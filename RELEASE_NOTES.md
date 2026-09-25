@@ -1,3 +1,20 @@
+# projectM for Android TV 1.9.5
+
+## Fixed
+- **Presets that stayed black now render.** The app shipped an August 2025 development snapshot of projectM (labelled 4.1.0). It now uses the **4.1.7** release, which fixes rendering bugs that made presets show nothing at all. On a SHIELD, presets that were black every time now render, for example *fiShbRaiN - david bowie cpe*, *$$$ Royal - Mashup (1)* and *fed - fumez*. Upstream fixes since that snapshot include:
+  - custom waveforms in dot mode were not drawn at all;
+  - blur textures used the wrong source image;
+  - `decay` was capped at 0.9375, which made most MilkDrop 1.4 presets far too dark;
+  - bass/mid/treble reached warp and composite shaders divided by 100, so those presets barely reacted to music;
+  - an unintended drift towards the top left in all presets, and inverted Y/angle values in per-pixel code.
+- The *Plasma* transition keeps the fix for NVIDIA SHIELD (projectM issue #872, float overflow), which the snapshot had and 4.1.7 lacks: it is applied as a patch.
+- The skip for black presets from 1.9.4 stays as a safety net.
+
+## Changed
+- `tools/build-projectm.sh` rebuilds the bundled projectM from the pinned upstream tag plus `tools/projectm-patches/` with the Android NDK (armeabi-v7a and arm64-v8a). Before, the libraries could not be rebuilt from the repository.
+
+---
+
 # projectM for Android TV 1.9.4
 
 ## Fixed

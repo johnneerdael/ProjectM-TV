@@ -1,11 +1,10 @@
 /**
  * @file touch.h
- * @copyright 2003-2024 projectM Team
+ * @copyright 2003-2023 projectM Team
  * @brief Touch-related functions to add random waveforms.
- * @since 4.0.0
  *
  * projectM -- Milkdrop-esque visualisation SDK
- * Copyright (C)2003-2024 projectM Team
+ * Copyright (C)2003-2023 projectM Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -26,7 +25,7 @@
 
 #pragma once
 
-#include "types.h"
+#include "projectM-4/types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,7 +43,6 @@ extern "C" {
  * @param y The y coordinate of the touch event.
  * @param pressure  The amount of pressure applied in a range from 0.0 to 1.0.
  * @param touch_type The waveform type that will be rendered on touch.
- * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_touch(projectm_handle instance, float x, float y,
                                     int pressure, projectm_touch_type touch_type);
@@ -55,7 +53,6 @@ PROJECTM_EXPORT void projectm_touch(projectm_handle instance, float x, float y,
  * @param x The x coordinate of the drag.
  * @param y the y coordinate of the drag.
  * @param pressure The amount of pressure applied in a range from 0.0 to 1.0.
- * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_touch_drag(projectm_handle instance, float x, float y, int pressure);
 
@@ -64,7 +61,6 @@ PROJECTM_EXPORT void projectm_touch_drag(projectm_handle instance, float x, floa
  * @param instance The projectM instance handle.
  * @param x The last known x touch coordinate.
  * @param y The last known y touch coordinate.
- * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_touch_destroy(projectm_handle instance, float x, float y);
 
@@ -74,7 +70,6 @@ PROJECTM_EXPORT void projectm_touch_destroy(projectm_handle instance, float x, f
  * Preset-defined waveforms will still be displayed.
  *
  * @param instance The projectM instance handle.
- * @since 4.0.0
  */
 PROJECTM_EXPORT void projectm_touch_destroy_all(projectm_handle instance);
 

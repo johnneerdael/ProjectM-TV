@@ -1,0 +1,25 @@
+From 0227b7a61d262a35a175a5e773d2e3db6e45b7e8 Mon Sep 17 00:00:00 2001
+From: Kai Blaschke <kai.blaschke@kb-dev.net>
+Date: Fri, 28 Feb 2025 11:37:39 +0100
+Subject: [PATCH] Issue #872: Fix float overflow in plasma transition shader
+
+---
+ .../TransitionShaders/TransitionShaderBuiltInPlasmaGlsl330.frag | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/libprojectM/Renderer/TransitionShaders/TransitionShaderBuiltInPlasmaGlsl330.frag b/src/libprojectM/Renderer/TransitionShaders/TransitionShaderBuiltInPlasmaGlsl330.frag
+index be2181a..50e104a 100644
+--- a/src/libprojectM/Renderer/TransitionShaders/TransitionShaderBuiltInPlasmaGlsl330.frag
++++ b/src/libprojectM/Renderer/TransitionShaders/TransitionShaderBuiltInPlasmaGlsl330.frag
+@@ -3,7 +3,7 @@
+ 
+ float sinNoise(vec2 uv)
+ {
+-    return fract(abs(sin(uv.x * 180.0 + uv.y * 3077.0) * (float(iRandStatic.x) * .001)));
++    return fract(abs(sin(uv.x * 0.018 + uv.y * 0.3077) * (float(iRandStatic.x) * .001)));
+ }
+ 
+ float valueNoise(vec2 uv, float scale)
+-- 
+2.50.1 (Apple Git-155)
+
