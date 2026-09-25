@@ -15,9 +15,10 @@ public class ProjectMApplication extends Application {
         Log.i(TAG, "Starting on " + android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL
                 + ", Android " + android.os.Build.VERSION.RELEASE);
 
-        // Presets are read straight from the APK. Indexing runs on a native background thread
-        // and is normally finished long before the GL surface exists.
-        ProjectMJNI.init(getAssets(), new File(getFilesDir(), SKIP_LIST_FILE).getAbsolutePath());
+        // Presets are read straight from the APK; the texture pack (~4 MB) is copied to app
+        // storage once. Both run on a native background thread before the first preset loads.
+        ProjectMJNI.init(getAssets(), new File(getFilesDir(), SKIP_LIST_FILE).getAbsolutePath(),
+                new File(getFilesDir(), "textures").getAbsolutePath());
 
         // Versions up to 1.7 extracted ~130MB of presets on every launch; reclaim that space.
         new Thread(() -> {

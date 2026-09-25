@@ -354,9 +354,13 @@ layer_excerpt() {
     echo "- Activity start (am start -W TotalTime): ${START_MS:-n/a} ms"
     echo "- $(grep -h -o 'Indexed [0-9]* presets.*' "$A" | head -1)"
     echo "- $(grep -h -o 'STARTUP first preset rendered.*' "$A" | head -1)"
+    echo "- $(grep -h -o 'Textures ready.*' "$A" | head -1)"
     echo
     echo "## Performance"
     echo "- App FPS (min / avg / max): $(stats_summary "$A")"
+    echo "- Audio level (RMS 0-1, min / avg / max): $(grep -o 'audio=[0-9.]*' "$A" | sed 's/audio=//' | awk '
+        { s += $1; n++; if (min == "" || $1 < min) min = $1; if ($1 > max) max = $1 }
+        END { if (n) printf "%.3f / %.3f / %.3f", min, s / n, max; else print "n/a" }')  (≈0 means the TV delivers no audio: most presets then look dim)"
     echo "- Render sizes seen: $(grep -o 'surface=[0-9]*x[0-9]*' "$A" | sed 's/surface=//' | sort | uniq -c | awk '{printf "%s (%s samples)  ", $2, $1}')"
     echo "- SurfaceFlinger FPS samples (every 10 s):${LATENCY_SAMPLES}"
     echo "- Resolution decisions:"

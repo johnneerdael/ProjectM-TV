@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
     // Audio capture runs on its own looper so UI work (menu animations) never delays it.
     private HandlerThread audioThread;
     private Handler audioHandler;
-    private Visualizer audioVisualizer;
+    private volatile Visualizer audioVisualizer;
 
     private View mainMenu;
     private View advancedMenu;
@@ -405,13 +405,21 @@ public class MainActivity extends Activity {
         } else {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
             setText(diagnostics, String.format(Locale.US,
-                    "Render  %dx%d (%s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nDevice  %s tier, %d MB RAM",
+                    "Render  %dx%d (%s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nAudio   %s%nDevice  %s tier, %d MB RAM",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
                     display.physicalWidth, display.physicalHeight, display.refreshRate,
                     display.uiWidth, display.uiHeight,
-                    renderer.getCurrentFps(), frameRateTarget,
+                    renderer.getCurrentFps(), frameRateTarget, audioLabel(),
                     profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb));
         }
+    }
+
+    /** Audio input as seen by the engine: tells whether the TV actually delivers sound to us. */
+    private String audioLabel() {
+        if (audioVisualizer == null) return "no capture (permission?)";
+        float level = ProjectMJNI.getAudioLevel();
+        if (level <= 0f) return "silent / no data";
+        return String.format(Locale.US, "%.2f %s", level, level < 0.02f ? "(very quiet)" : "(live)");
     }
 
     private void showNowPlaying(String name) {

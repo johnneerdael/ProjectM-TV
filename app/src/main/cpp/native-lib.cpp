@@ -19,6 +19,7 @@
 #include <android/asset_manager_jni.h>
 #include <android/log.h>
 #include <GLES2/gl2.h>
+#include <sys/stat.h>
 #include <sys/system_properties.h>
 
 #include <algorithm>
@@ -48,6 +49,7 @@
 namespace {
 
 constexpr const char* kPresetDir = "presets";
+constexpr const char* kTextureDir = "textures";
 constexpr size_t kMaxHistory = 128;
 constexpr int kMaxLoadAttemptsPerFrame = 4;
 
@@ -69,15 +71,19 @@ bool EndsWithMilk(const char* name) {
 // ------------------------------------------------------------------------------------------------
 class PresetLibrary {
 public:
-    void Start(AAssetManager* assets, std::string skipFilePath) {
+    void Start(AAssetManager* assets, std::string skipFilePath, std::string textureDir) {
         bool expected = false;
         if (!started_.compare_exchange_strong(expected, true)) return;
         assets_ = assets;
         skipFilePath_ = std::move(skipFilePath);
+        textureDir_ = std::move(textureDir);
         std::thread(&PresetLibrary::WorkerLoop, this).detach();
     }
 
     bool Ready() const { return ready_.load(std::memory_order_acquire); }
+
+    // Folder with the extracted texture pack (valid once Ready()).
+    const std::string& TextureDir() const { return textureDir_; }
 
     int ActiveCount() {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -200,7 +206,43 @@ private:
         cv_.notify_one();
     }
 
+    // projectM only scans real directories for textures, so the bundled texture pack is copied
+    // from the APK once (files whose size already matches are skipped on later launches).
+    void ExtractTextures() {
+        if (textureDir_.empty()) return;
+        double start = NowSeconds();
+        mkdir(textureDir_.c_str(), 0700);
+        AAssetDir* dir = AAssetManager_openDir(assets_, kTextureDir);
+        if (!dir) return;
+        int copied = 0, total = 0;
+        while (const char* file = AAssetDir_getNextFileName(dir)) {
+            ++total;
+            std::string assetPath = std::string(kTextureDir) + "/" + file;
+            std::string target = textureDir_ + "/" + file;
+            AAsset* asset = AAssetManager_open(assets_, assetPath.c_str(), AASSET_MODE_BUFFER);
+            if (!asset) continue;
+            off_t length = AAsset_getLength(asset);
+            struct stat st;
+            if (stat(target.c_str(), &st) == 0 && st.st_size == length) {
+                AAsset_close(asset);
+                continue;
+            }
+            const void* data = AAsset_getBuffer(asset);
+            std::string temp = target + ".tmp";
+            if (FILE* f = fopen(temp.c_str(), "wb")) {
+                bool ok = data && fwrite(data, 1, length, f) == static_cast<size_t>(length);
+                ok = (fclose(f) == 0) && ok;
+                if (ok && rename(temp.c_str(), target.c_str()) == 0) ++copied;
+                else remove(temp.c_str());
+            }
+            AAsset_close(asset);
+        }
+        AAssetDir_close(dir);
+        LOGI("Textures ready: %d files (%d copied) in %.0f ms", total, copied, (NowSeconds() - start) * 1000.0);
+    }
+
     void WorkerLoop() {
+        ExtractTextures();
         BuildIndex();
         std::unique_lock<std::mutex> lock(mutex_);
         for (;;) {
@@ -257,6 +299,7 @@ private:
     std::atomic<bool> ready_{false};
     AAssetManager* assets_ = nullptr;
     std::string skipFilePath_;
+    std::string textureDir_;
 
     std::mutex mutex_;
     std::condition_variable cv_;
@@ -395,6 +438,7 @@ struct Engine {
     int appliedMeshHeight = 0;
     double createdAt = 0;
     bool firstPresetLogged = false;
+    bool texturesApplied = false;
 };
 
 // Intentionally never destroyed: its detached worker thread lives as long as the process.
@@ -550,6 +594,7 @@ void DestroyEngineLocked() {
     }
     g_engine.width = g_engine.height = 0;
     g_engine.appliedMeshWidth = g_engine.appliedMeshHeight = 0;
+    g_engine.texturesApplied = false;
     g_engine.current.clear();  // the next instance resumes from g_published.currentPreset
     g_engine.switchRequested = false;
     g_engine.blackDetector.Disarm();
@@ -561,12 +606,20 @@ void DestroyEngineLocked() {
 
 extern "C" {
 
-JNIEXPORT void JNICALL JNI_FN(init)(JNIEnv* env, jclass, jobject assetManager, jstring skipFile) {
+JNIEXPORT void JNICALL JNI_FN(init)(JNIEnv* env, jclass, jobject assetManager, jstring skipFile,
+                                    jstring textureDir) {
     if (!g_assetManagerRef) g_assetManagerRef = env->NewGlobalRef(assetManager);
     AAssetManager* assets = AAssetManager_fromJava(env, g_assetManagerRef);
     const char* path = env->GetStringUTFChars(skipFile, nullptr);
-    g_library.Start(assets, path);
+    const char* textures = env->GetStringUTFChars(textureDir, nullptr);
+    g_library.Start(assets, path, textures);
     env->ReleaseStringUTFChars(skipFile, path);
+    env->ReleaseStringUTFChars(textureDir, textures);
+}
+
+// Recent audio level (RMS of normalized samples, 0..1); 0 when no audio arrived for 1 s.
+JNIEXPORT jfloat JNICALL JNI_FN(getAudioLevel)(JNIEnv*, jclass) {
+    return (NowSeconds() - g_inputs.audioLevelTime.load()) < 1.0 ? g_inputs.audioLevel.load() : 0.f;
 }
 
 JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
@@ -617,6 +670,12 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     if (g_engine.current.empty()) {
         // First frame(s): show the idle preset until the index is ready, then start immediately.
         if (g_library.Ready()) {
+            if (!g_engine.texturesApplied) {
+                // Once, before the first preset: this call rescans and reloads all textures.
+                const char* paths[] = {g_library.TextureDir().c_str()};
+                if (!g_library.TextureDir().empty()) projectm_set_texture_search_paths(g_engine.pm, paths, 1);
+                g_engine.texturesApplied = true;
+            }
             std::string resume;  // preset shown before an EGL context loss, if any
             {
                 std::lock_guard<std::mutex> published(g_published.mutex);

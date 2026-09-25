@@ -80,8 +80,8 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             // Machine-readable line for tools/tv-diagnostics.sh (cheap: once every 5 s).
             if (--statsCountdown <= 0) {
                 statsCountdown = STATS_LOG_INTERVAL_S;
-                Log.i(TAG, String.format(java.util.Locale.US, "STATS fps=%.1f surface=%dx%d",
-                        currentFps, surfaceWidth, surfaceHeight));
+                Log.i(TAG, String.format(java.util.Locale.US, "STATS fps=%.1f surface=%dx%d audio=%.3f",
+                        currentFps, surfaceWidth, surfaceHeight, ProjectMJNI.getAudioLevel()));
             }
         }
     }
