@@ -459,11 +459,6 @@ bool LoadPreset(const std::string& name, bool smooth) {
         g_engine.loadFailed = false;
         return false;
     }
-    if (!g_engine.firstPresetLogged) {
-        g_engine.firstPresetLogged = true;
-        LOGI("STARTUP first preset shown %.0f ms after engine creation",
-             (NowSeconds() - g_engine.createdAt) * 1000.0);
-    }
     g_engine.current = name;
     g_library.RecordShown(name);
     Publish(name);
@@ -635,6 +630,13 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
 
     FeedAudio();
     projectm_opengl_render_frame(g_engine.pm);
+
+    if (!g_engine.firstPresetLogged && !g_engine.current.empty()) {
+        // Logged after the first frame of the first preset has been rendered.
+        g_engine.firstPresetLogged = true;
+        LOGI("STARTUP first preset rendered %.0f ms after engine creation",
+             (NowSeconds() - g_engine.createdAt) * 1000.0);
+    }
 
     if (g_inputs.blankDetection.load() &&
         g_engine.blackDetector.Update(now, g_engine.width, g_engine.height, AudioPresent(now))) {

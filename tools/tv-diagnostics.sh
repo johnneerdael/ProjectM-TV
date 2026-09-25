@@ -52,6 +52,11 @@ done
 log() { printf '[%s] %s\n' "$(date +%H:%M:%S)" "$*"; }
 die() { log "ERROR: $*"; exit 1; }
 
+case "$DURATION" in
+    ''|*[!0-9]*) die "--duration must be a whole number of seconds (got '$DURATION')" ;;
+esac
+[ "$DURATION" -ge 30 ] || die "--duration must be at least 30 seconds"
+
 # ---------------------------------------------------------------------------------------------
 # adb
 # ---------------------------------------------------------------------------------------------
@@ -136,8 +141,7 @@ if [ "$APK_SOURCE" = "build" ]; then
         APK="$ROOT/app/build/outputs/apk/release/app-release.apk"
         APK_SOURCE="local build of $(cd "$ROOT" && git rev-parse --short HEAD 2>/dev/null || echo '?')"
     else
-        log "Local build failed (see build.log); falling back to the latest GitHub Release"
-        download_release || die "no APK available"
+        die "local build failed (see $OUT/build.log). Fix the build, or use --release to test the latest GitHub Release instead"
     fi
 elif [ "$APK_SOURCE" = "release" ]; then
     download_release || die "could not download the latest release APK"
@@ -168,15 +172,58 @@ log "App version: ${VERSION:-unknown}"
 # Run
 # ---------------------------------------------------------------------------------------------
 a logcat -c
-a logcat -v threadtime > "$OUT/raw_logcat.txt" 2>&1 &
+# Run adb itself in the background (not the shell function), so $! is the adb process.
+"$ADB" -s "$TARGET" logcat -v threadtime > "$OUT/raw_logcat.txt" 2>&1 &
 LOGCAT_PID=$!
-trap 'kill $LOGCAT_PID 2>/dev/null' EXIT
+SWEEP_ACTIVE=0
+MENU_OPEN=0
+
+open_resolution_row() {  # menu -> focus starts on shuffle -> 4x down = "Resolution"
+    key KEYCODE_DPAD_CENTER
+    MENU_OPEN=1
+    sleep 1
+    key KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN
+}
+close_menu() {
+    key KEYCODE_BACK
+    MENU_OPEN=0
+}
+restore_auto_resolution() {
+    open_resolution_row
+    key KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT
+    close_menu
+}
+cleanup() {
+    if [ "$SWEEP_ACTIVE" = 1 ]; then
+        log "Interrupted during the sweep: restoring Auto resolution"
+        SWEEP_ACTIVE=0
+        # A half-navigated menu would turn the next CENTER into a click on some row.
+        [ "$MENU_OPEN" = 1 ] && close_menu && sleep 1
+        restore_auto_resolution
+    fi
+    kill $LOGCAT_PID 2>/dev/null
+}
+trap cleanup EXIT
+trap 'exit 130' INT TERM
 
 log "Cold start"
 ash am force-stop "$PKG"
 sleep 1
 ash am start -W -n "$ACTIVITY" > "$OUT/am_start.txt"
 START_MS="$(grep -E "TotalTime" "$OUT/am_start.txt" | sed 's/[^0-9]//g')"
+sleep 2
+APP_PIDS=" $(ash pidof "$PKG") "
+if ! grep -q "Status: ok" "$OUT/am_start.txt" || [ -z "$(printf '%s' "$APP_PIDS" | tr -d ' ')" ]; then
+    cat "$OUT/am_start.txt"
+    die "the app did not start (is it installed? see am_start.txt)"
+fi
+
+# The app's process ids during the run (a crash + restart gives a new one).
+track_pid() {
+    for pid in $(ash pidof "$PKG"); do
+        case "$APP_PIDS" in *" $pid "*) ;; *) APP_PIDS="$APP_PIDS$pid " ;; esac
+    done
+}
 
 surface_layer() {
     ash dumpsys SurfaceFlinger --list | grep -i "surfaceview" | grep -i "projectm" | head -1
@@ -195,11 +242,13 @@ latency_fps() {
 LATENCY_SAMPLES=""
 elapsed=0
 shots_done=0
+snapshot_done=0
 log "Observing for ${DURATION}s"
 while [ $elapsed -lt "$DURATION" ]; do
     sleep 10
     elapsed=$((elapsed + 10))
     LATENCY_SAMPLES="$LATENCY_SAMPLES $(latency_fps)"
+    track_pid
 
     if [ $elapsed -ge 20 ] && [ $shots_done = 0 ]; then
         shots_done=1
@@ -212,7 +261,8 @@ while [ $elapsed -lt "$DURATION" ]; do
         a exec-out screencap -p > "$OUT/screen_advanced.png"
         key KEYCODE_BACK; key KEYCODE_BACK
     fi
-    if [ $elapsed = 60 ]; then
+    if [ $snapshot_done = 0 ] && { [ $elapsed -ge 60 ] || [ $elapsed -ge "$DURATION" ]; }; then
+        snapshot_done=1
         log "SurfaceFlinger and CPU snapshot"
         ash dumpsys SurfaceFlinger > "$OUT/raw_surfaceflinger.txt"
         ash top -b -n 1 > "$OUT/top.txt" 2>/dev/null || ash top -n 1 > "$OUT/top.txt"
@@ -224,41 +274,52 @@ done
 # ---------------------------------------------------------------------------------------------
 SWEEP_ROWS=""
 if [ "$SWEEP" = 1 ]; then
-    log "Resolution sweep"
-    open_resolution_row() { key KEYCODE_DPAD_CENTER; sleep 1; key KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN; }
-    open_resolution_row
-    key KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT
-    key KEYCODE_BACK
+    # Fixed levels offered by the app: 720/1080/1440/2160 up to the panel height, plus the panel
+    # height itself if it is not one of those (QualityController.manualHeights).
+    PANEL_H="$(grep -o 'Panel [0-9]*x[0-9]*' "$OUT/raw_logcat.txt" | head -1 | sed 's/.*x//')"
+    [ -n "$PANEL_H" ] || PANEL_H=1080
+    LEVELS=0
+    for h in 720 1080 1440 2160; do [ "$h" -le "$PANEL_H" ] && LEVELS=$((LEVELS + 1)); done
+    case "$PANEL_H" in 720|1080|1440|2160) ;; *) LEVELS=$((LEVELS + 1)) ;; esac
+    log "Resolution sweep over $LEVELS fixed levels (panel height $PANEL_H)"
+    SWEEP_ACTIVE=1
+    restore_auto_resolution
     step=1
-    while [ $step -le 4 ]; do
+    while [ $step -le $LEVELS ]; do
         open_resolution_row
         key KEYCODE_DPAD_RIGHT
-        key KEYCODE_BACK
+        close_menu
         sleep 15
         mark "SWEEP start step=$step"
         s1="$(latency_fps)"; sleep 10; s2="$(latency_fps)"; sleep 10; s3="$(latency_fps)"
         mark "SWEEP end step=$step"
         SWEEP_ROWS="$SWEEP_ROWS
 $step $s1 $s2 $s3"
+        track_pid
         step=$((step + 1))
     done
     log "Restoring Auto resolution"
-    open_resolution_row
-    key KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT
-    key KEYCODE_BACK
+    restore_auto_resolution
+    SWEEP_ACTIVE=0
 fi
 
 ash dumpsys meminfo "$PKG" | grep -E "TOTAL|Graphics|GL mtrack|EGL mtrack" > "$OUT/meminfo.txt"
 ash dumpsys thermalservice 2>/dev/null | head -40 > "$OUT/thermal.txt"
+track_pid
 kill $LOGCAT_PID 2>/dev/null
-trap - EXIT
+trap - EXIT INT TERM
 sleep 1
 
 # ---------------------------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------------------------
 L="$OUT/raw_logcat.txt"
-grep -E "projectM-Native|VisualizerRenderer|VisualizerView|DisplayInfo|DeviceProfile|QualityController|ProjectMTV|ProjectMApplication|TVDIAG|AndroidRuntime|FATAL|Fatal signal" "$L" > "$OUT/app_log.txt"
+# threadtime format: date time PID TID level tag: message. Keep lines from the app's processes,
+# our sweep markers, and crash-dump lines that name the package (tombstones come from crash_dump).
+awk -v pids="$APP_PIDS" -v pkg="$PKG" '
+    BEGIN { n = split(pids, p, " "); for (i = 1; i <= n; i++) mine[p[i]] = 1 }
+    ($3 in mine) || /TVDIAG/ || (index($0, pkg) && /(FATAL|Fatal signal|>>>|Process: )/)
+' "$L" > "$OUT/app_log.txt"
 A="$OUT/app_log.txt"
 
 stats_summary() {  # min / avg / max of the app's STATS fps lines
@@ -292,7 +353,7 @@ layer_excerpt() {
     echo "## Startup"
     echo "- Activity start (am start -W TotalTime): ${START_MS:-n/a} ms"
     echo "- $(grep -h -o 'Indexed [0-9]* presets.*' "$A" | head -1)"
-    echo "- $(grep -h -o 'STARTUP first preset shown.*' "$A" | head -1)"
+    echo "- $(grep -h -o 'STARTUP first preset rendered.*' "$A" | head -1)"
     echo
     echo "## Performance"
     echo "- App FPS (min / avg / max): $(stats_summary "$A")"
@@ -327,6 +388,7 @@ layer_excerpt() {
     grep -q 'SKIP preset=' "$A" || echo "- none"
     echo
     echo "## Errors and crashes"
+    echo "App process ids during the run:$APP_PIDS"
     grep -h -E "FATAL|Fatal signal|AndroidRuntime| E [A-Za-z-]*(projectM|Visualizer|ProjectM)" "$A" | head -20
     grep -q -E 'FATAL|Fatal signal' "$A" || echo "- no crashes"
     echo
