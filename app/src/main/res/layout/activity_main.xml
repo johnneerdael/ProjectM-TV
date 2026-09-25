@@ -252,6 +252,11 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_audio_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_skipped"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

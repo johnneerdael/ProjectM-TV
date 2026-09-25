@@ -67,7 +67,9 @@ Boasting an incredible 9,795 presets, the Cream of the Crop pack is a testament 
 
 ### Audio
 
-Audio is captured from the global output mix with Android's `Visualizer` API (session 0) at the maximum capture rate. The waveform is 8-bit unsigned mono PCM and is handed to projectM unchanged (`projectm_pcm_add_uint8`).
+Two audio sources (*Advanced › Audio source*):
+- **Standard** (default): the global output mix through Android's `Visualizer` API (session 0) at the maximum capture rate. The waveform is 8-bit unsigned mono PCM and is handed to projectM unchanged (`projectm_pcm_add_uint8`).
+- **Media capture** (Android 10+): [playback capture](https://developer.android.com/media/platform/av-capture) of audio that apps play as media (`USAGE_MEDIA`), so notification and system sounds are left out. It needs Android's screen-cast consent at every launch and shows a notification while it runs. Use it when *Standard* hears nothing: on a SHIELD with Dolby output over HDMI eARC, Android attaches output-mix effects to an idle output, so the Visualizer only receives silence. The captured audio is converted to the Visualizer's format and scale (`PcmConverter`).
 
 ## Downloads
 
@@ -103,6 +105,7 @@ See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md), including heap analysis with hea
 
 - `RECORD_AUDIO` - Required by the `Visualizer` API to capture system audio
 - `MODIFY_AUDIO_SETTINGS` - Used by the `Visualizer` API
+- `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PROJECTION` - Media capture runs in a foreground service, as Android requires
 
 ## Credits
 
