@@ -44,7 +44,7 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 - `projectM-Native: OUTPUT preset='…' samples=18 luma_range=3..9 change_pct_min=0.4 change_pct_avg=1.1 region_pct_min=2.0 luma_changes=… hue_only_changes=… flat=18/18 still=17/17 skipped=no`: what a preset showed while music played (see *Output measurements* below).
 - `projectM-Native: SKIP preset='…' reason=…`.
 - `QualityController: …`: dynamic-resolution decisions, including `Memory pressure …` when Android asks apps to free memory.
-- `ProjectMTV: Memory limit: render height up to 1260 (RAM 1941 MB)`.
+- `ProjectMTV: Memory limit: render height up to 1260 (RAM 1941 MB)` (or `Memory limit: off`). The sweep only covers the levels up to this limit; turn *Advanced › Memory limit* off first to sweep up to the panel resolution.
 
 ### Reading the results
 - **Did the music app get killed?** *Memory › Other apps killed during the run* lists processes Android stopped while they were visible, perceptible or foreground services (e.g. `com.soundcloud.android (prcp)`). Cached processes are left out, because Android kills those routinely.

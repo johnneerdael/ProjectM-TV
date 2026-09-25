@@ -159,7 +159,9 @@ public class MainActivity extends Activity {
     /** (Re)creates dynamic resolution for the current memory limit. */
     private void createQualityController() {
         int limit = memoryLimit();
-        if (limit > 0) Log.i(TAG, "Memory limit: render height up to " + limit + " (RAM " + profile.totalRamMb + " MB)");
+        // tools/tv-diagnostics.sh reads the latest of these lines to know the fixed levels offered.
+        Log.i(TAG, "Memory limit: " + (limit > 0 ? "render height up to " + limit : "off")
+                + " (RAM " + profile.totalRamMb + " MB)");
         quality = new QualityController(display, profile, limit, this::applyRenderHeight);
         quality.setTransitionSeconds(transitionSeconds());
         quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
@@ -178,6 +180,9 @@ public class MainActivity extends Activity {
         // While visible, these mean the system is about to kill other apps (e.g. the music player).
         if (level == TRIM_MEMORY_RUNNING_LOW || level == TRIM_MEMORY_RUNNING_CRITICAL) {
             quality.onMemoryPressure(level);
+            // The lower resolution applies at the next preset switch, which must then be a hard
+            // cut; don't wait for the next FPS sample to arm it.
+            if (quality.hasPendingChange()) ProjectMJNI.setForceHardCut(true);
         }
     }
 
