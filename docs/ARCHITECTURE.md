@@ -89,12 +89,26 @@ A preset is added to `files/skipped_presets.txt` and never picked again when:
 ### Resolution
 The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The display composer scales it to the panel, so a 720p render fills a 1080p or 4K screen without extra GPU work ([Android Developers blog: using the hardware scaler](https://android-developers.googleblog.com/2013/09/using-hardware-scaler-for-performance.html)). projectM always renders at the surface size, so no viewport workarounds are needed.
 
+### Frame pacing
+Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so the speed of the visuals doesn't change.
+
+### Threads
+| Thread | Priority | Work |
+|---|---|---|
+| GL (GLSurfaceView) | `THREAD_PRIORITY_DISPLAY` | projectM render, preset loading, black-frame detection |
+| AudioCapture (HandlerThread) | `THREAD_PRIORITY_AUDIO` | `Visualizer` callbacks → `addWaveform` |
+| Native worker | default | Preset indexing and prefetch |
+| UI | default | Overlay; status polled every 500 ms, text only updated when changed |
+
+### Overlay UI
+`OptionRow` is a focusable settings row: ↑/↓ moves between rows, ‹ › changes the value, and center cycles it or runs an action. The panel sits within the 48 dp / 27 dp overscan-safe margins. Views fade out and are set to `GONE`, so a hidden overlay costs nothing to draw. Long preset names use a marquee, which is only restarted when the text actually changes.
+
 ### Device tiers (`DeviceProfile`)
-| Tier | Rule | Default render | Mesh |
-|---|---|---|---|
-| HIGH | NVIDIA Shield / Tegra | 1080p | 48×32 |
-| STANDARD | everything else | 720p | 48×32 |
-| LOW | `isLowRamDevice()` or <1.6 GB RAM | 720p | 32×24 (less CPU for per-vertex equations) |
+| Tier | Rule | Default render | Frame rate | Mesh |
+|---|---|---|---|---|
+| HIGH | NVIDIA Shield / Tegra | 1080p | full | 48×32 |
+| STANDARD | everything else | 720p | full | 48×32 |
+| LOW | `isLowRamDevice()` or <1.6 GB RAM | 720p | half | 32×24 (less CPU for per-vertex equations) |
 
 Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 
@@ -123,4 +137,4 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 1. Build 1.8 locally (`./gradlew assembleRelease && ./install.sh`) and test on your weakest and strongest TVs.
 2. Check logcat for `Skipping preset` and `Indexed N presets` lines.
 3. Move Gradle to a stable release.
-4. Optionally add a CI job that runs `run_native_tests.sh`.
+4. ~~Add CI~~ Done: `.github/workflows/android.yml` (see `docs/RELEASING.md`).

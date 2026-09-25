@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="overlay_panel">#E6101218</color>
+    <color name="overlay_stroke">#1FFFFFFF</color>
+    <color name="overlay_focus">#2EFFFFFF</color>
+    <color name="accent">#8AB4F8</color>
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#B3FFFFFF</color>
+    <color name="text_tertiary">#80FFFFFF</color>
+    <color name="divider">#1AFFFFFF</color>
+    <color name="pill">#B3101218</color>
+</resources>

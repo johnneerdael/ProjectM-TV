@@ -8,26 +8,24 @@ import android.media.audiofx.Visualizer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 public class MainActivity extends Activity {
     private static final String TAG = "ProjectMTV";
     private static final int AUDIO_PERMISSION_REQUEST = 1;
-    private static final long MENU_AUTO_HIDE_MS = 8000;
-    private static final long NOW_PLAYING_MS = 4000;
+    private static final long MENU_AUTO_HIDE_MS = 10000;
+    private static final long NOW_PLAYING_MS = 6000;
     private static final long UI_REFRESH_MS = 500;
+    private static final long FADE_MS = 180;
 
     // Preference keys (kept compatible with earlier versions)
     private static final String PREFS = "projectm_settings";
@@ -35,30 +33,44 @@ public class MainActivity extends Activity {
     private static final String PREF_AUTO_CHANGE = "auto_change_enabled";
     private static final String PREF_PRESET_DURATION = "preset_duration";
     private static final String PREF_TRANSITION_DURATION = "transition_duration";
+    private static final String PREF_HALF_FRAME_RATE = "half_frame_rate";
 
     // Stored resolution values; RES_NATIVE replaces the former fixed "4K" option.
     private static final int RES_480P = 0;
     private static final int RES_720P = 1;
     private static final int RES_1080P = 2;
     private static final int RES_NATIVE = 3;
+    private static final String[] RESOLUTION_LABELS = {"480p", "720p", "1080p", "Native"};
+
+    private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
+    private static final int MAX_TRANSITION = 10;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private SharedPreferences prefs;
     private DeviceProfile profile;
+    private final NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
 
     private VisualizerView visualizerView;
     private VisualizerRenderer renderer;
+
+    // Audio capture runs on its own looper so UI work (menu animations) never delays it.
+    private HandlerThread audioThread;
+    private Handler audioHandler;
     private Visualizer audioVisualizer;
 
     private View overlayMenu;
-    private TextView presetNameText;
-    private TextView fpsDisplay;
-    private TextView skippedInfo;
-    private TextView nowPlaying;
+    private TextView presetName;
+    private TextView presetMeta;
+    private TextView statusLine;
+    private OptionRow skippedRow;
+    private View nowPlaying;
+    private TextView nowPlayingText;
+    private boolean menuVisible;
     private int lastPresetChange = -1;
+    private String currentPreset = "";
 
     private final Runnable hideMenu = () -> setMenuVisible(false);
-    private final Runnable hideNowPlaying = () -> nowPlaying.setVisibility(View.GONE);
+    private final Runnable hideNowPlaying = () -> fade(nowPlaying, false);
     private final Runnable uiRefresh = new Runnable() {
         @Override
         public void run() {
@@ -88,11 +100,15 @@ public class MainActivity extends Activity {
         visualizerView.setRenderHeight(renderHeightFor(savedResolution()));
         renderer = new VisualizerRenderer();
         visualizerView.start(renderer);
+        visualizerView.setHalfFrameRate(prefs.getBoolean(PREF_HALF_FRAME_RATE, profile.defaultHalfFrameRate()));
 
         initMenu();
 
+        audioThread = new HandlerThread("AudioCapture", android.os.Process.THREAD_PRIORITY_AUDIO);
+        audioThread.start();
+        audioHandler = new Handler(audioThread.getLooper());
         if (hasAudioPermission()) {
-            startAudio();
+            audioHandler.post(this::startAudio);
         } else if (Build.VERSION.SDK_INT >= 23) {
             requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, AUDIO_PERMISSION_REQUEST);
         }
@@ -104,117 +120,159 @@ public class MainActivity extends Activity {
 
     private void initMenu() {
         overlayMenu = findViewById(R.id.overlay_menu);
-        presetNameText = findViewById(R.id.preset_name);
-        fpsDisplay = findViewById(R.id.fps_display);
-        skippedInfo = findViewById(R.id.skipped_info);
+        presetName = findViewById(R.id.preset_name);
+        presetMeta = findViewById(R.id.preset_meta);
+        statusLine = findViewById(R.id.status_line);
         nowPlaying = findViewById(R.id.now_playing);
+        nowPlayingText = findViewById(R.id.now_playing_text);
 
         TextView versionInfo = findViewById(R.id.version_info);
-        versionInfo.setText("App v" + appVersion() + " | projectM " + ProjectMJNI.getVersion()
-                + " | " + profile.tier + " tier");
-
-        Switch autoChange = findViewById(R.id.auto_change_switch);
-        autoChange.setChecked(prefs.getBoolean(PREF_AUTO_CHANGE, true));
-        autoChange.setOnCheckedChangeListener((button, checked) -> {
-            ProjectMJNI.setAutoChange(checked);
-            prefs.edit().putBoolean(PREF_AUTO_CHANGE, checked).apply();
-        });
-
-        bindSeekBar(R.id.preset_duration_seekbar, R.id.preset_duration_text, PREF_PRESET_DURATION, 30,
-                ProjectMJNI::setPresetDuration);
-        bindSeekBar(R.id.transition_duration_seekbar, R.id.transition_duration_text,
-                PREF_TRANSITION_DURATION, 7, ProjectMJNI::setSoftCutDuration);
+        versionInfo.setText("v" + appVersion() + "  ·  projectM " + ProjectMJNI.getVersion()
+                + "  ·  " + profile.tier.name().toLowerCase(Locale.US) + " device");
 
         findViewById(R.id.prev_preset_button).setOnClickListener(v -> ProjectMJNI.previousPreset(true));
         findViewById(R.id.random_preset_button).setOnClickListener(v -> ProjectMJNI.randomPreset(true));
         findViewById(R.id.next_preset_button).setOnClickListener(v -> ProjectMJNI.nextPreset(true));
 
-        Button resetSkipped = findViewById(R.id.reset_skipped_button);
-        resetSkipped.setOnClickListener(v -> {
-            ProjectMJNI.resetSkippedPresets();
-            refreshStatus();
+        OptionRow autoChange = findViewById(R.id.row_auto_change);
+        autoChange.setup("Auto change", new String[]{"Off", "On"},
+                prefs.getBoolean(PREF_AUTO_CHANGE, true) ? 1 : 0, true, index -> {
+                    ProjectMJNI.setAutoChange(index == 1);
+                    prefs.edit().putBoolean(PREF_AUTO_CHANGE, index == 1).apply();
+                });
+
+        String[] durations = new String[PRESET_DURATIONS.length];
+        for (int i = 0; i < durations.length; i++) durations[i] = PRESET_DURATIONS[i] + " s";
+        OptionRow presetDuration = findViewById(R.id.row_preset_duration);
+        presetDuration.setup("Preset duration", durations,
+                nearestIndex(PRESET_DURATIONS, prefs.getInt(PREF_PRESET_DURATION, 30)), false, index -> {
+                    ProjectMJNI.setPresetDuration(PRESET_DURATIONS[index]);
+                    prefs.edit().putInt(PREF_PRESET_DURATION, PRESET_DURATIONS[index]).apply();
+                });
+
+        String[] transitions = new String[MAX_TRANSITION + 1];
+        transitions[0] = "Instant";
+        for (int i = 1; i <= MAX_TRANSITION; i++) transitions[i] = i + " s";
+        OptionRow transition = findViewById(R.id.row_transition);
+        transition.setup("Transition", transitions,
+                Math.min(MAX_TRANSITION, prefs.getInt(PREF_TRANSITION_DURATION, 7)), false, index -> {
+                    ProjectMJNI.setSoftCutDuration(index);
+                    prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
+                });
+
+        OptionRow resolution = findViewById(R.id.row_resolution);
+        resolution.setup("Resolution", RESOLUTION_LABELS, savedResolution(), false, index -> {
+            prefs.edit().putInt(PREF_RESOLUTION, index).apply();
+            visualizerView.setRenderHeight(renderHeightFor(index));
         });
 
-        RadioGroup resolutionGroup = findViewById(R.id.resolution_group);
-        resolutionGroup.check(radioIdFor(savedResolution()));
-        resolutionGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            int resolution = resolutionFor(checkedId);
-            prefs.edit().putInt(PREF_RESOLUTION, resolution).apply();
-            visualizerView.setRenderHeight(renderHeightFor(resolution));
+        int refresh = Math.round(visualizerView.displayRefreshRate());
+        OptionRow frameRate = findViewById(R.id.row_frame_rate);
+        frameRate.setup("Frame rate",
+                new String[]{Math.round(refresh / 2f) + " fps  (smooth)", refresh + " fps  (max)"},
+                prefs.getBoolean(PREF_HALF_FRAME_RATE, profile.defaultHalfFrameRate()) ? 0 : 1, true,
+                index -> {
+                    boolean half = index == 0;
+                    visualizerView.setHalfFrameRate(half);
+                    prefs.edit().putBoolean(PREF_HALF_FRAME_RATE, half).apply();
+                });
+
+        skippedRow = findViewById(R.id.row_skipped);
+        skippedRow.setupAction("Skipped presets", "0", () -> {
+            ProjectMJNI.resetSkippedPresets();
+            refreshStatus();
         });
 
         overlayMenu.setVisibility(View.GONE);
     }
 
-    private interface IntSetting { void apply(int value); }
-
-    private void bindSeekBar(int seekBarId, int labelId, String prefKey, int defaultValue, IntSetting setting) {
-        SeekBar seekBar = findViewById(seekBarId);
-        TextView label = findViewById(labelId);
-        int value = prefs.getInt(prefKey, defaultValue);
-        seekBar.setProgress(value);
-        label.setText(value + "s");
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
-                label.setText(progress + "s");
-                // D-pad changes arrive as individual steps: apply them immediately.
-                setting.apply(progress);
-                prefs.edit().putInt(prefKey, progress).apply();
-            }
-
-            @Override public void onStartTrackingTouch(SeekBar bar) {}
-            @Override public void onStopTrackingTouch(SeekBar bar) {}
-        });
+    private static int nearestIndex(int[] values, int target) {
+        int best = 0;
+        for (int i = 1; i < values.length; i++) {
+            if (Math.abs(values[i] - target) < Math.abs(values[best] - target)) best = i;
+        }
+        return best;
     }
 
     private void setMenuVisible(boolean visible) {
         handler.removeCallbacks(hideMenu);
-        if (!visible) {
-            overlayMenu.setVisibility(View.GONE);
-            visualizerView.requestFocus();
-            return;
+        if (visible == menuVisible) return;
+        menuVisible = visible;
+        if (visible) {
+            fade(nowPlaying, false);
+            refreshStatus();
+            overlayMenu.setTranslationX(dp(24));
+            overlayMenu.animate().translationX(0).setDuration(FADE_MS).start();
+            fade(overlayMenu, true);
+            findViewById(R.id.random_preset_button).requestFocus();
+            handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
+        } else {
+            overlayMenu.animate().translationX(dp(24)).setDuration(FADE_MS).start();
+            fade(overlayMenu, false);
         }
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) overlayMenu.getLayoutParams();
-        params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.4f);
-        overlayMenu.setLayoutParams(params);
-        overlayMenu.setVisibility(View.VISIBLE);
-        findViewById(R.id.auto_change_switch).requestFocus();
-        refreshStatus();
-        handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
     }
 
     private boolean isMenuVisible() {
-        return overlayMenu.getVisibility() == View.VISIBLE;
+        return menuVisible;
     }
 
-    /** Updates FPS, preset name and skip counter; shows the name briefly when a preset starts. */
+    /** Alpha fade that ends with GONE, so hidden views cost nothing to compose. */
+    private static void fade(View view, boolean in) {
+        view.animate().cancel();
+        if (in) {
+            view.setVisibility(View.VISIBLE);
+            view.animate().alpha(1f).setDuration(FADE_MS).withLayer().start();
+        } else if (view.getVisibility() == View.VISIBLE) {
+            view.animate().alpha(0f).setDuration(FADE_MS).withLayer()
+                    .withEndAction(() -> view.setVisibility(View.GONE)).start();
+        }
+    }
+
+    /** Updates text only when it changed: a changed text restarts the marquee and costs a layout. */
+    private static void setText(TextView view, CharSequence text) {
+        if (!text.toString().contentEquals(view.getText())) view.setText(text);
+    }
+
     private void refreshStatus() {
-        String preset = displayName(ProjectMJNI.getCurrentPresetName());
         int change = ProjectMJNI.getPresetChangeCounter();
-        if (change != lastPresetChange && !preset.isEmpty()) {
+        if (change != lastPresetChange) {
             lastPresetChange = change;
-            nowPlaying.setText(preset);
-            nowPlaying.setVisibility(View.VISIBLE);
-            handler.removeCallbacks(hideNowPlaying);
-            handler.postDelayed(hideNowPlaying, NOW_PLAYING_MS);
+            currentPreset = displayName(ProjectMJNI.getCurrentPresetName());
+            if (!currentPreset.isEmpty()) {
+                setText(presetName, currentPreset);
+                presetName.setSelected(true);  // start marquee for long names
+                if (!isMenuVisible()) showNowPlaying(currentPreset);
+            }
         }
         if (!isMenuVisible()) return;
 
-        float fps = renderer.getCurrentFps();
-        fpsDisplay.setText(String.format(Locale.US, "FPS: %.1f", fps));
-        fpsDisplay.setTextColor(fps < 20 ? 0xFFFF5050 : fps < 28 ? 0xFFFFAA00 : 0xFF00FF00);
-        presetNameText.setText(String.format(Locale.US, "Current: %s (%d presets)",
-                preset.isEmpty() ? "loading..." : preset, ProjectMJNI.getPresetCount()));
-        presetNameText.setSelected(true);
-        skippedInfo.setText("Skipped presets: " + ProjectMJNI.getSkippedCount());
+        int skipped = ProjectMJNI.getSkippedCount();
+        setText(presetMeta, numberFormat.format(ProjectMJNI.getPresetCount()) + " presets in rotation"
+                + (skipped > 0 ? "  ·  " + numberFormat.format(skipped) + " skipped" : ""));
+        skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
+        setText(statusLine, String.format(Locale.US, "%5.1f fps  ·  %dx%d",
+                renderer.getCurrentFps(), renderer.getSurfaceWidth(), renderer.getSurfaceHeight()));
+    }
+
+    private void showNowPlaying(String name) {
+        if (name.isEmpty()) return;
+        setText(nowPlayingText, name);
+        nowPlayingText.setSelected(true);
+        fade(nowPlaying, true);
+        handler.removeCallbacks(hideNowPlaying);
+        handler.postDelayed(hideNowPlaying, NOW_PLAYING_MS);
     }
 
     private static String displayName(String preset) {
         if (preset == null) return "";
         int slash = preset.lastIndexOf('/');
         String name = slash >= 0 ? preset.substring(slash + 1) : preset;
-        return name.endsWith(".milk") ? name.substring(0, name.length() - 5) : name;
+        return name.regionMatches(true, Math.max(0, name.length() - 5), ".milk", 0, 5)
+                ? name.substring(0, name.length() - 5) : name;
+    }
+
+    private int dp(int value) {
+        return Math.round(value * getResources().getDisplayMetrics().density);
     }
 
     // ---------------------------------------------------------------------------------------
@@ -223,7 +281,8 @@ public class MainActivity extends Activity {
 
     private int savedResolution() {
         int fallback = profile.defaultRenderHeight() >= 1080 ? RES_1080P : RES_720P;
-        return prefs.getInt(PREF_RESOLUTION, fallback);
+        int saved = prefs.getInt(PREF_RESOLUTION, fallback);
+        return saved >= RES_480P && saved <= RES_NATIVE ? saved : fallback;
     }
 
     private static int renderHeightFor(int resolution) {
@@ -234,23 +293,6 @@ public class MainActivity extends Activity {
             case RES_720P:
             default: return 720;
         }
-    }
-
-    private static int radioIdFor(int resolution) {
-        switch (resolution) {
-            case RES_480P: return R.id.resolution_480p;
-            case RES_1080P: return R.id.resolution_1080p;
-            case RES_NATIVE: return R.id.resolution_native;
-            case RES_720P:
-            default: return R.id.resolution_720p;
-        }
-    }
-
-    private static int resolutionFor(int radioId) {
-        if (radioId == R.id.resolution_480p) return RES_480P;
-        if (radioId == R.id.resolution_1080p) return RES_1080P;
-        if (radioId == R.id.resolution_native) return RES_NATIVE;
-        return RES_720P;
     }
 
     // ---------------------------------------------------------------------------------------
@@ -286,6 +328,11 @@ public class MainActivity extends Activity {
             case KeyEvent.KEYCODE_MEDIA_REWIND:
                 ProjectMJNI.previousPreset(true);
                 return true;
+            case KeyEvent.KEYCODE_DPAD_UP:
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+            case KeyEvent.KEYCODE_INFO:
+                showNowPlaying(currentPreset);
+                return true;
             case KeyEvent.KEYCODE_DPAD_CENTER:
             case KeyEvent.KEYCODE_ENTER:
             case KeyEvent.KEYCODE_MENU:
@@ -297,7 +344,7 @@ public class MainActivity extends Activity {
     }
 
     // ---------------------------------------------------------------------------------------
-    // Audio
+    // Audio (all Visualizer calls run on audioThread)
     // ---------------------------------------------------------------------------------------
 
     private boolean hasAudioPermission() {
@@ -310,7 +357,7 @@ public class MainActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == AUDIO_PERMISSION_REQUEST && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startAudio();
+            audioHandler.post(this::startAudio);
         } else {
             Log.w(TAG, "Audio permission denied - visuals will not react to music");
         }
@@ -319,8 +366,9 @@ public class MainActivity extends Activity {
     private void startAudio() {
         if (audioVisualizer != null) return;
         try {
-            // Session 0 = global output mix. The waveform is 8-bit unsigned mono PCM, which is
-            // passed to projectM unchanged.
+            // Session 0 = global output mix. The waveform is 8-bit unsigned mono PCM, passed to
+            // projectM unchanged. Callbacks arrive on the looper of the thread that registers the
+            // listener, i.e. audioThread.
             audioVisualizer = new Visualizer(0);
             audioVisualizer.setEnabled(false);
             audioVisualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
@@ -341,6 +389,12 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void setAudioEnabled(boolean enabled) {
+        audioHandler.post(() -> {
+            if (audioVisualizer != null) audioVisualizer.setEnabled(enabled);
+        });
+    }
+
     // ---------------------------------------------------------------------------------------
     // Lifecycle
     // ---------------------------------------------------------------------------------------
@@ -349,14 +403,14 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         visualizerView.onResume();
-        if (audioVisualizer != null) audioVisualizer.setEnabled(true);
+        setAudioEnabled(true);
         handler.post(uiRefresh);
     }
 
     @Override
     protected void onPause() {
         handler.removeCallbacks(uiRefresh);
-        if (audioVisualizer != null) audioVisualizer.setEnabled(false);
+        setAudioEnabled(false);
         visualizerView.onPause();
         super.onPause();
     }
@@ -377,11 +431,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         handler.removeCallbacksAndMessages(null);
-        if (audioVisualizer != null) {
-            audioVisualizer.setEnabled(false);
-            audioVisualizer.release();
-            audioVisualizer = null;
-        }
+        audioHandler.post(() -> {
+            if (audioVisualizer != null) {
+                audioVisualizer.setEnabled(false);
+                audioVisualizer.release();
+                audioVisualizer = null;
+            }
+        });
+        audioThread.quitSafely();
         // projectM owns GL objects, so it is destroyed on the GL thread. If the thread is already
         // gone, the next onSurfaceCreated() cleans up instead.
         visualizerView.queueEvent(renderer::release);

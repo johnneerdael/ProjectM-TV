@@ -55,6 +55,11 @@ public final class DeviceProfile {
         }
     }
 
+    /** Low-end boxes rarely hold 60 fps; an even half rate (30/25 fps) looks smoother. */
+    public boolean defaultHalfFrameRate() {
+        return tier == Tier.LOW;
+    }
+
     /** Per-vertex equation mesh; evaluated on the CPU for every vertex on every frame. */
     public int meshWidth() {
         return tier == Tier.LOW ? 32 : 48;

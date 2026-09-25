@@ -11,13 +11,17 @@
 - Presets that fail to load, or render nothing while music is playing, are skipped automatically and remembered ("Skipped presets" + *Reset* in the menu)
 - Resolution uses the TV's hardware scaler: 480p/720p/1080p always fill the screen; "4K" is now "Native"
 - Next preset is prefetched in the background; preset indexing runs on a background thread
-- Short on-screen label with the name of each new preset
+- Redesigned overlay: compact TV-style panel (inside the overscan-safe area) with now-playing header, icon transport controls and ‹ › settings rows; long preset names scroll
+- Now-playing pill when a preset starts (also on Up/Down/Info)
+- Frame rate option: full refresh or an even half rate (30/25 fps), default half on low-end devices
 - Space used by older versions' extracted presets is reclaimed automatically
 
 ### Technical
 - OpenGL ES 3.0 now required (as it always was for projectM 4)
 - AndroidX/Leanback dependencies removed; release builds are installable (`./gradlew assembleRelease`)
 - Host-side native test suite: `app/src/test/native/run_native_tests.sh`
+- Render thread runs at display priority; audio capture moved off the UI thread
+- GitHub Actions: APK for every change, automatic GitHub Release when the version changes on `main` (`docs/RELEASING.md`)
 
 ---
 
