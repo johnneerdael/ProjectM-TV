@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
         quality = new QualityController(display, profile, this::applyRenderHeight);
         quality.setTransitionSeconds(transitionSeconds());
         quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
-        quality.setMode(prefs.getInt(PREF_RENDER_HEIGHT, 0), prefs.getInt(PREF_AUTO_HEIGHT, 0));
+        quality.setMode(savedRenderHeight(), prefs.getInt(PREF_AUTO_HEIGHT, 0));
         visualizerView.start(renderer);
         applyFrameRateCap(prefs.getInt(PREF_FRAME_RATE_CAP, profile.defaultFrameRateCap()));
 
@@ -185,6 +185,12 @@ public class MainActivity extends Activity {
         frameRateTarget = Math.round(display.refreshRate / best);
         visualizerView.setFrameDivisor(best);
         quality.setTargetFps(display.refreshRate / best);
+        ProjectMJNI.setForceHardCut(false);  // any queued resolution change was dropped
+    }
+
+    /** Saved fixed render height if valid for the current panel, else 0 (automatic). */
+    private int savedRenderHeight() {
+        return QualityController.validFixedHeight(display, prefs.getInt(PREF_RENDER_HEIGHT, 0));
     }
 
     private int meshLevel() {
@@ -254,7 +260,7 @@ public class MainActivity extends Activity {
         String[] resolutionLabels = new String[heights.length + 1];
         resolutionLabels[0] = "Auto";
         int selectedResolution = 0;
-        int savedHeight = prefs.getInt(PREF_RENDER_HEIGHT, 0);
+        int savedHeight = savedRenderHeight();
         for (int i = 0; i < heights.length; i++) {
             resolutionLabels[i + 1] = heightLabel(heights[i]);
             if (heights[i] == savedHeight) selectedResolution = i + 1;
