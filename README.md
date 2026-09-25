@@ -91,6 +91,14 @@ app/src/test/native/run_native_tests.sh   # native engine (ASan/UBSan)
 
 Preferences are preserved when updating from earlier versions.
 
+### On-device diagnostics
+
+```bash
+tools/tv-diagnostics.sh <tv-ip>:5555 --sweep   # startup, FPS per resolution, 4K composition, skipped presets
+```
+
+See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md), including heap analysis with heaptrail.
+
 ## Permissions
 
 - `RECORD_AUDIO` - Required by the `Visualizer` API to capture system audio

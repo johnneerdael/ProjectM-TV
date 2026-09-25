@@ -133,7 +133,7 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         if (!skipped_.insert(name).second) return;
         ++skippedInOrder_;
-        LOGW("Skipping preset '%s' permanently: %s", name.c_str(), reason);
+        LOGW("SKIP preset='%s' reason=%s", name.c_str(), reason);
         FILE* f = fopen(skipFilePath_.c_str(), "a");
         if (f) {
             fprintf(f, "%s\n", name.c_str());
@@ -393,6 +393,8 @@ struct Engine {
     double fpsWindowStart = 0;
     int appliedMeshWidth = 0;
     int appliedMeshHeight = 0;
+    double createdAt = 0;
+    bool firstPresetLogged = false;
 };
 
 // Intentionally never destroyed: its detached worker thread lives as long as the process.
@@ -582,6 +584,8 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     projectm_set_preset_switch_failed_event_callback(g_engine.pm, OnSwitchFailed, nullptr);
     g_inputs.settingsDirty = true;
     g_engine.fpsWindowStart = NowSeconds();
+    g_engine.createdAt = g_engine.fpsWindowStart;
+    g_engine.firstPresetLogged = false;
     LOGI("projectM instance created");
 }
 
@@ -626,6 +630,13 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
 
     FeedAudio();
     projectm_opengl_render_frame(g_engine.pm);
+
+    if (!g_engine.firstPresetLogged && !g_engine.current.empty()) {
+        // Logged after the first frame of the first preset has been rendered.
+        g_engine.firstPresetLogged = true;
+        LOGI("STARTUP first preset rendered %.0f ms after engine creation",
+             (NowSeconds() - g_engine.createdAt) * 1000.0);
+    }
 
     if (g_inputs.blankDetection.load() &&
         g_engine.blackDetector.Update(now, g_engine.width, g_engine.height, AudioPresent(now))) {
