@@ -37,6 +37,7 @@
 #include <cmath>
 #include <condition_variable>
 #include <cstdio>
+#include <cctype>
 #include <cstdlib>
 #include <cstring>
 #include <deque>
@@ -116,14 +117,8 @@ public:
         return name;
     }
 
-    // The preset the next automatic switch will load ("" if unknown).
-    std::string PeekNext() {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return PeekNextLocked(false);
-    }
-
     // Estimated extra memory of a preset in MB (images, random images, complex shaders), from
-    // presets.idx; 0 when unknown.
+    // presets.idx; 0 when unknown. Logged with each load to calibrate the estimate.
     int Weight(const std::string& name) {
         std::lock_guard<std::mutex> lock(mutex_);
         auto it = weights_.find(name);
@@ -691,14 +686,12 @@ enum Command : int { kNone = 0, kNext, kPrevious, kRandom, kSkipCurrent };
 enum TransitionMode : int { kTransitionAuto = 0, kTransitionLightweight = 1, kTransitionClassic = 2 };
 
 constexpr double kMaxLightweightSeconds = 3.0;  // a still frame should not linger longer
-constexpr double kResizeWaitSeconds = 1.5;      // then switch at the old size (resize never came)
 constexpr float kSlowBlendRatio = 0.8f;         // classic blend slower than this: Auto goes lightweight
 
 struct Inputs {
     std::atomic<int> command{kNone};
     std::atomic<bool> commandHardCut{true};
     std::atomic<bool> forceHardCut{false};  // next automatic switch must be a hard cut
-    std::atomic<int> switchHeight{0};       // render height for the next automatic preset (0: keep)
     std::atomic<bool> blankDetection{false};  // act on black presets (always measured)
     std::atomic<int> transitionMode{kTransitionAuto};
     std::atomic<bool> autoLightweight{false};  // Auto's current choice
@@ -723,7 +716,6 @@ struct Published {
     std::atomic<int> changeCounter{0};
     std::atomic<float> lastTransitionFps{0.f};
     std::atomic<int> transitionCounter{0};
-    std::atomic<int> requestedHeight{0};  // render height the engine waits for before switching
 };
 
 // GL-thread-only state.
@@ -739,7 +731,6 @@ struct Engine {
     OutputDetector detector;
     SnapshotFade fade;
     bool snapshotReady = false;  // outgoing frame captured for the upcoming automatic switch
-    double resizeWaitSince = 0;  // automatic switch waiting for the render size of the next preset
     std::vector<uint8_t> pcmScratch;
     int framesSinceFps = 0;
     double fpsWindowStart = 0;
@@ -835,6 +826,33 @@ long ResidentMemoryKb() {
     return resident < 0 ? -1 : resident * (sysconf(_SC_PAGESIZE) / 1024);
 }
 
+// Size of a preset's warp and composite shader code (bytes, without // comments) and its number
+// of for-loops: the suspected drivers of GPU compile memory, logged next to the measured memory.
+void ShaderStats(const std::string& preset, size_t& bytes, int& loops) {
+    bytes = 0;
+    loops = 0;
+    size_t pos = 0;
+    while (pos < preset.size()) {
+        size_t end = preset.find('\n', pos);
+        if (end == std::string::npos) end = preset.size();
+        if (preset.compare(pos, 5, "warp_") == 0 || preset.compare(pos, 5, "comp_") == 0) {
+            size_t eq = preset.find('=', pos);
+            if (eq != std::string::npos && eq < end) {
+                std::string code = preset.substr(eq + 1, end - eq - 1);
+                size_t comment = code.find("//");
+                if (comment != std::string::npos) code.resize(comment);
+                bytes += code.size();
+                for (size_t f = code.find("for"); f != std::string::npos; f = code.find("for", f + 3)) {
+                    size_t after = code.find_first_not_of(" \t", f + 3);
+                    bool word = f == 0 || !(isalnum(static_cast<unsigned char>(code[f - 1])) || code[f - 1] == '_');
+                    if (word && after != std::string::npos && code[after] == '(') ++loops;
+                }
+            }
+        }
+        pos = end + 1;
+    }
+}
+
 bool UseLightweight() {
     int mode = g_inputs.transitionMode.load();
     return mode == kTransitionLightweight || (mode == kTransitionAuto && g_inputs.autoLightweight.load());
@@ -850,6 +868,9 @@ bool LoadPreset(const std::string& name, bool smooth) {
     g_engine.loading = name;
     g_engine.loadFailed = false;
     g_engine.inTransition = false;
+    size_t shaderBytes = 0;
+    int shaderLoops = 0;
+    ShaderStats(data, shaderBytes, shaderLoops);
     long availBefore = AvailableMemoryKb();
     long rssBefore = ResidentMemoryKb();
     double loadStart = NowSeconds();
@@ -859,10 +880,12 @@ bool LoadPreset(const std::string& name, bool smooth) {
     double loadMs = (loadEnd - loadStart) * 1000.0;
     long availAfter = AvailableMemoryKb();
     long rssAfter = ResidentMemoryKb();
-    // Memory the load took (to calibrate the preset weights in presets.idx): the drop in the
-    // system's available memory also covers GPU driver allocations outside our process.
-    LOGI("LOAD preset='%s' ms=%.0f smooth=%d size=%dx%d weight_mb=%d avail_drop_mb=%ld rss_growth_mb=%ld",
+    // Memory the load took, to find the presets that cause memory peaks and calibrate their
+    // weights: the drop in the system's available memory also covers GPU driver allocations.
+    LOGI("LOAD preset='%s' ms=%.0f smooth=%d size=%dx%d weight_mb=%d shader_kb=%.1f loops=%d "
+         "avail_drop_mb=%ld rss_growth_mb=%ld",
          name.c_str(), loadMs, smooth ? 1 : 0, g_engine.width, g_engine.height, g_library.Weight(name),
+         shaderBytes / 1024.0, shaderLoops,
          availBefore >= 0 && availAfter >= 0 ? (availBefore - availAfter) / 1024 : 0,
          rssBefore >= 0 && rssAfter >= 0 ? (rssAfter - rssBefore) / 1024 : 0);
     if (g_engine.loadFailed) {
@@ -914,40 +937,12 @@ std::function<std::string()> FirstThenNext(std::string first) {
 }
 
 // Automatic switch requested by projectM (preset time is up, or a hard cut on a loud beat).
-//
-// When the app wants the next preset at another render height (a heavy preset at a lower one, or
-// back up after it), the switch waits until the surface has that size, so the new preset's
-// buffers are allocated at the new size while the old preset still has its old ones, instead of
-// both at the larger size. The old preset is not drawn at the new size: its frame buffers would
-// be reallocated empty. It fades out from a snapshot instead.
 void HandleAutoSwitch() {
-    int wanted = g_inputs.switchHeight.load();
-    bool resized = false;
-    if (wanted > 0 && wanted != g_engine.height) {
-        double now = NowSeconds();
-        if (g_engine.resizeWaitSince == 0) {
-            g_engine.resizeWaitSince = now;
-            g_published.requestedHeight = wanted;
-            LOGI("RESIZE %d -> %d before loading '%s' (weight %d MB)", g_engine.height, wanted,
-                 g_library.PeekNext().c_str(), g_library.Weight(g_library.PeekNext()));
-        }
-        if (now - g_engine.resizeWaitSince < kResizeWaitSeconds) return;  // keep the old preset
-        LOGW("RESIZE to %d did not arrive, switching at %d", wanted, g_engine.height);
-    } else if (g_engine.resizeWaitSince > 0) {
-        resized = true;
-    }
-    g_engine.resizeWaitSince = 0;
-    g_published.requestedHeight = 0;
-
     g_engine.switchRequested = false;
-    bool forced = g_inputs.forceHardCut.exchange(false);
-    bool hardCut = g_engine.switchHardCut || forced;
+    bool hardCut = g_engine.switchHardCut || g_inputs.forceHardCut.exchange(false);
     int softCut = g_inputs.softCutDuration.load();
-    // After a resize projectM cannot blend (the old preset has no frame at the new size), so the
-    // snapshot fade is used whatever the transition mode.
-    bool lightweight = !g_engine.switchHardCut && softCut > 0 && g_engine.snapshotReady &&
-                       (resized || (!forced && UseLightweight()));
-    bool smooth = !hardCut && !lightweight && !resized;
+    bool lightweight = !hardCut && softCut > 0 && g_engine.snapshotReady && UseLightweight();
+    bool smooth = !hardCut && !lightweight;
     if (!lightweight) g_engine.fade.Stop();
     if (!SwitchPreset([] { return g_library.Next(); }, smooth)) {
         g_engine.fade.Stop();
@@ -967,8 +962,6 @@ void HandleCommands() {
     if (command != kNone) {
         bool smooth = !g_inputs.commandHardCut.load();
         g_engine.fade.Stop();  // remote-control switches are immediate
-        g_engine.resizeWaitSince = 0;  // an automatic switch waiting for a resize is replaced
-        g_published.requestedHeight = 0;
         switch (command) {
             case kNext:
                 SwitchPreset([] { return g_library.Next(); }, smooth);
@@ -996,13 +989,11 @@ void HandleCommands() {
 }
 
 // Called after a frame is complete: if projectM asked for a switch that will be a lightweight
-// transition, or that waits for a resize, keep a copy of this (outgoing) frame for the fade.
-// While waiting, the copy is refreshed every frame so the fade starts from the latest picture.
+// transition, keep a copy of this (outgoing) frame for the fade.
 void CaptureOutgoingFrame() {
-    if (!g_engine.switchRequested || g_engine.switchHardCut || g_inputs.softCutDuration.load() <= 0) return;
+    if (g_engine.snapshotReady || !g_engine.switchRequested || g_engine.switchHardCut) return;
+    if (g_inputs.forceHardCut.load() || g_inputs.softCutDuration.load() <= 0 || !UseLightweight()) return;
     if (g_inputs.command.load() != kNone) return;  // a remote-control switch comes first
-    bool waiting = g_engine.resizeWaitSince > 0;
-    if (!waiting && (g_engine.snapshotReady || g_inputs.forceHardCut.load() || !UseLightweight())) return;
     g_engine.snapshotReady = g_engine.fade.Capture(g_engine.width, g_engine.height);
 }
 
@@ -1072,8 +1063,6 @@ void DestroyEngineLocked(bool contextAlive) {
         g_engine.detector.Forget();
     }
     g_engine.snapshotReady = false;
-    g_engine.resizeWaitSince = 0;
-    g_published.requestedHeight = 0;
     if (g_engine.pm) {
         projectm_destroy(g_engine.pm);
         g_engine.pm = nullptr;
@@ -1193,7 +1182,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
         SwitchPreset([] { return g_library.Next(); }, false);
     }
     double end = NowSeconds();
-    g_engine.fade.Draw(end, g_engine.width, g_engine.height);
+    g_engine.fade.Draw(end);
     CaptureOutgoingFrame();
     TrackTransition(end);
     UpdateFps(now);
@@ -1277,23 +1266,6 @@ JNIEXPORT void JNICALL JNI_FN(setTransitionMode)(JNIEnv*, jclass, jint mode, jbo
 // True when automatic switches currently use the lightweight transition.
 JNIEXPORT jboolean JNICALL JNI_FN(isLightweightTransition)(JNIEnv*, jclass) {
     return UseLightweight();
-}
-
-// Render height the next automatic preset should use (0: keep the current one).
-JNIEXPORT void JNICALL JNI_FN(setSwitchHeight)(JNIEnv*, jclass, jint height) {
-    g_inputs.switchHeight = std::max(0, static_cast<int>(height));
-}
-
-// Height the engine is waiting for before its next switch (0: none).
-JNIEXPORT jint JNICALL JNI_FN(getRequestedHeight)(JNIEnv*, jclass) {
-    return g_published.requestedHeight.load();
-}
-
-// Weight (estimated extra MB) of the preset the next automatic switch will load; -1 if unknown.
-JNIEXPORT jint JNICALL JNI_FN(getUpcomingPresetWeight)(JNIEnv*, jclass) {
-    if (!g_library.Ready()) return -1;
-    std::string next = g_library.PeekNext();
-    return next.empty() ? -1 : g_library.Weight(next);
 }
 
 JNIEXPORT void JNICALL JNI_FN(setForceHardCut)(JNIEnv*, jclass, jboolean enabled) {

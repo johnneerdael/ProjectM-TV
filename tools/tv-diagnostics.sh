@@ -277,14 +277,17 @@ done
 # ---------------------------------------------------------------------------------------------
 SWEEP_ROWS=""
 if [ "$SWEEP" = 1 ]; then
-    # Fixed levels offered by the app: 720/1080/1440/2160 up to the panel height, plus the panel
-    # height itself if it is not one of those (QualityController.manualHeights).
+    # Fixed levels offered by the app (QualityController.manualHeights): 720/1080/1440/2160 up to
+    # the panel height and the memory limit, plus that maximum itself if it is not one of those.
     PANEL_H="$(grep -o 'Panel [0-9]*x[0-9]*' "$OUT/raw_logcat.txt" | head -1 | sed 's/.*x//')"
     [ -n "$PANEL_H" ] || PANEL_H=1080
+    MAX_H="$PANEL_H"
+    LIMIT_H="$(grep -o 'Memory limit: .*' "$OUT/raw_logcat.txt" | tail -1 | sed -n 's/.*up to \([0-9]*\).*/\1/p')"
+    if [ -n "$LIMIT_H" ] && [ "$LIMIT_H" -lt "$MAX_H" ]; then MAX_H="$LIMIT_H"; fi
     LEVELS=0
-    for h in 720 1080 1440 2160; do [ "$h" -le "$PANEL_H" ] && LEVELS=$((LEVELS + 1)); done
-    case "$PANEL_H" in 720|1080|1440|2160) ;; *) LEVELS=$((LEVELS + 1)) ;; esac
-    log "Resolution sweep over $LEVELS fixed levels (panel height $PANEL_H)"
+    for h in 720 1080 1440 2160; do [ "$h" -le "$MAX_H" ] && LEVELS=$((LEVELS + 1)); done
+    case "$MAX_H" in 720|1080|1440|2160) ;; *) LEVELS=$((LEVELS + 1)) ;; esac
+    log "Resolution sweep over $LEVELS fixed levels (panel height $PANEL_H, highest offered $MAX_H)"
     SWEEP_ACTIVE=1
     restore_auto_resolution
     step=1
@@ -400,10 +403,20 @@ layer_excerpt() {
         echo "- $mode transitions: fps incl. load $(printf '%s\n' "$T" | field_summary fps), blend fps $(printf '%s\n' "$T" | field_summary blend_fps), fps before $(printf '%s\n' "$T" | field_summary before_fps), frames > 50 ms $(printf '%s\n' "$T" | field_summary slow_frames)"
     done
     grep -h -o "TRANSITION auto:.*" "$A" | sed 's/^/- /' | head -3
-    echo "- Biggest memory drops during a load (avail_drop_mb, with the preset's weight_mb):"
+    echo "- Biggest memory drops during a load (avail_drop_mb, with weight_mb, shader_kb, loops):"
     grep -h -o "LOAD preset=.*" "$A" | awk -F"avail_drop_mb=" 'NF > 1 { split($2, a, " "); print a[1] "\t" $0 }' \
-        | sort -rn | head -5 | cut -f2 | sed 's/^/  - /'
-    echo "- Resizes for heavy presets: $(grep -c 'RESIZE .* before loading' "$A" || true)"
+        | sort -rn | head -10 | cut -f2 | sed 's/^/  - /'
+    echo "- Average memory drop per load by shader size and by image weight:"
+    grep -h -o "LOAD preset=.*" "$A" | awk '
+        function v(k,   i) { for (i = 1; i <= NF; i++) if (index($i, k "=") == 1) return substr($i, length(k) + 2) + 0; return -1 }
+        v("avail_drop_mb") >= 0 {
+            d = v("avail_drop_mb"); kb = v("shader_kb"); w = v("weight_mb")
+            complex = kb >= 4.2 || v("loops") >= 2
+            s = complex ? "complex shader" : kb >= 2 ? "shader 2-4 KB" : "shader < 2 KB"
+            sum[s] += d; n[s]++
+            if (!complex) { g = w >= 5 ? "simple shader, images >= 5 MB" : "simple shader, images < 5 MB"; sum[g] += d; n[g]++ }
+        }
+        END { for (k in n) printf "  - %s: %.0f MB over %d loads\n", k, sum[k] / n[k], n[k] }' | sort
     echo "- Slowest loads:"
     grep -h -o "LOAD preset=.*" "$A" | awk -F"ms=" '{ split($2, a, " "); print a[1] "\t" $0 }' | sort -rn | head -5 \
         | cut -f2 | sed 's/^/  - /'
@@ -422,7 +435,7 @@ layer_excerpt() {
     fi
     echo
     echo "## Memory"
-    grep -h -o -E "Memory pressure.*|Not enough free memory.*" "$A" | sort | uniq -c | sed 's/^ */- /' | head -10
+    grep -h -o -E "Memory limit: .*|Memory pressure.*" "$A" | sort -u | sed 's/^/- /' | head -10
     echo "- Other apps killed during the run (low memory; cached processes omitted):"
     grep -E "ActivityManager: Process .* has died: (prcp|prcl|fg|vis|svc|fore|percep)" "$L" | grep -v "$PKG" \
         | sed -E 's/.*Process ([^ ]+) \(pid [0-9]+\) has died: ([^ ]+).*/\1 (\2)/' | sort | uniq -c | sort -rn \

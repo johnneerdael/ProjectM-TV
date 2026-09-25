@@ -90,7 +90,7 @@ int main() {
     fade.Start(10.0, 1.0);
     CHECK(fade.Active());
     Fill(0, 1, 0);
-    fade.Draw(10.0, kSize, kSize);
+    fade.Draw(10.0);
     Pixel(kSize / 2, kSize / 2, px);
     CHECK(Near(px[0], 255) && Near(px[1], 0));  // start: only the outgoing frame is visible
 
@@ -110,13 +110,13 @@ int main() {
 
     printf("halfway: both frames mixed\n");
     Fill(0, 1, 0);
-    fade.Draw(10.5, kSize, kSize);
+    fade.Draw(10.5);
     Pixel(kSize / 2, kSize / 2, px);
     CHECK(Near(px[0], 128) && Near(px[1], 128));
 
     printf("end: the fade stops itself and leaves the new preset untouched\n");
     Fill(0, 1, 0);
-    fade.Draw(11.0, kSize, kSize);
+    fade.Draw(11.0);
     CHECK(!fade.Active());
     Pixel(kSize / 2, kSize / 2, px);
     CHECK(Near(px[0], 0) && Near(px[1], 255));

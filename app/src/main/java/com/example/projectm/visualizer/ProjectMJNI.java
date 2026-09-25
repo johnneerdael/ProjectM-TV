@@ -62,16 +62,6 @@ public final class ProjectMJNI {
     public static native void setTransitionMode(int mode, boolean autoStartsLightweight);
     /** True when automatic preset switches currently use the lightweight transition. */
     public static native boolean isLightweightTransition();
-    /**
-     * Render height the next automatic preset should use (0: keep). When it differs from the
-     * current height, the engine waits with that switch until the surface has been resized; see
-     * {@link #getRequestedHeight()}.
-     */
-    public static native void setSwitchHeight(int height);
-    /** Height the engine waits for before its next switch (0: none). */
-    public static native int getRequestedHeight();
-    /** Weight (estimated extra MB, from presets.idx) of the next automatic preset; -1 if unknown. */
-    public static native int getUpcomingPresetWeight();
     /** Makes the next automatic preset switch a hard cut (used before resolution changes). */
     public static native void setForceHardCut(boolean enabled);
     /** Reads an Android system property ("" if unset or not readable). */

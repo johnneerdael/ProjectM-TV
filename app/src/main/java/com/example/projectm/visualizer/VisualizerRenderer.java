@@ -18,13 +18,10 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     public interface StatsListener {
         void onFpsSample(float fps);
         void onPresetChanged();
-        /** The engine holds its next preset switch until the surface has this height. */
-        void onResizeRequested(int height);
     }
 
     private final StatsListener listener;
     private int lastPresetChange = Integer.MIN_VALUE;
-    private int lastRequestedHeight;
     private int statsCountdown;
     private static final int STATS_LOG_INTERVAL_S = 5;
 
@@ -64,12 +61,6 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl) {
         ProjectMJNI.onDrawFrame();
-
-        int requested = ProjectMJNI.getRequestedHeight();
-        if (requested != lastRequestedHeight) {
-            lastRequestedHeight = requested;
-            if (requested > 0) listener.onResizeRequested(requested);
-        }
 
         int change = ProjectMJNI.getPresetChangeCounter();
         if (change != lastPresetChange) {

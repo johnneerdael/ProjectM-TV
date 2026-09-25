@@ -75,7 +75,7 @@ void glReadPixels(GLint, GLint, GLsizei w, GLsizei h, GLenum, GLenum, GLvoid* ou
 int g_captures = 0, g_fadeStarts = 0, g_fadeDraws = 0; double g_fadeSeconds = 0; bool g_captureOk = true;
 bool SnapshotFade::Capture(int, int) { Stop(); ++g_captures; texture_ = g_captureOk ? 1 : 0; return g_captureOk; }
 void SnapshotFade::Start(double now, double seconds) { if (!texture_) return; ++g_fadeStarts; active_ = true; start_ = now; duration_ = seconds; g_fadeSeconds = seconds; }
-void SnapshotFade::Draw(double now, int, int) { if (!active_) return; ++g_fadeDraws; if (now - start_ >= duration_) Stop(); }
+void SnapshotFade::Draw(double now) { if (!active_) return; ++g_fadeDraws; if (now - start_ >= duration_) Stop(); }
 void SnapshotFade::Stop() { active_ = false; texture_ = 0; }
 void SnapshotFade::Forget() { Stop(); }
 void SnapshotFade::Release() { Stop(); }
@@ -141,8 +141,6 @@ int main(int argc, char** argv) {
   CHECK(g_library.Weight("good 3.milk") == 40 && g_library.Weight("good 2.milk") == 2);
   CHECK(g_library.Weight("good 1.milk") == 0 && g_library.Weight("good 4.milk") == 0);
   CHECK(g_library.Weight("crlf.milk") == 7);  // CRLF line
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getUpcomingPresetWeight(nullptr, nullptr) ==
-        g_library.Weight(g_library.PeekNext()));
 
   printf("indexing falls back to listing the folder without presets.idx\n");
   { std::string root2 = argv[2]; static AAssetManager am2{root2}; PresetLibrary& other = *new PresetLibrary();
@@ -331,50 +329,6 @@ int main(int argc, char** argv) {
   CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getLastTransitionFps(nullptr, nullptr) > 0.f);
   g_renderSleepMs = g_renderSleepMsSmooth = 0;
 
-  printf("heavy preset: the switch waits for the resize, then loads at the new size with a fade\n");
-  {
-    auto lastLine = [](const char* prefix) {
-      for (auto it = g_logLines.rbegin(); it != g_logLines.rend(); ++it) if (it->rfind(prefix, 0) == 0) return *it;
-      return std::string(); };
-    Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 2);
-    Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 2, false);  // classic
-    Java_com_example_projectm_visualizer_ProjectMJNI_setSwitchHeight(nullptr, nullptr, 360);
-    size_t loads = g_loaded.size(); int starts = g_fadeStarts;
-    g_requestInRender = true; frame(); frame(); frame();
-    CHECK(g_loaded.size() == loads);  // still the old preset
-    CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getRequestedHeight(nullptr, nullptr) == 360);
-    Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 640, 360); frame();
-    CHECK(g_loaded.size() == loads + 1 && !g_lastSmooth);  // no projectM blend across a resize ...
-    CHECK(g_fadeStarts == starts + 1);                     // ... the snapshot fades out instead
-    CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getRequestedHeight(nullptr, nullptr) == 0);
-    std::string load = lastLine("LOAD preset=");
-    printf("    %s\n", load.c_str());
-    CHECK(load.find("size=640x360") != std::string::npos && load.find("avail_drop_mb=") != std::string::npos);
-
-    printf("the same height again: no waiting\n");
-    loads = g_loaded.size();
-    g_requestInRender = true; frame(); frame();
-    CHECK(g_loaded.size() == loads + 1);
-
-    printf("a resize that never comes: switch at the old size after 1.5 s\n");
-    Java_com_example_projectm_visualizer_ProjectMJNI_setSwitchHeight(nullptr, nullptr, 720);
-    loads = g_loaded.size();
-    g_requestInRender = true; frame(); frame();
-    CHECK(g_loaded.size() == loads);
-    for (int i = 0; i < 200 && g_loaded.size() == loads; ++i) { frame(); std::this_thread::sleep_for(std::chrono::milliseconds(10)); }
-    CHECK(g_loaded.size() == loads + 1 && g_engine.height == 360);
-
-    printf("a remote-control switch replaces a waiting one\n");
-    loads = g_loaded.size();
-    g_requestInRender = true; frame(); frame();
-    CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getRequestedHeight(nullptr, nullptr) == 720);
-    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
-    CHECK(g_loaded.size() == loads + 1);
-    CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getRequestedHeight(nullptr, nullptr) == 0);
-    Java_com_example_projectm_visualizer_ProjectMJNI_setSwitchHeight(nullptr, nullptr, 0);
-    Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720); frame();
-  }
-
   printf("output measurements: flat and still are logged, never skipped\n");
   {
     auto outputLine = [](const std::string& preset) {
@@ -403,6 +357,22 @@ int main(int argc, char** argv) {
     printf("    %s\n", frozenLine.c_str());
     CHECK(frozenLine.find("flat=0/") != std::string::npos && frozenLine.find("still=0/") == std::string::npos);
     CHECK(frozenLine.find("change_pct_avg=0.0") != std::string::npos);
+  }
+
+  printf("LOAD lines carry size, weight, shader size/loops and the memory taken\n");
+  {
+    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    std::string load;
+    for (auto it = g_logLines.rbegin(); it != g_logLines.rend() && load.empty(); ++it)
+      if (it->rfind("LOAD preset=", 0) == 0) load = *it;
+    printf("    %s\n", load.c_str());
+    CHECK(load.find(" size=1280x720 weight_mb=") != std::string::npos);
+    CHECK(load.find(" shader_kb=") != std::string::npos && load.find(" loops=") != std::string::npos);
+    CHECK(load.find(" avail_drop_mb=") != std::string::npos && load.find(" rss_growth_mb=") != std::string::npos);
+    size_t bytes = 0; int loops = 0;
+    ShaderStats("warp_1=`for (int i=0;i<3;i++) x+=1; // for(\ncomp_1=`y = tex2D(a,b); for(;;){}\nper_frame_1=for(\n",
+                bytes, loops);
+    CHECK(loops == 2 && bytes > 40 && bytes < 90);  // comments and non-shader lines ignored
   }
 
   printf("audio level getter\n");

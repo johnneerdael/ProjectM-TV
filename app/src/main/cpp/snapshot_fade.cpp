@@ -114,6 +114,8 @@ bool SnapshotFade::Capture(int width, int height) {
     glBindTexture(GL_TEXTURE_2D, static_cast<GLuint>(texture));
     glActiveTexture(static_cast<GLenum>(activeTexture));
     glBindFramebuffer(GL_READ_FRAMEBUFFER, static_cast<GLuint>(readFbo));
+    width_ = width;
+    height_ = height;
     if (!ok) {
         LOGW("Could not capture the outgoing frame; using projectM's own transition");
         Stop();
@@ -131,7 +133,7 @@ void SnapshotFade::Start(double now, double seconds) {
     duration_ = seconds;
 }
 
-void SnapshotFade::Draw(double now, int width, int height) {
+void SnapshotFade::Draw(double now) {
     if (!active_) return;
     float t = static_cast<float>((now - start_) / duration_);
     if (t >= 1.f) {
@@ -166,7 +168,7 @@ void SnapshotFade::Draw(double now, int width, int height) {
     glGetIntegerv(GL_SAMPLER_BINDING, &sampler);
 
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, width_, height_);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_SCISSOR_TEST);
     glDisable(GL_CULL_FACE);

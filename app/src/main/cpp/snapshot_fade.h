@@ -18,10 +18,9 @@ public:
 
     bool Active() const { return active_; }
 
-    // Draws the snapshot over the current window contents (width x height, which may differ from
-    // the captured size after a resize); ends the fade when it is done. Restores the GL state it
-    // changes, so projectM's next frame is unaffected.
-    void Draw(double now, int width, int height);
+    // Draws the snapshot over the current window contents; ends the fade when it is done.
+    // Restores the GL state it changes, so projectM's next frame is unaffected.
+    void Draw(double now);
 
     // Ends the fade (or drops an unused capture) and frees the texture.
     void Stop();
@@ -40,6 +39,8 @@ private:
     GLuint vao_ = 0;
     GLint alphaLoc_ = -1;
     GLint scaleLoc_ = -1;
+    int width_ = 0;
+    int height_ = 0;
     bool programFailed_ = false;
     bool active_ = false;
     double start_ = 0;

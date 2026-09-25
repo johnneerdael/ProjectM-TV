@@ -28,7 +28,7 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 
 | File | Content |
 |---|---|
-| `summary.md` | Device and GPU, panel/UI size, startup times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory pressure and other apps killed for memory, surface composition, skipped presets, crashes |
+| `summary.md` | Device and GPU, panel/UI size, startup times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory limit and other apps killed for memory, surface composition, skipped presets, crashes |
 | `app_log.txt` | App log lines (`STATS`, `STARTUP`, `LOAD`, `TRANSITION`, `OUTPUT`, `SKIP`, `QualityController`, crashes) |
 | `device.txt` | System properties, display modes, CPU, memory, GLES driver |
 | `screen_*.png` | Visuals, main panel, Advanced panel |
@@ -38,16 +38,17 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 - `VisualizerRenderer: STATS fps=59.8 surface=2560x1440`: every 5 s.
 - `projectM-Native: STARTUP first preset shown 212 ms after engine creation`.
 - `projectM-Native: Indexed 9794 presets (3 skipped) in 84 ms from presets.idx`.
-- `projectM-Native: LOAD preset='…' ms=412 smooth=0 size=2560x1440 weight_mb=33 avail_drop_mb=61 rss_growth_mb=12`: every preset switch.
+- `projectM-Native: LOAD preset='…' ms=412 smooth=0 size=2240x1260 weight_mb=33 shader_kb=4.6 loops=2 avail_drop_mb=61 rss_growth_mb=12`: every preset switch.
   - `ms` is the stall (parse, textures, shader compile) during which the picture freezes.
-  - `weight_mb` is the preset's weight from `presets.idx`.
-  - `avail_drop_mb` / `rss_growth_mb` are how much the system's available memory fell and the app grew during the load. Compare them with the weight to calibrate it.
-- `projectM-Native: RESIZE 1440 -> 1080 before loading '…' (weight 40 MB)`: a heavy preset is loaded at a lower height because free memory is short (or the height goes back up after it).
+  - `weight_mb` is the preset's estimated extra memory from `presets.idx`.
+  - `shader_kb` / `loops` are the size of its warp and composite shaders and their loop count.
+  - `avail_drop_mb` / `rss_growth_mb` are how much the system's available memory fell and the app grew during the load. They show which presets cause memory peaks at a switch.
 - `projectM-Native: TRANSITION preset='…' mode=lightweight load_ms=412 fps=48.2 blend_fps=58.9 before_fps=59.9 frames=… slow_frames=2 worst_ms=431`: when a transition ends. `fps` includes the load, `blend_fps` excludes it, `slow_frames` counts frames over 50 ms.
 - `projectM-Native: TRANSITION auto: classic blend ran at …`: Auto switched to lightweight transitions.
 - `projectM-Native: OUTPUT preset='…' samples=18 luma_range=3..9 change_pct_min=0.4 change_pct_avg=1.1 region_pct_min=2.0 luma_changes=… hue_only_changes=… flat=18/18 still=17/17 skipped=no`: what a preset showed while music played (see *Output measurements* below).
 - `projectM-Native: SKIP preset='…' reason=…`.
-- `QualityController: …`: dynamic-resolution decisions. It also logs `Memory pressure …` when Android asks apps to free memory, and `Not enough free memory for 1800 (needs ~190 MB, 120 MB free)` when Auto skips a step up.
+- `QualityController: …`: dynamic-resolution decisions, including `Memory pressure …` when Android asks apps to free memory.
+- `ProjectMTV: Memory limit: render height up to 1260 (RAM 1941 MB)` (or `Memory limit: off`). The sweep only covers the levels up to this limit; turn *Advanced › Memory limit* off first to sweep up to the panel resolution.
 
 ### Reading the results
 - **Did the music app get killed?** *Memory › Other apps killed during the run* lists processes Android stopped while they were visible, perceptible or foreground services (e.g. `com.soundcloud.android (prcp)`). Cached processes are left out, because Android kills those routinely.

@@ -87,8 +87,15 @@ VisualizerRenderer (GL thread) ─► onDrawFrame (native)
 
 `--remove` deletes the failing presets. In 1.9 that removed 116 non-reactive and 73 excluded-texture presets (one was both), leaving 9,606.
 
+### Preset memory (measuring)
+The frame buffers of a preset depend only on the resolution. What differs per preset, read from the `.milk` files by `tools/gen-preset-index.py` following projectM's own rules:
+- **Images.** projectM loads every image named by `sampler_<name>` or `texsize_<name>` in the warp/comp shaders, used or not, at width × height × 4 bytes (no mipmaps, no power-of-two rounding). Random-image slots count as the largest bundled image. Per preset: median 0.4 MB, max 12 MB.
+- **Complex shaders:** the top 1 % by size (≥ 4.2 KB) or with two or more loops. They get a placeholder 32 MB for the GPU driver's compile memory, which can't be read from the file.
+
+The weight (extra MB) is the second column of `presets.idx`: 7,799 presets 0 MB, 1,419 presets 1–4 MB, 388 presets 5 MB or more. 1.9.1 only **measures**. Every `LOAD` log line records the preset's weight, its shader size and loop count, how much the system's available memory dropped, and how much the process grew during the load. The next runs show which presets cause memory peaks at a switch, and whether shaders or images drive them. The RAM-based resolution cap stays in place as a temporary measure until then.
+
 ### Preset index
-`tools/gen-preset-index.py` writes `app/src/main/assets/presets.idx`: the sorted list of bundled presets, each with a memory weight (see *Heavy presets*). CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before, without weights.
+`tools/gen-preset-index.py` writes `app/src/main/assets/presets.idx`: the sorted list of bundled presets, each with a memory weight (see *Preset memory*). CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before.
 
 ### Transitions
 projectM's soft cut renders the outgoing and incoming preset for the whole transition, which doubles CPU (per-vertex equations) and GPU cost and keeps two presets' frame buffers. On a SHIELD at 1260p, 5-second FPS averages fell to 19–36 around every switch, even at 720p.
@@ -119,21 +126,9 @@ The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The di
 
 **True 4K (`DisplayInfo`).** Android TVs commonly drive the UI at 1080p on a 4K panel, while a SurfaceView can still be shown at the panel's full physical resolution. `getRealSize()` reports the UI size, so before 1.8 "Native" was 1080p on such TVs. The physical size is now detected as AndroidX Media3 does in `Util.getCurrentDisplayModeSize`: the `vendor.display-size` / `sys.display-size` property, Sony's 4K panel feature, then `Display.Mode.getPhysicalWidth/Height()`. **Needs on-device confirmation per TV model:** *Advanced › Diagnostics* shows the panel, UI and render sizes.
 
-**Memory peaks.** On a 2 GB SHIELD, Android's low-memory killer closed SoundCloud (a foreground service) three times, taking up to 11 other processes with it. Each time it came right after a burst of allocations: the first preset at startup, a preset switch combined with a resize, and a switch at 4K. In between, the app ran for minutes at 1440p and 1800p without kills. So there is **no fixed resolution cap** (1.9 had one; 1.9.1 removed it). Instead the peaks are handled where they happen:
-- **Headroom check.** Auto only steps up, or starts at a remembered high level, when Android's free memory above its low-memory threshold (`MemoryInfo.availMem − threshold`, 0 while `lowMemory`) covers the estimate. For a step up, that's the extra frame buffers and surface of the bigger size plus a second preset during a switch. At launch it's the whole level. Otherwise it logs `Not enough free memory for …`. Estimate: ~13 B/px per projectM preset (two RGBA8 frame buffers, an RG16F motion-vector map, blur buffers), 12 B/px for the window surface, plus a 64 MB margin.
-- **Temporary back-off.** While the app is visible, `onTrimMemory(RUNNING_LOW / RUNNING_CRITICAL)` lowers Auto by one level at the next switch, forces that switch to be a hard cut, and keeps Auto at or below that level for 10 presets. Then the headroom check decides again.
-- **Lightweight transitions** (Auto's default below 2.6 GB RAM) avoid holding two presets for the whole blend.
+**Memory limit.** On a 2 GB SHIELD, rendering at 1440p and above made Android's low-memory killer close SoundCloud (a foreground service), taking up to 11 other processes with it. Resolutions are therefore capped by installed RAM (`DeviceProfile.memorySafeHeight`): below 1.6 GB 1080p, below 2.6 GB 1260p, below 3.6 GB 1440p, otherwise the panel. The cap applies to Auto and to the fixed choices. *Advanced › Memory limit › Off* removes it. While the app is visible, `onTrimMemory(RUNNING_LOW / RUNNING_CRITICAL)` lowers the Auto level by one step at the next switch and keeps it there for the session (at most one step per preset). **The thresholds are estimates** from the SHIELD run, which predates the texture pack. The next run should confirm them.
 
-**Heavy presets.** Most of what a preset allocates depends only on the resolution: its two frame buffers and motion-vector map are the same for every preset. What differs per preset (read from the `.milk` files by `tools/gen-preset-index.py`, following projectM's own rules):
-- **Images.** projectM loads every image named by `sampler_<name>` or `texsize_<name>` in the warp/comp shaders, used or not, at width × height × 4 bytes (no mipmaps, no power-of-two rounding). Random-image slots (`sampler_randNN`) count as the largest bundled image.
-- **Complex shaders:** the top 1 % by size (≥ 4.2 KB) or with two or more loops. They get a fixed 32 MB allowance for the GPU driver's compile memory. This part is an estimate.
-- Blur use is ignored: all blur buffers together are ~1.3 B/px (about 11 MB at 4K).
-
-Each preset's weight (extra MB) is the second column of `presets.idx`: 7,799 presets 0 MB, 1,419 presets 1–4 MB, 388 presets 5 MB or more (max 43 MB). Once a second, `MainActivity` asks `QualityController.heightForNextPreset(weight)` for the height of the preset the next automatic switch will load. That's the auto level, lowered only while free memory can't hold a second preset's frame buffers plus that preset's weight. The engine then holds that switch until the surface has the new size, and loads the preset at the new size. Before, it loaded at the old size and resized afterwards, so both presets briefly existed at the larger size. The old preset is not drawn at the new size (its buffers would be reallocated empty); it fades out from a snapshot, as in lightweight mode. If the resize doesn't arrive within 1.5 s, the switch goes ahead at the old size as a hard cut. After a heavy preset, the next normal one goes back up the same way. While a heavy preset runs at a reduced height, its frame rate doesn't move the auto level.
-
-Every `LOAD` log line records how much the system's available memory dropped and how much the process grew during the load. That calibrates the weights (the shader allowance in particular) on real devices.
-
-**Dynamic resolution (`QualityController`).** Heights ladder: 360 … 2160, capped by the panel, with a floor per tier. Once the settle period after a preset change has passed (transition + 3 s), 1-second FPS samples drive it:
+**Dynamic resolution (`QualityController`).** Heights ladder: 360 … 2160, capped by the panel and the memory limit, with a floor per tier. Once the settle period after a preset change has passed (transition + 3 s), 1-second FPS samples drive it:
 
 | Condition | Action |
 |---|---|
@@ -156,7 +151,7 @@ Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches t
 | UI | default | Overlay; status polled every 500 ms, text only updated when changed |
 
 ### Overlay UI
-`OptionRow` is a focusable settings row: ↑/↓ moves between rows, ‹ › changes the value, and center cycles it or runs an action. The main panel (now playing, transport, auto change, duration, transition, resolution, frame rate) ends with **Advanced ›**, which slides a separate panel over it: detail (mesh), transitions (Auto / Lightweight / Classic), skip slow presets, skip blank presets, skipped-preset reset and live diagnostics. BACK returns. Both panels sit within the 48 dp / 27 dp overscan-safe margins. Views fade out and are set to `GONE`, so a hidden overlay costs nothing to draw. Long preset names use a marquee, which is only restarted when the text actually changes.
+`OptionRow` is a focusable settings row: ↑/↓ moves between rows, ‹ › changes the value, and center cycles it or runs an action. The main panel (now playing, transport, auto change, duration, transition, resolution, frame rate) ends with **Advanced ›**, which slides a separate panel over it: detail (mesh), transitions (Auto / Lightweight / Classic), memory limit, skip slow presets, skip blank presets, skipped-preset reset and live diagnostics. BACK returns. Both panels sit within the 48 dp / 27 dp overscan-safe margins. Views fade out and are set to `GONE`, so a hidden overlay costs nothing to draw. Long preset names use a marquee, which is only restarted when the text actually changes.
 
 ### Device tiers (`DeviceProfile`)
 | Tier | Rule | Auto start / floor | Frame rate | Detail (mesh) | Transition | Skip slow |
@@ -180,7 +175,7 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 | JVM tests (`QualityControllerTest`): levels per panel, change only at preset switch, back-off, severe drop, slow-preset skip, low-tier floor | 5/5 pass |
 | 1.9 host engine tests (ASan + UBSan): `presets.idx` with CRLF/blank/junk lines and folder fallback; lightweight capture → hard cut → fade; remote switch ends fade; hard cuts never faded; capture failure → classic; classic mode; Auto switches only after a slow classic blend; black skipping off by default; `OUTPUT` flat/still lines; readback from the window framebuffer | all pass |
 | 1.9 `fade_gl_test` on Mesa llvmpipe (OpenGL ES 3.2, headless EGL): capture, fade curve (start / half / end), self-stop, GL state restored (blend, scissor, program, VAO, texture unit, sampler binding) | all pass |
-| 1.9.1 JVM tests: no fixed cap; step up only with free memory for the switch peak; start level fits free memory; memory pressure backs off for 10 presets, then may climb; second failure blocks a level | 11/11 pass |
+| 1.9 JVM tests: memory limit caps Auto and fixed levels, remembered 4K clamped, memory pressure lowers once per preset, second failure blocks a level | 9/9 pass |
 | GitHub Actions: Gradle build + NDK/CMake native build + APK packaging on ubuntu-24.04 | green |
 | **On-device test** | **Not done yet.** Needs a run on Shield / TCL / Fire TV |
 
@@ -189,7 +184,7 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 | Risk | Likelihood | Mitigation |
 |---|---|---|
 | Black detector skips a legitimately very dark preset | Low (off by default since 1.9) | Only when enabled, only while audio plays, 5 consecutive samples; *Reset* restores all |
-| The per-pixel memory estimate is off, so Auto holds back too much or too little | Medium | Derived from projectM's buffer formats, not measured. Any peak Android reports still triggers the back-off. The `Not enough free memory` and `Memory pressure` lines in the next run show which way it errs |
+| Memory limit too strict on a device with plenty of free RAM, or too loose once textures are loaded | Medium | Estimates from one SHIELD run; *Memory limit › Off*; `onTrimMemory` lowers further at runtime; confirm with the next diagnostics run |
 | `glCopyTexImage2D` from the window is slow or unsupported on a driver | Low | Only on switch frames; any GL error falls back to classic; *Transitions › Classic* |
 | The fade's still frame looks worse than projectM's blend on strong devices | Medium (taste) | Auto keeps classic where it runs at full speed; *Transitions › Classic* |
 | Visualizer returns silence (DRM apps, some vendors), so black detection never runs | Medium | Load-failure skipping still works; visuals follow projectM's idle response |

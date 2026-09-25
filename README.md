@@ -12,7 +12,7 @@ A music visualization powerhouse for your Android TV, bringing the legendary pro
 - **Up to true 4K** - Detects the physical panel (TVs often run their UI at 1080p on a 4K panel) and renders up to its full resolution; the display scaler handles lower resolutions at no GPU cost
 - **Automatic resolution** - Dynamic resolution that adapts between presets to hold the frame rate
 - **Smooth frame pacing** - Full refresh rate or an even fraction (e.g. 60/30, or 120/60/30 on 120 Hz TVs)
-- **Performance controls** - Advanced panel with mesh detail, transition style, skipping of slow or blank presets, and live diagnostics
+- **Performance controls** - Advanced panel with mesh detail, transition style, memory limit, skipping of slow or blank presets, and live diagnostics
 - **TV-style overlay** - Compact settings panel inside the overscan-safe area; long preset names scroll
 - **System audio visualization** - Reacts to any audio playing on the device
 - **Remote-friendly controls**

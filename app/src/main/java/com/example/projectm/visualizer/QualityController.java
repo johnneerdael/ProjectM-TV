@@ -14,16 +14,9 @@ import java.util.List;
  * is then forced to be a hard cut: the new preset starts from scratch anyway, so the reset is not
  * visible. Only a severe, sustained slowdown triggers an immediate change (with a preset switch).
  *
- * Memory: running out is a short peak, not a steady state. At a preset switch two presets'
- * frame buffers exist at once, and a resize reallocates them. So there is no fixed cap: Auto
- * only goes up (or starts high) when Android's free memory covers the estimated extra memory
- * of the higher level including a switch, and when Android reports memory pressure it steps
- * down one level for {@link #PRESSURE_BACKOFF_PRESETS} presets, then may climb again.
- *
- * Heavy presets: presets.idx gives every preset a weight (estimated extra MB for its images and
- * complex shaders, see tools/gen-preset-index.py). {@link #heightForNextPreset} lowers the
- * resolution for the upcoming preset only when free memory cannot hold its switch peak plus its
- * weight; the engine resizes before loading it and goes back up for the next normal preset.
+ * Heights are limited to the panel and to a memory-safe maximum (see
+ * {@link DeviceProfile#memorySafeHeight()}); memory pressure reported by Android lowers that
+ * maximum for the rest of the session.
  *
  * All methods run on the UI thread.
  */
@@ -32,11 +25,6 @@ public final class QualityController {
 
     public interface Listener {
         void onApplyRenderHeight(int height);
-    }
-
-    /** Free memory before Android starts killing apps (bytes), or a negative value if unknown. */
-    public interface MemoryProbe {
-        long headroomBytes();
     }
 
     /** Result of {@link #onFpsSample}. */
@@ -58,19 +46,8 @@ public final class QualityController {
     private static final float SKIP_THRESHOLD = 0.5f;
     private static final int SKIP_SAMPLES = 5;
     private static final long SETTLE_MS = 3000;             // ignore load hitch + transition start
-    /**
-     * Estimated bytes per rendered pixel. Each projectM preset holds two RGBA8 frame buffers and an
-     * RG16F motion-vector map plus smaller blur buffers (~13 B/px); the window surface has up to
-     * three RGBA8 buffers (12 B/px). During a switch two presets exist at once.
-     */
-    static final long PRESET_BYTES_PER_PIXEL = 13;
-    static final long SURFACE_BYTES_PER_PIXEL = 12;
-    static final long MEMORY_MARGIN_BYTES = 64L << 20;
-    static final int PRESSURE_BACKOFF_PRESETS = 10;
 
     private final Listener listener;
-    private final MemoryProbe memory;
-    private final DisplayInfo display;
     private final int[] levels;
     private final int minIndex;
     private boolean auto;
@@ -86,18 +63,14 @@ public final class QualityController {
     private final int[] blockedUntilPreset;  // per level: don't retry until this preset count
     private final int[] failures;            // per level: exponential back-off after failed probes
     private int presetCount;
-    private int pressureCeiling = Integer.MAX_VALUE;  // level index auto may not exceed ...
-    private int pressureUntilPreset;                  // ... until this preset count
+    private int ceiling;                     // highest level auto may use (lowered by memory pressure)
     private int pressurePreset = -1;
-    private boolean started;                          // first setMode (launch) done
-    private int shownHeight;                          // render height in use (lower for a heavy preset)
 
-    public QualityController(DisplayInfo display, DeviceProfile profile, MemoryProbe memory, Listener listener) {
+    /** @param memoryLimit highest render height allowed for memory reasons, 0 for none. */
+    public QualityController(DisplayInfo display, DeviceProfile profile, int memoryLimit, Listener listener) {
         this.listener = listener;
-        this.memory = memory;
-        this.display = display;
         List<Integer> usable = new ArrayList<>();
-        int maxHeight = display.physicalHeight;
+        int maxHeight = limit(display, memoryLimit);
         for (int h : AUTO_LADDER) if (h <= maxHeight) usable.add(h);
         if (usable.isEmpty() || usable.get(usable.size() - 1) < maxHeight) usable.add(maxHeight);
         levels = new int[usable.size()];
@@ -106,11 +79,16 @@ public final class QualityController {
         failures = new int[levels.length];
         minIndex = indexAtMost(profile.minAutoHeight());
         current = indexAtMost(profile.initialAutoHeight());
+        ceiling = levels.length - 1;
+    }
+
+    private static int limit(DisplayInfo display, int memoryLimit) {
+        return memoryLimit > 0 ? Math.min(display.physicalHeight, memoryLimit) : display.physicalHeight;
     }
 
     /** Levels available for manual selection in the menu (ascending heights). */
-    public static int[] manualHeights(DisplayInfo display) {
-        int maxHeight = display.physicalHeight;
+    public static int[] manualHeights(DisplayInfo display, int memoryLimit) {
+        int maxHeight = limit(display, memoryLimit);
         List<Integer> list = new ArrayList<>();
         for (int h : new int[]{720, 1080, 1440, 2160}) if (h <= maxHeight) list.add(h);
         if (list.isEmpty() || list.get(list.size() - 1) < maxHeight) list.add(maxHeight);
@@ -121,10 +99,11 @@ public final class QualityController {
 
     /**
      * Returns {@code savedHeight} if it is still a valid fixed level for this panel, otherwise 0
-     * (automatic). A saved 2160 must not be used after the device moved to a 1080p panel.
+     * (automatic). A saved 2160 must not be used after the device moved to a 1080p panel, or
+     * above the memory limit.
      */
-    public static int validFixedHeight(DisplayInfo display, int savedHeight) {
-        for (int h : manualHeights(display)) if (h == savedHeight) return savedHeight;
+    public static int validFixedHeight(DisplayInfo display, int memoryLimit, int savedHeight) {
+        for (int h : manualHeights(display, memoryLimit)) if (h == savedHeight) return savedHeight;
         return 0;
     }
 
@@ -134,15 +113,7 @@ public final class QualityController {
         fixedHeight = height;
         pending = -1;
         resetCounters(0);
-        if (auto) {
-            if (lastAutoHeight > 0) current = Math.max(minIndex, indexAtMost(lastAutoHeight));
-            // At launch nothing is allocated yet, so the whole level has to fit; later (switching
-            // back to Auto) the current buffers already exist and only the difference counts.
-            while (current > minIndex && !(started ? memoryAllows(current, current - 1) : memoryAllowsStart(current))) {
-                current--;
-            }
-        }
-        started = true;
+        if (auto && lastAutoHeight > 0) current = Math.max(minIndex, Math.min(ceiling, indexAtMost(lastAutoHeight)));
         listener.onApplyRenderHeight(currentHeight());
     }
 
@@ -181,46 +152,16 @@ public final class QualityController {
         if (auto && hasPendingChange()) {
             Log.i(TAG, "Render height " + levels[current] + " -> " + levels[pending] + " at preset switch");
             current = pending;
+            listener.onApplyRenderHeight(levels[current]);
         }
         pending = -1;
         resetCounters(SETTLE_MS + transitionMs);
     }
 
-    /** The render height actually in use changed (auto level, heavy preset or fixed). */
-    public void setShownHeight(int height) {
-        shownHeight = height;
-    }
-
-    /**
-     * Render height for the preset the next automatic switch loads: the auto level (or the pending
-     * change), lowered only while free memory cannot hold that switch: a second preset's frame
-     * buffers plus the preset's weight. 0 in fixed mode, where the user's choice applies.
-     *
-     * @param weightMb the upcoming preset's weight from presets.idx (negative: unknown)
-     */
-    public int heightForNextPreset(int weightMb) {
-        if (!auto) return 0;
-        int level = pending >= 0 ? pending : current;
-        while (level > minIndex && !fitsSwitch(level, Math.max(0, weightMb))) level--;
-        return levels[level];
-    }
-
-    private boolean fitsSwitch(int level, int weightMb) {
-        if (memory == null) return true;
-        long headroom = memory.headroomBytes();
-        if (headroom < 0) return true;
-        long pixels = (long) display.widthForHeight(levels[level]) * levels[level];
-        long shown = shownHeight > 0 ? (long) display.widthForHeight(shownHeight) * shownHeight : pixels;
-        long needed = Math.max(0, pixels - shown) * (PRESET_BYTES_PER_PIXEL + SURFACE_BYTES_PER_PIXEL)
-                + pixels * PRESET_BYTES_PER_PIXEL + ((long) weightMb << 20) + MEMORY_MARGIN_BYTES;
-        return headroom >= needed;
-    }
-
     /**
      * Android reports that memory is running low while we are in the foreground: other apps (such
      * as the music player) are about to be killed. Lowers the automatic resolution one level at
-     * the next preset switch and stays at or below it for {@link #PRESSURE_BACKOFF_PRESETS}
-     * presets; after that the free-memory check decides again.
+     * the next preset switch and never goes back above it in this session.
      */
     public void onMemoryPressure(int level) {
         if (!auto) {
@@ -230,39 +171,10 @@ public final class QualityController {
         if (presetCount == pressurePreset) return;  // one step per preset: it applies at the switch
         pressurePreset = presetCount;
         int from = pending >= 0 ? Math.min(current, pending) : current;
-        pressureCeiling = Math.max(minIndex, from - 1);
-        pressureUntilPreset = presetCount + PRESSURE_BACKOFF_PRESETS;
-        if (current > pressureCeiling) pending = pressureCeiling;
-        Log.w(TAG, "Memory pressure (level " + level + "): at most " + levels[pressureCeiling]
-                + " for the next " + PRESSURE_BACKOFF_PRESETS + " presets");
-    }
-
-    /** True if Android's free memory covers starting at a level: surface plus two presets at a switch. */
-    private boolean memoryAllowsStart(int level) {
-        long pixels = (long) display.widthForHeight(levels[level]) * levels[level];
-        return enoughFree(levels[level], pixels * (2 * PRESET_BYTES_PER_PIXEL + SURFACE_BYTES_PER_PIXEL)
-                + MEMORY_MARGIN_BYTES);
-    }
-
-    /**
-     * True if Android's free memory covers going from level {@code from} to {@code to}: the extra
-     * frame buffers and surface of the bigger size, plus a second preset during a switch.
-     * Unknown free memory never blocks.
-     */
-    private boolean memoryAllows(int to, int from) {
-        long pixelsTo = (long) display.widthForHeight(levels[to]) * levels[to];
-        long pixelsFrom = (long) display.widthForHeight(levels[from]) * levels[from];
-        return enoughFree(levels[to], Math.max(0, pixelsTo - pixelsFrom) * (PRESET_BYTES_PER_PIXEL + SURFACE_BYTES_PER_PIXEL)
-                + pixelsTo * PRESET_BYTES_PER_PIXEL + MEMORY_MARGIN_BYTES);
-    }
-
-    private boolean enoughFree(int height, long needed) {
-        if (memory == null) return true;
-        long headroom = memory.headroomBytes();
-        if (headroom < 0 || headroom >= needed) return true;
-        Log.i(TAG, "Not enough free memory for " + height + " (needs ~" + (needed >> 20) + " MB, "
-                + (headroom >> 20) + " MB free)");
-        return false;
+        ceiling = Math.min(ceiling, Math.max(minIndex, from - 1));
+        if (current > ceiling) pending = ceiling;
+        Log.w(TAG, "Memory pressure (level " + level + "): limiting resolution to " + levels[ceiling]
+                + " for this session");
     }
 
     /** One-second frame-rate sample; returns one of the ACTION_ constants. */
@@ -283,8 +195,6 @@ public final class QualityController {
             tooSlowSamples = 0;
         }
         if (!auto) return ACTION_NONE;
-        // A heavy preset running at a reduced height says nothing about the auto level.
-        if (shownHeight > 0 && shownHeight != levels[current]) return ACTION_NONE;
 
         if (fps < targetFps * SEVERE_THRESHOLD) {
             if (++severeSamples >= SEVERE_SAMPLES && current > minIndex && !switchRequested) {
@@ -307,13 +217,9 @@ public final class QualityController {
             }
         } else {
             slowSamples = 0;
-            boolean pressureOver = presetCount >= pressureUntilPreset;
             if (fps >= targetFps * UP_THRESHOLD && ++goodSamples >= UP_SAMPLES
-                    && current < levels.length - 1 && pending < 0
-                    && (pressureOver || current < pressureCeiling)
+                    && current < ceiling && pending < 0
                     && presetCount >= blockedUntilPreset[current + 1]) {
-                goodSamples = 0;
-                if (!memoryAllows(current + 1, current)) return ACTION_NONE;
                 pending = current + 1;
                 Log.i(TAG, "Headroom at " + levels[current] + ": will try " + levels[pending]);
             }

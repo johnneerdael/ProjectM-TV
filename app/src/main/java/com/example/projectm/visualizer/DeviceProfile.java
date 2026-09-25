@@ -66,6 +66,18 @@ public final class DeviceProfile {
     }
 
     /**
+     * Highest render height that leaves room for other apps, by installed RAM. projectM keeps
+     * several full-size frame buffers per preset; on a 2 GB NVIDIA SHIELD, rendering at 1440p and
+     * above made Android's low-memory killer close the music app. Returns 0 for "no limit".
+     */
+    public int memorySafeHeight() {
+        if (totalRamMb < 1600) return 1080;
+        if (totalRamMb < 2600) return 1260;
+        if (totalRamMb < 3600) return 1440;
+        return 0;
+    }
+
+    /**
      * Whether Auto transitions start lightweight: on low-end devices (a blend renders two presets)
      * and when RAM is tight (a blend keeps two presets' frame buffers).
      */
