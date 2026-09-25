@@ -108,6 +108,7 @@ See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md), including heap analysis with hea
 
 - **ProjectM Team** - For the incredible open-source visualization library
 - **Jason Fletcher** - For curating the Cream of the Crop preset collection
+- **MilkDrop / projectM texture pack** - Textures used by many presets (see [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md))
 - **Milkdrop Community** - For creating thousands of amazing presets
 - **Android Open Source Project** - For the Android TV platform
 

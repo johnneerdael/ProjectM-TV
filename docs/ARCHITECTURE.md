@@ -41,6 +41,7 @@ Tags are off by one: tag `v1.6` = app `versionName "1.5"`, and tag `v1.7` = app 
 | P7 | `requestRender()` override queued a `glClear` on every audio callback | Code | Unneeded GL work |
 | P8 | `ProjectMJNI.destroy()` ran on the main thread while the GL thread could still render; context loss created a second instance without freeing the first | Code | Use-after-free risk and a leak |
 | P9 | `assets/presets/.DS_Store` inside the preset folder | Repo | A junk entry wherever the folder is listed blindly |
+| P10 | No texture pack shipped and no texture search path set. 1,866 presets reference 71 image textures (`sampler_worms`, `sampler_clouds`, `sampler_rand00` …) | `grep sampler_` over the presets; `libprojectM-4.so` contains `TextureManager::ScanTextures` and `GetRandomTexture` | Those parts of presets render empty, so presets look dull. **Fixed after 1.8:** the projectM texture pack is bundled (it covers 46 of the 71 names; `randNN` then picks from it), copied to `files/textures` on first start, and set with `projectm_set_texture_search_paths` before the first preset |
 
 ## 4. Infrastructure findings
 

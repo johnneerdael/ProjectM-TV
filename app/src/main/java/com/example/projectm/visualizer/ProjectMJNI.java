@@ -22,8 +22,11 @@ public final class ProjectMJNI {
 
     private ProjectMJNI() {}
 
-    /** Starts background indexing of the presets bundled in the APK. Safe to call repeatedly. */
-    public static native void init(AssetManager assets, String skipListPath);
+    /**
+     * Starts background work: copies the bundled texture pack to {@code textureDir} (projectM only
+     * loads textures from real folders) and indexes the presets. Safe to call repeatedly.
+     */
+    public static native void init(AssetManager assets, String skipListPath, String textureDir);
 
     // GL thread only
     public static native void onSurfaceCreated();
@@ -50,6 +53,8 @@ public final class ProjectMJNI {
     /** Reads an Android system property ("" if unset or not readable). */
     public static native String getSystemProperty(String name);
     public static native String getCurrentPresetName();
+    /** Recent audio input level (RMS, 0..1); 0 if no audio arrived in the last second. */
+    public static native float getAudioLevel();
     /** Increments every time a new preset is shown. */
     public static native int getPresetChangeCounter();
     public static native int getPresetCount();

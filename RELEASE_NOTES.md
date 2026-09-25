@@ -1,3 +1,17 @@
+# projectM for Android TV 1.9 (unreleased)
+
+## Fixed
+- **Dull or empty presets.** About 1 in 5 presets (1,866) use texture images, e.g. `worms`, `clouds`, `lichen` or random textures. The app never shipped these, so those parts of the picture stayed empty. The MilkDrop texture pack recommended by the projectM project is now included.
+- **Resolution settings:**
+  - A saved 4K setting falls back to Auto on a 1080p panel.
+  - Changing the frame rate cancels a resolution change that was already queued.
+
+## New
+- **Audio level in Advanced › Diagnostics.** It shows whether the TV actually delivers sound to the app. Without audio most presets look dim.
+- **`tools/tv-diagnostics.sh`:** on-device measurements (startup, FPS per resolution, 4K composition, audio level, skipped presets) over adb. See `docs/DIAGNOSTICS.md`.
+
+---
+
 # projectM for Android TV 1.8
 
 A ground-up rebuild of the engine behind the visualizer. Visuals start almost immediately, presets that show nothing are skipped, and the picture now scales from Fire TV sticks up to 4K on NVIDIA Shield and high-end TVs.

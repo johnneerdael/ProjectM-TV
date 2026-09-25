@@ -49,6 +49,7 @@ struct projectm {};
 static projectm_preset_switch_failed_event g_failCb; static projectm_preset_switch_requested_event g_reqCb;
 std::vector<std::string> g_loaded; bool g_locked = false; size_t g_pcmFed = 0;
 bool g_lastSmooth = false; int g_meshCalls = 0;
+std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
 projectm_handle projectm_create() { return new projectm; }
 void projectm_destroy(projectm_handle p) { delete p; }
 void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
@@ -63,6 +64,9 @@ void projectm_set_preset_duration(projectm_handle, double) {}
 void projectm_set_soft_cut_duration(projectm_handle, double) {}
 void projectm_set_preset_locked(projectm_handle, bool l) { g_locked = l; }
 void projectm_set_mesh_size(projectm_handle, size_t, size_t) { ++g_meshCalls; }
+void projectm_set_texture_search_paths(projectm_handle, const char** paths, size_t count) {
+  g_texturePathCalls.push_back(count ? paths[0] : "");
+  g_loadsAtTextureCall = g_loaded.size(); }
 void projectm_set_window_size(projectm_handle, size_t, size_t) {}
 void projectm_set_fps(projectm_handle, int32_t) {}
 unsigned int projectm_pcm_get_max_samples() { return 576; }
@@ -81,9 +85,9 @@ static std::string current() { std::lock_guard<std::mutex> l(g_published.mutex);
 
 int main(int argc, char** argv) {
   setvbuf(stdout, nullptr, _IONBF, 0);
-  std::string root = argv[1], skip = root + "/skip.txt";
+  std::string root = argv[1], skip = root + "/skip.txt", texdir = root + "/extracted_textures";
   static AAssetManager am{root};
-  g_library.Start(&am, skip);
+  g_library.Start(&am, skip, texdir);
   for (int i = 0; i < 200 && !g_library.Ready(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
   printf("indexing\n");
@@ -91,12 +95,18 @@ int main(int argc, char** argv) {
   CHECK(g_library.ActiveCount() == 12);   // 13 .milk files (incl. .MILK), .DS_Store/.txt ignored, 1 pre-skipped
   CHECK(g_library.SkippedCount() == 1);
 
+  printf("texture pack extracted before the index is ready\n");
+  { FILE* f = fopen((texdir + "/worms.jpg").c_str(), "rb"); CHECK(f != nullptr); if (f) { fseek(f, 0, SEEK_END); CHECK(ftell(f) == 9); fclose(f); } }
+  { FILE* f = fopen((texdir + "/clouds.jpg").c_str(), "rb"); CHECK(f != nullptr); if (f) fclose(f); }
+
   printf("first frame loads a preset (hard cut, no wait)\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
   Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720);
   frame();
   CHECK(!current().empty());
   CHECK(current() != "preskipped.milk");
+  CHECK(g_texturePathCalls.size() == 1 && g_texturePathCalls[0] == texdir);
+  CHECK(g_loadsAtTextureCall == 0);  // search path set before the first preset loaded
   CHECK(!g_locked);
 
   printf("settings from any thread\n");
@@ -179,9 +189,16 @@ int main(int argc, char** argv) {
   Java_com_example_projectm_visualizer_ProjectMJNI_resetSkippedPresets(nullptr, nullptr);
   CHECK(g_library.SkippedCount() == 0 && g_library.ActiveCount() == 13);
 
-  printf("context loss: new instance resumes the same preset\n");
+  printf("context loss: new instance resumes the same preset, textures re-applied\n");
   g_pixel = 200; std::string shown = current();
   Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceCreated(nullptr, nullptr); frame();
   CHECK(current() == shown);
+  CHECK(g_texturePathCalls.size() == 2);
+
+  printf("audio level getter\n");
+  feedAudio(60);
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getAudioLevel(nullptr, nullptr) > 0.4f);
+  g_inputs.audioLevelTime = NowSeconds() - 5;
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getAudioLevel(nullptr, nullptr) == 0.f);
   printf("ALL TESTS PASSED\n");
 }
