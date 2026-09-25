@@ -1,3 +1,26 @@
+# projectM Android TV 1.8 - Rebuilt Engine: Instant Start, No More Black Presets
+
+1.8 replaces the rendering and preset pipeline. See `docs/ARCHITECTURE.md` for the full analysis.
+
+### Fixed
+- **Black visualizations**: preset switches from the remote now run on the rendering thread (they used to run without an OpenGL context); the app requests the OpenGL ES 3.0 context projectM 4 requires; audio is passed in its real 8-bit mono format
+- **Slow start**: presets are no longer extracted (~130 MB) on every launch; they are read directly from the app, and visuals start immediately
+- **1.7 regressions**: removed the adaptive "performance mode" that overrode your settings and reset the renderer; the resolution setting works again
+
+### New
+- Presets that fail to load, or render nothing while music is playing, are skipped automatically and remembered ("Skipped presets" + *Reset* in the menu)
+- Resolution uses the TV's hardware scaler: 480p/720p/1080p always fill the screen; "4K" is now "Native"
+- Next preset is prefetched in the background; preset indexing runs on a background thread
+- Short on-screen label with the name of each new preset
+- Space used by older versions' extracted presets is reclaimed automatically
+
+### Technical
+- OpenGL ES 3.0 now required (as it always was for projectM 4)
+- AndroidX/Leanback dependencies removed; release builds are installable (`./gradlew assembleRelease`)
+- Host-side native test suite: `app/src/test/native/run_native_tests.sh`
+
+---
+
 # projectM Android TV 1.6 - Complete Viewport Fix & Device-Tier Performance
 
 ## Revolutionary Viewport Resolution & Smart Performance Optimization

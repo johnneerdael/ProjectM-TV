@@ -1,1 +1,0 @@
-/Users/jneerdaekl/Scripts/projectm/projectm-android-tv/app/src/main/cpp/CMakeLists.txt

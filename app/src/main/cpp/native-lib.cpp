@@ -1,490 +1,709 @@
+// projectM Android TV - native engine
+//
+// Threading model
+// ---------------
+// * GL thread   : everything that touches the projectM handle (create, render, load presets,
+//                 settings). projectM compiles shaders while loading presets, so preset switches
+//                 MUST happen on the thread that owns the EGL context.
+// * Any thread  : commands (next/previous/random), settings and audio are written into atomics /
+//                 mutex-protected buffers and picked up by the GL thread at the start of the next
+//                 frame. Java never needs to queueEvent() for correctness.
+// * Worker      : a single background thread indexes the preset list from the APK assets and
+//                 prefetches (reads + decompresses) the next preset so the GL thread only has to
+//                 parse/compile it.
+//
+// Presets are read straight from the APK via AAssetManager, so nothing is extracted to disk.
+
 #include <jni.h>
-#include <string>
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
 #include <android/log.h>
-#include <GLES2/gl2.h> // For glViewport
-#include <sys/system_properties.h> // For system property detection
-#include <algorithm> // For std::transform
-#include <vector> // For std::vector
+#include <GLES2/gl2.h>
+
+#include <algorithm>
+#include <atomic>
+#include <chrono>
+#include <cmath>
+#include <condition_variable>
+#include <cstdio>
+#include <cstring>
+#include <deque>
+#include <functional>
+#include <mutex>
+#include <random>
+#include <string>
+#include <thread>
+#include <unordered_set>
+#include <utility>
+#include <vector>
+
 #include "projectM-4/projectM.h"
-#include "projectM-4/playlist.h"
 
 #define LOG_TAG "projectM-Native"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGW(...) __android_log_print(ANDROID_LOG_WARN, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
-// Device performance tiers
-enum DeviceTier {
-    LOW_END = 0,
-    MID_RANGE = 1,
-    HIGH_END = 2
+namespace {
+
+constexpr const char* kPresetDir = "presets";
+constexpr size_t kMaxHistory = 128;
+constexpr int kMaxLoadAttemptsPerFrame = 4;
+
+double NowSeconds() {
+    using namespace std::chrono;
+    return duration<double>(steady_clock::now().time_since_epoch()).count();
+}
+
+bool EndsWithMilk(const char* name) {
+    size_t len = strlen(name);
+    if (len < 5) return false;
+    const char* ext = name + len - 5;
+    return strncasecmp(ext, ".milk", 5) == 0;
+}
+
+// ------------------------------------------------------------------------------------------------
+// Preset library: index, shuffle order, history, skip list and background prefetch.
+// All public methods are thread-safe.
+// ------------------------------------------------------------------------------------------------
+class PresetLibrary {
+public:
+    void Start(AAssetManager* assets, std::string skipFilePath) {
+        bool expected = false;
+        if (!started_.compare_exchange_strong(expected, true)) return;
+        assets_ = assets;
+        skipFilePath_ = std::move(skipFilePath);
+        std::thread(&PresetLibrary::WorkerLoop, this).detach();
+    }
+
+    bool Ready() const { return ready_.load(std::memory_order_acquire); }
+
+    int ActiveCount() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return static_cast<int>(order_.size() - std::min(order_.size(), skippedInOrder_));
+    }
+
+    int SkippedCount() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return static_cast<int>(skipped_.size());
+    }
+
+    // Advances the shuffled cursor and returns the next playable preset ("" if none).
+    std::string Next() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        std::string name = PeekNextLocked(true);
+        RequestPrefetchLocked();
+        return name;
+    }
+
+    std::string Random(const std::string& avoid) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (order_.empty()) return {};
+        std::uniform_int_distribution<size_t> dist(0, order_.size() - 1);
+        for (int i = 0; i < 32; ++i) {
+            const std::string& candidate = order_[dist(rng_)];
+            if (candidate != avoid && !skipped_.count(candidate)) return candidate;
+        }
+        return PeekNextLocked(true);
+    }
+
+    // Returns the preset shown before the current one ("" if there is no history).
+    std::string Previous() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        while (history_.size() >= 2) {
+            history_.pop_back();  // current
+            std::string candidate = history_.back();
+            if (!skipped_.count(candidate)) {
+                history_.pop_back();  // will be pushed again when it is shown
+                return candidate;
+            }
+        }
+        return {};
+    }
+
+    void RecordShown(const std::string& name) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        history_.push_back(name);
+        if (history_.size() > kMaxHistory) history_.pop_front();
+    }
+
+    void MarkSkipped(const std::string& name, const char* reason) {
+        if (name.empty()) return;
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (!skipped_.insert(name).second) return;
+        ++skippedInOrder_;
+        LOGW("Skipping preset '%s' permanently: %s", name.c_str(), reason);
+        FILE* f = fopen(skipFilePath_.c_str(), "a");
+        if (f) {
+            fprintf(f, "%s\n", name.c_str());
+            fclose(f);
+        }
+    }
+
+    void ResetSkipped() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        skipped_.clear();
+        skippedInOrder_ = 0;
+        FILE* f = fopen(skipFilePath_.c_str(), "w");
+        if (f) fclose(f);
+        LOGI("Skip list cleared");
+    }
+
+    // Returns the preset file contents, using the prefetched copy when available.
+    std::string Load(const std::string& name) {
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            if (prefetchedName_ == name) {
+                prefetchedName_.clear();
+                return std::move(prefetchedData_);
+            }
+        }
+        return ReadAsset(name);
+    }
+
+private:
+    std::string ReadAsset(const std::string& name) const {
+        std::string path = std::string(kPresetDir) + "/" + name;
+        AAsset* asset = AAssetManager_open(assets_, path.c_str(), AASSET_MODE_BUFFER);
+        if (!asset) {
+            LOGE("Unable to open asset %s", path.c_str());
+            return {};
+        }
+        std::string data;
+        const void* buffer = AAsset_getBuffer(asset);
+        off_t length = AAsset_getLength(asset);
+        if (buffer && length > 0) data.assign(static_cast<const char*>(buffer), length);
+        AAsset_close(asset);
+        return data;
+    }
+
+    std::string PeekNextLocked(bool advance) {
+        if (order_.empty()) return {};
+        size_t cursor = cursor_;
+        for (size_t i = 0; i < order_.size(); ++i) {
+            if (cursor >= order_.size()) {
+                cursor = 0;
+                if (advance) std::shuffle(order_.begin(), order_.end(), rng_);
+            }
+            const std::string& candidate = order_[cursor++];
+            if (!skipped_.count(candidate)) {
+                if (advance) cursor_ = cursor;
+                return candidate;
+            }
+        }
+        return {};
+    }
+
+    void RequestPrefetchLocked() {
+        prefetchWanted_ = true;
+        cv_.notify_one();
+    }
+
+    void WorkerLoop() {
+        BuildIndex();
+        std::unique_lock<std::mutex> lock(mutex_);
+        for (;;) {
+            cv_.wait(lock, [this] { return prefetchWanted_; });
+            prefetchWanted_ = false;
+            std::string name = PeekNextLocked(false);
+            if (name.empty() || name == prefetchedName_) continue;
+            lock.unlock();
+            std::string data = ReadAsset(name);
+            lock.lock();
+            prefetchedName_ = name;
+            prefetchedData_ = std::move(data);
+        }
+    }
+
+    void BuildIndex() {
+        double start = NowSeconds();
+        std::vector<std::string> names;
+        names.reserve(10000);
+        AAssetDir* dir = AAssetManager_openDir(assets_, kPresetDir);
+        if (dir) {
+            while (const char* file = AAssetDir_getNextFileName(dir)) {
+                if (EndsWithMilk(file)) names.emplace_back(file);
+            }
+            AAssetDir_close(dir);
+        }
+
+        std::unordered_set<std::string> skipped;
+        if (FILE* f = fopen(skipFilePath_.c_str(), "r")) {
+            char line[1024];
+            while (fgets(line, sizeof(line), f)) {
+                size_t len = strcspn(line, "\r\n");
+                line[len] = '\0';
+                if (len > 0) skipped.insert(line);
+            }
+            fclose(f);
+        }
+
+        std::lock_guard<std::mutex> lock(mutex_);
+        rng_.seed(std::random_device{}());
+        std::shuffle(names.begin(), names.end(), rng_);
+        order_ = std::move(names);
+        skipped_ = std::move(skipped);
+        skippedInOrder_ = 0;
+        for (const auto& n : order_) skippedInOrder_ += skipped_.count(n);
+        cursor_ = 0;
+        ready_.store(true, std::memory_order_release);
+        prefetchWanted_ = true;  // warm up the first preset
+        LOGI("Indexed %zu presets (%zu skipped) in %.0f ms", order_.size(), skippedInOrder_,
+             (NowSeconds() - start) * 1000.0);
+    }
+
+    std::atomic<bool> started_{false};
+    std::atomic<bool> ready_{false};
+    AAssetManager* assets_ = nullptr;
+    std::string skipFilePath_;
+
+    std::mutex mutex_;
+    std::condition_variable cv_;
+    std::mt19937 rng_;
+    std::vector<std::string> order_;
+    size_t cursor_ = 0;
+    std::deque<std::string> history_;
+    std::unordered_set<std::string> skipped_;
+    size_t skippedInOrder_ = 0;
+    bool prefetchWanted_ = false;
+    std::string prefetchedName_;
+    std::string prefetchedData_;
 };
 
-// Global variables for performance optimization
-static int g_device_tier = MID_RANGE;
-static bool g_memory_optimized = false;
-static bool g_texture_compression_supported = false;
-
-projectm_handle g_projectm = nullptr;
-projectm_playlist_handle g_playlist = nullptr;
-
-// Store display dimensions separately from render dimensions
-static int g_display_width = 0;
-static int g_display_height = 0;
-
-// Performance tracking
-static bool g_is_low_memory_device = false;
-static bool g_is_high_end_device = false;
-
-// Device capability detection function
-void detect_device_capabilities() {
-    char prop[PROP_VALUE_MAX];
-    
-    // Check device model for performance classification
-    __system_property_get("ro.product.model", prop);
-    std::string model = prop;
-    std::transform(model.begin(), model.end(), model.begin(), ::tolower);
-    
-    // Enhanced device detection with tier classification
-    if (model.find("shield") != std::string::npos || 
-        model.find("tegra") != std::string::npos) {
-        g_is_high_end_device = true;
-        g_device_tier = HIGH_END;
-        LOGI("Detected HIGH-END device: %s", prop);
-    } else if (model.find("chromecast") != std::string::npos ||
-               model.find("google tv") != std::string::npos ||
-               model.find("mi box") != std::string::npos ||
-               model.find("fire tv stick 4k") != std::string::npos) {
-        g_device_tier = MID_RANGE;
-        LOGI("Detected MID-RANGE device: %s", prop);
-    } else if (model.find("fire tv stick") != std::string::npos) {
-        g_device_tier = LOW_END;
-        g_is_low_memory_device = true;
-        LOGI("Detected LOW-END device: %s", prop);
-    } else {
-        g_device_tier = MID_RANGE; // Default to mid-range for unknown devices
-        LOGI("Unknown device, defaulting to MID-RANGE: %s", prop);
+// ------------------------------------------------------------------------------------------------
+// Detects presets that render (almost) nothing while music is playing.
+// Samples a sparse grid of rows/columns of the final frame a few times after the transition.
+// ------------------------------------------------------------------------------------------------
+class BlackFrameDetector {
+public:
+    void Arm(double now, double settleSeconds) {
+        active_ = true;
+        nextSampleAt_ = now + settleSeconds;
+        deadline_ = nextSampleAt_ + kEvaluationWindow;
+        blackSamples_ = 0;
     }
-    
-    // Check available memory
-    __system_property_get("ro.config.low_ram", prop);
-    if (strcmp(prop, "true") == 0) {
-        g_is_low_memory_device = true;
-        g_memory_optimized = true;
-        if (g_device_tier > LOW_END) {
-            g_device_tier = LOW_END; // Downgrade tier for low RAM devices
+
+    void Disarm() { active_ = false; }
+
+    // Returns true when the current preset has been judged as rendering nothing.
+    bool Update(double now, int width, int height, bool audioPresent) {
+        if (!active_ || now < nextSampleAt_) return false;
+        if (now > deadline_) {
+            active_ = false;
+            return false;
         }
-        LOGI("Detected low-memory device, enabling memory optimizations");
+        nextSampleAt_ = now + kSampleInterval;
+        if (!audioPresent) return false;  // silence legitimately makes many presets dark
+
+        if (!FrameIsBlack(width, height)) {
+            active_ = false;  // preset produces output, stop checking
+            return false;
+        }
+        if (++blackSamples_ >= kRequiredBlackSamples) {
+            active_ = false;
+            return true;
+        }
+        return false;
     }
-    
-    // Set memory optimization based on device tier
-    if (g_device_tier == LOW_END) {
-        g_memory_optimized = true;
+
+private:
+    static constexpr double kSampleInterval = 0.5;
+    static constexpr double kEvaluationWindow = 20.0;
+    static constexpr int kRequiredBlackSamples = 5;
+    static constexpr int kLines = 5;
+    static constexpr int kPixelStep = 4;
+    static constexpr uint8_t kMaxBlackChannel = 20;  // ~8% brightness
+
+    bool FrameIsBlack(int width, int height) {
+        if (width <= 0 || height <= 0) return false;
+        buffer_.resize(static_cast<size_t>(std::max(width, height)) * 4);
+        for (int i = 1; i <= kLines; ++i) {
+            int y = height * i / (kLines + 1);
+            glReadPixels(0, y, width, 1, GL_RGBA, GL_UNSIGNED_BYTE, buffer_.data());
+            if (!SpanIsBlack(width)) return false;
+            int x = width * i / (kLines + 1);
+            glReadPixels(x, 0, 1, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer_.data());
+            if (!SpanIsBlack(height)) return false;
+        }
+        return true;
     }
-    
-    // Texture compression support (assume available on mid-range and above)
-    g_texture_compression_supported = (g_device_tier >= MID_RANGE);
-    
-    LOGI("Device capabilities: tier=%d, high_end=%d, low_memory=%d, memory_optimized=%d, texture_compression=%d", 
-         g_device_tier, g_is_high_end_device, g_is_low_memory_device, g_memory_optimized, g_texture_compression_supported);
+
+    bool SpanIsBlack(int pixels) const {
+        for (int p = 0; p < pixels; p += kPixelStep) {
+            const uint8_t* px = &buffer_[static_cast<size_t>(p) * 4];
+            if (px[0] > kMaxBlackChannel || px[1] > kMaxBlackChannel || px[2] > kMaxBlackChannel) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool active_ = false;
+    double nextSampleAt_ = 0;
+    double deadline_ = 0;
+    int blackSamples_ = 0;
+    std::vector<uint8_t> buffer_;
+};
+
+// ------------------------------------------------------------------------------------------------
+// Cross-thread inputs (written from UI / audio threads, consumed on the GL thread).
+// ------------------------------------------------------------------------------------------------
+enum Command : int { kNone = 0, kNext, kPrevious, kRandom };
+
+struct Inputs {
+    std::atomic<int> command{kNone};
+    std::atomic<bool> commandHardCut{true};
+
+    std::atomic<int> presetDuration{30};
+    std::atomic<int> softCutDuration{7};
+    std::atomic<bool> autoChange{true};
+    std::atomic<int> meshWidth{48};
+    std::atomic<int> meshHeight{32};
+    std::atomic<bool> settingsDirty{true};
+
+    std::mutex pcmMutex;
+    std::vector<uint8_t> pcm;
+    std::atomic<float> audioLevel{0.f};
+    std::atomic<double> audioLevelTime{0.0};
+};
+
+// Published state, read from any thread.
+struct Published {
+    std::mutex mutex;
+    std::string currentPreset;
+    std::atomic<int> changeCounter{0};
+};
+
+// GL-thread-only state.
+struct Engine {
+    projectm_handle pm = nullptr;
+    int width = 0;
+    int height = 0;
+    std::string current;         // preset currently shown
+    std::string loading;         // preset being loaded (for failure attribution)
+    bool loadFailed = false;
+    bool switchRequested = false;
+    bool switchHardCut = false;
+    BlackFrameDetector blackDetector;
+    std::vector<uint8_t> pcmScratch;
+    int framesSinceFps = 0;
+    double fpsWindowStart = 0;
+};
+
+// Intentionally never destroyed: its detached worker thread lives as long as the process.
+PresetLibrary& g_library = *new PresetLibrary();
+Inputs g_inputs;
+Published g_published;
+Engine g_engine;
+std::mutex g_engineMutex;  // guards g_engine against create/destroy races across Activities
+jobject g_assetManagerRef = nullptr;
+
+constexpr float kAudioPresentLevel = 0.02f;  // RMS of normalized 8-bit PCM
+
+bool AudioPresent(double now) {
+    return (now - g_inputs.audioLevelTime.load()) < 1.0 && g_inputs.audioLevel.load() > kAudioPresentLevel;
 }
 
-// Memory management for preset data caching
-static std::vector<std::string> g_preset_cache;
-static bool g_cache_initialized = false;
-static int g_max_cache_size = 50; // Default, adjusted based on device memory
+void OnSwitchRequested(bool isHardCut, void*) {
+    g_engine.switchRequested = true;
+    g_engine.switchHardCut = isHardCut;
+}
 
-// Memory-aware preset management
-void optimize_memory_usage() {
-    // Adjust cache size based on device tier
-    switch (g_device_tier) {
-        case HIGH_END:
-            g_max_cache_size = 100;
-            break;
-        case MID_RANGE:
-            g_max_cache_size = 50;
-            break;
-        case LOW_END:
-            g_max_cache_size = 20;
-            break;
+void OnSwitchFailed(const char* filename, const char* message, void*) {
+    LOGW("Preset load failed (%s): %s", filename ? filename : "", message ? message : "");
+    g_engine.loadFailed = true;
+}
+
+void ApplySettings() {
+    projectm_handle pm = g_engine.pm;
+    projectm_set_preset_duration(pm, g_inputs.presetDuration.load());
+    projectm_set_soft_cut_duration(pm, g_inputs.softCutDuration.load());
+    projectm_set_preset_locked(pm, !g_inputs.autoChange.load());
+    projectm_set_mesh_size(pm, g_inputs.meshWidth.load(), g_inputs.meshHeight.load());
+}
+
+void Publish(const std::string& name) {
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        g_published.currentPreset = name;
     }
-    
-    if (g_memory_optimized && g_preset_cache.size() > g_max_cache_size) {
-        // Remove oldest cached presets
-        int to_remove = g_preset_cache.size() - g_max_cache_size;
-        g_preset_cache.erase(g_preset_cache.begin(), g_preset_cache.begin() + to_remove);
-        LOGI("Trimmed preset cache to %d entries for memory optimization", g_max_cache_size);
+    g_published.changeCounter.fetch_add(1);
+}
+
+// Loads one preset; returns false if it could not be loaded (and marks it as skipped).
+bool LoadPreset(const std::string& name, bool smooth) {
+    std::string data = g_library.Load(name);
+    if (data.empty()) {
+        g_library.MarkSkipped(name, "unreadable or empty");
+        return false;
     }
-    
-    // Force garbage collection hint for Java side (would need JNI callback)
-    if (g_memory_optimized) {
-        LOGI("Memory optimization active - consider garbage collection");
+    g_engine.loading = name;
+    g_engine.loadFailed = false;
+    projectm_load_preset_data(g_engine.pm, data.c_str(), smooth);
+    if (g_engine.loadFailed) {
+        g_library.MarkSkipped(name, "failed to load/compile");
+        g_engine.loadFailed = false;
+        return false;
+    }
+    g_engine.current = name;
+    g_library.RecordShown(name);
+    Publish(name);
+    double settle = (smooth ? g_inputs.softCutDuration.load() : 0) + 2.0;
+    g_engine.blackDetector.Arm(NowSeconds(), settle);
+    return true;
+}
+
+// Switches using the given selector, retrying a few times when presets fail to load.
+template <typename Selector>
+void SwitchPreset(Selector select, bool smooth) {
+    for (int attempt = 0; attempt < kMaxLoadAttemptsPerFrame; ++attempt) {
+        std::string name = select();
+        if (name.empty()) return;
+        if (LoadPreset(name, smooth)) return;
     }
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeOnSurfaceCreated(JNIEnv *env, jclass clazz, jint width, jint height, jstring preset_path) {
-    LOGI("Native onSurfaceCreated called with dimensions: %dx%d", width, height);
-    const char* preset_path_chars = env->GetStringUTFChars(preset_path, nullptr);
-    std::string preset_path_str(preset_path_chars);
-    env->ReleaseStringUTFChars(preset_path, preset_path_chars);
-    
-    LOGI("Surface created with preset path: %s", preset_path_str.c_str());
+// Selector that tries `first` (if non-empty) and falls back to the shuffled order.
+std::function<std::string()> FirstThenNext(std::string first) {
+    return [first = std::move(first)]() mutable {
+        if (!first.empty()) return std::exchange(first, std::string());
+        return g_library.Next();
+    };
+}
 
-    // Detect device capabilities for performance optimization
-    detect_device_capabilities();
-
-    // Create projectM instance
-    g_projectm = projectm_create();
-    if (g_projectm == nullptr) {
-        LOGE("Failed to create projectM instance");
+void HandleCommands() {
+    int command = g_inputs.command.exchange(kNone);
+    if (command != kNone) {
+        bool smooth = !g_inputs.commandHardCut.load();
+        switch (command) {
+            case kNext:
+                SwitchPreset([] { return g_library.Next(); }, smooth);
+                break;
+            case kRandom:
+                SwitchPreset([] { return g_library.Random(g_engine.current); }, smooth);
+                break;
+            case kPrevious: {
+                std::string previous = g_library.Previous();
+                if (!previous.empty()) SwitchPreset(FirstThenNext(previous), smooth);
+                break;
+            }
+            default:
+                break;
+        }
+        g_engine.switchRequested = false;
         return;
     }
-    
-    // Apply performance-aware settings
-    if (g_is_high_end_device) {
-        // High-end devices get premium settings
-        projectm_set_preset_duration(g_projectm, 35);
-        projectm_set_soft_cut_duration(g_projectm, 10);
-        projectm_set_hard_cut_enabled(g_projectm, true);
-        projectm_set_beat_sensitivity(g_projectm, 1.2); // Higher sensitivity for better responsiveness
-        LOGI("Applied HIGH-END settings for premium device");
-    } else if (g_is_low_memory_device) {
-        // Low memory devices get conservative settings
-        projectm_set_preset_duration(g_projectm, 20);
-        projectm_set_soft_cut_duration(g_projectm, 3);
-        projectm_set_hard_cut_enabled(g_projectm, true);
-        projectm_set_beat_sensitivity(g_projectm, 0.8); // Lower sensitivity to reduce computation
-        LOGI("Applied LOW-MEMORY settings for resource-constrained device");
-    } else {
-        // Standard settings for regular devices
-        projectm_set_preset_duration(g_projectm, 30);
-        projectm_set_soft_cut_duration(g_projectm, 7);
-        projectm_set_hard_cut_enabled(g_projectm, true);
-        projectm_set_beat_sensitivity(g_projectm, 1.0);
-        LOGI("Applied STANDARD settings for regular device");
+    if (g_engine.switchRequested) {
+        g_engine.switchRequested = false;
+        SwitchPreset([] { return g_library.Next(); }, !g_engine.switchHardCut);
     }
-    
-    LOGI("ProjectM instance created successfully with device-optimized settings");
+}
 
-    // Create playlist and connect it to projectM
-    g_playlist = projectm_playlist_create(g_projectm);
-    if (g_playlist == nullptr) {
-        LOGE("Failed to create playlist");
+void FeedAudio() {
+    {
+        std::lock_guard<std::mutex> lock(g_inputs.pcmMutex);
+        g_engine.pcmScratch.swap(g_inputs.pcm);
+        g_inputs.pcm.clear();
+    }
+    auto& pcm = g_engine.pcmScratch;
+    if (pcm.empty()) return;
+    size_t maxSamples = projectm_pcm_get_max_samples();
+    size_t offset = pcm.size() > maxSamples ? pcm.size() - maxSamples : 0;
+    projectm_pcm_add_uint8(g_engine.pm, pcm.data() + offset,
+                           static_cast<unsigned int>(pcm.size() - offset), PROJECTM_MONO);
+    pcm.clear();
+}
+
+void UpdateFps(double now) {
+    ++g_engine.framesSinceFps;
+    double elapsed = now - g_engine.fpsWindowStart;
+    if (elapsed >= 1.0) {
+        projectm_set_fps(g_engine.pm, static_cast<int32_t>(g_engine.framesSinceFps / elapsed + 0.5));
+        g_engine.framesSinceFps = 0;
+        g_engine.fpsWindowStart = now;
+    }
+}
+
+void DestroyEngineLocked() {
+    if (g_engine.pm) {
+        projectm_destroy(g_engine.pm);
+        g_engine.pm = nullptr;
+    }
+    g_engine.width = g_engine.height = 0;
+    g_engine.current.clear();  // the next instance resumes from g_published.currentPreset
+    g_engine.switchRequested = false;
+    g_engine.blackDetector.Disarm();
+}
+
+}  // namespace
+
+#define JNI_FN(name) Java_com_example_projectm_visualizer_ProjectMJNI_##name
+
+extern "C" {
+
+JNIEXPORT void JNICALL JNI_FN(init)(JNIEnv* env, jclass, jobject assetManager, jstring skipFile) {
+    if (!g_assetManagerRef) g_assetManagerRef = env->NewGlobalRef(assetManager);
+    AAssetManager* assets = AAssetManager_fromJava(env, g_assetManagerRef);
+    const char* path = env->GetStringUTFChars(skipFile, nullptr);
+    g_library.Start(assets, path);
+    env->ReleaseStringUTFChars(skipFile, path);
+}
+
+JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
+    std::lock_guard<std::mutex> lock(g_engineMutex);
+    // A new EGL context invalidates all GL objects of a previous instance.
+    DestroyEngineLocked();
+    g_engine.pm = projectm_create();
+    if (!g_engine.pm) {
+        LOGE("projectm_create failed");
         return;
     }
-    LOGI("Playlist created successfully");
-
-    // Enable shuffle
-    projectm_playlist_set_shuffle(g_playlist, true);
-    LOGI("Shuffle enabled");
-    
-    // Add preset directory recursively, allowing duplicates
-    bool result = projectm_playlist_add_path(g_playlist, preset_path_str.c_str(), true, false);
-    LOGI("Add preset path result: %s", result ? "SUCCESS" : "FAILED");
-    
-    // Get playlist size to verify presets were loaded
-    size_t preset_count = projectm_playlist_size(g_playlist);
-    LOGI("Loaded %zu presets from path", preset_count);
-    
-    if (preset_count > 0) {
-        // Play the first preset
-        projectm_playlist_play_next(g_playlist, true);
-        LOGI("Playing first preset");
-    } else {
-        LOGE("No presets loaded - playlist is empty");
-    }
+    projectm_set_hard_cut_enabled(g_engine.pm, true);
+    projectm_set_beat_sensitivity(g_engine.pm, 1.0f);
+    projectm_set_preset_switch_requested_event_callback(g_engine.pm, OnSwitchRequested, nullptr);
+    projectm_set_preset_switch_failed_event_callback(g_engine.pm, OnSwitchFailed, nullptr);
+    g_inputs.settingsDirty = true;
+    g_engine.fpsWindowStart = NowSeconds();
+    LOGI("projectM instance created");
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeOnSurfaceChanged(JNIEnv *env, jclass clazz,
-                                                                        jint width, jint height) {
-    LOGI("Surface changed - requested render size: %dx%d, display size: %dx%d", width, height, g_display_width, g_display_height);
-    if (g_projectm) {
-        // CRITICAL FIX: Always set ProjectM to render at FULL display resolution
-        // This ensures presets fill the entire screen regardless of performance settings
-        int render_width = (g_display_width > 0) ? g_display_width : width;
-        int render_height = (g_display_height > 0) ? g_display_height : height;
-        
-        projectm_set_window_size(g_projectm, render_width, render_height);
-        glViewport(0, 0, render_width, render_height);
-        
-        LOGI("ProjectM set to FULL display resolution: %dx%d (requested was %dx%d)", 
-             render_width, render_height, width, height);
-        
-        // Performance optimization is now handled through other settings:
-        // - Preset complexity
-        // - Frame rate limiting 
-        // - Texture quality
-        // - Effect count
-        // But the viewport always fills the full screen
-    } else {
-        LOGE("ProjectM instance is null in surfaceChanged");
+JNIEXPORT void JNICALL JNI_FN(onSurfaceChanged)(JNIEnv*, jclass, jint width, jint height) {
+    std::lock_guard<std::mutex> lock(g_engineMutex);
+    if (!g_engine.pm) return;
+    if (width != g_engine.width || height != g_engine.height) {
+        // Resets projectM's renderer, so only call it on real size changes.
+        projectm_set_window_size(g_engine.pm, width, height);
+        g_engine.width = width;
+        g_engine.height = height;
+        LOGI("Render size %dx%d", width, height);
     }
+    glViewport(0, 0, width, height);
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeOnDrawFrame(JNIEnv *env, jclass clazz) {
-    if (g_projectm) {
-        // Store current viewport before rendering
-        GLint viewport[4];
-        glGetIntegerv(GL_VIEWPORT, viewport);
-        
-        // Ensure viewport is set to display size before ProjectM renders
-        if (g_display_width > 0 && g_display_height > 0) {
-            glViewport(0, 0, g_display_width, g_display_height);
+JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
+    std::lock_guard<std::mutex> lock(g_engineMutex);
+    if (!g_engine.pm) return;
+    double now = NowSeconds();
+
+    if (g_inputs.settingsDirty.exchange(false)) ApplySettings();
+
+    if (g_engine.loadFailed) {  // failure reported outside of a load call
+        g_library.MarkSkipped(g_engine.loading, "failed to load/compile");
+        g_engine.loadFailed = false;
+    }
+
+    if (g_engine.current.empty()) {
+        // First frame(s): show the idle preset until the index is ready, then start immediately.
+        if (g_library.Ready()) {
+            std::string resume;  // preset shown before an EGL context loss, if any
+            {
+                std::lock_guard<std::mutex> published(g_published.mutex);
+                resume = g_published.currentPreset;
+            }
+            SwitchPreset(FirstThenNext(resume), false);
         }
-        
-        projectm_opengl_render_frame(g_projectm);
-        
-        // Aggressively restore viewport to full display size after ProjectM renders
-        // ProjectM might change the viewport during rendering, so we reset it
-        if (g_display_width > 0 && g_display_height > 0) {
-            glViewport(0, 0, g_display_width, g_display_height);
-        } else {
-            // Fallback to stored viewport
-            glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
-        }
-        
-        // Memory optimization: periodic cleanup on low-end devices
-        static int frame_count = 0;
-        if (g_memory_optimized && (++frame_count % 600) == 0) { // Every ~10 seconds at 60fps
-            optimize_memory_usage();
-        }
-    }
-}
-
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeAddPCM(JNIEnv *env, jclass clazz,
-                                                             jshortArray pcm, jshort size) {
-    if (g_projectm) {
-        jshort *pcm_elements = env->GetShortArrayElements(pcm, nullptr);
-        
-        // Performance optimization: reduce PCM processing on low-end devices
-        int effective_size = size;
-        if (g_memory_optimized && size > 512) {
-            effective_size = 512; // Limit PCM data for low-end devices
-        }
-        
-        // Use the 16-bit PCM function directly - Android Visualizer provides stereo data
-        projectm_pcm_add_int16(g_projectm, (const int16_t*)pcm_elements, effective_size / 2, PROJECTM_STEREO);
-        env->ReleaseShortArrayElements(pcm, pcm_elements, JNI_ABORT);
     } else {
-        LOGE("ProjectM instance is null in addPCM");
+        HandleCommands();
     }
+
+    FeedAudio();
+    projectm_opengl_render_frame(g_engine.pm);
+
+    if (g_engine.blackDetector.Update(now, g_engine.width, g_engine.height, AudioPresent(now))) {
+        g_library.MarkSkipped(g_engine.current, "renders no visible output");
+        SwitchPreset([] { return g_library.Next(); }, false);
+    }
+    UpdateFps(now);
 }
 
-#include <cstdlib>
-#include <ctime>
-
-// Helper function to select a random preset
-void select_random_preset(bool hard_cut) {
-    if (!g_playlist) {
-        LOGE("Playlist is null in select_random_preset");
-        return;
-    }
-    
-    size_t preset_count = projectm_playlist_size(g_playlist);
-    if (preset_count <= 0) {
-        LOGE("No presets available for random selection");
-        return;
-    }
-    
-    // Get the current position to avoid selecting it again
-    size_t current_position = projectm_playlist_get_position(g_playlist);
-    size_t new_position;
-    
-    // If there's only one preset, we have no choice
-    if (preset_count == 1) {
-        new_position = 0;
-    } else {
-        // Select a random position different from the current one
-        do {
-            new_position = static_cast<size_t>(rand() % preset_count);
-        } while (new_position == current_position && preset_count > 1);
-    }
-    
-    LOGI("Selecting random preset: %zu of %zu", new_position, preset_count);
-    projectm_playlist_set_position(g_playlist, new_position, hard_cut);
+JNIEXPORT void JNICALL JNI_FN(release)(JNIEnv*, jclass) {
+    std::lock_guard<std::mutex> lock(g_engineMutex);
+    DestroyEngineLocked();
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeNextPreset(JNIEnv *env, jclass clazz, jboolean hard_cut) {
-    if (g_playlist) {
-        projectm_playlist_play_next(g_playlist, hard_cut);
-        LOGI("Selected next preset (hard_cut: %s)", hard_cut ? "true" : "false");
-    } else {
-        LOGE("Playlist is null in selectNextPreset");
+JNIEXPORT void JNICALL JNI_FN(addWaveform)(JNIEnv* env, jclass, jbyteArray waveform, jint length) {
+    if (length <= 0) return;
+    std::lock_guard<std::mutex> lock(g_inputs.pcmMutex);
+    auto& pcm = g_inputs.pcm;
+    size_t oldSize = pcm.size();
+    pcm.resize(oldSize + length);
+    env->GetByteArrayRegion(waveform, 0, length, reinterpret_cast<jbyte*>(pcm.data() + oldSize));
+
+    // RMS of the 8-bit unsigned samples (128 = silence) used to gate black-frame detection.
+    double sum = 0;
+    for (size_t i = oldSize; i < pcm.size(); ++i) {
+        double s = (static_cast<int>(pcm[i]) - 128) / 128.0;
+        sum += s * s;
     }
+    g_inputs.audioLevel = static_cast<float>(std::sqrt(sum / length));
+    g_inputs.audioLevelTime = NowSeconds();
+
+    constexpr size_t kMaxPending = 8192;  // never let the buffer grow while rendering is paused
+    if (pcm.size() > kMaxPending) pcm.erase(pcm.begin(), pcm.end() - kMaxPending);
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativePreviousPreset(JNIEnv *env, jclass clazz, jboolean hard_cut) {
-    if (g_playlist) {
-        projectm_playlist_play_previous(g_playlist, hard_cut);
-        LOGI("Selected previous preset (hard_cut: %s)", hard_cut ? "true" : "false");
-    }
+JNIEXPORT void JNICALL JNI_FN(nextPreset)(JNIEnv*, jclass, jboolean hardCut) {
+    g_inputs.commandHardCut = hardCut;
+    g_inputs.command = kNext;
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeSelectRandomPreset(JNIEnv *env, jclass clazz, jboolean hard_cut) {
-    // Initialize random seed if needed
-    static bool seeded = false;
-    if (!seeded) {
-        srand(static_cast<unsigned int>(time(nullptr)));
-        seeded = true;
-    }
-    
-    select_random_preset(hard_cut);
-    LOGI("Selected random preset (hard_cut: %s)", hard_cut ? "true" : "false");
+JNIEXPORT void JNICALL JNI_FN(previousPreset)(JNIEnv*, jclass, jboolean hardCut) {
+    g_inputs.commandHardCut = hardCut;
+    g_inputs.command = kPrevious;
 }
 
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeGetCurrentPresetName(JNIEnv *env, jclass clazz) {
-    if (!g_playlist) {
-        return env->NewStringUTF("No playlist available");
-    }
-    
-    size_t position = projectm_playlist_get_position(g_playlist);
-    char* name = projectm_playlist_item(g_playlist, position);
-    
-    if (name) {
-        jstring result = env->NewStringUTF(name);
-        // Free the string allocated by the library
-        free(name);
-        return result;
-    } else {
-        return env->NewStringUTF("Unknown preset");
-    }
+JNIEXPORT void JNICALL JNI_FN(randomPreset)(JNIEnv*, jclass, jboolean hardCut) {
+    g_inputs.commandHardCut = hardCut;
+    g_inputs.command = kRandom;
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeSetPresetDuration(JNIEnv *env, jclass clazz, jint seconds) {
-    if (g_projectm) {
-        projectm_set_preset_duration(g_projectm, seconds);
-        LOGI("Preset duration set to %d seconds", seconds);
-    }
+JNIEXPORT void JNICALL JNI_FN(setPresetDuration)(JNIEnv*, jclass, jint seconds) {
+    g_inputs.presetDuration = std::max(1, static_cast<int>(seconds));
+    g_inputs.settingsDirty = true;
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeSetSoftCutDuration(JNIEnv *env, jclass clazz, jint seconds) {
-    if (g_projectm) {
-        projectm_set_soft_cut_duration(g_projectm, seconds);
-        LOGI("Soft cut duration set to %d seconds", seconds);
-    }
+JNIEXPORT void JNICALL JNI_FN(setSoftCutDuration)(JNIEnv*, jclass, jint seconds) {
+    g_inputs.softCutDuration = std::max(0, static_cast<int>(seconds));
+    g_inputs.settingsDirty = true;
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeDestroy(JNIEnv *env, jclass clazz) {
-    if (g_playlist) {
-        projectm_playlist_destroy(g_playlist);
-        g_playlist = nullptr;
-    }
-    if (g_projectm) {
-        projectm_destroy(g_projectm);
-        g_projectm = nullptr;
-    }
+JNIEXPORT void JNICALL JNI_FN(setAutoChange)(JNIEnv*, jclass, jboolean enabled) {
+    g_inputs.autoChange = enabled;
+    g_inputs.settingsDirty = true;
 }
 
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeGetVersion(JNIEnv *env, jclass clazz) {
-    // Check if projectM API has a version function
-    if (g_projectm) {
-        // In projectM-4, we can use various info functions if available
-        // This is an example - actual implementation depends on projectM API
-        return env->NewStringUTF("ProjectM-4 Android TV Edition 1.5");
-    }
-    return env->NewStringUTF("ProjectM-4");
+JNIEXPORT void JNICALL JNI_FN(setMeshSize)(JNIEnv*, jclass, jint width, jint height) {
+    g_inputs.meshWidth = width;
+    g_inputs.meshHeight = height;
+    g_inputs.settingsDirty = true;
 }
 
-extern "C"
-JNIEXPORT jint JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeGetPresetCount(JNIEnv *env, jclass clazz) {
-    if (g_playlist) {
-        size_t count = projectm_playlist_size(g_playlist);
-        return static_cast<jint>(count);
-    }
-    return 0;
+JNIEXPORT jstring JNICALL JNI_FN(getCurrentPresetName)(JNIEnv* env, jclass) {
+    std::lock_guard<std::mutex> lock(g_published.mutex);
+    return env->NewStringUTF(g_published.currentPreset.c_str());
 }
 
-// Implementation of the native viewport setting
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeSetViewport(JNIEnv *env, jclass clazz, 
-                                                                  jint x, jint y, jint width, jint height) {
-    // Store display dimensions for later use
-    g_display_width = width;
-    g_display_height = height;
-    
-    // Set OpenGL viewport directly - this ensures the visualization is stretched to fit the full screen
-    glViewport(x, y, width, height);
-    LOGI("Native setViewport called and stored: %d,%d %dx%d", x, y, width, height);
+JNIEXPORT jint JNICALL JNI_FN(getPresetChangeCounter)(JNIEnv*, jclass) {
+    return g_published.changeCounter.load();
 }
 
-// Performance monitoring and optimization function
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeOptimizeForPerformance(JNIEnv *env, jclass clazz, jint performance_level) {
-    if (!g_projectm) {
-        LOGE("ProjectM instance is null in nativeOptimizeForPerformance");
-        return;
-    }
-    
-    // Apply performance optimizations based on level (0=low, 1=medium, 2=high)
-    switch (performance_level) {
-        case 0: // Low performance - aggressive optimization
-            g_memory_optimized = true;
-            // Reduce preset duration for faster transitions and less GPU load
-            projectm_set_preset_duration(g_projectm, 15);
-            projectm_set_soft_cut_duration(g_projectm, 2);
-            projectm_set_beat_sensitivity(g_projectm, 0.6); // Reduce sensitivity to save computation
-            LOGI("Applied LOW performance optimizations");
-            break;
-            
-        case 1: // Medium performance - balanced
-            projectm_set_preset_duration(g_projectm, 25);
-            projectm_set_soft_cut_duration(g_projectm, 5);
-            projectm_set_beat_sensitivity(g_projectm, 0.8);
-            LOGI("Applied MEDIUM performance optimizations");
-            break;
-            
-        case 2: // High performance - restore quality
-            g_memory_optimized = false;
-            projectm_set_preset_duration(g_projectm, 35);
-            projectm_set_soft_cut_duration(g_projectm, 10);
-            projectm_set_beat_sensitivity(g_projectm, 1.2); // Higher sensitivity for better responsiveness
-            LOGI("Applied HIGH performance optimizations");
-            break;
-            
-        default:
-            LOGW("Unknown performance level: %d", performance_level);
-            break;
-    }
+JNIEXPORT jint JNICALL JNI_FN(getPresetCount)(JNIEnv*, jclass) {
+    return g_library.ActiveCount();
 }
 
-// Get device capabilities for Java side optimization
-extern "C"
-JNIEXPORT jint JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeGetDeviceTier(JNIEnv *env, jclass clazz) {
-    return g_device_tier;
+JNIEXPORT jint JNICALL JNI_FN(getSkippedCount)(JNIEnv*, jclass) {
+    return g_library.SkippedCount();
 }
 
-// Memory management function callable from Java
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_projectm_visualizer_ProjectMJNI_nativeTrimMemory(JNIEnv *env, jclass clazz) {
-    optimize_memory_usage();
-    LOGI("Memory trimming requested from Java");
+JNIEXPORT void JNICALL JNI_FN(resetSkippedPresets)(JNIEnv*, jclass) {
+    g_library.ResetSkipped();
 }
+
+JNIEXPORT jstring JNICALL JNI_FN(getVersion)(JNIEnv* env, jclass) {
+    char* version = projectm_get_version_string();
+    jstring result = env->NewStringUTF(version ? version : "unknown");
+    if (version) projectm_free_string(version);
+    return result;
+}
+
+}  // extern "C"
