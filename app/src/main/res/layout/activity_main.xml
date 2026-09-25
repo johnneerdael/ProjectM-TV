@@ -196,11 +196,11 @@
                 android:textColor="#FFFFFF" />
                 
             <RadioButton
-                android:id="@+id/resolution_4k"
+                android:id="@+id/resolution_native"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4K"
+                android:text="Native"
                 android:textColor="#FFFFFF" />
         </RadioGroup>
         
@@ -213,6 +213,29 @@
             android:text="FPS: --"
             android:layout_marginBottom="16dp" />
         
+        <!-- Presets that were skipped automatically (failed to load or rendered nothing) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/skipped_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:text="Skipped presets: 0" />
+
+            <Button
+                android:id="@+id/reset_skipped_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reset" />
+        </LinearLayout>
+
         <!-- Version information -->
         <TextView
             android:id="@+id/version_info"
@@ -220,22 +243,24 @@
             android:layout_height="wrap_content"
             android:textColor="#80FFFFFF"
             android:textSize="12sp"
-            android:text="ProjectM Visualizer v1.6" />
+            android:text="" />
     </LinearLayout>
 
-    <!-- FPS display for when menu is closed -->
+    <!-- Briefly shows the name of a newly started preset -->
     <TextView
-        android:id="@+id/help_text"
+        android:id="@+id/now_playing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:text=""
-        android:textColor="#80FFFFFF"
-        android:textSize="14sp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="24dp"
+        android:maxWidth="900dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="#CCFFFFFF"
+        android:textSize="16sp"
         android:padding="8dp"
         android:visibility="gone"
-        android:background="#40000000" />
+        android:background="#60000000" />
 
 </RelativeLayout>

@@ -7,8 +7,8 @@ android {
         applicationId "com.example.projectm.visualizer"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 7
-        versionName "1.6"
+        versionCode 8
+        versionName "1.8"
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++17"
@@ -21,8 +21,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Sideload-friendly: sign release builds with the local debug key so
+            // `./gradlew assembleRelease` produces an installable, non-debuggable (faster) APK.
+            signingConfig signingConfigs.debug
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     externalNativeBuild {
         cmake {
@@ -33,6 +39,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.leanback:leanback:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    // No AndroidX dependencies: the app only uses framework APIs, which keeps the APK small
+    // and cold start fast on low-end TV boxes.
 }

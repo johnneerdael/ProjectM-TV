@@ -4,13 +4,16 @@
 echo "ProjectM Android TV Installer"
 echo "============================"
 
-APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
+# Prefer the optimized release build; fall back to the debug build.
+APK_PATH="app/build/outputs/apk/release/app-release.apk"
+[ -f "$APK_PATH" ] || APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
 
 if [ ! -f "$APK_PATH" ]; then
-    echo "Error: APK not found at $APK_PATH"
-    echo "Please build the project first with: ./gradlew assembleDebug"
+    echo "Error: no APK found"
+    echo "Please build the project first with: ./gradlew assembleRelease"
     exit 1
 fi
+echo "Using $APK_PATH"
 
 # Check if adb is available
 if ! command -v adb &> /dev/null; then
@@ -45,7 +48,7 @@ if [ $? -eq 0 ]; then
     echo "Next steps:"
     echo "1. Find 'ProjectM Visualizer' in your FireStick apps"
     echo "2. Grant audio recording permission when prompted"
-    echo "3. Use D-pad left/right to change presets"
+    echo "3. Use D-pad left/right to change presets, center to open the menu"
     echo "4. Enjoy the visualizations!"
 else
     echo ""

@@ -1,140 +1,54 @@
 package com.example.projectm.visualizer;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.SurfaceHolder;
+import android.view.WindowManager;
 
+/**
+ * GLSurfaceView that renders projectM continuously.
+ *
+ * Render resolution is set with {@link android.view.SurfaceHolder#setFixedSize}: the surface
+ * buffer gets the requested size and the display hardware scaler stretches it to the full screen
+ * at no GPU cost. This is what makes 480p/720p modes both fast and full-screen.
+ */
 public class VisualizerView extends GLSurfaceView {
-
     private static final String TAG = "VisualizerView";
-    private VisualizerRenderer renderer;
 
     public VisualizerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.d(TAG, "VisualizerView constructor");
-
-        try {
-            // Configure EGL
-            // Try to use RGB888 for better visual quality, but with a 16-bit depth buffer for better performance
-            setEGLConfigChooser(8, 8, 8, 0, 16, 0);
-            
-            // Create an OpenGL ES 2.0 context.
-            setEGLContextClientVersion(2);
-            
-            // Enable hardware acceleration
-            setPreserveEGLContextOnPause(true);
-            
-            Log.d(TAG, "Set OpenGL ES 2.0 context with hardware acceleration");
-    
-            // Note: renderer will be set by MainActivity
-            // renderer = new VisualizerRenderer();
-    
-            // DON'T set render mode yet - we'll do it after the renderer is set
-            // to avoid NullPointerException
-            Log.d(TAG, "Will set render mode to RENDERMODE_CONTINUOUSLY after renderer is set");
-        } catch (Exception e) {
-            Log.e(TAG, "Error initializing VisualizerView", e);
-        }
+        // projectM 4 uses GLSL "300 es" shaders and links against GLESv3: ask for an ES 3 context.
+        setEGLContextClientVersion(3);
+        // RGB888 without alpha, depth or stencil: projectM renders to its own framebuffers.
+        setEGLConfigChooser(8, 8, 8, 0, 0, 0);
+        setPreserveEGLContextOnPause(true);
     }
 
-    @Override
-    public void setRenderer(Renderer renderer) {
-        Log.d(TAG, "setRenderer called with renderer: " + (renderer != null ? renderer.getClass().getSimpleName() : "null"));
-        try {
-            // First set the renderer using the parent method
-            super.setRenderer(renderer);
-            
-            if (renderer instanceof VisualizerRenderer) {
-                this.renderer = (VisualizerRenderer) renderer;
-                Log.d(TAG, "VisualizerRenderer set successfully");
-                
-                // Now it's safe to set the render mode because the GLThread exists
-                setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
-                Log.i(TAG, "Set RENDERMODE_CONTINUOUSLY for music visualization");
-            } else {
-                Log.w(TAG, "Renderer is not an instance of VisualizerRenderer");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error setting renderer", e);
-        }
+    public void start(Renderer renderer) {
+        setRenderer(renderer);
+        setRenderMode(RENDERMODE_CONTINUOUSLY);
     }
 
-    public VisualizerRenderer getRenderer() {
-        return renderer;
-    }
-    
-    @Override
-    public void onResume() {
-        Log.d(TAG, "onResume called");
-        try {
-            super.onResume();
-        } catch (Exception e) {
-            Log.e(TAG, "Error in VisualizerView.onResume: " + e.getMessage());
+    /**
+     * @param targetHeight render height in pixels, or 0 for the display's native resolution.
+     */
+    public void setRenderHeight(int targetHeight) {
+        Point display = new Point();
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getRealSize(display);
+        int displayWidth = Math.max(display.x, display.y);
+        int displayHeight = Math.min(display.x, display.y);
+
+        if (targetHeight <= 0 || targetHeight >= displayHeight) {
+            getHolder().setSizeFromLayout();
+            Log.i(TAG, "Render resolution: native " + displayWidth + "x" + displayHeight);
+            return;
         }
-    }
-    
-    @Override
-    public void onPause() {
-        Log.d(TAG, "onPause called");
-        try {
-            super.onPause();
-        } catch (Exception e) {
-            Log.e(TAG, "Error in VisualizerView.onPause: " + e.getMessage());
-        }
-    }
-    
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        Log.d(TAG, "surfaceCreated called");
-        super.surfaceCreated(holder);
-    }
-    
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.d(TAG, "surfaceDestroyed called");
-        super.surfaceDestroyed(holder);
-    }
-    
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Log.d(TAG, "surfaceChanged called: " + width + "x" + height + ", format=" + format);
-        super.surfaceChanged(holder, format, width, height);
-    }
-    
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        Log.d(TAG, "onWindowFocusChanged: " + hasFocus);
-        super.onWindowFocusChanged(hasFocus);
-        
-        // If we gain focus, request a render to ensure we're displaying
-        if (hasFocus) {
-            Log.d(TAG, "Window gained focus, requesting render");
-            requestRender();
-        }
-    }
-    
-    @Override
-    public void requestRender() {
-        try {
-            // Check if we have a valid renderer before requesting a render
-            if (renderer != null) {
-                // Force a refresh of the entire surface
-                queueEvent(() -> {
-                    // This will run on the GL thread
-                    android.opengl.GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-                    android.opengl.GLES20.glClear(android.opengl.GLES20.GL_COLOR_BUFFER_BIT | 
-                                                  android.opengl.GLES20.GL_DEPTH_BUFFER_BIT);
-                });
-                
-                // Request the actual render
-                super.requestRender();
-            } else {
-                Log.d(TAG, "Skipping requestRender - renderer not set yet");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error in requestRender", e);
-        }
+        int width = Math.round(targetHeight * (float) displayWidth / displayHeight) & ~1;
+        getHolder().setFixedSize(width, targetHeight);
+        Log.i(TAG, "Render resolution: " + width + "x" + targetHeight + " scaled to "
+                + displayWidth + "x" + displayHeight);
     }
 }
