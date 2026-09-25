@@ -28,8 +28,8 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 
 | File | Content |
 |---|---|
-| `summary.md` | Device and GPU, panel/UI size, startup times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, surface composition, skipped presets, crashes, memory |
-| `app_log.txt` | App log lines (`STATS`, `STARTUP`, `SKIP`, `QualityController`, crashes) |
+| `summary.md` | Device and GPU, panel/UI size, startup times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory limit and other apps killed for memory, surface composition, skipped presets, crashes |
+| `app_log.txt` | App log lines (`STATS`, `STARTUP`, `LOAD`, `TRANSITION`, `OUTPUT`, `SKIP`, `QualityController`, crashes) |
 | `device.txt` | System properties, display modes, CPU, memory, GLES driver |
 | `screen_*.png` | Visuals, main panel, Advanced panel |
 | `raw_logcat.txt`, `raw_surfaceflinger.txt` | Full dumps (git-ignored) |
@@ -37,11 +37,19 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 ### App log lines used by the script
 - `VisualizerRenderer: STATS fps=59.8 surface=2560x1440`: every 5 s.
 - `projectM-Native: STARTUP first preset shown 212 ms after engine creation`.
-- `projectM-Native: Indexed 9795 presets (3 skipped) in 84 ms`.
+- `projectM-Native: Indexed 9794 presets (3 skipped) in 84 ms from presets.idx`.
+- `projectM-Native: LOAD preset='…' ms=412 smooth=0`: every preset switch. `ms` is the stall (parse, textures, shader compile) during which the picture freezes.
+- `projectM-Native: TRANSITION preset='…' mode=lightweight load_ms=412 fps=48.2 blend_fps=58.9 before_fps=59.9 frames=… slow_frames=2 worst_ms=431`: when a transition ends. `fps` includes the load, `blend_fps` excludes it, `slow_frames` counts frames over 50 ms.
+- `projectM-Native: TRANSITION auto: classic blend ran at …`: Auto switched to lightweight transitions.
+- `projectM-Native: OUTPUT preset='…' samples=18 luma_range=3..9 change_pct_min=0.4 change_pct_avg=1.1 region_pct_min=2.0 luma_changes=… hue_only_changes=… flat=18/18 still=17/17 skipped=no`: what a preset showed while music played (see *Output measurements* below).
 - `projectM-Native: SKIP preset='…' reason=…`.
-- `QualityController: …`: dynamic-resolution decisions.
+- `QualityController: …`: dynamic-resolution decisions, including `Memory pressure …` when Android asks apps to free memory.
+- `ProjectMTV: Memory limit: render height up to 1260 (RAM 1941 MB)`.
 
 ### Reading the results
+- **Did the music app get killed?** *Memory › Other apps killed during the run* lists processes Android stopped while they were visible, perceptible or foreground services (e.g. `com.soundcloud.android (prcp)`). Cached processes are left out, because Android kills those routinely.
+- **Switch stalls:** *Preset switches* shows the load time per switch (the freeze) and FPS during transitions, per mode.
+- **Output measurements:** *Candidates* lists presets that were flat or still in every sample. Compare them with what the screen showed, to choose thresholds before flat/still presets may be skipped.
 - **Is 4K really shown at 4K?** Compare *Render sizes* with the *Panel* line, then check the *Surface composition* section. A render buffer of 3840x2160 composed by the hardware composer (`DEVICE`) on a 4K display mode means full-resolution output.
 - **FPS:** *App FPS* is measured by the render loop; *SurfaceFlinger FPS* comes from the compositor's frame timestamps for the app's surface. The two should agree.
 

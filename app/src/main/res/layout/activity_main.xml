@@ -200,6 +200,16 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_transition_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_memory_limit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_skip_slow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

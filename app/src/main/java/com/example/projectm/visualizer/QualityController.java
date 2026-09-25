@@ -14,6 +14,10 @@ import java.util.List;
  * is then forced to be a hard cut: the new preset starts from scratch anyway, so the reset is not
  * visible. Only a severe, sustained slowdown triggers an immediate change (with a preset switch).
  *
+ * Heights are limited to the panel and to a memory-safe maximum (see
+ * {@link DeviceProfile#memorySafeHeight()}); memory pressure reported by Android lowers that
+ * maximum for the rest of the session.
+ *
  * All methods run on the UI thread.
  */
 public final class QualityController {
@@ -59,11 +63,14 @@ public final class QualityController {
     private final int[] blockedUntilPreset;  // per level: don't retry until this preset count
     private final int[] failures;            // per level: exponential back-off after failed probes
     private int presetCount;
+    private int ceiling;                     // highest level auto may use (lowered by memory pressure)
+    private int pressurePreset = -1;
 
-    public QualityController(DisplayInfo display, DeviceProfile profile, Listener listener) {
+    /** @param memoryLimit highest render height allowed for memory reasons, 0 for none. */
+    public QualityController(DisplayInfo display, DeviceProfile profile, int memoryLimit, Listener listener) {
         this.listener = listener;
         List<Integer> usable = new ArrayList<>();
-        int maxHeight = display.physicalHeight;
+        int maxHeight = limit(display, memoryLimit);
         for (int h : AUTO_LADDER) if (h <= maxHeight) usable.add(h);
         if (usable.isEmpty() || usable.get(usable.size() - 1) < maxHeight) usable.add(maxHeight);
         levels = new int[usable.size()];
@@ -72,13 +79,19 @@ public final class QualityController {
         failures = new int[levels.length];
         minIndex = indexAtMost(profile.minAutoHeight());
         current = indexAtMost(profile.initialAutoHeight());
+        ceiling = levels.length - 1;
+    }
+
+    private static int limit(DisplayInfo display, int memoryLimit) {
+        return memoryLimit > 0 ? Math.min(display.physicalHeight, memoryLimit) : display.physicalHeight;
     }
 
     /** Levels available for manual selection in the menu (ascending heights). */
-    public static int[] manualHeights(DisplayInfo display) {
+    public static int[] manualHeights(DisplayInfo display, int memoryLimit) {
+        int maxHeight = limit(display, memoryLimit);
         List<Integer> list = new ArrayList<>();
-        for (int h : new int[]{720, 1080, 1440, 2160}) if (h <= display.physicalHeight) list.add(h);
-        if (list.isEmpty() || list.get(list.size() - 1) < display.physicalHeight) list.add(display.physicalHeight);
+        for (int h : new int[]{720, 1080, 1440, 2160}) if (h <= maxHeight) list.add(h);
+        if (list.isEmpty() || list.get(list.size() - 1) < maxHeight) list.add(maxHeight);
         int[] result = new int[list.size()];
         for (int i = 0; i < result.length; i++) result[i] = list.get(i);
         return result;
@@ -86,10 +99,11 @@ public final class QualityController {
 
     /**
      * Returns {@code savedHeight} if it is still a valid fixed level for this panel, otherwise 0
-     * (automatic). A saved 2160 must not be used after the device moved to a 1080p panel.
+     * (automatic). A saved 2160 must not be used after the device moved to a 1080p panel, or
+     * above the memory limit.
      */
-    public static int validFixedHeight(DisplayInfo display, int savedHeight) {
-        for (int h : manualHeights(display)) if (h == savedHeight) return savedHeight;
+    public static int validFixedHeight(DisplayInfo display, int memoryLimit, int savedHeight) {
+        for (int h : manualHeights(display, memoryLimit)) if (h == savedHeight) return savedHeight;
         return 0;
     }
 
@@ -99,7 +113,7 @@ public final class QualityController {
         fixedHeight = height;
         pending = -1;
         resetCounters(0);
-        if (auto && lastAutoHeight > 0) current = Math.max(minIndex, indexAtMost(lastAutoHeight));
+        if (auto && lastAutoHeight > 0) current = Math.max(minIndex, Math.min(ceiling, indexAtMost(lastAutoHeight)));
         listener.onApplyRenderHeight(currentHeight());
     }
 
@@ -144,6 +158,25 @@ public final class QualityController {
         resetCounters(SETTLE_MS + transitionMs);
     }
 
+    /**
+     * Android reports that memory is running low while we are in the foreground: other apps (such
+     * as the music player) are about to be killed. Lowers the automatic resolution one level at
+     * the next preset switch and never goes back above it in this session.
+     */
+    public void onMemoryPressure(int level) {
+        if (!auto) {
+            Log.w(TAG, "Memory pressure (level " + level + ") at fixed " + fixedHeight + "p");
+            return;
+        }
+        if (presetCount == pressurePreset) return;  // one step per preset: it applies at the switch
+        pressurePreset = presetCount;
+        int from = pending >= 0 ? Math.min(current, pending) : current;
+        ceiling = Math.min(ceiling, Math.max(minIndex, from - 1));
+        if (current > ceiling) pending = ceiling;
+        Log.w(TAG, "Memory pressure (level " + level + "): limiting resolution to " + levels[ceiling]
+                + " for this session");
+    }
+
     /** One-second frame-rate sample; returns one of the ACTION_ constants. */
     public int onFpsSample(float fps) {
         if (System.currentTimeMillis() < settleUntil || fps <= 0) return ACTION_NONE;
@@ -185,7 +218,7 @@ public final class QualityController {
         } else {
             slowSamples = 0;
             if (fps >= targetFps * UP_THRESHOLD && ++goodSamples >= UP_SAMPLES
-                    && current < levels.length - 1 && pending < 0
+                    && current < ceiling && pending < 0
                     && presetCount >= blockedUntilPreset[current + 1]) {
                 pending = current + 1;
                 Log.i(TAG, "Headroom at " + levels[current] + ": will try " + levels[pending]);
@@ -194,10 +227,13 @@ public final class QualityController {
         return ACTION_NONE;
     }
 
-    /** Remembers that a level was too heavy: retry after 3, 6, 12 ... (max 48) presets. */
+    /**
+     * Remembers that a level was too heavy: retry once after 10 presets; after a second failure it
+     * is not tried again in this session (each attempt reallocates all frame buffers).
+     */
     private void block(int index) {
-        failures[index] = Math.min(failures[index] + 1, 5);
-        blockedUntilPreset[index] = presetCount + (3 << (failures[index] - 1));
+        failures[index]++;
+        blockedUntilPreset[index] = failures[index] >= 2 ? Integer.MAX_VALUE : presetCount + 10;
     }
 
     private int stepDown(int index) {

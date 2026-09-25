@@ -1,4 +1,4 @@
-# projectM Android TV: Codebase Analysis & Architecture (v1.8)
+# projectM Android TV: Codebase Analysis & Architecture (v1.9)
 
 ## 1. Summary
 
@@ -61,7 +61,7 @@ Tags are off by one: tag `v1.6` = app `versionName "1.5"`, and tag `v1.7` = app 
 
 ```
 ProjectMApplication ── ProjectMJNI.init(assets, skipList) ──► native worker thread
-                                                             ├─ index presets/*.milk from APK
+                                                             ├─ read presets.idx (prebuilt list; folder listing as fallback)
                                                              ├─ load skip list, shuffle
                                                              └─ prefetch next preset text
 MainActivity (UI thread)
@@ -70,20 +70,40 @@ MainActivity (UI thread)
   └─ VisualizerView.setRenderHeight ─► SurfaceHolder.setFixedSize (hardware scaler)
 
 VisualizerRenderer (GL thread) ─► onDrawFrame (native)
-  1. apply dirty settings        4. feed buffered audio
-  2. first preset / commands     5. projectm_opengl_render_frame
-  3. auto-switch requests        6. black-frame detector, FPS → projectM
+  1. apply dirty settings        5. projectm_opengl_render_frame
+  2. first preset / commands     6. output measurement (black skip only if enabled)
+  3. auto-switch requests        7. lightweight-transition overlay, capture outgoing frame
+  4. feed buffered audio         8. transition stats, FPS → projectM
 ```
 
 ### Threading rules
 - Only the GL thread touches the projectM handle (create, render, load, settings).
 - All other entry points only write atomics or mutex-protected buffers. This removes a whole class of races and makes `queueEvent()` unnecessary for correctness.
 
+### Preset index
+`tools/gen-preset-index.sh` writes `app/src/main/assets/presets.idx`, the sorted list of bundled presets, and CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before.
+
+### Transitions
+projectM's soft cut renders the outgoing and incoming preset for the whole transition, which doubles CPU (per-vertex equations) and GPU cost and keeps two presets' frame buffers. On a SHIELD at 1260p, 5-second FPS averages fell to 19–36 around every switch, even at 720p.
+
+| Mode | What happens at an automatic switch |
+|---|---|
+| **Lightweight** | At the end of the frame in which projectM asks for a switch, `SnapshotFade` copies the window into a texture (`glCopyTexImage2D`). The next frame loads the new preset as a hard cut: projectM still seeds it with the old image (`DrawInitialImage`). The snapshot is then drawn over it, fading out with a slow zoom over min(transition, 3 s): one textured full-screen pass per frame. The texture exists only during the fade. |
+| **Classic** | projectM's own blend (random transition shader). |
+| **Auto** (default) | Lightweight on the LOW tier and below 2.6 GB RAM, otherwise classic. It switches to lightweight for the session when a classic blend runs below 80 % of the FPS before it. |
+
+Remote-control switches, beat-triggered hard cuts and forced hard cuts are never faded. If the capture or the overlay shader fails, the switch uses classic. Every load is logged (`LOAD preset=… ms=…`), and every transition too (`TRANSITION … mode= fps= blend_fps= before_fps= slow_frames=`).
+
+**Not solved yet: the load stall.** `projectm_load_preset_data` parses the preset, loads its textures and compiles its shaders on the GL thread, so the picture freezes for that long at every switch. Hiding it requires a second, shared EGL context that renders projectM off the display thread. The `LOAD` log lines size this before building it.
+
 ### Preset skipping
 A preset is added to `files/skipped_presets.txt` and never picked again when:
 1. its file is empty or unreadable;
-2. projectM reports a load or compile failure (`projectm_set_preset_switch_failed_event_callback`); or
-3. **it renders nothing while music plays.** After the transition plus 2 s, five sparse rows and five columns of the frame are read every 0.5 s (4 bytes × a few thousand pixels, a handful of `glReadPixels` calls). If 5 samples in a row have no pixel brighter than ~8 %, the preset is skipped. Samples taken during silence don't count, so quiet passages never blacklist presets. The check stops at the first visible frame or after 20 s.
+2. projectM reports a load or compile failure (`projectm_set_preset_switch_failed_event_callback`);
+3. *Skip slow presets* is on and it stays below 50 % of the target FPS at the lowest resolution; or
+4. *Skip blank presets* is on (**off by default since 1.9**) and 5 samples in a row, 1 s apart, have no channel above 20/255 while music plays.
+
+**Output measurement.** For 20 s after each transition, 5 rows and 5 columns of the window are sampled once per second while audio is present. One `OUTPUT` log line per preset records the luma range (flatness), the share of sampled pixels that changed visibly since the previous sample (luma ≥ 8/255, or hue ≥ 12° on saturated pixels), for the whole frame and for the most active of 40 regions (quarters of each line), and how many changes were luma versus hue-only. Flat and still output are **only measured**. Presets that looked dull on the SHIELD ran on a build without textures, and a wrong skip is permanent, so thresholds get chosen from real runs first. For the same reason, 1.9 clears the skip list once on first launch.
 
 *Reset* in the menu clears the list.
 
@@ -92,16 +112,18 @@ The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The di
 
 **True 4K (`DisplayInfo`).** Android TVs commonly drive the UI at 1080p on a 4K panel, while a SurfaceView can still be shown at the panel's full physical resolution. `getRealSize()` reports the UI size, so before 1.8 "Native" was 1080p on such TVs. The physical size is now detected as AndroidX Media3 does in `Util.getCurrentDisplayModeSize`: the `vendor.display-size` / `sys.display-size` property, Sony's 4K panel feature, then `Display.Mode.getPhysicalWidth/Height()`. **Needs on-device confirmation per TV model:** *Advanced › Diagnostics* shows the panel, UI and render sizes.
 
-**Dynamic resolution (`QualityController`).** Heights ladder: 360 … 2160, capped by the panel, with a floor per tier. Once the settle period after a preset change has passed (transition + 3 s), 1-second FPS samples drive it:
+**Memory limit.** On a 2 GB SHIELD, rendering at 1440p and above made Android's low-memory killer close SoundCloud (a foreground service), taking up to 11 other processes with it. Resolutions are therefore capped by installed RAM (`DeviceProfile.memorySafeHeight`): below 1.6 GB 1080p, below 2.6 GB 1260p, below 3.6 GB 1440p, otherwise the panel. The cap applies to Auto and to the fixed choices. *Advanced › Memory limit › Off* removes it. While the app is visible, `onTrimMemory(RUNNING_LOW / RUNNING_CRITICAL)` lowers the Auto level by one step at the next switch and keeps it there for the session (at most one step per preset). **The thresholds are estimates** from the SHIELD run, which predates the texture pack. The next run should confirm them.
+
+**Dynamic resolution (`QualityController`).** Heights ladder: 360 … 2160, capped by the panel and the memory limit, with a floor per tier. Once the settle period after a preset change has passed (transition + 3 s), 1-second FPS samples drive it:
 
 | Condition | Action |
 |---|---|
 | < 85 % of target for 3 s | lower one level (two if far off) **at the next preset switch**, which is forced to be a hard cut |
 | < 55 % for 4 s | lower now and switch preset (hard cut) |
-| ≥ 97 % for 15 s | try one level higher at the next switch, unless that level recently failed (back-off 3, 6, 12 … 48 presets) |
+| ≥ 97 % for 15 s | try one level higher at the next switch. A level that failed is retried once after 10 presets; after a second failure it is not tried again in this session (the SHIELD oscillated 1440 ↔ 1800 before) |
 | < 50 % at the lowest level, *Skip slow presets* on | add the preset to the skip list |
 
-Changes wait for a preset switch because `projectm_set_window_size` resets the renderer; right after a hard cut the new preset starts from scratch anyway, so the reset is invisible. The last automatic level is remembered across launches.
+Changes wait for a preset switch: in projectM 4.1 `projectm_set_window_size` only stores the size, and each preset reallocates its frame buffers (losing their contents) on its next frame. Right after a hard cut the new preset starts from scratch anyway, so the reallocation is invisible. The last automatic level is remembered across launches.
 
 ### Frame pacing
 Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so the speed of the visuals doesn't change.
@@ -109,13 +131,13 @@ Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches t
 ### Threads
 | Thread | Priority | Work |
 |---|---|---|
-| GL (GLSurfaceView) | `THREAD_PRIORITY_DISPLAY` | projectM render, preset loading, black-frame detection |
+| GL (GLSurfaceView) | `THREAD_PRIORITY_DISPLAY` | projectM render, preset loading, output measurement, transition overlay |
 | AudioCapture (HandlerThread) | `THREAD_PRIORITY_AUDIO` | `Visualizer` callbacks → `addWaveform` |
 | Native worker | default | Preset indexing and prefetch |
 | UI | default | Overlay; status polled every 500 ms, text only updated when changed |
 
 ### Overlay UI
-`OptionRow` is a focusable settings row: ↑/↓ moves between rows, ‹ › changes the value, and center cycles it or runs an action. The main panel (now playing, transport, auto change, duration, transition, resolution, frame rate) ends with **Advanced ›**, which slides a separate panel over it: detail (mesh), skip slow presets, skip blank presets, skipped-preset reset and live diagnostics. BACK returns. Both panels sit within the 48 dp / 27 dp overscan-safe margins. Views fade out and are set to `GONE`, so a hidden overlay costs nothing to draw. Long preset names use a marquee, which is only restarted when the text actually changes.
+`OptionRow` is a focusable settings row: ↑/↓ moves between rows, ‹ › changes the value, and center cycles it or runs an action. The main panel (now playing, transport, auto change, duration, transition, resolution, frame rate) ends with **Advanced ›**, which slides a separate panel over it: detail (mesh), transitions (Auto / Lightweight / Classic), memory limit, skip slow presets, skip blank presets, skipped-preset reset and live diagnostics. BACK returns. Both panels sit within the 48 dp / 27 dp overscan-safe margins. Views fade out and are set to `GONE`, so a hidden overlay costs nothing to draw. Long preset names use a marquee, which is only restarted when the text actually changes.
 
 ### Device tiers (`DeviceProfile`)
 | Tier | Rule | Auto start / floor | Frame rate | Detail (mesh) | Transition | Skip slow |
@@ -137,6 +159,9 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 | All 19 JNI names and signatures cross-checked (`javac -h` header compiled against the implementation) | Match |
 | Host engine tests under ASan + UBSan: indexing/filtering, first frame, settings, next/random/previous, auto-switch, forced hard cut, mesh re-apply, failure skip + persistence, audio cap, black detection (silence / visible / black / disabled), skip-current, reset, context-loss resume | all pass |
 | JVM tests (`QualityControllerTest`): levels per panel, change only at preset switch, back-off, severe drop, slow-preset skip, low-tier floor | 5/5 pass |
+| 1.9 host engine tests (ASan + UBSan): `presets.idx` with CRLF/blank/junk lines and folder fallback; lightweight capture → hard cut → fade; remote switch ends fade; hard cuts never faded; capture failure → classic; classic mode; Auto switches only after a slow classic blend; black skipping off by default; `OUTPUT` flat/still lines; readback from the window framebuffer | all pass |
+| 1.9 `fade_gl_test` on Mesa llvmpipe (OpenGL ES 3.2, headless EGL): capture, fade curve (start / half / end), self-stop, GL state restored (blend, scissor, program, VAO, texture unit, sampler binding) | all pass |
+| 1.9 JVM tests: memory limit caps Auto and fixed levels, remembered 4K clamped, memory pressure lowers once per preset, second failure blocks a level | 9/9 pass |
 | GitHub Actions: Gradle build + NDK/CMake native build + APK packaging on ubuntu-24.04 | green |
 | **On-device test** | **Not done yet.** Needs a run on Shield / TCL / Fire TV |
 
@@ -144,11 +169,14 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 
 | Risk | Likelihood | Mitigation |
 |---|---|---|
-| Black detector skips a legitimately very dark preset | Low–medium | Only while audio is playing, 5 consecutive samples, ~8 % threshold; *Reset* restores all |
+| Black detector skips a legitimately very dark preset | Low (off by default since 1.9) | Only when enabled, only while audio plays, 5 consecutive samples; *Reset* restores all |
+| Memory limit too strict on a device with plenty of free RAM, or too loose once textures are loaded | Medium | Estimates from one SHIELD run; *Memory limit › Off*; `onTrimMemory` lowers further at runtime; confirm with the next diagnostics run |
+| `glCopyTexImage2D` from the window is slow or unsupported on a driver | Low | Only on switch frames; any GL error falls back to classic; *Transitions › Classic* |
+| The fade's still frame looks worse than projectM's blend on strong devices | Medium (taste) | Auto keeps classic where it runs at full speed; *Transitions › Classic* |
 | Visualizer returns silence (DRM apps, some vendors), so black detection never runs | Medium | Load-failure skipping still works; visuals follow projectM's idle response |
 | A device without OpenGL ES 3.0 can no longer install the app | Low (projectM 4 never worked there anyway) | Manifest now states the real requirement |
 | `setFixedSize` behaves oddly on a specific TV firmware | Low | Choose "Native" in the menu (uses the layout size) |
-| Shader compilation still causes a short hitch on each switch | Certain on weak GPUs | projectM compiles on the GL thread by design; file reading is already prefetched |
+| Preset load (parse, textures, shader compile) still freezes the picture at each switch | Certain | Measured by `LOAD` log lines; the fix (second shared EGL context) is planned once sized |
 | Pulling this change removes build caches from the index | Certain | Harmless; Gradle and CMake regenerate them |
 
 ## 8. Recommended next steps
