@@ -189,7 +189,9 @@ public class MainActivity extends Activity {
     private void applyRenderHeight(int height) {
         visualizerView.setRenderSize(display.widthForHeight(height), height);
         ProjectMJNI.setForceHardCut(false);
-        if (quality != null && quality.isAuto()) prefs.edit().putInt(PREF_AUTO_HEIGHT, height).apply();
+        if (quality != null && quality.isAuto()) {
+            prefs.edit().putInt(PREF_AUTO_HEIGHT, quality.autoHeightToRemember()).apply();
+        }
     }
 
     private void onFrameRate(float fps) {

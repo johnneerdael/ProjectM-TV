@@ -147,6 +147,26 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void memoryPressureLimitIsNotRememberedForTheNextLaunch() throws Exception {
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
+        q.setTargetFps(60);
+        q.setMode(0, 0);
+        q.onMemoryPressure(10);
+        q.onPresetChanged();
+        assertEquals(1260, applied);
+        assertEquals("next launch starts at the level chosen for the frame rate",
+                1440, q.autoHeightToRemember());
+
+        // A frame-rate drop below the pressure limit is remembered as usual.
+        settle(q);
+        samples(q, 3, 40);
+        q.onPresetChanged();
+        assertEquals(1080, applied);
+        assertEquals(1080, q.autoHeightToRemember());
+    }
+
+    @Test
     public void severeSlowdownSwitchesOnceAndDropsTwoLevels() throws Exception {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
