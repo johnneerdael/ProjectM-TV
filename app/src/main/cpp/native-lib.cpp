@@ -90,6 +90,7 @@ public:
         if (!started_.compare_exchange_strong(expected, true)) return;
         assets_ = assets;
         skipFilePath_ = std::move(skipFilePath);
+        strikeFilePath_ = skipFilePath_ + ".blank";
         textureDir_ = std::move(textureDir);
         std::thread(&PresetLibrary::WorkerLoop, this).detach();
     }
@@ -169,10 +170,25 @@ public:
         }
     }
 
+    // Records that `name` rendered black while music played; returns how often that happened so
+    // far (persisted, so a preset shown again in a later session counts too).
+    int AddBlankStrike(const std::string& name) {
+        if (name.empty()) return 0;
+        std::lock_guard<std::mutex> lock(mutex_);
+        int strikes = ++blankStrikes_[name];
+        if (FILE* f = fopen(strikeFilePath_.c_str(), "a")) {
+            fprintf(f, "%s\n", name.c_str());
+            fclose(f);
+        }
+        return strikes;
+    }
+
     void ResetSkipped() {
         std::lock_guard<std::mutex> lock(mutex_);
         skipped_.clear();
         skippedInOrder_ = 0;
+        blankStrikes_.clear();
+        if (FILE* f = fopen(strikeFilePath_.c_str(), "w")) fclose(f);
         FILE* f = fopen(skipFilePath_.c_str(), "w");
         if (f) fclose(f);
         LOGI("Skip list cleared");
@@ -308,6 +324,16 @@ private:
             }
             fclose(f);
         }
+        std::unordered_map<std::string, int> strikes;
+        if (FILE* f = fopen(strikeFilePath_.c_str(), "r")) {
+            char line[1024];
+            while (fgets(line, sizeof(line), f)) {
+                size_t len = strcspn(line, "\r\n");
+                line[len] = '\0';
+                if (len > 0) ++strikes[line];
+            }
+            fclose(f);
+        }
 
         std::lock_guard<std::mutex> lock(mutex_);
         rng_.seed(std::random_device{}());
@@ -315,6 +341,7 @@ private:
         order_ = std::move(names);
         weights_ = std::move(weights);
         skipped_ = std::move(skipped);
+        blankStrikes_ = std::move(strikes);
         skippedInOrder_ = 0;
         for (const auto& n : order_) skippedInOrder_ += skipped_.count(n);
         cursor_ = 0;
@@ -355,6 +382,7 @@ private:
     std::atomic<bool> ready_{false};
     AAssetManager* assets_ = nullptr;
     std::string skipFilePath_;
+    std::string strikeFilePath_;  // one line per black verdict
     std::string textureDir_;
 
     std::mutex mutex_;
@@ -364,6 +392,7 @@ private:
     size_t cursor_ = 0;
     std::deque<std::string> history_;
     std::unordered_set<std::string> skipped_;
+    std::unordered_map<std::string, int> blankStrikes_;
     std::unordered_map<std::string, int> weights_;
     size_t skippedInOrder_ = 0;
     bool prefetchWanted_ = false;
@@ -381,10 +410,11 @@ private:
 //     visibly and no region reached 10%. A pixel changed visibly when its luma moved >= 8/255, or
 //     its hue moved >= 12 degrees while saturated (S >= 0.2, luma >= 16). Regions are quarters of
 //     each sampled line, so a small shape that really moves registers.
-// Only black can skip a preset (5 black samples in a row), and only when "Skip blank presets" is
-// on (off by default). Dull output may simply come from missing textures, which 1.9 bundles, so
-// flat and still are measured only until real runs show which thresholds are safe: a wrong skip
-// is permanent.
+// Only black acts (5 black samples in a row with music), and only when "Skip blank presets" is on
+// (the default since 1.9.4): the app moves on to the next preset at once, and a preset that is
+// black a second time, in any later showing, goes on the skip list. Two strikes keep a one-off
+// (music starting late, a slow build-up) from removing a preset for good. Flat and still are only
+// measured until real runs show which thresholds are safe.
 // ------------------------------------------------------------------------------------------------
 class OutputDetector {
 public:
@@ -404,6 +434,13 @@ public:
         Flush();
         DropPending();
         active_ = false;
+    }
+
+    // True once since the last call if a sample showed visible output (not black).
+    bool TakeVisible() {
+        bool seen = visibleSeen_;
+        visibleSeen_ = false;
+        return seen;
     }
 
     // Frees the readback buffer; the GL context must be current.
@@ -434,9 +471,17 @@ public:
             return reason;
         }
         nextSampleAt_ = now + kSampleInterval;
-        // Silence legitimately makes many presets dark or still; a read still in flight is not
-        // doubled up.
-        if (!audioPresent || pending_ || width <= 0 || height <= 0) return reason;
+        // Silence legitimately makes many presets dark or still, and a preset that draws from the
+        // music starts from black when the music only just arrived (on a SHIELD the player's audio
+        // is found seconds after launch): only samples after kAudioSettle seconds of continuous
+        // music count. A read still in flight is not doubled up.
+        if (!audioPresent) {
+            audioSince_ = -1;
+            badSamples_ = 0;
+            return reason;
+        }
+        if (audioSince_ < 0) audioSince_ = now;
+        if (now - audioSince_ < kAudioSettle || pending_ || width <= 0 || height <= 0) return reason;
         Issue(width, height);
         return reason;
     }
@@ -520,6 +565,7 @@ private:
         const char* reason = IsBlack() ? "renders no visible output" : nullptr;
         previous_.swap(current_);
         if (!reason) {
+            visibleSeen_ = true;
             badSamples_ = 0;
             return nullptr;
         }
@@ -546,6 +592,7 @@ private:
 
     static constexpr double kSampleInterval = 1.0;
     static constexpr double kEvaluationWindow = 20.0;
+    static constexpr double kAudioSettle = 3.0;   // seconds of music before samples count
     static constexpr int kRequiredBadSamples = 5;
     static constexpr int kLines = 5;              // rows and columns each
     static constexpr int kRegionsPerLine = 4;
@@ -665,6 +712,8 @@ private:
     double nextSampleAt_ = 0;
     double deadline_ = 0;
     int badSamples_ = 0;
+    bool visibleSeen_ = false;
+    double audioSince_ = -1;     // when the current run of music started, -1 during silence
     int lumaRange_ = 0;
     bool still_ = false;
     Stats stats_;
@@ -685,6 +734,10 @@ private:
 enum Command : int { kNone = 0, kNext, kPrevious, kRandom, kSkipCurrent };
 enum TransitionMode : int { kTransitionAuto = 0, kTransitionLightweight = 1, kTransitionClassic = 2 };
 
+constexpr int kBlankStrikesToSkip = 2;          // black verdicts before a preset is skipped for good
+// More black presets in a row than this points at our rendering (driver, readback), not at the
+// presets: then nothing is struck or skipped until a preset shows visible output again.
+constexpr int kMaxBlankInARow = 3;
 constexpr double kMaxLightweightSeconds = 3.0;  // a still frame should not linger longer
 constexpr float kSlowBlendRatio = 0.8f;         // classic blend slower than this: Auto goes lightweight
 
@@ -729,6 +782,7 @@ struct Engine {
     bool switchRequested = false;
     bool switchHardCut = false;
     OutputDetector detector;
+    int blankInARow = 0;         // black verdicts since the last preset with visible output
     SnapshotFade fade;
     bool snapshotReady = false;  // outgoing frame captured for the upcoming automatic switch
     std::vector<uint8_t> pcmScratch;
@@ -1212,8 +1266,19 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
 
     // Reads the preset's own output, so it runs before the transition overlay is drawn.
     const char* blank = g_engine.detector.Update(now, g_engine.width, g_engine.height, AudioPresent(now));
-    if (blank && g_inputs.blankDetection.load()) {
-        g_library.MarkSkipped(g_engine.current, blank);
+    if (g_engine.detector.TakeVisible()) g_engine.blankInARow = 0;
+    if (blank && g_inputs.blankDetection.load() && ++g_engine.blankInARow > kMaxBlankInARow) {
+        if (g_engine.blankInARow == kMaxBlankInARow + 1) {
+            LOGW("BLANK %d presets in a row rendered black: suspecting a rendering problem, not skipping "
+                 "until a preset shows output", kMaxBlankInARow);
+        }
+    } else if (blank && g_inputs.blankDetection.load()) {
+        int strikes = g_library.AddBlankStrike(g_engine.current);
+        if (strikes >= kBlankStrikesToSkip) {
+            g_library.MarkSkipped(g_engine.current, "renders no visible output (twice)");
+        } else {
+            LOGW("BLANK preset='%s' strike=%d: moving on", g_engine.current.c_str(), strikes);
+        }
         g_engine.fade.Stop();
         SwitchPreset([] { return g_library.Next(); }, false);
     }

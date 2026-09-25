@@ -1,3 +1,14 @@
+# projectM for Android TV 1.9.4
+
+## Fixed
+- **Presets that stay black while music plays are replaced at once.** Some presets render nothing at all on the TV even though audio arrives and every texture is there; on the SHIELD these were mostly reaction/feedback presets. When a preset shows only black for 5 samples in a row while music plays (about 7 seconds after it starts, and counting only once the music has played for 3 seconds without a break), the app now moves on to the next one immediately.
+  - A preset is only put on the skip list when it is black a second time, in any later showing, so a one-off (music starting late, a slow build-up) never removes it for good.
+  - "Black" means every sampled pixel stays at or below about 8% brightness, moving or not. Dark presets with anything brighter are not affected.
+  - After 3 black presets in a row the app stops acting until a preset shows something again: that points at a rendering problem, not at the presets, and must not empty the library.
+  - This is *Advanced › Skip blank presets*, now on by default, also for anyone who had turned it off in 1.9. Turn it off to keep every preset; *Skipped presets* reset also forgets the strikes.
+
+---
+
 # projectM for Android TV 1.9.3
 
 ## Fixed

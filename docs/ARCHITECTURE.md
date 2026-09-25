@@ -116,11 +116,11 @@ A preset is added to `files/skipped_presets.txt` and never picked again when:
 1. its file is empty or unreadable;
 2. projectM reports a load or compile failure (`projectm_set_preset_switch_failed_event_callback`);
 3. *Skip slow presets* is on and it stays below 50 % of the target FPS at the lowest resolution; or
-4. *Skip blank presets* is on (**off by default since 1.9**) and 5 samples in a row, 1 s apart, have no channel above 20/255 while music plays.
+4. *Skip blank presets* is on (**on by default since 1.9.4**) and it has been black **twice**, in any showings: 5 samples in a row, 1 s apart, with no channel above 20/255 while music plays (samples count only after 3 s of uninterrupted music, since presets that draw from the music start from black). The first time the app only moves on to the next preset and records a strike in `files/skipped_presets.txt.blank`; a one-off (music starting late, a slow build-up) therefore never removes a preset. After 3 black verdicts in a row with no visible preset in between, nothing is struck or skipped until a preset shows output again (a rendering fault must not empty the library).
 
 **Output measurement.** For 20 s after each transition, 5 rows and 5 columns of the window are sampled once per second while audio is present. One `OUTPUT` log line per preset records the luma range (flatness), the share of sampled pixels that changed visibly since the previous sample (luma ≥ 8/255, or hue ≥ 12° on saturated pixels), for the whole frame and for the most active of 40 regions (quarters of each line), and how many changes were luma versus hue-only. Flat and still output are **only measured**. Presets that looked dull on the SHIELD ran on a build without textures, and a wrong skip is permanent, so thresholds get chosen from real runs first. For the same reason, 1.9 clears the skip list once on first launch.
 
-*Reset* in the menu clears the list.
+*Reset* in the menu clears the list and the strikes.
 
 ### Resolution
 The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The display composer scales it to the panel, so a 720p render fills a 1080p or 4K screen without extra GPU work ([Android Developers blog: using the hardware scaler](https://android-developers.googleblog.com/2013/09/using-hardware-scaler-for-performance.html)). projectM always renders at the surface size, so no viewport workarounds are needed.

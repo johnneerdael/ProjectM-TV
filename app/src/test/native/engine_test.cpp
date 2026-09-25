@@ -229,13 +229,20 @@ int main(int argc, char** argv) {
   for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(g_library.SkippedCount() == skippedBefore && current() == bright);
 
-  printf("black preset with music IS skipped and replaced\n");
+  printf("black preset with music is replaced at once, but only skipped for good the 2nd time\n");
   g_pixel = 5;
   Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string black = current();
   for (int i = 0; i < 400 && current() == black; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() != black);
-  CHECK(g_library.SkippedCount() == skippedBefore + 1);
+  CHECK(g_library.SkippedCount() == skippedBefore);  // first strike: moved on, not listed
+  { FILE* f = fopen((skip + ".blank").c_str(), "r"); CHECK(f != nullptr); char line[256] = {0}; CHECK(fgets(line, sizeof line, f) != nullptr); fclose(f);
+    line[strcspn(line, "\r\n")] = 0; CHECK(black == line); }  // strike persisted
+  Java_com_example_projectm_visualizer_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
+  CHECK(current() == black);  // shown again
+  for (int i = 0; i < 400 && current() == black; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+  CHECK(current() != black);
+  CHECK(g_library.SkippedCount() == skippedBefore + 1);  // second strike: skipped
 
   printf("skip current preset (too slow) and blank-detection toggle\n");
   g_pixel = 200; int beforeSkip = g_library.SkippedCount(); std::string slow = current();
@@ -248,9 +255,24 @@ int main(int argc, char** argv) {
   CHECK(current() == dim && g_library.SkippedCount() == beforeSkip + 1);
   Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
 
+  printf("everything black (rendering fault): after 3 black presets in a row nothing more is struck\n");
+  g_pixel = 200;  // a visible preset resets the run of black ones
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  for (int i = 0; i < 200; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+  g_pixel = 5; int skippedBeforeRun = g_library.SkippedCount();
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  int changes = 0; std::string onScreen = current();
+  for (int i = 0; i < 2000 && changes < 4; ++i) {
+    feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    if (current() != onScreen) { ++changes; onScreen = current(); }
+  }
+  CHECK(changes == 3);  // three black presets moved on, the fourth stays
+  CHECK(g_library.SkippedCount() <= skippedBeforeRun + 3);
+
   printf("reset skip list\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_resetSkippedPresets(nullptr, nullptr);
   CHECK(g_library.SkippedCount() == 0 && g_library.ActiveCount() == 14);
+  { FILE* f = fopen((skip + ".blank").c_str(), "r"); CHECK(f != nullptr); CHECK(fgetc(f) == EOF); fclose(f); }  // strikes cleared
 
   printf("context loss: new instance resumes the same preset, textures re-applied\n");
   g_pixel = 200; std::string shown = current();

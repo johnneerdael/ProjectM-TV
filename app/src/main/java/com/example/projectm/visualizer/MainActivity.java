@@ -52,8 +52,9 @@ public class MainActivity extends Activity {
     private static final String PREF_FRAME_RATE_CAP = "frame_rate_cap";
     private static final String PREF_MESH_LEVEL = "mesh_level";
     private static final String PREF_SKIP_SLOW = "skip_slow_presets";
-    // New key in 1.9: skipping black presets became opt-in (dull output was often missing textures).
-    private static final String PREF_BLANK_DETECTION = "blank_detection_v2";
+    // 1.9 made skipping black presets opt-in (dull output was often missing textures); 1.9.4 turns
+    // it on for everyone (new key) with two strikes before a preset is skipped for good.
+    private static final String PREF_BLANK_DETECTION = "blank_detection_v3";
     private static final String PREF_TRANSITION_MODE = "transition_mode";
     private static final String PREF_MEMORY_LIMIT = "memory_limit";
     private static final String PREF_MEDIA_CAPTURE = "media_capture";  // audio source: media capture
@@ -150,7 +151,7 @@ public class MainActivity extends Activity {
         ProjectMJNI.setAutoChange(prefs.getBoolean(PREF_AUTO_CHANGE, true));
         ProjectMJNI.setPresetDuration(prefs.getInt(PREF_PRESET_DURATION, 30));
         ProjectMJNI.setSoftCutDuration(transitionSeconds());
-        ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, false));
+        ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, true));
         ProjectMJNI.setTransitionMode(prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO),
                 profile.lightweightTransitionsByDefault());
 
@@ -389,7 +390,7 @@ public class MainActivity extends Activity {
 
         OptionRow blank = findViewById(R.id.row_blank_detection);
         blank.setup("Skip blank presets", new String[]{"Off", "On"},
-                prefs.getBoolean(PREF_BLANK_DETECTION, false) ? 1 : 0, true, index -> {
+                prefs.getBoolean(PREF_BLANK_DETECTION, true) ? 1 : 0, true, index -> {
                     ProjectMJNI.setBlankDetection(index == 1);
                     prefs.edit().putBoolean(PREF_BLANK_DETECTION, index == 1).apply();
                 });
