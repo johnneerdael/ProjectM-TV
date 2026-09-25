@@ -14,6 +14,19 @@ import javax.microedition.khronos.opengles.GL10;
 public class VisualizerRenderer implements GLSurfaceView.Renderer {
     private static final String TAG = "VisualizerRenderer";
 
+    /** Called on the GL thread; implementations should hand off to the UI thread. */
+    public interface StatsListener {
+        void onFpsSample(float fps);
+        void onPresetChanged();
+    }
+
+    private final StatsListener listener;
+    private int lastPresetChange = Integer.MIN_VALUE;
+
+    public VisualizerRenderer(StatsListener listener) {
+        this.listener = listener;
+    }
+
     private volatile float currentFps;
     private volatile int surfaceWidth;
     private volatile int surfaceHeight;
@@ -47,6 +60,13 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         ProjectMJNI.onDrawFrame();
 
+        int change = ProjectMJNI.getPresetChangeCounter();
+        if (change != lastPresetChange) {
+            boolean first = lastPresetChange == Integer.MIN_VALUE;
+            lastPresetChange = change;
+            if (!first) listener.onPresetChanged();
+        }
+
         framesInWindow++;
         long now = System.nanoTime();
         long elapsed = now - fpsWindowStart;
@@ -54,6 +74,7 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             currentFps = framesInWindow * 1e9f / elapsed;
             framesInWindow = 0;
             fpsWindowStart = now;
+            listener.onFpsSample(currentFps);
         }
     }
 

@@ -1,23 +1,21 @@
 package com.example.projectm.visualizer;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Choreographer;
-import android.view.WindowManager;
 
 /**
  * GLSurfaceView that renders projectM.
  *
  * Render resolution is set with {@link android.view.SurfaceHolder#setFixedSize}: the surface
  * buffer gets the requested size and the display hardware scaler stretches it to the full screen
- * at no GPU cost. This is what makes 480p/720p modes both fast and full-screen.
+ * at no GPU cost, so lower resolutions are both fast and full-screen.
  *
- * Frame rate: full rate renders continuously; half rate renders on every second vsync, driven by
- * {@link Choreographer}. On devices that cannot sustain the full refresh rate, an even 30 (or 25)
- * fps looks much smoother than an uneven 40-50 fps and leaves GPU headroom for heavy presets.
+ * Frame rate: rendering can be paced to every n-th vsync with {@link Choreographer}. On devices
+ * that cannot sustain the full refresh rate, an even 30 fps looks much smoother than an uneven
+ * 40-50 fps and leaves GPU headroom for heavy presets.
  */
 public class VisualizerView extends GLSurfaceView {
     private static final String TAG = "VisualizerView";
@@ -48,24 +46,20 @@ public class VisualizerView extends GLSurfaceView {
         setRenderMode(RENDERMODE_CONTINUOUSLY);
     }
 
-    /** Display refresh rate in Hz (typically 60 or 50 on TVs). */
-    public float displayRefreshRate() {
-        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        float rate = wm.getDefaultDisplay().getRefreshRate();
-        return rate > 1 ? rate : 60f;
-    }
-
-    /** Renders on every vsync ({@code halfRate == false}) or every second vsync. Call from the UI thread. */
-    public void setHalfFrameRate(boolean halfRate) {
-        frameDivisor = halfRate ? 2 : 1;
+    /**
+     * Renders on every {@code divisor}-th vsync: 1 = full refresh rate, 2 = half (e.g. 30 fps at
+     * 60 Hz, 60 fps at 120 Hz). Call from the UI thread.
+     */
+    public void setFrameDivisor(int divisor) {
+        frameDivisor = Math.max(1, divisor);
         stopPacing();
-        if (halfRate) {
+        if (frameDivisor > 1) {
             setRenderMode(RENDERMODE_WHEN_DIRTY);
             startPacing();
         } else {
             setRenderMode(RENDERMODE_CONTINUOUSLY);
         }
-        Log.i(TAG, "Frame rate: " + (halfRate ? "half" : "full") + " of " + displayRefreshRate() + " Hz");
+        Log.i(TAG, "Rendering every " + frameDivisor + " vsync(s)");
     }
 
     @Override
@@ -92,23 +86,11 @@ public class VisualizerView extends GLSurfaceView {
     }
 
     /**
-     * @param targetHeight render height in pixels, or 0 for the display's native resolution.
+     * Sets the render (surface buffer) size. It may exceed the UI resolution: on TVs that drive
+     * the UI at 1080p, a 3840x2160 SurfaceView buffer is still shown at the panel's full 4K.
      */
-    public void setRenderHeight(int targetHeight) {
-        Point display = new Point();
-        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        wm.getDefaultDisplay().getRealSize(display);
-        int displayWidth = Math.max(display.x, display.y);
-        int displayHeight = Math.min(display.x, display.y);
-
-        if (targetHeight <= 0 || targetHeight >= displayHeight) {
-            getHolder().setSizeFromLayout();
-            Log.i(TAG, "Render resolution: native " + displayWidth + "x" + displayHeight);
-            return;
-        }
-        int width = Math.round(targetHeight * (float) displayWidth / displayHeight) & ~1;
-        getHolder().setFixedSize(width, targetHeight);
-        Log.i(TAG, "Render resolution: " + width + "x" + targetHeight + " scaled to "
-                + displayWidth + "x" + displayHeight);
+    public void setRenderSize(int width, int height) {
+        getHolder().setFixedSize(width, height);
+        Log.i(TAG, "Render size " + width + "x" + height);
     }
 }

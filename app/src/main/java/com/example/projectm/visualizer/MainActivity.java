@@ -17,6 +17,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends Activity {
@@ -27,28 +29,29 @@ public class MainActivity extends Activity {
     private static final long UI_REFRESH_MS = 500;
     private static final long FADE_MS = 180;
 
-    // Preference keys (kept compatible with earlier versions)
     private static final String PREFS = "projectm_settings";
-    private static final String PREF_RESOLUTION = "selected_resolution";
     private static final String PREF_AUTO_CHANGE = "auto_change_enabled";
     private static final String PREF_PRESET_DURATION = "preset_duration";
     private static final String PREF_TRANSITION_DURATION = "transition_duration";
-    private static final String PREF_HALF_FRAME_RATE = "half_frame_rate";
-
-    // Stored resolution values; RES_NATIVE replaces the former fixed "4K" option.
-    private static final int RES_480P = 0;
-    private static final int RES_720P = 1;
-    private static final int RES_1080P = 2;
-    private static final int RES_NATIVE = 3;
-    private static final String[] RESOLUTION_LABELS = {"480p", "720p", "1080p", "Native"};
+    private static final String PREF_RENDER_HEIGHT = "render_height";      // 0 = automatic
+    private static final String PREF_AUTO_HEIGHT = "auto_render_height";  // last automatic level
+    private static final String PREF_FRAME_RATE_CAP = "frame_rate_cap";
+    private static final String PREF_MESH_LEVEL = "mesh_level";
+    private static final String PREF_SKIP_SLOW = "skip_slow_presets";
+    private static final String PREF_BLANK_DETECTION = "blank_detection";
 
     private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
     private static final int MAX_TRANSITION = 10;
 
+    private enum Menu { NONE, MAIN, ADVANCED }
+
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private final NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
     private SharedPreferences prefs;
     private DeviceProfile profile;
-    private final NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
+    private DisplayInfo display;
+    private QualityController quality;
+    private int frameRateTarget;
 
     private VisualizerView visualizerView;
     private VisualizerRenderer renderer;
@@ -58,18 +61,20 @@ public class MainActivity extends Activity {
     private Handler audioHandler;
     private Visualizer audioVisualizer;
 
-    private View overlayMenu;
+    private View mainMenu;
+    private View advancedMenu;
     private TextView presetName;
     private TextView presetMeta;
     private TextView statusLine;
+    private TextView diagnostics;
     private OptionRow skippedRow;
     private View nowPlaying;
     private TextView nowPlayingText;
-    private boolean menuVisible;
+    private Menu menu = Menu.NONE;
     private int lastPresetChange = -1;
     private String currentPreset = "";
 
-    private final Runnable hideMenu = () -> setMenuVisible(false);
+    private final Runnable hideMenu = () -> showMenu(Menu.NONE);
     private final Runnable hideNowPlaying = () -> fade(nowPlaying, false);
     private final Runnable uiRefresh = new Runnable() {
         @Override
@@ -85,24 +90,41 @@ public class MainActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        getWindow().setBackgroundDrawable(null);  // the GL surface covers the screen
 
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         profile = DeviceProfile.detect(this);
+        display = DisplayInfo.detect(this);
 
         // Settings go to the native engine before the surface exists; they are applied on the
         // GL thread as soon as projectM is created.
-        ProjectMJNI.setMeshSize(profile.meshWidth(), profile.meshHeight());
+        int[] mesh = DeviceProfile.MESH_SIZES[meshLevel()];
+        ProjectMJNI.setMeshSize(mesh[0], mesh[1]);
         ProjectMJNI.setAutoChange(prefs.getBoolean(PREF_AUTO_CHANGE, true));
         ProjectMJNI.setPresetDuration(prefs.getInt(PREF_PRESET_DURATION, 30));
-        ProjectMJNI.setSoftCutDuration(prefs.getInt(PREF_TRANSITION_DURATION, 7));
+        ProjectMJNI.setSoftCutDuration(transitionSeconds());
+        ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, true));
 
         visualizerView = findViewById(R.id.visualizer_view);
-        visualizerView.setRenderHeight(renderHeightFor(savedResolution()));
-        renderer = new VisualizerRenderer();
-        visualizerView.start(renderer);
-        visualizerView.setHalfFrameRate(prefs.getBoolean(PREF_HALF_FRAME_RATE, profile.defaultHalfFrameRate()));
+        renderer = new VisualizerRenderer(new VisualizerRenderer.StatsListener() {
+            @Override
+            public void onFpsSample(float fps) {
+                handler.post(() -> onFrameRate(fps));
+            }
 
-        initMenu();
+            @Override
+            public void onPresetChanged() {
+                handler.post(() -> quality.onPresetChanged());
+            }
+        });
+        quality = new QualityController(display, profile, this::applyRenderHeight);
+        quality.setTransitionSeconds(transitionSeconds());
+        quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
+        quality.setMode(prefs.getInt(PREF_RENDER_HEIGHT, 0), prefs.getInt(PREF_AUTO_HEIGHT, 0));
+        visualizerView.start(renderer);
+        applyFrameRateCap(prefs.getInt(PREF_FRAME_RATE_CAP, profile.defaultFrameRateCap()));
+
+        initMenus();
 
         audioThread = new HandlerThread("AudioCapture", android.os.Process.THREAD_PRIORITY_AUDIO);
         audioThread.start();
@@ -115,20 +137,87 @@ public class MainActivity extends Activity {
     }
 
     // ---------------------------------------------------------------------------------------
-    // Menu
+    // Quality: resolution and frame rate
     // ---------------------------------------------------------------------------------------
 
-    private void initMenu() {
-        overlayMenu = findViewById(R.id.overlay_menu);
+    private void applyRenderHeight(int height) {
+        visualizerView.setRenderSize(display.widthForHeight(height), height);
+        ProjectMJNI.setForceHardCut(false);
+        if (quality != null && quality.isAuto()) prefs.edit().putInt(PREF_AUTO_HEIGHT, height).apply();
+    }
+
+    private void onFrameRate(float fps) {
+        int action = quality.onFpsSample(fps);
+        if (action == QualityController.ACTION_SKIP) {
+            ProjectMJNI.skipCurrentPreset();
+        } else if (action == QualityController.ACTION_SWITCH) {
+            ProjectMJNI.nextPreset(true);
+        } else if (quality.hasPendingChange()) {
+            // The resolution changes at the next preset switch; make that switch a hard cut.
+            ProjectMJNI.setForceHardCut(true);
+        }
+    }
+
+    /** Frame-rate options: the refresh rate divided by 4, 2 or 1 (at least 24 fps), ascending. */
+    private int[] frameRateOptions() {
+        List<Integer> rates = new ArrayList<>();
+        for (int divisor : new int[]{4, 2, 1}) {
+            int rate = Math.round(display.refreshRate / divisor);
+            if (rate >= 24 && !rates.contains(rate)) rates.add(rate);
+        }
+        int[] result = new int[rates.size()];
+        for (int i = 0; i < result.length; i++) result[i] = rates.get(i);
+        return result;
+    }
+
+    private void applyFrameRateCap(int cap) {
+        int best = 1;
+        float bestDiff = Float.MAX_VALUE;
+        for (int divisor : new int[]{1, 2, 4}) {
+            float rate = display.refreshRate / divisor;
+            if (rate < 24 && divisor > 1) continue;
+            float diff = Math.abs(rate - cap);
+            if (diff < bestDiff) {
+                bestDiff = diff;
+                best = divisor;
+            }
+        }
+        frameRateTarget = Math.round(display.refreshRate / best);
+        visualizerView.setFrameDivisor(best);
+        quality.setTargetFps(display.refreshRate / best);
+    }
+
+    private int meshLevel() {
+        int level = prefs.getInt(PREF_MESH_LEVEL, profile.defaultMeshLevel());
+        return Math.max(0, Math.min(level, DeviceProfile.MESH_SIZES.length - 1));
+    }
+
+    private int transitionSeconds() {
+        return Math.min(MAX_TRANSITION, prefs.getInt(PREF_TRANSITION_DURATION, profile.defaultTransitionSeconds()));
+    }
+
+    private static String heightLabel(int height) {
+        if (height == 2160) return "4K";
+        if (height == 1440) return "1440p";
+        return height + "p";
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // Menus
+    // ---------------------------------------------------------------------------------------
+
+    private void initMenus() {
+        mainMenu = findViewById(R.id.overlay_menu);
+        advancedMenu = findViewById(R.id.advanced_menu);
         presetName = findViewById(R.id.preset_name);
         presetMeta = findViewById(R.id.preset_meta);
         statusLine = findViewById(R.id.status_line);
+        diagnostics = findViewById(R.id.diagnostics);
         nowPlaying = findViewById(R.id.now_playing);
         nowPlayingText = findViewById(R.id.now_playing_text);
 
         TextView versionInfo = findViewById(R.id.version_info);
-        versionInfo.setText("v" + appVersion() + "  ·  projectM " + ProjectMJNI.getVersion()
-                + "  ·  " + profile.tier.name().toLowerCase(Locale.US) + " device");
+        versionInfo.setText("v" + appVersion() + "  ·  projectM " + ProjectMJNI.getVersion());
 
         findViewById(R.id.prev_preset_button).setOnClickListener(v -> ProjectMJNI.previousPreset(true));
         findViewById(R.id.random_preset_button).setOnClickListener(v -> ProjectMJNI.randomPreset(true));
@@ -154,36 +243,75 @@ public class MainActivity extends Activity {
         transitions[0] = "Instant";
         for (int i = 1; i <= MAX_TRANSITION; i++) transitions[i] = i + " s";
         OptionRow transition = findViewById(R.id.row_transition);
-        transition.setup("Transition", transitions,
-                Math.min(MAX_TRANSITION, prefs.getInt(PREF_TRANSITION_DURATION, 7)), false, index -> {
-                    ProjectMJNI.setSoftCutDuration(index);
-                    prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
-                });
-
-        OptionRow resolution = findViewById(R.id.row_resolution);
-        resolution.setup("Resolution", RESOLUTION_LABELS, savedResolution(), false, index -> {
-            prefs.edit().putInt(PREF_RESOLUTION, index).apply();
-            visualizerView.setRenderHeight(renderHeightFor(index));
+        transition.setup("Transition", transitions, transitionSeconds(), false, index -> {
+            ProjectMJNI.setSoftCutDuration(index);
+            quality.setTransitionSeconds(index);
+            prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
         });
 
-        int refresh = Math.round(visualizerView.displayRefreshRate());
+        // Resolution: Auto + fixed heights up to the panel's physical resolution.
+        int[] heights = QualityController.manualHeights(display);
+        String[] resolutionLabels = new String[heights.length + 1];
+        resolutionLabels[0] = "Auto";
+        int selectedResolution = 0;
+        int savedHeight = prefs.getInt(PREF_RENDER_HEIGHT, 0);
+        for (int i = 0; i < heights.length; i++) {
+            resolutionLabels[i + 1] = heightLabel(heights[i]);
+            if (heights[i] == savedHeight) selectedResolution = i + 1;
+        }
+        OptionRow resolution = findViewById(R.id.row_resolution);
+        resolution.setup("Resolution", resolutionLabels, selectedResolution, false, index -> {
+            int height = index == 0 ? 0 : heights[index - 1];
+            prefs.edit().putInt(PREF_RENDER_HEIGHT, height).apply();
+            quality.setMode(height, prefs.getInt(PREF_AUTO_HEIGHT, 0));
+        });
+
+        int[] caps = frameRateOptions();
+        String[] capLabels = new String[caps.length];
+        int selectedCap = caps.length - 1;
+        for (int i = 0; i < caps.length; i++) {
+            capLabels[i] = caps[i] + " fps";
+            if (caps[i] == frameRateTarget) selectedCap = i;
+        }
         OptionRow frameRate = findViewById(R.id.row_frame_rate);
-        frameRate.setup("Frame rate",
-                new String[]{Math.round(refresh / 2f) + " fps  (smooth)", refresh + " fps  (max)"},
-                prefs.getBoolean(PREF_HALF_FRAME_RATE, profile.defaultHalfFrameRate()) ? 0 : 1, true,
-                index -> {
-                    boolean half = index == 0;
-                    visualizerView.setHalfFrameRate(half);
-                    prefs.edit().putBoolean(PREF_HALF_FRAME_RATE, half).apply();
+        frameRate.setup("Frame rate", capLabels, selectedCap, false, index -> {
+            prefs.edit().putInt(PREF_FRAME_RATE_CAP, caps[index]).apply();
+            applyFrameRateCap(caps[index]);
+        });
+
+        OptionRow advanced = findViewById(R.id.row_advanced);
+        advanced.setupAction("Advanced", "›", () -> showMenu(Menu.ADVANCED));
+
+        // Advanced panel
+        OptionRow detail = findViewById(R.id.row_detail);
+        detail.setup("Detail", DeviceProfile.MESH_LABELS, meshLevel(), false, index -> {
+            int[] size = DeviceProfile.MESH_SIZES[index];
+            ProjectMJNI.setMeshSize(size[0], size[1]);
+            prefs.edit().putInt(PREF_MESH_LEVEL, index).apply();
+        });
+
+        OptionRow skipSlow = findViewById(R.id.row_skip_slow);
+        skipSlow.setup("Skip slow presets", new String[]{"Off", "On"},
+                prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()) ? 1 : 0, true, index -> {
+                    quality.setSkipSlowPresets(index == 1);
+                    prefs.edit().putBoolean(PREF_SKIP_SLOW, index == 1).apply();
+                });
+
+        OptionRow blank = findViewById(R.id.row_blank_detection);
+        blank.setup("Skip blank presets", new String[]{"Off", "On"},
+                prefs.getBoolean(PREF_BLANK_DETECTION, true) ? 1 : 0, true, index -> {
+                    ProjectMJNI.setBlankDetection(index == 1);
+                    prefs.edit().putBoolean(PREF_BLANK_DETECTION, index == 1).apply();
                 });
 
         skippedRow = findViewById(R.id.row_skipped);
-        skippedRow.setupAction("Skipped presets", "0", () -> {
+        skippedRow.setupAction("Skipped presets", "None", () -> {
             ProjectMJNI.resetSkippedPresets();
             refreshStatus();
         });
 
-        overlayMenu.setVisibility(View.GONE);
+        mainMenu.setVisibility(View.GONE);
+        advancedMenu.setVisibility(View.GONE);
     }
 
     private static int nearestIndex(int[] values, int target) {
@@ -194,31 +322,46 @@ public class MainActivity extends Activity {
         return best;
     }
 
-    private void setMenuVisible(boolean visible) {
+    /** Shows one panel (or none). The advanced panel slides in over the main panel. */
+    private void showMenu(Menu target) {
         handler.removeCallbacks(hideMenu);
-        if (visible == menuVisible) return;
-        menuVisible = visible;
-        if (visible) {
-            fade(nowPlaying, false);
-            refreshStatus();
-            overlayMenu.setTranslationX(dp(24));
-            overlayMenu.animate().translationX(0).setDuration(FADE_MS).start();
-            fade(overlayMenu, true);
-            findViewById(R.id.random_preset_button).requestFocus();
-            handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
-        } else {
-            overlayMenu.animate().translationX(dp(24)).setDuration(FADE_MS).start();
-            fade(overlayMenu, false);
+        if (target == menu) return;
+        Menu previous = menu;
+        menu = target;
+
+        if (target == Menu.NONE) {
+            slide(previous == Menu.ADVANCED ? advancedMenu : mainMenu, false);
+            return;
         }
+        fade(nowPlaying, false);
+        refreshStatus();
+        if (target == Menu.MAIN) {
+            if (previous == Menu.ADVANCED) {
+                slide(advancedMenu, false);
+                fade(mainMenu, true);
+                findViewById(R.id.row_advanced).requestFocus();
+            } else {
+                slide(mainMenu, true);
+                findViewById(R.id.random_preset_button).requestFocus();
+            }
+        } else {
+            fade(mainMenu, false);
+            slide(advancedMenu, true);
+            findViewById(R.id.row_detail).requestFocus();
+        }
+        handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
     }
 
-    private boolean isMenuVisible() {
-        return menuVisible;
+    private void slide(View view, boolean in) {
+        float offset = dp(24);
+        if (in) view.setTranslationX(offset);
+        view.animate().translationX(in ? 0 : offset).setDuration(FADE_MS).start();
+        fade(view, in);
     }
 
     /** Alpha fade that ends with GONE, so hidden views cost nothing to compose. */
     private static void fade(View view, boolean in) {
-        view.animate().cancel();
+        view.animate().cancel();  // a cancelled animation does not run its end action
         if (in) {
             view.setVisibility(View.VISIBLE);
             view.animate().alpha(1f).setDuration(FADE_MS).withLayer().start();
@@ -241,17 +384,28 @@ public class MainActivity extends Activity {
             if (!currentPreset.isEmpty()) {
                 setText(presetName, currentPreset);
                 presetName.setSelected(true);  // start marquee for long names
-                if (!isMenuVisible()) showNowPlaying(currentPreset);
+                if (menu == Menu.NONE) showNowPlaying(currentPreset);
             }
         }
-        if (!isMenuVisible()) return;
+        if (menu == Menu.NONE) return;
 
         int skipped = ProjectMJNI.getSkippedCount();
-        setText(presetMeta, numberFormat.format(ProjectMJNI.getPresetCount()) + " presets in rotation"
-                + (skipped > 0 ? "  ·  " + numberFormat.format(skipped) + " skipped" : ""));
-        skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
-        setText(statusLine, String.format(Locale.US, "%5.1f fps  ·  %dx%d",
-                renderer.getCurrentFps(), renderer.getSurfaceWidth(), renderer.getSurfaceHeight()));
+        String mode = quality.isAuto() ? "auto" : "fixed";
+        if (menu == Menu.MAIN) {
+            setText(presetMeta, numberFormat.format(ProjectMJNI.getPresetCount()) + " presets in rotation"
+                    + (skipped > 0 ? "  ·  " + numberFormat.format(skipped) + " skipped" : ""));
+            setText(statusLine, String.format(Locale.US, "%5.1f fps  ·  %s %s",
+                    renderer.getCurrentFps(), heightLabel(quality.currentHeight()), mode));
+        } else {
+            skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
+            setText(diagnostics, String.format(Locale.US,
+                    "Render  %dx%d (%s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nDevice  %s tier, %d MB RAM",
+                    renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
+                    display.physicalWidth, display.physicalHeight, display.refreshRate,
+                    display.uiWidth, display.uiHeight,
+                    renderer.getCurrentFps(), frameRateTarget,
+                    profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb));
+        }
     }
 
     private void showNowPlaying(String name) {
@@ -276,32 +430,12 @@ public class MainActivity extends Activity {
     }
 
     // ---------------------------------------------------------------------------------------
-    // Resolution
-    // ---------------------------------------------------------------------------------------
-
-    private int savedResolution() {
-        int fallback = profile.defaultRenderHeight() >= 1080 ? RES_1080P : RES_720P;
-        int saved = prefs.getInt(PREF_RESOLUTION, fallback);
-        return saved >= RES_480P && saved <= RES_NATIVE ? saved : fallback;
-    }
-
-    private static int renderHeightFor(int resolution) {
-        switch (resolution) {
-            case RES_480P: return 480;
-            case RES_1080P: return 1080;
-            case RES_NATIVE: return 0;
-            case RES_720P:
-            default: return 720;
-        }
-    }
-
-    // ---------------------------------------------------------------------------------------
     // Remote control
     // ---------------------------------------------------------------------------------------
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if (isMenuVisible()) {  // any interaction keeps the menu open
+        if (menu != Menu.NONE) {  // any interaction keeps the menu open
             handler.removeCallbacks(hideMenu);
             handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
         }
@@ -310,12 +444,16 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (isMenuVisible()) {
-            if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU) {
-                setMenuVisible(false);
+        if (menu != Menu.NONE) {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                showMenu(menu == Menu.ADVANCED ? Menu.MAIN : Menu.NONE);
                 return true;
             }
-            return super.onKeyDown(keyCode, event);  // focus navigation inside the menu
+            if (keyCode == KeyEvent.KEYCODE_MENU) {
+                showMenu(Menu.NONE);
+                return true;
+            }
+            return super.onKeyDown(keyCode, event);  // focus navigation inside the panel
         }
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_RIGHT:
@@ -336,7 +474,7 @@ public class MainActivity extends Activity {
             case KeyEvent.KEYCODE_DPAD_CENTER:
             case KeyEvent.KEYCODE_ENTER:
             case KeyEvent.KEYCODE_MENU:
-                setMenuVisible(true);
+                showMenu(Menu.MAIN);
                 return true;
             default:
                 return super.onKeyDown(keyCode, event);

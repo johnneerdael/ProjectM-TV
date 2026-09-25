@@ -41,6 +41,14 @@ public final class ProjectMJNI {
     public static native void setSoftCutDuration(int seconds);
     public static native void setAutoChange(boolean enabled);
     public static native void setMeshSize(int width, int height);
+    /** Adds the current preset to the skip list and moves on (hard cut). */
+    public static native void skipCurrentPreset();
+    /** Enables skipping of presets that render nothing while music plays. */
+    public static native void setBlankDetection(boolean enabled);
+    /** Makes the next automatic preset switch a hard cut (used before resolution changes). */
+    public static native void setForceHardCut(boolean enabled);
+    /** Reads an Android system property ("" if unset or not readable). */
+    public static native String getSystemProperty(String name);
     public static native String getCurrentPresetName();
     /** Increments every time a new preset is shown. */
     public static native int getPresetChangeCounter();

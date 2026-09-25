@@ -86,6 +86,9 @@ jobs:
             echo "::warning::SIGNING_KEYSTORE_BASE64 is not set; APK is signed with a temporary debug key (see docs/RELEASING.md)."
           fi
 
+      - name: JVM unit tests
+        run: ./gradlew testReleaseUnitTest --no-daemon
+
       - name: Build release APK
         env:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}

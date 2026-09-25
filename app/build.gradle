@@ -42,6 +42,10 @@ android {
             signingConfig System.getenv("SIGNING_KEYSTORE_PATH") ? signingConfigs.release : signingConfigs.debug
         }
     }
+    testOptions {
+        // android.util.Log etc. return defaults in JVM unit tests
+        unitTests.returnDefaultValues = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -57,4 +61,5 @@ android {
 dependencies {
     // No AndroidX dependencies: the app only uses framework APIs, which keeps the APK small
     // and cold start fast on low-end TV boxes.
+    testImplementation 'junit:junit:4.13.2'
 }

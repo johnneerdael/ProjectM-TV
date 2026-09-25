@@ -114,7 +114,7 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
-            android:id="@+id/row_skipped"
+            android:id="@+id/row_advanced"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -154,6 +154,101 @@
             android:layout_marginEnd="12dp"
             android:layout_marginTop="8dp"
             android:text="↑↓ select   ‹ › change   BACK close" />
+    </LinearLayout>
+
+    <!-- Advanced panel: slides over the main panel; BACK returns -->
+    <LinearLayout
+        android:id="@+id/advanced_menu"
+        android:layout_width="@dimen/panel_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/safe_vertical"
+        android:layout_marginEnd="@dimen/safe_horizontal"
+        android:background="@drawable/bg_overlay_panel"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/Overlay.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Settings  ›  Advanced" />
+
+        <TextView
+            style="@style/Overlay.Meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:text="Performance and quality tuning" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/divider" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_skip_slow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_blank_detection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_skipped"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/divider" />
+
+        <!-- Diagnostics -->
+        <TextView
+            style="@style/Overlay.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="Diagnostics" />
+
+        <TextView
+            android:id="@+id/diagnostics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="monospace"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp" />
+
+        <TextView
+            style="@style/Overlay.Meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="10dp"
+            android:text="↑↓ select   ‹ › change   BACK return" />
     </LinearLayout>
 
     <!-- Now-playing pill, shown briefly when a preset starts -->

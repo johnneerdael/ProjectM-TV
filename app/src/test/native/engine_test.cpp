@@ -37,6 +37,9 @@ off_t AAsset_getLength(AAsset* a) { return a->data.size(); }
 void AAsset_close(AAsset* a) { delete a; }
 AAssetManager* AAssetManager_fromJava(JNIEnv*, jobject) { return nullptr; }
 int __android_log_print(int, const char* tag, const char* fmt, ...) { va_list ap; va_start(ap, fmt); vfprintf(stderr, fmt, ap); fputc('\n', stderr); va_end(ap); return 0; }
+int __system_property_get(const char* name, char* value) {
+  if (strcmp(name, "vendor.display-size") == 0) { strcpy(value, "3840x2160"); return 9; }
+  value[0] = 0; return 0; }
 // ---- fake GL ----
 unsigned char g_pixel = 0;
 void glViewport(GLint, GLint, GLsizei, GLsizei) {}
@@ -45,9 +48,11 @@ void glReadPixels(GLint, GLint, GLsizei w, GLsizei h, GLenum, GLenum, GLvoid* ou
 struct projectm {};
 static projectm_preset_switch_failed_event g_failCb; static projectm_preset_switch_requested_event g_reqCb;
 std::vector<std::string> g_loaded; bool g_locked = false; size_t g_pcmFed = 0;
+bool g_lastSmooth = false; int g_meshCalls = 0;
 projectm_handle projectm_create() { return new projectm; }
 void projectm_destroy(projectm_handle p) { delete p; }
-void projectm_load_preset_data(projectm_handle, const char* data, bool) {
+void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
+  g_lastSmooth = smooth;
   if (strstr(data, "BROKEN")) { g_failCb("", "compile error", nullptr); return; }
   g_loaded.push_back(data); }
 void projectm_set_preset_switch_requested_event_callback(projectm_handle, projectm_preset_switch_requested_event cb, void*) { g_reqCb = cb; }
@@ -57,7 +62,7 @@ void projectm_set_beat_sensitivity(projectm_handle, float) {}
 void projectm_set_preset_duration(projectm_handle, double) {}
 void projectm_set_soft_cut_duration(projectm_handle, double) {}
 void projectm_set_preset_locked(projectm_handle, bool l) { g_locked = l; }
-void projectm_set_mesh_size(projectm_handle, size_t, size_t) {}
+void projectm_set_mesh_size(projectm_handle, size_t, size_t) { ++g_meshCalls; }
 void projectm_set_window_size(projectm_handle, size_t, size_t) {}
 void projectm_set_fps(projectm_handle, int32_t) {}
 unsigned int projectm_pcm_get_max_samples() { return 576; }
@@ -110,9 +115,22 @@ int main(int argc, char** argv) {
   Java_com_example_projectm_visualizer_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
   CHECK(current() == a);
 
-  printf("projectM-requested auto switch\n");
+  printf("projectM-requested auto switch (smooth), and forced hard cut before a resize\n");
   std::string before = current(); g_reqCb(false, nullptr); frame();
   CHECK(current() != before);
+  CHECK(g_lastSmooth);
+  Java_com_example_projectm_visualizer_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
+  before = current(); g_reqCb(false, nullptr); frame();
+  CHECK(current() != before && !g_lastSmooth);
+  g_reqCb(false, nullptr); frame();
+  CHECK(g_lastSmooth);  // flag is one-shot
+
+  printf("mesh size only re-applied when it changes\n");
+  int meshCalls = g_meshCalls;
+  Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 5); frame();
+  CHECK(g_meshCalls == meshCalls);
+  Java_com_example_projectm_visualizer_ProjectMJNI_setMeshSize(nullptr, nullptr, 64, 48); frame();
+  CHECK(g_meshCalls == meshCalls + 1);
 
   printf("broken presets are skipped and persisted, playback continues\n");
   for (int i = 0; i < 40; ++i) { Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame(); }
@@ -145,6 +163,17 @@ int main(int argc, char** argv) {
   for (int i = 0; i < 300 && current() == black; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() != black);
   CHECK(g_library.SkippedCount() == skippedBefore + 1);
+
+  printf("skip current preset (too slow) and blank-detection toggle\n");
+  g_pixel = 200; int beforeSkip = g_library.SkippedCount(); std::string slow = current();
+  Java_com_example_projectm_visualizer_ProjectMJNI_skipCurrentPreset(nullptr, nullptr); frame();
+  CHECK(current() != slow && g_library.SkippedCount() == beforeSkip + 1);
+  Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, false);
+  g_pixel = 5; Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  std::string dim = current();
+  for (int i = 0; i < 300; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+  CHECK(current() == dim && g_library.SkippedCount() == beforeSkip + 1);
+  Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
 
   printf("reset skip list\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_resetSkippedPresets(nullptr, nullptr);

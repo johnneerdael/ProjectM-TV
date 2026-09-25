@@ -4,7 +4,7 @@
 
 | Trigger | Result |
 |---|---|
-| Any push or pull request | Native engine tests + release APK, downloadable from the workflow run (**Actions → run → Artifacts → `apk`**), named `projectM-TV-<version>-ci.<run>-<sha>.apk` |
+| Any push or pull request | Native engine tests, JVM unit tests + release APK, downloadable from the workflow run (**Actions → run → Artifacts → `apk`**), named `projectM-TV-<version>-ci.<run>-<sha>.apk` |
 | Push to `main` where `versionName` has no tag yet | Everything above, plus tag `v<versionName>` and a **GitHub Release** with `projectM-TV-<version>.apk`, using the top section of `RELEASE_NOTES.md` as the description |
 
 CI builds show their origin in the app menu, e.g. `v1.8-ci.42`.
