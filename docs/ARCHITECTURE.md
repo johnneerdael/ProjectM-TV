@@ -67,6 +67,7 @@ ProjectMApplication ── ProjectMJNI.init(assets, skipList) ──► native w
 MainActivity (UI thread)
   ├─ remote keys / menu ──► ProjectMJNI.next/previous/random/settings  (atomic, any thread)
   ├─ Visualizer (audio) ──► ProjectMJNI.addWaveform                    (mutex buffer)
+  │   or AudioCaptureService (media capture, Android 10+) ──► PcmConverter ──► addWaveform
   └─ VisualizerView.setRenderHeight ─► SurfaceHolder.setFixedSize (hardware scaler)
 
 VisualizerRenderer (GL thread) ─► onDrawFrame (native)
@@ -147,6 +148,7 @@ Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches t
 |---|---|---|
 | GL (GLSurfaceView) | `THREAD_PRIORITY_DISPLAY` | projectM render, preset loading, output measurement, transition overlay |
 | AudioCapture (HandlerThread) | `THREAD_PRIORITY_AUDIO` | `Visualizer` callbacks → `addWaveform` |
+| PlaybackCapture (media capture only) | `THREAD_PRIORITY_AUDIO` | `AudioRecord` reads (1024 frames) → `PcmConverter` → `addWaveform` |
 | Native worker | default | Preset indexing and prefetch |
 | UI | default | Overlay; status polled every 500 ms, text only updated when changed |
 
@@ -198,3 +200,16 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 2. Run `tools/tv-diagnostics.sh <tv-ip>:5555 --sweep` (see `docs/DIAGNOSTICS.md`) for startup, FPS, resolution and composition data.
 3. Move Gradle to a stable release.
 4. ~~Add CI~~ Done: `.github/workflows/android.yml` (see `docs/RELEASING.md`).
+
+## Audio sources
+
+**Why the Visualizer can hear nothing.** On an NVIDIA SHIELD (Android 11) with HDMI eARC and Dolby output, media is mixed on an output of the Dolby "MSD" module (`AUDIO_DEVICE_OUT_BUS`), encoded to E-AC3 and bridged to HDMI. Android picks the output for session-0 effects in `AudioPolicyManager::selectOutputForMusicEffects()` from the outputs of the device media would normally use (HDMI), not the MSD outputs. No active output qualifies, so it falls back to the idle primary output, and the Visualizer receives silence. The 1.9 diagnostics show exactly this: the Visualizer (effect 51) sits on `AudioOut_D` with 0 tracks while SoundCloud plays on `AudioOut_1D`. The selection code is unchanged in Android 14 (see the [Android 11](https://raw.githubusercontent.com/LineageOS/android_frameworks_av/lineage-18.1/services/audiopolicy/managerdefault/AudioPolicyManager.cpp) and [Android 14](https://raw.githubusercontent.com/LineageOS/android_frameworks_av/lineage-21.0/services/audiopolicy/managerdefault/AudioPolicyManager.cpp) sources, LineageOS mirror).
+
+**Media capture.** Playback capture copies a matching track's audio before the Dolby module, independently of which output Android chose (`AudioPolicyMix.cpp`: a loop-back-and-render mix is a secondary output of the track). `AudioCaptureService`:
+- matches `USAGE_MEDIA` only, so notification, system and assistant sounds never reach the visuals;
+- runs as a foreground service of type `mediaProjection` and starts foreground before it creates the projection (required on Android 14);
+- reads 16-bit stereo at 48 kHz in blocks of 1024 frames. `PcmConverter` sums the channels and scales each block so its peak reaches 0.99 of full range, as the Visualizer's normalized mode does (`EffectVisualizer.cpp`). Presets should therefore react the same to either source.
+
+Only one source feeds the engine: the Visualizer is released while capture runs and recreated when it ends. The consent result can't be stored for later, so the app asks again at every launch. Declining it, or a device without the consent dialog, switches the setting back to *Standard*.
+
+**Limits.** Apps can opt out of capture (`setAllowedCapturePolicy`, or targeting Android 9 or lower without opting in), and audio that an app sends to the TV already Dolby-encoded is never mixed, so neither source can see it.

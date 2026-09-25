@@ -1,3 +1,14 @@
+# projectM for Android TV 1.9.2
+
+## Added
+- **New audio source: Media capture** (*Advanced › Audio source*, Android 10 and later). On a SHIELD with Dolby output over HDMI eARC, the standard source heard nothing: Android attaches it to an audio output that carries no music. Media capture records what media apps play (SoundCloud, Spotify, …) and leaves out notification and system sounds.
+  - Android shows its screen-cast consent when you pick it, and again at every launch. Declining switches back to *Standard*.
+  - A notification shows while it runs, as Android requires.
+  - *Advanced › Diagnostics* shows which source is in use; `tools/tv-diagnostics.sh` reports it in the summary.
+  - Apps that block capture, and audio an app sends to the TV already Dolby-encoded, can't be visualized by either source.
+
+---
+
 # projectM for Android TV 1.9.1
 
 A measuring release: it finds out which presets cause memory peaks when they load.

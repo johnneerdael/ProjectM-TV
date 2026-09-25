@@ -374,6 +374,7 @@ layer_excerpt() {
     echo "- Audio level (RMS 0-1, min / avg / max): $(grep -o 'audio=[0-9.]*' "$A" | sed 's/audio=//' | awk '
         { s += $1; n++; if (min == "" || $1 < min) min = $1; if ($1 > max) max = $1 }
         END { if (n) printf "%.3f / %.3f / %.3f", min, s / n, max; else print "n/a" }')  (≈0 means the TV delivers no audio: most presets then look dim)"
+    echo "- Audio source: $(grep -h -o 'Audio source: .*' "$A" | tail -1 | sed 's/^Audio source: //' | grep . || echo 'standard (Visualizer)')"
     echo "- Render sizes seen: $(grep -o 'surface=[0-9]*x[0-9]*' "$A" | sed 's/surface=//' | sort | uniq -c | awk '{printf "%s (%s samples)  ", $2, $1}')"
     echo "- SurfaceFlinger FPS samples (every 10 s):${LATENCY_SAMPLES}"
     echo "- Resolution decisions:"
