@@ -826,30 +826,66 @@ long ResidentMemoryKb() {
     return resident < 0 ? -1 : resident * (sysconf(_SC_PAGESIZE) / 1024);
 }
 
-// Size of a preset's warp and composite shader code (bytes, without // comments) and its number
-// of for-loops: the suspected drivers of GPU compile memory, logged next to the measured memory.
-void ShaderStats(const std::string& preset, size_t& bytes, int& loops) {
-    bytes = 0;
-    loops = 0;
+// A preset's warp and composite shader code as tools/gen-preset-index.py reads it: the "warp_N=" and
+// "comp_N=" lines without leading backticks, joined with newlines, /* */ and then // comments removed.
+std::string ShaderCode(const std::string& preset) {
+    std::string code;
+    bool first = true;
     size_t pos = 0;
     while (pos < preset.size()) {
         size_t end = preset.find('\n', pos);
         if (end == std::string::npos) end = preset.size();
+        size_t lineEnd = end > pos && preset[end - 1] == '\r' ? end - 1 : end;
         if (preset.compare(pos, 5, "warp_") == 0 || preset.compare(pos, 5, "comp_") == 0) {
-            size_t eq = preset.find('=', pos);
-            if (eq != std::string::npos && eq < end) {
-                std::string code = preset.substr(eq + 1, end - eq - 1);
-                size_t comment = code.find("//");
-                if (comment != std::string::npos) code.resize(comment);
-                bytes += code.size();
-                for (size_t f = code.find("for"); f != std::string::npos; f = code.find("for", f + 3)) {
-                    size_t after = code.find_first_not_of(" \t", f + 3);
-                    bool word = f == 0 || !(isalnum(static_cast<unsigned char>(code[f - 1])) || code[f - 1] == '_');
-                    if (word && after != std::string::npos && code[after] == '(') ++loops;
-                }
+            size_t eq = pos + 5;
+            while (eq < lineEnd && isdigit(static_cast<unsigned char>(preset[eq]))) ++eq;
+            if (eq > pos + 5 && eq < lineEnd && preset[eq] == '=') {
+                size_t start = eq + 1;
+                while (start < lineEnd && preset[start] == '`') ++start;
+                if (!first) code += '\n';
+                code.append(preset, start, lineEnd - start);
+                first = false;
             }
         }
         pos = end + 1;
+    }
+    std::string withoutBlocks;
+    for (size_t i = 0; i < code.size();) {
+        size_t open = code.find("/*", i);
+        size_t close = open == std::string::npos ? open : code.find("*/", open + 2);
+        if (close == std::string::npos) {  // no (complete) block comment left
+            withoutBlocks.append(code, i, std::string::npos);
+            break;
+        }
+        withoutBlocks.append(code, i, open - i);
+        i = close + 2;
+    }
+    std::string result;
+    for (size_t i = 0; i < withoutBlocks.size();) {
+        size_t comment = withoutBlocks.find("//", i);
+        if (comment == std::string::npos) {
+            result.append(withoutBlocks, i, std::string::npos);
+            break;
+        }
+        result.append(withoutBlocks, i, comment - i);
+        i = withoutBlocks.find('\n', comment);
+        if (i == std::string::npos) break;
+    }
+    return result;
+}
+
+// Size of a preset's warp and composite shader code (bytes, without comments) and its number of
+// for-loops: the suspected drivers of GPU compile memory, logged next to the measured memory.
+// Counted like tools/gen-preset-index.py, so the log matches the weights in presets.idx.
+void ShaderStats(const std::string& preset, size_t& bytes, int& loops) {
+    std::string code = ShaderCode(preset);
+    bytes = code.size();
+    loops = 0;
+    for (size_t f = code.find("for"); f != std::string::npos; f = code.find("for", f + 3)) {
+        size_t after = f + 3;
+        while (after < code.size() && isspace(static_cast<unsigned char>(code[after]))) ++after;
+        bool word = f == 0 || !(isalnum(static_cast<unsigned char>(code[f - 1])) || code[f - 1] == '_');
+        if (word && after < code.size() && code[after] == '(') ++loops;
     }
 }
 

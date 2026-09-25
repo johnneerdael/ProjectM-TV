@@ -35,6 +35,7 @@ COMPLEX_SHADER_MB = 32        # allowance for driver compile memory (to be calib
 SHADER_LINE = re.compile(r"^(warp_|comp_)\d+=")
 BUILTIN = re.compile(r"^(main|blur[123]|noise_(lq|mq|hq)(_lite)?|noisevol_(lq|hq))$")
 RANDOM = re.compile(r"^rand\d\d")
+PREFIXES = ("fw_", "fc_", "pw_", "pc_", "wf_", "cf_", "wp_", "cp_")  # filter/wrap sampler prefixes
 
 
 def image_size(path):
@@ -76,13 +77,13 @@ def shader_code(text):
 
 def weight_mb(text, images):
     code = shader_code(text)
-    names = set(re.findall(r"sampler_([^ ;,\n\r)]+)", code)) | set(re.findall(r"texsize_([^ ;,.\n\r)]+)", code))
+    names = set(re.findall(r"sampler_(\w+)", code)) | set(re.findall(r"texsize_(\w+)", code))
     names.discard("state")
     total = 0
     randoms = set()
     for name in names:
         name = name.lower()
-        if len(name) > 3 and name[2] == "_":  # fw_, fc_, pw_, ... filter/wrap prefix
+        if len(name) > 3 and name[:3] in PREFIXES:
             name = name[3:]
         if BUILTIN.match(name):
             continue

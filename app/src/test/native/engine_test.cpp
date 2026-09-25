@@ -373,6 +373,10 @@ int main(int argc, char** argv) {
     ShaderStats("warp_1=`for (int i=0;i<3;i++) x+=1; // for(\ncomp_1=`y = tex2D(a,b); for(;;){}\nper_frame_1=for(\n",
                 bytes, loops);
     CHECK(loops == 2 && bytes > 40 && bytes < 90);  // comments and non-shader lines ignored
+    ShaderStats("warp_1=/*\r\nwarp_2=for(;;) {}\r\nwarp_3=*/\r\n", bytes, loops);
+    CHECK(loops == 0 && bytes == 0);  // a loop inside a block comment spanning lines
+    ShaderStats("warp_1=`a;\r\nwarpx=for(\ncomp_2=`for\ncomp_3=(;;)\n", bytes, loops);
+    CHECK(loops == 1 && bytes == std::string("a;\nfor\n(;;)").size());  // same rules as gen-preset-index.py
   }
 
   printf("audio level getter\n");
