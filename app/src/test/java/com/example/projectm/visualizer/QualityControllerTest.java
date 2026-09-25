@@ -48,6 +48,30 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void savedFixedHeightIsValidatedAgainstPanel() throws Exception {
+        assertEquals(2160, QualityController.validFixedHeight(display(3840, 2160), 2160));
+        assertEquals("4K on a 1080p panel falls back to Auto",
+                0, QualityController.validFixedHeight(display(1920, 1080), 2160));
+        assertEquals(0, QualityController.validFixedHeight(display(1920, 1080), 480));
+        assertEquals(1080, QualityController.validFixedHeight(display(1920, 1080), 1080));
+    }
+
+    @Test
+    public void changingTargetFpsDropsQueuedChange() throws Exception {
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), h -> applied = h);
+        q.setTargetFps(60);
+        q.setMode(0, 0);
+        settle(q);
+        samples(q, 3, 40);
+        assertTrue(q.hasPendingChange());
+        q.setTargetFps(30);
+        assertFalse(q.hasPendingChange());
+        q.onPresetChanged();
+        assertEquals(1440, applied);
+    }
+
+    @Test
     public void autoChangesOnlyAtPresetSwitchAndBacksOff() throws Exception {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), h -> applied = h);

@@ -84,6 +84,15 @@ public final class QualityController {
         return result;
     }
 
+    /**
+     * Returns {@code savedHeight} if it is still a valid fixed level for this panel, otherwise 0
+     * (automatic). A saved 2160 must not be used after the device moved to a 1080p panel.
+     */
+    public static int validFixedHeight(DisplayInfo display, int savedHeight) {
+        for (int h : manualHeights(display)) if (h == savedHeight) return savedHeight;
+        return 0;
+    }
+
     /** @param height 0 for automatic, otherwise a fixed render height. */
     public void setMode(int height, int lastAutoHeight) {
         auto = height <= 0;
@@ -96,6 +105,7 @@ public final class QualityController {
 
     public void setTargetFps(float fps) {
         targetFps = fps;
+        pending = -1;  // a queued change was computed against the old target
         resetCounters(SETTLE_MS);
     }
 
