@@ -9,7 +9,7 @@ A preset fails when it:
 
 Usage:
   tools/check-presets.py            report failing presets, exit 1 if any (used by CI)
-  tools/check-presets.py --remove   delete failing presets (then run tools/gen-preset-index.sh)
+  tools/check-presets.py --remove   delete failing presets (then run tools/gen-preset-index.py)
 """
 import os
 import re
@@ -86,7 +86,7 @@ def main():
     if leftover:
         print("excluded textures still bundled: " + ", ".join(leftover))
     if remove:
-        print("Removed %d presets. Now run tools/gen-preset-index.sh" % len(failing))
+        print("Removed %d presets. Now run tools/gen-preset-index.py" % len(failing))
         return 0
     print("%d presets fail the checks" % len(failing) if failing else "All presets pass the checks")
     return 1 if failing or leftover else 0

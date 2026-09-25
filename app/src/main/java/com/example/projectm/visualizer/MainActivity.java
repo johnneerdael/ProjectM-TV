@@ -42,7 +42,6 @@ public class MainActivity extends Activity {
     // New key in 1.9: skipping black presets became opt-in (dull output was often missing textures).
     private static final String PREF_BLANK_DETECTION = "blank_detection_v2";
     private static final String PREF_TRANSITION_MODE = "transition_mode";
-    private static final String PREF_MEMORY_LIMIT = "memory_limit";
 
     private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
     private static final int MAX_TRANSITION = 10;
@@ -57,6 +56,7 @@ public class MainActivity extends Activity {
     private QualityController quality;
     private int frameRateTarget;
     private float targetFps = 60f;
+    private int switchHeight = -1;  // last height sent for the next automatic preset
 
     private VisualizerView visualizerView;
     private VisualizerRenderer renderer;
@@ -133,7 +133,12 @@ public class MainActivity extends Activity {
 
             @Override
             public void onPresetChanged() {
-                handler.post(() -> quality.onPresetChanged());
+                handler.post(MainActivity.this::onPresetChanged);
+            }
+
+            @Override
+            public void onResizeRequested(int height) {
+                handler.post(() -> setRenderHeight(height));
             }
         });
         createQualityController();
@@ -156,22 +161,24 @@ public class MainActivity extends Activity {
     // Quality: resolution and frame rate
     // ---------------------------------------------------------------------------------------
 
-    /** (Re)creates dynamic resolution for the current memory limit. */
     private void createQualityController() {
-        int limit = memoryLimit();
-        // tools/tv-diagnostics.sh reads the latest of these lines to know the fixed levels offered.
-        Log.i(TAG, "Memory limit: " + (limit > 0 ? "render height up to " + limit : "off")
-                + " (RAM " + profile.totalRamMb + " MB)");
-        quality = new QualityController(display, profile, limit, this::applyRenderHeight);
+        quality = new QualityController(display, profile, this::memoryHeadroom, this::applyRenderHeight);
         quality.setTransitionSeconds(transitionSeconds());
         quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
         quality.setTargetFps(targetFps);
         quality.setMode(savedRenderHeight(), prefs.getInt(PREF_AUTO_HEIGHT, 0));
     }
 
-    /** Highest render height allowed for memory reasons, 0 for none. */
-    private int memoryLimit() {
-        return prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? profile.memorySafeHeight() : 0;
+    /**
+     * Memory Android can hand out before it starts killing apps: available memory above the
+     * low-memory threshold (0 while the system already reports low memory).
+     */
+    private long memoryHeadroom() {
+        android.app.ActivityManager am = (android.app.ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        if (am == null) return -1;
+        android.app.ActivityManager.MemoryInfo info = new android.app.ActivityManager.MemoryInfo();
+        am.getMemoryInfo(info);
+        return info.lowMemory ? 0 : Math.max(0, info.availMem - info.threshold);
     }
 
     @Override
@@ -182,12 +189,48 @@ public class MainActivity extends Activity {
             quality.onMemoryPressure(level);
             // The lower resolution applies at the next preset switch, which must then be a hard
             // cut; don't wait for the next FPS sample to arm it.
-            if (quality.hasPendingChange()) ProjectMJNI.setForceHardCut(true);
+            updateSwitchHeight();
         }
+    }
+
+    /** Resizes the render surface; the remembered auto level is not touched. */
+    private void setRenderHeight(int height) {
+        visualizerView.setRenderSize(display.widthForHeight(height), height);
+        quality.setShownHeight(height);
+    }
+
+    private void onPresetChanged() {
+        quality.onPresetChanged();
+        // Normally the engine resized before loading this preset. If it could not (a remote
+        // control switch, or the resize did not arrive in time), apply the height now.
+        int expected = switchHeight > 0 ? switchHeight : 0;
+        if (quality.isAuto() && expected > 0 && expected != renderer.getSurfaceHeight()) setRenderHeight(expected);
+        updateSwitchHeight();
+    }
+
+    /**
+     * Tells the engine the render height for the preset its next automatic switch loads: the
+     * auto level, or lower if that preset is heavy (weight from presets.idx) and free memory is
+     * short. The engine resizes before loading it.
+     */
+    private void updateSwitchHeight() {
+        int weight = ProjectMJNI.getUpcomingPresetWeight();
+        int height = quality.heightForNextPreset(weight);
+        if (height != switchHeight) {
+            switchHeight = height;
+            ProjectMJNI.setSwitchHeight(height);
+            if (height > 0 && quality.isAuto() && height < quality.currentHeight()) {
+                Log.i(TAG, "Next preset (weight " + weight + " MB) at " + height + " instead of "
+                        + quality.currentHeight() + ": not enough free memory");
+            }
+        }
+        // If the resize cannot happen before the switch, at least make it a hard cut.
+        ProjectMJNI.setForceHardCut(height > 0 && height != renderer.getSurfaceHeight());
     }
 
     private void applyRenderHeight(int height) {
         visualizerView.setRenderSize(display.widthForHeight(height), height);
+        if (quality != null) quality.setShownHeight(height);
         ProjectMJNI.setForceHardCut(false);
         if (quality != null && quality.isAuto()) prefs.edit().putInt(PREF_AUTO_HEIGHT, height).apply();
     }
@@ -197,11 +240,10 @@ public class MainActivity extends Activity {
         if (action == QualityController.ACTION_SKIP) {
             ProjectMJNI.skipCurrentPreset();
         } else if (action == QualityController.ACTION_SWITCH) {
+            // Severe slowdown: switch now (a remote-style hard cut) and apply the lower level.
             ProjectMJNI.nextPreset(true);
-        } else if (quality.hasPendingChange()) {
-            // The resolution changes at the next preset switch; make that switch a hard cut.
-            ProjectMJNI.setForceHardCut(true);
         }
+        updateSwitchHeight();
     }
 
     /** Frame-rate options: the refresh rate divided by 4, 2 or 1 (at least 24 fps), ascending. */
@@ -237,7 +279,7 @@ public class MainActivity extends Activity {
 
     /** Saved fixed render height if valid for the current panel, else 0 (automatic). */
     private int savedRenderHeight() {
-        return QualityController.validFixedHeight(display, memoryLimit(), prefs.getInt(PREF_RENDER_HEIGHT, 0));
+        return QualityController.validFixedHeight(display, prefs.getInt(PREF_RENDER_HEIGHT, 0));
     }
 
     private int meshLevel() {
@@ -337,15 +379,6 @@ public class MainActivity extends Activity {
                     prefs.edit().putInt(PREF_TRANSITION_MODE, index).apply();
                 });
 
-        OptionRow memoryLimit = findViewById(R.id.row_memory_limit);
-        int safeHeight = profile.memorySafeHeight();
-        memoryLimit.setup("Memory limit", new String[]{"Off", safeHeight > 0 ? "Up to " + heightLabel(safeHeight) : "On"},
-                prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? 1 : 0, true, index -> {
-                    prefs.edit().putBoolean(PREF_MEMORY_LIMIT, index == 1).apply();
-                    createQualityController();
-                    setupResolutionRow();
-                });
-
         OptionRow skipSlow = findViewById(R.id.row_skip_slow);
         skipSlow.setup("Skip slow presets", new String[]{"Off", "On"},
                 prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()) ? 1 : 0, true, index -> {
@@ -370,9 +403,9 @@ public class MainActivity extends Activity {
         advancedMenu.setVisibility(View.GONE);
     }
 
-    /** Resolution: Auto + fixed heights up to the panel resolution and the memory limit. */
+    /** Resolution: Auto + fixed heights up to the panel resolution. */
     private void setupResolutionRow() {
-        int[] heights = QualityController.manualHeights(display, memoryLimit());
+        int[] heights = QualityController.manualHeights(display);
         String[] resolutionLabels = new String[heights.length + 1];
         resolutionLabels[0] = "Auto";
         int selectedResolution = 0;
@@ -476,13 +509,13 @@ public class MainActivity extends Activity {
         } else {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
             setText(diagnostics, String.format(Locale.US,
-                    "Render  %dx%d (%s, limit %s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nBlend   %s%nAudio   %s%nDevice  %s tier, %d MB RAM",
+                    "Render  %dx%d (%s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nBlend   %s%nAudio   %s%nDevice  %s tier, %d MB RAM, %d MB free",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
-                    memoryLimit() > 0 ? heightLabel(memoryLimit()) : "none",
                     display.physicalWidth, display.physicalHeight, display.refreshRate,
                     display.uiWidth, display.uiHeight,
                     renderer.getCurrentFps(), frameRateTarget, transitionLabel(), audioLabel(),
-                    profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb));
+                    profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb,
+                    Math.max(0, memoryHeadroom()) >> 20));
         }
     }
 

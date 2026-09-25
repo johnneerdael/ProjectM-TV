@@ -1,3 +1,15 @@
+# projectM for Android TV 1.9.1
+
+## Changed
+- **No fixed resolution cap.** 1.9 capped resolution by the device's RAM (1260p on a 2 GB SHIELD) all the time. That was too blunt: the music app only got closed during short memory peaks, the first preset at startup or a preset switch at a high resolution, not while a preset was playing. All resolutions are available again, and the peaks are handled where they happen:
+  - **Auto checks free memory first.** It only raises the resolution, or starts at a high one, when Android has enough free memory for the bigger frame buffers plus a preset switch.
+  - **Short back-off.** When Android reports low memory, Auto drops one level at the next preset switch, stays there for 10 presets, then may climb again. 1.9 lowered it for the rest of the session.
+  - **Heavy presets are handled on their own.** Every preset has a memory weight worked out from its file: the images it loads and whether its shaders are very complex. About 390 of the 9,606 presets are heavy. When one of them comes up and free memory is short, only that preset is shown at a lower resolution. The app resizes before loading it, not after, so the old and new preset are never both in memory at the higher resolution. The next normal preset goes back up. All other presets are not affected.
+  - Lightweight transitions stay the default on low-memory devices, so two presets aren't held in memory for a whole transition.
+- *Advanced › Memory limit* is gone. *Advanced › Diagnostics* shows how much memory is free.
+
+---
+
 # projectM for Android TV 1.9
 
 This release fixes the problems found in on-device measurements on an NVIDIA SHIELD: music that stopped, stutters at preset switches, a slow start and dull presets.

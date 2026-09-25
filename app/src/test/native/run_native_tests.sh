@@ -24,9 +24,11 @@ echo "x" > "$WORK/assets/presets/preskipped.milk"
 echo junk > "$WORK/assets/presets/.DS_Store"
 echo junk > "$WORK/assets/presets/readme.txt"
 echo "preskipped.milk" > "$WORK/assets/skip.txt"
-# Prebuilt index as written by tools/gen-preset-index.sh, plus a CRLF line, a blank line and junk.
-(cd "$WORK/assets/presets" && ls -1) | grep -i '\.milk$' | LC_ALL=C sort > "$WORK/assets/presets.idx"
-printf 'crlf.milk\r\n\nreadme.txt\n' >> "$WORK/assets/presets.idx"
+# Prebuilt index as written by tools/gen-preset-index.py ("name<TAB>weight MB"), plus a line without
+# a weight, a CRLF line, a blank line and junk. "good 3.milk" is heavy.
+(cd "$WORK/assets/presets" && ls -1) | grep -i '\.milk$' | grep -v '^good [12]\.milk$' | LC_ALL=C sort \
+    | awk '{ print $0 "\t" ($0 == "good 3.milk" ? 40 : 0) }' > "$WORK/assets/presets.idx"
+printf 'good 1.milk\ngood 2.milk\t2\ncrlf.milk\t7\r\n\nreadme.txt\t9\n' >> "$WORK/assets/presets.idx"
 echo "preset crlf" > "$WORK/assets/presets/crlf.milk"
 # Second fixture without an index: the folder listing is used.
 mkdir -p "$WORK/noindex/presets"

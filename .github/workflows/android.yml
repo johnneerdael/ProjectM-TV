@@ -28,8 +28,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Check the preset index is up to date
-        run: tools/gen-preset-index.sh --check
+      - name: Check the preset index (names and memory weights) is up to date
+        run: tools/gen-preset-index.py --check
       - name: Check presets (audio-reactive, no excluded or missing textures)
         run: tools/check-presets.py
       - name: Install Mesa (headless OpenGL ES 3 for the transition overlay test)
