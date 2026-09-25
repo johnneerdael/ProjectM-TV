@@ -137,6 +137,11 @@ int main(int argc, char** argv) {
   CHECK(g_library.Ready());
   CHECK(g_library.ActiveCount() == 13);   // 14 .milk entries (incl. .MILK and a CRLF line), others ignored, 1 pre-skipped
 
+  printf("preset weights from presets.idx\n");
+  CHECK(g_library.Weight("good 3.milk") == 40 && g_library.Weight("good 2.milk") == 2);
+  CHECK(g_library.Weight("good 1.milk") == 0 && g_library.Weight("good 4.milk") == 0);
+  CHECK(g_library.Weight("crlf.milk") == 7);  // CRLF line
+
   printf("indexing falls back to listing the folder without presets.idx\n");
   { std::string root2 = argv[2]; static AAssetManager am2{root2}; PresetLibrary& other = *new PresetLibrary();
     other.Start(&am2, root2 + "/skip.txt", "");  // never destroyed, like the app's library
@@ -352,6 +357,26 @@ int main(int argc, char** argv) {
     printf("    %s\n", frozenLine.c_str());
     CHECK(frozenLine.find("flat=0/") != std::string::npos && frozenLine.find("still=0/") == std::string::npos);
     CHECK(frozenLine.find("change_pct_avg=0.0") != std::string::npos);
+  }
+
+  printf("LOAD lines carry size, weight, shader size/loops and the memory taken\n");
+  {
+    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    std::string load;
+    for (auto it = g_logLines.rbegin(); it != g_logLines.rend() && load.empty(); ++it)
+      if (it->rfind("LOAD preset=", 0) == 0) load = *it;
+    printf("    %s\n", load.c_str());
+    CHECK(load.find(" size=1280x720 weight_mb=") != std::string::npos);
+    CHECK(load.find(" shader_kb=") != std::string::npos && load.find(" loops=") != std::string::npos);
+    CHECK(load.find(" avail_drop_mb=") != std::string::npos && load.find(" rss_growth_mb=") != std::string::npos);
+    size_t bytes = 0; int loops = 0;
+    ShaderStats("warp_1=`for (int i=0;i<3;i++) x+=1; // for(\ncomp_1=`y = tex2D(a,b); for(;;){}\nper_frame_1=for(\n",
+                bytes, loops);
+    CHECK(loops == 2 && bytes > 40 && bytes < 90);  // comments and non-shader lines ignored
+    ShaderStats("warp_1=/*\r\nwarp_2=for(;;) {}\r\nwarp_3=*/\r\n", bytes, loops);
+    CHECK(loops == 0 && bytes == 0);  // a loop inside a block comment spanning lines
+    ShaderStats("warp_1=`a;\r\nwarpx=for(\ncomp_2=`for\ncomp_3=(;;)\n", bytes, loops);
+    CHECK(loops == 1 && bytes == std::string("a;\nfor\n(;;)").size());  // same rules as gen-preset-index.py
   }
 
   printf("audio level getter\n");

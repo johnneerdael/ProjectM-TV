@@ -65,6 +65,7 @@ public final class QualityController {
     private int presetCount;
     private int ceiling;                     // highest level auto may use (lowered by memory pressure)
     private int pressurePreset = -1;
+    private int beforePressure = -1;         // auto level when memory pressure first lowered the ceiling
 
     /** @param memoryLimit highest render height allowed for memory reasons, 0 for none. */
     public QualityController(DisplayInfo display, DeviceProfile profile, int memoryLimit, Listener listener) {
@@ -140,6 +141,14 @@ public final class QualityController {
         return auto ? levels[current] : fixedHeight;
     }
 
+    /**
+     * Automatic height to remember for the next launch: the level chosen for the frame rate, not
+     * the lower one memory pressure imposed on this session (that limit must not carry over).
+     */
+    public int autoHeightToRemember() {
+        return current == ceiling && beforePressure > current ? levels[beforePressure] : levels[current];
+    }
+
     /** True while a change waits for the next preset switch (which should then be a hard cut). */
     public boolean hasPendingChange() {
         return pending >= 0 && pending != current;
@@ -171,6 +180,7 @@ public final class QualityController {
         if (presetCount == pressurePreset) return;  // one step per preset: it applies at the switch
         pressurePreset = presetCount;
         int from = pending >= 0 ? Math.min(current, pending) : current;
+        if (beforePressure < 0) beforePressure = from;
         ceiling = Math.min(ceiling, Math.max(minIndex, from - 1));
         if (current > ceiling) pending = ceiling;
         Log.w(TAG, "Memory pressure (level " + level + "): limiting resolution to " + levels[ceiling]

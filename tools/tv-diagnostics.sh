@@ -403,6 +403,20 @@ layer_excerpt() {
         echo "- $mode transitions: fps incl. load $(printf '%s\n' "$T" | field_summary fps), blend fps $(printf '%s\n' "$T" | field_summary blend_fps), fps before $(printf '%s\n' "$T" | field_summary before_fps), frames > 50 ms $(printf '%s\n' "$T" | field_summary slow_frames)"
     done
     grep -h -o "TRANSITION auto:.*" "$A" | sed 's/^/- /' | head -3
+    echo "- Biggest memory drops during a load (avail_drop_mb, with weight_mb, shader_kb, loops):"
+    grep -h -o "LOAD preset=.*" "$A" | awk -F"avail_drop_mb=" 'NF > 1 { split($2, a, " "); print a[1] "\t" $0 }' \
+        | sort -rn | head -10 | cut -f2 | sed 's/^/  - /'
+    echo "- Average memory drop per load by shader size and by image weight:"
+    grep -h -o "LOAD preset=.*" "$A" | awk '
+        function v(k,   i) { for (i = 1; i <= NF; i++) if (index($i, k "=") == 1) return substr($i, length(k) + 2) + 0; return -1 }
+        v("avail_drop_mb") >= 0 {
+            d = v("avail_drop_mb"); kb = v("shader_kb"); w = v("weight_mb")
+            complex = kb >= 4.2 || v("loops") >= 2
+            s = complex ? "complex shader" : kb >= 2 ? "shader 2-4 KB" : "shader < 2 KB"
+            sum[s] += d; n[s]++
+            if (!complex) { g = w >= 5 ? "simple shader, images >= 5 MB" : "simple shader, images < 5 MB"; sum[g] += d; n[g]++ }
+        }
+        END { for (k in n) printf "  - %s: %.0f MB over %d loads\n", k, sum[k] / n[k], n[k] }' | sort
     echo "- Slowest loads:"
     grep -h -o "LOAD preset=.*" "$A" | awk -F"ms=" '{ split($2, a, " "); print a[1] "\t" $0 }' | sort -rn | head -5 \
         | cut -f2 | sed 's/^/  - /'

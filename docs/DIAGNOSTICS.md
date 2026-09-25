@@ -38,7 +38,11 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 - `VisualizerRenderer: STATS fps=59.8 surface=2560x1440`: every 5 s.
 - `projectM-Native: STARTUP first preset shown 212 ms after engine creation`.
 - `projectM-Native: Indexed 9794 presets (3 skipped) in 84 ms from presets.idx`.
-- `projectM-Native: LOAD preset='…' ms=412 smooth=0`: every preset switch. `ms` is the stall (parse, textures, shader compile) during which the picture freezes.
+- `projectM-Native: LOAD preset='…' ms=412 smooth=0 size=2240x1260 weight_mb=33 shader_kb=4.6 loops=2 avail_drop_mb=61 rss_growth_mb=12`: every preset switch.
+  - `ms` is the stall (parse, textures, shader compile) during which the picture freezes.
+  - `weight_mb` is the preset's estimated extra memory from `presets.idx`.
+  - `shader_kb` / `loops` are the size of its warp and composite shaders and their loop count.
+  - `avail_drop_mb` / `rss_growth_mb` are how much the system's available memory fell and the app grew during the load. They show which presets cause memory peaks at a switch.
 - `projectM-Native: TRANSITION preset='…' mode=lightweight load_ms=412 fps=48.2 blend_fps=58.9 before_fps=59.9 frames=… slow_frames=2 worst_ms=431`: when a transition ends. `fps` includes the load, `blend_fps` excludes it, `slow_frames` counts frames over 50 ms.
 - `projectM-Native: TRANSITION auto: classic blend ran at …`: Auto switched to lightweight transitions.
 - `projectM-Native: OUTPUT preset='…' samples=18 luma_range=3..9 change_pct_min=0.4 change_pct_avg=1.1 region_pct_min=2.0 luma_changes=… hue_only_changes=… flat=18/18 still=17/17 skipped=no`: what a preset showed while music played (see *Output measurements* below).

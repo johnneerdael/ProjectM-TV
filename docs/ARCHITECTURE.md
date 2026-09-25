@@ -87,8 +87,15 @@ VisualizerRenderer (GL thread) ─► onDrawFrame (native)
 
 `--remove` deletes the failing presets. In 1.9 that removed 116 non-reactive and 73 excluded-texture presets (one was both), leaving 9,606.
 
+### Preset memory (measuring)
+The frame buffers of a preset depend only on the resolution. What differs per preset, read from the `.milk` files by `tools/gen-preset-index.py` following projectM's own rules:
+- **Images.** projectM loads every image named by `sampler_<name>` or `texsize_<name>` in the warp/comp shaders, used or not, at width × height × 4 bytes (no mipmaps, no power-of-two rounding). Random-image slots count as the largest bundled image. Per preset: median 0.4 MB, max 12 MB.
+- **Complex shaders:** the top 1 % by size (≥ 4.2 KB) or with two or more loops. They get a placeholder 32 MB for the GPU driver's compile memory, which can't be read from the file.
+
+The weight (extra MB) is the second column of `presets.idx`: 7,799 presets 0 MB, 1,419 presets 1–4 MB, 388 presets 5 MB or more. 1.9.1 only **measures**. Every `LOAD` log line records the preset's weight, its shader size and loop count, how much the system's available memory dropped, and how much the process grew during the load. The next runs show which presets cause memory peaks at a switch, and whether shaders or images drive them. The RAM-based resolution cap stays in place as a temporary measure until then.
+
 ### Preset index
-`tools/gen-preset-index.sh` writes `app/src/main/assets/presets.idx`, the sorted list of bundled presets, and CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before.
+`tools/gen-preset-index.py` writes `app/src/main/assets/presets.idx`: the sorted list of bundled presets, each with a memory weight (see *Preset memory*). CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before.
 
 ### Transitions
 projectM's soft cut renders the outgoing and incoming preset for the whole transition, which doubles CPU (per-vertex equations) and GPU cost and keeps two presets' frame buffers. On a SHIELD at 1260p, 5-second FPS averages fell to 19–36 around every switch, even at 720p.
