@@ -1,3 +1,14 @@
+# projectM for Android TV 1.9.3
+
+## Fixed
+- **Visuals react to music on an NVIDIA SHIELD with Dolby output.** In 1.9.2 both audio sources heard silence there: the SHIELD sends media audio through its own Dolby path, which bypasses the output that *Standard* and *Media capture* listen to. The *Standard* source now finds the audio session of the app that plays music (SoundCloud, …) and listens there. It needs no setting and no consent.
+  - It starts about 10 seconds after launch; after a pause it picks the music up again within about 5 seconds.
+  - If *Media capture* is selected and stays silent while the player's session carries music, the app switches to *Standard* by itself, so the consent is not asked again.
+  - *Advanced › Diagnostics* shows the source as *player session N*; `tools/tv-diagnostics.sh` reports it as the source in use.
+  - On devices where the global output mix works, nothing changes: music keeps it busy and no search runs.
+
+---
+
 # projectM for Android TV 1.9.2
 
 ## Added
