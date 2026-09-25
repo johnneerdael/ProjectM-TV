@@ -67,3 +67,9 @@ fabric.properties
 
 # Specific large files
 java_pid*.hprof
+
+# tools/tv-diagnostics.sh output: keep summaries, logs and screenshots; not the bulky raw files
+diagnostics/**/raw_*
+diagnostics/**/*.hprof
+diagnostics/**/*.apk
+diagnostics/**/build.log

@@ -22,6 +22,8 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
 
     private final StatsListener listener;
     private int lastPresetChange = Integer.MIN_VALUE;
+    private int statsCountdown;
+    private static final int STATS_LOG_INTERVAL_S = 5;
 
     public VisualizerRenderer(StatsListener listener) {
         this.listener = listener;
@@ -75,6 +77,12 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             framesInWindow = 0;
             fpsWindowStart = now;
             listener.onFpsSample(currentFps);
+            // Machine-readable line for tools/tv-diagnostics.sh (cheap: once every 5 s).
+            if (--statsCountdown <= 0) {
+                statsCountdown = STATS_LOG_INTERVAL_S;
+                Log.i(TAG, String.format(java.util.Locale.US, "STATS fps=%.1f surface=%dx%d",
+                        currentFps, surfaceWidth, surfaceHeight));
+            }
         }
     }
 

@@ -133,7 +133,7 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         if (!skipped_.insert(name).second) return;
         ++skippedInOrder_;
-        LOGW("Skipping preset '%s' permanently: %s", name.c_str(), reason);
+        LOGW("SKIP preset='%s' reason=%s", name.c_str(), reason);
         FILE* f = fopen(skipFilePath_.c_str(), "a");
         if (f) {
             fprintf(f, "%s\n", name.c_str());
@@ -393,6 +393,8 @@ struct Engine {
     double fpsWindowStart = 0;
     int appliedMeshWidth = 0;
     int appliedMeshHeight = 0;
+    double createdAt = 0;
+    bool firstPresetLogged = false;
 };
 
 // Intentionally never destroyed: its detached worker thread lives as long as the process.
@@ -456,6 +458,11 @@ bool LoadPreset(const std::string& name, bool smooth) {
         g_library.MarkSkipped(name, "failed to load/compile");
         g_engine.loadFailed = false;
         return false;
+    }
+    if (!g_engine.firstPresetLogged) {
+        g_engine.firstPresetLogged = true;
+        LOGI("STARTUP first preset shown %.0f ms after engine creation",
+             (NowSeconds() - g_engine.createdAt) * 1000.0);
     }
     g_engine.current = name;
     g_library.RecordShown(name);
@@ -582,6 +589,8 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     projectm_set_preset_switch_failed_event_callback(g_engine.pm, OnSwitchFailed, nullptr);
     g_inputs.settingsDirty = true;
     g_engine.fpsWindowStart = NowSeconds();
+    g_engine.createdAt = g_engine.fpsWindowStart;
+    g_engine.firstPresetLogged = false;
     LOGI("projectM instance created");
 }
 
