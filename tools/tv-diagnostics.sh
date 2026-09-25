@@ -30,7 +30,7 @@ SWEEP=0
 OUT=""
 PKG="com.example.projectm.visualizer"
 ACTIVITY="$PKG/.MainActivity"
-REPO="johnneerdael/projectm-android-tv"
+REPO="johnneerdael/ProjectM-TV"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 while [ $# -gt 0 ]; do

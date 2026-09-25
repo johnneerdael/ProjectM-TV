@@ -1,129 +1,160 @@
-# projectM Visualizer for Android TV (v1.8)
+# projectM TV
 
-[![Android CI](https://github.com/johnneerdael/projectm-android-tv/actions/workflows/android.yml/badge.svg)](https://github.com/johnneerdael/projectm-android-tv/actions/workflows/android.yml)
+[![Android CI](https://github.com/johnneerdael/ProjectM-TV/actions/workflows/android.yml/badge.svg)](https://github.com/johnneerdael/ProjectM-TV/actions/workflows/android.yml)
 
-A music visualization powerhouse for your Android TV, bringing the legendary projectM (an open-source reimplementation of Milkdrop) to your living room with the complete Cream of the Crop preset collection.
+projectM TV is a music visualizer for Android TV. It runs [projectM](https://github.com/projectM-visualizer/projectm) 4.1.7, an open-source reimplementation of Winamp's MilkDrop, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself.
 
-## Features
+This README describes what the app does as of version 1.9.5, and where it falls short. Everything under *What it does* was checked on the only device it has been tested on: an NVIDIA SHIELD Android TV (2019, Android 11).
 
-- **Instant start** - Visuals start as soon as the screen is up; presets are read straight from the app package, nothing is extracted to storage
-- **Complete preset library** - The entire Cream of the Crop collection (9,795 presets), shuffled
-- **Self-cleaning playlist** - Presets that fail to load, or render nothing while music is playing, are skipped automatically and remembered (reset from the menu)
-- **Up to true 4K** - Detects the physical panel (TVs often run their UI at 1080p on a 4K panel) and renders up to its full resolution; the display scaler handles lower resolutions at no GPU cost
-- **Automatic resolution** - Dynamic resolution that adapts between presets to hold the frame rate
-- **Smooth frame pacing** - Full refresh rate or an even fraction (e.g. 60/30, or 120/60/30 on 120 Hz TVs)
-- **Performance controls** - Advanced panel with mesh detail, transition style, memory limit, skipping of slow or blank presets, and live diagnostics
-- **TV-style overlay** - Compact settings panel inside the overscan-safe area; long preset names scroll
-- **System audio visualization** - Reacts to any audio playing on the device
-- **Remote-friendly controls**
-  - **Right** - Random preset (instant cut)
-  - **Left** - Previous preset (instant cut)
-  - **Up / Down / Info** - Show the current preset name
-  - **Center / Menu** - Open settings overlay (↑↓ select a row, ‹ › change its value)
-  - **Back** - Close overlay / exit
+## What it does
 
-## Architecture
+- **Visualizes music from another app.** Play music in a music app, then start projectM TV. On the SHIELD, the visuals react to SoundCloud about 10 seconds after launch, and within about 5 seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
+- **Shows 9,606 presets in shuffled order.** It changes preset every 30 seconds by default, or when you press Left or Right on the remote. The default transition is 7 seconds; on TVs with less than about 2.6 GB of memory, such as the SHIELD, it is a lighter fade of at most 3 seconds.
+- **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that were black on the SHIELD render; this rule remains as a safety net (details under *Presets* below).
+- **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution between presets to hold the frame rate. The TV's scaler upscales to the panel.
+- **Protects the music app from being closed.** On TVs with little memory, Android closes other apps when projectM uses too much. The app caps its resolution by installed memory (on a 2 GB SHIELD: 1260p), and in *Auto* resolution it lowers the resolution when Android reports memory pressure.
+- **Starts quickly.** About 3–6 seconds from launch to the first preset on the SHIELD.
+- **Shows its own measurements.** *Settings › Advanced › Diagnostics* shows the render size, frame rate, audio source and audio level.
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design and the 1.7 regression analysis.
+## What it does not do, and known limits
 
-| Layer | Files | Responsibility |
+**Tested on one device.** All measurements come from an NVIDIA SHIELD Android TV (2019, `sif`, 2 GB RAM, Android 11), which runs the app 32-bit. Other Android TV devices are untested. The app should run on any Android TV with Android 5.0 or later and OpenGL ES 3.0, but performance, audio behaviour and memory limits will differ.
+
+**Audio**
+- The app does not play music, and it has no microphone or line-in input. It can only visualize audio that another app plays on the same TV.
+- On a SHIELD with Dolby or passthrough output, Android's standard visualizer hears nothing. The app works around this by finding the audio session of the playing app. That takes about 10 seconds after launch. If a search finds nothing, the next one waits 15, then 30, then 60 seconds, so it can take up to a minute. It works with SoundCloud; **other music apps (Spotify, YouTube Music, Plex, …) have not been tested**.
+- The *Media capture* audio source receives no audio on the SHIELD. It relies on Android's playback capture, which the SHIELD's Dolby audio path bypasses. When the app finds the player's session instead, it switches back to *Standard* by itself. On other devices, Media capture may work; it asks for screen-cast consent at every launch.
+- Apps that block audio capture, and audio that reaches the TV already encoded (for example Dolby bitstreams from a video app), cannot be visualized.
+- The audio the visualizer receives is 8-bit mono, which is what Android's visualizer API provides.
+
+**Picture and performance (SHIELD)**
+- **Most preset changes freeze the picture for a moment, typically about 0.9 seconds and up to about 1.8 seconds.** projectM compiles the new preset's shaders on the render thread. This is not fixed yet.
+- **4K is possible but not smooth.** At a fixed 4K the SHIELD averaged about 30 fps. With the default memory limit it never goes above 1260p; a fixed 4K needs *Memory limit* set to Off.
+- **Android often reports low memory shortly after launch.** *Auto* resolution then stays at 720p for that session.
+- Heavy presets drop below 60 fps, sometimes to about 20 fps, even at 720p.
+- projectM is a reimplementation of MilkDrop. Some presets look different from MilkDrop on Windows, or still render incorrectly.
+
+**Presets**
+- 189 of the 9,795 *Cream of the Crop* presets are not included: 116 that cannot react to music, 73 that use images with text, logos or people (one preset is in both groups), and 1 whose texture could not be found. Some presets that remain use textures with no stated licence; see [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
+- You cannot choose or search for a preset, or build playlists. Presets play in shuffled order.
+- The black-preset check has limits. It judges each preset only in the first 20 seconds or so after it starts, and only after 3 seconds of uninterrupted music. "Black" means every sampled pixel is at or below about 8% brightness, so a very dark preset can count as black. After 3 black presets in a row it stops acting until a preset shows something, in case the fault is the renderer rather than the presets.
+- Versions before 1.9.5 marked some presets as black that now render. If you used an earlier version, reset the skip list: *Settings › Advanced › Skipped presets*.
+
+**Other**
+- There is no touch or phone support. The app requires Android TV (Leanback).
+
+## Requirements
+
+- An Android TV device with Android 5.0 (API 21) or later
+- OpenGL ES 3.0
+- A music app that plays on the same device
+- The *Media capture* audio source needs Android 10 or later
+
+## Install
+
+1. Download `projectM-TV-<version>.apk` from [Releases](https://github.com/johnneerdael/ProjectM-TV/releases).
+2. Install it on the TV, for example with `adb install -r projectM-TV-1.9.5.apk`, or with a file manager and *Install unknown apps* enabled.
+3. Start the music in your music app, then open projectM TV. Android asks for permission to record audio; the app needs it to receive the music.
+
+Updates install over the previous version and keep your settings. If you installed a version you built yourself, Android refuses the update because the signing key differs: uninstall first, which resets the settings.
+
+## Remote control
+
+| Key | Action |
+|---|---|
+| Right, Next, Fast forward | Random preset (instant cut) |
+| Left, Previous, Rewind | Previous preset (instant cut) |
+| Up, Down, Info | Show the name of the current preset |
+| Center, Enter, Menu | Open the settings panel |
+| Back | Exit the app |
+
+In the panel, Up and Down move between rows, Left and Right change a value, and Center cycles a value or runs an action. Back closes the panel (in *Advanced*, it returns to the main panel), Menu closes it, and it hides itself after 10 seconds without input.
+
+## Settings
+
+The main panel shows the current preset and a live audio level (*Listening*, *Very quiet*, *No sound* or *No access*).
+
+| Setting | Values | Default |
 |---|---|---|
-| UI | `MainActivity`, `OptionRow`, `activity_main.xml` | Remote control, main + advanced panels, audio capture thread, preferences |
-| Device | `DeviceProfile`, `DisplayInfo` | Device-tier defaults; physical panel size and refresh rate |
-| Quality | `QualityController` | Dynamic resolution and slow-preset detection |
-| Rendering | `VisualizerView`, `VisualizerRenderer` | OpenGL ES 3.0 surface, hardware-scaler resolution, FPS |
-| Bridge | `ProjectMJNI` | JNI bindings; everything except surface/frame calls is thread-safe |
-| Engine | `app/src/main/cpp/native-lib.cpp` | projectM lifecycle, preset index/prefetch, skip list, transitions, output measurement |
+| Auto change | Off, On | On |
+| Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
+| Transition | Instant, 1–10 s | 7 s (2 s on low-end devices) |
+| Resolution | Auto, or a fixed height up to the panel resolution and the memory limit | Auto |
+| Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | 60 fps (30 on low-end devices) |
 
-## What is Milkdrop & the "Cream of the Crop" Pack?
+*Advanced ›* opens a second panel:
 
-### What is Milkdrop?
+| Setting | What it does | Default |
+|---|---|---|
+| Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
+| Transitions | *Classic* blends two running presets for the whole transition. *Lightweight* fades a still image of the old preset for at most 3 s and costs less memory and GPU time. *Auto* starts lightweight on TVs under about 2.6 GB and on low-end devices, classic otherwise. | Auto |
+| Memory limit | Caps the resolution by installed memory: under 1.6 GB 1080p, under 2.6 GB 1260p, under 3.6 GB 1440p, otherwise no cap | On |
+| Skip slow presets | Skips presets that stay far below the target frame rate even at the lowest resolution | On only on low-end devices |
+| Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
+| Audio source | *Standard* or *Media capture* (Android 10+), see *Audio* above | Standard |
+| Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
+| Diagnostics | Render size, panel, UI size, frame rate, transition style, audio source and level, device tier | – |
 
-Imagine your music transforming into a vibrant, ever-changing universe of color, light, and motion. That's Milkdrop. At its core, it's a music visualizer, a plug-in originally created for the iconic Winamp media player, and now available for various other players like Kodi and projectM. Milkdrop uses your device's graphics power to generate intricate and dynamic visualizations that react in real-time to the beats, melodies, and frequencies of the music you're listening to. The result is a captivating and often trippy visual experience that perfectly complements your auditory journey.
+## Troubleshooting
 
-### What Makes the "Cream of the Crop" Pack So Special?
+**The visuals don't react to the music.** Open *Settings › Advanced* and look at the *Audio* line under *Diagnostics*.
+- *silent / no data* right after launch: wait about 10 seconds while the app looks for the music app's audio.
+- Still silent with *Media capture* on a SHIELD: switch *Audio source* to *Standard*.
+- Still silent with *Standard*: the music app may block capture or send encoded audio, or it may not have been tested (see *Audio* above). Try SoundCloud to confirm the setup works.
 
-With a vast and dedicated community of artists creating and sharing their own visual "presets" for Milkdrop over the years, the sheer volume of available options can be overwhelming. This is where the Cream of the Crop pack comes in as your expert guide.
+**It stutters.** Keep *Resolution* on *Auto*, set *Frame rate* to 30 fps, and lower *Detail* in *Advanced*. The short freeze at each preset change is a known limit.
 
-Curated by Jason Fletcher, a respected figure in the Milkdrop community, this pack is a meticulously selected compilation of the "best of the best" presets. Fletcher sifted through thousands upon thousands of creations to handpick the most stunning, innovative, and awe-inspiring visuals. Think of it as the ultimate playlist for your eyes.
+**The music app closes while the visualizer runs.** Keep *Memory limit* on and *Resolution* on *Auto*. Only *Auto* lowers the resolution when memory runs low.
 
-Boasting an incredible 9,795 presets, the Cream of the Crop pack is a testament to the creativity and technical artistry of the Milkdrop community. Its quality is so highly regarded that it has become the default preset pack for some versions of projectM, an open-source and cross-platform implementation of the Milkdrop engine.
+**A preset is black.** The app moves on by itself after about 7 seconds of music, as long as *Skip blank presets* is on. To bring back presets skipped earlier, reset *Skipped presets* in *Advanced*.
 
-### What to Expect from the Cream of the Crop Pack:
+## For developers
 
-- **A Universe of Variety**: From pulsating geometric patterns and swirling nebulae to abstract landscapes and futuristic cityscapes, the diversity of visuals within the pack is staggering. You'll find a visual style to match any genre of music, from the most serene ambient tracks to the most frenetic electronic beats.
-
-- **A Feast for the Eyes**: These aren't just simple loops. The presets in the Cream of the Crop pack are known for their complexity, smooth transitions, and breathtaking beauty. Prepare to be hypnotized by the intricate details and fluid animations.
-
-- **A Gateway to a Thriving Community**: Exploring the Cream of the Crop pack is also a fantastic way to discover the work of talented visual artists and delve deeper into the world of music visualization.
-
-## Android TV Specifics
-
-- **OpenGL ES 3.0** - Required by projectM 4 (its shaders are GLSL `300 es`)
-- **Hardware scaler** - `SurfaceHolder.setFixedSize()` renders at a lower resolution and lets the display pipeline upscale
-- **Device tiers** - Low-RAM devices get a lighter per-vertex mesh; NVIDIA Shield defaults to 1080p, everything else to 720p
-- **GL-thread safety** - All preset switches run on the rendering thread (projectM compiles shaders while loading presets)
-- **Background work** - Preset indexing and prefetching of the next preset run on a native worker thread
-
-### Audio
-
-Two audio sources (*Advanced › Audio source*):
-- **Standard** (default): Android's `Visualizer` API at the maximum capture rate. The waveform is 8-bit unsigned mono PCM and is handed to projectM unchanged (`projectm_pcm_add_uint8`). It starts on the global output mix (session 0). When that stays silent for a few seconds, the app looks for the audio session of the app playing music and attaches the Visualizer there (`PlayerSessionFinder`): it probes recent session ids (they come from one counter in steps of 8, below a freshly generated id) and keeps the one that carries signal. On a SHIELD with Dolby output, media audio bypasses the output mix, so only this finds the music. It searches again when the music stops (pause, next app), with backoff, and rechecks the last player's session every few seconds.
-- **Media capture** (Android 10+): [playback capture](https://developer.android.com/media/platform/av-capture) of audio that apps play as media (`USAGE_MEDIA`), so notification and system sounds are left out. It needs Android's screen-cast consent at every launch and shows a notification while it runs. The captured audio is converted to the Visualizer's format and scale (`PcmConverter`). On a SHIELD with Dolby output it receives silence too; when the player's session is found meanwhile, the app switches to *Standard* by itself.
-
-## Downloads
-
-Every change on GitHub is built automatically; releases are published under **Releases**. See [docs/RELEASING.md](docs/RELEASING.md).
-
-## Building and Installing
+### Build
 
 ```bash
-./gradlew assembleRelease          # optimized, non-debuggable APK signed with your local debug key
+./gradlew assembleRelease     # non-debuggable APK, signed with your local debug key
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-`./install.sh` installs the release APK if present, otherwise the debug APK.
+Release builds on GitHub are signed with the release key; see [docs/RELEASING.md](docs/RELEASING.md). CI builds every push, and publishes a release when `versionName` changes on `main`.
 
-Tests run on any Linux/macOS machine (no device needed) and in CI:
+### projectM
+
+The app links against prebuilt projectM libraries in `app/src/main/jniLibs`. `tools/build-projectm.sh` rebuilds them from the pinned upstream tag plus the patches in `tools/projectm-patches/`, for armeabi-v7a and arm64-v8a, with the Android NDK named in `app/build.gradle`.
+
+### Tests
 
 ```bash
-app/src/test/native/run_native_tests.sh   # native engine (ASan/UBSan)
-./gradlew testReleaseUnitTest             # JVM tests (dynamic resolution)
+app/src/test/native/run_native_tests.sh   # native engine against fakes (ASan/UBSan)
+./gradlew testReleaseUnitTest             # JVM tests
 ```
-
-Preferences are preserved when updating from earlier versions.
 
 ### On-device diagnostics
 
 ```bash
-tools/tv-diagnostics.sh <tv-ip>:5555 --sweep   # startup, FPS per resolution, 4K composition, skipped presets
+tools/tv-diagnostics.sh <tv-ip>:5555 --sweep
 ```
 
-See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md), including heap analysis with heaptrail.
+By default it builds this checkout and installs it on the TV; `--no-install` tests the version already installed. It measures startup, frame rate per resolution, audio source and level, preset load times and memory, and writes a Markdown summary. See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md).
 
-## Permissions
+### Documentation
 
-- `RECORD_AUDIO` - Required by the `Visualizer` API to capture system audio
-- `MODIFY_AUDIO_SETTINGS` - Used by the `Visualizer` API
-- `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PROJECTION` - Media capture runs in a foreground service, as Android requires
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): design, threading, preset skipping and measurements
+- [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md): the diagnostics script
+- [docs/RELEASING.md](docs/RELEASING.md): signing and releases
+- [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md): sources and licences of bundled content
+- [RELEASE_NOTES.md](RELEASE_NOTES.md): changes per version
 
-## Credits
+## Credits and third-party content
 
-- **ProjectM Team** - For the incredible open-source visualization library
-- **Jason Fletcher** - For curating the Cream of the Crop preset collection
-- **MilkDrop / projectM texture pack** - Textures used by many presets (see [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md))
-- **Milkdrop Community** - For creating thousands of amazing presets
-- **Android Open Source Project** - For the Android TV platform
+- [projectM](https://github.com/projectM-visualizer/projectm), the visualization engine (LGPL 2.1)
+- *Cream of the Crop* presets, curated by Jason Fletcher (ISOSCELES), via [presets-cream-of-the-crop](https://github.com/projectM-visualizer/presets-cream-of-the-crop)
+- The MilkDrop texture pack, and textures from the community *MilkDrop 135k+ Presets MegaPack* collected by Incubo_
+- The authors of the MilkDrop presets
+
+Licences differ per source, and some textures have none stated. Details are in [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
 
 ## License
 
-This application is released under the same license as ProjectM (GPL v2).
-
-## Usage Tips
-
-- **Classic Milkdrop feel:** 7s transitions, ~30s preset duration
-- **Dynamic show:** 10-15s presets with 2-3s transitions
-- **Manual control:** Turn off auto change and use left/right
-- **Stuttering?** Keep Resolution on *Auto*, set Frame rate to 30 fps, and in *Advanced ›* lower Detail and turn on *Skip slow presets*
-- **Sharpest picture on a 4K TV:** pick *4K* (or *1440p*) and check *Advanced › Diagnostics* for the render size
-- **Too many skipped presets?** Use *Reset* next to "Skipped presets" in the menu
+The app's own code is licensed under the GNU Lesser General Public License, version 2.1; see [LICENSE](LICENSE). This matches projectM. Bundled presets and textures keep their own licences; see [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
