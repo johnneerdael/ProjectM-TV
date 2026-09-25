@@ -1,0 +1,148 @@
+name: Android CI
+
+# Every push / pull request: native tests + a release APK as a downloadable artifact.
+# Push to main with a new versionName (app/build.gradle): also creates tag v<versionName> and a
+# GitHub Release with the APK and the top section of RELEASE_NOTES.md.
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  native-tests:
+    name: Native engine tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Run host tests (ASan/UBSan)
+        run: app/src/test/native/run_native_tests.sh
+
+  apk:
+    name: Build APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+      release: ${{ steps.version.outputs.release }}
+      apk_name: ${{ steps.apk.outputs.name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          VERSION=$(sed -nE 's/.*versionName "([^"]+)".*/\1/p' app/build.gradle | head -n1)
+          TAG="v${VERSION}"
+          RELEASE=false
+          SUFFIX="-ci.${GITHUB_RUN_NUMBER}"
+          if [ "${GITHUB_EVENT_NAME}" = "push" ] && [ "${GITHUB_REF}" = "refs/heads/main" ] \
+             && ! git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null; then
+            RELEASE=true
+            SUFFIX=""
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "release=${RELEASE}" >> "$GITHUB_OUTPUT"
+          echo "VERSION_SUFFIX=${SUFFIX}" >> "$GITHUB_ENV"
+          echo "Version ${VERSION}${SUFFIX} (release: ${RELEASE})"
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Prepare Android SDK
+        run: |
+          # The committed local.properties points at a developer machine.
+          echo "sdk.dir=${ANDROID_HOME}" > local.properties
+          yes | "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --install \
+            "cmake;3.22.1" "ndk;27.3.13750724" "platforms;android-34" > /dev/null
+
+      - name: Configure release signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "${KEYSTORE_BASE64}" ]; then
+            echo "${KEYSTORE_BASE64}" | base64 -d > "${RUNNER_TEMP}/release.jks"
+            echo "SIGNING_KEYSTORE_PATH=${RUNNER_TEMP}/release.jks" >> "$GITHUB_ENV"
+          else
+            echo "::warning::SIGNING_KEYSTORE_BASE64 is not set; APK is signed with a temporary debug key (see docs/RELEASING.md)."
+          fi
+
+      - name: JVM unit tests
+        run: ./gradlew testReleaseUnitTest --no-daemon
+
+      - name: Build release APK
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: ./gradlew assembleRelease --no-daemon --stacktrace
+
+      - name: Name APK
+        id: apk
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          if [ "${{ steps.version.outputs.release }}" = "true" ]; then
+            NAME="projectM-TV-${{ steps.version.outputs.version }}.apk"
+          else
+            NAME="projectM-TV-${{ steps.version.outputs.version }}-ci.${GITHUB_RUN_NUMBER}-${SHORT_SHA}.apk"
+          fi
+          mkdir -p dist
+          cp app/build/outputs/apk/release/app-release.apk "dist/${NAME}"
+          echo "name=${NAME}" >> "$GITHUB_OUTPUT"
+          ls -lh dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: dist/*.apk
+          retention-days: 30
+          if-no-files-found: error
+
+  release:
+    name: Publish GitHub Release
+    needs: [native-tests, apk]
+    if: needs.apk.outputs.release == 'true'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk
+          path: dist
+
+      - name: Extract release notes
+        run: |
+          # Top section of RELEASE_NOTES.md, up to the first '---' separator.
+          awk '/^---[[:space:]]*$/ {exit} {print}' RELEASE_NOTES.md > notes.md
+          [ -s notes.md ] || echo "Release ${{ needs.apk.outputs.tag }}" > notes.md
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ needs.apk.outputs.tag }}" dist/*.apk \
+            --target "${GITHUB_SHA}" \
+            --title "projectM TV ${{ needs.apk.outputs.version }}" \
+            --notes-file notes.md

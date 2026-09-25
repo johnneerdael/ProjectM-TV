@@ -1,5 +1,7 @@
 # projectM Visualizer for Android TV (v1.8)
 
+[![Android CI](https://github.com/johnneerdael/projectm-android-tv/actions/workflows/android.yml/badge.svg)](https://github.com/johnneerdael/projectm-android-tv/actions/workflows/android.yml)
+
 A music visualization powerhouse for your Android TV, bringing the legendary projectM (an open-source reimplementation of Milkdrop) to your living room with the complete Cream of the Crop preset collection.
 
 ## Features
@@ -7,12 +9,17 @@ A music visualization powerhouse for your Android TV, bringing the legendary pro
 - **Instant start** - Visuals start as soon as the screen is up; presets are read straight from the app package, nothing is extracted to storage
 - **Complete preset library** - The entire Cream of the Crop collection (9,795 presets), shuffled
 - **Self-cleaning playlist** - Presets that fail to load, or render nothing while music is playing, are skipped automatically and remembered (reset from the menu)
-- **Hardware-scaled rendering** - Render at 480p / 720p / 1080p / native; the TV's display scaler stretches it to full screen at no GPU cost
+- **Up to true 4K** - Detects the physical panel (TVs often run their UI at 1080p on a 4K panel) and renders up to its full resolution; the display scaler handles lower resolutions at no GPU cost
+- **Automatic resolution** - Dynamic resolution that adapts between presets to hold the frame rate
+- **Smooth frame pacing** - Full refresh rate or an even fraction (e.g. 60/30, or 120/60/30 on 120 Hz TVs)
+- **Performance controls** - Advanced panel with mesh detail, skipping of slow or blank presets, and live diagnostics
+- **TV-style overlay** - Compact settings panel inside the overscan-safe area; long preset names scroll
 - **System audio visualization** - Reacts to any audio playing on the device
 - **Remote-friendly controls**
   - **Right** - Random preset (instant cut)
   - **Left** - Previous preset (instant cut)
-  - **Center / Menu** - Open settings overlay
+  - **Up / Down / Info** - Show the current preset name
+  - **Center / Menu** - Open settings overlay (↑↓ select a row, ‹ › change its value)
   - **Back** - Close overlay / exit
 
 ## Architecture
@@ -21,8 +28,9 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design and the 1.7
 
 | Layer | Files | Responsibility |
 |---|---|---|
-| UI | `MainActivity`, `activity_main.xml` | Remote control, settings overlay, audio capture, preferences |
-| Device | `DeviceProfile` | One place for device-tier defaults (render height, mesh size) |
+| UI | `MainActivity`, `OptionRow`, `activity_main.xml` | Remote control, main + advanced panels, audio capture thread, preferences |
+| Device | `DeviceProfile`, `DisplayInfo` | Device-tier defaults; physical panel size and refresh rate |
+| Quality | `QualityController` | Dynamic resolution and slow-preset detection |
 | Rendering | `VisualizerView`, `VisualizerRenderer` | OpenGL ES 3.0 surface, hardware-scaler resolution, FPS |
 | Bridge | `ProjectMJNI` | JNI bindings; everything except surface/frame calls is thread-safe |
 | Engine | `app/src/main/cpp/native-lib.cpp` | projectM lifecycle, preset index/prefetch, skip list, black-frame detection |
@@ -61,6 +69,10 @@ Boasting an incredible 9,795 presets, the Cream of the Crop pack is a testament 
 
 Audio is captured from the global output mix with Android's `Visualizer` API (session 0) at the maximum capture rate. The waveform is 8-bit unsigned mono PCM and is handed to projectM unchanged (`projectm_pcm_add_uint8`).
 
+## Downloads
+
+Every change on GitHub is built automatically; releases are published under **Releases**. See [docs/RELEASING.md](docs/RELEASING.md).
+
 ## Building and Installing
 
 ```bash
@@ -70,10 +82,11 @@ adb install -r app/build/outputs/apk/release/app-release.apk
 
 `./install.sh` installs the release APK if present, otherwise the debug APK.
 
-Engine logic can be tested on any Linux/macOS machine (no device needed):
+Tests run on any Linux/macOS machine (no device needed) and in CI:
 
 ```bash
-app/src/test/native/run_native_tests.sh
+app/src/test/native/run_native_tests.sh   # native engine (ASan/UBSan)
+./gradlew testReleaseUnitTest             # JVM tests (dynamic resolution)
 ```
 
 Preferences are preserved when updating from earlier versions.
@@ -99,5 +112,6 @@ This application is released under the same license as ProjectM (GPL v2).
 - **Classic Milkdrop feel:** 7s transitions, ~30s preset duration
 - **Dynamic show:** 10-15s presets with 2-3s transitions
 - **Manual control:** Turn off auto change and use left/right
-- **Stuttering?** Lower the resolution in the menu (720p or 480p); the image still fills the screen
+- **Stuttering?** Keep Resolution on *Auto*, set Frame rate to 30 fps, and in *Advanced ›* lower Detail and turn on *Skip slow presets*
+- **Sharpest picture on a 4K TV:** pick *4K* (or *1440p*) and check *Advanced › Diagnostics* for the render size
 - **Too many skipped presets?** Use *Reset* next to "Skipped presets" in the menu

@@ -89,12 +89,41 @@ A preset is added to `files/skipped_presets.txt` and never picked again when:
 ### Resolution
 The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The display composer scales it to the panel, so a 720p render fills a 1080p or 4K screen without extra GPU work ([Android Developers blog: using the hardware scaler](https://android-developers.googleblog.com/2013/09/using-hardware-scaler-for-performance.html)). projectM always renders at the surface size, so no viewport workarounds are needed.
 
+**True 4K (`DisplayInfo`).** Android TVs commonly drive the UI at 1080p on a 4K panel, while a SurfaceView can still be shown at the panel's full physical resolution. `getRealSize()` reports the UI size, so before 1.8 "Native" was 1080p on such TVs. The physical size is now detected as AndroidX Media3 does in `Util.getCurrentDisplayModeSize`: the `vendor.display-size` / `sys.display-size` property, Sony's 4K panel feature, then `Display.Mode.getPhysicalWidth/Height()`. **Needs on-device confirmation per TV model:** *Advanced › Diagnostics* shows the panel, UI and render sizes.
+
+**Dynamic resolution (`QualityController`).** Heights ladder: 360 … 2160, capped by the panel, with a floor per tier. Once the settle period after a preset change has passed (transition + 3 s), 1-second FPS samples drive it:
+
+| Condition | Action |
+|---|---|
+| < 85 % of target for 3 s | lower one level (two if far off) **at the next preset switch**, which is forced to be a hard cut |
+| < 55 % for 4 s | lower now and switch preset (hard cut) |
+| ≥ 97 % for 15 s | try one level higher at the next switch, unless that level recently failed (back-off 3, 6, 12 … 48 presets) |
+| < 50 % at the lowest level, *Skip slow presets* on | add the preset to the skip list |
+
+Changes wait for a preset switch because `projectm_set_window_size` resets the renderer; right after a hard cut the new preset starts from scratch anyway, so the reset is invisible. The last automatic level is remembered across launches.
+
+### Frame pacing
+Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so the speed of the visuals doesn't change.
+
+### Threads
+| Thread | Priority | Work |
+|---|---|---|
+| GL (GLSurfaceView) | `THREAD_PRIORITY_DISPLAY` | projectM render, preset loading, black-frame detection |
+| AudioCapture (HandlerThread) | `THREAD_PRIORITY_AUDIO` | `Visualizer` callbacks → `addWaveform` |
+| Native worker | default | Preset indexing and prefetch |
+| UI | default | Overlay; status polled every 500 ms, text only updated when changed |
+
+### Overlay UI
+`OptionRow` is a focusable settings row: ↑/↓ moves between rows, ‹ › changes the value, and center cycles it or runs an action. The main panel (now playing, transport, auto change, duration, transition, resolution, frame rate) ends with **Advanced ›**, which slides a separate panel over it: detail (mesh), skip slow presets, skip blank presets, skipped-preset reset and live diagnostics. BACK returns. Both panels sit within the 48 dp / 27 dp overscan-safe margins. Views fade out and are set to `GONE`, so a hidden overlay costs nothing to draw. Long preset names use a marquee, which is only restarted when the text actually changes.
+
 ### Device tiers (`DeviceProfile`)
-| Tier | Rule | Default render | Mesh |
-|---|---|---|---|
-| HIGH | NVIDIA Shield / Tegra | 1080p | 48×32 |
-| STANDARD | everything else | 720p | 48×32 |
-| LOW | `isLowRamDevice()` or <1.6 GB RAM | 720p | 32×24 (less CPU for per-vertex equations) |
+| Tier | Rule | Auto start / floor | Frame rate | Detail (mesh) | Transition | Skip slow |
+|---|---|---|---|---|---|---|
+| HIGH | NVIDIA Shield / Tegra | 1440p / 720p | 60 | High 64×48 | 7 s | off |
+| STANDARD | everything else | 1080p / 540p | 60 | Medium 48×32 | 7 s | off |
+| LOW | `isLowRamDevice()` or <1.6 GB RAM (e.g. older Fire TV sticks) | 720p / 360p | 30 | Low 32×24 | 2 s | on |
+
+Detail levels: Minimal 24×16, Low 32×24, Medium 48×32, High 64×48, Ultra 96×72. The per-vertex equations run on the CPU for every vertex on every frame, which is usually the bottleneck on low-end ARM boxes.
 
 Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 
@@ -105,8 +134,10 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 | Native engine compiled with `-Wall -Wextra` (host clang, projectM 4.1 headers, stub Android headers) | Clean |
 | Java compiled against the Android 14 framework (`android-all` jar) with a generated `R` | Clean (deprecation warnings only) |
 | All 19 JNI names and signatures cross-checked (`javac -h` header compiled against the implementation) | Match |
-| Host engine tests under ASan + UBSan: indexing/filtering, first frame, settings, next/random/previous, auto-switch, failure skip + persistence, audio cap, black detection (silence / visible / black), reset, context-loss resume | 23/23 pass |
-| **Full Gradle/APK build and on-device test** | **Not done.** The Android SDK/NDK download host is blocked in the environment used; needs a local build |
+| Host engine tests under ASan + UBSan: indexing/filtering, first frame, settings, next/random/previous, auto-switch, forced hard cut, mesh re-apply, failure skip + persistence, audio cap, black detection (silence / visible / black / disabled), skip-current, reset, context-loss resume | all pass |
+| JVM tests (`QualityControllerTest`): levels per panel, change only at preset switch, back-off, severe drop, slow-preset skip, low-tier floor | 5/5 pass |
+| GitHub Actions: Gradle build + NDK/CMake native build + APK packaging on ubuntu-24.04 | green |
+| **On-device test** | **Not done yet.** Needs a run on Shield / TCL / Fire TV |
 
 ## 7. What could go wrong
 
@@ -123,4 +154,4 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 1. Build 1.8 locally (`./gradlew assembleRelease && ./install.sh`) and test on your weakest and strongest TVs.
 2. Check logcat for `Skipping preset` and `Indexed N presets` lines.
 3. Move Gradle to a stable release.
-4. Optionally add a CI job that runs `run_native_tests.sh`.
+4. ~~Add CI~~ Done: `.github/workflows/android.yml` (see `docs/RELEASING.md`).

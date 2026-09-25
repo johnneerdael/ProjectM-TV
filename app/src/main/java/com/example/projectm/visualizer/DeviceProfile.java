@@ -45,22 +45,56 @@ public final class DeviceProfile {
         return new DeviceProfile(tier, totalRamMb);
     }
 
-    /** Default render height; the hardware scaler stretches it to the full screen. */
-    public int defaultRenderHeight() {
+    /** Starting point for automatic resolution; it adapts from there and is remembered. */
+    public int initialAutoHeight() {
         switch (tier) {
-            case HIGH: return 1080;
+            case HIGH: return 1440;
+            case STANDARD: return 1080;
             case LOW:
-            case STANDARD:
             default: return 720;
         }
     }
 
-    /** Per-vertex equation mesh; evaluated on the CPU for every vertex on every frame. */
-    public int meshWidth() {
-        return tier == Tier.LOW ? 32 : 48;
+    /** Lowest height automatic resolution may use. */
+    public int minAutoHeight() {
+        switch (tier) {
+            case HIGH: return 720;
+            case STANDARD: return 540;
+            case LOW:
+            default: return 360;
+        }
     }
 
-    public int meshHeight() {
-        return tier == Tier.LOW ? 24 : 32;
+    /** Default soft transition. During a transition two presets render at once (double cost). */
+    public int defaultTransitionSeconds() {
+        return tier == Tier.LOW ? 2 : 7;
     }
+
+    /** Skip presets that stay far below target even at the lowest resolution. */
+    public boolean defaultSkipSlowPresets() {
+        return tier == Tier.LOW;
+    }
+
+    /** Default frame-rate cap. Low-end boxes rarely hold 60 fps; an even 30 looks smoother. */
+    public int defaultFrameRateCap() {
+        return tier == Tier.LOW ? 30 : 60;
+    }
+
+    /** Default index into {@link #MESH_SIZES}. */
+    public int defaultMeshLevel() {
+        switch (tier) {
+            case HIGH: return 3;
+            case STANDARD: return 2;
+            case LOW:
+            default: return 1;
+        }
+    }
+
+    /**
+     * Per-vertex equation mesh (width, height) per detail level. Evaluated on the CPU for every
+     * vertex on every frame, so it is the main CPU cost of a preset; finer meshes give smoother
+     * warps and zooms.
+     */
+    public static final int[][] MESH_SIZES = {{24, 16}, {32, 24}, {48, 32}, {64, 48}, {96, 72}};
+    public static final String[] MESH_LABELS = {"Minimal", "Low", "Medium", "High", "Ultra"};
 }

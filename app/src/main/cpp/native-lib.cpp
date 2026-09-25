@@ -19,6 +19,7 @@
 #include <android/asset_manager_jni.h>
 #include <android/log.h>
 #include <GLES2/gl2.h>
+#include <sys/system_properties.h>
 
 #include <algorithm>
 #include <atomic>
@@ -348,11 +349,13 @@ private:
 // ------------------------------------------------------------------------------------------------
 // Cross-thread inputs (written from UI / audio threads, consumed on the GL thread).
 // ------------------------------------------------------------------------------------------------
-enum Command : int { kNone = 0, kNext, kPrevious, kRandom };
+enum Command : int { kNone = 0, kNext, kPrevious, kRandom, kSkipCurrent };
 
 struct Inputs {
     std::atomic<int> command{kNone};
     std::atomic<bool> commandHardCut{true};
+    std::atomic<bool> forceHardCut{false};  // next automatic switch must be a hard cut
+    std::atomic<bool> blankDetection{true};
 
     std::atomic<int> presetDuration{30};
     std::atomic<int> softCutDuration{7};
@@ -388,6 +391,8 @@ struct Engine {
     std::vector<uint8_t> pcmScratch;
     int framesSinceFps = 0;
     double fpsWindowStart = 0;
+    int appliedMeshWidth = 0;
+    int appliedMeshHeight = 0;
 };
 
 // Intentionally never destroyed: its detached worker thread lives as long as the process.
@@ -419,7 +424,14 @@ void ApplySettings() {
     projectm_set_preset_duration(pm, g_inputs.presetDuration.load());
     projectm_set_soft_cut_duration(pm, g_inputs.softCutDuration.load());
     projectm_set_preset_locked(pm, !g_inputs.autoChange.load());
-    projectm_set_mesh_size(pm, g_inputs.meshWidth.load(), g_inputs.meshHeight.load());
+    int meshWidth = g_inputs.meshWidth.load();
+    int meshHeight = g_inputs.meshHeight.load();
+    if (meshWidth != g_engine.appliedMeshWidth || meshHeight != g_engine.appliedMeshHeight) {
+        // Only on real changes: a new mesh size rebuilds the per-vertex grid.
+        projectm_set_mesh_size(pm, meshWidth, meshHeight);
+        g_engine.appliedMeshWidth = meshWidth;
+        g_engine.appliedMeshHeight = meshHeight;
+    }
 }
 
 void Publish(const std::string& name) {
@@ -482,6 +494,10 @@ void HandleCommands() {
             case kRandom:
                 SwitchPreset([] { return g_library.Random(g_engine.current); }, smooth);
                 break;
+            case kSkipCurrent:
+                g_library.MarkSkipped(g_engine.current, "too slow on this device");
+                SwitchPreset([] { return g_library.Next(); }, false);
+                break;
             case kPrevious: {
                 std::string previous = g_library.Previous();
                 if (!previous.empty()) SwitchPreset(FirstThenNext(previous), smooth);
@@ -495,7 +511,8 @@ void HandleCommands() {
     }
     if (g_engine.switchRequested) {
         g_engine.switchRequested = false;
-        SwitchPreset([] { return g_library.Next(); }, !g_engine.switchHardCut);
+        bool hardCut = g_engine.switchHardCut || g_inputs.forceHardCut.exchange(false);
+        SwitchPreset([] { return g_library.Next(); }, !hardCut);
     }
 }
 
@@ -530,6 +547,7 @@ void DestroyEngineLocked() {
         g_engine.pm = nullptr;
     }
     g_engine.width = g_engine.height = 0;
+    g_engine.appliedMeshWidth = g_engine.appliedMeshHeight = 0;
     g_engine.current.clear();  // the next instance resumes from g_published.currentPreset
     g_engine.switchRequested = false;
     g_engine.blackDetector.Disarm();
@@ -609,7 +627,8 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     FeedAudio();
     projectm_opengl_render_frame(g_engine.pm);
 
-    if (g_engine.blackDetector.Update(now, g_engine.width, g_engine.height, AudioPresent(now))) {
+    if (g_inputs.blankDetection.load() &&
+        g_engine.blackDetector.Update(now, g_engine.width, g_engine.height, AudioPresent(now))) {
         g_library.MarkSkipped(g_engine.current, "renders no visible output");
         SwitchPreset([] { return g_library.Next(); }, false);
     }
@@ -676,6 +695,26 @@ JNIEXPORT void JNICALL JNI_FN(setMeshSize)(JNIEnv*, jclass, jint width, jint hei
     g_inputs.meshWidth = width;
     g_inputs.meshHeight = height;
     g_inputs.settingsDirty = true;
+}
+
+JNIEXPORT void JNICALL JNI_FN(skipCurrentPreset)(JNIEnv*, jclass) {
+    g_inputs.command = kSkipCurrent;
+}
+
+JNIEXPORT void JNICALL JNI_FN(setBlankDetection)(JNIEnv*, jclass, jboolean enabled) {
+    g_inputs.blankDetection = enabled;
+}
+
+JNIEXPORT void JNICALL JNI_FN(setForceHardCut)(JNIEnv*, jclass, jboolean enabled) {
+    g_inputs.forceHardCut = enabled;
+}
+
+JNIEXPORT jstring JNICALL JNI_FN(getSystemProperty)(JNIEnv* env, jclass, jstring name) {
+    const char* key = env->GetStringUTFChars(name, nullptr);
+    char value[PROP_VALUE_MAX] = {0};
+    __system_property_get(key, value);
+    env->ReleaseStringUTFChars(name, key);
+    return env->NewStringUTF(value);
 }
 
 JNIEXPORT jstring JNICALL JNI_FN(getCurrentPresetName)(JNIEnv* env, jclass) {

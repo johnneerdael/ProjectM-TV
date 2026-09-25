@@ -1,23 +1,54 @@
-# projectM Android TV 1.8 - Rebuilt Engine: Instant Start, No More Black Presets
+# projectM for Android TV 1.8
 
-1.8 replaces the rendering and preset pipeline. See `docs/ARCHITECTURE.md` for the full analysis.
+A ground-up rebuild of the engine behind the visualizer. Visuals start almost immediately, presets that show nothing are skipped, and the picture now scales from Fire TV sticks up to 4K on NVIDIA Shield and high-end TVs.
 
-### Fixed
-- **Black visualizations**: preset switches from the remote now run on the rendering thread (they used to run without an OpenGL context); the app requests the OpenGL ES 3.0 context projectM 4 requires; audio is passed in its real 8-bit mono format
-- **Slow start**: presets are no longer extracted (~130 MB) on every launch; they are read directly from the app, and visuals start immediately
-- **1.7 regressions**: removed the adaptive "performance mode" that overrode your settings and reset the renderer; the resolution setting works again
+## Highlights
 
-### New
-- Presets that fail to load, or render nothing while music is playing, are skipped automatically and remembered ("Skipped presets" + *Reset* in the menu)
-- Resolution uses the TV's hardware scaler: 480p/720p/1080p always fill the screen; "4K" is now "Native"
-- Next preset is prefetched in the background; preset indexing runs on a background thread
-- Short on-screen label with the name of each new preset
-- Space used by older versions' extracted presets is reclaimed automatically
+- **Starts in seconds.** Presets are read directly from the app instead of being copied to storage (~130 MB) on every launch. Visuals appear as soon as the screen is up.
+- **No more black screens.** Fixed the causes of presets staying black:
+  - remote-control preset changes ran on the wrong thread;
+  - the graphics context was OpenGL ES 2.0 instead of the 3.0 projectM needs;
+  - audio was decoded in the wrong format.
+- **Real 4K.** Many TVs run their menus at 1080p on a 4K panel. The app now detects the physical panel and can render at up to full 4K on Shield and similar TVs.
+- **Automatic resolution.** *Auto* picks the highest resolution your device can run smoothly and adjusts between presets, so a change never interrupts a preset.
+- **Self-cleaning playlist.** Presets that fail to load, render nothing while music plays, or (optionally) are too slow for your device are skipped and remembered.
+- **New TV-style menu.** A compact panel with now-playing info, previous/shuffle/next controls and settings rows you change with the remote's arrows. Long preset names scroll.
 
-### Technical
-- OpenGL ES 3.0 now required (as it always was for projectM 4)
-- AndroidX/Leanback dependencies removed; release builds are installable (`./gradlew assembleRelease`)
-- Host-side native test suite: `app/src/test/native/run_native_tests.sh`
+## Settings
+
+| Setting | What it does |
+|---|---|
+| Resolution | **Auto** (recommended), or a fixed 720p / 1080p / 1440p / 4K, limited to what your panel supports |
+| Frame rate | Full refresh rate or an even fraction (e.g. 60 or 30 fps; 120/60/30 on 120 Hz TVs). A steady 30 is smoother than an unsteady 45 |
+| Transition | Blend time between presets. Shorter is faster on slow devices, because two presets render during a blend |
+| **Advanced ›** | **Detail** (Minimal–Ultra per-vertex mesh, the main CPU cost), **Skip slow presets**, **Skip blank presets**, skipped-preset reset, and live diagnostics (render size, panel, refresh rate, FPS) |
+
+## Performance on low-end devices (e.g. Fire TV sticks)
+
+On devices with little memory, the defaults now favour smoothness:
+- 30 fps
+- a lighter mesh
+- short transitions
+- Auto resolution that can drop to 360p when needed
+- slow presets skipped automatically
+
+All of these can be changed in the menu.
+
+## Good to know
+
+- **OpenGL ES 3.0 is now required.** projectM 4 always needed it; devices without it never showed correct visuals.
+- **Settings reset:** resolution and frame-rate settings start from the new defaults.
+- **Uninstall first:** if you installed an earlier build yourself, uninstall it before installing this one, because the signing key differs.
+- **Skipped-preset list:** resetting it under **Advanced ›** brings all presets back.
+
+## Remote control
+
+| Button | Action |
+|---|---|
+| Right / Left | Random preset / previous preset |
+| Up / Down / Info | Show the current preset name |
+| Center / Menu | Open the menu; ↑↓ select a row, ‹ › change its value |
+| Back | Close the panel (or return from Advanced) / exit |
 
 ---
 

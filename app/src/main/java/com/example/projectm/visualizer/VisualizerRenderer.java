@@ -14,7 +14,22 @@ import javax.microedition.khronos.opengles.GL10;
 public class VisualizerRenderer implements GLSurfaceView.Renderer {
     private static final String TAG = "VisualizerRenderer";
 
+    /** Called on the GL thread; implementations should hand off to the UI thread. */
+    public interface StatsListener {
+        void onFpsSample(float fps);
+        void onPresetChanged();
+    }
+
+    private final StatsListener listener;
+    private int lastPresetChange = Integer.MIN_VALUE;
+
+    public VisualizerRenderer(StatsListener listener) {
+        this.listener = listener;
+    }
+
     private volatile float currentFps;
+    private volatile int surfaceWidth;
+    private volatile int surfaceHeight;
     private long fpsWindowStart;
     private int framesInWindow;
 
@@ -22,6 +37,12 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         Log.i(TAG, "GL: " + GLES20.glGetString(GLES20.GL_VERSION) + " | "
                 + GLES20.glGetString(GLES20.GL_RENDERER));
+        try {
+            // The render thread is the app's critical path; keep it ahead of background work.
+            android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_DISPLAY);
+        } catch (RuntimeException e) {
+            Log.w(TAG, "Could not raise render thread priority", e);
+        }
         ProjectMJNI.onSurfaceCreated();
         fpsWindowStart = System.nanoTime();
         framesInWindow = 0;
@@ -30,12 +51,21 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         Log.i(TAG, "Surface " + width + "x" + height);
+        surfaceWidth = width;
+        surfaceHeight = height;
         ProjectMJNI.onSurfaceChanged(width, height);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
         ProjectMJNI.onDrawFrame();
+
+        int change = ProjectMJNI.getPresetChangeCounter();
+        if (change != lastPresetChange) {
+            boolean first = lastPresetChange == Integer.MIN_VALUE;
+            lastPresetChange = change;
+            if (!first) listener.onPresetChanged();
+        }
 
         framesInWindow++;
         long now = System.nanoTime();
@@ -44,6 +74,7 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             currentFps = framesInWindow * 1e9f / elapsed;
             framesInWindow = 0;
             fpsWindowStart = now;
+            listener.onFpsSample(currentFps);
         }
     }
 
@@ -54,5 +85,13 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
 
     public float getCurrentFps() {
         return currentFps;
+    }
+
+    public int getSurfaceWidth() {
+        return surfaceWidth;
+    }
+
+    public int getSurfaceHeight() {
+        return surfaceHeight;
     }
 }

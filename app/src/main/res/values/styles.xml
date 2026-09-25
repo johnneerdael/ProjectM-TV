@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Overlay" />
+
+    <style name="Overlay.Caption">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Single line that scrolls when the text does not fit -->
+    <style name="Overlay.Marquee">
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">24dp</item>
+    </style>
+
+    <style name="Overlay.Title" parent="Overlay.Marquee">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Overlay.Meta">
+        <item name="android:textColor">@color/text_tertiary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Overlay.IconButton">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@drawable/bg_icon_button</item>
+        <item name="android:tint">@color/text_primary</item>
+        <item name="android:focusable">true</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+</resources>
