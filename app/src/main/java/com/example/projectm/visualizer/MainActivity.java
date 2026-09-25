@@ -72,6 +72,7 @@ public class MainActivity extends Activity {
     private Handler audioHandler;
     private volatile Visualizer audioVisualizer;
     private volatile boolean captureRunning;  // AudioCaptureService feeds the engine instead
+    private boolean resumed;
     private OptionRow audioSourceRow;
 
     private View mainMenu;
@@ -674,10 +675,19 @@ public class MainActivity extends Activity {
         if (audioSourceRow != null) setupAudioSourceRow();
     }
 
-    /** Only one source feeds the engine: the Visualizer pauses while media capture runs. */
+    /**
+     * Only one source feeds the engine: the Visualizer is released while media capture runs. When
+     * capture ends while the app is in the background, the Visualizer returns in onResume.
+     */
     private void onCaptureStateChanged(boolean running) {
         captureRunning = running;
-        audioHandler.post(running ? this::stopAudio : this::startAudio);
+        // tools/tv-diagnostics.sh reports the latest of these lines as the source in use.
+        Log.i(TAG, "Audio source now: " + (running ? "media capture" : "standard"));
+        if (running) {
+            audioHandler.post(this::stopAudio);
+        } else if (resumed && hasAudioPermission()) {
+            audioHandler.post(this::startAudio);
+        }
     }
 
     private void stopAudio() {
@@ -685,7 +695,7 @@ public class MainActivity extends Activity {
         audioVisualizer.setEnabled(false);
         audioVisualizer.release();
         audioVisualizer = null;
-        Log.i(TAG, "Audio source: standard capture released");
+        Log.i(TAG, "Standard audio capture released");
     }
 
     private void startAudio() {
@@ -729,6 +739,8 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         visualizerView.onResume();
+        resumed = true;
+        if (!captureRunning && hasAudioPermission()) audioHandler.post(this::startAudio);  // no-op if running
         setAudioEnabled(true);
         handler.post(uiRefresh);
         if (menu == Menu.MAIN) handler.post(audioMeterRefresh);
@@ -738,6 +750,7 @@ public class MainActivity extends Activity {
     protected void onPause() {
         handler.removeCallbacks(uiRefresh);
         handler.removeCallbacks(audioMeterRefresh);
+        resumed = false;
         setAudioEnabled(false);
         visualizerView.onPause();
         super.onPause();

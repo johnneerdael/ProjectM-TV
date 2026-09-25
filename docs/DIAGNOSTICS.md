@@ -36,7 +36,8 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 
 ### App log lines used by the script
 - `VisualizerRenderer: STATS fps=59.8 surface=2560x1440`: every 5 s.
-- `ProjectMTV: Audio source: …`: media capture started, declined, unavailable, failed or ended. Without these lines the standard source (Visualizer) was used.
+- `ProjectMTV: Audio source now: media capture|standard`: the source feeding the engine after each change. Without these lines the standard source (Visualizer) was used throughout.
+- `ProjectMTV: Audio source: …`: media capture events (started, declined, unavailable, failed to start, stopped by the system, ended).
 - `projectM-Native: STARTUP first preset shown 212 ms after engine creation`.
 - `projectM-Native: Indexed 9794 presets (3 skipped) in 84 ms from presets.idx`.
 - `projectM-Native: LOAD preset='…' ms=412 smooth=0 size=2240x1260 weight_mb=33 shader_kb=4.6 loops=2 avail_drop_mb=61 rss_growth_mb=12`: every preset switch.
