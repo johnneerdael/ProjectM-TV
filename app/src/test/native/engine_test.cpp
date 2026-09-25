@@ -175,12 +175,13 @@ int main(int argc, char** argv) {
   CHECK(current() == a);
 
   printf("projectM-requested auto switch (smooth), and forced hard cut before a resize\n");
-  std::string before = current(); g_reqCb(false, nullptr); frame();
-  CHECK(current() != before);
+  // A switch shows up as a successful load: after a reshuffle the same preset may legally come next.
+  size_t loads = g_loaded.size(); g_reqCb(false, nullptr); frame();
+  CHECK(g_loaded.size() == loads + 1);
   CHECK(g_lastSmooth);
   Java_com_example_projectm_visualizer_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
-  before = current(); g_reqCb(false, nullptr); frame();
-  CHECK(current() != before && !g_lastSmooth);
+  loads = g_loaded.size(); g_reqCb(false, nullptr); frame();
+  CHECK(g_loaded.size() == loads + 1 && !g_lastSmooth);
   g_reqCb(false, nullptr); frame();
   CHECK(g_lastSmooth);  // flag is one-shot
 
@@ -264,11 +265,11 @@ int main(int argc, char** argv) {
   printf("lightweight: outgoing frame captured, projectM hard-cuts, overlay fades for min(transition, 3 s)\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 1, false);
   CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
-  int captures = g_captures, starts = g_fadeStarts; before = current();
+  int captures = g_captures, starts = g_fadeStarts; loads = g_loaded.size();
   g_requestInRender = true; frame();          // request fires during this frame's render
-  CHECK(g_captures == captures + 1 && current() == before);
+  CHECK(g_captures == captures + 1 && g_loaded.size() == loads);  // no switch yet
   frame();                                    // next frame switches
-  CHECK(current() != before && !g_lastSmooth);
+  CHECK(g_loaded.size() == loads + 1 && !g_lastSmooth);
   CHECK(g_fadeStarts == starts + 1 && g_fadeSeconds == 3.0 && g_engine.fade.Active());
   int draws = g_fadeDraws; frame(); CHECK(g_fadeDraws == draws + 1);
 
@@ -284,17 +285,17 @@ int main(int argc, char** argv) {
   CHECK(g_captures == captures && g_fadeStarts == starts && !g_lastSmooth);
 
   printf("capture failure falls back to projectM's classic transition\n");
-  g_captureOk = false; before = current();
+  g_captureOk = false; loads = g_loaded.size();
   g_requestInRender = true; frame(); frame();
-  CHECK(current() != before && g_lastSmooth && !g_engine.fade.Active());
+  CHECK(g_loaded.size() == loads + 1 && g_lastSmooth && !g_engine.fade.Active());
   g_captureOk = true;
 
   printf("classic mode: projectM soft cut, no capture\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 2, true);
   CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
-  captures = g_captures; before = current();
+  captures = g_captures; loads = g_loaded.size();
   g_requestInRender = true; frame(); frame();
-  CHECK(g_captures == captures && current() != before && g_lastSmooth);
+  CHECK(g_captures == captures && g_loaded.size() == loads + 1 && g_lastSmooth);
 
   printf("auto: a classic blend much slower than before switches to lightweight\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
