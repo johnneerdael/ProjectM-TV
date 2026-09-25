@@ -225,8 +225,11 @@ track_pid() {
     done
 }
 
+# The app's buffer layer. The first "surfaceview" match is "Background for -SurfaceView - ...", a
+# colour layer without buffers, so match the line that starts with "SurfaceView - ".
 surface_layer() {
-    ash dumpsys SurfaceFlinger --list | grep -i "surfaceview" | grep -i "projectm" | head -1
+    ash dumpsys SurfaceFlinger --list | grep -E '^[[:space:]]*SurfaceView - ' | grep -i "projectm" | head -1 \
+        | sed -E 's/^[[:space:]]+//'
 }
 
 # FPS from SurfaceFlinger's frame timestamps for our layer (independent of the app's own count).
@@ -274,14 +277,17 @@ done
 # ---------------------------------------------------------------------------------------------
 SWEEP_ROWS=""
 if [ "$SWEEP" = 1 ]; then
-    # Fixed levels offered by the app: 720/1080/1440/2160 up to the panel height, plus the panel
-    # height itself if it is not one of those (QualityController.manualHeights).
+    # Fixed levels offered by the app (QualityController.manualHeights): 720/1080/1440/2160 up to
+    # the panel height and the memory limit, plus that maximum itself if it is not one of those.
     PANEL_H="$(grep -o 'Panel [0-9]*x[0-9]*' "$OUT/raw_logcat.txt" | head -1 | sed 's/.*x//')"
     [ -n "$PANEL_H" ] || PANEL_H=1080
+    MAX_H="$PANEL_H"
+    LIMIT_H="$(grep -o 'Memory limit: .*' "$OUT/raw_logcat.txt" | tail -1 | sed -n 's/.*up to \([0-9]*\).*/\1/p')"
+    if [ -n "$LIMIT_H" ] && [ "$LIMIT_H" -lt "$MAX_H" ]; then MAX_H="$LIMIT_H"; fi
     LEVELS=0
-    for h in 720 1080 1440 2160; do [ "$h" -le "$PANEL_H" ] && LEVELS=$((LEVELS + 1)); done
-    case "$PANEL_H" in 720|1080|1440|2160) ;; *) LEVELS=$((LEVELS + 1)) ;; esac
-    log "Resolution sweep over $LEVELS fixed levels (panel height $PANEL_H)"
+    for h in 720 1080 1440 2160; do [ "$h" -le "$MAX_H" ] && LEVELS=$((LEVELS + 1)); done
+    case "$MAX_H" in 720|1080|1440|2160) ;; *) LEVELS=$((LEVELS + 1)) ;; esac
+    log "Resolution sweep over $LEVELS fixed levels (panel height $PANEL_H, highest offered $MAX_H)"
     SWEEP_ACTIVE=1
     restore_auto_resolution
     step=1
@@ -322,6 +328,13 @@ awk -v pids="$APP_PIDS" -v pkg="$PKG" '
 ' "$L" > "$OUT/app_log.txt"
 A="$OUT/app_log.txt"
 
+# min / avg / max (count) of a numeric key=value field in the given lines
+field_summary() {
+    grep -oE "(^|[ :])$1=[0-9.]+" | sed 's/.*=//' | awk '
+        { s += $1; n++; if (min == "" || $1 < min) min = $1; if ($1 > max) max = $1 }
+        END { if (n) printf "%.1f / %.1f / %.1f (%d)", min, s / n, max, n; else print "n/a" }'
+}
+
 stats_summary() {  # min / avg / max of the app's STATS fps lines
     grep -o "STATS fps=[0-9.]*" "$1" | sed 's/.*=//' | awk '
         { s += $1; n++; if (min == "" || $1 < min) min = $1; if ($1 > max) max = $1 }
@@ -330,8 +343,8 @@ stats_summary() {  # min / avg / max of the app's STATS fps lines
 
 layer_excerpt() {
     [ -f "$OUT/raw_surfaceflinger.txt" ] || return
-    grep -n -i "surfaceview.*projectm\|projectm.*surfaceview" "$OUT/raw_surfaceflinger.txt" | head -3
-    grep -i -A 12 "surfaceview.*projectm" "$OUT/raw_surfaceflinger.txt" \
+    grep -n -i "surfaceview.*projectm\|projectm.*surfaceview" "$OUT/raw_surfaceflinger.txt" | grep -v "Background for" | head -3
+    grep -i -A 12 "[^-]SurfaceView - .*projectm" "$OUT/raw_surfaceflinger.txt" | grep -v "Background for" \
         | grep -iE "buffer|composition|crop|frame=|dataspace|size|HWC|DEVICE|CLIENT" | head -20
     echo "--- HWC / display"
     grep -iE "^Display .*(HWC|mode)|activeMode|refresh-rate|HWC2 display|Display [0-9]+ HWC layers" "$OUT/raw_surfaceflinger.txt" | head -8
@@ -381,6 +394,39 @@ layer_excerpt() {
             echo "| $step | ${size:-?} | $s1 / $s2 / $s3 |"
         done
     fi
+    echo
+    echo "## Preset switches (min / avg / max (count))"
+    echo "- Load time, ms (parse + textures + shader compile, the stall at each switch): $(grep -h 'LOAD preset=' "$A" | field_summary ms)"
+    for mode in lightweight classic; do
+        T="$(grep -h "TRANSITION preset=.* mode=$mode" "$A" || true)"
+        [ -n "$T" ] || continue
+        echo "- $mode transitions: fps incl. load $(printf '%s\n' "$T" | field_summary fps), blend fps $(printf '%s\n' "$T" | field_summary blend_fps), fps before $(printf '%s\n' "$T" | field_summary before_fps), frames > 50 ms $(printf '%s\n' "$T" | field_summary slow_frames)"
+    done
+    grep -h -o "TRANSITION auto:.*" "$A" | sed 's/^/- /' | head -3
+    echo "- Slowest loads:"
+    grep -h -o "LOAD preset=.*" "$A" | awk -F"ms=" '{ split($2, a, " "); print a[1] "\t" $0 }' | sort -rn | head -5 \
+        | cut -f2 | sed 's/^/  - /'
+    echo
+    echo "## Output measurements (per preset; nothing is skipped for flat or still output)"
+    O="$(grep -h -o "OUTPUT preset=.*" "$A" || true)"
+    if [ -n "$O" ]; then
+        echo "- Presets measured: $(printf '%s\n' "$O" | wc -l | tr -d ' ')"
+        echo "- Flat in every sample: $(printf '%s\n' "$O" | awk '{ for (i = 1; i <= NF; i++) if ($i ~ /^flat=/) { split(substr($i, 6), f, "/"); if (f[2] > 0 && f[1] == f[2]) n++ } } END { print n + 0 }')"
+        echo "- Still in every compared sample: $(printf '%s\n' "$O" | awk '{ for (i = 1; i <= NF; i++) if ($i ~ /^still=/) { split(substr($i, 7), f, "/"); if (f[2] > 0 && f[1] == f[2]) n++ } } END { print n + 0 }')"
+        echo "- Candidates (flat or still in every sample):"
+        printf '%s\n' "$O" | awk '{ c = 0; for (i = 1; i <= NF; i++) if ($i ~ /^(flat|still)=/) { split(substr($i, index($i, "=") + 1), f, "/"); if (f[2] > 0 && f[1] == f[2]) c = 1 } } c' \
+            | head -20 | sed 's/^/  - /'
+    else
+        echo "- none (needs music playing and the 1.9 build)"
+    fi
+    echo
+    echo "## Memory"
+    grep -h -o -E "Memory limit: .*|Memory pressure.*" "$A" | sort -u | sed 's/^/- /' | head -10
+    echo "- Other apps killed during the run (low memory; cached processes omitted):"
+    grep -E "ActivityManager: Process .* has died: (prcp|prcl|fg|vis|svc|fore|percep)" "$L" | grep -v "$PKG" \
+        | sed -E 's/.*Process ([^ ]+) \(pid [0-9]+\) has died: ([^ ]+).*/\1 (\2)/' | sort | uniq -c | sort -rn \
+        | head -15 | sed 's/^ */  - /'
+    grep -q -E "has died: (prcp|prcl|fg|vis|svc)" "$L" || echo "  - none"
     echo
     echo "## Surface composition (is the render surface shown at full panel resolution?)"
     echo '```'

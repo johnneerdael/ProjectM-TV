@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     private static final long MENU_AUTO_HIDE_MS = 10000;
     private static final long NOW_PLAYING_MS = 6000;
     private static final long UI_REFRESH_MS = 500;
+    private static final long AUDIO_METER_MS = 66;
     private static final long FADE_MS = 180;
 
     private static final String PREFS = "projectm_settings";
@@ -38,7 +39,10 @@ public class MainActivity extends Activity {
     private static final String PREF_FRAME_RATE_CAP = "frame_rate_cap";
     private static final String PREF_MESH_LEVEL = "mesh_level";
     private static final String PREF_SKIP_SLOW = "skip_slow_presets";
-    private static final String PREF_BLANK_DETECTION = "blank_detection";
+    // New key in 1.9: skipping black presets became opt-in (dull output was often missing textures).
+    private static final String PREF_BLANK_DETECTION = "blank_detection_v2";
+    private static final String PREF_TRANSITION_MODE = "transition_mode";
+    private static final String PREF_MEMORY_LIMIT = "memory_limit";
 
     private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
     private static final int MAX_TRANSITION = 10;
@@ -52,6 +56,7 @@ public class MainActivity extends Activity {
     private DisplayInfo display;
     private QualityController quality;
     private int frameRateTarget;
+    private float targetFps = 60f;
 
     private VisualizerView visualizerView;
     private VisualizerRenderer renderer;
@@ -67,6 +72,8 @@ public class MainActivity extends Activity {
     private TextView presetMeta;
     private TextView statusLine;
     private TextView diagnostics;
+    private AudioMeterView audioMeter;
+    private TextView audioStatus;
     private OptionRow skippedRow;
     private View nowPlaying;
     private TextView nowPlayingText;
@@ -75,6 +82,16 @@ public class MainActivity extends Activity {
     private String currentPreset = "";
 
     private final Runnable hideMenu = () -> showMenu(Menu.NONE);
+    private final Runnable audioMeterRefresh = new Runnable() {
+        @Override
+        public void run() {
+            if (menu != Menu.MAIN) return;
+            float level = ProjectMJNI.getAudioLevel();
+            audioMeter.setLevel(level);
+            setText(audioStatus, audioStatus(level));
+            handler.postDelayed(this, AUDIO_METER_MS);
+        }
+    };
     private final Runnable hideNowPlaying = () -> fade(nowPlaying, false);
     private final Runnable uiRefresh = new Runnable() {
         @Override
@@ -103,7 +120,9 @@ public class MainActivity extends Activity {
         ProjectMJNI.setAutoChange(prefs.getBoolean(PREF_AUTO_CHANGE, true));
         ProjectMJNI.setPresetDuration(prefs.getInt(PREF_PRESET_DURATION, 30));
         ProjectMJNI.setSoftCutDuration(transitionSeconds());
-        ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, true));
+        ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, false));
+        ProjectMJNI.setTransitionMode(prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO),
+                profile.lightweightTransitionsByDefault());
 
         visualizerView = findViewById(R.id.visualizer_view);
         renderer = new VisualizerRenderer(new VisualizerRenderer.StatsListener() {
@@ -117,10 +136,7 @@ public class MainActivity extends Activity {
                 handler.post(() -> quality.onPresetChanged());
             }
         });
-        quality = new QualityController(display, profile, this::applyRenderHeight);
-        quality.setTransitionSeconds(transitionSeconds());
-        quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
-        quality.setMode(savedRenderHeight(), prefs.getInt(PREF_AUTO_HEIGHT, 0));
+        createQualityController();
         visualizerView.start(renderer);
         applyFrameRateCap(prefs.getInt(PREF_FRAME_RATE_CAP, profile.defaultFrameRateCap()));
 
@@ -139,6 +155,36 @@ public class MainActivity extends Activity {
     // ---------------------------------------------------------------------------------------
     // Quality: resolution and frame rate
     // ---------------------------------------------------------------------------------------
+
+    /** (Re)creates dynamic resolution for the current memory limit. */
+    private void createQualityController() {
+        int limit = memoryLimit();
+        // tools/tv-diagnostics.sh reads the latest of these lines to know the fixed levels offered.
+        Log.i(TAG, "Memory limit: " + (limit > 0 ? "render height up to " + limit : "off")
+                + " (RAM " + profile.totalRamMb + " MB)");
+        quality = new QualityController(display, profile, limit, this::applyRenderHeight);
+        quality.setTransitionSeconds(transitionSeconds());
+        quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
+        quality.setTargetFps(targetFps);
+        quality.setMode(savedRenderHeight(), prefs.getInt(PREF_AUTO_HEIGHT, 0));
+    }
+
+    /** Highest render height allowed for memory reasons, 0 for none. */
+    private int memoryLimit() {
+        return prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? profile.memorySafeHeight() : 0;
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        // While visible, these mean the system is about to kill other apps (e.g. the music player).
+        if (level == TRIM_MEMORY_RUNNING_LOW || level == TRIM_MEMORY_RUNNING_CRITICAL) {
+            quality.onMemoryPressure(level);
+            // The lower resolution applies at the next preset switch, which must then be a hard
+            // cut; don't wait for the next FPS sample to arm it.
+            if (quality.hasPendingChange()) ProjectMJNI.setForceHardCut(true);
+        }
+    }
 
     private void applyRenderHeight(int height) {
         visualizerView.setRenderSize(display.widthForHeight(height), height);
@@ -183,14 +229,15 @@ public class MainActivity extends Activity {
             }
         }
         frameRateTarget = Math.round(display.refreshRate / best);
+        targetFps = display.refreshRate / best;
         visualizerView.setFrameDivisor(best);
-        quality.setTargetFps(display.refreshRate / best);
+        quality.setTargetFps(targetFps);
         ProjectMJNI.setForceHardCut(false);  // any queued resolution change was dropped
     }
 
     /** Saved fixed render height if valid for the current panel, else 0 (automatic). */
     private int savedRenderHeight() {
-        return QualityController.validFixedHeight(display, prefs.getInt(PREF_RENDER_HEIGHT, 0));
+        return QualityController.validFixedHeight(display, memoryLimit(), prefs.getInt(PREF_RENDER_HEIGHT, 0));
     }
 
     private int meshLevel() {
@@ -219,6 +266,8 @@ public class MainActivity extends Activity {
         presetMeta = findViewById(R.id.preset_meta);
         statusLine = findViewById(R.id.status_line);
         diagnostics = findViewById(R.id.diagnostics);
+        audioMeter = findViewById(R.id.audio_meter);
+        audioStatus = findViewById(R.id.audio_status);
         nowPlaying = findViewById(R.id.now_playing);
         nowPlayingText = findViewById(R.id.now_playing_text);
 
@@ -255,22 +304,7 @@ public class MainActivity extends Activity {
             prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
         });
 
-        // Resolution: Auto + fixed heights up to the panel's physical resolution.
-        int[] heights = QualityController.manualHeights(display);
-        String[] resolutionLabels = new String[heights.length + 1];
-        resolutionLabels[0] = "Auto";
-        int selectedResolution = 0;
-        int savedHeight = savedRenderHeight();
-        for (int i = 0; i < heights.length; i++) {
-            resolutionLabels[i + 1] = heightLabel(heights[i]);
-            if (heights[i] == savedHeight) selectedResolution = i + 1;
-        }
-        OptionRow resolution = findViewById(R.id.row_resolution);
-        resolution.setup("Resolution", resolutionLabels, selectedResolution, false, index -> {
-            int height = index == 0 ? 0 : heights[index - 1];
-            prefs.edit().putInt(PREF_RENDER_HEIGHT, height).apply();
-            quality.setMode(height, prefs.getInt(PREF_AUTO_HEIGHT, 0));
-        });
+        setupResolutionRow();
 
         int[] caps = frameRateOptions();
         String[] capLabels = new String[caps.length];
@@ -296,6 +330,22 @@ public class MainActivity extends Activity {
             prefs.edit().putInt(PREF_MESH_LEVEL, index).apply();
         });
 
+        OptionRow transitionMode = findViewById(R.id.row_transition_mode);
+        transitionMode.setup("Transitions", new String[]{"Auto", "Lightweight", "Classic"},
+                prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO), true, index -> {
+                    ProjectMJNI.setTransitionMode(index, profile.lightweightTransitionsByDefault());
+                    prefs.edit().putInt(PREF_TRANSITION_MODE, index).apply();
+                });
+
+        OptionRow memoryLimit = findViewById(R.id.row_memory_limit);
+        int safeHeight = profile.memorySafeHeight();
+        memoryLimit.setup("Memory limit", new String[]{"Off", safeHeight > 0 ? "Up to " + heightLabel(safeHeight) : "On"},
+                prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? 1 : 0, true, index -> {
+                    prefs.edit().putBoolean(PREF_MEMORY_LIMIT, index == 1).apply();
+                    createQualityController();
+                    setupResolutionRow();
+                });
+
         OptionRow skipSlow = findViewById(R.id.row_skip_slow);
         skipSlow.setup("Skip slow presets", new String[]{"Off", "On"},
                 prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()) ? 1 : 0, true, index -> {
@@ -305,7 +355,7 @@ public class MainActivity extends Activity {
 
         OptionRow blank = findViewById(R.id.row_blank_detection);
         blank.setup("Skip blank presets", new String[]{"Off", "On"},
-                prefs.getBoolean(PREF_BLANK_DETECTION, true) ? 1 : 0, true, index -> {
+                prefs.getBoolean(PREF_BLANK_DETECTION, false) ? 1 : 0, true, index -> {
                     ProjectMJNI.setBlankDetection(index == 1);
                     prefs.edit().putBoolean(PREF_BLANK_DETECTION, index == 1).apply();
                 });
@@ -318,6 +368,25 @@ public class MainActivity extends Activity {
 
         mainMenu.setVisibility(View.GONE);
         advancedMenu.setVisibility(View.GONE);
+    }
+
+    /** Resolution: Auto + fixed heights up to the panel resolution and the memory limit. */
+    private void setupResolutionRow() {
+        int[] heights = QualityController.manualHeights(display, memoryLimit());
+        String[] resolutionLabels = new String[heights.length + 1];
+        resolutionLabels[0] = "Auto";
+        int selectedResolution = 0;
+        int savedHeight = savedRenderHeight();
+        for (int i = 0; i < heights.length; i++) {
+            resolutionLabels[i + 1] = heightLabel(heights[i]);
+            if (heights[i] == savedHeight) selectedResolution = i + 1;
+        }
+        OptionRow resolution = findViewById(R.id.row_resolution);
+        resolution.setup("Resolution", resolutionLabels, selectedResolution, false, index -> {
+            int height = index == 0 ? 0 : heights[index - 1];
+            prefs.edit().putInt(PREF_RENDER_HEIGHT, height).apply();
+            quality.setMode(height, prefs.getInt(PREF_AUTO_HEIGHT, 0));
+        });
     }
 
     private static int nearestIndex(int[] values, int target) {
@@ -341,6 +410,8 @@ public class MainActivity extends Activity {
         }
         fade(nowPlaying, false);
         refreshStatus();
+        handler.removeCallbacks(audioMeterRefresh);
+        if (target == Menu.MAIN) handler.post(audioMeterRefresh);
         if (target == Menu.MAIN) {
             if (previous == Menu.ADVANCED) {
                 slide(advancedMenu, false);
@@ -405,13 +476,27 @@ public class MainActivity extends Activity {
         } else {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
             setText(diagnostics, String.format(Locale.US,
-                    "Render  %dx%d (%s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nAudio   %s%nDevice  %s tier, %d MB RAM",
+                    "Render  %dx%d (%s, limit %s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nBlend   %s%nAudio   %s%nDevice  %s tier, %d MB RAM",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
+                    memoryLimit() > 0 ? heightLabel(memoryLimit()) : "none",
                     display.physicalWidth, display.physicalHeight, display.refreshRate,
                     display.uiWidth, display.uiHeight,
-                    renderer.getCurrentFps(), frameRateTarget, audioLabel(),
+                    renderer.getCurrentFps(), frameRateTarget, transitionLabel(), audioLabel(),
                     profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb));
         }
+    }
+
+    private String transitionLabel() {
+        String style = ProjectMJNI.isLightweightTransition() ? "lightweight" : "classic";
+        return prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO) == ProjectMJNI.TRANSITION_AUTO
+                ? style + " (auto)" : style;
+    }
+
+    /** Short status next to the level bar in the main panel. */
+    private String audioStatus(float level) {
+        if (audioVisualizer == null) return "No access";
+        if (level <= 0f) return "No sound";
+        return level < 0.02f ? "Very quiet" : "Listening";
     }
 
     /** Audio input as seen by the engine: tells whether the TV actually delivers sound to us. */
@@ -557,11 +642,13 @@ public class MainActivity extends Activity {
         visualizerView.onResume();
         setAudioEnabled(true);
         handler.post(uiRefresh);
+        if (menu == Menu.MAIN) handler.post(audioMeterRefresh);
     }
 
     @Override
     protected void onPause() {
         handler.removeCallbacks(uiRefresh);
+        handler.removeCallbacks(audioMeterRefresh);
         setAudioEnabled(false);
         visualizerView.onPause();
         super.onPause();

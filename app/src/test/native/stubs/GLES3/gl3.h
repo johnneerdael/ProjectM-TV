@@ -1,0 +1,37 @@
+#pragma once
+#include <cstddef>
+#include <cstdint>
+typedef unsigned int GLenum; typedef int GLint; typedef unsigned int GLuint; typedef int GLsizei; typedef void GLvoid;
+typedef unsigned int GLbitfield; typedef std::ptrdiff_t GLsizeiptr; typedef std::ptrdiff_t GLintptr;
+typedef uint64_t GLuint64; typedef struct __GLsync* GLsync;
+#define GL_RGBA 0x1908
+#define GL_UNSIGNED_BYTE 0x1401
+#define GL_READ_FRAMEBUFFER 0x8CA8
+#define GL_READ_FRAMEBUFFER_BINDING 0x8CAA
+#define GL_PIXEL_PACK_BUFFER 0x88EB
+#define GL_PIXEL_PACK_BUFFER_BINDING 0x88ED
+#define GL_PACK_ALIGNMENT 0x0D05
+#define GL_STREAM_READ 0x88E1
+#define GL_MAP_READ_BIT 0x0001
+#define GL_SYNC_GPU_COMMANDS_COMPLETE 0x9117
+#define GL_ALREADY_SIGNALED 0x911A
+#define GL_TIMEOUT_EXPIRED 0x911B
+#define GL_CONDITION_SATISFIED 0x911C
+#define GL_WAIT_FAILED 0x911D
+extern "C" {
+void glViewport(GLint, GLint, GLsizei, GLsizei);
+void glReadPixels(GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, GLvoid*);
+void glBindFramebuffer(GLenum, GLuint);
+void glGetIntegerv(GLenum, GLint*);
+void glGenBuffers(GLsizei, GLuint*);
+void glDeleteBuffers(GLsizei, const GLuint*);
+void glBindBuffer(GLenum, GLuint);
+void glBufferData(GLenum, GLsizeiptr, const void*, GLenum);
+void glPixelStorei(GLenum, GLint);
+void* glMapBufferRange(GLenum, GLintptr, GLsizeiptr, GLbitfield);
+unsigned char glUnmapBuffer(GLenum);
+GLsync glFenceSync(GLenum, GLbitfield);
+GLenum glClientWaitSync(GLsync, GLbitfield, GLuint64);
+void glDeleteSync(GLsync);
+void glFlush(void);
+}

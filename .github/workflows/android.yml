@@ -28,6 +28,14 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Check the preset index is up to date
+        run: tools/gen-preset-index.sh --check
+      - name: Check presets (audio-reactive, no excluded or missing textures)
+        run: tools/check-presets.py
+      - name: Install Mesa (headless OpenGL ES 3 for the transition overlay test)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends libegl-dev libgles-dev libegl-mesa0 libgl1-mesa-dri pkg-config > /dev/null
       - name: Run host tests (ASan/UBSan)
         run: app/src/test/native/run_native_tests.sh
 

@@ -20,6 +20,13 @@ public final class ProjectMJNI {
         }
     }
 
+    /** Classic blend until it proves too slow for the device, then lightweight. */
+    public static final int TRANSITION_AUTO = 0;
+    /** projectM hard-cuts; the last frame of the old preset fades out on top (cheap). */
+    public static final int TRANSITION_LIGHTWEIGHT = 1;
+    /** projectM's own blend: both presets render for the whole transition. */
+    public static final int TRANSITION_CLASSIC = 2;
+
     private ProjectMJNI() {}
 
     /**
@@ -46,8 +53,15 @@ public final class ProjectMJNI {
     public static native void setMeshSize(int width, int height);
     /** Adds the current preset to the skip list and moves on (hard cut). */
     public static native void skipCurrentPreset();
-    /** Enables skipping of presets that render nothing while music plays. */
+    /**
+     * Enables skipping of presets that stay black while music plays. Off by default: output is
+     * always measured and logged, but only skipped on request.
+     */
     public static native void setBlankDetection(boolean enabled);
+    /** Transition mode: {@link #TRANSITION_AUTO}, {@link #TRANSITION_LIGHTWEIGHT} or {@link #TRANSITION_CLASSIC}. */
+    public static native void setTransitionMode(int mode, boolean autoStartsLightweight);
+    /** True when automatic preset switches currently use the lightweight transition. */
+    public static native boolean isLightweightTransition();
     /** Makes the next automatic preset switch a hard cut (used before resolution changes). */
     public static native void setForceHardCut(boolean enabled);
     /** Reads an Android system property ("" if unset or not readable). */
@@ -58,6 +72,10 @@ public final class ProjectMJNI {
     /** Increments every time a new preset is shown. */
     public static native int getPresetChangeCounter();
     public static native int getPresetCount();
+    /** Increments when a transition finishes; see {@link #getLastTransitionFps()}. */
+    public static native int getTransitionCounter();
+    /** Average FPS over the last transition, including the preset-load stall. */
+    public static native float getLastTransitionFps();
     public static native int getSkippedCount();
     public static native void resetSkippedPresets();
     public static native String getVersion();

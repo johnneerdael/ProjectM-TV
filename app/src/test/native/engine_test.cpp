@@ -15,7 +15,7 @@
 #include <chrono>
 #include <sys/types.h>
 #include "android/asset_manager.h"
-#include "GLES2/gl2.h"
+#include "GLES3/gl3.h"
 #include "projectM-4/projectM.h"
 
 // ---- fake asset manager backed by a directory ----
@@ -36,14 +36,50 @@ const void* AAsset_getBuffer(AAsset* a) { return a->data.data(); }
 off_t AAsset_getLength(AAsset* a) { return a->data.size(); }
 void AAsset_close(AAsset* a) { delete a; }
 AAssetManager* AAssetManager_fromJava(JNIEnv*, jobject) { return nullptr; }
-int __android_log_print(int, const char* tag, const char* fmt, ...) { va_list ap; va_start(ap, fmt); vfprintf(stderr, fmt, ap); fputc('\n', stderr); va_end(ap); return 0; }
+std::vector<std::string> g_logLines;
+int __android_log_print(int, const char* tag, const char* fmt, ...) {
+  char buf[2048]; va_list ap; va_start(ap, fmt); vsnprintf(buf, sizeof buf, fmt, ap); va_end(ap);
+  fprintf(stderr, "%s\n", buf); g_logLines.push_back(buf); return 0; }
 int __system_property_get(const char* name, char* value) {
   if (strcmp(name, "vendor.display-size") == 0) { strcpy(value, "3840x2160"); return 9; }
   value[0] = 0; return 0; }
 // ---- fake GL ----
 unsigned char g_pixel = 0;
+int g_readFbo = -1;  // framebuffer bound for reading during glReadPixels
+unsigned char g_noise = 0;  // when set, pixels alternate between g_pixel and g_pixel + g_noise
+GLuint g_packBuffer = 0; std::vector<unsigned char> g_pbo; int g_fences = 0, g_mapped = 0;
 void glViewport(GLint, GLint, GLsizei, GLsizei) {}
-void glReadPixels(GLint, GLint, GLsizei w, GLsizei h, GLenum, GLenum, GLvoid* out) { memset(out, g_pixel, (size_t)w * h * 4); }
+void glBindFramebuffer(GLenum, GLuint fbo) { g_readFbo = (int)fbo; }
+void glGetIntegerv(GLenum e, GLint* v) { *v = e == GL_PIXEL_PACK_BUFFER_BINDING ? (GLint)g_packBuffer : e == GL_PACK_ALIGNMENT ? 4 : 7; }
+void glGenBuffers(GLsizei, GLuint* b) { *b = 42; }
+void glDeleteBuffers(GLsizei, const GLuint*) {}
+void glBindBuffer(GLenum, GLuint b) { g_packBuffer = b; }
+void glBufferData(GLenum, GLsizeiptr n, const void*, GLenum) { g_pbo.assign((size_t)n, 0); }
+void glPixelStorei(GLenum, GLint) {}
+void* glMapBufferRange(GLenum, GLintptr, GLsizeiptr, GLbitfield) { ++g_mapped; return g_pbo.data(); }
+unsigned char glUnmapBuffer(GLenum) { return 1; }
+GLsync glFenceSync(GLenum, GLbitfield) { ++g_fences; return (GLsync)(intptr_t)g_fences; }
+GLenum glClientWaitSync(GLsync, GLbitfield, GLuint64) { return GL_ALREADY_SIGNALED; }
+void glDeleteSync(GLsync) { --g_fences; }
+void glFlush() {}
+void glReadPixels(GLint, GLint, GLsizei w, GLsizei h, GLenum, GLenum, GLvoid* out) {
+  if (g_readFbo != 0) { fprintf(stderr, "FAIL glReadPixels not reading the window\n"); exit(1); }
+  if (g_packBuffer != 42) { fprintf(stderr, "FAIL glReadPixels without the pixel pack buffer (would stall)\n"); exit(1); }
+  size_t offset = (size_t)(intptr_t)out;
+  if (offset + (size_t)w * h * 4 > g_pbo.size()) { fprintf(stderr, "FAIL glReadPixels past the buffer\n"); exit(1); }
+  unsigned char* p = g_pbo.data() + offset;
+  for (size_t i = 0; i < (size_t)w * h; ++i) memset(p + i * 4, (i / 4) % 2 ? g_pixel + g_noise : g_pixel, 4); }
+}
+// ---- fake transition overlay (the real one is tested on Mesa by fade_gl_test.cpp) ----
+#include "snapshot_fade.h"
+int g_captures = 0, g_fadeStarts = 0, g_fadeDraws = 0; double g_fadeSeconds = 0; bool g_captureOk = true;
+bool SnapshotFade::Capture(int, int) { Stop(); ++g_captures; texture_ = g_captureOk ? 1 : 0; return g_captureOk; }
+void SnapshotFade::Start(double now, double seconds) { if (!texture_) return; ++g_fadeStarts; active_ = true; start_ = now; duration_ = seconds; g_fadeSeconds = seconds; }
+void SnapshotFade::Draw(double now) { if (!active_) return; ++g_fadeDraws; if (now - start_ >= duration_) Stop(); }
+void SnapshotFade::Stop() { active_ = false; texture_ = 0; }
+void SnapshotFade::Forget() { Stop(); }
+void SnapshotFade::Release() { Stop(); }
+extern "C" {
 // ---- fake projectM ----
 struct projectm {};
 static projectm_preset_switch_failed_event g_failCb; static projectm_preset_switch_requested_event g_reqCb;
@@ -52,8 +88,10 @@ bool g_lastSmooth = false; int g_meshCalls = 0;
 std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
 projectm_handle projectm_create() { return new projectm; }
 void projectm_destroy(projectm_handle p) { delete p; }
+int g_loadSleepMs = 0;
 void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
   g_lastSmooth = smooth;
+  if (g_loadSleepMs) std::this_thread::sleep_for(std::chrono::milliseconds(g_loadSleepMs));
   if (strstr(data, "BROKEN")) { g_failCb("", "compile error", nullptr); return; }
   g_loaded.push_back(data); }
 void projectm_set_preset_switch_requested_event_callback(projectm_handle, projectm_preset_switch_requested_event cb, void*) { g_reqCb = cb; }
@@ -71,7 +109,12 @@ void projectm_set_window_size(projectm_handle, size_t, size_t) {}
 void projectm_set_fps(projectm_handle, int32_t) {}
 unsigned int projectm_pcm_get_max_samples() { return 576; }
 void projectm_pcm_add_uint8(projectm_handle, const uint8_t*, unsigned int n, projectm_channels) { g_pcmFed += n; }
-void projectm_opengl_render_frame(projectm_handle) {}
+int g_renderSleepMs = 0, g_renderSleepMsSmooth = 0;  // simulated render cost (smooth: during a soft cut)
+bool g_requestInRender = false;  // like projectM: the timed switch request fires inside the render call
+void projectm_opengl_render_frame(projectm_handle) {
+  if (g_requestInRender) { g_requestInRender = false; g_reqCb(false, nullptr); }
+  int ms = g_renderSleepMs; if (g_lastSmooth && g_renderSleepMsSmooth) ms = g_renderSleepMsSmooth;
+  if (ms) std::this_thread::sleep_for(std::chrono::milliseconds(ms)); }
 char* projectm_get_version_string() { return strdup("4.1.0"); }
 void projectm_free_string(const char* s) { free((void*)s); }
 }
@@ -90,9 +133,15 @@ int main(int argc, char** argv) {
   g_library.Start(&am, skip, texdir);
   for (int i = 0; i < 200 && !g_library.Ready(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
-  printf("indexing\n");
+  printf("indexing from presets.idx\n");
   CHECK(g_library.Ready());
-  CHECK(g_library.ActiveCount() == 12);   // 13 .milk files (incl. .MILK), .DS_Store/.txt ignored, 1 pre-skipped
+  CHECK(g_library.ActiveCount() == 13);   // 14 .milk entries (incl. .MILK and a CRLF line), others ignored, 1 pre-skipped
+
+  printf("indexing falls back to listing the folder without presets.idx\n");
+  { std::string root2 = argv[2]; static AAssetManager am2{root2}; PresetLibrary& other = *new PresetLibrary();
+    other.Start(&am2, root2 + "/skip.txt", "");  // never destroyed, like the app's library
+    for (int i = 0; i < 200 && !other.Ready(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    CHECK(other.Ready() && other.ActiveCount() == 3); }
   CHECK(g_library.SkippedCount() == 1);
 
   printf("texture pack extracted before the index is ready\n");
@@ -126,12 +175,13 @@ int main(int argc, char** argv) {
   CHECK(current() == a);
 
   printf("projectM-requested auto switch (smooth), and forced hard cut before a resize\n");
-  std::string before = current(); g_reqCb(false, nullptr); frame();
-  CHECK(current() != before);
+  // A switch shows up as a successful load: after a reshuffle the same preset may legally come next.
+  size_t loads = g_loaded.size(); g_reqCb(false, nullptr); frame();
+  CHECK(g_loaded.size() == loads + 1);
   CHECK(g_lastSmooth);
   Java_com_example_projectm_visualizer_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
-  before = current(); g_reqCb(false, nullptr); frame();
-  CHECK(current() != before && !g_lastSmooth);
+  loads = g_loaded.size(); g_reqCb(false, nullptr); frame();
+  CHECK(g_loaded.size() == loads + 1 && !g_lastSmooth);
   g_reqCb(false, nullptr); frame();
   CHECK(g_lastSmooth);  // flag is one-shot
 
@@ -151,26 +201,34 @@ int main(int argc, char** argv) {
   printf("audio is fed on the GL thread, capped to projectM's buffer\n");
   g_pcmFed = 0; feedAudio(60); frame(); CHECK(g_pcmFed == 576);
 
+  printf("blank-preset skipping is off by default: a black preset with music stays\n");
+  g_pixel = 5; int skippedAtStart = g_library.SkippedCount();
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  std::string unproven = current();
+  for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+  CHECK(current() == unproven && g_library.SkippedCount() == skippedAtStart);
+  Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
+
   printf("dark preset during silence is NOT skipped\n");
   g_pixel = 0; int skippedBefore = g_library.SkippedCount();
   Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string dark = current();
   g_inputs.audioLevel = 0.f;
-  for (int i = 0; i < 300; ++i) { frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }  // 6s
+  for (int i = 0; i < 400; ++i) { frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }  // 8s
   CHECK(g_library.SkippedCount() == skippedBefore && current() == dark);
 
   printf("visible preset with music is NOT skipped\n");
   g_pixel = 200;
   Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string bright = current();
-  for (int i = 0; i < 300; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+  for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(g_library.SkippedCount() == skippedBefore && current() == bright);
 
   printf("black preset with music IS skipped and replaced\n");
   g_pixel = 5;
   Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string black = current();
-  for (int i = 0; i < 300 && current() == black; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+  for (int i = 0; i < 400 && current() == black; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() != black);
   CHECK(g_library.SkippedCount() == skippedBefore + 1);
 
@@ -181,19 +239,120 @@ int main(int argc, char** argv) {
   Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, false);
   g_pixel = 5; Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string dim = current();
-  for (int i = 0; i < 300; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+  for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() == dim && g_library.SkippedCount() == beforeSkip + 1);
   Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
 
   printf("reset skip list\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_resetSkippedPresets(nullptr, nullptr);
-  CHECK(g_library.SkippedCount() == 0 && g_library.ActiveCount() == 13);
+  CHECK(g_library.SkippedCount() == 0 && g_library.ActiveCount() == 14);
 
   printf("context loss: new instance resumes the same preset, textures re-applied\n");
   g_pixel = 200; std::string shown = current();
-  Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceCreated(nullptr, nullptr); frame();
+  Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+  Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720); frame();
   CHECK(current() == shown);
   CHECK(g_texturePathCalls.size() == 2);
+
+  printf("black detection reads the window framebuffer, not projectM's\n");
+  CHECK(g_readFbo == 7);  // the previous read binding is restored after sampling
+  CHECK(g_packBuffer == 0 && g_mapped > 0);  // pixel pack buffer unbound again; results were collected
+  CHECK(g_fences <= 1);                      // at most one read in flight, fences are deleted
+
+  auto settle = [](int ms) { for (int i = 0; i < ms / 2; ++i) { frame(); std::this_thread::sleep_for(std::chrono::milliseconds(2)); } };
+  Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 5); frame();
+
+  printf("lightweight: outgoing frame captured, projectM hard-cuts, overlay fades for min(transition, 3 s)\n");
+  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 1, false);
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  int captures = g_captures, starts = g_fadeStarts; loads = g_loaded.size();
+  g_requestInRender = true; frame();          // request fires during this frame's render
+  CHECK(g_captures == captures + 1 && g_loaded.size() == loads);  // no switch yet
+  frame();                                    // next frame switches
+  CHECK(g_loaded.size() == loads + 1 && !g_lastSmooth);
+  CHECK(g_fadeStarts == starts + 1 && g_fadeSeconds == 3.0 && g_engine.fade.Active());
+  int draws = g_fadeDraws; frame(); CHECK(g_fadeDraws == draws + 1);
+
+  printf("a remote-control switch ends the fade immediately\n");
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  CHECK(!g_engine.fade.Active());
+
+  printf("beat-triggered hard cuts and forced hard cuts are never faded\n");
+  captures = g_captures; starts = g_fadeStarts;
+  g_reqCb(true, nullptr); frame(); frame();
+  Java_com_example_projectm_visualizer_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
+  g_requestInRender = true; frame(); frame();
+  CHECK(g_captures == captures && g_fadeStarts == starts && !g_lastSmooth);
+
+  printf("capture failure falls back to projectM's classic transition\n");
+  g_captureOk = false; loads = g_loaded.size();
+  g_requestInRender = true; frame(); frame();
+  CHECK(g_loaded.size() == loads + 1 && g_lastSmooth && !g_engine.fade.Active());
+  g_captureOk = true;
+
+  printf("classic mode: projectM soft cut, no capture\n");
+  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 2, true);
+  CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  captures = g_captures; loads = g_loaded.size();
+  g_requestInRender = true; frame(); frame();
+  CHECK(g_captures == captures && g_loaded.size() == loads + 1 && g_lastSmooth);
+
+  printf("auto: a classic blend much slower than before switches to lightweight\n");
+  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
+  Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 1);
+  g_renderSleepMs = 1; g_renderSleepMsSmooth = 0;
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // hard cut: fast frames
+  settle(1500);
+  CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  g_renderSleepMsSmooth = 15;
+  int transitions = Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr);
+  g_requestInRender = true; frame(); frame();
+  CHECK(g_lastSmooth);
+  for (int i = 0; i < 200 && Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == transitions; ++i) frame();
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == transitions + 1);
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  g_renderSleepMs = g_renderSleepMsSmooth = 0;
+
+  printf("auto: a classic blend at full speed stays classic\n");
+  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
+  g_renderSleepMs = g_renderSleepMsSmooth = 2;
+  settle(1500);
+  transitions = Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr);
+  g_requestInRender = true; frame(); frame();
+  for (int i = 0; i < 1000 && Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == transitions; ++i) frame();
+  CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getLastTransitionFps(nullptr, nullptr) > 0.f);
+  g_renderSleepMs = g_renderSleepMsSmooth = 0;
+
+  printf("output measurements: flat and still are logged, never skipped\n");
+  {
+    auto outputLine = [](const std::string& preset) {
+      for (auto it = g_logLines.rbegin(); it != g_logLines.rend(); ++it)
+        if (it->rfind("OUTPUT preset='" + preset + "'", 0) == 0) return *it;
+      return std::string(); };
+    g_pixel = 230; g_noise = 3;  // near-white with faint, unchanging texture
+    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    std::string white = current();
+    int skipped = g_library.SkippedCount();  // after the switch: it may skip a broken preset on the way
+    for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+    CHECK(current() == white && g_library.SkippedCount() == skipped);
+    g_pixel = 60; g_noise = 120;  // varied picture (luma range > 12) that does not move
+    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    std::string frozen = current();
+    skipped = g_library.SkippedCount();
+    std::string whiteLine = outputLine(white);
+    printf("    %s\n", whiteLine.c_str());
+    CHECK(whiteLine.find("flat=") != std::string::npos && whiteLine.find("flat=0/") == std::string::npos);
+    CHECK(whiteLine.find("skipped=no") != std::string::npos);
+    for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
+    CHECK(current() == frozen && g_library.SkippedCount() == skipped);
+    g_noise = 0; g_pixel = 200;
+    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    std::string frozenLine = outputLine(frozen);
+    printf("    %s\n", frozenLine.c_str());
+    CHECK(frozenLine.find("flat=0/") != std::string::npos && frozenLine.find("still=0/") == std::string::npos);
+    CHECK(frozenLine.find("change_pct_avg=0.0") != std::string::npos);
+  }
 
   printf("audio level getter\n");
   feedAudio(60);

@@ -1,14 +1,39 @@
-# projectM for Android TV 1.9 (unreleased)
+# projectM for Android TV 1.9
+
+This release fixes the problems found in on-device measurements on an NVIDIA SHIELD: music that stopped, stutters at preset switches, a slow start and dull presets.
 
 ## Fixed
-- **Dull or empty presets.** About 1 in 5 presets (1,866) use texture images, e.g. `worms`, `clouds`, `lichen` or random textures. The app never shipped these, so those parts of the picture stayed empty. The MilkDrop texture pack recommended by the projectM project is now included.
+- **Music no longer stops.** At 1440p and above the app used so much memory on a 2 GB SHIELD that Android closed the music app (SoundCloud) and up to 11 other apps. Resolution is now capped by the device's RAM: 1080p below 1.6 GB, 1260p below 2.6 GB, 1440p below 3.6 GB, otherwise no cap. When Android reports low memory, Auto lowers the resolution at the next preset switch. You can turn the cap off in *Advanced › Memory limit*.
+- **Smoother preset switches.** A MilkDrop blend renders both presets for the whole transition. On the SHIELD that halved the frame rate for several seconds at every switch. The new **lightweight transition** switches straight to the new preset and fades the last picture of the old one out on top, at almost no extra cost. *Advanced › Transitions*:
+  - **Auto** (default) uses lightweight on low-end and low-memory devices and whenever a classic blend visibly slows down;
+  - **Lightweight** always uses it;
+  - **Classic** keeps projectM's own blend.
+- **Faster start.** On the SHIELD, 8.4 s of the 10.4 s cold start went to listing 9,800 preset files. The list is now built into the app and read in one go.
+- **Auto resolution settles.** It no longer keeps retrying a resolution the device can't sustain (on the SHIELD it went back and forth between 1440p and 1800p). A level that fails twice is not tried again in the session.
+- **Dull or empty presets:**
+  - About 1 in 5 presets (1,866) use texture images such as `worms`, `clouds` or `lichen`. The app never shipped these, so parts of the picture stayed empty. The MilkDrop texture pack recommended by the projectM project is now included.
+  - 14 more textures (e.g. `rose`, `shub1`, `grad3`) complete more presets.
+  - One preset whose texture could not be found anywhere was removed.
+- **Presets cleaned up** (9,795 → 9,606):
+  - 116 presets whose code cannot react to music at all were removed: no bass, mid, treble or volume in any equation or shader, the waveform hidden and no custom waveforms. They could only show a still or slowly drifting picture.
+  - 73 presets that show text, logos or photos of people through their images were removed, along with those 7 images.
+  - A new check (`tools/check-presets.py`, run by CI) keeps these presets out.
+- **Presets get a second chance.** Some presets were skipped as "blank" only because their textures were missing, so the skip list is cleared once when you update. *Skip blank presets* is now off by default.
 - **Resolution settings:**
   - A saved 4K setting falls back to Auto on a 1080p panel.
   - Changing the frame rate cancels a resolution change that was already queued.
 
 ## New
-- **Audio level in Advanced › Diagnostics.** It shows whether the TV actually delivers sound to the app. Without audio most presets look dim.
-- **`tools/tv-diagnostics.sh`:** on-device measurements (startup, FPS per resolution, 4K composition, audio level, skipped presets) over adb. See `docs/DIAGNOSTICS.md`.
+- **See that the app hears your music.** The settings panel has a live audio level bar under *Now playing*, with a status: *Listening*, *Very quiet*, *No sound* or *No access* (microphone/recording permission missing).
+- **Advanced › Diagnostics** shows:
+  - the audio level: whether the TV actually delivers sound to the app (without audio most presets look dim);
+  - the memory limit;
+  - the transition style in use.
+- **`tools/tv-diagnostics.sh`** measures startup, FPS per resolution, preset load times, transition FPS, 4K composition, the audio level and apps closed for low memory, all over adb. See `docs/DIAGNOSTICS.md`.
+- **Output measurements.** For each preset, the app logs how much of the picture changes while music plays. This is how we'll tell truly frozen or single-colour presets from dull ones before skipping anything.
+
+## Known limitation
+- Loading a preset (reading it, loading its textures, compiling its shaders) still freezes the picture briefly at each switch. 1.9 logs how long each load takes; moving the loading off the display thread is planned next.
 
 ---
 
