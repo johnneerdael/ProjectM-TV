@@ -80,6 +80,13 @@ VisualizerRenderer (GL thread) ─► onDrawFrame (native)
 - Only the GL thread touches the projectM handle (create, render, load, settings).
 - All other entry points only write atomics or mutex-protected buffers. This removes a whole class of races and makes `queueEvent()` unnecessary for correctness.
 
+### Preset checks
+`tools/check-presets.py` (run by CI) reads every bundled `.milk` file and fails when a preset:
+- **cannot react to music:** no `bass`, `mid`, `treb`, `vol` or `*_att` in any equation or shader, the main waveform hidden (`fWaveAlpha` ≤ 0.01 or `wave_a = 0` in code), and no custom waveform enabled;
+- uses an **excluded texture** (text, logos or photos of people), or a **texture that isn't bundled**. A texture counts only when its sampler is declared and used, directly or through `#define sampler_x sampler_y`.
+
+`--remove` deletes the failing presets. In 1.9 that removed 116 non-reactive and 73 excluded-texture presets (one was both), leaving 9,606.
+
 ### Preset index
 `tools/gen-preset-index.sh` writes `app/src/main/assets/presets.idx`, the sorted list of bundled presets, and CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before.
 

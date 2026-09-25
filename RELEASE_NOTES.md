@@ -12,14 +12,19 @@ This release fixes the problems found in on-device measurements on an NVIDIA SHI
 - **Auto resolution settles.** It no longer keeps retrying a resolution the device can't sustain (on the SHIELD it went back and forth between 1440p and 1800p). A level that fails twice is not tried again in the session.
 - **Dull or empty presets:**
   - About 1 in 5 presets (1,866) use texture images such as `worms`, `clouds` or `lichen`. The app never shipped these, so parts of the picture stayed empty. The MilkDrop texture pack recommended by the projectM project is now included.
-  - 14 more textures (e.g. `rose`, `shub1`, `grad3`) complete another 216 presets.
+  - 14 more textures (e.g. `rose`, `shub1`, `grad3`) complete more presets.
   - One preset whose texture could not be found anywhere was removed.
+- **Presets cleaned up** (9,795 → 9,606):
+  - 116 presets whose code cannot react to music at all were removed: no bass, mid, treble or volume in any equation or shader, the waveform hidden and no custom waveforms. They could only show a still or slowly drifting picture.
+  - 73 presets that show text, logos or photos of people through their images were removed, along with those 7 images.
+  - A new check (`tools/check-presets.py`, run by CI) keeps these presets out.
 - **Presets get a second chance.** Some presets were skipped as "blank" only because their textures were missing, so the skip list is cleared once when you update. *Skip blank presets* is now off by default.
 - **Resolution settings:**
   - A saved 4K setting falls back to Auto on a 1080p panel.
   - Changing the frame rate cancels a resolution change that was already queued.
 
 ## New
+- **See that the app hears your music.** The settings panel has a live audio level bar under *Now playing*, with a status: *Listening*, *Very quiet*, *No sound* or *No access* (microphone/recording permission missing).
 - **Advanced › Diagnostics** shows:
   - the audio level: whether the TV actually delivers sound to the app (without audio most presets look dim);
   - the memory limit;

@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     private static final long MENU_AUTO_HIDE_MS = 10000;
     private static final long NOW_PLAYING_MS = 6000;
     private static final long UI_REFRESH_MS = 500;
+    private static final long AUDIO_METER_MS = 66;
     private static final long FADE_MS = 180;
 
     private static final String PREFS = "projectm_settings";
@@ -71,6 +72,8 @@ public class MainActivity extends Activity {
     private TextView presetMeta;
     private TextView statusLine;
     private TextView diagnostics;
+    private AudioMeterView audioMeter;
+    private TextView audioStatus;
     private OptionRow skippedRow;
     private View nowPlaying;
     private TextView nowPlayingText;
@@ -79,6 +82,16 @@ public class MainActivity extends Activity {
     private String currentPreset = "";
 
     private final Runnable hideMenu = () -> showMenu(Menu.NONE);
+    private final Runnable audioMeterRefresh = new Runnable() {
+        @Override
+        public void run() {
+            if (menu != Menu.MAIN) return;
+            float level = ProjectMJNI.getAudioLevel();
+            audioMeter.setLevel(level);
+            setText(audioStatus, audioStatus(level));
+            handler.postDelayed(this, AUDIO_METER_MS);
+        }
+    };
     private final Runnable hideNowPlaying = () -> fade(nowPlaying, false);
     private final Runnable uiRefresh = new Runnable() {
         @Override
@@ -248,6 +261,8 @@ public class MainActivity extends Activity {
         presetMeta = findViewById(R.id.preset_meta);
         statusLine = findViewById(R.id.status_line);
         diagnostics = findViewById(R.id.diagnostics);
+        audioMeter = findViewById(R.id.audio_meter);
+        audioStatus = findViewById(R.id.audio_status);
         nowPlaying = findViewById(R.id.now_playing);
         nowPlayingText = findViewById(R.id.now_playing_text);
 
@@ -390,6 +405,8 @@ public class MainActivity extends Activity {
         }
         fade(nowPlaying, false);
         refreshStatus();
+        handler.removeCallbacks(audioMeterRefresh);
+        if (target == Menu.MAIN) handler.post(audioMeterRefresh);
         if (target == Menu.MAIN) {
             if (previous == Menu.ADVANCED) {
                 slide(advancedMenu, false);
@@ -468,6 +485,13 @@ public class MainActivity extends Activity {
         String style = ProjectMJNI.isLightweightTransition() ? "lightweight" : "classic";
         return prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO) == ProjectMJNI.TRANSITION_AUTO
                 ? style + " (auto)" : style;
+    }
+
+    /** Short status next to the level bar in the main panel. */
+    private String audioStatus(float level) {
+        if (audioVisualizer == null) return "No access";
+        if (level <= 0f) return "No sound";
+        return level < 0.02f ? "Very quiet" : "Listening";
     }
 
     /** Audio input as seen by the engine: tells whether the TV actually delivers sound to us. */
@@ -613,11 +637,13 @@ public class MainActivity extends Activity {
         visualizerView.onResume();
         setAudioEnabled(true);
         handler.post(uiRefresh);
+        if (menu == Menu.MAIN) handler.post(audioMeterRefresh);
     }
 
     @Override
     protected void onPause() {
         handler.removeCallbacks(uiRefresh);
+        handler.removeCallbacks(audioMeterRefresh);
         setAudioEnabled(false);
         visualizerView.onPause();
         super.onPause();
