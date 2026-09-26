@@ -40,9 +40,9 @@ public class MainActivity extends Activity {
     private static final long AUDIO_METER_MS = 66;
     private static final long FADE_MS = 180;
     private static final long AUDIO_WATCH_MS = 2000;      // how often silence is checked
+    private static final long FIRST_WATCH_MS = 500;       // first check after (re)starting
     private static final long SILENCE_BEFORE_SEARCH_MS = 4000;
-    private static final long SEARCH_RETRY_MS = 15000;    // doubles after each empty search
-    private static final long SEARCH_RETRY_MAX_MS = 60000;
+    private static final long SEARCH_RETRY_MS = 20000;    // while music plays but nothing is heard
     private static final long RECHECK_PLAYER_MS = 4000;   // quick look at the last player session
     private static final long AUDIO_POLL_MS = 50;         // shared Visualizer without callbacks
 
@@ -50,6 +50,8 @@ public class MainActivity extends Activity {
     private static final String PREF_AUTO_CHANGE = "auto_change_enabled";
     private static final String PREF_BEAT_CUTS = "beat_cuts";
     private static final String PREF_TRACK_ACCESS_EXPLAINED = "track_access_explained";
+    // The music player's audio session found last: tried first at the next launch.
+    private static final String PREF_LAST_PLAYER_SESSION = "last_player_session";
     private static final String PREF_PRESET_DURATION = "preset_duration";
     private static final String PREF_TRANSITION_DURATION = "transition_duration";
     private static final String PREF_RENDER_HEIGHT = "render_height";      // 0 = automatic
@@ -98,7 +100,6 @@ public class MainActivity extends Activity {
     private byte[] pollBuffer;
     private boolean audioPolled;
     private AudioManager audioManager;
-    private long searchRetryMs = SEARCH_RETRY_MS;
     private volatile boolean resumed;  // also read on audioThread
     private OptionRow audioSourceRow;
 
@@ -149,6 +150,7 @@ public class MainActivity extends Activity {
         getWindow().setBackgroundDrawable(null);  // the GL surface covers the screen
 
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        lastPlayerSession = prefs.getInt(PREF_LAST_PLAYER_SESSION, 0);
         profile = DeviceProfile.detect(this);
         display = DisplayInfo.detect(this);
 
@@ -856,13 +858,16 @@ public class MainActivity extends Activity {
                 musicActive = false;
                 return;
             }
-            if (!musicActive) {  // music (re)started: give the current source a chance first
+            if (!musicActive) {  // music (re)started
                 musicActive = true;
                 lastSignalAt = now;
                 nextSearchAt = 0;
                 nextRecheckAt = 0;
-                searchRetryMs = SEARCH_RETRY_MS;
-                return;
+                // If the current source hears nothing, look for the player's session right away (the
+                // last one first): a per-session Visualizer works on every TV, and waiting for 4 s of
+                // silence first only delayed the visuals after a launch.
+                if (captureRunning || ProjectMJNI.getAudioLevel() > 0f) return;
+                lastSignalAt = now - SILENCE_BEFORE_SEARCH_MS;
             }
             if (now - lastSignalAt < SILENCE_BEFORE_SEARCH_MS || switchingFromCapture) return;
 
@@ -881,15 +886,12 @@ public class MainActivity extends Activity {
             }
             if (found == 0 && now >= nextSearchAt) {
                 found = PlayerSessionFinder.find(audioManager.generateAudioSessionId(), last);
-                if (found == 0) {
-                    nextSearchAt = now + searchRetryMs;
-                    searchRetryMs = Math.min(searchRetryMs * 2, SEARCH_RETRY_MAX_MS);
-                }
+                if (found == 0) nextSearchAt = now + SEARCH_RETRY_MS;
             }
             if (found != 0) {
                 lastPlayerSession = found;
                 nextSearchAt = 0;
-                searchRetryMs = SEARCH_RETRY_MS;
+                prefs.edit().putInt(PREF_LAST_PLAYER_SESSION, found).apply();
             }
             if (fromCapture) {
                 if (found == 0) return;
@@ -941,7 +943,7 @@ public class MainActivity extends Activity {
             if (!captureRunning) switchingFromCapture = false;
         });
         audioHandler.removeCallbacks(audioWatch);
-        audioHandler.postDelayed(audioWatch, AUDIO_WATCH_MS);
+        audioHandler.postDelayed(audioWatch, FIRST_WATCH_MS);
         handler.post(uiRefresh);
         if (menu == Menu.MAIN) handler.post(audioMeterRefresh);
         // Checked on every resume: access may have been granted while the app was in the background.

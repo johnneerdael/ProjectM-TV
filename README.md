@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-This README describes what the app does as of version 1.9.17, and where it falls short. Everything under *What it does* was checked on the only devices it has been tested on: two NVIDIA SHIELD Android TVs (2019, Android 11).
+**Validated on the NVIDIA SHIELD TV (2 GB) and SHIELD TV Pro (3 GB). Not recommended for Android TV devices with 1 GB of memory.** This README describes the app as of version 1.9.18.
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
@@ -19,9 +19,22 @@ This README describes what the app does as of version 1.9.17, and where it falls
   <img src="docs/screenshots/tunnel.jpg" alt="A blue tunnel preset" width="32%">
 </p>
 
+## Highlights
+
+- **9,606 curated MilkDrop presets** with smooth blends between them
+- **Audio detected about 1 second after launch**, also on the SHIELD's Dolby output, where Android's standard visualizer hears nothing
+- **Track title and artist** on screen when a new track starts
+- **No freezes at preset switches**: upcoming presets are prepared in the background, with cached shaders
+- **Adaptive resolution** that holds the frame rate, also during blends, without interrupting the picture
+- **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), reused picture buffers, fewer redundant GL calls, a faster shader parser
+- **Memory-aware**: keeps the music app alive on TVs with little memory
+- **Skips presets that stay black**
+- **Private by design**: no internet permission; audio is analysed in memory only
+- **Remote-only control** with a settings panel and live diagnostics
+
 ## What it does
 
-- **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. On the SHIELD, the visuals react to SoundCloud about 10 seconds after launch, and within about 5 seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
+- **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. On the SHIELD, the visuals react to the music about 1 second after launch (about 5 seconds the very first time), and within a few seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
 - **Shows 9,606 presets in shuffled order, with smooth blends.** Every 30 seconds by default it blends the old preset into the new one over 7 seconds. The next preset's shaders are compiled in the background beforehand, so the switch does not freeze the picture, and the blend adapts its resolution to keep the frame rate up. Left and Right on the remote cut straight to a random or the previous preset.
 - **Shows the track that is playing.** When the music app starts a new track, its title and artist appear in the lower left for 20 seconds (taken from the app's media session, e.g. SoundCloud or Flow). This needs *notification access* (on the SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*), see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that were black on the SHIELD render; this rule remains as a safety net (details under *Presets* below).
@@ -32,11 +45,11 @@ This README describes what the app does as of version 1.9.17, and where it falls
 
 ## What it does not do, and known limits
 
-**Tested on two devices.** All measurements come from two NVIDIA SHIELD Android TVs with Android 11: the 2019 SHIELD TV (`sif`, 2 GB RAM, runs the app 32-bit) and the 2019 SHIELD TV Pro (`mdarcy`, 3 GB RAM, 64-bit). Other Android TV devices are untested. The app should run on any Android TV with Android 5.0 or later and OpenGL ES 3.0, but performance, audio behaviour and memory limits will differ.
+**Tested on two devices.** All measurements come from two NVIDIA SHIELD Android TVs with Android 11: the 2019 SHIELD TV (`sif`, 2 GB RAM, runs the app 32-bit) and the 2019 SHIELD TV Pro (`mdarcy`, 3 GB RAM, 64-bit). Other Android TV devices are untested. Devices with 1 GB of memory are not recommended: projectM and the music app together need more. The app should run on any Android TV with Android 5.0 or later and OpenGL ES 3.0, but performance, audio behaviour and memory limits will differ.
 
 **Audio**
 - The app does not play music, and it has no microphone or line-in input. It can only visualize audio that another app plays on the same TV.
-- On a SHIELD with Dolby or passthrough output, Android's standard visualizer hears nothing. The app works around this by finding the audio session of the playing app. That takes about 10 seconds after launch. If a search finds nothing, the next one waits 15, then 30, then 60 seconds, so it can take up to a minute. It works with SoundCloud and Flow; **other music apps (Spotify, YouTube Music, Plex, …) have not been tested**.
+- On a SHIELD with Dolby or passthrough output, Android's standard visualizer hears nothing. The app works around this by finding the audio session of the playing app. The search starts right at launch and remembers the session it found, so the visuals usually react within a second or two. If a search finds nothing while music plays, it tries again every 20 seconds. It works with SoundCloud and Flow; **other music apps (Spotify, YouTube Music, Plex, …) have not been tested**.
 - The *Media capture* audio source receives no audio on the SHIELD. It relies on Android's playback capture, which the SHIELD's Dolby audio path bypasses. When the app finds the player's session instead, it switches back to *Standard* by itself. On other devices, Media capture may work; it asks for screen-cast consent at every launch.
 - Apps that block audio capture, and audio that reaches the TV already encoded (for example Dolby bitstreams from a video app), cannot be visualized.
 - The audio the visualizer receives is 8-bit mono, which is what Android's visualizer API provides.
@@ -146,7 +159,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 ## Troubleshooting
 
 **The visuals don't react to the music.** Open *Settings › Advanced* and look at the *Audio* line under *Diagnostics*.
-- *silent / no data* right after launch: wait about 10 seconds while the app looks for the music app's audio.
+- *silent / no data* right after launch: wait a few seconds while the app looks for the music app's audio.
 - Still silent with *Media capture* on a SHIELD: switch *Audio source* to *Standard*.
 - Still silent with *Standard*: the music app may block capture or send encoded audio, or it may not have been tested (see *Audio* above). Try SoundCloud to confirm the setup works.
 

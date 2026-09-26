@@ -1,3 +1,11 @@
+# ProjectM TV 1.9.18
+
+## Changed
+- **The visuals react to the music about 1 second after launch** (was about 10 seconds on the SHIELD). The app now looks for the music app's audio session right away instead of first waiting for several seconds of silence, and remembers the session it found for the next launch. If nothing is found while music plays, it looks again every 20 seconds.
+- The README lists the app's highlights, and states the devices it was validated on: NVIDIA SHIELD TV (2 GB) and SHIELD TV Pro (3 GB). Devices with 1 GB of memory are not recommended.
+
+---
+
 # ProjectM TV 1.9.17
 
 ## Fixed

@@ -1,0 +1,2 @@
+- The visuals react to the music about 1 second after launch (was about 10 s on the SHIELD).
+- If no music is found while something plays, the app looks again every 20 seconds.
