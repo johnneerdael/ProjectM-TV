@@ -1,3 +1,11 @@
+# projectM for Android TV 1.9.9
+
+## Changed
+- **Reproducible builds, completed.** The expression parser inside projectM (projectm-eval) was regenerated with whatever flex/bison the build machine had installed, which shifted line numbers in the native library's debug info and changed its build ID between machines. The build now always uses the parser sources that ship with projectm-eval, so GitHub's and F-Droid's builds are byte-for-byte identical.
+- Nothing changes in the app itself.
+
+---
+
 # projectM for Android TV 1.9.8
 
 ## Changed

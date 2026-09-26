@@ -1,0 +1,2 @@
+- Reproducible builds: the native library is now identical no matter which machine builds it.
+- No changes to the app itself.
