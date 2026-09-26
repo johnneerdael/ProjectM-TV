@@ -1,3 +1,11 @@
+# projectM for Android TV 1.9.10
+
+## Changed
+- **No dependency metadata in the APK.** The Android build tools add an encrypted list of the app's dependencies to the APK signature block that only Google Play can read; F-Droid does not accept APKs that contain it. It is switched off. (The app has no third-party Android libraries, so the list was empty anyway.)
+- Nothing changes in the app itself.
+
+---
+
 # projectM for Android TV 1.9.9
 
 ## Changed

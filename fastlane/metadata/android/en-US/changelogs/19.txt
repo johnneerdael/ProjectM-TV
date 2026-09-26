@@ -1,0 +1,2 @@
+- Build: no Google Play dependency metadata in the APK (required by F-Droid).
+- No changes to the app itself.
