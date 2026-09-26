@@ -10,8 +10,18 @@ find_library(android-lib android)
 # docs/THIRD_PARTY.md) plus the patches in tools/projectm-patches. It is linked statically into
 # libprojectmtv.so, so the APK holds one native library and one C++ runtime. The playlist library
 # is not built: the app manages its own shuffled preset list straight from the APK assets.
-set(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../../..)
+get_filename_component(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../../.. ABSOLUTE)
 set(PROJECTM_SOURCE ${REPO_ROOT}/third_party/projectm)
+
+# Reproducible builds (F-Droid rebuilds the app and compares it with our release APK): keep the
+# checkout and NDK locations out of the output. Without this, the debug info that exists until the
+# release build strips it still changes the linker's build ID, so every build path gives a
+# different libprojectmtv.so. Applies to projectM too, which is added below.
+add_compile_options(
+    -ffile-prefix-map=${REPO_ROOT}=.
+    -ffile-prefix-map=${ANDROID_NDK}=ndk
+    -fdebug-compilation-dir=.  # the CMake build directory, which the prefix map does not cover
+)
 if(NOT EXISTS ${PROJECTM_SOURCE}/CMakeLists.txt OR NOT EXISTS ${PROJECTM_SOURCE}/vendor/projectm-eval/CMakeLists.txt)
     message(FATAL_ERROR "projectM sources missing: run `git submodule update --init --recursive`")
 endif()

@@ -29,7 +29,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'  # same major as F-Droid's build server (OpenJDK 21), for reproducible builds
       - name: Check the preset index (names and memory weights) is up to date
         run: tools/gen-preset-index.py --check
       - name: Check presets (audio-reactive, no excluded or missing textures)
@@ -76,7 +76,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'  # same major as F-Droid's build server (OpenJDK 21), for reproducible builds
 
       - uses: gradle/actions/setup-gradle@v4
 

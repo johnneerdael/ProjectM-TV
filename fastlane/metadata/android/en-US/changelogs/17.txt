@@ -1,0 +1,2 @@
+- Reproducible builds: F-Droid can verify that its build is identical to the GitHub release.
+- No changes to the app itself.

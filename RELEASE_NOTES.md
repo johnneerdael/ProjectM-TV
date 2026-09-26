@@ -1,3 +1,11 @@
+# projectM for Android TV 1.9.8
+
+## Changed
+- **Reproducible builds.** The native library no longer depends on where the source is checked out or where the Android NDK is installed (`-ffile-prefix-map`, `-fdebug-compilation-dir`), and CI builds with JDK 21 like F-Droid's build server. F-Droid can then rebuild the app, confirm it is identical to the release on GitHub, and ship it with our signature, so updates work across F-Droid, Downloader and GitHub.
+- Nothing changes in the app itself.
+
+---
+
 # projectM for Android TV 1.9.7
 
 ## Changed
