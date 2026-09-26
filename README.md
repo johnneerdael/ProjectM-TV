@@ -71,7 +71,11 @@ adb install -r projectM-TV.apk
 
 **Then:** start the music in your music app and open projectM TV. Android asks for permission to record audio; the app needs it to receive the music.
 
-From 1.9.6 on, every release is signed with the same key, so updates install over the previous version and keep your settings. **Versions up to 1.9.5 were each signed with a different temporary key: uninstall them once before installing 1.9.6 or later** (this resets the settings). The same applies to a version you built yourself.
+From 1.9.7 on, updates install over the previous version and keep your settings. Two one-time steps if you used an earlier version:
+- **1.9.7 changed the app ID** to `nl.neerdael.projectmtv`. It installs as a new app next to the old one; uninstall the old *projectM TV* afterwards.
+- Versions up to 1.9.5 were each signed with a different temporary key; 1.9.6 and later use one permanent key.
+
+A version you built yourself is signed with your own debug key: uninstall it before installing a release (this resets the settings).
 
 ## Remote control
 

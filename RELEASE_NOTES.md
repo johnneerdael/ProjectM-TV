@@ -1,3 +1,12 @@
+# projectM for Android TV 1.9.7
+
+## Changed
+- **New app ID: `nl.neerdael.projectmtv`.** Earlier versions used the placeholder `com.example.projectm.visualizer`. Android treats the new ID as a different app, so 1.9.7 installs next to the old version: **uninstall the old projectM TV afterwards** (its settings are not carried over). This is a one-time change, made before the app is published on F-Droid, where the ID can never change again.
+- Build: stable Gradle 8.14.2 instead of a 9.0 pre-release (F-Droid only builds with released Gradle versions).
+- Store listing for F-Droid (`fastlane/metadata`): description, changelog, icon and TV banner.
+
+---
+
 # projectM for Android TV 1.9.6
 
 ## Changed
