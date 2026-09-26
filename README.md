@@ -39,7 +39,7 @@ This README describes what the app does as of version 1.9.5, and where it falls 
 - projectM is a reimplementation of MilkDrop. Some presets look different from MilkDrop on Windows, or still render incorrectly.
 
 **Presets**
-- 189 of the 9,795 *Cream of the Crop* presets are not included: 116 that cannot react to music, 73 that use images with text, logos or people (one preset is in both groups), and 1 whose texture could not be found. Some presets that remain use textures with no stated licence; see [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
+- 189 of the 9,795 *Cream of the Crop* presets are not included: 116 that cannot react to music, 73 that use images with text, logos or people (one preset is in both groups), and 1 whose texture could not be found.
 - You cannot choose or search for a preset, or build playlists. Presets play in shuffled order.
 - The black-preset check has limits. It judges each preset only in the first 20 seconds or so after it starts, and only after 3 seconds of uninterrupted music. "Black" means every sampled pixel is at or below about 8% brightness, so a very dark preset can count as black. After 3 black presets in a row it stops acting until a preset shows something, in case the fault is the renderer rather than the presets.
 - Versions before 1.9.5 marked some presets as black that now render. If you used an earlier version, reset the skip list: *Settings › Advanced › Skipped presets*.
@@ -168,8 +168,10 @@ By default it builds this checkout and installs it on the TV; `--no-install` tes
 - The MilkDrop texture pack, and textures from the community *MilkDrop 135k+ Presets MegaPack* collected by Incubo_
 - The authors of the MilkDrop presets
 
-Licences differ per source, and some textures have none stated. Details are in [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
+projectM is LGPL 2.1; the presets and textures are distributed under CC0 1.0 (see *License*). Sources are listed in [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
 
 ## License
 
-The app's own code is licensed under the GNU Lesser General Public License, version 2.1; see [LICENSE](LICENSE). This matches projectM. Bundled presets and textures keep their own licences; see [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
+The app's own code is licensed under the GNU Lesser General Public License, version 2.1; see [LICENSE](LICENSE). This matches projectM.
+
+The bundled presets and textures are distributed under CC0 1.0 ([LICENSES/CC0-1.0.txt](LICENSES/CC0-1.0.txt)): free for any use. The presets and textures themselves were freely released by their authors; authors who want their work removed can open an issue. Details in [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md).
