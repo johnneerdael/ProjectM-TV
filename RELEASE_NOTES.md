@@ -1,3 +1,10 @@
+# ProjectM TV 1.9.14
+
+## Changed
+- The explanation of how to allow notification access (for track titles) appears only once, at the first launch without access, instead of at every launch. *Settings › Advanced › Track titles* shows it again.
+
+---
+
 # ProjectM TV 1.9.13
 
 ## Added

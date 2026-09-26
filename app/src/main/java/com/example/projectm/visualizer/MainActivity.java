@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
     private static final String PREFS = "projectm_settings";
     private static final String PREF_AUTO_CHANGE = "auto_change_enabled";
     private static final String PREF_BEAT_CUTS = "beat_cuts";
+    private static final String PREF_TRACK_ACCESS_EXPLAINED = "track_access_explained";
     private static final String PREF_PRESET_DURATION = "preset_duration";
     private static final String PREF_TRANSITION_DURATION = "transition_duration";
     private static final String PREF_RENDER_HEIGHT = "render_height";      // 0 = automatic
@@ -130,7 +131,6 @@ public class MainActivity extends Activity {
     private final Runnable hideNowPlaying = () -> fade(nowPlaying, false);
     private TrackWatcher trackWatcher;
     private String currentTrack = "";
-    private boolean trackAccessAsked;  // asked for notification-listener access in this launch
     private OptionRow trackRow;
     private final Runnable uiRefresh = new Runnable() {
         @Override
@@ -952,11 +952,13 @@ public class MainActivity extends Activity {
         // Checked on every resume: access may have been granted while the app was in the background.
         if (!trackWatcher.start()) {
             Log.i(TAG, "Track titles off: no notification-listener access");
-            // Explained once per launch, after the microphone permission (not on top of its dialog).
-            if (!trackAccessAsked && hasAudioPermission()) {
-                trackAccessAsked = true;
+            // Explained automatically only once, ever (after the microphone permission, not on top of
+            // its dialog); Advanced › Track titles explains it again on request.
+            if (!prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false) && hasAudioPermission()) {
                 handler.postDelayed(() -> {
-                    if (resumed && !trackWatcher.hasAccess()) explainTrackAccess();
+                    if (!resumed || trackWatcher.hasAccess() || prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false)) return;
+                    prefs.edit().putBoolean(PREF_TRACK_ACCESS_EXPLAINED, true).apply();
+                    explainTrackAccess();
                 }, TRACK_ACCESS_DELAY_MS);
             }
         }

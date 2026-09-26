@@ -64,7 +64,7 @@ The app has no internet permission: nothing it hears or reads can leave the TV. 
 | Record audio (`RECORD_AUDIO`) | Android's audio visualizer and playback capture both count as recording. The app only receives the sound other apps play, to animate the presets; the microphone is not used. | At first launch |
 | Change audio settings (`MODIFY_AUDIO_SETTINGS`) | Required by Android to attach a visualizer to the TV's main audio output (session 0), which the app listens to until it has found the music app's own audio session. | Granted at install |
 | Foreground service (`FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PROJECTION`) | Only for the *Media capture* audio source (Android 10+): Android runs playback capture in a foreground service. | Granted at install; *Media capture* also shows Android's screen-casting consent each time it starts |
-| Notification access (special access) | Only to read which track the music app is playing (its media session), for the track titles. The app reads no notifications. | You switch it on in the TV's settings (*Apps › Special app access › Notification access*); the app explains where at launch while it is off. Optional: without it no titles are shown |
+| Notification access (special access) | Only to read which track the music app is playing (its media session), for the track titles. The app reads no notifications. | You switch it on in the TV's settings (*Apps › Special app access › Notification access*); the app explains where once, at the first launch. Optional: without it no titles are shown |
 
 ## Install
 
@@ -136,7 +136,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 
 **It stutters.** Keep *Resolution* and *Transitions* on *Auto*, set *Frame rate* to 30 fps, and lower *Detail* in *Advanced*.
 
-<a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). While access is missing, the app explains this once per launch; *Settings › Advanced › Track titles* shows the explanation again, and *Diagnostics* shows whether access is granted.
+<a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). The app explains this once, at the first launch without access; *Settings › Advanced › Track titles* shows the explanation again, and *Diagnostics* shows whether access is granted.
 
 **The music app closes while the visualizer runs.** Keep *Memory limit* on and *Resolution* on *Auto*. Only *Auto* lowers the resolution when memory runs low.
 
