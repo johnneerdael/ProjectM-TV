@@ -51,6 +51,11 @@ set(ENABLE_SDL_UI OFF CACHE BOOL "" FORCE)
 set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 set(BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)  # static projectM ends up in a shared library
+# projectm-eval regenerates its parser (Scanner.c, Compiler.c) whenever flex/bison are installed,
+# and each flex/bison version writes slightly different code: the line numbers in the debug info,
+# and so the build ID, then depend on the build machine. Always use the pre-generated sources.
+set(CMAKE_DISABLE_FIND_PACKAGE_FLEX ON)
+set(CMAKE_DISABLE_FIND_PACKAGE_BISON ON)
 # projectM writes its version.h from CMAKE_PROJECT_VERSION*, which belong to the top-level project
 # (ours, unversioned): a first configure happens to get projectM's version, but a re-configure of an
 # existing build directory gets empty values and fails to compile. Set them from projectM's own
