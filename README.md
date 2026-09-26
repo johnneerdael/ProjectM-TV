@@ -10,6 +10,15 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 
 This README describes what the app does as of version 1.9.17, and where it falls short. Everything under *What it does* was checked on the only devices it has been tested on: two NVIDIA SHIELD Android TVs (2019, Android 11).
 
+<p align="center">
+  <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
+</p>
+<p align="center">
+  <img src="docs/screenshots/mandala.jpg" alt="A kaleidoscopic preset" width="32%">
+  <img src="docs/screenshots/kaleidoscope.jpg" alt="A green and yellow preset" width="32%">
+  <img src="docs/screenshots/tunnel.jpg" alt="A blue tunnel preset" width="32%">
+</p>
+
 ## What it does
 
 - **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. On the SHIELD, the visuals react to SoundCloud about 10 seconds after launch, and within about 5 seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
@@ -105,6 +114,11 @@ In the panel, Up and Down move between rows, Left and Right change a value, and 
 ## Settings
 
 The main panel shows the current preset and a live audio level (*Listening*, *Very quiet*, *No sound* or *No access*).
+
+<p align="center">
+  <img src="docs/screenshots/settings.jpg" alt="The settings panel" width="45%">
+  <img src="docs/screenshots/advanced.jpg" alt="The advanced settings panel with diagnostics" width="45%">
+</p>
 
 | Setting | Values | Default |
 |---|---|---|
