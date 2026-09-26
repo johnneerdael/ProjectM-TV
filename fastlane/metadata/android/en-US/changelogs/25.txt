@@ -1,0 +1,2 @@
+- Random and Previous on the remote no longer pause the picture.
+- Presets with many shapes run 70-90% faster (drawn in batches; picture unchanged).

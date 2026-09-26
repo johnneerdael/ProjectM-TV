@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-This README describes what the app does as of version 1.9.14, and where it falls short. Everything under *What it does* was checked on the only devices it has been tested on: two NVIDIA SHIELD Android TVs (2019, Android 11).
+This README describes what the app does as of version 1.9.16, and where it falls short. Everything under *What it does* was checked on the only devices it has been tested on: two NVIDIA SHIELD Android TVs (2019, Android 11).
 
 ## What it does
 
@@ -33,8 +33,8 @@ This README describes what the app does as of version 1.9.14, and where it falls
 - The audio the visualizer receives is 8-bit mono, which is what Android's visualizer API provides.
 
 **Picture and performance (SHIELD)**
-- **A preset change is only smooth when it was prepared.** Since 1.9.12 the next preset's shaders are compiled in the background, so a timed or blank-preset switch takes a few hundredths of a second. *Random* and *Previous* on the remote pick a preset that was not prepared: those still pause the picture for up to about half a second. For a minute after Android reports low memory, nothing is prepared in the background either.
-- **Blending two heavy presets is slow.** A blend renders both presets at once. With presets that use many shapes, the SHIELD's CPU is the limit, and the frame rate can drop to 20–30 fps for the length of the blend.
+- **A preset change is only smooth when it was prepared.** The next preset, and the ones *Random* and *Previous* on the remote would pick, are prepared in the background, so a switch takes a few hundredths of a second. For 20 seconds after Android reports low memory, and while less than 15% of the memory is free, nothing is prepared; a switch then pauses the picture for up to about half a second.
+- **Blending two heavy presets is slow.** A blend renders both presets at once. With presets whose equations run for many points or shapes per frame, the SHIELD's CPU is the limit, and the frame rate can drop to 20–30 fps for the length of the blend.
 - **4K is possible but not smooth.** At a fixed 4K the SHIELD averaged about 30 fps. With the default memory limit it never goes above 1260p; a fixed 4K needs *Memory limit* set to Off.
 - **Android often reports low memory shortly after launch.** *Auto* resolution then stays at 720p for that session.
 - Heavy presets drop below 60 fps, sometimes to about 20 fps, even at 720p.
@@ -159,7 +159,7 @@ Release builds on GitHub are signed with the release key; see [docs/RELEASING.md
 
 ### projectM
 
-projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, caches of linked and translated shader programs, fewer redundant GL calls, and a faster HLSL parser on Android) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
+projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, caches of linked and translated shader programs, fewer redundant GL calls, batched drawing of custom shapes, and a faster HLSL parser on Android) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
 
 ### Tests
 

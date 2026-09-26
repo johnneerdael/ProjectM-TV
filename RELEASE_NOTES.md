@@ -1,3 +1,12 @@
+# ProjectM TV 1.9.16
+
+## Changed
+- **Random and Previous on the remote no longer pause the picture.** The preset *Right* (random) and *Left* (previous) would pick is now prepared in the background as well, like the next preset: on the SHIELD such a switch takes 20–40 ms instead of up to about 0.9 s.
+- **Much faster presets with many shapes.** projectM drew every instance of a custom shape separately; it now draws them in batches. The picture is unchanged (checked pixel by pixel), while presets with thousands of shapes run 70–90% faster on the SHIELD (e.g. 23 → 40 fps and 13 → 25 fps). About 1,700 presets draw at least 100 shapes per frame.
+- After Android reports low memory, background preparation pauses for 20 seconds instead of a minute.
+
+---
+
 # ProjectM TV 1.9.15
 
 ## Changed
