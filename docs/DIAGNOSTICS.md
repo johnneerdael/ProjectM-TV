@@ -65,8 +65,8 @@ The Java heap is small (UI only); most memory is projectM's native and GPU memor
 
 ```bash
 heaptrail android-capture --serial 192.168.50.105:5555 \
-  --package com.example.projectm.visualizer --out diagnostics/heap --foreground
-adb -s 192.168.50.105:5555 shell dumpsys meminfo com.example.projectm.visualizer > diagnostics/heap/meminfo.txt
+  --package nl.neerdael.projectmtv --out diagnostics/heap --foreground
+adb -s 192.168.50.105:5555 shell dumpsys meminfo nl.neerdael.projectmtv > diagnostics/heap/meminfo.txt
 heaptrail --diff-series launch.hprof restarts5.hprof restarts10.hprof \
   --native-context diagnostics/heap/meminfo.txt --diff-by bytes --top 30
 heaptrail -i restarts10.hprof --find-referrers com.example.projectm.visualizer.MainActivity

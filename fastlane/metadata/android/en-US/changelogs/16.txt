@@ -1,0 +1,3 @@
+- New app ID: nl.neerdael.projectmtv. Uninstall the old projectM TV (com.example.projectm.visualizer) after installing.
+- projectM 4.1.7 built from source; LGPL 2.1 code, CC0 presets and textures.
+- Releases signed with one permanent key, so updates keep your settings.

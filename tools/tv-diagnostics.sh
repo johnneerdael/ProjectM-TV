@@ -28,8 +28,8 @@ APK_SOURCE="build"
 ALLOW_UNINSTALL=0
 SWEEP=0
 OUT=""
-PKG="com.example.projectm.visualizer"
-ACTIVITY="$PKG/.MainActivity"
+PKG="nl.neerdael.projectmtv"                          # application ID (1.9.7+; before: com.example.projectm.visualizer)
+ACTIVITY="$PKG/com.example.projectm.visualizer.MainActivity"  # the code keeps its Java package
 REPO="johnneerdael/ProjectM-TV"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
