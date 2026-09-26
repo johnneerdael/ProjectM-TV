@@ -51,6 +51,18 @@ set(ENABLE_SDL_UI OFF CACHE BOOL "" FORCE)
 set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 set(BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)  # static projectM ends up in a shared library
+# projectM writes its version.h from CMAKE_PROJECT_VERSION*, which belong to the top-level project
+# (ours, unversioned): a first configure happens to get projectM's version, but a re-configure of an
+# existing build directory gets empty values and fails to compile. Set them from projectM's own
+# project() call so every configure produces the same header.
+file(STRINGS ${PROJECTM_SOURCE}/CMakeLists.txt PROJECTM_VERSION_LINE REGEX "^[ \t]*VERSION [0-9]+\\.[0-9]+\\.[0-9]+")
+string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" CMAKE_PROJECT_VERSION "${PROJECTM_VERSION_LINE}")
+if(NOT CMAKE_PROJECT_VERSION)
+    message(FATAL_ERROR "projectM version not found in ${PROJECTM_SOURCE}/CMakeLists.txt")
+endif()
+set(CMAKE_PROJECT_VERSION_MAJOR ${CMAKE_MATCH_1})
+set(CMAKE_PROJECT_VERSION_MINOR ${CMAKE_MATCH_2})
+set(CMAKE_PROJECT_VERSION_PATCH ${CMAKE_MATCH_3})
 add_subdirectory(${PROJECTM_SOURCE} projectm EXCLUDE_FROM_ALL)
 
 add_library(projectmtv SHARED native-lib.cpp snapshot_fade.cpp)
