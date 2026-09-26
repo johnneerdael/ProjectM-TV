@@ -1,0 +1,379 @@
+Subject: [PATCH] Pool framebuffer textures between presets
+
+Creating a new preset's framebuffer textures (glTexImage2D) took 16-58 ms on the
+render thread at a preset switch on an NVIDIA SHIELD. Framebuffer attachments of
+discarded presets can now go into a per-thread pool and be reused by the next
+preset of the same size and format. A reused texture is cleared first, like a new one, so its
+old contents never show (only color attachments are pooled).
+
+The pool is off by default; the host enables it with a byte limit
+(projectm_opengl_set_texture_pool_limit, 0 empties it) and drops it after a
+context loss (projectm_opengl_forget_texture_pool). ProjectM TV only enables it
+while enough memory is free.
+
+---
+diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
+index 6fd68e863..2705f75f5 100644
+--- a/src/api/include/projectM-4/render_opengl.h
++++ b/src/api/include/projectM-4/render_opengl.h
+@@ -74,6 +74,28 @@ PROJECTM_EXPORT void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_
+  */
+ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_handle instance, uint32_t divisor);
+ 
++/**
++ * @brief Sets the size of the calling thread's pool of framebuffer textures.
++ *
++ * When a preset is discarded, its framebuffer textures are kept for the next preset of the same
++ * size instead of being deleted, which saves allocating them at the next preset switch. The pool
++ * belongs to the thread's current OpenGL context. 0 (the default) disables it and deletes the
++ * pooled textures; the context must be current.
++ *
++ * @param max_bytes The most memory the pooled textures may take.
++ */
++PROJECTM_EXPORT void projectm_opengl_set_texture_pool_limit(size_t max_bytes);
++
++/**
++ * @brief Drops the calling thread's pooled textures without deleting them, after their context was lost.
++ */
++PROJECTM_EXPORT void projectm_opengl_forget_texture_pool();
++
++/**
++ * @brief Memory held by the calling thread's texture pool, in bytes.
++ */
++PROJECTM_EXPORT size_t projectm_opengl_texture_pool_bytes();
++
+ #ifdef __cplusplus
+ } // extern "C"
+ #endif
+diff --git a/src/libprojectM/ProjectMCWrapper.cpp b/src/libprojectM/ProjectMCWrapper.cpp
+index 95f9c7f15..9ff9951da 100644
+--- a/src/libprojectM/ProjectMCWrapper.cpp
++++ b/src/libprojectM/ProjectMCWrapper.cpp
+@@ -184,6 +184,21 @@ void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_handle instance,
+     projectMInstance->SetOutgoingPresetFrameDivisor(divisor);
+ }
+ 
++void projectm_opengl_set_texture_pool_limit(size_t max_bytes)
++{
++    libprojectM::Renderer::Texture::SetPoolLimit(max_bytes);
++}
++
++void projectm_opengl_forget_texture_pool()
++{
++    libprojectM::Renderer::Texture::ForgetPool();
++}
++
++size_t projectm_opengl_texture_pool_bytes()
++{
++    return libprojectM::Renderer::Texture::PoolBytes();
++}
++
+ void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses)
+ {
+     uint32_t cacheHits{};
+diff --git a/src/libprojectM/Renderer/Texture.cpp b/src/libprojectM/Renderer/Texture.cpp
+index db0effa74..740f9213c 100644
+--- a/src/libprojectM/Renderer/Texture.cpp
++++ b/src/libprojectM/Renderer/Texture.cpp
+@@ -1,10 +1,151 @@
+ #include "Renderer/Texture.hpp"
+ 
++#include <deque>
+ #include <utility>
+ 
+ namespace libprojectM {
+ namespace Renderer {
+ 
++namespace {
++
++// Framebuffer textures of discarded presets, kept for the next preset of the same size: creating
++// them anew (glTexImage2D) cost the render thread 16-58 ms at a preset switch on an NVIDIA SHIELD.
++// Per thread, as textures belong to the thread's context; disabled until the host sets a limit.
++class TexturePool
++{
++public:
++    struct Entry
++    {
++        GLuint id;
++        int width;
++        int height;
++        GLint internalFormat;
++        GLenum format;
++        GLenum type;
++        size_t bytes;
++    };
++
++    static auto Instance() -> TexturePool&
++    {
++        thread_local TexturePool pool;
++        return pool;
++    }
++
++    static auto Bytes(int width, int height, GLint internalFormat) -> size_t
++    {
++        size_t perPixel = 4;
++        switch (internalFormat)
++        {
++            case GL_R8:
++            case GL_STENCIL_INDEX8:
++                perPixel = 1;
++                break;
++            case GL_DEPTH_COMPONENT16:
++                perPixel = 2;
++                break;
++            case GL_RGBA16F:
++                perPixel = 8;
++                break;
++            case GL_RGBA32F:
++                perPixel = 16;
++                break;
++            default:
++                break;
++        }
++        return static_cast<size_t>(width) * static_cast<size_t>(height) * perPixel;
++    }
++
++    auto Take(int width, int height, GLint internalFormat, GLenum format, GLenum type) -> GLuint
++    {
++        for (auto it = m_entries.begin(); it != m_entries.end(); ++it)
++        {
++            if (it->width == width && it->height == height && it->internalFormat == internalFormat &&
++                it->format == format && it->type == type)
++            {
++                GLuint id = it->id;
++                m_bytes -= it->bytes;
++                m_entries.erase(it);
++                return id;
++            }
++        }
++        return 0;
++    }
++
++    auto Put(const Entry& entry) -> bool
++    {
++        if (entry.bytes > m_maxBytes)
++        {
++            return false;
++        }
++        m_entries.push_back(entry);
++        m_bytes += entry.bytes;
++        Trim(m_maxBytes);
++        return true;
++    }
++
++    void SetLimit(size_t maxBytes)
++    {
++        m_maxBytes = maxBytes;
++        Trim(maxBytes);
++    }
++
++    void Forget()
++    {
++        m_entries.clear();
++        m_bytes = 0;
++    }
++
++    auto BytesHeld() const -> size_t
++    {
++        return m_bytes;
++    }
++
++private:
++    void Trim(size_t maxBytes)
++    {
++        while (m_bytes > maxBytes && !m_entries.empty()) // oldest first
++        {
++            glDeleteTextures(1, &m_entries.front().id);
++            m_bytes -= m_entries.front().bytes;
++            m_entries.pop_front();
++        }
++    }
++
++    std::deque<Entry> m_entries;
++    size_t m_bytes{};
++    size_t m_maxBytes{};
++};
++
++} // namespace
++
++void Texture::SetPoolable(GLint internalFormat, GLenum format, GLenum type)
++{
++    m_poolable = true;
++    m_internalFormat = internalFormat;
++    m_format = format;
++    m_type = type;
++}
++
++auto Texture::TakePooled(int width, int height, GLint internalFormat, GLenum format, GLenum type) -> GLuint
++{
++    return TexturePool::Instance().Take(width, height, internalFormat, format, type);
++}
++
++void Texture::SetPoolLimit(size_t maxBytes)
++{
++    TexturePool::Instance().SetLimit(maxBytes);
++}
++
++void Texture::ForgetPool()
++{
++    TexturePool::Instance().Forget();
++}
++
++auto Texture::PoolBytes() -> size_t
++{
++    return TexturePool::Instance().BytesHeld();
++}
++
+ Texture::Texture(std::string name, const int width, const int height, const bool isUserTexture)
+     : m_target(GL_TEXTURE_2D)
+     , m_name(std::move(name))
+@@ -47,7 +188,12 @@ Texture::~Texture()
+ {
+     if (m_textureId > 0)
+     {
+-        glDeleteTextures(1, &m_textureId);
++        if (!m_poolable ||
++            !TexturePool::Instance().Put({m_textureId, m_width, m_height, m_internalFormat, m_format, m_type,
++                                          TexturePool::Bytes(m_width, m_height, m_internalFormat)}))
++        {
++            glDeleteTextures(1, &m_textureId);
++        }
+         m_textureId = 0;
+     }
+ }
+diff --git a/src/libprojectM/Renderer/Texture.hpp b/src/libprojectM/Renderer/Texture.hpp
+index 75fce1164..2cd5eca6e 100644
+--- a/src/libprojectM/Renderer/Texture.hpp
++++ b/src/libprojectM/Renderer/Texture.hpp
+@@ -121,6 +121,33 @@ public:
+      */
+     auto Empty() const -> bool;
+ 
++    /**
++     * @brief Marks this texture as a framebuffer attachment: when it is destroyed it goes into the
++     *        texture pool (if enabled on this thread) instead of being deleted.
++     */
++    void SetPoolable(GLint internalFormat, GLenum format, GLenum type);
++
++    /**
++     * @brief A pooled texture of this size and format (0 if none), removed from the pool.
++     */
++    static auto TakePooled(int width, int height, GLint internalFormat, GLenum format, GLenum type) -> GLuint;
++
++    /**
++     * @brief Enables the texture pool of the calling thread's context with the given maximum size.
++     *        0 disables it and deletes the pooled textures (the context must be current).
++     */
++    static void SetPoolLimit(size_t maxBytes);
++
++    /**
++     * @brief Drops the pooled textures without deleting them, after their context was lost.
++     */
++    static void ForgetPool();
++
++    /**
++     * @brief Bytes held by the calling thread's texture pool.
++     */
++    static auto PoolBytes() -> size_t;
++
+ private:
+     /**
+      * @brief Creates a new, blank texture with the given size.
+@@ -135,6 +162,8 @@ private:
+     int m_height{0};             //!< Texture height in pixels.
+     bool m_isUserTexture{false}; //!< true if it's a user texture, false if an internal one.
+ 
++    bool m_poolable{false};      //!< A framebuffer attachment that goes into the pool when destroyed.
++
+     GLint m_internalFormat{}; //!< OpenGL internal format, e.g. GL_RGBA8
+     GLenum m_format{};        //!< OpenGL color format, e.g. GL_RGBA
+     GLenum m_type{};          //!< OpenGL component storage type, e.g. GL_UNSIGNED _BYTE
+diff --git a/src/libprojectM/Renderer/TextureAttachment.cpp b/src/libprojectM/Renderer/TextureAttachment.cpp
+index 1c342ad4a..f2be4ef1c 100644
+--- a/src/libprojectM/Renderer/TextureAttachment.cpp
++++ b/src/libprojectM/Renderer/TextureAttachment.cpp
+@@ -106,10 +106,22 @@ void TextureAttachment::ReplaceTexture(int width, int height)
+ 
+     m_texture.reset();
+ 
+-    GLuint textureId;
+-    glGenTextures(1, &textureId);
+-    glBindTexture(GL_TEXTURE_2D, textureId);
+-    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, textureFormat, pixelFormat, nullptr);
++    // A color texture of the same size and format from a discarded preset if the pool has one,
++    // cleared like a new texture: its old contents must never show.
++    GLuint textureId = m_attachmentType == AttachmentType::Color
++                           ? Texture::TakePooled(width, height, internalFormat, textureFormat, pixelFormat)
++                           : 0;
++    if (textureId != 0)
++    {
++        ClearPooledTexture(textureId);
++        glBindTexture(GL_TEXTURE_2D, textureId);
++    }
++    else
++    {
++        glGenTextures(1, &textureId);
++        glBindTexture(GL_TEXTURE_2D, textureId);
++        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, textureFormat, pixelFormat, nullptr);
++    }
+ 
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+@@ -119,6 +131,41 @@ void TextureAttachment::ReplaceTexture(int width, int height)
+     glBindTexture(GL_TEXTURE_2D, 0);
+ 
+     m_texture = std::make_shared<class Texture>("", textureId, GL_TEXTURE_2D, width, height, false);
++    if (m_attachmentType == AttachmentType::Color)
++    {
++        m_texture->SetPoolable(internalFormat, textureFormat, pixelFormat);
++    }
++}
++
++void TextureAttachment::ClearPooledTexture(GLuint textureId)
++{
++    // One scratch framebuffer per thread (context) to clear reused textures with.
++    thread_local GLuint clearFramebuffer = 0;
++    GLint previousDrawFramebuffer = 0;
++    glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &previousDrawFramebuffer);
++    if (clearFramebuffer == 0 || !glIsFramebuffer(clearFramebuffer))
++    {
++        glGenFramebuffers(1, &clearFramebuffer);
++    }
++    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, clearFramebuffer);
++    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureId, 0);
++    GLfloat clearColor[4];
++    GLboolean colorMask[4];
++    glGetFloatv(GL_COLOR_CLEAR_VALUE, clearColor);
++    glGetBooleanv(GL_COLOR_WRITEMASK, colorMask);
++    GLboolean scissor = glIsEnabled(GL_SCISSOR_TEST);
++    glDisable(GL_SCISSOR_TEST);
++    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
++    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
++    glClear(GL_COLOR_BUFFER_BIT);
++    glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
++    glColorMask(colorMask[0], colorMask[1], colorMask[2], colorMask[3]);
++    if (scissor == GL_TRUE)
++    {
++        glEnable(GL_SCISSOR_TEST);
++    }
++    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
++    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, static_cast<GLuint>(previousDrawFramebuffer));
+ }
+ 
+ } // namespace Renderer
+diff --git a/src/libprojectM/Renderer/TextureAttachment.hpp b/src/libprojectM/Renderer/TextureAttachment.hpp
+index c1de83133..3ce0e1108 100644
+--- a/src/libprojectM/Renderer/TextureAttachment.hpp
++++ b/src/libprojectM/Renderer/TextureAttachment.hpp
+@@ -84,6 +84,11 @@ public:
+     void SetSize(int width, int height);
+ 
+ private:
++    /**
++     * @brief Clears a texture taken from the pool to transparent black, like a new texture.
++     */
++    static void ClearPooledTexture(GLuint textureId);
++
+     /**
+      * @brief Replaces the current texture with a new one, e.g. if the framebuffer was resized.
+      * @param width The new texture width.

@@ -145,6 +145,10 @@ int g_fboFrames = 0;
 void projectm_opengl_render_frame_fbo(projectm_handle p, uint32_t) { ++g_fboFrames; projectm_opengl_render_frame(p); }
 uint32_t g_outgoingDivisor = 1;
 void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_handle, uint32_t d) { g_outgoingDivisor = d; }
+size_t g_poolLimit = 0; int g_poolForgets = 0;
+void projectm_opengl_set_texture_pool_limit(size_t bytes) { g_poolLimit = bytes; }
+void projectm_opengl_forget_texture_pool() { ++g_poolForgets; }
+size_t projectm_opengl_texture_pool_bytes() { return 0; }
 uint32_t g_cacheHits = 0, g_cacheMisses = 0;
 void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses) { *hits = g_cacheHits; *misses = g_cacheMisses; }
 char* projectm_get_version_string() { return strdup("4.1.0"); }

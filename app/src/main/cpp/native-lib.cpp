@@ -908,6 +908,7 @@ struct Engine {
     int fastBlends = 0;
     bool blendLevelTooSlow[kBlendLevels] = {};
     bool halfRateOutgoing = false;  // blends are CPU-bound: the outgoing preset renders every 2nd frame
+    size_t texturePoolLimit = 0;    // applied with projectm_opengl_set_texture_pool_limit
 };
 
 // Intentionally never destroyed: its detached worker thread lives as long as the process.
@@ -916,6 +917,11 @@ PresetPrewarmer& g_prewarmer = *new PresetPrewarmer();  // started and stopped w
 std::atomic<double> g_prewarmPausedUntil{0.0};           // background compiling paused after memory pressure
 constexpr double kPrewarmPauseSeconds = 20.0;  // the free-memory check below still applies
 constexpr double kPrewarmMinAvailableShare = 0.15;      // of RAM available, else no background compile
+// Framebuffer textures of discarded presets are kept for the next preset (projectM patch 0007),
+// which saves allocating them at a switch, but only while plenty of memory is free.
+constexpr size_t kTexturePoolBytes = 48u * 1024 * 1024;
+constexpr double kTexturePoolMinAvailableShare = 0.20;
+std::atomic<bool> g_texturePoolFlush{false};             // memory pressure: empty the pool (GL thread)
 Inputs g_inputs;
 Published g_published;
 Engine g_engine;
@@ -976,6 +982,19 @@ long MemInfoKb(const char* format) {
 }
 
 long AvailableMemoryKb() { return MemInfoKb("MemAvailable: %ld kB"); }
+
+// Enables the texture pool while plenty of memory is free, else empties it (GL thread).
+void UpdateTexturePool(double now) {
+    static const long totalKb = MemInfoKb("MemTotal: %ld kB");
+    long availableKb = AvailableMemoryKb();
+    bool plenty = now >= g_prewarmPausedUntil.load() && totalKb > 0 && availableKb >= 0 &&
+                  availableKb >= totalKb * kTexturePoolMinAvailableShare;
+    size_t limit = plenty ? kTexturePoolBytes : 0;
+    if (limit == g_engine.texturePoolLimit) return;
+    projectm_opengl_set_texture_pool_limit(limit);
+    g_engine.texturePoolLimit = limit;
+    LOGI("Texture pool %s (%ld MB of %ld MB available)", limit ? "on" : "off", availableKb / 1024, totalKb / 1024);
+}
 
 // Whether the upcoming preset may be compiled in the background: its short-lived projectM instance
 // must not push Android into taking memory from the music player.
@@ -1152,6 +1171,8 @@ bool LoadPreset(const std::string& name, bool smooth) {
     long rssBefore = ResidentMemoryKb();
     uint32_t cacheHitsBefore = 0, cacheMissesBefore = 0;
     projectm_opengl_program_cache_stats(&cacheHitsBefore, &cacheMissesBefore);
+    UpdateTexturePool(NowSeconds());
+    size_t poolBytes = projectm_opengl_texture_pool_bytes();
     double loadStart = NowSeconds();
     // Parses the preset, loads its textures and compiles its shaders: the stall at a switch, unless
     // the prewarmer already compiled them (then they come from the program cache).
@@ -1165,9 +1186,10 @@ bool LoadPreset(const std::string& name, bool smooth) {
     // Memory the load took, to find the presets that cause memory peaks and calibrate their
     // weights: the drop in the system's available memory also covers GPU driver allocations.
     LOGI("LOAD preset='%s' ms=%.0f smooth=%d size=%dx%d weight_mb=%d shader_kb=%.1f loops=%d "
-         "programs_cached=%u programs_compiled=%u avail_drop_mb=%ld rss_growth_mb=%ld",
+         "programs_cached=%u programs_compiled=%u pool_mb=%zu avail_drop_mb=%ld rss_growth_mb=%ld",
          name.c_str(), loadMs, smooth ? 1 : 0, g_engine.renderWidth, g_engine.renderHeight, g_library.Weight(name),
          shaderBytes / 1024.0, shaderLoops, cacheHits - cacheHitsBefore, cacheMisses - cacheMissesBefore,
+         poolBytes / (1024 * 1024),
          availBefore >= 0 && availAfter >= 0 ? (availBefore - availAfter) / 1024 : 0,
          rssBefore >= 0 && rssAfter >= 0 ? (rssAfter - rssBefore) / 1024 : 0);
     if (g_engine.loadFailed) {
@@ -1423,6 +1445,15 @@ void TrackTransition(double now, double frameCpuSeconds) {
 void DestroyEngineLocked(bool contextAlive) {
     g_prewarmer.Stop();
     ReleaseScaledTarget(contextAlive);
+    // The presets destroyed below may still add their textures to the pool: empty it afterwards.
+    struct PoolRelease {
+        bool contextAlive;
+        ~PoolRelease() {
+            if (contextAlive) projectm_opengl_set_texture_pool_limit(0);
+            else projectm_opengl_forget_texture_pool();
+            g_engine.texturePoolLimit = 0;
+        }
+    } poolRelease{contextAlive};
     if (contextAlive) {
         g_engine.fade.Release();
         g_engine.detector.Release();
@@ -1510,6 +1541,11 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     double cpuStart = ThreadCpuSeconds();
 
     if (g_inputs.settingsDirty.exchange(false)) ApplySettings();
+    if (g_texturePoolFlush.exchange(false) && g_engine.texturePoolLimit > 0) {
+        projectm_opengl_set_texture_pool_limit(0);
+        g_engine.texturePoolLimit = 0;
+        LOGW("Texture pool emptied: memory pressure");
+    }
     if (g_inputs.blendReset.exchange(false)) {
         g_engine.blendLevel = g_inputs.blendLevelStart.load();
         g_engine.fastBlends = 0;
@@ -1651,6 +1687,7 @@ JNIEXPORT void JNICALL JNI_FN(setAutoChange)(JNIEnv*, jclass, jboolean enabled) 
 // (its extra projectM instance and textures would come out of the music player's memory).
 JNIEXPORT void JNICALL JNI_FN(onMemoryPressure)(JNIEnv*, jclass) {
     g_prewarmPausedUntil = NowSeconds() + kPrewarmPauseSeconds;
+    g_texturePoolFlush = true;
     LOGW("PREWARM paused for %.0f s: memory pressure", kPrewarmPauseSeconds);
 }
 

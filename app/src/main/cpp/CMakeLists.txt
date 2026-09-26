@@ -27,22 +27,36 @@ if(NOT EXISTS ${PROJECTM_SOURCE}/CMakeLists.txt OR NOT EXISTS ${PROJECTM_SOURCE}
     message(FATAL_ERROR "projectM sources missing: run `git submodule update --init --recursive`")
 endif()
 
-# Apply our patches once (a patch that already applies in reverse is in place).
+# Apply our patches (a series: later ones change lines next to earlier ones, so each patch can
+# only be checked against the result of the ones before it). If the last one is in place, the
+# whole series is. Otherwise undo the ones that are (an older series, newest first) and apply the
+# series in order.
 find_package(Git REQUIRED)
 file(GLOB PROJECTM_PATCHES ${REPO_ROOT}/tools/projectm-patches/*.patch)
 list(SORT PROJECTM_PATCHES)
-foreach(patch IN LISTS PROJECTM_PATCHES)
-    execute_process(COMMAND ${GIT_EXECUTABLE} apply --reverse --check ${patch}
-        WORKING_DIRECTORY ${PROJECTM_SOURCE} RESULT_VARIABLE applied OUTPUT_QUIET ERROR_QUIET)
-    if(NOT applied EQUAL 0)
+list(GET PROJECTM_PATCHES -1 PROJECTM_LAST_PATCH)
+execute_process(COMMAND ${GIT_EXECUTABLE} apply --reverse --check ${PROJECTM_LAST_PATCH}
+    WORKING_DIRECTORY ${PROJECTM_SOURCE} RESULT_VARIABLE series_applied OUTPUT_QUIET ERROR_QUIET)
+if(NOT series_applied EQUAL 0)
+    set(PROJECTM_PATCHES_NEWEST_FIRST ${PROJECTM_PATCHES})
+    list(REVERSE PROJECTM_PATCHES_NEWEST_FIRST)
+    foreach(patch IN LISTS PROJECTM_PATCHES_NEWEST_FIRST)
+        execute_process(COMMAND ${GIT_EXECUTABLE} apply --reverse --check ${patch}
+            WORKING_DIRECTORY ${PROJECTM_SOURCE} RESULT_VARIABLE applied OUTPUT_QUIET ERROR_QUIET)
+        if(applied EQUAL 0)
+            execute_process(COMMAND ${GIT_EXECUTABLE} apply --reverse ${patch} WORKING_DIRECTORY ${PROJECTM_SOURCE})
+        endif()
+    endforeach()
+    foreach(patch IN LISTS PROJECTM_PATCHES)
         execute_process(COMMAND ${GIT_EXECUTABLE} apply ${patch}
             WORKING_DIRECTORY ${PROJECTM_SOURCE} RESULT_VARIABLE result)
         if(NOT result EQUAL 0)
-            message(FATAL_ERROR "projectM patch does not apply: ${patch}")
+            message(FATAL_ERROR "projectM patch does not apply: ${patch}. Reset the submodule: "
+                                "git submodule foreach --recursive git checkout -- .")
         endif()
         message(STATUS "Applied projectM patch ${patch}")
-    endif()
-endforeach()
+    endforeach()
+endif()
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 set(ENABLE_PLAYLIST OFF CACHE BOOL "" FORCE)

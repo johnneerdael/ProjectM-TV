@@ -39,11 +39,18 @@ printf 'JPEGclouds' > "$WORK/assets/textures/clouds.jpg"
 
 # The engine uses projectM API additions from tools/projectm-patches; apply them like the app's
 # CMake build does (a patch that already applies in reverse is in place).
-for patch in "$ROOT"/tools/projectm-patches/*.patch; do
-    if ! git -C "$ROOT/third_party/projectm" apply --reverse --check "$patch" 2>/dev/null; then
-        git -C "$ROOT/third_party/projectm" apply "$patch"
-    fi
-done
+# Same rule as there: if the last patch is in place, the whole series is; otherwise undo the
+# patches that are (newest first) and apply the series in order.
+PM="$ROOT/third_party/projectm"
+PATCHES=("$ROOT"/tools/projectm-patches/*.patch)
+if ! git -C "$PM" apply --reverse --check "${PATCHES[${#PATCHES[@]}-1]}" 2>/dev/null; then
+    for (( i=${#PATCHES[@]}-1; i>=0; i-- )); do
+        if git -C "$PM" apply --reverse --check "${PATCHES[$i]}" 2>/dev/null; then
+            git -C "$PM" apply --reverse "${PATCHES[$i]}"
+        fi
+    done
+    for patch in "${PATCHES[@]}"; do git -C "$PM" apply "$patch"; done
+fi
 
 SAN="-fsanitize=address,undefined"
 [ "${NO_SANITIZERS:-0}" = "1" ] && SAN=""

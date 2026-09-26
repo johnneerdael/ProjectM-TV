@@ -44,6 +44,7 @@ public final class QualityController {
     private static final int SKIP_SAMPLES = 5;
     private static final long SETTLE_MS = 3000;             // ignore load hitch + transition start
     private static final long PRESSURE_QUIET_MS = 10000;    // one step per burst of memory warnings
+    private static final float MIN_GAIN = 1.10f;             // a lower level must be this much faster
 
     private final Listener listener;
     private final int[] levels;
@@ -62,6 +63,9 @@ public final class QualityController {
     private int presetCount;
     private int ceiling;                     // highest level auto may use (lowered by memory pressure)
     private long pressureQuietUntil;
+    private float fpsBeforeLowering;         // > 0: judge whether the last lowering helped
+    private int loweredFrom = -1;            // level before the last lowering
+    private int cpuBoundPreset = -1;         // preset for which a lower resolution did not help
     private int beforePressure = -1;         // auto level when memory pressure first lowered the ceiling
 
     /** @param memoryLimit highest render height allowed for memory reasons, 0 for none. */
@@ -148,6 +152,7 @@ public final class QualityController {
     public void onPresetChanged() {
         presetCount++;
         switchRequested = false;
+        fpsBeforeLowering = 0;
         resetCounters(SETTLE_MS + transitionMs);
     }
 
@@ -190,10 +195,25 @@ public final class QualityController {
         }
         if (!auto) return ACTION_NONE;
 
+        // A preset that is limited by the CPU is not helped by a lower resolution: if the last
+        // lowering gained less than 10%, go back up and leave the resolution for this preset.
+        if (fpsBeforeLowering > 0) {
+            float before = fpsBeforeLowering;
+            fpsBeforeLowering = 0;
+            if (fps < before * MIN_GAIN && loweredFrom > current) {
+                failures[loweredFrom] = Math.max(0, failures[loweredFrom] - 1);  // the level was not too heavy
+                blockedUntilPreset[loweredFrom] = 0;
+                cpuBoundPreset = presetCount;
+                apply(loweredFrom, "lower resolution did not help (" + before + " -> " + fps + " fps): CPU-bound");
+                return ACTION_NONE;
+            }
+        }
+        boolean mayLower = current > minIndex && cpuBoundPreset != presetCount;
+
         if (fps < targetFps * SEVERE_THRESHOLD) {
-            if (++severeSamples >= SEVERE_SAMPLES && current > minIndex) {
+            if (++severeSamples >= SEVERE_SAMPLES && mayLower) {
                 block(current);
-                apply(stepDown(current), "severe slowdown (" + fps + " fps)");
+                lower(stepDown(current), fps, "severe slowdown (" + fps + " fps)");
                 return ACTION_NONE;
             }
         } else {
@@ -202,10 +222,10 @@ public final class QualityController {
 
         if (fps < targetFps * DOWN_THRESHOLD) {
             goodSamples = 0;
-            if (++slowSamples >= DOWN_SAMPLES && current > minIndex) {
+            if (++slowSamples >= DOWN_SAMPLES && mayLower) {
                 int to = stepDown(current);
                 block(current);
-                apply(to, fps + " fps < target " + targetFps);
+                lower(to, fps, fps + " fps < target " + targetFps);
             }
         } else {
             slowSamples = 0;
@@ -224,6 +244,14 @@ public final class QualityController {
     private void block(int index) {
         failures[index]++;
         blockedUntilPreset[index] = failures[index] >= 2 ? Integer.MAX_VALUE : presetCount + 10;
+    }
+
+    /** Lowers now and remembers the frame rate, to check after settling that it helped. */
+    private void lower(int index, float fps, String reason) {
+        int from = current;
+        apply(index, reason);
+        loweredFrom = from;
+        fpsBeforeLowering = fps;
     }
 
     /** Switches to a level now; the frame rate then settles before the next decision. */

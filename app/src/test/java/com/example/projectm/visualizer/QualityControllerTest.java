@@ -91,6 +91,31 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void lowerResolutionThatDoesNotHelpIsUndoneForThePreset() throws Exception {
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
+        q.setTargetFps(60);
+        q.setMode(0, 0);
+        settle(q);
+        samples(q, 3, 40);
+        assertEquals(1260, applied);
+        settle(q);
+        q.onFpsSample(41);  // hardly faster: the preset is limited by the CPU
+        assertEquals("back to the sharper level", 1440, applied);
+        settle(q);
+        samples(q, 12, 40);
+        assertEquals("not lowered again for this preset", 1440, applied);
+
+        q.onPresetChanged();
+        settle(q);
+        samples(q, 3, 40);
+        assertEquals("the next preset may be lowered again", 1260, applied);
+        settle(q);
+        q.onFpsSample(55);  // clearly faster: kept
+        assertEquals(1260, applied);
+    }
+
+    @Test
     public void newPresetAndNewLevelAreGivenTimeToSettle() throws Exception {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
