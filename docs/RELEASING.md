@@ -5,7 +5,7 @@
 | Trigger | Result |
 |---|---|
 | Any push or pull request | Native engine tests, JVM unit tests + release APK, downloadable from the workflow run (**Actions → run → Artifacts → `apk`**), named `projectM-TV-<version>-ci.<run>-<sha>.apk` |
-| Push to `main` where `versionName` has no tag yet | Everything above, plus tag `v<versionName>` and a **GitHub Release** with `projectM-TV-<version>.apk`, using the top section of `RELEASE_NOTES.md` as the description |
+| Push to `main` where `versionName` has no tag yet | Everything above, plus tag `v<versionName>` and a **GitHub Release**, marked as latest, with `projectM-TV-<version>.apk` and the same APK as `projectM-TV.apk`, using the top section of `RELEASE_NOTES.md` as the description |
 
 CI builds show their origin in the app menu, e.g. `v1.8-ci.42`.
 
@@ -16,6 +16,8 @@ CI builds show their origin in the app menu, e.g. `v1.8-ci.42`.
 3. Merge to `main`. The release appears under **Releases** within a few minutes.
 
 Pushing `main` again without changing `versionName` doesn't create another release.
+
+The fixed name makes one link always download the newest stable release: https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk (GitHub's `releases/latest` skips drafts and pre-releases).
 
 ## One-time setup: signing key
 

@@ -52,8 +52,8 @@ This README describes what the app does as of version 1.9.5, and where it falls 
 
 ## Install
 
-1. Download `projectM-TV-<version>.apk` from [Releases](https://github.com/johnneerdael/ProjectM-TV/releases).
-2. Install it on the TV, for example with `adb install -r projectM-TV-1.9.5.apk`, or with a file manager and *Install unknown apps* enabled.
+1. Download the latest release: **https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk**. This link always points to the newest stable release. Specific versions (`projectM-TV-<version>.apk`) are under [Releases](https://github.com/johnneerdael/ProjectM-TV/releases).
+2. Install it on the TV, for example with `adb install -r projectM-TV.apk`, or by entering the link in a downloader app on the TV with *Install unknown apps* enabled.
 3. Start the music in your music app, then open projectM TV. Android asks for permission to record audio; the app needs it to receive the music.
 
 Updates install over the previous version and keep your settings. If you installed a version you built yourself, Android refuses the update because the signing key differs: uninstall first, which resets the settings.

@@ -150,7 +150,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ needs.apk.outputs.tag }}" dist/*.apk \
+          # Also attach the APK under a fixed name, so this link always serves the newest stable
+          # release: https://github.com/<owner>/<repo>/releases/latest/download/projectM-TV.apk
+          cp "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk
+          gh release create "${{ needs.apk.outputs.tag }}" \
+            "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk \
             --target "${GITHUB_SHA}" \
             --title "projectM TV ${{ needs.apk.outputs.version }}" \
-            --notes-file notes.md
+            --notes-file notes.md \
+            --latest
