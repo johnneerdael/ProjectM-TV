@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Collects performance / fidelity diagnostics for projectM TV from an Android TV over adb.
+# Collects performance / fidelity diagnostics for ProjectM TV from an Android TV over adb.
 #
 #   tools/tv-diagnostics.sh [host:port] [options]
 #
@@ -351,7 +351,7 @@ layer_excerpt() {
 }
 
 {
-    echo "# projectM TV diagnostics: $MODEL"
+    echo "# ProjectM TV diagnostics: $MODEL"
     echo
     echo "- Collected: $(date '+%Y-%m-%d %H:%M %Z'), ${DURATION}s run"
     echo "- Target: \`$TARGET\`"

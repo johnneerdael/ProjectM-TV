@@ -203,6 +203,15 @@ int main(int argc, char** argv) {
   CHECK(current().find("broken") == std::string::npos);
   { FILE* f = fopen(skip.c_str(), "r"); char line[256]; int n = 0; while (fgets(line, sizeof line, f)) ++n; fclose(f); CHECK(n == 3); }
 
+  printf("next never shows the preset on screen again, also across reshuffles\n");
+  { std::string before = current(); int repeats = 0;
+    for (int i = 0; i < 200; ++i) {  // ~18 passes through the shuffled order
+      Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+      if (current() == before) ++repeats;
+      before = current();
+    }
+    CHECK(repeats == 0); }
+
   printf("audio is fed on the GL thread, capped to projectM's buffer\n");
   g_pcmFed = 0; feedAudio(60); frame(); CHECK(g_pcmFed == 576);
 

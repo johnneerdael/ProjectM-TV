@@ -1,8 +1,8 @@
-# projectM TV
+# ProjectM TV
 
 [![Android CI](https://github.com/johnneerdael/ProjectM-TV/actions/workflows/android.yml/badge.svg)](https://github.com/johnneerdael/ProjectM-TV/actions/workflows/android.yml)
 
-projectM TV is a music visualizer for Android TV. It runs [projectM](https://github.com/projectM-visualizer/projectm) 4.1.7, an open-source reimplementation of Winamp's MilkDrop, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself.
+ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://github.com/projectM-visualizer/projectm) 4.1.7, an open-source reimplementation of Winamp's MilkDrop, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself.
 
 > **Install on your TV with the Downloader app: code `4821216`**
 >
@@ -12,7 +12,7 @@ This README describes what the app does as of version 1.9.5, and where it falls 
 
 ## What it does
 
-- **Visualizes music from another app.** Play music in a music app, then start projectM TV. On the SHIELD, the visuals react to SoundCloud about 10 seconds after launch, and within about 5 seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
+- **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. On the SHIELD, the visuals react to SoundCloud about 10 seconds after launch, and within about 5 seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
 - **Shows 9,606 presets in shuffled order.** It changes preset every 30 seconds by default, or when you press Left or Right on the remote. The default transition is 7 seconds; on TVs with less than about 2.6 GB of memory, such as the SHIELD, it is a lighter fade of at most 3 seconds.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that were black on the SHIELD render; this rule remains as a safety net (details under *Presets* below).
 - **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution between presets to hold the frame rate. The TV's scaler upscales to the panel.
@@ -69,10 +69,10 @@ curl -LO https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/pr
 adb install -r projectM-TV.apk
 ```
 
-**Then:** start the music in your music app and open projectM TV. Android asks for permission to record audio; the app needs it to receive the music.
+**Then:** start the music in your music app and open ProjectM TV. Android asks for permission to record audio; the app needs it to receive the music.
 
 From 1.9.7 on, updates install over the previous version and keep your settings. Two one-time steps if you used an earlier version:
-- **1.9.7 changed the app ID** to `nl.neerdael.projectmtv`. It installs as a new app next to the old one; uninstall the old *projectM TV* afterwards.
+- **1.9.7 changed the app ID** to `nl.neerdael.projectmtv`. It installs as a new app next to the old one; uninstall the old *ProjectM Visualizer* (`com.example.projectm.visualizer`) afterwards.
 - Versions up to 1.9.5 were each signed with a different temporary key; 1.9.6 and later use one permanent key.
 
 A version you built yourself is signed with your own debug key: uninstall it before installing a release (this resets the settings).

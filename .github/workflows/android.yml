@@ -160,6 +160,6 @@ jobs:
           gh release create "${{ needs.apk.outputs.tag }}" \
             "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk \
             --target "${GITHUB_SHA}" \
-            --title "projectM TV ${{ needs.apk.outputs.version }}" \
+            --title "ProjectM TV ${{ needs.apk.outputs.version }}" \
             --notes-file notes.md \
             --latest

@@ -224,6 +224,10 @@ private:
 
     std::string PeekNextLocked(bool advance) {
         if (order_.empty()) return {};
+        // The preset on screen is not picked again (after a reshuffle it can come first), unless
+        // it is the only playable one.
+        const std::string* shown = history_.empty() ? nullptr : &history_.back();
+        bool shownPlayable = false;
         size_t cursor = cursor_;
         for (size_t i = 0; i < order_.size(); ++i) {
             if (cursor >= order_.size()) {
@@ -231,12 +235,15 @@ private:
                 if (advance) std::shuffle(order_.begin(), order_.end(), rng_);
             }
             const std::string& candidate = order_[cursor++];
-            if (!skipped_.count(candidate)) {
-                if (advance) cursor_ = cursor;
-                return candidate;
+            if (skipped_.count(candidate)) continue;
+            if (shown && candidate == *shown) {
+                shownPlayable = true;
+                continue;
             }
+            if (advance) cursor_ = cursor;
+            return candidate;
         }
-        return {};
+        return shownPlayable ? *shown : std::string();
     }
 
     void RequestPrefetchLocked() {

@@ -1,3 +1,13 @@
+# ProjectM TV 1.9.11
+
+## Changed
+- **New name and look.** The app is now called **ProjectM TV** everywhere (it was *ProjectM Visualizer* on the TV's home screen), with a new icon and TV banner. The store listing uses the same artwork.
+
+## Fixed
+- **"Next" could show the same preset again.** After every preset in the shuffled list had played, the list was reshuffled and could start with the preset that was on screen, so a switch (by the remote, the timer or blank-preset skipping) sometimes changed nothing. The preset on screen is no longer picked again.
+
+---
+
 # projectM for Android TV 1.9.10
 
 ## Changed

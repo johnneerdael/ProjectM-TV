@@ -46,7 +46,7 @@ if [ $? -eq 0 ]; then
     echo "✅ Installation successful!"
     echo ""
     echo "Next steps:"
-    echo "1. Find 'ProjectM Visualizer' in your FireStick apps"
+    echo "1. Find 'ProjectM TV' in your FireStick apps"
     echo "2. Grant audio recording permission when prompted"
     echo "3. Use D-pad left/right to change presets, center to open the menu"
     echo "4. Enjoy the visualizations!"

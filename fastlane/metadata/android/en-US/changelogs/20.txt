@@ -1,0 +1,2 @@
+- New name: ProjectM TV, with a new icon and TV banner.
+- Fixed: switching presets could occasionally show the same preset again.

@@ -1,6 +1,6 @@
-projectM TV is a music visualizer for Android TV. It runs projectM 4.1.7, the open-source reimplementation of Winamp's MilkDrop, with 9,606 presets from Jason Fletcher's "Cream of the Crop" collection.
+ProjectM TV is a music visualizer for Android TV. It runs projectM 4.1.7, the open-source reimplementation of Winamp's MilkDrop, with 9,606 presets from Jason Fletcher's "Cream of the Crop" collection.
 
-It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself: start your music first, then open projectM TV.
+It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself: start your music first, then open ProjectM TV.
 
 <b>What it does</b>
 <ul>
