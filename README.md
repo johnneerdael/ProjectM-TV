@@ -4,6 +4,10 @@
 
 projectM TV is a music visualizer for Android TV. It runs [projectM](https://github.com/projectM-visualizer/projectm) 4.1.7, an open-source reimplementation of Winamp's MilkDrop, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself.
 
+> **Install on your TV with the Downloader app: code `4821216`**
+>
+> Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
+
 This README describes what the app does as of version 1.9.5, and where it falls short. Everything under *What it does* was checked on the only device it has been tested on: an NVIDIA SHIELD Android TV (2019, Android 11).
 
 ## What it does
@@ -52,9 +56,20 @@ This README describes what the app does as of version 1.9.5, and where it falls 
 
 ## Install
 
-1. Download the latest release: **https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk**. This link always points to the newest stable release. Specific versions (`projectM-TV-<version>.apk`) are under [Releases](https://github.com/johnneerdael/ProjectM-TV/releases).
-2. Install it on the TV, for example with `adb install -r projectM-TV.apk`, or by entering the link in a downloader app on the TV with *Install unknown apps* enabled.
-3. Start the music in your music app, then open projectM TV. Android asks for permission to record audio; the app needs it to receive the music.
+**On the TV, with Downloader (easiest)**
+1. Install *Downloader* by AFTVnews from the TV's app store.
+2. Allow it to install apps: Android TV asks for this the first time (*Install unknown apps* for Downloader).
+3. Open Downloader, enter the code **4821216** and select *Go*. It downloads the newest stable release; confirm the installation.
+
+The code is an AFTVnews short link to https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk, which always points to the newest stable release. Specific versions (`projectM-TV-<version>.apk`) are under [Releases](https://github.com/johnneerdael/ProjectM-TV/releases).
+
+**From a computer, with adb**
+```bash
+curl -LO https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk
+adb install -r projectM-TV.apk
+```
+
+**Then:** start the music in your music app and open projectM TV. Android asks for permission to record audio; the app needs it to receive the music.
 
 Updates install over the previous version and keep your settings. If you installed a version you built yourself, Android refuses the update because the signing key differs: uninstall first, which resets the settings.
 
