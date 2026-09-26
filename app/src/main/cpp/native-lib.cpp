@@ -220,6 +220,15 @@ public:
         LOGI("Skip list cleared");
     }
 
+    // The first playable preset whose name starts with `prefix` ("" if none).
+    std::string FindByPrefix(const std::string& prefix) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (const auto& name : order_) {
+            if (name.compare(0, prefix.size(), prefix) == 0 && !skipped_.count(name)) return name;
+        }
+        return {};
+    }
+
     // The preset Next() will return (unless the order is reshuffled first).
     std::string PeekNext() {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -1527,6 +1536,18 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
             {
                 std::lock_guard<std::mutex> published(g_published.mutex);
                 resume = g_published.currentPreset;
+            }
+            // Benchmarks (adb shell setprop debug.projectmtv.preset <start of a preset name>): that
+            // preset, without automatic changes, so two builds can be measured on the same preset.
+            char forced[PROP_VALUE_MAX] = {0};
+            if (resume.empty() && __system_property_get("debug.projectmtv.preset", forced) > 0) {
+                std::string match = g_library.FindByPrefix(forced);
+                if (!match.empty()) {
+                    resume = match;
+                    g_inputs.autoChange = false;
+                    g_inputs.settingsDirty = true;
+                    LOGI("BENCHMARK preset='%s' (debug.projectmtv.preset), auto change off", match.c_str());
+                }
             }
             SwitchPreset(FirstThenNext(resume), false);
         }
