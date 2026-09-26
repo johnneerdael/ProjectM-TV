@@ -225,10 +225,10 @@ index cbf5f6edc..95f9c7f15 100644
  {
      auto projectMInstance = handle_to_instance(instance);
 diff --git a/src/libprojectM/Renderer/Framebuffer.cpp b/src/libprojectM/Renderer/Framebuffer.cpp
-index 455cdae4b..d2f554341 100644
+index 455cdae4b..9aab63b3a 100644
 --- a/src/libprojectM/Renderer/Framebuffer.cpp
 +++ b/src/libprojectM/Renderer/Framebuffer.cpp
-@@ -86,18 +86,44 @@ bool Framebuffer::SetSize(int width, int height)
+@@ -86,18 +86,45 @@ bool Framebuffer::SetSize(int width, int height)
          return false;
      }
  
@@ -251,7 +251,8 @@ index 455cdae4b..d2f554341 100644
              glFramebufferTexture2D(GL_FRAMEBUFFER, texture.first, GL_TEXTURE_2D, texture.second->Texture()->TextureID(), 0);
 +
 +            if (texture.second->Type() != TextureAttachment::AttachmentType::Color || texture.first != GL_COLOR_ATTACHMENT0 ||
-+                !oldTexture || oldTexture->TextureID() == 0 || oldWidth <= 0 || oldHeight <= 0)
++                !oldTexture || oldTexture == texture.second->Texture() || oldTexture->TextureID() == 0 ||
++                oldWidth <= 0 || oldHeight <= 0)
 +            {
 +                continue;
 +            }
@@ -275,7 +276,7 @@ index 455cdae4b..d2f554341 100644
  
      return true;
 diff --git a/src/libprojectM/Renderer/Shader.cpp b/src/libprojectM/Renderer/Shader.cpp
-index 4a64ab9db..d6ccc0d85 100644
+index 4a64ab9db..fae64689b 100644
 --- a/src/libprojectM/Renderer/Shader.cpp
 +++ b/src/libprojectM/Renderer/Shader.cpp
 @@ -2,11 +2,154 @@
@@ -303,7 +304,7 @@ index 4a64ab9db..d6ccc0d85 100644
 +class ProgramCache
 +{
 +public:
-+    static constexpr size_t maxBytes = 16 * 1024 * 1024;
++    static constexpr size_t maxBytes = 8 * 1024 * 1024;
 +
 +    static auto Instance() -> ProgramCache&
 +    {
@@ -340,7 +341,7 @@ index 4a64ab9db..d6ccc0d85 100644
 +        auto it = Find(key); // rejected by the driver: compile normally
 +        if (it != m_entries.end())
 +        {
-+            m_bytes -= it->binary.size();
++            m_bytes -= it->key.size() + it->binary.size();
 +            m_entries.erase(it);
 +        }
 +        m_misses++;
@@ -373,14 +374,14 @@ index 4a64ab9db..d6ccc0d85 100644
 +        auto it = Find(key);
 +        if (it != m_entries.end())
 +        {
-+            m_bytes -= it->binary.size();
++            m_bytes -= it->key.size() + it->binary.size();
 +            m_entries.erase(it);
 +        }
-+        m_bytes += entry.binary.size();
++        m_bytes += entry.key.size() + entry.binary.size(); // the key is the full shader source
 +        m_entries.push_front(std::move(entry));
 +        while (m_bytes > maxBytes && !m_entries.empty())
 +        {
-+            m_bytes -= m_entries.back().binary.size();
++            m_bytes -= m_entries.back().key.size() + m_entries.back().binary.size();
 +            m_entries.pop_back();
 +        }
 +#else

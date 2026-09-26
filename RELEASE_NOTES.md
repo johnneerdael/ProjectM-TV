@@ -1,7 +1,7 @@
 # ProjectM TV 1.9.12
 
 ## Changed
-- **No more freeze at a preset switch.** Loading a preset used to stop the picture for about a second (0.5 to 1.9 s on the SHIELD) while the graphics driver compiled its shaders. The next preset is now prepared in the background, so a switch takes a few hundredths of a second. Profiling also showed that projectM's shader translator spent half a second per preset setting up number formats; that is gone too.
+- **No more freeze at a preset switch.** Loading a preset used to stop the picture for about a second (0.5 to 1.9 s on the SHIELD) while the graphics driver compiled its shaders. The next preset is now prepared in the background, so a switch takes a few hundredths of a second. When Android reports that memory runs low, the background work pauses for a minute, so the music player keeps its memory. Profiling also showed that projectM's shader translator spent half a second per preset setting up number formats; that is gone too.
 - **Smooth blends are back, without frame drops.** *Auto* transitions blend the old preset into the new one again (instead of fading a still image) and keep the frame rate up: when the graphics chip is the limit, both presets render at a lower resolution during the blend (from 75%); when the processor is the limit, the outgoing preset renders every second frame. The menu shows the current blend resolution.
 - **No sudden cuts on loud beats.** projectM's jump to the next preset on a loud beat is now off by default; *Advanced › Cut on loud beats* turns it back on.
 - **Resolution changes no longer force a hard cut.** The presets' pictures are scaled to the new size instead of starting over.

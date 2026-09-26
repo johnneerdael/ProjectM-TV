@@ -16,9 +16,6 @@
 
 namespace {
 
-// A fresh instance after this many presets releases the textures the old one loaded.
-constexpr int kLoadsPerInstance = 20;
-
 double NowMs() {
     using namespace std::chrono;
     return duration<double, std::milli>(steady_clock::now().time_since_epoch()).count();
@@ -95,8 +92,6 @@ void PresetPrewarmer::Run(std::string textureDir) {
         LOGW("PREWARM unavailable: no off-screen OpenGL ES 3 context (error 0x%x)", eglGetError());
         return;
     }
-    projectm_handle pm = nullptr;
-    int loads = 0;
     for (;;) {
         std::string name;
         {
@@ -108,28 +103,23 @@ void PresetPrewarmer::Run(std::string textureDir) {
         }
         std::string data = reader_(name);
         if (data.empty()) continue;
-        if (pm && loads >= kLoadsPerInstance) {
-            projectm_destroy(pm);
-            pm = nullptr;
-        }
-        if (!pm) {
-            pm = projectm_create();
-            if (!pm) {
-                LOGW("PREWARM unavailable: projectm_create failed");
-                break;
-            }
-            loads = 0;
-            const char* paths[] = {textureDir.c_str()};
-            if (!textureDir.empty()) projectm_set_texture_search_paths(pm, paths, 1);
-            projectm_set_window_size(pm, 64, 36);
-        }
+        // A fresh instance per preset, destroyed right after: between switches the prewarmer holds
+        // no preset, textures or frame buffers (memory is tight on TV boxes, and running short
+        // makes Android take it from the music player).
         double start = NowMs();
+        projectm_handle pm = projectm_create();
+        if (!pm) {
+            LOGW("PREWARM unavailable: projectm_create failed");
+            break;
+        }
+        const char* paths[] = {textureDir.c_str()};
+        if (!textureDir.empty()) projectm_set_texture_search_paths(pm, paths, 1);
+        projectm_set_window_size(pm, 64, 36);
         projectm_load_preset_data(pm, data.c_str(), false);
-        ++loads;
+        projectm_destroy(pm);
         uint32_t hits = 0, misses = 0;
         projectm_opengl_program_cache_stats(&hits, &misses);
         LOGI("PREWARM preset='%s' ms=%.0f cache_hits=%u cache_misses=%u", name.c_str(), NowMs() - start,
              hits, misses);
     }
-    if (pm) projectm_destroy(pm);
 }

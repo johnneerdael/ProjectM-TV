@@ -1,0 +1,27 @@
+Subject: [PATCH] projectm-eval: per-thread state for rand()
+
+The Mersenne Twister state behind the expression language's rand() was a
+process-wide static. ProjectM TV runs a second projectM instance on a background
+thread (it compiles the next preset's shaders, which also runs the preset's init
+code), so two threads could use the state at once: one could pass the refill
+check while the other advanced the index, and then read one element past the
+array. With per-thread state each thread gets the same sequence as before (same
+fixed seed).
+
+---
+diff --git a/vendor/projectm-eval/projectm-eval/TreeFunctions.c b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
+index cf1a2c0..f60e060 100644
+--- a/vendor/projectm-eval/projectm-eval/TreeFunctions.c
++++ b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
+@@ -169,8 +169,9 @@ static uint32_t prjm_eval_genrand_int32(void)
+     static uint32_t mag01[2] = { 0x0UL, MATRIX_A };
+     /* mag01[x] = x * MATRIX_A  for x=0,1 */
+ 
+-    static uint32_t mt[N]; /* the array for the state vector  */
+-    static int32_t mti; /* mti==N+1 means mt[N] is not initialized */
++    /* Per thread: several projectM instances may evaluate code on different threads at once. */
++    static _Thread_local uint32_t mt[N]; /* the array for the state vector  */
++    static _Thread_local int32_t mti; /* mti==N+1 means mt[N] is not initialized */
+ 
+ 
+     if (!mti)

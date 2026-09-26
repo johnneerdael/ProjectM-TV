@@ -876,6 +876,9 @@ struct Engine {
 // Intentionally never destroyed: its detached worker thread lives as long as the process.
 PresetLibrary& g_library = *new PresetLibrary();
 PresetPrewarmer& g_prewarmer = *new PresetPrewarmer();  // started and stopped with the engine
+std::atomic<double> g_prewarmPausedUntil{0.0};           // background compiling paused after memory pressure
+constexpr double kPrewarmPauseSeconds = 60.0;
+constexpr double kPrewarmMinAvailableShare = 0.15;      // of RAM available, else no background compile
 Inputs g_inputs;
 Published g_published;
 Engine g_engine;
@@ -923,16 +926,31 @@ void Publish(const std::string& name) {
 }
 
 // System-wide available memory (MemAvailable) in kB, or -1.
-long AvailableMemoryKb() {
+long MemInfoKb(const char* format) {
     FILE* f = fopen("/proc/meminfo", "r");
     if (!f) return -1;
     char line[128];
     long kb = -1;
     while (fgets(line, sizeof(line), f)) {
-        if (sscanf(line, "MemAvailable: %ld kB", &kb) == 1) break;
+        if (sscanf(line, format, &kb) == 1) break;
     }
     fclose(f);
     return kb;
+}
+
+long AvailableMemoryKb() { return MemInfoKb("MemAvailable: %ld kB"); }
+
+// Whether the upcoming preset may be compiled in the background: its short-lived projectM instance
+// must not push Android into taking memory from the music player.
+bool PrewarmAllowed(double now) {
+    if (now < g_prewarmPausedUntil.load()) return false;
+    static const long totalKb = MemInfoKb("MemTotal: %ld kB");
+    long availableKb = AvailableMemoryKb();
+    if (totalKb > 0 && availableKb >= 0 && availableKb < totalKb * kPrewarmMinAvailableShare) {
+        LOGW("PREWARM skipped: %ld MB of %ld MB available", availableKb / 1024, totalKb / 1024);
+        return false;
+    }
+    return true;
 }
 
 // Resident memory of this process in kB, or -1.
@@ -1127,7 +1145,7 @@ bool LoadPreset(const std::string& name, bool smooth) {
     g_engine.lastLoadEnd = loadEnd;
     g_engine.lastLoadMs = loadMs;
     g_engine.detector.Arm(loadEnd, 2.0, name);
-    g_prewarmer.Request(g_library.PeekNext());
+    if (PrewarmAllowed(loadEnd)) g_prewarmer.Request(g_library.PeekNext());
     return true;
 }
 
@@ -1141,6 +1159,8 @@ void BeginTransition(double seconds, bool lightweight) {
     g_engine.transitionFrames = 0;
     g_engine.transitionSlowFrames = 0;
     g_engine.transitionCpuSeconds = 0;
+    g_engine.transitionScaled = false;  // set by the caller for an Auto blend
+    g_engine.transitionStepped = false;
     g_engine.transitionWorstMs = g_engine.lastLoadMs;
     g_engine.fpsBeforeTransition = g_engine.lastFps;
     g_engine.detector.Arm(g_engine.lastLoadEnd, seconds + 2.0, g_engine.current);  // judge it after the blend
@@ -1204,6 +1224,7 @@ void HandleCommands() {
         bool smooth = !g_inputs.commandHardCut.load();
         g_engine.fade.Stop();  // remote-control switches are immediate
         g_engine.scaledUntil = 0;
+        projectm_opengl_set_outgoing_preset_frame_divisor(g_engine.pm, 1);
         switch (command) {
             case kNext:
                 SwitchPreset([] { return g_library.Next(); }, smooth);
@@ -1292,6 +1313,8 @@ void AdaptBlendLevel(float blendFps, float before, float cpuShare) {
                  blendFps, before, static_cast<int>(kBlendScales[level + 1] * 100.f + 0.5f));
         }
     } else if (blendFps >= before * kBlendFastRatio) {
+        // One heavy preset must not cap the resolution for the rest of the session.
+        if (g_engine.fastBlends + 1 >= 2 * kFastBlendsToRaise && level > 0) g_engine.blendLevelTooSlow[level - 1] = false;
         if (++g_engine.fastBlends >= kFastBlendsToRaise && level > 0 && !g_engine.blendLevelTooSlow[level - 1]) {
             g_engine.blendLevel = level - 1;
             g_engine.fastBlends = 0;
@@ -1569,6 +1592,13 @@ JNIEXPORT void JNICALL JNI_FN(setSoftCutDuration)(JNIEnv*, jclass, jint seconds)
 JNIEXPORT void JNICALL JNI_FN(setAutoChange)(JNIEnv*, jclass, jboolean enabled) {
     g_inputs.autoChange = enabled;
     g_inputs.settingsDirty = true;
+}
+
+// Android reports that memory runs low: pause compiling presets in the background for a minute
+// (its extra projectM instance and textures would come out of the music player's memory).
+JNIEXPORT void JNICALL JNI_FN(onMemoryPressure)(JNIEnv*, jclass) {
+    g_prewarmPausedUntil = NowSeconds() + kPrewarmPauseSeconds;
+    LOGW("PREWARM paused for %.0f s: memory pressure", kPrewarmPauseSeconds);
 }
 
 JNIEXPORT void JNICALL JNI_FN(setBeatCuts)(JNIEnv*, jclass, jboolean enabled) {

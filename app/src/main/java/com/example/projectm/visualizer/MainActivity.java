@@ -216,6 +216,7 @@ public class MainActivity extends Activity {
         if (level == TRIM_MEMORY_RUNNING_LOW || level == TRIM_MEMORY_RUNNING_CRITICAL) {
             // The lower resolution applies at the next preset switch.
             quality.onMemoryPressure(level);
+            ProjectMJNI.onMemoryPressure();
         }
     }
 
