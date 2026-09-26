@@ -135,15 +135,32 @@ public:
         return it == weights_.end() ? 0 : it->second;
     }
 
+    // A random preset other than `avoid`. It is picked one step ahead (PeekRandom), so the next one
+    // can be prepared in the background like the next preset in the shuffled order.
     std::string Random(const std::string& avoid) {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (order_.empty()) return {};
-        std::uniform_int_distribution<size_t> dist(0, order_.size() - 1);
-        for (int i = 0; i < 32; ++i) {
-            const std::string& candidate = order_[dist(rng_)];
-            if (candidate != avoid && !skipped_.count(candidate)) return candidate;
+        std::string pick = std::exchange(randomAhead_, std::string());
+        if (pick.empty() || pick == avoid || skipped_.count(pick)) pick = PickRandomLocked(avoid);
+        randomAhead_ = PickRandomLocked(pick);
+        return pick;
+    }
+
+    // The preset Random() will return next.
+    std::string PeekRandom() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (randomAhead_.empty() || skipped_.count(randomAhead_)) {
+            randomAhead_ = PickRandomLocked(history_.empty() ? std::string() : history_.back());
         }
-        return PeekNextLocked(true);
+        return randomAhead_;
+    }
+
+    // The preset Previous() will return ("" if there is none).
+    std::string PeekPrevious() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (size_t i = history_.size() >= 2 ? history_.size() - 1 : 0; i-- > 0;) {  // before the current one
+            if (!skipped_.count(history_[i])) return history_[i];
+        }
+        return {};
     }
 
     // Returns the preset shown before the current one ("" if there is no history).
@@ -238,6 +255,16 @@ private:
         if (buffer && length > 0) data.assign(static_cast<const char*>(buffer), length);
         AAsset_close(asset);
         return data;
+    }
+
+    std::string PickRandomLocked(const std::string& avoid) {
+        if (order_.empty()) return {};
+        std::uniform_int_distribution<size_t> dist(0, order_.size() - 1);
+        for (int i = 0; i < 32; ++i) {
+            const std::string& candidate = order_[dist(rng_)];
+            if (candidate != avoid && !skipped_.count(candidate)) return candidate;
+        }
+        return PeekNextLocked(true);
     }
 
     std::string PeekNextLocked(bool advance) {
@@ -416,6 +443,7 @@ private:
     std::vector<std::string> order_;
     size_t cursor_ = 0;
     std::deque<std::string> history_;
+    std::string randomAhead_;  // Random()'s next pick
     std::unordered_set<std::string> skipped_;
     std::unordered_map<std::string, int> blankStrikes_;
     std::unordered_map<std::string, int> weights_;
@@ -877,7 +905,7 @@ struct Engine {
 PresetLibrary& g_library = *new PresetLibrary();
 PresetPrewarmer& g_prewarmer = *new PresetPrewarmer();  // started and stopped with the engine
 std::atomic<double> g_prewarmPausedUntil{0.0};           // background compiling paused after memory pressure
-constexpr double kPrewarmPauseSeconds = 60.0;
+constexpr double kPrewarmPauseSeconds = 20.0;  // the free-memory check below still applies
 constexpr double kPrewarmMinAvailableShare = 0.15;      // of RAM available, else no background compile
 Inputs g_inputs;
 Published g_published;
@@ -1145,7 +1173,11 @@ bool LoadPreset(const std::string& name, bool smooth) {
     g_engine.lastLoadEnd = loadEnd;
     g_engine.lastLoadMs = loadMs;
     g_engine.detector.Arm(loadEnd, 2.0, name);
-    if (PrewarmAllowed(loadEnd)) g_prewarmer.Request(g_library.PeekNext());
+    // What the next switch will most likely load: the timer's next preset, and what Right (random)
+    // and Left (previous) on the remote would pick. The previous one is usually still in the caches.
+    if (PrewarmAllowed(loadEnd)) {
+        g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
+    }
     return true;
 }
 

@@ -96,7 +96,9 @@ void SnapshotFade::Release() { Stop(); }
 std::vector<std::string> g_prewarmRequests; std::string g_prewarmTextureDir; int g_prewarmStarts = 0, g_prewarmStops = 0;
 void PresetPrewarmer::Start(const std::string& dir, Reader) { ++g_prewarmStarts; g_prewarmTextureDir = dir; }
 void PresetPrewarmer::Stop() { ++g_prewarmStops; }
-void PresetPrewarmer::Request(const std::string& name) { g_prewarmRequests.push_back(name); }
+std::vector<std::vector<std::string>> g_prewarmLists;
+void PresetPrewarmer::Request(const std::vector<std::string>& names) {
+  g_prewarmLists.push_back(names); g_prewarmRequests.push_back(names.empty() ? "" : names.front()); }
 extern "C" {
 // ---- fake projectM ----
 struct projectm {};
@@ -442,6 +444,15 @@ int main(int argc, char** argv) {
   printf("the next preset's shaders are compiled in the background\n");
   CHECK(g_prewarmStarts >= 1 && !g_prewarmTextureDir.empty());
   CHECK(!g_prewarmRequests.empty() && g_prewarmRequests.back() == g_library.PeekNext());
+
+  printf("random and previous presets are prepared too: Right picks the prepared random preset\n");
+  { std::vector<std::string> list = g_prewarmLists.back();
+    CHECK(list.size() == 3 && list[1] == g_library.PeekRandom() && list[2] == g_library.PeekPrevious());
+    std::string before = current(), prepared = list[1];
+    Java_com_example_projectm_visualizer_ProjectMJNI_randomPreset(nullptr, nullptr, true); frame();
+    CHECK(current() == prepared && current() != before);
+    CHECK(g_library.PeekPrevious() == before);  // Left would go back to it: prepared as well
+    CHECK(g_prewarmLists.back()[1] == g_library.PeekRandom() && g_prewarmLists.back()[1] != prepared); }
 
   printf("output measurements: flat and still are logged, never skipped\n");
   {

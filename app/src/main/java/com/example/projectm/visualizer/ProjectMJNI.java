@@ -55,7 +55,7 @@ public final class ProjectMJNI {
     public static native void setAutoChange(boolean enabled);
     /** projectM's hard cut to the next preset on a loud beat (off: presets only change by blending). */
     public static native void setBeatCuts(boolean enabled);
-    /** Memory runs low: pauses compiling upcoming presets in the background for a minute. */
+    /** Memory runs low: pauses compiling upcoming presets in the background for 20 s. */
     public static native void onMemoryPressure();
     public static native void setMeshSize(int width, int height);
     /** Adds the current preset to the skip list and moves on (hard cut). */

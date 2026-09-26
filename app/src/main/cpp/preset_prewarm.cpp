@@ -6,6 +6,7 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
+#include <algorithm>
 #include <chrono>
 
 #include "projectM-4/projectM.h"
@@ -15,6 +16,9 @@
 #define LOGW(...) __android_log_print(ANDROID_LOG_WARN, LOG_TAG, __VA_ARGS__)
 
 namespace {
+
+// Presets compiled this recently are not compiled again: their programs are still in the cache.
+constexpr size_t kRecentNames = 16;
 
 double NowMs() {
     using namespace std::chrono;
@@ -73,15 +77,19 @@ void PresetPrewarmer::Stop() {
     cv_.notify_all();
     if (thread_.joinable()) thread_.join();
     pending_.clear();
-    last_.clear();
+    recent_.clear();
 }
 
-void PresetPrewarmer::Request(const std::string& name) {
-    if (name.empty()) return;
+void PresetPrewarmer::Request(const std::vector<std::string>& names) {
     std::lock_guard<std::mutex> lock(mutex_);
-    if (name == last_ || name == pending_) return;
-    pending_ = name;
-    cv_.notify_one();
+    pending_.clear();
+    for (const auto& name : names) {
+        if (name.empty()) continue;
+        if (std::find(recent_.begin(), recent_.end(), name) != recent_.end()) continue;
+        if (std::find(pending_.begin(), pending_.end(), name) != pending_.end()) continue;
+        pending_.push_back(name);
+    }
+    if (!pending_.empty()) cv_.notify_one();
 }
 
 void PresetPrewarmer::Run(std::string textureDir) {
@@ -98,8 +106,10 @@ void PresetPrewarmer::Run(std::string textureDir) {
             std::unique_lock<std::mutex> lock(mutex_);
             cv_.wait(lock, [this] { return stop_ || !pending_.empty(); });
             if (stop_) break;
-            name.swap(pending_);
-            last_ = name;
+            name = pending_.front();
+            pending_.pop_front();
+            recent_.push_back(name);
+            if (recent_.size() > kRecentNames) recent_.pop_front();
         }
         std::string data = reader_(name);
         if (data.empty()) continue;
