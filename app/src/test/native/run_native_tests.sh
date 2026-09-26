@@ -41,7 +41,7 @@ SAN="-fsanitize=address,undefined"
 [ "${NO_SANITIZERS:-0}" = "1" ] && SAN=""
 g++ -std=c++17 -O1 -g $SAN -pthread \
     -I"$HERE/stubs" -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/$JNI_OS" \
-    -I"$ROOT/app/src/main/jniLibs/include" -I"$ROOT/app/src/main/cpp" \
+    -I"$ROOT/third_party/projectm/src/api/include" -I"$ROOT/app/src/main/cpp" \
     "$HERE/engine_test.cpp" -o "$WORK/engine_test"
 if ! ASAN_OPTIONS=detect_leaks=0 "$WORK/engine_test" "$WORK/assets" "$WORK/noindex" 2>"$WORK/engine.log"; then
     echo "--- engine log (last 80 lines)"

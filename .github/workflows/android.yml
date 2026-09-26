@@ -24,6 +24,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive  # projectM is built from source (third_party/projectm)
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -50,6 +52,8 @@ jobs:
       apk_name: ${{ steps.apk.outputs.name }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive  # projectM is built from source (third_party/projectm)
 
       - name: Determine version
         id: version

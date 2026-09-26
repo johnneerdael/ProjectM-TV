@@ -128,6 +128,8 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 ### Build
 
 ```bash
+git clone --recurse-submodules https://github.com/johnneerdael/ProjectM-TV.git
+# in an existing clone: git submodule update --init --recursive
 ./gradlew assembleRelease     # non-debuggable APK, signed with your local debug key
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
@@ -136,7 +138,7 @@ Release builds on GitHub are signed with the release key; see [docs/RELEASING.md
 
 ### projectM
 
-The app links against prebuilt projectM libraries in `app/src/main/jniLibs`. `tools/build-projectm.sh` rebuilds them from the pinned upstream tag plus the patches in `tools/projectm-patches/`, for armeabi-v7a and arm64-v8a, with the Android NDK named in `app/build.gradle`.
+projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository.
 
 ### Tests
 
