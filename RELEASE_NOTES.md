@@ -1,3 +1,16 @@
+# projectM for Android TV 1.9.6
+
+## Changed
+- **projectM is built from source with the app.** The same projectM 4.1.7 (plus the SHIELD plasma-transition fix) is now compiled from its source code in `third_party/projectm` and linked into the app, instead of shipping prebuilt libraries. Nothing changes on screen; the app's native code shrinks from about 10–12 MB to 1.3–2 MB per device type, and the whole app can be built from source, which F-Droid requires.
+- **Licences are stated for everything.** The app's code is LGPL 2.1; the bundled presets and textures are distributed under CC0 1.0 (see `docs/THIRD_PARTY.md`).
+
+- **Releases are signed with one permanent key.** Up to 1.9.5, every release was signed with a different temporary key, so no update could install over the previous version. From 1.9.6 on, updates install normally and keep your settings. **Uninstall 1.9.5 or earlier once before installing 1.9.6** (this resets the settings).
+
+## Added
+- **One link for the newest version.** https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk always downloads the latest stable release, and on the TV the *Downloader* app installs it with code **4821216**.
+
+---
+
 # projectM for Android TV 1.9.5
 
 ## Fixed

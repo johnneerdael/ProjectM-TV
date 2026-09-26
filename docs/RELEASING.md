@@ -23,6 +23,8 @@ The fixed name makes one link always download the newest stable release: https:/
 
 Android only installs an update over an existing app if both are signed with the same key. Without a key configured, every CI build gets a throwaway debug key and would need an uninstall first.
 
+**Status:** configured on 2026-09-26 (certificate `CN=projectM TV`, SHA-256 `EE:51:37:0F:48:53:25:D7:03:AD:BC:A4:D8:11:98:9D:90:E0:44:DA:61:81:F7:62:99:65:E6:AD:D0:3C:FC:EF`, valid until 2059). 1.9.6 is the first release signed with it; releases up to 1.9.5 used temporary keys. The keystore and its password are kept outside the repository by the maintainer; never commit them.
+
 1. Create a key (keep the file and passwords somewhere safe; losing them means users must reinstall):
    ```bash
    keytool -genkeypair -v -keystore projectm-release.jks -alias projectm \
