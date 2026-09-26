@@ -9,10 +9,9 @@ import java.util.List;
  * Dynamic resolution: picks the render height from a ladder of levels so the frame rate stays at
  * its target, and raises it again when there is headroom.
  *
- * Changing the render size resets projectM's framebuffers ("Calling this function will reset the
- * OpenGL renderer", parameters.h), so changes are only applied right after a preset switch, which
- * is then forced to be a hard cut: the new preset starts from scratch anyway, so the reset is not
- * visible. Only a severe, sustained slowdown triggers an immediate change (with a preset switch).
+ * Changes apply immediately: since 1.9.12 a new render size keeps the presets' frames (scaled,
+ * projectM patch 0002), so no preset switch or hard cut is needed to hide it. After a change the
+ * frame rate is left to settle before the next decision.
  *
  * Heights are limited to the panel and to a memory-safe maximum (see
  * {@link DeviceProfile#memorySafeHeight()}); memory pressure reported by Android lowers that
@@ -29,8 +28,6 @@ public final class QualityController {
 
     /** Result of {@link #onFpsSample}. */
     public static final int ACTION_NONE = 0;
-    /** Switch preset now (hard cut) so a severe downgrade can be applied. */
-    public static final int ACTION_SWITCH = 1;
     /** Current preset is too slow for this device even at the lowest resolution: skip it. */
     public static final int ACTION_SKIP = 2;
 
@@ -46,6 +43,7 @@ public final class QualityController {
     private static final float SKIP_THRESHOLD = 0.5f;
     private static final int SKIP_SAMPLES = 5;
     private static final long SETTLE_MS = 3000;             // ignore load hitch + transition start
+    private static final long PRESSURE_QUIET_MS = 10000;    // one step per burst of memory warnings
 
     private final Listener listener;
     private final int[] levels;
@@ -53,18 +51,17 @@ public final class QualityController {
     private boolean auto;
     private int fixedHeight;
     private int current;            // index into levels (auto mode)
-    private int pending = -1;       // level to apply at the next preset switch
     private float targetFps = 60f;
     private long settleUntil;
     private long transitionMs;
     private int slowSamples, severeSamples, goodSamples, tooSlowSamples;
     private boolean skipSlowPresets;
-    private boolean switchRequested;  // immediate switch asked for, waiting for onPresetChanged
+    private boolean switchRequested;  // skip asked for, waiting for onPresetChanged
     private final int[] blockedUntilPreset;  // per level: don't retry until this preset count
     private final int[] failures;            // per level: exponential back-off after failed probes
     private int presetCount;
     private int ceiling;                     // highest level auto may use (lowered by memory pressure)
-    private int pressurePreset = -1;
+    private long pressureQuietUntil;
     private int beforePressure = -1;         // auto level when memory pressure first lowered the ceiling
 
     /** @param memoryLimit highest render height allowed for memory reasons, 0 for none. */
@@ -112,7 +109,6 @@ public final class QualityController {
     public void setMode(int height, int lastAutoHeight) {
         auto = height <= 0;
         fixedHeight = height;
-        pending = -1;
         resetCounters(0);
         if (auto && lastAutoHeight > 0) current = Math.max(minIndex, Math.min(ceiling, indexAtMost(lastAutoHeight)));
         listener.onApplyRenderHeight(currentHeight());
@@ -120,7 +116,6 @@ public final class QualityController {
 
     public void setTargetFps(float fps) {
         targetFps = fps;
-        pending = -1;  // a queued change was computed against the old target
         resetCounters(SETTLE_MS);
     }
 
@@ -149,42 +144,31 @@ public final class QualityController {
         return current == ceiling && beforePressure > current ? levels[beforePressure] : levels[current];
     }
 
-    /** True while a change waits for the next preset switch. */
-    public boolean hasPendingChange() {
-        return pending >= 0 && pending != current;
-    }
-
-    /** Called when a new preset starts. */
+    /** Called when a new preset starts: its load and blend are not judged. */
     public void onPresetChanged() {
         presetCount++;
         switchRequested = false;
-        if (auto && hasPendingChange()) {
-            Log.i(TAG, "Render height " + levels[current] + " -> " + levels[pending] + " at preset switch");
-            current = pending;
-            listener.onApplyRenderHeight(levels[current]);
-        }
-        pending = -1;
         resetCounters(SETTLE_MS + transitionMs);
     }
 
     /**
      * Android reports that memory is running low while we are in the foreground: other apps (such
-     * as the music player) are about to be killed. Lowers the automatic resolution one level at
-     * the next preset switch and never goes back above it in this session.
+     * as the music player) are about to be killed. Lowers the automatic resolution one level now
+     * (one step per burst of warnings) and never goes back above it in this session.
      */
     public void onMemoryPressure(int level) {
         if (!auto) {
             Log.w(TAG, "Memory pressure (level " + level + ") at fixed " + fixedHeight + "p");
             return;
         }
-        if (presetCount == pressurePreset) return;  // one step per preset: it applies at the switch
-        pressurePreset = presetCount;
-        int from = pending >= 0 ? Math.min(current, pending) : current;
-        if (beforePressure < 0) beforePressure = from;
-        ceiling = Math.min(ceiling, Math.max(minIndex, from - 1));
-        if (current > ceiling) pending = ceiling;
+        long now = System.currentTimeMillis();
+        if (now < pressureQuietUntil) return;
+        pressureQuietUntil = now + PRESSURE_QUIET_MS;
+        if (beforePressure < 0) beforePressure = current;
+        ceiling = Math.min(ceiling, Math.max(minIndex, current - 1));
         Log.w(TAG, "Memory pressure (level " + level + "): limiting resolution to " + levels[ceiling]
                 + " for this session");
+        if (current > ceiling) apply(ceiling, "memory pressure");
     }
 
     /** One-second frame-rate sample; returns one of the ACTION_ constants. */
@@ -207,12 +191,10 @@ public final class QualityController {
         if (!auto) return ACTION_NONE;
 
         if (fps < targetFps * SEVERE_THRESHOLD) {
-            if (++severeSamples >= SEVERE_SAMPLES && current > minIndex && !switchRequested) {
-                Log.w(TAG, "Severe slowdown (" + fps + " fps), lowering resolution now");
+            if (++severeSamples >= SEVERE_SAMPLES && current > minIndex) {
                 block(current);
-                pending = stepDown(current);
-                switchRequested = true;
-                return ACTION_SWITCH;
+                apply(stepDown(current), "severe slowdown (" + fps + " fps)");
+                return ACTION_NONE;
             }
         } else {
             severeSamples = 0;
@@ -220,18 +202,16 @@ public final class QualityController {
 
         if (fps < targetFps * DOWN_THRESHOLD) {
             goodSamples = 0;
-            if (++slowSamples >= DOWN_SAMPLES && current > minIndex && pending < 0) {
-                pending = stepDown(current);
+            if (++slowSamples >= DOWN_SAMPLES && current > minIndex) {
+                int to = stepDown(current);
                 block(current);
-                Log.i(TAG, fps + " fps < target " + targetFps + ": will lower to " + levels[pending]);
+                apply(to, fps + " fps < target " + targetFps);
             }
         } else {
             slowSamples = 0;
             if (fps >= targetFps * UP_THRESHOLD && ++goodSamples >= UP_SAMPLES
-                    && current < ceiling && pending < 0
-                    && presetCount >= blockedUntilPreset[current + 1]) {
-                pending = current + 1;
-                Log.i(TAG, "Headroom at " + levels[current] + ": will try " + levels[pending]);
+                    && current < ceiling && presetCount >= blockedUntilPreset[current + 1]) {
+                apply(current + 1, "headroom");
             }
         }
         return ACTION_NONE;
@@ -244,6 +224,15 @@ public final class QualityController {
     private void block(int index) {
         failures[index]++;
         blockedUntilPreset[index] = failures[index] >= 2 ? Integer.MAX_VALUE : presetCount + 10;
+    }
+
+    /** Switches to a level now; the frame rate then settles before the next decision. */
+    private void apply(int index, String reason) {
+        if (index == current) return;
+        Log.i(TAG, "Render height " + levels[current] + " -> " + levels[index] + ": " + reason);
+        current = index;
+        listener.onApplyRenderHeight(levels[current]);
+        resetCounters(SETTLE_MS);
     }
 
     private int stepDown(int index) {

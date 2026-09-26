@@ -1,0 +1,2 @@
+- Resolution changes no longer interrupt the picture (no more hard cuts).
+- Smoother preset switches: the next preset's shader translation is prepared in the background.

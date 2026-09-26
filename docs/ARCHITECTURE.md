@@ -133,12 +133,12 @@ The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The di
 
 | Condition | Action |
 |---|---|
-| < 85 % of target for 3 s | lower one level (two if far off) at the next preset switch |
-| < 55 % for 4 s | lower now and switch preset (hard cut) |
-| ≥ 97 % for 15 s | try one level higher at the next switch. A level that failed is retried once after 10 presets; after a second failure it is not tried again in this session (the SHIELD oscillated 1440 ↔ 1800 before) |
+| < 85 % of target for 3 s | lower one level (two if far off), immediately |
+| < 55 % for 4 s | lower two levels, immediately (up to 1.9.14 this also forced a preset switch with a hard cut) |
+| ≥ 97 % for 15 s | try one level higher, immediately. A level that failed is retried once after 10 presets; after a second failure it is not tried again in this session (the SHIELD oscillated 1440 ↔ 1800 before) |
 | < 50 % at the lowest level, *Skip slow presets* on | add the preset to the skip list |
 
-Changes wait for a preset switch. Up to 1.9.11 that switch was forced to be a hard cut: in projectM 4.1 a new window size reallocates each preset's frame buffers, losing their contents, which a hard cut hides. Since 1.9.12 patch 0002 scales the contents into the new buffers, so the switch blends as usual. The last automatic level is remembered across launches.
+Since 1.9.15 changes apply immediately, after which the frame rate settles for 3 s before the next decision; memory pressure lowers one level per burst of warnings (10 s). Up to 1.9.14 changes waited for the next preset switch, and up to 1.9.11 that switch was forced to be a hard cut: in projectM 4.1 a new window size reallocates each preset's frame buffers, losing their contents. Since 1.9.12 patch 0002 scales the contents into the new buffers, so a resize is not visible. The last automatic level is remembered across launches.
 
 ### Frame pacing
 Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so the speed of the visuals doesn't change.

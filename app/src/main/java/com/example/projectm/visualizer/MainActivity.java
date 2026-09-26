@@ -237,14 +237,9 @@ public class MainActivity extends Activity {
 
     private void onFrameRate(float fps) {
         int action = quality.onFpsSample(fps);
-        if (action == QualityController.ACTION_SKIP) {
-            ProjectMJNI.skipCurrentPreset();
-        } else if (action == QualityController.ACTION_SWITCH) {
-            ProjectMJNI.nextPreset(true);
-        }
-        // A resolution change waits for the next preset switch, which can blend as usual: the
-        // presets' frames are scaled to the new size instead of starting over.
-
+        // Resolution changes apply by themselves (the presets' frames are scaled to the new size);
+        // only a preset that is too slow even at the lowest resolution is skipped.
+        if (action == QualityController.ACTION_SKIP) ProjectMJNI.skipCurrentPreset();
     }
 
     /** Frame-rate options: the refresh rate divided by 4, 2 or 1 (at least 24 fps), ascending. */

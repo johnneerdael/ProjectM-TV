@@ -8,32 +8,33 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-This README describes what the app does as of version 1.9.5, and where it falls short. Everything under *What it does* was checked on the only device it has been tested on: an NVIDIA SHIELD Android TV (2019, Android 11).
+This README describes what the app does as of version 1.9.14, and where it falls short. Everything under *What it does* was checked on the only devices it has been tested on: two NVIDIA SHIELD Android TVs (2019, Android 11).
 
 ## What it does
 
 - **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. On the SHIELD, the visuals react to SoundCloud about 10 seconds after launch, and within about 5 seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
-- **Shows 9,606 presets in shuffled order.** It changes preset every 30 seconds by default, or when you press Left or Right on the remote, and blends the old preset into the new one over 7 seconds. The next preset's shaders are compiled in the background beforehand, so a switch does not freeze the picture.
+- **Shows 9,606 presets in shuffled order, with smooth blends.** Every 30 seconds by default it blends the old preset into the new one over 7 seconds. The next preset's shaders are compiled in the background beforehand, so the switch does not freeze the picture, and the blend adapts its resolution to keep the frame rate up. Left and Right on the remote cut straight to a random or the previous preset.
 - **Shows the track that is playing.** When the music app starts a new track, its title and artist appear in the lower left for 20 seconds (taken from the app's media session, e.g. SoundCloud or Flow). This needs *notification access* (on the SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*), see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that were black on the SHIELD render; this rule remains as a safety net (details under *Presets* below).
-- **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution between presets to hold the frame rate. The TV's scaler upscales to the panel.
+- **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution to hold the frame rate, without interrupting the preset. The TV's scaler upscales to the panel.
 - **Protects the music app from being closed.** On TVs with little memory, Android closes other apps when projectM uses too much. The app caps its resolution by installed memory (on a 2 GB SHIELD: 1260p), and in *Auto* resolution it lowers the resolution when Android reports memory pressure.
 - **Starts quickly.** About 3–6 seconds from launch to the first preset on the SHIELD.
 - **Shows its own measurements.** *Settings › Advanced › Diagnostics* shows the render size, frame rate, audio source and audio level.
 
 ## What it does not do, and known limits
 
-**Tested on one device.** All measurements come from an NVIDIA SHIELD Android TV (2019, `sif`, 2 GB RAM, Android 11), which runs the app 32-bit. Other Android TV devices are untested. The app should run on any Android TV with Android 5.0 or later and OpenGL ES 3.0, but performance, audio behaviour and memory limits will differ.
+**Tested on two devices.** All measurements come from two NVIDIA SHIELD Android TVs with Android 11: the 2019 SHIELD TV (`sif`, 2 GB RAM, runs the app 32-bit) and the 2019 SHIELD TV Pro (`mdarcy`, 3 GB RAM, 64-bit). Other Android TV devices are untested. The app should run on any Android TV with Android 5.0 or later and OpenGL ES 3.0, but performance, audio behaviour and memory limits will differ.
 
 **Audio**
 - The app does not play music, and it has no microphone or line-in input. It can only visualize audio that another app plays on the same TV.
-- On a SHIELD with Dolby or passthrough output, Android's standard visualizer hears nothing. The app works around this by finding the audio session of the playing app. That takes about 10 seconds after launch. If a search finds nothing, the next one waits 15, then 30, then 60 seconds, so it can take up to a minute. It works with SoundCloud; **other music apps (Spotify, YouTube Music, Plex, …) have not been tested**.
+- On a SHIELD with Dolby or passthrough output, Android's standard visualizer hears nothing. The app works around this by finding the audio session of the playing app. That takes about 10 seconds after launch. If a search finds nothing, the next one waits 15, then 30, then 60 seconds, so it can take up to a minute. It works with SoundCloud and Flow; **other music apps (Spotify, YouTube Music, Plex, …) have not been tested**.
 - The *Media capture* audio source receives no audio on the SHIELD. It relies on Android's playback capture, which the SHIELD's Dolby audio path bypasses. When the app finds the player's session instead, it switches back to *Standard* by itself. On other devices, Media capture may work; it asks for screen-cast consent at every launch.
 - Apps that block audio capture, and audio that reaches the TV already encoded (for example Dolby bitstreams from a video app), cannot be visualized.
 - The audio the visualizer receives is 8-bit mono, which is what Android's visualizer API provides.
 
 **Picture and performance (SHIELD)**
-- **Most preset changes freeze the picture for a moment, typically about 0.9 seconds and up to about 1.8 seconds.** projectM compiles the new preset's shaders on the render thread. This is not fixed yet.
+- **A preset change is only smooth when it was prepared.** Since 1.9.12 the next preset's shaders are compiled in the background, so a timed or blank-preset switch takes a few hundredths of a second. *Random* and *Previous* on the remote pick a preset that was not prepared: those still pause the picture for up to about half a second. For a minute after Android reports low memory, nothing is prepared in the background either.
+- **Blending two heavy presets is slow.** A blend renders both presets at once. With presets that use many shapes, the SHIELD's CPU is the limit, and the frame rate can drop to 20–30 fps for the length of the blend.
 - **4K is possible but not smooth.** At a fixed 4K the SHIELD averaged about 30 fps. With the default memory limit it never goes above 1260p; a fixed 4K needs *Memory limit* set to Off.
 - **Android often reports low memory shortly after launch.** *Auto* resolution then stays at 720p for that session.
 - Heavy presets drop below 60 fps, sometimes to about 20 fps, even at 720p.
@@ -124,8 +125,9 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 | Skip slow presets | Skips presets that stay far below the target frame rate even at the lowest resolution | On only on low-end devices |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Audio source | *Standard* or *Media capture* (Android 10+), see *Audio* above | Standard |
+| Track titles | *On* when notification access is granted; select it for how to allow it (see [Track titles](#track-titles)) | – |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
-| Diagnostics | Render size, panel, UI size, frame rate, transition style, audio source and level, device tier | – |
+| Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track titles (access), device tier | – |
 
 ## Troubleshooting
 
@@ -134,7 +136,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 - Still silent with *Media capture* on a SHIELD: switch *Audio source* to *Standard*.
 - Still silent with *Standard*: the music app may block capture or send encoded audio, or it may not have been tested (see *Audio* above). Try SoundCloud to confirm the setup works.
 
-**It stutters.** Keep *Resolution* and *Transitions* on *Auto*, set *Frame rate* to 30 fps, and lower *Detail* in *Advanced*.
+**It stutters.** Keep *Resolution* and *Transitions* on *Auto*, set *Frame rate* to 30 fps, and lower *Detail* in *Advanced*. *Detail* sets how much per-vertex work every preset does on the CPU, which is what limits blends on the SHIELD.
 
 <a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). The app explains this once, at the first launch without access; *Settings › Advanced › Track titles* shows the explanation again, and *Diagnostics* shows whether access is granted.
 
@@ -157,7 +159,7 @@ Release builds on GitHub are signed with the release key; see [docs/RELEASING.md
 
 ### projectM
 
-projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, a cache of linked shader programs, fewer redundant GL calls, and a faster HLSL parser on Android) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
+projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, caches of linked and translated shader programs, fewer redundant GL calls, and a faster HLSL parser on Android) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
 
 ### Tests
 

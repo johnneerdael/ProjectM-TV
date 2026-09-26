@@ -1,7 +1,6 @@
 package com.example.projectm.visualizer;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -63,22 +62,7 @@ public class QualityControllerTest {
     }
 
     @Test
-    public void changingTargetFpsDropsQueuedChange() throws Exception {
-        QualityController q = new QualityController(display(3840, 2160),
-                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
-        q.setTargetFps(60);
-        q.setMode(0, 0);
-        settle(q);
-        samples(q, 3, 40);
-        assertTrue(q.hasPendingChange());
-        q.setTargetFps(30);
-        assertFalse(q.hasPendingChange());
-        q.onPresetChanged();
-        assertEquals(1440, applied);
-    }
-
-    @Test
-    public void autoChangesOnlyAtPresetSwitchAndBacksOff() throws Exception {
+    public void autoChangesApplyImmediatelyAndBackOff() throws Exception {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
         q.setTargetFps(60);
@@ -87,29 +71,35 @@ public class QualityControllerTest {
 
         settle(q);
         samples(q, 3, 40);
-        assertTrue(q.hasPendingChange());
-        assertEquals("not applied mid-preset", 1440, applied);
-        q.onPresetChanged();
-        assertEquals(1260, applied);
+        assertEquals("lowered at once, no preset switch needed", 1260, applied);
 
         settle(q);
         samples(q, 15, 60);
-        assertFalse("1440 just failed, so it is backed off", q.hasPendingChange());
+        assertEquals("1440 just failed, so it is backed off", 1260, applied);
         for (int i = 0; i < 10; i++) q.onPresetChanged();
         settle(q);
         samples(q, 15, 60);
-        assertTrue("retried once after 10 presets", q.hasPendingChange());
-        q.onPresetChanged();
-        assertEquals(1440, applied);
+        assertEquals("retried once after 10 presets", 1440, applied);
 
         settle(q);
         samples(q, 3, 40);
-        q.onPresetChanged();
         assertEquals(1260, applied);
         for (int i = 0; i < 100; i++) q.onPresetChanged();
         settle(q);
         samples(q, 15, 60);
-        assertFalse("a level that failed twice is not tried again this session", q.hasPendingChange());
+        assertEquals("a level that failed twice is not tried again this session", 1260, applied);
+    }
+
+    @Test
+    public void newPresetAndNewLevelAreGivenTimeToSettle() throws Exception {
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
+        q.setTargetFps(60);
+        q.setMode(0, 0);
+        settle(q);
+        q.onPresetChanged();
+        samples(q, 10, 20);
+        assertEquals("a load and blend are not judged", 1440, applied);
     }
 
     @Test
@@ -126,24 +116,22 @@ public class QualityControllerTest {
         assertEquals("a remembered 4K auto level is clamped", 1260, applied);
         settle(q);
         samples(q, 30, 60);
-        assertFalse("no headroom probe above the limit", q.hasPendingChange());
+        assertEquals("no headroom probe above the limit", 1260, applied);
     }
 
     @Test
-    public void memoryPressureLowersOneLevelPerPresetForTheSession() throws Exception {
+    public void memoryPressureLowersOneLevelPerBurstForTheSession() throws Exception {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
         q.setTargetFps(60);
         q.setMode(0, 0);
         assertEquals(1440, applied);
         q.onMemoryPressure(10);
-        q.onMemoryPressure(15);  // repeated callbacks before the switch count once
-        assertTrue(q.hasPendingChange());
-        q.onPresetChanged();
-        assertEquals(1260, applied);
+        q.onMemoryPressure(15);  // repeated callbacks in one burst count once
+        assertEquals("lowered at once", 1260, applied);
         settle(q);
         samples(q, 30, 60);
-        assertFalse("never raised above the lowered limit", q.hasPendingChange());
+        assertEquals("never raised above the lowered limit", 1260, applied);
     }
 
     @Test
@@ -153,7 +141,6 @@ public class QualityControllerTest {
         q.setTargetFps(60);
         q.setMode(0, 0);
         q.onMemoryPressure(10);
-        q.onPresetChanged();
         assertEquals(1260, applied);
         assertEquals("next launch starts at the level chosen for the frame rate",
                 1440, q.autoHeightToRemember());
@@ -161,21 +148,18 @@ public class QualityControllerTest {
         // A frame-rate drop below the pressure limit is remembered as usual.
         settle(q);
         samples(q, 3, 40);
-        q.onPresetChanged();
         assertEquals(1080, applied);
         assertEquals(1080, q.autoHeightToRemember());
     }
 
     @Test
-    public void severeSlowdownSwitchesOnceAndDropsTwoLevels() throws Exception {
+    public void severeSlowdownLowersTwoLevelsWithoutSwitchingPreset() throws Exception {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
         q.setTargetFps(60);
         q.setMode(0, 0);
         settle(q);
-        assertEquals(QualityController.ACTION_SWITCH, samples(q, 4, 25));
-        assertNotEquals(QualityController.ACTION_SWITCH, q.onFpsSample(25));
-        q.onPresetChanged();
+        assertEquals("no preset switch", QualityController.ACTION_NONE, samples(q, 4, 25));
         assertTrue(applied <= 1080);
     }
 
@@ -204,7 +188,6 @@ public class QualityControllerTest {
         q.setMode(0, 0);
         settle(q);
         samples(q, 3, 20);
-        q.onPresetChanged();
         assertTrue(applied < 720 && applied >= 360);
     }
 }

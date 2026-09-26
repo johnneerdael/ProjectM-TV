@@ -1,3 +1,14 @@
+# ProjectM TV 1.9.15
+
+## Changed
+- **Resolution changes no longer interrupt the picture.** *Auto* resolution used to switch to a new preset with a hard cut when the frame rate collapsed, and otherwise waited for the next preset change. It now changes the resolution on the spot; the presets keep running (their pictures are scaled to the new size).
+- **Smoother preset switches.** The shader translation of the next preset is now also done in the background, so a switch takes 16–77 ms (was 29–109 ms). In a 5-minute capture on an NVIDIA SHIELD TV Pro, no switch paused the picture for more than 67 ms (before: 83–133 ms at most switches), with no hard cuts.
+
+## Known limits
+- Blending two presets that are heavy on the processor still drops to about 20 fps for the length of the blend on the SHIELD.
+
+---
+
 # ProjectM TV 1.9.14
 
 ## Changed
