@@ -1,3 +1,13 @@
+# ProjectM TV 1.9.17
+
+## Fixed
+- **Heavy presets no longer turn needlessly blurry.** Since 1.9.15, *Auto* resolution could lower the resolution step by step (e.g. from 1260p to 720p within 15 seconds) on presets that are limited by the processor, where a lower resolution does not help. It now checks whether a lower resolution made the preset faster; if it did not, it returns to the sharper resolution for that preset.
+
+## Changed
+- **Faster preset switches when memory allows.** The picture buffers of the previous preset are reused for the next one instead of being created anew. This only happens while at least 20% of the memory is free, takes at most 48 MB, and stops at the first low-memory warning. The picture is unchanged (checked pixel by pixel).
+
+---
+
 # ProjectM TV 1.9.16
 
 ## Changed

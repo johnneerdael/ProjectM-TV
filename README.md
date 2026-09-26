@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-This README describes what the app does as of version 1.9.16, and where it falls short. Everything under *What it does* was checked on the only devices it has been tested on: two NVIDIA SHIELD Android TVs (2019, Android 11).
+This README describes what the app does as of version 1.9.17, and where it falls short. Everything under *What it does* was checked on the only devices it has been tested on: two NVIDIA SHIELD Android TVs (2019, Android 11).
 
 ## What it does
 

@@ -1,0 +1,2 @@
+- Heavy presets no longer turn needlessly blurry (Auto resolution checks whether lowering helps).
+- Faster preset switches when memory allows (picture buffers reused).
