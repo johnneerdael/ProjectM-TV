@@ -1,0 +1,3 @@
+- No more freeze at a preset switch: the next preset is prepared in the background.
+- Smooth blends are back, without frame drops (adaptive resolution during the blend).
+- No sudden cuts on loud beats (Advanced › Cut on loud beats turns them back on).

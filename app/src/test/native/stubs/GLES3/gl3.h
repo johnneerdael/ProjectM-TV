@@ -18,6 +18,16 @@ typedef uint64_t GLuint64; typedef struct __GLsync* GLsync;
 #define GL_TIMEOUT_EXPIRED 0x911B
 #define GL_CONDITION_SATISFIED 0x911C
 #define GL_WAIT_FAILED 0x911D
+#define GL_TEXTURE_2D 0x0DE1
+#define GL_RGBA8 0x8058
+#define GL_TEXTURE_MIN_FILTER 0x2801
+#define GL_TEXTURE_MAG_FILTER 0x2800
+#define GL_LINEAR 0x2601
+#define GL_FRAMEBUFFER 0x8D40
+#define GL_DRAW_FRAMEBUFFER 0x8CA9
+#define GL_COLOR_ATTACHMENT0 0x8CE0
+#define GL_FRAMEBUFFER_COMPLETE 0x8CD5
+#define GL_COLOR_BUFFER_BIT 0x00004000
 extern "C" {
 void glViewport(GLint, GLint, GLsizei, GLsizei);
 void glReadPixels(GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, GLvoid*);
@@ -34,4 +44,14 @@ GLsync glFenceSync(GLenum, GLbitfield);
 GLenum glClientWaitSync(GLsync, GLbitfield, GLuint64);
 void glDeleteSync(GLsync);
 void glFlush(void);
+void glGenFramebuffers(GLsizei, GLuint*);
+void glDeleteFramebuffers(GLsizei, const GLuint*);
+void glGenTextures(GLsizei, GLuint*);
+void glDeleteTextures(GLsizei, const GLuint*);
+void glBindTexture(GLenum, GLuint);
+void glTexImage2D(GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const void*);
+void glTexParameteri(GLenum, GLenum, GLint);
+void glFramebufferTexture2D(GLenum, GLenum, GLenum, GLuint, GLint);
+GLenum glCheckFramebufferStatus(GLenum);
+void glBlitFramebuffer(GLint, GLint, GLint, GLint, GLint, GLint, GLint, GLint, GLbitfield, GLenum);
 }

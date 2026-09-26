@@ -104,12 +104,12 @@ projectM's soft cut renders the outgoing and incoming preset for the whole trans
 | Mode | What happens at an automatic switch |
 |---|---|
 | **Lightweight** | At the end of the frame in which projectM asks for a switch, `SnapshotFade` copies the window into a texture (`glCopyTexImage2D`). The next frame loads the new preset as a hard cut: projectM still seeds it with the old image (`DrawInitialImage`). The snapshot is then drawn over it, fading out with a slow zoom over min(transition, 3 s): one textured full-screen pass per frame. The texture exists only during the fade. |
-| **Classic** | projectM's own blend (random transition shader). |
-| **Auto** (default) | Lightweight on the LOW tier and below 2.6 GB RAM, otherwise classic. It switches to lightweight for the session when a classic blend runs below 80 % of the FPS before it. |
+| **Classic** | projectM's own blend (random transition shader) at the full render size. |
+| **Auto** (default, since 1.9.12) | projectM's blend, adapted to keep the frame rate. It starts at 75 % of the render size (60 % on low-end devices): projectM renders into an off-screen framebuffer (`projectm_opengl_render_frame_fbo`, patch 0002) that one `glBlitFramebuffer` stretches onto the surface, and the size change keeps both presets' frames (patch 0002 scales them). Whether a slow blend is GPU- or CPU-bound is told apart by the render thread's CPU time (`CLOCK_THREAD_CPUTIME_ID`) over the blend: GPU-bound (below 80 % CPU) steps down to 60 % and 50 %, also once during a blend that starts far too slow; CPU-bound steps back up (a lower resolution only blurs) and renders the outgoing preset every second frame (`projectm_opengl_set_outgoing_preset_frame_divisor`); three blends with frames to spare step up again. |
 
-Remote-control switches, beat-triggered hard cuts and forced hard cuts are never faded. If the capture or the overlay shader fails, the switch uses classic. Every load is logged (`LOAD preset=… ms=…`), and every transition too (`TRANSITION … mode= fps= blend_fps= before_fps= slow_frames=`).
+Remote-control switches and forced hard cuts are never faded. Beat-triggered hard cuts are off unless *Cut on loud beats* is on (since 1.9.12). If the capture or the overlay shader fails, the switch uses classic. Every load is logged (`LOAD preset=… ms=… programs_cached= programs_compiled=`), and every transition too (`TRANSITION … mode= scale= fps= blend_fps= before_fps= cpu= outgoing_rate= slow_frames=`).
 
-**Not solved yet: the load stall.** `projectm_load_preset_data` parses the preset, loads its textures and compiles its shaders on the GL thread, so the picture freezes for that long at every switch. Hiding it requires a second, shared EGL context that renders projectM off the display thread. The `LOAD` log lines size this before building it.
+**The load stall (solved in 1.9.12).** `projectm_load_preset_data` parses the preset, translates its HLSL shaders to GLSL and links them on the GL thread; on the SHIELD that froze the picture for 0.5–1.9 s (median 0.9 s) at every switch. Profiled with simpleperf (`docs/PROFILING.md`): 73 % was the driver linking the warp and composite programs, most of the rest the HLSL translator constructing `std::locale("C")` for every float literal. Now `PresetPrewarmer` loads the upcoming preset (`PresetLibrary::PeekNext`) into a second projectM instance on a background thread with its own EGL pbuffer context; the linked programs go into a process-wide program binary cache (patch 0002), from which the render thread's load takes them with `glProgramBinary`, and the translator uses `std::locale::classic()` (patch 0003). Switches now take 10–80 ms. Random and previous-preset switches are not prewarmed and still compile.
 
 ### Preset skipping
 A preset is added to `files/skipped_presets.txt` and never picked again when:
@@ -133,12 +133,12 @@ The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The di
 
 | Condition | Action |
 |---|---|
-| < 85 % of target for 3 s | lower one level (two if far off) **at the next preset switch**, which is forced to be a hard cut |
+| < 85 % of target for 3 s | lower one level (two if far off) at the next preset switch |
 | < 55 % for 4 s | lower now and switch preset (hard cut) |
 | ≥ 97 % for 15 s | try one level higher at the next switch. A level that failed is retried once after 10 presets; after a second failure it is not tried again in this session (the SHIELD oscillated 1440 ↔ 1800 before) |
 | < 50 % at the lowest level, *Skip slow presets* on | add the preset to the skip list |
 
-Changes wait for a preset switch: in projectM 4.1 `projectm_set_window_size` only stores the size, and each preset reallocates its frame buffers (losing their contents) on its next frame. Right after a hard cut the new preset starts from scratch anyway, so the reallocation is invisible. The last automatic level is remembered across launches.
+Changes wait for a preset switch. Up to 1.9.11 that switch was forced to be a hard cut: in projectM 4.1 a new window size reallocates each preset's frame buffers, losing their contents, which a hard cut hides. Since 1.9.12 patch 0002 scales the contents into the new buffers, so the switch blends as usual. The last automatic level is remembered across launches.
 
 ### Frame pacing
 Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so the speed of the visuals doesn't change.
@@ -188,11 +188,12 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 | Black detector skips a legitimately very dark preset | Low (off by default since 1.9) | Only when enabled, only while audio plays, 5 consecutive samples; *Reset* restores all |
 | Memory limit too strict on a device with plenty of free RAM, or too loose once textures are loaded | Medium | Estimates from one SHIELD run; *Memory limit › Off*; `onTrimMemory` lowers further at runtime; confirm with the next diagnostics run |
 | `glCopyTexImage2D` from the window is slow or unsupported on a driver | Low | Only on switch frames; any GL error falls back to classic; *Transitions › Classic* |
-| The fade's still frame looks worse than projectM's blend on strong devices | Medium (taste) | Auto keeps classic where it runs at full speed; *Transitions › Classic* |
+| Two heavy presets do not fit in a frame on the CPU even with the outgoing one at half rate | Medium (preset-dependent) | Such blends still dip (the SHIELD: 15–30 fps for the heaviest pairs); reducing per-shape draw overhead further in projectM is the next lever |
+| The background compiler's second projectM instance costs memory (textures it loads) | Low | Tiny window size; a fresh instance every 20 presets releases its textures |
 | Visualizer returns silence (DRM apps, some vendors), so black detection never runs | Medium | Load-failure skipping still works; visuals follow projectM's idle response |
 | A device without OpenGL ES 3.0 can no longer install the app | Low (projectM 4 never worked there anyway) | Manifest now states the real requirement |
 | `setFixedSize` behaves oddly on a specific TV firmware | Low | Choose "Native" in the menu (uses the layout size) |
-| Preset load (parse, textures, shader compile) still freezes the picture at each switch | Certain | Measured by `LOAD` log lines; the fix (second shared EGL context) is planned once sized |
+| Preset load still freezes the picture for a random/previous switch or when the background compile has not finished | Low | Program cache; `LOAD … programs_compiled=` shows misses |
 | Pulling this change removes build caches from the index | Certain | Harmless; Gradle and CMake regenerate them |
 
 ## 8. Recommended next steps

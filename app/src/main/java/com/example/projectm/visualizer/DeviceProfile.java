@@ -78,10 +78,10 @@ public final class DeviceProfile {
     }
 
     /**
-     * Whether Auto transitions start lightweight: on low-end devices (a blend renders two presets)
-     * and when RAM is tight (a blend keeps two presets' frame buffers).
+     * Whether Auto blends start at a lower resolution: on low-end devices (a blend renders two
+     * presets) and when RAM is tight (a blend keeps two presets' frame buffers).
      */
-    public boolean lightweightTransitionsByDefault() {
+    public boolean lowerBlendResolutionByDefault() {
         return tier == Tier.LOW || totalRamMb < 2600;
     }
 

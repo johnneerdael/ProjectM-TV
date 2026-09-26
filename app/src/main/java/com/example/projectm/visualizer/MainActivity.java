@@ -45,6 +45,7 @@ public class MainActivity extends Activity {
 
     private static final String PREFS = "projectm_settings";
     private static final String PREF_AUTO_CHANGE = "auto_change_enabled";
+    private static final String PREF_BEAT_CUTS = "beat_cuts";
     private static final String PREF_PRESET_DURATION = "preset_duration";
     private static final String PREF_TRANSITION_DURATION = "transition_duration";
     private static final String PREF_RENDER_HEIGHT = "render_height";      // 0 = automatic
@@ -149,11 +150,12 @@ public class MainActivity extends Activity {
         int[] mesh = DeviceProfile.MESH_SIZES[meshLevel()];
         ProjectMJNI.setMeshSize(mesh[0], mesh[1]);
         ProjectMJNI.setAutoChange(prefs.getBoolean(PREF_AUTO_CHANGE, true));
+        ProjectMJNI.setBeatCuts(prefs.getBoolean(PREF_BEAT_CUTS, false));
         ProjectMJNI.setPresetDuration(prefs.getInt(PREF_PRESET_DURATION, 30));
         ProjectMJNI.setSoftCutDuration(transitionSeconds());
         ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, true));
         ProjectMJNI.setTransitionMode(prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO),
-                profile.lightweightTransitionsByDefault());
+                profile.lowerBlendResolutionByDefault());
 
         visualizerView = findViewById(R.id.visualizer_view);
         renderer = new VisualizerRenderer(new VisualizerRenderer.StatsListener() {
@@ -212,10 +214,8 @@ public class MainActivity extends Activity {
         super.onTrimMemory(level);
         // While visible, these mean the system is about to kill other apps (e.g. the music player).
         if (level == TRIM_MEMORY_RUNNING_LOW || level == TRIM_MEMORY_RUNNING_CRITICAL) {
+            // The lower resolution applies at the next preset switch.
             quality.onMemoryPressure(level);
-            // The lower resolution applies at the next preset switch, which must then be a hard
-            // cut; don't wait for the next FPS sample to arm it.
-            if (quality.hasPendingChange()) ProjectMJNI.setForceHardCut(true);
         }
     }
 
@@ -233,10 +233,10 @@ public class MainActivity extends Activity {
             ProjectMJNI.skipCurrentPreset();
         } else if (action == QualityController.ACTION_SWITCH) {
             ProjectMJNI.nextPreset(true);
-        } else if (quality.hasPendingChange()) {
-            // The resolution changes at the next preset switch; make that switch a hard cut.
-            ProjectMJNI.setForceHardCut(true);
         }
+        // A resolution change waits for the next preset switch, which can blend as usual: the
+        // presets' frames are scaled to the new size instead of starting over.
+
     }
 
     /** Frame-rate options: the refresh rate divided by 4, 2 or 1 (at least 24 fps), ascending. */
@@ -368,8 +368,15 @@ public class MainActivity extends Activity {
         OptionRow transitionMode = findViewById(R.id.row_transition_mode);
         transitionMode.setup("Transitions", new String[]{"Auto", "Lightweight", "Classic"},
                 prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO), true, index -> {
-                    ProjectMJNI.setTransitionMode(index, profile.lightweightTransitionsByDefault());
+                    ProjectMJNI.setTransitionMode(index, profile.lowerBlendResolutionByDefault());
                     prefs.edit().putInt(PREF_TRANSITION_MODE, index).apply();
+                });
+
+        OptionRow beatCuts = findViewById(R.id.row_beat_cuts);
+        beatCuts.setup("Cut on loud beats", new String[]{"Off", "On"},
+                prefs.getBoolean(PREF_BEAT_CUTS, false) ? 1 : 0, true, index -> {
+                    ProjectMJNI.setBeatCuts(index == 1);
+                    prefs.edit().putBoolean(PREF_BEAT_CUTS, index == 1).apply();
                 });
 
         OptionRow memoryLimit = findViewById(R.id.row_memory_limit);
@@ -547,9 +554,12 @@ public class MainActivity extends Activity {
     }
 
     private String transitionLabel() {
-        String style = ProjectMJNI.isLightweightTransition() ? "lightweight" : "classic";
-        return prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO) == ProjectMJNI.TRANSITION_AUTO
-                ? style + " (auto)" : style;
+        if (ProjectMJNI.isLightweightTransition()) return "lightweight";
+        if (prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO) != ProjectMJNI.TRANSITION_AUTO) {
+            return "blend";
+        }
+        int percent = ProjectMJNI.getBlendScalePercent();
+        return percent > 0 ? "blend at " + percent + "% (auto)" : "blend (auto)";
     }
 
     /** Short status next to the level bar in the main panel. */

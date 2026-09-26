@@ -149,7 +149,7 @@ public final class QualityController {
         return current == ceiling && beforePressure > current ? levels[beforePressure] : levels[current];
     }
 
-    /** True while a change waits for the next preset switch (which should then be a hard cut). */
+    /** True while a change waits for the next preset switch. */
     public boolean hasPendingChange() {
         return pending >= 0 && pending != current;
     }

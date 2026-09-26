@@ -13,7 +13,7 @@ This README describes what the app does as of version 1.9.5, and where it falls 
 ## What it does
 
 - **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. On the SHIELD, the visuals react to SoundCloud about 10 seconds after launch, and within about 5 seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
-- **Shows 9,606 presets in shuffled order.** It changes preset every 30 seconds by default, or when you press Left or Right on the remote. The default transition is 7 seconds; on TVs with less than about 2.6 GB of memory, such as the SHIELD, it is a lighter fade of at most 3 seconds.
+- **Shows 9,606 presets in shuffled order.** It changes preset every 30 seconds by default, or when you press Left or Right on the remote, and blends the old preset into the new one over 7 seconds. The next preset's shaders are compiled in the background beforehand, so a switch does not freeze the picture.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that were black on the SHIELD render; this rule remains as a safety net (details under *Presets* below).
 - **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution between presets to hold the frame rate. The TV's scaler upscales to the panel.
 - **Protects the music app from being closed.** On TVs with little memory, Android closes other apps when projectM uses too much. The app caps its resolution by installed memory (on a 2 GB SHIELD: 1260p), and in *Auto* resolution it lowers the resolution when Android reports memory pressure.
@@ -106,7 +106,8 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 | Setting | What it does | Default |
 |---|---|---|
 | Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
-| Transitions | *Classic* blends two running presets for the whole transition. *Lightweight* fades a still image of the old preset for at most 3 s and costs less memory and GPU time. *Auto* starts lightweight on TVs under about 2.6 GB and on low-end devices, classic otherwise. | Auto |
+| Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
+| Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
 | Memory limit | Caps the resolution by installed memory: under 1.6 GB 1080p, under 2.6 GB 1260p, under 3.6 GB 1440p, otherwise no cap | On |
 | Skip slow presets | Skips presets that stay far below the target frame rate even at the lowest resolution | On only on low-end devices |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
@@ -142,7 +143,7 @@ Release builds on GitHub are signed with the release key; see [docs/RELEASING.md
 
 ### projectM
 
-projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository.
+projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, a cache of linked shader programs, fewer redundant GL calls, and a faster HLSL parser on Android) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository.
 
 ### Tests
 

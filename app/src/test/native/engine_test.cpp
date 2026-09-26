@@ -49,7 +49,19 @@ int g_readFbo = -1;  // framebuffer bound for reading during glReadPixels
 unsigned char g_noise = 0;  // when set, pixels alternate between g_pixel and g_pixel + g_noise
 GLuint g_packBuffer = 0; std::vector<unsigned char> g_pbo; int g_fences = 0, g_mapped = 0;
 void glViewport(GLint, GLint, GLsizei, GLsizei) {}
-void glBindFramebuffer(GLenum, GLuint fbo) { g_readFbo = (int)fbo; }
+void glBindFramebuffer(GLenum target, GLuint fbo) { if (target != GL_DRAW_FRAMEBUFFER) g_readFbo = (int)fbo; }
+int g_blits = 0; int g_blitSrcW = 0, g_blitSrcH = 0, g_blitDstW = 0, g_blitDstH = 0;
+void glGenFramebuffers(GLsizei, GLuint* f) { *f = 77; }
+void glDeleteFramebuffers(GLsizei, const GLuint*) {}
+void glGenTextures(GLsizei, GLuint* t) { *t = 78; }
+void glDeleteTextures(GLsizei, const GLuint*) {}
+void glBindTexture(GLenum, GLuint) {}
+void glTexImage2D(GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const void*) {}
+void glTexParameteri(GLenum, GLenum, GLint) {}
+void glFramebufferTexture2D(GLenum, GLenum, GLenum, GLuint, GLint) {}
+GLenum glCheckFramebufferStatus(GLenum) { return GL_FRAMEBUFFER_COMPLETE; }
+void glBlitFramebuffer(GLint, GLint, GLint sw, GLint sh, GLint, GLint, GLint dw, GLint dh, GLbitfield, GLenum) {
+  ++g_blits; g_blitSrcW = sw; g_blitSrcH = sh; g_blitDstW = dw; g_blitDstH = dh; }
 void glGetIntegerv(GLenum e, GLint* v) { *v = e == GL_PIXEL_PACK_BUFFER_BINDING ? (GLint)g_packBuffer : e == GL_PACK_ALIGNMENT ? 4 : 7; }
 void glGenBuffers(GLsizei, GLuint* b) { *b = 42; }
 void glDeleteBuffers(GLsizei, const GLuint*) {}
@@ -79,6 +91,12 @@ void SnapshotFade::Draw(double now) { if (!active_) return; ++g_fadeDraws; if (n
 void SnapshotFade::Stop() { active_ = false; texture_ = 0; }
 void SnapshotFade::Forget() { Stop(); }
 void SnapshotFade::Release() { Stop(); }
+// ---- fake shader prewarmer (the real one needs EGL) ----
+#include "preset_prewarm.h"
+std::vector<std::string> g_prewarmRequests; std::string g_prewarmTextureDir; int g_prewarmStarts = 0, g_prewarmStops = 0;
+void PresetPrewarmer::Start(const std::string& dir, Reader) { ++g_prewarmStarts; g_prewarmTextureDir = dir; }
+void PresetPrewarmer::Stop() { ++g_prewarmStops; }
+void PresetPrewarmer::Request(const std::string& name) { g_prewarmRequests.push_back(name); }
 extern "C" {
 // ---- fake projectM ----
 struct projectm {};
@@ -105,16 +123,28 @@ void projectm_set_mesh_size(projectm_handle, size_t, size_t) { ++g_meshCalls; }
 void projectm_set_texture_search_paths(projectm_handle, const char** paths, size_t count) {
   g_texturePathCalls.push_back(count ? paths[0] : "");
   g_loadsAtTextureCall = g_loaded.size(); }
-void projectm_set_window_size(projectm_handle, size_t, size_t) {}
+size_t g_windowW = 0, g_windowH = 0; int g_windowSizeCalls = 0;
+void projectm_set_window_size(projectm_handle, size_t w, size_t h) { g_windowW = w; g_windowH = h; ++g_windowSizeCalls; }
 void projectm_set_fps(projectm_handle, int32_t) {}
 unsigned int projectm_pcm_get_max_samples() { return 576; }
 void projectm_pcm_add_uint8(projectm_handle, const uint8_t*, unsigned int n, projectm_channels) { g_pcmFed += n; }
 int g_renderSleepMs = 0, g_renderSleepMsSmooth = 0;  // simulated render cost (smooth: during a soft cut)
+int g_renderSpinMsSmooth = 0;  // simulated CPU-bound render cost during a soft cut (busy, not waiting)
 bool g_requestInRender = false;  // like projectM: the timed switch request fires inside the render call
 void projectm_opengl_render_frame(projectm_handle) {
   if (g_requestInRender) { g_requestInRender = false; g_reqCb(false, nullptr); }
   int ms = g_renderSleepMs; if (g_lastSmooth && g_renderSleepMsSmooth) ms = g_renderSleepMsSmooth;
-  if (ms) std::this_thread::sleep_for(std::chrono::milliseconds(ms)); }
+  if (ms) std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+  if (g_lastSmooth && g_renderSpinMsSmooth) {
+    auto until = std::chrono::steady_clock::now() + std::chrono::milliseconds(g_renderSpinMsSmooth);
+    while (std::chrono::steady_clock::now() < until) {}
+  } }
+int g_fboFrames = 0;
+void projectm_opengl_render_frame_fbo(projectm_handle p, uint32_t) { ++g_fboFrames; projectm_opengl_render_frame(p); }
+uint32_t g_outgoingDivisor = 1;
+void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_handle, uint32_t d) { g_outgoingDivisor = d; }
+uint32_t g_cacheHits = 0, g_cacheMisses = 0;
+void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses) { *hits = g_cacheHits; *misses = g_cacheMisses; }
 char* projectm_get_version_string() { return strdup("4.1.0"); }
 void projectm_free_string(const char* s) { free((void*)s); }
 }
@@ -333,32 +363,85 @@ int main(int argc, char** argv) {
   g_requestInRender = true; frame(); frame();
   CHECK(g_captures == captures && g_loaded.size() == loads + 1 && g_lastSmooth);
 
-  printf("auto: a classic blend much slower than before switches to lightweight\n");
+  printf("classic mode blends at the full render size\n");
+  CHECK(g_windowW == 1280 && g_windowH == 720);
+
+  // Waits until the running transition has ended and the render size is back to full.
+  auto finishTransition = [&](int before) {
+    for (int i = 0; i < 1500 && Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == before; ++i) frame();
+    settle(400); };
+  // Starts an automatic blend; returns the transition counter before it.
+  auto startBlend = [&]() {
+    int before = Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr);
+    g_requestInRender = true; frame(); frame();
+    return before; };
+
+  printf("auto: blends render at 75%% into the off-screen target, stretched onto the surface\n");
   Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
   Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 1);
   g_renderSleepMs = 1; g_renderSleepMsSmooth = 0;
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // hard cut: fast frames
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // hard cut: full size
   settle(1500);
   CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  CHECK(g_windowW == 1280 && g_windowH == 720);
+  int fboFrames = g_fboFrames, blits = g_blits;
+  int transitions = startBlend();
+  CHECK(g_lastSmooth && g_windowW == 960 && g_windowH == 540);
+  CHECK(g_fboFrames > fboFrames && g_blits > blits);
+  CHECK(g_blitSrcW == 960 && g_blitSrcH == 540 && g_blitDstW == 1280 && g_blitDstH == 720);
+  finishTransition(transitions);
+  CHECK(g_windowW == 1280 && g_windowH == 720);  // back to full size after the blend
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 75);
+  fboFrames = g_fboFrames; frame();
+  CHECK(g_fboFrames == fboFrames);  // full size renders straight to the surface
+
+  printf("auto: a blend far slower than before is lowered at once, and stays lower\n");
+  settle(1500);
   g_renderSleepMsSmooth = 15;
-  int transitions = Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr);
-  g_requestInRender = true; frame(); frame();
-  CHECK(g_lastSmooth);
-  for (int i = 0; i < 200 && Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == transitions; ++i) frame();
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == transitions + 1);
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  transitions = startBlend();
+  CHECK(g_windowW == 960);
+  for (int i = 0; i < 200 && g_windowW == 960; ++i) frame();
+  CHECK(g_windowW == 768 && g_windowH == 432);  // 60%, during the same blend
+  finishTransition(transitions);
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 60);
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // fast frames before it
+  settle(1500);
+  transitions = startBlend();
+  CHECK(g_windowW == 768);  // the next blend starts at the lower size
+  finishTransition(transitions);
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 50);
   g_renderSleepMs = g_renderSleepMsSmooth = 0;
 
-  printf("auto: a classic blend at full speed stays classic\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
+  printf("auto: blends with frames to spare raise the resolution again (low-end devices start at 60%%)\n");
+  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, true);
   g_renderSleepMs = g_renderSleepMsSmooth = 2;
   settle(1500);
-  transitions = Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr);
-  g_requestInRender = true; frame(); frame();
-  for (int i = 0; i < 1000 && Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == transitions; ++i) frame();
+  transitions = startBlend();
+  CHECK(g_windowW == 768);
+  finishTransition(transitions);
+  for (int i = 0; i < 2; ++i) { settle(1500); finishTransition(startBlend()); }
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 75);
   CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
   CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getLastTransitionFps(nullptr, nullptr) > 0.f);
   g_renderSleepMs = g_renderSleepMsSmooth = 0;
+
+  printf("auto: a slow blend that is CPU-bound keeps its resolution (a lower one would not help)\n");
+  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
+  g_renderSleepMs = 1; g_renderSleepMsSmooth = 0; g_renderSpinMsSmooth = 15;
+  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  settle(1500);
+  transitions = startBlend();
+  CHECK(g_windowW == 960);
+  for (int i = 0; i < 40; ++i) frame();  // ~0.65 s: past the point where a slow blend is lowered
+  CHECK(g_windowW == 960);  // not lowered during the blend
+  CHECK(g_outgoingDivisor == 2);  // instead the outgoing preset renders every 2nd frame
+  finishTransition(transitions);
+  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 100);  // sharper instead
+  g_renderSleepMs = g_renderSpinMsSmooth = 0;
+
+  printf("the next preset's shaders are compiled in the background\n");
+  CHECK(g_prewarmStarts >= 1 && !g_prewarmTextureDir.empty());
+  CHECK(!g_prewarmRequests.empty() && g_prewarmRequests.back() == g_library.PeekNext());
 
   printf("output measurements: flat and still are logged, never skipped\n");
   {

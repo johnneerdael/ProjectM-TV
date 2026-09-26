@@ -4,6 +4,7 @@ project(projectmtv)
 
 find_library(log-lib log)
 find_library(GLESv3-lib GLESv3)
+find_library(EGL-lib EGL)
 find_library(android-lib android)
 
 # projectM is built from source: the git submodule third_party/projectm (pinned release, see
@@ -70,7 +71,7 @@ set(CMAKE_PROJECT_VERSION_MINOR ${CMAKE_MATCH_2})
 set(CMAKE_PROJECT_VERSION_PATCH ${CMAKE_MATCH_3})
 add_subdirectory(${PROJECTM_SOURCE} projectm EXCLUDE_FROM_ALL)
 
-add_library(projectmtv SHARED native-lib.cpp snapshot_fade.cpp)
+add_library(projectmtv SHARED native-lib.cpp snapshot_fade.cpp preset_prewarm.cpp)
 
 # Always optimise the JNI layer, also in debug builds that are sideloaded onto TVs.
 target_compile_options(projectmtv PRIVATE -O2 -Wall -Wextra -Wno-unused-parameter)
@@ -79,6 +80,7 @@ target_link_libraries(projectmtv
     libprojectM::projectM
     ${log-lib}
     ${GLESv3-lib}
+    ${EGL-lib}
     ${android-lib}
 )
 

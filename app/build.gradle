@@ -10,10 +10,10 @@ android {
         applicationId "nl.neerdael.projectmtv"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 20
+        versionCode 21
         // Bump both for a release: CI publishes a GitHub Release when versionName changes on main.
         // CI appends VERSION_SUFFIX (e.g. "-ci.42") to non-release builds.
-        versionName "1.9.11" + (System.getenv("VERSION_SUFFIX") ?: "")
+        versionName "1.9.12" + (System.getenv("VERSION_SUFFIX") ?: "")
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++17"
@@ -41,6 +41,14 @@ android {
             // Use the release key when configured, otherwise the local debug key, so
             // `./gradlew assembleRelease` always produces an installable, non-debuggable APK.
             signingConfig System.getenv("SIGNING_KEYSTORE_PATH") ? signingConfigs.release : signingConfigs.debug
+        }
+        // Release code, profileable by simpleperf (src/profile/AndroidManifest.xml), installed next
+        // to the real app: `./gradlew assembleProfile`, see docs/PROFILING.md.
+        profile {
+            initWith release
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".profile"
+            matchingFallbacks = ['release']
         }
     }
     testOptions {

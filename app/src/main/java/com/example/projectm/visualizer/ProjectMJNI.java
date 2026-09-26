@@ -20,11 +20,14 @@ public final class ProjectMJNI {
         }
     }
 
-    /** Classic blend until it proves too slow for the device, then lightweight. */
+    /**
+     * projectM's blend, rendered below the render resolution (75% to start) and adapted to keep
+     * the frame rate: lower when a blend drops frames, higher when blends have frames to spare.
+     */
     public static final int TRANSITION_AUTO = 0;
     /** projectM hard-cuts; the last frame of the old preset fades out on top (cheap). */
     public static final int TRANSITION_LIGHTWEIGHT = 1;
-    /** projectM's own blend: both presets render for the whole transition. */
+    /** projectM's own blend at the full render resolution: both presets render for the whole transition. */
     public static final int TRANSITION_CLASSIC = 2;
 
     private ProjectMJNI() {}
@@ -50,6 +53,8 @@ public final class ProjectMJNI {
     public static native void setPresetDuration(int seconds);
     public static native void setSoftCutDuration(int seconds);
     public static native void setAutoChange(boolean enabled);
+    /** projectM's hard cut to the next preset on a loud beat (off: presets only change by blending). */
+    public static native void setBeatCuts(boolean enabled);
     public static native void setMeshSize(int width, int height);
     /** Adds the current preset to the skip list and moves on (hard cut). */
     public static native void skipCurrentPreset();
@@ -59,7 +64,10 @@ public final class ProjectMJNI {
      */
     public static native void setBlankDetection(boolean enabled);
     /** Transition mode: {@link #TRANSITION_AUTO}, {@link #TRANSITION_LIGHTWEIGHT} or {@link #TRANSITION_CLASSIC}. */
-    public static native void setTransitionMode(int mode, boolean autoStartsLightweight);
+    /** @param lowEndDevice Auto's blends start at a lower resolution. */
+    public static native void setTransitionMode(int mode, boolean lowEndDevice);
+    /** Resolution of Auto's blends in percent of the render resolution, 0 before the first blend. */
+    public static native int getBlendScalePercent();
     /** True when automatic preset switches currently use the lightweight transition. */
     public static native boolean isLightweightTransition();
     /** Makes the next automatic preset switch a hard cut (used before resolution changes). */

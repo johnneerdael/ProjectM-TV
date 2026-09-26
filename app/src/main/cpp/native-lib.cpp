@@ -40,6 +40,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
+#include <ctime>
 #include <deque>
 #include <functional>
 #include <mutex>
@@ -52,6 +53,7 @@
 #include <vector>
 
 #include "projectM-4/projectM.h"
+#include "preset_prewarm.h"
 #include "snapshot_fade.h"
 
 #define LOG_TAG "projectM-Native"
@@ -70,6 +72,13 @@ constexpr int kMaxLoadAttemptsPerFrame = 4;
 double NowSeconds() {
     using namespace std::chrono;
     return duration<double>(steady_clock::now().time_since_epoch()).count();
+}
+
+// CPU time the calling thread has used (GPU waits are not counted).
+double ThreadCpuSeconds() {
+    timespec ts{};
+    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts);
+    return static_cast<double>(ts.tv_sec) + static_cast<double>(ts.tv_nsec) * 1e-9;
 }
 
 bool EndsWithMilk(const char* name) {
@@ -193,6 +202,15 @@ public:
         if (f) fclose(f);
         LOGI("Skip list cleared");
     }
+
+    // The preset Next() will return (unless the order is reshuffled first).
+    std::string PeekNext() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return PeekNextLocked(false);
+    }
+
+    // Reads a preset without taking the prefetched copy (any thread).
+    std::string Read(const std::string& name) const { return ReadAsset(name); }
 
     // Returns the preset file contents, using the prefetched copy when available.
     std::string Load(const std::string& name) {
@@ -746,7 +764,22 @@ constexpr int kBlankStrikesToSkip = 2;          // black verdicts before a prese
 // presets: then nothing is struck or skipped until a preset shows visible output again.
 constexpr int kMaxBlankInARow = 3;
 constexpr double kMaxLightweightSeconds = 3.0;  // a still frame should not linger longer
-constexpr float kSlowBlendRatio = 0.8f;         // classic blend slower than this: Auto goes lightweight
+
+// Auto transitions blend both presets below the render size (the frames of both are kept and
+// scaled, see projectM patch 0003), one step lower whenever a blend drops frames and one step
+// higher after a few blends with frames to spare.
+constexpr float kBlendScales[] = {1.0f, 0.75f, 0.6f, 0.5f};
+constexpr int kBlendLevels = sizeof(kBlendScales) / sizeof(kBlendScales[0]);
+constexpr int kDefaultBlendLevel = 1;           // 75%
+constexpr int kLowEndBlendLevel = 2;            // 60% on low-end devices
+constexpr float kBlendSlowRatio = 0.85f;        // blend fps below this share of the fps before it: lower
+constexpr float kBlendEarlySlowRatio = 0.7f;    // this slow early in a blend: lower it at once
+constexpr float kBlendFastRatio = 0.97f;        // at least this share: counts towards a higher level
+constexpr int kFastBlendsToRaise = 3;
+// A blend whose frames are mostly the render thread's own CPU time (per-vertex equations, draw calls)
+// is CPU-bound: a lower resolution would only make it blurrier, so it keeps (or regains) sharpness.
+constexpr float kCpuBoundShare = 0.8f;
+constexpr double kScaledHoldSeconds = 0.25;     // stay scaled a little past the blend's end
 
 struct Inputs {
     std::atomic<int> command{kNone};
@@ -754,11 +787,13 @@ struct Inputs {
     std::atomic<bool> forceHardCut{false};  // next automatic switch must be a hard cut
     std::atomic<bool> blankDetection{false};  // act on black presets (always measured)
     std::atomic<int> transitionMode{kTransitionAuto};
-    std::atomic<bool> autoLightweight{false};  // Auto's current choice
+    std::atomic<int> blendLevelStart{kDefaultBlendLevel};
+    std::atomic<bool> blendReset{true};  // start Auto's blend scaling over at blendLevelStart
 
     std::atomic<int> presetDuration{30};
     std::atomic<int> softCutDuration{7};
     std::atomic<bool> autoChange{true};
+    std::atomic<bool> beatCuts{false};  // projectM's hard cut to the next preset on a loud beat
     std::atomic<int> meshWidth{48};
     std::atomic<int> meshHeight{32};
     std::atomic<bool> settingsDirty{true};
@@ -776,6 +811,7 @@ struct Published {
     std::atomic<int> changeCounter{0};
     std::atomic<float> lastTransitionFps{0.f};
     std::atomic<int> transitionCounter{0};
+    std::atomic<int> blendScalePercent{0};  // resolution of Auto's blends, 0 before the first one
 };
 
 // GL-thread-only state.
@@ -815,10 +851,31 @@ struct Engine {
     int transitionFrames = 0;
     int transitionSlowFrames = 0;
     double transitionWorstMs = 0;
+    bool transitionScaled = false;   // an Auto blend rendered below the render size
+    double transitionCpuSeconds = 0; // render-thread CPU time of the blend's frames
+    bool transitionStepped = false;  // its scale was already lowered during the blend
+
+    // projectM's window size; below the surface size it renders into scaledFbo, which is then
+    // stretched onto the surface.
+    int renderWidth = 0;
+    int renderHeight = 0;
+    GLuint scaledFbo = 0;
+    GLuint scaledTexture = 0;
+    int scaledWidth = 0;
+    int scaledHeight = 0;
+    float transitionScale = 1.f;
+    double scaledUntil = 0;  // render at transitionScale until then
+
+    // Auto's blend scaling, learned during the session (reset by setTransitionMode).
+    int blendLevel = kDefaultBlendLevel;
+    int fastBlends = 0;
+    bool blendLevelTooSlow[kBlendLevels] = {};
+    bool halfRateOutgoing = false;  // blends are CPU-bound: the outgoing preset renders every 2nd frame
 };
 
 // Intentionally never destroyed: its detached worker thread lives as long as the process.
 PresetLibrary& g_library = *new PresetLibrary();
+PresetPrewarmer& g_prewarmer = *new PresetPrewarmer();  // started and stopped with the engine
 Inputs g_inputs;
 Published g_published;
 Engine g_engine;
@@ -846,6 +903,7 @@ void ApplySettings() {
     projectm_set_preset_duration(pm, g_inputs.presetDuration.load());
     projectm_set_soft_cut_duration(pm, g_inputs.softCutDuration.load());
     projectm_set_preset_locked(pm, !g_inputs.autoChange.load());
+    projectm_set_hard_cut_enabled(pm, g_inputs.beatCuts.load());
     int meshWidth = g_inputs.meshWidth.load();
     int meshHeight = g_inputs.meshHeight.load();
     if (meshWidth != g_engine.appliedMeshWidth || meshHeight != g_engine.appliedMeshHeight) {
@@ -951,8 +1009,75 @@ void ShaderStats(const std::string& preset, size_t& bytes, int& loops) {
 }
 
 bool UseLightweight() {
-    int mode = g_inputs.transitionMode.load();
-    return mode == kTransitionLightweight || (mode == kTransitionAuto && g_inputs.autoLightweight.load());
+    return g_inputs.transitionMode.load() == kTransitionLightweight;
+}
+
+// Sets projectM's window size to the surface size times `scale`. A change keeps the frames of the
+// presets (scaled, projectM patch 0003), so it can happen at any frame.
+void ApplyRenderScale(float scale) {
+    int width = g_engine.width;
+    int height = g_engine.height;
+    if (!g_engine.pm || width <= 0 || height <= 0) return;
+    if (scale < 1.f) {
+        width = std::max(2, static_cast<int>(std::lround(width * scale)) & ~1);
+        height = std::max(2, static_cast<int>(std::lround(height * scale)) & ~1);
+    }
+    if (width == g_engine.renderWidth && height == g_engine.renderHeight) return;
+    projectm_set_window_size(g_engine.pm, width, height);
+    g_engine.renderWidth = width;
+    g_engine.renderHeight = height;
+}
+
+// The off-screen target for rendering below the surface size, (re)allocated for the given size.
+bool EnsureScaledTarget(int width, int height) {
+    if (g_engine.scaledFbo && g_engine.scaledWidth == width && g_engine.scaledHeight == height) return true;
+    if (!g_engine.scaledFbo) glGenFramebuffers(1, &g_engine.scaledFbo);
+    if (!g_engine.scaledTexture) glGenTextures(1, &g_engine.scaledTexture);
+    glBindTexture(GL_TEXTURE_2D, g_engine.scaledTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, g_engine.scaledFbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, g_engine.scaledTexture, 0);
+    bool complete = glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    g_engine.scaledWidth = complete ? width : 0;
+    g_engine.scaledHeight = complete ? height : 0;
+    if (!complete) LOGW("Scaled render target %dx%d unavailable: rendering at full size", width, height);
+    return complete;
+}
+
+// contextAlive: delete the GL objects (else they died with their context).
+void ReleaseScaledTarget(bool contextAlive) {
+    if (contextAlive) {
+        if (g_engine.scaledFbo) glDeleteFramebuffers(1, &g_engine.scaledFbo);
+        if (g_engine.scaledTexture) glDeleteTextures(1, &g_engine.scaledTexture);
+    }
+    g_engine.scaledFbo = g_engine.scaledTexture = 0;
+    g_engine.scaledWidth = g_engine.scaledHeight = 0;
+}
+
+// Renders a frame at projectM's window size; below the surface size, into the off-screen target,
+// stretched onto the surface by the GPU (one blit).
+void RenderPresetFrame() {
+    int width = g_engine.renderWidth;
+    int height = g_engine.renderHeight;
+    bool scaled = width != g_engine.width || height != g_engine.height;
+    if (scaled && !EnsureScaledTarget(width, height)) {
+        ApplyRenderScale(1.f);
+        scaled = false;
+    }
+    if (!scaled) {
+        projectm_opengl_render_frame(g_engine.pm);
+        return;
+    }
+    projectm_opengl_render_frame_fbo(g_engine.pm, g_engine.scaledFbo);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, g_engine.scaledFbo);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, g_engine.width, g_engine.height, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(0, 0, g_engine.width, g_engine.height);
 }
 
 // Loads one preset; returns false if it could not be loaded (and marks it as skipped).
@@ -970,19 +1095,24 @@ bool LoadPreset(const std::string& name, bool smooth) {
     ShaderStats(data, shaderBytes, shaderLoops);
     long availBefore = AvailableMemoryKb();
     long rssBefore = ResidentMemoryKb();
+    uint32_t cacheHitsBefore = 0, cacheMissesBefore = 0;
+    projectm_opengl_program_cache_stats(&cacheHitsBefore, &cacheMissesBefore);
     double loadStart = NowSeconds();
-    // Parses the preset, loads its textures and compiles its shaders: the stall at a switch.
+    // Parses the preset, loads its textures and compiles its shaders: the stall at a switch, unless
+    // the prewarmer already compiled them (then they come from the program cache).
     projectm_load_preset_data(g_engine.pm, data.c_str(), smooth);
     double loadEnd = NowSeconds();
+    uint32_t cacheHits = 0, cacheMisses = 0;
+    projectm_opengl_program_cache_stats(&cacheHits, &cacheMisses);
     double loadMs = (loadEnd - loadStart) * 1000.0;
     long availAfter = AvailableMemoryKb();
     long rssAfter = ResidentMemoryKb();
     // Memory the load took, to find the presets that cause memory peaks and calibrate their
     // weights: the drop in the system's available memory also covers GPU driver allocations.
     LOGI("LOAD preset='%s' ms=%.0f smooth=%d size=%dx%d weight_mb=%d shader_kb=%.1f loops=%d "
-         "avail_drop_mb=%ld rss_growth_mb=%ld",
-         name.c_str(), loadMs, smooth ? 1 : 0, g_engine.width, g_engine.height, g_library.Weight(name),
-         shaderBytes / 1024.0, shaderLoops,
+         "programs_cached=%u programs_compiled=%u avail_drop_mb=%ld rss_growth_mb=%ld",
+         name.c_str(), loadMs, smooth ? 1 : 0, g_engine.renderWidth, g_engine.renderHeight, g_library.Weight(name),
+         shaderBytes / 1024.0, shaderLoops, cacheHits - cacheHitsBefore, cacheMisses - cacheMissesBefore,
          availBefore >= 0 && availAfter >= 0 ? (availBefore - availAfter) / 1024 : 0,
          rssBefore >= 0 && rssAfter >= 0 ? (rssAfter - rssBefore) / 1024 : 0);
     if (g_engine.loadFailed) {
@@ -997,6 +1127,7 @@ bool LoadPreset(const std::string& name, bool smooth) {
     g_engine.lastLoadEnd = loadEnd;
     g_engine.lastLoadMs = loadMs;
     g_engine.detector.Arm(loadEnd, 2.0, name);
+    g_prewarmer.Request(g_library.PeekNext());
     return true;
 }
 
@@ -1009,6 +1140,7 @@ void BeginTransition(double seconds, bool lightweight) {
     g_engine.transitionEnd = g_engine.lastLoadEnd + seconds;
     g_engine.transitionFrames = 0;
     g_engine.transitionSlowFrames = 0;
+    g_engine.transitionCpuSeconds = 0;
     g_engine.transitionWorstMs = g_engine.lastLoadMs;
     g_engine.fpsBeforeTransition = g_engine.lastFps;
     g_engine.detector.Arm(g_engine.lastLoadEnd, seconds + 2.0, g_engine.current);  // judge it after the blend
@@ -1040,9 +1172,18 @@ void HandleAutoSwitch() {
     int softCut = g_inputs.softCutDuration.load();
     bool lightweight = !hardCut && softCut > 0 && g_engine.snapshotReady && UseLightweight();
     bool smooth = !hardCut && !lightweight;
+    // Auto blends run below the render size; the new preset starts at that size right away.
+    bool scaled = smooth && softCut > 0 && g_inputs.transitionMode.load() == kTransitionAuto;
+    g_engine.scaledUntil = 0;
     if (!lightweight) g_engine.fade.Stop();
+    if (scaled) {
+        g_engine.transitionScale = kBlendScales[g_engine.blendLevel];
+        ApplyRenderScale(g_engine.transitionScale);
+    }
+    projectm_opengl_set_outgoing_preset_frame_divisor(g_engine.pm, scaled && g_engine.halfRateOutgoing ? 2 : 1);
     if (!SwitchPreset([] { return g_library.Next(); }, smooth)) {
         g_engine.fade.Stop();
+        g_engine.scaledUntil = 0;
         return;
     }
     if (lightweight) {
@@ -1051,6 +1192,9 @@ void HandleAutoSwitch() {
         BeginTransition(seconds, true);
     } else if (smooth && softCut > 0) {
         BeginTransition(softCut, false);
+        g_engine.transitionScaled = scaled;
+        g_engine.transitionStepped = false;
+        if (scaled) g_engine.scaledUntil = g_engine.transitionEnd + kScaledHoldSeconds;
     }
 }
 
@@ -1059,6 +1203,7 @@ void HandleCommands() {
     if (command != kNone) {
         bool smooth = !g_inputs.commandHardCut.load();
         g_engine.fade.Stop();  // remote-control switches are immediate
+        g_engine.scaledUntil = 0;
         switch (command) {
             case kNext:
                 SwitchPreset([] { return g_library.Next(); }, smooth);
@@ -1120,38 +1265,100 @@ void UpdateFps(double now) {
     }
 }
 
-// Frame-time statistics for the running transition; logged and published when it ends. In Auto
-// mode a classic blend that runs clearly slower than the frames before it switches to lightweight.
-void TrackTransition(double now) {
+// Auto's blend resolution after a blend at `level` ran at blendFps (before: the fps before it).
+void AdaptBlendLevel(float blendFps, float before, float cpuShare) {
+    int level = g_engine.blendLevel;
+    int percent = static_cast<int>(kBlendScales[level] * 100.f + 0.5f);
+    if (blendFps < before * kBlendSlowRatio && cpuShare >= kCpuBoundShare) {
+        g_engine.fastBlends = 0;
+        if (!g_engine.halfRateOutgoing) {
+            g_engine.halfRateOutgoing = true;
+            LOGI("TRANSITION auto: blends are CPU-bound: the outgoing preset renders every 2nd frame");
+        }
+        if (level > 0) {
+            // Whatever lowered it, the resolution was not what held this blend back.
+            g_engine.blendLevelTooSlow[level - 1] = false;
+            g_engine.blendLevel = level - 1;
+            LOGI("TRANSITION auto: blend at %d%% ran at %.1f fps (%.1f before) on the CPU (%.0f%%): resolution "
+                 "does not help, next blends at %d%%", percent, blendFps, before, cpuShare * 100.f,
+                 static_cast<int>(kBlendScales[level - 1] * 100.f + 0.5f));
+        }
+    } else if (blendFps < before * kBlendSlowRatio) {
+        g_engine.blendLevelTooSlow[level] = true;
+        g_engine.fastBlends = 0;
+        if (level + 1 < kBlendLevels && !g_engine.transitionStepped) {
+            g_engine.blendLevel = level + 1;
+            LOGI("TRANSITION auto: blend at %d%% ran at %.1f fps (%.1f before): next blends at %d%%", percent,
+                 blendFps, before, static_cast<int>(kBlendScales[level + 1] * 100.f + 0.5f));
+        }
+    } else if (blendFps >= before * kBlendFastRatio) {
+        if (++g_engine.fastBlends >= kFastBlendsToRaise && level > 0 && !g_engine.blendLevelTooSlow[level - 1]) {
+            g_engine.blendLevel = level - 1;
+            g_engine.fastBlends = 0;
+            LOGI("TRANSITION auto: %d blends at %d%% kept up: next blends at %d%%", kFastBlendsToRaise, percent,
+                 static_cast<int>(kBlendScales[level - 1] * 100.f + 0.5f));
+        }
+    } else {
+        g_engine.fastBlends = 0;
+    }
+    g_published.blendScalePercent = static_cast<int>(kBlendScales[g_engine.blendLevel] * 100.f + 0.5f);
+}
+
+// Frame-time statistics for the running transition; logged and published when it ends. Auto blends
+// adapt their resolution: once early in a blend that starts far too slow, and after each blend.
+void TrackTransition(double now, double frameCpuSeconds) {
     double frameMs = g_engine.lastFrameAt > 0 ? (now - g_engine.lastFrameAt) * 1000.0 : 0;
     g_engine.lastFrameAt = now;
     if (!g_engine.inTransition) return;
     ++g_engine.transitionFrames;
     if (frameMs > 50.0) ++g_engine.transitionSlowFrames;  // below 20 fps: a visible stutter
     g_engine.transitionWorstMs = std::max(g_engine.transitionWorstMs, frameMs);
+    double blending = now - g_engine.transitionLoadEnd;
+    if (g_engine.transitionFrames > 1) g_engine.transitionCpuSeconds += frameCpuSeconds;  // not the load frame
+    if (g_engine.transitionScaled && !g_engine.transitionStepped && g_engine.transitionFrames >= 15 &&
+        blending >= 0.4 && g_engine.blendLevel + 1 < kBlendLevels && g_engine.fpsBeforeTransition > 0 &&
+        g_engine.transitionFrames / blending < g_engine.fpsBeforeTransition * kBlendEarlySlowRatio &&
+        g_engine.transitionCpuSeconds / blending < kCpuBoundShare) {
+        g_engine.blendLevelTooSlow[g_engine.blendLevel] = true;
+        ++g_engine.blendLevel;
+        g_engine.transitionStepped = true;
+        g_engine.transitionScale = kBlendScales[g_engine.blendLevel];
+        LOGI("TRANSITION auto: blend at %.1f fps (%.1f before), lowering it to %d%% now",
+             g_engine.transitionFrames / blending, g_engine.fpsBeforeTransition,
+             static_cast<int>(g_engine.transitionScale * 100.f + 0.5f));
+    }
+    if (g_engine.transitionScaled && !g_engine.halfRateOutgoing && g_engine.transitionFrames >= 15 &&
+        blending >= 0.4 && g_engine.fpsBeforeTransition > 0 &&
+        g_engine.transitionFrames / blending < g_engine.fpsBeforeTransition * kBlendSlowRatio &&
+        g_engine.transitionCpuSeconds / blending >= kCpuBoundShare) {
+        g_engine.halfRateOutgoing = true;
+        projectm_opengl_set_outgoing_preset_frame_divisor(g_engine.pm, 2);
+        LOGI("TRANSITION auto: blend at %.1f fps (%.1f before) on the CPU: the outgoing preset renders every "
+             "2nd frame from now on", g_engine.transitionFrames / blending, g_engine.fpsBeforeTransition);
+    }
     if (now < g_engine.transitionEnd) return;
     g_engine.inTransition = false;
     float fps = static_cast<float>(g_engine.transitionFrames / std::max(0.001, now - g_engine.transitionStart));
     float blendFps = static_cast<float>(g_engine.transitionFrames / std::max(0.001, now - g_engine.transitionLoadEnd));
     bool lightweight = g_engine.transitionLightweight;
-    LOGI("TRANSITION preset='%s' mode=%s load_ms=%.0f fps=%.1f blend_fps=%.1f before_fps=%.1f frames=%d "
-         "slow_frames=%d worst_ms=%.0f",
-         g_engine.current.c_str(), lightweight ? "lightweight" : "classic", g_engine.lastLoadMs, fps, blendFps,
-         g_engine.fpsBeforeTransition, g_engine.transitionFrames, g_engine.transitionSlowFrames,
-         g_engine.transitionWorstMs);
+    float cpuShare = static_cast<float>(g_engine.transitionCpuSeconds / std::max(0.001, now - g_engine.transitionLoadEnd));
+    LOGI("TRANSITION preset='%s' mode=%s scale=%d%% load_ms=%.0f fps=%.1f blend_fps=%.1f before_fps=%.1f "
+         "cpu=%.0f%% outgoing_rate=1/%d frames=%d slow_frames=%d worst_ms=%.0f",
+         g_engine.current.c_str(), lightweight ? "lightweight" : "classic",
+         g_engine.transitionScaled ? static_cast<int>(g_engine.transitionScale * 100.f + 0.5f) : 100,
+         g_engine.lastLoadMs, fps, blendFps, g_engine.fpsBeforeTransition, cpuShare * 100.f,
+         g_engine.transitionScaled && g_engine.halfRateOutgoing ? 2 : 1, g_engine.transitionFrames, g_engine.transitionSlowFrames, g_engine.transitionWorstMs);
     g_published.lastTransitionFps = fps;
     g_published.transitionCounter.fetch_add(1);
     float before = g_engine.fpsBeforeTransition;
-    if (!lightweight && g_inputs.transitionMode.load() == kTransitionAuto && !g_inputs.autoLightweight.load() &&
-        before > 0 && blendFps < before * kSlowBlendRatio) {
-        g_inputs.autoLightweight = true;
-        LOGI("TRANSITION auto: classic blend ran at %.1f fps (%.1f before), using lightweight transitions",
-             blendFps, before);
-    }
+    if (g_engine.transitionScaled && before > 0) AdaptBlendLevel(blendFps, before, cpuShare);
+    g_engine.transitionScaled = false;
 }
 
 // contextAlive: the EGL context that owns our GL objects is still current (else just forget them).
 void DestroyEngineLocked(bool contextAlive) {
+    g_prewarmer.Stop();
+    ReleaseScaledTarget(contextAlive);
     if (contextAlive) {
         g_engine.fade.Release();
         g_engine.detector.Release();
@@ -1165,6 +1372,9 @@ void DestroyEngineLocked(bool contextAlive) {
         g_engine.pm = nullptr;
     }
     g_engine.width = g_engine.height = 0;
+    g_engine.renderWidth = g_engine.renderHeight = 0;
+    g_engine.scaledUntil = 0;
+    g_engine.transitionScaled = false;
     g_engine.appliedMeshWidth = g_engine.appliedMeshHeight = 0;
     g_engine.texturesApplied = false;
     g_engine.inTransition = false;
@@ -1205,7 +1415,6 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
         LOGE("projectm_create failed");
         return;
     }
-    projectm_set_hard_cut_enabled(g_engine.pm, true);
     projectm_set_beat_sensitivity(g_engine.pm, 1.0f);
     projectm_set_preset_switch_requested_event_callback(g_engine.pm, OnSwitchRequested, nullptr);
     projectm_set_preset_switch_failed_event_callback(g_engine.pm, OnSwitchFailed, nullptr);
@@ -1220,10 +1429,11 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceChanged)(JNIEnv*, jclass, jint width, jin
     std::lock_guard<std::mutex> lock(g_engineMutex);
     if (!g_engine.pm) return;
     if (width != g_engine.width || height != g_engine.height) {
-        // Resets projectM's renderer, so only call it on real size changes.
-        projectm_set_window_size(g_engine.pm, width, height);
+        // The presets' frames are scaled to the new size (projectM patch 0003): no restart.
         g_engine.width = width;
         g_engine.height = height;
+        ApplyRenderScale(g_engine.transitionScale < 1.f && NowSeconds() < g_engine.scaledUntil
+                             ? g_engine.transitionScale : 1.f);
         LOGI("Render size %dx%d", width, height);
     }
     glViewport(0, 0, width, height);
@@ -1233,8 +1443,15 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     std::lock_guard<std::mutex> lock(g_engineMutex);
     if (!g_engine.pm) return;
     double now = NowSeconds();
+    double cpuStart = ThreadCpuSeconds();
 
     if (g_inputs.settingsDirty.exchange(false)) ApplySettings();
+    if (g_inputs.blendReset.exchange(false)) {
+        g_engine.blendLevel = g_inputs.blendLevelStart.load();
+        g_engine.fastBlends = 0;
+        g_engine.halfRateOutgoing = false;
+        std::fill(std::begin(g_engine.blendLevelTooSlow), std::end(g_engine.blendLevelTooSlow), false);
+    }
 
     if (g_engine.loadFailed) {  // failure reported outside of a load call
         g_library.MarkSkipped(g_engine.loading, "failed to load/compile");
@@ -1249,6 +1466,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
                 const char* paths[] = {g_library.TextureDir().c_str()};
                 if (!g_library.TextureDir().empty()) projectm_set_texture_search_paths(g_engine.pm, paths, 1);
                 g_engine.texturesApplied = true;
+                g_prewarmer.Start(g_library.TextureDir(), [](const std::string& name) { return g_library.Read(name); });
             }
             std::string resume;  // preset shown before an EGL context loss, if any
             {
@@ -1262,7 +1480,8 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     }
 
     FeedAudio();
-    projectm_opengl_render_frame(g_engine.pm);
+    ApplyRenderScale(now < g_engine.scaledUntil ? g_engine.transitionScale : 1.f);
+    RenderPresetFrame();
 
     if (!g_engine.firstPresetLogged && !g_engine.current.empty()) {
         // Logged after the first frame of the first preset has been rendered.
@@ -1292,7 +1511,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     double end = NowSeconds();
     g_engine.fade.Draw(end);
     CaptureOutgoingFrame();
-    TrackTransition(end);
+    TrackTransition(end, ThreadCpuSeconds() - cpuStart);
     UpdateFps(now);
 }
 
@@ -1352,6 +1571,11 @@ JNIEXPORT void JNICALL JNI_FN(setAutoChange)(JNIEnv*, jclass, jboolean enabled) 
     g_inputs.settingsDirty = true;
 }
 
+JNIEXPORT void JNICALL JNI_FN(setBeatCuts)(JNIEnv*, jclass, jboolean enabled) {
+    g_inputs.beatCuts = enabled;
+    g_inputs.settingsDirty = true;
+}
+
 JNIEXPORT void JNICALL JNI_FN(setMeshSize)(JNIEnv*, jclass, jint width, jint height) {
     g_inputs.meshWidth = width;
     g_inputs.meshHeight = height;
@@ -1366,9 +1590,16 @@ JNIEXPORT void JNICALL JNI_FN(setBlankDetection)(JNIEnv*, jclass, jboolean enabl
     g_inputs.blankDetection = enabled;
 }
 
-JNIEXPORT void JNICALL JNI_FN(setTransitionMode)(JNIEnv*, jclass, jint mode, jboolean autoStartsLightweight) {
+// lowEndDevice: Auto's blends start at a lower resolution.
+JNIEXPORT void JNICALL JNI_FN(setTransitionMode)(JNIEnv*, jclass, jint mode, jboolean lowEndDevice) {
     g_inputs.transitionMode = std::clamp(static_cast<int>(mode), 0, 2);
-    g_inputs.autoLightweight = autoStartsLightweight;
+    g_inputs.blendLevelStart = lowEndDevice ? kLowEndBlendLevel : kDefaultBlendLevel;
+    g_inputs.blendReset = true;
+}
+
+// Resolution (percent of the render size) of Auto's blends, 0 before the first one.
+JNIEXPORT jint JNICALL JNI_FN(getBlendScalePercent)(JNIEnv*, jclass) {
+    return g_published.blendScalePercent.load();
 }
 
 // True when automatic switches currently use the lightweight transition.
