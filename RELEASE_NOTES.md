@@ -3,6 +3,10 @@
 ## Added
 - **Auto-update (optional).** Switch on *Settings › Advanced › Auto-update* and the app checks GitHub for a new release once a day and downloads it in the background. When it is ready, a notice appears in the lower left and the settings panel shows *Install* at the top; Android's installer asks you to confirm. The first time, it asks you to allow installs from ProjectM TV instead; Android then restarts the app, and you select *Install* once more. The download is checked before it is offered: it must be this app, newer, and signed with the same key.
 - Off by default. While it is off, the app makes no network connection at all. Android lists the internet permission for every install, because Android grants it at install time and has no per-app switch for it. Apps installed from F-Droid show *Via F-Droid* and are updated by F-Droid.
+- An interrupted download (weak Wi-Fi) continues where it stopped, instead of starting over.
+
+## Fixed
+- *Diagnostics* no longer run off the bottom of the screen: they now have their own panel next to *Settings › Advanced*.
 
 ---
 
