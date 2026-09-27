@@ -56,26 +56,47 @@ final class Updater {
             "com.looker.droidify", "com.machiav3lli.fdroid"};
     private static final Pattern APK_NAME = Pattern.compile("projectM-TV-([0-9][0-9.]*)\\.apk");
 
+    private static Updater instance;
+
     private final Context context;
     private final SharedPreferences prefs;
-    private final Handler main;
-    private final Listener listener;
     private final boolean viaFDroid;
-    private final HandlerThread thread = new HandlerThread("Updater", Process.THREAD_PRIORITY_BACKGROUND);
     private final Handler worker;
-    private volatile boolean closed;
+    private volatile Handler main;
+    private volatile Listener listener;
     private volatile String status;
     private volatile String readyVersion;
 
-    Updater(Context context, SharedPreferences prefs, Handler main, Listener listener) {
-        this.context = context.getApplicationContext();
+    /**
+     * One per process, so an activity that is being destroyed and its successor never download into
+     * the same folder at once. The activity attaches its listener with {@link #attach}.
+     */
+    static synchronized Updater get(Context context, SharedPreferences prefs) {
+        if (instance == null) instance = new Updater(context.getApplicationContext(), prefs);
+        return instance;
+    }
+
+    private Updater(Context context, SharedPreferences prefs) {
+        this.context = context;
         this.prefs = prefs;
-        this.main = main;
-        this.listener = listener;
-        viaFDroid = installedByFDroid(this.context);
+        viaFDroid = installedByFDroid(context);
         status = viaFDroid ? "via F-Droid" : isEnabled() ? "waiting" : "off";
+        HandlerThread thread = new HandlerThread("Updater", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
         worker = new Handler(thread.getLooper());
+    }
+
+    /** {@code listener} hears about a ready update on {@code main}'s thread. */
+    void attach(Handler main, Listener listener) {
+        this.main = main;
+        this.listener = listener;
+    }
+
+    /** The activity is gone: no more callbacks to it, and no check is started for it. */
+    void detach(Listener listener) {
+        if (this.listener != listener) return;
+        this.listener = null;
+        worker.removeCallbacks(dueCheck);
     }
 
     boolean isViaFDroid() { return viaFDroid; }
@@ -105,13 +126,12 @@ final class Updater {
         } else {
             readyVersion = null;
             status = "off";
-            worker.post(() -> deleteAll(updatesDir()));  // a running download stops by itself
+            worker.post(() -> {  // after a running check, which stops by itself
+                deleteAll(updatesDir());
+                readyVersion = null;
+                status = "off";
+            });
         }
-    }
-
-    void close() {
-        closed = true;
-        thread.quitSafely();
     }
 
     /**
@@ -150,8 +170,9 @@ final class Updater {
 
     /** On the worker thread. */
     private void check(boolean force) {
-        if (!isEnabled() || closed) return;
-        String installed = installedVersion();
+        if (!isEnabled()) return;
+        String test = testVersion();
+        String installed = installedVersion(test);
         String ready = cleanUp(installed);
         if (ready != null) announce(ready);
         long checkedAt = prefs.getLong(PREF_CHECKED_AT, 0);
@@ -163,21 +184,24 @@ final class Updater {
         status = "checking";
         try {
             String latest = latestVersion(installed);
-            prefs.edit().putLong(PREF_CHECKED_AT, now).apply();
+            if (!isEnabled()) return;  // switched off while asking
             String current = ready != null ? ready : installed;
             if (compareVersions(latest, current) <= 0) {
+                // Only a completed check counts for the day: a failure is retried at the next launch.
+                prefs.edit().putLong(PREF_CHECKED_AT, now).apply();
                 status = ready != null ? ready + " ready to install" : "up to date, checked " + time(now);
                 Log.i(TAG, "Update: latest release is " + latest + ", installed " + installed);
                 return;
             }
             Log.i(TAG, "Update: " + latest + " available (installed " + installed + "), downloading");
-            File apk = download(latest);
+            File apk = download(latest, installed, test != null);
             if (apk == null) return;  // switched off meanwhile
             deleteAll(updatesDir());  // an older download
             File target = new File(updatesDir(), apk.getName());
             if (!updatesDir().mkdirs() && !updatesDir().isDirectory() || !apk.renameTo(target)) {
                 throw new IOException("cannot store the download");
             }
+            prefs.edit().putLong(PREF_CHECKED_AT, now).apply();
             announce(latest);
         } catch (IOException | RuntimeException e) {
             status = "check failed (" + e.getMessage() + "), again at next launch";
@@ -186,10 +210,14 @@ final class Updater {
     }
 
     private void announce(String version) {
+        if (!isEnabled()) return;
         readyVersion = version;
         status = version + " ready to install";
-        main.post(() -> {
-            if (version.equals(readyVersion)) listener.onUpdateReady(version);
+        Handler handler = main;
+        if (handler == null) return;
+        handler.post(() -> {
+            Listener current = listener;
+            if (current != null && version.equals(readyVersion)) current.onUpdateReady(version);
         });
     }
 
@@ -210,13 +238,14 @@ final class Updater {
     }
 
     /** Downloads and verifies the release APK; null if switched off meanwhile. */
-    private File download(String version) throws IOException {
+    private File download(String version, String installed, boolean testing) throws IOException {
+        if (!isEnabled()) return null;
         File dir = new File(context.getNoBackupFilesDir(), "update-download");
         deleteAll(dir);
         if (!dir.mkdirs() && !dir.isDirectory()) throw new IOException("no download folder");
         File apk = new File(dir, apkName(version));
         HttpURLConnection connection = open(REPO + "/releases/download/v" + version + "/" + apkName(version),
-                installedVersion());
+                installed);
         try {
             int code = connection.getResponseCode();
             if (code != HttpURLConnection.HTTP_OK) throw new IOException("HTTP " + code);
@@ -228,7 +257,7 @@ final class Updater {
             byte[] buffer = new byte[64 * 1024];
             try (InputStream in = connection.getInputStream(); OutputStream out = new FileOutputStream(apk)) {
                 for (int n; (n = in.read(buffer)) > 0; ) {
-                    if (!isEnabled() || closed) {
+                    if (!isEnabled()) {
                         deleteAll(dir);
                         return null;
                     }
@@ -245,7 +274,7 @@ final class Updater {
         } finally {
             connection.disconnect();
         }
-        String problem = verify(apk);
+        String problem = verify(apk, testing);
         if (problem != null) {
             deleteAll(dir);
             throw new IOException("download rejected: " + problem);
@@ -255,7 +284,7 @@ final class Updater {
 
     /** Null if the APK is this app, newer than the installed one and signed with the same key. */
     @SuppressWarnings("deprecation")  // GET_SIGNATURES: also on Android 5-8; the key does not rotate
-    private String verify(File apk) {
+    private String verify(File apk, boolean testing) {
         PackageManager pm = context.getPackageManager();
         PackageInfo archive = pm.getPackageArchiveInfo(apk.getPath(), PackageManager.GET_SIGNATURES);
         if (archive == null) return "not an APK";
@@ -267,7 +296,7 @@ final class Updater {
             return "own package not found";
         }
         long code = versionCode(archive), installedCode = versionCode(installed);
-        if (code < installedCode || code == installedCode && testVersion() == null) {
+        if (code < installedCode || code == installedCode && !testing) {
             return "version code " + code + " is not newer than " + installedCode;
         }
         if (archive.signatures == null || archive.signatures.length == 0
@@ -321,8 +350,7 @@ final class Updater {
     }
 
     /** The installed version name without a CI suffix (1.9.19-ci.12 → 1.9.19). */
-    private String installedVersion() {
-        String test = testVersion();
+    private String installedVersion(String test) {
         if (test != null) return test;
         try {
             String name = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
@@ -333,14 +361,18 @@ final class Updater {
     }
 
     private static String testVersion() {
+        java.lang.Process p = null;
         try {
-            java.lang.Process p = Runtime.getRuntime().exec(new String[]{"getprop", TEST_PROPERTY});
+            p = new ProcessBuilder("getprop", TEST_PROPERTY).redirectErrorStream(true).start();
+            p.getOutputStream().close();
             try (BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
                 String value = r.readLine();
                 return value != null && value.trim().matches("[0-9][0-9.]*") ? value.trim() : null;
             }
         } catch (IOException e) {
             return null;
+        } finally {
+            if (p != null) p.destroy();
         }
     }
 

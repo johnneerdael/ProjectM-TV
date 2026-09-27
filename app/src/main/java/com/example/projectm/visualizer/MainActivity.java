@@ -119,6 +119,7 @@ public class MainActivity extends Activity {
     private Updater updater;
     private OptionRow installRow;
     private boolean updateAnnounced;  // the pill announces a ready update once per launch
+    private final Updater.Listener updateListener = this::onUpdateReady;
     private Menu menu = Menu.NONE;
     private int lastPresetChange = -1;
     private String currentPreset = "";
@@ -317,7 +318,8 @@ public class MainActivity extends Activity {
         nowPlayingIcon = findViewById(R.id.now_playing_icon);
         nowPlayingText = findViewById(R.id.now_playing_text);
         trackWatcher = new TrackWatcher(this, handler, this::onTrack);
-        updater = new Updater(this, prefs, handler, this::onUpdateReady);
+        updater = Updater.get(this, prefs);
+        updater.attach(handler, updateListener);
 
         TextView versionInfo = findViewById(R.id.version_info);
         versionInfo.setText("v" + appVersion() + "  ·  projectM " + ProjectMJNI.getVersion());
@@ -1061,7 +1063,7 @@ public class MainActivity extends Activity {
         audioHandler.removeCallbacks(audioWatch);
         audioHandler.post(this::stopAudio);
         audioThread.quitSafely();
-        updater.close();
+        updater.detach(updateListener);
         // projectM owns GL objects, so it is destroyed on the GL thread. If the thread is already
         // gone, the next onSurfaceCreated() cleans up instead.
         visualizerView.queueEvent(renderer::release);
