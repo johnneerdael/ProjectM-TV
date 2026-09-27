@@ -32,6 +32,14 @@ endif()
 # whole series is. Otherwise undo the ones that are (an older series, newest first) and apply the
 # series in order.
 find_package(Git REQUIRED)
+# Every ABI configures in parallel against the one shared checkout; the lock makes the check-and-apply
+# below happen once at a time, so a second configure finds the series already in place.
+set(PROJECTM_PATCH_LOCK ${REPO_ROOT}/core/.cxx/projectm-patches.lock)
+file(MAKE_DIRECTORY ${REPO_ROOT}/core/.cxx)
+file(LOCK ${PROJECTM_PATCH_LOCK} GUARD FILE RESULT_VARIABLE patch_lock TIMEOUT 600)
+if(NOT patch_lock EQUAL 0)
+    message(FATAL_ERROR "Could not lock the projectM checkout for patching: ${patch_lock}")
+endif()
 file(GLOB PROJECTM_PATCHES ${REPO_ROOT}/tools/projectm-patches/*.patch)
 list(SORT PROJECTM_PATCHES)
 list(GET PROJECTM_PATCHES -1 PROJECTM_LAST_PATCH)
@@ -57,6 +65,7 @@ if(NOT series_applied EQUAL 0)
         message(STATUS "Applied projectM patch ${patch}")
     endforeach()
 endif()
+file(LOCK ${PROJECTM_PATCH_LOCK} RELEASE)
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 set(ENABLE_PLAYLIST OFF CACHE BOOL "" FORCE)
