@@ -1,3 +1,13 @@
+# ProjectM TV 2.0.1
+
+## Fixed
+- **Auto-update finds new releases sooner.** With *Settings › Advanced › Auto-update* on, the app now checks GitHub at every launch and every 6 hours while it stays open. Before, it checked at most once a day and only when the app came back to the foreground, so a TV left running the visualizer never saw a new release. A failed check is retried at the next launch or 6 hours later.
+
+## Changed
+- The rendering engine is now a separate library module inside the app, so other apps can embed it. The visuals and behaviour are unchanged.
+
+---
+
 # ProjectM TV 2.0.0
 
 **Restored visuals, with a fix shared upstream.** A preset showing a tiny white mark while bass-heavy music played led to the discovery of three linked bugs in projectM's shader translator. This release fixes them in ProjectM TV. The changes, regression tests and reproducible presets have also been submitted to the projectM maintainers in [upstream PR #1031](https://github.com/projectM-visualizer/projectm/pull/1031), so other projectM integrations can benefit when the fix is adopted.

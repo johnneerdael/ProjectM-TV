@@ -1,0 +1,1 @@
+- Auto-update checks GitHub at every launch and every 6 hours while the app is open (was once a day, only when the app came back to the foreground).

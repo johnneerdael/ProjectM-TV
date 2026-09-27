@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Validated on the NVIDIA SHIELD TV (2 GB) and SHIELD TV Pro (3 GB). Not recommended for Android TV devices with 1 GB of memory.** This README describes the app as of version 2.0.0.
+**Validated on the NVIDIA SHIELD TV (2 GB) and SHIELD TV Pro (3 GB). Not recommended for Android TV devices with 1 GB of memory.** This README describes the app as of version 2.0.1.
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
