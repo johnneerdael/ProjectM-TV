@@ -4,6 +4,9 @@
     <dimen name="safe_horizontal">48dp</dimen>
     <dimen name="safe_vertical">27dp</dimen>
     <dimen name="panel_width">340dp</dimen>
+    <!-- Diagnostics sit left of the advanced panel: safe_horizontal + panel_width + 12dp gap -->
+    <dimen name="diagnostics_width">420dp</dimen>
+    <dimen name="diagnostics_margin_end">400dp</dimen>
     <dimen name="panel_radius">16dp</dimen>
     <dimen name="row_radius">8dp</dimen>
 </resources>

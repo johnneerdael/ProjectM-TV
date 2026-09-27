@@ -106,6 +106,7 @@ public class MainActivity extends Activity {
 
     private View mainMenu;
     private View advancedMenu;
+    private View diagnosticsPanel;
     private TextView presetName;
     private TextView presetMeta;
     private TextView statusLine;
@@ -308,6 +309,7 @@ public class MainActivity extends Activity {
     private void initMenus() {
         mainMenu = findViewById(R.id.overlay_menu);
         advancedMenu = findViewById(R.id.advanced_menu);
+        diagnosticsPanel = findViewById(R.id.diagnostics_panel);
         presetName = findViewById(R.id.preset_name);
         presetMeta = findViewById(R.id.preset_meta);
         statusLine = findViewById(R.id.status_line);
@@ -454,6 +456,7 @@ public class MainActivity extends Activity {
 
         mainMenu.setVisibility(View.GONE);
         advancedMenu.setVisibility(View.GONE);
+        diagnosticsPanel.setVisibility(View.GONE);
     }
 
     /**
@@ -515,6 +518,7 @@ public class MainActivity extends Activity {
 
         if (target == Menu.NONE) {
             slide(previous == Menu.ADVANCED ? advancedMenu : mainMenu, false);
+            if (previous == Menu.ADVANCED) fade(diagnosticsPanel, false);
             return;
         }
         fade(nowPlaying, false);
@@ -524,6 +528,7 @@ public class MainActivity extends Activity {
         if (target == Menu.MAIN) {
             if (previous == Menu.ADVANCED) {
                 slide(advancedMenu, false);
+                fade(diagnosticsPanel, false);
                 fade(mainMenu, true);
                 findViewById(R.id.row_advanced).requestFocus();
             } else {
@@ -534,6 +539,7 @@ public class MainActivity extends Activity {
         } else {
             fade(mainMenu, false);
             slide(advancedMenu, true);
+            fade(diagnosticsPanel, true);
             findViewById(R.id.row_detail).requestFocus();
         }
         handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);

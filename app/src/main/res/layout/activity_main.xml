@@ -286,28 +286,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/divider" />
-
-        <!-- Diagnostics -->
-        <TextView
-            style="@style/Overlay.Caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="4dp"
-            android:text="Diagnostics" />
-
-        <TextView
-            android:id="@+id/diagnostics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:fontFamily="monospace"
-            android:lineSpacingExtra="2dp"
-            android:textColor="@color/text_tertiary"
-            android:textSize="12sp" />
 
         <TextView
             style="@style/Overlay.Meta"
@@ -317,6 +296,38 @@
             android:layout_marginEnd="12dp"
             android:layout_marginTop="10dp"
             android:text="↑↓ select   ‹ › change   BACK return" />
+    </LinearLayout>
+
+    <!-- Diagnostics: next to the advanced panel (the main panel is hidden then), so every line fits -->
+    <LinearLayout
+        android:id="@+id/diagnostics_panel"
+        android:layout_width="@dimen/diagnostics_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/safe_vertical"
+        android:layout_marginEnd="@dimen/diagnostics_margin_end"
+        android:background="@drawable/bg_overlay_panel"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <!-- Diagnostics -->
+        <TextView
+            style="@style/Overlay.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="Diagnostics" />
+
+        <TextView
+            android:id="@+id/diagnostics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
     <!-- Now-playing pill: the music app's new track, for 20 s (needs notification-listener access);
