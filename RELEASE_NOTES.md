@@ -1,3 +1,33 @@
+# ProjectM TV 2.0.0
+
+**Restored visuals, with a fix shared upstream.** A preset showing a tiny white mark while bass-heavy music played led to the discovery of three linked bugs in projectM's shader translator. This release fixes them in ProjectM TV. The changes, regression tests and reproducible presets have also been submitted to the projectM maintainers in [upstream PR #1031](https://github.com/projectM-visualizer/projectm/pull/1031), so other projectM integrations can benefit when the fix is adopted.
+
+## Fixed
+
+- **Colours and geometry return in affected presets.** Floating-point remainder was converted to scalar integer maths, losing fractional colour values and vector components. Presets such as **ORB - Burnt Ice --- Isosceles edit** could show almost nothing despite receiving the music correctly.
+- **Correct shader calculation order.** A missing operator-precedence entry grouped calculations incorrectly. **martin - elusive impressions mix2** could turn into a flat pale field; **martin - city lights** used incorrect scrolling offsets.
+- **Preserved integer behaviour.** Integer counters keep integer remainder; floating-point and vector expressions retain their proper types and components.
+
+## Proof with real music
+
+The unchanged presets were tested on old and fixed engines using the same **1926 – Rainy Melody (Original Mix)** excerpt, **1:00–1:20**, with matched timing, seeds, audio and textures.
+
+- **Burnt Ice:** a tiny white central mark becomes a large coloured scene. Mean visible screen coverage increased from **0.00965% to 54.88%** in the measured window.
+- **Elusive Impressions:** detailed imagery replaces the largely flat pale output. Staged builds separate the precedence defect from the incorrect result type and integer division.
+- **City Lights:** the intended centred scrolling offset is restored. Its visual difference is subtler than the two cases above.
+
+![Burnt Ice: old engine on the left, fixed engine on the right](https://raw.githubusercontent.com/johnneerdael/projectm/repro/hlsl-modulo-comparisons/reproductions/hlsl-modulo/real-music/00-comparison.png)
+
+[Real-music before/after videos, original presets, generated shaders and staged-build results](https://github.com/johnneerdael/projectm/tree/repro/hlsl-modulo-comparisons/reproductions/hlsl-modulo/real-music) · [Ten affected presets: individual comparisons and downloadable originals](https://github.com/johnneerdael/projectm/tree/repro/hlsl-modulo-comparisons/reproductions/hlsl-modulo)
+
+Public comparison videos are muted; the music recording is not redistributed. Visual measurements were made on the macOS test engine at 256×144 and 30 fps, excluding the first four seconds. They demonstrate this rendering defect, not a general preset-quality score.
+
+## Validation
+
+Ten new translator regression tests cover floating-point/vector types, integer and unsigned operations, calculation order, and generated desktop/ES/legacy shaders. **157 upstream projectM tests and 107 tests in the pinned integration pass.** GPU colour checks pass, and all ten affected presets regained visible output in paired renders. The fix is included in both Android ARM builds.
+
+---
+
 # ProjectM TV 1.9.19
 
 ## Added
