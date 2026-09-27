@@ -32,6 +32,10 @@ public class VisualizerView extends GLSurfaceView {
         }
     };
 
+    public VisualizerView(Context context) {
+        this(context, null);
+    }
+
     public VisualizerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         // projectM 4 uses GLSL "300 es" shaders and links against GLESv3: ask for an ES 3 context.

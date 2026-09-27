@@ -59,10 +59,10 @@ Tags are off by one: tag `v1.6` = app `versionName "1.5"`, and tag `v1.7` = app 
 
 ## 5. Architecture
 
-The engine is the Android library module `core/` (package `nl.neerdael.projectm.core`): the native code, projectM build, presets, textures, `ProjectMJNI`, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile`, `DisplayInfo` and `PcmConverter`. The app module `app/` holds the UI, audio capture, track titles and the updater. Another app embeds the engine by including `core/` as a Gradle module (for example from a git submodule of this repository): it calls `ProjectMJNI.init` once at startup, shows a `VisualizerView` driven by a `VisualizerRenderer`, and feeds audio and settings through `ProjectMJNI`.
+The engine is the Android library module `core/` (package `nl.neerdael.projectm.core`): the native code, projectM build, presets, textures, `ProjectMJNI`, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile`, `DisplayInfo` and `PcmConverter`. The app module `app/` holds the UI, audio capture, track titles and the updater. Another app embeds the engine by including `core/` as a Gradle module (for example from a git submodule of this repository): it calls `ProjectMCore.init(context)` once at startup, shows a `VisualizerView` driven by a `VisualizerRenderer`, and feeds audio and settings through `ProjectMJNI`.
 
 ```
-ProjectMApplication ── ProjectMJNI.init(assets, skipList) ──► native worker thread
+ProjectMApplication ── ProjectMCore.init(context) ──────────► native worker thread
                                                              ├─ read presets.idx (prebuilt list; folder listing as fallback)
                                                              ├─ load skip list, shuffle
                                                              └─ prefetch next preset text
