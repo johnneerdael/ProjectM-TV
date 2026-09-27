@@ -112,12 +112,23 @@ final class Updater {
     /** One line for the diagnostics. */
     String statusLabel() { return status; }
 
-    /** At every resume: announces a downloaded update, and checks GitHub when a day has passed. */
+    /**
+     * At every resume: announces a downloaded update right away (no network needed; e.g. after
+     * Android restarted the app because the user allowed installs from it), and checks GitHub when a
+     * day has passed.
+     */
     void onResume() {
         if (!isEnabled()) return;
+        worker.post(announceDownloaded);
         worker.removeCallbacks(dueCheck);
         worker.postDelayed(dueCheck, CHECK_DELAY_MS);
     }
+
+    private final Runnable announceDownloaded = () -> {
+        if (!isEnabled()) return;
+        String ready = cleanUp(installedVersion(testVersion()));
+        if (ready != null) announce(ready);
+    };
 
     void setEnabled(boolean enabled) {
         if (viaFDroid) return;

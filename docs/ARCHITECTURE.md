@@ -217,3 +217,14 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 Only one source feeds the engine: the Visualizer is released while capture runs and recreated when it ends. The consent result can't be stored for later, so the app asks again at every launch. Declining it, or a device without the consent dialog, switches the setting back to *Standard*.
 
 **Limits.** Apps can opt out of capture (`setAllowedCapturePolicy`, or targeting Android 9 or lower without opting in), and audio that an app sends to the TV already Dolby-encoded is never mixed, so neither source can see it.
+
+## Auto-update
+
+`Updater` (off by default, *Settings › Advanced › Auto-update*) is the only code that opens a network connection. While it is on, it runs on its own background thread, 10 s after the app comes to the foreground and at most once a day (right away when switched on):
+
+1. `HEAD github.com/johnneerdael/ProjectM-TV/releases/latest`: GitHub answers with a redirect to `/releases/tag/v<version>`, so no API call (or rate limit) is needed.
+2. If that version is newer than the installed one (CI suffixes like `-ci.42` ignored), it downloads `releases/download/v<version>/projectM-TV-<version>.apk` into `no_backup/update-download` (excluded from backups).
+3. The APK must be this package, have a higher version code, and carry the same signing certificate as the installed app; otherwise it is deleted. Then it moves to `no_backup/updates`, and the activity shows the *Install* row and a notice.
+4. *Install* hands it to Android's installer with `ACTION_INSTALL_PACKAGE`: a `content://` URI from the non-exported `UpdateFileProvider` with a one-off read grant (Android 7+), or a world-readable file (Android 5-6, whose installer only reads files). Android asks to confirm, and on Android 8+ to allow installs from the app the first time.
+
+Downloads that are no longer newer than the installed version are deleted at the next check. When the app was installed by an F-Droid client (installer package), the setting shows *Via F-Droid* and nothing runs. F-Droid's inclusion policy allows downloading updates only with explicit user consent, which the off-by-default setting is. For testing, `adb shell setprop debug.projectmtv.update_from 1.9.17` makes the app treat that as the installed version (and accept the same version code).

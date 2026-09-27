@@ -1,0 +1,2 @@
+- Optional auto-update (Settings › Advanced, off by default): checks GitHub once a day, downloads new releases and offers to install them.
+- While it is off, the app makes no network connection.

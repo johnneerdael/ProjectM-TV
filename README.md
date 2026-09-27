@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Validated on the NVIDIA SHIELD TV (2 GB) and SHIELD TV Pro (3 GB). Not recommended for Android TV devices with 1 GB of memory.** This README describes the app as of version 1.9.18.
+**Validated on the NVIDIA SHIELD TV (2 GB) and SHIELD TV Pro (3 GB). Not recommended for Android TV devices with 1 GB of memory.** This README describes the app as of version 1.9.19.
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
@@ -29,7 +29,8 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 - **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), reused picture buffers, fewer redundant GL calls, a faster shader parser
 - **Memory-aware**: keeps the music app alive on TVs with little memory
 - **Skips presets that stay black**
-- **Private by design**: no internet permission; audio is analysed in memory only
+- **Optional auto-update**: downloads new releases in the background and offers to install them (off by default)
+- **Private by design**: no network access unless you switch on auto-update; audio is analysed in memory only
 - **Remote-only control** with a settings panel and live diagnostics
 
 ## What it does
@@ -41,6 +42,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 - **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution to hold the frame rate, without interrupting the preset. The TV's scaler upscales to the panel.
 - **Protects the music app from being closed.** On TVs with little memory, Android closes other apps when projectM uses too much. The app caps its resolution by installed memory (on a 2 GB SHIELD: 1260p), and in *Auto* resolution it lowers the resolution when Android reports memory pressure.
 - **Starts quickly.** About 3–6 seconds from launch to the first preset on the SHIELD.
+- **Updates itself, if you want.** With *Settings › Advanced › Auto-update* on, the app checks GitHub for a new release once a day, downloads it in the background, and offers to install it: a notice in the lower left, and an *Install* row at the top of the settings panel. Android's installer asks you to confirm. The first time, it asks you to allow installs from ProjectM TV instead; Android then restarts the app, and you select *Install* once more. Off by default; apps installed from F-Droid are updated by F-Droid.
 - **Shows its own measurements.** *Settings › Advanced › Diagnostics* shows the render size, frame rate, audio source and audio level.
 
 ## What it does not do, and known limits
@@ -80,13 +82,15 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 
 ## Permissions
 
-The app has no internet permission: nothing it hears or reads can leave the TV. Audio is analysed in memory for the visuals and never recorded or stored.
+The app opens no network connection unless you switch on *Auto-update*, and then only to GitHub, to check for and download a new release. Nothing it hears or reads leaves the TV: audio is analysed in memory for the visuals and never recorded or stored, and track titles are only shown.
 
 | Permission | Why | When it is asked |
 |---|---|---|
 | Record audio (`RECORD_AUDIO`) | Android's audio visualizer and playback capture both count as recording. The app only receives the sound other apps play, to animate the presets; the microphone is not used. | At first launch |
 | Change audio settings (`MODIFY_AUDIO_SETTINGS`) | Required by Android to attach a visualizer to the TV's main audio output (session 0), which the app listens to until it has found the music app's own audio session. | Granted at install |
 | Foreground service (`FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PROJECTION`) | Only for the *Media capture* audio source (Android 10+): Android runs playback capture in a foreground service. | Granted at install; *Media capture* also shows Android's screen-casting consent each time it starts |
+| Internet (`INTERNET`) | Only for *Auto-update* (off by default): once a day, the app asks GitHub for the newest release and downloads it. While *Auto-update* is off, the app makes no connection. Android grants this permission at install and has no switch for it, which is why the app's own setting controls it. | Granted at install |
+| Install apps (`REQUEST_INSTALL_PACKAGES`) | Only for *Auto-update*: hands a downloaded update to Android's installer, which asks you to confirm. | The first time you install an update, Android asks you to allow installs from ProjectM TV |
 | Notification access (special access) | Only to read which track the music app is playing (its media session), for the track titles. The app reads no notifications. | You switch it on in the TV's settings (*Apps › Special app access › Notification access*); the app explains where once, at the first launch. Optional: without it no titles are shown |
 
 ## Install
@@ -106,7 +110,7 @@ adb install -r projectM-TV.apk
 
 **Then:** start the music in your music app and open ProjectM TV. Android asks for permission to record audio; the app needs it to receive the music (see [Permissions](#permissions)). It then explains how to allow notification access, which lets it show track titles.
 
-From 1.9.7 on, updates install over the previous version and keep your settings. Two one-time steps if you used an earlier version:
+To get new versions automatically, switch on *Settings › Advanced › Auto-update* (from 1.9.19). From 1.9.7 on, updates install over the previous version and keep your settings. Two one-time steps if you used an earlier version:
 - **1.9.7 changed the app ID** to `nl.neerdael.projectmtv`. It installs as a new app next to the old one; uninstall the old *ProjectM Visualizer* (`com.example.projectm.visualizer`) afterwards.
 - Versions up to 1.9.5 were each signed with a different temporary key; 1.9.6 and later use one permanent key.
 
@@ -153,8 +157,9 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Audio source | *Standard* or *Media capture* (Android 10+), see *Audio* above | Standard |
 | Track titles | *On* when notification access is granted; select it for how to allow it (see [Track titles](#track-titles)) | – |
+| Auto-update | Checks GitHub for a new release once a day and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
-| Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track titles (access), device tier | – |
+| Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track titles (access), update status, device tier | – |
 
 ## Troubleshooting
 

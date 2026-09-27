@@ -10,6 +10,7 @@ It visualizes the music another app plays on the TV, such as SoundCloud. It is n
 <li>Finds the audio of the playing app about 1 second after launch, even where Android's standard visualizer hears nothing (e.g. NVIDIA SHIELD with Dolby output)</li>
 <li>No freezes at preset switches: upcoming presets are prepared in the background</li>
 <li>Replaces presets that stay black while music plays</li>
+<li>Optional auto-update from the GitHub releases (off by default; the only network access). Not used when installed from F-Droid</li>
 <li>Settings panel with transition style, detail, frame rate, audio source and live diagnostics</li>
 </ul>
 
