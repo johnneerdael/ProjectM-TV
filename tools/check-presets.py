@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Static checks of the bundled MilkDrop presets (app/src/main/assets/presets).
+"""Static checks of the bundled MilkDrop presets (core/src/main/assets/presets).
 
 A preset fails when it:
   * cannot react to music: no audio variable (bass, mid, treb, vol, *_att) in any equation or
     shader, the main waveform hidden, and no custom waveform enabled;
   * uses a texture that is excluded (text, logos or photos of people), see EXCLUDED_TEXTURES;
-  * uses an image texture that is not bundled in app/src/main/assets/textures.
+  * uses an image texture that is not bundled in core/src/main/assets/textures.
 
 Usage:
   tools/check-presets.py            report failing presets, exit 1 if any (used by CI)
@@ -16,8 +16,8 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PRESETS = os.path.join(ROOT, "app/src/main/assets/presets")
-TEXTURES = os.path.join(ROOT, "app/src/main/assets/textures")
+PRESETS = os.path.join(ROOT, "core/src/main/assets/presets")
+TEXTURES = os.path.join(ROOT, "core/src/main/assets/textures")
 
 # Textures that show text, logos or people; presets using them are not bundled.
 EXCLUDED_TEXTURES = {"suff5", "prayerwheel", "winamp_woofer", "vitriol", "kaite", "portal1", "portal2"}

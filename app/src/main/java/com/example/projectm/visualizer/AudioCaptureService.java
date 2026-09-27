@@ -18,6 +18,9 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
+import nl.neerdael.projectm.core.PcmConverter;
+import nl.neerdael.projectm.core.ProjectMJNI;
+
 /**
  * "Media capture" audio source (Android 10+): records what media apps play and feeds it to the
  * engine. Needed where the Visualizer on the output mix hears nothing, e.g. a SHIELD with Dolby

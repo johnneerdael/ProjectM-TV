@@ -18,7 +18,7 @@ adb -s <tv>:5555 pull /data/local/tmp/perf.data
 Symbolize with the unstripped library of the same build:
 
 ```sh
-mkdir -p symdir && cp app/build/intermediates/cxx/RelWithDebInfo/*/obj/arm64-v8a/libprojectmtv.so symdir/
+mkdir -p symdir && cp core/build/intermediates/cxx/RelWithDebInfo/*/obj/arm64-v8a/libprojectmtv.so symdir/
 $NDK/simpleperf/bin/darwin/x86_64/simpleperf report -i perf.data --symdir symdir --sort dso,symbol
 $NDK/simpleperf/bin/darwin/x86_64/simpleperf report-sample -i perf.data --symdir symdir --show-callchain > samples.txt
 ```

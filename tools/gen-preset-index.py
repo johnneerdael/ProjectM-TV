@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generates app/src/main/assets/presets.idx: the sorted list of bundled presets with a memory
+"""Generates core/src/main/assets/presets.idx: the sorted list of bundled presets with a memory
 weight per preset.
 
 The app reads this one small file at startup instead of listing ~10k assets, which is slow and
@@ -24,9 +24,9 @@ import struct
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PRESETS = os.path.join(ROOT, "app/src/main/assets/presets")
-TEXTURES = os.path.join(ROOT, "app/src/main/assets/textures")
-INDEX = os.path.join(ROOT, "app/src/main/assets/presets.idx")
+PRESETS = os.path.join(ROOT, "core/src/main/assets/presets")
+TEXTURES = os.path.join(ROOT, "core/src/main/assets/textures")
+INDEX = os.path.join(ROOT, "core/src/main/assets/presets.idx")
 
 COMPLEX_SHADER_BYTES = 4200   # top 1% of warp+comp shader code
 COMPLEX_SHADER_LOOPS = 2

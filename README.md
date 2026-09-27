@@ -197,7 +197,7 @@ projectM is built from source with the app. The git submodule `third_party/proje
 ### Tests
 
 ```bash
-app/src/test/native/run_native_tests.sh   # native engine against fakes (ASan/UBSan)
+core/src/test/native/run_native_tests.sh   # native engine against fakes (ASan/UBSan)
 ./gradlew testReleaseUnitTest             # JVM tests
 ```
 

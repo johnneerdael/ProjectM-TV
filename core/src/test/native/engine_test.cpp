@@ -1,4 +1,4 @@
-// Host test harness for app/src/main/cpp/native-lib.cpp. Run via run_native_tests.sh.
+// Host test harness for core/src/main/cpp/native-lib.cpp. Run via run_native_tests.sh.
 // Compiles native-lib.cpp against fakes of projectM, AAssetManager and GL.
 #include <cstring>
 #include <cstdarg>
@@ -158,7 +158,7 @@ void projectm_free_string(const char* s) { free((void*)s); }
 #include "native-lib.cpp"
 
 #define CHECK(c) do { if (!(c)) { fprintf(stderr, "FAIL %s:%d %s\n", __FILE__, __LINE__, #c); exit(1); } else printf("  ok: %s\n", #c); } while (0)
-static void frame() { Java_com_example_projectm_visualizer_ProjectMJNI_onDrawFrame(nullptr, nullptr); }
+static void frame() { Java_nl_neerdael_projectm_core_ProjectMJNI_onDrawFrame(nullptr, nullptr); }
 static void feedAudio(uint8_t amp) { std::lock_guard<std::mutex> l(g_inputs.pcmMutex); for (int i = 0; i < 1024; ++i) g_inputs.pcm.push_back(128 + ((i & 1) ? amp : -amp)); g_inputs.audioLevel = amp / 128.f; g_inputs.audioLevelTime = NowSeconds(); }
 static std::string current() { std::lock_guard<std::mutex> l(g_published.mutex); return g_published.currentPreset; }
 
@@ -190,8 +190,8 @@ int main(int argc, char** argv) {
   { FILE* f = fopen((texdir + "/clouds.jpg").c_str(), "rb"); CHECK(f != nullptr); if (f) fclose(f); }
 
   printf("first frame loads a preset (hard cut, no wait)\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
-  Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720);
   frame();
   CHECK(!current().empty());
   CHECK(current() != "preskipped.milk");
@@ -200,19 +200,19 @@ int main(int argc, char** argv) {
   CHECK(!g_locked);
 
   printf("settings from any thread\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_setAutoChange(nullptr, nullptr, false); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setAutoChange(nullptr, nullptr, false); frame();
   CHECK(g_locked);
-  Java_com_example_projectm_visualizer_ProjectMJNI_setAutoChange(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setAutoChange(nullptr, nullptr, true); frame();
 
   printf("commands\n");
   std::string a = current();
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string b = current(); CHECK(b != a);
-  Java_com_example_projectm_visualizer_ProjectMJNI_randomPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_randomPreset(nullptr, nullptr, true); frame();
   std::string c = current(); CHECK(c != b);
-  Java_com_example_projectm_visualizer_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
   CHECK(current() == b);
-  Java_com_example_projectm_visualizer_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
   CHECK(current() == a);
 
   printf("projectM-requested auto switch (smooth), and forced hard cut before a resize\n");
@@ -220,7 +220,7 @@ int main(int argc, char** argv) {
   size_t loads = g_loaded.size(); g_reqCb(false, nullptr); frame();
   CHECK(g_loaded.size() == loads + 1);
   CHECK(g_lastSmooth);
-  Java_com_example_projectm_visualizer_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
   loads = g_loaded.size(); g_reqCb(false, nullptr); frame();
   CHECK(g_loaded.size() == loads + 1 && !g_lastSmooth);
   g_reqCb(false, nullptr); frame();
@@ -228,13 +228,13 @@ int main(int argc, char** argv) {
 
   printf("mesh size only re-applied when it changes\n");
   int meshCalls = g_meshCalls;
-  Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 5); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 5); frame();
   CHECK(g_meshCalls == meshCalls);
-  Java_com_example_projectm_visualizer_ProjectMJNI_setMeshSize(nullptr, nullptr, 64, 48); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setMeshSize(nullptr, nullptr, 64, 48); frame();
   CHECK(g_meshCalls == meshCalls + 1);
 
   printf("broken presets are skipped and persisted, playback continues\n");
-  for (int i = 0; i < 40; ++i) { Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame(); }
+  for (int i = 0; i < 40; ++i) { Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame(); }
   CHECK(g_library.SkippedCount() == 3);    // pre-skipped + 2 broken
   CHECK(current().find("broken") == std::string::npos);
   { FILE* f = fopen(skip.c_str(), "r"); char line[256]; int n = 0; while (fgets(line, sizeof line, f)) ++n; fclose(f); CHECK(n == 3); }
@@ -242,7 +242,7 @@ int main(int argc, char** argv) {
   printf("next never shows the preset on screen again, also across reshuffles\n");
   { std::string before = current(); int repeats = 0;
     for (int i = 0; i < 200; ++i) {  // ~18 passes through the shuffled order
-      Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+      Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
       if (current() == before) ++repeats;
       before = current();
     }
@@ -253,15 +253,15 @@ int main(int argc, char** argv) {
 
   printf("blank-preset skipping is off by default: a black preset with music stays\n");
   g_pixel = 5; int skippedAtStart = g_library.SkippedCount();
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string unproven = current();
   for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() == unproven && g_library.SkippedCount() == skippedAtStart);
-  Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
 
   printf("dark preset during silence is NOT skipped\n");
   g_pixel = 0; int skippedBefore = g_library.SkippedCount();
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string dark = current();
   g_inputs.audioLevel = 0.f;
   for (int i = 0; i < 400; ++i) { frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }  // 8s
@@ -269,21 +269,21 @@ int main(int argc, char** argv) {
 
   printf("visible preset with music is NOT skipped\n");
   g_pixel = 200;
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string bright = current();
   for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(g_library.SkippedCount() == skippedBefore && current() == bright);
 
   printf("black preset with music is replaced at once, but only skipped for good the 2nd time\n");
   g_pixel = 5;
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string black = current();
   for (int i = 0; i < 400 && current() == black; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() != black);
   CHECK(g_library.SkippedCount() == skippedBefore);  // first strike: moved on, not listed
   { FILE* f = fopen((skip + ".blank").c_str(), "r"); CHECK(f != nullptr); char line[256] = {0}; CHECK(fgets(line, sizeof line, f) != nullptr); fclose(f);
     line[strcspn(line, "\r\n")] = 0; CHECK(black == line); }  // strike persisted
-  Java_com_example_projectm_visualizer_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_previousPreset(nullptr, nullptr, true); frame();
   CHECK(current() == black);  // shown again
   for (int i = 0; i < 400 && current() == black; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() != black);
@@ -291,21 +291,21 @@ int main(int argc, char** argv) {
 
   printf("skip current preset (too slow) and blank-detection toggle\n");
   g_pixel = 200; int beforeSkip = g_library.SkippedCount(); std::string slow = current();
-  Java_com_example_projectm_visualizer_ProjectMJNI_skipCurrentPreset(nullptr, nullptr); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_skipCurrentPreset(nullptr, nullptr); frame();
   CHECK(current() != slow && g_library.SkippedCount() == beforeSkip + 1);
-  Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, false);
-  g_pixel = 5; Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setBlankDetection(nullptr, nullptr, false);
+  g_pixel = 5; Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   std::string dim = current();
   for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   CHECK(current() == dim && g_library.SkippedCount() == beforeSkip + 1);
-  Java_com_example_projectm_visualizer_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setBlankDetection(nullptr, nullptr, true);
 
   printf("everything black (rendering fault): after 3 black presets in a row nothing more is struck\n");
   g_pixel = 200;  // a visible preset resets the run of black ones
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   for (int i = 0; i < 200; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
   g_pixel = 5; int skippedBeforeRun = g_library.SkippedCount();
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   int changes = 0; std::string onScreen = current();
   for (int i = 0; i < 2000 && changes < 4; ++i) {
     feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -315,14 +315,14 @@ int main(int argc, char** argv) {
   CHECK(g_library.SkippedCount() <= skippedBeforeRun + 3);
 
   printf("reset skip list\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_resetSkippedPresets(nullptr, nullptr);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_resetSkippedPresets(nullptr, nullptr);
   CHECK(g_library.SkippedCount() == 0 && g_library.ActiveCount() == 14);
   { FILE* f = fopen((skip + ".blank").c_str(), "r"); CHECK(f != nullptr); CHECK(fgetc(f) == EOF); fclose(f); }  // strikes cleared
 
   printf("context loss: new instance resumes the same preset, textures re-applied\n");
   g_pixel = 200; std::string shown = current();
-  Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
-  Java_com_example_projectm_visualizer_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720); frame();
   CHECK(current() == shown);
   CHECK(g_texturePathCalls.size() == 2);
 
@@ -332,11 +332,11 @@ int main(int argc, char** argv) {
   CHECK(g_fences <= 1);                      // at most one read in flight, fences are deleted
 
   auto settle = [](int ms) { for (int i = 0; i < ms / 2; ++i) { frame(); std::this_thread::sleep_for(std::chrono::milliseconds(2)); } };
-  Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 5); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 5); frame();
 
   printf("lightweight: outgoing frame captured, projectM hard-cuts, overlay fades for min(transition, 3 s)\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 1, false);
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setTransitionMode(nullptr, nullptr, 1, false);
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
   int captures = g_captures, starts = g_fadeStarts; loads = g_loaded.size();
   g_requestInRender = true; frame();          // request fires during this frame's render
   CHECK(g_captures == captures + 1 && g_loaded.size() == loads);  // no switch yet
@@ -346,13 +346,13 @@ int main(int argc, char** argv) {
   int draws = g_fadeDraws; frame(); CHECK(g_fadeDraws == draws + 1);
 
   printf("a remote-control switch ends the fade immediately\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   CHECK(!g_engine.fade.Active());
 
   printf("beat-triggered hard cuts and forced hard cuts are never faded\n");
   captures = g_captures; starts = g_fadeStarts;
   g_reqCb(true, nullptr); frame(); frame();
-  Java_com_example_projectm_visualizer_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setForceHardCut(nullptr, nullptr, true);
   g_requestInRender = true; frame(); frame();
   CHECK(g_captures == captures && g_fadeStarts == starts && !g_lastSmooth);
 
@@ -363,8 +363,8 @@ int main(int argc, char** argv) {
   g_captureOk = true;
 
   printf("classic mode: projectM soft cut, no capture\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 2, true);
-  CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setTransitionMode(nullptr, nullptr, 2, true);
+  CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
   captures = g_captures; loads = g_loaded.size();
   g_requestInRender = true; frame(); frame();
   CHECK(g_captures == captures && g_loaded.size() == loads + 1 && g_lastSmooth);
@@ -374,21 +374,21 @@ int main(int argc, char** argv) {
 
   // Waits until the running transition has ended and the render size is back to full.
   auto finishTransition = [&](int before) {
-    for (int i = 0; i < 1500 && Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == before; ++i) frame();
+    for (int i = 0; i < 1500 && Java_nl_neerdael_projectm_core_ProjectMJNI_getTransitionCounter(nullptr, nullptr) == before; ++i) frame();
     settle(400); };
   // Starts an automatic blend; returns the transition counter before it.
   auto startBlend = [&]() {
-    int before = Java_com_example_projectm_visualizer_ProjectMJNI_getTransitionCounter(nullptr, nullptr);
+    int before = Java_nl_neerdael_projectm_core_ProjectMJNI_getTransitionCounter(nullptr, nullptr);
     g_requestInRender = true; frame(); frame();
     return before; };
 
   printf("auto: blends render at 75%% into the off-screen target, stretched onto the surface\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
-  Java_com_example_projectm_visualizer_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 1);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 1);
   g_renderSleepMs = 1; g_renderSleepMsSmooth = 0;
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // hard cut: full size
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // hard cut: full size
   settle(1500);
-  CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
   CHECK(g_windowW == 1280 && g_windowH == 720);
   int fboFrames = g_fboFrames, blits = g_blits;
   int transitions = startBlend();
@@ -397,7 +397,7 @@ int main(int argc, char** argv) {
   CHECK(g_blitSrcW == 960 && g_blitSrcH == 540 && g_blitDstW == 1280 && g_blitDstH == 720);
   finishTransition(transitions);
   CHECK(g_windowW == 1280 && g_windowH == 720);  // back to full size after the blend
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 75);
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 75);
   fboFrames = g_fboFrames; frame();
   CHECK(g_fboFrames == fboFrames);  // full size renders straight to the surface
 
@@ -409,32 +409,32 @@ int main(int argc, char** argv) {
   for (int i = 0; i < 200 && g_windowW == 960; ++i) frame();
   CHECK(g_windowW == 768 && g_windowH == 432);  // 60%, during the same blend
   finishTransition(transitions);
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 60);
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // fast frames before it
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 60);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();  // fast frames before it
   settle(1500);
   transitions = startBlend();
   CHECK(g_windowW == 768);  // the next blend starts at the lower size
   finishTransition(transitions);
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 50);
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 50);
   g_renderSleepMs = g_renderSleepMsSmooth = 0;
 
   printf("auto: blends with frames to spare raise the resolution again (low-end devices start at 60%%)\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, true);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, true);
   g_renderSleepMs = g_renderSleepMsSmooth = 2;
   settle(1500);
   transitions = startBlend();
   CHECK(g_windowW == 768);
   finishTransition(transitions);
   for (int i = 0; i < 2; ++i) { settle(1500); finishTransition(startBlend()); }
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 75);
-  CHECK(!Java_com_example_projectm_visualizer_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getLastTransitionFps(nullptr, nullptr) > 0.f);
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 75);
+  CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isLightweightTransition(nullptr, nullptr));
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getLastTransitionFps(nullptr, nullptr) > 0.f);
   g_renderSleepMs = g_renderSleepMsSmooth = 0;
 
   printf("auto: a slow blend that is CPU-bound keeps its resolution (a lower one would not help)\n");
-  Java_com_example_projectm_visualizer_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
   g_renderSleepMs = 1; g_renderSleepMsSmooth = 0; g_renderSpinMsSmooth = 15;
-  Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
   settle(1500);
   transitions = startBlend();
   CHECK(g_windowW == 960);
@@ -442,7 +442,7 @@ int main(int argc, char** argv) {
   CHECK(g_windowW == 960);  // not lowered during the blend
   CHECK(g_outgoingDivisor == 2);  // instead the outgoing preset renders every 2nd frame
   finishTransition(transitions);
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 100);  // sharper instead
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 100);  // sharper instead
   g_renderSleepMs = g_renderSpinMsSmooth = 0;
 
   printf("the next preset's shaders are compiled in the background\n");
@@ -453,7 +453,7 @@ int main(int argc, char** argv) {
   { std::vector<std::string> list = g_prewarmLists.back();
     CHECK(list.size() == 3 && list[1] == g_library.PeekRandom() && list[2] == g_library.PeekPrevious());
     std::string before = current(), prepared = list[1];
-    Java_com_example_projectm_visualizer_ProjectMJNI_randomPreset(nullptr, nullptr, true); frame();
+    Java_nl_neerdael_projectm_core_ProjectMJNI_randomPreset(nullptr, nullptr, true); frame();
     CHECK(current() == prepared && current() != before);
     CHECK(g_library.PeekPrevious() == before);  // Left would go back to it: prepared as well
     CHECK(g_prewarmLists.back()[1] == g_library.PeekRandom() && g_prewarmLists.back()[1] != prepared); }
@@ -465,13 +465,13 @@ int main(int argc, char** argv) {
         if (it->rfind("OUTPUT preset='" + preset + "'", 0) == 0) return *it;
       return std::string(); };
     g_pixel = 230; g_noise = 3;  // near-white with faint, unchanging texture
-    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
     std::string white = current();
     int skipped = g_library.SkippedCount();  // after the switch: it may skip a broken preset on the way
     for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
     CHECK(current() == white && g_library.SkippedCount() == skipped);
     g_pixel = 60; g_noise = 120;  // varied picture (luma range > 12) that does not move
-    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
     std::string frozen = current();
     skipped = g_library.SkippedCount();
     std::string whiteLine = outputLine(white);
@@ -481,7 +481,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < 400; ++i) { feedAudio(60); frame(); std::this_thread::sleep_for(std::chrono::milliseconds(20)); }
     CHECK(current() == frozen && g_library.SkippedCount() == skipped);
     g_noise = 0; g_pixel = 200;
-    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
     std::string frozenLine = outputLine(frozen);
     printf("    %s\n", frozenLine.c_str());
     CHECK(frozenLine.find("flat=0/") != std::string::npos && frozenLine.find("still=0/") == std::string::npos);
@@ -490,7 +490,7 @@ int main(int argc, char** argv) {
 
   printf("LOAD lines carry size, weight, shader size/loops and the memory taken\n");
   {
-    Java_com_example_projectm_visualizer_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
+    Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); frame();
     std::string load;
     for (auto it = g_logLines.rbegin(); it != g_logLines.rend() && load.empty(); ++it)
       if (it->rfind("LOAD preset=", 0) == 0) load = *it;
@@ -510,8 +510,8 @@ int main(int argc, char** argv) {
 
   printf("audio level getter\n");
   feedAudio(60);
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getAudioLevel(nullptr, nullptr) > 0.4f);
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getAudioLevel(nullptr, nullptr) > 0.4f);
   g_inputs.audioLevelTime = NowSeconds() - 5;
-  CHECK(Java_com_example_projectm_visualizer_ProjectMJNI_getAudioLevel(nullptr, nullptr) == 0.f);
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getAudioLevel(nullptr, nullptr) == 0.f);
   printf("ALL TESTS PASSED\n");
 }

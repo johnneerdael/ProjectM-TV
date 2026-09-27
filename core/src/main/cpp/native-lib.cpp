@@ -1481,7 +1481,7 @@ void DestroyEngineLocked(bool contextAlive) {
 
 }  // namespace
 
-#define JNI_FN(name) Java_com_example_projectm_visualizer_ProjectMJNI_##name
+#define JNI_FN(name) Java_nl_neerdael_projectm_core_ProjectMJNI_##name
 
 extern "C" {
 

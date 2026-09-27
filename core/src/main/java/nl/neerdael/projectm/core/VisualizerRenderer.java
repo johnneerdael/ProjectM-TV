@@ -1,4 +1,4 @@
-package com.example.projectm.visualizer;
+package nl.neerdael.projectm.core;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;

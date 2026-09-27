@@ -53,11 +53,13 @@ Tags are off by one: tag `v1.6` = app `versionName "1.5"`, and tag `v1.7` = app 
 | I4 | `install.sh` installed the debug APK (debuggable, slower ART); the JNI layer built at `-O0` in debug | Release build signed with the debug key; `install.sh` prefers it; JNI always `-O2` |
 | I5 | `proguard-rules.pro` referenced but missing | Reference removed (minify is off) |
 | I6 | projectM playlist library shipped but not needed with the new engine | Deleted (`.so` files and headers) |
-| I7 | No automated tests | `app/src/test/native/run_native_tests.sh` |
+| I7 | No automated tests | `core/src/test/native/run_native_tests.sh` |
 | I8 | Gradle `9.0-milestone-1` (pre-release) with AGP 8.12 | **Not changed.** Moving to a stable Gradle release is recommended |
 | I9 | `local.properties` (machine path) and `.idea/` tracked | **Not changed.** Untracking would delete them from your checkout on pull |
 
 ## 5. Architecture
+
+The engine is the Android library module `core/` (package `nl.neerdael.projectm.core`): the native code, projectM build, presets, textures, `ProjectMJNI`, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile`, `DisplayInfo` and `PcmConverter`. The app module `app/` holds the UI, audio capture, track titles and the updater. Another app embeds the engine by including `core/` as a Gradle module (for example from a git submodule of this repository): it calls `ProjectMJNI.init` once at startup, shows a `VisualizerView` driven by a `VisualizerRenderer`, and feeds audio and settings through `ProjectMJNI`.
 
 ```
 ProjectMApplication ── ProjectMJNI.init(assets, skipList) ──► native worker thread
@@ -96,7 +98,7 @@ The frame buffers of a preset depend only on the resolution. What differs per pr
 The weight (extra MB) is the second column of `presets.idx`: 7,799 presets 0 MB, 1,419 presets 1–4 MB, 388 presets 5 MB or more. 1.9.1 only **measures**. Every `LOAD` log line records the preset's weight, its shader size and loop count, how much the system's available memory dropped, and how much the process grew during the load. The next runs show which presets cause memory peaks at a switch, and whether shaders or images drive them. The RAM-based resolution cap stays in place as a temporary measure until then.
 
 ### Preset index
-`tools/gen-preset-index.py` writes `app/src/main/assets/presets.idx`: the sorted list of bundled presets, each with a memory weight (see *Preset memory*). CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before.
+`tools/gen-preset-index.py` writes `core/src/main/assets/presets.idx`: the sorted list of bundled presets, each with a memory weight (see *Preset memory*). CI fails if it is out of date. The worker reads that one small asset. Listing ~10k assets with `AAssetManager_openDir` took 8.4 s on an NVIDIA SHIELD and held the asset-manager lock that UI inflation also needs, so cold start took 10.4 s. Without the index file, the folder is listed as before.
 
 ### Transitions
 projectM's soft cut renders the outgoing and incoming preset for the whole transition, which doubles CPU (per-vertex equations) and GPU cost and keeps two presets' frame buffers. On a SHIELD at 1260p, 5-second FPS averages fell to 19–36 around every switch, even at 720p.

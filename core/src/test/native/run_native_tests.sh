@@ -1,11 +1,11 @@
 #!/bin/bash
-# Host-side tests for the native engine (app/src/main/cpp/native-lib.cpp).
+# Host-side tests for the native engine (core/src/main/cpp/native-lib.cpp).
 # 1. engine_test: the engine against fakes of projectM, AAssetManager and GLES. Covers preset
 #    indexing (presets.idx and folder fallback), commands, skip list, transitions (lightweight,
 #    classic, auto), output measurement, black-preset skipping and context loss.
 # 2. fade_gl_test: the lightweight-transition overlay on a real GLES3 driver (skipped without one).
 # Requirements: g++ (C++17) and a JDK (for jni.h); for 2, EGL/GLES (Mesa) development files.
-# Usage: app/src/test/native/run_native_tests.sh
+# Usage: core/src/test/native/run_native_tests.sh
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$HERE/../../../.." && pwd)"
@@ -56,7 +56,7 @@ SAN="-fsanitize=address,undefined"
 [ "${NO_SANITIZERS:-0}" = "1" ] && SAN=""
 g++ -std=c++17 -O1 -g $SAN -pthread \
     -I"$HERE/stubs" -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/$JNI_OS" \
-    -I"$ROOT/third_party/projectm/src/api/include" -I"$ROOT/app/src/main/cpp" \
+    -I"$ROOT/third_party/projectm/src/api/include" -I"$ROOT/core/src/main/cpp" \
     "$HERE/engine_test.cpp" -o "$WORK/engine_test"
 if ! ASAN_OPTIONS=detect_leaks=0 "$WORK/engine_test" "$WORK/assets" "$WORK/noindex" 2>"$WORK/engine.log"; then
     echo "--- engine log (last 80 lines)"
@@ -75,6 +75,6 @@ if [ -z "$GL_LIBS" ]; then
 fi
 # The Android stubs come last so the real GLES3 headers win.
 # shellcheck disable=SC2086
-g++ -std=c++17 -O1 -g $SAN $GL_CFLAGS -idirafter "$HERE/stubs" -I"$ROOT/app/src/main/cpp" \
-    "$HERE/fade_gl_test.cpp" "$ROOT/app/src/main/cpp/snapshot_fade.cpp" $GL_LIBS -o "$WORK/fade_gl_test"
+g++ -std=c++17 -O1 -g $SAN $GL_CFLAGS -idirafter "$HERE/stubs" -I"$ROOT/core/src/main/cpp" \
+    "$HERE/fade_gl_test.cpp" "$ROOT/core/src/main/cpp/snapshot_fade.cpp" $GL_LIBS -o "$WORK/fade_gl_test"
 ASAN_OPTIONS=detect_leaks=0 "$WORK/fade_gl_test"

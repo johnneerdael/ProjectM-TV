@@ -1,4 +1,4 @@
-// Runs app/src/main/cpp/snapshot_fade.cpp against a real OpenGL ES 3 driver (Mesa llvmpipe on a
+// Runs core/src/main/cpp/snapshot_fade.cpp against a real OpenGL ES 3 driver (Mesa llvmpipe on a
 // headless EGL pbuffer). Checks the captured frame, the fade curve, the end of the fade, and that
 // the GL state projectM relies on is restored. Run via run_native_tests.sh.
 #include <EGL/egl.h>

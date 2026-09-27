@@ -25,6 +25,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import nl.neerdael.projectm.core.DeviceProfile;
+import nl.neerdael.projectm.core.DisplayInfo;
+import nl.neerdael.projectm.core.ProjectMJNI;
+import nl.neerdael.projectm.core.QualityController;
+import nl.neerdael.projectm.core.VisualizerRenderer;
+import nl.neerdael.projectm.core.VisualizerView;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;

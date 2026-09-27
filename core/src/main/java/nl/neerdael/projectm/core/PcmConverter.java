@@ -1,4 +1,4 @@
-package com.example.projectm.visualizer;
+package nl.neerdael.projectm.core;
 
 /**
  * Turns captured 16-bit PCM into the waveform the engine takes from the Visualizer: 8-bit unsigned
@@ -6,7 +6,7 @@ package com.example.projectm.visualizer;
  * channels and scales every buffer so its peak reaches 0.99 of full range (EffectVisualizer.cpp).
  * Presets then react the same to either audio source.
  */
-final class PcmConverter {
+public final class PcmConverter {
     private PcmConverter() {}
 
     /**
@@ -14,7 +14,7 @@ final class PcmConverter {
      * @param out receives one byte per frame
      * @return number of frames written
      */
-    static int toUnsignedMono8(short[] in, int samples, int channels, byte[] out) {
+    public static int toUnsignedMono8(short[] in, int samples, int channels, byte[] out) {
         int frames = Math.min(samples / channels, out.length);
         int peak = 0;
         for (int f = 0; f < frames; f++) peak = Math.max(peak, Math.abs(sum(in, f, channels)));

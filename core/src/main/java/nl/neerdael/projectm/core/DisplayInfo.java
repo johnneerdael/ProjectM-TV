@@ -1,4 +1,4 @@
-package com.example.projectm.visualizer;
+package nl.neerdael.projectm.core;
 
 import android.app.UiModeManager;
 import android.content.Context;

@@ -3,6 +3,8 @@ package com.example.projectm.visualizer;
 import android.app.Application;
 import android.util.Log;
 
+import nl.neerdael.projectm.core.ProjectMJNI;
+
 import java.io.File;
 
 public class ProjectMApplication extends Application {
