@@ -26,6 +26,13 @@ public class UpdaterTest {
     }
 
     @Test
+    public void totalSizeFromAResumedDownload() {
+        assertEquals(41518462L, Updater.totalFromContentRange("bytes 1000-41518461/41518462"));
+        assertEquals(-1L, Updater.totalFromContentRange("bytes 1000-41518461/*"));
+        assertEquals(-1L, Updater.totalFromContentRange(null));
+    }
+
+    @Test
     public void ciSuffixIsIgnored() {
         assertEquals("1.9.19", Updater.stripSuffix("1.9.19-ci.42"));
         assertEquals("1.9.19", Updater.stripSuffix("1.9.19"));

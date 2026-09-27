@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
+import android.os.SystemClock;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -48,6 +49,8 @@ final class Updater {
     private static final long CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000L;
     private static final long CHECK_DELAY_MS = 10000;  // after launch: startup work goes first
     private static final int TIMEOUT_MS = 30000;
+    private static final int DOWNLOAD_ATTEMPTS = 5;       // per check; the part downloaded is kept
+    private static final long RETRY_DELAY_MS = 5000;      // times the attempt number
     // adb shell setprop debug.projectmtv.update_from 1.9.17: act as if that version were installed
     // (and accept a download with the installed version code), to test updating end to end.
     private static final String TEST_PROPERTY = "debug.projectmtv.update_from";
@@ -128,6 +131,7 @@ final class Updater {
             status = "off";
             worker.post(() -> {  // after a running check, which stops by itself
                 deleteAll(updatesDir());
+                deleteAll(downloadDir());
                 readyVersion = null;
                 status = "off";
             });
@@ -237,30 +241,66 @@ final class Updater {
         }
     }
 
-    /** Downloads and verifies the release APK; null if switched off meanwhile. */
+    /**
+     * Downloads and verifies the release APK; null if switched off meanwhile. TV Wi-Fi often stalls
+     * for longer than the read timeout, so the part already downloaded is kept: the next attempt
+     * (a few per check, and at the next launch) asks only for the rest.
+     */
     private File download(String version, String installed, boolean testing) throws IOException {
-        if (!isEnabled()) return null;
-        File dir = new File(context.getNoBackupFilesDir(), "update-download");
-        deleteAll(dir);
+        File dir = downloadDir();
         if (!dir.mkdirs() && !dir.isDirectory()) throw new IOException("no download folder");
         File apk = new File(dir, apkName(version));
+        File[] others = dir.listFiles();
+        if (others != null) for (File file : others) if (!file.equals(apk)) file.delete();
+        for (int attempt = 1; ; attempt++) {
+            if (!isEnabled()) return null;
+            try {
+                if (downloadRest(version, installed, apk)) break;
+                return null;  // switched off
+            } catch (IOException e) {
+                if (attempt >= DOWNLOAD_ATTEMPTS) throw e;
+                Log.w(TAG, "Update: download interrupted at " + apk.length() / 1024 + " KB (" + e
+                        + "), resuming");
+                SystemClock.sleep(RETRY_DELAY_MS * attempt);
+            }
+        }
+        String problem = verify(apk, testing);
+        if (problem != null) {
+            apk.delete();
+            throw new IOException("download rejected: " + problem);
+        }
+        return apk;
+    }
+
+    /** One attempt: appends the rest of the APK to {@code apk}. False if switched off meanwhile. */
+    private boolean downloadRest(String version, String installed, File apk) throws IOException {
+        long have = apk.length();
         HttpURLConnection connection = open(REPO + "/releases/download/v" + version + "/" + apkName(version),
                 installed);
         try {
+            if (have > 0) connection.setRequestProperty("Range", "bytes=" + have + "-");
             int code = connection.getResponseCode();
-            if (code != HttpURLConnection.HTTP_OK) throw new IOException("HTTP " + code);
-            long total = parseLong(connection.getHeaderField("Content-Length"));
+            long total;
+            if (code == HttpURLConnection.HTTP_PARTIAL && have > 0) {
+                total = totalFromContentRange(connection.getHeaderField("Content-Range"));
+            } else if (code == 416 && have > 0) {  // nothing left: the file is complete (or broken)
+                return true;
+            } else if (code == HttpURLConnection.HTTP_OK) {
+                have = 0;  // no resume: start over
+                total = parseLong(connection.getHeaderField("Content-Length"));
+            } else {
+                throw new IOException("HTTP " + code);
+            }
             // Room for the download and for Android's copy while installing.
-            if (total > 0 && dir.getUsableSpace() < total * 3) throw new IOException("not enough storage");
-            long written = 0;
+            if (total > 0 && apk.getParentFile().getUsableSpace() < (total - have) + total * 2) {
+                throw new IOException("not enough storage");
+            }
+            long written = have;
             int lastPercent = -1;
             byte[] buffer = new byte[64 * 1024];
-            try (InputStream in = connection.getInputStream(); OutputStream out = new FileOutputStream(apk)) {
+            try (InputStream in = connection.getInputStream(); OutputStream out = new FileOutputStream(apk, have > 0)) {
                 for (int n; (n = in.read(buffer)) > 0; ) {
-                    if (!isEnabled()) {
-                        deleteAll(dir);
-                        return null;
-                    }
+                    if (!isEnabled()) return false;
                     out.write(buffer, 0, n);
                     written += n;
                     int percent = total > 0 ? (int) (written * 100 / total) : -1;
@@ -271,15 +311,10 @@ final class Updater {
                 }
             }
             if (total > 0 && written != total) throw new IOException("download incomplete");
+            return true;
         } finally {
             connection.disconnect();
         }
-        String problem = verify(apk, testing);
-        if (problem != null) {
-            deleteAll(dir);
-            throw new IOException("download rejected: " + problem);
-        }
-        return apk;
     }
 
     /** Null if the APK is this app, newer than the installed one and signed with the same key. */
@@ -311,7 +346,13 @@ final class Updater {
      * Returns the version still ready to install, or null.
      */
     private String cleanUp(String installed) {
-        deleteAll(new File(context.getNoBackupFilesDir(), "update-download"));
+        File[] partial = downloadDir().listFiles();
+        if (partial != null) {
+            for (File file : partial) {
+                Matcher m = APK_NAME.matcher(file.getName());
+                if (!m.matches() || compareVersions(m.group(1), installed) <= 0) file.delete();
+            }
+        }
         String ready = null;
         File[] files = updatesDir().listFiles();
         if (files == null) return null;
@@ -327,6 +368,8 @@ final class Updater {
     }
 
     private File updatesDir() { return new File(context.getNoBackupFilesDir(), "updates"); }
+
+    private File downloadDir() { return new File(context.getNoBackupFilesDir(), "update-download"); }
 
     static File updateFile(Context context, String name) {
         return APK_NAME.matcher(name).matches()
@@ -408,6 +451,13 @@ final class Updater {
     }
 
     // --- pure helpers, unit-tested ---
+
+    /** "bytes 100-199/1000" → 1000; -1 if unknown. */
+    static long totalFromContentRange(String contentRange) {
+        if (contentRange == null) return -1;
+        int slash = contentRange.lastIndexOf('/');
+        return slash >= 0 ? parseLong(contentRange.substring(slash + 1)) : -1;
+    }
 
     /** "https://github.com/…/releases/tag/v1.9.18" → "1.9.18"; null for anything else. */
     static String versionFromTagUrl(String url) {
