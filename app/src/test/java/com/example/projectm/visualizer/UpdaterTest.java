@@ -37,4 +37,14 @@ public class UpdaterTest {
         assertEquals("1.9.19", Updater.stripSuffix("1.9.19-ci.42"));
         assertEquals("1.9.19", Updater.stripSuffix("1.9.19"));
     }
+
+    @Test
+    public void checksAreDueEverySixHours() {
+        long hour = 60 * 60 * 1000L, checkedAt = 1_000_000_000_000L;
+        assertEquals(6 * hour, Updater.untilNextCheck(checkedAt, checkedAt));
+        assertEquals(hour, Updater.untilNextCheck(checkedAt, checkedAt + 5 * hour));
+        assertEquals(0, Updater.untilNextCheck(checkedAt, checkedAt + 6 * hour));
+        assertEquals(0, Updater.untilNextCheck(0, checkedAt));             // never checked
+        assertEquals(0, Updater.untilNextCheck(checkedAt, checkedAt - 1)); // clock went back
+    }
 }

@@ -1049,6 +1049,7 @@ public class MainActivity extends Activity {
         handler.removeCallbacks(uiRefresh);
         handler.removeCallbacks(audioMeterRefresh);
         resumed = false;
+        updater.onPause();
         audioHandler.removeCallbacks(audioWatch);
         setAudioEnabled(false);
         visualizerView.onPause();

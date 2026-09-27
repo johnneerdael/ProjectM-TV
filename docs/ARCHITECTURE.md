@@ -222,7 +222,7 @@ Only one source feeds the engine: the Visualizer is released while capture runs 
 
 ## Auto-update
 
-`Updater` (off by default, *Settings › Advanced › Auto-update*) is the only code that opens a network connection. While it is on, it runs on its own background thread, 10 s after the app comes to the foreground and at most once a day (right away when switched on):
+`Updater` (off by default, *Settings › Advanced › Auto-update*) is the only code that opens a network connection. While it is on, it runs on its own background thread, 10 s after each launch, then every 6 hours while the activity stays resumed (right away when switched on). Resuming without a new launch checks only once 6 hours have passed since the last completed check; a failed check is retried at the next launch or interval:
 
 1. `HEAD github.com/johnneerdael/ProjectM-TV/releases/latest`: GitHub answers with a redirect to `/releases/tag/v<version>`, so no API call (or rate limit) is needed.
 2. If that version is newer than the installed one (CI suffixes like `-ci.42` ignored), it downloads `releases/download/v<version>/projectM-TV-<version>.apk` into `no_backup/update-download` (excluded from backups).

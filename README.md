@@ -43,7 +43,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 - **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution to hold the frame rate, without interrupting the preset. The TV's scaler upscales to the panel.
 - **Protects the music app from being closed.** On TVs with little memory, Android closes other apps when projectM uses too much. The app caps its resolution by installed memory (on a 2 GB SHIELD: 1260p), and in *Auto* resolution it lowers the resolution when Android reports memory pressure.
 - **Starts quickly.** About 3–6 seconds from launch to the first preset on the SHIELD.
-- **Updates itself, if you want.** With *Settings › Advanced › Auto-update* on, the app checks GitHub for a new release once a day, downloads it in the background, and offers to install it: a notice in the lower left, and an *Install* row at the top of the settings panel. Android's installer asks you to confirm. The first time, it asks you to allow installs from ProjectM TV instead; Android then restarts the app, and you select *Install* once more. Off by default; apps installed from F-Droid are updated by F-Droid.
+- **Updates itself, if you want.** With *Settings › Advanced › Auto-update* on, the app checks GitHub for a new release at every launch and every 6 hours while it is open, downloads it in the background, and offers to install it: a notice in the lower left, and an *Install* row at the top of the settings panel. Android's installer asks you to confirm. The first time, it asks you to allow installs from ProjectM TV instead; Android then restarts the app, and you select *Install* once more. Off by default; apps installed from F-Droid are updated by F-Droid.
 - **Shows its own measurements.** *Settings › Advanced › Diagnostics* shows the render size, frame rate, audio source and audio level.
 
 ## What it does not do, and known limits
@@ -90,7 +90,7 @@ The app opens no network connection unless you switch on *Auto-update*, and then
 | Record audio (`RECORD_AUDIO`) | Android's audio visualizer and playback capture both count as recording. The app only receives the sound other apps play, to animate the presets; the microphone is not used. | At first launch |
 | Change audio settings (`MODIFY_AUDIO_SETTINGS`) | Required by Android to attach a visualizer to the TV's main audio output (session 0), which the app listens to until it has found the music app's own audio session. | Granted at install |
 | Foreground service (`FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_MEDIA_PROJECTION`) | Only for the *Media capture* audio source (Android 10+): Android runs playback capture in a foreground service. | Granted at install; *Media capture* also shows Android's screen-casting consent each time it starts |
-| Internet (`INTERNET`) | Only for *Auto-update* (off by default): once a day, the app asks GitHub for the newest release and downloads it. While *Auto-update* is off, the app makes no connection. Android grants this permission at install and has no switch for it, which is why the app's own setting controls it. | Granted at install |
+| Internet (`INTERNET`) | Only for *Auto-update* (off by default): at every launch and every 6 hours while open, the app asks GitHub for the newest release and downloads it. While *Auto-update* is off, the app makes no connection. Android grants this permission at install and has no switch for it, which is why the app's own setting controls it. | Granted at install |
 | Install apps (`REQUEST_INSTALL_PACKAGES`) | Only for *Auto-update*: hands a downloaded update to Android's installer, which asks you to confirm. | The first time you install an update, Android asks you to allow installs from ProjectM TV |
 | Notification access (special access) | Only to read which track the music app is playing (its media session), for the track titles. The app reads no notifications. | You switch it on in the TV's settings (*Apps › Special app access › Notification access*); the app explains where once, at the first launch. Optional: without it no titles are shown |
 
@@ -158,7 +158,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Audio source | *Standard* or *Media capture* (Android 10+), see *Audio* above | Standard |
 | Track titles | *On* when notification access is granted; select it for how to allow it (see [Track titles](#track-titles)) | – |
-| Auto-update | Checks GitHub for a new release once a day and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
+| Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
 | Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track titles (access), update status, device tier | – |
 

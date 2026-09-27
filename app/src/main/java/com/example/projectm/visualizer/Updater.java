@@ -32,11 +32,12 @@ import java.util.regex.Pattern;
 
 /**
  * Auto-update from the GitHub releases (Settings › Advanced › Auto-update, off by default). While
- * it is off, the app opens no network connection. While it is on, the app checks at most once a
- * day whether a newer release exists, downloads its APK in the background, checks that it is this
- * app, newer and signed with the same key, and then offers to install it. Installing always goes
- * through Android's installer, which asks the user to confirm (and, the first time, to allow
- * installs from this app). Apps installed by an F-Droid client are updated by F-Droid instead.
+ * it is off, the app opens no network connection. While it is on, the app checks whether a newer
+ * release exists at every launch and every 6 hours while it stays in the foreground, downloads its
+ * APK in the background, checks that it is this app, newer and signed with the same key, and then
+ * offers to install it. Installing always goes through Android's installer, which asks the user to
+ * confirm (and, the first time, to allow installs from this app). Apps installed by an F-Droid
+ * client are updated by F-Droid instead.
  */
 final class Updater {
     interface Listener { void onUpdateReady(String version); }
@@ -46,7 +47,7 @@ final class Updater {
     static final String APK_MIME = "application/vnd.android.package-archive";
     private static final String PREF_ENABLED = "auto_update";
     private static final String PREF_CHECKED_AT = "update_checked_at";
-    private static final long CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000L;
+    private static final long CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000L;
     private static final long CHECK_DELAY_MS = 10000;  // after launch: startup work goes first
     private static final int TIMEOUT_MS = 30000;
     private static final int DOWNLOAD_ATTEMPTS = 5;       // per check; the part downloaded is kept
@@ -69,6 +70,8 @@ final class Updater {
     private volatile Listener listener;
     private volatile String status;
     private volatile String readyVersion;
+    private volatile boolean resumed;
+    private volatile boolean launchCheckDue;  // every launch checks once, however recent the last check
 
     /**
      * One per process, so an activity that is being destroyed and its successor never download into
@@ -93,6 +96,7 @@ final class Updater {
     void attach(Handler main, Listener listener) {
         this.main = main;
         this.listener = listener;
+        launchCheckDue = true;
     }
 
     /** The activity is gone: no more callbacks to it, and no check is started for it. */
@@ -114,14 +118,20 @@ final class Updater {
 
     /**
      * At every resume: announces a downloaded update right away (no network needed; e.g. after
-     * Android restarted the app because the user allowed installs from it), and checks GitHub when a
-     * day has passed.
+     * Android restarted the app because the user allowed installs from it), and checks GitHub at
+     * launch or when the interval has passed. While resumed, the checks repeat every interval.
      */
     void onResume() {
+        resumed = true;
         if (!isEnabled()) return;
         worker.post(announceDownloaded);
+        schedule(CHECK_DELAY_MS);
+    }
+
+    /** In the background: no checks until the next resume. */
+    void onPause() {
+        resumed = false;
         worker.removeCallbacks(dueCheck);
-        worker.postDelayed(dueCheck, CHECK_DELAY_MS);
     }
 
     private final Runnable announceDownloaded = () -> {
@@ -181,7 +191,19 @@ final class Updater {
         }
     }
 
-    private final Runnable dueCheck = () -> check(false);
+    private final Runnable dueCheck = () -> {
+        if (resumed) check(false);
+    };
+
+    private void schedule(long delayMs) {
+        worker.removeCallbacks(dueCheck);
+        worker.postDelayed(dueCheck, Math.max(delayMs, CHECK_DELAY_MS));
+    }
+
+    /** The next check while resumed, also after a failed one. */
+    private void scheduleNext(long delayMs) {
+        if (resumed && isEnabled()) schedule(delayMs);
+    }
 
     /** On the worker thread. */
     private void check(boolean force) {
@@ -192,17 +214,20 @@ final class Updater {
         if (ready != null) announce(ready);
         long checkedAt = prefs.getLong(PREF_CHECKED_AT, 0);
         long now = System.currentTimeMillis();
-        if (!force && now - checkedAt < CHECK_INTERVAL_MS && checkedAt <= now) {
+        long wait = untilNextCheck(checkedAt, now);
+        if (!force && !launchCheckDue && wait > 0) {
             if (ready == null) status = "up to date, checked " + time(checkedAt);
+            scheduleNext(wait);
             return;
         }
+        launchCheckDue = false;
         status = "checking";
         try {
             String latest = latestVersion(installed);
             if (!isEnabled()) return;  // switched off while asking
             String current = ready != null ? ready : installed;
             if (compareVersions(latest, current) <= 0) {
-                // Only a completed check counts for the day: a failure is retried at the next launch.
+                // Only a completed check counts: a failure is retried at the next launch or interval.
                 prefs.edit().putLong(PREF_CHECKED_AT, now).apply();
                 status = ready != null ? ready + " ready to install" : "up to date, checked " + time(now);
                 Log.i(TAG, "Update: latest release is " + latest + ", installed " + installed);
@@ -219,8 +244,10 @@ final class Updater {
             prefs.edit().putLong(PREF_CHECKED_AT, now).apply();
             announce(latest);
         } catch (IOException | RuntimeException e) {
-            status = "check failed (" + e.getMessage() + "), again at next launch";
+            status = "check failed (" + e.getMessage() + "), trying again later";
             Log.w(TAG, "Update: " + e);
+        } finally {
+            scheduleNext(CHECK_INTERVAL_MS);
         }
     }
 
@@ -462,6 +489,11 @@ final class Updater {
     }
 
     // --- pure helpers, unit-tested ---
+
+    /** Milliseconds until the next check is due; 0 if due now, also when the clock went back. */
+    static long untilNextCheck(long checkedAt, long now) {
+        return checkedAt > now || now - checkedAt >= CHECK_INTERVAL_MS ? 0 : checkedAt + CHECK_INTERVAL_MS - now;
+    }
 
     /** "bytes 100-199/1000" → 1000; -1 if unknown. */
     static long totalFromContentRange(String contentRange) {
