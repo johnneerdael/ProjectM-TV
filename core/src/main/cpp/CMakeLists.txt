@@ -98,7 +98,10 @@ target_link_libraries(projectmtv
     ${android-lib}
 )
 
+# projectM sets CMAKE_DEBUG_POSTFIX "d", which would name the debug build libprojectmtvd.so, a
+# library ProjectMJNI never loads.
 set_target_properties(projectmtv PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
+    DEBUG_POSTFIX ""
 )
