@@ -7,6 +7,10 @@
     <!-- Audio source "Media capture" (Android 10+): playback capture runs in a foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
+    <!-- Auto-update (Settings › Advanced, off by default): the only network access, to check the
+         GitHub releases and download a newer APK, which Android's installer then installs -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     
     <!-- TV features -->
     <uses-feature
@@ -66,6 +70,13 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
+
+        <!-- A downloaded update, readable by Android's installer through the install intent -->
+        <provider
+            android:name="com.example.projectm.visualizer.UpdateFileProvider"
+            android:authorities="${applicationId}.updates"
+            android:exported="false"
+            android:grantUriPermissions="true" />
 
         <service
             android:name="com.example.projectm.visualizer.AudioCaptureService"

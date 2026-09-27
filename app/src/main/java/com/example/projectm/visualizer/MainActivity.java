@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,7 +114,11 @@ public class MainActivity extends Activity {
     private TextView audioStatus;
     private OptionRow skippedRow;
     private View nowPlaying;
+    private ImageView nowPlayingIcon;
     private TextView nowPlayingText;
+    private Updater updater;
+    private OptionRow installRow;
+    private boolean updateAnnounced;  // the pill announces a ready update once per launch
     private Menu menu = Menu.NONE;
     private int lastPresetChange = -1;
     private String currentPreset = "";
@@ -309,8 +314,10 @@ public class MainActivity extends Activity {
         audioMeter = findViewById(R.id.audio_meter);
         audioStatus = findViewById(R.id.audio_status);
         nowPlaying = findViewById(R.id.now_playing);
+        nowPlayingIcon = findViewById(R.id.now_playing_icon);
         nowPlayingText = findViewById(R.id.now_playing_text);
         trackWatcher = new TrackWatcher(this, handler, this::onTrack);
+        updater = new Updater(this, prefs, handler, this::onUpdateReady);
 
         TextView versionInfo = findViewById(R.id.version_info);
         versionInfo.setText("v" + appVersion() + "  ·  projectM " + ProjectMJNI.getVersion());
@@ -318,6 +325,13 @@ public class MainActivity extends Activity {
         findViewById(R.id.prev_preset_button).setOnClickListener(v -> ProjectMJNI.previousPreset(true));
         findViewById(R.id.random_preset_button).setOnClickListener(v -> ProjectMJNI.randomPreset(true));
         findViewById(R.id.next_preset_button).setOnClickListener(v -> ProjectMJNI.nextPreset(true));
+
+        installRow = findViewById(R.id.row_install_update);
+        installRow.setupAction("Update ready", "", () -> {
+            if (!updater.install(this)) {
+                Toast.makeText(this, "Android's installer could not be opened", Toast.LENGTH_LONG).show();
+            }
+        });
 
         OptionRow autoChange = findViewById(R.id.row_auto_change);
         autoChange.setup("Auto change", new String[]{"Off", "On"},
@@ -419,6 +433,17 @@ public class MainActivity extends Activity {
             }
         });
 
+        OptionRow autoUpdate = findViewById(R.id.row_auto_update);
+        if (updater.isViaFDroid()) {
+            autoUpdate.setupAction("Auto-update", "Via F-Droid", () -> Toast.makeText(this,
+                    "Installed from F-Droid, which keeps the app up to date", Toast.LENGTH_LONG).show());
+        } else {
+            autoUpdate.setup("Auto-update", new String[]{"Off", "On"}, updater.isEnabled() ? 1 : 0, true, index -> {
+                updater.setEnabled(index == 1);
+                if (index == 0) installRow.setVisibility(View.GONE);
+            });
+        }
+
         skippedRow = findViewById(R.id.row_skipped);
         skippedRow.setupAction("Skipped presets", "None", () -> {
             ProjectMJNI.resetSkippedPresets();
@@ -501,7 +526,8 @@ public class MainActivity extends Activity {
                 findViewById(R.id.row_advanced).requestFocus();
             } else {
                 slide(mainMenu, true);
-                findViewById(R.id.random_preset_button).requestFocus();
+                (installRow.getVisibility() == View.VISIBLE ? installRow
+                        : findViewById(R.id.random_preset_button)).requestFocus();
             }
         } else {
             fade(mainMenu, false);
@@ -558,12 +584,12 @@ public class MainActivity extends Activity {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
             trackRow.setActionValue(trackWatcher.hasAccess() ? "On" : "Off  ·  Allow");
             setText(diagnostics, String.format(Locale.US,
-                    "Render  %dx%d (%s, limit %s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nBlend   %s%nAudio   %s%nTrack   %s%nDevice  %s tier, %d MB RAM",
+                    "Render  %dx%d (%s, limit %s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nBlend   %s%nAudio   %s%nTrack   %s%nUpdate  %s%nDevice  %s tier, %d MB RAM",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
                     memoryLimit() > 0 ? heightLabel(memoryLimit()) : "none",
                     display.physicalWidth, display.physicalHeight, display.refreshRate,
                     display.uiWidth, display.uiHeight,
-                    renderer.getCurrentFps(), frameRateTarget, transitionLabel(), audioLabel(), trackLabel(),
+                    renderer.getCurrentFps(), frameRateTarget, transitionLabel(), audioLabel(), trackLabel(), updater.statusLabel(),
                     profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb));
         }
     }
@@ -602,12 +628,32 @@ public class MainActivity extends Activity {
         currentTrack = label;
         if (label.isEmpty() || menu != Menu.NONE) return;
         if (!newTrack && nowPlaying.getVisibility() != View.VISIBLE) return;
-        setText(nowPlayingText, label);
+        showPill(R.drawable.ic_music_note, label, newTrack);
+    }
+
+    /** Text in the lower-left pill; {@code restart} shows it (again) for 20 s. */
+    private void showPill(int icon, String text, boolean restart) {
+        nowPlayingIcon.setImageResource(icon);
+        setText(nowPlayingText, text);
         nowPlayingText.setSelected(true);
-        if (!newTrack) return;
+        if (!restart) return;
         fade(nowPlaying, true);
         handler.removeCallbacks(hideNowPlaying);
         handler.postDelayed(hideNowPlaying, TRACK_SHOWN_MS);
+    }
+
+    /**
+     * A downloaded update: the settings panel gets an Install row at the top, and the pill says so
+     * once per launch.
+     */
+    private void onUpdateReady(String version) {
+        if (!updater.isEnabled()) return;
+        installRow.setActionValue("Install " + version);
+        installRow.setVisibility(View.VISIBLE);
+        if (updateAnnounced || menu != Menu.NONE) return;
+        updateAnnounced = true;
+        showPill(R.drawable.ic_system_update, getString(R.string.app_name) + " " + version
+                + " is ready to install: open the settings", true);
     }
 
     /** Diagnostics line: whether the playing track can be read. */
@@ -946,6 +992,7 @@ public class MainActivity extends Activity {
         audioHandler.postDelayed(audioWatch, FIRST_WATCH_MS);
         handler.post(uiRefresh);
         if (menu == Menu.MAIN) handler.post(audioMeterRefresh);
+        updater.onResume();
         // Checked on every resume: access may have been granted while the app was in the background.
         if (!trackWatcher.start()) {
             Log.i(TAG, "Track titles off: no notification-listener access");
@@ -1014,6 +1061,7 @@ public class MainActivity extends Activity {
         audioHandler.removeCallbacks(audioWatch);
         audioHandler.post(this::stopAudio);
         audioThread.quitSafely();
+        updater.close();
         // projectM owns GL objects, so it is destroyed on the GL thread. If the thread is already
         // gone, the next onSurfaceCreated() cleans up instead.
         visualizerView.queueEvent(renderer::release);

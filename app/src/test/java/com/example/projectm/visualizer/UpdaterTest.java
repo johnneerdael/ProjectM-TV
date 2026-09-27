@@ -1,0 +1,33 @@
+package com.example.projectm.visualizer;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+public class UpdaterTest {
+    @Test
+    public void versionFromTheLatestReleaseRedirect() {
+        assertEquals("1.9.18", Updater.versionFromTagUrl("https://github.com/johnneerdael/ProjectM-TV/releases/tag/v1.9.18"));
+        assertEquals("2.0", Updater.versionFromTagUrl("https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.0/"));
+        assertNull(Updater.versionFromTagUrl("https://github.com/johnneerdael/ProjectM-TV/releases"));
+        assertNull(Updater.versionFromTagUrl("https://github.com/johnneerdael/ProjectM-TV/releases/tag/nightly"));
+        assertNull(Updater.versionFromTagUrl("https://github.com/johnneerdael/ProjectM-TV/releases/tag/v1.9.18-beta"));
+    }
+
+    @Test
+    public void versionsCompareNumerically() {
+        assertTrue(Updater.compareVersions("1.9.10", "1.9.9") > 0);
+        assertTrue(Updater.compareVersions("1.10", "1.9.18") > 0);
+        assertTrue(Updater.compareVersions("1.9.18", "1.9.19") < 0);
+        assertEquals(0, Updater.compareVersions("1.9", "1.9.0"));
+        assertEquals(0, Updater.compareVersions("1.9.19-ci.42", "1.9.19"));
+    }
+
+    @Test
+    public void ciSuffixIsIgnored() {
+        assertEquals("1.9.19", Updater.stripSuffix("1.9.19-ci.42"));
+        assertEquals("1.9.19", Updater.stripSuffix("1.9.19"));
+    }
+}

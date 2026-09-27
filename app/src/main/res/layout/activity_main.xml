@@ -119,7 +119,13 @@
             android:layout_marginBottom="6dp"
             android:background="@drawable/divider" />
 
-        <!-- Settings -->
+        <!-- Settings; the first row only while a downloaded update is ready to install -->
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_install_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
         <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_auto_change"
             android:layout_width="match_parent"
@@ -267,6 +273,11 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_auto_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_skipped"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -308,7 +319,8 @@
             android:text="↑↓ select   ‹ › change   BACK return" />
     </LinearLayout>
 
-    <!-- Now-playing pill: the music app's new track, for 20 s (needs notification-listener access) -->
+    <!-- Now-playing pill: the music app's new track, for 20 s (needs notification-listener access);
+         also announces a downloaded update -->
     <LinearLayout
         android:id="@+id/now_playing"
         android:layout_width="wrap_content"
@@ -327,6 +339,7 @@
         android:visibility="gone">
 
         <ImageView
+            android:id="@+id/now_playing_icon"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginEnd="10dp"
