@@ -21,8 +21,18 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--audio", type=Path, required=True)
     command.add_argument("--work", type=Path, default=Path("build/preset-lab/audio"))
     command.add_argument("--manifest", type=Path)
+    command = commands.add_parser("trace", help="Trace static audio dependencies in one preset")
+    command.add_argument("preset", type=Path)
     args = parser.parse_args(argv)
     try:
+        if args.command == "trace":
+            from .preset_parser import parse_preset
+            from .dependencies import trace_dependencies
+            evidence = trace_dependencies(parse_preset(args.preset))
+            json.dump(dict(asdict(evidence), schema_version=1), sys.stdout,
+                      ensure_ascii=False, allow_nan=False)
+            sys.stdout.write("\n")
+            return 0
         if args.command == "corpus":
             from .audio import load_corpus
             corpus = load_corpus(args.audio, args.manifest, args.work)
