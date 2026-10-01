@@ -3,10 +3,6 @@
 
     <!-- Required permissions -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-    <!-- Audio source "Media capture" (Android 10+): playback capture runs in a foreground service -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
     <!-- Auto-update (Settings › Advanced, off by default): the only network access, to check the
          GitHub releases and download a newer APK, which Android's installer then installs -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -77,11 +73,6 @@
             android:authorities="${applicationId}.updates"
             android:exported="false"
             android:grantUriPermissions="true" />
-
-        <service
-            android:name="com.example.projectm.visualizer.AudioCaptureService"
-            android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
     </application>
 
 </manifest>

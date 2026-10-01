@@ -59,7 +59,7 @@ Tags are off by one: tag `v1.6` = app `versionName "1.5"`, and tag `v1.7` = app 
 
 ## 5. Architecture
 
-The engine is the Android library module `core/` (package `nl.neerdael.projectm.core`): the native code, projectM build, presets, textures, `ProjectMJNI`, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile`, `DisplayInfo` and `PcmConverter`. The app module `app/` holds the UI, audio capture, track titles and the updater. Another app embeds the engine by including `core/` as a Gradle module (for example from a git submodule of this repository): it calls `ProjectMCore.init(context)` once at startup, shows a `VisualizerView` driven by a `VisualizerRenderer`, and feeds audio and settings through `ProjectMJNI`.
+The engine is the Android library module `core/` (package `nl.neerdael.projectm.core`): the native code, projectM build, presets, textures, `ProjectMJNI`, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile` and `DisplayInfo`. The app module `app/` holds the UI, audio capture, track titles and the updater. Another app embeds the engine by including `core/` as a Gradle module (for example from a git submodule of this repository): it calls `ProjectMCore.init(context)` once at startup, shows a `VisualizerView` driven by a `VisualizerRenderer`, and feeds audio and settings through `ProjectMJNI`.
 
 ```
 ProjectMApplication ── ProjectMCore.init(context) ──────────► native worker thread
@@ -68,8 +68,7 @@ ProjectMApplication ── ProjectMCore.init(context) ────────�
                                                              └─ prefetch next preset text
 MainActivity (UI thread)
   ├─ remote keys / menu ──► ProjectMJNI.next/previous/random/settings  (atomic, any thread)
-  ├─ Visualizer (audio) ──► ProjectMJNI.addWaveform                    (mutex buffer)
-  │   or AudioCaptureService (media capture, Android 10+) ──► PcmConverter ──► addWaveform
+  ├─ Visualizer on the player's session ──► ProjectMJNI.addWaveform    (mutex buffer)
   └─ VisualizerView.setRenderHeight ─► SurfaceHolder.setFixedSize (hardware scaler)
 
 VisualizerRenderer (GL thread) ─► onDrawFrame (native)
@@ -150,7 +149,6 @@ Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches t
 |---|---|---|
 | GL (GLSurfaceView) | `THREAD_PRIORITY_DISPLAY` | projectM render, preset loading, output measurement, transition overlay |
 | AudioCapture (HandlerThread) | `THREAD_PRIORITY_AUDIO` | `Visualizer` callbacks → `addWaveform` |
-| PlaybackCapture (media capture only) | `THREAD_PRIORITY_AUDIO` | `AudioRecord` reads (1024 frames) → `PcmConverter` → `addWaveform` |
 | Native worker | default | Preset indexing and prefetch |
 | UI | default | Overlay; status polled every 500 ms, text only updated when changed |
 
@@ -205,20 +203,13 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 3. Move Gradle to a stable release.
 4. ~~Add CI~~ Done: `.github/workflows/android.yml` (see `docs/RELEASING.md`).
 
-## Audio sources
+## Audio source
 
 **Why the Visualizer can hear nothing.** On an NVIDIA SHIELD (Android 11) with HDMI eARC and Dolby output, media is mixed on an output of the Dolby "MSD" module (`AUDIO_DEVICE_OUT_BUS`), encoded to E-AC3 and bridged to HDMI. Android picks the output for session-0 effects in `AudioPolicyManager::selectOutputForMusicEffects()` from the outputs of the device media would normally use (HDMI), not the MSD outputs. No active output qualifies, so it falls back to the idle primary output, and the Visualizer receives silence. The 1.9 diagnostics show exactly this: the Visualizer (effect 51) sits on `AudioOut_D` with 0 tracks while SoundCloud plays on `AudioOut_1D`. The selection code is unchanged in Android 14 (see the [Android 11](https://raw.githubusercontent.com/LineageOS/android_frameworks_av/lineage-18.1/services/audiopolicy/managerdefault/AudioPolicyManager.cpp) and [Android 14](https://raw.githubusercontent.com/LineageOS/android_frameworks_av/lineage-21.0/services/audiopolicy/managerdefault/AudioPolicyManager.cpp) sources, LineageOS mirror).
 
-**Player session search.** A Visualizer attached to the player's own audio session is placed on the output that session plays on, so it hears the music where session 0 does not. The app can't ask Android for other apps' sessions, but session IDs come from one counter (steps of 8), so `PlayerSessionFinder` probes the 128 IDs below a freshly generated one, 16 at a time with 300 ms to settle, and takes the first with a signal. While Android reports music playing and the current source hears nothing, `MainActivity.audioWatch` (every 2 s) searches right away: the session found last (remembered across launches) is probed first, which takes about 0.3 s; a full search takes up to about 4 s. An empty search is repeated every 20 s. While nothing plays, nothing is probed. On the SHIELD the visuals react about 1 s after launch (1.9.18; before, a 4 s silence wait and the 2 s ticks made it about 10 s).
+**Player session search.** A Visualizer attached to the player's own audio session is placed on the output that session plays on, so it hears the music where session 0 does not. The app can't ask Android for other apps' sessions, but session IDs come from one counter (steps of 8), so `PlayerSessionFinder` probes the 128 IDs below a freshly generated one, 16 at a time with 300 ms to settle, and takes the first with a signal. While Android reports music playing and the app hears nothing (no session yet, or the player moved to a new one), `MainActivity.audioWatch` (every 2 s) searches right away: the session found last (remembered across launches) is probed first, which takes about 0.3 s; a full search takes up to about 4 s. An empty search is repeated every 20 s. While nothing plays, nothing is probed. On the SHIELD the visuals react about 1 s after launch (1.9.18; before, a 4 s silence wait and the 2 s ticks made it about 10 s).
 
-**Media capture.** Playback capture copies a matching track's audio before the Dolby module, independently of which output Android chose (`AudioPolicyMix.cpp`: a loop-back-and-render mix is a secondary output of the track). `AudioCaptureService`:
-- matches `USAGE_MEDIA` only, so notification, system and assistant sounds never reach the visuals;
-- runs as a foreground service of type `mediaProjection` and starts foreground before it creates the projection (required on Android 14);
-- reads 16-bit stereo at 48 kHz in blocks of 1024 frames. `PcmConverter` sums the channels and scales each block so its peak reaches 0.99 of full range, as the Visualizer's normalized mode does (`EffectVisualizer.cpp`). Presets should therefore react the same to either source.
-
-Only one source feeds the engine: the Visualizer is released while capture runs and recreated when it ends. The consent result can't be stored for later, so the app asks again at every launch. Declining it, or a device without the consent dialog, switches the setting back to *Standard*.
-
-**Limits.** Apps can opt out of capture (`setAllowedCapturePolicy`, or targeting Android 9 or lower without opting in), and audio that an app sends to the TV already Dolby-encoded is never mixed, so neither source can see it.
+**No other source.** The app never attaches to session 0, and has no playback-capture source: on the SHIELD both heard silence, the player's session works everywhere it was tried, and it needs nothing beyond `RECORD_AUDIO` (`AudioFlinger::createEffect` only asks for `MODIFY_AUDIO_SETTINGS` on session 0). While no player session is known, no Visualizer runs. Audio that an app sends to the TV already Dolby-encoded is never mixed, so it can't be visualized.
 
 ## Auto-update
 

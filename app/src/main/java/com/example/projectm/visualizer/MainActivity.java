@@ -1,16 +1,13 @@
 package com.example.projectm.visualizer;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.audiofx.Visualizer;
-import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,7 +37,6 @@ import java.util.Locale;
 public class MainActivity extends Activity {
     private static final String TAG = "ProjectMTV";
     private static final int AUDIO_PERMISSION_REQUEST = 1;
-    private static final int CAPTURE_CONSENT_REQUEST = 2;
     private static final long MENU_AUTO_HIDE_MS = 10000;
     private static final long TRACK_SHOWN_MS = 20000;  // a new track's title in the lower left
     private static final long TRACK_ACCESS_DELAY_MS = 1500;
@@ -72,7 +68,6 @@ public class MainActivity extends Activity {
     private static final String PREF_BLANK_DETECTION = "blank_detection_v3";
     private static final String PREF_TRANSITION_MODE = "transition_mode";
     private static final String PREF_MEMORY_LIMIT = "memory_limit";
-    private static final String PREF_MEDIA_CAPTURE = "media_capture";  // audio source: media capture
 
     private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
     private static final int MAX_TRANSITION = 10;
@@ -95,8 +90,7 @@ public class MainActivity extends Activity {
     private HandlerThread audioThread;
     private Handler audioHandler;
     private volatile Visualizer audioVisualizer;
-    private volatile boolean captureRunning;  // AudioCaptureService feeds the engine instead
-    // Standard source: 0 = global output mix, otherwise the session of the player we found.
+    // The session of the music player we found (see PlayerSessionFinder), 0 while none is known.
     // Only touched on audioThread.
     private volatile int audioSession;
     private int lastPlayerSession;
@@ -104,12 +98,10 @@ public class MainActivity extends Activity {
     private long nextSearchAt;
     private long nextRecheckAt;
     private boolean musicActive;
-    private volatile boolean switchingFromCapture;
     private byte[] pollBuffer;
     private boolean audioPolled;
     private AudioManager audioManager;
     private volatile boolean resumed;  // also read on audioThread
-    private OptionRow audioSourceRow;
 
     private View mainMenu;
     private View advancedMenu;
@@ -202,7 +194,6 @@ public class MainActivity extends Activity {
         audioThread.start();
         audioHandler = new Handler(audioThread.getLooper());
         audioManager = getSystemService(AudioManager.class);
-        AudioCaptureService.listener = this::onCaptureStateChanged;
         if (hasAudioPermission()) {
             onAudioPermissionGranted();
         } else if (Build.VERSION.SDK_INT >= 23) {
@@ -433,8 +424,6 @@ public class MainActivity extends Activity {
                     prefs.edit().putBoolean(PREF_BLANK_DETECTION, index == 1).apply();
                 });
 
-        setupAudioSourceRow();
-
         trackRow = findViewById(R.id.row_track_titles);
         trackRow.setupAction("Track titles", "", () -> {
             if (trackWatcher.hasAccess()) {
@@ -464,29 +453,6 @@ public class MainActivity extends Activity {
         mainMenu.setVisibility(View.GONE);
         advancedMenu.setVisibility(View.GONE);
         diagnosticsPanel.setVisibility(View.GONE);
-    }
-
-    /**
-     * Audio source: Standard (Visualizer on the output mix) or Media capture (Android 10+, asks for
-     * consent at every launch). Hidden where playback capture does not exist.
-     */
-    private void setupAudioSourceRow() {
-        audioSourceRow = findViewById(R.id.row_audio_source);
-        if (Build.VERSION.SDK_INT < 29) {
-            audioSourceRow.setVisibility(View.GONE);
-            return;
-        }
-        audioSourceRow.setup("Audio source", new String[]{"Standard", "Media capture"},
-                prefs.getBoolean(PREF_MEDIA_CAPTURE, false) ? 1 : 0, true, index -> {
-                    prefs.edit().putBoolean(PREF_MEDIA_CAPTURE, index == 1).apply();
-                    if (index == 0) {
-                        stopService(new Intent(this, AudioCaptureService.class));
-                    } else if (hasAudioPermission()) {
-                        requestMediaCapture();
-                    } else if (Build.VERSION.SDK_INT >= 23) {
-                        requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, AUDIO_PERMISSION_REQUEST);
-                    }
-                });
     }
 
     /** Resolution: Auto + fixed heights up to the panel resolution and the memory limit. */
@@ -620,16 +586,16 @@ public class MainActivity extends Activity {
 
     /** Short status next to the level bar in the main panel. */
     private String audioStatus(float level) {
-        if (audioVisualizer == null && !captureRunning) return "No access";
-        if (level <= 0f) return "No sound";
+        if (!hasAudioPermission()) return "No access";
+        if (audioVisualizer == null || level <= 0f) return "No sound";
         return level < 0.02f ? "Very quiet" : "Listening";
     }
 
     /** Audio input as seen by the engine: tells whether the TV actually delivers sound to us. */
     private String audioLabel() {
-        if (audioVisualizer == null && !captureRunning) return "no capture (permission?)";
-        int session = audioSession;
-        String source = captureRunning ? "media capture" : session != 0 ? "player session " + session : "standard";
+        if (!hasAudioPermission()) return "no capture (permission?)";
+        if (audioVisualizer == null) return "no player session found yet";
+        String source = sourceName();
         float level = ProjectMJNI.getAudioLevel();
         if (level <= 0f) return source + ", silent / no data";
         return String.format(Locale.US, "%s, %.2f %s", source, level, level < 0.02f ? "(very quiet)" : "(live)");
@@ -763,61 +729,11 @@ public class MainActivity extends Activity {
 
     private void onAudioPermissionGranted() {
         audioHandler.post(this::startAudio);
-        if (Build.VERSION.SDK_INT >= 29 && prefs.getBoolean(PREF_MEDIA_CAPTURE, false)) requestMediaCapture();
     }
 
-    /** Shows Android's screen-cast consent; media capture starts when the user accepts. */
-    @TargetApi(29)
-    private void requestMediaCapture() {
-        if (captureRunning) return;
-        try {
-            MediaProjectionManager manager = getSystemService(MediaProjectionManager.class);
-            startActivityForResult(manager.createScreenCaptureIntent(), CAPTURE_CONSENT_REQUEST);
-        } catch (ActivityNotFoundException | SecurityException e) {
-            Log.w(TAG, "Audio source: media capture unavailable on this device (" + e + ")");
-            useStandardAudioSource();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode != CAPTURE_CONSENT_REQUEST || Build.VERSION.SDK_INT < 29) return;
-        if (resultCode != RESULT_OK || data == null) {
-            Log.i(TAG, "Audio source: media capture declined, using standard");
-            useStandardAudioSource();
-            return;
-        }
-        startForegroundService(new Intent(this, AudioCaptureService.class)
-                .putExtra(AudioCaptureService.EXTRA_RESULT_CODE, resultCode)
-                .putExtra(AudioCaptureService.EXTRA_RESULT_DATA, data));
-    }
-
-    private void useStandardAudioSource() {
-        prefs.edit().putBoolean(PREF_MEDIA_CAPTURE, false).apply();
-        if (audioSourceRow != null) setupAudioSourceRow();
-    }
-
-    /**
-     * Only one source feeds the engine: the Visualizer is released while media capture runs. When
-     * capture ends while the app is in the background, the Visualizer returns in onResume.
-     */
-    private void onCaptureStateChanged(boolean running) {
-        captureRunning = running;
-        if (!running) switchingFromCapture = false;
-        lastSignalAt = SystemClock.elapsedRealtime();  // grace period for the new source
-        // tools/tv-diagnostics.sh reports the latest of these lines as the source in use.
-        Log.i(TAG, "Audio source now: " + (running ? "media capture" : standardSourceName()));
-        if (running) {
-            audioHandler.post(this::stopAudio);
-        } else if (resumed && hasAudioPermission()) {
-            audioHandler.post(this::startAudio);
-        }
-    }
-
-    private String standardSourceName() {
+    private String sourceName() {
         int session = audioSession;
-        return session != 0 ? "player session " + session : "standard";
+        return session != 0 ? "player session " + session : "none";
     }
 
     private void stopAudio() {
@@ -837,11 +753,10 @@ public class MainActivity extends Activity {
     }
 
     private void startAudio() {
-        if (audioVisualizer != null || captureRunning) return;
+        if (audioVisualizer != null || audioSession == 0) return;
         Visualizer visualizer = null;
         try {
-            // Session 0 = global output mix; otherwise the player's session found by
-            // PlayerSessionFinder. The waveform is 8-bit unsigned mono PCM, passed to projectM
+            // The player's session found by PlayerSessionFinder. The waveform is 8-bit unsigned mono PCM, passed to projectM
             // unchanged. Callbacks arrive on the looper of the thread that registers the listener,
             // i.e. audioThread.
             visualizer = new Visualizer(audioSession);
@@ -853,7 +768,7 @@ public class MainActivity extends Activity {
                 try {
                     visualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
                 } catch (IllegalStateException e) {
-                    Log.w(TAG, "Audio capture: keeping the default capture size on " + standardSourceName());
+                    Log.w(TAG, "Audio capture: keeping the default capture size on " + sourceName());
                 }
                 visualizer.setDataCaptureListener(new Visualizer.OnDataCaptureListener() {
                     @Override
@@ -873,16 +788,13 @@ public class MainActivity extends Activity {
                 pollBuffer = new byte[visualizer.getCaptureSize()];
                 audioHandler.post(audioPoll);
             }
-            Log.i(TAG, "Audio capture enabled on " + standardSourceName() + " (status " + status
+            Log.i(TAG, "Audio capture enabled on " + sourceName() + " (status " + status
                     + (controlled ? ")" : ", shared: polled)"));
         } catch (RuntimeException e) {
             Log.e(TAG, "Audio capture unavailable", e);
             if (visualizer != null) visualizer.release();
             audioVisualizer = null;
-            if (audioSession != 0) {  // the player's session is gone: back to the output mix
-                audioSession = 0;
-                startAudio();
-            }
+            audioSession = 0;  // the player's session is gone: the watch searches again
         }
     }
 
@@ -904,15 +816,15 @@ public class MainActivity extends Activity {
     };
 
     /**
-     * While music plays but the audio source stays silent, look for the session of the app that
-     * plays it (see PlayerSessionFinder). Where the global output mix or media capture works, the
-     * music keeps the level up, and while nothing plays no search runs.
+     * While music plays but we hear nothing (no session yet, or the player moved to a new one), look
+     * for the session of the app that plays it (see PlayerSessionFinder). While the player's
+     * session carries the music, and while nothing plays, no search runs.
      */
     private final Runnable audioWatch = new Runnable() {
         @Override
         public void run() {
             audioHandler.postDelayed(this, AUDIO_WATCH_MS);
-            if (!resumed || (audioVisualizer == null && !captureRunning)) return;
+            if (!resumed || !hasAudioPermission()) return;
             long now = SystemClock.elapsedRealtime();
             if (ProjectMJNI.getAudioLevel() > 0f) lastSignalAt = now;
             if (!audioManager.isMusicActive()) {
@@ -924,22 +836,20 @@ public class MainActivity extends Activity {
                 lastSignalAt = now;
                 nextSearchAt = 0;
                 nextRecheckAt = 0;
-                // If the current source hears nothing, look for the player's session right away (the
-                // last one first): a per-session Visualizer works on every TV, and waiting for 4 s of
-                // silence first only delayed the visuals after a launch.
-                if (captureRunning || ProjectMJNI.getAudioLevel() > 0f) return;
+                // If we hear nothing, look for the player's session right away (the last one
+                // first): waiting for 4 s of silence first only delayed the visuals after a launch.
+                if (ProjectMJNI.getAudioLevel() > 0f) return;
                 lastSignalAt = now - SILENCE_BEFORE_SEARCH_MS;
             }
-            if (now - lastSignalAt < SILENCE_BEFORE_SEARCH_MS || switchingFromCapture) return;
+            if (now - lastSignalAt < SILENCE_BEFORE_SEARCH_MS) return;
 
             // The last player's session often carries the music again (e.g. a paused player in
             // another app): one probe shows that, so it is checked often, apart from the backoff.
             int last = lastPlayerSession;
-            boolean recheck = !captureRunning && last != 0 && audioSession != last && now >= nextRecheckAt;
+            boolean recheck = last != 0 && audioSession != last && now >= nextRecheckAt;
             if (!recheck && now < nextSearchAt) return;
-            boolean fromCapture = captureRunning;
             int previous = audioSession;
-            if (!fromCapture) stopAudio();  // releases our instance so the probe sees the session as it is
+            stopAudio();  // releases our instance so the probe sees the session as it is
             int found = 0;
             if (recheck) {
                 nextRecheckAt = now + RECHECK_PLAYER_MS;
@@ -949,37 +859,19 @@ public class MainActivity extends Activity {
                 found = PlayerSessionFinder.find(audioManager.generateAudioSessionId(), last);
                 if (found == 0) nextSearchAt = now + SEARCH_RETRY_MS;
             }
-            if (found != 0) {
+            if (found != 0) {  // otherwise keep the current session
+                audioSession = found;
                 lastPlayerSession = found;
                 nextSearchAt = 0;
                 prefs.edit().putInt(PREF_LAST_PLAYER_SESSION, found).apply();
             }
-            if (fromCapture) {
-                if (found == 0) return;
-                // Media capture hears nothing here (e.g. SHIELD with Dolby output) but the player's
-                // session does: switch to Standard for good, so the consent is not asked again.
-                Log.i(TAG, "Audio source: media capture is silent, player session " + found + " is not");
-                audioSession = found;
-                if (!captureRunning) {  // capture ended during the search: nothing left to stop
-                    startAudio();
-                    Log.i(TAG, "Audio source now: " + standardSourceName());
-                    return;
-                }
-                switchingFromCapture = true;  // until the service has stopped; startAudio follows
-                handler.post(() -> {
-                    useStandardAudioSource();
-                    stopService(new Intent(MainActivity.this, AudioCaptureService.class));
-                });
-                return;
-            }
-            if (found != 0) audioSession = found;  // otherwise keep the current session
             startAudio();
-            if (audioSession != previous) Log.i(TAG, "Audio source now: " + standardSourceName());
+            // tools/tv-diagnostics.sh reports the latest of these lines as the source in use.
+            if (audioSession != previous) Log.i(TAG, "Audio source now: " + sourceName());
         }
     };
 
     private void setAudioEnabled(boolean enabled) {
-        AudioCaptureService.feeding = enabled;
         audioHandler.post(() -> {
             if (audioVisualizer == null) return;
             audioVisualizer.setEnabled(enabled);  // no effect on a polled, shared Visualizer
@@ -997,12 +889,9 @@ public class MainActivity extends Activity {
         super.onResume();
         visualizerView.onResume();
         resumed = true;
-        if (!captureRunning && hasAudioPermission()) audioHandler.post(this::startAudio);  // no-op if running
+        if (hasAudioPermission()) audioHandler.post(this::startAudio);  // no-op if running
         setAudioEnabled(true);
-        audioHandler.post(() -> {  // the watch starts fresh
-            musicActive = false;
-            if (!captureRunning) switchingFromCapture = false;
-        });
+        audioHandler.post(() -> musicActive = false);  // the watch starts fresh
         audioHandler.removeCallbacks(audioWatch);
         audioHandler.postDelayed(audioWatch, FIRST_WATCH_MS);
         handler.post(uiRefresh);
@@ -1072,8 +961,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         handler.removeCallbacksAndMessages(null);
-        AudioCaptureService.listener = null;
-        if (Build.VERSION.SDK_INT >= 29) stopService(new Intent(this, AudioCaptureService.class));
         audioHandler.removeCallbacks(audioWatch);
         audioHandler.post(this::stopAudio);
         audioThread.quitSafely();

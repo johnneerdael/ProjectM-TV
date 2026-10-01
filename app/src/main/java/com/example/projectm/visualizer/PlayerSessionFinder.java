@@ -10,10 +10,9 @@ import java.util.List;
 /**
  * Finds the audio session of the app that is playing music, by probing recent session ids.
  *
- * Why: on some TVs (NVIDIA SHIELD with Dolby output) media audio bypasses the output that the
- * global Visualizer (session 0) and playback capture listen to, so both hear silence. A Visualizer
- * attached to the player's own session is placed on the output that really plays it, so it does
- * receive the music. Players rarely announce their session, and Android 11 does not expose it, so
+ * Why: a Visualizer attached to the player's own session is placed on the output that really
+ * plays it, so it receives the music on every TV, also where the global output mix (session 0)
+ * hears silence (NVIDIA SHIELD with Dolby output), and it needs no permission beyond RECORD_AUDIO. Players rarely announce their session, and Android 11 does not expose it, so
  * we probe: session ids come from one counter in steps of 8, and a fresh id marks its top.
  *
  * Runs on the audio thread and blocks for up to a few hundred ms per batch.
