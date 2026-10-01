@@ -1,0 +1,46 @@
+From 811ce66c377941872b908b79e199cf0fdbd3aa30 Mon Sep 17 00:00:00 2001
+From: Mischa <me@mish.dev>
+Date: Fri, 9 Jan 2026 22:12:36 -0800
+Subject: [PATCH] Fix HLSLParser failing on parenthesized expressions in
+ declarations
+
+The parser rejected valid HLSL like `float2 var = (float2(x,y)) * scalar`
+with "expected ';'" errors. When parsing a parenthesized expression, the
+loop would break before consuming the closing paren, so subsequent binary
+operators were never seen.
+
+Moves end-char consumption into the else block and checks for operators
+after consuming the paren, continuing the loop if one is found.
+
+Fixes #940
+
+Cherry-picked from upstream commit c86dee9b7 (PR #948). Not part of the 4.1.x releases.
+---
+ vendor/hlslparser/src/HLSLParser.cpp | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/vendor/hlslparser/src/HLSLParser.cpp b/vendor/hlslparser/src/HLSLParser.cpp
+index 2b434b1a4..43ad3db51 100644
+--- a/vendor/hlslparser/src/HLSLParser.cpp
++++ b/vendor/hlslparser/src/HLSLParser.cpp
+@@ -2281,6 +2281,20 @@ bool HLSLParser::ParseBinaryExpression(int priority, HLSLExpression*& expression
+         }
+         else
+         {
++            // Before breaking, consume end char if needed and check for more operators
++            if( needsExpressionEndChar != 0 )
++            {
++                if( !Expect(needsExpressionEndChar) )
++                    return false;
++                needsExpressionEndChar = 0;
++
++                // After consuming end char, check if there's a binary operator to continue
++                if (AcceptBinaryOperator(priority, binaryOp))
++                {
++                    acceptBinaryOp = true;
++                    continue;
++                }
++            }
+             break;
+         }
+ 
