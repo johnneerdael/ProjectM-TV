@@ -1,0 +1,9 @@
+# Resolved on Python 3.14; install the package separately.
+Pygments==2.21.0
+iniconfig==2.3.0
+numpy==2.5.3
+opencv-python-headless==5.0.0.93
+packaging==26.3
+pip==26.1.1
+pluggy==1.6.0
+pytest==9.1.1

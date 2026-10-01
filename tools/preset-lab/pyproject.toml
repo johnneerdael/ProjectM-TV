@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "projectm-preset-lab"
+version = "0.1.0"
+description = "Offline projectM preset measurement and reusable genre matching"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "opencv-python-headless>=4.9"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+preset-lab = "preset_lab.cli:main"
+
+[tool.setuptools.package-data]
+preset_lab = ["profiles/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["native: requires the actual native OpenGL render worker"]

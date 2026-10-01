@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "version": "1",
+  "genres": [
+    {"id": "dance", "label": "Dance"},
+    {"id": "pop", "label": "Pop"},
+    {"id": "rock", "label": "Rock"},
+    {"id": "hip-hop", "label": "Hip-Hop"},
+    {"id": "rnb-soul", "label": "R&B / Soul"},
+    {"id": "jazz", "label": "Jazz"},
+    {"id": "classical", "label": "Classical"},
+    {"id": "ambient", "label": "Ambient"},
+    {"id": "folk-acoustic", "label": "Folk / Acoustic"},
+    {"id": "country", "label": "Country"},
+    {"id": "reggae", "label": "Reggae"},
+    {"id": "latin", "label": "Latin"}
+  ]
+}
