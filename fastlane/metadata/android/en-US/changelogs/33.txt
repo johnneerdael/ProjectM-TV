@@ -1,0 +1,3 @@
+- 19 fractal and domain-warp presets show their warp effect again (projectM shader translator fix).
+- Smoother waveforms: projectM now gets the full 576 audio samples per frame.
+- Preset equations use MilkDrop's comparison tolerance, so presets behave as in MilkDrop.
