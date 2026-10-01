@@ -47,6 +47,9 @@ class JobSpec:
     pcm_path: Path
     config: RunConfig
     identity: EngineIdentity
+    preset_root: Path
+    texture_root: Path
+    work: Path
 
 
 @dataclass(frozen=True, slots=True)

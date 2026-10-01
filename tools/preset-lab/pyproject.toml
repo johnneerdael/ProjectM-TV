@@ -16,7 +16,7 @@ test = ["pytest>=8"]
 preset-lab = "preset_lab.cli:main"
 
 [tool.setuptools.package-data]
-preset_lab = ["profiles/*.json"]
+preset_lab = ["profiles/*.json", "native/*", "native/vendor/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -13,8 +13,18 @@ def main(argv: list[str] | None = None) -> int:
     command = commands.add_parser("inventory", help="Identify presets, weights and textures")
     for name in ("presets", "textures", "index"):
         command.add_argument(f"--{name}", type=Path, required=True)
+    command = commands.add_parser("doctor", help="Build and verify deterministic native rendering")
+    command.add_argument("--repo", type=Path, default=Path.cwd())
+    command.add_argument("--work", type=Path, default=Path("build/preset-lab"))
+    command.add_argument("--worker", type=Path)
     args = parser.parse_args(argv)
     try:
+        if args.command == "doctor":
+            from .doctor import doctor
+            report = doctor(args.repo.resolve(), args.work.resolve(), args.worker)
+            json.dump(report, sys.stdout, ensure_ascii=False, allow_nan=False)
+            sys.stdout.write("\n")
+            return 0 if report["healthy"] else 1
         records, metadata = inventory(args.presets, args.index, args.textures)
         json.dump({"presets": [asdict(record) for record in records], "metadata": metadata},
                   sys.stdout, ensure_ascii=False, allow_nan=False)
