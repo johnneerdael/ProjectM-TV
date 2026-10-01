@@ -56,6 +56,18 @@ These are broad test buckets, not claims that every track in a genre has the sam
 
 Use the supplied corpus at `/Users/jneerdael/Desktop/audio`: one full track per genre is sufficient for the initial end-to-end tool and TV-category test. Do not require five tracks or independent held-out recordings before building, testing, or exporting the initial collections. Record the evidence as single-track testing, and expand the corpus later to assess how well the collections generalize. Prefer FLAC/WAV for future additions; the supplied M4A files are supported through the decoder. Ordinary mixed recordings are sufficient. Aligned stems are optional and improve source-response evidence.
 
+User update, 2 October: Ambient now has five supplied recordings, mapped in the user's stated order. Keep a single broad `ambient` genre and treat the supplied subgenre/sonic descriptions as test scenarios, not additional category IDs or measured conclusions. The corpus now has sixteen recordings across twelve broad genres. Use `profiles/reference-corpus.json` in the tool package to preserve the filename/title/scenario mapping; keep all source audio external.
+
+| File | User-specified reference | Test emphasis |
+|---|---|---|
+| `ambient.m4a` | Brian Eno — 1/1 | Sparse events, long silence, transients, clean decay |
+| `ambient2.webm` | Steve Roach — Structures from Silence | Slow swells, sustained harmony, low beat density |
+| `ambient3.webm` | Lustmord — Metastatic Resonance | Low/sub-bass, reverberation, unpredictable noise hits |
+| `ambient4.webm` | Gas — Pop 4 | Masked kick/beat under dense texture |
+| `ambient5.webm` | William Basinski — dlp 1.1 | Gradual spectral degradation, noise floor, dropouts |
+
+Support numbered samples in flat folders, including WebM/Opus. Actual excerpt descriptors and measured response remain separate from the user's expected sonic profiles. Per-genre corpus provenance reflects its real recording count; other genres remain valid initial single-track tests.
+
 The following files were inspected with ffprobe on 2 October 2026. All twelve complete audio streams were also decoded with ffmpeg, returning exit code zero and no reported decode errors. Each has a 44,100 Hz stereo AAC audio stream and an attached MJPEG image. Select the audio stream explicitly; album artwork is not visualizer output. Resolve these filename aliases at ingestion without renaming the user's files.
 
 | File | Genre ID | Duration (seconds) |

@@ -1,4 +1,5 @@
 import math
+import re
 import subprocess
 from pathlib import Path
 
@@ -116,8 +117,10 @@ def load_corpus(root: Path, manifest: Path | None, cache: Path) -> Corpus:
     if manifest:
         entries = load_json(manifest)["tracks"]
     else:
-        paths = sorted(p for p in root.iterdir() if p.suffix.lower() in (".m4a", ".wav", ".flac", ".mp3", ".ogg", ".aac"))
-        entries = [{"id": p.stem, "path": p.name, "genres": [ALIASES.get(p.stem.lower(), p.stem.lower())]}
+        paths = sorted(p for p in root.iterdir() if p.suffix.lower() in (".m4a", ".webm", ".wav", ".flac", ".mp3", ".ogg", ".opus", ".aac"))
+        entries = [{"id": p.stem, "path": p.name,
+                    "genres": [ALIASES.get(re.sub(r"\d+$", "", p.stem.lower()),
+                                          re.sub(r"\d+$", "", p.stem.lower()))]}
                    for p in paths]
     if not entries:
         raise ValueError("audio corpus is empty")
@@ -165,6 +168,10 @@ def load_corpus(root: Path, manifest: Path | None, cache: Path) -> Corpus:
                     "stereo_cancellation_detected": metadata["stereo_cancellation_detected"],
                     "mixing": metadata["mixing"], "stems_available": sorted(source_stems),
                     "variants": variants, "excerpts": segment_features, "evidence_level": "single-recording"}
+        if entry.get("title") or entry.get("test_scenarios"):
+            combined["reference"] = {"title": entry.get("title"),
+                                      "test_scenarios": entry.get("test_scenarios", []),
+                                      "provenance": "user-provided expectations"}
         for name in ("rms", "onset_density", "dynamic_range_db", "energy_variation"):
             combined[name] = float(np.average([s["features"][name] for s in segment_features], weights=durations))
         combined["spectral_balance"] = {band: float(np.average(

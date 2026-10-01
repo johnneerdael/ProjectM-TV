@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "tracks": [
+    {
+      "id": "ambient",
+      "path": "ambient.m4a",
+      "genres": ["ambient"],
+      "title": "Brian Eno — 1/1 (Ambient 1: Music for Airports)",
+      "test_scenarios": ["sparse piano/vocal-synth loops", "long silences", "isolated transients", "mid/high-frequency decay"]
+    },
+    {
+      "id": "ambient2",
+      "path": "ambient2.webm",
+      "genres": ["ambient"],
+      "title": "Steve Roach — Structures from Silence",
+      "test_scenarios": ["slow synth-pad swells", "near-zero beat density", "long attack/decay envelopes", "sustained mid-range harmonic movement"]
+    },
+    {
+      "id": "ambient3",
+      "path": "ambient3.webm",
+      "genres": ["ambient"],
+      "title": "Lustmord — Metastatic Resonance (The Place Where the Black Stars Hang)",
+      "test_scenarios": ["20–80 Hz low-end rumble", "long reverberation", "unpredictable high-frequency noise hits"]
+    },
+    {
+      "id": "ambient4",
+      "path": "ambient4.webm",
+      "genres": ["ambient"],
+      "title": "Gas — Pop 4 (Pop)",
+      "test_scenarios": ["muffled steady 4/4 kick", "dense filtered orchestral texture", "beat detection under masking"]
+    },
+    {
+      "id": "ambient5",
+      "path": "ambient5.webm",
+      "genres": ["ambient"],
+      "title": "William Basinski — dlp 1.1 (The Disintegration Loops)",
+      "test_scenarios": ["slowly degrading repeating loop", "gradual high-frequency loss", "crackle/noise floor", "dynamic dropouts"]
+    },
+    {"id": "classical", "path": "classical.m4a", "genres": ["classical"]},
+    {"id": "country", "path": "country.m4a", "genres": ["country"]},
+    {"id": "dance", "path": "dance.m4a", "genres": ["dance"]},
+    {"id": "folk", "path": "folk.m4a", "genres": ["folk-acoustic"]},
+    {"id": "hiphop", "path": "hiphop.m4a", "genres": ["hip-hop"]},
+    {"id": "jazz", "path": "jazz.m4a", "genres": ["jazz"]},
+    {"id": "latin", "path": "latin.m4a", "genres": ["latin"]},
+    {"id": "pop", "path": "pop.m4a", "genres": ["pop"]},
+    {"id": "r&b", "path": "r&b.m4a", "genres": ["rnb-soul"]},
+    {"id": "reggae", "path": "reggae.m4a", "genres": ["reggae"]},
+    {"id": "rock", "path": "rock.m4a", "genres": ["rock"]}
+  ]
+}

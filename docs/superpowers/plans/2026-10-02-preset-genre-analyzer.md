@@ -13,7 +13,7 @@
 ## Global Constraints
 
 - Use all twelve fixed broad genre IDs from the spec; All is the unfiltered library. Do not add subgenres or automatic track-genre detection.
-- Use `/Users/jneerdael/Desktop/audio`, one track per genre, for initial end-to-end testing. Neither additional recordings nor ratings are a prerequisite.
+- Use `/Users/jneerdael/Desktop/audio`, at least one track per genre, for initial end-to-end testing. Ambient now has five recordings in the user-specified filename/order mapping (sixteen recordings total). Neither further recordings nor ratings are a prerequisite.
 - Target home TV listening with editable audience preferences. Keep audio response, genre fit, audience fit, and technical quality separate.
 - `run` completes without prompts, manual analysis steps, or ratings. `match` never starts a render worker. Analyze new or changed presets automatically; reuse valid measurements.
 - Start screening at 256×144, 30 fps, four seconds warm-up and twenty seconds measurement; extend uncertain cases to sixty seconds. Validate representatives at 512×288, 30/60 fps, three seeds, and on SHIELD.

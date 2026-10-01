@@ -103,6 +103,32 @@ def test_attached_album_art_is_excluded_from_decoding(tmp_path):
     assert corpus.descriptors["dance"]["rms"] > 0.15
 
 
+def test_numbered_webm_samples_remain_in_the_same_broad_genre(tmp_path):
+    source = tmp_path / "source.wav"
+    write_wave(source, np.sin(np.arange(44100) * 0.03) * 0.2)
+    root = tmp_path / "audio"
+    root.mkdir()
+    for number in (2, 3):
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(source),
+                        "-c:a", "libopus", str(root / f"ambient{number}.webm")], check=True)
+    corpus = load_corpus(root, None, tmp_path / "cache")
+    assert [track.id for track in corpus.tracks] == ["ambient2", "ambient3"]
+    assert [track.genre_ids for track in corpus.tracks] == [("ambient",), ("ambient",)]
+
+
+def test_reference_annotations_are_not_measured_features(tmp_path):
+    write_wave(tmp_path / "ambient.wav", np.zeros(44100))
+    manifest = tmp_path / "reference.json"
+    manifest.write_text(json.dumps({"tracks": [{"id": "ambient", "path": "ambient.wav",
+        "genres": ["ambient"], "title": "Sparse reference", "test_scenarios": ["isolated_transients"]}]}))
+    corpus = load_corpus(tmp_path, manifest, tmp_path / "cache")
+    reference = corpus.descriptors["ambient"]["reference"]
+    assert reference["title"] == "Sparse reference"
+    assert reference["test_scenarios"] == ["isolated_transients"]
+    assert reference["provenance"] == "user-provided expectations"
+    assert corpus.descriptors["ambient"]["onset_density"] == 0
+
+
 def test_stems_must_align_and_share_variant_gain(tmp_path):
     times = np.arange(44100) / 44100
     drums = 0.9 * np.sin(2 * np.pi * 80 * times)

@@ -38,6 +38,14 @@ The flat-folder aliases `folk`, `hiphop` and `r&b` map to Folk / Acoustic, Hip-H
 
 The corpus records source hashes, valid excerpt offsets, spectral balance, onset density/regularity, dynamics and available stems. Initial excerpts are within-track evidence. Optional manifests accept `tracks` containing `id`, `path`, `genres`, `excerpts`, and `stems` (drums, bass_instrument, melody, vocals, other). Stem files must have aligned sample counts. Missing stems never become invented source-response scores.
 
+Numbered files such as `ambient2.webm` remain in Ambient. WebM/Opus inputs are decoded through the same audio-only path. The supplied Ambient references are Eno (`ambient.m4a`), Roach (`ambient2.webm`), Lustmord (`ambient3.webm`), Gas (`ambient4.webm`) and Basinski (`ambient5.webm`), in that order. Preserve the title/test-scenario annotations with the supplied manifest:
+
+```sh
+build/preset-lab-venv/bin/preset-lab corpus --audio /Users/jneerdael/Desktop/audio --manifest tools/preset-lab/src/preset_lab/profiles/reference-corpus.json --work build/preset-lab/audio > build/preset-lab-corpus.json
+```
+
+These annotations describe the user's expected test coverage; the tool stores them separately from measured audio features. They do not create subgenre categories.
+
 Inspect static audio dependencies:
 
 ```sh
