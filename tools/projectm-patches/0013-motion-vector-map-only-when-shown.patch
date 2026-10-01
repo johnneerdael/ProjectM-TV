@@ -1,0 +1,47 @@
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -126,15 +126,26 @@
+     // We now draw to the current framebuffer.
+     m_framebuffer.Bind(m_currentFrameBuffer);
+ 
+-    // Add motion vector u/v texture for the warp mesh draw and clean both buffers.
+-    m_framebuffer.SetAttachment(m_currentFrameBuffer, 1, m_motionVectorUVMap);
++    // The u/v map is only read by the next frame's motion vectors, so it is written only while the
++    // preset shows them (the same test as in MotionVectors::Draw()). A full-size write is saved
++    // for most presets; a preset turning them on uses a stale map for that one frame.
++    bool const writeMotionUV = *m_perFrameContext.mv_a >= 0.0001f &&
++                               static_cast<int>(*m_perFrameContext.mv_x) > 0 &&
++                               static_cast<int>(*m_perFrameContext.mv_y) > 0;
++
++    if (writeMotionUV)
++    {
++        // Add motion vector u/v texture for the warp mesh draw and clean both buffers.
++        m_framebuffer.SetAttachment(m_currentFrameBuffer, 1, m_motionVectorUVMap);
++    }
+ 
+     // Draw previous frame image warped via per-pixel mesh and warp shader
+     m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext);
+ 
+-    // Stop writing to the u/v texture, but keep it attached until the frame's drawing is done:
+-    // changing the attachments here would end the render pass.
++    if (writeMotionUV)
+     {
++        // Stop writing to the u/v texture, but keep it attached until the frame's drawing is done:
++        // changing the attachments here would end the render pass.
+         const GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_NONE};
+         glDrawBuffers(2, buffers);
+     }
+@@ -157,8 +168,11 @@
+     }
+     m_border.Draw(m_perFrameContext);
+ 
+-    // Remove the u/v texture from the framebuffer.
+-    m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
++    if (writeMotionUV)
++    {
++        // Remove the u/v texture from the framebuffer.
++        m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
++    }
+ 
+     // Todo: Song title anim would go here
+ 

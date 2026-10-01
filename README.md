@@ -27,7 +27,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 - **Track title and artist** on screen when a new track starts
 - **No freezes at preset switches**: upcoming presets are prepared in the background, with cached shaders
 - **Adaptive resolution** that holds the frame rate, also during blends, without interrupting the picture
-- **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), reused picture buffers, fewer redundant GL calls, a faster shader parser
+- **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), less memory traffic per frame (up to 22% more frames per second on a Mali-G52, up to 76% on presets without a composite shader), reused picture buffers, fewer redundant GL calls, a faster shader parser
 - **Memory-aware**: keeps the music app alive on TVs with little memory
 - **Skips presets that stay black**
 - **Optional auto-update**: downloads new releases in the background and offers to install them (off by default)
@@ -188,7 +188,7 @@ The engine is the `:core` module, which the open-source music streamer [Milkbeat
 
 ### projectM
 
-projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, caches of linked and translated shader programs, fewer redundant GL calls, batched drawing of custom shapes, reuse of framebuffer textures between presets, a faster HLSL parser on Android, and corrected floating-point/vector remainder and shader operator precedence) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
+projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, caches of linked and translated shader programs, fewer redundant GL calls, batched drawing of custom shapes, reuse of framebuffer textures between presets, a faster HLSL parser on Android, corrected floating-point/vector remainder and shader operator precedence, and less memory traffic per frame on tile-based GPUs: discarded render-target contents, fewer full-screen copies, one indexed draw for the warp mesh) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
 
 ### Tests
 

@@ -1,0 +1,111 @@
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -85,6 +85,7 @@
+     {
+         m_motionVectorUVMap->SetSize(renderContext.viewportSizeX, renderContext.viewportSizeY);
+         m_isFirstFrame = true;
++        m_flipHoldsPreviousFrame = false;
+     }
+ 
+     m_state.mainTexture = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
+@@ -97,13 +98,20 @@
+     m_framebuffer.Bind(m_previousFrameBuffer);
+     // Motion vector field. Drawn to the previous frame texture before warping it.
+     // Only do it after drawing one frame after init or resize.
++    bool motionVectorsDrawn = false;
+     if (!m_isFirstFrame)
+     {
+-        m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture());
++        motionVectorsDrawn = m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture());
+     }
+ 
+-    // y-flip the previous frame and assign the flipped texture as "main"
+-    m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
++    // y-flip the previous frame and assign the flipped texture as "main". The second flip of the
++    // last frame already left exactly this image in the flip texture, unless motion vectors were
++    // drawn onto the previous frame since, or something else replaced either texture.
++    if (m_isFirstFrame || motionVectorsDrawn || !m_flipHoldsPreviousFrame)
++    {
++        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
++    }
++    m_flipHoldsPreviousFrame = false;
+     m_state.mainTexture = m_flipTexture.Texture();
+ 
+     // We now draw to the current framebuffer.
+@@ -162,6 +170,11 @@
+         // Flip texture again in "previous" framebuffer as old-school effects are still upside down.
+         m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), m_framebuffer, m_previousFrameBuffer, true, false);
+     }
++    else
++    {
++        // The flip texture holds the y-flipped current frame, which is next frame's previous frame.
++        m_flipHoldsPreviousFrame = true;
++    }
+ 
+     // Swap framebuffer IDs for the next frame.
+     std::swap(m_currentFrameBuffer, m_previousFrameBuffer);
+@@ -181,6 +194,7 @@
+ 
+     // Render to previous framebuffer, as this is the image used to draw the next frame on.
+     m_flipTexture.Draw(image, m_framebuffer, m_previousFrameBuffer);
++    m_flipHoldsPreviousFrame = false;
+ }
+ 
+ void MilkdropPreset::PerFrameUpdate()
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+@@ -129,6 +129,7 @@
+     FinalComposite m_finalComposite; //!< Final composite shader or filters.
+ 
+     bool m_isFirstFrame{true}; //!< Controls drawing the motion vectors starting with the second frame.
++    bool m_flipHoldsPreviousFrame{false}; //!< The flip texture still holds the y-flipped previous frame.
+ };
+ 
+ } // namespace MilkdropPreset
+--- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
++++ b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
+@@ -27,12 +27,12 @@
+     glVertexAttribIPointer(2, 1, GL_INT, sizeof(MotionVectorVertex), reinterpret_cast<void*>(offsetof(MotionVectorVertex, index)));
+ }
+ 
+-void MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shared_ptr<Renderer::Texture> motionTexture)
++auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shared_ptr<Renderer::Texture> motionTexture) -> bool
+ {
+     // Don't draw if invisible.
+     if (*presetPerFrameContext.mv_a < 0.0001f)
+     {
+-        return;
++        return false;
+     }
+ 
+     int countX = static_cast<int>(*presetPerFrameContext.mv_x);
+@@ -40,7 +40,7 @@
+ 
+     if (countX <= 0 || countY <= 0)
+     {
+-        return;
++        return false;
+     }
+ 
+     float divertX = static_cast<float>(*presetPerFrameContext.mv_x) - static_cast<float>(countX);
+@@ -160,6 +160,7 @@
+     Renderer::Shader::Unbind();
+ 
+     glDisable(GL_BLEND);
++    return true;
+ }
+ 
+ } // namespace MilkdropPreset
+--- a/src/libprojectM/MilkdropPreset/MotionVectors.hpp
++++ b/src/libprojectM/MilkdropPreset/MotionVectors.hpp
+@@ -32,8 +32,9 @@
+      * Renders the motion vectors.
+      * @param presetPerFrameContext The per-frame context variables.
+      * @param motionTexture The u/v "motion" texture written by the warp shader.
++     * @return True if vectors were drawn, false if the preset's settings leave none to draw.
+      */
+-    void Draw(const PerFrameContext& presetPerFrameContext, std::shared_ptr<Renderer::Texture> motionTexture);
++    auto Draw(const PerFrameContext& presetPerFrameContext, std::shared_ptr<Renderer::Texture> motionTexture) -> bool;
+ 
+ private:
+     struct MotionVectorVertex

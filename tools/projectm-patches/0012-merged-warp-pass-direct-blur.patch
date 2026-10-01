@@ -1,0 +1,127 @@
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.cpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+@@ -141,6 +141,18 @@
+ 
+     m_blurFramebuffer.Bind(0);
+ 
++    // Each pass can draw straight into its blur texture instead of drawing into the framebuffer's
++    // own texture and copying from there: the same 8-bit values, one full read and write less.
++    // Checked once per texture size, as an RGB texture might not be renderable on every driver.
++    GLuint const ownTexture = m_blurFramebuffer.GetColorAttachmentTexture(0, 0)->TextureID();
++    if (m_directRendering == DirectRendering::Unknown && m_blurTextures[0] && m_blurTextures[0]->TextureID() != 0)
++    {
++        glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_blurTextures[0]->TextureID(), 0);
++        m_directRendering = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE ? DirectRendering::Yes : DirectRendering::No;
++        glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ownTexture, 0);
++    }
++    bool const direct = m_directRendering == DirectRendering::Yes;
++
+     glBlendFunc(GL_ONE, GL_ZERO);
+     glBindVertexArray(m_vaoBlur);
+ 
+@@ -240,20 +252,33 @@
+             }
+         }
+ 
+-        // Draw fullscreen quad. Only this pass's area is drawn and copied, with GL_ONE/GL_ZERO
+-        // blending, so the old contents (an earlier pass, already copied) are never read.
++        if (direct)
++        {
++            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_blurTextures[pass]->TextureID(), 0);
++        }
++
++        // Draw fullscreen quad. Only this pass's area is drawn and used, with GL_ONE/GL_ZERO
++        // blending, so the old contents of the target are never read.
+         {
+             const GLenum attachment = GL_COLOR_ATTACHMENT0;
+             glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
+         }
+         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+ 
+-        // Save to blur texture
+-        m_blurTextures[pass]->Bind(0);
+-        glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_blurTextures[pass]->Width(), m_blurTextures[pass]->Height());
+-        m_blurTextures[pass]->Unbind(0);
++        if (!direct)
++        {
++            // Save to blur texture
++            m_blurTextures[pass]->Bind(0);
++            glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_blurTextures[pass]->Width(), m_blurTextures[pass]->Height());
++            m_blurTextures[pass]->Unbind(0);
++        }
+     }
+ 
++    if (direct)
++    {
++        glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ownTexture, 0);
++    }
++
+     glBindVertexArray(0);
+     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ 
+@@ -363,6 +388,7 @@
+         // This will automatically replace any old texture.
+         m_blurTextures[i] = std::make_shared<Renderer::Texture>(textureName, width2, height2, false);
+     }
++    m_directRendering = DirectRendering::Unknown;
+ 
+     m_sourceTextureWidth = sourceTexture.Width();
+     m_sourceTextureHeight = sourceTexture.Height();
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.hpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
+@@ -111,6 +111,8 @@
+     std::shared_ptr<Renderer::Sampler> m_blurSampler;                               //!< The blur sampler.
+     std::array<std::shared_ptr<Renderer::Texture>, NumBlurTextures> m_blurTextures; //!< The blur textures for each pass.
+     BlurLevel m_blurLevel{BlurLevel::None};                                         //!< Current blur level.
++    enum class DirectRendering { Unknown, Yes, No };
++    DirectRendering m_directRendering{DirectRendering::Unknown}; //!< Passes draw straight into the blur textures (no copy).
+ };
+ 
+ } // namespace MilkdropPreset
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -114,6 +114,15 @@
+     m_flipHoldsPreviousFrame = false;
+     m_state.mainTexture = m_flipTexture.Texture();
+ 
++    // Update blur textures. They are made from the previous frame, which nothing changes from
++    // here on, so this happens before the warp: the warp and everything drawn on top of it can
++    // then go to the current framebuffer in one render pass.
++    {
++        const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
++        assert(warpedImage.get());
++        m_state.blurTexture.Update(*warpedImage, m_perFrameContext);
++    }
++
+     // We now draw to the current framebuffer.
+     m_framebuffer.Bind(m_currentFrameBuffer);
+ 
+@@ -123,14 +132,11 @@
+     // Draw previous frame image warped via per-pixel mesh and warp shader
+     m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext);
+ 
+-    // Remove the u/v texture from the framebuffer.
+-    m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
+-
+-    // Update blur textures
++    // Stop writing to the u/v texture, but keep it attached until the frame's drawing is done:
++    // changing the attachments here would end the render pass.
+     {
+-        const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
+-        assert(warpedImage.get());
+-        m_state.blurTexture.Update(*warpedImage, m_perFrameContext);
++        const GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_NONE};
++        glDrawBuffers(2, buffers);
+     }
+ 
+     // Draw audio-data-related stuff
+@@ -151,6 +157,9 @@
+     }
+     m_border.Draw(m_perFrameContext);
+ 
++    // Remove the u/v texture from the framebuffer.
++    m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
++
+     // Todo: Song title anim would go here
+ 
+     // y-flip the image for final compositing again

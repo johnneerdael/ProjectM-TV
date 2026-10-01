@@ -1,0 +1,95 @@
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.cpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+@@ -240,7 +240,12 @@
+             }
+         }
+ 
+-        // Draw fullscreen quad
++        // Draw fullscreen quad. Only this pass's area is drawn and copied, with GL_ONE/GL_ZERO
++        // blending, so the old contents (an earlier pass, already copied) are never read.
++        {
++            const GLenum attachment = GL_COLOR_ATTACHMENT0;
++            glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
++        }
+         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+ 
+         // Save to blur texture
+--- a/src/libprojectM/MilkdropPreset/FinalComposite.cpp
++++ b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+@@ -123,6 +123,11 @@
+ 
+         // Render the grid
+         glDisable(GL_BLEND);
++        // The grid covers the whole viewport without blending: the target's old contents are not needed.
++        {
++            const GLenum attachment = GL_COLOR_ATTACHMENT0;
++            glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
++        }
+         glBindVertexArray(m_vaoID);
+         glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
+         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(MeshVertex) * vertexCount, m_vertices.data());
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -308,6 +308,13 @@
+ 
+     // No blending between presets here, so we make sure blending is disabled.
+     glDisable(GL_BLEND);
++
++    // The mesh covers the whole viewport without blending, so the old contents of the frame and
++    // u/v attachments are never read: tile-based GPUs can skip loading them from memory.
++    {
++        const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
++        glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 2, attachments);
++    }
+ 
+     if (!m_warpShader)
+     {
+@@ -375,6 +382,9 @@
+ 
+         if (trianglesQueued > 0)
+         {
++            // Orphan the buffer first: the previous batch's draw may still read it, and overwriting
++            // it in place would make the driver stall or copy.
++            glBufferData(GL_ARRAY_BUFFER, sizeof(MeshVertex) * m_drawVertices.size(), nullptr, GL_STREAM_DRAW);
+             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(MeshVertex) * trianglesQueued * 3, m_drawVertices.data());
+             glDrawArrays(GL_TRIANGLES, 0, trianglesQueued * 3);
+         }
+--- a/src/libprojectM/Renderer/CopyTexture.cpp
++++ b/src/libprojectM/Renderer/CopyTexture.cpp
+@@ -108,6 +108,20 @@
+     Copy(flipVertical, flipHorizontal);
+ }
+ 
++namespace {
++// A copy covers the whole target. Without blending its old contents are never read, so
++// tile-based GPUs can skip loading them from memory. With blending on, keep them.
++void InvalidateCopyTarget()
++{
++    if (glIsEnabled(GL_BLEND))
++    {
++        return;
++    }
++    const GLenum attachment = GL_COLOR_ATTACHMENT0;
++    glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
++}
++} // namespace
++
+ void CopyTexture::Draw(const std::shared_ptr<class Texture>& originalTexture, const std::shared_ptr<class Texture>& targetTexture,
+                        bool flipVertical, bool flipHorizontal)
+ {
+@@ -146,6 +160,7 @@
+         m_framebuffer.GetAttachment(0, TextureAttachment::AttachmentType::Color, 0)->Texture(targetTexture);
+     }
+ 
++    InvalidateCopyTarget();
+     Copy(flipVertical, flipHorizontal);
+ 
+     // Rebind our internal texture.
+@@ -180,6 +195,7 @@
+     // Draw from unflipped texture
+     originalTexture->Bind(0);
+ 
++    InvalidateCopyTarget();
+     Copy(flipVertical, flipHorizontal);
+ 
+     // Swap texture attachments
