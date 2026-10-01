@@ -96,7 +96,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 
 **Audio**
 - The app does not play music, and it has no microphone or line-in input. It can only visualize audio that another app plays on the same TV.
-- The app listens to the audio session of the app that plays music, which it finds by itself once music plays. It tries the session it found last first, so the visuals usually react within a second or two. If it finds nothing while music plays, it tries again every 20 seconds. It does not depend on the TV's audio output setting, such as Dolby or passthrough. It works with SoundCloud and Flow; **other music apps (Spotify, YouTube Music, Plex, …) have not been tested**.
+- The app listens to the audio session of the app that plays music, which it finds by itself once music plays. It tries the session it found last first, so the visuals usually react within a second or two. If it finds nothing while music plays, it tries again once when the next track starts (with notification access, see [Track titles](#track-titles)), and otherwise once a minute. It does not depend on the TV's audio output setting, such as Dolby or passthrough. It works with SoundCloud and Flow; **other music apps (Spotify, YouTube Music, Plex, …) have not been tested**.
 - Audio that reaches the TV already encoded (for example Dolby bitstreams from a video app) cannot be visualized.
 - The audio the visualizer receives is 8-bit mono, which is what Android's visualizer API provides.
 
@@ -159,7 +159,7 @@ A version you built yourself is signed with your own debug key: uninstall it bef
 
 ## Troubleshooting
 
-**The visuals don't react to the music.** Open *Settings › Advanced* and look at the *Audio* line under *Diagnostics*.
+**The visuals don't react to the music.** If music plays at launch but the app finds no audio, the lower left shows *No audio detected*; the app looks again when the next track starts, and otherwise once a minute. Open *Settings › Advanced* and look at the *Audio* line under *Diagnostics*.
 - *no player session found yet* or *silent / no data* right after launch: wait a few seconds while the app looks for the music app's audio session.
 - Still silent: the music app may send encoded audio, or it may not have been tested (see *Audio* above). Try SoundCloud to confirm the setup works.
 

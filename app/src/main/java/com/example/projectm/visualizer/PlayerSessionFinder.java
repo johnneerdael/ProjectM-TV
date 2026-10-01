@@ -87,12 +87,6 @@ final class PlayerSessionFinder {
         return found;
     }
 
-    /** True when {@code session} carries signal right now (one probe, ~300 ms). */
-    static boolean hasSignal(int session) {
-        refused.clear();
-        return session > 0 && probe(new int[]{session}) == session;
-    }
-
     /** Attaches a short-lived Visualizer to each id and returns the loudest one above MIN_RMS. */
     private static int probe(int[] ids) {
         List<Visualizer> probes = new ArrayList<>();

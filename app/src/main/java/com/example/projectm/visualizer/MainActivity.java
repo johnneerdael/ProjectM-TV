@@ -46,8 +46,7 @@ public class MainActivity extends Activity {
     private static final long AUDIO_WATCH_MS = 2000;      // how often silence is checked
     private static final long FIRST_WATCH_MS = 500;       // first check after (re)starting
     private static final long SILENCE_BEFORE_SEARCH_MS = 4000;
-    private static final long SEARCH_RETRY_MS = 20000;    // while music plays but nothing is heard
-    private static final long RECHECK_PLAYER_MS = 4000;   // quick look at the last player session
+    private static final long SEARCH_RETRY_MS = 60000;    // after a search found nothing (a new track allows one)
     private static final long AUDIO_POLL_MS = 50;         // shared Visualizer without callbacks
 
     private static final String PREFS = "projectm_settings";
@@ -96,8 +95,9 @@ public class MainActivity extends Activity {
     private int lastPlayerSession;
     private volatile long lastSignalAt;
     private long nextSearchAt;
-    private long nextRecheckAt;
+    private boolean trackSearchDue;  // a new track started: allows one search despite the backoff
     private boolean musicActive;
+    private boolean noAudioNoticeDue;  // after a (re)start: tell once when no player session is found
     private byte[] pollBuffer;
     private boolean audioPolled;
     private AudioManager audioManager;
@@ -317,7 +317,7 @@ public class MainActivity extends Activity {
         nowPlaying = findViewById(R.id.now_playing);
         nowPlayingIcon = findViewById(R.id.now_playing_icon);
         nowPlayingText = findViewById(R.id.now_playing_text);
-        trackWatcher = new TrackWatcher(this, handler, this::onTrack);
+        trackWatcher = new TrackWatcher(this, handler, this::onTrackChanged);
         updater = Updater.get(this, prefs);
         updater.attach(handler, updateListener);
 
@@ -612,6 +612,19 @@ public class MainActivity extends Activity {
         showPill(R.drawable.ic_music_note, label, newTrack);
     }
 
+    /** From the music app's media session. A new track also allows one search for its audio. */
+    private void onTrackChanged(String label, boolean newTrack) {
+        if (newTrack && resumed) {
+            // On audioThread, so no watch run is in progress: the chain is restarted, not doubled.
+            audioHandler.post(() -> {
+                trackSearchDue = true;
+                audioHandler.removeCallbacks(audioWatch);
+                if (resumed) audioHandler.post(audioWatch);
+            });
+        }
+        onTrack(label, newTrack);
+    }
+
     /** Text in the lower-left pill; {@code restart} shows it (again) for 20 s. */
     private void showPill(int icon, String text, boolean restart) {
         nowPlayingIcon.setImageResource(icon);
@@ -621,6 +634,12 @@ public class MainActivity extends Activity {
         fade(nowPlaying, true);
         handler.removeCallbacks(hideNowPlaying);
         handler.postDelayed(hideNowPlaying, TRACK_SHOWN_MS);
+    }
+
+    /** Music plays at start but no player session carries it: say so in the pill, once. */
+    private void showNoAudioNotice() {
+        if (!resumed || menu != Menu.NONE) return;
+        showPill(R.drawable.ic_music_note, "No audio detected", true);
     }
 
     /**
@@ -794,7 +813,10 @@ public class MainActivity extends Activity {
             Log.e(TAG, "Audio capture unavailable", e);
             if (visualizer != null) visualizer.release();
             audioVisualizer = null;
-            audioSession = 0;  // the player's session is gone: the watch searches again
+            // The player's session is gone: the watch searches again after the backoff.
+            audioSession = 0;
+            nextSearchAt = SystemClock.elapsedRealtime() + SEARCH_RETRY_MS;
+            Log.i(TAG, "Audio source now: none");
         }
     }
 
@@ -826,7 +848,10 @@ public class MainActivity extends Activity {
             audioHandler.postDelayed(this, AUDIO_WATCH_MS);
             if (!resumed || !hasAudioPermission()) return;
             long now = SystemClock.elapsedRealtime();
-            if (ProjectMJNI.getAudioLevel() > 0f) lastSignalAt = now;
+            if (ProjectMJNI.getAudioLevel() > 0f) {
+                lastSignalAt = now;
+                noAudioNoticeDue = false;  // audio was heard after the (re)start
+            }
             if (!audioManager.isMusicActive()) {
                 musicActive = false;
                 return;
@@ -834,31 +859,24 @@ public class MainActivity extends Activity {
             if (!musicActive) {  // music (re)started
                 musicActive = true;
                 lastSignalAt = now;
-                nextSearchAt = 0;
-                nextRecheckAt = 0;
                 // If we hear nothing, look for the player's session right away (the last one
                 // first): waiting for 4 s of silence first only delayed the visuals after a launch.
                 if (ProjectMJNI.getAudioLevel() > 0f) return;
                 lastSignalAt = now - SILENCE_BEFORE_SEARCH_MS;
             }
             if (now - lastSignalAt < SILENCE_BEFORE_SEARCH_MS) return;
-
-            // The last player's session often carries the music again (e.g. a paused player in
-            // another app): one probe shows that, so it is checked often, apart from the backoff.
-            int last = lastPlayerSession;
-            boolean recheck = last != 0 && audioSession != last && now >= nextRecheckAt;
-            if (!recheck && now < nextSearchAt) return;
+            // After a search that found nothing, wait a minute, unless a new track has started
+            // since: each track allows one search. The session found last is probed first.
+            if (now < nextSearchAt && !trackSearchDue) return;
+            trackSearchDue = false;
             int previous = audioSession;
             stopAudio();  // releases our instance so the probe sees the session as it is
-            int found = 0;
-            if (recheck) {
-                nextRecheckAt = now + RECHECK_PLAYER_MS;
-                if (PlayerSessionFinder.hasSignal(last)) found = last;
+            int found = PlayerSessionFinder.find(audioManager.generateAudioSessionId(), lastPlayerSession);
+            if (found == 0) {
+                nextSearchAt = now + SEARCH_RETRY_MS;
+                if (noAudioNoticeDue) handler.post(MainActivity.this::showNoAudioNotice);
             }
-            if (found == 0 && now >= nextSearchAt) {
-                found = PlayerSessionFinder.find(audioManager.generateAudioSessionId(), last);
-                if (found == 0) nextSearchAt = now + SEARCH_RETRY_MS;
-            }
+            noAudioNoticeDue = false;  // only the first search after a (re)start tells
             if (found != 0) {  // otherwise keep the current session
                 audioSession = found;
                 lastPlayerSession = found;
@@ -891,7 +909,11 @@ public class MainActivity extends Activity {
         resumed = true;
         if (hasAudioPermission()) audioHandler.post(this::startAudio);  // no-op if running
         setAudioEnabled(true);
-        audioHandler.post(() -> musicActive = false);  // the watch starts fresh
+        audioHandler.post(() -> {  // the watch starts fresh, and searches right away
+            musicActive = false;
+            noAudioNoticeDue = true;
+            nextSearchAt = 0;
+        });
         audioHandler.removeCallbacks(audioWatch);
         audioHandler.postDelayed(audioWatch, FIRST_WATCH_MS);
         handler.post(uiRefresh);
