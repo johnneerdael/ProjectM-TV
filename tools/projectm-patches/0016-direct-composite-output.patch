@@ -1,0 +1,258 @@
+--- a/src/api/include/projectM-4/render_opengl.h
++++ b/src/api/include/projectM-4/render_opengl.h
+@@ -75,6 +75,19 @@
+ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_handle instance, uint32_t divisor);
+ 
+ /**
++ * @brief Lets the preset draw its final image straight into the target framebuffer.
++ *
++ * Saves storing the image in the preset's own texture and copying it to the target. projectM
++ * still uses the texture during transitions and in frames that request a preset switch. The
++ * caller must render one frame with this disabled before it switches presets itself, as the new
++ * preset starts from the previous preset's texture.
++ *
++ * @param instance The projectM instance handle.
++ * @param enabled True to allow drawing straight into the target. Off by default.
++ */
++PROJECTM_EXPORT void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled);
++
++/**
+  * @brief Sets the size of the calling thread's pool of framebuffer textures.
+  *
+  * When a preset is discarded, its framebuffer textures are kept for the next preset of the same
+--- a/src/libprojectM/MilkdropPreset/FinalComposite.cpp
++++ b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+@@ -129,7 +129,7 @@
+         // needed, unless the shader can discard pixels (clip()), which keep them.
+         if (!m_compositeShaderDiscards)
+         {
+-            const GLenum attachment = GL_COLOR_ATTACHMENT0;
++            const GLenum attachment = presetState.compositeToDefaultFramebuffer ? GL_COLOR : GL_COLOR_ATTACHMENT0;
+             glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
+         }
+         glBindVertexArray(m_vaoID);
+--- a/src/libprojectM/MilkdropPreset/FinalComposite.hpp
++++ b/src/libprojectM/MilkdropPreset/FinalComposite.hpp
+@@ -48,6 +48,15 @@
+      */
+     auto HasCompositeShader() const -> bool;
+ 
++    /**
++     * @brief True if the composite shader can discard pixels (clip()). They keep the target's
++     * contents, which must then be the preset's own previous frame, not another framebuffer.
++     */
++    auto CompositeShaderDiscards() const -> bool
++    {
++        return m_compositeShader != nullptr && m_compositeShaderDiscards;
++    }
++
+ private:
+     /**
+      * Composite mesh vertex with all required attributes.
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -193,9 +193,24 @@
+     m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0), nullptr, true, false);
+     m_state.mainTexture = m_flipTexture.Texture();
+ 
+-    // We no longer need the previous frame image, use it to render the final composite.
++    // We no longer need the previous frame image, use it to render the final composite, or draw
++    // the composite straight into the caller's framebuffer when nothing needs it stored.
+     m_framebuffer.BindRead(m_currentFrameBuffer);
+-    m_framebuffer.BindDraw(m_previousFrameBuffer);
++    m_state.compositeToDefaultFramebuffer = false;
++    if (m_directOutput)
++    {
++        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_directFramebuffer);
++#ifdef USE_GLES
++        // The default framebuffer's draw buffer must be GL_BACK (see ProjectM::RenderFrame()).
++        GLenum const drawBuffer = m_directFramebuffer == 0 ? GL_BACK : GL_COLOR_ATTACHMENT0;
++        glDrawBuffers(1, &drawBuffer);
++#endif
++        m_state.compositeToDefaultFramebuffer = m_directFramebuffer == 0;
++    }
++    else
++    {
++        m_framebuffer.BindDraw(m_previousFrameBuffer);
++    }
+ 
+     m_finalComposite.Draw(m_state, m_perFrameContext);
+ 
+@@ -218,6 +233,15 @@
+     return m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0);
+ }
+ 
++auto MilkdropPreset::SetOutputTarget(bool direct, uint32_t targetFramebuffer) -> bool
++{
++    // Pixels a composite shader discards keep the target's contents: only the stored path has the
++    // preset's previous frame there.
++    m_directOutput = direct && !m_finalComposite.CompositeShaderDiscards();
++    m_directFramebuffer = targetFramebuffer;
++    return m_directOutput;
++}
++
+ void MilkdropPreset::DrawInitialImage(const std::shared_ptr<Renderer::Texture>& image, const Renderer::RenderContext& renderContext)
+ {
+     m_framebuffer.SetSize(renderContext.viewportSizeX, renderContext.viewportSizeY);
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+@@ -86,6 +86,8 @@
+ 
+     void DrawInitialImage(const std::shared_ptr<Renderer::Texture>& image, const Renderer::RenderContext& renderContext) override;
+ 
++    auto SetOutputTarget(bool direct, uint32_t targetFramebuffer) -> bool override;
++
+ private:
+     void PerFrameUpdate();
+ 
+@@ -131,6 +133,8 @@
+     bool m_isFirstFrame{true}; //!< Controls drawing the motion vectors starting with the second frame.
+     bool m_flipHoldsPreviousFrame{false}; //!< The flip texture still holds the y-flipped previous frame.
+     bool m_warpSamplesBlur{true};         //!< The warp shader may read the blur textures.
++    bool m_directOutput{false};           //!< The final image goes straight into m_directFramebuffer.
++    uint32_t m_directFramebuffer{0};      //!< Target of the final image when m_directOutput is set.
+ };
+ 
+ } // namespace MilkdropPreset
+--- a/src/libprojectM/MilkdropPreset/PresetState.hpp
++++ b/src/libprojectM/MilkdropPreset/PresetState.hpp
+@@ -132,6 +132,7 @@
+ 
+     libprojectM::Audio::FrameAudioData audioData; //!< Holds audio/spectrum data and values for beat detection.
+     Renderer::RenderContext renderContext;        //!< Current renderer state data like viewport size and generic shaders.
++    bool compositeToDefaultFramebuffer{false};     //!< The final composite is drawn into the default framebuffer.
+ 
+     std::string perFrameInitCode; //!< Preset init code, run once on load.
+     std::string perFrameCode;     //!< Preset per-frame code, run once at the start of each frame.
+--- a/src/libprojectM/MilkdropPreset/VideoEcho.cpp
++++ b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+@@ -88,7 +88,7 @@
+     // The first draw covers the whole viewport (aspectMult >= 1) without depending on the target
+     // (GL_ONE/GL_ZERO or no blending), so tile-based GPUs need not load the old contents.
+     {
+-        const GLenum attachment = GL_COLOR_ATTACHMENT0;
++        const GLenum attachment = m_presetState.compositeToDefaultFramebuffer ? GL_COLOR : GL_COLOR_ATTACHMENT0;
+         glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
+     }
+ 
+--- a/src/libprojectM/Preset.hpp
++++ b/src/libprojectM/Preset.hpp
+@@ -47,6 +47,20 @@
+     virtual void DrawInitialImage(const std::shared_ptr<Renderer::Texture>& image,
+                                   const Renderer::RenderContext& renderContext) = 0;
+ 
++    /**
++     * @brief Asks the preset to draw its next frames straight into a framebuffer instead of its
++     * output texture, which OutputTexture() then no longer holds.
++     * @param direct True to draw into targetFramebuffer, false to draw into the output texture.
++     * @param targetFramebuffer The framebuffer object to draw into, 0 for the default framebuffer.
++     * @return True if the preset will draw straight into the framebuffer.
++     */
++    virtual auto SetOutputTarget(bool direct, uint32_t targetFramebuffer) -> bool
++    {
++        static_cast<void>(direct);
++        static_cast<void>(targetFramebuffer);
++        return false;
++    }
++
+     inline void SetFilename(const std::string& filename)
+     {
+         m_filename = filename;
+--- a/src/libprojectM/ProjectM.cpp
++++ b/src/libprojectM/ProjectM.cpp
+@@ -109,6 +109,9 @@
+     m_audioStorage.UpdateFrameAudioData(m_timeKeeper->SecondsSinceLastFrame(), m_frameCount);
+     auto audioData = m_audioStorage.GetFrameAudioData();
+ 
++    // A switch requested in this frame starts from this frame's image in the preset's texture.
++    bool switchRequested = false;
++
+     // Check if the preset isn't locked, and we've not already notified the user
+     if (!m_presetChangeNotified)
+     {
+@@ -116,6 +119,7 @@
+         if (m_timeKeeper->PresetProgressA() >= 1.0 && !m_timeKeeper->IsSmoothing())
+         {
+             m_presetChangeNotified = true;
++            switchRequested = true;
+             PresetSwitchRequestedEvent(false);
+         }
+         else if (m_hardCutEnabled &&
+@@ -124,6 +128,7 @@
+                  m_timeKeeper->CanHardCut())
+         {
+             m_presetChangeNotified = true;
++            switchRequested = true;
+             PresetSwitchRequestedEvent(true);
+         }
+     }
+@@ -170,6 +175,10 @@
+     // During a transition the outgoing preset may render at a fraction of the frame rate: it is
+     // fading out, and its last frame is blended meanwhile. This saves most of its (CPU) cost.
+     bool inTransition = m_transition != nullptr && m_transitioningPreset != nullptr;
++    // Outside of transitions the active preset may draw straight into the target, which saves
++    // storing its image and copying it here. Transitions and switches need the stored image.
++    bool const direct = m_activePreset->SetOutputTarget(m_directOutput && !inTransition && !switchRequested,
++                                                        targetFramebufferObject);
+     if (!inTransition || m_outgoingPresetFrameDivisor <= 1 || m_frameCount % m_outgoingPresetFrameDivisor == 0)
+     {
+         // ToDo: Call the to-be-implemented render method in Renderer
+@@ -191,7 +200,7 @@
+     {
+         m_transition->Draw(*m_activePreset, *m_transitioningPreset, renderContext, audioData);
+     }
+-    else
++    else if (!direct)
+     {
+         m_textureCopier->Draw(m_activePreset->OutputTexture(), false, false);
+     }
+@@ -286,6 +295,11 @@
+     m_outgoingPresetFrameDivisor = divisor > 0 ? divisor : 1;
+ }
+ 
++void ProjectM::SetDirectOutput(bool enabled)
++{
++    m_directOutput = enabled;
++}
++
+ auto ProjectM::WindowWidth() -> int
+ {
+     return m_windowWidth;
+--- a/src/libprojectM/ProjectM.hpp
++++ b/src/libprojectM/ProjectM.hpp
+@@ -111,6 +111,12 @@
+      */
+     void SetOutgoingPresetFrameDivisor(uint32_t divisor);
+ 
++    /**
++     * @brief Lets the active preset draw straight into the target framebuffer outside of
++     * transitions and switch requests (see projectm_opengl_set_direct_output()).
++     */
++    void SetDirectOutput(bool enabled);
++
+     void SetBeatSensitivity(float sensitivity);
+ 
+     auto GetBeatSensitivity() const -> float;
+@@ -197,6 +203,7 @@
+     uint32_t m_targetFps{35};          //!< Target frames per second.
+     uint32_t m_windowWidth{0};            //!< EvaluateFrameData window width. If 0, nothing is rendered.
+     uint32_t m_outgoingPresetFrameDivisor{1}; //!< Render the outgoing preset every n-th frame during a transition.
++    bool m_directOutput{false};                 //!< The active preset may draw straight into the target framebuffer.
+     uint32_t m_windowHeight{0};           //!< EvaluateFrameData window height. If 0, nothing is rendered.
+     double m_presetDuration{30.0};   //!< Preset duration in seconds.
+     double m_softCutDuration{3.0};   //!< Soft cut transition time.
+--- a/src/libprojectM/ProjectMCWrapper.cpp
++++ b/src/libprojectM/ProjectMCWrapper.cpp
+@@ -182,6 +182,12 @@
+ {
+     auto projectMInstance = handle_to_instance(instance);
+     projectMInstance->SetOutgoingPresetFrameDivisor(divisor);
++}
++
++void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled)
++{
++    auto projectMInstance = handle_to_instance(instance);
++    projectMInstance->SetDirectOutput(enabled);
+ }
+ 
+ void projectm_opengl_set_texture_pool_limit(size_t max_bytes)

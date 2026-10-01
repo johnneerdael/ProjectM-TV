@@ -861,6 +861,10 @@ struct Engine {
     bool loadFailed = false;
     bool switchRequested = false;
     bool switchHardCut = false;
+    // The last frame went straight to the screen (projectM patch 0016), so the preset's texture,
+    // which a new preset starts from, does not hold it: a switch waits for one stored frame.
+    bool lastFrameDirect = false;
+    bool blankSwitchPending = false;  // a black preset is replaced after the next stored frame
     OutputDetector detector;
     int blankInARow = 0;         // black verdicts since the last preset with visible output
     SnapshotFade fade;
@@ -1232,6 +1236,9 @@ void BeginTransition(double seconds, bool lightweight) {
 // Switches using the given selector, retrying a few times when presets fail to load.
 template <typename Selector>
 bool SwitchPreset(Selector select, bool smooth) {
+    // The new preset starts from the outgoing preset's stored frame, so the last frame must not
+    // have gone straight to the screen. Every caller waits for a stored frame; this guards that.
+    if (g_engine.lastFrameDirect) LOGW("Preset switch right after a direct frame: the new preset starts from an old image");
     for (int attempt = 0; attempt < kMaxLoadAttemptsPerFrame; ++attempt) {
         std::string name = select();
         if (name.empty()) return false;
@@ -1476,6 +1483,8 @@ void DestroyEngineLocked(bool contextAlive) {
     g_engine.lastFrameAt = 0;
     g_engine.current.clear();  // the next instance resumes from g_published.currentPreset
     g_engine.switchRequested = false;
+    g_engine.lastFrameDirect = false;
+    g_engine.blankSwitchPending = false;
     g_engine.detector.Disarm();
 }
 
@@ -1587,13 +1596,23 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
             }
             SwitchPreset(FirstThenNext(resume), false);
         }
-    } else {
+    } else if (!g_engine.lastFrameDirect) {
+        // After a direct frame a remote-control command waits one frame (projectM requests no
+        // switch then): the new preset starts from the stored frame this frame renders.
         HandleCommands();
     }
+
+    // Draw straight to the screen unless a switch is coming: a new preset starts from the
+    // outgoing preset's stored frame. projectM itself stores frames during transitions and in a
+    // frame in which it requests a switch.
+    bool const direct = !g_engine.current.empty() && !g_engine.switchRequested && !g_engine.blankSwitchPending &&
+                        g_inputs.command.load() == kNone;
+    projectm_opengl_set_direct_output(g_engine.pm, direct);
 
     FeedAudio();
     ApplyRenderScale(now < g_engine.scaledUntil ? g_engine.transitionScale : 1.f);
     RenderPresetFrame();
+    g_engine.lastFrameDirect = direct && !g_engine.switchRequested;
 
     if (!g_engine.firstPresetLogged && !g_engine.current.empty()) {
         // Logged after the first frame of the first preset has been rendered.
@@ -1610,13 +1629,17 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
             LOGW("BLANK %d presets in a row rendered black: suspecting a rendering problem, not skipping "
                  "until a preset shows output", kMaxBlankInARow);
         }
-    } else if (blank && g_inputs.blankDetection.load()) {
+    } else if (blank && g_inputs.blankDetection.load() && !g_engine.blankSwitchPending) {
         int strikes = g_library.AddBlankStrike(g_engine.current);
         if (strikes >= kBlankStrikesToSkip) {
             g_library.MarkSkipped(g_engine.current, "renders no visible output (twice)");
         } else {
             LOGW("BLANK preset='%s' strike=%d: moving on", g_engine.current.c_str(), strikes);
         }
+        g_engine.blankSwitchPending = true;
+    }
+    if (g_engine.blankSwitchPending && !g_engine.lastFrameDirect) {
+        g_engine.blankSwitchPending = false;
         g_engine.fade.Stop();
         SwitchPreset([] { return g_library.Next(); }, false);
     }

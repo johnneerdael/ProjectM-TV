@@ -27,7 +27,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 - **Track title and artist** on screen when a new track starts
 - **No freezes at preset switches**: upcoming presets are prepared in the background, with cached shaders
 - **Adaptive resolution** that holds the frame rate, also during blends, without interrupting the picture
-- **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), less memory traffic per frame (up to 22% more frames per second on a Mali-G52, up to 76% on presets without a composite shader), reused picture buffers, fewer redundant GL calls, a faster shader parser
+- **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), less memory traffic per frame (on a Mali-G52 10–26% more frames per second on presets with a composite shader, up to twice as many on presets without one), reused picture buffers, fewer redundant GL calls, a faster shader parser
 - **Memory-aware**: keeps the music app alive on TVs with little memory
 - **Skips presets that stay black**
 - **Optional auto-update**: downloads new releases in the background and offers to install them (off by default)
@@ -73,7 +73,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 | Transition | Instant, 1–10 s | 7 s (2 s on low-end devices) |
 | Resolution | Auto, or a fixed height up to the panel resolution and the memory limit | Auto |
-| Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | 60 fps (30 on low-end devices) |
+| Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
 
 *Advanced ›* opens a second panel:
 
@@ -163,7 +163,7 @@ A version you built yourself is signed with your own debug key: uninstall it bef
 - *no player session found yet* or *silent / no data* right after launch: wait a few seconds while the app looks for the music app's audio session.
 - Still silent: the music app may send encoded audio, or it may not have been tested (see *Audio* above). Try SoundCloud to confirm the setup works.
 
-**It stutters.** Keep *Resolution* and *Transitions* on *Auto*, set *Frame rate* to 30 fps, and lower *Detail* in *Advanced*. *Detail* sets how much per-vertex work every preset does on the CPU, which is often what limits blends.
+**It stutters.** Keep *Resolution* and *Transitions* on *Auto* and *Frame rate* at half the refresh rate (the default, 30 fps at 60 Hz), and lower *Detail* in *Advanced*. *Detail* sets how much per-vertex work every preset does on the CPU, which is often what limits blends.
 
 <a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). The app explains this once, at the first launch without access; *Settings › Advanced › Track titles* shows the explanation again, and *Diagnostics* shows whether access is granted.
 
@@ -188,7 +188,7 @@ The engine is the `:core` module, which the open-source music streamer [Milkbeat
 
 ### projectM
 
-projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, caches of linked and translated shader programs, fewer redundant GL calls, batched drawing of custom shapes, reuse of framebuffer textures between presets, a faster HLSL parser on Android, corrected floating-point/vector remainder and shader operator precedence, and less memory traffic per frame on tile-based GPUs: discarded render-target contents, fewer full-screen copies, one indexed draw for the warp mesh) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
+projectM is built from source with the app. The git submodule `third_party/projectm` is pinned to the 4.1.7 release; the app's CMake applies the patches in `tools/projectm-patches/` (a transition fix from upstream; rendering into the app's own framebuffer, keeping the presets' frames when the render size changes, caches of linked and translated shader programs, fewer redundant GL calls, batched drawing of custom shapes, reuse of framebuffer textures between presets, a faster HLSL parser on Android, corrected floating-point/vector remainder and shader operator precedence, and less memory traffic per frame on tile-based GPUs: discarded render-target contents, fewer full-screen copies, one indexed draw for the warp mesh, the final image drawn straight to the screen) and links projectM statically into `libprojectmtv.so`, for armeabi-v7a and arm64-v8a. The first build per ABI takes a few minutes longer; later builds reuse it. There are no prebuilt binaries in the repository. After pulling a change to one of the patches, reset the submodule first (`git submodule foreach --recursive git checkout -- .`) so the new version applies.
 
 ### Tests
 

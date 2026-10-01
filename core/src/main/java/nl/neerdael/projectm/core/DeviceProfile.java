@@ -95,9 +95,12 @@ public final class DeviceProfile {
         return tier == Tier.LOW;
     }
 
-    /** Default frame-rate cap. Low-end boxes rarely hold 60 fps; an even 30 looks smoother. */
+    /**
+     * Default frame-rate cap: 30 (half the refresh rate) on every tier. An even 30 fps looks smooth
+     * for these visuals, and twice the time per frame lets Auto pick a much higher resolution.
+     */
     public int defaultFrameRateCap() {
-        return tier == Tier.LOW ? 30 : 60;
+        return 30;
     }
 
     /** Default index into {@link #MESH_SIZES}. */
