@@ -40,7 +40,11 @@ file(LOCK ${PROJECTM_PATCH_LOCK} GUARD FILE RESULT_VARIABLE patch_lock TIMEOUT 6
 if(NOT patch_lock EQUAL 0)
     message(FATAL_ERROR "Could not lock the projectM checkout for patching: ${patch_lock}")
 endif()
-file(GLOB PROJECTM_PATCHES ${REPO_ROOT}/tools/projectm-patches/*.patch)
+# Patches are applied only while CMake configures, so the build must configure again when the series
+# changes: CONFIGURE_DEPENDS re-checks the glob on every build (a patch added or removed), and the
+# configure dependency covers a patch whose content changes.
+file(GLOB PROJECTM_PATCHES CONFIGURE_DEPENDS ${REPO_ROOT}/tools/projectm-patches/*.patch)
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${PROJECTM_PATCHES})
 list(SORT PROJECTM_PATCHES)
 list(GET PROJECTM_PATCHES -1 PROJECTM_LAST_PATCH)
 execute_process(COMMAND ${GIT_EXECUTABLE} apply --reverse --check ${PROJECTM_LAST_PATCH}
