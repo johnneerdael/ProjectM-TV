@@ -1,0 +1,2 @@
+- Much faster rendering on TVs with a Mali, Adreno or PowerVR GPU: 10-26% more frames per second on most presets, up to twice as many on some.
+- Default frame rate is now 30 fps (25 at 50 Hz), so Auto picks a much higher resolution. Everyone is moved to it once; 60 fps can still be chosen under Frame rate.

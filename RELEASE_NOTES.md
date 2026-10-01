@@ -1,3 +1,30 @@
+# ProjectM TV 2.1.0
+
+**Much faster rendering on most TVs.** On an Ugoos AM6 (Amlogic S922X with a Mali-G52 GPU) the visuals run with 10–26% more frames per second on presets with a composite shader, and up to twice as many on presets without one (26 → 55 fps at 4K). With the new 30 fps default, Auto picks a much higher resolution. projectM moved far more data through memory per frame than needed; TVs with a tile-based GPU (Mali, Adreno, PowerVR: most Android TV boxes and TVs) were held back by that, not by the GPU's power. The picture is unchanged.
+
+## Changed
+- **Default frame rate 30 fps** (half the refresh rate: 25 fps at 50 Hz), on every device. An even 30 fps looks smooth for these visuals, and twice the time per frame lets *Auto* choose a much higher resolution, also on less powerful TVs. The update moves everyone to the new default once, including those who chose a frame rate, and *Auto* learns its resolution anew. A powerful TV can be set back to 60 fps under *Settings › Frame rate*.
+- **Auto resolution recovers after a heavy preset.** A resolution that was too slow is tried again from the next preset on, and a resolution that keeps failing waits longer each time (up to 16 presets). Before, one very heavy preset could hold the resolution down for 10 presets, or for the rest of the session.
+- **Presets that are far too slow are skipped, on every TV.** A preset that stays below half the target frame rate, also when a lower resolution does not help because the CPU is the limit, is replaced after about 8 seconds and skipped from then on on that TV (on an AM6 one preset ran at 3–7 fps at any resolution). This was on only for low-end devices; it can be switched off under *Settings › Advanced › Skip slow presets*.
+- **Less memory traffic per frame** (projectM patches 0009–0016):
+  - Render targets that a pass overwrites completely are no longer loaded from memory first.
+  - Up to three of the four full-screen copies per frame that only flipped the image are gone.
+  - The warp, shapes and waves are drawn in one pass where the preset allows it, and the blur passes draw straight into their textures.
+  - The final image is drawn straight to the screen instead of being copied there. A preset switch by remote control can wait one frame (16–33 ms) for this.
+  - The warp mesh is drawn in one go, which also saves the CPU about 1 MB of copying per frame.
+- The only visible difference possible: when a preset turns motion vectors on, they can be slightly off in that one frame.
+
+## Measured
+On the AM6 at fixed resolutions, with the same preset and music, frames per second before → after:
+
+| Preset | 1080p | 1440p | 4K |
+|---|---|---|---|
+| Heavy, with composite shader | 33.6 → 37.1 | 20.4 → 23.3 | 9.3 → 10.8 |
+| Medium, with composite shader | 43.8 → 53.5 | 25.4 → 32.0 | 13.1 → 15.8 |
+| Light, without composite shader | 60 → 60 (max) | 52.1 → 60 (max) | 26.1 → 55.1 |
+
+---
+
 # ProjectM TV 2.0.2
 
 ## Changed

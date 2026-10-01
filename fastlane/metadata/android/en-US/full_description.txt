@@ -6,7 +6,8 @@ It visualizes the music another app plays on the TV, such as SoundCloud. It is n
 <ul>
 <li>Shows 9,606 presets in shuffled order, changing every 30 seconds by default or with Left/Right on the remote, with smooth blends between them</li>
 <li>Shows the title and artist of each new track for 20 seconds (needs notification access, under Apps › Special app access in the TV's settings)</li>
-<li>Adapts the render resolution to hold the frame rate, and caps it by the TV's memory so the music app is not closed</li>
+<li>Adapts the render resolution to hold the frame rate (30 fps by default), and caps it by the TV's memory so the music app is not closed</li>
+<li>Renders with little memory traffic per frame, so TVs with a tile-based GPU (Mali, Adreno, PowerVR) reach much higher resolutions</li>
 <li>Finds the audio session of the playing music app by itself, usually within a second or two of launch, whatever the TV's audio output (also Dolby or passthrough)</li>
 <li>No freezes at preset switches: upcoming presets are prepared in the background</li>
 <li>Replaces presets that stay black while music plays</li>

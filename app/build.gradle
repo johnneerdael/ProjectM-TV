@@ -11,10 +11,10 @@ android {
         applicationId "nl.neerdael.projectmtv"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 31
+        versionCode 32
         // Bump both for a release: CI publishes a GitHub Release when versionName changes on main.
         // CI appends VERSION_SUFFIX (e.g. "-ci.42") to non-release builds.
-        versionName "2.0.2" + (System.getenv("VERSION_SUFFIX") ?: "")
+        versionName "2.1.0" + (System.getenv("VERSION_SUFFIX") ?: "")
     }
     signingConfigs {
         release {
