@@ -1,0 +1,4 @@
+- Listens only to the music app's own audio session: no screen-cast prompt, fewer permissions.
+- Searches for that session at launch, once per new track, and otherwise at most once a minute.
+- Shows "No audio detected" when music plays at launch but no audio is found.
+- Smaller, optimized build (R8).

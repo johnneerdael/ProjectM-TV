@@ -1,3 +1,19 @@
+# ProjectM TV 2.0.2
+
+## Changed
+- **The app listens only to the music app's own audio session.** It finds that session by itself, whatever the TV's audio output (also Dolby or passthrough). The *Media capture* audio source, with its screen-cast prompt at every launch, is gone, and so is the *Audio source* setting: neither Media capture nor Android's visualizer on the TV's main output (session 0) was ever shown to receive music, and the player's session worked on every device tried.
+- **Fewer permissions.** The app no longer asks for *Foreground service*, *Media projection* or *Change audio settings*. For audio it only needs *Record audio*, which Android requires for any visualizer; the microphone is not used.
+- **Fewer searches.** When no audio is found while music plays, the app searches again when the next track starts (with notification access), and otherwise once a minute (was every 20 seconds). At launch, and when you return to the app, it searches right away.
+- **Smaller, optimized build.** Release builds are shrunk and optimized with R8.
+
+## Added
+- **"No audio detected."** When music plays at launch but the app finds no audio, the lower left says so.
+
+## Documentation
+- The README's only device statement is that at least 2 GB of RAM is highly recommended; the NVIDIA SHIELD measurements moved to an appendix.
+
+---
+
 # ProjectM TV 2.0.1
 
 ## Fixed
