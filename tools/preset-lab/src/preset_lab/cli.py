@@ -17,8 +17,20 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--repo", type=Path, default=Path.cwd())
     command.add_argument("--work", type=Path, default=Path("build/preset-lab"))
     command.add_argument("--worker", type=Path)
+    command = commands.add_parser("corpus", help="Decode music samples and measure audio descriptors")
+    command.add_argument("--audio", type=Path, required=True)
+    command.add_argument("--work", type=Path, default=Path("build/preset-lab/audio"))
+    command.add_argument("--manifest", type=Path)
     args = parser.parse_args(argv)
     try:
+        if args.command == "corpus":
+            from .audio import load_corpus
+            corpus = load_corpus(args.audio, args.manifest, args.work)
+            records = [dict(asdict(track), path=str(track.path)) for track in corpus.tracks]
+            json.dump({"identity": corpus.identity, "tracks": records, "descriptors": corpus.descriptors},
+                      sys.stdout, ensure_ascii=False, allow_nan=False)
+            sys.stdout.write("\n")
+            return 0
         if args.command == "doctor":
             from .doctor import doctor
             report = doctor(args.repo.resolve(), args.work.resolve(), args.worker)

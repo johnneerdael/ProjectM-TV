@@ -1,6 +1,6 @@
 # projectM Preset Lab
 
-An independently installable local tool for measured preset fingerprints and reusable genre matching. Implementation is in progress; inventory and the deterministic native-rendering check are available now. Automatic matching follows the approved plan.
+An independently installable local tool for measured preset fingerprints and reusable genre matching. Implementation is in progress; inventory, music ingestion and deterministic native-rendering checks are available now. Automatic matching follows the approved plan.
 
 Install in a dedicated environment from the ProjectM-TV checkout:
 
@@ -27,3 +27,13 @@ build/preset-lab-venv/bin/preset-lab doctor --repo . --work build/preset-lab > b
 The worker builds a private copy of the pinned projectM engine and app patches. Its synthetic clock and fixed subsystem seeds leave the Android engine untouched. Doctor compares fresh waveform, noise and random-texture shader runs for exact repeated frames and an identical pre-intervention prefix. Framebuffer discard is a no-op on Apple OpenGL 4.1, so desktop timings do not establish TV performance.
 
 The bundled JSON parser is [nlohmann/json 3.11.3](https://github.com/nlohmann/json/tree/v3.11.3), under the included MIT license. Resolved Python dependencies are recorded in `requirements.lock`.
+
+Ingest the initial music corpus:
+
+```sh
+build/preset-lab-venv/bin/preset-lab corpus --audio /Users/jneerdael/Desktop/audio --work build/preset-lab/audio > build/preset-lab-corpus.json
+```
+
+The flat-folder aliases `folk`, `hiphop` and `r&b` map to Folk / Acoustic, Hip-Hop and R&B / Soul. M4A album artwork is excluded. Audio is resampled to 44,100 Hz; mono gain is preserved, stereo is averaged, and detected phase cancellation uses the left channel with an explicit flag. Full mixes and aligned stem-removal variants share one gain (at most 1, reduced only to keep the largest variant peak below 0.95). No variant receives independent peak normalization.
+
+The corpus records source hashes, valid excerpt offsets, spectral balance, onset density/regularity, dynamics and available stems. Initial excerpts are within-track evidence. Optional manifests accept `tracks` containing `id`, `path`, `genres`, `excerpts`, and `stems` (drums, bass_instrument, melody, vocals, other). Stem files must have aligned sample counts. Missing stems never become invented source-response scores.
