@@ -148,7 +148,7 @@ The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The di
 |---|---|
 | < 85 % of target for 3 s | lower one level (two if far off), immediately |
 | < 55 % for 4 s | lower two levels, immediately (up to 1.9.14 this also forced a preset switch with a hard cut) |
-| ≥ 97 % for 15 s | try one level higher, immediately. A level that failed is retried once after 10 presets; after a second failure it is not tried again in this session (the SHIELD oscillated 1440 ↔ 1800 before) |
+| ≥ 97 % for 15 s | try one level higher, immediately. A level that failed is retried from the next preset on, waiting longer each time it fails again (1, 2, 4, 8, at most 16 presets): one heavy preset does not hold the resolution down, and a level the device cannot sustain is retried at most every 16 presets (the SHIELD oscillated 1440 ↔ 1800 when it was retried freely; from 1.9.x to 2.0 a level that failed twice was never tried again) |
 | < 50 % at the lowest level, *Skip slow presets* on | add the preset to the skip list |
 
 Since 1.9.15 changes apply immediately, after which the frame rate settles for 3 s before the next decision. Since 1.9.17 a lowering that gained less than 10% is undone and not repeated for that preset: the preset is limited by the CPU, and a lower resolution would only blur it; memory pressure lowers one level per burst of warnings (10 s). Up to 1.9.14 changes waited for the next preset switch, and up to 1.9.11 that switch was forced to be a hard cut: in projectM 4.1 a new window size reallocates each preset's frame buffers, losing their contents. Since 1.9.12 patch 0002 scales the contents into the new buffers, so a resize is not visible. The last automatic level is remembered across launches.
@@ -170,8 +170,8 @@ Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches t
 ### Device tiers (`DeviceProfile`)
 | Tier | Rule | Auto start / floor | Frame rate | Detail (mesh) | Transition | Skip slow |
 |---|---|---|---|---|---|---|
-| HIGH | NVIDIA Shield / Tegra | 1440p / 720p | 30 | High 64×48 | 7 s | off |
-| STANDARD | everything else | 1080p / 540p | 30 | Medium 48×32 | 7 s | off |
+| HIGH | NVIDIA Shield / Tegra | 1440p / 720p | 30 | High 64×48 | 7 s | on |
+| STANDARD | everything else | 1080p / 540p | 30 | Medium 48×32 | 7 s | on |
 | LOW | `isLowRamDevice()` or <1.6 GB RAM (e.g. older Fire TV sticks) | 720p / 360p | 30 | Low 32×24 | 2 s | on |
 
 Detail levels: Minimal 24×16, Low 32×24, Medium 48×32, High 64×48, Ultra 96×72. The per-vertex equations run on the CPU for every vertex on every frame, which is usually the bottleneck on low-end ARM boxes.

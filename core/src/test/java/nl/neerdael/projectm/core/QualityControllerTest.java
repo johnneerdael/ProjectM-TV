@@ -75,19 +75,38 @@ public class QualityControllerTest {
 
         settle(q);
         samples(q, 15, 60);
-        assertEquals("1440 just failed, so it is backed off", 1260, applied);
-        for (int i = 0; i < 10; i++) q.onPresetChanged();
+        assertEquals("1440 just failed, so it is backed off for this preset", 1260, applied);
+        q.onPresetChanged();
         settle(q);
         samples(q, 15, 60);
-        assertEquals("retried once after 10 presets", 1440, applied);
+        assertEquals("retried with the next preset", 1440, applied);
 
         settle(q);
         samples(q, 3, 40);
-        assertEquals(1260, applied);
-        for (int i = 0; i < 100; i++) q.onPresetChanged();
+        assertEquals("failed a second time", 1260, applied);
+        q.onPresetChanged();
         settle(q);
         samples(q, 15, 60);
-        assertEquals("a level that failed twice is not tried again this session", 1260, applied);
+        assertEquals("now backed off for 2 presets", 1260, applied);
+        q.onPresetChanged();
+        settle(q);
+        samples(q, 15, 60);
+        assertEquals("retried after 2 presets", 1440, applied);
+
+        for (int failure = 3; failure <= 8; failure++) {  // keeps failing: the wait grows to 16 presets
+            settle(q);
+            samples(q, 3, 40);
+            assertEquals(1260, applied);
+            int wait = Math.min(16, 1 << Math.min(4, failure - 1));
+            for (int i = 0; i < wait - 1; i++) q.onPresetChanged();
+            settle(q);
+            samples(q, 15, 60);
+            assertEquals("still backed off after " + (wait - 1) + " presets", 1260, applied);
+            q.onPresetChanged();
+            settle(q);
+            samples(q, 15, 60);
+            assertEquals("retried after " + wait + " presets, never given up", 1440, applied);
+        }
     }
 
     @Test
@@ -203,6 +222,39 @@ public class QualityControllerTest {
         q.setSkipSlowPresets(false);
         settle(q);
         assertNotEquals(QualityController.ACTION_SKIP, samples(q, 10, 10));
+    }
+
+    @Test
+    public void cpuBoundSlowPresetsAreSkippedAboveTheFloor() throws Exception {
+        QualityController q = new QualityController(display(1920, 1080),
+                profile(DeviceProfile.Tier.STANDARD), 0, h -> applied = h);
+        q.setTargetFps(30);
+        q.setSkipSlowPresets(true);
+        q.setMode(0, 0);
+        assertEquals(1080, applied);
+        settle(q);
+        samples(q, 3, 7);
+        assertEquals("lowered", 720, applied);
+        settle(q);
+        assertEquals("far below target and a lower resolution does not help: skipped at once",
+                QualityController.ACTION_SKIP, q.onFpsSample(5));
+        assertEquals("the next preset starts at the sharper level", 1080, applied);
+    }
+
+    @Test
+    public void cpuBoundPresetsAtAWatchableRateAreKept() throws Exception {
+        QualityController q = new QualityController(display(1920, 1080),
+                profile(DeviceProfile.Tier.STANDARD), 0, h -> applied = h);
+        q.setTargetFps(30);
+        q.setSkipSlowPresets(true);
+        q.setMode(0, 0);
+        settle(q);
+        samples(q, 3, 20);
+        assertEquals("one step down: slow, not severe", 900, applied);
+        settle(q);
+        assertEquals("CPU-bound but above half the target: kept", QualityController.ACTION_NONE, q.onFpsSample(20));
+        settle(q);
+        assertNotEquals(QualityController.ACTION_SKIP, samples(q, 10, 20));
     }
 
     @Test

@@ -90,9 +90,12 @@ public final class DeviceProfile {
         return tier == Tier.LOW ? 2 : 7;
     }
 
-    /** Skip presets that stay far below target even at the lowest resolution. */
+    /**
+     * Skip presets that stay far below target even at the lowest resolution or when a lower one does
+     * not help: on every tier, as a preset at a few frames per second is unwatchable.
+     */
     public boolean defaultSkipSlowPresets() {
-        return tier == Tier.LOW;
+        return true;
     }
 
     /**

@@ -45,6 +45,7 @@ public final class QualityController {
     private static final long SETTLE_MS = 3000;             // ignore load hitch + transition start
     private static final long PRESSURE_QUIET_MS = 10000;    // one step per burst of memory warnings
     private static final float MIN_GAIN = 1.10f;             // a lower level must be this much faster
+    private static final int MAX_BACKOFF_PRESETS = 16;       // longest wait before a failed level is retried
 
     private final Listener listener;
     private final int[] levels;
@@ -180,9 +181,10 @@ public final class QualityController {
     public int onFpsSample(float fps) {
         if (System.currentTimeMillis() < settleUntil || fps <= 0) return ACTION_NONE;
 
-        // Presets that stay far below target even at the lowest resolution are CPU-bound or
-        // simply too heavy for this device: optionally skip them for good.
-        boolean atFloor = !auto || current == minIndex;
+        // Presets that stay far below target even at the lowest resolution, or that a lower
+        // resolution did not help (CPU-bound), are too heavy for this device: optionally skip them
+        // for good.
+        boolean atFloor = !auto || current == minIndex || cpuBoundPreset == presetCount;
         if (skipSlowPresets && atFloor && fps < targetFps * SKIP_THRESHOLD) {
             if (++tooSlowSamples >= SKIP_SAMPLES && !switchRequested) {
                 tooSlowSamples = 0;
@@ -205,6 +207,12 @@ public final class QualityController {
                 blockedUntilPreset[loweredFrom] = 0;
                 cpuBoundPreset = presetCount;
                 apply(loweredFrom, "lower resolution did not help (" + before + " -> " + fps + " fps): CPU-bound");
+                if (skipSlowPresets && fps < targetFps * SKIP_THRESHOLD && !switchRequested) {
+                    // Far too slow, and the resolution is not the cause: no need to watch it longer.
+                    switchRequested = true;
+                    Log.w(TAG, "Preset too slow (" + fps + " fps), and a lower resolution does not help");
+                    return ACTION_SKIP;
+                }
                 return ACTION_NONE;
             }
         }
@@ -238,12 +246,13 @@ public final class QualityController {
     }
 
     /**
-     * Remembers that a level was too heavy: retry once after 10 presets; after a second failure it
-     * is not tried again in this session (each attempt reallocates all frame buffers).
+     * Remembers that a level was too heavy. Presets differ a lot, so it is tried again from the next
+     * preset on; a level that keeps failing waits longer each time (1, 2, 4, 8, at most 16 presets),
+     * which stops back-and-forth switching without one heavy preset holding the resolution down.
      */
     private void block(int index) {
         failures[index]++;
-        blockedUntilPreset[index] = failures[index] >= 2 ? Integer.MAX_VALUE : presetCount + 10;
+        blockedUntilPreset[index] = presetCount + Math.min(MAX_BACKOFF_PRESETS, 1 << Math.min(4, failures[index] - 1));
     }
 
     /** Lowers now and remembers the frame rate, to check after settling that it helped. */
