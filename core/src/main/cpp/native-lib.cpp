@@ -1425,9 +1425,11 @@ void HandleCommands() {
             g_engine.scaledUntil = 0;
             g_inputs.command = kNone;
             g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
-            if (!g_library.Contains(g_engine.current))
-                SwitchPreset([] { return g_library.Next(); }, false);
-            else g_library.RecordShown(g_engine.current);
+            if (g_library.Contains(g_engine.current)) g_library.RecordShown(g_engine.current);
+        }
+        if (!g_library.Contains(g_engine.current) && !SwitchPreset([] { return g_library.Next(); }, false)) {
+            g_inputs.categoryDirty = true; // continue bounded attempts on the next stored frame
+            return;
         }
         g_inputs.categoryAppliedSerial = serial;
     }
@@ -1744,8 +1746,11 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
                     LOGI("BENCHMARK preset='%s' (debug.projectmtv.preset), auto change off", match.c_str());
                 }
             }
-            SwitchPreset(FirstThenNext(resume), false);
-            if (applyingCategory) g_inputs.categoryAppliedSerial = categorySerial;
+            bool loaded = SwitchPreset(FirstThenNext(resume), false);
+            if (applyingCategory) {
+                if (loaded) g_inputs.categoryAppliedSerial = categorySerial;
+                else g_inputs.categoryDirty = true;
+            }
         }
     } else if (!g_engine.lastFrameDirect) {
         // After a direct frame a remote-control command waits one frame (projectM requests no

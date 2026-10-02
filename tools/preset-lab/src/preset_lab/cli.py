@@ -49,6 +49,7 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--repo", type=Path, default=Path.cwd())
     command.add_argument("--measurements", type=Path, required=True)
     command.add_argument("--count", type=int, default=500)
+    command.add_argument("--worker", type=Path)
     command.add_argument("--destination", type=Path, default=Path("build/preset-lab/dance-selection"))
     command.add_argument("--import", dest="import_to_app", action="store_true")
     command=commands.add_parser("run",help="Automatically analyze, match, music-test and export genre collections")
@@ -62,7 +63,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         if args.command == "bass-select":
-            from .dance_selection import export_dance_selection
+            from .dance_selection import export_dance_selection, current_experiment, matches_experiment
             from .export import import_bundle
             from .identity import load_json
             repo = args.repo.resolve()
@@ -71,13 +72,18 @@ def main(argv: list[str] | None = None) -> int:
             measurements = [load_json(p) for p in sorted(args.measurements.glob('*.json'))]
             state_path = args.measurements.parent/'ranking.json'
             state = load_json(state_path) if state_path.exists() else {}
+            experiment = current_experiment(repo, args.measurements.resolve(), state, args.worker)
+            compatible = [r for r in measurements if matches_experiment(r, experiment)]
+            known_records = {record.path:asdict(record) for record in records}
+            covered = {r.get('preset', {}).get('path') for r in compatible
+                       if r.get('preset') == known_records.get(r.get('preset', {}).get('path'))}
             evidence = {'measurement_method':'bass-screen-v1', 'measured_presets':len(measurements),
                         'scan_status':state.get('status','unknown'),
                         'requested_presets':state.get('requested_presets'),
                         'unknown_presets':state.get('unknown_presets'),
-                        'library_coverage':'full' if state.get('status')=='complete' else 'partial'}
+                        'library_coverage':'full' if covered == {r.path for r in records} else 'partial'}
             bundle = export_dance_selection(measurements, records, repo/'core/src/main/assets/preset-genres',
-                                            args.destination, evidence, args.count)
+                                            args.destination, evidence, args.count, experiment=experiment)
             result = import_bundle(bundle,repo) if args.import_to_app else bundle
             json.dump({'count':args.count,'destination':str(result),'scan_status':evidence['scan_status'],
                        'render_jobs':0},sys.stdout)

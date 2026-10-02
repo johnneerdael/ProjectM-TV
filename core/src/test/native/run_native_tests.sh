@@ -34,6 +34,7 @@ mkdir -p "$WORK/assets/preset-genres/genres"
 printf 'good 1.milk\t0\ngood 2.milk\t2\ngood 3.milk\t40\n' > "$WORK/assets/preset-genres/genres/dance.idx"
 printf 'good 4.milk\t0\ngood 5.milk\t0\n' > "$WORK/assets/preset-genres/genres/ambient.idx"
 printf 'good 6.milk\t0\n' > "$WORK/assets/preset-genres/genres/latin.idx"
+printf 'good 1.milk\t0\ngood 2.milk\t2\ngood 3.milk\t40\ngood 4.milk\t0\ngood 5.milk\t0\n' > "$WORK/assets/preset-genres/genres/pop.idx"
 printf 'good 1.milk\tgarbage\n' > "$WORK/assets/preset-genres/genres/classical.idx"
 # Second fixture without an index: the folder listing is used.
 mkdir -p "$WORK/noindex/presets"

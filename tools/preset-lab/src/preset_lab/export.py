@@ -80,7 +80,7 @@ def export_bundle(decisions: list[MatchDecision], inventory: list[PresetRecord],
     return destination
 
 
-def verify_bundle(bundle: Path, inventory: list[PresetRecord]) -> dict:
+def verify_bundle(bundle: Path, inventory: list[PresetRecord], *, check_library_identity: bool = True) -> dict:
     manifest=load_json(bundle/"manifest.json")
     if manifest.get("schema_version")!=1:
         raise ValueError("unsupported genre bundle schema")
@@ -105,7 +105,7 @@ def verify_bundle(bundle: Path, inventory: list[PresetRecord]) -> dict:
             raise ValueError("stale preset reference")
         if r.weight_mb!=known[r.path].weight_mb:
             raise ValueError("stale memory weight")
-    if manifest["library_sha256"]!=_library_identity(inventory):
+    if check_library_identity and manifest["library_sha256"]!=_library_identity(inventory):
         raise ValueError("stale library identity")
     for name,expected in manifest["checksums"].items():
         if name.startswith("/") or ".." in Path(name).parts or "\\" in name:

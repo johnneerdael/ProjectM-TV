@@ -5,19 +5,61 @@ import math
 from pathlib import Path
 import shutil
 import tempfile
+import json
 
 from .cache import write_atomic
-from .export import verify_bundle
+from .export import verify_bundle, _library_identity
 from .identity import canonical_json, digest, file_digest, load_json
-from .models import PresetRecord
+from .models import PresetRecord, RunConfig
+
+EXPERIMENT_KEYS = ('version','code','worker','engine','textures_sha256','audio','config')
 
 
-def select_dance(measurements: list[dict], inventory: list[PresetRecord], count: int = 500) -> list[dict]:
+def matches_experiment(row: dict, experiment: dict) -> bool:
+    return all(key in experiment and row.get('protocol', {}).get(key) == experiment[key]
+               for key in EXPERIMENT_KEYS)
+
+
+def current_experiment(repo: Path, measurements: Path, state: dict, worker: Path | None = None) -> dict:
+    from .bass_screen import VERSION, bass_signals
+    from .build_worker import prepare_engine
+    from .inventory import inventory
+    config = RunConfig()
+    _, identity = prepare_engine(repo, measurements.parent.parent)
+    if worker is None:
+        ranked = state.get('ranking', [])
+        if not ranked:
+            raise ValueError('no current experiment available; run bass-screen first')
+        expected_worker = ranked[0].get('protocol', {}).get('worker')
+        candidates = []
+        for root in (measurements.parent/'engine', measurements.parent, measurements.parent.parent):
+            candidates.extend(root.glob('native-build/*/preset-lab-worker'))
+        worker = next((p for p in candidates if file_digest(p) == expected_worker), None)
+        if worker is None:
+            raise ValueError('native worker unavailable; provide --worker')
+    if load_json(worker.parent/'build-identity.json') != asdict(identity):
+        raise ValueError('native worker differs from current engine/patches/instrumentation; rebuild and analyze')
+    textures = repo/'core/src/main/assets/textures'
+    texture_files = sorted(p for p in textures.rglob('*') if p.is_file() and p.name != '.DS_Store')
+    _, assets = inventory(repo/'core/src/main/assets/presets', repo/'core/src/main/assets/presets.idx', textures)
+    with tempfile.TemporaryDirectory(prefix='bass-selection-probes-') as directory:
+        signals = bass_signals(config, Path(directory))
+        audio = {name:file_digest(path) for name,path in signals.items()}
+    return dict(version=VERSION, code=file_digest(Path(__file__).with_name('bass_screen.py')),
+                worker=file_digest(worker), engine=asdict(identity), config=asdict(config), audio=audio,
+                textures_sha256=digest([(p.relative_to(textures).as_posix(),file_digest(p)) for p in texture_files]),
+                texture_bundle_sha256=assets['texture_sha256'])
+
+
+def select_dance(measurements: list[dict], inventory: list[PresetRecord], count: int = 500,
+                 *, experiment: dict) -> list[dict]:
     if type(count) is not int or count < 1:
         raise ValueError('Dance collection size must be positive')
     known = {r.path: r for r in inventory}
     candidates = {}
     for row in measurements:
+        if not matches_experiment(row, experiment):
+            continue
         record = row.get('preset', {})
         name = record.get('path')
         if name not in known or record != asdict(known[name]):
@@ -46,10 +88,12 @@ def select_dance(measurements: list[dict], inventory: list[PresetRecord], count:
 
 def export_dance_selection(measurements: list[dict], inventory: list[PresetRecord],
                            base_bundle: Path, destination: Path, evidence: dict,
-                           count: int = 500) -> Path:
+                           count: int = 500, *, experiment: dict) -> Path:
     """Update Dance only; preserve the other existing category memberships."""
-    selected = select_dance(measurements, inventory, count)
-    manifest = verify_bundle(base_bundle, inventory)
+    selected = select_dance(measurements, inventory, count, experiment=experiment)
+    stored = load_json(base_bundle/'manifest.json')
+    manifest = verify_bundle(base_bundle, [PresetRecord(**r) for r in stored['presets']],
+                             check_library_identity=False)
     prior_evidence = manifest['evidence']
     destination = destination.resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -61,6 +105,9 @@ def export_dance_selection(measurements: list[dict], inventory: list[PresetRecor
                                  for r in sorted(selected, key=lambda r:r['preset']['path'].encode())), encoding='utf-8')
         prior_rows = [load_json_line(line) for line in (staged/'presets.jsonl').read_text().splitlines() if line]
         rows = [r for r in prior_rows if r['genre_id'] != 'dance']
+        current = {r.path:asdict(r) for r in inventory}
+        if any(r['preset'] != current.get(r['preset']['path']) for r in rows):
+            raise ValueError('stale retained category members; refresh their evidence before preserving them')
         rows.extend({'preset': r['preset'], 'genre_id': 'dance', 'included': True,
                      'evidence_state': 'bass-screen-tested', 'rank': rank, 'score': r['score'],
                      'screen_response': r['levels'], 'protocol': r['protocol']}
@@ -69,6 +116,7 @@ def export_dance_selection(measurements: list[dict], inventory: list[PresetRecor
                                           sorted(rows, key=lambda r:(r['preset']['path'].encode(),r['genre_id']))), encoding='utf-8')
         used = {r['preset']['path']:r['preset'] for r in rows}
         manifest['presets'] = [used[name] for name in sorted(used, key=lambda n:n.encode())]
+        manifest['library_sha256'] = _library_identity(inventory)
         for genre in manifest['genres']:
             if genre['id'] == 'dance':
                 genre['count'] = count
@@ -80,6 +128,9 @@ def export_dance_selection(measurements: list[dict], inventory: list[PresetRecor
         manifest['evidence'] = {k:v for k,v in prior_evidence.items() if k in
                                 ('texture_sha256','app_patches_sha256','engine_identity')}
         manifest['evidence']['categories'] = category_evidence
+        manifest['evidence']['engine_identity'] = experiment['engine']
+        manifest['evidence']['app_patches_sha256'] = experiment['engine']['patches_sha256']
+        manifest['evidence']['texture_sha256'] = experiment['texture_bundle_sha256']
         manifest['evidence_level'] = 'category-specific measured suggestions; Dance selected by bass-caused screen change'
         manifest['checksums'] = {name:file_digest(staged/name) for name in manifest['checksums']}
         manifest.pop('generation_identity', None)
@@ -103,5 +154,4 @@ def export_dance_selection(measurements: list[dict], inventory: list[PresetRecor
 
 
 def load_json_line(line: str) -> dict:
-    import json
     return json.loads(line)

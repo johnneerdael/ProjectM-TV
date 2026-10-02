@@ -114,11 +114,13 @@ void projectm_opengl_set_direct_output(projectm_handle, bool enabled) { g_direct
 projectm_handle projectm_create() { g_lastFrameDirect = false; return new projectm; }
 void projectm_destroy(projectm_handle p) { delete p; }
 int g_loadSleepMs = 0;
+int g_failNextLoads = 0;
 void (*g_loadObserver)() = nullptr;
 void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
   if (g_lastFrameDirect) ++g_loadsAfterDirectFrame;
   g_lastSmooth = smooth;
   if (g_loadObserver) g_loadObserver();
+  if (g_failNextLoads > 0) { --g_failNextLoads; g_failCb("", "compile error", nullptr); return; }
   if (g_loadSleepMs) std::this_thread::sleep_for(std::chrono::milliseconds(g_loadSleepMs));
   if (strstr(data, "BROKEN")) { g_failCb("", "compile error", nullptr); return; }
   g_loaded.push_back(data); }
@@ -258,6 +260,23 @@ int main(int argc, char** argv) {
   CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
   CHECK(g_library.Contains(current()));
   g_loadObserver = nullptr;
+  requestCategory("all");
+  switchFrame();
+
+  printf("category retries bounded load failures before acknowledging completion\n");
+  requestCategory("latin");
+  switchFrame();
+  CHECK(current() == "good 6.milk");
+  g_failNextLoads = 4;
+  requestCategory("pop");
+  switchFrame();
+  CHECK(g_library.CategoryCount("pop") == 1);
+  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
+  for (int i = 0; i < 10 && Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr); ++i) frame();
+  CHECK(g_library.Category() == "pop" && g_library.Contains(current()));
+  CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
+  g_library.ResetSkipped();
+  g_library.MarkSkipped("preskipped.milk", "fixture initial skip");
   requestCategory("all");
   switchFrame();
 
