@@ -1,0 +1,131 @@
+:root {
+  color-scheme: dark;
+  --background: #090909;
+  --surface: #171717;
+  --raised-surface: #252525;
+  --text: #f2f2f2;
+  --muted: #bcbcbc;
+  --outline: #555555;
+  --accent: #bba1ff;
+}
+
+body, .wy-body-for-nav, .wy-nav-content-wrap {
+  background: var(--background);
+  color: var(--text);
+}
+
+.wy-nav-side, .wy-side-nav-search, .wy-nav-top {
+  background: var(--surface);
+}
+
+.wy-nav-content {
+  max-width: 1100px;
+  background: var(--background);
+}
+
+.rst-content {
+  line-height: 1.65;
+}
+
+.rst-content h1, .rst-content h2, .rst-content h3 {
+  font-family: inherit;
+  line-height: 1.2;
+}
+
+.rst-content h1 { font-size: 2.4rem; }
+.rst-content h2 { margin-top: 2.5rem; }
+.rst-content h3 { margin-top: 2rem; }
+
+a, a:visited, .wy-breadcrumbs a, .wy-side-nav-search > a {
+  color: var(--accent);
+}
+
+a:hover { color: var(--text); }
+
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.wy-menu-vertical a, .wy-menu-vertical a:visited,
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li.current a {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.wy-menu-vertical li.current,
+.wy-menu-vertical li.toctree-l2.current > a,
+.wy-menu-vertical a:hover,
+.wy-menu-vertical li.current a:hover {
+  background: var(--raised-surface);
+}
+
+.wy-menu-vertical li.current > a {
+  border-color: var(--outline);
+  color: var(--accent);
+}
+
+.wy-side-nav-search input[type="text"] {
+  color: var(--text);
+  background: var(--background);
+  border-color: var(--outline);
+  box-shadow: none;
+}
+
+.rst-content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+}
+
+.rst-content table.docutils {
+  width: 100%;
+  border-color: var(--outline);
+}
+
+.rst-content table.docutils thead,
+.rst-content table.docutils td,
+.rst-content table.docutils th,
+.rst-content table.docutils:not(.field-list) tr:nth-child(2n+1) td,
+.rst-content table.docutils tr:nth-child(2n) td {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--outline);
+  white-space: normal;
+}
+
+.rst-content code, .rst-content tt {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--outline);
+}
+
+.btn, .btn:visited, .btn-neutral, .btn-neutral:visited {
+  color: var(--text) !important;
+  background: var(--surface) !important;
+  border-color: var(--outline);
+  box-shadow: none;
+}
+
+.btn:hover, .btn-neutral:hover {
+  background: var(--raised-surface) !important;
+}
+
+footer, .wy-breadcrumbs-aside { color: var(--muted); }
+hr { border-color: var(--outline); }
+
+@media (max-width: 768px) {
+  .wy-nav-content { padding: 1.5rem; }
+  .rst-content h1 { font-size: 2rem; }
+}
+
+.rst-content pre, .rst-content pre code, .rst-content .highlight {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--outline);
+}
+
+.rst-content pre { overflow-x: auto; }
+.wy-table-responsive { overflow-x: auto; }

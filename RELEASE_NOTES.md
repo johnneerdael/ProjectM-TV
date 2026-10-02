@@ -3,7 +3,7 @@
 ## Added
 - **Dance collection:** 500 existing presets selected automatically for large bass-driven visual changes. Choose *Music category › Dance* in the settings panel. Automatic changes, Random and Previous stay within the collection, subject to the TV's existing skip rules.
 - **All remains the default**, with the full 9,606-preset library. The category you choose is saved.
-- [Technical wiki: how the Dance collection is measured](https://github.com/johnneerdael/ProjectM-TV/wiki/Dance-collection), including controlled renders, pixel differences, ranking, cache identities and measurement limits.
+- [Technical guide: how the Dance collection is measured](https://johnneerdael.github.io/ProjectM-TV/dance-measurement/), including controlled renders, pixel differences, ranking, cache identities and measurement limits.
 
 ## Fixed
 - A category switch stays pending until an eligible preset is loaded. Failed preset loads are retried across frames instead of leaving an old out-of-category preset marked as selected.
