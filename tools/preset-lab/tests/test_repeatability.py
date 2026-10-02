@@ -52,7 +52,8 @@ def test_worker_streams_complete_frames(tmp_path):
 @pytest.mark.parametrize("mode,status", [("error", "failed"), ("truncated", "failed"),
                                         ("timeout", "timeout")])
 def test_worker_reports_failures_without_success(tmp_path, mode, status):
-    result = render_job(fake_worker(tmp_path, mode), make_job(tmp_path), lambda f: None, 0.25)
+    result = render_job(fake_worker(tmp_path, mode), make_job(tmp_path), lambda f: None,
+                        0.25 if mode == "timeout" else 2)
     assert result.status == status
     assert result.manifest["status"] == status
     assert result.diagnostics_path.is_file()

@@ -1,6 +1,6 @@
 # projectM Preset Lab
 
-An independently installable local tool for measured preset fingerprints and reusable genre matching. Implementation is in progress; inventory, music ingestion, static tracing and deterministic native-rendering checks are available now. Automatic matching follows the approved plan.
+An independently installable local tool for measured preset fingerprints and reusable matching. The current priority is selecting a Dance preset by bass-caused change on screen. Broad genre matching remains experimental.
 
 Install in a dedicated environment from the ProjectM-TV checkout:
 
@@ -53,3 +53,49 @@ build/preset-lab-venv/bin/preset-lab trace 'core/src/main/assets/presets/shifter
 ```
 
 Tracing follows the engine's first-key and numbered-section rules, assignment overwrites, conditionals, persistent frame state and scoped q1–q32/t1–t8 transfers. It distinguishes waveform sample values from spectral bands and records source lines and visible impact classes. Unsupported shader helper/control syntax and shared memory/register flows produce explicit incomplete-analysis reasons. Static reachability is not a measured response strength; controlled rendering supplies that evidence.
+
+## Measure bass response on screen
+
+Run the same numerical test on every preset, using the actual projectM engine to execute preset equations, shaders and feedback:
+
+```sh
+build/preset-lab-venv/bin/preset-lab bass-screen --repo . --work build/preset-lab/bass-screen
+```
+
+Use repeatable `--preset 'Exact filename.milk'` to test a subset, or `--priority 'Exact filename.milk'` to check a candidate first while still scanning the full library. `--worker /absolute/path/to/preset-lab-worker` reuses an existing build. The command updates `ranking.json` after each preset and resumes by reusing completed measurements. Invalidated inputs are rendered again automatically.
+
+Each experiment renders an identical carrier twice, then adds bass noise bursts at three amplitudes (0.05, 0.15, 0.30). The noise carrier covers 20–250 Hz; the kick envelope adds modulation sidebands. All runs share four seconds of identical warmup and twenty seconds of measurement. The bass bursts have a 10 ms attack, 120 ms decay and one-second spacing. Output gain is not independently normalized.
+
+For each pixel, `d = mean(abs(RGB_bass - RGB_control)) / 255`. Screen magnitude is `M = mean(d)` across the entire image. Affected area is the fraction of pixels where `d > 8/255`; local intensity is the mean difference within that area. This gives a tiny bright element proportionately less credit than a full-scene effect. Color, brightness, geometry and shader changes all contribute. Identical intrinsic animation contributes zero.
+
+The ranking score is the average, across the three amplitudes, of the 95th-percentile screen magnitude during measurement. Results also expose mean magnitude, affected area, first-pulse magnitude and response delay. A large sustained divergence caused by bass feedback can score highly even if immediate kick impact is small; inspect the separate first-pulse measurement when beat punch matters. Scores are pixel differences, not accuracy percentages or musical probabilities.
+
+A non-repeatable control, a changed pre-bass image prefix, a rendering failure or a compatibility warning produces `unknown` with no score. These checks cover the actual tested conditions. They do not prove response for all possible songs, timings, starting states, resolutions or GPU backends. The static parser is not required to understand every shader construct for this measurement.
+
+## Build a Dance collection of at least 500
+
+Choose the highest-ranked measured presets from the cached results. Collection size is separate from the strongest-response tier: selecting 500 does not label all 500 equally strong. No rendering or manual reanalysis is required.
+
+```sh
+build/preset-lab-venv/bin/preset-lab bass-select --measurements build/preset-lab/bass-screen/measurements --count 500 --destination build/preset-lab/dance-selection --import
+```
+
+This updates the existing bundle's Dance category, preserves the other category memberships and master memory weights, and stores each selected preset's rank and screen measurements. It excludes unknown, stale, incomplete and non-finite measurements. The command fails if fewer than the requested number are eligible. Selection before scan completion is explicitly provisional; rerun it after completion to refresh the group. Increase `--count` for a larger collection. Omit `--import` to export for inspection without updating app assets.
+
+## Verify on a TV without replacing its installed release
+
+Build a separate debug app (`nl.neerdael.projectmtv.presettest`, labelled “ProjectM TV · Preset test”) and its framework instrumentation:
+
+```sh
+./gradlew -PpresetLabDeviceTest :app:assembleDebug :app:assembleDebugAndroidTest
+```
+
+Install both APKs on the test device, grant the test app its requested RECORD_AUDIO permission, and run:
+
+```sh
+adb -s DEVICE shell am instrument -r -w -e live_audio true nl.neerdael.projectmtv.presettest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
+```
+
+The live test checks category application, member count, random-selection containment, fallback and live audio delivery. It saves Dance as the separate test app's category. Omit `-e live_audio true` for emulator testing without music. Live audio/output motion establishes operation on that device; it does not replace the controlled bass-effect measurements or prove every selected preset on every GPU. Omit `-PpresetLabDeviceTest` when building the normal debug app.
+
+The Preset Lab CI workflow runs synthetic/fake-worker tests, bundle integrity checks and real rendering fixtures on headless Mesa. Local Apple GPU and TV test evidence remains distinct from CI results.

@@ -268,3 +268,9 @@ Use the already supplied recordings alongside synthetic fixtures throughout deve
 5. Generate the full library's initial genre collections, exercise review/overrides with the supplied tracks, validate on the SHIELD, and document the tested workflow and corpus-expansion path.
 
 This sequence preserves the full end state while using the user's accepted initial corpus. Written-spec review and an implementation plan precede product code.
+
+## Current implementation priority — 2026-10-02
+
+The user narrowed the current deliverable to a Dance preset selected solely by bass-caused visual change and affected screen area. Execute full presets with the native projectM engine and compare matched rendered pixels. Source dependency reachability alone cannot determine response magnitude. Preserve unknown results for non-repeatable or failed experiments. Measurements describe a specified input protocol and renderer, not guaranteed classification across all possible audio and preset states. Broad genre and audience scoring is deferred while this selection is established.
+
+The user subsequently required a Dance collection of at least 500 presets. Select the requested count from valid cached measurements by descending whole-screen bass-response magnitude. Strongest-response threshold groups remain diagnostic; they do not limit collection size. Preserve individual response strength, affected area and rank. Exclude unknown/stale/incomplete measurements, fail if fewer than the requested count are eligible, and mark selections provisional until the library scan completes.

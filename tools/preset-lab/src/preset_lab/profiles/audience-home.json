@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "version": "home-v1",
+  "setting": "Home TV listening",
+  "targets": {"flashiness": 0.05, "smoothness": 0.7, "chaos": 0.15},
+  "weights": {"flashiness": 2, "smoothness": 1, "chaos": 1},
+  "maximums": {"flashiness": 0.7},
+  "preferred_reference_weight": 2,
+  "notes": "Editable starting viewing preferences; measured fit scores are not statistical match probabilities."
+}

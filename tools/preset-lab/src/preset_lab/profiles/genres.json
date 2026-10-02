@@ -1,18 +1,186 @@
 {
   "schema_version": 1,
-  "version": "1",
+  "version": "editorial-v1",
   "genres": [
-    {"id": "dance", "label": "Dance"},
-    {"id": "pop", "label": "Pop"},
-    {"id": "rock", "label": "Rock"},
-    {"id": "hip-hop", "label": "Hip-Hop"},
-    {"id": "rnb-soul", "label": "R&B / Soul"},
-    {"id": "jazz", "label": "Jazz"},
-    {"id": "classical", "label": "Classical"},
-    {"id": "ambient", "label": "Ambient"},
-    {"id": "folk-acoustic", "label": "Folk / Acoustic"},
-    {"id": "country", "label": "Country"},
-    {"id": "reggae", "label": "Reggae"},
-    {"id": "latin", "label": "Latin"}
-  ]
+    {
+      "id": "dance",
+      "label": "Dance",
+      "targets": {
+        "motion_speed": 0.65,
+        "structural_motion": 0.7,
+        "smoothness": 0.55,
+        "persistence": 0.45,
+        "flashiness": 0.12,
+        "chaos": 0.35,
+        "color_vibrancy": 0.8,
+        "contrast": 0.7
+      },
+      "minimum_music_fit": 0.2
+    },
+    {
+      "id": "pop",
+      "label": "Pop",
+      "targets": {
+        "motion_speed": 0.5,
+        "structural_motion": 0.5,
+        "smoothness": 0.65,
+        "persistence": 0.55,
+        "flashiness": 0.08,
+        "chaos": 0.2,
+        "color_vibrancy": 0.75,
+        "contrast": 0.6
+      }
+    },
+    {
+      "id": "rock",
+      "label": "Rock",
+      "targets": {
+        "motion_speed": 0.65,
+        "structural_motion": 0.65,
+        "smoothness": 0.5,
+        "persistence": 0.45,
+        "flashiness": 0.12,
+        "chaos": 0.4,
+        "color_vibrancy": 0.65,
+        "contrast": 0.7
+      }
+    },
+    {
+      "id": "hip-hop",
+      "label": "Hip-Hop",
+      "targets": {
+        "motion_speed": 0.5,
+        "structural_motion": 0.6,
+        "smoothness": 0.65,
+        "persistence": 0.55,
+        "flashiness": 0.08,
+        "chaos": 0.25,
+        "color_vibrancy": 0.65,
+        "contrast": 0.65
+      }
+    },
+    {
+      "id": "rnb-soul",
+      "label": "R&B / Soul",
+      "targets": {
+        "motion_speed": 0.3,
+        "structural_motion": 0.35,
+        "smoothness": 0.8,
+        "persistence": 0.7,
+        "flashiness": 0.03,
+        "chaos": 0.15,
+        "color_vibrancy": 0.6,
+        "contrast": 0.5
+      }
+    },
+    {
+      "id": "jazz",
+      "label": "Jazz",
+      "targets": {
+        "motion_speed": 0.4,
+        "structural_motion": 0.4,
+        "smoothness": 0.75,
+        "persistence": 0.65,
+        "flashiness": 0.04,
+        "chaos": 0.2,
+        "color_vibrancy": 0.6,
+        "contrast": 0.55
+      }
+    },
+    {
+      "id": "classical",
+      "label": "Classical",
+      "targets": {
+        "motion_speed": 0.25,
+        "structural_motion": 0.3,
+        "smoothness": 0.85,
+        "persistence": 0.8,
+        "flashiness": 0.02,
+        "chaos": 0.15,
+        "color_vibrancy": 0.55,
+        "contrast": 0.5
+      }
+    },
+    {
+      "id": "ambient",
+      "label": "Ambient",
+      "targets": {
+        "motion_speed": 0.15,
+        "structural_motion": 0.2,
+        "smoothness": 0.85,
+        "persistence": 0.85,
+        "flashiness": 0.01,
+        "chaos": 0.1,
+        "color_vibrancy": 0.5,
+        "contrast": 0.45
+      }
+    },
+    {
+      "id": "folk-acoustic",
+      "label": "Folk / Acoustic",
+      "targets": {
+        "motion_speed": 0.25,
+        "structural_motion": 0.3,
+        "smoothness": 0.8,
+        "persistence": 0.65,
+        "flashiness": 0.02,
+        "chaos": 0.1,
+        "color_vibrancy": 0.55,
+        "contrast": 0.5
+      }
+    },
+    {
+      "id": "country",
+      "label": "Country",
+      "targets": {
+        "motion_speed": 0.4,
+        "structural_motion": 0.4,
+        "smoothness": 0.7,
+        "persistence": 0.6,
+        "flashiness": 0.05,
+        "chaos": 0.15,
+        "color_vibrancy": 0.6,
+        "contrast": 0.55
+      }
+    },
+    {
+      "id": "reggae",
+      "label": "Reggae",
+      "targets": {
+        "motion_speed": 0.35,
+        "structural_motion": 0.4,
+        "smoothness": 0.8,
+        "persistence": 0.7,
+        "flashiness": 0.04,
+        "chaos": 0.2,
+        "color_vibrancy": 0.65,
+        "contrast": 0.55
+      }
+    },
+    {
+      "id": "latin",
+      "label": "Latin",
+      "targets": {
+        "motion_speed": 0.6,
+        "structural_motion": 0.6,
+        "smoothness": 0.65,
+        "persistence": 0.5,
+        "flashiness": 0.08,
+        "chaos": 0.25,
+        "color_vibrancy": 0.75,
+        "contrast": 0.6
+      }
+    }
+  ],
+  "notes": "Editable starting visual-experience hypotheses; separate from measured response and human validation.",
+  "style_weights": {
+    "motion_speed": 1,
+    "structural_motion": 1,
+    "smoothness": 1.5,
+    "persistence": 0.7,
+    "flashiness": 2,
+    "chaos": 1,
+    "color_vibrancy": 0.3,
+    "contrast": 0.3
+  }
 }

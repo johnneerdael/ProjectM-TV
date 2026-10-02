@@ -23,8 +23,143 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--manifest", type=Path)
     command = commands.add_parser("trace", help="Trace static audio dependencies in one preset")
     command.add_argument("preset", type=Path)
+    command = commands.add_parser("match", help="Automatically rank cached fingerprints without rendering")
+    command.add_argument("--fingerprints", type=Path, required=True)
+    music = command.add_mutually_exclusive_group(required=True)
+    music.add_argument("--corpus", type=Path)
+    music.add_argument("--audio", type=Path)
+    command.add_argument("--work", type=Path, default=Path("build/preset-lab/audio"))
+    command.add_argument("--genre-config", type=Path, default=Path(__file__).parent / "profiles/genres.json")
+    command.add_argument("--audience-config", type=Path, default=Path(__file__).parent / "profiles/audience-home.json")
+    command.add_argument("--overrides", type=Path)
+    command = commands.add_parser("analyze", help="Automatically measure new/changed presets and reuse cached runs")
+    command.add_argument("--repo",type=Path,default=Path.cwd())
+    command.add_argument("--work",type=Path,default=Path("build/preset-lab/analysis"))
+    command.add_argument("--limit",type=int)
+    command.add_argument("--preset",action="append",default=[])
+    command.add_argument("--worker",type=Path)
+    command.add_argument("--concurrency",type=int,default=1)
+    command = commands.add_parser("bass-screen", help="Rank bass-caused pixel change and screen area using the native engine")
+    command.add_argument("--repo", type=Path, default=Path.cwd())
+    command.add_argument("--work", type=Path, default=Path("build/preset-lab/bass-screen"))
+    command.add_argument("--worker", type=Path)
+    command.add_argument("--preset", action="append", default=[])
+    command.add_argument("--priority", action="append", default=[])
+    command = commands.add_parser("bass-select", help="Export a requested-size Dance collection from cached screen measurements")
+    command.add_argument("--repo", type=Path, default=Path.cwd())
+    command.add_argument("--measurements", type=Path, required=True)
+    command.add_argument("--count", type=int, default=500)
+    command.add_argument("--destination", type=Path, default=Path("build/preset-lab/dance-selection"))
+    command.add_argument("--import", dest="import_to_app", action="store_true")
+    command=commands.add_parser("run",help="Automatically analyze, match, music-test and export genre collections")
+    command.add_argument("--repo",type=Path,default=Path.cwd())
+    command.add_argument("--audio",type=Path,required=True)
+    command.add_argument("--work",type=Path,default=Path("build/preset-lab/run"))
+    command.add_argument("--audience-config",type=Path)
+    command.add_argument("--limit",type=int)
+    command.add_argument("--worker",type=Path)
+    command.add_argument("--concurrency",type=int,default=1)
     args = parser.parse_args(argv)
     try:
+        if args.command == "bass-select":
+            from .dance_selection import export_dance_selection
+            from .export import import_bundle
+            from .identity import load_json
+            repo = args.repo.resolve()
+            records, metadata = inventory(repo/"core/src/main/assets/presets",repo/"core/src/main/assets/presets.idx",
+                                          repo/"core/src/main/assets/textures")
+            measurements = [load_json(p) for p in sorted(args.measurements.glob('*.json'))]
+            state_path = args.measurements.parent/'ranking.json'
+            state = load_json(state_path) if state_path.exists() else {}
+            evidence = {'measurement_method':'bass-screen-v1', 'measured_presets':len(measurements),
+                        'scan_status':state.get('status','unknown'),
+                        'requested_presets':state.get('requested_presets'),
+                        'unknown_presets':state.get('unknown_presets'),
+                        'library_coverage':'full' if state.get('status')=='complete' else 'partial'}
+            bundle = export_dance_selection(measurements, records, repo/'core/src/main/assets/preset-genres',
+                                            args.destination, evidence, args.count)
+            result = import_bundle(bundle,repo) if args.import_to_app else bundle
+            json.dump({'count':args.count,'destination':str(result),'scan_status':evidence['scan_status'],
+                       'render_jobs':0},sys.stdout)
+            sys.stdout.write("\n")
+            return 0
+        if args.command == "bass-screen":
+            from .bass_screen import scan_bass_screen
+            from .build_worker import build_worker
+            from .identity import load_json
+            from .models import EngineIdentity
+            repo = args.repo.resolve()
+            records, metadata = inventory(repo/"core/src/main/assets/presets", repo/"core/src/main/assets/presets.idx",
+                                          repo/"core/src/main/assets/textures")
+            requested = set(args.preset) | set(args.priority)
+            missing = requested - {r.path for r in records}
+            if missing:
+                raise ValueError(f"unknown presets: {sorted(missing)}")
+            if args.preset:
+                records = [r for r in records if r.path in set(args.preset)]
+            priority = {name: i for i, name in enumerate(args.priority)}
+            records.sort(key=lambda r: (priority.get(r.path, len(priority)), r.path))
+            worker = (args.worker or build_worker(repo, args.work / "engine")).resolve()
+            identity = EngineIdentity(**load_json(worker.parent / "build-identity.json"))
+            report = scan_bass_screen(records, repo, args.work, worker, identity)
+            json.dump({k:v for k,v in report.items() if k not in ('ranking','unknown')}, sys.stdout, allow_nan=False)
+            sys.stdout.write("\n")
+            return 0 if not report['unknown_presets'] else 1
+        if args.command=="run":
+            from .models import PipelineConfig
+            from .pipeline import run_pipeline
+            result=run_pipeline(PipelineConfig(args.repo,args.audio,args.work,args.audience_config,
+                                               concurrency=args.concurrency,preset_limit=args.limit),worker=args.worker)
+            json.dump(dict(asdict(result),export_path=str(result.export_path)),sys.stdout,allow_nan=False)
+            sys.stdout.write("\n")
+            return 1 if result.failed_jobs else 0
+        if args.command == "analyze":
+            from .build_worker import build_worker
+            from .identity import load_json
+            from .models import Corpus,EngineIdentity,RunConfig
+            from .pipeline import analyze_library
+            import random
+            repo=args.repo.resolve()
+            records,metadata=inventory(repo/"core/src/main/assets/presets",repo/"core/src/main/assets/presets.idx",
+                                       repo/"core/src/main/assets/textures")
+            total=len(records)
+            if args.preset:
+                wanted=set(args.preset)
+                missing=wanted-{r.path for r in records}
+                if missing: raise ValueError(f"unknown presets: {sorted(missing)}")
+                records=[r for r in records if r.path in wanted]
+            elif args.limit is not None:
+                if args.limit<1: raise ValueError("preset limit must be positive")
+                random.Random(12345).shuffle(records)
+                records=records[:args.limit]
+            worker=args.worker or build_worker(repo,args.work/"engine")
+            identity=EngineIdentity(**load_json(worker.parent/"build-identity.json"))
+            fps=analyze_library(records,Corpus((),{},"universal"),RunConfig(),args.work,worker,
+                               repo=repo,identity=identity,concurrency=args.concurrency)
+            state=load_json(args.work/"analysis-state.json")
+            json.dump({"schema_version":1,"library_total":total,"analyzed_presets":len(fps),
+                       "coverage":"full" if len(records)==total else "partial",
+                       "render_jobs":state["render_jobs"],"reused_jobs":state["reused_jobs"],
+                       "failed_jobs":state["failed_jobs"],"fingerprint_directory":str(args.work/"fingerprints")},
+                      sys.stdout,allow_nan=False)
+            sys.stdout.write("\n")
+            return 1 if state["failed_jobs"] else 0
+        if args.command == "match":
+            from .identity import load_json
+            from .matching import load_cached_corpus, load_fingerprints, match_presets
+            if args.corpus:
+                corpus = load_cached_corpus(args.corpus)
+            else:
+                from .audio import load_corpus
+                corpus = load_corpus(args.audio, None, args.work)
+            decisions = match_presets(load_fingerprints(args.fingerprints), corpus,
+                                      load_json(args.genre_config), load_json(args.audience_config),
+                                      load_json(args.overrides) if args.overrides else None)
+            json.dump({"schema_version": 1, "corpus_identity": corpus.identity, "render_jobs": 0,
+                       "decisions": [asdict(decision) for decision in decisions]},
+                      sys.stdout, ensure_ascii=False, allow_nan=False)
+            sys.stdout.write("\n")
+            return 0
         if args.command == "trace":
             from .preset_parser import parse_preset
             from .dependencies import trace_dependencies

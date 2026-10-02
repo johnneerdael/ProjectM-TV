@@ -19,7 +19,7 @@ def doctor(repo: Path, work: Path, worker: Path | None = None) -> dict:
     worker = worker or build_worker(repo, work)
     assets = work / "doctor"
     assets.mkdir(parents=True, exist_ok=True)
-    base = ("[preset00]\nfGammaAdj=1\nfDecay=0.98\nnWaveMode=0\nfWaveScale=1\n"
+    base = ("MILKDROP_PRESET_VERSION=201\n[preset00]\nfGammaAdj=1\nfDecay=0.98\nnWaveMode=0\nfWaveScale=1\n"
             "fWaveAlpha=1\nwave_r=1\nwave_g=0.4\nwave_b=0.2\n")
     cases = {
         "waveform": base + "per_frame_1=zoom=1+0.01*bass;\n",
