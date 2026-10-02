@@ -2,7 +2,7 @@
 
 [![Android CI](https://github.com/johnneerdael/ProjectM-TV/actions/workflows/android.yml/badge.svg)](https://github.com/johnneerdael/ProjectM-TV/actions/workflows/android.yml)
 
-ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://github.com/projectM-visualizer/projectm) 4.1.7, an open-source reimplementation of Winamp's MilkDrop, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself.
+ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://github.com/projectM-visualizer/projectm), an open-source reimplementation of Winamp's MilkDrop, built from the 4.1.7 release with enhancements from 4.1.8 already applied on top, and ships with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It visualizes the music another app plays on the TV, such as SoundCloud. It is not a music player itself.
 
 > **Install on your TV with the Downloader app: code `4821216`**
 >
