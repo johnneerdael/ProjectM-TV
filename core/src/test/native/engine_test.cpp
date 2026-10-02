@@ -114,9 +114,11 @@ void projectm_opengl_set_direct_output(projectm_handle, bool enabled) { g_direct
 projectm_handle projectm_create() { g_lastFrameDirect = false; return new projectm; }
 void projectm_destroy(projectm_handle p) { delete p; }
 int g_loadSleepMs = 0;
+void (*g_loadObserver)() = nullptr;
 void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
   if (g_lastFrameDirect) ++g_loadsAfterDirectFrame;
   g_lastSmooth = smooth;
+  if (g_loadObserver) g_loadObserver();
   if (g_loadSleepMs) std::this_thread::sleep_for(std::chrono::milliseconds(g_loadSleepMs));
   if (strstr(data, "BROKEN")) { g_failCb("", "compile error", nullptr); return; }
   g_loaded.push_back(data); }
@@ -189,6 +191,29 @@ int main(int argc, char** argv) {
   CHECK(g_library.Weight("good 1.milk") == 0 && g_library.Weight("good 4.milk") == 0);
   CHECK(g_library.Weight("crlf.milk") == 7);  // CRLF line
 
+  printf("music category limits every library selection path\n");
+  CHECK(g_library.SetCategory("dance"));
+  CHECK(g_library.Category() == "dance" && g_library.CategoryCount("dance") == 3);
+  for (int i = 0; i < 30; ++i) {
+    std::string pick = g_library.Next();
+    CHECK(pick == "good 1.milk" || pick == "good 2.milk" || pick == "good 3.milk");
+    g_library.RecordShown(pick);
+    std::string random = g_library.Random(pick);
+    CHECK(random == "good 1.milk" || random == "good 2.milk" || random == "good 3.milk");
+  }
+  auto generation = g_library.CategoryGeneration();
+  CHECK(g_library.SetCategory("ambient"));
+  CHECK(g_library.CategoryGeneration() > generation);
+  CHECK(g_library.Previous().empty() && g_library.PeekPrevious().empty());
+  CHECK(g_library.PeekRandom() == "good 4.milk" || g_library.PeekRandom() == "good 5.milk");
+  CHECK(g_library.SetCategory("latin"));
+  g_library.RecordShown("good 6.milk");
+  CHECK(g_library.Random("good 6.milk") == "good 6.milk");
+  CHECK(!g_library.SetCategory("classical") && g_library.Category() == "all");
+  CHECK(!g_library.SetCategory("unknown") && g_library.Category() == "all");
+  CHECK(g_library.SetCategory("all"));
+  CHECK(g_library.ActiveCount() == 13 && g_library.Weight("good 3.milk") == 40);
+
   printf("indexing falls back to listing the folder without presets.idx\n");
   { std::string root2 = argv[2]; static AAssetManager am2{root2}; PresetLibrary& other = *new PresetLibrary();
     other.Start(&am2, root2 + "/skip.txt", "");  // never destroyed, like the app's library
@@ -209,6 +234,32 @@ int main(int argc, char** argv) {
   CHECK(g_texturePathCalls.size() == 1 && g_texturePathCalls[0] == texdir);
   CHECK(g_loadsAtTextureCall == 0);  // search path set before the first preset loaded
   CHECK(!g_locked);
+
+  printf("music category stays pending until its first preset is published\n");
+  auto requestCategory = [](const std::string& category) {
+    std::lock_guard<std::mutex> lock(g_inputs.categoryMutex);
+    g_inputs.requestedCategory = category;
+    ++g_inputs.categoryRequestedSerial;
+    g_inputs.categoryDirty = true;
+  };
+  std::string category = (current() == "good 1.milk" || current() == "good 2.milk" || current() == "good 3.milk")
+                          ? "ambient" : "dance";
+  g_loadObserver = [] { CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr)); };
+  requestCategory(category);
+  switchFrame();
+  CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
+  CHECK(g_library.Contains(current()));
+  // Startup/context restoration must apply the same completion ordering.
+  g_engine.current.clear();
+  g_engine.lastFrameDirect = false;
+  g_lastFrameDirect = false;  // a new context has no previously rendered direct frame
+  requestCategory(category == "dance" ? "ambient" : "dance");
+  frame();
+  CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
+  CHECK(g_library.Contains(current()));
+  g_loadObserver = nullptr;
+  requestCategory("all");
+  switchFrame();
 
   printf("settings from any thread\n");
   Java_nl_neerdael_projectm_core_ProjectMJNI_setAutoChange(nullptr, nullptr, false); frame();

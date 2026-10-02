@@ -51,6 +51,7 @@ public class MainActivity extends Activity {
 
     private static final String PREFS = "projectm_settings";
     private static final String PREF_AUTO_CHANGE = "auto_change_enabled";
+    private static final String PREF_MUSIC_CATEGORY = "music_category";
     private static final String PREF_BEAT_CUTS = "beat_cuts";
     private static final String PREF_TRACK_ACCESS_EXPLAINED = "track_access_explained";
     // The music player's audio session found last: tried first at the next launch.
@@ -113,6 +114,10 @@ public class MainActivity extends Activity {
     private AudioMeterView audioMeter;
     private TextView audioStatus;
     private OptionRow skippedRow;
+    private OptionRow musicCategoryRow;
+    private String requestedMusicCategory = "all";
+    private String[] musicCategoryIds = new String[]{"all"};
+    private String displayedMusicCategory = "";
     private View nowPlaying;
     private ImageView nowPlayingIcon;
     private TextView nowPlayingText;
@@ -165,6 +170,8 @@ public class MainActivity extends Activity {
         int[] mesh = DeviceProfile.MESH_SIZES[meshLevel()];
         ProjectMJNI.setMeshSize(mesh[0], mesh[1]);
         ProjectMJNI.setAutoChange(prefs.getBoolean(PREF_AUTO_CHANGE, true));
+        requestedMusicCategory = MusicCategories.normalize(prefs.getString(PREF_MUSIC_CATEGORY, "all"));
+        ProjectMJNI.setMusicCategory(requestedMusicCategory);
         ProjectMJNI.setBeatCuts(prefs.getBoolean(PREF_BEAT_CUTS, false));
         ProjectMJNI.setPresetDuration(prefs.getInt(PREF_PRESET_DURATION, 30));
         ProjectMJNI.setSoftCutDuration(transitionSeconds());
@@ -341,6 +348,9 @@ public class MainActivity extends Activity {
                     ProjectMJNI.setAutoChange(index == 1);
                     prefs.edit().putBoolean(PREF_AUTO_CHANGE, index == 1).apply();
                 });
+
+        musicCategoryRow = findViewById(R.id.row_music_category);
+        refreshMusicCategory();
 
         String[] durations = new String[PRESET_DURATIONS.length];
         for (int i = 0; i < durations.length; i++) durations[i] = PRESET_DURATIONS[i] + " s";
@@ -542,7 +552,30 @@ public class MainActivity extends Activity {
         if (!text.toString().contentEquals(view.getText())) view.setText(text);
     }
 
+    private void refreshMusicCategory() {
+        if (musicCategoryRow == null) return;
+        String applied = MusicCategories.appliedSelection(requestedMusicCategory,
+                ProjectMJNI.getMusicCategory(), ProjectMJNI.isMusicCategoryPending());
+        if (!ProjectMJNI.isMusicCategoryPending() && !applied.equals(requestedMusicCategory)) {
+            requestedMusicCategory = applied;
+            prefs.edit().putString(PREF_MUSIC_CATEGORY, applied).apply();
+            Toast.makeText(this, "No eligible presets in that category; using All", Toast.LENGTH_SHORT).show();
+        }
+        String[] ids = MusicCategories.available(ProjectMJNI::getCategoryPresetCount);
+        if (java.util.Arrays.equals(ids, musicCategoryIds) && applied.equals(displayedMusicCategory)) return;
+        musicCategoryIds = ids;
+        displayedMusicCategory = applied;
+        String[] labels = new String[ids.length];
+        for (int i = 0; i < ids.length; i++) labels[i] = MusicCategories.label(ids[i]);
+        musicCategoryRow.setup("Music category", labels, MusicCategories.selectedIndex(ids, applied), true, index -> {
+            requestedMusicCategory = musicCategoryIds[index];
+            prefs.edit().putString(PREF_MUSIC_CATEGORY, requestedMusicCategory).apply();
+            ProjectMJNI.setMusicCategory(requestedMusicCategory);
+        });
+    }
+
     private void refreshStatus() {
+        refreshMusicCategory();
         int change = ProjectMJNI.getPresetChangeCounter();
         if (change != lastPresetChange) {
             lastPresetChange = change;

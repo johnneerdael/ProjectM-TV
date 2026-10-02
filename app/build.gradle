@@ -11,6 +11,7 @@ android {
         applicationId "nl.neerdael.projectmtv"
         minSdkVersion 21
         targetSdkVersion 34
+        testInstrumentationRunner "com.example.projectm.visualizer.MusicCategoryInstrumentation"
         versionCode 32
         // Bump both for a release: CI publishes a GitHub Release when versionName changes on main.
         // CI appends VERSION_SUFFIX (e.g. "-ci.42") to non-release builds.
@@ -29,6 +30,13 @@ android {
         }
     }
     buildTypes {
+        debug {
+            if (project.hasProperty('presetLabDeviceTest')) {
+                applicationIdSuffix ".presettest"
+                versionNameSuffix "-presettest"
+                resValue "string", "app_name", "ProjectM TV · Preset test"
+            }
+        }
         release {
             // R8 shrinks and optimizes; names are kept (proguard-rules.pro) so crash traces stay readable.
             minifyEnabled true

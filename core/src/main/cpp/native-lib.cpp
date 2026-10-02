@@ -106,6 +106,38 @@ public:
 
     bool Ready() const { return ready_.load(std::memory_order_acquire); }
 
+    bool SetCategory(const std::string& requested) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (!ready_.load()) return false;
+        std::string selected = requested;
+        if (selected != "all" && (!categories_.count(selected) || EligibleCountLocked(categories_.at(selected)) == 0))
+            selected = "all";
+        if (selected != category_) RebuildCategoryLocked(selected);
+        return selected == requested;
+    }
+
+    std::string Category() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return category_;
+    }
+
+    int CategoryCount(const std::string& name) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (name == "all") return EligibleCountLocked(master_);
+        auto found = categories_.find(name);
+        return found == categories_.end() ? 0 : EligibleCountLocked(found->second);
+    }
+
+    uint64_t CategoryGeneration() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return categoryGeneration_;
+    }
+
+    bool Contains(const std::string& name) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return activeMembers_.count(name) && !skipped_.count(name);
+    }
+
     // Folder with the extracted texture pack (valid once Ready()).
     const std::string& TextureDir() const { return textureDir_; }
 
@@ -122,6 +154,7 @@ public:
     // Advances the shuffled cursor and returns the next playable preset ("" if none).
     std::string Next() {
         std::lock_guard<std::mutex> lock(mutex_);
+        EnsureEligibleCategoryLocked();
         std::string name = PeekNextLocked(true);
         RequestPrefetchLocked();
         return name;
@@ -139,6 +172,7 @@ public:
     // can be prepared in the background like the next preset in the shuffled order.
     std::string Random(const std::string& avoid) {
         std::lock_guard<std::mutex> lock(mutex_);
+        EnsureEligibleCategoryLocked();
         std::string pick = std::exchange(randomAhead_, std::string());
         if (pick.empty() || pick == avoid || skipped_.count(pick)) pick = PickRandomLocked(avoid);
         randomAhead_ = PickRandomLocked(pick);
@@ -187,7 +221,8 @@ public:
         if (name.empty()) return;
         std::lock_guard<std::mutex> lock(mutex_);
         if (!skipped_.insert(name).second) return;
-        ++skippedInOrder_;
+        if (activeMembers_.count(name)) ++skippedInOrder_;
+        EnsureEligibleCategoryLocked();
         LOGW("SKIP preset='%s' reason=%s", name.c_str(), reason);
         FILE* f = fopen(skipFilePath_.c_str(), "a");
         if (f) {
@@ -251,6 +286,74 @@ public:
     }
 
 private:
+    int EligibleCountLocked(const std::vector<std::string>& names) const {
+        int count = 0;
+        for (const auto& name : names) count += !skipped_.count(name);
+        return count;
+    }
+
+    void RebuildCategoryLocked(const std::string& selected) {
+        category_ = selected;
+        order_ = selected == "all" ? master_ : categories_.at(selected);
+        activeMembers_ = std::unordered_set<std::string>(order_.begin(), order_.end());
+        std::shuffle(order_.begin(), order_.end(), rng_);
+        cursor_ = 0;
+        history_.clear();
+        randomAhead_.clear();
+        prefetchedName_.clear();
+        prefetchedData_.clear();
+        skippedInOrder_ = order_.size() - EligibleCountLocked(order_);
+        ++categoryGeneration_;
+        RequestPrefetchLocked();
+    }
+
+    void EnsureEligibleCategoryLocked() {
+        if (category_ != "all" && EligibleCountLocked(order_) == 0) {
+            LOGW("Music category %s has no eligible presets; using All", category_.c_str());
+            RebuildCategoryLocked("all");
+        }
+    }
+
+    void ReadCategories(const std::vector<std::string>& master,
+                        const std::unordered_map<std::string, int>& weights) {
+        const char* ids[] = {"dance", "pop", "rock", "hip-hop", "rnb-soul", "jazz", "classical",
+                            "ambient", "folk-acoustic", "country", "reggae", "latin"};
+        std::unordered_set<std::string> known(master.begin(), master.end());
+        for (const auto* id : ids) {
+            std::string path = std::string("preset-genres/genres/") + id + ".idx";
+            AAsset* asset = AAssetManager_open(assets_, path.c_str(), AASSET_MODE_BUFFER);
+            if (!asset) continue;
+            const char* buffer = static_cast<const char*>(AAsset_getBuffer(asset));
+            size_t length = static_cast<size_t>(std::max<off_t>(0, AAsset_getLength(asset)));
+            std::string data = buffer ? std::string(buffer, length) : std::string();
+            AAsset_close(asset);
+            std::vector<std::string> names;
+            std::unordered_set<std::string> unique;
+            bool valid = true;
+            size_t start = 0;
+            while (start < data.size()) {
+                size_t end = data.find('\n', start);
+                std::string row = data.substr(start, end == std::string::npos ? end : end - start);
+                start = end == std::string::npos ? data.size() : end + 1;
+                if (!row.empty() && row.back() == '\r') row.pop_back();
+                if (row.empty()) continue;
+                size_t tab = row.find('\t');
+                if (tab == std::string::npos || row.find('\t', tab + 1) != std::string::npos) { valid = false; break; }
+                std::string name = row.substr(0, tab), weight = row.substr(tab + 1);
+                if (name.find_first_of("/\\\r") != std::string::npos || !known.count(name) || !unique.insert(name).second
+                    || weight.empty() || weight.find_first_not_of("0123456789") != std::string::npos) { valid = false; break; }
+                char* stop = nullptr;
+                long parsed = strtol(weight.c_str(), &stop, 10);
+                auto actual = weights.find(name);
+                int expected = actual == weights.end() ? 0 : actual->second;
+                if (!stop || *stop || parsed != expected) { valid = false; break; }
+                names.push_back(std::move(name));
+            }
+            if (valid && !names.empty()) categories_[id] = std::move(names);
+            else LOGW("Ignored malformed or empty music category %s", id);
+        }
+    }
+
     std::string ReadAsset(const std::string& name) const {
         std::string path = std::string(kPresetDir) + "/" + name;
         AAsset* asset = AAssetManager_open(assets_, path.c_str(), AASSET_MODE_BUFFER);
@@ -349,11 +452,14 @@ private:
             prefetchWanted_ = false;
             std::string name = PeekNextLocked(false);
             if (name.empty() || name == prefetchedName_) continue;
+            uint64_t generation = categoryGeneration_;
             lock.unlock();
             std::string data = ReadAsset(name);
             lock.lock();
-            prefetchedName_ = name;
-            prefetchedData_ = std::move(data);
+            if (generation == categoryGeneration_ && activeMembers_.count(name) && !skipped_.count(name)) {
+                prefetchedName_ = name;
+                prefetchedData_ = std::move(data);
+            }
         }
     }
 
@@ -397,9 +503,12 @@ private:
         }
 
         std::lock_guard<std::mutex> lock(mutex_);
+        ReadCategories(names, weights);
         rng_.seed(std::random_device{}());
+        master_ = names;
         std::shuffle(names.begin(), names.end(), rng_);
         order_ = std::move(names);
+        activeMembers_ = std::unordered_set<std::string>(order_.begin(), order_.end());
         weights_ = std::move(weights);
         skipped_ = std::move(skipped);
         blankStrikes_ = std::move(strikes);
@@ -450,6 +559,11 @@ private:
     std::condition_variable cv_;
     std::mt19937 rng_;
     std::vector<std::string> order_;
+    std::vector<std::string> master_;
+    std::unordered_map<std::string, std::vector<std::string>> categories_;
+    std::unordered_set<std::string> activeMembers_;
+    std::string category_ = "all";
+    uint64_t categoryGeneration_ = 0;
     size_t cursor_ = 0;
     std::deque<std::string> history_;
     std::string randomAhead_;  // Random()'s next pick
@@ -834,6 +948,11 @@ struct Inputs {
     std::atomic<int> meshWidth{48};
     std::atomic<int> meshHeight{32};
     std::atomic<bool> settingsDirty{true};
+    std::mutex categoryMutex;
+    std::string requestedCategory = "all";
+    std::atomic<bool> categoryDirty{false};
+    std::atomic<uint64_t> categoryRequestedSerial{0};
+    std::atomic<uint64_t> categoryAppliedSerial{0};
 
     std::mutex pcmMutex;
     std::vector<uint8_t> pcm;
@@ -1289,6 +1408,29 @@ void HandleAutoSwitch() {
 }
 
 void HandleCommands() {
+    if (g_inputs.categoryDirty.exchange(false)) {
+        std::string requested;
+        uint64_t serial;
+        {
+            std::lock_guard<std::mutex> lock(g_inputs.categoryMutex);
+            requested = g_inputs.requestedCategory;
+            serial = g_inputs.categoryRequestedSerial.load();
+        }
+        uint64_t before = g_library.CategoryGeneration();
+        g_library.SetCategory(requested);
+        if (before != g_library.CategoryGeneration()) {
+            g_engine.fade.Stop();
+            g_engine.snapshotReady = false;
+            g_engine.switchRequested = false;
+            g_engine.scaledUntil = 0;
+            g_inputs.command = kNone;
+            g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
+            if (!g_library.Contains(g_engine.current))
+                SwitchPreset([] { return g_library.Next(); }, false);
+            else g_library.RecordShown(g_engine.current);
+        }
+        g_inputs.categoryAppliedSerial = serial;
+    }
     int command = g_inputs.command.exchange(kNone);
     if (command != kNone) {
         bool smooth = !g_inputs.commandHardCut.load();
@@ -1570,6 +1712,13 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     if (g_engine.current.empty()) {
         // First frame(s): show the idle preset until the index is ready, then start immediately.
         if (g_library.Ready()) {
+            bool applyingCategory = g_inputs.categoryDirty.exchange(false);
+            uint64_t categorySerial = 0;
+            if (applyingCategory) {
+                std::lock_guard<std::mutex> lock(g_inputs.categoryMutex);
+                g_library.SetCategory(g_inputs.requestedCategory);
+                categorySerial = g_inputs.categoryRequestedSerial.load();
+            }
             if (!g_engine.texturesApplied) {
                 // Once, before the first preset: this call rescans and reloads all textures.
                 const char* paths[] = {g_library.TextureDir().c_str()};
@@ -1582,6 +1731,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
                 std::lock_guard<std::mutex> published(g_published.mutex);
                 resume = g_published.currentPreset;
             }
+            if (!resume.empty() && !g_library.Contains(resume)) resume.clear();
             // Benchmarks (adb shell setprop debug.projectmtv.preset <start of a preset name>): that
             // preset, without automatic changes, so two builds can be measured on the same preset.
             char forced[PROP_VALUE_MAX] = {0};
@@ -1595,6 +1745,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
                 }
             }
             SwitchPreset(FirstThenNext(resume), false);
+            if (applyingCategory) g_inputs.categoryAppliedSerial = categorySerial;
         }
     } else if (!g_engine.lastFrameDirect) {
         // After a direct frame a remote-control command waits one frame (projectM requests no
@@ -1606,7 +1757,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     // outgoing preset's stored frame. projectM itself stores frames during transitions and in a
     // frame in which it requests a switch.
     bool const direct = !g_engine.current.empty() && !g_engine.switchRequested && !g_engine.blankSwitchPending &&
-                        g_inputs.command.load() == kNone;
+                         g_inputs.command.load() == kNone && !g_inputs.categoryDirty.load();
     projectm_opengl_set_direct_output(g_engine.pm, direct);
 
     FeedAudio();
@@ -1694,6 +1845,36 @@ JNIEXPORT void JNICALL JNI_FN(randomPreset)(JNIEnv*, jclass, jboolean hardCut) {
 JNIEXPORT void JNICALL JNI_FN(setPresetDuration)(JNIEnv*, jclass, jint seconds) {
     g_inputs.presetDuration = std::max(1, static_cast<int>(seconds));
     g_inputs.settingsDirty = true;
+}
+
+JNIEXPORT void JNICALL JNI_FN(setMusicCategory)(JNIEnv* env, jclass, jstring category) {
+    if (!category) return;
+    const char* text = env->GetStringUTFChars(category, nullptr);
+    if (!text) return;
+    {
+        std::lock_guard<std::mutex> lock(g_inputs.categoryMutex);
+        g_inputs.requestedCategory = text;
+        ++g_inputs.categoryRequestedSerial;
+    }
+    env->ReleaseStringUTFChars(category, text);
+    g_inputs.categoryDirty = true;
+}
+
+JNIEXPORT jstring JNICALL JNI_FN(getMusicCategory)(JNIEnv* env, jclass) {
+    return env->NewStringUTF(g_library.Category().c_str());
+}
+
+JNIEXPORT jboolean JNICALL JNI_FN(isMusicCategoryPending)(JNIEnv*, jclass) {
+    return g_inputs.categoryRequestedSerial.load() != g_inputs.categoryAppliedSerial.load();
+}
+
+JNIEXPORT jint JNICALL JNI_FN(getCategoryPresetCount)(JNIEnv* env, jclass, jstring category) {
+    if (!category) return 0;
+    const char* text = env->GetStringUTFChars(category, nullptr);
+    if (!text) return 0;
+    int count = g_library.CategoryCount(text);
+    env->ReleaseStringUTFChars(category, text);
+    return count;
 }
 
 JNIEXPORT void JNICALL JNI_FN(setSoftCutDuration)(JNIEnv*, jclass, jint seconds) {

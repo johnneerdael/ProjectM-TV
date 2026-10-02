@@ -132,6 +132,11 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_music_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_preset_duration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

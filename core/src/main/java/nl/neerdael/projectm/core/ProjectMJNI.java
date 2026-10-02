@@ -51,6 +51,10 @@ public final class ProjectMJNI {
     public static native void previousPreset(boolean hardCut);
     public static native void randomPreset(boolean hardCut);
     public static native void setPresetDuration(int seconds);
+    public static native void setMusicCategory(String genreId);
+    public static native String getMusicCategory();
+    public static native int getCategoryPresetCount(String genreId);
+    public static native boolean isMusicCategoryPending();
     public static native void setSoftCutDuration(int seconds);
     public static native void setAutoChange(boolean enabled);
     /** projectM's hard cut to the next preset on a loud beat (off: presets only change by blending). */

@@ -30,6 +30,11 @@ echo "preskipped.milk" > "$WORK/assets/skip.txt"
     | awk '{ print $0 "\t" ($0 == "good 3.milk" ? 40 : 0) }' > "$WORK/assets/presets.idx"
 printf 'good 1.milk\ngood 2.milk\t2\ncrlf.milk\t7\r\n\nreadme.txt\t9\n' >> "$WORK/assets/presets.idx"
 echo "preset crlf" > "$WORK/assets/presets/crlf.milk"
+mkdir -p "$WORK/assets/preset-genres/genres"
+printf 'good 1.milk\t0\ngood 2.milk\t2\ngood 3.milk\t40\n' > "$WORK/assets/preset-genres/genres/dance.idx"
+printf 'good 4.milk\t0\ngood 5.milk\t0\n' > "$WORK/assets/preset-genres/genres/ambient.idx"
+printf 'good 6.milk\t0\n' > "$WORK/assets/preset-genres/genres/latin.idx"
+printf 'good 1.milk\tgarbage\n' > "$WORK/assets/preset-genres/genres/classical.idx"
 # Second fixture without an index: the folder listing is used.
 mkdir -p "$WORK/noindex/presets"
 for n in a.milk b.milk C.MILK notes.txt; do echo "x" > "$WORK/noindex/presets/$n"; done
