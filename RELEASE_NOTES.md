@@ -1,3 +1,17 @@
+# ProjectM TV 2.1.1
+
+**Fixes from upstream projectM.** Four fixes merged into projectM after its 4.1.7 release are now in the app (projectM patches 0017–0020), ahead of the next projectM release.
+
+## Fixed
+- **Fractal and domain-warp presets show their effect again.** projectM's shader translator rejected code such as `(float2(x, y)) * zoom`, and the preset then quietly lost its warp effect. 19 bundled presets are affected, among them the **Cope - fractal explorer**, **cope - mandelbrot (32 iterations)** and **p wrap twist fold and starch** series. All other presets translate exactly as before (checked on every bundled preset shader).
+- **Smoother waveforms.** The app passed projectM 480 audio samples per frame, but projectM analyses 576, so the oldest part of each waveform came from an earlier capture and could jump. The full 576 samples are now passed.
+- **Preset equations behave as in MilkDrop.** Comparisons, `while` loops and division by values very close to zero now use MilkDrop's tolerance of 0.00001 (projectm-eval 1.0.7). Some presets that depend on such values can move or animate a little differently, as they do in MilkDrop. A small memory leak for presets with broken equations is also fixed.
+
+## Changed
+- Translating a preset's shaders no longer slows down out of proportion on long shaders, which saves a little time when a preset is loaded for the first time.
+
+---
+
 # ProjectM TV 2.1.0
 
 **Much faster rendering on most TVs.** On an Ugoos AM6 (Amlogic S922X with a Mali-G52 GPU) the visuals run with 10–26% more frames per second on presets with a composite shader, and up to twice as many on presets without one (26 → 55 fps at 4K). With the new 30 fps default, Auto picks a much higher resolution. projectM moved far more data through memory per frame than needed; TVs with a tile-based GPU (Mali, Adreno, PowerVR: most Android TV boxes and TVs) were held back by that, not by the GPU's power. The picture is unchanged.
