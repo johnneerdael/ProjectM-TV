@@ -29,7 +29,7 @@ The app falls back to **All** when a selected category has no eligible members. 
 
 ## Track titles are missing
 
-Allow notification access using **Advanced → Track titles**. The app reads the player's media session for titles. Titles are optional and do not control visualizer audio capture.
+Open **Advanced → Track titles → Configure**, then enable ProjectM TV in Android's notification-access settings. **Dismiss** permanently hides the automatic reminder; Advanced still reopens setup. See the [screenshot walkthrough](getting-started.md#track-titles). The app reads the player's media session for titles. Titles are optional and do not control visualizer audio capture.
 
 ## Updating a debug build fails
 

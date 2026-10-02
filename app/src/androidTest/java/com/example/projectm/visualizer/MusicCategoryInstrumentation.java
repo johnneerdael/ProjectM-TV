@@ -16,9 +16,11 @@ import nl.neerdael.projectm.core.ProjectMJNI;
 /** Runtime test using only Android framework APIs; adds no dependencies to the app. */
 public final class MusicCategoryInstrumentation extends Instrumentation {
     private boolean liveAudio;
+    private String setupCase;
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
         liveAudio = arguments != null && "true".equals(arguments.getString("live_audio"));
+        setupCase = arguments == null ? null : arguments.getString("setup_case");
         start();
     }
     private void check(boolean ok, String message) {
@@ -43,6 +45,10 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
         throw new AssertionError("category not applied: " + expected + ", actual=" + ProjectMJNI.getMusicCategory());
     }
     @Override public void onStart() {
+        if (setupCase != null) {
+            TrackAccessSetupTest.run(this, setupCase);
+            return;
+        }
         Bundle result = new Bundle();
         Activity activity = null;
         try {

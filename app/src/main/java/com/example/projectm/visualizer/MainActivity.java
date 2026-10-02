@@ -3,6 +3,8 @@ package com.example.projectm.visualizer;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -54,6 +56,8 @@ public class MainActivity extends Activity {
     private static final String PREF_MUSIC_CATEGORY = "music_category";
     private static final String PREF_BEAT_CUTS = "beat_cuts";
     private static final String PREF_TRACK_ACCESS_EXPLAINED = "track_access_explained";
+    private boolean trackAccessPromptShown;
+    private AlertDialog trackAccessDialog;
     // The music player's audio session found last: tried first at the next launch.
     private static final String PREF_LAST_PLAYER_SESSION = "last_player_session";
     private static final String PREF_PRESET_DURATION = "preset_duration";
@@ -955,12 +959,11 @@ public class MainActivity extends Activity {
         // Checked on every resume: access may have been granted while the app was in the background.
         if (!trackWatcher.start()) {
             Log.i(TAG, "Track titles off: no notification-listener access");
-            // Explained automatically only once, ever (after the microphone permission, not on top of
-            // its dialog); Advanced › Track titles explains it again on request.
-            if (!prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false) && hasAudioPermission()) {
+            // Dismiss is saved permanently; Configure is only an acknowledgement for this launch.
+            // Advanced › Track titles always remains available on request.
+            if (!trackAccessPromptShown && !prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false) && hasAudioPermission()) {
                 handler.postDelayed(() -> {
-                    if (!resumed || trackWatcher.hasAccess() || prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false)) return;
-                    prefs.edit().putBoolean(PREF_TRACK_ACCESS_EXPLAINED, true).apply();
+                    if (!resumed || trackAccessPromptShown || trackWatcher.hasAccess() || prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false)) return;
                     explainTrackAccess();
                 }, TRACK_ACCESS_DELAY_MS);
             }
@@ -973,17 +976,39 @@ public class MainActivity extends Activity {
 
     /**
      * Explains how to allow notification-listener access, which the app needs to read the playing
-     * track from the music app's media session. Only information: the user enables it in the TV's
-     * settings (the app is listed there because it declares {@link TrackListenerService}).
+     * track from the music app's media session. Configure opens settings; the user enables access.
      */
     private void explainTrackAccess() {
-        new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+        if (trackAccessDialog != null && trackAccessDialog.isShowing()) return;
+        trackAccessPromptShown = true;
+        trackAccessDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
                 .setTitle("Show track titles")
                 .setMessage("To show the title and artist of each new track, allow " + getString(R.string.app_name)
                         + " under\n\n" + TRACK_ACCESS_PATH + "\n\nThe app reads no notifications; Android requires"
                         + " this access to see which track the music app is playing.")
-                .setPositiveButton("OK", null)
+                .setPositiveButton("Configure", (dialog, which) -> openTrackAccessSettings())
+                .setNegativeButton("Dismiss", (dialog, which) ->
+                        prefs.edit().putBoolean(PREF_TRACK_ACCESS_EXPLAINED, true).apply())
+                .setOnDismissListener(dialog -> trackAccessDialog = null)
                 .show();
+    }
+
+    private void openTrackAccessSettings() {
+        boolean opened = TrackAccessNavigation.open(Build.VERSION.SDK_INT, action -> {
+            Intent intent = new Intent(action);
+            if (TrackAccessNavigation.DETAIL.equals(action)) {
+                intent.putExtra("android.provider.extra.NOTIFICATION_LISTENER_COMPONENT_NAME",
+                        new ComponentName(this, TrackListenerService.class).flattenToString());
+            }
+            try {
+                startActivity(intent);
+                return true;
+            } catch (ActivityNotFoundException | SecurityException unavailable) {
+                Log.i(TAG, "Notification access settings unavailable for " + action);
+                return false;
+            }
+        });
+        if (!opened) Toast.makeText(this, "Open " + TRACK_ACCESS_PATH, Toast.LENGTH_LONG).show();
     }
 
 

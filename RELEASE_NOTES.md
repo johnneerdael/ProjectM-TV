@@ -1,3 +1,12 @@
+# ProjectM TV 2.1.3
+
+## Changed
+- **Configure track titles directly:** the startup dialog opens the app-specific notification-access page where supported, then falls back to the notification-access list, Apps or Settings on other TVs.
+- **Permanent Dismiss:** the old OK button is now Dismiss and saves your choice across restarts. Configure does not permanently dismiss the reminder. *Settings → Advanced → Track titles* always reopens setup.
+- **Screenshot setup guide:** the [GitHub Pages walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) covers audio permission, notification access, All / Dance selection and performance settings with real TV captures.
+
+---
+
 # ProjectM TV 2.1.2
 
 ## Added

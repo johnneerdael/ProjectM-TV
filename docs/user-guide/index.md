@@ -21,7 +21,7 @@ ProjectM TV visualizes music another app plays on Android TV. It runs projectM w
 
 The choice is saved. Your TV's skip list and performance checks still apply, so the eligible count can be lower than the number packaged in a collection.
 
-This guide describes version 2.1.2. The screenshots show the real app; older settings captures may omit the Music category row introduced in that release. At least 2 GB of RAM is highly recommended.
+This guide describes version 2.1.3. The setup walkthrough uses real screenshots from an isolated test installation on an Ugoos AM6; Android settings can look different on your TV. At least 2 GB of RAM is highly recommended.
 
 ## For the curious
 

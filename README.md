@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the app as of version 2.1.2.
+**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the app as of version 2.1.3.
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
@@ -69,9 +69,11 @@ In the panel, Up and Down move between rows, Left and Right change a value, and 
 The main panel shows the current preset and a live audio level (*Listening*, *Very quiet*, *No sound* or *No access*).
 
 <p align="center">
-  <img src="docs/screenshots/settings.jpg" alt="The settings panel" width="45%">
-  <img src="docs/screenshots/advanced.jpg" alt="The advanced settings panel with diagnostics" width="45%">
+  <img src="docs/user-guide/images/setup/main-settings.png" alt="The settings panel" width="45%">
+  <img src="docs/user-guide/images/setup/advanced-settings.png" alt="The advanced settings panel with diagnostics" width="45%">
 </p>
+
+These settings captures use an isolated test installation on an Ugoos AM6. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
 
 | Setting | Values | Default |
 |---|---|---|
@@ -140,7 +142,7 @@ The app opens no network connection unless you switch on *Auto-update*, and then
 | Record audio (`RECORD_AUDIO`) | Android's audio visualizer counts as recording. The app attaches it only to the music app's audio session, to animate the presets; the microphone is not used. | At first launch |
 | Internet (`INTERNET`) | Only for *Auto-update* (off by default): at every launch and every 6 hours while open, the app asks GitHub for the newest release and downloads it. While *Auto-update* is off, the app makes no connection. Android grants this permission at install and has no switch for it, which is why the app's own setting controls it. | Granted at install |
 | Install apps (`REQUEST_INSTALL_PACKAGES`) | Only for *Auto-update*: hands a downloaded update to Android's installer, which asks you to confirm. | The first time you install an update, Android asks you to allow installs from ProjectM TV |
-| Notification access (special access) | Only to read which track the music app is playing (its media session), for the track titles. The app reads no notifications. | You switch it on in the TV's settings (*Apps › Special app access › Notification access*); the app explains where once, at the first launch. Optional: without it no titles are shown |
+| Notification access (special access) | Only to read which track the music app is playing (its media session), for the track titles. The app reads no notifications. | You switch it on in the TV's settings (*Apps › Special app access › Notification access*); the startup dialog offers Configure to open Android settings and Dismiss to permanently hide the reminder. Optional: without it no titles are shown |
 
 ## Install
 
@@ -173,7 +175,7 @@ A version you built yourself is signed with your own debug key: uninstall it bef
 
 **It stutters.** Keep *Resolution* and *Transitions* on *Auto* and *Frame rate* at half the refresh rate (the default, 30 fps at 60 Hz), and lower *Detail* in *Advanced*. *Detail* sets how much per-vertex work every preset does on the CPU, which is often what limits blends.
 
-<a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). The app explains this once, at the first launch without access; *Settings › Advanced › Track titles* shows the explanation again, and *Diagnostics* shows whether access is granted.
+<a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). Select **Configure** in the startup dialog to open the closest supported Android notification-access page. **Dismiss** permanently hides the automatic reminder. *Settings › Advanced › Track titles* always reopens setup, and *Diagnostics* shows whether access is granted. See the [screenshot walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/#track-titles).
 
 **The music app closes while the visualizer runs.** Keep *Memory limit* on and *Resolution* on *Auto*. Only *Auto* lowers the resolution when memory runs low.
 

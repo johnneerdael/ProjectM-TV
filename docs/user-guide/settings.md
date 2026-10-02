@@ -29,6 +29,8 @@ All is the default music category. Your selected category is saved.
 | Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track titles (access), update status, device tier | – |
 
 
-![Advanced settings panel](images/advanced.jpg)
+![Main settings panel with Music category All](images/setup/main-settings.png)
 
-The screenshots predate the Music category row; the tables describe version 2.1.2. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+![Advanced settings panel and Diagnostics](images/setup/advanced-settings.png)
+
+The tables describe version 2.1.3; screenshots use an isolated test installation. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
