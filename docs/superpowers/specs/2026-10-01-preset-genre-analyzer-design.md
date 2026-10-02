@@ -8,6 +8,8 @@ Build a separate local tool that automatically characterizes MilkDrop presets wi
 
 Keep the complete outcome in scope: a runnable analyzer, measured genre collections with audience-aware selection and review controls, an export contract, and a verified TV category selector. A parser, synthetic-only scores, or a menu without measured collections does not complete the project. Initial single-track evidence is sufficient for the user's agreed first test; broader generalization is assessed after corpus expansion.
 
+User clarification: inventory coverage is not matching accuracy. Neither enumerating 9,606 presets, producing twelve nonempty indexes, nor showing that a renderer runs proves genre suitability. Match candidates against the actual supplied recordings and documented home-viewing preferences. Report predicted, music-tested, and optionally user-reviewed evidence separately. Completion requires the automatic matching behavior to pass real-music and deliberately contrasting visual-behavior checks; never replace those checks with counts or schema validation.
+
 Source brief: https://chatgpt.com/s/t_6abed47009b48191ad5bcb13d9a66492
 
 ## Evidence from this checkout
@@ -67,6 +69,19 @@ User update, 2 October: Ambient now has five supplied recordings, mapped in the 
 | `ambient5.webm` | William Basinski — dlp 1.1 | Gradual spectral degradation, noise floor, dropouts |
 
 Support numbered samples in flat folders, including WebM/Opus. Actual excerpt descriptors and measured response remain separate from the user's expected sonic profiles. Per-genre corpus provenance reflects its real recording count; other genres remain valid initial single-track tests.
+
+Further user update: Dance has six recordings, ordered as listed below, bringing the current corpus to twenty-one recordings across twelve genres. Saron Hart is the user-confirmed favourite melodic techno reference; retain this preference as editable matching metadata, not a new category or a measured acoustic conclusion.
+
+| File | User-specified Dance reference | Test emphasis |
+|---|---|---|
+| `dance1.webm` | Tiësto — Adagio for Strings | Beatless breakdown, rolling 4/4 bass, bright leads |
+| `dance2.webm` | Charlotte de Witte & Enrico Sangiuliano — The Age of Love (Rework) | Low-end transients separated from acid/filter sweeps |
+| `dance3.webm` | Ran-D — Zombie | Distorted kicks, low-mid bursts, vocal breakdown, synth chords |
+| `dance4.webm` | Avicii — Levels | Sidechain ducking, piano plucks, vocal samples |
+| `dance5.m4a` | Gigi D'Agostino — L'Amour Toujours | Quantized rhythm, sharp mid/high leads |
+| `dance6.webm` | Saron Hart — Running | Favourite melodic techno reference |
+
+Normal flat-folder ingestion discovers additional numbered files and automatically attaches known annotations. An explicit manifest is optional and overrides automatic discovery; it is not required every time samples are added.
 
 The following files were inspected with ffprobe on 2 October 2026. All twelve complete audio streams were also decoded with ffmpeg, returning exit code zero and no reported decode errors. Each has a 44,100 Hz stereo AAC audio stream and an attached MJPEG image. Select the audio stream explicitly; album artwork is not visualizer output. Resolve these filename aliases at ingestion without renaming the user's files.
 
@@ -236,6 +251,7 @@ The selector is manual. Music category changes preset selection; it does not sel
 | Reliable batch operation | Crash/timeout/interruption/resume tests; cache invalidation for changed presets/textures/engine/audio/metric/profile identities |
 | Automatic reusable matching | Unattended `run` produces all twelve indexes with no ratings file; repeated unchanged runs launch zero render jobs; `match` never launches a render worker; profile/corpus changes reuse valid universal fingerprints; unknown/changed presets are analyzed automatically |
 | Genre-specific collections | Initial twelve-track corpus is sufficient; measured, nonempty collections for all twelve genres; correct single-track/provisional provenance and review/override behavior; broader validation can follow later |
+| Matching correctness | Genre/audio/style/audience contributions are independently inspectable; supplied-music checks for selected candidates; counterexamples distinguish quiet/persistent, beat-responsive, frantic/flashing, tiny/blank and incompatible output; predicted-only membership cannot be described as music-tested or broadly accurate |
 | Audience-aware selection | Editable audience profile affects downstream scoring without rerendering; separate fit components and explanations; review overrides; no genre-based demographic inference |
 | Correct export | Schema/checksum/path validation; exact membership and memory-weight consistency with the current 9,606-entry master catalog or its current successor; reproducible output |
 | TV category integration | JNI/library tests for every selection path, singleton/empty sets, skips, restart, history, rapid category changes, stale prefetch/prewarm work and fallback |

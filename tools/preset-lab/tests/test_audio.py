@@ -129,6 +129,31 @@ def test_reference_annotations_are_not_measured_features(tmp_path):
     assert corpus.descriptors["ambient"]["onset_density"] == 0
 
 
+def test_favourite_reference_is_preserved_without_inventing_a_title(tmp_path):
+    write_wave(tmp_path / "dance6.wav", np.zeros(44100))
+    manifest = tmp_path / "reference.json"
+    manifest.write_text(json.dumps({"tracks": [{"id": "dance6", "path": "dance6.wav",
+        "genres": ["dance"], "preferred": True, "test_scenarios": ["melodic techno"]}]}))
+    corpus = load_corpus(tmp_path, manifest, tmp_path / "cache")
+    reference = corpus.descriptors["dance6"]["reference"]
+    assert reference["preferred"] is True
+    assert reference["title"] is None
+
+
+def test_flat_folder_keeps_known_references_and_accepts_new_numbered_samples(tmp_path):
+    source = tmp_path / "source.wav"
+    write_wave(source, np.sin(np.arange(44100) * 0.03) * 0.2)
+    root = tmp_path / "audio"
+    root.mkdir()
+    for number in (6, 7):
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(source),
+                        "-c:a", "libopus", str(root / f"dance{number}.webm")], check=True)
+    corpus = load_corpus(root, None, tmp_path / "cache")
+    assert corpus.descriptors["dance6"]["reference"]["preferred"] is True
+    assert "dance7" in corpus.descriptors
+    assert corpus.tracks[1].genre_ids == ("dance",)
+
+
 def test_stems_must_align_and_share_variant_gain(tmp_path):
     times = np.arange(44100) / 44100
     drums = 0.9 * np.sin(2 * np.pi * 80 * times)

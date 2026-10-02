@@ -38,7 +38,37 @@
     },
     {"id": "classical", "path": "classical.m4a", "genres": ["classical"]},
     {"id": "country", "path": "country.m4a", "genres": ["country"]},
-    {"id": "dance", "path": "dance.m4a", "genres": ["dance"]},
+    {
+      "id": "dance1", "path": "dance1.webm", "genres": ["dance"],
+      "title": "Tiësto — Adagio for Strings",
+      "test_scenarios": ["beatless string/pad breakdown", "138 BPM rolling 4/4 bassline", "bright saw-wave leads"]
+    },
+    {
+      "id": "dance2", "path": "dance2.webm", "genres": ["dance"],
+      "title": "Charlotte de Witte & Enrico Sangiuliano — The Age of Love (Rework)",
+      "test_scenarios": ["40–60 Hz kick transients", "acid-synth/filter modulation", "separation of low-end attacks from mid/high sweeps"]
+    },
+    {
+      "id": "dance3", "path": "dance3.webm", "genres": ["dance"],
+      "title": "Ran-D — Zombie",
+      "test_scenarios": ["distorted reverse-bass kicks", "sub/low-mid bursts", "vocal breakdown", "large synth chords"]
+    },
+    {
+      "id": "dance4", "path": "dance4.webm", "genres": ["dance"],
+      "title": "Avicii — Levels",
+      "test_scenarios": ["full-spectrum sidechain ducking", "bright piano plucks", "high-register vocal samples"]
+    },
+    {
+      "id": "dance5", "path": "dance5.m4a", "genres": ["dance"],
+      "title": "Gigi D'Agostino — L'Amour Toujours",
+      "test_scenarios": ["quantized 4/4 rhythm", "1–4 kHz sharp leads", "limited sub-rumble"]
+    },
+    {
+      "id": "dance6", "path": "dance6.webm", "genres": ["dance"],
+      "title": "Saron Hart — Running",
+      "preferred": true,
+      "test_scenarios": ["user-favourite melodic techno reference"]
+    },
     {"id": "folk", "path": "folk.m4a", "genres": ["folk-acoustic"]},
     {"id": "hiphop", "path": "hiphop.m4a", "genres": ["hip-hop"]},
     {"id": "jazz", "path": "jazz.m4a", "genres": ["jazz"]},

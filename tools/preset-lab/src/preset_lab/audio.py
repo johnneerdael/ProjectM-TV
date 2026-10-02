@@ -122,6 +122,13 @@ def load_corpus(root: Path, manifest: Path | None, cache: Path) -> Corpus:
                     "genres": [ALIASES.get(re.sub(r"\d+$", "", p.stem.lower()),
                                           re.sub(r"\d+$", "", p.stem.lower()))]}
                    for p in paths]
+        references = {entry["path"]: entry for entry in load_json(
+            Path(__file__).parent / "profiles/reference-corpus.json")["tracks"]}
+        for entry in entries:
+            reference = references.get(entry["path"], {})
+            for field in ("title", "test_scenarios", "preferred"):
+                if field in reference:
+                    entry[field] = reference[field]
     if not entries:
         raise ValueError("audio corpus is empty")
     tracks, descriptors, ids, identities = [], {}, set(), []
@@ -168,9 +175,10 @@ def load_corpus(root: Path, manifest: Path | None, cache: Path) -> Corpus:
                     "stereo_cancellation_detected": metadata["stereo_cancellation_detected"],
                     "mixing": metadata["mixing"], "stems_available": sorted(source_stems),
                     "variants": variants, "excerpts": segment_features, "evidence_level": "single-recording"}
-        if entry.get("title") or entry.get("test_scenarios"):
+        if entry.get("title") or entry.get("test_scenarios") or entry.get("preferred"):
             combined["reference"] = {"title": entry.get("title"),
                                       "test_scenarios": entry.get("test_scenarios", []),
+                                      "preferred": bool(entry.get("preferred", False)),
                                       "provenance": "user-provided expectations"}
         for name in ("rms", "onset_density", "dynamic_range_db", "energy_variation"):
             combined[name] = float(np.average([s["features"][name] for s in segment_features], weights=durations))
@@ -183,6 +191,7 @@ def load_corpus(root: Path, manifest: Path | None, cache: Path) -> Corpus:
         tracks.append(record)
         descriptors[track_id] = combined
         identities.append({"id": track_id, "source": record.sha256, "genres": genres,
-                           "excerpts": excerpts, "stems_and_gain": key})
+                           "excerpts": excerpts, "stems_and_gain": key,
+                           "preferred": bool(entry.get("preferred", False))})
     identity = digest({"tracks": identities, "decoder": decoder, "feature_code": file_digest(Path(__file__))})
     return Corpus(tuple(tracks), descriptors, identity)
