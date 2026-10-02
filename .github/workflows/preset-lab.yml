@@ -46,6 +46,11 @@ jobs:
           if invalid:
               raise SystemExit('User audio/raw captures must remain untracked: ' + ', '.join(invalid))
           PY
+      - name: Supply the pinned engine's missing standard header on GCC
+        run: |
+          printf '#!/bin/sh\nexec /usr/bin/g++ -include algorithm "$@"\n' > "$RUNNER_TEMP/preset-lab-cxx"
+          chmod +x "$RUNNER_TEMP/preset-lab-cxx"
+          echo "CXX=$RUNNER_TEMP/preset-lab-cxx" >> "$GITHUB_ENV"
       - name: Verify the actual native rendering backend
         run: xvfb-run -a preset-lab doctor --repo . --work build/preset-lab-ci > build/preset-lab-ci-doctor.json
       - name: Test real native shader and bass response
