@@ -1,8 +1,8 @@
 name: Android CI
 
-# Every push / pull request: native tests + a release APK as a downloadable artifact.
+# Every push / pull request: native tests + a release APK and core AAR as downloadable artifacts.
 # Push to main with a new versionName (app/build.gradle): also creates tag v<versionName> and a
-# GitHub Release with the APK and the top section of RELEASE_NOTES.md.
+# GitHub Release with the APK, the core AAR and the top section of RELEASE_NOTES.md.
 
 on:
   push:
@@ -52,6 +52,7 @@ jobs:
       tag: ${{ steps.version.outputs.tag }}
       release: ${{ steps.version.outputs.release }}
       apk_name: ${{ steps.apk.outputs.name }}
+      aar_name: ${{ steps.aar.outputs.name }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -103,7 +104,7 @@ jobs:
       - name: JVM unit tests
         run: ./gradlew testReleaseUnitTest --no-daemon
 
-      - name: Build release APK
+      - name: Build release APK and core AAR
         env:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
@@ -124,10 +125,32 @@ jobs:
           echo "name=${NAME}" >> "$GITHUB_OUTPUT"
           ls -lh dist
 
+      - name: Name core AAR
+        id: aar
+        run: |
+          # The root assembleRelease also builds :core (the engine library the app embeds).
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          if [ "${{ steps.version.outputs.release }}" = "true" ]; then
+            NAME="projectM-TV-core-${{ steps.version.outputs.version }}.aar"
+          else
+            NAME="projectM-TV-core-${{ steps.version.outputs.version }}-ci.${GITHUB_RUN_NUMBER}-${SHORT_SHA}.aar"
+          fi
+          mkdir -p dist-aar
+          cp core/build/outputs/aar/core-release.aar "dist-aar/${NAME}"
+          echo "name=${NAME}" >> "$GITHUB_OUTPUT"
+          ls -lh dist-aar
+
       - uses: actions/upload-artifact@v4
         with:
           name: apk
           path: dist/*.apk
+          retention-days: 30
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: core-aar
+          path: dist-aar/*.aar
           retention-days: 30
           if-no-files-found: error
 
@@ -146,6 +169,11 @@ jobs:
           name: apk
           path: dist
 
+      - uses: actions/download-artifact@v4
+        with:
+          name: core-aar
+          path: dist
+
       - name: Extract release notes
         run: |
           # Top section of RELEASE_NOTES.md, up to the first '---' separator.
@@ -158,10 +186,35 @@ jobs:
         run: |
           # Also attach the APK under a fixed name, so this link always serves the newest stable
           # release: https://github.com/<owner>/<repo>/releases/latest/download/projectM-TV.apk
+          # (and projectM-TV-core.aar for the core library).
           cp "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk
+          cp "dist/${{ needs.apk.outputs.aar_name }}" dist/projectM-TV-core.aar
           gh release create "${{ needs.apk.outputs.tag }}" \
             "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk \
+            "dist/${{ needs.apk.outputs.aar_name }}" dist/projectM-TV-core.aar \
             --target "${GITHUB_SHA}" \
             --title "ProjectM TV ${{ needs.apk.outputs.version }}" \
             --notes-file notes.md \
             --latest
+
+  milkbeat:
+    name: Rebuild Milkbeat with this core
+    needs: [apk, release]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Trigger Milkbeat's build
+        env:
+          # Fine-grained token for johnneerdael/Milkbeat with Contents read/write (repository_dispatch).
+          GH_TOKEN: ${{ secrets.MILKBEAT_TOKEN }}
+          VERSION: ${{ needs.apk.outputs.version }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "::warning::MILKBEAT_TOKEN is not set; Milkbeat was not rebuilt (see docs/RELEASING.md)."
+            exit 0
+          fi
+          # Milkbeat follows the newest stable core, so a rebuild of its main branch is all it needs.
+          gh api repos/johnneerdael/Milkbeat/dispatches \
+            -f event_type=projectm-core-release -f "client_payload[version]=${VERSION}"
+          echo "Triggered Milkbeat's build for core ${VERSION}."

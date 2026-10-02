@@ -1,3 +1,13 @@
+# ProjectM TV 2.1.4
+
+No changes to the app itself.
+
+## For developers
+- **Core library AAR:** every release now includes the `:core` visualizer engine (projectM, native libraries for `armeabi-v7a` and `arm64-v8a`, presets) as `projectM-TV-core-<version>.aar`. The same file is also attached as `projectM-TV-core.aar`, so [this link](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV-core.aar) always serves the newest one. CI builds offer it as the `core-aar` artifact.
+- **Milkbeat follows core releases:** each release triggers a Milkbeat rebuild with the new core.
+
+---
+
 # ProjectM TV 2.1.3
 
 ## Changed

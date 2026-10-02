@@ -4,8 +4,8 @@
 
 | Trigger | Result |
 |---|---|
-| Any push or pull request | Native engine tests, JVM unit tests + release APK, downloadable from the workflow run (**Actions → run → Artifacts → `apk`**), named `projectM-TV-<version>-ci.<run>-<sha>.apk` |
-| Push to `main` where `versionName` has no tag yet | Everything above, plus tag `v<versionName>` and a **GitHub Release**, marked as latest, with `projectM-TV-<version>.apk` and the same APK as `projectM-TV.apk`, using the top section of `RELEASE_NOTES.md` as the description |
+| Any push or pull request | Native engine tests, JVM unit tests + release APK and core library AAR, downloadable from the workflow run (**Actions → run → Artifacts → `apk`** / **`core-aar`**), named `projectM-TV-<version>-ci.<run>-<sha>.apk` and `projectM-TV-core-<version>-ci.<run>-<sha>.aar` |
+| Push to `main` where `versionName` has no tag yet | Everything above, plus tag `v<versionName>` and a **GitHub Release**, marked as latest, with `projectM-TV-<version>.apk` (also as `projectM-TV.apk`) and `projectM-TV-core-<version>.aar` (also as `projectM-TV-core.aar`), using the top section of `RELEASE_NOTES.md` as the description |
 
 CI builds show their origin in the app menu, e.g. `v1.8-ci.42`.
 
@@ -17,28 +17,21 @@ CI builds show their origin in the app menu, e.g. `v1.8-ci.42`.
 
 Pushing `main` again without changing `versionName` doesn't create another release.
 
-The fixed name makes one link always download the newest stable release: https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk (GitHub's `releases/latest` skips drafts and pre-releases).
+The fixed names make one link always download the newest stable release: https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk and https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV-core.aar (GitHub's `releases/latest` skips drafts and pre-releases).
 
-## One-time setup: signing key
+The core AAR is the `:core` module (`nl.neerdael.projectm.core`: projectM engine, native libraries for `armeabi-v7a`/`arm64-v8a`, bundled presets). It is versioned with the app's `versionName`; there is no separate core version.
 
-Android only installs an update over an existing app if both are signed with the same key. Without a key configured, every CI build gets a throwaway debug key and would need an uninstall first.
+## Milkbeat follows each core release
 
-**Status:** configured on 2026-09-26 (certificate `CN=projectM TV`, SHA-256 `EE:51:37:0F:48:53:25:D7:03:AD:BC:A4:D8:11:98:9D:90:E0:44:DA:61:81:F7:62:99:65:E6:AD:D0:3C:FC:EF`, valid until 2059). 1.9.6 is the first release signed with it; releases up to 1.9.5 used temporary keys. The keystore and its password are kept outside the repository by the maintainer; never commit them.
+[Milkbeat](https://github.com/johnneerdael/Milkbeat) uses the core AAR straight from these releases. By default (`projectmCoreVersion=latest` in its `gradle.properties`) it uses `releases/latest/download/projectM-TV-core.aar`, the newest stable release. Its CI looks up the latest tag and builds against that exact version, which it names in the Milkbeat release notes.
 
-1. Create a key (keep the file and passwords somewhere safe; losing them means users must reinstall):
-   ```bash
-   keytool -genkeypair -v -keystore projectm-release.jks -alias projectm \
-     -keyalg RSA -keysize 4096 -validity 10000
-   ```
-2. Add four repository secrets (**Settings → Secrets and variables → Actions → New repository secret**):
+After every release, the `Rebuild Milkbeat with this core` job sends Milkbeat a `projectm-core-release` repository dispatch. That rebuilds Milkbeat's `main` and publishes a new Milkbeat release with the new core.
 
-   | Secret | Value |
-   |---|---|
-   | `SIGNING_KEYSTORE_BASE64` | `base64 -i projectm-release.jks` (macOS) or `base64 -w0 projectm-release.jks` (Linux) |
-   | `SIGNING_STORE_PASSWORD` | keystore password |
-   | `SIGNING_KEY_ALIAS` | `projectm` |
-   | `SIGNING_KEY_PASSWORD` | key password |
+To test an unreleased core in Milkbeat, build it here (`./gradlew :core:assembleRelease`), copy `core/build/outputs/aar/core-release.aar` to `<dir>/download/v<version>/projectM-TV-core-<version>.aar`, and build Milkbeat with `-PprojectmCoreRepo=<dir> -PprojectmCoreVersion=<version>`.
 
-3. To build locally with the same key, export the same values (with `SIGNING_KEYSTORE_PATH` pointing at the `.jks` file) before running `./gradlew assembleRelease`.
+## One-time setup: Milkbeat token
 
-**Note:** installs from Android Studio or `install.sh` (debug key) can't be upgraded by CI builds (release key) or the other way round. Uninstall once when switching; this resets the app's settings.
+**Status:** `MILKBEAT_TOKEN` added on 2026-10-02. Without it, the job only warns and Milkbeat isn't rebuilt.
+
+1. Create a [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new) with access to `johnneerdael/Milkbeat` only and the repository permission **Contents: Read and write** (needed to send a repository dispatch).
+2. Add it to this repository as the Actions secret `MILKBEAT_TOKEN`.

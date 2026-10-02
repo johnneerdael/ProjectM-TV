@@ -1,0 +1,1 @@
+No app changes. Each release now also publishes the visualizer engine as an Android library (AAR) for embedding in other apps, such as Milkbeat.
