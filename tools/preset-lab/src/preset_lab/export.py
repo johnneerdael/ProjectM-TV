@@ -130,7 +130,13 @@ def verify_bundle(bundle: Path, inventory: list[PresetRecord], *, check_library_
     if used!=set().union(*evidence_members.values()):
         raise ValueError("preset catalog differs from category evidence")
     for genre in manifest["genres"]:
-        index=read_index(bundle/"genres"/(genre["id"]+".idx"))
+        path=bundle/"genres"/(genre["id"]+".idx")
+        if genre["count"] == 0:
+            if path.read_text(encoding="utf-8").strip():
+                raise ValueError("nonempty index for unavailable category")
+            index={}
+        else:
+            index=read_index(path)
         if len(index)!=genre["count"]:
             raise ValueError("category count mismatch")
         if any(name not in known or known[name].weight_mb!=weight for name,weight in index.items()):

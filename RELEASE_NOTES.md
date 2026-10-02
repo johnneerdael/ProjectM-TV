@@ -1,3 +1,19 @@
+# ProjectM TV 2.1.2
+
+## Added
+- **Dance collection:** 500 existing presets selected automatically for large bass-driven visual changes. Choose *Music category › Dance* in the settings panel. Automatic changes, Random and Previous stay within the collection, subject to the TV's existing skip rules.
+- **All remains the default**, with the full 9,606-preset library. The category you choose is saved.
+- [Technical wiki: how the Dance collection is measured](https://github.com/johnneerdael/ProjectM-TV/wiki/Dance-collection), including controlled renders, pixel differences, ranking, cache identities and measurement limits.
+
+## Fixed
+- A category switch stays pending until an eligible preset is loaded. Failed preset loads are retried across frames instead of leaving an old out-of-category preset marked as selected.
+
+## Measurement
+- The collection uses measured whole-screen bass response rather than preset names or the presence of bass variables in their code. Renderer changes invalidate measurements; release candidates are revalidated with the production renderer.
+- Strength describes the tested signals and renderer, not suitability probabilities or a guarantee for every song or GPU. No music recordings are included in the app.
+
+---
+
 # ProjectM TV 2.1.1
 
 **Fixes from upstream projectM.** Four fixes merged into projectM after its 4.1.7 release are now in the app (projectM patches 0017–0020), ahead of the next projectM release.

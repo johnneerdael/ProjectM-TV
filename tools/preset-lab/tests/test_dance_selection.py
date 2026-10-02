@@ -76,6 +76,12 @@ def test_export_updates_dance_count_weights_and_evidence_and_preserves_other_gen
     # Repeated refresh must not nest prior manifest metadata indefinitely.
     result = export_dance_selection(measurements,library,result,result,{'scan_status':'complete'},3, experiment=EXPERIMENT)
     assert verify_bundle(result,library)['evidence']['categories']['dance']['scan_status']=='complete'
+    result = export_dance_selection(measurements,library,result,result,{},3,experiment=EXPERIMENT,
+                                    preserve_other_categories=False)
+    manifest=verify_bundle(result,library)
+    assert all(g['count']==0 for g in manifest['genres'] if g['id']!='dance')
+    assert (result/'genres/ambient.idx').read_text()==''
+    assert set(manifest['evidence']['categories'])=={'dance'}
 
 
 @pytest.mark.parametrize('dependency',['code','worker','engine','textures_sha256','audio','config'])

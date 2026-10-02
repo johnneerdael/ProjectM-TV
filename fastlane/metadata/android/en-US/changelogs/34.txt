@@ -1,0 +1,1 @@
+Adds a Dance collection of 500 presets selected by measured bass-driven visual change. All remains the default full library. Saves category selection and keeps navigation within it. Retries failed category loads safely. README and technical wiki updated.

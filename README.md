@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the app as of version 2.1.0.
+**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the app as of version 2.1.2.
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
@@ -22,6 +22,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 ## Highlights
 
 - **9,606 curated MilkDrop presets** with smooth blends between them
+- **Dance collection:** 500 presets selected automatically for large bass-driven changes on screen. **All** remains the default, keeping the full library available.
 - **Corrected shader maths** restores colours and detail in presets affected by projectM translator bugs; [proof and upstream contribution](https://github.com/projectM-visualizer/projectm/pull/1031)
 - **Audio detected about 1 second after launch**, from the music app's own audio session
 - **Track title and artist** on screen when a new track starts
@@ -38,6 +39,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 
 - **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. The visuals usually react to the music within a second or two of launch, and within a few seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
 - **Shows 9,606 presets in shuffled order, with smooth blends.** Every 30 seconds by default it blends the old preset into the new one over 7 seconds. The next preset's shaders are compiled in the background beforehand, so the switch does not freeze the picture, and the blend adapts its resolution to keep the frame rate up. Left and Right on the remote cut straight to a random or the previous preset.
+- **Offers a Dance collection.** Open the settings panel and set *Music category* to *Dance* for 500 presets ranked by measured bass-caused visual change. Automatic changes, Random and Previous stay within the selected collection, subject to the existing skip rules. The choice is saved. *All* is the default and uses the full library. [How the Dance collection was measured](https://github.com/johnneerdael/ProjectM-TV/wiki/Dance-collection).
 - **Shows the track that is playing.** When the music app starts a new track, its title and artist appear in the lower left for 20 seconds (taken from the app's media session, e.g. SoundCloud or Flow). This needs *notification access*, see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that used to be black render; this rule remains as a safety net (details under *Presets* below).
 - **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution to hold the frame rate, without interrupting the preset. The TV's scaler upscales to the panel.
@@ -70,6 +72,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 | Setting | Values | Default |
 |---|---|---|
 | Auto change | Off, On | On |
+| Music category | All, Dance | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 | Transition | Instant, 1–10 s | 7 s (2 s on low-end devices) |
 | Resolution | Auto, or a fixed height up to the panel resolution and the memory limit | Auto |
@@ -109,7 +112,8 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
 
 **Presets**
 - 189 of the 9,795 *Cream of the Crop* presets are not included: 116 that cannot react to music, 73 that use images with text, logos or people (one preset is in both groups), and 1 whose texture could not be found.
-- You cannot choose or search for a preset, or build playlists. Presets play in shuffled order.
+- You can select the prebuilt Dance collection, but cannot search for an individual preset or build custom playlists. Presets play in shuffled order within the selected category.
+- Dance ranks screen response under controlled bass tests; it is not a guarantee of the same response for every song, resolution or GPU. Some presets respond through color or brightness changes, others through geometry or feedback. Device-specific skips can reduce the number available on a TV. The [technical wiki](https://github.com/johnneerdael/ProjectM-TV/wiki/Dance-collection) documents the signals, measurements and limits.
 - The black-preset check has limits. It judges each preset only in the first 20 seconds or so after it starts, and only after 3 seconds of uninterrupted music. "Black" means every sampled pixel is at or below about 8% brightness, so a very dark preset can count as black. After 3 black presets in a row it stops acting until a preset shows something, in case the fault is the renderer rather than the presets.
 - Versions before 1.9.5 marked some presets as black that now render. If you used an earlier version, reset the skip list: *Settings › Advanced › Skipped presets*.
 

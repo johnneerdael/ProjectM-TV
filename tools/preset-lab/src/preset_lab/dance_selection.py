@@ -88,7 +88,7 @@ def select_dance(measurements: list[dict], inventory: list[PresetRecord], count:
 
 def export_dance_selection(measurements: list[dict], inventory: list[PresetRecord],
                            base_bundle: Path, destination: Path, evidence: dict,
-                           count: int = 500, *, experiment: dict) -> Path:
+                           count: int = 500, *, experiment: dict, preserve_other_categories: bool = True) -> Path:
     """Update Dance only; preserve the other existing category memberships."""
     selected = select_dance(measurements, inventory, count, experiment=experiment)
     stored = load_json(base_bundle/'manifest.json')
@@ -104,7 +104,12 @@ def export_dance_selection(measurements: list[dict], inventory: list[PresetRecor
         index.write_text(''.join(f"{r['preset']['path']}\t{r['preset']['weight_mb']}\n"
                                  for r in sorted(selected, key=lambda r:r['preset']['path'].encode())), encoding='utf-8')
         prior_rows = [load_json_line(line) for line in (staged/'presets.jsonl').read_text().splitlines() if line]
-        rows = [r for r in prior_rows if r['genre_id'] != 'dance']
+        rows = [r for r in prior_rows if r['genre_id'] != 'dance'] if preserve_other_categories else []
+        if not preserve_other_categories:
+            for genre in manifest['genres']:
+                if genre['id'] != 'dance':
+                    (staged/'genres'/f"{genre['id']}.idx").write_text('')
+                    genre['count'] = 0
         current = {r.path:asdict(r) for r in inventory}
         if any(r['preset'] != current.get(r['preset']['path']) for r in rows):
             raise ValueError('stale retained category members; refresh their evidence before preserving them')
@@ -125,6 +130,8 @@ def export_dance_selection(measurements: list[dict], inventory: list[PresetRecor
                                   selection_count=count, cutoff_score=selected[-1]['score'],
                                   selection_rule='highest measured whole-screen bass response; no fixed strength cutoff',
                                   subjective_suitability='provisional'))
+        if not preserve_other_categories:
+            category_evidence = {'dance':category_evidence['dance']}
         manifest['evidence'] = {k:v for k,v in prior_evidence.items() if k in
                                 ('texture_sha256','app_patches_sha256','engine_identity')}
         manifest['evidence']['categories'] = category_evidence

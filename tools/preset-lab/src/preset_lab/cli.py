@@ -52,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--worker", type=Path)
     command.add_argument("--destination", type=Path, default=Path("build/preset-lab/dance-selection"))
     command.add_argument("--import", dest="import_to_app", action="store_true")
+    command.add_argument("--dance-only", action="store_true", help="Publish only Dance; leave other experimental categories unavailable")
     command=commands.add_parser("run",help="Automatically analyze, match, music-test and export genre collections")
     command.add_argument("--repo",type=Path,default=Path.cwd())
     command.add_argument("--audio",type=Path,required=True)
@@ -83,7 +84,8 @@ def main(argv: list[str] | None = None) -> int:
                         'unknown_presets':state.get('unknown_presets'),
                         'library_coverage':'full' if covered == {r.path for r in records} else 'partial'}
             bundle = export_dance_selection(measurements, records, repo/'core/src/main/assets/preset-genres',
-                                            args.destination, evidence, args.count, experiment=experiment)
+                                            args.destination, evidence, args.count, experiment=experiment,
+                                            preserve_other_categories=not args.dance_only)
             result = import_bundle(bundle,repo) if args.import_to_app else bundle
             json.dump({'count':args.count,'destination':str(result),'scan_status':evidence['scan_status'],
                        'render_jobs':0},sys.stdout)

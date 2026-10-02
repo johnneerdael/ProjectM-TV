@@ -327,6 +327,7 @@ private:
             size_t length = static_cast<size_t>(std::max<off_t>(0, AAsset_getLength(asset)));
             std::string data = buffer ? std::string(buffer, length) : std::string();
             AAsset_close(asset);
+            if (data.empty()) continue; // category not published in this bundle
             std::vector<std::string> names;
             std::unordered_set<std::string> unique;
             bool valid = true;

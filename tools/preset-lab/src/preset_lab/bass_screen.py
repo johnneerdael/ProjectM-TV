@@ -18,6 +18,7 @@ from .models import EngineIdentity, JobSpec, PresetRecord, RunConfig
 from .worker import render_job, validate_job
 
 VERSION = "bass-screen-v1"
+CODE_SHA256 = file_digest(Path(__file__))
 AREA_THRESHOLD = 8 / 255
 LEVELS = (.05, .15, .30)
 
@@ -89,7 +90,7 @@ def measure_preset_bass(record: PresetRecord, repo: Path, work: Path, worker: Pa
     if file_digest(preset_root / record.path) != record.sha256:
         raise ValueError(f"stale preset identity: {record.path}")
     signals = signals or bass_signals(config, work / "signals")
-    dependencies = {"version": VERSION, "code": file_digest(Path(__file__)),
+    dependencies = {"version": VERSION, "code": CODE_SHA256,
                     "preset": asdict(record), "config": asdict(config), "engine": asdict(identity),
                     "worker": file_digest(worker), "audio": {n: file_digest(p) for n, p in signals.items()},
                     "textures_sha256": digest([(p.name, file_digest(p)) for p in sorted(textures.iterdir())

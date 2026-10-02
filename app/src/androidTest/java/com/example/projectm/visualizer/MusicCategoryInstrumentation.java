@@ -57,7 +57,10 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
             ProjectMJNI.setMusicCategory("dance");
             awaitCategory("dance");
             check(dance.contains(ProjectMJNI.getCurrentPresetName()), "out-of-category initial preset");
-            check(ProjectMJNI.getPresetCount() == dance.size(), "active count is not category-specific");
+            int eligible = ProjectMJNI.getCategoryPresetCount("dance");
+            check(eligible > 0 && eligible <= dance.size(), "invalid eligible Dance count");
+            check(ProjectMJNI.getPresetCount() == eligible, "active count is not category-specific");
+            result.putString("dance_members", "packaged=" + dance.size() + ", eligible=" + eligible);
             if (liveAudio) {
                 int audible = 0;
                 float peak = 0;
@@ -80,8 +83,12 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
                 check(dance.contains(ProjectMJNI.getCurrentPresetName()), "random escaped category");
             }
             ProjectMJNI.setMusicCategory("ambient");
-            awaitCategory("ambient");
-            check(members("ambient").contains(ProjectMJNI.getCurrentPresetName()), "ambient switch failed");
+            if (ProjectMJNI.getCategoryPresetCount("ambient") > 0) {
+                awaitCategory("ambient");
+                check(members("ambient").contains(ProjectMJNI.getCurrentPresetName()), "ambient switch failed");
+            } else {
+                awaitCategory("all");
+            }
             Activity target = activity;
             runOnMainSync(() -> {
                 View row = target.findViewById(R.id.row_music_category);
@@ -95,7 +102,7 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
                 ProjectMJNI.setMusicCategory("dance");
                 awaitCategory("dance");
             }
-            result.putString("stream", "PASS: category application, active count, random membership, Ambient switch, visible row, fallback\n");
+            result.putString("stream", "PASS: category application, active count, random membership, optional category, focusable row, fallback\n");
             finish(Activity.RESULT_OK, result);
         } catch (Throwable failure) {
             result.putString("stream", "FAIL: " + failure + "\n");

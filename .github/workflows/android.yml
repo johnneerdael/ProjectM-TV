@@ -34,6 +34,8 @@ jobs:
         run: tools/gen-preset-index.py --check
       - name: Check presets (audio-reactive, no excluded or missing textures)
         run: tools/check-presets.py
+      - name: Verify measured category membership, weights and provenance
+        run: python3 tools/import-preset-genres.py --bundle core/src/main/assets/preset-genres --check
       - name: Install Mesa (headless OpenGL ES 3 for the transition overlay test)
         run: |
           sudo apt-get update -qq
