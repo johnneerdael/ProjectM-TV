@@ -948,9 +948,6 @@ struct Inputs {
     std::atomic<bool> beatCuts{false};  // projectM's hard cut to the next preset on a loud beat
     std::atomic<int> meshWidth{48};
     std::atomic<int> meshHeight{32};
-    // Render size at which lines are 1 px wide (patch 0021); MilkDrop's authoring resolution.
-    std::atomic<int> lineReferenceWidth{1024};
-    std::atomic<int> lineReferenceHeight{768};
     std::atomic<bool> settingsDirty{true};
     std::mutex categoryMutex;
     std::string requestedCategory = "all";
@@ -1085,8 +1082,6 @@ void ApplySettings() {
         g_engine.appliedMeshWidth = meshWidth;
         g_engine.appliedMeshHeight = meshHeight;
     }
-    projectm_opengl_set_line_reference_size(pm, g_inputs.lineReferenceWidth.load(),
-                                            g_inputs.lineReferenceHeight.load());
 }
 
 void Publish(const std::string& name) {
@@ -1670,11 +1665,11 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
         return;
     }
     projectm_set_beat_sensitivity(g_engine.pm, 1.0f);
-    // Lines as quads, 1 px wide up to the reference size (default MilkDrop's 1024x768) and by the
-    // square root of the area ratio above it, so a preset keeps its look at high quality levels
-    // (patch 0021, projectM issue #682). Set before the first preset renders.
-    projectm_opengl_set_line_reference_size(g_engine.pm, g_inputs.lineReferenceWidth.load(),
-                                            g_inputs.lineReferenceHeight.load());
+    // Lines as quads, 1 px wide up to MilkDrop's authoring resolution, 1024x768, and by the square
+    // root of the area ratio above it, so a preset keeps its look at high quality levels (patch 0021,
+    // projectM issue #682); blur levels and the spiro waves' fade follow it too. Set before the first
+    // preset renders.
+    projectm_opengl_set_line_reference_size(g_engine.pm, 1024, 768);
     projectm_set_preset_switch_requested_event_callback(g_engine.pm, OnSwitchRequested, nullptr);
     projectm_set_preset_switch_failed_event_callback(g_engine.pm, OnSwitchFailed, nullptr);
     g_inputs.settingsDirty = true;
@@ -1919,13 +1914,6 @@ JNIEXPORT void JNICALL JNI_FN(setBeatCuts)(JNIEnv*, jclass, jboolean enabled) {
 JNIEXPORT void JNICALL JNI_FN(setMeshSize)(JNIEnv*, jclass, jint width, jint height) {
     g_inputs.meshWidth = width;
     g_inputs.meshHeight = height;
-    g_inputs.settingsDirty = true;
-}
-
-// Render size at which lines are 1 px wide; they widen with the square root of the area above it.
-JNIEXPORT void JNICALL JNI_FN(setLineReferenceSize)(JNIEnv*, jclass, jint width, jint height) {
-    g_inputs.lineReferenceWidth = std::max(0, static_cast<int>(width));
-    g_inputs.lineReferenceHeight = std::max(0, static_cast<int>(height));
     g_inputs.settingsDirty = true;
 }
 

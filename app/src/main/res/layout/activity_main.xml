@@ -243,11 +243,6 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
-            android:id="@+id/row_line_thickness"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_transition_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

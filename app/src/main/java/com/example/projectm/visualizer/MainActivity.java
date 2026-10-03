@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import nl.neerdael.projectm.core.DeviceProfile;
 import nl.neerdael.projectm.core.DisplayInfo;
-import nl.neerdael.projectm.core.LineReference;
 import nl.neerdael.projectm.core.ProjectMJNI;
 import nl.neerdael.projectm.core.QualityController;
 import nl.neerdael.projectm.core.VisualizerRenderer;
@@ -67,7 +66,6 @@ public class MainActivity extends Activity {
     private static final String PREF_AUTO_HEIGHT = "auto_render_height";  // last automatic level
     private static final String PREF_FRAME_RATE_CAP = "frame_rate_cap";
     private static final String PREF_MESH_LEVEL = "mesh_level";
-    private static final String PREF_LINE_REFERENCE = "line_reference";  // LineReference option index
     private static final String PREF_SKIP_SLOW = "skip_slow_presets";
     // 1.9 made skipping black presets opt-in (dull output was often missing textures); 1.9.4 turns
     // it on for everyone (new key) with two strikes before a preset is skipped for good.
@@ -175,8 +173,6 @@ public class MainActivity extends Activity {
         // GL thread as soon as projectM is created.
         int[] mesh = DeviceProfile.MESH_SIZES[meshLevel()];
         ProjectMJNI.setMeshSize(mesh[0], mesh[1]);
-        int[] lineReference = LineReference.size(lineReferenceIndex());
-        ProjectMJNI.setLineReferenceSize(lineReference[0], lineReference[1]);
         ProjectMJNI.setAutoChange(prefs.getBoolean(PREF_AUTO_CHANGE, true));
         requestedMusicCategory = MusicCategories.normalize(prefs.getString(PREF_MUSIC_CATEGORY, "all"));
         ProjectMJNI.setMusicCategory(requestedMusicCategory);
@@ -305,10 +301,6 @@ public class MainActivity extends Activity {
         return Math.max(0, Math.min(level, DeviceProfile.MESH_SIZES.length - 1));
     }
 
-    private int lineReferenceIndex() {
-        return LineReference.validIndex(prefs.getInt(PREF_LINE_REFERENCE, LineReference.DEFAULT_INDEX));
-    }
-
     private int transitionSeconds() {
         return Math.min(MAX_TRANSITION, prefs.getInt(PREF_TRANSITION_DURATION, profile.defaultTransitionSeconds()));
     }
@@ -407,14 +399,6 @@ public class MainActivity extends Activity {
             int[] size = DeviceProfile.MESH_SIZES[index];
             ProjectMJNI.setMeshSize(size[0], size[1]);
             prefs.edit().putInt(PREF_MESH_LEVEL, index).apply();
-        });
-
-        // Lines 1 px at MilkDrop's 1024x768 (the look presets were made with) or at 1080p.
-        OptionRow lineThickness = findViewById(R.id.row_line_thickness);
-        lineThickness.setup("Line thickness", LineReference.LABELS, lineReferenceIndex(), true, index -> {
-            int[] size = LineReference.size(index);
-            ProjectMJNI.setLineReferenceSize(size[0], size[1]);
-            prefs.edit().putInt(PREF_LINE_REFERENCE, index).apply();
         });
 
         OptionRow transitionMode = findViewById(R.id.row_transition_mode);

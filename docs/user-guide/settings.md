@@ -18,7 +18,6 @@ All is the default music category. Your selected category is saved.
 | Setting | What it does | Default |
 |---|---|---|
 | Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
-| Line thickness | How thick waveforms and shape outlines are. *MilkDrop (1024×768)*: 1 px at MilkDrop's original resolution, growing with the picture (1.6 px at 1080p, 3.2 px at 4K), so presets look as their authors made them. *1080p*: 1 px at 1080p, 2 px at 4K (thinner lines, a darker look on some presets) | MilkDrop (1024×768) |
 | Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
 | Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
 | Memory limit | Caps the resolution by installed memory: under 1.6 GB 1080p, under 2.6 GB 1260p, under 3.6 GB 1440p, otherwise no cap | On |
