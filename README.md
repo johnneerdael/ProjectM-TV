@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the app as of version 2.1.3.
+**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the app as of version 2.1.5.
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
@@ -192,7 +192,7 @@ git clone --recurse-submodules https://github.com/johnneerdael/ProjectM-TV.git
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-Release builds on GitHub are signed with the release key; see [docs/RELEASING.md](docs/RELEASING.md). CI builds every push, and publishes a release when `versionName` changes on `main`.
+Release builds on GitHub are signed with the release key; see [docs/RELEASING.md](docs/RELEASING.md). CI builds every push and publishes a new version after each successfully tested merge to `main`. Public release notes come from the PR’s `Release notes` section; CI adds the current Downloader code and download links.
 
 The engine is the `:core` module, which the open-source music streamer [Milkbeat](https://github.com/johnneerdael/Milkbeat) also uses.
 
