@@ -6,7 +6,8 @@ changes with the render size and a preset that feeds its image back looked diffe
 quality level. projectm_opengl_set_line_reference_height() draws them as quads instead: one
 instance per segment with miter joins, 1 px wide at the reference height and in proportion at
 other sizes. Edges are hard like MilkDrop's GL lines (the quad is the band itself, so the
-rasterizer resolves pixel-border ties); projectm_opengl_set_line_antialiasing() opts into a
+rasterizer resolves pixel-border ties; on GLES a 1/64 px offset makes those ties land on the row
+Mali's GL lines light); projectm_opengl_set_line_antialiasing() opts into a
 one-pixel anti-aliased edge. The thick main wave is two bands, 2 + t and 2 - t px wide (t: the
 slope), like MilkDrop's 2x2 pixel dilation; thick custom waves and shape outlines are the thin
 line drawn four times with MilkDrop's offsets. Waveform dots stay GL points with a scaled size.
@@ -608,10 +609,10 @@ index 000000000..4b6db89a6
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.cpp b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
 new file mode 100644
-index 000000000..bd3978f7a
+index 000000000..5a6c57232
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
-@@ -0,0 +1,183 @@
+@@ -0,0 +1,197 @@
 +#include "LineRenderer.hpp"
 +
 +#include "MilkdropStaticShaders.hpp"
@@ -625,6 +626,17 @@ index 000000000..bd3978f7a
 +namespace MilkdropPreset {
 +
 +using ColoredPoint = LineBatch::ColoredPoint;
++
++auto LineTieBias() -> glm::vec2
++{
++#ifdef USE_GLES
++    // GL line tie-breaking is implementation-defined; this matches Mali-G52's GL lines. Desktop GL
++    // needs none (its GL lines and the quads already agree).
++    return {0.0f, 1.0f / 64.0f};
++#else
++    return {0.0f, 0.0f};
++#endif
++}
 +
 +LineRenderer::LineRenderer()
 +{
@@ -647,6 +659,7 @@ index 000000000..bd3978f7a
 +    m_halfWidthLocation = m_shader.UniformLocation("half_width");
 +    m_slopeHalfWidthLocation = m_shader.UniformLocation("slope_half_width");
 +    m_passOffsetLocation = m_shader.UniformLocation("pass_offset");
++    m_tieBiasLocation = m_shader.UniformLocation("tie_bias");
 +}
 +
 +LineRenderer::~LineRenderer()
@@ -704,6 +717,8 @@ index 000000000..bd3978f7a
 +    glUniformMatrix4fv(m_transformationLocation, 1, GL_FALSE, glm::value_ptr(transformation));
 +    glUniform2f(m_viewportSizeLocation, static_cast<float>(context.viewportSizeX), static_cast<float>(context.viewportSizeY));
 +    glUniform1f(m_antialiasLocation, context.lineAntialiasing ? 1.0f : 0.0f);
++    const glm::vec2 tieBias = LineTieBias();
++    glUniform2f(m_tieBiasLocation, tieBias.x, tieBias.y);
 +
 +    m_halfWidthSet = false;
 +    m_slopeHalfWidthSet = false;
@@ -797,10 +812,10 @@ index 000000000..bd3978f7a
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.hpp b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
 new file mode 100644
-index 000000000..9518927d8
+index 000000000..436ff7d79
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
-@@ -0,0 +1,97 @@
+@@ -0,0 +1,110 @@
 +#pragma once
 +
 +#include "LineGeometry.hpp"
@@ -817,6 +832,18 @@ index 000000000..9518927d8
 +
 +namespace libprojectM {
 +namespace MilkdropPreset {
++
++/**
++ * @brief The quad lines' vertex offset in render pixels, which decides pixel-border ties.
++ *
++ * A hard-edged band that lies exactly on a pixel border (a flat line in silence) has pixel centres
++ * on both of its edges; the rasterizer's top-left rule then picks one row. GL leaves the row a GL
++ * line lights in that case to the implementation. On desktop GL the top-left rule already picks the
++ * row the GL lines light, so no offset is needed. On GLES (a Mali-G52, checked on a device) the GL
++ * lines light the other row, so the quads move by a 1/64 px fraction: enough to decide the tie,
++ * too little to change any pixel that is not on an edge.
++ */
++auto LineTieBias() -> glm::vec2;
 +
 +/**
 + * @brief Draws line strips as quads (hard or anti-aliased edge), one instance per segment (projectM issue #682).
@@ -865,6 +892,7 @@ index 000000000..9518927d8
 +    GLint m_halfWidthLocation{-1};
 +    GLint m_slopeHalfWidthLocation{-1};
 +    GLint m_passOffsetLocation{-1};
++    GLint m_tieBiasLocation{-1};
 +
 +    // The per-draw uniforms' values as last set on the program; Begin() forgets them, so the first
 +    // Draw() after it sets them again. Draw() skips sets that would not change anything.
@@ -899,10 +927,17 @@ index 000000000..9518927d8
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
-index f3f0c4112..b2656c04e 100644
+index f3f0c4112..79c21812b 100644
 --- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
 +++ b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
-@@ -14,9 +14,32 @@ MotionVectors::MotionVectors(PresetState& presetState)
+@@ -1,5 +1,6 @@
+ #include "MotionVectors.hpp"
+ 
++#include "LineRenderer.hpp"
+ #include "MilkdropStaticShaders.hpp"
+ 
+ #include <Renderer/TextureManager.hpp>
+@@ -14,9 +15,32 @@ MotionVectors::MotionVectors(PresetState& presetState)
      auto staticShaders = libprojectM::MilkdropPreset::MilkdropStaticShaders::Get();
      m_motionVectorShader.CompileProgram(staticShaders->GetPresetMotionVectorsVertexShader(),
                                          staticShaders->GetUntexturedDrawFragmentShader());
@@ -935,7 +970,7 @@ index f3f0c4112..b2656c04e 100644
  void MotionVectors::InitVertexAttrib()
  {
      glEnableVertexAttribArray(0);
-@@ -84,6 +107,10 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -84,6 +108,10 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
      float const inverseHeight = 1.25f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
      float const minimumLength = sqrtf(inverseWidth * inverseWidth + inverseHeight * inverseHeight);
  
@@ -946,7 +981,7 @@ index f3f0c4112..b2656c04e 100644
      std::vector<MotionVectorVertex> lineVertices(static_cast<std::size_t>(countX + 1) * 2); // countX + 1 lines for each grid row, 2 vertices each.
  
      glEnable(GL_BLEND);
-@@ -136,6 +163,15 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -136,6 +164,15 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
                  }
              }
  
@@ -962,7 +997,7 @@ index f3f0c4112..b2656c04e 100644
              // Draw a row of lines.
              if (m_lastVertexCount >= vertex)
              {
-@@ -150,6 +186,11 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -150,6 +187,11 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
          }
      }
  
@@ -974,7 +1009,7 @@ index f3f0c4112..b2656c04e 100644
      glBindBuffer(GL_ARRAY_BUFFER, 0);
      glBindVertexArray(0);
  
-@@ -163,5 +204,42 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -163,5 +205,43 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
      return true;
  }
  
@@ -1008,6 +1043,7 @@ index f3f0c4112..b2656c04e 100644
 +    m_motionVectorQuadShader.SetUniformFloat("half_width", LineStyleFor(LineKind::MotionVector, false, lineScale,
 +                                                                                 m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY).halfWidth);
 +    m_motionVectorQuadShader.SetUniformFloat("antialias", m_presetState.renderContext.lineAntialiasing ? 1.0f : 0.0f);
++    m_motionVectorQuadShader.SetUniformFloat2("tie_bias", LineTieBias());
 +    m_motionVectorQuadShader.SetUniformFloat("length_multiplier", static_cast<float>(*presetPerFrameContext.mv_l));
 +    m_motionVectorQuadShader.SetUniformFloat("minimum_length", minimumLength);
 +    m_motionVectorQuadShader.SetUniformInt("warp_coordinates", 0);
@@ -1119,10 +1155,10 @@ index 000000000..e07344750
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert
 new file mode 100644
-index 000000000..3be09b5e7
+index 000000000..a6c03a015
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert
-@@ -0,0 +1,107 @@
+@@ -0,0 +1,112 @@
 +precision highp float;
 +precision highp int;
 +
@@ -1142,6 +1178,7 @@ index 000000000..3be09b5e7
 +uniform float slope_half_width; // vertex stage only: see LineStyle::slopeHalfWidth
 +uniform vec2 pass_offset;        // vertex stage only: this pass's translation, see LineStyle::passOffsetX
 +uniform highp float antialias;   // 1: one-pixel anti-aliased edge; 0: hard edge (see the fragment shader)
++uniform vec2 tie_bias;           // vertex stage only: render pixels added to every corner, see LineTieBias()
 +
 +out vec4 fragment_color;
 +out float edge_distance;
@@ -1223,6 +1260,10 @@ index 000000000..3be09b5e7
 +        extent = bandHalfWidth * max(1.0, 0.5 / max(half_width, 0.0001)) * major;
 +    }
 +    vec2 position = corner + offsetDirection * side * extent;
++    // Pixel-border ties (a band edge exactly on a pixel centre) are left to the rasterizer; GL line
++    // tie-breaking is implementation-defined, so this offset makes them land on the row the
++    // platform's GL lines light (zero on desktop).
++    position += tie_bias;
 +    gl_Position = vec4(position / (0.5 * viewport_size), 0.0, 1.0);
 +
 +    // Scaled so the band's edge lands on half_width, where the anti-aliased ramp is centred (the
@@ -1232,10 +1273,10 @@ index 000000000..3be09b5e7
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert
 new file mode 100644
-index 000000000..969f76538
+index 000000000..7b678e750
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert
-@@ -0,0 +1,77 @@
+@@ -0,0 +1,82 @@
 +precision highp float;
 +precision highp int;
 +
@@ -1249,6 +1290,7 @@ index 000000000..969f76538
 +uniform vec2 viewport_size;
 +uniform highp float half_width;
 +uniform highp float antialias; // 1: one-pixel anti-aliased edge; 0: hard edge (see the line fragment shader)
++uniform vec2 tie_bias;           // vertex stage only: render pixels added to every corner, see LineTieBias()
 +uniform float length_multiplier;
 +uniform float minimum_length;
 +uniform sampler2D warp_coordinates;
@@ -1308,6 +1350,10 @@ index 000000000..969f76538
 +    // least 1 px wide along the minor axis, so the rasterizer resolves pixel-border ties.
 +    float extent = antialias > 0.5 ? half_width + 1.0 : max(half_width, 0.5) * major;
 +    vec2 position = (gl_VertexID < 2 ? a : b) + normal * side * extent;
++    // Pixel-border ties (a band edge exactly on a pixel centre) are left to the rasterizer; GL line
++    // tie-breaking is implementation-defined, so this offset makes them land on the row the
++    // platform's GL lines light (zero on desktop).
++    position += tie_bias;
 +    gl_Position = vec4(position / (0.5 * viewport_size), 0.0, 1.0);
 +
 +    edge_distance = side * extent / major;
