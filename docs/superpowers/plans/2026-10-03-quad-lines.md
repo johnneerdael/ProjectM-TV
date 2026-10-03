@@ -16,6 +16,8 @@
 
 > **Noted 2026-10-03 (after implementation):** projectM issue #682 suggests round joins and end caps for waveforms (miters for shapes). All strips use miter joins and flat ends instead: the article's round joins draw a circle over every joint, which blends joint pixels twice and makes beads on translucent or additive waves (feedback presets amplify that); at 1 px (1080) and 2 px (2160) the join shape is sub-pixel; MilkDrop's own lines have no round joins, and miters let thin quad lines light exactly MilkDrop's pixels. Round end caps on open waveforms (no overlap) remain a cheap option if 4K images show rough wave ends.
 
+> **Amended 2026-10-03 (after implementation, user-approved):** decision 1's width rule is clamped: `lineScale = max(1, viewportHeight / referenceHeight)`. At and below the reference height (1080) lines are drawn exactly as at it, MilkDrop's 1 px lines at full brightness; above it they widen in proportion (2 px at 2160, unchanged). Lines thinner than 1 px faded by their width made feedback presets go dark on the PC (`$$$ Royal - Mashup (191)` black at 480p, `(103)` 0.056 against 0.24 at 1080) and thick lines 8–34 % too bright at 480p. With the clamp, new 480p is within −5 % to +1 % of GL lines at 480p and 1080 renders are hash-identical to before. Decision 5's "below 1 px" case no longer occurs (scale ≥ 1). The 241-preset sample's ladder drift is now quoted between 1080 and 1440 (median 2.0 % quad against 4.3 % GL lines); between 720 and 1440 it is 10.0 % against 10.9 %, because 720 draws as GL lines.
+
 How lines are drawn in our build today (4.1.7 + patches 0001–0020):
 
 | Element | File | Primitive | "Thick" |
