@@ -3,7 +3,7 @@ Fill in each section. Delete sections or checklist items that don't apply, and s
 Repo rules this template checks for:
 - projectM is changed only through patch files in tools/projectm-patches/, never by committing inside third_party/projectm.
 - Rendering changes include before/after captures and, where they affect what viewers see or frame rate, measurements on a TV.
-- Releases follow docs/RELEASING.md: fixes ship as a patch release, big performance or default changes as a minor release, never as a pre-release.
+- Each tested main merge publishes automatically. Routine PRs do not bump versions; planned release-line changes follow docs/RELEASING.md.
 -->
 
 ## Summary
@@ -35,7 +35,7 @@ Omit validation/test results, badges and installation information; CI appends th
 - [ ] Before/after TV captures and fps measurements use the same preset, render height and audio; explain any rendering differences in Evidence (profile setup in `docs/PROFILING.md`)
 - [ ] Shader changes link as GLSL ES 3.00 (`glslangValidator -l`, with `#version 300 es` prepended)
 
-## Tests
+## Validation
 
 - [ ] Native engine tests: `bash core/src/test/native/run_native_tests.sh` (record any skipped GL checks below)
 - [ ] JVM unit tests: `./gradlew testDebugUnitTest`
@@ -61,7 +61,8 @@ alternate release and profile runs, and read fps from the `VisualizerRenderer: S
 ## Docs and release
 
 - [ ] README, `docs/ARCHITECTURE.md` and the user guide describe the new behaviour
-- [ ] For a release: `versionCode` and `versionName` bumped in `app/build.gradle`, a section added at the top of `RELEASE_NOTES.md` (ending with `---`) and a changelog in `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt`
+- [ ] The public `Release notes` section matches the final change and contains no placeholders or test logs
+- [ ] No routine version bump; planned release-line changes update the base version/code/commit together following `docs/RELEASING.md`
 
 ## Not tested / known limitations
 

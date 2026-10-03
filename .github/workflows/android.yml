@@ -1,8 +1,8 @@
-name: Android CI
+name: Android CI/CD
 
 # Every push / pull request: native tests + a release APK and core AAR as downloadable artifacts.
-# Push to main with a new versionName (app/build.gradle): also creates tag v<versionName> and a
-# GitHub Release with the APK, the core AAR and the top section of RELEASE_NOTES.md.
+# Every successfully tested merge to main publishes the next version with PR-sourced notes,
+# the APK/core AAR, current install links, checksums, and a Milkbeat core update.
 
 on:
   push:
@@ -12,10 +12,12 @@ on:
 
 concurrency:
   group: android-${{ github.ref }}
-  cancel-in-progress: true
+  queue: max
+  cancel-in-progress: false
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   native-tests:
@@ -26,6 +28,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive  # projectM is built from source (third_party/projectm)
+      - name: Test release tooling
+        run: python3 -m unittest discover -s .github/scripts/tests -v
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -51,28 +55,19 @@ jobs:
       release: ${{ steps.version.outputs.release }}
       apk_name: ${{ steps.apk.outputs.name }}
       aar_name: ${{ steps.aar.outputs.name }}
+      previous_tag: ${{ steps.version.outputs.previous_tag }}
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive  # projectM is built from source (third_party/projectm)
 
       - name: Determine version
         id: version
-        run: |
-          VERSION=$(sed -nE 's/.*versionName "([^"]+)".*/\1/p' app/build.gradle | head -n1)
-          TAG="v${VERSION}"
-          RELEASE=false
-          SUFFIX="-ci.${GITHUB_RUN_NUMBER}"
-          if [ "${GITHUB_EVENT_NAME}" = "push" ] && [ "${GITHUB_REF}" = "refs/heads/main" ] \
-             && ! git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null; then
-            RELEASE=true
-            SUFFIX=""
-          fi
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-          echo "release=${RELEASE}" >> "$GITHUB_OUTPUT"
-          echo "VERSION_SUFFIX=${SUFFIX}" >> "$GITHUB_ENV"
-          echo "Version ${VERSION}${SUFFIX} (release: ${RELEASE})"
+        run: >-
+          python3 .github/scripts/release_version.py
+          --repo . --sha "$GITHUB_SHA" --event "$GITHUB_EVENT_NAME" --ref "$GITHUB_REF"
+          --run-number "$GITHUB_RUN_NUMBER" --output "$GITHUB_OUTPUT" --env "$GITHUB_ENV"
 
       - uses: actions/setup-java@v5
         with:
@@ -95,8 +90,11 @@ jobs:
           if [ -n "${KEYSTORE_BASE64}" ]; then
             echo "${KEYSTORE_BASE64}" | base64 -d > "${RUNNER_TEMP}/release.jks"
             echo "SIGNING_KEYSTORE_PATH=${RUNNER_TEMP}/release.jks" >> "$GITHUB_ENV"
+          elif [ "${{ steps.version.outputs.release }}" = "true" ]; then
+            echo "::error::Release signing is unavailable; refusing to publish a debug-signed APK."
+            exit 1
           else
-            echo "::warning::SIGNING_KEYSTORE_BASE64 is not set; APK is signed with a temporary debug key (see docs/RELEASING.md)."
+            echo "CI artifact uses a temporary debug key."
           fi
 
       - name: JVM unit tests
@@ -159,8 +157,11 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: write
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/download-artifact@v4
         with:
@@ -172,28 +173,27 @@ jobs:
           name: core-aar
           path: dist
 
-      - name: Extract release notes
-        run: |
-          # Top section of RELEASE_NOTES.md, up to the first '---' separator.
-          awk '/^---[[:space:]]*$/ {exit} {print}' RELEASE_NOTES.md > notes.md
-          [ -s notes.md ] || echo "Release ${{ needs.apk.outputs.tag }}" > notes.md
-
-      - name: Create release
+      - name: Write release notes from merged PRs
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.apk.outputs.version }}
+          PREVIOUS_TAG: ${{ needs.apk.outputs.previous_tag }}
+        run: >-
+          python3 .github/scripts/release_notes.py generate
+          --checkout . --repo "$GITHUB_REPOSITORY" --sha "$GITHUB_SHA"
+          --version "$VERSION" --previous-tag "$PREVIOUS_TAG" --output notes.md
+
+      - name: Publish complete signed artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.apk.outputs.version }}
+          APK_NAME: ${{ needs.apk.outputs.apk_name }}
+          AAR_NAME: ${{ needs.apk.outputs.aar_name }}
         run: |
-          # Also attach the APK under a fixed name, so this link always serves the newest stable
-          # release: https://github.com/<owner>/<repo>/releases/latest/download/projectM-TV.apk
-          # (and projectM-TV-core.aar for the core library).
-          cp "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk
-          cp "dist/${{ needs.apk.outputs.aar_name }}" dist/projectM-TV-core.aar
-          gh release create "${{ needs.apk.outputs.tag }}" \
-            "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk \
-            "dist/${{ needs.apk.outputs.aar_name }}" dist/projectM-TV-core.aar \
-            --target "${GITHUB_SHA}" \
-            --title "ProjectM TV ${{ needs.apk.outputs.version }}" \
-            --notes-file notes.md \
-            --latest
+          cp "dist/$APK_NAME" dist/projectM-TV.apk
+          cp "dist/$AAR_NAME" dist/projectM-TV-core.aar
+          python3 .github/scripts/publish_release.py publish --repo "$GITHUB_REPOSITORY" \
+            --version "$VERSION" --sha "$GITHUB_SHA" --notes notes.md --assets-dir dist
 
   milkbeat:
     name: Rebuild Milkbeat with this core
@@ -201,18 +201,9 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Trigger Milkbeat's build
+      - uses: actions/checkout@v4
+      - name: Update Milkbeat with this core
         env:
-          # Fine-grained token for johnneerdael/Milkbeat with Contents read/write (repository_dispatch).
           GH_TOKEN: ${{ secrets.MILKBEAT_TOKEN }}
           VERSION: ${{ needs.apk.outputs.version }}
-        run: |
-          set -euo pipefail
-          if [ -z "${GH_TOKEN}" ]; then
-            echo "::warning::MILKBEAT_TOKEN is not set; Milkbeat was not rebuilt (see docs/RELEASING.md)."
-            exit 0
-          fi
-          # Milkbeat follows the newest stable core, so a rebuild of its main branch is all it needs.
-          gh api repos/johnneerdael/Milkbeat/dispatches \
-            -f event_type=projectm-core-release -f "client_payload[version]=${VERSION}"
-          echo "Triggered Milkbeat's build for core ${VERSION}."
+        run: python3 .github/scripts/publish_release.py milkbeat --version "$VERSION"

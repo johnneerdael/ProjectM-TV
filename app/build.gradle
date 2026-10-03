@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+// Floors for this release line. CI derives each patch/code from first-parent main history.
+// Reset all three only for a planned new release line; routine PRs need no version bump.
+def baseVersionName = "2.1.5"
+def baseVersionCode = 37
+def baseVersionCommit = "bd549b4295313d27c3450433415f04c2ed8d6835"
+
 android {
     // Java package of the code; the installed app ID (applicationId below) is separate since 1.9.7.
     namespace "com.example.projectm.visualizer"
@@ -12,10 +18,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 34
         testInstrumentationRunner "com.example.projectm.visualizer.MusicCategoryInstrumentation"
-        versionCode 36
-        // Bump both for a release: CI publishes a GitHub Release when versionName changes on main.
-        // CI appends VERSION_SUFFIX (e.g. "-ci.42") to non-release builds.
-        versionName "2.1.4" + (System.getenv("VERSION_SUFFIX") ?: "")
+        versionCode = (System.getenv("PROJECTM_RELEASE_VERSION_CODE") ?: baseVersionCode.toString()).toInteger()
+        versionName = (System.getenv("PROJECTM_RELEASE_VERSION") ?: baseVersionName) + (System.getenv("VERSION_SUFFIX") ?: "")
     }
     signingConfigs {
         release {
