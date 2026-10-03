@@ -3,25 +3,27 @@ Subject: [PATCH] projectM TV: lines as quads that scale with the render size
 projectM issue #682. MilkDrop draws waveforms, custom waves, shape outlines and motion vectors as
 1 px GL lines (thick ones four times, offset by up to a pixel), so their share of the picture
 changes with the render size and a preset that feeds its image back looked different at every
-quality level. projectm_opengl_set_line_reference_height() draws them as quads instead: one
-instance per segment with miter joins, 1 px wide at and below the reference height and in
-proportion above it (below it, thinner lines faded by their width made such presets go dark, so
-they are drawn as at the reference height). Edges are hard like MilkDrop's GL lines (the quad is
-the band itself, so the rasterizer resolves pixel-border ties; on GLES a 1/64 px offset makes those
-ties land on the row Mali's GL lines light); projectm_opengl_set_line_antialiasing() opts into a
-one-pixel anti-aliased edge. Thick lines are the thin line drawn four times with MilkDrop's
-offsets (a pixel for the main wave, half a pixel for custom waves and shape outlines, scaled like
-the width). Waveform dots stay GL points with a scaled size. If the driver rejects the line
-shaders, GL lines are drawn. 0, the default, keeps the GL lines.
-Unlike the issue's suggestion, waveforms also get miter joins and flat ends, not round joins and
-caps: round joins overlap the segments and blend joint pixels twice (bright beads on translucent
-or additive waves), at 1-2 px the join shape is sub-pixel, and MilkDrop's lines have none.
+quality level. projectm_opengl_set_line_reference_size() draws them as quads instead: one instance
+per segment with miter joins, 1 px wide at and below the reference size's area and widened by the
+square root of the area ratio above it, so a line covers the same share of the picture at any size
+and aspect ratio (at the reference's aspect ratio: the height ratio). Below the reference area,
+thinner lines faded by their width made such presets go dark, so they are drawn as at the reference
+size. Edges are hard like MilkDrop's GL lines (the quad is the band itself, so the rasterizer
+resolves pixel-border ties; on GLES a 1/64 px offset makes those ties land on the row Mali's GL
+lines light); projectm_opengl_set_line_antialiasing() opts into a one-pixel anti-aliased edge.
+Thick lines are the thin line drawn four times with MilkDrop's offsets (a pixel for the main wave,
+half a pixel for custom waves and shape outlines, scaled like the width). Waveform dots stay GL
+points with a scaled size. If the driver rejects the line shaders, GL lines are drawn. 0, the
+default, keeps the GL lines. Unlike the issue's suggestion, waveforms also get miter joins and flat
+ends, not round joins and caps: round joins overlap the segments and blend joint pixels twice
+(bright beads on translucent or additive waves), at 1-2 px the join shape is sub-pixel, and
+MilkDrop's lines have none.
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
-index ee6ae6562..e3dd5b78e 100644
+index ee6ae6562..0262cc70a 100644
 --- a/src/api/include/projectM-4/render_opengl.h
 +++ b/src/api/include/projectM-4/render_opengl.h
-@@ -87,6 +87,35 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
+@@ -87,6 +87,39 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
   */
  PROJECTM_EXPORT void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled);
  
@@ -29,25 +31,29 @@ index ee6ae6562..e3dd5b78e 100644
 + * @brief Draws waveforms, custom waves, shape outlines and motion vectors as quads, and waveform dots
 + *        with a matching point size, so they keep their share of the picture at large render sizes.
 + *
-+ * Lines are 1 px wide at and below the given render height and in proportion above it (thick ones
-+ * are drawn like MilkDrop's: the thin line four times with small offsets); below it they are drawn
-+ * as at it, because thinner, faded lines made presets that feed their image back go dark. Edges are
-+ * hard, like MilkDrop's GL lines, unless projectm_opengl_set_line_antialiasing() is enabled. Dots
-+ * remain GL points whose size scales the same way (on desktop OpenGL, GL_PROGRAM_POINT_SIZE is
-+ * enabled while they are drawn). 0, the default, keeps MilkDrop's 1 px GL lines and points. If the
-+ * driver rejects the line shaders, lines fall back to GL lines.
++ * Lines are 1 px wide at and below the given render size's area and widen by the square root of the
++ * area ratio above it, so a line covers the same share of the picture at any size and aspect ratio
++ * (at the reference's aspect ratio this is the render height over the reference height). Thick ones
++ * are drawn like MilkDrop's: the thin line four times with small offsets that scale the same way.
++ * Below the reference area lines are drawn as at it, because thinner, faded lines made presets that
++ * feed their image back go dark. Edges are hard, like MilkDrop's GL lines, unless
++ * projectm_opengl_set_line_antialiasing() is enabled. Dots remain GL points whose size scales the
++ * same way (on desktop OpenGL, GL_PROGRAM_POINT_SIZE is enabled while they are drawn). 0 in either
++ * dimension, the default, keeps MilkDrop's 1 px GL lines and points. If the driver rejects the line
++ * shaders, lines fall back to GL lines.
 + *
 + * @param instance The projectM instance handle.
-+ * @param reference_height Render height in pixels up to which lines are 1 px wide, or 0.
++ * @param width Width of the reference render size in pixels, or 0.
++ * @param height Height of the reference render size in pixels, or 0.
 + */
-+PROJECTM_EXPORT void projectm_opengl_set_line_reference_height(projectm_handle instance, uint32_t reference_height);
++PROJECTM_EXPORT void projectm_opengl_set_line_reference_size(projectm_handle instance, uint32_t width, uint32_t height);
 +
 +/**
-+ * @brief Gives quad lines (see projectm_opengl_set_line_reference_height()) a one-pixel anti-aliased edge.
++ * @brief Gives quad lines (see projectm_opengl_set_line_reference_size()) a one-pixel anti-aliased edge.
 + *
 + * Off by default: quad lines have hard edges like MilkDrop's GL lines, which presets that feed their
 + * image back are tuned for (a soft edge made such a preset 14 % darker in testing). Has no effect
-+ * while the line reference height is 0, and none on dots.
++ * while no line reference size is set, and none on dots.
 + *
 + * @param instance The projectM instance handle.
 + * @param enabled True for anti-aliased edges.
@@ -83,14 +89,15 @@ index 8dfb147ad..9ca510657 100644
          IdlePreset.hpp
          MilkdropPreset.cpp
 diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/MilkdropPreset/CustomShape.cpp
-index cde426ef0..52d9b0ed8 100644
+index cde426ef0..84f786fbd 100644
 --- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
 +++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
-@@ -141,6 +141,12 @@ void CustomShape::Draw()
+@@ -141,6 +141,13 @@ void CustomShape::Draw()
      m_imageLookedUp = false;
      m_lastBlendDestination = 0;
  
-+    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeY, m_presetState.renderContext.lineReferenceHeight);
++    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
++                                      m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
 +    m_quadBorders = lineScale > 0.0f && m_presetState.lineRenderer.Usable();
 +    m_borderStyle = LineStyleFor(LineKind::ShapeBorder, m_thickOutline, lineScale,
 +                                 m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
@@ -99,7 +106,7 @@ index cde426ef0..52d9b0ed8 100644
      // Need to use +/- 1.0 here instead of 2.0 used in Milkdrop to achieve the same rendering result.
      const auto incrementX = 1.0f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
      const auto incrementY = 1.0f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
-@@ -164,11 +170,13 @@ void CustomShape::Draw()
+@@ -164,11 +171,13 @@ void CustomShape::Draw()
          draw.additive = static_cast<int>(*m_perFrameContext.additive) != 0;
          draw.textured = static_cast<int>(*m_perFrameContext.textured) != 0;
          draw.sides = sides;
@@ -117,7 +124,7 @@ index cde426ef0..52d9b0ed8 100644
          {
              FlushBatch();
          }
-@@ -238,7 +246,7 @@ void CustomShape::Draw()
+@@ -238,7 +247,7 @@ void CustomShape::Draw()
          // Duplicate last vertex.
          vertexData[sides + 1] = vertexData[1];
  
@@ -126,7 +133,7 @@ index cde426ef0..52d9b0ed8 100644
          {
              // The outline as vertices in the border color (drawn with the untextured shader), offset
              // like MilkDrop's thick outline: top left, top right, bottom right, bottom left.
-@@ -263,6 +271,23 @@ void CustomShape::Draw()
+@@ -263,6 +272,23 @@ void CustomShape::Draw()
              }
          }
  
@@ -150,7 +157,7 @@ index cde426ef0..52d9b0ed8 100644
          m_draws.push_back(draw);
      }
  
-@@ -287,6 +312,11 @@ void CustomShape::FlushBatch()
+@@ -287,6 +313,11 @@ void CustomShape::FlushBatch()
      glBindBuffer(GL_ARRAY_BUFFER, m_vboIdUntextured);
      glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(TexturedPoint) * maxBatchVertices), nullptr, GL_STREAM_DRAW);
      glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(sizeof(TexturedPoint) * m_vertices.size()), m_vertices.data());
@@ -162,7 +169,7 @@ index cde426ef0..52d9b0ed8 100644
  
      for (const auto& draw : m_draws)
      {
-@@ -336,7 +366,17 @@ void CustomShape::FlushBatch()
+@@ -336,7 +367,17 @@ void CustomShape::FlushBatch()
              glDrawArrays(GL_TRIANGLE_FAN, draw.fillFirst, draw.sides + 2);
          }
  
@@ -181,7 +188,7 @@ index cde426ef0..52d9b0ed8 100644
          {
              m_presetState.untexturedShader.Bind();
              glBindVertexArray(m_vaoIdUntextured);
-@@ -347,6 +387,12 @@ void CustomShape::FlushBatch()
+@@ -347,6 +388,12 @@ void CustomShape::FlushBatch()
          }
      }
  
@@ -195,7 +202,7 @@ index cde426ef0..52d9b0ed8 100644
      m_draws.clear();
  }
 diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp
-index 8351368fb..7bdb99c0f 100644
+index 8351368fb..9f82851aa 100644
 --- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
 +++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
 @@ -1,6 +1,7 @@
@@ -222,14 +229,14 @@ index 8351368fb..7bdb99c0f 100644
      std::vector<InstanceDraw> m_draws;     //!< Draw calls of the current batch, in instance order.
 +    LineBatch m_lineBatch;                                     //!< Outlines of the current batch (quad lines).
 +    std::vector<Renderer::RenderItem::ColoredPoint> m_borderPoints; //!< One outline, for the line batch.
-+    bool m_quadBorders{false};                                 //!< This frame draws outlines as quads (reference height set, line program usable).
++    bool m_quadBorders{false};                                 //!< This frame draws outlines as quads (reference size set, line program usable).
 +    LineStyle m_borderStyle;                                   //!< Outline width, passes and pass offsets this frame (quad lines).
 +    bool m_linesBegun{false};                                  //!< LineRenderer::Begin() called for this batch.
      Renderer::TextureSamplerDescriptor m_imageTexture; //!< The "image" texture, looked up once per frame.
      bool m_imageLookedUp{false};
      bool m_texturedShaderReady{false}; //!< Textured shader uniforms set in this frame.
 diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
-index e3f94056b..59a04c6b1 100644
+index e3f94056b..e973aa3cf 100644
 --- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
 +++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
 @@ -1,5 +1,7 @@
@@ -240,11 +247,12 @@ index e3f94056b..59a04c6b1 100644
  #include "PerFrameContext.hpp"
  #include "PresetFileParser.hpp"
  
-@@ -171,6 +173,40 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -171,6 +173,41 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
  #ifndef USE_GLES
      glDisable(GL_LINE_SMOOTH);
  #endif
-+    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeY, m_presetState.renderContext.lineReferenceHeight);
++    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
++                                      m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
 +    const bool scaledDots = lineScale > 0.0f && m_useDots;
 +    const auto dot = DotStyleFor(LineKind::CustomWave, m_drawThick, lineScale);
 +    if (scaledDots && dot.alphaScale < 1.0f)
@@ -281,7 +289,7 @@ index e3f94056b..59a04c6b1 100644
      glLineWidth(1);
  
      // Additive wave drawing (vice overwrite)
-@@ -186,7 +222,8 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -186,7 +223,8 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
  
      m_presetState.untexturedShader.Bind();
      m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
@@ -312,10 +320,10 @@ index 363c27345..eb287f967 100644
      friend class WaveformPerPointContext;
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.cpp b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
 new file mode 100644
-index 000000000..d2f77d691
+index 000000000..bfeb1f2a0
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
-@@ -0,0 +1,136 @@
+@@ -0,0 +1,140 @@
 +#include "LineGeometry.hpp"
 +
 +#include <algorithm>
@@ -339,15 +347,19 @@ index 000000000..d2f77d691
 +
 +} // namespace
 +
-+auto LineScale(int viewportHeight, int referenceHeight) -> float
++auto LineScale(int viewportWidth, int viewportHeight, int referenceWidth, int referenceHeight) -> float
 +{
-+    if (viewportHeight <= 0 || referenceHeight <= 0)
++    if (viewportWidth <= 0 || viewportHeight <= 0 || referenceWidth <= 0 || referenceHeight <= 0)
 +    {
 +        return 0.0f;
 +    }
-+    // Below the reference height lines are drawn as at it, MilkDrop's 1 px lines at full brightness:
++    // In double, so a render size of the reference's aspect ratio gets exactly the float the height
++    // ratio gives (16:9 frames are unchanged from the height-based scale).
++    const double area = static_cast<double>(viewportWidth) * static_cast<double>(viewportHeight);
++    const double referenceArea = static_cast<double>(referenceWidth) * static_cast<double>(referenceHeight);
++    // Below the reference area lines are drawn as at it, MilkDrop's 1 px lines at full brightness:
 +    // thinner lines faded by their width made presets that feed their image back go dark in testing.
-+    return std::max(1.0f, static_cast<float>(viewportHeight) / static_cast<float>(referenceHeight));
++    return std::max(1.0f, static_cast<float>(std::sqrt(area / referenceArea)));
 +}
 +
 +auto LineStyleFor(LineKind kind, bool thick, float scale, int viewportWidth, int viewportHeight) -> LineStyle
@@ -454,10 +466,10 @@ index 000000000..d2f77d691
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.hpp b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
 new file mode 100644
-index 000000000..73a2e04c8
+index 000000000..d04c8c875
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
-@@ -0,0 +1,122 @@
+@@ -0,0 +1,123 @@
 +#pragma once
 +
 +#include <Renderer/RenderItem.hpp>
@@ -515,13 +527,14 @@ index 000000000..73a2e04c8
 +};
 +
 +/**
-+ * @brief Line width factor: the render height over the reference height, but at least 1.
++ * @brief Line width factor: the square root of the render area over the reference area, but at least 1.
 + *
-+ * Below the reference height lines are drawn as at it (MilkDrop's 1 px lines at full brightness),
-+ * above it they widen in proportion.
-+ * @return 0 when quad lines are off (no reference height) or the viewport is empty.
++ * A line keeps its share of the picture at any render size and aspect ratio; at the reference's
++ * aspect ratio this is the render height over the reference height. At or below the reference area
++ * lines are drawn as at it (MilkDrop's 1 px lines at full brightness), above it they widen.
++ * @return 0 when quad lines are off (no reference size) or the viewport is empty.
 + */
-+auto LineScale(int viewportHeight, int referenceHeight) -> float;
++auto LineScale(int viewportWidth, int viewportHeight, int referenceWidth, int referenceHeight) -> float;
 +
 +/**
 + * @brief Quad line style matching MilkDrop's thin (1 px) or thick line of this kind, at this scale.
@@ -894,7 +907,7 @@ index 000000000..8b10f8184
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
-index f3f0c4112..79c21812b 100644
+index f3f0c4112..0fb4b0d11 100644
 --- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
 +++ b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
 @@ -1,5 +1,6 @@
@@ -937,18 +950,19 @@ index f3f0c4112..79c21812b 100644
  void MotionVectors::InitVertexAttrib()
  {
      glEnableVertexAttribArray(0);
-@@ -84,6 +108,10 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -84,6 +108,11 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
      float const inverseHeight = 1.25f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
      float const minimumLength = sqrtf(inverseWidth * inverseWidth + inverseHeight * inverseHeight);
  
-+    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeY, m_presetState.renderContext.lineReferenceHeight);
++    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
++                                      m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
 +    const bool quadLines = lineScale > 0.0f && m_quadShaderUsable;
 +    m_vectorStarts.clear();
 +
      std::vector<MotionVectorVertex> lineVertices(static_cast<std::size_t>(countX + 1) * 2); // countX + 1 lines for each grid row, 2 vertices each.
  
      glEnable(GL_BLEND);
-@@ -136,6 +164,15 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -136,6 +165,15 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
                  }
              }
  
@@ -964,7 +978,7 @@ index f3f0c4112..79c21812b 100644
              // Draw a row of lines.
              if (m_lastVertexCount >= vertex)
              {
-@@ -150,6 +187,11 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -150,6 +188,11 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
          }
      }
  
@@ -976,7 +990,7 @@ index f3f0c4112..79c21812b 100644
      glBindBuffer(GL_ARRAY_BUFFER, 0);
      glBindVertexArray(0);
  
-@@ -163,5 +205,43 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
+@@ -163,5 +206,43 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
      return true;
  }
  
@@ -1069,7 +1083,7 @@ index eb9686dcd..1d8d9b634 100644
  
  } // namespace MilkdropPreset
 diff --git a/src/libprojectM/MilkdropPreset/PresetState.hpp b/src/libprojectM/MilkdropPreset/PresetState.hpp
-index aff1a5684..5110a0994 100644
+index aff1a5684..aacd39d7a 100644
 --- a/src/libprojectM/MilkdropPreset/PresetState.hpp
 +++ b/src/libprojectM/MilkdropPreset/PresetState.hpp
 @@ -8,6 +8,7 @@
@@ -1084,7 +1098,7 @@ index aff1a5684..5110a0994 100644
  
      Renderer::Shader untexturedShader; //!< Shader used to draw untextured primitives, e.g. waveforms.
      Renderer::Shader texturedShader;   //!< Shader used to draw textured primitives, e.g. textured shapes and the warp mesh.
-+    LineRenderer lineRenderer; //!< Draws waveforms, custom waves and shape outlines as quads (when lineReferenceHeight > 0).
++    LineRenderer lineRenderer; //!< Draws waveforms, custom waves and shape outlines as quads (when a line reference size is set).
  
      std::weak_ptr<Renderer::Texture> mainTexture; //!< A weak reference to the main texture in the preset framebuffer.
      BlurTexture blurTexture;                      //!< The blur textures used in this preset. Contents depend on the shader code using GetBlurX().
@@ -1323,7 +1337,7 @@ index 000000000..7b678e750
 +    fragment_color = vector_color;
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
-index bd9a662f3..996186af5 100644
+index bd9a662f3..655f12472 100644
 --- a/src/libprojectM/MilkdropPreset/Waveform.cpp
 +++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
 @@ -1,5 +1,6 @@
@@ -1399,11 +1413,12 @@ index bd9a662f3..996186af5 100644
  void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
  {
      m_mode = static_cast<WaveformMode>(m_presetState.waveMode % static_cast<int>(WaveformMode::Count));
-@@ -49,6 +109,13 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -49,6 +109,14 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
          }
      }
  
-+    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeY, m_presetState.renderContext.lineReferenceHeight);
++    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
++                                      m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
 +    if (lineScale > 0.0f && !m_presetState.waveDots && m_presetState.lineRenderer.Usable())
 +    {
 +        DrawQuadLines(presetPerFrameContext, lineScale);
@@ -1413,7 +1428,7 @@ index bd9a662f3..996186af5 100644
  #ifndef USE_GLES
      glDisable(GL_LINE_SMOOTH);
  #endif
-@@ -56,7 +123,11 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -56,7 +124,11 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
  
      m_presetState.untexturedShader.Bind();
      m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjectionFlipped);
@@ -1426,7 +1441,7 @@ index bd9a662f3..996186af5 100644
  
      glBindVertexArray(m_vaoID);
      glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
-@@ -82,10 +153,11 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -82,10 +154,11 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
          }
  
          m_tempAlpha = static_cast<float>(*presetPerFrameContext.wave_a);
@@ -1440,7 +1455,7 @@ index bd9a662f3..996186af5 100644
  
          const auto incrementX = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
          const auto incrementY = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
-@@ -157,7 +229,7 @@ void Waveform::ModulateOpacityByVolume(const PerFrameContext& presetPerFrameCont
+@@ -157,7 +230,7 @@ void Waveform::ModulateOpacityByVolume(const PerFrameContext& presetPerFrameCont
      }
  }
  
@@ -1449,7 +1464,7 @@ index bd9a662f3..996186af5 100644
  {
      //wave color brightening
      //
-@@ -256,7 +328,7 @@ void Waveform::MaximizeColors(const PerFrameContext& presetPerFrameContext)
+@@ -256,7 +329,7 @@ void Waveform::MaximizeColors(const PerFrameContext& presetPerFrameContext)
          }
      }
  
@@ -1459,7 +1474,7 @@ index bd9a662f3..996186af5 100644
  
  } // namespace MilkdropPreset
 diff --git a/src/libprojectM/MilkdropPreset/Waveform.hpp b/src/libprojectM/MilkdropPreset/Waveform.hpp
-index bad7b944b..57d0905f9 100644
+index bad7b944b..d004b0e45 100644
 --- a/src/libprojectM/MilkdropPreset/Waveform.hpp
 +++ b/src/libprojectM/MilkdropPreset/Waveform.hpp
 @@ -1,12 +1,15 @@
@@ -1487,7 +1502,7 @@ index bad7b944b..57d0905f9 100644
      void ModulateOpacityByVolume(const PerFrameContext& presetPerFrameContext);
  
 +    /**
-+     * @brief Draws the waveform lines as quads (lineReferenceHeight > 0, not dots).
++     * @brief Draws the waveform lines as quads (line reference size set, not dots).
 +     */
 +    void DrawQuadLines(const PerFrameContext& presetPerFrameContext, float lineScale);
 +
@@ -1505,16 +1520,18 @@ index bad7b944b..57d0905f9 100644
  
  } // namespace MilkdropPreset
 diff --git a/src/libprojectM/ProjectM.cpp b/src/libprojectM/ProjectM.cpp
-index d58aeff38..e7fdcc6ec 100644
+index d58aeff38..63eebc6d0 100644
 --- a/src/libprojectM/ProjectM.cpp
 +++ b/src/libprojectM/ProjectM.cpp
-@@ -300,6 +300,16 @@ void ProjectM::SetDirectOutput(bool enabled)
+@@ -300,6 +300,18 @@ void ProjectM::SetDirectOutput(bool enabled)
      m_directOutput = enabled;
  }
  
-+void ProjectM::SetLineReferenceHeight(int height)
++void ProjectM::SetLineReferenceSize(int width, int height)
 +{
-+    m_lineReferenceHeight = height > 0 ? height : 0;
++    const bool enabled = width > 0 && height > 0;
++    m_lineReferenceWidth = enabled ? width : 0;
++    m_lineReferenceHeight = enabled ? height : 0;
 +}
 +
 +void ProjectM::SetLineAntialiasing(bool enabled)
@@ -1525,29 +1542,31 @@ index d58aeff38..e7fdcc6ec 100644
  auto ProjectM::WindowWidth() -> int
  {
      return m_windowWidth;
-@@ -484,6 +494,8 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
+@@ -484,6 +496,9 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
      ctx.perPixelMeshX = static_cast<int>(m_meshX);
      ctx.perPixelMeshY = static_cast<int>(m_meshY);
      ctx.textureManager = m_textureManager.get();
++    ctx.lineReferenceWidth = m_lineReferenceWidth;
 +    ctx.lineReferenceHeight = m_lineReferenceHeight;
 +    ctx.lineAntialiasing = m_lineAntialiasing;
  
      return ctx;
  }
 diff --git a/src/libprojectM/ProjectM.hpp b/src/libprojectM/ProjectM.hpp
-index 8d96b96f1..dc1f323cf 100644
+index 8d96b96f1..4ce309297 100644
 --- a/src/libprojectM/ProjectM.hpp
 +++ b/src/libprojectM/ProjectM.hpp
-@@ -117,6 +117,18 @@ public:
+@@ -117,6 +117,19 @@ public:
       */
      void SetDirectOutput(bool enabled);
  
 +    /**
 +     * @brief Draws lines as quads (hard-edged unless SetLineAntialiasing() is on), 1 px wide at and
-+     * below this render height and in proportion above it; dots scale the same way (see
-+     * projectm_opengl_set_line_reference_height()). 0 keeps MilkDrop's GL lines and points.
++     * below this render size's area and by the square root of the area ratio above it, so a line
++     * keeps its share of the picture at any size and aspect ratio; dots scale the same way (see
++     * projectm_opengl_set_line_reference_size()). 0 in either keeps MilkDrop's GL lines and points.
 +     */
-+    void SetLineReferenceHeight(int height);
++    void SetLineReferenceSize(int width, int height);
 +
 +    /**
 +     * @brief Gives quad lines an anti-aliased edge (see projectm_opengl_set_line_antialiasing()).
@@ -1557,17 +1576,18 @@ index 8d96b96f1..dc1f323cf 100644
      void SetBeatSensitivity(float sensitivity);
  
      auto GetBeatSensitivity() const -> float;
-@@ -204,6 +216,8 @@ private:
+@@ -204,6 +217,9 @@ private:
      uint32_t m_windowWidth{0};            //!< EvaluateFrameData window width. If 0, nothing is rendered.
      uint32_t m_outgoingPresetFrameDivisor{1}; //!< Render the outgoing preset every n-th frame during a transition.
      bool m_directOutput{false};                 //!< The active preset may draw straight into the target framebuffer.
-+    int m_lineReferenceHeight{0}; //!< Render height at which quad lines are 1 px wide; 0 for GL lines.
++    int m_lineReferenceWidth{0};  //!< Render width of the size at which quad lines are 1 px wide; 0 for GL lines.
++    int m_lineReferenceHeight{0}; //!< Render height of the size at which quad lines are 1 px wide; 0 for GL lines.
 +    bool m_lineAntialiasing{false}; //!< Quad lines get an anti-aliased edge.
      uint32_t m_windowHeight{0};           //!< EvaluateFrameData window height. If 0, nothing is rendered.
      double m_presetDuration{30.0};   //!< Preset duration in seconds.
      double m_softCutDuration{3.0};   //!< Soft cut transition time.
 diff --git a/src/libprojectM/ProjectMCWrapper.cpp b/src/libprojectM/ProjectMCWrapper.cpp
-index 04bda086d..d287d7088 100644
+index 04bda086d..7322886b0 100644
 --- a/src/libprojectM/ProjectMCWrapper.cpp
 +++ b/src/libprojectM/ProjectMCWrapper.cpp
 @@ -5,6 +5,7 @@
@@ -1578,14 +1598,15 @@ index 04bda086d..d287d7088 100644
  #include <cstring>
  #include <sstream>
  
-@@ -190,6 +191,18 @@ void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled)
+@@ -190,6 +191,19 @@ void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled)
      projectMInstance->SetDirectOutput(enabled);
  }
  
-+void projectm_opengl_set_line_reference_height(projectm_handle instance, uint32_t reference_height)
++void projectm_opengl_set_line_reference_size(projectm_handle instance, uint32_t width, uint32_t height)
 +{
 +    auto projectMInstance = handle_to_instance(instance);
-+    projectMInstance->SetLineReferenceHeight(static_cast<int>(std::min<uint32_t>(reference_height, 65535)));
++    projectMInstance->SetLineReferenceSize(static_cast<int>(std::min<uint32_t>(width, 65535)),
++                                           static_cast<int>(std::min<uint32_t>(height, 65535)));
 +}
 +
 +void projectm_opengl_set_line_antialiasing(projectm_handle instance, bool enabled)
@@ -1598,14 +1619,15 @@ index 04bda086d..d287d7088 100644
  {
      libprojectM::Renderer::Texture::SetPoolLimit(max_bytes);
 diff --git a/src/libprojectM/Renderer/RenderContext.hpp b/src/libprojectM/Renderer/RenderContext.hpp
-index a5a1f9c6e..0824b7adf 100644
+index a5a1f9c6e..5cd8d3c47 100644
 --- a/src/libprojectM/Renderer/RenderContext.hpp
 +++ b/src/libprojectM/Renderer/RenderContext.hpp
-@@ -25,6 +25,8 @@ public:
+@@ -25,6 +25,9 @@ public:
      float aspectY{1.0};    //!< Y aspect ratio.
      float invAspectX{1.0}; //!< Inverse X aspect ratio.
      float invAspectY{1.0}; //!< Inverse Y aspect ratio.
-+    int lineReferenceHeight{0}; //!< Render height at which quad lines are 1 px wide; 0 draws MilkDrop's GL lines.
++    int lineReferenceWidth{0};  //!< Render width of the size at which quad lines are 1 px wide; 0 draws MilkDrop's GL lines.
++    int lineReferenceHeight{0}; //!< Render height of the size at which quad lines are 1 px wide; 0 draws MilkDrop's GL lines.
 +    bool lineAntialiasing{false}; //!< Quad lines get a one-pixel anti-aliased edge instead of a hard one.
  
      int perPixelMeshX{64}; //!< Per-pixel/per-vertex mesh X resolution.
@@ -1653,14 +1675,16 @@ index 5a9b54673..7448b05cc 100644
          MilkdropShaderCommentParsingTest.cpp
 diff --git a/tests/libprojectM/LineGeometryTest.cpp b/tests/libprojectM/LineGeometryTest.cpp
 new file mode 100644
-index 000000000..c008d5ef8
+index 000000000..4b977b4df
 --- /dev/null
 +++ b/tests/libprojectM/LineGeometryTest.cpp
-@@ -0,0 +1,305 @@
+@@ -0,0 +1,332 @@
 +#include <gtest/gtest.h>
 +
 +#include <MilkdropPreset/LineGeometry.hpp>
 +
++#include <algorithm>
++#include <cmath>
 +#include <vector>
 +
 +using libprojectM::MilkdropPreset::DotStyleFor;
@@ -1704,26 +1728,51 @@ index 000000000..c008d5ef8
 +
 +TEST(LineGeometry, ScaleIsZeroWithoutReferenceOrViewport)
 +{
-+    EXPECT_EQ(LineScale(1080, 0), 0.0f);
-+    EXPECT_EQ(LineScale(1080, -1), 0.0f);
-+    EXPECT_EQ(LineScale(0, 1080), 0.0f);
-+    EXPECT_EQ(LineScale(-5, 1080), 0.0f);
++    EXPECT_EQ(LineScale(1920, 1080, 0, 1080), 0.0f);
++    EXPECT_EQ(LineScale(1920, 1080, 1920, 0), 0.0f);
++    EXPECT_EQ(LineScale(1920, 1080, 0, 0), 0.0f);
++    EXPECT_EQ(LineScale(1920, 1080, -1, 1080), 0.0f);
++    EXPECT_EQ(LineScale(1920, 1080, 1920, -1), 0.0f);
++    EXPECT_EQ(LineScale(0, 1080, 1920, 1080), 0.0f);
++    EXPECT_EQ(LineScale(1920, 0, 1920, 1080), 0.0f);
++    EXPECT_EQ(LineScale(-5, 1080, 1920, 1080), 0.0f);
 +}
 +
-+TEST(LineGeometry, ScaleFollowsRenderHeightAboveReference)
++// At 16:9 the area rule gives what the height rule gave: the render height over the reference height.
++TEST(LineGeometry, ScaleAtSixteenByNineFollowsTheHeight)
 +{
-+    EXPECT_FLOAT_EQ(LineScale(1080, 1080), 1.0f);
-+    EXPECT_FLOAT_EQ(LineScale(1440, 1080), 1440.0f / 1080.0f);
-+    EXPECT_FLOAT_EQ(LineScale(2160, 1080), 2.0f);
++    EXPECT_FLOAT_EQ(LineScale(1920, 1080, 1920, 1080), 1.0f);
++    EXPECT_FLOAT_EQ(LineScale(2560, 1440, 1920, 1080), 1440.0f / 1080.0f);
++    EXPECT_FLOAT_EQ(LineScale(3840, 2160, 1920, 1080), 2.0f);
++    // Exactly the height rule's value, so 16:9 frames stay byte-identical.
++    for (int height : {1080, 1152, 1440, 1620, 1800, 2160, 2880})
++    {
++        const int width = height * 16 / 9;
++        EXPECT_EQ(LineScale(width, height, 1920, 1080), std::max(1.0f, static_cast<float>(height) / 1080.0f)) << height;
++    }
 +}
 +
-+// Below the reference height lines are drawn as at it (MilkDrop's 1 px lines at full brightness):
++// A line covers the same share of the picture at any aspect ratio: the scale is the square root of
++// the render area over the reference area.
++TEST(LineGeometry, ScaleFollowsTheRenderArea)
++{
++    EXPECT_FLOAT_EQ(LineScale(2560, 1080, 1920, 1080), std::sqrt(2560.0f / 1920.0f)); // 21:9, 1.155
++    EXPECT_FLOAT_EQ(LineScale(5120, 2160, 1920, 1080), 2.0f * std::sqrt(2560.0f / 1920.0f));
++    EXPECT_FLOAT_EQ(LineScale(2880, 2160, 1920, 1080), std::sqrt(2880.0f * 2160.0f / (1920.0f * 1080.0f))); // 4:3, 1.732
++    EXPECT_FLOAT_EQ(LineScale(1440, 2560, 1920, 1080), std::sqrt(1440.0f * 2560.0f / (1920.0f * 1080.0f))); // portrait, 1.333
++    EXPECT_FLOAT_EQ(LineScale(2160, 3840, 1920, 1080), 2.0f); // portrait 4K, same area as landscape
++    EXPECT_FLOAT_EQ(LineScale(2560, 1440, 2560, 1440), 1.0f);
++}
++
++// At or below the reference area lines are drawn as at it (MilkDrop's 1 px lines at full brightness):
 +// thinner, faded lines made feedback presets go dark.
 +TEST(LineGeometry, ScaleNeverDropsBelowOne)
 +{
-+    EXPECT_FLOAT_EQ(LineScale(720, 1080), 1.0f);
-+    EXPECT_FLOAT_EQ(LineScale(480, 1080), 1.0f);
-+    EXPECT_FLOAT_EQ(LineScale(1, 1080), 1.0f);
++    EXPECT_FLOAT_EQ(LineScale(1280, 720, 1920, 1080), 1.0f);
++    EXPECT_FLOAT_EQ(LineScale(854, 480, 1920, 1080), 1.0f);
++    EXPECT_FLOAT_EQ(LineScale(1440, 1080, 1920, 1080), 1.0f); // 4:3 at the reference height: 0.866 by area
++    EXPECT_FLOAT_EQ(LineScale(1080, 1920, 1920, 1080), 1.0f); // portrait, same area
++    EXPECT_FLOAT_EQ(LineScale(1, 1, 1920, 1080), 1.0f);
 +}
 +
 +TEST(LineGeometry, ThinLinesAreOnePixelAtReference)

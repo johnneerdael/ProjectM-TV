@@ -54,7 +54,11 @@ int main(int argc, char** argv) {
         engine.SetTexturePaths({textures});
         engine.SetWindowSize(width, height);
         engine.SetMeshSize(48, 32);
-        engine.SetLineReferenceHeight(cfg.value("line_reference_height", 0));
+        // Quad lines' reference size; a job with only line_reference_height means a 16:9 reference of that height.
+        int line_reference_height = cfg.value("line_reference_height", 0);
+        int line_reference_width = cfg.value("line_reference_width",
+                                             static_cast<int>(std::lround(line_reference_height * 16.0 / 9.0)));
+        engine.SetLineReferenceSize(line_reference_width, line_reference_height);
         engine.SetLineAntialiasing(cfg.value("line_antialiasing", false));
         engine.SetTargetFramesPerSecond(fps);
         engine.SetPresetLocked(true);

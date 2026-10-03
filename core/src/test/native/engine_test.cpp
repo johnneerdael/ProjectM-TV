@@ -111,8 +111,12 @@ std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
 bool g_directOutput = false, g_lastFrameDirect = false;
 int g_loadsAfterDirectFrame = 0;
 void projectm_opengl_set_direct_output(projectm_handle, bool enabled) { g_directOutput = enabled; }
+uint32_t g_lineReferenceWidth = 0;
 uint32_t g_lineReferenceHeight = 0;
-void projectm_opengl_set_line_reference_height(projectm_handle, uint32_t height) { g_lineReferenceHeight = height; }
+void projectm_opengl_set_line_reference_size(projectm_handle, uint32_t width, uint32_t height) {
+  g_lineReferenceWidth = width;
+  g_lineReferenceHeight = height;
+}
 projectm_handle projectm_create() { g_lastFrameDirect = false; return new projectm; }
 void projectm_destroy(projectm_handle p) { delete p; }
 int g_loadSleepMs = 0;
@@ -231,7 +235,8 @@ int main(int argc, char** argv) {
 
   printf("first frame loads a preset (hard cut, no wait)\n");
   Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
-  printf("lines are quads, 1 px at 1080p\n");
+  printf("lines are quads, 1 px at 1920x1080\n");
+  CHECK(g_lineReferenceWidth == 1920);
   CHECK(g_lineReferenceHeight == 1080);
   Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720);
   frame();
