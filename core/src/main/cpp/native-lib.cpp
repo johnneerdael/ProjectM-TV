@@ -1665,6 +1665,9 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
         return;
     }
     projectm_set_beat_sensitivity(g_engine.pm, 1.0f);
+    // Lines as quads, 1 px wide at 1080p and in proportion at other render sizes, so a preset looks
+    // the same at every quality level (patch 0021, projectM issue #682).
+    projectm_opengl_set_line_reference_height(g_engine.pm, 1080);
     projectm_set_preset_switch_requested_event_callback(g_engine.pm, OnSwitchRequested, nullptr);
     projectm_set_preset_switch_failed_event_callback(g_engine.pm, OnSwitchFailed, nullptr);
     g_inputs.settingsDirty = true;
