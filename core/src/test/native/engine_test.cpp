@@ -214,8 +214,14 @@ int main(int argc, char** argv) {
   CHECK(g_library.CategoryGeneration() > generation);
   CHECK(g_library.Previous().empty() && g_library.PeekPrevious().empty());
   CHECK(g_library.PeekRandom() == "good 4.milk" || g_library.PeekRandom() == "good 5.milk");
+  printf("the prepared random preset is never the one on screen\n");
+  g_library.RecordShown("good 4.milk");
+  CHECK(g_library.PeekRandom() == "good 5.milk");
+  g_library.RecordShown("good 5.milk");  // Next or Previous landed on the prepared random preset
+  CHECK(g_library.PeekRandom() == "good 4.milk");
   CHECK(g_library.SetCategory("latin"));
   g_library.RecordShown("good 6.milk");
+  CHECK(g_library.PeekRandom() == "good 6.milk" && g_library.PeekRandom() == "good 6.milk");
   CHECK(g_library.Random("good 6.milk") == "good 6.milk");
   CHECK(!g_library.SetCategory("classical") && g_library.Category() == "all");
   CHECK(!g_library.SetCategory("unknown") && g_library.Category() == "all");
@@ -286,6 +292,40 @@ int main(int argc, char** argv) {
   CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
   g_library.ResetSkipped();
   g_library.MarkSkipped("preskipped.milk", "fixture initial skip");
+  requestCategory("all");
+  switchFrame();
+
+  printf("retained category changes prepare the next selection around the preset on screen\n");
+  requestCategory("ambient");  // two good presets; switching to All retains either one
+  switchFrame();
+  for (int i = 0; i < 20; ++i) {
+    for (const char* category : {"all", "ambient"}) {
+      std::string kept = current();
+      requestCategory(category);
+      switchFrame();
+      const auto prepared = g_prewarmLists.back();
+      CHECK(current() == kept && prepared.size() == 3);
+      CHECK(prepared[0] == g_library.PeekNext() && prepared[1] == g_library.PeekRandom());
+      CHECK(prepared[1] != kept && prepared[2].empty());
+    }
+    std::string prepared = g_prewarmLists.back()[1];
+    Java_nl_neerdael_projectm_core_ProjectMJNI_randomPreset(nullptr, nullptr, true); switchFrame();
+    CHECK(current() == prepared);
+  }
+
+  printf("Next and Previous landing on the prepared random preset refresh its preparation\n");
+  std::string prepared = g_prewarmLists.back()[1];
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); switchFrame();
+  CHECK(current() == prepared && g_prewarmLists.back()[1] != current());
+  prepared = g_prewarmLists.back()[1];
+  Java_nl_neerdael_projectm_core_ProjectMJNI_randomPreset(nullptr, nullptr, true); switchFrame();
+  CHECK(current() == prepared);
+  prepared = g_prewarmLists.back()[1];
+  Java_nl_neerdael_projectm_core_ProjectMJNI_previousPreset(nullptr, nullptr, true); switchFrame();
+  CHECK(current() == prepared && g_prewarmLists.back()[1] != current());
+  prepared = g_prewarmLists.back()[1];
+  Java_nl_neerdael_projectm_core_ProjectMJNI_randomPreset(nullptr, nullptr, true); switchFrame();
+  CHECK(current() == prepared);
   requestCategory("all");
   switchFrame();
 
@@ -542,6 +582,11 @@ int main(int argc, char** argv) {
   CHECK(!g_prewarmRequests.empty() && g_prewarmRequests.back() == g_library.PeekNext());
 
   printf("random and previous presets are prepared too: Right picks the prepared random preset\n");
+  // The skip list was reset above, and the random pick is seeded per run: it can be a broken
+  // preset, which Right skips on the way to another one (tested at the start). Skip them first and
+  // switch once, so the prepared random preset is one that loads.
+  g_library.MarkSkipped("broken1.milk", "test"); g_library.MarkSkipped("broken2.milk", "test");
+  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); switchFrame();
   { std::vector<std::string> list = g_prewarmLists.back();
     CHECK(list.size() == 3 && list[1] == g_library.PeekRandom() && list[2] == g_library.PeekPrevious());
     std::string before = current(), prepared = list[1];
