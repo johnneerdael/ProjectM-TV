@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,6 +45,7 @@ final class TrackAccessSetupTest {
         int code = Activity.RESULT_CANCELED;
         try {
             check(test.getTargetContext().getPackageName().endsWith(".setuptest"), "requires isolated setup test app");
+            test.getUiAutomation();  // connect now: Android's automation-service toast expires before the first capture
             SharedPreferences prefs = test.getTargetContext().getSharedPreferences("projectm_settings", 0);
             prefs.edit().remove("track_access_explained").commit();
             if ("guide".equals(mode)) prefs.edit().putString("music_category", "all").commit();
@@ -100,10 +102,18 @@ final class TrackAccessSetupTest {
                             + ", pending=" + ProjectMJNI.isMusicCategoryPending()
                             + ", packaged=" + ProjectMJNI.getCategoryPresetCount("dance")
                             + ", requested=" + prefs.getString("music_category", "missing"));
+                    // Loading Dance can outlast the panel's auto-hide: reopen it on the category row.
+                    if (target.findViewById(R.id.overlay_menu).getVisibility() != View.VISIBLE) {
+                        test.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
+                        test.runOnMainSync(() -> target.findViewById(R.id.row_music_category).requestFocus());
+                    }
                     capture(test, "dance-selected");
                     test.runOnMainSync(() -> target.findViewById(R.id.row_advanced).performClick());
                     capture(test, "advanced-settings");
-                    test.runOnMainSync(() -> target.findViewById(R.id.row_track_titles).performClick());
+                    test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);  // back to the main panel
+                    test.runOnMainSync(() -> target.findViewById(R.id.row_track_display).performClick());
+                    capture(test, "track-display");
+                    test.runOnMainSync(() -> target.findViewById(R.id.row_track_info).performClick());
                     capture(test, "track-titles-manual");
                 }
             }

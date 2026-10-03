@@ -40,7 +40,8 @@ public class MainActivity extends Activity {
     private static final String TAG = "ProjectMTV";
     private static final int AUDIO_PERMISSION_REQUEST = 1;
     private static final long MENU_AUTO_HIDE_MS = 10000;
-    private static final long TRACK_SHOWN_MS = 20000;  // a new track's title in the lower left
+    private static final long NOTICE_SHOWN_MS = 20000;  // a notice in the lower-left pill
+    private static final long TRACK_STOP_GRACE_MS = 2000;  // buffering or seeking does not hide the track
     private static final long TRACK_ACCESS_DELAY_MS = 1500;
     private static final long UI_REFRESH_MS = 500;
     private static final long AUDIO_METER_MS = 66;
@@ -56,6 +57,9 @@ public class MainActivity extends Activity {
     private static final String PREF_MUSIC_CATEGORY = "music_category";
     private static final String PREF_BEAT_CUTS = "beat_cuts";
     private static final String PREF_TRACK_ACCESS_EXPLAINED = "track_access_explained";
+    private static final String PREF_TRACK_INFO = "track_info";
+    private static final String PREF_TRACK_SECONDS = "track_seconds";  // 0 = always
+    private static final String PREF_TRACK_PILL = "track_pill";
     private boolean trackAccessPromptShown;
     private AlertDialog trackAccessDialog;
     // The music player's audio session found last: tried first at the next launch.
@@ -74,9 +78,10 @@ public class MainActivity extends Activity {
     private static final String PREF_MEMORY_LIMIT = "memory_limit";
 
     private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
+    private static final int[] TRACK_SECONDS = {10, 20, 30, 60, 0};  // 0 = always
     private static final int MAX_TRANSITION = 10;
 
-    private enum Menu { NONE, MAIN, ADVANCED }
+    private enum Menu { NONE, MAIN, ADVANCED, TRACK }
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
@@ -110,6 +115,7 @@ public class MainActivity extends Activity {
 
     private View mainMenu;
     private View advancedMenu;
+    private View trackMenu;
     private View diagnosticsPanel;
     private TextView presetName;
     private TextView presetMeta;
@@ -144,10 +150,24 @@ public class MainActivity extends Activity {
             handler.postDelayed(this, AUDIO_METER_MS);
         }
     };
-    private final Runnable hideNowPlaying = () -> fade(nowPlaying, false);
     private TrackWatcher trackWatcher;
-    private String currentTrack = "";
-    private OptionRow trackRow;
+    private TrackCorner trackCorner;
+    private TrackWatcher.Track currentTrack;
+    private boolean trackPlaying;
+    private boolean pillHoldsTrack;  // the pill shows the track (Pill style), not a notice
+    private final Runnable hideNowPlaying = () -> {
+        boolean notice = !pillHoldsTrack;
+        pillHoldsTrack = false;
+        fade(nowPlaying, false);
+        if (notice && trackSeconds() == 0) showTrack(true);  // a track shown always takes the pill back
+    };
+    private OptionRow trackInfoRow;
+    private Boolean trackInfoRowAccess;  // whether the row was last set up with access
+    private final Runnable trackTimeUp = this::hideTrack;
+    private final Runnable trackStopped = () -> {
+        trackPlaying = false;
+        hideTrack();
+    };
     private final Runnable uiRefresh = new Runnable() {
         @Override
         public void run() {
@@ -318,6 +338,7 @@ public class MainActivity extends Activity {
     private void initMenus() {
         mainMenu = findViewById(R.id.overlay_menu);
         advancedMenu = findViewById(R.id.advanced_menu);
+        trackMenu = findViewById(R.id.track_menu);
         diagnosticsPanel = findViewById(R.id.diagnostics_panel);
         presetName = findViewById(R.id.preset_name);
         presetMeta = findViewById(R.id.preset_meta);
@@ -328,7 +349,18 @@ public class MainActivity extends Activity {
         nowPlaying = findViewById(R.id.now_playing);
         nowPlayingIcon = findViewById(R.id.now_playing_icon);
         nowPlayingText = findViewById(R.id.now_playing_text);
-        trackWatcher = new TrackWatcher(this, handler, this::onTrackChanged);
+        trackCorner = new TrackCorner(findViewById(R.id.track_corner));
+        trackWatcher = new TrackWatcher(this, handler, new TrackWatcher.Listener() {
+            @Override
+            public void onTrack(TrackWatcher.Track track, boolean newTrack) {
+                onTrackChanged(track, newTrack);
+            }
+
+            @Override
+            public void onStopped() {
+                onTrackStopped();
+            }
+        });
         updater = Updater.get(this, prefs);
         updater.attach(handler, updateListener);
 
@@ -365,18 +397,35 @@ public class MainActivity extends Activity {
                     prefs.edit().putInt(PREF_PRESET_DURATION, PRESET_DURATIONS[index]).apply();
                 });
 
-        String[] transitions = new String[MAX_TRANSITION + 1];
-        transitions[0] = "Instant";
-        for (int i = 1; i <= MAX_TRANSITION; i++) transitions[i] = i + " s";
-        OptionRow transition = findViewById(R.id.row_transition);
-        transition.setup("Transition", transitions, transitionSeconds(), false, index -> {
-            ProjectMJNI.setSoftCutDuration(index);
-            quality.setTransitionSeconds(index);
-            prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
-        });
-
         setupResolutionRow();
 
+        OptionRow trackDisplay = findViewById(R.id.row_track_display);
+        trackDisplay.setupAction("Track display", "›", () -> showMenu(Menu.TRACK));
+
+        OptionRow advanced = findViewById(R.id.row_advanced);
+        advanced.setupAction("Advanced", "›", () -> showMenu(Menu.ADVANCED));
+
+        // Track display panel
+        trackInfoRow = findViewById(R.id.row_track_info);
+        refreshTrackInfoRow();
+
+        String[] trackDurations = new String[TRACK_SECONDS.length];
+        for (int i = 0; i < trackDurations.length; i++) {
+            trackDurations[i] = TRACK_SECONDS[i] == 0 ? "Always" : TRACK_SECONDS[i] + " s";
+        }
+        OptionRow trackDuration = findViewById(R.id.row_track_duration);
+        trackDuration.setup("Show for", trackDurations, nearestIndex(TRACK_SECONDS, trackSeconds()), false, index -> {
+            prefs.edit().putInt(PREF_TRACK_SECONDS, TRACK_SECONDS[index]).apply();
+            applyTrackDisplay();
+        });
+
+        OptionRow trackPill = findViewById(R.id.row_track_pill);
+        trackPill.setup("Pill style", new String[]{"Off", "On"}, trackPill() ? 1 : 0, true, index -> {
+            prefs.edit().putBoolean(PREF_TRACK_PILL, index == 1).apply();
+            applyTrackDisplay();
+        });
+
+        // Advanced panel
         int[] caps = frameRateOptions();
         String[] capLabels = new String[caps.length];
         int selectedCap = caps.length - 1;
@@ -390,15 +439,21 @@ public class MainActivity extends Activity {
             applyFrameRateCap(caps[index]);
         });
 
-        OptionRow advanced = findViewById(R.id.row_advanced);
-        advanced.setupAction("Advanced", "›", () -> showMenu(Menu.ADVANCED));
-
-        // Advanced panel
         OptionRow detail = findViewById(R.id.row_detail);
         detail.setup("Detail", DeviceProfile.MESH_LABELS, meshLevel(), false, index -> {
             int[] size = DeviceProfile.MESH_SIZES[index];
             ProjectMJNI.setMeshSize(size[0], size[1]);
             prefs.edit().putInt(PREF_MESH_LEVEL, index).apply();
+        });
+
+        String[] transitions = new String[MAX_TRANSITION + 1];
+        transitions[0] = "Instant";
+        for (int i = 1; i <= MAX_TRANSITION; i++) transitions[i] = i + " s";
+        OptionRow transition = findViewById(R.id.row_transition);
+        transition.setup("Transition", transitions, transitionSeconds(), false, index -> {
+            ProjectMJNI.setSoftCutDuration(index);
+            quality.setTransitionSeconds(index);
+            prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
         });
 
         OptionRow transitionMode = findViewById(R.id.row_transition_mode);
@@ -438,15 +493,6 @@ public class MainActivity extends Activity {
                     prefs.edit().putBoolean(PREF_BLANK_DETECTION, index == 1).apply();
                 });
 
-        trackRow = findViewById(R.id.row_track_titles);
-        trackRow.setupAction("Track titles", "", () -> {
-            if (trackWatcher.hasAccess()) {
-                Toast.makeText(this, "Shown for 20 s when the music app starts a new track", Toast.LENGTH_LONG).show();
-            } else {
-                explainTrackAccess();
-            }
-        });
-
         OptionRow autoUpdate = findViewById(R.id.row_auto_update);
         if (updater.isViaFDroid()) {
             autoUpdate.setupAction("Auto-update", "Via F-Droid", () -> Toast.makeText(this,
@@ -466,6 +512,7 @@ public class MainActivity extends Activity {
 
         mainMenu.setVisibility(View.GONE);
         advancedMenu.setVisibility(View.GONE);
+        trackMenu.setVisibility(View.GONE);
         diagnosticsPanel.setVisibility(View.GONE);
     }
 
@@ -496,7 +543,19 @@ public class MainActivity extends Activity {
         return best;
     }
 
-    /** Shows one panel (or none). The advanced panel slides in over the main panel. */
+    private View panel(Menu which) {
+        switch (which) {
+            case MAIN: return mainMenu;
+            case ADVANCED: return advancedMenu;
+            case TRACK: return trackMenu;
+            default: return null;
+        }
+    }
+
+    /**
+     * Shows one panel (or none). The advanced and track display panels slide in over the main panel.
+     * The track stays on screen: the corner and the pill keep clear of the panels.
+     */
     private void showMenu(Menu target) {
         handler.removeCallbacks(hideMenu);
         if (target == menu) return;
@@ -504,20 +563,20 @@ public class MainActivity extends Activity {
         menu = target;
 
         if (target == Menu.NONE) {
-            slide(previous == Menu.ADVANCED ? advancedMenu : mainMenu, false);
+            slide(panel(previous), false);
             if (previous == Menu.ADVANCED) fade(diagnosticsPanel, false);
             return;
         }
-        fade(nowPlaying, false);
+        if (!pillHoldsTrack) fade(nowPlaying, false);  // a notice goes, the track stays
         refreshStatus();
         handler.removeCallbacks(audioMeterRefresh);
         if (target == Menu.MAIN) handler.post(audioMeterRefresh);
         if (target == Menu.MAIN) {
-            if (previous == Menu.ADVANCED) {
-                slide(advancedMenu, false);
-                fade(diagnosticsPanel, false);
+            if (previous != Menu.NONE) {
+                slide(panel(previous), false);
+                if (previous == Menu.ADVANCED) fade(diagnosticsPanel, false);
                 fade(mainMenu, true);
-                findViewById(R.id.row_advanced).requestFocus();
+                findViewById(previous == Menu.ADVANCED ? R.id.row_advanced : R.id.row_track_display).requestFocus();
             } else {
                 slide(mainMenu, true);
                 (installRow.getVisibility() == View.VISIBLE ? installRow
@@ -525,9 +584,13 @@ public class MainActivity extends Activity {
             }
         } else {
             fade(mainMenu, false);
-            slide(advancedMenu, true);
-            fade(diagnosticsPanel, true);
-            findViewById(R.id.row_detail).requestFocus();
+            slide(panel(target), true);
+            if (target == Menu.ADVANCED) {
+                fade(diagnosticsPanel, true);
+                findViewById(R.id.row_frame_rate).requestFocus();
+            } else {
+                trackInfoRow.requestFocus();
+            }
         }
         handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
     }
@@ -598,9 +661,10 @@ public class MainActivity extends Activity {
                     + (skipped > 0 ? "  ·  " + numberFormat.format(skipped) + " skipped" : ""));
             setText(statusLine, String.format(Locale.US, "%5.1f fps  ·  %s %s",
                     renderer.getCurrentFps(), heightLabel(quality.currentHeight()), mode));
+        } else if (menu == Menu.TRACK) {
+            refreshTrackInfoRow();  // access may have been granted meanwhile
         } else {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
-            trackRow.setActionValue(trackWatcher.hasAccess() ? "On" : "Off  ·  Allow");
             setText(diagnostics, String.format(Locale.US,
                     "Render  %dx%d (%s, limit %s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nBlend   %s%nAudio   %s%nTrack   %s%nUpdate  %s%nDevice  %s tier, %d MB RAM",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
@@ -638,19 +702,8 @@ public class MainActivity extends Activity {
         return String.format(Locale.US, "%s, %.2f %s", source, level, level < 0.02f ? "(very quiet)" : "(live)");
     }
 
-    /**
-     * A new track from the music app's media session: its title in the lower left for 20 s. A
-     * completed label of the same track (artist after title) only updates the text.
-     */
-    private void onTrack(String label, boolean newTrack) {
-        currentTrack = label;
-        if (label.isEmpty() || menu != Menu.NONE) return;
-        if (!newTrack && nowPlaying.getVisibility() != View.VISIBLE) return;
-        showPill(R.drawable.ic_music_note, label, newTrack);
-    }
-
     /** From the music app's media session. A new track also allows one search for its audio. */
-    private void onTrackChanged(String label, boolean newTrack) {
+    private void onTrackChanged(TrackWatcher.Track track, boolean newTrack) {
         if (newTrack && resumed) {
             // On audioThread, so no watch run is in progress: the chain is restarted, not doubled.
             audioHandler.post(() -> {
@@ -659,24 +712,96 @@ public class MainActivity extends Activity {
                 if (resumed) audioHandler.post(audioWatch);
             });
         }
-        onTrack(label, newTrack);
+        handler.removeCallbacks(trackStopped);
+        boolean restart = newTrack || !trackPlaying;  // a new track, or playing again after a pause
+        trackPlaying = true;
+        currentTrack = track;
+        showTrack(restart);
     }
 
-    /** Text in the lower-left pill; {@code restart} shows it (again) for 20 s. */
-    private void showPill(int icon, String text, boolean restart) {
+    /** Nothing plays: the track goes, unless playback resumes within a moment (buffering, seeking). */
+    private void onTrackStopped() {
+        handler.removeCallbacks(trackStopped);
+        handler.postDelayed(trackStopped, TRACK_STOP_GRACE_MS);
+    }
+
+    private boolean trackInfoOn() {
+        return prefs.getBoolean(PREF_TRACK_INFO, true);
+    }
+
+    /** How long a track is shown, 0 for as long as it plays. */
+    private int trackSeconds() {
+        return prefs.getInt(PREF_TRACK_SECONDS, 0);
+    }
+
+    private boolean trackPill() {
+        return prefs.getBoolean(PREF_TRACK_PILL, false);
+    }
+
+    /**
+     * Shows the playing track in the upper-left corner, or in the pill with Pill style.
+     * {@code restart} shows it (again) for the chosen time; otherwise only a track on screen is
+     * updated (the artist or cover arrived, or playback resumed within the grace period).
+     */
+    private void showTrack(boolean restart) {
+        if (currentTrack == null || !trackPlaying || !trackInfoOn()) return;
+        long shownMs = trackSeconds() * 1000L;
+        if (trackPill()) {
+            if (!restart && !pillHoldsTrack) return;
+            pillHoldsTrack = true;
+            showPill(R.drawable.ic_music_note, currentTrack.label(), restart, shownMs);
+            return;
+        }
+        if (!restart && !trackCorner.isVisible()) return;
+        trackCorner.show(currentTrack);
+        if (!restart) return;
+        handler.removeCallbacks(trackTimeUp);
+        if (shownMs > 0) handler.postDelayed(trackTimeUp, shownMs);
+    }
+
+    /** A Track display setting changed: show the track (again) as it now says, with the panel open. */
+    private void applyTrackDisplay() {
+        if (!trackInfoOn() || trackPill()) trackCorner.hide();
+        if ((!trackInfoOn() || !trackPill()) && pillHoldsTrack) {
+            pillHoldsTrack = false;
+            handler.removeCallbacks(hideNowPlaying);
+            fade(nowPlaying, false);
+        }
+        showTrack(true);
+    }
+
+    /** Hides the track, wherever it is shown; notices in the pill stay. */
+    private void hideTrack() {
+        handler.removeCallbacks(trackTimeUp);
+        trackCorner.hide();
+        if (pillHoldsTrack) {
+            pillHoldsTrack = false;
+            handler.removeCallbacks(hideNowPlaying);
+            fade(nowPlaying, false);
+        }
+    }
+
+    /** Text in the lower-left pill; {@code restart} shows it (again) for {@code shownMs}, 0 for good. */
+    private void showPill(int icon, String text, boolean restart, long shownMs) {
         nowPlayingIcon.setImageResource(icon);
         setText(nowPlayingText, text);
         nowPlayingText.setSelected(true);
         if (!restart) return;
         fade(nowPlaying, true);
         handler.removeCallbacks(hideNowPlaying);
-        handler.postDelayed(hideNowPlaying, TRACK_SHOWN_MS);
+        if (shownMs > 0) handler.postDelayed(hideNowPlaying, shownMs);
+    }
+
+    /** A notice in the pill for 20 s; it takes the pill from a track shown there. */
+    private void showNotice(int icon, String text) {
+        pillHoldsTrack = false;
+        showPill(icon, text, true, NOTICE_SHOWN_MS);
     }
 
     /** Music plays at start but no player session carries it: say so in the pill, once. */
     private void showNoAudioNotice() {
         if (!resumed || menu != Menu.NONE) return;
-        showPill(R.drawable.ic_music_note, "No audio detected", true);
+        showNotice(R.drawable.ic_music_note, "No audio detected");
     }
 
     /**
@@ -689,14 +814,31 @@ public class MainActivity extends Activity {
         installRow.setVisibility(View.VISIBLE);
         if (updateAnnounced || menu != Menu.NONE) return;
         updateAnnounced = true;
-        showPill(R.drawable.ic_system_update, getString(R.string.app_name) + " " + version
-                + " is ready to install: open the settings", true);
+        showNotice(R.drawable.ic_system_update, getString(R.string.app_name) + " " + version
+                + " is ready to install: open the settings");
     }
 
-    /** Diagnostics line: whether the playing track can be read. */
+    /** Diagnostics line: whether the playing track can be read, and how it is shown. */
     private String trackLabel() {
-        return trackWatcher.hasAccess() ? "shown on track changes"
-                : "no access (" + TRACK_ACCESS_PATH + ")";
+        if (!trackWatcher.hasAccess()) return "no access (" + TRACK_ACCESS_PATH + ")";
+        if (!trackInfoOn()) return "off";
+        int seconds = trackSeconds();
+        return (trackPill() ? "pill" : "corner") + ", " + (seconds == 0 ? "always" : seconds + " s");
+    }
+
+    /** Track info: Off/On with access, otherwise an action that explains how to allow it. */
+    private void refreshTrackInfoRow() {
+        boolean access = trackWatcher.hasAccess();
+        if (trackInfoRowAccess != null && trackInfoRowAccess == access) return;
+        trackInfoRowAccess = access;
+        if (access) {
+            trackInfoRow.setup("Track info", new String[]{"Off", "On"}, trackInfoOn() ? 1 : 0, true, index -> {
+                prefs.edit().putBoolean(PREF_TRACK_INFO, index == 1).apply();
+                applyTrackDisplay();
+            });
+        } else {
+            trackInfoRow.setupAction("Track info", "Off  ·  Allow", this::explainTrackAccess);
+        }
     }
 
     private static String displayName(String preset) {
@@ -728,7 +870,7 @@ public class MainActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (menu != Menu.NONE) {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
-                showMenu(menu == Menu.ADVANCED ? Menu.MAIN : Menu.NONE);
+                showMenu(menu == Menu.MAIN ? Menu.NONE : Menu.MAIN);
                 return true;
             }
             if (keyCode == KeyEvent.KEYCODE_MENU) {
@@ -751,7 +893,7 @@ public class MainActivity extends Activity {
             case KeyEvent.KEYCODE_DPAD_UP:
             case KeyEvent.KEYCODE_DPAD_DOWN:
             case KeyEvent.KEYCODE_INFO:
-                onTrack(currentTrack, true);  // the track again (nothing without access)
+                showTrack(true);  // the playing track again (nothing without access)
                 return true;
             case KeyEvent.KEYCODE_DPAD_CENTER:
             case KeyEvent.KEYCODE_ENTER:
@@ -960,7 +1102,7 @@ public class MainActivity extends Activity {
         if (!trackWatcher.start()) {
             Log.i(TAG, "Track titles off: no notification-listener access");
             // Dismiss is saved permanently; Configure is only an acknowledgement for this launch.
-            // Advanced › Track titles always remains available on request.
+            // Track display › Track info always remains available on request.
             if (!trackAccessPromptShown && !prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false) && hasAudioPermission()) {
                 handler.postDelayed(() -> {
                     if (!resumed || trackAccessPromptShown || trackWatcher.hasAccess() || prefs.getBoolean(PREF_TRACK_ACCESS_EXPLAINED, false)) return;
@@ -983,7 +1125,7 @@ public class MainActivity extends Activity {
         trackAccessPromptShown = true;
         trackAccessDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
                 .setTitle("Show track titles")
-                .setMessage("To show the title and artist of each new track, allow " + getString(R.string.app_name)
+                .setMessage("To show the cover, artist and title of the playing track, allow " + getString(R.string.app_name)
                         + " under\n\n" + TRACK_ACCESS_PATH + "\n\nThe app reads no notifications; Android requires"
                         + " this access to see which track the music app is playing.")
                 .setPositiveButton("Configure", (dialog, which) -> openTrackAccessSettings())

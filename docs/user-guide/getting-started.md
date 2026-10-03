@@ -46,7 +46,7 @@ If you selected Deny, allow the permission under Android **Settings → Apps →
 Title and artist are optional. After audio permission, a **Show track titles** dialog offers two choices:
 
 - **Configure** opens Android's notification-access settings. On supported Android 11+ devices it tries the page for ProjectM TV directly; otherwise it opens the list of apps, then falls back to Apps or the main Settings screen if necessary.
-- **Dismiss** permanently hides the automatic prompt for this installation. It stays dismissed after restarting the app. You can still open it yourself from **Settings → Advanced → Track titles**.
+- **Dismiss** permanently hides the automatic prompt for this installation. It stays dismissed after restarting the app. You can still open it yourself from **Settings → Track display → Track info**.
 
 [![Show track titles dialog with Dismiss and Configure buttons](images/setup/track-titles-prompt.png)](images/setup/track-titles-prompt.png)
 
@@ -55,7 +55,7 @@ Title and artist are optional. After audio permission, a **Show track titles** d
 1. Select **Configure**.
 2. Find **ProjectM TV** in the notification-access list, unless Android already opened its individual page.
 3. Turn its switch on. Read and confirm Android's access prompt if one appears.
-4. Press **Back** to return to ProjectM TV. In **Advanced**, **Track titles** changes to **On** when access is granted.
+4. Press **Back** to return to ProjectM TV. In **Track display**, **Track info** changes to **On** when access is granted.
 
 [![Android Notification access list with the isolated ProjectM TV Setup test switch off](images/setup/notification-access.png)](images/setup/notification-access.png)
 
@@ -85,13 +85,13 @@ If your TV opens a more general settings screen, look for **Apps → Special app
 
 ### Reopen setup after Dismiss
 
-Open the app's settings with **Center / Enter / Menu**, select **Advanced**, then **Track titles**. This reopens the same Configure / Dismiss dialog even when the automatic reminder has been dismissed.
+Open the app's settings with **Center / Enter / Menu**, select **Track display**, then **Track info**. This reopens the same Configure / Dismiss dialog even when the automatic reminder has been dismissed.
 
-[![Advanced panel showing Track titles Off and Allow](images/setup/advanced-settings.png)](images/setup/advanced-settings.png)
+[![Track display panel showing Track info Off and Allow](images/setup/track-display.png)](images/setup/track-display.png)
 
-[![Track-title configuration opened manually from Advanced](images/setup/track-titles-manual.png)](images/setup/track-titles-manual.png)
+[![Track-title configuration opened manually from Track display](images/setup/track-titles-manual.png)](images/setup/track-titles-manual.png)
 
-When the music app starts a new track, its title and artist appear in the lower left for 20 seconds. **Up / Down / Info** shows the current track again. The preset's name is shown separately in the settings panel.
+The cover, artist and title of the playing track appear in the upper left for as long as it plays; **Settings → Track display** shows them for 10–60 s per track instead, in the lower-left pill, or not at all. **Up / Down / Info** shows the current track again. The preset's name is shown separately in the settings panel.
 
 ## Choose All or Dance
 

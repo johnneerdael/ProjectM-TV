@@ -9,4 +9,6 @@
     <color name="text_tertiary">#80FFFFFF</color>
     <color name="divider">#1AFFFFFF</color>
     <color name="pill">#B3101218</color>
+    <color name="track_title">#CCFFFFFF</color>
+    <color name="track_cover">#1AFFFFFF</color>
 </resources>

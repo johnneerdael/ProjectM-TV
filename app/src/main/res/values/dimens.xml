@@ -9,4 +9,11 @@
     <dimen name="diagnostics_margin_end">400dp</dimen>
     <dimen name="panel_radius">16dp</dimen>
     <dimen name="row_radius">8dp</dimen>
+    <!-- Track corner, as in Milkbeat -->
+    <dimen name="track_cover">96dp</dimen>
+    <dimen name="track_cover_gap">20dp</dimen>
+    <!-- Space between the track corner and the settings panel, which can be open together -->
+    <dimen name="track_panel_gap">24dp</dimen>
+    <!-- Diagnostics start below the track corner (safe_vertical + track_cover + 24dp) -->
+    <dimen name="diagnostics_margin_top">147dp</dimen>
 </resources>
