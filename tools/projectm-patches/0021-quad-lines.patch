@@ -22,7 +22,13 @@ narrower than three times the sample count (160 instead of 480 dots below 1440 p
 count depends on the render size too; with a reference size the rule uses the reference-equivalent
 width (render width / line scale), so the samples follow the reference like the line width (a 1080p
 or 4K render with the 1024x768 reference draws MilkDrop's 160 dots, not 480, which washed out
-feedback presets).
+feedback presets). Two more of MilkDrop's quantities tied to its render size follow the reference
+size when lines are scaled (above the reference area), the size the presets were made for: the spiro
+and hash waves' fade (Waveform::MaximizeColors(), by max(width, height)), and the blur levels, made as
+from a source of the reference's size (the render size divided by the line scale) whose first pass
+reads the previous frame's mipmaps (glGenerateMipmap per frame), so blur1-3 keep their size and their
+radius keeps its share of the picture instead of shrinking with the render. Without a reference size,
+and at or below its area, all of this is MilkDrop's behaviour, byte for byte.
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
 index ee6ae6562..0262cc70a 100644
@@ -68,6 +74,166 @@ index ee6ae6562..0262cc70a 100644
  /**
   * @brief Sets the size of the calling thread's pool of framebuffer textures.
   *
+diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+index 60d95d267..746f29c0b 100644
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.cpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+@@ -1,5 +1,6 @@
+ #include "BlurTexture.hpp"
+ 
++#include "LineGeometry.hpp"
+ #include "PerFrameContext.hpp"
+ 
+ #include "MilkdropStaticShaders.hpp"
+@@ -22,6 +23,12 @@ BlurTexture::BlurTexture()
+ 
+     m_blurFramebuffer.CreateColorAttachment(0, 0);
+ 
++    glGenSamplers(1, &m_mipmapSampler);
++    glSamplerParameteri(m_mipmapSampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
++    glSamplerParameteri(m_mipmapSampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++    glSamplerParameteri(m_mipmapSampler, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++    glSamplerParameteri(m_mipmapSampler, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++
+     // Initialize Blur VAO/VBO with a single fullscreen quad.
+     static constexpr std::array<float, 16> pointsBlur{
+         -1.0, -1.0, 0.0, 0.0,
+@@ -63,6 +70,7 @@ BlurTexture::~BlurTexture()
+ {
+     glDeleteBuffers(1, &m_vboBlur);
+     glDeleteVertexArrays(1, &m_vaoBlur);
++    glDeleteSamplers(1, &m_mipmapSampler);
+ }
+ 
+ void BlurTexture::SetRequiredBlurLevel(BlurTexture::BlurLevel level)
+@@ -93,7 +101,7 @@ auto BlurTexture::GetDescriptorsForBlurLevel(BlurTexture::BlurLevel blurLevel) c
+     return descriptors;
+ }
+ 
+-void BlurTexture::Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext)
++void BlurTexture::Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext, float referenceScale)
+ {
+     if (m_blurLevel == BlurLevel::None)
+     {
+@@ -106,7 +114,22 @@ void BlurTexture::Update(const Renderer::Texture& sourceTexture, const PerFrameC
+         return;
+     }
+ 
+-    AllocateTextures(sourceTexture);
++    // MilkDrop's blur levels are fixed fractions of its texture, blurred by a few of their texels, so
++    // their radius is a share of the picture only at one render size. Above the line reference size
++    // they are made as from a source of the reference's size (BlurSourceFor()): the blur textures keep
++    // the reference's size and so their share of the picture. The first pass reads the source's
++    // mipmaps at that scale, so every source pixel counts.
++    const bool scaled = referenceScale > 1.0f;
++    const auto blurSource = BlurSourceFor(sourceTexture.Width(), sourceTexture.Height(), referenceScale);
++    const int effectiveWidth = blurSource.width;
++    const int effectiveHeight = blurSource.height;
++    const float sourceLod = blurSource.lod;
++    AllocateTextures(effectiveWidth, effectiveHeight);
++    if (scaled)
++    {
++        sourceTexture.Bind(0);
++        glGenerateMipmap(GL_TEXTURE_2D);
++    }
+ 
+     unsigned int const passes = static_cast<int>(m_blurLevel) * 2;
+     auto const blur1EdgeDarken = static_cast<float>(*perFrameContext.blur1_edge_darken);
+@@ -175,6 +198,10 @@ void BlurTexture::Update(const Renderer::Texture& sourceTexture, const PerFrameC
+         }
+         blurShader->Bind();
+         blurShader->SetUniformInt("texture_sampler", 0);
++        if ((pass % 2) == 0)
++        {
++            blurShader->SetUniformFloat("source_lod", pass == 0 ? sourceLod : 0.0f);
++        }
+ 
+         glViewport(0, 0, m_blurTextures[pass]->Width(), m_blurTextures[pass]->Height());
+ 
+@@ -189,10 +216,17 @@ void BlurTexture::Update(const Renderer::Texture& sourceTexture, const PerFrameC
+             m_blurTextures[pass - 1]->Bind(0);
+             blurShader->SetUniformInt("flipVertical", 0);
+         }
+-        m_blurSampler->Bind(0);
++        if (pass == 0 && scaled)
++        {
++            glBindSampler(0, m_mipmapSampler);
++        }
++        else
++        {
++            m_blurSampler->Bind(0);
++        }
+ 
+-        float srcWidth = static_cast<float>((pass == 0) ? sourceTexture.Width() : m_blurTextures[pass - 1]->Width());
+-        float srcHeight = static_cast<float>((pass == 0) ? sourceTexture.Height() : m_blurTextures[pass - 1]->Height());
++        float srcWidth = static_cast<float>((pass == 0) ? effectiveWidth : m_blurTextures[pass - 1]->Width());
++        float srcHeight = static_cast<float>((pass == 0) ? effectiveHeight : m_blurTextures[pass - 1]->Height());
+ 
+         float scaleNow = scale[pass / 2];
+         float biasNow = bias[pass / 2];
+@@ -341,10 +375,10 @@ void BlurTexture::GetSafeBlurMinMaxValues(const PerFrameContext& perFrameContext
+     }
+ }
+ 
+-void BlurTexture::AllocateTextures(const Renderer::Texture& sourceTexture)
++void BlurTexture::AllocateTextures(int sourceWidth, int sourceHeight)
+ {
+-    int width = sourceTexture.Width();
+-    int height = sourceTexture.Height();
++    int width = sourceWidth;
++    int height = sourceHeight;
+ 
+     if (m_blurTextures[0] != nullptr &&
+         width > 0 &&
+@@ -390,8 +424,8 @@ void BlurTexture::AllocateTextures(const Renderer::Texture& sourceTexture)
+     }
+     m_directRendering = DirectRendering::Unknown;
+ 
+-    m_sourceTextureWidth = sourceTexture.Width();
+-    m_sourceTextureHeight = sourceTexture.Height();
++    m_sourceTextureWidth = sourceWidth;
++    m_sourceTextureHeight = sourceHeight;
+ }
+ 
+ } // namespace MilkdropPreset
+diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.hpp b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
+index e012ab9ab..6d44b5da6 100644
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.hpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
+@@ -67,8 +67,11 @@ public:
+      * @brief Renders the required blur passes on the given texture.
+      * @param sourceTexture The texture to create the blur levels from.
+      * @param perFrameContext The per-frame variables.
++     * @param referenceScale The quad lines' scale (LineScale()). Above 1 the blur levels are made as
++     *                       from a source of the line reference's size, the source size divided by
++     *                       it, so the blurs keep their share of the picture; 0 or 1: from the source.
+      */
+-    void Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext);
++    void Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext, float referenceScale = 0.0f);
+ 
+     /**
+      * @brief Binds the user-readable blur textures to the texture slots starting with the given index.
+@@ -94,9 +97,10 @@ private:
+ 
+     /**
+      * Allocates the blur textures.
+-     * @param sourceTexture The source texture.
++     * @param sourceWidth Width of the source the blur levels are made from (see BlurSourceFor()).
++     * @param sourceHeight Height of the source the blur levels are made from.
+      */
+-    void AllocateTextures(const Renderer::Texture& sourceTexture);
++    void AllocateTextures(int sourceWidth, int sourceHeight);
+ 
+     GLuint m_vboBlur; //!< Vertex buffer object for the fullscreen blur quad.
+     GLuint m_vaoBlur; //!< Vertex array object for the fullscreen blur quad.
+@@ -109,6 +113,7 @@ private:
+ 
+     Renderer::Framebuffer m_blurFramebuffer;                                        //!< The framebuffer used to draw the blur textures.
+     std::shared_ptr<Renderer::Sampler> m_blurSampler;                               //!< The blur sampler.
++    GLuint m_mipmapSampler{};                                                       //!< Trilinear sampler for a scaled-down first pass.
+     std::array<std::shared_ptr<Renderer::Texture>, NumBlurTextures> m_blurTextures; //!< The blur textures for each pass.
+     BlurLevel m_blurLevel{BlurLevel::None};                                         //!< Current blur level.
+     enum class DirectRendering { Unknown, Yes, No };
 diff --git a/src/libprojectM/MilkdropPreset/CMakeLists.txt b/src/libprojectM/MilkdropPreset/CMakeLists.txt
 index 8dfb147ad..9ca510657 100644
 --- a/src/libprojectM/MilkdropPreset/CMakeLists.txt
@@ -325,10 +491,10 @@ index 363c27345..eb287f967 100644
      friend class WaveformPerPointContext;
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.cpp b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
 new file mode 100644
-index 000000000..611d56bc7
+index 000000000..78c6f67de
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
-@@ -0,0 +1,150 @@
+@@ -0,0 +1,172 @@
 +#include "LineGeometry.hpp"
 +
 +#include <algorithm>
@@ -375,6 +541,28 @@ index 000000000..611d56bc7
 +        return viewportWidth;
 +    }
 +    return static_cast<int>(std::lround(static_cast<float>(viewportWidth) / scale));
++}
++
++auto MaximizeColorsTextureSize(int viewportWidth, int viewportHeight, int referenceWidth, int referenceHeight) -> int
++{
++    if (LineScale(viewportWidth, viewportHeight, referenceWidth, referenceHeight) > 1.0f)
++    {
++        return std::max(referenceWidth, referenceHeight);
++    }
++    return std::max(viewportWidth, viewportHeight);
++}
++
++auto BlurSourceFor(int sourceWidth, int sourceHeight, float referenceScale) -> BlurSource
++{
++    if (referenceScale <= 1.0f || sourceWidth <= 0 || sourceHeight <= 0)
++    {
++        return {sourceWidth, sourceHeight, 0.0f};
++    }
++    BlurSource source;
++    source.width = std::max(1, static_cast<int>(std::lround(static_cast<float>(sourceWidth) / referenceScale)));
++    source.height = std::max(1, static_cast<int>(std::lround(static_cast<float>(sourceHeight) / referenceScale)));
++    source.lod = std::log2(static_cast<float>(sourceWidth) / static_cast<float>(source.width));
++    return source;
 +}
 +
 +auto LineStyleFor(LineKind kind, bool thick, float scale, int viewportWidth, int viewportHeight) -> LineStyle
@@ -481,10 +669,10 @@ index 000000000..611d56bc7
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.hpp b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
 new file mode 100644
-index 000000000..bb39dc26c
+index 000000000..7c3962e06
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
-@@ -0,0 +1,136 @@
+@@ -0,0 +1,169 @@
 +#pragma once
 +
 +#include <Renderer/RenderItem.hpp>
@@ -563,6 +751,39 @@ index 000000000..bb39dc26c
 + * @return The render width when quad lines are off (no reference size), as in MilkDrop.
 + */
 +auto SampleDecisionWidth(int viewportWidth, int viewportHeight, int referenceWidth, int referenceHeight) -> int;
++
++/**
++ * @brief Texture size for MilkDrop's spiro and hash wave fade (Waveform::MaximizeColors()).
++ *
++ * MilkDrop fades the CenteredSpiro, ExplosiveHash and CenteredSpiroVolume modes by its texture size,
++ * max(width, height): a bigger texture spreads the dense wave over more pixels. Quad lines keep the
++ * wave's share of the picture as at the line reference size, so above it the fade is the reference's,
++ * max(referenceWidth, referenceHeight); otherwise (no reference size, or at or below its area) the
++ * render's, as in MilkDrop.
++ */
++auto MaximizeColorsTextureSize(int viewportWidth, int viewportHeight, int referenceWidth, int referenceHeight) -> int;
++
++/**
++ * @brief Size and mipmap level of the source the blur levels are made from.
++ */
++struct BlurSource
++{
++    int width{0};    //!< Width the blur chain treats its source as having.
++    int height{0};   //!< Height the blur chain treats its source as having.
++    float lod{0.0f}; //!< Mipmap level the first blur pass reads the source at (0: the source itself).
++};
++
++/**
++ * @brief The source the blur levels are made from: the source itself, or above the line reference
++ *        area a source of the reference's area (the source size divided by the line scale), read from
++ *        the source's mipmaps at log2 of the actual ratio.
++ *
++ * MilkDrop's blur levels are fixed fractions of its texture, blurred by a few of their texels, so their
++ * radius is a share of the picture only at one render size. With the reference's size they keep the
++ * share they had at the reference, like the lines.
++ * @param referenceScale LineScale(); 0 or 1 keep the source (MilkDrop).
++ */
++auto BlurSourceFor(int sourceWidth, int sourceHeight, float referenceScale) -> BlurSource;
 +
 +/**
 + * @brief Quad line style matching MilkDrop's thin (1 px) or thick line of this kind, at this scale.
@@ -934,6 +1155,29 @@ index 000000000..8b10f8184
 +
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+index 25b91bf31..744efbb60 100755
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -22,6 +22,7 @@
+ #include "MilkdropPreset.hpp"
+ 
+ #include "Factory.hpp"
++#include "LineGeometry.hpp"
+ #include "MilkdropPresetExceptions.hpp"
+ #include "PresetFileParser.hpp"
+ 
+@@ -123,7 +124,9 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+     auto const updateBlur = [this]() {
+         const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
+         assert(warpedImage.get());
+-        m_state.blurTexture.Update(*warpedImage, m_perFrameContext);
++        m_state.blurTexture.Update(*warpedImage, m_perFrameContext,
++                                   LineScale(m_state.renderContext.viewportSizeX, m_state.renderContext.viewportSizeY,
++                                             m_state.renderContext.lineReferenceWidth, m_state.renderContext.lineReferenceHeight));
+     };
+     if (!m_warpSamplesBlur)
+     {
 diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
 index f3f0c4112..0fb4b0d11 100644
 --- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
@@ -1130,6 +1374,44 @@ index aff1a5684..aacd39d7a 100644
  
      std::weak_ptr<Renderer::Texture> mainTexture; //!< A weak reference to the main texture in the preset framebuffer.
      BlurTexture blurTexture;                      //!< The blur textures used in this preset. Contents depend on the shader code using GetBlurX().
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/Blur1FragmentShaderGlsl330.frag b/src/libprojectM/MilkdropPreset/Shaders/Blur1FragmentShaderGlsl330.frag
+index 0bc87fb4e..13dee3af4 100644
+--- a/src/libprojectM/MilkdropPreset/Shaders/Blur1FragmentShaderGlsl330.frag
++++ b/src/libprojectM/MilkdropPreset/Shaders/Blur1FragmentShaderGlsl330.frag
+@@ -7,6 +7,7 @@ uniform vec4 _c0; // source texsize (.xy), and inverse (.zw)
+ uniform vec4 _c1; // w1..w4
+ uniform vec4 _c2; // d1..d4
+ uniform vec4 _c3; // scale, bias, w_div
++uniform float source_lod; // mipmap level of the source: 0, or the line reference scale's log2 (first pass)
+ 
+ out vec4 color;
+ 
+@@ -32,17 +33,17 @@ void main(){
+     vec2 uv2 = fragment_texture.xy + srctexsize.zw*vec2(1.0,1.0);
+ 
+     vec3 blur =
+-    (texture(texture_sampler, uv2 + vec2(d1 * srctexsize.z, 0)).xyz +
+-    texture(texture_sampler, uv2 + vec2(-d1 * srctexsize.z, 0)).xyz) *
++    (textureLod(texture_sampler, uv2 + vec2(d1 * srctexsize.z, 0), source_lod).xyz +
++    textureLod(texture_sampler, uv2 + vec2(-d1 * srctexsize.z, 0), source_lod).xyz) *
+     w1 +
+-    (texture(texture_sampler, uv2 + vec2(d2 * srctexsize.z, 0)).xyz +
+-    texture(texture_sampler, uv2 + vec2(-d2 * srctexsize.z, 0)).xyz) *
++    (textureLod(texture_sampler, uv2 + vec2(d2 * srctexsize.z, 0), source_lod).xyz +
++    textureLod(texture_sampler, uv2 + vec2(-d2 * srctexsize.z, 0), source_lod).xyz) *
+     w2 +
+-    (texture(texture_sampler, uv2 + vec2(d3 * srctexsize.z, 0)).xyz +
+-    texture(texture_sampler, uv2 + vec2(-d3 * srctexsize.z, 0)).xyz) *
++    (textureLod(texture_sampler, uv2 + vec2(d3 * srctexsize.z, 0), source_lod).xyz +
++    textureLod(texture_sampler, uv2 + vec2(-d3 * srctexsize.z, 0), source_lod).xyz) *
+     w3 +
+-    (texture(texture_sampler, uv2 + vec2(d4 * srctexsize.z, 0)).xyz +
+-    texture(texture_sampler, uv2 + vec2(-d4 * srctexsize.z, 0)).xyz) *
++    (textureLod(texture_sampler, uv2 + vec2(d4 * srctexsize.z, 0), source_lod).xyz +
++    textureLod(texture_sampler, uv2 + vec2(-d4 * srctexsize.z, 0), source_lod).xyz) *
+     w4;
+ 
+     blur.xyz *= w_div;
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/LineFragmentShaderGlsl330.frag b/src/libprojectM/MilkdropPreset/Shaders/LineFragmentShaderGlsl330.frag
 new file mode 100644
 index 000000000..e07344750
@@ -1365,7 +1647,7 @@ index 000000000..7b678e750
 +    fragment_color = vector_color;
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
-index bd9a662f3..655f12472 100644
+index bd9a662f3..b63fde99f 100644
 --- a/src/libprojectM/MilkdropPreset/Waveform.cpp
 +++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
 @@ -1,5 +1,6 @@
@@ -1483,7 +1765,7 @@ index bd9a662f3..655f12472 100644
  
          const auto incrementX = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
          const auto incrementY = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
-@@ -157,7 +230,7 @@ void Waveform::ModulateOpacityByVolume(const PerFrameContext& presetPerFrameCont
+@@ -157,13 +230,17 @@ void Waveform::ModulateOpacityByVolume(const PerFrameContext& presetPerFrameCont
      }
  }
  
@@ -1492,7 +1774,18 @@ index bd9a662f3..655f12472 100644
  {
      //wave color brightening
      //
-@@ -256,7 +329,7 @@ void Waveform::MaximizeColors(const PerFrameContext& presetPerFrameContext)
+     //forces max color value to 1.0 and scales
+     // the rest accordingly
+-    int texsize = std::max(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
++    // MilkDrop fades these modes by its texture size; with quad lines above the line reference size,
++    // by the reference's (see MaximizeColorsTextureSize()).
++    const auto& context = m_presetState.renderContext;
++    const int texsize = MaximizeColorsTextureSize(context.viewportSizeX, context.viewportSizeY,
++                                                  context.lineReferenceWidth, context.lineReferenceHeight);
+ 
+     if (m_mode == WaveformMode::CenteredSpiro || m_mode == WaveformMode::ExplosiveHash)
+     {
+@@ -256,7 +333,7 @@ void Waveform::MaximizeColors(const PerFrameContext& presetPerFrameContext)
          }
      }
  
@@ -1824,10 +2117,10 @@ index 5a9b54673..7448b05cc 100644
          MilkdropShaderCommentParsingTest.cpp
 diff --git a/tests/libprojectM/LineGeometryTest.cpp b/tests/libprojectM/LineGeometryTest.cpp
 new file mode 100644
-index 000000000..c6a120382
+index 000000000..f4f054179
 --- /dev/null
 +++ b/tests/libprojectM/LineGeometryTest.cpp
-@@ -0,0 +1,377 @@
+@@ -0,0 +1,459 @@
 +#include <gtest/gtest.h>
 +
 +#include <MilkdropPreset/LineGeometry.hpp>
@@ -1836,11 +2129,13 @@ index 000000000..c6a120382
 +#include <cmath>
 +#include <vector>
 +
++using libprojectM::MilkdropPreset::BlurSourceFor;
 +using libprojectM::MilkdropPreset::DotStyleFor;
 +using libprojectM::MilkdropPreset::LineBatch;
 +using libprojectM::MilkdropPreset::LineKind;
 +using libprojectM::MilkdropPreset::LineScale;
 +using libprojectM::MilkdropPreset::LineStyleFor;
++using libprojectM::MilkdropPreset::MaximizeColorsTextureSize;
 +using libprojectM::MilkdropPreset::PassOffsetFor;
 +using libprojectM::MilkdropPreset::SampleDecisionWidth;
 +using Point = libprojectM::Renderer::RenderItem::ColoredPoint;
@@ -1966,6 +2261,86 @@ index 000000000..c6a120382
 +            EXPECT_LE(SampleDecisionWidth(width, height, 1024, 768), width) << width << "x" << height;
 +            EXPECT_GT(SampleDecisionWidth(width, height, 1024, 768), 0) << width << "x" << height;
 +        }
++    }
++}
++
++// MilkDrop fades the spiro and hash waves by its texture size, max(width, height). Without a reference
++// size (GL lines) that is the render size, as in MilkDrop.
++TEST(LineGeometry, MaximizeColorsTextureSizeIsTheRenderSizeWithoutReference)
++{
++    EXPECT_EQ(MaximizeColorsTextureSize(1920, 1080, 0, 0), 1920);
++    EXPECT_EQ(MaximizeColorsTextureSize(768, 1024, 0, 0), 1024);
++    EXPECT_EQ(MaximizeColorsTextureSize(3840, 2160, 0, 768), 3840);
++    EXPECT_EQ(MaximizeColorsTextureSize(3840, 2160, 1024, 0), 3840);
++}
++
++// Above the reference area the lines keep the reference's share of the picture, so the fade is the
++// reference's (the size the preset was made for), not the render's.
++TEST(LineGeometry, MaximizeColorsTextureSizeFollowsTheReferenceAboveIt)
++{
++    EXPECT_EQ(MaximizeColorsTextureSize(1920, 1080, 1024, 768), 1024);
++    EXPECT_EQ(MaximizeColorsTextureSize(3840, 2160, 1024, 768), 1024);
++    EXPECT_EQ(MaximizeColorsTextureSize(3840, 2160, 1920, 1080), 1920);
++    EXPECT_EQ(MaximizeColorsTextureSize(1080, 1920, 768, 1024), 1024);
++}
++
++// At or below the reference area the lines are MilkDrop's 1 px lines, and so is the fade.
++TEST(LineGeometry, MaximizeColorsTextureSizeIsTheRenderSizeAtOrBelowTheReference)
++{
++    EXPECT_EQ(MaximizeColorsTextureSize(1024, 768, 1024, 768), 1024);
++    EXPECT_EQ(MaximizeColorsTextureSize(800, 600, 1024, 768), 800);
++    EXPECT_EQ(MaximizeColorsTextureSize(1182, 665, 1024, 768), 1182); // area just under the reference's
++    EXPECT_EQ(MaximizeColorsTextureSize(1280, 720, 1920, 1080), 1280);
++}
++
++// Without line scaling the blur levels are made from the source itself, as in MilkDrop.
++TEST(LineGeometry, BlurSourceIsTheSourceWithoutScale)
++{
++    for (float scale : {0.0f, 1.0f})
++    {
++        const auto source = BlurSourceFor(1920, 1080, scale);
++        EXPECT_EQ(source.width, 1920);
++        EXPECT_EQ(source.height, 1080);
++        EXPECT_EQ(source.lod, 0.0f);
++    }
++}
++
++// Above the reference area the blur levels are made as from a source of the reference's area (the
++// source divided by the line scale), read from the source's mipmaps at log2 of that scale.
++TEST(LineGeometry, BlurSourceFollowsTheLineScale)
++{
++    const auto hd = BlurSourceFor(1920, 1080, LineScale(1920, 1080, 1024, 768));
++    EXPECT_EQ(hd.width, 1182);
++    EXPECT_EQ(hd.height, 665);
++    EXPECT_NEAR(hd.lod, std::log2(1920.0f / 1182.0f), 1e-6f);
++
++    const auto uhd = BlurSourceFor(3840, 2160, LineScale(3840, 2160, 1024, 768));
++    EXPECT_EQ(uhd.width, 1182);
++    EXPECT_EQ(uhd.height, 665);
++    EXPECT_NEAR(uhd.lod, std::log2(3840.0f / 1182.0f), 1e-6f);
++
++    const auto ref4x3 = BlurSourceFor(2048, 1536, LineScale(2048, 1536, 1024, 768));
++    EXPECT_EQ(ref4x3.width, 1024);
++    EXPECT_EQ(ref4x3.height, 768);
++    EXPECT_FLOAT_EQ(ref4x3.lod, 1.0f);
++
++    const auto ref1080 = BlurSourceFor(3840, 2160, LineScale(3840, 2160, 1920, 1080));
++    EXPECT_EQ(ref1080.width, 1920);
++    EXPECT_EQ(ref1080.height, 1080);
++    EXPECT_FLOAT_EQ(ref1080.lod, 1.0f);
++}
++
++// The scaled source is never empty and never larger than the source.
++TEST(LineGeometry, BlurSourceStaysWithinTheSource)
++{
++    for (float scale : {1.01f, 1.5f, 3.0f, 100.0f, 10000.0f})
++    {
++        const auto source = BlurSourceFor(3840, 2160, scale);
++        EXPECT_GE(source.width, 1) << scale;
++        EXPECT_GE(source.height, 1) << scale;
++        EXPECT_LE(source.width, 3840) << scale;
++        EXPECT_LE(source.height, 2160) << scale;
++        EXPECT_GE(source.lod, 0.0f) << scale;
 +    }
 +}
 +
