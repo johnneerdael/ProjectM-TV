@@ -179,11 +179,13 @@ public:
         return pick;
     }
 
-    // The preset Random() will return next.
+    // The preset Random() will return next. Picked again when Next or Previous landed on it: Random()
+    // never returns the preset on screen, so the one prepared would not be the one shown.
     std::string PeekRandom() {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (randomAhead_.empty() || skipped_.count(randomAhead_)) {
-            randomAhead_ = PickRandomLocked(history_.empty() ? std::string() : history_.back());
+        std::string shown = history_.empty() ? std::string() : history_.back();
+        if (randomAhead_.empty() || skipped_.count(randomAhead_) || randomAhead_ == shown) {
+            randomAhead_ = PickRandomLocked(shown);
         }
         return randomAhead_;
     }
