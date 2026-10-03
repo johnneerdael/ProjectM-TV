@@ -13,7 +13,7 @@ import java.util.List;
  * projectM patch 0002), so no preset switch or hard cut is needed to hide it. After a change the
  * frame rate is left to settle before the next decision.
  *
- * Heights are limited to the panel and to a memory-safe maximum (see
+ * Heights are limited to the panel, to {@link #RENDER_HEIGHT_CAP} and to a memory-safe maximum (see
  * {@link DeviceProfile#memorySafeHeight()}); memory pressure reported by Android lowers that
  * maximum for the rest of the session.
  *
@@ -30,6 +30,17 @@ public final class QualityController {
     public static final int ACTION_NONE = 0;
     /** Current preset is too slow for this device even at the lowest resolution: skip it. */
     public static final int ACTION_SKIP = 2;
+
+    /**
+     * Highest render height, for automatic and fixed resolution alike; the display's scaler upscales
+     * to the panel. projectM draws lines, blur and the presets' texel steps as at MilkDrop's
+     * 1024x768 (patch 0021), but presets that feed their image back also re-sample it bilinearly
+     * every frame, which smooths by a fraction of a real texel: above about twice the reference's
+     * size (665 lines at 16:9) that smoothing is too small a share of the picture and such presets
+     * settle into another pattern (Acid Mandala's red spokes die out from 2880x1620). Measured on
+     * 24 presets against the authored 1182x665 render; see docs/ARCHITECTURE.md (Lines).
+     */
+    public static final int RENDER_HEIGHT_CAP = 1330;
 
     /** Auto ladder, filtered to the panel resolution. */
     private static final int[] AUTO_LADDER = {360, 432, 540, 720, 900, 1080, 1260, 1440, 1800, 2160};
@@ -86,10 +97,14 @@ public final class QualityController {
     }
 
     private static int limit(DisplayInfo display, int memoryLimit) {
-        return memoryLimit > 0 ? Math.min(display.physicalHeight, memoryLimit) : display.physicalHeight;
+        int max = Math.min(display.physicalHeight, RENDER_HEIGHT_CAP);
+        return memoryLimit > 0 ? Math.min(max, memoryLimit) : max;
     }
 
-    /** Levels available for manual selection in the menu (ascending heights). */
+    /**
+     * Levels available for manual selection in the menu (ascending heights): 720, 1080, 1440 and
+     * 2160 up to the panel, {@link #RENDER_HEIGHT_CAP} and the memory limit, plus that maximum.
+     */
     public static int[] manualHeights(DisplayInfo display, int memoryLimit) {
         int maxHeight = limit(display, memoryLimit);
         List<Integer> list = new ArrayList<>();
@@ -103,17 +118,19 @@ public final class QualityController {
     /**
      * Returns {@code savedHeight} if it is still a valid fixed level for this panel, otherwise 0
      * (automatic). A saved 2160 must not be used after the device moved to a 1080p panel, or
-     * above the memory limit.
+     * above the memory limit. A height above {@link #RENDER_HEIGHT_CAP} (a 1440 or 4K saved before
+     * the cap) means "the sharpest" and becomes the cap where the panel and memory allow it.
      */
     public static int validFixedHeight(DisplayInfo display, int memoryLimit, int savedHeight) {
-        for (int h : manualHeights(display, memoryLimit)) if (h == savedHeight) return savedHeight;
+        int wanted = Math.min(savedHeight, RENDER_HEIGHT_CAP);
+        for (int h : manualHeights(display, memoryLimit)) if (h == wanted) return wanted;
         return 0;
     }
 
-    /** @param height 0 for automatic, otherwise a fixed render height. */
+    /** @param height 0 for automatic, otherwise a fixed render height (at most {@link #RENDER_HEIGHT_CAP}). */
     public void setMode(int height, int lastAutoHeight) {
         auto = height <= 0;
-        fixedHeight = height;
+        fixedHeight = Math.min(height, RENDER_HEIGHT_CAP);
         resetCounters(0);
         if (auto && lastAutoHeight > 0) current = Math.max(minIndex, Math.min(ceiling, indexAtMost(lastAutoHeight)));
         listener.onApplyRenderHeight(currentHeight());

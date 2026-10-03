@@ -46,7 +46,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Offers a Dance collection.** Open the settings panel and set *Music category* to *Dance* for 500 presets ranked by measured bass-caused visual change. Automatic changes, Random and Previous stay within the selected collection, subject to the existing skip rules. The choice is saved. *All* is the default and uses the full library. [How the Dance collection was measured](https://johnneerdael.github.io/ProjectM-TV/dance-measurement/).
 - **Shows the track that is playing.** When the music app starts a new track, its title and artist appear in the lower left for 20 seconds (taken from the app's media session, e.g. SoundCloud or Flow). This needs *notification access*, see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that used to be black render; this rule remains as a safety net (details under *Presets* below).
-- **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution to hold the frame rate, without interrupting the preset. The TV's scaler upscales to the panel.
+- **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution to hold the frame rate, without interrupting the preset, up to 1330p (presets keep their authored look up to about twice MilkDrop's size). The TV's scaler upscales to the panel.
 - **Protects the music app from being closed.** On TVs with little memory, Android closes other apps when projectM uses too much. The app caps its resolution by installed memory (with 2 GB: 1260p), and in *Auto* resolution it lowers the resolution when Android reports memory pressure.
 - **Starts quickly.** The first preset appears a few seconds after launch.
 - **Updates itself, if you want.** With *Settings › Advanced › Auto-update* on, the app checks GitHub for a new release at every launch and every 6 hours while it is open, downloads it in the background, and offers to install it: a notice in the lower left, and an *Install* row at the top of the settings panel. Android's installer asks you to confirm. The first time, it asks you to allow installs from ProjectM TV instead; Android then restarts the app, and you select *Install* once more. Off by default; apps installed from F-Droid are updated by F-Droid.
@@ -81,7 +81,7 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 | Music category | All, Dance | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 | Transition | Instant, 1–10 s | 7 s (2 s on low-end devices) |
-| Resolution | Auto, or a fixed height up to the panel resolution and the memory limit | Auto |
+| Resolution | Auto, or a fixed height (720p, 1080p, 1330p) up to the panel resolution and the memory limit. 1330p is the highest render height: above it presets that feed their image back drift from their authored look, so a 1440p or 4K TV's scaler upscales a 1330p render | Auto |
 | Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
 
 *Advanced ›* opens a second panel:
@@ -91,7 +91,7 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 | Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
 | Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
 | Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
-| Memory limit | Caps the resolution by installed memory: under 1.6 GB 1080p, under 2.6 GB 1260p, under 3.6 GB 1440p, otherwise no cap | On |
+| Memory limit | Caps the resolution by installed memory: under 1.6 GB 1080p, under 2.6 GB 1260p, otherwise the 1330p maximum | On |
 | Skip slow presets | Skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Track titles | *On* when notification access is granted; select it for how to allow it (see [Track titles](#track-titles)) | – |
@@ -112,7 +112,7 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 **Picture and performance**
 - **A preset change is only smooth when it was prepared.** The next preset, and the ones *Random* and *Previous* on the remote would pick, are prepared in the background, so a switch takes a few hundredths of a second. For 20 seconds after Android reports low memory, and while less than 15% of the memory is free, nothing is prepared; a switch then pauses the picture for up to about half a second.
 - **Blending two heavy presets is slow.** A blend renders both presets at once. With presets whose equations run for many points or shapes per frame, the CPU is the limit, and the frame rate drops for the length of the blend.
-- **High resolutions need memory.** *Memory limit* caps the resolution by installed memory (see *Settings*); a fixed 4K needs it set to Off.
+- **The render height stops at 1330p.** Presets were tuned at about 1024×768; above about twice that size, presets that feed their image back settle into a different pattern, so 1440p and 4K TVs show a 1330p render upscaled by the TV. *Memory limit* lowers it further on TVs with less than 2.6 GB.
 - **After a low-memory report, *Auto* resolution stays lower for that session.**
 - projectM is a reimplementation of MilkDrop. Some presets look different from MilkDrop on Windows, or still render incorrectly.
 
