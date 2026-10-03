@@ -14,6 +14,8 @@
 
 > **Amended 2026-10-03 during Task 4 (controller ruling, see the SDD ledger):** quad lines default to a **hard edge** (pixels whose centre is within `[-halfWidth, halfWidth)` of the line, at least 1 px wide, alpha × `min(2·halfWidth, 1)` for thinner lines). The 1 px anti-aliased edge of decision 3 is opt-in through `projectm_opengl_set_line_antialiasing(instance, bool)` (`RenderContext::lineAntialiasing`, default false), because measurement showed it darkens feedback presets (−14 % on a thin-wave preset at 1080) while the hard edge matches MilkDrop exactly. `LineRenderer::Begin` takes `(transformation, const Renderer::RenderContext&)`.
 
+> **Noted 2026-10-03 (after implementation):** projectM issue #682 suggests round joins and end caps for waveforms (miters for shapes). All strips use miter joins and flat ends instead: the article's round joins draw a circle over every joint, which blends joint pixels twice and makes beads on translucent or additive waves (feedback presets amplify that); at 1 px (1080) and 2 px (2160) the join shape is sub-pixel; MilkDrop's own lines have no round joins, and miters let thin quad lines light exactly MilkDrop's pixels. Round end caps on open waveforms (no overlap) remain a cheap option if 4K images show rough wave ends.
+
 How lines are drawn in our build today (4.1.7 + patches 0001–0020):
 
 | Element | File | Primitive | "Thick" |

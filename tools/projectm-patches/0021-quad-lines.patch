@@ -12,6 +12,9 @@ one-pixel anti-aliased edge. The thick main wave is two bands, 2 + t and 2 - t p
 slope), like MilkDrop's 2x2 pixel dilation; thick custom waves and shape outlines are the thin
 line drawn four times with MilkDrop's offsets. Waveform dots stay GL points with a scaled size.
 If the driver rejects the line shaders, GL lines are drawn. 0, the default, keeps the GL lines.
+Unlike the issue's suggestion, waveforms also get miter joins and flat ends, not round joins and
+caps: round joins overlap the segments and blend joint pixels twice (bright beads on translucent
+or additive waves), at 1-2 px the join shape is sub-pixel, and MilkDrop's lines have none.
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
 index ee6ae6562..e4315a44a 100644
