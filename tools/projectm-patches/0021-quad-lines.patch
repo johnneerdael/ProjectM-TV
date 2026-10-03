@@ -27,8 +27,15 @@ size when lines are scaled (above the reference area), the size the presets were
 and hash waves' fade (Waveform::MaximizeColors(), by max(width, height)), and the blur levels, made as
 from a source of the reference's size (the render size divided by the line scale) whose first pass
 reads the previous frame's mipmaps (glGenerateMipmap per frame), so blur1-3 keep their size and their
-radius keeps its share of the picture instead of shrinking with the render. Without a reference size,
-and at or below its area, all of this is MilkDrop's behaviour, byte for byte.
+radius keeps its share of the picture instead of shrinking with the render. Preset code sees that
+reference-sized canvas too (ShaderCanvasSize()): texsize and texsize_main, mip_x/y/avg and the
+per-frame and per-pixel pixelsx/pixelsy report the render size divided by the line scale, as in
+MilkDrop, where texsize is the internal canvas the preset was tuned on. Texel steps (texsize.zw * k)
+and uv-to-pixel factors then keep their share of the picture: feedback presets that advect or
+differentiate by a few texels per frame kept their pixel-sized steps at 4K and drifted 3.25x slower
+(Acid Mandala: saturation 0.46 instead of 0.80). The textures, their sampling and the sizes of real
+textures (texsize_<name>) are unchanged. Without a reference size, and at or below its area, all of
+this is MilkDrop's behaviour, byte for byte.
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
 index ee6ae6562..0262cc70a 100644
@@ -491,10 +498,10 @@ index 363c27345..eb287f967 100644
      friend class WaveformPerPointContext;
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.cpp b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
 new file mode 100644
-index 000000000..78c6f67de
+index 000000000..6ef37e4c8
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
-@@ -0,0 +1,172 @@
+@@ -0,0 +1,179 @@
 +#include "LineGeometry.hpp"
 +
 +#include <algorithm>
@@ -563,6 +570,13 @@ index 000000000..78c6f67de
 +    source.height = std::max(1, static_cast<int>(std::lround(static_cast<float>(sourceHeight) / referenceScale)));
 +    source.lod = std::log2(static_cast<float>(sourceWidth) / static_cast<float>(source.width));
 +    return source;
++}
++
++auto ShaderCanvasSize(int viewportWidth, int viewportHeight, int referenceWidth, int referenceHeight) -> CanvasSize
++{
++    const auto source = BlurSourceFor(viewportWidth, viewportHeight,
++                                      LineScale(viewportWidth, viewportHeight, referenceWidth, referenceHeight));
++    return {source.width, source.height};
 +}
 +
 +auto LineStyleFor(LineKind kind, bool thick, float scale, int viewportWidth, int viewportHeight) -> LineStyle
@@ -669,10 +683,10 @@ index 000000000..78c6f67de
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.hpp b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
 new file mode 100644
-index 000000000..7c3962e06
+index 000000000..fa854b1e9
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
-@@ -0,0 +1,169 @@
+@@ -0,0 +1,193 @@
 +#pragma once
 +
 +#include <Renderer/RenderItem.hpp>
@@ -784,6 +798,30 @@ index 000000000..7c3962e06
 + * @param referenceScale LineScale(); 0 or 1 keep the source (MilkDrop).
 + */
 +auto BlurSourceFor(int sourceWidth, int sourceHeight, float referenceScale) -> BlurSource;
++
++/**
++ * @brief Canvas size in pixels as told to preset code: texsize, texsize_main, mip_x/y/avg and
++ *        pixelsx/pixelsy.
++ */
++struct CanvasSize
++{
++    int width{0};
++    int height{0};
++};
++
++/**
++ * @brief The canvas size preset shaders and equations see: above the line reference area the
++ *        reference's area at the render's aspect ratio (the render size divided by LineScale(), the
++ *        size BlurSourceFor() makes the blur levels from), otherwise the render size.
++ *
++ * In MilkDrop texsize is the internal canvas, and presets step by texsize.zw texels and turn uv into
++ * pixels with texsize.xy, tuned on a canvas of about the reference size. The textures stay at the
++ * render size and are sampled as before; only the reported size follows the reference, so the steps
++ * and frequencies keep their share of the picture, like the lines.
++ * @return The render size when quad lines are off (no reference size), or at or below the reference
++ *         area, as in MilkDrop.
++ */
++auto ShaderCanvasSize(int viewportWidth, int viewportHeight, int referenceWidth, int referenceHeight) -> CanvasSize;
 +
 +/**
 + * @brief Quad line style matching MilkDrop's thin (1 px) or thick line of this kind, at this scale.
@@ -1178,6 +1216,64 @@ index 25b91bf31..744efbb60 100755
      };
      if (!m_warpSamplesBlur)
      {
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+index 8e0018ccf..fa32c254d 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -1,5 +1,6 @@
+ #include "MilkdropShader.hpp"
+ 
++#include "LineGeometry.hpp"
+ #include "PerFrameContext.hpp"
+ #include "PresetState.hpp"
+ #include "Utils.hpp"
+@@ -155,8 +156,13 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+ 
+     auto floatTime = static_cast<float>(presetState.renderContext.time);
+     auto timeSincePresetStartWrapped = floatTime - static_cast<int>(floatTime / 10000.0) * 10000;
+-    auto mipX = logf(static_cast<float>(presetState.renderContext.viewportSizeX)) / logf(2.0f);
+-    auto mipY = logf(static_cast<float>(presetState.renderContext.viewportSizeY)) / logf(2.0f);
++    // Above the line reference area, texsize, texsize_main and mip_* report the reference-sized canvas
++    // the preset was made for (ShaderCanvasSize()); the textures keep the render size.
++    const auto& context = presetState.renderContext;
++    const auto canvas = ShaderCanvasSize(context.viewportSizeX, context.viewportSizeY,
++                                         context.lineReferenceWidth, context.lineReferenceHeight);
++    auto mipX = logf(static_cast<float>(canvas.width)) / logf(2.0f);
++    auto mipY = logf(static_cast<float>(canvas.height)) / logf(2.0f);
+     auto mipAvg = 0.5f * (mipX + mipY);
+ 
+     BlurTexture::Values blurMin;
+@@ -204,10 +210,10 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+                                       blurMin[2],
+                                       blurMin[0],
+                                       blurMax[0]});
+-    m_shader.SetUniformFloat4("_c7", {presetState.renderContext.viewportSizeX,
+-                                      presetState.renderContext.viewportSizeY,
+-                                      1.0f / static_cast<float>(presetState.renderContext.viewportSizeX),
+-                                      1.0f / static_cast<float>(presetState.renderContext.viewportSizeY)});
++    m_shader.SetUniformFloat4("_c7", {canvas.width,
++                                      canvas.height,
++                                      1.0f / static_cast<float>(canvas.width),
++                                      1.0f / static_cast<float>(canvas.height)});
+ 
+     m_shader.SetUniformFloat4("_c8", {0.5f + 0.5f * cosf(floatTime * 0.329f + 1.2f),
+                                       0.5f + 0.5f * cosf(floatTime * 1.293f + 3.9f),
+@@ -314,6 +320,15 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+         desc.Bind(textureUnit, m_shader);
+         textureUnit++;
+     }
++    if (!m_mainTextureDescriptors.empty() &&
++        (canvas.width != context.viewportSizeX || canvas.height != context.viewportSizeY))
++    {
++        // texsize_main is the canvas size the preset sees, like texsize (Bind() set the texture's).
++        m_shader.SetUniformFloat4("texsize_main", {canvas.width,
++                                                   canvas.height,
++                                                   1.0f / static_cast<float>(canvas.width),
++                                                   1.0f / static_cast<float>(canvas.height)});
++    }
+     presetState.blurTexture.Bind(textureUnit, m_shader);
+     for (auto& desc : m_textureSamplerDescriptors)
+     {
 diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
 index f3f0c4112..0fb4b0d11 100644
 --- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
@@ -1354,6 +1450,56 @@ index eb9686dcd..1d8d9b634 100644
  };
  
  } // namespace MilkdropPreset
+diff --git a/src/libprojectM/MilkdropPreset/PerFrameContext.cpp b/src/libprojectM/MilkdropPreset/PerFrameContext.cpp
+index a408e6374..d2e937f26 100644
+--- a/src/libprojectM/MilkdropPreset/PerFrameContext.cpp
++++ b/src/libprojectM/MilkdropPreset/PerFrameContext.cpp
+@@ -1,5 +1,6 @@
+ #include "PerFrameContext.hpp"
+ 
++#include "LineGeometry.hpp"
+ #include "MilkdropPresetExceptions.hpp"
+ 
+ #ifdef MILKDROP_PRESET_DEBUG
+@@ -218,8 +219,11 @@ void PerFrameContext::LoadStateVariables(PresetState& state)
+     *solarize = static_cast<PRJM_EVAL_F>(state.solarize);
+     *meshx = static_cast<PRJM_EVAL_F>(state.renderContext.perPixelMeshX);
+     *meshy = static_cast<PRJM_EVAL_F>(state.renderContext.perPixelMeshY);
+-    *pixelsx = static_cast<PRJM_EVAL_F>(state.renderContext.viewportSizeX);
+-    *pixelsy = static_cast<PRJM_EVAL_F>(state.renderContext.viewportSizeY);
++    // Above the line reference area: the reference-sized canvas the preset was made for (ShaderCanvasSize()).
++    const auto canvas = ShaderCanvasSize(state.renderContext.viewportSizeX, state.renderContext.viewportSizeY,
++                                         state.renderContext.lineReferenceWidth, state.renderContext.lineReferenceHeight);
++    *pixelsx = static_cast<PRJM_EVAL_F>(canvas.width);
++    *pixelsy = static_cast<PRJM_EVAL_F>(canvas.height);
+     *aspectx = static_cast<PRJM_EVAL_F>(state.renderContext.invAspectX);
+     *aspecty = static_cast<PRJM_EVAL_F>(state.renderContext.invAspectY);
+     *blur1_min = static_cast<PRJM_EVAL_F>(state.blur1Min);
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelContext.cpp b/src/libprojectM/MilkdropPreset/PerPixelContext.cpp
+index 378258dc0..f2539ed1d 100644
+--- a/src/libprojectM/MilkdropPreset/PerPixelContext.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelContext.cpp
+@@ -1,5 +1,6 @@
+ #include "PerPixelContext.hpp"
+ 
++#include "LineGeometry.hpp"
+ #include "MilkdropPresetExceptions.hpp"
+ 
+ #ifdef MILKDROP_PRESET_DEBUG
+@@ -85,8 +86,11 @@ void PerPixelContext::LoadStateReadOnlyVariables(PresetState& state, PerFrameCon
+     *treb_att = static_cast<PRJM_EVAL_F>(*perFrameState.treb_att);
+     *meshx = static_cast<PRJM_EVAL_F>(state.renderContext.perPixelMeshX);
+     *meshy = static_cast<PRJM_EVAL_F>(state.renderContext.perPixelMeshY);
+-    *pixelsx = static_cast<PRJM_EVAL_F>(state.renderContext.viewportSizeX);
+-    *pixelsy = static_cast<PRJM_EVAL_F>(state.renderContext.viewportSizeY);
++    // Above the line reference area: the reference-sized canvas the preset was made for (ShaderCanvasSize()).
++    const auto canvas = ShaderCanvasSize(state.renderContext.viewportSizeX, state.renderContext.viewportSizeY,
++                                         state.renderContext.lineReferenceWidth, state.renderContext.lineReferenceHeight);
++    *pixelsx = static_cast<PRJM_EVAL_F>(canvas.width);
++    *pixelsy = static_cast<PRJM_EVAL_F>(canvas.height);
+     *aspectx = static_cast<PRJM_EVAL_F>(state.renderContext.aspectX);
+     *aspecty = static_cast<PRJM_EVAL_F>(state.renderContext.aspectY);
+ }
 diff --git a/src/libprojectM/MilkdropPreset/PresetState.hpp b/src/libprojectM/MilkdropPreset/PresetState.hpp
 index aff1a5684..aacd39d7a 100644
 --- a/src/libprojectM/MilkdropPreset/PresetState.hpp
@@ -2117,10 +2263,10 @@ index 5a9b54673..7448b05cc 100644
          MilkdropShaderCommentParsingTest.cpp
 diff --git a/tests/libprojectM/LineGeometryTest.cpp b/tests/libprojectM/LineGeometryTest.cpp
 new file mode 100644
-index 000000000..f4f054179
+index 000000000..1f99b61f2
 --- /dev/null
 +++ b/tests/libprojectM/LineGeometryTest.cpp
-@@ -0,0 +1,459 @@
+@@ -0,0 +1,529 @@
 +#include <gtest/gtest.h>
 +
 +#include <MilkdropPreset/LineGeometry.hpp>
@@ -2138,6 +2284,7 @@ index 000000000..f4f054179
 +using libprojectM::MilkdropPreset::MaximizeColorsTextureSize;
 +using libprojectM::MilkdropPreset::PassOffsetFor;
 +using libprojectM::MilkdropPreset::SampleDecisionWidth;
++using libprojectM::MilkdropPreset::ShaderCanvasSize;
 +using Point = libprojectM::Renderer::RenderItem::ColoredPoint;
 +
 +namespace {
@@ -2341,6 +2488,75 @@ index 000000000..f4f054179
 +        EXPECT_LE(source.width, 3840) << scale;
 +        EXPECT_LE(source.height, 2160) << scale;
 +        EXPECT_GE(source.lod, 0.0f) << scale;
++    }
++}
++
++// Without a reference size, and at or below its area, presets see the render size (texsize, pixelsx/y),
++// as in MilkDrop.
++TEST(LineGeometry, ShaderCanvasSizeIsTheRenderSizeWithoutScale)
++{
++    const auto noReference = ShaderCanvasSize(3840, 2160, 0, 0);
++    EXPECT_EQ(noReference.width, 3840);
++    EXPECT_EQ(noReference.height, 2160);
++
++    const auto partialReference = ShaderCanvasSize(3840, 2160, 1024, 0);
++    EXPECT_EQ(partialReference.width, 3840);
++    EXPECT_EQ(partialReference.height, 2160);
++
++    const auto atReference = ShaderCanvasSize(1024, 768, 1024, 768);
++    EXPECT_EQ(atReference.width, 1024);
++    EXPECT_EQ(atReference.height, 768);
++
++    const auto belowReference = ShaderCanvasSize(1182, 665, 1024, 768); // area just under the reference's
++    EXPECT_EQ(belowReference.width, 1182);
++    EXPECT_EQ(belowReference.height, 665);
++
++    const auto small = ShaderCanvasSize(640, 360, 1024, 768);
++    EXPECT_EQ(small.width, 640);
++    EXPECT_EQ(small.height, 360);
++}
++
++// Above the reference area presets see the reference's area at the render's aspect ratio (the render
++// size divided by the line scale), so texel steps and uv-to-pixel factors keep their share of the
++// picture. It is the size the blur levels are made from.
++TEST(LineGeometry, ShaderCanvasSizeFollowsTheReferenceAboveIt)
++{
++    const auto hd = ShaderCanvasSize(1920, 1080, 1024, 768);
++    EXPECT_EQ(hd.width, 1182);
++    EXPECT_EQ(hd.height, 665);
++
++    const auto uhd = ShaderCanvasSize(3840, 2160, 1024, 768);
++    EXPECT_EQ(uhd.width, 1182);
++    EXPECT_EQ(uhd.height, 665);
++
++    const auto ref4x3 = ShaderCanvasSize(2048, 1536, 1024, 768);
++    EXPECT_EQ(ref4x3.width, 1024);
++    EXPECT_EQ(ref4x3.height, 768);
++
++    const auto portrait = ShaderCanvasSize(1080, 1920, 768, 1024);
++    EXPECT_EQ(portrait.width, 665);
++    EXPECT_EQ(portrait.height, 1182);
++
++    for (int height : {1260, 1330, 1440})
++    {
++        const int width = height * 16 / 9;
++        const auto canvas = ShaderCanvasSize(width, height, 1024, 768);
++        const auto blur = BlurSourceFor(width, height, LineScale(width, height, 1024, 768));
++        EXPECT_EQ(canvas.width, blur.width) << height;
++        EXPECT_EQ(canvas.height, blur.height) << height;
++    }
++}
++
++// The reported canvas is never empty and never larger than the render.
++TEST(LineGeometry, ShaderCanvasSizeStaysWithinTheRender)
++{
++    for (int reference : {1, 2, 100, 1024})
++    {
++        const auto canvas = ShaderCanvasSize(3840, 2160, reference, reference);
++        EXPECT_GE(canvas.width, 1) << reference;
++        EXPECT_GE(canvas.height, 1) << reference;
++        EXPECT_LE(canvas.width, 3840) << reference;
++        EXPECT_LE(canvas.height, 2160) << reference;
 +    }
 +}
 +
