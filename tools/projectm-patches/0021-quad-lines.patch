@@ -4,10 +4,11 @@ projectM issue #682. MilkDrop draws waveforms, custom waves, shape outlines and 
 1 px GL lines (thick ones four times, offset by up to a pixel), so their share of the picture
 changes with the render size and a preset that feeds its image back looked different at every
 quality level. projectm_opengl_set_line_reference_height() draws them as quads instead: one
-instance per segment with miter joins, 1 px wide at the reference height and in proportion at
-other sizes. Edges are hard like MilkDrop's GL lines (the quad is the band itself, so the
-rasterizer resolves pixel-border ties; on GLES a 1/64 px offset makes those ties land on the row
-Mali's GL lines light); projectm_opengl_set_line_antialiasing() opts into a
+instance per segment with miter joins, 1 px wide at and below the reference height and in
+proportion above it (below it, thinner lines faded by their width made such presets go dark, so
+they are drawn as at the reference height). Edges are hard like MilkDrop's GL lines (the quad is
+the band itself, so the rasterizer resolves pixel-border ties; on GLES a 1/64 px offset makes those
+ties land on the row Mali's GL lines light); projectm_opengl_set_line_antialiasing() opts into a
 one-pixel anti-aliased edge. The thick main wave is two bands, 2 + t and 2 - t px wide (t: the
 slope), like MilkDrop's 2x2 pixel dilation; thick custom waves and shape outlines are the thin
 line drawn four times with MilkDrop's offsets. Waveform dots stay GL points with a scaled size.
@@ -17,7 +18,7 @@ caps: round joins overlap the segments and blend joint pixels twice (bright bead
 or additive waves), at 1-2 px the join shape is sub-pixel, and MilkDrop's lines have none.
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
-index ee6ae6562..e4315a44a 100644
+index ee6ae6562..d81b1e1ff 100644
 --- a/src/api/include/projectM-4/render_opengl.h
 +++ b/src/api/include/projectM-4/render_opengl.h
 @@ -87,6 +87,35 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
@@ -26,18 +27,18 @@ index ee6ae6562..e4315a44a 100644
  
 +/**
 + * @brief Draws waveforms, custom waves, shape outlines and motion vectors as quads, and waveform dots
-+ *        with a matching point size, so they keep their share of the picture at every render size.
++ *        with a matching point size, so they keep their share of the picture at large render sizes.
 + *
-+ * Lines are 1 px wide at the given render height (thick ones are drawn like MilkDrop's: a wider
-+ * band, or the thin line several times with small offsets) and proportionally wider or thinner at
-+ * other heights; lines thinner than 1 px fade by their width. Edges are hard, like MilkDrop's GL
-+ * lines, unless projectm_opengl_set_line_antialiasing() is enabled. Dots remain GL points whose size
-+ * scales the same way (on desktop OpenGL, GL_PROGRAM_POINT_SIZE is enabled while they are drawn).
-+ * 0, the default, keeps MilkDrop's 1 px GL lines and points. If the driver rejects the line shaders,
-+ * lines fall back to GL lines.
++ * Lines are 1 px wide at and below the given render height and in proportion above it (thick ones
++ * are drawn like MilkDrop's: a wider band, or the thin line several times with small offsets); below
++ * it they are drawn as at it, because thinner, faded lines made presets that feed their image back go
++ * dark. Edges are hard, like MilkDrop's GL lines, unless projectm_opengl_set_line_antialiasing() is
++ * enabled. Dots remain GL points whose size scales the same way (on desktop OpenGL,
++ * GL_PROGRAM_POINT_SIZE is enabled while they are drawn). 0, the default, keeps MilkDrop's 1 px GL
++ * lines and points. If the driver rejects the line shaders, lines fall back to GL lines.
 + *
 + * @param instance The projectM instance handle.
-+ * @param reference_height Render height in pixels at which lines are 1 px wide, or 0.
++ * @param reference_height Render height in pixels up to which lines are 1 px wide, or 0.
 + */
 +PROJECTM_EXPORT void projectm_opengl_set_line_reference_height(projectm_handle instance, uint32_t reference_height);
 +
@@ -311,10 +312,10 @@ index 363c27345..eb287f967 100644
      friend class WaveformPerPointContext;
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.cpp b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
 new file mode 100644
-index 000000000..508e3f0d1
+index 000000000..82ccd7e1e
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
-@@ -0,0 +1,155 @@
+@@ -0,0 +1,157 @@
 +#include "LineGeometry.hpp"
 +
 +#include <algorithm>
@@ -358,7 +359,9 @@ index 000000000..508e3f0d1
 +    {
 +        return 0.0f;
 +    }
-+    return static_cast<float>(viewportHeight) / static_cast<float>(referenceHeight);
++    // Below the reference height lines are drawn as at it, MilkDrop's 1 px lines at full brightness:
++    // thinner lines faded by their width made presets that feed their image back go dark in testing.
++    return std::max(1.0f, static_cast<float>(viewportHeight) / static_cast<float>(referenceHeight));
 +}
 +
 +auto LineStyleFor(LineKind kind, bool thick, float scale, int viewportWidth, int viewportHeight) -> LineStyle
@@ -472,10 +475,10 @@ index 000000000..508e3f0d1
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.hpp b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
 new file mode 100644
-index 000000000..4b6db89a6
+index 000000000..c73b8f8cb
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
-@@ -0,0 +1,134 @@
+@@ -0,0 +1,137 @@
 +#pragma once
 +
 +#include <Renderer/RenderItem.hpp>
@@ -539,7 +542,10 @@ index 000000000..4b6db89a6
 +};
 +
 +/**
-+ * @brief Line width factor: the render height over the reference height.
++ * @brief Line width factor: the render height over the reference height, but at least 1.
++ *
++ * Below the reference height lines are drawn as at it (MilkDrop's 1 px lines at full brightness),
++ * above it they widen in proportion.
 + * @return 0 when quad lines are off (no reference height) or the viewport is empty.
 + */
 +auto LineScale(int viewportHeight, int referenceHeight) -> float;
@@ -1575,7 +1581,7 @@ index d58aeff38..e7fdcc6ec 100644
      return ctx;
  }
 diff --git a/src/libprojectM/ProjectM.hpp b/src/libprojectM/ProjectM.hpp
-index 8d96b96f1..7f9b6cec0 100644
+index 8d96b96f1..dc1f323cf 100644
 --- a/src/libprojectM/ProjectM.hpp
 +++ b/src/libprojectM/ProjectM.hpp
 @@ -117,6 +117,18 @@ public:
@@ -1583,8 +1589,8 @@ index 8d96b96f1..7f9b6cec0 100644
      void SetDirectOutput(bool enabled);
  
 +    /**
-+     * @brief Draws lines as quads (hard-edged unless SetLineAntialiasing() is on), 1 px wide at this
-+     * render height and in proportion at others; dots scale the same way (see
++     * @brief Draws lines as quads (hard-edged unless SetLineAntialiasing() is on), 1 px wide at and
++     * below this render height and in proportion above it; dots scale the same way (see
 +     * projectm_opengl_set_line_reference_height()). 0 keeps MilkDrop's GL lines and points.
 +     */
 +    void SetLineReferenceHeight(int height);
@@ -1693,10 +1699,10 @@ index 5a9b54673..7448b05cc 100644
          MilkdropShaderCommentParsingTest.cpp
 diff --git a/tests/libprojectM/LineGeometryTest.cpp b/tests/libprojectM/LineGeometryTest.cpp
 new file mode 100644
-index 000000000..02bec8894
+index 000000000..815720756
 --- /dev/null
 +++ b/tests/libprojectM/LineGeometryTest.cpp
-@@ -0,0 +1,310 @@
+@@ -0,0 +1,319 @@
 +#include <gtest/gtest.h>
 +
 +#include <MilkdropPreset/LineGeometry.hpp>
@@ -1751,11 +1757,20 @@ index 000000000..02bec8894
 +    EXPECT_EQ(LineScale(-5, 1080), 0.0f);
 +}
 +
-+TEST(LineGeometry, ScaleFollowsRenderHeight)
++TEST(LineGeometry, ScaleFollowsRenderHeightAboveReference)
 +{
 +    EXPECT_FLOAT_EQ(LineScale(1080, 1080), 1.0f);
-+    EXPECT_FLOAT_EQ(LineScale(720, 1080), 720.0f / 1080.0f);
++    EXPECT_FLOAT_EQ(LineScale(1440, 1080), 1440.0f / 1080.0f);
 +    EXPECT_FLOAT_EQ(LineScale(2160, 1080), 2.0f);
++}
++
++// Below the reference height lines are drawn as at it (MilkDrop's 1 px lines at full brightness):
++// thinner, faded lines made feedback presets go dark.
++TEST(LineGeometry, ScaleNeverDropsBelowOne)
++{
++    EXPECT_FLOAT_EQ(LineScale(720, 1080), 1.0f);
++    EXPECT_FLOAT_EQ(LineScale(480, 1080), 1.0f);
++    EXPECT_FLOAT_EQ(LineScale(1, 1080), 1.0f);
 +}
 +
 +TEST(LineGeometry, ThinLinesAreOnePixelAtReference)
