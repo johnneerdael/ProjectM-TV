@@ -68,6 +68,147 @@ index 8dfb147ad..6b5824aa3 100644
          IdlePreset.cpp
          IdlePreset.hpp
          MilkdropPreset.cpp
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+index cde426ef0..7ab434ea0 100644
+--- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+@@ -141,6 +141,11 @@ void CustomShape::Draw()
+     m_imageLookedUp = false;
+     m_lastBlendDestination = 0;
+ 
++    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeY, m_presetState.renderContext.lineReferenceHeight);
++    m_quadBorders = lineScale > 0.0f;
++    m_borderStyle = LineStyleFor(LineKind::ShapeBorder, m_thickOutline, lineScale);
++    m_lineBatch.Clear();
++
+     // Need to use +/- 1.0 here instead of 2.0 used in Milkdrop to achieve the same rendering result.
+     const auto incrementX = 1.0f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
+     const auto incrementY = 1.0f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
+@@ -165,10 +170,12 @@ void CustomShape::Draw()
+         draw.textured = static_cast<int>(*m_perFrameContext.textured) != 0;
+         draw.sides = sides;
+         // If thick outline is used, the outline is drawn four times with slight offsets.
+-        draw.borderIterations = *m_perFrameContext.border_a > 0.0001f ? (m_thickOutline ? 4 : 1) : 0;
++        // Quad outlines draw thick lines in one call (m_borderStyle); GL lines four times, offset.
++        draw.borderIterations = *m_perFrameContext.border_a > 0.0001f ? (m_quadBorders ? 1 : (m_thickOutline ? 4 : 1)) : 0;
+ 
+-        size_t needed = static_cast<size_t>(sides + 2 + draw.borderIterations * sides);
+-        if (m_vertices.size() + needed > maxBatchVertices)
++        const size_t neededVertices = static_cast<size_t>(sides + 2 + (m_quadBorders ? 0 : draw.borderIterations * sides));
++        const size_t neededLinePoints = m_quadBorders && draw.borderIterations > 0 ? static_cast<size_t>(sides + 3) : 0;
++        if (m_vertices.size() + neededVertices > maxBatchVertices || m_lineBatch.Points().size() + neededLinePoints > maxBatchVertices)
+         {
+             FlushBatch();
+         }
+@@ -238,7 +245,7 @@ void CustomShape::Draw()
+         // Duplicate last vertex.
+         vertexData[sides + 1] = vertexData[1];
+ 
+-        if (draw.borderIterations > 0)
++        if (draw.borderIterations > 0 && !m_quadBorders)
+         {
+             // The outline as vertices in the border color (drawn with the untextured shader), offset
+             // like MilkDrop's thick outline: top left, top right, bottom right, bottom left.
+@@ -263,6 +270,23 @@ void CustomShape::Draw()
+             }
+         }
+ 
++        if (draw.borderIterations > 0 && m_quadBorders)
++        {
++            m_borderPoints.resize(static_cast<size_t>(sides));
++            for (int i = 0; i < sides; i++)
++            {
++                const TexturedPoint& corner = m_vertices[draw.fillFirst + i + 1];
++                auto& point = m_borderPoints[static_cast<size_t>(i)];
++                point.x = corner.x;
++                point.y = corner.y;
++                point.r = static_cast<float>(*m_perFrameContext.border_r);
++                point.g = static_cast<float>(*m_perFrameContext.border_g);
++                point.b = static_cast<float>(*m_perFrameContext.border_b);
++                point.a = static_cast<float>(*m_perFrameContext.border_a);
++            }
++            draw.borderStrip = m_lineBatch.Append(m_borderPoints.data(), m_borderPoints.size(), true);
++        }
++
+         m_draws.push_back(draw);
+     }
+ 
+@@ -287,6 +311,11 @@ void CustomShape::FlushBatch()
+     glBindBuffer(GL_ARRAY_BUFFER, m_vboIdUntextured);
+     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(TexturedPoint) * maxBatchVertices), nullptr, GL_STREAM_DRAW);
+     glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(sizeof(TexturedPoint) * m_vertices.size()), m_vertices.data());
++    if (m_quadBorders && !m_lineBatch.Points().empty())
++    {
++        m_presetState.lineRenderer.Upload(m_lineBatch);
++    }
++    m_linesBegun = false;
+ 
+     for (const auto& draw : m_draws)
+     {
+@@ -336,7 +365,17 @@ void CustomShape::FlushBatch()
+             glDrawArrays(GL_TRIANGLE_FAN, draw.fillFirst, draw.sides + 2);
+         }
+ 
+-        if (draw.borderIterations > 0)
++        if (draw.borderIterations > 0 && m_quadBorders)
++        {
++            auto& lines = m_presetState.lineRenderer;
++            if (!m_linesBegun)
++            {
++                lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext);
++                m_linesBegun = true;
++            }
++            lines.Draw(draw.borderStrip, m_borderStyle);
++        }
++        else if (draw.borderIterations > 0)
+         {
+             m_presetState.untexturedShader.Bind();
+             glBindVertexArray(m_vaoIdUntextured);
+@@ -347,6 +386,12 @@ void CustomShape::FlushBatch()
+         }
+     }
+ 
++    if (m_linesBegun)
++    {
++        m_presetState.lineRenderer.End();
++        m_linesBegun = false;
++    }
++    m_lineBatch.Clear();
+     m_vertices.clear();
+     m_draws.clear();
+ }
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+index 8351368fb..ba7bdfba1 100644
+--- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+@@ -1,6 +1,7 @@
+ #pragma once
+ 
+ #include "Constants.hpp"
++#include "LineGeometry.hpp"
+ #include "PresetState.hpp"
+ #include "ShapePerFrameContext.hpp"
+ 
+@@ -110,6 +111,7 @@ private:
+         GLint fillFirst{0};      //!< First fill vertex (a triangle fan of sides + 2 vertices).
+         GLint borderFirst{0};    //!< First outline vertex (borderIterations line loops of sides vertices).
+         int borderIterations{0}; //!< 0 without outline, 4 for a thick outline.
++        LineBatch::Strip borderStrip; //!< The outline in m_lineBatch (quad lines).
+     };
+ 
+     static constexpr size_t maxBatchVertices = 8192; //!< 256 KB per shape.
+@@ -121,6 +123,11 @@ private:
+ 
+     std::vector<TexturedPoint> m_vertices; //!< Current batch: fills and outlines of several instances.
+     std::vector<InstanceDraw> m_draws;     //!< Draw calls of the current batch, in instance order.
++    LineBatch m_lineBatch;                                     //!< Outlines of the current batch (quad lines).
++    std::vector<Renderer::RenderItem::ColoredPoint> m_borderPoints; //!< One outline, for the line batch.
++    bool m_quadBorders{false};                                 //!< This frame draws outlines as quads.
++    LineStyle m_borderStyle;                                   //!< Outline width and passes this frame.
++    bool m_linesBegun{false};                                  //!< LineRenderer::Begin() called for this batch.
+     Renderer::TextureSamplerDescriptor m_imageTexture; //!< The "image" texture, looked up once per frame.
+     bool m_imageLookedUp{false};
+     bool m_texturedShaderReady{false}; //!< Textured shader uniforms set in this frame.
 diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
 index e3f94056b..bd70893e4 100644
 --- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
