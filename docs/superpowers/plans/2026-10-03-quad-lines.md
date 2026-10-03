@@ -12,6 +12,8 @@
 
 ## Design
 
+> **Amended 2026-10-03 during Task 4 (controller ruling, see the SDD ledger):** quad lines default to a **hard edge** (pixels whose centre is within `[-halfWidth, halfWidth)` of the line, at least 1 px wide, alpha × `min(2·halfWidth, 1)` for thinner lines). The 1 px anti-aliased edge of decision 3 is opt-in through `projectm_opengl_set_line_antialiasing(instance, bool)` (`RenderContext::lineAntialiasing`, default false), because measurement showed it darkens feedback presets (−14 % on a thin-wave preset at 1080) while the hard edge matches MilkDrop exactly. `LineRenderer::Begin` takes `(transformation, const Renderer::RenderContext&)`.
+
 How lines are drawn in our build today (4.1.7 + patches 0001–0020):
 
 | Element | File | Primitive | "Thick" |
@@ -1625,7 +1627,7 @@ void Waveform::DrawQuadLines(const PerFrameContext& presetPerFrameContext, float
 
     auto& lines = m_presetState.lineRenderer;
     lines.Upload(m_lineBatch);
-    lines.Begin(PresetState::orthogonalProjectionFlipped, m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
+    lines.Begin(PresetState::orthogonalProjectionFlipped, m_presetState.renderContext);
     const auto style = LineStyleFor(LineKind::MainWave, m_presetState.waveThick, lineScale);
     for (const auto& strip : strips)
     {
@@ -1790,7 +1792,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
         auto& lines = m_presetState.lineRenderer;
         lines.Upload(m_lineBatch);
-        lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
+        lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext);
         lines.Draw(strip, LineStyleFor(LineKind::CustomWave, m_drawThick, lineScale));
         lines.End();
 
@@ -1964,7 +1966,7 @@ with
             auto& lines = m_presetState.lineRenderer;
             if (!m_linesBegun)
             {
-                lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
+                lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext);
                 m_linesBegun = true;
             }
             lines.Draw(draw.borderStrip, m_borderStyle);
@@ -2203,6 +2205,7 @@ void MotionVectors::DrawQuads(const PerFrameContext& presetPerFrameContext, floa
     m_motionVectorQuadShader.SetUniformFloat2("viewport_size", glm::vec2(static_cast<float>(m_presetState.renderContext.viewportSizeX),
                                                                          static_cast<float>(m_presetState.renderContext.viewportSizeY)));
     m_motionVectorQuadShader.SetUniformFloat("half_width", LineStyleFor(LineKind::MotionVector, false, lineScale).halfWidth);
+    m_motionVectorQuadShader.SetUniformFloat("antialias", m_presetState.renderContext.lineAntialiasing ? 1.0f : 0.0f);
     m_motionVectorQuadShader.SetUniformFloat("length_multiplier", static_cast<float>(*presetPerFrameContext.mv_l));
     m_motionVectorQuadShader.SetUniformFloat("minimum_length", minimumLength);
     m_motionVectorQuadShader.SetUniformInt("warp_coordinates", 0);
