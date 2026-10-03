@@ -10,7 +10,7 @@ The **Android CI/CD** workflow tests and builds every push and PR. Each successf
 | Successful merge/push to `main` | Stable APK/core AAR, GitHub Release, PR notes, current download details, checksums and Milkbeat dispatch |
 | Manual run on `main` | Publishes an unreleased commit or verifies an already complete release; the same commit keeps its version |
 
-Runs queue instead of canceling previous builds. Versions are tied to source history rather than workflow order: the first first-parent commit after `baseVersionCommit` maps to `baseVersionName`/`baseVersionCode`, and each later commit advances both. Initially, this means **2.1.5 / code 37**, then **2.1.6 / code 38**. Direct pushes containing several commits can leave version gaps; failed builds leave their version unpublished.
+Runs queue instead of canceling previous builds. Versions are tied to source history rather than workflow order: the first first-parent commit after `baseVersionCommit` maps to `baseVersionName`/`baseVersionCode`, and each later commit advances both. The 2.1 line started at **2.1.5 / code 37**; the current 2.2 baseline makes the next merge **2.2.0 / code 38**, then **2.2.1 / code 39**. Direct pushes containing several commits can leave version gaps; failed builds leave their version unpublished.
 
 CI fetches full tag history and rejects conflicting tags, inconsistent retry metadata and invalid Android codes. An older retry does not replace a newer release as latest. Missing release signing fails a publishing build; PR artifacts may use a temporary debug key.
 
