@@ -2,6 +2,7 @@ package com.example.projectm.visualizer;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
@@ -14,15 +15,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Reports the track the music app is playing, from its media session, each time a new one starts.
- * Needs notification-listener access for {@link TrackListenerService}; without it, nothing is
- * reported. Main thread only.
+ * Reports the track the music app is playing, from its media session: when one starts, plays again
+ * after a pause, or its details are completed, and when nothing plays any more. Needs
+ * notification-listener access for {@link TrackListenerService}; without it, nothing is reported.
+ * Main thread only.
  */
 final class TrackWatcher {
     interface Listener {
-        /** A new track started, or its label was completed (e.g. the artist arrived after the title). */
-        void onTrack(String label, boolean newTrack);
+        /**
+         * A track plays: a new one ({@code newTrack}), the same one again after a pause, or the same
+         * one with more details (the artist after the title, or the cover after the text).
+         */
+        void onTrack(Track track, boolean newTrack);
+
+        /** Nothing plays any more (paused, stopped, or the watch stopped). */
+        void onStopped();
     }
+
+    /** Title, artist and cover art of one track; title or artist may be empty, the cover null. */
+    static final class Track {
+        final String title;
+        final String artist;
+        final Bitmap cover;
+
+        Track(String title, String artist, Bitmap cover) {
+            this.title = title == null ? "" : title.trim();
+            this.artist = artist == null ? "" : artist.trim();
+            this.cover = cover;
+        }
+
+        /** "Title — Artist", or whichever of the two is known. */
+        String label() {
+            return TrackWatcher.label(title, artist);
+        }
+
+        /** Same title and artist; the cover may differ. */
+        boolean sameAs(Track other) {
+            return other != null && title.equals(other.title) && artist.equals(other.artist);
+        }
+    }
+
+    // Where sessions keep the cover, best first: apps fill in one or more of these.
+    private static final String[] COVER_KEYS = {MediaMetadata.METADATA_KEY_ALBUM_ART,
+            MediaMetadata.METADATA_KEY_ART, MediaMetadata.METADATA_KEY_DISPLAY_ICON};
 
     private static final String TAG = "ProjectMTV";
 
@@ -34,6 +69,8 @@ final class TrackWatcher {
     private MediaSessionManager sessions;
     private String lastTitle = "";
     private String lastLabel = "";
+    private Bitmap lastCover;
+    private boolean playing;
 
     private final MediaSessionManager.OnActiveSessionsChangedListener sessionsChanged = this::watch;
     private final MediaController.Callback controllerCallback = new MediaController.Callback() {
@@ -97,7 +134,11 @@ final class TrackWatcher {
         report();
     }
 
-    /** Reports the playing session's track if it differs from the last one reported. */
+    /**
+     * Reports the first playing session with track text if its track differs from the last one
+     * reported (another cover counts: one that arrives, replaces a fallback or goes), or if it
+     * plays again after a pause; reports a stop when no session plays a track.
+     */
     private void report() {
         for (MediaController controller : controllers) {
             PlaybackState state = controller.getPlaybackState();
@@ -106,15 +147,43 @@ final class TrackWatcher {
             String title = first(metadata, MediaMetadata.METADATA_KEY_TITLE, MediaMetadata.METADATA_KEY_DISPLAY_TITLE);
             String artist = first(metadata, MediaMetadata.METADATA_KEY_ARTIST,
                     MediaMetadata.METADATA_KEY_ALBUM_ARTIST, MediaMetadata.METADATA_KEY_DISPLAY_SUBTITLE);
-            String label = label(title, artist);
-            if (label.isEmpty() || label.equals(lastLabel)) return;
-            boolean newTrack = !title.equals(lastTitle) || lastTitle.isEmpty();
+            Track track = new Track(title, artist, cover(metadata));
+            String label = track.label();
+            if (label.isEmpty()) continue;  // nothing to show here; another session may play a track
+            if (!reportable(playing, lastLabel, label, !sameCover(track.cover, lastCover))) return;
+            boolean newTrack = !title.equals(lastTitle) || (title.isEmpty() && !label.equals(lastLabel));
+            if (!label.equals(lastLabel)) {
+                Log.i(TAG, "Track: " + label + " (" + controller.getPackageName() + ")");
+            }
             lastTitle = title;
             lastLabel = label;
-            Log.i(TAG, "Track: " + label + " (" + controller.getPackageName() + ")");
-            listener.onTrack(label, newTrack);
+            lastCover = track.cover;
+            playing = true;
+            listener.onTrack(track, newTrack);
             return;
         }
+        if (playing) {
+            playing = false;
+            listener.onStopped();
+        }
+    }
+
+    /** Whether a playing track is reported: playback (re)started, other text, or another cover. */
+    static boolean reportable(boolean wasPlaying, String lastLabel, String label, boolean coverChanged) {
+        return !wasPlaying || !label.equals(lastLabel) || coverChanged;
+    }
+
+    /** Each read of the metadata is a new bitmap, so covers are compared by their pixels. */
+    private static boolean sameCover(Bitmap a, Bitmap b) {
+        return a == b || (a != null && b != null && a.sameAs(b));
+    }
+
+    private static Bitmap cover(MediaMetadata metadata) {
+        for (String key : COVER_KEYS) {
+            Bitmap cover = metadata.getBitmap(key);
+            if (cover != null) return cover;
+        }
+        return null;
     }
 
     private static String first(MediaMetadata metadata, String... keys) {

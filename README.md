@@ -11,7 +11,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 **Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the app as of version 2.1.5.
 
 <p align="center">
-  <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's title in the lower left" width="100%">
+  <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's cover, artist and title in the upper left" width="100%">
 </p>
 <p align="center">
   <img src="docs/screenshots/mandala.jpg" alt="A kaleidoscopic preset" width="32%">
@@ -29,7 +29,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Dance collection:** 500 presets selected automatically for large bass-driven changes on screen. **All** remains the default, keeping the full library available.
 - **Corrected shader maths** restores colours and detail in presets affected by projectM translator bugs; [proof and upstream contribution](https://github.com/projectM-visualizer/projectm/pull/1031)
 - **Audio detected about 1 second after launch**, from the music app's own audio session
-- **Track title and artist** on screen when a new track starts
+- **Cover, artist and title** of the playing track on screen, as in Milkbeat
 - **No freezes at preset switches**: upcoming presets are prepared in the background, with cached shaders
 - **Adaptive resolution** that holds the frame rate, also during blends, without interrupting the picture
 - **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), less memory traffic per frame (on a Mali-G52 10–26% more frames per second on presets with a composite shader, up to twice as many on presets without one), reused picture buffers, fewer redundant GL calls, a faster shader parser
@@ -44,7 +44,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. The visuals usually react to the music within a second or two of launch, and within a few seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
 - **Shows 9,606 presets in shuffled order, with smooth blends.** Every 30 seconds by default it blends the old preset into the new one over 7 seconds. The next preset's shaders are compiled in the background beforehand, so the switch does not freeze the picture, and the blend adapts its resolution to keep the frame rate up. Left and Right on the remote cut straight to a random or the previous preset.
 - **Offers a Dance collection.** Open the settings panel and set *Music category* to *Dance* for 500 presets ranked by measured bass-caused visual change. Automatic changes, Random and Previous stay within the selected collection, subject to the existing skip rules. The choice is saved. *All* is the default and uses the full library. [How the Dance collection was measured](https://johnneerdael.github.io/ProjectM-TV/dance-measurement/).
-- **Shows the track that is playing.** When the music app starts a new track, its title and artist appear in the lower left for 20 seconds (taken from the app's media session, e.g. SoundCloud or Flow). This needs *notification access*, see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
+- **Shows the track that is playing.** The cover, artist and title of the playing track appear in the upper left for as long as it plays (taken from the app's media session, e.g. SoundCloud or Flow); *Settings › Track display* shows them for 10–60 s per track instead, in the small lower-left pill, or not at all. This needs *notification access*, see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that used to be black render; this rule remains as a safety net (details under *Presets* below).
 - **Adapts the resolution.** *Auto* resolution lowers or raises the render resolution to hold the frame rate, without interrupting the preset, up to 1330p (presets keep their authored look up to about twice MilkDrop's size). The TV's scaler upscales to the panel.
 - **Protects the music app from being closed.** On TVs with little memory, Android closes other apps when projectM uses too much. The app caps its resolution by installed memory (with 2 GB: 1260p), and in *Auto* resolution it lowers the resolution when Android reports memory pressure.
@@ -69,8 +69,9 @@ In the panel, Up and Down move between rows, Left and Right change a value, and 
 The main panel shows the current preset and a live audio level (*Listening*, *Very quiet*, *No sound* or *No access*).
 
 <p align="center">
-  <img src="docs/user-guide/images/setup/main-settings.png" alt="The settings panel" width="45%">
-  <img src="docs/user-guide/images/setup/advanced-settings.png" alt="The advanced settings panel with diagnostics" width="45%">
+  <img src="docs/user-guide/images/setup/main-settings.png" alt="The settings panel next to the playing track" width="32%">
+  <img src="docs/user-guide/images/setup/track-display-settings.png" alt="The track display panel" width="32%">
+  <img src="docs/user-guide/images/setup/advanced-settings.png" alt="The advanced settings panel with diagnostics" width="32%">
 </p>
 
 These settings captures use an isolated test installation on an Ugoos AM6. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
@@ -80,6 +81,15 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 | Auto change | Off, On | On |
 | Music category | All, Dance | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
+| Resolution | Auto, or a fixed height up to the panel resolution and the memory limit | Auto |
+
+*Track display ›* opens a panel for the playing track:
+
+| Setting | What it does | Default |
+|---|---|---|
+| Track info | Shows the cover, artist and title of the playing track in the upper left, as Milkbeat does; *Off · Allow* while notification access is missing, select it for how to allow it (see [Track titles](#track-titles)) | On |
+| Show for | 10, 20, 30 or 60 s from the start of each track, or *Always* while music plays (it goes when playback stops or pauses) | Always |
+| Pill style | Shows the track as one line (*Title — Artist*) in the small pill in the lower left instead | Off |
 | Transition | Instant, 1–10 s | 7 s (2 s on low-end devices) |
 | Resolution | Auto, or a fixed height (720p, 1080p, 1330p) up to the panel resolution and the memory limit. 1330p is the highest render height: above it presets that feed their image back drift from their authored look, so a 1440p or 4K TV's scaler upscales a 1330p render | Auto |
 | Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
@@ -88,16 +98,17 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 
 | Setting | What it does | Default |
 |---|---|---|
+| Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
 | Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
+| Transition | How long the blend from one preset to the next takes: Instant, 1–10 s | 7 s (2 s on low-end devices) |
 | Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
 | Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
 | Memory limit | Caps the resolution by installed memory: under 1.6 GB 1080p, under 2.6 GB 1260p, otherwise the 1330p maximum | On |
 | Skip slow presets | Skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
-| Track titles | *On* when notification access is granted; select it for how to allow it (see [Track titles](#track-titles)) | – |
 | Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
-| Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track titles (access), update status, device tier | – |
+| Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track display (access, corner or pill, how long), update status, device tier | – |
 
 ## What it does not do, and known limits
 
@@ -173,9 +184,9 @@ A version you built yourself is signed with your own debug key: uninstall it bef
 - *no player session found yet* or *silent / no data* right after launch: wait a few seconds while the app looks for the music app's audio session.
 - Still silent: the music app may send encoded audio, or it may not have been tested (see *Audio* above). Try SoundCloud to confirm the setup works.
 
-**It stutters.** Keep *Resolution* and *Transitions* on *Auto* and *Frame rate* at half the refresh rate (the default, 30 fps at 60 Hz), and lower *Detail* in *Advanced*. *Detail* sets how much per-vertex work every preset does on the CPU, which is often what limits blends.
+**It stutters.** Keep *Resolution* and *Advanced › Transitions* on *Auto* and *Advanced › Frame rate* at half the refresh rate (the default, 30 fps at 60 Hz), and lower *Detail* in *Advanced*. *Detail* sets how much per-vertex work every preset does on the CPU, which is often what limits blends.
 
-<a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). Select **Configure** in the startup dialog to open the closest supported Android notification-access page. **Dismiss** permanently hides the automatic reminder. *Settings › Advanced › Track titles* always reopens setup, and *Diagnostics* shows whether access is granted. See the [screenshot walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/#track-titles).
+<a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). Select **Configure** in the startup dialog to open the closest supported Android notification-access page. **Dismiss** permanently hides the automatic reminder. *Settings › Track display › Track info* always reopens setup, and *Diagnostics* shows whether access is granted. See the [screenshot walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/#track-titles).
 
 **The music app closes while the visualizer runs.** Keep *Memory limit* on and *Resolution* on *Auto*. Only *Auto* lowers the resolution when memory runs low.
 
