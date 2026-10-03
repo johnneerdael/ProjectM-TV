@@ -1,0 +1,21 @@
+Fix shader analysis includes in builds without MILKDROP_PRESET_DEBUG.
+
+Patch 0015 uses std::transform and std::tolower unconditionally, but added
+<algorithm> and <cctype> inside the debug-logging guard. GCC fails to compile
+MilkdropPreset.cpp without that flag. Include both headers in every build.
+
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -25,9 +25,10 @@
+ #include "MilkdropPresetExceptions.hpp"
+ #include "PresetFileParser.hpp"
+ 
+-#ifdef MILKDROP_PRESET_DEBUG
+ #include <algorithm>
+ #include <cctype>
++
++#ifdef MILKDROP_PRESET_DEBUG
+ #include <iostream>
+ #endif
+ 

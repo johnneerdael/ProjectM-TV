@@ -1,0 +1,48 @@
+cmake_minimum_required(VERSION 3.22)
+project(projectm_regressions VERSION 4.1.7 LANGUAGES C CXX)
+
+if(NOT PROJECTM_SOURCE)
+    message(FATAL_ERROR "PROJECTM_SOURCE must point to the patched projectM checkout")
+endif()
+option(SANITIZERS "Enable ASan/UBSan" ON)
+if(SANITIZERS)
+    add_compile_options(-fsanitize=address,undefined -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=address,undefined)
+endif()
+if(APPLE)
+    # The app's GLES framebuffer-discard hint has no equivalent in macOS OpenGL 3.2.
+    add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-include${CMAKE_CURRENT_SOURCE_DIR}/macos_gl.hpp>")
+endif()
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(ENABLE_PLAYLIST OFF CACHE BOOL "" FORCE)
+set(ENABLE_SYSTEM_PROJECTM_EVAL OFF CACHE BOOL "" FORCE)
+set(ENABLE_SDL_UI OFF CACHE BOOL "" FORCE)
+set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+set(BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(CMAKE_DISABLE_FIND_PACKAGE_FLEX ON)
+set(CMAKE_DISABLE_FIND_PACKAGE_BISON ON)
+if(NOT APPLE)
+    set(ENABLE_GLES ON CACHE BOOL "" FORCE)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(EGL REQUIRED IMPORTED_TARGET egl)
+endif()
+add_subdirectory("${PROJECTM_SOURCE}" projectm)
+add_executable(projectm-regressions regression_test.cpp)
+target_compile_features(projectm-regressions PRIVATE cxx_std_17)
+target_compile_definitions(projectm-regressions PRIVATE GL_SILENCE_DEPRECATION)
+target_include_directories(projectm-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM"
+    "${PROJECTM_SOURCE}/vendor/hlslparser/src"
+    "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_link_libraries(projectm-regressions PRIVATE libprojectM::projectM)
+if(NOT APPLE)
+    target_compile_definitions(projectm-regressions PRIVATE USE_GLES)
+    target_link_libraries(projectm-regressions PRIVATE PkgConfig::EGL)
+endif()
+enable_testing()
+add_test(NAME hlsl-self-reference COMMAND projectm-regressions macro)
+add_test(NAME custom-waveform-bounds COMMAND projectm-regressions waveform)
+# A broken self-referencing macro grows indefinitely; stop it before it exhausts memory.
+set_tests_properties(hlsl-self-reference custom-waveform-bounds PROPERTIES
+    TIMEOUT 10 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
