@@ -26,6 +26,22 @@ public class TrackWatcherTest {
     }
 
     @Test
+    public void reportsPlaybackThatStartsAgain() {
+        assertTrue(TrackWatcher.reportable(false, "Numb — Massano", "Numb — Massano", false));
+    }
+
+    @Test
+    public void reportsOtherTextOrAnotherCover() {
+        assertTrue(TrackWatcher.reportable(true, "Numb — Massano", "Glow — Rebūke", false));
+        assertTrue(TrackWatcher.reportable(true, "Numb — Massano", "Numb — Massano", true));
+    }
+
+    @Test
+    public void staysQuietWhileNothingChanges() {
+        assertFalse(TrackWatcher.reportable(true, "Numb — Massano", "Numb — Massano", false));
+    }
+
+    @Test
     public void tracksWithTheSameTitleAndArtistAreTheSameTrack() {
         TrackWatcher.Track track = new TrackWatcher.Track("Numb", "Massano", null);
         assertTrue(track.sameAs(new TrackWatcher.Track("Numb", "Massano", null)));

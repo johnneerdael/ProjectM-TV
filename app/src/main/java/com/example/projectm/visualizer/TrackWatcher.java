@@ -69,7 +69,7 @@ final class TrackWatcher {
     private MediaSessionManager sessions;
     private String lastTitle = "";
     private String lastLabel = "";
-    private boolean lastHadCover;
+    private Bitmap lastCover;
     private boolean playing;
 
     private final MediaSessionManager.OnActiveSessionsChangedListener sessionsChanged = this::watch;
@@ -135,8 +135,9 @@ final class TrackWatcher {
     }
 
     /**
-     * Reports the playing session's track if it differs from the last one reported (a cover that
-     * arrived counts), or if it plays again after a pause; reports a stop when nothing plays.
+     * Reports the first playing session with track text if its track differs from the last one
+     * reported (another cover counts: one that arrives, replaces a fallback or goes), or if it
+     * plays again after a pause; reports a stop when no session plays a track.
      */
     private void report() {
         for (MediaController controller : controllers) {
@@ -148,18 +149,15 @@ final class TrackWatcher {
                     MediaMetadata.METADATA_KEY_ALBUM_ARTIST, MediaMetadata.METADATA_KEY_DISPLAY_SUBTITLE);
             Track track = new Track(title, artist, cover(metadata));
             String label = track.label();
-            if (label.isEmpty()) return;
-            boolean coverArrived = track.cover != null && !lastHadCover;
-            if (playing && label.equals(lastLabel) && !coverArrived) return;
+            if (label.isEmpty()) continue;  // nothing to show here; another session may play a track
+            if (!reportable(playing, lastLabel, label, !sameCover(track.cover, lastCover))) return;
             boolean newTrack = !title.equals(lastTitle) || (title.isEmpty() && !label.equals(lastLabel));
-            if (label.equals(lastLabel)) {
-                lastHadCover |= track.cover != null;
-            } else {
+            if (!label.equals(lastLabel)) {
                 Log.i(TAG, "Track: " + label + " (" + controller.getPackageName() + ")");
-                lastHadCover = track.cover != null;
             }
             lastTitle = title;
             lastLabel = label;
+            lastCover = track.cover;
             playing = true;
             listener.onTrack(track, newTrack);
             return;
@@ -168,6 +166,16 @@ final class TrackWatcher {
             playing = false;
             listener.onStopped();
         }
+    }
+
+    /** Whether a playing track is reported: playback (re)started, other text, or another cover. */
+    static boolean reportable(boolean wasPlaying, String lastLabel, String label, boolean coverChanged) {
+        return !wasPlaying || !label.equals(lastLabel) || coverChanged;
+    }
+
+    /** Each read of the metadata is a new bitmap, so covers are compared by their pixels. */
+    private static boolean sameCover(Bitmap a, Bitmap b) {
+        return a == b || (a != null && b != null && a.sameAs(b));
     }
 
     private static Bitmap cover(MediaMetadata metadata) {
