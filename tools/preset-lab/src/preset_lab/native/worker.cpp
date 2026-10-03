@@ -51,6 +51,7 @@ int main(int argc, char** argv) {
         engine.SetTexturePaths({textures});
         engine.SetWindowSize(width, height);
         engine.SetMeshSize(48, 32);
+        engine.SetLineReferenceHeight(cfg.value("line_reference_height", 0));
         engine.SetTargetFramesPerSecond(fps);
         engine.SetPresetLocked(true);
         engine.SetHardCutEnabled(false);

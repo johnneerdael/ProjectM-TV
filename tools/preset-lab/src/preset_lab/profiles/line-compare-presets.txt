@@ -1,0 +1,17 @@
+# One or two presets per line kind, for fast iteration (found by scanning the bundled presets).
+# main wave, thin
+$$$ Royal - Mashup (106).milk
+# main wave, thick
+$$$ Royal - Mashup (191).milk
+# main wave dots (also motion vectors)
+$$$ Royal - Mashup (1).milk
+# custom wave, thick
+$$$ Royal - Mashup (162).milk
+# custom wave dots
+$$$ Royal - Mashup (10).milk
+# shape, thick outline
+$$$ Royal - Mashup (397).milk
+# shape with many instances and an outline
+Benjam and Zylot - Tie-Dye Supernova (Sunspots Mix) flx mrt - flx rnz.milk
+# motion vectors
+$$$ Royal - Mashup (103).milk

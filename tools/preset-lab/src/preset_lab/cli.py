@@ -53,6 +53,16 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--destination", type=Path, default=Path("build/preset-lab/dance-selection"))
     command.add_argument("--import", dest="import_to_app", action="store_true")
     command.add_argument("--dance-only", action="store_true", help="Publish only Dance; leave other experimental categories unavailable")
+    command = commands.add_parser("line-compare", help="Compare GL lines with quad lines (projectM #682) on identical frames")
+    command.add_argument("--repo", type=Path, default=Path.cwd())
+    command.add_argument("--work", type=Path, default=Path("build/preset-lab/line-compare"))
+    command.add_argument("--worker", type=Path)
+    command.add_argument("--preset", action="append", default=[])
+    command.add_argument("--preset-list", type=Path)
+    command.add_argument("--sample-every", type=int)
+    command.add_argument("--heights", default="1080,720,1440")
+    command.add_argument("--baseline", type=Path)
+    command.add_argument("--concurrency", type=int, default=1)
     command=commands.add_parser("run",help="Automatically analyze, match, music-test and export genre collections")
     command.add_argument("--repo",type=Path,default=Path.cwd())
     command.add_argument("--audio",type=Path,required=True)
@@ -113,6 +123,34 @@ def main(argv: list[str] | None = None) -> int:
             json.dump({k:v for k,v in report.items() if k not in ('ranking','unknown')}, sys.stdout, allow_nan=False)
             sys.stdout.write("\n")
             return 0 if not report['unknown_presets'] else 1
+        if args.command == "line-compare":
+            from .build_worker import build_worker
+            from .identity import load_json
+            from .line_compare import run_line_compare
+            from .models import EngineIdentity
+            repo = args.repo.resolve()
+            records, _ = inventory(repo/"core/src/main/assets/presets", repo/"core/src/main/assets/presets.idx",
+                                   repo/"core/src/main/assets/textures")
+            records.sort(key=lambda r: r.path)
+            names = list(args.preset)
+            if args.preset_list:
+                names += [line.strip() for line in args.preset_list.read_text().splitlines()
+                          if line.strip() and not line.startswith("#")]
+            if names:
+                missing = set(names) - {r.path for r in records}
+                if missing:
+                    raise ValueError(f"unknown presets: {sorted(missing)}")
+                records = [r for r in records if r.path in set(names)]
+            if args.sample_every:
+                records = records[::args.sample_every]
+            heights = tuple(int(h) for h in args.heights.split(",") if h)
+            worker = (args.worker or build_worker(repo, args.work / "engine")).resolve()
+            identity = EngineIdentity(**load_json(worker.parent / "build-identity.json"))
+            baseline = load_json(args.baseline) if args.baseline else None
+            report = run_line_compare(records, repo, args.work, worker, identity, heights, baseline, args.concurrency)
+            json.dump(report["summary"], sys.stdout, allow_nan=False)
+            sys.stdout.write("\n")
+            return 1 if report["summary"]["failed"] or report["summary"]["legacy_changed"] else 0
         if args.command=="run":
             from .models import PipelineConfig
             from .pipeline import run_pipeline

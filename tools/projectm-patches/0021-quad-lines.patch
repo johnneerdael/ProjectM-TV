@@ -9,6 +9,30 @@ miter joins, an anti-aliased edge, 1 px wide at the reference height and in prop
 sizes. Thick lines are wider and drawn more than once, matched to MilkDrop's brightness. Dots scale
 the same way. 0, the default, keeps the GL lines.
 ---
+diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
+index ee6ae6562..f0bb660aa 100644
+--- a/src/api/include/projectM-4/render_opengl.h
++++ b/src/api/include/projectM-4/render_opengl.h
+@@ -87,6 +87,19 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
+  */
+ PROJECTM_EXPORT void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled);
+ 
++/**
++ * @brief Draws waveforms, shape outlines, dots and motion vectors as anti-aliased quads that scale
++ *        with the render size.
++ *
++ * Lines are 1 px wide (thick ones wider) at the given render height and proportionally wider or
++ * thinner at other heights, so a preset covers the same share of the picture at every resolution.
++ * 0, the default, keeps MilkDrop's 1 px GL lines.
++ *
++ * @param instance The projectM instance handle.
++ * @param reference_height Render height in pixels at which lines are 1 px wide, or 0.
++ */
++PROJECTM_EXPORT void projectm_opengl_set_line_reference_height(projectm_handle instance, uint32_t reference_height);
++
+ /**
+  * @brief Sets the size of the calling thread's pool of framebuffer textures.
+  *
 diff --git a/src/libprojectM/MilkdropPreset/CMakeLists.txt b/src/libprojectM/MilkdropPreset/CMakeLists.txt
 index 8dfb147ad..9ff906ba6 100644
 --- a/src/libprojectM/MilkdropPreset/CMakeLists.txt
@@ -245,6 +269,92 @@ index 000000000..b02cb1b61
 +
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
+diff --git a/src/libprojectM/ProjectM.cpp b/src/libprojectM/ProjectM.cpp
+index d58aeff38..048161bdb 100644
+--- a/src/libprojectM/ProjectM.cpp
++++ b/src/libprojectM/ProjectM.cpp
+@@ -300,6 +300,11 @@ void ProjectM::SetDirectOutput(bool enabled)
+     m_directOutput = enabled;
+ }
+ 
++void ProjectM::SetLineReferenceHeight(int height)
++{
++    m_lineReferenceHeight = height > 0 ? height : 0;
++}
++
+ auto ProjectM::WindowWidth() -> int
+ {
+     return m_windowWidth;
+@@ -484,6 +489,7 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
+     ctx.perPixelMeshX = static_cast<int>(m_meshX);
+     ctx.perPixelMeshY = static_cast<int>(m_meshY);
+     ctx.textureManager = m_textureManager.get();
++    ctx.lineReferenceHeight = m_lineReferenceHeight;
+ 
+     return ctx;
+ }
+diff --git a/src/libprojectM/ProjectM.hpp b/src/libprojectM/ProjectM.hpp
+index 8d96b96f1..4d6e6c823 100644
+--- a/src/libprojectM/ProjectM.hpp
++++ b/src/libprojectM/ProjectM.hpp
+@@ -117,6 +117,12 @@ public:
+      */
+     void SetDirectOutput(bool enabled);
+ 
++    /**
++     * @brief Draws lines as anti-aliased quads, 1 px wide at this render height (see
++     * projectm_opengl_set_line_reference_height()). 0 keeps MilkDrop's GL lines.
++     */
++    void SetLineReferenceHeight(int height);
++
+     void SetBeatSensitivity(float sensitivity);
+ 
+     auto GetBeatSensitivity() const -> float;
+@@ -204,6 +210,7 @@ private:
+     uint32_t m_windowWidth{0};            //!< EvaluateFrameData window width. If 0, nothing is rendered.
+     uint32_t m_outgoingPresetFrameDivisor{1}; //!< Render the outgoing preset every n-th frame during a transition.
+     bool m_directOutput{false};                 //!< The active preset may draw straight into the target framebuffer.
++    int m_lineReferenceHeight{0}; //!< Render height at which quad lines are 1 px wide; 0 for GL lines.
+     uint32_t m_windowHeight{0};           //!< EvaluateFrameData window height. If 0, nothing is rendered.
+     double m_presetDuration{30.0};   //!< Preset duration in seconds.
+     double m_softCutDuration{3.0};   //!< Soft cut transition time.
+diff --git a/src/libprojectM/ProjectMCWrapper.cpp b/src/libprojectM/ProjectMCWrapper.cpp
+index 04bda086d..04cd8d56e 100644
+--- a/src/libprojectM/ProjectMCWrapper.cpp
++++ b/src/libprojectM/ProjectMCWrapper.cpp
+@@ -5,6 +5,7 @@
+ #include <Audio/AudioConstants.hpp>
+ #include <Renderer/Shader.hpp>
+ 
++#include <algorithm>
+ #include <cstring>
+ #include <sstream>
+ 
+@@ -190,6 +191,12 @@ void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled)
+     projectMInstance->SetDirectOutput(enabled);
+ }
+ 
++void projectm_opengl_set_line_reference_height(projectm_handle instance, uint32_t reference_height)
++{
++    auto projectMInstance = handle_to_instance(instance);
++    projectMInstance->SetLineReferenceHeight(static_cast<int>(std::min<uint32_t>(reference_height, 65535)));
++}
++
+ void projectm_opengl_set_texture_pool_limit(size_t max_bytes)
+ {
+     libprojectM::Renderer::Texture::SetPoolLimit(max_bytes);
+diff --git a/src/libprojectM/Renderer/RenderContext.hpp b/src/libprojectM/Renderer/RenderContext.hpp
+index a5a1f9c6e..066c9b4bc 100644
+--- a/src/libprojectM/Renderer/RenderContext.hpp
++++ b/src/libprojectM/Renderer/RenderContext.hpp
+@@ -25,6 +25,7 @@ public:
+     float aspectY{1.0};    //!< Y aspect ratio.
+     float invAspectX{1.0}; //!< Inverse X aspect ratio.
+     float invAspectY{1.0}; //!< Inverse Y aspect ratio.
++    int lineReferenceHeight{0}; //!< Render height at which quad lines are 1 px wide; 0 draws MilkDrop's GL lines.
+ 
+     int perPixelMeshX{64}; //!< Per-pixel/per-vertex mesh X resolution.
+     int perPixelMeshY{48}; //!< Per-pixel/per-vertex mesh Y resolution.
 diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
 index 5a9b54673..7448b05cc 100644
 --- a/tests/libprojectM/CMakeLists.txt
