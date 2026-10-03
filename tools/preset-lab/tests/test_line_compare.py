@@ -101,3 +101,40 @@ def test_failed_presets_are_counted():
     summary = summarize([entry], None)
     assert summary["failed"] == 1
     assert summary["median_deviation"] is None
+
+
+def _nondeterministic(name, ratio=1.3, legacy_hash="new", features=("main_thick",)):
+    entry = _entry(name, ratio, legacy_hash=legacy_hash, features=features, drift={"legacy": .5, "quad": .4})
+    entry["runs"]["legacy-1080-repeat"] = {"status": "success", "mean_luma": .2, "frames_sha256": "other"}
+    entry["nondeterministic"] = True
+    return entry
+
+
+def test_nondeterministic_entries_are_listed_and_excluded_from_statistics():
+    entries = [_entry("a", 1.0, drift={"legacy": .1, "quad": .1}), _nondeterministic("z"), _nondeterministic("b")]
+    summary = summarize(entries, None)
+    assert summary["nondeterministic"] == ["b", "z"]
+    assert summary["beyond_tolerance"] == []
+    assert summary["median_deviation"] == 0
+    assert summary["share_beyond_tolerance"] == 0
+    assert summary["median_ratio_by_feature"] == {"main_thin": pytest.approx(1.0)}
+    assert summary["median_drift"] == {"legacy": pytest.approx(.1), "quad": pytest.approx(.1)}
+    assert summary["failed"] == 0
+
+
+def test_nondeterministic_entries_never_count_as_changed_legacy_frames():
+    baseline = {"presets": [_entry("n", 1.0, legacy_hash="old")]}
+    assert summarize([_nondeterministic("n")], baseline)["legacy_changed"] == []
+
+
+def test_repeat_run_is_not_compared_against_the_baseline():
+    old = _entry("a", 1.0)
+    old["runs"]["legacy-1080-repeat"] = {"status": "success", "mean_luma": .2, "frames_sha256": "old"}
+    new = _entry("a", 1.0)
+    new["runs"]["legacy-1080-repeat"] = {"status": "success", "mean_luma": .2, "frames_sha256": "new"}
+    new["nondeterministic"] = False
+    assert summarize([new], {"presets": [old]})["legacy_changed"] == []
+
+
+def test_deterministic_entries_report_no_nondeterminism():
+    assert summarize([_entry("a", 1.0)], None)["nondeterministic"] == []

@@ -5,6 +5,8 @@ line_reference_height 0 (MilkDrop's 1 px GL lines) and with quad lines scaled to
 Mean luma over the measurement window compares the two. The legacy frames' hash, checked against an
 earlier report, proves the GL-line path unchanged. Line features are read statically from the preset
 file (first occurrence of a key wins, as in the engine); per-frame code can still change them.
+The legacy run at the reference height is rendered twice; presets whose two renders differ are
+nondeterministic (unseeded randomness, wall clock) and are reported but left out of the statistics.
 """
 import hashlib
 import re
@@ -121,8 +123,12 @@ def compare_preset(record: PresetRecord, repo: Path, work: Path, worker: Path, i
             entry["runs"][f"{mode}-{height}"] = measure_run(worker, record, repo, work, identity,
                                                             _config(height, reference), pcm, png, timeout)
     runs = entry["runs"]
+    runs[f"legacy-{REFERENCE_HEIGHT}-repeat"] = measure_run(worker, record, repo, work, identity,
+                                                            _config(REFERENCE_HEIGHT, 0), pcm, None, timeout)
     entry["status"] = "success" if all(run["status"] == "success" for run in runs.values()) else "failed"
     if entry["status"] == "success":
+        entry["nondeterministic"] = (runs[f"legacy-{REFERENCE_HEIGHT}"]["frames_sha256"]
+                                     != runs[f"legacy-{REFERENCE_HEIGHT}-repeat"]["frames_sha256"])
         entry["ratio"] = luma_ratio(runs[f"legacy-{REFERENCE_HEIGHT}"]["mean_luma"],
                                     runs[f"quad-{REFERENCE_HEIGHT}"]["mean_luma"])
         others = sorted(h for h in heights if h != REFERENCE_HEIGHT)
@@ -134,7 +140,9 @@ def compare_preset(record: PresetRecord, repo: Path, work: Path, worker: Path, i
 
 
 def summarize(entries: list[dict], baseline: dict | None) -> dict:
-    done = [e for e in entries if e["status"] == "success"]
+    all_done = [e for e in entries if e["status"] == "success"]
+    unstable = sorted(e["preset"] for e in all_done if e.get("nondeterministic"))
+    done = [e for e in all_done if not e.get("nondeterministic")]
     measured = [e for e in done if e.get("ratio") is not None]
     deviations = [abs(e["ratio"] - 1) for e in measured]
     flagged = sorted(e["preset"] for e in measured if abs(e["ratio"] - 1) > FIDELITY_TOLERANCE)
@@ -150,15 +158,15 @@ def summarize(entries: list[dict], baseline: dict | None) -> dict:
         for e in done:
             old_runs = previous.get(e["preset"], {}).get("runs", {})
             for key, run in sorted(e["runs"].items()):
-                if key.startswith("legacy-") and key in old_runs and old_runs[key].get("frames_sha256") != run["frames_sha256"]:
+                if key.startswith("legacy-") and not key.endswith("-repeat") and key in old_runs and old_runs[key].get("frames_sha256") != run["frames_sha256"]:
                     changed.append(f"{e['preset']} {key}")
-    return {"version": VERSION, "presets": len(entries), "failed": len(entries) - len(done),
+    return {"version": VERSION, "presets": len(entries), "failed": len(entries) - len(all_done),
             "median_deviation": statistics.median(deviations) if deviations else None,
             "share_beyond_tolerance": len(flagged) / len(measured) if measured else None,
             "beyond_tolerance": flagged,
             "median_ratio_by_feature": {f: statistics.median(r) for f, r in sorted(by_feature.items())},
             "median_drift": {m: statistics.median(d) if d else None for m, d in drift.items()},
-            "legacy_changed": changed}
+            "legacy_changed": changed, "nondeterministic": unstable}
 
 
 def run_line_compare(records: list[PresetRecord], repo: Path, work: Path, worker: Path, identity: EngineIdentity,
