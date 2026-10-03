@@ -27,7 +27,9 @@ size when lines are scaled (above the reference area), the size the presets were
 and hash waves' fade (Waveform::MaximizeColors(), by max(width, height)), and the blur levels, made as
 from a source of the reference's size (the render size divided by the line scale) whose first pass
 reads the previous frame's mipmaps (glGenerateMipmap per frame), so blur1-3 keep their size and their
-radius keeps its share of the picture instead of shrinking with the render. Preset code sees that
+radius keeps its share of the picture instead of shrinking with the render. Those mip levels stay
+allocated, so the framebuffer texture pool (0007) counts a texture's whole mip chain
+(Texture::StorageBytes()) against its limit and in projectm_opengl_texture_pool_bytes(). Preset code sees that
 reference-sized canvas too (ShaderCanvasSize()): texsize and texsize_main, mip_x/y/avg and the
 per-frame and per-pixel pixelsx/pixelsy report the render size divided by the line scale, as in
 MilkDrop, where texsize is the internal canvas the preset was tuned on. Texel steps (texsize.zw * k)
@@ -82,7 +84,7 @@ index ee6ae6562..0262cc70a 100644
   * @brief Sets the size of the calling thread's pool of framebuffer textures.
   *
 diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
-index 60d95d267..746f29c0b 100644
+index 60d95d267..a6844a8bf 100644
 --- a/src/libprojectM/MilkdropPreset/BlurTexture.cpp
 +++ b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
 @@ -1,5 +1,6 @@
@@ -118,7 +120,7 @@ index 60d95d267..746f29c0b 100644
  }
  
 -void BlurTexture::Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext)
-+void BlurTexture::Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext, float referenceScale)
++void BlurTexture::Update(Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext, float referenceScale)
  {
      if (m_blurLevel == BlurLevel::None)
      {
@@ -141,7 +143,7 @@ index 60d95d267..746f29c0b 100644
 +    if (scaled)
 +    {
 +        sourceTexture.Bind(0);
-+        glGenerateMipmap(GL_TEXTURE_2D);
++        sourceTexture.GenerateMipmaps(); // counted by the texture pool when the texture is discarded
 +    }
  
      unsigned int const passes = static_cast<int>(m_blurLevel) * 2;
@@ -204,7 +206,7 @@ index 60d95d267..746f29c0b 100644
  
  } // namespace MilkdropPreset
 diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.hpp b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
-index e012ab9ab..6d44b5da6 100644
+index e012ab9ab..9cc69d068 100644
 --- a/src/libprojectM/MilkdropPreset/BlurTexture.hpp
 +++ b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
 @@ -67,8 +67,11 @@ public:
@@ -216,7 +218,7 @@ index e012ab9ab..6d44b5da6 100644
 +     *                       it, so the blurs keep their share of the picture; 0 or 1: from the source.
       */
 -    void Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext);
-+    void Update(const Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext, float referenceScale = 0.0f);
++    void Update(Renderer::Texture& sourceTexture, const PerFrameContext& perFrameContext, float referenceScale = 0.0f);
  
      /**
       * @brief Binds the user-readable blur textures to the texture slots starting with the given index.
@@ -2249,15 +2251,221 @@ index bd7300994..49016b9ba 100644
      GLuint m_shaderProgram{}; //!< The program ID.
      mutable std::unordered_map<std::string, GLint> m_uniformLocations; //!< Uniform locations by name.
  };
+diff --git a/src/libprojectM/Renderer/Texture.cpp b/src/libprojectM/Renderer/Texture.cpp
+index 740f9213c..075018d95 100644
+--- a/src/libprojectM/Renderer/Texture.cpp
++++ b/src/libprojectM/Renderer/Texture.cpp
+@@ -1,5 +1,6 @@
+ #include "Renderer/Texture.hpp"
+ 
++#include <algorithm>
+ #include <deque>
+ #include <utility>
+ 
+@@ -22,6 +23,7 @@ public:
+         GLint internalFormat;
+         GLenum format;
+         GLenum type;
++        bool hasMipmaps;
+         size_t bytes;
+     };
+ 
+@@ -31,31 +33,7 @@ public:
+         return pool;
+     }
+ 
+-    static auto Bytes(int width, int height, GLint internalFormat) -> size_t
+-    {
+-        size_t perPixel = 4;
+-        switch (internalFormat)
+-        {
+-            case GL_R8:
+-            case GL_STENCIL_INDEX8:
+-                perPixel = 1;
+-                break;
+-            case GL_DEPTH_COMPONENT16:
+-                perPixel = 2;
+-                break;
+-            case GL_RGBA16F:
+-                perPixel = 8;
+-                break;
+-            case GL_RGBA32F:
+-                perPixel = 16;
+-                break;
+-            default:
+-                break;
+-        }
+-        return static_cast<size_t>(width) * static_cast<size_t>(height) * perPixel;
+-    }
+-
+-    auto Take(int width, int height, GLint internalFormat, GLenum format, GLenum type) -> GLuint
++    auto Take(int width, int height, GLint internalFormat, GLenum format, GLenum type, bool& hasMipmaps) -> GLuint
+     {
+         for (auto it = m_entries.begin(); it != m_entries.end(); ++it)
+         {
+@@ -63,11 +41,13 @@ public:
+                 it->format == format && it->type == type)
+             {
+                 GLuint id = it->id;
++                hasMipmaps = it->hasMipmaps;
+                 m_bytes -= it->bytes;
+                 m_entries.erase(it);
+                 return id;
+             }
+         }
++        hasMipmaps = false;
+         return 0;
+     }
+ 
+@@ -118,17 +98,58 @@ private:
+ 
+ } // namespace
+ 
+-void Texture::SetPoolable(GLint internalFormat, GLenum format, GLenum type)
++void Texture::SetPoolable(GLint internalFormat, GLenum format, GLenum type, bool hasMipmaps)
+ {
+     m_poolable = true;
+     m_internalFormat = internalFormat;
+     m_format = format;
+     m_type = type;
++    m_hasMipmaps = hasMipmaps;
++}
++
++void Texture::GenerateMipmaps()
++{
++    glBindTexture(m_target, m_textureId);
++    glGenerateMipmap(m_target);
++    m_hasMipmaps = true;
++}
++
++auto Texture::StorageBytes(int width, int height, GLint internalFormat, bool mipmaps) -> size_t
++{
++    size_t perPixel = 4;
++    switch (internalFormat)
++    {
++        case GL_R8:
++        case GL_STENCIL_INDEX8:
++            perPixel = 1;
++            break;
++        case GL_DEPTH_COMPONENT16:
++            perPixel = 2;
++            break;
++        case GL_RGBA16F:
++            perPixel = 8;
++            break;
++        case GL_RGBA32F:
++            perPixel = 16;
++            break;
++        default:
++            break;
++    }
++    size_t pixels = static_cast<size_t>(width) * static_cast<size_t>(height);
++    // glGenerateMipmap makes levels down to 1x1, each dimension halved and rounded down (at least 1).
++    while (mipmaps && (width > 1 || height > 1))
++    {
++        width = std::max(1, width / 2);
++        height = std::max(1, height / 2);
++        pixels += static_cast<size_t>(width) * static_cast<size_t>(height);
++    }
++    return pixels * perPixel;
+ }
+ 
+-auto Texture::TakePooled(int width, int height, GLint internalFormat, GLenum format, GLenum type) -> GLuint
++auto Texture::TakePooled(int width, int height, GLint internalFormat, GLenum format, GLenum type,
++                         bool& hasMipmaps) -> GLuint
+ {
+-    return TexturePool::Instance().Take(width, height, internalFormat, format, type);
++    return TexturePool::Instance().Take(width, height, internalFormat, format, type, hasMipmaps);
+ }
+ 
+ void Texture::SetPoolLimit(size_t maxBytes)
+@@ -189,8 +210,8 @@ Texture::~Texture()
+     if (m_textureId > 0)
+     {
+         if (!m_poolable ||
+-            !TexturePool::Instance().Put({m_textureId, m_width, m_height, m_internalFormat, m_format, m_type,
+-                                          TexturePool::Bytes(m_width, m_height, m_internalFormat)}))
++            !TexturePool::Instance().Put({m_textureId, m_width, m_height, m_internalFormat, m_format, m_type, m_hasMipmaps,
++                                          StorageBytes(m_width, m_height, m_internalFormat, m_hasMipmaps)}))
+         {
+             glDeleteTextures(1, &m_textureId);
+         }
+diff --git a/src/libprojectM/Renderer/Texture.hpp b/src/libprojectM/Renderer/Texture.hpp
+index 2cd5eca6e..4dfb029b3 100644
+--- a/src/libprojectM/Renderer/Texture.hpp
++++ b/src/libprojectM/Renderer/Texture.hpp
+@@ -124,13 +124,27 @@ public:
+     /**
+      * @brief Marks this texture as a framebuffer attachment: when it is destroyed it goes into the
+      *        texture pool (if enabled on this thread) instead of being deleted.
++     * @param hasMipmaps The texture already has mip levels (a pooled texture that had them).
+      */
+-    void SetPoolable(GLint internalFormat, GLenum format, GLenum type);
++    void SetPoolable(GLint internalFormat, GLenum format, GLenum type, bool hasMipmaps = false);
++
++    /**
++     * @brief Generates this texture's mip levels from level 0 (glGenerateMipmap), leaving it bound
++     *        to the active texture unit. The levels stay allocated, so the texture pool counts them.
++     */
++    void GenerateMipmaps();
++
++    /**
++     * @brief Bytes of a texture's storage: level 0, plus every mip level down to 1x1 with mipmaps.
++     */
++    static auto StorageBytes(int width, int height, GLint internalFormat, bool mipmaps) -> size_t;
+ 
+     /**
+      * @brief A pooled texture of this size and format (0 if none), removed from the pool.
++     * @param hasMipmaps Set to whether the returned texture has mip levels.
+      */
+-    static auto TakePooled(int width, int height, GLint internalFormat, GLenum format, GLenum type) -> GLuint;
++    static auto TakePooled(int width, int height, GLint internalFormat, GLenum format, GLenum type,
++                           bool& hasMipmaps) -> GLuint;
+ 
+     /**
+      * @brief Enables the texture pool of the calling thread's context with the given maximum size.
+@@ -163,6 +177,7 @@ private:
+     bool m_isUserTexture{false}; //!< true if it's a user texture, false if an internal one.
+ 
+     bool m_poolable{false};      //!< A framebuffer attachment that goes into the pool when destroyed.
++    bool m_hasMipmaps{false};    //!< Mip levels were generated; their storage stays allocated.
+ 
+     GLint m_internalFormat{}; //!< OpenGL internal format, e.g. GL_RGBA8
+     GLenum m_format{};        //!< OpenGL color format, e.g. GL_RGBA
+diff --git a/src/libprojectM/Renderer/TextureAttachment.cpp b/src/libprojectM/Renderer/TextureAttachment.cpp
+index f2be4ef1c..578ea8330 100644
+--- a/src/libprojectM/Renderer/TextureAttachment.cpp
++++ b/src/libprojectM/Renderer/TextureAttachment.cpp
+@@ -108,8 +108,9 @@ void TextureAttachment::ReplaceTexture(int width, int height)
+ 
+     // A color texture of the same size and format from a discarded preset if the pool has one,
+     // cleared like a new texture: its old contents must never show.
++    bool pooledMipmaps{false};
+     GLuint textureId = m_attachmentType == AttachmentType::Color
+-                           ? Texture::TakePooled(width, height, internalFormat, textureFormat, pixelFormat)
++                           ? Texture::TakePooled(width, height, internalFormat, textureFormat, pixelFormat, pooledMipmaps)
+                            : 0;
+     if (textureId != 0)
+     {
+@@ -133,7 +134,7 @@ void TextureAttachment::ReplaceTexture(int width, int height)
+     m_texture = std::make_shared<class Texture>("", textureId, GL_TEXTURE_2D, width, height, false);
+     if (m_attachmentType == AttachmentType::Color)
+     {
+-        m_texture->SetPoolable(internalFormat, textureFormat, pixelFormat);
++        m_texture->SetPoolable(internalFormat, textureFormat, pixelFormat, pooledMipmaps);
+     }
+ }
+ 
 diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
-index 5a9b54673..7448b05cc 100644
+index 5a9b54673..0e425be73 100644
 --- a/tests/libprojectM/CMakeLists.txt
 +++ b/tests/libprojectM/CMakeLists.txt
-@@ -2,6 +2,7 @@ find_package(GTest 1.10 REQUIRED NO_MODULE)
+@@ -2,6 +2,8 @@ find_package(GTest 1.10 REQUIRED NO_MODULE)
  
  add_executable(projectM-unittest
          HLSLModuloTest.cpp
 +        LineGeometryTest.cpp
++        TexturePoolTest.cpp
          WaveformAlignerTest.cpp
          PresetFileParserTest.cpp
          MilkdropShaderCommentParsingTest.cpp
@@ -2795,4 +3003,162 @@ index 000000000..1f99b61f2
 +    batch.Clear();
 +    EXPECT_TRUE(batch.Points().empty());
 +    EXPECT_EQ(batch.Append(points.data(), points.size(), false).firstPoint, 0);
++}
+diff --git a/tests/libprojectM/TexturePoolTest.cpp b/tests/libprojectM/TexturePoolTest.cpp
+new file mode 100644
+index 000000000..aa2e7e012
+--- /dev/null
++++ b/tests/libprojectM/TexturePoolTest.cpp
+@@ -0,0 +1,152 @@
++#include <Renderer/Texture.hpp>
++
++#include <gtest/gtest.h>
++
++#include <algorithm>
++
++#ifdef __APPLE__
++#include <OpenGL/OpenGL.h>
++#endif
++
++using libprojectM::Renderer::Texture;
++
++TEST(TextureStorageBytes, LevelZeroWithoutMipmaps)
++{
++    EXPECT_EQ(Texture::StorageBytes(4, 4, GL_RGBA8, false), 64u);
++    EXPECT_EQ(Texture::StorageBytes(4, 4, GL_RGBA16F, false), 128u);
++    EXPECT_EQ(Texture::StorageBytes(1920, 1080, GL_RGBA8, false), 1920u * 1080u * 4u);
++}
++
++TEST(TextureStorageBytes, MipChainDownToOnePixel)
++{
++    EXPECT_EQ(Texture::StorageBytes(4, 4, GL_RGBA8, true), (16u + 4u + 1u) * 4u);
++    EXPECT_EQ(Texture::StorageBytes(5, 3, GL_RGBA8, true), (15u + 2u + 1u) * 4u); // 5x3, 2x1, 1x1
++    EXPECT_EQ(Texture::StorageBytes(1, 1, GL_RGBA8, true), 4u);
++
++    size_t levels{};
++    for (int width = 3840, height = 2160;; width = std::max(1, width / 2), height = std::max(1, height / 2))
++    {
++        levels += static_cast<size_t>(width) * static_cast<size_t>(height) * 4u;
++        if (width == 1 && height == 1)
++        {
++            break;
++        }
++    }
++    EXPECT_EQ(Texture::StorageBytes(3840, 2160, GL_RGBA8, true), levels);
++}
++
++// The pool deletes evicted textures, so these tests need a GL context: an offscreen CGL context on macOS.
++class TexturePoolTest : public ::testing::Test
++{
++protected:
++    void SetUp() override
++    {
++#ifdef __APPLE__
++        CGLPixelFormatAttribute attributes[] = {kCGLPFAOpenGLProfile,
++                                                static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++                                                static_cast<CGLPixelFormatAttribute>(0)};
++        CGLPixelFormatObj pixelFormat{};
++        GLint formats{};
++        if (CGLChoosePixelFormat(attributes, &pixelFormat, &formats) != kCGLNoError || pixelFormat == nullptr)
++        {
++            GTEST_SKIP() << "no OpenGL context";
++        }
++        CGLCreateContext(pixelFormat, nullptr, &m_context);
++        CGLDestroyPixelFormat(pixelFormat);
++        if (m_context == nullptr)
++        {
++            GTEST_SKIP() << "no OpenGL context";
++        }
++        CGLSetCurrentContext(m_context);
++#else
++        GTEST_SKIP() << "needs an OpenGL context (macOS CGL)";
++#endif
++    }
++
++    void TearDown() override
++    {
++#ifdef __APPLE__
++        if (m_context != nullptr)
++        {
++            Texture::SetPoolLimit(0);
++            CGLSetCurrentContext(nullptr);
++            CGLDestroyContext(m_context);
++        }
++#endif
++    }
++
++    // A framebuffer-attachment texture, released into the pool (or deleted) when it goes out of scope.
++    static void Release(GLuint id, int width, int height, bool mipmaps, bool generate)
++    {
++        Texture texture("", id, GL_TEXTURE_2D, width, height, false);
++        texture.SetPoolable(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, mipmaps);
++        if (generate)
++        {
++            texture.GenerateMipmaps();
++        }
++    }
++
++    static auto NewTexture(int width, int height) -> GLuint
++    {
++        GLuint id{};
++        glGenTextures(1, &id);
++        glBindTexture(GL_TEXTURE_2D, id);
++        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
++        glBindTexture(GL_TEXTURE_2D, 0);
++        return id;
++    }
++
++    static auto Take(int width, int height, bool& mipmaps) -> GLuint
++    {
++        return Texture::TakePooled(width, height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, mipmaps);
++    }
++
++#ifdef __APPLE__
++    CGLContextObj m_context{};
++#endif
++};
++
++TEST_F(TexturePoolTest, CountsGeneratedMipLevels)
++{
++    const size_t plain = Texture::StorageBytes(64, 32, GL_RGBA8, false);
++    const size_t mipmapped = Texture::StorageBytes(64, 32, GL_RGBA8, true);
++    Texture::SetPoolLimit(1 << 20);
++
++    Release(NewTexture(64, 32), 64, 32, false, false);
++    EXPECT_EQ(Texture::PoolBytes(), plain);
++    Release(NewTexture(64, 32), 64, 32, false, true);
++    EXPECT_EQ(Texture::PoolBytes(), plain + mipmapped);
++
++    // Taken in pool order; a taken texture reports its mip levels, and keeps counting them when it comes back.
++    bool mipmaps{true};
++    GLuint first = Take(64, 32, mipmaps);
++    EXPECT_NE(first, 0u);
++    EXPECT_FALSE(mipmaps);
++    EXPECT_EQ(Texture::PoolBytes(), mipmapped);
++    GLuint second = Take(64, 32, mipmaps);
++    EXPECT_NE(second, 0u);
++    EXPECT_TRUE(mipmaps);
++    EXPECT_EQ(Texture::PoolBytes(), 0u);
++
++    Release(second, 64, 32, mipmaps, false);
++    EXPECT_EQ(Texture::PoolBytes(), mipmapped);
++    glDeleteTextures(1, &first);
++}
++
++TEST_F(TexturePoolTest, LimitIncludesMipLevels)
++{
++    const size_t plain = Texture::StorageBytes(64, 32, GL_RGBA8, false);
++    const size_t mipmapped = Texture::StorageBytes(64, 32, GL_RGBA8, true);
++
++    // Too large for the limit with its mip levels: deleted, not pooled.
++    Texture::SetPoolLimit(mipmapped - 1);
++    Release(NewTexture(64, 32), 64, 32, false, true);
++    EXPECT_EQ(Texture::PoolBytes(), 0u);
++
++    // Room for one mipmapped texture: adding it evicts the older plain one.
++    Texture::SetPoolLimit(mipmapped);
++    Release(NewTexture(64, 32), 64, 32, false, false);
++    EXPECT_EQ(Texture::PoolBytes(), plain);
++    Release(NewTexture(64, 32), 64, 32, false, true);
++    EXPECT_EQ(Texture::PoolBytes(), mipmapped);
 +}
