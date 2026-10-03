@@ -1,0 +1,492 @@
+{
+ "about": "Thick main wave: two slope-aware bands (84c7050, run simplify-head) vs MilkDrop four offset passes (493e173, runs simplify-a / simplify-b). preset-lab line-compare, 1920x1080 reference (line_reference_height 1080), bass-0.30, identical frames in both modes. mean_luma is the window mean.",
+ "synthetic_fdecay0_quad_vs_gl_at_1080": {
+  "columns": [
+   "variant",
+   "lit_px_ratio",
+   "luma_ratio",
+   "quad_4k_over_1080_share",
+   "gl_4k_over_1080_share"
+  ],
+  "rows": [
+   [
+    "circle a1 blend",
+    0.9996,
+    0.9995,
+    1.0,
+    0.4996
+   ],
+   [
+    "circle a0.4 blend",
+    0.9996,
+    0.9989,
+    1.0005,
+    0.4997
+   ],
+   [
+    "circle a0.4 add",
+    0.9996,
+    0.9987,
+    1.0009,
+    0.4997
+   ],
+   [
+    "line a1 blend",
+    1.0002,
+    1.0002,
+    0.9993,
+    0.4998
+   ],
+   [
+    "line a0.4 blend",
+    1.0002,
+    1.0004,
+    0.9992,
+    0.4998
+   ],
+   [
+    "line a0.4 add",
+    1.0002,
+    1.0004,
+    0.9991,
+    0.4998
+   ],
+   [
+    "diag45 a1 blend",
+    1.0003,
+    1.0004,
+    0.9994,
+    0.4998
+   ],
+   [
+    "diag45 a0.4 blend",
+    1.0003,
+    1.0011,
+    0.9989,
+    0.4998
+   ],
+   [
+    "diag45 a0.4 add",
+    1.0003,
+    1.0013,
+    0.9987,
+    0.4998
+   ]
+  ]
+ },
+ "fixed_list_summary": {
+  "main_thick_median_ratio_before": 0.865,
+  "main_thick_median_ratio_after": 1.004,
+  "beyond_tolerance_before": [
+   "$$$ Royal - Mashup (191).milk"
+  ],
+  "beyond_tolerance_after": []
+ },
+ "line_compare_reports": {
+  "simplify-head": {
+   "engine": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "instrumentation_sha256": "936dda630b874583d582ba66ae1eda35d531e43f9c2a2c11d4909bce9d769057",
+    "patches_sha256": "af1c0977afe340a1806d0185d747292f024894ccd4440123a9c3ecd52d4e786c"
+   },
+   "summary": {
+    "beyond_tolerance": [
+     "$$$ Royal - Mashup (191).milk"
+    ],
+    "failed": 0,
+    "legacy_changed": [],
+    "median_deviation": 0.13544469672230353,
+    "median_drift": {
+     "legacy": 0.11844730849322582,
+     "quad": 0.038002504413647886
+    },
+    "median_ratio_by_feature": {
+     "main_thick": 0.8650081455795147
+    },
+    "new_failures": [],
+    "nondeterministic": [],
+    "presets": 2,
+    "share_beyond_tolerance": 0.5,
+    "version": "line-compare-v1"
+   },
+   "presets": [
+    {
+     "drift": {
+      "legacy": 0.18307262543041514,
+      "quad": 0.06547597632160562
+     },
+     "features": [
+      "main_thick"
+     ],
+     "frames": "0cc89699ec17308d",
+     "nondeterministic": false,
+     "preset": "$$$ Royal - Mashup (191).milk",
+     "ratio": 0.7295634488572111,
+     "runs": {
+      "legacy-1080": {
+       "frames_sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+       "mean_luma": 0.06831206570689877,
+       "status": "success"
+      },
+      "legacy-1080-repeat": {
+       "frames_sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+       "mean_luma": 0.06831206570689877,
+       "status": "success"
+      },
+      "legacy-1440": {
+       "frames_sha256": "38b9a166d25c1f6ab2f130252c3ac0986f257f7873e0b0326dba3a27035c580c",
+       "mean_luma": 0.04991167656456431,
+       "status": "success"
+      },
+      "legacy-2160": {
+       "frames_sha256": "53c56754273388c0eb952d7171ce49cfdbb70c196171ef46a01570c36936f0db",
+       "mean_luma": 0.06109683445344369,
+       "status": "success"
+      },
+      "quad-1080": {
+       "frames_sha256": "f7ffc545c673bd7b150de4aa335f04ca68e14ac3cfa3f07a7db7486791cbd821",
+       "mean_luma": 0.04983798625568549,
+       "status": "success"
+      },
+      "quad-1440": {
+       "frames_sha256": "d6f8eb31890f09164d448762fc21c82e901b3a5f6b2683c6c8dbc9af72e33d9c",
+       "mean_luma": 0.21785452999174595,
+       "status": "success"
+      },
+      "quad-2160": {
+       "frames_sha256": "bcf3824e8993003cab3a082e29bbdb4e5223748789d4d5c980aff7a81fd6d9d5",
+       "mean_luma": 0.2331181697547436,
+       "status": "success"
+      }
+     },
+     "status": "success"
+    },
+    {
+     "drift": {
+      "legacy": 0.05382199155603651,
+      "quad": 0.01052903250569015
+     },
+     "features": [
+      "main_thick"
+     ],
+     "frames": "851a3d1b5ec15c7e",
+     "nondeterministic": false,
+     "preset": "Serge + 158 002.milk",
+     "ratio": 1.0004528423018182,
+     "runs": {
+      "legacy-1080": {
+       "frames_sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+       "mean_luma": 0.3319852086404959,
+       "status": "success"
+      },
+      "legacy-1080-repeat": {
+       "frames_sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+       "mean_luma": 0.3319852086404959,
+       "status": "success"
+      },
+      "legacy-1440": {
+       "frames_sha256": "11a11424e8b523dadae09259b6536baebbafd777c66e509bbf7e924d7d8a63c2",
+       "mean_luma": 0.31596715611716114,
+       "status": "success"
+      },
+      "legacy-2160": {
+       "frames_sha256": "43590f9e91c289901e335cefbb58c31d11a6e8eeea035ca93c591b2ad45fa389",
+       "mean_luma": 0.2998297232824067,
+       "status": "success"
+      },
+      "quad-1080": {
+       "frames_sha256": "93791ba6d7cc8c7d989f35da98009d31b41572a7b0c61be40b9d1427e80263eb",
+       "mean_luma": 0.3321355455865463,
+       "status": "success"
+      },
+      "quad-1440": {
+       "frames_sha256": "e991907344f329dc6ac71de364f4a9b1b11e28c25b31200b0a66b6724f8434f9",
+       "mean_luma": 0.3285428483660022,
+       "status": "success"
+      },
+      "quad-2160": {
+       "frames_sha256": "4d3e0fc9d80696db9e876979a585684856bbbc3573a4a5453bcca001d51d6821",
+       "mean_luma": 0.3251196529716253,
+       "status": "success"
+      }
+     },
+     "status": "success"
+    }
+   ]
+  },
+  "simplify-a": {
+   "engine": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "instrumentation_sha256": "936dda630b874583d582ba66ae1eda35d531e43f9c2a2c11d4909bce9d769057",
+    "patches_sha256": "d7a0f48d005dcd11084f89debacadfb83db1b23c1a50ceed1c59d699b05bf1a0"
+   },
+   "summary": {
+    "beyond_tolerance": [],
+    "failed": 0,
+    "legacy_changed": [],
+    "median_deviation": 0.00043009537748411875,
+    "median_drift": {
+     "legacy": 0.06640935671635106,
+     "quad": 0.01968496687123278
+    },
+    "median_ratio_by_feature": {
+     "custom_dots": 0.999687638114841,
+     "custom_thick": 1.0000041989828212,
+     "custom_thin": 0.9993710772468606,
+     "main_dots": 0.9993710772468606,
+     "main_thick": 1.003833912650998,
+     "main_thin": 1.0000533991877478,
+     "motion_vectors": 1.040265704808497,
+     "shape_thick": 1.0,
+     "shape_thin": 1.0002312680018288
+    },
+    "new_failures": [],
+    "nondeterministic": [],
+    "presets": 11,
+    "share_beyond_tolerance": 0.0,
+    "version": "line-compare-v1"
+   },
+   "presets": [
+    {
+     "drift": {
+      "legacy": 0.18307262543041514,
+      "quad": 0.12752808726152143
+     },
+     "features": [
+      "main_thick"
+     ],
+     "frames": "0cc89699ec17308d",
+     "nondeterministic": false,
+     "preset": "$$$ Royal - Mashup (191).milk",
+     "ratio": 1.0076696923316149,
+     "runs": {
+      "legacy-1080": {
+       "frames_sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+       "mean_luma": 0.06831206570689877,
+       "status": "success"
+      },
+      "legacy-1080-repeat": {
+       "frames_sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+       "mean_luma": 0.06831206570689877,
+       "status": "success"
+      },
+      "legacy-1440": {
+       "frames_sha256": "38b9a166d25c1f6ab2f130252c3ac0986f257f7873e0b0326dba3a27035c580c",
+       "mean_luma": 0.04991167656456431,
+       "status": "success"
+      },
+      "legacy-2160": {
+       "frames_sha256": "53c56754273388c0eb952d7171ce49cfdbb70c196171ef46a01570c36936f0db",
+       "mean_luma": 0.06109683445344369,
+       "status": "success"
+      },
+      "quad-1080": {
+       "frames_sha256": "b68d7343b8c88a8a8a82e11dbbde2672dcbc704092d69e3a3954d245e44b49be",
+       "mean_luma": 0.06883599823340773,
+       "status": "success"
+      },
+      "quad-1440": {
+       "frames_sha256": "cd439d7308afe7c6c17520b8c1cbf5864083b5607ea01f222e52c800afded8b6",
+       "mean_luma": 0.22428314673403899,
+       "status": "success"
+      },
+      "quad-2160": {
+       "frames_sha256": "1515de544ecd84a59d1ecb104a2de31425f3bd0cd939d06bf6c1c350e0d2b56c",
+       "mean_luma": 0.257066323235631,
+       "status": "success"
+      }
+     },
+     "status": "success"
+    },
+    {
+     "drift": {
+      "legacy": 0.05382199155603651,
+      "quad": 0.011555131485084136
+     },
+     "features": [
+      "main_thick"
+     ],
+     "frames": "851a3d1b5ec15c7e",
+     "nondeterministic": false,
+     "preset": "Serge + 158 002.milk",
+     "ratio": 0.9999981329703814,
+     "runs": {
+      "legacy-1080": {
+       "frames_sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+       "mean_luma": 0.3319852086404959,
+       "status": "success"
+      },
+      "legacy-1080-repeat": {
+       "frames_sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+       "mean_luma": 0.3319852086404959,
+       "status": "success"
+      },
+      "legacy-1440": {
+       "frames_sha256": "11a11424e8b523dadae09259b6536baebbafd777c66e509bbf7e924d7d8a63c2",
+       "mean_luma": 0.31596715611716114,
+       "status": "success"
+      },
+      "legacy-2160": {
+       "frames_sha256": "43590f9e91c289901e335cefbb58c31d11a6e8eeea035ca93c591b2ad45fa389",
+       "mean_luma": 0.2998297232824067,
+       "status": "success"
+      },
+      "quad-1080": {
+       "frames_sha256": "e122a2f4e0c8a268ee8ed096e6213d544e10ff441e374d28ea9e2baaaced3c71",
+       "mean_luma": 0.33198458881427845,
+       "status": "success"
+      },
+      "quad-1440": {
+       "frames_sha256": "84235e695780a4b4c5c7f8ac209081f9a99e592cddf8f3d965a53c1135aea15a",
+       "mean_luma": 0.3286801970253388,
+       "status": "success"
+      },
+      "quad-2160": {
+       "frames_sha256": "5143ca00d8cfd6d083dd032a4aef004c691e754ebab8636f17038a7403a928a1",
+       "mean_luma": 0.32492563854902984,
+       "status": "success"
+      }
+     },
+     "status": "success"
+    }
+   ]
+  },
+  "simplify-b": {
+   "engine": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e",
+    "patches_sha256": "16e8c27bb11f953874dd1fc3ccc6256b77c2f0cc828f645755c4ef5f1d27840d"
+   },
+   "summary": {
+    "beyond_tolerance": [],
+    "failed": 0,
+    "legacy_changed": [],
+    "median_deviation": 0.00043009537748411875,
+    "median_drift": {
+     "legacy": 0.06640935671635106,
+     "quad": 0.01968496687123278
+    },
+    "median_ratio_by_feature": {
+     "custom_dots": 0.999687638114841,
+     "custom_thick": 1.0000041989828212,
+     "custom_thin": 0.9993710772468606,
+     "main_dots": 0.9993710772468606,
+     "main_thick": 1.003833912650998,
+     "main_thin": 1.0000533991877478,
+     "motion_vectors": 1.040265704808497,
+     "shape_thick": 1.0,
+     "shape_thin": 1.0002312680018288
+    },
+    "new_failures": [],
+    "nondeterministic": [],
+    "presets": 11,
+    "share_beyond_tolerance": 0.0,
+    "version": "line-compare-v1"
+   },
+   "presets": [
+    {
+     "drift": {
+      "legacy": 0.18307262543041514,
+      "quad": 0.12752808726152143
+     },
+     "features": [
+      "main_thick"
+     ],
+     "frames": "0cc89699ec17308d",
+     "nondeterministic": false,
+     "preset": "$$$ Royal - Mashup (191).milk",
+     "ratio": 1.0076696923316149,
+     "runs": {
+      "legacy-1080": {
+       "frames_sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+       "mean_luma": 0.06831206570689877,
+       "status": "success"
+      },
+      "legacy-1080-repeat": {
+       "frames_sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+       "mean_luma": 0.06831206570689877,
+       "status": "success"
+      },
+      "legacy-1440": {
+       "frames_sha256": "38b9a166d25c1f6ab2f130252c3ac0986f257f7873e0b0326dba3a27035c580c",
+       "mean_luma": 0.04991167656456431,
+       "status": "success"
+      },
+      "legacy-2160": {
+       "frames_sha256": "53c56754273388c0eb952d7171ce49cfdbb70c196171ef46a01570c36936f0db",
+       "mean_luma": 0.06109683445344369,
+       "status": "success"
+      },
+      "quad-1080": {
+       "frames_sha256": "b68d7343b8c88a8a8a82e11dbbde2672dcbc704092d69e3a3954d245e44b49be",
+       "mean_luma": 0.06883599823340773,
+       "status": "success"
+      },
+      "quad-1440": {
+       "frames_sha256": "cd439d7308afe7c6c17520b8c1cbf5864083b5607ea01f222e52c800afded8b6",
+       "mean_luma": 0.22428314673403899,
+       "status": "success"
+      },
+      "quad-2160": {
+       "frames_sha256": "1515de544ecd84a59d1ecb104a2de31425f3bd0cd939d06bf6c1c350e0d2b56c",
+       "mean_luma": 0.257066323235631,
+       "status": "success"
+      }
+     },
+     "status": "success"
+    },
+    {
+     "drift": {
+      "legacy": 0.05382199155603651,
+      "quad": 0.011555131485084136
+     },
+     "features": [
+      "main_thick"
+     ],
+     "frames": "851a3d1b5ec15c7e",
+     "nondeterministic": false,
+     "preset": "Serge + 158 002.milk",
+     "ratio": 0.9999981329703814,
+     "runs": {
+      "legacy-1080": {
+       "frames_sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+       "mean_luma": 0.3319852086404959,
+       "status": "success"
+      },
+      "legacy-1080-repeat": {
+       "frames_sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+       "mean_luma": 0.3319852086404959,
+       "status": "success"
+      },
+      "legacy-1440": {
+       "frames_sha256": "11a11424e8b523dadae09259b6536baebbafd777c66e509bbf7e924d7d8a63c2",
+       "mean_luma": 0.31596715611716114,
+       "status": "success"
+      },
+      "legacy-2160": {
+       "frames_sha256": "43590f9e91c289901e335cefbb58c31d11a6e8eeea035ca93c591b2ad45fa389",
+       "mean_luma": 0.2998297232824067,
+       "status": "success"
+      },
+      "quad-1080": {
+       "frames_sha256": "e122a2f4e0c8a268ee8ed096e6213d544e10ff441e374d28ea9e2baaaced3c71",
+       "mean_luma": 0.33198458881427845,
+       "status": "success"
+      },
+      "quad-1440": {
+       "frames_sha256": "84235e695780a4b4c5c7f8ac209081f9a99e592cddf8f3d965a53c1135aea15a",
+       "mean_luma": 0.3286801970253388,
+       "status": "success"
+      },
+      "quad-2160": {
+       "frames_sha256": "5143ca00d8cfd6d083dd032a4aef004c691e754ebab8636f17038a7403a928a1",
+       "mean_luma": 0.32492563854902984,
+       "status": "success"
+      }
+     },
+     "status": "success"
+    }
+   ]
+  }
+ }
+}

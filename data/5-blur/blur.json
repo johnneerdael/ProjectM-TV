@@ -1,0 +1,1716 @@
+{
+ "about": "Blur textures built at the reference size (render size / LineScale) above the reference. Prototype variant \"blur\" on top of the 103 sample-count fix (\"base\"). Mean luma over frames 120-240, bass-0.30; *_ratio = vs classic 1024x768, *_ratio169 = vs classic 1182x665. Final build (1cdb714) is frame-identical to this prototype (final-measure parity 18/18).",
+ "summary": {
+  "base": {
+   "q1080_vs169": {
+    "median": 1.01,
+    "within10": 17
+   },
+   "q1080": {
+    "n": 18,
+    "median": 0.996,
+    "within10": 10,
+    "within25": 12,
+    "changed": []
+   },
+   "q4k_vs169": {
+    "median": 1.017,
+    "within10": 10
+   },
+   "q4k": {
+    "n": 18,
+    "median": 1.018,
+    "within10": 8,
+    "within25": 10,
+    "changed": []
+   },
+   "classic_identical": "18/18"
+  },
+  "mc": {
+   "q1080_vs169": {
+    "median": 1.01,
+    "within10": 17
+   },
+   "q1080": {
+    "n": 18,
+    "median": 0.996,
+    "within10": 10,
+    "within25": 12,
+    "changed": [
+     "Fvese-mvfun2.milk"
+    ]
+   },
+   "q4k_vs169": {
+    "median": 1.017,
+    "within10": 10
+   },
+   "q4k": {
+    "n": 18,
+    "median": 1.018,
+    "within10": 8,
+    "within25": 10,
+    "changed": [
+     "Fvese-mvfun2.milk"
+    ]
+   },
+   "classic_identical": "18/18"
+  },
+  "mv": {
+   "q1080_vs169": {
+    "median": 1.022,
+    "within10": 16
+   },
+   "q1080": {
+    "n": 18,
+    "median": 1.003,
+    "within10": 9,
+    "within25": 12,
+    "changed": [
+     "$$$ Royal - Mashup (103).milk",
+     "Fvese-mvfun2.milk",
+     "suksma - penattrition - geiss crossfire shaders nz+.milk"
+    ]
+   },
+   "q4k_vs169": {
+    "median": 1.026,
+    "within10": 11
+   },
+   "q4k": {
+    "n": 18,
+    "median": 1.044,
+    "within10": 8,
+    "within25": 10,
+    "changed": [
+     "$$$ Royal - Mashup (103).milk",
+     "Fvese-mvfun2.milk",
+     "suksma - penattrition - geiss crossfire shaders nz+.milk"
+    ]
+   },
+   "classic_identical": "18/18"
+  },
+  "blur": {
+   "q1080_vs169": {
+    "median": 1.014,
+    "within10": 17
+   },
+   "q1080": {
+    "n": 18,
+    "median": 1.018,
+    "within10": 9,
+    "within25": 13,
+    "changed": [
+     "$$$ Royal - Mashup (162).milk",
+     "$$$ Royal - Mashup (191).milk",
+     "$$$ Royal - Mashup (397).milk",
+     "Flexi - alien complex 03.milk",
+     "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+     "Serge + 158 002.milk",
+     "Serge circles005b.milk",
+     "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+     "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+     "fat cancer tour meant t nz+.milk",
+     "rce-ordinary - want.milk",
+     "shifter - spincycle(remix) - love at home - q load.milk",
+     "suksma - bleuneycombinatoriccitensor.milk",
+     "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk"
+    ]
+   },
+   "q4k_vs169": {
+    "median": 1.042,
+    "within10": 14
+   },
+   "q4k": {
+    "n": 18,
+    "median": 1.058,
+    "within10": 7,
+    "within25": 13,
+    "changed": [
+     "$$$ Royal - Mashup (162).milk",
+     "$$$ Royal - Mashup (191).milk",
+     "$$$ Royal - Mashup (397).milk",
+     "Flexi - alien complex 03.milk",
+     "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+     "Serge + 158 002.milk",
+     "Serge circles005b.milk",
+     "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+     "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+     "fat cancer tour meant t nz+.milk",
+     "rce-ordinary - want.milk",
+     "shifter - spincycle(remix) - love at home - q load.milk",
+     "suksma - bleuneycombinatoriccitensor.milk",
+     "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk"
+    ]
+   },
+   "classic_identical": "18/18"
+  },
+  "all": {
+   "q1080_vs169": {
+    "median": 1.035,
+    "within10": 16
+   },
+   "q1080": {
+    "n": 18,
+    "median": 1.06,
+    "within10": 8,
+    "within25": 13,
+    "changed": [
+     "$$$ Royal - Mashup (103).milk",
+     "$$$ Royal - Mashup (162).milk",
+     "$$$ Royal - Mashup (191).milk",
+     "$$$ Royal - Mashup (397).milk",
+     "Flexi - alien complex 03.milk",
+     "Fvese-mvfun2.milk",
+     "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+     "Serge + 158 002.milk",
+     "Serge circles005b.milk",
+     "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+     "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+     "fat cancer tour meant t nz+.milk",
+     "rce-ordinary - want.milk",
+     "shifter - spincycle(remix) - love at home - q load.milk",
+     "suksma - bleuneycombinatoriccitensor.milk",
+     "suksma - penattrition - geiss crossfire shaders nz+.milk",
+     "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk"
+    ]
+   },
+   "q4k_vs169": {
+    "median": 1.046,
+    "within10": 15
+   },
+   "q4k": {
+    "n": 18,
+    "median": 1.075,
+    "within10": 7,
+    "within25": 13,
+    "changed": [
+     "$$$ Royal - Mashup (103).milk",
+     "$$$ Royal - Mashup (162).milk",
+     "$$$ Royal - Mashup (191).milk",
+     "$$$ Royal - Mashup (397).milk",
+     "Flexi - alien complex 03.milk",
+     "Fvese-mvfun2.milk",
+     "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+     "Serge + 158 002.milk",
+     "Serge circles005b.milk",
+     "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+     "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+     "fat cancer tour meant t nz+.milk",
+     "rce-ordinary - want.milk",
+     "shifter - spincycle(remix) - love at home - q load.milk",
+     "suksma - bleuneycombinatoriccitensor.milk",
+     "suksma - penattrition - geiss crossfire shaders nz+.milk",
+     "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk"
+    ]
+   },
+   "classic_identical": "18/18"
+  }
+ },
+ "rows": {
+  "$$$ Royal - Mashup (103).milk": {
+   "gt_1024x768": 0.21917,
+   "gt_1182x665": 0.2081,
+   "base": {
+    "q1080": 0.21086,
+    "q1080_ratio": 0.962,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.013,
+    "q4k": 0.2328,
+    "q4k_ratio": 1.062,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.119,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.21086,
+    "q1080_ratio": 0.962,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.013,
+    "q4k": 0.2328,
+    "q4k_ratio": 1.062,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.119,
+    "classic_identical": true
+   }
+  },
+  "$$$ Royal - Mashup (162).milk": {
+   "gt_1024x768": 0.13671,
+   "gt_1182x665": 0.1418,
+   "base": {
+    "q1080": 0.14797,
+    "q1080_ratio": 1.082,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.044,
+    "q4k": 0.14406,
+    "q4k_ratio": 1.054,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.016,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.14845,
+    "q1080_ratio": 1.086,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.047,
+    "q4k": 0.14488,
+    "q4k_ratio": 1.06,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.022,
+    "classic_identical": true
+   }
+  },
+  "$$$ Royal - Mashup (191).milk": {
+   "gt_1024x768": 0.15659,
+   "gt_1182x665": 0.02645,
+   "base": {
+    "q1080": 0.36531,
+    "q1080_ratio": 2.333,
+    "q1080_changed": false,
+    "q1080_ratio169": 13.811,
+    "q4k": 0.2986,
+    "q4k_ratio": 1.907,
+    "q4k_changed": false,
+    "q4k_ratio169": 11.289,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.36922,
+    "q1080_ratio": 2.358,
+    "q1080_changed": true,
+    "q1080_ratio169": 13.959,
+    "q4k": 0.30883,
+    "q4k_ratio": 1.972,
+    "q4k_changed": true,
+    "q4k_ratio169": 11.676,
+    "classic_identical": true
+   }
+  },
+  "$$$ Royal - Mashup (397).milk": {
+   "gt_1024x768": 0.05499,
+   "gt_1182x665": 0.03968,
+   "base": {
+    "q1080": 0.03967,
+    "q1080_ratio": 0.721,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.0,
+    "q4k": 0.03853,
+    "q4k_ratio": 0.701,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.971,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.04179,
+    "q1080_ratio": 0.76,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.053,
+    "q4k": 0.04275,
+    "q4k_ratio": 0.777,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.077,
+    "classic_identical": true
+   }
+  },
+  "Flexi - alien complex 03.milk": {
+   "gt_1024x768": 0.57745,
+   "gt_1182x665": 0.5746,
+   "base": {
+    "q1080": 0.56679,
+    "q1080_ratio": 0.982,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.986,
+    "q4k": 0.55103,
+    "q4k_ratio": 0.954,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.959,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.59931,
+    "q1080_ratio": 1.038,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.043,
+    "q4k": 0.61006,
+    "q4k_ratio": 1.056,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.062,
+    "classic_identical": true
+   }
+  },
+  "Fvese-mvfun2.milk": {
+   "gt_1024x768": 0.46534,
+   "gt_1182x665": 0.62386,
+   "base": {
+    "q1080": 0.62746,
+    "q1080_ratio": 1.348,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.006,
+    "q4k": 0.63521,
+    "q4k_ratio": 1.365,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.018,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.62746,
+    "q1080_ratio": 1.348,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.006,
+    "q4k": 0.63521,
+    "q4k_ratio": 1.365,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.018,
+    "classic_identical": true
+   }
+  },
+  "Goody's Trichromatic Mind Games.milk": {
+   "gt_1024x768": 0.05679,
+   "gt_1182x665": 0.07683,
+   "base": {
+    "q1080": 0.07901,
+    "q1080_ratio": 1.391,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.028,
+    "q4k": 0.08113,
+    "q4k_ratio": 1.429,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.056,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.07901,
+    "q1080_ratio": 1.391,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.028,
+    "q4k": 0.08113,
+    "q4k_ratio": 1.429,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.056,
+    "classic_identical": true
+   }
+  },
+  "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk": {
+   "gt_1024x768": 0.24113,
+   "gt_1182x665": 0.2586,
+   "base": {
+    "q1080": 0.27995,
+    "q1080_ratio": 1.161,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.083,
+    "q4k": 0.28753,
+    "q4k_ratio": 1.192,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.112,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.27402,
+    "q1080_ratio": 1.136,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.06,
+    "q4k": 0.27662,
+    "q4k_ratio": 1.147,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.07,
+    "classic_identical": true
+   }
+  },
+  "Serge + 158 002.milk": {
+   "gt_1024x768": 0.38478,
+   "gt_1182x665": 0.37141,
+   "base": {
+    "q1080": 0.36205,
+    "q1080_ratio": 0.941,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.975,
+    "q4k": 0.35315,
+    "q4k_ratio": 0.918,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.951,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.36938,
+    "q1080_ratio": 0.96,
+    "q1080_changed": true,
+    "q1080_ratio169": 0.995,
+    "q4k": 0.36668,
+    "q4k_ratio": 0.953,
+    "q4k_changed": true,
+    "q4k_ratio169": 0.987,
+    "classic_identical": true
+   }
+  },
+  "Serge circles005b.milk": {
+   "gt_1024x768": 0.29607,
+   "gt_1182x665": 0.42676,
+   "base": {
+    "q1080": 0.41372,
+    "q1080_ratio": 1.397,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.969,
+    "q4k": 0.55712,
+    "q4k_ratio": 1.882,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.305,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.41568,
+    "q1080_ratio": 1.404,
+    "q1080_changed": true,
+    "q1080_ratio169": 0.974,
+    "q4k": 0.57846,
+    "q4k_ratio": 1.954,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.355,
+    "classic_identical": true
+   }
+  },
+  "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk": {
+   "gt_1024x768": 0.68144,
+   "gt_1182x665": 0.69762,
+   "base": {
+    "q1080": 0.65144,
+    "q1080_ratio": 0.956,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.934,
+    "q4k": 0.65966,
+    "q4k_ratio": 0.968,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.946,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.64145,
+    "q1080_ratio": 0.941,
+    "q1080_changed": true,
+    "q1080_ratio169": 0.919,
+    "q4k": 0.69192,
+    "q4k_ratio": 1.015,
+    "q4k_changed": true,
+    "q4k_ratio169": 0.992,
+    "classic_identical": true
+   }
+  },
+  "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk": {
+   "gt_1024x768": 0.54602,
+   "gt_1182x665": 0.4856,
+   "base": {
+    "q1080": 0.50897,
+    "q1080_ratio": 0.932,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.048,
+    "q4k": 0.39489,
+    "q4k_ratio": 0.723,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.813,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.44887,
+    "q1080_ratio": 0.822,
+    "q1080_changed": true,
+    "q1080_ratio169": 0.924,
+    "q4k": 0.46541,
+    "q4k_ratio": 0.852,
+    "q4k_changed": true,
+    "q4k_ratio169": 0.958,
+    "classic_identical": true
+   }
+  },
+  "fat cancer tour meant t nz+.milk": {
+   "gt_1024x768": 0.19128,
+   "gt_1182x665": 0.21413,
+   "base": {
+    "q1080": 0.23434,
+    "q1080_ratio": 1.225,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.094,
+    "q4k": 0.24304,
+    "q4k_ratio": 1.271,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.135,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.21718,
+    "q1080_ratio": 1.135,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.014,
+    "q4k": 0.2131,
+    "q4k_ratio": 1.114,
+    "q4k_changed": true,
+    "q4k_ratio169": 0.995,
+    "classic_identical": true
+   }
+  },
+  "rce-ordinary - want.milk": {
+   "gt_1024x768": 0.61771,
+   "gt_1182x665": 0.60733,
+   "base": {
+    "q1080": 0.61647,
+    "q1080_ratio": 0.998,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.015,
+    "q4k": 0.63902,
+    "q4k_ratio": 1.034,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.052,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.61538,
+    "q1080_ratio": 0.996,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.013,
+    "q4k": 0.62474,
+    "q4k_ratio": 1.011,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.029,
+    "classic_identical": true
+   }
+  },
+  "shifter - spincycle(remix) - love at home - q load.milk": {
+   "gt_1024x768": 0.99345,
+   "gt_1182x665": 0.91612,
+   "base": {
+    "q1080": 0.98981,
+    "q1080_ratio": 0.996,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.08,
+    "q4k": 0.99523,
+    "q4k_ratio": 1.002,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.086,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.99254,
+    "q1080_ratio": 0.999,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.083,
+    "q4k": 0.99846,
+    "q4k_ratio": 1.005,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.09,
+    "classic_identical": true
+   }
+  },
+  "suksma - bleuneycombinatoriccitensor.milk": {
+   "gt_1024x768": 0.26257,
+   "gt_1182x665": 0.02953,
+   "base": {
+    "q1080": 0.02937,
+    "q1080_ratio": 0.112,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.995,
+    "q4k": 0.02832,
+    "q4k_ratio": 0.108,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.959,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.02947,
+    "q1080_ratio": 0.112,
+    "q1080_changed": true,
+    "q1080_ratio169": 0.998,
+    "q4k": 0.02765,
+    "q4k_ratio": 0.105,
+    "q4k_changed": true,
+    "q4k_ratio169": 0.936,
+    "classic_identical": true
+   }
+  },
+  "suksma - penattrition - geiss crossfire shaders nz+.milk": {
+   "gt_1024x768": 0.3135,
+   "gt_1182x665": 0.32995,
+   "base": {
+    "q1080": 0.31256,
+    "q1080_ratio": 0.997,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.947,
+    "q4k": 0.23965,
+    "q4k_ratio": 0.764,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.726,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.31256,
+    "q1080_ratio": 0.997,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.947,
+    "q4k": 0.23965,
+    "q4k_ratio": 0.764,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.726,
+    "classic_identical": true
+   }
+  },
+  "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk": {
+   "gt_1024x768": 0.04683,
+   "gt_1182x665": 0.04742,
+   "base": {
+    "q1080": 0.04473,
+    "q1080_ratio": 0.955,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.943,
+    "q4k": 0.04253,
+    "q4k_ratio": 0.908,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.897,
+    "classic_identical": true
+   },
+   "blur": {
+    "q1080": 0.05067,
+    "q1080_ratio": 1.082,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.069,
+    "q4k": 0.05161,
+    "q4k_ratio": 1.102,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.088,
+    "classic_identical": true
+   }
+  }
+ },
+ "tv_am6_2160_silence": {
+  "summary": {
+   "tony-2160": {
+    "release_runs": [
+     10.72,
+     10.66
+    ],
+    "profile_runs": [
+     11.31,
+     11.33
+    ],
+    "release_mean": 10.69,
+    "profile_mean": 11.32,
+    "delta_pct": 5.89,
+    "paired_delta_pct": {
+     "r1": 5.5,
+     "r2": 6.29
+    },
+    "paired_mean_pct": 5.89,
+    "gpu_util": [
+     [
+      99,
+      99
+     ],
+     [
+      99,
+      98.8
+     ]
+    ],
+    "audio": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "surface": [
+     "3840x2160"
+    ]
+   },
+   "fatc-2160": {
+    "release_runs": [
+     7.35,
+     7.33
+    ],
+    "profile_runs": [
+     9.05,
+     9.19
+    ],
+    "release_mean": 7.34,
+    "profile_mean": 9.12,
+    "delta_pct": 24.25,
+    "paired_delta_pct": {
+     "r1": 23.13,
+     "r2": 25.38
+    },
+    "paired_mean_pct": 24.25,
+    "gpu_util": [
+     [
+      99.3,
+      99
+     ],
+     [
+      99.2,
+      99.2
+     ]
+    ],
+    "audio": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
+    "surface": [
+     "3840x2160"
+    ]
+   }
+  },
+  "runs": {
+   "tony-2160": {
+    "release": [
+     {
+      "n": 12,
+      "mean": 10.72,
+      "min": 10.5,
+      "max": 11.0,
+      "samples": [
+       10.7,
+       10.5,
+       11.0,
+       10.5,
+       10.9,
+       10.6,
+       10.7,
+       10.7,
+       10.8,
+       10.8,
+       10.8,
+       10.6
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       44.8,
+       44.7,
+       45.1,
+       45.2,
+       45.4,
+       45.2
+      ],
+      "benchmark": "BENCHMARK preset='TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "tony-2160-release-r1",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     },
+     {
+      "n": 12,
+      "mean": 10.66,
+      "min": 10.5,
+      "max": 10.9,
+      "samples": [
+       10.9,
+       10.7,
+       10.7,
+       10.7,
+       10.7,
+       10.6,
+       10.7,
+       10.7,
+       10.6,
+       10.6,
+       10.5,
+       10.5
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       47.4,
+       47.0,
+       47.2,
+       47.4,
+       47.7,
+       47.5
+      ],
+      "benchmark": "BENCHMARK preset='TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "tony-2160-release-r2",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     }
+    ],
+    "profile": [
+     {
+      "n": 12,
+      "mean": 11.31,
+      "min": 11.2,
+      "max": 11.4,
+      "samples": [
+       11.3,
+       11.2,
+       11.3,
+       11.3,
+       11.4,
+       11.2,
+       11.4,
+       11.3,
+       11.3,
+       11.4,
+       11.2,
+       11.4
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       46.1,
+       46.0,
+       46.2,
+       46.3,
+       46.4,
+       46.4
+      ],
+      "benchmark": "BENCHMARK preset='TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "tony-2160-profile-r1",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     },
+     {
+      "n": 12,
+      "mean": 11.33,
+      "min": 11.2,
+      "max": 11.5,
+      "samples": [
+       11.4,
+       11.2,
+       11.2,
+       11.4,
+       11.2,
+       11.2,
+       11.4,
+       11.5,
+       11.5,
+       11.3,
+       11.3,
+       11.4
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 98.8,
+      "gpu_util_samples": [
+       99,
+       98,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       47.7,
+       47.7,
+       47.7,
+       47.8,
+       47.9,
+       48.0
+      ],
+      "benchmark": "BENCHMARK preset='TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "tony-2160-profile-r2",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     }
+    ]
+   },
+   "fatc-2160": {
+    "release": [
+     {
+      "n": 12,
+      "mean": 7.35,
+      "min": 6.8,
+      "max": 8.7,
+      "samples": [
+       8.7,
+       8.3,
+       7.9,
+       7.5,
+       7.3,
+       7.1,
+       7.0,
+       6.9,
+       6.8,
+       6.8,
+       6.9,
+       7.0
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99.3,
+      "gpu_util_samples": [
+       99,
+       99,
+       100,
+       99,
+       99,
+       100
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       48.4,
+       48.1,
+       48.1,
+       48.1,
+       48.2,
+       48.1
+      ],
+      "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "fatc-2160-release-r1",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     },
+     {
+      "n": 12,
+      "mean": 7.33,
+      "min": 6.8,
+      "max": 8.7,
+      "samples": [
+       8.7,
+       8.2,
+       7.7,
+       7.5,
+       7.3,
+       7.2,
+       7.1,
+       6.9,
+       6.8,
+       6.8,
+       6.9,
+       6.9
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       49.8,
+       49.5,
+       49.4,
+       49.3,
+       49.4,
+       49.5
+      ],
+      "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "fatc-2160-release-r2",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     }
+    ],
+    "profile": [
+     {
+      "n": 12,
+      "mean": 9.05,
+      "min": 8.8,
+      "max": 9.6,
+      "samples": [
+       9.6,
+       9.2,
+       9.4,
+       9.1,
+       8.9,
+       9.1,
+       8.9,
+       8.8,
+       8.9,
+       8.9,
+       8.8,
+       9.0
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99.2,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       100,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       49.7,
+       49.7,
+       49.7,
+       49.7,
+       50.3,
+       50.1
+      ],
+      "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "fatc-2160-profile-r1",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     },
+     {
+      "n": 12,
+      "mean": 9.19,
+      "min": 9.0,
+      "max": 9.7,
+      "samples": [
+       9.7,
+       9.5,
+       9.4,
+       9.3,
+       9.1,
+       9.0,
+       9.1,
+       9.0,
+       9.1,
+       9.1,
+       9.0,
+       9.0
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99.2,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       100,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       49.9,
+       50.0,
+       50.1,
+       50.2,
+       50.3,
+       50.6
+      ],
+      "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "fatc-2160-profile-r2",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     }
+    ]
+   },
+   "m103-2160": {
+    "release": [
+     {
+      "n": 13,
+      "mean": 35.11,
+      "min": 34.5,
+      "max": 36.0,
+      "samples": [
+       34.8,
+       34.7,
+       35.4,
+       35.3,
+       34.5,
+       35.8,
+       35.2,
+       35.1,
+       35.2,
+       34.9,
+       34.9,
+       34.6,
+       36.0
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       50.4,
+       50.6,
+       50.7,
+       50.5,
+       50.6,
+       50.8
+      ],
+      "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "m103-2160-release-r1",
+      "user_input": true,
+      "valid": false,
+      "resumed_ok": true
+     },
+     {
+      "n": 13,
+      "mean": 35.15,
+      "min": 34.4,
+      "max": 35.9,
+      "samples": [
+       35.0,
+       34.9,
+       35.1,
+       35.4,
+       34.4,
+       35.9,
+       35.5,
+       35.1,
+       35.2,
+       35.0,
+       35.0,
+       34.6,
+       35.9
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 99,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       50.9,
+       51.0,
+       50.8,
+       51.1,
+       50.8,
+       50.9
+      ],
+      "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "m103-2160-release-r2",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     }
+    ],
+    "profile": [
+     {
+      "n": 10,
+      "mean": 33.89,
+      "min": 33.5,
+      "max": 34.4,
+      "samples": [
+       34.4,
+       33.7,
+       33.8,
+       34.0,
+       33.8,
+       34.2,
+       33.7,
+       33.8,
+       34.0,
+       33.5
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 93.7,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       67
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       50.8,
+       50.7,
+       51.3,
+       51.0,
+       51.6,
+       51.0
+      ],
+      "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "m103-2160-profile-r1",
+      "user_input": false,
+      "valid": false,
+      "resumed_ok": false
+     },
+     {
+      "n": 6,
+      "mean": 35.12,
+      "min": 34.5,
+      "max": 35.9,
+      "samples": [
+       35.0,
+       34.8,
+       35.2,
+       35.3,
+       34.5,
+       35.9
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 94.8,
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       88,
+       89,
+       95
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       666,
+       666,
+       800
+      ],
+      "temp_c": [
+       51.2,
+       51.0,
+       51.9,
+       51.3,
+       50.9,
+       51.0
+      ],
+      "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "m103-2160-profile-r2",
+      "user_input": false,
+      "valid": false,
+      "resumed_ok": false
+     }
+    ]
+   },
+   "m191-2160": {
+    "release": [
+     {
+      "n": 12,
+      "mean": 32.91,
+      "min": 32.7,
+      "max": 33.2,
+      "samples": [
+       33.1,
+       32.8,
+       32.9,
+       32.8,
+       32.8,
+       32.8,
+       32.7,
+       33.0,
+       32.9,
+       32.8,
+       33.2,
+       33.1
+      ],
+      "audio_mean": 0.0,
+      "audio_samples": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "gpu_util": 98.3,
+      "gpu_util_samples": [
+       99,
+       99,
+       98,
+       96,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       50.8,
+       51.0,
+       50.9,
+       51.0,
+       51.0,
+       50.7
+      ],
+      "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (191).milk' (debug.projectmtv.preset), auto change off",
+      "media": "state=PlaybackState {state=0",
+      "run": "m191-2160-release-r1",
+      "user_input": false,
+      "valid": true,
+      "resumed_ok": true
+     }
+    ],
+    "profile": [
+     {
+      "n": 0,
+      "mean": null,
+      "min": null,
+      "max": null,
+      "samples": [],
+      "audio_mean": null,
+      "audio_samples": [],
+      "surface": [],
+      "gpu_util": 44.8,
+      "gpu_util_samples": [
+       57,
+       0,
+       0,
+       78,
+       77,
+       57
+      ],
+      "gpu_freq_mhz": [
+       666,
+       285,
+       285,
+       800,
+       666,
+       400
+      ],
+      "temp_c": [
+       53.6,
+       48.8,
+       49.8,
+       53.0,
+       50.7,
+       49.5
+      ],
+      "benchmark": null,
+      "media": "state=PlaybackState {state=0",
+      "run": "m191-2160-profile-r1",
+      "user_input": true,
+      "valid": false,
+      "resumed_ok": true
+     }
+    ]
+   }
+  }
+ }
+}

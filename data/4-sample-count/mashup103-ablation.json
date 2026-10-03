@@ -1,0 +1,592 @@
+{
+ "about": "$$$ Royal - Mashup (103): ablation and the sample-count fix (SampleDecisionWidth = width / LineScale). bass-0.30, 4 s warm-up + 4 s window, 30 fps. gt = classic 1024x768, c1080 = classic 1920x1080, q1080/q4k = quad lines with reference 1024x768.",
+ "cur": {
+  "original": {
+   "gt": {
+    "mean_luma": 0.2192,
+    "center_rgb_last": [
+     162,
+     107,
+     98
+    ],
+    "center_rgb_window": [
+     74,
+     52,
+     49
+    ],
+    "frames": 240,
+    "sha256": "1186d2c8bbefa0bdbf006e53377c10de76fcee536970dece84aca5cabf2ac4ed"
+   },
+   "c1080": {
+    "mean_luma": 0.2314,
+    "center_rgb_last": [
+     71,
+     53,
+     51
+    ],
+    "center_rgb_window": [
+     68,
+     54,
+     52
+    ],
+    "frames": 240,
+    "sha256": "77b82905d57e7a01e59278994c36325a627a8b3155d5a5e2ab3a516bf4824ec8"
+   },
+   "q1080": {
+    "mean_luma": 0.4995,
+    "center_rgb_last": [
+     169,
+     143,
+     138
+    ],
+    "center_rgb_window": [
+     146,
+     127,
+     124
+    ],
+    "frames": 240,
+    "sha256": "f91437e6d00dd2d3c8ccfea95c41c601eda5c8a70e59992524dc3663b00baee5"
+   },
+   "q4k": {
+    "mean_luma": 0.5195,
+    "center_rgb_last": [
+     187,
+     156,
+     150
+    ],
+    "center_rgb_window": [
+     154,
+     136,
+     133
+    ],
+    "frames": 240,
+    "sha256": "e79324d648c86603b84b6492f316515b07332e7f911a439f0b5d82985de430da"
+   },
+   "gt1024sq": {
+    "mean_luma": 0.175,
+    "center_rgb_last": [
+     150,
+     89,
+     79
+    ],
+    "center_rgb_window": [
+     63,
+     41,
+     38
+    ],
+    "frames": 240,
+    "sha256": "f71044327fdb974413d5325429aa6f9befbbdd9ad4e50158f6a785c98f60912b"
+   }
+  },
+  "no-mv": {
+   "gt": {
+    "mean_luma": 0.1986,
+    "center_rgb_last": [
+     163,
+     107,
+     98
+    ],
+    "center_rgb_window": [
+     71,
+     49,
+     45
+    ],
+    "frames": 240,
+    "sha256": "68e12ae1fb29b3657cb66d4e5713ca907f3557717b9d7c96d12d7f3a64a7efd0"
+   },
+   "c1080": {
+    "mean_luma": 0.2231,
+    "center_rgb_last": [
+     71,
+     53,
+     51
+    ],
+    "center_rgb_window": [
+     66,
+     52,
+     50
+    ],
+    "frames": 240,
+    "sha256": "b8d20010258218ea13aa5c7540f5f145f5ce2d1ab8c890431c5692faed9643d1"
+   },
+   "q1080": {
+    "mean_luma": 0.5151,
+    "center_rgb_last": [
+     169,
+     143,
+     138
+    ],
+    "center_rgb_window": [
+     146,
+     127,
+     124
+    ],
+    "frames": 240,
+    "sha256": "9aca0adefe935b7229c8d267784e4b8686c248f12f217f86997d344f44cc5aab"
+   }
+  },
+  "no-wave": {
+   "gt": {
+    "mean_luma": 0.0151,
+    "center_rgb_last": [
+     0,
+     0,
+     0
+    ],
+    "center_rgb_window": [
+     4,
+     4,
+     4
+    ],
+    "frames": 240,
+    "sha256": "e43355f7787198e21260cc78e809bb8683320b461a77a01bcaf79381e506587f"
+   },
+   "c1080": {
+    "mean_luma": 0.0062,
+    "center_rgb_last": [
+     0,
+     0,
+     0
+    ],
+    "center_rgb_window": [
+     2,
+     2,
+     2
+    ],
+    "frames": 240,
+    "sha256": "64b66ce426f85da6c391ac5f01796b66c2987d791600fcf3f80b9692f9335b5e"
+   },
+   "q1080": {
+    "mean_luma": 0.0154,
+    "center_rgb_last": [
+     0,
+     0,
+     0
+    ],
+    "center_rgb_window": [
+     5,
+     5,
+     5
+    ],
+    "frames": 240,
+    "sha256": "9596d65633ec97b16985f717b8e857ccbef09bde8b6c5ce6364e7011502cdf21"
+   }
+  },
+  "none": {
+   "gt": {
+    "mean_luma": 0.0,
+    "center_rgb_last": [
+     0,
+     0,
+     0
+    ],
+    "center_rgb_window": [
+     0,
+     0,
+     0
+    ],
+    "frames": 240,
+    "sha256": "fce39a0f0e6ce839cf5a10407ec90135e2a80fd62e94511217a1d3e629291b9b"
+   },
+   "c1080": {
+    "mean_luma": 0.0,
+    "center_rgb_last": [
+     0,
+     0,
+     0
+    ],
+    "center_rgb_window": [
+     0,
+     0,
+     0
+    ],
+    "frames": 240,
+    "sha256": "cc37dfa0e07e0e94273f071787eb1d02585b3ea2bb8b5f80f465d2e64e06f28f"
+   },
+   "q1080": {
+    "mean_luma": 0.0,
+    "center_rgb_last": [
+     0,
+     0,
+     0
+    ],
+    "center_rgb_window": [
+     0,
+     0,
+     0
+    ],
+    "frames": 240,
+    "sha256": "cc37dfa0e07e0e94273f071787eb1d02585b3ea2bb8b5f80f465d2e64e06f28f"
+   }
+  },
+  "wave-lines": {
+   "gt": {
+    "mean_luma": 0.3629,
+    "center_rgb_last": [
+     160,
+     148,
+     145
+    ],
+    "center_rgb_window": [
+     95,
+     80,
+     78
+    ],
+    "frames": 240,
+    "sha256": "30e54db9d1f3df2eea367c8fc6f16915c13c503709b349cadcc414e218de0b68"
+   },
+   "c1080": {
+    "mean_luma": 0.6083,
+    "center_rgb_last": [
+     178,
+     159,
+     155
+    ],
+    "center_rgb_window": [
+     169,
+     153,
+     150
+    ],
+    "frames": 240,
+    "sha256": "6d81d43148ffaafe161b60e2c22bf5f79a1b5b2b53e9833b6615a98de06f6dc1"
+   },
+   "q1080": {
+    "mean_luma": 0.6615,
+    "center_rgb_last": [
+     216,
+     198,
+     194
+    ],
+    "center_rgb_window": [
+     198,
+     172,
+     168
+    ],
+    "frames": 240,
+    "sha256": "39c5dcc52ec8856195df96a9759203e19fb09b12d7176e09681ab232adec65fb"
+   },
+   "q4k": {
+    "mean_luma": 0.6798,
+    "center_rgb_last": [
+     224,
+     202,
+     198
+    ],
+    "center_rgb_window": [
+     202,
+     176,
+     172
+    ],
+    "frames": 240,
+    "sha256": "a3a97d0b493cb968a5ebac300339dd7acabcdbc2f4a65741d5d7a9395334a773"
+   }
+  }
+ },
+ "sweep": {
+  "no-mv": {
+   "q1920x1080@1920x1080": {
+    "mean_luma": 0.2341,
+    "center_rgb_last": [
+     61,
+     51,
+     49
+    ],
+    "center_rgb_window": [
+     62,
+     53,
+     52
+    ],
+    "frames": 240,
+    "sha256": "5eb9e5fef645e744d2900216bea42c9085906d01012b0566e8b706fd1084db69"
+   },
+   "q1440x810@1920x1080": {
+    "mean_luma": 0.4008,
+    "center_rgb_last": [
+     141,
+     106,
+     100
+    ],
+    "center_rgb_window": [
+     115,
+     97,
+     94
+    ],
+    "frames": 240,
+    "sha256": "1de760ce11e0426b364b04ddf63da69b312992edc499e3809d988928e16164ee"
+   },
+   "q1280x720@1920x1080": {
+    "mean_luma": 0.4725,
+    "center_rgb_last": [
+     172,
+     135,
+     129
+    ],
+    "center_rgb_window": [
+     136,
+     117,
+     114
+    ],
+    "frames": 240,
+    "sha256": "e3d7f57fcb6d1c7df3f9de90c98dac39224b977f43870b033b834aba51db193a"
+   },
+   "q960x540@1920x1080": {
+    "mean_luma": 0.614,
+    "center_rgb_last": [
+     211,
+     182,
+     176
+    ],
+    "center_rgb_window": [
+     183,
+     158,
+     154
+    ],
+    "frames": 240,
+    "sha256": "e56957676cad6067e4d35dc3717b141beac6a31c3a192c6af054164aeb51a7b8"
+   },
+   "q1024x768@1024x768": {
+    "mean_luma": 0.1987,
+    "center_rgb_last": [
+     94,
+     78,
+     77
+    ],
+    "center_rgb_window": [
+     62,
+     45,
+     43
+    ],
+    "frames": 240,
+    "sha256": "a3252dbdf28be03cbd35f49cbd7d07c0b8f71b8ddabfa5faa018dda5919d3e79"
+   },
+   "q768x576@1024x768": {
+    "mean_luma": 0.3534,
+    "center_rgb_last": [
+     178,
+     139,
+     133
+    ],
+    "center_rgb_window": [
+     108,
+     80,
+     76
+    ],
+    "frames": 240,
+    "sha256": "15a472237ddb9b6f16f518cab392b92239ab1d16af6eccdc11476d64ea27a3ff"
+   },
+   "q631x473@1024x768": {
+    "mean_luma": 0.4665,
+    "center_rgb_last": [
+     209,
+     174,
+     168
+    ],
+    "center_rgb_window": [
+     138,
+     108,
+     103
+    ],
+    "frames": 240,
+    "sha256": "5cb79b9516394bfdb4db356c00e32e67ec74e95db3a95cfca5a0aefb90c03422"
+   },
+   "q512x384@1024x768": {
+    "mean_luma": 0.5811,
+    "center_rgb_last": [
+     226,
+     202,
+     198
+    ],
+    "center_rgb_window": [
+     170,
+     138,
+     133
+    ],
+    "frames": 240,
+    "sha256": "805c6e5b93e807dd75112bac1f7d5b8654e8fab5a128b2387f3b25946d924896"
+   },
+   "c@3840x2160": {
+    "mean_luma": 0.0457,
+    "center_rgb_last": [
+     13,
+     11,
+     11
+    ],
+    "center_rgb_window": [
+     14,
+     11,
+     11
+    ],
+    "frames": 240,
+    "sha256": "d3a41490812ff663804b38288f8126bf16c2cf62b4f4ecde1d2fa71731b176eb"
+   },
+   "q3840x2160@3840x2160": {
+    "mean_luma": 0.046,
+    "center_rgb_last": [
+     13,
+     11,
+     11
+    ],
+    "center_rgb_window": [
+     14,
+     11,
+     11
+    ],
+    "frames": 240,
+    "sha256": "024673f6563b02fa0a09c0060d799e5a4fc11f37a4b643bcca7186cc0f8b2dc5"
+   }
+  }
+ },
+ "fix": {
+  "original": {
+   "gt": {
+    "mean_luma": 0.2192,
+    "center_rgb_last": [
+     162,
+     107,
+     98
+    ],
+    "center_rgb_window": [
+     74,
+     52,
+     49
+    ],
+    "frames": 240,
+    "sha256": "1186d2c8bbefa0bdbf006e53377c10de76fcee536970dece84aca5cabf2ac4ed"
+   },
+   "c1080": {
+    "mean_luma": 0.2314,
+    "center_rgb_last": [
+     71,
+     53,
+     51
+    ],
+    "center_rgb_window": [
+     68,
+     54,
+     52
+    ],
+    "frames": 240,
+    "sha256": "77b82905d57e7a01e59278994c36325a627a8b3155d5a5e2ab3a516bf4824ec8"
+   },
+   "q1080": {
+    "mean_luma": 0.2109,
+    "center_rgb_last": [
+     88,
+     79,
+     77
+    ],
+    "center_rgb_window": [
+     61,
+     49,
+     47
+    ],
+    "frames": 240,
+    "sha256": "9ac9775a4a4109b0d06d41c28283c9a7367200d091d1f4ca2b2245c2ecd50879"
+   },
+   "q4k": {
+    "mean_luma": 0.2328,
+    "center_rgb_last": [
+     94,
+     86,
+     84
+    ],
+    "center_rgb_window": [
+     66,
+     52,
+     50
+    ],
+    "frames": 240,
+    "sha256": "cf7eec97b663d3e9d5253e02baacf759f3b1e00bd0deff61fe7ac99ef1ca7514"
+   }
+  },
+  "no-mv": {
+   "q1080": {
+    "mean_luma": 0.1971,
+    "center_rgb_last": [
+     88,
+     78,
+     77
+    ],
+    "center_rgb_window": [
+     57,
+     45,
+     43
+    ],
+    "frames": 240,
+    "sha256": "ec98fa1f25f9b050f8226e1e1763314a97dbea4f0128eeba096a8fba249ec394"
+   }
+  },
+  "wave-lines": {
+   "gt": {
+    "mean_luma": 0.3629,
+    "center_rgb_last": [
+     160,
+     148,
+     145
+    ],
+    "center_rgb_window": [
+     95,
+     80,
+     78
+    ],
+    "frames": 240,
+    "sha256": "30e54db9d1f3df2eea367c8fc6f16915c13c503709b349cadcc414e218de0b68"
+   },
+   "c1080": {
+    "mean_luma": 0.6083,
+    "center_rgb_last": [
+     178,
+     159,
+     155
+    ],
+    "center_rgb_window": [
+     169,
+     153,
+     150
+    ],
+    "frames": 240,
+    "sha256": "6d81d43148ffaafe161b60e2c22bf5f79a1b5b2b53e9833b6615a98de06f6dc1"
+   },
+   "q1080": {
+    "mean_luma": 0.3696,
+    "center_rgb_last": [
+     164,
+     153,
+     150
+    ],
+    "center_rgb_window": [
+     100,
+     86,
+     84
+    ],
+    "frames": 240,
+    "sha256": "3c5d66526ab1961656276b6506ffa0297dd38ee924c09fc56d026308e495184d"
+   },
+   "q4k": {
+    "mean_luma": 0.3964,
+    "center_rgb_last": [
+     167,
+     155,
+     153
+    ],
+    "center_rgb_window": [
+     101,
+     88,
+     86
+    ],
+    "frames": 240,
+    "sha256": "879e7b86c6b717038eb988279b391fcec2287dae599d761e542a45fd4364e8cd"
+   }
+  }
+ },
+ "summary": {
+  "driver": "main wave (nWaveMode=4 DerivativeLine, drawn as dots); motion vectors contribute ~0.015 luma; no shapes/custom waves enabled",
+  "mechanism": "DerivativeLine/Line/DoubleLine/2077 Wave9/X/11 draw 480/3=160 samples when viewportSizeX<1440 and 480 at >=1440. GT 1024x768 has 160 dots, 1080/4K have 480. Quad mode sizes each dot as at the reference (3.25px -> 4px alpha 0.66 at 1080) but keeps 3x the dots -> ~3x the coverage share in a feedback loop -> 2.3x luma.",
+  "fix": "0021 + SampleDecisionWidth(): with a line reference set, the rule uses viewportSizeX / LineScale (reference-equivalent width). Classic renders byte-identical.",
+  "fix_result": {
+   "q1080": 0.2109,
+   "q4k": 0.2328,
+   "gt": 0.2192
+  }
+ }
+}

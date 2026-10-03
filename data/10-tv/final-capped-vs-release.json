@@ -1,0 +1,1567 @@
+{
+ "summary": {
+  "m103-2160": {
+   "release_runs": [
+    36.38,
+    36.27
+   ],
+   "profile_runs": [
+    59.98,
+    59.98
+   ],
+   "release_mean": 36.33,
+   "profile_mean": 59.98,
+   "delta_pct": 65.12,
+   "paired_delta_pct": {
+    "r1": 64.87,
+    "r2": 65.37
+   },
+   "paired_mean_pct": 65.12,
+   "gpu_util": [
+    [
+     99,
+     99
+    ],
+    [
+     89.2,
+     87.8
+    ]
+   ],
+   "audio": [
+    [
+     0.219,
+     0.234
+    ],
+    [
+     0.247,
+     0.291
+    ]
+   ],
+   "surface": [
+    "2364x1330",
+    "3840x2160"
+   ]
+  },
+  "cart-2160": {
+   "release_runs": [
+    12.85,
+    12.55
+   ],
+   "profile_runs": [
+    33.97,
+    33.38
+   ],
+   "release_mean": 12.7,
+   "profile_mean": 33.67,
+   "delta_pct": 165.16,
+   "paired_delta_pct": {
+    "r1": 164.36,
+    "r2": 165.98
+   },
+   "paired_mean_pct": 165.17,
+   "gpu_util": [
+    [
+     98.8,
+     99
+    ],
+    [
+     98.7,
+     98.3
+    ]
+   ],
+   "audio": [
+    [
+     0.253,
+     0.285
+    ],
+    [
+     0.189,
+     0.253
+    ]
+   ],
+   "surface": [
+    "2364x1330",
+    "3840x2160"
+   ]
+  },
+  "fatc-2160": {
+   "release_runs": [
+    7.86,
+    7.42
+   ],
+   "profile_runs": [
+    23.55,
+    23.53,
+    23.6
+   ],
+   "release_mean": 7.64,
+   "profile_mean": 23.56,
+   "delta_pct": 208.38,
+   "paired_delta_pct": {
+    "r3": 199.36,
+    "r4": 218.06
+   },
+   "paired_mean_pct": 208.71,
+   "gpu_util": [
+    [
+     99.3,
+     99.5
+    ],
+    [
+     99,
+     99,
+     98.7
+    ]
+   ],
+   "audio": [
+    [
+     0.237,
+     0.208
+    ],
+    [
+     0.225,
+     0.22,
+     0.259
+    ]
+   ],
+   "surface": [
+    "2364x1330",
+    "3840x2160"
+   ]
+  },
+  "flexi-2160": {
+   "release_runs": [
+    12.37,
+    12.28
+   ],
+   "profile_runs": [
+    29.39,
+    30.75
+   ],
+   "release_mean": 12.32,
+   "profile_mean": 30.07,
+   "delta_pct": 143.98,
+   "paired_delta_pct": {
+    "r1": 137.59,
+    "r2": 150.41
+   },
+   "paired_mean_pct": 144.0,
+   "gpu_util": [
+    [
+     99,
+     98.8
+    ],
+    [
+     98.7,
+     98.8
+    ]
+   ],
+   "audio": [
+    [
+     0.178,
+     0.208
+    ],
+    [
+     0.281,
+     0.201
+    ]
+   ],
+   "surface": [
+    "2364x1330",
+    "3840x2160"
+   ]
+  }
+ },
+ "runs": {
+  "m103-2160": {
+   "release": [
+    {
+     "n": 12,
+     "mean": 36.38,
+     "min": 36.1,
+     "max": 37.1,
+     "samples": [
+      37.1,
+      36.6,
+      36.6,
+      36.1,
+      36.3,
+      36.3,
+      36.1,
+      36.2,
+      36.2,
+      36.6,
+      36.4,
+      36.1
+     ],
+     "audio_mean": 0.219,
+     "audio_samples": [
+      0.304,
+      0.194,
+      0.222,
+      0.195,
+      0.206,
+      0.21,
+      0.222,
+      0.243,
+      0.199,
+      0.228,
+      0.201,
+      0.207
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 99,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      50.8,
+      50.7,
+      50.6,
+      50.7,
+      51.1,
+      52.3
+     ],
+     "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "m103-2160-release-r1",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 36.27,
+     "min": 35.9,
+     "max": 36.5,
+     "samples": [
+      36.5,
+      36.3,
+      36.5,
+      36.3,
+      35.9,
+      36.4,
+      36.0,
+      36.4,
+      36.3,
+      36.1,
+      36.2,
+      36.3
+     ],
+     "audio_mean": 0.234,
+     "audio_samples": [
+      0.209,
+      0.215,
+      0.226,
+      0.178,
+      0.215,
+      0.292,
+      0.23,
+      0.288,
+      0.221,
+      0.237,
+      0.269,
+      0.227
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 99,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      51.3,
+      51.6,
+      51.9,
+      51.9,
+      51.5,
+      51.8
+     ],
+     "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "m103-2160-release-r2",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ],
+   "profile": [
+    {
+     "n": 12,
+     "mean": 59.98,
+     "min": 59.8,
+     "max": 60.3,
+     "samples": [
+      60.0,
+      60.0,
+      59.8,
+      59.8,
+      60.0,
+      59.9,
+      59.9,
+      60.0,
+      60.3,
+      60.0,
+      60.1,
+      60.0
+     ],
+     "audio_mean": 0.247,
+     "audio_samples": [
+      0.237,
+      0.225,
+      0.255,
+      0.182,
+      0.314,
+      0.215,
+      0.233,
+      0.306,
+      0.238,
+      0.292,
+      0.248,
+      0.217
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 89.2,
+     "gpu_util_samples": [
+      87,
+      90,
+      91,
+      90,
+      87,
+      90
+     ],
+     "gpu_freq_mhz": [
+      666,
+      666,
+      666,
+      666,
+      666,
+      666
+     ],
+     "temp_c": [
+      51.5,
+      51.1,
+      51.4,
+      51.1,
+      53.2,
+      51.2
+     ],
+     "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "m103-2160-profile-r1",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 13,
+     "mean": 59.98,
+     "min": 59.8,
+     "max": 60.1,
+     "samples": [
+      60.0,
+      60.0,
+      60.0,
+      59.8,
+      59.9,
+      60.0,
+      60.0,
+      60.1,
+      60.0,
+      60.0,
+      60.0,
+      60.0,
+      60.0
+     ],
+     "audio_mean": 0.291,
+     "audio_samples": [
+      0.195,
+      0.288,
+      0.305,
+      0.279,
+      0.34,
+      0.267,
+      0.321,
+      0.626,
+      0.201,
+      0.203,
+      0.222,
+      0.232,
+      0.305
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 87.8,
+     "gpu_util_samples": [
+      89,
+      86,
+      88,
+      88,
+      88,
+      88
+     ],
+     "gpu_freq_mhz": [
+      666,
+      666,
+      666,
+      666,
+      666,
+      666
+     ],
+     "temp_c": [
+      52.6,
+      51.4,
+      51.6,
+      51.5,
+      51.6,
+      51.4
+     ],
+     "benchmark": "BENCHMARK preset='$$$ Royal - Mashup (103).milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "m103-2160-profile-r2",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ]
+  },
+  "cart-2160": {
+   "release": [
+    {
+     "n": 12,
+     "mean": 12.85,
+     "min": 11.6,
+     "max": 13.7,
+     "samples": [
+      12.7,
+      13.3,
+      13.4,
+      13.7,
+      12.6,
+      12.3,
+      11.6,
+      12.1,
+      12.5,
+      13.6,
+      13.4,
+      13.0
+     ],
+     "audio_mean": 0.253,
+     "audio_samples": [
+      0.238,
+      0.23,
+      0.174,
+      0.217,
+      0.485,
+      0.432,
+      0.187,
+      0.216,
+      0.176,
+      0.223,
+      0.228,
+      0.224
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 98.8,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      98
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      51.9,
+      53.1,
+      52.4,
+      52.2,
+      52.2,
+      52.0
+     ],
+     "benchmark": "BENCHMARK preset='TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "cart-2160-release-r1",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 12.55,
+     "min": 11.2,
+     "max": 13.4,
+     "samples": [
+      12.4,
+      12.9,
+      13.4,
+      11.2,
+      11.9,
+      12.4,
+      12.8,
+      11.9,
+      13.2,
+      12.6,
+      12.6,
+      13.3
+     ],
+     "audio_mean": 0.285,
+     "audio_samples": [
+      0.148,
+      0.214,
+      0.296,
+      0.304,
+      0.311,
+      0.239,
+      0.248,
+      0.296,
+      0.5,
+      0.238,
+      0.299,
+      0.327
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 99,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      52.9,
+      52.7,
+      52.8,
+      52.7,
+      60.0,
+      53.1
+     ],
+     "benchmark": "BENCHMARK preset='TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "cart-2160-release-r2",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ],
+   "profile": [
+    {
+     "n": 12,
+     "mean": 33.97,
+     "min": 33.5,
+     "max": 34.4,
+     "samples": [
+      34.0,
+      34.4,
+      34.1,
+      34.2,
+      33.8,
+      34.0,
+      33.8,
+      34.0,
+      33.6,
+      33.5,
+      34.1,
+      34.1
+     ],
+     "audio_mean": 0.189,
+     "audio_samples": [
+      0.185,
+      0.177,
+      0.142,
+      0.14,
+      0.209,
+      0.204,
+      0.193,
+      0.198,
+      0.21,
+      0.257,
+      0.185,
+      0.166
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 98.7,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      97
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      52.6,
+      52.8,
+      52.6,
+      52.5,
+      52.7,
+      56.3
+     ],
+     "benchmark": "BENCHMARK preset='TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "cart-2160-profile-r1",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 13,
+     "mean": 33.38,
+     "min": 32.0,
+     "max": 34.0,
+     "samples": [
+      33.6,
+      32.0,
+      34.0,
+      33.8,
+      33.9,
+      33.7,
+      33.2,
+      32.8,
+      32.7,
+      33.7,
+      33.4,
+      33.9,
+      33.3
+     ],
+     "audio_mean": 0.253,
+     "audio_samples": [
+      0.496,
+      0.244,
+      0.254,
+      0.229,
+      0.185,
+      0.197,
+      0.209,
+      0.245,
+      0.202,
+      0.182,
+      0.168,
+      0.211,
+      0.472
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 98.3,
+     "gpu_util_samples": [
+      99,
+      96,
+      99,
+      99,
+      98,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      53.0,
+      56.7,
+      53.3,
+      53.1,
+      56.4,
+      53.7
+     ],
+     "benchmark": "BENCHMARK preset='TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "cart-2160-profile-r2",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ]
+  },
+  "fatc-2160": {
+   "release": [
+    {
+     "n": 1,
+     "mean": 8.3,
+     "min": 8.3,
+     "max": 8.3,
+     "samples": [
+      8.3
+     ],
+     "audio_mean": 0.295,
+     "audio_samples": [
+      0.295
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 0,
+     "gpu_util_samples": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "gpu_freq_mhz": [
+      400,
+      285,
+      285,
+      285,
+      285,
+      285
+     ],
+     "temp_c": [
+      60.5,
+      55.5,
+      51.4,
+      50.4,
+      50.2,
+      50.5
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-release-r1",
+     "user_input": false,
+     "valid": false,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 8.22,
+     "min": 6.7,
+     "max": 9.9,
+     "samples": [
+      8.0,
+      9.0,
+      9.0,
+      7.6,
+      9.7,
+      9.9,
+      8.7,
+      8.0,
+      7.3,
+      6.7,
+      7.0,
+      7.8
+     ],
+     "audio_mean": 0.176,
+     "audio_samples": [
+      0.291,
+      0.208,
+      0.237,
+      0.214,
+      0.111,
+      0.139,
+      0.138,
+      0.166,
+      0.147,
+      0.13,
+      0.15,
+      0.176
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 99.3,
+     "gpu_util_samples": [
+      99,
+      100,
+      99,
+      99,
+      99,
+      100
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      52.0,
+      52.0,
+      52.5,
+      52.0,
+      52.2,
+      55.7
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-release-r2",
+     "user_input": true,
+     "valid": false,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 7.86,
+     "min": 6.6,
+     "max": 8.7,
+     "samples": [
+      8.0,
+      7.8,
+      8.7,
+      8.0,
+      7.4,
+      7.8,
+      8.1,
+      7.4,
+      8.2,
+      8.0,
+      8.3,
+      6.6
+     ],
+     "audio_mean": 0.237,
+     "audio_samples": [
+      0.288,
+      0.342,
+      0.294,
+      0.201,
+      0.241,
+      0.209,
+      0.233,
+      0.234,
+      0.257,
+      0.205,
+      0.19,
+      0.151
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 99.3,
+     "gpu_util_samples": [
+      99,
+      99,
+      100,
+      99,
+      99,
+      100
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      53.9,
+      55.7,
+      53.8,
+      54.0,
+      53.8,
+      54.7
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-release-r3",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 7.42,
+     "min": 6.3,
+     "max": 9.1,
+     "samples": [
+      9.1,
+      8.3,
+      8.2,
+      7.7,
+      7.3,
+      6.5,
+      7.2,
+      6.8,
+      7.3,
+      6.3,
+      6.7,
+      7.6
+     ],
+     "audio_mean": 0.208,
+     "audio_samples": [
+      0.165,
+      0.168,
+      0.194,
+      0.171,
+      0.373,
+      0.21,
+      0.223,
+      0.234,
+      0.181,
+      0.178,
+      0.216,
+      0.186
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 99.5,
+     "gpu_util_samples": [
+      99,
+      100,
+      99,
+      99,
+      100,
+      100
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      56.2,
+      54.0,
+      54.1,
+      54.1,
+      54.1,
+      53.9
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-release-r4",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ],
+   "profile": [
+    {
+     "n": 12,
+     "mean": 23.21,
+     "min": 22.1,
+     "max": 24.2,
+     "samples": [
+      24.1,
+      22.2,
+      24.2,
+      23.2,
+      23.2,
+      23.8,
+      23.5,
+      22.8,
+      23.3,
+      23.1,
+      22.1,
+      23.0
+     ],
+     "audio_mean": 0.27,
+     "audio_samples": [
+      0.243,
+      0.298,
+      0.235,
+      0.27,
+      0.296,
+      0.39,
+      0.25,
+      0.19,
+      0.313,
+      0.217,
+      0.296,
+      0.244
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 99,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      53.3,
+      53.6,
+      55.8,
+      54.6,
+      56.8,
+      53.4
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-profile-r1",
+     "user_input": true,
+     "valid": false,
+     "resumed_ok": true
+    },
+    {
+     "n": 13,
+     "mean": 23.55,
+     "min": 22.5,
+     "max": 24.7,
+     "samples": [
+      24.7,
+      24.3,
+      23.4,
+      24.2,
+      22.5,
+      22.6,
+      24.3,
+      23.9,
+      23.8,
+      22.9,
+      23.6,
+      23.4,
+      22.6
+     ],
+     "audio_mean": 0.225,
+     "audio_samples": [
+      0.273,
+      0.195,
+      0.179,
+      0.23,
+      0.209,
+      0.25,
+      0.212,
+      0.245,
+      0.234,
+      0.203,
+      0.22,
+      0.233,
+      0.247
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 99,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      53.6,
+      53.3,
+      53.3,
+      53.4,
+      54.0,
+      54.0
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-profile-r2",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 23.53,
+     "min": 22.0,
+     "max": 24.5,
+     "samples": [
+      24.5,
+      23.2,
+      24.4,
+      23.6,
+      24.1,
+      23.7,
+      22.6,
+      22.8,
+      23.8,
+      22.0,
+      23.7,
+      24.0
+     ],
+     "audio_mean": 0.22,
+     "audio_samples": [
+      0.181,
+      0.157,
+      0.204,
+      0.221,
+      0.29,
+      0.22,
+      0.197,
+      0.192,
+      0.213,
+      0.316,
+      0.19,
+      0.258
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 99,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      55.3,
+      54.6,
+      54.9,
+      54.5,
+      54.8,
+      55.4
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-profile-r3",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 23.6,
+     "min": 22.4,
+     "max": 24.7,
+     "samples": [
+      23.4,
+      23.1,
+      23.3,
+      23.6,
+      23.4,
+      22.4,
+      24.7,
+      23.6,
+      24.3,
+      23.7,
+      23.9,
+      23.8
+     ],
+     "audio_mean": 0.259,
+     "audio_samples": [
+      0.254,
+      0.149,
+      0.167,
+      0.254,
+      0.205,
+      0.175,
+      0.178,
+      0.458,
+      0.363,
+      0.599,
+      0.175,
+      0.135
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 98.7,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      97,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      54.8,
+      54.7,
+      56.5,
+      54.6,
+      55.2,
+      55.1
+     ],
+     "benchmark": "BENCHMARK preset='fat cancer tour meant t nz+.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "fatc-2160-profile-r4",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ]
+  },
+  "flexi-2160": {
+   "release": [
+    {
+     "n": 12,
+     "mean": 12.37,
+     "min": 12.1,
+     "max": 12.6,
+     "samples": [
+      12.2,
+      12.5,
+      12.6,
+      12.4,
+      12.4,
+      12.4,
+      12.5,
+      12.5,
+      12.1,
+      12.2,
+      12.3,
+      12.3
+     ],
+     "audio_mean": 0.178,
+     "audio_samples": [
+      0.24,
+      0.17,
+      0.11,
+      0.184,
+      0.198,
+      0.142,
+      0.123,
+      0.162,
+      0.208,
+      0.23,
+      0.181,
+      0.194
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 99,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      99,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      53.2,
+      56.4,
+      53.4,
+      53.6,
+      53.7,
+      53.5
+     ],
+     "benchmark": "BENCHMARK preset='Flexi - alien complex 03.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "flexi-2160-release-r1",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 12,
+     "mean": 12.28,
+     "min": 12.0,
+     "max": 12.6,
+     "samples": [
+      12.3,
+      12.2,
+      12.2,
+      12.4,
+      12.0,
+      12.1,
+      12.3,
+      12.3,
+      12.3,
+      12.3,
+      12.4,
+      12.6
+     ],
+     "audio_mean": 0.208,
+     "audio_samples": [
+      0.207,
+      0.192,
+      0.184,
+      0.192,
+      0.193,
+      0.214,
+      0.194,
+      0.17,
+      0.177,
+      0.276,
+      0.235,
+      0.26
+     ],
+     "surface": [
+      "3840x2160"
+     ],
+     "gpu_util": 98.8,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      98,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      57.6,
+      54.2,
+      54.2,
+      54.0,
+      54.4,
+      55.3
+     ],
+     "benchmark": "BENCHMARK preset='Flexi - alien complex 03.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "flexi-2160-release-r2",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ],
+   "profile": [
+    {
+     "n": 12,
+     "mean": 29.39,
+     "min": 28.5,
+     "max": 30.5,
+     "samples": [
+      28.7,
+      29.6,
+      29.1,
+      28.9,
+      30.1,
+      28.6,
+      30.1,
+      29.0,
+      28.5,
+      30.5,
+      29.2,
+      30.4
+     ],
+     "audio_mean": 0.281,
+     "audio_samples": [
+      0.254,
+      0.301,
+      0.219,
+      0.286,
+      0.239,
+      0.238,
+      0.24,
+      0.55,
+      0.271,
+      0.304,
+      0.273,
+      0.195
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 98.7,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      98,
+      99,
+      98
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      55.3,
+      54.9,
+      54.8,
+      55.0,
+      58.3,
+      55.3
+     ],
+     "benchmark": "BENCHMARK preset='Flexi - alien complex 03.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "flexi-2160-profile-r1",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    },
+    {
+     "n": 13,
+     "mean": 30.75,
+     "min": 30.3,
+     "max": 31.1,
+     "samples": [
+      30.6,
+      30.9,
+      30.7,
+      30.4,
+      30.3,
+      30.8,
+      31.0,
+      30.8,
+      31.1,
+      31.0,
+      30.7,
+      30.8,
+      30.6
+     ],
+     "audio_mean": 0.201,
+     "audio_samples": [
+      0.278,
+      0.236,
+      0.31,
+      0.214,
+      0.205,
+      0.194,
+      0.179,
+      0.161,
+      0.19,
+      0.17,
+      0.145,
+      0.192,
+      0.133
+     ],
+     "surface": [
+      "2364x1330"
+     ],
+     "gpu_util": 98.8,
+     "gpu_util_samples": [
+      99,
+      99,
+      99,
+      98,
+      99,
+      99
+     ],
+     "gpu_freq_mhz": [
+      800,
+      800,
+      800,
+      800,
+      800,
+      800
+     ],
+     "temp_c": [
+      54.8,
+      55.1,
+      55.5,
+      54.9,
+      54.9,
+      55.1
+     ],
+     "benchmark": "BENCHMARK preset='Flexi - alien complex 03.milk' (debug.projectmtv.preset), auto change off",
+     "media": "state=PlaybackState {state=3",
+     "run": "flexi-2160-profile-r2",
+     "user_input": false,
+     "valid": true,
+     "resumed_ok": true
+    }
+   ]
+  }
+ }
+}

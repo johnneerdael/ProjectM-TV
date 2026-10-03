@@ -1,0 +1,4218 @@
+{
+ "about": "Final build: 1330 cap + virtual texsize (after) vs native 4K (before, 0021 at 4a5606b). img_err = mean |diff| of 5 frames vs the authored 1182x665 render at 1182x665; luma ratio vs authored; sharpness = Laplacian variance at 4K. Keys: gt = authored, b4k = before native 4K, a4k = virtual texsize at native 4K, a1260/a1330/a1440 = virtual texsize at that height, upscaled.",
+ "report": [
+  "authored (1182x665 upscaled cubic) median sharpness 12.91",
+  "b4k {'n': 24, 'median_img_err': 0.1116, 'mean_img_err': 0.1253, 'luma_within_10pct': 16, 'median_abs_log_luma': 0.0689, 'median_sat_ratio': 0.983, 'median_sharpness': 446.87}",
+  "a4k {'n': 24, 'median_img_err': 0.0982, 'mean_img_err': 0.0955, 'luma_within_10pct': 19, 'median_abs_log_luma': 0.0569, 'median_sat_ratio': 0.998, 'median_sharpness': 286.48}",
+  "a1260 {'n': 24, 'median_img_err': 0.0738, 'mean_img_err': 0.0846, 'luma_within_10pct': 19, 'median_abs_log_luma': 0.0445, 'median_sat_ratio': 0.996, 'median_sharpness': 68.38}",
+  "a1330 {'n': 24, 'median_img_err': 0.0741, 'mean_img_err': 0.0874, 'luma_within_10pct': 20, 'median_abs_log_luma': 0.0395, 'median_sat_ratio': 0.991, 'median_sharpness': 80.93}",
+  "a1440 {'n': 24, 'median_img_err': 0.0752, 'mean_img_err': 0.0833, 'luma_within_10pct': 20, 'median_abs_log_luma': 0.0411, 'median_sat_ratio': 0.998, 'median_sharpness': 89.12}",
+  "",
+  "img_err / luma ratio / centre R",
+  "preset                                                gt               b4k               a4k             a1260             a1330             a1440",
+  "$$$ Royal - Mashup (103).milk            0.000/1.00/0.23   0.127/1.12/0.26   0.127/1.12/0.26   0.102/1.06/0.26   0.115/1.09/0.27   0.097/1.04/0.24",
+  "$$$ Royal - Mashup (162).milk            0.000/1.00/0.45   0.017/1.02/0.46   0.017/1.02/0.46   0.015/1.02/0.46   0.015/1.00/0.44   0.016/1.04/0.47",
+  "$$$ Royal - Mashup (191).milk            0.000/1.00/0.13  0.292/11.69/0.28  0.400/15.92/0.27  0.385/15.42/0.24  0.384/15.35/0.25  0.377/15.08/0.25",
+  "$$$ Royal - Mashup (397).milk            0.000/1.00/0.35   0.012/1.08/0.33   0.012/1.08/0.33   0.011/1.05/0.35   0.011/1.04/0.35   0.011/1.06/0.35",
+  "Flexi - alien complex 03.milk            0.000/1.00/0.74   0.174/1.06/0.80   0.097/0.93/0.68   0.064/0.94/0.69   0.064/0.95/0.70   0.069/0.94/0.69",
+  "Fumbling_Foo & Flexi, Martin, Orb - Ac   0.000/1.00/0.66   0.319/0.88/0.47   0.106/1.00/0.01   0.076/1.01/0.59   0.092/1.00/0.62   0.089/1.00/0.55",
+  "Fvese-mvfun2.milk                        0.000/1.00/0.87   0.116/1.02/0.84   0.116/1.02/0.84   0.077/1.01/0.85   0.082/1.00/0.85   0.080/1.00/0.85",
+  "Goody's Trichromatic Mind Games.milk     0.000/1.00/0.04   0.016/1.06/0.05   0.016/1.06/0.05   0.012/1.03/0.04   0.012/1.04/0.04   0.013/1.04/0.05",
+  "Hexcollie - Virtual LSD (martin shader   0.000/1.00/0.59   0.187/1.07/0.54   0.176/1.14/0.55   0.201/1.15/0.54   0.213/1.25/0.54   0.153/1.11/0.56",
+  "Serge + 158 002.milk                     0.000/1.00/0.04   0.021/0.99/0.04   0.021/0.99/0.04   0.019/0.99/0.04   0.019/0.99/0.04   0.020/0.99/0.04",
+  "Serge circles005b.milk                   0.000/1.00/0.93   0.312/1.36/0.96   0.107/1.21/0.95   0.063/1.10/0.94   0.069/1.12/0.94   0.075/1.13/0.94",
+  "TonyMilkdrop - I Like Cartoon --- Isos   0.000/1.00/0.72   0.212/0.99/0.73   0.200/0.97/0.69   0.201/0.87/0.76   0.196/1.03/0.80   0.198/0.91/0.74",
+  "TonyMilkdrop - Nuclear [Flexi - help o   0.000/1.00/0.58   0.253/0.96/0.52   0.177/0.99/0.54   0.174/1.01/0.56   0.201/0.91/0.51   0.211/0.97/0.54",
+  "cen-Fumbling_Foo & Flexi, Martin, Orb    0.000/1.00/0.97   0.171/1.05/0.95   0.102/1.01/0.98   0.087/1.02/0.98   0.090/1.02/0.98   0.091/1.00/0.98",
+  "cen-Milkdrop Mashup Masters ADAMFX 2 r   0.000/1.00/0.17   0.060/0.89/0.18   0.032/1.08/0.16   0.026/1.04/0.16   0.025/1.04/0.16   0.027/1.04/0.16",
+  "cen-Rovastar - Harlequin's Fractal Enc   0.000/1.00/0.13   0.057/1.03/0.13   0.010/1.00/0.13   0.008/1.00/0.13   0.010/1.00/0.13   0.010/1.00/0.13",
+  "cen-TonyMilkdrop - Rhythm Of My Life [   0.000/1.00/0.22   0.074/0.83/0.20   0.052/1.06/0.23   0.038/1.01/0.22   0.040/1.01/0.22   0.042/1.03/0.23",
+  "cen-suksma - ed geining hateops - Matr   0.000/1.00/0.29   0.117/0.75/0.29   0.091/1.38/0.30   0.073/1.30/0.30   0.074/1.29/0.30   0.078/1.31/0.30",
+  "fat cancer tour meant t nz+.milk         0.000/1.00/0.26   0.107/0.99/0.17   0.103/0.98/0.16   0.087/1.00/0.17   0.086/0.98/0.17   0.083/0.99/0.20",
+  "rce-ordinary - want.milk                 0.000/1.00/0.80   0.074/1.03/0.90   0.074/1.03/0.90   0.075/1.03/0.86   0.074/1.02/0.87   0.075/1.02/0.89",
+  "shifter - spincycle(remix) - love at h   0.000/1.00/0.80   0.100/1.09/1.00   0.100/1.09/1.00   0.100/1.09/1.00   0.080/1.07/0.99   0.043/1.02/0.87",
+  "suksma - bleuneycombinatoriccitensor.m   0.000/1.00/0.04   0.015/0.93/0.05   0.015/0.93/0.05   0.014/0.95/0.04   0.015/0.96/0.05   0.014/0.95/0.05",
+  "suksma - penattrition - geiss crossfir   0.000/1.00/0.18   0.150/0.73/0.12   0.117/1.03/0.21   0.100/1.09/0.26   0.104/1.08/0.26   0.105/1.07/0.26",
+  "suksma - yin - 395 - Artificial Inspir   0.000/1.00/0.29   0.026/1.09/0.34   0.026/1.09/0.34   0.024/1.07/0.33   0.024/1.07/0.33   0.024/1.07/0.33",
+  "",
+  "NOT IDENTICAL cen-Milkdrop Mashup Masters ADAMFX 2 raron + flexi {'classic_after==before (gt2==gt)': False, 'classic repeat (gtr==gt)': False, 'ref<=1: after==before at 1024x768': False, 'ref<=1: after==before at 1182x665': False}"
+ ],
+ "per_preset": {
+  "$$$ Royal - Mashup (103).milk": {
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.21532,
+    "sat": 0.3256,
+    "sharpness": 13.66,
+    "centre": [
+     0.24,
+     0.192,
+     0.186
+    ],
+    "img_err": 0.1666,
+    "luma_ratio": 1.0342
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.21532,
+    "sat": 0.3256,
+    "sharpness": 13.66,
+    "centre": [
+     0.24,
+     0.192,
+     0.186
+    ],
+    "img_err": 0.1666,
+    "luma_ratio": 1.0342
+   },
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.20819,
+    "sat": 0.3007,
+    "sharpness": 12.13,
+    "centre": [
+     0.232,
+     0.198,
+     0.193
+    ]
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.20819,
+    "sat": 0.3007,
+    "sharpness": 12.13,
+    "centre": [
+     0.232,
+     0.198,
+     0.193
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.20819,
+    "sat": 0.3007,
+    "sharpness": 12.13,
+    "centre": [
+     0.232,
+     0.198,
+     0.193
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.21202,
+    "sat": 0.3188,
+    "sharpness": 12.13,
+    "centre": [
+     0.245,
+     0.2,
+     0.195
+    ],
+    "img_err": 0.0699,
+    "luma_ratio": 1.0184
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.21202,
+    "sat": 0.3188,
+    "sharpness": 12.13,
+    "centre": [
+     0.245,
+     0.2,
+     0.195
+    ],
+    "img_err": 0.0699,
+    "luma_ratio": 1.0184
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.21708,
+    "sat": 0.2918,
+    "sharpness": 54.42,
+    "centre": [
+     0.243,
+     0.204,
+     0.199
+    ],
+    "img_err": 0.0966,
+    "luma_ratio": 1.0427
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.22604,
+    "sat": 0.2848,
+    "sharpness": 68.9,
+    "centre": [
+     0.268,
+     0.228,
+     0.222
+    ],
+    "img_err": 0.1146,
+    "luma_ratio": 1.0857
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.22078,
+    "sat": 0.2909,
+    "sharpness": 52.97,
+    "centre": [
+     0.263,
+     0.223,
+     0.217
+    ],
+    "img_err": 0.102,
+    "luma_ratio": 1.0605
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.2328,
+    "sat": 0.2695,
+    "sharpness": 187.04,
+    "centre": [
+     0.261,
+     0.221,
+     0.216
+    ],
+    "img_err": 0.1267,
+    "luma_ratio": 1.1182
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.2328,
+    "sat": 0.2695,
+    "sharpness": 187.05,
+    "centre": [
+     0.261,
+     0.221,
+     0.216
+    ],
+    "img_err": 0.1268,
+    "luma_ratio": 1.1182
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "$$$ Royal - Mashup (162).milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.14177,
+    "sat": 0.4557,
+    "sharpness": 14.81,
+    "centre": [
+     0.445,
+     0.448,
+     0.44
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.14177,
+    "sat": 0.4557,
+    "sharpness": 14.81,
+    "centre": [
+     0.445,
+     0.448,
+     0.44
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.14177,
+    "sat": 0.4557,
+    "sharpness": 14.81,
+    "centre": [
+     0.445,
+     0.448,
+     0.44
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.13666,
+    "sat": 0.4677,
+    "sharpness": 14.68,
+    "centre": [
+     0.502,
+     0.5,
+     0.499
+    ],
+    "img_err": 0.0664,
+    "luma_ratio": 0.964
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.13666,
+    "sat": 0.4677,
+    "sharpness": 14.68,
+    "centre": [
+     0.502,
+     0.5,
+     0.499
+    ],
+    "img_err": 0.0664,
+    "luma_ratio": 0.964
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.14177,
+    "sat": 0.4557,
+    "sharpness": 14.81,
+    "centre": [
+     0.445,
+     0.448,
+     0.44
+    ],
+    "img_err": 0.0006,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.14177,
+    "sat": 0.4557,
+    "sharpness": 14.81,
+    "centre": [
+     0.445,
+     0.448,
+     0.44
+    ],
+    "img_err": 0.0006,
+    "luma_ratio": 1.0
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.14426,
+    "sat": 0.4541,
+    "sharpness": 62.72,
+    "centre": [
+     0.456,
+     0.457,
+     0.45
+    ],
+    "img_err": 0.0146,
+    "luma_ratio": 1.0176
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.14161,
+    "sat": 0.4555,
+    "sharpness": 74.2,
+    "centre": [
+     0.441,
+     0.443,
+     0.436
+    ],
+    "img_err": 0.0154,
+    "luma_ratio": 0.9989
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.14691,
+    "sat": 0.4547,
+    "sharpness": 72.23,
+    "centre": [
+     0.471,
+     0.469,
+     0.465
+    ],
+    "img_err": 0.0157,
+    "luma_ratio": 1.0363
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.14488,
+    "sat": 0.455,
+    "sharpness": 202.23,
+    "centre": [
+     0.459,
+     0.458,
+     0.453
+    ],
+    "img_err": 0.0169,
+    "luma_ratio": 1.0219
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.14488,
+    "sat": 0.455,
+    "sharpness": 202.23,
+    "centre": [
+     0.459,
+     0.458,
+     0.453
+    ],
+    "img_err": 0.0169,
+    "luma_ratio": 1.0219
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "$$$ Royal - Mashup (191).milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.02642,
+    "sat": 0.0,
+    "sharpness": 2.3,
+    "centre": [
+     0.132,
+     0.132,
+     0.132
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.02642,
+    "sat": 0.0,
+    "sharpness": 2.3,
+    "centre": [
+     0.132,
+     0.132,
+     0.132
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.02642,
+    "sat": 0.0,
+    "sharpness": 2.3,
+    "centre": [
+     0.132,
+     0.132,
+     0.132
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.15748,
+    "sat": 0.0,
+    "sharpness": 7.7,
+    "centre": [
+     0.099,
+     0.099,
+     0.099
+    ],
+    "img_err": 0.1468,
+    "luma_ratio": 5.9606
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.15748,
+    "sat": 0.0,
+    "sharpness": 7.7,
+    "centre": [
+     0.099,
+     0.099,
+     0.099
+    ],
+    "img_err": 0.1468,
+    "luma_ratio": 5.9606
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.02633,
+    "sat": 0.0,
+    "sharpness": 2.29,
+    "centre": [
+     0.132,
+     0.132,
+     0.132
+    ],
+    "img_err": 0.0007,
+    "luma_ratio": 0.9966
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.02633,
+    "sat": 0.0,
+    "sharpness": 2.29,
+    "centre": [
+     0.132,
+     0.132,
+     0.132
+    ],
+    "img_err": 0.0007,
+    "luma_ratio": 0.9966
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.4074,
+    "sat": 0.0,
+    "sharpness": 50.87,
+    "centre": [
+     0.24,
+     0.24,
+     0.24
+    ],
+    "img_err": 0.385,
+    "luma_ratio": 15.4201
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.40567,
+    "sat": 0.0,
+    "sharpness": 55.42,
+    "centre": [
+     0.247,
+     0.247,
+     0.247
+    ],
+    "img_err": 0.3844,
+    "luma_ratio": 15.3547
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.39846,
+    "sat": 0.0,
+    "sharpness": 64.51,
+    "centre": [
+     0.249,
+     0.249,
+     0.249
+    ],
+    "img_err": 0.3767,
+    "luma_ratio": 15.0818
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.30883,
+    "sat": 0.0,
+    "sharpness": 475.91,
+    "centre": [
+     0.275,
+     0.275,
+     0.275
+    ],
+    "img_err": 0.2919,
+    "luma_ratio": 11.6893
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.42069,
+    "sat": 0.0,
+    "sharpness": 172.4,
+    "centre": [
+     0.272,
+     0.272,
+     0.272
+    ],
+    "img_err": 0.3996,
+    "luma_ratio": 15.9232
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "$$$ Royal - Mashup (397).milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.03968,
+    "sat": 0.6718,
+    "sharpness": 0.31,
+    "centre": [
+     0.349,
+     0.146,
+     0.069
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.03968,
+    "sat": 0.6718,
+    "sharpness": 0.31,
+    "centre": [
+     0.349,
+     0.146,
+     0.069
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.05498,
+    "sat": 0.7557,
+    "sharpness": 0.34,
+    "centre": [
+     0.38,
+     0.123,
+     0.061
+    ],
+    "img_err": 0.0482,
+    "luma_ratio": 1.3856
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.03968,
+    "sat": 0.6718,
+    "sharpness": 0.31,
+    "centre": [
+     0.349,
+     0.146,
+     0.069
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.05498,
+    "sat": 0.7557,
+    "sharpness": 0.34,
+    "centre": [
+     0.38,
+     0.123,
+     0.061
+    ],
+    "img_err": 0.0482,
+    "luma_ratio": 1.3856
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.03968,
+    "sat": 0.6718,
+    "sharpness": 0.31,
+    "centre": [
+     0.349,
+     0.146,
+     0.069
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.03968,
+    "sat": 0.6718,
+    "sharpness": 0.31,
+    "centre": [
+     0.349,
+     0.146,
+     0.069
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.04165,
+    "sat": 0.6765,
+    "sharpness": 0.4,
+    "centre": [
+     0.349,
+     0.145,
+     0.069
+    ],
+    "img_err": 0.0108,
+    "luma_ratio": 1.0496
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.04136,
+    "sat": 0.6793,
+    "sharpness": 0.39,
+    "centre": [
+     0.353,
+     0.142,
+     0.069
+    ],
+    "img_err": 0.0107,
+    "luma_ratio": 1.0423
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.04192,
+    "sat": 0.6835,
+    "sharpness": 0.43,
+    "centre": [
+     0.346,
+     0.142,
+     0.071
+    ],
+    "img_err": 0.0112,
+    "luma_ratio": 1.0565
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.04275,
+    "sat": 0.6833,
+    "sharpness": 0.54,
+    "centre": [
+     0.334,
+     0.146,
+     0.075
+    ],
+    "img_err": 0.0124,
+    "luma_ratio": 1.0774
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.04275,
+    "sat": 0.6833,
+    "sharpness": 0.54,
+    "centre": [
+     0.334,
+     0.146,
+     0.075
+    ],
+    "img_err": 0.0124,
+    "luma_ratio": 1.0774
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "Flexi - alien complex 03.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.57455,
+    "sat": 0.4658,
+    "sharpness": 5.49,
+    "centre": [
+     0.738,
+     0.531,
+     0.48
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.57455,
+    "sat": 0.4658,
+    "sharpness": 5.49,
+    "centre": [
+     0.738,
+     0.531,
+     0.48
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.57455,
+    "sat": 0.4658,
+    "sharpness": 5.49,
+    "centre": [
+     0.738,
+     0.531,
+     0.48
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.58045,
+    "sat": 0.4661,
+    "sharpness": 6.71,
+    "centre": [
+     0.76,
+     0.541,
+     0.493
+    ],
+    "img_err": 0.0643,
+    "luma_ratio": 1.0103
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.58045,
+    "sat": 0.4661,
+    "sharpness": 6.71,
+    "centre": [
+     0.76,
+     0.541,
+     0.493
+    ],
+    "img_err": 0.0643,
+    "luma_ratio": 1.0103
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.57356,
+    "sat": 0.4689,
+    "sharpness": 5.89,
+    "centre": [
+     0.743,
+     0.53,
+     0.48
+    ],
+    "img_err": 0.0367,
+    "luma_ratio": 0.9983
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.57356,
+    "sat": 0.4689,
+    "sharpness": 5.89,
+    "centre": [
+     0.743,
+     0.53,
+     0.48
+    ],
+    "img_err": 0.0367,
+    "luma_ratio": 0.9983
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.54118,
+    "sat": 0.4685,
+    "sharpness": 36.19,
+    "centre": [
+     0.695,
+     0.512,
+     0.454
+    ],
+    "img_err": 0.0639,
+    "luma_ratio": 0.9419
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.54411,
+    "sat": 0.4666,
+    "sharpness": 41.58,
+    "centre": [
+     0.698,
+     0.514,
+     0.457
+    ],
+    "img_err": 0.0639,
+    "luma_ratio": 0.947
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.53889,
+    "sat": 0.4651,
+    "sharpness": 52.05,
+    "centre": [
+     0.692,
+     0.512,
+     0.454
+    ],
+    "img_err": 0.069,
+    "luma_ratio": 0.9379
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.61006,
+    "sat": 0.5276,
+    "sharpness": 1038.68,
+    "centre": [
+     0.802,
+     0.545,
+     0.514
+    ],
+    "img_err": 0.1743,
+    "luma_ratio": 1.0618
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.53472,
+    "sat": 0.4474,
+    "sharpness": 202.44,
+    "centre": [
+     0.675,
+     0.512,
+     0.451
+    ],
+    "img_err": 0.0966,
+    "luma_ratio": 0.9307
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.2624,
+    "sat": 0.8025,
+    "sharpness": 13.7,
+    "centre": [
+     0.659,
+     0.158,
+     0.061
+    ]
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.26169,
+    "sat": 0.7933,
+    "sharpness": 89.17,
+    "centre": [
+     0.622,
+     0.177,
+     0.061
+    ],
+    "img_err": 0.0924,
+    "luma_ratio": 0.9973
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.2624,
+    "sat": 0.8025,
+    "sharpness": 13.7,
+    "centre": [
+     0.659,
+     0.158,
+     0.061
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.2624,
+    "sat": 0.8025,
+    "sharpness": 13.7,
+    "centre": [
+     0.659,
+     0.158,
+     0.061
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.25005,
+    "sat": 0.8228,
+    "sharpness": 12.97,
+    "centre": [
+     0.59,
+     0.196,
+     0.111
+    ],
+    "img_err": 0.1845,
+    "luma_ratio": 0.9529
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.25005,
+    "sat": 0.8228,
+    "sharpness": 12.97,
+    "centre": [
+     0.59,
+     0.196,
+     0.111
+    ],
+    "img_err": 0.1845,
+    "luma_ratio": 0.9529
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.26184,
+    "sat": 0.799,
+    "sharpness": 13.51,
+    "centre": [
+     0.664,
+     0.159,
+     0.06
+    ],
+    "img_err": 0.0192,
+    "luma_ratio": 0.9979
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.26184,
+    "sat": 0.799,
+    "sharpness": 13.51,
+    "centre": [
+     0.664,
+     0.159,
+     0.06
+    ],
+    "img_err": 0.0192,
+    "luma_ratio": 0.9979
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.2638,
+    "sat": 0.8007,
+    "sharpness": 74.04,
+    "centre": [
+     0.593,
+     0.171,
+     0.062
+    ],
+    "img_err": 0.0765,
+    "luma_ratio": 1.0053
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.26118,
+    "sat": 0.7942,
+    "sharpness": 103.85,
+    "centre": [
+     0.551,
+     0.174,
+     0.06
+    ],
+    "img_err": 0.0886,
+    "luma_ratio": 0.9954
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.26317,
+    "sat": 0.8005,
+    "sharpness": 348.0,
+    "centre": [
+     0.005,
+     0.2,
+     0.058
+    ],
+    "img_err": 0.1062,
+    "luma_ratio": 1.0029
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.23203,
+    "sat": 0.4569,
+    "sharpness": 417.82,
+    "centre": [
+     0.467,
+     0.752,
+     0.251
+    ],
+    "img_err": 0.3189,
+    "luma_ratio": 0.8843
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "Fvese-mvfun2.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.6237,
+    "sat": 0.129,
+    "sharpness": 25.57,
+    "centre": [
+     0.868,
+     0.926,
+     0.881
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.6237,
+    "sat": 0.129,
+    "sharpness": 25.57,
+    "centre": [
+     0.868,
+     0.926,
+     0.881
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.6237,
+    "sat": 0.129,
+    "sharpness": 25.57,
+    "centre": [
+     0.868,
+     0.926,
+     0.881
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.45049,
+    "sat": 0.1301,
+    "sharpness": 42.24,
+    "centre": [
+     0.828,
+     0.879,
+     0.839
+    ],
+    "img_err": 0.1672,
+    "luma_ratio": 0.7223
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.45049,
+    "sat": 0.1301,
+    "sharpness": 42.24,
+    "centre": [
+     0.828,
+     0.879,
+     0.839
+    ],
+    "img_err": 0.1672,
+    "luma_ratio": 0.7223
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.63204,
+    "sat": 0.1283,
+    "sharpness": 34.1,
+    "centre": [
+     0.867,
+     0.924,
+     0.88
+    ],
+    "img_err": 0.0204,
+    "luma_ratio": 1.0134
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.63204,
+    "sat": 0.1283,
+    "sharpness": 34.1,
+    "centre": [
+     0.867,
+     0.924,
+     0.88
+    ],
+    "img_err": 0.0204,
+    "luma_ratio": 1.0134
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.6294,
+    "sat": 0.1259,
+    "sharpness": 317.38,
+    "centre": [
+     0.854,
+     0.908,
+     0.866
+    ],
+    "img_err": 0.0771,
+    "luma_ratio": 1.0091
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.62316,
+    "sat": 0.126,
+    "sharpness": 378.61,
+    "centre": [
+     0.85,
+     0.905,
+     0.862
+    ],
+    "img_err": 0.0823,
+    "luma_ratio": 0.9991
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.62207,
+    "sat": 0.1253,
+    "sharpness": 476.2,
+    "centre": [
+     0.851,
+     0.905,
+     0.862
+    ],
+    "img_err": 0.0799,
+    "luma_ratio": 0.9974
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.63521,
+    "sat": 0.1226,
+    "sharpness": 1837.08,
+    "centre": [
+     0.843,
+     0.897,
+     0.855
+    ],
+    "img_err": 0.1161,
+    "luma_ratio": 1.0185
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.63521,
+    "sat": 0.1226,
+    "sharpness": 1837.08,
+    "centre": [
+     0.843,
+     0.897,
+     0.855
+    ],
+    "img_err": 0.1161,
+    "luma_ratio": 1.0185
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "Goody's Trichromatic Mind Games.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.07664,
+    "sat": 0.0646,
+    "sharpness": 16.18,
+    "centre": [
+     0.041,
+     0.037,
+     0.038
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.07664,
+    "sat": 0.0646,
+    "sharpness": 16.18,
+    "centre": [
+     0.041,
+     0.037,
+     0.038
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.07664,
+    "sat": 0.0646,
+    "sharpness": 16.18,
+    "centre": [
+     0.041,
+     0.037,
+     0.038
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.05723,
+    "sat": 0.0416,
+    "sharpness": 15.5,
+    "centre": [
+     0.02,
+     0.017,
+     0.019
+    ],
+    "img_err": 0.1053,
+    "luma_ratio": 0.7467
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.05723,
+    "sat": 0.0416,
+    "sharpness": 15.5,
+    "centre": [
+     0.02,
+     0.017,
+     0.019
+    ],
+    "img_err": 0.1053,
+    "luma_ratio": 0.7467
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.07685,
+    "sat": 0.0647,
+    "sharpness": 16.22,
+    "centre": [
+     0.041,
+     0.037,
+     0.038
+    ],
+    "img_err": 0.0029,
+    "luma_ratio": 1.0027
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.07685,
+    "sat": 0.0647,
+    "sharpness": 16.22,
+    "centre": [
+     0.041,
+     0.037,
+     0.038
+    ],
+    "img_err": 0.0029,
+    "luma_ratio": 1.0027
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.07927,
+    "sat": 0.0656,
+    "sharpness": 77.65,
+    "centre": [
+     0.045,
+     0.04,
+     0.041
+    ],
+    "img_err": 0.0116,
+    "luma_ratio": 1.0343
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.07945,
+    "sat": 0.0658,
+    "sharpness": 87.66,
+    "centre": [
+     0.045,
+     0.04,
+     0.042
+    ],
+    "img_err": 0.0121,
+    "luma_ratio": 1.0367
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.0798,
+    "sat": 0.066,
+    "sharpness": 103.44,
+    "centre": [
+     0.046,
+     0.041,
+     0.042
+    ],
+    "img_err": 0.0128,
+    "luma_ratio": 1.0412
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.08113,
+    "sat": 0.0672,
+    "sharpness": 365.88,
+    "centre": [
+     0.047,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0159,
+    "luma_ratio": 1.0586
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.08113,
+    "sat": 0.0672,
+    "sharpness": 365.88,
+    "centre": [
+     0.047,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0159,
+    "luma_ratio": 1.0586
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.25871,
+    "sat": 0.9004,
+    "sharpness": 16.65,
+    "centre": [
+     0.586,
+     0.237,
+     0.029
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.25871,
+    "sat": 0.9004,
+    "sharpness": 16.65,
+    "centre": [
+     0.586,
+     0.237,
+     0.029
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.25871,
+    "sat": 0.9004,
+    "sharpness": 16.65,
+    "centre": [
+     0.586,
+     0.237,
+     0.029
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.23942,
+    "sat": 0.9912,
+    "sharpness": 12.07,
+    "centre": [
+     0.471,
+     0.147,
+     0.006
+    ],
+    "img_err": 0.2019,
+    "luma_ratio": 0.9254
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.23942,
+    "sat": 0.9912,
+    "sharpness": 12.07,
+    "centre": [
+     0.471,
+     0.147,
+     0.006
+    ],
+    "img_err": 0.2019,
+    "luma_ratio": 0.9254
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.26786,
+    "sat": 0.9042,
+    "sharpness": 16.76,
+    "centre": [
+     0.569,
+     0.231,
+     0.032
+    ],
+    "img_err": 0.1153,
+    "luma_ratio": 1.0354
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.26786,
+    "sat": 0.9042,
+    "sharpness": 16.76,
+    "centre": [
+     0.569,
+     0.231,
+     0.032
+    ],
+    "img_err": 0.1153,
+    "luma_ratio": 1.0354
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.29706,
+    "sat": 0.9025,
+    "sharpness": 137.85,
+    "centre": [
+     0.54,
+     0.217,
+     0.031
+    ],
+    "img_err": 0.2013,
+    "luma_ratio": 1.1482
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.32323,
+    "sat": 0.8819,
+    "sharpness": 163.48,
+    "centre": [
+     0.544,
+     0.221,
+     0.029
+    ],
+    "img_err": 0.2132,
+    "luma_ratio": 1.2494
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.28635,
+    "sat": 0.9036,
+    "sharpness": 183.5,
+    "centre": [
+     0.556,
+     0.221,
+     0.027
+    ],
+    "img_err": 0.1526,
+    "luma_ratio": 1.1068
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.27662,
+    "sat": 0.8992,
+    "sharpness": 716.92,
+    "centre": [
+     0.538,
+     0.224,
+     0.038
+    ],
+    "img_err": 0.1869,
+    "luma_ratio": 1.0692
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.29429,
+    "sat": 0.9105,
+    "sharpness": 709.36,
+    "centre": [
+     0.547,
+     0.215,
+     0.029
+    ],
+    "img_err": 0.1761,
+    "luma_ratio": 1.1375
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "Serge + 158 002.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.37118,
+    "sat": 0.064,
+    "sharpness": 29.57,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.37118,
+    "sat": 0.064,
+    "sharpness": 29.57,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.37118,
+    "sat": 0.064,
+    "sharpness": 29.57,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.38445,
+    "sat": 0.0643,
+    "sharpness": 34.34,
+    "centre": [
+     0.046,
+     0.046,
+     0.047
+    ],
+    "img_err": 0.2138,
+    "luma_ratio": 1.0358
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.38445,
+    "sat": 0.0643,
+    "sharpness": 34.34,
+    "centre": [
+     0.046,
+     0.046,
+     0.047
+    ],
+    "img_err": 0.2138,
+    "luma_ratio": 1.0358
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.37117,
+    "sat": 0.0641,
+    "sharpness": 29.56,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0003,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.37117,
+    "sat": 0.0641,
+    "sharpness": 29.56,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0003,
+    "luma_ratio": 1.0
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.36874,
+    "sat": 0.0667,
+    "sharpness": 178.33,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.019,
+    "luma_ratio": 0.9934
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.36877,
+    "sat": 0.0663,
+    "sharpness": 202.91,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0191,
+    "luma_ratio": 0.9935
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.36788,
+    "sat": 0.0674,
+    "sharpness": 248.23,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.0197,
+    "luma_ratio": 0.9911
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.36668,
+    "sat": 0.0673,
+    "sharpness": 861.95,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.021,
+    "luma_ratio": 0.9879
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.36668,
+    "sat": 0.0673,
+    "sharpness": 861.95,
+    "centre": [
+     0.043,
+     0.043,
+     0.044
+    ],
+    "img_err": 0.021,
+    "luma_ratio": 0.9879
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "Serge circles005b.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.42675,
+    "sat": 0.6865,
+    "sharpness": 26.96,
+    "centre": [
+     0.932,
+     0.483,
+     0.482
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.42675,
+    "sat": 0.6865,
+    "sharpness": 26.96,
+    "centre": [
+     0.932,
+     0.483,
+     0.482
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.42675,
+    "sat": 0.6865,
+    "sharpness": 26.96,
+    "centre": [
+     0.932,
+     0.483,
+     0.482
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.3009,
+    "sat": 0.6864,
+    "sharpness": 53.84,
+    "centre": [
+     0.87,
+     0.378,
+     0.378
+    ],
+    "img_err": 0.3133,
+    "luma_ratio": 0.7051
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.3009,
+    "sat": 0.6864,
+    "sharpness": 53.84,
+    "centre": [
+     0.87,
+     0.378,
+     0.378
+    ],
+    "img_err": 0.3133,
+    "luma_ratio": 0.7051
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.42995,
+    "sat": 0.6821,
+    "sharpness": 35.64,
+    "centre": [
+     0.932,
+     0.487,
+     0.487
+    ],
+    "img_err": 0.0143,
+    "luma_ratio": 1.0075
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.42995,
+    "sat": 0.6821,
+    "sharpness": 35.64,
+    "centre": [
+     0.932,
+     0.487,
+     0.487
+    ],
+    "img_err": 0.0143,
+    "luma_ratio": 1.0075
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.47138,
+    "sat": 0.6376,
+    "sharpness": 291.46,
+    "centre": [
+     0.941,
+     0.521,
+     0.52
+    ],
+    "img_err": 0.0627,
+    "luma_ratio": 1.1046
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.47942,
+    "sat": 0.6302,
+    "sharpness": 354.48,
+    "centre": [
+     0.943,
+     0.527,
+     0.526
+    ],
+    "img_err": 0.0694,
+    "luma_ratio": 1.1234
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.48302,
+    "sat": 0.6252,
+    "sharpness": 447.4,
+    "centre": [
+     0.944,
+     0.53,
+     0.529
+    ],
+    "img_err": 0.0749,
+    "luma_ratio": 1.1319
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.57846,
+    "sat": 0.4323,
+    "sharpness": 1053.4,
+    "centre": [
+     0.957,
+     0.629,
+     0.628
+    ],
+    "img_err": 0.3116,
+    "luma_ratio": 1.3555
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.51484,
+    "sat": 0.5888,
+    "sharpness": 1803.76,
+    "centre": [
+     0.951,
+     0.559,
+     0.558
+    ],
+    "img_err": 0.1074,
+    "luma_ratio": 1.2064
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.69759,
+    "sat": 0.3482,
+    "sharpness": 1.5,
+    "centre": [
+     0.724,
+     0.68,
+     0.56
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.69759,
+    "sat": 0.3482,
+    "sharpness": 1.5,
+    "centre": [
+     0.724,
+     0.68,
+     0.56
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.69759,
+    "sat": 0.3482,
+    "sharpness": 1.5,
+    "centre": [
+     0.724,
+     0.68,
+     0.56
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.67443,
+    "sat": 0.3685,
+    "sharpness": 2.32,
+    "centre": [
+     0.766,
+     0.67,
+     0.603
+    ],
+    "img_err": 0.2054,
+    "luma_ratio": 0.9668
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.67443,
+    "sat": 0.3685,
+    "sharpness": 2.32,
+    "centre": [
+     0.766,
+     0.67,
+     0.603
+    ],
+    "img_err": 0.2054,
+    "luma_ratio": 0.9668
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.68993,
+    "sat": 0.3578,
+    "sharpness": 1.89,
+    "centre": [
+     0.73,
+     0.694,
+     0.578
+    ],
+    "img_err": 0.0974,
+    "luma_ratio": 0.989
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.68993,
+    "sat": 0.3578,
+    "sharpness": 1.89,
+    "centre": [
+     0.73,
+     0.694,
+     0.578
+    ],
+    "img_err": 0.0974,
+    "luma_ratio": 0.989
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.60518,
+    "sat": 0.4444,
+    "sharpness": 5.42,
+    "centre": [
+     0.76,
+     0.524,
+     0.511
+    ],
+    "img_err": 0.2006,
+    "luma_ratio": 0.8675
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.7218,
+    "sat": 0.3172,
+    "sharpness": 18.17,
+    "centre": [
+     0.796,
+     0.743,
+     0.671
+    ],
+    "img_err": 0.1962,
+    "luma_ratio": 1.0347
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.63724,
+    "sat": 0.4131,
+    "sharpness": 12.08,
+    "centre": [
+     0.736,
+     0.575,
+     0.515
+    ],
+    "img_err": 0.1978,
+    "luma_ratio": 0.9135
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.69192,
+    "sat": 0.353,
+    "sharpness": 13.26,
+    "centre": [
+     0.734,
+     0.717,
+     0.588
+    ],
+    "img_err": 0.2125,
+    "luma_ratio": 0.9919
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.67624,
+    "sat": 0.3676,
+    "sharpness": 36.23,
+    "centre": [
+     0.691,
+     0.727,
+     0.562
+    ],
+    "img_err": 0.1999,
+    "luma_ratio": 0.9694
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.4856,
+    "sat": 0.376,
+    "sharpness": 27.18,
+    "centre": [
+     0.578,
+     0.457,
+     0.419
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.4856,
+    "sat": 0.376,
+    "sharpness": 27.18,
+    "centre": [
+     0.578,
+     0.457,
+     0.419
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.4856,
+    "sat": 0.376,
+    "sharpness": 27.18,
+    "centre": [
+     0.578,
+     0.457,
+     0.419
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.51403,
+    "sat": 0.3482,
+    "sharpness": 27.9,
+    "centre": [
+     0.6,
+     0.472,
+     0.438
+    ],
+    "img_err": 0.1683,
+    "luma_ratio": 1.0585
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.51403,
+    "sat": 0.3482,
+    "sharpness": 27.9,
+    "centre": [
+     0.6,
+     0.472,
+     0.438
+    ],
+    "img_err": 0.1683,
+    "luma_ratio": 1.0585
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.50528,
+    "sat": 0.3517,
+    "sharpness": 25.23,
+    "centre": [
+     0.581,
+     0.46,
+     0.425
+    ],
+    "img_err": 0.1544,
+    "luma_ratio": 1.0405
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.50528,
+    "sat": 0.3517,
+    "sharpness": 25.23,
+    "centre": [
+     0.581,
+     0.46,
+     0.425
+    ],
+    "img_err": 0.1544,
+    "luma_ratio": 1.0405
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.48861,
+    "sat": 0.3585,
+    "sharpness": 188.93,
+    "centre": [
+     0.556,
+     0.438,
+     0.405
+    ],
+    "img_err": 0.1737,
+    "luma_ratio": 1.0062
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.44118,
+    "sat": 0.3876,
+    "sharpness": 310.25,
+    "centre": [
+     0.511,
+     0.402,
+     0.375
+    ],
+    "img_err": 0.2014,
+    "luma_ratio": 0.9085
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.4691,
+    "sat": 0.3752,
+    "sharpness": 400.42,
+    "centre": [
+     0.541,
+     0.427,
+     0.393
+    ],
+    "img_err": 0.2108,
+    "luma_ratio": 0.966
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.46541,
+    "sat": 0.3457,
+    "sharpness": 1478.21,
+    "centre": [
+     0.516,
+     0.424,
+     0.388
+    ],
+    "img_err": 0.2525,
+    "luma_ratio": 0.9584
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.47911,
+    "sat": 0.3598,
+    "sharpness": 1049.86,
+    "centre": [
+     0.538,
+     0.425,
+     0.399
+    ],
+    "img_err": 0.1768,
+    "luma_ratio": 0.9866
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "cen-Fumbling_Foo & Flexi, Martin, Orb - Star Forge v5a.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.55387,
+    "sat": 0.708,
+    "sharpness": 21.71,
+    "centre": [
+     0.973,
+     0.963,
+     0.931
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.55387,
+    "sat": 0.708,
+    "sharpness": 21.71,
+    "centre": [
+     0.973,
+     0.963,
+     0.931
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.55387,
+    "sat": 0.708,
+    "sharpness": 21.71,
+    "centre": [
+     0.973,
+     0.963,
+     0.931
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.5638,
+    "sat": 0.7402,
+    "sharpness": 24.18,
+    "centre": [
+     0.979,
+     0.943,
+     0.912
+    ],
+    "img_err": 0.2006,
+    "luma_ratio": 1.0179
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.5638,
+    "sat": 0.7402,
+    "sharpness": 24.18,
+    "centre": [
+     0.979,
+     0.943,
+     0.912
+    ],
+    "img_err": 0.2006,
+    "luma_ratio": 1.0179
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.55375,
+    "sat": 0.7078,
+    "sharpness": 21.78,
+    "centre": [
+     0.973,
+     0.963,
+     0.931
+    ],
+    "img_err": 0.0069,
+    "luma_ratio": 0.9998
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.55375,
+    "sat": 0.7078,
+    "sharpness": 21.78,
+    "centre": [
+     0.973,
+     0.963,
+     0.931
+    ],
+    "img_err": 0.0069,
+    "luma_ratio": 0.9998
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.56427,
+    "sat": 0.7028,
+    "sharpness": 130.81,
+    "centre": [
+     0.977,
+     0.967,
+     0.936
+    ],
+    "img_err": 0.087,
+    "luma_ratio": 1.0188
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.56289,
+    "sat": 0.7016,
+    "sharpness": 146.75,
+    "centre": [
+     0.978,
+     0.967,
+     0.935
+    ],
+    "img_err": 0.0902,
+    "luma_ratio": 1.0163
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.5559,
+    "sat": 0.707,
+    "sharpness": 174.47,
+    "centre": [
+     0.978,
+     0.968,
+     0.937
+    ],
+    "img_err": 0.0914,
+    "luma_ratio": 1.0037
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.58261,
+    "sat": 0.6661,
+    "sharpness": 524.91,
+    "centre": [
+     0.951,
+     0.96,
+     0.926
+    ],
+    "img_err": 0.1705,
+    "luma_ratio": 1.0519
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.55989,
+    "sat": 0.7008,
+    "sharpness": 446.47,
+    "centre": [
+     0.979,
+     0.969,
+     0.938
+    ],
+    "img_err": 0.1025,
+    "luma_ratio": 1.0109
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "cen-Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.11241,
+    "sat": 0.7729,
+    "sharpness": 3.53,
+    "centre": [
+     0.165,
+     0.114,
+     0.175
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.11254,
+    "sat": 0.7723,
+    "sharpness": 3.65,
+    "centre": [
+     0.164,
+     0.112,
+     0.174
+    ],
+    "img_err": 0.0161,
+    "luma_ratio": 1.0012
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.1119,
+    "sat": 0.7727,
+    "sharpness": 3.49,
+    "centre": [
+     0.165,
+     0.114,
+     0.173
+    ],
+    "img_err": 0.016,
+    "luma_ratio": 0.9955
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.11107,
+    "sat": 0.7763,
+    "sharpness": 4.02,
+    "centre": [
+     0.162,
+     0.134,
+     0.174
+    ],
+    "img_err": 0.0803,
+    "luma_ratio": 0.9881
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.11125,
+    "sat": 0.7765,
+    "sharpness": 3.97,
+    "centre": [
+     0.161,
+     0.134,
+     0.172
+    ],
+    "img_err": 0.0802,
+    "luma_ratio": 0.9897
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.11173,
+    "sat": 0.7729,
+    "sharpness": 3.54,
+    "centre": [
+     0.165,
+     0.114,
+     0.173
+    ],
+    "img_err": 0.0162,
+    "luma_ratio": 0.994
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.11197,
+    "sat": 0.7724,
+    "sharpness": 3.55,
+    "centre": [
+     0.165,
+     0.113,
+     0.173
+    ],
+    "img_err": 0.0161,
+    "luma_ratio": 0.9961
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.11719,
+    "sat": 0.7713,
+    "sharpness": 27.3,
+    "centre": [
+     0.161,
+     0.115,
+     0.168
+    ],
+    "img_err": 0.0259,
+    "luma_ratio": 1.0425
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.11671,
+    "sat": 0.7723,
+    "sharpness": 30.57,
+    "centre": [
+     0.162,
+     0.114,
+     0.169
+    ],
+    "img_err": 0.0254,
+    "luma_ratio": 1.0383
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.11739,
+    "sat": 0.7713,
+    "sharpness": 41.39,
+    "centre": [
+     0.16,
+     0.114,
+     0.166
+    ],
+    "img_err": 0.0267,
+    "luma_ratio": 1.0443
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.10045,
+    "sat": 0.8115,
+    "sharpness": 126.18,
+    "centre": [
+     0.176,
+     0.082,
+     0.183
+    ],
+    "img_err": 0.0599,
+    "luma_ratio": 0.8936
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.12095,
+    "sat": 0.7722,
+    "sharpness": 175.95,
+    "centre": [
+     0.164,
+     0.114,
+     0.169
+    ],
+    "img_err": 0.0317,
+    "luma_ratio": 1.076
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": false,
+    "classic repeat (gtr==gt)": false,
+    "ref<=1: after==before at 1024x768": false,
+    "ref<=1: after==before at 1182x665": false
+   }
+  },
+  "cen-Rovastar - Harlequin's Fractal Encounter - piece da rats in us.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.15714,
+    "sat": 0.4797,
+    "sharpness": 0.17,
+    "centre": [
+     0.129,
+     0.129,
+     0.087
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.15714,
+    "sat": 0.4797,
+    "sharpness": 0.17,
+    "centre": [
+     0.129,
+     0.129,
+     0.087
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.15714,
+    "sat": 0.4797,
+    "sharpness": 0.17,
+    "centre": [
+     0.129,
+     0.129,
+     0.087
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.15623,
+    "sat": 0.4857,
+    "sharpness": 0.17,
+    "centre": [
+     0.129,
+     0.121,
+     0.078
+    ],
+    "img_err": 0.0705,
+    "luma_ratio": 0.9942
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.15623,
+    "sat": 0.4857,
+    "sharpness": 0.17,
+    "centre": [
+     0.129,
+     0.121,
+     0.078
+    ],
+    "img_err": 0.0705,
+    "luma_ratio": 0.9942
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.15714,
+    "sat": 0.4797,
+    "sharpness": 0.17,
+    "centre": [
+     0.129,
+     0.129,
+     0.087
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.15714,
+    "sat": 0.4797,
+    "sharpness": 0.17,
+    "centre": [
+     0.129,
+     0.129,
+     0.087
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.15729,
+    "sat": 0.4797,
+    "sharpness": 0.21,
+    "centre": [
+     0.128,
+     0.128,
+     0.084
+    ],
+    "img_err": 0.0078,
+    "luma_ratio": 1.001
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.15724,
+    "sat": 0.4798,
+    "sharpness": 0.19,
+    "centre": [
+     0.132,
+     0.132,
+     0.091
+    ],
+    "img_err": 0.0099,
+    "luma_ratio": 1.0006
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.15725,
+    "sat": 0.4799,
+    "sharpness": 0.24,
+    "centre": [
+     0.13,
+     0.13,
+     0.087
+    ],
+    "img_err": 0.0096,
+    "luma_ratio": 1.0007
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.16114,
+    "sat": 0.4715,
+    "sharpness": 0.45,
+    "centre": [
+     0.128,
+     0.135,
+     0.096
+    ],
+    "img_err": 0.0568,
+    "luma_ratio": 1.0255
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.15722,
+    "sat": 0.4797,
+    "sharpness": 0.25,
+    "centre": [
+     0.129,
+     0.13,
+     0.086
+    ],
+    "img_err": 0.0098,
+    "luma_ratio": 1.0005
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "cen-TonyMilkdrop - Rhythm Of My Life [Flexi - multiverse] --- Isosceles edit.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.18058,
+    "sat": 0.3451,
+    "sharpness": 67.67,
+    "centre": [
+     0.223,
+     0.183,
+     0.152
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.18058,
+    "sat": 0.3451,
+    "sharpness": 67.67,
+    "centre": [
+     0.223,
+     0.183,
+     0.152
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.18058,
+    "sat": 0.3451,
+    "sharpness": 67.67,
+    "centre": [
+     0.223,
+     0.183,
+     0.152
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.1808,
+    "sat": 0.3471,
+    "sharpness": 74.73,
+    "centre": [
+     0.237,
+     0.195,
+     0.161
+    ],
+    "img_err": 0.1829,
+    "luma_ratio": 1.0012
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.1808,
+    "sat": 0.3471,
+    "sharpness": 74.73,
+    "centre": [
+     0.237,
+     0.195,
+     0.161
+    ],
+    "img_err": 0.1829,
+    "luma_ratio": 1.0012
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.18058,
+    "sat": 0.3451,
+    "sharpness": 67.67,
+    "centre": [
+     0.223,
+     0.183,
+     0.152
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.18058,
+    "sat": 0.3451,
+    "sharpness": 67.67,
+    "centre": [
+     0.223,
+     0.183,
+     0.152
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.18158,
+    "sat": 0.3174,
+    "sharpness": 558.01,
+    "centre": [
+     0.223,
+     0.192,
+     0.166
+    ],
+    "img_err": 0.038,
+    "luma_ratio": 1.0055
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.18151,
+    "sat": 0.3155,
+    "sharpness": 651.58,
+    "centre": [
+     0.224,
+     0.192,
+     0.166
+    ],
+    "img_err": 0.0402,
+    "luma_ratio": 1.0052
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.18629,
+    "sat": 0.3167,
+    "sharpness": 821.29,
+    "centre": [
+     0.231,
+     0.199,
+     0.172
+    ],
+    "img_err": 0.0418,
+    "luma_ratio": 1.0316
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.19115,
+    "sat": 0.3056,
+    "sharpness": 3261.11,
+    "centre": [
+     0.228,
+     0.199,
+     0.173
+    ],
+    "img_err": 0.0516,
+    "luma_ratio": 1.0585
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.14982,
+    "sat": 0.2671,
+    "sharpness": 2927.84,
+    "centre": [
+     0.202,
+     0.165,
+     0.137
+    ],
+    "img_err": 0.0737,
+    "luma_ratio": 0.8297
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "cen-suksma - ed geining hateops - Matrix Moral Infinite.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.07789,
+    "sat": 0.9729,
+    "sharpness": 0.18,
+    "centre": [
+     0.295,
+     0.03,
+     0.45
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.07789,
+    "sat": 0.9729,
+    "sharpness": 0.18,
+    "centre": [
+     0.295,
+     0.03,
+     0.45
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.07789,
+    "sat": 0.9729,
+    "sharpness": 0.18,
+    "centre": [
+     0.295,
+     0.03,
+     0.45
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.08676,
+    "sat": 0.9654,
+    "sharpness": 0.18,
+    "centre": [
+     0.307,
+     0.048,
+     0.308
+    ],
+    "img_err": 0.1064,
+    "luma_ratio": 1.1139
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.08676,
+    "sat": 0.9654,
+    "sharpness": 0.18,
+    "centre": [
+     0.307,
+     0.048,
+     0.308
+    ],
+    "img_err": 0.1064,
+    "luma_ratio": 1.1139
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.07789,
+    "sat": 0.9729,
+    "sharpness": 0.18,
+    "centre": [
+     0.295,
+     0.03,
+     0.45
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.07789,
+    "sat": 0.9729,
+    "sharpness": 0.18,
+    "centre": [
+     0.295,
+     0.03,
+     0.45
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.10089,
+    "sat": 0.9774,
+    "sharpness": 0.59,
+    "centre": [
+     0.299,
+     0.031,
+     0.544
+    ],
+    "img_err": 0.0727,
+    "luma_ratio": 1.2953
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.10078,
+    "sat": 0.9775,
+    "sharpness": 0.67,
+    "centre": [
+     0.299,
+     0.031,
+     0.552
+    ],
+    "img_err": 0.0741,
+    "luma_ratio": 1.2939
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.10185,
+    "sat": 0.9776,
+    "sharpness": 0.83,
+    "centre": [
+     0.299,
+     0.031,
+     0.559
+    ],
+    "img_err": 0.0778,
+    "luma_ratio": 1.3076
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.05831,
+    "sat": 0.963,
+    "sharpness": 1.43,
+    "centre": [
+     0.29,
+     0.031,
+     0.222
+    ],
+    "img_err": 0.1169,
+    "luma_ratio": 0.7486
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.1076,
+    "sat": 0.9783,
+    "sharpness": 2.58,
+    "centre": [
+     0.305,
+     0.031,
+     0.572
+    ],
+    "img_err": 0.0915,
+    "luma_ratio": 1.3814
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "fat cancer tour meant t nz+.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.21541,
+    "sat": 0.9023,
+    "sharpness": 30.63,
+    "centre": [
+     0.259,
+     0.319,
+     0.408
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.21541,
+    "sat": 0.9023,
+    "sharpness": 30.63,
+    "centre": [
+     0.259,
+     0.319,
+     0.408
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.21541,
+    "sat": 0.9023,
+    "sharpness": 30.63,
+    "centre": [
+     0.259,
+     0.319,
+     0.408
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.19219,
+    "sat": 0.9204,
+    "sharpness": 37.95,
+    "centre": [
+     0.272,
+     0.202,
+     0.22
+    ],
+    "img_err": 0.2165,
+    "luma_ratio": 0.8922
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.19219,
+    "sat": 0.9204,
+    "sharpness": 37.95,
+    "centre": [
+     0.272,
+     0.202,
+     0.22
+    ],
+    "img_err": 0.2165,
+    "luma_ratio": 0.8922
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.21581,
+    "sat": 0.9022,
+    "sharpness": 30.69,
+    "centre": [
+     0.284,
+     0.319,
+     0.408
+    ],
+    "img_err": 0.007,
+    "luma_ratio": 1.0019
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.21581,
+    "sat": 0.9022,
+    "sharpness": 30.69,
+    "centre": [
+     0.284,
+     0.319,
+     0.408
+    ],
+    "img_err": 0.007,
+    "luma_ratio": 1.0019
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.21453,
+    "sat": 0.8985,
+    "sharpness": 215.35,
+    "centre": [
+     0.172,
+     0.311,
+     0.455
+    ],
+    "img_err": 0.0868,
+    "luma_ratio": 0.9959
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.21192,
+    "sat": 0.8992,
+    "sharpness": 241.08,
+    "centre": [
+     0.165,
+     0.309,
+     0.459
+    ],
+    "img_err": 0.0858,
+    "luma_ratio": 0.9838
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.21413,
+    "sat": 0.8942,
+    "sharpness": 266.07,
+    "centre": [
+     0.203,
+     0.314,
+     0.43
+    ],
+    "img_err": 0.0827,
+    "luma_ratio": 0.9941
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.2131,
+    "sat": 0.8865,
+    "sharpness": 1102.66,
+    "centre": [
+     0.165,
+     0.316,
+     0.45
+    ],
+    "img_err": 0.1072,
+    "luma_ratio": 0.9893
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.21109,
+    "sat": 0.889,
+    "sharpness": 1113.31,
+    "centre": [
+     0.161,
+     0.311,
+     0.453
+    ],
+    "img_err": 0.1032,
+    "luma_ratio": 0.9799
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "rce-ordinary - want.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.60733,
+    "sat": 0.6132,
+    "sharpness": 0.91,
+    "centre": [
+     0.8,
+     0.634,
+     0.328
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.60733,
+    "sat": 0.6132,
+    "sharpness": 0.91,
+    "centre": [
+     0.8,
+     0.634,
+     0.328
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.60733,
+    "sat": 0.6132,
+    "sharpness": 0.91,
+    "centre": [
+     0.8,
+     0.634,
+     0.328
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.61767,
+    "sat": 0.6005,
+    "sharpness": 0.98,
+    "centre": [
+     0.802,
+     0.615,
+     0.319
+    ],
+    "img_err": 0.119,
+    "luma_ratio": 1.017
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.61767,
+    "sat": 0.6005,
+    "sharpness": 0.98,
+    "centre": [
+     0.802,
+     0.615,
+     0.319
+    ],
+    "img_err": 0.119,
+    "luma_ratio": 1.017
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.60733,
+    "sat": 0.6132,
+    "sharpness": 0.91,
+    "centre": [
+     0.799,
+     0.633,
+     0.328
+    ],
+    "img_err": 0.0014,
+    "luma_ratio": 1.0
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.60733,
+    "sat": 0.6132,
+    "sharpness": 0.91,
+    "centre": [
+     0.799,
+     0.633,
+     0.328
+    ],
+    "img_err": 0.0014,
+    "luma_ratio": 1.0
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.62283,
+    "sat": 0.6244,
+    "sharpness": 1.25,
+    "centre": [
+     0.864,
+     0.707,
+     0.353
+    ],
+    "img_err": 0.075,
+    "luma_ratio": 1.0255
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.62086,
+    "sat": 0.6289,
+    "sharpness": 1.29,
+    "centre": [
+     0.87,
+     0.715,
+     0.355
+    ],
+    "img_err": 0.074,
+    "luma_ratio": 1.0223
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.62142,
+    "sat": 0.6286,
+    "sharpness": 1.4,
+    "centre": [
+     0.886,
+     0.726,
+     0.359
+    ],
+    "img_err": 0.0755,
+    "luma_ratio": 1.0232
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.62474,
+    "sat": 0.6251,
+    "sharpness": 2.27,
+    "centre": [
+     0.895,
+     0.74,
+     0.364
+    ],
+    "img_err": 0.0737,
+    "luma_ratio": 1.0287
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.62474,
+    "sat": 0.6251,
+    "sharpness": 2.27,
+    "centre": [
+     0.895,
+     0.74,
+     0.364
+    ],
+    "img_err": 0.0737,
+    "luma_ratio": 1.0287
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "shifter - spincycle(remix) - love at home - q load.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.91602,
+    "sat": 0.2623,
+    "sharpness": 2.21,
+    "centre": [
+     0.801,
+     0.992,
+     0.997
+    ]
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.99657,
+    "sat": 0.0069,
+    "sharpness": 0.29,
+    "centre": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "img_err": 0.0986,
+    "luma_ratio": 1.0879
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.91602,
+    "sat": 0.2623,
+    "sharpness": 2.21,
+    "centre": [
+     0.801,
+     0.992,
+     0.997
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.91602,
+    "sat": 0.2623,
+    "sharpness": 2.21,
+    "centre": [
+     0.801,
+     0.992,
+     0.997
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.99657,
+    "sat": 0.0069,
+    "sharpness": 0.29,
+    "centre": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "img_err": 0.0986,
+    "luma_ratio": 1.0879
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.9119,
+    "sat": 0.2998,
+    "sharpness": 1.81,
+    "centre": [
+     0.8,
+     0.992,
+     0.997
+    ],
+    "img_err": 0.025,
+    "luma_ratio": 0.9955
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.9119,
+    "sat": 0.2998,
+    "sharpness": 1.81,
+    "centre": [
+     0.8,
+     0.992,
+     0.997
+    ],
+    "img_err": 0.025,
+    "luma_ratio": 0.9955
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.99875,
+    "sat": 0.0068,
+    "sharpness": 0.56,
+    "centre": [
+     0.999,
+     1.0,
+     0.999
+    ],
+    "img_err": 0.1002,
+    "luma_ratio": 1.0903
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.98052,
+    "sat": 0.0836,
+    "sharpness": 2.7,
+    "centre": [
+     0.986,
+     0.999,
+     0.999
+    ],
+    "img_err": 0.08,
+    "luma_ratio": 1.0704
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.9371,
+    "sat": 0.2374,
+    "sharpness": 9.02,
+    "centre": [
+     0.866,
+     0.994,
+     0.997
+    ],
+    "img_err": 0.0434,
+    "luma_ratio": 1.023
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.99846,
+    "sat": 0.0076,
+    "sharpness": 2.05,
+    "centre": [
+     0.998,
+     1.0,
+     0.999
+    ],
+    "img_err": 0.0997,
+    "luma_ratio": 1.09
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.99846,
+    "sat": 0.0076,
+    "sharpness": 2.05,
+    "centre": [
+     0.998,
+     1.0,
+     0.999
+    ],
+    "img_err": 0.0997,
+    "luma_ratio": 1.09
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "suksma - bleuneycombinatoriccitensor.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.02968,
+    "sat": 0.426,
+    "sharpness": 9.44,
+    "centre": [
+     0.035,
+     0.103,
+     0.197
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.02968,
+    "sat": 0.426,
+    "sharpness": 9.44,
+    "centre": [
+     0.035,
+     0.103,
+     0.197
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.02968,
+    "sat": 0.426,
+    "sharpness": 9.44,
+    "centre": [
+     0.035,
+     0.103,
+     0.197
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.37677,
+    "sat": 0.7734,
+    "sharpness": 10.8,
+    "centre": [
+     0.106,
+     0.42,
+     0.545
+    ],
+    "img_err": 0.3714,
+    "luma_ratio": 12.6944
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.37677,
+    "sat": 0.7734,
+    "sharpness": 10.8,
+    "centre": [
+     0.106,
+     0.42,
+     0.545
+    ],
+    "img_err": 0.3714,
+    "luma_ratio": 12.6944
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.02958,
+    "sat": 0.4201,
+    "sharpness": 9.45,
+    "centre": [
+     0.035,
+     0.103,
+     0.197
+    ],
+    "img_err": 0.0013,
+    "luma_ratio": 0.9966
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.02958,
+    "sat": 0.4201,
+    "sharpness": 9.45,
+    "centre": [
+     0.035,
+     0.103,
+     0.197
+    ],
+    "img_err": 0.0013,
+    "luma_ratio": 0.9966
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.02831,
+    "sat": 0.4142,
+    "sharpness": 89.12,
+    "centre": [
+     0.045,
+     0.086,
+     0.172
+    ],
+    "img_err": 0.014,
+    "luma_ratio": 0.9538
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.02845,
+    "sat": 0.4112,
+    "sharpness": 104.46,
+    "centre": [
+     0.046,
+     0.089,
+     0.175
+    ],
+    "img_err": 0.0145,
+    "luma_ratio": 0.9586
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.02812,
+    "sat": 0.4146,
+    "sharpness": 128.82,
+    "centre": [
+     0.046,
+     0.087,
+     0.174
+    ],
+    "img_err": 0.0144,
+    "luma_ratio": 0.9474
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.02765,
+    "sat": 0.4142,
+    "sharpness": 482.56,
+    "centre": [
+     0.049,
+     0.085,
+     0.17
+    ],
+    "img_err": 0.0151,
+    "luma_ratio": 0.9316
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.02765,
+    "sat": 0.4142,
+    "sharpness": 482.56,
+    "centre": [
+     0.049,
+     0.085,
+     0.17
+    ],
+    "img_err": 0.0151,
+    "luma_ratio": 0.9316
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "suksma - penattrition - geiss crossfire shaders nz+.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.33006,
+    "sat": 0.7384,
+    "sharpness": 9.09,
+    "centre": [
+     0.183,
+     0.314,
+     0.284
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.33006,
+    "sat": 0.7384,
+    "sharpness": 9.09,
+    "centre": [
+     0.183,
+     0.314,
+     0.284
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.33311,
+    "sat": 0.7291,
+    "sharpness": 12.3,
+    "centre": [
+     0.213,
+     0.303,
+     0.327
+    ],
+    "img_err": 0.1501,
+    "luma_ratio": 1.0092
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.33311,
+    "sat": 0.7291,
+    "sharpness": 12.3,
+    "centre": [
+     0.213,
+     0.303,
+     0.327
+    ],
+    "img_err": 0.1501,
+    "luma_ratio": 1.0092
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.33006,
+    "sat": 0.7384,
+    "sharpness": 9.09,
+    "centre": [
+     0.183,
+     0.314,
+     0.284
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.35774,
+    "sat": 0.7334,
+    "sharpness": 11.05,
+    "centre": [
+     0.215,
+     0.36,
+     0.309
+    ],
+    "img_err": 0.0454,
+    "luma_ratio": 1.0839
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.35774,
+    "sat": 0.7334,
+    "sharpness": 11.05,
+    "centre": [
+     0.215,
+     0.36,
+     0.309
+    ],
+    "img_err": 0.0454,
+    "luma_ratio": 1.0839
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.36006,
+    "sat": 0.7338,
+    "sharpness": 55.75,
+    "centre": [
+     0.255,
+     0.345,
+     0.342
+    ],
+    "img_err": 0.0995,
+    "luma_ratio": 1.0909
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.35794,
+    "sat": 0.7321,
+    "sharpness": 63.46,
+    "centre": [
+     0.262,
+     0.341,
+     0.337
+    ],
+    "img_err": 0.1039,
+    "luma_ratio": 1.0845
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.35478,
+    "sat": 0.7337,
+    "sharpness": 74.79,
+    "centre": [
+     0.257,
+     0.33,
+     0.332
+    ],
+    "img_err": 0.1051,
+    "luma_ratio": 1.0749
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.23965,
+    "sat": 0.7682,
+    "sharpness": 155.62,
+    "centre": [
+     0.117,
+     0.175,
+     0.221
+    ],
+    "img_err": 0.1496,
+    "luma_ratio": 0.7261
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.33959,
+    "sat": 0.741,
+    "sharpness": 224.96,
+    "centre": [
+     0.213,
+     0.294,
+     0.302
+    ],
+    "img_err": 0.1165,
+    "luma_ratio": 1.0289
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  },
+  "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk": {
+   "gt": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.04729,
+    "sat": 0.4303,
+    "sharpness": 26.04,
+    "centre": [
+     0.286,
+     0.162,
+     0.246
+    ]
+   },
+   "gtr": {
+    "worker": "before",
+    "key": "c@1182x665",
+    "luma": 0.04729,
+    "sat": 0.4303,
+    "sharpness": 26.04,
+    "centre": [
+     0.286,
+     0.162,
+     0.246
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "gt2": {
+    "worker": "after",
+    "key": "c@1182x665",
+    "luma": 0.04729,
+    "sat": 0.4303,
+    "sharpness": 26.04,
+    "centre": [
+     0.286,
+     0.162,
+     0.246
+    ],
+    "img_err": 0.0,
+    "luma_ratio": 1.0
+   },
+   "bref": {
+    "worker": "before",
+    "key": "q1024x768@1024x768",
+    "luma": 0.04661,
+    "sat": 0.4423,
+    "sharpness": 28.48,
+    "centre": [
+     0.28,
+     0.17,
+     0.255
+    ],
+    "img_err": 0.0553,
+    "luma_ratio": 0.9856
+   },
+   "aref": {
+    "worker": "after",
+    "key": "q1024x768@1024x768",
+    "luma": 0.04661,
+    "sat": 0.4423,
+    "sharpness": 28.48,
+    "centre": [
+     0.28,
+     0.17,
+     0.255
+    ],
+    "img_err": 0.0553,
+    "luma_ratio": 0.9856
+   },
+   "b665": {
+    "worker": "before",
+    "key": "q1024x768@1182x665",
+    "luma": 0.04781,
+    "sat": 0.4307,
+    "sharpness": 26.42,
+    "centre": [
+     0.289,
+     0.164,
+     0.243
+    ],
+    "img_err": 0.0179,
+    "luma_ratio": 1.011
+   },
+   "a665": {
+    "worker": "after",
+    "key": "q1024x768@1182x665",
+    "luma": 0.04781,
+    "sat": 0.4307,
+    "sharpness": 26.42,
+    "centre": [
+     0.289,
+     0.164,
+     0.243
+    ],
+    "img_err": 0.0179,
+    "luma_ratio": 1.011
+   },
+   "a1260": {
+    "worker": "after",
+    "key": "q1024x768@2240x1260",
+    "luma": 0.05056,
+    "sat": 0.4231,
+    "sharpness": 237.21,
+    "centre": [
+     0.328,
+     0.184,
+     0.264
+    ],
+    "img_err": 0.0237,
+    "luma_ratio": 1.0691
+   },
+   "a1330": {
+    "worker": "after",
+    "key": "q1024x768@2364x1330",
+    "luma": 0.05071,
+    "sat": 0.4229,
+    "sharpness": 278.45,
+    "centre": [
+     0.333,
+     0.186,
+     0.267
+    ],
+    "img_err": 0.0239,
+    "luma_ratio": 1.0723
+   },
+   "a1440": {
+    "worker": "after",
+    "key": "q1024x768@2560x1440",
+    "luma": 0.05071,
+    "sat": 0.4189,
+    "sharpness": 343.16,
+    "centre": [
+     0.332,
+     0.187,
+     0.27
+    ],
+    "img_err": 0.0244,
+    "luma_ratio": 1.0723
+   },
+   "b4k": {
+    "worker": "before",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.05161,
+    "sat": 0.4156,
+    "sharpness": 1273.91,
+    "centre": [
+     0.343,
+     0.194,
+     0.275
+    ],
+    "img_err": 0.0256,
+    "luma_ratio": 1.0914
+   },
+   "a4k": {
+    "worker": "after",
+    "key": "q1024x768@3840x2160",
+    "luma": 0.05161,
+    "sat": 0.4156,
+    "sharpness": 1273.91,
+    "centre": [
+     0.343,
+     0.194,
+     0.275
+    ],
+    "img_err": 0.0256,
+    "luma_ratio": 1.0914
+   },
+   "_identical": {
+    "classic_after==before (gt2==gt)": true,
+    "classic repeat (gtr==gt)": true,
+    "ref<=1: after==before at 1024x768": true,
+    "ref<=1: after==before at 1182x665": true
+   }
+  }
+ }
+}

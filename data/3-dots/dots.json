@@ -1,0 +1,78 @@
+{
+ "about": "Waveform dots: whole-pixel point sizes with area-compensated alpha (commit 4fc2eea), size = max(1, ceil(base*scale)), alpha *= (base*scale)^2 / size^2. Synthetic fDecay=0 presets (geo-dots.py), mean luma and lit pixels of quad dots against GL points, same frames.",
+ "before_5a3bbb9": {
+  "note": "measured at 1280x720 with reference height 1080 (scale 0.667): the 1.33 px point rasterised as 1 px",
+  "main_dots_luma_ratio_720": 0.25,
+  "expected": 0.444
+ },
+ "after_4fc2eea": {
+  "1080": {
+   "columns": [
+    "variant",
+    "legacy_px",
+    "quad_px",
+    "px_ratio",
+    "legacy_luma",
+    "quad_luma",
+    "luma_ratio"
+   ],
+   "rows": [
+    [
+     "main-dots-circle",
+     3375,
+     3369,
+     0.998,
+     459105,
+     458873,
+     0.999
+    ],
+    [
+     "main-dots-line",
+     3039,
+     3042,
+     1.001,
+     420980,
+     421448,
+     1.001
+    ],
+    [
+     "custom-dots-thin",
+     711,
+     711,
+     1.0,
+     61727,
+     61727,
+     1.0
+    ],
+    [
+     "custom-dots-thick",
+     1933,
+     1933,
+     1.0,
+     246863,
+     246863,
+     1.0
+    ]
+   ]
+  },
+  "720_vs_expected_0.444": {
+   "main-dots-circle": {
+    "px": 0.951,
+    "luma": 0.459
+   },
+   "main-dots-line": {
+    "px": 0.812,
+    "luma": 0.443
+   },
+   "custom-dots-thin": {
+    "px": 0.833,
+    "luma": 0.443
+   },
+   "custom-dots-thick": {
+    "px": 0.901,
+    "luma": 0.443
+   }
+  }
+ },
+ "final_build_note": "Since 31b8cbf the scale never drops below 1, so the 720 case no longer occurs; the whole-pixel rule now applies at non-integer scales above 1 (1.62 at 1080, 3.25 at 4K with the 1024x768 reference, e.g. 3.25 px -> 4 px point, alpha x0.66)."
+}

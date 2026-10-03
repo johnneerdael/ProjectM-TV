@@ -1,0 +1,493 @@
+{
+ "about": "MaximizeColors texsize = max(refW, refH) above the reference (CenteredSpiro / ExplosiveHash / CenteredSpiroVolume alpha). Prototype variant \"mc\" vs \"base\". Only Fvese-mvfun2 changes frames; its wave is invisible, so no luma changes.",
+ "summary": {
+  "base": {
+   "q1080_vs169": {
+    "median": 1.01,
+    "within10": 17
+   },
+   "q1080": {
+    "n": 18,
+    "median": 0.996,
+    "within10": 10,
+    "within25": 12,
+    "changed": []
+   },
+   "q4k_vs169": {
+    "median": 1.017,
+    "within10": 10
+   },
+   "q4k": {
+    "n": 18,
+    "median": 1.018,
+    "within10": 8,
+    "within25": 10,
+    "changed": []
+   },
+   "classic_identical": "18/18"
+  },
+  "mc": {
+   "q1080_vs169": {
+    "median": 1.01,
+    "within10": 17
+   },
+   "q1080": {
+    "n": 18,
+    "median": 0.996,
+    "within10": 10,
+    "within25": 12,
+    "changed": [
+     "Fvese-mvfun2.milk"
+    ]
+   },
+   "q4k_vs169": {
+    "median": 1.017,
+    "within10": 10
+   },
+   "q4k": {
+    "n": 18,
+    "median": 1.018,
+    "within10": 8,
+    "within25": 10,
+    "changed": [
+     "Fvese-mvfun2.milk"
+    ]
+   },
+   "classic_identical": "18/18"
+  }
+ },
+ "rows": {
+  "$$$ Royal - Mashup (103).milk": {
+   "base": {
+    "q1080": 0.21086,
+    "q1080_ratio": 0.962,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.013,
+    "q4k": 0.2328,
+    "q4k_ratio": 1.062,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.119,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.21086,
+    "q1080_ratio": 0.962,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.013,
+    "q4k": 0.2328,
+    "q4k_ratio": 1.062,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.119,
+    "classic_identical": true
+   }
+  },
+  "$$$ Royal - Mashup (162).milk": {
+   "base": {
+    "q1080": 0.14797,
+    "q1080_ratio": 1.082,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.044,
+    "q4k": 0.14406,
+    "q4k_ratio": 1.054,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.016,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.14797,
+    "q1080_ratio": 1.082,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.044,
+    "q4k": 0.14406,
+    "q4k_ratio": 1.054,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.016,
+    "classic_identical": true
+   }
+  },
+  "$$$ Royal - Mashup (191).milk": {
+   "base": {
+    "q1080": 0.36531,
+    "q1080_ratio": 2.333,
+    "q1080_changed": false,
+    "q1080_ratio169": 13.811,
+    "q4k": 0.2986,
+    "q4k_ratio": 1.907,
+    "q4k_changed": false,
+    "q4k_ratio169": 11.289,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.36531,
+    "q1080_ratio": 2.333,
+    "q1080_changed": false,
+    "q1080_ratio169": 13.811,
+    "q4k": 0.2986,
+    "q4k_ratio": 1.907,
+    "q4k_changed": false,
+    "q4k_ratio169": 11.289,
+    "classic_identical": true
+   }
+  },
+  "$$$ Royal - Mashup (397).milk": {
+   "base": {
+    "q1080": 0.03967,
+    "q1080_ratio": 0.721,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.0,
+    "q4k": 0.03853,
+    "q4k_ratio": 0.701,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.971,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.03967,
+    "q1080_ratio": 0.721,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.0,
+    "q4k": 0.03853,
+    "q4k_ratio": 0.701,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.971,
+    "classic_identical": true
+   }
+  },
+  "Flexi - alien complex 03.milk": {
+   "base": {
+    "q1080": 0.56679,
+    "q1080_ratio": 0.982,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.986,
+    "q4k": 0.55103,
+    "q4k_ratio": 0.954,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.959,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.56679,
+    "q1080_ratio": 0.982,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.986,
+    "q4k": 0.55103,
+    "q4k_ratio": 0.954,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.959,
+    "classic_identical": true
+   }
+  },
+  "Fvese-mvfun2.milk": {
+   "base": {
+    "q1080": 0.62746,
+    "q1080_ratio": 1.348,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.006,
+    "q4k": 0.63521,
+    "q4k_ratio": 1.365,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.018,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.62746,
+    "q1080_ratio": 1.348,
+    "q1080_changed": true,
+    "q1080_ratio169": 1.006,
+    "q4k": 0.63521,
+    "q4k_ratio": 1.365,
+    "q4k_changed": true,
+    "q4k_ratio169": 1.018,
+    "classic_identical": true
+   }
+  },
+  "Goody's Trichromatic Mind Games.milk": {
+   "base": {
+    "q1080": 0.07901,
+    "q1080_ratio": 1.391,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.028,
+    "q4k": 0.08113,
+    "q4k_ratio": 1.429,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.056,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.07901,
+    "q1080_ratio": 1.391,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.028,
+    "q4k": 0.08113,
+    "q4k_ratio": 1.429,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.056,
+    "classic_identical": true
+   }
+  },
+  "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk": {
+   "base": {
+    "q1080": 0.27995,
+    "q1080_ratio": 1.161,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.083,
+    "q4k": 0.28753,
+    "q4k_ratio": 1.192,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.112,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.27995,
+    "q1080_ratio": 1.161,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.083,
+    "q4k": 0.28753,
+    "q4k_ratio": 1.192,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.112,
+    "classic_identical": true
+   }
+  },
+  "Serge + 158 002.milk": {
+   "base": {
+    "q1080": 0.36205,
+    "q1080_ratio": 0.941,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.975,
+    "q4k": 0.35315,
+    "q4k_ratio": 0.918,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.951,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.36205,
+    "q1080_ratio": 0.941,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.975,
+    "q4k": 0.35315,
+    "q4k_ratio": 0.918,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.951,
+    "classic_identical": true
+   }
+  },
+  "Serge circles005b.milk": {
+   "base": {
+    "q1080": 0.41372,
+    "q1080_ratio": 1.397,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.969,
+    "q4k": 0.55712,
+    "q4k_ratio": 1.882,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.305,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.41372,
+    "q1080_ratio": 1.397,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.969,
+    "q4k": 0.55712,
+    "q4k_ratio": 1.882,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.305,
+    "classic_identical": true
+   }
+  },
+  "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk": {
+   "base": {
+    "q1080": 0.65144,
+    "q1080_ratio": 0.956,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.934,
+    "q4k": 0.65966,
+    "q4k_ratio": 0.968,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.946,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.65144,
+    "q1080_ratio": 0.956,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.934,
+    "q4k": 0.65966,
+    "q4k_ratio": 0.968,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.946,
+    "classic_identical": true
+   }
+  },
+  "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk": {
+   "base": {
+    "q1080": 0.50897,
+    "q1080_ratio": 0.932,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.048,
+    "q4k": 0.39489,
+    "q4k_ratio": 0.723,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.813,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.50897,
+    "q1080_ratio": 0.932,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.048,
+    "q4k": 0.39489,
+    "q4k_ratio": 0.723,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.813,
+    "classic_identical": true
+   }
+  },
+  "fat cancer tour meant t nz+.milk": {
+   "base": {
+    "q1080": 0.23434,
+    "q1080_ratio": 1.225,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.094,
+    "q4k": 0.24304,
+    "q4k_ratio": 1.271,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.135,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.23434,
+    "q1080_ratio": 1.225,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.094,
+    "q4k": 0.24304,
+    "q4k_ratio": 1.271,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.135,
+    "classic_identical": true
+   }
+  },
+  "rce-ordinary - want.milk": {
+   "base": {
+    "q1080": 0.61647,
+    "q1080_ratio": 0.998,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.015,
+    "q4k": 0.63902,
+    "q4k_ratio": 1.034,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.052,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.61647,
+    "q1080_ratio": 0.998,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.015,
+    "q4k": 0.63902,
+    "q4k_ratio": 1.034,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.052,
+    "classic_identical": true
+   }
+  },
+  "shifter - spincycle(remix) - love at home - q load.milk": {
+   "base": {
+    "q1080": 0.98981,
+    "q1080_ratio": 0.996,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.08,
+    "q4k": 0.99523,
+    "q4k_ratio": 1.002,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.086,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.98981,
+    "q1080_ratio": 0.996,
+    "q1080_changed": false,
+    "q1080_ratio169": 1.08,
+    "q4k": 0.99523,
+    "q4k_ratio": 1.002,
+    "q4k_changed": false,
+    "q4k_ratio169": 1.086,
+    "classic_identical": true
+   }
+  },
+  "suksma - bleuneycombinatoriccitensor.milk": {
+   "base": {
+    "q1080": 0.02937,
+    "q1080_ratio": 0.112,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.995,
+    "q4k": 0.02832,
+    "q4k_ratio": 0.108,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.959,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.02937,
+    "q1080_ratio": 0.112,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.995,
+    "q4k": 0.02832,
+    "q4k_ratio": 0.108,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.959,
+    "classic_identical": true
+   }
+  },
+  "suksma - penattrition - geiss crossfire shaders nz+.milk": {
+   "base": {
+    "q1080": 0.31256,
+    "q1080_ratio": 0.997,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.947,
+    "q4k": 0.23965,
+    "q4k_ratio": 0.764,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.726,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.31256,
+    "q1080_ratio": 0.997,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.947,
+    "q4k": 0.23965,
+    "q4k_ratio": 0.764,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.726,
+    "classic_identical": true
+   }
+  },
+  "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk": {
+   "base": {
+    "q1080": 0.04473,
+    "q1080_ratio": 0.955,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.943,
+    "q4k": 0.04253,
+    "q4k_ratio": 0.908,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.897,
+    "classic_identical": true
+   },
+   "mc": {
+    "q1080": 0.04473,
+    "q1080_ratio": 0.955,
+    "q1080_changed": false,
+    "q1080_ratio169": 0.943,
+    "q4k": 0.04253,
+    "q4k_ratio": 0.908,
+    "q4k_changed": false,
+    "q4k_ratio169": 0.897,
+    "classic_identical": true
+   }
+  }
+ }
+}

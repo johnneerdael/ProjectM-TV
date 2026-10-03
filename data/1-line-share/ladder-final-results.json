@@ -1,0 +1,1139 @@
+{
+ "about": "Resolution ladder after the LineScale clamp (commit 31b8cbf, reference height 1080). old = GL lines (line_reference_height 0), new = quad lines (1080). 2160 entries copied from the earlier ladder run (scale 2 unchanged by the clamp).",
+ "method": {
+  "worker": "<local>/build/preset-lab/line-fixed-clamp/engine/native-build/fa4417dd…/preset-lab-worker",
+  "engine": {
+   "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+   "instrumentation_sha256": "936dda630b874583d582ba66ae1eda35d531e43f9c2a2c11d4909bce9d769057",
+   "patches_sha256": "af1c0977afe340a1806d0185d747292f024894ccd4440123a9c3ecd52d4e786c"
+  },
+  "resolutions": [
+   [
+    854,
+    480
+   ],
+   [
+    1920,
+    1080
+   ],
+   [
+    3840,
+    2160
+   ]
+  ],
+  "modes": {
+   "old": "line_reference_height 0 (GL lines)",
+   "new": "line_reference_height 1080 (quad lines)"
+  },
+  "audio": "preset_lab.bass_screen.bass_signals bass-0.30, seed 12345",
+  "fps": 30,
+  "A": "synthetic fDecay=0 presets from scratchpad/geo; warmup 1 s, measurement 1 s; mean_luma = mean over measured frames of sum(Rec.709 luma/255)/(W*H); lit_share = share of pixels with max channel > 8; extra ratio *_ratio_1080_over_480",
+  "B": "warmup 4 s, measurement 4 s; mean_luma as in A; drift = mean_luma(2160)/mean_luma(480 or 1080); determinism = old 1080 rendered twice, identical frame hashes; extra drift *_drift_1080_over_480",
+  "rendered_resolutions": [
+   [
+    854,
+    480
+   ],
+   [
+    1920,
+    1080
+   ]
+  ],
+  "reused_2160": "All 2160 entries (A and B) and the 4K frames/crops are copied from ../ladder/results.json and ../ladder images, rendered by the previous worker (line-sample-post, unclamped patch). The clamp only changes LineScale below the reference height; at 2160 the scale stays 2.",
+  "change": "patch 0021 LineScale = max(1, viewportHeight/referenceHeight): at and below 1080 lines are drawn as at 1080"
+ },
+ "A_synthetic": {
+  "main-circle-thin": {
+   "old": {
+    "480": {
+     "mean_luma": 0.0018218005785920921,
+     "lit_share": 0.003948250065053344,
+     "sha256": "9fa6347f4a9ae7d75d8fb1a1d3b0d49dfc5dfadddd67faf1244e517aa1788fab",
+     "seconds": 0.4
+    },
+    "1080": {
+     "mean_luma": 0.0008086600178906437,
+     "lit_share": 0.001753584747942387,
+     "sha256": "7591b94ef434716b652852cc891b4259b50d395b7f3b8636e5a2865dccec163c",
+     "seconds": 1.4
+    },
+    "2160": {
+     "mean_luma": 0.0004040976760728082,
+     "lit_share": 0.0008763985339506174,
+     "sha256": "844fb357d78c8458e48b81979f6bcce279f4fc4099f4b1b48203639b3ca48611",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.2218122448863747,
+    "mean_luma_ratio_2160_over_1080": 0.49971269400319845,
+    "mean_luma_ratio_1080_over_480": 0.443879548284909,
+    "lit_share_ratio_2160_over_480": 0.22197138466678565,
+    "lit_share_ratio_2160_over_1080": 0.49977540861880887,
+    "lit_share_ratio_1080_over_480": 0.4441422703854738
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.0018221838257616342,
+     "lit_share": 0.003947599531615925,
+     "sha256": "4cf92d7f6fccc4464fe1319207e7a6c0ab23c65cd58136ab5822e79ce395d8ae",
+     "seconds": 0.4
+    },
+    "1080": {
+     "mean_luma": 0.0008088880070402648,
+     "lit_share": 0.0017534561471193417,
+     "sha256": "450b4996bee4455948b4931b6a11eaf5296d57294b95b5c2b66c1ee2bda0995c",
+     "seconds": 1.4
+    },
+    "2160": {
+     "mean_luma": 0.0008084214198760139,
+     "lit_share": 0.0013075970936213992,
+     "sha256": "1b488ec1ba6884720d5b7f7cfbb4ed6def0a4891c03c117ca812946a3a6ac11f",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.4436552495125517,
+    "mean_luma_ratio_2160_over_1080": 0.9994231745801769,
+    "mean_luma_ratio_1080_over_480": 0.44391130883963736,
+    "lit_share_ratio_2160_over_480": 0.331238537027119,
+    "lit_share_ratio_2160_over_1080": 0.745725575041942,
+    "lit_share_ratio_1080_over_480": 0.4441828845798792
+   }
+  },
+  "main-line-thin": {
+   "old": {
+    "480": {
+     "mean_luma": 0.001965014655689234,
+     "lit_share": 0.0026223816029143903,
+     "sha256": "012f20cd8ae6ad67bb6fe6058305b8daed08d118e778ce5e9a9c5c1a62eb8c8a",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.000872258762885298,
+     "lit_share": 0.001167164994855967,
+     "sha256": "a4a303dd4f8e2024afe63042cf052fe562b78e9e29ccfc4c3bbc776f6fe26329",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.00043588747590625747,
+     "lit_share": 0.0005837392296810698,
+     "sha256": "a16be3d5bc512b052eb784478e148d55219fecbe5fd488f719e96c6254cf49f0",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.22182403303926954,
+    "mean_luma_ratio_2160_over_1080": 0.4997226676914184,
+    "mean_luma_ratio_1080_over_480": 0.4438942785286001,
+    "lit_share_ratio_2160_over_480": 0.22259888836633457,
+    "lit_share_ratio_2160_over_1080": 0.5001342845731127,
+    "lit_share_ratio_1080_over_480": 0.44507824244909105
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.0019649366778405355,
+     "lit_share": 0.002622462919594067,
+     "sha256": "248d6a22cd7ef5db9e727a081c47b7cb058c7879c9f84b8653abcf30ad402e66",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0008722459516460905,
+     "lit_share": 0.0011671006944444443,
+     "sha256": "38159ca0a7eea7fb9449a2a2b1ede99a8e1f062065a102b5619958c282a4c2f4",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.0008716393119288611,
+     "lit_share": 0.001046923225308642,
+     "sha256": "6b6ade97b9363176526e3fac2e6671b2975a4ecd73257003ea7d551ee3963ec2",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.4435966419471554,
+    "mean_luma_ratio_2160_over_1080": 0.9993045084175116,
+    "mean_luma_ratio_1080_over_480": 0.4439053743984709,
+    "lit_share_ratio_2160_over_480": 0.3992137381567614,
+    "lit_share_ratio_2160_over_1080": 0.8970290483864304,
+    "lit_share_ratio_1080_over_480": 0.44503992248062013
+   }
+  },
+  "main-circle-thick": {
+   "old": {
+    "480": {
+     "mean_luma": 0.004404453818184832,
+     "lit_share": 0.006702689955763726,
+     "sha256": "2c929dcbd683d2dccbc55d837dec9d9cc0d44f24aa4ceba7c40edbef46008e0e",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0019551777193778743,
+     "lit_share": 0.002975855195473251,
+     "sha256": "c52d01c0c3f6ea020b0229344903c2e41d20307cdd9c7aa6a4378e99583f580d",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.0009771463520895113,
+     "lit_share": 0.001487204218106996,
+     "sha256": "58d81174bb1b7a99cd1bcc82ff38b4a2175888a8ff0dd957a7882102b3b785ec",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.22185414864724676,
+    "mean_luma_ratio_2160_over_1080": 0.49977367397600736,
+    "mean_luma_ratio_1080_over_480": 0.4439092337182557,
+    "lit_share_ratio_2160_over_480": 0.22188169644161007,
+    "lit_share_ratio_2160_over_1080": 0.4997569170601009,
+    "lit_share_ratio_1080_over_480": 0.4439792404412614
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.0044032426658732705,
+     "lit_share": 0.006701388888888888,
+     "sha256": "d1f4842d9d45b195faf22f5a0c9c8ff32426d941447c7f3727b8c3ca4c487e6b",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0019561294737578667,
+     "lit_share": 0.002977157278806584,
+     "sha256": "ab09512eab5c81b32a4ed498565356109f325442af014c1505b7e447536cbd01",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.001954909818266234,
+     "lit_share": 0.0025298635223765437,
+     "sha256": "fb6cfea43df8d5d5990c75445dfce0c8dfefa5f543ccfb5c1d79fd365b556f7d",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.44397049324978044,
+    "mean_luma_ratio_2160_over_1080": 0.9993764955193434,
+    "mean_luma_ratio_1080_over_480": 0.444247483546292,
+    "lit_share_ratio_2160_over_480": 0.3775133131836501,
+    "lit_share_ratio_2160_over_1080": 0.8497581032704656,
+    "lit_share_ratio_1080_over_480": 0.44425973901362503
+   }
+  },
+  "main-line-thick": {
+   "old": {
+    "480": {
+     "mean_luma": 0.004471872998716791,
+     "lit_share": 0.005279322794691647,
+     "sha256": "fefe57127029508f629462312b5493b62dde88e6c2c88d6b38edf2147c7532f2",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.00198686280150589,
+     "lit_share": 0.002350019290123457,
+     "sha256": "ed0993b69b27f781820e86e44c87f080b14207284102e43d387b204925ffb7dc",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.0009931390599595034,
+     "lit_share": 0.0011756004050925927,
+     "sha256": "03831ae2a2f404e8dded080af8c68bceeab9a914119f55b48eeed1b9b5e81e74",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.22208570329356084,
+    "mean_luma_ratio_2160_over_1080": 0.4998528631200805,
+    "mean_luma_ratio_1080_over_480": 0.44430215305220494,
+    "lit_share_ratio_2160_over_480": 0.22268015251400378,
+    "lit_share_ratio_2160_over_1080": 0.5002513851836651,
+    "lit_share_ratio_1080_over_480": 0.4451365035845883
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.004483017735008393,
+     "lit_share": 0.005305425448868071,
+     "sha256": "30671df84c9ae019ab637a1316026de24ea6fd4bd8f258c2377c20110c5f0f1f",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0019878910489414385,
+     "lit_share": 0.002352944958847736,
+     "sha256": "d916e6c25ca94518c274e8383217063e696f74e2b5e4e828f9a98ae7ef562286",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.001987173518764373,
+     "lit_share": 0.002232329443158436,
+     "sha256": "49e85336612208bca3af2571f2b7230a2e42a56d52757b508ea5ab41f4ca20a2",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.4432669322823129,
+    "mean_luma_ratio_2160_over_1080": 0.999639049545775,
+    "mean_luma_ratio_1080_over_480": 0.4434269874548504,
+    "lit_share_ratio_2160_over_480": 0.42076351174338156,
+    "lit_share_ratio_2160_over_1080": 0.948738488235455,
+    "lit_share_ratio_1080_over_480": 0.4434978837276366
+   }
+  },
+  "custom-circle-thick": {
+   "old": {
+    "480": {
+     "mean_luma": 0.0034141256087589856,
+     "lit_share": 0.00811646174863388,
+     "sha256": "49af2082050815bfa936d0358198bebea99052e0d1fea844971ceb34b95c5d07",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0015200616598836033,
+     "lit_share": 0.003613216949588477,
+     "sha256": "7b791459de9759ed7a67b73dddf5c14cb33d4c936cd8528e82ea5d13157edb3f",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.0007600549397372761,
+     "lit_share": 0.0018068295074588482,
+     "sha256": "6eb043bd848cb3bb0ca774a1166a939095055d40ae5e3e64c4b6c0227b8614ad",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.22262067270968144,
+    "mean_luma_ratio_2160_over_1080": 0.5000158610641335,
+    "mean_luma_ratio_1080_over_480": 0.4452272218643229,
+    "lit_share_ratio_2160_over_480": 0.2226129517289925,
+    "lit_share_ratio_2160_over_1080": 0.50006117337201,
+    "lit_share_ratio_1080_over_480": 0.44517143818199284
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.003414293217104692,
+     "lit_share": 0.008114022248243558,
+     "sha256": "7032085b088ddd9efb6a02f6238c92cdb1e659c76b7686b2c08ebf3d10024e78",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0015202170310860967,
+     "lit_share": 0.003613216949588477,
+     "sha256": "832f60b8eb1a7fcc923b9fccb8febe4c3ce6602a69214c41ccfa2aee24853df0",
+     "seconds": 1.5
+    },
+    "2160": {
+     "mean_luma": 0.0015206157594698116,
+     "lit_share": 0.0027517923739711924,
+     "sha256": "30887acd50809b16063312f384417411a017fc1f52aa1a2f2570c465a92df215",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.4453676537949158,
+    "mean_luma_ratio_2160_over_1080": 1.00026228385524,
+    "mean_luma_ratio_1080_over_480": 0.4452508716797426,
+    "lit_share_ratio_2160_over_480": 0.33914035354868205,
+    "lit_share_ratio_2160_over_1080": 0.7615906856311533,
+    "lit_share_ratio_1080_over_480": 0.44530528005030184
+   }
+  },
+  "main-dots": {
+   "old": {
+    "480": {
+     "mean_luma": 0.003943125792120127,
+     "lit_share": 0.0062486176164454855,
+     "sha256": "a11809abf56b8781c00a626c4e7799b87374888265c4fc4e80a0a2787573050f",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0008682086083625836,
+     "lit_share": 0.0017229616769547328,
+     "sha256": "5921a4729b288fe779dd0cf0df640ee23888f9b8bf299d129fed100d67416873",
+     "seconds": 1.4
+    },
+    "2160": {
+     "mean_luma": 0.00021689336838336156,
+     "lit_share": 0.0004309574331275721,
+     "sha256": "134c0f26fe5f06121b5012266b0820484180f68de154a02a8528a65e79081ff6",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.05500543980027151,
+    "mean_luma_ratio_2160_over_1080": 0.249817113415192,
+    "mean_luma_ratio_1080_over_480": 0.2201828331466362,
+    "lit_share_ratio_2160_over_480": 0.06896844383521766,
+    "lit_share_ratio_2160_over_1080": 0.2501259539848109,
+    "lit_share_ratio_1080_over_480": 0.27573485572555106
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.003945297046259305,
+     "lit_share": 0.006247316549570648,
+     "sha256": "89174dcb32e1c8b0c959211142c790f226510b2136d2d7fa7d466287b774759f",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0008681860413514686,
+     "lit_share": 0.0017231545781893002,
+     "sha256": "245f094b964d86742e2b3c1d9a5cd2dcbe49282886dc5b2e77108b7089a25d86",
+     "seconds": 1.7
+    },
+    "2160": {
+     "mean_luma": 0.0008675608069985324,
+     "lit_share": 0.0013288081918724282,
+     "sha256": "1ca2e3e71c38491d8c7f9b9eb3ba3307faa6db83b06bbf0a666f0513d09e0cf6",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.21989746192142914,
+    "mean_luma_ratio_2160_over_1080": 0.9992798382798658,
+    "mean_luma_ratio_1080_over_480": 0.2200559377841095,
+    "lit_share_ratio_2160_over_480": 0.2127006341568768,
+    "lit_share_ratio_2160_over_1080": 0.771148571748419,
+    "lit_share_ratio_1080_over_480": 0.27582315775366395
+   }
+  },
+  "shape-outline-thin": {
+   "old": {
+    "480": {
+     "mean_luma": 0.0008613985495655457,
+     "lit_share": 0.0024242941712204016,
+     "sha256": "852689f3fbe1589c547fe3e078306ac71d23f001ca479c14f29bf756169205a4",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.00038301708198428544,
+     "lit_share": 0.001079025205761317,
+     "sha256": "5542aa55195c65e88b4a66f065f89e73fc15ec0dfafe7b2ecb33d6f9b8aac53d",
+     "seconds": 1.6
+    },
+    "2160": {
+     "mean_luma": 0.00019128426160118107,
+     "lit_share": 0.0005395206404320987,
+     "sha256": "40e389525831406b9ff2bc5804eeea6fabc4f5c60522362bda4d08ebdc556982",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.22206243752982524,
+    "mean_luma_ratio_2160_over_1080": 0.4994144402390626,
+    "mean_luma_ratio_1080_over_480": 0.44464560821174315,
+    "lit_share_ratio_2160_over_480": 0.22254751376170712,
+    "lit_share_ratio_2160_over_1080": 0.5000074489005422,
+    "lit_share_ratio_1080_over_480": 0.4450883966850155
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.0008621194862188955,
+     "lit_share": 0.0018567037470725999,
+     "sha256": "063749672a43cb567ecab4a12e8d519d3e836636f02e721dfdf941aa1497bd28",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.00038358030997841523,
+     "lit_share": 0.0008247010030864198,
+     "sha256": "e4c6ff4683fe1d9bf9a23f877f9a70469c1d0891e9dffd794c4ae2b1a5ed7186",
+     "seconds": 1.8
+    },
+    "2160": {
+     "mean_luma": 0.0003834351151702322,
+     "lit_share": 0.0006172960069444444,
+     "sha256": "8431b4f1d8999e9b2a68c4f8b061d02090de634960e86f35d46842228f34d500",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.44475866895424343,
+    "mean_luma_ratio_2160_over_1080": 0.9996214748139934,
+    "mean_luma_ratio_1080_over_480": 0.44492708506187584,
+    "lit_share_ratio_2160_over_480": 0.33246876779223045,
+    "lit_share_ratio_2160_over_1080": 0.7485088591310448,
+    "lit_share_ratio_1080_over_480": 0.44417479330598497
+   }
+  },
+  "shape-outline-thick": {
+   "old": {
+    "480": {
+     "mean_luma": 0.001649642076885399,
+     "lit_share": 0.003147524720270621,
+     "sha256": "08ab7052e12b2d7e0db174f91d48a200b2e1d2f71f8f7637d836454996b04808",
+     "seconds": 0.5
+    },
+    "1080": {
+     "mean_luma": 0.0007346583428649237,
+     "lit_share": 0.0014009612911522632,
+     "sha256": "1384771f09825d3a590d0cb1317f766baf90340d0bc990e693dd271811d1db59",
+     "seconds": 1.6
+    },
+    "2160": {
+     "mean_luma": 0.0003671150293417907,
+     "lit_share": 0.0007024498456790123,
+     "sha256": "b96cb2afcfda5e4a16025cdae550a1cb054e088dbb951f72cbc219a5426172bb",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.22254223172757628,
+    "mean_luma_ratio_2160_over_1080": 0.49970851472286276,
+    "mean_luma_ratio_1080_over_480": 0.4453440859437781,
+    "lit_share_ratio_2160_over_480": 0.22317532286723912,
+    "lit_share_ratio_2160_over_1080": 0.5014056063613729,
+    "lit_share_ratio_1080_over_480": 0.44509937670380234
+   },
+   "new": {
+    "480": {
+     "mean_luma": 0.0014523497108952868,
+     "lit_share": 0.0024882903981264643,
+     "sha256": "ed372c38371003877b725604e8641d7a6562cde8bda005c1ba710976b9d55211",
+     "seconds": 0.6
+    },
+    "1080": {
+     "mean_luma": 0.0006562204645137376,
+     "lit_share": 0.0011164641203703705,
+     "sha256": "6ff2372ce2f99bfaacbf3e06599cc5b6cd107a2ca7ea172ba021da2ba0db7896",
+     "seconds": 1.7
+    },
+    "2160": {
+     "mean_luma": 0.0006581339122450678,
+     "lit_share": 0.0009113377700617283,
+     "sha256": "e6ce1d06fca69cb7131cb457144cfec255f6aae0ee03a6f7a6d533d5ae1a77d9",
+     "seconds": 4.1
+    },
+    "mean_luma_ratio_2160_over_480": 0.4531511297229973,
+    "mean_luma_ratio_2160_over_1080": 1.002915861108885,
+    "mean_luma_ratio_1080_over_480": 0.4518336455681992,
+    "lit_share_ratio_2160_over_480": 0.36625056735657213,
+    "lit_share_ratio_2160_over_1080": 0.8162714353591636,
+    "lit_share_ratio_1080_over_480": 0.4486872276688453
+   }
+  }
+ },
+ "B_real_presets": {
+  "$$$ Royal - Mashup (191).milk": {
+   "slug": "royal-mashup-191",
+   "old-1080-repeat": {
+    "mean_luma": 0.06831206545214537,
+    "lit_share": 0.26977498070987654,
+    "sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+    "seconds": 5.8
+   },
+   "old-480": {
+    "mean_luma": 0.061722347067242195,
+    "lit_share": 0.281430949941452,
+    "sha256": "c4145f9090d465ea97a3b2fa3da5e9d5ecb8bdee88b37b84fc5d7565126d1447",
+    "seconds": 1.6
+   },
+   "old-1080": {
+    "mean_luma": 0.06831206545214537,
+    "lit_share": 0.26977498070987654,
+    "sha256": "1cadf4a101e4212f7cfae7bc1c6c9b3c388e48ca29e91b808cbf807c3eefe79d",
+    "seconds": 6.0
+   },
+   "old-2160": {
+    "mean_luma": 0.06109683478466296,
+    "lit_share": 0.21432067218042697,
+    "sha256": "53c56754273388c0eb952d7171ce49cfdbb70c196171ef46a01570c36936f0db",
+    "seconds": 16.0
+   },
+   "new-480": {
+    "mean_luma": 0.058507283981443205,
+    "lit_share": 0.27030091237314596,
+    "sha256": "db769533bd65105a95b705f6a0d44c79605691bac0e5c81bd4c378f3c011c68b",
+    "seconds": 1.5
+   },
+   "new-1080": {
+    "mean_luma": 0.04983798655554042,
+    "lit_share": 0.22912260480967078,
+    "sha256": "f7ffc545c673bd7b150de4aa335f04ca68e14ac3cfa3f07a7db7486791cbd821",
+    "seconds": 6.2
+   },
+   "new-2160": {
+    "mean_luma": 0.2331181705280009,
+    "lit_share": 0.5589088551713606,
+    "sha256": "bcf3824e8993003cab3a082e29bbdb4e5223748789d4d5c980aff7a81fd6d9d5",
+    "seconds": 16.0
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 0.9898657080895226,
+   "old_drift_2160_over_1080": 0.8943783851399298,
+   "old_drift_1080_over_480": 1.1067638982964165,
+   "new_drift_2160_over_480": 3.9844298805929728,
+   "new_drift_2160_over_1080": 4.677519832552013,
+   "new_drift_1080_over_480": 0.8518253312074369,
+   "features": [
+    "main_thick"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  },
+  "$$$ Royal - Mashup (162).milk": {
+   "slug": "royal-mashup-162",
+   "old-1080-repeat": {
+    "mean_luma": 0.10381586994881499,
+    "lit_share": 0.8487962319958847,
+    "sha256": "39f96d8b2ca10740b7e09d6f0d429da87321e597c7ff32fc9a0aecb2999773d8",
+    "seconds": 6.0
+   },
+   "old-480": {
+    "mean_luma": 0.18289929621199796,
+    "lit_share": 0.8837350783892792,
+    "sha256": "7dd952933da024e2c0b33cce3f155d73f6068c3ec29672e8026f608969c78f80",
+    "seconds": 1.7
+   },
+   "old-1080": {
+    "mean_luma": 0.10381586994881499,
+    "lit_share": 0.8487962319958847,
+    "sha256": "39f96d8b2ca10740b7e09d6f0d429da87321e597c7ff32fc9a0aecb2999773d8",
+    "seconds": 6.2
+   },
+   "old-2160": {
+    "mean_luma": 0.07842564746663391,
+    "lit_share": 0.8189246801054526,
+    "sha256": "e99467c5d760d02028c345ef247216f1deb6d76acd7263db37f6b3337eb46c93",
+    "seconds": 15.9
+   },
+   "new-480": {
+    "mean_luma": 0.18289906793120478,
+    "lit_share": 0.8837315004553734,
+    "sha256": "5ee9cb6587f1abc48050171cab8dc8ba4fc771d3c1fffb8a90b9f1e19bc58c33",
+    "seconds": 1.8
+   },
+   "new-1080": {
+    "mean_luma": 0.10381630609497927,
+    "lit_share": 0.8488012192965535,
+    "sha256": "8cc71afabc7c09c51475fa5bccab0027657c77b2f5e4fcb98c1b54acc5eaeb6d",
+    "seconds": 6.2
+   },
+   "new-2160": {
+    "mean_luma": 0.10368727175112241,
+    "lit_share": 0.8416019714104296,
+    "sha256": "8c6ba1b7605a41c9d24aeb35639179e1816d32f10eb183b98f7fb74857912c7f",
+    "seconds": 16.1
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 0.4287914119457901,
+   "old_drift_2160_over_1080": 0.7554302391850168,
+   "old_drift_1080_over_480": 0.5676121893245689,
+   "new_drift_2160_over_480": 0.5669097875890932,
+   "new_drift_2160_over_1080": 0.9987570898184452,
+   "new_drift_1080_over_480": 0.5676152824027977,
+   "features": [
+    "main_thin",
+    "custom_dots",
+    "custom_thick"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  },
+  "$$$ Royal - Mashup (103).milk": {
+   "slug": "royal-mashup-103",
+   "old-1080-repeat": {
+    "mean_luma": 0.23136708204041911,
+    "lit_share": 0.8097292590985082,
+    "sha256": "77b82905d57e7a01e59278994c36325a627a8b3155d5a5e2ab3a516bf4824ec8",
+    "seconds": 6.4
+   },
+   "old-480": {
+    "mean_luma": 0.36913907413078845,
+    "lit_share": 0.9846388319672132,
+    "sha256": "66a3de3ac5e32ed19d402cffc2ad6fdd1ff70361d24684e00855c87abdae763a",
+    "seconds": 2.2
+   },
+   "old-1080": {
+    "mean_luma": 0.23136708204041911,
+    "lit_share": 0.8097292590985082,
+    "sha256": "77b82905d57e7a01e59278994c36325a627a8b3155d5a5e2ab3a516bf4824ec8",
+    "seconds": 6.7
+   },
+   "old-2160": {
+    "mean_luma": 0.0475865817592238,
+    "lit_share": 0.32097151793177725,
+    "sha256": "3afbdc33c662a43811cb936a670eb64e0c9946dc7e87afb73656e0fe41a71c6b",
+    "seconds": 16.5
+   },
+   "new-480": {
+    "mean_luma": 0.3589826537553318,
+    "lit_share": 0.9808834244080146,
+    "sha256": "6de759bde168e41c43b54ee74927cb5537fb82d822519c63170371e815bf7e94",
+    "seconds": 1.5
+   },
+   "new-1080": {
+    "mean_luma": 0.2406832418338509,
+    "lit_share": 0.8159360251093107,
+    "sha256": "970c6259ad4c7332450978c2aed4819a80342203bb85abdbd4e33634b0d54f1a",
+    "seconds": 6.1
+   },
+   "new-2160": {
+    "mean_luma": 0.2622661200122423,
+    "lit_share": 0.7083863781587577,
+    "sha256": "c25a639e46beec9b239a718d32bd8dcdb3ebaecf14a7dc405b540d6e79d04f4a",
+    "seconds": 15.9
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 0.12891233980384192,
+   "old_drift_2160_over_1080": 0.20567567926932045,
+   "old_drift_1080_over_480": 0.6267748343499507,
+   "new_drift_2160_over_480": 0.7305815957085002,
+   "new_drift_2160_over_1080": 1.089673373243371,
+   "new_drift_1080_over_480": 0.6704592528804775,
+   "features": [
+    "main_dots",
+    "motion_vectors"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  },
+  "Flexi - alien complex 03.milk": {
+   "slug": "flexi-alien-complex-03",
+   "old-1080-repeat": {
+    "mean_luma": 0.5922178647718754,
+    "lit_share": 0.9999998553240741,
+    "sha256": "e30865b140218ba6347228287bf00c18e39c3a8425dbfff5638270bd54d7e459",
+    "seconds": 6.4
+   },
+   "old-480": {
+    "mean_luma": 0.5579263115222387,
+    "lit_share": 0.9999998576958106,
+    "sha256": "f2787192af5c1764a4e100fa91b2abc857ad27284952736bad197d7186ac7c13",
+    "seconds": 1.6
+   },
+   "old-1080": {
+    "mean_luma": 0.5922178647718754,
+    "lit_share": 0.9999998553240741,
+    "sha256": "e30865b140218ba6347228287bf00c18e39c3a8425dbfff5638270bd54d7e459",
+    "seconds": 5.9
+   },
+   "old-2160": {
+    "mean_luma": 0.5819110920962832,
+    "lit_share": 0.9999999819155093,
+    "sha256": "c82ccc79942dce7160fa319961ef8ca1fc8f8ef467ed376f327724a7b961225e",
+    "seconds": 16.1
+   },
+   "new-480": {
+    "mean_luma": 0.560797290486092,
+    "lit_share": 0.9999998373666407,
+    "sha256": "0e19acb1e211125436ee1083d84c371ba90a7a870fa45a7a6c60a9a7f458465e",
+    "seconds": 1.7
+   },
+   "new-1080": {
+    "mean_luma": 0.5923548338165131,
+    "lit_share": 0.9999999517746914,
+    "sha256": "5f3cc462215da967a6942891b12e51950b376acd5a68ed4b607a13466700fb16",
+    "seconds": 6.3
+   },
+   "new-2160": {
+    "mean_luma": 0.5601670198582861,
+    "lit_share": 0.9999998593428499,
+    "sha256": "c296290b1920e92388ba9214839f61d17437f9bd8c9cc889bff99b47cd81ced0",
+    "seconds": 16.2
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 1.0429891548018317,
+   "old_drift_2160_over_1080": 0.9825963158346086,
+   "old_drift_1080_over_480": 1.0614625131338153,
+   "new_drift_2160_over_480": 0.9988761168456083,
+   "new_drift_2160_over_1080": 0.945661262269369,
+   "new_drift_1080_over_480": 1.0562726387338062,
+   "features": [
+    "main_thin",
+    "shape_thin"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  },
+  "rce-ordinary - want.milk": {
+   "slug": "rce-ordinary-want",
+   "old-1080-repeat": {
+    "mean_luma": 0.6740133954404357,
+    "lit_share": 1.0,
+    "sha256": "48c42755d674339ce2c7e2a14404f1dac0dc708a8efbe04909387b6ae0d44a08",
+    "seconds": 5.8
+   },
+   "old-480": {
+    "mean_luma": 0.5631748592092574,
+    "lit_share": 1.0,
+    "sha256": "15f70263fd7babadb89402f50b6aa01e76909d7ad25b7b8a53a4f18560589eda",
+    "seconds": 1.6
+   },
+   "old-1080": {
+    "mean_luma": 0.6740133954404357,
+    "lit_share": 1.0,
+    "sha256": "48c42755d674339ce2c7e2a14404f1dac0dc708a8efbe04909387b6ae0d44a08",
+    "seconds": 5.9
+   },
+   "old-2160": {
+    "mean_luma": 0.7299057352873376,
+    "lit_share": 1.0,
+    "sha256": "b7ed2096cfa90a5f208bc37598706081888d1488f3a95272545f58a6b509b93c",
+    "seconds": 15.9
+   },
+   "new-480": {
+    "mean_luma": 0.5632739047740386,
+    "lit_share": 1.0,
+    "sha256": "9d05a1e66a32634d60e35db64a54c56235466378113cdd23f0fa3eadc3a18298",
+    "seconds": 1.5
+   },
+   "new-1080": {
+    "mean_luma": 0.6740493873728302,
+    "lit_share": 1.0,
+    "sha256": "7f601441e1351f8a16af85cc5932ef948e8e0c4a35533eefe104c8aeebaae6d3",
+    "seconds": 5.9
+   },
+   "new-2160": {
+    "mean_luma": 0.6830398484699961,
+    "lit_share": 1.0,
+    "sha256": "d18e6ab71305f2568e51d0d04f20c7c02cdbeb1f5078b2cf3b3790b83af5e844",
+    "seconds": 15.9
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 1.2960552541570902,
+   "old_drift_2160_over_1080": 1.0829246721578567,
+   "old_drift_1080_over_480": 1.196810163697301,
+   "new_drift_2160_over_480": 1.2126246976486554,
+   "new_drift_2160_over_1080": 1.0133379857108202,
+   "new_drift_1080_over_480": 1.196663615445189,
+   "features": [
+    "main_thin"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  },
+  "Serge + 158 002.milk": {
+   "slug": "serge-158-002",
+   "old-1080-repeat": {
+    "mean_luma": 0.3319852092233298,
+    "lit_share": 0.7837697683577676,
+    "sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+    "seconds": 5.8
+   },
+   "old-480": {
+    "mean_luma": 0.4091916422212145,
+    "lit_share": 0.9062601645849597,
+    "sha256": "1707d13605891dc9ce90ea4733d8146e14670f0458b91d7cb3bd54723977c238",
+    "seconds": 1.5
+   },
+   "old-1080": {
+    "mean_luma": 0.3319852092233298,
+    "lit_share": 0.7837697683577676,
+    "sha256": "c8faa2ccdb0b7dabb363e667ba493dc137db6d5b352c6481b507b58ee989296d",
+    "seconds": 6.2
+   },
+   "old-2160": {
+    "mean_luma": 0.2998297234024437,
+    "lit_share": 0.7034668280205119,
+    "sha256": "43590f9e91c289901e335cefbb58c31d11a6e8eeea035ca93c591b2ad45fa389",
+    "seconds": 16.2
+   },
+   "new-480": {
+    "mean_luma": 0.4097760683660577,
+    "lit_share": 0.9065832764116576,
+    "sha256": "13e2f0b2c0f0988600c4fc4e9b611c152e1bdc5e7a75da2a98c2131ba36c96ec",
+    "seconds": 1.5
+   },
+   "new-1080": {
+    "mean_luma": 0.33213554723492783,
+    "lit_share": 0.78384860468107,
+    "sha256": "93791ba6d7cc8c7d989f35da98009d31b41572a7b0c61be40b9d1427e80263eb",
+    "seconds": 6.0
+   },
+   "new-2160": {
+    "mean_luma": 0.32511965565916034,
+    "lit_share": 0.7446389622315458,
+    "sha256": "4d3e0fc9d80696db9e876979a585684856bbbc3573a4a5453bcca001d51d6821",
+    "seconds": 16.1
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 0.7327366751062616,
+   "old_drift_2160_over_1080": 0.9031418119617046,
+   "old_drift_1080_over_480": 0.8113196237860941,
+   "new_drift_2160_over_480": 0.7934081093499272,
+   "new_drift_2160_over_1080": 0.9788764206837368,
+   "new_drift_1080_over_480": 0.8105293912338173,
+   "features": [
+    "main_thick"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  },
+  "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk": {
+   "slug": "tonymilkdrop-i-like-cartoon-isosceles-edit",
+   "old-1080-repeat": {
+    "mean_luma": 0.6403042937912027,
+    "lit_share": 1.0,
+    "sha256": "e8c2a761a09283eb432361df459e799df4d7cf88281e7d5eeccc1aafdb0d5f4e",
+    "seconds": 5.7
+   },
+   "old-480": {
+    "mean_luma": 0.7116434309596038,
+    "lit_share": 1.0,
+    "sha256": "c9b61b11eb65f2b26e3ab4ff7bc736e3dc64124a83af61a401b54bf44054a88f",
+    "seconds": 1.5
+   },
+   "old-1080": {
+    "mean_luma": 0.6403042937912027,
+    "lit_share": 1.0,
+    "sha256": "e8c2a761a09283eb432361df459e799df4d7cf88281e7d5eeccc1aafdb0d5f4e",
+    "seconds": 6.1
+   },
+   "old-2160": {
+    "mean_luma": 0.6632392666016832,
+    "lit_share": 1.0,
+    "sha256": "c32eec7f8d2102fda9eaca2d8e16b36bfcda7fe39042605431c2a0610092f4f5",
+    "seconds": 16.1
+   },
+   "new-480": {
+    "mean_luma": 0.7040660620507173,
+    "lit_share": 1.0,
+    "sha256": "bddc40df2fd7925780b097beba9bce5c8d07180110a4ffe35a9093d68d417f4c",
+    "seconds": 1.6
+   },
+   "new-1080": {
+    "mean_luma": 0.6673754701614949,
+    "lit_share": 1.0,
+    "sha256": "93c7228fa21d68587e3c58cb465d9be077d87eeb9a1f62c286da7b8430252652",
+    "seconds": 7.1
+   },
+   "new-2160": {
+    "mean_luma": 0.6635516873197138,
+    "lit_share": 1.0,
+    "sha256": "1d815efa10d5d43f75f5f30350ba1a087a47d7487f3771ca2c4ead5c96af79d1",
+    "seconds": 15.9
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 0.9319825600123213,
+   "old_drift_2160_over_1080": 1.0358188646130795,
+   "old_drift_1080_over_480": 0.8997543797007933,
+   "new_drift_2160_over_480": 0.9424565720253605,
+   "new_drift_2160_over_1080": 0.9942704174595213,
+   "new_drift_1080_over_480": 0.9478875721088522,
+   "features": [
+    "main_thin"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  },
+  "$$$ Royal - Mashup (397).milk": {
+   "slug": "royal-mashup-397",
+   "old-1080-repeat": {
+    "mean_luma": 0.03967342923703148,
+    "lit_share": 0.627450552983539,
+    "sha256": "8f715e8e78b2dea9d3419fac28dba0f55675c81e34be529ae61a13b1911a3305",
+    "seconds": 7.2
+   },
+   "old-480": {
+    "mean_luma": 0.03932199967514784,
+    "lit_share": 0.6195789828909707,
+    "sha256": "244e9eb0416188fabd2f4e6cea9624f562a35bce6ee32939daee71ab647f3c67",
+    "seconds": 1.6
+   },
+   "old-1080": {
+    "mean_luma": 0.03967342923703148,
+    "lit_share": 0.627450552983539,
+    "sha256": "8f715e8e78b2dea9d3419fac28dba0f55675c81e34be529ae61a13b1911a3305",
+    "seconds": 6.0
+   },
+   "old-2160": {
+    "mean_luma": 0.03853052563337009,
+    "lit_share": 0.6201903493119857,
+    "sha256": "56ec2a61fac7fd0ea93e98aa82e830884013bf491ebff79257371e40d9f647a5",
+    "seconds": 16.0
+   },
+   "new-480": {
+    "mean_luma": 0.03932199967514784,
+    "lit_share": 0.6195789828909707,
+    "sha256": "244e9eb0416188fabd2f4e6cea9624f562a35bce6ee32939daee71ab647f3c67",
+    "seconds": 1.7
+   },
+   "new-1080": {
+    "mean_luma": 0.03967342923703148,
+    "lit_share": 0.627450552983539,
+    "sha256": "8f715e8e78b2dea9d3419fac28dba0f55675c81e34be529ae61a13b1911a3305",
+    "seconds": 6.8
+   },
+   "new-2160": {
+    "mean_luma": 0.03853052563337009,
+    "lit_share": 0.6201903493119857,
+    "sha256": "56ec2a61fac7fd0ea93e98aa82e830884013bf491ebff79257371e40d9f647a5",
+    "seconds": 16.0
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 0.9798719788333152,
+   "old_drift_2160_over_1080": 0.9711922154035881,
+   "old_drift_1080_over_480": 1.0089372250848614,
+   "new_drift_2160_over_480": 0.9798719788333152,
+   "new_drift_2160_over_1080": 0.9711922154035881,
+   "new_drift_1080_over_480": 1.0089372250848614,
+   "features": [
+    "main_thin",
+    "shape_thick"
+   ],
+   "no_lines_drawn": true,
+   "included": false
+  },
+  "Serge circles005b.milk": {
+   "slug": "serge-circles005b",
+   "old-1080-repeat": {
+    "mean_luma": 0.17489168445199973,
+    "lit_share": 0.7061107253086419,
+    "sha256": "adbf1a5960680d2e28fa3e1ea364b6db886f4ab47fc69d7839357a27a0cade22",
+    "seconds": 6.5
+   },
+   "old-480": {
+    "mean_luma": 0.5285599486774719,
+    "lit_share": 1.0,
+    "sha256": "ae192dfca4228165e5aca9cdb2c57efdaa0046091dd72c0fe19cf874e71c897d",
+    "seconds": 1.6
+   },
+   "old-1080": {
+    "mean_luma": 0.17489168445199973,
+    "lit_share": 0.7061107253086419,
+    "sha256": "adbf1a5960680d2e28fa3e1ea364b6db886f4ab47fc69d7839357a27a0cade22",
+    "seconds": 6.3
+   },
+   "old-2160": {
+    "mean_luma": 0.0850868411236355,
+    "lit_share": 0.430491484214249,
+    "sha256": "9f314ec9852d2f91e7c8db41426077398fc5ca71d2c158397c619ab4c4c0420e",
+    "seconds": 16.7
+   },
+   "new-480": {
+    "mean_luma": 0.5322430870300214,
+    "lit_share": 1.0,
+    "sha256": "6e32c3ffe04589f2b45819566a02f0143be05aedf902a8de9857f742c371f8d6",
+    "seconds": 1.6
+   },
+   "new-1080": {
+    "mean_luma": 0.17811102769335824,
+    "lit_share": 0.7055429406185699,
+    "sha256": "fc6ed211ff31013ecc2f6ce8afd7ee141dc7b6dc36e5dacd21c6fb390fb6b6a9",
+    "seconds": 6.1
+   },
+   "new-2160": {
+    "mean_luma": 0.32028453125541506,
+    "lit_share": 0.7818986514998071,
+    "sha256": "a28b49f4137029aaa42bf361095ae51fede36e259ff3578d47d6d94fed275121",
+    "seconds": 16.3
+   },
+   "nondeterministic": false,
+   "old_drift_2160_over_480": 0.16097860107738815,
+   "old_drift_2160_over_1080": 0.48651164513764056,
+   "old_drift_1080_over_480": 0.33088334613623727,
+   "new_drift_2160_over_480": 0.6017636284251997,
+   "new_drift_2160_over_1080": 1.7982296514892238,
+   "new_drift_1080_over_480": 0.3346422565809893,
+   "features": [
+    "main_thick",
+    "shape_thin"
+   ],
+   "no_lines_drawn": false,
+   "included": true
+  }
+ },
+ "B_median_drift_included": {
+  "old": {
+   "480": 0.8323596175592914,
+   "1080": 0.8987600985508173
+  },
+  "new": {
+   "480": 0.8679323406876438,
+   "1080": 1.0060475377646327
+  }
+ },
+ "B_substitutions": {
+  "$$$ Royal - Mashup (397).milk": "Serge circles005b.milk (old and new frames identical at all three heights: no lines drawn in this window; substitute taken from line-sample-post report: deterministic, visible lines, among the largest legacy 720/1440 drift, so selected for a visible effect)"
+ },
+ "B_note": "None of the 8 requested presets is in line-sample-post/report.json (241-preset sample), so determinism was checked here; all 9 rendered presets are deterministic.",
+ "hash_checks": {
+  "A": {
+   "main-circle-thin": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "main-line-thin": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "main-circle-thick": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "main-line-thick": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "custom-circle-thick": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "main-dots": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "shape-outline-thin": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "shape-outline-thick": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   }
+  },
+  "B": {
+   "$$$ Royal - Mashup (191).milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "$$$ Royal - Mashup (162).milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "$$$ Royal - Mashup (103).milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "Flexi - alien complex 03.milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "rce-ordinary - want.milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "Serge + 158 002.milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "$$$ Royal - Mashup (397).milk": {
+    "new480_eq_old480": true,
+    "new1080_eq_old1080": true,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   },
+   "Serge circles005b.milk": {
+    "new480_eq_old480": false,
+    "new1080_eq_old1080": false,
+    "new1080_eq_previous_new1080": true,
+    "old480_eq_previous_old480": true,
+    "old1080_eq_previous_old1080": true
+   }
+  }
+ }
+}

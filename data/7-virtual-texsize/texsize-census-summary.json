@@ -1,0 +1,39 @@
+{
+ "about": "Census of texsize-family use in 9,606 bundled presets (summary only; per-preset list omitted).",
+ "summary": {
+  "presets": 9606,
+  "with_shaders": 8100,
+  "with_any_texsize_family": 6615,
+  "presets_per_class": {
+   "a": 5284,
+   "a_scaled": 1677,
+   "a_unit": 4880,
+   "b": 4428,
+   "b_noise": 4112,
+   "d": 4113,
+   "d_noise": 4103,
+   "d_user": 16,
+   "e": 90,
+   "pixels": 177,
+   "b_pixel": 680,
+   "a_comp_only": 1163
+  },
+  "presets_per_class_in_warp": {
+   "a": 4121,
+   "a_scaled": 877,
+   "a_unit": 3879,
+   "b": 3967,
+   "b_noise": 3878,
+   "d": 3879,
+   "d_noise": 3870,
+   "d_user": 15,
+   "e": 89
+  },
+  "texsize_main_canvas_any": 6590,
+  "only_c": 0,
+  "only_noise_idiom_b": 1180,
+  "b_pixel_in_warp": 311,
+  "a_or_b_pixel": 5371,
+  "notes": "c (aspect from texsize) and mip_* : 0 presets; noise idiom = texsize.xy(y) x texsize_noise*.zw(w) tiling (1:1 noise per pixel, mostly dithering); d counts uses, not bare declarations"
+ }
+}

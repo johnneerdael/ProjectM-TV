@@ -1,0 +1,2717 @@
+{
+ "environment": {
+  "device": "Ugoos AM6 (UGOOS-AM6), Amlogic S922X, Mali-G52 MP6, Magisk root",
+  "android": "9 (Ugoos/AM3/AM3:9/PPR1.180610.011/20250716 userdebug)",
+  "display_mode": "3840x2160 @ 60 Hz (mode 2)",
+  "render_size": "3840x2160 (render_height 2160, memory_limit false; STATS surface=3840x2160 confirmed)",
+  "fps_target": "60 (frame_rate_cap 60 -> frame divisor 1)",
+  "other_fixed_settings": "blank_detection_v3 false, skip_slow_presets false, mesh_level 3, auto_update false, track_access_explained true; preset pinned with debug.projectmtv.preset (auto change off)",
+  "before_app": "nl.neerdael.projectmtv 2.1.4 (release, GL lines)",
+  "after_app": "nl.neerdael.projectmtv.profile 2.1.4 (branch feat/instanced-lines, quad lines via projectm_opengl_set_line_reference_height(1080); APK built 2026-10-03 09:05 CEST, includes the GLES pixel-border tie fix)",
+  "audio_condition": "music: a music app playing live in the background; both visualizers captured it (STATS audio level > 0 in every music run). Live music, so the two apps hear different passages.",
+  "measurement": "launch with am start -S; screencap at ~20 s; fps = VisualizerRenderer STATS lines (1 s fps window, logged every 5 s) from 25 s to ~90 s after launch (12-13 samples); GPU utilization/frequency read without su from /sys/class/mpgpu every ~9 s during the window",
+  "date": "2026-10-03 (11:32-12:34 CEST)"
+ },
+ "music": {
+  "mashup191": {
+   "preset": "$$$ Royal - Mashup (191).milk",
+   "why": "thick main wave, feedback",
+   "release": {
+    "mean": 32.12,
+    "min": 30.7,
+    "max": 32.6,
+    "gpu_util": 98.8,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.343,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020086,
+      "mean": 32.05,
+      "min": 30.7,
+      "max": 32.6,
+      "n_stats": 13,
+      "fps_samples": [
+       30.7,
+       30.8,
+       32.5,
+       32.3,
+       32.4,
+       32.6,
+       32.2,
+       32.1,
+       32.4,
+       31.9,
+       32.2,
+       32.3,
+       32.3
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       97,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       47.1,
+       47.0,
+       47.1,
+       47.6,
+       47.1,
+       47.3
+      ],
+      "audio_samples": [
+       0.546,
+       0.203,
+       0.441,
+       0.087,
+       0.174,
+       0.324,
+       0.247,
+       0.542,
+       0.176,
+       0.583,
+       0.293,
+       0.576,
+       0.203
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791020281,
+      "mean": 32.19,
+      "min": 31.8,
+      "max": 32.4,
+      "n_stats": 12,
+      "fps_samples": [
+       32.3,
+       31.8,
+       32.2,
+       32.2,
+       32.0,
+       32.3,
+       32.2,
+       32.3,
+       32.4,
+       32.2,
+       32.3,
+       32.1
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       48.5,
+       48.1,
+       48.1,
+       48.5,
+       48.2,
+       48.3
+      ],
+      "audio_samples": [
+       0.235,
+       0.51,
+       0.245,
+       0.262,
+       0.414,
+       0.302,
+       0.249,
+       0.306,
+       0.531,
+       0.362,
+       0.42,
+       0.344
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 32.01,
+    "min": 31.6,
+    "max": 32.5,
+    "gpu_util": 99,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.305,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020184,
+      "mean": 31.98,
+      "min": 31.8,
+      "max": 32.2,
+      "n_stats": 13,
+      "fps_samples": [
+       32.1,
+       31.8,
+       32.0,
+       32.2,
+       32.0,
+       31.8,
+       32.0,
+       32.0,
+       32.1,
+       32.0,
+       32.0,
+       32.0,
+       31.8
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       47.7,
+       47.9,
+       47.9,
+       48.1,
+       47.9,
+       47.8
+      ],
+      "audio_samples": [
+       0.359,
+       0.592,
+       0.253,
+       0.204,
+       0.334,
+       0.297,
+       0.349,
+       0.324,
+       0.509,
+       0.223,
+       0.302,
+       0.253,
+       0.216
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791020377,
+      "mean": 32.04,
+      "min": 31.6,
+      "max": 32.5,
+      "n_stats": 13,
+      "fps_samples": [
+       32.2,
+       32.0,
+       31.6,
+       32.0,
+       31.9,
+       32.0,
+       32.3,
+       31.8,
+       32.2,
+       32.1,
+       32.5,
+       32.0,
+       31.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       48.6,
+       48.7,
+       48.9,
+       54.7,
+       49.0,
+       49.1
+      ],
+      "audio_samples": [
+       0.187,
+       0.497,
+       0.306,
+       0.331,
+       0.348,
+       0.218,
+       0.122,
+       0.186,
+       0.371,
+       0.212,
+       0.219,
+       0.378,
+       0.344
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": -0.34,
+   "gpu_util_delta_pts": 0.2,
+   "run_order": "R,P,R,P (m1,m2)",
+   "repeat_runs": [
+    "m2"
+   ],
+   "paired_delta_pct": {
+    "m1": -0.22,
+    "m2": -0.47
+   },
+   "audio_condition": "music"
+  },
+  "mashup162": {
+   "preset": "$$$ Royal - Mashup (162).milk",
+   "why": "thick custom waves",
+   "release": {
+    "mean": 33.59,
+    "min": 28.9,
+    "max": 36.2,
+    "gpu_util": 98.8,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.276,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020587,
+      "mean": 33.35,
+      "min": 31.7,
+      "max": 35.7,
+      "n_stats": 13,
+      "fps_samples": [
+       33.6,
+       32.1,
+       35.7,
+       32.6,
+       33.2,
+       33.4,
+       33.2,
+       34.2,
+       33.6,
+       32.4,
+       31.7,
+       34.9,
+       32.9
+      ],
+      "gpu_util_samples": [
+       99,
+       98,
+       99,
+       99,
+       98,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       50.9,
+       53.0,
+       51.4,
+       50.9,
+       51.2,
+       52.9
+      ],
+      "audio_samples": [
+       0.23,
+       0.189,
+       0.247,
+       0.292,
+       0.296,
+       0.448,
+       0.158,
+       0.604,
+       0.137,
+       0.14,
+       0.226,
+       0.241,
+       0.134
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022069,
+      "mean": 34.76,
+      "min": 33.6,
+      "max": 36.2,
+      "n_stats": 12,
+      "fps_samples": [
+       35.9,
+       36.2,
+       35.2,
+       35.0,
+       34.2,
+       34.5,
+       34.6,
+       33.8,
+       34.9,
+       35.4,
+       33.6,
+       33.8
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       53.1,
+       53.3,
+       52.9,
+       53.0,
+       53.9,
+       53.0
+      ],
+      "audio_samples": [
+       0.233,
+       0.318,
+       0.467,
+       0.325,
+       0.218,
+       0.19,
+       0.235,
+       0.304,
+       0.48,
+       0.422,
+       0.158,
+       0.144
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m3",
+      "start_unix": 1791023241,
+      "mean": 34.59,
+      "min": 32.9,
+      "max": 35.6,
+      "n_stats": 12,
+      "fps_samples": [
+       35.4,
+       35.2,
+       34.7,
+       34.3,
+       34.4,
+       35.5,
+       35.6,
+       34.6,
+       33.3,
+       35.0,
+       34.2,
+       32.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       53.7,
+       53.3,
+       53.5,
+       53.3,
+       53.1,
+       53.4
+      ],
+      "audio_samples": [
+       0.033,
+       0.305,
+       0.301,
+       0.241,
+       0.262,
+       0.538,
+       0.484,
+       0.285,
+       0.341,
+       0.264,
+       0.194,
+       0.296
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m4",
+      "start_unix": 1791023433,
+      "mean": 31.68,
+      "min": 28.9,
+      "max": 35.4,
+      "n_stats": 12,
+      "fps_samples": [
+       33.0,
+       31.6,
+       35.4,
+       32.2,
+       31.8,
+       32.5,
+       28.9,
+       32.8,
+       30.4,
+       29.8,
+       30.8,
+       30.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       97,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       53.9,
+       54.0,
+       55.9,
+       54.9,
+       54.3,
+       54.7
+      ],
+      "audio_samples": [
+       0.204,
+       0.295,
+       0.425,
+       0.201,
+       0.239,
+       0.169,
+       0.446,
+       0.267,
+       0.294,
+       0.196,
+       0.192,
+       0.204
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 36.93,
+    "min": 35.7,
+    "max": 38.3,
+    "gpu_util": 98.6,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.254,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020488,
+      "mean": 37.06,
+      "min": 36.2,
+      "max": 38.3,
+      "n_stats": 13,
+      "fps_samples": [
+       37.3,
+       37.5,
+       37.0,
+       36.7,
+       36.2,
+       36.4,
+       36.9,
+       37.1,
+       36.6,
+       37.0,
+       36.9,
+       38.3,
+       37.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       98
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       51.0,
+       50.4,
+       50.7,
+       50.6,
+       50.4,
+       50.2
+      ],
+      "audio_samples": [
+       0.228,
+       0.165,
+       0.276,
+       0.33,
+       0.167,
+       0.148,
+       0.247,
+       0.186,
+       0.235,
+       0.204,
+       0.359,
+       0.188,
+       0.565
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022165,
+      "mean": 37.1,
+      "min": 36.6,
+      "max": 37.6,
+      "n_stats": 13,
+      "fps_samples": [
+       37.4,
+       37.6,
+       36.9,
+       37.0,
+       37.1,
+       37.2,
+       37.0,
+       37.1,
+       37.2,
+       37.2,
+       37.3,
+       36.7,
+       36.6
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       97,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       53.3,
+       53.9,
+       53.3,
+       54.4,
+       53.1,
+       53.4
+      ],
+      "audio_samples": [
+       0.073,
+       0.31,
+       0.267,
+       0.404,
+       0.269,
+       0.476,
+       0.305,
+       0.325,
+       0.24,
+       0.402,
+       0.572,
+       0.415,
+       0.265
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m3",
+      "start_unix": 1791023337,
+      "mean": 36.77,
+      "min": 35.7,
+      "max": 37.4,
+      "n_stats": 13,
+      "fps_samples": [
+       35.9,
+       36.5,
+       36.6,
+       36.9,
+       37.0,
+       36.5,
+       37.4,
+       37.3,
+       37.3,
+       37.4,
+       35.7,
+       36.8,
+       36.7
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       95,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       53.7,
+       53.8,
+       53.3,
+       53.5,
+       53.4,
+       53.7
+      ],
+      "audio_samples": [
+       0.188,
+       0.179,
+       0.191,
+       0.154,
+       0.151,
+       0.229,
+       0.209,
+       0.322,
+       0.236,
+       0.208,
+       0.198,
+       0.168,
+       0.229
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m4",
+      "start_unix": 1791023529,
+      "mean": 36.8,
+      "min": 36.0,
+      "max": 37.3,
+      "n_stats": 13,
+      "fps_samples": [
+       37.1,
+       36.9,
+       36.8,
+       36.8,
+       36.6,
+       36.4,
+       36.9,
+       36.4,
+       36.8,
+       37.2,
+       37.2,
+       37.3,
+       36.0
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       97,
+       99,
+       98,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       54.0,
+       53.9,
+       53.9,
+       53.9,
+       53.6,
+       54.3
+      ],
+      "audio_samples": [
+       0.342,
+       0.235,
+       0.17,
+       0.163,
+       0.148,
+       0.284,
+       0.283,
+       0.207,
+       0.273,
+       0.189,
+       0.142,
+       0.299,
+       0.148
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": 9.94,
+   "gpu_util_delta_pts": -0.2,
+   "run_order": "m1 P,R; m2 R,P; m3/m4 R,P,R,P (requested repeat)",
+   "repeat_runs": [
+    "m2",
+    "m3",
+    "m4"
+   ],
+   "paired_delta_pct": {
+    "m1": 11.12,
+    "m2": 6.73,
+    "m3": 6.3,
+    "m4": 16.16
+   },
+   "audio_condition": "music"
+  },
+  "mashup103": {
+   "preset": "$$$ Royal - Mashup (103).milk",
+   "why": "motion vectors + dots",
+   "release": {
+    "mean": 36.55,
+    "min": 35.2,
+    "max": 37.4,
+    "gpu_util": 99,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.248,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020685,
+      "mean": 36.31,
+      "min": 35.2,
+      "max": 37.1,
+      "n_stats": 13,
+      "fps_samples": [
+       36.6,
+       35.2,
+       36.7,
+       36.6,
+       36.2,
+       36.3,
+       35.9,
+       37.1,
+       36.4,
+       36.3,
+       36.4,
+       36.4,
+       35.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       50.9,
+       50.7,
+       50.4,
+       53.6,
+       50.5,
+       50.4
+      ],
+      "audio_samples": [
+       0.162,
+       0.211,
+       0.184,
+       0.215,
+       0.148,
+       0.108,
+       0.283,
+       0.288,
+       0.294,
+       0.221,
+       0.27,
+       0.342,
+       0.197
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022357,
+      "mean": 36.7,
+      "min": 36.1,
+      "max": 37.4,
+      "n_stats": 13,
+      "fps_samples": [
+       36.4,
+       36.1,
+       36.5,
+       37.4,
+       36.2,
+       36.9,
+       37.3,
+       36.5,
+       37.1,
+       36.6,
+       36.7,
+       36.5,
+       36.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.5,
+       52.5,
+       52.6,
+       54.2,
+       52.5,
+       52.6
+      ],
+      "audio_samples": [
+       0.192,
+       0.229,
+       0.157,
+       0.21,
+       0.532,
+       0.271,
+       0.231,
+       0.235,
+       0.19,
+       0.344,
+       0.363,
+       0.35,
+       0.217
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m3",
+      "start_unix": 1791022856,
+      "mean": 36.58,
+      "min": 36.0,
+      "max": 37.0,
+      "n_stats": 13,
+      "fps_samples": [
+       37.0,
+       36.5,
+       37.0,
+       36.4,
+       36.0,
+       36.8,
+       37.0,
+       36.5,
+       36.6,
+       36.5,
+       36.2,
+       36.6,
+       36.5
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.4,
+       52.5,
+       52.5,
+       53.2,
+       52.4,
+       52.3
+      ],
+      "audio_samples": [
+       0.299,
+       0.494,
+       0.416,
+       0.174,
+       0.284,
+       0.268,
+       0.38,
+       0.235,
+       0.256,
+       0.39,
+       0.256,
+       0.25,
+       0.263
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m4",
+      "start_unix": 1791023048,
+      "mean": 36.62,
+      "min": 36.1,
+      "max": 37.2,
+      "n_stats": 12,
+      "fps_samples": [
+       36.9,
+       37.2,
+       36.5,
+       37.2,
+       36.7,
+       36.3,
+       36.6,
+       36.6,
+       36.7,
+       36.4,
+       36.2,
+       36.1
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.5,
+       52.6,
+       52.4,
+       55.3,
+       52.2,
+       52.7
+      ],
+      "audio_samples": [
+       0.178,
+       0.193,
+       0.106,
+       0.199,
+       0.174,
+       0.26,
+       0.213,
+       0.192,
+       0.27,
+       0.159,
+       0.174,
+       0.174
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 35.23,
+    "min": 33.9,
+    "max": 36.8,
+    "gpu_util": 99,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.239,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020782,
+      "mean": 34.86,
+      "min": 33.9,
+      "max": 35.6,
+      "n_stats": 13,
+      "fps_samples": [
+       35.5,
+       34.8,
+       35.0,
+       34.0,
+       33.9,
+       35.2,
+       34.1,
+       35.1,
+       35.0,
+       35.5,
+       35.6,
+       34.6,
+       34.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.8,
+       50.5,
+       50.7,
+       50.8,
+       50.9,
+       50.7
+      ],
+      "audio_samples": [
+       0.127,
+       0.116,
+       0.19,
+       0.204,
+       0.208,
+       0.157,
+       0.207,
+       0.213,
+       0.203,
+       0.2,
+       0.189,
+       0.208,
+       0.18
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022261,
+      "mean": 35.64,
+      "min": 34.8,
+      "max": 36.8,
+      "n_stats": 12,
+      "fps_samples": [
+       35.5,
+       36.3,
+       36.8,
+       35.8,
+       34.8,
+       35.4,
+       35.1,
+       36.3,
+       35.2,
+       35.4,
+       35.4,
+       35.7
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       53.0,
+       52.5,
+       52.6,
+       52.6,
+       53.2,
+       52.7
+      ],
+      "audio_samples": [
+       0.37,
+       0.184,
+       0.361,
+       0.253,
+       0.223,
+       0.333,
+       0.339,
+       0.266,
+       0.326,
+       0.203,
+       0.287,
+       0.21
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m3",
+      "start_unix": 1791022952,
+      "mean": 35.07,
+      "min": 34.2,
+      "max": 36.1,
+      "n_stats": 12,
+      "fps_samples": [
+       35.6,
+       35.4,
+       34.7,
+       34.5,
+       35.1,
+       34.2,
+       34.9,
+       35.1,
+       34.3,
+       35.8,
+       35.1,
+       36.1
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.8,
+       53.0,
+       52.7,
+       53.0,
+       52.4,
+       53.2
+      ],
+      "audio_samples": [
+       0.21,
+       0.187,
+       0.165,
+       0.155,
+       0.146,
+       0.205,
+       0.348,
+       0.244,
+       0.354,
+       0.321,
+       0.234,
+       0.327
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m4",
+      "start_unix": 1791023145,
+      "mean": 35.34,
+      "min": 34.6,
+      "max": 36.4,
+      "n_stats": 12,
+      "fps_samples": [
+       35.5,
+       35.7,
+       36.4,
+       34.9,
+       35.5,
+       36.0,
+       35.1,
+       35.3,
+       34.9,
+       34.6,
+       35.5,
+       34.7
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.4,
+       52.3,
+       52.3,
+       52.7,
+       52.7,
+       52.6
+      ],
+      "audio_samples": [
+       0.173,
+       0.327,
+       0.269,
+       0.305,
+       0.189,
+       0.277,
+       0.372,
+       0.165,
+       0.367,
+       0.189,
+       0.294,
+       0.086
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": -3.61,
+   "gpu_util_delta_pts": 0,
+   "run_order": "m1 R,P; m2 P,R; m3/m4 R,P,R,P (requested repeat)",
+   "repeat_runs": [
+    "m2",
+    "m3",
+    "m4"
+   ],
+   "paired_delta_pct": {
+    "m1": -3.99,
+    "m2": -2.89,
+    "m3": -4.13,
+    "m4": -3.5
+   },
+   "audio_condition": "music"
+  },
+  "flexi-alien03": {
+   "preset": "Flexi - alien complex 03.milk",
+   "why": "many outlined shapes",
+   "release": {
+    "mean": 12.32,
+    "min": 12.0,
+    "max": 12.7,
+    "gpu_util": 99,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.254,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020882,
+      "mean": 12.26,
+      "min": 12.0,
+      "max": 12.6,
+      "n_stats": 12,
+      "fps_samples": [
+       12.0,
+       12.1,
+       12.2,
+       12.2,
+       12.3,
+       12.3,
+       12.3,
+       12.2,
+       12.3,
+       12.2,
+       12.4,
+       12.6
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       50.9,
+       51.0,
+       50.8,
+       50.9,
+       51.1,
+       51.4
+      ],
+      "audio_samples": [
+       0.243,
+       0.327,
+       0.138,
+       0.313,
+       0.154,
+       0.163,
+       0.581,
+       0.355,
+       0.239,
+       0.182,
+       0.261,
+       0.129
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791021081,
+      "mean": 12.38,
+      "min": 12.1,
+      "max": 12.7,
+      "n_stats": 12,
+      "fps_samples": [
+       12.2,
+       12.3,
+       12.4,
+       12.6,
+       12.6,
+       12.2,
+       12.1,
+       12.2,
+       12.2,
+       12.6,
+       12.7,
+       12.5
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       51.5,
+       51.8,
+       51.6,
+       51.5,
+       51.4,
+       53.1
+      ],
+      "audio_samples": [
+       0.205,
+       0.141,
+       0.242,
+       0.217,
+       0.277,
+       0.332,
+       0.263,
+       0.228,
+       0.349,
+       0.248,
+       0.309,
+       0.195
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 12.23,
+    "min": 12.0,
+    "max": 12.5,
+    "gpu_util": 98.8,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.244,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791020982,
+      "mean": 12.23,
+      "min": 12.0,
+      "max": 12.5,
+      "n_stats": 12,
+      "fps_samples": [
+       12.2,
+       12.2,
+       12.0,
+       12.0,
+       12.2,
+       12.2,
+       12.2,
+       12.3,
+       12.3,
+       12.3,
+       12.4,
+       12.5
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       51.7,
+       51.4,
+       51.4,
+       51.4,
+       51.3,
+       51.3
+      ],
+      "audio_samples": [
+       0.406,
+       0.322,
+       0.334,
+       0.206,
+       0.306,
+       0.178,
+       0.355,
+       0.25,
+       0.291,
+       0.212,
+       0.235,
+       0.184
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791021177,
+      "mean": 12.22,
+      "min": 12.0,
+      "max": 12.5,
+      "n_stats": 12,
+      "fps_samples": [
+       12.0,
+       12.1,
+       12.3,
+       12.1,
+       12.1,
+       12.1,
+       12.0,
+       12.3,
+       12.4,
+       12.3,
+       12.5,
+       12.5
+      ],
+      "gpu_util_samples": [
+       99,
+       97,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.4,
+       51.7,
+       52.2,
+       51.8,
+       52.0,
+       52.0
+      ],
+      "audio_samples": [
+       0.176,
+       0.167,
+       0.225,
+       0.155,
+       0.182,
+       0.25,
+       0.246,
+       0.306,
+       0.285,
+       0.266,
+       0.095,
+       0.243
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": -0.73,
+   "gpu_util_delta_pts": -0.2,
+   "run_order": "R,P,R,P (m1,m2)",
+   "repeat_runs": [
+    "m2"
+   ],
+   "paired_delta_pct": {
+    "m1": -0.24,
+    "m2": -1.29
+   },
+   "audio_condition": "music"
+  },
+  "rce-want": {
+   "preset": "rce-ordinary - want.milk",
+   "why": "thin main wave",
+   "release": {
+    "mean": 30.22,
+    "min": 29.6,
+    "max": 31.2,
+    "gpu_util": 98.8,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.198,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021273,
+      "mean": 30.22,
+      "min": 29.6,
+      "max": 31.2,
+      "n_stats": 13,
+      "fps_samples": [
+       30.0,
+       31.2,
+       29.9,
+       30.4,
+       29.6,
+       30.7,
+       30.3,
+       29.9,
+       30.1,
+       30.5,
+       30.2,
+       30.1,
+       30.0
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       98,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.6,
+       53.1,
+       52.7,
+       52.7,
+       52.3,
+       52.7
+      ],
+      "audio_samples": [
+       0.216,
+       0.279,
+       0.212,
+       0.194,
+       0.194,
+       0.164,
+       0.191,
+       0.167,
+       0.123,
+       0.247,
+       0.24,
+       0.167,
+       0.183
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 29.88,
+    "min": 29.4,
+    "max": 30.4,
+    "gpu_util": 98.8,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.27,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021371,
+      "mean": 29.88,
+      "min": 29.4,
+      "max": 30.4,
+      "n_stats": 13,
+      "fps_samples": [
+       30.2,
+       30.1,
+       29.9,
+       29.9,
+       30.1,
+       29.8,
+       29.5,
+       29.4,
+       29.4,
+       30.0,
+       29.6,
+       30.4,
+       30.2
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       98,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.8,
+       52.8,
+       52.6,
+       55.9,
+       52.9,
+       53.0
+      ],
+      "audio_samples": [
+       0.184,
+       0.315,
+       0.146,
+       0.29,
+       0.195,
+       0.316,
+       0.165,
+       0.229,
+       0.247,
+       0.162,
+       0.536,
+       0.309,
+       0.414
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": -1.13,
+   "gpu_util_delta_pts": 0.0,
+   "run_order": "R,P",
+   "repeat_runs": [],
+   "paired_delta_pct": {
+    "m1": -1.13
+   },
+   "audio_condition": "music"
+  },
+  "serge158-002": {
+   "preset": "Serge + 158 002.milk",
+   "why": "additive thick main wave",
+   "release": {
+    "mean": 10.59,
+    "min": 10.5,
+    "max": 10.7,
+    "gpu_util": 99,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.282,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021571,
+      "mean": 10.6,
+      "min": 10.6,
+      "max": 10.6,
+      "n_stats": 12,
+      "fps_samples": [
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6,
+       10.6
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.2,
+       52.2,
+       52.2,
+       52.2,
+       52.2,
+       52.2
+      ],
+      "audio_samples": [
+       0.22,
+       0.307,
+       0.219,
+       0.23,
+       0.219,
+       0.203,
+       0.339,
+       0.39,
+       0.269,
+       0.202,
+       0.313,
+       0.344
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022657,
+      "mean": 10.59,
+      "min": 10.5,
+      "max": 10.7,
+      "n_stats": 12,
+      "fps_samples": [
+       10.6,
+       10.6,
+       10.6,
+       10.7,
+       10.6,
+       10.7,
+       10.6,
+       10.6,
+       10.5,
+       10.5,
+       10.6,
+       10.5
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.3,
+       52.3,
+       52.2,
+       52.8,
+       57.2,
+       52.5
+      ],
+      "audio_samples": [
+       0.319,
+       0.17,
+       0.36,
+       0.445,
+       0.236,
+       0.309,
+       0.439,
+       0.266,
+       0.021,
+       0.395,
+       0.346,
+       0.213
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 10.75,
+    "min": 8.7,
+    "max": 15.2,
+    "gpu_util": 99,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.293,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021470,
+      "mean": 10.92,
+      "min": 8.7,
+      "max": 15.2,
+      "n_stats": 13,
+      "fps_samples": [
+       10.5,
+       10.2,
+       10.5,
+       10.6,
+       10.6,
+       8.7,
+       11.5,
+       9.4,
+       10.2,
+       9.2,
+       11.2,
+       15.2,
+       14.1
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.1,
+       52.9,
+       53.6,
+       53.2,
+       54.8,
+       53.0
+      ],
+      "audio_samples": [
+       0.232,
+       0.265,
+       0.44,
+       0.267,
+       0.269,
+       0.282,
+       0.082,
+       0.4,
+       0.381,
+       0.251,
+       0.369,
+       0.272,
+       0.328
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022754,
+      "mean": 10.59,
+      "min": 10.5,
+      "max": 10.7,
+      "n_stats": 12,
+      "fps_samples": [
+       10.6,
+       10.5,
+       10.6,
+       10.5,
+       10.7,
+       10.7,
+       10.5,
+       10.7,
+       10.6,
+       10.6,
+       10.5,
+       10.6
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.2,
+       52.3,
+       52.1,
+       52.3,
+       52.2,
+       52.1
+      ],
+      "audio_samples": [
+       0.326,
+       0.349,
+       0.424,
+       0.219,
+       0.38,
+       0.247,
+       0.301,
+       0.232,
+       0.192,
+       0.266,
+       0.264,
+       0.296
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": 1.51,
+   "gpu_util_delta_pts": 0,
+   "run_order": "m1 P,R; m2 R,P",
+   "repeat_runs": [
+    "m2"
+   ],
+   "paired_delta_pct": {
+    "m1": 3.02,
+    "m2": 0.0
+   },
+   "audio_condition": "music"
+  },
+  "tony-cartoon": {
+   "preset": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+   "why": "thin circle",
+   "release": {
+    "mean": 12.75,
+    "min": 11.3,
+    "max": 13.9,
+    "gpu_util": 98.8,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.272,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021670,
+      "mean": 13.1,
+      "min": 12.2,
+      "max": 13.9,
+      "n_stats": 12,
+      "fps_samples": [
+       12.2,
+       13.4,
+       13.4,
+       13.4,
+       13.7,
+       13.2,
+       12.2,
+       12.9,
+       13.3,
+       13.9,
+       12.7,
+       12.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       98,
+       98,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.3,
+       52.3,
+       52.2,
+       52.5,
+       52.1,
+       52.2
+      ],
+      "audio_samples": [
+       0.286,
+       0.178,
+       0.328,
+       0.122,
+       0.102,
+       0.418,
+       0.204,
+       0.428,
+       0.139,
+       0.115,
+       0.145,
+       0.238
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022561,
+      "mean": 12.4,
+      "min": 11.3,
+      "max": 13.3,
+      "n_stats": 12,
+      "fps_samples": [
+       12.7,
+       13.3,
+       11.9,
+       12.7,
+       12.4,
+       11.8,
+       11.3,
+       12.7,
+       11.8,
+       12.6,
+       12.5,
+       13.1
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.5,
+       52.3,
+       52.3,
+       52.3,
+       52.5,
+       52.5
+      ],
+      "audio_samples": [
+       0.215,
+       0.277,
+       0.231,
+       0.433,
+       0.462,
+       0.274,
+       0.347,
+       0.446,
+       0.287,
+       0.211,
+       0.394,
+       0.245
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 11.8,
+    "min": 10.4,
+    "max": 13.5,
+    "gpu_util": 98.9,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.298,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021770,
+      "mean": 12.07,
+      "min": 10.4,
+      "max": 13.5,
+      "n_stats": 12,
+      "fps_samples": [
+       13.5,
+       12.3,
+       11.9,
+       11.7,
+       10.4,
+       11.2,
+       12.2,
+       11.7,
+       11.8,
+       12.4,
+       12.8,
+       12.9
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.5,
+       52.3,
+       52.1,
+       51.9,
+       52.8,
+       52.4
+      ],
+      "audio_samples": [
+       0.008,
+       0.376,
+       0.248,
+       0.193,
+       0.258,
+       0.187,
+       0.331,
+       0.262,
+       0.295,
+       0.402,
+       0.29,
+       0.349
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     },
+     {
+      "tag": "m2",
+      "start_unix": 1791022464,
+      "mean": 11.53,
+      "min": 10.7,
+      "max": 12.4,
+      "n_stats": 12,
+      "fps_samples": [
+       11.3,
+       11.4,
+       10.8,
+       11.2,
+       11.4,
+       11.6,
+       12.4,
+       10.7,
+       11.8,
+       12.4,
+       11.3,
+       12.0
+      ],
+      "gpu_util_samples": [
+       98,
+       99,
+       99,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.5,
+       52.6,
+       52.6,
+       52.5,
+       52.2,
+       52.7
+      ],
+      "audio_samples": [
+       0.457,
+       0.273,
+       0.192,
+       0.274,
+       0.272,
+       0.235,
+       0.222,
+       0.453,
+       0.302,
+       0.298,
+       0.507,
+       0.476
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": -7.45,
+   "gpu_util_delta_pts": 0.1,
+   "run_order": "m1 R,P; m2 P,R",
+   "repeat_runs": [
+    "m2"
+   ],
+   "paired_delta_pct": {
+    "m1": -7.86,
+    "m2": -7.02
+   },
+   "audio_condition": "music"
+  },
+  "mashup397": {
+   "preset": "$$$ Royal - Mashup (397).milk",
+   "why": "thick shape outline",
+   "release": {
+    "mean": 16.34,
+    "min": 16.2,
+    "max": 16.5,
+    "gpu_util": 98,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.264,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021967,
+      "mean": 16.34,
+      "min": 16.2,
+      "max": 16.5,
+      "n_stats": 12,
+      "fps_samples": [
+       16.4,
+       16.2,
+       16.5,
+       16.3,
+       16.2,
+       16.4,
+       16.2,
+       16.3,
+       16.2,
+       16.5,
+       16.5,
+       16.4
+      ],
+      "gpu_util_samples": [
+       98,
+       98,
+       99,
+       99,
+       96,
+       98
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.6,
+       52.3,
+       52.1,
+       52.2,
+       52.2,
+       52.1
+      ],
+      "audio_samples": [
+       0.2,
+       0.197,
+       0.16,
+       0.265,
+       0.227,
+       0.199,
+       0.188,
+       0.44,
+       0.51,
+       0.471,
+       0.137,
+       0.178
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "profile": {
+    "mean": 16.29,
+    "min": 15.8,
+    "max": 16.8,
+    "gpu_util": 98.8,
+    "gpu_freq_mhz": [
+     800
+    ],
+    "audio_level_mean": 0.272,
+    "runs": [
+     {
+      "tag": "m1",
+      "start_unix": 1791021869,
+      "mean": 16.29,
+      "min": 15.8,
+      "max": 16.8,
+      "n_stats": 12,
+      "fps_samples": [
+       16.8,
+       16.6,
+       16.2,
+       16.1,
+       16.2,
+       16.4,
+       16.1,
+       16.3,
+       15.8,
+       16.3,
+       16.3,
+       16.4
+      ],
+      "gpu_util_samples": [
+       99,
+       99,
+       98,
+       99,
+       99,
+       99
+      ],
+      "gpu_freq_mhz": [
+       800,
+       800,
+       800,
+       800,
+       800,
+       800
+      ],
+      "temp_c": [
+       52.3,
+       52.5,
+       52.1,
+       52.4,
+       57.0,
+       52.5
+      ],
+      "audio_samples": [
+       0.337,
+       0.312,
+       0.184,
+       0.383,
+       0.393,
+       0.012,
+       0.224,
+       0.323,
+       0.265,
+       0.191,
+       0.2,
+       0.44
+      ],
+      "surface": [
+       "3840x2160"
+      ],
+      "audio_condition": "music",
+      "media_session": "state=PlaybackState {state=3"
+     }
+    ]
+   },
+   "delta_pct": -0.31,
+   "gpu_util_delta_pts": 0.8,
+   "run_order": "P,R",
+   "repeat_runs": [],
+   "paired_delta_pct": {
+    "m1": -0.31
+   },
+   "audio_condition": "music"
+  }
+ },
+ "silence": {
+  "mashup191": {
+   "note": "Partial trial only, before the user started music: the profile app (quad lines) ran ~28 s in silence before music started; STATS 7-28 s after launch (the regular 10 s discard was not possible). No release counterpart was run in silence, so this is not an A/B.",
+   "profile": {
+    "fps_samples": [
+     32.1,
+     32.5,
+     32.7,
+     32.9,
+     32.7
+    ],
+    "mean": 32.58,
+    "audio_level": 0.0
+   }
+  }
+ }
+}

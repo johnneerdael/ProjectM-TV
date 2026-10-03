@@ -1,0 +1,210 @@
+{
+ "final_ab": {
+  "tony": {
+   "release_runs": [
+    [
+     "tony-release-f2",
+     12.63,
+     0.215,
+     99
+    ],
+    [
+     "tony-release-f3",
+     12.22,
+     0.228,
+     99
+    ]
+   ],
+   "profile_runs": [
+    [
+     "tony-profile-f2",
+     12.27,
+     0.185,
+     98.7
+    ],
+    [
+     "tony-profile-f3",
+     11.64,
+     0.309,
+     99
+    ]
+   ],
+   "extra_profile_runs": [
+    [
+     "tony-profile-f1",
+     11.94,
+     0.354
+    ]
+   ],
+   "release_mean": 12.43,
+   "profile_mean": 11.96,
+   "delta_pct": -3.78,
+   "paired_delta_pct": [
+    -2.85,
+    -4.75
+   ]
+  },
+  "m103": {
+   "release_runs": [
+    [
+     "m103-release-f1",
+     36.77,
+     0.284,
+     98.8
+    ],
+    [
+     "m103-release-f2",
+     36.47,
+     0.258,
+     99
+    ]
+   ],
+   "profile_runs": [
+    [
+     "m103-profile-f1",
+     34.85,
+     0.216,
+     99
+    ],
+    [
+     "m103-profile-f2",
+     35.16,
+     0.23,
+     99
+    ]
+   ],
+   "extra_profile_runs": [],
+   "release_mean": 36.62,
+   "profile_mean": 35.0,
+   "delta_pct": -4.41,
+   "paired_delta_pct": [
+    -5.22,
+    -3.59
+   ]
+  }
+ },
+ "in_build": {
+  "tony": {
+   "0": {
+    "runs": [
+     [
+      "tony-diag0-r1",
+      12.6,
+      0.261
+     ],
+     [
+      "tony-diag0-r2",
+      12.78,
+      0.257
+     ],
+     [
+      "tony-diag0-r3",
+      12.55,
+      0.268
+     ]
+    ],
+    "mean": 12.64
+   },
+   "2160": {
+    "runs": [
+     [
+      "tony-diag2160-r1",
+      12.46,
+      0.289
+     ],
+     [
+      "tony-diag2160-r2",
+      12.47,
+      0.377
+     ]
+    ],
+    "mean": 12.46,
+    "delta_vs_0_pct": -1.42
+   },
+   "1080": {
+    "runs": [
+     [
+      "tony-diag1080-r1",
+      12.47,
+      0.201
+     ],
+     [
+      "tony-diag1080-r2",
+      12.3,
+      0.236
+     ],
+     [
+      "tony-diag1080-r3",
+      12.18,
+      0.293
+     ]
+    ],
+    "mean": 12.32,
+    "delta_vs_0_pct": -2.53
+   }
+  },
+  "m103": {
+   "0": {
+    "runs": [
+     [
+      "m103-diag0-r1",
+      36.58,
+      0.263
+     ],
+     [
+      "m103-diag0-r2",
+      36.36,
+      0.186
+     ],
+     [
+      "m103-diag0-r3",
+      36.31,
+      0.177
+     ]
+    ],
+    "mean": 36.42
+   },
+   "2160": {
+    "runs": [
+     [
+      "m103-diag2160-r1",
+      36.61,
+      0.247
+     ],
+     [
+      "m103-diag2160-r2",
+      36.48,
+      0.285
+     ]
+    ],
+    "mean": 36.55,
+    "delta_vs_0_pct": 0.36
+   },
+   "1080": {
+    "runs": [
+     [
+      "m103-diag1080-r1",
+      35.48,
+      0.313
+     ],
+     [
+      "m103-diag1080-r2",
+      35.69,
+      0.312
+     ],
+     [
+      "m103-diag1080-r3",
+      34.83,
+      0.263
+     ]
+    ],
+    "mean": 35.33,
+    "delta_vs_0_pct": -2.99
+   }
+  }
+ },
+ "notes": {
+  "tony-release-f1": "discarded: music app and then the launcher (uid <n>) took the foreground during the run; 0 valid STATS samples",
+  "in_build": "profile build of HEAD 84c7050 plus a temporary system property debug.projectmtv.lineref overriding the reference height (0 = GL lines, 2160 = 1 px quads, 1080 = shipping 2 px quads); hook never committed, removed; final A/B used the HEAD build without it"
+ }
+}
