@@ -414,7 +414,7 @@ index 8351368fb..9f82851aa 100644
      bool m_imageLookedUp{false};
      bool m_texturedShaderReady{false}; //!< Textured shader uniforms set in this frame.
 diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
-index e3f94056b..e973aa3cf 100644
+index 72fcececc..90def82c0 100644
 --- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
 +++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
 @@ -1,5 +1,7 @@
@@ -425,7 +425,7 @@ index e3f94056b..e973aa3cf 100644
  #include "PerFrameContext.hpp"
  #include "PresetFileParser.hpp"
  
-@@ -171,6 +173,41 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -183,6 +185,41 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
  #ifndef USE_GLES
      glDisable(GL_LINE_SMOOTH);
  #endif
@@ -467,7 +467,7 @@ index e3f94056b..e973aa3cf 100644
      glLineWidth(1);
  
      // Additive wave drawing (vice overwrite)
-@@ -186,7 +223,8 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -198,7 +235,8 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
  
      m_presetState.untexturedShader.Bind();
      m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
@@ -1194,7 +1194,7 @@ index 000000000..8b10f8184
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
-index 25b91bf31..744efbb60 100755
+index a00a836bd..ec3dfc97d 100755
 --- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
 @@ -22,6 +22,7 @@
@@ -1205,7 +1205,7 @@ index 25b91bf31..744efbb60 100755
  #include "MilkdropPresetExceptions.hpp"
  #include "PresetFileParser.hpp"
  
-@@ -123,7 +124,9 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+@@ -124,7 +125,9 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
      auto const updateBlur = [this]() {
          const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
          assert(warpedImage.get());

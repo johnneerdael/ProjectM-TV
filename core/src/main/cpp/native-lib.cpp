@@ -1666,7 +1666,7 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     }
     projectm_set_beat_sensitivity(g_engine.pm, 1.0f);
     // Lines as quads, 1 px wide up to MilkDrop's authoring resolution, 1024x768, and by the square
-    // root of the area ratio above it, so a preset keeps its look at high quality levels (patch 0021,
+    // root of the area ratio above it, so a preset keeps its look at high quality levels (patch 0024,
     // projectM issue #682); blur levels and the spiro waves' fade follow it too. Set before the first
     // preset renders.
     projectm_opengl_set_line_reference_size(g_engine.pm, 1024, 768);

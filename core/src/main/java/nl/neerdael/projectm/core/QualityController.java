@@ -34,7 +34,7 @@ public final class QualityController {
     /**
      * Highest render height, for automatic and fixed resolution alike; the display's scaler upscales
      * to the panel. projectM draws lines, blur and the presets' texel steps as at MilkDrop's
-     * 1024x768 (patch 0021), but presets that feed their image back also re-sample it bilinearly
+     * 1024x768 (patch 0024), but presets that feed their image back also re-sample it bilinearly
      * every frame, which smooths by a fraction of a real texel: above about twice the reference's
      * size (665 lines at 16:9) that smoothing is too small a share of the picture and such presets
      * settle into another pattern (Acid Mandala's red spokes die out from 2880x1620). Measured on
