@@ -242,6 +242,8 @@ public class MainActivity extends Activity {
         // tools/tv-diagnostics.sh reads the latest of these lines to know the fixed levels offered.
         Log.i(TAG, "Memory limit: " + (limit > 0 ? "render height up to " + limit : "off")
                 + " (RAM " + profile.totalRamMb + " MB)");
+        Log.i(TAG, "Render height cap: " + QualityController.RENDER_HEIGHT_CAP + " (panel height "
+                + display.physicalHeight + ")");
         quality = new QualityController(display, profile, limit, this::applyRenderHeight);
         quality.setTransitionSeconds(transitionSeconds());
         quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
@@ -471,7 +473,8 @@ public class MainActivity extends Activity {
                 });
 
         OptionRow memoryLimit = findViewById(R.id.row_memory_limit);
-        int safeHeight = profile.memorySafeHeight();
+        // A memory limit at or above the render height cap changes nothing; show what it allows.
+        int safeHeight = Math.min(profile.memorySafeHeight(), QualityController.RENDER_HEIGHT_CAP);
         memoryLimit.setup("Memory limit", new String[]{"Off", safeHeight > 0 ? "Up to " + heightLabel(safeHeight) : "On"},
                 prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? 1 : 0, true, index -> {
                     prefs.edit().putBoolean(PREF_MEMORY_LIMIT, index == 1).apply();

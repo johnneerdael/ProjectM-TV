@@ -111,6 +111,12 @@ std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
 bool g_directOutput = false, g_lastFrameDirect = false;
 int g_loadsAfterDirectFrame = 0;
 void projectm_opengl_set_direct_output(projectm_handle, bool enabled) { g_directOutput = enabled; }
+uint32_t g_lineReferenceWidth = 0;
+uint32_t g_lineReferenceHeight = 0;
+void projectm_opengl_set_line_reference_size(projectm_handle, uint32_t width, uint32_t height) {
+  g_lineReferenceWidth = width;
+  g_lineReferenceHeight = height;
+}
 projectm_handle projectm_create() { g_lastFrameDirect = false; return new projectm; }
 void projectm_destroy(projectm_handle p) { delete p; }
 int g_loadSleepMs = 0;
@@ -229,6 +235,9 @@ int main(int argc, char** argv) {
 
   printf("first frame loads a preset (hard cut, no wait)\n");
   Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+  printf("lines are quads, 1 px at MilkDrop's 1024x768\n");
+  CHECK(g_lineReferenceWidth == 1024);
+  CHECK(g_lineReferenceHeight == 768);
   Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720);
   frame();
   CHECK(!current().empty());
@@ -402,10 +411,12 @@ int main(int argc, char** argv) {
 
   printf("context loss: new instance resumes the same preset, textures re-applied\n");
   g_pixel = 200; std::string shown = current();
+  g_lineReferenceWidth = g_lineReferenceHeight = 0;
   Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
   Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720); frame();
   CHECK(current() == shown);
   CHECK(g_texturePathCalls.size() == 2);
+  CHECK(g_lineReferenceWidth == 1024 && g_lineReferenceHeight == 768);  // set on the new instance too
 
   printf("black detection reads the window framebuffer, not projectM's\n");
   CHECK(g_readFbo == 7);  // the previous read binding is restored after sampling
