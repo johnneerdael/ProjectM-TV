@@ -2,7 +2,7 @@
 Fill in each section. Delete sections or checklist items that don't apply, and say why if it isn't obvious.
 Repo rules this template checks for:
 - projectM is changed only through patch files in tools/projectm-patches/, never by committing inside third_party/projectm.
-- Rendering changes are compared on identical frames (preset-lab) and, where they affect what viewers see or frame rate, on a TV.
+- Rendering changes include before/after captures and, where they affect what viewers see or frame rate, measurements on a TV.
 - Releases follow docs/RELEASING.md: fixes ship as a patch release, big performance or default changes as a minor release, never as a pre-release.
 -->
 
@@ -14,20 +14,30 @@ Repo rules this template checks for:
 
 -
 
+## Release notes
+
+<!--
+Write factual, public, user-facing changes for the release notes. If there are no app changes, write
+Internal: followed by a brief explanation. Fill the placeholder below before submitting.
+Omit validation/test results, badges and installation information; CI appends those separately.
+-->
+
+-
+
 ## projectM patches
 
 <!-- Only when tools/projectm-patches/ changes. -->
 
 - [ ] The change is in a patch file in `tools/projectm-patches/`; nothing is committed inside `third_party/projectm`
-- [ ] The patch is regenerated from the submodule (`tools/regen-projectm-patch.sh <patch>`), and its header explains the change
-- [ ] `tools/check-patch-series.sh`: every patch applies to a clean export of the pinned projectM
-- [ ] `tools/projectm-host-tests.sh`: projectM's host test suite passes
-- [ ] Rendering that should not change didn't: `preset-lab line-compare ... --baseline <report>` shows `legacy_changed: []` (or the change is explained below)
+- [ ] The patch is generated against the pinned projectM plus earlier patches in the series; its header explains the change and any upstream source
+- [ ] From a fresh recursive checkout of this PR, `./gradlew :core:assembleDebug` succeeds: the Android CMake build applies the complete patch series to the pinned projectM (attach the build log)
+- [ ] `bash core/src/test/native/run_native_tests.sh` passes, including the real projectM shader macro/parser and custom waveform regressions; record any skipped GL checks below
+- [ ] Before/after TV captures and fps measurements use the same preset, render height and audio; explain any rendering differences in Evidence (profile setup in `docs/PROFILING.md`)
 - [ ] Shader changes link as GLSL ES 3.00 (`glslangValidator -l`, with `#version 300 es` prepended)
 
 ## Tests
 
-- [ ] Native engine tests: `bash core/src/test/native/run_native_tests.sh` (regenerate changed patches first)
+- [ ] Native engine tests: `bash core/src/test/native/run_native_tests.sh` (record any skipped GL checks below)
 - [ ] JVM unit tests: `./gradlew testDebugUnitTest`
 - [ ] Build: `./gradlew :app:assembleDebug`
 - [ ] preset-lab, if `tools/preset-lab/` changed: `python -m pytest tools/preset-lab/tests`
@@ -35,7 +45,7 @@ Repo rules this template checks for:
 ## On a TV
 
 <!--
-For rendering, audio or performance changes. Method in docs/PROFILING.md: install the profile build next to the release app,
+For rendering, audio or performance changes. Use docs/PROFILING.md to install and profile the build next to the release app;
 pin a preset with `adb shell setprop debug.projectmtv.preset '<name prefix>'`, use the same render height in both apps,
 alternate release and profile runs, and read fps from the `VisualizerRenderer: STATS` log lines.
 -->
@@ -46,7 +56,7 @@ alternate release and profile runs, and read fps from the `VisualizerRenderer: S
 
 ## Evidence
 
-<!-- Before/after images, line-compare or benchmark tables. Say what was compared with what (build, render size, audio, frame). -->
+<!-- Before/after captures or benchmark tables. Say what was compared with what (build, preset, render size, audio, capture timing). -->
 
 ## Docs and release
 
