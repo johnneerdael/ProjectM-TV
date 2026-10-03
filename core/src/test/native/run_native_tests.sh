@@ -4,7 +4,10 @@
 #    indexing (presets.idx and folder fallback), commands, skip list, transitions (lightweight,
 #    classic, auto), output measurement, black-preset skipping and context loss.
 # 2. fade_gl_test: the lightweight-transition overlay on a real GLES3 driver (skipped without one).
-# Requirements: g++ (C++17) and a JDK (for jni.h); for 2, EGL/GLES (Mesa) development files.
+# 3. projectm-regressions: self-referencing shader macros and custom waveform audio bounds in
+#    the real patched engine, with ASan/UBSan and GL (macOS OpenGL or headless EGL/GLES on Linux).
+# Requirements: g++ (C++17) and a JDK (for jni.h); for 2/3, CMake and EGL/GLES development files
+# on Linux. macOS can run 3 using its OpenGL framework without EGL/GLES.
 # Usage: core/src/test/native/run_native_tests.sh
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
@@ -73,8 +76,28 @@ fi
 # Transition overlay against a real OpenGL ES 3 driver (Mesa llvmpipe, headless EGL). Needs the
 # EGL/GLES development files (CI: libegl-dev libgles-dev libegl-mesa0). GL_CFLAGS/GL_LIBS override
 # pkg-config, e.g. for a Mesa build outside the system paths.
+# Forward only supplied overrides; otherwise CMake keeps its own dependency discovery.
+REGRESSION_GL_ARGS=(-DGL_CFLAGS="${GL_CFLAGS:-}" -DGL_LIBS="${GL_LIBS:-}")
 GL_CFLAGS="${GL_CFLAGS:-$(pkg-config --cflags egl glesv2 2>/dev/null || true)}"
 GL_LIBS="${GL_LIBS:-$(pkg-config --libs egl glesv2 2>/dev/null || true)}"
+if [ "$(uname)" = "Darwin" ] || [ -n "$GL_LIBS" ]; then
+    REGRESSION_SANITIZERS=ON
+    [ "${NO_SANITIZERS:-0}" = "1" ] && REGRESSION_SANITIZERS=OFF
+    if ! cmake -S "$HERE/projectm-regressions" -B "$WORK/regressions" \
+        -DPROJECTM_SOURCE="$PM" -DCMAKE_BUILD_TYPE=Debug -DSANITIZERS="$REGRESSION_SANITIZERS" \
+        "${REGRESSION_GL_ARGS[@]}" \
+        >"$WORK/regressions.log" 2>&1; then
+        tail -80 "$WORK/regressions.log"
+        exit 1
+    fi
+    if ! cmake --build "$WORK/regressions" -j 4 >>"$WORK/regressions.log" 2>&1; then
+        tail -80 "$WORK/regressions.log"
+        exit 1
+    fi
+    ctest --test-dir "$WORK/regressions" --output-on-failure
+else
+    echo "SKIPPED projectM regressions: no EGL/GLES development files"
+fi
 if [ -z "$GL_LIBS" ]; then
     echo "SKIPPED transition overlay GL test: no EGL/GLES development files (pkg-config egl glesv2)"
     exit 0

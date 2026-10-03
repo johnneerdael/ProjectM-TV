@@ -1,0 +1,39 @@
+From 2a3c36035cee6d83411c3187dfe48f29e5ea82c8 Mon Sep 17 00:00:00 2001
+From: Kai Blaschke <kai.blaschke@kb-dev.net>
+Date: Wed, 09 Sep 2026 16:27:22 +0000
+Subject: [PATCH] Fix infinite replace loop if a shader macro was defined to itself
+
+One example affected preset is "martin + Se7enSlasher - pixies party (random texture edit).milk"
+
+Macros with an argument referencing itself may still be problematic, but is WAY less probable to pop up in the wild.
+
+Backported from upstream commit 2a3c36035cee6d83411c3187dfe48f29e5ea82c8 (PR #1025) to projectM 4.1.7.
+Only the HLSLParser fix is included; 4.1.7 loads images through SOIL2.
+---
+
+diff --git a/vendor/hlslparser/src/HLSLParser.cpp b/vendor/hlslparser/src/HLSLParser.cpp
+--- a/vendor/hlslparser/src/HLSLParser.cpp
++++ b/vendor/hlslparser/src/HLSLParser.cpp
+@@ -3692,10 +3692,18 @@ HLSLMacro * HLSLParser::ProcessMacroFromIdentifier(std::string & sourcePreproces
+             if (m_macros[i]->argument == NULL)
+             {
+                 // Macro without arguments
+-                sourcePreprocessed.append("(");
+-                sourcePreprocessed.append(m_macros[i]->value);
+-                sourcePreprocessed.append(")");
+-                addOriginalSource = false;
++                if (m_macros[i]->name == m_macros[i]->value)
++                {
++                    // Macro name and value are identical (#define xyz xyz)
++                    addOriginalSource = true;
++                }
++                else
++                {
++                    sourcePreprocessed.append("(");
++                    sourcePreprocessed.append(m_macros[i]->value);
++                    sourcePreprocessed.append(")");
++                    addOriginalSource = false;
++                }
+             }
+             else
+             {
