@@ -1,8 +1,12 @@
 # One or two presets per line kind, for fast iteration (found by scanning the bundled presets).
 # main wave, thin
 $$$ Royal - Mashup (106).milk
+# main wave, thin (visible)
+rce-ordinary - want.milk
 # main wave, thick
 $$$ Royal - Mashup (191).milk
+# main wave, thick, additive
+Serge + 158 002.milk
 # main wave dots (also motion vectors)
 $$$ Royal - Mashup (1).milk
 # custom wave, thick

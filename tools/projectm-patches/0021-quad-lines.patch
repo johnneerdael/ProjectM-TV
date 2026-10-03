@@ -10,10 +10,10 @@ sizes. Thick lines are wider and drawn more than once, matched to MilkDrop's bri
 the same way. 0, the default, keeps the GL lines.
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
-index ee6ae6562..f0bb660aa 100644
+index ee6ae6562..ea5c8c717 100644
 --- a/src/api/include/projectM-4/render_opengl.h
 +++ b/src/api/include/projectM-4/render_opengl.h
-@@ -87,6 +87,19 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
+@@ -87,6 +87,30 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
   */
  PROJECTM_EXPORT void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled);
  
@@ -29,6 +29,17 @@ index ee6ae6562..f0bb660aa 100644
 + * @param reference_height Render height in pixels at which lines are 1 px wide, or 0.
 + */
 +PROJECTM_EXPORT void projectm_opengl_set_line_reference_height(projectm_handle instance, uint32_t reference_height);
++
++/**
++ * @brief Gives quad lines (see projectm_opengl_set_line_reference_height()) a one-pixel anti-aliased edge.
++ *
++ * Off by default: hard edges like MilkDrop's GL lines, which presets that feed their image back are
++ * tuned for (a soft edge made such a preset 14 % darker in testing).
++ *
++ * @param instance The projectM instance handle.
++ * @param enabled True for anti-aliased edges.
++ */
++PROJECTM_EXPORT void projectm_opengl_set_line_antialiasing(projectm_handle instance, bool enabled);
 +
  /**
   * @brief Sets the size of the calling thread's pool of framebuffer textures.
@@ -282,10 +293,10 @@ index 000000000..b02cb1b61
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.cpp b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
 new file mode 100644
-index 000000000..d8730dded
+index 000000000..7430fe1fa
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
-@@ -0,0 +1,112 @@
+@@ -0,0 +1,113 @@
 +#include "LineRenderer.hpp"
 +
 +#include "MilkdropStaticShaders.hpp"
@@ -346,16 +357,17 @@ index 000000000..d8730dded
 +    glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(sizeof(ColoredPoint) * points.size()), points.data());
 +}
 +
-+void LineRenderer::Begin(const glm::mat4& transformation, int viewportWidth, int viewportHeight)
++void LineRenderer::Begin(const glm::mat4& transformation, const Renderer::RenderContext& context)
 +{
-+    m_ready = m_vaoId != 0 && viewportWidth > 0 && viewportHeight > 0;
++    m_ready = m_vaoId != 0 && context.viewportSizeX > 0 && context.viewportSizeY > 0;
 +    if (!m_ready)
 +    {
 +        return;
 +    }
 +    m_shader.Bind();
 +    m_shader.SetUniformMat4x4("vertex_transformation", transformation);
-+    m_shader.SetUniformFloat2("viewport_size", glm::vec2(static_cast<float>(viewportWidth), static_cast<float>(viewportHeight)));
++    m_shader.SetUniformFloat2("viewport_size", glm::vec2(static_cast<float>(context.viewportSizeX), static_cast<float>(context.viewportSizeY)));
++    m_shader.SetUniformFloat("antialias", context.lineAntialiasing ? 1.0f : 0.0f);
 +}
 +
 +void LineRenderer::Draw(const LineBatch::Strip& strip, const LineStyle& style)
@@ -400,14 +412,15 @@ index 000000000..d8730dded
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.hpp b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
 new file mode 100644
-index 000000000..d823f18c2
+index 000000000..928f8e3c8
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
-@@ -0,0 +1,46 @@
+@@ -0,0 +1,47 @@
 +#pragma once
 +
 +#include "LineGeometry.hpp"
 +
++#include <Renderer/RenderContext.hpp>
 +#include <Renderer/Shader.hpp>
 +
 +#include <projectM-opengl.h>
@@ -420,7 +433,7 @@ index 000000000..d823f18c2
 +namespace MilkdropPreset {
 +
 +/**
-+ * @brief Draws line strips as anti-aliased quads, one instance per segment (projectM issue #682).
++ * @brief Draws line strips as quads (hard or anti-aliased edge), one instance per segment (projectM issue #682).
 + *
 + * Upload() a LineBatch, Begin() once for its transformation and viewport, then Draw() its strips.
 + * Other draws may run between Begin() and Draw(): Draw() binds its own program and buffers. The
@@ -436,7 +449,7 @@ index 000000000..d823f18c2
 +    auto operator=(const LineRenderer&) -> LineRenderer& = delete;
 +
 +    void Upload(const LineBatch& batch);
-+    void Begin(const glm::mat4& transformation, int viewportWidth, int viewportHeight);
++    void Begin(const glm::mat4& transformation, const Renderer::RenderContext& context);
 +    void Draw(const LineBatch::Strip& strip, const LineStyle& style);
 +    void End();
 +
@@ -472,23 +485,35 @@ index aff1a5684..5110a0994 100644
      BlurTexture blurTexture;                      //!< The blur textures used in this preset. Contents depend on the shader code using GetBlurX().
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/LineFragmentShaderGlsl330.frag b/src/libprojectM/MilkdropPreset/Shaders/LineFragmentShaderGlsl330.frag
 new file mode 100644
-index 000000000..7280073ed
+index 000000000..6ebdc9eaf
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/Shaders/LineFragmentShaderGlsl330.frag
-@@ -0,0 +1,15 @@
+@@ -0,0 +1,27 @@
 +precision mediump float;
 +
 +in vec4 fragment_color;
 +in float edge_distance;
 +
 +uniform highp float half_width;
++uniform float antialias; // 1: one-pixel anti-aliased edge; 0: hard edge like MilkDrop's GL lines
 +
 +out vec4 color;
 +
 +void main()
 +{
-+    // How much of this pixel a line 2 * half_width wide covers (a box filter across the line).
-+    float coverage = clamp(half_width + 0.5 - abs(edge_distance), 0.0, 1.0);
++    float coverage;
++    if (antialias > 0.5)
++    {
++        // How much of this pixel a line 2 * half_width wide covers (a box filter across the line).
++        coverage = clamp(half_width + 0.5 - abs(edge_distance), 0.0, 1.0);
++    }
++    else
++    {
++        // Pixels whose centre lies within [-w, w) of the line, so a line exactly on a pixel border
++        // still covers one row; at least one pixel wide, thinner lines fade by their width instead.
++        float w = max(half_width, 0.5);
++        coverage = (edge_distance >= -w && edge_distance < w) ? min(2.0 * half_width, 1.0) : 0.0;
++    }
 +    color = vec4(fragment_color.rgb, fragment_color.a * coverage);
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert
@@ -575,7 +600,7 @@ index 000000000..9614bdc05
 +    fragment_color = atA ? color_a : color_b;
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
-index bd9a662f3..1df824098 100644
+index bd9a662f3..ea34c46f0 100644
 --- a/src/libprojectM/MilkdropPreset/Waveform.cpp
 +++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
 @@ -36,6 +36,64 @@ void Waveform::InitVertexAttrib()
@@ -629,7 +654,7 @@ index bd9a662f3..1df824098 100644
 +
 +    auto& lines = m_presetState.lineRenderer;
 +    lines.Upload(m_lineBatch);
-+    lines.Begin(PresetState::orthogonalProjectionFlipped, m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
++    lines.Begin(PresetState::orthogonalProjectionFlipped, m_presetState.renderContext);
 +    const auto style = LineStyleFor(LineKind::MainWave, m_presetState.waveThick, lineScale);
 +    for (const auto& strip : strips)
 +    {
@@ -732,10 +757,10 @@ index bad7b944b..57d0905f9 100644
  
  } // namespace MilkdropPreset
 diff --git a/src/libprojectM/ProjectM.cpp b/src/libprojectM/ProjectM.cpp
-index d58aeff38..048161bdb 100644
+index d58aeff38..e7fdcc6ec 100644
 --- a/src/libprojectM/ProjectM.cpp
 +++ b/src/libprojectM/ProjectM.cpp
-@@ -300,6 +300,11 @@ void ProjectM::SetDirectOutput(bool enabled)
+@@ -300,6 +300,16 @@ void ProjectM::SetDirectOutput(bool enabled)
      m_directOutput = enabled;
  }
  
@@ -744,22 +769,28 @@ index d58aeff38..048161bdb 100644
 +    m_lineReferenceHeight = height > 0 ? height : 0;
 +}
 +
++void ProjectM::SetLineAntialiasing(bool enabled)
++{
++    m_lineAntialiasing = enabled;
++}
++
  auto ProjectM::WindowWidth() -> int
  {
      return m_windowWidth;
-@@ -484,6 +489,7 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
+@@ -484,6 +494,8 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
      ctx.perPixelMeshX = static_cast<int>(m_meshX);
      ctx.perPixelMeshY = static_cast<int>(m_meshY);
      ctx.textureManager = m_textureManager.get();
 +    ctx.lineReferenceHeight = m_lineReferenceHeight;
++    ctx.lineAntialiasing = m_lineAntialiasing;
  
      return ctx;
  }
 diff --git a/src/libprojectM/ProjectM.hpp b/src/libprojectM/ProjectM.hpp
-index 8d96b96f1..4d6e6c823 100644
+index 8d96b96f1..57f78eb63 100644
 --- a/src/libprojectM/ProjectM.hpp
 +++ b/src/libprojectM/ProjectM.hpp
-@@ -117,6 +117,12 @@ public:
+@@ -117,6 +117,17 @@ public:
       */
      void SetDirectOutput(bool enabled);
  
@@ -769,19 +800,25 @@ index 8d96b96f1..4d6e6c823 100644
 +     */
 +    void SetLineReferenceHeight(int height);
 +
++    /**
++     * @brief Gives quad lines an anti-aliased edge (see projectm_opengl_set_line_antialiasing()).
++     */
++    void SetLineAntialiasing(bool enabled);
++
      void SetBeatSensitivity(float sensitivity);
  
      auto GetBeatSensitivity() const -> float;
-@@ -204,6 +210,7 @@ private:
+@@ -204,6 +215,8 @@ private:
      uint32_t m_windowWidth{0};            //!< EvaluateFrameData window width. If 0, nothing is rendered.
      uint32_t m_outgoingPresetFrameDivisor{1}; //!< Render the outgoing preset every n-th frame during a transition.
      bool m_directOutput{false};                 //!< The active preset may draw straight into the target framebuffer.
 +    int m_lineReferenceHeight{0}; //!< Render height at which quad lines are 1 px wide; 0 for GL lines.
++    bool m_lineAntialiasing{false}; //!< Quad lines get an anti-aliased edge.
      uint32_t m_windowHeight{0};           //!< EvaluateFrameData window height. If 0, nothing is rendered.
      double m_presetDuration{30.0};   //!< Preset duration in seconds.
      double m_softCutDuration{3.0};   //!< Soft cut transition time.
 diff --git a/src/libprojectM/ProjectMCWrapper.cpp b/src/libprojectM/ProjectMCWrapper.cpp
-index 04bda086d..04cd8d56e 100644
+index 04bda086d..d287d7088 100644
 --- a/src/libprojectM/ProjectMCWrapper.cpp
 +++ b/src/libprojectM/ProjectMCWrapper.cpp
 @@ -5,6 +5,7 @@
@@ -792,7 +829,7 @@ index 04bda086d..04cd8d56e 100644
  #include <cstring>
  #include <sstream>
  
-@@ -190,6 +191,12 @@ void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled)
+@@ -190,6 +191,18 @@ void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled)
      projectMInstance->SetDirectOutput(enabled);
  }
  
@@ -802,18 +839,25 @@ index 04bda086d..04cd8d56e 100644
 +    projectMInstance->SetLineReferenceHeight(static_cast<int>(std::min<uint32_t>(reference_height, 65535)));
 +}
 +
++void projectm_opengl_set_line_antialiasing(projectm_handle instance, bool enabled)
++{
++    auto projectMInstance = handle_to_instance(instance);
++    projectMInstance->SetLineAntialiasing(enabled);
++}
++
  void projectm_opengl_set_texture_pool_limit(size_t max_bytes)
  {
      libprojectM::Renderer::Texture::SetPoolLimit(max_bytes);
 diff --git a/src/libprojectM/Renderer/RenderContext.hpp b/src/libprojectM/Renderer/RenderContext.hpp
-index a5a1f9c6e..066c9b4bc 100644
+index a5a1f9c6e..0824b7adf 100644
 --- a/src/libprojectM/Renderer/RenderContext.hpp
 +++ b/src/libprojectM/Renderer/RenderContext.hpp
-@@ -25,6 +25,7 @@ public:
+@@ -25,6 +25,8 @@ public:
      float aspectY{1.0};    //!< Y aspect ratio.
      float invAspectX{1.0}; //!< Inverse X aspect ratio.
      float invAspectY{1.0}; //!< Inverse Y aspect ratio.
 +    int lineReferenceHeight{0}; //!< Render height at which quad lines are 1 px wide; 0 draws MilkDrop's GL lines.
++    bool lineAntialiasing{false}; //!< Quad lines get a one-pixel anti-aliased edge instead of a hard one.
  
      int perPixelMeshX{64}; //!< Per-pixel/per-vertex mesh X resolution.
      int perPixelMeshY{48}; //!< Per-pixel/per-vertex mesh Y resolution.

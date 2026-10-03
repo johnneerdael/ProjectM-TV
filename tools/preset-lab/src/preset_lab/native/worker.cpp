@@ -52,6 +52,7 @@ int main(int argc, char** argv) {
         engine.SetWindowSize(width, height);
         engine.SetMeshSize(48, 32);
         engine.SetLineReferenceHeight(cfg.value("line_reference_height", 0));
+        engine.SetLineAntialiasing(cfg.value("line_antialiasing", false));
         engine.SetTargetFramesPerSecond(fps);
         engine.SetPresetLocked(true);
         engine.SetHardCutEnabled(false);
