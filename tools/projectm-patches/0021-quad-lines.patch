@@ -108,11 +108,14 @@ index e3f94056b..24a046311 100644
  
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.cpp b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
 new file mode 100644
-index 000000000..06ce06939
+index 000000000..8ed99afdc
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
-@@ -0,0 +1,117 @@
+@@ -0,0 +1,115 @@
 +#include "LineGeometry.hpp"
++
++#include <algorithm>
++#include <cmath>
 +
 +namespace libprojectM {
 +namespace MilkdropPreset {
@@ -178,15 +181,10 @@ index 000000000..06ce06939
 +    const float size = base * scale;
 +
 +    DotStyle style;
-+    if (size >= 1.0f)
-+    {
-+        style.size = size;
-+    }
-+    else
-+    {
-+        // Points are at least one pixel: fade the dot by the area it should cover instead.
-+        style.alphaScale = size * size;
-+    }
++    // Points rasterise to whole pixels: draw the next whole size and fade by the area difference,
++    // so a dot keeps its share of the picture at every render size.
++    style.size = std::max(1.0f, std::ceil(size - 0.0001f));
++    style.alphaScale = (size * size) / (style.size * style.size);
 +    return style;
 +}
 +
@@ -231,7 +229,7 @@ index 000000000..06ce06939
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.hpp b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
 new file mode 100644
-index 000000000..b02cb1b61
+index 000000000..402ac5e03
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
 @@ -0,0 +1,94 @@
@@ -270,8 +268,8 @@ index 000000000..b02cb1b61
 + */
 +struct DotStyle
 +{
-+    float size{1.0f};       //!< gl_PointSize in render pixels, at least 1.
-+    float alphaScale{1.0f}; //!< Alpha factor for dots smaller than one pixel (their area).
++    float size{1.0f};       //!< gl_PointSize: a whole number of render pixels, at least 1.
++    float alphaScale{1.0f}; //!< Alpha factor: wanted dot area divided by drawn area.
 +};
 +
 +/**
@@ -933,10 +931,10 @@ index 5a9b54673..7448b05cc 100644
          MilkdropShaderCommentParsingTest.cpp
 diff --git a/tests/libprojectM/LineGeometryTest.cpp b/tests/libprojectM/LineGeometryTest.cpp
 new file mode 100644
-index 000000000..0545fb0fe
+index 000000000..55ea052ae
 --- /dev/null
 +++ b/tests/libprojectM/LineGeometryTest.cpp
-@@ -0,0 +1,192 @@
+@@ -0,0 +1,208 @@
 +#include <gtest/gtest.h>
 +
 +#include <MilkdropPreset/LineGeometry.hpp>
@@ -1046,6 +1044,22 @@ index 000000000..0545fb0fe
 +    const auto mainDot = DotStyleFor(LineKind::MainWave, false, 0.25f); // 2 px * 0.25
 +    EXPECT_FLOAT_EQ(mainDot.size, 1.0f);
 +    EXPECT_FLOAT_EQ(mainDot.alphaScale, 0.25f);
++}
++
++TEST(LineGeometry, DotsRoundUpToWholePixelsAndFadeByArea)
++{
++    const auto mainDot = DotStyleFor(LineKind::MainWave, false, 2.0f / 3.0f); // 1.33 px
++    EXPECT_FLOAT_EQ(mainDot.size, 2.0f);
++    EXPECT_NEAR(mainDot.alphaScale, 0.4444f, 0.0001f);
++    const auto customDot = DotStyleFor(LineKind::CustomWave, true, 1.5f); // 3 px wanted
++    EXPECT_FLOAT_EQ(customDot.size, 3.0f);
++    EXPECT_FLOAT_EQ(customDot.alphaScale, 1.0f);
++    const auto thinDot = DotStyleFor(LineKind::CustomWave, false, 1.5f); // 1.5 px
++    EXPECT_FLOAT_EQ(thinDot.size, 2.0f);
++    EXPECT_FLOAT_EQ(thinDot.alphaScale, 0.5625f);
++    const auto exact = DotStyleFor(LineKind::MainWave, false, 1.0f);
++    EXPECT_EQ(exact.size, 2.0f);
++    EXPECT_EQ(exact.alphaScale, 1.0f);
 +}
 +
 +TEST(LineBatch, OpenStripRepeatsItsEndPoints)

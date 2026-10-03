@@ -46,6 +46,9 @@ int main(int argc, char** argv) {
         if (!std::filesystem::is_regular_file(preset) || !std::filesystem::is_directory(textures))
             throw std::runtime_error("preset or texture path unavailable");
         GlCapture capture(width, height);
+        // Desktop core-profile GL ignores gl_PointSize unless this is enabled; Android's GLES always honours it,
+        // so the worker renders dots like the TVs.
+        glEnable(GL_PROGRAM_POINT_SIZE);
         lab::clock_seconds = 0;
         LabProjectM engine;
         engine.SetTexturePaths({textures});
