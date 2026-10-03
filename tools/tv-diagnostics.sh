@@ -278,12 +278,15 @@ done
 SWEEP_ROWS=""
 if [ "$SWEEP" = 1 ]; then
     # Fixed levels offered by the app (QualityController.manualHeights): 720/1080/1440/2160 up to
-    # the panel height and the memory limit, plus that maximum itself if it is not one of those.
+    # the panel height, the render height cap and the memory limit, plus that maximum itself if it
+    # is not one of those.
     PANEL_H="$(grep -o 'Panel [0-9]*x[0-9]*' "$OUT/raw_logcat.txt" | head -1 | sed 's/.*x//')"
     [ -n "$PANEL_H" ] || PANEL_H=1080
     MAX_H="$PANEL_H"
     LIMIT_H="$(grep -o 'Memory limit: .*' "$OUT/raw_logcat.txt" | tail -1 | sed -n 's/.*up to \([0-9]*\).*/\1/p')"
     if [ -n "$LIMIT_H" ] && [ "$LIMIT_H" -lt "$MAX_H" ]; then MAX_H="$LIMIT_H"; fi
+    CAP_H="$(grep -o 'Render height cap: [0-9]*' "$OUT/raw_logcat.txt" | tail -1 | sed 's/.*: //')"
+    if [ -n "$CAP_H" ] && [ "$CAP_H" -lt "$MAX_H" ]; then MAX_H="$CAP_H"; fi
     LEVELS=0
     for h in 720 1080 1440 2160; do [ "$h" -le "$MAX_H" ] && LEVELS=$((LEVELS + 1)); done
     case "$MAX_H" in 720|1080|1440|2160) ;; *) LEVELS=$((LEVELS + 1)) ;; esac
