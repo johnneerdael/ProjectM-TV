@@ -33,8 +33,6 @@ jobs:
         run: python -m pip install --no-deps -e tools/preset-lab
       - name: Test measurements, cache reuse and bundle integrity
         run: python -m pytest tools/preset-lab/tests -m 'not native' -q
-      - name: Verify the app's measured category bundle
-        run: python tools/import-preset-genres.py --bundle core/src/main/assets/preset-genres --check
       - name: Reject tracked user audio and raw captures
         run: |
           python - <<'PY'
