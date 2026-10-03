@@ -9,16 +9,16 @@ proportion above it (below it, thinner lines faded by their width made such pres
 they are drawn as at the reference height). Edges are hard like MilkDrop's GL lines (the quad is
 the band itself, so the rasterizer resolves pixel-border ties; on GLES a 1/64 px offset makes those
 ties land on the row Mali's GL lines light); projectm_opengl_set_line_antialiasing() opts into a
-one-pixel anti-aliased edge. The thick main wave is two bands, 2 + t and 2 - t px wide (t: the
-slope), like MilkDrop's 2x2 pixel dilation; thick custom waves and shape outlines are the thin
-line drawn four times with MilkDrop's offsets. Waveform dots stay GL points with a scaled size.
-If the driver rejects the line shaders, GL lines are drawn. 0, the default, keeps the GL lines.
+one-pixel anti-aliased edge. Thick lines are the thin line drawn four times with MilkDrop's
+offsets (a pixel for the main wave, half a pixel for custom waves and shape outlines, scaled like
+the width). Waveform dots stay GL points with a scaled size. If the driver rejects the line
+shaders, GL lines are drawn. 0, the default, keeps the GL lines.
 Unlike the issue's suggestion, waveforms also get miter joins and flat ends, not round joins and
 caps: round joins overlap the segments and blend joint pixels twice (bright beads on translucent
 or additive waves), at 1-2 px the join shape is sub-pixel, and MilkDrop's lines have none.
 ---
 diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
-index ee6ae6562..d81b1e1ff 100644
+index ee6ae6562..e3dd5b78e 100644
 --- a/src/api/include/projectM-4/render_opengl.h
 +++ b/src/api/include/projectM-4/render_opengl.h
 @@ -87,6 +87,35 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
@@ -30,12 +30,12 @@ index ee6ae6562..d81b1e1ff 100644
 + *        with a matching point size, so they keep their share of the picture at large render sizes.
 + *
 + * Lines are 1 px wide at and below the given render height and in proportion above it (thick ones
-+ * are drawn like MilkDrop's: a wider band, or the thin line several times with small offsets); below
-+ * it they are drawn as at it, because thinner, faded lines made presets that feed their image back go
-+ * dark. Edges are hard, like MilkDrop's GL lines, unless projectm_opengl_set_line_antialiasing() is
-+ * enabled. Dots remain GL points whose size scales the same way (on desktop OpenGL,
-+ * GL_PROGRAM_POINT_SIZE is enabled while they are drawn). 0, the default, keeps MilkDrop's 1 px GL
-+ * lines and points. If the driver rejects the line shaders, lines fall back to GL lines.
++ * are drawn like MilkDrop's: the thin line four times with small offsets); below it they are drawn
++ * as at it, because thinner, faded lines made presets that feed their image back go dark. Edges are
++ * hard, like MilkDrop's GL lines, unless projectm_opengl_set_line_antialiasing() is enabled. Dots
++ * remain GL points whose size scales the same way (on desktop OpenGL, GL_PROGRAM_POINT_SIZE is
++ * enabled while they are drawn). 0, the default, keeps MilkDrop's 1 px GL lines and points. If the
++ * driver rejects the line shaders, lines fall back to GL lines.
 + *
 + * @param instance The projectM instance handle.
 + * @param reference_height Render height in pixels up to which lines are 1 px wide, or 0.
@@ -312,10 +312,10 @@ index 363c27345..eb287f967 100644
      friend class WaveformPerPointContext;
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.cpp b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
 new file mode 100644
-index 000000000..82ccd7e1e
+index 000000000..d2f77d691
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
-@@ -0,0 +1,157 @@
+@@ -0,0 +1,136 @@
 +#include "LineGeometry.hpp"
 +
 +#include <algorithm>
@@ -328,28 +328,14 @@ index 000000000..82ccd7e1e
 +
 +constexpr float ThinHalfWidth = 0.5f; //!< MilkDrop's lines are 1 px wide.
 +
-+// MilkDrop draws a thick line four times, offset by a pixel (main wave) or about half a pixel
-+// (custom waves, shape outlines), so most pixels of the wider line are blended two or more times.
++// MilkDrop draws a thick line as the thin one four times, offset by (0, 0), (x, 0), (x, y), (0, y):
++// a pixel for the main wave, about half a pixel for custom waves and shape outlines. The quads do the
++// same (LineStyle::passOffsetX/Y), so every pixel is hit exactly as often as with the GL lines. A
++// wider line drawn fewer times cannot match both the lit pixels and the hits per pixel (0.75 px drawn
++// 3 times was 4.5 hits per column instead of 4, which feedback presets amplified to +10-30 %).
 +// Checked on feedback-free synthetic presets (circle, straight and 45 degree lines) against the GL lines.
-+struct ThickEmulation
-+{
-+    float thickHalfWidth;
-+    int thickPasses;
-+    float slopeHalfWidth; //!< See LineStyle::slopeHalfWidth.
-+};
-+
-+// Offsets (0,0), (1,0), (1,1), (0,1) px: a 2x2 dilation, 2 + t px wide along the minor axis, 4 hits
-+// per column. Two passes, 2 + t and 2 - t px wide (half width 1 +- 0.5 t), hit the same pixels as
-+// often; a constant width either misses the extra pixel on slopes (opaque waves 0.78 as bright at
-+// 45 degrees) or blends it twice (additive waves 1.5 times as bright).
-+constexpr ThickEmulation MainWaveThick{1.0f, 2, 0.5f};
-+// Custom waves and shape outlines: the thin line drawn four times with MilkDrop's own sub-pixel
-+// offsets (LineStyle::passOffsetX/Y), so every pixel is hit exactly as often as with the GL lines.
-+// A wider line drawn several times cannot match both the lit pixels and the hits per pixel: 0.75 px
-+// drawn 3 times was 4.5 hits per column instead of 4, which feedback presets amplified to +10-30 %.
 +// (Shape outlines on desktop GL also enable GL_LINE_SMOOTH, which GLES lacks; that is not emulated.)
-+constexpr ThickEmulation CustomWaveThick{ThinHalfWidth, 4, 0.0f};
-+constexpr ThickEmulation ShapeBorderThick{ThinHalfWidth, 4, 0.0f};
++constexpr int ThickPasses = 4;
 +
 +} // namespace
 +
@@ -366,27 +352,26 @@ index 000000000..82ccd7e1e
 +
 +auto LineStyleFor(LineKind kind, bool thick, float scale, int viewportWidth, int viewportHeight) -> LineStyle
 +{
-+    // MilkDrop's thick-line offsets in the strip's own -1...1 coordinates, before vertex_transformation
-+    // (projectM: 1 / viewport size, half a pixel). The custom waves' vertical offset uses the width
-+    // too, as in CustomWaveform's GL-line path.
++    // MilkDrop's thick-line offsets in the strip's own -1...1 coordinates, before vertex_transformation:
++    // 2 / viewport size (a pixel) for the main wave, 1 / viewport size (half a pixel) for custom waves
++    // and shape outlines. The custom waves' vertical offset uses the width too, as in CustomWaveform's
++    // GL-line path.
 +    const float incrementX = viewportWidth > 0 ? 1.0f / static_cast<float>(viewportWidth) : 0.0f;
 +    const float incrementY = viewportHeight > 0 ? 1.0f / static_cast<float>(viewportHeight) : 0.0f;
 +
-+    ThickEmulation emulation{ThinHalfWidth, 1, 0.0f};
 +    float offsetX = 0.0f;
 +    float offsetY = 0.0f;
 +    switch (kind)
 +    {
 +        case LineKind::MainWave:
-+            emulation = MainWaveThick;
++            offsetX = 2.0f * incrementX;
++            offsetY = 2.0f * incrementY;
 +            break;
 +        case LineKind::CustomWave:
-+            emulation = CustomWaveThick;
 +            offsetX = incrementX;
 +            offsetY = incrementX;
 +            break;
 +        case LineKind::ShapeBorder:
-+            emulation = ShapeBorderThick;
 +            offsetX = incrementX;
 +            offsetY = incrementY;
 +            break;
@@ -396,18 +381,12 @@ index 000000000..82ccd7e1e
 +    }
 +
 +    LineStyle style;
-+    style.halfWidth = (thick ? emulation.thickHalfWidth : ThinHalfWidth) * scale;
-+    style.passes = thick ? emulation.thickPasses : 1;
-+    style.slopeHalfWidth = (thick ? emulation.slopeHalfWidth : 0.0f) * scale;
-+    // The offsets keep their share of the picture: half a pixel at the reference height.
++    style.halfWidth = ThinHalfWidth * scale;
++    style.passes = thick ? ThickPasses : 1;
++    // The offsets keep their share of the picture: a pixel or half a pixel at the reference size.
 +    style.passOffsetX = thick ? offsetX * scale : 0.0f;
 +    style.passOffsetY = thick ? offsetY * scale : 0.0f;
 +    return style;
-+}
-+
-+auto SlopeHalfWidthForPass(const LineStyle& style, int pass) -> float
-+{
-+    return (pass % 2 == 0) ? style.slopeHalfWidth : -style.slopeHalfWidth;
 +}
 +
 +auto PassOffsetFor(const LineStyle& style, int pass) -> PassOffset
@@ -475,10 +454,10 @@ index 000000000..82ccd7e1e
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.hpp b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
 new file mode 100644
-index 000000000..c73b8f8cb
+index 000000000..73a2e04c8
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
-@@ -0,0 +1,137 @@
+@@ -0,0 +1,122 @@
 +#pragma once
 +
 +#include <Renderer/RenderItem.hpp>
@@ -506,18 +485,12 @@ index 000000000..c73b8f8cb
 +struct LineStyle
 +{
 +    float halfWidth{0.0f}; //!< Half the line width in render pixels.
-+    int passes{1};         //!< How often the line is drawn (MilkDrop blends most pixels of thick lines more than once).
-+    /**
-+     * Extra half width per unit of slope t = min(|dx|, |dy|) / max(|dx|, |dy|), in render pixels along
-+     * the minor axis, added on even passes and subtracted on odd ones (see SlopeHalfWidthForPass()).
-+     * Only the thick main wave uses it.
-+     */
-+    float slopeHalfWidth{0.0f};
++    int passes{1};         //!< How often the line is drawn (MilkDrop draws thick lines four times).
 +    /**
 +     * Offset of passes 1-3 in the strip's own coordinates (the -1...1 space of the points, before
 +     * vertex_transformation), where MilkDrop adds its thick-line increments: passes 0-3 are moved by
 +     * (0, 0), (passOffsetX, 0), (passOffsetX, passOffsetY), (0, passOffsetY), see PassOffsetFor().
-+     * Thick custom waves and shape outlines use it; 0 otherwise.
++     * Thick lines use it; 0 otherwise.
 +     */
 +    float passOffsetX{0.0f};
 +    float passOffsetY{0.0f}; //!< See passOffsetX.
@@ -556,15 +529,6 @@ index 000000000..c73b8f8cb
 + * @param viewportHeight Render height in pixels; MilkDrop's thick-line offsets depend on it.
 + */
 +auto LineStyleFor(LineKind kind, bool thick, float scale, int viewportWidth, int viewportHeight) -> LineStyle;
-+
-+/**
-+ * @brief The slope term for one pass of a line: +slopeHalfWidth on even passes, -slopeHalfWidth on odd ones.
-+ *
-+ * MilkDrop's thick main wave is the 1 px line drawn again offset by (1,0), (1,1) and (0,1) pixels: per
-+ * column (or row) 4 hits spread over 2 + t pixels, 2-2 on axis-aligned lines and 1-2-1 at 45 degrees.
-+ * Two passes 2 + t and 2 - t pixels wide give exactly that.
-+ */
-+auto SlopeHalfWidthForPass(const LineStyle& style, int pass) -> float;
 +
 +/**
 + * @brief The translation of one pass: (0, 0), (x, 0), (x, y), (0, y) for passes 0-3 (repeating), in
@@ -618,10 +582,10 @@ index 000000000..c73b8f8cb
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.cpp b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
 new file mode 100644
-index 000000000..5a6c57232
+index 000000000..6a1e4aedd
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
-@@ -0,0 +1,197 @@
+@@ -0,0 +1,194 @@
 +#include "LineRenderer.hpp"
 +
 +#include "MilkdropStaticShaders.hpp"
@@ -666,7 +630,6 @@ index 000000000..5a6c57232
 +    m_viewportSizeLocation = m_shader.UniformLocation("viewport_size");
 +    m_antialiasLocation = m_shader.UniformLocation("antialias");
 +    m_halfWidthLocation = m_shader.UniformLocation("half_width");
-+    m_slopeHalfWidthLocation = m_shader.UniformLocation("slope_half_width");
 +    m_passOffsetLocation = m_shader.UniformLocation("pass_offset");
 +    m_tieBiasLocation = m_shader.UniformLocation("tie_bias");
 +}
@@ -730,7 +693,6 @@ index 000000000..5a6c57232
 +    glUniform2f(m_tieBiasLocation, tieBias.x, tieBias.y);
 +
 +    m_halfWidthSet = false;
-+    m_slopeHalfWidthSet = false;
 +    m_passOffsetSet = false;
 +}
 +
@@ -771,8 +733,8 @@ index 000000000..5a6c57232
 +    SetFloat(m_halfWidthLocation, style.halfWidth, m_lastHalfWidth, m_halfWidthSet);
 +    for (int pass = 0; pass < style.passes; pass++)
 +    {
-+        // Every pass states its offset and slope, so nothing leaks into the next style's draws; the
-+        // values only reach GL when they change (a thin outline after another sets nothing).
++        // Every pass states its offset, so nothing leaks into the next style's draws; the value only
++        // reaches GL when it changes (a thin outline after another sets nothing).
 +        const auto offset = PassOffsetFor(style, pass);
 +        const glm::vec2 passOffset(offset.x, offset.y);
 +        if (!m_passOffsetSet || passOffset != m_lastPassOffset)
@@ -781,7 +743,6 @@ index 000000000..5a6c57232
 +            m_lastPassOffset = passOffset;
 +            m_passOffsetSet = true;
 +        }
-+        SetFloat(m_slopeHalfWidthLocation, SlopeHalfWidthForPass(style, pass), m_lastSlopeHalfWidth, m_slopeHalfWidthSet);
 +        glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, strip.segments);
 +    }
 +}
@@ -821,10 +782,10 @@ index 000000000..5a6c57232
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.hpp b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
 new file mode 100644
-index 000000000..436ff7d79
+index 000000000..8b10f8184
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
-@@ -0,0 +1,110 @@
+@@ -0,0 +1,107 @@
 +#pragma once
 +
 +#include "LineGeometry.hpp"
@@ -899,7 +860,6 @@ index 000000000..436ff7d79
 +    GLint m_viewportSizeLocation{-1};
 +    GLint m_antialiasLocation{-1};
 +    GLint m_halfWidthLocation{-1};
-+    GLint m_slopeHalfWidthLocation{-1};
 +    GLint m_passOffsetLocation{-1};
 +    GLint m_tieBiasLocation{-1};
 +
@@ -907,8 +867,6 @@ index 000000000..436ff7d79
 +    // Draw() after it sets them again. Draw() skips sets that would not change anything.
 +    float m_lastHalfWidth{0.0f};
 +    bool m_halfWidthSet{false};
-+    float m_lastSlopeHalfWidth{0.0f};
-+    bool m_slopeHalfWidthSet{false};
 +    glm::vec2 m_lastPassOffset{0.0f, 0.0f};
 +    bool m_passOffsetSet{false};
 +};
@@ -1164,10 +1122,10 @@ index 000000000..e07344750
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert
 new file mode 100644
-index 000000000..a6c03a015
+index 000000000..7e3363fa3
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert
-@@ -0,0 +1,112 @@
+@@ -0,0 +1,108 @@
 +precision highp float;
 +precision highp int;
 +
@@ -1184,7 +1142,6 @@ index 000000000..a6c03a015
 +uniform mat4 vertex_transformation;
 +uniform vec2 viewport_size;
 +uniform highp float half_width;
-+uniform float slope_half_width; // vertex stage only: see LineStyle::slopeHalfWidth
 +uniform vec2 pass_offset;        // vertex stage only: this pass's translation, see LineStyle::passOffsetX
 +uniform highp float antialias;   // 1: one-pixel anti-aliased edge; 0: hard edge (see the fragment shader)
 +uniform vec2 tie_bias;           // vertex stage only: render pixels added to every corner, see LineTieBias()
@@ -1244,11 +1201,8 @@ index 000000000..a6c03a015
 +        }
 +    }
 +
-+    // The thick main wave widens with the slope t like MilkDrop's 2x2 pixel dilation: the band is
-+    // half_width + slope_half_width * t wide along the minor axis (slope_half_width is 0 otherwise).
 +    float major = max(abs(direction.x), abs(direction.y)); // at least 0.707
-+    float slope = min(abs(direction.x), abs(direction.y)) / major;
-+    float bandHalfWidth = max(half_width + slope_half_width * slope, 0.0001);
++    float bandHalfWidth = max(half_width, 0.0001);
 +
 +    // Distances are measured along the line's minor axis, like GL lines: a 1 px line covers one
 +    // pixel per column (or row) at any angle, instead of 1 px perpendicular, which would cover up to
@@ -1275,9 +1229,9 @@ index 000000000..a6c03a015
 +    position += tie_bias;
 +    gl_Position = vec4(position / (0.5 * viewport_size), 0.0, 1.0);
 +
-+    // Scaled so the band's edge lands on half_width, where the anti-aliased ramp is centred (the
-+    // ramp stretches by the same factor). Only the anti-aliased edge reads it.
-+    edge_distance = side * extent / major * (half_width / bandHalfWidth);
++    // Along the minor axis, like half_width, where the anti-aliased ramp is centred. Only the
++    // anti-aliased edge reads it.
++    edge_distance = side * extent / major;
 +    fragment_color = atA ? color_a : color_b;
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/MotionVectorLineVertexShaderGlsl330.vert
@@ -1699,10 +1653,10 @@ index 5a9b54673..7448b05cc 100644
          MilkdropShaderCommentParsingTest.cpp
 diff --git a/tests/libprojectM/LineGeometryTest.cpp b/tests/libprojectM/LineGeometryTest.cpp
 new file mode 100644
-index 000000000..815720756
+index 000000000..c008d5ef8
 --- /dev/null
 +++ b/tests/libprojectM/LineGeometryTest.cpp
-@@ -0,0 +1,319 @@
+@@ -0,0 +1,305 @@
 +#include <gtest/gtest.h>
 +
 +#include <MilkdropPreset/LineGeometry.hpp>
@@ -1715,7 +1669,6 @@ index 000000000..815720756
 +using libprojectM::MilkdropPreset::LineScale;
 +using libprojectM::MilkdropPreset::LineStyleFor;
 +using libprojectM::MilkdropPreset::PassOffsetFor;
-+using libprojectM::MilkdropPreset::SlopeHalfWidthForPass;
 +using Point = libprojectM::Renderer::RenderItem::ColoredPoint;
 +
 +namespace {
@@ -1783,34 +1736,25 @@ index 000000000..815720756
 +    }
 +}
 +
-+TEST(LineGeometry, MainWaveThickIsTwoPixelsDrawnTwice)
++TEST(LineGeometry, MainWaveThickIsFourOffsetThinLines)
 +{
++    // MilkDrop offsets the main wave by 2 / viewport size on each axis in its -1...1 coordinates
++    // (a whole pixel), and draws the 1 px line four times.
 +    const auto style = LineStyleFor(LineKind::MainWave, true, 1.0f, Width, Height);
-+    EXPECT_FLOAT_EQ(style.halfWidth, 1.0f);
-+    EXPECT_EQ(style.passes, 2);
++    EXPECT_FLOAT_EQ(style.halfWidth, 0.5f);
++    EXPECT_EQ(style.passes, 4);
++    EXPECT_FLOAT_EQ(style.passOffsetX, 2.0f / Width);
++    EXPECT_FLOAT_EQ(style.passOffsetY, 2.0f / Height);
 +}
 +
-+TEST(LineGeometry, OnlyMainWaveThickWidensWithSlope)
++TEST(LineGeometry, MainWaveThickOffsetsFollowTheViewport)
 +{
-+    // MilkDrop's thick main wave is a 2x2 pixel dilation: 2 px wide on axis-aligned lines, 3 px at 45 degrees.
-+    EXPECT_FLOAT_EQ(LineStyleFor(LineKind::MainWave, true, 1.0f, Width, Height).slopeHalfWidth, 0.5f);
-+    EXPECT_FLOAT_EQ(LineStyleFor(LineKind::MainWave, true, 2.0f, Width, Height).slopeHalfWidth, 1.0f);
-+    EXPECT_FLOAT_EQ(LineStyleFor(LineKind::MainWave, false, 1.0f, Width, Height).slopeHalfWidth, 0.0f);
-+    for (auto kind : {LineKind::CustomWave, LineKind::ShapeBorder, LineKind::MotionVector})
-+    {
-+        EXPECT_FLOAT_EQ(LineStyleFor(kind, true, 1.0f, Width, Height).slopeHalfWidth, 0.0f);
-+        EXPECT_FLOAT_EQ(LineStyleFor(kind, false, 1.0f, Width, Height).slopeHalfWidth, 0.0f);
-+    }
-+}
-+
-+TEST(LineGeometry, SlopeTermAlternatesSignPerPass)
-+{
-+    // Pass 0 covers 2 + t px, pass 1 covers 2 - t px: 4 hits per column at any slope, spread 1-2-1 at 45 degrees.
-+    const auto style = LineStyleFor(LineKind::MainWave, true, 1.0f, Width, Height);
-+    EXPECT_FLOAT_EQ(SlopeHalfWidthForPass(style, 0), 0.5f);
-+    EXPECT_FLOAT_EQ(SlopeHalfWidthForPass(style, 1), -0.5f);
-+    EXPECT_FLOAT_EQ(SlopeHalfWidthForPass(style, 2), 0.5f);
-+    EXPECT_FLOAT_EQ(SlopeHalfWidthForPass(LineStyleFor(LineKind::CustomWave, true, 1.0f, Width, Height), 1), 0.0f);
++    const auto style = LineStyleFor(LineKind::MainWave, true, 1.0f, 1280, 1024);
++    EXPECT_FLOAT_EQ(style.passOffsetX, 2.0f / 1280.0f);
++    EXPECT_FLOAT_EQ(style.passOffsetY, 2.0f / 1024.0f);
++    const auto none = LineStyleFor(LineKind::MainWave, true, 1.0f, 0, 0);
++    EXPECT_EQ(none.passOffsetX, 0.0f);
++    EXPECT_EQ(none.passOffsetY, 0.0f);
 +}
 +
 +TEST(LineGeometry, ThinLinesHaveNoPassOffset)
@@ -1823,13 +1767,6 @@ index 000000000..815720756
 +    }
 +}
 +
-+TEST(LineGeometry, MainWaveThickHasNoPassOffset)
-+{
-+    const auto style = LineStyleFor(LineKind::MainWave, true, 1.0f, Width, Height);
-+    EXPECT_EQ(style.passOffsetX, 0.0f);
-+    EXPECT_EQ(style.passOffsetY, 0.0f);
-+}
-+
 +TEST(LineGeometry, CustomWaveThickIsFourOffsetThinLines)
 +{
 +    // MilkDrop offsets custom waves by 1 / viewport width on both axes, in the strip's own -1...1
@@ -1837,7 +1774,6 @@ index 000000000..815720756
 +    const auto style = LineStyleFor(LineKind::CustomWave, true, 1.0f, Width, Height);
 +    EXPECT_FLOAT_EQ(style.halfWidth, 0.5f);
 +    EXPECT_EQ(style.passes, 4);
-+    EXPECT_FLOAT_EQ(style.slopeHalfWidth, 0.0f);
 +    EXPECT_FLOAT_EQ(style.passOffsetX, 1.0f / Width);
 +    EXPECT_FLOAT_EQ(style.passOffsetY, 1.0f / Width);
 +}
@@ -1860,6 +1796,10 @@ index 000000000..815720756
 +    EXPECT_FLOAT_EQ(style.halfWidth, 0.5f * scale);
 +    EXPECT_FLOAT_EQ(style.passOffsetX, scale / 1280.0f);
 +    EXPECT_FLOAT_EQ(style.passOffsetY, scale / 1280.0f);
++    const auto mainWave = LineStyleFor(LineKind::MainWave, true, 2.0f, 3840, 2160);
++    EXPECT_FLOAT_EQ(mainWave.halfWidth, 1.0f);
++    EXPECT_FLOAT_EQ(mainWave.passOffsetX, 2.0f * 2.0f / 3840.0f);
++    EXPECT_FLOAT_EQ(mainWave.passOffsetY, 2.0f * 2.0f / 2160.0f);
 +}
 +
 +TEST(LineGeometry, NoPassOffsetWithoutViewport)
@@ -1890,8 +1830,8 @@ index 000000000..815720756
 +TEST(LineGeometry, WidthScalesButPassesDoNot)
 +{
 +    const auto style = LineStyleFor(LineKind::MainWave, true, 2.0f, Width, Height);
-+    EXPECT_FLOAT_EQ(style.halfWidth, 2.0f);
-+    EXPECT_EQ(style.passes, 2);
++    EXPECT_FLOAT_EQ(style.halfWidth, 1.0f);
++    EXPECT_EQ(style.passes, 4);
 +    EXPECT_FLOAT_EQ(LineStyleFor(LineKind::CustomWave, false, 0.5f, Width, Height).halfWidth, 0.25f);
 +}
 +
