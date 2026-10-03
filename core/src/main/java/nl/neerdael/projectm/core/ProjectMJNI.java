@@ -62,6 +62,11 @@ public final class ProjectMJNI {
     /** Memory runs low: pauses compiling upcoming presets in the background for 20 s. */
     public static native void onMemoryPressure();
     public static native void setMeshSize(int width, int height);
+    /**
+     * Render size at which waveforms and shape outlines are 1 px wide; above it they widen with
+     * the square root of the area ratio. Applies live; see {@link LineReference}.
+     */
+    public static native void setLineReferenceSize(int width, int height);
     /** Adds the current preset to the skip list and moves on (hard cut). */
     public static native void skipCurrentPreset();
     /**
