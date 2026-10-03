@@ -68,6 +68,44 @@ index 8dfb147ad..6b5824aa3 100644
          IdlePreset.cpp
          IdlePreset.hpp
          MilkdropPreset.cpp
+diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+index e3f94056b..24a046311 100644
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+@@ -1,5 +1,6 @@
+ #include "CustomWaveform.hpp"
+ 
++#include "LineGeometry.hpp"
+ #include "PerFrameContext.hpp"
+ #include "PresetFileParser.hpp"
+ 
+@@ -171,6 +172,17 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
+ #ifndef USE_GLES
+     glDisable(GL_LINE_SMOOTH);
+ #endif
++    const float lineScale = LineScale(m_presetState.renderContext.viewportSizeY, m_presetState.renderContext.lineReferenceHeight);
++    const bool scaledDots = lineScale > 0.0f && m_useDots;
++    const auto dot = DotStyleFor(LineKind::CustomWave, m_drawThick, lineScale);
++    if (scaledDots && dot.alphaScale < 1.0f)
++    {
++        for (int point = 0; point < smoothedVertexCount; point++)
++        {
++            pointsSmoothed[point].a *= dot.alphaScale;
++        }
++    }
++
+     glLineWidth(1);
+ 
+     // Additive wave drawing (vice overwrite)
+@@ -186,7 +198,7 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
+ 
+     m_presetState.untexturedShader.Bind();
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+-    m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", m_drawThick ? 2.0f : 1.0f);
++    m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", scaledDots ? dot.size : (m_drawThick ? 2.0f : 1.0f));
+ 
+     auto iterations = (m_drawThick && !m_useDots) ? 4 : 1;
+ 
 diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.cpp b/src/libprojectM/MilkdropPreset/LineGeometry.cpp
 new file mode 100644
 index 000000000..06ce06939
@@ -604,7 +642,7 @@ index 000000000..d85333b0e
 +    fragment_color = atA ? color_a : color_b;
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
-index bd9a662f3..ea34c46f0 100644
+index bd9a662f3..51b8a62c4 100644
 --- a/src/libprojectM/MilkdropPreset/Waveform.cpp
 +++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
 @@ -36,6 +36,64 @@ void Waveform::InitVertexAttrib()
@@ -686,17 +724,33 @@ index bd9a662f3..ea34c46f0 100644
  #ifndef USE_GLES
      glDisable(GL_LINE_SMOOTH);
  #endif
-@@ -82,7 +147,8 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
+@@ -56,7 +121,10 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
+ 
+     m_presetState.untexturedShader.Bind();
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjectionFlipped);
+-    m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", 1.0f);
++    // Quad-line mode draws the main wave's 2x2 pixel dots as one scaled point instead of four.
++    const bool scaledDots = lineScale > 0.0f && m_presetState.waveDots;
++    const auto dot = DotStyleFor(LineKind::MainWave, true, lineScale);
++    m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", scaledDots ? dot.size : 1.0f);
+ 
+     glBindVertexArray(m_vaoID);
+     glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
+@@ -82,10 +150,11 @@ void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
          }
  
          m_tempAlpha = static_cast<float>(*presetPerFrameContext.wave_a);
 -        MaximizeColors(presetPerFrameContext);
 +        const auto color = MaximizeColors(presetPerFrameContext);
-+        glVertexAttrib4f(1, color.r, color.g, color.b, color.a);
++        glVertexAttrib4f(1, color.r, color.g, color.b, scaledDots ? color.a * dot.alphaScale : color.a);
  
          // Always draw "thick" dots.
-         const auto iterations = m_presetState.waveThick || m_presetState.waveDots ? 4 : 1;
-@@ -157,7 +223,7 @@ void Waveform::ModulateOpacityByVolume(const PerFrameContext& presetPerFrameCont
+-        const auto iterations = m_presetState.waveThick || m_presetState.waveDots ? 4 : 1;
++        const auto iterations = scaledDots ? 1 : (m_presetState.waveThick || m_presetState.waveDots ? 4 : 1);
+ 
+         const auto incrementX = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
+         const auto incrementY = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
+@@ -157,7 +226,7 @@ void Waveform::ModulateOpacityByVolume(const PerFrameContext& presetPerFrameCont
      }
  }
  
@@ -705,7 +759,7 @@ index bd9a662f3..ea34c46f0 100644
  {
      //wave color brightening
      //
-@@ -256,7 +322,7 @@ void Waveform::MaximizeColors(const PerFrameContext& presetPerFrameContext)
+@@ -256,7 +325,7 @@ void Waveform::MaximizeColors(const PerFrameContext& presetPerFrameContext)
          }
      }
  
