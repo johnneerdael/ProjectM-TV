@@ -5,7 +5,7 @@
 - Android TV or Google TV running Android 5.0 or later.
 - OpenGL ES 3.0.
 - At least 2 GB RAM is highly recommended.
-- A music app playing on the same device.
+- A music app playing on the same device. Verified with Spotify, SoundCloud, SmartTube and [Milkbeat](https://github.com/johnneerdael/Milkbeat); other apps have not been verified.
 
 ProjectM TV visualizes another app's music. It does not play music itself or use the microphone.
 
