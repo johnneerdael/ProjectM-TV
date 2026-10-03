@@ -3,6 +3,8 @@
 $$$ Royal - Mashup (106).milk
 # main wave, thin (visible)
 rce-ordinary - want.milk
+# main wave, thin circle (diagonals)
+TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk
 # main wave, thick
 $$$ Royal - Mashup (191).milk
 # main wave, thick, additive

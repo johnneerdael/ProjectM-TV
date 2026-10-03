@@ -518,10 +518,10 @@ index 000000000..6ebdc9eaf
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert
 new file mode 100644
-index 000000000..9614bdc05
+index 000000000..d85333b0e
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/Shaders/LineVertexShaderGlsl330.vert
-@@ -0,0 +1,77 @@
+@@ -0,0 +1,81 @@
 +precision highp float;
 +precision highp int;
 +
@@ -592,11 +592,15 @@ index 000000000..9614bdc05
 +        }
 +    }
 +
-+    // One extra pixel on each side holds the anti-aliased edge.
++    // The quad is one pixel wider than the line on each side, so both edge modes fit.
 +    float extent = half_width + 1.0;
 +    vec2 position = corner + offsetDirection * side * extent;
 +    gl_Position = vec4(position / (0.5 * viewport_size), 0.0, 1.0);
-+    edge_distance = side * extent;
++
++    // Distances are measured along the line's minor axis, like GL lines: a 1 px line covers one
++    // pixel per column (or row) at any angle, instead of 1 px perpendicular, which would cover up to
++    // 1.41 times as many pixels on diagonals. The larger direction component is at least 0.707.
++    edge_distance = side * extent / max(abs(direction.x), abs(direction.y));
 +    fragment_color = atA ? color_a : color_b;
 +}
 diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
