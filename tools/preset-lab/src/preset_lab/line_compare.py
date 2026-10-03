@@ -153,8 +153,12 @@ def summarize(entries: list[dict], baseline: dict | None) -> dict:
     drift = {mode: [e["drift"][mode] for e in done if e.get("drift") and e["drift"][mode] is not None]
              for mode in ("legacy", "quad")}
     changed = []
+    failures = sorted(e["preset"] for e in entries if e["status"] != "success")
+    new_failures = failures
     if baseline is not None:
         previous = {e["preset"]: e for e in baseline.get("presets", [])}
+        # A preset that already failed in the baseline (e.g. one that never loads) is not a regression.
+        new_failures = [p for p in failures if previous.get(p, {}).get("status") != "failed"]
         for e in done:
             old_runs = previous.get(e["preset"], {}).get("runs", {})
             for key, run in sorted(e["runs"].items()):
@@ -166,7 +170,12 @@ def summarize(entries: list[dict], baseline: dict | None) -> dict:
             "beyond_tolerance": flagged,
             "median_ratio_by_feature": {f: statistics.median(r) for f, r in sorted(by_feature.items())},
             "median_drift": {m: statistics.median(d) if d else None for m, d in drift.items()},
-            "legacy_changed": changed, "nondeterministic": unstable}
+            "legacy_changed": changed, "nondeterministic": unstable, "new_failures": new_failures}
+
+
+def exit_code(summary: dict) -> int:
+    """1 if a preset failed that did not fail in the baseline (any failure without one) or legacy frames changed."""
+    return 1 if summary["new_failures"] or summary["legacy_changed"] else 0
 
 
 def run_line_compare(records: list[PresetRecord], repo: Path, work: Path, worker: Path, identity: EngineIdentity,

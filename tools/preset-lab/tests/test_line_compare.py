@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from preset_lab.line_compare import (LineRunConfig, ladder_drift, line_features, luma_ratio,
-                                     mean_luma, summarize)
+                                     exit_code, mean_luma, summarize)
 
 
 def test_mean_luma_of_white_is_one_and_of_black_zero():
@@ -138,3 +138,37 @@ def test_repeat_run_is_not_compared_against_the_baseline():
 
 def test_deterministic_entries_report_no_nondeterminism():
     assert summarize([_entry("a", 1.0)], None)["nondeterministic"] == []
+
+
+def _failed(name):
+    entry = _entry(name, 1.0)
+    entry["status"] = "failed"
+    return entry
+
+
+def test_failures_already_failed_in_the_baseline_are_not_new():
+    baseline = {"presets": [_failed("broken"), _entry("a", 1.0)]}
+    summary = summarize([_failed("broken"), _entry("a", 1.0)], baseline)
+    assert summary["failed"] == 1
+    assert summary["new_failures"] == []
+    assert exit_code(summary) == 0
+
+
+def test_failures_that_succeeded_or_were_missing_in_the_baseline_are_new():
+    baseline = {"presets": [_entry("a", 1.0), _failed("broken")]}
+    summary = summarize([_failed("a"), _failed("unknown"), _failed("broken")], baseline)
+    assert summary["new_failures"] == ["a", "unknown"]
+    assert exit_code(summary) == 1
+
+
+def test_without_a_baseline_every_failure_is_new():
+    summary = summarize([_failed("b"), _failed("a"), _entry("c", 1.0)], None)
+    assert summary["new_failures"] == ["a", "b"]
+    assert exit_code(summary) == 1
+
+
+def test_changed_legacy_frames_fail_the_run():
+    baseline = {"presets": [_entry("a", 1.0, legacy_hash="old")]}
+    summary = summarize([_entry("a", 1.0, legacy_hash="new")], baseline)
+    assert exit_code(summary) == 1
+    assert exit_code(summarize([_entry("a", 1.0)], None)) == 0

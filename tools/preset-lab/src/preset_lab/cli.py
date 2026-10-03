@@ -126,7 +126,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "line-compare":
             from .build_worker import build_worker
             from .identity import load_json
-            from .line_compare import run_line_compare
+            from .line_compare import exit_code, run_line_compare
             from .models import EngineIdentity
             repo = args.repo.resolve()
             records, _ = inventory(repo/"core/src/main/assets/presets", repo/"core/src/main/assets/presets.idx",
@@ -150,7 +150,7 @@ def main(argv: list[str] | None = None) -> int:
             report = run_line_compare(records, repo, args.work, worker, identity, heights, baseline, args.concurrency)
             json.dump(report["summary"], sys.stdout, allow_nan=False)
             sys.stdout.write("\n")
-            return 1 if report["summary"]["failed"] or report["summary"]["legacy_changed"] else 0
+            return exit_code(report["summary"])
         if args.command=="run":
             from .models import PipelineConfig
             from .pipeline import run_pipeline
