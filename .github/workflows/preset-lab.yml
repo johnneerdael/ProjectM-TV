@@ -51,6 +51,24 @@ jobs:
           echo "CXX=$RUNNER_TEMP/preset-lab-cxx" >> "$GITHUB_ENV"
       - name: Verify the actual native rendering backend
         run: xvfb-run -a preset-lab doctor --repo . --work build/preset-lab-ci > build/preset-lab-ci-doctor.json
+      - name: Build source-analysis adapters against the same pinned engine
+        run: |
+          python - <<'PYCODE'
+          import json
+          from pathlib import Path
+          import subprocess
+          from preset_lab.build_worker import prepare_engine
+          work = Path('build/preset-lab-ci')
+          source, _ = prepare_engine(Path('.'), work)
+          engine_build = Path(json.loads(Path('build/preset-lab-ci-doctor.json').read_text())['worker']).parent
+          subprocess.run(['cmake', '-S', 'tools/milk-analyzer', '-B', 'build/milk-analyzer/native',
+                          f'-DENGINE_SOURCE={source}', f'-DENGINE_BUILD={engine_build}',
+                          f'-DENGINE_IDENTITY_FILE={engine_build / "build-identity.json"}',
+                          '-DSANITIZERS=OFF'], check=True)
+          subprocess.run(['cmake', '--build', 'build/milk-analyzer/native', '-j', '4'], check=True)
+          PYCODE
+      - name: Test source equation domains and shader initialization
+        run: python -m pytest tools/milk-analyzer -q
       - name: Test real native shader and bass response
         run: |
           PRESET_LAB_WORKER=$(python -c 'import json; print(json.load(open("build/preset-lab-ci-doctor.json"))["worker"])') xvfb-run -a python -m pytest tools/preset-lab/tests -m native -q

@@ -1,0 +1,225 @@
+{
+  "scope": "Source parsing/lowering only; no full visual prediction credit",
+  "base_main_commit": "f8d7dd58c7e29875465aed5ea8928d18de52701d",
+  "selector_origin_commit": "c8b1279645e75584bda92a9aaa5b89ceed8056b5",
+  "global_input_policy": "projectmtv-implicit-extern-zero-v1",
+  "authored_source_unchanged": true,
+  "original_subset_size": 315,
+  "remaining_known_source_gaps": 3,
+  "remaining_gap_classes": [
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 3
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 3
+    }
+  ],
+  "current_main_parser_fixes": "Patch0036 from already merged PR29 clears16historical parsing cases; do not attribute these to this change",
+  "cleared_initialization_presets": [
+    {
+      "preset": "Serge + martin - crystal palace tunnel003.milk",
+      "preset_sha256": "f4ab74c7f561e50177b1b68ecf647045de78582ba378e39bb9295d26a55fd4e2",
+      "source_tokens": 4383,
+      "parsed_code_tokens": 3720,
+      "lowering_unknowns": {}
+    },
+    {
+      "preset": "martin - ludicrous speed.milk",
+      "preset_sha256": "9a99802ec59187a9f635f615db07622c5feaa15d02ed64beefb8156e68d48b22",
+      "source_tokens": 2351,
+      "parsed_code_tokens": 1700,
+      "lowering_unknowns": {}
+    },
+    {
+      "preset": "martin - mandelbox explorer - wreck diver nz+ liquititty.milk",
+      "preset_sha256": "2d767a8f65168592fc25b0e70accb968fa5b118296b64f66a62e5f889a9faddd",
+      "source_tokens": 6011,
+      "parsed_code_tokens": 5348,
+      "lowering_unknowns": {}
+    },
+    {
+      "preset": "martin - organic light.milk",
+      "preset_sha256": "71c481a0ebc470c3a9e717630cdd3785f4217248f81cbe6157cf1da99914698e",
+      "source_tokens": 2031,
+      "parsed_code_tokens": 1380,
+      "lowering_unknowns": {}
+    }
+  ],
+  "limitations": [
+    "Core policy preserves external-input classification and uses GLES link-time defaults; arbitrary D3D9 register history is not reproduced",
+    "Full-preset numerical domains, TV performance and appearance equivalence are not established by source lowering",
+    "Current descriptor controls reuse exact requests but are translated and compiled against the new engine"
+  ],
+  "adapter_identity": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "parent_commit": "f8d7dd58c7e29875465aed5ea8928d18de52701d",
+    "patches_sha256": "6b5a6058721de62f4c289be8517aa6f9b3e67705fd9228da832b0c39da44be9e",
+    "patches": [
+      {
+        "path": "0001-plasma-transition-float-overflow-shield.patch",
+        "sha256": "90211950c7f5fe2c29ee0a23e0217ba44a53cbfd5fb1f77887ad242e9dd365bc"
+      },
+      {
+        "path": "0002-render-target-resize-program-cache-shader-state.patch",
+        "sha256": "f9412348e6079972ae87b20091d78888a10dd4c4b902a6f1e08856a2e19f7005"
+      },
+      {
+        "path": "0003-hlslparser-classic-locale.patch",
+        "sha256": "c2cecd1ecfa020015e929caaab7a5cf26bd6c9b0c43473861bc1aaeef5792e87"
+      },
+      {
+        "path": "0004-projectm-eval-thread-local-rand.patch",
+        "sha256": "ee624476036c144f6b9aef688da6c46772e917b208b15441982f7cf8a68e8584"
+      },
+      {
+        "path": "0005-cache-translated-preset-shaders.patch",
+        "sha256": "427847d0815576d012514345e829992608260a25f095b0ec622f53b6cf846562"
+      },
+      {
+        "path": "0006-custom-shapes-batched-draws.patch",
+        "sha256": "f582ce185e20060e6c2a65eb5bcdf5e23dd3f03949cd7666e7c42092a86f9eff"
+      },
+      {
+        "path": "0007-framebuffer-texture-pool.patch",
+        "sha256": "f6527189010d21f5180b1cd2d6ec53913fc6ceb59a4ca7024b9809ebfabbac45"
+      },
+      {
+        "path": "0008-hlsl-floating-point-modulo.patch",
+        "sha256": "8f871546bc006afee7fc520f353a6181d8aa085c0b176425475a03837b7c8d90"
+      },
+      {
+        "path": "0009-tile-gpu-invalidate-and-mesh-orphaning.patch",
+        "sha256": "b968939c0d58981a8c1a4ff100852a912dd92dd25ce9d875791dde727e6619d1"
+      },
+      {
+        "path": "0010-skip-redundant-previous-frame-flip.patch",
+        "sha256": "0b4941b388ce61166a038b0212496cd94b682da9353a2960c8c575300287a77d"
+      },
+      {
+        "path": "0011-indexed-warp-mesh.patch",
+        "sha256": "296905e75730fdb7ab39769cec8a1ee980ddb3ab3f4d0f5083b0483f4a091384"
+      },
+      {
+        "path": "0012-merged-warp-pass-direct-blur.patch",
+        "sha256": "e1acef87cfb563ce5d58d6ad6011ce745a98c77ac9465703964e596c7ca6daae"
+      },
+      {
+        "path": "0013-motion-vector-map-only-when-shown.patch",
+        "sha256": "61bfd88a026f1c5825c1827aa0993dc131956705c05aa81428f959b2f0e9500d"
+      },
+      {
+        "path": "0014-video-echo-in-final-orientation.patch",
+        "sha256": "59881214d9dfec9fd7c1b636df383612008ae2e8d2f3153ebdca70fdb0da1620"
+      },
+      {
+        "path": "0015-keep-output-for-blur-reading-and-discarding-shaders.patch",
+        "sha256": "018652ae06d4ebdc9a8080bd14ae7b20b8abc9ebb6be132967a3ea1644554190"
+      },
+      {
+        "path": "0016-direct-composite-output.patch",
+        "sha256": "364077d6131884d8b9f72718e179281722e7cfa1c9b193af6aaa244f3d135e02"
+      },
+      {
+        "path": "0017-pcm-max-samples-is-buffer-size.patch",
+        "sha256": "bfce4d6b77f9ad1bb63b93f3b4395dd0745282b89bd29a6b4f266ea20838cd9d"
+      },
+      {
+        "path": "0018-hlslparser-parenthesized-constructor-expressions.patch",
+        "sha256": "9f6cd972d67dfda9d76ebe8d168531e676c1ce32f185dcbe6c19abfabcc926ed"
+      },
+      {
+        "path": "0019-hlslparser-number-scan-without-source-copy.patch",
+        "sha256": "32a914b0ad6be0fdd8d144e0d075e9b7e5876a76ca385fcbaf555f8b6e99c8bc"
+      },
+      {
+        "path": "0020-projectm-eval-1.0.7-evaluator-fixes.patch",
+        "sha256": "de9e4f64b5e252445ae50d3f540d7b76a607cc27daceaf217a2ef901341d7b27"
+      },
+      {
+        "path": "0021-hlslparser-self-referencing-macros.patch",
+        "sha256": "71382b8ecd90a35a24023d8d16bae0f0f2881513748461166aba9faca7cf89aa"
+      },
+      {
+        "path": "0022-custom-waveform-sample-bounds.patch",
+        "sha256": "ffe85782c4689f8bc36391c3cb002b7a015467f6d50feb8353a19e045e0bd240"
+      },
+      {
+        "path": "0023-milkdrop-preset-unconditional-shader-includes.patch",
+        "sha256": "0a856f5843a75d44ad7c4ee3197936bdef450b8f33d91ed500ba36dabf468fbe"
+      },
+      {
+        "path": "0024-quad-lines.patch",
+        "sha256": "3da8433e6096a87176ef4a82bd55261e5dbb69176c0f825bb1d555fe655d82fa"
+      },
+      {
+        "path": "0025-shader-failure-handling.patch",
+        "sha256": "b9460b0d17a53f30675938efc92707258c18ed84479695cd51cf1617a792db85"
+      },
+      {
+        "path": "0026-custom-warp-sampler-binding.patch",
+        "sha256": "3bb981b2a255895f5816dc450f92ecf7ba1caabcdc94c366a84cb1ef01938d31"
+      },
+      {
+        "path": "0027-preset-exception-diagnostics.patch",
+        "sha256": "d4a802f5bfe201eabd908095d8da0fc6d55d635b36686d05b24382d2453bd37c"
+      },
+      {
+        "path": "0028-initialize-fresh-color-history.patch",
+        "sha256": "9c5cca38b6d8d19dab4f85e1e104a6a73c6a92766bdd19e8fa31aa9713706b7f"
+      },
+      {
+        "path": "0029-per-frame-record-compatibility.patch",
+        "sha256": "a79b74945135f2383e3b6003e5ba3a501389023826a98da36deb0a073fe87728"
+      },
+      {
+        "path": "0030-hlslparser-uniform-write-copies.patch",
+        "sha256": "aa5d7d37c8216feec833171eedd20d057c4e256636fbaede01a506c7bc454b33"
+      },
+      {
+        "path": "0031-hlslparser-array-initializer-layout.patch",
+        "sha256": "475d804a35875a4bb1b8b86bc3cbe8d535f29af0e2f1f3514e43f0a263fd46fe"
+      },
+      {
+        "path": "0032-sampler-state-preprocessing.patch",
+        "sha256": "c8950136ef61a9b1090ba29e3f49d6c59c8d74ef75f4590f36b6eb6fe15ce049"
+      },
+      {
+        "path": "0033-legacy-equation-code-all-phases.patch",
+        "sha256": "5b86bcb46e832eb8c241b41f456e5ca2ae5284fe16a12ef43dae093b85b571b4"
+      },
+      {
+        "path": "0034-projectm-eval-lone-dot-number.patch",
+        "sha256": "6768bc1343049bafe8590893a762d94d68f57740e7b6154a9303f586999ff791"
+      },
+      {
+        "path": "0035-leave-out-uncompilable-equation-code.patch",
+        "sha256": "690950939f284b9d4831548cd03cb129b1f138809c16228631a72cea3e41e6ec"
+      },
+      {
+        "path": "0036-hlslparser-contextual-identifiers-macro-tokens-postfix.patch",
+        "sha256": "addd1f64eff60da530a7aa764b3b6af9253dcd64cc3c4361fe8860e2c25864a9"
+      },
+      {
+        "path": "0037-hlslparser-implicit-global-inputs.patch",
+        "sha256": "aed2ae366d37c307d72f4b58dd3b2ed96a0b149d52d0d76c853462ea1e02b4f0"
+      }
+    ]
+  },
+  "validation": {
+    "focused_source_tests": "28 passed",
+    "native_driver_regression_groups": "7 groups passed (host OpenGL), ASan/UBSan",
+    "historical_full_analyzer_suite": "750 passed and35subtests with historical adapters, before generated-scratch follow-up",
+    "android_core_and_jvm": "core assembleDebug and app/core testDebugUnitTest pass",
+    "release_tooling": "74tests pass"
+  },
+  "current_debug_artifact": {
+    "AAR": "core/build/outputs/aar/core-debug.aar",
+    "AAR_sha256": "f6c24ed1fd2307628065d68d6a50d64ed7f52f4d4177036d4a0eeac5a476e212",
+    "native_libraries": {
+      "jni/arm64-v8a/libprojectmtv.so": "791442ea67a66928579cf9bf49647e4b22361197c25271d6b65cf7333f2f095c",
+      "jni/armeabi-v7a/libprojectmtv.so": "448bdec852c9f40ca00d5cd0673034e40d8d1a017c93657857bb782027f3fe65"
+    }
+  }
+}

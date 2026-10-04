@@ -241,3 +241,14 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 4. *Install* hands it to Android's installer with `ACTION_INSTALL_PACKAGE`: a `content://` URI from the non-exported `UpdateFileProvider` with a one-off read grant (Android 7+), or a world-readable file (Android 5-6, whose installer only reads files). Android asks to confirm, and on Android 8+ to allow installs from the app the first time.
 
 Downloads that are no longer newer than the installed version are deleted at the next check. When the app was installed by an F-Droid client (installer package), the setting shows *Via F-Droid* and nothing runs. F-Droid's inclusion policy allows downloading updates only with explicit user consent, which the off-by-default setting is. For testing, `adb shell setprop debug.projectmtv.update_from 1.9.17` makes the app treat that as the installed version (and accept the same version code).
+
+## Legacy shader global inputs
+
+Patch 0037 preserves plain uninitialized scalar/vector float globals as external
+uniform inputs. Read-only globals stay uniforms; shader writes use the initialized
+per-invocation copy established by patch 0030. The GLES link-time default for unbound
+uniforms is zero. This is a defined current-core policy, not a claim that legacy D3D9
+registers always held zero. Locals and explicit static/const/initialized storage retain
+their previous classification. Mixed comma declarations are emitted separately when
+needed to preserve different storage classes. The focused source analyzer and target
+policy are documented in `tools/milk-analyzer/README.md`.

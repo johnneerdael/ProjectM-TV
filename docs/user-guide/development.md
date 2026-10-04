@@ -54,3 +54,16 @@ build/docs-env/bin/mkdocs build --strict
 ```
 
 The User guide workflow validates the site and deploys main-branch documentation to GitHub Pages. Documentation changes do not require an APK release or a version bump.
+
+## Shader initialization diagnostics
+
+The [source-analysis tools](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/milk-analyzer)
+check equation ranges and whether shader branches initialize their outputs. They
+include the bounded-selector fix from PR #25. These checks do not establish full
+visual accuracy.
+
+The engine preserves plain uninitialized scalar/vector shader globals as external
+inputs. Inputs with no binding start at zero; writable copies begin with that input
+on each invocation. This gives the affected older presets defined inputs without
+changing their source or assignment order. Local variables still require an authored
+initialization. The policy does not reproduce arbitrary old Direct3D register history.

@@ -78,3 +78,13 @@ endforeach()
 # A broken self-referencing macro grows indefinitely; stop it before it exhausts memory.
 set_tests_properties(hlsl-self-reference custom-waveform-bounds shader-render-regressions parser-presets PROPERTIES
     TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+add_executable(implicit-global-regressions implicit_global_test.cpp)
+target_compile_features(implicit-global-regressions PRIVATE cxx_std_17)
+target_include_directories(implicit-global-regressions PRIVATE "${PROJECTM_SOURCE}/vendor/hlslparser/src")
+target_link_libraries(implicit-global-regressions PRIVATE libprojectM::projectM)
+add_test(NAME implicit-global-regressions COMMAND implicit-global-regressions)
+set_tests_properties(implicit-global-regressions PROPERTIES TIMEOUT 10 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0")
+
+add_test(NAME implicit-input-bindings COMMAND projectm-regressions implicit-bindings)
+set_tests_properties(implicit-input-bindings PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
