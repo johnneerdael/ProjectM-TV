@@ -374,7 +374,7 @@ def prepare(args):
                 "pcm": pcm, "pcm_protocol": "16s bass-0.30 float32, seed12345; clip(rint(128+127*x),0,255); short input is exact 8s byte prefix; full1470-byte JNI blocks",
                 "config": {"width": 2364, "height": 1330, "fps": 30, "seed": 12345, "warmup_frames": 120,
                            "measurement_frames": 360, "capture_frames": capture_indices(360)},
-                "transport": "debug run-as private /data/user/0/dedicated-package/files/jobs; binary exec-in tee and exec-out tar",
+                "transport": "debug run-as private job/PCM input; output app-created external-files sandbox; binary exec-in tee and exec-out tar",
                 "capture_format": "native RGB8, bottom_to_top; GLES RGBA readback with alpha stripped before SHA256",
                 "capture_hash_coverage": "corpus:selected frames only; full-readback pilot:every frame and concatenated native stream",
                 "retention": "corpus256x144 lossless PNGs/compact sampled metrics; native files only selected pilot/proof jobs",
@@ -438,6 +438,7 @@ def install_role(serial, role, work):
 def make_job(protocol, record, role, mode, repeat, measurement_frames):
     key = job_key(protocol["sha256"], record, role, mode, repeat, measurement_frames)
     remote = REMOTE + "/" + key
+    remote_output = LEGACY_REMOTE + "/" + key + "/output"
     audio = protocol["pcm"][str(120 + measurement_frames)]
     return {"schema_version": 2, "job_id": key, "protocol_sha256": protocol["sha256"],
             "preset_filename": record["path"], "preset_sha256": record["sha256"],
@@ -445,7 +446,7 @@ def make_job(protocol, record, role, mode, repeat, measurement_frames):
             "measurement_frames": measurement_frames, "capture_mode": mode,
             "capture_frames": capture_indices(measurement_frames), "retain_native_frames": mode == "full",
             "pcm_uint8_path": remote + "/pcm.u8", "pcm_uint8_sha256": audio["sha256"],
-            "output_directory": remote + "/output", "expected_core_sha256": protocol["roles"][role]["core_sha256"]}
+            "output_directory": remote_output, "expected_core_sha256": protocol["roles"][role]["core_sha256"]}
 
 
 def run_one(args, protocol, record, role, mode, repeat, measurement_frames, native=False):
@@ -484,7 +485,7 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
                       timeout=args.timeout, allow_failure=True)
         (directory / "instrumentation.log").write_bytes(process.stdout + process.stderr)
         output = directory / "output"
-        pull_private(serial, relative + "/output", output)
+        pull_private(serial, job["output_directory"], output)
         if not (output / "result.json").is_file():
             raise ValueError("missing atomic APK result; instrumentation failed or crashed")
         result = json.loads((output / "result.json").read_text())
@@ -497,13 +498,14 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
         adb(serial, "shell", "am", "force-stop", PACKAGE)
         # Host has pulled and verified all output; remove only owned remote scratch.
         adb(serial, "shell", "run-as", PACKAGE, "rm", "-rf", relative)
+        adb(serial, "shell", "run-as", PACKAGE, "rm", "-rf", LEGACY_REMOTE + "/" + job["job_id"])
     except subprocess.TimeoutExpired as error:
         row.update(status="timeout", error="instrumentation/ADB job timeout")
         captured = (error.output or b"") + (error.stderr or b"")
         (directory / "timeout-command.log").write_bytes(captured)
         adb(protocol["device_serial"], "shell", "am", "force-stop", PACKAGE, allow_failure=True)
         try:
-            pull_private(protocol["device_serial"], "files/jobs/" + job["job_id"] + "/output", directory / "output")
+            pull_private(protocol["device_serial"], job["output_directory"], directory / "output")
         except Exception as recovery_error:
             row["remote_partial_recovery_error"] = f"{type(recovery_error).__name__}: {recovery_error}"
     except Exception as error:

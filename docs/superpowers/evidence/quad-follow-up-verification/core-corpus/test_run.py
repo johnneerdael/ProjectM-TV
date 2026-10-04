@@ -155,6 +155,12 @@ class HostTests(unittest.TestCase):
         run.extract_owned_tar(archive,self.work/"extracted")
         self.assertEqual((self.work/"extracted/output/frame-0120.rgb").read_bytes(),raw)
 
+    def test_job_stages_private_input_and_app_created_external_output(self):
+        protocol={"sha256":"p","pcm":{"480":{"sha256":"audio"}},"roles":{"baseline":{"core_sha256":"core"}}}
+        job=run.make_job(protocol,{"path":"x.milk","sha256":"source"},"baseline","selected",1,360)
+        self.assertTrue(job["pcm_uint8_path"].startswith("/data/user/0/"+run.PACKAGE+"/files/jobs/"))
+        self.assertTrue(job["output_directory"].startswith("/sdcard/Android/data/"+run.PACKAGE+"/files/jobs/"))
+
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
     def test_allowed_ip_serials_are_accepted(self):
