@@ -85,7 +85,8 @@ class AttemptOutputTests(unittest.TestCase):
     def test_post_promotion_timeout_keeps_one_checkpointable_producer(self):
         record = {"path": "exact.milk", "sha256": "source", "bytes": 1}
         protocol = {"sha256": "protocol", "device_serial": "192.168.51.53:5555",
-                    "config": {"width": 2, "height": 1, "fps": 30, "seed": 12345},
+                    "config": {"width": 2, "height": 1, "fps": 30, "seed": 12345,
+                               "measurement_frames": 2, "capture_frames": self.job["capture_frames"]},
                     "roles": {"baseline": {"core_sha256": "core"}},
                     "pcm": {"122": {"path": str(self.work / "pcm.u8")}}}
         key = run.job_key("protocol", record, "baseline", "selected", 1, 2)
@@ -131,7 +132,8 @@ class AttemptOutputTests(unittest.TestCase):
     def test_repeated_force_stop_timeout_records_terminal_metadata(self):
         record={"path":"exact.milk","sha256":"source","bytes":1}
         protocol={"sha256":"protocol","device_serial":"192.168.51.53:5555",
-                  "config":{"width":2,"height":1,"fps":30,"seed":12345},
+                  "config":{"width":2,"height":1,"fps":30,"seed":12345,
+                            "measurement_frames":2,"capture_frames":self.job["capture_frames"]},
                   "roles":{"baseline":{"core_sha256":"core"}},"pcm":{}}
         key=run.job_key("protocol",record,"baseline","selected",1,2)
         job=dict(self.job,job_id=key)

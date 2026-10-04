@@ -72,6 +72,13 @@ def verify_terminal_producer(directory, row, protocol, record):
         for field in ("width","height","fps","seed"):
             if field in protocol["config"] and packet.get(field)!=protocol["config"][field]:
                 raise ValueError("input configuration provenance mismatch: "+field)
+        # Corpus captures come from the frozen protocol. Short pilot jobs use the
+        # same runner's deterministic schedule for their independently keyed window.
+        config=protocol["config"]
+        captures=(config["capture_frames"] if row["measurement_frames"]==config["measurement_frames"]
+                  else run.capture_indices(row["measurement_frames"]))
+        if packet.get("capture_frames")!=captures:
+            raise ValueError("input configuration provenance mismatch: capture_frames")
     relative=row.get("result_path","output/result.json")
     result_path=directory/relative
     if not result_path.resolve().is_relative_to(directory.resolve()):raise ValueError("unsafe producer result path")
