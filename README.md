@@ -132,6 +132,7 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 - You can select the prebuilt Dance collection, but cannot search for an individual preset or build custom playlists. Presets play in shuffled order within the selected category.
 - Dance ranks screen response under controlled bass tests; it is not a guarantee of the same response for every song, resolution or GPU. Some presets respond through color or brightness changes, others through geometry or feedback. Device-specific skips can reduce the number available on a TV. The [technical guide](https://johnneerdael.github.io/ProjectM-TV/dance-measurement/) documents the signals, measurements and limits.
 - The black-preset check has limits. It judges each preset only in the first 20 seconds or so after it starts, and only after 3 seconds of uninterrupted music. "Black" means every sampled pixel is at or below about 8% brightness, so a very dark preset can count as black. After 3 black presets in a row it stops acting until a preset shows something, in case the fault is the renderer rather than the presets.
+- Random-image samplers keep their selected image when a preset uses it in both rendering stages, including aliases requesting different filtering or edge wrapping. Short aliases use the same image as their full filename-filtered form. The image is chosen anew for each preset load, so revisiting a preset can look different.
 - Versions before 1.9.5 marked some presets as black that now render. If you used an earlier version, reset the skip list: *Settings › Advanced › Skipped presets*.
 - Presets whose equations MilkDrop accepts now load: code split across numbered lines, a lone `.` as the number 0, and a stray `;` inside parentheses. Equation code that does not compile in MilkDrop either is left out, as MilkDrop does, and the rest of the preset plays. Earlier versions skipped 27 bundled presets for this reason. If you used an earlier version, reset the skip list to bring them back.
 
@@ -216,6 +217,8 @@ Two core AARs expose the same Java/JNI API with different rendering policies:
 |---|---|---|
 | `capped` | Internal render height never exceeds 1330p, including oversized JNI surface requests; the result is upscaled for presentation. No Native choice or feedback diffusion. | `projectM-TV-core.aar`, `projectM-TV-core-<version>.aar` |
 | `native` | Auto and numeric choices retain the 1330p cap; explicit Native may use the full detected panel height when memory permits. Eligible above-reference warp reads receive feedback diffusion. | `projectM-TV-core-native.aar`, `projectM-TV-core-native-<version>.aar` |
+
+If the capped intermediate render target cannot be allocated, the core skips that frame rather than exceeding the cap.
 
 The canonical core download remains the capped artifact so Milkbeat keeps its capped behavior. Choose the explicitly named Native AAR to opt into that policy. Normal APK and Gradle builds default to `native`; the standard APK still starts in Auto at at most 1330p.
 
