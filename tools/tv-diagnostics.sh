@@ -9,7 +9,7 @@
 #   --release          download the latest GitHub Release APK instead of building
 #   --no-install       test the version that is already installed
 #   --package ID       application ID to test (default nl.neerdael.projectmtv); for example
-#                      nl.neerdael.projectmtv.profile with --apk or --no-install
+#                      nl.neerdael.projectmtv.profile with a matching --apk or --no-install (not build/--release)
 #   --allow-uninstall  if the install fails because of a different signing key, uninstall the
 #                      existing app first (this resets the app's settings)
 #   --sweep            also measure each fixed resolution (drives the menu with key events)
@@ -33,7 +33,8 @@ APK_SOURCE="build"
 ALLOW_UNINSTALL=0
 SWEEP=0
 OUT=""
-PKG="nl.neerdael.projectmtv"                          # application ID (1.9.7+; before: com.example.projectm.visualizer)
+DEFAULT_PKG="nl.neerdael.projectmtv"                  # release application ID (1.9.7+)
+PKG="$DEFAULT_PKG"
 REPO="johnneerdael/ProjectM-TV"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
@@ -63,6 +64,14 @@ case "$DURATION" in
     ''|*[!0-9]*) die "--duration must be a whole number of seconds (got '$DURATION')" ;;
 esac
 [ "$DURATION" -ge 30 ] || die "--duration must be at least 30 seconds"
+
+# Both automatic APK sources install the production application ID. Validate the final option
+# state before connecting so an alternate package cannot accidentally measure a stale install.
+case "$APK_SOURCE" in
+    build|release)
+        [ "$PKG" = "$DEFAULT_PKG" ] || die "--package $PKG requires --apk with a matching application ID or --no-install; build/--release install $DEFAULT_PKG"
+        ;;
+esac
 
 # ---------------------------------------------------------------------------------------------
 # adb

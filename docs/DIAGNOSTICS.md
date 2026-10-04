@@ -19,11 +19,20 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 |---|---|
 | *(default)* | Builds the release APK from this checkout, installs it and observes it for 180 s |
 | `--release` | Installs the latest GitHub Release instead of building |
+| `--apk PATH` | Installs the supplied APK; its application ID must match `--package` (or the default ID) |
 | `--no-install` | Tests the version that is already installed |
-| `--package ID` | Application ID to test (default `nl.neerdael.projectmtv`). Use `nl.neerdael.projectmtv.profile` with `--apk app/build/outputs/apk/profile/app-profile.apk` or `--no-install` to leave the installed app and its settings alone |
+| `--package ID` | Application ID to test (default `nl.neerdael.projectmtv`). Alternate IDs require a matching `--apk` or `--no-install`; building and `--release` only support the default ID |
 | `--allow-uninstall` | If the installed app has a different signing key, uninstall it first (resets app settings) |
 | `--sweep` | Also measures each fixed resolution (720p, 1080p, …), driving the menu with key events |
 | `--duration SEC` | Observation time (default 180) |
+
+For an already installed profile build, run:
+
+```bash
+tools/tv-diagnostics.sh 192.168.50.105:5555 --package nl.neerdael.projectmtv.profile --no-install
+```
+
+To install a newly built profile APK instead, replace `--no-install` with `--apk app/build/outputs/apk/profile/app-profile.apk`. The script does not inspect supplied APKs to verify their application ID; supply an APK that matches the package being tested. Incompatible build/`--release` and package combinations fail before connecting to the TV, building, downloading or installing anything. If multiple APK-source options are supplied, the last one selects the mode; the package check uses that final mode regardless of option order.
 
 ## What it collects
 
