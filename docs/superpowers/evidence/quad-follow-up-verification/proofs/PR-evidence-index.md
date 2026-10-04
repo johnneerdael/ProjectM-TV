@@ -16,6 +16,8 @@ alongside them. These artifacts were pushed on `followup/quad-lines` in `9dd8875
 | Initialize fresh color history | [Actual renderer pixels](initial-history/measured/08-fresh-history-init.png) | Controlled valid allocator contents: 1024 nonzero RGBA bytes before, zero after. This initializes history, not the outer display; specific Mali outlier attribution remains unproven. |
 | Preserve framebuffer ownership after context recreation | [Actual attachment checks](initial-history/measured/09-context-fbo-ownership.png) | Cached name collision detaches a foreign attachment; local clearing framebuffer preserves it. Sentinel paint is intact in both cases. Full patches1–28 host suite174 passes, zero skips. |
 
+| Recover legacy split per-frame records | [Actual compiler regression results](../core-corpus/diagnostic-presets/per-frame-fallback/10-per-frame-record-fallback.png) | Three legacy cases fail before and pass after; accepted block comments and invalid-code rejection remain intact. Full host suite179 passes; JNI preset recovery and full corpus still pending. |
+
 The shader/transition/fallback sources are in `manifest.json`, `raw/`, and `allocation-builds.json`.
 Sampler and analyzer sources are in their numbered reports and `additional-proof-sources.json`.
 The original 46-file export has `artifact-index.json`; later additions have separate source hashes.

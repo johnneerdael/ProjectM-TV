@@ -33,6 +33,27 @@
       "path": "suite.log",
       "bytes": 31165,
       "sha256": "83b320c35936b77b60fc42ee89934812a50f57174cad530d5cf895688d7db104"
+    },
+    {
+      "path": "export.py",
+      "bytes": 2565,
+      "sha256": "330f259c561af6863733fd33988cacd6c114fa22a43e22acd96a14292db2d624"
+    },
+    {
+      "path": "figure-data.json",
+      "bytes": 653,
+      "sha256": "59d6f9cbbfc020fdfc3a78480cbedcc63efa57e1fb05ae880f8c655c11994f58"
+    },
+    {
+      "path": "10-per-frame-record-fallback.png",
+      "bytes": 60134,
+      "sha256": "06bcdfbf2c91d5d74566d6992dc389b2982dc969aa03ae4af81cefda81c8df52"
+    },
+    {
+      "path": "series-application.json",
+      "bytes": 4734,
+      "sha256": "c7727c803ef8ef6b48c96b23d64f81487f8ae7b310abc4980a1af56dd7b00133"
     }
-  ]
+  ],
+  "figure_rendering": "Pillow12.3.0; actual parsed test outcomes, visually inspected; not an app screenshot"
 }
