@@ -22,7 +22,13 @@ def validate_score(row,model,*,fps,measurement_frames):
     descriptors=row.get('descriptors')
     if not isinstance(descriptors,dict) or descriptors.get('frames_measured')!=measurement_frames:
         raise ValueError('Complete declared measurement frame count required')
-    flashing=descriptors['flashing'];motion=descriptors['motion']
+    flashing=descriptors.get('flashing');motion=descriptors.get('motion')
+    if not isinstance(flashing,dict) or not isinstance(motion,dict):
+        raise ValueError('Flash and motion descriptor objects required')
+    product=flashing.get('peak_paired_luma_area_product')
+    if (isinstance(product,bool) or not isinstance(product,Real) or not math.isfinite(product)
+            or not 0<=product<=1):
+        raise ValueError('Complete finite paired flash measurement required')
     expected_rate=(flashing['coherent_brightening_transitions']+
                    flashing['coherent_darkening_transitions'])/(measurement_frames/fps)
     if not math.isclose(features[0],expected_rate,rel_tol=1e-9,abs_tol=1e-9):
@@ -62,15 +68,16 @@ def audit_run(run,model_path):
     for case in corpus:
         path=run/'results'/(case['sha256']+'.json')
         if not path.exists():missing+=1;issues.append({**case,'reason':'missing'});continue
-        row=json.loads(path.read_text())
-        if row.get('status')!='scored':
-            unscored+=1;issues.append({**case,'reason':row.get('reason','unscored')});continue
         try:
+            row=json.loads(path.read_text())
+            if not isinstance(row,dict):raise ValueError('Score record must be a JSON object')
+            if row.get('status')!='scored':
+                unscored+=1;issues.append({**case,'reason':row.get('reason','unscored')});continue
             if any(row.get(k)!=case[k] for k in ('preset','sha256')) or row.get('identity')!=metadata['identity']:
                 raise ValueError('Score record identity differs from corpus/run')
             validate_score(row,model,fps=profile['fps'],measurement_frames=profile['frames']-profile['warmup'])
             verified+=1
-        except (ValueError,KeyError,TypeError) as error:
+        except (ValueError,KeyError,TypeError,OSError) as error:
             issues.append({**case,'reason':str(error)})
     return {'corpus':len(corpus),'arithmetically_verified':verified,'missing':missing,'unscored':unscored,
             'invalid':len(issues)-missing-unscored,'ready':not issues,'issues':issues,

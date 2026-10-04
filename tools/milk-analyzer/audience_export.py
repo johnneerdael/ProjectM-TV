@@ -3,13 +3,13 @@ import argparse
 import hashlib
 import json
 import math
+import sys
 import zipfile
 from pathlib import Path
 
 from audience_policy import labels_for_intensity
 from audience_ranking import relative_activity_ranks
 from core_backend import reusable_result
-from score_audit import audit_run
 
 
 def export_collection(corpus, results, output, *, identity, weights, run_metadata=None):
@@ -96,9 +96,15 @@ def main():
         result=verify_review_assets(args.output,args.aar)
         print(json.dumps({'status':'verified','scored':result['scored'],'counts':result['counts']}));return
     if args.run is None:parser.error('--run required for export')
+    from score_audit import audit_run
     audit=audit_run(args.run,args.model)
     if not audit['ready']:
-        raise ValueError('Complete recomputed scores required: '+json.dumps({k:v for k,v in audit.items() if k!='issues'}))
+        print(json.dumps({'status':'incomplete',
+            'audit':{k:v for k,v in audit.items() if k!='issues'},
+            'audit_command':[sys.executable,str(Path(__file__).with_name('score_audit.py')),
+                '--run',str(args.run),'--model',str(args.model),
+                '--output',str(args.output.parent/'score-audit.json')]}))
+        raise SystemExit(1)
     metadata=json.loads((args.run/'run-identity.json').read_text())
     if hashlib.sha256(args.aar.read_bytes()).hexdigest()!=metadata['aar_sha256']:
         raise ValueError('Review AAR differs from scoring AAR')

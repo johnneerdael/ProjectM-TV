@@ -1,6 +1,9 @@
 import json
 import hashlib
 import zipfile
+import subprocess
+import sys
+from pathlib import Path
 import pytest
 from audience_export import export_collection, verify_review_assets
 
@@ -53,3 +56,75 @@ def test_verify_checks_real_corpus_scores_and_membership_even_with_updated_check
     if tamper:
         with pytest.raises(ValueError):verify_review_assets(output,aar)
     else:assert verify_review_assets(output,aar)['scored']==6
+
+
+def cli_run(tmp_path):
+    model=tmp_path/'model.json'
+    model.write_text(json.dumps({'model':{'intercept':20,'weights':[0,0,0,0],'feature_scale':[1,1,1,1]}}))
+    aar=tmp_path/'core.aar';run=tmp_path/'run';run.mkdir();(run/'results').mkdir()
+    cases=[]
+    with zipfile.ZipFile(aar,'w') as archive:
+        for name in ('a.milk','b.milk'):
+            raw=name.encode();sha=hashlib.sha256(raw).hexdigest()
+            archive.writestr('assets/presets/'+name,raw);cases.append({'preset':name,'sha256':sha})
+        archive.writestr('assets/presets.idx','a.milk\t0\nb.milk\t0\n')
+    (run/'corpus.json').write_text(json.dumps({'cases':cases}))
+    (run/'run-identity.json').write_text(json.dumps({
+        'identity':'run','aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest(),
+        'model_sha256':hashlib.sha256(model.read_bytes()).hexdigest(),
+        'profile':{'fps':30,'frames':420,'warmup':60}}))
+    for row in cases:
+        (run/'results'/(row['sha256']+'.json')).write_text(json.dumps({**row,
+            'identity':'run','status':'scored','score':20,'features':[0,0,0,0],
+            'descriptors':{'frames_measured':360,'flashing':{
+                'coherent_brightening_transitions':0,'coherent_darkening_transitions':0,
+                'peak_paired_luma_area_product':0},'motion':{
+                'median_speed_viewports_per_second':0,
+                'mean_acceleration_viewports_per_second_squared':0,'matched_brightness_change_p95':0}}}))
+    output=tmp_path/'review-assets'
+    script=Path(__file__).with_name('audience_export.py')
+    command=[sys.executable,str(script),'--run',str(run),'--model',str(model),
+             '--aar',str(aar),'--output',str(output)]
+    return command,run,aar,output,script
+
+
+@pytest.mark.parametrize('failure',[None,'stale','missing'])
+def test_cli_enforces_complete_recomputed_scores_before_writing_assets(tmp_path,failure):
+    command,run,aar,output,script=cli_run(tmp_path)
+    path=next((run/'results').glob('*.json'))
+    if failure=='stale':
+        row=json.loads(path.read_text());row['score']=21;path.write_text(json.dumps(row))
+    if failure=='missing':path.unlink()
+    result=subprocess.run(command,capture_output=True,text=True,timeout=20)
+    if failure:
+        assert result.returncode!=0
+        assert not output.exists()
+        error=json.loads(result.stdout)
+        assert error['status']=='incomplete'
+        assert not error['audit']['ready']
+        assert '--run' in error['audit_command']
+    else:
+        assert result.returncode==0,result.stderr
+        assert json.loads(result.stdout)['status']=='complete'
+        assert verify_review_assets(output,aar)['scored']==2
+
+
+def test_asset_verification_does_not_require_scipy(tmp_path):
+    command,run,aar,output,script=cli_run(tmp_path)
+    created=subprocess.run(command,capture_output=True,text=True,timeout=20)
+    assert created.returncode==0,created.stderr
+    code='''import builtins,runpy,sys
+original=builtins.__import__
+def guarded(name,*args,**kwargs):
+    if name=="scipy" or name.startswith("scipy."):raise ImportError("SciPy intentionally unavailable")
+    return original(name,*args,**kwargs)
+builtins.__import__=guarded
+path,aar,output=sys.argv[1:]
+sys.path.insert(0,str(__import__("pathlib").Path(path).parent))
+sys.argv=[path,"--verify","--aar",aar,"--output",output]
+runpy.run_path(path,run_name="__main__")
+'''
+    verified=subprocess.run([sys.executable,'-c',code,str(script),str(aar),str(output)],
+                            capture_output=True,text=True,timeout=20)
+    assert verified.returncode==0,verified.stderr
+    assert json.loads(verified.stdout)['status']=='verified'
