@@ -136,6 +136,25 @@ class HostTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"dimensions|256"):
             run.validate_result(self.job,self.result,self.frames,self.work)
 
+    def test_private_transport_tar_rejects_escaping_and_symlink_members(self):
+        import io,tarfile
+        for name,kind in (("../escape.txt",tarfile.REGTYPE),("link",tarfile.SYMTYPE)):
+            archive=self.work/("bad-"+str(len(name))+".tar")
+            with tarfile.open(archive,"w") as out:
+                item=tarfile.TarInfo(name);item.type=kind
+                if kind==tarfile.REGTYPE:item.size=3;out.addfile(item,io.BytesIO(b"bad"))
+                else:item.linkname="../outside";out.addfile(item)
+            with self.assertRaisesRegex(ValueError,"unsafe|link|escape"):
+                run.extract_owned_tar(archive,self.work/"extracted")
+
+    def test_private_transport_tar_preserves_job_file_bytes(self):
+        import io,tarfile
+        archive=self.work/"job.tar";raw=b"native-byte-evidence"
+        with tarfile.open(archive,"w") as out:
+            item=tarfile.TarInfo("./output/frame-0120.rgb");item.size=len(raw);out.addfile(item,io.BytesIO(raw))
+        run.extract_owned_tar(archive,self.work/"extracted")
+        self.assertEqual((self.work/"extracted/output/frame-0120.rgb").read_bytes(),raw)
+
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
     def test_allowed_ip_serials_are_accepted(self):

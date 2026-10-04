@@ -18,13 +18,15 @@ import struct
 import sys
 import threading
 import time
+import tarfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[5]
 WORK = ROOT / "build/follow-ups/core-corpus/measurements"
 PACKAGE = "nl.neerdael.projectmtv.corecorpus"
 COMPONENT = PACKAGE + "/nl.neerdael.projectm.corecorpus.CorpusInstrumentation"
-REMOTE = "/sdcard/Android/data/" + PACKAGE + "/files/jobs"
+REMOTE = "/data/user/0/" + PACKAGE + "/files/jobs"
+LEGACY_REMOTE = "/sdcard/Android/data/" + PACKAGE + "/files/jobs"
 TERMINAL = {"success", "failed", "timeout", "incorrect_current_preset", "nondeterministic"}
 STOP = threading.Event()
 CONTROLS = (
@@ -88,6 +90,50 @@ def adb(serial, *args, timeout=120, allow_failure=False):
     if result.returncode and not allow_failure:
         raise RuntimeError(f"adb {args[0]} failed: {result.returncode}")
     return result
+
+
+def extract_owned_tar(archive_path, destination):
+    with tarfile.open(archive_path) as archive:
+        members = archive.getmembers()
+        for member in members:
+            path = destination / member.name
+            if (Path(member.name).is_absolute() or ".." in Path(member.name).parts
+                    or not path.resolve().is_relative_to(destination.resolve())
+                    or not (member.isfile() or member.isdir())):
+                raise ValueError("unsafe/escaping/link member in owned job transfer")
+        for member in members:
+            path = destination / member.name
+            if member.isdir():
+                path.mkdir(parents=True, exist_ok=True)
+            else:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                with archive.extractfile(member) as source, path.open("wb") as output:
+                    for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                        output.write(chunk)
+
+
+def push_private(serial, source, relative):
+    validate_device(serial)
+    with Path(source).open("rb") as stream:
+        copied = subprocess.run(["adb", "-s", serial, "exec-in", "run-as", PACKAGE, "tee", relative],
+                                stdin=stream, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, timeout=120)
+    if copied.returncode:
+        raise RuntimeError(f"owned private job write failed: {relative}")
+
+
+def pull_private(serial, relative, destination):
+    validate_device(serial)
+    destination.mkdir(parents=True, exist_ok=True)
+    archive_path = destination / "owned-transfer.tar"
+    with archive_path.open("wb") as output:
+        copied = subprocess.run(["adb", "-s", serial, "exec-out", "run-as", PACKAGE,
+                                 "tar", "-cf", "-", "-C", relative, "."],
+                                stdout=output, stderr=subprocess.PIPE, timeout=300)
+    (destination / "transfer.log").write_bytes(copied.stderr)
+    if copied.returncode:
+        raise RuntimeError("owned private job pull failed; partial transfer preserved")
+    extract_owned_tar(archive_path, destination)
+    archive_path.unlink()
 
 
 def safe_member(directory, relative):
@@ -328,6 +374,7 @@ def prepare(args):
                 "pcm": pcm, "pcm_protocol": "16s bass-0.30 float32, seed12345; clip(rint(128+127*x),0,255); short input is exact 8s byte prefix; full1470-byte JNI blocks",
                 "config": {"width": 2364, "height": 1330, "fps": 30, "seed": 12345, "warmup_frames": 120,
                            "measurement_frames": 360, "capture_frames": capture_indices(360)},
+                "transport": "debug run-as private /data/user/0/dedicated-package/files/jobs; binary exec-in tee and exec-out tar",
                 "capture_format": "native RGB8, bottom_to_top; GLES RGBA readback with alpha stripped before SHA256",
                 "capture_hash_coverage": "corpus:selected frames only; full-readback pilot:every frame and concatenated native stream",
                 "retention": "corpus256x144 lossless PNGs/compact sampled metrics; native files only selected pilot/proof jobs",
@@ -370,14 +417,17 @@ def require_awake(serial):
 def install_role(serial, role, work):
     require_awake(serial)
     adb(serial, "shell", "am", "force-stop", PACKAGE)
-    # Preserve every prior owned job, including timeout partials, before data clear.
-    if adb(serial, "shell", "test", "-d", REMOTE, allow_failure=True).returncode == 0:
-        recovery = work / "recovered-device" / str(time.time_ns())
+    # Preserve both legacy shell staging and private timeout partials before role clear.
+    if adb(serial, "shell", "test", "-d", LEGACY_REMOTE, allow_failure=True).returncode == 0:
+        recovery = work / "recovered-device" / ("legacy-" + str(time.time_ns()))
         recovery.mkdir(parents=True)
-        pulled = adb(serial, "pull", REMOTE, str(recovery), timeout=300, allow_failure=True)
+        pulled = adb(serial, "pull", LEGACY_REMOTE, str(recovery), timeout=300, allow_failure=True)
         (recovery / "pull.log").write_bytes(pulled.stdout + pulled.stderr)
         if pulled.returncode:
-            raise RuntimeError("could not preserve prior owned remote job data; refusing role clear")
+            raise RuntimeError("could not preserve prior legacy staging; refusing role clear")
+    if adb(serial, "shell", "run-as", PACKAGE, "test", "-d", "files/jobs", allow_failure=True).returncode == 0:
+        recovery = work / "recovered-device" / ("private-" + str(time.time_ns()))
+        pull_private(serial, "files/jobs", recovery)
     adb(serial, "install", "-r", role["apk_path"], timeout=300)
     cleared = adb(serial, "shell", "pm", "clear", PACKAGE)
     if cleared.stdout.strip() != b"Success":
@@ -424,17 +474,17 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
         remote = REMOTE + "/" + job["job_id"]
         adb(serial, "shell", "am", "force-stop", PACKAGE)
         # Delete only this dedicated job's staging path; never touch other apps/presets.
-        adb(serial, "shell", "rm", "-rf", remote)
-        adb(serial, "shell", "mkdir", "-p", remote)
-        adb(serial, "push", str(directory / "job.json"), remote + "/job.json")
+        relative = "files/jobs/" + job["job_id"]
+        adb(serial, "shell", "run-as", PACKAGE, "rm", "-rf", relative)
+        adb(serial, "shell", "run-as", PACKAGE, "mkdir", "-p", relative)
+        push_private(serial, directory / "job.json", relative + "/job.json")
         audio = protocol["pcm"][str(120 + measurement_frames)]
-        adb(serial, "push", audio["path"], job["pcm_uint8_path"])
+        push_private(serial, audio["path"], relative + "/pcm.u8")
         process = adb(serial, "shell", "am", "instrument", "-w", "-e", "job", remote + "/job.json", COMPONENT,
                       timeout=args.timeout, allow_failure=True)
         (directory / "instrumentation.log").write_bytes(process.stdout + process.stderr)
         output = directory / "output"
-        pulled = adb(serial, "pull", job["output_directory"], str(directory), timeout=180, allow_failure=True)
-        (directory / "pull.log").write_bytes(pulled.stdout + pulled.stderr)
+        pull_private(serial, relative + "/output", output)
         if not (output / "result.json").is_file():
             raise ValueError("missing atomic APK result; instrumentation failed or crashed")
         result = json.loads((output / "result.json").read_text())
@@ -446,16 +496,14 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
             row.update(status="failed", error="instrumentation exited unsuccessfully despite result")
         adb(serial, "shell", "am", "force-stop", PACKAGE)
         # Host has pulled and verified all output; remove only owned remote scratch.
-        adb(serial, "shell", "rm", "-rf", remote)
+        adb(serial, "shell", "run-as", PACKAGE, "rm", "-rf", relative)
     except subprocess.TimeoutExpired as error:
         row.update(status="timeout", error="instrumentation/ADB job timeout")
         captured = (error.output or b"") + (error.stderr or b"")
         (directory / "timeout-command.log").write_bytes(captured)
         adb(protocol["device_serial"], "shell", "am", "force-stop", PACKAGE, allow_failure=True)
         try:
-            recovered = adb(protocol["device_serial"], "pull", job["output_directory"], str(directory),
-                            timeout=180, allow_failure=True)
-            (directory / "timeout-recovery.log").write_bytes(recovered.stdout + recovered.stderr)
+            pull_private(protocol["device_serial"], "files/jobs/" + job["job_id"] + "/output", directory / "output")
         except Exception as recovery_error:
             row["remote_partial_recovery_error"] = f"{type(recovery_error).__name__}: {recovery_error}"
     except Exception as error:
