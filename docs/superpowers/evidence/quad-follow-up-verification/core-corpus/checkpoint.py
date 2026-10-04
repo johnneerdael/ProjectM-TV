@@ -75,6 +75,8 @@ def verify_terminal_producer(directory, row, protocol, record):
     relative=row.get("result_path","output/result.json")
     result_path=directory/relative
     if not result_path.resolve().is_relative_to(directory.resolve()):raise ValueError("unsafe producer result path")
+    available=[p for p in [directory/"output/result.json",*directory.glob("attempts/*/output/result.json")] if p.is_file()]
+    if any(p.resolve()!=result_path.resolve() for p in available):raise ValueError("available current producer result is not attributed to the row")
     if "result_path" in row and not result_path.is_file():raise ValueError("claimed producer result path is missing")
     result=row.get("result")
     if not result_path.exists() and result is None:

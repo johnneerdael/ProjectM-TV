@@ -97,6 +97,17 @@ class BackupTests(unittest.TestCase):
         row["result_path"]="missing/result.json";run.save_row(path,row)
         with self.assertRaisesRegex(ValueError,"producer|result"):
             checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+    def test_omitted_result_fields_cannot_hide_incoming_producer(self):
+        self.save_failed_producer({"schema_version":2,"job_id":"wrong","protocol_sha256":"protocol",
+                                   "status":"failed","error":"load failed"})
+        incoming=self.directory/"attempts/current/output/result.json";incoming.parent.mkdir(parents=True)
+        (self.directory/"output/result.json").rename(incoming)
+        path=self.directory/"row.json";row=json.loads(path.read_text());row.pop("payload_sha256");row.pop("result")
+        for item in row["retained_files"]:
+            if item["path"]=="output/result.json":item["path"]="attempts/current/output/result.json"
+        run.save_row(path,row)
+        with self.assertRaisesRegex(ValueError,"producer|result"):
+            checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
 
     def test_snapshot_finds_actual_v2_runner_without_retagging_v1(self):
         import run_v2
