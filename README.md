@@ -209,6 +209,12 @@ Release builds on GitHub are signed with the release key; see [docs/RELEASING.md
 
 The engine is the `:core` module, which the open-source music streamer [Milkbeat](https://github.com/johnneerdael/Milkbeat) also uses.
 
+Older presets with plain uninitialized shader globals now retain those values as
+external inputs; unbound inputs start at zero, and shader writes use initialized
+copies for each invocation. Local variables keep their authored initialization
+requirements. See [shader initialization analysis](tools/milk-analyzer/README.md)
+for the target policy and its legacy-compatibility limits.
+
 ### Core rendering policies
 
 Two core AARs expose the same Java/JNI API with different rendering policies:

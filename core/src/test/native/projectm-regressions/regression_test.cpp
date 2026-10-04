@@ -1,5 +1,9 @@
-// Exercise the patched engine itself, including the evaluator and real GL drawing.
 #include "gl_context.hpp"
+#include <GLSLGenerator.h>
+#include <HLSLParser.h>
+#include <HLSLTree.h>
+#include "Renderer/Shader.hpp"
+// Exercise the patched engine itself, including the evaluator and real GL drawing.
 #include <HLSLParser.h>
 #include <HLSLTree.h>
 #include <MilkdropPreset/CustomWaveform.hpp>
@@ -50,6 +54,63 @@ static void TestMacros()
     }
 }
 
+static void TestImplicitInputBindings()
+{
+    GLContext context;
+    using namespace M4;
+    const char* vertex=
+#ifdef USE_GLES
+        "#version 300 es\n"
+#else
+        "#version 330\n"
+#endif
+        "void main(){ vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2); gl_Position=vec4(p*2.-1.,0,1); }";
+    struct Case { const char* source; const char* input; int components; int boundRed; };
+    for(const auto& test:{
+        Case{"float3 mus; void PS(out float4 r:COLOR0){r=float4(mus+.25,1);}","mus",3,115},
+        Case{"float dist_c; void PS(out float4 r:COLOR0){float before=dist_c;dist_c=.4;r=float4(before+.25,before,before,1);}","dist_c",1,115},
+        Case{"float2 uv3; void PS(out float4 r:COLOR0){uv3+=.25;r=float4(uv3,0,1);}","uv3",2,115}})
+    {
+        Allocator allocator;HLSLTree tree(&allocator);HLSLParser parser(&allocator,&tree);
+        const std::string source=test.source;
+        Check(parser.Parse("binding",source.data(),source.size()),"implicit binding source rejected");
+        GLSLGenerator generator;
+        Check(generator.Generate(&tree,GLSLGenerator::Target_FragmentShader,
+#ifdef USE_GLES
+            GLSLGenerator::Version_300_ES,
+#else
+            GLSLGenerator::Version_330,
+#endif
+            "PS"),"implicit binding translation rejected");
+        libprojectM::Renderer::Shader program;
+        program.CompileProgram(vertex,generator.GetResult());program.Bind();
+        GLuint framebuffer,texture,vao;
+        glGenFramebuffers(1,&framebuffer);glBindFramebuffer(GL_FRAMEBUFFER,framebuffer);
+        glGenTextures(1,&texture);glBindTexture(GL_TEXTURE_2D,texture);
+        glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,16,16,0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
+        glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,texture,0);
+        Check(glCheckFramebufferStatus(GL_FRAMEBUFFER)==GL_FRAMEBUFFER_COMPLETE,"binding framebuffer incomplete");
+        glGenVertexArrays(1,&vao);glBindVertexArray(vao);glViewport(0,0,16,16);
+        glDisable(GL_BLEND);
+        for(int invocation=0;invocation<3;++invocation)
+        {
+            if(invocation==1)
+            {
+                if(test.components==1)program.SetUniformFloat(test.input,.2f);
+                else if(test.components==2)program.SetUniformFloat2(test.input,{.2f,.2f});
+                else program.SetUniformFloat3(test.input,{.2f,.2f,.2f});
+            }
+            glDrawArrays(GL_TRIANGLES,0,3);
+            unsigned char pixel[4]{};glReadPixels(8,8,1,1,GL_RGBA,GL_UNSIGNED_BYTE,pixel);
+            const int want=invocation==0?64:test.boundRed;
+            Check(std::abs(int(pixel[0])-want)<=2,"implicit input value or invocation reset mismatch");
+            Check(glGetError()==GL_NO_ERROR,"implicit binding driver error");
+        }
+        glDeleteVertexArrays(1,&vao);glDeleteTextures(1,&texture);glDeleteFramebuffers(1,&framebuffer);
+        std::cout<<"bound and unbound implicit input: "<<test.input<<std::endl;
+    }
+}
+
 static void TestShaderRendering()
 {
     GLContext gl;
@@ -63,6 +124,14 @@ static void TestShaderRendering()
     Check(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "incomplete framebuffer");
     struct Case { const char* name; const char* shader; int red; };
     for (const auto& test : {
+        Case{"mixed-reverse", "float a,b=.25;\nshader_body { ret=a+b; }", 64},
+        Case{"mixed-alternating", "float a,b=.1,c,d=.15;\nshader_body { ret=a+b+c+d; }", 64},
+        Case{"implicit-mus", "float3 mus;\nshader_body { ret = mus+.25; }", 64},
+        Case{"implicit-dist", "float dist_c;\nshader_body { float before=dist_c; dist_c=.4; ret=before+.25; }", 64},
+        Case{"implicit-uv3", "float2 uv3;\nshader_body { uv3=.4*cos(42*uv3); ret=float3(uv3,0); }", 102},
+        Case{"explicit-zero-control", "float2 uv3=0;\nshader_body { uv3=.4*cos(42*uv3); ret=float3(uv3,0); }", 102},
+        Case{"nonzero-control", "float2 uv3=.1;\nshader_body { ret=float3(uv3,0); }", 26},
+        Case{"local-assigned-control", "shader_body { float3 mus; mus=.25; ret=mus; }", 64},
         Case{"control", "shader_body { ret = .25; }", 64},
         Case{"sample", "shader_body { float3 sample = .5; ret = sample*sample*sample; }", 32},
         Case{"sample-shadow", "float sample = .1;\nshader_body { float sample = .25; { float sample = .5; sample *= .5; } ret = sample; }", 64},
@@ -106,7 +175,7 @@ static void TestShaderRendering()
     glDeleteFramebuffers(1, &framebuffer);
 }
 
-static void TestParserPresets(const std::string& assets, const std::string& manifest)
+static void TestParserPresets(const std::string& assets, const std::string& manifest, int expected=16)
 {
     GLContext gl;
     using namespace libprojectM;
@@ -150,7 +219,7 @@ static void TestParserPresets(const std::string& assets, const std::string& mani
         }
         ++count;
     }
-    Check(count == 16, "expected exactly 16 unchanged witness presets");
+    Check(count == expected, "wrong number of unchanged witness presets");
     Check(failures == 0, "original shader rejected by production compiler");
 }
 
@@ -231,7 +300,9 @@ int main(int argc, char** argv)
         const std::string mode(argv[1]);
         if (mode == "macro") TestMacros();
         else if (mode == "shader-render") TestShaderRendering();
+        else if (mode == "implicit-bindings") TestImplicitInputBindings();
         else if (mode == "parser-presets" && argc == 4) TestParserPresets(argv[2], argv[3]);
+        else if (mode == "initialization-presets" && argc == 4) TestParserPresets(argv[2], argv[3],4);
         else if (mode == "waveform") TestWaveforms();
         else throw std::runtime_error("unknown test mode");
         std::cout << mode << " regressions passed\n";

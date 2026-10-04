@@ -20,6 +20,14 @@ struct Case
 int main(int argc, char** argv)
 {
     const std::vector<Case> cases = {
+        {"implicit-global-read", "float3 mus; float3 f() { return mus+.25; }"},
+        {"implicit-global-first-read", "float dist_c; float3 f() { float before=dist_c; dist_c=.4; return before+.25; }"},
+        {"implicit-global-self-read", "float2 uv3; float3 f() { uv3=.4*cos(42*uv3); return float3(uv3,0); }"},
+        {"implicit-global-helper", "float v; float read_v() { return v; } float3 f() { float before=read_v(); v=.4; return before+.25; }"},
+        {"implicit-global-mixed", "float a=.1,b; float3 f() { return a+b; }"},
+        {"local-control", "float3 f() { float v; v=.25; return v; }"},
+        {"initialized-global-control", "float v=.25; float3 f() { return v; }"},
+        {"static-global-control", "static float v; float3 f() { v=.25; return v; }"},
         {"sample-arithmetic", "float3 f() { float3 sample = float3(.2,.3,.4); return sample*sample*sample; }"},
         {"sample-assignment", "float3 f() { float3 sample = 0; sample = .5; sample += .1; return sample; }"},
         {"sample-shadow", "float sample = 1; float3 f() { float sample = .5; { float sample = .25; sample *= 2; } return sample; }"},
@@ -62,6 +70,16 @@ int main(int argc, char** argv)
             M4::GLSLGenerator generator;
             ok = generator.Generate(&tree, M4::GLSLGenerator::Target_FragmentShader,
                                     M4::GLSLGenerator::Version_300_ES, "PS");
+            if (ok && std::string(test.name).find("implicit-global") == 0)
+            {
+                const std::string glsl=generator.GetResult();
+                const char* uniform=std::string(test.name)=="implicit-global-read" ? "uniform vec3 mus;" :
+                    std::string(test.name)=="implicit-global-self-read" ? "uniform vec2 uv3;" :
+                    std::string(test.name)=="implicit-global-first-read" ? "uniform float dist_c;" :
+                    std::string(test.name)=="implicit-global-mixed" ? "uniform float b;" : "uniform float v;";
+                ok=glsl.find(uniform)!=std::string::npos;
+                if (!ok) std::cerr << "Missing external input declaration: " << uniform << std::endl;
+            }
             if (ok && argc >= 2)
             {
                 std::filesystem::create_directories(argv[1]);
