@@ -1,0 +1,29 @@
+{
+  "scope": "Initial partial actual-core coverage/family export; saved render artifacts remain in the original dataset and separate evidence branch, not this metadata archive.",
+  "verified_terminal_presets": 992,
+  "complete_coverage": false,
+  "files": [
+    {
+      "path": "build/follow-ups/core-corpus/baseline-family-audit.json",
+      "bytes": 8947545,
+      "sha256": "7e72cdfba712ae4f00e7ad03ad9bfa2597792fc608acef87b54572fe5ab96505"
+    },
+    {
+      "path": "build/follow-ups/corpus-family-review/preset-index.json",
+      "bytes": 6796565,
+      "sha256": "d456378f29a1027cf6c9789f97671782f6d16edf0c963bc82a6b3a18053a87d4"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/protocol.json",
+      "bytes": 17887,
+      "sha256": "c471ac2947cdd4af015a35ee7b56b9141970d8392c012b1e99eef8e24d927f70"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/inventory.json",
+      "bytes": 1519670,
+      "sha256": "60a9e4c7e798f18b746ebde76a6f5fafbe4315a0b7937f1846ffed3a5377b219"
+    }
+  ],
+  "archive_sha256": "649fdb33181e9ef0f4c06959843970f03dbac433e59a172755b8bd76d8b81dc8",
+  "archive_bytes": 4083264
+}
