@@ -39,3 +39,18 @@ The peer TV pilot's latest report had seven of eight full/selected equality
 checks pass, with one baseline Echasketch mismatch. The new Mac-emulator epoch
 needs its own reviewed pilot before treating its corpus as stable. Never merge
 failed or cross-device protocols into successful coverage.
+
+## Prepared candidate
+
+The shared-harness build completed successfully. Candidate APK:
+`build/follow-ups/core-corpus/candidate-cc3ca3448bc7-0b43830171d9/candidate-core-corpus.apk`.
+SHA256: `a4eb41e338fdf8aa1e480abe8f49304c91e1857d5596221f3735aa7a7d646364`.
+Embedded core ELF SHA256:
+`ab779853fe58e6d55c8a0d0aa6ce47a1ab0c73c2c69d045e538cb2c7c6f9286a`.
+
+`candidate-worker.json` preserves the full build identity.
+`compatibility-proof.json` confirms exact equality to the peer baseline for
+harness sources, instrumentation identity, engine-instrumentation diff,
+core-clock diff and the common twenty-four patches. Both compiled ABIs include
+all three actual core native units. The APK has not been installed on the peer
+emulator and has not yet produced shared-protocol candidate measurements.
