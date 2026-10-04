@@ -37,11 +37,16 @@ def run(cmd, cwd=None, log=None):
 
 
 def prepare(variant, commit):
-    harness_digest = digest({name: sha(HERE / name) for name in ("build.py", "CorpusInstrumentation.java", "LabBridge.java", "lab_bridge.cpp")})
+    frozen_inputs = {name: (HERE / name).read_bytes() for name in ("build.py", "CorpusInstrumentation.java", "LabBridge.java", "lab_bridge.cpp")}
+    harness_digest = digest({name: hashlib.sha256(data).hexdigest() for name, data in frozen_inputs.items()})
     destination = WORK / (variant + "-" + commit[:12] + "-" + harness_digest[:12])
     if destination.exists():
         raise ValueError(f"refuse to overwrite frozen build directory: {destination}")
     destination.mkdir(parents=True)
+    frozen_harness = destination / "harness-source"
+    frozen_harness.mkdir()
+    for name, data in frozen_inputs.items():
+        (frozen_harness / name).write_bytes(data)
     source = destination / "repo"
     source.mkdir()
     with tempfile.TemporaryDirectory(dir=destination) as temporary_name:
@@ -85,7 +90,7 @@ def prepare(variant, commit):
     if original.count(clock) != 1:
         raise ValueError("core clock instrumentation does not match snapshot")
     native.write_text(original.replace(clock, "double NowSeconds() { return lab::clock_seconds.load(); }"))
-    shutil.copyfile(HERE / "lab_bridge.cpp", core / "lab_bridge.cpp")
+    (core / "lab_bridge.cpp").write_bytes(frozen_inputs["lab_bridge.cpp"])
     cmake = core / "CMakeLists.txt"
     text = cmake.read_text()
     text = text.replace("add_subdirectory(${PROJECTM_SOURCE} projectm EXCLUDE_FROM_ALL)",
@@ -105,7 +110,7 @@ def prepare(variant, commit):
     java = app / "src/main/java/nl/neerdael/projectm/corecorpus"
     java.mkdir(parents=True)
     for name in ("CorpusInstrumentation.java", "LabBridge.java"):
-        shutil.copyfile(HERE / name, java / name)
+        (java / name).write_bytes(frozen_inputs[name])
     (app / "src/main/AndroidManifest.xml").write_text("""<manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <application android:label="ProjectM core corpus" android:extractNativeLibs="true" android:allowBackup="false" />
   <instrumentation android:name="nl.neerdael.projectm.corecorpus.CorpusInstrumentation" android:targetPackage="nl.neerdael.projectmtv.corecorpus" />
@@ -137,10 +142,10 @@ dependencies { implementation project(':core') }
         rows = [row for row in (ROOT / "local.properties").read_text().splitlines() if row.startswith("sdk.dir=")]
         (source / "local.properties").write_text("\n".join(rows) + "\n")
     instrumentation = {
-        "builder_sha256": sha(Path(__file__)),
+        "builder_sha256": sha(frozen_harness / "build.py"),
         "worker_builder_sha256": sha(ROOT / "tools/preset-lab/src/preset_lab/build_worker.py"),
         "analysis_hooks_sha256": sha(hooks),
-        "lab_bridge_sha256": sha(HERE / "lab_bridge.cpp"),
+        "lab_bridge_sha256": sha(core / "lab_bridge.cpp"),
         "core_clock_transformation": "private NowSeconds returns shared atomic logical frame clock; engine TimeKeeper uses same clock",
         "rng_transformation": "private deterministic instrumented engine; no production RNG parity claim",
     }
@@ -151,7 +156,9 @@ dependencies { implementation project(':core') }
                 "original_core_source_sha256": original_core,
                 "instrumented_core_source_sha256": {p.name: sha(p) for p in core.glob("*") if p.is_file()},
                 "instrumentation": instrumentation, "instrumentation_sha256": digest(instrumentation),
-                "harness_sources_sha256": {name: sha(HERE / name) for name in ("CorpusInstrumentation.java", "LabBridge.java", "lab_bridge.cpp")},
+                "harness_sources_sha256": {"CorpusInstrumentation.java": sha(java / "CorpusInstrumentation.java"),
+                                           "LabBridge.java": sha(java / "LabBridge.java"),
+                                           "lab_bridge.cpp": sha(core / "lab_bridge.cpp")},
                 "core_library_entry": "lib/arm64-v8a/libprojectmtv.so", "core_sha256": None,
                 "gradle_variant": "release", "native_build_type": "RelWithDebInfo", "prewarm_setting": "actual onMemoryPressure20s pause; job<20 logicalseconds"}
     assets = app / "src/main/assets"
@@ -167,6 +174,11 @@ dependencies { implementation project(':core') }
         subprocess.check_output(["git", "show", commit + ":core/src/main/cpp/CMakeLists.txt"], cwd=ROOT, text=True).splitlines(True),
         cmake.read_text().splitlines(True), fromfile="original/CMakeLists.txt", tofile="instrumented/CMakeLists.txt")))
     (destination / "identity.json").write_text(canonical(identity) + "\n")
+    identity["clock_instrumentation_diff_sha256"] = sha(destination / "private-core-diff.patch")
+    identity["engine_instrumentation_diff_sha256"] = sha(destination / "private-engine-diff.patch")
+    identity["cmake_instrumentation_diff_sha256"] = sha(destination / "private-cmake-diff.patch")
+    (assets / "backend-identity.json").write_text(canonical(identity) + "\n")
+    (destination / "identity.json").write_text(canonical(identity) + "\n")
     return destination, source, identity
 
 
@@ -178,6 +190,31 @@ def build(variant, commit):
     with zipfile.ZipFile(built) as archive:
         core = archive.read(identity["core_library_entry"])
     identity["core_sha256"] = hashlib.sha256(core).hexdigest()
+    caches = list((source / "core/.cxx/RelWithDebInfo").glob("*/*/CMakeCache.txt"))
+    if not caches:
+        raise ValueError("missing native compile cache evidence")
+    cache_evidence = []
+    for cache in caches:
+        lines = cache.read_text().splitlines()
+        actual_type = next((row.split("=", 1)[1] for row in lines if row.startswith("CMAKE_BUILD_TYPE:")), None)
+        flags = next((row.split("=", 1)[1] for row in lines if row.startswith("CMAKE_CXX_FLAGS_RELWITHDEBINFO:")), None)
+        if actual_type != "RelWithDebInfo" or flags is None or "-O2" not in flags or "-O0" in flags:
+            raise ValueError("native cache does not prove optimized RelWithDebInfo")
+        commands = cache.parent / "compile_commands.json"
+        if not commands.is_file():
+            raise ValueError("missing native compilation command evidence")
+        units = json.loads(commands.read_text())
+        wrapper_units = [row for row in units if Path(row["file"]).name in ("native-lib.cpp", "snapshot_fade.cpp", "preset_prewarm.cpp")]
+        if {Path(row["file"]).name for row in wrapper_units} != {"native-lib.cpp", "snapshot_fade.cpp", "preset_prewarm.cpp"}:
+            raise ValueError("compiled core translation-unit topology is incomplete")
+        if any("-O2" not in row.get("command", " ".join(row.get("arguments", []))) for row in wrapper_units):
+            raise ValueError("core compilation commands do not prove O2")
+        cache_evidence.append({"abi": cache.parent.name, "build_type": actual_type, "flags": flags,
+                               "cache_sha256": sha(cache), "compile_commands_sha256": sha(commands),
+                               "core_translation_units": [Path(row["file"]).name for row in wrapper_units]})
+    identity["native_compile_evidence"] = cache_evidence
+    if sha(Path(__file__)) != identity["instrumentation"]["builder_sha256"]:
+        raise ValueError("builder changed after snapshot; refuse to repackage with ambiguous provenance")
     (source / "corpus-app/src/main/assets/backend-identity.json").write_text(canonical(identity) + "\n")
     with (destination / "repackage.log").open("w") as log:
         run([str(source / "gradlew"), "--no-daemon", ":corpus-app:assembleRelease"], source, log)
