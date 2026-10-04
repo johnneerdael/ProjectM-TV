@@ -1,0 +1,13 @@
+{
+  "preset": {
+    "path": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+    "sha256": "163034eb002666dfd1966444dedd1a47853131e915a5cb2745bd09ff52a4e230",
+    "weight_mb": 0
+  },
+  "jobs": 14,
+  "all_success": true,
+  "all_profiles_same_eight_hashes_across_rounds": true,
+  "candidate_off_equals_baseline": true,
+  "scope": "sampled single-preset actual-core pilot, high-clipped authored reference; not acceptance or proof that desktop regression is fixed",
+  "jobs_payload_sha256": "26f5da1315d71f4426a032ae772c7aa180d5ee4b4da821b0b8a779134cdabba3"
+}

@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "metadata_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/worker-candidate.json",
+  "metadata_sha256": "f9c5166cde49e1473252eb03578a7f077d55623c4c30d9d3bba45e9f8d0dec7a",
+  "apk_sha256": "b3f1d7dcd71588fa0f06febaf8ded9c880da3a6f2697d626583735637716dffa",
+  "core_sha256": "ac8a9ba5ccc17d21df222a152986683a8f8a4092951c3e70f2054e86699fc763",
+  "aar_sha256": "f4096ee0226f25bb8e6f870319c838d87955da5de064bfc11d0a7843f8fce32c",
+  "one_line_copied_patch_difference": [
+    [
+      "+    m_framebuffer.CreateColorAttachment(0, FilteredAttachment);",
+      "+    m_framebuffer.CreateColorAttachment(0, FilteredAttachment, GL_RGBA16F, GL_RGBA, GL_HALF_FLOAT);"
+    ]
+  ],
+  "reverse_check_with_explicit_git_ceiling": "passed",
+  "embedded_identity_exact": true,
+  "aar_apk_elf_identity": true,
+  "compiled_units": [
+    {
+      "abi": "armeabi-v7a",
+      "compile_commands_sha256": "0721b7dadce33ca57e1f3036121e5155d7102318973e63cfa8d5ba569f5c6703",
+      "feedback_source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp"
+    },
+    {
+      "abi": "arm64-v8a",
+      "compile_commands_sha256": "17b19d63a3982325402480ee7cb38c2daf40c199d711526268e7eb422e700a53",
+      "feedback_source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp"
+    }
+  ],
+  "normal_candidate_comparison": {
+    "metadata_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/worker-candidate.json",
+    "metadata_sha256": "f31878eef2d705a8cc97940831fcc9b33ae3b429d427af188c488127bdb1a8ef",
+    "same_commit_observer_harness_prerequisite_patches_original_core": true,
+    "only_renderer_source_difference": "filtered attachment format overload"
+  },
+  "android_device_jobs": false,
+  "runtime_fbo_support": "must be checked by parent before measurement"
+}

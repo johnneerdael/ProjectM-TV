@@ -59,7 +59,8 @@ void glBindTexture(GLenum, GLuint) {}
 void glTexImage2D(GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const void*) {}
 void glTexParameteri(GLenum, GLenum, GLint) {}
 void glFramebufferTexture2D(GLenum, GLenum, GLenum, GLuint, GLint) {}
-GLenum glCheckFramebufferStatus(GLenum) { return GL_FRAMEBUFFER_COMPLETE; }
+GLenum g_framebufferStatus = GL_FRAMEBUFFER_COMPLETE;
+GLenum glCheckFramebufferStatus(GLenum) { return g_framebufferStatus; }
 void glBlitFramebuffer(GLint, GLint, GLint sw, GLint sh, GLint, GLint, GLint dw, GLint dh, GLbitfield, GLenum) {
   ++g_blits; g_blitSrcW = sw; g_blitSrcH = sh; g_blitDstW = dw; g_blitDstH = dh; }
 void glGetIntegerv(GLenum e, GLint* v) { *v = e == GL_PIXEL_PACK_BUFFER_BINDING ? (GLint)g_packBuffer : e == GL_PACK_ALIGNMENT ? 4 : 7; }

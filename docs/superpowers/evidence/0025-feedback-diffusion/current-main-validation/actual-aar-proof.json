@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "aar_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/follow-ups/core-corpus/baseline-0625587f12b9-0b43830171d9/repo/core/build/outputs/aar/core-release.aar",
+    "aar_sha256": "8a09eb5655eda7223790d2216782168bd30491a5a4c1af50e88c3ce5134553e4",
+    "apk_sha256": "fcede0eae549e1a93fb914e9cd2484713d3c55911f40cc5239dc4cd768eaf198",
+    "core_sha256": "8412ae670f8511c48b89b358d10dcc9fd81ec760353722d7cdfd86ea60efc5d2",
+    "patch_count": 29,
+    "source_commit": "0625587f12b9cd38c852e2517eb109b027fd6526",
+    "aar_and_apk_core_elf_identical": true
+  },
+  "candidate": {
+    "aar_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/follow-ups/core-corpus/candidate-5c8b0a2748c8-0b43830171d9/repo/core/build/outputs/aar/core-release.aar",
+    "aar_sha256": "0400b534779ba293beeb1e906b6bddba3c27ecb9d99757659ac6360138fb50d9",
+    "apk_sha256": "0b56b2e8325f073c86d5edac2277cd2167d21b58a8940403c1379a9e53f058fb",
+    "core_sha256": "46301141c0f10dd092e956a1156a58809b5c1c77f35baba9a83b57ba67903fdb",
+    "patch_count": 30,
+    "source_commit": "5c8b0a2748c88bbb8c95095c550b026c0ddd952f",
+    "aar_and_apk_core_elf_identical": true
+  }
+}

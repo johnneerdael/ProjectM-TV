@@ -16,6 +16,24 @@ The native runner also builds the patched projectM engine with ASan/UBSan and ch
 
 Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
 
+## Core rendering policies
+
+The core publishes two AARs with the same Java/JNI interface. Select a policy at build time:
+
+```sh
+./gradlew :core:assembleRelease -PprojectmCoreRenderingPolicy=capped
+./gradlew :core:assembleRelease -PprojectmCoreRenderingPolicy=native
+```
+
+Both commands produce `core/build/outputs/aar/core-release.aar`; copy the first AAR before building the second policy. Normal Gradle and APK builds default to `native`.
+
+- **Capped:** enforces a maximum internal render height of 1330p in the core, including direct JNI surface requests. Larger destination surfaces display the upscaled render. The Native choice and feedback diffusion are absent. If the capped intermediate framebuffer cannot be created, the core skips the frame rather than breaking the cap.
+- **Native:** keeps Auto and numeric fixed choices capped at 1330p, with a separate full-panel Native option when panel and memory limits permit it. Eligible above-reference rendering uses feedback diffusion, including Auto at 1330p. Higher resolution can cost more GPU work and memory or change feedback pictures.
+
+The canonical `projectM-TV-core.aar` and versioned `projectM-TV-core-<version>.aar` downloads use **capped**, preserving Milkbeat's default core policy. The explicit `projectM-TV-core-native.aar` and `projectM-TV-core-native-<version>.aar` downloads use **native**. The standard ProjectM TV APK uses the Native-capable core and defaults to Auto. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for publication and checksums.
+
+These policies are separate build choices, not a claim that feedback compensation preserves every preset or improves TV frame rate.
+
 ## Offline preset analysis
 
 [Preset Lab](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/preset-lab) is independently installable. It uses a private copy of the pinned engine and patches; its synthetic clock and seeds do not modify the Android renderer.

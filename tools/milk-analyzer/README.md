@@ -20,7 +20,7 @@ The other three presets are `Serge + martin - crystal palace tunnel003.milk`
 (`mus`), `martin - mandelbox explorer - wreck diver nz+ liquititty.milk`
 (`dist_c`) and `martin - organic light.milk` (`uv3`). The Microsoft legacy compiler
 reflects these globals as external constants with NULL defaults. Previously they
-became uninitialized ordinary GLSL globals. Patch 0038 preserves uninitialized
+became uninitialized ordinary GLSL globals. Patch 0040 preserves uninitialized
 scalar/vector float globals as uniform inputs and uses the existing initialized
 per-invocation copies when shaders write them. Mixed comma declarations preserve
 individual storage classes. Locals, static/const declarations, initialized globals,

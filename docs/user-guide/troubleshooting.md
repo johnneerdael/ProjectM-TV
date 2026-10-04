@@ -19,6 +19,14 @@ Keep **Resolution** and **Transitions** on Auto, and use the default half-refres
 
 Higher resolutions use more memory. Keep Memory limit enabled, particularly on TVs with 2 GB RAM. After a memory-pressure report, automatic resolution may stay lower for the session.
 
+If you selected **Native**, switch back to **Auto**. Native holds the detected panel height; it does not lower the resolution when a preset is slow or Android reports memory pressure.
+
+## Native is missing or the picture looks different
+
+Native is offered only for a detected panel height above 1330p when **Memory limit** permits the entire panel height. For example, a 4K TV whose RAM limit permits only 1440p will not offer Native. **Advanced → Diagnostics** shows the detected panel and actual render size. Keep Memory limit enabled to leave room for your music player.
+
+Feedback presets can change brightness, colour and pattern at higher resolution. The compensation under evaluation does not preserve every preset's appearance. Compare another preset or return to Auto; sharper output is not a guarantee of the same picture.
+
 ## A preset looks different when revisited
 
 Some presets choose random images from the bundled texture pack each time they load. Those choices stay fixed while the preset plays and are shared by its rendering stages. Revisiting the preset can choose other images; the renderer preserves each alias's requested filtering and edge wrapping. This does not guarantee the same appearance as MilkDrop on Windows.
