@@ -1,0 +1,240 @@
+{
+  "status": "BUILT_NOT_RUN",
+  "purpose": "F7 actual-Core optional shader failure paired controls; runtime verdict pending",
+  "adapter_sha256": "65eeea6f1347344ba2b16f0827bc99e67dd8545777bc84fdf7cf36cb2a49a811",
+  "frozen_plan_sha256": "7030fd5fee67a6736ba39299194b1b32c1f4ce19370a7691cd525ef909a4ac57",
+  "shared_provider_sha256": "9dec52595390ccad79e806be69543ead19f195f13c360be8ccf87aba934f0cf5",
+  "frozen_observer_sha256": {
+    "build.py": "9dec52595390ccad79e806be69543ead19f195f13c360be8ccf87aba934f0cf5",
+    "run.py": "a29c40ba919487f0fd748c0fc50421346c85983ce40b2711897a2a14766801a7",
+    "CorpusInstrumentation.java": "2e250f2113aee4e024820855b271bc96f436326675af1c14045da35bb327e1bb",
+    "LabBridge.java": "f011d57843049365995017fd935db525ab10e1ebe9adc2670a362e81bafbcbcc",
+    "lab_bridge.cpp": "4c731d2003a8e24840a5445571ddba81b5c1906b700e97463ce6ecfa00030981"
+  },
+  "common_stderr_observer": {
+    "transforms": {
+      "CorpusInstrumentation.java": {
+        "original_sha256": "789a2489d1a5a3627656da8d23c981ab9be196c970e17fc640252aba0c2621e9",
+        "instrumented_sha256": "2e250f2113aee4e024820855b271bc96f436326675af1c14045da35bb327e1bb",
+        "diff_sha256": "aec884a8cd24235e605103e359cefaf02022421e21e474955536872c2c09ff9b"
+      },
+      "LabBridge.java": {
+        "original_sha256": "db17b2e9d92f7114c98d19c9f2565f637313ab2fc8c9dd7a68764f85b8989379",
+        "instrumented_sha256": "f011d57843049365995017fd935db525ab10e1ebe9adc2670a362e81bafbcbcc",
+        "diff_sha256": "c123805630c5e08a237b8ccb030a1e8354b013f784ad9ac91e08754bdb5653d3"
+      },
+      "lab_bridge.cpp": {
+        "original_sha256": "84e82c6d52c05da45ae5ce643431ea501a0415034dfb24eb9c5ab961180d57c9",
+        "instrumented_sha256": "4c731d2003a8e24840a5445571ddba81b5c1906b700e97463ce6ecfa00030981",
+        "diff_sha256": "3dc438fb0dad5ae8f030b4ba4fb83fdf5de539202a9f8c76cbb10c04acd60241"
+      }
+    },
+    "scope": "identical fd2 redirection helper before first core init/constructor; flush/restore in finally; all original GL/readback/clock/seed functions byte-exact; no renderer/math/kernel/preset changes",
+    "required_runtime_diagnostic": "real native-diagnostics.stderr file must contain feedback diffusion disabled plus ShaderException compiler text; JSON metadata excluded",
+    "export": "capture0600 in own app-internalprivateJob; afterrestore Java existing write helper copies bytes into external output for standard verified ADBpull; no root/adbd privilege changes"
+  },
+  "all_paired_assets_identical": true,
+  "observed_ProjectMJNI_class_identical": true,
+  "all_paired_Core_Java_classes_identical": false,
+  "Core_Java_class_differences": {
+    "nl/neerdael/projectm/core/QualityController.class": {
+      "baseline": "62433837b0d1e847f232053cc61ad9d436fb540bf3ae2d5267505df6028eefe6",
+      "candidate": "8da145fb3522cad4bfb4c948840d274f366a594fb84f41b73a82429401bbe55b"
+    }
+  },
+  "Java_difference_scope": "Only prescribed production QualityController Native-optin differs; frozen harness never references it; each private role Core classes byte-match its respective normal role",
+  "fault_literal_embedded_in_candidate_ELF_only": true,
+  "executed_build_adapter_sha256": "65eeea6f1347344ba2b16f0827bc99e67dd8545777bc84fdf7cf36cb2a49a811",
+  "paired_assets_sha256": "bff049e5fe9b75866801a0cec3f0c5693642d190377a4f686434e309bf68928d",
+  "fixture_overlays": [
+    {
+      "case": "visible-custom-warp",
+      "fixture_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-classic35/f7-plan/fixtures/visible-custom-warp.milk",
+      "fixture_sha256": "def4815b52bb63d407647abe8c413ae810b1d586f3fc0965a9631f8907132e45",
+      "overlay_apk_entry": "assets/presets/zip lock badge - in the bra.milk",
+      "original_asset_sha256": "1ec142dab96a2c7e659b16677a7f9f76563fb9a38fc9d5519ab484448cb3b7d6",
+      "paired_roles_bytes_identical": true
+    },
+    {
+      "case": "mixed-point-packed-and-bilinear",
+      "fixture_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-classic35/f7-plan/fixtures/mixed-point-packed-and-bilinear.milk",
+      "fixture_sha256": "969452ee87e7fb25d9d2e6e1fc4e43119857d4d4f89b89b4118b12f752b2fc0e",
+      "overlay_apk_entry": "assets/presets/zip lock badge - pretending in so many fucked up ways.milk",
+      "original_asset_sha256": "457e31ad6f1b73cbe92e0611a14486b46542a90b19c12c4985d6cb20a39acaaa",
+      "paired_roles_bytes_identical": true
+    },
+    {
+      "case": "classic-visible-wave-and-shape",
+      "fixture_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-classic35/f7-plan/fixtures/classic-visible-wave-and-shape.milk",
+      "fixture_sha256": "8f11e5489363fff21a984b2f102ce428ada9b41bf83cfec927d436d2724a4e5e",
+      "overlay_apk_entry": "assets/presets/zip lock badge.milk",
+      "original_asset_sha256": "9ea3fc24943b2474d1a0c8a1051f047f73ffc2f2d8e2ca6a2e82dffc9e50784e",
+      "paired_roles_bytes_identical": true
+    }
+  ],
+  "planned_config": {
+    "width": 512,
+    "height": 288,
+    "reference_width": 128,
+    "reference_height": 72,
+    "scale": 4,
+    "fps": 30,
+    "warmup_frames": 0,
+    "measurement_frames": 60,
+    "repeats_per_role": 2,
+    "seed": 12345,
+    "capture_mode": "full",
+    "capture_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "retain_native_frames": true,
+    "paused_prewarm": "actual onMemoryPressure20s policy;2logicalseconds perjob"
+  },
+  "planned_jobs": 12,
+  "device_jobs": 0,
+  "roles": {
+    "baseline": {
+      "metadata_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/worker-baseline.json",
+      "metadata_sha256": "eb5f5d272fbddb219240be290d037f59510318b4b404f78629c76724ce3b5205",
+      "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/baseline-core-corpus.apk",
+      "apk_sha256": "5719d756f7a6e284e555ab7678bae27dab4c3f7cfd31b25e454330f766baec95",
+      "core_sha256": "e7fc2d23d2f784ed5f4e946d62673bcc51aca3d9ab29e09210305d40fa5462ce",
+      "actual_core_aar": {
+        "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/build/outputs/aar/core-release.aar",
+        "sha256": "5acd96055be2a61fc6813f20489b1e3c0fb9de123774ab38c2361d45dc88e993",
+        "native_sha256": {
+          "jni/arm64-v8a/libprojectmtv.so": "e7fc2d23d2f784ed5f4e946d62673bcc51aca3d9ab29e09210305d40fa5462ce",
+          "jni/armeabi-v7a/libprojectmtv.so": "993431e004578494846cf02b3fbc0725685571c03031148cf8dfd8ebe5c8d199"
+        },
+        "apk_elf_identity": true
+      },
+      "native_compile_evidence": [
+        {
+          "abi": "armeabi-v7a",
+          "build_type": "RelWithDebInfo",
+          "flags": "-O2 -g -DNDEBUG",
+          "cache_sha256": "5715505be944268b9b604d1665f847186ffc0b643d28e4d0e3166b8449e5c55f",
+          "compile_commands_sha256": "b60e285fa21564660f44f8f21a7336136315d1ec7bf72ea31175d6ae8cbf074d",
+          "core_translation_units": [
+            "native-lib.cpp",
+            "snapshot_fade.cpp",
+            "preset_prewarm.cpp"
+          ]
+        },
+        {
+          "abi": "arm64-v8a",
+          "build_type": "RelWithDebInfo",
+          "flags": "-O2 -g -DNDEBUG",
+          "cache_sha256": "b97909b67e0fcc9d6d154f23aa169b201e18b7898a3e3556b5b87cd1960b467f",
+          "compile_commands_sha256": "042086e468603d4364655997e8eb1aedcdc6507a2622cdc8bae18dd849a2ea5a",
+          "core_translation_units": [
+            "native-lib.cpp",
+            "snapshot_fade.cpp",
+            "preset_prewarm.cpp"
+          ]
+        }
+      ]
+    },
+    "candidate": {
+      "metadata_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/worker-candidate.json",
+      "metadata_sha256": "ae10b32c5c0ea6876a5fa1b28308ee78fec331f1d8d2bdf4e6d8ff726f3610dd",
+      "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/candidate-core-corpus.apk",
+      "apk_sha256": "ef7032bf59de3a974469bde655c0f72e526ab1c39613de967d90d6adfe5813b1",
+      "core_sha256": "b1c1efddca2231e409a4040b229edc41b9c08e59e490b29faa402d1d6d06d791",
+      "actual_core_aar": {
+        "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/build/outputs/aar/core-release.aar",
+        "sha256": "30c27fba0d19c964d4dde56991ceb7828079c5f1b8ae01672f1caff8668390cd",
+        "native_sha256": {
+          "jni/arm64-v8a/libprojectmtv.so": "b1c1efddca2231e409a4040b229edc41b9c08e59e490b29faa402d1d6d06d791",
+          "jni/armeabi-v7a/libprojectmtv.so": "fa846e8a4988043f2f8c7b007f1d0030bfa37c37ca285a8285adf15eb2d88946"
+        },
+        "apk_elf_identity": true
+      },
+      "native_compile_evidence": [
+        {
+          "abi": "armeabi-v7a",
+          "build_type": "RelWithDebInfo",
+          "flags": "-O2 -g -DNDEBUG",
+          "cache_sha256": "a8b35692cd2936cb75a96971819f4f90817bf97d87b097a483f3da7d9dcc7898",
+          "compile_commands_sha256": "cc814e91dab50e821a03878148563bb7f02270fcfd55c20ba5001308cfc17fa3",
+          "core_translation_units": [
+            "native-lib.cpp",
+            "snapshot_fade.cpp",
+            "preset_prewarm.cpp"
+          ]
+        },
+        {
+          "abi": "arm64-v8a",
+          "build_type": "RelWithDebInfo",
+          "flags": "-O2 -g -DNDEBUG",
+          "cache_sha256": "5f81d6141c6c91da6f9bdcb17b2ae97eca1effab3cce955eb28a26d0eb570a98",
+          "compile_commands_sha256": "97e1ab583b295192833807a5f58d6fed7330ad608cc84d4a6a95f15bd6a887bd",
+          "core_translation_units": [
+            "native-lib.cpp",
+            "snapshot_fade.cpp",
+            "preset_prewarm.cpp"
+          ]
+        }
+      ]
+    }
+  }
+}

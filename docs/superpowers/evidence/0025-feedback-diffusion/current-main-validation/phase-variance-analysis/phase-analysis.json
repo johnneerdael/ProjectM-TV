@@ -1,0 +1,31 @@
+{
+  "measured_driver_counterexamples": {
+    "driver_results": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/phase-variance-analysis/driver-results.txt",
+    "fp16_driver_results": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/phase-variance-analysis/fp16-driver-results.txt",
+    "full_renderer_results": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/phase-variance-analysis/full-renderer-results.txt",
+    "full_renderer_proof": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/phase-variance-analysis/full-renderer-proof.json",
+    "filter_class_identity": "Native200/reference100: OFF exactidentity andinteger2-native-texel translation through8steps; uniformvariance0.5 lowers interiorchecker SD80\u219250.1248 after1\u21924.96826 after8.",
+    "filter_class_max_sink": "Four integer-reference neighboring reads, .94*max-.04: OFF peaks110/93/11 atsteps1/2/8; ON20/0/0. FP16filteredstorage gives the same extinction, so this synthetic loss does not require theextra8bit intermediate rounding.",
+    "full_renderer_identity": "Native200/reference100, identicalseed: OFFSD40 for8steps; ONSD10.6066 after1,3 after2,0 by8. Integer-reference translation shows the same result.",
+    "full_renderer_max_sink": "Atstep8, reference100mean.27 byte, nativeOFFmean.264375/peak11, nativeONmean0/peak0. These are matched syntheticfixtures, not realpreset acceptance.",
+    "boundary": "Samevariance0.5 stencil: globallyclamped prefilter gives edgebytes0(left),255(right); wrappedprefilter64(left),191(right). GL_REPEAT afteraclampedfilter cannot restorewrappedneighbor footprints. Localizedboundaryeffect; no quantitativepreset-scale attribution."
+  },
+  "phase_distinction": {
+    "main_point": "Fractional sampling phase, rather than movement magnitude, determines bilinear variance.",
+    "integer_translation": "At reference output pixel centres, displacement d_ref=0 or 1 has f_ref=0. At scale 2, its native displacement is 0 or 2 texels, also integer. Both interpolation variances are zero, despite nonzero movement in the second case.",
+    "half_reference_translation": "At scale 2, d_ref=0.5 has f_ref=0.5 and f_native=0. The moment difference is 4*0.25=1 native pixel squared. A shorter displacement can therefore need more smoothing than an integer displacement.",
+    "absolute_native_uv_counterexample": "At native centre u=(i+0.5)/200, frac(u*100-0.5) alternates between 0.75 and 0.25 even for identity. Substituting that native-site phase into a reference formula would request variance 0.75 instead of zero. Native output sites are not reference pixel centres.",
+    "provisional_formula": "Per axis: max(0, s_axis^2*f_ref*(1-f_ref)-f_native*(1-f_native)). This is a diagnostic moment calculation, not a shipping algorithm. Obtain f_ref from the corresponding authored read at reference output centres, not from the absolute phase of native UV.",
+    "negative_difference_limit": "At reference 99 or 101 with native 200, an integer reference displacement becomes fractional on the native grid. Native interpolation can already exceed reference variance. A nonnegative blur cannot undo that excess.",
+    "coordinate_limit": "Relative displacement supplies reference phase exactly for constant translations. For spatially varying or data-dependent reads, displacement evaluated at native sites is not displacement at reference sites. Record unwrapped coordinates and compare on the actual reference grid. Different coordinates from one sampler may require different footprints.",
+    "boundary_limit": "Clamp and wrap select different neighbours at boundaries. Clamping can collapse the footprint to one edge pixel. One globally clamped filtered image cannot reproduce both linear clamp and linear wrap reads."
+  },
+  "actual_read_trace": {
+    "Fed": "Lines 231\u2013243 use newuv=uv, four cardinal GetPixel offsets of one reference texel, and four diagonal reads from older blur. Lines 244\u2013253 apply max followed by 0.94*x-0.04. Static zoom=0.97848 and warp=0.01 mean base uv need not equal uv_orig; integer offsets do not prove zero total phase.",
+    "astral": "Lines 593\u2013594 set warp=0 and zoom=1 each frame. The first sampler_main,uv read at 598 is an identity read. The max reads at 601/612 scale uv around 0.5 and have coordinate-specific phases. A gate based only on mesh movement would conflate these distinct reads."
+  },
+  "minimal_actual_core_fixture_design": "Use the exact recorded synthetic fixtures as a private asset overlay on matched actual-core builds. Keep render size, reference values, line options, PCM and seed identical. The active warp reads GetPixel(uv); the OFF control adds only 0*GetPixel(uv_orig) to invoke the existing conservative gate. Seed once with frame<1, retain native captures and source hashes, validate recurrence and fresh-process repeats. This is a component diagnostic, not corpus acceptance.",
+  "real_case_observer_design": "If requested later, record unwrapped main-read coordinates, uv_orig, texture and reference-grid dimensions, descriptor filter/wrap mode and read validity in private read-only sidecars. Compare corresponding reference-grid runs; do not infer reference phase from native UV or displacement length alone. FP32 or integer bit encoding is needed for reliable subpixel coordinates at 4K. Preserve original pixel outputs and verify observer hashes before interpretation.",
+  "implementation_question": "Can individual bilinear reads receive their authoredreference footprint, includingzero/integerdisplacement, branch-specific coordinates andwrap/clamp boundaries, within the devicecost budget? Awhole-imageaverage1/6 stencil or movement-magnitude threshold does not answerthat question.",
+  "status": "Evidence recorded and experimental development stopped. No device lease, background process, root edits or production algorithm selection."
+}
