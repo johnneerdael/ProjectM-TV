@@ -52,6 +52,44 @@ class BackupTests(unittest.TestCase):
     def test_explicit_failed_terminal_job_remains_checkpointable(self):
         result=checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
         self.assertEqual(result["key"],self.key);self.assertEqual(result["status"],"failed")
+    def save_failed_producer(self, result):
+        packet={"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol",
+                "preset_filename":"x.milk","preset_sha256":"source",
+                "expected_core_sha256":"core","capture_mode":"selected",
+                "measurement_frames":360,"warmup_frames":120}
+        run.atomic(self.directory/"job.json",packet)
+        run.atomic(self.directory/"output/result.json",result)
+        row=dict(self.row,result=result,retained_files=[
+            {"path":"job.json","sha256":run.file_hash(self.directory/"job.json")},
+            {"path":"output/result.json","sha256":run.file_hash(self.directory/"output/result.json")}])
+        run.save_row(self.directory/"row.json",row)
+
+    def test_failed_producer_wrong_identity_cannot_be_checkpointed_after_rehash(self):
+        base={"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol","status":"failed",
+              "error":"load failed","core_sha256":"core","requested_preset_sha256":"source"}
+        for field in ["job_id","protocol_sha256","core_sha256","requested_preset_sha256","status"]:
+            with self.subTest(field=field):
+                self.save_failed_producer(dict(base,**{field:"other"}))
+                with self.assertRaisesRegex(ValueError,"producer|provenance|status"):
+                    checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+
+    def test_failed_row_cannot_hide_or_rewrite_retained_producer(self):
+        base={"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol","status":"failed","error":"load failed"}
+        for remove in (False,True):
+            with self.subTest(remove=remove):
+                self.save_failed_producer(base)
+                path=self.directory/"row.json";row=json.loads(path.read_text());row.pop("payload_sha256")
+                if remove:row.pop("result")
+                else:row["result"]["error"]="rewritten"
+                run.save_row(path,row)
+                with self.assertRaisesRegex(ValueError,"producer|result"):
+                    checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+
+    def test_pre_engine_failure_without_runtime_fields_remains_checkpointable(self):
+        self.save_failed_producer({"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol",
+                                   "status":"failed","error":"PCM checksum mismatch before init"})
+        result=checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+        self.assertEqual(result["status"],"failed")
     def test_partial_job_without_terminal_row_is_not_covered(self):
         (self.directory/"row.json").unlink()
         self.assertIsNone(checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key))

@@ -59,6 +59,45 @@ def verify_protocol(work):
     return protocol, inventory
 
 
+def verify_terminal_producer(directory, row, protocol, record):
+    packet_path=directory/"job.json"
+    packet=json.loads(packet_path.read_text()) if packet_path.exists() else None
+    expected={"schema_version":2,"job_id":row["key"],"protocol_sha256":protocol["sha256"],
+              "preset_filename":record["path"],"preset_sha256":record["sha256"],
+              "capture_mode":row["capture_mode"],"measurement_frames":row["measurement_frames"],
+              "expected_core_sha256":protocol["roles"][row["role"]]["core_sha256"]}
+    if packet is not None:
+        for field,value in expected.items():
+            if packet.get(field)!=value:raise ValueError("input job provenance mismatch: "+field)
+        for field in ("width","height","fps","seed"):
+            if field in protocol["config"] and packet.get(field)!=protocol["config"][field]:
+                raise ValueError("input configuration provenance mismatch: "+field)
+    relative=row.get("result_path","output/result.json")
+    result_path=directory/relative
+    if not result_path.resolve().is_relative_to(directory.resolve()):raise ValueError("unsafe producer result path")
+    result=row.get("result")
+    if not result_path.exists() and result is None:
+        if row["status"] not in ("failed","timeout") or not isinstance(row.get("error"),str) or not row["error"].strip():
+            raise ValueError("missing producer result without explicit host failure")
+        return
+    if packet is None or not result_path.is_file() or not isinstance(result,dict):
+        raise ValueError("missing producer result or input job provenance")
+    if not any(f["path"]==relative for f in row["retained_files"]):
+        raise ValueError("producer result is not retained evidence")
+    if json.loads(result_path.read_text())!=result:raise ValueError("producer result differs from terminal row")
+    for field in ("schema_version","job_id","protocol_sha256"):
+        if result.get(field)!=packet[field]:raise ValueError("producer provenance mismatch: "+field)
+    if result.get("status") not in ("success","failed"):raise ValueError("invalid producer status")
+    if result["status"]=="failed":
+        if row["status"]=="success" or not result.get("error"):raise ValueError("invalid producer failure status")
+    elif row["status"] in ("failed","timeout") and not row.get("error"):
+        raise ValueError("successful producer lacks explicit host failure reason")
+    available={"core_sha256":expected["expected_core_sha256"],"requested_preset_sha256":record["sha256"]}
+    available.update({field:packet[field] for field in ("preset_filename","capture_mode","capture_frames","width","height","fps","seed") if field in packet})
+    for field,value in available.items():
+        if field in result and result[field]!=value:raise ValueError("producer provenance mismatch: "+field)
+
+
 def verify_job(work, protocol, inventory, job_id):
     directory = work / "jobs" / job_id
     path = directory / "row.json"
@@ -75,6 +114,7 @@ def verify_job(work, protocol, inventory, job_id):
     expected = run.job_key(protocol["sha256"],record,row["role"],row["capture_mode"],row["repeat"],row["measurement_frames"])
     if expected != job_id:
         raise ValueError("job key provenance mismatch")
+    verify_terminal_producer(directory,row,protocol,record)
     if row["status"] == "success":
         job = json.loads((directory / "job.json").read_text())
         result = json.loads((directory / "output/result.json").read_text())
