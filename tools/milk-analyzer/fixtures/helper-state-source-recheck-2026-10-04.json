@@ -1,0 +1,109 @@
+{
+  "basis": "Targeted source-only reparse of recorded helper-global-write witnesses",
+  "distinct_presets": 14,
+  "sections_rechecked": 14,
+  "complete_sections": 14,
+  "rows": [
+    {
+      "preset": "EVET - The Beast of Eden.milk",
+      "preset_sha256": "2673f009ca4cfc52ce76b390714d9701d60a20b4878fa380e6b145cbfa3ef7eb",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Isosceles mashup16.milk",
+      "preset_sha256": "83066cc55401b2e2daeaf05d652ae2029f3f14d48400a2e817de210e0c258716",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "martin - city lights.milk",
+      "preset_sha256": "4fbc0750baa2a0d1c6706a9412945306e4238601f67bd9a2c3095eb55b219d29",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "martin - open machinery hazard.milk",
+      "preset_sha256": "a1961129c1b75ad71c951487661c811829ff80793e168cb89ee29fa86d7eeefd",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (83).milk",
+      "preset_sha256": "a79fbbb3d43d38691283147b08c63eb279c431dbe530bdb15188b336427766ac",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (85).milk",
+      "preset_sha256": "7630ddd93d03bef3e1093c3172fdc6b0e3223ec8e62b8fe231f4a80a10436cd4",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (88).milk",
+      "preset_sha256": "57c4806d624e284e6b6e9fb620c6968041ea7de2df5d6aab0af3606673702c39",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (90).milk",
+      "preset_sha256": "40c04cbc6068c909a6e6c7b6d077fdf80650e47cecd74d2801d071ee947a158b",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (95).milk",
+      "preset_sha256": "41ed13f010d011b56eeda36e0f3887ae8e19607d3fc734641a6c81c645459d36",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (97).milk",
+      "preset_sha256": "797355706972ac99b2b0a1086a1494fa782d736760a52e415558b64e43bdc703",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (99).milk",
+      "preset_sha256": "ca05c3d12cacc446e2771640ccfeaebf0aa26230ea122435abe6fe002e652d1a",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "martin - attack of the beast [flexi's plasma + glass lens mix].milk",
+      "preset_sha256": "39d274727b1ead6a57828205b1af7cd81771bae22ac1c5cd62a046b98c27decd",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (54).milk",
+      "preset_sha256": "15a39b34e3c2204d2ddc57f65a91c58143e45c2da5f5c1fea1246e746443cbac",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "xtramartin (55).milk",
+      "preset_sha256": "fe073d925eb191c3294d3ea6b3b1311b460ef8e6a89e20586e71d8b56144385c",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    }
+  ],
+  "appearance_accuracy_verified": false,
+  "recorded_gap_uses": 17,
+  "implementation_sha256": "8ea88c795de5d76cb9908f413e4929d5f72b75dc28a335b07e54a07842287159"
+}

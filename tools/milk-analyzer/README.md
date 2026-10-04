@@ -619,7 +619,7 @@ timeout or invalid output as unknown, with no predicted fallback. This is separa
 from an established syntax rejection and leaves the pinned engine untouched.
 
 Unsupported bitwise unary expressions, conditional/logical assignment effects,
-unsequenced arithmetic/comparison updates, helper output arguments/global writes,
+unsequenced arithmetic/comparison updates, helper output arguments,
 loop-condition side effects, `break`/`continue`, nonterminal helper returns,
 unresolved array sizes/initializer layouts, index-expression side effects,
 non-writable matrix row assignments and same-name initializer
@@ -631,6 +631,17 @@ result unknown; a discarded expression cannot silently hide lost state changes.
 The numeric evaluator raises on absent symbolic inputs, unsupported operations,
 or nonfinite domains/conversions. Its binary32 arithmetic is not guaranteed to
 match GPU rounding, fused operations or transcendental functions bit for bit.
+
+Sequenced helper global writes now survive calls, parameter/local shadowing,
+branches and loops. Transitive helper writes become loop-carried state; unsafe
+shared-read/write ordering remains explicit. Destination indices are captured
+before assignment RHS evaluation according to the GLSL330/GLES300 target rules.
+All 14 distinct recorded helper-global-write witness sections now lower. Three
+analytic helper-state fixtures matched the unchanged published core on an
+isolated API34 emulator with zero RGB8 error across all30 frames each. See
+`fixtures/helper-state-source-recheck-2026-10-04.json` and
+`fixtures/helper-state-native-proof-2026-10-04.json`. This does not establish
+whole-preset appearance accuracy.
 
 Remaining work includes faithful source geometry/rasterization, external texture
 loading and random shader uniforms, complete drawing/blend ordering, all helper/loop/control-flow

@@ -43,6 +43,7 @@ class ShaderFields:
         self.functions={};self.global_names=set();self.globals={};self.call_stack=[]
         self.frame_wrap=frame_wrap;self.sampler_bindings={}
         self.effects=[]
+        self.local_names=set()
         self.sample_counter=0
         self.matrix_constructors=set()
 
@@ -224,6 +225,7 @@ class ShaderFields:
             # components invalid rather than requesting a fictitious uniform.
             kind='uninitialized' if argument['modifier']==2 else 'input'
             self.environment[argument['name']]=Field(kind,dtype=argument['type']['name'],detail={'name':argument['name']})
+            self.local_names.add(argument['name'])
         self.statements(entries[0]['body'])
         if 'ret' not in self.environment:return self.unsupported('missing shader result')
         result=self.environment['ret']
@@ -232,12 +234,50 @@ class ShaderFields:
         if self.effects:result=Field('sequence',tuple(self.effects)+(result,),result.dtype)
         return result
 
-    def helper(self,node:dict,args:tuple,dtype:str)->Field:
-        name=node['function'];candidates=self.functions[name]
+    def helper_candidates(self,node):
+        candidates=self.functions.get(node['function'],[])
         signature=node.get('signature')
         if signature is not None:
             expected=[a['type'] for a in signature]
             candidates=[f for f in candidates if [a['type'] for a in f['args']]==expected]
+        return candidates
+
+    def global_access(self,node,seen=None):
+        """Conservative transitive read/write sets for shared shader variables."""
+        seen=set() if seen is None else seen
+        reads=set();writes=set()
+        if isinstance(node,list):children=node
+        elif isinstance(node,dict):
+            if node.get('kind')=='variable' and node.get('global'):reads.add(node['name'])
+            target=None
+            if node.get('kind')=='binary' and node['operator']>=16:target=node['left']
+            elif node.get('kind')=='unary' and node['operator'] in {3,4,5,6}:target=node['operand']
+            while target is not None and target.get('kind') in {'member','index'}:target=target['object']
+            if target is not None and target.get('global'):writes.add(target['name'])
+            children=list(node.values())
+            if node.get('kind')=='call':
+                for function in self.helper_candidates(node):
+                    if id(function) not in seen:
+                        r,w=self.global_access(function['body'],seen|{id(function)})
+                        reads.update(r);writes.update(w)
+        else:return reads,writes
+        for child in children:
+            r,w=self.global_access(child,seen);reads.update(r);writes.update(w)
+        return reads,writes
+
+    def has_shared_effects(self,node):
+        return self.has_assignment(node) or bool(self.global_access(node)[1])
+
+    def unsequenced(self,nodes):
+        if len(nodes)<2:return False
+        if any(self.has_assignment(node) for node in nodes):return True
+        access=[self.global_access(node) for node in nodes]
+        return any(writes & (other_reads|other_writes)
+                   for i,(_,writes) in enumerate(access)
+                   for j,(other_reads,other_writes) in enumerate(access) if i!=j)
+
+    def helper(self,node:dict,args:tuple,dtype:str)->Field:
+        name=node['function'];candidates=self.helper_candidates(node)
         if len(candidates)!=1:return self.unsupported('ambiguous shader helper: '+name,args,dtype)
         function=candidates[0];parameters=function['args'];body=function['body']
         if any(p['modifier'] in {2,3} for p in parameters):
@@ -247,19 +287,26 @@ class ShaderFields:
             return self.unsupported('nonterminal shader helper return not lowered: '+name,args,dtype)
         if len(args)>len(parameters):return self.unsupported('shader helper argument count mismatch',args,dtype)
         caller=self.environment
+        caller_locals=self.local_names
         globals_before=dict(self.globals)
         caller_effects=self.effects;self.effects=[]
-        self.environment=dict(globals_before);self.call_stack.append(name)
+        self.environment=dict(globals_before);self.local_names=set();self.call_stack.append(name)
+        completed_globals=None;completed_effects=[]
         try:
             for i,p in enumerate(parameters):
                 value=args[i] if i<len(args) else self.expression(p.get('default'))
                 self.environment[p['name']]=self.coerce(value,self.dtype(p['type'],actual=value))
+                self.local_names.add(p['name'])
             self.statements(body[:-1]);result=self.coerce(self.expression(body[-1]['value']),function['return_type']['name'])
-            if self.globals!=globals_before:
-                return self.unsupported('shader helper global writes not lowered: '+name,(result,),dtype)
-            if self.effects:result=Field('sequence',tuple(self.effects)+(result,),result.dtype)
+            completed_globals=dict(self.globals);completed_effects=list(self.effects)
             return result
-        finally:self.environment=caller;self.globals=globals_before;self.call_stack.pop();self.effects=caller_effects
+        finally:
+            self.environment=caller;self.local_names=caller_locals
+            self.globals=globals_before if completed_globals is None else completed_globals
+            for global_name,value in self.globals.items():
+                if global_name not in caller_locals:self.environment[global_name]=value
+            self.call_stack.pop();self.effects=caller_effects
+            self.effects.extend(completed_effects)
 
     @staticmethod
     def has_assignment(node)->bool:
@@ -272,11 +319,14 @@ class ShaderFields:
     def scoped(self,body:list[dict]):
         """Restore block declarations while preserving assignments to outer names."""
         before=dict(self.environment)
+        locals_before=set(self.local_names)
         declared={d['name'] for s in body if s['kind']=='declarations' for d in s['values']}
         self.statements(body)
         for name in declared:
-            if name in before:self.environment[name]=before[name]
+            if name in self.globals and name not in locals_before:self.environment[name]=self.globals[name]
+            elif name in before:self.environment[name]=before[name]
             else:self.environment.pop(name,None)
+        self.local_names=locals_before
 
     def unsupported(self,reason:str,args:tuple=(),dtype:str="float")->Field:
         self.complete=False;self.unknown.append(reason)
@@ -317,7 +367,8 @@ class ShaderFields:
                 return self.unsupported('assignment to const GLSL value',(value,),value.dtype)
             if target.get('global') and target.get('type',{}).get('flags',0)&4:
                 return self.unsupported('assignment to read-only GLSL uniform',(value,),value.dtype)
-            self.environment[target["name"]]=value
+            if not target.get('global') or target['name'] not in self.local_names:
+                self.environment[target["name"]]=value
             if target.get('global'):self.globals[target['name']]=value
             return value
         if target['kind']=='member':
@@ -333,7 +384,7 @@ class ShaderFields:
         if target['kind']=='index':
             parent_type=target['object'].get('type',{})
             if parent_type.get('array'):
-                if self.has_assignment(target['index']):return self.unsupported('shader index side-effect order unresolved',(value,))
+                if self.has_shared_effects(target['index']):return self.unsupported('shader index side-effect order unresolved',(value,))
                 prior=self.expression(target['object'],defer_read=True);layout=self.array_type(prior.dtype)
                 if layout is None:return self.unsupported('array write storage unresolved',(value,))
                 element,length=layout;index=self.coerce(self.expression(target['index']),'int')
@@ -341,7 +392,7 @@ class ShaderFields:
                 updated=Field('array_write',(prior,index,self.coerce(value,element)),prior.dtype)
                 self.write(target['object'],updated);return value
             if 'x' in parent_type.get('name',''):return self.unsupported('matrix row assignment is not a writable pinned-generator expression',(value,))
-            if self.has_assignment(target['index']):return self.unsupported('shader index side-effect order unresolved',(value,))
+            if self.has_shared_effects(target['index']):return self.unsupported('shader index side-effect order unresolved',(value,))
             prior=self.expression(target['object'],defer_read=True);shape=self.shape(prior.dtype)
             if shape is None or shape[1]<2:return self.unsupported('unsupported indexed shader assignment',(value,))
             index=self.coerce(self.expression(target['index']),'int')
@@ -354,7 +405,17 @@ class ShaderFields:
             return value
         return self.unsupported("indexed or indirect shader assignment",(value,))
 
-    def expression(self,node:dict|None,*,defer_read=False)->Field:
+    def bind_destination(self,target):
+        """Capture GLSL lvalue indices before evaluating the assignment RHS."""
+        if target.get('kind') not in {'index','member'}:return target
+        bound={**target,'object':self.bind_destination(target['object'])}
+        if target['kind']=='index':
+            bound['index']=(self.unsupported('shader index side-effect order unresolved')
+                if self.has_shared_effects(target['index']) else self.expression(target['index']))
+        return bound
+
+    def expression(self,node:dict|Field|None,*,defer_read=False)->Field:
+        if isinstance(node,Field):return node
         if node is None:return self.unsupported("uninitialized shader value")
         kind=node["kind"];dtype=node.get("type",{}).get("name","float")
         if node.get('type',{}).get('array'):
@@ -380,7 +441,7 @@ class ShaderFields:
             else:result=Field('member',(value,),dtype,{'field':node['field'],'swizzle':node.get('swizzle',False)})
             return result if defer_read else self.read(result)
         if kind=="index":
-            if self.has_assignment(node['index']):
+            if self.has_shared_effects(node['index']):
                 return self.unsupported('array index side-effect order unresolved' if node['object'].get('type',{}).get('array')
                                         else 'shader index side-effect order unresolved',dtype=dtype)
             value=self.expression(node['object'],defer_read=True)
@@ -388,7 +449,9 @@ class ShaderFields:
             result=Field(op,(value,self.coerce(self.expression(node['index']),'int')),dtype)
             return result if defer_read else self.read(result)
         if kind in {"construct","aggregate"}:
-            args=tuple(self.expression(arg) for arg in node.get("args",node.get("elements",[])))
+            arguments=node.get("args",node.get("elements",[]))
+            if self.unsequenced(arguments):return self.unsupported('constructor argument side-effect order not established',dtype=dtype)
+            args=tuple(self.expression(arg) for arg in arguments)
             matrix=re.fullmatch(r'(?:float|int|bool)([1-4])x([1-4])',dtype)
             if matrix:
                 return self.matrix_constructor(args,dtype)
@@ -414,21 +477,24 @@ class ShaderFields:
             if node['operator'] not in {0,1,2}:return self.unsupported('bitwise unary operator not lowered',dtype=dtype)
             return Field("unary",(self.expression(node["operand"]),),dtype,{"operator":node["operator"]})
         if kind=="conditional":
-            if self.has_assignment(node):return self.unsupported('conditional expression side effects not lowered',dtype=dtype)
+            if self.has_shared_effects(node):return self.unsupported('conditional expression side effects not lowered',dtype=dtype)
             return Field("select",tuple(self.expression(node[key]) for key in ["condition","yes","no"]),dtype)
         if kind=="binary":
             op=node["operator"]
-            if 2<=op<16 and self.has_assignment(node):
+            if 2<=op<16 and (self.has_assignment(node) or self.unsequenced([node['left'],node['right']])):
                 return self.unsupported('arithmetic/comparison side-effect order not established',dtype=dtype)
             matrix_product=op in {4,19} and 'x' in dtype
             if matrix_product and (not re.fullmatch(r'float([2-4])x\1',dtype)):
                 return self.unsupported('rectangular bare matrix product has no pinned GLSL helper',dtype=dtype)
-            if op in {0,1} and self.has_assignment(node):return self.unsupported('logical expression side effects not lowered',dtype=dtype)
+            if op in {0,1} and self.has_shared_effects(node):return self.unsupported('logical expression side effects not lowered',dtype=dtype)
             if op>=16:
+                destination=self.bind_destination(node['left'])
+                if op!=16 and self.global_access(node['right'])[1]&self.global_access(destination)[0]:
+                    return self.unsupported('compound assignment helper side-effect order not established',dtype=dtype)
                 value=self.coerce(self.expression(node["right"]),dtype)
-                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(node["left"]),dtype),value),dtype,
+                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination),dtype),value),dtype,
                                       {'zero_guard':True} if op==19 and not matrix_product else {})
-                return self.write(node["left"],value)
+                return self.write(destination,value)
             args=(self.expression(node['left']),self.expression(node['right']))
             if op in {2,3,4,5,6}:args=tuple(self.coerce(arg,dtype) for arg in args)
             elif op in {7,8,9,10,11,12,13,14,15}:
@@ -443,6 +509,7 @@ class ShaderFields:
                          {'zero_guard':True} if op==4 and not matrix_product else {})
         if kind=="call":
             name=node["function"];arguments=node.get("args",[])
+            if self.unsequenced(arguments):return self.unsupported('call argument side-effect order not established',dtype=dtype)
             if name.lower().startswith("tex") and arguments:
                 if name not in {'tex2D','tex3D','texCUBE'} or len(arguments)!=2:
                     return self.unsupported('texture sampling overload not lowered: '+name,dtype=dtype)
@@ -473,9 +540,10 @@ class ShaderFields:
         return self.unsupported("shader expression not lowered: "+kind,dtype=dtype)
 
     def loop(self,statement):
-        if self.has_assignment(statement.get('condition')):
+        if self.has_shared_effects(statement.get('condition')):
             self.unsupported('loop condition side effects not lowered');return
         before=dict(self.environment)
+        locals_before=set(self.local_names)
         declared={d['name'] for s in statement.get('initialization',[]) if s['kind']=='declarations' for d in s['values']}
         self.statements(statement.get('initialization',[]))
         if statement.get('initial_expression') is not None:self.expression(statement['initial_expression'])
@@ -495,11 +563,14 @@ class ShaderFields:
                         if target.get('global'):global_writes.add(target['name'])
                 for value in node.values():targets(value)
         targets(statement['body']);targets(statement.get('increment'))
+        hidden_writes=self.global_access(statement['body'])[1]|self.global_access(statement.get('increment'))[1]
+        writes.update(hidden_writes);global_writes.update(hidden_writes)
         for name in global_writes:
-            if name in initial and name in globals_initial and initial[name] is not globals_initial[name]:
+            if name in initial and name in globals_initial and name in self.local_names:
                 self.unsupported('loop global/local shadow alias unresolved');return
         names=tuple(sorted(writes & initial.keys()))
-        global_aliases={name for name in names if name in globals_initial and initial[name] is globals_initial[name]}
+        global_aliases={name for name in names if name in globals_initial and name not in self.local_names}
+        for name in global_aliases:initial[name]=globals_initial[name]
         plan=LoopPlan(names)
         slots={name:Field('loop_slot',dtype=initial[name].dtype,detail={'plan':plan,'name':name}) for name in names}
         self.environment.update(slots)
@@ -522,6 +593,7 @@ class ShaderFields:
         for name in declared:
             if name in before:self.environment[name]=before[name]
             else:self.environment.pop(name,None)
+        self.local_names=locals_before
 
     def statements(self,statements:list[dict]):
         for statement in statements:
@@ -535,6 +607,7 @@ class ShaderFields:
                         value=self.unsupported('same-name initializer binding differs in emitted GLSL',dtype=dtype)
                     else:value=self.initializer(self.expression(declaration['value']),dtype) if declaration['value'] is not None else Field('uninitialized',dtype=dtype,detail={'name':declaration['name']})
                     self.environment[declaration["name"]]=value
+                    self.local_names.add(declaration['name'])
             elif kind=="block":self.scoped(statement["body"])
             elif kind in {'for','while'}:self.loop(statement)
             elif kind=="if":

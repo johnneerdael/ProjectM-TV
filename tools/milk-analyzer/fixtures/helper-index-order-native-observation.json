@@ -1,0 +1,62 @@
+{
+  "prediction": {
+    "portable_prediction": "unresolved evaluation order",
+    "candidate_rgb": [
+      [
+        0.9,
+        0.2,
+        0.1
+      ],
+      [
+        0.1,
+        0.9,
+        0.1
+      ]
+    ],
+    "source_sha256": "98fbe31dc0e737a4100de6443e4fead63ee18ec95a38e8f205bdb188caab872d",
+    "scope": "This one fixture and renderer only; no universal ordering rule"
+  },
+  "metadata": {
+    "backend": "published-core-jni",
+    "core_version": "4.1.7",
+    "preset": "helper-state-index-order.milk",
+    "frames": 30,
+    "width": 128,
+    "height": 72,
+    "fps": 30,
+    "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+    "simulated_clock": true,
+    "skipped_count": 0,
+    "indexed_count": 1
+  },
+  "observed_rgba": [
+    [
+      230,
+      51,
+      26,
+      255
+    ]
+  ],
+  "capture_sha256": "ad49e0a0ae3b8070b1df2ffc8eb630e109997f70186a3e522e815f17a0304815",
+  "model_at_capture": "unresolved; two analytical candidates frozen before observation",
+  "subsequent_language_learning": {
+    "rule": "Evaluate assignment destination expressions before RHS expressions; capture destination indices",
+    "references": [
+      "https://registry.khronos.org/OpenGL/specs/gl/GLSLangSpec.3.30.pdf",
+      "https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf"
+    ],
+    "section": "5.8 Assignments",
+    "current_model_result": [
+      9,
+      2,
+      1
+    ],
+    "derived_rgb8": [
+      230,
+      51,
+      26
+    ],
+    "current_model_unresolved": false,
+    "scope": "Declared GLSL330/GLES300 target semantics; no retroactive blind prediction pass claimed"
+  }
+}
