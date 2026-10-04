@@ -8,7 +8,7 @@ Start music in the player before opening ProjectM TV. Open **Settings → Advanc
 |---|---|
 | No access | Grant Record audio permission to ProjectM TV |
 | No player session found yet | Wait a few seconds while the app searches |
-| Silent / no data | Confirm music is playing; try a tested player such as SoundCloud |
+| Silent / no data | Confirm music is playing; try a verified player such as Spotify or SoundCloud |
 | An active player session and changing level | Audio is reaching the visualizer; try another preset |
 
 If no audio is found while Android reports music playing, the app searches again when the track changes with notification access, and otherwise once a minute. Encoded audio such as a Dolby bitstream arriving from a video app cannot be visualized.
@@ -30,6 +30,8 @@ The app falls back to **All** when a selected category has no eligible members. 
 ## Track titles are missing
 
 Open **Track display → Track info → Configure**, then enable ProjectM TV in Android's notification-access settings. **Dismiss** permanently hides the automatic reminder; Track display still reopens setup. See the [screenshot walkthrough](getting-started.md#track-titles). The app reads the player's media session for titles. Titles are optional and do not control visualizer audio capture.
+
+If the artist and title appear but the cover does not, the music app may not provide one. Covers have only been verified with Spotify and [Milkbeat](https://github.com/johnneerdael/Milkbeat); SoundCloud and SmartTube show the artist and title only.
 
 ## Updating a debug build fails
 
