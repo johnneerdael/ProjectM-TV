@@ -1,6 +1,6 @@
 Subject: [PATCH] MilkdropPreset: compensate reference-scale feedback diffusion
 
-Build on 0029 and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
+Build on 0032 (previously 0029) and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
 per axis through an exact-moment adaptive 3/4-tap stencil, capped at 1.9, for bilinear warp reads
 only. One pass with two render targets writes the exact y-flipped frame and its filtered copy.
 Point-sampled warp reads (pw/pc main and aliases, by the bound sampler's filter mode) and the
@@ -648,10 +648,10 @@ index b84b27380..0edb51074 100644
      bool m_flipHoldsPreviousFrame{false}; //!< The flip texture still holds the y-flipped previous frame.
      bool m_warpSamplesBlur{true};         //!< The warp shader may read the blur textures.
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
-index 72c07eba3..066cc68aa 100644
+index 956d2e9df..9be28072a 100644
 --- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
-@@ -324,8 +324,12 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+@@ -325,8 +325,12 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
      GLint textureUnit{0};
      for (auto& desc : m_mainTextureDescriptors)
      {
@@ -729,7 +729,7 @@ index aacd39d7a..26918a2b3 100644
  
      std::map<int, Renderer::TextureSamplerDescriptor> randomTextureDescriptors; //!< Descriptors for random texture IDs. Should be the same across both warp and comp shaders.
 diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
-index 81236e6e8..e9aab272a 100644
+index d7efc7d9f..a6a0302d4 100644
 --- a/tests/libprojectM/CMakeLists.txt
 +++ b/tests/libprojectM/CMakeLists.txt
 @@ -1,6 +1,8 @@
@@ -739,8 +739,8 @@ index 81236e6e8..e9aab272a 100644
 +        FeedbackDiffusionRenderTest.cpp
 +        FeedbackDiffusionTest.cpp
          HLSLModuloTest.cpp
+         PresetShaderTranslationTest.cpp
          ShaderExceptionTest.cpp
-         MilkdropPresetExceptionTest.cpp
 diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
 new file mode 100644
 index 000000000..1d5dacb9e
