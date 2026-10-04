@@ -35,6 +35,26 @@ class SamplingPolicyTest(unittest.TestCase):
         self.assertIsNone(binding['wrap'])
         self.assertEqual(binding['wrap_condition'],'frame_wrap > 0.0001')
 
+    def test_current_core_reserves_unit_zero_for_implicit_main(self):
+        module=importlib.import_module('sampling_policy')
+        bindings=module.main_sampler_bindings(['sampler_fc_main','sampler_pc_main'],stage='warp',frame_wrap=1,
+                                             policy='projectmtv-core-2.2.6-v1')
+        self.assertEqual(bindings['sampler_main']['unit'],0)
+        self.assertTrue(bindings['sampler_main']['wrap'])
+        self.assertFalse(bindings['sampler_fc_main']['wrap'])
+        self.assertTrue(bindings['sampler_fc_main']['linear'])
+        self.assertFalse(bindings['sampler_pc_main']['linear'])
+
+    def test_current_policy_does_not_change_composite_binding(self):
+        module=importlib.import_module('sampling_policy')
+        kwargs=dict(stage='composite',frame_wrap=1)
+        old=module.main_sampler_bindings(['sampler_fc_main'],**kwargs)
+        current=module.main_sampler_bindings(['sampler_fc_main'],policy='projectmtv-core-2.2.6-v1',**kwargs)
+        self.assertEqual(current['sampler_main']['unit'],0)
+        for name in old:
+            self.assertEqual({k:v for k,v in old[name].items() if k!='unit'},
+                             {k:v for k,v in current[name].items() if k!='unit'})
+
     def test_prefixed_main_sampler_keeps_feedback_history_in_lowered_graph(self):
         tree=test_native_reader.NativeReaderTest().read('PSVERSION_COMP=2\ncomp_1=`shader_body {ret=tex2D(sampler_fc_main,uv).xyz;}\n')['sections']['comp_']['tree']
         model=ShaderFields(stage='composite',frame=4,warp_reads_blur=False)
@@ -44,6 +64,21 @@ class SamplingPolicyTest(unittest.TestCase):
         self.assertEqual(sample.detail['surface'],'current_warp_with_draws')
         self.assertEqual(sample.detail['frame'],4)
         self.assertFalse(sample.detail['sampling_policy']['wrap'])
+
+    def test_current_binding_reaches_shader_field_sampling(self):
+        tree=test_native_reader.NativeReaderTest().read('PSVERSION_WARP=2\n'
+            'warp_1=`shader_body {ret=tex2D(sampler_pc_main,uv).xyz;}\n')['sections']['warp_']['tree']
+        model=ShaderFields(stage='warp',frame=4,warp_reads_blur=False,frame_wrap=1,
+                           main_binding_policy='projectmtv-core-2.2.6-v1')
+        result=model.lower(tree)
+        self.assertTrue(model.complete,model.unknown)
+        self.assertFalse(result.args[0].detail['sampling_policy']['wrap'])
+        self.assertFalse(result.args[0].detail['sampling_policy']['linear'])
+
+    def test_unknown_binding_policy_is_not_assumed(self):
+        module=importlib.import_module('sampling_policy')
+        with self.assertRaisesRegex(ValueError,'policy'):
+            module.main_sampler_bindings([],stage='warp',frame_wrap=1,policy='latest')
 
 
 if __name__=='__main__':unittest.main()

@@ -828,6 +828,17 @@ controls match the published2.2.6 native library exactly over60 RGB8 frames.
 See `fixtures/focused-blockers-178-2026-10-04.json` and
 `fixtures/equation-policy-core-2.2.6-proof.json`.
 
+The forecast domain also accepts `main_binding_policy`:
+`legacy-sorted-v1` retains the historical descriptor ordering, while
+`projectmtv-core-2.2.6-v1` models shipped patch0026 by reserving unit zero for
+implicit main. Named clamp/wrap/point aliases keep their own modes; composite
+units are reordered without changing those sampling modes. Explicit policy
+selection preserves old evidence and prevents mixing sampler behavior across
+core versions. Three frozen current-AAR controls verify clamp and point filtering
+with zero RGB8 error across84 measured frames after two seed frames per control.
+See `fixtures/main-binding-core-2.2.6-proof.json`. This does not change the178
+remaining source gaps or establish full-preset appearance accuracy.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed

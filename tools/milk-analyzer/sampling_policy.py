@@ -15,10 +15,12 @@ def texture_settings(sampler_name:str)->dict:
     return settings
 
 
-def main_sampler_bindings(references,*,stage:str,frame_wrap:float|None)->dict:
+def main_sampler_bindings(references,*,stage:str,frame_wrap:float|None,policy='legacy-sorted-v1')->dict:
     if stage not in {'warp','composite'}:raise ValueError('warp/composite stage required')
     if frame_wrap is not None and not math.isfinite(frame_wrap):raise ValueError('finite frame wrap required')
+    if policy not in {'legacy-sorted-v1','projectmtv-core-2.2.6-v1'}:raise ValueError('unsupported main binding policy')
     names=sorted({name for name in references if texture_settings(name)['texture'].lower()=='main'}|{'sampler_main'})
+    if policy=='projectmtv-core-2.2.6-v1':names=['sampler_main']+[name for name in names if name!='sampler_main']
     bindings={}
     for unit,name in enumerate(names):
         policy={**texture_settings(name),'unit':unit}

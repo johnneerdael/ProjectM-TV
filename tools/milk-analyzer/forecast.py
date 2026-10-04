@@ -85,6 +85,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     warp_reads_blur = 'blur' in warp_code.lower()
     pipeline = SourcePipeline.from_source(source, profile=domain['profile'], compatibility=compatibility,
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'),
+        main_binding_policy=domain.get('main_binding_policy','legacy-sorted-v1'),
         initial_feedback=initial, warp_reads_blur=warp_reads_blur, blur_levels=domain['blur_levels'],
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),

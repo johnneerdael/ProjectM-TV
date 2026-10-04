@@ -26,7 +26,7 @@ class PipelineResult:
 
 class SourcePipeline:
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1'):
         if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
             raise ValueError('unsupported shader coordinate profile')
         field=np.asarray(initial_feedback,dtype=np.float32)
@@ -46,6 +46,9 @@ class SourcePipeline:
         if main_sampling_profile not in ('portable',PROFILE) or (main_sampling_profile==PROFILE and not quantize):
             raise ValueError('supported main sampling profile with actual unorm storage required')
         self.main_sampling_profile=main_sampling_profile
+        from sampling_policy import main_sampler_bindings
+        main_sampler_bindings([],stage='warp',frame_wrap=None,policy=main_binding_policy)
+        self.main_binding_policy=main_binding_policy
         self.height,self.width=field.shape[:2]
         x,y=np.meshgrid((np.arange(self.width,dtype=np.float32)+.5)/self.width,
                         (np.arange(self.height,dtype=np.float32)+.5)/self.height)
@@ -165,7 +168,8 @@ class SourcePipeline:
 
         def stage(tree,name,main,blur,coordinates,polar,colour=None):
             nonlocal pending_motion_uv
-            model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap)
+            model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap,
+                               main_binding_policy=self.main_binding_policy)
             expression=model.lower(tree,language_extensions=self.language_extensions.get(name,[]),
                                    native_samplers=self.native_samplers.get(name,{}))
             if not model.complete:raise UnresolvedMath('unsupported source shader: '+'; '.join(model.unknown))

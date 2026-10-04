@@ -37,12 +37,13 @@ ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul',
 
 
 class ShaderFields:
-    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None):
+    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1'):
         if stage not in {"warp","composite"}:raise ValueError("warp or composite stage required")
         self.stage=stage;self.frame=frame;self.warp_reads_blur=warp_reads_blur
         self.environment={};self.complete=True;self.unknown=[]
         self.functions={};self.global_names=set();self.globals={};self.call_stack=[]
         self.frame_wrap=frame_wrap;self.sampler_bindings={}
+        self.main_binding_policy=main_binding_policy
         self.effects=[]
         self.local_names=set()
         self.native_samplers={}
@@ -232,7 +233,7 @@ class ShaderFields:
             else:self.unsupported('shader global not lowered: '+node['kind'])
         entries=self.functions.get('PS',[])
         samplers=[name for name in self.global_names|set(self.native_samplers) if name.startswith('sampler_')]
-        self.sampler_bindings=main_sampler_bindings(samplers,stage=self.stage,frame_wrap=self.frame_wrap)
+        self.sampler_bindings=main_sampler_bindings(samplers,stage=self.stage,frame_wrap=self.frame_wrap,policy=self.main_binding_policy)
         if len(entries)!=1:return self.unsupported('missing or ambiguous shader entry point')
         for argument in entries[0]['args']:
             # GLSL out parameters have no incoming value. Keep unwritten
