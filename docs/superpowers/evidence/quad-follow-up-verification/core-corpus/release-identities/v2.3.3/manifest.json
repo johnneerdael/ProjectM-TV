@@ -1,0 +1,20 @@
+{
+  "archive_sha256": "b2821706da5ebd3746cc0fc76919b4df8bb02e51276cdb712ccd0c5069ba651d",
+  "members": [
+    {
+      "path": "release.json",
+      "sha256": "e23de3156e5f47efe7005e33ddc5f3cf28f9f2bbaf927ff3cb8c46b769bae237"
+    },
+    {
+      "path": "verified-release-identity.json",
+      "sha256": "e9a7a6310c5b139b1fbf510b11a9e141e89cfd72deedf162b3a30619995e4271"
+    },
+    {
+      "path": "checksums.txt",
+      "sha256": "1ab86890e9c20d4ab9a3ee41e950c66ef063a0cf0be06f0af9abe593520b15a5"
+    }
+  ],
+  "release": "v2.3.3",
+  "scope": "Public AAR artifact identity only; source-pinned corpus candidate must be built and validated separately.",
+  "source_commit": "6e71ac2a18a95463fbe3a21c05e6dd4027cb74a0"
+}
