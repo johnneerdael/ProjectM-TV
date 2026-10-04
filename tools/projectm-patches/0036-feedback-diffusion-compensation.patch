@@ -1,6 +1,6 @@
 Subject: [PATCH] MilkdropPreset: compensate reference-scale feedback diffusion
 
-Build on 0032 (previously 0029) and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
+Build on 0032 (numbered 0036 after PR #27's 0033-0035; previously 0030) and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
 per axis through an exact-moment adaptive 3/4-tap stencil, capped at 1.9, for bilinear warp reads
 only. One pass with two render targets writes the exact y-flipped frame and its filtered copy.
 Point-sampled warp reads (pw/pc main and aliases, by the bound sampler's filter mode) and the
