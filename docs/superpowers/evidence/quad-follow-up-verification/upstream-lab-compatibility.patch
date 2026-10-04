@@ -1,0 +1,69 @@
+Subject: [LAB ONLY] Capture stock 4.1.7 into the laboratory FBO
+
+No preset, feedback, blur, shader or primitive algorithm changes. Reject quad-only options.
+
+--- a/src/libprojectM/ProjectM.hpp
++++ b/src/libprojectM/ProjectM.hpp
+@@ -27,6 +27,7 @@
+ #include <Audio/PCM.hpp>
+ 
+ #include <memory>
++#include <stdexcept>
+ #include <string>
+ #include <vector>
+ 
+@@ -88,6 +89,11 @@
+     void LoadPresetData(std::istream& presetData, bool smoothTransition);
+ 
+     void SetWindowSize(uint32_t width, uint32_t height);
++    // Lab-only compatibility: stock rendering supports classic lines only.
++    void SetLineReferenceSize(int width, int height)
++    { if (width != 0 || height != 0) throw std::invalid_argument("stock worker requires classic lines"); }
++    void SetLineAntialiasing(bool enabled)
++    { if (enabled) throw std::invalid_argument("stock worker has no quad antialiasing"); }
+ 
+     /**
+      * @brief Sets the texture paths used to find images for presets.
+@@ -101,7 +107,7 @@
+ 
+     void ResetTextures();
+ 
+-    void RenderFrame();
++    void RenderFrame(uint32_t targetFramebufferObject = 0);
+ 
+     void SetBeatSensitivity(float sensitivity);
+ 
+--- a/src/libprojectM/ProjectM.cpp
++++ b/src/libprojectM/ProjectM.cpp
+@@ -90,7 +90,7 @@
+     m_textureManager = std::make_unique<Renderer::TextureManager>(m_textureSearchPaths);
+ }
+ 
+-void ProjectM::RenderFrame()
++void ProjectM::RenderFrame(uint32_t targetFramebufferObject)
+ {
+     // Don't render if window area is zero.
+     if (m_windowWidth == 0 || m_windowHeight == 0)
+@@ -167,7 +167,7 @@
+     m_activePreset->RenderFrame(audioData, renderContext);
+ 
+     // ToDo: Allow external apps to provide a custom target framebuffer.
+-    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
++    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, targetFramebufferObject);
+     glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
+ 
+ #ifdef USE_GLES
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -1,3 +1,4 @@
++#define MILKDROP_PRESET_DEBUG
+ #include "PerPixelMesh.hpp"
+ 
+ #include "MilkdropShader.hpp"
+--- a/src/libprojectM/MilkdropPreset/FinalComposite.cpp
++++ b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+@@ -1,3 +1,4 @@
++#define MILKDROP_PRESET_DEBUG
+ #include "FinalComposite.hpp"
+ 
+ #include "PresetState.hpp"

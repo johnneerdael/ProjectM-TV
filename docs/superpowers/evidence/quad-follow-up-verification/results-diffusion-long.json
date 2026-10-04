@@ -1,0 +1,301 @@
+{
+  "jobs": 50,
+  "nondeterministic": [],
+  "timing": {
+    "fps": 30,
+    "warmup_seconds": 4,
+    "measurement_seconds": 12
+  },
+  "comparisons": [
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "height": 1330,
+      "reference_motion_mae": 0.01893760822713375,
+      "baseline": {
+        "img_err": 0.3861299157142639,
+        "luma_ratio": 14.844567963725792,
+        "center_rgb": [
+          0.24722753527596034,
+          0.24722753527596034,
+          0.24722753527596034
+        ],
+        "saturation": 0.0,
+        "motion_mae": 0.04553905501961708,
+        "picture_sharpness_ratio": 5.5612795729043265
+      },
+      "diffusion": {
+        "img_err": 0.01387853641062975,
+        "luma_ratio": 0.3939686730014945,
+        "center_rgb": [
+          0.1276588250223474,
+          0.1276588250223474,
+          0.1276588250223474
+        ],
+        "saturation": 0.0,
+        "motion_mae": 0.00035491090966388583,
+        "picture_sharpness_ratio": 0.5331415365245558
+      }
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "height": 2160,
+      "reference_motion_mae": 0.01893760822713375,
+      "baseline": {
+        "img_err": 0.4042418301105499,
+        "luma_ratio": 15.56332960019403,
+        "center_rgb": [
+          0.2720481819163707,
+          0.2720481819163707,
+          0.2720481819163707
+        ],
+        "saturation": 0.0,
+        "motion_mae": 0.04306427389383316,
+        "picture_sharpness_ratio": 6.227000640117021
+      },
+      "diffusion": {
+        "img_err": 0.01422009989619255,
+        "luma_ratio": 0.37079643582788735,
+        "center_rgb": [
+          0.12478225511419419,
+          0.12478225511419419,
+          0.12478225511419419
+        ],
+        "saturation": 0.0,
+        "motion_mae": 0.00029590498888865113,
+        "picture_sharpness_ratio": 0.5216441927934528
+      }
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "height": 1330,
+      "reference_motion_mae": 0.3115614354610443,
+      "baseline": {
+        "img_err": 0.08465691655874252,
+        "luma_ratio": 1.0740618409804883,
+        "center_rgb": [
+          0.34511852111733254,
+          0.4045295894655144,
+          0.5170297022996533
+        ],
+        "saturation": 0.6650656878948211,
+        "motion_mae": 0.3532717823982239,
+        "picture_sharpness_ratio": 3.2750364679196426
+      },
+      "diffusion": {
+        "img_err": 0.06511242687702179,
+        "luma_ratio": 0.8294352900860277,
+        "center_rgb": [
+          0.23036975591677689,
+          0.29589032010267524,
+          0.4316517794721219
+        ],
+        "saturation": 0.6688587129116058,
+        "motion_mae": 0.28199315071105957,
+        "picture_sharpness_ratio": 1.258001414062573
+      }
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "height": 2160,
+      "reference_motion_mae": 0.3115614354610443,
+      "baseline": {
+        "img_err": 0.10055562853813171,
+        "luma_ratio": 1.028519482056202,
+        "center_rgb": [
+          0.3268947306127955,
+          0.3790056138356835,
+          0.5013841514615104
+        ],
+        "saturation": 0.6673750042915344,
+        "motion_mae": 0.3494608402252197,
+        "picture_sharpness_ratio": 4.566917503223341
+      },
+      "diffusion": {
+        "img_err": 0.0958961695432663,
+        "luma_ratio": 0.7240830815979361,
+        "center_rgb": [
+          0.17905606326088824,
+          0.24462172341072919,
+          0.3941859990792009
+        ],
+        "saturation": 0.6772579789161682,
+        "motion_mae": 0.2656562626361847,
+        "picture_sharpness_ratio": 0.8256279525348048
+      }
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 1330,
+      "reference_motion_mae": 0.2551341652870178,
+      "baseline": {
+        "img_err": 0.21142034232616425,
+        "luma_ratio": 0.8958497152250287,
+        "center_rgb": [
+          0.37700036058542147,
+          0.44173690203003996,
+          0.4042642751082225
+        ],
+        "saturation": 0.4516929626464844,
+        "motion_mae": 0.2629021108150482,
+        "picture_sharpness_ratio": 1.5447694542286419
+      },
+      "diffusion": {
+        "img_err": 0.1742130070924759,
+        "luma_ratio": 1.0634336338345844,
+        "center_rgb": [
+          0.45924476188679125,
+          0.5249500060097567,
+          0.47917578722460424
+        ],
+        "saturation": 0.3725097060203552,
+        "motion_mae": 0.20694440603256226,
+        "picture_sharpness_ratio": 0.7290609067111016
+      }
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 2160,
+      "reference_motion_mae": 0.2551341652870178,
+      "baseline": {
+        "img_err": 0.1935974508523941,
+        "luma_ratio": 0.9180494105502758,
+        "center_rgb": [
+          0.40042927104451587,
+          0.458108650937441,
+          0.42273285377519065
+        ],
+        "saturation": 0.4435146689414978,
+        "motion_mae": 0.2835562229156494,
+        "picture_sharpness_ratio": 1.5131556003604116
+      },
+      "diffusion": {
+        "img_err": 0.19372627139091492,
+        "luma_ratio": 1.0319466442622842,
+        "center_rgb": [
+          0.44377473805987594,
+          0.5072117412288779,
+          0.45902930373055784
+        ],
+        "saturation": 0.43826127648353574,
+        "motion_mae": 0.2531639337539673,
+        "picture_sharpness_ratio": 1.1116780111042956
+      }
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "height": 1330,
+      "reference_motion_mae": 0.2582250237464905,
+      "baseline": {
+        "img_err": 0.1843816339969635,
+        "luma_ratio": 1.0002758855742169,
+        "center_rgb": [
+          0.6066945531142605,
+          0.643791307230322,
+          0.6778045279354862
+        ],
+        "saturation": 0.4001853585243225,
+        "motion_mae": 0.24564000964164734,
+        "picture_sharpness_ratio": 1.4547064297697676
+      },
+      "diffusion": {
+        "img_err": 0.2080172300338745,
+        "luma_ratio": 0.9900529100893241,
+        "center_rgb": [
+          0.5905363336639211,
+          0.7022207455291939,
+          0.6714382412969632
+        ],
+        "saturation": 0.466057550907135,
+        "motion_mae": 0.2869306802749634,
+        "picture_sharpness_ratio": 1.0808068934868604
+      }
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "height": 2160,
+      "reference_motion_mae": 0.2582250237464905,
+      "baseline": {
+        "img_err": 0.20161619782447815,
+        "luma_ratio": 0.9296625379816389,
+        "center_rgb": [
+          0.5512320561664094,
+          0.6225515640444709,
+          0.6297221407960472
+        ],
+        "saturation": 0.4652453064918518,
+        "motion_mae": 0.25632187724113464,
+        "picture_sharpness_ratio": 1.3293023174408356
+      },
+      "diffusion": {
+        "img_err": 0.18921148777008057,
+        "luma_ratio": 0.9481091580492029,
+        "center_rgb": [
+          0.5498835119771076,
+          0.6343907163023821,
+          0.6322040224215114
+        ],
+        "saturation": 0.4519973576068878,
+        "motion_mae": 0.2517695724964142,
+        "picture_sharpness_ratio": 1.1337734231553072
+      }
+    },
+    {
+      "name": "ORB - Toffie Grider.milk",
+      "height": 1330,
+      "reference_motion_mae": 0.11710326373577118,
+      "baseline": {
+        "img_err": 0.021488752216100693,
+        "luma_ratio": 0.9611856289205255,
+        "center_rgb": [
+          0.817989623268065,
+          0.6678589354166421,
+          0.0
+        ],
+        "saturation": 0.9906080007553101,
+        "motion_mae": 0.1183418333530426,
+        "picture_sharpness_ratio": 1.2632532597349413
+      },
+      "diffusion": {
+        "img_err": 0.016826443374156952,
+        "luma_ratio": 0.9674675085695944,
+        "center_rgb": [
+          0.8236572319356346,
+          0.6746312051605254,
+          0.0
+        ],
+        "saturation": 0.9902843356132507,
+        "motion_mae": 0.1196359395980835,
+        "picture_sharpness_ratio": 0.9906997443739918
+      }
+    },
+    {
+      "name": "ORB - Toffie Grider.milk",
+      "height": 2160,
+      "reference_motion_mae": 0.11710326373577118,
+      "baseline": {
+        "img_err": 0.02050725743174553,
+        "luma_ratio": 1.0202817821158288,
+        "center_rgb": [
+          0.8902308245561171,
+          0.7418124143974506,
+          0.0
+        ],
+        "saturation": 0.982493805885315,
+        "motion_mae": 0.11212723702192307,
+        "picture_sharpness_ratio": 1.1700245696335276
+      },
+      "diffusion": {
+        "img_err": 0.01439246628433466,
+        "luma_ratio": 1.0082533141512966,
+        "center_rgb": [
+          0.880117487200856,
+          0.7213111649784654,
+          0.0
+        ],
+        "saturation": 0.9990651845932007,
+        "motion_mae": 0.11277365684509277,
+        "picture_sharpness_ratio": 0.5031262893433144
+      }
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+18: RESOURCE_ENDPOINT fragment_attempts=1 live_shaders=1
+176: RESOURCE_ENDPOINT repeated_attempts=16 live_shaders=16

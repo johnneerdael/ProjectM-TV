@@ -1,0 +1,37 @@
+575:     auto sampledBlend = [&](double frameCpuSeconds, bool cpuBound) {
+576:       constexpr double start = 100.0, frameSeconds = 0.016;
+577:       g_engine.lastLoadStart = g_engine.lastLoadEnd = start;
+578:       g_engine.lastLoadMs = 0;
+579:       g_engine.lastFps = 250.f;
+580:       g_engine.lastFrameAt = start;
+581:       g_engine.blendLevel = kDefaultBlendLevel;
+582:       g_engine.fastBlends = 0;
+583:       g_engine.halfRateOutgoing = false;
+584:       std::fill(std::begin(g_engine.blendLevelTooSlow), std::end(g_engine.blendLevelTooSlow), false);
+585:       projectm_opengl_set_outgoing_preset_frame_divisor(g_engine.pm, 1);
+586:       BeginTransition(1.0, false);
+587:       g_engine.transitionScaled = true;
+588:       g_engine.transitionScale = kBlendScales[g_engine.blendLevel];
+589:       const int before = g_published.transitionCounter.load();
+590:       // Include all 63 frames through 1.008 s, rather than jumping past the end without CPU samples.
+591:       for (int sample = 1; sample <= 63; ++sample) {
+592:         TrackTransition(start + sample * frameSeconds, frameCpuSeconds);
+593:         ApplyRenderScale(g_engine.transitionScale);
+594:         if (sample == 40) {  // 0.640 s: after early adaptation, still inside the one-second blend
+595:           CHECK(g_engine.inTransition);
+596:           CHECK(g_windowW == (cpuBound ? 960u : 768u));
+597:           CHECK(g_windowH == (cpuBound ? 540u : 432u));
+598:           CHECK(g_engine.transitionStepped == !cpuBound);
+599:           CHECK(g_outgoingDivisor == (cpuBound ? 2u : 1u));
+600:         }
+601:       }
+602:       CHECK(!g_engine.inTransition && g_engine.transitionFrames == 63);
+603:       CHECK(g_published.transitionCounter.load() == before + 1);
+604:       CHECK(g_engine.transitionStepped == !cpuBound);
+605:       CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == (cpuBound ? 100 : 60));
+606:     };
+607: 
+608:     printf("auto: sampled CPU-bound blend keeps its resolution and halves outgoing frames\n");
+609:     sampledBlend(0.015, true);
+610:     printf("auto: equally slow sampled low-CPU blend lowers resolution instead\n");
+611:     sampledBlend(0.0001, false);

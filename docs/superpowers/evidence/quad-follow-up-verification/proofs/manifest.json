@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-04T01:24:39.017061+00:00",
+  "workspace": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups",
+  "workspace_head_at_export": "a59b4e53f43ef9d0bdb1b23392be3ee6854c3a09",
+  "generator": "export_proof.py",
+  "generator_sha256": "74001cd76b0594611b31e225c48175c738d1c7d1ee991adf4fef2f9f002a98bd",
+  "allocation_build_records": "allocation-builds.json",
+  "sources": {
+    "diagnostic-red": {
+      "path": "build/follow-ups/shader-message-red.log",
+      "sha256": "86a78dd73bfe55d9142aa6e7fd5b8cf52f3c889ff855d0c863ea6f262ed260b7",
+      "source_line_ranges": [
+        [
+          196,
+          203
+        ]
+      ],
+      "excerpt": "raw/diagnostic-red.txt",
+      "excerpt_sha256": "1d0fe036ed9ebfa69e2eab52ba347c362474a3e6caf6e851bd2282162feced1c"
+    },
+    "diagnostic-green": {
+      "path": "build/follow-ups/shader-message-green.log",
+      "sha256": "a022b8e4f387f84ade11c8d958a3579c7618b308283ad62976d82c376284a776",
+      "source_line_ranges": [
+        [
+          142,
+          145
+        ]
+      ],
+      "excerpt": "raw/diagnostic-green.txt",
+      "excerpt_sha256": "ea327d9daf243f4eec36c0900428bc44965756f160f9e33e0bc26305c44e5b48"
+    },
+    "diagnostic-test": {
+      "path": "third_party/projectm/tests/libprojectM/ShaderExceptionTest.cpp",
+      "sha256": "1162bd8182ee9923cf37f1ba6929ca2cf9af83a0c82b501137e19f4a3a8d9e03",
+      "source_line_ranges": [
+        [
+          1,
+          17
+        ]
+      ],
+      "excerpt": "raw/diagnostic-test.txt",
+      "excerpt_sha256": "faaee4821affb75e730a476d3beaa22da25954e60b66d36adae748e37e923fff"
+    },
+    "allocation-red": {
+      "path": "build/follow-ups/proof-export/allocation/red/run.log",
+      "sha256": "3a7075e5afff33df1b31433e00ad53fce06d3e8d3f6a2dc381d1e902e09c9d66",
+      "source_line_ranges": [
+        [
+          18,
+          18
+        ],
+        [
+          176,
+          176
+        ]
+      ],
+      "excerpt": "raw/allocation-red.txt",
+      "excerpt_sha256": "a47da452787f736cd3d56daab5fabcc88dd99a2c3c3eb75a7941d62f5fee604a"
+    },
+    "allocation-green": {
+      "path": "build/follow-ups/proof-export/allocation/green/run.log",
+      "sha256": "bfa1e9a0ef7557dbafadea10e78bb45dc90647c5ca24819f0e2fd05c58093c98",
+      "source_line_ranges": [
+        [
+          11,
+          11
+        ],
+        [
+          18,
+          18
+        ]
+      ],
+      "excerpt": "raw/allocation-green.txt",
+      "excerpt_sha256": "e36696292c7c14827388acb8d2391a1c2d64c4a16a8f04a52c8db64764847898"
+    },
+    "fallback-red-stderr": {
+      "path": "build/follow-ups/verification/shader-reject-red/jobs/Geiss - Surface (1-02 Version).milk-c665-diffusion-reject-r1/worker/run-en_sw9nr/stderr.log",
+      "sha256": "cc8cdec44631c2084745bd6c933304fe9e9ca7c045089b25b1c677650ee35c9e",
+      "source_line_ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "excerpt": "raw/fallback-red-stderr.txt",
+      "excerpt_sha256": "0254e9c0e5e8d56f4a3286174ab9b2cfe4463154e8dda3acac833dd6bb09731d"
+    },
+    "fallback-red-manifest": {
+      "path": "build/follow-ups/verification/shader-reject-red/jobs/Geiss - Surface (1-02 Version).milk-c665-diffusion-reject-r1/worker/run-en_sw9nr/manifest.json",
+      "sha256": "a5d15db2be16a650bf43ddc36ffa85697f3131874cd01d04325f5611186ba6ad",
+      "copy": "raw/fallback-red-manifest.json",
+      "copy_sha256": "a5d15db2be16a650bf43ddc36ffa85697f3131874cd01d04325f5611186ba6ad"
+    },
+    "fallback-red-job": {
+      "path": "build/follow-ups/verification/shader-reject-red/jobs/Geiss - Surface (1-02 Version).milk-c665-diffusion-reject-r1/worker/run-en_sw9nr/job.json",
+      "sha256": "aec339bb4fd20b869b65f2d1913bfebaed472f78106d59a6429bffefbf7b2b6d",
+      "copy": "raw/fallback-red-job.json",
+      "copy_sha256": "aec339bb4fd20b869b65f2d1913bfebaed472f78106d59a6429bffefbf7b2b6d"
+    },
+    "fallback-red-orchestrator": {
+      "path": "build/follow-ups/shader-reject-red.log",
+      "sha256": "9bdf7d942a824b2b396764752f0d9f37316e87e3f13820032665b274bc386b39",
+      "source_line_ranges": [
+        [
+          1,
+          7
+        ]
+      ],
+      "excerpt": "raw/fallback-red-orchestrator.txt",
+      "excerpt_sha256": "a2c079efe00d8da3db3d34ba314deedbc475f1d9a8c7215d067b5387e0268a2b"
+    },
+    "fallback-green-manifest": {
+      "path": "build/follow-ups/verification/shader-fallback/jobs/Geiss - Surface (1-02 Version).milk-c665-diffusion-reject-safe-on-r1/worker/run-kz2hc_17/manifest.json",
+      "sha256": "996c499b8ad7cd0cb7dc8025a2974a4a15b837062fe2de4656955a3d3cbcf620",
+      "copy": "raw/fallback-green-manifest.json",
+      "copy_sha256": "996c499b8ad7cd0cb7dc8025a2974a4a15b837062fe2de4656955a3d3cbcf620"
+    },
+    "fallback-green-job": {
+      "path": "build/follow-ups/verification/shader-fallback/jobs/Geiss - Surface (1-02 Version).milk-c665-diffusion-reject-safe-on-r1/worker/run-kz2hc_17/job.json",
+      "sha256": "41e0fa6c6ee79f373820d7239b301328dc7ef68409905360b459d0edf03e9400",
+      "copy": "raw/fallback-green-job.json",
+      "copy_sha256": "41e0fa6c6ee79f373820d7239b301328dc7ef68409905360b459d0edf03e9400"
+    },
+    "fallback-green-metrics": {
+      "path": "build/follow-ups/verification/shader-fallback/jobs/Geiss - Surface (1-02 Version).milk-c665-diffusion-reject-safe-on-r1/metrics.json",
+      "sha256": "40d935cb44ed0712c208902860dc2e05c5713d1db135b278be8c447373222772",
+      "copy": "raw/fallback-green-metrics.json",
+      "copy_sha256": "40d935cb44ed0712c208902860dc2e05c5713d1db135b278be8c447373222772"
+    },
+    "fallback-baseline-metrics": {
+      "path": "build/follow-ups/verification/shader-fallback/jobs/Geiss - Surface (1-02 Version).milk-c665-final-r1/metrics.json",
+      "sha256": "4020e188e71bedb4d0fd8bc83db3c9481734af1b1d854766d48dda09fe42e65b",
+      "copy": "raw/fallback-baseline-metrics.json",
+      "copy_sha256": "4020e188e71bedb4d0fd8bc83db3c9481734af1b1d854766d48dda09fe42e65b"
+    },
+    "fallback-matrix-summary": {
+      "path": "docs/superpowers/evidence/quad-follow-up-verification/results-shader-fallback.json",
+      "sha256": "98b874d9ab8add8c1c68b7cb030a3f5d2eda98e7cb6228cafc9fcc15418db2e0",
+      "copy": "raw/fallback-matrix-summary.json",
+      "copy_sha256": "98b874d9ab8add8c1c68b7cb030a3f5d2eda98e7cb6228cafc9fcc15418db2e0"
+    },
+    "fallback-frame": {
+      "path": "build/follow-ups/verification/shader-fallback/jobs/Geiss - Surface (1-02 Version).milk-c665-diffusion-reject-safe-on-r1/five.npz",
+      "sha256": "3656423f8290d90ab6700a776208f055c6098dbf02e57a6300fc79f72f169b97",
+      "npz_key": "frames",
+      "npz_index": 4,
+      "engine_frame_index_zero_based": 239,
+      "width": 1182,
+      "height": 665,
+      "pixel_sha256_rgb": "fdaeea6e2f8db20e5c09369ad98fffdc8077bc2d1118743c30351691e4c52ba1",
+      "pixel_hash_verified_against_metrics_measurement_index": 119,
+      "export": "03-fallback-geiss-frame-239.png",
+      "export_sha256": "4e6445d7bfa0633062f92dd951dbb887ba17e5189cba5356b62bf3b9e516eacc",
+      "source_data_copy": "raw/fallback-frame-239.npz",
+      "source_data_copy_sha256": "8d45ea32b655deeb008742bf31a99d2acc67ed8af826d59c280541c9fcebb715",
+      "processing": "Native size equals five.npz snapshot target. Export RGB uint8 to lossless PNG with no resampling, color adjustment or generative changes."
+    },
+    "fallback-baseline-frame": {
+      "path": "build/follow-ups/verification/shader-fallback/jobs/Geiss - Surface (1-02 Version).milk-c665-final-r1/five.npz",
+      "sha256": "3656423f8290d90ab6700a776208f055c6098dbf02e57a6300fc79f72f169b97",
+      "npz_key": "frames",
+      "npz_index": 4,
+      "engine_frame_index_zero_based": 239,
+      "pixel_sha256_rgb": "fdaeea6e2f8db20e5c09369ad98fffdc8077bc2d1118743c30351691e4c52ba1",
+      "validation": "The selected baseline RGB array equals the fallback array byte for byte."
+    },
+    "transition-red": {
+      "path": "build/follow-ups/native-shader-failure.log",
+      "sha256": "aad6a044adc1243c6b06704a8b71f114173cc60b38c7e6201ab2cb501a0358a6",
+      "source_line_ranges": [
+        [
+          365,
+          366
+        ],
+        [
+          446,
+          447
+        ]
+      ],
+      "excerpt": "raw/transition-red.txt",
+      "excerpt_sha256": "c4b2acbdaa92219a1649ef8da33922108276f728ad207b3d88eeaee4e2e8d9da"
+    },
+    "transition-green": {
+      "path": "build/follow-ups/native-deterministic-policy-green.log",
+      "sha256": "4beb046fe5eb7abaffa02178fda3e1606a67726752b599f0bdd3a485e6eea6af",
+      "source_line_ranges": [
+        [
+          365,
+          385
+        ],
+        [
+          415,
+          415
+        ],
+        [
+          416,
+          425
+        ]
+      ],
+      "excerpt": "raw/transition-green.txt",
+      "excerpt_sha256": "37f426b73b6bdfe67ddb9bfd55565a1b49d1375c8a6407eac71c13b76935cbb6"
+    },
+    "transition-positive": {
+      "path": "build/follow-ups/native-deterministic-policy-positive.log",
+      "sha256": "4fdb06fc6cbe83ced83ef1b78625483eb9a5079106a97804efbb8392c437e433",
+      "source_line_ranges": [
+        [
+          1,
+          5
+        ],
+        [
+          27,
+          27
+        ]
+      ],
+      "excerpt": "raw/transition-positive.txt",
+      "excerpt_sha256": "488816f8d26093f33773ac65dc2e239449420f6af0c83234c375345b995487ef"
+    },
+    "transition-negative": {
+      "path": "build/follow-ups/native-deterministic-policy-negative.log",
+      "sha256": "a469a0d3bfdcbb5ae1d3d8560cf7ca077cb4ab0b73cb4930014e7a0b2c019aac",
+      "source_line_ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "excerpt": "raw/transition-negative.txt",
+      "excerpt_sha256": "424573663bd1a1061ea70b5a89191fedcec4942dd655a3fc0b67d675571c7adb"
+    },
+    "transition-concurrent-load": {
+      "path": "build/follow-ups/native-deterministic-policy-concurrent-load.json",
+      "sha256": "a5158cc87b1b07bf1adf992a28208b8e69744cab365f51b521022f915e758b2d",
+      "copy": "raw/transition-concurrent-load.json",
+      "copy_sha256": "a5158cc87b1b07bf1adf992a28208b8e69744cab365f51b521022f915e758b2d"
+    },
+    "transition-test-source": {
+      "path": "core/src/test/native/engine_test.cpp",
+      "sha256": "5ef0e8cbf8fc0b1866132dfaf415561bb261de30929a8438396232b99fd093a7",
+      "source_line_ranges": [
+        [
+          575,
+          611
+        ]
+      ],
+      "excerpt": "raw/transition-test-source.txt",
+      "excerpt_sha256": "6cb59f6296272b16382c68e7140d6a17e03d42ca054da955f2622d874feff6c7"
+    }
+  },
+  "visuals": [
+    {
+      "id": "01-diagnostic-preserved",
+      "artifacts": [
+        "01-diagnostic-preserved.png",
+        "01-diagnostic-preserved.svg"
+      ],
+      "what_it_proves": "The RED assertion reports std::exception; the GREEN standard-handler assertion succeeds for the artificial owned message.",
+      "limitations": [
+        "The string is artificial unit-test input, not a captured GPU driver diagnostic.",
+        "GREEN log records assertion success, not a printed what() string.",
+        "Historical unit logs contain no immutable build identity; current test source is provided and hashed separately."
+      ],
+      "source_keys": [
+        "diagnostic-red",
+        "diagnostic-green",
+        "diagnostic-test"
+      ],
+      "build_identities": []
+    },
+    {
+      "id": "02-vertex-shader-lifetime",
+      "artifacts": [
+        "02-vertex-shader-lifetime.png",
+        "02-vertex-shader-lifetime.svg"
+      ],
+      "what_it_proves": "The pre-fix driver retains 1 shader after one fragment rejection and 16 after 16 repeated attempts; fixed driver retains zero at both measured endpoints.",
+      "limitations": [
+        "Fresh CGL reproduction, not the unsaved original session transcript.",
+        "Chart contains only two observed endpoints per build; it claims no intermediate trajectory, RSS size, or field failure rate.",
+        "Copied fixture omits the separately-tested what() comparison and adds explicit endpoint printing; copied-source hashes and commands are recorded.",
+        "Desktop macOS CGL driver; no Android GPU resource measurement."
+      ],
+      "source_keys": [
+        "allocation-red",
+        "allocation-green"
+      ],
+      "build_identities": [
+        {
+          "state": "red",
+          "identity": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "patches_sha256": "c0ab5e137bfe151bd5da8e5b07befe5ccd844792194c6a72da849a6adcd5df16",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e"
+          },
+          "snapshot": "build/follow-ups/lab-final/engines/9733b1ea4f38ade6c71fc6bfdcce317965b47883f2decbc8f4082c602dca1aea"
+        },
+        {
+          "state": "green",
+          "identity": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e"
+          },
+          "snapshot": "build/follow-ups/lab-diagnostics-fixed/engines/8ca3d2d6929298e2614f58573e9a0006f6e37cfa93ebd0439207cd788d3d1297"
+        }
+      ]
+    },
+    {
+      "id": "03-optional-shader-fallback",
+      "artifacts": [
+        "03-optional-shader-fallback.png",
+        "03-optional-shader-fallback.svg",
+        "03-fallback-geiss-frame-239.png"
+      ],
+      "what_it_proves": "The rejected-shader pre-fix worker failed before emitting any frame. The fallback worker emitted 240 frames and matches the baseline all-frame hash in this recorded case.",
+      "limitations": [
+        "Shader rejection is deliberately injected by a test-only invalid fragment token; not an observed retail-driver incompatibility.",
+        "The failed worker emitted zero frames; no before-rendered image exists or was fabricated.",
+        "Displayed frame is engine frame 239 from a recorded classic-size case; it demonstrates successful fallback rather than visual diffusion quality.",
+        "Recorded artifacts identify a research diffusion PoC build; these are not screenshots of the final APK.",
+        "Image proof is one Geiss case; separate matrix summary records the broader byte-parity checks."
+      ],
+      "source_keys": [
+        "fallback-red-stderr",
+        "fallback-red-manifest",
+        "fallback-red-job",
+        "fallback-red-orchestrator",
+        "fallback-green-manifest",
+        "fallback-green-job",
+        "fallback-green-metrics",
+        "fallback-baseline-metrics",
+        "fallback-matrix-summary",
+        "fallback-frame",
+        "fallback-baseline-frame"
+      ],
+      "build_identities": [
+        {
+          "state": "rejected-before-fallback",
+          "identity": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e",
+            "patches_sha256": "a34f537973f4d8f4a12383e9cdf5dedc28824c58b5dce01d73674c8df53b7bf5"
+          }
+        },
+        {
+          "state": "fallback",
+          "identity": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "patches_sha256": "fbf8855469a52aae89e26a6c7c2ff336deaedb00eb82ba21e98bdde01be54370",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e"
+          }
+        },
+        {
+          "state": "baseline",
+          "identity": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "patches_sha256": "c0ab5e137bfe151bd5da8e5b07befe5ccd844792194c6a72da849a6adcd5df16",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e"
+          }
+        }
+      ]
+    },
+    {
+      "id": "04-deterministic-transition-test",
+      "artifacts": [
+        "04-deterministic-transition-test.png",
+        "04-deterministic-transition-test.svg"
+      ],
+      "what_it_proves": "Recorded old harness failed its width assertion; deterministic CPU/low-CPU inputs exercise the real policy and the full subsequent harness passes.",
+      "limitations": [
+        "Test-only fix: no claim that production engine policy changed.",
+        "CPU percentages and frame rates in the deterministic control are consequences of supplied synthetic timings, not benchmark measurements.",
+        "One observed flaky failure and one passing full run do not measure statistical flake rate.",
+        "Historical native logs do not carry immutable build identities; current test source is hashed separately.",
+        "Concurrent-load observation is a point-in-time worker inventory, not a continuous utilization trace."
+      ],
+      "source_keys": [
+        "transition-red",
+        "transition-green",
+        "transition-positive",
+        "transition-negative",
+        "transition-concurrent-load",
+        "transition-test-source"
+      ],
+      "build_identities": []
+    }
+  ],
+  "proof_gaps": [
+    "Original allocation RED console output was not saved; proof uses explicitly-labeled fresh snapshot reruns.",
+    "No before-rendered frame exists for failed shader loading (zero frames emitted).",
+    "No historical immutable build ID is embedded in diagnostic unit logs or native host logs.",
+    "No retail-device screenshot or quantitative field/performance claim is established by these host/research artifacts."
+  ],
+  "exported_artifacts": [
+    {
+      "path": "01-diagnostic-preserved.png",
+      "sha256": "dbc22c686ec58d147235c9532065754099ccfe83e275faeab75ac5cfbf839c7b"
+    },
+    {
+      "path": "02-vertex-shader-lifetime.png",
+      "sha256": "6313c1464bab228157e4a42a3509ee512353fe5a6eb17d79366c5d9efa30da33"
+    },
+    {
+      "path": "03-fallback-geiss-frame-239.png",
+      "sha256": "4e6445d7bfa0633062f92dd951dbb887ba17e5189cba5356b62bf3b9e516eacc"
+    },
+    {
+      "path": "03-optional-shader-fallback.png",
+      "sha256": "40316cf270afb5efe150221f7d907cb05cef12a67975d571eafa7fc068f0d3ca"
+    },
+    {
+      "path": "04-deterministic-transition-test.png",
+      "sha256": "5b4ff25996f11117ff5c5f6c8bd9f05605a18f08b221d41fea148481f996b57b"
+    },
+    {
+      "path": "01-diagnostic-preserved.svg",
+      "sha256": "5d0b8f09a6d1adcad13b4fe8bcfbbaaeba71cc0c4646dd2b68a561be38646662"
+    },
+    {
+      "path": "02-vertex-shader-lifetime.svg",
+      "sha256": "176968bace5f3b0fcf1b80a48791dc67107475e0b3e2a9b366459510eed4c6d0"
+    },
+    {
+      "path": "03-optional-shader-fallback.svg",
+      "sha256": "dc3ebcfced45f4661f56043dbc18887f674b4c93af19f744fa92400482580f78"
+    },
+    {
+      "path": "04-deterministic-transition-test.svg",
+      "sha256": "0e45ada5035e4fa140d40a386f3db897adf7a210bcbd77a927b64d98b8496e7f"
+    },
+    {
+      "path": "allocation-builds.json",
+      "sha256": "9729080905326e391aaddbd867297c97c91baeff9fa74c1e04b54a215149b577"
+    }
+  ]
+}

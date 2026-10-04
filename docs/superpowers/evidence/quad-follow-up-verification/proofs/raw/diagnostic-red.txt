@@ -1,0 +1,8 @@
+196: [ RUN      ] ShaderException.PreservesDriverDiagnosticThroughStandardExceptionHandler
+197: /Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/third_party/projectm/tests/libprojectM/ShaderExceptionTest.cpp:15: Failure
+198: Expected equality of these values:
+199:   error.what()
+200:     Which is: "std::exception"
+201:   "fragment shader: unsupported driver instruction"
+202: 
+203: [  FAILED  ] ShaderException.PreservesDriverDiagnosticThroughStandardExceptionHandler (0 ms)

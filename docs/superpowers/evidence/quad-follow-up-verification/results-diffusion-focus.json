@@ -1,0 +1,895 @@
+{
+  "render_jobs": 168,
+  "presets": 12,
+  "nondeterministic": [],
+  "comparisons": [
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "height": 1330,
+      "baseline_img_err": 0.11533796787261963,
+      "diffusion_img_err": 0.07191808521747589,
+      "delta_img_err": -0.04341988265514374,
+      "authored_pairwise_noise": {
+        "c656": 0.04752844572067261,
+        "c675": 0.04325244575738907
+      },
+      "baseline_luma_ratio": 1.0857524947357575,
+      "diffusion_luma_ratio": 0.9045177820071509,
+      "authored_center_rgb": [
+        0.21655071059915343,
+        0.17868981460676964,
+        0.17330243030070022
+      ],
+      "baseline_center_rgb": [
+        0.26325425128967866,
+        0.20911274214327094,
+        0.20117854099964064
+      ],
+      "diffusion_center_rgb": [
+        0.22376279285124367,
+        0.1703029415186017,
+        0.16451986983260242
+      ],
+      "authored_saturation": 0.26228801906108856,
+      "baseline_saturation": 0.2432563990354538,
+      "diffusion_saturation": 0.29849993884563447,
+      "authored_motion_mae": 0.19834278523921967,
+      "baseline_motion_mae": 0.258676677942276,
+      "diffusion_motion_mae": 0.20311525464057922,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "height": 2160,
+      "baseline_img_err": 0.12751051783561707,
+      "diffusion_img_err": 0.07280904799699783,
+      "delta_img_err": -0.05470146983861923,
+      "authored_pairwise_noise": {
+        "c656": 0.04752844572067261,
+        "c675": 0.04325244575738907
+      },
+      "baseline_luma_ratio": 1.1186728626472255,
+      "diffusion_luma_ratio": 0.8665528067973564,
+      "authored_center_rgb": [
+        0.21655071059915343,
+        0.17868981460676964,
+        0.17330243030070022
+      ],
+      "baseline_center_rgb": [
+        0.2574054181134258,
+        0.20336179020540834,
+        0.19559928574535532
+      ],
+      "diffusion_center_rgb": [
+        0.21385593768596683,
+        0.1600266744268438,
+        0.15460813351350064
+      ],
+      "authored_saturation": 0.26228801906108856,
+      "baseline_saturation": 0.23264582753181456,
+      "diffusion_saturation": 0.31451950371265414,
+      "authored_motion_mae": 0.19834278523921967,
+      "baseline_motion_mae": 0.27036136388778687,
+      "diffusion_motion_mae": 0.1988169252872467,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "height": 1330,
+      "baseline_img_err": 0.38526344299316406,
+      "diffusion_img_err": 0.019922379404306412,
+      "delta_img_err": -0.36534106358885765,
+      "authored_pairwise_noise": {
+        "c656": 0.013884445652365685,
+        "c675": 0.014849428087472916
+      },
+      "baseline_luma_ratio": 15.347228900616058,
+      "diffusion_luma_ratio": 0.4088309155290845,
+      "authored_center_rgb": [
+        0.13353164617005436,
+        0.13353164617005436,
+        0.13353164617005436
+      ],
+      "baseline_center_rgb": [
+        0.2472156709304492,
+        0.2472156709304492,
+        0.2472156709304492
+      ],
+      "diffusion_center_rgb": [
+        0.1276152157509684,
+        0.1276152157509684,
+        0.1276152157509684
+      ],
+      "authored_saturation": 0.0,
+      "baseline_saturation": 0.0,
+      "diffusion_saturation": 0.0,
+      "authored_motion_mae": 0.02430899813771248,
+      "baseline_motion_mae": 0.04215984791517258,
+      "diffusion_motion_mae": 0.0011889110319316387,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "height": 2160,
+      "baseline_img_err": 0.39994144439697266,
+      "diffusion_img_err": 0.02042270265519619,
+      "delta_img_err": -0.37951874174177647,
+      "authored_pairwise_noise": {
+        "c656": 0.013884445652365685,
+        "c675": 0.014849428087472916
+      },
+      "baseline_luma_ratio": 15.904296646477649,
+      "diffusion_luma_ratio": 0.378849250733342,
+      "authored_center_rgb": [
+        0.13353164617005436,
+        0.13353164617005436,
+        0.13353164617005436
+      ],
+      "baseline_center_rgb": [
+        0.2713348438414075,
+        0.2713348438414075,
+        0.2713348438414075
+      ],
+      "diffusion_center_rgb": [
+        0.12472449755847556,
+        0.12472449755847556,
+        0.12472449755847556
+      ],
+      "authored_saturation": 0.0,
+      "baseline_saturation": 0.0,
+      "diffusion_saturation": 0.0,
+      "authored_motion_mae": 0.02430899813771248,
+      "baseline_motion_mae": 0.03524375334382057,
+      "diffusion_motion_mae": 0.00026954890927299857,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "height": 1330,
+      "baseline_img_err": 0.06353401392698288,
+      "diffusion_img_err": 0.06962639093399048,
+      "delta_img_err": 0.006092377007007599,
+      "authored_pairwise_noise": {
+        "c656": 0.052113693207502365,
+        "c675": 0.05170496553182602
+      },
+      "baseline_luma_ratio": 0.947041285757145,
+      "diffusion_luma_ratio": 1.039022425371468,
+      "authored_center_rgb": [
+        0.7590885248930234,
+        0.5293287338702564,
+        0.48683642738141
+      ],
+      "baseline_center_rgb": [
+        0.7189391759368637,
+        0.5110330005123671,
+        0.4639286756230362
+      ],
+      "diffusion_center_rgb": [
+        0.8091536496158906,
+        0.5465540080863197,
+        0.5085274014854295
+      ],
+      "authored_saturation": 0.47281287908554076,
+      "baseline_saturation": 0.47240687608718873,
+      "diffusion_saturation": 0.4968572735786438,
+      "authored_motion_mae": 0.13567206263542175,
+      "baseline_motion_mae": 0.1420881152153015,
+      "diffusion_motion_mae": 0.14218385517597198,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "height": 2160,
+      "baseline_img_err": 0.0964149460196495,
+      "diffusion_img_err": 0.07034529000520706,
+      "delta_img_err": -0.026069656014442444,
+      "authored_pairwise_noise": {
+        "c656": 0.052113693207502365,
+        "c675": 0.05170496553182602
+      },
+      "baseline_luma_ratio": 0.9305909590326524,
+      "diffusion_luma_ratio": 1.0391815776758204,
+      "authored_center_rgb": [
+        0.7590885248930234,
+        0.5293287338702564,
+        0.48683642738141
+      ],
+      "baseline_center_rgb": [
+        0.6927478824203933,
+        0.5081868261064715,
+        0.45569367339110284
+      ],
+      "diffusion_center_rgb": [
+        0.8081637689717734,
+        0.5462905557509784,
+        0.5088819202529906
+      ],
+      "authored_saturation": 0.47281287908554076,
+      "baseline_saturation": 0.4547151207923889,
+      "diffusion_saturation": 0.4950333654880524,
+      "authored_motion_mae": 0.13567206263542175,
+      "baseline_motion_mae": 0.14505918323993683,
+      "diffusion_motion_mae": 0.14193855226039886,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "height": 1330,
+      "baseline_img_err": 0.09533022344112396,
+      "diffusion_img_err": 0.0624876394867897,
+      "delta_img_err": -0.03284258395433426,
+      "authored_pairwise_noise": {
+        "c656": 0.05775360018014908,
+        "c675": 0.06315570324659348
+      },
+      "baseline_luma_ratio": 0.997247252586683,
+      "diffusion_luma_ratio": 0.9707488317645185,
+      "authored_center_rgb": [
+        0.6794926401933326,
+        0.23278165574013335,
+        0.06904558852655744
+      ],
+      "baseline_center_rgb": [
+        0.6441841521566799,
+        0.2461207612810468,
+        0.06915405913642388
+      ],
+      "diffusion_center_rgb": [
+        0.6499819074865123,
+        0.22191011159071655,
+        0.07302257152768579
+      ],
+      "authored_saturation": 0.7794573783874512,
+      "baseline_saturation": 0.7745847582817078,
+      "diffusion_saturation": 0.750593364238739,
+      "authored_motion_mae": 0.15648359060287476,
+      "baseline_motion_mae": 0.16820788383483887,
+      "diffusion_motion_mae": 0.1629280000925064,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "height": 2160,
+      "baseline_img_err": 0.10880456119775772,
+      "diffusion_img_err": 0.05888305604457855,
+      "delta_img_err": -0.04992150515317917,
+      "authored_pairwise_noise": {
+        "c656": 0.05775360018014908,
+        "c675": 0.06315570324659348
+      },
+      "baseline_luma_ratio": 1.0026696405935704,
+      "diffusion_luma_ratio": 0.9643180495367262,
+      "authored_center_rgb": [
+        0.6794926401933326,
+        0.23278165574013335,
+        0.06904558852655744
+      ],
+      "baseline_center_rgb": [
+        0.028698251958640987,
+        0.2662820434324065,
+        0.06949694659724741
+      ],
+      "diffusion_center_rgb": [
+        0.5831340426393681,
+        0.2235424700278131,
+        0.07057686412881764
+      ],
+      "authored_saturation": 0.7794573783874512,
+      "baseline_saturation": 0.7845889925956726,
+      "diffusion_saturation": 0.7493949890136719,
+      "authored_motion_mae": 0.15648359060287476,
+      "baseline_motion_mae": 0.17166507244110107,
+      "diffusion_motion_mae": 0.16143915057182312,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "ORB - Toffie Grider.milk",
+      "height": 1330,
+      "baseline_img_err": 0.05024658888578415,
+      "diffusion_img_err": 0.04472917690873146,
+      "delta_img_err": -0.005517411977052689,
+      "authored_pairwise_noise": {
+        "c656": 0.035985805094242096,
+        "c675": 0.03985114023089409
+      },
+      "baseline_luma_ratio": 0.8833524865117128,
+      "diffusion_luma_ratio": 0.9001721902035897,
+      "authored_center_rgb": [
+        0.6107677990982489,
+        0.38510082286033853,
+        0.0
+      ],
+      "baseline_center_rgb": [
+        0.4638239005721468,
+        0.21764253543596734,
+        0.0
+      ],
+      "diffusion_center_rgb": [
+        0.4814594751958078,
+        0.25228444964483693,
+        0.0
+      ],
+      "authored_saturation": 0.9021246075630188,
+      "baseline_saturation": 0.8828696131706237,
+      "diffusion_saturation": 0.8672582507133484,
+      "authored_motion_mae": 0.12791277468204498,
+      "baseline_motion_mae": 0.1248706579208374,
+      "diffusion_motion_mae": 0.127292662858963,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "ORB - Toffie Grider.milk",
+      "height": 2160,
+      "baseline_img_err": 0.06338360905647278,
+      "diffusion_img_err": 0.03513365238904953,
+      "delta_img_err": -0.02824995666742325,
+      "authored_pairwise_noise": {
+        "c656": 0.035985805094242096,
+        "c675": 0.03985114023089409
+      },
+      "baseline_luma_ratio": 1.090743627948307,
+      "diffusion_luma_ratio": 1.0294145365651193,
+      "authored_center_rgb": [
+        0.6107677990982489,
+        0.38510082286033853,
+        0.0
+      ],
+      "baseline_center_rgb": [
+        0.686977132062959,
+        0.43985687327271433,
+        0.0
+      ],
+      "diffusion_center_rgb": [
+        0.6377057711668129,
+        0.3639349460286301,
+        0.0
+      ],
+      "authored_saturation": 0.9021246075630188,
+      "baseline_saturation": 0.9290418982505798,
+      "diffusion_saturation": 0.9083151936531066,
+      "authored_motion_mae": 0.12791277468204498,
+      "baseline_motion_mae": 0.13050226867198944,
+      "diffusion_motion_mae": 0.12528428435325623,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "height": 1330,
+      "baseline_img_err": 0.06799310445785522,
+      "diffusion_img_err": 0.015654953196644783,
+      "delta_img_err": -0.05233815126121044,
+      "authored_pairwise_noise": {
+        "c656": 0.09418442100286484,
+        "c675": 0.0937843769788742
+      },
+      "baseline_luma_ratio": 1.123682375200193,
+      "diffusion_luma_ratio": 0.9982429167677923,
+      "authored_center_rgb": [
+        0.9570368248309422,
+        0.4858860311801489,
+        0.4858860311801489
+      ],
+      "baseline_center_rgb": [
+        0.9642452754289962,
+        0.5291646869718352,
+        0.5291646869718352
+      ],
+      "diffusion_center_rgb": [
+        0.9564890840487504,
+        0.48131876290378445,
+        0.48131876290378445
+      ],
+      "authored_saturation": 0.679234504699707,
+      "baseline_saturation": 0.624504005908966,
+      "diffusion_saturation": 0.6804872870445251,
+      "authored_motion_mae": 0.22481690347194672,
+      "baseline_motion_mae": 0.23042353987693787,
+      "diffusion_motion_mae": 0.22400860488414764,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "height": 2160,
+      "baseline_img_err": 0.10517257452011108,
+      "diffusion_img_err": 0.018281100317835808,
+      "delta_img_err": -0.08689147420227528,
+      "authored_pairwise_noise": {
+        "c656": 0.09418442100286484,
+        "c675": 0.0937843769788742
+      },
+      "baseline_luma_ratio": 1.2063795913938413,
+      "diffusion_luma_ratio": 0.9905247384335332,
+      "authored_center_rgb": [
+        0.9570368248309422,
+        0.4858860311801489,
+        0.4858860311801489
+      ],
+      "baseline_center_rgb": [
+        0.9685569265884723,
+        0.559911122410963,
+        0.559911122410963
+      ],
+      "diffusion_center_rgb": [
+        0.9559164487071835,
+        0.47873663008477585,
+        0.47873663008477585
+      ],
+      "authored_saturation": 0.679234504699707,
+      "baseline_saturation": 0.5846662282943725,
+      "diffusion_saturation": 0.6835485339164734,
+      "authored_motion_mae": 0.22481690347194672,
+      "baseline_motion_mae": 0.23091980814933777,
+      "diffusion_motion_mae": 0.22273629903793335,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "height": 1330,
+      "baseline_img_err": 0.19658677279949188,
+      "diffusion_img_err": 0.21625478565692902,
+      "delta_img_err": 0.019668012857437134,
+      "authored_pairwise_noise": {
+        "c656": 0.1208847388625145,
+        "c675": 0.08342201262712479
+      },
+      "baseline_luma_ratio": 1.0346938051759282,
+      "diffusion_luma_ratio": 0.9462287330982629,
+      "authored_center_rgb": [
+        0.7541784919553087,
+        0.7157117309193431,
+        0.6017542578528737
+      ],
+      "baseline_center_rgb": [
+        0.8007934413679606,
+        0.6998733721040419,
+        0.6249232102345713
+      ],
+      "diffusion_center_rgb": [
+        0.775850322214903,
+        0.7381275093500276,
+        0.6193357068936094
+      ],
+      "authored_saturation": 0.3732801377773285,
+      "baseline_saturation": 0.35468565821647646,
+      "diffusion_saturation": 0.3900272995233536,
+      "authored_motion_mae": 0.21646252274513245,
+      "baseline_motion_mae": 0.25366508960723877,
+      "diffusion_motion_mae": 0.24600200355052948,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "height": 2160,
+      "baseline_img_err": 0.2003277689218521,
+      "diffusion_img_err": 0.19186758995056152,
+      "delta_img_err": -0.008460178971290588,
+      "authored_pairwise_noise": {
+        "c656": 0.1208847388625145,
+        "c675": 0.08342201262712479
+      },
+      "baseline_luma_ratio": 0.9693452017984666,
+      "diffusion_luma_ratio": 0.973007099311487,
+      "authored_center_rgb": [
+        0.7541784919553087,
+        0.7157117309193431,
+        0.6017542578528737
+      ],
+      "baseline_center_rgb": [
+        0.7267558760016993,
+        0.7085845249397341,
+        0.5682453576048476
+      ],
+      "diffusion_center_rgb": [
+        0.7339536459436525,
+        0.6854863029879521,
+        0.571005271136554
+      ],
+      "authored_saturation": 0.3732801377773285,
+      "baseline_saturation": 0.3847611784934998,
+      "diffusion_saturation": 0.38329299092292785,
+      "authored_motion_mae": 0.21646252274513245,
+      "baseline_motion_mae": 0.2013474404811859,
+      "diffusion_motion_mae": 0.20964501798152924,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 1330,
+      "baseline_img_err": 0.20416493713855743,
+      "diffusion_img_err": 0.17706140875816345,
+      "delta_img_err": -0.027103528380393982,
+      "authored_pairwise_noise": {
+        "c656": 0.1631978154182434,
+        "c675": 0.16082586348056793
+      },
+      "baseline_luma_ratio": 0.9085580638311279,
+      "diffusion_luma_ratio": 0.9558962431994862,
+      "authored_center_rgb": [
+        0.585996686256202,
+        0.4534434225264677,
+        0.4198341297303237
+      ],
+      "baseline_center_rgb": [
+        0.5273294087788347,
+        0.4088087244669131,
+        0.3816357369804092
+      ],
+      "diffusion_center_rgb": [
+        0.5580087597997224,
+        0.4325970579215477,
+        0.39916904447766227
+      ],
+      "authored_saturation": 0.3656960964202881,
+      "baseline_saturation": 0.3800554394721985,
+      "diffusion_saturation": 0.37766267657279967,
+      "authored_motion_mae": 0.2079867124557495,
+      "baseline_motion_mae": 0.2270946204662323,
+      "diffusion_motion_mae": 0.23495371639728546,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 2160,
+      "baseline_img_err": 0.1785174161195755,
+      "diffusion_img_err": 0.21385638415813446,
+      "delta_img_err": 0.03533896803855896,
+      "authored_pairwise_noise": {
+        "c656": 0.1631978154182434,
+        "c675": 0.16082586348056793
+      },
+      "baseline_luma_ratio": 0.9866480046515864,
+      "diffusion_luma_ratio": 0.9465659062882003,
+      "authored_center_rgb": [
+        0.585996686256202,
+        0.4534434225264677,
+        0.4198341297303237
+      ],
+      "baseline_center_rgb": [
+        0.5692067665623991,
+        0.4446270505212116,
+        0.4165587743585088
+      ],
+      "diffusion_center_rgb": [
+        0.5425669941732482,
+        0.4244609880104948,
+        0.3882366699573346
+      ],
+      "authored_saturation": 0.3656960964202881,
+      "baseline_saturation": 0.3643405020236969,
+      "diffusion_saturation": 0.37663252353668214,
+      "authored_motion_mae": 0.2079867124557495,
+      "baseline_motion_mae": 0.2181859016418457,
+      "diffusion_motion_mae": 0.2488451451063156,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "height": 1330,
+      "baseline_img_err": 0.08810661733150482,
+      "diffusion_img_err": 0.05224626883864403,
+      "delta_img_err": -0.035860348492860794,
+      "authored_pairwise_noise": {
+        "c656": 0.05015045404434204,
+        "c675": 0.048741694539785385
+      },
+      "baseline_luma_ratio": 0.9915792168120691,
+      "diffusion_luma_ratio": 0.9826916183691061,
+      "authored_center_rgb": [
+        0.2733935041634004,
+        0.2950259473961895,
+        0.4553962054221563
+      ],
+      "baseline_center_rgb": [
+        0.15329024451589798,
+        0.29018423032844787,
+        0.4683109735122113
+      ],
+      "diffusion_center_rgb": [
+        0.19866412328496424,
+        0.28849662212949434,
+        0.46121696543003843
+      ],
+      "authored_saturation": 0.866251266002655,
+      "baseline_saturation": 0.8761168837547302,
+      "diffusion_saturation": 0.8892814517021179,
+      "authored_motion_mae": 0.25418516993522644,
+      "baseline_motion_mae": 0.2485324740409851,
+      "diffusion_motion_mae": 0.2529202103614807,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "height": 2160,
+      "baseline_img_err": 0.1105455681681633,
+      "diffusion_img_err": 0.057162437587976456,
+      "delta_img_err": -0.053383130580186844,
+      "authored_pairwise_noise": {
+        "c656": 0.05015045404434204,
+        "c675": 0.048741694539785385
+      },
+      "baseline_luma_ratio": 0.99201681553564,
+      "diffusion_luma_ratio": 0.9865621812966142,
+      "authored_center_rgb": [
+        0.2733935041634004,
+        0.2950259473961895,
+        0.4553962054221563
+      ],
+      "baseline_center_rgb": [
+        0.14794905721097595,
+        0.2902840569178417,
+        0.4677771261057143
+      ],
+      "diffusion_center_rgb": [
+        0.17232097181561662,
+        0.2903940437173455,
+        0.46105208396372893
+      ],
+      "authored_saturation": 0.866251266002655,
+      "baseline_saturation": 0.8853610634803772,
+      "diffusion_saturation": 0.8956109404563903,
+      "authored_motion_mae": 0.25418516993522644,
+      "baseline_motion_mae": 0.2538624107837677,
+      "diffusion_motion_mae": 0.24972249567508698,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "height": 1330,
+      "baseline_img_err": 0.07339366525411606,
+      "diffusion_img_err": 0.07006783038377762,
+      "delta_img_err": -0.00332583487033844,
+      "authored_pairwise_noise": {
+        "c656": 0.011332983151078224,
+        "c675": 0.010349310003221035
+      },
+      "baseline_luma_ratio": 1.0222879860164826,
+      "diffusion_luma_ratio": 0.9243521841722021,
+      "authored_center_rgb": [
+        0.7823252170743521,
+        0.6077786141194446,
+        0.3174623895904172
+      ],
+      "baseline_center_rgb": [
+        0.8633148675859414,
+        0.7006398317710387,
+        0.3498810130314619
+      ],
+      "diffusion_center_rgb": [
+        0.7590120405257375,
+        0.5963362540959829,
+        0.31110125462576776
+      ],
+      "authored_saturation": 0.6235576510429383,
+      "baseline_saturation": 0.6382786154747009,
+      "diffusion_saturation": 0.6736191034317016,
+      "authored_motion_mae": 0.14771069586277008,
+      "baseline_motion_mae": 0.14348943531513214,
+      "diffusion_motion_mae": 0.13205336034297943,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "height": 2160,
+      "baseline_img_err": 0.07299473136663437,
+      "diffusion_img_err": 0.08547782152891159,
+      "delta_img_err": 0.012483090162277222,
+      "authored_pairwise_noise": {
+        "c656": 0.011332983151078224,
+        "c675": 0.010349310003221035
+      },
+      "baseline_luma_ratio": 1.0286580568944728,
+      "diffusion_luma_ratio": 0.8935827932715171,
+      "authored_center_rgb": [
+        0.7823252170743521,
+        0.6077786141194446,
+        0.3174623895904172
+      ],
+      "baseline_center_rgb": [
+        0.8892574090464372,
+        0.7286083294879168,
+        0.3614320990018306
+      ],
+      "diffusion_center_rgb": [
+        0.7434869987089485,
+        0.600905425047784,
+        0.3108965207015804
+      ],
+      "authored_saturation": 0.6235576510429383,
+      "baseline_saturation": 0.6381338953971862,
+      "diffusion_saturation": 0.6961754560470581,
+      "authored_motion_mae": 0.14771069586277008,
+      "baseline_motion_mae": 0.14143292605876923,
+      "diffusion_motion_mae": 0.12240000069141388,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "height": 1330,
+      "baseline_img_err": 0.07421573251485825,
+      "diffusion_img_err": 0.012191402725875378,
+      "delta_img_err": -0.06202432978898287,
+      "authored_pairwise_noise": {
+        "c656": 0.009501464664936066,
+        "c675": 0.009671374224126339
+      },
+      "baseline_luma_ratio": 1.293953669868127,
+      "diffusion_luma_ratio": 1.0112459992845406,
+      "authored_center_rgb": [
+        0.17450808962919687,
+        0.028298248592366237,
+        0.3845866558150295
+      ],
+      "baseline_center_rgb": [
+        0.19442724561880434,
+        0.02827880697026757,
+        0.4689375098621876
+      ],
+      "diffusion_center_rgb": [
+        0.17624673809119468,
+        0.02827451374361278,
+        0.39045207956600375
+      ],
+      "authored_saturation": 0.978399121761322,
+      "baseline_saturation": 0.9805603623390198,
+      "diffusion_saturation": 0.978405213356018,
+      "authored_motion_mae": 0.12913453578948975,
+      "baseline_motion_mae": 0.1556856334209442,
+      "diffusion_motion_mae": 0.12933993339538574,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "height": 2160,
+      "baseline_img_err": 0.09177563339471817,
+      "diffusion_img_err": 0.010860297828912735,
+      "delta_img_err": -0.08091533556580544,
+      "authored_pairwise_noise": {
+        "c656": 0.009501464664936066,
+        "c675": 0.009671374224126339
+      },
+      "baseline_luma_ratio": 1.3813677977304155,
+      "diffusion_luma_ratio": 0.9970852297669608,
+      "authored_center_rgb": [
+        0.17450808962919687,
+        0.028298248592366237,
+        0.3845866558150295
+      ],
+      "baseline_center_rgb": [
+        0.21206165794828732,
+        0.028291465964279224,
+        0.5044517960460291
+      ],
+      "diffusion_center_rgb": [
+        0.17335061525092288,
+        0.028283626199643964,
+        0.386804996866931
+      ],
+      "authored_saturation": 0.978399121761322,
+      "baseline_saturation": 0.9810673475265503,
+      "diffusion_saturation": 0.9783718705177307,
+      "authored_motion_mae": 0.12913453578948975,
+      "baseline_motion_mae": 0.16170811653137207,
+      "diffusion_motion_mae": 0.128561332821846,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "height": 1330,
+      "baseline_img_err": 0.1045612096786499,
+      "diffusion_img_err": 0.07599440962076187,
+      "delta_img_err": -0.02856680005788803,
+      "authored_pairwise_noise": {
+        "c656": 0.033052943646907806,
+        "c675": 0.03205646947026253
+      },
+      "baseline_luma_ratio": 1.0778221388033116,
+      "diffusion_luma_ratio": 0.832477793239947,
+      "authored_center_rgb": [
+        0.327968001817483,
+        0.32132922984999096,
+        0.4674493201915347
+      ],
+      "baseline_center_rgb": [
+        0.37183330109007123,
+        0.3596075798000004,
+        0.4831904936080583
+      ],
+      "diffusion_center_rgb": [
+        0.23678093118956076,
+        0.25998083340227784,
+        0.40704623310572274
+      ],
+      "authored_saturation": 0.7253665208816529,
+      "baseline_saturation": 0.692667555809021,
+      "diffusion_saturation": 0.7228772878646851,
+      "authored_motion_mae": 0.34530991315841675,
+      "baseline_motion_mae": 0.38398557901382446,
+      "diffusion_motion_mae": 0.29975080490112305,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "height": 2160,
+      "baseline_img_err": 0.12224019318819046,
+      "diffusion_img_err": 0.1137826070189476,
+      "delta_img_err": -0.008457586169242859,
+      "authored_pairwise_noise": {
+        "c656": 0.033052943646907806,
+        "c675": 0.03205646947026253
+      },
+      "baseline_luma_ratio": 1.0229762806557021,
+      "diffusion_luma_ratio": 0.7294554968187607,
+      "authored_center_rgb": [
+        0.327968001817483,
+        0.32132922984999096,
+        0.4674493201915347
+      ],
+      "baseline_center_rgb": [
+        0.3372978461253328,
+        0.33683897364565696,
+        0.4646259414179124
+      ],
+      "diffusion_center_rgb": [
+        0.1799499343284768,
+        0.214901546298818,
+        0.371911503091463
+      ],
+      "authored_saturation": 0.7253665208816529,
+      "baseline_saturation": 0.6912143111228943,
+      "diffusion_saturation": 0.7224353313446045,
+      "authored_motion_mae": 0.34530991315841675,
+      "baseline_motion_mae": 0.37646955251693726,
+      "diffusion_motion_mae": 0.27378425002098083,
+      "authored_unique_measurement_frames": 120,
+      "baseline_unique_measurement_frames": 120,
+      "diffusion_unique_measurement_frames": 120
+    }
+  ]
+}

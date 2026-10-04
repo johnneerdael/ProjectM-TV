@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1080pt" height="590.4pt" viewBox="0 0 1080 590.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-04T03:24:38.557046</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 590.4 
+L 1080 590.4 
+L 1080 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #a43835" x="48.6" y="147.9495" transform="rotate(-0 48.6 147.9495)">Before — detail lost in what()</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 194.182639)">shader-message-red.log, L199–203</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 207.65592)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 227.609748)">error.what()</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 243.691232)">  Which is: "std::exception"</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 260.191232)">Expected:</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 276.65342)">  "fragment shader: unsupported driver instruction"</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 290.15592)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 309.682639)">[ FAILED ] standard-handler regression test</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #21715b" x="583.654206" y="147.9495" transform="rotate(-0 583.654206 147.9495)">After — same assertion passes</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 194.182639)">shader-message-green.log, L142–145</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 207.65592)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 227.191232)">[ OK ] ShaderException.</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 243.682639)">PreservesDriverDiagnosticThroughStandardExceptionHandler</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 257.15592)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 276.682639)">The test throws the same artificial message and checks</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 293.15342)">what() through catch (const std::exception&amp;).</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 306.65592)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(583.654206 326.182639)">This is test input, not an actual driver's wording.</text>
+   </g>
+  </g>
+  <g id="text_5">
+   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start" x="48.6" y="37.380562" transform="rotate(-0 48.6 37.380562)">ShaderException preserves its owned diagnostic</text>
+  </g>
+  <g id="text_6">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="48.6" y="66.977325" transform="rotate(-0 48.6 66.977325)">Standard-handler regression • artificial diagnostic string, honestly labeled</text>
+  </g>
+  <g id="text_7">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 556.102238)">Sources: build/follow-ups/shader-message-red.log (L196–203) SHA256 86a78dd73bfe55d9</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 569.602238)">build/follow-ups/shader-message-green.log (L142–145) SHA256 a022b8e4f387f84a • full hashes and test source in manifest.json / raw/</text>
+  </g>
+ </g>
+</svg>

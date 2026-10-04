@@ -1,0 +1,282 @@
+{
+  "jobs": 24,
+  "nondeterministic": [],
+  "comparisons": [
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "height": 1330,
+      "rgba8_img_err": 0.07191808521747589,
+      "rgba16f_img_err": 0.07205912470817566,
+      "target_format_img_difference": 0.0023121535778045654,
+      "rgba8_luma_ratio": 0.9045177820071509,
+      "rgba16f_luma_ratio": 0.8952483382984984,
+      "rgba8_center_rgb": [
+        0.22376279285124367,
+        0.1703029415186017,
+        0.16451986983260242
+      ],
+      "rgba16f_center_rgb": [
+        0.2226280622545857,
+        0.16922931967960766,
+        0.16352535388276263
+      ],
+      "rgba8_saturation": 0.29849993884563447,
+      "rgba16f_saturation": 0.2982742041349411,
+      "rgba8_motion_mae": 0.20311525464057922,
+      "rgba16f_motion_mae": 0.2015068382024765
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "height": 2160,
+      "rgba8_img_err": 0.07280904799699783,
+      "rgba16f_img_err": 0.07324569672346115,
+      "target_format_img_difference": 0.00233979569748044,
+      "rgba8_luma_ratio": 0.8665528067973564,
+      "rgba16f_luma_ratio": 0.8566280622708486,
+      "rgba8_center_rgb": [
+        0.21385593768596683,
+        0.1600266744268438,
+        0.15460813351350064
+      ],
+      "rgba16f_center_rgb": [
+        0.21161930381881403,
+        0.15902617341947067,
+        0.15363345195813663
+      ],
+      "rgba8_saturation": 0.31451950371265414,
+      "rgba16f_saturation": 0.3143476814031601,
+      "rgba8_motion_mae": 0.1988169252872467,
+      "rgba16f_motion_mae": 0.19701679050922394
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "height": 1330,
+      "rgba8_img_err": 0.019922379404306412,
+      "rgba16f_img_err": 0.02004306949675083,
+      "target_format_img_difference": 0.0003199648344889283,
+      "rgba8_luma_ratio": 0.4088309155290845,
+      "rgba16f_luma_ratio": 0.39655813881055263,
+      "rgba8_center_rgb": [
+        0.1276152157509684,
+        0.1276152157509684,
+        0.1276152157509684
+      ],
+      "rgba16f_center_rgb": [
+        0.12743584990440027,
+        0.12743584990440027,
+        0.12743584990440027
+      ],
+      "rgba8_saturation": 0.0,
+      "rgba16f_saturation": 0.0,
+      "rgba8_motion_mae": 0.0011889110319316387,
+      "rgba16f_motion_mae": 0.0006385938613675535
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "height": 2160,
+      "rgba8_img_err": 0.02042270265519619,
+      "rgba16f_img_err": 0.020404672250151634,
+      "target_format_img_difference": 3.219255813746713e-05,
+      "rgba8_luma_ratio": 0.378849250733342,
+      "rgba16f_luma_ratio": 0.3797378926689213,
+      "rgba8_center_rgb": [
+        0.12472449755847556,
+        0.12472449755847556,
+        0.12472449755847556
+      ],
+      "rgba16f_center_rgb": [
+        0.12493755846924677,
+        0.12493755846924677,
+        0.12493755846924677
+      ],
+      "rgba8_saturation": 0.0,
+      "rgba16f_saturation": 0.0,
+      "rgba8_motion_mae": 0.00026954890927299857,
+      "rgba16f_motion_mae": 0.00025053799618035555
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "height": 1330,
+      "rgba8_img_err": 0.07599440962076187,
+      "rgba16f_img_err": 0.07653475552797318,
+      "target_format_img_difference": 0.001331458450295031,
+      "rgba8_luma_ratio": 0.832477793239947,
+      "rgba16f_luma_ratio": 0.8293991964727264,
+      "rgba8_center_rgb": [
+        0.23678093118956076,
+        0.25998083340227784,
+        0.40704623310572274
+      ],
+      "rgba16f_center_rgb": [
+        0.2356626187376275,
+        0.2589057072232994,
+        0.40540006009065854
+      ],
+      "rgba8_saturation": 0.7228772878646851,
+      "rgba16f_saturation": 0.723647129535675,
+      "rgba8_motion_mae": 0.29975080490112305,
+      "rgba16f_motion_mae": 0.299421489238739
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "height": 2160,
+      "rgba8_img_err": 0.1137826070189476,
+      "rgba16f_img_err": 0.11424217373132706,
+      "target_format_img_difference": 0.000979253905825317,
+      "rgba8_luma_ratio": 0.7294554968187607,
+      "rgba16f_luma_ratio": 0.7269400132597896,
+      "rgba8_center_rgb": [
+        0.1799499343284768,
+        0.214901546298818,
+        0.371911503091463
+      ],
+      "rgba16f_center_rgb": [
+        0.1791569534433501,
+        0.21402026778915006,
+        0.37035613720636135
+      ],
+      "rgba8_saturation": 0.7224353313446045,
+      "rgba16f_saturation": 0.7228182554244995,
+      "rgba8_motion_mae": 0.27378425002098083,
+      "rgba16f_motion_mae": 0.27347275614738464
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "height": 1330,
+      "rgba8_img_err": 0.07006783038377762,
+      "rgba16f_img_err": 0.07318753749132156,
+      "target_format_img_difference": 0.012265793979167938,
+      "rgba8_luma_ratio": 0.9243521841722021,
+      "rgba16f_luma_ratio": 0.9147598871102057,
+      "rgba8_center_rgb": [
+        0.7590120405257375,
+        0.5963362540959829,
+        0.31110125462576776
+      ],
+      "rgba16f_center_rgb": [
+        0.7518099107286706,
+        0.5909409838404234,
+        0.30970858104141796
+      ],
+      "rgba8_saturation": 0.6736191034317016,
+      "rgba16f_saturation": 0.6790203332901001,
+      "rgba8_motion_mae": 0.13205336034297943,
+      "rgba16f_motion_mae": 0.13292084634304047
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "height": 2160,
+      "rgba8_img_err": 0.08547782152891159,
+      "rgba16f_img_err": 0.08747987449169159,
+      "target_format_img_difference": 0.012553786858916283,
+      "rgba8_luma_ratio": 0.8935827932715171,
+      "rgba16f_luma_ratio": 0.8890487730084612,
+      "rgba8_center_rgb": [
+        0.7434869987089485,
+        0.600905425047784,
+        0.3108965207015804
+      ],
+      "rgba16f_center_rgb": [
+        0.7396105420209494,
+        0.5923668347145312,
+        0.30941143689986284
+      ],
+      "rgba8_saturation": 0.6961754560470581,
+      "rgba16f_saturation": 0.6961283206939697,
+      "rgba8_motion_mae": 0.12240000069141388,
+      "rgba16f_motion_mae": 0.12305870652198792
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 1330,
+      "rgba8_img_err": 0.17706140875816345,
+      "rgba16f_img_err": 0.17681877315044403,
+      "target_format_img_difference": 0.20259949564933777,
+      "rgba8_luma_ratio": 0.9558962431994862,
+      "rgba16f_luma_ratio": 1.0661561514524547,
+      "rgba8_center_rgb": [
+        0.5580087597997224,
+        0.4325970579215477,
+        0.39916904447766227
+      ],
+      "rgba16f_center_rgb": [
+        0.607267736023272,
+        0.47467305954138256,
+        0.44540079930114
+      ],
+      "rgba8_saturation": 0.37766267657279967,
+      "rgba16f_saturation": 0.34308382868766785,
+      "rgba8_motion_mae": 0.23495371639728546,
+      "rgba16f_motion_mae": 0.1760074347257614
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 2160,
+      "rgba8_img_err": 0.21385638415813446,
+      "rgba16f_img_err": 0.19930176436901093,
+      "target_format_img_difference": 0.22346369922161102,
+      "rgba8_luma_ratio": 0.9465659062882003,
+      "rgba16f_luma_ratio": 0.9956364491493959,
+      "rgba8_center_rgb": [
+        0.5425669941732482,
+        0.4244609880104948,
+        0.3882366699573346
+      ],
+      "rgba16f_center_rgb": [
+        0.5731431770801815,
+        0.4489856807081113,
+        0.4193645937348705
+      ],
+      "rgba8_saturation": 0.37663252353668214,
+      "rgba16f_saturation": 0.3625884115695953,
+      "rgba8_motion_mae": 0.2488451451063156,
+      "rgba16f_motion_mae": 0.22126345336437225
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "height": 1330,
+      "rgba8_img_err": 0.21625478565692902,
+      "rgba16f_img_err": 0.1964828372001648,
+      "target_format_img_difference": 0.09595013409852982,
+      "rgba8_luma_ratio": 0.9462287330982629,
+      "rgba16f_luma_ratio": 0.9661823705375153,
+      "rgba8_center_rgb": [
+        0.775850322214903,
+        0.7381275093500276,
+        0.6193357068936094
+      ],
+      "rgba16f_center_rgb": [
+        0.7779220648211906,
+        0.7587359635541244,
+        0.6386705646800878
+      ],
+      "rgba8_saturation": 0.3900272995233536,
+      "rgba16f_saturation": 0.36830746829509736,
+      "rgba8_motion_mae": 0.24600200355052948,
+      "rgba16f_motion_mae": 0.21131552755832672
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "height": 2160,
+      "rgba8_img_err": 0.19186758995056152,
+      "rgba16f_img_err": 0.1845138669013977,
+      "target_format_img_difference": 0.11756141483783722,
+      "rgba8_luma_ratio": 0.973007099311487,
+      "rgba16f_luma_ratio": 0.93126365726104,
+      "rgba8_center_rgb": [
+        0.7339536459436525,
+        0.6854863029879521,
+        0.571005271136554
+      ],
+      "rgba16f_center_rgb": [
+        0.754886413638243,
+        0.637907770988411,
+        0.5581604530878067
+      ],
+      "rgba8_saturation": 0.38329299092292785,
+      "rgba16f_saturation": 0.40127546787261964,
+      "rgba8_motion_mae": 0.20964501798152924,
+      "rgba16f_motion_mae": 0.18884091079235077
+    }
+  ]
+}

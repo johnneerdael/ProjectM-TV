@@ -147,18 +147,13 @@ void projectm_set_fps(projectm_handle, int32_t) {}
 unsigned int projectm_pcm_get_max_samples() { return 576; }
 void projectm_pcm_add_uint8(projectm_handle, const uint8_t*, unsigned int n, projectm_channels) { g_pcmFed += n; }
 int g_renderSleepMs = 0, g_renderSleepMsSmooth = 0;  // simulated render cost (smooth: during a soft cut)
-int g_renderSpinMsSmooth = 0;  // simulated CPU-bound render cost during a soft cut (busy, not waiting)
 bool g_requestInRender = false;  // like projectM: the timed switch request fires inside the render call
 void projectm_opengl_render_frame(projectm_handle) {
   bool requested = false;
   if (g_requestInRender) { g_requestInRender = false; g_reqCb(false, nullptr); requested = true; }
   g_lastFrameDirect = g_directOutput && !requested;
   int ms = g_renderSleepMs; if (g_lastSmooth && g_renderSleepMsSmooth) ms = g_renderSleepMsSmooth;
-  if (ms) std::this_thread::sleep_for(std::chrono::milliseconds(ms));
-  if (g_lastSmooth && g_renderSpinMsSmooth) {
-    auto until = std::chrono::steady_clock::now() + std::chrono::milliseconds(g_renderSpinMsSmooth);
-    while (std::chrono::steady_clock::now() < until) {}
-  } }
+  if (ms) std::this_thread::sleep_for(std::chrono::milliseconds(ms)); }
 int g_fboFrames = 0;
 void projectm_opengl_render_frame_fbo(projectm_handle p, uint32_t) { ++g_fboFrames; projectm_opengl_render_frame(p); }
 uint32_t g_outgoingDivisor = 1;
@@ -563,19 +558,76 @@ int main(int argc, char** argv) {
   CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getLastTransitionFps(nullptr, nullptr) > 0.f);
   g_renderSleepMs = g_renderSleepMsSmooth = 0;
 
-  printf("auto: a slow blend that is CPU-bound keeps its resolution (a lower one would not help)\n");
-  Java_nl_neerdael_projectm_core_ProjectMJNI_setTransitionMode(nullptr, nullptr, 0, false);
-  g_renderSleepMs = 1; g_renderSleepMsSmooth = 0; g_renderSpinMsSmooth = 15;
-  Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); switchFrame();
-  settle(1500);
-  transitions = startBlend();
-  CHECK(g_windowW == 960);
-  for (int i = 0; i < 40; ++i) frame();  // ~0.65 s: past the point where a slow blend is lowered
-  CHECK(g_windowW == 960);  // not lowered during the blend
-  CHECK(g_outgoingDivisor == 2);  // instead the outgoing preset renders every 2nd frame
-  finishTransition(transitions);
-  CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == 100);  // sharper instead
-  g_renderSleepMs = g_renderSpinMsSmooth = 0;
+  // A wall-clock busy spin cannot guarantee CPU share when the host thread is descheduled.
+  // Feed measured wall/CPU samples to the real policy instead; render routing is covered above.
+  {
+    const double loadStart = g_engine.lastLoadStart, loadEnd = g_engine.lastLoadEnd, loadMs = g_engine.lastLoadMs;
+    const double lastFrameAt = g_engine.lastFrameAt;
+    const float lastFps = g_engine.lastFps;
+    const int blendLevel = g_engine.blendLevel, fastBlends = g_engine.fastBlends;
+    const bool halfRateOutgoing = g_engine.halfRateOutgoing;
+    bool tooSlow[kBlendLevels];
+    std::copy(std::begin(g_engine.blendLevelTooSlow), std::end(g_engine.blendLevelTooSlow), tooSlow);
+    const int scalePercent = g_published.blendScalePercent.load(), counter = g_published.transitionCounter.load();
+    const float transitionFps = g_published.lastTransitionFps.load();
+    const uint32_t outgoingDivisor = g_outgoingDivisor;
+
+    auto sampledBlend = [&](double frameCpuSeconds, bool cpuBound) {
+      constexpr double start = 100.0, frameSeconds = 0.016;
+      g_engine.lastLoadStart = g_engine.lastLoadEnd = start;
+      g_engine.lastLoadMs = 0;
+      g_engine.lastFps = 250.f;
+      g_engine.lastFrameAt = start;
+      g_engine.blendLevel = kDefaultBlendLevel;
+      g_engine.fastBlends = 0;
+      g_engine.halfRateOutgoing = false;
+      std::fill(std::begin(g_engine.blendLevelTooSlow), std::end(g_engine.blendLevelTooSlow), false);
+      projectm_opengl_set_outgoing_preset_frame_divisor(g_engine.pm, 1);
+      BeginTransition(1.0, false);
+      g_engine.transitionScaled = true;
+      g_engine.transitionScale = kBlendScales[g_engine.blendLevel];
+      const int before = g_published.transitionCounter.load();
+      // Include all 63 frames through 1.008 s, rather than jumping past the end without CPU samples.
+      for (int sample = 1; sample <= 63; ++sample) {
+        TrackTransition(start + sample * frameSeconds, frameCpuSeconds);
+        ApplyRenderScale(g_engine.transitionScale);
+        if (sample == 40) {  // 0.640 s: after early adaptation, still inside the one-second blend
+          CHECK(g_engine.inTransition);
+          CHECK(g_windowW == (cpuBound ? 960u : 768u));
+          CHECK(g_windowH == (cpuBound ? 540u : 432u));
+          CHECK(g_engine.transitionStepped == !cpuBound);
+          CHECK(g_outgoingDivisor == (cpuBound ? 2u : 1u));
+        }
+      }
+      CHECK(!g_engine.inTransition && g_engine.transitionFrames == 63);
+      CHECK(g_published.transitionCounter.load() == before + 1);
+      CHECK(g_engine.transitionStepped == !cpuBound);
+      CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == (cpuBound ? 100 : 60));
+    };
+
+    printf("auto: sampled CPU-bound blend keeps its resolution and halves outgoing frames\n");
+    sampledBlend(0.015, true);
+    printf("auto: equally slow sampled low-CPU blend lowers resolution instead\n");
+    sampledBlend(0.0001, false);
+
+    // Return to real timestamps and full-size routing before subsequent render/detector tests.
+    g_engine.detector.Disarm();
+    g_engine.lastLoadStart = loadStart; g_engine.lastLoadEnd = loadEnd; g_engine.lastLoadMs = loadMs;
+    g_engine.lastFrameAt = lastFrameAt; g_engine.lastFps = lastFps;
+    g_engine.transitionStart = g_engine.transitionLoadEnd = g_engine.transitionEnd = 0;
+    g_engine.transitionCpuSeconds = g_engine.transitionWorstMs = 0;
+    g_engine.transitionFrames = g_engine.transitionSlowFrames = 0;
+    g_engine.transitionScaled = g_engine.transitionStepped = false;
+    g_engine.transitionScale = 1.f; g_engine.scaledUntil = 0;
+    g_engine.blendLevel = blendLevel; g_engine.fastBlends = fastBlends;
+    g_engine.halfRateOutgoing = halfRateOutgoing;
+    std::copy(std::begin(tooSlow), std::end(tooSlow), g_engine.blendLevelTooSlow);
+    g_published.blendScalePercent = scalePercent; g_published.transitionCounter = counter;
+    g_published.lastTransitionFps = transitionFps;
+    projectm_opengl_set_outgoing_preset_frame_divisor(g_engine.pm, outgoingDivisor);
+    ApplyRenderScale(1.f);
+    CHECK(g_windowW == 1280 && g_windowH == 720);
+  }
 
   printf("the next preset's shaders are compiled in the background\n");
   CHECK(g_prewarmStarts >= 1 && !g_prewarmTextureDir.empty());

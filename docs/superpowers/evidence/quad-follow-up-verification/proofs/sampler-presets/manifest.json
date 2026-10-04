@@ -1,0 +1,326 @@
+[
+  {
+    "name": "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+    "key": "c665",
+    "image": "fc2becb63a96-c665.png",
+    "image_sha256": "1cdba9e2ec1df266e9973cc732ecbd367928d90aaa944d5c1eabf8e17f6ea00b",
+    "direct_change_img_err": 0.0,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk-c665-deterministic-baseline-r1/five.npz",
+        "source_sha256": "6e63e47f8dc8c2beacdc35ea567712f539f272d74c64a46124212a97b2650296",
+        "frame_index": 239,
+        "normalized_frame_sha256": "d3ff42abfc4edc1fe2b477a0c82143a874912b0ab610d42cdf944cb902857a3d",
+        "full_frame_stream_sha256": "ce97d8f56cfc324fa3787095007ab592fa977841abdf661558d87fd82bf6145a"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk-c665-deterministic-samplers-r1/five.npz",
+        "source_sha256": "b0d6cac6ae4b09e069038e7be6ff89928a2a815c34f1bb39d133fa87a47b01d0",
+        "frame_index": 239,
+        "normalized_frame_sha256": "d3ff42abfc4edc1fe2b477a0c82143a874912b0ab610d42cdf944cb902857a3d",
+        "full_frame_stream_sha256": "ab576044dae7e23bea1650a198b645d41534859bd5cf59433c46b50c793e62e3"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+    "key": "q1330",
+    "image": "fc2becb63a96-q1330.png",
+    "image_sha256": "1b4f1d0ef6e5a890f773a5842db6ba363575386e8a2874b1b4b5c061c6f97bb2",
+    "direct_change_img_err": 0.0,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk-q1330-deterministic-baseline-r1/five.npz",
+        "source_sha256": "a0c97bae9f20be643fdac4d3dd9fb477daeb902925239ce07847f0d2d50662f4",
+        "frame_index": 239,
+        "normalized_frame_sha256": "d291066a3ad8b263779e441b94d7494beb24ed5b238ed317f262bd3d0f45b5e1",
+        "full_frame_stream_sha256": "b3223b71a5feb11ece3d2370a87662eacefe5df6e190d3df077882e2959785c6"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk-q1330-deterministic-samplers-r1/five.npz",
+        "source_sha256": "d58f480ef2744c7624a53fae57e195f04cf84593368d43867cdea8e018525718",
+        "frame_index": 239,
+        "normalized_frame_sha256": "d291066a3ad8b263779e441b94d7494beb24ed5b238ed317f262bd3d0f45b5e1",
+        "full_frame_stream_sha256": "8346d6b2cdd6e0f72cd5dffaff85e129398b2c9c381f6d83d2a3d352c47a7de8"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+    "key": "q2160",
+    "image": "fc2becb63a96-q2160.png",
+    "image_sha256": "b26674bda3c49759720c9acccc198f516dd4f11cbcfb03d2ef7e95c686094db4",
+    "direct_change_img_err": 0.0,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk-q2160-deterministic-baseline-r1/five.npz",
+        "source_sha256": "fbc8720f5412ee4268dbfba95ef75f0fa800cb56febc13fe7b9ab7e78ddfa8ee",
+        "frame_index": 239,
+        "normalized_frame_sha256": "d5432b078f9e0b2d5fff7475fa645bfff903e05497559291b0dbaece36f72296",
+        "full_frame_stream_sha256": "0439b401b14ff0df2a396a56893638337ae60462bded39afd29a654b8df44534"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk-q2160-deterministic-samplers-r1/five.npz",
+        "source_sha256": "e725a23b049b333a4efd5582639a724134f93287f67e09b93972253459b78d33",
+        "frame_index": 239,
+        "normalized_frame_sha256": "d5432b078f9e0b2d5fff7475fa645bfff903e05497559291b0dbaece36f72296",
+        "full_frame_stream_sha256": "6426e39bcafd63b6541b72c4d33e73df6a3819cb6d11e55f082f9753e2996754"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+    "key": "c665",
+    "image": "634d6fdcdd95-c665.png",
+    "image_sha256": "e2d6a6d1a7cebfca0ee82ed792ba06f5510361fd1ee38e56e18abc4094a51db7",
+    "direct_change_img_err": 0.07484602183103561,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - ed geining hateops - Matrix Moral Infinite.milk-c665-deterministic-baseline-r1/five.npz",
+        "source_sha256": "76cd282ff245f49fbf6bd4c0760fbd0aed40fb5c88af2ae24d3e78f54b9f44bc",
+        "frame_index": 239,
+        "normalized_frame_sha256": "f6f44f2d1214a2d1cc3da632673c92f751dfca4a99eb9ed7149dbe96a07ea165",
+        "full_frame_stream_sha256": "e1b6c975889cda49de1ad98de587e44a010025142a6c3c3780e2a701dc6eb17c"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - ed geining hateops - Matrix Moral Infinite.milk-c665-deterministic-samplers-r1/five.npz",
+        "source_sha256": "8ff4156103a7f5078d49f446dee335d198e5c21443ff241b291f18f4ab28f9e8",
+        "frame_index": 239,
+        "normalized_frame_sha256": "05887b3f00d194eb0f6806aa7bcdc199cd123459b53a4f5dc9a9dd29ee138107",
+        "full_frame_stream_sha256": "b596142bf2b3a5c12476f3e50f19e16c89a299a9498db3e9b2e02f2f4d2e7dcb"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+    "key": "q1330",
+    "image": "634d6fdcdd95-q1330.png",
+    "image_sha256": "bdf92db511724224b7d3d3262f167833f2a3723bc5f33b6cca751c8128104b48",
+    "direct_change_img_err": 0.08994041383266449,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - ed geining hateops - Matrix Moral Infinite.milk-q1330-deterministic-baseline-r1/five.npz",
+        "source_sha256": "9b54ddc8365c19427d69cf187e584a260e976c8bf21eee9f09e94aaafe4e3d7f",
+        "frame_index": 239,
+        "normalized_frame_sha256": "f655cb6eaadb04ba02c12583a7e9768f782ee5db84e55a97d9e3fa649f976abb",
+        "full_frame_stream_sha256": "80452bb5c0e32ccb64af90fffde51b56b6217b4a6bb8a1795621554f01576c91"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - ed geining hateops - Matrix Moral Infinite.milk-q1330-deterministic-samplers-r1/five.npz",
+        "source_sha256": "b291512134b91185a7a642e378c20568e9f5fab9b2414517e818a3fbd54fc8c0",
+        "frame_index": 239,
+        "normalized_frame_sha256": "7c4bf559d32b59ef64ef401b389d6d721847b6d84c49288d1789da3fb436d1fd",
+        "full_frame_stream_sha256": "8d1f261452627af61230d188f810446844fe029b35b4bbbab79f1966c5e8723e"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+    "key": "q2160",
+    "image": "634d6fdcdd95-q2160.png",
+    "image_sha256": "4170b46872a1b2d92d681a2dfdfddaa0af268e40885bb35d07ee5c4230bcbb84",
+    "direct_change_img_err": 0.0905836746096611,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - ed geining hateops - Matrix Moral Infinite.milk-q2160-deterministic-baseline-r1/five.npz",
+        "source_sha256": "899e49d69e499eb43d28f451e80049ce3365c0ef80aeeaf01fad85e8761884b2",
+        "frame_index": 239,
+        "normalized_frame_sha256": "f2d6822fd8f894373bd762b8da5d645d0b9d2e8210be691247875857d2c65d6c",
+        "full_frame_stream_sha256": "b0a6609947d4a2ba6590fe9816dbae925778ab27743be0b016f5bab29ac6403a"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - ed geining hateops - Matrix Moral Infinite.milk-q2160-deterministic-samplers-r1/five.npz",
+        "source_sha256": "0765de622805c7bb18a46c954c0c4620e15ff27eb46b85843689ace608e06235",
+        "frame_index": 239,
+        "normalized_frame_sha256": "14a88b2df381fe38a4e0b98bce6e58c447b93af811d143aa9ad1997d166bf41d",
+        "full_frame_stream_sha256": "90a80369863b6efaf8cf1c9b4f09ebb421d5312194e12840a591737299842522"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+    "key": "c665",
+    "image": "b4d9dbeefdae-c665.png",
+    "image_sha256": "066032b60168a4e92251ef2349689c27b9f7005deb6365c345e6b6ebc8e80d2f",
+    "direct_change_img_err": 0.0013133327011018991,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - mood rings for masochist alien deities - portentous anskeptising.milk-c665-deterministic-baseline-r1/five.npz",
+        "source_sha256": "cc9a153320f98d7835e3a84b3d335240f34148000734e8f043211d522ed9f179",
+        "frame_index": 239,
+        "normalized_frame_sha256": "c5bde7da36e089f4a6c97638a8848c4bcf6dc7cdb3d94a7cd5b9f387028771ca",
+        "full_frame_stream_sha256": "3cf348b9c105b432ddd3bc6e73bef2b29518c53b8090fdfa2db4c86deaaa2828"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - mood rings for masochist alien deities - portentous anskeptising.milk-c665-deterministic-samplers-r1/five.npz",
+        "source_sha256": "2a595d78be3e57ef5f72d5aec9a1dc3e76fd70b46ebbcc44b22089c907e2d791",
+        "frame_index": 239,
+        "normalized_frame_sha256": "478b5228d25d94923f63b41d9663febbde3047f5061cfeb5c126fd712575bd36",
+        "full_frame_stream_sha256": "07a7598c21409de8b30a46f56b5f0c719287a94d5bcf53ef6c9c5ed52f459bd1"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+    "key": "q1330",
+    "image": "b4d9dbeefdae-q1330.png",
+    "image_sha256": "17ecd040616c69002073310fc2721233c17d67550907adf71110d1efce31510c",
+    "direct_change_img_err": 0.004383303225040436,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - mood rings for masochist alien deities - portentous anskeptising.milk-q1330-deterministic-baseline-r1/five.npz",
+        "source_sha256": "e5d50f8195beaee727ad0895895a54b3cf521bff5aa52fd6abe0bfe689583742",
+        "frame_index": 239,
+        "normalized_frame_sha256": "e7f91a2fa76f05d3bcca702917331e2435029d5a51d826b8c5a2946e3adcdc9b",
+        "full_frame_stream_sha256": "0adcb771da1c8d8a168b0ca1246c2b20af13fb00cce918dce1ea906a92ab0a4f"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - mood rings for masochist alien deities - portentous anskeptising.milk-q1330-deterministic-samplers-r1/five.npz",
+        "source_sha256": "7d3a6074e565534d04572a0e98fd46d0839d4cbecb9e6d6bcea50d47d8d8dba7",
+        "frame_index": 239,
+        "normalized_frame_sha256": "1f887c8d713f0c96f358d0eee12b020178cfe9b7ac559a901ed94c3280c0451a",
+        "full_frame_stream_sha256": "801eb2aff40a30f80470c0c003f373aaead4c0a9ba014c5e43c28efb1cfd0e4d"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  },
+  {
+    "name": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+    "key": "q2160",
+    "image": "b4d9dbeefdae-q2160.png",
+    "image_sha256": "5aa1d0660e916320fdb0a76eda297e18801b9317ae645e67d9cb24a4bf54a9c9",
+    "direct_change_img_err": 0.004684836603701115,
+    "sources": [
+      {
+        "worker": "deterministic-baseline",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - mood rings for masochist alien deities - portentous anskeptising.milk-q2160-deterministic-baseline-r1/five.npz",
+        "source_sha256": "33798a410d227e4dbb0046f558b27aa57eb04211c8ef16a88ea2df5b72927702",
+        "frame_index": 239,
+        "normalized_frame_sha256": "44041612b340ff864a2f09247100fe122e7773ee50899f0d2bd48e35233e395a",
+        "full_frame_stream_sha256": "5fefdda2e651b95bb87389a8a76217bc5f53877fce06e7746866739d7177a96f"
+      },
+      {
+        "worker": "deterministic-samplers",
+        "identity": {
+          "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+          "patches_sha256": "55a7dcfa82a553d1509083d75e91ea1f604f008394256e5f7616d5d6a6f6f811",
+          "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+        },
+        "source": "build/follow-ups/verification/sampler-impact-private-rng/jobs/suksma - mood rings for masochist alien deities - portentous anskeptising.milk-q2160-deterministic-samplers-r1/five.npz",
+        "source_sha256": "0ad34b5bbb494bfe6caeebefe821b0a017ae924bd18acad4701452a9f1680635",
+        "frame_index": 239,
+        "normalized_frame_sha256": "b7227da2b51da0d352a165b8058b35b10bdf05e9b7de9d11d3488ad0f9eef6af",
+        "full_frame_stream_sha256": "368459d50a693bf9e94df9cd51451a65f1912f0913f61c959fb9b20dd9375504"
+      }
+    ],
+    "limit": "Direct semantic correction comparison; does not alone prove authored fidelity."
+  }
+]

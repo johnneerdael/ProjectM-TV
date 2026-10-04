@@ -1,0 +1,21 @@
+# Per-change PR evidence
+
+Each image uses actual engine frames, test output, or measured driver objects. A rendered image is not
+used to imply a diagnostic/resource change. PNGs are ready to embed; full source data and hashes remain
+alongside them. No artifacts have been published or pushed.
+
+| Change | Image | Proof and limits |
+|---|---|---|
+| Preserve shader diagnostics | [Before/after](01-diagnostic-preserved.png) | Standard-handler RED/GREEN with a labeled artificial diagnostic string; not a fabricated driver screenshot. |
+| Free vertex shaders on fragment rejection | [Measured object counts](02-vertex-shader-lifetime.png) | Fresh CGL endpoints: 1/16 live leaked shaders before, 0/0 after; no invented intermediate values or memory estimates. |
+| Optional diffusion shader fallback | [Load failure and actual fallback frame](03-optional-shader-fallback.png) | Before emits no frame; after pixels and full frame hashes match classic baseline. Research-only until diffusion is promoted. |
+| Deterministic CPU-bound transition test | [Failure/pass evidence](04-deterministic-transition-test.png) | Test-only correction; no production FPS improvement or statistical flake-rate claim. |
+| Keep explicit warp sampler modes | [Rendered sampler comparisons](05-warp-sampler-binding.png) | Fractional/out-of-bounds fixture; correct aliases provide independent render oracles. Public-API tests and driver traces support the result. |
+| Isolate laboratory shader randomness | [Actual repeated-frame differences](06-analyzer-repeat-delta.png) | Analyzer-only change; before repeats drift, after all frame hashes match. Does not alter production randomness. |
+
+The shader/transition/fallback sources are in `manifest.json`, `raw/`, and `allocation-builds.json`.
+Sampler and analyzer sources are in their numbered reports and `additional-proof-sources.json`.
+The original 46-file export has `artifact-index.json`; later additions have separate source hashes.
+
+Actual-preset images and any successful feedback correction will be added after the corrected
+deterministic comparisons pass. Rejected/invalid probes remain labeled experiments and are not PR fixes.

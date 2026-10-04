@@ -1,0 +1,6 @@
+{
+  "render_jobs": 80,
+  "fallback_comparisons": 10,
+  "successful_diffusion_comparisons": 10,
+  "errors": []
+}

@@ -1,0 +1,59 @@
+Subject: [PATCH] Keep original feedback rendering when the optional diffusion shader is rejected
+
+Catch shader compilation/link failure, gate Active() on usability, and guard Draw(). A rejected diffusion shader must not fail preset loading or select an empty diffusion texture.
+
+--- a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
++++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
+@@ -128,7 +128,17 @@
+     vertexShader.append(static_cast<const char*>(VertexShader));
+     fragmentShader.append(static_cast<const char*>(FragmentShader));
+ 
+-    m_shader.CompileProgram(vertexShader, fragmentShader);
++    try
++    {
++        m_shader.CompileProgram(vertexShader, fragmentShader);
++        m_usable = true;
++    }
++    catch (const Renderer::ShaderException&)
++    {
++        // Rejecting this optional program must not reject the preset, even when diffusion is off.
++        // Active() stays false, so RenderFrame keeps its original feedback copy path.
++        m_usable = false;
++    }
+ }
+ 
+ void FeedbackDiffusion::InitVertexAttrib()
+@@ -168,12 +178,12 @@
+ 
+ auto FeedbackDiffusion::Active() const -> bool
+ {
+-    return m_kernel.variance > 0.0f;
++    return m_usable && m_kernel.variance > 0.0f;
+ }
+ 
+ void FeedbackDiffusion::Draw(const std::shared_ptr<Renderer::Texture>& source, bool flipVertical)
+ {
+-    if (source == nullptr || source->Empty() || source == Texture())
++    if (!m_usable || source == nullptr || source->Empty() || source == Texture())
+     {
+         return;
+     }
+--- a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
++++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
+@@ -91,7 +91,7 @@
+     void SetScale(float scale);
+ 
+     /**
+-     * @brief True if SetScale() got a scale above 1, i.e. the frame needs the diffusion pass.
++     * @brief True if the program compiled and SetScale() got a scale above 1.
+      */
+     auto Active() const -> bool;
+ 
+@@ -108,6 +108,7 @@
+     auto Texture() const -> std::shared_ptr<Renderer::Texture>;
+ 
+ private:
++    bool m_usable{false};                                     //!< Program compiled; original feedback otherwise.
+     Renderer::Shader m_shader;                                //!< 3x3 bilinear tap kernel shader.
+     Renderer::Framebuffer m_framebuffer{1};                   //!< Holds the output texture.
+     Renderer::Sampler m_sampler{GL_CLAMP_TO_EDGE, GL_LINEAR}; //!< Bilinear taps; edges repeat.
