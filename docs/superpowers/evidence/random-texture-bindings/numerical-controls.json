@@ -83,6 +83,20 @@
       "unit": 3,
       "width": 2,
       "wrap": 33071
+    },
+    {
+      "asset_name": "red",
+      "filter": 9728,
+      "height": 2,
+      "prefix": "",
+      "requested_alias": "pc_RAND00",
+      "slot": 0,
+      "target": 3553,
+      "texsize_uniform": "texsize_RAND00",
+      "uniform": "sampler_pc_RAND00",
+      "unit": 2,
+      "width": 2,
+      "wrap": 33071
     }
   ],
   "control": "numerical",
@@ -179,10 +193,23 @@
         0
       ],
       "tolerance_bytes": 1
+    },
+    {
+      "actual_rgb": [
+        64,
+        0,
+        0
+      ],
+      "expected_rgb": [
+        64,
+        0,
+        0
+      ],
+      "tolerance_bytes": 1
     }
   ],
   "preset_results": [],
   "profile": "host-real-GL-production-random-device-v1",
   "fixture_source": "core/src/test/native/projectm-regressions/random_texture_test.cpp: Fixtures::Write",
-  "fixture_source_sha256": "f5b60ddd77cd07ebd0fed227ce0e244e4d5481704343fdbcbcc780d5623b89e6"
+  "fixture_source_sha256": "076650fa718462e050742caa9bab8faf96dfc620403d49da7106aa69a46dcf5e"
 }
