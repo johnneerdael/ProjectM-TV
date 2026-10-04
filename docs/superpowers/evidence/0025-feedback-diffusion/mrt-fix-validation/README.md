@@ -116,8 +116,14 @@ They do not run in place. They resolve the repository root from their execution 
 copying, it checks:
 
 - the two scripts' hashes against `results.json`;
-- the prerequisites in that `build/` tree: the owned emulator launch metadata, the raw-point and
-  classic comparators, the pristine projectM source and the Preset Lab venv;
+- every input `run.py` reads in that `build/` tree:
+  - the owned emulator launch metadata;
+  - the classic and raw-point worker metadata;
+  - the pristine projectM source;
+  - the Preset Lab venv with numpy and OpenCV;
+  - both PCM signals, against their recorded SHA256s;
+  - the six preset files;
+  - the complete raw-point comparator analysis, with each row's hash and its native captures;
 - that the epoch directory does not already exist.
 
 `reproduce.sh --check <new-epoch>` performs only those checks. `PROJECTM_ROOT` selects the checkout

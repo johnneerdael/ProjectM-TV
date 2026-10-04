@@ -38,10 +38,65 @@ for need in "$ROOT/docs/superpowers/evidence/0025-feedback-diffusion/shared-core
             "$BASE/emulator/launch.json" \
             "$BASE/raw-point-controls/analysis.json" \
             "$BASE/classic-reference-control/worker-baseline.json" \
+            "$BASE/raw-point-experiment/worker-candidate.json" \
             "$ROOT/build/follow-ups/pristine-source/projectm" \
             "$PY"; do
     [ -e "$need" ] || { echo "missing prerequisite: $need" >&2; missing=1; }
 done
+[ "$missing" = 0 ] || exit 1
+# Everything else run.py reads: the PCM signals (hashes it asserts), the six preset files, and the
+# comparator rows and their native captures (run.py hash-checks the rows and compares the captures).
+python3 - "$HERE/run.py" "$ROOT" "$BASE" <<'PYCHECK' || missing=1
+import ast, hashlib, json, sys
+from pathlib import Path
+run, root, base = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for block in iter(lambda: f.read(1 << 20), b''):
+            h.update(block)
+    return h.hexdigest()
+problems = []
+names = next(ast.literal_eval(node.value) for node in ast.parse(run.read_text()).body
+             if isinstance(node, ast.Assign) and getattr(node.targets[0], 'id', '') == 'NAMES')
+for name in names:
+    if not (root / 'core/src/main/assets/presets' / name).is_file():
+        problems.append(f'missing preset: {name}')
+pcm = {240: '38a09d906e93452d4af5ebea36fcdc684a8383eacbd162d2d61b4ed3fbd2674c',
+       480: '14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc'}
+for frames, digest in pcm.items():
+    path = base / f'targeted-matrix/signals/pcm-{frames}.u8'
+    if not path.is_file():
+        problems.append(f'missing signal: {path}')
+    elif sha(path) != digest:
+        problems.append(f'signal hash differs: {path}')
+analysis = json.loads((base / 'raw-point-controls/analysis.json').read_text())
+if analysis.get('state') != 'complete':
+    problems.append('raw-point-controls/analysis.json is not complete')
+rows = []
+for case in analysis.get('cases', []):
+    for role in ['p1', 'raw-point']:
+        info = case['roles'][role]
+        if info.get('status') != 'success':
+            problems.append(f"comparator {role} {case['profile']} {case['preset']['path']} not successful")
+        rows += zip(info['row_paths'], info['row_sha256'])
+    rows += zip(case['reference']['row_paths'], case['reference']['row_sha256'])
+for path, digest in rows:
+    path = Path(path)
+    if not path.is_file() or sha(path) != digest:
+        problems.append(f'comparator row missing or changed: {path}')
+        continue
+    for sample in json.loads(path.read_text())['result']['selected_files']:
+        if not (path.parent / 'output' / sample['path']).is_file():
+            problems.append(f"comparator capture missing: {path.parent / 'output' / sample['path']}")
+for problem in problems[:20]:
+    print(problem, file=sys.stderr)
+if problems:
+    print(f'{len(problems)} input problem(s)', file=sys.stderr)
+    sys.exit(1)
+print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows with captures')
+PYCHECK
+"$PY" -c 'import numpy, cv2' 2> /dev/null || { echo "missing numpy/OpenCV in $PY" >&2; missing=1; }
 git -C "$ROOT" rev-parse --verify --quiet '25e6aa83^{commit}' > /dev/null ||
     { echo "missing commit 25e6aa83 (git fetch origin bug/native-4k-feedback-fidelity)" >&2; missing=1; }
 [ "$missing" = 0 ] || exit 1
