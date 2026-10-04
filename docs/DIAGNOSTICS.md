@@ -13,23 +13,36 @@
 tools/tv-diagnostics.sh 192.168.50.105:5555 --sweep
 ```
 
-The first connection shows an *Allow debugging?* prompt on the TV; accept it with the remote.
+The first connection shows an *Allow debugging?* prompt on the TV; accept it with the remote. The script captures the foreground Android user ID once, records it in the summary, and uses it for installation, permission grants, notification access, stopping/starting the app and process lookup. Keep that user in the foreground throughout the run. An APK update replaces shared package code even when installation targets one user.
 
 | Option | Effect |
 |---|---|
 | *(default)* | Builds the release APK from this checkout, installs it and observes it for 180 s |
 | `--release` | Installs the latest GitHub Release instead of building |
+| `--apk PATH` | Installs the supplied APK; its application ID must match `--package` (or the default ID) |
 | `--no-install` | Tests the version that is already installed |
-| `--allow-uninstall` | If the installed app has a different signing key, uninstall it first (resets app settings) |
+| `--package ID` | Application ID to test (default `nl.neerdael.projectmtv`). Alternate IDs require a matching `--apk` or `--no-install`; building and `--release` only support the default ID |
+| `--allow-uninstall` | Attempts signing-key recovery by uninstalling only for the captured Android user (resets that user's app settings); refuses if another user has the same package or that state cannot be verified |
 | `--sweep` | Also measures each fixed resolution (720p, 1080p, …), driving the menu with key events |
 | `--duration SEC` | Observation time (default 180) |
+
+For an already installed profile build, run:
+
+```bash
+tools/tv-diagnostics.sh 192.168.50.105:5555 --package nl.neerdael.projectmtv.profile --no-install
+```
+
+To install a newly built profile APK instead, replace `--no-install` with `--apk app/build/outputs/apk/profile/app-profile.apk`. The script does not inspect supplied APKs to verify their application ID; supply an APK that matches the package being tested. Incompatible build/`--release` and package combinations fail before connecting to the TV, building, downloading or installing anything. If multiple APK-source options are supplied, the last one selects the mode; the package check uses that final mode regardless of option order.
+
+On a signing-key conflict, `--allow-uninstall` checks `pm list users` and each other user's `pm list packages --user <userId>` before removing any app data. Another user's installation, including a stopped user's, retains shared package code and its signing key; the script refuses recovery in that case. Failed or malformed queries also stop before uninstalling. Use `--no-install` to measure the existing app or supply an APK signed with its installed key. If Android still retains an incompatible package after an allowed user-scoped uninstall (for example a preinstalled package), the retry fails explicitly; the script never broadens removal to all users.
 
 ## What it collects
 
 | File | Content |
 |---|---|
-| `summary.md` | Device and GPU, panel/UI size, startup times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory limit and other apps killed for memory, surface composition, skipped presets, crashes |
+| `summary.md` | Device and GPU, panel/UI size, cold start and observation start times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory limit and other apps killed for memory, surface composition, skipped presets, crashes |
 | `app_log.txt` | App log lines (`STATS`, `STARTUP`, `LOAD`, `TRANSITION`, `OUTPUT`, `SKIP`, `QualityController`, crashes) |
+| `am_start_cold.txt`, `am_start.txt` | `am start -W` output of the cold start and of the start that is observed |
 | `device.txt` | System properties, display modes, CPU, memory, GLES driver |
 | `screen_*.png` | Visuals, main panel, Advanced panel |
 | `raw_logcat.txt`, `raw_surfaceflinger.txt` | Full dumps (git-ignored) |
@@ -54,6 +67,21 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 - `QualityController: …`: dynamic-resolution decisions, including `Memory pressure …` when Android asks apps to free memory.
 - `ProjectMTV: Memory limit: render height up to 1260 (RAM 1941 MB)` (or `Memory limit: off`). The sweep only covers the levels up to this limit; turn *Advanced › Memory limit* off first to sweep up to the render height cap.
 - `ProjectMTV: Render height cap: 1330 (panel height 2160)`: the highest render height the app uses (`QualityController.RENDER_HEIGHT_CAP`); the sweep stops there too.
+
+### Cold start
+
+The app's notification listener (`TrackListenerService`, needed for track titles) is rebound by Android about a second after `am force-stop`, and that starts the app's process again. A plain stop-and-start therefore measures a warm start in an already running process. The script instead:
+
+1. disallows the app's enabled notification listeners (`cmd notification disallow_listener`),
+2. force-stops the app for the captured user and waits up to 10 s until that user's process is gone,
+3. runs `am start --user <userId> -W` and allows that user's listeners again right away (also on exit or Ctrl-C),
+4. records the `TotalTime` and whether a new process started for the activity: no process before the start and an `ActivityManager: Start proc <pid>:<package>/… for …activity` line (on Android 10+ also `LaunchState`).
+
+*Startup › Cold start* says *cold start* only when step 4 found a new process for the activity (the `Start proc` line, or `LaunchState: COLD`). It says *unverified* when neither is available, and otherwise names why the time is not a cold-start time. The cold-started process had no listener access, so the script stops it and starts the app again for the observation (*Observation start*, normally warm).
+
+The foreground user is resolved with `am get-current-user` once. Listener reads use `settings --user <userId>`; `cmd notification allow_listener` and `disallow_listener` receive that same numeric ID as their final argument, including during cleanup. Process lookup uses `ps -A -o UID,PID,NAME`, matching the exact package process name and Android user (`UID / 100000`); another user's same-named process cannot affect cold-start evidence or app-log filtering. A failed user lookup, unavailable/malformed process table or ambiguous process match aborts instead of treating it as no process. These APIs were checked against Android 9 and 14 sources; availability on older Android versions was not verified.
+
+If notification access cannot be read, the script leaves the listener alone, so Android may restart the app and the start is reported as warm or unverified. If the script is killed with `kill -9`, restore notification access using the numeric Android user shown in the run: `adb -s <tv>:5555 shell cmd notification allow_listener <package>/com.example.projectm.visualizer.TrackListenerService <userId>`.
 
 ### Reading the results
 - **Did the music app get killed?** *Memory › Other apps killed during the run* lists processes Android stopped while they were visible, perceptible or foreground services (e.g. `com.soundcloud.android (prcp)`). Cached processes are left out, because Android kills those routinely.

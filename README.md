@@ -252,7 +252,7 @@ core/src/test/native/run_native_tests.sh   # engine tests and patched projectM r
 tools/tv-diagnostics.sh <tv-ip>:5555 --sweep
 ```
 
-By default it builds this checkout and installs it on the TV; `--no-install` tests the version already installed. It measures startup, frame rate per resolution, audio source and level, preset load times and memory, and writes a Markdown summary. See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md).
+By default it builds this checkout and installs it on the TV; `--no-install` tests the version already installed. To test the profile build, use `--package nl.neerdael.projectmtv.profile` with `--apk app/build/outputs/apk/profile/app-profile.apk` or `--no-install`. Alternate package IDs are rejected when building or using `--release`, which install `nl.neerdael.projectmtv`. It measures a real cold start (it briefly disallows the app's notification listener, which would otherwise restart the app right after it is stopped, and allows it again), frame rate per resolution, audio source and level, preset load times and memory, and writes a Markdown summary. See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md).
 
 ### Documentation
 
