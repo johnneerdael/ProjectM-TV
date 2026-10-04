@@ -32,7 +32,7 @@ These are explicit interpreter limitations; corpus prevalence has not yet been m
 
 ## Integration understanding still requiring work
 
-- Source-driven shader random vectors/matrices and their lifecycle, including preset loading and texture selection.
+- Automatic shader random lifecycle assembly, including actual seed, preset loading, fallback instances, other consumers and texture selection. Explicit Android/bionic replay now supplies source-generated vectors/matrices; host and Android sequences differ. Lexical shader random references occur in 3,205 presets (overlapping families, not verified live dependencies). See `2026-10-04-android-shader-random-learning.md`.
 - Remaining motion-vector raster coverage and precision.
 - Accumulated warp/blur/composite feedback error over time. Correct individual expressions do not prove correct evolving appearance.
 - External texture availability, loading/rescaling and native failure/fallback behaviour.

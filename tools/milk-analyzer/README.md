@@ -659,6 +659,16 @@ historical duplicate-return presets still have other unresolved domains/effects.
 See `fixtures/helper-return-native-proof-2026-10-04.json` and
 `fixtures/helper-return-source-proof-2026-10-04.json`.
 
+Shader random replay can run the standalone ARM64 CPU adapter through explicit
+`execute_ledger(..., adb=Path(...), serial=...)` arguments. Host execution remains
+the default; Android execution requires Android/bionic response identity. Both
+paths retain the same explicit seed/lifecycle and uniform-bank validation.
+Recorded Android banks differ from macOS under the same seed and agree with
+independent Android draws/rotation formulas. Automatic renderer lifecycle
+assembly remains unresolved. See
+`docs/superpowers/evidence/2026-10-04-android-shader-random-learning.md` and
+`fixtures/android-shader-random-proof-2026-10-04.json`.
+
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe
 shared-read/write ordering remains explicit. Destination indices are captured

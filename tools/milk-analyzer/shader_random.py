@@ -6,9 +6,11 @@ order must be supplied; host-libc results do not establish Android equivalence.
 """
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import tempfile
+import uuid
 import numpy as np
 
 
@@ -16,7 +18,17 @@ RANDOM_NAMES = {'rand_frame', 'rand_preset'} | {
     f'rot_{group}{i}' for group in ('s', 'd', 'f', 'vf', 'uf', 'rand') for i in range(1, 5)}
 
 
-def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30) -> dict:
+def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
+                   adb: Path | None=None, serial: str | None=None) -> dict:
+    """Replay on the host, or explicitly named Android with an Android binary.
+
+    The Android path transfers only this standalone CPU adapter and request into
+    a unique temporary directory; it does not install or modify the core AAR.
+    """
+    if adb is not None and (not isinstance(serial,str) or not re.fullmatch(r'[A-Za-z0-9._:-]+',serial)):
+        raise ValueError('explicit safe Android serial required')
+    if adb is None and serial is not None:
+        raise ValueError('Android serial requires explicit adb path')
     if type(seed) is not int or not 0 <= seed < 2**32:
         raise ValueError('explicit uint32 post-mix C-rand seed required')
     if not isinstance(events, list):
@@ -31,10 +43,28 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30) -
     with tempfile.TemporaryDirectory(prefix='milk-random-') as directory:
         path = Path(directory) / 'request.json'
         path.write_text(request)
-        process = subprocess.run([str(binary), str(path)], capture_output=True, text=True, timeout=timeout)
+        if adb is None:
+            process = subprocess.run([str(binary), str(path)], capture_output=True, text=True, timeout=timeout)
+        else:
+            remote='/data/local/tmp/milk-random-'+uuid.uuid4().hex
+            def command(*args):
+                result=subprocess.run([str(adb),'-s',serial,*args],capture_output=True,text=True,timeout=timeout)
+                if result.returncode:
+                    raise ValueError('Android random adapter command failed (exit '+str(result.returncode)+'): '+result.stderr.strip())
+                return result
+            command('shell','-T','-n','mkdir',remote)
+            try:
+                command('push',str(binary),remote+'/adapter')
+                command('push',str(path),remote+'/request.json')
+                command('shell','-T','-n','chmod','700',remote+'/adapter')
+                process=command('shell','-T','-n',remote+'/adapter',remote+'/request.json')
+            finally:
+                command('shell','-T','-n','rm','-r',remote)
     if process.returncode:
         raise ValueError('shader random source evaluation failed: ' + process.stderr.strip())
     result = json.loads(process.stdout)
+    if adb is not None and result.get('profile',{}).get('platform')!='Android/bionic':
+        raise ValueError('Android/bionic random execution profile required')
     if result.get('schema_version') != 1 or result.get('seed') != seed:
         raise ValueError('random input response identity mismatch')
     records = result.get('events', [])
@@ -59,6 +89,7 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30) -
                              time=events[i]['time'], profile=result['profile'])
     result.update(binary_sha256=binary_sha,
                   request_sha256=hashlib.sha256(request.encode()).hexdigest())
+    if adb is not None:result['execution_transport']={'kind':'adb','serial':serial}
     return result
 
 
