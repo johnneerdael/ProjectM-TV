@@ -20,7 +20,7 @@ def source_tokens(text: str, *, shader: bool) -> list[str]:
 
 
 def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
-                 equation_loader_policy='strict-raw-v1') -> dict:
+                 equation_loader_policy='strict-raw-v1',shader_profile=None,shader_compatibility=None) -> dict:
     """Count source once, including omitted code and invalid/unclassified rows.
 
     Latin-1 provides a lossless byte-to-character mapping for the inventory.
@@ -33,6 +33,12 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
     select_equation(None,'per_frame_',policy=equation_loader_policy)
     valid_cache = (cache is not None and cache.get('preset_sha256') == digest
                    and cache.get('reader_sha256') == reader_sha)
+    from equation_loading import constant_q_banks
+    known_q=constant_q_banks(cache,policy=equation_loader_policy) if valid_cache else {}
+    stage_plan=None
+    if shader_profile is not None and valid_cache:
+        from stage_resolution import resolve_stages
+        stage_plan=resolve_stages(cache,profile=shader_profile,compatibility=shader_compatibility or {})
     groups = defaultdict(list)
     first_keys = set()
     first_values = {}
@@ -107,10 +113,20 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
             lowered = False
             reasons = []
             if shader and parsed:
+                stage_name='warp' if stage=='warp' else 'composite'
+                bindings=None
+                if stage_plan and stage_plan[stage_name]['kind']=='custom_'+stage_name:
+                    requested=shader_compatibility[stage_name]['request']['samplers']
+                    # A declared sampler type can make offline compilation pass
+                    # without proving TextureManager preserves a random alias.
+                    # The merged engine still has known randNN association gaps.
+                    if not any(re.fullmatch(r'sampler_(?:[A-Za-z]{2}_)?rand[0-9]+(?:_[A-Za-z0-9_]+)?',name,re.I)
+                               for name in requested):bindings=requested
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
-                                     frame=3, warp_reads_blur=False)
+                                     frame=3, warp_reads_blur=False,known_uniforms=known_q,
+                                     array_initializer_policy=section.get('array_initializer_policy','legacy-layout-v1'))
                 try:
-                    model.lower(section['tree'],language_extensions=section.get('language_extensions',[]))
+                    model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings)
                     lowered = model.complete
                     reasons = [str(reason) for reason in model.unknown]
                 except (KeyError, TypeError, ValueError, RecursionError) as error:
@@ -125,6 +141,8 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                                                   native_source_matches and first_values_match)
             if selected is not None:
                 unit['equation_loading']={key:selected[key] for key in ['policy','assembly','compile_status','tree_status']}
+            if shader and stage_plan and source_matches:
+                unit['shader_stage_resolution']=stage_plan['warp' if stage=='warp' else 'composite']
             units.append(unit)
             totals = stages[stage]
             totals['source_tokens'] += count

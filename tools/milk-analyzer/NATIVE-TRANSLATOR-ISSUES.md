@@ -2,6 +2,18 @@
 
 Date: 2026-10-04. Task: investigate native HLSL preprocessing/GLSL emission failures that block source predictions. Keep this separate from analyzer-only scope and liveness fixes.
 
+## Resolution update
+
+[PR #26](https://github.com/johnneerdael/ProjectM-TV/pull/26) is merged at
+`ce9b80aa65860a81efa7ca90ad4763fcd96a2f58`. Patches0030–0032 implement T1–T3;
+do not reimplement the historical issues below. Its evidence reports54/56 array
+and48/51 sampler-state witnesses compiling, and eliminates uninitialized
+uniform-copy declarations. The analyzer now models the initialized global copies
+and grouped arrays with matching engine provenance. Unverified random-sampler
+association remains blocked even when explicit types make offline compilation
+succeed. The current bounded source audit retains54 gaps before adopting PR27.
+The affected tables and2.2.4 evidence below remain historical reproductions.
+
 ## Artifact scope and release status
 
 These findings concern **our patched ProjectM TV native engine shipped in `ProjectM-TV:core`**, not an unpatched upstream projectM binary. Attribution to projectM identifies the embedded code lineage only.

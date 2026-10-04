@@ -313,6 +313,18 @@ void targetLocalBindings(json& node,const std::set<std::string>& locals) {
     } else if(node.is_array())for(auto& item:node)targetLocalBindings(item,locals);
 }
 
+void targetGlobalBindings(json& node,const std::map<std::string,json>& declarations) {
+    if(node.is_object()) {
+        auto found=declarations.find(node.value("name",std::string()));
+        if(node.value("kind",std::string())=="variable"&&node.value("global",false)&&found!=declarations.end()) {
+            node["native_type_flags"]=node["type"].value("flags",0);
+            node["type"]=found->second;
+            node["target_binding"]="global initialized uniform copy";
+        }
+        for(auto& item:node.items())targetGlobalBindings(item.value(),declarations);
+    }else if(node.is_array())for(auto& item:node)targetGlobalBindings(item,declarations);
+}
+
 json shaderTree(std::string code,bool warp,const std::string& header) {
     try {
         ParserDiagnostics diagnostics;
@@ -405,6 +417,15 @@ json shaderTree(std::string code,bool warp,const std::string& header) {
         // Generated locals have no initializer; preserve component validity.
         tree.ReplaceUniformsAssignments();
         auto target=statements(tree.GetRoot()->statement);
+        std::map<std::string,json> globalCopies;
+        for(const auto& node:target)if(node["kind"]=="declarations")for(const auto& declaration:node["values"]) {
+            const auto& value=declaration["value"];
+            if(!(declaration["type"].value("flags",0)&HLSLTypeFlag_Uniform)&&value.is_object()&&
+               value.value("kind",std::string())=="variable"&&value.value("global",false)&&
+               (value["type"].value("flags",0)&HLSLTypeFlag_Uniform))
+                globalCopies.emplace(declaration["name"].get<std::string>(),declaration["type"]);
+        }
+        targetGlobalBindings(target,globalCopies);
         json replacements=json::array();
         for(auto& function:target)if(function["kind"]=="function") {
             std::set<std::string> locals;
@@ -420,6 +441,7 @@ json shaderTree(std::string code,bool warp,const std::string& header) {
             targetLocalBindings(function["body"],locals);
         }
         return {{"status","parsed"},{"tree",target},
+                {"array_initializer_policy",kArrayInitializerPolicy},{"array_generator_sha256",kArrayGeneratorSha},
                 {"target_transforms",{"HLSLTree::ReplaceUniformsAssignments"}},
                 {"uniform_local_replacements",replacements},
                 {"language_extensions",extensions},{"runtime_compatibility","not established by syntax parsing"}};

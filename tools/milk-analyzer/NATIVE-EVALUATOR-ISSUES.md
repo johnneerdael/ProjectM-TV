@@ -2,6 +2,17 @@
 
 Date: 2026-10-04. Task: reconcile MilkDrop numbered equation records with our native loader/evaluator. The source-reader’s own parser results must remain separate from actual AAR load outcomes.
 
+## Resolution update
+
+[PR #27](https://github.com/johnneerdael/ProjectM-TV/pull/27) is merged at
+`f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98`. Patches0033–0035 extend retry to all
+equation phases, add lone-dot numeric compatibility and preserve preset loading
+when a defective block is omitted with a warning. Its reported corpus result is
+9,600 clean loads and6 warning-only loads, with zero failed loads. Do not treat
+the historical27 remaining failures below as current release failures or ask an
+engineer to reimplement these fixes. The analyzer's35-patch source snapshot is
+built; selected-assembly and omission-policy adoption remain in progress.
+
 ## Artifact scope and release status
 
 These findings concern **our patched ProjectM TV native engine shipped in `ProjectM-TV:core`**, not an unpatched upstream projectM binary. Attribution to projectM identifies the embedded code lineage only.

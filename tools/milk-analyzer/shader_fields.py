@@ -37,13 +37,16 @@ ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul',
 
 
 class ShaderFields:
-    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1'):
+    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,array_initializer_policy='legacy-layout-v1'):
         if stage not in {"warp","composite"}:raise ValueError("warp or composite stage required")
         self.stage=stage;self.frame=frame;self.warp_reads_blur=warp_reads_blur
         self.environment={};self.complete=True;self.unknown=[]
         self.functions={};self.global_names=set();self.globals={};self.call_stack=[]
         self.frame_wrap=frame_wrap;self.sampler_bindings={}
         self.main_binding_policy=main_binding_policy
+        self.known_uniforms=known_uniforms or {}
+        if array_initializer_policy not in {'legacy-layout-v1','grouped-elements-v1'}:raise ValueError('unsupported array initializer policy')
+        self.array_initializer_policy=array_initializer_policy
         self.effects=[]
         self.local_names=set()
         self.native_samplers={}
@@ -123,6 +126,24 @@ class ShaderFields:
                 return Field('input',dtype=dtype,detail={'name':declaration['name']})
             return Field('array',tuple(Field('uninitialized',dtype=element) for _ in range(length)),dtype)
         elements=value.get('elements',[value])
+        if self.array_initializer_policy=='grouped-elements-v1' and 'x' not in element:
+            element_shape=self.shape(element)
+            shapes=[self.shape(a['type']['name']) if not a['type'].get('array') and 'x' not in a['type']['name'] else None for a in elements]
+            if element_shape and all(shapes):
+                components=element_shape[1]
+                if len(elements)==length and all(shape[1]==components for shape in shapes):
+                    return Field('array',tuple(self.coerce(self.expression(a),element) for a in elements),dtype)
+                if sum(shape[1] for shape in shapes)!=length*components:
+                    return self.unsupported('native GLSL array initializer component count mismatch',dtype=dtype)
+                groups=[];group=[];filled=0
+                for item,shape in zip(elements,shapes):
+                    if filled+shape[1]>components:
+                        return self.unsupported('native GLSL array initializer spans elements',dtype=dtype)
+                    group.append(item);filled+=shape[1]
+                    if filled==components:
+                        if self.unsequenced(group):return self.unsupported('array constructor argument side-effect order not established',dtype=dtype)
+                        groups.append(Field('construct',tuple(self.expression(a) for a in group),element));group=[];filled=0
+                return Field('array',tuple(groups),dtype)
         # Native emits element-type[](raw expressions), with no flat grouping or
         # padding. Invalid GLSL constructor layouts must not become valid arrays.
         if len(elements)!=length or any(a['type']['name']!=element and not
@@ -227,6 +248,9 @@ class ShaderFields:
                         value=self.array_declaration(declaration,global_scope=True)
                     elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
                     elif declaration['value'] is not None:value=self.initializer(self.expression(declaration['value']),dtype)
+                    elif declaration['type'].get('flags',0)&4 and name in self.known_uniforms:
+                        value=Field('constant',dtype=dtype,detail={'value':self.known_uniforms[name],
+                                    'basis':'explicit source/context uniform binding'})
                     else:value=Field('input' if declaration['type'].get('flags',0)&4 or dtype.startswith('sampler') else 'uninitialized',dtype=dtype,detail={'name':name})
                     self.environment[name]=value
                     self.globals[name]=self.environment[name]
@@ -804,7 +828,15 @@ class ShaderFields:
             elif kind=="block":self.scoped(statement["body"])
             elif kind in {'for','while'}:self.loop(statement)
             elif kind=="if":
-                condition=self.expression(statement["condition"]);before=dict(self.environment);globals_before=dict(self.globals)
+                condition=self.expression(statement["condition"])
+                if not self.has_shared_effects(statement['condition']):
+                    from field_math import evaluate
+                    try:
+                        known=evaluate(condition)
+                        if getattr(known,'ndim',0)==0:
+                            self.scoped(statement['yes'] if bool(known) else statement['no']);continue
+                    except ValueError:pass
+                before=dict(self.environment);globals_before=dict(self.globals)
                 outer_effects=self.effects;self.effects=[]
                 self.scoped(statement["yes"]);yes=dict(self.environment);globals_yes=dict(self.globals)
                 yes_effects=self.effects;self.effects=[]

@@ -753,7 +753,7 @@ The native generator emits inline initializers, and GLSL ES3.00 section4.2.2
 makes the new local name visible afterwards. The initializer reads its outer
 binding; missing or unwritten outer storage stays unresolved. All49 historical
 shader witnesses pass offline GLSL330 and GLES300 compiler checks. Re-reading
-and auditing all original315 presets clears47 more, leaving **240** known
+and auditing all original 315 presets clears47 more, leaving **240** known
 source blockers with no newly blocked entries. Two frozen global/nested-local
 controls match the unchanged published core2.2.4 across60frames with zero RGB8
 error. This establishes the scope behavior, not whole-preset appearance accuracy.
@@ -772,7 +772,7 @@ stale or inconsistent native evidence keeps the source gap open.
 
 Confirmed ignored code retains all original source tokens, unvisited counts and
 byte/source hashes; it receives no parsing or visual-accuracy credit. Re-reading
-all original315 witnesses resolves20 more execution gaps, leaving **220** known
+all original 315 witnesses resolves20 more execution gaps, leaving **220** known
 blockers. Per-preset source-token, unvisited-token and parsed-token totals match
 the previous audit exactly, and the visual gate remains closed. See
 `fixtures/focused-blockers-220-2026-10-04.json`.
@@ -797,7 +797,7 @@ Independent float-vector storage math preserves component validity until a
 component is consumed. An unwritten lane may be discarded by a later overwrite;
 live unwritten reads remain unresolved. Coupled operations such as normalization,
 dot products and length, helper/storage effects, arrays and matrices are excluded
-from this bounded deferral. Rechecking the original315 witnesses clears3 more
+from this bounded deferral. Rechecking the original 315 witnesses clears3 more
 interpreter gaps and leaves217 in the historical source-adapter epoch. Two
 frozen controls match the **published core2.2.6** exactly across60 RGB8 frames.
 See `fixtures/focused-blockers-217-2026-10-04.json` and
@@ -835,9 +835,24 @@ implicit main. Named clamp/wrap/point aliases keep their own modes; composite
 units are reordered without changing those sampling modes. Explicit policy
 selection preserves old evidence and prevents mixing sampler behavior across
 core versions. Three frozen current-AAR controls verify clamp and point filtering
-with zero RGB8 error across84 measured frames after two seed frames per control.
-See `fixtures/main-binding-core-2.2.6-proof.json`. This does not change the178
+with zero RGB8 error across 84 measured frames after two seed frames per control.
+See `fixtures/main-binding-core-2.2.6-proof.json`. This does not change the 178
 remaining source gaps or establish full-preset appearance accuracy.
+
+Merged PR #26 changes the target translator: writable uniform copies are now
+initialized globals, and arrays group flat/mixed component lists into elements.
+The reader corrects stale reference qualifiers from actual copy declarations and
+records the array generator hash/policy. Historical array behavior remains
+selectable. Source-matched compiler context permits sampler-state name binding;
+stale context and unverified random aliases cannot clear those gaps.
+
+A fresh 32-patch CPU snapshot audit of the original 315 cases retains 54 source
+gaps with the existing per-frame retry policy. This is conditional source
+interpretation, not a whole-preset AAR appearance certification. Merged PR #27's
+all-phase retry and warning-only omission behavior still need model adoption.
+See `fixtures/focused-blockers-54-merged26-2026-10-04.json` and the updated
+native-engine handoffs. PR #28 targets the separate experimental Native 4K branch;
+its dual raw/filtered feedback routing is not enabled by this source audit.
 
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its

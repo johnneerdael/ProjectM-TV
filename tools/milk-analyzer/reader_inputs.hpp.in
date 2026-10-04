@@ -4,3 +4,5 @@ inline constexpr const char* kShaderHeader = R"MILK_HEADER(@SHADER_HEADER_TEXT@)
 inline constexpr const char* kShaderHeaderSha = "@SHADER_HEADER_SHA@";
 inline constexpr const char* kEngineIdentity = R"MILK_ENGINE(@ENGINE_IDENTITY_TEXT@)MILK_ENGINE";
 inline constexpr const char* kEngineArchiveSha = "@ENGINE_ARCHIVE_SHA@";
+constexpr const char* kArrayInitializerPolicy = "@ARRAY_INITIALIZER_POLICY@";
+constexpr const char* kArrayGeneratorSha = "@ARRAY_GENERATOR_SHA@";
