@@ -8,7 +8,7 @@ ProjectM TV-specific fix; production random_device seeding is unchanged.
 
 ---
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
-index 956d2e9df..ddabc17de 100644
+index 956d2e9df..bbffd607b 100644
 --- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
 @@ -19,6 +19,7 @@
@@ -75,7 +75,7 @@ index 956d2e9df..ddabc17de 100644
 -                        addLowerCaseName.substr(0, 6) == lowerCaseName &&
 -                        addLowerCaseName[6] == '_')
 +                    if (addLowerCaseName.length() > offset + 7 &&
-+                        addLowerCaseName.substr(0, offset + 6) == lowerCaseName &&
++                        additionalName->substr(0, offset + 6) == *samplerName &&
 +                        addLowerCaseName[offset + 6] == '_')
                      {
                          samplerName = m_samplerNames.erase(samplerName);

@@ -178,6 +178,14 @@ static void NumericalControls(TextureManager& manager)
     prefixed.LoadCode("shader_body { ret=(tex2D(sampler_fc_rand00,uv).rgb+tex2D(sampler_pw_rand00_red,uv).rgb)*0.5; }");
     prefixed.LoadTexturesAndCompile(prefixFirst);
     ExpectPixel(prefixed, prefixFirst, 64, 0);
+    PresetState spelling;
+    Setup(spelling, manager);
+    MilkdropShader caseSensitive(MilkdropShader::ShaderType::CompositeShader);
+    caseSensitive.LoadCode("sampler sampler_pc_rand00_red=sampler_state {AddressU=WRAP;};\n"
+                           "shader_body { ret=tex2D(sampler_pc_RAND00,uv).rgb; }");
+    caseSensitive.LoadTexturesAndCompile(spelling);
+    BoundTexture(caseSensitive, spelling, "pc_RAND00", GL_CLAMP_TO_EDGE, GL_NEAREST);
+    ExpectPixel(caseSensitive, spelling, 64, 0);
 }
 
 static void LifecycleControls(TextureManager& manager)
