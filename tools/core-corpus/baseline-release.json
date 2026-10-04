@@ -1,0 +1,8 @@
+{
+  "tag": "v2.2.1",
+  "source_commit": "5681852f9497f320e57b8a5dd40c076d0f5a6b18",
+  "aar": "projectM-TV-core-2.2.1.aar",
+  "aar_sha256": "4c960385cd0afb7007ed08f99e0e04836c243f950e61f3e6e5dc4d9e77c8a440",
+  "release_url": "https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.2.1",
+  "reason": "Published core artifact matching exact recovered baseline source; newer2.2.4 also changes preset selection."
+}
