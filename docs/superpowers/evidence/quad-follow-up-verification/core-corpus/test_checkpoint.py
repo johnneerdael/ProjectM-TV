@@ -90,6 +90,24 @@ class BackupTests(unittest.TestCase):
                                    "status":"failed","error":"PCM checksum mismatch before init"})
         result=checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
         self.assertEqual(result["status"],"failed")
+    def test_missing_result_path_cannot_hide_available_wrong_producer(self):
+        self.save_failed_producer({"schema_version":2,"job_id":"wrong","protocol_sha256":"protocol",
+                                   "status":"failed","error":"load failed"})
+        path=self.directory/"row.json";row=json.loads(path.read_text());row.pop("payload_sha256");row.pop("result")
+        row["result_path"]="missing/result.json";run.save_row(path,row)
+        with self.assertRaisesRegex(ValueError,"producer|result"):
+            checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+
+    def test_snapshot_finds_actual_v2_runner_without_retagging_v1(self):
+        import run_v2
+        with tempfile.TemporaryDirectory(dir=checkpoint.ROOT/"build") as name:
+            work=Path(name)
+            run.atomic(work/"protocol.json",{})
+            run.atomic(work/"inventory.json",{})
+            protocol={"pcm":{},"roles":{},"runner_sha256":run.file_hash(Path(run_v2.__file__))}
+            try:files=checkpoint.snapshot_files(work,protocol)
+            except ValueError:files=[]
+        self.assertIn(str(Path(run_v2.__file__)),[item["source"] for item in files])
     def test_partial_job_without_terminal_row_is_not_covered(self):
         (self.directory/"row.json").unlink()
         self.assertIsNone(checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key))

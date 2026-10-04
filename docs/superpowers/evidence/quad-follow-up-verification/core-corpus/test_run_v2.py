@@ -68,6 +68,16 @@ class AttemptOutputTests(unittest.TestCase):
         self.assertTrue((self.directory / "output/result.json").exists())
         self.assertFalse(incoming.exists())
 
+    def test_failed_attempt_metadata_and_logs_survive_retry_without_promoted_output(self):
+        (self.directory/"row.json").write_bytes(b"old failed row")
+        (self.directory/"job.json").write_bytes(b"old job packet")
+        (self.directory/"instrumentation.log").write_bytes(b"old invocation result")
+        run.begin_output_attempt(self.job,self.directory)
+        archived=list(self.directory.glob("previous-attempt-*/row.json"))
+        self.assertEqual(len(archived),1)
+        self.assertEqual(archived[0].read_bytes(),b"old failed row")
+        self.assertEqual((archived[0].parent/"instrumentation.log").read_bytes(),b"old invocation result")
+
 
 if __name__ == "__main__":
     unittest.main()

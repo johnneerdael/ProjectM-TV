@@ -166,12 +166,14 @@ def pull_external(serial, remote, destination):
 def begin_output_attempt(job, directory):
     token=uuid.uuid4().hex
     previous=directory/"output"
-    if previous.exists():
+    metadata=[p for p in directory.iterdir() if p.is_file()]
+    attempts=directory/"attempts"
+    if previous.exists() or metadata or attempts.exists():
         archive=directory/("previous-attempt-"+token)
         archive.mkdir()
-        previous.rename(archive/"output")
-        for name in ("row.json","job.json"):
-            if (directory/name).exists():shutil.copy2(directory/name,archive/name)
+        if previous.exists():previous.rename(archive/"output")
+        if attempts.exists():attempts.rename(archive/"attempts")
+        for path in metadata:path.rename(archive/path.name)
     incoming=directory/"attempts"/token/"output"
     incoming.parent.mkdir(parents=True)
     remote_parent=job["output_directory"].rsplit("/output",1)[0]

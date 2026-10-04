@@ -75,6 +75,7 @@ def verify_terminal_producer(directory, row, protocol, record):
     relative=row.get("result_path","output/result.json")
     result_path=directory/relative
     if not result_path.resolve().is_relative_to(directory.resolve()):raise ValueError("unsafe producer result path")
+    if "result_path" in row and not result_path.is_file():raise ValueError("claimed producer result path is missing")
     result=row.get("result")
     if not result_path.exists() and result is None:
         if row["status"] not in ("failed","timeout") or not isinstance(row.get("error"),str) or not row["error"].strip():
@@ -363,17 +364,20 @@ def snapshot_files(work,protocol):
         for path in (apk.parent/"harness-source").rglob("*"):
             if path.is_file():paths.append(path)
     # Freeze the runner matching this protocol even when later source epochs exist.
-    runner=Path(__file__).with_name("run.py")
-    if run.file_hash(runner)==protocol["runner_sha256"]:
-        paths.append(runner)
-    else:
-        relative=runner.relative_to(ROOT).as_posix()
-        found=False
-        for commit in git(ROOT,"log","--format=%H","--",relative).splitlines():
-            data=subprocess.run(["git","-C",str(ROOT),"show",commit+":"+relative],capture_output=True,check=True).stdout
-            if hashlib.sha256(data).hexdigest()==protocol["runner_sha256"]:
-                frozen=work/"snapshot-source"/"run.py";frozen.parent.mkdir(exist_ok=True);frozen.write_bytes(data);paths.append(frozen);found=True;break
-        if not found:raise ValueError("historical protocol runner source not available")
+    runners=[Path(__file__).with_name(name) for name in ("run.py","run_v2.py")]
+    found=False
+    for runner in runners:
+        if runner.is_file() and run.file_hash(runner)==protocol["runner_sha256"]:
+            paths.append(runner);found=True;break
+    if not found:
+        for runner in runners:
+            relative=runner.relative_to(ROOT).as_posix()
+            for commit in git(ROOT,"log","--format=%H","--",relative).splitlines():
+                data=subprocess.run(["git","-C",str(ROOT),"show",commit+":"+relative],capture_output=True,check=True).stdout
+                if hashlib.sha256(data).hexdigest()==protocol["runner_sha256"]:
+                    frozen=work/"snapshot-source"/runner.name;frozen.parent.mkdir(exist_ok=True);frozen.write_bytes(data);paths.append(frozen);found=True;break
+            if found:break
+    if not found:raise ValueError("historical protocol runner source not available")
     return [{"source":str(path),"path":path.relative_to(ROOT).as_posix()} for path in sorted(set(paths))]
 
 
