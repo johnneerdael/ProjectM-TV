@@ -112,6 +112,52 @@ class AndroidUserTests(DiagnosticsTestCase):
     def adb_calls(self):
         return [json.loads(line) for line in self.calls.read_text().splitlines()]
 
+    def run_conflicting_install(self, installed_users, failure="", mode="conflict"):
+        state = json.loads(self.state.read_text())
+        state.update(installed_users=installed_users, installs=0, uninstalls=0)
+        self.state.write_text(json.dumps(state))
+        apk = self.root / "app.apk"
+        apk.touch()
+        self.environment["DIAGNOSTICS_TEST_FAILURE"] = failure
+        self.environment["DIAGNOSTICS_TEST_INSTALL"] = mode
+        return self.run_script(["--apk", str(apk), "--allow-uninstall", "--duration", "30"])
+
+    def test_signing_conflict_preserves_data_when_installed_for_another_user(self):
+        for installed_users in ([0, 10], [10, 11]):  # Include a stopped user.
+            with self.subTest(installed_users=installed_users):
+                result = self.run_conflicting_install(installed_users)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn("another Android user", result.stdout)
+                state = json.loads(self.state.read_text())
+                self.assertEqual(state["uninstalls"], 0)
+                self.assertEqual(state["installed_users"], installed_users)
+                self.assertEqual(state["installs"], 1)
+
+    def test_signing_conflict_does_not_uninstall_when_user_queries_fail(self):
+        for failure in ("users-error", "users-malformed", "packages-error", "packages-malformed"):
+            with self.subTest(failure=failure):
+                result = self.run_conflicting_install([10], failure)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn("cannot verify", result.stdout)
+                state = json.loads(self.state.read_text())
+                self.assertEqual(state["uninstalls"], 0)
+                self.assertEqual(state["installed_users"], [10])
+
+    def test_signing_conflict_uninstalls_only_sole_installation_user(self):
+        result = self.run_conflicting_install([10])
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        uninstalls = [call for call in self.adb_calls() if call[:1] == ["uninstall"]]
+        self.assertEqual(uninstalls, [["uninstall", "--user", "10", PACKAGE]])
+        self.assertEqual(json.loads(self.state.read_text())["installs"], 2)
+
+    def test_retained_signing_conflict_is_explicit_without_broader_uninstall(self):
+        result = self.run_conflicting_install([10], mode="retained-conflict")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("remains after", result.stdout)
+        uninstalls = [call for call in self.adb_calls() if call[:1] == ["uninstall"]]
+        self.assertEqual(uninstalls, [["uninstall", "--user", "10", PACKAGE]])
+        self.assertEqual(json.loads(self.state.read_text())["installs"], 2)
+
     def test_secondary_user_process_is_measured_without_other_user_process(self):
         for launch_state in ("", "COLD"):  # Android 9 has no LaunchState line; Android 14 does.
             with self.subTest(launch_state=launch_state):

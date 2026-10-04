@@ -17,9 +17,23 @@ failure = os.environ.get("DIAGNOSTICS_TEST_FAILURE", "")
 package = "nl.neerdael.projectmtv"
 listener = package + "/com.example.projectm.visualizer.TrackListenerService"
 changed = False
+install_mode = os.environ.get("DIAGNOSTICS_TEST_INSTALL", "")
 
 if args == ["get-state"]:
     print("device")
+elif args[:1] == ["install"]:
+    state["installs"] = state.get("installs", 0) + 1
+    changed = True
+    if install_mode and (state["installs"] == 1 or install_mode == "retained-conflict"
+                         or state.get("installed_users", [])):
+        print("Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE: different signing key]")
+    else:
+        print("Success")
+elif args[:1] == ["uninstall"]:
+    state["uninstalls"] = state.get("uninstalls", 0) + 1
+    state["installed_users"] = [user for user in state.get("installed_users", []) if user != 10]
+    changed = True
+    print("Success")
 elif args[:2] == ["logcat", "-v"]:
     print(f"10-05 12:00:00.000 100 100 I ActivityManager: Start proc 202:{package}/u0a123 for service")
     print(f"10-05 12:00:00.001 100 100 I ActivityManager: Start proc 309:{package}/u10a123 for activity")
@@ -67,6 +81,26 @@ elif args[:1] == ["shell"]:
         launch_state = os.environ.get("DIAGNOSTICS_TEST_LAUNCH_STATE", "COLD")
         if launch_state:
             print("LaunchState: " + launch_state)
+    elif command == ["pm", "list", "users"]:
+        if failure == "users-error":
+            print("permission denied", file=sys.stderr)
+            sys.exit(1)
+        if failure == "users-malformed":
+            print("Error: couldn't get users")
+        else:
+            print("Users:\n\tUserInfo{0:Owner:13} running\n\tUserInfo{10:TV user:10} running\n\tUserInfo{11:Stopped:10}")
+    elif command[:3] == ["pm", "list", "packages"]:
+        if failure == "packages-error":
+            print("permission denied", file=sys.stderr)
+            sys.exit(1)
+        if failure == "packages-malformed":
+            print("Error: Invalid user")
+        else:
+            user = int(command[command.index("--user") + 1])
+            if user in state.get("installed_users", []):
+                print("package:" + package)
+            # FILTER is a substring match; similarly named packages are not this app.
+            print("package:" + package + ".tools")
     elif command[:1] == ["settings"]:
         print(listener if state["listener"] else "null")
     elif command[:2] == ["cmd", "notification"]:

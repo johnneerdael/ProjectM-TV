@@ -10,8 +10,8 @@
 #   --no-install       test the version that is already installed
 #   --package ID       application ID to test (default nl.neerdael.projectmtv); for example
 #                      nl.neerdael.projectmtv.profile with a matching --apk or --no-install (not build/--release)
-#   --allow-uninstall  if the install fails because of a different signing key, uninstall the
-#                      existing app first (this resets the app's settings)
+#   --allow-uninstall  on a signing-key conflict, uninstall for this user (resets its settings)
+#                      only if no other Android user has the app; otherwise refuse
 #   --sweep            also measure each fixed resolution (drives the menu with key events)
 #   --out DIR          output directory (default diagnostics/<model>-<timestamp>)
 #
@@ -102,6 +102,26 @@ app_pids() {
         NF != 3 || $1 !~ /^[0-9]+$/ || $2 !~ /^[0-9]+$/ || $2 < 1 { bad = 1; exit 1 }
         int($1 / 100000) == user && $3 == pkg { pid = $2; matches++ }
         END { if (bad || matches > 1) exit 1; if (matches == 1) print pid }'
+}
+other_package_users() {
+    local user_table user_ids other_user packages
+    user_table="$(ash_checked pm list users)" || return 1
+    user_ids="$(printf '%s\n' "$user_table" | awk -v current="$ANDROID_USER" '
+        NR == 1 { if ($0 != "Users:") { bad = 1; exit 1 }; next }
+        /^[[:space:]]*$/ { next }
+        !/^[[:space:]]*UserInfo\{[0-9]+:/ { bad = 1; exit 1 }
+        { sub(/^[[:space:]]*UserInfo\{/, ""); sub(/:.*/, "");
+          if ($0 == current) found_current = 1; else print }
+        END { if (bad || !found_current) exit 1 }')" || return 1
+    # Include stopped users: their installed package still retains the shared signing key.
+    for other_user in $user_ids; do
+        packages="$(ash_checked pm list packages --user "$other_user" "$PKG")" || return 1
+        printf '%s\n' "$packages" | awk '
+            /^[[:space:]]*$/ { next }
+            !/^package:[A-Za-z0-9_.]+$/ { exit 1 }' || return 1
+        # The package filter is a substring match; only this exact ID blocks removal.
+        if printf '%s\n' "$packages" | grep -qxF "package:$PKG"; then echo "$other_user"; fi
+    done
 }
 key() {  # one key at a time so focus changes keep up on slow devices
     for k in "$@"; do ash input keyevent "$k" >/dev/null; sleep 0.4; done
@@ -196,12 +216,18 @@ if [ "$APK_SOURCE" != "none" ]; then
     result="$(a install -r --user "$ANDROID_USER" "$APK" 2>&1 | tr -d '\r')"
     if printf '%s' "$result" | grep -q "INSTALL_FAILED_UPDATE_INCOMPATIBLE"; then
         if [ "$ALLOW_UNINSTALL" = 1 ]; then
-            log "Installed app has a different signing key; uninstalling it (--allow-uninstall)"
-            a uninstall --user "$ANDROID_USER" "$PKG" >/dev/null 2>&1
+            OTHER_PACKAGE_USERS="$(other_package_users)" || die "cannot verify other users' package installations; refusing --allow-uninstall and preserving this user's app data. Use --no-install or an APK with the installed signing key"
+            [ -z "$OTHER_PACKAGE_USERS" ] || die "signing conflict: $PKG is installed for another Android user ($OTHER_PACKAGE_USERS). Refusing --allow-uninstall; no app data was removed. Use --no-install or an APK with the installed signing key"
+            log "Installed app has a different signing key; uninstalling for Android user $ANDROID_USER (--allow-uninstall)"
+            uninstall_result="$(a uninstall --user "$ANDROID_USER" "$PKG" 2>&1)" || die "uninstall for Android user $ANDROID_USER failed: $uninstall_result"
+            printf '%s\n' "$uninstall_result" | tr -d '\r' | grep -qxF "Success" || die "uninstall for Android user $ANDROID_USER failed: $uninstall_result"
             result="$(a install -r --user "$ANDROID_USER" "$APK" 2>&1 | tr -d '\r')"
+            if printf '%s' "$result" | grep -q "INSTALL_FAILED_UPDATE_INCOMPATIBLE"; then
+                die "signing conflict remains after removing this user's installation; Android still retains the incompatible package. No broader uninstall will be attempted. Use an APK with the installed signing key"
+            fi
             APK_SOURCE="$APK_SOURCE (previous install removed: different signing key)"
         else
-            die "installed app is signed with a different key. Re-run with --allow-uninstall (resets app settings) or use --no-install"
+            die "installed app is signed with a different key. Use --no-install or a matching-key APK; --allow-uninstall resets this user's settings only when no other user has the app"
         fi
     fi
     printf '%s' "$result" | grep -q "Success" || die "install failed: $result"

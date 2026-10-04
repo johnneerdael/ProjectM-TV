@@ -22,7 +22,7 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 | `--apk PATH` | Installs the supplied APK; its application ID must match `--package` (or the default ID) |
 | `--no-install` | Tests the version that is already installed |
 | `--package ID` | Application ID to test (default `nl.neerdael.projectmtv`). Alternate IDs require a matching `--apk` or `--no-install`; building and `--release` only support the default ID |
-| `--allow-uninstall` | If the installed app has a different signing key, uninstall it first (resets app settings) |
+| `--allow-uninstall` | Attempts signing-key recovery by uninstalling only for the captured Android user (resets that user's app settings); refuses if another user has the same package or that state cannot be verified |
 | `--sweep` | Also measures each fixed resolution (720p, 1080p, …), driving the menu with key events |
 | `--duration SEC` | Observation time (default 180) |
 
@@ -33,6 +33,8 @@ tools/tv-diagnostics.sh 192.168.50.105:5555 --package nl.neerdael.projectmtv.pro
 ```
 
 To install a newly built profile APK instead, replace `--no-install` with `--apk app/build/outputs/apk/profile/app-profile.apk`. The script does not inspect supplied APKs to verify their application ID; supply an APK that matches the package being tested. Incompatible build/`--release` and package combinations fail before connecting to the TV, building, downloading or installing anything. If multiple APK-source options are supplied, the last one selects the mode; the package check uses that final mode regardless of option order.
+
+On a signing-key conflict, `--allow-uninstall` checks `pm list users` and each other user's `pm list packages --user <userId>` before removing any app data. Another user's installation, including a stopped user's, retains shared package code and its signing key; the script refuses recovery in that case. Failed or malformed queries also stop before uninstalling. Use `--no-install` to measure the existing app or supply an APK signed with its installed key. If Android still retains an incompatible package after an allowed user-scoped uninstall (for example a preinstalled package), the retry fails explicitly; the script never broadens removal to all users.
 
 ## What it collects
 
