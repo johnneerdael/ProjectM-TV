@@ -107,6 +107,30 @@ metrics, the hash-verified comparator rows and the file hashes.
 The raw captures (3.9 GB) remain in `build/native-4k-current-main/mrt-fix-validation/` of the
 recovery worktree. They are not yet in an external backup.
 
+## Reproducing
+
+`build_mrt_fix.py` and `run.py` are archived byte-for-byte; `results.json` records their SHA256s.
+They do not run in place. They resolve the repository root from their execution depth,
+`build/native-4k-current-main/<epoch>/`, and write their outputs beside themselves.
+`reproduce.sh <new-epoch>` copies them to a new epoch at that depth and runs them there. Before
+copying, it checks:
+
+- the two scripts' hashes against `results.json`;
+- the prerequisites in that `build/` tree: the owned emulator launch metadata, the raw-point and
+  classic comparators, the pristine projectM source and the Preset Lab venv;
+- that the epoch directory does not already exist.
+
+`reproduce.sh --check <new-epoch>` performs only those checks. `PROJECTM_ROOT` selects the checkout
+that holds the `build/` tree. The original tree is the recovery worktree, so for example:
+
+```sh
+PROJECTM_ROOT=/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery \
+  docs/superpowers/evidence/0025-feedback-diffusion/mrt-fix-validation/reproduce.sh --check mrt-fix-validation-repro
+```
+
+A real run builds the worker and renders on emulator-5582 after the runner's own launch-identity and
+lease guards. It does not overwrite earlier epochs.
+
 ## Limits
 
 These results come from one emulator GPU stack, one seed and signal, and six presets. The workers are
