@@ -1,0 +1,188 @@
+{
+  "bindings": [
+    {
+      "asset_name": "red",
+      "filter": 9729,
+      "height": 2,
+      "prefix": "red",
+      "requested_alias": "rand00_red",
+      "slot": 0,
+      "target": 3553,
+      "texsize_uniform": "texsize_rand00_red",
+      "uniform": "sampler_rand00_red",
+      "unit": 1,
+      "width": 2,
+      "wrap": 10497
+    },
+    {
+      "asset_name": "green",
+      "filter": 9729,
+      "height": 2,
+      "prefix": "green",
+      "requested_alias": "rand01_green",
+      "slot": 1,
+      "target": 3553,
+      "texsize_uniform": "texsize_rand01_green",
+      "uniform": "sampler_rand01_green",
+      "unit": 1,
+      "width": 4,
+      "wrap": 10497
+    },
+    {
+      "asset_name": "red",
+      "filter": 9729,
+      "height": 2,
+      "prefix": "",
+      "requested_alias": "fw_rand00",
+      "slot": 0,
+      "target": 3553,
+      "texsize_uniform": "texsize_rand00",
+      "uniform": "sampler_fw_rand00",
+      "unit": 2,
+      "width": 2,
+      "wrap": 10497
+    },
+    {
+      "asset_name": "red",
+      "filter": 9729,
+      "height": 2,
+      "prefix": "",
+      "requested_alias": "fc_rand00",
+      "slot": 0,
+      "target": 3553,
+      "texsize_uniform": "texsize_rand00",
+      "uniform": "sampler_fc_rand00",
+      "unit": 1,
+      "width": 2,
+      "wrap": 33071
+    },
+    {
+      "asset_name": "red",
+      "filter": 9728,
+      "height": 2,
+      "prefix": "",
+      "requested_alias": "pw_rand00",
+      "slot": 0,
+      "target": 3553,
+      "texsize_uniform": "texsize_rand00",
+      "uniform": "sampler_pw_rand00",
+      "unit": 4,
+      "width": 2,
+      "wrap": 10497
+    },
+    {
+      "asset_name": "red",
+      "filter": 9728,
+      "height": 2,
+      "prefix": "",
+      "requested_alias": "pc_rand00",
+      "slot": 0,
+      "target": 3553,
+      "texsize_uniform": "texsize_rand00",
+      "uniform": "sampler_pc_rand00",
+      "unit": 3,
+      "width": 2,
+      "wrap": 33071
+    }
+  ],
+  "control": "numerical",
+  "gl_renderer": "Apple M4 Pro",
+  "gl_version": "4.1 Metal - 89.4",
+  "numerical_checks": [
+    {
+      "actual_rgb": [
+        64,
+        0,
+        0
+      ],
+      "expected_rgb": [
+        64,
+        0,
+        0
+      ],
+      "tolerance_bytes": 1
+    },
+    {
+      "actual_rgb": [
+        0,
+        128,
+        0
+      ],
+      "expected_rgb": [
+        0,
+        128,
+        0
+      ],
+      "tolerance_bytes": 1
+    },
+    {
+      "actual_rgb": [
+        64,
+        128,
+        0
+      ],
+      "expected_rgb": [
+        64,
+        128,
+        0
+      ],
+      "tolerance_bytes": 1
+    },
+    {
+      "actual_rgb": [
+        64,
+        0,
+        0
+      ],
+      "expected_rgb": [
+        64,
+        0,
+        0
+      ],
+      "tolerance_bytes": 1
+    },
+    {
+      "actual_rgb": [
+        128,
+        0,
+        0
+      ],
+      "expected_rgb": [
+        128,
+        0,
+        0
+      ],
+      "tolerance_bytes": 1
+    },
+    {
+      "actual_rgb": [
+        192,
+        0,
+        0
+      ],
+      "expected_rgb": [
+        192,
+        0,
+        0
+      ],
+      "tolerance_bytes": 1
+    },
+    {
+      "actual_rgb": [
+        64,
+        0,
+        0
+      ],
+      "expected_rgb": [
+        64,
+        0,
+        0
+      ],
+      "tolerance_bytes": 1
+    }
+  ],
+  "preset_results": [],
+  "profile": "host-real-GL-production-random-device-v1",
+  "fixture_source": "core/src/test/native/projectm-regressions/random_texture_test.cpp: Fixtures::Write",
+  "fixture_source_sha256": "f5b60ddd77cd07ebd0fed227ce0e244e4d5481704343fdbcbcc780d5623b89e6"
+}

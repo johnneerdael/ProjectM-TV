@@ -273,7 +273,8 @@ static void PresetControls()
         const auto renderError = glGetError();
         presetResults.push_back({{"preset_path", path.string()}, {"raw_source_parse", "accepted"},
             {"custom_warp_compile", "accepted"}, {"custom_composite_compile", "accepted"},
-            {"full_preset_load", "accepted"}, {"full_render_gl_error", renderError},
+            {"full_preset_load", "accepted"}, {"full_stage_selection", "retain debug compiler log; program unbound after draw"},
+            {"full_render_gl_error", renderError},
             {"appearance_verified", false}});
         std::cout << name << " parsed; custom warp/comp compiled; full preset loaded; render_gl_error="
                   << renderError << " (appearance unverified)\n";

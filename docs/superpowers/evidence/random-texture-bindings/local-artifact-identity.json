@@ -1,0 +1,10 @@
+{
+  "scope": "Local release build; default local version 2.2.0, not published core 2.2.8 or a seeded lab binary",
+  "engine_source_commit": "a30de789c777162d5eecb71f519d939a79f0fd73",
+  "aar_sha256": "781d0efe43f52795eb382f9b8b14635912cff9c3dee75e878447b37fd232f3da",
+  "libraries": {
+    "jni/arm64-v8a/libprojectmtv.so": "4875cb41719294d47c47c7edd9be29ca915a2b8c54ff000b26c290b4d63886fe",
+    "jni/armeabi-v7a/libprojectmtv.so": "04552faf3e1e755930129cc6f12f39b14fa61ddf6f0b7134ed9906243be6fb40"
+  },
+  "patch_sha256": "7d126be6ec94cee62146ccf571841bbfa1cc43f1df2e0fab7e6d9d933e39acaa"
+}
