@@ -1,14 +1,25 @@
+def renderingPolicy = providers.gradleProperty('projectmCoreRenderingPolicy').getOrElse('native')
+if (!(renderingPolicy in ['capped', 'native'])) {
+    throw new GradleException("projectmCoreRenderingPolicy must be 'capped' or 'native' (got '${renderingPolicy}')")
+}
+
 apply plugin: 'com.android.library'
 
 android {
     namespace = "nl.neerdael.projectm.core"
     compileSdk = 34
     ndkVersion = "27.3.13750724"
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         minSdk = 21
         consumerProguardFiles "consumer-rules.pro"
+        buildConfigField 'String', 'RENDERING_POLICY', '"' + renderingPolicy + '"'
+        buildConfigField 'boolean', 'SUPPORTS_NATIVE_RENDERING', (renderingPolicy == 'native').toString()
         externalNativeBuild {
             cmake {
+                arguments "-DPROJECTMTV_RENDERING_POLICY=${renderingPolicy}"
                 cppFlags "-std=c++17"
             }
         }
@@ -19,6 +30,9 @@ android {
     testOptions {
         // android.util.Log etc. return defaults in JVM unit tests
         unitTests.returnDefaultValues = true
+        unitTests.all {
+            systemProperty 'projectmCoreRenderingPolicy', renderingPolicy
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

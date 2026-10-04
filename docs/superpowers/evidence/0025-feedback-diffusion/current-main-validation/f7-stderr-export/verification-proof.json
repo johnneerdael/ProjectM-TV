@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "jobs_success": 12,
+  "fresh_processes": 12,
+  "retained_full_native_frames": 720,
+  "actual_shader_exception_jobs": 6,
+  "black_frames": 0,
+  "native_parity": "all60 frames percase,allroles/repeats; directly comparedRGBbytes and independently rehashed everyretained frame",
+  "logging_observer_pixel_parity": "all720orderedframe hashes match prior unloggedF7 actualCoreepoch; commonIOobserver has no observedpixel effect",
+  "diagnostics": [
+    {
+      "fixture": "visible-custom-warp",
+      "repeat": 1,
+      "pid": 20290,
+      "path": "build/native-4k-current-main/f7-stderr-export-main35-mrt36/runtime-001/jobs/56d3e6aedfc50a3cbad34809f7c30ca911ad293fe7c997f934ef5956a0359a37/output/native-diagnostics.stderr",
+      "sha256": "f35a6c669ecd9cd5c3baa1d4ff513d43277e790ce7921a62d985c723bd6b5250",
+      "text": "projectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\nprojectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\n"
+    },
+    {
+      "fixture": "visible-custom-warp",
+      "repeat": 2,
+      "pid": 20365,
+      "path": "build/native-4k-current-main/f7-stderr-export-main35-mrt36/runtime-001/jobs/7e9ef2354eb5c5594dbb1a66017cf80983ea33ebd1cbe54629c65c320df1316a/output/native-diagnostics.stderr",
+      "sha256": "f35a6c669ecd9cd5c3baa1d4ff513d43277e790ce7921a62d985c723bd6b5250",
+      "text": "projectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\nprojectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\n"
+    },
+    {
+      "fixture": "mixed-point-packed-and-bilinear",
+      "repeat": 2,
+      "pid": 20517,
+      "path": "build/native-4k-current-main/f7-stderr-export-main35-mrt36/runtime-001/jobs/7ea33927671bf0b525264f05d784b8934f9dfbc58d6f08004deb87330a6ea525/output/native-diagnostics.stderr",
+      "sha256": "f35a6c669ecd9cd5c3baa1d4ff513d43277e790ce7921a62d985c723bd6b5250",
+      "text": "projectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\nprojectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\n"
+    },
+    {
+      "fixture": "classic-visible-wave-and-shape",
+      "repeat": 2,
+      "pid": 20665,
+      "path": "build/native-4k-current-main/f7-stderr-export-main35-mrt36/runtime-001/jobs/97714e9aa0871b635ecfdc901b85a6bdf9a86f3409a2e301c3632741441895b9/output/native-diagnostics.stderr",
+      "sha256": "f35a6c669ecd9cd5c3baa1d4ff513d43277e790ce7921a62d985c723bd6b5250",
+      "text": "projectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\nprojectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\n"
+    },
+    {
+      "fixture": "classic-visible-wave-and-shape",
+      "repeat": 1,
+      "pid": 20591,
+      "path": "build/native-4k-current-main/f7-stderr-export-main35-mrt36/runtime-001/jobs/f1bc236a4dc89381696303f1e960a61ba74ffb610ba3ab8f229dd57f2af7f32f/output/native-diagnostics.stderr",
+      "sha256": "f35a6c669ecd9cd5c3baa1d4ff513d43277e790ce7921a62d985c723bd6b5250",
+      "text": "projectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\nprojectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\n"
+    },
+    {
+      "fixture": "mixed-point-packed-and-bilinear",
+      "repeat": 1,
+      "pid": 20440,
+      "path": "build/native-4k-current-main/f7-stderr-export-main35-mrt36/runtime-001/jobs/ff3f92225ba5e022c108ec5285968cb21229861094dd60058d7aed8127acd48a/output/native-diagnostics.stderr",
+      "sha256": "f35a6c669ecd9cd5c3baa1d4ff513d43277e790ce7921a62d985c723bd6b5250",
+      "text": "projectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\nprojectM feedback diffusion disabled: Error compiling shader: ERROR: 0:14: '@' : invalid character\nERROR: 0:14: 'PRESET_LAB_F7_SYNTAX_FAULT' : undeclared identifier\n\n"
+    }
+  ],
+  "protocol_sha256": "84cc010101bc86dae8b48fb03045b5338212853daa8fbeb5bf4746916c3d2dc9",
+  "summary_sha256": "b12cd1f993a91406a648801a2129753c06808230b0b7f33725fb6371634ef962",
+  "artifact_proof_sha256": "6db02c0f5be0c438bebd6c725cc322830de2b619e79081a202e97cd72ea736ed",
+  "observer_transform_proof_sha256": "24a3c06be3f8aafe63581f2b7a412d1180e81b1b21b2924794f8df369a928f1a",
+  "lease_released_sha256": "33dba2e0d2ad50c809c816f03c6e0acac4699cf81b8b744a930193d985e78e98",
+  "limitations": "one owned AppleM4Pro emulator GPU,3syntheticfixtures,2s logicaljobs,private128x72reference; actualCoreF7 fallback only,notTV/fidelity/performance evidence"
+}

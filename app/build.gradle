@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 
 // Floors for this release line. CI derives each patch/code from first-parent main history.
 // Reset all three only for a planned new release line; routine PRs need no version bump.
-def baseVersionName = "2.2.0"
-def baseVersionCode = 38
-def baseVersionCommit = "da4fe0edf20ed1590b740e5a1af34956a80b0c20"
+def baseVersionName = "2.3.0"
+def baseVersionCode = 49
+def baseVersionCommit = "8b70620339018cfaf5ac05acdb4ea8104dc2eb59"
 
 android {
     // Java package of the code; the installed app ID (applicationId below) is separate since 1.9.7.

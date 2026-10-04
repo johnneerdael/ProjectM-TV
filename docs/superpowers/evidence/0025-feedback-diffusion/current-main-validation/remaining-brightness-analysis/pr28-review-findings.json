@@ -1,0 +1,80 @@
+{
+  "reviewer": "performance+maintainability",
+  "immutable_patch_sha256": "8cb4e470598231b45ae6b4a80fa47722bb5e41bf886dc956bded592d36a9adcf",
+  "findings": [
+    {
+      "priority": "P2",
+      "confidence": 0.96,
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/pr28-review/source/tools/projectm-patches/0033-feedback-diffusion-compensation.patch",
+      "line": 588,
+      "title": "Avoid calculating a filtered cache that constant motion vectors discard next frame",
+      "repro": "Above the reference area, run a preset with constant mv_a > 0 and positive vector counts. Every frame after the first draws new vectors, forcing MRT before the warp. The final MRT again calculates a filtered image, then the next frame draws vectors and recomputes it before use.",
+      "evidence_lines": [
+        553,
+        555,
+        585,
+        588,
+        605
+      ],
+      "impact": "Two 3/4-tap stencil calculations run every frame, although only the input calculation is consumed by the warp. Equal fullscreen pass counts do not establish equal fetch/write work or GPU frame rate.",
+      "suggestion": "Use an exact raw-only output path when appropriate and invalidate the filtered cache, or otherwise avoid calculating this unused filtered output. Validate motion-vector appearance and cache transitions, then measure device cost."
+    },
+    {
+      "priority": "P2",
+      "confidence": 0.92,
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/pr28-review/source/tools/projectm-patches/0033-feedback-diffusion-compensation.patch",
+      "line": 260,
+      "title": "Avoid retaining the unused legacy flip surface alongside the MRT raw copy",
+      "repro": "Switch to a diffusion-eligible preset at 4K. ProjectM::StartPresetTransition calls DrawInitialImage. CopyTexture::Draw allocates a full-size flip texture and swaps image attachments. The active path then allocates its own raw and filtered MRT textures; the old flip remains alive until the inactive or fallback path needs it.",
+      "evidence": "ProjectM.cpp StartPresetTransition; CopyTexture.cpp Draw(Framebuffer&) and UpdateTextureSize; patch lines 260\u2013261, 548\u2013560 and 585\u2013590.",
+      "impact": "One redundant live RGBA8 surface occupies 31.64 MiB at 4K per active preset. The 48 MiB texture-pool limit covers discarded textures, not these live attachments. This does not establish an out-of-memory failure or a GPU frame-rate change.",
+      "suggestion": "Reuse the existing flip attachment as the MRT raw target, or provide careful release/recreation ownership when entering or leaving the active path. Test initial-image, resize, fallback and inactive transitions."
+    },
+    {
+      "priority": "P3",
+      "confidence": 1.0,
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/pr28-review/source/tools/projectm-patches/0033-feedback-diffusion-compensation.patch",
+      "line": 1203,
+      "title": "Correct the RGB and opaque-alpha test comment",
+      "repro": "Trace the two default CreateColorAttachment calls to Framebuffer.cpp lines 220\u2013222: both create RGBA/unsigned-byte attachments. The MRT shader copies all four source channels.",
+      "impact": "The false format claim misleads alpha-cause and memory analysis. This test does not assert that readback alpha is opaque.",
+      "suggestion": "Describe the actual RGBA storage and alpha behavior. Preserve historical evidence with an explicit erratum rather than reinterpreting past results."
+    }
+  ],
+  "maintainability_findings": [],
+  "resource_estimates": [
+    {
+      "width": 2364,
+      "height": 1330,
+      "rgba8_surface_bytes": 12576480,
+      "rgba8_surface_MiB": 11.993865966796875,
+      "mrt_raw_and_filtered_bytes": 25152960,
+      "mrt_raw_and_filtered_MiB": 23.98773193359375,
+      "private_raw8_filtered16_bytes": 37729440,
+      "private_raw8_filtered16_MiB": 35.981597900390625,
+      "main2_plus_legacy_flip_plus_mrt2_MiB": 59.969329833984375
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "rgba8_surface_bytes": 33177600,
+      "rgba8_surface_MiB": 31.640625,
+      "mrt_raw_and_filtered_bytes": 66355200,
+      "mrt_raw_and_filtered_MiB": 63.28125,
+      "private_raw8_filtered16_bytes": 99532800,
+      "private_raw8_filtered16_MiB": 94.921875,
+      "main2_plus_legacy_flip_plus_mrt2_MiB": 158.203125
+    }
+  ],
+  "inactive_contract": "Construction creates a program, FBO and zero-size attachment objects. Pixel storage is allocated by active Draw.SetSize. After an active episode, both MRT surfaces remain live while inactive: the reference guard avoids draws but does not free prior storage. This is a bounded cache tradeoff, not unbounded growth.",
+  "residual_risks": [
+    "GPU frame-rate, thermal and bandwidth acceptance remain unmeasured.",
+    "The existing pool counts RGBA16F as eight bytes per pixel and counts mip levels, but its limit does not cap live memory.",
+    "These findings address immutable patch 0033. The owner adapted preset member context in 0036; the final revision needs its own review."
+  ],
+  "testing_gaps": [
+    "Account for cached-output consumption and invalidation with continuous motion vectors.",
+    "Track live texture attachments across preset load, active-to-inactive changes, resizing and memory pressure.",
+    "Verify mixed RGBA8/RGBA16F framebuffer completeness on the actual diagnostic target."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "Source restored from authorized tool-call inputs; no rendering launched",
+  "rollout": "/Users/jneerdael/.codex/sessions/2026/10/04/rollout-2026-10-04T03-35-59-01a1048d-b785-7840-aa49-43c17343fd1a.jsonl",
+  "files": [
+    {
+      "file": "test_screen.py",
+      "sha256": "7ea8bf98a22b84f1485f8d41b5b8fd32fbd91f931b912a6fdb572d997b0b3edc",
+      "tool_call_line": 1783
+    },
+    {
+      "file": "screen.py",
+      "sha256": "456ca177d74869eecaff5f734cd2250cfa5a57769f16c24390d12fef6fedfa66",
+      "tool_call_line": 1783
+    },
+    {
+      "file": "README.md",
+      "sha256": "d909c8156ac9fe317480e0c2ff77d9138c7fb21cd06bf054ecd9415f6072ce96",
+      "tool_call_line": 1803
+    }
+  ],
+  "revision": "screen.py/test_screen.py restored through last successfully tested review edits at rollout line1783. README recovered from prepared final write at1803, which did not execute before loss; wording corrected to match restored code.",
+  "worker_identity": "Not frozen during recovery; parent must supply matching worker metadata before init/run.",
+  "scope": "Parent-owned build_sparse_workers.py and validate_sparse.py untouched; no renderer or algorithm changes."
+}

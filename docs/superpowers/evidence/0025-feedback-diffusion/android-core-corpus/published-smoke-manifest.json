@@ -1,0 +1,216 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuspublished",
+  "pid": 7544,
+  "job": {
+    "preset": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+    "seed": 12345,
+    "referenceWidth": 1024,
+    "referenceHeight": 768,
+    "width": 1182,
+    "height": 665,
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/audio.u8",
+    "instrumented": false,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output",
+    "expectedPresetCount": 9606
+  },
+  "requestSha256": "345d37d9a32aad88289aa893b207764dc6cf7ed7c4ee80218c4068beb504011a",
+  "determinism": "nondeterministic-real-clock-smoke",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected frames, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-120.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "d9170a2a69b40ef38f0e4d1580395c1d23652d2281d53ee2745b81dce8d4b408",
+      "pngBytes": 485060,
+      "pngSha256": "aa4d618a1f9e54dd40b31abf28342f43fb09ce739f89babcaabf68376a9822b4",
+      "rgbMean": [
+        209.7229329669351,
+        253.44305688078063,
+        187.5454537358625
+      ],
+      "exactBlackFraction": 1.653880895131229E-5
+    },
+    {
+      "frame": 150,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-150.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "311c127faa6a4380acf944d911617b7b1e016a02bcfb65737af771998b50d974",
+      "pngBytes": 439824,
+      "pngSha256": "c49a655d8510b9991457d49a015f33581218afa83bcdca3de09457fb84f493b6",
+      "rgbMean": [
+        201.47948933246823,
+        250.45007188020813,
+        188.86315407808863
+      ],
+      "exactBlackFraction": 3.816648219533606E-6
+    },
+    {
+      "frame": 180,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-180.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "976b853dbeafdb1df5b4ba6f08e262cab0fbe3382d398842d16ec9ed4902cdad",
+      "pngBytes": 906316,
+      "pngSha256": "885fdb4de162cdee90e77224391fa919a50b77d5794b48f15155948bbb9a955c",
+      "rgbMean": [
+        191.8502067351119,
+        216.54336857371857,
+        222.26413622889712
+      ],
+      "exactBlackFraction": 6.361080365889343E-6
+    },
+    {
+      "frame": 210,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-210.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "6eb69e0c966bbfe304312be753503aa9ca68ee1f7c7e402885f7c7aec6742e13",
+      "pngBytes": 1174897,
+      "pngSha256": "707833ba2665744bf38ac5ad74ad6d3daee12e56b1bfce77038401f1d6615d19",
+      "rgbMean": [
+        166.62258437973105,
+        119.57212192918846,
+        149.11092960828466
+      ],
+      "exactBlackFraction": 5.088864292711474E-6
+    },
+    {
+      "frame": 239,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-239.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "cebe6916550bd4c6b78fa3d6a047caee90ac05d921af478cb79bfd0313ab3133",
+      "pngBytes": 1051938,
+      "pngSha256": "1f6d39425cad6e6193a3550d62a5432b17d08c36135bad4bb21c6d04ade874de",
+      "rgbMean": [
+        110.9108380087274,
+        139.4598017887358,
+        200.65747872218617
+      ],
+      "exactBlackFraction": 5.088864292711474E-6
+    },
+    {
+      "frame": 300,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-300.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "3ff66af8187f2fc47dfded2d40ea56ac5e1a76a689b4d2b46b4c8ca690780db2",
+      "pngBytes": 554438,
+      "pngSha256": "5ba69947b3fad898065469adb94753c63a8600b021a28f6ad4e919bb5001fbf1",
+      "rgbMean": [
+        53.87562942890221,
+        227.92353599735378,
+        222.48253374553133
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-390.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "d7e205c09658bccf3adbe826b0f0c392b101281ff91bb079e5557b758a3f099c",
+      "pngBytes": 175343,
+      "pngSha256": "88e4525ed289aa7a96284ab57e74ef7baf4a43c10f936b58fc5fa0c4c8f88019",
+      "rgbMean": [
+        42.30632927496406,
+        253.40699591618642,
+        213.2343829115937
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuspublished\/files\/jobs\/smoke-1791091925599634000\/output\/frame-479.png",
+      "width": 1182,
+      "height": 665,
+      "rgbSha256": "64215a60f8c7c83d7fa5c31b3d0c943040fe378808b769d301bad513b3601f9d",
+      "pngBytes": 244491,
+      "pngSha256": "2e46affc9bc09b52738e7262d41a3ea1d69ea3f7acd8e4e86ab7a94c8430dd36",
+      "rgbMean": [
+        68.79214661018027,
+        253.4815630446675,
+        197.25899902039362
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 1624579,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 301,
+      "elapsedRealtimeMs": 1635705,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "UGOOS",
+    "model": "AM9 PRO",
+    "device": "umx5jyks",
+    "fingerprint": "Droidlogic\/franklin\/franklin:14\/UD2A.240505.001.W1\/eng.ugoos.20260518.150800:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "armeabi"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "163034eb002666dfd1966444dedd1a47853131e915a5cb2745bd09ff52a4e230",
+  "forcedPresetPrefix": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.5 Android META-EGL",
+  "glVendor": "ARM",
+  "glRenderer": "Mali-G310",
+  "glVersion": "OpenGL ES 3.2 v1.r44p1-01eac0.9b95285bf71814048571d5e10c324e77",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.20",
+  "startupIndexWaitMs": 98,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.1.7",
+  "coreSurfaceAttempted": true,
+  "framesRendered": 480,
+  "renderWallDurationMs": 16381,
+  "verifiedPresetName": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 19936
+}

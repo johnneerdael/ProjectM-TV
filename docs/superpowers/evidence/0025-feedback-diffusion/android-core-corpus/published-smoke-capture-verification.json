@@ -1,0 +1,6 @@
+{
+  "captures_verified": 8,
+  "raw_rgb_and_png_sha256_match": true,
+  "protocol": "projectmtv-core-corpus-v1",
+  "determinism": "nondeterministic-real-clock-smoke"
+}

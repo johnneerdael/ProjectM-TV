@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.application'
+}
+
+def aarPath = providers.gradleProperty('coreAar').orNull
+def corpusId = providers.gradleProperty('corpusApplicationId').orNull
+if (aarPath == null || !file(aarPath).isFile()) {
+    throw new GradleException('Supply -PcoreAar=/absolute/path/to/the/actual/core.aar')
+}
+if (!(corpusId in ['nl.neerdael.projectmtv.corpuspublished', 'nl.neerdael.projectmtv.corpusbaseline', 'nl.neerdael.projectmtv.corpuscandidate'])) {
+    throw new GradleException('Supply -PcorpusApplicationId=nl.neerdael.projectmtv.corpuspublished, nl.neerdael.projectmtv.corpusbaseline or nl.neerdael.projectmtv.corpuscandidate')
+}
+
+android {
+    namespace 'nl.neerdael.projectmtv.corpus'
+    compileSdk 34
+    defaultConfig {
+        applicationId corpusId
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName '1'
+        manifestPlaceholders = [corpusApplicationId: corpusId]
+        ndk { abiFilters 'arm64-v8a' }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        debug { debuggable true }
+    }
+}
+
+dependencies {
+    implementation files(aarPath)
+}

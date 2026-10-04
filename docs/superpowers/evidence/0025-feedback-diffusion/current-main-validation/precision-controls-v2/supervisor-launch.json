@@ -1,0 +1,1 @@
+{"pid": 4849, "workdir": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery", "script": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/precision-controls-v2.py", "reason": "Adds app-storage budget guard before any measurements; first prepared epoch stays intact"}

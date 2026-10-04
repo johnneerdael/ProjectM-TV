@@ -13,9 +13,10 @@ import java.util.List;
  * projectM patch 0002), so no preset switch or hard cut is needed to hide it. After a change the
  * frame rate is left to settle before the next decision.
  *
- * Heights are limited to the panel, to {@link #RENDER_HEIGHT_CAP} and to a memory-safe maximum (see
- * {@link DeviceProfile#memorySafeHeight()}); memory pressure reported by Android lowers that
- * maximum for the rest of the session.
+ * Auto and standard fixed heights stop at {@link #RENDER_HEIGHT_CAP}. Explicit Native uses the
+ * physical panel height in a Native Core build when the memory limit allows it. A Capped Core
+ * build omits Native. Memory pressure reported by Android
+ * lowers Auto's maximum for the rest of the session.
  *
  * All methods run on the UI thread.
  */
@@ -32,7 +33,8 @@ public final class QualityController {
     public static final int ACTION_SKIP = 2;
 
     /**
-     * Highest render height, for automatic and fixed resolution alike; the display's scaler upscales
+     * Highest render height for Auto and standard fixed choices; Native bypasses this cap.
+     * The display's scaler upscales
      * to the panel. projectM draws lines, blur and the presets' texel steps as at MilkDrop's
      * 1024x768 (patch 0024), but presets that feed their image back also re-sample it bilinearly
      * every frame, which smooths by a fraction of a real texel: above about twice the reference's
@@ -41,6 +43,9 @@ public final class QualityController {
      * 24 presets against the authored 1182x665 render; see docs/ARCHITECTURE.md (Lines).
      */
     public static final int RENDER_HEIGHT_CAP = 1330;
+
+    /** Explicit Native selection, distinct from a legacy saved 1440/2160 numeric height. */
+    public static final int NATIVE_HEIGHT = -1;
 
     /** Auto ladder, filtered to the panel resolution. */
     private static final int[] AUTO_LADDER = {360, 432, 540, 720, 900, 1080, 1260, 1440, 1800, 2160};
@@ -63,6 +68,7 @@ public final class QualityController {
     private final int minIndex;
     private boolean auto;
     private int fixedHeight;
+    private final int nativeHeight;
     private int current;            // index into levels (auto mode)
     private float targetFps = 60f;
     private long settleUntil;
@@ -83,6 +89,7 @@ public final class QualityController {
     /** @param memoryLimit highest render height allowed for memory reasons, 0 for none. */
     public QualityController(DisplayInfo display, DeviceProfile profile, int memoryLimit, Listener listener) {
         this.listener = listener;
+        nativeHeight = nativeAvailable(display, memoryLimit) ? display.physicalHeight : 0;
         List<Integer> usable = new ArrayList<>();
         int maxHeight = limit(display, memoryLimit);
         for (int h : AUTO_LADDER) if (h <= maxHeight) usable.add(h);
@@ -101,15 +108,23 @@ public final class QualityController {
         return memoryLimit > 0 ? Math.min(max, memoryLimit) : max;
     }
 
+    private static boolean nativeAvailable(DisplayInfo display, int memoryLimit) {
+        return RenderingPolicy.NATIVE_ENABLED && display.physicalHeight > RENDER_HEIGHT_CAP
+                && (memoryLimit <= 0 || memoryLimit >= display.physicalHeight);
+    }
+
     /**
      * Levels available for manual selection in the menu (ascending heights): 720, 1080, 1440 and
      * 2160 up to the panel, {@link #RENDER_HEIGHT_CAP} and the memory limit, plus that maximum.
+     * Append {@link #NATIVE_HEIGHT} when the Core policy enables Native, the full panel height is
+     * above the cap and memory allows it.
      */
     public static int[] manualHeights(DisplayInfo display, int memoryLimit) {
         int maxHeight = limit(display, memoryLimit);
         List<Integer> list = new ArrayList<>();
         for (int h : new int[]{720, 1080, 1440, 2160}) if (h <= maxHeight) list.add(h);
         if (list.isEmpty() || list.get(list.size() - 1) < maxHeight) list.add(maxHeight);
+        if (nativeAvailable(display, memoryLimit)) list.add(NATIVE_HEIGHT);
         int[] result = new int[list.size()];
         for (int i = 0; i < result.length; i++) result[i] = list.get(i);
         return result;
@@ -122,15 +137,17 @@ public final class QualityController {
      * the cap) means "the sharpest" and becomes the cap where the panel and memory allow it.
      */
     public static int validFixedHeight(DisplayInfo display, int memoryLimit, int savedHeight) {
+        if (savedHeight == NATIVE_HEIGHT) return nativeAvailable(display, memoryLimit) ? NATIVE_HEIGHT : 0;
         int wanted = Math.min(savedHeight, RENDER_HEIGHT_CAP);
         for (int h : manualHeights(display, memoryLimit)) if (h == wanted) return wanted;
         return 0;
     }
 
-    /** @param height 0 for automatic, otherwise a fixed render height (at most {@link #RENDER_HEIGHT_CAP}). */
+    /** @param height 0 for Auto, {@link #NATIVE_HEIGHT} for Native, or a capped fixed numeric height. */
     public void setMode(int height, int lastAutoHeight) {
-        auto = height <= 0;
-        fixedHeight = Math.min(height, RENDER_HEIGHT_CAP);
+        boolean nativeSelected = height == NATIVE_HEIGHT && nativeHeight > 0;
+        auto = height <= 0 && !nativeSelected;
+        fixedHeight = nativeSelected ? nativeHeight : Math.min(height, RENDER_HEIGHT_CAP);
         resetCounters(0);
         if (auto && lastAutoHeight > 0) current = Math.max(minIndex, Math.min(ceiling, indexAtMost(lastAutoHeight)));
         listener.onApplyRenderHeight(currentHeight());
@@ -152,6 +169,10 @@ public final class QualityController {
 
     public boolean isAuto() {
         return auto;
+    }
+
+    public boolean isNative() {
+        return !auto && nativeHeight > 0 && fixedHeight == nativeHeight;
     }
 
     public int currentHeight() {

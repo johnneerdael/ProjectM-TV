@@ -1,0 +1,26 @@
+{
+  "source_analysis_sha256": "7df8528f635b6db6da0d2958c9454ad5ef838e44cc6f1ffd96fe66463e2e27ca",
+  "state": "complete",
+  "case_profiles_checked": 128,
+  "independently_recomputed_counts": {
+    "mixed": 32,
+    "closer": 58,
+    "tie": 20,
+    "farther": 18
+  },
+  "profiles": {
+    "1330": {
+      "mixed": 18,
+      "tie": 10,
+      "closer": 28,
+      "farther": 8
+    },
+    "2160": {
+      "closer": 30,
+      "mixed": 14,
+      "tie": 10,
+      "farther": 10
+    }
+  },
+  "scope": "Independent arithmetic check of reported numeric classification; does not replace pixel/input artifact audit or noise/perceptual acceptance."
+}

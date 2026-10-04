@@ -1,0 +1,16 @@
+{
+  "backend": "actual Android ProjectM TV core AAR",
+  "baseline_patches": 29,
+  "candidate_patches": 30,
+  "preset": "$$$ Royal - Mashup (191).milk",
+  "jobs": 4,
+  "successes": 4,
+  "selected_frames_each": 16,
+  "rendered_frames_each": 480,
+  "driver": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+  "repeats": {
+    "baseline": true,
+    "candidate": true
+  },
+  "scope": "software-renderer single-preset diagnostic; not authored fidelity, hardware performance or corpus acceptance"
+}

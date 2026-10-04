@@ -1,0 +1,37 @@
+{
+  "capture_protocol": "sparse-v1",
+  "native_sources_sha256": "61141e3d718df1a243ce877a8e2b39a447c63b89bdd20a7e3b690aaedd527b75",
+  "diagnostic_compile_definition": "MILKDROP_PRESET_DEBUG",
+  "capture_frame_indices": [
+    120,
+    150,
+    180,
+    210,
+    239,
+    300,
+    390,
+    479
+  ],
+  "workers": {
+    "baseline": {
+      "exe": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/diffusion/corpus-screen/sparse-build-baseline/preset-lab-worker",
+      "snapshot": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/diffusion/work-baseline/engines/3e063fd6bd692b4203117066cec9c495a5c0b043c137b670ddf34c055fb02c2b",
+      "identity": {
+        "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+        "patches_sha256": "c0ab5e137bfe151bd5da8e5b07befe5ccd844792194c6a72da849a6adcd5df16",
+        "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+      },
+      "worker_sha256": "cb1babb0acfb1a15ee7e0d0cd85ed6afdb35755ea2d9a4b2d067b4ac312bbb02"
+    },
+    "reviewed": {
+      "exe": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/diffusion/corpus-screen/sparse-build-reviewed/preset-lab-worker",
+      "snapshot": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/diffusion/work-reviewed/engines/1ab75359e147643f1994cf441d12c2bbdf17817b6d18db35673a927e84d90425",
+      "identity": {
+        "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+        "patches_sha256": "44381ce5cd09e605e4393bd5b2de3fe9273d59b916e0f5bb96010107c8b18479",
+        "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+      },
+      "worker_sha256": "eb8efde0bf211f0b5e2f58b1b696b5ad8c9753cafe30afcb57dea5c1349fa3df"
+    }
+  }
+}
