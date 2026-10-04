@@ -8,7 +8,7 @@ t variables (custom wave/shape init) at zero, and failed per-frame, per-pixel or
 per-point code is not run. Do the same, and report each left-out block through
 Preset::InitializationWarnings(), ProjectM::PresetInitializationWarningEvent()
 and the new C callback projectm_set_preset_initialization_warning_event_callback().
-Preset parse errors and shader failures still fail the load. Tests cover every
+Preset parse errors still fail the load. Tests cover every
 block, disabled components and presets without problems.
 ---
 diff --git a/src/api/include/projectM-4/callbacks.h b/src/api/include/projectM-4/callbacks.h
