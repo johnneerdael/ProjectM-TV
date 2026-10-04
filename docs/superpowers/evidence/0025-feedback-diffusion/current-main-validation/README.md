@@ -77,6 +77,6 @@ colour by alpha again or retain prior target contents. Explicitly disabling
 blending makes the regression pass; the full host suite is **190/190**.
 `alpha-red.txt` and `alpha-green-suite.txt` preserve RED→GREEN evidence.
 
-This is a renderer contract correction. The production main surfaces are RGB;
-it is not evidence that the Acid Mandala or Fed brightness regressions are
+This is a renderer contract correction. The production main surfaces use RGBA colour attachments; blur levels use RGB.
+This is not evidence that the Acid Mandala or Fed brightness regressions are
 fixed. New actual-core comparisons must verify its effect separately.
