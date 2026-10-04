@@ -49,14 +49,18 @@ class AuditTests(unittest.TestCase):
                        for i in run.capture_indices(360)]
             result = {"status": "success", "core_sha256": "core", "requested_preset_sha256": "preset",
                       "frames_metadata_sha256": hashlib.sha256(raw).hexdigest(),
-                      "rendered_frames": 480, "selected_files": samples, "gl_renderer": "fixture GPU"}
+                      "rendered_frames": 480, "selected_files": samples, "gl_renderer": "fixture GPU",
+                      "schema_version": 2, "job_id": key, "protocol_sha256": self.protocol["sha256"],
+                      "preset_filename": "fixture.milk", "capture_mode": "selected",
+                      "capture_frames": run.capture_indices(360), "width": 2364, "height": 1330,
+                      "fps": 30, "seed": 12345}
             job = {"key": key, "protocol_sha256": self.protocol["sha256"], "preset": self.record,
                    "role": "baseline", "repeat": repeat, "measurement_frames": 360,
                    "capture_mode": "selected", "status": "success", "result": result,
                    "selected_native_sha256": {str(i): "f" * 64 for i in run.capture_indices(360)},
                    "frame_trace": {"path": "frames.jsonl.gz"},
                    "retained_files": [{"path": "frames.jsonl.gz", "sha256": run.file_hash(trace)}]}
-            run.save_row(directory / "row.json", job)
+            self.save_job(directory / "row.json", job)
             paths.append(str((directory / "row.json").relative_to(self.work)))
         self.pair = {"key": run.digest({"protocol_sha256": self.protocol["sha256"],
                                         "preset": self.record, "role": "baseline"}),
@@ -70,6 +74,23 @@ class AuditTests(unittest.TestCase):
 
     def tearDown(self):
         self.temp.cleanup()
+
+    def save_job(self, path, job):
+        job.pop("payload_sha256", None)
+        result_path = path.parent / "output/result.json"
+        run.atomic(result_path, job["result"])
+        job["retained_files"] = [f for f in job["retained_files"] if f["path"] != "output/result.json"]
+        job["retained_files"].append({"path": "output/result.json", "sha256": run.file_hash(result_path)})
+        run.save_row(path, job)
+
+    def fail_pair(self):
+        for rel in self.pair["runs"]:
+            path = self.work / rel
+            job = json.loads(path.read_text())
+            job["status"] = "failed"
+            job["result"].update(status="failed", error="requested load failed")
+            self.save_job(path, job)
+        run.save_row(self.pair_path, dict(self.pair, status="failed", repeat_exact_selected=False))
 
     def test_complete_verified_export_preserves_original_provenance_and_metrics(self):
         before = self.pair_path.read_bytes()
@@ -108,7 +129,7 @@ class AuditTests(unittest.TestCase):
         job.pop("payload_sha256")
         job["retained_files"][0]["sha256"] = run.file_hash(trace)
         job["result"]["frames_metadata_sha256"] = hashlib.sha256(raw).hexdigest()
-        run.save_row(path, job)
+        self.save_job(path, job)
         report = audit.export(self.work, self.families, "baseline")
         self.assertFalse(report["complete_coverage"])
         self.assertEqual(len(report["integrity_issues"]), 1)
@@ -121,17 +142,89 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(len(report["integrity_issues"]), 1)
 
     def test_failed_pair_remains_explicit_and_counts_as_attempted(self):
+        self.fail_pair()
+        report = audit.export(self.work, self.families, "baseline")
+        self.assertTrue(report["complete_coverage"])
+        self.assertEqual(report["statuses"], {"failed": 1})
+        self.assertEqual(report["rows"][0]["samples"], [])
+
+    def test_rehashed_failed_result_with_wrong_provenance_is_rejected(self):
+        for field, value in [("job_id", "other"), ("protocol_sha256", "other"),
+                             ("core_sha256", "other"), ("requested_preset_sha256", "other"),
+                             ("status", "invented")]:
+            with self.subTest(field=field):
+                self.fail_pair()
+                path = self.work / self.pair["runs"][0]
+                job = json.loads(path.read_text())
+                original = dict(job["result"])
+                job["result"][field] = value
+                self.save_job(path, job)
+                report = audit.export(self.work, self.families, "baseline")
+                self.assertFalse(report["complete_coverage"])
+                self.assertEqual(len(report["integrity_issues"]), 1)
+                job["result"] = original
+                self.save_job(path, job)
+
+    def test_removed_row_result_cannot_hide_retained_producer_result(self):
+        self.fail_pair()
+        path = self.work / self.pair["runs"][0]
+        job = json.loads(path.read_text())
+        job.pop("payload_sha256")
+        job.pop("result")
+        run.save_row(path, job)
+        report = audit.export(self.work, self.families, "baseline")
+        self.assertFalse(report["complete_coverage"])
+        self.assertEqual(len(report["integrity_issues"]), 1)
+
+    def test_failed_row_cannot_differ_from_original_producer_json(self):
+        self.fail_pair()
+        path = self.work / self.pair["runs"][0]
+        job = json.loads(path.read_text())
+        job.pop("payload_sha256")
+        job["result"]["error"] = "rewritten message"
+        run.save_row(path, job)
+        report = audit.export(self.work, self.families, "baseline")
+        self.assertFalse(report["complete_coverage"])
+        self.assertEqual(len(report["integrity_issues"]), 1)
+
+    def test_real_pre_engine_failure_needs_no_unavailable_runtime_core(self):
+        self.fail_pair()
+        for rel in self.pair["runs"]:
+            path = self.work / rel
+            job = json.loads(path.read_text())
+            job["result"].pop("core_sha256")
+            job["result"].pop("requested_preset_sha256")
+            job["result"]["error"] = "PCM checksum mismatch before init"
+            self.save_job(path, job)
+        report = audit.export(self.work, self.families, "baseline")
+        self.assertTrue(report["complete_coverage"])
+
+    def test_missing_producer_without_host_failure_evidence_is_rejected(self):
+        self.fail_pair()
+        path = self.work / self.pair["runs"][0]
+        job = json.loads(path.read_text())
+        job.pop("payload_sha256")
+        job.pop("result")
+        (path.parent / "output/result.json").unlink()
+        job["retained_files"] = [f for f in job["retained_files"] if f["path"] != "output/result.json"]
+        run.save_row(path, job)
+        report = audit.export(self.work, self.families, "baseline")
+        self.assertFalse(report["complete_coverage"])
+        self.assertEqual(len(report["integrity_issues"]), 1)
+
+    def test_explicit_host_transport_failure_preserves_attempted_coverage(self):
+        self.fail_pair()
         for rel in self.pair["runs"]:
             path = self.work / rel
             job = json.loads(path.read_text())
             job.pop("payload_sha256")
-            job.update(status="failed", result={"status": "failed", "error": "requested load failed"})
+            job.pop("result")
+            job["error"] = "RuntimeError: external output pull failed"
+            (path.parent / "output/result.json").unlink()
+            job["retained_files"] = [f for f in job["retained_files"] if f["path"] != "output/result.json"]
             run.save_row(path, job)
-        pair = dict(self.pair, status="failed", repeat_exact_selected=False)
-        run.save_row(self.pair_path, pair)
         report = audit.export(self.work, self.families, "baseline")
         self.assertTrue(report["complete_coverage"])
-        self.assertEqual(report["statuses"], {"failed": 1})
         self.assertEqual(report["rows"][0]["samples"], [])
 
 

@@ -15,6 +15,40 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def verify_producer(path, job, protocol, record, role):
+    producer = path.parent / "output/result.json"
+    result = job.get("result")
+    if not producer.exists() and result is None:
+        require(job["status"] in ("failed", "timeout") and isinstance(job.get("error"), str)
+                and bool(job["error"].strip()), "missing producer and explicit host failure evidence")
+        return None
+    require(producer.is_file() and isinstance(result, dict), "missing retained producer result")
+    require(any(f["path"] == "output/result.json" for f in job["retained_files"]),
+            "producer result is not declared in retained evidence")
+    require(json.loads(producer.read_text()) == result, "row result differs from retained producer result")
+    for field, expected in {"schema_version": 2, "job_id": job["key"],
+                            "protocol_sha256": protocol["sha256"]}.items():
+        require(result.get(field) == expected, "producer provenance mismatch: " + field)
+    require(result.get("status") in ("failed", "success"), "invalid producer status")
+    if result["status"] == "failed":
+        require(job["status"] != "success" and isinstance(result.get("error"), str)
+                and bool(result["error"].strip()), "failed producer lacks failure status or diagnostic")
+    elif job["status"] in ("failed", "timeout"):
+        require(bool(job.get("error")), "producer success lacks an explicit host failure reason")
+    config = protocol["config"]
+    expected_fields = {"width": config["width"], "height": config["height"], "fps": config["fps"],
+                       "seed": config["seed"], "preset_filename": record["path"],
+                       "capture_mode": "selected", "capture_frames": run.capture_indices(360),
+                       "core_sha256": protocol["roles"][role]["core_sha256"],
+                       "requested_preset_sha256": record["sha256"]}
+    # A genuine failure before initialization cannot supply a runtime ELF or source hash.
+    # Validate every field that is available; successful jobs require all of them.
+    for field, expected in expected_fields.items():
+        if field in result or job["status"] == "success":
+            require(result.get(field) == expected, "producer provenance mismatch: " + field)
+    return result
+
+
 def verify_job(work, relative, protocol, record, role, repeat):
     key = run.job_key(protocol["sha256"], record, role, "selected", repeat)
     path = work / relative
@@ -26,9 +60,9 @@ def verify_job(work, relative, protocol, record, role, repeat):
             "job source/role/repeat mismatch")
     require(job["capture_mode"] == "selected" and job["measurement_frames"] == 360,
             "job capture window mismatch")
+    result = verify_producer(path, job, protocol, record, role)
     if job["status"] != "success":
         return job
-    result = job["result"]
     require(result.get("status") == "success", "successful job lacks producer success")
     require(result.get("core_sha256") == protocol["roles"][role]["core_sha256"], "runtime core mismatch")
     require(result.get("requested_preset_sha256") == record["sha256"], "runtime preset source mismatch")

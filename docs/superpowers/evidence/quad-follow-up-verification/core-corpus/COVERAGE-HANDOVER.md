@@ -43,5 +43,11 @@ signatures; its emulator pilot and candidate scan still remain to be run. Neithe
 a completed baseline nor unchanged control presets prove absence of candidate
 degradation across the corpus.
 
-The initial audit has seven negative/positive host tests. Together with existing
-runner, recovery, disk-guard and checkpoint tests, the host-tool suite passes58.
+The audit has13 negative/positive host tests. Together with existing runner,
+recovery, disk-guard and checkpoint tests, the host-tool suite passes64. Available
+failed producer results must match the retained JSON and original job/protocol,
+source and runtime identities. Genuine early failures may lack runtime fields;
+host-only failures need an explicit error and cannot hide a retained producer.
+The initial992-pair snapshot remains historical. `reviewed-family-audit.json.gz`
+contains a later1216-pair snapshot with these stricter checks and no integrity
+issues; it is still partial.
