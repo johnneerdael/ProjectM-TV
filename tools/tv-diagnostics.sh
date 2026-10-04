@@ -85,6 +85,24 @@ done
 
 a() { "$ADB" -s "$TARGET" "$@"; }
 ash() { "$ADB" -s "$TARGET" shell "$@" 2>/dev/null | tr -d '\r'; }
+# Preserve adb failures for queries whose empty output would otherwise look like valid state.
+ash_checked() {
+    local shell_output
+    shell_output="$("$ADB" -s "$TARGET" shell "$@" 2>&1)" || return 1
+    printf '%s\n' "$shell_output" | tr -d '\r'
+}
+app_pids() {
+    local process_table
+    process_table="$(ash_checked ps -A -o UID,PID,NAME)" || return 1
+    # Android UIDs reserve 100000 values per user. UID is numeric; NAME is argv[0], not the
+    # truncated kernel task name. Validate the table so an unavailable ps is never "no process".
+    printf '%s\n' "$process_table" | awk -v user="$ANDROID_USER" -v pkg="$PKG" '
+        NR == 1 { if (NF != 3 || $1 != "UID" || $2 != "PID" || $3 != "NAME") { bad = 1; exit 1 }; next }
+        NF == 0 { next }
+        NF != 3 || $1 !~ /^[0-9]+$/ || $2 !~ /^[0-9]+$/ || $2 < 1 { bad = 1; exit 1 }
+        int($1 / 100000) == user && $3 == pkg { pid = $2; matches++ }
+        END { if (bad || matches > 1) exit 1; if (matches == 1) print pid }'
+}
 key() {  # one key at a time so focus changes keep up on slow devices
     for k in "$@"; do ash input keyevent "$k" >/dev/null; sleep 0.4; done
 }
@@ -108,6 +126,14 @@ connect() {
 }
 
 connect
+
+# Resolve once: cleanup must restore this user's listener even if the foreground user changes.
+ANDROID_USER="$(ash_checked am get-current-user)" || die "cannot read the foreground Android user"
+case "$ANDROID_USER" in
+    ''|*[!0-9]*) die "cannot read a numeric foreground Android user (got '$ANDROID_USER')" ;;
+esac
+app_pids >/dev/null || die "cannot read numeric UID/PID/NAME process data for Android user $ANDROID_USER"
+log "Android user: $ANDROID_USER"
 
 MODEL="$(ash getprop ro.product.model)"
 SAFE_MODEL="$(printf '%s' "$MODEL" | tr -c 'A-Za-z0-9._-' '_' | sed 's/_*$//')"
@@ -167,12 +193,12 @@ fi
 if [ "$APK_SOURCE" != "none" ]; then
     [ -f "$APK" ] || die "APK not found: $APK"
     log "Installing $APK"
-    result="$(a install -r "$APK" 2>&1 | tr -d '\r')"
+    result="$(a install -r --user "$ANDROID_USER" "$APK" 2>&1 | tr -d '\r')"
     if printf '%s' "$result" | grep -q "INSTALL_FAILED_UPDATE_INCOMPATIBLE"; then
         if [ "$ALLOW_UNINSTALL" = 1 ]; then
             log "Installed app has a different signing key; uninstalling it (--allow-uninstall)"
-            a uninstall "$PKG" >/dev/null 2>&1
-            result="$(a install -r "$APK" 2>&1 | tr -d '\r')"
+            a uninstall --user "$ANDROID_USER" "$PKG" >/dev/null 2>&1
+            result="$(a install -r --user "$ANDROID_USER" "$APK" 2>&1 | tr -d '\r')"
             APK_SOURCE="$APK_SOURCE (previous install removed: different signing key)"
         else
             die "installed app is signed with a different key. Re-run with --allow-uninstall (resets app settings) or use --no-install"
@@ -180,7 +206,7 @@ if [ "$APK_SOURCE" != "none" ]; then
     fi
     printf '%s' "$result" | grep -q "Success" || die "install failed: $result"
 fi
-ash pm grant "$PKG" android.permission.RECORD_AUDIO >/dev/null
+ash pm grant --user "$ANDROID_USER" "$PKG" android.permission.RECORD_AUDIO >/dev/null
 VERSION="$(ash dumpsys package "$PKG" | grep -m1 versionName | sed 's/.*versionName=//')"
 log "App version: ${VERSION:-unknown}"
 
@@ -213,19 +239,19 @@ restore_auto_resolution() {
 LISTENERS=""
 LISTENERS_OFF=0
 LISTENERS_NOT_RESTORED=""
-# One enabled listener per line. Notification access is per Android user and `cmd notification`
-# acts on the current user, so read the current user's setting (plain `settings get` reads user 0,
-# which could grant access the current user never gave). Fails if it cannot be read: an unset
+# One enabled listener per line. Use the captured user for both settings and notification commands
+# (plain `settings get` reads user 0, which could grant access the foreground user never gave).
+# Fails if it cannot be read: an unset
 # setting prints "null", so empty output is an error too.
 enabled_listeners() {
-    v="$(ash settings --user current get secure enabled_notification_listeners)"
+    v="$(ash_checked settings --user "$ANDROID_USER" get secure enabled_notification_listeners)" || return 1
     case "$v" in ""|*sage:*|*rror*|*nvalid*|*xception*) return 1 ;; esac
     printf '%s\n' "$v" | tr ':' '\n'
 }
 allow_listeners() {
     [ "$LISTENERS_OFF" = 1 ] || return 0
     for c in $LISTENERS; do
-        ash cmd notification allow_listener "$c" >/dev/null
+        ash cmd notification allow_listener "$c" "$ANDROID_USER" >/dev/null
     done
     # The setting is written asynchronously (Android 14), so give it a few seconds.
     for c in $LISTENERS; do
@@ -234,7 +260,7 @@ allow_listeners() {
             tries=$((tries + 1))
             if [ $tries -ge 10 ]; then
                 LISTENERS_NOT_RESTORED="$LISTENERS_NOT_RESTORED $c"
-                log "WARNING: could not allow the notification listener $c again. Run: adb -s $TARGET shell cmd notification allow_listener $c"
+                log "WARNING: could not allow the notification listener $c again. Run: adb -s $TARGET shell cmd notification allow_listener $c $ANDROID_USER"
                 break
             fi
             sleep 0.5
@@ -270,18 +296,22 @@ else
 fi
 if [ -n "$LISTENERS" ]; then
     LISTENERS_OFF=1
-    for c in $LISTENERS; do ash cmd notification disallow_listener "$c" >/dev/null; done
+    for c in $LISTENERS; do ash cmd notification disallow_listener "$c" "$ANDROID_USER" >/dev/null; done
 fi
-ash am force-stop "$PKG"
+ash_checked am force-stop --user "$ANDROID_USER" "$PKG" >/dev/null || die "could not stop the app for Android user $ANDROID_USER"
 waited=0
-while [ -n "$(ash pidof "$PKG")" ] && [ $waited -lt 20 ]; do sleep 0.5; waited=$((waited + 1)); done
-PID_BEFORE="$(ash pidof "$PKG")"
-ash am start -W -n "$ACTIVITY" > "$OUT/am_start_cold.txt"
+while :; do
+    PID_BEFORE="$(app_pids)" || die "cannot read the app process for Android user $ANDROID_USER"
+    if [ -z "$PID_BEFORE" ] || [ $waited -ge 20 ]; then break; fi
+    sleep 0.5
+    waited=$((waited + 1))
+done
+ash_checked am start --user "$ANDROID_USER" -W -n "$ACTIVITY" > "$OUT/am_start_cold.txt" || die "could not start the app for Android user $ANDROID_USER"
 allow_listeners
 COLD_MS="$(grep -E "TotalTime" "$OUT/am_start_cold.txt" | sed 's/[^0-9]//g')"
 LAUNCH_STATE="$(sed -n 's/^LaunchState: //p' "$OUT/am_start_cold.txt")"  # Android 10+
 sleep 1
-COLD_PID="$(ash pidof "$PKG")"
+COLD_PID="$(app_pids)" || die "cannot read the cold-start process for Android user $ANDROID_USER"
 # ActivityManager logs "Start proc <pid>:<package>/<uid> for <reason> [{component}]" when it starts a
 # process; the reason is activity (Android 9), top-activity or pre-top-activity, service, ...
 START_PROC="$(grep -F "Start proc $COLD_PID:$PKG/" "$OUT/raw_logcat.txt" | tail -1 | sed 's/.* for \([^ ]*\).*/\1/')"
@@ -303,13 +333,14 @@ fi
 log "Cold start: ${COLD_MS:-n/a} ms ($COLD_KIND)"
 
 log "Starting the app for the observation"
-ash am force-stop "$PKG"
+ash_checked am force-stop --user "$ANDROID_USER" "$PKG" >/dev/null || die "could not stop the app for Android user $ANDROID_USER"
 sleep 1
-PID_BEFORE_RUN="$(ash pidof "$PKG")"
-ash am start -W -n "$ACTIVITY" > "$OUT/am_start.txt"
+PID_BEFORE_RUN="$(app_pids)" || die "cannot read the app process for Android user $ANDROID_USER"
+ash_checked am start --user "$ANDROID_USER" -W -n "$ACTIVITY" > "$OUT/am_start.txt" || die "could not start the app for Android user $ANDROID_USER"
 START_MS="$(grep -E "TotalTime" "$OUT/am_start.txt" | sed 's/[^0-9]//g')"
 sleep 2
-APP_PIDS=" $(ash pidof "$PKG") "
+RUN_PIDS="$(app_pids)" || die "cannot read the observation process for Android user $ANDROID_USER"
+APP_PIDS=" $RUN_PIDS "
 if ! grep -q "Status: ok" "$OUT/am_start.txt" || [ -z "$(printf '%s' "$APP_PIDS" | tr -d ' ')" ]; then
     cat "$OUT/am_start.txt"
     die "the app did not start (is it installed? see am_start.txt)"
@@ -317,7 +348,9 @@ fi
 
 # The app's process ids during the run (a crash + restart gives a new one).
 track_pid() {
-    for pid in $(ash pidof "$PKG"); do
+    local observed_pids
+    observed_pids="$(app_pids)" || die "cannot track the app process for Android user $ANDROID_USER"
+    for pid in $observed_pids; do
         case "$APP_PIDS" in *" $pid "*) ;; *) APP_PIDS="$APP_PIDS$pid " ;; esac
     done
 }
@@ -455,6 +488,7 @@ layer_excerpt() {
     echo
     echo "- Collected: $(date '+%Y-%m-%d %H:%M %Z'), ${DURATION}s run"
     echo "- Target: \`$TARGET\`"
+    echo "- Android user: \`$ANDROID_USER\`"
     echo "- App: ${VERSION:-unknown} ($APK_SOURCE)"
     echo
     echo "## Device"
@@ -466,7 +500,7 @@ layer_excerpt() {
     echo "## Startup"
     echo "- Cold start (am start -W TotalTime): ${COLD_MS:-n/a} ms ($COLD_KIND)"
     for c in $LISTENERS_NOT_RESTORED; do
-        echo "- **WARNING:** the notification listener \`$c\` could not be allowed again (track titles stay off). Run \`adb -s $TARGET shell cmd notification allow_listener $c\`"
+        echo "- **WARNING:** the notification listener \`$c\` could not be allowed again (track titles stay off). Run \`adb -s $TARGET shell cmd notification allow_listener $c $ANDROID_USER\`"
     done
     echo "- Observation start (am start -W TotalTime): ${START_MS:-n/a} ms ($([ -n "$PID_BEFORE_RUN" ] && echo "warm: process $PID_BEFORE_RUN was already running" || echo "no process before the start"))"
     echo "- $(grep -h -o 'Indexed [0-9]* presets.*' "$A" | head -1)"

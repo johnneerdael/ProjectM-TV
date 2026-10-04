@@ -13,7 +13,7 @@
 tools/tv-diagnostics.sh 192.168.50.105:5555 --sweep
 ```
 
-The first connection shows an *Allow debugging?* prompt on the TV; accept it with the remote.
+The first connection shows an *Allow debugging?* prompt on the TV; accept it with the remote. The script captures the foreground Android user ID once, records it in the summary, and uses it for installation, permission grants, notification access, stopping/starting the app and process lookup. Keep that user in the foreground throughout the run. An APK update replaces shared package code even when installation targets one user.
 
 | Option | Effect |
 |---|---|
@@ -71,13 +71,15 @@ To install a newly built profile APK instead, replace `--no-install` with `--apk
 The app's notification listener (`TrackListenerService`, needed for track titles) is rebound by Android about a second after `am force-stop`, and that starts the app's process again. A plain stop-and-start therefore measures a warm start in an already running process. The script instead:
 
 1. disallows the app's enabled notification listeners (`cmd notification disallow_listener`),
-2. force-stops the app and waits up to 10 s until its process is gone,
-3. runs `am start -W` and allows the listeners again right away (also on exit or Ctrl-C),
+2. force-stops the app for the captured user and waits up to 10 s until that user's process is gone,
+3. runs `am start --user <userId> -W` and allows that user's listeners again right away (also on exit or Ctrl-C),
 4. records the `TotalTime` and whether a new process started for the activity: no process before the start and an `ActivityManager: Start proc <pid>:<package>/… for …activity` line (on Android 10+ also `LaunchState`).
 
 *Startup › Cold start* says *cold start* only when step 4 found a new process for the activity (the `Start proc` line, or `LaunchState: COLD`). It says *unverified* when neither is available, and otherwise names why the time is not a cold-start time. The cold-started process had no listener access, so the script stops it and starts the app again for the observation (*Observation start*, normally warm).
 
-The listeners are read for the current Android user (`settings --user current`), the user `cmd notification` acts on. If that setting cannot be read, the script leaves the listener alone, so Android may restart the app and the start is reported as warm. If the script is killed with `kill -9`, allow the listener again by hand: `adb -s <tv>:5555 shell cmd notification allow_listener <package>/com.example.projectm.visualizer.TrackListenerService`.
+The foreground user is resolved with `am get-current-user` once. Listener reads use `settings --user <userId>`; `cmd notification allow_listener` and `disallow_listener` receive that same numeric ID as their final argument, including during cleanup. Process lookup uses `ps -A -o UID,PID,NAME`, matching the exact package process name and Android user (`UID / 100000`); another user's same-named process cannot affect cold-start evidence or app-log filtering. A failed user lookup, unavailable/malformed process table or ambiguous process match aborts instead of treating it as no process. These APIs were checked against Android 9 and 14 sources; availability on older Android versions was not verified.
+
+If notification access cannot be read, the script leaves the listener alone, so Android may restart the app and the start is reported as warm or unverified. If the script is killed with `kill -9`, restore notification access using the numeric Android user shown in the run: `adb -s <tv>:5555 shell cmd notification allow_listener <package>/com.example.projectm.visualizer.TrackListenerService <userId>`.
 
 ### Reading the results
 - **Did the music app get killed?** *Memory › Other apps killed during the run* lists processes Android stopped while they were visible, perceptible or foreground services (e.g. `com.soundcloud.android (prcp)`). Cached processes are left out, because Android kills those routinely.
