@@ -45,6 +45,8 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
   - `weight_mb` is the preset's estimated extra memory from `presets.idx`.
   - `shader_kb` / `loops` are the size of its warp and composite shaders and their loop count.
   - `avail_drop_mb` / `rss_growth_mb` are how much the system's available memory fell and the app grew during the load. They show which presets cause memory peaks at a switch.
+- `projectM-Native: Preset load failed (): Could not parse preset data.`: projectM could not load the preset; the app skips it for good on this TV.
+- `projectM-Native: Preset code left out (name.milk): Could not compile per-pixel code: syntax error, unexpected '*', expecting '(' (line 12, column 12)`: an equation block that does not compile, left out like MilkDrop does; the preset still plays. The line is the number of the preset's code line (e.g. `per_pixel_12`); an unexpected end of file is reported one line past the block's last line.
 - `projectM-Native: TRANSITION preset='…' mode=lightweight load_ms=412 fps=48.2 blend_fps=58.9 before_fps=59.9 frames=… slow_frames=2 worst_ms=431`: when a transition ends. `fps` includes the load, `blend_fps` excludes it, `slow_frames` counts frames over 50 ms.
 - `projectM-Native: TRANSITION auto: classic blend ran at …`: Auto switched to lightweight transitions.
 - `projectM-Native: OUTPUT preset='…' samples=18 luma_range=3..9 change_pct_min=0.4 change_pct_avg=1.1 region_pct_min=2.0 luma_changes=… hue_only_changes=… flat=18/18 still=17/17 skipped=no`: what a preset showed while music played (see *Output measurements* below).

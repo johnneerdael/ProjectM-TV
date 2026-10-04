@@ -1,33 +1,29 @@
 Subject: [PATCH] MilkdropPreset: compensate reference-scale feedback diffusion
 
-Build on 0029 and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
-per axis through an exact-moment adaptive 3/4-tap stencil, capped at 1.9. Apply it
-in the first flip when vectors already require that copy, otherwise cache the
-filtered final flip for the next warp. Keep the ordinary path without a reference,
-at/below its area, for conservatively gated shaders, and after shader failure.
-
-Preserve mixed warps' nearest-filtered main reads from the raw previous flip.
-Select input placement P1 only while compensation is active and successfully
-compiled warp descriptors include GL_NEAREST main sampling; cache that decision
-at initialization. Bilinear reads retain the filtered input and the composite stays
-sharp. Other warps keep the efficient hybrid/P2 cache. Preserve raw-flip invalidation
-on initial images, resizing and fresh motion vectors. No per-frame allocations.
-The extra pass for mixed feedback is a correctness trade; its device cost remains
-unverified. Renderer regressions cover packed GB recurrence, mixed point/bilinear
-reads, both point alias ordering conventions and clamp/wrap, plus the inactive path.
+Build on 0035 (previously numbered 0030) and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
+per axis through an exact-moment adaptive 3/4-tap stencil, capped at 1.9, for bilinear warp reads
+only. One pass with two render targets writes the exact y-flipped frame and its filtered copy.
+Point-sampled warp reads (pw/pc main and aliases, by the bound sampler's filter mode) and the
+composite read the exact copy, as at the reference size; encoded state in point-read channels is
+not averaged. The pass replaces the required end-of-frame flip and is recomputed before the warp
+after new motion vectors, so pass counts match the uncompensated path. Keep the ordinary path
+without a reference, at/below its area, for conservatively gated shaders, and after shader failure.
 
 Scale the minimum vector length only with active compensation; invalidate cached
 input when scale/reference or framebuffer state changes. Cache uniform locations.
 Shader compilation cleanup is provided by prerequisite patch 0025.
+WarpSamplerTest's packed point-state and mixed-routing regressions come from 02504a3a's
+alternative P1-subset fix on the feature branch; this patch keeps single-pass placement.
 
 The nine-tap PoC (229ae74) missed AM6 cost targets. Independent productisation
-measurements and deliberate kernel/placement changes are recorded under
+measurements and deliberate kernel/placement/routing changes are recorded under
  docs/superpowers/evidence/0025-feedback-diffusion/.
 ---
 diff --git a/src/libprojectM/MilkdropPreset/CMakeLists.txt b/src/libprojectM/MilkdropPreset/CMakeLists.txt
+index c54b1dc06..4d6cc7557 100644
 --- a/src/libprojectM/MilkdropPreset/CMakeLists.txt
 +++ b/src/libprojectM/MilkdropPreset/CMakeLists.txt
-@@ -57,6 +57,8 @@
+@@ -57,6 +57,8 @@ add_library(MilkdropPreset OBJECT
          EvalLibMutex.cpp
          Factory.cpp
          Factory.hpp
@@ -38,9 +34,10 @@ diff --git a/src/libprojectM/MilkdropPreset/CMakeLists.txt b/src/libprojectM/Mil
          FinalComposite.cpp
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
 new file mode 100644
+index 000000000..92308b68a
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
-@@ -0,0 +1,306 @@
+@@ -0,0 +1,341 @@
 +#include "FeedbackDiffusion.hpp"
 +
 +#include <algorithm>
@@ -66,6 +63,7 @@ new file mode 100644
 +
 +constexpr char VertexShader[] = R"(
 +precision highp float;
++precision highp int;
 +
 +layout(location = 0) in vec2 position;
 +layout(location = 1) in vec2 tex_coord;
@@ -84,15 +82,28 @@ new file mode 100644
 +}
 +)";
 +
-+// Uniform branch: three low-variance taps, four symmetric diagonal taps above that range.
++// One pass, two outputs: the exact y-flipped previous frame for point reads and the composite,
++// and the filtered warp input. Uniform branch: three low-variance taps, four symmetric diagonal
++// taps above that range.
 +constexpr char FragmentShader[] = R"(
 +precision highp float;
++precision highp int; // flip_vertical is shared with the vertex stage; texel indices exceed 2^10.
 +in vec2 fragment_tex_coord;
 +uniform sampler2D source;
++uniform int flip_vertical;
 +uniform vec2 tap_step;
 +uniform vec2 weights; // x: requested/capped variance, y: unused
-+out vec4 color;
++layout(location = 0) out vec4 raw;
++layout(location = 1) out vec4 color;
 +void main() {
++    // texelFetch copies texels exactly, independent of sampler state and coordinate precision.
++    ivec2 texel = ivec2(gl_FragCoord.xy);
++    if (flip_vertical > 0)
++    {
++        texel.y = textureSize(source, 0).y - 1 - texel.y;
++    }
++    raw = texelFetch(source, texel, 0);
++
 +    vec2 uv = fragment_tex_coord;
 +    if (weights.x <= 2.0 / 3.0)
 +    {
@@ -197,11 +208,15 @@ new file mode 100644
 +        }
 +        return false;
 +    };
++    // Both prefix orders name the same sampler (TextureManager::ExtractTextureSettings).
++    constexpr std::array<const char*, 4> pointSamplers{"sampler_pw_main", "sampler_wp_main", "sampler_pc_main", "sampler_cp_main"};
++    constexpr std::array<const char*, 5> bilinearSamplers{"sampler_main", "sampler_fc_main", "sampler_cf_main",
++                                                          "sampler_fw_main", "sampler_wf_main"};
 +    bool pointFeedback = false;
-+    for (const auto* sampler : {"sampler_pw_main", "sampler_pc_main"})
++    for (const auto* sampler : pointSamplers)
 +        pointFeedback |= contains({"tex2d", "(", sampler, ","});
 +    bool bilinearFeedback = contains({"getpixel", "("}) || contains({"getmain", "("});
-+    for (const auto* sampler : {"sampler_main", "sampler_fc_main", "sampler_fw_main"})
++    for (const auto* sampler : bilinearSamplers)
 +        bilinearFeedback |= contains({"tex2d", "(", sampler, ","});
 +    // Point-only feedback loses no bilinear variance. A mixed warp still can: Acid Mandala's
 +    // displaced GetPixel path needs compensation despite its point-sampled feedback branches.
@@ -209,7 +224,7 @@ new file mode 100644
 +    // A single source blur cannot preserve the explicitly undisplaced branch of a mixed warp.
 +    if (contains({"getpixel", "(", "uv_orig", ")"}) ||
 +        contains({"getmain", "(", "uv_orig", ")"})) return false;
-+    for (const auto* sampler : {"sampler_main", "sampler_fc_main", "sampler_fw_main"})
++    for (const auto* sampler : bilinearSamplers)
 +    {
 +        if (contains({"tex2d", "(", sampler, ",", "uv_orig", ")"})) return false;
 +    }
@@ -246,7 +261,8 @@ new file mode 100644
 +    m_stepLocation = m_shader.UniformLocation("tap_step");
 +    m_weightsLocation = m_shader.UniformLocation("weights");
 +    RenderItem::Init();
-+    m_framebuffer.CreateColorAttachment(0, 0);
++    m_framebuffer.CreateColorAttachment(0, RawAttachment);
++    m_framebuffer.CreateColorAttachment(0, FilteredAttachment);
 +    m_usable = true;
 +}
 +
@@ -283,6 +299,12 @@ new file mode 100644
 +    }
 +    m_scale = scale;
 +    m_kernel = DiffusionKernelFor(scale);
++    if (m_usable && !Active())
++    {
++        // At or below the reference the pass cannot run: return the render-sized targets (to the
++        // bounded texture pool) instead of holding them; the next active Draw() resizes them again.
++        m_framebuffer.SetSize(1, 1);
++    }
 +    if (m_usable && !m_warnedScaleCap && DiffusionVariance(scale) > MaxDiffusionVariance)
 +    {
 +        // Q2: clamp extreme scales rather than add another full-screen pass. Warn once per preset.
@@ -298,15 +320,19 @@ new file mode 100644
 +    return m_usable && m_kernel.variance > 0.0f;
 +}
 +
-+void FeedbackDiffusion::Draw(const std::shared_ptr<Renderer::Texture>& source, bool flipVertical)
++void FeedbackDiffusion::Draw(const std::shared_ptr<Renderer::Texture>& source, bool flipVertical, bool writeRaw)
 +{
-+    if (!Active() || source == nullptr || source->Empty() || source == Texture())
++    if (!Active() || source == nullptr || source->Empty() || source == Texture() || source == RawTexture())
 +    {
 +        return;
 +    }
 +
 +    m_framebuffer.SetSize(source->Width(), source->Height());
 +    m_framebuffer.Bind(0);
++    // Without point-sampled reads the exact copy is not needed: GL_NONE drops output location 0.
++    const GLenum buffers[] = {writeRaw ? static_cast<GLenum>(GL_COLOR_ATTACHMENT0 + RawAttachment) : static_cast<GLenum>(GL_NONE),
++                              static_cast<GLenum>(GL_COLOR_ATTACHMENT0 + FilteredAttachment)};
++    glDrawBuffers(2, buffers);
 +
 +    // Filtering overwrites the target. Inherited alpha blending would multiply RGBA
 +    // source colours by alpha a second time and retain unrelated target history.
@@ -316,8 +342,9 @@ new file mode 100644
 +    // tile-based GPUs can skip loading them (as in CopyTexture).
 +    if (!glIsEnabled(GL_BLEND))
 +    {
-+        const GLenum attachment = GL_COLOR_ATTACHMENT0;
-+        glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
++        const GLenum attachments[] = {static_cast<GLenum>(GL_COLOR_ATTACHMENT0 + FilteredAttachment),
++                                      static_cast<GLenum>(GL_COLOR_ATTACHMENT0 + RawAttachment)};
++        glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, writeRaw ? 2 : 1, attachments);
 +    }
 +
 +    source->Bind(0);
@@ -342,16 +369,22 @@ new file mode 100644
 +
 +auto FeedbackDiffusion::Texture() const -> std::shared_ptr<Renderer::Texture>
 +{
-+    return m_framebuffer.GetColorAttachmentTexture(0, 0);
++    return m_framebuffer.GetColorAttachmentTexture(0, FilteredAttachment);
++}
++
++auto FeedbackDiffusion::RawTexture() const -> std::shared_ptr<Renderer::Texture>
++{
++    return m_framebuffer.GetColorAttachmentTexture(0, RawAttachment);
 +}
 +
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
 new file mode 100644
+index 000000000..e48bfcb6c
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
-@@ -0,0 +1,128 @@
+@@ -0,0 +1,143 @@
 +/**
 + * @file FeedbackDiffusion.hpp
 + * @brief Restores MilkDrop's per-frame feedback smoothing, in picture units, at render sizes above the reference.
@@ -370,16 +403,22 @@ new file mode 100644
 + *
 + * Off (no pass, frames unchanged) without a line reference size or at or below the reference area.
 + *
-+ * Placement P2: merge the stencil into the required end-of-frame y-flip and reuse that texture
-+ * as next frame's warp input. New motion vectors trigger a recomputation from the raw previous
-+ * canvas. A compiled warp with nearest-filtered main descriptors instead uses input placement
-+ * P1: those descriptors retain the raw flip while bilinear descriptors use the filtered image.
-+ * P1 also leaves the composite sharp. Its extra pass is restricted to this mixed-feedback contract;
-+ * device cost has not been established for that subset. Other warps retain the efficient P2 path.
++ * The pass writes two images at once (multiple render targets): the exact y-flipped frame and its
++ * filtered copy. Only bilinear warp reads get the filtered copy. Point-sampled warp reads
++ * (sampler_pw_main, sampler_pc_main and their aliases) and the composite get the exact frame, as
++ * at the reference size, where point sampling and the composite add no smoothing. Encoded state in
++ * colour channels read through point samplers therefore survives unchanged.
 + *
-+ * Limits: the variance is uniform. MilkDrop's smoothing is 1/6 texel² only on average; where the warp
-+ * does not move the image (or moves it by whole texels) it smooths nothing, and the kernel still
-+ * adds its share to bilinear reads there. Point-filtered main descriptors preserve raw feedback.
++ * Placement: the pass replaces the required end-of-frame y-flip, and its two images are next
++ * frame's warp inputs. Frames that draw motion vectors change the raw previous canvas, so the
++ * inputs are recomputed before the warp (the exact copy only if the warp has point-sampled main
++ * reads) and the end-of-frame flip is a plain copy for the composite. Either way a frame has the
++ * same number of full-screen passes as without compensation; a frame without vectors writes one
++ * extra colour target (the composite's exact copy).
++ *
++ * Limits: the variance is uniform. MilkDrop's bilinear smoothing is 1/6 texel² only on average; where
++ * the warp does not move the image (or moves it by whole texels) it smooths nothing, and the kernel
++ * still adds its share there. The blur textures are still made from the unfiltered frame.
 + */
 +#pragma once
 +
@@ -430,11 +469,9 @@ new file mode 100644
 +constexpr float MaxDiffusionVariance = 1.9f; //!< Largest verified variance (scale approximately 3.52).
 +
 +/**
-+ * @brief Draws the feedback image into its own texture through the diffusion kernel, optionally y-flipped.
++ * @brief Draws the feedback image, optionally y-flipped, into an exact copy and a filtered copy in one pass.
 + *
-+ * Replace the end-of-frame CopyTexture flip and cache its result for ordinary warps (P2).
-+ * Mixed point/bilinear warps require the separate input pass (P1) to retain raw point state.
-+ * The general P1 path failed the earlier AM6 performance target; this subset needs device validation.
++ * Replaces the end-of-frame CopyTexture flip; both results are cached for the next warp.
 + */
 +class FeedbackDiffusion : public Renderer::RenderItem
 +{
@@ -446,6 +483,7 @@ new file mode 100644
 +    /**
 +     * @brief Sets the kernel for this render/reference scale.
 +     * @return True when the scale changed; invalidate a cached filtered image before using it.
++     * An inactive scale shrinks both targets to 1x1, so they hold no render-sized memory.
 +     * @param scale LineScale() of the render and reference sizes; 0 or <= 1 turn the pass off.
 +     */
 +    auto SetScale(float scale) -> bool;
@@ -456,20 +494,30 @@ new file mode 100644
 +    auto Active() const -> bool;
 +
 +    /**
-+     * @brief Draws source through the kernel into Texture(), resizing it to source's size.
-+     * @param source The feedback image. Must not be Texture().
++     * @brief Copies source into RawTexture() and draws it through the kernel into Texture(), resizing both.
++     * @param source The feedback image. Must not be Texture() or RawTexture().
 +     * @param flipVertical Flip the image on the y axis, as CopyTexture does for the warp's input.
++     * @param writeRaw False leaves RawTexture() unwritten (no point-sampled read or composite needs it),
++     *                 saving its full-screen write.
 +     */
-+    void Draw(const std::shared_ptr<Renderer::Texture>& source, bool flipVertical);
++    void Draw(const std::shared_ptr<Renderer::Texture>& source, bool flipVertical, bool writeRaw = true);
 +
 +    /**
-+     * @brief The last image drawn.
++     * @brief The last filtered image drawn: the input of bilinear warp reads.
 +     */
 +    auto Texture() const -> std::shared_ptr<Renderer::Texture>;
 +
++    /**
++     * @brief The last image drawn, copied exactly: the input of point-sampled warp reads and the composite.
++     */
++    auto RawTexture() const -> std::shared_ptr<Renderer::Texture>;
++
 +private:
-+    Renderer::Shader m_shader;                                //!< Adaptive 3/4-tap stencil shader.
-+    Renderer::Framebuffer m_framebuffer{1};                   //!< Holds the output texture.
++    static constexpr int RawAttachment = 0;      //!< Fragment output location 0.
++    static constexpr int FilteredAttachment = 1; //!< Fragment output location 1.
++
++    Renderer::Shader m_shader;                                //!< Exact copy plus adaptive 3/4-tap stencil.
++    Renderer::Framebuffer m_framebuffer{1};                   //!< Holds the raw and filtered textures.
 +    Renderer::Sampler m_sampler{GL_CLAMP_TO_EDGE, GL_LINEAR}; //!< Bilinear taps; edges repeat.
 +    DiffusionKernel m_kernel;                                 //!< Current kernel.
 +    bool m_usable{false};                                    //!< False after shader compile/link failure.
@@ -481,17 +529,18 @@ new file mode 100644
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+index b8f627bbe..c16aef069 100755
 --- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
-@@ -76,6 +76,7 @@
+@@ -76,6 +76,7 @@ void MilkdropPreset::Initialize(const Renderer::RenderContext& renderContext)
      }
  
      m_perPixelMesh.CompileWarpShader(m_state);
-+    m_warpUsesPointMainSampler = m_perPixelMesh.HasPointMainSampler();
++    m_warpSamplesMainTexels = m_perPixelMesh.WarpSamplesMainTexels();
      m_finalComposite.CompileCompositeShader(m_state);
  }
  
-@@ -90,14 +91,24 @@
+@@ -90,6 +91,7 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
          m_motionVectorUVMap->SetSize(renderContext.viewportSizeX, renderContext.viewportSizeY);
          m_isFirstFrame = true;
          m_flipHoldsPreviousFrame = false;
@@ -499,13 +548,10 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM
      }
  
      m_state.mainTexture = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
-+    m_state.rawPointFeedbackTexture.reset();
- 
-     // First evaluate per-frame code
-     PerFrameUpdate();
+@@ -99,24 +101,49 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
  
      glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
-+
+ 
 +    // Above the line reference size, the warp reads the previous frame through a small blur that gives
 +    // back the per-frame smoothing feedback presets get at the reference size (see FeedbackDiffusion.hpp).
 +    if (m_feedbackDiffusion.SetScale(m_diffusionAllowed ? LineScale(renderContext.viewportSizeX, renderContext.viewportSizeY,
@@ -513,48 +559,33 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM
 +    {
 +        m_diffusionHoldsPreviousFrame = false;
 +    }
- 
++
      m_framebuffer.Bind(m_previousFrameBuffer);
      // Motion vector field. Drawn to the previous frame texture before warping it.
-@@ -105,18 +116,47 @@
+     // Only do it after drawing one frame after init or resize.
      bool motionVectorsDrawn = false;
      if (!m_isFirstFrame)
      {
 -        motionVectorsDrawn = m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture());
--    }
 +        motionVectorsDrawn = m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture(), m_feedbackDiffusion.Active());
-+    }
-+
-+    // Mixed point/bilinear warps need two feedback representations: keep the raw flip for point
-+    // state, filter at input (P1), and composite the current canvas sharply. Other warps retain
-+    // the cached output placement (P2) when vectors do not already require the input copy.
-+    const bool rawPointFeedback = m_feedbackDiffusion.Active() && m_warpUsesPointMainSampler;
-+    const bool diffuseAtOutput = m_feedbackDiffusion.Active() && !motionVectorsDrawn && !rawPointFeedback;
+     }
  
      // y-flip the previous frame and assign the flipped texture as "main". The second flip of the
      // last frame already left exactly this image in the flip texture, unless motion vectors were
      // drawn onto the previous frame since, or something else replaced either texture.
 -    if (m_isFirstFrame || motionVectorsDrawn || !m_flipHoldsPreviousFrame)
--    {
--        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
++    // With diffusion, the same holds for its exact and filtered copies (see FeedbackDiffusion.hpp):
++    // bilinear warp reads get the filtered one, point-sampled warp reads the exact one.
 +    if (m_feedbackDiffusion.Active())
-+    {
-+        if (rawPointFeedback)
-+        {
-+            // Reuse the previous raw final flip unless the canvas was modified or invalidated.
-+            if (m_isFirstFrame || motionVectorsDrawn || !m_flipHoldsPreviousFrame)
-+            {
-+                m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
-+            }
-+            m_state.rawPointFeedbackTexture = m_flipTexture.Texture();
-+        }
-+        // P2 reuses the previous end-of-frame result. Fresh vectors require recomputing it
-+        // from the raw canvas, not filtering an already filtered texture a second time.
+     {
+-        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
 +        if (m_isFirstFrame || motionVectorsDrawn || !m_diffusionHoldsPreviousFrame)
 +        {
-+            m_feedbackDiffusion.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), true);
++            m_feedbackDiffusion.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), true,
++                                     m_warpSamplesMainTexels);
 +        }
 +        m_state.mainTexture = m_feedbackDiffusion.Texture();
++        m_state.rawMainTexture = m_feedbackDiffusion.RawTexture();
 +    }
 +    else
 +    {
@@ -563,6 +594,7 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM
 +            m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
 +        }
 +        m_state.mainTexture = m_flipTexture.Texture();
++        m_state.rawMainTexture.reset();
      }
      m_flipHoldsPreviousFrame = false;
 -    m_state.mainTexture = m_flipTexture.Texture();
@@ -570,16 +602,21 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM
  
      // Update blur textures. They are made from the previous frame, which nothing changes from
      // here on, so this can happen before the warp: the warp and everything drawn on top of it
-@@ -194,8 +234,16 @@
+@@ -193,9 +220,20 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+ 
      // Todo: Song title anim would go here
  
-     // y-flip the image for final compositing again
+-    // y-flip the image for final compositing again
 -    m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0), nullptr, true, false);
 -    m_state.mainTexture = m_flipTexture.Texture();
-+    if (diffuseAtOutput)
++    // y-flip the image for final compositing again. With diffusion, the same pass also filters
++    // next frame's warp input; the composite gets the exact copy. After motion vectors the next
++    // frame recomputes its inputs anyway (vectors usually stay on), so a plain flip suffices.
++    const bool diffusionActive = m_feedbackDiffusion.Active() && !motionVectorsDrawn;
++    if (diffusionActive)
 +    {
 +        m_feedbackDiffusion.Draw(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0), true);
-+        m_state.mainTexture = m_feedbackDiffusion.Texture();
++        m_state.mainTexture = m_feedbackDiffusion.RawTexture();
 +    }
 +    else
 +    {
@@ -589,27 +626,25 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM
  
      // We no longer need the previous frame image, use it to render the final composite, or draw
      // the composite straight into the caller's framebuffer when nothing needs it stored.
-@@ -223,7 +271,8 @@
+@@ -223,7 +261,8 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
      // Old-school effects (video echo) draw in the final orientation themselves, so no flip is
      // needed here, and the flip texture still holds the y-flipped current frame, which is next
      // frame's previous frame.
 -    m_flipHoldsPreviousFrame = true;
-+    m_flipHoldsPreviousFrame = !diffuseAtOutput;
-+    m_diffusionHoldsPreviousFrame = diffuseAtOutput;
++    m_flipHoldsPreviousFrame = !diffusionActive;
++    m_diffusionHoldsPreviousFrame = diffusionActive;
  
      // Swap framebuffer IDs for the next frame.
      std::swap(m_currentFrameBuffer, m_previousFrameBuffer);
-@@ -252,7 +301,9 @@
- 
+@@ -253,6 +292,7 @@ void MilkdropPreset::DrawInitialImage(const std::shared_ptr<Renderer::Texture>&
      // Render to previous framebuffer, as this is the image used to draw the next frame on.
      m_flipTexture.Draw(image, m_framebuffer, m_previousFrameBuffer);
-+    m_state.rawPointFeedbackTexture.reset();
      m_flipHoldsPreviousFrame = false;
 +    m_diffusionHoldsPreviousFrame = false;
  }
  
  void MilkdropPreset::PerFrameUpdate()
-@@ -320,6 +371,7 @@
+@@ -320,6 +360,7 @@ void MilkdropPreset::InitializePreset(PresetFileParser& parsedFile)
  
      // Load global init variables into the state
      m_state.Initialize(parsedFile);
@@ -618,6 +653,7 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM
      // Register code context variables
      m_perFrameContext.RegisterBuiltinVariables();
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+index 7c0ac0615..9340aec2f 100644
 --- a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
 @@ -27,6 +27,7 @@
@@ -628,7 +664,7 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp b/src/libprojectM
  #include "Filters.hpp"
  #include "FinalComposite.hpp"
  #include "MotionVectors.hpp"
-@@ -127,9 +128,13 @@
+@@ -130,11 +131,15 @@ private:
      DarkenCenter m_darkenCenter;                                                        //!< Center darkening effect.
      Border m_border;                                                                    //!< Inner/outer borders.
      Renderer::CopyTexture m_flipTexture;                                                //!< Texture flip filter
@@ -636,72 +672,71 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp b/src/libprojectM
  
      FinalComposite m_finalComposite; //!< Final composite shader or filters.
  
-+    bool m_diffusionHoldsPreviousFrame{false}; //!< Cached P2 warp input, invalidated by vectors/resize/initial image.
+     std::vector<std::string> m_initializationWarnings; //!< Equation code left out by the last Initialize().
+ 
++    bool m_diffusionHoldsPreviousFrame{false}; //!< Diffusion holds the previous frame's warp inputs, invalidated by vectors/resize/initial image.
 +    bool m_diffusionAllowed{true}; //!< Load-time gate for feedback that must keep its peaks.
-+    bool m_warpUsesPointMainSampler{false}; //!< Cached compiled sampler layout; selects raw point feedback while diffusion is active.
++    bool m_warpSamplesMainTexels{false}; //!< The warp has point-sampled main reads: diffusion must also write the exact copy.
      bool m_isFirstFrame{true}; //!< Controls drawing the motion vectors starting with the second frame.
      bool m_flipHoldsPreviousFrame{false}; //!< The flip texture still holds the y-flipped previous frame.
      bool m_warpSamplesBlur{true};         //!< The warp shader may read the blur textures.
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+index 956d2e9df..fc5347cae 100644
 --- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
-@@ -62,6 +62,7 @@
- 
- void MilkdropShader::LoadTexturesAndCompile(PresetState& presetState)
- {
-+    m_hasPointMainSampler = false;
-     std::locale loc;
- 
-     // Now request the textures and descriptors from the texture manager.
-@@ -154,6 +155,11 @@
- 
-     // Now that we have the textures, transpile the code.
-     TranspileHLSLShader(presetState, m_preprocessedCode);
-+    m_hasPointMainSampler = std::any_of(m_mainTextureDescriptors.begin(), m_mainTextureDescriptors.end(),
-+                                      [](const Renderer::TextureSamplerDescriptor& descriptor) {
-+        const auto sampler = descriptor.Sampler();
-+        return sampler && sampler->FilterMode() == GL_NEAREST;
-+    });
- 
-     // Update blur texture level if shader was compiled successfully.
-     presetState.blurTexture.SetRequiredBlurLevel(m_maxBlurLevelRequired);
-@@ -324,8 +330,12 @@
+@@ -325,8 +325,12 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
      GLint textureUnit{0};
      for (auto& desc : m_mainTextureDescriptors)
      {
 -        // Update main texture, swaps every frame.
 -        desc.Texture(presetState.mainTexture);
-+        // Mixed warps keep point-sampled state raw; only their bilinear reads use diffusion.
++        // Update main texture, swaps every frame. Feedback diffusion filters the main texture for
++        // bilinear warp reads only: point samplers read single texels, unfiltered as at the reference size.
 +        const auto sampler = desc.Sampler();
-+        const bool rawPoint = m_type == ShaderType::WarpShader && sampler &&
-+                              sampler->FilterMode() == GL_NEAREST &&
-+                              !presetState.rawPointFeedbackTexture.expired();
-+        desc.Texture(rawPoint ? presetState.rawPointFeedbackTexture : presetState.mainTexture);
++        const bool rawTexels = m_type == ShaderType::WarpShader && sampler && sampler->FilterMode() == GL_NEAREST &&
++                               !presetState.rawMainTexture.expired();
++        desc.Texture(rawTexels ? presetState.rawMainTexture : presetState.mainTexture);
          desc.Bind(textureUnit, m_shader);
          textureUnit++;
      }
+@@ -351,6 +355,19 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+     }
+ }
+ 
++auto MilkdropShader::SamplesMainTexels() const -> bool
++{
++    for (const auto& desc : m_mainTextureDescriptors)
++    {
++        const auto sampler = desc.Sampler();
++        if (sampler && sampler->FilterMode() == GL_NEAREST)
++        {
++            return true;
++        }
++    }
++    return false;
++}
++
+ auto MilkdropShader::Shader() -> Renderer::Shader&
+ {
+     return m_shader;
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.hpp b/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
+index 4f8165dc7..baff0240f 100644
 --- a/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
-@@ -52,6 +52,9 @@
-      * @param presetState The preset state to pull the values and textures from.
+@@ -61,6 +61,11 @@ public:
       */
-     void LoadTexturesAndCompile(PresetState& presetState);
+     void LoadVariables(const PresetState& presetState, const PerFrameContext& perFrameContext);
+ 
++    /**
++     * @brief True if a main-texture sampler of this shader uses point filtering (pw/pc and aliases).
++     */
++    auto SamplesMainTexels() const -> bool;
 +
-+    /** Whether the compiled main descriptors include a nearest-filtered sampler. */
-+    auto HasPointMainSampler() const -> bool { return m_hasPointMainSampler; }
- 
      /**
-      * @brief Loads all required shader variables into the uniforms.
-@@ -108,6 +111,7 @@
-     std::array<glm::vec3, 20> m_randRotationCenters{}; //!< Random rotation center vectors which don't change every frame.
-     std::array<glm::vec3, 20> m_randRotationSpeeds{};  //!< Random rotation speeds which don't change every frame.
- 
-+    bool m_hasPointMainSampler{false}; //!< Cached after successful compilation from the actual sampler modes.
-     Renderer::Shader m_shader;
- };
- 
+      * @brief Returns the contained shader.
+      * @return The shader program wrapper.
 diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
+index 0fb4b0d11..0aa1b7e42 100644
 --- a/src/libprojectM/MilkdropPreset/MotionVectors.cpp
 +++ b/src/libprojectM/MilkdropPreset/MotionVectors.cpp
 @@ -1,6 +1,7 @@
@@ -712,7 +747,7 @@ diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/
  #include "MilkdropStaticShaders.hpp"
  
  #include <Renderer/TextureManager.hpp>
-@@ -51,7 +52,7 @@
+@@ -51,7 +52,7 @@ void MotionVectors::InitVertexAttrib()
      glVertexAttribIPointer(2, 1, GL_INT, sizeof(MotionVectorVertex), reinterpret_cast<void*>(offsetof(MotionVectorVertex, index)));
  }
  
@@ -721,7 +756,7 @@ diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/
  {
      // Don't draw if invisible.
      if (*presetPerFrameContext.mv_a < 0.0001f)
-@@ -106,7 +107,11 @@
+@@ -106,7 +107,11 @@ auto MotionVectors::Draw(const PerFrameContext& presetPerFrameContext, std::shar
      // Line smoothing makes some of them disappear otherwise.
      float const inverseWidth = 1.25f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
      float const inverseHeight = 1.25f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
@@ -735,9 +770,10 @@ diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.cpp b/src/libprojectM/
      const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
                                        m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
 diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.hpp b/src/libprojectM/MilkdropPreset/MotionVectors.hpp
+index 1d8d9b634..4affa4f38 100644
 --- a/src/libprojectM/MilkdropPreset/MotionVectors.hpp
 +++ b/src/libprojectM/MilkdropPreset/MotionVectors.hpp
-@@ -36,9 +36,10 @@
+@@ -36,9 +36,10 @@ public:
       * Renders the motion vectors.
       * @param presetPerFrameContext The per-frame context variables.
       * @param motionTexture The u/v "motion" texture written by the warp shader.
@@ -750,66 +786,345 @@ diff --git a/src/libprojectM/MilkdropPreset/MotionVectors.hpp b/src/libprojectM/
  private:
      struct MotionVectorVertex
 diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+index b8d2a8a7a..d2ab009cb 100644
 --- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
 +++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
-@@ -112,6 +112,11 @@
-             m_warpShader.reset();
-         }
+@@ -114,6 +114,11 @@ void PerPixelMesh::CompileWarpShader(PresetState& presetState)
      }
-+}
-+
-+auto PerPixelMesh::HasPointMainSampler() const -> bool
-+{
-+    return m_warpShader && m_warpShader->HasPointMainSampler();
  }
  
++auto PerPixelMesh::WarpSamplesMainTexels() const -> bool
++{
++    return m_warpShader && m_warpShader->SamplesMainTexels();
++}
++
  void PerPixelMesh::Draw(const PresetState& presetState,
+                         const PerFrameContext& perFrameContext,
+                         PerPixelContext& perPixelContext)
 diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+index 4657a1eab..570864689 100644
 --- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
 +++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
-@@ -47,6 +47,9 @@
-      * @param presetState The preset state to retrieve the configuration values from.
+@@ -48,6 +48,11 @@ public:
       */
      void CompileWarpShader(PresetState& presetState);
-+
-+    /** Query the successfully compiled warp; a failed/default warp has no point descriptors. */
-+    auto HasPointMainSampler() const -> bool;
  
++    /**
++     * @brief True if the compiled warp shader reads the main texture through a point sampler.
++     */
++    auto WarpSamplesMainTexels() const -> bool;
++
      /**
       * @brief Renders the transformation mesh.
+      * @param presetState The preset state to retrieve the configuration values from.
 diff --git a/src/libprojectM/MilkdropPreset/PresetState.hpp b/src/libprojectM/MilkdropPreset/PresetState.hpp
+index aacd39d7a..26918a2b3 100644
 --- a/src/libprojectM/MilkdropPreset/PresetState.hpp
 +++ b/src/libprojectM/MilkdropPreset/PresetState.hpp
-@@ -154,6 +154,7 @@
+@@ -154,6 +154,7 @@ public:
      LineRenderer lineRenderer; //!< Draws waveforms, custom waves and shape outlines as quads (when a line reference size is set).
  
      std::weak_ptr<Renderer::Texture> mainTexture; //!< A weak reference to the main texture in the preset framebuffer.
-+    std::weak_ptr<Renderer::Texture> rawPointFeedbackTexture; //!< Raw previous flip, only while the active warp needs point feedback.
++    std::weak_ptr<Renderer::Texture> rawMainTexture; //!< Unfiltered main texture for point-sampled warp reads while feedback diffusion filters mainTexture.
      BlurTexture blurTexture;                      //!< The blur textures used in this preset. Contents depend on the shader code using GetBlurX().
  
      std::map<int, Renderer::TextureSamplerDescriptor> randomTextureDescriptors; //!< Descriptors for random texture IDs. Should be the same across both warp and comp shaders.
 diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
+index 4b9dcb7e0..edf9bb413 100644
 --- a/tests/libprojectM/CMakeLists.txt
 +++ b/tests/libprojectM/CMakeLists.txt
-@@ -1,6 +1,7 @@
+@@ -1,6 +1,8 @@
  find_package(GTest 1.10 REQUIRED NO_MODULE)
  
  add_executable(projectM-unittest
++        FeedbackDiffusionRenderTest.cpp
 +        FeedbackDiffusionTest.cpp
          HLSLModuloTest.cpp
+         PresetShaderTranslationTest.cpp
          ShaderExceptionTest.cpp
-         MilkdropPresetExceptionTest.cpp
+diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
+new file mode 100644
+index 000000000..3511e5439
+--- /dev/null
++++ b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
+@@ -0,0 +1,264 @@
++#include <ProjectM.hpp>
++#include <Renderer/Shader.hpp>
++#include <projectM-opengl.h>
++
++#include <gtest/gtest.h>
++
++#include <algorithm>
++#include <cstdint>
++#include <sstream>
++#include <string>
++#include <utility>
++#include <vector>
++
++#ifdef __APPLE__
++#include <OpenGL/OpenGL.h>
++#endif
++
++// Feedback diffusion filters only the bilinear warp input. Point-sampled warp reads and the
++// composite must see the same texels as with compensation off at the same reference size.
++// (The reference size also changes texsize and the canvas the preset sees, so the comparisons keep
++// it and turn compensation off through the load-time gate instead: an explicitly undisplaced
++// GetPixel(uv_orig) read, multiplied by zero, makes a warp ineligible without changing its result.)
++
++namespace {
++
++constexpr int Width = 128;
++constexpr int Height = 96;
++using Image = std::vector<uint8_t>;
++
++class TestProjectM : public libprojectM::ProjectM
++{
++public:
++    mutable std::string failure;
++    void PresetSwitchFailedEvent(const std::string&, const std::string& reason) const override
++    {
++        failure = reason;
++    }
++};
++
++// Two-texel stripes: added smoothing changes them. Literal sizes, as texsize reports the reference
++// canvas above the reference area. (The composite samples between texels: one-texel stripes would
++// average to a flat grey.)
++constexpr char Seed[] = "float3(frac(floor(uv.x*64.0)*0.5)*2.0, frac(floor(uv.y*48.0)*0.5)*2.0, uv.x)";
++constexpr char Ineligible[] = " + GetPixel(uv_orig).rgb*0.0";
++
++// A shader composite: the old-school one adds time-dependent random hues.
++auto Preset(const std::string& warp, const std::string& comp = "tex2D(sampler_main, uv).rgb") -> std::string
++{
++    return "MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=3\nPSVERSION_COMP=3\n"
++           "[preset00]\nfDecay=1\nfGammaAdj=1\nfWaveAlpha=0\nbTexWrap=1\nfVideoEchoAlpha=0\n"
++           "fWarpAnimSpeed=1\nfWarpScale=1\nfZoomExponent=1\nzoom=1\nwarp=0\nrot=0\nfShader=0\n"
++           "warp_1=`shader_body { " + warp + " }\n"
++           "comp_1=`shader_body { ret = " + comp + "; }\n";
++}
++
++// Frames 0 and 1 seed the feedback; frame 2 reads it.
++auto FeedbackPreset(const std::string& read) -> std::string
++{
++    return Preset(std::string("if (frame < 2) ret = ") + Seed + "; else ret = " + read + ";");
++}
++
++auto DifferentBytes(const Image& a, const Image& b) -> size_t
++{
++    size_t different{};
++    for (size_t i = 0; i < std::min(a.size(), b.size()); ++i)
++    {
++        different += a[i] != b[i];
++    }
++    return different;
++}
++
++} // namespace
++
++class FeedbackDiffusionRenderTest : public ::testing::Test
++{
++protected:
++    static void SetUpTestSuite()
++    {
++#ifdef __APPLE__
++        CGLPixelFormatAttribute attributes[] = {
++            kCGLPFAOpenGLProfile, static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++            static_cast<CGLPixelFormatAttribute>(0)};
++        CGLPixelFormatObj format{};
++        GLint count{};
++        if (CGLChoosePixelFormat(attributes, &format, &count) != kCGLNoError || format == nullptr)
++        {
++            return;
++        }
++        CGLCreateContext(format, nullptr, &s_context);
++        CGLDestroyPixelFormat(format);
++#endif
++    }
++
++    static void TearDownTestSuite()
++    {
++#ifdef __APPLE__
++        if (s_context != nullptr)
++        {
++            CGLSetCurrentContext(nullptr);
++            CGLDestroyContext(s_context);
++            s_context = nullptr;
++        }
++#endif
++    }
++
++    void SetUp() override
++    {
++#ifdef __APPLE__
++        if (s_context == nullptr)
++        {
++            GTEST_SKIP() << "no macOS CGL OpenGL context";
++        }
++        ASSERT_EQ(CGLSetCurrentContext(s_context), kCGLNoError);
++        libprojectM::Renderer::Shader::Unbind();
++        glGenFramebuffers(1, &m_framebuffer);
++        glGenTextures(1, &m_texture);
++        glBindTexture(GL_TEXTURE_2D, m_texture);
++        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
++        glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
++        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
++        ASSERT_EQ(glCheckFramebufferStatus(GL_FRAMEBUFFER), GL_FRAMEBUFFER_COMPLETE);
++        glPixelStorei(GL_PACK_ALIGNMENT, 1);
++        ASSERT_EQ(glGetError(), GL_NO_ERROR);
++#else
++        GTEST_SKIP() << "render regression needs a macOS CGL OpenGL context";
++#endif
++    }
++
++    void TearDown() override
++    {
++#ifdef __APPLE__
++        if (s_context != nullptr)
++        {
++            libprojectM::Renderer::Shader::Unbind();
++            glDeleteFramebuffers(1, &m_framebuffer);
++            glDeleteTextures(1, &m_texture);
++        }
++#endif
++    }
++
++    // referenceWidth/Height 0 turn compensation off; 64x48 gives scale 2 (three taps),
++    // 32x24 scale 4 (four taps, capped variance).
++    auto Render(const std::string& preset, int referenceWidth, int referenceHeight) -> Image
++    {
++        glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
++        glClearColor(0, 0, 0, 1);
++        glClear(GL_COLOR_BUFFER_BIT);
++        TestProjectM engine;
++        engine.SetWindowSize(Width, Height);
++        engine.SetMeshSize(48, 32);
++        engine.SetPresetLocked(true);
++        engine.SetHardCutEnabled(false);
++        engine.SetEasterEgg(0);
++        engine.SetLineReferenceSize(referenceWidth, referenceHeight);
++        std::istringstream data(preset);
++        engine.LoadPresetData(data, false);
++        EXPECT_TRUE(engine.failure.empty()) << engine.failure;
++        for (int frame = 0; frame < 3; ++frame)
++        {
++            engine.RenderFrame(m_framebuffer);
++        }
++        Image pixels(Width * Height * 3);
++        glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer);
++        glReadBuffer(GL_COLOR_ATTACHMENT0);
++        glReadPixels(0, 0, Width, Height, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
++        EXPECT_EQ(glGetError(), GL_NO_ERROR);
++        EXPECT_GT(*std::max_element(pixels.begin(), pixels.end()), 200) << "fixture did not render";
++        return pixels;
++    }
++
++#ifdef __APPLE__
++    static CGLContextObj s_context;
++#endif
++    GLuint m_framebuffer{};
++    GLuint m_texture{};
++};
++
++#ifdef __APPLE__
++CGLContextObj FeedbackDiffusionRenderTest::s_context{};
++#endif
++
++constexpr std::pair<int, int> References[] = {{64, 48}, {32, 24}}; // Scale 2 (three taps), 4 (four taps, capped).
++
++TEST_F(FeedbackDiffusionRenderTest, BilinearFeedbackIsStillCompensated)
++{
++    // Guards the fixture: the gated variant really turns the filter off, and these sizes activate it.
++    for (const auto& reference : References)
++    {
++        SCOPED_TRACE(reference.first);
++        const auto active = Render(FeedbackPreset("GetPixel(uv).rgb"), reference.first, reference.second);
++        const auto off = Render(FeedbackPreset(std::string("GetPixel(uv).rgb") + Ineligible), reference.first, reference.second);
++        EXPECT_GT(DifferentBytes(active, off), 0u);
++        EXPECT_EQ(DifferentBytes(off, Render(FeedbackPreset(std::string("GetPixel(uv).rgb") + Ineligible),
++                                             reference.first, reference.second)), 0u) << "fixture must repeat exactly";
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, PointSampledFeedbackReadsUnfilteredTexels)
++{
++    // The GetPixel term keeps the warp eligible for compensation (a mixed warp); it adds nothing.
++    for (const char* name : {"pw_main", "wp_main", "pc_main", "cp_main"})
++    {
++        SCOPED_TRACE(name);
++        const std::string read = std::string("tex2D(sampler_") + name + ", uv).rgb";
++        for (const auto& reference : References)
++        {
++            SCOPED_TRACE(reference.first);
++            const auto active = Render(FeedbackPreset(read + " + GetPixel(uv).rgb*0.0"), reference.first, reference.second);
++            const auto off = Render(FeedbackPreset(read + Ineligible), reference.first, reference.second);
++            EXPECT_EQ(DifferentBytes(active, off), 0u);
++        }
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, CompositeReadsTheUnfilteredFrame)
++{
++    // The warp does not read feedback, so only the composite could see the filter.
++    for (const char* comp : {"tex2D(sampler_main, uv).rgb", "tex2D(sampler_pc_main, uv).rgb"})
++    {
++        SCOPED_TRACE(comp);
++        for (const auto& reference : References)
++        {
++            SCOPED_TRACE(reference.first);
++            const auto active = Render(Preset(std::string("ret = ") + Seed + ";", comp), reference.first, reference.second);
++            const auto off = Render(Preset(std::string("ret = ") + Seed + Ineligible + ";", comp),
++                                    reference.first, reference.second);
++            EXPECT_EQ(DifferentBytes(active, off), 0u);
++        }
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, FramesWithMotionVectorsKeepPointReadsAndCompositeExact)
++{
++    // Motion vectors are drawn onto the previous frame every frame, so the warp inputs are
++    // recomputed before each warp and the end-of-frame flip feeds only the composite. At alpha
++    // 0.001 blending changes no 8-bit value: the frames take that path while compensation's own
++    // scaled minimum vector length cannot change the canvas.
++    const std::string vectors = "nMotionVectorsX=12\nnMotionVectorsY=9\nmv_a=0.001\nmv_r=1\nmv_g=1\nmv_b=1\nmv_l=1\n";
++    for (const char* read : {"tex2D(sampler_pc_main, uv).rgb", "GetPixel(uv).rgb"})
++    {
++        SCOPED_TRACE(read);
++        // Frame 0 draws inverted stripes, frame 1 the stripes frame 2 reads: an exact copy left over
++        // from before the vector frames would show frame 0's image.
++        const std::string seed = std::string("if (frame < 1) ret = 1.0 - ") + Seed + "; else if (frame < 2) ret = " + Seed + "; else ret = ";
++        auto active = Preset(seed + read + " + GetPixel(uv).rgb*0.0;");
++        auto off = Preset(seed + read + Ineligible + ";");
++        active.insert(active.find("warp_1="), vectors);
++        off.insert(off.find("warp_1="), vectors);
++        for (const auto& reference : References)
++        {
++            SCOPED_TRACE(reference.first);
++            const auto activeImage = Render(active, reference.first, reference.second);
++            const auto offImage = Render(off, reference.first, reference.second);
++            if (std::string(read).find("pc_main") != std::string::npos)
++            {
++                EXPECT_EQ(DifferentBytes(activeImage, offImage), 0u);
++            }
++            else
++            {
++                EXPECT_GT(DifferentBytes(activeImage, offImage), 0u) << "bilinear reads must still be filtered";
++            }
++        }
++    }
++}
 diff --git a/tests/libprojectM/FeedbackDiffusionTest.cpp b/tests/libprojectM/FeedbackDiffusionTest.cpp
 new file mode 100644
+index 000000000..9b18833e3
 --- /dev/null
 +++ b/tests/libprojectM/FeedbackDiffusionTest.cpp
-@@ -0,0 +1,222 @@
+@@ -0,0 +1,375 @@
 +#include <MilkdropPreset/FeedbackDiffusion.hpp>
 +#include <MilkdropPreset/LineGeometry.hpp>
 +
 +#include <gtest/gtest.h>
 +
 +#include <cmath>
++#include <string>
 +
 +using libprojectM::MilkdropPreset::DiffusionKernelFor;
 +using libprojectM::MilkdropPreset::DiffusionVariance;
@@ -928,6 +1243,24 @@ new file mode 100644
 +    EXPECT_TRUE(DiffusionWarpEligible(""));
 +}
 +
++TEST(FeedbackDiffusion, GateRecognizesEveryMainSamplerAlias)
++{
++    using libprojectM::MilkdropPreset::DiffusionWarpEligible;
++    // TextureManager accepts both orders of the filter/wrap prefix; the gate must too.
++    for (const char* point : {"pw", "wp", "pc", "cp"})
++    {
++        SCOPED_TRACE(point);
++        EXPECT_FALSE(DiffusionWarpEligible(std::string("ret=tex2D(sampler_") + point + "_main,uv);"));
++        EXPECT_FALSE(DiffusionWarpEligible(std::string("ret=TEX2D(SAMPLER_") + point + "_MAIN,uv);"));
++    }
++    for (const char* bilinear : {"fc", "cf", "fw", "wf"})
++    {
++        SCOPED_TRACE(bilinear);
++        EXPECT_TRUE(DiffusionWarpEligible(std::string("ret=tex2D(sampler_") + bilinear + "_main,uv)+tex2D(sampler_cp_main,uv)*.01;"));
++        EXPECT_FALSE(DiffusionWarpEligible(std::string("ret=tex2D(sampler_") + bilinear + "_main,uv_orig);"));
++    }
++}
++
 +TEST(FeedbackDiffusion, AllowsMixedPointReadsWithBilinearFeedback)
 +{
 +    using libprojectM::MilkdropPreset::DiffusionWarpEligible;
@@ -979,6 +1312,8 @@ new file mode 100644
 +#include <OpenGL/OpenGL.h>
 +#include <Renderer/Texture.hpp>
 +
++#include <vector>
++
 +TEST(FeedbackDiffusion, TransparentSourceIsCopiedWithoutMultiplyingAlphaAgain)
 +{
 +    CGLPixelFormatAttribute attrs[] = {kCGLPFAOpenGLProfile,
@@ -1025,11 +1360,144 @@ new file mode 100644
 +    CGLSetCurrentContext(nullptr);
 +    CGLDestroyContext(context);
 +}
++
++namespace {
++
++auto ReadTexture(const libprojectM::Renderer::Texture& texture) -> std::vector<unsigned char>
++{
++    std::vector<unsigned char> pixels(static_cast<size_t>(texture.Width() * texture.Height() * 4));
++    GLuint framebuffer{};
++    glGenFramebuffers(1, &framebuffer);
++    glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
++    glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture.TextureID(), 0);
++    glReadBuffer(GL_COLOR_ATTACHMENT0);
++    glPixelStorei(GL_PACK_ALIGNMENT, 1);
++    glReadPixels(0, 0, texture.Width(), texture.Height(), GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
++    glDeleteFramebuffers(1, &framebuffer);
++    return pixels;
++}
++
++} // namespace
++
++TEST(FeedbackDiffusion, InactiveScaleReleasesRenderSizedTargets)
++{
++    CGLPixelFormatAttribute attrs[] = {kCGLPFAOpenGLProfile,
++        static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++        static_cast<CGLPixelFormatAttribute>(0)};
++    CGLPixelFormatObj format{};
++    GLint count{};
++    ASSERT_EQ(CGLChoosePixelFormat(attrs, &format, &count), kCGLNoError);
++    CGLContextObj context{};
++    ASSERT_EQ(CGLCreateContext(format, nullptr, &context), kCGLNoError);
++    CGLDestroyPixelFormat(format);
++    ASSERT_EQ(CGLSetCurrentContext(context), kCGLNoError);
++    {
++        using libprojectM::Renderer::Texture;
++        Texture::SetPoolLimit(0);
++        auto source = std::make_shared<Texture>("release-test", 64, 32, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
++        glViewport(0, 0, 64, 32);
++        libprojectM::MilkdropPreset::FeedbackDiffusion diffusion;
++        diffusion.SetScale(2.0f);
++        diffusion.Draw(source, true);
++        ASSERT_EQ(diffusion.RawTexture()->Width(), 64);
++        ASSERT_EQ(diffusion.Texture()->Width(), 64);
++        // Lowering the render size to or below the reference turns compensation off: keep no
++        // render-sized targets while the pass cannot run.
++        diffusion.SetScale(1.0f);
++        EXPECT_FALSE(diffusion.Active());
++        EXPECT_LE(diffusion.RawTexture()->Width() * diffusion.RawTexture()->Height(), 1);
++        EXPECT_LE(diffusion.Texture()->Width() * diffusion.Texture()->Height(), 1);
++        // Raising it again restores full-size targets on the next pass.
++        diffusion.SetScale(2.0f);
++        diffusion.Draw(source, true);
++        EXPECT_EQ(diffusion.RawTexture()->Width(), 64);
++        EXPECT_EQ(diffusion.Texture()->Height(), 32);
++        EXPECT_EQ(glGetError(), GL_NO_ERROR);
++    }
++    CGLSetCurrentContext(nullptr);
++    CGLDestroyContext(context);
++}
++
++TEST(FeedbackDiffusion, OnePassWritesExactFlippedCopyAndFilteredCopy)
++{
++    CGLPixelFormatAttribute attrs[] = {kCGLPFAOpenGLProfile,
++        static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++        static_cast<CGLPixelFormatAttribute>(0)};
++    CGLPixelFormatObj format{};
++    GLint count{};
++    ASSERT_EQ(CGLChoosePixelFormat(attrs, &format, &count), kCGLNoError);
++    CGLContextObj context{};
++    ASSERT_EQ(CGLCreateContext(format, nullptr, &context), kCGLNoError);
++    CGLDestroyPixelFormat(format);
++    ASSERT_EQ(CGLSetCurrentContext(context), kCGLNoError);
++    {
++        using libprojectM::Renderer::Texture;
++        constexpr int width = 24;
++        constexpr int height = 10;
++        Texture::SetPoolLimit(0);
++        auto source = std::make_shared<Texture>("pattern", width, height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
++        std::vector<unsigned char> input(width * height * 4);
++        for (size_t i = 0; i < input.size(); ++i)
++        {
++            // Distinct, high-frequency texels; alpha opaque like the preset canvases.
++            input[i] = i % 4 == 3 ? 255 : static_cast<unsigned char>((i * 97 + i / 7 * 31) % 256);
++        }
++        source->Bind(0);
++        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
++        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, input.data());
++        glViewport(0, 0, width, height);
++        glDisable(GL_DITHER);
++
++        for (float scale : {2.0f, 4.0f})
++        {
++            SCOPED_TRACE(scale);
++            libprojectM::MilkdropPreset::FeedbackDiffusion diffusion;
++            diffusion.SetScale(scale);
++            ASSERT_TRUE(diffusion.Active());
++            for (bool flip : {false, true})
++            {
++                SCOPED_TRACE(flip);
++                diffusion.Draw(source, flip);
++                ASSERT_EQ(glGetError(), GL_NO_ERROR);
++                const auto raw = ReadTexture(*diffusion.RawTexture());
++                size_t different{};
++                for (int y = 0; y < height; ++y)
++                {
++                    const int sourceRow = flip ? height - 1 - y : y;
++                    for (int x = 0; x < width * 4; ++x)
++                    {
++                        different += raw[static_cast<size_t>(y * width * 4 + x)] !=
++                                     input[static_cast<size_t>(sourceRow * width * 4 + x)];
++                    }
++                }
++                EXPECT_EQ(different, 0u) << "raw output is not an exact copy";
++                EXPECT_NE(ReadTexture(*diffusion.Texture()), raw) << "filtered output must differ for this pattern";
++            }
++            // A filtered-only pass (no point-sampled reads need the exact copy) writes the same
++            // filtered image and leaves the exact copy as it was.
++            diffusion.Draw(source, true);
++            const auto raw = ReadTexture(*diffusion.RawTexture());
++            const auto filtered = ReadTexture(*diffusion.Texture());
++            auto flippedSource = std::make_shared<Texture>("pattern-flip", width, height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
++            std::vector<unsigned char> zeros(input.size(), 0);
++            flippedSource->Bind(0);
++            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, zeros.data());
++            diffusion.Draw(flippedSource, true, false);
++            EXPECT_EQ(ReadTexture(*diffusion.RawTexture()), raw) << "filtered-only pass wrote the exact copy";
++            EXPECT_NE(ReadTexture(*diffusion.Texture()), filtered) << "filtered-only pass did not write the filtered copy";
++            diffusion.Draw(source, true, false);
++            EXPECT_EQ(ReadTexture(*diffusion.Texture()), filtered);
++        }
++    }
++    CGLSetCurrentContext(nullptr);
++    CGLDestroyContext(context);
++}
 +#endif
 diff --git a/tests/libprojectM/WarpSamplerTest.cpp b/tests/libprojectM/WarpSamplerTest.cpp
+index 31ef5b7cb..156f94440 100644
 --- a/tests/libprojectM/WarpSamplerTest.cpp
 +++ b/tests/libprojectM/WarpSamplerTest.cpp
-@@ -141,13 +141,14 @@
+@@ -141,13 +141,14 @@ protected:
  #endif
      }
  
@@ -1045,7 +1513,7 @@ diff --git a/tests/libprojectM/WarpSamplerTest.cpp b/tests/libprojectM/WarpSampl
          engine.SetMeshSize(48, 32);
          engine.SetPresetLocked(true);
          engine.SetHardCutEnabled(false);
-@@ -155,7 +156,7 @@
+@@ -155,7 +156,7 @@ protected:
          std::istringstream data(preset);
          engine.LoadPresetData(data, false);
          EXPECT_TRUE(engine.failure.empty()) << engine.failure;
@@ -1054,7 +1522,7 @@ diff --git a/tests/libprojectM/WarpSamplerTest.cpp b/tests/libprojectM/WarpSampl
          {
              engine.RenderFrame(m_framebuffer);
          }
-@@ -258,3 +259,67 @@
+@@ -258,3 +259,67 @@ TEST_F(WarpSamplerTest, DefaultWarpMatchesUnqualifiedPassThrough)
          ExpectSame(Render(fixed), Render(passThrough));
      }
  }

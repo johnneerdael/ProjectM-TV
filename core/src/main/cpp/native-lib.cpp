@@ -1070,6 +1070,11 @@ void OnSwitchFailed(const char* filename, const char* message, void*) {
     g_engine.loadFailed = true;
 }
 
+// Equation code that doesn't compile is left out, as in MilkDrop; the preset still loads (patch 0035).
+void OnInitializationWarning(const char*, const char* message, void*) {
+    LOGW("Preset code left out (%s): %s", g_engine.loading.c_str(), message ? message : "");
+}
+
 void ApplySettings() {
     projectm_handle pm = g_engine.pm;
     projectm_set_preset_duration(pm, g_inputs.presetDuration.load());
@@ -1676,6 +1681,7 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     projectm_opengl_set_line_reference_size(g_engine.pm, 1024, 768);
     projectm_set_preset_switch_requested_event_callback(g_engine.pm, OnSwitchRequested, nullptr);
     projectm_set_preset_switch_failed_event_callback(g_engine.pm, OnSwitchFailed, nullptr);
+    projectm_set_preset_initialization_warning_event_callback(g_engine.pm, OnInitializationWarning, nullptr);
     g_inputs.settingsDirty = true;
     g_engine.fpsWindowStart = NowSeconds();
     g_engine.createdAt = g_engine.fpsWindowStart;

@@ -1,0 +1,234 @@
+{
+  "hypothesis": "MRT product fix (commit 25e6aa83, 0030 sha fd4d058c) renders selected native frames byte-identical to the private raw-point/P1 diagnostic",
+  "verdict": "confirmed: 96/96 selected native RGB frames byte-identical across 6 presets x {1330,2160}; all 12 mrt-fix repeat pairs exact with fresh PIDs",
+  "jobs": {
+    "new": 24,
+    "success": 24
+  },
+  "artifacts": {
+    "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/mrt-fix-validation/worker/candidate-25e6aa83be92-0b43830171d9/candidate-core-corpus.apk",
+    "apk_sha256": "913fa839dafc5497dd830f991767a318acfcb39570b54536bd460b22063fb81b",
+    "aar": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/mrt-fix-validation/worker/candidate-25e6aa83be92-0b43830171d9/repo/core/build/outputs/aar/core-release.aar",
+    "aar_sha256": "2ef7bdaba8d6b080026f2ace04d7439bf001076999d9e45cd685de4455511da2",
+    "arm64_elf_sha256": "63df469c2f159a8703af2be16c4bea2574432162ac761efd97941f55cc0e7723",
+    "apk_aar_elf_identity": true,
+    "source_commit": "25e6aa83be924c6f863653b797f17e5ea11a217c",
+    "patch_0030_sha256": "fd4d058c0c6e40635c812f8e4e92f965c4f3ef17af5b28e746c9081e1e139c0e",
+    "build_adapter_sha256": "97cb8a3b03b88e4498e19914785c59f21cc775c81ea791e94d1da09c360424a8",
+    "run_adapter_sha256": "65b8a060d9432d026c93dce515753cbbd7eaf3ded79154e23db569f107292dd6",
+    "protocol_sha256": {
+      "1330": "31f24a7b9c056c10c74982b11f3f19b09b880e0016d290f8e17c19c3023ed562",
+      "2160": "dc1ca0856be096ef96a34ba9694caac24e0703698fb5da80d0c1b43815aa498a"
+    }
+  },
+  "comparator": "read-only rows from raw-point-controls/analysis.json (hash-verified); see comparator-index.json",
+  "limits": "Apple M4 Pro emulator, one seed/signal, six presets; instrumented RNG/time lab build, not shipping bytes; no TV/performance claim",
+  "cases": [
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "profile": "1330",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.022349447011947632,
+        "raw-point": 0.022349447011947632,
+        "mrt-fix": 0.022349447011947632
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.3193524023470974,
+        "raw-point": 0.3193524023470974,
+        "mrt-fix": 0.3193524023470974
+      }
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "profile": "2160",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.02255769446492195,
+        "raw-point": 0.02255769446492195,
+        "mrt-fix": 0.02255769446492195
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.3160252850849211,
+        "raw-point": 0.3160252850849211,
+        "mrt-fix": 0.3160252850849211
+      }
+    },
+    {
+      "preset": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "profile": "1330",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.05851736664772034,
+        "raw-point": 0.0566883459687233,
+        "mrt-fix": 0.0566883459687233
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.904243554054938,
+        "raw-point": 0.9089677490061621,
+        "mrt-fix": 0.9089677490061621
+      }
+    },
+    {
+      "preset": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "profile": "2160",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.04631879925727844,
+        "raw-point": 0.043110717087984085,
+        "mrt-fix": 0.043110717087984085
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.915554066510965,
+        "raw-point": 0.9321417563119091,
+        "mrt-fix": 0.9321417563119091
+      }
+    },
+    {
+      "preset": "Fed - quadratrail.milk",
+      "profile": "1330",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.0019993337336927652,
+        "raw-point": 0.0019993337336927652,
+        "mrt-fix": 0.0019993337336927652
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.7584081290445459,
+        "raw-point": 0.7584081290445459,
+        "mrt-fix": 0.7584081290445459
+      }
+    },
+    {
+      "preset": "Fed - quadratrail.milk",
+      "profile": "2160",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.002850322285667062,
+        "raw-point": 0.002850322285667062,
+        "mrt-fix": 0.002850322285667062
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.5265012531117527,
+        "raw-point": 0.5265012531117527,
+        "mrt-fix": 0.5265012531117527
+      }
+    },
+    {
+      "preset": "Fumbling_Foo + En D & Martin - Mandelverse.milk",
+      "profile": "1330",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.23298391699790955,
+        "raw-point": 0.12297672033309937,
+        "mrt-fix": 0.12297672033309937
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.879048562121864,
+        "raw-point": 1.0152992035167072,
+        "mrt-fix": 1.0152992035167072
+      }
+    },
+    {
+      "preset": "Fumbling_Foo + En D & Martin - Mandelverse.milk",
+      "profile": "2160",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.23288702964782715,
+        "raw-point": 0.1269446313381195,
+        "mrt-fix": 0.1269446313381195
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.8763067744532455,
+        "raw-point": 1.035144728588125,
+        "mrt-fix": 1.035144728588125
+      }
+    },
+    {
+      "preset": "$$$ Royal - Mashup (255).milk",
+      "profile": "1330",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.16871300339698792,
+        "raw-point": 0.1201021671295166,
+        "mrt-fix": 0.1201021671295166
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.9466438714533725,
+        "raw-point": 0.8846807418932019,
+        "mrt-fix": 0.8846807418932019
+      }
+    },
+    {
+      "preset": "$$$ Royal - Mashup (255).milk",
+      "profile": "2160",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.1649346947669983,
+        "raw-point": 0.09170252084732056,
+        "mrt-fix": 0.09170252084732056
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.9524042404137534,
+        "raw-point": 0.9577180730046357,
+        "mrt-fix": 0.9577180730046357
+      }
+    },
+    {
+      "preset": "astral spinorgentics encrustcore nz+.milk",
+      "profile": "1330",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.21183770895004272,
+        "raw-point": 0.21183770895004272,
+        "mrt-fix": 0.21183770895004272
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.6631191058450104,
+        "raw-point": 0.6631191058450104,
+        "mrt-fix": 0.6631191058450104
+      }
+    },
+    {
+      "preset": "astral spinorgentics encrustcore nz+.milk",
+      "profile": "2160",
+      "mrt_fix_repeat_exact_fresh": true,
+      "identical_selected_frames_vs_raw_point": 8,
+      "max_abs_native_byte_difference": 0,
+      "image_mae_1182_rgb01_12s": {
+        "p1": 0.2323622703552246,
+        "raw-point": 0.2323622703552246,
+        "mrt-fix": 0.2323622703552246
+      },
+      "luma_ratio_vs_classic29_ref0_12s": {
+        "p1": 0.6448438690632029,
+        "raw-point": 0.6448438690632029,
+        "mrt-fix": 0.6448438690632029
+      }
+    }
+  ],
+  "analysis_sha256": "8c6928ff918c8b4e537d8e4f0eb3365994d8c18d3436181bad78797433da637a",
+  "manifest_sha256": "09fd5a9273d46dd5cdadc4979b0cf46d0074a9f87ec3d098fc8410a3c06acdab"
+}

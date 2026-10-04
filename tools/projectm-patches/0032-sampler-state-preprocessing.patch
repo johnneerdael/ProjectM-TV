@@ -1,0 +1,247 @@
+Subject: [PATCH] Keep preset shader positions aligned when removing sampler_state blocks
+
+PreprocessPresetShader removed "= sampler_state {...}" blocks only from its
+comment-stripped search copy, then used positions found in that shorter copy
+to replace shader_body and its braces in the original program. Any preset
+with such a block before shader_body (51 bundled presets) had the wrong part
+of its source replaced and fell back to the default shader. The blocks are
+now blanked in both strings with the same number of spaces, keeping line
+breaks, so positions stay aligned; their fields stay ignored, as before.
+
+GetReferencedSamplers now reads sampler and texsize names as identifiers, so
+"sampler sampler_noise_lq=sampler_state{...}" names "noise_lq" instead of
+including the rest of the line.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+index 72c07eba3..956d2e9df 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -14,6 +14,7 @@
+ #include <glm/mat4x4.hpp>
+ 
+ #include <algorithm>
++#include <cctype>
+ #include <list>
+ #include <mutex>
+ #include <regex>
+@@ -368,30 +369,40 @@ void MilkdropShader::PreprocessPresetShader(std::string& program)
+     // Find "sampler_state" overrides and remove them first, as they're not supported by GLSL.
+     // The logic isn't totally fool-proof, but should work in general.
+     // Use a comment-stripped copy for searching so commented-out sampler_state blocks are skipped.
+-    // StripComments preserves string length, so positions map 1:1 to the original.
++    // StripComments preserves string length, so positions map 1:1 to the original. Each
++    // "= sampler_state {...}" is blanked in both strings, keeping line breaks, so they stay aligned:
++    // removing it from the copy only made shader_body below replace the wrong part of the program.
++    // The block's fields are ignored; the sampler name's prefix selects filtering and wrapping.
+     std::string stripped = Utils::StripComments(program);
+     found = stripped.find("sampler_state");
+     while (found != std::string::npos)
+     {
+         // Now go backwards and find the assignment
+-        found = stripped.rfind('=', found);
+-        auto startPos = found;
++        auto startPos = stripped.rfind('=', found);
+ 
+         // Find closing brace and semicolon
+-        found = stripped.find('}', found);
+-        found = stripped.find(';', found);
+-
+-        if (found != std::string::npos)
++        auto endPos = stripped.find('}', found);
++        if (endPos != std::string::npos)
+         {
+-            stripped.replace(startPos, found - startPos, "");
++            endPos = stripped.find(';', endPos);
+         }
+-        else
++
++        if (startPos == std::string::npos || endPos == std::string::npos)
+         {
+-            // No closing brace and semicolon.
++            // No assignment, or no closing brace and semicolon.
+             break;
+         }
+ 
+-        found = stripped.find("sampler_state");
++        for (auto pos = startPos; pos < endPos; ++pos)
++        {
++            if (stripped.at(pos) != '\n')
++            {
++                stripped.at(pos) = ' ';
++                program.at(pos) = ' ';
++            }
++        }
++
++        found = stripped.find("sampler_state", endPos);
+     }
+ 
+     // replace shader_body with entry point function
+@@ -538,21 +549,26 @@ void MilkdropShader::GetReferencedSamplers(const std::string& program)
+     // Strip comments so that commented-out sampler/texsize declarations are not matched.
+     std::string const stripped = Utils::StripComments(program);
+ 
++    // Sampler and texsize names end with the identifier: "sampler_main=sampler_state{" names "main".
++    auto const identifierEnd = [&stripped](size_t pos) {
++        while (pos < stripped.length() && (std::isalnum(static_cast<unsigned char>(stripped.at(pos))) || stripped.at(pos) == '_'))
++        {
++            ++pos;
++        }
++        return pos;
++    };
++
+     // Search for sampler usage
+     auto found = stripped.find("sampler_", 0);
+     while (found != std::string::npos)
+     {
+         found += 8;
+-        size_t const end = stripped.find_first_of(" ;,\n\r)", found);
+-
+-        if (end != std::string::npos)
++        size_t const end = identifierEnd(found);
++        std::string const sampler = stripped.substr(found, end - found);
++        // Skip "sampler_state", as it's a reserved word and not a sampler.
++        if (!sampler.empty() && sampler != "state")
+         {
+-            std::string const sampler = stripped.substr(static_cast<int>(found), static_cast<int>(end - found));
+-            // Skip "sampler_state", as it's a reserved word and not a sampler.
+-            if (sampler != "state")
+-            {
+-                m_samplerNames.insert(sampler);
+-            }
++            m_samplerNames.insert(sampler);
+         }
+ 
+         found = stripped.find("sampler_", found);
+@@ -563,11 +579,10 @@ void MilkdropShader::GetReferencedSamplers(const std::string& program)
+     while (found != std::string::npos)
+     {
+         found += 8;
+-        size_t const end = stripped.find_first_of(" ;,.\n\r)", found);
+-
+-        if (end != std::string::npos)
++        size_t const end = identifierEnd(found);
++        std::string const sampler = stripped.substr(found, end - found);
++        if (!sampler.empty())
+         {
+-            std::string const sampler = stripped.substr(static_cast<int>(found), static_cast<int>(end - found));
+             m_samplerNames.insert(sampler);
+         }
+ 
+diff --git a/tests/libprojectM/MilkdropShaderCommentParsingTest.cpp b/tests/libprojectM/MilkdropShaderCommentParsingTest.cpp
+index 89f636f60..cc6cb1616 100644
+--- a/tests/libprojectM/MilkdropShaderCommentParsingTest.cpp
++++ b/tests/libprojectM/MilkdropShaderCommentParsingTest.cpp
+@@ -2,6 +2,7 @@
+ 
+ #include <Utils.hpp>
+ 
++#include <cctype>
+ #include <regex>
+ #include <set>
+ #include <string>
+@@ -16,7 +17,7 @@ using libprojectM::Utils::StripComments;
+ 
+ /**
+  * Mirrors MilkdropShader::GetReferencedSamplers() sampler_ extraction.
+- * (MilkdropShader.cpp ~lines 512-516)
++ * Names end with the identifier, so "sampler_main=sampler_state{" names "main".
+  */
+ static auto ExtractSamplerNames(const std::string& program) -> std::set<std::string>
+ {
+@@ -25,19 +26,22 @@ static auto ExtractSamplerNames(const std::string& program) -> std::set<std::str
+ 
+     std::string const stripped = StripComments(program);
+ 
++    auto const identifierEnd = [&stripped](size_t pos) {
++        while (pos < stripped.length() && (std::isalnum(static_cast<unsigned char>(stripped.at(pos))) || stripped.at(pos) == '_'))
++        {
++            ++pos;
++        }
++        return pos;
++    };
++
+     auto found = stripped.find("sampler_", 0);
+     while (found != std::string::npos)
+     {
+         found += 8;
+-        size_t const end = stripped.find_first_of(" ;,\n\r)", found);
+-        if (end != std::string::npos)
++        std::string const sampler = stripped.substr(found, identifierEnd(found) - found);
++        if (!sampler.empty() && sampler != "state")
+         {
+-            std::string const sampler = stripped.substr(
+-                static_cast<int>(found), static_cast<int>(end - found));
+-            if (sampler != "state")
+-            {
+-                samplerNames.insert(sampler);
+-            }
++            samplerNames.insert(sampler);
+         }
+         found = stripped.find("sampler_", found);
+     }
+@@ -46,11 +50,9 @@ static auto ExtractSamplerNames(const std::string& program) -> std::set<std::str
+     while (found != std::string::npos)
+     {
+         found += 8;
+-        size_t const end = stripped.find_first_of(" ;,.\n\r)", found);
+-        if (end != std::string::npos)
++        std::string const sampler = stripped.substr(found, identifierEnd(found) - found);
++        if (!sampler.empty())
+         {
+-            std::string const sampler = stripped.substr(
+-                static_cast<int>(found), static_cast<int>(end - found));
+             samplerNames.insert(sampler);
+         }
+         found = stripped.find("texsize_", found);
+@@ -443,6 +445,13 @@ TEST(SamplerParsing, SkipsSamplerState)
+         << "sampler_state is a reserved word and should be skipped";
+ }
+ 
++TEST(SamplerParsing, UnspacedSamplerStateAssignmentKeepsTheName)
++{
++    auto names = ExtractSamplerNames("sampler sampler_noise_lq=sampler_state{AddressU=WRAP;};\n"
++                                     "float4 texsize_noise_lq;\n");
++    EXPECT_EQ(names, (std::set<std::string>{"main", "noise_lq"}));
++}
++
+ TEST(SamplerParsing, CommentedSamplerStateNotExtracted)
+ {
+     auto names = ExtractSamplerNames("// sampler_state { Filter = LINEAR; };\n");
+diff --git a/tests/libprojectM/PresetShaderTranslationTest.cpp b/tests/libprojectM/PresetShaderTranslationTest.cpp
+index f6ac584bd..2aec93a00 100644
+--- a/tests/libprojectM/PresetShaderTranslationTest.cpp
++++ b/tests/libprojectM/PresetShaderTranslationTest.cpp
+@@ -414,5 +414,32 @@ TEST_F(PresetShaderRenderTest, FlatLocalArrayInitializerKeepsTheAuthoredShader)
+     EXPECT_NEAR(RenderRed("shader_body { float2 a[2] = {1, 0.5, 0.25, 0}; ret = a[1].x; }"), 64, 2);
+ }
+ 
++TEST_F(PresetShaderRenderTest, SamplerStateBlockBeforeShaderBodyKeepsTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("sampler sampler_main = sampler_state {\n"
++                          "    AddressU = CLAMP;\n"
++                          "    AddressV = WRAP;\n"
++                          "};\n"
++                          "shader_body { ret = .8; }"),
++                204, 2);
++}
++
++TEST_F(PresetShaderRenderTest, SeveralSamplerStateBlocksKeepTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("sampler sampler_noise_lq = sampler_state {\n"
++                          "    AddressU = WRAP;\n"
++                          "};\n"
++                          "sampler3D sampler_noisevol_lq = sampler_state { AddressU = WRAP; };\n"
++                          "shader_body { ret = 0.25 + 0 * (tex2D(sampler_noise_lq, uv).x +\n"
++                          "    tex3D(sampler_noisevol_lq, float3(uv, 0)).x); }"),
++                64, 2);
++}
++
++TEST_F(PresetShaderRenderTest, UnspacedSamplerStateAssignmentKeepsTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("sampler sampler_noise_lq=sampler_state{AddressU=WRAP;AddressV=WRAP;};\n"
++                          "shader_body { ret = 0.25 + 0 * tex2D(sampler_noise_lq, uv).x; }"),
++                64, 2);
++}
+ 
+ } // namespace

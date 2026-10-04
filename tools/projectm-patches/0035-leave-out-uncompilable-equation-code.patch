@@ -1,0 +1,532 @@
+Subject: [PATCH] Leave out equation code that doesn't compile, like MilkDrop
+
+Local fix against projectM 4.1.7 plus patches 0001–0034. A compile error in any
+equation block aborted preset initialization, so the whole preset failed to load.
+MilkDrop's CState::RecompileExpressions shows a warning for that block and runs
+the rest of the preset: failed init code leaves the q variables (preset init) or
+t variables (custom wave/shape init) at zero, and failed per-frame, per-pixel or
+per-point code is not run. Do the same, and report each left-out block through
+Preset::InitializationWarnings(), ProjectM::PresetInitializationWarningEvent()
+and the new C callback projectm_set_preset_initialization_warning_event_callback().
+Preset parse errors still fail the load. Tests cover every
+block, disabled components and presets without problems.
+---
+diff --git a/src/api/include/projectM-4/callbacks.h b/src/api/include/projectM-4/callbacks.h
+index 4a55c872a..a0fb1ab2a 100644
+--- a/src/api/include/projectM-4/callbacks.h
++++ b/src/api/include/projectM-4/callbacks.h
+@@ -54,6 +54,20 @@ typedef void (*projectm_preset_switch_requested_event)(bool is_hard_cut, void* u
+ typedef void (*projectm_preset_switch_failed_event)(const char* preset_filename,
+                                                     const char* message, void* user_data);
+ 
++/**
++ * @brief Callback function that is executed once per problem in a preset that loaded anyway.
++ *
++ * Like MilkDrop, projectM leaves out preset equation code that doesn't compile and uses the rest of
++ * the preset. The message names the code block and the compiler error. The message and filename
++ * pointers are only valid inside the callback.
++ *
++ * @param preset_filename The filename of the preset, empty if it was loaded from data.
++ * @param message The problem.
++ * @param user_data A user-defined data pointer that was provided when registering the callback.
++ */
++typedef void (*projectm_preset_initialization_warning_event)(const char* preset_filename,
++                                                             const char* message, void* user_data);
++
+ 
+ /**
+  * @brief Sets a callback function that will be called when a preset change is requested.
+@@ -83,6 +97,19 @@ PROJECTM_EXPORT void projectm_set_preset_switch_failed_event_callback(projectm_h
+                                                                       projectm_preset_switch_failed_event callback,
+                                                                       void* user_data);
+ 
++/**
++ * @brief Sets a callback function that will be called for each problem in a preset that loaded anyway.
++ *
++ * Only one callback can be registered per projectM instance. To remove the callback, use NULL.
++ *
++ * @param instance The projectM instance handle.
++ * @param callback A pointer to the callback function.
++ * @param user_data A pointer to any data that will be sent back in the callback.
++ */
++PROJECTM_EXPORT void projectm_set_preset_initialization_warning_event_callback(projectm_handle instance,
++                                                                               projectm_preset_initialization_warning_event callback,
++                                                                               void* user_data);
++
+ #ifdef __cplusplus
+ } // extern "C"
+ #endif
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+index 84f786fbd..6c602733e 100644
+--- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+@@ -1,5 +1,6 @@
+ #include "CustomShape.hpp"
+ 
++#include "MilkdropPresetExceptions.hpp"
+ #include "PresetFileParser.hpp"
+ 
+ #include <Renderer/TextureManager.hpp>
+@@ -102,17 +103,34 @@ void CustomShape::Initialize(PresetFileParser& parsedFile, int index)
+     m_image = parsedFile.GetString(shapecodePrefix + "image", "");
+ }
+ 
+-void CustomShape::CompileCodeAndRunInitExpressions()
++void CustomShape::CompileCodeAndRunInitExpressions(std::vector<std::string>& warnings)
+ {
+     m_perFrameContext.LoadStateVariables(m_presetState, *this, 0);
+-    m_perFrameContext.EvaluateInitCode(m_presetState.customShapeInitCode[m_index], *this);
++    bool initCompiled{true};
++    try
++    {
++        m_perFrameContext.EvaluateInitCode(m_presetState.customShapeInitCode[m_index], *this);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        initCompiled = false;
++        warnings.emplace_back(error.what());
++    }
+ 
++    // MilkDrop starts the t variables at zero if the init code fails.
+     for (int t = 0; t < TVarCount; t++)
+     {
+-        m_tValuesAfterInitCode[t] = *m_perFrameContext.t_vars[t];
++        m_tValuesAfterInitCode[t] = initCompiled ? *m_perFrameContext.t_vars[t] : 0.0;
+     }
+ 
+-    m_perFrameContext.CompilePerFrameCode(m_presetState.customShapePerFrameCode[m_index], *this);
++    try
++    {
++        m_perFrameContext.CompilePerFrameCode(m_presetState.customShapePerFrameCode[m_index], *this);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        warnings.emplace_back(error.what());
++    }
+ }
+ 
+ void CustomShape::Draw()
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+index 9f82851aa..cb3fd1863 100644
+--- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+@@ -10,6 +10,7 @@
+ 
+ #include <projectm-eval.h>
+ 
++#include <string>
+ #include <vector>
+ 
+ namespace libprojectM {
+@@ -41,9 +42,10 @@ public:
+ 
+     /**
+      * @brief Compiles all code blocks and runs the init expression.
+-     * @throws MilkdropCompileException Thrown if one of the code blocks couldn't be compiled.
++     * A code block that doesn't compile is left out and its message added to warnings.
++     * @param warnings Receives one message per code block that couldn't be compiled.
+      */
+-    void CompileCodeAndRunInitExpressions();
++    void CompileCodeAndRunInitExpressions(std::vector<std::string>& warnings);
+ 
+     /**
+      * @brief Renders the shape.
+diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+index 90def82c0..4f03d55a0 100644
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+@@ -2,6 +2,7 @@
+ 
+ #include "LineGeometry.hpp"
+ #include "LineRenderer.hpp"
++#include "MilkdropPresetExceptions.hpp"
+ #include "PerFrameContext.hpp"
+ #include "PresetFileParser.hpp"
+ 
+@@ -61,18 +62,42 @@ void CustomWaveform::Initialize(PresetFileParser& parsedFile, int index)
+ 
+ }
+ 
+-void CustomWaveform::CompileCodeAndRunInitExpressions(const PerFrameContext& presetPerFrameContext)
++void CustomWaveform::CompileCodeAndRunInitExpressions(const PerFrameContext& presetPerFrameContext, std::vector<std::string>& warnings)
+ {
+     m_perFrameContext.LoadStateVariables(m_presetState, presetPerFrameContext, *this);
+-    m_perFrameContext.EvaluateInitCode(m_presetState.customWaveInitCode[m_index], *this);
++    bool initCompiled{true};
++    try
++    {
++        m_perFrameContext.EvaluateInitCode(m_presetState.customWaveInitCode[m_index], *this);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        initCompiled = false;
++        warnings.emplace_back(error.what());
++    }
+ 
++    // MilkDrop starts the t variables at zero if the init code fails.
+     for (int t = 0; t < TVarCount; t++)
+     {
+-        m_tValuesAfterInitCode[t] = *m_perFrameContext.t_vars[t];
++        m_tValuesAfterInitCode[t] = initCompiled ? *m_perFrameContext.t_vars[t] : 0.0;
+     }
+ 
+-    m_perFrameContext.CompilePerFrameCode(m_presetState.customWavePerFrameCode[m_index], *this);
+-    m_perPointContext.CompilePerPointCode(m_presetState.customWavePerPointCode[m_index], *this);
++    try
++    {
++        m_perFrameContext.CompilePerFrameCode(m_presetState.customWavePerFrameCode[m_index], *this);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        warnings.emplace_back(error.what());
++    }
++    try
++    {
++        m_perPointContext.CompilePerPointCode(m_presetState.customWavePerPointCode[m_index], *this);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        warnings.emplace_back(error.what());
++    }
+ }
+ 
+ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
+diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.hpp b/src/libprojectM/MilkdropPreset/CustomWaveform.hpp
+index eb287f967..c1e72af73 100644
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.hpp
+@@ -6,6 +6,7 @@
+ 
+ #include <Renderer/RenderItem.hpp>
+ 
++#include <string>
+ #include <vector>
+ 
+ namespace libprojectM {
+@@ -37,10 +38,11 @@ public:
+ 
+     /**
+      * @brief Compiles all code blocks and runs the init expression.
+-     * @throws MilkdropCompileException Thrown if one of the code blocks couldn't be compiled.
++     * A code block that doesn't compile is left out and its message added to warnings.
+      * @param presetPerFrameContext The per-frame context to retrieve the init Q vars from.
++     * @param warnings Receives one message per code block that couldn't be compiled.
+      */
+-    void CompileCodeAndRunInitExpressions(const PerFrameContext& presetPerFrameContext);
++    void CompileCodeAndRunInitExpressions(const PerFrameContext& presetPerFrameContext, std::vector<std::string>& warnings);
+ 
+     /**
+      * @brief Renders the waveform.
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+index ec3dfc97d..b8f627bbe 100755
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -347,27 +347,64 @@ void MilkdropPreset::InitializePreset(PresetFileParser& parsedFile)
+ 
+ void MilkdropPreset::CompileCodeAndRunInitExpressions()
+ {
++    // Like MilkDrop (CState::RecompileExpressions), code that does not compile is reported and left
++    // out; the rest of the preset still runs.
++    m_initializationWarnings.clear();
++
+     // Per-frame init and code
+     m_perFrameContext.LoadStateVariables(m_state);
+-    m_perFrameContext.EvaluateInitCode(m_state);
+-    m_perFrameContext.CompilePerFrameCode(m_state.perFrameCode);
++    try
++    {
++        m_perFrameContext.EvaluateInitCode(m_state);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        // MilkDrop starts the q variables at zero if the init code fails.
++        for (int q = 0; q < QVarCount; q++)
++        {
++            m_perFrameContext.q_values_after_init_code[q] = 0.0;
++            *m_perFrameContext.q_vars[q] = 0.0;
++            m_state.frameQVariables[q] = 0.0;
++        }
++        m_initializationWarnings.emplace_back(error.what());
++    }
++    try
++    {
++        m_perFrameContext.CompilePerFrameCode(m_state.perFrameCode);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        m_initializationWarnings.emplace_back(error.what());
++    }
+ 
+     // Per-vertex code
+-    m_perPixelContext.CompilePerPixelCode(m_state.perPixelCode);
++    try
++    {
++        m_perPixelContext.CompilePerPixelCode(m_state.perPixelCode);
++    }
++    catch (const MilkdropCompileException& error)
++    {
++        m_initializationWarnings.emplace_back(error.what());
++    }
+ 
+     for (int i = 0; i < CustomWaveformCount; i++)
+     {
+         auto& wave = m_customWaveforms[i];
+-        wave->CompileCodeAndRunInitExpressions(m_perFrameContext);
++        wave->CompileCodeAndRunInitExpressions(m_perFrameContext, m_initializationWarnings);
+     }
+ 
+     for (int i = 0; i < CustomShapeCount; i++)
+     {
+         auto& shape = m_customShapes[i];
+-        shape->CompileCodeAndRunInitExpressions();
++        shape->CompileCodeAndRunInitExpressions(m_initializationWarnings);
+     }
+ }
+ 
++auto MilkdropPreset::InitializationWarnings() const -> std::vector<std::string>
++{
++    return m_initializationWarnings;
++}
++
+ void MilkdropPreset::LoadShaderCode()
+ {
+     m_perPixelMesh.LoadWarpShader(m_state);
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+index b84b27380..7c0ac0615 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+@@ -43,6 +43,7 @@
+ #include <map>
+ #include <memory>
+ #include <string>
++#include <vector>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -88,6 +89,8 @@ public:
+ 
+     auto SetOutputTarget(bool direct, uint32_t targetFramebuffer) -> bool override;
+ 
++    auto InitializationWarnings() const -> std::vector<std::string> override;
++
+ private:
+     void PerFrameUpdate();
+ 
+@@ -130,6 +133,8 @@ private:
+ 
+     FinalComposite m_finalComposite; //!< Final composite shader or filters.
+ 
++    std::vector<std::string> m_initializationWarnings; //!< Equation code left out by the last Initialize().
++
+     bool m_isFirstFrame{true}; //!< Controls drawing the motion vectors starting with the second frame.
+     bool m_flipHoldsPreviousFrame{false}; //!< The flip texture still holds the y-flipped previous frame.
+     bool m_warpSamplesBlur{true};         //!< The warp shader may read the blur textures.
+diff --git a/src/libprojectM/Preset.hpp b/src/libprojectM/Preset.hpp
+index 1ffbad110..ca5c90263 100644
+--- a/src/libprojectM/Preset.hpp
++++ b/src/libprojectM/Preset.hpp
+@@ -7,6 +7,7 @@
+ 
+ #include <memory>
+ #include <string>
++#include <vector>
+ 
+ namespace libprojectM {
+ 
+@@ -61,6 +62,16 @@ public:
+         return false;
+     }
+ 
++    /**
++     * @brief Returns the problems found by the last Initialize() call that did not stop the preset
++     * from loading, e.g. equation code that was left out because it does not compile.
++     * @return One message per problem; empty if there were none.
++     */
++    virtual auto InitializationWarnings() const -> std::vector<std::string>
++    {
++        return {};
++    }
++
+     inline void SetFilename(const std::string& filename)
+     {
+         m_filename = filename;
+diff --git a/src/libprojectM/ProjectM.cpp b/src/libprojectM/ProjectM.cpp
+index 63eebc6d0..9fee744d6 100644
+--- a/src/libprojectM/ProjectM.cpp
++++ b/src/libprojectM/ProjectM.cpp
+@@ -54,6 +54,10 @@ void ProjectM::PresetSwitchFailedEvent(const std::string&, const std::string&) c
+ {
+ }
+ 
++void ProjectM::PresetInitializationWarningEvent(const std::string&, const std::string&) const
++{
++}
++
+ void ProjectM::LoadPresetFile(const std::string& presetFilename, bool smoothTransition)
+ {
+     try
+@@ -264,6 +268,10 @@ void ProjectM::StartPresetTransition(std::unique_ptr<Preset>&& preset, bool hard
+     }
+ 
+     preset->Initialize(GetRenderContext());
++    for (const auto& warning : preset->InitializationWarnings())
++    {
++        PresetInitializationWarningEvent(preset->Filename(), warning);
++    }
+ 
+     // If already in a transition, force immediate completion.
+     if (m_transitioningPreset != nullptr)
+diff --git a/src/libprojectM/ProjectM.hpp b/src/libprojectM/ProjectM.hpp
+index 4ce309297..0c5fcfc9f 100644
+--- a/src/libprojectM/ProjectM.hpp
++++ b/src/libprojectM/ProjectM.hpp
+@@ -68,6 +68,14 @@ public:
+      */
+     virtual void PresetSwitchFailedEvent(const std::string& presetFilename, const std::string& message) const;
+ 
++    /**
++     * @brief Callback for notifying the integrating app that a loaded preset left out code it couldn't compile.
++     * Called once per problem after the preset has been initialized; the preset is used.
++     * @param presetFilename The filename of the preset. Empty if loaded from a stream.
++     * @param message The problem, e.g. which code block didn't compile and why.
++     */
++    virtual void PresetInitializationWarningEvent(const std::string& presetFilename, const std::string& message) const;
++
+     /**
+      * @brief Loads the given preset file and performs a smooth or immediate transition.
+      * @param presetFilename The preset filename to load.
+diff --git a/src/libprojectM/ProjectMCWrapper.cpp b/src/libprojectM/ProjectMCWrapper.cpp
+index 7322886b0..e725ba1bc 100644
+--- a/src/libprojectM/ProjectMCWrapper.cpp
++++ b/src/libprojectM/ProjectMCWrapper.cpp
+@@ -29,6 +29,16 @@ void projectMWrapper::PresetSwitchFailedEvent(const std::string& presetFilename,
+     }
+ }
+ 
++void projectMWrapper::PresetInitializationWarningEvent(const std::string& presetFilename,
++                                                       const std::string& message) const
++{
++    if (m_presetInitializationWarningEventCallback)
++    {
++        m_presetInitializationWarningEventCallback(presetFilename.c_str(),
++                                                   message.c_str(), m_presetInitializationWarningEventUserData);
++    }
++}
++
+ } // namespace libprojectM
+ 
+ libprojectM::projectMWrapper* handle_to_instance(projectm_handle instance)
+@@ -113,6 +123,15 @@ void projectm_set_preset_switch_failed_event_callback(projectm_handle instance,
+     projectMInstance->m_presetSwitchFailedEventUserData = user_data;
+ }
+ 
++void projectm_set_preset_initialization_warning_event_callback(projectm_handle instance,
++                                                               projectm_preset_initialization_warning_event callback,
++                                                               void* user_data)
++{
++    auto projectMInstance = handle_to_instance(instance);
++    projectMInstance->m_presetInitializationWarningEventCallback = callback;
++    projectMInstance->m_presetInitializationWarningEventUserData = user_data;
++}
++
+ void projectm_set_texture_search_paths(projectm_handle instance,
+                                        const char** texture_search_paths,
+                                        size_t count)
+diff --git a/src/libprojectM/ProjectMCWrapper.hpp b/src/libprojectM/ProjectMCWrapper.hpp
+index 38e4cc9af..2f020a760 100644
+--- a/src/libprojectM/ProjectMCWrapper.hpp
++++ b/src/libprojectM/ProjectMCWrapper.hpp
+@@ -33,12 +33,17 @@ public:
+     void PresetSwitchFailedEvent(const std::string& presetFilename,
+                                  const std::string& failureMessage) const override;
+     void PresetSwitchRequestedEvent(bool isHardCut) const override;
++    void PresetInitializationWarningEvent(const std::string& presetFilename,
++                                          const std::string& message) const override;
+ 
+     projectm_preset_switch_failed_event m_presetSwitchFailedEventCallback{nullptr};
+     void* m_presetSwitchFailedEventUserData{nullptr};
+ 
+     projectm_preset_switch_requested_event m_presetSwitchRequestedEventCallback{nullptr};
+     void* m_presetSwitchRequestedEventUserData{nullptr};
++
++    projectm_preset_initialization_warning_event m_presetInitializationWarningEventCallback{nullptr};
++    void* m_presetInitializationWarningEventUserData{nullptr};
+ };
+ 
+ } // namespace libprojectM
+diff --git a/tests/libprojectM/MilkdropPresetExceptionTest.cpp b/tests/libprojectM/MilkdropPresetExceptionTest.cpp
+index d64dc5103..f261a9376 100644
+--- a/tests/libprojectM/MilkdropPresetExceptionTest.cpp
++++ b/tests/libprojectM/MilkdropPresetExceptionTest.cpp
+@@ -5,6 +5,7 @@
+ #include <exception>
+ #include <sstream>
+ #include <string>
++#include <vector>
+ #ifdef __APPLE__
+ #include <OpenGL/OpenGL.h>
+ #endif
+@@ -33,6 +34,10 @@ public:
+     void PresetSwitchFailedEvent(const std::string& file, const std::string& reason) const override {
+         filename = file; failure = reason; ++failures;
+     }
++    mutable std::vector<std::string> warnings;
++    void PresetInitializationWarningEvent(const std::string&, const std::string& message) const override {
++        warnings.push_back(message);
++    }
+ };
+ class MilkdropPresetFailureEventTest : public ::testing::Test {
+ protected:
+@@ -74,14 +79,48 @@ TEST_F(MilkdropPresetFailureEventTest, InvalidPresetDataReportsParseReason) {
+     EXPECT_TRUE(engine.filename.empty());
+     EXPECT_EQ(engine.failure, "Could not parse preset data.");
+ }
+-TEST_F(MilkdropPresetFailureEventTest, InvalidPerFrameExpressionReportsCompileReason) {
++TEST_F(MilkdropPresetFailureEventTest, InvalidPerFrameExpressionIsLeftOutWithItsReason) {
++    // Like MilkDrop, the preset loads without the code block that doesn't compile.
+     FailureEventProjectM engine;
+     engine.SetWindowSize(128,96);
+     std::istringstream data("[preset00]\nfDecay=1\nper_frame_1=zoom=(;\n");
+     engine.LoadPresetData(data, false);
+-    EXPECT_EQ(engine.failures, 1);
+-    EXPECT_TRUE(engine.filename.empty());
+-    EXPECT_EQ(engine.failure, "Could not compile per-frame code: syntax error, unexpected ';' (line 1, column 6)");
++    EXPECT_EQ(engine.failures, 0) << engine.failure;
++    ASSERT_EQ(engine.warnings.size(), 1u);
++    EXPECT_EQ(engine.warnings[0], "Could not compile per-frame code: syntax error, unexpected ';' (line 1, column 6)");
++}
++TEST_F(MilkdropPresetFailureEventTest, EveryCodeBlockIsLeftOutSeparately) {
++    const std::pair<const char*, const char*> cases[] = {
++        {"per_frame_init_1=q1=(;\n", "Could not compile per-frame init code: "},
++        {"per_pixel_1=zoom=zoom*sin*2;\n", "Could not compile per-pixel code: "},
++        {"wavecode_0_enabled=1\nwave_0_init1=t1=;\n", "Could not compile custom wave 0 per-frame init code: "},
++        {"wavecode_0_enabled=1\nwave_0_per_frame1=r=(;\n", "Could not compile custom wave 0 per-frame code: "},
++        {"wavecode_0_enabled=1\nwave_0_per_point1=x=0.99l;\n", "Could not compile custom wave 0 per-point code: "},
++        {"shapecode_0_enabled=1\nshape_0_init1=t1=(;\n", "Could not compile custom shape 0 per-frame init code: "},
++        {"shapecode_1_enabled=1\nshape_1_per_frame1=shpt =\n", "Could not compile custom shape 1 per-frame code: "},
++        // Disabled components are compiled too, as in MilkDrop.
++        {"wavecode_2_enabled=0\nwave_2_per_frame1=r=(;\n", "Could not compile custom wave 2 per-frame code: "},
++        {"shapecode_3_enabled=0\nshape_3_per_frame1=rad=(;\n", "Could not compile custom shape 3 per-frame code: "},
++    };
++    for (const auto& [records, reason] : cases) {
++        FailureEventProjectM engine;
++        engine.SetWindowSize(128,96);
++        std::istringstream data(std::string("[preset00]\nfDecay=1\nper_frame_1=zoom=1.01;\n") + records);
++        engine.LoadPresetData(data, false);
++        EXPECT_EQ(engine.failures, 0) << records << engine.failure;
++        ASSERT_EQ(engine.warnings.size(), 1u) << records;
++        EXPECT_EQ(engine.warnings[0].rfind(reason, 0), 0u) << engine.warnings[0];
++        EXPECT_NE(engine.warnings[0].find(" (line "), std::string::npos) << engine.warnings[0];
++    }
++}
++TEST_F(MilkdropPresetFailureEventTest, ValidPresetsHaveNoWarnings) {
++    FailureEventProjectM engine;
++    engine.SetWindowSize(128,96);
++    std::istringstream data("[preset00]\nfDecay=1\nper_frame_init_1=q1=1;\nper_frame_1=zoom=1+q1*0.01;\n"
++                            "wavecode_0_enabled=1\nwave_0_per_point1=x=sample;\n");
++    engine.LoadPresetData(data, false);
++    EXPECT_EQ(engine.failures, 0) << engine.failure;
++    EXPECT_TRUE(engine.warnings.empty());
+ }
+ TEST_F(MilkdropPresetFailureEventTest, MissingPresetFileReportsPathAndParseReason) {
+     FailureEventProjectM engine;
