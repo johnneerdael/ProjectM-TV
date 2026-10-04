@@ -1,0 +1,97 @@
+{
+  "scope": "Completed private Android build intermediates only; all APK hashes preserved; no corpus, emulator, source evidence or git worktrees removed",
+  "freed_bytes": 2513288473,
+  "metadata_archive_sha256": "0f870cd6a770bcb467f3bbdc929386b2f5b176905413dc242c317b5a12003afb",
+  "metadata_archive_bytes": 1683452,
+  "directories": [
+    {
+      "directory": "build/follow-ups/core-corpus/candidate-4270934706fc-0b43830171d9/repo/core/.cxx",
+      "generated_files": 370,
+      "bytes": 94331864
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/candidate-4270934706fc-0b43830171d9/repo/core/build/intermediates",
+      "generated_files": 9751,
+      "bytes": 207306864
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/candidate-4270934706fc-0b43830171d9/repo/corpus-app/build/intermediates",
+      "generated_files": 19438,
+      "bytes": 201415877
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline-a59b4e53f43e-6db2bfc9da35/repo/core/.cxx",
+      "generated_files": 370,
+      "bytes": 94061370
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline-a59b4e53f43e-6db2bfc9da35/repo/core/build/intermediates",
+      "generated_files": 9751,
+      "bytes": 207074892
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline-a59b4e53f43e-6db2bfc9da35/repo/corpus-app/build/intermediates",
+      "generated_files": 19454,
+      "bytes": 201330189
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline/repo/core/.cxx",
+      "generated_files": 370,
+      "bytes": 93772615
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline/repo/core/build/intermediates",
+      "generated_files": 9751,
+      "bytes": 206821236
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline/repo/corpus-app/build/intermediates",
+      "generated_files": 19454,
+      "bytes": 201076534
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline-a59b4e53f43e-0b43830171d9/repo/core/.cxx",
+      "generated_files": 370,
+      "bytes": 94061378
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline-a59b4e53f43e-0b43830171d9/repo/core/build/intermediates",
+      "generated_files": 9751,
+      "bytes": 207074892
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/baseline-a59b4e53f43e-0b43830171d9/repo/corpus-app/build/intermediates",
+      "generated_files": 19438,
+      "bytes": 201327821
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/candidate-28-build/candidate-eca2d6670419-0b43830171d9/repo/core/.cxx",
+      "generated_files": 370,
+      "bytes": 94543717
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/candidate-28-build/candidate-eca2d6670419-0b43830171d9/repo/core/build/intermediates",
+      "generated_files": 9751,
+      "bytes": 207489689
+    },
+    {
+      "directory": "build/follow-ups/core-corpus/candidate-28-build/candidate-eca2d6670419-0b43830171d9/repo/corpus-app/build/intermediates",
+      "generated_files": 19438,
+      "bytes": 201599535
+    }
+  ],
+  "protected_apks": [
+    {
+      "path": "build/follow-ups/core-corpus/baseline-a59b4e53f43e-0b43830171d9/baseline-core-corpus.apk",
+      "sha256": "df7d279f78f47ae6cd092d65be0f63270a4f7dc8de1a938f179c63a77eff08b9"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/candidate-4270934706fc-0b43830171d9/candidate-core-corpus.apk",
+      "sha256": "6fea44afaf4c8cf9ff3821ad709bbd104ba5435850912eef7a6866279ae24ffb"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/candidate-28-build/candidate-eca2d6670419-0b43830171d9/candidate-core-corpus.apk",
+      "sha256": "ca8f3c1ae720fb18393dc611a8e569d388cfad2e6a36791ffed04f70e7bc7450"
+    }
+  ]
+}
