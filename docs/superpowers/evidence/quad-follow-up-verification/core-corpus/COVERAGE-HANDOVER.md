@@ -63,8 +63,8 @@ deterministic schedule for their independently keyed measurement window.
 
 The capture-provenance fix has six RED/GREEN mutation cases and a short-pilot
 control; the full host-tool suite passes 118 tests. A partial baseline snapshot
-checked 8,816 available terminal producer records with zero identity/schedule
-mismatches. This check does not replace the final complete coverage/frame audit.
+checked 8,816 terminal records (8,815 producer results and one explicit
+host-only failure) with zero identity/schedule mismatches. This check does not replace the final complete coverage/frame audit.
 
 The current snapshot includes `capture-provenance-validation.inputs.json.gz`: a
 frozen job list with exact row, packet and producer-result file hashes, a list
