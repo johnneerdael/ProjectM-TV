@@ -1,6 +1,6 @@
 {
   "scope": "Source parsing/lowering only; no full visual prediction credit",
-  "base_main_commit": "f8d7dd58c7e29875465aed5ea8928d18de52701d",
+  "base_main_commit": "8b70620339018cfaf5ac05acdb4ea8104dc2eb59",
   "selector_origin_commit": "c8b1279645e75584bda92a9aaa5b89ceed8056b5",
   "global_input_policy": "projectmtv-implicit-extern-zero-v1",
   "authored_source_unchanged": true,
@@ -50,12 +50,13 @@
   "limitations": [
     "Core policy preserves external-input classification and uses GLES link-time defaults; arbitrary D3D9 register history is not reproduced",
     "Full-preset numerical domains, TV performance and appearance equivalence are not established by source lowering",
-    "Current descriptor controls reuse exact requests but are translated and compiled against the new engine"
+    "Current descriptor controls reuse exact requests but are translated and compiled against the new engine",
+    "Recorded initial Android screenshots use the earlier feature artifact; the final integrated39test revision matches those9controls byte-for-byte. Both artifact identities are preserved."
   ],
   "adapter_identity": {
     "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
-    "parent_commit": "f8d7dd58c7e29875465aed5ea8928d18de52701d",
-    "patches_sha256": "6b5a6058721de62f4c289be8517aa6f9b3e67705fd9228da832b0c39da44be9e",
+    "parent_commit": "4ee082d6340b951f3f11d9a05cf12f2882ac2532",
+    "patches_sha256": "4c14c39740da78f9e1a7c815d362a570590a61108826797864b21653e4aec00d",
     "patches": [
       {
         "path": "0001-plasma-transition-float-overflow-shield.patch",
@@ -202,24 +203,47 @@
         "sha256": "addd1f64eff60da530a7aa764b3b6af9253dcd64cc3c4361fe8860e2c25864a9"
       },
       {
-        "path": "0037-hlslparser-implicit-global-inputs.patch",
-        "sha256": "aed2ae366d37c307d72f4b58dd3b2ed96a0b149d52d0d76c853462ea1e02b4f0"
+        "path": "0037-random-texture-alias-bindings.patch",
+        "sha256": "92905a34b19ada2128d3c4fd7e603bd6c52acf9f22b27f4678aadf38d4c22652"
+      },
+      {
+        "path": "0038-hlslparser-implicit-global-inputs.patch",
+        "sha256": "e2f902214bea04657c92c0572af0e47d32cc71b0d3f64437deb327dbb058e907"
       }
     ]
   },
   "validation": {
-    "focused_source_tests": "28 passed",
-    "native_driver_regression_groups": "7 groups passed (host OpenGL), ASan/UBSan",
-    "historical_full_analyzer_suite": "750 passed and35subtests with historical adapters, before generated-scratch follow-up",
-    "android_core_and_jvm": "core assembleDebug and app/core testDebugUnitTest pass",
-    "release_tooling": "74tests pass"
+    "focused_source_tests": "39 passed",
+    "native_driver_regression_groups": "13groups pass on the integrated host driver with ASan/UBSan",
+    "historical_full_analyzer_suite": "750tests and35subtests pass with preserved historical adapters; supplementary scope",
+    "android_core_and_jvm": "core/app assembleDebug and testDebugUnitTest pass after a clean complete38patch application",
+    "release_tooling": "74tests pass",
+    "final_integrated_control_retest": "9controls byte-identical to recorded feature outputs across60frames"
   },
   "current_debug_artifact": {
-    "AAR": "core/build/outputs/aar/core-debug.aar",
-    "AAR_sha256": "f6c24ed1fd2307628065d68d6a50d64ed7f52f4d4177036d4a0eeac5a476e212",
-    "native_libraries": {
-      "jni/arm64-v8a/libprojectmtv.so": "791442ea67a66928579cf9bf49647e4b22361197c25271d6b65cf7333f2f095c",
-      "jni/armeabi-v7a/libprojectmtv.so": "448bdec852c9f40ca00d5cd0673034e40d8d1a017c93657857bb782027f3fe65"
-    }
+    "head_commit": "4ee082d6340b951f3f11d9a05cf12f2882ac2532",
+    "aar_sha256": "b5d7f16cd314f3bc87b5c9405ad8f0aa0893e13fd617ad867bec2082f00f0669",
+    "arm64_sha256": "aa131f4065b0a801f6c9d5ad8d37ac681f7c2393f06d4fa93d5a3ca6d7993330"
+  },
+  "tested_source_commit": "4ee082d6340b951f3f11d9a05cf12f2882ac2532",
+  "adapter_binaries": {
+    "milk-native-reader": "1dccc1e84666bd7c592078391beccd5b21cbb249accb4ed483e7b7045ea3ead3",
+    "milk-shader-translate": "cb88575ce1260d5d311c5fea94e72f9e1ba63a4ad7623adec72a9bf505dd43c4"
+  },
+  "series_verification": {
+    "patch_count": 38,
+    "definition": "patches_sha256 is SHA256 of the concatenation of sorted patch bytes",
+    "tree_scope": "upstream4.1.7 plus all committed patches0001-0038; base8b706203 includes independently merged parser and random-binding fixes",
+    "random_binding_patch": "0037-random-texture-alias-bindings.patch",
+    "initialization_patch": "0038-hlslparser-implicit-global-inputs.patch"
+  },
+  "current_subset_audit": {
+    "reader_sha256": "1dccc1e84666bd7c592078391beccd5b21cbb249accb4ed483e7b7045ea3ead3",
+    "coverage_sha256": "8d3eab693b37af395502df53e2560d222800a48abf296f57103235b1a8c25f0b",
+    "compatibility_sha256": "012d98a590e9844a5cffd16333363a09a368dabd9c92eff10819eaceab6808e7",
+    "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+    "presets": 315,
+    "remaining_gaps": 3,
+    "scope": "Fresh38patchreader and translator; explicit descriptor contexts; no rendered inputs or visual credit"
   }
 }
