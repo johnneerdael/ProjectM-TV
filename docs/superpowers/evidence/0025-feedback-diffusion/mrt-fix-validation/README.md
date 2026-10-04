@@ -117,8 +117,11 @@ copying, it checks:
 
 - the two scripts' hashes against `results.json`;
 - every input `run.py` reads in that `build/` tree:
-  - the shared provider code the adapters execute (`shared-core-corpus/run.py`, `build.py` and
-    `tools/preset-lab/src/preset_lab/build_worker.py`), against the hashes in `analysis.json`;
+  - the shared provider code and harness the adapters execute or freeze into the worker, against the
+    hashes in `analysis.json`: `shared-core-corpus/run.py`, `build.py`, `CorpusInstrumentation.java`,
+    `LabBridge.java`, `lab_bridge.cpp`, preset-lab's `build_worker.py`, and `native/analysis_hooks.hpp`
+    as transformed by `build.py`;
+  - the pristine projectM checkout and its nested projectm-eval at the revisions `25e6aa83` pins;
   - the owned emulator launch metadata;
   - the classic and raw-point worker metadata, and the APK, exported AAR and compile commands each
     references, against the hashes in `artifact-proof.json`;
@@ -131,7 +134,8 @@ copying, it checks:
 - that the epoch directory does not already exist.
 
 `reproduce.sh --check <new-epoch>` performs only those checks. Device-side guards (emulator launch
-identity, lease, installation) run only in a real run. `PROJECTM_ROOT` selects the checkout
+identity, lease, installation) run only in a real run. preset-lab's `identity.py` and `models.py`,
+which `build_worker.py` imports, have no recorded hashes and are not verified. `PROJECTM_ROOT` selects the checkout
 that holds the `build/` tree. The original tree is the recovery worktree, so for example:
 
 ```sh

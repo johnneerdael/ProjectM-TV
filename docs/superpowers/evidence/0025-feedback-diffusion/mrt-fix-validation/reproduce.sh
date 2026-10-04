@@ -47,7 +47,7 @@ done
 # Everything else run.py reads, by recorded size/SHA256: the PCM signals (hashes run.py asserts), the six
 # preset files (as rendered by the comparator rows), and the comparator rows and their native captures.
 python3 - "$HERE/run.py" "$ROOT" "$BASE" "$HERE/artifact-proof.json" "$HERE/analysis.json" <<'PYCHECK' || missing=1
-import ast, hashlib, json, sys
+import ast, hashlib, json, subprocess, sys
 from pathlib import Path
 run, root, base, proof, recorded_analysis = (Path(arg) for arg in sys.argv[1:6])
 def sha(path):
@@ -60,13 +60,44 @@ problems = []
 # The shared provider code the adapters execute: run.py's runner, the builder and the worker builder it
 # hashes into every backend identity. A different revision could change protocol or validation semantics.
 definitions = json.loads(recorded_analysis.read_text())['definitions']
-instrumentation = definitions['roles']['mrt-fix']['backend_identity']['instrumentation']
+identity = definitions['roles']['mrt-fix']['backend_identity']
+instrumentation = identity['instrumentation']
 corpus = root / 'docs/superpowers/evidence/0025-feedback-diffusion/shared-core-corpus'
-for path, digest in [(corpus / 'run.py', definitions['provider_sha256']),
-                     (corpus / 'build.py', instrumentation['builder_sha256']),
-                     (root / 'tools/preset-lab/src/preset_lab/build_worker.py', instrumentation['worker_builder_sha256'])]:
+expected_files = [(corpus / 'run.py', definitions['provider_sha256']),
+                  (corpus / 'build.py', instrumentation['builder_sha256']),
+                  (root / 'tools/preset-lab/src/preset_lab/build_worker.py', instrumentation['worker_builder_sha256'])]
+# The harness sources build.py freezes into the worker.
+expected_files += [(corpus / name, digest) for name, digest in identity['harness_sources_sha256'].items()]
+for path, digest in expected_files:
     if not path.is_file() or sha(path) != digest:
         problems.append(f'provider missing or changed: {path}')
+# build_worker copies analysis_hooks.hpp into the engine and build.py then makes its clock atomic;
+# the identity records the result.
+hooks = root / 'tools/preset-lab/src/preset_lab/native/analysis_hooks.hpp'
+if not hooks.is_file():
+    problems.append(f'provider missing: {hooks}')
+else:
+    text = hooks.read_text().replace('#include <cstdint>', '#include <cstdint>\n#include <atomic>')
+    text = text.replace('inline double clock_seconds = 0.0;', 'inline std::atomic<double> clock_seconds{0.0};')
+    if hashlib.sha256(text.encode()).hexdigest() != instrumentation['analysis_hooks_sha256']:
+        problems.append(f'provider changed: {hooks}')
+# The pristine engine and its nested evaluator must be the revisions 25e6aa83 pins: build.py checks
+# only the parent (after creating the epoch) and archives the evaluator without a check.
+def git(cwd, *args):
+    result = subprocess.run(['git', '-C', str(cwd), *args], capture_output=True, text=True)
+    return result.stdout.strip() if result.returncode == 0 else None
+pristine = root / 'build/follow-ups/pristine-source/projectm'
+pinned_engine = (git(root, 'ls-tree', '25e6aa83', 'third_party/projectm') or '').split()
+pinned_engine = pinned_engine[2] if len(pinned_engine) > 2 else None
+engine_head = git(pristine, 'rev-parse', 'HEAD')
+if not pinned_engine or engine_head != pinned_engine or engine_head != identity['upstream_commit']:
+    problems.append(f'pristine projectM is {engine_head}, expected {pinned_engine} (recorded {identity["upstream_commit"]})')
+else:
+    pinned_eval = (git(pristine, 'ls-tree', engine_head, 'vendor/projectm-eval') or '').split()
+    pinned_eval = pinned_eval[2] if len(pinned_eval) > 2 else None
+    eval_head = git(pristine / 'vendor/projectm-eval', 'rev-parse', 'HEAD')
+    if not pinned_eval or eval_head != pinned_eval:
+        problems.append(f'pristine projectm-eval is {eval_head}, expected {pinned_eval}')
 names = next(ast.literal_eval(node.value) for node in ast.parse(run.read_text()).body
              if isinstance(node, ast.Assign) and getattr(node.targets[0], 'id', '') == 'NAMES')
 def same_bytes(path, size, digest):
@@ -133,7 +164,7 @@ for problem in problems[:20]:
 if problems:
     print(f'{len(problems)} input problem(s)', file=sys.stderr)
     sys.exit(1)
-print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows, reference and raw-point artifacts, shared provider; recorded sizes/SHA256s match')
+print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows, reference and raw-point artifacts, shared provider and harness, pinned engine revisions; recorded sizes/SHA256s match')
 PYCHECK
 "$PY" -c 'import numpy, cv2' 2> /dev/null || { echo "missing numpy/OpenCV in $PY" >&2; missing=1; }
 git -C "$ROOT" rev-parse --verify --quiet '25e6aa83^{commit}' > /dev/null ||
