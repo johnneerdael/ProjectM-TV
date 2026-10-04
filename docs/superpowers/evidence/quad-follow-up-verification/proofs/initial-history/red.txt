@@ -1,0 +1,54 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from TextureHistoryTest
+[ RUN      ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-initial-history-review/TextureHistoryTest.cpp:116: Failure
+Expected equality of these values:
+  std::count_if(pixels.begin(), pixels.end(), [](unsigned char v) { return v != 0; })
+    Which is: 1024
+  0
+fresh history still contains the permitted allocator poison
+
+[  FAILED  ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender (34 ms)
+[ RUN      ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-initial-history-review/TextureHistoryTest.cpp:145: Failure
+Expected equality of these values:
+  std::count_if(pixels.begin(), pixels.end(), [](unsigned char v) { return v != 0; })
+    Which is: 1024
+  0
+scissor/mask must not prevent initialization of the full color history
+
+[  FAILED  ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState (0 ms)
+[ RUN      ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-initial-history-review/TextureHistoryTest.cpp:162: Failure
+Expected equality of these values:
+  std::count_if(pixels.begin(), pixels.end(), [](unsigned char v) { return v != 0; })
+    Which is: 1024
+  0
+
+[  FAILED  ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization (6 ms)
+[ RUN      ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract
+[       OK ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract (8 ms)
+[ RUN      ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-initial-history-review/TextureHistoryTest.cpp:246: Failure
+Expected equality of these values:
+  attachment
+    Which is: 0
+  static_cast<GLint>(sentinel)
+    Which is: 1
+clear helper detached a foreign attachment
+
+[  FAILED  ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName (8 ms)
+[----------] 5 tests from TextureHistoryTest (58 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (58 ms total)
+[  PASSED  ] 1 test.
+[  FAILED  ] 4 tests, listed below:
+[  FAILED  ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender
+[  FAILED  ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState
+[  FAILED  ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization
+[  FAILED  ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName
+
+ 4 FAILED TESTS

@@ -1,0 +1,11 @@
+{
+  "frozen_runner_v1_sha256": "a29c40ba919487f0fd748c0fc50421346c85983ce40b2711897a2a14766801a7",
+  "runner_v2_sha256": "5f0b7d32837e75d2c592d21903125585aee8a35f108c7a215dc130c9c72e75d7",
+  "host_tool_tests_passed": 75,
+  "v2_actual_core_jobs_passed": 4,
+  "selected_repeats_and_prior_v1_samples_exact": true,
+  "baseline_success_return_checks": 4395,
+  "baseline_return_mismatches": 0,
+  "failed_jobs_checked_with_strict_checkpoint_provenance": 43,
+  "scope": "Partial controls and advancing baseline evidence; complete corpus and v2 full/selected pilot pending."
+}

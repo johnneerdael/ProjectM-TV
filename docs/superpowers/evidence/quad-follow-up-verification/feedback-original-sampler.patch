@@ -1,0 +1,87 @@
+Subject: [EXPERIMENT] Expose original feedback for individual-read ablations
+
+--- a/src/libprojectM/MilkdropPreset/PresetState.hpp
++++ b/src/libprojectM/MilkdropPreset/PresetState.hpp
+@@ -153,6 +153,8 @@
+     Renderer::Shader texturedShader;   //!< Shader used to draw textured primitives, e.g. textured shapes and the warp mesh.
+     LineRenderer lineRenderer; //!< Draws waveforms, custom waves and shape outlines as quads (when a line reference size is set).
+ 
++    bool pmxWantsOriginalFeedback{false}; //!< EXPERIMENT
++    std::weak_ptr<Renderer::Texture> pmxOriginalTexture; //!< EXPERIMENT: unfiltered flip.
+     std::weak_ptr<Renderer::Texture> mainTexture; //!< A weak reference to the main texture in the preset framebuffer.
+     BlurTexture blurTexture;                      //!< The blur textures used in this preset. Contents depend on the shader code using GetBlurX().
+ 
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -116,6 +116,11 @@
+     // y-flip the previous frame and assign the flipped texture as "main". The second flip of the
+     // last frame already left exactly this image in the flip texture, unless motion vectors were
+     // drawn onto the previous frame since, or something else replaced either texture.
++    if (m_feedbackDiffusion.Active() && m_state.pmxWantsOriginalFeedback &&
++        (m_isFirstFrame || motionVectorsDrawn || !m_flipHoldsPreviousFrame))
++    {
++        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
++    }
+     if (m_feedbackDiffusion.Active())
+     {
+         // The same y-flip, through the diffusion kernel, every frame. Only the warp (and textured
+@@ -131,6 +136,7 @@
+         }
+         m_state.mainTexture = m_flipTexture.Texture();
+     }
++    m_state.pmxOriginalTexture = m_flipTexture.Texture();
+     m_flipHoldsPreviousFrame = false;
+ 
+     // Update blur textures. They are made from the previous frame, which nothing changes from
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
+@@ -99,6 +99,7 @@
+     std::string m_preprocessedCode;            //!< The preprocessed preset shader code.
+ 
+     std::set<std::string> m_samplerNames;                                        //!< All sampler names referenced in the shader code.
++    std::vector<Renderer::TextureSamplerDescriptor> m_pmxOriginalDescriptors; //!< EXPERIMENT
+     std::vector<Renderer::TextureSamplerDescriptor> m_mainTextureDescriptors;              //!< Descriptors for all main texture references.
+     std::vector<Renderer::TextureSamplerDescriptor> m_textureSamplerDescriptors;           //!< Descriptors of all referenced samplers in the shader code.
+     BlurTexture::BlurLevel m_maxBlurLevelRequired{BlurTexture::BlurLevel::None}; //!< Max blur level of main texture required by this shader.
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -76,6 +76,14 @@
+         std::string lowerCaseName = Utils::ToLower(baseName);
+ 
+         // The "main" and "blurX" textures are preset-specific and are not managed by TextureManager.
++        if (lowerCaseName == "pmx_original")
++        {
++            presetState.pmxWantsOriginalFeedback = true;
++            Renderer::TextureSamplerDescriptor desc(presetState.mainTexture.lock(),
++                presetState.renderContext.textureManager->GetSampler(name), name, "pmx_original");
++            m_pmxOriginalDescriptors.push_back(std::move(desc));
++            continue;
++        }
+         if (lowerCaseName == "main")
+         {
+             Renderer::TextureSamplerDescriptor desc(presetState.mainTexture.lock(),
+@@ -320,6 +328,12 @@
+         desc.Bind(textureUnit, m_shader);
+         textureUnit++;
+     }
++    for (auto& desc : m_pmxOriginalDescriptors)
++    {
++        desc.Texture(presetState.pmxOriginalTexture);
++        desc.Bind(textureUnit, m_shader);
++        textureUnit++;
++    }
+     if (!m_mainTextureDescriptors.empty() &&
+         (canvas.width != context.viewportSizeX || canvas.height != context.viewportSizeY))
+     {
+@@ -683,6 +697,11 @@
+     // Collect unique samplers and texsize uniforms
+     std::set<std::string> samplerDeclarations;
+     std::set<std::string> texSizeDeclarations;
++    for (const auto& desc : m_pmxOriginalDescriptors)
++    {
++        samplerDeclarations.insert(desc.SamplerDeclaration());
++        texSizeDeclarations.insert(desc.TexSizeDeclaration());
++    }
+     for (const auto& desc : m_mainTextureDescriptors)
+     {
+         samplerDeclarations.insert(desc.SamplerDeclaration());

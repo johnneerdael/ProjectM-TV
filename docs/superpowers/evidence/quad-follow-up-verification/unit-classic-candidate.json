@@ -1,0 +1,149 @@
+[
+  {
+    "name": "$$$ Royal - Mashup (103).milk",
+    "height": 360,
+    "before": 0.26517587900161743,
+    "classic_candidate": 0.27197879552841187,
+    "delta": 0.006802916526794434
+  },
+  {
+    "name": "$$$ Royal - Mashup (103).milk",
+    "height": 480,
+    "before": 0.1536225974559784,
+    "classic_candidate": 0.1656271368265152,
+    "delta": 0.012004539370536804
+  },
+  {
+    "name": "$$$ Royal - Mashup (103).milk",
+    "height": 540,
+    "before": 0.1039958968758583,
+    "classic_candidate": 0.11099891364574432,
+    "delta": 0.007003016769886017
+  },
+  {
+    "name": "$$$ Royal - Mashup (191).milk",
+    "height": 360,
+    "before": 0.051193565130233765,
+    "classic_candidate": 0.049342915415763855,
+    "delta": -0.0018506497144699097
+  },
+  {
+    "name": "$$$ Royal - Mashup (191).milk",
+    "height": 480,
+    "before": 0.07521513849496841,
+    "classic_candidate": 0.0715845599770546,
+    "delta": -0.0036305785179138184
+  },
+  {
+    "name": "$$$ Royal - Mashup (191).milk",
+    "height": 540,
+    "before": 0.034440163522958755,
+    "classic_candidate": 0.033384159207344055,
+    "delta": -0.0010560043156147003
+  },
+  {
+    "name": "Flexi - alien complex 03.milk",
+    "height": 360,
+    "before": 0.12867069244384766,
+    "classic_candidate": 0.12924516201019287,
+    "delta": 0.0005744695663452148
+  },
+  {
+    "name": "Flexi - alien complex 03.milk",
+    "height": 480,
+    "before": 0.08860237151384354,
+    "classic_candidate": 0.09204232692718506,
+    "delta": 0.003439955413341522
+  },
+  {
+    "name": "Flexi - alien complex 03.milk",
+    "height": 540,
+    "before": 0.06679609417915344,
+    "classic_candidate": 0.07363856583833694,
+    "delta": 0.006842471659183502
+  },
+  {
+    "name": "Geiss - Surface (1-02 Version).milk",
+    "height": 360,
+    "before": 0.011871998198330402,
+    "classic_candidate": 0.0118729742243886,
+    "delta": 9.760260581970215e-07
+  },
+  {
+    "name": "Geiss - Surface (1-02 Version).milk",
+    "height": 480,
+    "before": 0.0069290585815906525,
+    "classic_candidate": 0.006928140763193369,
+    "delta": -9.178183972835541e-07
+  },
+  {
+    "name": "Geiss - Surface (1-02 Version).milk",
+    "height": 540,
+    "before": 0.004747164901345968,
+    "classic_candidate": 0.004743014462292194,
+    "delta": -4.15043905377388e-06
+  },
+  {
+    "name": "Serge circles005b.milk",
+    "height": 360,
+    "before": 0.2983474135398865,
+    "classic_candidate": 0.29620686173439026,
+    "delta": -0.002140551805496216
+  },
+  {
+    "name": "Serge circles005b.milk",
+    "height": 480,
+    "before": 0.2592470049858093,
+    "classic_candidate": 0.25756022334098816,
+    "delta": -0.001686781644821167
+  },
+  {
+    "name": "Serge circles005b.milk",
+    "height": 540,
+    "before": 0.23102053999900818,
+    "classic_candidate": 0.22948873043060303,
+    "delta": -0.0015318095684051514
+  },
+  {
+    "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+    "height": 360,
+    "before": 0.17846393585205078,
+    "classic_candidate": 0.22341080009937286,
+    "delta": 0.04494686424732208
+  },
+  {
+    "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+    "height": 480,
+    "before": 0.14679861068725586,
+    "classic_candidate": 0.20496942102909088,
+    "delta": 0.05817081034183502
+  },
+  {
+    "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+    "height": 540,
+    "before": 0.1933019608259201,
+    "classic_candidate": 0.21415871381759644,
+    "delta": 0.02085675299167633
+  },
+  {
+    "name": "fat cancer tour meant t nz+.milk",
+    "height": 360,
+    "before": 0.1194232702255249,
+    "classic_candidate": 0.11938795447349548,
+    "delta": -3.5315752029418945e-05
+  },
+  {
+    "name": "fat cancer tour meant t nz+.milk",
+    "height": 480,
+    "before": 0.0922934040427208,
+    "classic_candidate": 0.09201152622699738,
+    "delta": -0.0002818778157234192
+  },
+  {
+    "name": "fat cancer tour meant t nz+.milk",
+    "height": 540,
+    "before": 0.08788029849529266,
+    "classic_candidate": 0.08847589790821075,
+    "delta": 0.0005955994129180908
+  }
+]

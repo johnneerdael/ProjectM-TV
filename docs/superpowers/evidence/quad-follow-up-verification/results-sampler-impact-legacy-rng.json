@@ -1,0 +1,2584 @@
+{
+  "jobs": 396,
+  "presets": 33,
+  "nondeterministic": [
+    [
+      "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "c665",
+      "diagnostics-fixed"
+    ],
+    [
+      "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "c665",
+      "samplers-fixed"
+    ],
+    [
+      "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "q1330",
+      "diagnostics-fixed"
+    ],
+    [
+      "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "q1330",
+      "samplers-fixed"
+    ],
+    [
+      "LuxXx - Growing Alien Organs i.milk",
+      "c665",
+      "diagnostics-fixed"
+    ],
+    [
+      "LuxXx - Growing Alien Organs i.milk",
+      "c665",
+      "samplers-fixed"
+    ],
+    [
+      "LuxXx - Growing Alien Organs i.milk",
+      "q1330",
+      "diagnostics-fixed"
+    ],
+    [
+      "LuxXx - Growing Alien Organs i.milk",
+      "q1330",
+      "samplers-fixed"
+    ],
+    [
+      "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "c665",
+      "diagnostics-fixed"
+    ],
+    [
+      "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "c665",
+      "samplers-fixed"
+    ],
+    [
+      "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "q1330",
+      "diagnostics-fixed"
+    ],
+    [
+      "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "q1330",
+      "samplers-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx nz+.milk",
+      "c665",
+      "diagnostics-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx nz+.milk",
+      "c665",
+      "samplers-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx nz+.milk",
+      "q1330",
+      "diagnostics-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx nz+.milk",
+      "q1330",
+      "samplers-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx.milk",
+      "c665",
+      "diagnostics-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx.milk",
+      "c665",
+      "samplers-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx.milk",
+      "q1330",
+      "diagnostics-fixed"
+    ],
+    [
+      "fed - glowing 5 - fingers rmx.milk",
+      "q1330",
+      "samplers-fixed"
+    ],
+    [
+      "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "c665",
+      "diagnostics-fixed"
+    ],
+    [
+      "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "c665",
+      "samplers-fixed"
+    ],
+    [
+      "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "q1330",
+      "diagnostics-fixed"
+    ],
+    [
+      "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "q1330",
+      "samplers-fixed"
+    ],
+    [
+      "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "c665",
+      "diagnostics-fixed"
+    ],
+    [
+      "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "c665",
+      "samplers-fixed"
+    ],
+    [
+      "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "q1330",
+      "diagnostics-fixed"
+    ],
+    [
+      "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "q1330",
+      "samplers-fixed"
+    ]
+  ],
+  "sets": {
+    "control18": [
+      "$$$ Royal - Mashup (103).milk",
+      "$$$ Royal - Mashup (162).milk",
+      "$$$ Royal - Mashup (191).milk",
+      "$$$ Royal - Mashup (397).milk",
+      "Flexi - alien complex 03.milk",
+      "Fvese-mvfun2.milk",
+      "Goody's Trichromatic Mind Games.milk",
+      "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+      "Serge + 158 002.milk",
+      "Serge circles005b.milk",
+      "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "fat cancer tour meant t nz+.milk",
+      "rce-ordinary - want.milk",
+      "shifter - spincycle(remix) - love at home - q load.milk",
+      "suksma - bleuneycombinatoriccitensor.milk",
+      "suksma - penattrition - geiss crossfire shaders nz+.milk",
+      "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk"
+    ],
+    "capped24": [
+      "$$$ Royal - Mashup (103).milk",
+      "$$$ Royal - Mashup (162).milk",
+      "$$$ Royal - Mashup (191).milk",
+      "$$$ Royal - Mashup (397).milk",
+      "Flexi - alien complex 03.milk",
+      "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "Fvese-mvfun2.milk",
+      "Goody's Trichromatic Mind Games.milk",
+      "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+      "Serge + 158 002.milk",
+      "Serge circles005b.milk",
+      "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "Fumbling_Foo & Flexi, Martin, Orb - Star Forge v5a.milk",
+      "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "Rovastar - Harlequin's Fractal Encounter - piece da rats in us.milk",
+      "TonyMilkdrop - Rhythm Of My Life [Flexi - multiverse] --- Isosceles edit.milk",
+      "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "fat cancer tour meant t nz+.milk",
+      "rce-ordinary - want.milk",
+      "shifter - spincycle(remix) - love at home - q load.milk",
+      "suksma - bleuneycombinatoriccitensor.milk",
+      "suksma - penattrition - geiss crossfire shaders nz+.milk",
+      "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk"
+    ],
+    "prior_virtual_size_regressions": [
+      "$$$ Royal - Mashup (191).milk",
+      "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+      "LuxXx - Growing Alien Organs i.milk",
+      "fed - glowing 5 - fingers rmx nz+.milk",
+      "fed - glowing 5 - fingers rmx.milk",
+      "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "suksma - negative infinity for not flinching - couldn't not.milk"
+    ]
+  },
+  "comparisons": [
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.20810226913944727,
+      "new_luma": 0.20810226913944727,
+      "old_center_rgb": [
+        0.21655071059915343,
+        0.17868981460676964,
+        0.17330243030070022
+      ],
+      "new_center_rgb": [
+        0.21655071059915343,
+        0.17868981460676964,
+        0.17330243030070022
+      ],
+      "old_saturation": 0.26228801906108856,
+      "new_saturation": 0.26228801906108856
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.11533796787261963,
+      "candidate_vs_corrected_reference": 0.11533796787261963,
+      "candidate_vs_old_reference": 0.11533796787261963,
+      "old_luma": 0.2259475578783269,
+      "new_luma": 0.2259475578783269,
+      "old_center_rgb": [
+        0.26325425128967866,
+        0.20911274214327094,
+        0.20117854099964064
+      ],
+      "new_center_rgb": [
+        0.26325425128967866,
+        0.20911274214327094,
+        0.20117854099964064
+      ],
+      "old_saturation": 0.2432563990354538,
+      "new_saturation": 0.2432563990354538
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.12751051783561707,
+      "candidate_vs_corrected_reference": 0.12751051783561707,
+      "candidate_vs_old_reference": 0.12751051783561707,
+      "old_luma": 0.23279836114160884,
+      "new_luma": 0.23279836114160884,
+      "old_center_rgb": [
+        0.2574054181134258,
+        0.20336179020540834,
+        0.19559928574535532
+      ],
+      "new_center_rgb": [
+        0.2574054181134258,
+        0.20336179020540834,
+        0.19559928574535532
+      ],
+      "old_saturation": 0.23264582753181456,
+      "new_saturation": 0.23264582753181456
+    },
+    {
+      "name": "$$$ Royal - Mashup (162).milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.14415623089751353,
+      "new_luma": 0.14415623089751353,
+      "old_center_rgb": [
+        0.4201730644723726,
+        0.43967497099850056,
+        0.3983092292175338
+      ],
+      "new_center_rgb": [
+        0.4201730644723726,
+        0.43967497099850056,
+        0.3983092292175338
+      ],
+      "old_saturation": 0.4406621217727661,
+      "new_saturation": 0.4406621217727661
+    },
+    {
+      "name": "$$$ Royal - Mashup (162).milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.014283457770943642,
+      "candidate_vs_corrected_reference": 0.014283457770943642,
+      "candidate_vs_old_reference": 0.014283457770943642,
+      "old_luma": 0.14398403311050012,
+      "new_luma": 0.14398403311050012,
+      "old_center_rgb": [
+        0.41696825417560635,
+        0.4361639237085016,
+        0.39545665271808644
+      ],
+      "new_center_rgb": [
+        0.41696825417560635,
+        0.4361639237085016,
+        0.39545665271808644
+      ],
+      "old_saturation": 0.4394643306732178,
+      "new_saturation": 0.4394643306732178
+    },
+    {
+      "name": "$$$ Royal - Mashup (162).milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.015932558104395866,
+      "candidate_vs_corrected_reference": 0.015932558104395866,
+      "candidate_vs_old_reference": 0.015932558104395866,
+      "old_luma": 0.14732410156054185,
+      "new_luma": 0.14732410156054185,
+      "old_center_rgb": [
+        0.43450557987308863,
+        0.45268392557479525,
+        0.41290189254392584
+      ],
+      "new_center_rgb": [
+        0.43450557987308863,
+        0.45268392557479525,
+        0.41290189254392584
+      ],
+      "old_saturation": 0.43830626010894774,
+      "new_saturation": 0.43830626010894774
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.026451475184427677,
+      "new_luma": 0.026451475184427677,
+      "old_center_rgb": [
+        0.13353164617005436,
+        0.13353164617005436,
+        0.13353164617005436
+      ],
+      "new_center_rgb": [
+        0.13353164617005436,
+        0.13353164617005436,
+        0.13353164617005436
+      ],
+      "old_saturation": 0.0,
+      "new_saturation": 0.0
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.38526344299316406,
+      "candidate_vs_corrected_reference": 0.38526344299316406,
+      "candidate_vs_old_reference": 0.38526344299316406,
+      "old_luma": 0.4059568444143769,
+      "new_luma": 0.4059568444143769,
+      "old_center_rgb": [
+        0.2472156709304492,
+        0.2472156709304492,
+        0.2472156709304492
+      ],
+      "new_center_rgb": [
+        0.2472156709304492,
+        0.2472156709304492,
+        0.2472156709304492
+      ],
+      "old_saturation": 0.0,
+      "new_saturation": 0.0
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.39994144439697266,
+      "candidate_vs_corrected_reference": 0.39994144439697266,
+      "candidate_vs_old_reference": 0.39994144439697266,
+      "old_luma": 0.42069210807007984,
+      "new_luma": 0.42069210807007984,
+      "old_center_rgb": [
+        0.2713348438414075,
+        0.2713348438414075,
+        0.2713348438414075
+      ],
+      "new_center_rgb": [
+        0.2713348438414075,
+        0.2713348438414075,
+        0.2713348438414075
+      ],
+      "old_saturation": 0.0,
+      "new_saturation": 0.0
+    },
+    {
+      "name": "$$$ Royal - Mashup (397).milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.039675966037535024,
+      "new_luma": 0.039675966037535024,
+      "old_center_rgb": [
+        0.356965132458212,
+        0.16516983561101214,
+        0.054833122791600304
+      ],
+      "new_center_rgb": [
+        0.356965132458212,
+        0.16516983561101214,
+        0.054833122791600304
+      ],
+      "old_saturation": 0.7035911440849304,
+      "new_saturation": 0.7035911440849304
+    },
+    {
+      "name": "$$$ Royal - Mashup (397).milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.010080380365252495,
+      "candidate_vs_corrected_reference": 0.010080380365252495,
+      "candidate_vs_old_reference": 0.010080380365252495,
+      "old_luma": 0.041362533812740514,
+      "new_luma": 0.041362533812740514,
+      "old_center_rgb": [
+        0.3676681600169864,
+        0.1607968720095929,
+        0.05501245357125751
+      ],
+      "new_center_rgb": [
+        0.3676681600169864,
+        0.1607968720095929,
+        0.05501245357125751
+      ],
+      "old_saturation": 0.7067266941070557,
+      "new_saturation": 0.7067266941070557
+    },
+    {
+      "name": "$$$ Royal - Mashup (397).milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.011765782721340656,
+      "candidate_vs_corrected_reference": 0.011765782721340656,
+      "candidate_vs_old_reference": 0.011765782721340656,
+      "old_luma": 0.04275178238711495,
+      "new_luma": 0.04275178238711495,
+      "old_center_rgb": [
+        0.35298509656724064,
+        0.16645105895528217,
+        0.06009889103853993
+      ],
+      "new_center_rgb": [
+        0.35298509656724064,
+        0.16645105895528217,
+        0.06009889103853993
+      ],
+      "old_saturation": 0.703736674785614,
+      "new_saturation": 0.703736674785614
+    },
+    {
+      "name": "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.023181812837719917,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.023181812837719917,
+      "old_luma": 0.10631954061243816,
+      "new_luma": 0.10628080608480991,
+      "old_center_rgb": [
+        0.19933069365595318,
+        0.09253966589606726,
+        0.19227407540556324
+      ],
+      "new_center_rgb": [
+        0.1994738287471852,
+        0.0928188500593345,
+        0.1919399673119395
+      ],
+      "old_saturation": 0.7777040362358093,
+      "new_saturation": 0.7774388074874878
+    },
+    {
+      "name": "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.024999845772981644,
+      "baseline_vs_old_reference": 0.06287985295057297,
+      "candidate_vs_corrected_reference": 0.0628979504108429,
+      "candidate_vs_old_reference": 0.062944695353508,
+      "old_luma": 0.12042891147296512,
+      "new_luma": 0.12043042995842264,
+      "old_center_rgb": [
+        0.1740990973338035,
+        0.09610185491029637,
+        0.20311185840832738
+      ],
+      "new_center_rgb": [
+        0.174613323455076,
+        0.09613856661178057,
+        0.2034917939342442
+      ],
+      "old_saturation": 0.7950677633285522,
+      "new_saturation": 0.7954939365386963
+    },
+    {
+      "name": "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.06370415538549423,
+      "candidate_vs_corrected_reference": 0.06376570463180542,
+      "candidate_vs_old_reference": 0.06370415538549423,
+      "old_luma": 0.12079995784387562,
+      "new_luma": 0.12079995784387562,
+      "old_center_rgb": [
+        0.18486682328860038,
+        0.10100053922514224,
+        0.2192819838599663
+      ],
+      "new_center_rgb": [
+        0.18486682328860038,
+        0.10100053922514224,
+        0.2192819838599663
+      ],
+      "old_saturation": 0.7922470688819885,
+      "new_saturation": 0.7922470688819885
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.5745975794163672,
+      "new_luma": 0.5745975794163672,
+      "old_center_rgb": [
+        0.7590885248930234,
+        0.5293287338702564,
+        0.48683642738141
+      ],
+      "new_center_rgb": [
+        0.7590885248930234,
+        0.5293287338702564,
+        0.48683642738141
+      ],
+      "old_saturation": 0.47281287908554076,
+      "new_saturation": 0.47281287908554076
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.06353401392698288,
+      "candidate_vs_corrected_reference": 0.06353401392698288,
+      "candidate_vs_old_reference": 0.06353401392698288,
+      "old_luma": 0.5441676304034196,
+      "new_luma": 0.5441676304034196,
+      "old_center_rgb": [
+        0.7189391759368637,
+        0.5110330005123671,
+        0.4639286756230362
+      ],
+      "new_center_rgb": [
+        0.7189391759368637,
+        0.5110330005123671,
+        0.4639286756230362
+      ],
+      "old_saturation": 0.47240687608718873,
+      "new_saturation": 0.47240687608718873
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0964149460196495,
+      "candidate_vs_corrected_reference": 0.0964149460196495,
+      "candidate_vs_old_reference": 0.0964149460196495,
+      "old_luma": 0.5347153124869178,
+      "new_luma": 0.5347153124869178,
+      "old_center_rgb": [
+        0.6927478824203933,
+        0.5081868261064715,
+        0.45569367339110284
+      ],
+      "new_center_rgb": [
+        0.6927478824203933,
+        0.5081868261064715,
+        0.45569367339110284
+      ],
+      "old_saturation": 0.4547151207923889,
+      "new_saturation": 0.4547151207923889
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.26247231546005284,
+      "new_luma": 0.26247231546005284,
+      "old_center_rgb": [
+        0.6794926401933326,
+        0.23278165574013335,
+        0.06904558852655744
+      ],
+      "new_center_rgb": [
+        0.6794926401933326,
+        0.23278165574013335,
+        0.06904558852655744
+      ],
+      "old_saturation": 0.7794573783874512,
+      "new_saturation": 0.7794573783874512
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.09533022344112396,
+      "candidate_vs_corrected_reference": 0.09533022344112396,
+      "candidate_vs_old_reference": 0.09533022344112396,
+      "old_luma": 0.26174979547260285,
+      "new_luma": 0.26174979547260285,
+      "old_center_rgb": [
+        0.6441841521566799,
+        0.2461207612810468,
+        0.06915405913642388
+      ],
+      "new_center_rgb": [
+        0.6441841521566799,
+        0.2461207612810468,
+        0.06915405913642388
+      ],
+      "old_saturation": 0.7745847582817078,
+      "new_saturation": 0.7745847582817078
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.10880456119775772,
+      "candidate_vs_corrected_reference": 0.10880456119775772,
+      "candidate_vs_old_reference": 0.10880456119775772,
+      "old_luma": 0.2631730222080934,
+      "new_luma": 0.2631730222080934,
+      "old_center_rgb": [
+        0.028698251958640987,
+        0.2662820434324065,
+        0.06949694659724741
+      ],
+      "new_center_rgb": [
+        0.028698251958640987,
+        0.2662820434324065,
+        0.06949694659724741
+      ],
+      "old_saturation": 0.7845889925956726,
+      "new_saturation": 0.7845889925956726
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Star Forge v5a.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.5542948049294547,
+      "new_luma": 0.5542948049294547,
+      "old_center_rgb": [
+        0.8770314739086367,
+        0.9141527276388868,
+        0.8419940091306874
+      ],
+      "new_center_rgb": [
+        0.8770314739086367,
+        0.9141527276388868,
+        0.8419940091306874
+      ],
+      "old_saturation": 0.6909912467002869,
+      "new_saturation": 0.6909912467002869
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Star Forge v5a.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.09313134849071503,
+      "candidate_vs_corrected_reference": 0.09313134849071503,
+      "candidate_vs_old_reference": 0.09313134849071503,
+      "old_luma": 0.5632361500362145,
+      "new_luma": 0.5632361500362145,
+      "old_center_rgb": [
+        0.8827937397477313,
+        0.9183097770901975,
+        0.8464875040252241
+      ],
+      "new_center_rgb": [
+        0.8827937397477313,
+        0.9183097770901975,
+        0.8464875040252241
+      ],
+      "old_saturation": 0.6840255260467529,
+      "new_saturation": 0.6840255260467529
+    },
+    {
+      "name": "Fumbling_Foo & Flexi, Martin, Orb - Star Forge v5a.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.10575880110263824,
+      "candidate_vs_corrected_reference": 0.10575880110263824,
+      "candidate_vs_old_reference": 0.10575880110263824,
+      "old_luma": 0.5598932513351618,
+      "new_luma": 0.5598932513351618,
+      "old_center_rgb": [
+        0.883739769851807,
+        0.9208166526561115,
+        0.8481361371307137
+      ],
+      "new_center_rgb": [
+        0.883739769851807,
+        0.9208166526561115,
+        0.8481361371307137
+      ],
+      "old_saturation": 0.6844032287597657,
+      "new_saturation": 0.6844032287597657
+    },
+    {
+      "name": "Fvese-mvfun2.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.6238564289136962,
+      "new_luma": 0.6238564289136962,
+      "old_center_rgb": [
+        0.8151945763450956,
+        0.8936747105259218,
+        0.830084108509714
+      ],
+      "new_center_rgb": [
+        0.8151945763450956,
+        0.8936747105259218,
+        0.830084108509714
+      ],
+      "old_saturation": 0.12800645381212233,
+      "new_saturation": 0.12800645381212233
+    },
+    {
+      "name": "Fvese-mvfun2.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0823218822479248,
+      "candidate_vs_corrected_reference": 0.0823218822479248,
+      "candidate_vs_old_reference": 0.0823218822479248,
+      "old_luma": 0.6235668225945761,
+      "new_luma": 0.6235668225945761,
+      "old_center_rgb": [
+        0.7985989742702913,
+        0.8725797232802364,
+        0.8126033365452189
+      ],
+      "new_center_rgb": [
+        0.7985989742702913,
+        0.8725797232802364,
+        0.8126033365452189
+      ],
+      "old_saturation": 0.12559378892183304,
+      "new_saturation": 0.12559378892183304
+    },
+    {
+      "name": "Fvese-mvfun2.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.11514957249164581,
+      "candidate_vs_corrected_reference": 0.11514957249164581,
+      "candidate_vs_old_reference": 0.11514957249164581,
+      "old_luma": 0.6352127882939911,
+      "new_luma": 0.6352127882939911,
+      "old_center_rgb": [
+        0.7935067466576394,
+        0.8649965726147072,
+        0.8071454718799169
+      ],
+      "new_center_rgb": [
+        0.7935067466576394,
+        0.8649965726147072,
+        0.8071454718799169
+      ],
+      "old_saturation": 0.12288605123758316,
+      "new_saturation": 0.12288605123758316
+    },
+    {
+      "name": "Goody's Trichromatic Mind Games.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.07683270861356802,
+      "new_luma": 0.07683270861356802,
+      "old_center_rgb": [
+        0.05880357371706853,
+        0.054290786427464606,
+        0.054927184183239545
+      ],
+      "new_center_rgb": [
+        0.05880357371706853,
+        0.054290786427464606,
+        0.054927184183239545
+      ],
+      "old_saturation": 0.06752834990620613,
+      "new_saturation": 0.06752834990620613
+    },
+    {
+      "name": "Goody's Trichromatic Mind Games.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.011622662656009197,
+      "candidate_vs_corrected_reference": 0.011622662656009197,
+      "candidate_vs_old_reference": 0.011622662656009197,
+      "old_luma": 0.07957269825235969,
+      "new_luma": 0.07957269825235969,
+      "old_center_rgb": [
+        0.0606409919064228,
+        0.05650686968102807,
+        0.0571663148937123
+      ],
+      "new_center_rgb": [
+        0.0606409919064228,
+        0.05650686968102807,
+        0.0571663148937123
+      ],
+      "old_saturation": 0.07040301710367203,
+      "new_saturation": 0.07040301710367203
+    },
+    {
+      "name": "Goody's Trichromatic Mind Games.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.01539147924631834,
+      "candidate_vs_corrected_reference": 0.01539147924631834,
+      "candidate_vs_old_reference": 0.01539147924631834,
+      "old_luma": 0.08112507471287185,
+      "new_luma": 0.08112507471287185,
+      "old_center_rgb": [
+        0.061620147761715274,
+        0.05756883887010306,
+        0.058218638656272685
+      ],
+      "new_center_rgb": [
+        0.061620147761715274,
+        0.05756883887010306,
+        0.058218638656272685
+      ],
+      "old_saturation": 0.07190479934215546,
+      "new_saturation": 0.07190479934215546
+    },
+    {
+      "name": "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.25859519402787684,
+      "new_luma": 0.25859519402787684,
+      "old_center_rgb": [
+        0.5610249679194316,
+        0.2668263455114666,
+        0.023206076251058957
+      ],
+      "new_center_rgb": [
+        0.5610249679194316,
+        0.2668263455114666,
+        0.023206076251058957
+      ],
+      "old_saturation": 0.8623833537101746,
+      "new_saturation": 0.8623833537101746
+    },
+    {
+      "name": "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.21554279327392578,
+      "candidate_vs_corrected_reference": 0.21554279327392578,
+      "candidate_vs_old_reference": 0.21554279327392578,
+      "old_luma": 0.32328674964018317,
+      "new_luma": 0.32328674964018317,
+      "old_center_rgb": [
+        0.5612475716469134,
+        0.25928676556121005,
+        0.021020558345478977
+      ],
+      "new_center_rgb": [
+        0.5612475716469134,
+        0.25928676556121005,
+        0.021020558345478977
+      ],
+      "old_saturation": 0.865103542804718,
+      "new_saturation": 0.865103542804718
+    },
+    {
+      "name": "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.17790359258651733,
+      "candidate_vs_corrected_reference": 0.17790359258651733,
+      "candidate_vs_old_reference": 0.17790359258651733,
+      "old_luma": 0.2942879942798842,
+      "new_luma": 0.2942879942798842,
+      "old_center_rgb": [
+        0.5445656192003548,
+        0.2504036883850762,
+        0.018371328887779387
+      ],
+      "new_center_rgb": [
+        0.5445656192003548,
+        0.2504036883850762,
+        0.018371328887779387
+      ],
+      "old_saturation": 0.8928766131401062,
+      "new_saturation": 0.8928766131401062
+    },
+    {
+      "name": "LuxXx - Growing Alien Organs i.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.01584729366004467,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.01584729366004467,
+      "old_luma": 0.03807400461369575,
+      "new_luma": 0.03808564500804448,
+      "old_center_rgb": [
+        0.08732859988915351,
+        0.0,
+        0.006084223350659336
+      ],
+      "new_center_rgb": [
+        0.08720028177640637,
+        0.0,
+        0.006084223350659336
+      ],
+      "old_saturation": 0.9919004678726197,
+      "new_saturation": 0.9924935817718505
+    },
+    {
+      "name": "LuxXx - Growing Alien Organs i.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.012720928527414799,
+      "baseline_vs_old_reference": 0.015152796171605587,
+      "candidate_vs_corrected_reference": 0.015152194537222385,
+      "candidate_vs_old_reference": 0.015146108344197273,
+      "old_luma": 0.038135358194189894,
+      "new_luma": 0.03814598568676885,
+      "old_center_rgb": [
+        0.08710152978209566,
+        0.0,
+        0.006109915725858039
+      ],
+      "new_center_rgb": [
+        0.08746467703966625,
+        0.0,
+        0.006109915725858039
+      ],
+      "old_saturation": 0.99837406873703,
+      "new_saturation": 0.9983838796615601
+    },
+    {
+      "name": "LuxXx - Growing Alien Organs i.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.032089799642562866,
+      "candidate_vs_corrected_reference": 0.03206495940685272,
+      "candidate_vs_old_reference": 0.032089799642562866,
+      "old_luma": 0.05264064441394745,
+      "new_luma": 0.05264064441394745,
+      "old_center_rgb": [
+        0.32202508354325526,
+        0.0,
+        0.006113370687459654
+      ],
+      "new_center_rgb": [
+        0.32202508354325526,
+        0.0,
+        0.006113370687459654
+      ],
+      "old_saturation": 0.9989393711090088,
+      "new_saturation": 0.9989393711090088
+    },
+    {
+      "name": "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.021164607256650925,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.021164607256650925,
+      "old_luma": 0.11199208821967829,
+      "new_luma": 0.11191114322732447,
+      "old_center_rgb": [
+        0.15678542302244722,
+        0.09839843483442098,
+        0.17235594950992877
+      ],
+      "new_center_rgb": [
+        0.1575536756592119,
+        0.09781628278168068,
+        0.17417865839146118
+      ],
+      "old_saturation": 0.7708637714385986,
+      "new_saturation": 0.7660751581192017
+    },
+    {
+      "name": "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.029321182519197464,
+      "baseline_vs_old_reference": 0.0269620381295681,
+      "candidate_vs_corrected_reference": 0.02708454243838787,
+      "candidate_vs_old_reference": 0.030971895903348923,
+      "old_luma": 0.11734733798510825,
+      "new_luma": 0.11702159709481144,
+      "old_center_rgb": [
+        0.15511412974398445,
+        0.10023422189958227,
+        0.16791438657038066
+      ],
+      "new_center_rgb": [
+        0.15405557618709637,
+        0.10072573466428543,
+        0.16566185153460294
+      ],
+      "old_saturation": 0.769327712059021,
+      "new_saturation": 0.7637885570526123
+    },
+    {
+      "name": "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.004959811922162771,
+      "baseline_vs_old_reference": 0.032529331743717194,
+      "candidate_vs_corrected_reference": 0.03246709704399109,
+      "candidate_vs_old_reference": 0.03635985031723976,
+      "old_luma": 0.12095467233299859,
+      "new_luma": 0.1205126742455954,
+      "old_center_rgb": [
+        0.1573986212604898,
+        0.09899465006392213,
+        0.16828165463555536
+      ],
+      "new_center_rgb": [
+        0.1573986212604898,
+        0.09899465006392213,
+        0.16828165463555536
+      ],
+      "old_saturation": 0.7698809862136841,
+      "new_saturation": 0.7649212956428528
+    },
+    {
+      "name": "ORB - Toffie Grider.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.4346916221937013,
+      "new_luma": 0.4346916221937013,
+      "old_center_rgb": [
+        0.6107677990982489,
+        0.38510082286033853,
+        0.0
+      ],
+      "new_center_rgb": [
+        0.6107677990982489,
+        0.38510082286033853,
+        0.0
+      ],
+      "old_saturation": 0.9021246075630188,
+      "new_saturation": 0.9021246075630188
+    },
+    {
+      "name": "ORB - Toffie Grider.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.05024658888578415,
+      "candidate_vs_corrected_reference": 0.05024658888578415,
+      "candidate_vs_old_reference": 0.05024658888578415,
+      "old_luma": 0.3839859253306161,
+      "new_luma": 0.3839859253306161,
+      "old_center_rgb": [
+        0.4638239005721468,
+        0.21764253543596734,
+        0.0
+      ],
+      "new_center_rgb": [
+        0.4638239005721468,
+        0.21764253543596734,
+        0.0
+      ],
+      "old_saturation": 0.8828696131706237,
+      "new_saturation": 0.8828696131706237
+    },
+    {
+      "name": "ORB - Toffie Grider.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.06338360905647278,
+      "candidate_vs_corrected_reference": 0.06338360905647278,
+      "candidate_vs_old_reference": 0.06338360905647278,
+      "old_luma": 0.47413711703029254,
+      "new_luma": 0.47413711703029254,
+      "old_center_rgb": [
+        0.686977132062959,
+        0.43985687327271433,
+        0.0
+      ],
+      "new_center_rgb": [
+        0.686977132062959,
+        0.43985687327271433,
+        0.0
+      ],
+      "old_saturation": 0.9290418982505798,
+      "new_saturation": 0.9290418982505798
+    },
+    {
+      "name": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.15713596348741535,
+      "new_luma": 0.15713596348741535,
+      "old_center_rgb": [
+        0.1312797192554978,
+        0.12875088419206074,
+        0.08411482596603709
+      ],
+      "new_center_rgb": [
+        0.1312797192554978,
+        0.12875088419206074,
+        0.08411482596603709
+      ],
+      "old_saturation": 0.4714020073413849,
+      "new_saturation": 0.4714020073413849
+    },
+    {
+      "name": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.00939836073666811,
+      "candidate_vs_corrected_reference": 0.00939836073666811,
+      "candidate_vs_old_reference": 0.00939836073666811,
+      "old_luma": 0.15723954593580808,
+      "new_luma": 0.15723954593580808,
+      "old_center_rgb": [
+        0.13163181180385392,
+        0.12877086714469635,
+        0.08422435359516524
+      ],
+      "new_center_rgb": [
+        0.13163181180385392,
+        0.12877086714469635,
+        0.08422435359516524
+      ],
+      "old_saturation": 0.4708403766155243,
+      "new_saturation": 0.4708403766155243
+    },
+    {
+      "name": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.009250013157725334,
+      "candidate_vs_corrected_reference": 0.009250013157725334,
+      "candidate_vs_old_reference": 0.009250013157725334,
+      "old_luma": 0.15722407049775217,
+      "new_luma": 0.15722407049775217,
+      "old_center_rgb": [
+        0.1317163379465727,
+        0.129048250288091,
+        0.08434962300731767
+      ],
+      "new_center_rgb": [
+        0.1317163379465727,
+        0.129048250288091,
+        0.08434962300731767
+      ],
+      "old_saturation": 0.4720471501350403,
+      "new_saturation": 0.4720471501350403
+    },
+    {
+      "name": "Serge + 158 002.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.3714143166298514,
+      "new_luma": 0.3714143166298514,
+      "old_center_rgb": [
+        0.039019924071827194,
+        0.0392940527369593,
+        0.0402668886924942
+      ],
+      "new_center_rgb": [
+        0.039019924071827194,
+        0.0392940527369593,
+        0.0402668886924942
+      ],
+      "old_saturation": 0.06725359186530114,
+      "new_saturation": 0.06725359186530114
+    },
+    {
+      "name": "Serge + 158 002.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.01760331727564335,
+      "candidate_vs_corrected_reference": 0.01760331727564335,
+      "candidate_vs_old_reference": 0.01760331727564335,
+      "old_luma": 0.36895813992335025,
+      "new_luma": 0.36895813992335025,
+      "old_center_rgb": [
+        0.038807696000155927,
+        0.039101998190644964,
+        0.04006573996835393
+      ],
+      "new_center_rgb": [
+        0.038807696000155927,
+        0.039101998190644964,
+        0.04006573996835393
+      ],
+      "old_saturation": 0.07056428343057633,
+      "new_saturation": 0.07056428343057633
+    },
+    {
+      "name": "Serge + 158 002.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.019403310492634773,
+      "candidate_vs_corrected_reference": 0.019403310492634773,
+      "candidate_vs_old_reference": 0.019403310492634773,
+      "old_luma": 0.36668232978786697,
+      "new_luma": 0.36668232978786697,
+      "old_center_rgb": [
+        0.03862512009047449,
+        0.0389183646388082,
+        0.039896196993136256
+      ],
+      "new_center_rgb": [
+        0.03862512009047449,
+        0.0389183646388082,
+        0.039896196993136256
+      ],
+      "old_saturation": 0.0699046216905117,
+      "new_saturation": 0.0699046216905117
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.4267643529598772,
+      "new_luma": 0.4267643529598772,
+      "old_center_rgb": [
+        0.9570368248309422,
+        0.4858860311801489,
+        0.4858860311801489
+      ],
+      "new_center_rgb": [
+        0.9570368248309422,
+        0.4858860311801489,
+        0.4858860311801489
+      ],
+      "old_saturation": 0.679234504699707,
+      "new_saturation": 0.679234504699707
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.06799310445785522,
+      "candidate_vs_corrected_reference": 0.06799310445785522,
+      "candidate_vs_old_reference": 0.06799310445785522,
+      "old_luma": 0.4795475817847283,
+      "new_luma": 0.4795475817847283,
+      "old_center_rgb": [
+        0.9642452754289962,
+        0.5291646869718352,
+        0.5291646869718352
+      ],
+      "new_center_rgb": [
+        0.9642452754289962,
+        0.5291646869718352,
+        0.5291646869718352
+      ],
+      "old_saturation": 0.624504005908966,
+      "new_saturation": 0.624504005908966
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.10517257452011108,
+      "candidate_vs_corrected_reference": 0.10517257452011108,
+      "candidate_vs_old_reference": 0.10517257452011108,
+      "old_luma": 0.5148398057451937,
+      "new_luma": 0.5148398057451937,
+      "old_center_rgb": [
+        0.9685569265884723,
+        0.559911122410963,
+        0.559911122410963
+      ],
+      "new_center_rgb": [
+        0.9685569265884723,
+        0.559911122410963,
+        0.559911122410963
+      ],
+      "old_saturation": 0.5846662282943725,
+      "new_saturation": 0.5846662282943725
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.6976233469009024,
+      "new_luma": 0.6976233469009024,
+      "old_center_rgb": [
+        0.7541784919553087,
+        0.7157117309193431,
+        0.6017542578528737
+      ],
+      "new_center_rgb": [
+        0.7541784919553087,
+        0.7157117309193431,
+        0.6017542578528737
+      ],
+      "old_saturation": 0.3732801377773285,
+      "new_saturation": 0.3732801377773285
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.19658677279949188,
+      "candidate_vs_corrected_reference": 0.19658677279949188,
+      "candidate_vs_old_reference": 0.19658677279949188,
+      "old_luma": 0.7218265553844613,
+      "new_luma": 0.7218265553844613,
+      "old_center_rgb": [
+        0.8007934413679606,
+        0.6998733721040419,
+        0.6249232102345713
+      ],
+      "new_center_rgb": [
+        0.8007934413679606,
+        0.6998733721040419,
+        0.6249232102345713
+      ],
+      "old_saturation": 0.35468565821647646,
+      "new_saturation": 0.35468565821647646
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.2003277689218521,
+      "candidate_vs_corrected_reference": 0.2003277689218521,
+      "candidate_vs_old_reference": 0.2003277689218521,
+      "old_luma": 0.676237843980977,
+      "new_luma": 0.676237843980977,
+      "old_center_rgb": [
+        0.7267558760016993,
+        0.7085845249397341,
+        0.5682453576048476
+      ],
+      "new_center_rgb": [
+        0.7267558760016993,
+        0.7085845249397341,
+        0.5682453576048476
+      ],
+      "old_saturation": 0.3847611784934998,
+      "new_saturation": 0.3847611784934998
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.48559778237109313,
+      "new_luma": 0.48559778237109313,
+      "old_center_rgb": [
+        0.585996686256202,
+        0.4534434225264677,
+        0.4198341297303237
+      ],
+      "new_center_rgb": [
+        0.585996686256202,
+        0.4534434225264677,
+        0.4198341297303237
+      ],
+      "old_saturation": 0.3656960964202881,
+      "new_saturation": 0.3656960964202881
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.20416493713855743,
+      "candidate_vs_corrected_reference": 0.20416493713855743,
+      "candidate_vs_old_reference": 0.20416493713855743,
+      "old_luma": 0.4411937809517698,
+      "new_luma": 0.4411937809517698,
+      "old_center_rgb": [
+        0.5273294087788347,
+        0.4088087244669131,
+        0.3816357369804092
+      ],
+      "new_center_rgb": [
+        0.5273294087788347,
+        0.4088087244669131,
+        0.3816357369804092
+      ],
+      "old_saturation": 0.3800554394721985,
+      "new_saturation": 0.3800554394721985
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.1785174161195755,
+      "candidate_vs_corrected_reference": 0.1785174161195755,
+      "candidate_vs_old_reference": 0.1785174161195755,
+      "old_luma": 0.47911408303967434,
+      "new_luma": 0.47911408303967434,
+      "old_center_rgb": [
+        0.5692067665623991,
+        0.4446270505212116,
+        0.4165587743585088
+      ],
+      "new_center_rgb": [
+        0.5692067665623991,
+        0.4446270505212116,
+        0.4165587743585088
+      ],
+      "old_saturation": 0.3643405020236969,
+      "new_saturation": 0.3643405020236969
+    },
+    {
+      "name": "TonyMilkdrop - Rhythm Of My Life [Flexi - multiverse] --- Isosceles edit.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.17997679591764987,
+      "new_luma": 0.17997679591764987,
+      "old_center_rgb": [
+        0.2161201111460628,
+        0.17514303522954028,
+        0.1459627041547457
+      ],
+      "new_center_rgb": [
+        0.2161201111460628,
+        0.17514303522954028,
+        0.1459627041547457
+      ],
+      "old_saturation": 0.2978951632976532,
+      "new_saturation": 0.2978951632976532
+    },
+    {
+      "name": "TonyMilkdrop - Rhythm Of My Life [Flexi - multiverse] --- Isosceles edit.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.040125131607055664,
+      "candidate_vs_corrected_reference": 0.040125131607055664,
+      "candidate_vs_old_reference": 0.040125131607055664,
+      "old_luma": 0.18103719804477852,
+      "new_luma": 0.18103719804477852,
+      "old_center_rgb": [
+        0.213335434847564,
+        0.18068356234343627,
+        0.15509992819394394
+      ],
+      "new_center_rgb": [
+        0.213335434847564,
+        0.18068356234343627,
+        0.15509992819394394
+      ],
+      "old_saturation": 0.28451294004917144,
+      "new_saturation": 0.28451294004917144
+    },
+    {
+      "name": "TonyMilkdrop - Rhythm Of My Life [Flexi - multiverse] --- Isosceles edit.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.05113230273127556,
+      "candidate_vs_corrected_reference": 0.05113230273127556,
+      "candidate_vs_old_reference": 0.05113230273127556,
+      "old_luma": 0.19114878286091438,
+      "new_luma": 0.19114878286091438,
+      "old_center_rgb": [
+        0.22045024353780865,
+        0.19202359659623885,
+        0.1672390935942921
+      ],
+      "new_center_rgb": [
+        0.22045024353780865,
+        0.19202359659623885,
+        0.1672390935942921
+      ],
+      "old_saturation": 0.2839007616043091,
+      "new_saturation": 0.2839007616043091
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.21534680056268538,
+      "new_luma": 0.21534680056268538,
+      "old_center_rgb": [
+        0.2733935041634004,
+        0.2950259473961895,
+        0.4553962054221563
+      ],
+      "new_center_rgb": [
+        0.2733935041634004,
+        0.2950259473961895,
+        0.4553962054221563
+      ],
+      "old_saturation": 0.866251266002655,
+      "new_saturation": 0.866251266002655
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.08810661733150482,
+      "candidate_vs_corrected_reference": 0.08810661733150482,
+      "candidate_vs_old_reference": 0.08810661733150482,
+      "old_luma": 0.2135334118449324,
+      "new_luma": 0.2135334118449324,
+      "old_center_rgb": [
+        0.15329024451589798,
+        0.29018423032844787,
+        0.4683109735122113
+      ],
+      "new_center_rgb": [
+        0.15329024451589798,
+        0.29018423032844787,
+        0.4683109735122113
+      ],
+      "old_saturation": 0.8761168837547302,
+      "new_saturation": 0.8761168837547302
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.1105455681681633,
+      "candidate_vs_corrected_reference": 0.1105455681681633,
+      "candidate_vs_old_reference": 0.1105455681681633,
+      "old_luma": 0.2136276473299837,
+      "new_luma": 0.2136276473299837,
+      "old_center_rgb": [
+        0.14794905721097595,
+        0.2902840569178417,
+        0.4677771261057143
+      ],
+      "new_center_rgb": [
+        0.14794905721097595,
+        0.2902840569178417,
+        0.4677771261057143
+      ],
+      "old_saturation": 0.8853610634803772,
+      "new_saturation": 0.8853610634803772
+    },
+    {
+      "name": "fed - glowing 5 - fingers rmx nz+.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.1771460771560669,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.1771460771560669,
+      "old_luma": 0.17349384125368494,
+      "new_luma": 0.1753357477911294,
+      "old_center_rgb": [
+        0.2392245032296935,
+        0.17646277821883352,
+        0.246634789982541
+      ],
+      "new_center_rgb": [
+        0.21374626974973002,
+        0.151125678435367,
+        0.25806964853677655
+      ],
+      "old_saturation": 0.8383266687393188,
+      "new_saturation": 0.8250178813934326
+    },
+    {
+      "name": "fed - glowing 5 - fingers rmx nz+.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.23625722527503967,
+      "baseline_vs_old_reference": 0.21352484822273254,
+      "candidate_vs_corrected_reference": 0.21715174615383148,
+      "candidate_vs_old_reference": 0.20928247272968292,
+      "old_luma": 0.19806408105271972,
+      "new_luma": 0.19427554606371147,
+      "old_center_rgb": [
+        0.25476833164237633,
+        0.2009727211633784,
+        0.26193583881105936
+      ],
+      "new_center_rgb": [
+        0.24466319579871318,
+        0.20143439802451438,
+        0.26250614125285904
+      ],
+      "old_saturation": 0.7330515503883361,
+      "new_saturation": 0.8041652917861939
+    },
+    {
+      "name": "fed - glowing 5 - fingers rmx nz+.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.21046562492847443,
+      "candidate_vs_corrected_reference": 0.20893210172653198,
+      "candidate_vs_old_reference": 0.21046562492847443,
+      "old_luma": 0.16559834397896622,
+      "new_luma": 0.16559834397896622,
+      "old_center_rgb": [
+        0.25334201467688416,
+        0.18728802455267082,
+        0.2390464260791122
+      ],
+      "new_center_rgb": [
+        0.25334201467688416,
+        0.18728802455267082,
+        0.2390464260791122
+      ],
+      "old_saturation": 0.8772105216979981,
+      "new_saturation": 0.8772105216979981
+    },
+    {
+      "name": "fed - glowing 5 - fingers rmx.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.18174949288368225,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.18174949288368225,
+      "old_luma": 0.2072674778470761,
+      "new_luma": 0.1658583675113516,
+      "old_center_rgb": [
+        0.2327042338028498,
+        0.22444740700796068,
+        0.2282616742478335
+      ],
+      "new_center_rgb": [
+        0.23509553435158972,
+        0.21457481388277236,
+        0.2025686382693303
+      ],
+      "old_saturation": 0.764255964756012,
+      "new_saturation": 0.8007062792778015
+    },
+    {
+      "name": "fed - glowing 5 - fingers rmx.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.23312513530254364,
+      "baseline_vs_old_reference": 0.2041754573583603,
+      "candidate_vs_corrected_reference": 0.19393886625766754,
+      "candidate_vs_old_reference": 0.21352890133857727,
+      "old_luma": 0.18712178122649986,
+      "new_luma": 0.19442978154727916,
+      "old_center_rgb": [
+        0.24724838073507577,
+        0.2378817669639475,
+        0.23860278851343641
+      ],
+      "new_center_rgb": [
+        0.24412591522655402,
+        0.24132410844269622,
+        0.24714764179415208
+      ],
+      "old_saturation": 0.8729712009429932,
+      "new_saturation": 0.8807382225990296
+    },
+    {
+      "name": "fed - glowing 5 - fingers rmx.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.19655157625675201,
+      "candidate_vs_corrected_reference": 0.1623527556657791,
+      "candidate_vs_old_reference": 0.19655157625675201,
+      "old_luma": 0.016125770975928953,
+      "new_luma": 0.016125770975928953,
+      "old_center_rgb": [
+        0.016416653113148546,
+        0.015935184869987087,
+        0.01621217110654704
+      ],
+      "new_center_rgb": [
+        0.016416653113148546,
+        0.015935184869987087,
+        0.01621217110654704
+      ],
+      "old_saturation": 0.6491684556007385,
+      "new_saturation": 0.6491684556007385
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.6073306442370814,
+      "new_luma": 0.6073306442370814,
+      "old_center_rgb": [
+        0.7823252170743521,
+        0.6077786141194446,
+        0.3174623895904172
+      ],
+      "new_center_rgb": [
+        0.7823252170743521,
+        0.6077786141194446,
+        0.3174623895904172
+      ],
+      "old_saturation": 0.6235576510429383,
+      "new_saturation": 0.6235576510429383
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.07339366525411606,
+      "candidate_vs_corrected_reference": 0.07339366525411606,
+      "candidate_vs_old_reference": 0.07339366525411606,
+      "old_luma": 0.6208668211432188,
+      "new_luma": 0.6208668211432188,
+      "old_center_rgb": [
+        0.8633148675859414,
+        0.7006398317710387,
+        0.3498810130314619
+      ],
+      "new_center_rgb": [
+        0.8633148675859414,
+        0.7006398317710387,
+        0.3498810130314619
+      ],
+      "old_saturation": 0.6382786154747009,
+      "new_saturation": 0.6382786154747009
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.07299473136663437,
+      "candidate_vs_corrected_reference": 0.07299473136663437,
+      "candidate_vs_old_reference": 0.07299473136663437,
+      "old_luma": 0.6247355603933845,
+      "new_luma": 0.6247355603933845,
+      "old_center_rgb": [
+        0.8892574090464372,
+        0.7286083294879168,
+        0.3614320990018306
+      ],
+      "new_center_rgb": [
+        0.8892574090464372,
+        0.7286083294879168,
+        0.3614320990018306
+      ],
+      "old_saturation": 0.6381338953971862,
+      "new_saturation": 0.6381338953971862
+    },
+    {
+      "name": "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.11211906373500824,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.11211906373500824,
+      "old_luma": 0.7235626323237592,
+      "new_luma": 0.6871040846280043,
+      "old_center_rgb": [
+        0.5085313923549218,
+        0.6495285155060241,
+        0.7032458420088178
+      ],
+      "new_center_rgb": [
+        0.4428044824584614,
+        0.5722584844989687,
+        0.6736211264065937
+      ],
+      "old_saturation": 0.2083210341632366,
+      "new_saturation": 0.25018801242113115
+    },
+    {
+      "name": "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.13995251059532166,
+      "baseline_vs_old_reference": 0.06998150795698166,
+      "candidate_vs_corrected_reference": 0.14538104832172394,
+      "candidate_vs_old_reference": 0.11723645776510239,
+      "old_luma": 0.7618326410957036,
+      "new_luma": 0.6978534088839886,
+      "old_center_rgb": [
+        0.5334628029907645,
+        0.6708984092563665,
+        0.7426090698326858
+      ],
+      "new_center_rgb": [
+        0.4873067285986123,
+        0.6260744325859736,
+        0.70308703420668
+      ],
+      "old_saturation": 0.21979890540242195,
+      "new_saturation": 0.29869645833969116
+    },
+    {
+      "name": "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0927790105342865,
+      "candidate_vs_corrected_reference": 0.09281380474567413,
+      "candidate_vs_old_reference": 0.0927790105342865,
+      "old_luma": 0.6590691916651766,
+      "new_luma": 0.6590691916651766,
+      "old_center_rgb": [
+        0.3930114589479697,
+        0.5363685463977903,
+        0.6422932623570261
+      ],
+      "new_center_rgb": [
+        0.3930114589479697,
+        0.5363685463977903,
+        0.6422932623570261
+      ],
+      "old_saturation": 0.22990392446517943,
+      "new_saturation": 0.22990392446517943
+    },
+    {
+      "name": "shifter - spincycle(remix) - love at home - q load.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.8333526463301847,
+      "new_luma": 0.8333526463301847,
+      "old_center_rgb": [
+        0.9978008125412969,
+        0.8472456647543152,
+        0.9999894978787711
+      ],
+      "new_center_rgb": [
+        0.9978008125412969,
+        0.8472456647543152,
+        0.9999894978787711
+      ],
+      "old_saturation": 0.22911406457424163,
+      "new_saturation": 0.22911406457424163
+    },
+    {
+      "name": "shifter - spincycle(remix) - love at home - q load.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.06497567892074585,
+      "candidate_vs_corrected_reference": 0.06497567892074585,
+      "candidate_vs_old_reference": 0.06497567892074585,
+      "old_luma": 0.9589886339850925,
+      "new_luma": 0.9589886339850925,
+      "old_center_rgb": [
+        0.999990905533877,
+        0.9960313137024741,
+        0.9999999979264783
+      ],
+      "new_center_rgb": [
+        0.999990905533877,
+        0.9960313137024741,
+        0.9999999979264783
+      ],
+      "old_saturation": 0.06877892464399338,
+      "new_saturation": 0.06877892464399338
+    },
+    {
+      "name": "shifter - spincycle(remix) - love at home - q load.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.08824978768825531,
+      "candidate_vs_corrected_reference": 0.08824978768825531,
+      "candidate_vs_old_reference": 0.08824978768825531,
+      "old_luma": 0.9979504382710022,
+      "new_luma": 0.9979504382710022,
+      "old_center_rgb": [
+        1.0,
+        0.9998718144504458,
+        0.9981284502371551
+      ],
+      "new_center_rgb": [
+        1.0,
+        0.9998718144504458,
+        0.9981284502371551
+      ],
+      "old_saturation": 0.011180111626163124,
+      "new_saturation": 0.011180111626163124
+    },
+    {
+      "name": "suksma - bleuneycombinatoriccitensor.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.029532453599253102,
+      "new_luma": 0.029532453599253102,
+      "old_center_rgb": [
+        0.025782549502272694,
+        0.09630747664484693,
+        0.1856352368636106
+      ],
+      "new_center_rgb": [
+        0.025782549502272694,
+        0.09630747664484693,
+        0.1856352368636106
+      ],
+      "old_saturation": 0.5170809984207153,
+      "new_saturation": 0.5170809984207153
+    },
+    {
+      "name": "suksma - bleuneycombinatoriccitensor.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.014529560692608356,
+      "candidate_vs_corrected_reference": 0.014529560692608356,
+      "candidate_vs_old_reference": 0.014529560692608356,
+      "old_luma": 0.028319939504832713,
+      "new_luma": 0.028319939504832713,
+      "old_center_rgb": [
+        0.040123221099824934,
+        0.0922952267738097,
+        0.17504258080462176
+      ],
+      "new_center_rgb": [
+        0.040123221099824934,
+        0.0922952267738097,
+        0.17504258080462176
+      ],
+      "old_saturation": 0.4420465171337128,
+      "new_saturation": 0.4420465171337128
+    },
+    {
+      "name": "suksma - bleuneycombinatoriccitensor.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.014984799548983574,
+      "candidate_vs_corrected_reference": 0.014984799548983574,
+      "candidate_vs_old_reference": 0.014984799548983574,
+      "old_luma": 0.027650416576766652,
+      "new_luma": 0.027650416576766652,
+      "old_center_rgb": [
+        0.046449675629639725,
+        0.09073715024043306,
+        0.1722001130457971
+      ],
+      "new_center_rgb": [
+        0.046449675629639725,
+        0.09073715024043306,
+        0.1722001130457971
+      ],
+      "old_saturation": 0.42988203167915345,
+      "new_saturation": 0.42988203167915345
+    },
+    {
+      "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.05592793971300125,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.05592793971300125,
+      "old_luma": 0.0778907652123574,
+      "new_luma": 0.0888531578963583,
+      "old_center_rgb": [
+        0.17450808962919687,
+        0.028298248592366237,
+        0.3845866558150295
+      ],
+      "new_center_rgb": [
+        0.20277236444191468,
+        0.028298248592366237,
+        0.45161426008311817
+      ],
+      "old_saturation": 0.978399121761322,
+      "new_saturation": 0.980632996559143
+    },
+    {
+      "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.0776006355881691,
+      "baseline_vs_old_reference": 0.07421573251485825,
+      "candidate_vs_corrected_reference": 0.07772578299045563,
+      "candidate_vs_old_reference": 0.10952166467905045,
+      "old_luma": 0.1007870414953665,
+      "new_luma": 0.11250603114482442,
+      "old_center_rgb": [
+        0.19442724561880434,
+        0.02827880697026757,
+        0.4689375098621876
+      ],
+      "new_center_rgb": [
+        0.24902718552814557,
+        0.02827880697026757,
+        0.5440210572347972
+      ],
+      "old_saturation": 0.9805603623390198,
+      "new_saturation": 0.9823011875152587
+    },
+    {
+      "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.08108338713645935,
+      "baseline_vs_old_reference": 0.09177563339471817,
+      "candidate_vs_corrected_reference": 0.09419151395559311,
+      "candidate_vs_old_reference": 0.12460041791200638,
+      "old_luma": 0.107595794804931,
+      "new_luma": 0.11901689097225374,
+      "old_center_rgb": [
+        0.21206165794828732,
+        0.028291465964279224,
+        0.5044517960460291
+      ],
+      "new_center_rgb": [
+        0.26767947812966497,
+        0.028291465964279224,
+        0.5710556721000515
+      ],
+      "old_saturation": 0.9810673475265503,
+      "new_saturation": 0.9827848076820374
+    },
+    {
+      "name": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.04096870869398117,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.04096870869398117,
+      "old_luma": 0.13405944419840785,
+      "new_luma": 0.13288216414624032,
+      "old_center_rgb": [
+        0.10688852605807621,
+        0.09393733429200556,
+        0.10091433780880149
+      ],
+      "new_center_rgb": [
+        0.10522709380840871,
+        0.0916519994807192,
+        0.09591617692828772
+      ],
+      "old_saturation": 0.8246493220329285,
+      "new_saturation": 0.8170408248901367
+    },
+    {
+      "name": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.08291051536798477,
+      "baseline_vs_old_reference": 0.11710751056671143,
+      "candidate_vs_corrected_reference": 0.08450967073440552,
+      "candidate_vs_old_reference": 0.08326313644647598,
+      "old_luma": 0.16941918601568032,
+      "new_luma": 0.16002548774439537,
+      "old_center_rgb": [
+        0.11656882028849735,
+        0.10463384717274275,
+        0.12616136498273897
+      ],
+      "new_center_rgb": [
+        0.1188137890436358,
+        0.1022972069870216,
+        0.09566654806122607
+      ],
+      "old_saturation": 0.8063244700431824,
+      "new_saturation": 0.8257849812507629
+    },
+    {
+      "name": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fw_main",
+      "byte_identical": false,
+      "direct_change_img_err": 0.02754727005958557,
+      "baseline_vs_old_reference": 0.08495219051837921,
+      "candidate_vs_corrected_reference": 0.07874362170696259,
+      "candidate_vs_old_reference": 0.07769390940666199,
+      "old_luma": 0.16841174466632577,
+      "new_luma": 0.15933613743624253,
+      "old_center_rgb": [
+        0.12226668170161586,
+        0.10979341995607399,
+        0.11642716221165676
+      ],
+      "new_center_rgb": [
+        0.1182820896089274,
+        0.10204854925348483,
+        0.09318730638956976
+      ],
+      "old_saturation": 0.8353941917419434,
+      "new_saturation": 0.8338727474212646
+    },
+    {
+      "name": "suksma - negative infinity for not flinching - couldn't not.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.06059489867568127,
+      "new_luma": 0.06059489867568127,
+      "old_center_rgb": [
+        0.35087565388603437,
+        0.3424071785576977,
+        0.3086210598321322
+      ],
+      "new_center_rgb": [
+        0.35087565388603437,
+        0.3424071785576977,
+        0.3086210598321322
+      ],
+      "old_saturation": 0.17828991413116455,
+      "new_saturation": 0.17828991413116455
+    },
+    {
+      "name": "suksma - negative infinity for not flinching - couldn't not.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.018390540033578873,
+      "candidate_vs_corrected_reference": 0.018390540033578873,
+      "candidate_vs_old_reference": 0.018390540033578873,
+      "old_luma": 0.06281408690389297,
+      "new_luma": 0.06281408690389297,
+      "old_center_rgb": [
+        0.3564721879572763,
+        0.3543369593007089,
+        0.2987864050794646
+      ],
+      "new_center_rgb": [
+        0.3564721879572763,
+        0.3543369593007089,
+        0.2987864050794646
+      ],
+      "old_saturation": 0.1706288978457451,
+      "new_saturation": 0.1706288978457451
+    },
+    {
+      "name": "suksma - negative infinity for not flinching - couldn't not.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "fc_main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.026071608066558838,
+      "candidate_vs_corrected_reference": 0.026071608066558838,
+      "candidate_vs_old_reference": 0.026071608066558838,
+      "old_luma": 0.07222756074806988,
+      "new_luma": 0.07222756074806988,
+      "old_center_rgb": [
+        0.3837579756938141,
+        0.3873854593760086,
+        0.33978300226501346
+      ],
+      "new_center_rgb": [
+        0.3837579756938141,
+        0.3873854593760086,
+        0.33978300226501346
+      ],
+      "old_saturation": 0.15812602937221526,
+      "new_saturation": 0.15812602937221526
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders nz+.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.329949671617799,
+      "new_luma": 0.329949671617799,
+      "old_center_rgb": [
+        0.2617271245990969,
+        0.30168794136787214,
+        0.42193447491890407
+      ],
+      "new_center_rgb": [
+        0.2617271245990969,
+        0.30168794136787214,
+        0.42193447491890407
+      ],
+      "old_saturation": 0.7687443137168884,
+      "new_saturation": 0.7687443137168884
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders nz+.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.10484186559915543,
+      "candidate_vs_corrected_reference": 0.10484186559915543,
+      "candidate_vs_old_reference": 0.10484186559915543,
+      "old_luma": 0.3578843836390913,
+      "new_luma": 0.3578843836390913,
+      "old_center_rgb": [
+        0.3024022495222087,
+        0.33474687172966744,
+        0.43580488098711245
+      ],
+      "new_center_rgb": [
+        0.3024022495222087,
+        0.33474687172966744,
+        0.43580488098711245
+      ],
+      "old_saturation": 0.7289429664611816,
+      "new_saturation": 0.7289429664611816
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders nz+.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.11763264983892441,
+      "candidate_vs_corrected_reference": 0.11763264983892441,
+      "candidate_vs_old_reference": 0.11763264983892441,
+      "old_luma": 0.3395922819434965,
+      "new_luma": 0.3395922819434965,
+      "old_center_rgb": [
+        0.2669954907760429,
+        0.31492248727230104,
+        0.41823866949525423
+      ],
+      "new_center_rgb": [
+        0.2669954907760429,
+        0.31492248727230104,
+        0.41823866949525423
+      ],
+      "old_saturation": 0.7488189101219177,
+      "new_saturation": 0.7488189101219177
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.3666751177060547,
+      "new_luma": 0.3666751177060547,
+      "old_center_rgb": [
+        0.327968001817483,
+        0.32132922984999096,
+        0.4674493201915347
+      ],
+      "new_center_rgb": [
+        0.327968001817483,
+        0.32132922984999096,
+        0.4674493201915347
+      ],
+      "old_saturation": 0.7253665208816529,
+      "new_saturation": 0.7253665208816529
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.1045612096786499,
+      "candidate_vs_corrected_reference": 0.1045612096786499,
+      "candidate_vs_old_reference": 0.1045612096786499,
+      "old_luma": 0.39521055961189594,
+      "new_luma": 0.39521055961189594,
+      "old_center_rgb": [
+        0.37183330109007123,
+        0.3596075798000004,
+        0.4831904936080583
+      ],
+      "new_center_rgb": [
+        0.37183330109007123,
+        0.3596075798000004,
+        0.4831904936080583
+      ],
+      "old_saturation": 0.692667555809021,
+      "new_saturation": 0.692667555809021
+    },
+    {
+      "name": "suksma - penattrition - geiss crossfire shaders.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.12224019318819046,
+      "candidate_vs_corrected_reference": 0.12224019318819046,
+      "candidate_vs_old_reference": 0.12224019318819046,
+      "old_luma": 0.37509994811993164,
+      "new_luma": 0.37509994811993164,
+      "old_center_rgb": [
+        0.3372978461253328,
+        0.33683897364565696,
+        0.4646259414179124
+      ],
+      "new_center_rgb": [
+        0.3372978461253328,
+        0.33683897364565696,
+        0.4646259414179124
+      ],
+      "old_saturation": 0.6912143111228943,
+      "new_saturation": 0.6912143111228943
+    },
+    {
+      "name": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk",
+      "key": "c665",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.0,
+      "candidate_vs_corrected_reference": 0.0,
+      "candidate_vs_old_reference": 0.0,
+      "old_luma": 0.04827187895451113,
+      "new_luma": 0.04827187895451113,
+      "old_center_rgb": [
+        0.27951993572235795,
+        0.15802907556367762,
+        0.24853899848709543
+      ],
+      "new_center_rgb": [
+        0.27951993572235795,
+        0.15802907556367762,
+        0.24853899848709543
+      ],
+      "old_saturation": 0.40491469502449035,
+      "new_saturation": 0.40491469502449035
+    },
+    {
+      "name": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk",
+      "key": "q1330",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.02775145322084427,
+      "candidate_vs_corrected_reference": 0.02775145322084427,
+      "candidate_vs_old_reference": 0.02775145322084427,
+      "old_luma": 0.05179425226583761,
+      "new_luma": 0.05179425226583761,
+      "old_center_rgb": [
+        0.3196729755637542,
+        0.1734351017777753,
+        0.2620813005045086
+      ],
+      "new_center_rgb": [
+        0.3196729755637542,
+        0.1734351017777753,
+        0.2620813005045086
+      ],
+      "old_saturation": 0.39822524785995483,
+      "new_saturation": 0.39822524785995483
+    },
+    {
+      "name": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin + flexi - elephant mating.milk",
+      "key": "q2160",
+      "static_first_main_descriptor_before": "main",
+      "byte_identical": true,
+      "direct_change_img_err": 0.0,
+      "baseline_vs_old_reference": 0.029125407338142395,
+      "candidate_vs_corrected_reference": 0.029125407338142395,
+      "candidate_vs_old_reference": 0.029125407338142395,
+      "old_luma": 0.05252199496072317,
+      "new_luma": 0.05252199496072317,
+      "old_center_rgb": [
+        0.33530729213946364,
+        0.18313538420126277,
+        0.26990211838336164
+      ],
+      "new_center_rgb": [
+        0.33530729213946364,
+        0.18313538420126277,
+        0.26990211838336164
+      ],
+      "old_saturation": 0.3900874674320221,
+      "new_saturation": 0.3900874674320221
+    }
+  ],
+  "status": "Legacy analyzer RNG; nondeterministic cases are not authoritative fidelity comparisons"
+}

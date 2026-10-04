@@ -1,0 +1,13 @@
+{
+  "protocol_sha256": "db30e933df242896ab72e5889623a1c48ca0e4ff2fd0a2ec42c9d8e2f061587f",
+  "complete_coverage": false,
+  "verified_terminal_presets": 413,
+  "statuses": {
+    "failed": 2,
+    "success": 411
+  },
+  "archive": "checkpoint-00413-presets.zip",
+  "archive_bytes": 82720281,
+  "archive_sha256": "ab65d2c878305eb4b036ea8b30717524c7013a8d5bb5dc0d376c0c0f13f23c6c",
+  "files": 5796
+}

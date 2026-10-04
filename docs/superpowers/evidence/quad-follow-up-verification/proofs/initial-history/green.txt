@@ -1,0 +1,19 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from TextureHistoryTest
+[ RUN      ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender
+[       OK ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender (44 ms)
+[ RUN      ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState
+[       OK ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState (4 ms)
+[ RUN      ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization
+[       OK ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization (6 ms)
+[ RUN      ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract
+[       OK ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract (7 ms)
+[ RUN      ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName
+[       OK ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName (8 ms)
+[----------] 5 tests from TextureHistoryTest (71 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (71 ms total)
+[  PASSED  ] 5 tests.

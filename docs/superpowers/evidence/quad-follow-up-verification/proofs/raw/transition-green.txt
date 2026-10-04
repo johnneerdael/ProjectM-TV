@@ -1,0 +1,32 @@
+365: auto: sampled CPU-bound blend keeps its resolution and halves outgoing frames
+366:   ok: g_engine.inTransition
+367:   ok: g_windowW == (cpuBound ? 960u : 768u)
+368:   ok: g_windowH == (cpuBound ? 540u : 432u)
+369:   ok: g_engine.transitionStepped == !cpuBound
+370:   ok: g_outgoingDivisor == (cpuBound ? 2u : 1u)
+371:   ok: !g_engine.inTransition && g_engine.transitionFrames == 63
+372:   ok: g_published.transitionCounter.load() == before + 1
+373:   ok: g_engine.transitionStepped == !cpuBound
+374:   ok: Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == (cpuBound ? 100 : 60)
+375: auto: equally slow sampled low-CPU blend lowers resolution instead
+376:   ok: g_engine.inTransition
+377:   ok: g_windowW == (cpuBound ? 960u : 768u)
+378:   ok: g_windowH == (cpuBound ? 540u : 432u)
+379:   ok: g_engine.transitionStepped == !cpuBound
+380:   ok: g_outgoingDivisor == (cpuBound ? 2u : 1u)
+381:   ok: !g_engine.inTransition && g_engine.transitionFrames == 63
+382:   ok: g_published.transitionCounter.load() == before + 1
+383:   ok: g_engine.transitionStepped == !cpuBound
+384:   ok: Java_nl_neerdael_projectm_core_ProjectMJNI_getBlendScalePercent(nullptr, nullptr) == (cpuBound ? 100 : 60)
+385:   ok: g_windowW == 1280 && g_windowH == 720
+415: ALL TESTS PASSED
+416: Test project /var/folders/cm/m92k6_qs115046xzbll7hfkh0000gn/T/tmp.FivwQTnz73/regressions
+417:     Start 1: hlsl-self-reference
+418: 1/2 Test #1: hlsl-self-reference ..............   Passed    0.40 sec
+419:     Start 2: custom-waveform-bounds
+420: 2/2 Test #2: custom-waveform-bounds ...........   Passed    0.12 sec
+421: 
+422: 100% tests passed, 0 tests failed out of 2
+423: 
+424: Total Test time (real) =   0.53 sec
+425: SKIPPED transition overlay GL test: no EGL/GLES development files (pkg-config egl glesv2)

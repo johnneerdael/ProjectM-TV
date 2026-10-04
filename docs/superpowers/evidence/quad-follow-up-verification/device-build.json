@@ -1,0 +1,15 @@
+{
+  "source_commit": "a59b4e53f43ef9d0bdb1b23392be3ee6854c3a09",
+  "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/apk-verify-repo/app/build/outputs/apk/profile/app-profile.apk",
+  "sha256": "90baafea47aa02c2ebc15fa634d7a69f83f67404317b23aaf2e36c18669f2495",
+  "package": "nl.neerdael.projectmtv.quadverify",
+  "modes": [
+    "classic",
+    "unit",
+    "milkdrop"
+  ],
+  "device_operations_run": true,
+  "device": "AM9 PRO / Mali-G310 / Android14 / 192.168.51.53",
+  "silence_property": "debug.projectmtv.verify.silence",
+  "capture_property": "debug.projectmtv.verify.capture"
+}

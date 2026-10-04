@@ -1,0 +1,741 @@
+[
+  {
+    "preset": {
+      "bytes": 12222,
+      "path": "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "sha256": "c4175d09cdc563337287a1bef32d5cbebf301acbecbf03b1c3a649fb70bb721f"
+    },
+    "candidate_core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+    "driver": {
+      "gl_renderer": "Mali-G310",
+      "gl_version": "OpenGL ES 3.2 v1.r44p1-01eac0.9b95285bf71814048571d5e10c324e77",
+      "android_fingerprint": "Droidlogic/franklin/franklin:14/UD2A.240505.001.W1/eng.ugoos.20260518.150800:userdebug/test-keys"
+    },
+    "checks": {
+      "full_repeat_exact": true,
+      "full_vs_selected_exact": true,
+      "selected_repeat_exact": true
+    },
+    "native_comparisons": [
+      {
+        "frame": 120,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 150,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 180,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 210,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 239,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 300,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 390,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 479,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      }
+    ],
+    "pre28_hash_comparison": {
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "exact": true,
+      "old_key": "e49c011b34df78d948af21092def96367314b2aae4471ffbf56452d29904901f",
+      "old_core_sha256": "97949eaeae554474dd15f786f23aea50fe9cc0d3cb140cfac42af04f661f3225",
+      "old_stream": "04a41b5f11f1114a2e54b2989626577ca5538137a2ea66b6173b6c686e81ce95",
+      "new_stream": "04a41b5f11f1114a2e54b2989626577ca5538137a2ea66b6173b6c686e81ce95",
+      "old_rendered_frames": 480,
+      "new_rendered_frames": 480,
+      "full_stream_comparable": true
+    },
+    "sources": [
+      {
+        "label": "Baseline a59 (v4)",
+        "key": "0a8aad9d4e88d9f5b5c3783de02d77833bd581488bb09aac55984f0344d5952f",
+        "source_commit": "a59b4e53f43ef9d0bdb1b23392be3ee6854c3a09",
+        "core_sha256": "6dc6fbe6bc812856b68b143db09300906f9f85c76bc372627856ab343b2e2137",
+        "wall_seconds": 59.281,
+        "full_stream_sha256": "04a41b5f11f1114a2e54b2989626577ca5538137a2ea66b6173b6c686e81ce95",
+        "selected_native_sha256": {
+          "120": "661989a3632e771fd36468d17c850cb0e9c9ad6a95cfbca343194962f7fd9a4e",
+          "121": "0f712505b63c1e526a025a24a332bf6eaeb2dcbefc481509e50c77d0199b129a",
+          "150": "f41ad96adaa1d05eb99fb20b568810ce045062642444c00ecb9c86e326beb0c4",
+          "151": "5da16ff7629ab6a8c152b707d3e821211a1447a202280fc28d5c1d0549caf28e",
+          "180": "304c020ea5935cfeccabde92dd44bc400f961e95fa5579fe180c61fffd8c8208",
+          "181": "0720f1d560363ba4639373bfdbe3121f1451ae4b13a820d1842ed5ce7f83346a",
+          "210": "295f4d5533087c97f70112a4aaa48e876770457d172e4e5211e21e452988e79c",
+          "211": "831b9b004548c2fd1eec3ceaded24b271e325830eadc3d470948c1346e8883b5",
+          "238": "7f7a9f5d7966f739044fcffc3fbd8182aa42df7eeed0582a44fd49ae13ffab55",
+          "239": "54d0c1b9d5936900b2fa928235fc3da8008fabea682f498469b10bbf19edf861",
+          "300": "08fc45d05a14ebcb0ff066825fa12835d822f31b79adfe33a1d2b2db37c3c537",
+          "301": "931371a21f6161f4b615671d37ee481ccd16a2928952b0c37387e77bb562f5d1",
+          "390": "98d7502efdffc4ac0f5122144cd4807538b96f8657cde91fffb5fe829d53500a",
+          "391": "2bdde211250d8a3eb6be123052a6c40ab05a8171234ffb6c7b4a519e435269a0",
+          "478": "2a9bd1208f4393605d2f012708258701b52e6ea5647c86b9483b1b296f9fc536",
+          "479": "26c090cd810e356529a23e95676ecea01e0afa120d72d44796fc7a6c0bb0dee2"
+        }
+      },
+      {
+        "label": "Pre28 candidate",
+        "key": "e49c011b34df78d948af21092def96367314b2aae4471ffbf56452d29904901f",
+        "source_commit": "4270934706fc158e9ceba3b0b1edd72e750dfd8f",
+        "core_sha256": "97949eaeae554474dd15f786f23aea50fe9cc0d3cb140cfac42af04f661f3225",
+        "wall_seconds": 71.754,
+        "full_stream_sha256": "04a41b5f11f1114a2e54b2989626577ca5538137a2ea66b6173b6c686e81ce95",
+        "selected_native_sha256": {
+          "120": "661989a3632e771fd36468d17c850cb0e9c9ad6a95cfbca343194962f7fd9a4e",
+          "121": "0f712505b63c1e526a025a24a332bf6eaeb2dcbefc481509e50c77d0199b129a",
+          "150": "f41ad96adaa1d05eb99fb20b568810ce045062642444c00ecb9c86e326beb0c4",
+          "151": "5da16ff7629ab6a8c152b707d3e821211a1447a202280fc28d5c1d0549caf28e",
+          "180": "304c020ea5935cfeccabde92dd44bc400f961e95fa5579fe180c61fffd8c8208",
+          "181": "0720f1d560363ba4639373bfdbe3121f1451ae4b13a820d1842ed5ce7f83346a",
+          "210": "295f4d5533087c97f70112a4aaa48e876770457d172e4e5211e21e452988e79c",
+          "211": "831b9b004548c2fd1eec3ceaded24b271e325830eadc3d470948c1346e8883b5",
+          "238": "7f7a9f5d7966f739044fcffc3fbd8182aa42df7eeed0582a44fd49ae13ffab55",
+          "239": "54d0c1b9d5936900b2fa928235fc3da8008fabea682f498469b10bbf19edf861",
+          "300": "08fc45d05a14ebcb0ff066825fa12835d822f31b79adfe33a1d2b2db37c3c537",
+          "301": "931371a21f6161f4b615671d37ee481ccd16a2928952b0c37387e77bb562f5d1",
+          "390": "98d7502efdffc4ac0f5122144cd4807538b96f8657cde91fffb5fe829d53500a",
+          "391": "2bdde211250d8a3eb6be123052a6c40ab05a8171234ffb6c7b4a519e435269a0",
+          "478": "2a9bd1208f4393605d2f012708258701b52e6ea5647c86b9483b1b296f9fc536",
+          "479": "26c090cd810e356529a23e95676ecea01e0afa120d72d44796fc7a6c0bb0dee2"
+        }
+      },
+      {
+        "label": "Candidate28",
+        "key": "755c751fb4baf8c6c79b9b6ec3401b4c8e40e191594ee12cadfc9b3710796013",
+        "source_commit": "eca2d66704195dc4c412f269d52ce4bfde21e48f",
+        "core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+        "wall_seconds": 59.312,
+        "full_stream_sha256": "04a41b5f11f1114a2e54b2989626577ca5538137a2ea66b6173b6c686e81ce95",
+        "selected_native_sha256": {
+          "120": "661989a3632e771fd36468d17c850cb0e9c9ad6a95cfbca343194962f7fd9a4e",
+          "121": "0f712505b63c1e526a025a24a332bf6eaeb2dcbefc481509e50c77d0199b129a",
+          "150": "f41ad96adaa1d05eb99fb20b568810ce045062642444c00ecb9c86e326beb0c4",
+          "151": "5da16ff7629ab6a8c152b707d3e821211a1447a202280fc28d5c1d0549caf28e",
+          "180": "304c020ea5935cfeccabde92dd44bc400f961e95fa5579fe180c61fffd8c8208",
+          "181": "0720f1d560363ba4639373bfdbe3121f1451ae4b13a820d1842ed5ce7f83346a",
+          "210": "295f4d5533087c97f70112a4aaa48e876770457d172e4e5211e21e452988e79c",
+          "211": "831b9b004548c2fd1eec3ceaded24b271e325830eadc3d470948c1346e8883b5",
+          "238": "7f7a9f5d7966f739044fcffc3fbd8182aa42df7eeed0582a44fd49ae13ffab55",
+          "239": "54d0c1b9d5936900b2fa928235fc3da8008fabea682f498469b10bbf19edf861",
+          "300": "08fc45d05a14ebcb0ff066825fa12835d822f31b79adfe33a1d2b2db37c3c537",
+          "301": "931371a21f6161f4b615671d37ee481ccd16a2928952b0c37387e77bb562f5d1",
+          "390": "98d7502efdffc4ac0f5122144cd4807538b96f8657cde91fffb5fe829d53500a",
+          "391": "2bdde211250d8a3eb6be123052a6c40ab05a8171234ffb6c7b4a519e435269a0",
+          "478": "2a9bd1208f4393605d2f012708258701b52e6ea5647c86b9483b1b296f9fc536",
+          "479": "26c090cd810e356529a23e95676ecea01e0afa120d72d44796fc7a6c0bb0dee2"
+        }
+      }
+    ]
+  },
+  {
+    "preset": {
+      "bytes": 5858,
+      "path": "$$$ Royal - Mashup (191).milk",
+      "sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe"
+    },
+    "candidate_core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+    "driver": {
+      "gl_renderer": "Mali-G310",
+      "gl_version": "OpenGL ES 3.2 v1.r44p1-01eac0.9b95285bf71814048571d5e10c324e77",
+      "android_fingerprint": "Droidlogic/franklin/franklin:14/UD2A.240505.001.W1/eng.ugoos.20260518.150800:userdebug/test-keys"
+    },
+    "checks": {
+      "full_repeat_exact": true,
+      "full_vs_selected_exact": true,
+      "selected_repeat_exact": true
+    },
+    "native_comparisons": [
+      {
+        "frame": 120,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 150,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 180,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 210,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 239,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 300,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 390,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 479,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      }
+    ],
+    "pre28_hash_comparison": {
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "exact": true,
+      "old_key": "e6ce36ce674471f05309ab294074b0f624b0b5838cb337c96a6f7b4a92ba8f7d",
+      "old_core_sha256": "97949eaeae554474dd15f786f23aea50fe9cc0d3cb140cfac42af04f661f3225",
+      "old_stream": "e7e8abe146e77290753f36fb0eba32dfd63b9ab5dccfdb56005ee0aee22b8ee1",
+      "new_stream": "e7e8abe146e77290753f36fb0eba32dfd63b9ab5dccfdb56005ee0aee22b8ee1",
+      "old_rendered_frames": 480,
+      "new_rendered_frames": 480,
+      "full_stream_comparable": true
+    },
+    "sources": [
+      {
+        "label": "Baseline a59 (v4)",
+        "key": "a6401cde0ef81727147be9a6a38a6ecf7eed44b605b607567289efe21d4e2455",
+        "source_commit": "a59b4e53f43ef9d0bdb1b23392be3ee6854c3a09",
+        "core_sha256": "6dc6fbe6bc812856b68b143db09300906f9f85c76bc372627856ab343b2e2137",
+        "wall_seconds": 51.697,
+        "full_stream_sha256": "e7e8abe146e77290753f36fb0eba32dfd63b9ab5dccfdb56005ee0aee22b8ee1",
+        "selected_native_sha256": {
+          "120": "0210b590bb5a8aff15ed407eb49e892fd309961ab19ff5e58400b5bb1239301f",
+          "121": "2f7a5f74e2cd6e2ba295f01617ee7ebac7d8b7aa9498f03c15eb4f78ccb2a9d6",
+          "150": "3478207320d676ed1c78fc49fab401de5b48b9faebf34f6c5dc7acd8f5ff7fb6",
+          "151": "9b32c0e303d8825675d499ddda7c30c38d151d77837c6301f749e8eecd8fd5da",
+          "180": "00350a69cfbc50adb3c3372959becd31e3a7fca9376242ac03655bf6ef6831a9",
+          "181": "be1871bd58fc0531bfcadd408b2da44e5b0d84894808135c574f1f618336f392",
+          "210": "39ec7dbeb3bfc00939cb491d782a47961d931a5fe31f46501fdfe1a03caeff5a",
+          "211": "deedfebe1711ada26f88627ccf3962e2b9a9fd68f70742407d506f19c83e7d9d",
+          "238": "a4a0bef75973f6d913088d37788009ad72d4b7c588984ada94f28b4488a07229",
+          "239": "0ac230a1cf65698f8d578a0389e8e5dfc77470d4b745360ca6e17128280e457d",
+          "300": "5861523c5520204309f68575cacb8fafbffd83735922f1f9b98ff2c4586dda0c",
+          "301": "91c2da81247259395849847416fc2745ec635e0c93a5c275255fdccf13e82417",
+          "390": "fa790ce46395a069511fd93a7aad18b2a423a6d56c3d060b956909798dc16a59",
+          "391": "e0e4490a43739edf617629fcb135e5e5087bfeeb29674600ba45a93be940a067",
+          "478": "f1f61521bf8722a7850a24152f41c379a3e064c5a106fd9efbc2281dd8f47d8a",
+          "479": "72f927f803705867e43c233ddc3e9f769551cedee111436713709f4c851e45f1"
+        }
+      },
+      {
+        "label": "Pre28 candidate",
+        "key": "e6ce36ce674471f05309ab294074b0f624b0b5838cb337c96a6f7b4a92ba8f7d",
+        "source_commit": "4270934706fc158e9ceba3b0b1edd72e750dfd8f",
+        "core_sha256": "97949eaeae554474dd15f786f23aea50fe9cc0d3cb140cfac42af04f661f3225",
+        "wall_seconds": 55.385,
+        "full_stream_sha256": "e7e8abe146e77290753f36fb0eba32dfd63b9ab5dccfdb56005ee0aee22b8ee1",
+        "selected_native_sha256": {
+          "120": "0210b590bb5a8aff15ed407eb49e892fd309961ab19ff5e58400b5bb1239301f",
+          "121": "2f7a5f74e2cd6e2ba295f01617ee7ebac7d8b7aa9498f03c15eb4f78ccb2a9d6",
+          "150": "3478207320d676ed1c78fc49fab401de5b48b9faebf34f6c5dc7acd8f5ff7fb6",
+          "151": "9b32c0e303d8825675d499ddda7c30c38d151d77837c6301f749e8eecd8fd5da",
+          "180": "00350a69cfbc50adb3c3372959becd31e3a7fca9376242ac03655bf6ef6831a9",
+          "181": "be1871bd58fc0531bfcadd408b2da44e5b0d84894808135c574f1f618336f392",
+          "210": "39ec7dbeb3bfc00939cb491d782a47961d931a5fe31f46501fdfe1a03caeff5a",
+          "211": "deedfebe1711ada26f88627ccf3962e2b9a9fd68f70742407d506f19c83e7d9d",
+          "238": "a4a0bef75973f6d913088d37788009ad72d4b7c588984ada94f28b4488a07229",
+          "239": "0ac230a1cf65698f8d578a0389e8e5dfc77470d4b745360ca6e17128280e457d",
+          "300": "5861523c5520204309f68575cacb8fafbffd83735922f1f9b98ff2c4586dda0c",
+          "301": "91c2da81247259395849847416fc2745ec635e0c93a5c275255fdccf13e82417",
+          "390": "fa790ce46395a069511fd93a7aad18b2a423a6d56c3d060b956909798dc16a59",
+          "391": "e0e4490a43739edf617629fcb135e5e5087bfeeb29674600ba45a93be940a067",
+          "478": "f1f61521bf8722a7850a24152f41c379a3e064c5a106fd9efbc2281dd8f47d8a",
+          "479": "72f927f803705867e43c233ddc3e9f769551cedee111436713709f4c851e45f1"
+        }
+      },
+      {
+        "label": "Candidate28",
+        "key": "2dd4f06e98bbce60038b4c60b7593b197030d1c95792bb6d1a925054945896e6",
+        "source_commit": "eca2d66704195dc4c412f269d52ce4bfde21e48f",
+        "core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+        "wall_seconds": 49.596,
+        "full_stream_sha256": "e7e8abe146e77290753f36fb0eba32dfd63b9ab5dccfdb56005ee0aee22b8ee1",
+        "selected_native_sha256": {
+          "120": "0210b590bb5a8aff15ed407eb49e892fd309961ab19ff5e58400b5bb1239301f",
+          "121": "2f7a5f74e2cd6e2ba295f01617ee7ebac7d8b7aa9498f03c15eb4f78ccb2a9d6",
+          "150": "3478207320d676ed1c78fc49fab401de5b48b9faebf34f6c5dc7acd8f5ff7fb6",
+          "151": "9b32c0e303d8825675d499ddda7c30c38d151d77837c6301f749e8eecd8fd5da",
+          "180": "00350a69cfbc50adb3c3372959becd31e3a7fca9376242ac03655bf6ef6831a9",
+          "181": "be1871bd58fc0531bfcadd408b2da44e5b0d84894808135c574f1f618336f392",
+          "210": "39ec7dbeb3bfc00939cb491d782a47961d931a5fe31f46501fdfe1a03caeff5a",
+          "211": "deedfebe1711ada26f88627ccf3962e2b9a9fd68f70742407d506f19c83e7d9d",
+          "238": "a4a0bef75973f6d913088d37788009ad72d4b7c588984ada94f28b4488a07229",
+          "239": "0ac230a1cf65698f8d578a0389e8e5dfc77470d4b745360ca6e17128280e457d",
+          "300": "5861523c5520204309f68575cacb8fafbffd83735922f1f9b98ff2c4586dda0c",
+          "301": "91c2da81247259395849847416fc2745ec635e0c93a5c275255fdccf13e82417",
+          "390": "fa790ce46395a069511fd93a7aad18b2a423a6d56c3d060b956909798dc16a59",
+          "391": "e0e4490a43739edf617629fcb135e5e5087bfeeb29674600ba45a93be940a067",
+          "478": "f1f61521bf8722a7850a24152f41c379a3e064c5a106fd9efbc2281dd8f47d8a",
+          "479": "72f927f803705867e43c233ddc3e9f769551cedee111436713709f4c851e45f1"
+        }
+      }
+    ]
+  },
+  {
+    "preset": {
+      "bytes": 7977,
+      "path": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "sha256": "f3cc16483f388d1bb40e39785368b3f8610f56bcf8162a11b6daa3e5a7256e16"
+    },
+    "candidate_core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+    "driver": {
+      "gl_renderer": "Mali-G310",
+      "gl_version": "OpenGL ES 3.2 v1.r44p1-01eac0.9b95285bf71814048571d5e10c324e77",
+      "android_fingerprint": "Droidlogic/franklin/franklin:14/UD2A.240505.001.W1/eng.ugoos.20260518.150800:userdebug/test-keys"
+    },
+    "checks": {
+      "full_repeat_exact": true,
+      "full_vs_selected_exact": true,
+      "selected_repeat_exact": true
+    },
+    "native_comparisons": [
+      {
+        "frame": 120,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.026621364057064056,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 150,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0300106443464756,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 180,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.033572401851415634,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 210,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.0471063069999218,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 239,
+        "apk_thumbnail_rgb_mae_to_candidate28": {
+          "Baseline a59 (v4)": 0.08393944054841995,
+          "Pre28 candidate": 0.0
+        },
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      }
+    ],
+    "pre28_hash_comparison": {
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239
+      ],
+      "exact": true,
+      "old_key": "a76984781c940da1f51b693d4aa5f3b99bfbd36e0b5da81417099b6d90507a38",
+      "old_core_sha256": "97949eaeae554474dd15f786f23aea50fe9cc0d3cb140cfac42af04f661f3225",
+      "old_stream": "87de4fd5af5ef172f478d80d805db119a2256ba5964a7c22174f67a4a710cbe2",
+      "new_stream": "0e68d1d62f541eabb96a2075a1ebd1cfeeb15912ec976771437ea90a67cac4c0",
+      "old_rendered_frames": 240,
+      "new_rendered_frames": 480,
+      "full_stream_comparable": false
+    },
+    "sources": [
+      {
+        "label": "Baseline a59 (v4)",
+        "key": "b90fe38921b74b19cf80bd10e5da5476d68ce11df8a3ea4a88b17bdeeb80e558",
+        "source_commit": "a59b4e53f43ef9d0bdb1b23392be3ee6854c3a09",
+        "core_sha256": "6dc6fbe6bc812856b68b143db09300906f9f85c76bc372627856ab343b2e2137",
+        "wall_seconds": 30.217,
+        "full_stream_sha256": "971e92d32294df7f4618d56f8bf94c3570f4aaed04faea3fbae4be50e695c92c",
+        "selected_native_sha256": {
+          "120": "2d2b3ac93862747664c9d30a4a1927a869f8e29daff3959f428977c21c9cc372",
+          "121": "a29e66e6a5966b3ab4e01e4551e5b3d5dd9033e3c7f50ea9f4e9a49a5039b955",
+          "150": "a8b89b1729ad53ac1b2702d60a7f54045efeca122100f83f0a959240cb62d249",
+          "151": "7b05fbe9f7385bf14f5c822bd58be102ba16b87bf6bd2e454c0396286c9a6864",
+          "180": "30728c297bbfc4ba03ae95e145705b6dad00a4d8e92a20338c425a75cc7d304c",
+          "181": "c92e46ce770a1398dad7efaa748b82173f34ec37afff8393e69d106166ab632a",
+          "210": "89a282631e1082da16110668e2baed85077d4c33f594b1753c1987431d5aacda",
+          "211": "ecc12c3dce410082dc15941942b649f71b01f3e48835c5925cb2166755be8a45",
+          "238": "474ab137356738a33ff6ee2a9577bc56e215b34260987cc205498407517e86f3",
+          "239": "0ca33dc0d4456a896d808bc47819f559dc7eba020d2538b9a937b03f2d886144"
+        }
+      },
+      {
+        "label": "Pre28 candidate",
+        "key": "a76984781c940da1f51b693d4aa5f3b99bfbd36e0b5da81417099b6d90507a38",
+        "source_commit": "4270934706fc158e9ceba3b0b1edd72e750dfd8f",
+        "core_sha256": "97949eaeae554474dd15f786f23aea50fe9cc0d3cb140cfac42af04f661f3225",
+        "wall_seconds": 32.596,
+        "full_stream_sha256": "87de4fd5af5ef172f478d80d805db119a2256ba5964a7c22174f67a4a710cbe2",
+        "selected_native_sha256": {
+          "120": "91fba064ed04c9e389751ec71b67afc63a00994c2e11d2a452323ca4c61b1d14",
+          "121": "d9374d238f56bd61dafdaa180a8f86b99c7a672552e176217431ba5886a3cb41",
+          "150": "f31c5460ee50182dd58478e74ca16726841dd4b4332d8e5f4a91a552ebc531c3",
+          "151": "745773e0eeca1b32a0799b8d2a4cface76744c78b46deee792616f212566bdec",
+          "180": "fc29f35ce79f49c670f17df9dd62da8db67b433b474c0dbcb24eb40abc30279a",
+          "181": "9e15305da6ff2699bc43a546b5977fda8beaa07fa6bee220e2baa0a56b132ed3",
+          "210": "e56670a6a2e6420301a16b89501f54efeee6966d65b43fc7e8913c64d02681b8",
+          "211": "fcfc9a7e611c69cae2ed87cd5df8468bfaeff8ce1028e5c85f18ad80a9a90ef7",
+          "238": "1985b36c24f36ef6902b1a881e44d8598789b17da69009709f6faf9e6be48fd3",
+          "239": "86cd0e27e10fb4c86c25572f897618ca7146c45f1fbc0b9f9b67bc6ad48ae7a5"
+        }
+      },
+      {
+        "label": "Candidate28",
+        "key": "a738331092da6dbcaee51f1f7731515176dd3c191e266091509d66f2431158a2",
+        "source_commit": "eca2d66704195dc4c412f269d52ce4bfde21e48f",
+        "core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+        "wall_seconds": 53.235,
+        "full_stream_sha256": "0e68d1d62f541eabb96a2075a1ebd1cfeeb15912ec976771437ea90a67cac4c0",
+        "selected_native_sha256": {
+          "120": "91fba064ed04c9e389751ec71b67afc63a00994c2e11d2a452323ca4c61b1d14",
+          "121": "d9374d238f56bd61dafdaa180a8f86b99c7a672552e176217431ba5886a3cb41",
+          "150": "f31c5460ee50182dd58478e74ca16726841dd4b4332d8e5f4a91a552ebc531c3",
+          "151": "745773e0eeca1b32a0799b8d2a4cface76744c78b46deee792616f212566bdec",
+          "180": "fc29f35ce79f49c670f17df9dd62da8db67b433b474c0dbcb24eb40abc30279a",
+          "181": "9e15305da6ff2699bc43a546b5977fda8beaa07fa6bee220e2baa0a56b132ed3",
+          "210": "e56670a6a2e6420301a16b89501f54efeee6966d65b43fc7e8913c64d02681b8",
+          "211": "fcfc9a7e611c69cae2ed87cd5df8468bfaeff8ce1028e5c85f18ad80a9a90ef7",
+          "238": "1985b36c24f36ef6902b1a881e44d8598789b17da69009709f6faf9e6be48fd3",
+          "239": "86cd0e27e10fb4c86c25572f897618ca7146c45f1fbc0b9f9b67bc6ad48ae7a5",
+          "300": "48b78fe9e9bd6bee71820b1d915c7b8b6563a91470c66b83ab14abe59254c93e",
+          "301": "f1e2aab9cf447c2e26c6713a820544adf1d14c75076528ffddf984d503e81df2",
+          "390": "3d9c23227eeecf713012dd9ceafe8ec8a1269473393a152043921f215c421495",
+          "391": "24f4dfaf4f1ae308d8ee8b34f0aaecadc17ad155b2368c475e25b8d70ac34624",
+          "478": "79c8e4ed83bf3847f813ca45159fb9509447a282b091065e556e0b39c7f10b4c",
+          "479": "50806fe88325fd4b0fec6e8691ac1e7b5140866814fdc49ee270a141cf67b453"
+        }
+      }
+    ]
+  },
+  {
+    "preset": {
+      "bytes": 13572,
+      "path": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+      "sha256": "f9103cf98d60d669f8216bc99771ea28a8b68e465afcc4786ca434235c8611d6"
+    },
+    "candidate_core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+    "driver": {
+      "gl_renderer": "Mali-G310",
+      "gl_version": "OpenGL ES 3.2 v1.r44p1-01eac0.9b95285bf71814048571d5e10c324e77",
+      "android_fingerprint": "Droidlogic/franklin/franklin:14/UD2A.240505.001.W1/eng.ugoos.20260518.150800:userdebug/test-keys"
+    },
+    "checks": {
+      "full_repeat_exact": true,
+      "full_vs_selected_exact": true,
+      "selected_repeat_exact": true
+    },
+    "native_comparisons": [
+      {
+        "frame": 120,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 150,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 180,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 210,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 239,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 300,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 390,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      },
+      {
+        "frame": 479,
+        "apk_thumbnail_rgb_mae_to_candidate28": {},
+        "thumbnail_size": [
+          256,
+          144
+        ],
+        "not_historical_reference_fidelity_metric": true
+      }
+    ],
+    "pre28_hash_comparison": null,
+    "sources": [
+      {
+        "label": "Candidate28",
+        "key": "766fd0b97061156bb3d3d39e752c2e08eec4de211ab78f6c8b8f18be194a3b3e",
+        "source_commit": "eca2d66704195dc4c412f269d52ce4bfde21e48f",
+        "core_sha256": "d0867fca97c52998a975ad1970f08ec3ae29b91293b079b0c41a07f0c785cc9c",
+        "wall_seconds": 65.065,
+        "full_stream_sha256": "773aa8e85e655ff39d186929aa8760f8551d90ea373e2b982f3e4df247a0aaa3",
+        "selected_native_sha256": {
+          "120": "08883562aa283cbf06febb09a7bd25673a646414312a540761737348979d3998",
+          "121": "a2038c5374783acca6941df5bd0739d5ea89ac4b811ae39610f02724ac7f2187",
+          "150": "7adf694b1094f7dee4091ca3dcf83639e8e05df4d53921d4c230a46ef4063a07",
+          "151": "b094994c3a2e3f0ebe7b556cc4ddb8a594dcd95a9942e1bc161a32ad6e673278",
+          "180": "fc9ece3629b4075ef6197cb2ae0e213099f6fa3604ad049e1af0707ee2485f95",
+          "181": "50fb52c910ad41322ceca6f7479379a677df91dbd238145a43017f37bef52312",
+          "210": "471fc6adba100ce44a524512a9ff2c2af41905e21c08317e913b60a1f8fc1b09",
+          "211": "7840195d05163e3f103a2bec12202530ddc1aaf6874462df53c81b6c68a0248a",
+          "238": "29fdcadd804617d252676f64c1310a07c001335519658459c68b7d65dd0875ec",
+          "239": "ddaded059fb07c67fb4251b96d8139d843236ee9408ade5cc20147848cbca7c7",
+          "300": "c2da164ee73d0dc7e14debecc10759a641420a54b4f21d0d7fbce7fa8fa3b287",
+          "301": "5e68efd0e7405f261a5b726ba1472be8bbde27cd00af74a551044a0a6965cec0",
+          "390": "819a7353f335b034e5f5144260c4567a68d4f1e1f0f093531081d81b8313ce26",
+          "391": "8220043bf6803b53f6c96cab118c7fa8b4806c73a2dbc47f94045ea6d46c15ad",
+          "478": "a750c8f6c0f927b13d9345a5f50056a493552d823035dab92722737db8e2c770",
+          "479": "a234822689fa44154b46aacffde624bee6a6fa2296fe00c5f82df100d63d7341"
+        }
+      }
+    ]
+  }
+]

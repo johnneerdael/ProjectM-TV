@@ -1,0 +1,82 @@
+[
+  {
+    "variant": "off",
+    "repeat": 1,
+    "identity": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "08dc4fc5abe928f83d8306ea6f9a18a26da8be80ef7589c578e1a35c3cdd0163",
+      "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+    },
+    "frame_hashes": [
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30"
+    ],
+    "final_rgb": [
+      0.5002156530971102,
+      0.5003803626713843,
+      0.25098039215686274
+    ],
+    "copy_difference_mae": 0.0
+  },
+  {
+    "variant": "off",
+    "repeat": 2,
+    "identity": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "08dc4fc5abe928f83d8306ea6f9a18a26da8be80ef7589c578e1a35c3cdd0163",
+      "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+    },
+    "frame_hashes": [
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30"
+    ],
+    "final_rgb": [
+      0.5002156530971102,
+      0.5003803626713843,
+      0.25098039215686274
+    ],
+    "copy_difference_mae": 0.0
+  },
+  {
+    "variant": "on",
+    "repeat": 1,
+    "identity": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "08dc4fc5abe928f83d8306ea6f9a18a26da8be80ef7589c578e1a35c3cdd0163",
+      "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+    },
+    "frame_hashes": [
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "180edf14b28af55c8e48cfc4d7129a0463ae6084061e564314ccd6f6c15a9b82"
+    ],
+    "final_rgb": [
+      0.5002156530971102,
+      0.5003862597670647,
+      0.25098039215686274
+    ],
+    "copy_difference_mae": 0.0003850574139505625
+  },
+  {
+    "variant": "on",
+    "repeat": 2,
+    "identity": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "08dc4fc5abe928f83d8306ea6f9a18a26da8be80ef7589c578e1a35c3cdd0163",
+      "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+    },
+    "frame_hashes": [
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "2a47df41148036518ac96f76867f795674c5d869bc4221253ebf983fd2547d30",
+      "180edf14b28af55c8e48cfc4d7129a0463ae6084061e564314ccd6f6c15a9b82"
+    ],
+    "final_rgb": [
+      0.5002156530971102,
+      0.5003862597670647,
+      0.25098039215686274
+    ],
+    "copy_difference_mae": 0.0003850574139505625
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "review_thread": "https://github.com/johnneerdael/ProjectM-TV/pull/23#discussion_r4176987183",
+  "regression_result_before": "8 assertion failures from swapped/invalid/missing/altered failed-producer evidence",
+  "audit_tests_after": 13,
+  "all_host_tool_tests_after": 64,
+  "verified_terminal_presets": 1216,
+  "statuses": {
+    "failed": 13,
+    "success": 1203
+  },
+  "integrity_issues": [],
+  "complete_coverage": false,
+  "audit_source_sha256": "3dfeee06301e5945bd9cd036fffb0f32e41efda01c83330c86bc27dbd119d7e9",
+  "test_source_sha256": "f631530ea48cb1be748741dc6f26e0f5fd7e90cec05792a309ed07a4273d4769",
+  "snapshot_plain_sha256": "a333174226b61b44368411cf8f27c1ee02088a676f3451df588d2fd17cc83839",
+  "snapshot_gzip_sha256": "59309113a66f170dde9cf78bbc4b6916501384a7292ef8724458ad8f23793b8c",
+  "scope": "Partial actual-core snapshot after checking retained producer identity for successful and failed jobs; explicit host/pre-engine failures remain attempted coverage, not successful renders."
+}

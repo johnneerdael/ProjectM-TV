@@ -1,0 +1,327 @@
+{
+  "scope": "Immutable recovery epoch, three exact-hash controls and owner bridge; original baseline protocol unchanged",
+  "files": [
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/latest-baseline-owner-launch.json",
+      "bytes": 1617,
+      "sha256": "552d4044d28764fb18239d3919bc2f625481bc2b49c4a0515db35dedeb015f1d"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/owner-receipt.json",
+      "bytes": 1677,
+      "sha256": "de30ef64054c4f9e09580f281cf33fe36e5991178e62ab82e218fdba368e3b0d"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probe-report.json",
+      "bytes": 1035,
+      "sha256": "7a1fa4bd1677e29e8c7fc95b3236fc7f27217dabea5121a2ad749ab2d96ad810"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/instrumentation.log",
+      "bytes": 16949,
+      "sha256": "a6939b4f40f31178450004f78e96404269af74d54826837f534e7ec1059ca5bc"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/job.json",
+      "bytes": 1031,
+      "sha256": "6856e5dae56df6cf0342fd4a5fcb3808a144562589e2c7d1639d01118f0035c2"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0120.png",
+      "bytes": 27470,
+      "sha256": "8e47ad7ed38efb954c35ffebcf1ed140d2e2d57eee77ffd9281fb2d573227b92"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0121.png",
+      "bytes": 27185,
+      "sha256": "360e7200c59827ead4b6b02f64cff3d7d31304316704dcb8b7b12b49322a4c54"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0150.png",
+      "bytes": 27428,
+      "sha256": "233d61159c458604eb5d14b0de00669e30e7043e835d3562892ce03eebc3e6ef"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0151.png",
+      "bytes": 26778,
+      "sha256": "996124741599560f5b05db6611b28cd6d3a384044564bb06f2dd1aac2a0bc7d6"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0180.png",
+      "bytes": 27885,
+      "sha256": "11ba9e8cc491eef84ee03e22e0eff671399c28b98dd97b24fde4f38a84a5993a"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0181.png",
+      "bytes": 27574,
+      "sha256": "b520458ae9b036da5f750cdc43e6d20e2200281dc5f88edd2ebc4ab51f58355b"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0210.png",
+      "bytes": 28002,
+      "sha256": "98822881cc40b06616c27b6dfe27389dc9e7d75e87cf82aacf5c019256316e7f"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0211.png",
+      "bytes": 27261,
+      "sha256": "479a36973efbfc8d59e208b30e089e910f6d84ead19e059ca5fd0301af2d8e0a"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0238.png",
+      "bytes": 27518,
+      "sha256": "4e3c31f99461b13500eb2df140baec9b65a9debe9a135b0a49c1be79a4bffa4d"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0239.png",
+      "bytes": 27477,
+      "sha256": "d89a192cac66d6c065586d71814ddf7bc16b8666b3964162c311aa1f884d0070"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0300.png",
+      "bytes": 27411,
+      "sha256": "1005a24fe90b185d4f3c12c90c7322ae4fe07c2d213d2e49d88ef3985eb1e026"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0301.png",
+      "bytes": 27736,
+      "sha256": "b2cac0072f72767b9a6bc2b8c581a34195aed6990b361177f8f46db272327f5f"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0390.png",
+      "bytes": 28574,
+      "sha256": "2a74d3085c75e7b2a694fc9096f72d855d890179fd489ee0977d99f301eafeff"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0391.png",
+      "bytes": 28041,
+      "sha256": "895d7e5b8dd872d8dbffd18318fe107ca3aa395be53efa628edce7f8e3bde7e9"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0478.png",
+      "bytes": 27640,
+      "sha256": "5606edc206b4276f18f2273fa1071de690b8aafc0a2cbc87f3c8c5614884dc6e"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frame-0479.png",
+      "bytes": 27405,
+      "sha256": "ed8db79816bcf4e655a6ac3b823772cf6a9fd5419e3bf0294b76055eeea11013"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/frames.jsonl.gz",
+      "bytes": 2264,
+      "sha256": "5fd581d96887d1e9052f94ad6b6d2b9bdf0eb6e0318cf3d8e78e2e6098e2cc79"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/output/result.json",
+      "bytes": 16893,
+      "sha256": "837bf04200a55858cb2efcdcfe3a2f221b3907fea7af4173abea7bb2320b7e65"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/pull.log",
+      "bytes": 203,
+      "sha256": "a659783cf74d4070d70141f92e3e3a66acea8f8af7c4d264938f0948c5b2e6b6"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/5ccd75c0d7bc01c105a737f7086a789227d7599b66382d63184e79ab061cb2e0/row.json",
+      "bytes": 21922,
+      "sha256": "915edb1c861a2d6fc2c47cdaa5aa44d79c2370b6e896c9bd9dca4f4d0b1502c5"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/instrumentation.log",
+      "bytes": 17030,
+      "sha256": "c2a32b5cbdf860012847c0a55da6e079c632c9cfd658edf5b74d8b135e6a6f7a"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/job.json",
+      "bytes": 1111,
+      "sha256": "c273341758afe14c303e38104f86e19bb948328428ee156589130ee53746aa5c"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0120.png",
+      "bytes": 86866,
+      "sha256": "25f8d81b4d6b5fb117c2e6cff79b0fd6472dcea284ae0c2fe87438613e74d4db"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0121.png",
+      "bytes": 86783,
+      "sha256": "d812aa3e219b9b4c3492c046f5c9b4d9f179362b1a11e9b2a2a3a99b53bc24b6"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0150.png",
+      "bytes": 83700,
+      "sha256": "b736ff6b99ae61bae184ff86009fc81b89a2571965f282d97d7e29d968efc0ce"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0151.png",
+      "bytes": 83435,
+      "sha256": "07fc6fad785d9635b8e0197e3fbc5cb5fdd316b762c2a8eaa71202c092d773dc"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0180.png",
+      "bytes": 93035,
+      "sha256": "18d9447aaf9f09d70cce350abf293ad962d92171da59e24420d0833351bba5b9"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0181.png",
+      "bytes": 89841,
+      "sha256": "c6a00aec9e57f7c65ea555e5269f4a5b826e87851f6b8fa005da8d175c4bcd2a"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0210.png",
+      "bytes": 79230,
+      "sha256": "7181ae1a598bb34dba509645ffd293c894c3f016c126cc27266a71fca3614c2b"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0211.png",
+      "bytes": 78902,
+      "sha256": "38495b2f51b9cdd0d5fe604978b5fc8c04fa7a5a016789f334e1a8b802b15d73"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0238.png",
+      "bytes": 85850,
+      "sha256": "1c5a36b482dfdea6fdf69b8d58241b425db5610c995b963f3c605f90efb0890d"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0239.png",
+      "bytes": 85891,
+      "sha256": "c70945fb73fcfd04418a01eb96c0d2c1056712c0c5b445afbbe4dd7fe33cebef"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0300.png",
+      "bytes": 70705,
+      "sha256": "85683787b1ab082414544873d9162f019c796b97ba2182896e88625bb15dd019"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0301.png",
+      "bytes": 70617,
+      "sha256": "17a90351f5b5a26dd3b8f11e207009ca841b1e2a3fa5359ca40b1c2ffa232d04"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0390.png",
+      "bytes": 71308,
+      "sha256": "c023fa4e566a290989c1cfb2cf6f11057c234a959f3d102f6805a5396f50f9d0"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0391.png",
+      "bytes": 71770,
+      "sha256": "071995e2225521af7bccf6f5ae2a7d6e6b7a0795d0f11380faacfd6c683125f8"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0478.png",
+      "bytes": 84636,
+      "sha256": "6a0a909026b0cefbe58e45f238951d03985b75d1206c38f147d65bbb738c1725"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frame-0479.png",
+      "bytes": 83789,
+      "sha256": "a3b59d9a50333994a7089c1b11e480bd95f201544b550f025ccc0495a3e9a709"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/frames.jsonl.gz",
+      "bytes": 2418,
+      "sha256": "ecf7fe0bcffb6437298ee22630f5a3ac887caeaaf615ffb68de02e816eb462b1"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/output/result.json",
+      "bytes": 16974,
+      "sha256": "829cc0f2854b29daf65995cb491a05d4ddf5c478642842ffb8e50b2893703611"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/pull.log",
+      "bytes": 204,
+      "sha256": "6cb1efa87ee0c738a5e4091ab46200772bbdb73ddc8b3526de074fb64e3e5484"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/7c8bb8f12331d4c433832dab46d2ff31fe0f97ef00e8efd5e717d3c29bbae7f1/row.json",
+      "bytes": 22091,
+      "sha256": "22e246358ce88527cd7a3720b99aa577a13b3c39ef343f6783d6e7662dca44ea"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/instrumentation.log",
+      "bytes": 13765,
+      "sha256": "3a0c10eb50f12c21e656c58285f8ae51b9321d1b3b17a0e0615e552c99c8f765"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/job.json",
+      "bytes": 1034,
+      "sha256": "ae56376493c9ff969f96323314241e23f111abcb89bf2763ca68ca181e65420a"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0120.png",
+      "bytes": 69037,
+      "sha256": "ebc6e7bc795e707c3a43c193db1278cd8df521ca25ca53c60157ec69900aa1e9"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0121.png",
+      "bytes": 69009,
+      "sha256": "01209f7d7c9b2868ba3840a0980657353bc68ddcc81f57149c7041785edd69d3"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0150.png",
+      "bytes": 71064,
+      "sha256": "081a30eb8c8e9e2905e24e50221ee05fbf6c7a0562e0f9d522c875186ef36769"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0151.png",
+      "bytes": 70750,
+      "sha256": "963a4b1e0639d4b52028bc305847c5a0b92bb874720bf3f20e489f92aa430969"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0180.png",
+      "bytes": 71938,
+      "sha256": "921b7b8ec7782aa81c0db196c096be77a4c03d7e366d4a52b39cf17fd7947164"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0181.png",
+      "bytes": 71735,
+      "sha256": "30ca4f741a28c3e75d4745217b7fc2fd2819bc881f92b0f4c860f2e5a9fd433a"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0210.png",
+      "bytes": 77730,
+      "sha256": "934ae6d453856d87f32c730ad3fbccb779e560034cd17085d77792c1295fbaea"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0211.png",
+      "bytes": 77825,
+      "sha256": "36f128d5398ee9b5d2ffa6b88cef2fe9ce4987a5ac64ed2c8018df43209fc8ae"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0238.png",
+      "bytes": 77338,
+      "sha256": "ae96fbf619047c839d8ed6e887b00cefbc96944da0a8a28675c5063af5db01f5"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frame-0239.png",
+      "bytes": 77683,
+      "sha256": "60253933d2c02760e7b204e7aa2733162389542029e39e7885f3439f545e1f53"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/frames.jsonl.gz",
+      "bytes": 1336,
+      "sha256": "aaf58caa8417ece43feeb7dfe49631a5b054dcd2c38427445beb82649e13e42a"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/output/result.json",
+      "bytes": 13709,
+      "sha256": "0f24add1de5de5c3501df178c0ee8b4b51edb1a5d7d653c824e97115fb859a18"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/pull.log",
+      "bytes": 203,
+      "sha256": "75165b75ebcfbe18f1cdedc36a86da093ce05ddd5748f91e7f1d500a28c991e9"
+    },
+    {
+      "path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/owner-epochs/20334/probes/jobs/cc41fe56ecf996e81d9bbb2c7bcf3908f68099eaeecdee8cf91fbf6360e50690/row.json",
+      "bytes": 17590,
+      "sha256": "32913094d0ea5708c2feadc8847ca2fe96a7c760262409f16853e284405dbfda"
+    },
+    {
+      "path": "docs/superpowers/evidence/quad-follow-up-verification/core-corpus/owner_bridge.py",
+      "bytes": 10414,
+      "sha256": "a6dd91648cc90f513bdec7d8bef77b690964c4bf68b2ef76048867df6d712265"
+    }
+  ],
+  "archive_sha256": "f37b6f30526682dd1b5087ee8caaa413b817e30dd0e9ab6c0b4ddeef522163f4",
+  "archive_bytes": 2574638
+}

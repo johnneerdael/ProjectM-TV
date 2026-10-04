@@ -1,0 +1,38 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+Note: Google Test filter = PerFrameRecordCompatibility.*
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from PerFrameRecordCompatibility
+[ RUN      ] PerFrameRecordCompatibility.JoinsIdentifierSplitAcrossRecords
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/expression-record-compat/source/tests/libprojectM/PerFrameRecordCompatibilityTest.cpp:11: Failure
+Expected: context.CompilePerFrameCode("is_beat=2;\nk1=is_\nbeat;\nzoom=k1;\n") doesn't throw an exception.
+  Actual: it throws libprojectM::MilkdropPreset::MilkdropCompileException with description "Could not compile per-frame code".
+
+[  FAILED  ] PerFrameRecordCompatibility.JoinsIdentifierSplitAcrossRecords (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.RemovesLineCommentsBeforeJoiningRecords
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/expression-record-compat/source/tests/libprojectM/PerFrameRecordCompatibilityTest.cpp:19: Failure
+Expected: context.CompilePerFrameCode("is_beat=3;\nk1=is_// split token\nbeat;\nzoom=k1;\n") doesn't throw an exception.
+  Actual: it throws libprojectM::MilkdropPreset::MilkdropCompileException with description "Could not compile per-frame code".
+
+[  FAILED  ] PerFrameRecordCompatibility.RemovesLineCommentsBeforeJoiningRecords (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.SupportsLegacyBackslashComments
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/expression-record-compat/source/tests/libprojectM/PerFrameRecordCompatibilityTest.cpp:27: Failure
+Expected: context.CompilePerFrameCode("is_beat=4;\nk1=is_\\\\ split token\nbeat;\nzoom=k1;\n") doesn't throw an exception.
+  Actual: it throws libprojectM::MilkdropPreset::MilkdropCompileException with description "Could not compile per-frame code".
+
+[  FAILED  ] PerFrameRecordCompatibility.SupportsLegacyBackslashComments (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.KeepsAcceptedBlockCommentsOnOriginalPath
+ // marker [       OK ] PerFrameRecordCompatibility.KeepsAcceptedBlockCommentsOnOriginalPath (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.InvalidExpressionStillReportsFailure
+[       OK ] PerFrameRecordCompatibility.InvalidExpressionStillReportsFailure (0 ms)
+[----------] 5 tests from PerFrameRecordCompatibility (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 3 tests, listed below:
+[  FAILED  ] PerFrameRecordCompatibility.JoinsIdentifierSplitAcrossRecords
+[  FAILED  ] PerFrameRecordCompatibility.RemovesLineCommentsBeforeJoiningRecords
+[  FAILED  ] PerFrameRecordCompatibility.SupportsLegacyBackslashComments
+
+ 3 FAILED TESTS

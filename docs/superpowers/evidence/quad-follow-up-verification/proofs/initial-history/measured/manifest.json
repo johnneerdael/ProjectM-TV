@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "real-CGL-controlled-renderer-diagnostic",
+  "not_app_screenshots": true,
+  "mali_outlier_resolution_claim": false,
+  "code_patch_sha256": "9c5cca38b6d8d19dab4f85e1e104a6a73c6a92766bdd19e8fa31aa9713706b7f",
+  "original_fixture_sha256": "e2b22f0b8c3d9552f277ef086e0af555f61409ae90f1855489c4b79c977b91a4",
+  "export_script_sha256": "c494f509fbbcb64318e73223197c3981cc6b2b1b8b298e30c6583af6b4ae6aa3",
+  "host_suite_log_sha256": "36ecc3aac985a9c21a941c8bdf38e7848eeb48c8e2abe61a6366734f20df3e2a",
+  "runs": [
+    {
+      "variant": "red",
+      "exit_code": 1,
+      "renderer_source": "build/follow-ups/core-initial-history-review/red/source/Renderer/TextureAttachment.cpp",
+      "renderer_sha256": "afe6b090986845377ec66b0b7ce4beb7d7c91b6d556d85bf727d77eed7c702ae",
+      "fixture_sha256": "28be82d4044cdf132f31881af6a34b3333cf50f295558c8b32b1688c8ebf7846",
+      "log_sha256": "df5b45ef2483af790ff3ebb4e2afea54a4e6ccf1e4d486f48d6b640eccfde309",
+      "raw_files": {
+        "ClearingDisplayDoesNotReplaceInternalHistoryInitialization.rgba": "abe0710d68ff72b4533ed35fd5d84ecc21125b5e2a7731c61b003093ef958257",
+        "FreshClearPreservesFramebufferAndRasterState.rgba": "abe0710d68ff72b4533ed35fd5d84ecc21125b5e2a7731c61b003093ef958257",
+        "FreshColorHistoryIsTransparentBlackBeforeFirstRender.rgba": "abe0710d68ff72b4533ed35fd5d84ecc21125b5e2a7731c61b003093ef958257",
+        "PooledHistoryRetainsExistingTransparentBlackContract.rgba": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "RecreatedContextDoesNotClearForeignFramebufferWithReusedName.rgba": "7027515fbf2ca8d0dd931cbef2b7dda1716827cb4a0ef8adad10eaeb2c33860c"
+      }
+    },
+    {
+      "variant": "green",
+      "exit_code": 0,
+      "renderer_source": "build/follow-ups/core-initial-history-review/green/source/Renderer/TextureAttachment.cpp",
+      "renderer_sha256": "0e68c3da136cd3ba1b802fd3ef532e7fbe4bf76cffbc117e9987b22747ddf2b5",
+      "fixture_sha256": "28be82d4044cdf132f31881af6a34b3333cf50f295558c8b32b1688c8ebf7846",
+      "log_sha256": "2805b2c00c1cf33d9e312532d180259fdf287c4e1c4705dd437dbcf9c2d4e3a8",
+      "raw_files": {
+        "ClearingDisplayDoesNotReplaceInternalHistoryInitialization.rgba": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "FreshClearPreservesFramebufferAndRasterState.rgba": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "FreshColorHistoryIsTransparentBlackBeforeFirstRender.rgba": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "PooledHistoryRetainsExistingTransparentBlackContract.rgba": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "RecreatedContextDoesNotClearForeignFramebufferWithReusedName.rgba": "7027515fbf2ca8d0dd931cbef2b7dda1716827cb4a0ef8adad10eaeb2c33860c"
+      }
+    }
+  ],
+  "images": [
+    {
+      "file": "08-fresh-history-init.png",
+      "sha256": "1a88cddbda080bf373c5f5c0ca516f3f760af5766b7e5e055ccd202d358f35ba"
+    },
+    {
+      "file": "09-context-fbo-ownership.png",
+      "sha256": "0abd6aca1b3fecac9200a4db2df70ec95352b698588269c4d14ec1f9cb3ac6ea"
+    }
+  ]
+}

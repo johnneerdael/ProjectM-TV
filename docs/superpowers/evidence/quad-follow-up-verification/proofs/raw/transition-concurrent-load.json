@@ -1,0 +1,9 @@
+{
+  "observed_utc": "2026-10-03T22:52:20.857339+00:00",
+  "active_preset_lab_workers": [
+    "26865 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/work-final/native-build/47290eff36b94c1f7cc7961d61ee642c2c9b0c2ac4cacb5e5b7832d090711226/preset-lab-worker --job /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/jobs/run-647vcoj6/job.json",
+    "26881 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/work-final/native-build/47290eff36b94c1f7cc7961d61ee642c2c9b0c2ac4cacb5e5b7832d090711226/preset-lab-worker --job /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/jobs/run-aqohfos2/job.json",
+    "26882 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/work-final/native-build/47290eff36b94c1f7cc7961d61ee642c2c9b0c2ac4cacb5e5b7832d090711226/preset-lab-worker --job /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/jobs/run-9emm9xbr/job.json",
+    "26896 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/work-final/native-build/47290eff36b94c1f7cc7961d61ee642c2c9b0c2ac4cacb5e5b7832d090711226/preset-lab-worker --job /Users/jneerdael/Scripts/Projectm-TV/.worktrees/clean-main-2026-10-03/build/diffusion/jobs/run-boros7qy/job.json"
+  ]
+}

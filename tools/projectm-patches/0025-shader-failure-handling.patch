@@ -1,0 +1,311 @@
+Subject: [PATCH] Preserve shader diagnostics and clean up failed program compilation
+
+Standard exception handlers lost the driver diagnostic because ShaderException inherited std::exception::what(). Return its owned message without allocation. If fragment compilation throws, delete the already-compiled unattached vertex shader before rethrowing; otherwise repeated failed loads or optional-shader fallback leak shader objects.
+
+Tests exercise the standard exception interface and real CGL shader-object lifetimes for vertex, fragment and link failure, repeated attempts, and successful retry. Valid rendering is unchanged.
+
+--- a/src/libprojectM/Renderer/Shader.hpp
++++ b/src/libprojectM/Renderer/Shader.hpp
+@@ -13,6 +13,7 @@
+ #include <glm/mat4x4.hpp>
+ 
+ #include <cstdint>
++#include <exception>
+ #include <map>
+ #include <string>
+ #include <unordered_map>
+@@ -33,6 +34,11 @@
+ 
+     virtual ~ShaderException() = default;
+ 
++    const char* what() const noexcept override
++    {
++        return m_message.c_str();
++    }
++
+     const std::string& message() const
+     {
+         return m_message;
+--- a/src/libprojectM/Renderer/Shader.cpp
++++ b/src/libprojectM/Renderer/Shader.cpp
+@@ -178,7 +178,17 @@
+     }
+ 
+     auto vertexShader = CompileShader(vertexShaderSource, GL_VERTEX_SHADER);
+-    auto fragmentShader = CompileShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
++    GLuint fragmentShader{};
++    try
++    {
++        fragmentShader = CompileShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
++    }
++    catch (...)
++    {
++        // The vertex shader is still unattached, so deleting the program cannot release it.
++        glDeleteShader(vertexShader);
++        throw;
++    }
+ 
+     glAttachShader(m_shaderProgram, vertexShader);
+     glAttachShader(m_shaderProgram, fragmentShader);
+--- a/tests/libprojectM/CMakeLists.txt
++++ b/tests/libprojectM/CMakeLists.txt
+@@ -2,6 +2,8 @@
+ 
+ add_executable(projectM-unittest
+         HLSLModuloTest.cpp
++        ShaderExceptionTest.cpp
++        ShaderFailureTest.cpp
+         LineGeometryTest.cpp
+         TexturePoolTest.cpp
+         WaveformAlignerTest.cpp
+--- /dev/null
++++ b/tests/libprojectM/ShaderExceptionTest.cpp
+@@ -0,0 +1,17 @@
++#include <Renderer/Shader.hpp>
++
++#include <gtest/gtest.h>
++
++#include <exception>
++
++TEST(ShaderException, PreservesDriverDiagnosticThroughStandardExceptionHandler)
++{
++    try
++    {
++        throw libprojectM::Renderer::ShaderException("fragment shader: unsupported driver instruction");
++    }
++    catch (const std::exception& error)
++    {
++        EXPECT_STREQ(error.what(), "fragment shader: unsupported driver instruction");
++    }
++}
+--- /dev/null
++++ b/tests/libprojectM/ShaderFailureTest.cpp
+@@ -0,0 +1,228 @@
++#include <projectM-opengl.h>
++
++#include <gtest/gtest.h>
++
++#include <algorithm>
++#include <set>
++#include <string>
++
++#ifdef __APPLE__
++#include <OpenGL/OpenGL.h>
++#endif
++
++namespace {
++
++// Observe real driver objects, including unattached shaders that deleting a program cannot free.
++std::set<GLuint> shaderObjects;
++size_t shadersCreated{};
++
++auto TrackCreateShader(GLenum type) -> GLuint
++{
++    const auto shader = glCreateShader(type);
++    if (shader != 0)
++    {
++        shaderObjects.insert(shader);
++        ++shadersCreated;
++    }
++    return shader;
++}
++
++void TrackDeleteShader(GLuint shader)
++{
++    glDeleteShader(shader);
++    if (glIsShader(shader) == GL_FALSE)
++    {
++        shaderObjects.erase(shader);
++    }
++}
++
++auto LiveShaders() -> size_t
++{
++    return static_cast<size_t>(std::count_if(shaderObjects.begin(), shaderObjects.end(), [](GLuint shader) {
++        return glIsShader(shader) == GL_TRUE;
++    }));
++}
++
++} // namespace
++
++// Compile the production implementation with observed GL calls and a distinct class name so it
++// can coexist with the ordinary Renderer object files in projectM-unittest. Load GL declarations
++// above before wrapping their names; only calls in this implementation are intercepted.
++#define Shader ShaderUnderTest
++#define glCreateShader TrackCreateShader
++#define glDeleteShader TrackDeleteShader
++#include "../../src/libprojectM/Renderer/Shader.cpp"
++#undef glDeleteShader
++#undef glCreateShader
++#undef Shader
++
++using libprojectM::Renderer::ShaderException;
++using libprojectM::Renderer::ShaderUnderTest;
++
++namespace {
++
++constexpr char ValidVertex[] = R"(#version 150
++out vec3 shader_value;
++void main() {
++    gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
++    shader_value = vec3(1.0);
++}
++)";
++
++constexpr char ValidFragment[] = R"(#version 150
++in vec3 shader_value;
++out vec4 color;
++void main() { color = vec4(shader_value, 1.0); }
++)";
++
++constexpr char InvalidShader[] = "#version 150\nTHIS_IS_NOT_VALID_GLSL\n";
++
++// Each stage compiles, but their active interface types disagree, requiring a link rejection.
++constexpr char MismatchedFragment[] = R"(#version 150
++in vec4 shader_value;
++out vec4 color;
++void main() { color = shader_value; }
++)";
++
++void ExpectRejection(ShaderUnderTest& shader, const char* vertex, const char* fragment)
++{
++    try
++    {
++        shader.CompileProgram(vertex, fragment);
++        FAIL() << "driver unexpectedly accepted invalid shader program";
++    }
++    catch (const ShaderException& error)
++    {
++        const std::string prefix = "Error compiling shader: ";
++        EXPECT_EQ(error.message().substr(0, prefix.size()), prefix);
++        EXPECT_GT(error.message().size(), prefix.size()) << "driver diagnostic was lost";
++        EXPECT_EQ(error.message(), error.what());
++    }
++}
++
++} // namespace
++
++class ShaderFailureTest : public ::testing::Test
++{
++protected:
++    void SetUp() override
++    {
++#ifdef __APPLE__
++        CGLPixelFormatAttribute attributes[] = {kCGLPFAOpenGLProfile,
++                                                static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++                                                static_cast<CGLPixelFormatAttribute>(0)};
++        CGLPixelFormatObj pixelFormat{};
++        GLint formats{};
++        if (CGLChoosePixelFormat(attributes, &pixelFormat, &formats) != kCGLNoError || pixelFormat == nullptr)
++        {
++            GTEST_SKIP() << "no OpenGL context";
++        }
++        const auto result = CGLCreateContext(pixelFormat, nullptr, &m_context);
++        CGLDestroyPixelFormat(pixelFormat);
++        if (result != kCGLNoError || m_context == nullptr)
++        {
++            GTEST_SKIP() << "no OpenGL context";
++        }
++        ASSERT_EQ(CGLSetCurrentContext(m_context), kCGLNoError);
++        shaderObjects.clear();
++        shadersCreated = 0;
++#else
++        GTEST_SKIP() << "needs an OpenGL context (macOS CGL)";
++#endif
++    }
++
++    void TearDown() override
++    {
++#ifdef __APPLE__
++        if (m_context != nullptr)
++        {
++            ShaderUnderTest::Unbind();
++            // Keep failing RED tests isolated: clean leaked objects before disposing of the context.
++            for (const auto shader : shaderObjects)
++            {
++                if (glIsShader(shader) == GL_TRUE)
++                {
++                    glDeleteShader(shader);
++                }
++            }
++            shaderObjects.clear();
++            CGLSetCurrentContext(nullptr);
++            CGLDestroyContext(m_context);
++        }
++#endif
++    }
++
++#ifdef __APPLE__
++    CGLContextObj m_context{};
++#endif
++};
++
++TEST_F(ShaderFailureTest, VertexRejectionReleasesShader)
++{
++    {
++        ShaderUnderTest shader;
++        ExpectRejection(shader, InvalidShader, ValidFragment);
++        EXPECT_GT(shadersCreated, 0u);
++        EXPECT_EQ(LiveShaders(), 0u);
++    }
++    EXPECT_EQ(LiveShaders(), 0u);
++}
++
++TEST_F(ShaderFailureTest, FragmentRejectionReleasesBothShaders)
++{
++    {
++        ShaderUnderTest shader;
++        ExpectRejection(shader, ValidVertex, InvalidShader);
++        EXPECT_GE(shadersCreated, 2u);
++        EXPECT_EQ(LiveShaders(), 0u);
++    }
++    EXPECT_EQ(LiveShaders(), 0u);
++}
++
++TEST_F(ShaderFailureTest, LinkRejectionReleasesBothShaders)
++{
++    {
++        ShaderUnderTest shader;
++        ExpectRejection(shader, ValidVertex, MismatchedFragment);
++        EXPECT_GE(shadersCreated, 2u);
++        EXPECT_EQ(LiveShaders(), 0u);
++    }
++    EXPECT_EQ(LiveShaders(), 0u);
++}
++
++TEST_F(ShaderFailureTest, RepeatedRejectedProgramsDoNotAccumulateShaders)
++{
++    for (int attempt = 0; attempt < 16; ++attempt)
++    {
++        SCOPED_TRACE(attempt);
++        {
++            ShaderUnderTest shader;
++            ExpectRejection(shader, InvalidShader, ValidFragment);
++            ExpectRejection(shader, ValidVertex, InvalidShader);
++            ExpectRejection(shader, ValidVertex, MismatchedFragment);
++        }
++        EXPECT_EQ(LiveShaders(), 0u);
++    }
++}
++
++TEST_F(ShaderFailureTest, RejectedProgramCanCompileAndBindSuccessfullyAfterRetry)
++{
++    ShaderUnderTest shader;
++    ExpectRejection(shader, InvalidShader, ValidFragment);
++    ExpectRejection(shader, ValidVertex, InvalidShader);
++    ExpectRejection(shader, ValidVertex, MismatchedFragment);
++    ASSERT_NO_THROW(shader.CompileProgram(ValidVertex, ValidFragment));
++    EXPECT_EQ(LiveShaders(), 0u);
++
++    shader.Bind();
++    GLint program{};
++    glGetIntegerv(GL_CURRENT_PROGRAM, &program);
++    ASSERT_NE(program, 0);
++    GLint linked{};
++    glGetProgramiv(static_cast<GLuint>(program), GL_LINK_STATUS, &linked);
++    EXPECT_EQ(linked, GL_TRUE);
++    GLint attached{};
++    glGetProgramiv(static_cast<GLuint>(program), GL_ATTACHED_SHADERS, &attached);
++    EXPECT_EQ(attached, 0);
++    EXPECT_EQ(glGetError(), GL_NO_ERROR);
++}

@@ -179,11 +179,13 @@ public:
         return pick;
     }
 
-    // The preset Random() will return next.
+    // The preset Random() will return next. Picked again when Next or Previous landed on it:
+    // Random() avoids the preset on screen when another playable preset exists.
     std::string PeekRandom() {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (randomAhead_.empty() || skipped_.count(randomAhead_)) {
-            randomAhead_ = PickRandomLocked(history_.empty() ? std::string() : history_.back());
+        std::string shown = history_.empty() ? std::string() : history_.back();
+        if (randomAhead_.empty() || skipped_.count(randomAhead_) || randomAhead_ == shown) {
+            randomAhead_ = PickRandomLocked(shown);
         }
         return randomAhead_;
     }
@@ -1425,8 +1427,10 @@ void HandleCommands() {
             g_engine.switchRequested = false;
             g_engine.scaledUntil = 0;
             g_inputs.command = kNone;
-            g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
+            // A category rebuild clears history. Record a retained preset first, so the next
+            // candidates are prepared around the preset on screen, just as after a switch.
             if (g_library.Contains(g_engine.current)) g_library.RecordShown(g_engine.current);
+            g_prewarmer.Request({g_library.PeekNext(), g_library.PeekRandom(), g_library.PeekPrevious()});
         }
         if (!g_library.Contains(g_engine.current) && !SwitchPreset([] { return g_library.Next(); }, false)) {
             g_inputs.categoryDirty = true; // continue bounded attempts on the next stored frame

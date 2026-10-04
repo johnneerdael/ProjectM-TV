@@ -1,0 +1,128 @@
+{
+  "kind": "actual-core captured thumbnails with explicit no-frame before status",
+  "image_sha256": "9d88127bbe513fd2817729229d7ca9333b22f04941adf1b970a62cc5a73a0cc4",
+  "sources": [
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "frame": 120,
+      "job": "803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0/output/frame-0120.png",
+      "thumbnail_sha256": "9ead0c70bd5d12a504cb660fb05e9095870a67dbaac66514e8cfae2d5d380031",
+      "native_sha256": "a83d918499a760322f5f94995c3303366fda44f0f0acdabdb204513232134cb6"
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "frame": 120,
+      "job": "1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be/output/frame-0120.png",
+      "thumbnail_sha256": "3ed10472dc37c67de9f965509782e014b629946f3a3578c3bb1862b0ba012ab2",
+      "native_sha256": "1c9524d3da694374e6a58faee4c3292d920f973ab42ef5d08c591a5bbd51b88a"
+    },
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "frame": 150,
+      "job": "803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0/output/frame-0150.png",
+      "thumbnail_sha256": "ba636ea3921495a66766ffea092953ab07a34d3c9778b6c962ebcbd2ad10965b",
+      "native_sha256": "6c6e7a6c3e117a14360d00a55614ef6c3a8fe4ee3410de14fc20019bfbedb649"
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "frame": 150,
+      "job": "1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be/output/frame-0150.png",
+      "thumbnail_sha256": "6b67aac14841ee44dd4715504e1ffcf385ce3b03906617f5cfbf7f4680f9aa58",
+      "native_sha256": "adf065a5c31cb17bd3a2a82ddc269af85a982c415e794ea9c996d92e6773dce2"
+    },
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "frame": 180,
+      "job": "803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0/output/frame-0180.png",
+      "thumbnail_sha256": "4f224cb0e4c4dc2c9a8297cd56b77820174077e9765af88670dd0df7788b7da6",
+      "native_sha256": "3bafa64c70760e47d5b726bd6546d3ef5dbee099ab16087161cec7477f10006e"
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "frame": 180,
+      "job": "1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be/output/frame-0180.png",
+      "thumbnail_sha256": "07d584a939ec45e3e4b713d074e8d6149c7bb6b402db162652e6a36d9afd4641",
+      "native_sha256": "2e1c5b4bd52eb2d931203a29a95b2e0f62025839dda5298996df2d24a3af3c9c"
+    },
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "frame": 210,
+      "job": "803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0/output/frame-0210.png",
+      "thumbnail_sha256": "230fd0d85586444ff4a5301173fce82fe13302fa56f148bc048f633ed0c93faa",
+      "native_sha256": "42ed4b44eac4f8568010e67db0229c82416ee6dee9ab5d044763a381d2e99c14"
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "frame": 210,
+      "job": "1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be/output/frame-0210.png",
+      "thumbnail_sha256": "89e6af242de5d920f7d7b086db136456bc3e7f171b8093d16be3a122c5ca8d47",
+      "native_sha256": "4e9642eae7fde31891216159269b6ca00a3613cbb05e3f3f07916e48568d46af"
+    },
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "frame": 239,
+      "job": "803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/803340974ee0540cd85199db363f76a08389257fdf89a7b78a14e81b05caebe0/output/frame-0239.png",
+      "thumbnail_sha256": "7efe775aab13c754c942e088f8364be06ea63f0ec9e54d71727c110c88105935",
+      "native_sha256": "e46ba8296193b58ff6f62a75a5349ef113827160a84f76ee4c12d281ecbfcd42"
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "frame": 239,
+      "job": "1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be",
+      "thumbnail_path": "build/follow-ups/core-corpus/tv-candidate29/measurements/jobs/1ba559dd416c0b832d85833f508f159b5dce0053771c4f8d85d829693a7824be/output/frame-0239.png",
+      "thumbnail_sha256": "c3f12e09eb222d067819c032af0734806f9b6f736cf64f2e70451410d7fac853",
+      "native_sha256": "bceed077f26321fb12c9a93211dcc229ea640f57ff75fc9111be6377eae18549"
+    }
+  ],
+  "core_sha256": "8412ae670f8511c48b89b358d10dcc9fd81ec760353722d7cdfd86ea60efc5d2",
+  "observer_sha256": "1abc75ec9591541bc3520b80d9d1a1bc91863ab5a6c1bbcf6c41bd09dc0c183f"
+}

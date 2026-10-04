@@ -1,0 +1,44 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+Note: Google Test filter = MilkdropPresetException.*:MilkdropPresetFailureEventTest.*
+[==========] Running 5 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from MilkdropPresetException
+[ RUN      ] MilkdropPresetException.LoadMessageSurvivesStandardExceptionHandler
+[       OK ] MilkdropPresetException.LoadMessageSurvivesStandardExceptionHandler (0 ms)
+[ RUN      ] MilkdropPresetException.CompileMessageSurvivesStandardExceptionHandler
+[       OK ] MilkdropPresetException.CompileMessageSurvivesStandardExceptionHandler (0 ms)
+[----------] 2 tests from MilkdropPresetException (0 ms total)
+
+[----------] 3 tests from MilkdropPresetFailureEventTest
+[ RUN      ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/green/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:69: Failure
+Expected equality of these values:
+  engine.failure
+    Which is: "std::exception"
+  "Could not parse preset data."
+
+[  FAILED  ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason (73 ms)
+[ RUN      ] MilkdropPresetFailureEventTest.InvalidPerFrameExpressionReportsCompileReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] MilkdropPresetFailureEventTest.InvalidPerFrameExpressionReportsCompileReason (71 ms)
+[ RUN      ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/green/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:86: Failure
+Expected equality of these values:
+  engine.failure
+    Which is: "std::exception"
+  "Could not parse preset file \"" + path + "\""
+    Which is: "Could not parse preset file \"/preset-exception-test/no-such-preset.milk\""
+
+[  FAILED  ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason (72 ms)
+[----------] 3 tests from MilkdropPresetFailureEventTest (217 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 2 test suites ran. (259 ms total)
+[  PASSED  ] 3 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason
+[  FAILED  ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason
+
+ 2 FAILED TESTS

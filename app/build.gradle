@@ -43,8 +43,9 @@ android {
             }
         }
         release {
-            // R8 shrinks and optimizes; names are kept (proguard-rules.pro) so crash traces stay readable.
+            // R8 shrinks, optimizes and obfuscates; retrace crash traces with the release's mapping.txt.
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             // Use the release key when configured, otherwise the local debug key, so
             // `./gradlew assembleRelease` always produces an installable, non-debuggable APK.

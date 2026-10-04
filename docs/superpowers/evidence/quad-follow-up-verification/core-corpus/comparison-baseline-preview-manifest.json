@@ -1,0 +1,26 @@
+{
+  "selected_presets": 9606,
+  "verified_pairs": {
+    "baseline": 2767,
+    "candidate": 0
+  },
+  "rendered_successful_runs": {
+    "baseline": 5471,
+    "candidate": 0
+  },
+  "counts": {
+    "both_failed": 0,
+    "changed_needs_visual_review": 0,
+    "missing_pending": 9606,
+    "new_failure": 0,
+    "nondeterministic_uncomparable": 0,
+    "recovered_load_compatibility": 0,
+    "unchanged_native_samples": 0
+  },
+  "complete_coverage": false,
+  "integrity_issues": [],
+  "source_report_sha256": "8d8370478dff4d824b2ff7014358fa914c566d5072ace24f7072f4fb1e4b6025",
+  "gzip_sha256": "1d41c0b5bbbc8d3dd81862a3327456cb55f98db8629d5cf06ae33d0c00886c7c",
+  "host_tool_tests_passed": 107,
+  "scope": "Full inventory read-only preview; baseline advances and candidate corpus has not run. No candidate fidelity verdict."
+}

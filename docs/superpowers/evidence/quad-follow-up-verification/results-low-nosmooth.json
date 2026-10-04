@@ -1,0 +1,145 @@
+{
+  "phase": "low-nosmooth",
+  "render_jobs": 42,
+  "presets": 3,
+  "legacy_comparisons": 0,
+  "nondeterministic": [],
+  "legacy_changed": [],
+  "comparisons": [
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q360",
+      "authored_img_err": 0.2653493285179138,
+      "authored_luma_ratio": 2.297361299249025,
+      "luma": 0.4778500029955576,
+      "center_rgb": [
+        0.5681904871323529,
+        0.47306175392610755,
+        0.458697008896151
+      ],
+      "saturation": 0.19585037529468535,
+      "same_size_img_err": 0.05814995616674423,
+      "same_size_luma_ratio": 0.999178771000203
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q480",
+      "authored_img_err": 0.15395884215831757,
+      "authored_luma_ratio": 1.7258822866364594,
+      "luma": 0.3589826537553318,
+      "center_rgb": [
+        0.39184065423555037,
+        0.31467038318595414,
+        0.3050587194027938
+      ],
+      "saturation": 0.235786572098732,
+      "same_size_img_err": 0.07332330197095871,
+      "same_size_luma_ratio": 0.9726024964953259
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q540",
+      "authored_img_err": 0.10491155087947845,
+      "authored_luma_ratio": 1.4229103432277381,
+      "luma": 0.29596464082338575,
+      "center_rgb": [
+        0.3192640817901235,
+        0.24884918653675456,
+        0.2402172156156701
+      ],
+      "saturation": 0.25176210403442384,
+      "same_size_img_err": 0.07632928341627121,
+      "same_size_luma_ratio": 0.9514504028081321
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q360",
+      "authored_img_err": 0.1312854290008545,
+      "authored_luma_ratio": 0.9529933443935527,
+      "luma": 0.5478528928401586,
+      "center_rgb": [
+        0.6808988913852579,
+        0.5069850813589325,
+        0.4481373541893609
+      ],
+      "saturation": 0.4386496126651764,
+      "same_size_img_err": 0.02439180202782154,
+      "same_size_luma_ratio": 0.9962006462983101
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q480",
+      "authored_img_err": 0.09158562123775482,
+      "authored_luma_ratio": 0.9755102005879348,
+      "luma": 0.560797290486092,
+      "center_rgb": [
+        0.7340855520312695,
+        0.5228776992823272,
+        0.47549243880558784
+      ],
+      "saturation": 0.45660431385040284,
+      "same_size_img_err": 0.022607998922467232,
+      "same_size_luma_ratio": 0.9997867478917998
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q540",
+      "authored_img_err": 0.06984082609415054,
+      "authored_luma_ratio": 0.9931590032436962,
+      "luma": 0.5709431615428063,
+      "center_rgb": [
+        0.7575884571935771,
+        0.5309090565238439,
+        0.48674038519728907
+      ],
+      "saturation": 0.46900796294212344,
+      "same_size_img_err": 0.020814795047044754,
+      "same_size_luma_ratio": 1.0019546128962062
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q360",
+      "authored_img_err": 0.17846393585205078,
+      "authored_luma_ratio": 1.0568905616082247,
+      "luma": 0.7373115308971042,
+      "center_rgb": [
+        0.8360642616421567,
+        0.8091593193990558,
+        0.7264003353077345
+      ],
+      "saturation": 0.27511494159698485,
+      "same_size_img_err": 0.1956736296415329,
+      "same_size_luma_ratio": 1.0112910866123055
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q480",
+      "authored_img_err": 0.14679861068725586,
+      "authored_luma_ratio": 1.0092352344261926,
+      "luma": 0.7040660620507173,
+      "center_rgb": [
+        0.8394754100986799,
+        0.7223480872741249,
+        0.6656709999359219
+      ],
+      "saturation": 0.30309886038303374,
+      "same_size_img_err": 0.16287489235401154,
+      "same_size_luma_ratio": 0.9893522955749497
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q540",
+      "authored_img_err": 0.1933019608259201,
+      "authored_luma_ratio": 0.8437076279676803,
+      "luma": 0.5885901392286346,
+      "center_rgb": [
+        0.7842400573912693,
+        0.5259690576333413,
+        0.5337331747256516
+      ],
+      "saturation": 0.45275049805641177,
+      "same_size_img_err": 0.1379534751176834,
+      "same_size_luma_ratio": 0.9049616227123352
+    }
+  ]
+}

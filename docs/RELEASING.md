@@ -51,6 +51,14 @@ The Downloader code shown in README and the fixed APK URL serve the newest stabl
 
 Each release also attaches `projectM-TV-<version>.apk`, `projectM-TV-core-<version>.aar` and `checksums.txt`. The core is the `:core` module: projectM, native ARMv7/ARM64 libraries and presets, versioned together with the app.
 
+The release APK is shrunk, optimized and obfuscated by R8, so Java stack traces from it show short class and method names. Each release also attaches `projectM-TV-<version>-mapping.txt` (CI builds keep it in the `mapping` artifact). F-Droid rebuilds the same source reproducibly, so the mapping fits its APK too. Restore the names with the SDK's `retrace` tool:
+
+```sh
+retrace projectM-TV-<version>-mapping.txt crash.txt
+```
+
+`retrace` is in the Android SDK command-line tools (`cmdline-tools/latest/bin`). Native crashes (`Fatal signal`) are not affected.
+
 Publication creates or resumes a draft, uploads every artifact, then publishes it. A retry verifies the tag points to the expected commit and leaves a complete published release unchanged.
 
 ## Milkbeat follows each core release

@@ -55,6 +55,9 @@ def publish(repo, version, sha, notes, assets_dir, api=github_api, command=run):
     digests = {name: hashlib.sha256((assets_dir / name).read_bytes()).hexdigest() for name in names}
     if digests[names[0]] != digests[names[1]] or digests[names[2]] != digests[names[3]]:
         raise ValueError("latest asset alias differs from its versioned artifact")
+    # R8 obfuscates the release APK; its mapping turns crash traces back into source names.
+    names.append(f"projectM-TV-{version}-mapping.txt")
+    digests[names[-1]] = hashlib.sha256((assets_dir / names[-1]).read_bytes()).hexdigest()
     checksums = assets_dir / "checksums.txt"
     checksums.write_text("".join(f"{digests[name]}  {name}\n" for name in names), encoding="utf-8")
     names.append(checksums.name)

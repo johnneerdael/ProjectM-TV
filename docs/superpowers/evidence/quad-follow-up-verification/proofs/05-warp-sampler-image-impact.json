@@ -1,0 +1,26 @@
+{
+  "warp-fc_main-wrap1-shader": {
+    "changed_pixels": 2794,
+    "pixels": 12288,
+    "mean_absolute_rgb_difference": 24.44357638888889,
+    "max_absolute_rgb_difference": 255
+  },
+  "warp-fw_main-wrap0-shader": {
+    "changed_pixels": 2794,
+    "pixels": 12288,
+    "mean_absolute_rgb_difference": 24.44357638888889,
+    "max_absolute_rgb_difference": 255
+  },
+  "warp-cp_main-wrap0-shader": {
+    "changed_pixels": 12236,
+    "pixels": 12288,
+    "mean_absolute_rgb_difference": 8.49826388888889,
+    "max_absolute_rgb_difference": 61
+  },
+  "warp-cp_main-wrap1-shader": {
+    "changed_pixels": 12288,
+    "pixels": 12288,
+    "mean_absolute_rgb_difference": 32.9296875,
+    "max_absolute_rgb_difference": 255
+  }
+}
