@@ -122,7 +122,7 @@ projectm_handle projectm_create() { g_lastFrameDirect = false; return new projec
 void projectm_destroy(projectm_handle p) { delete p; }
 int g_loadSleepMs = 0;
 int g_failNextLoads = 0;
-int g_warnNextLoads = 0;  // loads that leave out uncompilable code but succeed (patch 0032)
+int g_warnNextLoads = 0;  // loads that leave out uncompilable code but succeed (patch 0035)
 void (*g_loadObserver)() = nullptr;
 void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
   if (g_lastFrameDirect) ++g_loadsAfterDirectFrame;

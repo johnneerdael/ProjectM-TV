@@ -1,0 +1,36 @@
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+index 956d2e9df..2720bbd4e 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -19,6 +19,8 @@
+ #include <mutex>
+ #include <regex>
+ #include <set>
++#include <fstream>
++#include <cstdlib>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -730,7 +732,7 @@ void MilkdropShader::TranspileHLSLShader(const PresetState& presetState, std::st
+         cacheKey += '\0' + declaration;
+     }
+     std::string cachedGlsl;
+-    if (TranslationCache::Instance().Find(cacheKey, cachedGlsl))
++    if (!std::getenv("PM_DUMP_HLSL_DIR") && TranslationCache::Instance().Find(cacheKey, cachedGlsl))
+     {
+         m_shader.CompileProgram(vertexShader, cachedGlsl);
+         return;
+@@ -776,6 +778,13 @@ void MilkdropShader::TranspileHLSLShader(const PresetState& presetState, std::st
+         sourcePreprocessed.insert(0, samplerDeclaration);
+     }
+ 
++    if (const char* dumpDir = std::getenv("PM_DUMP_HLSL_DIR")) // SCRATCH-DUMP
++    {
++        std::string base = std::string(dumpDir) + "/" + std::getenv("PM_DUMP_HLSL_PREFIX") + "_" + shaderTypeString + "_";
++        int attempt = 0;
++        while (std::ifstream(base + std::to_string(attempt) + ".hlsl").good()) ++attempt;
++        std::ofstream(base + std::to_string(attempt) + ".hlsl") << sourcePreprocessed;
++    }
+     // Transpile from HLSL (aka preset shader aka DirectX shader) to GLSL (aka OpenGL shader lang)
+     // First, parse HLSL into a tree
+     if (!parser.Parse("", sourcePreprocessed.c_str(), sourcePreprocessed.size()))

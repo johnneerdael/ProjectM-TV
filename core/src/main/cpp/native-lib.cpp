@@ -1070,7 +1070,7 @@ void OnSwitchFailed(const char* filename, const char* message, void*) {
     g_engine.loadFailed = true;
 }
 
-// Equation code that doesn't compile is left out, as in MilkDrop; the preset still loads (patch 0032).
+// Equation code that doesn't compile is left out, as in MilkDrop; the preset still loads (patch 0035).
 void OnInitializationWarning(const char*, const char* message, void*) {
     LOGW("Preset code left out (%s): %s", g_engine.loading.c_str(), message ? message : "");
 }

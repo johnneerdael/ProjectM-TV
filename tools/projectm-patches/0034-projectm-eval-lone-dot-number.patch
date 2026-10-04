@@ -1,6 +1,6 @@
 Subject: [PATCH] projectm-eval: read a lone '.' as the number 0, like NS-EEL
 
-Local fix against projectM 4.1.7 plus patches 0001–0030. MilkDrop's NS-EEL
+Local fix against projectM 4.1.7 plus patches 0001–0033. MilkDrop's NS-EEL
 lexer accepts a lone '.' as a number and converts it with atof(), which gives 0,
 so presets such as "zoom=zoom+.10*sin(rad+.+15.15)" or "y=if(c,.-.4,y)"
 compile in MilkDrop. projectm-eval's FLOAT rule needs a digit and rejected the

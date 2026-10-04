@@ -1,6 +1,6 @@
 Subject: [PATCH] Compile MilkDrop's legacy equation form in every code phase
 
-Local fix against projectM 4.1.7 plus patches 0001–0029. Patch 0029 retried only
+Local fix against projectM 4.1.7 plus patches 0001–0032. Patch 0029 retried only
 per-frame code in MilkDrop's legacy form. Move that retry into one helper
 (LegacyEquationCode) and use it for preset init, per-frame and per-pixel code,
 custom wave init, per-frame and per-point code, and custom shape init and
@@ -536,10 +536,10 @@ index 5e775dc8a..4f2b36641 100644
  }
  
 diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
-index 81236e6e8..2f3e0b5be 100644
+index d7efc7d9f..4294429db 100644
 --- a/tests/libprojectM/CMakeLists.txt
 +++ b/tests/libprojectM/CMakeLists.txt
-@@ -5,6 +5,7 @@ add_executable(projectM-unittest
+@@ -6,6 +6,7 @@ add_executable(projectM-unittest
          ShaderExceptionTest.cpp
          MilkdropPresetExceptionTest.cpp
          PerFrameRecordCompatibilityTest.cpp

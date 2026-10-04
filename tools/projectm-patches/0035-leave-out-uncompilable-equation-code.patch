@@ -1,6 +1,6 @@
 Subject: [PATCH] Leave out equation code that doesn't compile, like MilkDrop
 
-Local fix against projectM 4.1.7 plus patches 0001–0031. A compile error in any
+Local fix against projectM 4.1.7 plus patches 0001–0034. A compile error in any
 equation block aborted preset initialization, so the whole preset failed to load.
 MilkDrop's CState::RecompileExpressions shows a warning for that block and runs
 the rest of the preset: failed init code leaves the q variables (preset init) or
