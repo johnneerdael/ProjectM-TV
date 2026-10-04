@@ -1,0 +1,94 @@
+{
+  "basis": "Two new correctly delimited source predictions; no replacement of failed forecasts",
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "rows": [
+    {
+      "fixture": "sampler-name-wrap-spaced.milk",
+      "prediction": {
+        "preset": "sampler-name-wrap-spaced.milk",
+        "source_sha256": "d7e00e7102dfbd40c2a773e66428ab8f41fd3e6f896d584839f165a25f5cf302",
+        "expected_rgb": [
+          0.25,
+          0.25,
+          0.75
+        ],
+        "allowed_rgb8_error": 2,
+        "frames": 30,
+        "basis": "New corrected-identifier source prediction frozen before observation; earlier failed forecast retained separately"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "sampler-name-wrap-spaced.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "distinct_colour_count": 1,
+      "observed_colors": [
+        [
+          64,
+          64,
+          191,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "9e930e7540682de2f298426b0d06f0c39cc284ebc2a14fec2dfdb4fde8072773"
+    },
+    {
+      "fixture": "sampler-name-clamp-spaced.milk",
+      "prediction": {
+        "preset": "sampler-name-clamp-spaced.milk",
+        "source_sha256": "fc4227220cb8c53a97f0dd521d634b4c481a3d469aabaefda5796255df4c8653",
+        "expected_rgb": [
+          0.99609375,
+          0.25,
+          0.75
+        ],
+        "allowed_rgb8_error": 2,
+        "frames": 30,
+        "basis": "New corrected-identifier source prediction frozen before observation; earlier failed forecast retained separately"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "sampler-name-clamp-spaced.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "distinct_colour_count": 1,
+      "observed_colors": [
+        [
+          254,
+          64,
+          191,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "c2f71d70124c93185ea526b933a4c49205946a6430d6cfd588170627d40f4a50"
+    }
+  ],
+  "whole_preset_accuracy_verified": false
+}

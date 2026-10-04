@@ -53,6 +53,19 @@ class ShaderCompatibilityTest(unittest.TestCase):
         result = self.check('sampler2D sampler_main;\nshader_body {ret=tex2D(sampler_main,uv).xyz;}')
         self.assertTrue(result['offline_accepted'], result)
 
+    def test_native_reference_scan_rejects_identifier_with_unspaced_assignment(self):
+        code='shader_body\n{\nsampler sampler_main=sampler_state {AddressU=CLAMP;};\nret=tex2D(sampler_main,uv).xyz;\n}\n'
+        result=self.check(code)
+        self.assertFalse(result['offline_accepted'])
+        self.assertIn('main=sampler_state',result['translation']['referenced_samplers'])
+        self.assertEqual(result['predicted_stage'],'default_composite')
+
+    def test_spaced_local_state_keeps_native_sampler_name(self):
+        code='shader_body\n{\nsampler sampler_main = sampler_state {AddressU=CLAMP;};\nret=tex2D(sampler_main,uv).xyz;\n}\n'
+        result=self.check(code)
+        self.assertTrue(result['offline_accepted'],result)
+        self.assertEqual(result['translation']['referenced_samplers'],['main'])
+
     def test_profile_and_stage_are_explicit(self):
         with self.assertRaisesRegex(ValueError, 'profile'):
             self.check('shader_body {ret=0;}', profile='auto')

@@ -44,6 +44,7 @@ class ShaderFields:
         self.frame_wrap=frame_wrap;self.sampler_bindings={}
         self.effects=[]
         self.local_names=set()
+        self.native_samplers={}
         self.sample_counter=0
         self.matrix_constructors=set()
 
@@ -192,11 +193,17 @@ class ShaderFields:
         if any(i>=shape[1] for i in indices):self.unsupported('vector member out of bounds');return None
         return indices
 
-    def lower(self,tree:list[dict],*,language_extensions=())->Field:
+    def lower(self,tree:list[dict],*,language_extensions=(),native_samplers=None)->Field:
         """Lower the entry body; uniforms stay symbolic rather than guessed zero."""
         self.collect_matrix_constructors(tree)
         extensions=set(language_extensions)
         if extensions-{'all'}:raise ValueError('unsupported parser language extension')
+        native_samplers={} if native_samplers is None else native_samplers
+        if not isinstance(native_samplers,dict) or any(
+            not isinstance(name,str) or not name.startswith('sampler_') or
+            dtype not in {'sampler2D','sampler3D'} for name,dtype in native_samplers.items()):
+            raise ValueError('explicit native sampler names and dimensions required')
+        self.native_samplers=dict(native_samplers)
         for node in tree:
             if node['kind']=='function':
                 # Only the reader's explicitly tagged standard declaration is
@@ -211,13 +218,14 @@ class ShaderFields:
                     dtype=declaration['type']['name']
                     if declaration['type'].get('array'):
                         value=self.array_declaration(declaration,global_scope=True)
+                    elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
                     elif declaration['value'] is not None:value=self.initializer(self.expression(declaration['value']),dtype)
                     else:value=Field('input' if declaration['type'].get('flags',0)&4 or dtype.startswith('sampler') else 'uninitialized',dtype=dtype,detail={'name':name})
                     self.environment[name]=value
                     self.globals[name]=self.environment[name]
             else:self.unsupported('shader global not lowered: '+node['kind'])
         entries=self.functions.get('PS',[])
-        samplers=[name for name in self.global_names if name.startswith('sampler_')]
+        samplers=[name for name in self.global_names|set(self.native_samplers) if name.startswith('sampler_')]
         self.sampler_bindings=main_sampler_bindings(samplers,stage=self.stage,frame_wrap=self.frame_wrap)
         if len(entries)!=1:return self.unsupported('missing or ambiguous shader entry point')
         for argument in entries[0]['args']:
@@ -233,6 +241,16 @@ class ShaderFields:
             return Field('unknown',(result,),result.dtype,{'reason':'shader contains unresolved semantic effects'})
         if self.effects:result=Field('sequence',tuple(self.effects)+(result,),result.dtype)
         return result
+
+    def native_sampler(self,declaration):
+        """Name binding replaces a state initializer only with explicit context."""
+        name=declaration['name'];value=declaration.get('value')
+        if (declaration['type']['name'].startswith('sampler') and value is not None and
+                value.get('kind')=='sampler_state' and name in self.native_samplers):
+            return Field('input',dtype=self.native_samplers[name],detail={
+                'name':name,'binding_basis':'explicit native descriptor',
+                'source_sampler_states_ignored':value['states']})
+        return None
 
     def helper_candidates(self,node):
         candidates=self.functions.get(node['function'],[])
@@ -652,7 +670,8 @@ class ShaderFields:
             elif kind=="declarations":
                 for declaration in statement["values"]:
                     dtype=declaration['type']['name']
-                    if declaration['type'].get('array'):value=self.array_declaration(declaration)
+                    if self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
+                    elif declaration['type'].get('array'):value=self.array_declaration(declaration)
                     elif declaration['name'] in self._referenced_names(declaration['value']):
                         value=self.unsupported('same-name initializer binding differs in emitted GLSL',dtype=dtype)
                     else:value=self.initializer(self.expression(declaration['value']),dtype) if declaration['value'] is not None else Field('uninitialized',dtype=dtype,detail={'name':declaration['name']})

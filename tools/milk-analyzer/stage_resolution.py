@@ -1,6 +1,13 @@
 """Native stage selection from file settings and source-bound offline evidence."""
 import hashlib
+import re
 from scene_equations import _scalar
+
+
+def contains_sampler_state(value):
+    if isinstance(value,list):return any(contains_sampler_state(v) for v in value)
+    if not isinstance(value,dict):return False
+    return value.get('kind')=='sampler_state' or any(contains_sampler_state(v) for v in value.values())
 
 
 def resolve_stages(source:dict,*,profile:str,compatibility:dict)->dict:
@@ -29,7 +36,16 @@ def resolve_stages(source:dict,*,profile:str,compatibility:dict)->dict:
             if not identity or accepted is None:
                 stage.update(kind='unknown',reason='missing, stale or unresolved target compatibility evidence')
             elif accepted is True:
-                stage.update(kind='custom_'+name,reason='offline target accepted',conditional_on_native_profile=True)
+                section=source.get('sections',{}).get(prefix,{})
+                scanner_hash=translation.get('sampler_reference_body_sha256','')
+                references=translation.get('referenced_samplers')
+                scanner_bound=(isinstance(scanner_hash,str) and re.fullmatch('[0-9a-f]{64}',scanner_hash) is not None
+                               and translation.get('status')=='translated' and isinstance(references,list)
+                               and 'main' in references and all(isinstance(value,str) and
+                                   re.fullmatch('[A-Za-z0-9_]+',value) for value in references))
+                if contains_sampler_state(section.get('tree',[])) and not scanner_bound:
+                    stage.update(kind='unknown',reason='sampler-state acceptance lacks native reference-scan provenance')
+                else:stage.update(kind='custom_'+name,reason='offline target accepted',conditional_on_native_profile=True)
             elif accepted is False:
                 stage.update(kind='fixed_warp' if name=='warp' else 'default_composite',
                              reason='offline target rejected',conditional_on_native_profile=True)

@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
+#include <locale>
 #include <regex>
 #include <set>
 #include <sstream>
@@ -29,8 +30,15 @@ class MilkdropShader {
 public:
     enum class ShaderType { WarpShader, CompositeShader };
     ShaderType m_type;
+    struct BlurTexture {
+        enum class BlurLevel {None,Blur1,Blur2,Blur3};
+    };
+    std::set<std::string> m_samplerNames;
+    BlurTexture::BlurLevel m_maxBlurLevelRequired{BlurTexture::BlurLevel::None};
     explicit MilkdropShader(ShaderType type): m_type(type) {}
     void PreprocessPresetShader(std::string& program);
+    void GetReferencedSamplers(const std::string& program);
+    void UpdateMaxBlurLevel(BlurTexture::BlurLevel requestedLevel);
 };
 #include "cpu_shader_adapter.hpp"
 
@@ -74,6 +82,7 @@ int main(int argc, char** argv) {
             {"shader_header_sha256", kShaderHeaderSha}, {"native_source_sha256", kNativeShaderSourceSha},
             {"preprocess_body_sha256", kNativePreprocessBodySha},
             {"translation_body_sha256", kNativeTranslationBodySha},
+            {"sampler_reference_body_sha256", kNativeSamplerReferenceBodySha},
             {"adapter", "unchanged native CPU bodies; explicit descriptor declarations and static header/version views"},
             {"native_driver_verified", false}};
         {
@@ -82,6 +91,12 @@ int main(int argc, char** argv) {
                 auto code = request.at("code").get<std::string>();
                 MilkdropShader shader(stage == "warp" ? MilkdropShader::ShaderType::WarpShader
                                                        : MilkdropShader::ShaderType::CompositeShader);
+                shader.GetReferencedSamplers(code);
+                result["referenced_samplers"] = shader.m_samplerNames;
+                for (const auto& name : shader.m_samplerNames) {
+                    if (!std::regex_match(name,std::regex("[A-Za-z0-9_]+")))
+                        throw Renderer::ShaderException("Native sampler scan produced invalid descriptor identifier: " + name);
+                }
                 shader.PreprocessPresetShader(code);
                 result["glsl"] = targetTranslate(code, stage, samplers, sizes);
                 result["status"] = "translated";

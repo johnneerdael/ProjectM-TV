@@ -1,0 +1,471 @@
+{
+  "basis": "Pinned source-bound offline GLES300 compatibility checks; no native visual inspection",
+  "distinct_presets": 51,
+  "sections": 51,
+  "accepted": 0,
+  "rejected": 51,
+  "unknown": 0,
+  "rows": [
+    {
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+      "preset_sha256": "5dd383cf79e1aacbed944ded85d70a365dde2c51f2ca7646ed0b7fde0cf4c79f",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2408123ef406aa736cd1a14e07da2e0fbb7cc6e52c5014a6a7e26991f44879e7"
+    },
+    {
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+      "preset_sha256": "06b84ff69c3aeeb88eff3dea63dd3c1f5b146b4c2afb9df204f5f2561e7aee15",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2408123ef406aa736cd1a14e07da2e0fbb7cc6e52c5014a6a7e26991f44879e7"
+    },
+    {
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial.milk",
+      "preset_sha256": "5f2e3c5732513d8f2c14a6c6dd2255fc38e1f7034a1906dc02726e47fc8585ad",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "ORB - Arctic Chill.milk",
+      "preset_sha256": "6baf4215af49e53e20ccd810497ed72b0d59347236546e5438a5edde638ad13f",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "1f6584c66dfce69281c070ce1117f49ad7ad1c98636ddcf80356591d4781f21f",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "cb0664943e74419e12e5a6c8fb24fbabf647cd5580fc77a024f47aeeb049bd77"
+    },
+    {
+      "preset": "ORB - Flexi - Chilled Element.milk",
+      "preset_sha256": "e1cbf8d01bc0e37234d8ed2c7ca1413c8af7d4dbd11dd1d59f7bf4b545e6e8dc",
+      "section": "warp_",
+      "accepted": false,
+      "source_sha256": "9d740e9bb7e774cc51e1cf3246c6a66c04625e40f462f7b729514f3374db1065",
+      "predicted_stage": "fixed_warp",
+      "evidence_sha256": "12912af5e61129de4322b596295bcc47a0c751b944eb1bb190911d621c07e19f"
+    },
+    {
+      "preset": "ORB - Flexi - Eleventh Element.milk",
+      "preset_sha256": "343a22ab6e971222d3baea473b9d16a5c8598ef4378bbba5ceee5467201bce2a",
+      "section": "warp_",
+      "accepted": false,
+      "source_sha256": "a1732d5ad905bc0781501064f74442075185063de2546ea0e73b8ed5d739c1f3",
+      "predicted_stage": "fixed_warp",
+      "evidence_sha256": "c3f0b3bc291b9cc65262d4fc3fb2aa69b81359d2a2dafaa18811e59e09887a6b"
+    },
+    {
+      "preset": "ORB - Flexi - Ninth Element.milk",
+      "preset_sha256": "94b518dc38d136b265b6493b4bc3fd32faaaf2abf14b9a7a31b24ea51886a465",
+      "section": "warp_",
+      "accepted": false,
+      "source_sha256": "9d740e9bb7e774cc51e1cf3246c6a66c04625e40f462f7b729514f3374db1065",
+      "predicted_stage": "fixed_warp",
+      "evidence_sha256": "12912af5e61129de4322b596295bcc47a0c751b944eb1bb190911d621c07e19f"
+    },
+    {
+      "preset": "ORB - Flexi - Tenth Element.milk",
+      "preset_sha256": "537501c8a8ac320c39c6a7519f78ee076a5068848b3429fb20e9ac6d71af6b6e",
+      "section": "warp_",
+      "accepted": false,
+      "source_sha256": "c7e5a28ab4aa61226a0b398bc1e94c434fde6135562f524aa8cff7b800c208f4",
+      "predicted_stage": "fixed_warp",
+      "evidence_sha256": "52309ad110cfd52b0720da890210f4b424232159f8d0d3159398d47b6d8d54ab"
+    },
+    {
+      "preset": "ORB - Smoke and Fire.milk",
+      "preset_sha256": "5b79ec3443c5dc54b89d148e8e2f88fd0b39917797abb22b25c57826ad4bcab1",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "b7eb2a4d8e526d147fc61d6e6a65e7dc988964a5dd1e97e540a0aee0e02067d7",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "760dce5f858a99b815428a5ac9788e478c5030674962671070d1594ce56a860f"
+    },
+    {
+      "preset": "ORB - Smoke and Ice.milk",
+      "preset_sha256": "e26af58e2ab773d1021de5af1e475a2de5938812a036e19dfc98cff4036e5f97",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "d67a0d6b2bf7f71548900e1b1518a75db773b9414aaef6384df61236624d4c68",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "eb7b1a9f7283fc3d69841ebce12e51ee067588d529c7385908a36c202ef6db1a"
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "7904cb659869118fed10df59aeb127f3597b34b8abf400b7e0cb5ec7482bedc3",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "78748d4c727b8b04cd6f44cb053504ebb5c6a7414d1ca041fabda1112e628fab"
+    },
+    {
+      "preset": "shifter - mosaic mitosis - j4 all servants left to gare.milk",
+      "preset_sha256": "b9212257a4199186202a1d6fba5d46e0fbb581db1a8f5645414323f6189651cc",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "5a0a594116ff74d7979178188b6ca261258b6b3032eb953641e2208c9f004acc"
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "preset_sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "4fda0914622d056d2d65967a22a3cd06b3b632708a7027af75401dcf43e5e556"
+    },
+    {
+      "preset": "suksma - anti-tank tamm 1-50.milk",
+      "preset_sha256": "f22b913aa3d8d260cdd5a800b2f1644cd64c752b1983a30785ec059cba2cfec2",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "ceb5f8862d77079a195f963c6b9e79c08f81367936a040f78e7fdf294d78bf5c",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "a0f65d62ed4c73a0c25bd6b63365a367480644fe8e634f291c3c786e82f837ff"
+    },
+    {
+      "preset": "suksma - astral project x.milk",
+      "preset_sha256": "3f3562873e8ebd57435da5fcd3cd42a0a21c028bfc923a075e1a8ea527e26352",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - bonnie self.milk",
+      "preset_sha256": "f2e83d0b868d7e609588777c03f30dd827dda1753679c1be01d3bd0e6659137e",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - borat pubis jokulars.milk",
+      "preset_sha256": "e74a28440be792d6fc8ef83087b8eb5acd8b89492826bff6b4cff2759e3ff62b",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "4fda0914622d056d2d65967a22a3cd06b3b632708a7027af75401dcf43e5e556"
+    },
+    {
+      "preset": "suksma - care puts us through more pain, which is doubly ironically good.milk",
+      "preset_sha256": "41f127b78ac58610438013e80fe91034d126b1210a406a141ae53920b005c97b",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "2220bcca1ef4aebe555419bd70076f0f98020a0b0ea32114b3835834032da307",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "b59386358fc1bd81a20bde20e6d8d48d4c97498a076c2a94440dfd944ae403a5"
+    },
+    {
+      "preset": "suksma - chernobyl pie for dessert - more lateral shade of masueality.milk",
+      "preset_sha256": "c9f6b2b167de683e64426cadc684b1a76f43a91728f03c72070d93f29162dd21",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - chernobyl pie for dessert - sanguine lococlustarz banefilamanes.milk",
+      "preset_sha256": "913f45a044dae4b6aa342560754e846d3c8729fbf68c837a026ae82ee9d9e9c2",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3e6fd438b4187388dc5a61b6b01a71666b53136de6eaee0b3f27aea2db84164c"
+    },
+    {
+      "preset": "suksma - dikso lactose.milk",
+      "preset_sha256": "74d9b1050f5ed14df424b30a2886032e0dfe3e90fcf2e4d9ed44039636ee184f",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3e6fd438b4187388dc5a61b6b01a71666b53136de6eaee0b3f27aea2db84164c"
+    },
+    {
+      "preset": "suksma - do get your hopes down.milk",
+      "preset_sha256": "556d402c9f021e1e9292a2085fb38e24a9904e93ad108ded7ee9e0f14b239267",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "4fda0914622d056d2d65967a22a3cd06b3b632708a7027af75401dcf43e5e556"
+    },
+    {
+      "preset": "suksma - egg space ad hoc kludge regurge.milk",
+      "preset_sha256": "98ea6d655b9c427e67b131f878d251ffcda6333974fa39913f49285cee5b1814",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3e6fd438b4187388dc5a61b6b01a71666b53136de6eaee0b3f27aea2db84164c"
+    },
+    {
+      "preset": "suksma - eyes that will not see.milk",
+      "preset_sha256": "c050efb6fce70abe6b12c73d70f081de34cbfec7aeae5f050a0d90a867682826",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "0636b45d86f5fc087159ad27876a810d00d2c0b8e62aea78e71ad688de93a9ee",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3d273e8222a000b93587d2963bee268e6c4a73bed36cd0388f14c478850b71d0"
+    },
+    {
+      "preset": "suksma - fiShbRaiN - witchcraft (phugly megalopolish remix)2 - horse mane mattresside.milk",
+      "preset_sha256": "d1d2be17abeb05c12361834ba340fee7cdbf53d98b302a6711256bbd4988e83d",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "894044546db8627778eb6bf9da8641ffe8caf8ff900c34a7fa74d1005c4c3691",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "45f2daf5b141e0295d21d88f4d1944c83a68bc4c0daa6e29242befa206abbedb"
+    },
+    {
+      "preset": "suksma - for all your banking needs.milk",
+      "preset_sha256": "16a5559295292f17cc0895354d2a47a9d9acdf685f610457739fda9293d987db",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - fram oil filter ad.milk",
+      "preset_sha256": "78cc704d86e901d69198a98d7aa21fc4875015c162b4bd3d7b9a0fabec085596",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - gambling with my life is ok, go for it.milk",
+      "preset_sha256": "b763050f5b3c019eb2dfee64a09114aa9d0506653ad5fe905fbdc2cf3e37fc3b",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "75a1b2db25d3bb599b5bd8610c20c22df6190afd177cb4d80db6dc1f3a81b63a",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "7f6e336e13d152c011217a30d8aab0750b602726ba8e47309bcd40498a54424d"
+    },
+    {
+      "preset": "suksma - infinitely versatile virtual stringed biofeedback instrument.milk",
+      "preset_sha256": "210a0931e2761bfb782695a658bab04d936dc558770c51e733cd05c23a57cf61",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3e6fd438b4187388dc5a61b6b01a71666b53136de6eaee0b3f27aea2db84164c"
+    },
+    {
+      "preset": "suksma - insect coarse hair poizen stingers - southern cross jupiter misalignment --- Isosceles edit.milk",
+      "preset_sha256": "768710055fd0bb96eeba51cb87ce4beca03970044b061136435a2d802194554f",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - involuntarily sliding up the dimly lit floorless corroded walls.milk",
+      "preset_sha256": "4b5c31124f349a9752e4ce2ddba9b8fe23870bb7a4d9f24f102afedfb8307a4b",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3e6fd438b4187388dc5a61b6b01a71666b53136de6eaee0b3f27aea2db84164c"
+    },
+    {
+      "preset": "suksma - kakafonouz larquidark --- Isosceles edit.milk",
+      "preset_sha256": "30b0c90dce1da1a8dbaae8311af70a8f00446411d593e7ccc47ef9ab4a2fe881",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - keep up with invalid retrogress.milk",
+      "preset_sha256": "f48efa525d19c4ebb58f9ffd7a18e059d0cedfbc122cab568a285b446e9a0f13",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - lackstastique.milk",
+      "preset_sha256": "1ce72df71ec6f4208dc7384b46443a67022a638d3cc761862790ca114b7cf8b4",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - league fathom slide molech.milk",
+      "preset_sha256": "06c5f803dc5c71eddadfd176737b5d58deb3c239ab2ec90af20b4516cb785180",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - my pal, ball.milk",
+      "preset_sha256": "3a5c8760f3d0551d35b2e2f1330948b077d606a2399521f41ce2cabdb9453aca",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "5a0a594116ff74d7979178188b6ca261258b6b3032eb953641e2208c9f004acc"
+    },
+    {
+      "preset": "suksma - negative infinity for not flinching - neg3.milk",
+      "preset_sha256": "cb76c1c73afec3b6f87436090b3318fd29215e84c057a0023200a960e1cdce96",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "0636b45d86f5fc087159ad27876a810d00d2c0b8e62aea78e71ad688de93a9ee",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3d273e8222a000b93587d2963bee268e6c4a73bed36cd0388f14c478850b71d0"
+    },
+    {
+      "preset": "suksma - never bam.milk",
+      "preset_sha256": "1e75702b33ce57180bb57aaf06bc5da0f221509d7255df1714388342ca573b01",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "5a0a594116ff74d7979178188b6ca261258b6b3032eb953641e2208c9f004acc"
+    },
+    {
+      "preset": "suksma - no beat forensic.milk",
+      "preset_sha256": "9d710acfe4856fca848e908eaec7013b29ca09ccdd82a90ac57e16ba50610955",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - not like this, not like this.milk",
+      "preset_sha256": "b2998ce6a2c6992ce7fe97850ec8db54c5bb9b5de700e5dd9fceaa4f0d28d24c",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "9d9fd889ca556b5b94d0423abff1aa0e1dbdcaff85dcd6c4c10df58d24721459",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "6ed89e96b17d6b93f70820986fd7fb7d8ba2c0a148f1e3c4db689de0495fe1f9"
+    },
+    {
+      "preset": "suksma - outre seepia sweyy lurk memephetase (2).milk",
+      "preset_sha256": "1964ec095a1a4821d896c35494ff6125de983eded24371a9f5989a4fd9d9047d",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - popart death smock leftbrain.milk",
+      "preset_sha256": "d0041e489835fc537211a8582f3370b8ce81d37c4d7563f9f0dd88f9e7aeb99e",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - shadowgate melt ghoul.milk",
+      "preset_sha256": "8c880c5a33ebc8d873118b3344eb9d6927363fc7dd87f8e154e97a4e0a176d92",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "4fda0914622d056d2d65967a22a3cd06b3b632708a7027af75401dcf43e5e556"
+    },
+    {
+      "preset": "suksma - shiny-bladed homicide machine at dusk - occult calendar time lapse slice.milk",
+      "preset_sha256": "0773fc7b69a44545b4b4e0f5e6a9945868c06e5a57e3204e9284043ec82b24d1",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "803b26a6d1d437cdfa62ed23f4c4f939b3e2705281f608a34a2f2d0ef9b08206",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "c4198fe0c8e08a96774bd146655d0ab92180bd426fa7dcb12350aa10b23dc23b"
+    },
+    {
+      "preset": "suksma - shiny-bladed homicide machine at dusk - quantum liquid beads riding cosmic strings.milk",
+      "preset_sha256": "cc85b04956f4e9aa97c6e336d578e12c400ce3898cdbc625f22fe2f9907836d9",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "ceb5f8862d77079a195f963c6b9e79c08f81367936a040f78e7fdf294d78bf5c",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "a0f65d62ed4c73a0c25bd6b63365a367480644fe8e634f291c3c786e82f837ff"
+    },
+    {
+      "preset": "suksma - thought she knew something about the middle east because she grew up there.milk",
+      "preset_sha256": "bec08797e519d44196fafa29821a1530c4d5fe01e945f795a486d3658721f5c3",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "7563f8c5fe7eafd52d5af69bbeaed4f27ea2f2cfa28f4a2e4851d9a105a27e54",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "9f9d24dd7b2298a6bc9abdea07ce809f366e91d62802e03ad68e906999e50e57"
+    },
+    {
+      "preset": "suksma - to finally feel like a cyborg.milk",
+      "preset_sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3e6fd438b4187388dc5a61b6b01a71666b53136de6eaee0b3f27aea2db84164c"
+    },
+    {
+      "preset": "suksma - water + god roam3.milk",
+      "preset_sha256": "fe77f903e21fd5eb9a4e7a3bbffd1dc9c7e9b91af5b9a89b63f8dbf86908bd05",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "fca8761c2c15571418e737614c30a5838883035ef573e1e45209f62e75d5921f",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "cde5d53b810f219f04e5d33ebc7a1e9dc43464fe031af206fe1144a8c7e8d668"
+    },
+    {
+      "preset": "suksma - water + god.milk",
+      "preset_sha256": "1634fdb50f1ada951996a3a0898056332a10819a2b3c2afeb7d4f462d576bbc3",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "5f5367aed95cacd145b0ec133766fd73191ac5c264451fb1fa747147a98a366b",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "52b299c9a4677129556061a1eb29a73fda5f4dae706dcfaf3da8c70fbe122727"
+    },
+    {
+      "preset": "suksma - water god.milk",
+      "preset_sha256": "47ec30203c9ed7f2015d059e563b65b3cf5a19cf1ecccb1cbbfa79588a91c42e",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "2a16701373fbcc81940a21a2cc9c72c5111132d46c71a3f4feda62e9b64b0a58"
+    },
+    {
+      "preset": "suksma - yaqui mirage master.milk",
+      "preset_sha256": "4fcd6be698a29ecb680d3f1933c62c9bbcc37f79f1ffa4a55e5b51a7e39b28b3",
+      "section": "comp_",
+      "accepted": false,
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "predicted_stage": "default_composite",
+      "evidence_sha256": "3e6fd438b4187388dc5a61b6b01a71666b53136de6eaee0b3f27aea2db84164c"
+    }
+  ],
+  "full_report_sha256": "680588e51124b060ea43a75f6b29d8e65b870871d14479db31c8e3883505c346",
+  "scope": "Prior pinned translator check, before adding exact reference scan; every case already rejected. No new whole-corpus percentage."
+}

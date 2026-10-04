@@ -654,6 +654,18 @@ numerical vector semantics and runtime compatibility stay separate. Evidence:
 `fixtures/modf-source-proof-2026-10-04.json` and
 `fixtures/modf-native-proof-2026-10-04.json`.
 
+Sampler-state values are not applied as native filtering directives. Accepted
+custom stages may supply explicit runtime sampler bindings; the model then uses
+TextureManager's name-based policy. Source-matched rejection selects fallback
+instead of interpreting that custom shader. The offline bridge now also copies
+native sampler-reference lookup, catching malformed identifiers that AST-based
+lookup misses. All51 saved state witnesses reject in the pinned GLES300 check.
+Two initial local-declaration predictions failed and led to this correction;
+two new correctly delimited sources match the published emulator with zero RGB8
+error across all30 frames each. See
+`docs/superpowers/evidence/2026-10-04-sampler-runtime-learning.md` for details and
+the preserved failures.
+
 Remaining work includes faithful source geometry/rasterization, external texture
 loading and random shader uniforms, complete drawing/blend ordering, all helper/loop/control-flow
 semantics, discarded fragments and native precision verification. The numeric
