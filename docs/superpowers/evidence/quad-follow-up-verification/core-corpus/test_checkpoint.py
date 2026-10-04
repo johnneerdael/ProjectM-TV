@@ -91,6 +91,22 @@ class BackupTests(unittest.TestCase):
         command("-C",str(repository),"remote","set-url","origin",str(remote))
         self.assertEqual(checkpoint.push(repository),second)
 
+    def test_protocol_partition_reuses_blob_without_retagging_old_evidence(self):
+        import subprocess
+        repository=self.work/"repo";repository.mkdir()
+        subprocess.run(["git","init","-b",checkpoint.BRANCH,str(repository)],check=True,capture_output=True)
+        for key,value in (("user.name","Checkpoint test"),("user.email","checkpoint@example.invalid")):
+            subprocess.run(["git","-C",str(repository),"config",key,value],check=True,capture_output=True)
+        source=self.work/"shared.png";source.write_bytes(b"samePNG")
+        first=checkpoint.plan_payloads([{"source":str(source),"path":"old/frame.png"}],set())
+        checkpoint.write_archive(repository,"old-protocol",0,first["payloads"],first["files"],[])
+        known,_,_,_=checkpoint.load_archives(repository,"new-protocol",{})
+        second=checkpoint.plan_payloads([{"source":str(source),"path":"new/frame.png"}],known)
+        self.assertEqual(second["payloads"],{})
+        checkpoint.write_archive(repository,"new-protocol",0,{},second["files"],[])
+        checkpoint.restore_files(repository,"new-protocol",self.work/"new-restore")
+        self.assertEqual((self.work/"new-restore/new/frame.png").read_bytes(),b"samePNG")
+
     def test_remote_push_failure_cannot_advance_acknowledgement(self):
         self.assertFalse(checkpoint.remote_acknowledged("new","old"))
         self.assertFalse(checkpoint.remote_acknowledged("new",None))

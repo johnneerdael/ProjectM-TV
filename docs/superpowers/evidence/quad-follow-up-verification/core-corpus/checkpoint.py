@@ -171,8 +171,9 @@ def push(backup):
 
 def load_archives(backup,protocol_hash,memo):
     blobs,jobs,files=set(),{},{}
+    all_archives=sorted((backup/STORE).glob("*/*.zip"))
     archives=sorted((backup/STORE/protocol_hash).glob("*.zip"))
-    for path in archives:
+    for path in all_archives:
         signature=(str(path),path.stat().st_size,path.stat().st_mtime_ns)
         if signature not in memo:
             sidecar=json.loads(path.with_suffix(".json").read_text())
@@ -183,8 +184,8 @@ def load_archives(backup,protocol_hash,memo):
                 expected={"blobs/"+s for s in manifest["blobs"]}|{"checkpoint-manifest.json"}
                 if set(archive.namelist())!=expected or len(archive.namelist())!=len(expected):
                     raise ValueError("checkpoint archive member coverage mismatch")
-                if manifest["protocol_sha256"]!=protocol_hash:
-                    raise ValueError("checkpoint protocol provenance mismatch")
+                if manifest["protocol_sha256"]!=path.parent.name:
+                    raise ValueError("checkpoint protocol partition provenance mismatch")
                 for checksum in manifest["blobs"]:
                     with archive.open("blobs/"+checksum) as stream:
                         if hashlib.file_digest(stream,"sha256").hexdigest()!=checksum:
@@ -194,6 +195,9 @@ def load_archives(backup,protocol_hash,memo):
         if blobs.intersection(manifest["blobs"]):
             raise ValueError("duplicate stored core blob payload")
         blobs.update(manifest["blobs"])
+    for path in archives:
+        signature=(str(path),path.stat().st_size,path.stat().st_mtime_ns)
+        manifest=memo[signature]
         for file in manifest["files"]:
             if Path(file["path"]).is_absolute() or ".." in Path(file["path"]).parts:
                 raise ValueError("unsafe checkpoint alias path")
@@ -212,7 +216,7 @@ def load_archives(backup,protocol_hash,memo):
 def restore_files(backup,protocol_hash,destination):
     _,_,files,_=load_archives(backup,protocol_hash,{})
     locations={}
-    for path in sorted((backup/STORE/protocol_hash).glob("*.zip")):
+    for path in sorted((backup/STORE).glob("*/*.zip")):
         with zipfile.ZipFile(path) as archive:
             manifest=json.loads(archive.read("checkpoint-manifest.json"))
             for checksum in manifest["blobs"]:locations[checksum]=path
@@ -302,6 +306,7 @@ def checkpoint_cycle(args,memo):
     protocol,inventory=verify_protocol(work);protocol_hash=protocol["sha256"]
     blobs,covered,files,sequence=load_archives(backup,protocol_hash,memo)
     expected={run.job_key(protocol_hash,r,role,"selected",repeat,360) for r in inventory["presets"] for role in protocol["roles"] for repeat in (1,2)}
+    baseline_expected={run.job_key(protocol_hash,r,"baseline","selected",repeat,360) for r in inventory["presets"] for repeat in (1,2)}
     previous=json.loads(state_path.read_text()) if state_path.exists() else {}
     if previous.get("protocol_sha256") not in (None,protocol_hash):raise ValueError("monitor state belongs to another protocol")
     state={"pid":os.getpid(),"protocol_sha256":protocol_hash,"branch":BRANCH,"dataset":str(work),
@@ -311,7 +316,8 @@ def checkpoint_cycle(args,memo):
            "integrity_issues":[],"complete_corpus_remote_coverage":False}
     run.atomic(state_path,state)
     head=push(backup)
-    state.update(remote_verified_head=head,remote_verified_jobs=len(covered),remote_corpus_jobs=len(set(covered)&expected))
+    state.update(remote_verified_head=head,remote_verified_jobs=len(covered),remote_corpus_jobs=len(set(covered)&expected),remote_baseline_jobs=len(set(covered)&baseline_expected),
+                 complete_baseline_remote_coverage=baseline_expected.issubset(covered))
     run.atomic(state_path,state)
     def publish(payloads,aliases,jobs,bootstrap=False):
         nonlocal sequence,blobs,covered,files,head,state
@@ -323,7 +329,8 @@ def checkpoint_cycle(args,memo):
         run.atomic(state_path,state)
         head=push(backup)
         state.update(state="remote_confirmed",remote_verified_head=head,remote_verified_jobs=len(covered),
-                     remote_corpus_jobs=len(set(covered)&expected),updated_unix_seconds=time.time())
+                     remote_corpus_jobs=len(set(covered)&expected),remote_baseline_jobs=len(set(covered)&baseline_expected),
+                     complete_baseline_remote_coverage=baseline_expected.issubset(covered),updated_unix_seconds=time.time())
         run.atomic(state_path,state)
         print(f"remote core checkpoint confirmed: {len(covered)} jobs; {len(set(covered)&expected)}/{len(expected)} corpus jobs; {path.name}; HEAD{head}",flush=True)
     def store_unit(unit_files,jobs,bootstrap=False):
@@ -355,8 +362,10 @@ def checkpoint_cycle(args,memo):
     state.update(state="finite_backup_finished" if args.once else "waiting",locally_committed_jobs=len(covered),
                  remote_verified_jobs=len(covered),remote_corpus_jobs=len(set(covered)&expected),
                  complete_corpus_remote_coverage=expected.issubset(covered) and not state["integrity_issues"],
+                 remote_baseline_jobs=len(set(covered)&baseline_expected),
+                 complete_baseline_remote_coverage=baseline_expected.issubset(covered) and not state["integrity_issues"],
                  updated_unix_seconds=time.time())
-    for name in ("pilot-report.json","independent-pilot-audit.json","full-repeat-diagnostic.json"):
+    for name in ("pilot-report.json","independent-pilot-audit.json","full-repeat-diagnostic.json","baseline-completion-index.json","baseline-progress.json","progress.json"):
         path=work/name
         if path.exists():
             # Mutable live reports are retained as immutable versioned snapshots.
