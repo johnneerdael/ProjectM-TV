@@ -1,10 +1,12 @@
 {
-  "scope": "Local release build; default local version 2.2.0, not published core 2.2.8 or a seeded lab binary",
-  "engine_source_commit": "9c20236c3f38a1bed5205e435b6e7639a1158685",
-  "aar_sha256": "084b9e0cd5ab799d5888f218d7442d0cb03e4b3b45a5b3256f9e5f7b8adaa526",
+  "scope": "Local release build after integrating main parser fix; default local version 2.2.0, not published core 2.2.8 or a seeded lab binary",
+  "engine_source_commit": "24daf6d4482c9127dc6925414daa884260ca9ef7",
+  "base_commit": "f8d7dd58c7e29875465aed5ea8928d18de52701d",
+  "engine_patch_count": 37,
+  "aar_sha256": "3bdd8b79d635d8ee16a37503950f7ec833b45bc858f4aa2c992f1aa71b9a3005",
   "libraries": {
-    "jni/arm64-v8a/libprojectmtv.so": "be2c7d1a9602be4f9c16dcfec849016f8d0b5f6274e7e8867704dd8387c11d51",
-    "jni/armeabi-v7a/libprojectmtv.so": "e574540cec6ead0f337732ab7aaf9b3a3fcb1384205acf106ee8a424511af2f4"
+    "jni/arm64-v8a/libprojectmtv.so": "79c0778723f4b39b7ccb36e445b30bb969ca3fa195ac49a60d5fd9fd8f0945c0",
+    "jni/armeabi-v7a/libprojectmtv.so": "5644d3b32dea1085737aecb6c7521fe5044538cc619b00f0966e000d4c527e0d"
   },
-  "patch_sha256": "7eaf8bde5beb5031aae32dd63b1e91e8dccb8c5a4f7397ae0117226437bfb022"
+  "patch_sha256": "92905a34b19ada2128d3c4fd7e603bd6c52acf9f22b27f4678aadf38d4c22652"
 }

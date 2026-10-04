@@ -1,6 +1,6 @@
 # Random texture binding investigation — 2026-10-04
 
-Base: published core 2.2.8 source `f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98`; upstream projectM `e0b0a967` plus patches 0001–0035. Candidate engine change: patch 0037, final engine source commit `9c20236c3f38a1bed5205e435b6e7639a1158685`. Local release AAR/native hashes are in `local-artifact-identity.json`; that build uses the default local version 2.2.0 and is not the published 2.2.8 AAR. No authored presets or analyzer source were changed.
+Original reference: published core 2.2.8 source `f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98`; upstream projectM `e0b0a967` plus patches 0001–0035. Candidate engine change: patch 0037, final engine source commit `24daf6d4482c9127dc6925414daa884260ca9ef7`. Main parser fix `f8d7dd58` was integrated; the final engine includes parser patch 0036 and random-binding patch 0037 (37 patches total). Local release AAR/native hashes are in `local-artifact-identity.json`; that build uses the default local version 2.2.0 and is not the published 2.2.8 AAR. No authored presets or analyzer source were changed.
 
 ## Findings and fix
 
@@ -37,9 +37,9 @@ The core extracts all top-level `assets/textures/` files to private `files/textu
 
 ## Validation and limits
 
-- Seven ASan/UBSan real-GL CTest controls pass: manager, cross-stage aliases, shorthand, numerical samples, lifecycle, existing macro and waveform regressions. `numerical-controls.json` preserves expected/actual RGB bytes; these prove the controlled alias associations, not full-preset appearance.
+- Ten integrated ASan/UBSan CTest groups pass, including main's parser, shader-render and 16-preset controls. The seven original groups pass: manager, cross-stage aliases, shorthand, numerical samples, lifecycle, existing macro and waveform regressions. `numerical-controls.json` preserves expected/actual RGB bytes; these prove the controlled alias associations, not full-preset appearance.
 - Full native host runner passes; macOS transition-overlay GLES test is skipped without EGL/GLES. All 222 upstream engine tests pass, including main/named-main sampler controls. CI's Linux native job, including the GLES transition test, passes for `a30de789`.
-- Fresh debug core/app build and JVM tests pass. Release APK/core AAR build and release JVM tests pass. All 36 patches apply to a clean recursive export. Preset index/content checks and MkDocs strict build pass.
+- Fresh debug core/app build and JVM tests pass. Release APK/core AAR build and release JVM tests pass. All 37 patches apply to a clean recursive export. Preset index/content checks and MkDocs strict build pass.
 - The separate PR25 analyzer checkpoint passes 750 tests and 35 subtests using its prepared historical adapters, with bytecode/cache writes disabled. A pinned copy rechecks the original 315 inputs: source/code/parsed/unvisited inventories unchanged, no newly blocked presets. It reports 22 gaps versus the saved 23 because independent analyzer work cleared `martin - ludicrous speed.milk`; this patch receives no credit. The three random-binding guards remain. See `subset-audit.json` for adapter/module provenance. No new 36-patch analyzer adapter or full-corpus rendering was run.
 - Dedicated TV before/after captures and frame-rate validation are pending device allocation. The shared corpus baseline and running devices/processes/settings were not changed.
 
