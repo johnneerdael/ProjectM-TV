@@ -7,5 +7,5 @@
 -    private static final int[] CAPTURES = {120, 150, 180, 210, 239, 300, 390, 479};
 +    private static final int[] CAPTURES = {0, 1, 2, 120, 150, 180, 210, 239, 300, 390, 479};
      private Bundle arguments;
- 
+
      @Override public void onCreate(Bundle arguments) {
