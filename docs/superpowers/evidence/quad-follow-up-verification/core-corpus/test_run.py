@@ -175,6 +175,22 @@ class HostTests(unittest.TestCase):
         self.assertTrue(result["native_verified"])
         self.assertEqual(len(result["cleanup_warning"]),2)
 
+    def test_only_owned_emulator_serial_is_allowed(self):
+        self.assertEqual(run.validate_device("emulator-5580"),"emulator-5580")
+        with self.assertRaises(ValueError):run.validate_device("emulator-5554")
+
+    def test_owned_emulator_rejects_wrong_pid_command_and_non_qemu(self):
+        launch={"serial":"emulator-5580","pid":123,"command":["/sdk/emulator/emulator","-avd","Owned","-port","5580"],
+                "avd":str(self.work/"avds/Owned.avd")}
+        command="/sdk/emulator/qemu/darwin-aarch64/qemu-system-aarch64 -avd Owned -port 5580"
+        run.validate_emulator_claim(launch,command,"1",self.work)
+        with self.assertRaisesRegex(ValueError,"qemu"):
+            run.validate_emulator_claim(launch,command,"0",self.work)
+        with self.assertRaisesRegex(ValueError,"process|launch"):
+            run.validate_emulator_claim(launch,"unrelated process","1",self.work)
+        launch["serial"]="emulator-5554"
+        with self.assertRaises(ValueError):run.validate_emulator_claim(launch,command,"1",self.work)
+
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
     def test_allowed_ip_serials_are_accepted(self):

@@ -79,9 +79,40 @@ def job_key(protocol_hash, record, role, capture_mode, repeat, measurement_frame
 
 
 def validate_device(serial):
-    if serial not in ("192.168.51.53", "192.168.51.53:5555"):
-        raise ValueError("only device 192.168.51.53 is authorized")
+    if serial not in ("192.168.51.53", "192.168.51.53:5555", "emulator-5580"):
+        raise ValueError("only physical device192.168.51.53 and owned emulator-5580 are authorized")
     return serial
+
+
+def validate_emulator_claim(launch, process_command, qemu, owner_directory):
+    if launch.get("serial") != "emulator-5580" or type(launch.get("pid")) is not int or launch["pid"] <= 0:
+        raise ValueError("unexpected emulator launch identity")
+    command = launch.get("command", [])
+    if "-port" not in command or command[command.index("-port") + 1] != "5580" or "-avd" not in command:
+        raise ValueError("emulator launch did not claim owned port5580")
+    name = command[command.index("-avd") + 1]
+    if not Path(launch["avd"]).resolve().is_relative_to((owner_directory / "avds").resolve()):
+        raise ValueError("emulator launch AVD is outside owned sandbox")
+    if "qemu-system-aarch64" not in process_command or f"-avd {name}" not in process_command or "-port 5580" not in process_command:
+        raise ValueError("emulator PID process no longer matches owned launch")
+    if qemu != "1":
+        raise ValueError("owned emulator must report ro.kernel.qemu=1")
+
+
+def require_owned_emulator(serial):
+    if serial != "emulator-5580":
+        return None
+    owner = ROOT / "build/follow-ups/core-corpus/mac-emulator"
+    path = owner / "launch.json"
+    launch = json.loads(path.read_text())
+    os.kill(launch["pid"], 0)
+    process = subprocess.run(["ps", "-p", str(launch["pid"]), "-o", "command="],
+                             capture_output=True, text=True, check=True).stdout.strip()
+    qemu = subprocess.run(["adb", "-s", serial, "shell", "getprop", "ro.kernel.qemu"],
+                          capture_output=True, text=True, check=True, timeout=30).stdout.strip()
+    validate_emulator_claim(launch, process, qemu, owner)
+    return {"launch_sha256": file_hash(path), "pid": launch["pid"], "avd": launch["avd"],
+            "command": launch["command"], "ro.kernel.qemu": qemu}
 
 
 def adb(serial, *args, timeout=120, allow_failure=False):
@@ -387,6 +418,7 @@ def validate_observer_pair(baseline, candidate):
 
 def prepare(args):
     validate_device(args.serial)
+    emulator_owner = require_owned_emulator(args.serial)
     corpus = inventory()
     roles = {role: artifact(path, role, corpus) for role, path in (("baseline", args.baseline_apk), ("candidate", args.candidate_apk))}
     validate_observer_pair(roles["baseline"], roles["candidate"])
@@ -394,7 +426,7 @@ def prepare(args):
               for key in ("ro.product.manufacturer", "ro.product.model", "ro.product.device", "ro.build.fingerprint", "ro.product.cpu.abi")}
     pcm = prepare_pcm(args.work / "signals")
     protocol = {"schema_version": 2, "backend": "production-projectm-tv-core-ProjectMJNI-EGL-GLES3",
-                "device_serial": args.serial, "device": device, "roles": roles,
+                "device_serial": args.serial, "device": device, "emulator_owner": emulator_owner, "roles": roles,
                 "corpus_sha256": corpus["corpus_sha256"], "textures_sha256": corpus["textures_sha256"],
                 "pcm": pcm, "pcm_protocol": "16s bass-0.30 float32, seed12345; clip(rint(128+127*x),0,255); short input is exact 8s byte prefix; full1470-byte JNI blocks",
                 "config": {"width": 2364, "height": 1330, "fps": 30, "seed": 12345, "warmup_frames": 120,
@@ -423,6 +455,9 @@ def load_inputs(work):
     corpus = json.loads((work / "inventory.json").read_text())
     if digest(corpus["presets"]) != corpus["corpus_sha256"] or corpus["corpus_sha256"] != protocol["corpus_sha256"]:
         raise ValueError("immutable corpus checksum mismatch")
+    emulator_owner = require_owned_emulator(protocol["device_serial"])
+    if emulator_owner != protocol.get("emulator_owner"):
+        raise ValueError("owned emulator launch changed; use a new immutable protocol")
     for role in protocol["roles"].values():
         if file_hash(role["apk_path"]) != role["apk_sha256"]:
             raise ValueError("immutable APK changed")
@@ -433,6 +468,7 @@ def load_inputs(work):
 
 
 def require_awake(serial):
+    require_owned_emulator(serial)
     power = adb(serial, "shell", "dumpsys", "power").stdout.decode(errors="replace")
     match = re.search(r"mWakefulness=(\w+)", power)
     if not match or match.group(1) != "Awake":
