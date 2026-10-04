@@ -215,7 +215,6 @@ enabled_listeners() {
 }
 allow_listeners() {
     [ "$LISTENERS_OFF" = 1 ] || return 0
-    LISTENERS_OFF=0
     for c in $LISTENERS; do
         ash cmd notification allow_listener "$c" >/dev/null
     done
@@ -232,6 +231,8 @@ allow_listeners() {
             sleep 0.5
         done
     done
+    # Only now: if Ctrl-C or a lost connection cut the restore short, the exit trap tries again.
+    LISTENERS_OFF=0
 }
 cleanup() {
     allow_listeners
