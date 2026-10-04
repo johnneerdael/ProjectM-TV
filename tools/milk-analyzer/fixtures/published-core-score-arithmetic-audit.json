@@ -1,0 +1,13 @@
+{
+  "corpus": 9606,
+  "arithmetically_verified": 144,
+  "missing": 9459,
+  "unscored": 3,
+  "invalid": 0,
+  "ready": false,
+  "basis": "Saved feature/descriptor/model arithmetic; not validation of visual prediction accuracy",
+  "run_identity": "ea1a42958b54c7d88c1d5fb44584e8bd6bfe9c981d56b8939f9571ef0712c24e",
+  "full_report_sha256": "2461d9d289196deae68da05484191ed54324a92f65040f24b25cc565e354f2c6",
+  "date": "2026-10-04",
+  "note": "Stopped partial run; diagnostic remeasurement not spliced into original identity"
+}

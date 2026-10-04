@@ -66,10 +66,29 @@ is local test input, not distributed with this repository.
 ## Complete review export and debug build
 
 `audience_export.py` verifies every preset path/hash against the published AAR
-and requires a finite matching score for the entire corpus. It emits the agreed
+and requires a finite matching score for the entire corpus. Before writing
+assets it recomputes scores from the pinned model, saved features and flash
+contributions. The model hash, measurement duration and correspondence-derived
+features must agree. Direct uniform/stationary observations remain explicit
+exceptions to unavailable optical-flow features. It emits the agreed
 overlapping groups, a separate relative-rank table and checksummed metadata.
 The unchanged core receives Chill through `ambient`, Normal through `pop`, and
 Party through `dance`; those aliases are displayed as the requested review names.
+
+Audit partial or complete data without starting a render:
+
+```bash
+build/preset-lab-venv/bin/python tools/milk-analyzer/score_audit.py \
+  --run build/core-audience-corpus \
+  --output build/core-audience-corpus/score-audit.json
+```
+
+The report distinguishes missing, unresolved, arithmetically invalid and verified
+records. `ready` is false until every corpus entry verifies. Arithmetic agreement
+does not establish perceptual accuracy. The duplicate published-core coordinator
+is stopped; the shared full-corpus owner uses `followup/quad-lines`. Selected
+frame pairs from that baseline must not be treated as continuous measurements
+for acceleration or flashing-rate features.
 
 ```bash
 build/preset-lab-venv/bin/python tools/milk-analyzer/audience_export.py \
