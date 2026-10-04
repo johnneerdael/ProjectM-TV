@@ -1,0 +1,38 @@
+{
+  "scope": "Per-frame compilation fallback only; accepted original programs bypass normalization; init/pixel/custom stages and shaders untouched. Actual-core recovery and corpus comparison still pending.",
+  "reference": "https://github.com/WACUP/vis_milk2/blob/50cbd69c69497f22baa521066e04ee05d5940ea4/vis_milk2/state.cpp#L1530",
+  "patch_sha256": "a79b74945135f2383e3b6003e5ba3a501389023826a98da36deb0a073fe87728",
+  "red_failed": 3,
+  "red_passed_controls": 2,
+  "green_passed": 5,
+  "full_suite_passed": 179,
+  "full_suite_skipped": 0,
+  "host_limit": "Mac OpenGL 4.1 uses the same no-op glInvalidateFramebuffer compile shim as the prior host suite; not a GLES driver or corpus substitute.",
+  "evidence_files": [
+    {
+      "path": "green.log",
+      "bytes": 1334,
+      "sha256": "440dc48b32b9c88076abd5c6f1c7b16cd866d0016b3237ab613ab1b30ae3cbe2"
+    },
+    {
+      "path": "host-gl-shim.h",
+      "bytes": 303,
+      "sha256": "d6e750d59971b64150bfb5cb2764667b06eeb0ac4c2ac0864b896500beef06e5"
+    },
+    {
+      "path": "plan.md",
+      "bytes": 1475,
+      "sha256": "ce160b41dbf34007994b7fe0658de5ed6faad6d5387345181392e7102ef0247c"
+    },
+    {
+      "path": "red.log",
+      "bytes": 2906,
+      "sha256": "9ec761ae15bb65fce15c84b7ccef4e8417fed3782c792ca9c6e8f8437629ef55"
+    },
+    {
+      "path": "suite.log",
+      "bytes": 31165,
+      "sha256": "83b320c35936b77b60fc42ee89934812a50f57174cad530d5cf895688d7db104"
+    }
+  ]
+}
