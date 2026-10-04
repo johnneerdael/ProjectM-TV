@@ -33,8 +33,8 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
     select_equation(None,'per_frame_',policy=equation_loader_policy)
     valid_cache = (cache is not None and cache.get('preset_sha256') == digest
                    and cache.get('reader_sha256') == reader_sha)
-    from equation_loading import constant_q_banks
-    known_q=constant_q_banks(cache,policy=equation_loader_policy) if valid_cache else {}
+    from equation_loading import constant_q_components
+    known_q=constant_q_components(cache,policy=equation_loader_policy) if valid_cache else {}
     stage_plan=None
     if shader_profile is not None and valid_cache:
         from stage_resolution import resolve_stages
@@ -123,7 +123,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                     if not any(re.fullmatch(r'sampler_(?:[A-Za-z]{2}_)?rand[0-9]+(?:_[A-Za-z0-9_]+)?',name,re.I)
                                for name in requested):bindings=requested
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
-                                     frame=3, warp_reads_blur=False,known_uniforms=known_q,
+                                     frame=3, warp_reads_blur=False,known_uniform_components=known_q,
                                      array_initializer_policy=section.get('array_initializer_policy','legacy-layout-v1'))
                 try:
                     model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings)

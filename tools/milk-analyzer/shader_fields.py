@@ -37,7 +37,7 @@ ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul',
 
 
 class ShaderFields:
-    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,array_initializer_policy='legacy-layout-v1'):
+    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,array_initializer_policy='legacy-layout-v1'):
         if stage not in {"warp","composite"}:raise ValueError("warp or composite stage required")
         self.stage=stage;self.frame=frame;self.warp_reads_blur=warp_reads_blur
         self.environment={};self.complete=True;self.unknown=[]
@@ -45,6 +45,7 @@ class ShaderFields:
         self.frame_wrap=frame_wrap;self.sampler_bindings={}
         self.main_binding_policy=main_binding_policy
         self.known_uniforms=known_uniforms or {}
+        self.known_uniform_components=known_uniform_components or {}
         if array_initializer_policy not in {'legacy-layout-v1','grouped-elements-v1'}:raise ValueError('unsupported array initializer policy')
         self.array_initializer_policy=array_initializer_policy
         self.effects=[]
@@ -251,6 +252,14 @@ class ShaderFields:
                     elif declaration['type'].get('flags',0)&4 and name in self.known_uniforms:
                         value=Field('constant',dtype=dtype,detail={'value':self.known_uniforms[name],
                                     'basis':'explicit source/context uniform binding'})
+                    elif declaration['type'].get('flags',0)&4 and dtype=='float4' and name in self.known_uniform_components:
+                        packed=Field('input',dtype=dtype,detail={'name':name})
+                        lanes=self.known_uniform_components[name]
+                        value=Field('components',tuple(
+                            Field('constant',dtype='float',detail={'value':lanes[i],
+                                'basis':'source-proven untouched main Q component'}) if i in lanes else
+                            Field('member',(packed,),'float',{'field':'xyzw'[i],'swizzle':True})
+                            for i in range(4)),dtype)
                     else:value=Field('input' if declaration['type'].get('flags',0)&4 or dtype.startswith('sampler') else 'uninitialized',dtype=dtype,detail={'name':name})
                     self.environment[name]=value
                     self.globals[name]=self.environment[name]

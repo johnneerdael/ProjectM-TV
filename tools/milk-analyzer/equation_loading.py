@@ -33,8 +33,8 @@ def select_equation(section,prefix,*,policy):
             'code':None,'tree_status':'unknown','tree':None,'policy':policy}
 
 
-def constant_q_banks(source,*,policy):
-    """Prove untouched main Q banks zero; referenced banks stay unconstrained."""
+def constant_q_components(source,*,policy):
+    """Prove untouched main Q components zero; referenced slots stay symbolic."""
     names=set()
     for prefix,section in source.get('sections',{}).items():
         if prefix not in {'warp_','comp_'} and select_equation(section,prefix,policy=policy)['compile_status'] not in {'accepted','omitted'}:return {}
@@ -49,5 +49,12 @@ def constant_q_banks(source,*,policy):
         if selected['compile_status']=='omitted':continue
         if selected['compile_status']!='accepted' or selected['tree_status']!='parsed':return {}
         visit(selected['tree'])
-    return {'_q'+chr(ord('a')+bank):[0,0,0,0] for bank in range(8)
-            if not {f'q{bank*4+component+1}' for component in range(4)}&names}
+    return {'_q'+chr(ord('a')+bank):components for bank in range(8)
+            if (components:={component:0 for component in range(4)
+                            if f'q{bank*4+component+1}' not in names})}
+
+
+def constant_q_banks(source,*,policy):
+    """Compatibility view: only whole banks whose four lanes are proven zero."""
+    return {name:[lanes[i] for i in range(4)]
+            for name,lanes in constant_q_components(source,policy=policy).items() if len(lanes)==4}

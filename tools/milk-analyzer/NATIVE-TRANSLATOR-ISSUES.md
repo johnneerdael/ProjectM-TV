@@ -368,3 +368,14 @@ The supplied MilkDrop3 source compiles with D3DX and binds named known constants
 source inspection alone has not yet established a matching current-core zero
 policy for these three uninitialized globals. Preserve uncertainty pending a
 versioned translator/default policy and corresponding native numerical controls.
+
+
+### Component-default follow-up
+
+The component-level untouched-Q rule now clears the New Creation `arg` case:
+q29 is absent from selected main equation trees and native initialization is zero,
+so k1=0 selects an initializing branch. Other packed-bank components remain
+symbolic. This is an analyzer input-context correction, not a native translator
+patch. The remaining source-gap count is **26**; the other four read-before-write
+cases above remain unresolved. See
+`fixtures/focused-blockers-26-partial-q-2026-10-04.json`.

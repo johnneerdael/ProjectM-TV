@@ -1183,3 +1183,19 @@ swizzle. They also reject in the unchanged native CPU translator bodies with
 explicit descriptor context. Minimal paired diagnostic controls isolate the
 failures; authored presets remain unchanged and blocked. See the translator
 handoff and `fixtures/remaining-native-parser-16-2026-10-04.json`.
+
+
+### Component-level untouched Q inference
+
+Untouched main Q slots now remain provably zero even when a different component
+in the same packed uniform bank is referenced. Referenced components stay
+symbolic. The binding applies to original uniform declarations; a shader local
+with the same name is not initialized by this rule. Missing/unresolved equation
+trees still prevent inference, and whole-bank callers retain their earlier API.
+
+The same 315-case audit now leaves **26** known source gaps, clearing only
+`New Creation Sensation -  AdamFx,Flexi,Amandio c n Martin - Star to Another World ft Hexocollie,ShadowH,Geiss Bewitchcrafted A.milk`.
+Its q29 is untouched, proving k1=0 and selecting the initializing branch for arg;
+q32 stays symbolic. No new blockers appeared and source/parsed inventories stay
+unchanged. See `fixtures/focused-blockers-26-partial-q-2026-10-04.json`.
+This is an input/default and control-flow proof, not rendered appearance evidence.
