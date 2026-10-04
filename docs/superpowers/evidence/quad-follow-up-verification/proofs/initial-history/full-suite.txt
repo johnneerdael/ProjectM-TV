@@ -1,0 +1,483 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 174 tests from 21 test suites.
+[----------] Global test environment set-up.
+[----------] 10 tests from ModuloTest
+[ RUN      ] ModuloTest.FloatVectorResultPreservesComponents
+[       OK ] ModuloTest.FloatVectorResultPreservesComponents (0 ms)
+[ RUN      ] ModuloTest.MixedScalarAndVectorPromotesToFloatVector
+[       OK ] ModuloTest.MixedScalarAndVectorPromotesToFloatVector (0 ms)
+[ RUN      ] ModuloTest.UnsignedVectorResultPreservesComponents
+[       OK ] ModuloTest.UnsignedVectorResultPreservesComponents (0 ms)
+[ RUN      ] ModuloTest.RemainderAndMultiplicationAssociateLeftToRight
+[       OK ] ModuloTest.RemainderAndMultiplicationAssociateLeftToRight (0 ms)
+[ RUN      ] ModuloTest.ComparisonBindsMoreTightlyThanEquality
+[       OK ] ModuloTest.ComparisonBindsMoreTightlyThanEquality (0 ms)
+[ RUN      ] ModuloTest.BitwiseAndBindsMoreTightlyThanXor
+[       OK ] ModuloTest.BitwiseAndBindsMoreTightlyThanXor (0 ms)
+[ RUN      ] ModuloTest.FloatRemainderUsesModOnDesktopAndES
+[       OK ] ModuloTest.FloatRemainderUsesModOnDesktopAndES (0 ms)
+[ RUN      ] ModuloTest.IntegerVectorRemainderKeepsIntegerOperator
+[       OK ] ModuloTest.IntegerVectorRemainderKeepsIntegerOperator (0 ms)
+[ RUN      ] ModuloTest.IntegerVectorRemainderUsesVectorFallbackOnLegacyGLSL
+[       OK ] ModuloTest.IntegerVectorRemainderUsesVectorFallbackOnLegacyGLSL (0 ms)
+[ RUN      ] ModuloTest.GeneratedRemainderPromotesScalarAndVectorOperands
+[       OK ] ModuloTest.GeneratedRemainderPromotesScalarAndVectorOperands (0 ms)
+[----------] 10 tests from ModuloTest (0 ms total)
+
+[----------] 1 test from ShaderException
+[ RUN      ] ShaderException.PreservesDriverDiagnosticThroughStandardExceptionHandler
+[       OK ] ShaderException.PreservesDriverDiagnosticThroughStandardExceptionHandler (0 ms)
+[----------] 1 test from ShaderException (0 ms total)
+
+[----------] 3 tests from MilkdropPresetException
+[ RUN      ] MilkdropPresetException.LoadMessageSurvivesStandardExceptionHandler
+[       OK ] MilkdropPresetException.LoadMessageSurvivesStandardExceptionHandler (0 ms)
+[ RUN      ] MilkdropPresetException.CompileMessageSurvivesStandardExceptionHandler
+[       OK ] MilkdropPresetException.CompileMessageSurvivesStandardExceptionHandler (0 ms)
+[ RUN      ] MilkdropPresetException.FactoryMessageSurvivesStandardExceptionHandler
+[       OK ] MilkdropPresetException.FactoryMessageSurvivesStandardExceptionHandler (0 ms)
+[----------] 3 tests from MilkdropPresetException (0 ms total)
+
+[----------] 3 tests from MilkdropPresetFailureEventTest
+[ RUN      ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason (71 ms)
+[ RUN      ] MilkdropPresetFailureEventTest.InvalidPerFrameExpressionReportsCompileReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] MilkdropPresetFailureEventTest.InvalidPerFrameExpressionReportsCompileReason (69 ms)
+[ RUN      ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason (68 ms)
+[----------] 3 tests from MilkdropPresetFailureEventTest (209 ms total)
+
+[----------] 5 tests from ShaderFailureTest
+[ RUN      ] ShaderFailureTest.VertexRejectionReleasesShader
+[       OK ] ShaderFailureTest.VertexRejectionReleasesShader (0 ms)
+[ RUN      ] ShaderFailureTest.FragmentRejectionReleasesBothShaders
+[       OK ] ShaderFailureTest.FragmentRejectionReleasesBothShaders (0 ms)
+[ RUN      ] ShaderFailureTest.LinkRejectionReleasesBothShaders
+[       OK ] ShaderFailureTest.LinkRejectionReleasesBothShaders (0 ms)
+[ RUN      ] ShaderFailureTest.RepeatedRejectedProgramsDoNotAccumulateShaders
+[       OK ] ShaderFailureTest.RepeatedRejectedProgramsDoNotAccumulateShaders (4 ms)
+[ RUN      ] ShaderFailureTest.RejectedProgramCanCompileAndBindSuccessfullyAfterRetry
+[       OK ] ShaderFailureTest.RejectedProgramCanCompileAndBindSuccessfullyAfterRetry (1 ms)
+[----------] 5 tests from ShaderFailureTest (7 ms total)
+
+[----------] 6 tests from WarpSamplerTest
+[ RUN      ] WarpSamplerTest.ExplicitModesIgnorePresetWrap
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] WarpSamplerTest.ExplicitModesIgnorePresetWrap (1375 ms)
+[ RUN      ] WarpSamplerTest.EquivalentAliasesHaveIdenticalFilteringAndWrapping
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] WarpSamplerTest.EquivalentAliasesHaveIdenticalFilteringAndWrapping (1274 ms)
+[ RUN      ] WarpSamplerTest.UnqualifiedMainHonorsPresetWrap
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] WarpSamplerTest.UnqualifiedMainHonorsPresetWrap (403 ms)
+[ RUN      ] WarpSamplerTest.MixedMainAndExplicitClampMatchIndependentReferences
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] WarpSamplerTest.MixedMainAndExplicitClampMatchIndependentReferences (488 ms)
+[ RUN      ] WarpSamplerTest.CompositeModesIgnorePresetWrap
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] WarpSamplerTest.CompositeModesIgnorePresetWrap (1307 ms)
+[ RUN      ] WarpSamplerTest.DefaultWarpMatchesUnqualifiedPassThrough
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+[       OK ] WarpSamplerTest.DefaultWarpMatchesUnqualifiedPassThrough (319 ms)
+[----------] 6 tests from WarpSamplerTest (5168 ms total)
+
+[----------] 31 tests from LineGeometry
+[ RUN      ] LineGeometry.ScaleIsZeroWithoutReferenceOrViewport
+[       OK ] LineGeometry.ScaleIsZeroWithoutReferenceOrViewport (0 ms)
+[ RUN      ] LineGeometry.ScaleAtSixteenByNineFollowsTheHeight
+[       OK ] LineGeometry.ScaleAtSixteenByNineFollowsTheHeight (0 ms)
+[ RUN      ] LineGeometry.ScaleFollowsTheRenderArea
+[       OK ] LineGeometry.ScaleFollowsTheRenderArea (0 ms)
+[ RUN      ] LineGeometry.ScaleNeverDropsBelowOne
+[       OK ] LineGeometry.ScaleNeverDropsBelowOne (0 ms)
+[ RUN      ] LineGeometry.SampleDecisionWidthIsTheRenderWidthWithoutReference
+[       OK ] LineGeometry.SampleDecisionWidthIsTheRenderWidthWithoutReference (0 ms)
+[ RUN      ] LineGeometry.SampleDecisionWidthFollowsTheLineScale
+[       OK ] LineGeometry.SampleDecisionWidthFollowsTheLineScale (0 ms)
+[ RUN      ] LineGeometry.SampleDecisionWidthNeverExceedsTheRenderWidth
+[       OK ] LineGeometry.SampleDecisionWidthNeverExceedsTheRenderWidth (0 ms)
+[ RUN      ] LineGeometry.MaximizeColorsTextureSizeIsTheRenderSizeWithoutReference
+[       OK ] LineGeometry.MaximizeColorsTextureSizeIsTheRenderSizeWithoutReference (0 ms)
+[ RUN      ] LineGeometry.MaximizeColorsTextureSizeFollowsTheReferenceAboveIt
+[       OK ] LineGeometry.MaximizeColorsTextureSizeFollowsTheReferenceAboveIt (0 ms)
+[ RUN      ] LineGeometry.MaximizeColorsTextureSizeIsTheRenderSizeAtOrBelowTheReference
+[       OK ] LineGeometry.MaximizeColorsTextureSizeIsTheRenderSizeAtOrBelowTheReference (0 ms)
+[ RUN      ] LineGeometry.BlurSourceIsTheSourceWithoutScale
+[       OK ] LineGeometry.BlurSourceIsTheSourceWithoutScale (0 ms)
+[ RUN      ] LineGeometry.BlurSourceFollowsTheLineScale
+[       OK ] LineGeometry.BlurSourceFollowsTheLineScale (0 ms)
+[ RUN      ] LineGeometry.BlurSourceStaysWithinTheSource
+[       OK ] LineGeometry.BlurSourceStaysWithinTheSource (0 ms)
+[ RUN      ] LineGeometry.ShaderCanvasSizeIsTheRenderSizeWithoutScale
+[       OK ] LineGeometry.ShaderCanvasSizeIsTheRenderSizeWithoutScale (0 ms)
+[ RUN      ] LineGeometry.ShaderCanvasSizeFollowsTheReferenceAboveIt
+[       OK ] LineGeometry.ShaderCanvasSizeFollowsTheReferenceAboveIt (0 ms)
+[ RUN      ] LineGeometry.ShaderCanvasSizeStaysWithinTheRender
+[       OK ] LineGeometry.ShaderCanvasSizeStaysWithinTheRender (0 ms)
+[ RUN      ] LineGeometry.ThinLinesAreOnePixelAtReference
+[       OK ] LineGeometry.ThinLinesAreOnePixelAtReference (0 ms)
+[ RUN      ] LineGeometry.MainWaveThickIsFourOffsetThinLines
+[       OK ] LineGeometry.MainWaveThickIsFourOffsetThinLines (0 ms)
+[ RUN      ] LineGeometry.MainWaveThickOffsetsFollowTheViewport
+[       OK ] LineGeometry.MainWaveThickOffsetsFollowTheViewport (0 ms)
+[ RUN      ] LineGeometry.ThinLinesHaveNoPassOffset
+[       OK ] LineGeometry.ThinLinesHaveNoPassOffset (0 ms)
+[ RUN      ] LineGeometry.CustomWaveThickIsFourOffsetThinLines
+[       OK ] LineGeometry.CustomWaveThickIsFourOffsetThinLines (0 ms)
+[ RUN      ] LineGeometry.ShapeBorderThickIsFourOffsetThinLines
+[       OK ] LineGeometry.ShapeBorderThickIsFourOffsetThinLines (0 ms)
+[ RUN      ] LineGeometry.PassOffsetsScaleWithTheLines
+[       OK ] LineGeometry.PassOffsetsScaleWithTheLines (0 ms)
+[ RUN      ] LineGeometry.NoPassOffsetWithoutViewport
+[       OK ] LineGeometry.NoPassOffsetWithoutViewport (0 ms)
+[ RUN      ] LineGeometry.PassOffsetsFollowMilkDropsOrder
+[       OK ] LineGeometry.PassOffsetsFollowMilkDropsOrder (0 ms)
+[ RUN      ] LineGeometry.WidthScalesButPassesDoNot
+[       OK ] LineGeometry.WidthScalesButPassesDoNot (0 ms)
+[ RUN      ] LineGeometry.MotionVectorsIgnoreThick
+[       OK ] LineGeometry.MotionVectorsIgnoreThick (0 ms)
+[ RUN      ] LineGeometry.MainWaveDotsAreTwoPixelBlocks
+[       OK ] LineGeometry.MainWaveDotsAreTwoPixelBlocks (0 ms)
+[ RUN      ] LineGeometry.CustomWaveDotsAreTwoPixelsOnlyWhenThick
+[       OK ] LineGeometry.CustomWaveDotsAreTwoPixelsOnlyWhenThick (0 ms)
+[ RUN      ] LineGeometry.DotsBelowOnePixelFadeByArea
+[       OK ] LineGeometry.DotsBelowOnePixelFadeByArea (0 ms)
+[ RUN      ] LineGeometry.DotsRoundUpToWholePixelsAndFadeByArea
+[       OK ] LineGeometry.DotsRoundUpToWholePixelsAndFadeByArea (0 ms)
+[----------] 31 tests from LineGeometry (0 ms total)
+
+[----------] 8 tests from LineBatch
+[ RUN      ] LineBatch.OpenStripRepeatsItsEndPoints
+[       OK ] LineBatch.OpenStripRepeatsItsEndPoints (0 ms)
+[ RUN      ] LineBatch.LoopWrapsAround
+[       OK ] LineBatch.LoopWrapsAround (0 ms)
+[ RUN      ] LineBatch.TwoPointLoopHasTwoSegments
+[       OK ] LineBatch.TwoPointLoopHasTwoSegments (0 ms)
+[ RUN      ] LineBatch.FewerThanTwoPointsDrawNothing
+[       OK ] LineBatch.FewerThanTwoPointsDrawNothing (0 ms)
+[ RUN      ] LineBatch.StripsFollowEachOther
+[       OK ] LineBatch.StripsFollowEachOther (0 ms)
+[ RUN      ] LineBatch.LastInstanceReadsInsideItsStrip
+[       OK ] LineBatch.LastInstanceReadsInsideItsStrip (0 ms)
+[ RUN      ] LineBatch.KeepsColors
+[       OK ] LineBatch.KeepsColors (0 ms)
+[ RUN      ] LineBatch.ClearEmpties
+[       OK ] LineBatch.ClearEmpties (0 ms)
+[----------] 8 tests from LineBatch (0 ms total)
+
+[----------] 2 tests from TextureStorageBytes
+[ RUN      ] TextureStorageBytes.LevelZeroWithoutMipmaps
+[       OK ] TextureStorageBytes.LevelZeroWithoutMipmaps (0 ms)
+[ RUN      ] TextureStorageBytes.MipChainDownToOnePixel
+[       OK ] TextureStorageBytes.MipChainDownToOnePixel (0 ms)
+[----------] 2 tests from TextureStorageBytes (0 ms total)
+
+[----------] 2 tests from TexturePoolTest
+[ RUN      ] TexturePoolTest.CountsGeneratedMipLevels
+[       OK ] TexturePoolTest.CountsGeneratedMipLevels (7 ms)
+[ RUN      ] TexturePoolTest.LimitIncludesMipLevels
+[       OK ] TexturePoolTest.LimitIncludesMipLevels (4 ms)
+[----------] 2 tests from TexturePoolTest (11 ms total)
+
+[----------] 5 tests from TextureHistoryTest
+[ RUN      ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender
+[       OK ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender (4 ms)
+[ RUN      ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState
+[       OK ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState (5 ms)
+[ RUN      ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization
+[       OK ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization (4 ms)
+[ RUN      ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract
+[       OK ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract (7 ms)
+[ RUN      ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName
+[       OK ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName (9 ms)
+[----------] 5 tests from TextureHistoryTest (31 ms total)
+
+[----------] 1 test from projectMWaveformAligner
+[ RUN      ] projectMWaveformAligner.AlignDelta
+[       OK ] projectMWaveformAligner.AlignDelta (2 ms)
+[----------] 1 test from projectMWaveformAligner (2 ms total)
+
+[----------] 22 tests from PresetFileParser
+[ RUN      ] PresetFileParser.ReadEmptyFile
+[       OK ] PresetFileParser.ReadEmptyFile (0 ms)
+[ RUN      ] PresetFileParser.ReadFileWithNullByte
+[       OK ] PresetFileParser.ReadFileWithNullByte (0 ms)
+[ RUN      ] PresetFileParser.ReadSimpleFile
+[       OK ] PresetFileParser.ReadSimpleFile (0 ms)
+[ RUN      ] PresetFileParser.GetRawPresetValues
+[       OK ] PresetFileParser.GetRawPresetValues (0 ms)
+[ RUN      ] PresetFileParser.EmptyValue
+[       OK ] PresetFileParser.EmptyValue (0 ms)
+[ RUN      ] PresetFileParser.EmptyKey
+[       OK ] PresetFileParser.EmptyKey (0 ms)
+[ RUN      ] PresetFileParser.ValueWithSpaceDelimiter
+[       OK ] PresetFileParser.ValueWithSpaceDelimiter (0 ms)
+[ RUN      ] PresetFileParser.ReadFileWithRepeatedKey
+[       OK ] PresetFileParser.ReadFileWithRepeatedKey (0 ms)
+[ RUN      ] PresetFileParser.GetCode
+[       OK ] PresetFileParser.GetCode (0 ms)
+[ RUN      ] PresetFileParser.GetCodeWithGap
+[       OK ] PresetFileParser.GetCodeWithGap (0 ms)
+[ RUN      ] PresetFileParser.GetCodeWithRepeatedLine
+[       OK ] PresetFileParser.GetCodeWithRepeatedLine (0 ms)
+[ RUN      ] PresetFileParser.GetCodeMultilineComment
+[       OK ] PresetFileParser.GetCodeMultilineComment (0 ms)
+[ RUN      ] PresetFileParser.GetCodeShaderSyntax
+[       OK ] PresetFileParser.GetCodeShaderSyntax (0 ms)
+[ RUN      ] PresetFileParser.GetIntValid
+[       OK ] PresetFileParser.GetIntValid (0 ms)
+[ RUN      ] PresetFileParser.GetIntInvalid
+[       OK ] PresetFileParser.GetIntInvalid (0 ms)
+[ RUN      ] PresetFileParser.GetIntDefault
+[       OK ] PresetFileParser.GetIntDefault (0 ms)
+[ RUN      ] PresetFileParser.GetFloatValid
+[       OK ] PresetFileParser.GetFloatValid (0 ms)
+[ RUN      ] PresetFileParser.GetFloatInvalid
+[       OK ] PresetFileParser.GetFloatInvalid (0 ms)
+[ RUN      ] PresetFileParser.GetFloatDefault
+[       OK ] PresetFileParser.GetFloatDefault (0 ms)
+[ RUN      ] PresetFileParser.GetBooleanValid
+[       OK ] PresetFileParser.GetBooleanValid (0 ms)
+[ RUN      ] PresetFileParser.GetBooleanInvalid
+[       OK ] PresetFileParser.GetBooleanInvalid (0 ms)
+[ RUN      ] PresetFileParser.GetBooleanDefault
+[       OK ] PresetFileParser.GetBooleanDefault (0 ms)
+[----------] 22 tests from PresetFileParser (2 ms total)
+
+[----------] 15 tests from StripComments
+[ RUN      ] StripComments.PreservesCodeWithNoComments
+[       OK ] StripComments.PreservesCodeWithNoComments (0 ms)
+[ RUN      ] StripComments.StripsLineComment
+[       OK ] StripComments.StripsLineComment (0 ms)
+[ RUN      ] StripComments.StripsLineCommentNoSpace
+[       OK ] StripComments.StripsLineCommentNoSpace (0 ms)
+[ RUN      ] StripComments.StripsBlockComment
+[       OK ] StripComments.StripsBlockComment (0 ms)
+[ RUN      ] StripComments.StripsMultiLineBlockComment
+[       OK ] StripComments.StripsMultiLineBlockComment (0 ms)
+[ RUN      ] StripComments.PreservesNewlinesInBlockComment
+[       OK ] StripComments.PreservesNewlinesInBlockComment (0 ms)
+[ RUN      ] StripComments.EmptyString
+[       OK ] StripComments.EmptyString (0 ms)
+[ RUN      ] StripComments.UnterminatedBlockComment
+[       OK ] StripComments.UnterminatedBlockComment (0 ms)
+[ RUN      ] StripComments.PreservesStringLength
+[       OK ] StripComments.PreservesStringLength (0 ms)
+[ RUN      ] StripComments.LineCommentAtEndOfFileNoNewline
+[       OK ] StripComments.LineCommentAtEndOfFileNoNewline (0 ms)
+[ RUN      ] StripComments.NestedSlashesInsideBlockComment
+[       OK ] StripComments.NestedSlashesInsideBlockComment (0 ms)
+[ RUN      ] StripComments.SlashStarInsideLineComment
+[       OK ] StripComments.SlashStarInsideLineComment (0 ms)
+[ RUN      ] StripComments.ConsecutiveComments
+[       OK ] StripComments.ConsecutiveComments (0 ms)
+[ RUN      ] StripComments.AdjacentBlockComments
+[       OK ] StripComments.AdjacentBlockComments (0 ms)
+[ RUN      ] StripComments.SingleSlashNotComment
+[       OK ] StripComments.SingleSlashNotComment (0 ms)
+[----------] 15 tests from StripComments (0 ms total)
+
+[----------] 16 tests from SamplerParsing
+[ RUN      ] SamplerParsing.FindsUncommentedSampler
+[       OK ] SamplerParsing.FindsUncommentedSampler (0 ms)
+[ RUN      ] SamplerParsing.IgnoresLineCommentedSampler
+[       OK ] SamplerParsing.IgnoresLineCommentedSampler (0 ms)
+[ RUN      ] SamplerParsing.NoSpaceAfterSlashesStillCommented
+[       OK ] SamplerParsing.NoSpaceAfterSlashesStillCommented (0 ms)
+[ RUN      ] SamplerParsing.IgnoresBlockCommentedSampler
+[       OK ] SamplerParsing.IgnoresBlockCommentedSampler (0 ms)
+[ RUN      ] SamplerParsing.BlockCommentSpansMultipleLines
+[       OK ] SamplerParsing.BlockCommentSpansMultipleLines (0 ms)
+[ RUN      ] SamplerParsing.SamplerAfterBlockCommentCloseIsFound
+[       OK ] SamplerParsing.SamplerAfterBlockCommentCloseIsFound (0 ms)
+[ RUN      ] SamplerParsing.IgnoresLineCommentedTexsize
+[       OK ] SamplerParsing.IgnoresLineCommentedTexsize (0 ms)
+[ RUN      ] SamplerParsing.IgnoresBlockCommentedTexsize
+[       OK ] SamplerParsing.IgnoresBlockCommentedTexsize (0 ms)
+[ RUN      ] SamplerParsing.TexsizeInBlockCommentSamplerOutside
+[       OK ] SamplerParsing.TexsizeInBlockCommentSamplerOutside (0 ms)
+[ RUN      ] SamplerParsing.MixedCommentedAndUncommented
+[       OK ] SamplerParsing.MixedCommentedAndUncommented (0 ms)
+[ RUN      ] SamplerParsing.SkipsSamplerState
+[       OK ] SamplerParsing.SkipsSamplerState (0 ms)
+[ RUN      ] SamplerParsing.CommentedSamplerStateNotExtracted
+[       OK ] SamplerParsing.CommentedSamplerStateNotExtracted (0 ms)
+[ RUN      ] SamplerParsing.EmptyProgram
+[       OK ] SamplerParsing.EmptyProgram (0 ms)
+[ RUN      ] SamplerParsing.ReproducesCrashPresetPattern
+[       OK ] SamplerParsing.ReproducesCrashPresetPattern (0 ms)
+[ RUN      ] SamplerParsing.MultipleSamplersOnSameLinePartiallyCommented
+[       OK ] SamplerParsing.MultipleSamplersOnSameLinePartiallyCommented (0 ms)
+[ RUN      ] SamplerParsing.SamplerInsideBlockCommentWithCodeOnSameLine
+[       OK ] SamplerParsing.SamplerInsideBlockCommentWithCodeOnSameLine (0 ms)
+[----------] 16 tests from SamplerParsing (0 ms total)
+
+[----------] 12 tests from BlurDetection
+[ RUN      ] BlurDetection.NoBlur
+[       OK ] BlurDetection.NoBlur (0 ms)
+[ RUN      ] BlurDetection.DetectsBlur1
+[       OK ] BlurDetection.DetectsBlur1 (0 ms)
+[ RUN      ] BlurDetection.DetectsBlur2
+[       OK ] BlurDetection.DetectsBlur2 (0 ms)
+[ RUN      ] BlurDetection.DetectsBlur3
+[       OK ] BlurDetection.DetectsBlur3 (0 ms)
+[ RUN      ] BlurDetection.Blur3TakesPrecedenceOverBlur1
+[       OK ] BlurDetection.Blur3TakesPrecedenceOverBlur1 (0 ms)
+[ RUN      ] BlurDetection.IgnoresBlur1InLineComment
+[       OK ] BlurDetection.IgnoresBlur1InLineComment (0 ms)
+[ RUN      ] BlurDetection.IgnoresBlur2InLineComment
+[       OK ] BlurDetection.IgnoresBlur2InLineComment (0 ms)
+[ RUN      ] BlurDetection.IgnoresBlur3InLineComment
+[       OK ] BlurDetection.IgnoresBlur3InLineComment (0 ms)
+[ RUN      ] BlurDetection.IgnoresBlurInBlockComment
+[       OK ] BlurDetection.IgnoresBlurInBlockComment (0 ms)
+[ RUN      ] BlurDetection.CommentedBlur3RealBlur1
+[       OK ] BlurDetection.CommentedBlur3RealBlur1 (0 ms)
+[ RUN      ] BlurDetection.BlockCommentedBlur2RealBlur1
+[       OK ] BlurDetection.BlockCommentedBlur2RealBlur1 (0 ms)
+[ RUN      ] BlurDetection.AllBlurLevelsCommentedOut
+[       OK ] BlurDetection.AllBlurLevelsCommentedOut (0 ms)
+[----------] 12 tests from BlurDetection (0 ms total)
+
+[----------] 6 tests from SamplerStateRemoval
+[ RUN      ] SamplerStateRemoval.RemovesRealSamplerState
+[       OK ] SamplerStateRemoval.RemovesRealSamplerState (0 ms)
+[ RUN      ] SamplerStateRemoval.SkipsLineCommentedSamplerState
+[       OK ] SamplerStateRemoval.SkipsLineCommentedSamplerState (0 ms)
+[ RUN      ] SamplerStateRemoval.SkipsBlockCommentedSamplerState
+[       OK ] SamplerStateRemoval.SkipsBlockCommentedSamplerState (0 ms)
+[ RUN      ] SamplerStateRemoval.RemovesRealButSkipsCommented
+[       OK ] SamplerStateRemoval.RemovesRealButSkipsCommented (0 ms)
+[ RUN      ] SamplerStateRemoval.MultipleRealSamplerStates
+[       OK ] SamplerStateRemoval.MultipleRealSamplerStates (0 ms)
+[ RUN      ] SamplerStateRemoval.NoSamplerState
+[       OK ] SamplerStateRemoval.NoSamplerState (0 ms)
+[----------] 6 tests from SamplerStateRemoval (0 ms total)
+
+[----------] 5 tests from ShaderBodyFind
+[ RUN      ] ShaderBodyFind.FindsRealShaderBody
+[       OK ] ShaderBodyFind.FindsRealShaderBody (0 ms)
+[ RUN      ] ShaderBodyFind.SkipsLineCommentedShaderBody
+[       OK ] ShaderBodyFind.SkipsLineCommentedShaderBody (0 ms)
+[ RUN      ] ShaderBodyFind.SkipsBlockCommentedShaderBody
+[       OK ] ShaderBodyFind.SkipsBlockCommentedShaderBody (0 ms)
+[ RUN      ] ShaderBodyFind.AllShaderBodiesCommented
+[       OK ] ShaderBodyFind.AllShaderBodiesCommented (0 ms)
+[ RUN      ] ShaderBodyFind.ShaderBodyAfterCodeAndComments
+[       OK ] ShaderBodyFind.ShaderBodyAfterCodeAndComments (0 ms)
+[----------] 5 tests from ShaderBodyFind (0 ms total)
+
+[----------] 10 tests from BraceCounting
+[ RUN      ] BraceCounting.SimpleNesting
+[       OK ] BraceCounting.SimpleNesting (0 ms)
+[ RUN      ] BraceCounting.SkipsBracesInLineComment
+[       OK ] BraceCounting.SkipsBracesInLineComment (0 ms)
+[ RUN      ] BraceCounting.SkipsBracesInBlockComment
+[       OK ] BraceCounting.SkipsBracesInBlockComment (0 ms)
+[ RUN      ] BraceCounting.NestedBracesWithBlockComment
+[       OK ] BraceCounting.NestedBracesWithBlockComment (0 ms)
+[ RUN      ] BraceCounting.MultipleLineComments
+[       OK ] BraceCounting.MultipleLineComments (0 ms)
+[ RUN      ] BraceCounting.MixedCommentTypes
+[       OK ] BraceCounting.MixedCommentTypes (0 ms)
+[ RUN      ] BraceCounting.BlockCommentSpanningMultipleLines
+[       OK ] BraceCounting.BlockCommentSpanningMultipleLines (0 ms)
+[ RUN      ] BraceCounting.SlashThatIsNotComment
+[       OK ] BraceCounting.SlashThatIsNotComment (0 ms)
+[ RUN      ] BraceCounting.LineCommentImmediatelyFollowedByBrace
+[       OK ] BraceCounting.LineCommentImmediatelyFollowedByBrace (0 ms)
+[ RUN      ] BraceCounting.BlockCommentContainingSlashSlash
+[       OK ] BraceCounting.BlockCommentContainingSlashSlash (0 ms)
+[----------] 10 tests from BraceCounting (0 ms total)
+
+[----------] 6 tests from RegexSamplerRemoval
+[ RUN      ] RegexSamplerRemoval.RemovesUncommentedDeclaration
+[       OK ] RegexSamplerRemoval.RemovesUncommentedDeclaration (0 ms)
+[ RUN      ] RegexSamplerRemoval.Removes3DDeclaration
+[       OK ] RegexSamplerRemoval.Removes3DDeclaration (0 ms)
+[ RUN      ] RegexSamplerRemoval.RemovesBareSamplerDeclaration
+[       OK ] RegexSamplerRemoval.RemovesBareSamplerDeclaration (0 ms)
+[ RUN      ] RegexSamplerRemoval.MatchesCommentedDeclaration
+[       OK ] RegexSamplerRemoval.MatchesCommentedDeclaration (0 ms)
+[ RUN      ] RegexSamplerRemoval.PreservesUnrelatedCode
+[       OK ] RegexSamplerRemoval.PreservesUnrelatedCode (0 ms)
+[ RUN      ] RegexSamplerRemoval.RemovesMultipleDeclarations
+[       OK ] RegexSamplerRemoval.RemovesMultipleDeclarations (0 ms)
+[----------] 6 tests from RegexSamplerRemoval (0 ms total)
+
+[----------] 5 tests from RegexTexsizeRemoval
+[ RUN      ] RegexTexsizeRemoval.RemovesUncommentedDeclaration
+[       OK ] RegexTexsizeRemoval.RemovesUncommentedDeclaration (0 ms)
+[ RUN      ] RegexTexsizeRemoval.MatchesCommentedDeclaration
+[       OK ] RegexTexsizeRemoval.MatchesCommentedDeclaration (0 ms)
+[ RUN      ] RegexTexsizeRemoval.PreservesUnrelatedCode
+[       OK ] RegexTexsizeRemoval.PreservesUnrelatedCode (0 ms)
+[ RUN      ] RegexTexsizeRemoval.DoesNotMatchFloat3
+[       OK ] RegexTexsizeRemoval.DoesNotMatchFloat3 (0 ms)
+[ RUN      ] RegexTexsizeRemoval.RemovesMultipleDeclarations
+[       OK ] RegexTexsizeRemoval.RemovesMultipleDeclarations (0 ms)
+[----------] 5 tests from RegexTexsizeRemoval (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 174 tests from 21 test suites ran. (5477 ms total)
+[  PASSED  ] 174 tests.

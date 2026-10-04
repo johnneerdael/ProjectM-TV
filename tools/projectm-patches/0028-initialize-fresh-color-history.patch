@@ -1,0 +1,322 @@
+Subject: [PATCH] Initialize fresh color history with a context-safe clear
+
+Fresh color storage has undefined contents. Initialize it to the same transparent
+black as pooled history before a first warp may sample it. Use a local scratch
+framebuffer for each allocation-time clear so a recreated context cannot reuse
+a cached framebuffer name that now belongs to another attachment. Preserve the
+read/draw bindings, clear color, write mask and scissor state.
+
+Real-driver tests prove initialization with legal nonzero allocation contents,
+outer-display clear insufficiency, pooled compatibility and a recreated-context
+name collision that previously detached a foreign framebuffer attachment.
+
+--- a/src/libprojectM/Renderer/TextureAttachment.cpp
++++ b/src/libprojectM/Renderer/TextureAttachment.cpp
+@@ -122,6 +122,11 @@
+         glGenTextures(1, &textureId);
+         glBindTexture(GL_TEXTURE_2D, textureId);
+         glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, textureFormat, pixelFormat, nullptr);
++        if (m_attachmentType == AttachmentType::Color)
++        {
++            // Fresh storage is undefined; feedback must start with the same black as pooled storage.
++            ClearPooledTexture(textureId);
++        }
+     }
+ 
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+@@ -140,14 +145,11 @@
+ 
+ void TextureAttachment::ClearPooledTexture(GLuint textureId)
+ {
+-    // One scratch framebuffer per thread (context) to clear reused textures with.
+-    thread_local GLuint clearFramebuffer = 0;
++    // A local framebuffer cannot collide with a cached name from a lost context.
++    GLuint clearFramebuffer = 0;
+     GLint previousDrawFramebuffer = 0;
+     glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &previousDrawFramebuffer);
+-    if (clearFramebuffer == 0 || !glIsFramebuffer(clearFramebuffer))
+-    {
+-        glGenFramebuffers(1, &clearFramebuffer);
+-    }
++    glGenFramebuffers(1, &clearFramebuffer);
+     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, clearFramebuffer);
+     glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureId, 0);
+     GLfloat clearColor[4];
+@@ -167,6 +169,7 @@
+     }
+     glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
+     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, static_cast<GLuint>(previousDrawFramebuffer));
++    glDeleteFramebuffers(1, &clearFramebuffer);
+ }
+ 
+ } // namespace Renderer
+--- a/tests/libprojectM/CMakeLists.txt
++++ b/tests/libprojectM/CMakeLists.txt
+@@ -8,6 +8,7 @@
+         WarpSamplerTest.cpp
+         LineGeometryTest.cpp
+         TexturePoolTest.cpp
++        TextureHistoryTest.cpp
+         WaveformAlignerTest.cpp
+         PresetFileParserTest.cpp
+         MilkdropShaderCommentParsingTest.cpp
+--- /dev/null
++++ b/tests/libprojectM/TextureHistoryTest.cpp
+@@ -0,0 +1,257 @@
++#include <projectM-opengl.h>
++#include <Renderer/Texture.hpp>
++#include <gtest/gtest.h>
++#include <algorithm>
++#include <array>
++#include <vector>
++
++#ifdef __APPLE__
++#include <OpenGL/OpenGL.h>
++#endif
++
++namespace {
++
++GLuint lastClearFramebuffer{};
++
++void ObserveClearFramebuffer(GLsizei count, GLuint* names)
++{
++    glGenFramebuffers(count, names);
++    if (count > 0) lastClearFramebuffer = names[count - 1];
++}
++
++// nullptr allocation has undefined contents. Supply a permitted nonzero starting value
++// deterministically so the production initializer cannot pass by relying on allocator zeroes.
++void AllocatePoisonedStorage(GLenum target, GLint level, GLint internalFormat, GLsizei width,
++                             GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels)
++{
++    if (!pixels && format == GL_RGBA && type == GL_UNSIGNED_BYTE)
++    {
++        std::vector<unsigned char> poison(static_cast<size_t>(width) * height * 4, 0x7b);
++        glTexImage2D(target, level, internalFormat, width, height, border, format, type, poison.data());
++    }
++    else
++    {
++        glTexImage2D(target, level, internalFormat, width, height, border, format, type, pixels);
++    }
++}
++
++} // namespace
++
++// Exercise the production renderer initializer on a real driver. Only the dependency's
++// unspecified initial bytes are controlled; all framebuffer clears and reads are real GL calls.
++#define TextureAttachment TextureAttachmentUnderTest
++#define glTexImage2D AllocatePoisonedStorage
++#define glGenFramebuffers ObserveClearFramebuffer
++#include "Renderer/TextureAttachment.cpp"
++#undef glGenFramebuffers
++#undef glTexImage2D
++#undef TextureAttachment
++
++using Attachment = libprojectM::Renderer::TextureAttachmentUnderTest;
++using Texture = libprojectM::Renderer::Texture;
++
++class TextureHistoryTest : public ::testing::Test
++{
++protected:
++    void SetUp() override
++    {
++#ifdef __APPLE__
++        CGLPixelFormatAttribute attributes[] = {kCGLPFAOpenGLProfile,
++            static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++            static_cast<CGLPixelFormatAttribute>(0)};
++        CGLPixelFormatObj format{};
++        GLint count{};
++        if (CGLChoosePixelFormat(attributes, &format, &count) != kCGLNoError || !format)
++        {
++            GTEST_SKIP() << "no CGL OpenGL context";
++        }
++        CGLCreateContext(format, nullptr, &m_context);
++        CGLDestroyPixelFormat(format);
++        if (!m_context) GTEST_SKIP() << "no CGL OpenGL context";
++        ASSERT_EQ(CGLSetCurrentContext(m_context), kCGLNoError);
++        Texture::SetPoolLimit(0);
++        glGenFramebuffers(1, &m_read);
++        glGenFramebuffers(1, &m_draw);
++#else
++        GTEST_SKIP() << "needs CGL context for this isolated renderer diagnostic";
++#endif
++    }
++
++    void TearDown() override
++    {
++#ifdef __APPLE__
++        if (m_context)
++        {
++            Texture::SetPoolLimit(0);
++            glDeleteFramebuffers(1, &m_read);
++            glDeleteFramebuffers(1, &m_draw);
++            CGLSetCurrentContext(nullptr);
++            CGLDestroyContext(m_context);
++        }
++#endif
++    }
++
++    auto Read(const Attachment& attachment) -> std::vector<unsigned char>
++    {
++        glBindFramebuffer(GL_READ_FRAMEBUFFER, m_read);
++        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
++                               attachment.Texture()->TextureID(), 0);
++        glReadBuffer(GL_COLOR_ATTACHMENT0);
++        std::vector<unsigned char> pixels(16 * 16 * 4);
++        glReadPixels(0, 0, 16, 16, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
++        EXPECT_EQ(glGetError(), GL_NO_ERROR);
++        return pixels;
++    }
++
++#ifdef __APPLE__
++    CGLContextObj m_context{};
++#endif
++    GLuint m_read{}, m_draw{};
++};
++
++TEST_F(TextureHistoryTest, FreshColorHistoryIsTransparentBlackBeforeFirstRender)
++{
++    Attachment history(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    const auto pixels = Read(history);
++    EXPECT_EQ(std::count_if(pixels.begin(), pixels.end(), [](unsigned char v) { return v != 0; }), 0)
++        << "fresh history still contains the permitted allocator poison";
++}
++
++TEST_F(TextureHistoryTest, FreshClearPreservesFramebufferAndRasterState)
++{
++    glBindFramebuffer(GL_READ_FRAMEBUFFER, m_read);
++    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_draw);
++    glClearColor(.2f, .3f, .4f, .5f);
++    glColorMask(GL_FALSE, GL_TRUE, GL_FALSE, GL_TRUE);
++    glEnable(GL_SCISSOR_TEST);
++    glScissor(2, 3, 1, 1);
++    Attachment history(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    GLint read{}, draw{};
++    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &read);
++    glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &draw);
++    EXPECT_EQ(read, static_cast<GLint>(m_read));
++    EXPECT_EQ(draw, static_cast<GLint>(m_draw));
++    std::array<GLfloat, 4> clear{};
++    std::array<GLboolean, 4> mask{};
++    std::array<GLint, 4> scissor{};
++    glGetFloatv(GL_COLOR_CLEAR_VALUE, clear.data());
++    glGetBooleanv(GL_COLOR_WRITEMASK, mask.data());
++    glGetIntegerv(GL_SCISSOR_BOX, scissor.data());
++    EXPECT_EQ(clear, (std::array<GLfloat, 4>{.2f, .3f, .4f, .5f}));
++    EXPECT_EQ(mask, (std::array<GLboolean, 4>{GL_FALSE, GL_TRUE, GL_FALSE, GL_TRUE}));
++    EXPECT_EQ(scissor, (std::array<GLint, 4>{2, 3, 1, 1}));
++    EXPECT_EQ(glIsEnabled(GL_SCISSOR_TEST), GL_TRUE);
++    const auto pixels = Read(history);
++    EXPECT_EQ(std::count_if(pixels.begin(), pixels.end(), [](unsigned char v) { return v != 0; }), 0)
++        << "scissor/mask must not prevent initialization of the full color history";
++}
++
++TEST_F(TextureHistoryTest, ClearingDisplayDoesNotReplaceInternalHistoryInitialization)
++{
++    GLuint display{};
++    glGenTextures(1, &display);
++    glBindTexture(GL_TEXTURE_2D, display);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
++    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_draw);
++    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, display, 0);
++    glClearColor(0, 0, 0, 1);
++    glClear(GL_COLOR_BUFFER_BIT);
++    // Same ordering as the core harness: clear the display, then initialize preset history.
++    Attachment history(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    const auto pixels = Read(history);
++    EXPECT_EQ(std::count_if(pixels.begin(), pixels.end(), [](unsigned char v) { return v != 0; }), 0);
++    glDeleteTextures(1, &display);
++}
++
++TEST_F(TextureHistoryTest, PooledHistoryRetainsExistingTransparentBlackContract)
++{
++    Texture::SetPoolLimit(4096);
++    {
++        Attachment previous(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++        const std::vector<unsigned char> paint(16 * 16 * 4, 0x45);
++        glBindTexture(GL_TEXTURE_2D, previous.Texture()->TextureID());
++        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 16, 16, GL_RGBA, GL_UNSIGNED_BYTE, paint.data());
++    }
++    ASSERT_EQ(Texture::PoolBytes(), 1024u);
++    Attachment history(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    EXPECT_EQ(Texture::PoolBytes(), 0u);
++    const auto pixels = Read(history);
++    EXPECT_EQ(std::count_if(pixels.begin(), pixels.end(), [](unsigned char v) { return v != 0; }), 0);
++}
++
++TEST_F(TextureHistoryTest, RecreatedContextDoesNotClearForeignFramebufferWithReusedName)
++{
++#ifdef __APPLE__
++    // Force the clear helper to allocate its framebuffer in the first context, including on RED.
++    Texture::SetPoolLimit(4096);
++    {
++        Attachment previous(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    }
++    {
++        Attachment pooled(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    }
++    const GLuint oldClearName = lastClearFramebuffer;
++    ASSERT_NE(oldClearName, 0u);
++    Texture::SetPoolLimit(0);
++    glDeleteFramebuffers(1, &m_read);
++    glDeleteFramebuffers(1, &m_draw);
++    m_read = m_draw = 0;
++    CGLSetCurrentContext(nullptr);
++    CGLDestroyContext(m_context);
++    m_context = nullptr;
++
++    CGLPixelFormatAttribute attributes[] = {kCGLPFAOpenGLProfile,
++        static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++        static_cast<CGLPixelFormatAttribute>(0)};
++    CGLPixelFormatObj format{};
++    GLint formats{};
++    ASSERT_EQ(CGLChoosePixelFormat(attributes, &format, &formats), kCGLNoError);
++    ASSERT_EQ(CGLCreateContext(format, nullptr, &m_context), kCGLNoError);
++    CGLDestroyPixelFormat(format);
++    ASSERT_EQ(CGLSetCurrentContext(m_context), kCGLNoError);
++
++    // GL names are local to a context. Make the formerly cached integer a foreign live FBO.
++    std::vector<GLuint> foreignNames;
++    GLuint foreign{};
++    for (int i = 0; i < 1024 && foreign != oldClearName; ++i)
++    {
++        glGenFramebuffers(1, &foreign);
++        foreignNames.push_back(foreign);
++        glBindFramebuffer(GL_FRAMEBUFFER, foreign);
++    }
++    ASSERT_EQ(foreign, oldClearName) << "could not recreate the targeted GL name collision";
++    GLuint sentinel{};
++    glGenTextures(1, &sentinel);
++    glBindTexture(GL_TEXTURE_2D, sentinel);
++    const std::vector<unsigned char> paint(16 * 16 * 4, 0x45);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, paint.data());
++    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, sentinel, 0);
++    ASSERT_EQ(glCheckFramebufferStatus(GL_FRAMEBUFFER), GL_FRAMEBUFFER_COMPLETE);
++
++    // Force both the fresh and pooled clear paths while the foreign FBO is bound for read/draw.
++    Texture::SetPoolLimit(4096);
++    {
++        Attachment fresh(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    }
++    {
++        Attachment pooled(GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, 16, 16);
++    }
++    GLint attachment{}, read{}, draw{};
++    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &read);
++    glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &draw);
++    EXPECT_EQ(read, static_cast<GLint>(foreign));
++    EXPECT_EQ(draw, static_cast<GLint>(foreign));
++    glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
++                                          GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &attachment);
++    EXPECT_EQ(attachment, static_cast<GLint>(sentinel)) << "clear helper detached a foreign attachment";
++    // Reattach only to inspect preserved storage even when RED broke the framebuffer attachment.
++    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, sentinel, 0);
++    std::vector<unsigned char> pixels(16 * 16 * 4);
++    glReadPixels(0, 0, 16, 16, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
++    EXPECT_EQ(pixels, paint) << "clear helper modified foreign framebuffer content";
++    EXPECT_EQ(glGetError(), GL_NO_ERROR);
++    Texture::SetPoolLimit(0);
++    glDeleteTextures(1, &sentinel);
++    glDeleteFramebuffers(static_cast<GLsizei>(foreignNames.size()), foreignNames.data());
++#endif
++}
