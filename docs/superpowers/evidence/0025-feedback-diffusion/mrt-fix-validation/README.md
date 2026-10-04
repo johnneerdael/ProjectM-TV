@@ -122,8 +122,9 @@ copying, it checks:
   - the pristine projectM source;
   - the Preset Lab venv with numpy and OpenCV;
   - both PCM signals, against their recorded SHA256s;
-  - the six preset files;
-  - the complete raw-point comparator analysis, with each row's hash and its native captures;
+  - the six preset files, against the sizes and SHA256s the comparator rows rendered;
+  - the complete raw-point comparator analysis, with each row's hash and each native capture's
+    recorded size and SHA256;
 - that the epoch directory does not already exist.
 
 `reproduce.sh --check <new-epoch>` performs only those checks. `PROJECTM_ROOT` selects the checkout

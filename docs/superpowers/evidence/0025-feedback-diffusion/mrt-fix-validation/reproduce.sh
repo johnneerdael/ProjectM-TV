@@ -44,8 +44,8 @@ for need in "$ROOT/docs/superpowers/evidence/0025-feedback-diffusion/shared-core
     [ -e "$need" ] || { echo "missing prerequisite: $need" >&2; missing=1; }
 done
 [ "$missing" = 0 ] || exit 1
-# Everything else run.py reads: the PCM signals (hashes it asserts), the six preset files, and the
-# comparator rows and their native captures (run.py hash-checks the rows and compares the captures).
+# Everything else run.py reads, by recorded size/SHA256: the PCM signals (hashes run.py asserts), the six
+# preset files (as rendered by the comparator rows), and the comparator rows and their native captures.
 python3 - "$HERE/run.py" "$ROOT" "$BASE" <<'PYCHECK' || missing=1
 import ast, hashlib, json, sys
 from pathlib import Path
@@ -59,9 +59,8 @@ def sha(path):
 problems = []
 names = next(ast.literal_eval(node.value) for node in ast.parse(run.read_text()).body
              if isinstance(node, ast.Assign) and getattr(node.targets[0], 'id', '') == 'NAMES')
-for name in names:
-    if not (root / 'core/src/main/assets/presets' / name).is_file():
-        problems.append(f'missing preset: {name}')
+def same_bytes(path, size, digest):
+    return path.is_file() and path.stat().st_size == size and sha(path) == digest
 pcm = {240: '38a09d906e93452d4af5ebea36fcdc684a8383eacbd162d2d61b4ed3fbd2674c',
        480: '14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc'}
 for frames, digest in pcm.items():
@@ -74,27 +73,38 @@ analysis = json.loads((base / 'raw-point-controls/analysis.json').read_text())
 if analysis.get('state') != 'complete':
     problems.append('raw-point-controls/analysis.json is not complete')
 rows = []
+recorded_presets = {}
 for case in analysis.get('cases', []):
+    recorded_presets[case['preset']['path']] = case['preset']
     for role in ['p1', 'raw-point']:
         info = case['roles'][role]
         if info.get('status') != 'success':
             problems.append(f"comparator {role} {case['profile']} {case['preset']['path']} not successful")
         rows += zip(info['row_paths'], info['row_sha256'])
     rows += zip(case['reference']['row_paths'], case['reference']['row_sha256'])
+# The new run must render the same preset bytes as the comparator rows it is compared with.
+for name in names:
+    record = recorded_presets.get(name)
+    path = root / 'core/src/main/assets/presets' / name
+    if record is None:
+        problems.append(f'preset not in comparator analysis: {name}')
+    elif not same_bytes(path, record['bytes'], record['sha256']):
+        problems.append(f'preset missing or changed: {path}')
 for path, digest in rows:
     path = Path(path)
     if not path.is_file() or sha(path) != digest:
         problems.append(f'comparator row missing or changed: {path}')
         continue
     for sample in json.loads(path.read_text())['result']['selected_files']:
-        if not (path.parent / 'output' / sample['path']).is_file():
-            problems.append(f"comparator capture missing: {path.parent / 'output' / sample['path']}")
+        capture = path.parent / 'output' / sample['path']
+        if not same_bytes(capture, sample['bytes'], sample['sha256']):
+            problems.append(f'comparator capture missing or changed: {capture}')
 for problem in problems[:20]:
     print(problem, file=sys.stderr)
 if problems:
     print(f'{len(problems)} input problem(s)', file=sys.stderr)
     sys.exit(1)
-print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows with captures')
+print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows; preset and capture sizes/SHA256s match')
 PYCHECK
 "$PY" -c 'import numpy, cv2' 2> /dev/null || { echo "missing numpy/OpenCV in $PY" >&2; missing=1; }
 git -C "$ROOT" rev-parse --verify --quiet '25e6aa83^{commit}' > /dev/null ||
