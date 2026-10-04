@@ -63,7 +63,7 @@ deterministic schedule for their independently keyed measurement window.
 
 The capture-provenance fix has six RED/GREEN mutation cases and a short-pilot
 control; the full host-tool suite passes 120 tests. A partial baseline snapshot
-checked 9,130 terminal records (9,129 producer results and one explicit
+checked 9,460 terminal records (9,459 producer results and one explicit
 host-only failure) with zero identity/schedule mismatches. This check does not replace the final complete coverage/frame audit.
 
 The current snapshot includes `capture-provenance-validation.inputs.json.gz`: a
@@ -78,4 +78,9 @@ and runs `checkpoint.verify_job` for every frozen row. This validates row digest
 job directory/key/source identity, retained files and successful frame-observer
 evidence. Corrupt row digests, wrong host-only keys/presets and altered inventories
 have four RED/GREEN cases; six snapshot tests and 120 total host-tool tests pass.
-The current snapshot has 9,130 terminal records and remains partial coverage.
+The current snapshot has 9,460 terminal records and remains partial coverage.
+
+Snapshot source provenance records the collector, checkpoint validator and imported
+`run.py` helper SHA-256 values. Generation checks all three source files unchanged
+before publishing; reproduction must check those identities before using the
+manifest's exact inputs. The baseline helper remains the frozen original runner.
