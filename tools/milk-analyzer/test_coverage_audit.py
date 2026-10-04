@@ -21,6 +21,50 @@ class CoverageAuditTest(unittest.TestCase):
         self.assertEqual(report['unvisited_code_tokens'], 4)
         self.assertEqual(report['parsed_code_tokens'], 0)
 
+    def test_native_confirmed_ignored_source_is_retained_without_execution_gap(self):
+        from test_native_reader import NativeReaderTest
+        from gap_priority import rank_gaps
+        source=(b'per_frame_1=q1=.2;\nper_frame_1=q1=100;\n'
+                b'shape_4_per_frame1=zoom=100;\n=1\n')
+        cache=NativeReaderTest().read(source.decode())
+        cache.update(preset_sha256=hashlib.sha256(source).hexdigest(),reader_sha256='reader')
+        report=self.audit(source,cache)
+        ignored=[u for u in report['units'] if not u['loader_numbering_reachable']]
+        self.assertEqual(len(ignored),3)
+        self.assertTrue(all(u['loader_ignored_confirmed'] for u in ignored))
+        self.assertEqual(report['unvisited_code_tokens'],10)
+        self.assertEqual(report['parsed_code_tokens'],4)
+        report.update(preset='fixture.milk',preset_sha256=hashlib.sha256(source).hexdigest())
+        self.assertEqual(rank_gaps([report])['presets_with_known_gaps'],0)
+        self.assertFalse(report['visual_gate']['eligible'])
+
+    def test_unvisited_source_without_matching_native_evidence_remains_a_gap(self):
+        from gap_priority import rank_gaps
+        source=b'per_frame_1=q1=.2;\nper_frame_3=q1=100;\n'
+        report=self.audit(source)
+        self.assertFalse(report['units'][1].get('loader_ignored_confirmed',False))
+        report.update(preset='fixture.milk',preset_sha256=hashlib.sha256(source).hexdigest())
+        self.assertEqual(rank_gaps([report])['presets_with_known_gaps'],1)
+
+    def test_native_loader_confirmation_requires_actual_prefixes_and_first_values(self):
+        from test_native_reader import NativeReaderTest
+        source=b'per_frame_1=q1=.2;\nper_frame_1=q1=100;\n'
+        cache=NativeReaderTest().read(source.decode())
+        cache.update(preset_sha256=hashlib.sha256(source).hexdigest(),reader_sha256='reader')
+        cache['values']['per_frame_1']='q1=.7;'
+        self.assertFalse(self.audit(source,cache)['units'][1]['loader_ignored_confirmed'])
+        cache['values']['per_frame_1']='q1=.2;'
+        cache['requested_code_prefixes']=[]
+        self.assertFalse(self.audit(source,cache)['units'][1]['loader_ignored_confirmed'])
+
+    def test_scalar_configuration_is_not_ignored_code(self):
+        from test_native_reader import NativeReaderTest
+        source=b'fDecay=.98;\nper_frame_1=q1=.2;\n'
+        cache=NativeReaderTest().read(source.decode())
+        cache.update(preset_sha256=hashlib.sha256(source).hexdigest(),reader_sha256='reader')
+        unit=next(u for u in self.audit(source,cache)['units'] if u['stage']=='configuration')
+        self.assertFalse(unit['loader_ignored_confirmed'])
+
     def test_parser_success_does_not_open_behavior_gate(self):
         source = b'per_frame_1=q1=bass;\n'
         cache = self.cache(source, {'per_frame_': {'status': 'parsed',

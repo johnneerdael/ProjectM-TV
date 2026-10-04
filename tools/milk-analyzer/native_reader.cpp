@@ -447,7 +447,9 @@ int main(int argc,char** argv) {
             for(const auto& phase:{"init","per_frame","per_point"})
                 if(kind=="wave"||std::string(phase)!="per_point")prefixes.emplace_back(kind+"_"+std::to_string(i)+"_"+phase,active);
         }
+        report["requested_code_prefixes"]=json::array();
         for(const auto& [prefix,active]:prefixes) {
+            report["requested_code_prefixes"].push_back(prefix);
             auto code=file.GetCode(prefix);if(code.empty())continue;
             json section;
             if(prefix=="warp_"||prefix=="comp_")section=shaderTree(code,prefix=="warp_",header);

@@ -28,7 +28,7 @@ def rank_gaps(rows: Iterable[dict]) -> dict:
             if unit['stage'] == 'configuration' or not unit['source_tokens']:
                 continue
             if not unit['loader_numbering_reachable']:
-                reasons = {'source outside supported numbered loader'}
+                reasons = set() if unit.get('loader_ignored_confirmed') is True else {'source outside supported numbered loader'}
             elif not unit['target_parsed']:
                 reasons = {'target parse unavailable'}
             else:
@@ -63,7 +63,8 @@ def rank_gaps(rows: Iterable[dict]) -> dict:
         corpus_sha256=hashlib.sha256(json.dumps(corpus).encode()).hexdigest(),
         priority_order=['affected_presets descending', 'affected_units descending',
                         'affected_source_tokens descending', 'gap name ascending'],
-        scope='Known source-audit parsing/lowering gaps; behavioral obligations are not yet enumerated.',
+        scope='Known source-audit parsing/lowering gaps; native-confirmed ignored source remains in the inventory '
+              'without an execution gap. Behavioral obligations are not yet enumerated.',
         use_count_definition='One section partition needing a gap; repeated expressions/frames do not add uses.',
         sole_known_gap_definition='Removing this gap would leave no recorded structural gaps for these presets. '
                                   'This does not establish verified behavior or successful prediction.',

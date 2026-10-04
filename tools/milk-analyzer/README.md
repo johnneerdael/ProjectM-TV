@@ -762,6 +762,21 @@ would hide an outer shared-state ordering conflict.
 See `fixtures/focused-blockers-240-2026-10-04.json`,
 `fixtures/initializer-scope-native-proof-2026-10-04.json` and `REFERENCES.md`.
 
+The native reader records its requested numbered-code prefixes. An omitted
+unit is confirmed ignored only with matching preset/reader identity, the pinned
+prefix set, native first-value entries and matching loaded source (or confirmed
+absence). This resolves duplicate keys, malformed delimiter-free/empty-key rows,
+numbering gaps and unsupported component slots without interpreting them as
+executed code. Scalar configuration is excluded from this disposition. Missing,
+stale or inconsistent native evidence keeps the source gap open.
+
+Confirmed ignored code retains all original source tokens, unvisited counts and
+byte/source hashes; it receives no parsing or visual-accuracy credit. Re-reading
+all original315 witnesses resolves20 more execution gaps, leaving **220** known
+blockers. Per-preset source-token, unvisited-token and parsed-token totals match
+the previous audit exactly, and the visual gate remains closed. See
+`fixtures/focused-blockers-220-2026-10-04.json`.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed

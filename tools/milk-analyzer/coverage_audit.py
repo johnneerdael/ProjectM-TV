@@ -32,6 +32,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
                    and cache.get('reader_sha256') == reader_sha)
     groups = defaultdict(list)
     first_keys = set()
+    first_values = {}
     for number, line in enumerate(re.split(r'\r\n|\r|\n', raw.decode('latin1')), 1):
         stripped = line.strip()
         if not stripped or stripped.startswith(('//', '\\\\')) or re.fullmatch(r'\[[^\]]*\]', stripped):
@@ -45,6 +46,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
         match = CODE_KEY.fullmatch(key)
         unique = key not in first_keys
         first_keys.add(key)
+        if unique:first_values[key]=value
         if match:
             prefix, index = match.groups()
             groups[prefix].append((number, index, value.removeprefix('`'), unique))
@@ -69,6 +71,19 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
                     break
                 consumed.append(row)
         consumed_lines = {line for line, _ in consumed}
+        # Match the native reader's actual prefix requests and first-value map.
+        # Absence of parsing is not evidence that potentially live code is safe.
+        requested=cache.get('requested_code_prefixes',[]) if valid_cache else []
+        native_values=cache.get('values',{}) if valid_cache else {}
+        native_loader=(isinstance(requested,list) and all(isinstance(p,str) for p in requested) and
+                       set(requested)==SUPPORTED_PREFIXES and isinstance(native_values,dict))
+        consumed_text='\n'.join(value for _,value in consumed)+'\n' if consumed else ''
+        native_section=cache.get('sections',{}).get(prefix,{}) if valid_cache else {}
+        display=lambda value:value.encode('latin1').decode('utf8',errors='replace')
+        native_source_matches=(native_section.get('source')==display(consumed_text) if consumed
+                               else prefix not in cache.get('sections',{}) if valid_cache else False)
+        first_values_match=all(native_values.get(key)==display(value) for key,value in first_values.items()
+                               if CODE_KEY.fullmatch(key) and CODE_KEY.fullmatch(key)[1]==prefix)
         partitions = [(True, consumed)] if consumed else []
         omitted = [(line, value) for line, _, value, _ in rows if line not in consumed_lines]
         if omitted:
@@ -99,6 +114,8 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
                     'loader_numbering_reachable': visited, 'target_parsed': bool(parsed),
                     'lowering_complete': lowered if shader else None,
                     'lowering_unknowns': reasons, 'verified_behavior': None}
+            unit['loader_ignored_confirmed']=bool(stage!='configuration' and not visited and native_loader and
+                                                  native_source_matches and first_values_match)
             units.append(unit)
             totals = stages[stage]
             totals['source_tokens'] += count
