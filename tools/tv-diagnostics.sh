@@ -205,10 +205,12 @@ LISTENERS=""
 LISTENERS_OFF=0
 LISTENERS_NOT_RESTORED=""
 # One enabled listener per line. Notification access is per Android user and `cmd notification`
-# acts on the current user, so read the current user's setting (plain `settings get` reads user 0).
+# acts on the current user, so read the current user's setting (plain `settings get` reads user 0,
+# which could grant access the current user never gave). Fails if it cannot be read: an unset
+# setting prints "null", so empty output is an error too.
 enabled_listeners() {
     v="$(ash settings --user current get secure enabled_notification_listeners)"
-    case "$v" in ""|*sage:*|*rror*|*nvalid*|*xception*) v="$(ash settings get secure enabled_notification_listeners)" ;; esac
+    case "$v" in ""|*sage:*|*rror*|*nvalid*|*xception*) return 1 ;; esac
     printf '%s\n' "$v" | tr ':' '\n'
 }
 allow_listeners() {
@@ -251,7 +253,11 @@ trap 'exit 130' INT TERM
 # wait until its process is gone, start it, and allow the listener again right away. This process
 # started without listener access (no track titles), so the observation uses a normal second start.
 log "Cold start"
-LISTENERS="$(enabled_listeners | awk -v p="$PKG/" 'index($0, p) == 1' | tr '\n' ' ')"
+if ENABLED="$(enabled_listeners)"; then
+    LISTENERS="$(printf '%s\n' "$ENABLED" | awk -v p="$PKG/" 'index($0, p) == 1' | tr '\n' ' ')"
+else
+    log "Could not read the current user's notification access; leaving the listener alone (the start may be warm)"
+fi
 if [ -n "$LISTENERS" ]; then
     LISTENERS_OFF=1
     for c in $LISTENERS; do ash cmd notification disallow_listener "$c" >/dev/null; done

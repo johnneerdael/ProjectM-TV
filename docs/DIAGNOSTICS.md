@@ -66,7 +66,9 @@ The app's notification listener (`TrackListenerService`, needed for track titles
 3. runs `am start -W` and allows the listeners again right away (also on exit or Ctrl-C),
 4. records the `TotalTime` and whether a new process started for the activity: no process before the start and an `ActivityManager: Start proc <pid>:<package>/… for …activity` line (on Android 10+ also `LaunchState`).
 
-*Startup › Cold start* says *cold start* only in that case; otherwise it names why the time is not a cold-start time. That process had no listener access, so the script stops it and starts the app again for the observation (*Observation start*, normally warm). If the script is killed with `kill -9`, allow the listener again by hand: `adb -s <tv>:5555 shell cmd notification allow_listener <package>/com.example.projectm.visualizer.TrackListenerService`.
+*Startup › Cold start* says *cold start* only when step 4 found a new process; otherwise it names why the time is not a cold-start time. The cold-started process had no listener access, so the script stops it and starts the app again for the observation (*Observation start*, normally warm).
+
+The listeners are read for the current Android user (`settings --user current`), the user `cmd notification` acts on. If that setting cannot be read, the script leaves the listener alone, so Android may restart the app and the start is reported as warm. If the script is killed with `kill -9`, allow the listener again by hand: `adb -s <tv>:5555 shell cmd notification allow_listener <package>/com.example.projectm.visualizer.TrackListenerService`.
 
 ### Reading the results
 - **Did the music app get killed?** *Memory › Other apps killed during the run* lists processes Android stopped while they were visible, perceptible or foreground services (e.g. `com.soundcloud.android (prcp)`). Cached processes are left out, because Android kills those routinely.
