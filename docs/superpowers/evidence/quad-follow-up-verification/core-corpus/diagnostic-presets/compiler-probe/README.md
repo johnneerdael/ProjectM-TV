@@ -12,6 +12,8 @@ but the function body does not insert a space. The probe follows the body.
 This is a compiler component probe, not a substitute backend for the corpus.
 No preset bytes, APKs, production expressions or live baseline inputs changed.
 `results.json` identifies exact inputs, source and linked evaluator library.
+The `.eel` evidence retains original trailing whitespace and blank records;
+the local Git attribute preserves those byte-exact inputs during whitespace checks.
 
 Reproduce against the completed host-suite evaluator:
 
