@@ -1,5 +1,6 @@
 package nl.neerdael.projectm.core;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -45,14 +46,14 @@ public class QualityControllerTest {
 
     @Test
     public void manualLevelsFollowPhysicalPanel() throws Exception {
-        assertEquals(4, QualityController.manualHeights(display(3840, 2160), 0).length);
-        assertEquals(2, QualityController.manualHeights(display(1920, 1080), 0).length);
+        assertArrayEquals(new int[]{720, 1080, 1330}, QualityController.manualHeights(display(3840, 2160), 0));
+        assertArrayEquals(new int[]{720, 1080}, QualityController.manualHeights(display(1920, 1080), 0));
         assertEquals(2560, display(3840, 2160).widthForHeight(1440));
     }
 
     @Test
     public void savedFixedHeightIsValidatedAgainstPanel() throws Exception {
-        assertEquals(2160, QualityController.validFixedHeight(display(3840, 2160), 0, 2160));
+        assertEquals("4K saved before the cap is the cap", 1330, QualityController.validFixedHeight(display(3840, 2160), 0, 2160));
         assertEquals("4K on a 1080p panel falls back to Auto",
                 0, QualityController.validFixedHeight(display(1920, 1080), 0, 2160));
         assertEquals(0, QualityController.validFixedHeight(display(1920, 1080), 0, 480));
@@ -62,12 +63,36 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void renderHeightIsCappedForAutoAndFixedResolution() throws Exception {
+        assertEquals(1330, QualityController.RENDER_HEIGHT_CAP);
+        // 4K and 1440p panels: no fixed level above the cap; the cap itself is offered.
+        assertArrayEquals(new int[]{720, 1080, 1330}, QualityController.manualHeights(display(2560, 1440), 0));
+        assertEquals(1330, QualityController.validFixedHeight(display(3840, 2160), 0, 1440));
+        assertEquals(1330, QualityController.validFixedHeight(display(2560, 1440), 0, 1440));
+        assertEquals(1080, QualityController.validFixedHeight(display(3840, 2160), 0, 1080));
+        assertEquals(0, QualityController.validFixedHeight(display(3840, 2160), 0, 0));
+        // A memory limit below the cap still wins.
+        assertArrayEquals(new int[]{720, 1080}, QualityController.manualHeights(display(3840, 2160), 1080));
+
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
+        q.setTargetFps(60);
+        q.setMode(2160, 0);
+        assertEquals("a fixed 4K passed in directly is not trusted either", 1330, applied);
+        q.setMode(0, 2160);
+        assertEquals("a remembered 4K auto level is clamped", 1330, applied);
+        settle(q);
+        samples(q, 30, 60);
+        assertEquals("no headroom probe above the cap", 1330, applied);
+    }
+
+    @Test
     public void autoChangesApplyImmediatelyAndBackOff() throws Exception {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
         q.setTargetFps(60);
         q.setMode(0, 0);
-        assertEquals(1440, applied);
+        assertEquals(1330, applied);
 
         settle(q);
         samples(q, 3, 40);
@@ -75,11 +100,11 @@ public class QualityControllerTest {
 
         settle(q);
         samples(q, 15, 60);
-        assertEquals("1440 just failed, so it is backed off for this preset", 1260, applied);
+        assertEquals("the cap just failed, so it is backed off for this preset", 1260, applied);
         q.onPresetChanged();
         settle(q);
         samples(q, 15, 60);
-        assertEquals("retried with the next preset", 1440, applied);
+        assertEquals("retried with the next preset", 1330, applied);
 
         settle(q);
         samples(q, 3, 40);
@@ -91,7 +116,7 @@ public class QualityControllerTest {
         q.onPresetChanged();
         settle(q);
         samples(q, 15, 60);
-        assertEquals("retried after 2 presets", 1440, applied);
+        assertEquals("retried after 2 presets", 1330, applied);
 
         for (int failure = 3; failure <= 8; failure++) {  // keeps failing: the wait grows to 16 presets
             settle(q);
@@ -105,7 +130,7 @@ public class QualityControllerTest {
             q.onPresetChanged();
             settle(q);
             samples(q, 15, 60);
-            assertEquals("retried after " + wait + " presets, never given up", 1440, applied);
+            assertEquals("retried after " + wait + " presets, never given up", 1330, applied);
         }
     }
 
@@ -120,10 +145,10 @@ public class QualityControllerTest {
         assertEquals(1260, applied);
         settle(q);
         q.onFpsSample(41);  // hardly faster: the preset is limited by the CPU
-        assertEquals("back to the sharper level", 1440, applied);
+        assertEquals("back to the sharper level", 1330, applied);
         settle(q);
         samples(q, 12, 40);
-        assertEquals("not lowered again for this preset", 1440, applied);
+        assertEquals("not lowered again for this preset", 1330, applied);
 
         q.onPresetChanged();
         settle(q);
@@ -143,7 +168,7 @@ public class QualityControllerTest {
         settle(q);
         q.onPresetChanged();
         samples(q, 10, 20);
-        assertEquals("a load and blend are not judged", 1440, applied);
+        assertEquals("a load and blend are not judged", 1330, applied);
     }
 
     @Test
@@ -169,7 +194,7 @@ public class QualityControllerTest {
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
         q.setTargetFps(60);
         q.setMode(0, 0);
-        assertEquals(1440, applied);
+        assertEquals(1330, applied);
         q.onMemoryPressure(10);
         q.onMemoryPressure(15);  // repeated callbacks in one burst count once
         assertEquals("lowered at once", 1260, applied);
@@ -187,7 +212,7 @@ public class QualityControllerTest {
         q.onMemoryPressure(10);
         assertEquals(1260, applied);
         assertEquals("next launch starts at the level chosen for the frame rate",
-                1440, q.autoHeightToRemember());
+                1330, q.autoHeightToRemember());
 
         // A frame-rate drop below the pressure limit is remembered as usual.
         settle(q);

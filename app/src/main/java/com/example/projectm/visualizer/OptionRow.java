@@ -59,6 +59,7 @@ public class OptionRow extends LinearLayout {
         this.wrap = wrap;
         this.listener = listener;
         this.action = null;
+        this.actionValue = "";  // a later setupAction shows its value again
         render();
     }
 

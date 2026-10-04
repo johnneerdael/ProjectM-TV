@@ -1,8 +1,8 @@
-name: Android CI
+name: Android CI/CD
 
-# Every push / pull request: native tests + a release APK as a downloadable artifact.
-# Push to main with a new versionName (app/build.gradle): also creates tag v<versionName> and a
-# GitHub Release with the APK and the top section of RELEASE_NOTES.md.
+# Every push / pull request: native tests + a release APK and core AAR as downloadable artifacts.
+# Every successfully tested merge to main publishes the next version with PR-sourced notes,
+# the APK/core AAR, current install links, checksums, and a Milkbeat core update.
 
 on:
   push:
@@ -12,10 +12,12 @@ on:
 
 concurrency:
   group: android-${{ github.ref }}
-  cancel-in-progress: true
+  queue: max
+  cancel-in-progress: false
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   native-tests:
@@ -26,6 +28,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive  # projectM is built from source (third_party/projectm)
+      - name: Test release tooling
+        run: python3 -m unittest discover -s .github/scripts/tests -v
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -34,8 +38,6 @@ jobs:
         run: tools/gen-preset-index.py --check
       - name: Check presets (audio-reactive, no excluded or missing textures)
         run: tools/check-presets.py
-      - name: Verify measured category membership, weights and provenance
-        run: python3 tools/import-preset-genres.py --bundle core/src/main/assets/preset-genres --check
       - name: Install Mesa (headless OpenGL ES 3 for the transition overlay test)
         run: |
           sudo apt-get update -qq
@@ -52,28 +54,20 @@ jobs:
       tag: ${{ steps.version.outputs.tag }}
       release: ${{ steps.version.outputs.release }}
       apk_name: ${{ steps.apk.outputs.name }}
+      aar_name: ${{ steps.aar.outputs.name }}
+      previous_tag: ${{ steps.version.outputs.previous_tag }}
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive  # projectM is built from source (third_party/projectm)
 
       - name: Determine version
         id: version
-        run: |
-          VERSION=$(sed -nE 's/.*versionName "([^"]+)".*/\1/p' app/build.gradle | head -n1)
-          TAG="v${VERSION}"
-          RELEASE=false
-          SUFFIX="-ci.${GITHUB_RUN_NUMBER}"
-          if [ "${GITHUB_EVENT_NAME}" = "push" ] && [ "${GITHUB_REF}" = "refs/heads/main" ] \
-             && ! git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null; then
-            RELEASE=true
-            SUFFIX=""
-          fi
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-          echo "release=${RELEASE}" >> "$GITHUB_OUTPUT"
-          echo "VERSION_SUFFIX=${SUFFIX}" >> "$GITHUB_ENV"
-          echo "Version ${VERSION}${SUFFIX} (release: ${RELEASE})"
+        run: >-
+          python3 .github/scripts/release_version.py
+          --repo . --sha "$GITHUB_SHA" --event "$GITHUB_EVENT_NAME" --ref "$GITHUB_REF"
+          --run-number "$GITHUB_RUN_NUMBER" --output "$GITHUB_OUTPUT" --env "$GITHUB_ENV"
 
       - uses: actions/setup-java@v5
         with:
@@ -96,14 +90,17 @@ jobs:
           if [ -n "${KEYSTORE_BASE64}" ]; then
             echo "${KEYSTORE_BASE64}" | base64 -d > "${RUNNER_TEMP}/release.jks"
             echo "SIGNING_KEYSTORE_PATH=${RUNNER_TEMP}/release.jks" >> "$GITHUB_ENV"
+          elif [ "${{ steps.version.outputs.release }}" = "true" ]; then
+            echo "::error::Release signing is unavailable; refusing to publish a debug-signed APK."
+            exit 1
           else
-            echo "::warning::SIGNING_KEYSTORE_BASE64 is not set; APK is signed with a temporary debug key (see docs/RELEASING.md)."
+            echo "CI artifact uses a temporary debug key."
           fi
 
       - name: JVM unit tests
         run: ./gradlew testReleaseUnitTest --no-daemon
 
-      - name: Build release APK
+      - name: Build release APK and core AAR
         env:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
@@ -121,13 +118,45 @@ jobs:
           fi
           mkdir -p dist
           cp app/build/outputs/apk/release/app-release.apk "dist/${NAME}"
+          # R8 obfuscates the release; this maps its crash traces back to source names (retrace).
+          mkdir -p dist-mapping
+          cp app/build/outputs/mapping/release/mapping.txt "dist-mapping/${NAME%.apk}-mapping.txt"
           echo "name=${NAME}" >> "$GITHUB_OUTPUT"
-          ls -lh dist
+          ls -lh dist dist-mapping
+
+      - name: Name core AAR
+        id: aar
+        run: |
+          # The root assembleRelease also builds :core (the engine library the app embeds).
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          if [ "${{ steps.version.outputs.release }}" = "true" ]; then
+            NAME="projectM-TV-core-${{ steps.version.outputs.version }}.aar"
+          else
+            NAME="projectM-TV-core-${{ steps.version.outputs.version }}-ci.${GITHUB_RUN_NUMBER}-${SHORT_SHA}.aar"
+          fi
+          mkdir -p dist-aar
+          cp core/build/outputs/aar/core-release.aar "dist-aar/${NAME}"
+          echo "name=${NAME}" >> "$GITHUB_OUTPUT"
+          ls -lh dist-aar
 
       - uses: actions/upload-artifact@v4
         with:
           name: apk
           path: dist/*.apk
+          retention-days: 30
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: core-aar
+          path: dist-aar/*.aar
+          retention-days: 30
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mapping
+          path: dist-mapping/*-mapping.txt
           retention-days: 30
           if-no-files-found: error
 
@@ -138,30 +167,58 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: write
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/download-artifact@v4
         with:
           name: apk
           path: dist
 
-      - name: Extract release notes
-        run: |
-          # Top section of RELEASE_NOTES.md, up to the first '---' separator.
-          awk '/^---[[:space:]]*$/ {exit} {print}' RELEASE_NOTES.md > notes.md
-          [ -s notes.md ] || echo "Release ${{ needs.apk.outputs.tag }}" > notes.md
+      - uses: actions/download-artifact@v4
+        with:
+          name: core-aar
+          path: dist
 
-      - name: Create release
+      - uses: actions/download-artifact@v4
+        with:
+          name: mapping
+          path: dist
+
+      - name: Write release notes from merged PRs
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.apk.outputs.version }}
+          PREVIOUS_TAG: ${{ needs.apk.outputs.previous_tag }}
+        run: >-
+          python3 .github/scripts/release_notes.py generate
+          --checkout . --repo "$GITHUB_REPOSITORY" --sha "$GITHUB_SHA"
+          --version "$VERSION" --previous-tag "$PREVIOUS_TAG" --output notes.md
+
+      - name: Publish complete signed artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.apk.outputs.version }}
+          APK_NAME: ${{ needs.apk.outputs.apk_name }}
+          AAR_NAME: ${{ needs.apk.outputs.aar_name }}
         run: |
-          # Also attach the APK under a fixed name, so this link always serves the newest stable
-          # release: https://github.com/<owner>/<repo>/releases/latest/download/projectM-TV.apk
-          cp "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk
-          gh release create "${{ needs.apk.outputs.tag }}" \
-            "dist/${{ needs.apk.outputs.apk_name }}" dist/projectM-TV.apk \
-            --target "${GITHUB_SHA}" \
-            --title "ProjectM TV ${{ needs.apk.outputs.version }}" \
-            --notes-file notes.md \
-            --latest
+          cp "dist/$APK_NAME" dist/projectM-TV.apk
+          cp "dist/$AAR_NAME" dist/projectM-TV-core.aar
+          python3 .github/scripts/publish_release.py publish --repo "$GITHUB_REPOSITORY" \
+            --version "$VERSION" --sha "$GITHUB_SHA" --notes notes.md --assets-dir dist
+
+  milkbeat:
+    name: Rebuild Milkbeat with this core
+    needs: [apk, release]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Milkbeat with this core
+        env:
+          GH_TOKEN: ${{ secrets.MILKBEAT_TOKEN }}
+          VERSION: ${{ needs.apk.outputs.version }}
+        run: python3 .github/scripts/publish_release.py milkbeat --version "$VERSION"

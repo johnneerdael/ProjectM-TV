@@ -1,44 +1,70 @@
 # Builds & Releases
 
-## What CI does (`.github/workflows/android.yml`)
+## Automatic publishing
+
+The **Android CI/CD** workflow tests and builds every push and PR. Each successfully tested merge to `main` publishes a stable GitHub Release with its signed APK, core AAR, public release notes and SHA-256 checksums, then triggers Milkbeat's core update. Routine PRs need no version bump or manual release command.
 
 | Trigger | Result |
 |---|---|
-| Any push or pull request | Native engine tests, JVM unit tests + release APK, downloadable from the workflow run (**Actions → run → Artifacts → `apk`**), named `projectM-TV-<version>-ci.<run>-<sha>.apk` |
-| Push to `main` where `versionName` has no tag yet | Everything above, plus tag `v<versionName>` and a **GitHub Release**, marked as latest, with `projectM-TV-<version>.apk` and the same APK as `projectM-TV.apk`, using the top section of `RELEASE_NOTES.md` as the description |
+| Feature push or PR | Release tooling tests, native/JVM tests, APK and core AAR artifacts with a `-ci.<run>` version suffix |
+| Successful merge/push to `main` | Stable APK/core AAR, GitHub Release, PR notes, current download details, checksums and Milkbeat dispatch |
+| Manual run on `main` | Publishes an unreleased commit or verifies an already complete release; the same commit keeps its version |
 
-CI builds show their origin in the app menu, e.g. `v1.8-ci.42`.
+Runs queue instead of canceling previous builds. Versions are tied to source history rather than workflow order: the first first-parent commit after `baseVersionCommit` maps to `baseVersionName`/`baseVersionCode`, and each later commit advances both. The 2.1 line started at **2.1.5 / code 37**; the current 2.2 baseline makes the next merge **2.2.0 / code 38**, then **2.2.1 / code 39**. Direct pushes containing several commits can leave version gaps; failed builds leave their version unpublished.
 
-## Publishing a release
+CI fetches full tag history and rejects conflicting tags, inconsistent retry metadata and invalid Android codes. An older retry does not replace a newer release as latest. Missing release signing fails a publishing build; PR artifacts may use a temporary debug key.
 
-1. In `app/build.gradle`, bump `versionCode` (+1) and `versionName` (e.g. `1.9`).
-2. Add a new section at the top of `RELEASE_NOTES.md`, ending with a `---` line.
-3. Merge to `main`. The release appears under **Releases** within a few minutes.
+## Writing PR release notes
 
-Pushing `main` again without changing `versionName` doesn't create another release.
+Use `.github/pull_request_template.md` and `AGENTS.md`. Include a substantive `## Release notes` section describing concrete changes, their effects and material limits for app users. Keep it aligned with the final diff. Put tests and implementation process in `## Validation`, outside public notes.
 
-The fixed name makes one link always download the newest stable release: https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk (GitHub's `releases/latest` skips drafts and pre-releases).
+For changes with no user-visible effect, use an `Internal` subsection and explain the change. A bare “No user-visible changes”, `N/A`, empty bullets or `TODO` placeholders fail validation. The **PR release notes** check runs again when the PR body is edited. CI checks structure; reviewers check factual accuracy and writing quality.
 
-## One-time setup: signing key
+The workflow collects merged PR sections since the previous reachable version tag. Historical PRs before this automation use their existing change descriptions without validation/checklist/badge sections. Direct commits use their actual descriptions. The generator does not invent claims or use an external AI service.
 
-Android only installs an update over an existing app if both are signed with the same key. Without a key configured, every CI build gets a throwaway debug key and would need an uninstall first.
+CI appends install/download information. The canonical Downloader code comes from the install blockquote in `README.md`; update it when the code changes. Notes include stable/latest and versioned APK/core URLs, checksums, the user guide and the comparison link. `RELEASE_NOTES.md` remains a human-readable archive rather than being copied into unrelated releases.
 
-**Status:** configured on 2026-09-26 (certificate `CN=projectM TV`, SHA-256 `EE:51:37:0F:48:53:25:D7:03:AD:BC:A4:D8:11:98:9D:90:E0:44:DA:61:81:F7:62:99:65:E6:AD:D0:3C:FC:EF`, valid until 2059). 1.9.6 is the first release signed with it; releases up to 1.9.5 used temporary keys. The keystore and its password are kept outside the repository by the maintainer; never commit them.
+## Versions and tagged builds
 
-1. Create a key (keep the file and passwords somewhere safe; losing them means users must reinstall):
-   ```bash
-   keytool -genkeypair -v -keystore projectm-release.jks -alias projectm \
-     -keyalg RSA -keysize 4096 -validity 10000
-   ```
-2. Add four repository secrets (**Settings → Secrets and variables → Actions → New repository secret**):
+`app/build.gradle` holds literal `baseVersionName`, `baseVersionCode` and `baseVersionCommit` values. Keep them unchanged for routine PRs. For a planned major/minor line change, update all three together: the desired first version, a code above the latest released code, and the current `main` commit before that change. Tests verify the sequence.
 
-   | Secret | Value |
-   |---|---|
-   | `SIGNING_KEYSTORE_BASE64` | `base64 -i projectm-release.jks` (macOS) or `base64 -w0 projectm-release.jks` (Linux) |
-   | `SIGNING_STORE_PASSWORD` | keystore password |
-   | `SIGNING_KEY_ALIAS` | `projectm` |
-   | `SIGNING_KEY_PASSWORD` | key password |
+CI passes `PROJECTM_RELEASE_VERSION` and `PROJECTM_RELEASE_VERSION_CODE` to Gradle. Local builds default to the baseline. To reproduce a tagged release's version metadata after checking out that tag and fetching tags:
 
-3. To build locally with the same key, export the same values (with `SIGNING_KEYSTORE_PATH` pointing at the `.jks` file) before running `./gradlew assembleRelease`.
+```bash
+python3 .github/scripts/release_version.py --repo . --sha HEAD \
+  --event workflow_dispatch --ref refs/heads/main --run-number 1 \
+  --output /tmp/projectmtv-version-output --env /tmp/projectmtv-version-env
+set -a
+. /tmp/projectmtv-version-env
+set +a
+./gradlew assembleRelease
+```
 
-**Note:** installs from Android Studio or `install.sh` (debug key) can't be upgraded by CI builds (release key) or the other way round. Uninstall once when switching; this resets the app's settings.
+Signing still requires the configured release key; locally debug-signed builds cannot update an installed stable release.
+
+## Downloads and core library
+
+The Downloader code shown in README and the fixed APK URL serve the newest stable build:
+
+- [Latest APK](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk)
+- [Latest core AAR](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV-core.aar)
+
+Each release also attaches `projectM-TV-<version>.apk`, `projectM-TV-core-<version>.aar` and `checksums.txt`. The core is the `:core` module: projectM, native ARMv7/ARM64 libraries and presets, versioned together with the app.
+
+The release APK is shrunk, optimized and obfuscated by R8, so Java stack traces from it show short class and method names. Each release also attaches `projectM-TV-<version>-mapping.txt` (CI builds keep it in the `mapping` artifact). F-Droid rebuilds the same source reproducibly, so the mapping fits its APK too. Restore the names with the SDK's `retrace` tool:
+
+```sh
+retrace projectM-TV-<version>-mapping.txt crash.txt
+```
+
+`retrace` is in the Android SDK command-line tools (`cmdline-tools/latest/bin`). Native crashes (`Fatal signal`) are not affected.
+
+Publication creates or resumes a draft, uploads every artifact, then publishes it. A retry verifies the tag points to the expected commit and leaves a complete published release unchanged.
+
+## Milkbeat follows each core release
+
+[Milkbeat](https://github.com/johnneerdael/Milkbeat) follows the latest stable core. Its workflow pins the resolved version and names it in Milkbeat's release notes. ProjectM-TV sends a `projectm-core-release` dispatch after publication. A core already named by Milkbeat's latest release does not trigger a duplicate rebuild.
+
+`MILKBEAT_TOKEN` must be a fine-grained token with Contents read/write on `johnneerdael/Milkbeat`, stored as a ProjectM-TV Actions secret. It was configured on 2026-10-02. A missing token fails the update job visibly; rerun a failed update job after fixing its configuration.
+
+For an unreleased core, build `:core:assembleRelease`, copy the AAR to `<dir>/download/v<version>/projectM-TV-core-<version>.aar`, and build Milkbeat with `-PprojectmCoreRepo=<dir> -PprojectmCoreVersion=<version>`.

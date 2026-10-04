@@ -1,3 +1,29 @@
+# ProjectM TV 2.1.5
+
+## Fixed
+- **Preset loading freezes:** self-referencing shader macros no longer cause an endless loop and rapidly increasing memory use.
+- **Custom waveform crashes:** audio sample reads stay within their buffers, including presets with large or negative separation values. Oscilloscope waveforms can safely use up to 512 points.
+
+These fixes are backported from projectM [PR 1025](https://github.com/projectM-visualizer/projectm/pull/1025) (HLSLParser only) and [PR 1029](https://github.com/projectM-visualizer/projectm/pull/1029). The engine remains based on projectM 4.1.7.
+
+## For developers
+- **Automatic releases:** each successfully tested merge to `main` publishes a new patch release with reviewed PR release notes, current Downloader/install links, APK/core AAR downloads and SHA-256 checksums.
+- **Milkbeat core updates:** publishing a new core triggers Milkbeat's rebuild; a core already consumed by its latest release does not trigger a duplicate rebuild.
+
+The freeze and waveform fixes are included in the core AAR used by Milkbeat.
+
+---
+
+# ProjectM TV 2.1.4
+
+No changes to the app itself.
+
+## For developers
+- **Core library AAR:** every release now includes the `:core` visualizer engine (projectM, native libraries for `armeabi-v7a` and `arm64-v8a`, presets) as `projectM-TV-core-<version>.aar`. The same file is also attached as `projectM-TV-core.aar`, so [this link](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV-core.aar) always serves the newest one. CI builds offer it as the `core-aar` artifact.
+- **Milkbeat follows core releases:** each release triggers a Milkbeat rebuild with the new core.
+
+---
+
 # ProjectM TV 2.1.3
 
 ## Changed

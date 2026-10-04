@@ -8,6 +8,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- Track corner: the playing track as Milkbeat shows it (cover, artist, title) straight over the
+         visual; needs notification-listener access. Without a cover the text starts at the margin. -->
+    <LinearLayout
+        android:id="@+id/track_corner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="@dimen/safe_horizontal"
+        android:layout_marginTop="@dimen/safe_vertical"
+        android:alpha="0"
+        android:animateLayoutChanges="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/track_cover"
+            android:layout_width="@dimen/track_cover"
+            android:layout_height="@dimen/track_cover"
+            android:layout_marginEnd="@dimen/track_cover_gap"
+            android:background="@drawable/bg_track_cover"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/track_primary"
+                style="@style/Overlay.TrackLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/track_secondary"
+                style="@style/Overlay.TrackLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/track_title"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </LinearLayout>
+
     <!-- Settings panel: compact card inside the overscan-safe area -->
     <LinearLayout
         android:id="@+id/overlay_menu"
@@ -142,17 +190,12 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
-            android:id="@+id/row_transition"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_resolution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
-            android:id="@+id/row_frame_rate"
+            android:id="@+id/row_track_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -238,7 +281,17 @@
             android:background="@drawable/divider" />
 
         <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_frame_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_transition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -249,11 +302,6 @@
 
         <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_beat_cuts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.example.projectm.visualizer.OptionRow
-            android:id="@+id/row_track_titles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -298,13 +346,83 @@
             android:text="↑↓ select   ‹ › change   BACK return" />
     </LinearLayout>
 
-    <!-- Diagnostics: next to the advanced panel (the main panel is hidden then), so every line fits -->
+    <!-- Track display panel: slides over the main panel like the advanced one; BACK returns -->
+    <LinearLayout
+        android:id="@+id/track_menu"
+        android:layout_width="@dimen/panel_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/safe_vertical"
+        android:layout_marginEnd="@dimen/safe_horizontal"
+        android:background="@drawable/bg_overlay_panel"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/Overlay.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Settings  ›  Track display" />
+
+        <TextView
+            style="@style/Overlay.Meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:text="Cover, artist and title of the playing track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/divider" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_track_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_track_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_track_pill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/divider" />
+
+        <TextView
+            style="@style/Overlay.Meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="10dp"
+            android:text="↑↓ select   ‹ › change   BACK return" />
+    </LinearLayout>
+
+    <!-- Diagnostics: next to the advanced panel (the main panel is hidden then), so every line fits;
+         below the track corner, which stays on screen -->
     <LinearLayout
         android:id="@+id/diagnostics_panel"
         android:layout_width="@dimen/diagnostics_width"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
-        android:layout_marginTop="@dimen/safe_vertical"
+        android:layout_marginTop="@dimen/diagnostics_margin_top"
         android:layout_marginEnd="@dimen/diagnostics_margin_end"
         android:background="@drawable/bg_overlay_panel"
         android:orientation="vertical"
@@ -330,8 +448,8 @@
 
     </LinearLayout>
 
-    <!-- Now-playing pill: the music app's new track, for 20 s (needs notification-listener access);
-         also announces a downloaded update -->
+    <!-- Now-playing pill: the playing track when Track display › Pill style is on (needs
+         notification-listener access); also tells about missing audio and a downloaded update -->
     <LinearLayout
         android:id="@+id/now_playing"
         android:layout_width="wrap_content"
