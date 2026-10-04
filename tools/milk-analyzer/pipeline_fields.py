@@ -26,7 +26,7 @@ class PipelineResult:
 
 class SourcePipeline:
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None):
         if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
             raise ValueError('unsupported shader coordinate profile')
         field=np.asarray(initial_feedback,dtype=np.float32)
@@ -53,7 +53,7 @@ class SourcePipeline:
                    for level in range(1,blur_levels+1)}
         self.blur_source_frame=-2
         from composite_mesh import make_mesh
-        self.composite_mesh=make_mesh(self.width,self.height)
+        self.composite_mesh=make_mesh(self.width,self.height,raster_subpixel_bits=composite_subpixel_bits)
 
     @classmethod
     def from_source(cls,source,*,profile,compatibility,**kwargs):
@@ -201,6 +201,7 @@ class SourcePipeline:
                  'warp_kind':'fixed_warp' if self.warp_tree is None else 'custom_warp',
                  'composite_kind':self.composite_kind}
         history['motion_vector_source_frame']=motion_source_frame
+        history['composite_subpixel_bits']=self.composite_mesh.get('raster_subpixel_bits') if self.composite_kind!='legacy_composite' else None
         result=PipelineResult(self.frame,warped.copy(),drawn.copy(),displayed,history)
         # Commit only after both shader stages succeed; failed evaluation must
         # not silently advance the feedback/blur history.

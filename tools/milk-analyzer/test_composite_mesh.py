@@ -21,6 +21,28 @@ class CompositeMeshTest(unittest.TestCase):
         self.assertEqual(mesh['triangles'].size,3960)
         self.assertGreater(mesh['u'][1]-mesh['u'][0],mesh['u'][15]-mesh['u'][14])
 
+    def test_explicit_subpixel_grid_moves_geometry_without_rounding_varyings(self):
+        m=self.module();mesh=m.make_mesh(128,72,raster_subpixel_bits=4)
+        np.testing.assert_array_equal(mesh['raster_u'],np.rint(mesh['u']*128*16)/(128*16))
+        np.testing.assert_array_equal(mesh['raster_v'],np.rint(mesh['v']*72*16)/(72*16))
+        portable=m.make_mesh(128,72)
+        np.testing.assert_array_equal(mesh['uv'],portable['uv'])
+        np.testing.assert_array_equal(mesh['polar'],portable['polar'])
+        q=np.array([[[.35,.75]]],dtype=np.float32)
+        self.assertGreater(np.max(abs(m.interpolate(mesh,mesh['uv'],q)-m.interpolate(portable,portable['uv'],q))),1e-5)
+
+    def test_invalid_raster_precision_is_not_silently_assumed(self):
+        for bits in [True,-1,3,17,4.5]:
+            with self.assertRaises(ValueError):self.module().make_mesh(128,72,raster_subpixel_bits=bits)
+
+    def test_pipeline_can_select_explicit_composite_raster_precision(self):
+        warp,comp=test_pipeline_fields.trees('ret=0;','ret=uv.x;')
+        p=SourcePipeline(warp,comp,initial_feedback=np.zeros((72,128,4)),
+                         warp_reads_blur=False,blur_levels=0,quantize=False,composite_subpixel_bits=4)
+        result=p.step(warp_uv=p.original_uv,uniforms={},frame_wrap=1)
+        expected=self.module().composite_fields(128,72,mesh=p.composite_mesh)['uv'][...,0]
+        np.testing.assert_allclose(result.display[...,0],expected)
+
     def test_polar_corner_radius_and_four_center_angles(self):
         mesh=self.module().make_mesh(512,288);polar=mesh['polar']
         np.testing.assert_allclose(polar[[0,0,-1,-1],[0,-1,0,-1],0],1,atol=1e-7)

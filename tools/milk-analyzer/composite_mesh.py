@@ -11,7 +11,7 @@ def axis(count):
                     (1-np.power(1-x*2,np.float32(3)))*.5).astype(np.float32)
 
 
-def make_mesh(width,height):
+def make_mesh(width,height,*,raster_subpixel_bits=None):
     if any(type(n) is not int or n<=0 for n in (width,height)):raise ValueError('positive integer viewport required')
     u=axis(32);v=axis(24);uu,vv=np.meshgrid(u,v)
     positions=np.stack((uu*2-1,-(vv*2-1)),axis=-1)
@@ -38,10 +38,20 @@ def make_mesh(width,height):
             if (int(col<16)+int(row<12)+int((col,row)==(16,12)))%2:
                 triangles.extend([[a,b,d],[d,c,a]])
             else:triangles.extend([[c,a,b],[b,d,c]])
-    return {'u':u,'v':v,'positions':positions,
+    result={'u':u,'v':v,'positions':positions,
             'uv':np.stack((uu+np.float32(.5)/width,vv+np.float32(.5)/height),axis=-1),
             'polar':np.stack((rad,ang),axis=-1),
             'triangles':np.asarray(triangles,dtype=np.int32)}
+    if raster_subpixel_bits is not None:
+        if type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16:
+            raise ValueError('supported explicit raster subpixel bits required (4..16)')
+        scale=2**raster_subpixel_bits
+        # Snap window-space geometry, not attributes. Keep source UV/polar/hue
+        # values unchanged; interpolation uses the rasterized vertex locations.
+        result.update(raster_u=np.rint(u*width*scale)/(width*scale),
+                      raster_v=np.rint(v*height*scale)/(height*scale),
+                      raster_subpixel_bits=raster_subpixel_bits)
+    return result
 
 
 def vertex_colours(mesh,shade):
@@ -56,10 +66,11 @@ def interpolate(mesh,values,query):
     data=np.asarray(values,dtype=np.float32);q=np.asarray(query,dtype=np.float32)
     if data.shape[:2]!=(24,32) or q.shape[-1:]!=(2,) or not np.all(np.isfinite(q)) or np.any((q<0)|(q>1)):
         raise UnresolvedMath('invalid composite field interpolation')
-    col=np.clip(np.searchsorted(mesh['u'],q[...,0],side='right')-1,0,30)
-    row=np.clip(np.searchsorted(mesh['v'],q[...,1],side='right')-1,0,22)
-    fx=(q[...,0]-mesh['u'][col])/(mesh['u'][col+1]-mesh['u'][col])
-    fy=(q[...,1]-mesh['v'][row])/(mesh['v'][row+1]-mesh['v'][row])
+    u=mesh.get('raster_u',mesh['u']);v=mesh.get('raster_v',mesh['v'])
+    col=np.clip(np.searchsorted(u,q[...,0],side='right')-1,0,30)
+    row=np.clip(np.searchsorted(v,q[...,1],side='right')-1,0,22)
+    fx=(q[...,0]-u[col])/(u[col+1]-u[col])
+    fy=(q[...,1]-v[row])/(v[row+1]-v[row])
     extra=(None,)*(data.ndim-2);x=fx[(...,)+extra];y=fy[(...,)+extra]
     a,b,c,d=data[row,col],data[row,col+1],data[row+1,col],data[row+1,col+1]
     diagonal=((col<16).astype(int)+(row<12).astype(int)+((col==16)&(row==12)).astype(int))%2
@@ -74,7 +85,8 @@ def composite_fields(width,height,*,time=None,hue_offsets=None,mesh=None):
                     (np.arange(height,dtype=np.float32)+.5)/height)
     query=np.stack((x,y),axis=-1)
     result={'uv':interpolate(mesh,mesh['uv'],query),'polar':interpolate(mesh,mesh['polar'],query),
-            'native_driver_verified':False,'seam_ownership':'numerical right/bottom; GPU raster ties unverified'}
+            'native_driver_verified':False,'seam_ownership':'numerical right/bottom; GPU raster ties unverified',
+            'raster_subpixel_bits':mesh.get('raster_subpixel_bits')}
     if time is not None and hue_offsets is not None:
         result['diffuse']=interpolate(mesh,vertex_colours(mesh,corner_shades(time,hue_offsets)),query)
     return result

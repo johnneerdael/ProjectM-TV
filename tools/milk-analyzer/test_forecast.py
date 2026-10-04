@@ -62,6 +62,15 @@ def test_complete_equation_warp_draw_composite_forecast_keeps_feedback_separate(
     assert result['input_hashes']['preset_sha256'] == source['preset_sha256']
 
 
+def test_explicit_composite_raster_setting_reaches_the_source_forecast():
+    source=native(BASE+'warp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=uv.x;}\n')
+    result=predict(source,domain=domain(composite_subpixel_bits=4),audio=audio(1))
+    from composite_mesh import composite_fields,make_mesh
+    expected=composite_fields(32,32,mesh=make_mesh(32,32,raster_subpixel_bits=4))['uv'][...,0]
+    np.testing.assert_allclose(result['frames'][0]['display'][...,0],np.clip(expected,0,1))
+    assert result['frames'][0]['history']['composite_subpixel_bits']==4
+
+
 def test_shapes_are_drawn_between_warp_and_composite_and_become_feedback():
     source = native(BASE + 'warp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=0;}\n'
                     'shapecode_0_enabled=1\nshapecode_0_x=.25\nshapecode_0_y=.75\n'

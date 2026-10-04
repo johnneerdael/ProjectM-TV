@@ -4,16 +4,20 @@ Snapshot: 2026-10-04. Interpreter worktree: `.worktrees/preset-genre-analyzer`, 
 
 ## Highest-frequency recorded unresolved families
 
-Counts below are historical counts from the source audit of 9,606 presets. Families overlap. Recent targeted fixes have not been followed by a new complete audit. Do not sum these counts or infer appearance accuracy from them.
+The refreshed source audit finds 371 of 9,606 presets with known structural gaps,
+down from 490 in the previous audit (119 fewer). The other 9,235 pass these checks;
+they are not proven behaviourally predictable. Families overlap. Do not sum their
+counts or infer appearance accuracy from them.
 
 | Family | Recorded affected presets | Research needed |
 |---|---:|---|
-| Target parse unavailable | 149 historically; 67 now parse | Sampler-alias declaration rebuilding closes 67 shader witnesses (63 also lower completely). Remaining witnesses include 16 shader failures, 53 projectM equation-assembly rejections and 13 sections rejected by both assembly modes. Preserve original source; do not silently repair it. |
-| Uninitialized shader reads | 127 | Trace component initialization and native execution. Separate actual undefined values from interpreter binding errors. Do not invent a deterministic result for undefined GPU behaviour. |
+| Uninitialized shader reads | 116 | Trace component initialization and native execution. Separate actual undefined values from interpreter binding errors. Do not invent a deterministic result for undefined GPU behaviour. |
+| Target parse unavailable | 82 | Remaining witnesses include 16 shader failures, 53 projectM equation-assembly rejections and 13 sections rejected by both assembly modes. Preserve original source; do not silently repair it. |
 | Native GLSL array initializer layout | 56 | Trace HLSL array types/constructors through projectM's translator, and establish compilation versus fallback. |
+| Sampler-state/binding context | 51 | Source lowering still needs explicit native binding/compatibility evidence; the two reported families overlap completely. |
 | Same-name initializer binding | 49 | Establish exactly which local/global value an initializer reads in the emitted GLSL and native backend. |
 | Source outside numbered loader | 20 | Establish actual projectM loading behaviour for unnumbered/unsupported sections before interpreting author intent. |
-| Nonterminal helper returns (`hardcore_stars`) | 4 historically | First top-level unconditional returns now stop execution and effect scans. These four presets still have other initialization/effect-order gaps. Branch/loop-dependent returns remain unimplemented; their frequency needs a new census. |
+| Arithmetic/comparison effect order | 3 | Diagnose writes/reads across operands against actual native sequencing or undefined behaviour. |
 
 The original sampler-state/dynamic-sampler families each affected 51 presets. They are now substantially diagnosed as native preprocessing/binding compatibility issues; they are not 102 independent missing calculations. Remaining work is integration and broader regression coverage, not assuming authored sampler states control filtering.
 
@@ -33,7 +37,7 @@ These are explicit interpreter limitations; corpus prevalence has not yet been m
 ## Integration understanding still requiring work
 
 - Automatic shader random lifecycle assembly, including actual seed, preset loading, fallback instances, other consumers and texture selection. Explicit Android/bionic replay now supports reseeding while preserving shader state. Two CPU-observed published-core lifecycles reproduce 60 random-colour frames exactly; background reseeding occurs during rendering. Whole-event replay still needs to detect or model mid-event interleaving. Lexical shader random references occur in 3,205 presets (overlapping families, not verified live dependencies). See `2026-10-04-core-random-lifecycle-learning.md`.
-- Remaining motion-vector raster coverage and precision.
+- Remaining motion-vector/warp feedback raster coverage and precision. Explicit composite subpixel-grid interpolation now has queried four-bit runtime evidence and a fresh 30-frame held-out UV control with exact RGB8 output. Earlier motion feedback drift is preserved as unresolved; see `2026-10-04-composite-raster-learning.md`.
 - Accumulated warp/blur/composite feedback error over time. Correct individual expressions do not prove correct evolving appearance.
 - External texture availability, loading/rescaling and native failure/fallback behaviour.
 - Calibration of smooth motion, flashing, colour diversity and activity descriptors against actual behaviour. This is separate from structural code coverage.

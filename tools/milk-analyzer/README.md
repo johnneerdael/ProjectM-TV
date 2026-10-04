@@ -158,6 +158,12 @@ priority. It retains source witnesses, dependency overlaps and counts of presets
 with only that known gap. Those counts describe potential structural progress,
 not presets proven predictable. Behavioral obligations still need enumeration.
 
+The refreshed 2026-10-04 source audit finds 371/9,606 presets with known structural
+gaps, down from 490 (119 fewer). Passing structural checks in the other 9,235
+does not prove complete behaviour or appearance. The compact updated index is
+`fixtures/source-gap-summary-refreshed-2026-10-04.json`; full local witnesses are
+in `build/milk-analyzer/source-refresh-2026-10-04/gap-priority.json`.
+
 ```bash
 build/preset-lab-venv/bin/python tools/milk-analyzer/gap_priority.py \
   --details build/milk-analyzer/current/source-coverage-audit.presets.jsonl \
@@ -677,6 +683,14 @@ during rendering. Conditional source replay of two recorded lifecycles reproduce
 all 60 random-colour frames exactly. Seed/event inputs come from CPU call traces,
 so this is not an independently inferred lifecycle or whole-preset forecast.
 See `fixtures/core-random-lifecycle-proof-2026-10-04.json`.
+
+Composite interpolation accepts explicit `composite_subpixel_bits` in the
+forecast domain/pipeline constructor. It snaps window-space mesh geometry before
+interpolating unchanged UV, polar and hue attributes. The default remains the
+portable unsnapped model. The queried Android emulator reports four subpixel bits;
+a separate frozen UV control matches all 30 native frames exactly under that
+setting. GPU tie rules and remaining warp/motion feedback drift are unverified.
+See `fixtures/composite-raster-proof-2026-10-04.json`.
 
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe
