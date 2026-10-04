@@ -1,0 +1,96 @@
+{
+  "scope": "Inductive equation range proof only; shader definite-assignment integration pending;23blockers retained",
+  "preset": "martin - ludicrous speed.milk",
+  "preset_sha256": "9a99802ec59187a9f635f615db07622c5feaa15d02ed64beefb8156e68d48b22",
+  "reader_sha256": "57b19fe4d27ea81c916052b555806a92b092dde545a4a0a8c831d189ee789ac4",
+  "equation_loader_policy": "projectmtv-core-2.2.8-v1",
+  "native_tree_functions_sha256": "f886626367d03d6602a87a2ebf02ec7ca4636fa9560311ffa5461fa1201f817f",
+  "implementation_sha256": "6c9c81247bc631bf7931aefd73ac863e6e5013a6eede05f9712844a90e6b8270",
+  "main_q_output_domains": {
+    "q5": [
+      0,
+      0
+    ],
+    "q6": [
+      0,
+      0
+    ],
+    "q7": [
+      0,
+      0
+    ],
+    "q8": [
+      0,
+      0
+    ],
+    "q9": [
+      0,
+      0
+    ],
+    "q10": [
+      0,
+      0
+    ],
+    "q11": [
+      0,
+      0
+    ],
+    "q12": [
+      0,
+      0
+    ],
+    "q13": [
+      0,
+      0
+    ],
+    "q14": [
+      0,
+      0
+    ],
+    "q15": [
+      0,
+      0
+    ],
+    "q16": [
+      0,
+      0
+    ],
+    "q17": [
+      0,
+      0
+    ],
+    "q18": [
+      0,
+      0
+    ],
+    "q19": [
+      0,
+      0
+    ],
+    "q24": [
+      0,
+      1
+    ],
+    "q25": [
+      0,
+      0
+    ],
+    "q29": [
+      0,
+      7
+    ],
+    "q31": [
+      0,
+      0
+    ]
+  },
+  "proof": "Initial rand12 range is inclusive0..12; boolean-product increment0..1; signed remainder of bounded nonnegative input gives0..7; joined state contains init and is closed under all frame updates; q29 assigned after update",
+  "limitation": "No appearance, GPU, domain-specific math accuracy or whole corpus claim",
+  "frame_context": "MAIN/READONLY/coordinate built-ins reset to unknown incoming/configuration bounds;Q reset to init snapshot;custom locals persist;shared-register-dependent proofs rejected",
+  "review_regressions": [
+    "audio/configuration reset",
+    "Q reset to init",
+    "disabled-shape shared-register write",
+    "native IEEE nonfinite export"
+  ]
+}

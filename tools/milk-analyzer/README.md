@@ -1217,3 +1217,31 @@ Their `rss`, `rss0` and `tmp` are helper-only scratch variables. The original
 changes to source-token/parsed inventories. See
 `fixtures/focused-blockers-23-helper-scratch-2026-10-04.json`.
 The returned-value/control-flow proof does not certify full visual predictions.
+
+
+### Inductive main-Q domains (shader integration pending)
+
+`equation_domains.py` can now prove conservative main-Q bounds for a restricted
+straight-line subset of selected native equation trees. It joins initialization
+and frame states, widens growing bounds to unknown and returns bounds only after
+a stable inductive state is established. Nested assignment/control/memory effects,
+missing trees and per-pixel programs prevent inference. This is source analysis,
+not a finite sequence of observed frames.
+
+The exact ludicrous-speed equations prove q29 lies in0..7 after each frame update:
+native rand12 is inclusive0..12, the boolean-product increment is0..1, and bounded
+nonnegative signed remainder produces0..7. Native rand is not assumed to return
+an integer. Negative seeds and unbounded recurrences fail to establish this domain.
+See `fixtures/ludicrous-speed-q-domain-proof-2026-10-04.json`.
+
+The shader definite-assignment analysis does not consume these domains yet, so
+**23 known blockers remain**. No appearance or whole-corpus credit is added.
+
+
+The domain proof applies native frame boundaries: configuration/audio/time and
+coordinate built-ins do not inherit initialization writes; without explicit bounds
+they reset to unknown. Main Q slots reset to their initialization snapshot while
+custom variables persist. Shared-register-dependent programs are rejected until
+other-phase writes are modeled, and exported IEEE nonfinite objects stay unknown.
+Counterexamples cover audio/configuration resets, Q resets, disabled-shape register
+initialization and overflow constants. The shader integration remains pending.

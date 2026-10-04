@@ -168,3 +168,27 @@ duplicate full-corpus render. The other agent's saved baseline is read-only at:
 `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/`.
 Its instrumented protocol is distinct from published-AAR controls. Do not alter
 its devices, running processes, rows or settings.
+
+
+## Follow-up: selector equation invariant established, integration pending
+
+The new restricted `equation_domains.py` analyzer establishes an inductive q29
+bound of0..7 for the exact ludicrous-speed main equations. Native rand12 produces
+a bounded real value in the inclusive0..12 range, not an assumed integer; the
+boolean increment stays0..1 and the subsequent signed integer remainder is0..7.
+The state proof includes initialization and is closed under frame updates.
+Mutation controls reject negative seeds, unbounded growth and nested effects.
+
+Evidence: `fixtures/ludicrous-speed-q-domain-proof-2026-10-04.json`. The shader
+branch/definite-assignment layer still needs to consume this bound to prove all
+selector cases initialize arg. The preset remains blocked until that integration
+and its counterexamples are verified; the current total remains23.
+
+
+The proof now explicitly applies frame resets: built-in configuration/audio/time
+and coordinate inputs stay unknown without supplied bounds, Q values reload the
+init snapshot, and custom locals persist. Shared-register dependencies are rejected
+until cross-phase effects are modeled. Nonfinite native constant exports stay
+unknown. These guards correct three issues found in focused review; the specific
+q29 invariant still holds. Do not infer audio/configuration persistence from an
+init assignment or ignore custom phase register writes, even for disabled shapes.
