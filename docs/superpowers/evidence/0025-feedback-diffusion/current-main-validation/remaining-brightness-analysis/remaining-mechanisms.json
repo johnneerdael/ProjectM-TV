@@ -1,0 +1,833 @@
+{
+  "scope": "Read-only source and host analysis of remaining brightness losses. No tracked edits or device jobs. A private filtered-only RGBA16F APK was built from commit 1b2c2663.",
+  "inputs_sha256": {
+    "rawpoint": "5effa91665bed44e8bc8fc156ab8490fa6b23d932327f0807830b79eeb267410",
+    "gaussian": "6d6c898398e77d7f4c7537e3549ab3c094a09c780f62c7940861ad8ce1271f50",
+    "broad_trueclassic": "b96ae65fb2ddf080ce66909ce15b552e75d48a74291cebaae765df351f614458",
+    "immutable_pr28_patch": "8cb4e470598231b45ae6b4a80fa47722bb5e41bf886dc956bded592d36a9adcf"
+  },
+  "measured_cases": [
+    {
+      "preset": {
+        "bytes": 24396,
+        "path": "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk",
+        "sha256": "163034eb002666dfd1966444dedd1a47853131e915a5cb2745bd09ff52a4e230"
+      },
+      "rawpoint_p1": {
+        "classic_reference_summary": {
+          "centre_rgb": [
+            0.0897999395836766,
+            0.18212456997059073,
+            0.1990495663506044
+          ],
+          "contrast_luma_std_1182": 0.20048137567937374,
+          "laplacian_luma_var_1182": 0.01215081854024902,
+          "luma": 0.20526067159188904,
+          "saturation": 0.7672157660126686
+        },
+        "errors": {
+          "centre_rgb_absolute_error": [
+            0.03884074646873773,
+            0.08082082717887983,
+            0.07055680507912485
+          ],
+          "contrast_luma_std_absolute_error": 0.0068237073719501495,
+          "image_mae_1182_rgb01": 0.043110717087984085,
+          "luma_absolute_error": 0.013928628672463597,
+          "luma_ratio": 0.9321417563119091,
+          "saturation_absolute_error": 0.04392414540052414
+        },
+        "summary": {
+          "centre_rgb": [
+            0.05095919311493888,
+            0.1381971275682341,
+            0.17382688981746247
+          ],
+          "contrast_luma_std_1182": 0.1936576683074236,
+          "laplacian_luma_var_1182": 0.0024919028219301254,
+          "luma": 0.19133204291942543,
+          "saturation": 0.7316412776708603
+        }
+      },
+      "same_variance_gaussian": {
+        "classic_reference_summary": {
+          "centre_rgb": [
+            0.0897999395836766,
+            0.18212456997059073,
+            0.1990495663506044
+          ],
+          "contrast_luma_std_1182": 0.20048137567937374,
+          "laplacian_luma_var_1182": 0.01215081854024902,
+          "luma": 0.20526067159188904,
+          "saturation": 0.7672157660126686
+        },
+        "errors": {
+          "centre_rgb_absolute_error": [
+            0.03875715002379401,
+            0.07197103979575527,
+            0.08300014437324907
+          ],
+          "contrast_luma_std_absolute_error": 0.006554806604981422,
+          "image_mae_1182_rgb01": 0.041947707533836365,
+          "luma_absolute_error": 0.015654980116433355,
+          "luma_ratio": 0.9237312243255276,
+          "saturation_absolute_error": 0.05453336238861084
+        },
+        "summary": {
+          "centre_rgb": [
+            0.0510427895598826,
+            0.14320899595853,
+            0.1220829952833757
+          ],
+          "contrast_luma_std_1182": 0.19392656907439232,
+          "laplacian_luma_var_1182": 0.002490699363988824,
+          "luma": 0.1896056914754557,
+          "saturation": 0.7176219895482063
+        }
+      },
+      "rawpoint_vs_p1_exact": false
+    },
+    {
+      "preset": {
+        "bytes": 5934,
+        "path": "Fed - quadratrail.milk",
+        "sha256": "2bdf01d1500258f71d077e5fb225d5e4be97f9b15a1af48b5705ff61982104d0"
+      },
+      "rawpoint_p1": {
+        "classic_reference_summary": {
+          "centre_rgb": [
+            0.12472843861252166,
+            0.12472843861252166,
+            0.12472843861252166
+          ],
+          "contrast_luma_std_1182": 0.021868216805160046,
+          "laplacian_luma_var_1182": 0.00016349597171938512,
+          "luma": 0.00464300057898304,
+          "saturation": 0.0
+        },
+        "errors": {
+          "centre_rgb_absolute_error": [
+            0.03139807562724267,
+            0.03139807562724267,
+            0.03139807562724267
+          ],
+          "contrast_luma_std_absolute_error": 0.005089833517558873,
+          "image_mae_1182_rgb01": 0.002850322285667062,
+          "luma_absolute_error": 0.0021984549559498764,
+          "luma_ratio": 0.5265012531117527,
+          "saturation_absolute_error": 0.0
+        },
+        "summary": {
+          "centre_rgb": [
+            0.09333036298527898,
+            0.09333036298527898,
+            0.09333036298527898
+          ],
+          "contrast_luma_std_1182": 0.016778383287601173,
+          "laplacian_luma_var_1182": 0.0001642846309550805,
+          "luma": 0.002444545623033164,
+          "saturation": 0.0
+        }
+      },
+      "same_variance_gaussian": {
+        "classic_reference_summary": {
+          "centre_rgb": [
+            0.12472843861252166,
+            0.12472843861252166,
+            0.12472843861252166
+          ],
+          "contrast_luma_std_1182": 0.021868216805160046,
+          "laplacian_luma_var_1182": 0.00016349597171938512,
+          "luma": 0.00464300057898304,
+          "saturation": 0.0
+        },
+        "errors": {
+          "centre_rgb_absolute_error": [
+            0.034149902751803914,
+            0.034149902751803914,
+            0.034149902751803914
+          ],
+          "contrast_luma_std_absolute_error": 0.005421998561359942,
+          "image_mae_1182_rgb01": 0.002904432825744152,
+          "luma_absolute_error": 0.002259949434624834,
+          "luma_ratio": 0.5132566976505025,
+          "saturation_absolute_error": 0.0
+        },
+        "summary": {
+          "centre_rgb": [
+            0.09057853586071773,
+            0.09057853586071773,
+            0.09057853586071773
+          ],
+          "contrast_luma_std_1182": 0.016446218243800104,
+          "laplacian_luma_var_1182": 0.00016371479068766348,
+          "luma": 0.002383051144358206,
+          "saturation": 0.0
+        }
+      },
+      "rawpoint_vs_p1_exact": true
+    },
+    {
+      "preset": {
+        "bytes": 22132,
+        "path": "astral spinorgentics encrustcore nz+.milk",
+        "sha256": "e94d07220b1e2dcde7279449639d19ec1ebda39a4e90a17b15f4b405a4574dfb"
+      },
+      "rawpoint_p1": {
+        "classic_reference_summary": {
+          "centre_rgb": [
+            0.7135511691307539,
+            0.404090147645511,
+            0.5745306500496812
+          ],
+          "contrast_luma_std_1182": 0.3675713986158371,
+          "laplacian_luma_var_1182": 0.005931737905484624,
+          "luma": 0.5120052872737482,
+          "saturation": 0.39827332459390163
+        },
+        "errors": {
+          "centre_rgb_absolute_error": [
+            0.08944650132060585,
+            0.10450651631001624,
+            0.18903953182900135
+          ],
+          "contrast_luma_std_absolute_error": 0.10860972851514816,
+          "image_mae_1182_rgb01": 0.2323622703552246,
+          "luma_absolute_error": 0.18184181684732773,
+          "luma_ratio": 0.6448438690632029,
+          "saturation_absolute_error": 0.19770952127873898
+        },
+        "summary": {
+          "centre_rgb": [
+            0.7119356397796387,
+            0.3206099307730422,
+            0.40998506197424955
+          ],
+          "contrast_luma_std_1182": 0.27284228801727295,
+          "laplacian_luma_var_1182": 0.0023883300518718897,
+          "luma": 0.33016347042642047,
+          "saturation": 0.5959828458726406
+        }
+      },
+      "same_variance_gaussian": {
+        "classic_reference_summary": {
+          "centre_rgb": [
+            0.7135511691307539,
+            0.404090147645511,
+            0.5745306500496812
+          ],
+          "contrast_luma_std_1182": 0.3675713986158371,
+          "laplacian_luma_var_1182": 0.005931737905484624,
+          "luma": 0.5120052872737482,
+          "saturation": 0.39827332459390163
+        },
+        "errors": {
+          "centre_rgb_absolute_error": [
+            0.0949881980098911,
+            0.1109423492272881,
+            0.1981453979650005
+          ],
+          "contrast_luma_std_absolute_error": 0.1071725282818079,
+          "image_mae_1182_rgb01": 0.2315729260444641,
+          "luma_absolute_error": 0.18689919983862777,
+          "luma_ratio": 0.6349662699113877,
+          "saturation_absolute_error": 0.19853577204048634
+        },
+        "summary": {
+          "centre_rgb": [
+            0.7037680986746551,
+            0.31133774051190694,
+            0.3943454702724068
+          ],
+          "contrast_luma_std_1182": 0.27440460585057735,
+          "laplacian_luma_var_1182": 0.0023502253970946185,
+          "luma": 0.32510608743512037,
+          "saturation": 0.596809096634388
+        }
+      },
+      "rawpoint_vs_p1_exact": true
+    }
+  ],
+  "benefited_counterexamples": [
+    {
+      "baseline_reference_errors": {
+        "native_luma_absolute_error": 0.11938126815556416,
+        "native_rgb_mean_absolute_error": 0.13283213215266557,
+        "thumbnail_hsv_mean_saturation_error": 0.06381422387748502,
+        "thumbnail_mae_256x144_rgb01": 0.31563834100961685
+      },
+      "candidate_reference_errors": {
+        "native_luma_absolute_error": 0.006314358915383914,
+        "native_rgb_mean_absolute_error": 0.006318057666742349,
+        "thumbnail_hsv_mean_saturation_error": 0.005124572886880438,
+        "thumbnail_mae_256x144_rgb01": 0.09363458212465048
+      },
+      "classification": "closer",
+      "dark_reference_band": "lit>=5pct",
+      "frame_closeness": {
+        "native_luma_absolute_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "native_rgb_mean_absolute_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "thumbnail_hsv_mean_saturation_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "thumbnail_mae_256x144_rgb01_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ]
+      },
+      "frame_errors": {
+        "baseline": {
+          "native_luma_absolute_error_frames": [
+            0.13084776414050503,
+            0.13941584272763652,
+            0.13200381237748282,
+            0.12965328281543476,
+            0.10161288536855784,
+            0.12359806937322293,
+            0.08346578223435686,
+            0.11445270620731651
+          ],
+          "native_rgb_mean_absolute_error_frames": [
+            0.15000391115339298,
+            0.15250664069983746,
+            0.15391620487974225,
+            0.13957392867645024,
+            0.11225805380784136,
+            0.12810086756898045,
+            0.09744655327009168,
+            0.12885089716498813
+          ],
+          "thumbnail_hsv_mean_saturation_error_frames": [
+            0.08299196197576253,
+            0.07623421330337687,
+            0.10135346456290845,
+            0.043546283530773444,
+            0.05768516390931372,
+            0.03388980375136166,
+            0.05578714341639435,
+            0.059025756569989096
+          ],
+          "thumbnail_mae_256x144_rgb01_frames": [
+            0.322326123714447,
+            0.31667470932006836,
+            0.3569531738758087,
+            0.3211955726146698,
+            0.3240962028503418,
+            0.30742859840393066,
+            0.2801631987094879,
+            0.29626914858818054
+          ]
+        },
+        "candidate": {
+          "native_luma_absolute_error_frames": [
+            0.0015674834954145789,
+            0.004498910525423172,
+            0.02740138469492659,
+            0.0029613904343714914,
+            0.0053945683601532846,
+            0.0018607161475172607,
+            0.0007554603360953038,
+            0.006074957329169628
+          ],
+          "native_rgb_mean_absolute_error_frames": [
+            0.001858747265169954,
+            0.0033784630302356824,
+            0.027545484009089516,
+            0.003312107171871063,
+            0.0048856448937870485,
+            0.0015511066152162172,
+            0.0012021095821227086,
+            0.006810798766446598
+          ],
+          "thumbnail_hsv_mean_saturation_error_frames": [
+            0.0017901518246187242,
+            0.003682321452886661,
+            0.0077948410266883705,
+            0.006385952818627472,
+            0.003714979915577399,
+            0.0077260135825163445,
+            0.0010221992442810413,
+            0.008880123229847492
+          ],
+          "thumbnail_mae_256x144_rgb01_frames": [
+            0.05681803077459335,
+            0.09341447800397873,
+            0.1674719899892807,
+            0.06991279125213623,
+            0.0875810980796814,
+            0.06980378925800323,
+            0.07182390242815018,
+            0.13225057721138
+          ]
+        }
+      },
+      "metric_closeness": {
+        "native_luma_absolute_error": "closer",
+        "native_rgb_mean_absolute_error": "closer",
+        "thumbnail_hsv_mean_saturation_error": "closer",
+        "thumbnail_mae_256x144_rgb01": "closer"
+      },
+      "preset": {
+        "bytes": 8070,
+        "path": "Stahlregen & Flexi + Geiss + Martin + Rovastar + Telek - DiskWasher (Gentle RMX).milk",
+        "sha256": "5eba0797e746af8238af4b7129d255a1113893414f5ee0654bdaef2e1507a3af"
+      },
+      "profile": "2160",
+      "reference_luma_mean": 0.5506812834331524,
+      "repeat_exact_selected": {
+        "baseline": true,
+        "candidate": true,
+        "reference": true
+      },
+      "sampling_group": "blur"
+    },
+    {
+      "baseline_reference_errors": {
+        "native_luma_absolute_error": 0.011934512575759528,
+        "native_rgb_mean_absolute_error": 0.011047081253826075,
+        "thumbnail_hsv_mean_saturation_error": 0.016897270518450434,
+        "thumbnail_mae_256x144_rgb01": 0.01708052633330226
+      },
+      "candidate_reference_errors": {
+        "native_luma_absolute_error": 0.004685875645598896,
+        "native_rgb_mean_absolute_error": 0.004363418581798117,
+        "thumbnail_hsv_mean_saturation_error": 0.004175017446214599,
+        "thumbnail_mae_256x144_rgb01": 0.009504401532467455
+      },
+      "classification": "closer",
+      "dark_reference_band": "lit>=5pct",
+      "frame_closeness": {
+        "native_luma_absolute_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "native_rgb_mean_absolute_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "thumbnail_hsv_mean_saturation_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "farther",
+          "closer",
+          "closer"
+        ],
+        "thumbnail_mae_256x144_rgb01_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ]
+      },
+      "frame_errors": {
+        "baseline": {
+          "native_luma_absolute_error_frames": [
+            0.006494957733916493,
+            0.009579750707750953,
+            0.011691906474127621,
+            0.01699660665193363,
+            0.008498019798262105,
+            0.007861121840153085,
+            0.020641510078310568,
+            0.013712227321621778
+          ],
+          "native_rgb_mean_absolute_error_frames": [
+            0.006386210082288203,
+            0.00894016830839644,
+            0.01074423542446936,
+            0.015199436771251218,
+            0.0076795694343915035,
+            0.007393599873461591,
+            0.018961820155256822,
+            0.013071609981093473
+          ],
+          "thumbnail_hsv_mean_saturation_error_frames": [
+            0.009467869178921572,
+            0.01058325674019607,
+            0.021004072201797397,
+            0.03165583724809368,
+            0.005071635859204809,
+            0.004092839392701525,
+            0.0379114753540305,
+            0.015391178172657935
+          ],
+          "thumbnail_mae_256x144_rgb01_frames": [
+            0.011013207025825977,
+            0.014082251116633415,
+            0.016030943021178246,
+            0.020238494500517845,
+            0.014345398172736168,
+            0.013303128071129322,
+            0.025580760091543198,
+            0.022050028666853905
+          ]
+        },
+        "candidate": {
+          "native_luma_absolute_error_frames": [
+            0.0035448535482526244,
+            0.004543050653432031,
+            0.003978632496933421,
+            0.00489431965657975,
+            0.005764196755027817,
+            0.004312953084861279,
+            0.006511459992117288,
+            0.00393753897758696
+          ],
+          "native_rgb_mean_absolute_error_frames": [
+            0.003410738989264283,
+            0.004338317719502376,
+            0.003913385687246927,
+            0.004101815542302801,
+            0.004987949527925937,
+            0.0038186778488413253,
+            0.006067133941814106,
+            0.00426932939748718
+          ],
+          "thumbnail_hsv_mean_saturation_error_frames": [
+            0.002926176981209151,
+            0.005225673168572989,
+            0.001372506467864909,
+            0.002672355834694995,
+            0.0028085214120370516,
+            0.007845158462690627,
+            0.01033837145969499,
+            0.00021137578295207793
+          ],
+          "thumbnail_mae_256x144_rgb01_frames": [
+            0.008831756189465523,
+            0.009156567044556141,
+            0.009743036702275276,
+            0.008693888783454895,
+            0.009876294992864132,
+            0.007737715262919664,
+            0.011773393489420414,
+            0.010222559794783592
+          ]
+        }
+      },
+      "metric_closeness": {
+        "native_luma_absolute_error": "closer",
+        "native_rgb_mean_absolute_error": "closer",
+        "thumbnail_hsv_mean_saturation_error": "closer",
+        "thumbnail_mae_256x144_rgb01": "closer"
+      },
+      "preset": {
+        "bytes": 5835,
+        "path": "Goody - Lightning - Vegas Dreamer remix (PS2-0) - mix.milk",
+        "sha256": "b9986198dfd96f456e2b58480bf29447f2226b2358a802bac1774bcb51da629a"
+      },
+      "profile": "2160",
+      "reference_luma_mean": 0.06139879567473974,
+      "repeat_exact_selected": {
+        "baseline": true,
+        "candidate": true,
+        "reference": true
+      },
+      "sampling_group": "max"
+    },
+    {
+      "baseline_reference_errors": {
+        "native_luma_absolute_error": 0.1439738548518229,
+        "native_rgb_mean_absolute_error": 0.12028266097725739,
+        "thumbnail_hsv_mean_saturation_error": 0.04611565085018382,
+        "thumbnail_mae_256x144_rgb01": 0.1215798957273364
+      },
+      "candidate_reference_errors": {
+        "native_luma_absolute_error": 0.005219787074141162,
+        "native_rgb_mean_absolute_error": 0.004544817157292069,
+        "thumbnail_hsv_mean_saturation_error": 0.001327867030058577,
+        "thumbnail_mae_256x144_rgb01": 0.010938076418824494
+      },
+      "classification": "closer",
+      "dark_reference_band": "lit>=5pct",
+      "frame_closeness": {
+        "native_luma_absolute_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "native_rgb_mean_absolute_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "thumbnail_hsv_mean_saturation_error_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ],
+        "thumbnail_mae_256x144_rgb01_frames": [
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer",
+          "closer"
+        ]
+      },
+      "frame_errors": {
+        "baseline": {
+          "native_luma_absolute_error_frames": [
+            0.11695840701372379,
+            0.13156743586155184,
+            0.1341227837491028,
+            0.15258132618739545,
+            0.17030537401018764,
+            0.17699188844905278,
+            0.1408727770174676,
+            0.12839084652610122
+          ],
+          "native_rgb_mean_absolute_error_frames": [
+            0.10108822164455801,
+            0.11558300838237019,
+            0.10922273261406192,
+            0.12217817663993102,
+            0.1382415237421635,
+            0.1533802135837076,
+            0.1154101531817599,
+            0.10715725802950686
+          ],
+          "thumbnail_hsv_mean_saturation_error_frames": [
+            0.05194695499727675,
+            0.07720811631944446,
+            0.021793832550381254,
+            0.015770314202069646,
+            0.02880816823257082,
+            0.09832356770833328,
+            0.03553687534041394,
+            0.039537377450980404
+          ],
+          "thumbnail_mae_256x144_rgb01_frames": [
+            0.10174940526485443,
+            0.11733511835336685,
+            0.11030536144971848,
+            0.12327924370765686,
+            0.13870882987976074,
+            0.15654747188091278,
+            0.1170746311545372,
+            0.10763910412788391
+          ]
+        },
+        "candidate": {
+          "native_luma_absolute_error_frames": [
+            0.0021230989996229854,
+            0.00019926659841168481,
+            0.0012055846034638718,
+            0.004129715462061367,
+            0.0085127203810198,
+            0.012719612450207418,
+            0.005621227407251739,
+            0.007247070691090429
+          ],
+          "native_rgb_mean_absolute_error_frames": [
+            0.0015913692127416587,
+            0.0007508516801958432,
+            0.0012780887921754332,
+            0.0035094051539748066,
+            0.007000446113551409,
+            0.010942385993674772,
+            0.004946265102503422,
+            0.006339725209519205
+          ],
+          "thumbnail_hsv_mean_saturation_error_frames": [
+            0.0019211048134532005,
+            0.0005934904343681824,
+            0.00021233319716773558,
+            0.00013733575027241596,
+            0.0013531454248366659,
+            0.004254323257080639,
+            0.0005177483319717124,
+            0.0016334550313180651
+          ],
+          "thumbnail_mae_256x144_rgb01_frames": [
+            0.01116891112178564,
+            0.010078273713588715,
+            0.009775092825293541,
+            0.0100333821028471,
+            0.009947143495082855,
+            0.01369648426771164,
+            0.011536522768437862,
+            0.011268801055848598
+          ]
+        }
+      },
+      "metric_closeness": {
+        "native_luma_absolute_error": "closer",
+        "native_rgb_mean_absolute_error": "closer",
+        "thumbnail_hsv_mean_saturation_error": "closer",
+        "thumbnail_mae_256x144_rgb01": "closer"
+      },
+      "preset": {
+        "bytes": 14128,
+        "path": "Waltra - Heaven Liquid.milk",
+        "sha256": "51cde8a9f21f6a432a5c5d3f470b771d47e96db797a7776c722a735c52316d24"
+      },
+      "profile": "2160",
+      "reference_luma_mean": 0.2572629269479811,
+      "repeat_exact_selected": {
+        "baseline": true,
+        "candidate": true,
+        "reference": true
+      },
+      "sampling_group": "gradient"
+    }
+  ],
+  "proven_operations": [
+    {
+      "name": "Extra prewarp quantization",
+      "reference": "Q8(F(A_reference(C)))",
+      "current": "Q8(F(A_native(Q8(D(C)))))",
+      "locations": [
+        "FeedbackDiffusion constructor createsdefaultunsignedbyteRGBA target",
+        "Framebuffer.cpp220\u2013222",
+        "MilkdropPreset warp executesafterdiffusionDraw"
+      ],
+      "meaning": "KernelunitDC isnot sufficient toconserve sparse8bit signal; theextraQ8 precedesnonlinearF."
+    },
+    {
+      "name": "Blur source andtiming preserved",
+      "locations": [
+        "MilkdropPreset.cpp updateBlur lambda",
+        "BlurTexture.cpp pass0 sourceTexture.GenerateMipmaps/source_lod"
+      ],
+      "meaning": "Warp reads olderblur beforeupdatewhenm_warpSamplesBlur; refreshedblur reachescomposite. Main isfiltered but blur sourceisraw. Changingblursource ortiming atsame time wouldconfound attribution."
+    },
+    {
+      "name": "Feedback source vsdisplay",
+      "locations": [
+        "MilkdropPreset.cpp finalComposite thenframebufferIDswap"
+      ],
+      "meaning": "Nextwarp reads uncompositedcanvas, not finaldisplay. Capturedluma cannotlocate lossatwarp, sourceinjection orcomposite byitself."
+    },
+    {
+      "name": "No single common reaction operator",
+      "locations": [
+        "Fedpreset236\u2013253",
+        "astralpreset598\u2013615",
+        "Acidpreset638\u2013652"
+      ],
+      "meaning": "Fed is scalarmax\u2192.94*x\u2212.04; astral hasmax plusconditionalcolour/noise andenabledtexturedshapes; Acid hasgradientadvection/sharpening/product sinks/pointinjection."
+    }
+  ],
+  "hypotheses": [
+    {
+      "rank": 1,
+      "mechanism": "Additional Q8 changes weak support and threshold crossings.",
+      "proven": "The host component shows impulse extinction, and the source inserts an unsigned-byte target before the warp.",
+      "unproved": "Its magnitude or dominance in the real presets. Rounded mass can increase or decrease."
+    },
+    {
+      "rank": 2,
+      "mechanism": "Uniform averaging before max/threshold does not commute with the reaction.",
+      "proven": "For translation-invariant averaging D and convex T(z)=max(0,a*z-c), T(Dz)<=D(T(z)). A maximum over translated reads is also convex.",
+      "unproved": "The actual warps vary spatially and include injection and composite effects. Goody has almost the same feather/max warp as astral and a larger sink, yet improves against classic. Presence of max does not prove the cause."
+    },
+    {
+      "rank": 3,
+      "mechanism": "The average 1/6 variance misses correlated read phases.",
+      "proven": "Bilinear variance is f*(1-f) per axis. One source filter cannot match disparate branch phases.",
+      "unproved": "The phase distribution weighted by active content has not been recorded or directly ablated."
+    }
+  ],
+  "priority_ablation": {
+    "worker": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/worker-candidate.json",
+    "change": "Change only filtered MRT storage to RGBA16F. Keep raw storage, canvas, blur, kernel, presets, clock and RNG unchanged.",
+    "controls": "Compare matched actual-core builds from 1b2c2663 with identical PCM and seed: 480 simulated frames, eight native captures and two fresh-process repeats. Check mixed-framebuffer completeness first.",
+    "stage_probes": "Observe raw input, filtered input, post-warp before waves, post-waves before composite and final display in matched builds. Count zero transitions and 1\u201316 LSB support; measure luma, quantiles, clipping and injection. Extra readbacks are diagnostics, not TV cost measurements.",
+    "decision": "Restored support and closer classic images would implicate additional quantization. No improvement would reject its dominance and prioritize branch phase or blur timing. Do not promote FP16 or a brightness gain without validation."
+  },
+  "rgba_errata": {
+    "verified": "Main/flip/diffusionCreateColorAttachment defaults GL_RGBA/GL_RGBA/UNSIGNED_BYTE. BlurTexture textureconstructor usesGL_RGB. Nativecapturesstripalpha separately.",
+    "mutable_docs_status": "RootREADME/handover no longer containthefalseRGBsurface sentence; immutablePR28 snapshot does.",
+    "locations": [
+      {
+        "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/pr28-review/source/tools/projectm-patches/0033-feedback-diffusion-compensation.patch",
+        "line": 1203,
+        "text": "Diffusion framebuffer stores RGB; its readback alpha is opaque."
+      },
+      {
+        "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/tools/projectm-patches/0030-feedback-diffusion-compensation.patch",
+        "line": 1022,
+        "text": "Samefalse testcomment inhistorical featurepatch"
+      },
+      {
+        "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/pr28-review/source/docs/superpowers/evidence/0025-feedback-diffusion/current-main-validation/README.md",
+        "line": 80,
+        "text": "Production main surfaces are RGB"
+      },
+      {
+        "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/pr28-review/source/docs/superpowers/handover/2026-10-04-native-4k-feedback-bugs.md",
+        "line": 299,
+        "text": "Production main surfaces are RGB"
+      }
+    ],
+    "causal_limit": "Warp outputs start with alpha 1, but nonadditive blending can change it. Fed has no enabled shapes, so a common alpha-textured-shape explanation is not established."
+  }
+}

@@ -39,6 +39,7 @@ if(NOT APPLE)
 endif()
 add_subdirectory("${PROJECTM_SOURCE}" projectm)
 add_executable(projectm-regressions regression_test.cpp)
+add_executable(random-texture-regressions random_texture_test.cpp)
 target_compile_features(projectm-regressions PRIVATE cxx_std_17)
 target_compile_definitions(projectm-regressions PRIVATE GL_SILENCE_DEPRECATION)
 target_include_directories(projectm-regressions PRIVATE
@@ -52,8 +53,51 @@ if(NOT APPLE)
     target_link_libraries(projectm-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
 enable_testing()
+target_compile_features(random-texture-regressions PRIVATE cxx_std_17)
+target_compile_definitions(random-texture-regressions PRIVATE GL_SILENCE_DEPRECATION)
+target_compile_definitions(random-texture-regressions PRIVATE
+    BUNDLED_ASSETS="${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets")
+target_include_directories(random-texture-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM"
+    "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset"
+    "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_include_directories(random-texture-regressions PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../tools/preset-lab/src/preset_lab/native")
+target_link_libraries(random-texture-regressions PRIVATE libprojectM::projectM)
+if(NOT APPLE)
+    target_compile_definitions(random-texture-regressions PRIVATE USE_GLES)
+    target_link_libraries(random-texture-regressions PRIVATE ${REGRESSION_GL_TARGET})
+endif()
+foreach(control manager stages shorthand numerical lifecycle)
+    add_test(NAME random-texture-${control} COMMAND random-texture-regressions
+        ${control} "${CMAKE_CURRENT_BINARY_DIR}/textures-${control}")
+    set_tests_properties(random-texture-${control} PROPERTIES TIMEOUT 30
+        ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+endforeach()
+add_executable(shader-parser-regressions shader_parser_test.cpp)
+target_compile_features(shader-parser-regressions PRIVATE cxx_std_17)
+target_include_directories(shader-parser-regressions PRIVATE "${PROJECTM_SOURCE}/vendor/hlslparser/src")
+target_link_libraries(shader-parser-regressions PRIVATE libprojectM::projectM)
+add_test(NAME shader-parser-regressions COMMAND shader-parser-regressions)
+set_tests_properties(shader-parser-regressions PROPERTIES
+    TIMEOUT 10 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0")
 add_test(NAME hlsl-self-reference COMMAND projectm-regressions macro)
 add_test(NAME custom-waveform-bounds COMMAND projectm-regressions waveform)
+add_test(NAME shader-render-regressions COMMAND projectm-regressions shader-render)
+add_test(NAME parser-presets COMMAND projectm-regressions parser-presets
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets"
+    "${CMAKE_CURRENT_SOURCE_DIR}/parser-presets.tsv")
+file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/parser-presets.tsv" PARSER_PRESETS)
+foreach(ROW IN LISTS PARSER_PRESETS)
+    string(REPLACE "\t" ";" FIELDS "${ROW}")
+    list(GET FIELDS 0 EXPECTED_SHA)
+    list(GET FIELDS 2 PRESET_NAME)
+    file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/${PRESET_NAME}" ACTUAL_SHA)
+    if(NOT ACTUAL_SHA STREQUAL EXPECTED_SHA)
+        message(FATAL_ERROR "Parser witness changed: ${PRESET_NAME}")
+    endif()
+endforeach()
 # A broken self-referencing macro grows indefinitely; stop it before it exhausts memory.
-set_tests_properties(hlsl-self-reference custom-waveform-bounds PROPERTIES
-    TIMEOUT 10 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+set_tests_properties(hlsl-self-reference custom-waveform-bounds shader-render-regressions parser-presets PROPERTIES
+    TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

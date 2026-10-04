@@ -19,6 +19,18 @@ Keep **Resolution** and **Transitions** on Auto, and use the default half-refres
 
 Higher resolutions use more memory. Keep Memory limit enabled, particularly on TVs with 2 GB RAM. After a memory-pressure report, automatic resolution may stay lower for the session.
 
+If you selected **Native**, switch back to **Auto**. Native holds the detected panel height; it does not lower the resolution when a preset is slow or Android reports memory pressure.
+
+## Native is missing or the picture looks different
+
+Native is offered only for a detected panel height above 1330p when **Memory limit** permits the entire panel height. For example, a 4K TV whose RAM limit permits only 1440p will not offer Native. **Advanced → Diagnostics** shows the detected panel and actual render size. Keep Memory limit enabled to leave room for your music player.
+
+Feedback presets can change brightness, colour and pattern at higher resolution. The compensation under evaluation does not preserve every preset's appearance. Compare another preset or return to Auto; sharper output is not a guarantee of the same picture.
+
+## A preset looks different when revisited
+
+Some presets choose random images from the bundled texture pack each time they load. Those choices stay fixed while the preset plays and are shared by its rendering stages. Revisiting the preset can choose other images; the renderer preserves each alias's requested filtering and edge wrapping. This does not guarantee the same appearance as MilkDrop on Windows.
+
 ## Presets skipped by an earlier version
 
 Earlier versions skipped presets whose equation code projectM could not compile, including 27 bundled presets. The app now loads equation code like MilkDrop does, so these presets play. A code block that MilkDrop cannot compile either is left out and the rest of the preset plays, as in MilkDrop. Presets skipped earlier stay on this TV's skip list until you reset it: **Advanced → Skipped presets**. A reset also clears presets skipped as slow or black; the app skips those again if they still are.
@@ -42,3 +54,7 @@ If the artist and title appear but the cover does not, the music app may not pro
 A production release and a locally built debug APK use different signing keys. Use the [separate preset-test app](development.md#test-on-a-tv-without-replacing-the-release) for development without replacing your production installation.
 
 For unresolved problems, include the app version, device, Android version and relevant diagnostics in a [GitHub issue](https://github.com/johnneerdael/ProjectM-TV/issues).
+
+## A preset looks different from MilkDrop
+
+Some presets can fall back to a simpler shader when their custom shader cannot compile. The engine includes fixes for local variables named `sample`, declaration and statement macros, and swizzles after parenthesized constructors. These fixes leave the preset files unchanged. Passing parser and compiler checks does not establish identical appearance across GPUs; include the preset name, device and app version when reporting a difference.

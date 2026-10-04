@@ -1,0 +1,182 @@
+#!/bin/bash
+# Re-runs this experiment in a NEW epoch directory.
+#
+# build_mrt_fix.py and run.py are the exact adapters that produced results.json (their SHA256s are
+# recorded there), so they are not edited to run in place. They resolve the repository root from
+# their execution depth, build/native-4k-current-main/<epoch>/, and write their outputs beside
+# themselves. This launcher checks their hashes and the prerequisites, copies them unchanged to a new
+# epoch at that depth, and runs them there.
+#
+# Usage: reproduce.sh [--check] <new-epoch-name>
+#   --check  verify hashes and prerequisites only; build nothing and touch no device.
+# PROJECTM_ROOT selects the checkout whose build/native-4k-current-main tree holds the prerequisites
+# (default: this checkout).
+#
+# The run installs and renders on emulator-5582 only, after its own launch-identity and lease guards.
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+ROOT="${PROJECTM_ROOT:-$(git -C "$HERE" rev-parse --show-toplevel)}"
+CHECK=0
+if [ "${1:-}" = "--check" ]; then CHECK=1; shift; fi
+EPOCH="${1:?usage: reproduce.sh [--check] <new-epoch-name>}"
+BASE="$ROOT/build/native-4k-current-main"
+DEST="$BASE/$EPOCH"
+PY="$ROOT/build/preset-lab-venv/bin/python"
+
+expect() { # file, recorded key in results.json
+    local actual recorded
+    actual="$(shasum -a 256 "$HERE/$1" | cut -d' ' -f1)"
+    recorded="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['artifacts'][sys.argv[2]])" "$HERE/results.json" "$2")"
+    [ "$actual" = "$recorded" ] || { echo "$1: SHA256 $actual differs from recorded $recorded" >&2; exit 1; }
+}
+expect build_mrt_fix.py build_adapter_sha256
+expect run.py run_adapter_sha256
+
+missing=0
+for need in "$ROOT/docs/superpowers/evidence/0025-feedback-diffusion/shared-core-corpus/build.py" \
+            "$ROOT/docs/superpowers/evidence/0025-feedback-diffusion/shared-core-corpus/run.py" \
+            "$BASE/emulator/launch.json" \
+            "$BASE/raw-point-controls/analysis.json" \
+            "$BASE/classic-reference-control/worker-baseline.json" \
+            "$BASE/raw-point-experiment/worker-candidate.json" \
+            "$ROOT/build/follow-ups/pristine-source/projectm" \
+            "$PY"; do
+    [ -e "$need" ] || { echo "missing prerequisite: $need" >&2; missing=1; }
+done
+[ "$missing" = 0 ] || exit 1
+# Everything else run.py reads, by recorded size/SHA256: the PCM signals (hashes run.py asserts), the six
+# preset files (as rendered by the comparator rows), and the comparator rows and their native captures.
+python3 - "$HERE/run.py" "$ROOT" "$BASE" "$HERE/artifact-proof.json" "$HERE/analysis.json" <<'PYCHECK' || missing=1
+import ast, hashlib, json, subprocess, sys
+from pathlib import Path
+run, root, base, proof, recorded_analysis = (Path(arg) for arg in sys.argv[1:6])
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for block in iter(lambda: f.read(1 << 20), b''):
+            h.update(block)
+    return h.hexdigest()
+problems = []
+# The shared provider code the adapters execute: run.py's runner, the builder and the worker builder it
+# hashes into every backend identity. A different revision could change protocol or validation semantics.
+definitions = json.loads(recorded_analysis.read_text())['definitions']
+identity = definitions['roles']['mrt-fix']['backend_identity']
+instrumentation = identity['instrumentation']
+corpus = root / 'docs/superpowers/evidence/0025-feedback-diffusion/shared-core-corpus'
+expected_files = [(corpus / 'run.py', definitions['provider_sha256']),
+                  (corpus / 'build.py', instrumentation['builder_sha256']),
+                  (root / 'tools/preset-lab/src/preset_lab/build_worker.py', instrumentation['worker_builder_sha256'])]
+# The harness sources build.py freezes into the worker.
+expected_files += [(corpus / name, digest) for name, digest in identity['harness_sources_sha256'].items()]
+for path, digest in expected_files:
+    if not path.is_file() or sha(path) != digest:
+        problems.append(f'provider missing or changed: {path}')
+# build_worker copies analysis_hooks.hpp into the engine and build.py then makes its clock atomic;
+# the identity records the result.
+hooks = root / 'tools/preset-lab/src/preset_lab/native/analysis_hooks.hpp'
+if not hooks.is_file():
+    problems.append(f'provider missing: {hooks}')
+else:
+    text = hooks.read_text().replace('#include <cstdint>', '#include <cstdint>\n#include <atomic>')
+    text = text.replace('inline double clock_seconds = 0.0;', 'inline std::atomic<double> clock_seconds{0.0};')
+    if hashlib.sha256(text.encode()).hexdigest() != instrumentation['analysis_hooks_sha256']:
+        problems.append(f'provider changed: {hooks}')
+# The pristine engine and its nested evaluator must be the revisions 25e6aa83 pins: build.py checks
+# only the parent (after creating the epoch) and archives the evaluator without a check.
+def git(cwd, *args):
+    result = subprocess.run(['git', '-C', str(cwd), *args], capture_output=True, text=True)
+    return result.stdout.strip() if result.returncode == 0 else None
+pristine = root / 'build/follow-ups/pristine-source/projectm'
+pinned_engine = (git(root, 'ls-tree', '25e6aa83', 'third_party/projectm') or '').split()
+pinned_engine = pinned_engine[2] if len(pinned_engine) > 2 else None
+engine_head = git(pristine, 'rev-parse', 'HEAD')
+if not pinned_engine or engine_head != pinned_engine or engine_head != identity['upstream_commit']:
+    problems.append(f'pristine projectM is {engine_head}, expected {pinned_engine} (recorded {identity["upstream_commit"]})')
+else:
+    pinned_eval = (git(pristine, 'ls-tree', engine_head, 'vendor/projectm-eval') or '').split()
+    pinned_eval = pinned_eval[2] if len(pinned_eval) > 2 else None
+    eval_head = git(pristine / 'vendor/projectm-eval', 'rev-parse', 'HEAD')
+    if not pinned_eval or eval_head != pinned_eval:
+        problems.append(f'pristine projectm-eval is {eval_head}, expected {pinned_eval}')
+names = next(ast.literal_eval(node.value) for node in ast.parse(run.read_text()).body
+             if isinstance(node, ast.Assign) and getattr(node.targets[0], 'id', '') == 'NAMES')
+def same_bytes(path, size, digest):
+    return path.is_file() and path.stat().st_size == size and sha(path) == digest
+pcm = {240: '38a09d906e93452d4af5ebea36fcdc684a8383eacbd162d2d61b4ed3fbd2674c',
+       480: '14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc'}
+for frames, digest in pcm.items():
+    path = base / f'targeted-matrix/signals/pcm-{frames}.u8'
+    if not path.is_file():
+        problems.append(f'missing signal: {path}')
+    elif sha(path) != digest:
+        problems.append(f'signal hash differs: {path}')
+analysis = json.loads((base / 'raw-point-controls/analysis.json').read_text())
+if analysis.get('state') != 'complete':
+    problems.append('raw-point-controls/analysis.json is not complete')
+rows = []
+recorded_presets = {}
+for case in analysis.get('cases', []):
+    recorded_presets[case['preset']['path']] = case['preset']
+    for role in ['p1', 'raw-point']:
+        info = case['roles'][role]
+        if info.get('status') != 'success':
+            problems.append(f"comparator {role} {case['profile']} {case['preset']['path']} not successful")
+        rows += zip(info['row_paths'], info['row_sha256'])
+    rows += zip(case['reference']['row_paths'], case['reference']['row_sha256'])
+# The new run must render the same preset bytes as the comparator rows it is compared with.
+for name in names:
+    record = recorded_presets.get(name)
+    path = root / 'core/src/main/assets/presets' / name
+    if record is None:
+        problems.append(f'preset not in comparator analysis: {name}')
+    elif not same_bytes(path, record['bytes'], record['sha256']):
+        problems.append(f'preset missing or changed: {path}')
+for path, digest in rows:
+    path = Path(path)
+    if not path.is_file() or sha(path) != digest:
+        problems.append(f'comparator row missing or changed: {path}')
+        continue
+    for sample in json.loads(path.read_text())['result']['selected_files']:
+        capture = path.parent / 'output' / sample['path']
+        if not same_bytes(capture, sample['bytes'], sample['sha256']):
+            problems.append(f'comparator capture missing or changed: {capture}')
+# The existing roles' artifacts, which run.py reopens through their metadata: metadata, APK, exported
+# AAR and compile commands, against the hashes recorded in artifact-proof.json. (mrt-fix is rebuilt.)
+recorded = json.loads(proof.read_text())
+for role, metadata_path in [('reference', base / 'classic-reference-control/worker-baseline.json'),
+                            ('raw-point', base / 'raw-point-experiment/worker-candidate.json')]:
+    record = recorded[role]
+    if sha(metadata_path) != record['metadata_sha256']:
+        problems.append(f'{role} metadata changed: {metadata_path}')
+        continue
+    metadata = json.loads(metadata_path.read_text())
+    apk, aar = Path(metadata['apk']), Path(record['aar'])
+    if str(apk) != record['apk'] or not apk.is_file() or sha(apk) != record['apk_sha256']:
+        problems.append(f'{role} APK missing or changed: {apk}')
+    if aar != apk.parent / 'repo/core/build/outputs/aar/core-release.aar' or not aar.is_file() or sha(aar) != record['aar_sha256']:
+        problems.append(f'{role} AAR missing or changed: {aar}')
+    for relative, digest in record['compiled_sources'].items():
+        unit = apk.parent / 'repo' / relative
+        if not unit.is_file() or sha(unit) != digest:
+            problems.append(f'{role} compile commands missing or changed: {unit}')
+for problem in problems[:20]:
+    print(problem, file=sys.stderr)
+if problems:
+    print(f'{len(problems)} input problem(s)', file=sys.stderr)
+    sys.exit(1)
+print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows, reference and raw-point artifacts, shared provider and harness, pinned engine revisions; recorded sizes/SHA256s match')
+PYCHECK
+"$PY" -c 'import numpy, cv2' 2> /dev/null || { echo "missing numpy/OpenCV in $PY" >&2; missing=1; }
+git -C "$ROOT" rev-parse --verify --quiet '25e6aa83^{commit}' > /dev/null ||
+    { echo "missing commit 25e6aa83 (git fetch origin bug/native-4k-feedback-fidelity)" >&2; missing=1; }
+[ "$missing" = 0 ] || exit 1
+[ -e "$DEST" ] && { echo "refusing to reuse existing epoch $DEST" >&2; exit 1; }
+
+if [ "$CHECK" = 1 ]; then
+    echo "ok: adapter hashes match results.json; prerequisites present; would create $DEST"
+    exit 0
+fi
+mkdir -p "$DEST"
+cp "$HERE/build_mrt_fix.py" "$HERE/run.py" "$DEST/"
+"$PY" "$DEST/build_mrt_fix.py"
+"$PY" "$DEST/run.py"

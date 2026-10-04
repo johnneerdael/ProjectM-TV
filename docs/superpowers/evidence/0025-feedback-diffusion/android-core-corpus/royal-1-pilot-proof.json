@@ -1,0 +1,29 @@
+{
+  "preset": {
+    "path": "$$$ Royal - Mashup (1).milk",
+    "sha256": "a7c9240f57f8a448b8a6dfd7fbe9f0501419da9d4ae987ca2961e6733c3e3078",
+    "weight_mb": 0
+  },
+  "jobs": 14,
+  "simulated_frames_each": 480,
+  "captures_each": 8,
+  "all_success": true,
+  "all_profiles_repeated_with_identical_eight_frame_hashes": true,
+  "candidate_off_equals_baseline": true,
+  "wall_seconds_total": 356.5267891252879,
+  "device": {
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "armeabi"
+    ],
+    "device": "umx5jyks",
+    "fingerprint": "Droidlogic/franklin/franklin:14/UD2A.240505.001.W1/eng.ugoos.20260518.150800:userdebug/test-keys",
+    "manufacturer": "UGOOS",
+    "model": "AM9 PRO",
+    "sdk": 34
+  },
+  "renderer": "Mali-G310",
+  "scope": "single-preset pilot; not corpus acceptance, size-band validation, all-frame hash proof or FPS benchmark",
+  "jobs_payload_sha256": "13d141032c2cc74fbb7566854254519093a381eaddc30ea8cc074c77761c27be"
+}

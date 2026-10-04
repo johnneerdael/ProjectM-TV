@@ -1,0 +1,12 @@
+{
+  "base_commit": "f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98",
+  "renderer_commit": "d6170278bec04cf3bbfeccbfe29977233bc4064b",
+  "pr28_patch_sha256": "e449c6dfdfb80ec6c6bf87b96614bc0fcc951518de2e678389bdf3fd812e96fd",
+  "pr28_patch_unmodified": true,
+  "ordered_prerequisite_patches": 35,
+  "apply_check_returncode": 1,
+  "stderr": "error: patch failed: src/libprojectM/MilkdropPreset/MilkdropPreset.hpp:127\nerror: src/libprojectM/MilkdropPreset/MilkdropPreset.hpp: patch does not apply\n",
+  "scope": "clean private export, all35 current main patches applied; failure before runtime instrumentation; no worktree patch edited",
+  "resolution": "PR28 owner merged PR27 and regenerated0036 at1b2c266331c9624ef7027da86d825096d243e86a; fresh actual-core build succeeded with all36 patches",
+  "resolution_source_commit": "1b2c266331c9624ef7027da86d825096d243e86a"
+}

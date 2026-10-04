@@ -4,7 +4,8 @@
 #    indexing (presets.idx and folder fallback), commands, skip list, transitions (lightweight,
 #    classic, auto), output measurement, black-preset skipping and context loss.
 # 2. fade_gl_test: the lightweight-transition overlay on a real GLES3 driver (skipped without one).
-# 3. projectm-regressions: self-referencing shader macros and custom waveform audio bounds in
+# 3. projectm-regressions: shader parser/macros, numerical render controls, 16 unchanged presets
+#    and custom waveform audio bounds in
 #    the real patched engine, with ASan/UBSan and GL (macOS OpenGL or headless EGL/GLES on Linux).
 # Requirements: g++ (C++17) and a JDK (for jni.h); for 2/3, CMake and EGL/GLES development files
 # on Linux. macOS can run 3 using its OpenGL framework without EGL/GLES.
@@ -72,6 +73,17 @@ if ! ASAN_OPTIONS=detect_leaks=0 "$WORK/engine_test" "$WORK/assets" "$WORK/noind
     tail -80 "$WORK/engine.log"
     exit 1
 fi
+
+# Exercise both artifact policies through the real JNI sizing/presentation paths.
+for policy in native capped; do
+    POLICY_DEFINE=""
+    if [ "$policy" = capped ]; then POLICY_DEFINE="-DPROJECTMTV_RENDERING_POLICY_CAPPED"; fi
+    g++ -std=c++17 -O1 -g $SAN -pthread ${POLICY_DEFINE:+"$POLICY_DEFINE"} \
+        -I"$HERE/stubs" -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/$JNI_OS" \
+        -I"$ROOT/third_party/projectm/src/api/include" -I"$ROOT/core/src/main/cpp" \
+        "$HERE/render_policy_test.cpp" -o "$WORK/render_policy_$policy"
+    ASAN_OPTIONS=detect_leaks=0 "$WORK/render_policy_$policy"
+done
 
 # Transition overlay against a real OpenGL ES 3 driver (Mesa llvmpipe, headless EGL). Needs the
 # EGL/GLES development files (CI: libegl-dev libgles-dev libegl-mesa0). GL_CFLAGS/GL_LIBS override

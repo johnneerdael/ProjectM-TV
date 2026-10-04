@@ -1,0 +1,9 @@
+{
+  "source_commit": "0e3f948e8cf0244b1f27c846bcb5b8b9fc3a26a0",
+  "ordered_patches": 36,
+  "apk_sha256": "aed73b16568f6ec159d7d1f450f1b9996798ea8b7877a4c03d71faf75602bdc6",
+  "aar_sha256": "9ceac11905d3dd73acf32495454d1aaede8fc0a5d3f7a0ca25593c31852eb985",
+  "aar": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/merged-pr28-final/candidate-0e3f948e8cf0-0b43830171d9/repo/core/build/outputs/aar/core-release.aar",
+  "core_sha256": "a5338e329f71dd1154adf9f0dc3da7185882f3de46ea1803016aaa7a92611285",
+  "aar_apk_elf_identical": true
+}

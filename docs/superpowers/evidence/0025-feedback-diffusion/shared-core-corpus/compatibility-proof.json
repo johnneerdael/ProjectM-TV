@@ -1,0 +1,10 @@
+{
+  "shared_harness_sources_identical": true,
+  "shared_instrumentation_identical": true,
+  "shared_engine_instrumentation_diff_identical": true,
+  "common_24_patches_identical": true,
+  "core_clock_diff_identical": true,
+  "candidate_apk_sha256": "a4eb41e338fdf8aa1e480abe8f49304c91e1857d5596221f3735aa7a7d646364",
+  "device_operations": "none; candidate not installed on peer emulator",
+  "comparison_status": "prepared, not rendered or accepted"
+}

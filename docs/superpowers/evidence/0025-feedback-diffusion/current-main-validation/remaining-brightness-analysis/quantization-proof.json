@@ -1,0 +1,746 @@
+{
+  "status": "measured",
+  "host_driver": "AppleM4Pro CGL; no emulator orTV",
+  "immutable_pr33_filter_source_sha256": "b3c3c6ad42ead863c9f9af4adc39ad34f9fe43330e9229f7369caba15fc42881",
+  "host_fp16_source_byte_exact_actual_core_source": true,
+  "fp16_source_sha256": "7505d39fa3f06dc7044837f14eafceb93179303861e78fb913bdb46b8fbeeeab",
+  "renderer_archive_sha256": "b8082ecce5d40a7bb19e04ef9bd8930704ba60fbe85e9e9c787f2d8ce4e876c5",
+  "probe_source_sha256": "dbd224fa8cb7d984685768f111cf96c55cc60b8bc46d24e8ada3c8e420d3b591",
+  "float_probe_source_sha256": "bd82a342718bd55ce5497943bf765767697c53687bc7aa233c48b16a343cf52d",
+  "results": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/remaining-brightness-analysis/quantization-pr33-results.txt",
+      "sha256": "eb04d1a6456d084dadc42ae86f35b2ace6c3a7464b0ee42c57e8f2093a53d109",
+      "rows": [
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 0.0,
+          "output_max": 0.0,
+          "lit": 0.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 1.0,
+          "output_max": 1.0,
+          "lit": 1.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 4.0,
+          "output_max": 1.0,
+          "lit": 4.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 9.0,
+          "output_max": 2.0,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 18.0,
+          "output_max": 4.0,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1024.0,
+          "output_max": 1.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2048.0,
+          "output_max": 2.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4096.0,
+          "output_max": 4.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8192.0,
+          "output_max": 8.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16384.0,
+          "output_max": 16.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 0.0,
+          "output_max": 0.0,
+          "lit": 0.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 1.0,
+          "output_max": 1.0,
+          "lit": 1.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 4.0,
+          "output_max": 1.0,
+          "lit": 4.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 9.0,
+          "output_max": 2.0,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 18.0,
+          "output_max": 4.0,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1024.0,
+          "output_max": 1.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2048.0,
+          "output_max": 2.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4096.0,
+          "output_max": 4.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8192.0,
+          "output_max": 8.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16384.0,
+          "output_max": 16.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 0.0,
+          "output_max": 0.0,
+          "lit": 0.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 0.0,
+          "output_max": 0.0,
+          "lit": 0.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 4.0,
+          "output_max": 1.0,
+          "lit": 4.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 4.0,
+          "output_max": 1.0,
+          "lit": 4.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 20.0,
+          "output_max": 3.0,
+          "lit": 12.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1024.0,
+          "output_max": 1.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2048.0,
+          "output_max": 2.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4096.0,
+          "output_max": 4.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8192.0,
+          "output_max": 8.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16384.0,
+          "output_max": 16.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 0.0,
+          "output_max": 0.0,
+          "lit": 0.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 0.0,
+          "output_max": 0.0,
+          "lit": 0.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 4.0,
+          "output_max": 1.0,
+          "lit": 4.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 4.0,
+          "output_max": 1.0,
+          "lit": 4.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 20.0,
+          "output_max": 3.0,
+          "lit": 12.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1024.0,
+          "output_max": 1.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2048.0,
+          "output_max": 2.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4096.0,
+          "output_max": 4.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8192.0,
+          "output_max": 8.0,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16384.0,
+          "output_max": 16.0,
+          "lit": 1024.0
+        }
+      ]
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/remaining-brightness-analysis/filtered-precision-host-verified-results.txt",
+      "sha256": "1b2841933d6110f30ea5bdf8f1d03b1d6b746a302944bc79e6bc859c1b687ee0",
+      "rows": [
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 1.08303,
+          "output_max": 0.249996,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 1.99997,
+          "output_max": 0.499992,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 3.99994,
+          "output_max": 0.999985,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 7.99988,
+          "output_max": 1.99997,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 15.9998,
+          "output_max": 3.99994,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1023.98,
+          "output_max": 0.999985,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2047.97,
+          "output_max": 1.99997,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4095.94,
+          "output_max": 3.99994,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8191.88,
+          "output_max": 7.99988,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16383.8,
+          "output_max": 15.9998,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 1.08303,
+          "output_max": 0.249996,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 1.99997,
+          "output_max": 0.499992,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 3.99994,
+          "output_max": 0.999985,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 7.99988,
+          "output_max": 1.99997,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 15.9998,
+          "output_max": 3.99994,
+          "lit": 7.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1023.98,
+          "output_max": 0.999985,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2047.97,
+          "output_max": 1.99997,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4095.94,
+          "output_max": 3.99994,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8191.88,
+          "output_max": 7.99988,
+          "lit": 1024.0
+        },
+        {
+          "scale": 2.0,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16383.8,
+          "output_max": 15.9998,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 1.06248,
+          "output_max": 0.156248,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 1.99973,
+          "output_max": 0.328059,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 3.9372,
+          "output_max": 0.640554,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 7.99915,
+          "output_max": 1.29667,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 15.9983,
+          "output_max": 2.59335,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1023.98,
+          "output_max": 0.999985,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2047.97,
+          "output_max": 1.99997,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4095.94,
+          "output_max": 3.99994,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8191.88,
+          "output_max": 7.99988,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 0.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16383.8,
+          "output_max": 15.9998,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 1.0,
+          "output_mass": 1.06248,
+          "output_max": 0.156248,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 2.0,
+          "output_mass": 1.99973,
+          "output_max": 0.328059,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 4.0,
+          "output_mass": 3.9372,
+          "output_max": 0.640554,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 8.0,
+          "output_mass": 7.99915,
+          "output_max": 1.29667,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 0.0,
+          "input_mass": 16.0,
+          "output_mass": 15.9983,
+          "output_max": 2.59335,
+          "lit": 16.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 1024.0,
+          "output_mass": 1023.98,
+          "output_max": 0.999985,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 2048.0,
+          "output_mass": 2047.97,
+          "output_max": 1.99997,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 4096.0,
+          "output_mass": 4095.94,
+          "output_max": 3.99994,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 8192.0,
+          "output_mass": 8191.88,
+          "output_max": 7.99988,
+          "lit": 1024.0
+        },
+        {
+          "scale": 3.2476,
+          "dither": 1.0,
+          "constant": 1.0,
+          "input_mass": 16384.0,
+          "output_mass": 16383.8,
+          "output_max": 15.9998,
+          "lit": 1024.0
+        }
+      ]
+    }
+  ],
+  "observed": "8bit target erasesisolated1LSB atbothscales and2LSB atnative; constants survive. FP16 retainsfractional signal. Some amplitudes gainmass; not universal darkbias.",
+  "limitations": "One hostdriver,32x32 interiorimpulses/constants. Hardware sampling andhalf precision retain numericalerror. No established magnitude ofcontribution toAcid/Fed/astral losses."
+}

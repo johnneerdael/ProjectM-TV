@@ -1,0 +1,59 @@
+{
+  "status": "finished",
+  "started_unix_seconds": 1791138766.001606,
+  "device_serial": "emulator-5582",
+  "launch_sha256": "482e8d121c0e319b5ca5f2a7b0d416366a727d0415a9a36ae58ed067323c7297",
+  "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/fp16-driver-probe/app/build/outputs/apk/release/app-release.apk",
+  "apk_sha256": "29ab52b88907b57fad851a33b92cc39628554a2932168bbbb7a50d47b913004c",
+  "package": "nl.neerdael.projectmtv.fp16driverprobe",
+  "component": "nl.neerdael.projectmtv.fp16driverprobe/nl.neerdael.projectmtv.fp16driverprobe.Fp16DriverProbeInstrumentation",
+  "driver_only": true,
+  "source_sha256": {
+    "app/src/main/java/nl/neerdael/projectmtv/fp16driverprobe/Fp16DriverProbeInstrumentation.java": "ea2a17df7972657a2c3ee745629b4afd2655633a49df4ee9b6346a73ec047f15",
+    "app/src/main/AndroidManifest.xml": "06ffe8428d63c235d36ae030da5520a6bbf1195799c00c4545d8b2eaf16a96e9",
+    "app/build.gradle": "208a1c0f16db9033a8602de3801db918b92767f9631c146bd2b748a650113bf1",
+    "build.gradle": "9c150f6618daae72ece6ec986b0134927740570dbf2c88ec2a6a7fd2a9a17d28",
+    "settings.gradle": "a2c7839e2c477a51eee105c85e3f8517fb2e62a90fa9cf645a35dcd664b08ff9",
+    "run_probe_once.py": "347bb2441c665f3cb177daac89b470f2fa3e56ed4b5f76eace59ef06a3f6b1e3"
+  },
+  "owned_emulator": {
+    "pid": 15197,
+    "serial": "emulator-5582",
+    "command": [
+      "/Users/jneerdael/Library/Android/sdk/emulator/emulator",
+      "-avd",
+      "ProjectM_Native4K_API34_20261004",
+      "-port",
+      "5582",
+      "-gpu",
+      "host",
+      "-no-window",
+      "-no-audio",
+      "-no-snapshot",
+      "-no-boot-anim",
+      "-cores",
+      "2",
+      "-memory",
+      "2048",
+      "-feature",
+      "-Vulkan"
+    ],
+    "avd": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/emulator/avds/ProjectM_Native4K_API34_20261004.avd",
+    "purpose": "targeted native4k baseline29/candidate30 only; no full baseline scan",
+    "environment": {
+      "ANDROID_AVD_HOME": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/emulator/avds",
+      "ANDROID_EMULATOR_HOME": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/emulator/emulator-home",
+      "ANDROID_USER_HOME": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/emulator/android-home"
+    },
+    "restarted_unix_seconds": 1791124253.3355489,
+    "graphics_config": {
+      "hw.gpu.enabled": "yes",
+      "hw.gpu.mode": "host",
+      "hw.ramSize": "2048",
+      "Vulkan": "disabled to use native host OpenGL"
+    }
+  },
+  "result_status": "success",
+  "result_sha256": "0c699728e0c3b07cd5814b6d99611760fab633379a27ba19a27325c31ce9df37",
+  "finished_unix_seconds": 1791138766.476585
+}

@@ -1,0 +1,108 @@
+{
+  "original_patch_sha256": "aee139f8a33d4b495ac31a313a090bd7f42ff6be4dfbe99c376720a1d873daa3",
+  "regenerated_patch_sha256": "f7d11eca0c311be9586dc76235efb886d448d533ef42965f45bf2f8192a2093a",
+  "shipping_patch_sha256": "f7d11eca0c311be9586dc76235efb886d448d533ef42965f45bf2f8192a2093a",
+  "source": "own isolated baseline29 and candidate30 source trees; original30 physically reversed/reapplied before RED",
+  "apply_check": "passed against baseline29",
+  "physical_apply": "passed",
+  "reverse_check": "passed",
+  "reapplied_changed_sources_exact": true,
+  "changed_files": {
+    "src/libprojectM/MilkdropPreset/CMakeLists.txt": {
+      "baseline29_sha256": "e9bc15df638e45188f270e75ac2a8f28795f05d7058c30fb383b83107e55a883",
+      "candidate30_sha256": "4d33d736d205864b479785e583acd91dff89c870b52e107d7e965d2467a0819e",
+      "reapplied30_sha256": "4d33d736d205864b479785e583acd91dff89c870b52e107d7e965d2467a0819e"
+    },
+    "src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp": {
+      "baseline29_sha256": null,
+      "candidate30_sha256": "6b6c25926d8a8a0aa14bf7434b7294a3bdab0cecf1d27a7fb9ef8130c511cc78",
+      "reapplied30_sha256": "6b6c25926d8a8a0aa14bf7434b7294a3bdab0cecf1d27a7fb9ef8130c511cc78"
+    },
+    "src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp": {
+      "baseline29_sha256": null,
+      "candidate30_sha256": "986899cf4f14a023387377303fa1da912c7a60d96a88be892cdeae9d64e026ae",
+      "reapplied30_sha256": "986899cf4f14a023387377303fa1da912c7a60d96a88be892cdeae9d64e026ae"
+    },
+    "src/libprojectM/MilkdropPreset/MilkdropPreset.cpp": {
+      "baseline29_sha256": "0268312d96a777368661bb9841c0204a49b11272263239514872a44667b11eda",
+      "candidate30_sha256": "89682405d1c54635b1f86394fd5c06a0f199baad24970bde57ad1d04f449da73",
+      "reapplied30_sha256": "89682405d1c54635b1f86394fd5c06a0f199baad24970bde57ad1d04f449da73"
+    },
+    "src/libprojectM/MilkdropPreset/MilkdropPreset.hpp": {
+      "baseline29_sha256": "4e0efdce3773a2f3e75024f14d3bbae94798746de0a1a4eca6d8cd06b131827a",
+      "candidate30_sha256": "ff79c9a27a1aa8973cb57dc3977efef5d2d4ca0b5f46cb94a49befe5c9d8eeb8",
+      "reapplied30_sha256": "ff79c9a27a1aa8973cb57dc3977efef5d2d4ca0b5f46cb94a49befe5c9d8eeb8"
+    },
+    "src/libprojectM/MilkdropPreset/MilkdropShader.cpp": {
+      "baseline29_sha256": "2fc2dd1c53539c72533e2daa5195590a234181dea23c5b4c9c55120d0bafbc4e",
+      "candidate30_sha256": "6e99fcee91cd9ae92da71a449ca7069c10deff862360ab08241c3dc8053e0ce4",
+      "reapplied30_sha256": "6e99fcee91cd9ae92da71a449ca7069c10deff862360ab08241c3dc8053e0ce4"
+    },
+    "src/libprojectM/MilkdropPreset/MilkdropShader.hpp": {
+      "baseline29_sha256": "61622de25977a646e4cdd71651264c487f5c1f233ca2865d14cb1692c803e330",
+      "candidate30_sha256": "20eac4a487e27b36915333280eca9dff68630a1e3a726b21555cffd9ba090405",
+      "reapplied30_sha256": "20eac4a487e27b36915333280eca9dff68630a1e3a726b21555cffd9ba090405"
+    },
+    "src/libprojectM/MilkdropPreset/MotionVectors.cpp": {
+      "baseline29_sha256": "02f9253bad40edf3a7d1840b853485d91610b4e6916b091dae56414db8a8771c",
+      "candidate30_sha256": "582d91c4d424cd4073f0801eedc29e08b78b5786e19071baa8df7af32176339a",
+      "reapplied30_sha256": "582d91c4d424cd4073f0801eedc29e08b78b5786e19071baa8df7af32176339a"
+    },
+    "src/libprojectM/MilkdropPreset/MotionVectors.hpp": {
+      "baseline29_sha256": "f8ade73b8bf35395375f3b601cd334ffe90507a8aedb015eef7dc5e96f1da30f",
+      "candidate30_sha256": "3659a20f01dbd42be68f3c916f629924521de857ab2ada095c43ea6156158e42",
+      "reapplied30_sha256": "3659a20f01dbd42be68f3c916f629924521de857ab2ada095c43ea6156158e42"
+    },
+    "src/libprojectM/MilkdropPreset/PerPixelMesh.cpp": {
+      "baseline29_sha256": "e5546369c36911ea4220aa3e40e67e614e6ba7e0bd98c8a9401518e4f3628340",
+      "candidate30_sha256": "3275d90a0776850b43146705592615a0cab7cc08322f86349cd1032160268991",
+      "reapplied30_sha256": "3275d90a0776850b43146705592615a0cab7cc08322f86349cd1032160268991"
+    },
+    "src/libprojectM/MilkdropPreset/PerPixelMesh.hpp": {
+      "baseline29_sha256": "5cc168d1eff46b73b3daee025dec9d764845266a8a336aed3f24121fe4904b84",
+      "candidate30_sha256": "1d75d61e32b648a0ca08010d5023d6a3307a411580bc102410bce4e0707dd4f5",
+      "reapplied30_sha256": "1d75d61e32b648a0ca08010d5023d6a3307a411580bc102410bce4e0707dd4f5"
+    },
+    "src/libprojectM/MilkdropPreset/PresetState.hpp": {
+      "baseline29_sha256": "8970e631401143f3161317a5310664c61247d537a9efe15a9f77c0ba3736ce34",
+      "candidate30_sha256": "3cf728e7f83a33c71a8690794df72b51911cf67489ce0dc7df6f35de49cbafc3",
+      "reapplied30_sha256": "3cf728e7f83a33c71a8690794df72b51911cf67489ce0dc7df6f35de49cbafc3"
+    },
+    "tests/libprojectM/CMakeLists.txt": {
+      "baseline29_sha256": "1e0a6424126585cbd8443e945390124f644521436ea62a6331d2b66df1b9d9f0",
+      "candidate30_sha256": "3fc043d763870700221e35216ed4693fc955c1163b565f19cedb1ad654cb5f85",
+      "reapplied30_sha256": "3fc043d763870700221e35216ed4693fc955c1163b565f19cedb1ad654cb5f85"
+    },
+    "tests/libprojectM/FeedbackDiffusionTest.cpp": {
+      "baseline29_sha256": null,
+      "candidate30_sha256": "539bb754ddbe1428ca099422ae6ce792d80a6ee92d892d52f0df80b334e271e1",
+      "reapplied30_sha256": "539bb754ddbe1428ca099422ae6ce792d80a6ee92d892d52f0df80b334e271e1"
+    },
+    "tests/libprojectM/WarpSamplerTest.cpp": {
+      "baseline29_sha256": "7673908b81c94b7537a76ff6777e42f5cbf6243c02b45204249fc7bceab55667",
+      "candidate30_sha256": "d0f3c30e7b43777c5dbf8e7433df17aa194f6395f61490b666693f0914b6864e",
+      "reapplied30_sha256": "d0f3c30e7b43777c5dbf8e7433df17aa194f6395f61490b666693f0914b6864e"
+    }
+  },
+  "red_tests": {
+    "failures": [
+      "WarpSamplerTest.PackedPointStateSurvivesMixedFeedbackAboveReference",
+      "WarpSamplerTest.MixedFeedbackKeepsPointStateAndFiltersBilinearRead"
+    ],
+    "inactive_control": "passed",
+    "log_sha256": "696cd025b01ee9b1340c69b5b85aa1768db0fb2834a2f9a1a9cb1544be5e4af8"
+  },
+  "green_suite": {
+    "passed": 193,
+    "failed": 0,
+    "suite_log_sha256": "a8eef70ed0a51d8143f0e27f2de42c929bd7f6224d1d3499132b59da09467b13",
+    "full_unit_output_sha256": "e9c27754184129731992a42cb0b7ddefff396d7bb737476b1103fc953e490090"
+  },
+  "host_only_gl_shim": {
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/docs/superpowers/evidence/quad-follow-up-verification/core-corpus/diagnostic-presets/per-frame-fallback/host-gl-shim.h",
+    "scope": "host GL invalidation hint only; no Android source adaptation"
+  },
+  "runtime_core_aar": "not built or measured for production change; parent owns actual-core validation",
+  "device_jobs_launched": false,
+  "commits_or_staging": false
+}

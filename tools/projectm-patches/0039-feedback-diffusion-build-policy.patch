@@ -1,0 +1,21 @@
+Subject: [PATCH] FeedbackDiffusion: compile-time opt-out for the capped core
+
+Keep line/reference sizing and all existing engine fixes while disabling only feedback
+diffusion in the 1330-capped AAR. Native builds retain the existing implementation.
+Core CMake supplies PROJECTMTV_DISABLE_FEEDBACK_DIFFUSION for the capped policy.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
+--- a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
++++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
+@@ -201,6 +201,10 @@
+ 
+ FeedbackDiffusion::FeedbackDiffusion()
+ {
++#ifdef PROJECTMTV_DISABLE_FEEDBACK_DIFFUSION
++    // The capped core preserves its pre-compensation feedback and skips the optional shader.
++    return;
++#endif
+     std::string vertexShader(static_cast<const char*>(ShaderVersion));
+     std::string fragmentShader(static_cast<const char*>(ShaderVersion));
+     vertexShader.append(static_cast<const char*>(VertexShader));

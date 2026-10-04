@@ -23,6 +23,7 @@
 // or low-memory devices and switches to lightweight when a classic blend runs visibly slower.
 
 #include <jni.h>
+#include "render_policy.h"
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #include <android/log.h>
@@ -1220,13 +1221,10 @@ bool UseLightweight() {
 // Sets projectM's window size to the surface size times `scale`. A change keeps the frames of the
 // presets (scaled, projectM patch 0003), so it can happen at any frame.
 void ApplyRenderScale(float scale) {
-    int width = g_engine.width;
-    int height = g_engine.height;
-    if (!g_engine.pm || width <= 0 || height <= 0) return;
-    if (scale < 1.f) {
-        width = std::max(2, static_cast<int>(std::lround(width * scale)) & ~1);
-        height = std::max(2, static_cast<int>(std::lround(height * scale)) & ~1);
-    }
+    if (!g_engine.pm || g_engine.width <= 0 || g_engine.height <= 0) return;
+    const auto dimensions = projectmtv::RenderDimensionsFor(g_engine.width, g_engine.height, scale);
+    const int width = dimensions.width;
+    const int height = dimensions.height;
     if (width == g_engine.renderWidth && height == g_engine.renderHeight) return;
     projectm_set_window_size(g_engine.pm, width, height);
     g_engine.renderWidth = width;
@@ -1249,7 +1247,7 @@ bool EnsureScaledTarget(int width, int height) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     g_engine.scaledWidth = complete ? width : 0;
     g_engine.scaledHeight = complete ? height : 0;
-    if (!complete) LOGW("Scaled render target %dx%d unavailable: rendering at full size", width, height);
+    if (!complete) LOGW("Scaled render target %dx%d unavailable", width, height);
     return complete;
 }
 
@@ -1271,6 +1269,10 @@ void RenderPresetFrame() {
     bool scaled = width != g_engine.width || height != g_engine.height;
     if (scaled && !EnsureScaledTarget(width, height)) {
         ApplyRenderScale(1.f);
+        if (g_engine.renderWidth != g_engine.width || g_engine.renderHeight != g_engine.height) {
+            LOGW("Capped render target unavailable: skipping frame without exceeding 1330");
+            return;
+        }
         scaled = false;
     }
     if (!scaled) {

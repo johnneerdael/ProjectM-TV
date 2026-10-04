@@ -1,10 +1,14 @@
 // Exercise the patched engine itself, including the evaluator and real GL drawing.
+#include "gl_context.hpp"
 #include <HLSLParser.h>
 #include <HLSLTree.h>
 #include <MilkdropPreset/CustomWaveform.hpp>
 #include <MilkdropPreset/PerFrameContext.hpp>
 #include <MilkdropPreset/PresetFileParser.hpp>
 #include <MilkdropPreset/PresetState.hpp>
+#include <MilkdropPreset/MilkdropShader.hpp>
+#include <ProjectM.hpp>
+#include <projectM-opengl.h>
 
 #ifdef __APPLE__
 #include <OpenGL/OpenGL.h>
@@ -14,6 +18,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -45,66 +50,109 @@ static void TestMacros()
     }
 }
 
-class GLContext
+static void TestShaderRendering()
 {
-public:
-    GLContext()
+    GLContext gl;
+    GLuint framebuffer, texture;
+    glGenFramebuffers(1, &framebuffer);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+    Check(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "incomplete framebuffer");
+    struct Case { const char* name; const char* shader; int red; };
+    for (const auto& test : {
+        Case{"control", "shader_body { ret = .25; }", 64},
+        Case{"sample", "shader_body { float3 sample = .5; ret = sample*sample*sample; }", 32},
+        Case{"sample-shadow", "float sample = .1;\nshader_body { float sample = .25; { float sample = .5; sample *= .5; } ret = sample; }", 64},
+        Case{"macro-declaration", "#define decl float3 value;\ndecl\nshader_body { value = .25; ret = value; }", 64},
+        Case{"macro-statement", "#define texx float3(.25,.5,.75);\nshader_body { float3 add=texx; ret = add; }", 64},
+        Case{"macro-precedence", "#define sum .1+.2\nshader_body { ret = sum*2; }", 128},
+        Case{"macro-authored-parentheses", "#define sum (.1+.2)\nshader_body { ret = sum*2; }", 153},
+        Case{"macro-function", "#define add(x) x+.2\nshader_body { ret = add(.1)*2; }", 128},
+        Case{"postfix", "shader_body { ret = (float3(.1,.2,.3)*2).zyx; }", 153},
+        Case{"postfix-precedence", "shader_body { ret = .1+(float3(.1,.2,.3)*2).zyx*.5; }", 102},
+        Case{"postfix-nested", "shader_body { ret = (((float3(.1,.2,.3)*2))).zyx.xyy; }", 153},
+        Case{"parenthesized-binary", "shader_body { ret = (float3(.1,.2,.3))*2+.1; }", 77}})
     {
-#ifdef __APPLE__
-        CGLPixelFormatAttribute attributes[] = {
-            kCGLPFAOpenGLProfile, static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
-            static_cast<CGLPixelFormatAttribute>(0)};
-        CGLPixelFormatObj format = nullptr;
-        GLint count = 0;
-        Check(CGLChoosePixelFormat(attributes, &format, &count) == kCGLNoError && format,
-              "could not choose a GL pixel format");
-        const auto error = CGLCreateContext(format, nullptr, &context);
-        CGLDestroyPixelFormat(format);
-        Check(error == kCGLNoError, "could not create a GL context");
-        Check(CGLSetCurrentContext(context) == kCGLNoError, "could not make GL context current");
-#else
-        display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-        Check(eglInitialize(display, nullptr, nullptr), "could not initialize EGL");
-        Check(eglBindAPI(EGL_OPENGL_ES_API), "could not bind GLES");
-        const EGLint attributes[] = {EGL_SURFACE_TYPE, EGL_PBUFFER_BIT,
-                                     EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT,
-                                     EGL_RED_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_BLUE_SIZE, 8, EGL_NONE};
-        EGLConfig config;
-        EGLint count;
-        Check(eglChooseConfig(display, attributes, &config, 1, &count) && count,
-              "could not choose a GLES3 config");
-        const EGLint surfaceAttributes[] = {EGL_WIDTH, 16, EGL_HEIGHT, 16, EGL_NONE};
-        surface = eglCreatePbufferSurface(display, config, surfaceAttributes);
-        const EGLint contextAttributes[] = {EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE};
-        context = eglCreateContext(display, config, EGL_NO_CONTEXT, contextAttributes);
-        Check(surface != EGL_NO_SURFACE && context != EGL_NO_CONTEXT,
-              "could not create a GLES3 context");
-        Check(eglMakeCurrent(display, surface, surface, context), "could not make GLES current");
-#endif
+        std::string preset = "MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=3\nPSVERSION_COMP=3\n"
+            "[preset00]\nfDecay=1\nfGammaAdj=1\nfWaveAlpha=0\nfVideoEchoAlpha=0\n"
+            "fShader=0\nzoom=1\nwarp=0\nrot=0\nwarp_1=`shader_body { ret = 0; }\n";
+        std::istringstream lines(test.shader);
+        std::string line;
+        for (int number = 1; std::getline(lines, line); ++number)
+            preset += "comp_" + std::to_string(number) + "=`" + line + "\n";
+        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+        glClearColor(0, 0, 0, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
+        libprojectM::ProjectM engine;
+        engine.SetWindowSize(16, 16);
+        engine.SetPresetLocked(true);
+        engine.SetHardCutEnabled(false);
+        engine.SetEasterEgg(0);
+        std::istringstream data(preset);
+        engine.LoadPresetData(data, false);
+        for (int frame = 0; frame < 2; ++frame) engine.RenderFrame(framebuffer);
+        unsigned char pixel[4]{};
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
+        glReadBuffer(GL_COLOR_ATTACHMENT0);
+        glReadPixels(8, 8, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
+        Check(glGetError() == GL_NO_ERROR, "shader render GL error");
+        std::cout << test.name << " red=" << int(pixel[0]) << " expected=" << test.red << std::endl;
+        Check(std::abs(int(pixel[0]) - test.red) <= 2, "authored shader result mismatch (including fallback)");
     }
+    glDeleteTextures(1, &texture);
+    glDeleteFramebuffers(1, &framebuffer);
+}
 
-    ~GLContext()
+static void TestParserPresets(const std::string& assets, const std::string& manifest)
+{
+    GLContext gl;
+    using namespace libprojectM;
+    Renderer::TextureManager textures({assets + "/textures"});
+    auto mainTexture = std::make_shared<Renderer::Texture>("main", 16, 16, false);
+    std::ifstream list(manifest);
+    Check(list.good(), "cannot open parser preset manifest");
+    std::string line;
+    int count = 0;
+    int failures = 0;
+    while (std::getline(list, line))
     {
-#ifdef __APPLE__
-        CGLSetCurrentContext(nullptr);
-        CGLDestroyContext(context);
-#else
-        eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-        eglDestroyContext(display, context);
-        eglDestroySurface(display, surface);
-        eglTerminate(display);
-#endif
+        const auto firstTab = line.find('\t');
+        const auto lastTab = line.find('\t', firstTab + 1);
+        Check(firstTab != std::string::npos && lastTab != std::string::npos, "invalid preset manifest");
+        const std::string stage = line.substr(firstTab + 1, lastTab - firstTab - 1);
+        Check(stage == "warp" || stage == "composite", "invalid preset stage");
+        const std::string filename = line.substr(lastTab + 1);
+        MilkdropPreset::PresetFileParser preset;
+        Check(preset.Read(assets + "/presets/" + filename), "cannot read witness preset");
+        MilkdropPreset::PresetState state;
+        state.renderContext.viewportSizeX = 16;
+        state.renderContext.viewportSizeY = 16;
+        state.renderContext.textureManager = &textures;
+        state.mainTexture = mainTexture;
+        MilkdropPreset::MilkdropShader shader(stage == "warp"
+            ? MilkdropPreset::MilkdropShader::ShaderType::WarpShader
+            : MilkdropPreset::MilkdropShader::ShaderType::CompositeShader);
+        // Invoke the real shader compiler directly: exceptions are failures,
+        // rather than successful preset loads that silently choose fallback.
+        try
+        {
+            shader.LoadCode(preset.GetCode(stage == "warp" ? "warp_" : "comp_"));
+            shader.LoadTexturesAndCompile(state);
+            std::cout << "custom shader compiled: " << filename << std::endl;
+        }
+        catch (const std::exception& error)
+        {
+            std::cout << "custom shader rejected: " << filename << ": " << error.what() << std::endl;
+            ++failures;
+        }
+        ++count;
     }
-
-private:
-#ifdef __APPLE__
-    CGLContextObj context = nullptr;
-#else
-    EGLDisplay display = EGL_NO_DISPLAY;
-    EGLSurface surface = EGL_NO_SURFACE;
-    EGLContext context = EGL_NO_CONTEXT;
-#endif
-};
+    Check(count == 16, "expected exactly 16 unchanged witness presets");
+    Check(failures == 0, "original shader rejected by production compiler");
+}
 
 static void TestWaveforms()
 {
@@ -179,9 +227,11 @@ int main(int argc, char** argv)
 {
     try
     {
-        Check(argc == 2, "expected macro or waveform");
+        Check(argc >= 2, "expected test mode");
         const std::string mode(argv[1]);
         if (mode == "macro") TestMacros();
+        else if (mode == "shader-render") TestShaderRendering();
+        else if (mode == "parser-presets" && argc == 4) TestParserPresets(argv[2], argv[3]);
         else if (mode == "waveform") TestWaveforms();
         else throw std::runtime_error("unknown test mode");
         std::cout << mode << " regressions passed\n";

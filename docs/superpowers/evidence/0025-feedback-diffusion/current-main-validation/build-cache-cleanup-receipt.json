@@ -1,0 +1,789 @@
+{
+  "timestamp": 1791143551.626194,
+  "removed": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 95942397,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/.gradle",
+      "logical_bytes": 24358594,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 247170545,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 97578325,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/.gradle",
+      "logical_bytes": 24870694,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 247581251,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 94673142,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/.gradle",
+      "logical_bytes": 24603291,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 246932356,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 95992898,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/.gradle",
+      "logical_bytes": 24664064,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 247227900,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 95851671,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/.gradle",
+      "logical_bytes": 24078224,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 247095862,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 97543701,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/.gradle",
+      "logical_bytes": 24732402,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 247546677,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 96306201,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/.gradle",
+      "logical_bytes": 25152941,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 247526204,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx",
+      "logical_bytes": 97669254,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/.gradle",
+      "logical_bytes": 25263003,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/corpus-app/build",
+      "logical_bytes": 247830929,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx",
+      "logical_bytes": 96355765,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/.gradle",
+      "logical_bytes": 25323638,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/corpus-app/build",
+      "logical_bytes": 247579271,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx",
+      "logical_bytes": 97719267,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/.gradle",
+      "logical_bytes": 25420837,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/corpus-app/build",
+      "logical_bytes": 247884406,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx",
+      "logical_bytes": 96344461,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/.gradle",
+      "logical_bytes": 25286587,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/corpus-app/build",
+      "logical_bytes": 247571172,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx",
+      "logical_bytes": 97708018,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/.gradle",
+      "logical_bytes": 25360179,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/corpus-app/build",
+      "logical_bytes": 247876199,
+      "scope": "rebuildable inactive compiler/cache/app-intermediate output; AAR/APK/source/results retained"
+    }
+  ],
+  "retained_compile_provenance": [
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "2c021328b8fb011b6bbf5e0517e64fe07216c6ee936a1b237a47a3e5ce915c10"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "47ceef7f9c1bfbc75270b8be9030d6180e65d71a55f928a000cac04cdc706aab"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "0e8b9343c513daf44b9855dbafb14ae7a8cb5ad5d9597aedf33e2a40b42e3824"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "6c3fc3de67af9f304eab0a1828487a54c2453069d99c9b8c1f1b99064eee2940"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "29993645ca23fe4cb864234199fcbe8f3bebdae65e90e4bad922226e79bf9c1c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "c8d2a70e2f2831111646f5d8fefd1e7bc9d53d52dbe9dedf497f7d03e51a2a1d"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "186ca37abfe2a5e4ff1f9794248f397849f8daa4684d9d88611fb758ad5a41dd"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "14a9a442322a908d40814951d8536acaa045b7d35cb1ee04f2e0538a6a6e6291"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "2c021328b8fb011b6bbf5e0517e64fe07216c6ee936a1b237a47a3e5ce915c10"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "6c3fc3de67af9f304eab0a1828487a54c2453069d99c9b8c1f1b99064eee2940"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "0721b7dadce33ca57e1f3036121e5155d7102318973e63cfa8d5ba569f5c6703"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "0101b5879a45a0f3593e2e3cd3cee1956cd60f55d89e73cfe517c1f44ea08927"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "3b6b3f8aa4a16ea2dac40951334466f05452efb6a752eec1cf0b28c2fa8aa596"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "17b19d63a3982325402480ee7cb38c2daf40c199d711526268e7eb422e700a53"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "c5307cd06e5b5cf7140bf66496a2eab1208cb64d965c07f15a5a89eeb3724da6"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "83acc622fa5639ce951f3dace0a470453936c343d63595bc917650be500c0fa8"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "1e492c79ebbadb15378e9352eda8a1b67794be33951ae1f8b11b9f75b822060f"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "b7450ca842704a410668d58f50ab471f6b48d9268cb5ca567eb7d88e48477467"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "0721b7dadce33ca57e1f3036121e5155d7102318973e63cfa8d5ba569f5c6703"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/filtered-precision-experiment/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "17b19d63a3982325402480ee7cb38c2daf40c199d711526268e7eb422e700a53"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "c1142671eabd9a1ab9864bc3e5450122ad5ee43d5506d1a32f966ece85490b49"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "c065f8c2176bd329a80f2ec708c145b2ad12bf810ad49a0939e4bd84bb4ee28f"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "e68b51075a3fc318c8ad94364dc9eb7146bf25e06252a04bb8bdda71c70c4bd7"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "23264496bb7243fc8e06db152c4c4b7955d310c85a4aed85ca3cce60ac4f38de"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "a34421cb65ce803c2379f65fa256cc82c79fd2ee9adfa50439811a8c21d63ad0"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "e9877ca17f5762e925039a55f39bcced0860e82c11783b2f4cea954d508509cc"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "fd7dd894352a53f556f8858a77e36496f307b57992ee721e23534582175be9d0"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "7c4e8c50b59adf9a866efb10e3ff2c7598a496859e6aa3d0ecd704946ca198a3"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "c1142671eabd9a1ab9864bc3e5450122ad5ee43d5506d1a32f966ece85490b49"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/classic-reference-control/baseline-0625587f12b9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "23264496bb7243fc8e06db152c4c4b7955d310c85a4aed85ca3cce60ac4f38de"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "df4e6b69b0e527844f23febf72de77e70f35cd1fbaecf247212a10e014c37539"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "ce9993a63156959701368c9a84785683cc9021e6b23afe297b58cdc1cbd72a65"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "d696f6b807fe96b09e9c0190bc1706bcc0d16a91a93f9c499d9602fcd018d231"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "ef89a39267ffea8b470c273c0dadb8cf799ce1f1f7f5299de3d435d3a989aeb1"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "334ef451d8c1603e3eaceb84edb036eb9b515cfce8e07fa000aa29c6d983a5ce"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "2ff2e1ff4ede021db7721b1ce76a6074a029f5c3cb0664a77f1d527da9ee2614"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "f7ca2c5b501dd9af049150525d16a1ab4f7f66438aea969f0d9321c74c620276"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "5f1ffbd2a48ce9f8eefe082de2f2da136dc0dff9635ae1528ca9d1be2213bea9"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "df4e6b69b0e527844f23febf72de77e70f35cd1fbaecf247212a10e014c37539"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/gaussian-kernel-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "ef89a39267ffea8b470c273c0dadb8cf799ce1f1f7f5299de3d435d3a989aeb1"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "e177926c255dd20a462365e168677aca448839af3b00623ff5a17f866b72891a"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "dfe0021a3f3910def0ecb8b40e1250cf072f5a4b087eed6bb485d8c466e40606"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "2b680087d3d287ebce7f857862249ebdb9811c67445d948dd91def30ea302aaa"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "53fd8ab8ca31a508f9bad094ac5520b17553c8fac6ce2b47d86cdf4e44db26a1"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "fe6b71e1b2c4e7f407a97eb6d004b50bf6f52d1dd0f335d7e2f6a0e6a4fa9303"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "c4068521ebf50681fbefb8c7eae30b2859d5d3a5e0d336920694622595b9514b"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "e64bca699df94402baba3d39ab3e8d97744dd1bbed128ca0604d0bc87269b59b"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "16e37627287fde71b0c9a7c43324f54cf0634e85be6da30068dfd6cb04a5ac30"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "e177926c255dd20a462365e168677aca448839af3b00623ff5a17f866b72891a"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/p1-experiment/candidate-790aaa249d3c-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "53fd8ab8ca31a508f9bad094ac5520b17553c8fac6ce2b47d86cdf4e44db26a1"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "2ab3e557c6eaa07137bb431a36ca31c7fbb869b50e089d1018aae7972fd1b129"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "4d48c96d01d1ac673ba9cb6ed50e1796aa95ac5d2e829030410d32feb88932fe"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "52e495c650d9c9198e164afa83a73e2365fb7325eee5e818f4012c53409164fb"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "d9db7a87c872812327542d94da6a06e7fee73f202d2d349c326cf2de42f9c071"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "f6efe98e7202b5e20463e03cc977c9ab4e2f23cd73287bfb393eb8a5da98027e"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "59a973ec9093e9faa9f11ff33b537162d91b1fe440e86321216c651238d1ba9b"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "43c4c85da4eca822a8dba1a053208da2e557c71d4d515596ddafed5e1389ce54"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "d49165119f2293b7158a6b972c594517bd78118e7862cf23c99d5d13fa02363c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "2ab3e557c6eaa07137bb431a36ca31c7fbb869b50e089d1018aae7972fd1b129"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/current-main-mrt-candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "d9db7a87c872812327542d94da6a06e7fee73f202d2d349c326cf2de42f9c071"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "263a5e1d81068df42632d34b95b4b1f31bf47ea53aa5cc5c9efcf3b414a3bc29"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "9e4197190b27c8ba1322677594f6a8f61f257e3083608aca76144b4ad25c3446"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "75c0a4081c803c1d91acb738cdde79bd8675731e9e97b498e64e192a6a81ff2f"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "896a77442d6390b11b399eb9c1e70e8118b73db1250ca0b1d0f51a8a87ba148c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "17e3313138f2ec162f3b7629261eb6044efd2719c7964c736962052644d7c6d9"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "31cfc58a3b033825b962a1ad86ad543c4038548731f9b979fa5121a743d8aec8"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "d9a3c6b59b3c37d46242a4312c5c82573328ab9f4bec4c26263fc6a6d23ee2fc"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "2cba8cdf7ceb04577cbad5a4c36ccab9121ca09e99122e6d01af953300eda104"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "263a5e1d81068df42632d34b95b4b1f31bf47ea53aa5cc5c9efcf3b414a3bc29"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/baseline/baseline-f435dd7c58ea-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "896a77442d6390b11b399eb9c1e70e8118b73db1250ca0b1d0f51a8a87ba148c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "75acfd80d95f32599673057aca39681db9d7b23d7d3245854e761882f4d3323c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "af6be11d888c92fc4b61a183a0f6276fa202e68751738d488eac7b8a6d1d397e"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "58ac26b929cecb422c34f04e26b138d5726d0e2e4d387578d38428e4354d8eca"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "e1217e94e4052bdf1882d05670f6a5fb8ecade9e937dbf0261f288a91b75821a"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "1f11588ca5f59d7b300be99c5308e1ae83584ab78edb911b5774556a09d018dc"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "fe079e01eb5372e0fef0281c9052c0a444ab2f9bbfd8e15b9ed195ed7ccdb104"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "fc1e6a99ed1af6cc426d037b2e6587ed62f24e7dcb0fc573f0377e9566853d7f"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "f352589344943993e4857c2bd797d7e123590b4071e9c53b6978fe88417d7005"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "75acfd80d95f32599673057aca39681db9d7b23d7d3245854e761882f4d3323c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-actual-core-main35-mrt36/candidate/candidate-1b2c266331c9-0b43830171d9/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "e1217e94e4052bdf1882d05670f6a5fb8ecade9e937dbf0261f288a91b75821a"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "f851c718845ce843c653ab19e077c54c5711e67ac8ff4807cfab47be2136abc6"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "d2ef9b01797f3915336ad5531d1072c5a789eb6c0886c345f00ecbbd631cff92"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "c9f1b321555ccb4cc15c516392f27d6457767bc0ae96b5e00ce642d257230bc8"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "9cf0d1baa84333be141cbd6ec1c72f62ea0d17f2b20fe8901cd29038fdcbc0c9"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "b7de7522c5163f4ee04e81daa1e4575ccff80649a608801db4431d0e651a42ca"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "0502a9aed2a0530e437efba1c88b1c12acb97bfac372cbba0ad650d8cb6b829c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "30207ce5e7f165ebd9db71afc07e1641666537935f55eb327db1216c9a597dbe"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "d4388330714ed08c735a6c8bf7931c294fa8cea85c2beaa51b58b86a9047cea8"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "f851c718845ce843c653ab19e077c54c5711e67ac8ff4807cfab47be2136abc6"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/baseline/baseline-f435dd7c58ea-2c65eb230480/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "9cf0d1baa84333be141cbd6ec1c72f62ea0d17f2b20fe8901cd29038fdcbc0c9"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "8a3902961e9776b4e180acf546d1aa24551adec29deae0de6622c2bed0eb2381"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "759337aa62c795979c72016f9a4b90d3813bcd2ee8997c50c9bf7478729d0423"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "c046c4029853a1c2e8b81655330038820831bbfa2553a50a6857320cb80be1f5"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "a066dc2b63125ded11fabf1fa5bfdbe86e74e2a470d2c1e3d71bf11e74432669"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "9ef9c1b387664e0bf28dc8e1916846c34dfe56c766e6d6138d9ec18435adac21"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "b921b331722ca7ac9c1bb9d43ef4fbc49e87ec9e1976f92659a280c7fc1e6c74"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "f52e572165973e2c946202f2779f2cd1ac8de1ee52b1b0a651636555b60ebfaf"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "f0da249406bc6d5f21a9e1d089c73b16c840679cd2970099814bbeb6063e740c"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "8a3902961e9776b4e180acf546d1aa24551adec29deae0de6622c2bed0eb2381"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-capture-main35-mrt36/candidate/candidate-1b2c266331c9-2c65eb230480/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "a066dc2b63125ded11fabf1fa5bfdbe86e74e2a470d2c1e3d71bf11e74432669"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "b60e285fa21564660f44f8f21a7336136315d1ec7bf72ea31175d6ae8cbf074d"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "197325f433b0ff5177666b31936af1f7cbbb5c815f5d4d982343fff92ab04736"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "5715505be944268b9b604d1665f847186ffc0b643d28e4d0e3166b8449e5c55f"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "042086e468603d4364655997e8eb1aedcdc6507a2622cdc8bae18dd849a2ea5a"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "4557a2fb25a04c6ed8a66ed17a7ef17854341d9557e3f6edfaafa193e74fdb56"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "b97909b67e0fcc9d6d154f23aa169b201e18b7898a3e3556b5b87cd1960b467f"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "923c3b185fc1accd782b65a56b335c49657d8257e37034aa9d2045e775dca9ff"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "bc81c14f095388fcd414ba2974462f75bfb03d01f2fef269acb3a2fdde45e045"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "b60e285fa21564660f44f8f21a7336136315d1ec7bf72ea31175d6ae8cbf074d"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/baseline/baseline-f435dd7c58ea-870d839c79e3/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "042086e468603d4364655997e8eb1aedcdc6507a2622cdc8bae18dd849a2ea5a"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/compile_commands.json",
+      "sha256": "cc814e91dab50e821a03878148563bb7f02270fcfd55c20ba5001308cfc17fa3"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/build.ninja",
+      "sha256": "770858ba0cb828cbd33da711144a352e17b91ae7136f053b2bf9dd464f2108e2"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeCache.txt",
+      "sha256": "a8b35692cd2936cb75a96971819f4f90817bf97d87b097a483f3da7d9dcc7898"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/compile_commands.json",
+      "sha256": "97e1ab583b295192833807a5f58d6fed7330ad608cc84d4a6a95f15bd6a887bd"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/build.ninja",
+      "sha256": "c1afa4f464c9a8a7859343f5bb03d5d9c46c1e4530e3df66d8d47770fb017620"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeCache.txt",
+      "sha256": "5f81d6141c6c91da6f9bdcb17b2ae97eca1effab3cce955eb28a26d0eb570a98"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/arm64-v8a/CMakeFiles/CMakeOutput.log",
+      "sha256": "5ab6aa719a88fd2fbaad00712d1dce85f87e3bcd535f97039ffbcfe282584bab"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/RelWithDebInfo/r2g2t2d2/armeabi-v7a/CMakeFiles/CMakeOutput.log",
+      "sha256": "b32b90b263cf715c429108f0ff9821294a53abba8b28e4e7e11b822c81b15657"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/tools/release/armeabi-v7a/compile_commands.json",
+      "sha256": "cc814e91dab50e821a03878148563bb7f02270fcfd55c20ba5001308cfc17fa3"
+    },
+    {
+      "original": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "retained": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/build-cache-cleanup/provenance/f7-stderr-export-main35-mrt36/candidate/candidate-1b2c266331c9-870d839c79e3/repo/core/.cxx/tools/release/arm64-v8a/compile_commands.json",
+      "sha256": "97e1ab583b295192833807a5f58d6fed7330ad608cc84d4a6a95f15bd6a887bd"
+    }
+  ],
+  "logical_bytes_removed": 4428622326,
+  "protected": "All raw measurements, archives, source, APK/AAR outputs, emulator and active main35/classic35/finalmerge scan workers retained; no worktree removed."
+}

@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+    <application android:label="ProjectM core corpus" android:allowBackup="false"
+        android:hasCode="true" android:supportsRtl="false" />
+    <instrumentation android:name="nl.neerdael.projectmtv.corpus.CorpusInstrumentation"
+        android:targetPackage="${corpusApplicationId}"
+        android:functionalTest="true" />
+</manifest>

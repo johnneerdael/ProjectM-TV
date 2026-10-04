@@ -1,0 +1,22 @@
+{
+  "transforms": {
+    "CorpusInstrumentation.java": {
+      "original_sha256": "789a2489d1a5a3627656da8d23c981ab9be196c970e17fc640252aba0c2621e9",
+      "instrumented_sha256": "2e250f2113aee4e024820855b271bc96f436326675af1c14045da35bb327e1bb",
+      "diff_sha256": "aec884a8cd24235e605103e359cefaf02022421e21e474955536872c2c09ff9b"
+    },
+    "LabBridge.java": {
+      "original_sha256": "db17b2e9d92f7114c98d19c9f2565f637313ab2fc8c9dd7a68764f85b8989379",
+      "instrumented_sha256": "f011d57843049365995017fd935db525ab10e1ebe9adc2670a362e81bafbcbcc",
+      "diff_sha256": "c123805630c5e08a237b8ccb030a1e8354b013f784ad9ac91e08754bdb5653d3"
+    },
+    "lab_bridge.cpp": {
+      "original_sha256": "84e82c6d52c05da45ae5ce643431ea501a0415034dfb24eb9c5ab961180d57c9",
+      "instrumented_sha256": "4c731d2003a8e24840a5445571ddba81b5c1906b700e97463ce6ecfa00030981",
+      "diff_sha256": "3dc438fb0dad5ae8f030b4ba4fb83fdf5de539202a9f8c76cbb10c04acd60241"
+    }
+  },
+  "scope": "identical fd2 redirection helper before first core init/constructor; flush/restore in finally; all original GL/readback/clock/seed functions byte-exact; no renderer/math/kernel/preset changes",
+  "required_runtime_diagnostic": "real native-diagnostics.stderr file must contain feedback diffusion disabled plus ShaderException compiler text; JSON metadata excluded",
+  "export": "capture0600 in own app-internalprivateJob; afterrestore Java existing write helper copies bytes into external output for standard verified ADBpull; no root/adbd privilege changes"
+}

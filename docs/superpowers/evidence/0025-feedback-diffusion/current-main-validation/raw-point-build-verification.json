@@ -1,0 +1,44 @@
+{
+  "metadata_sha256": "347291d7f790cf1327033b552b235a7fe36ad9c992c13290d54e3005f572a210",
+  "apk_sha256": "946d4f02ee5e487eb224d2d792a6722938243b666f9f4890df123dc4b0089ad7",
+  "core_sha256": "ee9c8bae0b7987071ef3db8b8ac85b27fc0a5e605ba6e0b4efe4db61c2cf4d04",
+  "actual_aar_elf_identity": true,
+  "adapter_and_modified_source_hashes_verified": true,
+  "reverse_patch_check": "passed",
+  "embedded_identity": "exact",
+  "compiled_units": [
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+      "command_sha256": "98bd5f02b55c5541db6e196c986145c53f03b11896f1e4ba633eab420636ff86"
+    },
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+      "command_sha256": "0a05d0c5cf4b546b3b228d5e07836f428f267cbb318a5c99b4dc29a15fc2fd88"
+    },
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropShader.cpp",
+      "command_sha256": "3041ea4aebe48efbbd1368b75f23176cd088037892d4b8cf5e495b4a7ecdd093"
+    },
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/PresetState.cpp",
+      "command_sha256": "5679beda54ad89586eecb3a69a93e97ddc1d96a49bf62fb8940b131ddd4822c1"
+    },
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+      "command_sha256": "089de139bdddb9e79db82ba67fa4a6632efdbfeac0c0a3690ab7800301e69603"
+    },
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+      "command_sha256": "aac1be8b9c195c5efb8857b771be13d3267464579ec050f6386087e5c53b6a8c"
+    },
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropShader.cpp",
+      "command_sha256": "e489a953ec7f8273591dd7e8e5a20b83ccd1d613af5041d25c753c6baee8bc32"
+    },
+    {
+      "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/raw-point-experiment/candidate-790aaa249d3c-0b43830171d9/repo/third_party/projectm/src/libprojectM/MilkdropPreset/PresetState.cpp",
+      "command_sha256": "71ff897b47d04a9ac6dc2d21aed6ec874e8d8f4074d03df1ecf727a5ac6979c0"
+    }
+  ],
+  "render_jobs_launched": false
+}

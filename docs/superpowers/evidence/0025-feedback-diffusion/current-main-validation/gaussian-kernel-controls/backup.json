@@ -1,0 +1,8 @@
+{
+  "archive": "/Users/jneerdael/Scripts/Projectm-TV-recovery-2026-10-04/current-main-validation/gaussian-kernel-controls.zip",
+  "sha256": "ac50b52e3b697bf505358b85520530c87a2f1705982509bd7727ed10421f9ccc",
+  "bytes": 870156168,
+  "members": 551,
+  "crc_verified": true,
+  "scope": "24 new Gaussian actual-core jobs and adapter/worker controls; reused references preserved in raw-point-controls and raw-point-reuse-closure archives"
+}

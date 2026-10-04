@@ -1,0 +1,22 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+Note: Google Test filter = FeedbackDiffusion.TransparentSourceIsCopiedWithoutMultiplyingAlphaAgain
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from FeedbackDiffusion
+[ RUN      ] FeedbackDiffusion.TransparentSourceIsCopiedWithoutMultiplyingAlphaAgain
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/projectm/tests/libprojectM/FeedbackDiffusionTest.cpp:213: Failure
+The difference between pixel[0] and 128 is 64, which exceeds 1, where
+pixel[0] evaluates to 64,
+128 evaluates to 128, and
+1 evaluates to 1.
+
+[  FAILED  ] FeedbackDiffusion.TransparentSourceIsCopiedWithoutMultiplyingAlphaAgain (62 ms)
+[----------] 1 test from FeedbackDiffusion (62 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (62 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] FeedbackDiffusion.TransparentSourceIsCopiedWithoutMultiplyingAlphaAgain
+
+ 1 FAILED TEST
