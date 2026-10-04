@@ -17,6 +17,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 static void Check(bool ok, const char* message)
 {
@@ -157,7 +158,9 @@ static void TestWaveforms()
         Check(preset.Read(input), "fixture preset did not parse");
         CustomWaveform wave(state);
         wave.Initialize(preset, 0);
-        wave.CompileCodeAndRunInitExpressions(frame);
+        std::vector<std::string> warnings;
+        wave.CompileCodeAndRunInitExpressions(frame, warnings);
+        Check(warnings.empty(), "fixture waveform code did not compile");
         for (auto& value : state.globalRegisters) value = 0;
         wave.Draw(frame);
         Check(state.globalRegisters[0] == test.points, "wrong number of waveform points");

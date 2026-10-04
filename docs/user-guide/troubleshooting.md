@@ -19,6 +19,10 @@ Keep **Resolution** and **Transitions** on Auto, and use the default half-refres
 
 Higher resolutions use more memory. Keep Memory limit enabled, particularly on TVs with 2 GB RAM. After a memory-pressure report, automatic resolution may stay lower for the session.
 
+## Presets skipped by an earlier version
+
+Earlier versions skipped presets whose equation code projectM could not compile, including 27 bundled presets. The app now loads equation code like MilkDrop does, so these presets play. A code block that MilkDrop cannot compile either is left out and the rest of the preset plays, as in MilkDrop. Presets skipped earlier stay on this TV's skip list until you reset it: **Advanced → Skipped presets**. A reset also clears presets skipped as slow or black; the app skips those again if they still are.
+
 ## Fewer than 500 Dance presets are available
 
 The collection packages 500, while the eligible count excludes this TV's skipped presets. **Advanced → Skipped presets** shows the skip count and lets you reset the list. Failed or consistently slow presets can be skipped again on that device.
