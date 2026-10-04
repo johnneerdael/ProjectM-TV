@@ -6,6 +6,7 @@ explicitly supplied after review. Never reuse direct-projectM evidence.
 import argparse
 from collections import Counter
 import fcntl
+import gzip
 import hashlib
 import json
 import os
@@ -156,6 +157,80 @@ def validate_result(job, result, frames, directory):
     return "success"
 
 
+def read_frames(directory):
+    plain = directory / "frames.jsonl"
+    if plain.is_file():
+        with plain.open() as stream:
+            return [json.loads(line) for line in stream if line.strip()]
+    zipped = directory / "frames.jsonl.gz"
+    if zipped.is_file():
+        with gzip.open(zipped, "rt") as stream:
+            return [json.loads(line) for line in stream if line.strip()]
+    return []
+
+
+def compress_trace(path):
+    target = path.with_suffix(path.suffix + ".gz")
+    temporary = target.with_name(target.name + ".tmp")
+    sha, size = hashlib.sha256(), 0
+    with path.open("rb") as source, temporary.open("wb") as output:
+        with gzip.GzipFile(fileobj=output, mode="wb", mtime=0, filename="") as zipped:
+            for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                sha.update(chunk); size += len(chunk); zipped.write(chunk)
+    # Verify the retained gzip before replacing the original evidence.
+    with gzip.open(temporary, "rb") as stream:
+        restored = hashlib.file_digest(stream, "sha256").hexdigest()
+    if restored != sha.hexdigest() or file_hash(path) != sha.hexdigest():
+        raise ValueError("frame trace changed or compression checksum failed")
+    os.replace(temporary, target)
+    path.unlink()
+    return {"path": target.name, "compressed_sha256": file_hash(target),
+            "compressed_bytes": target.stat().st_size, "uncompressed_sha256": sha.hexdigest(),
+            "uncompressed_bytes": size, "encoding": "gzip-lossless-jsonl"}
+
+
+def deduplicate_repeat_pngs(first, second, work):
+    if (first["status"] != "success" or second["status"] != "success"
+            or first.get("selected_native_sha256") != second.get("selected_native_sha256")):
+        return {"unique_thumbnail_files": 0, "shared_bytes": 0, "aliases": []}
+    if any(first.get(field) != second.get(field) for field in ("protocol_sha256", "preset", "role", "measurement_frames")):
+        raise ValueError("repeat thumbnail provenance differs")
+    first_directory, second_directory = work / "jobs" / first["key"], work / "jobs" / second["key"]
+    samples = {item["frame"]: item for item in first["result"]["selected_files"]}
+    aliases, seen = [], set()
+    for item in second["result"]["selected_files"]:
+        previous = samples.get(item["frame"])
+        if not previous or not previous.get("thumbnail_path") or not item.get("thumbnail_path"):
+            continue
+        source = safe_member(first_directory / "output", previous["thumbnail_path"])
+        target = safe_member(second_directory / "output", item["thumbnail_path"])
+        source_sha, target_sha = file_hash(source), file_hash(target)
+        if source_sha != previous["thumbnail_sha256"] or target_sha != item["thumbnail_sha256"]:
+            raise ValueError("repeat thumbnail checksum changed before linking")
+        if source_sha != target_sha:
+            # Equal native pixels do not require equal PNG encodings.
+            continue
+        if target in seen:
+            continue
+        seen.add(target)
+        if not source.samefile(target):
+            temporary = target.with_name(target.name + ".link.tmp")
+            if temporary.exists():
+                temporary.unlink()
+            os.link(source, temporary)
+            os.replace(temporary, target)
+        aliases.append({"path": target.relative_to(second_directory).as_posix(),
+                        "shared_with": source.relative_to(work).as_posix(), "sha256": target_sha,
+                        "bytes": target.stat().st_size})
+    metadata = {"unique_thumbnail_files": len(aliases), "shared_bytes": sum(item["bytes"] for item in aliases),
+                "aliases": aliases}
+    if second.get("thumbnail_deduplication") != metadata:
+        second["thumbnail_deduplication"] = metadata
+        second.pop("payload_sha256", None)
+        save_row(second_directory / "row.json", second)
+    return metadata
+
+
 def read_cached(path, key, protocol_hash):
     if not path.is_file():
         return None
@@ -254,6 +329,8 @@ def load_inputs(work):
     protocol = json.loads((work / "protocol.json").read_text())
     if digest({k: v for k, v in protocol.items() if k != "sha256"}) != protocol["sha256"]:
         raise ValueError("immutable protocol checksum mismatch")
+    if protocol.get("runner_sha256") != file_hash(Path(__file__)):
+        raise ValueError("immutable runner changed; prepare a new protocol/work directory")
     corpus = json.loads((work / "inventory.json").read_text())
     if digest(corpus["presets"]) != corpus["corpus_sha256"] or corpus["corpus_sha256"] != protocol["corpus_sha256"]:
         raise ValueError("immutable corpus checksum mismatch")
@@ -323,8 +400,7 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
         if not (output / "result.json").is_file():
             raise ValueError("missing atomic APK result; instrumentation failed or crashed")
         result = json.loads((output / "result.json").read_text())
-        frames_path = output / "frames.jsonl"
-        frames = [json.loads(line) for line in frames_path.read_text().splitlines()] if frames_path.exists() else []
+        frames = read_frames(output)
         row["status"] = validate_result(job, result, frames, output)
         row.update(result=result, selected_native_sha256={str(item["frame"]): item["sha256"] for item in result.get("selected_files", [])},
                    native_verified=native and row["status"] == "success")
@@ -338,6 +414,10 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
         adb(protocol["device_serial"], "shell", "am", "force-stop", PACKAGE, allow_failure=True)
     except Exception as error:
         row.update(status="failed", error=f"{type(error).__name__}: {error}")
+    trace = directory / "output/frames.jsonl"
+    if trace.is_file():
+        metadata = compress_trace(trace)
+        row["frame_trace"] = dict(metadata, path="output/" + metadata["path"])
     for path in sorted(directory.rglob("*")):
         if path.is_file() and path.name not in ("row.json", "row.json.tmp"):
             row["retained_files"].append({"path": path.relative_to(directory).as_posix(), "bytes": path.stat().st_size, "sha256": file_hash(path)})
@@ -407,6 +487,7 @@ def scan(args, protocol, corpus):
             if STOP.is_set():
                 progress("interrupted"); return
             pair = [run_one(args, protocol, record, role, "selected", repeat, 360) for repeat in (1,2)]
+            deduplicate_repeat_pngs(pair[0], pair[1], args.work)
             statuses = [row["status"] for row in pair]
             status = "success" if statuses == ["success", "success"] else next((s for s in statuses if s != "success"), "failed")
             if status == "success" and pair[0]["selected_native_sha256"] != pair[1]["selected_native_sha256"]:

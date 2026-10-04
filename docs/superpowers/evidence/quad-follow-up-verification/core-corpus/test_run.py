@@ -49,6 +49,61 @@ class HostTests(unittest.TestCase):
         self.result["status"]="failed";self.result["error"]="requested preset rejected"
         self.assertEqual(run.validate_result(self.job,self.result,[],self.work),"failed")
 
+    def test_gzipped_trace_preserves_every_uncompressed_byte(self):
+        path=self.work/"frames.jsonl"
+        raw=b'{"frame":0,"preset_filename":"exact.milk"}\n{"frame":1,"preset_filename":"exact.milk"}\n'
+        path.write_bytes(raw)
+        metadata=run.compress_trace(path)
+        self.assertFalse(path.exists())
+        self.assertEqual(metadata["uncompressed_sha256"],hashlib.sha256(raw).hexdigest())
+        self.assertEqual(metadata["uncompressed_bytes"],len(raw))
+        self.assertEqual(metadata["compressed_sha256"],run.file_hash(self.work/"frames.jsonl.gz"))
+        self.assertEqual([row["frame"] for row in run.read_frames(self.work)], [0,1])
+
+    def make_repeat_rows(self):
+        rows=[]
+        raw=b"lossless thumbnail evidence";sha=hashlib.sha256(raw).hexdigest()
+        for repeat in (1,2):
+            key=f"repeat-{repeat}";directory=self.work/"jobs"/key/"output";directory.mkdir(parents=True)
+            (directory/"thumb.png").write_bytes(raw)
+            row={"key":key,"protocol_sha256":"protocol","status":"success",
+                 "selected_native_sha256":{"120":"native"},
+                 "result":{"selected_files":[{"frame":120,"thumbnail_path":"thumb.png","thumbnail_sha256":sha}]},
+                 "retained_files":[{"path":"output/thumb.png","sha256":sha}]}
+            run.save_row(directory.parent/"row.json",row);rows.append(row)
+        return rows
+
+    def test_repeat_png_hardlink_requires_two_verified_identical_files(self):
+        first,second=self.make_repeat_rows()
+        result=run.deduplicate_repeat_pngs(first,second,self.work)
+        self.assertEqual(result["unique_thumbnail_files"],1)
+        self.assertTrue((self.work/"jobs/repeat-1/output/thumb.png").samefile(self.work/"jobs/repeat-2/output/thumb.png"))
+        self.assertIsNotNone(run.read_cached(self.work/"jobs/repeat-2/row.json","repeat-2","protocol"))
+
+    def test_changed_repeat_png_is_rejected_before_linking(self):
+        first,second=self.make_repeat_rows()
+        (self.work/"jobs/repeat-2/output/thumb.png").write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError,"checksum"):
+            run.deduplicate_repeat_pngs(first,second,self.work)
+        self.assertFalse((self.work/"jobs/repeat-1/output/thumb.png").samefile(self.work/"jobs/repeat-2/output/thumb.png"))
+
+    def test_missing_repeat_png_is_explicit(self):
+        first,second=self.make_repeat_rows()
+        (self.work/"jobs/repeat-1/output/thumb.png").unlink()
+        with self.assertRaisesRegex(ValueError,"missing"):
+            run.deduplicate_repeat_pngs(first,second,self.work)
+
+    def test_repeated_thumbnail_path_and_rerun_do_not_double_count(self):
+        first,second=self.make_repeat_rows()
+        first["result"]["selected_files"].append(dict(first["result"]["selected_files"][0],frame=121))
+        second["result"]["selected_files"].append(dict(second["result"]["selected_files"][0],frame=121))
+        one=run.deduplicate_repeat_pngs(first,second,self.work)
+        before=(self.work/"jobs/repeat-2/row.json").read_bytes()
+        two=run.deduplicate_repeat_pngs(first,second,self.work)
+        self.assertEqual(one,two)
+        self.assertEqual(one["unique_thumbnail_files"],1)
+        self.assertEqual(before,(self.work/"jobs/repeat-2/row.json").read_bytes())
+
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
     def test_allowed_ip_serials_are_accepted(self):
