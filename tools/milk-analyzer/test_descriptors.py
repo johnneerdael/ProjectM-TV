@@ -92,6 +92,32 @@ def test_shifted_textured_field_has_visible_speed_not_coherent_flashing():
     assert result['flashing']['coherent_darkening_transitions']==0
 
 
+def test_sparse_translation_uses_full_viewport_units_and_screen_area():
+    rng=np.random.default_rng(711)
+    patch=rng.uniform(.08,.3,(12,12,1)).astype(np.float32)
+    target=stream()
+    for i in range(6):
+        image=np.zeros((128,256,3),dtype=np.float32)
+        image[58:70,110+i:122+i]=patch
+        assert float((image@np.array([.2126,.7152,.0722])).std()) < .02
+        add(target,image,i/30)
+    result=target.report()['motion']
+    assert result['available_transition_fraction'] > .5
+    assert result['median_speed_viewports_per_second']==pytest.approx(30/256,rel=.25)
+    assert 0 < result['mean_supported_area'] < .03
+    assert result['matched_brightness_change_p95'] < .04
+
+
+def test_sparse_subthreshold_noise_remains_unresolved():
+    rng=np.random.default_rng(713)
+    first=np.zeros((128,256,3),dtype=np.float32)
+    first[58:70,110:122]=rng.uniform(0,.01,(12,12,1))
+    target=stream();add(target,first,0);add(target,np.roll(first,1,axis=1),1/30)
+    result=target.report()['motion']
+    assert result['available_transition_fraction']==0
+    assert result['median_speed_viewports_per_second'] is None
+
+
 def test_motion_compensated_brightness_separates_translation_from_dimming():
     rng=np.random.default_rng(517)
     image=np.repeat(rng.uniform(.25,.85,(64,64,1)).astype(np.float32),3,axis=-1)

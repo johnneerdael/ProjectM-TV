@@ -30,8 +30,21 @@ def visible_motion(old, new, dt, settings):
                darkening_screen_area=None,untracked_brightness_change_screen_area=float(changed.mean()),
                reason='insufficient visible texture or correspondence')
     height,width=old.shape
-    if min(height,width)<16 or min(float(old.std()),float(new.std()))<settings['motion_min_contrast']:
+    if min(height,width)<16:
         return empty
+    if min(float(old.std()),float(new.std()))<settings['motion_min_contrast']:
+        # A small visible object can have strong local contrast even when the
+        # surrounding black viewport dilutes its whole-field standard deviation.
+        # Use a padded union only for the contrast gate. Flow, velocities and
+        # screen areas below still use the original unscaled viewport.
+        ys,xs=np.where(np.maximum(old,new)>=settings['value_floor'])
+        if not len(xs):return empty
+        top,bottom=max(0,int(ys.min())-8),min(height,int(ys.max())+9)
+        left,right=max(0,int(xs.min())-8),min(width,int(xs.max())+9)
+        if min(bottom-top,right-left)<16:return empty
+        local_contrast=min(float(old[top:bottom,left:right].std()),
+                           float(new[top:bottom,left:right].std()))
+        if local_contrast<settings['motion_min_contrast']:return empty
     def normalize(image):
         return np.clip(128+(image-float(image.mean()))/max(float(image.std()),.03)*40,0,255).astype(np.uint8)
     a,b=normalize(old),normalize(new)

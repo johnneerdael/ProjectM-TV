@@ -1,0 +1,94 @@
+{
+  "status": "scored",
+  "preset": "$$$ Royal - Mashup (249).milk",
+  "preset_sha256": "2ff5747efd2c7195f809e61c66367627aafcd7b0489d663dc6967822b34896ac",
+  "basis": "Offline remeasurement of existing unchanged published-core capture; no new rendering",
+  "capture_sha256": "b670dd48621cc3011c96a798c60784f9a4f2c465dfb5aa5f56f52fa3db2e12d6",
+  "descriptor_implementation_sha256": "c74129000cd03b2123def6a4d9ff5308b48ba9a5aaca42fa222068ef87f1fa3f",
+  "features": [
+    0.0,
+    0.14988474547863007,
+    8.95539417396652,
+    0.1428677923977375
+  ],
+  "score": 74.80676144,
+  "labels": [
+    "Normal",
+    "Party"
+  ],
+  "descriptors": {
+    "schema_version": 1,
+    "basis": "Numerical source-predicted display fields; no native visual inspection",
+    "appearance_accuracy_verified": false,
+    "frames_measured": 360,
+    "warmup_frames": 60,
+    "settings": {
+      "hue_bins": 12,
+      "value_floor": 0.05,
+      "saturation_floor": 0.15,
+      "brightness_jump": 0.1,
+      "rgb_jump": 0.1,
+      "coherent_area": 0.2,
+      "motion_min_contrast": 0.02,
+      "flow_consistency_pixels": 0.5,
+      "flow_residual_levels": 20,
+      "motion_support_pixels": 12
+    },
+    "colour": {
+      "mean_luma": 0.00040112751705439424,
+      "mean_contrast": 0.00729489011120879,
+      "mean_saturation": 0.006041331616385529,
+      "mean_coloured_fraction": 0.004465663580246914,
+      "mean_effective_hue_bins": 3.1065726415987998,
+      "temporal_effective_hue_bins": 4.560162729500172
+    },
+    "flashing": {
+      "peak_mean_luma_jump": 0.0008155953255482018,
+      "peak_brightness_change_area": 0.004123263888888889,
+      "peak_paired_luma_area_product": 2.5629297321453732e-06,
+      "peak_brightening_screen_area": 0.003472222222222222,
+      "peak_darkening_screen_area": 0.003146701388888889,
+      "peak_visible_brightening_fraction": 0.5614035087719298,
+      "peak_visible_darkening_fraction": 0.64,
+      "peak_rgb_change_area": 0.021375868055555556,
+      "coherent_brightening_transitions": 0,
+      "coherent_darkening_transitions": 0,
+      "dominant_sampled_brightness_hz": 2.083333333333313,
+      "spectral_peak_fraction": 0.10549691756352814,
+      "frequency_resolution_hz": 0.08333333333333252,
+      "nyquist_hz": 14.999999999999854,
+      "uniform_sampling": true
+    },
+    "motion": {
+      "available_transition_fraction": 0.5403899721448467,
+      "peak_untracked_brightness_change_screen_area": 0.003146701388888889,
+      "matched_brightness_change_p95": 0.1428677923977375,
+      "peak_matched_brightness_change_p95": 0.2108725756406784,
+      "peak_matched_brightening_screen_area": 0.001193576388888889,
+      "peak_matched_darkening_screen_area": 0.0007595486111111111,
+      "mean_supported_area": 0.01126234965635739,
+      "median_speed_viewports_per_second": 0.14988474547863007,
+      "p95_speed_viewports_per_second": 0.6598520249128341,
+      "mean_acceleration_viewports_per_second_squared": 8.95539417396652,
+      "mean_warp_query_displacement": null
+    },
+    "structure": {
+      "fractal": null
+    },
+    "bass_response": null,
+    "mood_assignment": null,
+    "aggregation": {
+      "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+      "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+      "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+      "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+    },
+    "limitations": [
+      "Motion is an estimator with incomplete texture/correspondence support",
+      "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+      "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+      "Fractal structure, causal bass response and audience thresholds need separate evidence"
+    ]
+  },
+  "collection_inclusion": "Diagnostic only; original corpus result and identity preserved"
+}

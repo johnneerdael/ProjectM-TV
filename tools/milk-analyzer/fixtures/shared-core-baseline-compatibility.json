@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "source_branch": "followup/quad-lines",
+  "review_date": "2026-10-04",
+  "purpose": "Compatibility audit of available shared control captures, not full corpus coverage or score export",
+  "rows": [
+    {
+      "job_id": "4351673cdd86f080d05ea25edee0796f9dac4e874404a4253c1f641967267d2d",
+      "preset": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "preset_sha256": "f3cc16483f388d1bb40e39785368b3f8610f56bcf8162a11b6daa3e5a7256e16",
+      "protocol_sha256": "87928d583de171ba6f3c578bf1682d625bd43453516da370642de260f6fc5425",
+      "capture_mode": "selected",
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "adjacent_pairs": 8,
+      "consecutive_triples": 0,
+      "fps": 30,
+      "viewport": [
+        2364,
+        1330
+      ],
+      "result_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/mac-emulator/speed-probe/jobs/4351673cdd86f080d05ea25edee0796f9dac4e874404a4253c1f641967267d2d/output/result.json"
+    },
+    {
+      "job_id": "65f75c803880d9764c6e2630b4e4b0460fb2a77f112c6dbddd57456034b35b9e",
+      "preset": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+      "preset_sha256": "f3cc16483f388d1bb40e39785368b3f8610f56bcf8162a11b6daa3e5a7256e16",
+      "protocol_sha256": "87928d583de171ba6f3c578bf1682d625bd43453516da370642de260f6fc5425",
+      "capture_mode": "selected",
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "adjacent_pairs": 8,
+      "consecutive_triples": 0,
+      "fps": 30,
+      "viewport": [
+        2364,
+        1330
+      ],
+      "result_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/mac-emulator/speed-probe/jobs/65f75c803880d9764c6e2630b4e4b0460fb2a77f112c6dbddd57456034b35b9e/output/result.json"
+    },
+    {
+      "job_id": "a9e90c8ae57a855f0c5efc19b55a7492c537e22a6554905a81b79fb0cc56e7d9",
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "protocol_sha256": "87928d583de171ba6f3c578bf1682d625bd43453516da370642de260f6fc5425",
+      "capture_mode": "selected",
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "adjacent_pairs": 8,
+      "consecutive_triples": 0,
+      "fps": 30,
+      "viewport": [
+        2364,
+        1330
+      ],
+      "result_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/mac-emulator/speed-probe/jobs/a9e90c8ae57a855f0c5efc19b55a7492c537e22a6554905a81b79fb0cc56e7d9/output/result.json"
+    },
+    {
+      "job_id": "af4e075f23244f70063e6e7ab5f67abd2abf1e21461aef6ef8e1fbb74fcad78b",
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "protocol_sha256": "87928d583de171ba6f3c578bf1682d625bd43453516da370642de260f6fc5425",
+      "capture_mode": "selected",
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "adjacent_pairs": 8,
+      "consecutive_triples": 0,
+      "fps": 30,
+      "viewport": [
+        2364,
+        1330
+      ],
+      "result_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/mac-emulator/speed-probe/jobs/af4e075f23244f70063e6e7ab5f67abd2abf1e21461aef6ef8e1fbb74fcad78b/output/result.json"
+    },
+    {
+      "job_id": "c4a46a3a57a4f5cb149fc298026312e003e8c47f6103dd66f918e373439e51b3",
+      "preset": "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "preset_sha256": "c4175d09cdc563337287a1bef32d5cbebf301acbecbf03b1c3a649fb70bb721f",
+      "protocol_sha256": "87928d583de171ba6f3c578bf1682d625bd43453516da370642de260f6fc5425",
+      "capture_mode": "selected",
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "adjacent_pairs": 8,
+      "consecutive_triples": 0,
+      "fps": 30,
+      "viewport": [
+        2364,
+        1330
+      ],
+      "result_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/mac-emulator/speed-probe/jobs/c4a46a3a57a4f5cb149fc298026312e003e8c47f6103dd66f918e373439e51b3/output/result.json"
+    },
+    {
+      "job_id": "d3f3468c1fe6fd5412da88ae1bc67be2f36d9a6bcbded023eb1167c75882d02d",
+      "preset": "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "preset_sha256": "c4175d09cdc563337287a1bef32d5cbebf301acbecbf03b1c3a649fb70bb721f",
+      "protocol_sha256": "87928d583de171ba6f3c578bf1682d625bd43453516da370642de260f6fc5425",
+      "capture_mode": "full",
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "adjacent_pairs": 8,
+      "consecutive_triples": 0,
+      "fps": 30,
+      "viewport": [
+        2364,
+        1330
+      ],
+      "result_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/mac-emulator/speed-probe/jobs/d3f3468c1fe6fd5412da88ae1bc67be2f36d9a6bcbded023eb1167c75882d02d/output/result.json"
+    },
+    {
+      "job_id": "fb203aa4d0b318f50bad8bc9a51eac568db2b906eda08cbbf599168509aabf4f",
+      "preset": "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk",
+      "preset_sha256": "c4175d09cdc563337287a1bef32d5cbebf301acbecbf03b1c3a649fb70bb721f",
+      "protocol_sha256": "87928d583de171ba6f3c578bf1682d625bd43453516da370642de260f6fc5425",
+      "capture_mode": "selected",
+      "frames": [
+        120,
+        121,
+        150,
+        151,
+        180,
+        181,
+        210,
+        211,
+        238,
+        239,
+        300,
+        301,
+        390,
+        391,
+        478,
+        479
+      ],
+      "adjacent_pairs": 8,
+      "consecutive_triples": 0,
+      "fps": 30,
+      "viewport": [
+        2364,
+        1330
+      ],
+      "result_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/mac-emulator/speed-probe/jobs/fb203aa4d0b318f50bad8bc9a51eac568db2b906eda08cbbf599168509aabf4f/output/result.json"
+    }
+  ],
+  "current_model_requirements": [
+    "continuous 30fps display transitions for flashing rates",
+    "consecutive transition velocities for acceleration",
+    "model calibration is not validated for changed viewport, PCM, driver or sparse capture schedule"
+  ],
+  "score_import_approved": false,
+  "reason": "Selected capture pairs contain no consecutive triples for acceleration; unsampled transitions cannot establish continuous flash rate. Different audio, viewport and device require explicit calibration/verification."
+}
