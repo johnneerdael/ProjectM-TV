@@ -1,0 +1,6 @@
+#pragma once
+// Frozen at configure time; the reader binary hash covers all runtime parser inputs.
+inline constexpr const char* kShaderHeader = R"MILK_HEADER(@SHADER_HEADER_TEXT@)MILK_HEADER";
+inline constexpr const char* kShaderHeaderSha = "@SHADER_HEADER_SHA@";
+inline constexpr const char* kEngineIdentity = R"MILK_ENGINE(@ENGINE_IDENTITY_TEXT@)MILK_ENGINE";
+inline constexpr const char* kEngineArchiveSha = "@ENGINE_ARCHIVE_SHA@";

@@ -1,0 +1,131 @@
+cmake_minimum_required(VERSION 3.22)
+project(milk_code_reader LANGUAGES C CXX)
+if(NOT ENGINE_BUILD OR NOT ENGINE_SOURCE)
+    message(FATAL_ERROR "Pass the existing production preset-lab ENGINE_BUILD and ENGINE_SOURCE")
+endif()
+
+add_executable(milk-audio-inputs native_audio.cpp)
+target_compile_features(milk-audio-inputs PRIVATE cxx_std_17)
+target_compile_definitions(milk-audio-inputs PRIVATE PROJECTM_STATIC_DEFINE)
+target_include_directories(milk-audio-inputs PRIVATE
+    "${CMAKE_CURRENT_BINARY_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native"
+    "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/src/api/include"
+    "${ENGINE_SOURCE}/vendor/projectm-eval/projectm-eval"
+    "${ENGINE_BUILD}/projectm/src/api/include")
+target_link_libraries(milk-audio-inputs PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+if(NOT APPLE)
+    find_package(OpenSSL REQUIRED)
+    target_link_libraries(milk-audio-inputs PRIVATE OpenSSL::Crypto)
+endif()
+add_executable(milk-native-reader native_reader.cpp)
+file(READ "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetShaderHeaderGlsl330.inc" SHADER_HEADER_TEXT)
+file(SHA256 "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetShaderHeaderGlsl330.inc" SHADER_HEADER_SHA)
+file(READ "${ENGINE_BUILD}/build-identity.json" ENGINE_IDENTITY_TEXT)
+file(SHA256 "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a" ENGINE_ARCHIVE_SHA)
+configure_file(reader_inputs.hpp.in reader_inputs.hpp @ONLY)
+target_compile_features(milk-native-reader PRIVATE cxx_std_17)
+target_compile_definitions(milk-native-reader PRIVATE PROJECTM_STATIC_DEFINE ENGINE_SOURCE_DIR="${ENGINE_SOURCE}")
+target_include_directories(milk-native-reader PRIVATE
+    "${CMAKE_CURRENT_BINARY_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native"
+    "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/vendor/hlslparser/src"
+    "${ENGINE_SOURCE}/vendor/projectm-eval/projectm-eval" "${ENGINE_SOURCE}/src/api/include"
+    "${ENGINE_BUILD}/projectm/src/api/include")
+target_link_libraries(milk-native-reader PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+if(APPLE)
+    target_link_libraries(milk-native-reader PRIVATE "-framework CoreFoundation")
+endif()
+
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+file(SHA256 "${ENGINE_SOURCE}/vendor/SOIL2/stb_image.h" IMAGE_DECODER_SHA)
+file(SHA256 "${ENGINE_SOURCE}/vendor/SOIL2/SOIL2.c" SOIL_SOURCE_SHA)
+file(SHA256 "${ENGINE_SOURCE}/src/libprojectM/Renderer/TextureManager.cpp" TEXTURE_MANAGER_SHA)
+configure_file(image_inputs.hpp.in image_inputs.hpp @ONLY)
+add_executable(milk-image-inputs native_image.cpp "${ENGINE_SOURCE}/vendor/SOIL2/etc1_utils.c")
+target_compile_features(milk-image-inputs PRIVATE cxx_std_17)
+target_include_directories(milk-image-inputs PRIVATE "${CMAKE_CURRENT_BINARY_DIR}"
+    "${ENGINE_SOURCE}/vendor/SOIL2" "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native")
+execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/generate_random_adapter.py"
+    --engine "${ENGINE_SOURCE}" --output "${CMAKE_CURRENT_BINARY_DIR}/cpu_random_adapter.hpp"
+    COMMAND_ERROR_IS_FATAL ANY)
+add_executable(milk-shader-random native_random.cpp)
+target_compile_features(milk-shader-random PRIVATE cxx_std_17)
+target_include_directories(milk-shader-random PRIVATE "${CMAKE_CURRENT_BINARY_DIR}"
+    "${ENGINE_SOURCE}/vendor" "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native")
+execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/generate_composite_adapter.py"
+    --engine "${ENGINE_SOURCE}" --output "${CMAKE_CURRENT_BINARY_DIR}/cpu_composite_adapter.hpp"
+    COMMAND_ERROR_IS_FATAL ANY)
+add_executable(milk-composite-inputs native_composite.cpp)
+target_compile_features(milk-composite-inputs PRIVATE cxx_std_17)
+target_include_directories(milk-composite-inputs PRIVATE "${CMAKE_CURRENT_BINARY_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native")
+execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/generate_shader_adapter.py"
+    --engine "${ENGINE_SOURCE}" --output "${CMAKE_CURRENT_BINARY_DIR}/cpu_shader_adapter.hpp"
+    COMMAND_ERROR_IS_FATAL ANY)
+add_executable(milk-shader-translate native_shader.cpp)
+target_compile_features(milk-shader-translate PRIVATE cxx_std_17)
+target_compile_definitions(milk-shader-translate PRIVATE PROJECTM_STATIC_DEFINE)
+target_include_directories(milk-shader-translate PRIVATE "${CMAKE_CURRENT_BINARY_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native"
+    "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/vendor/hlslparser/src"
+    "${ENGINE_SOURCE}/src/api/include" "${ENGINE_BUILD}/projectm/src/api/include")
+target_link_libraries(milk-shader-translate PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+if(APPLE)
+    target_link_libraries(milk-shader-translate PRIVATE "-framework CoreFoundation")
+endif()
+
+# Compile unchanged native CPU math bodies, replacing only GL-owning state
+# includes and the namespace. Keep originals and adapted content identities.
+set(CPU_WAVE_DIR "${CMAKE_CURRENT_BINARY_DIR}/cpu-wave-source")
+file(MAKE_DIRECTORY "${CPU_WAVE_DIR}/Waveforms")
+file(GLOB WAVE_INPUTS CONFIGURE_DEPENDS "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Waveforms/*.cpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Waveforms/*.hpp")
+list(APPEND WAVE_INPUTS "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/WaveformMode.hpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Constants.hpp")
+set(WAVE_SOURCE_HASHES "{")
+set(CPU_WAVE_SOURCES)
+foreach(INPUT IN LISTS WAVE_INPUTS)
+    file(RELATIVE_PATH RELATIVE "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset" "${INPUT}")
+    file(READ "${INPUT}" CONTENT)
+    file(SHA256 "${INPUT}" SOURCE_SHA)
+    string(REPLACE "libprojectM" "milk_wave_cpu" CONTENT "${CONTENT}")
+    string(REGEX REPLACE "#include \"(PresetState.hpp|PerFrameContext.hpp|Renderer/RenderItem.hpp)\""
+        "#include \"cpu_wave_state.hpp\"" CONTENT "${CONTENT}")
+    file(WRITE "${CPU_WAVE_DIR}/${RELATIVE}" "${CONTENT}")
+    file(SHA256 "${CPU_WAVE_DIR}/${RELATIVE}" ADAPTED_SHA)
+    string(APPEND WAVE_SOURCE_HASHES "\"${RELATIVE}\":{\"original\":\"${SOURCE_SHA}\",\"adapted\":\"${ADAPTED_SHA}\"},")
+    if(RELATIVE MATCHES "\\.cpp$")
+        list(APPEND CPU_WAVE_SOURCES "${CPU_WAVE_DIR}/${RELATIVE}")
+    endif()
+endforeach()
+string(REGEX REPLACE ",$" "}" WAVE_SOURCE_HASHES "${WAVE_SOURCE_HASHES}")
+file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/cpu_wave_state.hpp" CPU_WAVE_ADAPTER_SHA)
+configure_file(cpu_wave_inputs.hpp.in cpu_wave_inputs.hpp @ONLY)
+add_executable(milk-wave-inputs native_wave.cpp ${CPU_WAVE_SOURCES})
+target_compile_features(milk-wave-inputs PRIVATE cxx_std_17)
+target_compile_definitions(milk-wave-inputs PRIVATE PROJECTM_STATIC_DEFINE)
+target_include_directories(milk-wave-inputs PRIVATE "${CMAKE_CURRENT_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CPU_WAVE_DIR}" "${CPU_WAVE_DIR}/Waveforms" "${ENGINE_SOURCE}/src/libprojectM"
+    "${ENGINE_SOURCE}/src/api/include" "${ENGINE_BUILD}/projectm/src/api/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native")
+
+# Public/protected native CPU generators, linked to the exact existing archive.
+# OpenGL resolves the archive's unused texture-upload symbols; no GL context or
+# GL function is used by this executable's generation path.
+add_executable(milk-noise-inputs native_noise.cpp)
+target_compile_features(milk-noise-inputs PRIVATE cxx_std_17)
+target_compile_definitions(milk-noise-inputs PRIVATE PROJECTM_STATIC_DEFINE)
+target_include_directories(milk-noise-inputs PRIVATE
+    "${CMAKE_CURRENT_BINARY_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native"
+    "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/src/api/include"
+    "${ENGINE_BUILD}/projectm/src/api/include")
+target_link_libraries(milk-noise-inputs PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+if(APPLE)
+    target_link_libraries(milk-noise-inputs PRIVATE "-framework CoreFoundation" "-framework OpenGL")
+else()
+    find_package(OpenGL REQUIRED)
+    find_package(OpenSSL REQUIRED)
+    target_link_libraries(milk-noise-inputs PRIVATE OpenGL::GL OpenSSL::Crypto)
+endif()
