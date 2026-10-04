@@ -1,0 +1,11 @@
+{
+  "scope": "Temporary copy of one inactive raw capture only; source unchanged",
+  "source": "build/follow-ups/reference-injection-review/loop-probe/cases/blur-1182x665-off-r1/worker/run-57g29_9d/source.rgb",
+  "source_sha256": "a9f82b26ebad1263dc6f586d9fa3cfa1e47468e53a1ea2734593339238d2fa53",
+  "bytes": 7074270,
+  "source_allocated_bytes": 7077888,
+  "compressed_copy_allocated_bytes": 581632,
+  "compressed_flag": true,
+  "source_hash_preserved": true,
+  "copy_hash_equal": true
+}
