@@ -1,0 +1,25 @@
+{
+  "scope": "Pinned current analyzer against unchanged historical 35-patch parser/translator adapters; no 36-patch or appearance credit",
+  "presets": 315,
+  "historical_gap_count": 23,
+  "current_gap_count": 22,
+  "inventory_unchanged": true,
+  "newly_blocked": [],
+  "cleared_by_current_analyzer_only": [
+    "martin - ludicrous speed.milk"
+  ],
+  "appearance_verified": false,
+  "reader_sha256": "57b19fe4d27ea81c916052b555806a92b092dde545a4a0a8c831d189ee789ac4",
+  "analyzer_guard_preserved": true,
+  "analyzer_module_sha256": {
+    "coverage_audit.py": "a2c1484dab81911e99c572a19cf35e97cc7915ee550fbc29de3bd5213dafe194",
+    "shader_fields.py": "be7bcc26ddcaee1b51fe7afb2a4588a7d13f8c498e13ace0cfd93f9ab1f3189e",
+    "sampling_policy.py": "c6e8767540704444fcada9a6b8d1c75da934bf13528c31b26abbf6b05aaab30f",
+    "equation_loading.py": "e164850d796e51c69c0aaad9d668847b607b708c0577123fe8a8f2c75bfd7cd0"
+  },
+  "historical_inventory_sha256": "bb54ffb2f098251214065ff2e2b9d605c04fcbf16971a07f65bf2a956e71692a",
+  "random_gaps": {
+    "dynamic sampler expression": 3,
+    "shader expression not lowered: sampler_state": 3
+  }
+}
