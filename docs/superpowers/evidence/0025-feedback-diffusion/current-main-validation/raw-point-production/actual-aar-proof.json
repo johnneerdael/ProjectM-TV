@@ -1,0 +1,10 @@
+{
+  "source_commit": "02504a3acee96aa992f5097e341c317f0c586198",
+  "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/follow-ups/core-corpus/candidate-02504a3acee9-0b43830171d9/candidate-core-corpus.apk",
+  "apk_sha256": "72be73e82fd4978a1951a711b085659dc4695d2277db33d99d0ff5c1bea8f054",
+  "aar": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/follow-ups/core-corpus/candidate-02504a3acee9-0b43830171d9/repo/core/build/outputs/aar/core-release.aar",
+  "aar_sha256": "eafc5434cdde1809217239242eedebd57c3751a7d54782cf7c7dfedba10d8abf",
+  "core_sha256": "17394124df8772420a8e4c414c8bf073dcc52b189e4c1ae9eb13679496e528a3",
+  "aar_apk_elf_identical": true,
+  "patch0030_sha256": "f7d11eca0c311be9586dc76235efb886d448d533ef42965f45bf2f8192a2093a"
+}

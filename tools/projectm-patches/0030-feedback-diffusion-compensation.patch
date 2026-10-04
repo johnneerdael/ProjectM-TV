@@ -12,6 +12,8 @@ without a reference, at/below its area, for conservatively gated shaders, and af
 Scale the minimum vector length only with active compensation; invalidate cached
 input when scale/reference or framebuffer state changes. Cache uniform locations.
 Shader compilation cleanup is provided by prerequisite patch 0025.
+WarpSamplerTest's packed point-state and mixed-routing regressions come from 02504a3a's
+alternative P1-subset fix on the feature branch; this patch keeps single-pass placement.
 
 The nine-tap PoC (229ae74) missed AM6 cost targets. Independent productisation
 measurements and deliberate kernel/placement/routing changes are recorded under
@@ -1284,3 +1286,100 @@ index 000000000..58983acef
 +    CGLDestroyContext(context);
 +}
 +#endif
+diff --git a/tests/libprojectM/WarpSamplerTest.cpp b/tests/libprojectM/WarpSamplerTest.cpp
+index 31ef5b7cb..156f94440 100644
+--- a/tests/libprojectM/WarpSamplerTest.cpp
++++ b/tests/libprojectM/WarpSamplerTest.cpp
+@@ -141,13 +141,14 @@ protected:
+ #endif
+     }
+ 
+-    auto Render(const std::string& preset) -> Image
++    auto Render(const std::string& preset, int referenceWidth = 0, int referenceHeight = 0, int frames = 3) -> Image
+     {
+         glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
+         glClearColor(0, 0, 0, 1);
+         glClear(GL_COLOR_BUFFER_BIT);
+         TestProjectM engine;
+         engine.SetWindowSize(Width, Height);
++        engine.SetLineReferenceSize(referenceWidth, referenceHeight);
+         engine.SetMeshSize(48, 32);
+         engine.SetPresetLocked(true);
+         engine.SetHardCutEnabled(false);
+@@ -155,7 +156,7 @@ protected:
+         std::istringstream data(preset);
+         engine.LoadPresetData(data, false);
+         EXPECT_TRUE(engine.failure.empty()) << engine.failure;
+-        for (int frame = 0; frame < 3; ++frame)
++        for (int frame = 0; frame < frames; ++frame)
+         {
+             engine.RenderFrame(m_framebuffer);
+         }
+@@ -258,3 +259,67 @@ TEST_F(WarpSamplerTest, DefaultWarpMatchesUnqualifiedPassThrough)
+         ExpectSame(Render(fixed), Render(passThrough));
+     }
+ }
++
++namespace {
++
++auto PackedFeedbackPreset(const std::string& sampler, bool wrap) -> std::string
++{
++    auto preset = Preset("GetPixel(uv)", wrap, false);
++    preset.erase(preset.find("warp_1="));
++    // Green/blue encode independent discrete state, rather than display colour. A point recurrence
++    // must retain these bits even while a live bilinear red-channel read enables compensation.
++    preset += "warp_1=`shader_body { if (frame < 2) ret = float3(1, "
++              "frac(floor(uv.x*32)*0.5)*2, frac(floor(uv.y*24)*0.5)*2); "
++              "else { float2 packed = tex2D(sampler_" + sampler +
++              ", uv_orig + float2(0.199, 0.004)).gb; "
++              "ret = float3(GetPixel(uv).r, round(packed*32)/32); } }\n";
++    return preset;
++}
++
++} // namespace
++
++TEST_F(WarpSamplerTest, PackedPointStateSurvivesMixedFeedbackAboveReference)
++{
++    for (bool wrap : {false, true})
++    {
++        SCOPED_TRACE(wrap);
++        // Both supported ordering conventions must route by the actual sampler's filter mode.
++        for (const char* name : {"pc_main", "cp_main", "pw_main", "wp_main"})
++        {
++            SCOPED_TRACE(name);
++            const auto preset = PackedFeedbackPreset(name, wrap);
++            ExpectSame(Render(preset, 0, 0, 8), Render(preset, Width/2, Height/2, 8));
++        }
++    }
++}
++
++TEST_F(WarpSamplerTest, MixedFeedbackKeepsPointStateAndFiltersBilinearRead)
++{
++    auto preset = Preset("GetPixel(uv)", false, false);
++    preset.erase(preset.find("warp_1="));
++    preset += "warp_1=`shader_body { if (frame < 2) "
++              "ret = float3(1, frac(floor(uv.x*32)*0.5)*2, 1); "
++              "else ret = float3(GetPixel(uv).g, tex2D(sampler_pc_main, uv_orig).g, 1); }\n";
++    const auto ordinary = Render(preset);
++    const auto compensated = Render(preset, Width/2, Height/2);
++    size_t filteredPixels{};
++    size_t changedPointPixels{};
++    for (size_t pixel = 0; pixel < ordinary.size(); pixel += 3)
++    {
++        changedPointPixels += compensated[pixel+1] != ordinary[pixel+1];
++        filteredPixels += compensated[pixel] != compensated[pixel+1];
++    }
++    EXPECT_EQ(changedPointPixels, 0u) << "point state changed";
++    EXPECT_GT(filteredPixels, 100u) << "bilinear branch must still receive diffusion";
++}
++
++TEST_F(WarpSamplerTest, MixedPointFeedbackIsUnchangedAtReferenceOrWithoutReference)
++{
++    for (const char* name : {"pc_main", "cp_main", "pw_main", "wp_main"})
++    {
++        SCOPED_TRACE(name);
++        const auto preset = PackedFeedbackPreset(name, true);
++        ExpectSame(Render(preset, 0, 0, 8), Render(preset, Width, Height, 8));
++        ExpectSame(Render(preset, 0, 0, 8), Render(preset, Width*2, Height*2, 8));
++    }
++}
