@@ -37,17 +37,31 @@ execution or compilation. Confirm proposed labels with varied music and visual
 review. Thumbnail differences are not the historical authored1182 fidelity error.
 
 Keep prior baseline protocol, paths and hashes when comparing a later candidate.
-`candidate28-input-equivalence.json` records that the prepared candidate28 protocol
-has the same baseline APK, driver-independent inputs and existing baseline input
-signatures; its emulator pilot and candidate scan still remain to be run. Neither
+The historical `candidate28-input-equivalence.json` records that the prepared candidate28 protocol
+had the same baseline APK, driver-independent inputs and existing baseline input
+signatures. The current prepared candidate29-r3 dataset supersedes candidate28;
+its emulator pilot and candidate scan still remain to be run. Neither
 a completed baseline nor unchanged control presets prove absence of candidate
 degradation across the corpus.
 
-The audit has13 negative/positive host tests. Together with existing runner,
-recovery, disk-guard and checkpoint tests, the host-tool suite passes64. Available
+At the historical 1,216-pair snapshot, the audit had 13 negative/positive host
+tests and the combined host-tool suite passed 64. Available
 failed producer results must match the retained JSON and original job/protocol,
 source and runtime identities. Genuine early failures may lack runtime fields;
 host-only failures need an explicit error and cannot hide a retained producer.
 The initial992-pair snapshot remains historical. `reviewed-family-audit.json.gz`
 contains a later1216-pair snapshot with these stricter checks and no integrity
 issues; it is still partial.
+
+## Capture-schedule provenance
+
+Checkpoint validation compares each corpus job packet's capture indices with the
+immutable protocol configuration before accepting any terminal record, including
+a host timeout with a successful producer. Rehashing matching packet/result files
+does not authorize a different capture schedule. Short pilot jobs retain the
+deterministic schedule for their independently keyed measurement window.
+
+The capture-provenance fix has six RED/GREEN mutation cases and a short-pilot
+control; the full host-tool suite passes 114 tests. A partial baseline snapshot
+checked 8,426 available terminal producer records with zero identity/schedule
+mismatches. This check does not replace the final complete coverage/frame audit.
