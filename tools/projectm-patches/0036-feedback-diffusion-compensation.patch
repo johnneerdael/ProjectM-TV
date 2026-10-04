@@ -34,10 +34,10 @@ index c54b1dc06..4d6cc7557 100644
          FinalComposite.cpp
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
 new file mode 100644
-index 000000000..b47cbf966
+index 000000000..c1ff1e4c0
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
-@@ -0,0 +1,326 @@
+@@ -0,0 +1,330 @@
 +#include "FeedbackDiffusion.hpp"
 +
 +#include <algorithm>
@@ -208,11 +208,15 @@ index 000000000..b47cbf966
 +        }
 +        return false;
 +    };
++    // Both prefix orders name the same sampler (TextureManager::ExtractTextureSettings).
++    constexpr std::array<const char*, 4> pointSamplers{"sampler_pw_main", "sampler_wp_main", "sampler_pc_main", "sampler_cp_main"};
++    constexpr std::array<const char*, 5> bilinearSamplers{"sampler_main", "sampler_fc_main", "sampler_cf_main",
++                                                          "sampler_fw_main", "sampler_wf_main"};
 +    bool pointFeedback = false;
-+    for (const auto* sampler : {"sampler_pw_main", "sampler_pc_main"})
++    for (const auto* sampler : pointSamplers)
 +        pointFeedback |= contains({"tex2d", "(", sampler, ","});
 +    bool bilinearFeedback = contains({"getpixel", "("}) || contains({"getmain", "("});
-+    for (const auto* sampler : {"sampler_main", "sampler_fc_main", "sampler_fw_main"})
++    for (const auto* sampler : bilinearSamplers)
 +        bilinearFeedback |= contains({"tex2d", "(", sampler, ","});
 +    // Point-only feedback loses no bilinear variance. A mixed warp still can: Acid Mandala's
 +    // displaced GetPixel path needs compensation despite its point-sampled feedback branches.
@@ -220,7 +224,7 @@ index 000000000..b47cbf966
 +    // A single source blur cannot preserve the explicitly undisplaced branch of a mixed warp.
 +    if (contains({"getpixel", "(", "uv_orig", ")"}) ||
 +        contains({"getmain", "(", "uv_orig", ")"})) return false;
-+    for (const auto* sampler : {"sampler_main", "sampler_fc_main", "sampler_fw_main"})
++    for (const auto* sampler : bilinearSamplers)
 +    {
 +        if (contains({"tex2d", "(", sampler, ",", "uv_orig", ")"})) return false;
 +    }
@@ -981,16 +985,17 @@ index 000000000..1d5dacb9e
 +}
 diff --git a/tests/libprojectM/FeedbackDiffusionTest.cpp b/tests/libprojectM/FeedbackDiffusionTest.cpp
 new file mode 100644
-index 000000000..58983acef
+index 000000000..6f3f17d31
 --- /dev/null
 +++ b/tests/libprojectM/FeedbackDiffusionTest.cpp
-@@ -0,0 +1,303 @@
+@@ -0,0 +1,322 @@
 +#include <MilkdropPreset/FeedbackDiffusion.hpp>
 +#include <MilkdropPreset/LineGeometry.hpp>
 +
 +#include <gtest/gtest.h>
 +
 +#include <cmath>
++#include <string>
 +
 +using libprojectM::MilkdropPreset::DiffusionKernelFor;
 +using libprojectM::MilkdropPreset::DiffusionVariance;
@@ -1107,6 +1112,24 @@ index 000000000..58983acef
 +    EXPECT_TRUE(DiffusionWarpEligible("ret=tex2D(sampler_fc_main,uv);"));
 +    EXPECT_TRUE(DiffusionWarpEligible("ret=GetPixel(uv+(d,0))+GetPixel(uv+(0,d))-GetPixel((uv-.5)*.9+.5)-.4;"));
 +    EXPECT_TRUE(DiffusionWarpEligible(""));
++}
++
++TEST(FeedbackDiffusion, GateRecognizesEveryMainSamplerAlias)
++{
++    using libprojectM::MilkdropPreset::DiffusionWarpEligible;
++    // TextureManager accepts both orders of the filter/wrap prefix; the gate must too.
++    for (const char* point : {"pw", "wp", "pc", "cp"})
++    {
++        SCOPED_TRACE(point);
++        EXPECT_FALSE(DiffusionWarpEligible(std::string("ret=tex2D(sampler_") + point + "_main,uv);"));
++        EXPECT_FALSE(DiffusionWarpEligible(std::string("ret=TEX2D(SAMPLER_") + point + "_MAIN,uv);"));
++    }
++    for (const char* bilinear : {"fc", "cf", "fw", "wf"})
++    {
++        SCOPED_TRACE(bilinear);
++        EXPECT_TRUE(DiffusionWarpEligible(std::string("ret=tex2D(sampler_") + bilinear + "_main,uv)+tex2D(sampler_cp_main,uv)*.01;"));
++        EXPECT_FALSE(DiffusionWarpEligible(std::string("ret=tex2D(sampler_") + bilinear + "_main,uv_orig);"));
++    }
 +}
 +
 +TEST(FeedbackDiffusion, AllowsMixedPointReadsWithBilinearFeedback)
