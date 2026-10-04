@@ -32,7 +32,7 @@ new file mode 100644
 index 000000000..1ec4a9610
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
-@@ -0,0 +1,302 @@
+@@ -0,0 +1,306 @@
 +#include "FeedbackDiffusion.hpp"
 +
 +#include <algorithm>
@@ -299,6 +299,10 @@ index 000000000..1ec4a9610
 +
 +    m_framebuffer.SetSize(source->Width(), source->Height());
 +    m_framebuffer.Bind(0);
++
++    // Filtering overwrites the target. Inherited alpha blending would multiply RGBA
++    // source colours by alpha a second time and retain unrelated target history.
++    glDisable(GL_BLEND);
 +
 +    // The pass covers the whole target: without blending its old contents are never read, so
 +    // tile-based GPUs can skip loading them (as in CopyTexture).
@@ -667,7 +671,7 @@ new file mode 100644
 index 000000000..70eb93b67
 --- /dev/null
 +++ b/tests/libprojectM/FeedbackDiffusionTest.cpp
-@@ -0,0 +1,170 @@
+@@ -0,0 +1,222 @@
 +#include <MilkdropPreset/FeedbackDiffusion.hpp>
 +#include <MilkdropPreset/LineGeometry.hpp>
 +
@@ -838,3 +842,55 @@ index 000000000..70eb93b67
 +    EXPECT_TRUE(DiffusionWarpEligible("// GetPixel(uv_orig)\nret=GetPixel(uv);"));
 +    EXPECT_TRUE(DiffusionWarpEligible("ret=GetPixel(uv_orig+float2(.01,0));"));
 +}
++
++#ifdef __APPLE__
++#include <OpenGL/OpenGL.h>
++#include <Renderer/Texture.hpp>
++
++TEST(FeedbackDiffusion, TransparentSourceIsCopiedWithoutMultiplyingAlphaAgain)
++{
++    CGLPixelFormatAttribute attrs[] = {kCGLPFAOpenGLProfile,
++        static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++        static_cast<CGLPixelFormatAttribute>(0)};
++    CGLPixelFormatObj format{};
++    GLint count{};
++    ASSERT_EQ(CGLChoosePixelFormat(attrs, &format, &count), kCGLNoError);
++    CGLContextObj context{};
++    ASSERT_EQ(CGLCreateContext(format, nullptr, &context), kCGLNoError);
++    CGLDestroyPixelFormat(format);
++    ASSERT_EQ(CGLSetCurrentContext(context), kCGLNoError);
++    {
++        using libprojectM::Renderer::Texture;
++        Texture::SetPoolLimit(0);
++        auto source = std::make_shared<Texture>("alpha-test", 16, 16, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
++        std::array<unsigned char, 16 * 16 * 4> input{};
++        for (size_t i = 0; i < input.size(); i += 4) { input[i] = 128; input[i + 3] = 128; }
++        source->Bind(0);
++        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 16, 16, GL_RGBA, GL_UNSIGNED_BYTE, input.data());
++        glViewport(0, 0, 16, 16);
++        glDisable(GL_DITHER);
++        glEnable(GL_BLEND);
++        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
++        libprojectM::MilkdropPreset::FeedbackDiffusion diffusion;
++        diffusion.SetScale(2.0f);
++        ASSERT_TRUE(diffusion.Active());
++        diffusion.Draw(source, false);
++        GLuint framebuffer{};
++        glGenFramebuffers(1, &framebuffer);
++        glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
++        glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
++                               diffusion.Texture()->TextureID(), 0);
++        glReadBuffer(GL_COLOR_ATTACHMENT0);
++        std::array<unsigned char, 4> pixel{};
++        glReadPixels(8, 8, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel.data());
++        EXPECT_EQ(glGetError(), GL_NO_ERROR);
++        EXPECT_NEAR(pixel[0], 128, 1);
++        EXPECT_EQ(pixel[1], 0);
++        EXPECT_EQ(pixel[2], 0);
++        // Diffusion framebuffer stores RGB; its readback alpha is opaque.
++        glDeleteFramebuffers(1, &framebuffer);
++    }
++    CGLSetCurrentContext(nullptr);
++    CGLDestroyContext(context);
++}
++#endif

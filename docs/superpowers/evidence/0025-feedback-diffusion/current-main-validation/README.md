@@ -40,3 +40,44 @@ corrected to explicit host graphics, with Vulkan disabled for native host
 OpenGL, and it was restarted only after the first four jobs completed. The
 corpus owner's emulator-5580, worktree and processes remain untouched.
 Further hardware-renderer controls and native-4K comparisons are in progress.
+
+## First hardware matrix
+
+The corrected emulator reports the Apple M4 Pro renderer. Fourteen-frame
+wording in prior recovery notes does not apply here: each of the **48 jobs**
+renders all 480 frames, with eight native captures. Four presets run at
+1182×665, 2364×1330 and 3840×2160 on baseline29/candidate30, twice each.
+All jobs succeed, all repeats are byte-identical, and near-reference candidate
+outputs match the baseline. The near-reference profile retains the core's
+normal 1024×768 reference setting; it is not the exact no-reference classic
+ground truth required for final spec acceptance.
+
+| Preset | Size | 12 s image MAE before→after | Candidate / near-reference luma |
+| --- | --- | --- | --- |
+| Royal 191 | 1330 | 0.3793→0.0212 | 0.332 |
+| Royal 191 | 2160 | 0.3986→0.0214 | 0.329 |
+| Acid Mandala | 1330 | 0.0710→0.0743 | 0.860 |
+| Acid Mandala | 2160 | 0.0754→0.0562 | 0.880 |
+| Fed quadratrail | 1330 | 0.0042→0.0018 | 0.771 |
+| Fed quadratrail | 2160 | 0.0020→0.0027 | 0.521 |
+| I Like Cartoon | 1330 | 0.1917→0.2341 | 0.902 |
+| I Like Cartoon | 2160 | 0.1986→0.1896 | 0.932 |
+
+`first-matrix-analysis.json` retains both windows and brightness, centre RGB,
+saturation and sharpness separately. `first-matrix-jobs.jsonl.gz` retains exact
+job/result identities. The four cases are deliberately difficult; they do not
+estimate a corpus-wide failure rate. These results remain mixed and do not
+justify merge acceptance.
+
+## Overwrite-state regression
+
+An independent real-driver component test exposed inherited blending in the
+diffusion pass: a uniform RGBA source with red=128 and alpha=128 rendered red=64
+instead of 128. The filter must overwrite its target, not multiply source
+colour by alpha again or retain prior target contents. Explicitly disabling
+blending makes the regression pass; the full host suite is **190/190**.
+`alpha-red.txt` and `alpha-green-suite.txt` preserve RED→GREEN evidence.
+
+This is a renderer contract correction. The production main surfaces are RGB;
+it is not evidence that the Acid Mandala or Fed brightness regressions are
+fixed. New actual-core comparisons must verify its effect separately.

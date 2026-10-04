@@ -1,0 +1,17 @@
+{
+  "jobs": 4,
+  "all_success": true,
+  "both_roles_repeat_identically": true,
+  "captures_each": 16,
+  "frames_each": 480,
+  "renderer": "Apple M4 Pro",
+  "patches_baseline": 29,
+  "patches_candidate": 30,
+  "times_seconds": [
+    2.8414492920273915,
+    2.7001181250670925,
+    3.1150712909875438,
+    2.7437125840224326
+  ],
+  "scope": "single-preset control; not authored fidelity or TV FPS evidence"
+}
