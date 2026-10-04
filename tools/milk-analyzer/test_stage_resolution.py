@@ -39,9 +39,35 @@ class StageResolutionTest(unittest.TestCase):
         plan=self.resolve(source,{'composite':{'offline_accepted':None}})
         self.assertEqual(plan['composite']['kind'],'unknown')
 
+    def test_preset_pipeline_refuses_native_rejected_equations_before_shader_fallback(self):
+        from pipeline_fields import SourcePipeline
+        for code in ['per_frame_1=q1=is_\nper_frame_2=beat*.2;\n',
+                     'wavecode_0_enabled=0\nwave_0_per_frame1=q1=;\n']:
+            source=test_native_reader.NativeReaderTest().read(code)
+            with self.assertRaisesRegex(UnresolvedMath,'native equation compilation rejected'):
+                SourcePipeline.from_source(source,profile='glsl330',compatibility={},
+                    initial_feedback=np.full((4,4,4),.4),warp_reads_blur=False,blur_levels=0)
+
     def test_native_reader_activity_matches_missing_level_defaults(self):
         source=test_native_reader.NativeReaderTest().read('comp_1=`shader_body {ret=1;}\n')
         self.assertTrue(source['sections']['comp_']['active'])
+
+    def test_rejected_array_and_state_execute_fallback_not_authored_shader(self):
+        from pipeline_fields import SourcePipeline
+        cases=['shader_body {float2 a[2]={1,2,3,4};ret=a[0].xxx;}',
+               'sampler sampler_main = sampler_state {AddressU=CLAMP;AddressV=WRAP;};'
+               'shader_body {ret=.8;}']
+        for code in cases:
+            source=test_native_reader.NativeReaderTest().read('PSVERSION_COMP=2\ncomp_1=`'+code+'\n')
+            report=test_shader_compat.ShaderCompatibilityTest().check(source['sections']['comp_']['source'],profile='gles300')
+            self.assertFalse(report['offline_accepted'],report)
+            initial=np.full((4,4,4),.4,dtype=np.float32)
+            pipeline=SourcePipeline.from_source(source,profile='gles300',compatibility={'composite':report},
+                initial_feedback=initial,warp_reads_blur=False,blur_levels=0,quantize=False)
+            result=pipeline.step(warp_uv=pipeline.original_uv,uniforms={},frame_wrap=0,decay=1)
+            np.testing.assert_allclose(result.display[...,:3],.4)
+            self.assertEqual(result.history['composite_kind'],'default_composite')
+            self.assertTrue(pipeline.stage_resolution['composite']['conditional_on_native_profile'])
 
     def test_default_pipeline_preserves_feedback_alpha_and_applies_live_decay(self):
         from pipeline_fields import SourcePipeline

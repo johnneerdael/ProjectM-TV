@@ -777,6 +777,22 @@ blockers. Per-preset source-token, unvisited-token and parsed-token totals match
 the previous audit exactly, and the visual gate remains closed. See
 `fixtures/focused-blockers-220-2026-10-04.json`.
 
+`SourcePipeline.from_source` refuses explicit raw projectM equation compile
+rejection before selecting shader fallback. The pinned loader compiles custom
+equations even when their wave/shape is disabled and aborts initialization on
+failure. An accepted MilkDrop-assembled tree cannot rescue that target load.
+Absence of this rejection flag does not prove complete runtime success.
+
+The 56 array and 51 sampler-state witnesses have source-bound offline GLES300
+plans:100 default composites and7 fixed warps. One preset also has a fatal
+equation rejection, so its shader plan does not imply a usable preset. Plans
+remain conditional on matching descriptors/profile and successful native
+fallback initialization; the220 authored-source blockers are not cleared by
+these plans. Two frozen array/state rejection controls match the unchanged
+published core2.2.4 fallback output exactly over60 RGB8 frames. The numeric
+pipeline regression also ensures rejected authored trees are not executed.
+See `fixtures/array-state-fallback-native-proof-2026-10-04.json`.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed

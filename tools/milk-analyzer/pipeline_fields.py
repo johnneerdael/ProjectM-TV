@@ -63,6 +63,11 @@ class SourcePipeline:
     def from_source(cls,source,*,profile,compatibility,**kwargs):
         if kwargs.get('coordinate_profile','strict')!='strict' and profile!='glsl330':
             raise ValueError('Apple shader coordinate profile requires glsl330')
+        # The pinned preset loader compiles custom equations even for disabled
+        # waves/shapes and throws on failure. Shader fallback cannot rescue it.
+        for prefix,section in source.get('sections',{}).items():
+            if prefix not in {'warp_','comp_'} and section.get('projectm_native_compile_status')=='rejected':
+                raise UnresolvedMath('native equation compilation rejected: '+prefix)
         from stage_resolution import resolve_stages
         plan=resolve_stages(source,profile=profile,compatibility=compatibility)
         trees={}
