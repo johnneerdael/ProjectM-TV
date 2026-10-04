@@ -39,6 +39,30 @@ framebuffer bound. Pin and verify AAR/native-library/input identities before
 using results for scoring. The pinned initial artifact is release v2.2.4 with
 SHA-256 `75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60`.
 
+`core_corpus.py` uses a shared published asset archive and a small deterministic
+selection-index overlay per preset. It validates the deployed AAR, native
+library, runner, clock helper and PCM hashes before starting. RGB fields stream
+to numerical descriptors; renderer logs use separate files. Each result is
+written atomically and only complete finite scores with the same run identity
+are reused. Unscored entries retain diagnostics and require `--retry-unscored`
+after investigation. The model at `profiles/audience-model-v1.json` preserves
+the development candidate's weights and archival provenance; each native run
+pins its actual scoring code separately. It is not a calibrated accuracy claim.
+
+```bash
+build/preset-lab-venv/bin/python tools/milk-analyzer/core_corpus.py \
+  --aar build/core-audience-analysis/published/projectM-TV-core-2.2.4.aar \
+  --model tools/milk-analyzer/profiles/audience-model-v1.json \
+  --runtime build/core-audience-analysis/published \
+  --pcm build/milk-analyzer/audience-ten-2026-10-03/running.f32 \
+  --output build/core-audience-corpus
+```
+
+The runtime directory contains the D8-converted published JNI class/runner,
+the runner-side clock helper and the unchanged extracted library. A validated
+five-preset pilot and resume check precede the complete run. The PCM fixture
+is local test input, not distributed with this repository.
+
 Read preset equations and shaders without audio playback, a GPU context, or
 reference images. This is research tooling under development. It does **not**
 yet produce a validated appearance prediction or replacement Dance ranking.

@@ -9,6 +9,7 @@ import android.opengl.EGLSurface;
 import android.opengl.GLES20;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -18,14 +19,30 @@ import nl.neerdael.projectm.core.ProjectMJNI;
 public final class CoreBackendRunner {
     private static native void configureClock(String corePath);
     private static native void setClock(long nanoseconds);
+    private static native void startStream(String logPath,int frames);
+    private static native void writeFrame(ByteBuffer rgba);
     public static void main(String[] args) throws Exception {
-        if (args.length != 4 && args.length != 7) throw new IllegalArgumentException("LIB ASSETS WORK OUTPUT [CLOCK_LIB PCM FRAMES]");
+        if (args.length != 4 && args.length != 7 && args.length != 8) throw new IllegalArgumentException("LIB ASSETS WORK OUTPUT [CLOCK_LIB PCM FRAMES [stream]]");
+        boolean simulated=args.length>=7;
+        boolean streaming=args.length==8 && "stream".equals(args[7]);
+        int frames=simulated?Integer.parseInt(args[6]):30;
+        if (frames<1 || frames>36000) throw new IllegalArgumentException("Invalid frame schedule");
+        if (simulated) System.load(args[4]);
+        if (streaming) {
+            // Android's Java standard streams can own duplicated descriptors;
+            // redirect them explicitly as well as native stdout/stderr.
+            PrintStream logs=new PrintStream(new FileOutputStream(args[3]+".java.log"),true);
+            System.setOut(logs);System.setErr(logs);
+            startStream(args[3]+".log",frames);
+        }
         System.load(args[0]);
         AssetManager assets = AssetManager.class.getDeclaredConstructor().newInstance();
         Method add = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
-        int cookie = (Integer) add.invoke(assets, args[1]);
-        if (cookie == 0) throw new IllegalStateException("Asset archive rejected");
-        ProjectMJNI.init(assets, args[2] + "/skip.txt", args[2] + "/textures");
+        for(String archive:args[1].split("\\|",-1)) {
+            int cookie = (Integer) add.invoke(assets, archive);
+            if (cookie == 0) throw new IllegalStateException("Asset archive rejected: "+archive);
+        }
+        ProjectMJNI.init(assets, streaming?args[3]+".skip":args[2]+"/skip.txt", args[2] + "/textures");
         ProjectMJNI.setAutoChange(false);
         ProjectMJNI.setBeatCuts(false);
         ProjectMJNI.setBlankDetection(false);
@@ -49,15 +66,12 @@ public final class CoreBackendRunner {
         EGLSurface surface = EGL14.eglCreatePbufferSurface(display,configs[0],
                 new int[]{EGL14.EGL_WIDTH,128,EGL14.EGL_HEIGHT,72,EGL14.EGL_NONE},0);
         if (!EGL14.eglMakeCurrent(display,surface,surface,context)) throw new IllegalStateException("EGL context failed");
-        boolean simulated=args.length==7;
-        if (simulated) { System.load(args[4]);configureClock(args[0]); }
+        if (simulated) configureClock(args[0]);
         ProjectMJNI.onSurfaceCreated();ProjectMJNI.onSurfaceChanged(128,72);
         ByteBuffer rgba = ByteBuffer.allocateDirect(128*72*4);
-        int frames=simulated?Integer.parseInt(args[6]):30;
-        if (frames<1 || frames>36000) throw new IllegalArgumentException("Invalid frame schedule");
         FileInputStream pcm=simulated?new FileInputStream(args[5]):null;
         byte[] inputBytes=new byte[1470*4];byte[] waveform=new byte[1470];
-        try (FileOutputStream output = new FileOutputStream(args[3])) {
+        try (FileOutputStream output = streaming?null:new FileOutputStream(args[3])) {
             for (int frame=0;frame<frames;++frame) {
                 if (simulated) {
                     int received=0;
@@ -76,11 +90,19 @@ public final class CoreBackendRunner {
                 GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0);
                 GLES20.glReadPixels(0,0,128,72,GLES20.GL_RGBA,GLES20.GL_UNSIGNED_BYTE,rgba);
                 if (GLES20.glGetError()!=GLES20.GL_NO_ERROR) throw new IllegalStateException("GL readback failed");
-                byte[] bytes = new byte[rgba.capacity()];rgba.position(0);rgba.get(bytes);rgba.position(0);output.write(bytes);
+                if(streaming)writeFrame(rgba);
+                else {byte[] bytes = new byte[rgba.capacity()];rgba.position(0);rgba.get(bytes);rgba.position(0);output.write(bytes);}
             }
         }
         if (pcm!=null) {if(pcm.read()!=-1)throw new IllegalStateException("PCM exceeds frame schedule");pcm.close();}
         System.out.println("core="+ProjectMJNI.getVersion()+" preset="+ProjectMJNI.getCurrentPresetName()+" count="+ProjectMJNI.getPresetCount());
+        org.json.JSONObject metadata=new org.json.JSONObject();
+        metadata.put("backend","published-core-jni");metadata.put("core_version",ProjectMJNI.getVersion());
+        metadata.put("preset",ProjectMJNI.getCurrentPresetName());metadata.put("frames",frames);
+        metadata.put("width",128);metadata.put("height",72);metadata.put("fps",30);
+        metadata.put("renderer",GLES20.glGetString(GLES20.GL_RENDERER));metadata.put("simulated_clock",simulated);
+        metadata.put("skipped_count",ProjectMJNI.getSkippedCount());metadata.put("indexed_count",ProjectMJNI.getPresetCount());
+        try(FileOutputStream meta=new FileOutputStream(args[3]+".json")){meta.write(metadata.toString().getBytes("UTF-8"));}
         ProjectMJNI.release();EGL14.eglMakeCurrent(display,EGL14.EGL_NO_SURFACE,EGL14.EGL_NO_SURFACE,EGL14.EGL_NO_CONTEXT);
         EGL14.eglDestroySurface(display,surface);EGL14.eglDestroyContext(display,context);EGL14.eglTerminate(display);
         System.exit(0);
