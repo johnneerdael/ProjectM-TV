@@ -2,7 +2,8 @@
 
 Current baseline: `a59b4e5` (PR #14 and PR #20 merged). Worktree: `.worktrees/quad-lines-follow-ups`,
 branch `followup/quad-lines`. Device testing used the approved address `192.168.51.53`.
-No commit or push has been performed for this follow-up.
+Code and per-fix evidence were committed and pushed in `9dd8875`; `c40d987` adds the first corpus
+data checkpoint. The full corpus scan remains in progress; see [shared baseline](CORPUS-BASELINE.md).
 
 ## Visual acceptance criterion
 
@@ -145,11 +146,13 @@ the fix and pass all38 cases after it; plain-main/default warp, unaffected alias
 images remain byte-identical. Six public-API CGL rendering tests accompany the patch: RED3 fail/3 controls
 pass; GREEN6 pass/0 skip. The complete host suite passes163 tests,0 skipped.
 
-The 396-job sweep on33 presets completed, but seven presets expose an analyzer RNG fault in repeated
+The original 396-job sweep on33 presets completed, but seven presets exposed an analyzer RNG fault in repeated
 classic/1330 runs. Do not use those runs to claim fidelity or degradation. Process-global libc rand is
 consumed outside the engine; private Park–Miller shader RNG instrumentation restores exact240-frame
 repeats in the exact Echasketch case at665/1330/2160, with identical audio traces. The fix changes tools
-only and creates a new instrumentation identity. The corrected full sweep still needs to be rerun.
+only and creates a new instrumentation identity. The corrected 396-job sweep completed with zero repeat
+mismatches (`results-sampler-impact.json`); the original runs remain labeled in
+`results-sampler-impact-legacy-rng.json`.
 
 Long-window verification completed50 jobs, all repeated identically (`results-diffusion-long.json`).
 The12-second window confirms Royal191's motion loss: reference sampled motion0.01894, P1 at4K0.000296,

@@ -2,7 +2,7 @@
 
 Each image uses actual engine frames, test output, or measured driver objects. A rendered image is not
 used to imply a diagnostic/resource change. PNGs are ready to embed; full source data and hashes remain
-alongside them. No artifacts have been published or pushed.
+alongside them. These artifacts were pushed on `followup/quad-lines` in `9dd8875`.
 
 | Change | Image | Proof and limits |
 |---|---|---|
@@ -17,5 +17,6 @@ The shader/transition/fallback sources are in `manifest.json`, `raw/`, and `allo
 Sampler and analyzer sources are in their numbered reports and `additional-proof-sources.json`.
 The original 46-file export has `artifact-index.json`; later additions have separate source hashes.
 
-Actual-preset images and any successful feedback correction will be added after the corrected
-deterministic comparisons pass. Rejected/invalid probes remain labeled experiments and are not PR fixes.
+Nine matched actual-preset images from the corrected deterministic sampler comparisons are in
+`sampler-presets/`, with their source and frame hashes in `sampler-presets/manifest.json`.
+Rejected/invalid feedback probes remain labeled experiments and are not production fixes.
