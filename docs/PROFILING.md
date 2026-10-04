@@ -31,11 +31,21 @@ Notes:
 
 ## Fixed settings for a benchmark
 
-To compare builds at a fixed render height, set the profile app's settings directly (rooted TV; the release app's settings stay untouched):
+To compare builds at a fixed render height, set the profile app's settings directly (root shell on the TV; the release app's settings stay untouched). `L` is the app's notification listener:
 
-1. `am force-stop nl.neerdael.projectmtv.profile`.
-2. Write `shared_prefs/projectm_settings.xml` in the app's data directory, for example `render_height` (`0` = Auto), `memory_limit=false`, `blank_detection_v3=false`. Copy the file over the old one (`cat … >`) to keep its owner and SELinux context.
-3. **`am force-stop` again**, then `am start -n nl.neerdael.projectmtv.profile/com.example.projectm.visualizer.MainActivity`.
-4. Check that every `VisualizerRenderer: STATS … surface=WxH` line shows the requested size before using the run.
+```sh
+P=nl.neerdael.projectmtv.profile
+L=$P/com.example.projectm.visualizer.TrackListenerService
+adb -s <tv>:5555 shell cmd notification disallow_listener $L
+adb -s <tv>:5555 shell am force-stop $P
+adb -s <tv>:5555 shell pidof $P        # must print nothing before the write
+# write /data/data/$P/shared_prefs/projectm_settings.xml, e.g. render_height (0 = Auto),
+# memory_limit=false, blank_detection_v3=false: push the file to /data/local/tmp and `cat` it over
+# the old one (as root), which keeps its owner and SELinux context
+adb -s <tv>:5555 shell cmd notification allow_listener $L
+adb -s <tv>:5555 shell am start -n $P/com.example.projectm.visualizer.MainActivity
+```
 
-Step 3 is needed because the app's notification listener is rebound about a second after a force-stop, which starts the app's process again, and `ProjectMApplication` reads `projectm_settings` into memory at that moment. A file written after that restart is not read: the run uses the previous run's settings, or the defaults (Auto, 30 fps) if the restart read the file while `cat` had emptied it. On an Ugoos AM6, 4 of 7 alternating 1330p/Native runs rendered the wrong height without step 3; with it, 8 of 8 were correct. Clear `debug.projectmtv.preset` afterwards if you pinned a preset.
+Then check that every `VisualizerRenderer: STATS … surface=WxH` line shows the requested size before using the run.
+
+Why the listener is disallowed: Android rebinds the app's notification listener about a second after a force-stop, which starts the app's process again, and `ProjectMApplication` reads `projectm_settings` at that moment. If that happens before the write, the process keeps the previous run's settings. If it reads the file while `cat` has emptied it, it gets no settings, and its one-time migrations then save that nearly empty map over the new file, so even another force-stop before `am start` gives the defaults (Auto, 30 fps cap). Measured with alternating render heights: on an Ugoos AM6 (Android 9), 4 of 7 runs were wrong with a single force-stop and 8 of 8 right with a second force-stop after the write; on an Ugoos AM9 Pro (Android 14), 1 of 16 runs with the second force-stop still got the defaults. With the listener disallowed no app process exists during the write. Clear `debug.projectmtv.preset` afterwards if you pinned a preset.
