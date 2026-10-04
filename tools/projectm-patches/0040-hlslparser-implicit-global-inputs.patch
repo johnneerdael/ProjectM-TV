@@ -1,0 +1,74 @@
+Subject: Preserve implicit legacy global inputs and initialized writable copies
+
+Microsoft legacy reflection classifies plain uninitialized float globals as external constants.
+Translate supported scalar/vector globals as uniforms, retaining per-invocation write copies.
+GLES link-time uniform initialization defines unbound inputs as zero; this does not claim
+equivalence to arbitrary D3D9 register history. Leave locals/static/initialized storage alone.
+
+diff --git a/vendor/hlslparser/src/HLSLTree.cpp b/vendor/hlslparser/src/HLSLTree.cpp
+--- a/vendor/hlslparser/src/HLSLTree.cpp
++++ b/vendor/hlslparser/src/HLSLTree.cpp
+@@ -613,6 +613,42 @@
+
+ bool HLSLTree::ReplaceUniformsAssignments()
+ {
++    // Preserve the external-input classification of plain uninitialized legacy
++    // HLSL float globals. GLES initializes these uniforms at link time; writes
++    // use the existing per-invocation copies below. Locals, initialized globals,
++    // static/const storage and unsupported aggregate types retain their rules.
++    for (HLSLStatement* statement = m_root->statement; statement != NULL; statement = statement->nextStatement)
++    {
++        if (statement->nodeType != HLSLNodeType_Declaration) continue;
++        HLSLDeclaration* first = static_cast<HLSLDeclaration*>(statement);
++        bool changed = false;
++        for (HLSLDeclaration* declaration = first; declaration != NULL; declaration = declaration->nextDeclaration)
++        {
++            if (declaration->assignment == NULL && !declaration->type.array &&
++                declaration->type.baseType >= HLSLBaseType_Float && declaration->type.baseType <= HLSLBaseType_Float4 &&
++                !(declaration->type.flags & (HLSLTypeFlag_Uniform | HLSLTypeFlag_Static | HLSLTypeFlag_Const)))
++            {
++                declaration->type.flags |= HLSLTypeFlag_Uniform | HLSLTypeFlag_ImplicitUniform;
++                changed = true;
++            }
++        }
++        if (!changed) continue;
++        // A comma declaration can mix initialized storage with an implicit input.
++        // GLSL emits one qualifier for the whole statement, so separate the chain
++        // while keeping source declaration order and initializer evaluation order.
++        HLSLStatement* after = statement->nextStatement;
++        HLSLDeclaration* declaration = first;
++        while (declaration->nextDeclaration != NULL)
++        {
++            HLSLDeclaration* next = declaration->nextDeclaration;
++            declaration->nextDeclaration = NULL;
++            declaration->nextStatement = next;
++            declaration = next;
++        }
++        declaration->nextStatement = after;
++        statement = declaration;
++    }
++
+     // MilkDrop's HLSL compiler lets a shader assign to a global uniform, e.g. "q18 = 1;" with q18
+     // defined as _qe.y. The write goes to a per-invocation copy that starts with the uniform's value
+     // and that every function sees. GLSL uniforms are read-only, so each assigned uniform gets a global
+@@ -799,7 +835,7 @@
+             HLSLDeclaration * declaration = AddNode<HLSLDeclaration>(uniform->fileName, uniform->line);
+             declaration->name = copy->second;
+             declaration->type = uniform->type;
+-            declaration->type.flags = (declaration->type.flags & ~(HLSLTypeFlag_Uniform | HLSLTypeFlag_Const)) | HLSLTypeFlag_Static;
++            declaration->type.flags = (declaration->type.flags & ~(HLSLTypeFlag_Uniform | HLSLTypeFlag_Const | HLSLTypeFlag_ImplicitUniform)) | HLSLTypeFlag_Static;
+             declaration->assignment = value;
+
+             declaration->nextStatement = insertAfter->nextStatement;
+diff --git a/vendor/hlslparser/src/HLSLTree.h b/vendor/hlslparser/src/HLSLTree.h
+--- a/vendor/hlslparser/src/HLSLTree.h
++++ b/vendor/hlslparser/src/HLSLTree.h
+@@ -335,6 +335,8 @@
+
+     // Misc.
+     HLSLTypeFlag_NoPromote = 0x200000,
++    // Uninitialized scalar/vector float globals are legacy external inputs.
++    HLSLTypeFlag_ImplicitUniform = 0x400000,
+ };
+
+ enum HLSLAttributeType

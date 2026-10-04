@@ -1,0 +1,1007 @@
+"""Lower native shader trees to typed, source-derived field expressions.
+
+This first lowering preserves operation order, branches and sampling history.
+Unknown nodes remain in the result. It is not yet a complete shader interpreter
+or appearance predictor, and it never consumes rendered images.
+"""
+from dataclasses import dataclass,field
+import re
+from sampling_policy import texture_settings,main_sampler_bindings
+
+
+@dataclass(frozen=True)
+class Field:
+    op:str
+    args:tuple=()
+    dtype:str="float"
+    detail:dict=field(default_factory=dict)
+
+
+@dataclass(eq=False)
+class LoopPlan:
+    names:tuple
+    condition:Field|None=None
+    updates:dict=field(default_factory=dict)
+    effects:tuple=()
+    iteration_limit:int=1024
+
+
+BINARY={0:"and",1:"or",2:"add",3:"subtract",4:"multiply",5:"divide",6:"remainder",
+        7:"less",8:"greater",9:"less_equal",10:"greater_equal",11:"equal",12:"not_equal",
+        13:"bit_and",14:"bit_or",15:"bit_xor"}
+PURE={"sin","cos","tan","asin","acos","atan","atan2","abs","sqrt","rsqrt",
+      "length","distance","dot","cross","reflect","normalize","pow","exp","exp2","log","log2","log10",
+      "min","max","clamp","saturate","lerp","smoothstep","step","frac","floor",
+      "ceil","round","trunc","sign","fmod","mul","all","any"}
+ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul','all','any'}
+
+
+class ShaderFields:
+    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,known_uniform_component_domains=None,global_input_policy='strict-v1',array_initializer_policy='legacy-layout-v1'):
+        if stage not in {"warp","composite"}:raise ValueError("warp or composite stage required")
+        self.stage=stage;self.frame=frame;self.warp_reads_blur=warp_reads_blur
+        self.environment={};self.complete=True;self.unknown=[]
+        self.functions={};self.global_names=set();self.globals={};self.call_stack=[]
+        self.frame_wrap=frame_wrap;self.sampler_bindings={}
+        self.main_binding_policy=main_binding_policy
+        self.known_uniforms=known_uniforms or {}
+        self.known_uniform_components=known_uniform_components or {}
+        self.known_uniform_component_domains=known_uniform_component_domains or {}
+        self.case_constraints={}
+        self.domain_guards={}
+        if global_input_policy not in {'strict-v1','projectmtv-implicit-extern-zero-v1'}:
+            raise ValueError('unsupported implicit global input policy')
+        self.global_input_policy=global_input_policy
+        if array_initializer_policy not in {'legacy-layout-v1','grouped-elements-v1'}:raise ValueError('unsupported array initializer policy')
+        self.array_initializer_policy=array_initializer_policy
+        self.effects=[]
+        self.local_names=set()
+        self.native_samplers={}
+        self.sample_counter=0
+        self.matrix_constructors=set()
+
+    @staticmethod
+    def coerce(value:Field,dtype:str)->Field:
+        if value.dtype==dtype:return value
+        op='matrix_cast' if re.fullmatch(r'float[2-4]x[2-4]',dtype) else 'cast'
+        return Field(op,(value,),dtype,{'target_type':dtype})
+
+    def collect_matrix_constructors(self,node):
+        """Mirror native EnumerateMatrixCtorsNeeded's shader-wide registry."""
+        if isinstance(node,list):
+            for item in node:self.collect_matrix_constructors(item)
+        elif isinstance(node,dict):
+            if node.get('kind')=='construct' and 'x' in node.get('type',{}).get('name',''):
+                self.matrix_constructors.add((node['type']['name'],tuple(a['type']['name'] for a in node.get('args',[]))))
+            elif node.get('kind')=='declarations':
+                for declaration in node['values']:
+                    dtype=declaration['type']['name'];value=declaration['value']
+                    if 'x' not in dtype or declaration['type'].get('flags',0)&4:continue
+                    args=[] if value is None else value['elements'] if value.get('kind')=='aggregate' else [value]
+                    types=tuple(a['type']['name'] for a in args)
+                    if not any('x' in name for name in types):self.matrix_constructors.add((dtype,types))
+            for value in node.values():self.collect_matrix_constructors(value)
+
+    def matrix_constructor(self,args,dtype):
+        shape=self.shape(dtype)
+        if shape is None:return self.unsupported('matrix constructor type not lowered',args,dtype)
+        components=sum(self.shape(a.dtype)[1] for a in args if 'x' not in a.dtype and self.shape(a.dtype))
+        if components>shape[1]:return self.unsupported('overfilled native matrix constructor',args,dtype)
+        return Field('matrix_constructor',args,dtype,{'lowering':'pinned GLSLGenerator::OutputMatrixCtors'})
+
+    def initializer(self,value,dtype):
+        args=value.args if value.op=='aggregate' else (value,)
+        if (dtype,tuple(a.dtype for a in args)) in self.matrix_constructors:
+            return self.matrix_constructor(args,dtype)
+        return self.coerce(value,dtype)
+
+    @staticmethod
+    def array_type(dtype):
+        match=re.fullmatch(r'(.+)\[([1-9][0-9]*)\]',dtype)
+        return (match[1],int(match[2])) if match else None
+
+    def dtype(self,type_info,*,actual=None,initializer=None):
+        name=type_info['name']
+        if not type_info.get('array'):return name
+        size=type_info.get('array_size')
+        if size is None:
+            if actual is not None and self.array_type(actual.dtype):
+                if self.array_type(actual.dtype)[0]==name:return actual.dtype
+                self.unsupported('helper array element type mismatch');return name
+            if initializer is not None and initializer.get('kind')=='aggregate':length=len(initializer['elements'])
+            else:
+                self.unsupported('array size is not established');return name
+        else:
+            try:
+                from field_math import evaluate
+                bound=self.expression(size)
+                if bound.dtype!='int':raise ValueError('array size requires integer constant expression')
+                length=int(evaluate(bound))
+            except ValueError:
+                self.unsupported('array size is not a resolved integer constant');return name
+        if not 1<=length<=4096:
+            self.unsupported('array size outside supported storage budget');return name
+        return f'{name}[{length}]'
+
+    def array_declaration(self,declaration,*,global_scope=False):
+        value=declaration['value'];dtype=self.dtype(declaration['type'],initializer=value)
+        layout=self.array_type(dtype)
+        if layout is None:return self.unsupported('array storage size unresolved',dtype=dtype)
+        element,length=layout
+        if value is None:
+            if global_scope and declaration['type'].get('flags',0)&4:
+                return Field('input',dtype=dtype,detail={'name':declaration['name']})
+            return Field('array',tuple(Field('uninitialized',dtype=element) for _ in range(length)),dtype)
+        elements=value.get('elements',[value])
+        if self.array_initializer_policy=='grouped-elements-v1' and 'x' not in element:
+            element_shape=self.shape(element)
+            shapes=[self.shape(a['type']['name']) if not a['type'].get('array') and 'x' not in a['type']['name'] else None for a in elements]
+            if element_shape and all(shapes):
+                components=element_shape[1]
+                if len(elements)==length and all(shape[1]==components for shape in shapes):
+                    return Field('array',tuple(self.coerce(self.expression(a),element) for a in elements),dtype)
+                if sum(shape[1] for shape in shapes)!=length*components:
+                    return self.unsupported('native GLSL array initializer component count mismatch',dtype=dtype)
+                groups=[];group=[];filled=0
+                for item,shape in zip(elements,shapes):
+                    if filled+shape[1]>components:
+                        return self.unsupported('native GLSL array initializer spans elements',dtype=dtype)
+                    group.append(item);filled+=shape[1]
+                    if filled==components:
+                        if self.unsequenced(group):return self.unsupported('array constructor argument side-effect order not established',dtype=dtype)
+                        groups.append(Field('construct',tuple(self.expression(a) for a in group),element));group=[];filled=0
+                return Field('array',tuple(groups),dtype)
+        # Native emits element-type[](raw expressions), with no flat grouping or
+        # padding. Invalid GLSL constructor layouts must not become valid arrays.
+        if len(elements)!=length or any(a['type']['name']!=element and not
+                (element=='float' and a['type']['name'] in {'int','float'}) for a in elements):
+            return self.unsupported('native GLSL array initializer layout mismatch',dtype=dtype)
+        return Field('array',tuple(self.coerce(self.expression(a),element) for a in elements),dtype)
+
+    def read(self,value:Field)->Field:
+        pending=[value];seen=set()
+        while pending:
+            item=pending.pop()
+            if id(item) in seen:continue
+            seen.add(id(item))
+            if item.op=='uninitialized':return self.unsupported('uninitialized shader value reaches a read',(value,),value.dtype)
+            # Loop initialization and per-component validity are checked in the
+            # execution context; an initial unknown may be assigned in its body.
+            if item.op in {'loop_result','loop_slot','array','array_index','array_write'}:continue
+            pending.extend(item.args)
+        return value
+
+    @staticmethod
+    def scalar_bounds(value):
+        """Restricted finite bounds, including the native uniform float32 boundary."""
+        import math
+        if value.op=='constant' and isinstance(value.detail.get('value'),(int,float)):
+            x=float(value.detail['value']);return (x,x) if math.isfinite(x) else None
+        if value.op=='member' and 'source_domain' in value.detail:
+            import numpy as np
+            lo,hi=value.detail['source_domain']
+            if not (math.isfinite(lo) and math.isfinite(hi) and lo<=hi):return None
+            with np.errstate(over='ignore',invalid='ignore'):
+                bounds=(float(np.float32(lo)),float(np.float32(hi)))
+            return bounds if all(math.isfinite(x) for x in bounds) else None
+        if value.op in {'cast','narrow','construct'} and len(value.args)==1 and value.dtype=='int':
+            bound=ShaderFields.scalar_bounds(value.args[0])
+            if bound is None or not (-2147483648<=bound[0]<=bound[1]<=2147483647):return None
+            return tuple(math.trunc(x) for x in bound)
+        if value.op=='remainder' and value.dtype=='int':
+            left=ShaderFields.scalar_bounds(value.args[0]);right=ShaderFields.scalar_bounds(value.args[1])
+            if left is None or right is None:return None
+            if not (0<=left[0]<=left[1]<=2147483647 and right[0]==right[1] and
+                    right[0]==int(right[0]) and 1<=right[0]<=2147483647):return None
+            return (0,min(int(left[1]),int(right[0])-1))
+        return None
+
+    def condition_cases(self,condition):
+        """Narrow equality branches on one bounded integer expression identity."""
+        if condition.op not in {'equal','not_equal'} or len(condition.args)!=2:return None
+        selector,constant=condition.args
+        if selector.op=='constant':selector,constant=constant,selector
+        if constant.op!='constant' or selector.dtype!='int':return None
+        bound=self.scalar_bounds(selector)
+        if bound is None or bound[1]-bound[0]>63:return None
+        values=frozenset(range(int(bound[0]),int(bound[1])+1))
+        saved=self.case_constraints.get(id(selector))
+        if saved is not None:values&=saved[1]
+        literal=constant.detail.get('value')
+        if not isinstance(literal,(int,float)):return None
+        yes=frozenset(v for v in values if (v==literal)==(condition.op=='equal'))
+        pending=[selector]
+        while pending:
+            value=pending.pop()
+            if value.op=='member' and 'source_domain' in value.detail:
+                self.domain_guards[id(value)]=Field('source_domain_guard',(value,),'bool',
+                    {'bounds':self.scalar_bounds(value)})
+            pending.extend(value.args)
+        return selector,yes,values-yes
+
+    def scoped_cases(self,body,case):
+        before=dict(self.case_constraints)
+        if case is not None:
+            selector,values=case
+            self.case_constraints[id(selector)]=(selector,values)
+        try:self.scoped(body)
+        finally:self.case_constraints=before
+
+    @staticmethod
+    def shape(dtype):
+        match=re.fullmatch(r'(float|int|uint|bool)([1-4])?(?:x([1-4]))?',dtype)
+        if match is None:return None
+        base,rows,cols=match.groups()
+        return base,(int(rows)*int(cols) if cols else int(rows or 1))
+
+    def parts(self,value):
+        shape=self.shape(value.dtype)
+        if shape is None:return (self.unsupported('component type not understood',dtype=value.dtype),)
+        base,count=shape
+        if value.op=='components':return value.args
+        if value.op=='uninitialized':
+            return tuple(Field('uninitialized',dtype=base,detail={**value.detail,'component':i}) for i in range(count))
+        if value.op=='select':
+            yes=self.parts(value.args[1]);no=self.parts(value.args[2])
+            return tuple(Field('select',(value.args[0],y,n),base) for y,n in zip(yes,no))
+        if re.fullmatch(r'float[2-4]',value.dtype) and value.op in ELEMENTWISE|{'add','subtract','multiply','divide','remainder','unary'}:
+            arguments=[self.parts(arg) for arg in value.args]
+            if all(len(parts) in {1,count} for parts in arguments):
+                return tuple(Field(value.op,tuple(parts[0] if len(parts)==1 else parts[i]
+                                                 for parts in arguments),base,value.detail) for i in range(count))
+        if value.op in {'construct','aggregate'}:
+            flattened=tuple(self.coerce(part,base) for arg in value.args for part in self.parts(arg))
+            if len(flattened)==1 and 'x' not in value.dtype:return flattened*count
+            if len(flattened)>=count:return flattened[:count]
+        if value.op=='cast':
+            flattened=tuple(self.coerce(part,base) for part in self.parts(value.args[0]))
+            if len(flattened)==1 and 'x' not in value.dtype:return flattened*count
+            if len(flattened)>=count:return flattened[:count]
+            if 'x' not in value.dtype:
+                zero=Field('constant',dtype=base,detail={'value':0})
+                return flattened+(zero,)*(count-len(flattened))
+        if count==1:return (value,)
+        if 'x' not in value.dtype:
+            return tuple(Field('member',(value,),base,{'field':'xyzw'[i],'swizzle':True}) for i in range(count))
+        return tuple(Field('flat_component',(value,),base,{'index':i}) for i in range(count))
+
+    def member_indices(self,dtype,name):
+        if 'x' in dtype:
+            matrix=re.fullmatch(r'(?:float|int|uint|bool)([1-4])x([1-4])',dtype)
+            member=re.fullmatch(r'_m([0-3])([0-3])',name)
+            offset=0
+            if member is None:member=re.fullmatch(r'_([1-4])([1-4])',name);offset=1
+            if matrix is None or member is None:
+                self.unsupported('multiple/unsupported matrix member in pinned generator');return None
+            row=int(member[1])-offset;column=int(member[2])-offset
+            if row>=int(matrix[1]) or column>=int(matrix[2]):
+                self.unsupported('matrix member out of bounds');return None
+            return [row*int(matrix[2])+column]
+        shape=self.shape(dtype)
+        if shape is None or any(c not in 'xyzwrgba' for c in name):
+            self.unsupported('non-numeric shader member');return None
+        indices=[('xyzw'.index(c) if c in 'xyzw' else 'rgba'.index(c)) if shape[1]>1 else 0 for c in name]
+        if any(i>=shape[1] for i in indices):self.unsupported('vector member out of bounds');return None
+        return indices
+
+    @staticmethod
+    def localize_exclusive_helper_storage(tree):
+        """Localize plain unwritten globals referenced by exactly one helper.
+
+        Retain externally visible accesses and authored initializers. A generated
+        implicit-input copy may be treated as unknown per-call scratch only when
+        exclusive to one helper: every read must still follow a complete write.
+        This conservative proof cannot borrow a value from a prior helper call.
+        """
+        from copy import deepcopy
+        tree=deepcopy(tree)
+        owners={}
+        def references(node,owner):
+            if isinstance(node,list):
+                for child in node:references(child,owner)
+            elif isinstance(node,dict):
+                if node.get('kind')=='variable' and node.get('global'):
+                    owners.setdefault(node['name'],set()).add(owner)
+                for child in node.values():references(child,owner)
+        functions={i:node for i,node in enumerate(tree) if node.get('kind')=='function' and node.get('name')!='PS'}
+        for i,node in enumerate(tree):references(node,i if i in functions else None)
+        localized={}
+        for node in tree:
+            if node.get('kind')!='declarations':continue
+            retained=[]
+            for declaration in node['values']:
+                name=declaration['name'];usage=owners.get(name,set());type_info=declaration['type']
+                initializer=declaration['value']
+                generated_copy=(type_info.get('flags',0)==2 and isinstance(initializer,dict) and
+                    initializer.get('kind')=='variable' and initializer.get('global') and
+                    (initializer.get('type',{}).get('flags',0)&0x400004)==0x400004)
+                plain=(initializer is None and not type_info.get('flags',0))
+                if (len(usage)==1 and None not in usage and (plain or generated_copy) and
+                        not type_info.get('array') and
+                        re.fullmatch(r'(float|int|uint|bool)[1-4]?',type_info['name'])):
+                    if generated_copy:
+                        declaration['value']=None
+                        declaration['type']={**type_info,'flags':0}
+                    owner=next(iter(usage));localized.setdefault(owner,[]).append(declaration)
+                else:retained.append(declaration)
+            node['values']=retained
+        def local_references(node,names):
+            if isinstance(node,list):
+                for child in node:local_references(child,names)
+            elif isinstance(node,dict):
+                if node.get('kind')=='variable' and node.get('global') and node.get('name') in names:
+                    node['global']=False
+                for child in node.values():local_references(child,names)
+        for owner,declarations in localized.items():
+            function=functions[owner]
+            local_references(function,{d['name'] for d in declarations})
+            function['body'].insert(0,{'kind':'declarations','values':declarations})
+        return tree
+
+    def lower(self,tree:list[dict],*,language_extensions=(),native_samplers=None)->Field:
+        """Lower the entry body; uniforms stay symbolic rather than guessed zero."""
+        tree=self.localize_exclusive_helper_storage(tree)
+        self.collect_matrix_constructors(tree)
+        extensions=set(language_extensions)
+        if extensions-{'all'}:raise ValueError('unsupported parser language extension')
+        native_samplers={} if native_samplers is None else native_samplers
+        if not isinstance(native_samplers,dict) or any(
+            not isinstance(name,str) or not name.startswith('sampler_') or
+            dtype not in {'sampler2D','sampler3D'} for name,dtype in native_samplers.items()):
+            raise ValueError('explicit native sampler names and dimensions required')
+        self.native_samplers=dict(native_samplers)
+        for node in tree:
+            if node['kind']=='function':
+                # Only the reader's explicitly tagged standard declaration is
+                # intrinsic. Preserve real bodies and untagged declarations.
+                synthetic=(node['name'] in extensions and not node['body'] and
+                    node['return_type']['name']=='bool' and len(node['args'])==1 and
+                    node['args'][0]['modifier']==0)
+                if not synthetic:self.functions.setdefault(node['name'],[]).append(node)
+            elif node['kind']=='declarations':
+                for declaration in node['values']:
+                    name=declaration['name'];self.global_names.add(name)
+                    dtype=declaration['type']['name']
+                    if declaration['type'].get('array'):
+                        value=self.array_declaration(declaration,global_scope=True)
+                    elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
+                    elif declaration['value'] is not None:value=self.initializer(self.expression(declaration['value']),dtype)
+                    elif ((declaration['type'].get('flags',0)&0x400004)==0x400004 and
+                          self.global_input_policy=='projectmtv-implicit-extern-zero-v1' and name not in self.known_uniforms):
+                        value=Field('input',dtype=dtype,detail={'name':name,'unbound_default':0,
+                            'basis':'GLES link-time initialization when no explicit binding is supplied'})
+                    elif declaration['type'].get('flags',0)&4 and name in self.known_uniforms:
+                        value=Field('constant',dtype=dtype,detail={'value':self.known_uniforms[name],
+                                    'basis':'explicit source/context uniform binding'})
+                    elif declaration['type'].get('flags',0)&4 and dtype=='float4' and (name in self.known_uniform_components or name in self.known_uniform_component_domains):
+                        packed=Field('input',dtype=dtype,detail={'name':name})
+                        lanes=self.known_uniform_components.get(name,{})
+                        domains=self.known_uniform_component_domains.get(name,{})
+                        value=Field('components',tuple(
+                            Field('constant',dtype='float',detail={'value':lanes[i],
+                                'basis':'source-proven untouched main Q component'}) if i in lanes else
+                            Field('member',(packed,),'float',{'field':'xyzw'[i],'swizzle':True,
+                                **({'source_domain':domains[i]} if i in domains else {})})
+                            for i in range(4)),dtype)
+                    else:value=Field('input' if declaration['type'].get('flags',0)&4 or dtype.startswith('sampler') else 'uninitialized',dtype=dtype,detail={'name':name})
+                    self.environment[name]=value
+                    self.globals[name]=self.environment[name]
+            else:self.unsupported('shader global not lowered: '+node['kind'])
+        entries=self.functions.get('PS',[])
+        samplers=[name for name in self.global_names|set(self.native_samplers) if name.startswith('sampler_')]
+        self.sampler_bindings=main_sampler_bindings(samplers,stage=self.stage,frame_wrap=self.frame_wrap,policy=self.main_binding_policy)
+        if len(entries)!=1:return self.unsupported('missing or ambiguous shader entry point')
+        for argument in entries[0]['args']:
+            # GLSL out parameters have no incoming value. Keep unwritten
+            # components invalid rather than requesting a fictitious uniform.
+            kind='uninitialized' if argument['modifier']==2 else 'input'
+            self.environment[argument['name']]=Field(kind,dtype=argument['type']['name'],detail={'name':argument['name']})
+            self.local_names.add(argument['name'])
+        self.statements(self.discard_dead_assignments(entries[0]['body']))
+        if 'ret' not in self.environment:return self.unsupported('missing shader result')
+        result=self.environment['ret']
+        if not self.complete and result.op!='unknown':
+            return Field('unknown',(result,),result.dtype,{'reason':'shader contains unresolved semantic effects'})
+        self.effects[:0]=self.domain_guards.values()
+        if self.effects:result=Field('sequence',tuple(self.effects)+(result,),result.dtype)
+        return result
+
+    def native_sampler(self,declaration):
+        """Name binding replaces a state initializer only with explicit context."""
+        name=declaration['name'];value=declaration.get('value')
+        if (declaration['type']['name'].startswith('sampler') and value is not None and
+                value.get('kind')=='sampler_state' and name in self.native_samplers):
+            return Field('input',dtype=self.native_samplers[name],detail={
+                'name':name,'binding_basis':'explicit native descriptor',
+                'source_sampler_states_ignored':value['states']})
+        return None
+
+    def helper_candidates(self,node):
+        candidates=self.functions.get(node['function'],[])
+        signature=node.get('signature')
+        if signature is not None:
+            expected=[a['type'] for a in signature]
+            candidates=[f for f in candidates if [a['type'] for a in f['args']]==expected]
+        return candidates
+
+    def output_targets(self,node):
+        if not isinstance(node,dict) or node.get('kind')!='call':return []
+        arguments=node.get('args',[])
+        # The pinned HLSL intrinsic table incorrectly describes modf's second
+        # parameter as input; the generated GLSL wrapper declares it out.
+        if node['function']=='modf' and 'modf' not in self.functions:
+            return arguments[1:2]
+        return [arguments[i] for i,p in enumerate(node.get('signature',[]))
+                if i<len(arguments) and p.get('modifier') in {2,3}]
+
+    def local_access(self,node):
+        """Caller-local storage touched directly by output arguments."""
+        reads=set();writes=set()
+        if isinstance(node,list):children=node
+        elif isinstance(node,dict):
+            if node.get('kind')=='variable' and not node.get('global'):reads.add(node['name'])
+            for target in self.output_targets(node):
+                while target.get('kind') in {'member','index'}:target=target['object']
+                if target.get('kind')=='variable' and not target.get('global'):writes.add(target['name'])
+            children=node.values()
+        else:return reads,writes
+        for child in children:
+            r,w=self.local_access(child);reads.update(r);writes.update(w)
+        return reads,writes
+
+    def global_access(self,node,seen=None):
+        """Conservative transitive read/write sets for shared shader variables."""
+        seen=set() if seen is None else seen
+        reads=set();writes=set()
+        if isinstance(node,list):children=node
+        elif isinstance(node,dict):
+            if node.get('kind')=='variable' and node.get('global'):reads.add(node['name'])
+            target=None
+            if node.get('kind')=='binary' and node['operator']>=16:target=node['left']
+            elif node.get('kind')=='unary' and node['operator'] in {3,4,5,6}:target=node['operand']
+            while target is not None and target.get('kind') in {'member','index'}:target=target['object']
+            if target is not None and target.get('global'):writes.add(target['name'])
+            for output in self.output_targets(node):
+                while output.get('kind') in {'member','index'}:output=output['object']
+                if output.get('global'):writes.add(output['name'])
+            children=list(node.values())
+            if node.get('kind')=='call':
+                for function in self.helper_candidates(node):
+                    if id(function) not in seen:
+                        r,w=self.global_access(self.reachable_helper_body(function['body']),seen|{id(function)})
+                        reads.update(r);writes.update(w)
+        else:return reads,writes
+        for child in children:
+            r,w=self.global_access(child,seen);reads.update(r);writes.update(w)
+        return reads,writes
+
+    def has_shared_effects(self,node):
+        return self.has_assignment(node) or bool(self.global_access(node)[1]) or bool(self.local_access(node)[1])
+
+    def unsequenced(self,nodes):
+        if len(nodes)<2:return False
+        if any(self.has_assignment(node) for node in nodes):return True
+        access=[]
+        for node in nodes:
+            gr,gw=self.global_access(node);lr,lw=self.local_access(node)
+            access.append(({('global',n) for n in gr}|{('local',n) for n in lr},
+                           {('global',n) for n in gw}|{('local',n) for n in lw}))
+        return any(writes & (other_reads|other_writes)
+                   for i,(_,writes) in enumerate(access)
+                   for j,(other_reads,other_writes) in enumerate(access) if i!=j)
+
+    def helper(self,node:dict,args:tuple,dtype:str)->Field:
+        name=node['function'];candidates=self.helper_candidates(node)
+        if len(candidates)!=1:return self.unsupported('ambiguous shader helper: '+name,args,dtype)
+        function=candidates[0];parameters=function['args'];body=self.reachable_helper_body(function['body'])
+        if any(p['modifier'] in {2,3} for p in parameters):
+            return self.unsupported('shader helper output arguments not lowered: '+name,args,dtype)
+        if name in self.call_stack:return self.unsupported('recursive shader helper: '+name,args,dtype)
+        if not body or body[-1]['kind']!='return':
+            return self.unsupported('nonterminal shader helper return not lowered: '+name,args,dtype)
+        if len(args)>len(parameters):return self.unsupported('shader helper argument count mismatch',args,dtype)
+        caller=self.environment
+        caller_locals=self.local_names
+        globals_before=dict(self.globals)
+        caller_effects=self.effects;self.effects=[]
+        self.environment=dict(globals_before);self.local_names=set();self.call_stack.append(name)
+        completed_globals=None;completed_effects=[]
+        try:
+            for i,p in enumerate(parameters):
+                value=args[i] if i<len(args) else self.expression(p.get('default'))
+                self.environment[p['name']]=self.coerce(value,self.dtype(p['type'],actual=value))
+                self.local_names.add(p['name'])
+            self.statements(body[:-1]);result=self.coerce(self.expression(body[-1]['value']),function['return_type']['name'])
+            completed_globals=dict(self.globals);completed_effects=list(self.effects)
+            return result
+        finally:
+            self.environment=caller;self.local_names=caller_locals
+            self.globals=globals_before if completed_globals is None else completed_globals
+            for global_name,value in self.globals.items():
+                if global_name not in caller_locals:self.environment[global_name]=value
+            self.call_stack.pop();self.effects=caller_effects
+            self.effects.extend(completed_effects)
+
+    @staticmethod
+    def reachable_helper_body(body):
+        """A top-level return ends execution, including effect dependency scans.
+
+        Returns inside branches/loops still need path-aware lowering; retaining
+        them here ensures those unresolved effects cannot disappear.
+        """
+        end=next((i+1 for i,s in enumerate(body) if s['kind']=='return'),len(body))
+        return body[:end]
+
+    @staticmethod
+    def has_assignment(node)->bool:
+        if isinstance(node,list):return any(ShaderFields.has_assignment(n) for n in node)
+        if not isinstance(node,dict):return False
+        if node.get('kind')=='binary' and node['operator']>=16:return True
+        if node.get('kind')=='unary' and node['operator'] in {3,4,5,6}:return True
+        return any(ShaderFields.has_assignment(v) for v in node.values())
+
+    def scoped(self,body:list[dict]):
+        """Restore block declarations while preserving assignments to outer names."""
+        before=dict(self.environment)
+        locals_before=set(self.local_names)
+        declared={d['name'] for s in body if s['kind']=='declarations' for d in s['values']}
+        self.statements(body)
+        for name in declared:
+            if name in self.globals and name not in locals_before:self.environment[name]=self.globals[name]
+            elif name in before:self.environment[name]=before[name]
+            else:self.environment.pop(name,None)
+        self.local_names=locals_before
+
+    def unsupported(self,reason:str,args:tuple=(),dtype:str="float")->Field:
+        self.complete=False;self.unknown.append(reason)
+        return Field("unknown",args,dtype,{"reason":reason})
+
+    def texture(self,name:str,args:tuple,dtype:str)->Field:
+        policy=self.sampler_bindings.get(name,texture_settings(name));base=policy['texture'].lower()
+        if base=='main':
+            if name not in self.sampler_bindings:
+                if self.stage=='warp':
+                    # Without a complete tree, earlier main aliases can change
+                    # which sampler occupies overridden unit0. Keep that unknown.
+                    policy={**policy,'unit':None,'wrap':None,'linear':True if name=='sampler_main' else None,
+                            'binding_condition':'complete main-sampler order required'}
+            source_frame=self.frame-1 if self.stage=="warp" else self.frame
+            surface="pre_composite_feedback" if self.stage=="warp" else "current_warp_with_draws"
+        elif name in {'sampler_blur1','sampler_blur2','sampler_blur3'}:
+            source_frame=self.frame-(2 if self.stage=="warp" and self.warp_reads_blur else 1)
+            surface="blur_of_pre_composite_feedback"
+            policy={**policy,'wrap':False,'linear':True}
+        elif base in {'blur1','blur2','blur3'}:
+            return self.unsupported('prefixed blur sampler binding not established',(args[0],),dtype)
+        else:
+            source_frame=None;surface="procedural_or_external_texture"
+        site_index=self.sample_counter;self.sample_counter+=1
+        return Field("sample",args,dtype,{"sampler":name,"surface":surface,"frame":source_frame,'site_index':site_index,
+            'canonical_texture':base,'sampling_policy':policy,
+            "coordinate_convention":"MilkDrop shader UV; underlying main/blur flips remain explicit pipeline requirements"})
+
+    def write(self,target:dict,value:Field):
+        type_info=target.get('type',{'name':value.dtype})
+        dtype=self.dtype(type_info,actual=value)
+        if self.array_type(dtype) and value.dtype!=dtype:
+            return self.unsupported('incompatible whole-array assignment',(value,),dtype)
+        value=self.coerce(value,dtype)
+        if target["kind"]=="variable":
+            if target.get('type',{}).get('flags',0)&1:
+                return self.unsupported('assignment to const GLSL value',(value,),value.dtype)
+            if target.get('global') and target.get('type',{}).get('flags',0)&4:
+                return self.unsupported('assignment to read-only GLSL uniform',(value,),value.dtype)
+            if not target.get('global') or target['name'] not in self.local_names:
+                self.environment[target["name"]]=value
+            if target.get('global'):self.globals[target['name']]=value
+            return value
+        if target['kind']=='member':
+            prior=self.expression(target['object'],defer_read=True)
+            indices=self.member_indices(prior.dtype,target['field'])
+            if indices is None:return self.unsupported('unsupported shader member assignment',(value,))
+            if len(set(indices))!=len(indices):return self.unsupported('duplicate shader swizzle assignment',(value,))
+            components=list(self.parts(prior));assigned=self.parts(value)
+            for index,part in zip(indices,assigned):components[index]=self.coerce(part,self.shape(prior.dtype)[0])
+            updated=Field('components',tuple(components),prior.dtype)
+            self.write(target['object'],updated)
+            return value
+        if target['kind']=='index':
+            parent_type=target['object'].get('type',{})
+            if parent_type.get('array'):
+                if self.has_shared_effects(target['index']):return self.unsupported('shader index side-effect order unresolved',(value,))
+                prior=self.expression(target['object'],defer_read=True);layout=self.array_type(prior.dtype)
+                if layout is None:return self.unsupported('array write storage unresolved',(value,))
+                element,length=layout;index=self.coerce(self.expression(target['index']),'int')
+                self.effects.append(Field('index_guard',(index,),'bool',{'length':length}))
+                updated=Field('array_write',(prior,index,self.coerce(value,element)),prior.dtype)
+                self.write(target['object'],updated);return value
+            if 'x' in parent_type.get('name',''):return self.unsupported('matrix row assignment is not a writable pinned-generator expression',(value,))
+            if self.has_shared_effects(target['index']):return self.unsupported('shader index side-effect order unresolved',(value,))
+            prior=self.expression(target['object'],defer_read=True);shape=self.shape(prior.dtype)
+            if shape is None or shape[1]<2:return self.unsupported('unsupported indexed shader assignment',(value,))
+            index=self.coerce(self.expression(target['index']),'int')
+            self.effects.append(Field('index_guard',(index,),'bool',{'length':shape[1]}))
+            components=[]
+            for i,part in enumerate(self.parts(prior)):
+                condition=Field('equal',(index,Field('constant',dtype='int',detail={'value':i})),'bool')
+                components.append(Field('select',(condition,self.coerce(value,shape[0]),part),shape[0]))
+            self.write(target['object'],Field('components',tuple(components),prior.dtype))
+            return value
+        return self.unsupported("indexed or indirect shader assignment",(value,))
+
+    def bind_destination(self,target):
+        """Capture GLSL lvalue indices before evaluating the assignment RHS."""
+        if target.get('kind') not in {'index','member'}:return target
+        bound={**target,'object':self.bind_destination(target['object'])}
+        if target['kind']=='index':
+            bound['index']=(self.unsupported('shader index side-effect order unresolved')
+                if self.has_shared_effects(target['index']) else self.expression(target['index']))
+        return bound
+
+    def zero_storage_product(self,node,dtype):
+        """Pinned scalar/vector mult0 returns zero for plain unknown storage.
+
+        Do not evaluate helpers, indices, textures or external inputs here. Their
+        effects/domains remain obligations even if the final product is zero.
+        """
+        for literal_key,storage_key in [('left','right'),('right','left')]:
+            literal=node[literal_key];storage=node[storage_key]
+            if literal.get('kind')!='constant' or literal.get('value')!=0:continue
+            base=storage
+            while base.get('kind')=='member':base=base['object']
+            if base.get('kind')!='variable' or base.get('type',{}).get('array'):continue
+            value=self.expression(storage,defer_read=True)
+            pending=[value];seen=set();unwritten=False;plain=True
+            while pending:
+                item=pending.pop()
+                if id(item) in seen:continue
+                seen.add(id(item))
+                if item.op not in {'uninitialized','components','member','flat_component','cast','narrow','constant'}:
+                    plain=False;break
+                unwritten|=item.op=='uninitialized';pending.extend(item.args)
+            if plain and unwritten:
+                return self.coerce(Field('constant',dtype='float',detail={'value':0,
+                    'basis':'pinned mult0 literal-zero result independent of plain unwritten storage'}),dtype)
+        return None
+
+    def expression(self,node:dict|Field|None,*,defer_read=False)->Field:
+        if isinstance(node,Field):return node
+        if node is None:return self.unsupported("uninitialized shader value")
+        kind=node["kind"];dtype=node.get("type",{}).get("name","float")
+        if node.get('type',{}).get('array'):
+            environment=self.globals if node.get('global') else self.environment
+            dtype=self.dtype(node['type'],actual=environment.get(node.get('name','')))
+        if kind=="constant":
+            value=node['value'];literal=node.get('renderer_literal')
+            if literal is not None:
+                try:value=float(literal.removeprefix('float(').removesuffix(')'))
+                except ValueError:return self.unsupported('nonfinite or unsupported renderer literal',dtype=dtype)
+            return Field("constant",dtype=dtype,detail={"value":value,'native_value':node['value'],'renderer_literal':literal})
+        if kind=="variable":
+            environment=self.globals if node.get('global') else self.environment
+            value=environment.get(node["name"],Field("input",dtype=dtype,detail={"name":node["name"]}))
+            return value if defer_read else self.read(value)
+        if kind=="member":
+            value=self.expression(node['object'],defer_read=True)
+            if value.op in {'uninitialized','components','select'} or 'x' in value.dtype or self.shape(value.dtype)==(value.dtype,1):
+                indices=self.member_indices(value.dtype,node['field'])
+                if indices is None:return self.unsupported('unsupported shader member',dtype=dtype)
+                components=self.parts(value);chosen=tuple(components[i] for i in indices)
+                result=self.coerce(chosen[0],dtype) if len(chosen)==1 else Field('components',chosen,dtype)
+            else:result=Field('member',(value,),dtype,{'field':node['field'],'swizzle':node.get('swizzle',False)})
+            return result if defer_read else self.read(result)
+        if kind=="index":
+            if self.has_shared_effects(node['index']):
+                return self.unsupported('array index side-effect order unresolved' if node['object'].get('type',{}).get('array')
+                                        else 'shader index side-effect order unresolved',dtype=dtype)
+            value=self.expression(node['object'],defer_read=True)
+            op='array_index' if self.array_type(value.dtype) else 'index'
+            result=Field(op,(value,self.coerce(self.expression(node['index']),'int')),dtype)
+            return result if defer_read else self.read(result)
+        if kind in {"construct","aggregate"}:
+            arguments=node.get("args",node.get("elements",[]))
+            if self.unsequenced(arguments):return self.unsupported('constructor argument side-effect order not established',dtype=dtype)
+            args=tuple(self.expression(arg) for arg in arguments)
+            matrix=re.fullmatch(r'(?:float|int|bool)([1-4])x([1-4])',dtype)
+            if matrix:
+                return self.matrix_constructor(args,dtype)
+            return Field(kind,args,dtype)
+        if kind=="cast":
+            value=self.expression(node['operand'],defer_read=True)
+            source=self.shape(value.dtype);target=self.shape(dtype)
+            if source and target and 'x' not in value.dtype and 'x' not in dtype and value.op in {'uninitialized','components','select','loop_slot','loop_result'}:
+                parts=self.parts(value)
+                if source[1]==1:parts=parts*target[1]
+                elif source[1]<target[1]:parts=parts+(Field('constant',dtype=target[0],detail={'value':0}),)*(target[1]-source[1])
+                parts=tuple(self.coerce(part,target[0]) for part in parts[:target[1]])
+                result=parts[0] if target[1]==1 else Field('components',parts,dtype)
+            else:result=self.coerce(value,dtype)
+            return result if defer_read else self.read(result)
+        if kind=="unary":
+            if node['operator'] in {3,4,5,6}:
+                previous=self.expression(node['operand'])
+                one=Field('constant',dtype=dtype,detail={'value':1})
+                updated=Field('add' if node['operator'] in {3,5} else 'subtract',(self.coerce(previous,dtype),one),dtype)
+                stored=self.write(node['operand'],updated)
+                return stored if node['operator'] in {3,4} else previous
+            if node['operator'] not in {0,1,2}:return self.unsupported('bitwise unary operator not lowered',dtype=dtype)
+            return Field("unary",(self.expression(node["operand"],defer_read=defer_read),),dtype,{"operator":node["operator"]})
+        if kind=="conditional":
+            if self.has_shared_effects(node):return self.unsupported('conditional expression side effects not lowered',dtype=dtype)
+            return Field("select",tuple(self.expression(node[key]) for key in ["condition","yes","no"]),dtype)
+        if kind=="binary":
+            op=node["operator"]
+            if 2<=op<16 and (self.has_assignment(node) or self.unsequenced([node['left'],node['right']])):
+                return self.unsupported('arithmetic/comparison side-effect order not established',dtype=dtype)
+            matrix_product=op in {4,19} and 'x' in dtype
+            if matrix_product and (not re.fullmatch(r'float([2-4])x\1',dtype)):
+                return self.unsupported('rectangular bare matrix product has no pinned GLSL helper',dtype=dtype)
+            if op in {0,1} and self.has_shared_effects(node):return self.unsupported('logical expression side effects not lowered',dtype=dtype)
+            if op==4 and not matrix_product:
+                zero=self.zero_storage_product(node,dtype)
+                if zero is not None:return zero
+            if op>=16:
+                destination=self.bind_destination(node['left'])
+                global_conflict=self.global_access(node['right'])[1]&self.global_access(destination)[0]
+                local_conflict=self.local_access(node['right'])[1]&self.local_access(destination)[0]
+                if op!=16 and (global_conflict or local_conflict):
+                    return self.unsupported('compound assignment helper side-effect order not established',dtype=dtype)
+                deferred=(bool(re.fullmatch(r'float[2-4]',dtype)) and self.componentwise_storage(node['right']))
+                value=self.coerce(self.expression(node["right"],defer_read=deferred),dtype)
+                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination,defer_read=deferred),dtype),value),dtype,
+                                      {'zero_guard':True} if op==19 and not matrix_product else {})
+                return self.write(destination,value)
+            args=(self.expression(node['left'],defer_read=defer_read),self.expression(node['right'],defer_read=defer_read))
+            if op in {2,3,4,5,6}:args=tuple(self.coerce(arg,dtype) for arg in args)
+            elif op in {7,8,9,10,11,12,13,14,15}:
+                names=[node[key]['type']['name'] for key in ['left','right']]
+                if all(name in {'float','uint','int','bool'} for name in names):
+                    common=next(name for name in ['float','uint','int','bool'] if name in names)
+                    args=tuple(self.coerce(arg,common) for arg in args)
+                elif op in {7,8,9,10,11,12}:
+                    if names[0] in {'float','uint','int','bool'}:args=(self.coerce(args[0],names[1]),args[1])
+                    elif names[1] in {'float','uint','int','bool'}:args=(args[0],self.coerce(args[1],names[0]))
+            return Field('matrix_product' if matrix_product else BINARY[op],args,dtype,
+                         {'zero_guard':True} if op==4 and not matrix_product else {})
+        if kind=="call":
+            name=node["function"];arguments=node.get("args",[])
+            # GLSL330/GLES300 evaluate call arguments once, left to right.
+            if name=='modf' and name not in self.functions:
+                if len(arguments)!=2:return self.unsupported('modf requires two arguments',dtype=dtype)
+                if not re.fullmatch(r'float[1-4]?',dtype):return self.unsupported('modf numeric type not lowered',dtype=dtype)
+                value=self.coerce(self.expression(arguments[0]),dtype)
+                target=self.bind_destination(arguments[1])
+                if target.get('kind') not in {'variable','member','index'}:
+                    return self.unsupported('modf output is not writable storage',dtype=dtype)
+                if target.get('type',{}).get('name')!=dtype:
+                    return self.unsupported('modf output storage type mismatch',dtype=dtype)
+                self.write(target,Field('trunc',(value,),dtype,{'output_of':'modf'}))
+                return Field('modf_fraction',(value,),dtype)
+            if name.lower().startswith("tex") and arguments:
+                if name not in {'tex2D','tex3D','texCUBE','tex2Dbias','tex2Dlod'} or len(arguments)!=2:
+                    return self.unsupported('texture sampling overload not lowered: '+name,dtype=dtype)
+                sampler=self.expression(arguments[0])
+                if sampler.op!='input':return self.unsupported("dynamic sampler expression",(sampler,),dtype)
+                coordinates=self.expression(arguments[1])
+                signature=node.get('signature',[])
+                if len(signature)>1:coordinates=self.coerce(coordinates,signature[1]['type']['name'])
+                if name in {'tex2Dbias','tex2Dlod'}:
+                    policy=self.sampler_bindings.get(sampler.detail['name'],texture_settings(sampler.detail['name']))
+                    if policy.get('mipmapped') is not False or policy.get('base_level')!=0:
+                        return self.unsupported('LOD sampling policy requires explicit base-level proof',dtype=dtype)
+                    packed=coordinates
+                    coordinates=Field('member',(packed,),'float2',{'field':'xy','swizzle':True})
+                    selector=Field('member',(packed,),'float',{'field':'w','swizzle':True})
+                    result=self.texture(sampler.detail['name'],(coordinates,selector),dtype)
+                    return Field(result.op,result.args,result.dtype,{**result.detail,'intrinsic':name,
+                        'lod_mode':'bias' if name=='tex2Dbias' else 'explicit','lod_effect':'base level only'})
+                result=self.texture(sampler.detail['name'],(coordinates,),dtype)
+                return Field(result.op,result.args,result.dtype,{**result.detail,'intrinsic':name})
+            args=tuple(self.expression(arg,defer_read=defer_read and name in ELEMENTWISE) for arg in arguments)
+            signature=node.get('signature',[])
+            args=tuple(self.coerce(arg,self.dtype(signature[i]['type'],actual=arg)) if i<len(signature) else arg
+                       for i,arg in enumerate(args))
+            if name in self.functions:return self.helper(node,args,dtype)
+            if name not in PURE:return self.unsupported("shader helper/intrinsic not lowered: "+name,args,dtype)
+            # Pinned GLSLGenerator implements DX9 compatibility using abs for
+            # these intrinsics. Preserve its literal pow(x,1) sign exception.
+            if name=='pow' and arguments[1]['kind']=='constant' and arguments[1]['value']==1:
+                return self.coerce(args[0],dtype)
+            if name in {'sqrt','rsqrt','log','log2','log10','pow'}:
+                args=(Field('abs',(args[0],),args[0].dtype,
+                            {'lowering':'pinned projectM DX9 compatibility'}),)+args[1:]
+            result=Field(name,args,dtype)
+            if name in {"sqrt","rsqrt","log","log2","log10","pow","normalize"}:
+                return Field("domain_checked",(result,),dtype,{"function":name,"domain":"post-projectM-lowering domain requires proof"})
+            return result
+        return self.unsupported("shader expression not lowered: "+kind,dtype=dtype)
+
+    def loop(self,statement):
+        if self.has_shared_effects(statement.get('condition')):
+            self.unsupported('loop condition side effects not lowered');return
+        before=dict(self.environment)
+        locals_before=set(self.local_names)
+        declared={d['name'] for s in statement.get('initialization',[]) if s['kind']=='declarations' for d in s['values']}
+        self.statements(statement.get('initialization',[]),allow_dead_initializers=False)
+        if statement.get('initial_expression') is not None:self.expression(statement['initial_expression'])
+        initial=dict(self.environment);globals_initial=dict(self.globals)
+        writes=set();global_writes=set()
+        def targets(node):
+            if isinstance(node,list):
+                for item in node:targets(item)
+            elif isinstance(node,dict):
+                for output in self.output_targets(node):
+                    while output.get('kind') in {'member','index'}:output=output['object']
+                    if output.get('kind')=='variable':
+                        writes.add(output['name'])
+                        if output.get('global'):global_writes.add(output['name'])
+                target=None
+                if node.get('kind')=='binary' and node['operator']>=16:target=node['left']
+                elif node.get('kind')=='unary' and node['operator'] in {3,4,5,6}:target=node['operand']
+                if target is not None:
+                    while target.get('kind') in {'member','index'}:target=target['object']
+                    if target.get('kind')=='variable':
+                        writes.add(target['name'])
+                        if target.get('global'):global_writes.add(target['name'])
+                for value in node.values():targets(value)
+        targets(statement['body']);targets(statement.get('increment'))
+        hidden_writes=self.global_access(statement['body'])[1]|self.global_access(statement.get('increment'))[1]
+        writes.update(hidden_writes);global_writes.update(hidden_writes)
+        for name in global_writes:
+            if name in initial and name in globals_initial and name in self.local_names:
+                self.unsupported('loop global/local shadow alias unresolved');return
+        names=tuple(sorted(writes & initial.keys()))
+        global_aliases={name for name in names if name in globals_initial and name not in self.local_names}
+        for name in global_aliases:initial[name]=globals_initial[name]
+        plan=LoopPlan(names)
+        slots={name:Field('loop_slot',dtype=initial[name].dtype,detail={'plan':plan,'name':name}) for name in names}
+        self.environment.update(slots)
+        for name in names:
+            if name in global_aliases:self.globals[name]=slots[name]
+        plan.condition=self.expression(statement['condition']) if statement.get('condition') is not None else None
+        outer_effects=self.effects;self.effects=[]
+        self.scoped(statement['body'])
+        if statement.get('increment') is not None:self.expression(statement['increment'])
+        plan.effects=tuple(self.effects);self.effects=outer_effects
+        plan.updates={name:self.environment[name] for name in names if self.environment[name] is not slots[name]}
+        self.environment=initial;self.globals=globals_initial
+        arguments=tuple(initial[name] for name in names)
+        self.effects.append(Field('loop_result',arguments,'bool',{'plan':plan,'name':None}))
+        for name in plan.updates:
+            result=Field('loop_result',arguments,initial[name].dtype,{'plan':plan,'name':name,
+                        'termination':'runtime checked; iteration budget is not a termination proof'})
+            self.environment[name]=result
+            if name in global_aliases:self.globals[name]=result
+        for name in declared:
+            if name in before:self.environment[name]=before[name]
+            else:self.environment.pop(name,None)
+        self.local_names=locals_before
+
+    def pure_initializer(self,node,*,allow_texture=False):
+        """Recognize scalar/vector computations with no calls or indexed effects."""
+        if node is None:return False
+        if not re.fullmatch(r'(float|int|uint|bool)[1-4]?',node.get('type',{}).get('name','float')):return False
+        kind=node.get('kind')
+        if kind in {'constant','variable'}:return not node.get('type',{}).get('array')
+        if kind=='member':return self.pure_initializer(node['object'],allow_texture=allow_texture)
+        if kind=='unary':return node['operator'] in {0,1,2} and self.pure_initializer(node['operand'],allow_texture=allow_texture)
+        if kind=='binary':return 0<=node['operator']<16 and all(self.pure_initializer(node[k],allow_texture=allow_texture) for k in ('left','right'))
+        if kind in {'construct','aggregate'}:
+            return all(self.pure_initializer(a,allow_texture=allow_texture) for a in node['elements' if kind=='aggregate' else 'args'])
+        if kind=='call':
+            pure=node['function'] in PURE or (allow_texture and node['function'] in {'tex2D','tex3D','tex2Dlod','tex3Dlod','tex2Dbias','tex3Dbias'})
+            return (pure and node['function'] not in self.functions and not self.has_shared_effects(node) and
+                    all(self.pure_initializer(a,allow_texture=allow_texture) or
+                        (allow_texture and a.get('kind')=='variable' and a.get('type',{}).get('name','').startswith('sampler'))
+                        for a in node.get('args',[])))
+        return False
+
+    def discard_dead_assignments(self,body):
+        """Prune pure entry-body stores whose destinations are never observed.
+
+        Keep nested control flow, helper calls, indexed writes and output stores.
+        Transitive helper references keep global destinations live. This does
+        not modify the parsed source or compiler compatibility evidence.
+        """
+        kept=[]
+        for statement in reversed(body):
+            node=statement.get('value',{}) if statement['kind']=='expression' else {}
+            target=node.get('left',{})
+            if (node.get('kind')=='binary' and node.get('operator',0)>=16 and
+                    target.get('kind')=='variable' and
+                    target['name'] not in {'ret','_return_value','_mv_tex_coords'} and
+                    not target.get('type',{}).get('array') and
+                    re.fullmatch(r'(float|int|uint|bool)[1-4]?',target.get('type',{}).get('name','')) and
+                    target['name'] not in self._referenced_names(kept)|self.global_access(kept)[0] and
+                    self.pure_initializer(node['right'],allow_texture=True)):
+                continue
+            kept.insert(0,statement)
+        return kept
+
+    def componentwise_storage(self,node):
+        """Only defer independent scalar/vector lanes with no storage effects."""
+        return self.pure_initializer(node) and self.componentwise_children(node)
+
+    def componentwise_children(self,node):
+        if isinstance(node,list):return all(self.componentwise_children(value) for value in node)
+        if isinstance(node,dict):
+            if node.get('kind')=='call' and node['function'] not in ELEMENTWISE:return False
+            return all(self.componentwise_children(value) for value in node.values())
+        return True
+
+    def statements(self,statements:list[dict],*,allow_dead_initializers=True):
+        for statement_index,statement in enumerate(statements):
+            kind=statement["kind"]
+            if kind=="expression":self.expression(statement["value"])
+            elif kind=="declarations":
+                for declaration_index,declaration in enumerate(statement["values"]):
+                    dtype=declaration['type']['name']
+                    remaining=[{'kind':'declarations','values':statement['values'][declaration_index+1:]}]+statements[statement_index+1:]
+                    dead=(allow_dead_initializers and not self.call_stack and declaration['name'] not in {'ret','_return_value','_mv_tex_coords'} and
+                          declaration['name'] not in self._referenced_names(remaining) and
+                          not declaration['type'].get('array') and self.pure_initializer(declaration.get('value')))
+                    if dead:value=Field('uninitialized',dtype=dtype,detail={'name':declaration['name'],'dead_initializer':True})
+                    elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
+                    elif declaration['type'].get('array'):value=self.array_declaration(declaration)
+                    # The native generator emits an inline GLSL initializer.
+                    # Its new name enters scope afterwards (GLSL ES 3.00 4.2.2),
+                    # so a same-name RHS still resolves to the outer binding.
+                    elif (declaration['name'] in self._referenced_names(declaration['value']) and
+                          declaration['name'] not in self.environment):
+                        value=self.unsupported('unbound initializer name in emitted GLSL',dtype=dtype)
+                    elif (declaration['name'] in self._referenced_names(declaration['value']) and
+                          self.has_shared_effects(declaration['value'])):
+                        # Native AST local flags can disagree with the GLSL
+                        # outer binding here. Do not miss hidden read/write
+                        # conflicts until effect analysis resolves that scope.
+                        value=self.unsupported('same-name initializer shared effects not resolved',dtype=dtype)
+                    else:value=self.initializer(self.expression(declaration['value'],defer_read=bool(re.fullmatch(r'float[2-4]',dtype)) and self.componentwise_storage(declaration['value'])),dtype) if declaration['value'] is not None else Field('uninitialized',dtype=dtype,detail={'name':declaration['name']})
+                    self.environment[declaration["name"]]=value
+                    self.local_names.add(declaration['name'])
+            elif kind=="block":self.scoped(statement["body"])
+            elif kind in {'for','while'}:self.loop(statement)
+            elif kind=="if":
+                condition=self.expression(statement["condition"])
+                cases=None
+                if not self.has_shared_effects(statement['condition']):
+                    cases=self.condition_cases(condition)
+                    if cases is not None:
+                        selector,yes_values,no_values=cases
+                        if not no_values or not yes_values:
+                            take_yes=bool(yes_values)
+                            self.scoped_cases(statement['yes'] if take_yes else statement['no'],
+                                (selector,yes_values if take_yes else no_values))
+                            continue
+                    from field_math import evaluate
+                    try:
+                        known=evaluate(condition)
+                        if getattr(known,'ndim',0)==0:
+                            self.scoped(statement['yes'] if bool(known) else statement['no']);continue
+                    except ValueError:pass
+                before=dict(self.environment);globals_before=dict(self.globals)
+                outer_effects=self.effects;self.effects=[]
+                self.scoped_cases(statement["yes"],None if cases is None else (cases[0],cases[1]));yes=dict(self.environment);globals_yes=dict(self.globals)
+                yes_effects=self.effects;self.effects=[]
+                self.environment=dict(before);self.globals=dict(globals_before)
+                self.scoped_cases(statement["no"],None if cases is None else (cases[0],cases[2]));no=dict(self.environment);globals_no=dict(self.globals)
+                no_effects=self.effects;self.effects=outer_effects
+                true=Field('constant',dtype='bool',detail={'value':True})
+                self.effects.extend(Field('select',(condition,effect,true),'bool') for effect in yes_effects)
+                self.effects.extend(Field('select',(condition,true,effect),'bool') for effect in no_effects)
+                self.globals={name:(globals_yes[name] if globals_yes[name]==globals_no[name]
+                                   else Field('select',(condition,globals_yes[name],globals_no[name]),globals_yes[name].dtype))
+                              for name in globals_before}
+                for name in yes.keys()|no.keys():
+                    y=yes.get(name,before.get(name));n=no.get(name,before.get(name))
+                    if y is None or n is None:self.environment[name]=self.unsupported("branch-local lifetime not resolved")
+                    elif y==n:self.environment[name]=y
+                    else:self.environment[name]=Field("select",(condition,y,n),y.dtype)
+            else:self.unsupported("shader statement not lowered: "+kind)
+
+    @staticmethod
+    def _referenced_names(node):
+        if isinstance(node,list):return set().union(*(ShaderFields._referenced_names(n) for n in node))
+        if not isinstance(node,dict):return set()
+        result={node['name']} if node.get('kind')=='variable' else set()
+        for value in node.values():result|=ShaderFields._referenced_names(value)
+        return result

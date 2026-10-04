@@ -75,6 +75,7 @@ foreach(control manager stages shorthand numerical lifecycle)
     set_tests_properties(random-texture-${control} PROPERTIES TIMEOUT 30
         ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 endforeach()
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 add_executable(shader-parser-regressions shader_parser_test.cpp)
 target_compile_features(shader-parser-regressions PRIVATE cxx_std_17)
 target_include_directories(shader-parser-regressions PRIVATE "${PROJECTM_SOURCE}/vendor/hlslparser/src")
@@ -85,19 +86,26 @@ set_tests_properties(shader-parser-regressions PROPERTIES
 add_test(NAME hlsl-self-reference COMMAND projectm-regressions macro)
 add_test(NAME custom-waveform-bounds COMMAND projectm-regressions waveform)
 add_test(NAME shader-render-regressions COMMAND projectm-regressions shader-render)
-add_test(NAME parser-presets COMMAND projectm-regressions parser-presets
+add_test(NAME parser-presets COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/check_preset_hashes.py"
+    "$<TARGET_FILE:projectm-regressions>" parser-presets
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets"
     "${CMAKE_CURRENT_SOURCE_DIR}/parser-presets.tsv")
-file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/parser-presets.tsv" PARSER_PRESETS)
-foreach(ROW IN LISTS PARSER_PRESETS)
-    string(REPLACE "\t" ";" FIELDS "${ROW}")
-    list(GET FIELDS 0 EXPECTED_SHA)
-    list(GET FIELDS 2 PRESET_NAME)
-    file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/${PRESET_NAME}" ACTUAL_SHA)
-    if(NOT ACTUAL_SHA STREQUAL EXPECTED_SHA)
-        message(FATAL_ERROR "Parser witness changed: ${PRESET_NAME}")
-    endif()
-endforeach()
 # A broken self-referencing macro grows indefinitely; stop it before it exhausts memory.
 set_tests_properties(hlsl-self-reference custom-waveform-bounds shader-render-regressions parser-presets PROPERTIES
     TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+add_executable(implicit-global-regressions implicit_global_test.cpp)
+target_compile_features(implicit-global-regressions PRIVATE cxx_std_17)
+target_include_directories(implicit-global-regressions PRIVATE "${PROJECTM_SOURCE}/vendor/hlslparser/src")
+target_link_libraries(implicit-global-regressions PRIVATE libprojectM::projectM)
+add_test(NAME implicit-global-regressions COMMAND implicit-global-regressions)
+set_tests_properties(implicit-global-regressions PROPERTIES TIMEOUT 10 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0")
+
+add_test(NAME implicit-input-bindings COMMAND projectm-regressions implicit-bindings)
+set_tests_properties(implicit-input-bindings PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+add_test(NAME initialization-presets COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/check_preset_hashes.py"
+    "$<TARGET_FILE:projectm-regressions>" initialization-presets
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets"
+    "${CMAKE_CURRENT_SOURCE_DIR}/initialization-presets.tsv")
+set_tests_properties(initialization-presets PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
