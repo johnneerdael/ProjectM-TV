@@ -20,7 +20,8 @@ def source_tokens(text: str, *, shader: bool) -> list[str]:
 
 
 def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
-                 equation_loader_policy='strict-raw-v1',shader_profile=None,shader_compatibility=None) -> dict:
+                 equation_loader_policy='strict-raw-v1',shader_profile=None,shader_compatibility=None,
+                 random_binding_evidence=None,asset_metadata=None,random_policy_patch_sha256=None) -> dict:
     """Count source once, including omitted code and invalid/unclassified rows.
 
     Latin-1 provides a lossless byte-to-character mapping for the inventory.
@@ -114,6 +115,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                 parsed=selected['compile_status']=='accepted' and selected['tree_status']=='parsed'
             lowered = False
             reasons = []
+            random_context=None
             if shader and parsed:
                 stage_name='warp' if stage=='warp' else 'composite'
                 bindings=None
@@ -121,9 +123,20 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                     requested=shader_compatibility[stage_name]['request']['samplers']
                     # A declared sampler type can make offline compilation pass
                     # without proving TextureManager preserves a random alias.
-                    # The merged engine still has known randNN association gaps.
-                    if not any(re.fullmatch(r'sampler_(?:[A-Za-z]{2}_)?rand[0-9]+(?:_[A-Za-z0-9_]+)?',name,re.I)
-                               for name in requested):bindings=requested
+                    # Source-bound observed aliases may clear this only in their
+                    # verified profile; Android and future selections stay separate.
+                    random_names={name for name in requested if re.fullmatch(
+                        r'sampler_(?:[A-Za-z]{2}_)?rand[0-9]+(?:_[A-Za-z0-9_]+)?',name,re.I)}
+                    if not random_names:bindings=requested
+                    elif random_binding_evidence is not None and random_policy_patch_sha256 is not None:
+                        from random_binding_context import verified_context
+                        random_context=verified_context(cache,stage=stage_name,profile=shader_profile,
+                            evidence=random_binding_evidence,asset_metadata=asset_metadata or {},
+                            policy_patch_sha256=random_policy_patch_sha256)
+                        if (random_context is not None and random_names<=random_context['samplers'].keys() and
+                                all(requested[name]==random_context['samplers'][name] for name in random_names)):
+                            bindings=requested
+                        else:random_context=None
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
                                      frame=3, warp_reads_blur=False,known_uniform_components=known_q,
                                      known_uniform_component_domains=known_q_domains,
@@ -140,6 +153,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                     'loader_numbering_reachable': visited, 'target_parsed': bool(parsed),
                     'lowering_complete': lowered if shader else None,
                     'lowering_unknowns': reasons, 'verified_behavior': None}
+            if random_context is not None:unit['random_binding_context']=random_context
             unit['loader_ignored_confirmed']=bool(stage!='configuration' and not visited and native_loader and
                                                   native_source_matches and first_values_match)
             if selected is not None:

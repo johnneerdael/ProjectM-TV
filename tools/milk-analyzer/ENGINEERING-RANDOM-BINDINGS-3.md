@@ -162,3 +162,31 @@ blockers or source-token inventory changes appeared. See
 `fixtures/focused-blockers-6-merged29-30-2026-10-04.json`. This supersedes earlier
 22-case counts; it does not certify Android/AAR appearance. The global-input owner
 continues those three cases; the predictor owner handles random context adoption.
+
+
+## Analyzer implementation now available (host context)
+
+The predictor's `random_binding_context.py` validates and imports the PR30 compiled-
+pair context. All three exact composite shader sections now lower with no unknown
+sampler expressions under that verified host GLSL330 context. The audit API retains
+the guard when context is absent, stale, incomplete or outside the observed profile.
+Source/asset hashes, native policy, aliases/slots/targets/dimensions and sampler
+modes are checked. Selected assets are recorded for the observed compilation only.
+
+The midgit full-render error1286 remains visible; it is not fixed by successful
+binding validation. GLES300/Android certification is still separate. Do not copy
+host random choices into production prediction as universal choices. The strict
+Android source checkpoint retains the three random-context gaps pending equivalent
+runtime context or a separately proven cross-profile contract.
+
+Evidence input: `fixtures/random-binding-host-context-37.json`; implementation
+regressions: `test_random_binding_context.py`. This fixes the host-context import
+path, not the separate framebuffer failure or broad visual calibration.
+
+
+The final validator now checks pair-wide slot consistency, per-stage unit conflicts,
+and independently decoded image dimensions under an explicit upload policy. In
+this host context SOIL rounds image sizes up to powers of two; raw decoded size
+is not blindly compared with uploaded size.7focused regressions pass, including
+contradictory aliases/dimensions and missing hashes. The prepared-adapter suite
+passes760tests+35subtests. Host-only scope and error1286 remain unchanged.

@@ -1309,3 +1309,32 @@ into the search folder: merely placing one image there does not isolate a pool.
 The failed initial75-image probe is retained separately from the corrected
 single-asset protocol. Cross-stage same-colour controls cannot distinguish custom
 compilation from equal-colour fallback and receive no such credit.
+
+
+### Source-bound random binding context adoption
+
+`random_binding_context.py` validates the observed compiled-pair aliases against
+full preset hashes, matching shader stage, native policy patch identity, GL target,
+slot/name/unit, image content hashes/dimensions and name-based sampling settings.
+`audit_source` accepts optional `random_binding_evidence`, `asset_metadata` and
+`random_policy_patch_sha256` inputs; absent/stale context retains the blanket guard.
+All three exact composite sections lower completely with the verified PR30 host
+context. Their selected images remain inputs of that observed compilation, not
+predictions of a later production random choice.
+
+The captured profile is host GLSL330. It cannot certify GLES300/Android bindings;
+that profile's strict count remains6pending an equivalent context or a separately
+verified cross-profile binding contract. Full-render error1286 for midgit remains
+recorded alongside valid binding identity and does not become an appearance pass.
+Visual-gate credit remainsfalse. These boundaries distinguish interpreted source,
+loaded image association and a functioning complete renderer.
+
+
+Binding validation checks shared-slot consistency across the complete observed
+warp/composite pair and rejects conflicting unit assignments within a stage.
+Asset metadata records independently decoded dimensions and content hashes;
+reported upload sizes must follow the declared SOIL loading policy. The observed
+host uses power-of-two ceiling resampling, so decoded320x160 becomes512x256.
+Missing source/policy digests and unsupported loading policies remain invalid.
+See `fixtures/random-binding-host-assets-37.json`.7focused regressions and the
+760-test/35-subtest prepared-adapter suite pass; no Android profile credit is added.
