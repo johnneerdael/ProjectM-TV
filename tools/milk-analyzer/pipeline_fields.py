@@ -91,10 +91,13 @@ class SourcePipeline:
     def step(self,*,warp_uv,uniforms:dict,frame_wrap:float,stage_uniforms=None,minimum=(0,0,0),maximum=(1,1,1),
              edge_darken:float=0,warp_polar=None,composite_polar=None,draw=None,draw_scene=None,
              motion_vectors=None,motion_state=None,external_sample=None,on_sample=None,decay=None,
-             legacy_time=None,hue_offsets=None,render_time=None)->PipelineResult:
+             legacy_time=None,hue_offsets=None,render_time=None,warp_original_uv=None)->PipelineResult:
         uv=np.asarray(warp_uv,dtype=np.float32)
         if uv.shape!=(self.height,self.width,2) or not np.all(np.isfinite(uv)):
             raise UnresolvedMath('explicit finite viewport-sized warp coordinates required')
+        original=self.original_uv if warp_original_uv is None else np.asarray(warp_original_uv,dtype=np.float32)
+        if original.shape!=uv.shape or not np.all(np.isfinite(original)):
+            raise UnresolvedMath('explicit finite viewport-sized original warp coordinates required')
         if not np.isfinite(frame_wrap):raise UnresolvedMath('finite frame wrap required')
         stage_uniforms={} if stage_uniforms is None else stage_uniforms
         if not isinstance(stage_uniforms,dict) or set(stage_uniforms)-{'warp','composite'}:
@@ -172,7 +175,7 @@ class SourcePipeline:
                 pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile)
             return output
 
-        warp_coordinates=np.concatenate((uv,self.original_uv),axis=-1)
+        warp_coordinates=np.concatenate((uv,original),axis=-1)
         if self.warp_tree is None:
             if diffuse is None:raise UnresolvedMath('fixed warp requires live decay')
             warped=self._store(sample2d(previous,uv,wrap=frame_wrap>.0001,linear=True,origin='top')*diffuse)

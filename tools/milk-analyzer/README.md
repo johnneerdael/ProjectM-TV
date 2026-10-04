@@ -708,6 +708,14 @@ All 39 targeted rs sections lower completely; two frozen native controls match
 60 frames exactly. See `fixtures/zero-storage-source-proof-2026-10-04.json` and
 `fixtures/zero-storage-native-proof-2026-10-04.json`.
 
+Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
+domain. The regular native mesh uses snapped window-space vertices, and its
+original-UV varying is interpolated from the same geometry instead of assumed
+ideal pixel-centre coordinates. The portable default is unchanged. A separate
+original-UV transfer control matches 30 native frames within one RGB8 byte;
+a fresh motion-feedback control still fails at eight bytes and remains recorded
+as unresolved. See `fixtures/warp-raster-proof-2026-10-04.json`.
+
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe
 shared-read/write ordering remains explicit. Destination indices are captured

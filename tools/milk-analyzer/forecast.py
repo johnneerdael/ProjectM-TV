@@ -127,7 +127,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     for index, frame in enumerate(scene['frames']):
         main = frame['main']
         render_time=audio['frames'][index]['time']
-        mesh = warp_fields(source,scene,index,numeric_profile=domain.get('numeric_profile','portable'))
+        mesh = warp_fields(source,scene,index,numeric_profile=domain.get('numeric_profile','portable'),
+                           raster_subpixel_bits=domain.get('warp_subpixel_bits'))
         common = source_uniforms(scene,index)
         if texture_bank is not None:
             common.update(material_uniforms)
@@ -165,7 +166,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
                 motion_vectors_prewarped=True)
 
-        result = pipeline.step(warp_uv=mesh['uv'],warp_polar=mesh['polar'],uniforms=common,
+        result = pipeline.step(warp_uv=mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
             frame_wrap=main['wrap'],stage_uniforms=random_banks,decay=main['decay'],
             minimum=[main[f'blur{i}_min'] for i in range(1,4)],
             maximum=[main[f'blur{i}_max'] for i in range(1,4)],edge_darken=main['blur1_edge_darken'],

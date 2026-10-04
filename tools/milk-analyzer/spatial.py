@@ -98,7 +98,7 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     return result
 
 
-def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFILE):
+def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None,viewport=None):
     """Interpolate native triangles with clip w=1.
 
     The opt-in Apple NaN rule is supported by direct float readback of the
@@ -106,22 +106,42 @@ def interpolate_mesh(vertex_values,original_uv,*,numeric_profile=PORTABLE_PROFIL
     It does not establish portable or Android nonfinite interpolation behavior.
     """
     _runtime_profile(numeric_profile)
+    if raster_subpixel_bits is not None:
+        if type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16:
+            raise ValueError('supported explicit raster subpixel bits required (4..16)')
+        if not isinstance(viewport,(tuple,list)) or len(viewport)!=2 or any(type(n) is not int or n<=0 for n in viewport):
+            raise ValueError('explicit positive integer raster viewport required')
     if numeric_profile==APPLE_NAN_MESH_PROFILE:
         values=np.asarray(vertex_values,dtype=np.float32)
         if values.ndim!=3 or values.shape[-1]!=2 or np.any(np.isinf(values)):
             raise ValueError('observed NaN profile requires two-component UV mesh without infinity')
         missing=np.isnan(values)
-        finite=interpolate_mesh(np.where(missing,0,values),original_uv)
-        support=interpolate_mesh(missing.astype(np.float32),original_uv)>0
+        finite=interpolate_mesh(np.where(missing,0,values),original_uv,raster_subpixel_bits=raster_subpixel_bits,viewport=viewport)
+        support=interpolate_mesh(missing.astype(np.float32),original_uv,raster_subpixel_bits=raster_subpixel_bits,viewport=viewport)>0
         return np.where(support,np.finfo(np.float32).max,finite)
     values=_finite(vertex_values,'mesh values');uv=_finite(original_uv,'original UV')
     if values.ndim<2 or min(values.shape[:2])<2 or uv.shape[-1:]!=(2,):
         raise ValueError('mesh values and two-component UV required')
     if np.any((uv<0)|(uv>1)):raise ValueError('mesh query outside viewport')
     ny,nx=values.shape[0]-1,values.shape[1]-1
-    q=uv*np.array([nx,ny],dtype=np.float32)
-    cell=np.minimum(np.floor(q).astype(np.int64),[nx-1,ny-1])
-    fraction=q-cell;fx,fy=fraction[...,0].astype(np.float32),fraction[...,1].astype(np.float32)
+    if raster_subpixel_bits is None:
+        q=uv*np.array([nx,ny],dtype=np.float32)
+        cell=np.minimum(np.floor(q).astype(np.int64),[nx-1,ny-1])
+        fraction=q-cell;fx,fy=fraction[...,0].astype(np.float32),fraction[...,1].astype(np.float32)
+    else:
+        cells=[];fractions=[];scale=2**raster_subpixel_bits
+        for i,(count,extent) in enumerate(zip((nx,ny),viewport)):
+            clip=np.arange(count+1,dtype=np.float32)/np.float32(count)*2-1
+            axis=np.rint((clip*.5+.5)*extent*scale)/(extent*scale)
+            widths=np.diff(axis);valid=np.flatnonzero(widths>0)
+            if not len(valid):raise ValueError('raster mesh axis collapsed')
+            indices=np.clip(np.searchsorted(axis,uv[...,i],side='right')-1,0,count-1)
+            # Degenerate boundary cells cover no fragments. Use the adjacent
+            # nonzero interval for endpoint queries; GPU seam ties stay unverified.
+            fallback=valid[np.clip(np.searchsorted(valid,indices,side='right')-1,0,len(valid)-1)]
+            indices=np.where(widths[indices]>0,indices,fallback)
+            cells.append(indices);fractions.append((uv[...,i]-axis[indices])/widths[indices])
+        cell=np.stack(cells,axis=-1);fx,fy=fractions
     x,y=cell[...,0],cell[...,1]
     a,b,c,d=values[y,x],values[y,x+1],values[y+1,x],values[y+1,x+1]
     extra=(None,)*(values.ndim-2)

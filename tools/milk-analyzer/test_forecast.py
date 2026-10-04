@@ -71,6 +71,18 @@ def test_explicit_composite_raster_setting_reaches_the_source_forecast():
     assert result['frames'][0]['history']['composite_subpixel_bits']==4
 
 
+def test_warp_raster_setting_and_original_uv_reach_the_source_forecast():
+    source=native(BASE+'warp_1=`shader_body {ret=float3(uv_orig,.25);}\ncomp_1=`shader_body {ret=0;}\n')
+    settings=domain(warp_subpixel_bits=4);settings.update(mesh_x=10,mesh_y=10)
+    result=predict(source,domain=settings,audio=audio(1))
+    from spatial import mesh_inputs,interpolate_mesh
+    mesh=mesh_inputs(10,10,aspect_x=1,aspect_y=1)
+    x,y=np.meshgrid((np.arange(32,dtype=np.float32)+.5)/32,(np.arange(32,dtype=np.float32)+.5)/32)
+    query=np.stack((x,y),-1)
+    expected=interpolate_mesh(mesh['position']*.5+.5,query,raster_subpixel_bits=4,viewport=(32,32))
+    np.testing.assert_allclose(result['frames'][0]['feedback'][...,:2],np.clip(expected,0,1),atol=1e-7)
+
+
 def test_shapes_are_drawn_between_warp_and_composite_and_become_feedback():
     source = native(BASE + 'warp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=0;}\n'
                     'shapecode_0_enabled=1\nshapecode_0_x=.25\nshapecode_0_y=.75\n'

@@ -9,7 +9,7 @@ from scene_equations import WARP,_scalar
 from spatial import mesh_inputs,warp_vertex_uv,interpolate_mesh,PORTABLE_PROFILE
 
 
-def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABLE_PROFILE)->dict:
+def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None)->dict:
     width,height=scene['viewport'];grid_x,grid_y=scene['mesh_size']
     frame=scene['frames'][frame_index]
     aspect_x=float(np.float32(min(1,width/height)))
@@ -31,8 +31,12 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
     x,y=np.meshgrid((np.arange(width,dtype=np.float32)+.5)/np.float32(width),
                     (np.arange(height,dtype=np.float32)+.5)/np.float32(height))
     original_uv=np.stack((x,y),axis=-1)
-    uv=interpolate_mesh(vertex_uv,original_uv,numeric_profile=numeric_profile)
-    polar=interpolate_mesh(np.stack((mesh['radius'],mesh['angle']),axis=-1),original_uv)
-    return {'uv':uv,'polar':polar,'vertex_uv':vertex_uv,'numeric_profile':numeric_profile,
+    raster=dict(raster_subpixel_bits=raster_subpixel_bits,viewport=(width,height))
+    uv=interpolate_mesh(vertex_uv,original_uv,numeric_profile=numeric_profile,**raster)
+    polar=interpolate_mesh(np.stack((mesh['radius'],mesh['angle']),axis=-1),original_uv,**raster)
+    interpolated_original=(original_uv if raster_subpixel_bits is None else
+        interpolate_mesh(mesh['position']*.5+.5,original_uv,**raster))
+    return {'uv':uv,'original_uv':interpolated_original,'polar':polar,'vertex_uv':vertex_uv,'numeric_profile':numeric_profile,
+            'raster_subpixel_bits':raster_subpixel_bits,
             'basis':'native source equations, float32 vertex storage and warp mesh interpolation',
             'appearance_prediction_complete':False}
