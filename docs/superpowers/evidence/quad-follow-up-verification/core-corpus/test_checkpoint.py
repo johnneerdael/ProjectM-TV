@@ -10,7 +10,7 @@ class BackupTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.work=Path(self.temp.name)
         self.record={"path":"x.milk","sha256":"source","bytes":1}
-        self.protocol={"sha256":"protocol","config":{"measurement_frames":360},"roles":{"baseline":{"core_sha256":"core"}}}
+        self.protocol={"sha256":"protocol","config":{"measurement_frames":360,"capture_frames":run.capture_indices(360)},"roles":{"baseline":{"core_sha256":"core"}}}
         self.inventory={"presets":[self.record]}
         self.key=run.job_key("protocol",self.record,"baseline","selected",1,360)
         self.directory=self.work/"jobs"/self.key;self.directory.mkdir(parents=True)
@@ -83,6 +83,44 @@ class BackupTests(unittest.TestCase):
                     self.assertIsNotNone(run.read_cached(path,self.key,"protocol"))
                     with self.assertRaisesRegex(ValueError,"producer provenance mismatch: "+field):
                         checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+
+    def test_rehashed_packet_and_result_cannot_change_protocol_capture_frames(self):
+        base={"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol",
+              "status":"success","core_sha256":"core","requested_preset_sha256":"source",
+              "capture_mode":"selected","capture_frames":run.capture_indices(360),
+              "width":2364,"height":1330,"fps":30,"seed":12345}
+        for status in ("failed","timeout"):
+            for captures in ([],[120],[121,120]):
+                with self.subTest(status=status,captures=captures):
+                    self.save_failed_producer(dict(base,capture_frames=captures))
+                    packet=json.loads((self.directory/"job.json").read_text())
+                    packet["capture_frames"]=captures
+                    run.atomic(self.directory/"job.json",packet)
+                    path=self.directory/"row.json";row=json.loads(path.read_text());row.pop("payload_sha256")
+                    row.update(status=status,error="post-result transport timeout")
+                    for retained in row["retained_files"]:
+                        retained["sha256"]=run.file_hash(self.directory/retained["path"])
+                    run.save_row(path,row)
+                    self.assertIsNotNone(run.read_cached(path,self.key,"protocol"))
+                    with self.assertRaisesRegex(ValueError,"input configuration provenance mismatch: capture_frames"):
+                        checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+
+    def test_short_pilot_capture_frames_remain_checkpointable_after_host_timeout(self):
+        self.key=run.job_key("protocol",self.record,"baseline","selected",1,120)
+        self.directory=self.work/"jobs"/self.key;self.directory.mkdir(parents=True)
+        self.row.update(key=self.key,measurement_frames=120,status="timeout",error="post-result transport timeout")
+        self.save_failed_producer({"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol",
+                                  "status":"success","core_sha256":"core","requested_preset_sha256":"source",
+                                  "capture_mode":"selected","capture_frames":run.capture_indices(120),
+                                  "width":2364,"height":1330,"fps":30,"seed":12345})
+        packet=json.loads((self.directory/"job.json").read_text())
+        packet.update(measurement_frames=120,capture_frames=run.capture_indices(120))
+        run.atomic(self.directory/"job.json",packet)
+        path=self.directory/"row.json";row=json.loads(path.read_text());row.pop("payload_sha256")
+        for retained in row["retained_files"]:
+            retained["sha256"]=run.file_hash(self.directory/retained["path"])
+        run.save_row(path,row)
+        self.assertEqual(checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)["status"],"timeout")
 
     def test_complete_successful_producer_remains_checkpointable_after_host_timeout(self):
         self.save_failed_producer({"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol",
