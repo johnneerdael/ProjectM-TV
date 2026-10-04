@@ -11,6 +11,24 @@ def trees(warp,composite):
 
 
 class PipelineFieldsTest(unittest.TestCase):
+    def test_tagged_reduction_controls_warp_and_composite_display_fields(self):
+        module=importlib.import_module('pipeline_fields')
+        source=test_native_reader.NativeReaderTest().read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
+            'warp_1=`shader_body {ret=float3(all(uv));}\n'
+            'comp_1=`shader_body {ret=GetPixel(uv);}\n')['sections']
+        pipeline=module.SourcePipeline(source['warp_']['tree'],source['comp_']['tree'],
+            initial_feedback=np.zeros((16,16,4)),warp_reads_blur=False,blur_levels=0,quantize=False,
+            language_extensions={'warp':source['warp_']['language_extensions']})
+        coordinates=pipeline.original_uv.copy();coordinates[:,:8,0]=0
+        result=pipeline.step(warp_uv=coordinates,uniforms={},frame_wrap=1)
+        np.testing.assert_array_equal(result.feedback[:,:8,:3],0)
+        np.testing.assert_array_equal(result.feedback[:,8:,:3],1)
+        # Composite sampling uses its declared mesh coordinates and wrapped
+        # bilinear filtering; the two boundary columns mix black and white.
+        expected=np.ones((16,16,4),dtype=np.float32)
+        expected[:,:7,:3]=0;expected[:,[7,15],:3]=.5
+        np.testing.assert_allclose(result.display,expected,atol=1e-6)
+
     def test_failed_composite_does_not_advance_feedback_or_blur_state(self):
         module=importlib.import_module('pipeline_fields')
         from field_math import UnresolvedMath

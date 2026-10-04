@@ -88,7 +88,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
                                      frame=3, warp_reads_blur=False)
                 try:
-                    model.lower(section['tree'])
+                    model.lower(section['tree'],language_extensions=section.get('language_extensions',[]))
                     lowered = model.complete
                     reasons = [str(reason) for reason in model.unknown]
                 except (KeyError, TypeError, ValueError, RecursionError) as error:

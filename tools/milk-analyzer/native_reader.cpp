@@ -326,10 +326,10 @@ json shaderTree(std::string code,bool warp,const std::string& header) {
         Allocator allocator;HLSLTree tree(&allocator);HLSLParser parser(&allocator,&tree);std::string preprocessed;
         std::string full=header+macros+code;
         std::vector<std::string> extensions;
-        // Standard HLSL all/any are absent from this pinned parser's intrinsic table.
+        // Standard HLSL all is absent; any is already in the intrinsic table.
         // Preserve the language meaning while explicitly exposing this runtime-compatibility gap.
         // https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-all
-        for(const auto& name:{std::string("all"),std::string("any")}) {
+        for(const auto& name:{std::string("all")}) {
             if(!std::regex_search(code,std::regex("\\b"+name+"\\s*\\(")))continue;
             if(std::regex_search(code,std::regex("\\b(bool|float[1-4]?|int[1-4]?)\\s+"+name+"\\s*\\(")))continue;
             extensions.push_back(name);

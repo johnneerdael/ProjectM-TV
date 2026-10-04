@@ -191,11 +191,19 @@ class ShaderFields:
         if any(i>=shape[1] for i in indices):self.unsupported('vector member out of bounds');return None
         return indices
 
-    def lower(self,tree:list[dict])->Field:
+    def lower(self,tree:list[dict],*,language_extensions=())->Field:
         """Lower the entry body; uniforms stay symbolic rather than guessed zero."""
         self.collect_matrix_constructors(tree)
+        extensions=set(language_extensions)
+        if extensions-{'all'}:raise ValueError('unsupported parser language extension')
         for node in tree:
-            if node['kind']=='function':self.functions.setdefault(node['name'],[]).append(node)
+            if node['kind']=='function':
+                # Only the reader's explicitly tagged standard declaration is
+                # intrinsic. Preserve real bodies and untagged declarations.
+                synthetic=(node['name'] in extensions and not node['body'] and
+                    node['return_type']['name']=='bool' and len(node['args'])==1 and
+                    node['args'][0]['modifier']==0)
+                if not synthetic:self.functions.setdefault(node['name'],[]).append(node)
             elif node['kind']=='declarations':
                 for declaration in node['values']:
                     name=declaration['name'];self.global_names.add(name)

@@ -26,7 +26,7 @@ class PipelineResult:
 
 class SourcePipeline:
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None):
         if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
             raise ValueError('unsupported shader coordinate profile')
         field=np.asarray(initial_feedback,dtype=np.float32)
@@ -34,6 +34,7 @@ class SourcePipeline:
             raise ValueError('explicit finite RGBA initial feedback required')
         if type(blur_levels) is not int or not 0<=blur_levels<=3:raise ValueError('blur level0..3 required')
         self.warp_tree=warp_tree;self.composite_tree=composite_tree
+        self.language_extensions=language_extensions or {}
         self.composite_kind=composite_kind or ('custom_composite' if composite_tree is not None else 'default_composite')
         self.source_values=source_values or {};self.stage_resolution=None
         self.coordinate_profile=coordinate_profile
@@ -69,7 +70,9 @@ class SourcePipeline:
                 trees[name]=section['tree']
             else:trees[name]=None
         pipeline=cls(trees['warp'],trees['composite'],composite_kind=plan['composite']['kind'],
-                     source_values=source['values'],**kwargs)
+                     source_values=source['values'],language_extensions={
+                         name:source.get('sections',{}).get(prefix,{}).get('language_extensions',[])
+                         for name,prefix in [('warp','warp_'),('composite','comp_')]},**kwargs)
         pipeline.stage_resolution=plan
         return pipeline
 
@@ -136,7 +139,7 @@ class SourcePipeline:
         def stage(tree,name,main,blur,coordinates,polar,colour=None):
             nonlocal pending_motion_uv
             model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap)
-            expression=model.lower(tree)
+            expression=model.lower(tree,language_extensions=self.language_extensions.get(name,[]))
             if not model.complete:raise UnresolvedMath('unsupported source shader: '+'; '.join(model.unknown))
             values={**uniforms,**stage_uniforms.get(name,{}),**lowlevel,'_uv':coordinates}
             if name=='warp' and diffuse is not None:values['_vDiffuse']=diffuse
