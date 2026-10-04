@@ -204,6 +204,13 @@ restore_auto_resolution() {
 LISTENERS=""
 LISTENERS_OFF=0
 LISTENERS_NOT_RESTORED=""
+# One enabled listener per line. Notification access is per Android user and `cmd notification`
+# acts on the current user, so read the current user's setting (plain `settings get` reads user 0).
+enabled_listeners() {
+    v="$(ash settings --user current get secure enabled_notification_listeners)"
+    case "$v" in ""|*sage:*|*rror*|*nvalid*|*xception*) v="$(ash settings get secure enabled_notification_listeners)" ;; esac
+    printf '%s\n' "$v" | tr ':' '\n'
+}
 allow_listeners() {
     [ "$LISTENERS_OFF" = 1 ] || return 0
     LISTENERS_OFF=0
@@ -213,7 +220,7 @@ allow_listeners() {
     # The setting is written asynchronously (Android 14), so give it a few seconds.
     for c in $LISTENERS; do
         tries=0
-        until ash settings get secure enabled_notification_listeners | tr ':' '\n' | grep -qxF "$c"; do
+        until enabled_listeners | grep -qxF "$c"; do
             tries=$((tries + 1))
             if [ $tries -ge 10 ]; then
                 LISTENERS_NOT_RESTORED="$LISTENERS_NOT_RESTORED $c"
@@ -244,8 +251,7 @@ trap 'exit 130' INT TERM
 # wait until its process is gone, start it, and allow the listener again right away. This process
 # started without listener access (no track titles), so the observation uses a normal second start.
 log "Cold start"
-LISTENERS="$(ash settings get secure enabled_notification_listeners | tr ':' '\n' \
-    | awk -v p="$PKG/" 'index($0, p) == 1' | tr '\n' ' ')"
+LISTENERS="$(enabled_listeners | awk -v p="$PKG/" 'index($0, p) == 1' | tr '\n' ' ')"
 if [ -n "$LISTENERS" ]; then
     LISTENERS_OFF=1
     for c in $LISTENERS; do ash cmd notification disallow_listener "$c" >/dev/null; done

@@ -37,7 +37,7 @@ To compare builds at a fixed render height, set the profile app's settings direc
 a() { adb -s <tv>:5555 shell "$@"; }
 P=nl.neerdael.projectmtv.profile
 L=$P/com.example.projectm.visualizer.TrackListenerService
-ON=$(a settings get secure enabled_notification_listeners | tr ':' '\n' | grep -cxF "$L")
+ON=$(a settings --user current get secure enabled_notification_listeners | tr ':' '\n' | grep -cxF "$L")
 [ "$ON" = 1 ] && a cmd notification disallow_listener $L
 a am force-stop $P
 a pidof $P                            # must print nothing before the write
