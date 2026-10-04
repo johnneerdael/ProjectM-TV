@@ -810,6 +810,24 @@ identify exact affected filenames/hashes and separate shipped fixes from pending
 verification: [native translator](NATIVE-TRANSLATOR-ISSUES.md) and
 [native evaluator/loading](NATIVE-EVALUATOR-ISSUES.md).
 
+Equation loading now has explicit `strict-raw-v1` and
+`projectmtv-core-2.2.6-v1` policies. Both preserve an accepted raw program; the
+2.2.6 policy retries legacy assembly only for rejected `per_frame_` code. Init,
+per-pixel and custom-component phases do not acquire that retry. Raw and legacy
+trees remain separate, and scene execution sends the selected source to the
+backend with normalization disabled. Missing compilation evidence stays unknown.
+
+Set `equation_loader_policy` in a forecast domain or pass
+`--equation-loader-policy projectmtv-core-2.2.6-v1` to the coverage audit.
+Historical defaults remain strict. A fresh dual-policy audit of all315 witnesses
+leaves217 with strict loading and178 with the shipped per-frame retry, clearing
+39 source/loader gaps. This models the equation loader only: the shader CPU
+adapter remains bound to its historical engine archive. It does not certify
+full core2.2.6 rendering or every named preset's appearance. Two frozen retry/raw
+controls match the published2.2.6 native library exactly over60 RGB8 frames.
+See `fixtures/focused-blockers-178-2026-10-04.json` and
+`fixtures/equation-policy-core-2.2.6-proof.json`.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed

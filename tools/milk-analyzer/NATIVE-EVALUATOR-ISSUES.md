@@ -145,4 +145,14 @@ A native equation compilation failure throws during preset initialization. Shade
 
 ## Acceptance and reporting
 
+The analyzer now exposes an explicit `projectmtv-core-2.2.6-v1` equation-loader
+policy. A source-matched audit of the original 315 witnesses resolves all 39
+per-frame cases listed above, reducing the audit from 217 to 178. Two frozen
+synthetic retry/raw-preservation controls matched the published 2.2.6 native
+library across 60 RGB8 frames with zero error. This is not a full runtime pass of
+the 39 named presets and does not clear the 14 other-phase witnesses or the 13
+triage cases. The shader CPU adapter still has a historical engine identity.
+See `fixtures/focused-blockers-178-2026-10-04.json` and
+`fixtures/equation-policy-core-2.2.6-proof.json`.
+
 Reproduce against published core 2.2.6 first. Keep raw evaluator status, loader retry status, selected assembly and final preset-load outcome separate. Verify exact source hashes and AAR/native-library identity in each result. Fix only the missing behavior, rerun the affected named presets plus negative controls, and report which entries actually change. Update analyzer target-loader policy accordingly. Preserve the historical 2.2.4 evidence instead of relabeling it as current-release results.

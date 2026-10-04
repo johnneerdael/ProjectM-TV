@@ -82,7 +82,10 @@ json executeEquations(const json& request) {
         auto& scope=scopes[scopeName];
         if(!scope)scope=std::make_shared<EquationContext>(&registers);
         auto compiled=std::make_unique<EquationProgram>(scope);
-        auto source=milkdropEquationSource(entry.value().is_string()?entry.value().get<std::string>():entry.value().at("code").get<std::string>());
+        auto source=entry.value().is_string()?entry.value().get<std::string>():entry.value().at("code").get<std::string>();
+        auto assembly=entry.value().is_string()?std::string("legacy"):entry.value().value("assembly",std::string("legacy"));
+        if(assembly=="legacy")source=milkdropEquationSource(source);
+        else if(assembly!="raw")throw std::runtime_error("unsupported equation assembly policy: "+assembly);
         compiled->program=prjm_eval_compile_code(compiled->context,source.c_str());
         if(!compiled->program)throw std::runtime_error("equation execution compile error: "+entry.key());
         programs.emplace(entry.key(),std::move(compiled));
@@ -461,6 +464,7 @@ int main(int argc,char** argv) {
                 section["assembled_source"]=assembled;
                 section["projectm_native_status"]=native["status"];
                 section["projectm_native_compile_status"]=native["compile_status"];
+                if(native.contains("tree"))section["projectm_raw_tree"]=native["tree"];
                 if(native.contains("compile_error"))section["projectm_native_compile_error"]=native["compile_error"];
                 if(native["status"]!="parsed")section["projectm_native_reason"]=native["reason"];
             }

@@ -77,12 +77,13 @@ def _scalar(values,key,default,kind):
     return value
 
 
-def _code(source,name):
+def _code(source,name,policy='strict-raw-v1'):
+    from equation_loading import select_equation
     section=source.get('sections',{}).get(name)
-    if section is None:return '0;'
-    if section.get('status')!='parsed' or section.get('projectm_native_status')!='parsed':
+    selected=select_equation(section,name,policy=policy)
+    if selected['compile_status']!='accepted' or selected['tree_status']!='parsed':
         raise ValueError('target equation compatibility unresolved: '+name)
-    return section['assembled_source'] or '0;'
+    return selected['code'] or '0;'
 
 
 def _variables(tree):
@@ -109,7 +110,11 @@ def _frame_input(frame):
 
 
 def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,height:int=72,
-                  mesh_x:int=48,mesh_y:int=32,timeout_seconds:float=60,seed:int|None=None)->dict:
+                  mesh_x:int=48,mesh_y:int=32,timeout_seconds:float=60,seed:int|None=None,
+                  equation_loader_policy='strict-raw-v1')->dict:
+    from equation_loading import select_equation
+    def code(name):return _code(source,name,equation_loader_policy)
+    def tree(name):return select_equation(source.get('sections',{}).get(name),name,policy=equation_loader_policy)['tree']
     if not frames:raise ValueError('explicit input frames required')
     if any(type(n) is not int or n<=0 for n in [width,height]):raise ValueError('positive integer viewport required')
     if seed is not None and (type(seed) is not int or not 0<=seed<2**32):
@@ -127,19 +132,19 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     defaults['mv_a']=_scalar(values,'mv_a',legacy_motion,'float')
     aspect_x=float(np.float32(min(1,width/height)));aspect_y=float(np.float32(min(1,height/width)))
     mesh=mesh_inputs(mesh_x,mesh_y,aspect_x=aspect_x,aspect_y=aspect_y)
-    pixel_code=_code(source,'per_pixel_')
+    pixel_code=code('per_pixel_')
     has_pixel_code=pixel_code!='0;'
     defaults.update(meshx=mesh_x,meshy=mesh_y,pixelsx=width,pixelsy=height,
                     aspectx=float(np.float32(1)/np.float32(aspect_x)),
                     aspecty=float(np.float32(1)/np.float32(aspect_y)))
-    programmes={'main_init':{'scope':'main','code':_code(source,'per_frame_init_')},
-                'main_frame':{'scope':'main','code':_code(source,'per_frame_')},'main_defaults':'0;'}
+    programmes={'main_init':{'scope':'main','code':code('per_frame_init_')},
+                'main_frame':{'scope':'main','code':code('per_frame_')},'main_defaults':'0;'}
     if has_pixel_code:
         programmes['pixel']={'scope':'pixel','code':pixel_code}
         programmes['pixel_inputs']={'scope':'pixel','code':'0;'}
     custom=set()
     for name in ['per_frame_init_','per_frame_']:
-        custom|=_variables(source.get('sections',{}).get(name,{}).get('tree'))
+        custom|=_variables(tree(name))
     custom-=set(defaults)|set(READONLY)|set(Q)
     custom={name for name in custom if not re.fullmatch(r'reg\d\d',name)}
     capture=list(defaults)+list(READONLY)+Q+sorted(custom)
@@ -156,12 +161,12 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     # Initializers still have memory/register effects when drawing is disabled.
     waves={}
     for index in range(4):
-        name=f'wave{index}_init';programmes[name]={'scope':f'wave{index}','code':_code(source,f'wave_{index}_init')}
+        name=f'wave{index}_init';programmes[name]={'scope':f'wave{index}','code':code(f'wave_{index}_init')}
         wave={c:_scalar(values,f'wavecode_{index}_{c}',1,'float') for c in 'rgba'}
         wave['samples']=_scalar(values,f'wavecode_{index}_samples',512,'int')
         waves[index]=wave
-        programmes[f'wave{index}_frame']={'scope':f'wave{index}','code':_code(source,f'wave_{index}_per_frame')}
-        programmes[f'wave{index}_point']={'scope':f'wave{index}_point','code':_code(source,f'wave_{index}_per_point')}
+        programmes[f'wave{index}_frame']={'scope':f'wave{index}','code':code(f'wave_{index}_per_frame')}
+        programmes[f'wave{index}_point']={'scope':f'wave{index}_point','code':code(f'wave_{index}_per_point')}
         programmes[f'wave{index}_defaults']='0;'
         append({'program':name,'variables':{**initial,**wave,**{t:0 for t in T},
                **{q:{'program':'main_init','variable':q} for q in Q}}})
@@ -172,7 +177,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
         shape['thick']=_scalar(values,f'shapecode_{index}_thickOutline',0,'bool')
         shapes[index]=shape
         for phase in ['init','frame']:
-            programmes[f'shape{index}_{phase}']={'scope':f'shape{index}','code':_code(source,f'shape_{index}_'+('init' if phase=='init' else 'per_frame'))}
+            programmes[f'shape{index}_{phase}']={'scope':f'shape{index}','code':code(f'shape_{index}_'+('init' if phase=='init' else 'per_frame'))}
         programmes[f'shape{index}_defaults']='0;'
         append({'program':f'shape{index}_init','variables':{**initial,**shape,'instance':0,**{t:0 for t in T},
                 **{q:{'program':'main_init','variable':q} for q in Q}}})
@@ -205,7 +210,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
         for index,wave in waves.items():
             if not _scalar(values,f'wavecode_{index}_enabled',0,'int'):continue
             frame_program=f'wave{index}_frame';point_program=f'wave{index}_point'
-            frame_custom=_variables(source.get('sections',{}).get(f'wave_{index}_per_frame',{}).get('tree'))-set(READONLY)-set(wave)-set(Q)-set(T)
+            frame_custom=_variables(tree(f'wave_{index}_per_frame'))-set(READONLY)-set(wave)-set(Q)-set(T)
             append({'program':frame_program,'variables':inputs,'reset_variables':{**wave,
                     **{q:{'program':'main_frame','variable':q} for q in Q},
                     **{t:{'program':f'wave{index}_defaults','variable':t} for t in T}},
@@ -218,12 +223,14 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
                       'preset_wave_scale':_scalar(values,'fWaveScale',1,'float'),
                       'left':audio_frames[frame_index]['spectrum_left' if spectrum else 'waveform_left'],
                       'right':audio_frames[frame_index]['spectrum_right' if spectrum else 'waveform_right']}
-            point_custom=_variables(source.get('sections',{}).get(f'wave_{index}_per_point',{}).get('tree'))-set(READONLY)-set(Q)-set(T)-set('rgba')-{'sample','value1','value2','x','y'}
+            point_custom=_variables(tree(f'wave_{index}_per_point'))-set(READONLY)-set(Q)-set(T)-set('rgba')-{'sample','value1','value2','x','y'}
             append({'program':point_program,'variables':{
                         **{name:{'program':'main_frame','variable':name} for name in READONLY},
                         **{name:{'program':frame_program,'variable':name} for name in Q+T}},
                     'wave_points':settings,'capture':['x','y','r','g','b','a','sample','value1','value2']+sorted(point_custom)},
                    (frame_index,'wave_points',index))
+    for program in programmes.values():
+        if isinstance(program,dict):program['assembly']='raw'
     request={'programs':programmes,'steps':steps}
     with tempfile.TemporaryDirectory() as temporary:
         path=Path(temporary)/'scene.json';path.write_text(json.dumps(request))
@@ -255,5 +262,6 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
             if isinstance(value,(int,float)):frame['main'][name]=max(low,min(high,value))
     return {'basis':'native source equation orchestration; no rendered inputs','frames':result,
             'equation_rng_seed':seed,
+            'equation_loader_policy':equation_loader_policy,
             'viewport':[width,height],'mesh_size':[mesh_x,mesh_y],
             'appearance_prediction_complete':False,'remaining':['drawing/runtime precision']}

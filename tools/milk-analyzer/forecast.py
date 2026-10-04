@@ -84,6 +84,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     # Native MilkdropPreset uses this literal substring test, including comments.
     warp_reads_blur = 'blur' in warp_code.lower()
     pipeline = SourcePipeline.from_source(source, profile=domain['profile'], compatibility=compatibility,
+        equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'),
         initial_feedback=initial, warp_reads_blur=warp_reads_blur, blur_levels=domain['blur_levels'],
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
@@ -114,7 +115,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     h,w=field.shape[-3:-1]
                     material_uniforms[name]=[w,h,1/w,1/h]
     scene = execute_scene(source,audio['frames'],reader=reader,width=width,height=height,
-        mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'])
+        mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],
+        equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))
     builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs')
     if builtin['engine_archive_sha256']!=archive:
         raise ValueError('builtin-wave source engine identity mismatch')

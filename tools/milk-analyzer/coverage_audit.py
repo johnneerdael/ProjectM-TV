@@ -19,7 +19,8 @@ def source_tokens(text: str, *, shader: bool) -> list[str]:
     return TOKEN.findall(text)
 
 
-def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> dict:
+def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
+                 equation_loader_policy='strict-raw-v1') -> dict:
     """Count source once, including omitted code and invalid/unclassified rows.
 
     Latin-1 provides a lossless byte-to-character mapping for the inventory.
@@ -28,6 +29,8 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
     its drawing/runtime effects. No AST node count enters the denominator.
     """
     digest = hashlib.sha256(raw).hexdigest()
+    from equation_loading import select_equation
+    select_equation(None,'per_frame_',policy=equation_loader_policy)
     valid_cache = (cache is not None and cache.get('preset_sha256') == digest
                    and cache.get('reader_sha256') == reader_sha)
     groups = defaultdict(list)
@@ -97,6 +100,10 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
             source_matches = section.get('source') == expected_source
             parsed = (source_matches and section.get('status') == 'parsed' and
                       (shader or section.get('projectm_native_status') == 'parsed'))
+            selected=None
+            if stage=='eel' and source_matches and 'projectm_native_compile_status' in section:
+                selected=select_equation(section,prefix,policy=equation_loader_policy)
+                parsed=selected['compile_status']=='accepted' and selected['tree_status']=='parsed'
             lowered = False
             reasons = []
             if shader and parsed:
@@ -116,6 +123,8 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str) -> d
                     'lowering_unknowns': reasons, 'verified_behavior': None}
             unit['loader_ignored_confirmed']=bool(stage!='configuration' and not visited and native_loader and
                                                   native_source_matches and first_values_match)
+            if selected is not None:
+                unit['equation_loading']={key:selected[key] for key in ['policy','assembly','compile_status','tree_status']}
             units.append(unit)
             totals = stages[stage]
             totals['source_tokens'] += count
@@ -154,6 +163,8 @@ def main() -> None:
     parser.add_argument('--presets', type=Path, required=True)
     parser.add_argument('--summary', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    from equation_loading import POLICIES
+    parser.add_argument('--equation-loader-policy',choices=sorted(POLICIES),default='strict-raw-v1')
     args = parser.parse_args()
     summary = json.loads(args.summary.read_text())
     reader_sha = summary['reader_sha256']
@@ -176,7 +187,8 @@ def main() -> None:
                     cache = json.loads(Path(row['tree']).read_text())
                 except (OSError, json.JSONDecodeError):
                     pass  # Missing/invalid cache is uncovered, never excluded.
-            result = audit_source(path.read_bytes(), cache=cache, reader_sha=reader_sha)
+            result = audit_source(path.read_bytes(), cache=cache, reader_sha=reader_sha,
+                                  equation_loader_policy=args.equation_loader_policy)
             result['preset'] = path.name
             details.write(json.dumps(result, separators=(',', ':')) + '\n')
             for stage, counts in result['stages'].items():
@@ -193,9 +205,10 @@ def main() -> None:
     code_count = sum(row['code_tokens'] for row in presets)
     parsed_count = sum(row['parsed_code_tokens'] for row in presets)
     result = {'schema_version': 1, 'presets': len(paths), 'reader_sha256': reader_sha,
+              'equation_loader_policy':args.equation_loader_policy,
               'audit_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'lowering_inputs': {name: hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
-                                  for name in ('shader_fields.py', 'sampling_policy.py')},
+                                  for name in ('shader_fields.py', 'sampling_policy.py','equation_loading.py')},
               'summary_sha256': hashlib.sha256(args.summary.read_bytes()).hexdigest(),
               'corpus_sha256': hashlib.sha256(json.dumps([(row['preset'], row['preset_sha256'])
                                                          for row in presets]).encode()).hexdigest(),

@@ -60,14 +60,20 @@ class SourcePipeline:
         self.composite_mesh=make_mesh(self.width,self.height,raster_subpixel_bits=composite_subpixel_bits)
 
     @classmethod
-    def from_source(cls,source,*,profile,compatibility,**kwargs):
+    def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
         if kwargs.get('coordinate_profile','strict')!='strict' and profile!='glsl330':
             raise ValueError('Apple shader coordinate profile requires glsl330')
         # The pinned preset loader compiles custom equations even for disabled
         # waves/shapes and throws on failure. Shader fallback cannot rescue it.
+        from equation_loading import select_equation
+        select_equation(None,'per_frame_',policy=equation_loader_policy)
         for prefix,section in source.get('sections',{}).items():
-            if prefix not in {'warp_','comp_'} and section.get('projectm_native_compile_status')=='rejected':
-                raise UnresolvedMath('native equation compilation rejected: '+prefix)
+            if prefix not in {'warp_','comp_'}:
+                selected=select_equation(section,prefix,policy=equation_loader_policy)
+                if selected['compile_status']=='rejected':
+                    raise UnresolvedMath('native equation compilation rejected: '+prefix)
+                if selected['compile_status']!='accepted':
+                    raise UnresolvedMath('native equation compatibility unresolved: '+prefix)
         from stage_resolution import resolve_stages
         plan=resolve_stages(source,profile=profile,compatibility=compatibility)
         trees={}
@@ -86,6 +92,7 @@ class SourcePipeline:
                      native_samplers={name:compatibility[name]['request']['samplers']
                          for name in ('warp','composite') if plan[name]['kind'].startswith('custom_')},**kwargs)
         pipeline.stage_resolution=plan
+        pipeline.equation_loader_policy=equation_loader_policy
         return pipeline
 
     def _store(self,field):
