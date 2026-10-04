@@ -289,6 +289,109 @@ static void PresetControls()
     }
 }
 
+// Allocation is part of Update: it must preserve distinct caller read/draw targets
+// on the first frame, after resizing, and when reference-scale blur is enabled.
+static void BlurFramebufferControls(TextureManager& manager)
+{
+    PresetState state;
+    Setup(state, manager);
+    PerFrameContext frame(state.globalMemory, &state.globalRegisters);
+    frame.RegisterBuiltinVariables();
+    frame.LoadStateVariables(state);
+    *frame.blur1_min = *frame.blur2_min = *frame.blur3_min = 0;
+    *frame.blur1_max = *frame.blur2_max = *frame.blur3_max = 1;
+    *frame.blur1_edge_darken = 0;
+    auto output = std::make_shared<Texture>("caller-output", 256, 192, false);
+    GLuint read{}, draw{};
+    glGenFramebuffers(1, &read);
+    glGenFramebuffers(1, &draw);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw);
+    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output->TextureID(), 0);
+    for (const auto level : {BlurTexture::BlurLevel::Blur1, BlurTexture::BlurLevel::Blur3})
+    {
+        BlurTexture blur;
+        blur.SetRequiredBlurLevel(level);
+        struct Case { const char* name; int width; int height; float scale; };
+        for (const auto& test : {
+            Case{"first", 128, 96, 0}, Case{"same-size", 128, 96, 0},
+            Case{"resize", 192, 128, 0}, Case{"scaled", 192, 128, 2},
+            Case{"scaled-same-size", 192, 128, 2}})
+        {
+            auto source = std::make_shared<Texture>("source", test.width, test.height, false);
+            glBindFramebuffer(GL_FRAMEBUFFER, read);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, source->TextureID(), 0);
+            Check(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "blur source incomplete");
+            glClearColor(.25f, .5f, .75f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw);
+            glViewport(0, 0, test.width, test.height);
+            Check(glGetError() == GL_NO_ERROR, "GL error before blur update");
+            blur.Update(*source, frame, test.scale);
+            GLint actualRead{}, actualDraw{};
+            glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &actualRead);
+            glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &actualDraw);
+            std::cout << "blur " << static_cast<int>(level) << ' ' << test.name
+                      << " read=" << actualRead << '/' << read << " draw=" << actualDraw << '/' << draw << '\n';
+            Check(actualRead == static_cast<GLint>(read) && actualDraw == static_cast<GLint>(draw),
+                  std::string("blur changed caller framebuffer: ") + test.name);
+            Check(glGetError() == GL_NO_ERROR, "GL error in blur update");
+            glClear(GL_COLOR_BUFFER_BIT); // The next caller draw must still have a complete target.
+            for (const auto& descriptor : blur.GetDescriptorsForBlurLevel(level))
+            {
+                glBindFramebuffer(GL_READ_FRAMEBUFFER, read);
+                const auto texture = descriptor.Texture();
+                glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture->TextureID(), 0);
+                glReadBuffer(GL_COLOR_ATTACHMENT0);
+                unsigned char pixel[4]{};
+                glReadPixels(texture->Width()/2, texture->Height()/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
+                Check(glGetError() == GL_NO_ERROR, "blur readback failed");
+                Check(std::abs(int(pixel[0])-64) <= 2 && std::abs(int(pixel[1])-128) <= 2 &&
+                      std::abs(int(pixel[2])-191) <= 2, "blur lost constant source color");
+            }
+        }
+    }
+    glDeleteFramebuffers(1, &read);
+    glDeleteFramebuffers(1, &draw);
+}
+
+static void MidgitRenderControls(TextureManager& manager)
+{
+    // Use the exact bundled source with the two generated TGA assets. JPEG decoder
+    // warnings and production-random image choice are separate from FBO ownership.
+    const fs::path path = fs::path(BUNDLED_ASSETS) / "presets" / "midgitstraights of majillaen - featy sweet.milk";
+    PresetState state;
+    Setup(state, manager);
+    state.renderContext.viewportSizeX = 128;
+    state.renderContext.viewportSizeY = 96;
+    libprojectM::MilkdropPreset::MilkdropPreset preset(path.string());
+    preset.Initialize(state.renderContext);
+    auto output = std::make_shared<Texture>("output", 256, 192, false);
+    GLuint target{};
+    glGenFramebuffers(1, &target);
+    glBindFramebuffer(GL_FRAMEBUFFER, target);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output->TextureID(), 0);
+    Check(preset.SetOutputTarget(true, target), "midgit output target rejected");
+    Check(glGetError() == GL_NO_ERROR, "GL error before midgit render");
+    for (int frame = 0; frame < 4; ++frame)
+    {
+        state.renderContext.frame = frame;
+        if (frame == 2)
+        {
+            state.renderContext.viewportSizeX = 192;
+            state.renderContext.viewportSizeY = 128;
+        }
+        preset.RenderFrame(state.audioData, state.renderContext);
+        const auto error = glGetError();
+        std::cout << "midgit frame=" << frame << " render_gl_error=" << error << '\n';
+        Check(error == GL_NO_ERROR, "midgit full render framebuffer failure");
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, target);
+        unsigned char pixel[4]{};
+        glReadPixels(64, 48, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
+        Check(glGetError() == GL_NO_ERROR, "midgit output readback failed");
+    }
+    glDeleteFramebuffers(1, &target);
+}
+
 static void ManagerControls(TextureManager& manager)
 {
     for (const auto& mode : std::vector<std::string>{"", "fw_", "fc_", "pw_", "pc_"})
@@ -354,6 +457,8 @@ int main(int argc, char** argv)
         else if (mode == "numerical") NumericalControls(manager);
         else if (mode == "lifecycle") LifecycleControls(manager);
         else if (mode == "presets") PresetControls();
+        else if (mode == "blur-framebuffers") BlurFramebufferControls(manager);
+        else if (mode == "midgit-render") MidgitRenderControls(manager);
         else throw std::runtime_error("unknown control");
         Check(glGetError() == GL_NO_ERROR, "GL error in random texture control");
         std::ofstream report(fixtures.directory.string() + ".json");

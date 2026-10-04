@@ -44,3 +44,7 @@ The core extracts all top-level `assets/textures/` files to private `files/textu
 - Dedicated TV before/after captures and frame-rate validation are pending device allocation. The shared corpus baseline and running devices/processes/settings were not changed.
 
 Rerun the native suite with `core/src/test/native/run_native_tests.sh`. For optional exact-preset diagnostics, configure `core/src/test/native/projectm-regressions` against the applied engine, enable `-DCMAKE_CXX_FLAGS=-DMILKDROP_PRESET_DEBUG`, build `random-texture-regressions`, then run `random-texture-regressions presets <new-fixture-directory>`. Its companion JSON is preserved even when a full-render diagnostic fails. Do not clear analyzer guards until a matching runtime/AAR-bound descriptor manifest and lifecycle profile are consumed by the analyzer.
+
+## Follow-up framebuffer diagnosis — 2026-10-05
+
+The historical JSON above remains unchanged. Patch 0041 diagnoses and fixes the midgit error: blur allocation unbound the caller framebuffer before `BlurTexture::Update` saved its bindings. Subsequent waveform/border draws reached framebuffer zero. See [the source-bound reproduction and regression results](../midgit-framebuffer/README.md). This follow-up does not clear analyzer guards or certify full-preset appearance.
