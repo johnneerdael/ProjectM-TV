@@ -23,3 +23,11 @@ The original 46-file export has `artifact-index.json`; later additions have sepa
 Nine matched actual-preset images from the corrected deterministic sampler comparisons are in
 `sampler-presets/`, with their source and frame hashes in `sampler-presets/manifest.json`.
 Rejected/invalid feedback probes remain labeled experiments and are not production fixes.
+
+Actual Android `projectm-tv:core` physical controls for patches1–28 are in
+[the candidate28 report](../core-corpus/physical-candidate28/REPORT.md). The four
+matched sheets use actual APK thumbnails; Mood Rings is explicitly candidate-only.
+All16 jobs and256 raw frame hashes were independently verified.
+[Supporting records](../core-corpus/physical-candidate28/supporting-records.zip)
+retain original protocol, trace, source and image provenance. These controls do not
+establish full-corpus quality or resolve the original Mali startup outlier.

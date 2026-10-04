@@ -1,0 +1,27 @@
+{
+  "images": [
+    {
+      "file": "Echasketch-actual-core-sheet.png",
+      "sha256": "aa7aa778059566fc2f29461135bf5e7a93b87e8c155ea33dce13c76db2712812",
+      "kind": "actual APK-produced filtered256x144 thumbnail sheet; no historical reference img_err claim"
+    },
+    {
+      "file": "Matrix-actual-core-sheet.png",
+      "sha256": "751dca6156089b643741dfe5714e8376fcd09c0061b091a5aecf36642e088faf",
+      "kind": "actual APK-produced filtered256x144 thumbnail sheet; no historical reference img_err claim"
+    },
+    {
+      "file": "MoodRings-actual-core-sheet.png",
+      "sha256": "dd2607b213580807afd92f9e5497ec2cc78ad543f97e991794289d00f74ccd01",
+      "kind": "actual APK-produced filtered256x144 thumbnail sheet; no historical reference img_err claim"
+    },
+    {
+      "file": "Royal191-actual-core-sheet.png",
+      "sha256": "4c7b15a2114dbf0dd81041a1e02560c80a4a944217ec18aced53a5936194ba32",
+      "kind": "actual APK-produced filtered256x144 thumbnail sheet; no historical reference img_err claim"
+    }
+  ],
+  "assessment_sha256": "3944291fcb4239f1f11c2d7a562278302263e13ff51fee1d507568447d059cfb",
+  "verified_sha256": "96ba8f0426d3ce7b410a70c4a60f501808fdaf4ee070ee4592c30aaa213a6404",
+  "report_sha256": "c98a8b314bf0bb7f02e15d7676444f4a09bb22338c88e330eccb8cdf4273a1a0"
+}
