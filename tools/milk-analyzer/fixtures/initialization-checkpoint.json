@@ -1,6 +1,6 @@
 {
   "scope": "Source parsing/lowering only; no full visual prediction credit",
-  "base_main_commit": "8b70620339018cfaf5ac05acdb4ea8104dc2eb59",
+  "base_main_commit": "6ef76b6f66e97543ec7623e8fc80a5821f6bdf2c",
   "selector_origin_commit": "c8b1279645e75584bda92a9aaa5b89ceed8056b5",
   "global_input_policy": "projectmtv-implicit-extern-zero-v1",
   "authored_source_unchanged": true,
@@ -51,12 +51,12 @@
     "Core policy preserves external-input classification and uses GLES link-time defaults; arbitrary D3D9 register history is not reproduced",
     "Full-preset numerical domains, TV performance and appearance equivalence are not established by source lowering",
     "Current descriptor controls reuse exact requests but are translated and compiled against the new engine",
-    "Recorded initial Android screenshots use the earlier feature artifact; the final integrated39test revision matches those9controls byte-for-byte. Both artifact identities are preserved."
+    "Recorded initial Android screenshots retain their earlier feature artifact identities. Both final Native/capped40patch artifacts reproduce all9outputs byte-for-byte across60frames; separate final hashes are recorded."
   ],
   "adapter_identity": {
     "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
-    "parent_commit": "4ee082d6340b951f3f11d9a05cf12f2882ac2532",
-    "patches_sha256": "4c14c39740da78f9e1a7c815d362a570590a61108826797864b21653e4aec00d",
+    "parent_commit": "e45ad0bec1ab2667d1732e7b9e87ce90477e226d",
+    "patches_sha256": "40e7314080b5a977fd4aba936647386d3643b4ad67849561d7e9056f1d79c453",
     "patches": [
       {
         "path": "0001-plasma-transition-float-overflow-shield.patch",
@@ -207,43 +207,60 @@
         "sha256": "92905a34b19ada2128d3c4fd7e603bd6c52acf9f22b27f4678aadf38d4c22652"
       },
       {
-        "path": "0038-hlslparser-implicit-global-inputs.patch",
+        "path": "0038-feedback-diffusion-compensation.patch",
+        "sha256": "7dab8ec89bd3e4e61d469185235ac6a48e7ff6a8410190cd0d211959470401e2"
+      },
+      {
+        "path": "0039-feedback-diffusion-build-policy.patch",
+        "sha256": "7f3b543d9c42172d95f49582e91883bde0718a556962b30b8a847e65f5c00011"
+      },
+      {
+        "path": "0040-hlslparser-implicit-global-inputs.patch",
         "sha256": "e2f902214bea04657c92c0572af0e47d32cc71b0d3f64437deb327dbb058e907"
       }
     ]
   },
   "validation": {
-    "focused_source_tests": "39 passed",
-    "native_driver_regression_groups": "13groups pass on the integrated host driver with ASan/UBSan",
+    "focused_source_tests": "39 passed against the rebuilt40patch adapters",
+    "native_driver_regression_groups": "13groups pass on the40patch host driver with ASan/UBSan",
     "historical_full_analyzer_suite": "750tests and35subtests pass with preserved historical adapters; supplementary scope",
-    "android_core_and_jvm": "core/app assembleDebug and testDebugUnitTest pass after a clean complete38patch application",
-    "release_tooling": "74tests pass",
-    "final_integrated_control_retest": "9controls byte-identical to recorded feature outputs across60frames"
+    "android_core_and_jvm": "Native policy core/app assembleDebug and testDebugUnitTest pass; capped policy core assembleDebug/testDebugUnitTest pass after a clean40patch application",
+    "release_tooling": "80tests pass",
+    "final_integrated_control_retest": "Both final Native/capped40patch libraries match all9recorded feature outputs byte-for-byte across60frames"
   },
-  "current_debug_artifact": {
-    "head_commit": "4ee082d6340b951f3f11d9a05cf12f2882ac2532",
-    "aar_sha256": "b5d7f16cd314f3bc87b5c9405ad8f0aa0893e13fd617ad867bec2082f00f0669",
-    "arm64_sha256": "aa131f4065b0a801f6c9d5ad8d37ac681f7c2393f06d4fa93d5a3ca6d7993330"
-  },
-  "tested_source_commit": "4ee082d6340b951f3f11d9a05cf12f2882ac2532",
+  "tested_source_commit": "e45ad0bec1ab2667d1732e7b9e87ce90477e226d",
   "adapter_binaries": {
-    "milk-native-reader": "1dccc1e84666bd7c592078391beccd5b21cbb249accb4ed483e7b7045ea3ead3",
-    "milk-shader-translate": "cb88575ce1260d5d311c5fea94e72f9e1ba63a4ad7623adec72a9bf505dd43c4"
+    "milk-native-reader": "22be0cf01ee8bf68681bd62a94651b81c218e89f6224bef418ba8c87ee54174b",
+    "milk-shader-translate": "9b9698e99a210ae78e1f60877e8acd6f2216e90af7cac298681b15b072b210a1"
   },
   "series_verification": {
-    "patch_count": 38,
+    "patch_count": 40,
     "definition": "patches_sha256 is SHA256 of the concatenation of sorted patch bytes",
-    "tree_scope": "upstream4.1.7 plus all committed patches0001-0038; base8b706203 includes independently merged parser and random-binding fixes",
+    "tree_scope": "upstream4.1.7 plus all committed patches0001-0040; base6ef76b6f includes independently merged parser, random-binding and Native4K policies",
     "random_binding_patch": "0037-random-texture-alias-bindings.patch",
-    "initialization_patch": "0038-hlslparser-implicit-global-inputs.patch"
+    "initialization_patch": "0040-hlslparser-implicit-global-inputs.patch"
   },
   "current_subset_audit": {
-    "reader_sha256": "1dccc1e84666bd7c592078391beccd5b21cbb249accb4ed483e7b7045ea3ead3",
-    "coverage_sha256": "8d3eab693b37af395502df53e2560d222800a48abf296f57103235b1a8c25f0b",
-    "compatibility_sha256": "012d98a590e9844a5cffd16333363a09a368dabd9c92eff10819eaceab6808e7",
+    "reader_sha256": "22be0cf01ee8bf68681bd62a94651b81c218e89f6224bef418ba8c87ee54174b",
+    "coverage_sha256": "9f3b83e3418e6eba42ef45aac230173ec6219f633148358f77b3be12222a2dac",
+    "compatibility_sha256": "b57ce40fa86d6b2dc6759b6a239d4ead6827298c5192e0a2ce4e3a1109532f30",
     "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
     "presets": 315,
     "remaining_gaps": 3,
-    "scope": "Fresh38patchreader and translator; explicit descriptor contexts; no rendered inputs or visual credit"
+    "scope": "Fresh40patchreader and translator after the Native4K base integration; explicit descriptor contexts; no rendered inputs or visual credit"
+  },
+  "current_debug_artifacts": {
+    "native": {
+      "tested_source_commit": "e45ad0bec1ab2667d1732e7b9e87ce90477e226d",
+      "policy": "native",
+      "aar_sha256": "0890422c040720ca08b1a20d6cedccf641ae19ee3001f4edd9604b939bebc554",
+      "arm64_sha256": "9cb1595d8ffc883fd2364720dec0ef27754d98eb1180cbf42b40f84cc5425222"
+    },
+    "capped": {
+      "tested_source_commit": "e45ad0bec1ab2667d1732e7b9e87ce90477e226d",
+      "policy": "capped",
+      "aar_sha256": "eee54812f3cf6ff29663d82e879cbfc695acc9eb323966245ab64846dfeacf64",
+      "arm64_sha256": "adfeeab14bc9232ff50a68d349883ea786495c8d0de4ed7b3614d7ff958ac4e1"
+    }
   }
 }

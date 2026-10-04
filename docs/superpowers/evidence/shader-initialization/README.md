@@ -44,7 +44,10 @@ appearance certification or TV fps measurements.
 
 All60frames of each fixed implicit case exactly match its explicit-zero control.
 All60frames of the explicit nonzero initializer controls match baseline and fixed
-builds. Separate native driver tests supply nonzero uniforms through the GL API and
+builds. Both final rendering policies (Native-capable and capped) reproduce all nine
+recorded feature controls byte-for-byte across all60frames. The final hashes and
+40-patch inventory are in `tools/milk-analyzer/fixtures/initialization-checkpoint.json`.
+Separate native driver tests supply nonzero uniforms through the GL API and
 verify that writable copies preserve those inputs and reset each invocation.
 
 ![Captured control readbacks](android-control-readbacks.png)
