@@ -1,0 +1,74 @@
+import hashlib
+import json
+from pathlib import Path
+import tempfile
+import unittest
+import run
+
+class HostTests(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.work=Path(self.temp.name)
+        raw=b"\x01\x02\x03\x04\x05\x06"
+        (self.work/"frame-0000.rgb").write_bytes(raw)
+        (self.work/"frame-0001.rgb").write_bytes(raw)
+        sha=hashlib.sha256(raw).hexdigest()
+        self.job={"schema_version":2,"job_id":"job","protocol_sha256":"protocol","preset_filename":"exact.milk",
+                  "preset_sha256":"source","width":2,"height":1,"fps":30,"seed":12345,
+                  "warmup_frames":0,"measurement_frames":2,"capture_mode":"selected","capture_frames":[0,1],
+                  "expected_core_sha256":"core","retain_native_frames":True}
+        self.result={"schema_version":2,"job_id":"job","protocol_sha256":"protocol","status":"success",
+                     "rendered_frames":2,"capture_mode":"selected","capture_frames":[0,1],"core_sha256":"core",
+                     "width":2,"height":1,"fps":30,"seed":12345,"eligible_count":1,
+                     "requested_preset_sha256":"source",
+                     "selected_files":[{"frame":i,"path":f"frame-{i:04d}.rgb","bytes":6,"sha256":sha} for i in range(2)]}
+        self.frames=[{"frame":i,"preset_filename":"exact.milk","change_counter":1,"sha256":sha,"captured":True} for i in range(2)]
+    def tearDown(self):self.temp.cleanup()
+    def test_shipping_frame_selections_cover_short_and_long_windows(self):
+        self.assertEqual(run.frame_picks(120),[120,150,180,210,239])
+        self.assertEqual(run.frame_picks(360),[120,150,180,210,239,300,390,479])
+    def test_job_key_separates_roles_modes_repeats_and_source_protocol(self):
+        record={"path":"x.milk","sha256":"x"}
+        keys=[run.job_key("p",record,"baseline","selected",1),run.job_key("p",record,"candidate","selected",1),
+              run.job_key("p",record,"baseline","full",1),run.job_key("p",record,"baseline","selected",2),
+              run.job_key("q",record,"baseline","selected",1),run.job_key("p",dict(record,sha256="changed"),"baseline","selected",1)]
+        self.assertEqual(len(set(keys)),6)
+    def test_adjacent_motion_pairs_include_short_and_long_windows(self):
+        self.assertEqual(run.capture_indices(360),[120,121,150,151,180,181,210,211,238,239,300,301,390,391,478,479])
+
+    def test_cached_rows_require_payload_and_retained_file_integrity(self):
+        path=self.work/"row.json"
+        value={"key":"key","protocol_sha256":"protocol","status":"success",
+               "retained_files":[{"path":"frame-0000.rgb","sha256":run.file_hash(self.work/"frame-0000.rgb")}]}
+        run.save_row(path,value)
+        self.assertIsNotNone(run.read_cached(path,"key","protocol"))
+        self.assertIsNone(run.read_cached(path,"key","other"))
+        (self.work/"frame-0000.rgb").write_bytes(b"corrupt")
+        self.assertIsNone(run.read_cached(path,"key","protocol"))
+
+    def test_failed_apk_result_is_terminal_failed(self):
+        self.result["status"]="failed";self.result["error"]="requested preset rejected"
+        self.assertEqual(run.validate_result(self.job,self.result,[],self.work),"failed")
+
+    def test_other_device_is_rejected(self):
+        with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
+    def test_allowed_ip_serials_are_accepted(self):
+        self.assertEqual(run.validate_device("192.168.51.53:5555"),"192.168.51.53:5555")
+    def test_selected_native_files_validate_against_trace_hashes(self):
+        self.assertEqual(run.validate_result(self.job,self.result,self.frames,self.work),"success")
+    def test_wrong_current_preset_is_explicit(self):
+        self.frames[1]["preset_filename"]="fallback.milk"
+        self.assertEqual(run.validate_result(self.job,self.result,self.frames,self.work),"incorrect_current_preset")
+    def test_truncated_native_sample_is_rejected(self):
+        (self.work/"frame-0001.rgb").write_bytes(b"short")
+        with self.assertRaisesRegex(ValueError,"bytes|checksum"):run.validate_result(self.job,self.result,self.frames,self.work)
+    def test_selected_result_cannot_claim_full_stream_hash(self):
+        self.result["sha256_all_frames"]="invented"
+        with self.assertRaisesRegex(ValueError,"full|coverage"):run.validate_result(self.job,self.result,self.frames,self.work)
+    def test_wrong_runtime_core_library_is_rejected(self):
+        self.result["core_sha256"]="othercore"
+        with self.assertRaisesRegex(ValueError,"core|provenance"):run.validate_result(self.job,self.result,self.frames,self.work)
+    def test_missing_or_duplicate_frame_names_are_rejected(self):
+        self.frames[1]["frame"]=0
+        with self.assertRaisesRegex(ValueError,"frame|trace"):run.validate_result(self.job,self.result,self.frames,self.work)
+
+if __name__=="__main__":unittest.main()
