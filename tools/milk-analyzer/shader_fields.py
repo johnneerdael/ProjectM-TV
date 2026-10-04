@@ -30,7 +30,7 @@ BINARY={0:"and",1:"or",2:"add",3:"subtract",4:"multiply",5:"divide",6:"remainder
         7:"less",8:"greater",9:"less_equal",10:"greater_equal",11:"equal",12:"not_equal",
         13:"bit_and",14:"bit_or",15:"bit_xor"}
 PURE={"sin","cos","tan","asin","acos","atan","atan2","abs","sqrt","rsqrt",
-      "length","distance","dot","cross","normalize","pow","exp","log","log2",
+      "length","distance","dot","cross","reflect","normalize","pow","exp","exp2","log","log2","log10",
       "min","max","clamp","saturate","lerp","smoothstep","step","frac","floor",
       "ceil","round","trunc","sign","fmod","mul","all","any"}
 
@@ -455,11 +455,11 @@ class ShaderFields:
             # these intrinsics. Preserve its literal pow(x,1) sign exception.
             if name=='pow' and arguments[1]['kind']=='constant' and arguments[1]['value']==1:
                 return self.coerce(args[0],dtype)
-            if name in {'sqrt','rsqrt','log','log2','pow'}:
+            if name in {'sqrt','rsqrt','log','log2','log10','pow'}:
                 args=(Field('abs',(args[0],),args[0].dtype,
                             {'lowering':'pinned projectM DX9 compatibility'}),)+args[1:]
             result=Field(name,args,dtype)
-            if name in {"sqrt","rsqrt","log","log2","pow","normalize"}:
+            if name in {"sqrt","rsqrt","log","log2","log10","pow","normalize"}:
                 return Field("domain_checked",(result,),dtype,{"function":name,"domain":"post-projectM-lowering domain requires proof"})
             return result
         return self.unsupported("shader expression not lowered: "+kind,dtype=dtype)

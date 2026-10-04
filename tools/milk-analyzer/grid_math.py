@@ -297,6 +297,12 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 elif len(right_shape)==1:raw=np.matmul(args[0],args[1][...,None])[...,0]
                 else:raw=np.matmul(*args)
             elif op=='dot':raw=np.sum(args[0]*args[1],axis=1)
+            elif op=='reflect':
+                incident,normal=args
+                product=incident*normal
+                dot=product if product.ndim==1 else np.sum(product,axis=1,keepdims=True)
+                raw=incident-np.float32(2)*dot*normal
+            elif op=='log10':raw=np.log(args[0])/np.log(np.float32(10))
             elif op in {'length','distance','normalize'}:
                 value=args[0]-args[1] if op=='distance' else args[0]
                 norm=np.abs(value) if value.ndim==1 else np.linalg.norm(value,axis=tuple(range(1,value.ndim)))

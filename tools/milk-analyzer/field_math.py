@@ -94,7 +94,7 @@ BINARY={'add':np.add,'subtract':np.subtract,'multiply':np.multiply,'divide':np.d
         'and':np.logical_and,'or':np.logical_or,'bit_and':np.bitwise_and,
         'bit_or':np.bitwise_or,'bit_xor':np.bitwise_xor}
 UNARY={'sin':np.sin,'cos':np.cos,'tan':np.tan,'asin':np.arcsin,'acos':np.arccos,
-       'atan':np.arctan,'abs':np.abs,'sqrt':np.sqrt,'exp':np.exp,'log':np.log,
+       'atan':np.arctan,'abs':np.abs,'sqrt':np.sqrt,'exp':np.exp,'exp2':np.exp2,'log':np.log,
        'log2':np.log2,'floor':np.floor,'ceil':np.ceil,'round':np.rint,
        'trunc':np.trunc,'sign':np.sign}
 
@@ -193,6 +193,8 @@ def evaluate(field:Field,*,inputs=None,sample=None):
             elif op in UNARY:raw=UNARY[op](args[0])
             elif op=='mul':raw=args[0]*args[1] if args[0].ndim==0 or args[1].ndim==0 else np.matmul(*args)
             elif op=='dot':raw=np.dot(*args)
+            elif op=='reflect':raw=args[0]-np.float32(2)*np.dot(args[1],args[0])*args[1]
+            elif op=='log10':raw=np.log(args[0])/np.log(np.float32(10))
             elif op=='length':raw=np.linalg.norm(args[0])
             elif op=='distance':raw=np.linalg.norm(args[0]-args[1])
             elif op=='normalize':raw=args[0]/np.linalg.norm(args[0])

@@ -18,6 +18,24 @@ Implementation map:
 | Motion-vector trails | Native fractional grid, prior warp map, minimum length and pre-warp canonical lines; GPU precision/coverage pending |
 | Shader control flow | Typed native loop trees and per-lane loop state |
 
+## Additional shader intrinsics
+
+The pinned `vendor/hlslparser/src/GLSLGenerator.cpp` translates `log10(x)`
+to `log(abs(x))/log(10.0)`, following its DX9 compatibility rule for logarithms.
+The source evaluator preserves this absolute-value step and evaluates the
+ratio with binary32 operands. Zero and nonfinite results remain unresolved.
+`exp2` uses componentwise base-two exponentiation with the same finite-result
+requirement. `reflect(I,N)` uses `I - 2*dot(N,I)*N` and does not normalize `N`.
+Scalar and grid implementations preserve independent lanes; analytic fixtures
+cover scalar/vector overloads, unit/nonunit/zero normals, negative logarithm
+arguments, zero logarithm and exponent overflow. This establishes these numeric
+operations, not bit-identical GPU transcendental results or whole-preset accuracy.
+
+The saved corpus witnesses for these three missing-intrinsic reasons comprise
+five distinct presets and six shader sections. All six lower completely with
+the added support. See `fixtures/intrinsic-gap-recheck-2026-10-04.json`; the
+per-section source identities and remaining-gap lists are retained.
+
 Noise-table sizes are conceptual for filtered textures; verify physical sizes
 from implementation. Documentation and runtime differences must remain explicit.
 
