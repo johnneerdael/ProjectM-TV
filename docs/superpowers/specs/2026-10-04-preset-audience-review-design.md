@@ -34,6 +34,10 @@ exist. Label execution backends explicitly; native measurements are not
 independent predictions. Keep diagnosis/learning separate from frozen scoring
 results and independent human audience validation.
 
+Use ProjectM-TV `:core` as the numerical backend, including this project's
+patch series and renderer defaults. Pin the AAR and native-library hashes;
+unmodified upstream projectM is not an equivalent scoring backend.
+
 The debug app consumes generated group indexes and scoring metadata, defaults to
 All, and makes the selected preset's score identifiable during evaluation. Use
 the current ProjectM-TV code and engine after reconciling the feature branch with

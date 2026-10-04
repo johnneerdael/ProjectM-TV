@@ -30,6 +30,14 @@ Run the analyzer tests with:
 build/preset-lab-venv/bin/python -m pytest tools/milk-analyzer -q
 ```
 
+The full-corpus numerical backend uses ProjectM-TV `:core`, including the app's
+patches. An opt-in isolated-session C ABI is built into the debug AAR with
+`./gradlew :core:assembleDebug -PprojectmAnalysis=true`. The ABI is declared in
+`core/src/main/cpp/numerical_analysis.h`; the caller owns the EGL context and GL
+thread. It uses the same 1024×768 line reference as the app. Ordinary builds omit
+the ABI, and enabling it in a non-Debug native build is rejected. Core/AAR and
+input identities must be recorded before numerical results are used for scoring.
+
 Read preset equations and shaders without audio playback, a GPU context, or
 reference images. This is research tooling under development. It does **not**
 yet produce a validated appearance prediction or replacement Dance ranking.

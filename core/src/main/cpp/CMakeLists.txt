@@ -99,6 +99,13 @@ set(CMAKE_PROJECT_VERSION_PATCH ${CMAKE_MATCH_3})
 add_subdirectory(${PROJECTM_SOURCE} projectm EXCLUDE_FROM_ALL)
 
 add_library(projectmtv SHARED native-lib.cpp snapshot_fade.cpp preset_prewarm.cpp)
+option(PROJECTMTV_ANALYSIS_API "Export isolated numerical analysis sessions" OFF)
+if(PROJECTMTV_ANALYSIS_API)
+    if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+        message(FATAL_ERROR "PROJECTMTV_ANALYSIS_API is supported only for Debug builds")
+    endif()
+    target_sources(projectmtv PRIVATE numerical_analysis.cpp)
+endif()
 
 # Always optimise the JNI layer, also in debug builds that are sideloaded onto TVs.
 target_compile_options(projectmtv PRIVATE -O2 -Wall -Wextra -Wno-unused-parameter)
