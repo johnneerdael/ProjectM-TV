@@ -31,19 +31,21 @@ Notes:
 
 ## Fixed settings for a benchmark
 
-To compare builds at a fixed render height, set the profile app's settings directly (root shell on the TV; the release app's settings stay untouched). `L` is the app's notification listener:
+To compare builds at a fixed render height, set the profile app's settings directly (root shell on the TV; the release app's settings stay untouched). `L` is the app's notification listener; it is disallowed only while it is enabled, and allowed again only in that case, so notification access ends up as it was:
 
 ```sh
+a() { adb -s <tv>:5555 shell "$@"; }
 P=nl.neerdael.projectmtv.profile
 L=$P/com.example.projectm.visualizer.TrackListenerService
-adb -s <tv>:5555 shell cmd notification disallow_listener $L
-adb -s <tv>:5555 shell am force-stop $P
-adb -s <tv>:5555 shell pidof $P        # must print nothing before the write
+ON=$(a settings get secure enabled_notification_listeners | tr ':' '\n' | grep -cxF "$L")
+[ "$ON" = 1 ] && a cmd notification disallow_listener $L
+a am force-stop $P
+a pidof $P                            # must print nothing before the write
 # write /data/data/$P/shared_prefs/projectm_settings.xml, e.g. render_height (0 = Auto),
 # memory_limit=false, blank_detection_v3=false: push the file to /data/local/tmp and `cat` it over
 # the old one (as root), which keeps its owner and SELinux context
-adb -s <tv>:5555 shell cmd notification allow_listener $L
-adb -s <tv>:5555 shell am start -n $P/com.example.projectm.visualizer.MainActivity
+[ "$ON" = 1 ] && a cmd notification allow_listener $L
+a am start -n $P/com.example.projectm.visualizer.MainActivity
 ```
 
 Then check that every `VisualizerRenderer: STATS … surface=WxH` line shows the requested size before using the run.
