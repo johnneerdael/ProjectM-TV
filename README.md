@@ -218,6 +218,13 @@ core/src/test/native/run_native_tests.sh   # engine tests and patched projectM r
 ./gradlew testReleaseUnitTest             # JVM tests
 ```
 
+The experimental [Milk source analyzer](tools/milk-analyzer/README.md) has a
+separate native/Python setup for interpreting preset equations, shaders and
+feedback. It records unresolved code and runtime assumptions; passing its source
+checks does not certify complete visual predictions or new audience collections.
+See the [development guide](docs/user-guide/development.md) for the distinction
+between this interpreter and the measured Dance selection.
+
 ### On-device diagnostics
 
 ```bash

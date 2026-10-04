@@ -28,6 +28,13 @@ build/preset-lab-venv/bin/preset-lab doctor --repo . --work build/preset-lab
 
 The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. [The Dance measurement article](dance-measurement.md) describes the protocol and exports.
 
+The experimental [Milk source analyzer](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/milk-analyzer)
+models equations, shader state and feedback separately from the Dance measurement
+tool. Its README documents pinned source adapters, explicit runtime profiles and
+tests. Passing source checks is not a complete visual-accuracy or audience ranking
+claim; unresolved source remains recorded for diagnosis. Raw captures and audio
+stay outside Git. It does not change the installed app's preset collections.
+
 ## Test on a TV without replacing the release
 
 ```sh
