@@ -114,6 +114,11 @@ if (audienceReview) {
                 def artifact = new File(reviewAssets,path)
                 if (!artifact.isFile() || sha(artifact) != expected) throw new GradleException('Audience asset checksum differs: '+path)
             }
+            exec {
+                commandLine rootProject.file('build/preset-lab-venv/bin/python'),
+                        rootProject.file('tools/milk-analyzer/audience_export.py'),
+                        '--verify', '--aar', reviewAar, '--output', reviewAssets
+            }
         }
     }
     tasks.matching { it.name == 'mergeDebugAssets' }.configureEach { dependsOn validateReview }

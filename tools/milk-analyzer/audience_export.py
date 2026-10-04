@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import math
 import zipfile
 from pathlib import Path
 
@@ -44,10 +45,56 @@ def export_collection(corpus, results, output, *, identity, weights, run_metadat
     return manifest
 
 
+def verify_review_assets(output, aar):
+    output=Path(output);aar=Path(aar)
+    manifest=json.loads((output/'audience-review.json').read_text())
+    if hashlib.sha256(aar.read_bytes()).hexdigest()!=manifest['run_metadata']['aar_sha256']:
+        raise ValueError('Review AAR identity differs')
+    with zipfile.ZipFile(aar) as archive:
+        expected={name.removeprefix('assets/presets/'):hashlib.sha256(archive.read(name)).hexdigest()
+                  for name in archive.namelist() if name.startswith('assets/presets/') and name.lower().endswith('.milk')}
+    rows=manifest['presets']
+    if manifest['core_aliases']!={'all':'all','chill':'ambient','normal':'pop','party':'dance'}:
+        raise ValueError('Review core aliases differ')
+    if manifest['bands']!={'Chill':[0,30],'Normal':[25,75],'Party':[70,100]}:
+        raise ValueError('Review intensity bands differ')
+    if (manifest['unscored']!=0 or manifest['scored']!=len(expected) or manifest['corpus_count']!=len(expected)
+            or len(rows)!=len(expected) or {r['preset']:r['sha256'] for r in rows}!=expected):
+        raise ValueError('Review collection is not the complete published corpus')
+    for row in rows:
+        if not reusable_result({'identity':'verified','status':'scored','score':row['score']},'verified'):
+            raise ValueError('Invalid review intensity')
+        if row['labels']!=labels_for_intensity(row['score']):raise ValueError('Score labels differ from bands')
+        if isinstance(row['rank'],bool) or not isinstance(row['rank'],(int,float)) or not math.isfinite(row['rank']) or not 1<=row['rank']<=100:
+            raise ValueError('Invalid review relative rank')
+    ranks=relative_activity_ranks([r['score'] for r in rows])
+    if any(abs(row['rank']-rank)>1e-8 for row,rank in zip(rows,ranks)):
+        raise ValueError('Relative ranks differ from score ordering')
+    expected_table=''.join(f"{r['preset']}\t{r['score']:.8f}\t{r['rank']:.8f}\n" for r in rows)
+    if (output/'audience-scores.tsv').read_text(encoding='utf-8')!=expected_table:
+        raise ValueError('Displayed scores differ from manifest')
+    for group,label in (('all',None),('chill','Chill'),('normal','Normal'),('party','Party')):
+        alias=manifest['core_aliases'][group]
+        actual=[line.split('\t')[0] for line in (output/f'preset-genres/genres/{alias}.idx').read_text().splitlines()]
+        selected=[r['preset'] for r in rows if label is None or label in r['labels']]
+        if actual!=selected or manifest['counts'][group]!=len(selected):
+            raise ValueError('Group membership differs from scores: '+group)
+    for name,expected_hash in manifest['checksums'].items():
+        if hashlib.sha256((output/name).read_bytes()).hexdigest()!=expected_hash:
+            raise ValueError('Review asset checksum differs: '+name)
+    return manifest
+
+
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--run',type=Path,required=True)
+    parser=argparse.ArgumentParser();parser.add_argument('--run',type=Path)
     parser.add_argument('--aar',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
-    args=parser.parse_args();metadata=json.loads((args.run/'run-identity.json').read_text())
+    parser.add_argument('--verify',action='store_true')
+    args=parser.parse_args()
+    if args.verify:
+        result=verify_review_assets(args.output,args.aar)
+        print(json.dumps({'status':'verified','scored':result['scored'],'counts':result['counts']}));return
+    if args.run is None:parser.error('--run required for export')
+    metadata=json.loads((args.run/'run-identity.json').read_text())
     if hashlib.sha256(args.aar.read_bytes()).hexdigest()!=metadata['aar_sha256']:
         raise ValueError('Review AAR differs from scoring AAR')
     corpus=json.loads((args.run/'corpus.json').read_text())['cases']
