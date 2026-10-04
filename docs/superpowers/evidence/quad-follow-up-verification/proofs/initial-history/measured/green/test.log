@@ -1,0 +1,25 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from TextureHistoryTest
+[ RUN      ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender
+[       OK ] TextureHistoryTest.FreshColorHistoryIsTransparentBlackBeforeFirstRender (60 ms)
+[ RUN      ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState
+[       OK ] TextureHistoryTest.FreshClearPreservesFramebufferAndRasterState (9 ms)
+[ RUN      ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization
+[       OK ] TextureHistoryTest.ClearingDisplayDoesNotReplaceInternalHistoryInitialization (12 ms)
+[ RUN      ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract
+[       OK ] TextureHistoryTest.PooledHistoryRetainsExistingTransparentBlackContract (11 ms)
+[ RUN      ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName
+[       OK ] TextureHistoryTest.RecreatedContextDoesNotClearForeignFramebufferWithReusedName (15 ms)
+[----------] 5 tests from TextureHistoryTest (109 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (109 ms total)
+[  PASSED  ] 5 tests.
+PROOF_PIXELS FreshColorHistoryIsTransparentBlackBeforeFirstRender nonzero=0 bytes=1024
+PROOF_PIXELS FreshClearPreservesFramebufferAndRasterState nonzero=0 bytes=1024
+PROOF_PIXELS ClearingDisplayDoesNotReplaceInternalHistoryInitialization nonzero=0 bytes=1024
+PROOF_PIXELS PooledHistoryRetainsExistingTransparentBlackContract nonzero=0 bytes=1024
+PROOF_ATTACHMENT expected=1 actual=1 framebuffer_status=36053
+PROOF_PIXELS RecreatedContextDoesNotClearForeignFramebufferWithReusedName nonzero=1024 bytes=1024

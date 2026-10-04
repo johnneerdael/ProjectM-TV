@@ -13,6 +13,8 @@ alongside them. These artifacts were pushed on `followup/quad-lines` in `9dd8875
 | Keep explicit warp sampler modes | [Rendered sampler comparisons](05-warp-sampler-binding.png) | Fractional/out-of-bounds fixture; correct aliases provide independent render oracles. Public-API tests and driver traces support the result. |
 | Isolate laboratory shader randomness | [Actual repeated-frame differences](06-analyzer-repeat-delta.png) | Analyzer-only change; before repeats drift, after all frame hashes match. Does not alter production randomness. |
 | Preserve preset load/compile diagnostics | [Actual RED/GREEN tests](preset-diagnostics/07-preset-diagnostics.png) | Three exception classes retain their owned message through public failure events; six tests fail before and pass after, full host suite169 passes. No preset acceptance/rendering claim. |
+| Initialize fresh color history | [Actual renderer pixels](initial-history/measured/08-fresh-history-init.png) | Controlled valid allocator contents: 1024 nonzero RGBA bytes before, zero after. This initializes history, not the outer display; specific Mali outlier attribution remains unproven. |
+| Preserve framebuffer ownership after context recreation | [Actual attachment checks](initial-history/measured/09-context-fbo-ownership.png) | Cached name collision detaches a foreign attachment; local clearing framebuffer preserves it. Sentinel paint is intact in both cases. Full patches1–28 host suite174 passes, zero skips. |
 
 The shader/transition/fallback sources are in `manifest.json`, `raw/`, and `allocation-builds.json`.
 Sampler and analyzer sources are in their numbered reports and `additional-proof-sources.json`.
