@@ -42,6 +42,7 @@ class SnapshotTests(unittest.TestCase):
         frozen = manifest_path.read_bytes()
         manifest = json.loads(gzip.decompress(frozen))
         self.assertEqual(report["jobs_checked"], 1)
+        self.assertEqual(report.get("validation_helper_sha256"), run.file_hash(Path(run.__file__)))
         self.assertEqual(manifest["jobs"][0]["key"], key)
         self.assertEqual(report["input_records_sha256"], run.digest(manifest["jobs"]))
         self.assertEqual(report["input_manifest_sha256"], run.file_hash(manifest_path))
