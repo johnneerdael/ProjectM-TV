@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "purpose": "driver capability and explicit-number probe; not a fidelity or actual-Core comparison",
+  "source_sha256": {
+    "app/src/main/java/nl/neerdael/projectmtv/fp16driverprobe/Fp16DriverProbeInstrumentation.java": "ea2a17df7972657a2c3ee745629b4afd2655633a49df4ee9b6346a73ec047f15",
+    "app/src/main/AndroidManifest.xml": "06ffe8428d63c235d36ae030da5520a6bbf1195799c00c4545d8b2eaf16a96e9",
+    "app/build.gradle": "208a1c0f16db9033a8602de3801db918b92767f9631c146bd2b748a650113bf1",
+    "build.gradle": "9c150f6618daae72ece6ec986b0134927740570dbf2c88ec2a6a7fd2a9a17d28",
+    "settings.gradle": "a2c7839e2c477a51eee105c85e3f8517fb2e62a90fa9cf645a35dcd664b08ff9",
+    "gradle.properties": "5c522000c15411cb4eda055dc024c9c7ce4f627c10dd65f516d0abedefb64b64",
+    "gradle/wrapper/gradle-wrapper.properties": "c843c0dc3c29b87d293a6a16973efba1b189b3649e1d205c7c45fd4d3e86ad7e",
+    "gradle/wrapper/gradle-wrapper.jar": "7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172",
+    "gradlew": "b187b4c52e749f5760afdd6fadc31b2a98ad35fb249bf0dff03b72650f320409",
+    "run_probe_once.py": "347bb2441c665f3cb177daac89b470f2fa3e56ed4b5f76eace59ef06a3f6b1e3"
+  },
+  "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/native-4k-current-main/fp16-driver-probe/app/build/outputs/apk/release/app-release.apk",
+  "apk_sha256": "29ab52b88907b57fad851a33b92cc39628554a2932168bbbb7a50d47b913004c",
+  "build_log_sha256": "49dd0c5d183b88551a7dd09318b71f90d00455076d29b4cb7a9d54a69fb804b5",
+  "result_sha256": "0c699728e0c3b07cd5814b6d99611760fab633379a27ba19a27325c31ce9df37",
+  "run_manifest_sha256": "c6f483249de8fe2dc561151bda6190bd533bb407475d2745b773bd54f0e4f01f",
+  "device_serial": "emulator-5582",
+  "emulator_pid": 15197,
+  "launch_sha256": "482e8d121c0e319b5ca5f2a7b0d416366a727d0415a9a36ae58ed067323c7297",
+  "mixed_fbo_complete": true,
+  "raw_byte_exact": true,
+  "half_values_exact": true,
+  "linear_midpoint_exact": true,
+  "gl_error_checks": 18,
+  "gl_errors": 0,
+  "objects_deleted": true,
+  "lease_released": true,
+  "java_version": "openjdk version \"21.0.11\" 2026-04-21\nOpenJDK Runtime Environment Homebrew (build 21.0.11)\nOpenJDK 64-Bit Server VM Homebrew (build 21.0.11, mixed mode, sharing)"
+}
