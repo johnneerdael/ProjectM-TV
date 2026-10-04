@@ -39,7 +39,8 @@ class PublishTests(unittest.TestCase):
         self.notes = self.root / "notes.md"
         self.notes.write_text("# ProjectM TV 2.1.5\n\nFixed a preset loading freeze.\n")
         for name, data in {"projectM-TV-2.1.5.apk": b"signed apk", "projectM-TV.apk": b"signed apk",
-                           "projectM-TV-core-2.1.5.aar": b"engine", "projectM-TV-core.aar": b"engine"}.items():
+                           "projectM-TV-core-2.1.5.aar": b"engine", "projectM-TV-core.aar": b"engine",
+                           "projectM-TV-2.1.5-mapping.txt": b"a.b -> x:"}.items():
             (self.root / name).write_bytes(data)
         self.commands = []
 
@@ -61,11 +62,12 @@ class PublishTests(unittest.TestCase):
         command = self.commands[0]
         self.assertEqual(command[:3], ["gh", "release", "upload"])
         self.assertIn(str(self.root / "checksums.txt"), command)
+        self.assertIn(str(self.root / "projectM-TV-2.1.5-mapping.txt"), command)
         checksums = (self.root / "checksums.txt").read_text()
-        self.assertEqual(len(checksums.splitlines()), 4)
+        self.assertEqual(len(checksums.splitlines()), 5)
 
     def test_complete_same_commit_release_is_not_republished(self):
-        names = [p.name for p in self.root.glob("*.apk")] + [p.name for p in self.root.glob("*.aar")] + ["checksums.txt"]
+        names = [p.name for p in self.root.iterdir()] + ["checksums.txt"]
         api = FakeAPI(existing={"id": 55, "draft": False, "assets": [{"name": n} for n in names],
                                 "html_url": "release url"}, tag_commit="a" * 40)
         self.publish(api)
@@ -111,6 +113,13 @@ class PublishTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "upload interrupted"):
             module.publish("owner/repo", "2.1.5", "a" * 40, self.notes, self.root, api, failed_upload)
         self.assertFalse(any(method == "PATCH" for _, method, _ in api.calls))
+
+    def test_missing_mapping_is_rejected_before_network_calls(self):
+        (self.root / "projectM-TV-2.1.5-mapping.txt").unlink()
+        api = FakeAPI()
+        with self.assertRaises(FileNotFoundError):
+            self.publish(api)
+        self.assertFalse(api.calls)
 
     def test_wrong_version_notes_are_rejected_before_network_calls(self):
         self.notes.write_text("# ProjectM TV 2.1.4\n\nOld notes.\n")

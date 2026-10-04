@@ -5,7 +5,7 @@
 - Android TV or Google TV running Android 5.0 or later.
 - OpenGL ES 3.0.
 - At least 2 GB RAM is highly recommended.
-- A music app playing on the same device.
+- A music app playing on the same device. Verified with Spotify, SoundCloud, SmartTube and [Milkbeat](https://github.com/johnneerdael/Milkbeat); other apps have not been verified.
 
 ProjectM TV visualizes another app's music. It does not play music itself or use the microphone.
 
@@ -92,6 +92,8 @@ Open the app's settings with **Center / Enter / Menu**, select **Track display**
 [![Track-title configuration opened manually from Track display](images/setup/track-titles-manual.png)](images/setup/track-titles-manual.png)
 
 The cover, artist and title of the playing track appear in the upper left for as long as it plays; **Settings → Track display** shows them for 10–60 s per track instead, in the lower-left pill, or not at all. **Up / Down / Info** shows the current track again. The preset's name is shown separately in the settings panel.
+
+Covers have only been verified with Spotify and [Milkbeat](https://github.com/johnneerdael/Milkbeat). SoundCloud and SmartTube have been verified to show the artist and title only, without a cover. No other music apps have been verified.
 
 ## Choose All or Dance
 

@@ -1,5 +1,4 @@
-# R8 shrinks and optimizes the release build. The app is open source, so obfuscation buys nothing
-# and would make crash traces in logcat and tools/tv-diagnostics.sh unreadable.
--dontobfuscate
+# R8 shrinks, optimizes and obfuscates the release build. Crash traces are mapped back to the
+# original names with the build's mapping.txt, which CI attaches to each GitHub release.
 
 # The engine's JNI entry points are kept by core/consumer-rules.pro.

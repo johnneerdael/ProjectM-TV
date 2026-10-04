@@ -118,8 +118,11 @@ jobs:
           fi
           mkdir -p dist
           cp app/build/outputs/apk/release/app-release.apk "dist/${NAME}"
+          # R8 obfuscates the release; this maps its crash traces back to source names (retrace).
+          mkdir -p dist-mapping
+          cp app/build/outputs/mapping/release/mapping.txt "dist-mapping/${NAME%.apk}-mapping.txt"
           echo "name=${NAME}" >> "$GITHUB_OUTPUT"
-          ls -lh dist
+          ls -lh dist dist-mapping
 
       - name: Name core AAR
         id: aar
@@ -150,6 +153,13 @@ jobs:
           retention-days: 30
           if-no-files-found: error
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mapping
+          path: dist-mapping/*-mapping.txt
+          retention-days: 30
+          if-no-files-found: error
+
   release:
     name: Publish GitHub Release
     needs: [native-tests, apk]
@@ -171,6 +181,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: core-aar
+          path: dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: mapping
           path: dist
 
       - name: Write release notes from merged PRs
