@@ -161,6 +161,11 @@ class HostTests(unittest.TestCase):
         self.assertTrue(job["pcm_uint8_path"].startswith("/data/user/0/"+run.PACKAGE+"/files/jobs/"))
         self.assertTrue(job["output_directory"].startswith("/sdcard/Android/data/"+run.PACKAGE+"/files/jobs/"))
 
+    def test_pre_engine_failure_does_not_require_unavailable_runtime_core_hash(self):
+        self.result["status"]="failed";self.result["error"]="PCM checksum mismatch"
+        self.result.pop("core_sha256")
+        self.assertEqual(run.validate_result(self.job,self.result,[],self.work),"failed")
+
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
     def test_allowed_ip_serials_are_accepted(self):
