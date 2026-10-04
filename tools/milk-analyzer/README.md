@@ -1199,3 +1199,21 @@ Its q29 is untouched, proving k1=0 and selecting the initializing branch for arg
 q32 stays symbolic. No new blockers appeared and source/parsed inventories stay
 unchanged. See `fixtures/focused-blockers-26-partial-q-2026-10-04.json`.
 This is an input/default and control-flow proof, not rendered appearance evidence.
+
+
+### Exclusive helper scratch storage
+
+The source lowering now localizes plain uninitialized scalar/vector globals
+referenced exclusively inside one helper. It preserves initialized/qualified
+storage and any references from another helper or the entry function. Per-call
+storage starts uninitialized, so the helper must still establish each read's
+value; this does not invent global defaults or erase externally shared state.
+Authored preset files and native shaders are unchanged.
+
+This removes conservative ordering blockers for three `hardcore_stars` call
+sums: the k10/k8 QBikal Surface Turbulence presets and `boobs - tithypno.milk`.
+Their `rss`, `rss0` and `tmp` are helper-only scratch variables. The original
+315-case recheck now retains **23** known source gaps, with no new blockers or
+changes to source-token/parsed inventories. See
+`fixtures/focused-blockers-23-helper-scratch-2026-10-04.json`.
+The returned-value/control-flow proof does not certify full visual predictions.

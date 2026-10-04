@@ -222,8 +222,54 @@ class ShaderFields:
         if any(i>=shape[1] for i in indices):self.unsupported('vector member out of bounds');return None
         return indices
 
+    @staticmethod
+    def localize_exclusive_helper_storage(tree):
+        """Localize plain unwritten globals referenced by exactly one helper.
+
+        No initializer or externally visible access may be discarded. Per-call
+        uninitialized storage is conservative: lowering must still prove each
+        read follows a write rather than inheriting a previous call's value.
+        """
+        from copy import deepcopy
+        tree=deepcopy(tree)
+        owners={}
+        def references(node,owner):
+            if isinstance(node,list):
+                for child in node:references(child,owner)
+            elif isinstance(node,dict):
+                if node.get('kind')=='variable' and node.get('global'):
+                    owners.setdefault(node['name'],set()).add(owner)
+                for child in node.values():references(child,owner)
+        functions={i:node for i,node in enumerate(tree) if node.get('kind')=='function' and node.get('name')!='PS'}
+        for i,node in enumerate(tree):references(node,i if i in functions else None)
+        localized={}
+        for node in tree:
+            if node.get('kind')!='declarations':continue
+            retained=[]
+            for declaration in node['values']:
+                name=declaration['name'];usage=owners.get(name,set());type_info=declaration['type']
+                if (len(usage)==1 and None not in usage and declaration['value'] is None and
+                        not type_info.get('flags',0) and not type_info.get('array') and
+                        re.fullmatch(r'(float|int|uint|bool)[1-4]?',type_info['name'])):
+                    owner=next(iter(usage));localized.setdefault(owner,[]).append(declaration)
+                else:retained.append(declaration)
+            node['values']=retained
+        def local_references(node,names):
+            if isinstance(node,list):
+                for child in node:local_references(child,names)
+            elif isinstance(node,dict):
+                if node.get('kind')=='variable' and node.get('global') and node.get('name') in names:
+                    node['global']=False
+                for child in node.values():local_references(child,names)
+        for owner,declarations in localized.items():
+            function=functions[owner]
+            local_references(function,{d['name'] for d in declarations})
+            function['body'].insert(0,{'kind':'declarations','values':declarations})
+        return tree
+
     def lower(self,tree:list[dict],*,language_extensions=(),native_samplers=None)->Field:
         """Lower the entry body; uniforms stay symbolic rather than guessed zero."""
+        tree=self.localize_exclusive_helper_storage(tree)
         self.collect_matrix_constructors(tree)
         extensions=set(language_extensions)
         if extensions-{'all'}:raise ValueError('unsupported parser language extension')
