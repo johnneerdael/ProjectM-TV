@@ -20,6 +20,7 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 | *(default)* | Builds the release APK from this checkout, installs it and observes it for 180 s |
 | `--release` | Installs the latest GitHub Release instead of building |
 | `--no-install` | Tests the version that is already installed |
+| `--package ID` | Application ID to test (default `nl.neerdael.projectmtv`). Use `nl.neerdael.projectmtv.profile` with `--apk app/build/outputs/apk/profile/app-profile.apk` or `--no-install` to leave the installed app and its settings alone |
 | `--allow-uninstall` | If the installed app has a different signing key, uninstall it first (resets app settings) |
 | `--sweep` | Also measures each fixed resolution (720p, 1080p, …), driving the menu with key events |
 | `--duration SEC` | Observation time (default 180) |
@@ -28,8 +29,9 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 
 | File | Content |
 |---|---|
-| `summary.md` | Device and GPU, panel/UI size, startup times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory limit and other apps killed for memory, surface composition, skipped presets, crashes |
+| `summary.md` | Device and GPU, panel/UI size, cold start and observation start times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory limit and other apps killed for memory, surface composition, skipped presets, crashes |
 | `app_log.txt` | App log lines (`STATS`, `STARTUP`, `LOAD`, `TRANSITION`, `OUTPUT`, `SKIP`, `QualityController`, crashes) |
+| `am_start_cold.txt`, `am_start.txt` | `am start -W` output of the cold start and of the start that is observed |
 | `device.txt` | System properties, display modes, CPU, memory, GLES driver |
 | `screen_*.png` | Visuals, main panel, Advanced panel |
 | `raw_logcat.txt`, `raw_surfaceflinger.txt` | Full dumps (git-ignored) |
@@ -54,6 +56,17 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 - `QualityController: …`: dynamic-resolution decisions, including `Memory pressure …` when Android asks apps to free memory.
 - `ProjectMTV: Memory limit: render height up to 1260 (RAM 1941 MB)` (or `Memory limit: off`). The sweep only covers the levels up to this limit; turn *Advanced › Memory limit* off first to sweep up to the render height cap.
 - `ProjectMTV: Render height cap: 1330 (panel height 2160)`: the highest render height the app uses (`QualityController.RENDER_HEIGHT_CAP`); the sweep stops there too.
+
+### Cold start
+
+The app's notification listener (`TrackListenerService`, needed for track titles) is rebound by Android about a second after `am force-stop`, and that starts the app's process again. A plain stop-and-start therefore measures a warm start in an already running process. The script instead:
+
+1. disallows the app's enabled notification listeners (`cmd notification disallow_listener`),
+2. force-stops the app and waits up to 10 s until its process is gone,
+3. runs `am start -W` and allows the listeners again right away (also on exit or Ctrl-C),
+4. records the `TotalTime` and whether a new process started for the activity: no process before the start and an `ActivityManager: Start proc <pid>:<package>/… for …activity` line (on Android 10+ also `LaunchState`).
+
+*Startup › Cold start* says *cold start* only in that case; otherwise it names why the time is not a cold-start time. That process had no listener access, so the script stops it and starts the app again for the observation (*Observation start*, normally warm). If the script is killed with `kill -9`, allow the listener again by hand: `adb -s <tv>:5555 shell cmd notification allow_listener <package>/com.example.projectm.visualizer.TrackListenerService`.
 
 ### Reading the results
 - **Did the music app get killed?** *Memory › Other apps killed during the run* lists processes Android stopped while they were visible, perceptible or foreground services (e.g. `com.soundcloud.android (prcp)`). Cached processes are left out, because Android kills those routinely.

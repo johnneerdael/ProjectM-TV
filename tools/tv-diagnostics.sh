@@ -8,6 +8,8 @@
 #   --apk PATH         install this APK instead of building one
 #   --release          download the latest GitHub Release APK instead of building
 #   --no-install       test the version that is already installed
+#   --package ID       application ID to test (default nl.neerdael.projectmtv); for example
+#                      nl.neerdael.projectmtv.profile with --apk or --no-install
 #   --allow-uninstall  if the install fails because of a different signing key, uninstall the
 #                      existing app first (this resets the app's settings)
 #   --sweep            also measure each fixed resolution (drives the menu with key events)
@@ -15,6 +17,9 @@
 #
 # Output: summary.md (human readable) plus logs, dumps and screenshots in the output directory.
 # Works with the bash 3.2 that ships with macOS; needs adb, curl and awk.
+#
+# The cold start briefly disallows the app's notification listener (Android restarts the app's
+# process for it right after a force-stop) and allows it again; see docs/DIAGNOSTICS.md.
 #
 # Tip: play music on the TV while this runs. Without audio the visuals barely react and
 # blank-preset detection stays idle (performance numbers are still valid).
@@ -29,7 +34,6 @@ ALLOW_UNINSTALL=0
 SWEEP=0
 OUT=""
 PKG="nl.neerdael.projectmtv"                          # application ID (1.9.7+; before: com.example.projectm.visualizer)
-ACTIVITY="$PKG/com.example.projectm.visualizer.MainActivity"  # the code keeps its Java package
 REPO="johnneerdael/ProjectM-TV"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
@@ -42,12 +46,15 @@ while [ $# -gt 0 ]; do
         --allow-uninstall) ALLOW_UNINSTALL=1 ;;
         --sweep) SWEEP=1 ;;
         --out) OUT="$2"; shift ;;
-        -h|--help) sed -n '2,22p' "$0"; exit 0 ;;
+        --package) PKG="$2"; shift ;;
+        -h|--help) sed -n '2,27p' "$0"; exit 0 ;;
         -*) echo "Unknown option: $1" >&2; exit 2 ;;
         *) TARGET="$1" ;;
     esac
     shift
 done
+
+ACTIVITY="$PKG/com.example.projectm.visualizer.MainActivity"  # the code keeps its Java package
 
 log() { printf '[%s] %s\n' "$(date +%H:%M:%S)" "$*"; }
 die() { log "ERROR: $*"; exit 1; }
@@ -193,7 +200,22 @@ restore_auto_resolution() {
     key KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT
     close_menu
 }
+# Enabled notification listeners of this app, disallowed during the cold start (see below).
+LISTENERS=""
+LISTENERS_OFF=0
+LISTENERS_NOT_RESTORED=""
+allow_listeners() {
+    [ "$LISTENERS_OFF" = 1 ] || return 0
+    LISTENERS_OFF=0
+    for c in $LISTENERS; do
+        ash cmd notification allow_listener "$c" >/dev/null
+        ash settings get secure enabled_notification_listeners | tr ':' '\n' | grep -qxF "$c" \
+            || { LISTENERS_NOT_RESTORED="$LISTENERS_NOT_RESTORED $c"
+                 log "WARNING: could not allow the notification listener $c again. Run: adb -s $TARGET shell cmd notification allow_listener $c"; }
+    done
+}
 cleanup() {
+    allow_listeners
     if [ "$SWEEP_ACTIVE" = 1 ]; then
         log "Interrupted during the sweep: restoring Auto resolution"
         SWEEP_ACTIVE=0
@@ -206,9 +228,47 @@ cleanup() {
 trap cleanup EXIT
 trap 'exit 130' INT TERM
 
+# Cold start. The app's notification listener (TrackListenerService) makes Android rebind it about
+# a second after `am force-stop`, which starts the app's process again. `am start -W` would then
+# start the activity in that running process: a warm start. So disallow the listener, stop the app,
+# wait until its process is gone, start it, and allow the listener again right away. This process
+# started without listener access (no track titles), so the observation uses a normal second start.
 log "Cold start"
+LISTENERS="$(ash settings get secure enabled_notification_listeners | tr ':' '\n' \
+    | awk -v p="$PKG/" 'index($0, p) == 1' | tr '\n' ' ')"
+if [ -n "$LISTENERS" ]; then
+    LISTENERS_OFF=1
+    for c in $LISTENERS; do ash cmd notification disallow_listener "$c" >/dev/null; done
+fi
+ash am force-stop "$PKG"
+waited=0
+while [ -n "$(ash pidof "$PKG")" ] && [ $waited -lt 20 ]; do sleep 0.5; waited=$((waited + 1)); done
+PID_BEFORE="$(ash pidof "$PKG")"
+ash am start -W -n "$ACTIVITY" > "$OUT/am_start_cold.txt"
+allow_listeners
+COLD_MS="$(grep -E "TotalTime" "$OUT/am_start_cold.txt" | sed 's/[^0-9]//g')"
+LAUNCH_STATE="$(sed -n 's/^LaunchState: //p' "$OUT/am_start_cold.txt")"  # Android 10+
+sleep 1
+COLD_PID="$(ash pidof "$PKG")"
+# ActivityManager logs "Start proc <pid>:<package>/<uid> for <reason>" when it starts a process.
+START_PROC="$(grep -F "Start proc $COLD_PID:$PKG/" "$OUT/raw_logcat.txt" | tail -1 | sed 's/.* for //')"
+if [ -n "$PID_BEFORE" ]; then
+    COLD_KIND="warm start: process $PID_BEFORE kept running after the force-stop, so this is not a cold-start time"
+elif [ -n "$LAUNCH_STATE" ] && [ "$LAUNCH_STATE" != COLD ]; then
+    COLD_KIND="Android reports LaunchState $LAUNCH_STATE, so this is not a cold-start time"
+else
+    case "$START_PROC" in
+        *activity*) COLD_KIND="cold start: new process $COLD_PID for the activity" ;;
+        "") COLD_KIND="cold start: no app process before the start (ActivityManager start line not found)" ;;
+        *) COLD_KIND="warm start: process $COLD_PID started for '$START_PROC' before the activity, so this is not a cold-start time" ;;
+    esac
+fi
+log "Cold start: ${COLD_MS:-n/a} ms ($COLD_KIND)"
+
+log "Starting the app for the observation"
 ash am force-stop "$PKG"
 sleep 1
+PID_BEFORE_RUN="$(ash pidof "$PKG")"
 ash am start -W -n "$ACTIVITY" > "$OUT/am_start.txt"
 START_MS="$(grep -E "TotalTime" "$OUT/am_start.txt" | sed 's/[^0-9]//g')"
 sleep 2
@@ -367,7 +427,11 @@ layer_excerpt() {
     echo '```'
     echo
     echo "## Startup"
-    echo "- Activity start (am start -W TotalTime): ${START_MS:-n/a} ms"
+    echo "- Cold start (am start -W TotalTime): ${COLD_MS:-n/a} ms ($COLD_KIND)"
+    for c in $LISTENERS_NOT_RESTORED; do
+        echo "- **WARNING:** the notification listener \`$c\` could not be allowed again (track titles stay off). Run \`adb -s $TARGET shell cmd notification allow_listener $c\`"
+    done
+    echo "- Observation start (am start -W TotalTime): ${START_MS:-n/a} ms ($([ -n "$PID_BEFORE_RUN" ] && echo "warm: process $PID_BEFORE_RUN was already running" || echo "no process before the start"))"
     echo "- $(grep -h -o 'Indexed [0-9]* presets.*' "$A" | head -1)"
     echo "- $(grep -h -o 'STARTUP first preset rendered.*' "$A" | head -1)"
     echo "- $(grep -h -o 'Textures ready.*' "$A" | head -1)"
@@ -466,7 +530,7 @@ layer_excerpt() {
     grep -i "projectm" "$OUT/top.txt" 2>/dev/null | head -3
     echo '```'
     echo
-    echo "Files: device.txt, app_log.txt, am_start.txt, meminfo.txt, thermal.txt, top.txt, screen_*.png (raw_* files are large and not meant for git)."
+    echo "Files: device.txt, app_log.txt, am_start_cold.txt, am_start.txt, meminfo.txt, thermal.txt, top.txt, screen_*.png (raw_* files are large and not meant for git)."
 } > "$OUT/summary.md"
 
 log "Done. Summary: $OUT/summary.md"
