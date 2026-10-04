@@ -1,0 +1,252 @@
+{
+  "base_main": "f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98",
+  "upstream": "e0b0a967f0ffd7d332106c366668ed271718472b",
+  "patch": "0036-hlslparser-contextual-identifiers-macro-tokens-postfix.patch",
+  "scope": "unchanged shader sections; CPU translation with explicit descriptors, offline GLES300 compilation and production desktop GL compilation are separate from Android runtime selection and appearance",
+  "rows": [
+    {
+      "preset": "EVET + Flexi - Rainbox Splash Poolz.milk",
+      "preset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf",
+      "stage": "composite",
+      "request_sha256": "049cf4dc22820121454cd07fb10d85eb8e69564502562f37f889afd3d8fa1632",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(87) : Syntax error: expected identifier near '*'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "EVET - Brainsplolz.milk",
+      "preset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31",
+      "stage": "composite",
+      "request_sha256": "049cf4dc22820121454cd07fb10d85eb8e69564502562f37f889afd3d8fa1632",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(87) : Syntax error: expected identifier near '*'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Fed + Geiss - Color Pox Remix.milk",
+      "preset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1",
+      "stage": "warp",
+      "request_sha256": "46c18b211bdfc39650499b9c3ea1e66f94372e05cba8cfb2ed0b8ea3ee1be09e",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(80) : Syntax error: expected ';' near '('\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - dimension window.milk",
+      "preset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d",
+      "stage": "composite",
+      "request_sha256": "49b8513486db8cee19c57c48f82d0e42c8ec178462125ec6455a446ae05b9229",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near ';'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - ianus portal.milk",
+      "preset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef",
+      "stage": "composite",
+      "request_sha256": "544f1da3bb301c2a58b525eba3b23473c0858a657f9b72b2bf9b1f76dcd2f28e",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near ';'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - madness portal.milk",
+      "preset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+      "stage": "composite",
+      "request_sha256": "a0825c20ab8c6291e12800e6ac901fc7c8b56b6254f2b79ae015a32ecd387ba5",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near ';'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - rorschach bomb.milk",
+      "preset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801",
+      "stage": "composite",
+      "request_sha256": "a0825c20ab8c6291e12800e6ac901fc7c8b56b6254f2b79ae015a32ecd387ba5",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near ';'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - spirally caterpillar coop mode.milk",
+      "preset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22",
+      "stage": "composite",
+      "request_sha256": "544f1da3bb301c2a58b525eba3b23473c0858a657f9b72b2bf9b1f76dcd2f28e",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near ';'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - spirally repetative 2.milk",
+      "preset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd",
+      "stage": "composite",
+      "request_sha256": "ef8f6a9ff3d34422b8fb3d518cc75ff3c99470d601ce971e8938d813e466a1da",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near ';'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+      "preset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233",
+      "stage": "composite",
+      "request_sha256": "049cf4dc22820121454cd07fb10d85eb8e69564502562f37f889afd3d8fa1632",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(87) : Syntax error: expected identifier near '*'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
+      "preset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362",
+      "stage": "composite",
+      "request_sha256": "049cf4dc22820121454cd07fb10d85eb8e69564502562f37f889afd3d8fa1632",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(87) : Syntax error: expected identifier near '*'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
+      "preset_sha256": "12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b",
+      "stage": "composite",
+      "request_sha256": "049cf4dc22820121454cd07fb10d85eb8e69564502562f37f889afd3d8fa1632",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(87) : Syntax error: expected identifier near '*'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "Hexcollie - Hedgehog dreams.milk",
+      "preset_sha256": "9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7",
+      "stage": "composite",
+      "request_sha256": "049cf4dc22820121454cd07fb10d85eb8e69564502562f37f889afd3d8fa1632",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(87) : Syntax error: expected identifier near '*'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "lice - veritubule.milk",
+      "preset_sha256": "fd1e37383cb6c78a6d1eb906ca7982db7fc0d69d8b891f71be259341029c481b",
+      "stage": "composite",
+      "request_sha256": "7d2c3a29df38967c2bc8cb13cec8013ce7e7d3b368e2d17b16eb98940f419e2d",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near '*'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "suksma - crisco orgy - rosvell roams nz+.milk",
+      "preset_sha256": "f99c8383eb1010a257c9188776b734edf6438c307a72f777f442b5479aad61b6",
+      "stage": "warp",
+      "request_sha256": "395f9f2649f9bdf7eebea28c4a7ea8eb022c274b0aa42bdee47a0549808a6c03",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(118) : Syntax error: expected ')' near '.'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    },
+    {
+      "preset": "suksma - fuck retro anything.milk",
+      "preset_sha256": "d57fea66d8addb123af5327e19d7410ed923d0a64416b448fee2458510730883",
+      "stage": "composite",
+      "request_sha256": "544f1da3bb301c2a58b525eba3b23473c0858a657f9b72b2bf9b1f76dcd2f28e",
+      "before": {
+        "status": "rejected",
+        "diagnostic": "(85) : Syntax error: expected identifier near ';'\n"
+      },
+      "after": {
+        "status": "translated",
+        "diagnostic": "",
+        "gles300_compile": true
+      }
+    }
+  ],
+  "binaries": {
+    "translate-before": "74d516c3d40547ee14155485b9219eb6357046a89951cf62d5fb311ef323bb6c",
+    "translate-after": "30634530cc0a6e4b1686f53815e392ddc38881fc7585d40c72682f14b492327b"
+  }
+}

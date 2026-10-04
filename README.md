@@ -29,6 +29,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Dance collection:** 500 presets selected automatically for large bass-driven changes on screen. **All** remains the default, keeping the full library available.
 - **Corrected shader maths** restores colours and detail in presets affected by projectM translator bugs; [proof and upstream contribution](https://github.com/projectM-visualizer/projectm/pull/1031)
 - **More presets run their own shaders:** 102 bundled presets that fell back to the default shader because of translator errors (flat array initializers, `sampler_state` blocks) now run as written, and shaders that change `q` variables or `time` start from their real values instead of undefined ones
+- **Additional shader compatibility fixes:** presets using a local named `sample`, declaration or statement macros, or swizzles after parenthesized constructors can use their authored shaders. GPU driver acceptance and visual fidelity remain device-dependent.
 - **Audio detected about 1 second after launch**, from the music app's own audio session
 - **Cover, artist and title** of the playing track on screen, as in Milkbeat
 - **No freezes at preset switches**: upcoming presets are prepared in the background, with cached shaders
