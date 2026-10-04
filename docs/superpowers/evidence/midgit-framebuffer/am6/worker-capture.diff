@@ -1,0 +1,11 @@
+--- original/CorpusInstrumentation.java
++++ test-only/CorpusInstrumentation.java
+@@ -36,7 +36,7 @@
+     private static final int FRAMES = 480;
+     private static final int FPS = 30;
+     private static final int PCM_BLOCK = 1470;
+-    private static final int[] CAPTURES = {120, 150, 180, 210, 239, 300, 390, 479};
++    private static final int[] CAPTURES = {0, 1, 2, 120, 150, 180, 210, 239, 300, 390, 479};
+     private Bundle arguments;
+ 
+     @Override public void onCreate(Bundle arguments) {

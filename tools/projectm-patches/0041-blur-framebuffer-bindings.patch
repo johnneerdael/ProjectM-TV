@@ -18,7 +18,7 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/Mi
 @@ -114,6 +114,12 @@ void BlurTexture::Update(Renderer::Texture& sourceTexture, const PerFrameContext
          return;
      }
- 
+
 +    // Save caller bindings before AllocateTextures: resizing its framebuffer unbinds both targets.
 +    GLint origReadFramebuffer;
 +    GLint origDrawFramebuffer;
@@ -31,7 +31,7 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/Mi
 @@ -156,12 +162,6 @@ void BlurTexture::Update(Renderer::Texture& sourceTexture, const PerFrameContext
      scale[2] = 1.0f / (tempMax - tempMin);
      bias[2] = -tempMin * scale[2];
- 
+
 -    // Remember previously bound framebuffer
 -    GLint origReadFramebuffer;
 -    GLint origDrawFramebuffer;
@@ -39,5 +39,5 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/Mi
 -    glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &origDrawFramebuffer);
 -
      m_blurFramebuffer.Bind(0);
- 
+
      // Each pass can draw straight into its blur texture instead of drawing into the framebuffer's

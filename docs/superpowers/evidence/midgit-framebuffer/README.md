@@ -30,11 +30,24 @@ The optional bundled-image diagnostic is `build/framebuffer-regressions/random-t
 ## Additional local validation
 
 - All 41 patches apply to a clean export of the pinned submodule.
-- Android debug core/APK builds and debug JVM tests pass with JDK 21 and the installed SDK/NDK.
+- Android debug and release core/APK builds and JVM tests pass with JDK 21 and the installed SDK/NDK.
+- Full native runner and both JNI rendering-policy controls pass. The macOS GLES transition overlay is skipped without EGL/GLES libraries; Linux CI passes it.
 - Persistent ASan/UBSan CTest build: all 15 groups pass on macOS OpenGL.
 - Patched upstream engine suite: 243/243 tests pass.
 - Preset index/content checks, `git diff --check` and MkDocs strict build pass.
 
+## AM6 actual-core validation
+
+Authorized awake Ugoos AM6, Android 9, Mali-G52, OpenGL ES 3.2; Android supports `armeabi-v7a` on this device. Two new test-only worker packages used unchanged locally built baseline/fixed production core AARs, with their packaged ARMv7 library bytes verified against the AAR. Existing player audio and production app settings were untouched. Both jobs used the exact preset, 1280×720, the same 705600-byte generated 110/440 Hz unsigned mono signal, 30 FPS pacing and complete packaged presets/textures. Production random choices and real clock remain enabled. Worker-only changes select distinct package IDs, include ARMv7 and capture the first three frames. See [source/artifact identities and complete capture manifests](am6/summary.json) and [the capture-only source diff](am6/worker-capture.diff).
+
+Both jobs completed 480 frames, 480 per-frame GL checks, preset identity checks and clean core/EGL release. All 11 PNGs per job were decoded and verified against the recorded RGB and PNG hashes. Captures retained here are [baseline frame 0](am6/baseline-frame-000.png), [fixed frame 0](am6/fixed-frame-000.png), [baseline frame 120](am6/baseline-frame-120.png) and [fixed frame 120](am6/fixed-frame-120.png). They show rendered output; independently chosen images and clocks prevent treating their pixel differences as a controlled fidelity measurement.
+
+The complete paced render loop, including PNG encoding/readback, took 19.819 s baseline and 19.977 s fixed: effective rates 24.22 and 24.03 frames/s. These are worker-window rates with capture overhead, not on-screen app frame-rate measurements or evidence of a performance improvement.
+
+The same direct blur ownership control was cross-compiled against each core's Android static engine libraries and run on the AM6 without sanitizers. [Baseline](am6/baseline-bindings.txt) fails on first allocation (`read=0/2 draw=0/3`); [fixed](am6/fixed-bindings.txt) passes all ten Blur1/Blur3 first/same/resize/scaled controls and constant-colour readbacks. [Executable hashes and exits](am6/bindings.json) identify those runs. Both full-preset jobs can return zero GL errors on Mali because framebuffer zero is a valid EGL pbuffer. The binding assertion exposes the underlying target loss that macOS reports as error 1286; absence of a GLES error alone would miss it.
+
+After validation, both task-only worker apps and native-control files were removed and the originally empty preset override was restored. No TV wake command was sent, and the existing player was not stopped or reconfigured.
+
 ## Limits
 
-These are host source-bound controls on Apple M4 Pro OpenGL 4.1, not observations from a published Android AAR. The bundled JPEG decoder still produces the pre-existing SOIL2 left-shift UBSan warnings; isolated TGA regressions avoid that unrelated defect. Full authored-preset numerical accuracy, equivalence to MilkDrop and TV frame-rate effects are not established by these controls. Analyzer guards and the shared corpus baseline remain unchanged. Dedicated TV validation and final GitHub review/check results are recorded in the PR when available.
+The host controls use Apple M4 Pro OpenGL 4.1; the AM6 checks use locally built Android core AARs. Neither is an observation from a published AAR. The bundled JPEG decoder still produces the pre-existing SOIL2 left-shift UBSan warnings; isolated TGA regressions avoid that unrelated defect. Full authored-preset numerical accuracy, equivalence to MilkDrop and TV frame-rate effects are not established by these controls. Analyzer guards and the shared corpus baseline remain unchanged. Final GitHub review/check results are recorded in the PR. The AM6 check covers one preset and GPU, not the entire library or other TV models.

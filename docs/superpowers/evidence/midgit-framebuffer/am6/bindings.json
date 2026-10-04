@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "exit_code": 1,
+    "output": "blur 1 first read=0/2 draw=0/3\nblur changed caller framebuffer: first\n",
+    "executable_sha256": "f99ccce044d462bdea88443b05217c1ee460e7ba14eda41f7180e800a97a99fe"
+  },
+  "fixed": {
+    "exit_code": 0,
+    "output": "blur 1 first read=2/2 draw=3/3\nblur 1 same-size read=2/2 draw=3/3\nblur 1 resize read=2/2 draw=3/3\nblur 1 scaled read=2/2 draw=3/3\nblur 1 scaled-same-size read=2/2 draw=3/3\nblur 3 first read=2/2 draw=3/3\nblur 3 same-size read=2/2 draw=3/3\nblur 3 resize read=2/2 draw=3/3\nblur 3 scaled read=2/2 draw=3/3\nblur 3 scaled-same-size read=2/2 draw=3/3\nblur-framebuffers controls passed\n",
+    "executable_sha256": "c4b5c2514874ce7d2780f00b1bef6091405181eb337703856085177b90e3a758"
+  }
+}
