@@ -4,7 +4,8 @@
 #    indexing (presets.idx and folder fallback), commands, skip list, transitions (lightweight,
 #    classic, auto), output measurement, black-preset skipping and context loss.
 # 2. fade_gl_test: the lightweight-transition overlay on a real GLES3 driver (skipped without one).
-# 3. projectm-regressions: self-referencing shader macros and custom waveform audio bounds in
+# 3. projectm-regressions: shader parser/macros, numerical render controls, 16 unchanged presets
+#    and custom waveform audio bounds in
 #    the real patched engine, with ASan/UBSan and GL (macOS OpenGL or headless EGL/GLES on Linux).
 # Requirements: g++ (C++17) and a JDK (for jni.h); for 2/3, CMake and EGL/GLES development files
 # on Linux. macOS can run 3 using its OpenGL framework without EGL/GLES.
