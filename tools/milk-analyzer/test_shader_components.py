@@ -93,6 +93,23 @@ class ShaderComponentsTest(unittest.TestCase):
         self.assertFalse(model.complete)
         self.assertEqual(result.op,'unknown')
 
+    def test_unwritten_lane_can_be_overwritten_after_componentwise_storage_math(self):
+        code=('shader_body {float2 v;v.x=uv.x;v*=2;'
+              'float2 m=floor(frac(v*.5)*2);v=frac(v)*(1-m)+m*frac(1-v);'
+              'v.y=.3;ret=float3(v,0);}')
+        model,result=lower(code)
+        self.assertTrue(model.complete,model.unknown)
+        actual=evaluate_grid(result,batch_shape=(2,),inputs={'_uv':[[.1,0],[.7,0]]})
+        np.testing.assert_allclose(actual,[[.2,.3,0],[.6,.3,0]],atol=1e-6)
+
+    def test_live_componentwise_unwritten_lane_stays_unresolved(self):
+        model,result=lower('shader_body {float2 v;v.x=.2;v*=2;ret=float3(v,0);}')
+        self.assertFalse(model.complete)
+
+    def test_coupled_normalize_requires_unwritten_lane_even_if_only_x_is_used(self):
+        model,result=lower('shader_body {float2 v;v.x=.2;float2 w=normalize(v);ret=w.xxx;}')
+        self.assertFalse(model.complete)
+
     def test_branch_component_writes_preserve_defined_values_per_lane(self):
         model,result=lower('shader_body {float3 v;if(bass>0){v.x=1;}else{v.x=2;}v.yz=float2(3,4);ret=v;}')
         self.assertTrue(model.complete,model.unknown)

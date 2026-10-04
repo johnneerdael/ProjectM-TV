@@ -1,0 +1,76 @@
+{
+  "scope": "Independent float-vector lane storage; two frozen current published-core2.2.6 numerical controls, not whole-preset visual certification.",
+  "core_release": "2.2.6",
+  "runtime": {
+    "aar_sha256": "0e61b2ad0de62a71a1cf837706821c14a536568fa85b6359a5e8321b63226b3e",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "cd66617d35c266e862324163931262e2478a9eb658ecaa227fddabbd4a6eece4",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "rows": [
+    {
+      "fixture": "component-fold-high",
+      "prediction": {
+        "source_sha256": "1ec075b596293148a7892ed287c1675d8ced89937718250e4bf2a495489dff56",
+        "expected_rgb": [
+          0.6,
+          0.3,
+          0.4
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen component-lane prediction using published core2.2.6; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "component-fold-high.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "b7e84dffbc2f6152f2825695fe1371b22eca20da793f472fa3ce060e67f271bd"
+    },
+    {
+      "fixture": "component-fold-low",
+      "prediction": {
+        "source_sha256": "f7db9ab2f1530b42f045d2e2b2d7173f2a3e742f951b4784119d652e7e06c8e1",
+        "expected_rgb": [
+          0.2,
+          0.3,
+          0.4
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen component-lane prediction using published core2.2.6; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "component-fold-low.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "40a0bbed715094026a2f513438d406ba4219f30da88a0b9d0bd1822ab0f7d008"
+    }
+  ],
+  "implementation_sha256": "d0d27268810dfd98a91230bca61e509503a7af9a6ca6706c2eb38096a39b03a3",
+  "whole_preset_accuracy_verified": false
+}

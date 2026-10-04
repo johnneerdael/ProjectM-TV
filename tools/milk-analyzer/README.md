@@ -793,6 +793,23 @@ published core2.2.4 fallback output exactly over60 RGB8 frames. The numeric
 pipeline regression also ensures rejected authored trees are not executed.
 See `fixtures/array-state-fallback-native-proof-2026-10-04.json`.
 
+Independent float-vector storage math preserves component validity until a
+component is consumed. An unwritten lane may be discarded by a later overwrite;
+live unwritten reads remain unresolved. Coupled operations such as normalization,
+dot products and length, helper/storage effects, arrays and matrices are excluded
+from this bounded deferral. Rechecking the original315 witnesses clears3 more
+interpreter gaps and leaves217 in the historical source-adapter epoch. Two
+frozen controls match the **published core2.2.6** exactly across60 RGB8 frames.
+See `fixtures/focused-blockers-217-2026-10-04.json` and
+`fixtures/component-lane-native-proof-2026-10-04.json`.
+
+Core2.2.6 has newer native patches than that historical audit, including the
+per-frame record retry in patch0029. Reconcile the adapter's loader policy before
+using the old217 count as a current-release failure count. Engineering handoffs
+identify exact affected filenames/hashes and separate shipped fixes from pending
+verification: [native translator](NATIVE-TRANSLATOR-ISSUES.md) and
+[native evaluator/loading](NATIVE-EVALUATOR-ISSUES.md).
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed

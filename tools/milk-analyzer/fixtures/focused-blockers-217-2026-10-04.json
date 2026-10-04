@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "presets": 315,
+  "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Known source-audit parsing/lowering gaps; native-confirmed ignored source remains in the inventory without an execution gap. Behavioral obligations are not yet enumerated.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 217,
+  "verified_behavior_percent": null,
+  "previous_known_blockers": 220,
+  "cleared_presets": [
+    {
+      "preset": "cope + martin - noysez award losing e8 a'shayanni deanth spleendoor.milk",
+      "preset_sha256": "b9ee84c4f23a862cd14fa80723104146d627aaf6e6a03812ed3fd15de80257f3"
+    },
+    {
+      "preset": "cope + martin - noysez award losing single wrap womb dynamics e8 a'sha.milk",
+      "preset_sha256": "cad2f9fdb4a763d271f6c59d482fde75f487f1cf84de9cbca125bf31559aa0cb"
+    },
+    {
+      "preset": "cope + martin - noysez award losing single wrap.milk",
+      "preset_sha256": "4728d00d38823d8fe5fe7cfcb102ff5fe98f874113cdcb72265a84f00f99f8d1"
+    }
+  ],
+  "shader_fields_sha256": "b5a5add6dd3e7d86eb9d199b7c1508e1a9bb43f4ceb2776ffdb9b7eb0d2fc4a1",
+  "target_scope": "Historical pinned source-adapter epoch; core2.2.6 loader policy still needs reconciliation.",
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 82,
+      "affected_units": 82,
+      "affected_source_tokens": 23352,
+      "sole_known_gap_presets": 81,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 1
+      }
+    },
+    {
+      "gap": "native GLSL array initializer layout mismatch",
+      "affected_presets": 56,
+      "affected_units": 56,
+      "affected_source_tokens": 21139,
+      "sole_known_gap_presets": 55,
+      "overlap_presets": {
+        "target parse unavailable": 1
+      }
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 51
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 51
+      }
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 29,
+      "affected_units": 29,
+      "affected_source_tokens": 14275,
+      "sole_known_gap_presets": 26,
+      "overlap_presets": {
+        "arithmetic/comparison side-effect order not established": 3
+      }
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 3
+      }
+    }
+  ]
+}

@@ -33,6 +33,7 @@ PURE={"sin","cos","tan","asin","acos","atan","atan2","abs","sqrt","rsqrt",
       "length","distance","dot","cross","reflect","normalize","pow","exp","exp2","log","log2","log10",
       "min","max","clamp","saturate","lerp","smoothstep","step","frac","floor",
       "ceil","round","trunc","sign","fmod","mul","all","any"}
+ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul','all','any'}
 
 
 class ShaderFields:
@@ -158,6 +159,11 @@ class ShaderFields:
         if value.op=='select':
             yes=self.parts(value.args[1]);no=self.parts(value.args[2])
             return tuple(Field('select',(value.args[0],y,n),base) for y,n in zip(yes,no))
+        if re.fullmatch(r'float[2-4]',value.dtype) and value.op in ELEMENTWISE|{'add','subtract','multiply','divide','remainder','unary'}:
+            arguments=[self.parts(arg) for arg in value.args]
+            if all(len(parts) in {1,count} for parts in arguments):
+                return tuple(Field(value.op,tuple(parts[0] if len(parts)==1 else parts[i]
+                                                 for parts in arguments),base,value.detail) for i in range(count))
         if value.op in {'construct','aggregate'}:
             flattened=tuple(self.coerce(part,base) for arg in value.args for part in self.parts(arg))
             if len(flattened)==1 and 'x' not in value.dtype:return flattened*count
@@ -561,7 +567,7 @@ class ShaderFields:
                 stored=self.write(node['operand'],updated)
                 return stored if node['operator'] in {3,4} else previous
             if node['operator'] not in {0,1,2}:return self.unsupported('bitwise unary operator not lowered',dtype=dtype)
-            return Field("unary",(self.expression(node["operand"]),),dtype,{"operator":node["operator"]})
+            return Field("unary",(self.expression(node["operand"],defer_read=defer_read),),dtype,{"operator":node["operator"]})
         if kind=="conditional":
             if self.has_shared_effects(node):return self.unsupported('conditional expression side effects not lowered',dtype=dtype)
             return Field("select",tuple(self.expression(node[key]) for key in ["condition","yes","no"]),dtype)
@@ -582,11 +588,12 @@ class ShaderFields:
                 local_conflict=self.local_access(node['right'])[1]&self.local_access(destination)[0]
                 if op!=16 and (global_conflict or local_conflict):
                     return self.unsupported('compound assignment helper side-effect order not established',dtype=dtype)
-                value=self.coerce(self.expression(node["right"]),dtype)
-                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination),dtype),value),dtype,
+                deferred=(bool(re.fullmatch(r'float[2-4]',dtype)) and self.componentwise_storage(node['right']))
+                value=self.coerce(self.expression(node["right"],defer_read=deferred),dtype)
+                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination,defer_read=deferred),dtype),value),dtype,
                                       {'zero_guard':True} if op==19 and not matrix_product else {})
                 return self.write(destination,value)
-            args=(self.expression(node['left']),self.expression(node['right']))
+            args=(self.expression(node['left'],defer_read=defer_read),self.expression(node['right'],defer_read=defer_read))
             if op in {2,3,4,5,6}:args=tuple(self.coerce(arg,dtype) for arg in args)
             elif op in {7,8,9,10,11,12,13,14,15}:
                 names=[node[key]['type']['name'] for key in ['left','right']]
@@ -632,7 +639,7 @@ class ShaderFields:
                         'lod_mode':'bias' if name=='tex2Dbias' else 'explicit','lod_effect':'base level only'})
                 result=self.texture(sampler.detail['name'],(coordinates,),dtype)
                 return Field(result.op,result.args,result.dtype,{**result.detail,'intrinsic':name})
-            args=tuple(self.expression(arg) for arg in arguments)
+            args=tuple(self.expression(arg,defer_read=defer_read and name in ELEMENTWISE) for arg in arguments)
             signature=node.get('signature',[])
             args=tuple(self.coerce(arg,self.dtype(signature[i]['type'],actual=arg)) if i<len(signature) else arg
                        for i,arg in enumerate(args))
@@ -753,6 +760,17 @@ class ShaderFields:
             kept.insert(0,statement)
         return kept
 
+    def componentwise_storage(self,node):
+        """Only defer independent scalar/vector lanes with no storage effects."""
+        return self.pure_initializer(node) and self.componentwise_children(node)
+
+    def componentwise_children(self,node):
+        if isinstance(node,list):return all(self.componentwise_children(value) for value in node)
+        if isinstance(node,dict):
+            if node.get('kind')=='call' and node['function'] not in ELEMENTWISE:return False
+            return all(self.componentwise_children(value) for value in node.values())
+        return True
+
     def statements(self,statements:list[dict],*,allow_dead_initializers=True):
         for statement_index,statement in enumerate(statements):
             kind=statement["kind"]
@@ -779,7 +797,7 @@ class ShaderFields:
                         # outer binding here. Do not miss hidden read/write
                         # conflicts until effect analysis resolves that scope.
                         value=self.unsupported('same-name initializer shared effects not resolved',dtype=dtype)
-                    else:value=self.initializer(self.expression(declaration['value']),dtype) if declaration['value'] is not None else Field('uninitialized',dtype=dtype,detail={'name':declaration['name']})
+                    else:value=self.initializer(self.expression(declaration['value'],defer_read=bool(re.fullmatch(r'float[2-4]',dtype)) and self.componentwise_storage(declaration['value'])),dtype) if declaration['value'] is not None else Field('uninitialized',dtype=dtype,detail={'name':declaration['name']})
                     self.environment[declaration["name"]]=value
                     self.local_names.add(declaration['name'])
             elif kind=="block":self.scoped(statement["body"])
