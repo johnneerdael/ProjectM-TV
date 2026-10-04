@@ -141,6 +141,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                                                   native_source_matches and first_values_match)
             if selected is not None:
                 unit['equation_loading']={key:selected[key] for key in ['policy','assembly','compile_status','tree_status']}
+                if 'warning' in selected:unit['equation_loading']['warning']=selected['warning']
             if shader and stage_plan and source_matches:
                 unit['shader_stage_resolution']=stage_plan['warp' if stage=='warp' else 'composite']
             units.append(unit)

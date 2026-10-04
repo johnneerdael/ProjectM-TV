@@ -81,6 +81,7 @@ def _code(source,name,policy='strict-raw-v1'):
     from equation_loading import select_equation
     section=source.get('sections',{}).get(name)
     selected=select_equation(section,name,policy=policy)
+    if selected['compile_status']=='omitted':return '0;'
     if selected['compile_status']!='accepted' or selected['tree_status']!='parsed':
         raise ValueError('target equation compatibility unresolved: '+name)
     return selected['code'] or '0;'
@@ -115,6 +116,10 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     from equation_loading import select_equation
     def code(name):return _code(source,name,equation_loader_policy)
     def tree(name):return select_equation(source.get('sections',{}).get(name),name,policy=equation_loader_policy)['tree']
+    warnings=[{'section':prefix,'warning':selected['warning']} for prefix,section in source.get('sections',{}).items()
+              if prefix not in {'warp_','comp_'}
+              for selected in [select_equation(section,prefix,policy=equation_loader_policy)]
+              if selected['compile_status']=='omitted']
     if not frames:raise ValueError('explicit input frames required')
     if any(type(n) is not int or n<=0 for n in [width,height]):raise ValueError('positive integer viewport required')
     if seed is not None and (type(seed) is not int or not 0<=seed<2**32):
@@ -263,5 +268,6 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     return {'basis':'native source equation orchestration; no rendered inputs','frames':result,
             'equation_rng_seed':seed,
             'equation_loader_policy':equation_loader_policy,
+            'equation_warnings':warnings,
             'viewport':[width,height],'mesh_size':[mesh_x,mesh_y],
             'appearance_prediction_complete':False,'remaining':['drawing/runtime precision']}

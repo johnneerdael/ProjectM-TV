@@ -77,7 +77,7 @@ class SourcePipeline:
                 selected=select_equation(section,prefix,policy=equation_loader_policy)
                 if selected['compile_status']=='rejected':
                     raise UnresolvedMath('native equation compilation rejected: '+prefix)
-                if selected['compile_status']!='accepted':
+                if selected['compile_status'] not in {'accepted','omitted'}:
                     raise UnresolvedMath('native equation compatibility unresolved: '+prefix)
         from stage_resolution import resolve_stages
         plan=resolve_stages(source,profile=profile,compatibility=compatibility)

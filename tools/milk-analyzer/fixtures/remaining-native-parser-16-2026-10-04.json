@@ -1,0 +1,319 @@
+{
+  "scope": "16 remaining source-parser witnesses from original315; private35-patch unchanged native CPU translator bodies; explicit texture descriptors, not AAR driver or appearance certification",
+  "date": "2026-10-04",
+  "identity": {
+    "engine": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e",
+      "patches_sha256": "a0c7ddefb6e18c13641b3aaa48a0b90abc78b2f27f3f688ea5d02a551697895c"
+    },
+    "engine_archive_sha256": "01c128d5bca6e27b834878a437088ab63294ff8a99dac2abe3211486f68c9963",
+    "native_source_sha256": "e09f6f4181499c70aa58aa79c5cd9550eb2343346274b0fb309ed311091921c2",
+    "preprocess_body_sha256": "682d0cb71050ea603069f3fb201d26410262a710455503f41a716f6e736754e5",
+    "sampler_reference_body_sha256": "d152584656b3764d66775f10a8ef2301e79b53ee144c5c76e3c35af8bd466f57",
+    "shader_header_sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b",
+    "translation_body_sha256": "c02ea51b77933d13ddb12f5b14adb263944a0cae580a136e54318a4fbc93b5f2"
+  },
+  "rows": [
+    {
+      "preset": "EVET + Flexi - Rainbox Splash Poolz.milk",
+      "preset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(87) : Syntax error: expected identifier near '*'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "8bca12a4a1d57d54d4dc24e718449b99cf8d32a24ea76186611f215f17321e2c",
+      "variant_request_sha256": "b1b3ca207ee3e57f439329b210a428ffbf95e2c3ec07f3abe9c5ed333eb02575"
+    },
+    {
+      "preset": "EVET - Brainsplolz.milk",
+      "preset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(87) : Syntax error: expected identifier near '*'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "8bca12a4a1d57d54d4dc24e718449b99cf8d32a24ea76186611f215f17321e2c",
+      "variant_request_sha256": "b1b3ca207ee3e57f439329b210a428ffbf95e2c3ec07f3abe9c5ed333eb02575"
+    },
+    {
+      "preset": "Fed + Geiss - Color Pox Remix.milk",
+      "preset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1",
+      "stage": "warp",
+      "source_sha256": "0265c9b6e4fc62c975f496e55466fdad2d64f6a2ac27b2f5432272dc61788346",
+      "issue": "T5: object macro token spacing/wrapping",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(77) : Syntax error: expected ';' near '('\n",
+      "variant_change": "expand authored object macros with token spacing preserved",
+      "variant_status": "translated",
+      "original_request_sha256": "a583498071c84dc0a170b82a5f91a50a7830c333274310064e818d721d0aa775",
+      "variant_request_sha256": "0914810c44f240a6b96fb1f4a50288074d9e9a273a010bc66a5ca01972a2865c"
+    },
+    {
+      "preset": "Flexi - dimension window.milk",
+      "preset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d",
+      "stage": "composite",
+      "source_sha256": "14fb2740b8599f5e3b9e897a94d4a78fd0fe6915b1b1d62df4ebad7e911c9c91",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near ';'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "c8726d97568d4a95591082338b40bd84a871132bc3481774671cf7713e34d479",
+      "variant_request_sha256": "64fc5becb76d45a629fa0b80aa7bb0f675f41ddd6a9fee0050d4973f47a3aa1a"
+    },
+    {
+      "preset": "Flexi - ianus portal.milk",
+      "preset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef",
+      "stage": "composite",
+      "source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near ';'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "1e93076d82bb67186e2da197f8f53d28c9de7fe2336463eb508e7062ee3f2fd6",
+      "variant_request_sha256": "6ed7dabd069381c8c2ad98c0ad664fbc5afdf0bf7b452cc2d1cc3687458f1d21"
+    },
+    {
+      "preset": "Flexi - madness portal.milk",
+      "preset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+      "stage": "composite",
+      "source_sha256": "44051b005972dc825f827333716a31ae7d4b62d8e2709b28dd2322c31ad2a7b9",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near ';'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "6e05caaa9db3725721e8d72f7ab131664c42ab63792dd7bd562038a00601afd6",
+      "variant_request_sha256": "cad14a90b4552917c3933847f3f495416aceef08808c59a7fca084b1f256c8d6"
+    },
+    {
+      "preset": "Flexi - rorschach bomb.milk",
+      "preset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801",
+      "stage": "composite",
+      "source_sha256": "44051b005972dc825f827333716a31ae7d4b62d8e2709b28dd2322c31ad2a7b9",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near ';'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "6e05caaa9db3725721e8d72f7ab131664c42ab63792dd7bd562038a00601afd6",
+      "variant_request_sha256": "cad14a90b4552917c3933847f3f495416aceef08808c59a7fca084b1f256c8d6"
+    },
+    {
+      "preset": "Flexi - spirally caterpillar coop mode.milk",
+      "preset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22",
+      "stage": "composite",
+      "source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near ';'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "1e93076d82bb67186e2da197f8f53d28c9de7fe2336463eb508e7062ee3f2fd6",
+      "variant_request_sha256": "6ed7dabd069381c8c2ad98c0ad664fbc5afdf0bf7b452cc2d1cc3687458f1d21"
+    },
+    {
+      "preset": "Flexi - spirally repetative 2.milk",
+      "preset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd",
+      "stage": "composite",
+      "source_sha256": "a28f050fc2e2db496202519239eccf09700afe7916d31a4bac5c53755548f6be",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near ';'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "347e3000888680562e1eb6b4f23a7dfc5992ce974207c22242cc869c3f34ffe5",
+      "variant_request_sha256": "1e61ccaa3ca59d418e9e29ce1869584f5ae4a7686b03eca18bef4e758a79de68"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+      "preset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(87) : Syntax error: expected identifier near '*'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "8bca12a4a1d57d54d4dc24e718449b99cf8d32a24ea76186611f215f17321e2c",
+      "variant_request_sha256": "b1b3ca207ee3e57f439329b210a428ffbf95e2c3ec07f3abe9c5ed333eb02575"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
+      "preset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(87) : Syntax error: expected identifier near '*'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "8bca12a4a1d57d54d4dc24e718449b99cf8d32a24ea76186611f215f17321e2c",
+      "variant_request_sha256": "b1b3ca207ee3e57f439329b210a428ffbf95e2c3ec07f3abe9c5ed333eb02575"
+    },
+    {
+      "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
+      "preset_sha256": "12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(87) : Syntax error: expected identifier near '*'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "8bca12a4a1d57d54d4dc24e718449b99cf8d32a24ea76186611f215f17321e2c",
+      "variant_request_sha256": "b1b3ca207ee3e57f439329b210a428ffbf95e2c3ec07f3abe9c5ed333eb02575"
+    },
+    {
+      "preset": "Hexcollie - Hedgehog dreams.milk",
+      "preset_sha256": "9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(87) : Syntax error: expected identifier near '*'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "8bca12a4a1d57d54d4dc24e718449b99cf8d32a24ea76186611f215f17321e2c",
+      "variant_request_sha256": "b1b3ca207ee3e57f439329b210a428ffbf95e2c3ec07f3abe9c5ed333eb02575"
+    },
+    {
+      "preset": "lice - veritubule.milk",
+      "preset_sha256": "fd1e37383cb6c78a6d1eb906ca7982db7fc0d69d8b891f71be259341029c481b",
+      "stage": "composite",
+      "source_sha256": "ba58023fbe736a5514c7912b02995f73818da067e8a0df1eb6a40dbf50625034",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near '*'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "f51fbcc7ae0ba5b97741cc75c394990ce58eb56aad523625d0a137fe51e59a7d",
+      "variant_request_sha256": "b5c18989dd5a67dd19e4cc9405815734b9acd47b5db1d04102e478940704320a"
+    },
+    {
+      "preset": "suksma - crisco orgy - rosvell roams nz+.milk",
+      "preset_sha256": "f99c8383eb1010a257c9188776b734edf6438c307a72f777f442b5479aad61b6",
+      "stage": "warp",
+      "source_sha256": "e81c1a0c2056bdc3f196b1d1b2ccdaf70f091f1406f379f9353e29b9e6dffb03",
+      "issue": "T6: parenthesized expression swizzle",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(118) : Syntax error: expected ')' near '.'\n",
+      "variant_change": "materialize constructor and parenthesized expression before swizzle, preserving coordinate operations",
+      "variant_status": "translated",
+      "original_request_sha256": "a0ba91d2fda7d0f24a28b130a184f03c267ad39510a95a7dae14457f2ed353b0",
+      "variant_request_sha256": "659e4320c008c2060b86ed39634454bbf1540cb153e0c4586ffd0dac663853a6"
+    },
+    {
+      "preset": "suksma - fuck retro anything.milk",
+      "preset_sha256": "d57fea66d8addb123af5327e19d7410ed923d0a64416b448fee2458510730883",
+      "stage": "composite",
+      "source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "issue": "T4: sample modifier ambiguity",
+      "native_original_status": "rejected",
+      "original_diagnostic": "(85) : Syntax error: expected identifier near ';'\n",
+      "variant_change": "sample-renamed",
+      "variant_status": "translated",
+      "original_request_sha256": "1e93076d82bb67186e2da197f8f53d28c9de7fe2336463eb508e7062ee3f2fd6",
+      "variant_request_sha256": "6ed7dabd069381c8c2ad98c0ad664fbc5afdf0bf7b452cc2d1cc3687458f1d21"
+    }
+  ],
+  "minimal_controls": [
+    {
+      "label": "sample",
+      "request": {
+        "code": "shader_body {float3 sample=tex2D(sampler_main,uv);ret=sample*sample*sample;}",
+        "stage": "composite",
+        "profile": "gles300",
+        "samplers": {
+          "sampler_main": "sampler2D",
+          "sampler_manyfish": "sampler2D"
+        },
+        "texture_sizes": []
+      },
+      "status": "rejected",
+      "diagnostic": "(83) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "label": "sample-renamed",
+      "request": {
+        "code": "shader_body {float3 sampled=tex2D(sampler_main,uv);ret=sampled*sampled*sampled;}",
+        "stage": "composite",
+        "profile": "gles300",
+        "samplers": {
+          "sampler_main": "sampler2D",
+          "sampler_manyfish": "sampler2D"
+        },
+        "texture_sizes": []
+      },
+      "status": "translated",
+      "diagnostic": ""
+    },
+    {
+      "label": "constructor-swizzle",
+      "request": {
+        "code": "shader_body {ret=float3(1,2,3).xyy;}",
+        "stage": "composite",
+        "profile": "gles300",
+        "samplers": {
+          "sampler_main": "sampler2D",
+          "sampler_manyfish": "sampler2D"
+        },
+        "texture_sizes": []
+      },
+      "status": "translated",
+      "diagnostic": ""
+    },
+    {
+      "label": "constructor-local",
+      "request": {
+        "code": "shader_body {float3 v=float3(1,2,3);ret=v.xyy;}",
+        "stage": "composite",
+        "profile": "gles300",
+        "samplers": {
+          "sampler_main": "sampler2D",
+          "sampler_manyfish": "sampler2D"
+        },
+        "texture_sizes": []
+      },
+      "status": "translated",
+      "diagnostic": ""
+    },
+    {
+      "label": "macro-declaration",
+      "request": {
+        "code": "#define smp sampler sampler_manyfish;\nsmp\nshader_body {ret=tex2D(sampler_manyfish,uv).xyz;}",
+        "stage": "composite",
+        "profile": "gles300",
+        "samplers": {
+          "sampler_main": "sampler2D",
+          "sampler_manyfish": "sampler2D"
+        },
+        "texture_sizes": []
+      },
+      "status": "rejected",
+      "diagnostic": "(75) : Syntax error: expected ';' near '('\n"
+    },
+    {
+      "label": "direct-declaration",
+      "request": {
+        "code": "sampler sampler_manyfish;\nshader_body {ret=tex2D(sampler_manyfish,uv).xyz;}",
+        "stage": "composite",
+        "profile": "gles300",
+        "samplers": {
+          "sampler_main": "sampler2D",
+          "sampler_manyfish": "sampler2D"
+        },
+        "texture_sizes": []
+      },
+      "status": "translated",
+      "diagnostic": ""
+    }
+  ]
+}

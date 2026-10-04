@@ -11,7 +11,7 @@ and48/51 sampler-state witnesses compiling, and eliminates uninitialized
 uniform-copy declarations. The analyzer now models the initialized global copies
 and grouped arrays with matching engine provenance. Unverified random-sampler
 association remains blocked even when explicit types make offline compilation
-succeed. The current bounded source audit retains54 gaps before adopting PR27.
+succeed. After adopting PR #27, the bounded source audit retains 27 known gaps.
 The affected tables and2.2.4 evidence below remain historical reproductions.
 
 ## Artifact scope and release status
@@ -259,3 +259,112 @@ The native rewrite creates `new_qe` without copying `_qe`; writing its Y compone
 - Local full compiler reports: `build/milk-analyzer/focused-array-binding-2026-10-04/compatibility.json`; local source trees under `build/milk-analyzer/focused-315-loader-ignored-2026-10-04/trees/`.
 
 The latest release already includes shader exception diagnostics, warp sampler ordering and fresh feedback initialization fixes. Do not report those as new open issues. This document concerns the distinct failures above. Do not borrow core 2.2.4 or instrumented-baseline captures as current 2.2.6 acceptance evidence.
+
+
+## Current remaining parser cases (35-patch snapshot)
+
+The original 315-preset subset now has **27 known source interpretation gaps**.
+All 16 remaining shader parsing witnesses also reject in the CPU adapter that
+uses the unchanged translator bodies from the merged 35-patch engine snapshot.
+These are not merely failures of our independent field interpreter. Descriptor
+inputs are explicit; this is not a current AAR driver or visual certification.
+Exact engine/source hashes and minimal controls are recorded in
+`fixtures/remaining-native-parser-16-2026-10-04.json`.
+
+### T4 — local identifier `sample` consumed as an interpolation modifier (14 presets)
+
+`HLSLParser::AcceptInterpolationModifier` unconditionally accepts the identifier
+`sample` while probing a type. An expression statement using a previously declared
+local called `sample` is consequently consumed as a type/modifier attempt. The
+parser then reports `expected identifier near '*'` or near `';'`.
+
+```hlsl
+shader_body {
+    float3 sample = tex2D(sampler_main, uv);
+    ret = sample*sample*sample;
+}
+```
+
+The unchanged native translator rejects this minimal control. Renaming the local
+and all its references to `sampled` translates successfully. The same isolated
+rename in diagnostic copies of all 14 exact witnesses makes them translate;
+all 14 generated GLES shaders pass the offline compiler. Original preset files
+are unchanged and remain blocked. Diagnose speculative type parsing / token
+rollback so expressions using an existing local remain expressions; preserve
+legitimate interpolation qualifiers. Verify against the legacy D3D compiler
+before introducing broader identifier rules.
+
+### T5 — object macro containing a sampler declaration loses token boundaries (1 preset)
+
+`Fed + Geiss - Color Pox Remix.milk`, warp, contains
+`#define smp sampler sampler_manyfish;` followed by `smp`. The native preprocessor
+emits `(samplersampler_manyfish;)`, appended after the header's last declaration,
+and reports `expected ';' near '('`. A minimal macro declaration reproduces this;
+the equivalent direct sampler declaration translates. Expanding the authored
+macros in a diagnostic copy makes the full shader translate. Inspect object-macro
+whitespace retention and expression-parenthesis wrapping in `HLSLParser`;
+declaration and statement macros cannot be treated as scalar expressions.
+Do not silently rewrite the authored source or claim a visual match.
+
+### T6 — member selection on a parenthesized expression (1 preset)
+
+`suksma - crisco orgy - rosvell roams nz+.milk`, warp, uses nested coordinate
+expressions with `.xyy` and `.xyz`. With the required built-in blur descriptor
+context supplied, the native translator rejects near `'.'`. Minimal control
+`ret=(float3(1,2,3)*2).xyy;` rejects, while direct constructor member selection
+`ret=float3(1,2,3).xyy;` translates. Materializing the constructor and parenthesized
+coordinate expression into locals before applying the same swizzles makes the
+full diagnostic copy translate. Inspect postfix/member parsing after a closing
+parenthesis in `HLSLParser`; retain type checking and repeated-component swizzles.
+Do not mistake missing adapter blur declarations for this second, real failure.
+
+### Exact current parser witnesses
+
+| Issue | Exact preset filename | SHA-256 | Section |
+|---|---|---|---|
+| T4 | EVET + Flexi - Rainbox Splash Poolz.milk | `be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf` | composite |
+| T4 | EVET - Brainsplolz.milk | `ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31` | composite |
+| T5 | Fed + Geiss - Color Pox Remix.milk | `acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1` | warp |
+| T4 | Flexi - dimension window.milk | `ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d` | composite |
+| T4 | Flexi - ianus portal.milk | `c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef` | composite |
+| T4 | Flexi - madness portal.milk | `e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e` | composite |
+| T4 | Flexi - rorschach bomb.milk | `ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801` | composite |
+| T4 | Flexi - spirally caterpillar coop mode.milk | `83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22` | composite |
+| T4 | Flexi - spirally repetative 2.milk | `a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd` | composite |
+| T4 | Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk | `249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233` | composite |
+| T4 | Flexi - truly soft piece of software - topology - cohere.milk | `a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362` | composite |
+| T4 | Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk | `12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b` | composite |
+| T4 | Hexcollie - Hedgehog dreams.milk | `9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7` | composite |
+| T4 | lice - veritubule.milk | `fd1e37383cb6c78a6d1eb906ca7982db7fc0d69d8b891f71be259341029c481b` | composite |
+| T6 | suksma - crisco orgy - rosvell roams nz+.milk | `f99c8383eb1010a257c9188776b734edf6438c307a72f777f442b5479aad61b6` | warp |
+| T4 | suksma - fuck retro anything.milk | `d57fea66d8addb123af5327e19d7410ed923d0a64416b448fee2458510730883` | composite |
+
+
+## Remaining read-before-write cases (5 presets; not all confirmed native bugs)
+
+These require separate attribution from T4–T6. Do not initialize arbitrary shader
+storage to zero to clear a diagnostic. The current typed lowering traces the
+following authored storage into reads. A successful baseline render or repeat
+does not prove the value is defined. Exact source hashes and read-only baseline
+joins are in `fixtures/remaining-uninitialized-5-2026-10-04.json`.
+
+| Exact preset filename | Storage | Investigation |
+|---|---|---|
+| New Creation Sensation -  AdamFx,Flexi,Amandio c n Martin - Star to Another World ft Hexocollie,ShadowH,Geiss Bewitchcrafted A.milk | local `arg` | Prove incoming q29/default and selector range before concluding an unassigned path is reachable |
+| martin - ludicrous speed.milk | local `arg` | Prove nonnegative index4 recurrence across init/frame updates and native conversion/remainder domains |
+| Serge + martin - crystal palace tunnel003.milk | global `mus` | Added to crisp/dots without a prior assignment; determine legacy external/global default versus translated GLSL storage |
+| martin - mandelbox explorer - wreck diver nz+ liquititty.milk | global `dist_c` | Used in focus before its later assignment in the entry function; a later assignment cannot initialize an earlier read |
+| martin - organic light.milk | global `uv3` | Reads its old value in `uv3=.4*cos(42*uv3)+64*dz`; distinguish per-invocation shader storage from feedback texture persistence |
+
+The two `arg` shaders cover k1 values 0–3, where k1 is `int(q29)%4`.
+A finite nonnegative input proves branch exhaustiveness; without an input/domain
+proof, guessing that negative or non-finite values never occur would hide a gap.
+The ludicrous-speed source initializes index4 using `rand(12)` and updates it
+modulo 8 before binding q29. The New Creation source has no EEL mention of q29;
+component-level untouched-Q inference is a potential analyzer improvement, since
+another component in its packed bank prevents the existing whole-bank proof.
+
+The supplied MilkDrop3 source compiles with D3DX and binds named known constants;
+source inspection alone has not yet established a matching current-core zero
+policy for these three uninitialized globals. Preserve uncertainty pending a
+versioned translator/default policy and corresponding native numerical controls.

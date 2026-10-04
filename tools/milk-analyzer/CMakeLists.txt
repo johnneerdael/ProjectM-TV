@@ -19,6 +19,9 @@ if(NOT APPLE)
     target_link_libraries(milk-audio-inputs PRIVATE OpenSSL::Crypto)
 endif()
 add_executable(milk-native-reader native_reader.cpp)
+if(EXISTS "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/LegacyEquationCode.hpp")
+    target_compile_definitions(milk-native-reader PRIVATE MILK_HAS_LEGACY_EQUATION_CODE=1)
+endif()
 file(READ "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetShaderHeaderGlsl330.inc" SHADER_HEADER_TEXT)
 file(SHA256 "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetShaderHeaderGlsl330.inc" SHADER_HEADER_SHA)
 file(READ "${ENGINE_BUILD}/build-identity.json" ENGINE_IDENTITY_TEXT)
@@ -39,6 +42,7 @@ target_include_directories(milk-native-reader PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native"
     "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/vendor/hlslparser/src"
     "${ENGINE_SOURCE}/vendor/projectm-eval/projectm-eval" "${ENGINE_SOURCE}/src/api/include"
+    "${ENGINE_SOURCE}/vendor/projectm-eval/projectm-eval/api"
     "${ENGINE_BUILD}/projectm/src/api/include")
 target_link_libraries(milk-native-reader PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
 if(APPLE)

@@ -11,6 +11,9 @@ extern "C" {
 #include "TreeFunctions.h"
 #include "TreeVariables.h"
 }
+#ifdef MILK_HAS_LEGACY_EQUATION_CODE
+#include "MilkdropPreset/LegacyEquationCode.hpp"
+#endif
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -38,6 +41,9 @@ public:
 };
 
 std::string milkdropEquationSource(const std::string& code) {
+#ifdef MILK_HAS_LEGACY_EQUATION_CODE
+    return libprojectM::MilkdropPreset::AssembleLegacyEquationCode(code);
+#else
     // MilkDrop 2.25c state.cpp: ReadCode + StripLinefeedCharsAndComments.
     // Remove numbered-line boundaries, not other whitespace; preserve split identifiers/numbers.
     // The original implementation also recognizes both // and double-backslash line comments.
@@ -48,6 +54,7 @@ std::string milkdropEquationSource(const std::string& code) {
         if(code[i]!='\n'&&code[i]!='\r')result+=code[i];
     }
     return result;
+#endif
 }
 
 json numericValue(PRJM_EVAL_F value) {
@@ -463,6 +470,11 @@ int main(int argc,char** argv) {
         const std::string header=kShaderHeader;
         report["parser_inputs"]={{"shader_header_sha256",kShaderHeaderSha},{"engine_archive_sha256",kEngineArchiveSha},
                                  {"engine",json::parse(kEngineIdentity)}};
+#ifdef MILK_HAS_LEGACY_EQUATION_CODE
+        report["equation_assembly_policy"]="projectmtv-core-2.2.8-v1";
+#else
+        report["equation_assembly_policy"]="milkdrop-records-v1";
+#endif
         int version=file.GetInt("MILKDROP_PRESET_VERSION",100);
         bool warpActive=version>=200&&file.GetInt(version==200?"PSVERSION":"PSVERSION_WARP",2)>0;
         bool compActive=version>=200&&file.GetInt(version==200?"PSVERSION":"PSVERSION_COMP",2)>0;
@@ -484,6 +496,11 @@ int main(int argc,char** argv) {
                 section=milkdropContext.parse(assembled);
                 section["dialect"]="MilkDrop 2.25c numbered equation assembly";
                 section["assembled_source"]=assembled;
+#ifdef MILK_HAS_LEGACY_EQUATION_CODE
+                section["target_assembly_policy"]="projectmtv-core-2.2.8-v1";
+#else
+                section["target_assembly_policy"]="milkdrop-records-v1";
+#endif
                 section["projectm_native_status"]=native["status"];
                 section["projectm_native_compile_status"]=native["compile_status"];
                 if(native.contains("tree"))section["projectm_raw_tree"]=native["tree"];

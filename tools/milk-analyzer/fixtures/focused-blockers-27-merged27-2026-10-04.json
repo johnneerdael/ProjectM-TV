@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "presets": 315,
+  "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "35-patch source-language audit, matched explicit descriptor/profile context, excluding unverified random aliases. Omitted blocks retain originaltokens andwarning, no parsingcredit. Not full-AAR mood/appearance certification.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 27,
+  "verified_behavior_percent": null,
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 16,
+      "affected_units": 16,
+      "affected_source_tokens": 1736,
+      "sole_known_gap_presets": 16,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 5,
+      "affected_units": 5,
+      "affected_source_tokens": 2298,
+      "sole_known_gap_presets": 5,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 3,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 573,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 3
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 573,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 3
+      }
+    }
+  ],
+  "merge_revision": "f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98",
+  "remaining_witnesses": {
+    "target parse unavailable": [
+      {
+        "preset": "EVET + Flexi - Rainbox Splash Poolz.milk",
+        "preset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf",
+        "section": "comp_"
+      },
+      {
+        "preset": "EVET - Brainsplolz.milk",
+        "preset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31",
+        "section": "comp_"
+      },
+      {
+        "preset": "Fed + Geiss - Color Pox Remix.milk",
+        "preset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1",
+        "section": "warp_"
+      },
+      {
+        "preset": "Flexi - dimension window.milk",
+        "preset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi - ianus portal.milk",
+        "preset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi - madness portal.milk",
+        "preset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi - rorschach bomb.milk",
+        "preset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi - spirally caterpillar coop mode.milk",
+        "preset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi - spirally repetative 2.milk",
+        "preset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+        "preset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
+        "preset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362",
+        "section": "comp_"
+      },
+      {
+        "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
+        "preset_sha256": "12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b",
+        "section": "comp_"
+      },
+      {
+        "preset": "Hexcollie - Hedgehog dreams.milk",
+        "preset_sha256": "9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7",
+        "section": "comp_"
+      },
+      {
+        "preset": "lice - veritubule.milk",
+        "preset_sha256": "fd1e37383cb6c78a6d1eb906ca7982db7fc0d69d8b891f71be259341029c481b",
+        "section": "comp_"
+      },
+      {
+        "preset": "suksma - crisco orgy - rosvell roams nz+.milk",
+        "preset_sha256": "f99c8383eb1010a257c9188776b734edf6438c307a72f777f442b5479aad61b6",
+        "section": "warp_"
+      },
+      {
+        "preset": "suksma - fuck retro anything.milk",
+        "preset_sha256": "d57fea66d8addb123af5327e19d7410ed923d0a64416b448fee2458510730883",
+        "section": "comp_"
+      }
+    ],
+    "uninitialized shader value reaches a read": [
+      {
+        "preset": "New Creation Sensation -  AdamFx,Flexi,Amandio c n Martin - Star to Another World ft Hexocollie,ShadowH,Geiss Bewitchcrafted A.milk",
+        "preset_sha256": "147a5c7e76e1285172984c52ca837dae2578d4aef570766218ad1ca2c47c3649",
+        "section": "warp_"
+      },
+      {
+        "preset": "Serge + martin - crystal palace tunnel003.milk",
+        "preset_sha256": "f4ab74c7f561e50177b1b68ecf647045de78582ba378e39bb9295d26a55fd4e2",
+        "section": "warp_"
+      },
+      {
+        "preset": "martin - ludicrous speed.milk",
+        "preset_sha256": "9a99802ec59187a9f635f615db07622c5feaa15d02ed64beefb8156e68d48b22",
+        "section": "warp_"
+      },
+      {
+        "preset": "martin - mandelbox explorer - wreck diver nz+ liquititty.milk",
+        "preset_sha256": "2d767a8f65168592fc25b0e70accb968fa5b118296b64f66a62e5f889a9faddd",
+        "section": "comp_"
+      },
+      {
+        "preset": "martin - organic light.milk",
+        "preset_sha256": "71c481a0ebc470c3a9e717630cdd3785f4217248f81cbe6157cf1da99914698e",
+        "section": "comp_"
+      }
+    ],
+    "arithmetic/comparison side-effect order not established": [
+      {
+        "preset": "Martin - QBikal - Surface Turbulence IIeeeee hakanh mash-up k10.milk",
+        "preset_sha256": "5d7e6434c83ab2285b71d346114e3fb57547d7f5c811f8a49f35b4f4d2bfbd56",
+        "section": "comp_"
+      },
+      {
+        "preset": "Martin - QBikal - Surface Turbulence IIeeeee hakanh mash-up k8.milk",
+        "preset_sha256": "7e85c8d05450e0086cfa9a2ca75178acbd19f84243db7868ef760c1417549911",
+        "section": "comp_"
+      },
+      {
+        "preset": "boobs - tithypno.milk",
+        "preset_sha256": "07dffa334fbedd13bb5986d79336f8078937c9e3a9d01b09325a44f8418abd9b",
+        "section": "comp_"
+      }
+    ],
+    "dynamic sampler expression": [
+      {
+        "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+        "preset_sha256": "5dd383cf79e1aacbed944ded85d70a365dde2c51f2ca7646ed0b7fde0cf4c79f",
+        "section": "comp_"
+      },
+      {
+        "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+        "preset_sha256": "06b84ff69c3aeeb88eff3dea63dd3c1f5b146b4c2afb9df204f5f2561e7aee15",
+        "section": "comp_"
+      },
+      {
+        "preset": "midgitstraights of majillaen - featy sweet.milk",
+        "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+        "section": "comp_"
+      }
+    ],
+    "shader expression not lowered: sampler_state": [
+      {
+        "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+        "preset_sha256": "5dd383cf79e1aacbed944ded85d70a365dde2c51f2ca7646ed0b7fde0cf4c79f",
+        "section": "comp_"
+      },
+      {
+        "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+        "preset_sha256": "06b84ff69c3aeeb88eff3dea63dd3c1f5b146b4c2afb9df204f5f2561e7aee15",
+        "section": "comp_"
+      },
+      {
+        "preset": "midgitstraights of majillaen - featy sweet.milk",
+        "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+        "section": "comp_"
+      }
+    ]
+  }
+}

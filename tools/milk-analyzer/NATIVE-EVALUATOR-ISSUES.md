@@ -167,3 +167,19 @@ See `fixtures/focused-blockers-178-2026-10-04.json` and
 `fixtures/equation-policy-core-2.2.6-proof.json`.
 
 Reproduce against published core 2.2.6 first. Keep raw evaluator status, loader retry status, selected assembly and final preset-load outcome separate. Verify exact source hashes and AAR/native-library identity in each result. Fix only the missing behavior, rerun the affected named presets plus negative controls, and report which entries actually change. Update analyzer target-loader policy accordingly. Preserve the historical 2.2.4 evidence instead of relabeling it as current-release results.
+
+
+## Analyzer adoption of merged core 2.2.8
+
+The explicit `projectmtv-core-2.2.8-v1` loader policy now models all-phase legacy
+retry, bare-dot acceptance and warning-only omission from PR #27. Raw accepted
+code remains authoritative; omitted blocks contribute no parsing credit and
+retain their warnings. Policy stamps prevent using a newer assembler to support
+an older target claim. Two frozen initialization retry/omission controls match
+the published 2.2.8 native library exactly over 60 RGB8 frames.
+
+The original 315-case source audit now retains **27** known gaps, all in shader
+parsing, live uninitialized values, expression ordering or random sampler context.
+See `fixtures/focused-blockers-27-merged27-2026-10-04.json` and
+`fixtures/equation-policy-core-2.2.8-proof.json`. Do not turn this loader/source
+result into a full visual-accuracy or mood-scoring claim.

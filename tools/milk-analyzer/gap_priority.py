@@ -30,7 +30,9 @@ def rank_gaps(rows: Iterable[dict]) -> dict:
             if not unit['loader_numbering_reachable']:
                 reasons = set() if unit.get('loader_ignored_confirmed') is True else {'source outside supported numbered loader'}
             elif not unit['target_parsed']:
-                reasons = {'target parse unavailable'}
+                omitted=unit.get('equation_loading',{})
+                reasons = set() if (omitted.get('policy')=='projectmtv-core-2.2.8-v1' and
+                                   omitted.get('compile_status')=='omitted') else {'target parse unavailable'}
             else:
                 reasons = set(unit['lowering_unknowns'])
                 if unit['lowering_complete'] is False and not reasons:

@@ -1160,3 +1160,26 @@ python -m pytest tools/milk-analyzer -q
 
 The fixtures test native parsing/execution and source arithmetic. They never load
 rendered reference images or generate a visual comparison score.
+
+
+### Merged core 2.2.8 equation loading and remaining parser diagnosis
+
+The explicit `projectmtv-core-2.2.8-v1` policy models merged PR #27: preserve
+accepted raw equations, retry legacy assembly in all equation phases, and omit
+a genuinely rejected block with its warning retained. Omission does not earn
+source parsing credit. Reader assembly-policy stamps prevent an older target
+policy from borrowing newer normalization behavior.
+
+A fresh 35-patch CPU audit of the original 315 cases leaves **27 known source
+gaps**, down from 54. Two frozen initialization retry/omission controls match the
+published core 2.2.8 native library exactly across 60 RGB8 frames. This does not
+certify whole-preset appearance or mood scores. See
+`fixtures/focused-blockers-27-merged27-2026-10-04.json` and
+`fixtures/equation-policy-core-2.2.8-proof.json`.
+
+The 16 remaining parser witnesses are traced to 14 local `sample` identifier
+ambiguities, one sampler declaration macro, and one parenthesized expression
+swizzle. They also reject in the unchanged native CPU translator bodies with
+explicit descriptor context. Minimal paired diagnostic controls isolate the
+failures; authored presets remain unchanged and blocked. See the translator
+handoff and `fixtures/remaining-native-parser-16-2026-10-04.json`.
