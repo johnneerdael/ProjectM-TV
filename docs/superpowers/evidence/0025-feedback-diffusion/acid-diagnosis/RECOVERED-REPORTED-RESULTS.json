@@ -1,0 +1,515 @@
+{
+  "status": "Historical reported results recovered from authorized tool outputs, not reconstructed raw measurement data",
+  "rollout": "/Users/jneerdael/.codex/sessions/2026/10/04/rollout-2026-10-04T03-35-59-01a1048d-b785-7840-aa49-43c17343fd1a.jsonl",
+  "raw_job_json_available": false,
+  "raw_frame_hash_sequences_available": false,
+  "raw_pngs_available": false,
+  "worker_binaries_or_snapshots_restored": false,
+  "reported_results": {
+    "author-footprint-v3-1182x665-control.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.018565189093351364,
+        "luma_ratio": 0.9978497815802777,
+        "centre_rgb": [
+          0.6850234674975157,
+          0.2318269696470389,
+          0.06920230064693736
+        ],
+        "diagnostic_rows": 192,
+        "control_byte_identical": true
+      },
+      "tool_output_rollout_line": 897
+    },
+    "author-footprint-v3-1158x652-control.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.06767028570175171,
+        "luma_ratio": 1.0070047081117124,
+        "centre_rgb": [
+          0.6887457975386366,
+          0.22633239775285793,
+          0.07200402649354061
+        ],
+        "diagnostic_rows": 192,
+        "control_byte_identical": true
+      },
+      "tool_output_rollout_line": 897
+    },
+    "author-footprint-v3-1182x665-authored.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.0,
+        "luma_ratio": 1.0,
+        "centre_rgb": [
+          0.4546176101654764,
+          0.18368487006606962,
+          0.24245429524552925
+        ],
+        "diagnostic_rows": 384,
+        "authored_byte_identical": true
+      },
+      "tool_output_rollout_line": 897
+    },
+    "author-footprint-v3-2364x1330-12s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.1865626871585846,
+        "luma_ratio": 1.2629730981806209,
+        "centre_rgb": [
+          0.4828811494000716,
+          0.2567346138988575,
+          0.2811735479594161
+        ],
+        "diagnostic_rows": 384
+      },
+      "tool_output_rollout_line": 925
+    },
+    "author-footprint-v3-2364x1330-4s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.09447120130062103,
+        "luma_ratio": 1.087043570254982,
+        "centre_rgb": [
+          0.6729994559079091,
+          0.2583367619014444,
+          0.08014257638802072
+        ],
+        "diagnostic_rows": 192
+      },
+      "tool_output_rollout_line": 925
+    },
+    "author-footprint-v3-3840x2160-12s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.11298612505197525,
+        "luma_ratio": 1.048738380254144,
+        "centre_rgb": [
+          0.45488511475942384,
+          0.19992604270682043,
+          0.19640414237540002
+        ],
+        "diagnostic_rows": 384
+      },
+      "tool_output_rollout_line": 925
+    },
+    "author-footprint-v3-3840x2160-4s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.049452800303697586,
+        "luma_ratio": 1.0005079426448937,
+        "centre_rgb": [
+          0.6646127172818074,
+          0.23957300350374222,
+          0.06761369274111392
+        ],
+        "diagnostic_rows": 192
+      },
+      "tool_output_rollout_line": 925
+    },
+    "author-global-grid-1158x652-control.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.06767028570175171,
+        "luma_ratio": 1.0070047081117124,
+        "centre_rgb": [
+          0.6887457975386366,
+          0.22633239775285793,
+          0.07200402649354061
+        ],
+        "diagnostic_rows": 192,
+        "control_byte_identical": true
+      },
+      "tool_output_rollout_line": 989
+    },
+    "author-global-grid-1182x665-control.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.018565189093351364,
+        "luma_ratio": 0.9978497815802777,
+        "centre_rgb": [
+          0.6850234674975157,
+          0.2318269696470389,
+          0.06920230064693736
+        ],
+        "diagnostic_rows": 192,
+        "control_byte_identical": true
+      },
+      "tool_output_rollout_line": 989
+    },
+    "author-global-grid-1182x665-authored.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.0,
+        "luma_ratio": 1.0,
+        "centre_rgb": [
+          0.4546176101654764,
+          0.18368487006606962,
+          0.24245429524552925
+        ],
+        "diagnostic_rows": 384,
+        "authored_byte_identical": true
+      },
+      "tool_output_rollout_line": 989
+    },
+    "author-global-grid-3840x2160-4s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.061016540974378586,
+        "luma_ratio": 0.9789565582783598,
+        "centre_rgb": [
+          0.39064111056266665,
+          0.2180214077818627,
+          0.06735936648965139
+        ],
+        "diagnostic_rows": 192
+      },
+      "tool_output_rollout_line": 1010
+    },
+    "author-global-grid-2364x1330-4s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.07709795236587524,
+        "luma_ratio": 0.9549410214008792,
+        "centre_rgb": [
+          0.344499484004128,
+          0.22005869932546268,
+          0.06728144200162854
+        ],
+        "diagnostic_rows": 192
+      },
+      "tool_output_rollout_line": 1010
+    },
+    "author-global-grid-2364x1330-12s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.1347222775220871,
+        "luma_ratio": 0.8025880356053373,
+        "centre_rgb": [
+          0.22883370832973068,
+          0.15117528176913425,
+          0.20928603810068458
+        ],
+        "diagnostic_rows": 384
+      },
+      "tool_output_rollout_line": 1010
+    },
+    "author-global-grid-3840x2160-12s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.11745013296604156,
+        "luma_ratio": 0.8637874594986962,
+        "centre_rgb": [
+          0.39195320235486586,
+          0.1602568394309456,
+          0.23039060464345637
+        ],
+        "diagnostic_rows": 384
+      },
+      "tool_output_rollout_line": 1010
+    },
+    "verified-raw-sharpen-2364x1330.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.12129448354244232,
+        "luma_ratio": 0.8437519272579361,
+        "centre_rgb": [
+          0.3773223169890751,
+          0.15748376138769465,
+          0.22980341977637897
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1226
+    },
+    "verified-raw-sharpen-3840x2160.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.11999458074569702,
+        "luma_ratio": 0.8229749760657145,
+        "centre_rgb": [
+          0.3922174681156113,
+          0.15913218662164802,
+          0.24107480226047465
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1226
+    },
+    "verified-raw-sharpen-1182x665.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.0,
+        "luma_ratio": 1.0,
+        "centre_rgb": [
+          0.4546176101654764,
+          0.18368487006606962,
+          0.24245429524552925
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true,
+        "authored_byte_identical": true
+      },
+      "tool_output_rollout_line": 1226
+    },
+    "verified-raw-p1-sharpen-3840x2160.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.1196717619895935,
+        "luma_ratio": 0.8249853218020132,
+        "centre_rgb": [
+          0.3957267208607768,
+          0.15966713229305352,
+          0.24367771575204583
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1273
+    },
+    "verified-raw-p1-sharpen-2364x1330.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.12113118171691895,
+        "luma_ratio": 0.8457538064735574,
+        "centre_rgb": [
+          0.38056218978819606,
+          0.15798964296652113,
+          0.23213545743512695
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1273
+    },
+    "phase-beta-p1-1182x665-12s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.0,
+        "luma_ratio": 1.0,
+        "centre_rgb": [
+          0.4546176101654764,
+          0.18368487006606962,
+          0.24245429524552925
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true,
+        "authored_byte_identical": true
+      },
+      "tool_output_rollout_line": 1332
+    },
+    "phase-beta-p1-2364x1330-12s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.10731802135705948,
+        "luma_ratio": 1.024448648808619,
+        "centre_rgb": [
+          0.37266264617723155,
+          0.1886682959017742,
+          0.2651905562975307
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1332
+    },
+    "phase-beta-p1-2364x1330-4s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.05218176916241646,
+        "luma_ratio": 0.9943263767775745,
+        "centre_rgb": [
+          0.6716520535225711,
+          0.223166518513542,
+          0.06764735222684824
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1332
+    },
+    "phase-beta-p1-3840x2160-12s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.11690886318683624,
+        "luma_ratio": 1.0075652553795975,
+        "centre_rgb": [
+          0.34643846994334015,
+          0.18501446128863072,
+          0.2708134520821146
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1332
+    },
+    "phase-beta-p1-3840x2160-4s.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.05506268888711929,
+        "luma_ratio": 0.9920083106715474,
+        "centre_rgb": [
+          0.6716963366574127,
+          0.2247448999372125,
+          0.06914716378449524
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1332
+    },
+    "phase-beta-fed-authored.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.0,
+        "luma_ratio": 1.0,
+        "centre_rgb": [
+          0.10323133293721529,
+          0.10323133293721529,
+          0.10323133293721529
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true,
+        "authored_byte_identical": true
+      },
+      "tool_output_rollout_line": 1401
+    },
+    "phase-beta-fed-3840x2160.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.001962133217602968,
+        "luma_ratio": 0.5856747963858143,
+        "centre_rgb": [
+          0.08777586242401622,
+          0.08777586242401622,
+          0.08777586242401622
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1470
+    },
+    "phase-beta-fed-2364x1330.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.0013420762261375785,
+        "luma_ratio": 0.8588679829315696,
+        "centre_rgb": [
+          0.09841496649983802,
+          0.09841496649983802,
+          0.09841496649983802
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1470
+    },
+    "phase-beta-royal-3840x2160.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.07806134968996048,
+        "luma_ratio": 3.7438770529271688,
+        "centre_rgb": [
+          0.13513132163927388,
+          0.13513132163927388,
+          0.13513132163927388
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1470
+    },
+    "phase-beta-royal-2364x1330.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 0.09123899787664413,
+        "luma_ratio": 4.042157881336468,
+        "centre_rgb": [
+          0.13637686540058827,
+          0.13637686540058827,
+          0.13637686540058827
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true
+      },
+      "tool_output_rollout_line": 1470
+    },
+    "phase-beta-royal-authored-repeat.log": {
+      "reported_values": {
+        "status": "success",
+        "img_err": 5.188645602061115e-08,
+        "luma_ratio": 1.0000000585196323,
+        "centre_rgb": [
+          0.1336592333506981,
+          0.1336592333506981,
+          0.1336592333506981
+        ],
+        "routing_checked": true,
+        "shader_compile_success": true,
+        "authored_byte_identical": false
+      },
+      "tool_output_rollout_line": 1470
+    }
+  },
+  "independent_routing_proof_reported": {
+    "reported_values": {
+      "shader_compile_success": true,
+      "distinct_sources_verified": true,
+      "raw_checker_orientation_verified": true,
+      "repeat_wrap_verified": true,
+      "unit0_texture_and_sampler_overwrite_reproduced": true,
+      "descriptor_restoration_verified": true,
+      "min_filter": 9729,
+      "mag_filter": 9729,
+      "wrap_s": 10497,
+      "wrap_t": 10497
+    },
+    "tool_output_rollout_line": 1188
+  },
+  "royal_offpath_pixel_quantification_reported": {
+    "reported_values": {
+      "primary_frame_hash_mismatches": 57,
+      "frames": 480,
+      "mean_luma_difference": 1.5798761708596398e-09,
+      "captured_frames": [
+        {
+          "frame": 0,
+          "channels_changed": 0,
+          "max_byte_difference": 0,
+          "mean_abs_byte_difference": 0.0
+        },
+        {
+          "frame": 1,
+          "channels_changed": 78,
+          "max_byte_difference": 5,
+          "mean_abs_byte_difference": 6.615523580524917e-05
+        },
+        {
+          "frame": 2,
+          "channels_changed": 0,
+          "max_byte_difference": 0,
+          "mean_abs_byte_difference": 0.0
+        },
+        {
+          "frame": 3,
+          "channels_changed": 0,
+          "max_byte_difference": 0,
+          "mean_abs_byte_difference": 0.0
+        },
+        {
+          "frame": 4,
+          "channels_changed": 0,
+          "max_byte_difference": 0,
+          "mean_abs_byte_difference": 0.0
+        }
+      ],
+      "strict_F1_pass": false
+    },
+    "tool_output_rollout_line": 1450
+  },
+  "historical_ruling": "Scalar phase-beta was rejected: Acid brightness improved, Fed remained dim, Royal191 overgrew and failed strict off-path frame identity. No product integration was justified.",
+  "source_binding_invalidation": "Earlier raw-FW sharpening/all-uv negative results were invalid because PerPixelMesh overwrote both texture and sampler at unit0 after descriptor binding; those results must not be treated as true raw-source controls. Verified source-routing/P1 controls replaced that conclusion.",
+  "scope": "No corpus runner recovered in this priority round; no measurements, TV actions, product changes or commits performed."
+}

@@ -1,0 +1,163 @@
+{
+  "provenance": "Recovered only source-generating function/custom-tool inputs from explicitly authorized child rollout; no reasoning or unrelated messages extracted.",
+  "rollout": "/Users/jneerdael/.codex/sessions/2026/10/04/rollout-2026-10-04T03-35-59-01a1048d-b785-7840-aa49-43c17343fd1a.jsonl",
+  "source_files": [
+    {
+      "file": "acid-diagnosis-all-uv-rawlinear.milk",
+      "sha256": "0ac321beb31f3858f279ca5b004eaeb25d656c704e9cd4969b132b4c38aa12c9",
+      "last_tool_call_rollout_line": 185
+    },
+    {
+      "file": "acid-diagnosis-author-footprint-v3.milk",
+      "sha256": "302a3c8c309fb98792c20263fafca960d13f9a6a917c4dea52195ae00fd0058a",
+      "last_tool_call_rollout_line": 884
+    },
+    {
+      "file": "acid-diagnosis-author-footprint.milk",
+      "sha256": "b6a15c58be080805ad748fb12cc446d569848e8c24457b5e6f89b0c7f746daa7",
+      "last_tool_call_rollout_line": 805
+    },
+    {
+      "file": "acid-diagnosis-author-global-grid.milk",
+      "sha256": "7c97ff84bab43c2c9aaa37d071e68911688356a030eb42c07f17c103029ae085",
+      "last_tool_call_rollout_line": 963
+    },
+    {
+      "file": "acid-diagnosis-original.milk",
+      "sha256": "163034eb002666dfd1966444dedd1a47853131e915a5cb2745bd09ff52a4e230",
+      "last_tool_call_rollout_line": 242
+    },
+    {
+      "file": "acid-diagnosis-phase-beta.milk",
+      "sha256": "bb5c5d400e2ede6fbc5740aa0197770ee310ae0b7de2105d9426622e24f9a4b0",
+      "last_tool_call_rollout_line": 1269
+    },
+    {
+      "file": "acid-diagnosis-sharp-point.milk",
+      "sha256": "80b1a7417ccd39b561181b17b633344cd03788b94d1b655285c7a856710bbf32",
+      "last_tool_call_rollout_line": 67
+    },
+    {
+      "file": "acid-diagnosis-sharp-rawlinear.milk",
+      "sha256": "53393a60a252d366f47de6fcae0a0c36dcd353f2726772b62f0a1599331e599e",
+      "last_tool_call_rollout_line": 141
+    },
+    {
+      "file": "alluv_probe.py",
+      "sha256": "102af7c0f63b1ce5c2c980211749adad4949dcf5abaa3a18e8677d5cf1572543",
+      "last_tool_call_rollout_line": 185
+    },
+    {
+      "file": "author_footprint_probe.py",
+      "sha256": "f2ed7434b6f5c928b9282d13fbd0a928caaa70b31241576dad1d0b98783dec00",
+      "last_tool_call_rollout_line": 884
+    },
+    {
+      "file": "author_global_grid_probe.py",
+      "sha256": "9b2534b0c7c846f559e829e6a8b410956ed13bc67ff5ba23a0dc61c08c8f258e",
+      "last_tool_call_rollout_line": 963
+    },
+    {
+      "file": "build_author_footprint.py",
+      "sha256": "677541b7c94211b67990074f8b92e14460d3863f4c9b12226d23b60b9fb32636",
+      "last_tool_call_rollout_line": 847
+    },
+    {
+      "file": "build_phase_beta.py",
+      "sha256": "36eef19848abfa76ddb40d5e36326459b9cf69f93436fe17cec3606401881736",
+      "last_tool_call_rollout_line": 1269
+    },
+    {
+      "file": "build_rawlinear.py",
+      "sha256": "7f50f4b1d58063eb245900c3bb741455d6b11c179c408163a052830620842f04",
+      "last_tool_call_rollout_line": 141
+    },
+    {
+      "file": "build_sidecar.py",
+      "sha256": "cd522918f1383ac19fc6dbed65efbebcf626bea8225e32a3b91d69ac41f3491b",
+      "last_tool_call_rollout_line": 658
+    },
+    {
+      "file": "build_variance.py",
+      "sha256": "cc143c8db05c3ac6eb3669cfdbbbc40c1bfc2844e7e6308b4e2736979e39645d",
+      "last_tool_call_rollout_line": 242
+    },
+    {
+      "file": "build_verified_raw.py",
+      "sha256": "1d06ddb7271d85eab72722a5e31d48a1b59170966938040bfe06b5273875d689",
+      "last_tool_call_rollout_line": 1235
+    },
+    {
+      "file": "fed-diagnosis-phase-beta.milk",
+      "sha256": "5f661f75f3c77440ae4d908938dd158b6db784e3f0d5550b88f7773e155c8da4",
+      "last_tool_call_rollout_line": 1376
+    },
+    {
+      "file": "phase_beta_heldout_probe.py",
+      "sha256": "96d1d9a4d34392df26d908012c6e7d58a04191f487fc2f1225171da8914524fa",
+      "last_tool_call_rollout_line": 1446
+    },
+    {
+      "file": "phase_beta_probe.py",
+      "sha256": "8c83727f76b28d4d58527cbcd86844de1d7ab9ffadaad1e8489f6f4e8839ae15",
+      "last_tool_call_rollout_line": 1282
+    },
+    {
+      "file": "phase_sidecar.hpp",
+      "sha256": "cf1d21a01ed2fb1557fa441c0018235f5d913d985ebbf6caa6eb3ce91a4888bd",
+      "last_tool_call_rollout_line": 590
+    },
+    {
+      "file": "raw-helper-tested.glsl",
+      "sha256": "abf88341a77289540e0b2a11f434cd29d5d60bc4ed3b78fd6420c875a939258c",
+      "last_tool_call_rollout_line": 1160
+    },
+    {
+      "file": "rawlinear_probe.py",
+      "sha256": "7c7496ac98531062e5e2a9c5879b15eec3f35fc9a2c3ddc3fca7c7fbf0eb0d68",
+      "last_tool_call_rollout_line": 141
+    },
+    {
+      "file": "routing_checks.cpp",
+      "sha256": "d4e437c016a4374a13df37a55b9f85cc809148dad1a6fa8d4c794ff068d9cf39",
+      "last_tool_call_rollout_line": 1235
+    },
+    {
+      "file": "routing_probe.cpp",
+      "sha256": "0f4e7a407bac09e0c924afafd2f04d33e36747bc9d85436b6e785c908d8ea596",
+      "last_tool_call_rollout_line": 1184
+    },
+    {
+      "file": "royal-diagnosis-phase-beta.milk",
+      "sha256": "aed2c9a9d55d63c71f9b4d8345c13186cf06a16b2b7be17f8c8ced9105833663",
+      "last_tool_call_rollout_line": 1376
+    },
+    {
+      "file": "sharp_probe.py",
+      "sha256": "19842c82d96b17354c411c905425491320edca2d70272c05f2b6792e063da8ad",
+      "last_tool_call_rollout_line": 67
+    },
+    {
+      "file": "sidecar_method.cpp",
+      "sha256": "ff47972c1677d7da52b5d0d31efb7f46ee2aa2a760a4e7848eb1d2da8bf4aac8",
+      "last_tool_call_rollout_line": 658
+    },
+    {
+      "file": "sidecar_probe.py",
+      "sha256": "d453cce46e972c577e5d12fb1b95d8bab7bc3be13ca0cb12bc8dff8cabdcecfa",
+      "last_tool_call_rollout_line": 493
+    },
+    {
+      "file": "variance_probe.py",
+      "sha256": "7af7383b072d33b70da3098719f7179473c430d692171ecdae0c91a49fd91519",
+      "last_tool_call_rollout_line": 242
+    },
+    {
+      "file": "verified_raw_sharpen_probe.py",
+      "sha256": "9388d8882b62639c2f0071e5b3d180554a5c47539856ca0bb008d580fc562cd8",
+      "last_tool_call_rollout_line": 1235
+    }
+  ],
+  "replay_extraction_failures": [],
+  "raw_evidence": "Original workers, per-job JSON, frame hashes, CSVs and PNGs were not recovered by this source replay."
+}
