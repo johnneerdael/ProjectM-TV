@@ -46,10 +46,10 @@ done
 [ "$missing" = 0 ] || exit 1
 # Everything else run.py reads, by recorded size/SHA256: the PCM signals (hashes run.py asserts), the six
 # preset files (as rendered by the comparator rows), and the comparator rows and their native captures.
-python3 - "$HERE/run.py" "$ROOT" "$BASE" "$HERE/artifact-proof.json" <<'PYCHECK' || missing=1
+python3 - "$HERE/run.py" "$ROOT" "$BASE" "$HERE/artifact-proof.json" "$HERE/analysis.json" <<'PYCHECK' || missing=1
 import ast, hashlib, json, sys
 from pathlib import Path
-run, root, base, proof = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3]), Path(sys.argv[4])
+run, root, base, proof, recorded_analysis = (Path(arg) for arg in sys.argv[1:6])
 def sha(path):
     h = hashlib.sha256()
     with open(path, 'rb') as f:
@@ -57,6 +57,16 @@ def sha(path):
             h.update(block)
     return h.hexdigest()
 problems = []
+# The shared provider code the adapters execute: run.py's runner, the builder and the worker builder it
+# hashes into every backend identity. A different revision could change protocol or validation semantics.
+definitions = json.loads(recorded_analysis.read_text())['definitions']
+instrumentation = definitions['roles']['mrt-fix']['backend_identity']['instrumentation']
+corpus = root / 'docs/superpowers/evidence/0025-feedback-diffusion/shared-core-corpus'
+for path, digest in [(corpus / 'run.py', definitions['provider_sha256']),
+                     (corpus / 'build.py', instrumentation['builder_sha256']),
+                     (root / 'tools/preset-lab/src/preset_lab/build_worker.py', instrumentation['worker_builder_sha256'])]:
+    if not path.is_file() or sha(path) != digest:
+        problems.append(f'provider missing or changed: {path}')
 names = next(ast.literal_eval(node.value) for node in ast.parse(run.read_text()).body
              if isinstance(node, ast.Assign) and getattr(node.targets[0], 'id', '') == 'NAMES')
 def same_bytes(path, size, digest):
@@ -123,7 +133,7 @@ for problem in problems[:20]:
 if problems:
     print(f'{len(problems)} input problem(s)', file=sys.stderr)
     sys.exit(1)
-print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows, reference and raw-point artifacts; recorded sizes/SHA256s match')
+print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows, reference and raw-point artifacts, shared provider; recorded sizes/SHA256s match')
 PYCHECK
 "$PY" -c 'import numpy, cv2' 2> /dev/null || { echo "missing numpy/OpenCV in $PY" >&2; missing=1; }
 git -C "$ROOT" rev-parse --verify --quiet '25e6aa83^{commit}' > /dev/null ||

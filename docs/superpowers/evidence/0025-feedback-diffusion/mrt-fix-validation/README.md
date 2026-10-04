@@ -117,6 +117,8 @@ copying, it checks:
 
 - the two scripts' hashes against `results.json`;
 - every input `run.py` reads in that `build/` tree:
+  - the shared provider code the adapters execute (`shared-core-corpus/run.py`, `build.py` and
+    `tools/preset-lab/src/preset_lab/build_worker.py`), against the hashes in `analysis.json`;
   - the owned emulator launch metadata;
   - the classic and raw-point worker metadata, and the APK, exported AAR and compile commands each
     references, against the hashes in `artifact-proof.json`;
