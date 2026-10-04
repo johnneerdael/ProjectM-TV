@@ -16,7 +16,7 @@ core API, with correct preset ownership, no reported GL error, and successful
 core/EGL cleanup. All eight downloaded capture RGB/PNG hashes match.
 
 `published-smoke-manifest.json`, `published-smoke-capture-verification.json`
-and `published-smoke-instrumentation.log` preserve this result. It uses real
+and `published-smoke-instrumentation.txt` preserve this result. It uses real
 time and is explicitly a nondeterministic smoke test, not fidelity ground truth.
 
 ## Matched instrumented pilot
@@ -58,9 +58,28 @@ durations are not FPS benchmarks: capture/readback costs are included.
 
 The live resumable database is
 `.worktrees/native-feedback-recovery/build/core-corpus/screen-v3/screen.sqlite`.
-Whole-corpus validation is incomplete. Known-problem presets are prioritised
-before the alphabetical scan. The 1330 default remains unchanged; the evidence
-does not yet justify merging the Native feature.
+Whole-corpus validation is incomplete. This independent TV protocol is retained
+as bounded pilot evidence; no full baseline scan was launched. Further corpus
+work adopts the other agent's shared actual-core protocol, whose Mac-emulator
+selected-capture controls took 1.67–2.52 seconds per job. The user reports an
+expected shared-run duration of 15–20 hours; that is not a measured completion
+time. The 1330 default remains unchanged.
+
+Acid Mandala also completed all fourteen jobs. All seven profiles repeat with
+identical eight-frame hashes, and the candidate off path matches the baseline.
+`acid-pilot-jobs.jsonl.gz` and `acid-pilot-proof.json` preserve those results.
+Its core reference luma is 0.89147/0.90828 in the 4/12-second samples and is
+visibly clipped. This differs substantially from the old desktop reference;
+near-unity corrected luma here is not proof that the desktop regression is
+fixed. At 1330, 12-second image MAE changes 0.0381→0.0340; at 4K,
+0.0454→0.0355. Candidate/reference luma is 1.0018/1.0029 respectively.
+
+Audio-description erratum: the archived laboratory manifests say the core
+retains 512 samples. The compiled code actually calls
+`projectm_pcm_get_max_samples()`; patch 0017 returns `AudioBufferSamples`,
+which is **576**. Both sides therefore used the production 576-sample tail.
+The inaccurate descriptive labels are preserved in immutable artifacts and
+corrected here; no measured input or result is rewritten.
 
 Runner usage and limitations are in `tools/core-corpus/README.md`.
 Source checks pass: 24 core-builder/runner tests and 15 summary tests.

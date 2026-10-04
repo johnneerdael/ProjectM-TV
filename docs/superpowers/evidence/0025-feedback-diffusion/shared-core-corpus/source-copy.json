@@ -1,0 +1,27 @@
+{
+  "peer_commit": "0c4f98b",
+  "copied_from": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/docs/superpowers/evidence/quad-follow-up-verification/core-corpus",
+  "files": [
+    {
+      "path": "build.py",
+      "sha256": "9dec52595390ccad79e806be69543ead19f195f13c360be8ccf87aba934f0cf5"
+    },
+    {
+      "path": "CorpusInstrumentation.java",
+      "sha256": "789a2489d1a5a3627656da8d23c981ab9be196c970e17fc640252aba0c2621e9"
+    },
+    {
+      "path": "LabBridge.java",
+      "sha256": "db17b2e9d92f7114c98d19c9f2565f637313ab2fc8c9dd7a68764f85b8989379"
+    },
+    {
+      "path": "lab_bridge.cpp",
+      "sha256": "84e82c6d52c05da45ae5ce643431ea501a0415034dfb24eb9c5ab961180d57c9"
+    },
+    {
+      "path": "PROTOCOL.md",
+      "sha256": "627b84dcf0d48061788ffe23268b07753b905bbfb2666bb20360ef79b87c60e0"
+    }
+  ],
+  "purpose": "prepare diffusion candidate with shared harness; no peer worktree or emulator modification"
+}

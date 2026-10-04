@@ -1,0 +1,3 @@
+INSTRUMENTATION_RESULT: manifest=/data/data/nl.neerdael.projectmtv.corpuspublished/files/jobs/smoke-1791091925599634000/output/manifest.json
+INSTRUMENTATION_RESULT: status=ok
+INSTRUMENTATION_CODE: -1

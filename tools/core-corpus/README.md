@@ -39,7 +39,7 @@ Seven profiles run twice for every preset:
 The complete scan is 134,484 fresh-process jobs. Each simulates 16 seconds at
 30 fps with identical unsigned-8-bit mono PCM: four seconds of warm-up and
 twelve measured seconds. Production core receives 1470 samples per frame and
-retains its normal latest-512-sample input. Logical time is `frame / 30.0`.
+retains its normal latest-576-sample input (patch 0017). Logical time is `frame / 30.0`.
 
 Eight frames are captured: 120, 150, 180, 210, 239, 300, 390 and 479.
 Each 4-second/12-second metric uses five selected frames. Image error is RGB
