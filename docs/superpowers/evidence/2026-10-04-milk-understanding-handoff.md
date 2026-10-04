@@ -2,6 +2,15 @@
 
 Snapshot: 2026-10-04. Interpreter worktree: `.worktrees/preset-genre-analyzer`, branch `feat/preset-audience-scoring`. This is a research index, not a claim of complete language coverage or visual accuracy.
 
+Latest targeted recheck: all 371 previously blocked presets were re-read with the
+current reader/interpreter. 315 retain source blockers; 56 now pass these checks.
+This recheck does not search the other 9,235 files for new regressions. Its count
+is relevant to source interpretation, unlike the unrelated stopped 144-score
+numerical experiment. Remaining blockers are often invalid/undefined source or
+binding/translation context, not absent functions. See
+`tools/milk-analyzer/fixtures/remaining-source-blockers-2026-10-04.json` and full
+witnesses in `build/milk-analyzer/remaining-gap-recheck-2026-10-04/gap-priority.json`.
+
 ## Highest-frequency recorded unresolved families
 
 The refreshed source audit finds 371 of 9,606 presets with known structural gaps,
