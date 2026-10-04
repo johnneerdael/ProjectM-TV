@@ -622,6 +622,52 @@ def pilot(args, protocol, corpus):
     print(canonical(report), flush=True)
 
 
+def select_roles(requested, available):
+    roles=list(requested) if requested else list(available)
+    if len(set(roles))!=len(roles) or any(role not in available for role in roles):
+        raise ValueError("invalid or repeated execution role")
+    return roles
+
+
+def render_input_signature(protocol,role,record,driver):
+    identity=protocol["roles"][role]
+    return digest({"backend":protocol["backend"],"apk_sha256":identity["apk_sha256"],
+                   "core_sha256":identity["core_sha256"],"observer":identity["backend_identity"],
+                   "device_serial":protocol["device_serial"],"device":protocol["device"],"driver":driver,
+                   "textures_sha256":protocol["textures_sha256"],"pcm480_sha256":protocol["pcm"]["480"]["sha256"],
+                   "config":protocol["config"],"preset":record,"capture_mode":"selected"})
+
+
+def notify_baseline(args):
+    """Notify locally only after complete baseline and exact remote coverage proof."""
+    if not args.checkpoint_state:
+        raise ValueError("baseline notification requires checkpoint state path")
+    marker=args.work/"baseline-completion-notified.json"
+    while not STOP.is_set():
+        index_path=args.work/"baseline-completion-index.json"
+        if index_path.exists() and args.checkpoint_state.exists() and not marker.exists():
+            index=json.loads(index_path.read_text());state=json.loads(args.checkpoint_state.read_text())
+            if index.get("complete_coverage") and index.get("terminal_presets")==9606 and state.get("protocol_sha256")==index["protocol_sha256"]:
+                from checkpoint import BACKUP,STORE,BRANCH
+                expected={Path(path).parent.name for item in index["rows"] for path in item["runs"]}
+                covered=set()
+                for archive_path in (BACKUP/STORE/index["protocol_sha256"]).glob("*.zip"):
+                    with zipfile.ZipFile(archive_path) as archive:
+                        manifest=json.loads(archive.read("checkpoint-manifest.json"))
+                        covered.update(j["key"] for j in manifest["jobs"] if j["role"]=="baseline" and j["capture_mode"]=="selected" and j["measurement_frames"]==360)
+                head=state.get("remote_verified_head")
+                local=subprocess.run(["git","-C",str(BACKUP),"rev-parse","HEAD"],capture_output=True,text=True,check=True).stdout.strip()
+                remote=subprocess.run(["git","-C",str(BACKUP),"ls-remote","--heads","origin","refs/heads/"+BRANCH],capture_output=True,text=True,check=True).stdout.split()
+                if len(expected)==19212 and expected.issubset(covered) and head==local and remote and remote[0]==head:
+                    command='display notification "First baseline complete: 9,606 presets; verified remote backup ready." with title "ProjectM TV" sound name "Glass"'
+                    subprocess.run(["osascript","-e",command],check=True)
+                    atomic(marker,{"protocol_sha256":index["protocol_sha256"],"index_sha256":file_hash(index_path),"remote_verified_head":head,
+                                   "verified_baseline_jobs":19212,"notified_unix_seconds":time.time()})
+                    print("BASELINE COMPLETE AND REMOTELY VERIFIED: 9606 presets / 19212 jobs",flush=True)
+                    return
+        STOP.wait(30)
+
+
 def scan(args, protocol, corpus):
     path = args.work / "pilot-report.json"
     report = json.loads(path.read_text())
@@ -630,15 +676,19 @@ def scan(args, protocol, corpus):
             or len(report.get("checks", [])) != 8 or not all(c["full_vs_selected_exact"] for c in report["checks"])):
         raise ValueError("scan requires reviewed successful matching eight-check pilot SHA256")
     rows = []
+    execution_roles=select_roles(args.roles,protocol["roles"])
     start = time.monotonic()
     def progress(state):
         value = {"state": state, "pid": os.getpid(), "protocol_sha256": protocol["sha256"],
-                 "requested_role_presets": corpus["count"] * 2, "terminal_role_presets": len(rows),
-                 "complete_coverage": len(rows) == corpus["count"] * 2,
+                 "execution_roles":execution_roles,"full_goal_role_presets":corpus["count"]*2,
+                 "requested_role_presets": corpus["count"] * len(execution_roles), "terminal_role_presets": len(rows),
+                 "complete_coverage": len(rows) == corpus["count"] * len(execution_roles),
+                 "full_goal_complete":len(rows)==corpus["count"]*2,
                  "statuses": dict(Counter(row["status"] for row in rows)), "elapsed_seconds": time.monotonic()-start}
         atomic(args.work / "progress.json", value)
     progress("running")
-    for role, identity in protocol["roles"].items():
+    for role in execution_roles:
+        identity=protocol["roles"][role]
         install_role(protocol["device_serial"], identity, args.work)
         for record in corpus["presets"]:
             if STOP.is_set():
@@ -652,21 +702,33 @@ def scan(args, protocol, corpus):
             key = digest({"protocol_sha256": protocol["sha256"], "preset": record, "role": role})
             value = {"key": key, "protocol_sha256": protocol["sha256"], "preset": record, "role": role,
                      "status": status, "runs": [str((args.work / "jobs" / row["key"] / "row.json").relative_to(args.work)) for row in pair],
-                     "repeat_exact_selected": status == "success", "hash_coverage": capture_indices(360)}
+                     "repeat_exact_selected": status == "success", "hash_coverage": capture_indices(360),
+                     "driver":{k:pair[0].get("result",{}).get(k) for k in ("gl_vendor","gl_renderer","gl_version","egl_version","android_fingerprint","abi")}}
+            value["render_input_sha256"]=render_input_signature(protocol,role,record,value["driver"])
             save_row(args.work / "rows" / f"{key}.json", value)
             rows.append(value); progress("running")
+            role_rows=[row for row in rows if row["role"]==role]
+            atomic(args.work/(role+"-progress.json"),{"protocol_sha256":protocol["sha256"],"role":role,"requested_presets":corpus["count"],
+                   "terminal_presets":len(role_rows),"complete_coverage":len(role_rows)==corpus["count"],
+                   "statuses":dict(Counter(row["status"] for row in role_rows))})
+        atomic(args.work/(role+"-completion-index.json"),{"protocol_sha256":protocol["sha256"],"role":role,
+               "inventory_sha256":file_hash(args.work/"inventory.json"),"terminal_presets":len(role_rows),"complete_coverage":len(role_rows)==corpus["count"],
+               "statuses":dict(Counter(row["status"] for row in role_rows)),"rows":role_rows,
+               "limitations":protocol["limitations"],"reuse":"Compare exact baseline render_input_sha256; preserve original protocol, paths and hashes. A single bass stimulus does not establish chill/party/normal semantic labels."})
     progress("complete")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=("prepare", "pilot", "scan"))
+    parser.add_argument("phase", choices=("prepare", "pilot", "scan", "notify-baseline"))
     parser.add_argument("--work", type=Path, default=WORK)
     parser.add_argument("--serial", default="192.168.51.53:5555")
     parser.add_argument("--baseline-apk", type=Path)
     parser.add_argument("--candidate-apk", type=Path)
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--reviewed-pilot-sha256")
+    parser.add_argument("--roles",nargs="+",choices=("baseline","candidate"))
+    parser.add_argument("--checkpoint-state",type=Path)
     args = parser.parse_args()
     validate_device(args.serial)
     args.work.mkdir(parents=True, exist_ok=True)
@@ -676,6 +738,8 @@ def main():
         prepare(args); return
     for signum in (signal.SIGINT, signal.SIGTERM):
         signal.signal(signum, lambda *_: STOP.set())
+    if args.phase=="notify-baseline":
+        notify_baseline(args);return
     with (args.work / "host.lock").open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         protocol, corpus = load_inputs(args.work)

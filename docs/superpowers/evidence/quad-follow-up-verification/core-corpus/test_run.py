@@ -191,6 +191,24 @@ class HostTests(unittest.TestCase):
         launch["serial"]="emulator-5554"
         with self.assertRaises(ValueError):run.validate_emulator_claim(launch,command,"1",self.work)
 
+    def test_role_selection_preserves_full_goal_and_baseline_first_phase(self):
+        self.assertEqual(run.select_roles(["baseline"],{"baseline":{},"candidate":{}}),["baseline"])
+        self.assertEqual(run.select_roles(None,{"baseline":{},"candidate":{}}),["baseline","candidate"])
+        with self.assertRaises(ValueError):run.select_roles(["baseline","baseline"],{"baseline":{}})
+
+    def test_baseline_reuse_signature_excludes_global_protocol_and_candidate(self):
+        identity={"apk_sha256":"apk","core_sha256":"core","backend_identity":{"instrumentation_sha256":"observer","harness_sources_sha256":{},"source_commit":"base"}}
+        protocol={"sha256":"first","roles":{"baseline":identity,"candidate":{"apk_sha256":"old"}},
+                  "backend":"actual-core","device_serial":"emulator-5580","device":{"fingerprint":"device"},
+                  "textures_sha256":"textures","pcm":{"480":{"sha256":"audio"}},"config":{"width":2364}}
+        driver={"gl_renderer":"same"};record={"path":"x.milk","sha256":"source"}
+        one=run.render_input_signature(protocol,"baseline",record,driver)
+        import copy
+        changed=copy.deepcopy(protocol);changed["sha256"]="new";changed["roles"]["candidate"]["apk_sha256"]="new"
+        self.assertEqual(one,run.render_input_signature(changed,"baseline",record,driver))
+        changed["pcm"]["480"]["sha256"]="changed audio"
+        self.assertNotEqual(one,run.render_input_signature(changed,"baseline",record,driver))
+
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
     def test_allowed_ip_serials_are_accepted(self):
