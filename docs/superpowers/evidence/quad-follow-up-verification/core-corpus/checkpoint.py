@@ -5,6 +5,7 @@ original paths, so repeated PNGs have one payload. Push acknowledgement is exact
 remote HEAD; locally committed data is never labelled remote before that check.
 """
 import argparse
+from contextlib import contextmanager
 import copy
 import fcntl
 import gzip
@@ -180,6 +181,22 @@ def git(backup,*args):
     return result.stdout.strip()
 
 
+@contextmanager
+def backup_writer_lock(backup):
+    backup=Path(backup).resolve()
+    lock_path=Path(git(backup,"rev-parse","--git-path","core-corpus-writer.lock"))
+    if not lock_path.is_absolute():lock_path=backup/lock_path
+    with lock_path.open("a+") as lock:
+        try:
+            fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise RuntimeError("another core backup writer owns this checkout; retry required") from error
+        try:
+            yield
+        finally:
+            fcntl.flock(lock,fcntl.LOCK_UN)
+
+
 def push(backup):
     head=git(backup,"rev-parse","HEAD")
     git(backup,"push","origin",f"HEAD:refs/heads/{BRANCH}")
@@ -321,6 +338,13 @@ def snapshot_files(work,protocol):
 
 
 def checkpoint_cycle(args,memo):
+    args.work=Path(args.work).resolve()
+    args.backup=Path(args.backup).resolve()
+    with backup_writer_lock(args.backup):
+        return _checkpoint_cycle(args,memo)
+
+
+def _checkpoint_cycle(args,memo):
     backup,work,state_path=args.backup,args.work,args.state_dir/"status.json"
     if git(backup,"branch","--show-current")!=BRANCH:raise ValueError("unexpected backup worktree branch")
     if git(backup,"status","--porcelain"):raise ValueError("dirty backup requires manual archive verification/commit; no automatic data discard")

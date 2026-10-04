@@ -19,6 +19,36 @@ class BackupTests(unittest.TestCase):
                   "error":"APK crashed before engine", "retained_files":[]}
         run.save_row(self.directory/"row.json",self.row)
     def tearDown(self):self.temp.cleanup()
+    def test_shared_checkout_rejects_second_dataset_writer(self):
+        import subprocess
+        repository=self.work/"shared-backup"
+        subprocess.run(["git","init","-b",checkpoint.BRANCH,str(repository)],check=True,capture_output=True)
+        with checkpoint.backup_writer_lock(repository):
+            with self.assertRaisesRegex(RuntimeError,"another.*writer"):
+                with checkpoint.backup_writer_lock(repository):
+                    self.fail("second writer entered the shared checkout")
+
+    def test_writer_lock_releases_and_different_checkouts_can_overlap(self):
+        import subprocess
+        first=self.work/"first-backup";second=self.work/"second-backup"
+        for repository in (first,second):
+            subprocess.run(["git","init","-b",checkpoint.BRANCH,str(repository)],check=True,capture_output=True)
+        with checkpoint.backup_writer_lock(first):
+            with checkpoint.backup_writer_lock(second):
+                pass
+        with checkpoint.backup_writer_lock(first):
+            pass
+    def test_checkpoint_normalizes_relative_dataset_before_snapshotting(self):
+        import subprocess
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        repository=self.work/"relative-backup"
+        subprocess.run(["git","init","-b",checkpoint.BRANCH,str(repository)],check=True,capture_output=True)
+        args=SimpleNamespace(backup=repository,work=Path("relative-dataset"))
+        expected=args.work.resolve()
+        with patch.object(checkpoint,"_checkpoint_cycle",return_value={}) as cycle:
+            checkpoint.checkpoint_cycle(args,{})
+        self.assertEqual(cycle.call_args.args[0].work,expected)
     def test_explicit_failed_terminal_job_remains_checkpointable(self):
         result=checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
         self.assertEqual(result["key"],self.key);self.assertEqual(result["status"],"failed")
