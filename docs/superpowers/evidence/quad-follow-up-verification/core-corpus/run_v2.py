@@ -601,7 +601,9 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
         (directory / "timeout-command.log").write_bytes(captured)
         adb(protocol["device_serial"], "shell", "am", "force-stop", PACKAGE, allow_failure=True)
         try:
-            pull_external(protocol["device_serial"], job["output_directory"], incoming)
+            # Promoted output already retains this attempt's verified producer.
+            if not (directory / "output").is_dir():
+                pull_external(protocol["device_serial"], job["output_directory"], incoming)
         except Exception as recovery_error:
             row["remote_partial_recovery_error"] = f"{type(recovery_error).__name__}: {recovery_error}"
     except Exception as error:

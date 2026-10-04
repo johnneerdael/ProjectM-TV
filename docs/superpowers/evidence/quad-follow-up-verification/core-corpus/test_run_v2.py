@@ -1,8 +1,12 @@
 import json
 from pathlib import Path
 import shutil
+import subprocess
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
+import checkpoint
 import test_run
 import run_v2 as run
 
@@ -77,6 +81,52 @@ class AttemptOutputTests(unittest.TestCase):
         self.assertEqual(len(archived),1)
         self.assertEqual(archived[0].read_bytes(),b"old failed row")
         self.assertEqual((archived[0].parent/"instrumentation.log").read_bytes(),b"old invocation result")
+
+    def test_post_promotion_timeout_keeps_one_checkpointable_producer(self):
+        record = {"path": "exact.milk", "sha256": "source", "bytes": 1}
+        protocol = {"sha256": "protocol", "device_serial": "192.168.51.53:5555",
+                    "config": {"width": 2, "height": 1, "fps": 30, "seed": 12345},
+                    "roles": {"baseline": {"core_sha256": "core"}},
+                    "pcm": {"122": {"path": str(self.work / "pcm.u8")}}}
+        key = run.job_key("protocol", record, "baseline", "selected", 1, 2)
+        job = dict(self.job, job_id=key)
+        result = dict(self.fixture.result, job_id=key)
+        args = SimpleNamespace(work=self.work, timeout=600)
+        stops = 0
+
+        def adb(serial, *arguments, **kwargs):
+            nonlocal stops
+            if arguments[:3] == ("shell", "am", "force-stop"):
+                stops += 1
+                if stops == 2:
+                    raise subprocess.TimeoutExpired("post-promotion force-stop", 120)
+            return subprocess.CompletedProcess(arguments, 0, b"", b"")
+
+        def pull(serial, remote, destination):
+            destination.mkdir(parents=True, exist_ok=True)
+            for name in ("frames.jsonl", "frame-0000.rgb", "frame-0001.rgb"):
+                shutil.copy2(self.work / name, destination / name)
+            (destination / "result.json").write_text(json.dumps(result))
+
+        original_hash = run.file_hash
+
+        def file_hash(path):
+            if Path(path) == run.ROOT / "core/src/main/assets/presets/exact.milk":
+                return "source"
+            return original_hash(path)
+
+        with (patch.object(run, "make_job", return_value=job),
+              patch.object(run, "require_awake"), patch.object(run, "push_private"),
+              patch.object(run, "adb", side_effect=adb),
+              patch.object(run, "pull_external", side_effect=pull) as transfer,
+              patch.object(run, "file_hash", side_effect=file_hash)):
+            row = run.run_one(args, protocol, record, "baseline", "selected", 1, 2, native=True)
+
+        self.assertEqual(row["status"], "timeout")
+        verified = checkpoint.verify_job(self.work, protocol, {"presets": [record]}, key)
+        self.assertEqual(verified["status"], "timeout")
+        self.assertEqual(transfer.call_count, 1)
+        self.assertEqual(len(list((self.work / "jobs" / key).rglob("result.json"))), 1)
 
 
 if __name__ == "__main__":
