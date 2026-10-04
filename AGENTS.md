@@ -112,7 +112,7 @@ Run commands from the isolated repository root. Android builds require JDK 21 (C
 | Preset Lab | `python -m pytest tools/preset-lab/tests`; CI splits `-m 'not native'` and `-m native` under Xvfb |
 | User guide | `mkdocs build --strict` with `docs/site-requirements.txt` installed |
 
-The corpus host suite passed 118 tests after the capture-provenance fix. Build commands in the table are declared by source/CI, not a claim of fresh APK/device validation for every docs-only change. Existing virtual environments are task-local prerequisites, not committed dependencies. For Android category/audio journeys, use the separate `.presettest` package and instrumentation command in `docs/user-guide/development.md`; live audio requires an authorized device/music source. Core-corpus pilots and scans have their own protocol/package, not that category instrumentation runner.
+The corpus host suite passed 120 tests after the capture-provenance fix. Build commands in the table are declared by source/CI, not a claim of fresh APK/device validation for every docs-only change. Existing virtual environments are task-local prerequisites, not committed dependencies. For Android category/audio journeys, use the separate `.presettest` package and instrumentation command in `docs/user-guide/development.md`; live audio requires an authorized device/music source. Core-corpus pilots and scans have their own protocol/package, not that category instrumentation runner.
 
 ## Generated artifacts and release preparation
 

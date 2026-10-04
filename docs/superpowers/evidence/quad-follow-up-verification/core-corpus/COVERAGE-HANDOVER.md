@@ -62,8 +62,8 @@ does not authorize a different capture schedule. Short pilot jobs retain the
 deterministic schedule for their independently keyed measurement window.
 
 The capture-provenance fix has six RED/GREEN mutation cases and a short-pilot
-control; the full host-tool suite passes 118 tests. A partial baseline snapshot
-checked 8,816 terminal records (8,815 producer results and one explicit
+control; the full host-tool suite passes 120 tests. A partial baseline snapshot
+checked 9,130 terminal records (9,129 producer results and one explicit
 host-only failure) with zero identity/schedule mismatches. This check does not replace the final complete coverage/frame audit.
 
 The current snapshot includes `capture-provenance-validation.inputs.json.gz`: a
@@ -72,3 +72,10 @@ digest and the snapshot generator hash. Check these hashes before reproducing
 the producer validation with `capture_provenance_snapshot.py`. Later jobs or
 row annotations are separate snapshots. The list does not claim byte equality
 with an older remote checkpoint's storage annotations.
+
+Before declaring the snapshot clean, the collector checks the immutable inventory
+and runs `checkpoint.verify_job` for every frozen row. This validates row digests,
+job directory/key/source identity, retained files and successful frame-observer
+evidence. Corrupt row digests, wrong host-only keys/presets and altered inventories
+have four RED/GREEN cases; six snapshot tests and 120 total host-tool tests pass.
+The current snapshot has 9,130 terminal records and remains partial coverage.
