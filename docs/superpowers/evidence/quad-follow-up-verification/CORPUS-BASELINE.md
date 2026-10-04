@@ -38,3 +38,9 @@ build/preset-lab-venv/bin/python docs/superpowers/evidence/quad-follow-up-verifi
 ```
 
 The runner reuses checksum-valid records only when their preset bytes and immutable protocol match. It refuses an altered protocol or inventory. Preserve failed records for investigation; do not treat them as missing coverage or silently delete them. The audit index must be refreshed after the scan finishes before making corpus-wide claims.
+
+## Remote data checkpoint
+
+`corpus-checkpoints/checkpoint-00413-presets.zip` preserves the first audited snapshot: 413 completed presets (411 successful, two failed), including repeat records, native frame hashes, sampled images, manifests and logs. It also includes the complete source-family classification and its scripts. This checkpoint is partial; later live results are separate until another checkpoint is pushed.
+
+The adjacent JSON gives the archive checksum and coverage. The archive's `checkpoint-manifest.json` gives every member's SHA256. Extract into the follow-up worktree root to restore the original `build/follow-ups/` paths, then run the audit before resuming. Do not overwrite a newer live scan with an older checkpoint.

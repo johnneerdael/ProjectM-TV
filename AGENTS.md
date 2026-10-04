@@ -1,5 +1,10 @@
 # ProjectM TV contributor instructions
 
+## Protect work in progress
+
+- Commit and push to the feature branch after every code change. Preserve work in progress without treating a checkpoint as approval to merge or release.
+- Back up measurement data separately when it lives in ignored build directories. Include input and worker identities, checksums and coverage; mark partial runs explicitly.
+
 ## Pull requests and release notes
 
 Each successfully tested merge to `main` publishes a versioned APK and core AAR, then updates Milkbeat. Use a feature branch and PR for changes.
