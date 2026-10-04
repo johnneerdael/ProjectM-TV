@@ -304,7 +304,7 @@ class ShaderFields:
             if node.get('kind')=='call':
                 for function in self.helper_candidates(node):
                     if id(function) not in seen:
-                        r,w=self.global_access(function['body'],seen|{id(function)})
+                        r,w=self.global_access(self.reachable_helper_body(function['body']),seen|{id(function)})
                         reads.update(r);writes.update(w)
         else:return reads,writes
         for child in children:
@@ -329,11 +329,11 @@ class ShaderFields:
     def helper(self,node:dict,args:tuple,dtype:str)->Field:
         name=node['function'];candidates=self.helper_candidates(node)
         if len(candidates)!=1:return self.unsupported('ambiguous shader helper: '+name,args,dtype)
-        function=candidates[0];parameters=function['args'];body=function['body']
+        function=candidates[0];parameters=function['args'];body=self.reachable_helper_body(function['body'])
         if any(p['modifier'] in {2,3} for p in parameters):
             return self.unsupported('shader helper output arguments not lowered: '+name,args,dtype)
         if name in self.call_stack:return self.unsupported('recursive shader helper: '+name,args,dtype)
-        if not body or body[-1]['kind']!='return' or any(s['kind']=='return' for s in body[:-1]):
+        if not body or body[-1]['kind']!='return':
             return self.unsupported('nonterminal shader helper return not lowered: '+name,args,dtype)
         if len(args)>len(parameters):return self.unsupported('shader helper argument count mismatch',args,dtype)
         caller=self.environment
@@ -357,6 +357,16 @@ class ShaderFields:
                 if global_name not in caller_locals:self.environment[global_name]=value
             self.call_stack.pop();self.effects=caller_effects
             self.effects.extend(completed_effects)
+
+    @staticmethod
+    def reachable_helper_body(body):
+        """A top-level return ends execution, including effect dependency scans.
+
+        Returns inside branches/loops still need path-aware lowering; retaining
+        them here ensures those unresolved effects cannot disappear.
+        """
+        end=next((i+1 for i,s in enumerate(body) if s['kind']=='return'),len(body))
+        return body[:end]
 
     @staticmethod
     def has_assignment(node)->bool:

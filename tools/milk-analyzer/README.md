@@ -620,7 +620,7 @@ from an established syntax rejection and leaves the pinned engine untouched.
 
 Unsupported bitwise unary expressions, conditional/logical assignment effects,
 unsequenced arithmetic/comparison updates, helper output arguments,
-loop-condition side effects, `break`/`continue`, nonterminal helper returns,
+loop-condition side effects, `break`/`continue`, branch/loop-dependent helper returns,
 unresolved array sizes/initializer layouts, index-expression side effects,
 non-writable matrix row assignments and same-name initializer
 binding differences,
@@ -649,6 +649,15 @@ This closes 67 of 83 historical shader parse witnesses; 63 lower completely.
 Sampler-state initializers remain governed by their separate compatibility gate.
 See `fixtures/sampler-alias-source-proof-2026-10-04.json`; these source checks
 do not establish whole-preset appearance accuracy.
+
+Helpers stop at their first top-level unconditional return. Unreachable trailing
+arithmetic, reads and shared writes are excluded from evaluation and transitive
+effect analysis. State changes before the return remain visible to callers.
+Branch/loop-dependent returns still require path-aware lowering and stay
+unresolved. Two frozen native controls match all 30 frames each; the four
+historical duplicate-return presets still have other unresolved domains/effects.
+See `fixtures/helper-return-native-proof-2026-10-04.json` and
+`fixtures/helper-return-source-proof-2026-10-04.json`.
 
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe

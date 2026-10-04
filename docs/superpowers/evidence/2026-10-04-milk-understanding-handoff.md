@@ -13,7 +13,7 @@ Counts below are historical counts from the source audit of 9,606 presets. Famil
 | Native GLSL array initializer layout | 56 | Trace HLSL array types/constructors through projectM's translator, and establish compilation versus fallback. |
 | Same-name initializer binding | 49 | Establish exactly which local/global value an initializer reads in the emitted GLSL and native backend. |
 | Source outside numbered loader | 20 | Establish actual projectM loading behaviour for unnumbered/unsupported sections before interpreting author intent. |
-| Nonterminal helper returns (`hardcore_stars`) | 4 | Model path-dependent early returns and their side effects without executing later statements. |
+| Nonterminal helper returns (`hardcore_stars`) | 4 historically | First top-level unconditional returns now stop execution and effect scans. These four presets still have other initialization/effect-order gaps. Branch/loop-dependent returns remain unimplemented; their frequency needs a new census. |
 
 The original sampler-state/dynamic-sampler families each affected 51 presets. They are now substantially diagnosed as native preprocessing/binding compatibility issues; they are not 102 independent missing calculations. Remaining work is integration and broader regression coverage, not assuming authored sampler states control filtering.
 
@@ -22,7 +22,7 @@ The original sampler-state/dynamic-sampler families each affected 51 presets. Th
 These are explicit interpreter limitations; corpus prevalence has not yet been measured for every topic.
 
 - General user-helper `out`/`inout` arguments: copy-in/copy-out, aliases, swizzles, arrays and call order. The intrinsic `modf` output is already implemented separately.
-- Control flow: `break`, `continue`, early helper returns, loop-condition side effects and conditional/logical assignment effects.
+- Control flow: `break`, `continue`, branch/loop-dependent helper returns, loop-condition side effects and conditional/logical assignment effects.
 - Expression effects: side effects inside index expressions and unsafe/unsequenced arithmetic or comparison updates.
 - Matrix semantics: whole-row writes, overfilled constructors and rectangular bare products where the native translator lacks a helper.
 - Unsupported bitwise unary expressions: establish accepted types and actual translation before adding numerical semantics.
