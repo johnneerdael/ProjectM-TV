@@ -1,0 +1,1682 @@
+{
+  "basis": "Conditional source replay of observed published-core random lifecycle",
+  "rows": [
+    {
+      "fixture": "random-frame",
+      "seed": 12345,
+      "events": [
+        {
+          "kind": "reseed",
+          "id": "stream-0",
+          "seed": 1791113863
+        },
+        {
+          "kind": "construct",
+          "id": "6913-warp"
+        },
+        {
+          "kind": "construct",
+          "id": "6913-comp"
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.0
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.0
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.03333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.03333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.06666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.06666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.1
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.1
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.13333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.13333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.16666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.16666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.2
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.2
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.23333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.23333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.26666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.26666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.3
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.3
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.3333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.3333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.36666666666666664
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.36666666666666664
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.4
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.4
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.43333333333333335
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.43333333333333335
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.4666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.4666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.5
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.5
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.5333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.5333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.5666666666666667
+        },
+        {
+          "kind": "reseed",
+          "id": "stream-38",
+          "seed": 1791113863
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.5666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.6
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.6
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.6333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.6333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.6666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.6666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.7
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.7
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.7333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.7333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.7666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.7666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.8
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.8
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.8333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.8333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.8666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.8666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.9
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.9
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.9333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.9333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6913-warp",
+          "time": 0.9666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6913-comp",
+          "time": 0.9666666666666667
+        },
+        {
+          "kind": "construct",
+          "id": "6926-warp"
+        },
+        {
+          "kind": "construct",
+          "id": "6926-comp"
+        }
+      ],
+      "event_positions": [
+        {
+          "event_index": 1,
+          "record_start": 2,
+          "record_count": 184
+        },
+        {
+          "event_index": 2,
+          "record_start": 186,
+          "record_count": 184
+        },
+        {
+          "event_index": 3,
+          "record_start": 370,
+          "record_count": 28
+        },
+        {
+          "event_index": 4,
+          "record_start": 398,
+          "record_count": 28
+        },
+        {
+          "event_index": 5,
+          "record_start": 426,
+          "record_count": 28
+        },
+        {
+          "event_index": 6,
+          "record_start": 454,
+          "record_count": 28
+        },
+        {
+          "event_index": 7,
+          "record_start": 482,
+          "record_count": 28
+        },
+        {
+          "event_index": 8,
+          "record_start": 510,
+          "record_count": 28
+        },
+        {
+          "event_index": 9,
+          "record_start": 538,
+          "record_count": 28
+        },
+        {
+          "event_index": 10,
+          "record_start": 566,
+          "record_count": 28
+        },
+        {
+          "event_index": 11,
+          "record_start": 594,
+          "record_count": 28
+        },
+        {
+          "event_index": 12,
+          "record_start": 622,
+          "record_count": 28
+        },
+        {
+          "event_index": 13,
+          "record_start": 650,
+          "record_count": 28
+        },
+        {
+          "event_index": 14,
+          "record_start": 678,
+          "record_count": 28
+        },
+        {
+          "event_index": 15,
+          "record_start": 706,
+          "record_count": 28
+        },
+        {
+          "event_index": 16,
+          "record_start": 734,
+          "record_count": 28
+        },
+        {
+          "event_index": 17,
+          "record_start": 762,
+          "record_count": 28
+        },
+        {
+          "event_index": 18,
+          "record_start": 790,
+          "record_count": 28
+        },
+        {
+          "event_index": 19,
+          "record_start": 818,
+          "record_count": 28
+        },
+        {
+          "event_index": 20,
+          "record_start": 846,
+          "record_count": 28
+        },
+        {
+          "event_index": 21,
+          "record_start": 874,
+          "record_count": 28
+        },
+        {
+          "event_index": 22,
+          "record_start": 902,
+          "record_count": 28
+        },
+        {
+          "event_index": 23,
+          "record_start": 930,
+          "record_count": 28
+        },
+        {
+          "event_index": 24,
+          "record_start": 958,
+          "record_count": 28
+        },
+        {
+          "event_index": 25,
+          "record_start": 986,
+          "record_count": 28
+        },
+        {
+          "event_index": 26,
+          "record_start": 1014,
+          "record_count": 28
+        },
+        {
+          "event_index": 27,
+          "record_start": 1042,
+          "record_count": 28
+        },
+        {
+          "event_index": 28,
+          "record_start": 1070,
+          "record_count": 28
+        },
+        {
+          "event_index": 29,
+          "record_start": 1098,
+          "record_count": 28
+        },
+        {
+          "event_index": 30,
+          "record_start": 1126,
+          "record_count": 28
+        },
+        {
+          "event_index": 31,
+          "record_start": 1154,
+          "record_count": 28
+        },
+        {
+          "event_index": 32,
+          "record_start": 1182,
+          "record_count": 28
+        },
+        {
+          "event_index": 33,
+          "record_start": 1210,
+          "record_count": 28
+        },
+        {
+          "event_index": 34,
+          "record_start": 1238,
+          "record_count": 28
+        },
+        {
+          "event_index": 35,
+          "record_start": 1266,
+          "record_count": 28
+        },
+        {
+          "event_index": 36,
+          "record_start": 1294,
+          "record_count": 28
+        },
+        {
+          "event_index": 37,
+          "record_start": 1322,
+          "record_count": 28
+        },
+        {
+          "event_index": 39,
+          "record_start": 1351,
+          "record_count": 28
+        },
+        {
+          "event_index": 40,
+          "record_start": 1379,
+          "record_count": 28
+        },
+        {
+          "event_index": 41,
+          "record_start": 1407,
+          "record_count": 28
+        },
+        {
+          "event_index": 42,
+          "record_start": 1435,
+          "record_count": 28
+        },
+        {
+          "event_index": 43,
+          "record_start": 1463,
+          "record_count": 28
+        },
+        {
+          "event_index": 44,
+          "record_start": 1491,
+          "record_count": 28
+        },
+        {
+          "event_index": 45,
+          "record_start": 1519,
+          "record_count": 28
+        },
+        {
+          "event_index": 46,
+          "record_start": 1547,
+          "record_count": 28
+        },
+        {
+          "event_index": 47,
+          "record_start": 1575,
+          "record_count": 28
+        },
+        {
+          "event_index": 48,
+          "record_start": 1603,
+          "record_count": 28
+        },
+        {
+          "event_index": 49,
+          "record_start": 1631,
+          "record_count": 28
+        },
+        {
+          "event_index": 50,
+          "record_start": 1659,
+          "record_count": 28
+        },
+        {
+          "event_index": 51,
+          "record_start": 1687,
+          "record_count": 28
+        },
+        {
+          "event_index": 52,
+          "record_start": 1715,
+          "record_count": 28
+        },
+        {
+          "event_index": 53,
+          "record_start": 1743,
+          "record_count": 28
+        },
+        {
+          "event_index": 54,
+          "record_start": 1771,
+          "record_count": 28
+        },
+        {
+          "event_index": 55,
+          "record_start": 1799,
+          "record_count": 28
+        },
+        {
+          "event_index": 56,
+          "record_start": 1827,
+          "record_count": 28
+        },
+        {
+          "event_index": 57,
+          "record_start": 1855,
+          "record_count": 28
+        },
+        {
+          "event_index": 58,
+          "record_start": 1883,
+          "record_count": 28
+        },
+        {
+          "event_index": 59,
+          "record_start": 1911,
+          "record_count": 28
+        },
+        {
+          "event_index": 60,
+          "record_start": 1939,
+          "record_count": 28
+        },
+        {
+          "event_index": 61,
+          "record_start": 1967,
+          "record_count": 28
+        },
+        {
+          "event_index": 62,
+          "record_start": 1995,
+          "record_count": 28
+        },
+        {
+          "event_index": 63,
+          "record_start": 2023,
+          "record_count": 28
+        },
+        {
+          "event_index": 64,
+          "record_start": 2051,
+          "record_count": 184
+        },
+        {
+          "event_index": 65,
+          "record_start": 2235,
+          "record_count": 184
+        }
+      ],
+      "trace_records": 2419,
+      "draws_consumed": 2416,
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "expected_rgb8": [
+        [
+          254.0,
+          245.0,
+          99.0
+        ],
+        [
+          214.0,
+          160.0,
+          180.0
+        ],
+        [
+          141.0,
+          15.0,
+          179.0
+        ],
+        [
+          133.0,
+          92.0,
+          193.0
+        ],
+        [
+          174.0,
+          239.0,
+          126.0
+        ],
+        [
+          6.0,
+          2.0,
+          18.0
+        ],
+        [
+          82.0,
+          251.0,
+          186.0
+        ],
+        [
+          25.0,
+          211.0,
+          103.0
+        ],
+        [
+          0.0,
+          187.0,
+          247.0
+        ],
+        [
+          34.0,
+          146.0,
+          151.0
+        ],
+        [
+          135.0,
+          182.0,
+          158.0
+        ],
+        [
+          56.0,
+          51.0,
+          164.0
+        ],
+        [
+          129.0,
+          176.0,
+          73.0
+        ],
+        [
+          187.0,
+          80.0,
+          118.0
+        ],
+        [
+          29.0,
+          179.0,
+          11.0
+        ],
+        [
+          168.0,
+          222.0,
+          109.0
+        ],
+        [
+          200.0,
+          220.0,
+          185.0
+        ],
+        [
+          155.0,
+          202.0,
+          143.0
+        ],
+        [
+          96.0,
+          206.0,
+          77.0
+        ],
+        [
+          63.0,
+          178.0,
+          184.0
+        ],
+        [
+          123.0,
+          149.0,
+          139.0
+        ],
+        [
+          80.0,
+          229.0,
+          208.0
+        ],
+        [
+          45.0,
+          209.0,
+          212.0
+        ],
+        [
+          86.0,
+          245.0,
+          2.0
+        ],
+        [
+          158.0,
+          18.0,
+          213.0
+        ],
+        [
+          245.0,
+          236.0,
+          250.0
+        ],
+        [
+          202.0,
+          59.0,
+          206.0
+        ],
+        [
+          132.0,
+          60.0,
+          131.0
+        ],
+        [
+          144.0,
+          34.0,
+          87.0
+        ],
+        [
+          246.0,
+          106.0,
+          229.0
+        ]
+      ],
+      "trace_sha256": "29df29d7eeb9c12d179e03cc61cee908079892fb69dbc0f14efb6e3d576b10b5",
+      "capture_sha256": "b751a9a6711aa099d8f240f2c08264a896790c213a23b8a46f7302b66fc6ea54",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "random-frame.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "input_basis": "Observed CPU rand/srand call trace mapped to pinned source event patterns; no rendered values supplied to replay",
+      "independent_unobserved_lifecycle_prediction": false
+    },
+    {
+      "fixture": "random-preset",
+      "seed": 12345,
+      "events": [
+        {
+          "kind": "reseed",
+          "id": "stream-0",
+          "seed": 1791113863
+        },
+        {
+          "kind": "construct",
+          "id": "6935-warp"
+        },
+        {
+          "kind": "construct",
+          "id": "6935-comp"
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.0
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.0
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.03333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.03333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.06666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.06666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.1
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.1
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.13333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.13333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.16666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.16666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.2
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.2
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.23333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.23333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.26666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.26666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.3
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.3
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.3333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.3333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.36666666666666664
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.36666666666666664
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.4
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.4
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.43333333333333335
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.43333333333333335
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.4666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.4666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.5
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.5
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.5333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.5333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.5666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.5666666666666667
+        },
+        {
+          "kind": "reseed",
+          "id": "stream-39",
+          "seed": 1791113863
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.6
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.6
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.6333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.6333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.6666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.6666666666666666
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.7
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.7
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.7333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.7333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.7666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.7666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.8
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.8
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.8333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.8333333333333334
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.8666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.8666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.9
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.9
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.9333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.9333333333333333
+        },
+        {
+          "kind": "load",
+          "id": "6935-warp",
+          "time": 0.9666666666666667
+        },
+        {
+          "kind": "load",
+          "id": "6935-comp",
+          "time": 0.9666666666666667
+        },
+        {
+          "kind": "construct",
+          "id": "6948-warp"
+        },
+        {
+          "kind": "construct",
+          "id": "6948-comp"
+        }
+      ],
+      "event_positions": [
+        {
+          "event_index": 1,
+          "record_start": 2,
+          "record_count": 184
+        },
+        {
+          "event_index": 2,
+          "record_start": 186,
+          "record_count": 184
+        },
+        {
+          "event_index": 3,
+          "record_start": 370,
+          "record_count": 28
+        },
+        {
+          "event_index": 4,
+          "record_start": 398,
+          "record_count": 28
+        },
+        {
+          "event_index": 5,
+          "record_start": 426,
+          "record_count": 28
+        },
+        {
+          "event_index": 6,
+          "record_start": 454,
+          "record_count": 28
+        },
+        {
+          "event_index": 7,
+          "record_start": 482,
+          "record_count": 28
+        },
+        {
+          "event_index": 8,
+          "record_start": 510,
+          "record_count": 28
+        },
+        {
+          "event_index": 9,
+          "record_start": 538,
+          "record_count": 28
+        },
+        {
+          "event_index": 10,
+          "record_start": 566,
+          "record_count": 28
+        },
+        {
+          "event_index": 11,
+          "record_start": 594,
+          "record_count": 28
+        },
+        {
+          "event_index": 12,
+          "record_start": 622,
+          "record_count": 28
+        },
+        {
+          "event_index": 13,
+          "record_start": 650,
+          "record_count": 28
+        },
+        {
+          "event_index": 14,
+          "record_start": 678,
+          "record_count": 28
+        },
+        {
+          "event_index": 15,
+          "record_start": 706,
+          "record_count": 28
+        },
+        {
+          "event_index": 16,
+          "record_start": 734,
+          "record_count": 28
+        },
+        {
+          "event_index": 17,
+          "record_start": 762,
+          "record_count": 28
+        },
+        {
+          "event_index": 18,
+          "record_start": 790,
+          "record_count": 28
+        },
+        {
+          "event_index": 19,
+          "record_start": 818,
+          "record_count": 28
+        },
+        {
+          "event_index": 20,
+          "record_start": 846,
+          "record_count": 28
+        },
+        {
+          "event_index": 21,
+          "record_start": 874,
+          "record_count": 28
+        },
+        {
+          "event_index": 22,
+          "record_start": 902,
+          "record_count": 28
+        },
+        {
+          "event_index": 23,
+          "record_start": 930,
+          "record_count": 28
+        },
+        {
+          "event_index": 24,
+          "record_start": 958,
+          "record_count": 28
+        },
+        {
+          "event_index": 25,
+          "record_start": 986,
+          "record_count": 28
+        },
+        {
+          "event_index": 26,
+          "record_start": 1014,
+          "record_count": 28
+        },
+        {
+          "event_index": 27,
+          "record_start": 1042,
+          "record_count": 28
+        },
+        {
+          "event_index": 28,
+          "record_start": 1070,
+          "record_count": 28
+        },
+        {
+          "event_index": 29,
+          "record_start": 1098,
+          "record_count": 28
+        },
+        {
+          "event_index": 30,
+          "record_start": 1126,
+          "record_count": 28
+        },
+        {
+          "event_index": 31,
+          "record_start": 1154,
+          "record_count": 28
+        },
+        {
+          "event_index": 32,
+          "record_start": 1182,
+          "record_count": 28
+        },
+        {
+          "event_index": 33,
+          "record_start": 1210,
+          "record_count": 28
+        },
+        {
+          "event_index": 34,
+          "record_start": 1238,
+          "record_count": 28
+        },
+        {
+          "event_index": 35,
+          "record_start": 1266,
+          "record_count": 28
+        },
+        {
+          "event_index": 36,
+          "record_start": 1294,
+          "record_count": 28
+        },
+        {
+          "event_index": 37,
+          "record_start": 1322,
+          "record_count": 28
+        },
+        {
+          "event_index": 38,
+          "record_start": 1350,
+          "record_count": 28
+        },
+        {
+          "event_index": 40,
+          "record_start": 1379,
+          "record_count": 28
+        },
+        {
+          "event_index": 41,
+          "record_start": 1407,
+          "record_count": 28
+        },
+        {
+          "event_index": 42,
+          "record_start": 1435,
+          "record_count": 28
+        },
+        {
+          "event_index": 43,
+          "record_start": 1463,
+          "record_count": 28
+        },
+        {
+          "event_index": 44,
+          "record_start": 1491,
+          "record_count": 28
+        },
+        {
+          "event_index": 45,
+          "record_start": 1519,
+          "record_count": 28
+        },
+        {
+          "event_index": 46,
+          "record_start": 1547,
+          "record_count": 28
+        },
+        {
+          "event_index": 47,
+          "record_start": 1575,
+          "record_count": 28
+        },
+        {
+          "event_index": 48,
+          "record_start": 1603,
+          "record_count": 28
+        },
+        {
+          "event_index": 49,
+          "record_start": 1631,
+          "record_count": 28
+        },
+        {
+          "event_index": 50,
+          "record_start": 1659,
+          "record_count": 28
+        },
+        {
+          "event_index": 51,
+          "record_start": 1687,
+          "record_count": 28
+        },
+        {
+          "event_index": 52,
+          "record_start": 1715,
+          "record_count": 28
+        },
+        {
+          "event_index": 53,
+          "record_start": 1743,
+          "record_count": 28
+        },
+        {
+          "event_index": 54,
+          "record_start": 1771,
+          "record_count": 28
+        },
+        {
+          "event_index": 55,
+          "record_start": 1799,
+          "record_count": 28
+        },
+        {
+          "event_index": 56,
+          "record_start": 1827,
+          "record_count": 28
+        },
+        {
+          "event_index": 57,
+          "record_start": 1855,
+          "record_count": 28
+        },
+        {
+          "event_index": 58,
+          "record_start": 1883,
+          "record_count": 28
+        },
+        {
+          "event_index": 59,
+          "record_start": 1911,
+          "record_count": 28
+        },
+        {
+          "event_index": 60,
+          "record_start": 1939,
+          "record_count": 28
+        },
+        {
+          "event_index": 61,
+          "record_start": 1967,
+          "record_count": 28
+        },
+        {
+          "event_index": 62,
+          "record_start": 1995,
+          "record_count": 28
+        },
+        {
+          "event_index": 63,
+          "record_start": 2023,
+          "record_count": 28
+        },
+        {
+          "event_index": 64,
+          "record_start": 2051,
+          "record_count": 184
+        },
+        {
+          "event_index": 65,
+          "record_start": 2235,
+          "record_count": 184
+        }
+      ],
+      "trace_records": 2419,
+      "draws_consumed": 2416,
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "expected_rgb8": [
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ],
+        [
+          189.0,
+          160.0,
+          112.0
+        ]
+      ],
+      "trace_sha256": "8c5e404ad7e86c24da2e8a3939839912d0c2a050aa62a838be13e46488d20d10",
+      "capture_sha256": "52d274dee42d4c21ea13ee8b1384dec9c4aaa7ef158c17a7ee72aae242ce2bb1",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "random-preset.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "input_basis": "Observed CPU rand/srand call trace mapped to pinned source event patterns; no rendered values supplied to replay",
+      "independent_unobserved_lifecycle_prediction": false
+    }
+  ],
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "trace_helper_sha256": "4fde4425d729762f7f7bdff08f860adc178b4e24c98a94aa3dcff82fb9e759a6",
+  "trace_source_sha256": "c9aa9c52d922102973148cd3486f04d65d4583894965b49b15f6f88f5280a6b3",
+  "adapter_sha256": "47bb740e45d80b26b8571da5c82e6c2d8addf443217c57693c078d7bbf5f25a2",
+  "whole_preset_accuracy_verified": false,
+  "automatic_renderer_lifecycle_verified": false,
+  "implementation_sha256": {
+    "native_random.cpp": "af6f9d2257669a8982c384f6928fc6c3ebe91797660249ab192a0b3036f3d64d",
+    "shader_random.py": "72512ff72b2fdc033fdb1e7813abd725da1cf65af568b72f197f172d656c911c"
+  },
+  "rotation_load_times_verified": false,
+  "seed_call_binary_evidence": {
+    "time_call_offset": "0xd0d94",
+    "srand_call_offset": "0xd0d98",
+    "traced_return_offset": "0xd0d9c"
+  }
+}

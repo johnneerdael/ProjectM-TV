@@ -34,9 +34,11 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
     if not isinstance(events, list):
         raise ValueError('explicit random lifecycle event list required')
     for event in events:
-        if (not isinstance(event, dict) or event.get('kind') not in {'construct', 'load'} or
+        if (not isinstance(event, dict) or event.get('kind') not in {'construct', 'load', 'reseed'} or
                 not isinstance(event.get('id'), str) or not event['id']):
             raise ValueError('invalid shader random lifecycle event')
+        if event['kind']=='reseed' and (type(event.get('seed')) is not int or not 0<=event['seed']<2**32):
+            raise ValueError('explicit uint32 reseed seed required')
     request = json.dumps(dict(seed=seed, events=events), allow_nan=False)
     binary = Path(binary).resolve()
     binary_sha = hashlib.sha256(binary.read_bytes()).hexdigest()
@@ -76,7 +78,9 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
             raise ValueError('random event order mismatch')
         if record.get('draws_before') != expected_draws:
             raise ValueError('random stream position mismatch')
-        expected_draws += 184 if event['kind'] == 'construct' else 28
+        if event['kind']=='reseed' and record.get('seed')!=event['seed']:
+            raise ValueError('random reseed identity mismatch')
+        expected_draws += {'construct':184,'load':28,'reseed':0}[event['kind']]
         if record.get('draws_after') != expected_draws:
             raise ValueError('random consumption differs from pinned source')
     if result.get('draws_consumed') != expected_draws:

@@ -32,7 +32,7 @@ These are explicit interpreter limitations; corpus prevalence has not yet been m
 
 ## Integration understanding still requiring work
 
-- Automatic shader random lifecycle assembly, including actual seed, preset loading, fallback instances, other consumers and texture selection. Explicit Android/bionic replay now supplies source-generated vectors/matrices; host and Android sequences differ. Lexical shader random references occur in 3,205 presets (overlapping families, not verified live dependencies). See `2026-10-04-android-shader-random-learning.md`.
+- Automatic shader random lifecycle assembly, including actual seed, preset loading, fallback instances, other consumers and texture selection. Explicit Android/bionic replay now supports reseeding while preserving shader state. Two CPU-observed published-core lifecycles reproduce 60 random-colour frames exactly; background reseeding occurs during rendering. Whole-event replay still needs to detect or model mid-event interleaving. Lexical shader random references occur in 3,205 presets (overlapping families, not verified live dependencies). See `2026-10-04-core-random-lifecycle-learning.md`.
 - Remaining motion-vector raster coverage and precision.
 - Accumulated warp/blur/composite feedback error over time. Correct individual expressions do not prove correct evolving appearance.
 - External texture availability, loading/rescaling and native failure/fallback behaviour.

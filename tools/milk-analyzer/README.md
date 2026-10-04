@@ -669,6 +669,15 @@ assembly remains unresolved. See
 `docs/superpowers/evidence/2026-10-04-android-shader-random-learning.md` and
 `fixtures/android-shader-random-proof-2026-10-04.json`.
 
+Explicit random ledgers also support `{'kind':'reseed','id':'stream','seed':...}`.
+Reseeding changes the shared C-rand stream without reconstructing shader objects
+or consuming draws; stored preset values and rotation parameters survive.
+Runner-side tracing of the unchanged published core reveals background reseeding
+during rendering. Conditional source replay of two recorded lifecycles reproduces
+all 60 random-colour frames exactly. Seed/event inputs come from CPU call traces,
+so this is not an independently inferred lifecycle or whole-preset forecast.
+See `fixtures/core-random-lifecycle-proof-2026-10-04.json`.
+
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe
 shared-read/write ordering remains explicit. Destination indices are captured

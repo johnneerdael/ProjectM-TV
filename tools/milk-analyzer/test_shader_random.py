@@ -64,6 +64,38 @@ def test_random_values_have_correct_lifetime_and_repeatability():
     assert first['loads'] != changed['loads']
 
 
+def test_explicit_reseed_resets_draws_but_preserves_existing_shader_state():
+    events=[create('warp'),load('warp'),dict(kind='reseed',id='shared-stream',seed=54321),load('warp',12)]
+    result=run(events)
+    fresh=run([create('new'),load('new')],seed=54321)
+    before,after=result['loads']
+    assert after['uniforms']['rand_preset']==before['uniforms']['rand_preset']
+    assert after['uniforms']['rot_s1']==before['uniforms']['rot_s1']
+    unreseeded=run([create('warp'),load('warp'),load('warp',12)])['loads'][1]['uniforms']
+    for name,value in after['uniforms'].items():
+        if name!='rand_frame' and not name.startswith('rot_rand'):
+            assert value==unreseeded[name]
+    # Reseeding does not reconstruct an existing shader or consume its 184 draws.
+    libc=ctypes.CDLL(None);libc.srand(54321);libc.rand.restype=ctypes.c_int
+    expected=[float(np.float32(libc.rand()%7381)/np.float32(7380)) for _ in range(4)]
+    assert after['uniforms']['rand_frame']==expected
+    assert after['uniforms']['rand_frame']!=fresh['loads'][0]['uniforms']['rand_frame']
+    assert result['draws_consumed']==240
+    assert result['events'][2]['draws_before']==result['events'][2]['draws_after']==212
+    assert result['events'][2]['seed']==54321
+
+
+def test_python_reseed_validation_preserves_seed_identity():
+    from shader_random import execute_ledger
+    result=execute_ledger(BINARY,seed=12345,events=[create('warp'),
+        dict(kind='reseed',id='shared-stream',seed=0),load('warp')])
+    assert result['draws_consumed']==212
+    for seed in [-1,2**32,True]:
+        with pytest.raises(ValueError,match='seed'):
+            execute_ledger(BINARY,seed=12345,events=[dict(kind='reseed',id='stream',seed=seed)])
+        assert 'seed' in run([dict(kind='reseed',id='stream',seed=seed)],valid=False)
+
+
 def test_matrix_upload_discards_translation_and_keeps_rotations_orthonormal():
     native = run([create('warp'), load('warp', 321.25)])
     matrices = {key: np.asarray(value) for key, value in native['loads'][0]['uniforms'].items()

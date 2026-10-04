@@ -58,15 +58,18 @@ public:
 };
 #include "cpu_random_adapter.hpp"
 
+static std::uint32_t parseSeed(const json& value) {
+    if(!value.is_number_integer() || value.get<double>()<0 ||
+       value.get<double>()>std::numeric_limits<std::uint32_t>::max())
+        throw std::runtime_error("uint32 post-mix C-rand seed required");
+    return value.get<std::uint32_t>();
+}
+
 int main(int argc, char** argv) {
     try {
         if (argc != 2) throw std::runtime_error("usage: milk-shader-random request.json");
         std::ifstream input(argv[1]); json request; input >> request;
-        const auto& seedJson = request.at("seed");
-        if (!seedJson.is_number_integer() || seedJson.get<double>() < 0 ||
-            seedJson.get<double>() > std::numeric_limits<std::uint32_t>::max())
-            throw std::runtime_error("uint32 post-mix C-rand seed required");
-        const auto seed = seedJson.get<std::uint32_t>();
+        const auto seed = parseSeed(request.at("seed"));
         const auto& events = request.at("events");
         if (!events.is_array() || events.size() > 100000)
             throw std::runtime_error("event ledger exceeds adapter budget");
@@ -78,7 +81,9 @@ int main(int argc, char** argv) {
             std::string kind = event.at("kind"), id = event.at("id");
             if (id.empty()) throw std::runtime_error("nonempty shader id required");
             const auto before = drawsConsumed;
-            if (kind == "construct") {
+            if (kind == "reseed") {
+                srand(parseSeed(event.at("seed")));
+            } else if (kind == "construct") {
                 if (states.count(id)) throw std::runtime_error("duplicate shader construction id");
                 // Constructor type does not affect its random initialization.
                 states[id] = std::make_unique<MilkdropShader>(MilkdropShader::ShaderType::WarpShader);
@@ -93,7 +98,9 @@ int main(int argc, char** argv) {
                                  {"uniforms", state.m_shader.values},
                                  {"draws_before", before}, {"draws_after", drawsConsumed}});
             } else throw std::runtime_error("unknown random lifecycle event");
-            records.push_back({{"kind", kind}, {"id", id}, {"draws_before", before}, {"draws_after", drawsConsumed}});
+            json record={{"kind",kind},{"id",id},{"draws_before",before},{"draws_after",drawsConsumed}};
+            if(kind=="reseed")record["seed"]=parseSeed(event.at("seed"));
+            records.push_back(record);
         }
 #if defined(__APPLE__)
         const char* platform = "macOS";
