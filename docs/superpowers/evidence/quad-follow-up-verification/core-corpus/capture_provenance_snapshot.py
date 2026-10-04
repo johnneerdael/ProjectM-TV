@@ -19,6 +19,13 @@ def snapshot(work, output):
     protocol = json.loads(protocol_bytes)
     if run.digest({k: v for k, v in protocol.items() if k != "sha256"}) != protocol["sha256"]:
         raise ValueError("protocol checksum mismatch")
+    inventory_path = work / "inventory.json"
+    inventory_bytes = inventory_path.read_bytes()
+    inventory = json.loads(inventory_bytes)
+    if (len(inventory["presets"]) != inventory["count"]
+            or run.digest(inventory["presets"]) != inventory["corpus_sha256"]
+            or inventory["corpus_sha256"] != protocol["corpus_sha256"]):
+        raise ValueError("immutable inventory/corpus mismatch")
     checked, counts = [], Counter()
     # Freeze membership before checking: later scanner jobs are outside this snapshot.
     paths = sorted((work / "jobs").glob("*/row.json"))
@@ -35,18 +42,23 @@ def snapshot(work, output):
         inputs = [p for p in inputs if p.is_file()]
         hashes = {p: run.file_hash(p) for p in inputs}
         hashes[row_path] = hashlib.sha256(row_bytes).hexdigest()
-        checkpoint.verify_terminal_producer(directory, row, protocol, row["preset"])
+        verified = checkpoint.verify_job(work, protocol, inventory, directory.name)
+        if verified is None:
+            raise ValueError("missing terminal row provenance")
         if any(run.file_hash(p) != checksum for p, checksum in hashes.items()):
             raise ValueError("checked input changed during validation")
         checked.append({"key": row["key"], "status": row["status"],
                         "inputs": [{"path": p.relative_to(work).as_posix(), "sha256": checksum,
                                     "bytes": p.stat().st_size} for p, checksum in hashes.items()]})
         counts[row["status"]] += 1
-    if protocol_path.read_bytes() != protocol_bytes:
-        raise ValueError("protocol changed during validation")
+    if protocol_path.read_bytes() != protocol_bytes or inventory_path.read_bytes() != inventory_bytes:
+        raise ValueError("protocol/inventory changed during validation")
     if not checked:
         raise ValueError("empty snapshot")
-    manifest = {"protocol_sha256": protocol["sha256"], "jobs": checked}
+    manifest = {"protocol_sha256": protocol["sha256"],
+                "dataset_inputs": [{"path": "protocol.json", "sha256": hashlib.sha256(protocol_bytes).hexdigest()},
+                                   {"path": "inventory.json", "sha256": hashlib.sha256(inventory_bytes).hexdigest()}],
+                "jobs": checked}
     manifest_path = output.with_suffix(".inputs.json.gz")
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_bytes(gzip.compress((run.canonical(manifest) + "\n").encode(), mtime=0))
@@ -56,7 +68,7 @@ def snapshot(work, output):
               "input_records_sha256": run.digest(checked),
               "validator_sha256": run.file_hash(Path(checkpoint.__file__)),
               "snapshot_script_sha256": run.file_hash(Path(__file__)),
-              "scope": "Available terminal producer identity and immutable capture schedule; partial baseline, not full retained-file/frame audit",
+              "scope": "Existing checkpoint row/job/inventory provenance, retained-file and successful-observer validation; partial baseline, not complete corpus coverage",
               "limitations": "Membership and exact checked row/packet/result hashes are frozen in the input manifest. Later jobs or storage annotations are different snapshots; these hashes do not assert equality with older remote checkpoint row metadata."}
     run.atomic(output, report)
     return report
