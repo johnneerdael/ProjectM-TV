@@ -1,6 +1,6 @@
 # Random texture binding investigation — 2026-10-04
 
-Base: published core 2.2.8 source `f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98`; upstream projectM `e0b0a967` plus patches 0001–0035. Candidate engine change: patch 0036, final engine source commit `9c20236c3f38a1bed5205e435b6e7639a1158685`. Local release AAR/native hashes are in `local-artifact-identity.json`; that build uses the default local version 2.2.0 and is not the published 2.2.8 AAR. No authored presets or analyzer source were changed.
+Base: published core 2.2.8 source `f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98`; upstream projectM `e0b0a967` plus patches 0001–0035. Candidate engine change: patch 0037, final engine source commit `9c20236c3f38a1bed5205e435b6e7639a1158685`. Local release AAR/native hashes are in `local-artifact-identity.json`; that build uses the default local version 2.2.0 and is not the published 2.2.8 AAR. No authored presets or analyzer source were changed.
 
 ## Findings and fix
 
@@ -8,7 +8,7 @@ The three reported presets use unqualified `rand00`/`rand01`. Their source-bound
 
 Related native defects were reproduced independently:
 
-| Trigger | Before | With 0036 |
+| Trigger | Before | With 0037 |
 |---|---|---|
 | `pc_rand00_red` | mode qualifier hides the filename filter; selected texture uses default sampler | red-prefixed image, point/clamp sampler, exact alias and unqualified texsize |
 | warp `rand00_red`, composite `fw_rand00` | cached old descriptor leaves the new alias undeclared | shared image, current alias and requested sampler |
@@ -31,7 +31,7 @@ Loaded textures now retain their lowercase base name and exact `SourcePath()`. G
 | EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk | `06b84ff69c3aeeb88eff3dea63dd3c1f5b146b4c2afb9df204f5f2561e7aee15` | accepted before/after | no GL error before/after |
 | midgitstraights of majillaen - featy sweet.milk | `d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba` | accepted before/after | `GL_INVALID_FRAMEBUFFER_OPERATION` (1286) before/after |
 
-Retained debug compiler messages show the full loader successfully compiling custom warp/composite shaders; no fallback message appears in the final diagnostic. The renderer unbinds its program after drawing, so post-draw current-program inspection cannot certify stage selection. Numerical behavior and appearance of the full authored presets remain unverified. The midgit framebuffer result is an unresolved baseline diagnostic, not a claimed fix or a regression introduced by 0036. Bundled-image diagnostics also surface pre-existing vendored SOIL2 JPEG left-shift UBSan warnings; these are outside the binding fix. Both outcomes remain in ignored local diagnostic logs in this evidence directory (not committed).
+Retained debug compiler messages show the full loader successfully compiling custom warp/composite shaders; no fallback message appears in the final diagnostic. The renderer unbinds its program after drawing, so post-draw current-program inspection cannot certify stage selection. Numerical behavior and appearance of the full authored presets remain unverified. The midgit framebuffer result is an unresolved baseline diagnostic, not a claimed fix or a regression introduced by 0037. Bundled-image diagnostics also surface pre-existing vendored SOIL2 JPEG left-shift UBSan warnings; these are outside the binding fix. Both outcomes remain in ignored local diagnostic logs in this evidence directory (not committed).
 
 The core extracts all top-level `assets/textures/` files to private `files/textures/` before marking its worker ready, skips already copied files whose sizes match, and supplies that path to live/prewarm engines before the first preset. This source review and host asset scan establish the implemented path; actual Android extraction/binding has not been freshly measured for this change.
 

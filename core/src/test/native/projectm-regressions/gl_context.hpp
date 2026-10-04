@@ -67,4 +67,3 @@ private:
     EGLContext context = EGL_NO_CONTEXT;
 #endif
 };
-
