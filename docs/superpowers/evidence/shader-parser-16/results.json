@@ -17,7 +17,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "EVET - Brainsplolz.milk",
@@ -32,7 +34,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Fed + Geiss - Color Pox Remix.milk",
@@ -47,7 +51,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - dimension window.milk",
@@ -62,7 +68,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - ianus portal.milk",
@@ -77,7 +85,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - madness portal.milk",
@@ -92,7 +102,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - rorschach bomb.milk",
@@ -107,7 +119,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - spirally caterpillar coop mode.milk",
@@ -122,7 +136,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - spirally repetative 2.milk",
@@ -137,7 +153,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
@@ -152,7 +170,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
@@ -167,7 +187,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
@@ -182,7 +204,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "Hexcollie - Hedgehog dreams.milk",
@@ -197,7 +221,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "lice - veritubule.milk",
@@ -212,7 +238,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "suksma - crisco orgy - rosvell roams nz+.milk",
@@ -227,7 +255,9 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     },
     {
       "preset": "suksma - fuck retro anything.milk",
@@ -242,11 +272,19 @@
         "status": "translated",
         "diagnostic": "",
         "gles300_compile": true
-      }
+      },
+      "production_desktop_before": "rejected",
+      "production_desktop_after": "compiled_and_linked"
     }
   ],
   "binaries": {
     "translate-before": "74d516c3d40547ee14155485b9219eb6357046a89951cf62d5fb311ef323bb6c",
     "translate-after": "30634530cc0a6e4b1686f53815e392ddc38881fc7585d40c72682f14b492327b"
+  },
+  "validated_feature_commit": "b302d38ef3d15bab8c7f90b29336046320bae5fe",
+  "android_debug_artifact": {
+    "aar_sha256": "01adaf0d6e93d0fdd3130c13ab5269fef20447425755f32c89270b0be1ec6417",
+    "arm64_libprojectmtv_sha256": "504331cafbeae9c9873261ff01d327b9c769300d1e228a485c1bcbfd2b3fb6ab",
+    "profile": "debug; local build; not published release or device-selection verification"
   }
 }

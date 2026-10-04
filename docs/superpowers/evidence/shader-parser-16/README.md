@@ -31,10 +31,16 @@ CMake rejects changed witnesses before building.
 | Focused parser controls | sample, declaration/statement macros and constructor postfix cases reject; `(sample)` crashes under ASan/UBSan | 24 controls pass, including modifier/cast/identity controls and invalid members |
 | Generated control fragments, GLSL ES 3.00 | not all generated | 22/22 compile with `glslangValidator -l` |
 | Sixteen original affected shader sections, CPU adapter | 16/16 reject | 16/16 translate and compile offline as GLSL ES 3.00 |
-| Sixteen originals, production `MilkdropShader` on desktop GL | before result not yet recorded here | 16/16 directly compile/link, without fallback exception handling |
-| Numerical controls through real engine | baseline recorded in test failures | 12 red-channel controls match independent expected values within 2/255 |
+| Sixteen originals, production `MilkdropShader` on desktop GL | 16/16 reject when patch 0036 is removed | 16/16 directly compile/link, without fallback exception handling |
+| Numerical controls through real engine | constant control gives 64/255; sample cube falls back to 0 instead of 32/255 | 12 red-channel controls match independent expected values within 2/255 |
 | Complete projectM host suite | existing baseline | 222/222 pass on macOS CGL |
 | Android core and JVM tests | existing baseline | `:core:assembleDebug testDebugUnitTest` succeeds |
+
+Removing only patch 0036 from the production engine made all 16 original
+shader compilations fail; restoring it passes all five CTest groups. The
+independent sample-cube render control also fails with fallback without the patch.
+The local debug AAR and ARM64 library hashes are recorded in `results.json`;
+these identify a build artifact, not an Android runtime or published release.
 
 The CPU adapter is local diagnostic scaffolding copied from the predictor
 worktree and rebuilt against this worktree's parser/generator. Its binary hashes
