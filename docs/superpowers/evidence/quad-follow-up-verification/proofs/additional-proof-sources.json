@@ -1,0 +1,32 @@
+[
+  {
+    "path": "05-warp-sampler-binding.png",
+    "source": "build/follow-ups/sampler-binding-review/contact-sheet.png",
+    "sha256": "031bd422505d490ab904e5e5a64b221c9f48c02e7e8f927b5f22f5d4a6c02979"
+  },
+  {
+    "path": "05-warp-sampler-binding-report.md",
+    "source": "build/follow-ups/sampler-binding-review/REPORT.md",
+    "sha256": "09f95235f5f447e0a300f2b91c67dcda49f176550cf78525632115f28bc8b2c7"
+  },
+  {
+    "path": "05-warp-sampler-image-impact.json",
+    "source": "build/follow-ups/sampler-binding-review/image-impact.json",
+    "sha256": "d23d0ff02dd79deb243da4d59705a30eb0ff38680a43bbe9e7601975c91e3cd4"
+  },
+  {
+    "path": "06-analyzer-repeat-delta.png",
+    "source": "build/follow-ups/echasketch-determinism/repeat-delta-proof.png",
+    "sha256": "90a48d31c959bf50caaa88921c262e02b80ae6fb428f50984fa571c01db2bb81"
+  },
+  {
+    "path": "06-analyzer-repeat-report.md",
+    "source": "build/follow-ups/echasketch-determinism/REPORT.md",
+    "sha256": "adb5f4c514bef401b174b423ad71d2829fc8ebddb6cce1e80e56841925f8fae8"
+  },
+  {
+    "path": "06-analyzer-repeat-summary.json",
+    "source": "build/follow-ups/echasketch-determinism/summary.json",
+    "sha256": "270348ff6c2e4e17862be0608a0416b71ec1ebc1d8223ec04102c26c1b170639"
+  }
+]

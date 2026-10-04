@@ -1,0 +1,16 @@
+Subject: [EXPERIMENT] Remove intermediate 8-bit rounding from diffusion only
+
+Hypothesis control: the extra RGBA8 diffusion target may lose feedback energy independently
+of the intended kernel. This is a desktop experiment, not a proposed production format.
+
+--- a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
++++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
+@@ -121,7 +121,7 @@
+ {
+     RenderItem::Init();
+ 
+-    m_framebuffer.CreateColorAttachment(0, 0);
++    m_framebuffer.CreateColorAttachment(0, 0, GL_RGBA16F, GL_RGBA, GL_HALF_FLOAT);
+ 
+     std::string vertexShader(static_cast<const char*>(ShaderVersion));
+     std::string fragmentShader(static_cast<const char*>(ShaderVersion));

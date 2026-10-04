@@ -1,0 +1,52 @@
+{
+  "scope": "Component compiler ablation only; not an actual-core corpus render, preset rewrite or deployed fix",
+  "reference_source_url": "https://github.com/WACUP/vis_milk2/blob/50cbd69c69497f22baa521066e04ee05d5940ea4/vis_milk2/state.cpp#L1530",
+  "reference_source_sha256": "ab2f658ea69441284e2d8e765e7a7c17fa38f81a42919cb0120cb56d6c2bcb17",
+  "probe_source_sha256": "565b28f882d2c1f4f7859e488bb92f505fd20ea7787cef81329af3cb6477e76d",
+  "eval_library_sha256": "e8feb097a635f3e48a233691737a353ecca103f0526c43f255aa542051bc486d",
+  "results": [
+    {
+      "preset": "161.milk",
+      "source_sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b",
+      "expression_sha256": "da777447802da2c07925a2027a9746c0360e1a2ac960a550bc6df99a1c9e0ffa",
+      "cases": [
+        {
+          "mode": "projectM_newlines",
+          "compiled": false,
+          "error": "syntax error, unexpected VAR",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "mode": "MilkDrop_record_join",
+          "compiled": true,
+          "error": "",
+          "line": 0,
+          "column": 0
+        }
+      ]
+    },
+    {
+      "preset": "430.milk",
+      "source_sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63",
+      "expression_sha256": "a8f2681aed5d62564509adc95d3fa3ae313ecdf89cbb20e51dcd7b98aa076808",
+      "cases": [
+        {
+          "mode": "projectM_newlines",
+          "compiled": false,
+          "error": "syntax error, unexpected VAR",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "mode": "MilkDrop_record_join",
+          "compiled": true,
+          "error": "",
+          "line": 0,
+          "column": 0
+        }
+      ]
+    }
+  ],
+  "next_step": "Retry MilkDrop record joining only after original per-frame compilation fails. Keep shaders and already successful expression programs untouched. Verify invalid code still fails, then use actual-core JNI controls and the full candidate corpus."
+}

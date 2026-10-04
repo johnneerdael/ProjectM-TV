@@ -39,3 +39,40 @@ def test_hook_can_be_force_included_and_present_in_private_source(tmp_path):
                             input=f'#include "{copied}"\nint main() {{ return lab::Seed(1)==0; }}\n',
                             text=True, capture_output=True)
     assert result.returncode == 0, result.stderr
+
+def test_shader_random_is_private_resettable_and_preserves_mac_oracle(tmp_path):
+    import os
+    source = tmp_path / "shader_random.cpp"
+    executable = tmp_path / "shader_random"
+    source.write_text(r'''#include "analysis_hooks.hpp"
+#include <array>
+#include <cassert>
+#include <cstdlib>
+int main() {
+    const std::array<uint32_t, 10> expected = {1069204390u, 2122508281u,
+        1145818450u, 1284826501u, 1130931722u, 191692057u, 542931499u,
+        391687590u, 1055947075u, 497630717u};
+    lab::ResetShaderRandom();
+    for (auto value : expected) assert(lab::ShaderRandom() == value);
+    lab::ResetShaderRandom();
+    for (auto value : expected) {
+        // Simulate another linked dependency consuming the process-global RNG.
+        for (int i = 0; i < 6; ++i) (void)rand();
+        assert(lab::ShaderRandom() == value);
+    }
+#ifdef __APPLE__
+    srand(lab::Seed(1));
+    lab::ResetShaderRandom();
+    for (int i = 0; i < 1000; ++i)
+        assert(lab::ShaderRandom() == static_cast<uint32_t>(rand()));
+#endif
+    lab::shader_random_state = 0;
+    assert(lab::ShaderRandom() == 520932930u);
+}
+''')
+    result = subprocess.run(["c++", "-std=c++17", "-I", str(NATIVE), str(source),
+                             "-o", str(executable)], text=True, capture_output=True)
+    assert result.returncode == 0, result.stderr
+    env = dict(os.environ, PRESET_LAB_SEED="12345")
+    result = subprocess.run([str(executable)], env=env, text=True, capture_output=True)
+    assert result.returncode == 0, result.stderr

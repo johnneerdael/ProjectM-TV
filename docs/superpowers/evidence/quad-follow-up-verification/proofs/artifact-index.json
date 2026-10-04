@@ -1,0 +1,232 @@
+[
+  {
+    "path": "01-diagnostic-preserved.png",
+    "sha256": "dbc22c686ec58d147235c9532065754099ccfe83e275faeab75ac5cfbf839c7b",
+    "bytes": 125014
+  },
+  {
+    "path": "01-diagnostic-preserved.svg",
+    "sha256": "5d0b8f09a6d1adcad13b4fe8bcfbbaaeba71cc0c4646dd2b68a561be38646662",
+    "bytes": 5045
+  },
+  {
+    "path": "02-vertex-shader-lifetime.png",
+    "sha256": "6313c1464bab228157e4a42a3509ee512353fe5a6eb17d79366c5d9efa30da33",
+    "bytes": 105751
+  },
+  {
+    "path": "02-vertex-shader-lifetime.svg",
+    "sha256": "176968bace5f3b0fcf1b80a48791dc67107475e0b3e2a9b366459510eed4c6d0",
+    "bytes": 9764
+  },
+  {
+    "path": "03-fallback-geiss-frame-239.png",
+    "sha256": "4e6445d7bfa0633062f92dd951dbb887ba17e5189cba5356b62bf3b9e516eacc",
+    "bytes": 89455
+  },
+  {
+    "path": "03-optional-shader-fallback.png",
+    "sha256": "40316cf270afb5efe150221f7d907cb05cef12a67975d571eafa7fc068f0d3ca",
+    "bytes": 223403
+  },
+  {
+    "path": "03-optional-shader-fallback.svg",
+    "sha256": "dc3ebcfced45f4661f56043dbc18887f674b4c93af19f744fa92400482580f78",
+    "bytes": 137002
+  },
+  {
+    "path": "04-deterministic-transition-test.png",
+    "sha256": "5b4ff25996f11117ff5c5f6c8bd9f05605a18f08b221d41fea148481f996b57b",
+    "bytes": 178204
+  },
+  {
+    "path": "04-deterministic-transition-test.svg",
+    "sha256": "0e45ada5035e4fa140d40a386f3db897adf7a210bcbd77a927b64d98b8496e7f",
+    "bytes": 6695
+  },
+  {
+    "path": "README.md",
+    "sha256": "7dd3a192173adfbf02d24a7a7f10f46e101bb3e8f6bd3c2964de8c14bcfa58e9",
+    "bytes": 11407
+  },
+  {
+    "path": "allocation/green/compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "allocation/green/run.log",
+    "sha256": "bfa1e9a0ef7557dbafadea10e78bb45dc90647c5ca24819f0e2fd05c58093c98",
+    "bytes": 1591
+  },
+  {
+    "path": "allocation/green/src/libprojectM/Renderer/Shader.cpp",
+    "sha256": "5ae024f2b200ae5f4ee39eb039831841744ed0a27c0cc0f0a257d7a000eb6af3",
+    "bytes": 11946
+  },
+  {
+    "path": "allocation/green/src/libprojectM/Renderer/Shader.hpp",
+    "sha256": "29d4c3b33f389b007826c865523003d8c2e0839c5b45bbf78b69a72abf85cee4",
+    "bytes": 6663
+  },
+  {
+    "path": "allocation/green/tests/libprojectM/ShaderFailureTest.cpp",
+    "sha256": "5793fff94fd8db71d5b06574dfbcf09f19fcfaea842b57079a61b20084b92dfd",
+    "bytes": 6845
+  },
+  {
+    "path": "allocation/red/compile.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "allocation/red/run.log",
+    "sha256": "3a7075e5afff33df1b31433e00ad53fce06d3e8d3f6a2dc381d1e902e09c9d66",
+    "bytes": 9326
+  },
+  {
+    "path": "allocation/red/src/libprojectM/Renderer/Shader.cpp",
+    "sha256": "bdbeddab4b2c71a3506cd0ead1ae81c651fcabc72d56c07e65f7cb2f61be3b56",
+    "bytes": 11724
+  },
+  {
+    "path": "allocation/red/src/libprojectM/Renderer/Shader.hpp",
+    "sha256": "657e05191afcdf4db56298f8293ed6268da638bfb63260711285e9875a6b372f",
+    "bytes": 6548
+  },
+  {
+    "path": "allocation/red/tests/libprojectM/ShaderFailureTest.cpp",
+    "sha256": "5793fff94fd8db71d5b06574dfbcf09f19fcfaea842b57079a61b20084b92dfd",
+    "bytes": 6845
+  },
+  {
+    "path": "allocation-builds.json",
+    "sha256": "9729080905326e391aaddbd867297c97c91baeff9fa74c1e04b54a215149b577",
+    "bytes": 8160
+  },
+  {
+    "path": "export_proof.py",
+    "sha256": "74001cd76b0594611b31e225c48175c738d1c7d1ee991adf4fef2f9f002a98bd",
+    "bytes": 21635
+  },
+  {
+    "path": "manifest.json",
+    "sha256": "694d1a3d366db923e45d9b32e1ae23c201b256cae33b7b980d6083330e70c2bb",
+    "bytes": 18866
+  },
+  {
+    "path": "raw/allocation-endpoints.json",
+    "sha256": "b03b335dc668479032652175989b254dbb6f8231670b17431318e2a71464ddb9",
+    "bytes": 786
+  },
+  {
+    "path": "raw/allocation-green.txt",
+    "sha256": "e36696292c7c14827388acb8d2391a1c2d64c4a16a8f04a52c8db64764847898",
+    "bytes": 115
+  },
+  {
+    "path": "raw/allocation-red.txt",
+    "sha256": "a47da452787f736cd3d56daab5fabcc88dd99a2c3c3eb75a7941d62f5fee604a",
+    "bytes": 117
+  },
+  {
+    "path": "raw/diagnostic-green.txt",
+    "sha256": "ea327d9daf243f4eec36c0900428bc44965756f160f9e33e0bc26305c44e5b48",
+    "bytes": 294
+  },
+  {
+    "path": "raw/diagnostic-red.txt",
+    "sha256": "1d0fe036ed9ebfa69e2eab52ba347c362474a3e6caf6e851bd2282162feced1c",
+    "bytes": 498
+  },
+  {
+    "path": "raw/diagnostic-test.txt",
+    "sha256": "faaee4821affb75e730a476d3beaa22da25954e60b66d36adae748e37e923fff",
+    "bytes": 487
+  },
+  {
+    "path": "raw/fallback-baseline-metrics.json",
+    "sha256": "4020e188e71bedb4d0fd8bc83db3c9481734af1b1d854766d48dda09fe42e65b",
+    "bytes": 10134
+  },
+  {
+    "path": "raw/fallback-frame-239.npz",
+    "sha256": "8d45ea32b655deeb008742bf31a99d2acc67ed8af826d59c280541c9fcebb715",
+    "bytes": 100137
+  },
+  {
+    "path": "raw/fallback-green-job.json",
+    "sha256": "41e0fa6c6ee79f373820d7239b301328dc7ef68409905360b459d0edf03e9400",
+    "bytes": 1355
+  },
+  {
+    "path": "raw/fallback-green-manifest.json",
+    "sha256": "996c499b8ad7cd0cb7dc8025a2974a4a15b837062fe2de4656955a3d3cbcf620",
+    "bytes": 904
+  },
+  {
+    "path": "raw/fallback-green-metrics.json",
+    "sha256": "40d935cb44ed0712c208902860dc2e05c5713d1db135b278be8c447373222772",
+    "bytes": 10214
+  },
+  {
+    "path": "raw/fallback-matrix-summary.json",
+    "sha256": "98b874d9ab8add8c1c68b7cb030a3f5d2eda98e7cb6228cafc9fcc15418db2e0",
+    "bytes": 111
+  },
+  {
+    "path": "raw/fallback-red-job.json",
+    "sha256": "aec339bb4fd20b869b65f2d1913bfebaed472f78106d59a6429bffefbf7b2b6d",
+    "bytes": 1345
+  },
+  {
+    "path": "raw/fallback-red-manifest.json",
+    "sha256": "a5d15db2be16a650bf43ddc36ffa85697f3131874cd01d04325f5611186ba6ad",
+    "bytes": 506
+  },
+  {
+    "path": "raw/fallback-red-orchestrator.txt",
+    "sha256": "a2c079efe00d8da3db3d34ba314deedbc475f1d9a8c7215d067b5387e0268a2b",
+    "bytes": 1649
+  },
+  {
+    "path": "raw/fallback-red-stderr.txt",
+    "sha256": "0254e9c0e5e8d56f4a3286174ab9b2cfe4463154e8dda3acac833dd6bb09731d",
+    "bytes": 173
+  },
+  {
+    "path": "raw/transition-concurrent-load.json",
+    "sha256": "a5158cc87b1b07bf1adf992a28208b8e69744cab365f51b521022f915e758b2d",
+    "bytes": 1393
+  },
+  {
+    "path": "raw/transition-green.txt",
+    "sha256": "37f426b73b6bdfe67ddb9bfd55565a1b49d1375c8a6407eac71c13b76935cbb6",
+    "bytes": 1813
+  },
+  {
+    "path": "raw/transition-negative.txt",
+    "sha256": "424573663bd1a1061ea70b5a89191fedcec4942dd655a3fc0b67d675571c7adb",
+    "bytes": 296
+  },
+  {
+    "path": "raw/transition-positive.txt",
+    "sha256": "488816f8d26093f33773ac65dc2e239449420f6af0c83234c375345b995487ef",
+    "bytes": 697
+  },
+  {
+    "path": "raw/transition-red.txt",
+    "sha256": "c4b2acbdaa92219a1649ef8da33922108276f728ad207b3d88eeaee4e2e8d9da",
+    "bytes": 337
+  },
+  {
+    "path": "raw/transition-test-source.txt",
+    "sha256": "6cb59f6296272b16382c68e7140d6a17e03d42ca054da955f2622d874feff6c7",
+    "bytes": 2205
+  },
+  {
+    "path": "reproduce_allocations.py",
+    "sha256": "b99a6fc0f91456a608cf4d6d4c57a0ed749efe0a776d8d58c219503855393414",
+    "bytes": 5395
+  }
+]

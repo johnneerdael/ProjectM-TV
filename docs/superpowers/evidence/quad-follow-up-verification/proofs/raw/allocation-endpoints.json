@@ -1,0 +1,34 @@
+[
+  {
+    "state": "red",
+    "attempts": 1,
+    "live_shaders": 1,
+    "source_key": "allocation-red",
+    "source_line": 18,
+    "measurement": "glIsShader on tracked real driver objects"
+  },
+  {
+    "state": "red",
+    "attempts": 16,
+    "live_shaders": 16,
+    "source_key": "allocation-red",
+    "source_line": 176,
+    "measurement": "glIsShader on tracked real driver objects"
+  },
+  {
+    "state": "green",
+    "attempts": 1,
+    "live_shaders": 0,
+    "source_key": "allocation-green",
+    "source_line": 11,
+    "measurement": "glIsShader on tracked real driver objects"
+  },
+  {
+    "state": "green",
+    "attempts": 16,
+    "live_shaders": 0,
+    "source_key": "allocation-green",
+    "source_line": 18,
+    "measurement": "glIsShader on tracked real driver objects"
+  }
+]

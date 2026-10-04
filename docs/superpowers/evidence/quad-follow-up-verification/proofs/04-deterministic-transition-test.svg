@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1080pt" height="669.6pt" viewBox="0 0 1080 669.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-04T03:24:39.000206</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 669.6 
+L 1080 669.6 
+L 1080 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #a43835" x="48.6" y="152.7735" transform="rotate(-0 48.6 152.7735)">Before — timing-sensitive host assertion</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 209.076559)">native-shader-failure.log, L365–366 / L446–447</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 222.54984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 242.114371)">auto: a slow blend that is CPU-bound keeps</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 259.679996)">its resolution</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 272.04984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 291.614371)">TRANSITION auto: blend at 60.1 fps</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 308.076559)">(228.3 before), lowering it to 60% now</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 321.54984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 340.932184)">FAIL engine_test.cpp:574 g_windowW == 960</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 354.54984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 374.114371)">The fake workload spun to a wall-time deadline.</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(48.6 390.585153)">Host preemption can reduce measured thread CPU share.</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #21715b" x="584.315493" y="152.7735" transform="rotate(-0 584.315493 152.7735)">After — deterministic policy inputs</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 209.076559)">63 samples through transition end:</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 225.614371)">  wall: 16 ms / frame; baseline input: 250 fps</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 239.04984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 258.585153)">15 ms CPU input:</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 274.961403)">  scale=75%, cpu=92%, outgoing_rate=1/2</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 292.679996)">  next blends at 100%</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 305.04984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 324.585153)">0.1 ms CPU input:</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 340.961403)">  scale=60%, cpu=1%, outgoing_rate=1/1</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 354.54984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 374.076559)">native-deterministic-policy-green.log L415:</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 391.553668)">  ALL TESTS PASSED</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 404.04984)"/>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 423.576559)">Scratch negative control (threshold 80% → 99%)</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans Mono'" transform="translate(584.315493 440.114371)">failed the expected width assertion.</text>
+   </g>
+  </g>
+  <g id="text_5">
+   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start" x="48.6" y="40.152563" transform="rotate(-0 48.6 40.152563)">CPU-bound transition coverage no longer depends on host timing</text>
+  </g>
+  <g id="text_6">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="48.6" y="74.738925" transform="rotate(-0 48.6 74.738925)">TEST-ONLY fix • real policy, synthetic timing samples • production adaptation policy unchanged</text>
+  </g>
+  <g id="text_7">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 619.584637)">RED source: build/follow-ups/native-shader-failure.log SHA256 aad6a044adc1243c</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 633.084637)">GREEN source: build/follow-ups/native-deterministic-policy-green.log SHA256 4beb046fe5eb7aba</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 646.584637)">Sample-derived values are not app performance measurements. Exact line excerpts, negative control and source hashes: raw/ and manifest.json</text>
+  </g>
+ </g>
+</svg>

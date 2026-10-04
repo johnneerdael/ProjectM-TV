@@ -1,0 +1,6 @@
+1: TRANSITION auto: blend at 62.5 fps (250.0 before) on the CPU: the outgoing preset renders every 2nd frame from now on
+2: TRANSITION preset='policy-control' mode=classic scale=75% load_ms=0 fps=62.5 blend_fps=62.5 before_fps=250.0 cpu=92% outgoing_rate=1/2 frames=63 slow_frames=0 worst_ms=16
+3: TRANSITION auto: blend at 75% ran at 62.5 fps (250.0 before) on the CPU (92%): resolution does not help, next blends at 100%
+4: TRANSITION auto: blend at 62.5 fps (250.0 before), lowering it to 60% now
+5: TRANSITION preset='policy-control' mode=classic scale=60% load_ms=0 fps=62.5 blend_fps=62.5 before_fps=250.0 cpu=1% outgoing_rate=1/1 frames=63 slow_frames=0 worst_ms=16
+27: POLICY TESTS PASSED

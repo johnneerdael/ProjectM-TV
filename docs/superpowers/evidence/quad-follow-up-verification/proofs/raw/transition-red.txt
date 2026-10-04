@@ -1,0 +1,4 @@
+365: auto: a slow blend that is CPU-bound keeps its resolution (a lower one would not help)
+366:   ok: g_windowW == 960
+446: TRANSITION auto: blend at 60.1 fps (228.3 before), lowering it to 60% now
+447: FAIL /Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/core/src/test/native/engine_test.cpp:574 g_windowW == 960

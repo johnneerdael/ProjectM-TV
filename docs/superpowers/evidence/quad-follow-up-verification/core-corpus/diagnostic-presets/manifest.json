@@ -1,0 +1,151 @@
+{
+  "scope": "Actual-core diagnostic failures and unmodified preset bytes; not a fidelity comparison.",
+  "files": [
+    {
+      "path": "build/follow-ups/core-corpus/baseline-native-warnings.log",
+      "sha256": "a0e2aba74b23c57138e45d2f931d0b09b6752cb5e0c8bafd95da2ab32a276730",
+      "bytes": 157650
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/summary.json",
+      "sha256": "e5c709b56437ba6ad9f9651c2edb0b296a2a807036f10f95cfcc5347f038812f",
+      "bytes": 1181
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/native-diagnostics.log",
+      "sha256": "0cb9a79872579de09497d8f28b4d526bf1452602d034a3743abf9b9ec619345d",
+      "bytes": 1260
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/a2f019a1310a1fd81f6465510d10f2fb122ad6405aa1c53b422e5533420ab3f2/pull.log",
+      "sha256": "969ed211ba38f328e690a241806eaf57f722c1dbf660d7c8ab05aeb47193f610",
+      "bytes": 199
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/a2f019a1310a1fd81f6465510d10f2fb122ad6405aa1c53b422e5533420ab3f2/instrumentation.log",
+      "sha256": "24cb8579dc4c216344048e41c8b8a8ccee0b259141d06bfe26b07b58b8f27c97",
+      "bytes": 98
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/a2f019a1310a1fd81f6465510d10f2fb122ad6405aa1c53b422e5533420ab3f2/job.json",
+      "sha256": "6719c6a43bb9a29ce4fd3e01a72e827daf38665f6b7f8b688e10b936d20b099e",
+      "bytes": 986
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/a2f019a1310a1fd81f6465510d10f2fb122ad6405aa1c53b422e5533420ab3f2/row.json",
+      "sha256": "d1d387f211ba669de0cf93a15a0443a18fbbbad0bea3bd4a05dfb75763799d11",
+      "bytes": 10475
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/2fcef098bc6aaa6149ac52f02ca6af575ac7318aa29e071b4a62c1b078a5b357/pull.log",
+      "sha256": "fea60351852aed2e5b4dd48d5c9857f54f97801796367081258587ea9997d51b",
+      "bytes": 199
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/2fcef098bc6aaa6149ac52f02ca6af575ac7318aa29e071b4a62c1b078a5b357/instrumentation.log",
+      "sha256": "24cb8579dc4c216344048e41c8b8a8ccee0b259141d06bfe26b07b58b8f27c97",
+      "bytes": 98
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/2fcef098bc6aaa6149ac52f02ca6af575ac7318aa29e071b4a62c1b078a5b357/job.json",
+      "sha256": "57586f781e7661c52cec4d162ef8477d9e5f7ccfd72734510aa9643b3ba5144a",
+      "bytes": 986
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/2fcef098bc6aaa6149ac52f02ca6af575ac7318aa29e071b4a62c1b078a5b357/row.json",
+      "sha256": "7aec533474948add17cbb48b109b2523ce4dfa7ba6c6c2854c3a9835301fe4f9",
+      "bytes": 10474
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/46a0e208a5e1bc41cf310a20da1f95018d65413194b4a947e1632eb0a4ed5015/pull.log",
+      "sha256": "637bd2e2a724a7e0720615bfe40dfa05f546ff05b042eb17fb1c9190fd7c6135",
+      "bytes": 199
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/46a0e208a5e1bc41cf310a20da1f95018d65413194b4a947e1632eb0a4ed5015/instrumentation.log",
+      "sha256": "24cb8579dc4c216344048e41c8b8a8ccee0b259141d06bfe26b07b58b8f27c97",
+      "bytes": 98
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/46a0e208a5e1bc41cf310a20da1f95018d65413194b4a947e1632eb0a4ed5015/job.json",
+      "sha256": "2c4295f07025c2c32f9f24a20669379e5f14092a358bf1f36dc795f85749dae0",
+      "bytes": 986
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/46a0e208a5e1bc41cf310a20da1f95018d65413194b4a947e1632eb0a4ed5015/row.json",
+      "sha256": "b69b890d6d72765cdaab927f16e77fbc54004b57edfc9b62bfa51b82a7585700",
+      "bytes": 10476
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/87b8e65c207ea4863ca0f3f9cac1fad45031a1804aa6b536d3985533aa990b1b/pull.log",
+      "sha256": "0989a0b631ee759b3114253c9a132b1a3bfa26eaab6a36dafd3da2327e8eb9f4",
+      "bytes": 199
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/87b8e65c207ea4863ca0f3f9cac1fad45031a1804aa6b536d3985533aa990b1b/instrumentation.log",
+      "sha256": "24cb8579dc4c216344048e41c8b8a8ccee0b259141d06bfe26b07b58b8f27c97",
+      "bytes": 98
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/87b8e65c207ea4863ca0f3f9cac1fad45031a1804aa6b536d3985533aa990b1b/job.json",
+      "sha256": "5da7f33921ee94612c7d25d324a979353284e4cba57d4983be7d9022bf1ebd09",
+      "bytes": 986
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/87b8e65c207ea4863ca0f3f9cac1fad45031a1804aa6b536d3985533aa990b1b/row.json",
+      "sha256": "2d6e71fa703814ebe2b356ef5dc5c5fe695242fb5f34fa6667f36e0d3140c959",
+      "bytes": 10476
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/87b8e65c207ea4863ca0f3f9cac1fad45031a1804aa6b536d3985533aa990b1b/output/result.json",
+      "sha256": "43024a82fcaf22962bf124ab4aa286cb0a1a00856046f877664d9709eb6d6b01",
+      "bytes": 9029
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/87b8e65c207ea4863ca0f3f9cac1fad45031a1804aa6b536d3985533aa990b1b/output/frames.jsonl.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/46a0e208a5e1bc41cf310a20da1f95018d65413194b4a947e1632eb0a4ed5015/output/result.json",
+      "sha256": "3df074df70a6bc61b4495adfaaa3641efd79ae522cbe7e33e4b092c5907026f1",
+      "bytes": 9029
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/46a0e208a5e1bc41cf310a20da1f95018d65413194b4a947e1632eb0a4ed5015/output/frames.jsonl.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/2fcef098bc6aaa6149ac52f02ca6af575ac7318aa29e071b4a62c1b078a5b357/output/result.json",
+      "sha256": "4d083054bc29f995743515fa3c24350bdfe300c8e7d188fdb2042703de275d6a",
+      "bytes": 9029
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/2fcef098bc6aaa6149ac52f02ca6af575ac7318aa29e071b4a62c1b078a5b357/output/frames.jsonl.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/a2f019a1310a1fd81f6465510d10f2fb122ad6405aa1c53b422e5533420ab3f2/output/result.json",
+      "sha256": "821989adc71dbbafd01b1c9f89c63070a4b53458c43e5153933fe740a0c58c48",
+      "bytes": 9028
+    },
+    {
+      "path": "build/follow-ups/core-corpus/tv-candidate28/diagnostic-jobs/jobs/a2f019a1310a1fd81f6465510d10f2fb122ad6405aa1c53b422e5533420ab3f2/output/frames.jsonl.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "core/src/main/assets/presets/161.milk",
+      "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b",
+      "bytes": 15036
+    },
+    {
+      "path": "core/src/main/assets/presets/430.milk",
+      "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63",
+      "bytes": 8225
+    }
+  ],
+  "archive_sha256": "d4f9e8125e268ea7269450ec0bb5a8fe0cae78f270df11e4154548ba2fed4d48"
+}

@@ -1,0 +1,324 @@
+{
+  "phase": "low-real",
+  "render_jobs": 154,
+  "presets": 7,
+  "nondeterministic": [],
+  "legacy_changed": [],
+  "comparisons": [
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q360",
+      "authored_img_err": 0.26517587900161743,
+      "authored_luma_ratio": 2.2962267781681662,
+      "luma": 0.4778500029955576,
+      "center_rgb": [
+        0.5681904871323529,
+        0.47306175392610755,
+        0.458697008896151
+      ],
+      "saturation": 0.19585037529468535,
+      "same_size_img_err": 0.057495806366205215,
+      "same_size_luma_ratio": 0.990775393948522
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q480",
+      "authored_img_err": 0.1536225974559784,
+      "authored_luma_ratio": 1.725029982805142,
+      "luma": 0.3589826537553318,
+      "center_rgb": [
+        0.39184065423555037,
+        0.31467038318595414,
+        0.3050587194027938
+      ],
+      "saturation": 0.235786572098732,
+      "same_size_img_err": 0.07319559901952744,
+      "same_size_luma_ratio": 0.9724861953469109
+    },
+    {
+      "name": "$$$ Royal - Mashup (103).milk",
+      "key": "q540",
+      "authored_img_err": 0.1039958968758583,
+      "authored_luma_ratio": 1.4222076580292489,
+      "luma": 0.29596464082338575,
+      "center_rgb": [
+        0.3192640817901235,
+        0.24884918653675456,
+        0.2402172156156701
+      ],
+      "saturation": 0.25176210403442384,
+      "same_size_img_err": 0.07578960061073303,
+      "same_size_luma_ratio": 0.9547669938255654
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "q360",
+      "authored_img_err": 0.051193565130233765,
+      "authored_luma_ratio": 1.6550708238735676,
+      "luma": 0.043779064826161944,
+      "center_rgb": [
+        0.4583574176198257,
+        0.4583574176198257,
+        0.4583574176198257
+      ],
+      "saturation": 0.0,
+      "same_size_img_err": 0.0021614902652800083,
+      "same_size_luma_ratio": 1.0402692076025926
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "q480",
+      "authored_img_err": 0.07521513849496841,
+      "authored_luma_ratio": 2.4788658884944197,
+      "luma": 0.06556965953503441,
+      "center_rgb": [
+        0.37673148148148133,
+        0.37673148148148133,
+        0.37673148148148133
+      ],
+      "saturation": 0.0,
+      "same_size_img_err": 0.00747118704020977,
+      "same_size_luma_ratio": 1.062332569168195
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "q540",
+      "authored_img_err": 0.034440163522958755,
+      "authored_luma_ratio": 1.0568362848307933,
+      "luma": 0.02795487876220447,
+      "center_rgb": [
+        0.23629534439804728,
+        0.23629534439804728,
+        0.23629534439804728
+      ],
+      "saturation": 0.0,
+      "same_size_img_err": 0.0018126954091712832,
+      "same_size_luma_ratio": 1.0572668050333562
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q360",
+      "authored_img_err": 0.12867069244384766,
+      "authored_luma_ratio": 0.9534549264837247,
+      "luma": 0.5478528928401586,
+      "center_rgb": [
+        0.6808988913852579,
+        0.5069850813589325,
+        0.4481373541893609
+      ],
+      "saturation": 0.4386496126651764,
+      "same_size_img_err": 0.03573889285326004,
+      "same_size_luma_ratio": 0.9955340524326984
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q480",
+      "authored_img_err": 0.08860237151384354,
+      "authored_luma_ratio": 0.975982688711824,
+      "luma": 0.560797290486092,
+      "center_rgb": [
+        0.7340855520312695,
+        0.5228776992823272,
+        0.47549243880558784
+      ],
+      "saturation": 0.45660431385040284,
+      "same_size_img_err": 0.0365411750972271,
+      "same_size_luma_ratio": 1.0051458031366545
+    },
+    {
+      "name": "Flexi - alien complex 03.milk",
+      "key": "q540",
+      "authored_img_err": 0.06679609417915344,
+      "authored_luma_ratio": 0.9936400395607778,
+      "luma": 0.5709431615428063,
+      "center_rgb": [
+        0.7575884571935771,
+        0.5309090565238439,
+        0.48674038519728907
+      ],
+      "saturation": 0.46900796294212344,
+      "same_size_img_err": 0.03856213390827179,
+      "same_size_luma_ratio": 1.0136836882426483
+    },
+    {
+      "name": "Geiss - Surface (1-02 Version).milk",
+      "key": "q360",
+      "authored_img_err": 0.011871998198330402,
+      "authored_luma_ratio": 1.0512647452217518,
+      "luma": 0.05913271815396355,
+      "center_rgb": [
+        0.4556356237518156,
+        0.5253447400372183,
+        0.4794538767474582
+      ],
+      "saturation": 0.03679310008883476,
+      "same_size_img_err": 3.1241636406775797e-06,
+      "same_size_luma_ratio": 0.9999863986743859
+    },
+    {
+      "name": "Geiss - Surface (1-02 Version).milk",
+      "key": "q480",
+      "authored_img_err": 0.0069290585815906525,
+      "authored_luma_ratio": 1.0213522202622636,
+      "luma": 0.05745016490965238,
+      "center_rgb": [
+        0.4283178905549145,
+        0.49480775022427254,
+        0.45103097366397543
+      ],
+      "saturation": 0.03739708736538887,
+      "same_size_img_err": 5.98956012254348e-06,
+      "same_size_luma_ratio": 1.000011449049872
+    },
+    {
+      "name": "Geiss - Surface (1-02 Version).milk",
+      "key": "q540",
+      "authored_img_err": 0.004747164901345968,
+      "authored_luma_ratio": 1.0042680980426915,
+      "luma": 0.056489198046919126,
+      "center_rgb": [
+        0.41755485077261384,
+        0.4812528683026707,
+        0.438666894870088
+      ],
+      "saturation": 0.035692545026540755,
+      "same_size_img_err": 1.8236427422380075e-05,
+      "same_size_luma_ratio": 1.0002089162007135
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "key": "q360",
+      "authored_img_err": 0.2983474135398865,
+      "authored_luma_ratio": 1.5563071708968235,
+      "luma": 0.6641764227945999,
+      "center_rgb": [
+        1.0,
+        0.7339709144653231,
+        0.7339709144653231
+      ],
+      "saturation": 0.4249833285808563,
+      "same_size_img_err": 0.014363635331392288,
+      "same_size_luma_ratio": 1.0045815176820845
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "key": "q480",
+      "authored_img_err": 0.2592470049858093,
+      "authored_luma_ratio": 1.2471895889758797,
+      "luma": 0.5322560579575865,
+      "center_rgb": [
+        0.9999959951300782,
+        0.5807175205049339,
+        0.5807175205049339
+      ],
+      "saturation": 0.5945956707000732,
+      "same_size_img_err": 0.01087271049618721,
+      "same_size_luma_ratio": 1.006992791053054
+    },
+    {
+      "name": "Serge circles005b.milk",
+      "key": "q540",
+      "authored_img_err": 0.23102053999900818,
+      "authored_luma_ratio": 1.0350122761570315,
+      "luma": 0.44170634433968525,
+      "center_rgb": [
+        0.99892825082708,
+        0.4681970101569436,
+        0.4681970101569436
+      ],
+      "saturation": 0.7025004386901855,
+      "same_size_img_err": 0.0102746756747365,
+      "same_size_luma_ratio": 1.0106258403839419
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q360",
+      "authored_img_err": 0.17846393585205078,
+      "authored_luma_ratio": 1.0568905616082247,
+      "luma": 0.7373115308971042,
+      "center_rgb": [
+        0.8360642616421567,
+        0.8091593193990558,
+        0.7264003353077345
+      ],
+      "saturation": 0.27511494159698485,
+      "same_size_img_err": 0.1956736296415329,
+      "same_size_luma_ratio": 1.0112910866123055
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q480",
+      "authored_img_err": 0.14679861068725586,
+      "authored_luma_ratio": 1.0092352344261926,
+      "luma": 0.7040660620507173,
+      "center_rgb": [
+        0.8394754100986799,
+        0.7223480872741249,
+        0.6656709999359219
+      ],
+      "saturation": 0.30309886038303374,
+      "same_size_img_err": 0.16287489235401154,
+      "same_size_luma_ratio": 0.9893522955749497
+    },
+    {
+      "name": "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
+      "key": "q540",
+      "authored_img_err": 0.1933019608259201,
+      "authored_luma_ratio": 0.8437076279676803,
+      "luma": 0.5885901392286346,
+      "center_rgb": [
+        0.7842400573912693,
+        0.5259690576333413,
+        0.5337331747256516
+      ],
+      "saturation": 0.45275049805641177,
+      "same_size_img_err": 0.1379534751176834,
+      "same_size_luma_ratio": 0.9049616227123352
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "key": "q360",
+      "authored_img_err": 0.1194232702255249,
+      "authored_luma_ratio": 0.8272311411781753,
+      "luma": 0.17814157957853916,
+      "center_rgb": [
+        0.4369005310457515,
+        0.23226752564451703,
+        0.41618784608750875
+      ],
+      "saturation": 0.8992812633514404,
+      "same_size_img_err": 0.0013254599180072546,
+      "same_size_luma_ratio": 1.0004209399576827
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "key": "q480",
+      "authored_img_err": 0.0922934040427208,
+      "authored_luma_ratio": 0.8805641584901076,
+      "luma": 0.1896266742210181,
+      "center_rgb": [
+        0.16410544822504175,
+        0.2688700099320774,
+        0.44202462194027897
+      ],
+      "saturation": 0.8995403289794922,
+      "same_size_img_err": 0.003237305674701929,
+      "same_size_luma_ratio": 1.0011284174047403
+    },
+    {
+      "name": "fat cancer tour meant t nz+.milk",
+      "key": "q540",
+      "authored_img_err": 0.08788029849529266,
+      "authored_luma_ratio": 0.9235917789217941,
+      "luma": 0.1988925346168074,
+      "center_rgb": [
+        0.16874703713790046,
+        0.2732386793451949,
+        0.4440564040688286
+      ],
+      "saturation": 0.9039321184158325,
+      "same_size_img_err": 0.004006098955869675,
+      "same_size_luma_ratio": 1.0015413729324059
+    }
+  ]
+}

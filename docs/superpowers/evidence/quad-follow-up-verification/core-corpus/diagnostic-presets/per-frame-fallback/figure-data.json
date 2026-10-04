@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "case": "JoinsIdentifierSplitAcrossRecords",
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "case": "RemovesLineCommentsBeforeJoiningRecords",
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "case": "SupportsLegacyBackslashComments",
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "case": "KeepsAcceptedBlockCommentsOnOriginalPath",
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "case": "InvalidExpressionStillReportsFailure",
+      "before_pass": true,
+      "after_pass": true
+    }
+  ],
+  "kind": "measured-test-outcomes"
+}

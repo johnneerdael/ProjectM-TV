@@ -1,0 +1,68 @@
+{
+  "jobs": 20,
+  "nondeterministic": [],
+  "off_gate_changed": [],
+  "comparisons": [
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "q1330",
+      "reference_motion_mae": 0.02430899813771248,
+      "off": {
+        "img_err": 0.38526344299316406,
+        "luma_ratio": 15.347228900616058,
+        "center_rgb": [
+          0.2472156709304492,
+          0.2472156709304492,
+          0.2472156709304492
+        ],
+        "saturation": 0.0,
+        "motion_mae": 0.04215984791517258,
+        "picture_sharpness_ratio": 4.710779356498877
+      },
+      "on": {
+        "img_err": 0.026423122733831406,
+        "luma_ratio": 0.1284713561594648,
+        "center_rgb": [
+          0.0520026342019523,
+          0.0520026342019523,
+          0.0520026342019523
+        ],
+        "saturation": 0.0,
+        "motion_mae": 9.353906352771446e-05,
+        "picture_sharpness_ratio": 0.4563917250498785
+      }
+    },
+    {
+      "name": "$$$ Royal - Mashup (191).milk",
+      "key": "q2160",
+      "reference_motion_mae": 0.02430899813771248,
+      "off": {
+        "img_err": 0.39994144439697266,
+        "luma_ratio": 15.904296646477649,
+        "center_rgb": [
+          0.2713348438414075,
+          0.2713348438414075,
+          0.2713348438414075
+        ],
+        "saturation": 0.0,
+        "motion_mae": 0.03524375334382057,
+        "picture_sharpness_ratio": 5.340680758790438
+      },
+      "on": {
+        "img_err": 0.026484442874789238,
+        "luma_ratio": 0.1280903500631274,
+        "center_rgb": [
+          0.05176817660738421,
+          0.05176817660738421,
+          0.05176817660738421
+        ],
+        "saturation": 0.0,
+        "motion_mae": 8.587583579355851e-05,
+        "picture_sharpness_ratio": 0.4637834623878861
+      }
+    }
+  ],
+  "status": "experimental; not accepted for production",
+  "valid_for_strategy_comparison": false,
+  "reason": "Reference copy drew with native viewport, cropping the input. Corrected viewport probe requires fresh jobs."
+}

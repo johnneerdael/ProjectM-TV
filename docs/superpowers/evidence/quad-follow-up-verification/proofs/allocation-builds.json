@@ -1,0 +1,140 @@
+[
+  {
+    "state": "red",
+    "description": "Fresh CGL rerun; not the unsaved original session run.",
+    "rerun_utc": "2026-10-04T01:22:43.014520+00:00",
+    "host": "macOS-15.8-arm64-arm-64bit-Mach-O",
+    "gl_context_lines": [
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4",
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4",
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4",
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4"
+    ],
+    "snapshot": "build/follow-ups/lab-final/engines/9733b1ea4f38ade6c71fc6bfdcce317965b47883f2decbc8f4082c602dca1aea",
+    "worker_config": {
+      "path": "build/follow-ups/worker-final.json",
+      "sha256": "4327c5e52e26fdfd3c4016a825153b54dbf91b411f60775f059e83c7342c7219"
+    },
+    "worker_identity": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "c0ab5e137bfe151bd5da8e5b07befe5ccd844792194c6a72da849a6adcd5df16",
+      "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e"
+    },
+    "copied_sources": [
+      {
+        "original_path": "build/follow-ups/lab-final/engines/9733b1ea4f38ade6c71fc6bfdcce317965b47883f2decbc8f4082c602dca1aea/src/libprojectM/Renderer/Shader.cpp",
+        "original_sha256": "bdbeddab4b2c71a3506cd0ead1ae81c651fcabc72d56c07e65f7cb2f61be3b56",
+        "copy_path": "allocation/red/src/libprojectM/Renderer/Shader.cpp",
+        "copy_sha256": "bdbeddab4b2c71a3506cd0ead1ae81c651fcabc72d56c07e65f7cb2f61be3b56"
+      },
+      {
+        "original_path": "build/follow-ups/lab-final/engines/9733b1ea4f38ade6c71fc6bfdcce317965b47883f2decbc8f4082c602dca1aea/src/libprojectM/Renderer/Shader.hpp",
+        "original_sha256": "657e05191afcdf4db56298f8293ed6268da638bfb63260711285e9875a6b372f",
+        "copy_path": "allocation/red/src/libprojectM/Renderer/Shader.hpp",
+        "copy_sha256": "657e05191afcdf4db56298f8293ed6268da638bfb63260711285e9875a6b372f"
+      }
+    ],
+    "test_original_path": "third_party/projectm/tests/libprojectM/ShaderFailureTest.cpp",
+    "test_original_sha256": "9344ea4765882d34a96576d69779a7fd88bfea069fed27f66f49a69e122c63f0",
+    "test_copy_path": "allocation/red/tests/libprojectM/ShaderFailureTest.cpp",
+    "test_copy_sha256": "5793fff94fd8db71d5b06574dfbcf09f19fcfaea842b57079a61b20084b92dfd",
+    "test_copy_changes": [
+      "Remove what() comparison to isolate allocation lifetime",
+      "Print two measured glIsShader endpoints after existing checks",
+      "Print actual CGL renderer/version identity"
+    ],
+    "compile_command": [
+      "clang++",
+      "-std=c++17",
+      "-DGL_SILENCE_DEPRECATION",
+      "-I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/third_party/projectm/src/libprojectM",
+      "-I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/third_party/projectm/vendor",
+      "-I/opt/homebrew/include",
+      "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/proof-export/allocation/red/tests/libprojectM/ShaderFailureTest.cpp",
+      "/opt/homebrew/lib/libgtest.a",
+      "/opt/homebrew/lib/libgtest_main.a",
+      "-framework",
+      "OpenGL",
+      "-o",
+      "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/proof-export/allocation/red/shader-failure-test"
+    ],
+    "compile_exit_code": 0,
+    "run_command": [
+      "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/proof-export/allocation/red/shader-failure-test",
+      "--gtest_filter=ShaderFailureTest.VertexRejectionReleasesShader:ShaderFailureTest.FragmentRejectionReleasesBothShaders:ShaderFailureTest.LinkRejectionReleasesBothShaders:ShaderFailureTest.RepeatedRejectedProgramsDoNotAccumulateShaders"
+    ],
+    "run_exit_code": 1,
+    "binary_sha256": "ee071a1a35dc90931e6980b06a4615ce89faeb39a66f533f405e888d59df2a14",
+    "log_path": "allocation/red/run.log",
+    "log_sha256": "3a7075e5afff33df1b31433e00ad53fce06d3e8d3f6a2dc381d1e902e09c9d66"
+  },
+  {
+    "state": "green",
+    "description": "Fresh CGL rerun; not the unsaved original session run.",
+    "rerun_utc": "2026-10-04T01:22:44.038984+00:00",
+    "host": "macOS-15.8-arm64-arm-64bit-Mach-O",
+    "gl_context_lines": [
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4",
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4",
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4",
+      "GL_CONTEXT renderer=Apple M4 Pro version=4.1 Metal - 89.4"
+    ],
+    "snapshot": "build/follow-ups/lab-diagnostics-fixed/engines/8ca3d2d6929298e2614f58573e9a0006f6e37cfa93ebd0439207cd788d3d1297",
+    "worker_config": {
+      "path": "build/follow-ups/worker-diagnostics-fixed.json",
+      "sha256": "991f3a6cec0cc60ae0d56182c2f06523480c022902e2b9c132b6921a2f28746e"
+    },
+    "worker_identity": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "839ea69b6a5b5fd94afa1b5d140c621b7af2b6dad7c53c849487d37bc4bb786d",
+      "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e"
+    },
+    "copied_sources": [
+      {
+        "original_path": "build/follow-ups/lab-diagnostics-fixed/engines/8ca3d2d6929298e2614f58573e9a0006f6e37cfa93ebd0439207cd788d3d1297/src/libprojectM/Renderer/Shader.cpp",
+        "original_sha256": "5ae024f2b200ae5f4ee39eb039831841744ed0a27c0cc0f0a257d7a000eb6af3",
+        "copy_path": "allocation/green/src/libprojectM/Renderer/Shader.cpp",
+        "copy_sha256": "5ae024f2b200ae5f4ee39eb039831841744ed0a27c0cc0f0a257d7a000eb6af3"
+      },
+      {
+        "original_path": "build/follow-ups/lab-diagnostics-fixed/engines/8ca3d2d6929298e2614f58573e9a0006f6e37cfa93ebd0439207cd788d3d1297/src/libprojectM/Renderer/Shader.hpp",
+        "original_sha256": "29d4c3b33f389b007826c865523003d8c2e0839c5b45bbf78b69a72abf85cee4",
+        "copy_path": "allocation/green/src/libprojectM/Renderer/Shader.hpp",
+        "copy_sha256": "29d4c3b33f389b007826c865523003d8c2e0839c5b45bbf78b69a72abf85cee4"
+      }
+    ],
+    "test_original_path": "third_party/projectm/tests/libprojectM/ShaderFailureTest.cpp",
+    "test_original_sha256": "9344ea4765882d34a96576d69779a7fd88bfea069fed27f66f49a69e122c63f0",
+    "test_copy_path": "allocation/green/tests/libprojectM/ShaderFailureTest.cpp",
+    "test_copy_sha256": "5793fff94fd8db71d5b06574dfbcf09f19fcfaea842b57079a61b20084b92dfd",
+    "test_copy_changes": [
+      "Remove what() comparison to isolate allocation lifetime",
+      "Print two measured glIsShader endpoints after existing checks",
+      "Print actual CGL renderer/version identity"
+    ],
+    "compile_command": [
+      "clang++",
+      "-std=c++17",
+      "-DGL_SILENCE_DEPRECATION",
+      "-I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/third_party/projectm/src/libprojectM",
+      "-I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/third_party/projectm/vendor",
+      "-I/opt/homebrew/include",
+      "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/proof-export/allocation/green/tests/libprojectM/ShaderFailureTest.cpp",
+      "/opt/homebrew/lib/libgtest.a",
+      "/opt/homebrew/lib/libgtest_main.a",
+      "-framework",
+      "OpenGL",
+      "-o",
+      "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/proof-export/allocation/green/shader-failure-test"
+    ],
+    "compile_exit_code": 0,
+    "run_command": [
+      "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/proof-export/allocation/green/shader-failure-test",
+      "--gtest_filter=ShaderFailureTest.VertexRejectionReleasesShader:ShaderFailureTest.FragmentRejectionReleasesBothShaders:ShaderFailureTest.LinkRejectionReleasesBothShaders:ShaderFailureTest.RepeatedRejectedProgramsDoNotAccumulateShaders"
+    ],
+    "run_exit_code": 0,
+    "binary_sha256": "6a598b6bb0de5239e1b31a53499048f37b4de91003e2908d7cb821ac472f9536",
+    "log_path": "allocation/green/run.log",
+    "log_sha256": "bfa1e9a0ef7557dbafadea10e78bb45dc90647c5ca24819f0e2fd05c58093c98"
+  }
+]

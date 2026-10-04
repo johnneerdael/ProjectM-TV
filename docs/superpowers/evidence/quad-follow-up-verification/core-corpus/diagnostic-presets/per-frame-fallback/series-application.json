@@ -1,0 +1,123 @@
+{
+  "upstream_ref": "e0b0a967f0ffd7d332106c366668ed271718472b",
+  "ordered_patches": [
+    {
+      "name": "0001-plasma-transition-float-overflow-shield.patch",
+      "sha256": "90211950c7f5fe2c29ee0a23e0217ba44a53cbfd5fb1f77887ad242e9dd365bc"
+    },
+    {
+      "name": "0002-render-target-resize-program-cache-shader-state.patch",
+      "sha256": "f9412348e6079972ae87b20091d78888a10dd4c4b902a6f1e08856a2e19f7005"
+    },
+    {
+      "name": "0003-hlslparser-classic-locale.patch",
+      "sha256": "c2cecd1ecfa020015e929caaab7a5cf26bd6c9b0c43473861bc1aaeef5792e87"
+    },
+    {
+      "name": "0004-projectm-eval-thread-local-rand.patch",
+      "sha256": "ee624476036c144f6b9aef688da6c46772e917b208b15441982f7cf8a68e8584"
+    },
+    {
+      "name": "0005-cache-translated-preset-shaders.patch",
+      "sha256": "427847d0815576d012514345e829992608260a25f095b0ec622f53b6cf846562"
+    },
+    {
+      "name": "0006-custom-shapes-batched-draws.patch",
+      "sha256": "f582ce185e20060e6c2a65eb5bcdf5e23dd3f03949cd7666e7c42092a86f9eff"
+    },
+    {
+      "name": "0007-framebuffer-texture-pool.patch",
+      "sha256": "f6527189010d21f5180b1cd2d6ec53913fc6ceb59a4ca7024b9809ebfabbac45"
+    },
+    {
+      "name": "0008-hlsl-floating-point-modulo.patch",
+      "sha256": "8f871546bc006afee7fc520f353a6181d8aa085c0b176425475a03837b7c8d90"
+    },
+    {
+      "name": "0009-tile-gpu-invalidate-and-mesh-orphaning.patch",
+      "sha256": "b968939c0d58981a8c1a4ff100852a912dd92dd25ce9d875791dde727e6619d1"
+    },
+    {
+      "name": "0010-skip-redundant-previous-frame-flip.patch",
+      "sha256": "0b4941b388ce61166a038b0212496cd94b682da9353a2960c8c575300287a77d"
+    },
+    {
+      "name": "0011-indexed-warp-mesh.patch",
+      "sha256": "296905e75730fdb7ab39769cec8a1ee980ddb3ab3f4d0f5083b0483f4a091384"
+    },
+    {
+      "name": "0012-merged-warp-pass-direct-blur.patch",
+      "sha256": "e1acef87cfb563ce5d58d6ad6011ce745a98c77ac9465703964e596c7ca6daae"
+    },
+    {
+      "name": "0013-motion-vector-map-only-when-shown.patch",
+      "sha256": "61bfd88a026f1c5825c1827aa0993dc131956705c05aa81428f959b2f0e9500d"
+    },
+    {
+      "name": "0014-video-echo-in-final-orientation.patch",
+      "sha256": "59881214d9dfec9fd7c1b636df383612008ae2e8d2f3153ebdca70fdb0da1620"
+    },
+    {
+      "name": "0015-keep-output-for-blur-reading-and-discarding-shaders.patch",
+      "sha256": "018652ae06d4ebdc9a8080bd14ae7b20b8abc9ebb6be132967a3ea1644554190"
+    },
+    {
+      "name": "0016-direct-composite-output.patch",
+      "sha256": "364077d6131884d8b9f72718e179281722e7cfa1c9b193af6aaa244f3d135e02"
+    },
+    {
+      "name": "0017-pcm-max-samples-is-buffer-size.patch",
+      "sha256": "bfce4d6b77f9ad1bb63b93f3b4395dd0745282b89bd29a6b4f266ea20838cd9d"
+    },
+    {
+      "name": "0018-hlslparser-parenthesized-constructor-expressions.patch",
+      "sha256": "9f6cd972d67dfda9d76ebe8d168531e676c1ce32f185dcbe6c19abfabcc926ed"
+    },
+    {
+      "name": "0019-hlslparser-number-scan-without-source-copy.patch",
+      "sha256": "32a914b0ad6be0fdd8d144e0d075e9b7e5876a76ca385fcbaf555f8b6e99c8bc"
+    },
+    {
+      "name": "0020-projectm-eval-1.0.7-evaluator-fixes.patch",
+      "sha256": "de9e4f64b5e252445ae50d3f540d7b76a607cc27daceaf217a2ef901341d7b27"
+    },
+    {
+      "name": "0021-hlslparser-self-referencing-macros.patch",
+      "sha256": "71382b8ecd90a35a24023d8d16bae0f0f2881513748461166aba9faca7cf89aa"
+    },
+    {
+      "name": "0022-custom-waveform-sample-bounds.patch",
+      "sha256": "ffe85782c4689f8bc36391c3cb002b7a015467f6d50feb8353a19e045e0bd240"
+    },
+    {
+      "name": "0023-milkdrop-preset-unconditional-shader-includes.patch",
+      "sha256": "0a856f5843a75d44ad7c4ee3197936bdef450b8f33d91ed500ba36dabf468fbe"
+    },
+    {
+      "name": "0024-quad-lines.patch",
+      "sha256": "3da8433e6096a87176ef4a82bd55261e5dbb69176c0f825bb1d555fe655d82fa"
+    },
+    {
+      "name": "0025-shader-failure-handling.patch",
+      "sha256": "b9460b0d17a53f30675938efc92707258c18ed84479695cd51cf1617a792db85"
+    },
+    {
+      "name": "0026-custom-warp-sampler-binding.patch",
+      "sha256": "3bb981b2a255895f5816dc450f92ecf7ba1caabcdc94c366a84cb1ef01938d31"
+    },
+    {
+      "name": "0027-preset-exception-diagnostics.patch",
+      "sha256": "d4a802f5bfe201eabd908095d8da0fc6d55d635b36686d05b24382d2453bd37c"
+    },
+    {
+      "name": "0028-initialize-fresh-color-history.patch",
+      "sha256": "9c5cca38b6d8d19dab4f85e1e104a6a73c6a92766bdd19e8fa31aa9713706b7f"
+    },
+    {
+      "name": "0029-per-frame-record-compatibility.patch",
+      "sha256": "a79b74945135f2383e3b6003e5ba3a501389023826a98da36deb0a073fe87728"
+    }
+  ],
+  "all_apply_cleanly": true,
+  "new_patch_source_whitespace_check": "passed --whitespace=error-all"
+}

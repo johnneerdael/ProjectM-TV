@@ -37,7 +37,7 @@ def _instrument(root: Path) -> None:
     shutil.copyfile(NATIVE / "analysis_hooks.hpp", library / "analysis_hooks.hpp")
     paths = ["TimeKeeper.cpp", "TimeKeeper.hpp", "ProjectM.cpp", "Renderer/MilkdropNoise.cpp",
              "Renderer/TextureManager.cpp", "Renderer/TransitionShaderManager.cpp",
-             "MilkdropPreset/PresetState.cpp"]
+             "MilkdropPreset/PresetState.cpp", "MilkdropPreset/MilkdropShader.cpp"]
     for name in paths:
         file = library / name
         relative = os.path.relpath(library / "analysis_hooks.hpp", file.parent)
@@ -47,7 +47,11 @@ def _instrument(root: Path) -> None:
              "double currentFrameTime = lab::clock_seconds;")
     _replace(library, "TimeKeeper.hpp", "m_randomGenerator{m_randomDevice()}",
              "m_randomGenerator{lab::Seed(11)}")
-    _replace(library, "ProjectM.cpp", "srand(time(nullptr));", "srand(lab::Seed(1));")
+    _replace(library, "ProjectM.cpp", "srand(time(nullptr));",
+             "srand(lab::Seed(1));\n    lab::ResetShaderRandom();")
+    _replace(library, "MilkdropPreset/MilkdropShader.cpp",
+             "static auto floatRand = []() { return static_cast<float>(rand() % 7381) / 7380.0f; };",
+             "static auto floatRand = []() { return static_cast<float>(lab::ShaderRandom() % 7381) / 7380.0f; };")
     _replace(library, "Renderer/MilkdropNoise.cpp",
              "static_cast<uint32_t>(std::chrono::system_clock::now().time_since_epoch().count())",
              "lab::Seed(101) ^ static_cast<uint32_t>(size * 31 + zoomFactor)", 2)

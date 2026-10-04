@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1080pt" height="590.4pt" viewBox="0 0 1080 590.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-04T03:24:38.652125</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 590.4 
+L 1080 590.4 
+L 1080 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 91.8 448.704 
+L 1036.8 448.704 
+L 1036.8 141.696 
+L 91.8 141.696 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 134.754545 448.704 
+L 314.564271 448.704 
+L 314.564271 432.373787 
+L 134.754545 432.373787 
+z
+" clip-path="url(#p8b75cfa2a5)" style="fill: #a43835"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 634.226004 448.704 
+L 814.035729 448.704 
+L 814.035729 187.420596 
+L 634.226004 187.420596 
+z
+" clip-path="url(#p8b75cfa2a5)" style="fill: #a43835"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 314.564271 448.704 
+L 494.373996 448.704 
+L 494.373996 448.704 
+L 314.564271 448.704 
+z
+" clip-path="url(#p8b75cfa2a5)" style="fill: #21715b"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 814.035729 448.704 
+L 993.845455 448.704 
+L 993.845455 448.704 
+L 814.035729 448.704 
+z
+" clip-path="url(#p8b75cfa2a5)" style="fill: #21715b"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="madb469c23a" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#madb469c23a" x="314.564271" y="448.704" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="314.564271" y="464.822125" transform="rotate(-0 314.564271 464.822125)">After 1 fragment rejection</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#madb469c23a" x="814.035729" y="448.704" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="814.035729" y="464.822125" transform="rotate(-0 814.035729 464.822125)">After 16 repeated attempts</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_3">
+      <path d="M 91.8 448.704 
+L 1036.8 448.704 
+" clip-path="url(#p8b75cfa2a5)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <defs>
+       <path id="mc0989caef7" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mc0989caef7" x="91.8" y="448.704" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="84.8" y="453.262594" transform="rotate(-0 84.8 453.262594)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_5">
+      <path d="M 91.8 383.383149 
+L 1036.8 383.383149 
+" clip-path="url(#p8b75cfa2a5)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#mc0989caef7" x="91.8" y="383.383149" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="84.8" y="387.941743" transform="rotate(-0 84.8 387.941743)">4</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_7">
+      <path d="M 91.8 318.062298 
+L 1036.8 318.062298 
+" clip-path="url(#p8b75cfa2a5)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#mc0989caef7" x="91.8" y="318.062298" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="84.8" y="322.620892" transform="rotate(-0 84.8 322.620892)">8</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_9">
+      <path d="M 91.8 252.741447 
+L 1036.8 252.741447 
+" clip-path="url(#p8b75cfa2a5)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#mc0989caef7" x="91.8" y="252.741447" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="84.8" y="257.300041" transform="rotate(-0 84.8 257.300041)">12</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_11">
+      <path d="M 91.8 187.420596 
+L 1036.8 187.420596 
+" clip-path="url(#p8b75cfa2a5)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.15; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#mc0989caef7" x="91.8" y="187.420596" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end" x="84.8" y="191.979189" transform="rotate(-0 84.8 191.979189)">16</text>
+     </g>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="62.647188" y="295.2" transform="rotate(-90 62.647188 295.2)">Live shader objects at measured endpoint</text>
+    </g>
+   </g>
+   <g id="patch_7">
+    <path d="M 91.8 448.704 
+L 91.8 141.696 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 91.8 448.704 
+L 1036.8 448.704 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a43835" x="224.659408" y="425.025191" transform="rotate(-0 224.659408 425.025191)">1</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a43835" x="724.130867" y="180.072" transform="rotate(-0 724.130867 180.072)">16</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #21715b" x="404.469133" y="441.355404" transform="rotate(-0 404.469133 441.355404)">0</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #21715b" x="903.940592" y="441.355404" transform="rotate(-0 903.940592 441.355404)">0</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_9">
+     <path d="M 102.6 161.614125 
+L 126.6 161.614125 
+L 126.6 153.214125 
+L 102.6 153.214125 
+z
+" style="fill: #a43835"/>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="136.2" y="161.614125" transform="rotate(-0 136.2 161.614125)">Pre-fix snapshot</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 102.6 179.615063 
+L 126.6 179.615063 
+L 126.6 171.215063 
+L 102.6 171.215063 
+z
+" style="fill: #21715b"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="136.2" y="179.615063" transform="rotate(-0 136.2 179.615063)">Fixed snapshot</text>
+    </g>
+   </g>
+  </g>
+  <g id="text_15">
+   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start" x="48.6" y="37.380562" transform="rotate(-0 48.6 37.380562)">Failed fragment compilation releases the vertex shader</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start" x="48.6" y="66.977325" transform="rotate(-0 48.6 66.977325)">Fresh real CGL rerun • measured endpoints only • no intermediate counts or memory estimates</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 542.602238)">Sources: allocation/red/run.log and allocation/green/run.log — source line numbers in raw/allocation-endpoints.json</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 556.102238)">Each repeated attempt exercises vertex, fragment and link rejection; one fragment rejection per attempt.</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; fill: #444444" transform="translate(48.6 569.602238)">Original session RED log was not saved; these are new reruns. Snapshot identities and every source/binary/log SHA256: allocation-builds.json</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p8b75cfa2a5">
+   <rect x="91.8" y="141.696" width="945" height="307.008"/>
+  </clipPath>
+ </defs>
+</svg>

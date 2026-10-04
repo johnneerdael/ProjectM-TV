@@ -1,0 +1,74 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+Note: Google Test filter = MilkdropPresetException.*:MilkdropPresetFailureEventTest.*
+[==========] Running 6 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 3 tests from MilkdropPresetException
+[ RUN      ] MilkdropPresetException.LoadMessageSurvivesStandardExceptionHandler
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/red/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:17: Failure
+Expected equality of these values:
+  error.what()
+    Which is: "std::exception"
+  "Could not parse preset data."
+
+[  FAILED  ] MilkdropPresetException.LoadMessageSurvivesStandardExceptionHandler (0 ms)
+[ RUN      ] MilkdropPresetException.CompileMessageSurvivesStandardExceptionHandler
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/red/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:21: Failure
+Expected equality of these values:
+  error.what()
+    Which is: "std::exception"
+  "Could not compile per-frame code"
+
+[  FAILED  ] MilkdropPresetException.CompileMessageSurvivesStandardExceptionHandler (0 ms)
+[ RUN      ] MilkdropPresetException.FactoryMessageSurvivesStandardExceptionHandler
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/red/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:26: Failure
+Expected equality of these values:
+  error.what()
+    Which is: "std::exception"
+  "Could not parse preset data."
+
+[  FAILED  ] MilkdropPresetException.FactoryMessageSurvivesStandardExceptionHandler (0 ms)
+[----------] 3 tests from MilkdropPresetException (0 ms total)
+
+[----------] 3 tests from MilkdropPresetFailureEventTest
+[ RUN      ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/red/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:75: Failure
+Expected equality of these values:
+  engine.failure
+    Which is: "std::exception"
+  "Could not parse preset data."
+
+[  FAILED  ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason (70 ms)
+[ RUN      ] MilkdropPresetFailureEventTest.InvalidPerFrameExpressionReportsCompileReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/red/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:84: Failure
+Expected equality of these values:
+  engine.failure
+    Which is: "std::exception"
+  "Could not compile per-frame code"
+
+[  FAILED  ] MilkdropPresetFailureEventTest.InvalidPerFrameExpressionReportsCompileReason (71 ms)
+[ RUN      ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason
+[PresetFactory] Filename is URL: idle://Geiss & Sperl - Feedback (projectM idle HDR mix).milk
+/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/preset-exception-review/red/source/tests/libprojectM/MilkdropPresetExceptionTest.cpp:92: Failure
+Expected equality of these values:
+  engine.failure
+    Which is: "std::exception"
+  "Could not parse preset file \"" + path + "\""
+    Which is: "Could not parse preset file \"/preset-exception-test/no-such-preset.milk\""
+
+[  FAILED  ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason (68 ms)
+[----------] 3 tests from MilkdropPresetFailureEventTest (209 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 2 test suites ran. (245 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 6 tests, listed below:
+[  FAILED  ] MilkdropPresetException.LoadMessageSurvivesStandardExceptionHandler
+[  FAILED  ] MilkdropPresetException.CompileMessageSurvivesStandardExceptionHandler
+[  FAILED  ] MilkdropPresetException.FactoryMessageSurvivesStandardExceptionHandler
+[  FAILED  ] MilkdropPresetFailureEventTest.InvalidPresetDataReportsParseReason
+[  FAILED  ] MilkdropPresetFailureEventTest.InvalidPerFrameExpressionReportsCompileReason
+[  FAILED  ] MilkdropPresetFailureEventTest.MissingPresetFileReportsPathAndParseReason
+
+ 6 FAILED TESTS

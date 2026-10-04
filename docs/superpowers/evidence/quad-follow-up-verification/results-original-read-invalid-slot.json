@@ -1,0 +1,114 @@
+{
+  "jobs": 40,
+  "nondeterministic": [],
+  "changed_unmodified_copy": [],
+  "changed_retained_with_diffusion_off": [],
+  "comparisons": [
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 1330,
+      "copy": {
+        "img_err": 0.17706140875816345,
+        "luma_ratio": 0.9558962431994862,
+        "center_rgb": [
+          0.5580087597997224,
+          0.4325970579215477,
+          0.39916904447766227
+        ],
+        "saturation": 0.37766267657279967,
+        "motion_mae": 0.23495371639728546
+      },
+      "retained": {
+        "img_err": 0.17706140875816345,
+        "luma_ratio": 0.9558962431994862,
+        "center_rgb": [
+          0.5580087597997224,
+          0.4325970579215477,
+          0.39916904447766227
+        ],
+        "saturation": 0.37766267657279967,
+        "motion_mae": 0.23495371639728546
+      }
+    },
+    {
+      "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+      "height": 2160,
+      "copy": {
+        "img_err": 0.21385638415813446,
+        "luma_ratio": 0.9465659062882003,
+        "center_rgb": [
+          0.5425669941732482,
+          0.4244609880104948,
+          0.3882366699573346
+        ],
+        "saturation": 0.37663252353668214,
+        "motion_mae": 0.2488451451063156
+      },
+      "retained": {
+        "img_err": 0.21385638415813446,
+        "luma_ratio": 0.9465659062882003,
+        "center_rgb": [
+          0.5425669941732482,
+          0.4244609880104948,
+          0.3882366699573346
+        ],
+        "saturation": 0.37663252353668214,
+        "motion_mae": 0.2488451451063156
+      }
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "height": 1330,
+      "copy": {
+        "img_err": 0.07006783038377762,
+        "luma_ratio": 0.9243521841722021,
+        "center_rgb": [
+          0.7590120405257375,
+          0.5963362540959829,
+          0.31110125462576776
+        ],
+        "saturation": 0.6736191034317016,
+        "motion_mae": 0.13205336034297943
+      },
+      "retained": {
+        "img_err": 0.07006783038377762,
+        "luma_ratio": 0.9243521841722021,
+        "center_rgb": [
+          0.7590120405257375,
+          0.5963362540959829,
+          0.31110125462576776
+        ],
+        "saturation": 0.6736191034317016,
+        "motion_mae": 0.13205336034297943
+      }
+    },
+    {
+      "name": "rce-ordinary - want.milk",
+      "height": 2160,
+      "copy": {
+        "img_err": 0.08547782152891159,
+        "luma_ratio": 0.8935827932715171,
+        "center_rgb": [
+          0.7434869987089485,
+          0.600905425047784,
+          0.3108965207015804
+        ],
+        "saturation": 0.6961754560470581,
+        "motion_mae": 0.12240000069141388
+      },
+      "retained": {
+        "img_err": 0.08547782152891159,
+        "luma_ratio": 0.8935827932715171,
+        "center_rgb": [
+          0.7434869987089485,
+          0.600905425047784,
+          0.3108965207015804
+        ],
+        "saturation": 0.6961754560470581,
+        "motion_mae": 0.12240000069141388
+      }
+    }
+  ],
+  "valid_for_fidelity": false,
+  "reason": "Research original sampler used unit0, overwritten by PerPixelMesh after custom LoadVariables. Identical active output does not falsify the individual-read hypothesis."
+}

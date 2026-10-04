@@ -1,0 +1,6 @@
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-initial-history-review/proof-export/green/build
+[ 25%] Building CXX object CMakeFiles/proof-test.dir/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-initial-history-review/proof-export/ReadbackProofTest.cpp.o
+[ 50%] Linking CXX executable proof-test
+[100%] Built target proof-test

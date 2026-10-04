@@ -1,0 +1,77 @@
+Subject: [EXPERIMENT] Sample feedback on the reference grid before the native warp
+
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -20,6 +20,7 @@
+  */
+ 
+ #include "MilkdropPreset.hpp"
++#include <cstdlib>
+ 
+ #include "Factory.hpp"
+ #include "LineGeometry.hpp"
+@@ -111,12 +112,48 @@
+     // y-flip the previous frame and assign the flipped texture as "main". The second flip of the
+     // last frame already left exactly this image in the flip texture, unless motion vectors were
+     // drawn onto the previous frame since, or something else replaced either texture.
+-    if (m_isFirstFrame || motionVectorsDrawn || !m_flipHoldsPreviousFrame)
+-    {
+-        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
++    bool referenceFeedback = false;
++    const char* const referenceProbe = std::getenv("PMX_REF_FEEDBACK");
++    if (referenceProbe != nullptr && referenceProbe[0] == '1' && !m_pmxReferenceShaderFailed &&
++        LineScale(renderContext.viewportSizeX, renderContext.viewportSizeY,
++                  renderContext.lineReferenceWidth, renderContext.lineReferenceHeight) > 1.0f)
++    {
++        try
++        {
++            if (!m_pmxReferenceCopy)
++            {
++                m_pmxReferenceCopy = std::make_unique<Renderer::CopyTexture>();
++            }
++            const auto canvas = ShaderCanvasSize(renderContext.viewportSizeX, renderContext.viewportSizeY,
++                                                 renderContext.lineReferenceWidth, renderContext.lineReferenceHeight);
++            if (!m_pmxReferenceFramebuffer)
++            {
++                m_pmxReferenceFramebuffer = std::make_unique<Renderer::Framebuffer>(1);
++                m_pmxReferenceFramebuffer->CreateColorAttachment(0, 0);
++            }
++            m_pmxReferenceFramebuffer->SetSize(canvas.width, canvas.height);
++            glViewport(0, 0, canvas.width, canvas.height);
++            m_pmxReferenceCopy->Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0),
++                                     *m_pmxReferenceFramebuffer, 0, true, false);
++            glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++            m_state.mainTexture = m_pmxReferenceFramebuffer->GetColorAttachmentTexture(0, 0);
++            referenceFeedback = true;
++        }
++        catch (const Renderer::ShaderException&)
++        {
++            // A rejected optional copy program leaves the existing rendering path available.
++            m_pmxReferenceShaderFailed = true;
++        }
++    }
++    if (!referenceFeedback)
++    {
++        if (m_isFirstFrame || motionVectorsDrawn || !m_flipHoldsPreviousFrame)
++        {
++            m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
++        }
++        m_state.mainTexture = m_flipTexture.Texture();
+     }
+     m_flipHoldsPreviousFrame = false;
+-    m_state.mainTexture = m_flipTexture.Texture();
+ 
+     // Update blur textures. They are made from the previous frame, which nothing changes from
+     // here on, so this can happen before the warp: the warp and everything drawn on top of it
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+@@ -126,6 +126,9 @@
+     std::array<std::unique_ptr<CustomShape>, CustomShapeCount> m_customShapes;          //!< Custom shapes in this preset.
+     DarkenCenter m_darkenCenter;                                                        //!< Center darkening effect.
+     Border m_border;                                                                    //!< Inner/outer borders.
++    std::unique_ptr<Renderer::CopyTexture> m_pmxReferenceCopy; //!< EXPERIMENT: optional reference-grid copy.
++    std::unique_ptr<Renderer::Framebuffer> m_pmxReferenceFramebuffer; //!< EXPERIMENT: warp input only.
++    bool m_pmxReferenceShaderFailed{false}; //!< EXPERIMENT: fallback to original path.
+     Renderer::CopyTexture m_flipTexture;                                                //!< Texture flip filter
+ 
+     FinalComposite m_finalComposite; //!< Final composite shader or filters.

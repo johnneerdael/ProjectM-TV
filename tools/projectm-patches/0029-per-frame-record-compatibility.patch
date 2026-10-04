@@ -1,0 +1,118 @@
+diff --git a/src/libprojectM/MilkdropPreset/PerFrameContext.cpp b/src/libprojectM/MilkdropPreset/PerFrameContext.cpp
+index d2e937f..fcfd3bb 100644
+--- a/src/libprojectM/MilkdropPreset/PerFrameContext.cpp
++++ b/src/libprojectM/MilkdropPreset/PerFrameContext.cpp
+@@ -244,6 +244,40 @@ void PerFrameContext::CompilePerFrameCode(const std::string& perFrameCode)
+ 
+     perFrameCodeHandle = projectm_eval_code_compile(perFrameCodeContext, perFrameCode.c_str());
+     if (perFrameCodeHandle == nullptr)
++    {
++        // MilkDrop removes record separators and line comments before compiling EEL.
++        // Retry that legacy form only after rejection, preserving accepted programs.
++        std::string legacyCode;
++        legacyCode.reserve(perFrameCode.size());
++        bool inLineComment{false};
++        for (size_t index = 0; index < perFrameCode.size(); ++index)
++        {
++            const auto character = perFrameCode[index];
++            if (character == '\n')
++            {
++                inLineComment = false;
++                continue;
++            }
++            if (inLineComment)
++            {
++                continue;
++            }
++            if (index + 1 < perFrameCode.size() &&
++                ((character == '/' && perFrameCode[index + 1] == '/') ||
++                 (character == '\\' && perFrameCode[index + 1] == '\\')))
++            {
++                inLineComment = true;
++                ++index;
++                continue;
++            }
++            legacyCode.push_back(character);
++        }
++        if (legacyCode != perFrameCode)
++        {
++            perFrameCodeHandle = projectm_eval_code_compile(perFrameCodeContext, legacyCode.c_str());
++        }
++    }
++    if (perFrameCodeHandle == nullptr)
+     {
+ #ifdef MILKDROP_PRESET_DEBUG
+         int line;
+diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
+index 50b18ee..81236e6 100644
+--- a/tests/libprojectM/CMakeLists.txt
++++ b/tests/libprojectM/CMakeLists.txt
+@@ -4,6 +4,7 @@ add_executable(projectM-unittest
+         HLSLModuloTest.cpp
+         ShaderExceptionTest.cpp
+         MilkdropPresetExceptionTest.cpp
++        PerFrameRecordCompatibilityTest.cpp
+         ShaderFailureTest.cpp
+         WarpSamplerTest.cpp
+         LineGeometryTest.cpp
+@@ -37,6 +38,7 @@ target_include_directories(projectM-unittest
+ target_link_libraries(projectM-unittest
+         PRIVATE
+         projectM_main
++        projectM::Eval
+         GTest::gtest
+         GTest::gtest_main
+         )
+diff --git a/tests/libprojectM/PerFrameRecordCompatibilityTest.cpp b/tests/libprojectM/PerFrameRecordCompatibilityTest.cpp
+new file mode 100644
+index 0000000..d35e3d2
+--- /dev/null
++++ b/tests/libprojectM/PerFrameRecordCompatibilityTest.cpp
+@@ -0,0 +1,47 @@
++#include <MilkdropPreset/PerFrameContext.hpp>
++#include <MilkdropPreset/MilkdropPresetExceptions.hpp>
++#include <gtest/gtest.h>
++
++using libprojectM::MilkdropPreset::PerFrameContext;
++using libprojectM::MilkdropPreset::MilkdropCompileException;
++
++TEST(PerFrameRecordCompatibility, JoinsIdentifierSplitAcrossRecords) {
++    PerFrameContext context(nullptr, nullptr);
++    context.RegisterBuiltinVariables();
++    ASSERT_NO_THROW(context.CompilePerFrameCode("is_beat=2;\nk1=is_\nbeat;\nzoom=k1;\n"));
++    context.ExecutePerFrameCode();
++    EXPECT_DOUBLE_EQ(*context.zoom, 2.0);
++}
++
++TEST(PerFrameRecordCompatibility, RemovesLineCommentsBeforeJoiningRecords) {
++    PerFrameContext context(nullptr, nullptr);
++    context.RegisterBuiltinVariables();
++    ASSERT_NO_THROW(context.CompilePerFrameCode("is_beat=3;\nk1=is_// split token\nbeat;\nzoom=k1;\n"));
++    context.ExecutePerFrameCode();
++    EXPECT_DOUBLE_EQ(*context.zoom, 3.0);
++}
++
++TEST(PerFrameRecordCompatibility, SupportsLegacyBackslashComments) {
++    PerFrameContext context(nullptr, nullptr);
++    context.RegisterBuiltinVariables();
++    ASSERT_NO_THROW(context.CompilePerFrameCode("is_beat=4;\nk1=is_\\\\ split token\nbeat;\nzoom=k1;\n"));
++    context.ExecutePerFrameCode();
++    EXPECT_DOUBLE_EQ(*context.zoom, 4.0);
++}
++
++TEST(PerFrameRecordCompatibility, KeepsAcceptedBlockCommentsOnOriginalPath) {
++    // Legacy line-comment stripping would remove the closing block comment here.
++    PerFrameContext context(nullptr, nullptr);
++    context.RegisterBuiltinVariables();
++    ASSERT_NO_THROW(context.CompilePerFrameCode("zoom=1; /* // marker */\nrot=.25;\n"));
++    context.ExecutePerFrameCode();
++    EXPECT_DOUBLE_EQ(*context.zoom, 1.0);
++    EXPECT_DOUBLE_EQ(*context.rot, .25);
++}
++
++TEST(PerFrameRecordCompatibility, InvalidExpressionStillReportsFailure) {
++    PerFrameContext context(nullptr, nullptr);
++    context.RegisterBuiltinVariables();
++    EXPECT_THROW(context.CompilePerFrameCode("zoom=(;\n"), MilkdropCompileException);
++    EXPECT_EQ(context.perFrameCodeHandle, nullptr);
++}

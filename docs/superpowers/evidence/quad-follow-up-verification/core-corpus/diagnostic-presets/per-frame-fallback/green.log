@@ -1,0 +1,20 @@
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+Note: Google Test filter = PerFrameRecordCompatibility.*
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from PerFrameRecordCompatibility
+[ RUN      ] PerFrameRecordCompatibility.JoinsIdentifierSplitAcrossRecords
+[       OK ] PerFrameRecordCompatibility.JoinsIdentifierSplitAcrossRecords (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.RemovesLineCommentsBeforeJoiningRecords
+[       OK ] PerFrameRecordCompatibility.RemovesLineCommentsBeforeJoiningRecords (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.SupportsLegacyBackslashComments
+[       OK ] PerFrameRecordCompatibility.SupportsLegacyBackslashComments (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.KeepsAcceptedBlockCommentsOnOriginalPath
+ // marker [       OK ] PerFrameRecordCompatibility.KeepsAcceptedBlockCommentsOnOriginalPath (0 ms)
+[ RUN      ] PerFrameRecordCompatibility.InvalidExpressionStillReportsFailure
+[       OK ] PerFrameRecordCompatibility.InvalidExpressionStillReportsFailure (0 ms)
+[----------] 5 tests from PerFrameRecordCompatibility (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 5 tests.

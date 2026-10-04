@@ -1,0 +1,43 @@
+{
+  "source": "build/follow-ups/preset-exception-review",
+  "red_failures": 6,
+  "green_passes": 6,
+  "full_green_passes": 169,
+  "files": [
+    {
+      "path": "07-preset-diagnostics.png",
+      "sha256": "200a91033999c8d140d8fce21693188d0b48ea6da8bada9b8b42c2923bbaeb70",
+      "bytes": 89665
+    },
+    {
+      "path": "MilkdropPresetExceptionTest.cpp",
+      "sha256": "a99817ba449ef1a3c8683fb3df9dde75ab944f3295d686a6ef9ea06767cca7f7",
+      "bytes": 3773
+    },
+    {
+      "path": "README.md",
+      "sha256": "227334cc679c4149122ab8de10bd50bc9e8d00a39bae97cc8e09e4beda76a4ab",
+      "bytes": 2313
+    },
+    {
+      "path": "green-suite.log",
+      "sha256": "47e45d1b7b69a134fbe2bdce0864b0665dd0552e4ed655128726fab9eb430893",
+      "bytes": 29216
+    },
+    {
+      "path": "green.log",
+      "sha256": "5f185c190623a0bb2332d4366fe3d75416fb0da08425e3a0b726f89457ed0083",
+      "bytes": 2004
+    },
+    {
+      "path": "red.log",
+      "sha256": "9566ff4fe130a7dbfc2d6dd3d0b5194d7d63357a5307b94ad214bb76bca7a1a9",
+      "bytes": 4478
+    },
+    {
+      "path": "two-overrides-failure.log",
+      "sha256": "9e90110655cb9b546f4440eb099f994ad44565bbc07f7203081384f8f7d81da6",
+      "bytes": 2762
+    }
+  ]
+}

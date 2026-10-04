@@ -1,0 +1,4 @@
+142: [----------] 1 test from ShaderException
+143: [ RUN      ] ShaderException.PreservesDriverDiagnosticThroughStandardExceptionHandler
+144: [       OK ] ShaderException.PreservesDriverDiagnosticThroughStandardExceptionHandler (0 ms)
+145: [----------] 1 test from ShaderException (0 ms total)

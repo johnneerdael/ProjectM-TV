@@ -1,0 +1,4 @@
+1: TRANSITION auto: blend at 62.5 fps (250.0 before), lowering it to 60% now
+2: FAIL build/follow-ups/policy-negative-control/engine_test.cpp:221 g_windowW == (cpuBound ? 960u : 768u)
+3: auto: sampled CPU-bound blend keeps its resolution and halves outgoing frames
+4:   ok: g_engine.inTransition
