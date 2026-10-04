@@ -1,0 +1,46 @@
+dec_med = pow (0.7, 30/fps);
+dec_slow = pow (0.99, 30/fps);
+beat = max (max (bass, mid), treb); 
+avg = avg*dec_slow + beat*(1-dec_slow);
+is_beat = above(beat, .5+avg+peak) * above (time, t0+.2);
+t0 = is_beat*time + (1-is_beat)*t0;
+peak = is_beat * beat + (1-is_beat)*peak*dec_med;
+index = (index + is_beat) %4;
+index2 = (index2 + is_beat*bnot(index))%2;
+
+q20 = avg;
+q21 = beat;
+q22 = peak;
+q23 = index;
+q24 = is_beat;
+q26 = bass_att + mid_att + treb_att;
+q27 = index +1;
+q28 = index2;
+
+
+
+k1 =  is_
+beat*equal(index%2,0);
+p1 =  k1*(p1+1) + (1-k1)*p1;
+p2 = dec_med * p2+ (1-dec_med)*p1;
+rott = p2 * 3.1416/4;
+
+q1 = cos(rott);
+q2 = sin(rott);
+q3 = -q2;
+q4 = q1;
+
+alt = alt * .2 + q26*.8;
+q26 = q26 - alt;
+
+step = step + 100*max(q26-0.01,0) + q24 ;
+q30 = step;
+
+p4 = dec_med*p4 + (1-dec_med)*q27;
+q31 = p4;
+
+//zoom = 1 + .05*q1;
+//rot = -0.01 * (index);
+zoom = 1;
+rot = .003;
+
