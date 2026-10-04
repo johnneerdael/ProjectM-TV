@@ -107,6 +107,16 @@ class BackupTests(unittest.TestCase):
         checkpoint.restore_files(repository,"new-protocol",self.work/"new-restore")
         self.assertEqual((self.work/"new-restore/new/frame.png").read_bytes(),b"samePNG")
 
+    def test_final_checkpoint_wakes_only_for_matching_complete_baseline(self):
+        state={"protocol_sha256":"protocol","complete_baseline_remote_coverage":False}
+        path=self.work/"baseline-completion-index.json"
+        self.assertFalse(checkpoint.final_checkpoint_ready(self.work,state))
+        path.write_text(json.dumps({"protocol_sha256":"other","complete_coverage":True,"terminal_presets":9606}))
+        self.assertFalse(checkpoint.final_checkpoint_ready(self.work,state))
+        path.write_text(json.dumps({"protocol_sha256":"protocol","complete_coverage":True,"terminal_presets":9606}))
+        self.assertTrue(checkpoint.final_checkpoint_ready(self.work,state))
+        self.assertFalse(checkpoint.final_checkpoint_ready(self.work,dict(state,complete_baseline_remote_coverage=True)))
+
     def test_remote_push_failure_cannot_advance_acknowledgement(self):
         self.assertFalse(checkpoint.remote_acknowledged("new","old"))
         self.assertFalse(checkpoint.remote_acknowledged("new",None))

@@ -365,17 +365,27 @@ def checkpoint_cycle(args,memo):
                  remote_baseline_jobs=len(set(covered)&baseline_expected),
                  complete_baseline_remote_coverage=baseline_expected.issubset(covered) and not state["integrity_issues"],
                  updated_unix_seconds=time.time())
-    for name in ("pilot-report.json","independent-pilot-audit.json","full-repeat-diagnostic.json","baseline-completion-index.json","baseline-progress.json","progress.json"):
+    for name in ("pilot-report.json","independent-pilot-audit.json","full-repeat-diagnostic.json","baseline-scan-launch.json","baseline-completion-index.json","baseline-progress.json","progress.json"):
         path=work/name
         if path.exists():
             # Mutable live reports are retained as immutable versioned snapshots.
-            snapshot=work/"checkpoint-report-snapshots"/(run.file_hash(path)+"-"+name)
+            data=path.read_bytes()
+            snapshot=work/"checkpoint-report-snapshots"/(hashlib.sha256(data).hexdigest()+"-"+name)
             snapshot.parent.mkdir(exist_ok=True)
-            if not snapshot.exists():snapshot.write_bytes(path.read_bytes())
+            if not snapshot.exists():snapshot.write_bytes(data)
             store_unit([{"source":str(snapshot),"path":snapshot.relative_to(ROOT).as_posix()}],[])
     state["state"]="finite_backup_finished" if args.once else "waiting"
     run.atomic(state_path,state)
     return state
+
+
+def final_checkpoint_ready(work,state):
+    path=work/"baseline-completion-index.json"
+    if not path.exists() or state.get("complete_baseline_remote_coverage"):
+        return False
+    index=json.loads(path.read_text())
+    return (index.get("protocol_sha256")==state.get("protocol_sha256")
+            and index.get("complete_coverage") is True and index.get("terminal_presets")==9606)
 
 
 def main():
@@ -401,7 +411,10 @@ def main():
                 state.update(state="retry_required",error=f"{type(error).__name__}: {error}",pid=os.getpid(),updated_unix_seconds=time.time())
                 run.atomic(path,state);print(run.canonical(state),flush=True)
                 if args.once:raise SystemExit(1)
-            STOP.wait(args.interval)
+            deadline=time.monotonic()+args.interval
+            while not STOP.is_set() and time.monotonic()<deadline:
+                if final_checkpoint_ready(args.work,state):break
+                STOP.wait(min(30,max(0,deadline-time.monotonic())))
 
 
 if __name__=="__main__":main()
