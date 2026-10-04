@@ -700,6 +700,14 @@ All 16 targeted source witnesses lower completely; two frozen native controls
 match 60 frames exactly. See `fixtures/texsize-binding-source-proof-2026-10-04.json`
 and `fixtures/texsize-binding-native-proof-2026-10-04.json`.
 
+Literal-zero scalar/vector products of plain unwritten storage follow the
+pinned generated `mult0` helper, returning zero without initializing that
+storage. The rule does not discard helper/texture/index effects, missing inputs,
+branch-dependent graphs or matrix products. Later live reads remain unresolved.
+All 39 targeted rs sections lower completely; two frozen native controls match
+60 frames exactly. See `fixtures/zero-storage-source-proof-2026-10-04.json` and
+`fixtures/zero-storage-native-proof-2026-10-04.json`.
+
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe
 shared-read/write ordering remains explicit. Destination indices are captured

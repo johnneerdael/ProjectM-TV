@@ -25,9 +25,10 @@ Since that full audit, a targeted investigation identified 16 texture-size
 declaration binding errors within the uninitialized family. They now lower
 completely after matching native uniform rebuilding. The full 371 total above
 is the dated audit count, not a newly recomputed total after this fix. Recurrent
-uninitialized `rs` origins occur in 39 recorded presets; some use `0 * rs`.
-Generated zero multiplication semantics need separate analysis; do not assume
-all uninitialized reads are irrelevant.
+uninitialized `rs` origins occur in 39 recorded presets, all with explicit
+`0 * rs`. These sections now lower under the pinned generated mult0 rule for
+literal-zero products of plain storage. Matrix/texture/index/helper effects and
+later live reads stay unresolved. See `2026-10-04-zero-storage-learning.md`.
 
 ## Remaining language and maths topics
 

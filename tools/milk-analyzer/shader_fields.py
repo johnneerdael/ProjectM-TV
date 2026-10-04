@@ -474,6 +474,32 @@ class ShaderFields:
                 if self.has_shared_effects(target['index']) else self.expression(target['index']))
         return bound
 
+    def zero_storage_product(self,node,dtype):
+        """Pinned scalar/vector mult0 returns zero for plain unknown storage.
+
+        Do not evaluate helpers, indices, textures or external inputs here. Their
+        effects/domains remain obligations even if the final product is zero.
+        """
+        for literal_key,storage_key in [('left','right'),('right','left')]:
+            literal=node[literal_key];storage=node[storage_key]
+            if literal.get('kind')!='constant' or literal.get('value')!=0:continue
+            base=storage
+            while base.get('kind')=='member':base=base['object']
+            if base.get('kind')!='variable' or base.get('type',{}).get('array'):continue
+            value=self.expression(storage,defer_read=True)
+            pending=[value];seen=set();unwritten=False;plain=True
+            while pending:
+                item=pending.pop()
+                if id(item) in seen:continue
+                seen.add(id(item))
+                if item.op not in {'uninitialized','components','member','flat_component','cast','narrow','constant'}:
+                    plain=False;break
+                unwritten|=item.op=='uninitialized';pending.extend(item.args)
+            if plain and unwritten:
+                return self.coerce(Field('constant',dtype='float',detail={'value':0,
+                    'basis':'pinned mult0 literal-zero result independent of plain unwritten storage'}),dtype)
+        return None
+
     def expression(self,node:dict|Field|None,*,defer_read=False)->Field:
         if isinstance(node,Field):return node
         if node is None:return self.unsupported("uninitialized shader value")
@@ -547,6 +573,9 @@ class ShaderFields:
             if matrix_product and (not re.fullmatch(r'float([2-4])x\1',dtype)):
                 return self.unsupported('rectangular bare matrix product has no pinned GLSL helper',dtype=dtype)
             if op in {0,1} and self.has_shared_effects(node):return self.unsupported('logical expression side effects not lowered',dtype=dtype)
+            if op==4 and not matrix_product:
+                zero=self.zero_storage_product(node,dtype)
+                if zero is not None:return zero
             if op>=16:
                 destination=self.bind_destination(node['left'])
                 global_conflict=self.global_access(node['right'])[1]&self.global_access(destination)[0]
