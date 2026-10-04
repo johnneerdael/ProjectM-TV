@@ -42,9 +42,9 @@ def verify_producer(path, job, protocol, record, role):
                        "core_sha256": protocol["roles"][role]["core_sha256"],
                        "requested_preset_sha256": record["sha256"]}
     # A genuine failure before initialization cannot supply a runtime ELF or source hash.
-    # Validate every field that is available; successful jobs require all of them.
+    # Validate every field that is available; successful producers require all of them.
     for field, expected in expected_fields.items():
-        if field in result or job["status"] == "success":
+        if field in result or result["status"] == "success":
             require(result.get(field) == expected, "producer provenance mismatch: " + field)
     return result
 

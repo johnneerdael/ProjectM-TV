@@ -56,13 +56,42 @@ class BackupTests(unittest.TestCase):
         packet={"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol",
                 "preset_filename":"x.milk","preset_sha256":"source",
                 "expected_core_sha256":"core","capture_mode":"selected",
-                "measurement_frames":360,"warmup_frames":120}
+                "measurement_frames":360,"warmup_frames":120,
+                "width":2364,"height":1330,"fps":30,"seed":12345,
+                "capture_frames":run.capture_indices(360)}
         run.atomic(self.directory/"job.json",packet)
         run.atomic(self.directory/"output/result.json",result)
         row=dict(self.row,result=result,retained_files=[
             {"path":"job.json","sha256":run.file_hash(self.directory/"job.json")},
             {"path":"output/result.json","sha256":run.file_hash(self.directory/"output/result.json")}])
         run.save_row(self.directory/"row.json",row)
+
+    def test_successful_producer_inside_host_failure_requires_identity_after_rehash(self):
+        base={"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol","status":"success",
+              "core_sha256":"core","requested_preset_sha256":"source","preset_filename":"x.milk",
+              "capture_mode":"selected","capture_frames":run.capture_indices(360),
+              "width":2364,"height":1330,"fps":30,"seed":12345}
+        for status in ("failed","timeout"):
+            for field in ("core_sha256","requested_preset_sha256","capture_mode","capture_frames",
+                          "width","height","fps","seed"):
+                with self.subTest(status=status,field=field):
+                    result=dict(base);result.pop(field)
+                    self.save_failed_producer(result)
+                    path=self.directory/"row.json";row=json.loads(path.read_text());row.pop("payload_sha256")
+                    row.update(status=status,error="post-result transport timeout")
+                    run.save_row(path,row)
+                    self.assertIsNotNone(run.read_cached(path,self.key,"protocol"))
+                    with self.assertRaisesRegex(ValueError,"producer provenance mismatch: "+field):
+                        checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)
+
+    def test_complete_successful_producer_remains_checkpointable_after_host_timeout(self):
+        self.save_failed_producer({"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol",
+                                  "status":"success","core_sha256":"core","requested_preset_sha256":"source",
+                                  "capture_mode":"selected","capture_frames":run.capture_indices(360),
+                                  "width":2364,"height":1330,"fps":30,"seed":12345})
+        path=self.directory/"row.json";row=json.loads(path.read_text());row.pop("payload_sha256")
+        row.update(status="timeout",error="post-result transport timeout");run.save_row(path,row)
+        self.assertEqual(checkpoint.verify_job(self.work,self.protocol,self.inventory,self.key)["status"],"timeout")
 
     def test_failed_producer_wrong_identity_cannot_be_checkpointed_after_rehash(self):
         base={"schema_version":2,"job_id":self.key,"protocol_sha256":"protocol","status":"failed",

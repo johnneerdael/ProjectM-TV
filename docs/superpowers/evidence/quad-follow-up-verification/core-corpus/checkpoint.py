@@ -95,10 +95,17 @@ def verify_terminal_producer(directory, row, protocol, record):
         if row["status"]=="success" or not result.get("error"):raise ValueError("invalid producer failure status")
     elif row["status"] in ("failed","timeout") and not row.get("error"):
         raise ValueError("successful producer lacks explicit host failure reason")
+    required=("capture_mode","capture_frames","width","height","fps","seed")
+    if result["status"]=="success":
+        for field in required:
+            if field not in packet:raise ValueError("input job provenance missing: "+field)
     available={"core_sha256":expected["expected_core_sha256"],"requested_preset_sha256":record["sha256"]}
-    available.update({field:packet[field] for field in ("preset_filename","capture_mode","capture_frames","width","height","fps","seed") if field in packet})
+    available.update({field:packet[field] for field in ("preset_filename",*required) if field in packet})
     for field,value in available.items():
-        if field in result and result[field]!=value:raise ValueError("producer provenance mismatch: "+field)
+        # The preset hash establishes identity; a supplied filename must also match.
+        mandatory=result["status"]=="success" and field!="preset_filename"
+        if (field in result or mandatory) and result.get(field)!=value:
+            raise ValueError("producer provenance mismatch: "+field)
 
 
 def verify_job(work, protocol, inventory, job_id):

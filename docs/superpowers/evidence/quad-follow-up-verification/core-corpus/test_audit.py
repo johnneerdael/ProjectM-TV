@@ -148,6 +148,35 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(report["statuses"], {"failed": 1})
         self.assertEqual(report["rows"][0]["samples"], [])
 
+    def test_successful_producer_inside_host_failure_requires_identity_after_rehash(self):
+        path = self.work / self.pair["runs"][0]
+        original = json.loads(path.read_text())
+        for status in ("failed", "timeout"):
+            for field in ("core_sha256", "requested_preset_sha256", "preset_filename", "capture_mode",
+                          "capture_frames", "width", "height", "fps", "seed"):
+                with self.subTest(status=status, field=field):
+                    job = json.loads(run.canonical(original))
+                    job.update(status=status, error="post-result transport timeout")
+                    job["result"].pop(field)
+                    self.save_job(path, job)
+                    run.save_row(self.pair_path, dict(self.pair, status=status, repeat_exact_selected=False))
+                    self.assertIsNotNone(run.read_cached(path, job["key"], self.protocol["sha256"]))
+                    report = audit.export(self.work, self.families, "baseline")
+                    self.assertFalse(report["complete_coverage"])
+                    self.assertEqual(len(report["integrity_issues"]), 1)
+                    self.assertIn("producer provenance mismatch: " + field, report["integrity_issues"][0]["error"])
+
+    def test_complete_successful_producer_preserves_host_timeout_coverage(self):
+        path = self.work / self.pair["runs"][0]
+        job = json.loads(path.read_text())
+        job.update(status="timeout", error="post-result transport timeout")
+        self.save_job(path, job)
+        run.save_row(self.pair_path, dict(self.pair, status="timeout", repeat_exact_selected=False))
+        report = audit.export(self.work, self.families, "baseline")
+        self.assertTrue(report["complete_coverage"])
+        self.assertEqual(report["statuses"], {"timeout": 1})
+        self.assertEqual(report["rows"][0]["samples"], [])
+
     def test_rehashed_failed_result_with_wrong_provenance_is_rejected(self):
         for field, value in [("job_id", "other"), ("protocol_sha256", "other"),
                              ("core_sha256", "other"), ("requested_preset_sha256", "other"),
