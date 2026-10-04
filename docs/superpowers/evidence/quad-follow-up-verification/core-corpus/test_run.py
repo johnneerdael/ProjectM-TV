@@ -21,7 +21,9 @@ class HostTests(unittest.TestCase):
                      "width":2,"height":1,"fps":30,"seed":12345,"eligible_count":1,
                      "requested_preset_sha256":"source",
                      "selected_files":[{"frame":i,"path":f"frame-{i:04d}.rgb","bytes":6,"sha256":sha} for i in range(2)]}
-        self.frames=[{"frame":i,"preset_filename":"exact.milk","change_counter":1,"sha256":sha,"captured":True} for i in range(2)]
+        self.frames=[{"frame":i,"preset_filename":"exact.milk","change_counter":1,"sha256":sha,"captured":True,"pcm_bytes":1470} for i in range(2)]
+        trace=self.work/"frames.jsonl";trace.write_text("".join(json.dumps(row)+"\n" for row in self.frames))
+        self.result["frames_metadata_sha256"]=run.file_hash(trace)
     def tearDown(self):self.temp.cleanup()
     def test_shipping_frame_selections_cover_short_and_long_windows(self):
         self.assertEqual(run.frame_picks(120),[120,150,180,210,239])
@@ -103,6 +105,36 @@ class HostTests(unittest.TestCase):
         self.assertEqual(one,two)
         self.assertEqual(one["unique_thumbnail_files"],1)
         self.assertEqual(before,(self.work/"jobs/repeat-2/row.json").read_bytes())
+
+    def test_shared_observer_requires_same_private_instrumentation_and_harness(self):
+        first={"backend_identity":{"instrumentation_sha256":"shared","harness_sources_sha256":{"x.cpp":"same"}}}
+        second={"backend_identity":{"instrumentation_sha256":"different","harness_sources_sha256":{"x.cpp":"same"}}}
+        with self.assertRaisesRegex(ValueError,"instrumentation|observer"):
+            run.validate_observer_pair(first,second)
+        second["backend_identity"]["instrumentation_sha256"]="shared"
+        run.validate_observer_pair(first,second)
+        second["backend_identity"]["harness_sources_sha256"]["x.cpp"]="changed"
+        with self.assertRaisesRegex(ValueError,"harness|observer"):
+            run.validate_observer_pair(first,second)
+
+    def test_producer_trace_hash_mismatch_is_rejected(self):
+        self.result["frames_metadata_sha256"]="wrong"
+        with self.assertRaisesRegex(ValueError,"trace|metadata"):
+            run.validate_result(self.job,self.result,self.frames,self.work)
+
+    def test_pcm_block_length_is_required_every_frame(self):
+        self.frames[1].pop("pcm_bytes")
+        with self.assertRaisesRegex(ValueError,"PCM"):
+            run.validate_result(self.job,self.result,self.frames,self.work)
+
+    def test_thumbnail_wrong_ihdr_dimensions_is_rejected(self):
+        import struct
+        raw=b"\x89PNG\r\n\x1a\n"+struct.pack(">I",13)+b"IHDR"+struct.pack(">II",128,72)+b"header"
+        (self.work/"thumb.png").write_bytes(raw)
+        sample=self.result["selected_files"][0]
+        sample.update(thumbnail_path="thumb.png",thumbnail_sha256=run.file_hash(self.work/"thumb.png"),thumbnail_bytes=len(raw))
+        with self.assertRaisesRegex(ValueError,"dimensions|256"):
+            run.validate_result(self.job,self.result,self.frames,self.work)
 
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")

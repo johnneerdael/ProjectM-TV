@@ -10,9 +10,11 @@ import gzip
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import signal
 import subprocess
+import struct
 import sys
 import threading
 import time
@@ -106,6 +108,9 @@ def validate_result(job, result, frames, directory):
         raise ValueError("packaged preset source provenance mismatch")
     if result.get("status") != "success":
         return "failed"
+    trace = directory / "frames.jsonl"
+    if not trace.is_file() or file_hash(trace) != result.get("frames_metadata_sha256"):
+        raise ValueError("producer frame metadata trace checksum mismatch")
     expected = job["warmup_frames"] + job["measurement_frames"]
     if result.get("rendered_frames") != expected or len(frames) != expected:
         raise ValueError("incomplete rendered frame/name trace")
@@ -131,7 +136,7 @@ def validate_result(job, result, frames, directory):
             raise ValueError("missing native frame checksum")
         if not captured and sha is not None:
             raise ValueError("unread native frame has invented checksum")
-        if "pcm_bytes" in event and event["pcm_bytes"] != 44100 // job["fps"]:
+        if event.get("pcm_bytes") != 44100 // job["fps"]:
             raise ValueError("PCM frame block was truncated before production JNI")
     if job["capture_mode"] == "full" and len(result.get("sha256_all_frames", "")) != 64:
         raise ValueError("full mode lacks full stream checksum")
@@ -150,8 +155,12 @@ def validate_result(job, result, frames, directory):
             path = safe_member(directory, sample["thumbnail_path"])
             if path.stat().st_size != sample["thumbnail_bytes"] or file_hash(path) != sample["thumbnail_sha256"]:
                 raise ValueError("thumbnail bytes/checksum mismatch")
-            if path.read_bytes()[:8] != b"\x89PNG\r\n\x1a\n":
+            with path.open("rb") as stream:
+                header = stream.read(24)
+            if header[:8] != b"\x89PNG\r\n\x1a\n" or header[12:16] != b"IHDR":
                 raise ValueError("thumbnail is not lossless PNG")
+            if len(header) != 24 or struct.unpack(">II", header[16:24]) != (256, 144):
+                raise ValueError("thumbnail dimensions must be 256x144")
         elif not job.get("retain_native_frames"):
             raise ValueError("compact corpus result lacks thumbnail")
     return "success"
@@ -298,10 +307,18 @@ def prepare_pcm(destination):
             for frames, path in ((240, short_path), (480, long_path))}
 
 
+def validate_observer_pair(baseline, candidate):
+    first, second = baseline["backend_identity"], candidate["backend_identity"]
+    for field in ("instrumentation_sha256", "harness_sources_sha256"):
+        if not first.get(field) or first.get(field) != second.get(field):
+            raise ValueError(f"baseline/candidate observer mismatch: {field}")
+
+
 def prepare(args):
     validate_device(args.serial)
     corpus = inventory()
     roles = {role: artifact(path, role, corpus) for role, path in (("baseline", args.baseline_apk), ("candidate", args.candidate_apk))}
+    validate_observer_pair(roles["baseline"], roles["candidate"])
     device = {key: adb(args.serial, "shell", "getprop", key).stdout.decode().strip()
               for key in ("ro.product.manufacturer", "ro.product.model", "ro.product.device", "ro.build.fingerprint", "ro.product.cpu.abi")}
     pcm = prepare_pcm(args.work / "signals")
@@ -343,9 +360,29 @@ def load_inputs(work):
     return protocol, corpus
 
 
-def install_role(serial, role):
+def require_awake(serial):
+    power = adb(serial, "shell", "dumpsys", "power").stdout.decode(errors="replace")
+    match = re.search(r"mWakefulness=(\w+)", power)
+    if not match or match.group(1) != "Awake":
+        raise RuntimeError("authorized TV is not awake; wait for user; no remote wake permitted")
+
+
+def install_role(serial, role, work):
+    require_awake(serial)
     adb(serial, "shell", "am", "force-stop", PACKAGE)
+    # Preserve every prior owned job, including timeout partials, before data clear.
+    if adb(serial, "shell", "test", "-d", REMOTE, allow_failure=True).returncode == 0:
+        recovery = work / "recovered-device" / str(time.time_ns())
+        recovery.mkdir(parents=True)
+        pulled = adb(serial, "pull", REMOTE, str(recovery), timeout=300, allow_failure=True)
+        (recovery / "pull.log").write_bytes(pulled.stdout + pulled.stderr)
+        if pulled.returncode:
+            raise RuntimeError("could not preserve prior owned remote job data; refusing role clear")
     adb(serial, "install", "-r", role["apk_path"], timeout=300)
+    cleared = adb(serial, "shell", "pm", "clear", PACKAGE)
+    if cleared.stdout.strip() != b"Success":
+        raise RuntimeError("dedicated corecorpus data clear was not acknowledged")
+    print(f"installed role with verified dedicated-package data clear: {role['backend_identity']['variant']}", flush=True)
 
 
 def make_job(protocol, record, role, mode, repeat, measurement_frames):
@@ -373,6 +410,7 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
                                 for sample in cached.get("result", {}).get("selected_files", [])))
     if cached is not None and (not native or native_available):
         return cached
+    require_awake(protocol["device_serial"])
     directory.mkdir(parents=True, exist_ok=True)
     atomic(directory / "job.json", job)
     start = time.monotonic()
@@ -395,7 +433,7 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
                       timeout=args.timeout, allow_failure=True)
         (directory / "instrumentation.log").write_bytes(process.stdout + process.stderr)
         output = directory / "output"
-        pulled = adb(serial, "pull", job["output_directory"], str(output), timeout=180, allow_failure=True)
+        pulled = adb(serial, "pull", job["output_directory"], str(directory), timeout=180, allow_failure=True)
         (directory / "pull.log").write_bytes(pulled.stdout + pulled.stderr)
         if not (output / "result.json").is_file():
             raise ValueError("missing atomic APK result; instrumentation failed or crashed")
@@ -409,9 +447,17 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
         adb(serial, "shell", "am", "force-stop", PACKAGE)
         # Host has pulled and verified all output; remove only owned remote scratch.
         adb(serial, "shell", "rm", "-rf", remote)
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired as error:
         row.update(status="timeout", error="instrumentation/ADB job timeout")
+        captured = (error.output or b"") + (error.stderr or b"")
+        (directory / "timeout-command.log").write_bytes(captured)
         adb(protocol["device_serial"], "shell", "am", "force-stop", PACKAGE, allow_failure=True)
+        try:
+            recovered = adb(protocol["device_serial"], "pull", job["output_directory"], str(directory),
+                            timeout=180, allow_failure=True)
+            (directory / "timeout-recovery.log").write_bytes(recovered.stdout + recovered.stderr)
+        except Exception as recovery_error:
+            row["remote_partial_recovery_error"] = f"{type(recovery_error).__name__}: {recovery_error}"
     except Exception as error:
         row.update(status="failed", error=f"{type(error).__name__}: {error}")
     trace = directory / "output/frames.jsonl"
@@ -431,7 +477,7 @@ def pilot(args, protocol, corpus):
     cases = [(CONTROLS[0],120), (CONTROLS[0],360), (CONTROLS[1],120), (CONTROLS[2],360)]
     checks = []
     for role, identity in protocol["roles"].items():
-        install_role(protocol["device_serial"], identity)
+        install_role(protocol["device_serial"], identity, args.work)
         for name, duration in cases:
             record = next(record for record in corpus["presets"] if record["path"] == name)
             full = run_one(args, protocol, record, role, "full", 1, duration, native=True)
@@ -482,7 +528,7 @@ def scan(args, protocol, corpus):
         atomic(args.work / "progress.json", value)
     progress("running")
     for role, identity in protocol["roles"].items():
-        install_role(protocol["device_serial"], identity)
+        install_role(protocol["device_serial"], identity, args.work)
         for record in corpus["presets"]:
             if STOP.is_set():
                 progress("interrupted"); return
