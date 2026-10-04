@@ -624,13 +624,24 @@ loop-condition side effects, `break`/`continue`, nonterminal helper returns,
 unresolved array sizes/initializer layouts, index-expression side effects,
 non-writable matrix row assignments and same-name initializer
 binding differences,
-projection/LOD/bias/gradient sampling, overfilled matrix constructors, and
+projected/gradient sampling and general mipmapped LOD/bias sampling, overfilled matrix constructors, and
 rectangular bare matrix products without a native GLSL helper remain
 explicitly unresolved. An unresolved statement also makes the returned shader
 result unknown; a discarded expression cannot silently hide lost state changes.
 The numeric evaluator raises on absent symbolic inputs, unsupported operations,
 or nonfinite domains/conversions. Its binary32 arithmetic is not guaranteed to
 match GPU rounding, fused operations or transcendental functions bit for bit.
+
+`tex2Dbias` and `tex2Dlod` preserve packed-coordinate XY and evaluate their W
+selector under the pinned native sampler policy. Those samplers use non-mipmap
+minification filters at base level zero, so finite LOD/bias changes do not create
+visible texture changes by themselves. Missing/nonfinite selectors and unproven
+sampler policies remain unresolved. Four frozen high-frequency texture controls
+match the published core's RGBA8 output across 30 frames each; all 14 historical
+source witnesses lower completely. This verifies the bounded sampling behaviour,
+not complete appearance prediction. See
+`fixtures/texture-lod-native-proof-2026-10-04.json` and
+`fixtures/texture-lod-source-proof-2026-10-04.json`.
 
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe

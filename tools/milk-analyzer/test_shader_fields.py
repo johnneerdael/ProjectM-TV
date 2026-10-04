@@ -38,7 +38,7 @@ class ShaderFieldsTest(unittest.TestCase):
         self.assertEqual(sample.detail['frame'],3)
 
     def test_lod_and_projected_texture_calls_are_not_misread_as_plain_uv_samples(self):
-        for call in ['tex2Dlod','tex2Dproj']:
+        for call in ['tex2Dproj']:
             tree=test_native_reader.NativeReaderTest().read(f'PSVERSION_COMP=2\ncomp_1=`shader_body {{ret={call}(sampler_main,float4(uv,0,2)).xyz;}}\n')['sections']['comp_']['tree']
             model=ShaderFields(stage='composite',frame=3,warp_reads_blur=False)
             result=model.lower(tree)

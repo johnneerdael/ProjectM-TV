@@ -134,8 +134,12 @@ def evaluate(field:Field,*,inputs=None,sample=None):
             raw=visit(node.args[1]) if needs_right else left
         elif op=='sample':
             if sample is None:raise UnresolvedMath('texture function not supplied: '+node.detail['sampler'])
-            if len(node.args)!=1:raise UnresolvedMath('texture overload not implemented')
-            raw=sample(node.detail,visit(node.args[0]))
+            if len(node.args)!=1 and not (len(node.args)==2 and node.detail.get('lod_effect')=='base level only'
+                    and node.detail.get('sampling_policy',{}).get('mipmapped') is False
+                    and node.detail.get('sampling_policy',{}).get('base_level')==0):
+                raise UnresolvedMath('texture overload not implemented')
+            values=[visit(arg) for arg in node.args]
+            raw=sample(node.detail,values[0])
         elif op=='multiply' and node.detail.get('zero_guard') and all(maskable_math(a,inputs) for a in node.args):
             # Native GLSL mult0 returns zero regardless of the other numeric
             # argument, including a division's unspecified nonfinite result.

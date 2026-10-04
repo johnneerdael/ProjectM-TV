@@ -1,0 +1,113 @@
+{
+  "basis": "Targeted source-only LOD/bias witness reparse under pinned non-mipmap sampler policy",
+  "presets": 14,
+  "sections": 14,
+  "complete": 14,
+  "rows": [
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ souls at zero facing.milk",
+      "preset_sha256": "17097f48974712710b873f561642a02cc32fb4adcb50812a8faf7af2c1f86256",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ souls at zero.milk",
+      "preset_sha256": "ef22f694f75bf078d4456141a924bd9a4bd4b4fb807f7d89719f2d6cb8c0b8f1",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Rovastar + Loadus + Geiss flx,cpe - Tone-mapped FractalDrop 7b - en masse quackery2.milk",
+      "preset_sha256": "9cc00dca2549051938a90edceb27aab0a275a2c58e2e9c8074103bd53544edcc",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "bdrv + al Telek - Target Practice mx - planck-ton.milk",
+      "preset_sha256": "3d9aa49320d0bd061774adfc728d527f91ab5cdfd6fae3b2ce269bbe885842e3",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "buxom xuxum sluxtxphuxnx.milk",
+      "preset_sha256": "6690d0d2885aa8054ba1eee910374db15d649657b024cbbb8521841d0411f27f",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "fiShbRaiN + Flexi - witchcraft [graffitti attack] - reasonable affliction.milk",
+      "preset_sha256": "8e9edba28c3c15aff99ab46e45d0ca373f9ef1523ca635d752bdb8542440d767",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk",
+      "preset_sha256": "9d7041c1943e9bf2b3ab629e6e79917af8e1dd88d9121d579d31e1d40608f18d",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - flexi 27goats digital-art-org - scathing review2 slobbering hot vessel cadavar juicy fruit r.milk",
+      "preset_sha256": "927c592b64231bf01de068f4fe772a6f8edf505f6a7733416122b743638fa8f7",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - flexi 27goats digital-art-org - scathing review2 slobbering hot vessel cadavar juicy fruit.milk",
+      "preset_sha256": "56354390fb2dd631ba97163714da78c99053ece9893d90dffd5e31b50ed02e8d",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - flexi 27goats digital-artorg - scathing review2 slobbering hot vessel cadavar G0N.milk",
+      "preset_sha256": "91f7ff93dba3bf720bd6df98ecf95b5e9b25c8c60bc81e1dfe531370c15d8d59",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - flexi coheres vacuum energy - brujchump - kunwei.milk",
+      "preset_sha256": "e5976b65fdd57b71336ee4658b5f6cff315c0450e4a96d3c56f622f97437b42d",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - flexi coheres vacuum energy - brujchump.milk",
+      "preset_sha256": "5ee34103559ffd0385c2eb43830e6a1c985042bc1069292e2e069be7b3c8b6be",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - star stenck - all ye goldless rainbows.milk",
+      "preset_sha256": "35be1a06f2f8bf6ed8a7be36a72f6575f2b68dcecb96d543fffc0b7543d41529",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "no rules, no judgement, only hate.milk",
+      "preset_sha256": "f0a34aaa40a99bc22707348d319c411becb7e0c98f23b23a093cf1fd65ed823a",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    }
+  ],
+  "whole_preset_accuracy_verified": false,
+  "implementation_sha256": {
+    "tools/milk-analyzer/shader_fields.py": "5263fc47532161c64489abc8068a8b6137d95e5a3fe5fba83052062108b3dc47",
+    "tools/milk-analyzer/field_math.py": "9ae5fca02f1be8bc52326f432798777b79561c86bfe999fcaa39c5213e635e51",
+    "tools/milk-analyzer/grid_math.py": "6bf0585fd324877ab5c305c3fbc2cbb50625670e0be0fff3fcb3c3f7f4111346",
+    "tools/milk-analyzer/sampling_policy.py": "19737c55cda80a8ff72c1e415893e77aeb1186a2a8d44fbfbfbfb3ad48bb7e21"
+  }
+}

@@ -574,13 +574,23 @@ class ShaderFields:
                 self.write(target,Field('trunc',(value,),dtype,{'output_of':'modf'}))
                 return Field('modf_fraction',(value,),dtype)
             if name.lower().startswith("tex") and arguments:
-                if name not in {'tex2D','tex3D','texCUBE'} or len(arguments)!=2:
+                if name not in {'tex2D','tex3D','texCUBE','tex2Dbias','tex2Dlod'} or len(arguments)!=2:
                     return self.unsupported('texture sampling overload not lowered: '+name,dtype=dtype)
                 sampler=self.expression(arguments[0])
                 if sampler.op!='input':return self.unsupported("dynamic sampler expression",(sampler,),dtype)
                 coordinates=self.expression(arguments[1])
                 signature=node.get('signature',[])
                 if len(signature)>1:coordinates=self.coerce(coordinates,signature[1]['type']['name'])
+                if name in {'tex2Dbias','tex2Dlod'}:
+                    policy=self.sampler_bindings.get(sampler.detail['name'],texture_settings(sampler.detail['name']))
+                    if policy.get('mipmapped') is not False or policy.get('base_level')!=0:
+                        return self.unsupported('LOD sampling policy requires explicit base-level proof',dtype=dtype)
+                    packed=coordinates
+                    coordinates=Field('member',(packed,),'float2',{'field':'xy','swizzle':True})
+                    selector=Field('member',(packed,),'float',{'field':'w','swizzle':True})
+                    result=self.texture(sampler.detail['name'],(coordinates,selector),dtype)
+                    return Field(result.op,result.args,result.dtype,{**result.detail,'intrinsic':name,
+                        'lod_mode':'bias' if name=='tex2Dbias' else 'explicit','lod_effect':'base level only'})
                 result=self.texture(sampler.detail['name'],(coordinates,),dtype)
                 return Field(result.op,result.args,result.dtype,{**result.detail,'intrinsic':name})
             args=tuple(self.expression(arg) for arg in arguments)

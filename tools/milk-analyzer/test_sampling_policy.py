@@ -14,9 +14,10 @@ class SamplingPolicyTest(unittest.TestCase):
 
     def test_native_prefix_order_and_unknown_prefix_follow_texture_manager(self):
         module=importlib.import_module('sampling_policy')
-        self.assertEqual(module.texture_settings('sampler_cp_main'),{'texture':'main','wrap':False,'linear':False})
-        self.assertEqual(module.texture_settings('sampler_WF_noise_hq'),{'texture':'noise_hq','wrap':True,'linear':True})
-        self.assertEqual(module.texture_settings('sampler_zz_main'),{'texture':'main','wrap':True,'linear':True})
+        common={'mipmapped':False,'base_level':0}
+        self.assertEqual(module.texture_settings('sampler_cp_main'),{'texture':'main','wrap':False,'linear':False,**common})
+        self.assertEqual(module.texture_settings('sampler_WF_noise_hq'),{'texture':'noise_hq','wrap':True,'linear':True,**common})
+        self.assertEqual(module.texture_settings('sampler_zz_main'),{'texture':'main','wrap':True,'linear':True,**common})
 
     def test_warp_texture_unit_zero_overrides_alias_policy_in_native_bind_order(self):
         module=importlib.import_module('sampling_policy')

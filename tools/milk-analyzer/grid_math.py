@@ -211,12 +211,16 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 raw[needed]=right.astype(bool)
         elif op=='sample':
             if sample is None:raise UnresolvedMath('texture function not supplied: '+node.detail['sampler'])
-            if len(node.args)!=1:raise UnresolvedMath('texture grid overload not implemented')
+            if len(node.args)!=1 and not (len(node.args)==2 and node.detail.get('lod_effect')=='base level only'
+                    and node.detail.get('sampling_policy',{}).get('mipmapped') is False
+                    and node.detail.get('sampling_policy',{}).get('base_level')==0):
+                raise UnresolvedMath('texture grid overload not implemented')
             prior=nan_coordinates
             try:
                 nan_coordinates=coordinate_profile!='strict'
                 coordinates=visit(node.args[0],ctx)
             finally:nan_coordinates=prior
+            for argument in node.args[1:]:visit(argument,ctx)
             if np.any(np.isnan(coordinates)):
                 policy=node.detail.get('sampling_policy',{})
                 if coordinates.shape[-1]!=2 or type(policy.get('wrap')) is not bool:

@@ -5,7 +5,7 @@ import math
 def texture_settings(sampler_name:str)->dict:
     name=sampler_name.removeprefix('sampler_')
     prefix=name[:3].lower()
-    settings={'texture':name,'wrap':True,'linear':True}
+    settings={'texture':name,'wrap':True,'linear':True,'mipmapped':False,'base_level':0}
     if len(name)>3 and name[2]=='_':
         settings['texture']=name[3:]
         if prefix in {'fc_','cf_'}:settings.update(wrap=False,linear=True)
