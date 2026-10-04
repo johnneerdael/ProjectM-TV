@@ -10,6 +10,34 @@ READER = Path(os.environ.get("MILK_NATIVE_READER", ROOT / "build/milk-analyzer/n
 
 
 class NativeReaderTest(unittest.TestCase):
+    def test_commented_texsize_does_not_invent_a_sampler_binding(self):
+        result=self.read('PSVERSION_WARP=2\nwarp_1=`// float4 texsize_fc_main;\n'
+                         'warp_2=`shader_body {ret=GetPixel(uv);}\n')
+        section=result['sections']['warp_'];self.assertEqual(section['status'],'parsed',result)
+        names={d['name'] for node in section['tree'] if node['kind']=='declarations' for d in node['values']}
+        self.assertNotIn('texsize_fc_main',names)
+        self.assertNotIn('sampler_fc_main',names)
+        from shader_fields import ShaderFields
+        model=ShaderFields(stage='warp',frame=3,warp_reads_blur=False,frame_wrap=0)
+        field=model.lower(section['tree'])
+        self.assertTrue(model.complete,model.unknown)
+        self.assertFalse(field.args[0].detail['sampling_policy']['wrap'])
+    def test_authored_texsize_declaration_is_rebuilt_as_native_uniform(self):
+        result=self.read('PSVERSION_COMP=2\ncomp_1=`float4 texsize_image;\n'
+                         'comp_2=`shader_body {ret=texsize_image.xyz;}\n')
+        tree=result['sections']['comp_']['tree']
+        declaration=next(d for node in tree if node['kind']=='declarations'
+                         for d in node['values'] if d['name']=='texsize_image')
+        self.assertEqual(declaration['type']['flags']&4,4)
+
+    def test_texsize_rebuilding_preserves_deleted_line_refs_and_qualifiers(self):
+        result=self.read('PSVERSION_COMP=2\ncomp_1=`uniform float4 texsize_a; float4 texsize_b;\n'
+                         'comp_2=`float g=.4;\ncomp_3=`shader_body {ret=float3(g);}\n')
+        tree=result['sections']['comp_']['tree']
+        declarations={d['name']:d for node in tree if node['kind']=='declarations' for d in node['values']}
+        self.assertEqual(declarations['texsize_a']['type']['flags']&4,4)
+        self.assertEqual(declarations['texsize_b']['type']['flags']&4,4)
+        self.assertEqual(declarations['g']['type']['flags']&4,4)
     def test_unused_sampler_declaration_keeps_native_binding_order(self):
         for declaration in ['sampler2D sampler_fc_main;',
                             'sampler2D sampler_noise_hq; sampler2D sampler_fc_main;']:

@@ -21,6 +21,14 @@ counts or infer appearance accuracy from them.
 
 The original sampler-state/dynamic-sampler families each affected 51 presets. They are now substantially diagnosed as native preprocessing/binding compatibility issues; they are not 102 independent missing calculations. Remaining work is integration and broader regression coverage, not assuming authored sampler states control filtering.
 
+Since that full audit, a targeted investigation identified 16 texture-size
+declaration binding errors within the uninitialized family. They now lower
+completely after matching native uniform rebuilding. The full 371 total above
+is the dated audit count, not a newly recomputed total after this fix. Recurrent
+uninitialized `rs` origins occur in 39 recorded presets; some use `0 * rs`.
+Generated zero multiplication semantics need separate analysis; do not assume
+all uninitialized reads are irrelevant.
+
 ## Remaining language and maths topics
 
 These are explicit interpreter limitations; corpus prevalence has not yet been measured for every topic.

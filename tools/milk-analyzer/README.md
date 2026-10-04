@@ -692,6 +692,14 @@ a separate frozen UV control matches all 30 native frames exactly under that
 setting. GPU tie rules and remaining warp/motion feedback drift are unverified.
 See `fixtures/composite-raster-proof-2026-10-04.json`.
 
+Authored `float4 texsize_*` declarations follow native line removal and uniform
+rebuilding. Actual dimensions remain explicit inputs; missing materials or size
+banks are not guessed. Reference collection excludes comments and preserves
+real references in deleted tails, avoiding phantom sampler-order changes.
+All 16 targeted source witnesses lower completely; two frozen native controls
+match 60 frames exactly. See `fixtures/texsize-binding-source-proof-2026-10-04.json`
+and `fixtures/texsize-binding-native-proof-2026-10-04.json`.
+
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe
 shared-read/write ordering remains explicit. Destination indices are captured
