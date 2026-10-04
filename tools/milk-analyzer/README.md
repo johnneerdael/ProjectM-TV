@@ -1261,3 +1261,19 @@ The original315 recheck retains **22** source gaps, clearing only
 `martin - ludicrous speed.milk`. No new blockers or source-token/parsed inventory
 changes appeared. See `fixtures/focused-blockers-22-selector-domains-2026-10-04.json`.
 This is an input and definite-assignment proof, not full appearance certification.
+
+
+### Legacy implicit global constant attribution
+
+The three remaining global read-before-write cases compile under Microsoft's
+legacy compiler using the official Winamp header and MilkDrop2.25c wrapper.
+Reflection exposes mus, dist_c and uv3 as external constants with no default,
+where current native GLSL declares ordinary uninitialized globals. This isolates
+an implicit global-input translation/binding policy gap. It does not prove the
+legacy D3D device supplies zero or certify a visual match. Static/local controls
+remain distinct; uninitialized local uv3 is rejected by Microsoft.
+
+See the initialization engineering brief,
+`fixtures/legacy-global-constant-attribution-2026-10-04.json` and optional CPU-only
+`d3dx_reference_probe.c`. DLL provenance is verified, including the native legacy
+compiler dependency; no Microsoft binaries are committed.22source blockers remain.

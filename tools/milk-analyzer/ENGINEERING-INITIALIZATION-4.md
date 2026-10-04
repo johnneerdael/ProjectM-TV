@@ -202,3 +202,50 @@ The current22-case fixture clears only ludicrous speed. I2/I3/I4 remain engineer
 investigations. This file's historical name retains the earlier count for stable
 links; I1 is not an outstanding native bug. Current list:
 `fixtures/focused-blockers-22-selector-domains-2026-10-04.json`.
+
+
+## New compiler evidence: implicit external constants, not ordinary locals
+
+All three exact authored sections compile with the official Winamp `include.fx`,
+MilkDrop2.25c PS wrapper, `ps_3_0`, flags65536, Microsoft D3DX9_36 wrapper and
+Microsoft D3DX9_31 legacy compiler. Loader traces verify both native DLLs;
+disassembly identifies Microsoft compiler9.15.779.0000. An earlier mixed Wine
+compiler probe was rejected as authoritative evidence and is not used here.
+
+| Preset/storage | Legacy reflection | Current native GLES translation |
+|---|---|---|
+| crystal palace / mus | FLOAT4 register c6, float3, DefaultValue=NULL | `vec3 mus;`, then read |
+| mandelbox / dist_c | FLOAT4 register c13, float, DefaultValue=NULL | uninitialized global float, read before later assignment |
+| organic light / uv3 | FLOAT4 register c2, float2, DefaultValue=NULL | uninitialized global vec2, self-read in assignment |
+
+These sources are valid legacy programs requiring external constant register
+inputs. The current GLSL translation loses that implicit external-input storage
+classification. Compilation does not establish the values supplied by MilkDrop's
+D3D device: NULL default is not proof of zero. Inspect application constant-table
+binding and register initialization/reuse across preset switches. The inspected
+2.25c source binds recognized names; no SetDefaults/SetValue call was found.
+Do not invent a generic zero policy from compiler acceptance alone.
+
+Microsoft's [D3D9 shader guide](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-writing-shaders-9)
+describes global inputs as uniforms. Its [constant initialization guide](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-using-shaders-9)
+separates source initializers from application SetDefaults handling.
+
+Update the fix approach: preserve read-only implicit external globals and initialize
+writable copies from an explicitly established binding/default policy. Keep static,
+const, explicit uniform, initialized globals and locals distinct. Do not blanket-zero
+uninitialized locals or change assignment order. Paired controls show three plain
+globals accepted as external inputs, static uv3 folded with no external constant,
+and local uv3 rejected with X4000. Those distinctions must survive a fix.
+
+Exact shader/file hashes, prepared HLSL/include hashes, DLL/loader identity,
+reflection and current GLSL lines are recorded in
+`fixtures/legacy-global-constant-attribution-2026-10-04.json`. Complete local outputs
+are under `build/milk-analyzer/d3dx-global-defaults/`. The CPU-only source probe is
+`tools/milk-analyzer/d3dx_reference_probe.c`; it requires a Windows cross compiler,
+Wine/Windows and legally obtained D3DX DLLs, which are not committed or distributed.
+Example cross compilation: `zig cc -target x86-windows-gnu -O2 tools/milk-analyzer/d3dx_reference_probe.c -o probe.exe`.
+Invoke with a prepared HLSL file, profile `ps_3_0`, explicit D3DX9_36 path and flags
+`65536`. Put native D3DX9_31 beside the probe and verify the loader chain; a Microsoft
+wrapper can otherwise delegate to Wine's built-in compiler. No rendering/capture
+is needed to verify compiler reflection. The remaining count stays22 until the
+current core binding/default policy and analyzer adaptation are verified.
