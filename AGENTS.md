@@ -16,34 +16,51 @@ Each successfully tested merge to `main` publishes a versioned APK and core AAR,
 
 For release tooling changes, run `python3 -m unittest discover -s .github/scripts/tests -v`. Review factual accuracy of the PR release notes: CI validates their presence and placeholders, not the truth of English prose.
 
-## Bootstrap and maintain this file
+## Maintaining this file
 
-On the next implementation task, inspect the ProjectM TV repository and populate the repository-specific sections below in the same isolated worktree and PR as the requested work. Repeat this discovery whenever relevant context is missing or has changed. This is part of the task and does not require a separate request to edit `AGENTS.md`.
+Keep the repository-specific sections below current whenever a task changes architecture, commands, dependencies, documentation or constraints, in the same worktree and PR as that task. Record only facts backed by repository files or observed command results; mark unverified commands and unresolved facts explicitly, and link to existing docs instead of duplicating them. Do not import assumptions from other repositories (including Milkbeat).
 
-1. Read existing instructions, `README.md`, the user guide and any Pages sources, `.github/pull_request_template.md`, `docs/RELEASING.md`, `app/build.gradle`, dependency manifests and lockfiles, build scripts, CI workflows, and release tooling. Inspect the actual code structure and entry points. Preserve the contributor rules above while populating the missing context.
-2. Replace the repository-specific population instructions with concise, concrete guidance supported by repository files, installed/resolved dependency versions, official documentation, or observed command results. Preserve the section structure when useful; mark genuinely inapplicable sections with a brief reason.
-3. Describe the project's purpose, supported platforms, current architecture, and identifiers. Record exact paths, commands, variants, environment prerequisites, documentation location, and important invariants. Distinguish verified facts from unresolved details and recorded technical debt.
-4. Validate commands before describing them as working. If the environment prevents validation, state the missing prerequisite and the unverified command explicitly. Do not add dependencies or tooling solely to fill this file.
-5. Preserve useful existing project rules while replacing instructions that conflict with the mandatory workflow or documentation precedence below. Do not import assumptions from another repository or copy its framework versions, package names, file budgets, or device requirements.
-6. Maintain the populated guidance whenever a task changes architecture, commands, dependencies, documentation, or constraints. Keep it concise and actionable; put extended explanations in linked documentation.
-
-Do not stop at proposing customization. Complete the applicable population work as part of implementation. A populated `AGENTS.md` is subject to the same validation, PR, and Codex review requirements as any other change. Until discovery is complete, these sections are instructions to populate, not claims about the current implementation.
+Last full discovery: 2026-10-04, against `main` at `4fc66208` (projectM patch series 0001–0029). "Verified" below means the command was run with the stated result on that date; everything else is described from the source files and CI configuration.
 
 ## Repository overview
 
-ProjectM TV produces an Android APK and a core AAR consumed by Milkbeat through the automatic release/update workflow described above. These are supplied contributor facts; verify their implementation during repository discovery.
+ProjectM TV is a music visualizer for Android TV. It renders [projectM](https://github.com/projectM-visualizer/projectm) (a MilkDrop reimplementation) presets that react to the audio another app plays on the same TV; it is not a music player. It bundles 9,606 *Cream of the Crop* presets. GitHub: `johnneerdael/ProjectM-TV` (verified with `gh repo view`; a checkout's `origin` URL may still use the former name `projectm-android-tv`, which redirects).
 
-Populate with the app purpose, application ID and namespaces, primary languages/frameworks, projectM upstream/fork relationship, supported Android versions and device types, build variants, and important entry points. Identify the app/core boundary and Milkbeat integration. Record exact build tasks rather than assuming Milkbeat’s stack or flavor names apply here.
+| | `:app` | `:core` |
+|---|---|---|
+| Type | Android application (APK) | Android library (AAR), the engine |
+| Namespace / Java package | `com.example.projectm.visualizer` (legacy package; the installed ID differs) | `nl.neerdael.projectm.core` |
+| Application ID | `nl.neerdael.projectmtv` (since 1.9.7); suffixes `.profile`, `.presettest`, `.setuptest` for side-by-side builds | – |
+| Languages | Java (source/target 1.8), XML views | Java + C++17 (JNI), CMake; builds `libprojectmtv.so` |
+| SDK levels | compileSdk 34, targetSdk 34, minSdk 21 | compileSdk 34, minSdk 21; ABIs `armeabi-v7a`, `arm64-v8a` |
+| Dependencies | `project(':core')`; test: JUnit 4.13.2. No AndroidX, Kotlin or Compose (framework APIs only, to keep the APK small) | test: JUnit 4.13.2; projectM built from source |
+
+- **Devices:** Android TV only. The manifest requires `android.software.leanback`, OpenGL ES 3.0 and audio output; touchscreen, gamepad and microphone are optional. README: Android 5.0+ (API 21), at least 2 GB RAM highly recommended, no touch/phone support.
+- **Build types (no product flavors):** `debug`; `release` (R8 minify + resource shrinking, release key when `SIGNING_KEYSTORE_PATH` is set, otherwise the local debug key); `profile` (`initWith release`, debug key, `.profile` suffix, `profileable` via `app/src/profile/AndroidManifest.xml`). Gradle properties `-PpresetLabDeviceTest` / `-PsetupScreenshotTest` give the debug build the `.presettest` / `.setuptest` suffix and a distinct app name.
+- **Entry points:** `ProjectMApplication` (one-time preference migrations, `ProjectMCore.init`); `MainActivity` (single `singleTask` landscape activity: UI, remote keys, audio capture, settings panels); `TrackListenerService` (notification listener used only for media sessions); `Updater` + `UpdateFileProvider` (opt-in GitHub auto-update). Engine: `ProjectMCore`, `ProjectMJNI`, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile`, `DisplayInfo`; native `core/src/main/cpp/native-lib.cpp` plus `snapshot_fade.cpp` and `preset_prewarm.cpp`.
+- **projectM relationship:** submodule `third_party/projectm` tracks upstream `https://github.com/projectM-visualizer/projectm.git`, pinned at tag `v4.1.7` (commit `e0b0a967`). All engine changes are the ordered patch series `tools/projectm-patches/NNNN-*.patch` (0001–0032), applied at CMake configure time by `core/src/main/cpp/CMakeLists.txt` and linked statically into `libprojectmtv.so`. The personal fork `johnneerdael/projectm` is not referenced by the build; it is used for upstream PRs.
+- **App/core boundary and Milkbeat:** `:app` holds UI, audio capture, track titles and the updater; `:core` holds the engine, JNI, presets, textures and preset indexes. [Milkbeat](https://github.com/johnneerdael/Milkbeat) consumes the released core AAR: CI publishes `projectM-TV-core-<version>.aar` and dispatches `projectm-core-release` to Milkbeat (see *Generated artifacts*). Milkbeat's own build and API usage live in its repository and were not inspected here.
+- **Build tasks:** `./gradlew assembleRelease` (APK at `app/build/outputs/apk/release/app-release.apk` and AAR at `core/build/outputs/aar/core-release.aar`), `./gradlew :core:assembleRelease`, `./gradlew assembleDebug`, `./gradlew assembleProfile`.
 
 ## Codebase navigation and knowledge tools
 
-Populate with the source/module map, architecture documentation, and existing code search or knowledge graph tools. Record when generated indexes must be refreshed and whether their outputs are committed. If a graph tool such as graphify is already configured, record its verified commands and freshness rules; otherwise use ordinary code search and do not assume a graph exists.
+- No `.codegraph/` or `graphify-out/` exists at the repository root (checked 2026-10-04). Use `git grep`/`rg`; do not assume a code graph.
+- Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) §5 (threading rules, transitions, resolution, frame pacing, threads, overlay UI, device tiers). Its title says v1.9 and §1–4 and §6–8 are historical analysis; verify against the code. Design specs, plans and evidence for engine work are in `docs/superpowers/{specs,plans,evidence}`.
+- projectM sources: `third_party/projectm` shows patched code only after a CMake configure or a manual apply; the committed source of truth is `tools/projectm-patches/`. Search both the submodule and the patches.
+- Logs for tracing behavior: native tag `projectM-Native` (`LOAD`, `PREWARM`, `TRANSITION`, `OUTPUT` lines per switch); `VisualizerRenderer` logs `STATS fps=… surface=… audio=…` every 5 s.
+- Committed generated data indexes (not code indexes): `core/src/main/assets/presets.idx` (regenerate with `tools/gen-preset-index.py` whenever presets or textures change; CI enforces `--check`) and the genre bundle in `core/src/main/assets/preset-genres/` (produced by Preset Lab, imported with `tools/import-preset-genres.py`).
 
 ## Design and user experience
 
 Follow the project's established design system and platform conventions. Reuse existing theme tokens and components. Preserve accessibility, keyboard/focus behavior, responsiveness, and supported input methods. Avoid introducing decorative styles or changing appearance incidentally during a refactor.
 
-Populate with the actual UI toolkit and design system, theme/component locations, TV remote and D-pad focus/navigation contracts, supported layouts, accessibility requirements, approved visual patterns, and official references. Verify any additional touch/keyboard support; do not assume Jetpack Compose or Material 3 is used.
+- **Toolkit:** framework Views and XML only (no AndroidX, Leanback library, Material or Compose). One layout, `app/src/main/res/layout/activity_main.xml`. Theme `Theme.Leanback` in `res/values/themes.xml` (parent `@android:style/Theme.Black.NoTitleBar.Fullscreen`); text styles `Overlay.*` in `res/values/styles.xml`; tokens in `res/values/colors.xml` and `dimens.xml`; drawables in `res/drawable*`. Reusable views: `OptionRow` (focusable settings row), `AudioMeterView`, `TrackCorner`. Dialogs use `android.R.style.Theme_DeviceDefault_Dialog_Alert`.
+- **Remote/D-pad contract** (`MainActivity.onKeyDown`/`dispatchKeyEvent`; documented in the README *Remote control* table and `docs/user-guide/controls.md`; keep all three in sync):
+  - No panel: Right/Next/Fast forward = random preset (hard cut); Left/Previous/Rewind = previous preset; Up/Down/Info = show the track again; Center/Enter/Menu = open the panel; Back exits.
+  - Panel open: Up/Down move focus between rows, Left/Right change a value, Center cycles or runs an action; Back closes (from *Advanced* or *Track display* it returns to the main panel); Menu closes; it hides after 10 s without input, and every key event restarts that timer.
+- **Layout:** landscape, fullscreen, immersive sticky. The GL surface renders at its own size (`SurfaceHolder.setFixedSize`) and is scaled by the display; the overlay UI uses the UI resolution.
+- **Accessibility:** no documented requirements and no TalkBack verification found; the layout has only three `contentDescription` attributes. Keep every new control reachable by D-pad focus and give icon-only controls a `contentDescription`.
+- **Visual references:** user-guide setup screenshots (`docs/user-guide/images/setup/`) come from the `-PsetupScreenshotTest` build on an Ugoos AM6. Rendering changes need before/after captures (PR template).
 
 ## Use existing platform and dependency APIs
 
@@ -56,43 +73,96 @@ Before implementing a component, parser, formatter, scheduler, transport, or sim
 
 Prefer configuration, composition, or a small wrapper to copied library source or overlapping dependencies. Use maintained implementations for security-sensitive primitives.
 
-Populate with a compact table of common needs, preferred APIs/dependencies, their source of version truth, and important constraints. Keep version information current rather than copying versions from another project.
+| Need | Existing API / implementation | Version truth | Constraints |
+|---|---|---|---|
+| Audio input | `android.media.audiofx.Visualizer` on the player's session (`PlayerSessionFinder`), on the `AudioCapture` `HandlerThread` → `ProjectMJNI.addWaveform` | framework, minSdk 21 | 8-bit mono; needs `RECORD_AUDIO`; no microphone use |
+| Playing track | `MediaSessionManager` via `TrackListenerService` / `TrackWatcher` | framework | needs notification access; no notification content is read |
+| Rendering | `GLSurfaceView` + GLES 3.0 + projectM C API via JNI | `third_party/projectm` tag + `tools/projectm-patches/` | projectM handle only on the GL thread |
+| Frame pacing | `Choreographer` in `VisualizerView` | framework | |
+| Settings | `SharedPreferences` file `projectm_settings` | framework | see *Dependencies, state, and lifecycle* |
+| Auto-update | `HttpURLConnection` + `Updater` + custom `UpdateFileProvider` (no AndroidX `FileProvider`) | framework | the app's only network use; off by default |
+| Engine fixes | new patch in `tools/projectm-patches/` | patch series | never edit committed submodule files |
+| Preset analysis | `tools/preset-lab` (numpy, opencv-python-headless) | `tools/preset-lab/pyproject.toml`, `requirements.lock` | offline only; does not change the Android renderer |
+| Docs site | MkDocs | `docs/site-requirements.txt` (`mkdocs==1.6.1`) | |
+| Build toolchain | AGP 8.12.0, Gradle 8.14.2, NDK 27.3.13750724, CMake 3.22.1 | `build.gradle`, `gradle/wrapper/gradle-wrapper.properties`, `app/build.gradle`, `core/build.gradle` | no version catalog |
+
+Adding AndroidX or another runtime dependency departs from the documented small-APK policy (`app/build.gradle`) and affects F-Droid reproducibility; justify it in the PR.
 
 ## Performance and resource use
 
 Avoid blocking work on latency-sensitive threads, unnecessary polling, duplicate requests, unbounded concurrency, and background work that outlives its owner. Honor existing cache, cancellation, visibility, lifecycle, and resource-release contracts. Back performance claims with measurements and state what was not measured.
 
-Populate with the actual rendering/audio paths, render-thread ownership, visibility and pause behavior, frame pacing, resource cleanup, and relevant CPU/GPU/memory/thermal constraints. Record established budgets, benchmark or frame-capture commands, representative preset/audio workloads, device coverage, and measured regression lessons. Do not invent performance targets or claim improvements without evidence.
+- **Threads** ([ARCHITECTURE §5 *Threads*](docs/ARCHITECTURE.md)): GL thread (`THREAD_PRIORITY_DISPLAY`) owns the projectM handle (create, render, load, settings) and output measurement; `AudioCapture` HandlerThread (`THREAD_PRIORITY_AUDIO`); a native worker for preset indexing and prefetch; a background shader-compile `std::thread` started from the GL thread (`preset_prewarm`); the UI polls status every 500 ms. Other entry points only write atomics or mutex-protected buffers; keep it that way.
+- **Visibility and cleanup:** `MainActivity.onPause` stops the track watcher, UI refresh, updater and audio, then calls `visualizerView.onPause()`; `onResume` restarts them and re-checks notification access. `onDestroy` releases projectM on the GL thread (`queueEvent(renderer::release)`); after context loss the next `onSurfaceCreated` cleans up.
+- **Frame pacing and quality:** default is half the refresh rate (`RENDERMODE_WHEN_DIRTY` + `Choreographer`); `QualityController` moves the render height on a ladder; the render height is capped at 1330p, and by installed RAM (`DeviceProfile.memorySafeHeight`); `onTrimMemory` → `ProjectMJNI.onMemoryPressure`. Device tiers (HIGH/STANDARD/LOW) are in `DeviceProfile` and ARCHITECTURE §5.
+- **No numeric frame-time or memory budget is defined.** Compare before/after on the same TV, preset, render height and audio (PR template).
+- **Measurement tools:** profile build + simpleperf ([docs/PROFILING.md](docs/PROFILING.md)); pin a preset with `adb shell setprop debug.projectmtv.preset '<name prefix>'` and clear it afterwards (`debug.projectmtv.update_from` also exists); `tools/tv-diagnostics.sh <tv-ip>:5555 --sweep` ([docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md)); Preset Lab for offline rendering comparisons (desktop timings do not establish TV performance).
+- **Documented device coverage:** NVIDIA SHIELD TV 2019 (`sif`, 2 GB, 32-bit) and SHIELD TV Pro 2019 (`mdarcy`, 3 GB), Android 11; Ugoos AM6 (Amlogic S922X, Mali-G52 MP6, Android 9). No emulator configuration is committed.
+- **Measured lessons (ARCHITECTURE §5):** listing ~10k assets took 8.4 s and blocked UI inflation → the worker reads `presets.idx`; GL linking at switches froze the picture 0.5–1.9 s → background prewarm and program caches; tile-based GPUs paid for render-target loads → patches 0009–0016.
 
 ## Dependencies, state, and lifecycle
 
 Follow the existing dependency injection and ownership model. Prefer explicit dependencies and testable boundaries. Preserve instance identity, initialization timing, lifecycle, cancellation, and cleanup when refactoring. Keep migrations focused on the task and avoid creating duplicate services, caches, clients, or background workers.
 
-Populate with actual dependency injection conventions, state ownership, service scopes, persistence and schema migration rules, sensitive initialization paths, and the validation required when these change.
+- **No DI framework.** `MainActivity` constructs its collaborators directly (`TrackWatcher`, `QualityController`, the `AudioCapture` handler thread). `Updater` is a process-wide singleton (`Updater.get`, own `Updater` background thread; the activity attaches/detaches its listener). The engine is a process-wide native singleton behind static `ProjectMJNI` methods.
+- **Initialization:** `ProjectMCore.init(context)` once from `Application.onCreate` (safe to repeat); it keeps the application `AssetManager` for the process lifetime and starts native preset indexing and the one-time texture copy before the first preset loads.
+- **Persistence:** `SharedPreferences` `projectm_settings` (`MainActivity`, `ProjectMApplication`); `files/skipped_presets.txt` (skip list, `ProjectMCore.skipListFile`); `files/textures/` (texture copy). `android:allowBackup="true"`. There is no schema version: one-time migrations in `ProjectMApplication` are guarded by boolean keys (`skip_list_reset_1_9`, `frame_rate_reset_30`); add a new key for a new migration rather than reusing one.
+- **Settings flow:** Java writes settings through `ProjectMJNI` setters; native code applies dirty settings on the GL thread at the next frame.
+- **Validation when changing these:** native engine tests (commands, skip list, transitions, context loss), `QualityControllerTest`, app JVM tests, and a TV check of pause/resume (Home and return), audio re-attachment and low-memory behavior.
 
 ## User-facing text and localization
 
 Use the project's established resource or localization mechanism for user-facing text. Follow its locale ownership and translation workflow; do not invent an English-only or all-locales policy.
 
-Populate with resource paths, string naming rules, locale update requirements, and formatting/accessibility conventions. Mark inapplicable where appropriate.
+- **Not localized today.** `app/src/main/res/values/strings.xml` holds only `app_name` (overridden by `resValue` for test builds); there are no `values-*` locale directories and no translation workflow. UI text is English literals in Java (`MainActivity`, `OptionRow`, …) and the layout XML. Introducing localization is a deliberate change that should move strings to resources consistently.
+- **Wording conventions:** the product name is "ProjectM TV"; menu paths use `›` (e.g. *Settings › Advanced › Auto-update*). Keep setting names and values identical in the UI, the README settings tables and `docs/user-guide/settings.md`.
+- Store listing text: `fastlane/metadata/android/en-US/` (F-Droid metadata, English only).
 
 ## Code structure and modularization
 
 Place code according to its responsibility and actual consumers. Reuse shared code when appropriate without creating speculative abstractions. Split oversized or mixed-responsibility files along meaningful boundaries. Preserve behavior during refactors and remove obsolete code.
 
-Populate with a source/module placement table covering the app, core library, native code and bindings if present, tests, presets/assets, documentation, and release scripts. Record visibility and naming conventions, generated-code boundaries, representative patterns, and any established size limits. Do not impose arbitrary file budgets.
+| Responsibility | Location |
+|---|---|
+| App UI, audio capture, track titles, updater | `app/src/main/java/com/example/projectm/visualizer/` |
+| App resources; profile-build manifest | `app/src/main/res/`; `app/src/profile/` |
+| App JVM tests | `app/src/test/java/com/example/projectm/visualizer/` |
+| On-device tests | `app/src/androidTest/…` (`MusicCategoryInstrumentation` is a custom `Instrumentation` and the configured runner; `TrackAccessSetupTest`) |
+| Engine Java API | `core/src/main/java/nl/neerdael/projectm/core/` |
+| JNI and native engine glue | `core/src/main/cpp/` (`native-lib.cpp`, `snapshot_fade.*`, `preset_prewarm.*`, `CMakeLists.txt`) |
+| Core JVM tests | `core/src/test/java/…` (`QualityControllerTest`) |
+| Native host tests | `core/src/test/native/` (`engine_test.cpp` against stubs, `fade_gl_test.cpp`, `projectm-regressions/`) |
+| Presets, textures, indexes | `core/src/main/assets/{presets,textures,presets.idx,preset-genres}` |
+| projectM changes | `tools/projectm-patches/NNNN-<slug>.patch` (4-digit order, header explains the change and any upstream source) |
+| Upstream engine (do not commit edits) | `third_party/projectm` |
+| Tools | `tools/*.sh`, `tools/*.py`, `tools/preset-lab/` |
+| Release tooling / CI | `.github/scripts/` (+ `tests/`), `.github/workflows/` |
+| Docs | `README.md`, `docs/`, `docs/user-guide/` |
+
+- JNI functions bind by name (`Java_nl_neerdael_projectm_core_ProjectMJNI_*`), kept by `core/consumer-rules.pro`; renaming `ProjectMJNI`, its package or a native method requires matching native changes and breaks consumers.
+- No file-size limits are established. `MainActivity.java` (~1,200 lines) and `native-lib.cpp` (~2,000 lines) are large; split only along real responsibilities.
+- Root scripts `build.sh`, `build_android.sh`, `debug.sh`, `install.sh` are local helpers not used by CI (not validated).
 
 ## Repository-specific constraints
 
 Preserve the release/version rules above. Treat the core AAR’s interface and compatibility with Milkbeat as an integration boundary; verify the actual API and consumers before changing it.
 
-Populate with verified public API/ABI compatibility rules, dependency/native-library requirements, supported runtime versions, preset/asset constraints, upstream attribution and licensing requirements, and any protected or generated files. Record the procedure for deliberate incompatible changes. These constraints cannot waive the mandatory documentation evaluation rule below.
+- **Core API:** public classes in `nl.neerdael.projectm.core` (`ProjectMCore`, `ProjectMJNI` incl. `TRANSITION_*` constants, `VisualizerView`, `VisualizerRenderer`, `QualityController`, `DeviceProfile`, `DisplayInfo`) are used by `:app` and by Milkbeat through the released AAR. There is no API/ABI compatibility check. Before removing or changing public members or native signatures, inspect Milkbeat's usage. Because every `main` merge publishes the core and triggers a Milkbeat rebuild, a deliberate incompatible change needs a coordinated Milkbeat change; no written procedure exists yet (unresolved).
+- **Native toolchain:** NDK `27.3.13750724`, CMake `3.22.1`, C++17, ABIs `armeabi-v7a`/`arm64-v8a`, projectM linked statically. Keep the reproducible-build settings in `CMakeLists.txt` (`-ffile-prefix-map`, disabled flex/bison) and `dependenciesInfo` off in `app/build.gradle`: F-Droid rebuilds and compares the release APK.
+- **projectM patches:** never commit edits inside `third_party/projectm` (submodule has `ignore = dirty`). To write a patch: apply the existing series in `third_party/projectm` and stage it (`git -C third_party/projectm add -A`) so new edits show as a clean diff, then use `tools/regen-projectm-patch.sh <name>`. That script only diffs `src/` and `tests/`; patches touching `vendor/hlslparser` (0003, 0008, 0018, 0019, 0021, 0030, 0031) must be produced manually with a `git diff` that includes `vendor/hlslparser`. For several new patches at once, a local-only branch in the submodule with one commit per patch (series, then each new patch) lets `git diff <commit> <commit>` regenerate any of them; never stage `third_party/projectm` in the superproject, and reset the submodule to the pinned commit afterwards. After pulling patch changes, reset the submodule (`git submodule foreach --recursive git checkout -- .`). Shader changes must link as GLSL ES 3.00 (`glslangValidator -l` with `#version 300 es` prepended; PR template).
+- **Patch identity in the Dance bundle:** `tools/import-preset-genres.py` refuses a bundle whose `app_patches_sha256` differs from the current patch series. Changing the series means a re-measured bundle is needed before the next import.
+- **Presets and textures:** CI rejects presets that cannot react to audio or use excluded or missing textures (`tools/check-presets.py`) and a stale `presets.idx` (`tools/gen-preset-index.py --check`). Preset Lab CI rejects tracked audio/raw capture files under `tools/preset-lab` and `core/src/main/assets/preset-genres`.
+- **Licensing and attribution:** app code LGPL-2.1 (`LICENSE`); presets and textures CC0 1.0 (`LICENSES/CC0-1.0.txt`). Record new third-party content and new patches in [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md); keep upstream attribution in patch headers and release notes.
+- **Privacy claims:** README states no network access except opt-in auto-update to GitHub, and in-memory audio analysis only. New network use or data storage contradicts published documentation and must update it.
+- **Do not commit:** `local.properties`, keystores, APK/AAR outputs, `build/`, raw diagnostics (see `.gitignore`).
 
 ## Formatting and linting
 
 Follow the repository's configured formatting and lint rules. Review automatic formatting changes and avoid unrelated churn. Fix violations rather than disabling checks to obtain a passing result.
 
-Populate with exact check/format commands, their working directories, configuration files, target paths, incremental/ratchet behavior, and CI equivalents.
+- No formatter or linter is configured: no `.editorconfig`, `.clang-format`, ktlint/detekt, `lint.xml`, pre-commit or Python lint configuration outside `third_party/`. CI does not run Android Lint. Match the surrounding style (Java: 4-space indent).
+- The JNI library compiles with `-Wall -Wextra -Wno-unused-parameter`; do not add warnings.
+- Checks that act as lint in CI: `release_notes.py validate` (PR body), `tools/gen-preset-index.py --check`, `tools/check-presets.py`, `mkdocs build --strict` (user guide). `tools/check-patch-series.sh` is not in CI; CI applies the series through CMake during the native tests and `assembleRelease`.
 
 ## Building and testing
 
@@ -104,17 +174,67 @@ For release tooling changes, the required check is:
 python3 -m unittest discover -s .github/scripts/tests -v
 ```
 
-Populate with the repository’s exact setup, APK and core AAR build tasks, app/core unit and integration tests, native tests if present, device/emulator journeys, and documentation checks. Derive required Android SDK/NDK, JDK, Gradle, native toolchain, variants, and device coverage from repository files and CI. Identify relevant rendering, preset-loading, audio, lifecycle, and Milkbeat integration checks, and when each applies. State unavailable prerequisites and unverified coverage honestly.
+**Prerequisites** (from `app/build.gradle`, `core/build.gradle`, wrapper and CI): JDK 21 (CI Temurin 21, matching F-Droid; sources compile as Java 1.8), Gradle wrapper 8.14.2, AGP 8.12.0, Android SDK platform 34, NDK `27.3.13750724`, CMake `3.22.1` (CI installs the last three with `sdkmanager`), `local.properties` with `sdk.dir` (git-ignored; CI writes it), initialized submodules. CI runs on `ubuntu-24.04`.
+
+| Command | Covers | Status |
+|---|---|---|
+| `git submodule update --init --recursive` | setup | Verified |
+| `tools/check-patch-series.sh` | full series applies to a clean export of the submodule's `HEAD` (so the submodule must be at the pinned commit) | Verified: "all 29 patches apply" on `main`; the 32-patch series was verified with the same steps against `e0b0a967` |
+| `tools/projectm-host-tests.sh [--gtest_filter=…]` | patched projectM GTest suite (build in `build/projectm-host`); needs CMake, Ninja, C++ compiler, Homebrew googletest | Verified on macOS: 179/179 on `main`, 204/204 with 0030–0032 |
+| `python3 -m unittest discover -s .github/scripts/tests -v` | release tooling | Verified: 74 tests OK (Python 3.13.12) |
+| `core/src/test/native/run_native_tests.sh` | engine tests, GL fade overlay, patched-projectM regressions (ASan/UBSan); needs a C++17 compiler, JDK (`jni.h`), CMake, EGL/GLES dev libs on Linux (macOS uses OpenGL) | CI; not validated in this pass |
+| `./gradlew testReleaseUnitTest` (CI) / `./gradlew testDebugUnitTest` (PR template) | app and core JVM tests | not validated in this pass |
+| `./gradlew assembleRelease` / `./gradlew :core:assembleDebug` / `./gradlew assembleProfile` | APK + AAR; patch application through CMake; profile build | CI runs `assembleRelease`; not validated in this pass |
+| `tools/gen-preset-index.py --check`, `tools/check-presets.py` | asset checks | CI; not validated in this pass |
+| `python -m pytest tools/preset-lab/tests` (`-m native` needs the native worker; see `tools/preset-lab/README.md`) | Preset Lab | CI (Preset Lab workflow); not validated in this pass |
+| `mkdocs build --strict` (after `pip install -r docs/site-requirements.txt`) | user guide | CI (User guide workflow); not validated in this pass |
+| `./gradlew -PpresetLabDeviceTest :app:assembleDebug :app:assembleDebugAndroidTest`, then `adb -s DEVICE shell am instrument -r -w -e live_audio true nl.neerdael.projectmtv.presettest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation` | music-category behavior on a TV ([development guide](docs/user-guide/development.md)) | needs a TV; not validated in this pass |
+
+**What to run when:**
+
+- JNI, `native-lib.cpp`, transitions, skip list: native tests, JVM tests, a build, and a TV check for rendering/audio/frame rate.
+- projectM patches: `check-patch-series.sh`, `projectm-host-tests.sh`, native tests, `:core:assembleDebug` log, TV before/after; complete the PR template's *projectM patches* checklist. Shader translation changes: `PresetShaderTranslationTest` (generated GLSL plus composite shaders rendered through the engine on macOS CGL; render cases skip without a GL context) and, where useful, translating the bundled presets' shaders before and after and compiling both with `glslangValidator` as GLSL ES 3.00.
+- Presets/textures: `check-presets.py`, regenerate `presets.idx`, consider the genre bundle.
+- UI, settings, remote keys: JVM tests plus a D-pad journey on a TV (open panel, sub-panels, Back/Menu, auto-hide); refresh setup screenshots with `-PsetupScreenshotTest` when visuals change.
+- Audio and track titles: a TV with a verified music app (Spotify, SoundCloud, SmartTube, Milkbeat); include pause/resume.
+- Public core API: build `:core:assembleRelease` and build Milkbeat against it (`-PprojectmCoreRepo=<dir> -PprojectmCoreVersion=<version>`, see [docs/RELEASING.md](docs/RELEASING.md)); not validated in this pass.
+- After TV work: clear `debug.projectmtv.*` properties and restore app settings.
 
 ## Generated artifacts and release preparation
 
 A successful tested merge to `main` triggers the versioned APK/core AAR release and Milkbeat update. Routine PRs must not manually bump the base version/code/commit. Follow `docs/RELEASING.md` for a planned new release line.
 
-Populate with the exact CI workflow names and triggers, artifact locations, version calculation, signing prerequisites without secret values, publication destinations, Downloader code ownership, canonical README install blockquote, and Milkbeat update mechanism. Record generated outputs, regeneration commands and triggers, and what is committed. Verify release automation from its implementation rather than assuming details.
+| Workflow (file) | Trigger | What it does |
+|---|---|---|
+| Android CI/CD (`android.yml`) | push to any branch, pull request, manual | `native-tests`: release-tooling tests, preset index/preset checks, Mesa, `run_native_tests.sh`. `apk`: `release_version.py`, signing, `testReleaseUnitTest`, `assembleRelease`; artifacts `apk`, `core-aar`, `mapping` (30 days). `release` (only when publishing): `release_notes.py generate`, `publish_release.py publish`. `milkbeat`: `publish_release.py milkbeat`. Runs queue; none is cancelled |
+| PR release notes (`release-notes.yml`) | PR opened, synchronized, reopened, edited, ready for review | `release_notes.py validate` on the PR body |
+| User guide (`docs.yml`) | PR or `main` push touching `docs/user-guide/**`, `docs/site-requirements.txt`, `mkdocs.yml`, the workflow; manual | `mkdocs build --strict`; deploys to GitHub Pages from `main` |
+| Preset Lab (`preset-lab.yml`) | every push and PR; manual | Preset Lab tests incl. native rendering under xvfb; rejects tracked audio/raw captures |
+
+- **Versioning (`.github/scripts/release_version.py`):** publishing happens only for `refs/heads/main` on `push` or `workflow_dispatch`. Version = `baseVersionName` patch + (first-parent ordinal since `baseVersionCommit` − 1); the code advances in step from `baseVersionCode`. Other builds get a `-ci.<run>` suffix and file names `…-ci.<run>-<sha>.apk/.aar`. Base values today: 2.2.0 / 38 / `da4fe0ed`; the latest tag is `v2.2.6`.
+- **Signing secrets (names only):** `SIGNING_KEYSTORE_BASE64`, `SIGNING_STORE_PASSWORD`, `SIGNING_KEY_ALIAS`, `SIGNING_KEY_PASSWORD`. A publishing build without the keystore fails; PR artifacts use a temporary debug key.
+- **Publication:** GitHub Release `v<version>` with `projectM-TV-<version>.apk`, `projectM-TV-core-<version>.aar`, stable-named `projectM-TV.apk` / `projectM-TV-core.aar`, `projectM-TV-<version>-mapping.txt` and `checksums.txt`. Notes come from merged PRs' `## Release notes` sections plus a CI footer.
+- **Downloader code:** read by `release_notes.py` from the README blockquote `` > **Install on your TV with the Downloader app: code `4821216`** `` (exact regex; changing its format breaks release-note generation). The code is an AFTVnews short link to `releases/latest/download/projectM-TV.apk`; who manages the short link is not recorded in the repository.
+- **Milkbeat:** `publish_release.py milkbeat` (token secret `MILKBEAT_TOKEN`) sends `repository_dispatch` `projectm-core-release` with the version to `johnneerdael/Milkbeat`, unless Milkbeat's latest release already names this core version or newer.
+- **Committed generated files:** `core/src/main/assets/presets.idx`, `core/src/main/assets/preset-genres/`. Not committed: APKs, AARs, `build/`, raw diagnostics. `RELEASE_NOTES.md` is a manual archive (last entry 2.1.5) and is not used by CI.
 
 ## Documentation map
 
-Known contributor references are `README.md`, its canonical install blockquote, `docs/RELEASING.md`, and `.github/pull_request_template.md`; verify their current content and roles. Populate with the user-guide location, any Pages/GitHub Pages URL and source paths, other Markdown entry points, documentation build/publishing workflow, and source ownership. State verified absence where appropriate. Do not invent a guide or Pages site. The mandatory evaluation rule below applies before and after this map is populated.
+| Source | Role |
+|---|---|
+| `README.md` | Product overview, settings tables, permissions, install (canonical Downloader blockquote), troubleshooting, developer build/test |
+| `docs/user-guide/*.md` + `mkdocs.yml` | User guide source, published by the User guide workflow to https://johnneerdael.github.io/ProjectM-TV/ (`docs/user-guide/development.md` covers build/test and the docs site) |
+| `docs/ARCHITECTURE.md` | Engine design, threading, transitions, resolution, device tiers, measurements |
+| `docs/RELEASING.md` | CI publishing, versioning, signing, downloads, Milkbeat |
+| `docs/THIRD_PARTY.md` | projectM pin, per-patch descriptions, presets/textures sources and licences |
+| `docs/PROFILING.md`, `docs/DIAGNOSTICS.md` | Profile build + simpleperf; `tools/tv-diagnostics.sh` |
+| `docs/DANCE-COLLECTION.md` | Pointer to `docs/user-guide/dance-measurement.md` |
+| `tools/preset-lab/README.md` | Preset Lab installation and commands |
+| `docs/superpowers/` | Design specs, plans and evidence for engine work |
+| `.github/pull_request_template.md` | Required PR sections and checklists |
+| `RELEASE_NOTES.md`, `fastlane/metadata/android/en-US/` | Historical release notes; F-Droid store listing and changelogs |
+
+Known documentation drift (2026-10-04, not yet fixed): README says it describes the app "as of version 2.1.5" while releases reach v2.2.6; `docs/ARCHITECTURE.md` §5 describes embedding `core/` as a Gradle module, while `docs/RELEASING.md` describes Milkbeat consuming the released AAR; the committed Dance bundle's `app_patches_sha256` does not match the current patch series (computed with Preset Lab's digest function, not by running the import check).
 
 ## Mandatory workflow — scope and completion
 
