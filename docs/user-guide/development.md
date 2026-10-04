@@ -63,7 +63,8 @@ include the bounded-selector fix from PR #25. These checks do not establish full
 visual accuracy.
 
 The engine preserves plain uninitialized scalar/vector shader globals as external
-inputs. Inputs with no binding start at zero; writable copies begin with that input
-on each invocation. This gives the affected older presets defined inputs without
+inputs. Inputs with no binding start at zero; explicit bindings remain available to
+source-analysis evaluations, and writable copies begin with the chosen input on each
+invocation. This gives the affected older presets defined inputs without
 changing their source or assignment order. Local variables still require an authored
 initialization. The policy does not reproduce arbitrary old Direct3D register history.

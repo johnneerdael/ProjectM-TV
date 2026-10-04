@@ -27,10 +27,15 @@ individual storage classes. Locals, static/const declarations, initialized globa
 arrays and matrices retain their previous handling.
 
 The versioned `projectmtv-implicit-extern-zero-v1` target policy models GLES link-time
-zero initialization for unbound implicit inputs. Explicit diagnostic bindings override
-that default. The policy is enabled only for declarations carrying the native
+zero initialization for unbound implicit inputs. An explicit binding supplied when
+lowering or evaluating a scalar/grid field overrides that default, including different
+values for different grid lanes. The policy is enabled only for declarations carrying the native
 implicit-uniform marker, in a reader stamped for the new engine. `strict-v1` keeps
 external inputs symbolic. It never initializes a local just because its name matches.
+
+This focused tool retains source parsing, equation-domain proof, shader lowering,
+and offline compatibility checks. It does not include the experimental pipeline
+simulation from PR #25. No image or device result is inferred from source checks.
 
 This policy defines current core behavior. It does not claim equivalence to old
 D3D9 device-register history, nor does NULL legacy reflection prove a zero value.
@@ -73,8 +78,9 @@ historical adapters cannot certify the new target policy. The broader original
 PR #25 suite remains a supplemental compatibility check; it is not imported here.
 
 The native tests exercise actual parser generation, default and nonzero input values,
-copy reset across invocations, local/static/initialized controls and exact preset
-hashes. Numerical source tests require NumPy and pytest from the existing
+copy reset across invocations, local/static/initialized controls and preset hashes
+checked each time the tests run. Offline translator tests require `glslangValidator`.
+Numerical source tests require NumPy and pytest from the existing
 `tools/preset-lab/requirements.lock`. No app runtime dependency is added.
 
 ## References

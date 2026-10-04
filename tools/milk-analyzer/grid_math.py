@@ -52,11 +52,13 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
     def context(indices,parent,update=None):
         contexts.append(indices);states.append({**states[parent],**(update or {})});return len(contexts)-1
 
-    def bind(name,dtype,ctx):
+    def bind(name,dtype,ctx,*,unbound_default=None):
         key=(name,dtype)
         if key not in bound:
-            if name not in inputs:raise UnresolvedMath('missing symbolic grid input: '+name)
-            data=np.asarray(inputs[name]);_,shape=_layout(dtype)
+            if name in inputs:data=np.asarray(inputs[name])
+            elif unbound_default is not None:data=np.asarray(unbound_default)
+            else:raise UnresolvedMath('missing symbolic grid input: '+name)
+            _,shape=_layout(dtype)
             if not np.all(np.isfinite(data)):raise UnresolvedMath('nonfinite symbolic grid input: '+name)
             if data.shape==batch_shape+shape:bound[key]=data.reshape((size,)+shape)
             elif data.shape==shape or data.shape==():
@@ -179,7 +181,8 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
         if op=='constant':
             value=typed(node.detail['value'],node.dtype)
             raw=np.broadcast_to(value,(count,)+value.shape)
-        elif op=='input':raw=bind(node.detail['name'],node.dtype,ctx)
+        elif op=='input':raw=bind(node.detail['name'],node.dtype,ctx,
+                                  unbound_default=node.detail.get('unbound_default'))
         elif op=='loop_slot':
             state=states[ctx].get(id(node.detail['plan']))
             if state is None:raise UnresolvedMath('loop state outside execution context')

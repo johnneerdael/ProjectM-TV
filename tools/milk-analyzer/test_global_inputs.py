@@ -44,10 +44,33 @@ def test_nonzero_external_binding_initializes_writable_copy_before_first_read():
     np.testing.assert_allclose(evaluate(result),[.45,.45,.45],atol=1e-6)
 
 
+@pytest.mark.parametrize('declarations,body,name,value,want',[
+    ('float3 mus;','ret=mus+.25;','mus',[.1,.2,.3],[.35,.45,.55]),
+    ('float dist_c;','float before=dist_c;dist_c=.4;ret=before+.25;','dist_c',.2,[.45,.45,.45]),
+    ('float2 uv3;','uv3+=.25;ret=float3(uv3,0);','uv3',[.2,.3],[.45,.55,0]),
+])
+def test_runtime_binding_overrides_unbound_default_after_lowering(declarations,body,name,value,want):
+    model,result=lower(declarations,body)
+    assert model.complete,model.unknown
+    np.testing.assert_allclose(evaluate(result),[.25,.25,.25] if name=='mus' else
+        ([.25,.25,.25] if name=='dist_c' else [.25,.25,0]),atol=1e-6)
+    np.testing.assert_allclose(evaluate(result,inputs={name:value}),want,atol=1e-6)
+    np.testing.assert_allclose(evaluate_grid(result,batch_shape=(2,),inputs={name:value}),
+                               [want,want],atol=1e-6)
+
+
+def test_runtime_binding_accepts_distinct_grid_lanes():
+    model,result=lower('float dist_c;','float before=dist_c;dist_c=.4;ret=before+.25;')
+    assert model.complete,model.unknown
+    np.testing.assert_allclose(evaluate_grid(result,batch_shape=(2,),
+        inputs={'dist_c':np.array([.2,.3])}),[[.45]*3,[.55]*3],atol=1e-6)
+
+
 def test_strict_mode_keeps_external_inputs_symbolic_instead_of_assuming_zero():
     model,result=lower('float3 mus;','ret=mus;',policy='strict-v1')
     assert model.complete,model.unknown
     with pytest.raises(UnresolvedMath):evaluate(result)
+    with pytest.raises(UnresolvedMath):evaluate_grid(result,batch_shape=(2,))
     np.testing.assert_allclose(evaluate(result,inputs={'mus':[.1,.2,.3]}),[.1,.2,.3])
 
 

@@ -59,3 +59,14 @@ def test_folded_branch_keeps_runtime_domain_guard_scalar_and_grid():
 def test_int_conversion_domain_overflow_cannot_prove_branch_cover():
     model,_=lower(CODE,{'_qh':{0:(0,2147483647)}})
     assert not model.complete
+
+
+def test_float32_boundary_is_narrowed_before_selector_proof():
+    from pytest import raises
+    from field_math import UnresolvedMath
+    code='shader_body {int k=int(q29);float x;if(k==16777216){x=.2;}ret=x;}'
+    model,result=lower(code,{'_qh':{0:(16777216,16777217)}})
+    assert model.complete,model.unknown
+    assert evaluate(result,inputs={'_qh':[16777217,0,0,0]}).tolist()==approx([.2]*3)
+    with raises(UnresolvedMath,match='source domain'):
+        evaluate(result,inputs={'_qh':[16777218,0,0,0]})

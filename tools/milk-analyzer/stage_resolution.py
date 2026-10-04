@@ -1,7 +1,7 @@
 """Native stage selection from file settings and source-bound offline evidence."""
 import hashlib
 import re
-from scene_equations import _scalar
+from source_context import scalar as _scalar
 
 
 def contains_sampler_state(value):

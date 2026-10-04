@@ -184,6 +184,8 @@ static void TestShaderRendering()
     Check(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "incomplete framebuffer");
     struct Case { const char* name; const char* shader; int red; };
     for (const auto& test : {
+        Case{"mixed-reverse", "float a,b=.25;\nshader_body { ret=a+b; }", 64},
+        Case{"mixed-alternating", "float a,b=.1,c,d=.15;\nshader_body { ret=a+b+c+d; }", 64},
         Case{"implicit-mus", "float3 mus;\nshader_body { ret = mus+.25; }", 64},
         Case{"implicit-dist", "float dist_c;\nshader_body { float before=dist_c; dist_c=.4; ret=before+.25; }", 64},
         Case{"implicit-uv3", "float2 uv3;\nshader_body { uv3=.4*cos(42*uv3); ret=float3(uv3,0); }", 102},
@@ -233,7 +235,7 @@ static void TestShaderRendering()
     glDeleteFramebuffers(1, &framebuffer);
 }
 
-static void TestParserPresets(const std::string& assets, const std::string& manifest)
+static void TestParserPresets(const std::string& assets, const std::string& manifest, int expected=16)
 {
     GLContext gl;
     using namespace libprojectM;
@@ -277,7 +279,7 @@ static void TestParserPresets(const std::string& assets, const std::string& mani
         }
         ++count;
     }
-    Check(count == 16, "expected exactly 16 unchanged witness presets");
+    Check(count == expected, "wrong number of unchanged witness presets");
     Check(failures == 0, "original shader rejected by production compiler");
 }
 
@@ -360,6 +362,7 @@ int main(int argc, char** argv)
         else if (mode == "shader-render") TestShaderRendering();
         else if (mode == "implicit-bindings") TestImplicitInputBindings();
         else if (mode == "parser-presets" && argc == 4) TestParserPresets(argv[2], argv[3]);
+        else if (mode == "initialization-presets" && argc == 4) TestParserPresets(argv[2], argv[3],4);
         else if (mode == "waveform") TestWaveforms();
         else throw std::runtime_error("unknown test mode");
         std::cout << mode << " regressions passed\n";

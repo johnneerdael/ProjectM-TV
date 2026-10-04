@@ -368,8 +368,8 @@ class ShaderFields:
                     elif declaration['value'] is not None:value=self.initializer(self.expression(declaration['value']),dtype)
                     elif ((declaration['type'].get('flags',0)&0x400004)==0x400004 and
                           self.global_input_policy=='projectmtv-implicit-extern-zero-v1' and name not in self.known_uniforms):
-                        value=self.coerce(Field('constant',dtype='float',detail={'value':0,
-                            'basis':'unbound implicit external uniform, GLES link-time initialization'}),dtype)
+                        value=Field('input',dtype=dtype,detail={'name':name,'unbound_default':0,
+                            'basis':'GLES link-time initialization when no explicit binding is supplied'})
                     elif declaration['type'].get('flags',0)&4 and name in self.known_uniforms:
                         value=Field('constant',dtype=dtype,detail={'value':self.known_uniforms[name],
                                     'basis':'explicit source/context uniform binding'})

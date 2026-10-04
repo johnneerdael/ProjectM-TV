@@ -1,0 +1,512 @@
+{
+  "scope": "Bounded Android numerical controls; no TV fps or whole-preset appearance equivalence",
+  "device": "task-owned emulator-5586",
+  "baseline_version": "2.2.10",
+  "baseline_commit": "8b70620339018cfaf5ac05acdb4ea8104dc2eb59",
+  "baseline_aar_sha256": "f984c35d2cae742f8483f6f3505cb9f1edc1dde8cfe89ba9e1de2086d6276b52",
+  "baseline_arm64_sha256": "25b5754c593eb5988750b4fb8556d86566186c81bfa2c3cb480bf66a1c21281b",
+  "fixed_aar_sha256": "f6c24ed1fd2307628065d68d6a50d64ed7f52f4d4177036d4a0eeac5a476e212",
+  "fixed_arm64_sha256": "791442ea67a66928579cf9bf49647e4b22361197c25271d6b65cf7333f2f095c",
+  "protocol": {
+    "frames": 60,
+    "fps": 30,
+    "width": 128,
+    "height": 72,
+    "mesh": [
+      48,
+      32
+    ],
+    "audio": "explicit silence",
+    "runner_java_sha256": "415d107d35f27b9d06dc9b34ca4c1e3cd9fb440a43b12bf654859fd5401ce381",
+    "clock_adapter_source_sha256": "e0880a2662b0bc99ec9c18e6d2140cbeb5a345a42b299c2776995a1ae0fe1cb8",
+    "clock_adapter_binary_sha256": "71ef72ce2b5def424bdf55ca9ce67c657d133649ebf17c008950b1228acf6529",
+    "scope": "Clock interposition; production core binaries unchanged"
+  },
+  "rows": [
+    {
+      "build": "baseline",
+      "name": "mus-implicit",
+      "source_sha256": "3f4246984438d891ac5c4771b45ea924da935c38c77dfd9bc4b441ca7ea98dab",
+      "frames": 60,
+      "centre_last_rgba": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "output_sha256": "9c033ca44a46dc679cd2e625bd686e1de137c5dce019b9cf2500dc333ec5c00b",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "mus-implicit.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "mus-zero",
+      "source_sha256": "e82ee5dcd2633a1ea21b6bdb68075533bfd4d2d8357d97aba033748044a6f35b",
+      "frames": 60,
+      "centre_last_rgba": [
+        64,
+        64,
+        64,
+        255
+      ],
+      "output_sha256": "11a20a9473ebd1c7e7cee687c53e526915899f9561dd504201aee23ef203aca3",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "mus-zero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "mus-nonzero",
+      "source_sha256": "2106c45af75c5166cd46e48fdb02f91ecdcb145c785daeebd4d9581be4fe5bae",
+      "frames": 60,
+      "centre_last_rgba": [
+        115,
+        115,
+        115,
+        255
+      ],
+      "output_sha256": "f0cfbd85495e7cc4fb24a19617e08dab8aabd7912bc7534d0f4f2377d69f43bf",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "mus-nonzero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "dist-implicit",
+      "source_sha256": "2f8b72777a85475b10a7737932d2963828dd1a4d27c05d21613ad693f0d79868",
+      "frames": 60,
+      "centre_last_rgba": [
+        166,
+        166,
+        166,
+        255
+      ],
+      "output_sha256": "fbbcfd24538bf6f2289ec98813bc3440fe9e167f0cef30ffa549a9ca47d70855",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "dist-implicit.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "dist-zero",
+      "source_sha256": "f2822645490a805b75daddd2b5402d1e2c1d22891e64fb88fb0aebcbf4e7a3a0",
+      "frames": 60,
+      "centre_last_rgba": [
+        64,
+        64,
+        64,
+        255
+      ],
+      "output_sha256": "11a20a9473ebd1c7e7cee687c53e526915899f9561dd504201aee23ef203aca3",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "dist-zero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "dist-nonzero",
+      "source_sha256": "97a8e96de26118d5783af4379815084c61195a7368357a8e9d92d79662d8d8ef",
+      "frames": 60,
+      "centre_last_rgba": [
+        115,
+        115,
+        115,
+        255
+      ],
+      "output_sha256": "f0cfbd85495e7cc4fb24a19617e08dab8aabd7912bc7534d0f4f2377d69f43bf",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "dist-nonzero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "uv3-implicit",
+      "source_sha256": "c334acb8159e2f5aa1926907accf1e1f28e411b25c08e531912c5d7e18c79b44",
+      "frames": 60,
+      "centre_last_rgba": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "output_sha256": "9c033ca44a46dc679cd2e625bd686e1de137c5dce019b9cf2500dc333ec5c00b",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "uv3-implicit.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "uv3-zero",
+      "source_sha256": "23a24635ce1012119a58883fe7d341f2779e643ee44b17ab373e24d1a36193e1",
+      "frames": 60,
+      "centre_last_rgba": [
+        102,
+        102,
+        0,
+        255
+      ],
+      "output_sha256": "2a1c9982a33109b17e3ffb680524911ae9b4fd6b624886a7579c2b50d9a0103c",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "uv3-zero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "baseline",
+      "name": "uv3-nonzero",
+      "source_sha256": "719dcb353d0dc4007d1570552076bc8639ea8a08c5900499bd2885c6dc2e186c",
+      "frames": 60,
+      "centre_last_rgba": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "output_sha256": "9c033ca44a46dc679cd2e625bd686e1de137c5dce019b9cf2500dc333ec5c00b",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "uv3-nonzero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "mus-implicit",
+      "source_sha256": "3f4246984438d891ac5c4771b45ea924da935c38c77dfd9bc4b441ca7ea98dab",
+      "frames": 60,
+      "centre_last_rgba": [
+        64,
+        64,
+        64,
+        255
+      ],
+      "output_sha256": "11a20a9473ebd1c7e7cee687c53e526915899f9561dd504201aee23ef203aca3",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "mus-implicit.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "mus-zero",
+      "source_sha256": "e82ee5dcd2633a1ea21b6bdb68075533bfd4d2d8357d97aba033748044a6f35b",
+      "frames": 60,
+      "centre_last_rgba": [
+        64,
+        64,
+        64,
+        255
+      ],
+      "output_sha256": "11a20a9473ebd1c7e7cee687c53e526915899f9561dd504201aee23ef203aca3",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "mus-zero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "mus-nonzero",
+      "source_sha256": "2106c45af75c5166cd46e48fdb02f91ecdcb145c785daeebd4d9581be4fe5bae",
+      "frames": 60,
+      "centre_last_rgba": [
+        115,
+        115,
+        115,
+        255
+      ],
+      "output_sha256": "f0cfbd85495e7cc4fb24a19617e08dab8aabd7912bc7534d0f4f2377d69f43bf",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "mus-nonzero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "dist-implicit",
+      "source_sha256": "2f8b72777a85475b10a7737932d2963828dd1a4d27c05d21613ad693f0d79868",
+      "frames": 60,
+      "centre_last_rgba": [
+        64,
+        64,
+        64,
+        255
+      ],
+      "output_sha256": "11a20a9473ebd1c7e7cee687c53e526915899f9561dd504201aee23ef203aca3",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "dist-implicit.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "dist-zero",
+      "source_sha256": "f2822645490a805b75daddd2b5402d1e2c1d22891e64fb88fb0aebcbf4e7a3a0",
+      "frames": 60,
+      "centre_last_rgba": [
+        64,
+        64,
+        64,
+        255
+      ],
+      "output_sha256": "11a20a9473ebd1c7e7cee687c53e526915899f9561dd504201aee23ef203aca3",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "dist-zero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "dist-nonzero",
+      "source_sha256": "97a8e96de26118d5783af4379815084c61195a7368357a8e9d92d79662d8d8ef",
+      "frames": 60,
+      "centre_last_rgba": [
+        115,
+        115,
+        115,
+        255
+      ],
+      "output_sha256": "f0cfbd85495e7cc4fb24a19617e08dab8aabd7912bc7534d0f4f2377d69f43bf",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "dist-nonzero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "uv3-implicit",
+      "source_sha256": "c334acb8159e2f5aa1926907accf1e1f28e411b25c08e531912c5d7e18c79b44",
+      "frames": 60,
+      "centre_last_rgba": [
+        102,
+        102,
+        0,
+        255
+      ],
+      "output_sha256": "2a1c9982a33109b17e3ffb680524911ae9b4fd6b624886a7579c2b50d9a0103c",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "uv3-implicit.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "uv3-zero",
+      "source_sha256": "23a24635ce1012119a58883fe7d341f2779e643ee44b17ab373e24d1a36193e1",
+      "frames": 60,
+      "centre_last_rgba": [
+        102,
+        102,
+        0,
+        255
+      ],
+      "output_sha256": "2a1c9982a33109b17e3ffb680524911ae9b4fd6b624886a7579c2b50d9a0103c",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "uv3-zero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "build": "fixed",
+      "name": "uv3-nonzero",
+      "source_sha256": "719dcb353d0dc4007d1570552076bc8639ea8a08c5900499bd2885c6dc2e186c",
+      "frames": 60,
+      "centre_last_rgba": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "output_sha256": "9c033ca44a46dc679cd2e625bd686e1de137c5dce019b9cf2500dc333ec5c00b",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "uv3-nonzero.milk",
+        "frames": 60,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    }
+  ],
+  "controls": [
+    {
+      "symbol": "mus",
+      "fixed_implicit_vs_explicit_zero_max_RGBA8_error": 0,
+      "fixed_vs_baseline_nonzero_initializer_max_RGBA8_error": 0
+    },
+    {
+      "symbol": "dist",
+      "fixed_implicit_vs_explicit_zero_max_RGBA8_error": 0,
+      "fixed_vs_baseline_nonzero_initializer_max_RGBA8_error": 0
+    },
+    {
+      "symbol": "uv3",
+      "fixed_implicit_vs_explicit_zero_max_RGBA8_error": 0,
+      "fixed_vs_baseline_nonzero_initializer_max_RGBA8_error": 0
+    }
+  ]
+}
