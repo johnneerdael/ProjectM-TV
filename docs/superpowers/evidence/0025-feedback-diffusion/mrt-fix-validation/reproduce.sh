@@ -46,10 +46,10 @@ done
 [ "$missing" = 0 ] || exit 1
 # Everything else run.py reads, by recorded size/SHA256: the PCM signals (hashes run.py asserts), the six
 # preset files (as rendered by the comparator rows), and the comparator rows and their native captures.
-python3 - "$HERE/run.py" "$ROOT" "$BASE" <<'PYCHECK' || missing=1
+python3 - "$HERE/run.py" "$ROOT" "$BASE" "$HERE/artifact-proof.json" <<'PYCHECK' || missing=1
 import ast, hashlib, json, sys
 from pathlib import Path
-run, root, base = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+run, root, base, proof = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3]), Path(sys.argv[4])
 def sha(path):
     h = hashlib.sha256()
     with open(path, 'rb') as f:
@@ -99,12 +99,31 @@ for path, digest in rows:
         capture = path.parent / 'output' / sample['path']
         if not same_bytes(capture, sample['bytes'], sample['sha256']):
             problems.append(f'comparator capture missing or changed: {capture}')
+# The existing roles' artifacts, which run.py reopens through their metadata: metadata, APK, exported
+# AAR and compile commands, against the hashes recorded in artifact-proof.json. (mrt-fix is rebuilt.)
+recorded = json.loads(proof.read_text())
+for role, metadata_path in [('reference', base / 'classic-reference-control/worker-baseline.json'),
+                            ('raw-point', base / 'raw-point-experiment/worker-candidate.json')]:
+    record = recorded[role]
+    if sha(metadata_path) != record['metadata_sha256']:
+        problems.append(f'{role} metadata changed: {metadata_path}')
+        continue
+    metadata = json.loads(metadata_path.read_text())
+    apk, aar = Path(metadata['apk']), Path(record['aar'])
+    if str(apk) != record['apk'] or not apk.is_file() or sha(apk) != record['apk_sha256']:
+        problems.append(f'{role} APK missing or changed: {apk}')
+    if aar != apk.parent / 'repo/core/build/outputs/aar/core-release.aar' or not aar.is_file() or sha(aar) != record['aar_sha256']:
+        problems.append(f'{role} AAR missing or changed: {aar}')
+    for relative, digest in record['compiled_sources'].items():
+        unit = apk.parent / 'repo' / relative
+        if not unit.is_file() or sha(unit) != digest:
+            problems.append(f'{role} compile commands missing or changed: {unit}')
 for problem in problems[:20]:
     print(problem, file=sys.stderr)
 if problems:
     print(f'{len(problems)} input problem(s)', file=sys.stderr)
     sys.exit(1)
-print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows; preset and capture sizes/SHA256s match')
+print(f'inputs ok: {len(names)} presets, 2 signals, {len(rows)} comparator rows, reference and raw-point artifacts; recorded sizes/SHA256s match')
 PYCHECK
 "$PY" -c 'import numpy, cv2' 2> /dev/null || { echo "missing numpy/OpenCV in $PY" >&2; missing=1; }
 git -C "$ROOT" rev-parse --verify --quiet '25e6aa83^{commit}' > /dev/null ||

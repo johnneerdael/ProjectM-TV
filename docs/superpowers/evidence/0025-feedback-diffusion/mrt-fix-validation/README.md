@@ -118,7 +118,8 @@ copying, it checks:
 - the two scripts' hashes against `results.json`;
 - every input `run.py` reads in that `build/` tree:
   - the owned emulator launch metadata;
-  - the classic and raw-point worker metadata;
+  - the classic and raw-point worker metadata, and the APK, exported AAR and compile commands each
+    references, against the hashes in `artifact-proof.json`;
   - the pristine projectM source;
   - the Preset Lab venv with numpy and OpenCV;
   - both PCM signals, against their recorded SHA256s;
@@ -127,7 +128,8 @@ copying, it checks:
     recorded size and SHA256;
 - that the epoch directory does not already exist.
 
-`reproduce.sh --check <new-epoch>` performs only those checks. `PROJECTM_ROOT` selects the checkout
+`reproduce.sh --check <new-epoch>` performs only those checks. Device-side guards (emulator launch
+identity, lease, installation) run only in a real run. `PROJECTM_ROOT` selects the checkout
 that holds the `build/` tree. The original tree is the recovery worktree, so for example:
 
 ```sh
