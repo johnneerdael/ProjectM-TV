@@ -1,0 +1,10 @@
+{
+  "archive": "/Users/jneerdael/Scripts/Projectm-TV-recovery-2026-10-04/current-main-validation/raw-point-controls.zip",
+  "sha256": "1f979407f513820e638707a00a063fff86224759c7738873a62f660398c0274e",
+  "bytes": 2165511738,
+  "slots": 84,
+  "new_jobs": 60,
+  "native_captures_verified": 672,
+  "partial": true,
+  "scope": "focused actual-core routing experiment, not production acceptance"
+}
