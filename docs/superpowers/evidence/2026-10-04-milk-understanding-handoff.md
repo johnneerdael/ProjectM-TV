@@ -8,7 +8,7 @@ Counts below are historical counts from the source audit of 9,606 presets. Famil
 
 | Family | Recorded affected presets | Research needed |
 |---|---:|---|
-| Target parse unavailable | 149 | Separate malformed author source, loader concatenation rules, evaluator rejection and missing parser support. Preserve original source; do not silently repair it. |
+| Target parse unavailable | 149 historically; 67 now parse | Sampler-alias declaration rebuilding closes 67 shader witnesses (63 also lower completely). Remaining witnesses include 16 shader failures, 53 projectM equation-assembly rejections and 13 sections rejected by both assembly modes. Preserve original source; do not silently repair it. |
 | Uninitialized shader reads | 127 | Trace component initialization and native execution. Separate actual undefined values from interpreter binding errors. Do not invent a deterministic result for undefined GPU behaviour. |
 | Native GLSL array initializer layout | 56 | Trace HLSL array types/constructors through projectM's translator, and establish compilation versus fallback. |
 | Same-name initializer binding | 49 | Establish exactly which local/global value an initializer reads in the emitted GLSL and native backend. |
@@ -41,6 +41,8 @@ These are explicit interpreter limitations; corpus prevalence has not yet been m
 ## Avoid duplicating recent work
 
 Already implemented with targeted evidence: `exp2`, `log10`, `reflect`, reduction binding for `all`/`any`, helper global writes/local scopes/loop-carried state, destination-index capture, and scalar `modf` output/call sequencing. Some mathematically supported overloads still fail the pinned native shader compiler.
+
+Plain sampler alias declarations now follow native removal/rebinding, including deletion of trailing code on the declaration line and preservation of leading qualifiers. See `2026-10-04-sampler-alias-learning.md` and its source-proof fixture.
 
 `tex2Dbias` and `tex2Dlod` base-level interpretation is implemented: 14 recorded source witnesses lower, and four controlled native fixtures match their frozen predictions. General mipmapped sampling remains outside that claim.
 

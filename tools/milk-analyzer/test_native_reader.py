@@ -10,6 +10,62 @@ READER = Path(os.environ.get("MILK_NATIVE_READER", ROOT / "build/milk-analyzer/n
 
 
 class NativeReaderTest(unittest.TestCase):
+    def test_unused_sampler_declaration_keeps_native_binding_order(self):
+        for declaration in ['sampler2D sampler_fc_main;',
+                            'sampler2D sampler_noise_hq; sampler2D sampler_fc_main;']:
+            with self.subTest(declaration=declaration):
+                result=self.read('PSVERSION_WARP=2\nwarp_1=`'+declaration+'\n'
+                                 'warp_2=`shader_body {ret=tex2D(sampler_main,uv).xyz;}\n')
+                section=result['sections']['warp_']
+                self.assertEqual(section['status'],'parsed',result)
+                from shader_fields import ShaderFields
+                model=ShaderFields(stage='warp',frame=3,warp_reads_blur=False,frame_wrap=0)
+                field=model.lower(section['tree'])
+                self.assertTrue(model.complete,model.unknown)
+                self.assertTrue(field.args[0].detail['sampling_policy']['wrap'])
+
+    def test_sampler_removal_preserves_native_qualifier_spillover(self):
+        code=['#define sampler_pic sampler_main','uniform sampler2D sampler_pic;',
+              'float g=.4;','float helper(){return g;}',
+              'shader_body {g=.8;ret=float3(helper());}']
+        result=self.read('PSVERSION_COMP=2\n'+'\n'.join('comp_'+str(i+1)+'=`'+line
+                         for i,line in enumerate(code))+'\n')
+        section=result['sections']['comp_']
+        self.assertEqual(section['status'],'parsed',result)
+        g=next(d for node in section['tree'] if node['kind']=='declarations'
+               for d in node['values'] if d['name']=='g')
+        self.assertEqual(g['type']['flags']&4,4)
+
+    def test_generic_sampler_alias_declaration_uses_rebuilt_texture_binding(self):
+        result=self.read('PSVERSION_COMP=2\ncomp_1=`#define sampler_pic sampler_cells\n'
+                         'comp_2=`sampler sampler_pic;\n'
+                         'comp_3=`shader_body {ret=tex2D(sampler_pic,uv).xyz;}\n')
+        self.assertEqual(result['sections']['comp_']['status'],'parsed',result)
+
+    def test_sampler_alias_declaration_uses_native_rebuilt_binding(self):
+        result=self.read('PSVERSION_COMP=2\ncomp_1=`#define sampler_pic sampler_cells\n'
+                         'comp_2=`sampler2D sampler_pic;\n'
+                         'comp_3=`shader_body {ret=tex2D(sampler_pic,uv).xyz;}\n')
+        self.assertEqual(result['sections']['comp_']['status'],'parsed',result)
+        from shader_fields import ShaderFields
+        model=ShaderFields(stage='composite',frame=3,warp_reads_blur=False)
+        field=model.lower(result['sections']['comp_']['tree'])
+        self.assertTrue(model.complete,model.unknown)
+        self.assertEqual(field.args[0].detail['sampler'],'sampler_cells')
+
+    def test_sampler_alias_does_not_preserve_native_deleted_same_line_code(self):
+        result=self.read('PSVERSION_COMP=2\ncomp_1=`#define sampler_pic sampler_main\n'
+                         'comp_2=`shader_body {\n'
+                         'comp_3=`sampler2D sampler_pic; ret=float3(.9,.1,.2);\n'
+                         'comp_4=`}\n')
+        self.assertEqual(result['sections']['comp_']['status'],'parsed',result)
+        from shader_fields import ShaderFields
+        from field_math import evaluate
+        model=ShaderFields(stage='composite',frame=3,warp_reads_blur=False)
+        field=model.lower(result['sections']['comp_']['tree'])
+        self.assertTrue(model.complete,model.unknown)
+        self.assertEqual(evaluate(field).tolist(),[0,0,0])
+
     def test_custom_wave_forward_backward_audio_smoothing_matches_known_kernel(self):
         left=[0]*480;left[239]=1
         settings={'frame_program':'frame','spectrum':False,'separation':0,'scaling':1,'smoothing':.5,

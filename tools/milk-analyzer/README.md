@@ -643,6 +643,13 @@ not complete appearance prediction. See
 `fixtures/texture-lod-native-proof-2026-10-04.json` and
 `fixtures/texture-lod-source-proof-2026-10-04.json`.
 
+Plain sampler aliases follow native declaration rebuilding, including removal
+of the declaration's remaining line and preservation of preceding qualifiers.
+This closes 67 of 83 historical shader parse witnesses; 63 lower completely.
+Sampler-state initializers remain governed by their separate compatibility gate.
+See `fixtures/sampler-alias-source-proof-2026-10-04.json`; these source checks
+do not establish whole-preset appearance accuracy.
+
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe
 shared-read/write ordering remains explicit. Destination indices are captured

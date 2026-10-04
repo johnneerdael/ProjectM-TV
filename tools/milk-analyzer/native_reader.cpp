@@ -341,6 +341,21 @@ json shaderTree(std::string code,bool warp,const std::string& header) {
             full=prototypes+full;
         }
         if(!parser.ApplyPreprocessor("milk",full.c_str(),full.size(),preprocessed))throw std::runtime_error("native shader preprocessing failed");
+        // Object macros wrap aliases in parentheses, including declaration names.
+        // Native translation discards these declarations and rebuilds bindings.
+        // Drop plain named texture declarations and the rest of their line,
+        // matching native translation's deletion span. Retain sampler_state
+        // initializers for the independent language model and compatibility gate.
+        std::regex plainSamplerDeclarations(
+            "\\bsampler(?:[23]D)?(?:\\s+|\\s*\\()\\(*\\s*(sampler_[A-Za-z_][A-Za-z_0-9]*)\\s*\\)*\\s*;[^\\r\\n]*");
+        std::set<std::string> declaredSamplers;
+        std::regex deletedReferences("\\b(?:sampler_|texsize_)([A-Za-z_][A-Za-z_0-9]*)");
+        for(auto i=std::sregex_iterator(preprocessed.begin(),preprocessed.end(),plainSamplerDeclarations);i!=std::sregex_iterator();++i) {
+            auto removed=libprojectM::Utils::StripComments((*i)[0]);
+            for(auto j=std::sregex_iterator(removed.begin(),removed.end(),deletedReferences);j!=std::sregex_iterator();++j)
+                if((*j)[1]!="state")declaredSamplers.insert((*j)[1]);
+        }
+        preprocessed=std::regex_replace(preprocessed,plainSamplerDeclarations,"");
         // Retain the language's sampler-state declarations. projectM's GLSL preparation drops them.
         // Resolve generic samplers to the dimensions of the built-in binding they reference.
         std::regex generic("\\bsampler\\s+(sampler_[A-Za-z_][A-Za-z_0-9]*)");
@@ -350,7 +365,7 @@ json shaderTree(std::string code,bool warp,const std::string& header) {
             preprocessed.replace(declaration.position(),declaration.length(),
                 std::string(name.find("noisevol_")!=std::string::npos?"sampler3D ":"sampler2D ")+name);
         }
-        std::set<std::string> samplers,sizes;
+        std::set<std::string> samplers=declaredSamplers,sizes;
         std::regex names("\\b(sampler_|texsize_)([A-Za-z_][A-Za-z_0-9]*)");
         for(auto i=std::sregex_iterator(preprocessed.begin(),preprocessed.end(),names);i!=std::sregex_iterator();++i)
             ((*i)[1]=="sampler_"?samplers:sizes).insert((*i)[2]);

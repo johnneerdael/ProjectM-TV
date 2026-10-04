@@ -1,0 +1,837 @@
+{
+  "reader_sha256": "63730c5835c4fcb9aac61270092139448ff0a9d69cb4dfd4e332784e73b3cf33",
+  "rows": [
+    {
+      "preset": "AdamFX 2 Geiss - Mash-Up Sphere Xibit Graffiti Warp me Oval Interprise.milk",
+      "section": "warp_",
+      "preset_sha256": "020b088381fcf79eb2d8d95ca4a2e5d9f6cd05a6844c649e1570536a8a18d4fd",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Cope-WIP - Strange Attractor 2 hack3 you think i could ever give a shit - i've got music, internet, and milkdrop.milk",
+      "section": "warp_",
+      "preset_sha256": "8cbf5bfdb56c76fa7ffcfcf5028adb4c3460e0deb371e457e100cbcbcdc68cba",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Cope-WIP - Strange Attractor 2 hack3.milk",
+      "section": "warp_",
+      "preset_sha256": "c2834bf9897736e3008dbb8d8e1850ed3c63432653582fc1d636333736f31595",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "EVET + Flexi - Rainbox Splash Poolz.milk",
+      "section": "comp_",
+      "preset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(82) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "preset": "EVET - Brainsplolz.milk",
+      "section": "comp_",
+      "preset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(82) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume vitality restore drugs rt nz+.milk",
+      "section": "warp_",
+      "preset_sha256": "afb4a16599f91e4327a62c46e213d78013ba7c22f503cf32ce64511fb5efb7c5",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "EoS - glowsticks v2 05 and proton lights (+Krash's beat code) _Phat_remix03 madhatter_v4 abdomen claw.milk",
+      "section": "warp_",
+      "preset_sha256": "e1753ce64f71e421e61bccdb46f2ebaac2fbe23fd7c96d96ff4f5b7c3204fa55",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Fed + Geiss - Color Pox Remix.milk",
+      "section": "warp_",
+      "preset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(78) : Syntax error: expected ';' near '('\n"
+    },
+    {
+      "preset": "Flexi - dimension window.milk",
+      "section": "comp_",
+      "preset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near ';'\n"
+    },
+    {
+      "preset": "Flexi - ianus portal.milk",
+      "section": "comp_",
+      "preset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near ';'\n"
+    },
+    {
+      "preset": "Flexi - madness portal.milk",
+      "section": "comp_",
+      "preset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near ';'\n"
+    },
+    {
+      "preset": "Flexi - mindblob [where it's at now] gno sth air fetch.milk",
+      "section": "warp_",
+      "preset_sha256": "546044cd7696adc8d59b008ef492579262dc83e5d1c3b18cc5136d56561f55b5",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Flexi - rorschach bomb.milk",
+      "section": "comp_",
+      "preset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near ';'\n"
+    },
+    {
+      "preset": "Flexi - spirally caterpillar coop mode.milk",
+      "section": "comp_",
+      "preset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near ';'\n"
+    },
+    {
+      "preset": "Flexi - spirally repetative 2.milk",
+      "section": "comp_",
+      "preset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near ';'\n"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+      "section": "comp_",
+      "preset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(82) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
+      "section": "comp_",
+      "preset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(82) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
+      "section": "comp_",
+      "preset_sha256": "12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(82) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "preset": "Geiss - Desert Rose 2 (Jelly).milk",
+      "section": "warp_",
+      "preset_sha256": "ccffc14e5da22d3c890ba8ac42d5a638194b624be074961a93f6d8342ba2d0b8",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Geiss - Desert Rose 2.milk",
+      "section": "warp_",
+      "preset_sha256": "c3d40d7d1e529542be1d854de98d284ba0b2bfc828871b87ac95b430f293884a",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Hexcollie - Hedgehog dreams.milk",
+      "section": "comp_",
+      "preset_sha256": "9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(82) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "preset": "LuxXx - Get Out of My Face, Old Man.milk",
+      "section": "warp_",
+      "preset_sha256": "9409450af34f61798111a079b8389a95d478b480ba97a95eca2fb2880f414b55",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Martin - Pixies Party (Hakan mash-up) 6-12.milk",
+      "section": "comp_",
+      "preset_sha256": "0b6378a0d5b18035c01ea0ab72d46467355ae0dcc5bcd911e963627ba37e74e3",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Martin - Pixies Party (Hakan mash-up) 7.milk",
+      "section": "comp_",
+      "preset_sha256": "4213faaa2a9886c1ee82f06fac624d8849054fb4d57f24355f2354463d0f392a",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Martin - Pixies Party (Hakan mash-up) 8-1.milk",
+      "section": "comp_",
+      "preset_sha256": "c9410c410f5a9cc76672e9e8626f0e1ee2e5dc6bddbcfcd66687b828c0be56ef",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Martin - Pixies Party (Hakan mash-up) 9-1.milk",
+      "section": "comp_",
+      "preset_sha256": "e308bb77fdb8f1b42547c9fb041734a3819e325480598526620ae3f059c8d5da",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "PHAT HD FX 2 FiShbRaiN  -  Flexi  ft AdamFX Aderrasi , Martin n Rova - Witchcraft Take OverFX  C.milk",
+      "section": "warp_",
+      "preset_sha256": "5ad8b89de1f824b17c2c3ae7c554ab767d1584ba127378a958bf2d8d7be85425",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Rovastar & Zylot - Crystal Ball (Too Many Visions Mix) nz+ chef's table too good for you.milk",
+      "section": "warp_",
+      "preset_sha256": "d5e4dfa01fe4b8c98230e48545c13305756e3f8f6d68bbb8dcbe898a2b06a758",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Rovastar & Zylot - Crystal Ball (Too Many Visions Mix) nz+.milk",
+      "section": "warp_",
+      "preset_sha256": "2b484c54fa691b7e3d6f100d96c6a7985ea21285c66d587c6b16a9d17037e772",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Rovastar - Ritual Halostar.milk",
+      "section": "warp_",
+      "preset_sha256": "d60f2fa28281f9d1a9fec6923845ecea8efbc34b4c665f19938e882f4d382c9e",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Stahlregen & Flexi + Geiss + ORB - Spotted Blob_2 - usheriah colobot - could-scape.milk",
+      "section": "warp_",
+      "preset_sha256": "5eb77240150a9fbb713603f6073bbf1a9c1bb77b43e807fe4640fbedb898d0b9",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": false,
+      "lowering_unknowns": [
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read"
+      ]
+    },
+    {
+      "preset": "Stahlregen & Geiss + TobiasWolfBoi - Jelly Space Desert Rose.milk",
+      "section": "warp_",
+      "preset_sha256": "cd719931e6bd8b59c67f026ad8e4963280966fc73f5688e21e6b0f85c7f2083a",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "The NG + LuxXx - In Bloom ii.milk",
+      "section": "warp_",
+      "preset_sha256": "8ed6a6b22d72446dccf09605a2edb73ce0891bca5516facb75d817cfb54d287a",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "The NG + MindJourney - Lake of Dreams (The Monster Inside).milk",
+      "section": "warp_",
+      "preset_sha256": "7d8bb8056e5409727c15fac6eb2269b13c48cf3e169ce733a0b6293ef14f5209",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "Zylot - Spiral (Hypnotic Crisis v3) - my irrelevance.milk",
+      "section": "warp_",
+      "preset_sha256": "d065206b0b0467c7436d4519b563003d1e6d55f5a3623254ae8c6949c437f053",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "amandio c - prime forms keylontiq pseudoskienke spatial segweight feel nonfancunt.milk",
+      "section": "warp_",
+      "preset_sha256": "e041aca12f5ae6e6be6b62d3ce4c4e9b09b5e2b2e5917e71fb6fbf5386019de4",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "amandio c - prime forms keylontiq pseudoskienke spatial segweight feel welcome in my pure hate of you.milk",
+      "section": "warp_",
+      "preset_sha256": "6bb7f49a7055f1c3e73f35067c1dea413c52fc034751564165ce17f7b5ad740e",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "amandio c - prime forms keylontiq pseudoskienke spatial segweight.milk",
+      "section": "warp_",
+      "preset_sha256": "d751dd9368c1f181bcf54395cdbeddf35be7a4c4724ec3fda1395e0fa0386cab",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "bdrv + al - dude's starpulse vector - duck farm plus maggot deathbliss.milk",
+      "section": "warp_",
+      "preset_sha256": "d0129a2024fcb4459829de103a389d07a43054c579144c08c12fdfc82d2b28b7",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "bdrv + al - dude's starpulse vector - duck farm plus maggot pig.milk",
+      "section": "warp_",
+      "preset_sha256": "0a0109de9abb80c068406d358b18c8d4c4522b761c247d0f79fa5a6814c958b1",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "dylan - LED ravers addition (spectratex).milk",
+      "section": "warp_",
+      "preset_sha256": "55bd505a7550bd87df88a5f08ca10f4effb2f216856945d6c35d6ff37e0c444b",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "dylan - Sonic Errosion (spectratex) 'tismbembre did i benthakne.milk",
+      "section": "warp_",
+      "preset_sha256": "9881b129aff48f3e7a82ab623012472baec73bf21b80a593b4ef0a242dad9636",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "dylan - Sonic Errosion (spectratex) 'tismbembre sorry about the whole me creating everything and forgetting about that.milk",
+      "section": "warp_",
+      "preset_sha256": "3dfcf4d821c271c3935f30f9f8402566b7e6b8f1fec2eab9a25456653c1b461c",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "dylan - Sonic Errosion (spectratex) 'tismbembre stars reel.milk",
+      "section": "warp_",
+      "preset_sha256": "07bd48a9cce7505590891d22edb70577c14c9ae2b0038cce7eee1357e48e61d5",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "dylan - Sonic Errosion (spectratex) 'tismbembre the law of convservation of mediocrity.milk",
+      "section": "warp_",
+      "preset_sha256": "f3f617107437c09baac1f49c544c8c95d592b8bc34f2287318c7452f26754100",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "dylan -Sonic Errosion (spectratex) 'tismbembre to gain fuck all.milk",
+      "section": "warp_",
+      "preset_sha256": "02741e2953a50850103fe897f1e02ffe598310a0b7ffdd7e3ff0e8e5635744bf",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "ewephlai.milk",
+      "section": "warp_",
+      "preset_sha256": "482628d58c10a2934a07edfc4d51327ced69e2301c0546362443bdf5542567c1",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": false,
+      "lowering_unknowns": [
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read"
+      ]
+    },
+    {
+      "preset": "faintling --- Isosceles edit.milk",
+      "section": "warp_",
+      "preset_sha256": "b79c5124b4a02df31455e3c2f59435431198aff5a91fb20b27cb795118b9cdaf",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "goody - the many contours of a nightmare.milk",
+      "section": "warp_",
+      "preset_sha256": "23216fab9692ebd8453f19f608f77ca7886abcdc942dfb14750a2bd5de64eac9",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "greazed up humility - cable knit sveat.milk",
+      "section": "warp_",
+      "preset_sha256": "0831665d09c38fa4aa7f6d0b4e1e77b7c7a63add760a1e5953ee88a1c7e1c9db",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "lice - veritubule.milk",
+      "section": "comp_",
+      "preset_sha256": "fd1e37383cb6c78a6d1eb906ca7982db7fc0d69d8b891f71be259341029c481b",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near '*'\n"
+    },
+    {
+      "preset": "martin - pixies party d-strux wille itunes.milk",
+      "section": "comp_",
+      "preset_sha256": "4da4df6766d53506fbd67db4a1a11b236804c36d12b2897bdb2d2a62cdfd8591",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "martin - pixies party d-strux wille.milk",
+      "section": "comp_",
+      "preset_sha256": "d6d84a86f3872ba4a8c3a4767052d912e6de3192a29dfac23a5dd9781b37ca8d",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "martin - pixies party filth edition.milk",
+      "section": "comp_",
+      "preset_sha256": "a504a2ab80dca27bb56f6cef0513ce6df4c3785144c578c7fe11489c70b8a6b6",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "martin - pixies party linkwurst love.milk",
+      "section": "comp_",
+      "preset_sha256": "69fd259f770611eff3c26e3e524a966ff21479e88b3c5fa3211a1104afa34d38",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "martin - pixies party.milk",
+      "section": "comp_",
+      "preset_sha256": "ce7934ae8a46c390917eb57f377725d56331fb484d5b0c52d6cc3f9a165dac07",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "mouthful o sand.milk",
+      "section": "warp_",
+      "preset_sha256": "a45105e86ee41b1bcfacc0e29119458e4891d8785e1595e92f254ddc0f6bbcdc",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "raron - dark side of the moon (pink floyd) 5 - woodn't dumb.milk",
+      "section": "warp_",
+      "preset_sha256": "544d7e51d7af850d5c70e48c9012f273093f10d7e5a13d67a0cd1158325b70f9",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "shifter - crosshatch colony beta6 - crapping a fucking brick into your small fucking illuminati scarcity brain.milk",
+      "section": "warp_",
+      "preset_sha256": "67bfaefadbb20c6f3b37494cd806f8e9469d132925704b69cf60930f64460659",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "shifter - crosshatch colony beta6 - deep down i love you, but i don't want to spend another second with .milk",
+      "section": "warp_",
+      "preset_sha256": "546548475d87874b0df2533c07a3558f6c64160cbeb020439bc04ecc25d278bb",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - Geiss - Cosmic Dust 2 - Trails 5b - mash0000 - lateral honeycomb spinal bias.milk",
+      "section": "warp_",
+      "preset_sha256": "21c7e36983ccc62e22709b68f7cebaf790f889cea7e8a9c0e80c853326953953",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - Roosta  - Bursting Egg - mash0000 - tree rings of life - nuclear stratovarian wood nz+ puke slo --- Isosceles edit1.milk",
+      "section": "warp_",
+      "preset_sha256": "4dc209757bd0598a280f80e8b3d7af8786a7c114a48d896caa356402a8b1a382",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - Roosta  - Bursting Egg - mash0000 - tree rings of life - nuclear stratovarian wood nz+ puke slo --- Isosceles edit2.milk",
+      "section": "warp_",
+      "preset_sha256": "3787a60f6ce23d51c1fe40bb50c460fac0693a4e988c7faea47bd5d6429656b5",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - crisco orgy - rosvell roams nz+.milk",
+      "section": "warp_",
+      "preset_sha256": "f99c8383eb1010a257c9188776b734edf6438c307a72f777f442b5479aad61b6",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(112) : Syntax error: expected ')' near '.'\n"
+    },
+    {
+      "preset": "suksma - dorsal forsal - dead hog rt.milk",
+      "section": "warp_",
+      "preset_sha256": "819a851708105708bf5ee69dcb7c72316e55246bc1abb05522dadb506493caaa",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - dorsal forsal - dead hog.milk",
+      "section": "warp_",
+      "preset_sha256": "7ba2e2feab4c4e83147be7b76159c2b3db3bcdf0f77fc56764900a84dd86d0a6",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - dorsal forsal - mockery wins up until - woodn't3 (long game).milk",
+      "section": "warp_",
+      "preset_sha256": "c09321951ed4810278cd8c35ea7d4ad17affc1f97639b91d14520017ee725fd7",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - fuck retro anything.milk",
+      "section": "comp_",
+      "preset_sha256": "d57fea66d8addb123af5327e19d7410ed923d0a64416b448fee2458510730883",
+      "status": "unknown",
+      "reason": "native shader parsing failed",
+      "diagnostics": "milk(80) : Syntax error: expected identifier near ';'\n"
+    },
+    {
+      "preset": "suksma - geiss pill dreampt - crop coicle.milk",
+      "section": "warp_",
+      "preset_sha256": "d23fc18c1e85fd7a5cfe7813a575b0116c20aaff0a1e699cb01be3a1042ff63f",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": false,
+      "lowering_unknowns": [
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read"
+      ]
+    },
+    {
+      "preset": "suksma - movement within the trout - seven golden stairs.milk",
+      "section": "warp_",
+      "preset_sha256": "e2b45431b60665c9a7760222ae52b7a52238367b23165f26c136daa4b20dd905",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - my throat be a wellspring of blood - codon base pair sdi.milk",
+      "section": "warp_",
+      "preset_sha256": "ad1c0bf192e74dce49af6fc169cd2626ebb0b7a2e67aecb523e6dc53946fe5c8",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - my throat be a wellspring of blood - plenum of unprofessional wrestler physicists nz+.milk",
+      "section": "warp_",
+      "preset_sha256": "7d18b0bcbfdcf34b3a3d9edf5e1bcbdbb506d36b4107eaad99e101126a013805",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - my throat be a wellspring of blood - plenum of unprofessional wrestler physicists.milk",
+      "section": "warp_",
+      "preset_sha256": "55ce8ce831c73cea13dc8cc687369e5fd2aee0f3e38cc5edb52e9d78cfd5d2e6",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - redusa enfeck ladin binbama dahdc.milk",
+      "section": "warp_",
+      "preset_sha256": "8d9c45ab57b9bf1441e6864e85239c5819e6df0964cffb14eb197a1a98f10753",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - rugburn protocydal gammalobulink --- Isosceles edit.milk",
+      "section": "warp_",
+      "preset_sha256": "ac48623b223ad862eb1cb7116be7179f3494907d2d5cbe1e97c144a2f97e7692",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - rugburn protocydal gammalobulink.milk",
+      "section": "warp_",
+      "preset_sha256": "829fb111af4c43c06ed90940e9d4bd5372d60109c0e2b3bdfd9596c6aa1c8c4d",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "suksma - shifter - spincycle + labor of others.milk",
+      "section": "warp_",
+      "preset_sha256": "0bd2b75ee877b8a198bd30e79f5f1495a5575357603aeb046bf157ec601c2d5c",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": false,
+      "lowering_unknowns": [
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read",
+        "uninitialized shader value reaches a read"
+      ]
+    },
+    {
+      "preset": "suksma - stone - rt mess.milk",
+      "section": "warp_",
+      "preset_sha256": "c593600aaea093de73ee8fbef9866e992f1533bd81e2a75977c6e48f2b564bd2",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "undulant --- Isosceles edit.milk",
+      "section": "warp_",
+      "preset_sha256": "572b729f2adc6369ac3eb61f0fc13f7775aae0440e61638939cf25eb76b12f77",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "undulant 03 Oengyilkos Vasarnap.milk",
+      "section": "warp_",
+      "preset_sha256": "f26f265131f0ec1fdecdacc48586fdb7e8bd42a5099cf61ed18660c14c74359e",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "undulant safe preyre --- Isosceles edit.milk",
+      "section": "warp_",
+      "preset_sha256": "6c312094b9c2b731799bf438b50ea9bad6c483a62e5f5afc179f0eb0fc82d037",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "you are now leaving the materialistic sector - chloral reef, er --- Isosceles edit.milk",
+      "section": "warp_",
+      "preset_sha256": "3d25d6740f3b08c69b34bf5bba08c1d889901d3ac025c83f26566670f11455c2",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    },
+    {
+      "preset": "you are now leaving the materialistic sector - chloral reef, er.milk",
+      "section": "warp_",
+      "preset_sha256": "9799cb9d25eaa720628db423491213c636914559b647bc88fbffc3be0380827d",
+      "status": "parsed",
+      "reason": null,
+      "diagnostics": "",
+      "lowering_complete": true,
+      "lowering_unknowns": []
+    }
+  ],
+  "counts": {
+    "parsed": 67,
+    "unknown": 16
+  },
+  "whole_preset_accuracy_verified": false,
+  "lowering_complete_sections": 63,
+  "implementation_sha256": {
+    "native_reader.cpp": "accd8409313aafaa17517b372f2f6b10c4c0ebedcfb392e6463cfb095e29bfad",
+    "shader_fields.py": "5263fc47532161c64489abc8068a8b6137d95e5a3fe5fba83052062108b3dc47"
+  }
+}
