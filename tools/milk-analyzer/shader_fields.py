@@ -767,8 +767,18 @@ class ShaderFields:
                     if dead:value=Field('uninitialized',dtype=dtype,detail={'name':declaration['name'],'dead_initializer':True})
                     elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
                     elif declaration['type'].get('array'):value=self.array_declaration(declaration)
-                    elif declaration['name'] in self._referenced_names(declaration['value']):
-                        value=self.unsupported('same-name initializer binding differs in emitted GLSL',dtype=dtype)
+                    # The native generator emits an inline GLSL initializer.
+                    # Its new name enters scope afterwards (GLSL ES 3.00 4.2.2),
+                    # so a same-name RHS still resolves to the outer binding.
+                    elif (declaration['name'] in self._referenced_names(declaration['value']) and
+                          declaration['name'] not in self.environment):
+                        value=self.unsupported('unbound initializer name in emitted GLSL',dtype=dtype)
+                    elif (declaration['name'] in self._referenced_names(declaration['value']) and
+                          self.has_shared_effects(declaration['value'])):
+                        # Native AST local flags can disagree with the GLSL
+                        # outer binding here. Do not miss hidden read/write
+                        # conflicts until effect analysis resolves that scope.
+                        value=self.unsupported('same-name initializer shared effects not resolved',dtype=dtype)
                     else:value=self.initializer(self.expression(declaration['value']),dtype) if declaration['value'] is not None else Field('uninitialized',dtype=dtype,detail={'name':declaration['name']})
                     self.environment[declaration["name"]]=value
                     self.local_names.add(declaration['name'])

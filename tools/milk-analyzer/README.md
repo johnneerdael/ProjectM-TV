@@ -496,7 +496,7 @@ Angular seam ownership and raster subpixel/rounding remain explicit limits.
   Assignments create function-local replacements without initializing other
   packed components; a first assignment's right side reads the original uniform.
   Unwritten components remain unknown. Preserve independent helper-local state.
-  Unrewritten uniform increments and same-name initializers remain unresolved.
+  Unrewritten uniform increments and unbound initializer names remain unresolved.
 - Preserve the pinned renderer's DX9 compatibility lowering: `sqrt`, `rsqrt`,
   `log`, `log2`, and ordinary `pow` apply `abs` to their relevant input. A literal
   exponent of one makes `pow` return the signed base. Floating remainder and
@@ -628,8 +628,7 @@ Unsupported bitwise unary expressions, conditional/logical assignment effects,
 unsequenced arithmetic/comparison updates, helper output arguments,
 loop-condition side effects, `break`/`continue`, branch/loop-dependent helper returns,
 unresolved array sizes/initializer layouts, index-expression side effects,
-non-writable matrix row assignments and same-name initializer
-binding differences,
+non-writable matrix row assignments and unbound initializer names,
 projected/gradient sampling and general mipmapped LOD/bias sampling, overfilled matrix constructors, and
 rectangular bare matrix products without a native GLSL helper remain
 explicitly unresolved. An unresolved statement also makes the returned shader
@@ -749,6 +748,20 @@ explain the blockers but do not remove them or silently repair preset source.
 See `fixtures/focused-parsing-diagnostics-2026-10-04.json` for source identities,
 native error locations and baseline evidence.
 
+The same-name initializer audit previously applied an incorrect binding rule.
+The native generator emits inline initializers, and GLSL ES3.00 section4.2.2
+makes the new local name visible afterwards. The initializer reads its outer
+binding; missing or unwritten outer storage stays unresolved. All49 historical
+shader witnesses pass offline GLSL330 and GLES300 compiler checks. Re-reading
+and auditing all original315 presets clears47 more, leaving **240** known
+source blockers with no newly blocked entries. Two frozen global/nested-local
+controls match the unchanged published core2.2.4 across60frames with zero RGB8
+error. This establishes the scope behavior, not whole-preset appearance accuracy.
+Effectful same-name initializers remain unresolved where native AST local flags
+would hide an outer shared-state ordering conflict.
+See `fixtures/focused-blockers-240-2026-10-04.json`,
+`fixtures/initializer-scope-native-proof-2026-10-04.json` and `REFERENCES.md`.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed
@@ -818,11 +831,11 @@ absolute error below2e-8. This is numerical evidence for that case and domain;
 its complete appearance remains unproved.
 
 The component-state update also matched a corpus shader's HLSL-tree calculation
-to an independent algebraic result. A subsequent target-translation audit found
-its `ret1=ret1` local initializer has a different binding in emitted GLSL. The
-probe now explicitly records that compatibility gap and is not target-runtime
-verification. Preserve the distinction between understood authoring arithmetic
-and the actual renderer's behavior.
+to an independent algebraic result. A subsequent target-translation audit
+incorrectly flagged its `ret1=ret1` local initializer as a binding difference.
+The initializer-scope correction above supersedes that warning. The original
+algebraic probe remains independent arithmetic evidence, not full target-runtime
+verification. Preserve that distinction.
 
 ## Regression from the first blind failure
 

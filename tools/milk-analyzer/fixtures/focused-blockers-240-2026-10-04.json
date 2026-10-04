@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "presets": 315,
+  "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Known source-audit parsing/lowering gaps; behavioral obligations are not yet enumerated.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 240,
+  "verified_behavior_percent": null,
+  "previous_known_blockers": 287,
+  "shader_fields_sha256": "4e519b4c30f9e367fef932489a1d50dd86de93ed2efaa71dc20a83643b83bb2b",
+  "reader_sha256": "3add6af6ecc57aa4925a346229b5e51dcc8f86d929401be15edcec13e88f6dd1",
+  "cleared_presets": [
+    {
+      "preset": "Goody + martin - crystal palace - Aqua Lumens.milk",
+      "preset_sha256": "b9cad7b8082c1b39a2b739fd8f29888dd898ee9752356b5de87bd3facafaa93b"
+    },
+    {
+      "preset": "LuxXx - CottonCandyTrip.milk",
+      "preset_sha256": "76478ba12f35f4ec1862cdcf14cd7014e43743819ab85193a7d002e5d6b467b0"
+    },
+    {
+      "preset": "EVET + martin + stahlregen - Deep Urchin.milk",
+      "preset_sha256": "733dafda9c54215ef1da9567c4332fcb06b3fd3203e01fbad2ee3a061df61499"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom.milk",
+      "preset_sha256": "4dd679327be1076bc8bc66b556a8b1b81dbadbdb5f6996d26cc9adf50afa198d"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 20c.milk",
+      "preset_sha256": "1f349e9a1d4107888f03be3dbf50b562dad94385da31895393ab972e8fd66dbe"
+    },
+    {
+      "preset": "i am only here to die slowly in pain spread 'em.milk",
+      "preset_sha256": "90908e290e52a11ebed8defb340719633011199c5b900ef8efdb1dfacdc32ed4"
+    },
+    {
+      "preset": "rationalizing insanity using only mainstream religion nz+ barf bowl.milk",
+      "preset_sha256": "80f4690d079337f30cd6db9b3af2f773154de99a6a1147eb535703dc3e164344"
+    },
+    {
+      "preset": "Waltra - Sigma.milk",
+      "preset_sha256": "d72f0c111e57f9673faabb3818aca57d14f5a2b9bbe17dabc30dc5f59336b17f"
+    },
+    {
+      "preset": "Waltra - Priority Lane.milk",
+      "preset_sha256": "a12f2cdf960a854684e35f7b69ec2c223585842592f692df7f0367b283c4ee96"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Taken.milk",
+      "preset_sha256": "0bfeb2c4db70e06ae742998bac7c549580ad3ebe6fcf30d27feb8444ef8cb588"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+.milk",
+      "preset_sha256": "363a9a84ff0b283278fcf6b7a63d96193024cf3bf247489ffa3df019ec18ba01"
+    },
+    {
+      "preset": "goody + martin - crystal palace - schizotoxin5.milk",
+      "preset_sha256": "219fa249042d708e7f8e308efe0ec85380e23a6f3bdc2d5a874bb61793ff3ce5"
+    },
+    {
+      "preset": "suksma - gammaantilattice --- Isosceles edit.milk",
+      "preset_sha256": "5283a11437a815a074a30259d44431beb32be54281c26a3eee648007aa44986e"
+    },
+    {
+      "preset": "rationalizing insanity using only mainstream religion roam.milk",
+      "preset_sha256": "e786ddec4a98a59acd45ed75c727c334f76fa295b5cebfa2ef9fc518ce1b820c"
+    },
+    {
+      "preset": "martin - crystal palace nz+.milk",
+      "preset_sha256": "d36a9e0ebeb8ad4f356cd8a8465ff07386bb156b5b363d3a93ca73e957146ca7"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Ocular Anima.milk",
+      "preset_sha256": "3b253bb29b57229d6f675d3fb23fee530bcfed9aacc5714d35ba3a727fcfb5b5"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 9a.milk",
+      "preset_sha256": "9b7b20e78b86868a963d8c3d2cc64e120791403ea6a9cc7a737d2a3f2bc9473e"
+    },
+    {
+      "preset": "stuffing wolves into bay-os deoree.milk",
+      "preset_sha256": "1e6b7070f8fa4d1cf295970803207544ac1d4e6a14acab99f3360306c1b32986"
+    },
+    {
+      "preset": "LuxXx - Play v3 (the war within all of us).milk",
+      "preset_sha256": "204edef0144d83a630dd943a89839ec44bbee6034802b519f676e9807a045f50"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2.milk",
+      "preset_sha256": "b98239467978391ecb57a6d764484fe15cde0942ed8b6470449276b098f83a6c"
+    },
+    {
+      "preset": "goody + martin - crystal palace - schizotoxin - the wild iris bloom - 16 iterations.milk",
+      "preset_sha256": "a32d703e25fc15a4a0a7e86d76e30e4c688883c8c3cc308ccb5879ffb5d2eaf3"
+    },
+    {
+      "preset": "$$$ Royal - Mashup (295).milk",
+      "preset_sha256": "15a05fc98e98db66d8d1967082e8357b6ffe60a38d67ca7a94792cf8544bb273"
+    },
+    {
+      "preset": "martin - crystal palace_1 nz+.milk",
+      "preset_sha256": "88ab1e509724e6d7a6eaf5906330600a60d3807312dcd8457ead2009fae09e40"
+    },
+    {
+      "preset": "goody + martin - crystal palace - schizotoxin - the wild iris bloom - 16 iterations5.milk",
+      "preset_sha256": "0c2f3f2c3dffe3826190a7e9ca44e68e74d835935c3eed98949b0b4bef213daa"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Taken5 nz+.milk",
+      "preset_sha256": "2a74b1ecfce3844b8516326925c14f536c466cc70fc857b9581f3d35fb1e1b6f"
+    },
+    {
+      "preset": "amandio c - dynacube (shifter wave) - don't cry or feel too down nz+.milk",
+      "preset_sha256": "c74cef95dadcee7a05f077b1c11852e9f2f9f8e8635681cd9023cba3bb16253a"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Taken5.milk",
+      "preset_sha256": "2857c4aae8ebe536030b21c213c7a063b8a34f61b53346a2874cb191dfe1d2e4"
+    },
+    {
+      "preset": "martin - crystal palace.milk",
+      "preset_sha256": "a2a4a6d9c4ea66ca214b988fd2ed9898eaca1028aa16396a0cd18cd47df473bc"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess.milk",
+      "preset_sha256": "17b276c90d8e918f1d6cca805bf26f1ddf972456a5da22a461a2cd3df31d175a"
+    },
+    {
+      "preset": "suksma - sun pod gambit couch nz+ manugular bombementumb is qontinuose.milk",
+      "preset_sha256": "046f55c91a1e37ac1e34fa07d9eef2fab63c0a5972fc48a5d28ce21d720e5719"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - Darkening mathematics.milk",
+      "preset_sha256": "7a641bececc3cfa236e6643fc8953c11af51d03c98da871ecd724e69c62929cd"
+    },
+    {
+      "preset": "amandio c - dynacube (shifter wave) - don't cry or feel too down.milk",
+      "preset_sha256": "ec4d44ccd5f40feadefefff70713ea3893600b92bd413966247c9e38b37b2e40"
+    },
+    {
+      "preset": "midgitstraights of majillaen - hypnochristocrasee.milk",
+      "preset_sha256": "de7f7f60a5d666509dda9e3afa41430ceb3b55c85cf47283dcc6bc7870813748"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 9a nz+.milk",
+      "preset_sha256": "4a2b2d5042cecaae1b9865b635ce69dc656dfc54da63bada9d76e22253330f27"
+    },
+    {
+      "preset": "LuxXx - Play v2.milk",
+      "preset_sha256": "cb27ef645627b23cd2552bfb8a7fd0ce38b4a72371530f9c735bb2a295e13dec"
+    },
+    {
+      "preset": "rationalizing insanity using only mainstream religion.milk",
+      "preset_sha256": "f97b50c57badd4eb9a59b35e44a147e51edaf3f8d6b45678c203dd6794b202de"
+    },
+    {
+      "preset": "$$$ Royal - Mashup (151).milk",
+      "preset_sha256": "b6592d6d1d745142621e839fcaf5a14469978041310012b088cbf38aff87925f"
+    },
+    {
+      "preset": "suksma - satanic teleprompter - john dee enochian alien summons.milk",
+      "preset_sha256": "795a4b808c0bfd58a42b145a84db09f85591dbeee643d5821e576eda08c737b1"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 9.milk",
+      "preset_sha256": "790b2691e809dbb3602ee6e370c8ca7d250107bd9fa66b1d0562689e60ceb611"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Aqua Lumens5.milk",
+      "preset_sha256": "2eb3b9588cbf8a32226d5a99800df0763ee997500a142a4d8dc8978f83b3bc05"
+    },
+    {
+      "preset": "suksma - sun pod gambit couch - flx infinity within a finite boundary --- Isosceles edit2.milk",
+      "preset_sha256": "72aaa696a19ba1552068a48d0ae378bc58e7ac6072e59d261501960a759cb8f7"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - Darkening mathematics5.milk",
+      "preset_sha256": "9738c48aea959f972bea32adcbe272842653f0263185e81b3c6d76a9f4897d15"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Ocular Anima - not so g slow.milk",
+      "preset_sha256": "808ec148c6918523f764c3345983f4abad9bf5375b47f2c0657d504dbeb05585"
+    },
+    {
+      "preset": "amandio c - circles intersection - lost points nz+ queuebical vership.milk",
+      "preset_sha256": "2c29c8f0c90c4d48962c93f25e966c835d7599f0d33cc978e1179128d76cb0f5"
+    },
+    {
+      "preset": "Goody + martin - crystal palace - Taken - nsgs.milk",
+      "preset_sha256": "68ada3f50c0957aa2998460c204f6f18ebc5379bf6ffa5fa3e790ffe7e768289"
+    },
+    {
+      "preset": "Waltra - Square Orgy.milk",
+      "preset_sha256": "99a718a0a6c194f93ce2807a04673b8017eaa7aacae927a9cb97a066aefd29f1"
+    },
+    {
+      "preset": "martin - crystal palace_1.milk",
+      "preset_sha256": "732b03872f5ee824ee11ba680375fa9d7c398f45c68665d5341a522967b8ed53"
+    }
+  ],
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 82,
+      "affected_units": 82,
+      "affected_source_tokens": 23352,
+      "sole_known_gap_presets": 81,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 1
+      }
+    },
+    {
+      "gap": "native GLSL array initializer layout mismatch",
+      "affected_presets": 56,
+      "affected_units": 56,
+      "affected_source_tokens": 21139,
+      "sole_known_gap_presets": 55,
+      "overlap_presets": {
+        "target parse unavailable": 1
+      }
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 51
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 51
+      }
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 32,
+      "affected_units": 32,
+      "affected_source_tokens": 16789,
+      "sole_known_gap_presets": 29,
+      "overlap_presets": {
+        "arithmetic/comparison side-effect order not established": 3
+      }
+    },
+    {
+      "gap": "source outside supported numbered loader",
+      "affected_presets": 20,
+      "affected_units": 25,
+      "affected_source_tokens": 952,
+      "sole_known_gap_presets": 20,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 3
+      }
+    }
+  ],
+  "scope_reference": "https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf#page=41",
+  "offline_compatibility": {
+    "original_same_name_witnesses": 49,
+    "gles300_accepted": 49,
+    "glsl330_accepted": 49,
+    "native_driver_verified": false
+  }
+}

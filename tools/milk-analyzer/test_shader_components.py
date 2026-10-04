@@ -6,12 +6,34 @@ from grid_math import evaluate_grid
 
 
 class ShaderComponentsTest(unittest.TestCase):
-    def test_same_name_initializer_does_not_assume_hlsl_outer_binding_survives_glsl(self):
-        for code in ['float g=2;shader_body {float g=g;ret=g;}',
-                     'shader_body {float g=2;{float g=g+1;ret=g;}}']:
+    def test_same_name_initializer_reads_outer_binding_before_local_scope_begins(self):
+        for code,expected in [('float g=2;shader_body {float g=g;ret=g;}',2),
+                              ('shader_body {float g=2;{float g=g+1;ret=g;}}',3)]:
             model,result=lower(code)
+            self.assertTrue(model.complete,model.unknown)
+            np.testing.assert_array_equal(evaluate(result),[expected]*3)
+
+    def test_same_name_initializer_does_not_define_unwritten_outer_storage(self):
+        model,result=lower('float g;shader_body {float g=g;ret=g;}')
+        self.assertFalse(model.complete)
+        self.assertIn('uninitialized shader value reaches a read',model.unknown)
+
+    def test_same_name_initializer_in_later_declarator_sees_new_earlier_binding(self):
+        model,result=lower('float g=.1;shader_body {float g=g+.2,h=g;ret=float3(g,h,0);}')
+        self.assertTrue(model.complete,model.unknown)
+        np.testing.assert_allclose(evaluate(result),[.3,.3,0])
+
+    def test_same_name_initializer_without_outer_binding_stays_unresolved(self):
+        model,result=lower('shader_body {float missing=missing;ret=missing;}')
+        self.assertFalse(model.complete)
+        self.assertIn('unbound initializer name in emitted GLSL',model.unknown)
+
+    def test_same_name_initializer_keeps_shared_read_write_order_unresolved(self):
+        for expression in ['bump()+g','g+bump()']:
+            model,result=lower('float g=1;float bump(){g+=1;return g;}'
+                               'shader_body {float g='+expression+';ret=g;}')
             self.assertFalse(model.complete)
-            self.assertEqual(result.op,'unknown')
+            self.assertIn('same-name initializer shared effects not resolved',model.unknown)
 
     def test_uniform_assignment_uses_native_function_local_replacement(self):
         model,result=lower('shader_body {bass=2;ret=bass;}')

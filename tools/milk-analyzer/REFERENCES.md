@@ -198,8 +198,17 @@ The pinned `GLSLGenerator.cpp` emits scalar-swizzle helpers, casts vector indice
 to integer, turns matrix row indexing into a getter, and maps single matrix
 members to transposed GLSL storage indices. A matrix row getter is not a writable
 l-value; multiple matrix-member selectors are also not faithfully emitted.
-Its identifier output does not rename a global to preserve an HLSL same-name
-local initializer binding. Keep those target-language boundaries unresolved.
+`OutputDeclaration` emits a local initializer inline. Under
+[GLSL ES 3.00 section4.2.2](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf#page=41),
+the new name becomes visible after that initializer, so a same-name reference
+uses the outer binding. The previous blanket compatibility warning was incorrect.
+Missing or unwritten outer storage remains unresolved; illegal redeclarations
+still require the target compiler gate. Global and nested-local controls match
+the unchanged published core across60frames; see
+`fixtures/initializer-scope-native-proof-2026-10-04.json`.
+Effectful same-name initializers stay unresolved until effect analysis binds
+their outer references correctly; AST local flags must not conceal shared-state
+ordering conflicts.
 
 The same generator calls `HLSLTree::ReplaceUniformsAssignments()` before emitting
 GLSL. This changes uniform assignment destinations and subsequent references to
