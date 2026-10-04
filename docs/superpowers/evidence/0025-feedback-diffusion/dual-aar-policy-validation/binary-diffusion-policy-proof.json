@@ -1,0 +1,22 @@
+{
+  "native": {
+    "arm64-v8a": {
+      "optional_shader_constructor_warning_literal_present": true,
+      "sha256": "c9d8ef37d46f068fc4b37b328d3d534a27f1bada1b05bbf87bc89890af9fe202"
+    },
+    "armeabi-v7a": {
+      "optional_shader_constructor_warning_literal_present": true,
+      "sha256": "eb5b848e8ecabe33c8a3bc7c81a48d0e6ecdf04b107e75965df3b5eeb848e9fc"
+    }
+  },
+  "capped": {
+    "arm64-v8a": {
+      "optional_shader_constructor_warning_literal_present": false,
+      "sha256": "23ee3109b135e7102311a90cbbf185764e7c3d3b8ebb2d87f593bec45d3c5250"
+    },
+    "armeabi-v7a": {
+      "optional_shader_constructor_warning_literal_present": false,
+      "sha256": "a837a912b7371f2b8cc3f4dc36c08c681967817248b2c1fe492bfe9bae697cc4"
+    }
+  }
+}
