@@ -14,6 +14,15 @@ import org.junit.Test;
 public class QualityControllerTest {
     private int applied = -1;
 
+    private static boolean nativePolicy() {
+        return "native".equals(System.getProperty("projectmCoreRenderingPolicy", "native"));
+    }
+
+    private static int[] highPanelManualLevels() {
+        return nativePolicy() ? new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT}
+                : new int[]{720, 1080, 1330};
+    }
+
     private static DisplayInfo display(int width, int height) throws Exception {
         Constructor<DisplayInfo> c = DisplayInfo.class.getDeclaredConstructor(
                 int.class, int.class, int.class, int.class, float.class);
@@ -46,7 +55,7 @@ public class QualityControllerTest {
 
     @Test
     public void manualLevelsFollowPhysicalPanel() throws Exception {
-        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT}, QualityController.manualHeights(display(3840, 2160), 0));
+        assertArrayEquals(highPanelManualLevels(), QualityController.manualHeights(display(3840, 2160), 0));
         assertArrayEquals(new int[]{720, 1080}, QualityController.manualHeights(display(1920, 1080), 0));
         assertEquals(2560, display(3840, 2160).widthForHeight(1440));
     }
@@ -66,7 +75,7 @@ public class QualityControllerTest {
     public void autoAndLegacyFixedHeightsStayCapped() throws Exception {
         assertEquals(1330, QualityController.RENDER_HEIGHT_CAP);
         // Auto and saved numeric heights keep the cap; Native is a separate explicit option.
-        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT}, QualityController.manualHeights(display(2560, 1440), 0));
+        assertArrayEquals(highPanelManualLevels(), QualityController.manualHeights(display(2560, 1440), 0));
         assertEquals(1330, QualityController.validFixedHeight(display(3840, 2160), 0, 1440));
         assertEquals(1330, QualityController.validFixedHeight(display(2560, 1440), 0, 1440));
         assertEquals(1080, QualityController.validFixedHeight(display(3840, 2160), 0, 1080));
@@ -294,12 +303,12 @@ public class QualityControllerTest {
     }
     @Test
     public void nativeIsAnExplicitOptionAboveTheCap() throws Exception {
-        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT},
+        assertArrayEquals(highPanelManualLevels(),
                 QualityController.manualHeights(display(3840, 2160), 0));
-        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT},
+        assertArrayEquals(highPanelManualLevels(),
                 QualityController.manualHeights(display(2560, 1440), 0));
         assertArrayEquals(new int[]{720, 1080}, QualityController.manualHeights(display(1920, 1080), 0));
-        assertEquals(QualityController.NATIVE_HEIGHT,
+        assertEquals(nativePolicy() ? QualityController.NATIVE_HEIGHT : 0,
                 QualityController.validFixedHeight(display(3840, 2160), 0, QualityController.NATIVE_HEIGHT));
         assertEquals(1330, QualityController.validFixedHeight(display(3840, 2160), 0, 2160));
     }
@@ -309,13 +318,19 @@ public class QualityControllerTest {
         QualityController q = new QualityController(display(3840, 2160),
                 profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
         q.setMode(QualityController.NATIVE_HEIGHT, 0);
-        assertEquals(2160, applied);
-        assertEquals(3840, display(3840, 2160).widthForHeight(applied));
-        assertTrue(q.isNative());
-        assertTrue(!q.isAuto());
-        settle(q);
-        samples(q, 20, 10);
-        assertEquals("a fixed Native selection does not enter the Auto ladder", 2160, applied);
+        if (nativePolicy()) {
+            assertEquals(2160, applied);
+            assertEquals(3840, display(3840, 2160).widthForHeight(applied));
+            assertTrue(q.isNative());
+            assertTrue(!q.isAuto());
+            settle(q);
+            samples(q, 20, 10);
+            assertEquals("a fixed Native selection does not enter the Auto ladder", 2160, applied);
+        } else {
+            assertTrue("capped rejects a direct Native selection", q.isAuto());
+            assertTrue(!q.isNative());
+            assertTrue(applied > 0 && applied <= 1330);
+        }
         q.setMode(0, 2160);
         assertEquals(1330, applied);
         assertTrue(!q.isNative());
@@ -333,6 +348,30 @@ public class QualityControllerTest {
         q.setMode(QualityController.NATIVE_HEIGHT, 0);
         assertTrue(q.isAuto());
         assertTrue(applied <= 1260);
+    }
+
+    @Test
+    public void policyStillAllowsLowerFixedHeights() throws Exception {
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
+        for (int height : new int[]{360, 540, 720, 1080, 1330}) {
+            q.setMode(height, 0);
+            assertEquals(height, applied);
+            assertTrue(!q.isAuto());
+            assertTrue(!q.isNative());
+        }
+    }
+
+    @Test
+    public void nativePanelOptionRequiresPolicyAndSufficientMemory() throws Exception {
+        int available = nativePolicy() ? QualityController.NATIVE_HEIGHT : 0;
+        assertEquals(available, QualityController.validFixedHeight(display(3840, 2160), 2160, QualityController.NATIVE_HEIGHT));
+        assertEquals(available, QualityController.validFixedHeight(display(7680, 4320), 0, QualityController.NATIVE_HEIGHT));
+        QualityController q = new QualityController(display(7680, 4320),
+                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
+        q.setMode(QualityController.NATIVE_HEIGHT, 0);
+        assertEquals(nativePolicy() ? 4320 : 1330, applied);
+        assertEquals(nativePolicy(), q.isNative());
     }
 
 }

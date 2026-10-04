@@ -50,17 +50,21 @@ def publish(repo, version, sha, notes, assets_dir, api=github_api, command=run):
     body = notes.read_text(encoding="utf-8")
     if not body.startswith(f"# ProjectM TV {version}\n"):
         raise ValueError("release notes do not match the built version")
-    names = [f"projectM-TV-{version}.apk", "projectM-TV.apk",
-             f"projectM-TV-core-{version}.aar", "projectM-TV-core.aar"]
-    digests = {name: hashlib.sha256((assets_dir / name).read_bytes()).hexdigest() for name in names}
-    if digests[names[0]] != digests[names[1]] or digests[names[2]] != digests[names[3]]:
-        raise ValueError("latest asset alias differs from its versioned artifact")
-    # R8 obfuscates the release APK; its mapping turns crash traces back into source names.
-    names.append(f"projectM-TV-{version}-mapping.txt")
-    digests[names[-1]] = hashlib.sha256((assets_dir / names[-1]).read_bytes()).hexdigest()
-    checksums = assets_dir / "checksums.txt"
-    checksums.write_text("".join(f"{digests[name]}  {name}\n" for name in names), encoding="utf-8")
-    names.append(checksums.name)
+    # Canonical core names remain the capped policy used by existing integrations and Milkbeat.
+    pairs = [(f"projectM-TV-{version}.apk", "projectM-TV.apk"),
+             (f"projectM-TV-core-{version}.aar", "projectM-TV-core.aar"),
+             (f"projectM-TV-core-native-{version}.aar", "projectM-TV-core-native.aar")]
+    mapping = f"projectM-TV-{version}-mapping.txt"
+    legacy_names = [name for pair in pairs[:2] for name in pair] + [mapping]
+    native_names = list(pairs[2])
+    names = [name for pair in pairs for name in pair] + [mapping]
+    digests = {name: hashlib.sha256((assets_dir / name).read_bytes()).hexdigest() for name in legacy_names}
+    for name in native_names:
+        if (assets_dir / name).is_file():
+            digests[name] = hashlib.sha256((assets_dir / name).read_bytes()).hexdigest()
+    for versioned, alias in pairs:
+        if versioned in digests and alias in digests and digests[versioned] != digests[alias]:
+            raise ValueError(f"latest asset alias differs from its versioned artifact: {alias}")
     tag = f"v{version}"
     existing = api(f"repos/{repo}/releases/tags/{tag}", missing_ok=True)
     if existing:
@@ -68,10 +72,31 @@ def publish(repo, version, sha, notes, assets_dir, api=github_api, command=run):
         if actual_commit != sha:
             raise ValueError("existing release tag belongs to a different commit")
         if not existing.get("draft"):
-            uploaded = {asset["name"] for asset in existing.get("assets", [])}
-            if set(names) <= uploaded:
+            assets = {asset["name"]: asset for asset in existing.get("assets", [])}
+            uploaded = set(assets)
+            # Older releases may not expose digest metadata. When available, check remote
+            # aliases too without replacing any published asset.
+            for versioned, alias in pairs:
+                first = assets.get(versioned, {}).get("digest")
+                second = assets.get(alias, {}).get("digest")
+                if first and second and first != second:
+                    raise ValueError(f"published asset alias differs from its versioned artifact: {alias}")
+            if set(legacy_names + ["checksums.txt"]) <= uploaded and not set(native_names) & uploaded:
+                # Do not upgrade an already-complete legacy release to a new artifact schema.
                 return {"url": existing["html_url"], "created": False}
-            raise ValueError("published release is incomplete; refusing to replace published artifacts")
+            if not set(names + ["checksums.txt"]) <= uploaded:
+                raise ValueError("published release is incomplete; refusing to replace published artifacts")
+            for name in native_names:
+                if name not in digests:
+                    raise FileNotFoundError(assets_dir / name)
+            return {"url": existing["html_url"], "created": False}
+    for name in native_names:
+        if name not in digests:
+            raise FileNotFoundError(assets_dir / name)
+    # Include versioned and stable aliases of both rendering policies, plus the R8 mapping.
+    checksums = assets_dir / "checksums.txt"
+    checksums.write_text("".join(f"{digests[name]}  {name}\n" for name in names), encoding="utf-8")
+    names.append(checksums.name)
     latest = api(f"repos/{repo}/releases/latest", missing_ok=True)
     make_latest = "true" if not latest or version_tuple(version) >= version_tuple(latest["tag_name"]) else "false"
     if not existing:

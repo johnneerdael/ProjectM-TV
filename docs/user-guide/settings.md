@@ -11,11 +11,13 @@ All is the default music category. Your selected category is saved.
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 | Resolution | Auto or numeric fixed heights up to 1330p, within the panel and memory limits; Native uses the detected panel height when it is above 1330p and memory permits | Auto |
 
-**Native** is an explicit opt-in and is still under evaluation. It uses the TV's detected panel height, such as 2160p on a 4K panel, even if Android's menus run at 1080p. It can show more detail, but can run slower and use more memory. It does not lower resolution for slow presets or memory-pressure reports; use Auto for adaptive performance. Auto transitions can still render a blend at lower resolution. Higher resolution can also change a feedback preset's brightness, colour or pattern, and the compensation does not preserve every preset's look.
+The standard APK uses the Native-capable core. **Native** is an explicit opt-in with known picture and resource limits. It uses the TV's detected panel height, such as 2160p on a 4K panel, even if Android's menus run at 1080p. It can show more detail, but can run slower and use more memory. It does not lower resolution for slow presets or memory-pressure reports; use Auto for adaptive performance. Auto transitions can still render a blend at lower resolution. Higher resolution can also change a feedback preset's brightness, colour or pattern, and the compensation does not preserve every preset's look.
 
 Native appears only when the panel height exceeds 1330p and **Memory limit** permits that full height. If a saved Native choice becomes unavailable, the app uses Auto. Older saved numeric 1440p/4K choices remain capped; they do not automatically select Native. Auto remains the default and stops at 1330p even when Memory limit is off.
 
-The feedback correction also applies to eligible presets above their authored reference size in Auto and numeric fixed modes, including 1330p. It can change their patterns even when the resolution setting stays the same.
+In the Native-capable core, the feedback correction also applies to eligible presets above their authored reference size in Auto and numeric fixed modes, including 1330p. It can change their patterns even when the resolution setting stays the same.
+
+A build using the **capped core** has no Native choice or feedback diffusion. It keeps internal rendering at or below 1330p even when its host requests a larger surface, and upscales the result for presentation. The canonical core AAR used by Milkbeat selects this capped policy; the standard ProjectM TV APK uses the Native-capable policy. Core developers can choose the policy in the [build instructions](development.md#core-rendering-policies).
 
 *Track display ›* opens a panel for the playing track:
 
@@ -48,4 +50,4 @@ The feedback correction also applies to eligible presets above their authored re
 
 ![Advanced settings panel and Diagnostics, below the track in the upper left](images/setup/advanced-settings.png)
 
-The tables describe the current source, including the Native option under evaluation; screenshots use an earlier isolated test installation. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+The tables describe the current source, including the optional Native mode; screenshots use an earlier isolated test installation. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.

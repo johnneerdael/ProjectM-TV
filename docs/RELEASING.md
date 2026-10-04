@@ -2,12 +2,12 @@
 
 ## Automatic publishing
 
-The **Android CI/CD** workflow tests and builds every push and PR. Each successfully tested merge to `main` publishes a stable GitHub Release with its signed APK, core AAR, public release notes and SHA-256 checksums, then triggers Milkbeat's core update. Routine PRs need no version bump or manual release command.
+The **Android CI/CD** workflow tests and builds every push and PR. Each successfully tested merge to `main` publishes a stable GitHub Release with its signed APK, capped and Native core AARs, public release notes and SHA-256 checksums, then triggers Milkbeat's core update. Routine PRs need no version bump or manual release command.
 
 | Trigger | Result |
 |---|---|
-| Feature push or PR | Release tooling tests, native/JVM tests, APK and core AAR artifacts with a `-ci.<run>` version suffix |
-| Successful merge/push to `main` | Stable APK/core AAR, GitHub Release, PR notes, current download details, checksums and Milkbeat dispatch |
+| Feature push or PR | Release tooling tests, native/JVM tests, APK and both core-policy AAR artifacts with a `-ci.<run>` version suffix |
+| Successful merge/push to `main` | Stable APK/capped and Native core AARs, GitHub Release, PR notes, current download details, checksums and Milkbeat dispatch |
 | Manual run on `main` | Publishes an unreleased commit or verifies an already complete release; the same commit keeps its version |
 
 Runs queue instead of canceling previous builds. Versions are tied to source history rather than workflow order: the first first-parent commit after `baseVersionCommit` maps to `baseVersionName`/`baseVersionCode`, and each later commit advances both. The 2.1 line started at **2.1.5 / code 37**; the current 2.2 baseline makes the next merge **2.2.0 / code 38**, then **2.2.1 / code 39**. Direct pushes containing several commits can leave version gaps; failed builds leave their version unpublished.
@@ -47,9 +47,19 @@ Signing still requires the configured release key; locally debug-signed builds c
 The Downloader code shown in README and the fixed APK URL serve the newest stable build:
 
 - [Latest APK](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV.apk)
-- [Latest core AAR](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV-core.aar)
+- [Latest capped core AAR](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV-core.aar) (canonical compatibility download)
+- [Latest Native core AAR](https://github.com/johnneerdael/ProjectM-TV/releases/latest/download/projectM-TV-core-native.aar) (explicit opt-in)
 
-Each release also attaches `projectM-TV-<version>.apk`, `projectM-TV-core-<version>.aar` and `checksums.txt`. The core is the `:core` module: projectM, native ARMv7/ARM64 libraries and presets, versioned together with the app.
+Each release attaches `projectM-TV-<version>.apk`, `projectM-TV-core-<version>.aar` (capped), `projectM-TV-core-native-<version>.aar` (Native) and `checksums.txt`, plus the fixed names above. Both cores contain the same public Java/JNI API, native ARMv7/ARM64 libraries and presets, and share the app version. Their rendering policies differ.
+
+| Core policy | Internal rendering | Native selection / diffusion |
+|---|---|---|
+| `capped` | At most 1330p even for oversized JNI requests; presentation is upscaled as needed | Neither |
+| `native` | Auto/numeric choices at most 1330p; explicit Native can use the detected panel height within memory limits | Both; diffusion also applies to eligible above-reference Auto/numeric rendering |
+
+Build with `-PprojectmCoreRenderingPolicy=capped` or `-PprojectmCoreRenderingPolicy=native`; the default is `native` so existing APK and Gradle tasks retain their Native-capable policy. The release workflow builds each policy separately and stages both results before publication. Local policy builds both write `core/build/outputs/aar/core-release.aar`, so copy the first result before building the second. The canonical published `projectM-TV-core[-<version>].aar` files must contain the capped AAR; never replace that compatibility alias with the Native artifact. Record checksums for every published filename and verify the staged policies before publishing.
+
+Native is an optional capability with known GPU, memory and picture limits. Publication of this research checkpoint is not universal fidelity or performance acceptance; see the [source-scoped validation](superpowers/evidence/0025-feedback-diffusion/final-merged-validation/README.md).
 
 The release APK is shrunk, optimized and obfuscated by R8, so Java stack traces from it show short class and method names. Each release also attaches `projectM-TV-<version>-mapping.txt` (CI builds keep it in the `mapping` artifact). F-Droid rebuilds the same source reproducibly, so the mapping fits its APK too. Restore the names with the SDK's `retrace` tool:
 
@@ -63,8 +73,8 @@ Publication creates or resumes a draft, uploads every artifact, then publishes i
 
 ## Milkbeat follows each core release
 
-[Milkbeat](https://github.com/johnneerdael/Milkbeat) follows the latest stable core. Its workflow pins the resolved version and names it in Milkbeat's release notes. ProjectM-TV sends a `projectm-core-release` dispatch after publication. A core already named by Milkbeat's latest release does not trigger a duplicate rebuild.
+[Milkbeat](https://github.com/johnneerdael/Milkbeat) follows the latest stable **capped** core through the unchanged canonical artifact name. The explicitly named Native AAR does not change that default. Its workflow pins the resolved version and names it in Milkbeat's release notes. ProjectM-TV sends a `projectm-core-release` dispatch after publication. A core already named by Milkbeat's latest release does not trigger a duplicate rebuild.
 
 `MILKBEAT_TOKEN` must be a fine-grained token with Contents read/write on `johnneerdael/Milkbeat`, stored as a ProjectM-TV Actions secret. It was configured on 2026-10-02. A missing token fails the update job visibly; rerun a failed update job after fixing its configuration.
 
-For an unreleased core, build `:core:assembleRelease`, copy the AAR to `<dir>/download/v<version>/projectM-TV-core-<version>.aar`, and build Milkbeat with `-PprojectmCoreRepo=<dir> -PprojectmCoreVersion=<version>`.
+For an unreleased Milkbeat-compatible core, build `./gradlew :core:assembleRelease -PprojectmCoreRenderingPolicy=capped`, copy the AAR to `<dir>/download/v<version>/projectM-TV-core-<version>.aar`, and build Milkbeat with `-PprojectmCoreRepo=<dir> -PprojectmCoreVersion=<version>`.

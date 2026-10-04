@@ -8,7 +8,7 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the current source; the Native resolution option is still under evaluation.
+**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the current source. The standard APK includes an optional Native resolution mode; the default published core library uses the capped rendering policy described below.
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's cover, artist and title in the upper left" width="100%">
@@ -122,7 +122,7 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 - **A preset change is only smooth when it was prepared.** The next preset, and the ones *Random* and *Previous* on the remote would pick, are prepared in the background, so a switch takes a few hundredths of a second. For 20 seconds after Android reports low memory, and while less than 15% of the memory is free, nothing is prepared; a switch then pauses the picture for up to about half a second.
 - **Blending two heavy presets is slow.** A blend renders both presets at once. With presets whose equations run for many points or shapes per frame, the CPU is the limit, and the frame rate drops for the length of the blend.
 - **Auto and numeric fixed heights stop at 1330p.** *Native* is a separate opt-in for the detected full panel height, offered only above 1330p when the memory limit allows it. It can show more detail, but uses more memory and can run slower. Feedback presets can change brightness, colour or pattern at higher resolution; the compensation under evaluation does not preserve every preset's look. Keep Auto for adaptive performance. Older saved 1440p/4K numeric settings remain capped rather than opting into Native; an unavailable saved Native choice uses Auto.
-- **Feedback compensation also applies below Native.** Eligible presets receive the correction above the authored reference size, including at 1330p in Auto or numeric fixed modes. Keeping the default resolution choice does not guarantee unchanged feedback patterns.
+- **The Native-capable core also applies feedback compensation below Native.** Eligible presets receive the correction above the authored reference size, including at 1330p in Auto or numeric fixed modes. Keeping Auto does not guarantee unchanged feedback patterns. The capped core omits this compensation and enforces a maximum internal render height of 1330p.
 - **After a low-memory report, *Auto* resolution stays lower for that session.**
 - projectM is a reimplementation of MilkDrop. Some presets look different from MilkDrop on Windows, or still render incorrectly.
 
@@ -206,6 +206,24 @@ adb install -r app/build/outputs/apk/release/app-release.apk
 Release builds on GitHub are signed with the release key; see [docs/RELEASING.md](docs/RELEASING.md). CI builds every push and publishes a new version after each successfully tested merge to `main`. Public release notes come from the PR’s `Release notes` section; CI adds the current Downloader code and download links.
 
 The engine is the `:core` module, which the open-source music streamer [Milkbeat](https://github.com/johnneerdael/Milkbeat) also uses.
+
+### Core rendering policies
+
+Two core AARs expose the same Java/JNI API with different rendering policies:
+
+| Policy | Rendering behavior | Published filenames |
+|---|---|---|
+| `capped` | Internal render height never exceeds 1330p, including oversized JNI surface requests; the result is upscaled for presentation. No Native choice or feedback diffusion. | `projectM-TV-core.aar`, `projectM-TV-core-<version>.aar` |
+| `native` | Auto and numeric choices retain the 1330p cap; explicit Native may use the full detected panel height when memory permits. Eligible above-reference warp reads receive feedback diffusion. | `projectM-TV-core-native.aar`, `projectM-TV-core-native-<version>.aar` |
+
+The canonical core download remains the capped artifact so Milkbeat keeps its capped behavior. Choose the explicitly named Native AAR to opt into that policy. Normal APK and Gradle builds default to `native`; the standard APK still starts in Auto at at most 1330p.
+
+```bash
+./gradlew :core:assembleRelease -PprojectmCoreRenderingPolicy=capped
+./gradlew :core:assembleRelease -PprojectmCoreRenderingPolicy=native
+```
+
+Each command writes `core/build/outputs/aar/core-release.aar`; save the first result before building the other policy. See [releasing](docs/RELEASING.md#downloads-and-core-library) for published artifact ownership and [validation evidence](docs/superpowers/evidence/0025-feedback-diffusion/final-merged-validation/README.md) for the research checkpoint. Native can cost more GPU work and memory, and feedback pictures can change. The checkpoint does not establish universal visual fidelity, a noise margin or a TV performance gain.
 
 ### projectM
 

@@ -14,7 +14,8 @@ import java.util.List;
  * frame rate is left to settle before the next decision.
  *
  * Auto and standard fixed heights stop at {@link #RENDER_HEIGHT_CAP}. Explicit Native uses the
- * physical panel height when the memory limit allows it. Memory pressure reported by Android
+ * physical panel height in a Native Core build when the memory limit allows it. A Capped Core
+ * build omits Native. Memory pressure reported by Android
  * lowers Auto's maximum for the rest of the session.
  *
  * All methods run on the UI thread.
@@ -108,14 +109,15 @@ public final class QualityController {
     }
 
     private static boolean nativeAvailable(DisplayInfo display, int memoryLimit) {
-        return display.physicalHeight > RENDER_HEIGHT_CAP
+        return RenderingPolicy.NATIVE_ENABLED && display.physicalHeight > RENDER_HEIGHT_CAP
                 && (memoryLimit <= 0 || memoryLimit >= display.physicalHeight);
     }
 
     /**
      * Levels available for manual selection in the menu (ascending heights): 720, 1080, 1440 and
      * 2160 up to the panel, {@link #RENDER_HEIGHT_CAP} and the memory limit, plus that maximum.
-     * Append {@link #NATIVE_HEIGHT} when the full panel height is above the cap and memory allows it.
+     * Append {@link #NATIVE_HEIGHT} when the Core policy enables Native, the full panel height is
+     * above the cap and memory allows it.
      */
     public static int[] manualHeights(DisplayInfo display, int memoryLimit) {
         int maxHeight = limit(display, memoryLimit);
