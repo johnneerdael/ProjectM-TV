@@ -283,7 +283,11 @@ elif [ -n "$LAUNCH_STATE" ] && [ "$LAUNCH_STATE" != COLD ]; then
 else
     case "$START_PROC" in
         *activity*) COLD_KIND="cold start: new process $COLD_PID for the activity" ;;
-        "") COLD_KIND="cold start: no app process before the start (ActivityManager start line not found)" ;;
+        "") if [ "$LAUNCH_STATE" = COLD ]; then
+                COLD_KIND="cold start: Android reports LaunchState COLD (ActivityManager start line not found)"
+            else
+                COLD_KIND="unverified: no app process before the start, but no ActivityManager start line or LaunchState shows that the activity started a new one"
+            fi ;;
         *) COLD_KIND="warm start: process $COLD_PID started for '$START_PROC' before the activity, so this is not a cold-start time" ;;
     esac
 fi
