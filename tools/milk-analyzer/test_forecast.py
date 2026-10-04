@@ -83,6 +83,14 @@ def test_warp_raster_setting_and_original_uv_reach_the_source_forecast():
     np.testing.assert_allclose(result['frames'][0]['feedback'][...,:2],np.clip(expected,0,1),atol=1e-7)
 
 
+def test_explicit_main_sampler_profile_reaches_source_forecast_and_history():
+    source=native(BASE+'warp_1=`shader_body {ret=GetPixel(uv);}\ncomp_1=`shader_body {ret=GetPixel(uv);}\n')
+    settings=domain(main_sampling_profile='swiftshader-unorm8-fixed16-v1');settings['quantize']=True
+    result=predict(source,domain=settings,audio=audio(1))
+    assert result['frames'][0]['history']['main_sampling_profile']=='swiftshader-unorm8-fixed16-v1'
+    np.testing.assert_allclose(result['frames'][0]['display'][...,:3],np.broadcast_to([.2,.4,.6],(32,32,3)),atol=1/255)
+
+
 def test_shapes_are_drawn_between_warp_and_composite_and_become_feedback():
     source = native(BASE + 'warp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=0;}\n'
                     'shapecode_0_enabled=1\nshapecode_0_x=.25\nshapecode_0_y=.75\n'

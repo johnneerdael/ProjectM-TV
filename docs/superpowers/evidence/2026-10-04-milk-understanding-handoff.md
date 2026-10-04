@@ -2,6 +2,14 @@
 
 Snapshot: 2026-10-04. Interpreter worktree: `.worktrees/preset-genre-analyzer`, branch `feat/preset-audience-scoring`. This is a research index, not a claim of complete language coverage or visual accuracy.
 
+Current focus is only the known blocked set. A fresh recheck of all 315 entries
+after unused pure initializer analysis leaves 300 blockers (15 cleared). The
+largest remaining families are parsing82, array layout56, sampler context51,
+same-name binding49 and uninitialized live values45; counts overlap. See
+`fixtures/focused-blockers-300-2026-10-04.json` and
+`2026-10-04-dead-initializer-learning.md`. Earlier renderer-precision work is a
+checkpoint and is not the priority while resolving this set.
+
 Latest targeted recheck: all 371 previously blocked presets were re-read with the
 current reader/interpreter. 315 retain source blockers; 56 now pass these checks.
 This recheck does not search the other 9,235 files for new regressions. Its count
@@ -57,6 +65,9 @@ These are explicit interpreter limitations; corpus prevalence has not yet been m
 - Automatic shader random lifecycle assembly, including actual seed, preset loading, fallback instances, other consumers and texture selection. Explicit Android/bionic replay now supports reseeding while preserving shader state. Two CPU-observed published-core lifecycles reproduce 60 random-colour frames exactly; background reseeding occurs during rendering. Whole-event replay still needs to detect or model mid-event interleaving. Lexical shader random references occur in 3,205 presets (overlapping families, not verified live dependencies). See `2026-10-04-core-random-lifecycle-learning.md`.
 - Remaining motion-vector/warp feedback raster coverage and precision. Explicit warp and composite subpixel grids now preserve actual original-UV interpolation. Separate UV controls pass, while a fresh feedback control still misses by eight RGB8 bytes; see `2026-10-04-warp-raster-learning.md`.
 - Accumulated warp/blur/composite feedback error over time. Correct individual expressions do not prove correct evolving appearance.
+  The recorded emulator's main UNORM8 fixed sampling profile now reproduces two
+  fresh motion-feedback controls exactly across 60 frames; broader presets,
+  blur/float/external formats and GPU equivalence remain separate obligations.
 - External texture availability, loading/rescaling and native failure/fallback behaviour.
 - Calibration of smooth motion, flashing, colour diversity and activity descriptors against actual behaviour. This is separate from structural code coverage.
 

@@ -86,7 +86,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     pipeline = SourcePipeline.from_source(source, profile=domain['profile'], compatibility=compatibility,
         initial_feedback=initial, warp_reads_blur=warp_reads_blur, blur_levels=domain['blur_levels'],
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
-        composite_subpixel_bits=domain.get('composite_subpixel_bits'))
+        composite_subpixel_bits=domain.get('composite_subpixel_bits'),
+        main_sampling_profile=domain.get('main_sampling_profile','portable'))
     if materials is not None and noise_bank is not None:
         if materials.noise_bank is None or digest(materials.noise_bank.manifest)!=digest(noise_bank.manifest):
             raise ValueError('combine procedural noise into the declared material bank')

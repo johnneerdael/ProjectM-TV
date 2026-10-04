@@ -708,6 +708,14 @@ All 39 targeted rs sections lower completely; two frozen native controls match
 60 frames exactly. See `fixtures/zero-storage-source-proof-2026-10-04.json` and
 `fixtures/zero-storage-native-proof-2026-10-04.json`.
 
+Unused scalar/vector local initializers may be excluded from entry-point
+evaluation only when their expressions are recognized pure and the variable is
+unreferenced in the remaining scope, including later declarations on the same
+statement. Helpers, textures, indexed reads, aggregate child effects, arrays,
+matrices, loop initialization and implicit outputs remain protected. No value is
+invented for unwritten storage. Rechecking the known 315 blocked presets clears
+15 and leaves 300. See `fixtures/focused-blockers-300-2026-10-04.json`.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed
@@ -715,6 +723,15 @@ ideal pixel-centre coordinates. The portable default is unchanged. A separate
 original-UV transfer control matches 30 native frames within one RGB8 byte;
 a fresh motion-feedback control still fails at eight bytes and remains recorded
 as unresolved. See `fixtures/warp-raster-proof-2026-10-04.json`.
+
+The explicit `main_sampling_profile='swiftshader-unorm8-fixed16-v1'` now models
+the recorded renderer's fixed-point UNORM8 addressing/filter arithmetic for main
+feedback. It requires quantized storage and does not change float motion maps,
+blur/external sampling or the portable default. Twenty RGBA32F sampler readbacks
+match exactly as float32; two new frozen horizontal/vertical motion-feedback
+controls match all 60 RGB8 frames exactly with raster settings supplied. Earlier
+failed controls remain preserved, and other GPUs/formats are not assumed equal.
+See `fixtures/fixed-sampler-feedback-proof-2026-10-04.json`.
 
 Sequenced helper global writes now survive calls, parameter/local shadowing,
 branches and loops. Transitive helper writes become loop-carried state; unsafe

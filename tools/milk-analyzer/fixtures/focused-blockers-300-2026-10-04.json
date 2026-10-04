@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "presets": 315,
+  "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Known source-audit parsing/lowering gaps; behavioral obligations are not yet enumerated.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 300,
+  "verified_behavior_percent": null,
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 82,
+      "affected_units": 82,
+      "affected_source_tokens": 23352,
+      "sole_known_gap_presets": 79,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 1,
+        "same-name initializer binding differs in emitted GLSL": 2
+      }
+    },
+    {
+      "gap": "native GLSL array initializer layout mismatch",
+      "affected_presets": 56,
+      "affected_units": 56,
+      "affected_source_tokens": 21139,
+      "sole_known_gap_presets": 55,
+      "overlap_presets": {
+        "target parse unavailable": 1
+      }
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 51
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 51
+      }
+    },
+    {
+      "gap": "same-name initializer binding differs in emitted GLSL",
+      "affected_presets": 49,
+      "affected_units": 49,
+      "affected_source_tokens": 15360,
+      "sole_known_gap_presets": 47,
+      "overlap_presets": {
+        "target parse unavailable": 2
+      }
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 45,
+      "affected_units": 45,
+      "affected_source_tokens": 21045,
+      "sole_known_gap_presets": 42,
+      "overlap_presets": {
+        "arithmetic/comparison side-effect order not established": 3
+      }
+    },
+    {
+      "gap": "source outside supported numbered loader",
+      "affected_presets": 20,
+      "affected_units": 25,
+      "affected_source_tokens": 952,
+      "sole_known_gap_presets": 20,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 3
+      }
+    }
+  ],
+  "previous_known_blockers": 315,
+  "cleared": [
+    {
+      "preset": "207 mrt get out to where the shooting's going on.milk",
+      "preset_sha256": "4310d8305be429b3a00ecbe04c0da900314b159bcbecd5056c1e0b419da84c8c"
+    },
+    {
+      "preset": "Martin - Pixies Party (Hakan mash-up) 6-11.milk",
+      "preset_sha256": "e6e8db0a5c217caed94cc023560302d34fc43195518a6e78376f7c2da3f94f67"
+    },
+    {
+      "preset": "Martin - Pixies Party (Hakan mash-up) 6-9.milk",
+      "preset_sha256": "2e4602d0119435e4bab47bca780db081cbef06fd7de678a3faf8c919a7771ce2"
+    },
+    {
+      "preset": "Martin - Pixies Party (Hakan mash-up) 8-7.milk",
+      "preset_sha256": "68e71b4f74be03315b6d388e0a1c97ac6d24b7f268dc97f5f4ed529847d2cb14"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence IIy (by hakanh mash-up).milk",
+      "preset_sha256": "d8ca096ecafead7adec21c0d3c0fb9ba3dbafbfe1986d9b9484b29137c4e90e4"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence IIy2 (by hakanh mash-up).milk",
+      "preset_sha256": "7cc7cf9cc911fddd27fbce68fba5bf09954d1ad00484bc91737991a0b1fd9661"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence IIy4 (by hakanh mash-up).milk",
+      "preset_sha256": "92efb345226139042a6b043a21b45a0015e232153e4bc69c5e46d56e9edfdffe"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence IIz (by hakanh mash-up).milk",
+      "preset_sha256": "e4c4b45dd8d9f22dbc388794fe5e176fac61ff1f75459b266326e5579dd7a124"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence IIz2 (by hakanh mash-up).milk",
+      "preset_sha256": "c0df16374834840b6c7384cf263b319fe420be01d85effdbbf51638704670405"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence IIz3 (by hakanh mash-up).milk",
+      "preset_sha256": "bc0691261c8f82327a1adc4f2d9ea72d2d4e3104c3183f47687a9097bacf746a"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence IIz5 (by hakanh mash-up).milk",
+      "preset_sha256": "653965b564d53daf412f86b57844185f977fcb49c050ceb30376dfb46e9c01a3"
+    },
+    {
+      "preset": "Martin - QBikal - Surface Turbulence nz+ unlinked error.milk",
+      "preset_sha256": "6eb033be9e0c8ae757a4be09ee67dda9e52a9e9aea117d6cab83cefc241d9e50"
+    },
+    {
+      "preset": "amandio c - feeling well 3 more menace ruine equinatro.milk",
+      "preset_sha256": "8c564731fca20b32f46732e802db45dde71742ef5219d9c6a2650533b1c33b51"
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - can't even remember her blood mist eminant mrt.milk",
+      "preset_sha256": "8adb4d93f97b81a97450020082e448cb7e3b777906f32547c18001c5628271bd"
+    },
+    {
+      "preset": "suksma - dumb - zhuGan nz rupairt.milk",
+      "preset_sha256": "3bea0275a8085f65d54e1413bbea50c29220227e43cb66205a978e07163bdcae"
+    }
+  ],
+  "lowering_sha256": "6adce37143bec7790a45f2d5811ffcaee3dca0dcc93c9534770e710e4b0d6ff9",
+  "whole_preset_accuracy_verified": false
+}

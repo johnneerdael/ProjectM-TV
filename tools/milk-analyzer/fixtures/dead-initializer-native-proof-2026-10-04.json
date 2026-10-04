@@ -1,0 +1,75 @@
+{
+  "basis": "Blocker-relevant unused pure initializer and preserved aggregate helper effects",
+  "rows": [
+    {
+      "fixture": "blocked-dead-back",
+      "prediction": {
+        "source_sha256": "a84b65f7249e82d72b4d535366713b6df92ce0270aceeb13ab080d3d9b7fb3cc",
+        "expected_rgb": [
+          0.4,
+          0.4,
+          0.4
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen blocker-relevant unused initializer and preserved helper effects prediction"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "blocked-dead-back.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "fc80ea0da1f502b7553388d156bd2fa8bc396833f8b6576cf74699f0e36fa314"
+    },
+    {
+      "fixture": "blocked-live-helper",
+      "prediction": {
+        "source_sha256": "38c72b3ffeeebe3b432079bdbb3d3dbf63b7e89a27fcba44c2dea13938bebbec",
+        "expected_rgb": [
+          0.4,
+          0.4,
+          0.4
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen blocker-relevant unused initializer and preserved helper effects prediction"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "blocked-live-helper.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "fc80ea0da1f502b7553388d156bd2fa8bc396833f8b6576cf74699f0e36fa314"
+    }
+  ],
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "implementation_sha256": "6adce37143bec7790a45f2d5811ffcaee3dca0dcc93c9534770e710e4b0d6ff9",
+  "whole_preset_accuracy_verified": false
+}

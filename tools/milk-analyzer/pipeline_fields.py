@@ -26,7 +26,7 @@ class PipelineResult:
 
 class SourcePipeline:
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable'):
         if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
             raise ValueError('unsupported shader coordinate profile')
         field=np.asarray(initial_feedback,dtype=np.float32)
@@ -42,6 +42,10 @@ class SourcePipeline:
         self.feedback=field.copy();self.frame=0;self.warp_reads_blur=warp_reads_blur
         self.motion_uv=None;self.motion_uv_frame=None
         self.blur_levels=blur_levels;self.quantize=quantize
+        from unorm_sampler import PROFILE
+        if main_sampling_profile not in ('portable',PROFILE) or (main_sampling_profile==PROFILE and not quantize):
+            raise ValueError('supported main sampling profile with actual unorm storage required')
+        self.main_sampling_profile=main_sampling_profile
         self.height,self.width=field.shape[:2]
         x,y=np.meshgrid((np.arange(self.width,dtype=np.float32)+.5)/self.width,
                         (np.arange(self.height,dtype=np.float32)+.5)/self.height)
@@ -87,6 +91,11 @@ class SourcePipeline:
     def _rgba(self,rgb):
         if rgb.shape!=(self.height,self.width,3):raise UnresolvedMath('shader ret must be a viewport-sized RGB field')
         return self._store(np.concatenate((rgb,np.ones(rgb.shape[:2]+(1,),dtype=np.float32)),axis=-1))
+
+    def _sample_main(self,field,uv,*,wrap,linear):
+        from unorm_sampler import PROFILE,sample_unorm8
+        if self.main_sampling_profile==PROFILE:return sample_unorm8(field,uv,wrap=wrap,linear=linear,origin='top')
+        return sample2d(field,uv,wrap=wrap,linear=linear,origin='top')
 
     def step(self,*,warp_uv,uniforms:dict,frame_wrap:float,stage_uniforms=None,minimum=(0,0,0),maximum=(1,1,1),
              edge_darken:float=0,warp_polar=None,composite_polar=None,draw=None,draw_scene=None,
@@ -157,7 +166,7 @@ class SourcePipeline:
                 if texture=='main':
                     if policy.get('wrap') is None or policy.get('linear') is None:
                         raise UnresolvedMath('main sampler policy is unresolved')
-                    return sample2d(main,sample_uv,wrap=policy['wrap'],linear=policy['linear'],origin='top')
+                    return self._sample_main(main,sample_uv,wrap=policy['wrap'],linear=policy['linear'])
                 if texture in {'blur1','blur2','blur3'}:
                     level=int(texture[-1])
                     if level not in blur:raise UnresolvedMath('required blur level was not supplied')
@@ -178,7 +187,7 @@ class SourcePipeline:
         warp_coordinates=np.concatenate((uv,original),axis=-1)
         if self.warp_tree is None:
             if diffuse is None:raise UnresolvedMath('fixed warp requires live decay')
-            warped=self._store(sample2d(previous,uv,wrap=frame_wrap>.0001,linear=True,origin='top')*diffuse)
+            warped=self._store(self._sample_main(previous,uv,wrap=frame_wrap>.0001,linear=True)*diffuse)
         else:warped=self._rgba(stage(self.warp_tree,'warp',previous,old_blur,warp_coordinates,warp_polar))
         pending_motion_uv=motion_uv_surface(pending_motion_uv) if write_motion else None
         new_blur=update_blur() if self.warp_reads_blur else old_blur
@@ -196,7 +205,7 @@ class SourcePipeline:
             displayed=legacy_display(drawn,values=self.source_values,time=time,
                                      hue_offsets=hue_offsets,quantize=self.quantize)
         elif self.composite_tree is None:
-            displayed=self._rgba(sample2d(drawn,composite_uv,wrap=True,linear=True,origin='top')[...,:3])
+            displayed=self._rgba(self._sample_main(drawn,composite_uv,wrap=True,linear=True)[...,:3])
         else:displayed=self._rgba(stage(self.composite_tree,'composite',drawn,new_blur,composite_uv,composite_polar,composite.get('diffuse')))
         history={'main_source_frame':self.frame-1,'warp_blur_source_frame':warp_blur_frame,
                  'composite_main_frame':self.frame,'composite_blur_source_frame':self.frame-1,
@@ -204,6 +213,7 @@ class SourcePipeline:
                  'warp_kind':'fixed_warp' if self.warp_tree is None else 'custom_warp',
                  'composite_kind':self.composite_kind}
         history['motion_vector_source_frame']=motion_source_frame
+        history['main_sampling_profile']=self.main_sampling_profile
         history['composite_subpixel_bits']=self.composite_mesh.get('raster_subpixel_bits') if self.composite_kind!='legacy_composite' else None
         result=PipelineResult(self.frame,warped.copy(),drawn.copy(),displayed,history)
         # Commit only after both shader stages succeed; failed evaluation must

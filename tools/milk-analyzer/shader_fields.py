@@ -657,7 +657,7 @@ class ShaderFields:
         before=dict(self.environment)
         locals_before=set(self.local_names)
         declared={d['name'] for s in statement.get('initialization',[]) if s['kind']=='declarations' for d in s['values']}
-        self.statements(statement.get('initialization',[]))
+        self.statements(statement.get('initialization',[]),allow_dead_initializers=False)
         if statement.get('initial_expression') is not None:self.expression(statement['initial_expression'])
         initial=dict(self.environment);globals_initial=dict(self.globals)
         writes=set();global_writes=set()
@@ -712,14 +712,34 @@ class ShaderFields:
             else:self.environment.pop(name,None)
         self.local_names=locals_before
 
-    def statements(self,statements:list[dict]):
-        for statement in statements:
+    def pure_initializer(self,node):
+        """Recognize scalar/vector computations with no calls or indexed effects."""
+        if node is None:return False
+        if not re.fullmatch(r'(float|int|uint|bool)[1-4]?',node.get('type',{}).get('name','float')):return False
+        kind=node.get('kind')
+        if kind in {'constant','variable'}:return not node.get('type',{}).get('array')
+        if kind=='member':return self.pure_initializer(node['object'])
+        if kind=='unary':return node['operator'] in {0,1,2} and self.pure_initializer(node['operand'])
+        if kind=='binary':return 0<=node['operator']<16 and all(self.pure_initializer(node[k]) for k in ('left','right'))
+        if kind in {'construct','aggregate'}:
+            return all(self.pure_initializer(a) for a in node['elements' if kind=='aggregate' else 'args'])
+        if kind=='call':return (node['function'] in PURE and node['function'] not in self.functions and
+            not self.has_shared_effects(node) and all(self.pure_initializer(a) for a in node.get('args',[])))
+        return False
+
+    def statements(self,statements:list[dict],*,allow_dead_initializers=True):
+        for statement_index,statement in enumerate(statements):
             kind=statement["kind"]
             if kind=="expression":self.expression(statement["value"])
             elif kind=="declarations":
-                for declaration in statement["values"]:
+                for declaration_index,declaration in enumerate(statement["values"]):
                     dtype=declaration['type']['name']
-                    if self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
+                    remaining=[{'kind':'declarations','values':statement['values'][declaration_index+1:]}]+statements[statement_index+1:]
+                    dead=(allow_dead_initializers and not self.call_stack and declaration['name'] not in {'ret','_return_value','_mv_tex_coords'} and
+                          declaration['name'] not in self._referenced_names(remaining) and
+                          not declaration['type'].get('array') and self.pure_initializer(declaration.get('value')))
+                    if dead:value=Field('uninitialized',dtype=dtype,detail={'name':declaration['name'],'dead_initializer':True})
+                    elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
                     elif declaration['type'].get('array'):value=self.array_declaration(declaration)
                     elif declaration['name'] in self._referenced_names(declaration['value']):
                         value=self.unsupported('same-name initializer binding differs in emitted GLSL',dtype=dtype)
