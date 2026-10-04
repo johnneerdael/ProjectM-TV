@@ -17,7 +17,7 @@ Native appears only when the panel height exceeds 1330p and **Memory limit** per
 
 In the Native-capable core, the feedback correction also applies to eligible presets above their authored reference size in Auto and numeric fixed modes, including 1330p. It can change their patterns even when the resolution setting stays the same.
 
-A build using the **capped core** has no Native choice or feedback diffusion. It keeps internal rendering at or below 1330p even when its host requests a larger surface, and upscales the result for presentation. The canonical core AAR used by Milkbeat selects this capped policy; the standard ProjectM TV APK uses the Native-capable policy. Core developers can choose the policy in the [build instructions](development.md#core-rendering-policies).
+A build using the **capped core** has no Native choice or feedback diffusion. It keeps internal rendering at or below 1330p even when its host requests a larger surface, and upscales the result for presentation. If that render target is unavailable, the core skips the frame instead of exceeding the cap. The canonical core AAR used by Milkbeat selects this capped policy; the standard ProjectM TV APK uses the Native-capable policy. Core developers can choose the policy in the [build instructions](development.md#core-rendering-policies).
 
 *Track display ›* opens a panel for the playing track:
 

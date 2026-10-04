@@ -27,7 +27,7 @@ The core publishes two AARs with the same Java/JNI interface. Select a policy at
 
 Both commands produce `core/build/outputs/aar/core-release.aar`; copy the first AAR before building the second policy. Normal Gradle and APK builds default to `native`.
 
-- **Capped:** enforces a maximum internal render height of 1330p in the core, including direct JNI surface requests. Larger destination surfaces display the upscaled render. The Native choice and feedback diffusion are absent.
+- **Capped:** enforces a maximum internal render height of 1330p in the core, including direct JNI surface requests. Larger destination surfaces display the upscaled render. The Native choice and feedback diffusion are absent. If the capped intermediate framebuffer cannot be created, the core skips the frame rather than breaking the cap.
 - **Native:** keeps Auto and numeric fixed choices capped at 1330p, with a separate full-panel Native option when panel and memory limits permit it. Eligible above-reference rendering uses feedback diffusion, including Auto at 1330p. Higher resolution can cost more GPU work and memory or change feedback pictures.
 
 The canonical `projectM-TV-core.aar` and versioned `projectM-TV-core-<version>.aar` downloads use **capped**, preserving Milkbeat's default core policy. The explicit `projectM-TV-core-native.aar` and `projectM-TV-core-native-<version>.aar` downloads use **native**. The standard ProjectM TV APK uses the Native-capable core and defaults to Auto. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for publication and checksums.
