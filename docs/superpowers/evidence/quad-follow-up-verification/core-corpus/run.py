@@ -145,6 +145,20 @@ def pull_private(serial, relative, destination):
     archive_path.unlink()
 
 
+def cleanup_verified_job(serial, internal, external, row):
+    warnings = []
+    for label, arguments in (
+        ("internal", ("shell", "run-as", PACKAGE, "rm", "-rf", internal)),
+        ("external", ("shell", "rm", "-rf", external)),
+    ):
+        try:
+            adb(serial, *arguments)
+        except Exception as error:
+            warnings.append(f"{label}: {type(error).__name__}: {error}")
+    if warnings:
+        row["cleanup_warning"] = warnings
+
+
 def safe_member(directory, relative):
     path = directory / relative
     if not path.resolve().is_relative_to(directory.resolve()) or not path.is_file():
@@ -509,8 +523,7 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
             row.update(status="failed", error="instrumentation exited unsuccessfully despite result")
         adb(serial, "shell", "am", "force-stop", PACKAGE)
         # Host has pulled and verified all output; remove only owned remote scratch.
-        adb(serial, "shell", "run-as", PACKAGE, "rm", "-rf", relative)
-        adb(serial, "shell", "run-as", PACKAGE, "rm", "-rf", LEGACY_REMOTE + "/" + job["job_id"])
+        cleanup_verified_job(serial, relative, LEGACY_REMOTE + "/" + job["job_id"], row)
     except subprocess.TimeoutExpired as error:
         row.update(status="timeout", error="instrumentation/ADB job timeout")
         captured = (error.output or b"") + (error.stderr or b"")

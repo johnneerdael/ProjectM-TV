@@ -166,6 +166,15 @@ class HostTests(unittest.TestCase):
         self.result.pop("core_sha256")
         self.assertEqual(run.validate_result(self.job,self.result,[],self.work),"failed")
 
+    def test_verified_success_survives_cleanup_failure_with_warning(self):
+        from unittest.mock import patch
+        result={"status":"success","native_verified":True}
+        with patch.object(run,"adb",side_effect=RuntimeError("owned remote cleanup denied")):
+            run.cleanup_verified_job("192.168.51.53:5555","files/jobs/"+"a"*64,"/sdcard/Android/data/"+run.PACKAGE+"/files/jobs/"+"a"*64,result)
+        self.assertEqual(result["status"],"success")
+        self.assertTrue(result["native_verified"])
+        self.assertEqual(len(result["cleanup_warning"]),2)
+
     def test_other_device_is_rejected(self):
         with self.assertRaises(ValueError):run.validate_device("192.168.51.36:5555")
     def test_allowed_ip_serials_are_accepted(self):
