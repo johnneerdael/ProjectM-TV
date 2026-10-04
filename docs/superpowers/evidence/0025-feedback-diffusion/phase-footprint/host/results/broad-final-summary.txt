@@ -1,0 +1,30 @@
+presets 68
+c1280     mean MAE 0.0459 median 0.0181
+v0_2160   mean MAE 0.0578 median 0.0229
+v1_2160   mean MAE 0.0413 median 0.0150
+fp1_2160  mean MAE 0.0351 median 0.0125
+fp2_2160  mean MAE 0.0336 median 0.0125
+v1_1330   mean MAE 0.0399 median 0.0150
+fp1_1330  mean MAE 0.0350 median 0.0116
+fp2_1330  mean MAE 0.0316 median 0.0116
+closer/within 5%/farther:
+  fp2_2160 vs v1_2160 (34, 30, 4)
+  fp2_2160 vs v0_2160 (44, 22, 2)
+  fp2_1330 vs v1_1330 (30, 34, 4)
+  fp2_2160 vs fp1_2160 (2, 66, 0)
+  fp2_1330 vs fp1_1330 (9, 57, 2)
+within classic-1280 MAE (+5%): fp2_2160 55 v1_2160 47
+worst fp2/v1 at 2160:
+   Zylot & Shifter - Tartan (Silent Heaven Mix).milk       v0 0.0104 v1 0.0087 fp2 0.0108 c1280 0.0049
+   bdrv + al - dude's starpulse vector - duck farm plus ma v0 0.0240 v1 0.0122 fp2 0.0137 c1280 0.0108
+   $$$ Royal - Mashup (123).milk                           v0 0.0092 v1 0.0073 fp2 0.0081 c1280 0.0092
+   Stahlregen + Geiss - Old school, baby! (Flower V2)_1 -  v0 0.0217 v1 0.0200 fp2 0.0217 c1280 0.0192
+   Mig_Oscilloscope022 b.milk                              v0 0.0004 v1 0.0002 fp2 0.0002 c1280 0.0002
+   MilkTop HDFX Presets  Ft Aderrasi,AdamFX,RovaStar,Shado v0 0.0719 v1 0.0700 fp2 0.0719 c1280 0.0716
+worst fp2/v1 at 1330:
+   $$$ Royal - Mashup (123).milk                           v1 0.0073 fp2 0.0083
+   Zylot & Shifter - Tartan (Silent Heaven Mix).milk       v1 0.0085 fp2 0.0095
+   Mig_Oscilloscope022 b.milk                              v1 0.0002 fp2 0.0002
+   Krash and Rovastar - Rainbow Orb 2 Peacock (Sumpkin Twe v1 0.0017 fp2 0.0018
+   MilkTop HDFX Presets  Ft Aderrasi,AdamFX,RovaStar,Shado v1 0.0674 fp2 0.0706
+   143.milk                                                v1 0.0075 fp2 0.0077

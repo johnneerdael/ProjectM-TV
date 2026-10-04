@@ -1,0 +1,23 @@
+{
+ "preset": "Geiss - Motion Blur.milk",
+ "classic": {
+  "luma": 0.0,
+  "contrast": 0.0
+ },
+ "p2_2160": {
+  "luma": 0.0,
+  "luma_ratio": null,
+  "mae": 0.0,
+  "luma_abs_err": 0.0,
+  "contrast": 0.0,
+  "digest": 0.0
+ },
+ "p2_1330": {
+  "luma": 0.0,
+  "luma_ratio": null,
+  "mae": 0.0,
+  "luma_abs_err": 0.0,
+  "contrast": 0.0,
+  "digest": 0.0
+ }
+}

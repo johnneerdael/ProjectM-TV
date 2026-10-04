@@ -1,0 +1,23 @@
+{
+ "preset": "Stahlregen & Flexi + Geiss + Martin + Rovastar + Telek - DiskWasher (Gentle RMX).milk",
+ "classic": {
+  "luma": 0.5526667237281799,
+  "contrast": 0.3607202172279358
+ },
+ "p2_2160": {
+  "luma": 0.5665181279182434,
+  "luma_ratio": 1.0250628517972362,
+  "mae": 0.07130297273397446,
+  "luma_abs_err": 0.013851404190063477,
+  "contrast": 0.35605257749557495,
+  "digest": 6294.9189453125
+ },
+ "p2_1330": {
+  "luma": 0.5677003264427185,
+  "luma_ratio": 1.027201932139364,
+  "mae": 0.06658852845430374,
+  "luma_abs_err": 0.015033602714538574,
+  "contrast": 0.3575479984283447,
+  "digest": 6338.7138671875
+ }
+}

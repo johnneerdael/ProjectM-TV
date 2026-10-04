@@ -1,0 +1,23 @@
+{
+ "preset": "TonyMilkdrop - Nuclear [Flexi - why even bother + alien complex] --- Isosceles edit1.milk",
+ "classic": {
+  "luma": 0.4520569443702698,
+  "contrast": 0.29569923877716064
+ },
+ "p2_2160": {
+  "luma": 0.45227715373039246,
+  "luma_ratio": 1.0004871274799891,
+  "mae": 0.14865800738334656,
+  "luma_abs_err": 0.00022020936012268066,
+  "contrast": 0.29488056898117065,
+  "digest": 5314.05810546875
+ },
+ "p2_1330": {
+  "luma": 0.4468926191329956,
+  "luma_ratio": 0.9885759409260525,
+  "mae": 0.1721895933151245,
+  "luma_abs_err": 0.00516432523727417,
+  "contrast": 0.2948686480522156,
+  "digest": 5224.09033203125
+ }
+}

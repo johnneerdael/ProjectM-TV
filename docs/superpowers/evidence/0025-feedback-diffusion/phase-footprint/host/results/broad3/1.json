@@ -1,0 +1,23 @@
+{
+ "preset": "MilkTop HDFX Presets  Ft Aderrasi,AdamFX,RovaStar,ShadowHarlequin,Martin n Flexi - BitStorm AftermathFX D.milk",
+ "classic": {
+  "luma": 0.2502437233924866,
+  "contrast": 0.24371635913848877
+ },
+ "p2_2160": {
+  "luma": 0.24677759408950806,
+  "luma_ratio": 0.9861489860525205,
+  "mae": 0.071942999958992,
+  "luma_abs_err": 0.0034661293029785156,
+  "contrast": 0.22327172756195068,
+  "digest": 3864.90185546875
+ },
+ "p2_1330": {
+  "luma": 0.24718838930130005,
+  "luma_ratio": 0.9877905665334331,
+  "mae": 0.07062140107154846,
+  "luma_abs_err": 0.0030553340911865234,
+  "contrast": 0.22863709926605225,
+  "digest": 3857.62744140625
+ }
+}

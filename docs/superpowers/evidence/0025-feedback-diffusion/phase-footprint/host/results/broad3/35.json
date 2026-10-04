@@ -1,0 +1,23 @@
+{
+ "preset": "MegalomaGreg - Ambitions [Flexi's mix 33 highest grade pixel fucker] [remix 07 washing away all the neon paint] --- Isosceles edit.milk",
+ "classic": {
+  "luma": 0.10375535488128662,
+  "contrast": 0.17440840601921082
+ },
+ "p2_2160": {
+  "luma": 0.10513925552368164,
+  "luma_ratio": 1.0133381129482757,
+  "mae": 0.045855920761823654,
+  "luma_abs_err": 0.0013839006423950195,
+  "contrast": 0.17423570156097412,
+  "digest": 1341.958740234375
+ },
+ "p2_1330": {
+  "luma": 0.10327588021755219,
+  "luma_ratio": 0.995378795973634,
+  "mae": 0.04666106775403023,
+  "luma_abs_err": 0.00047947466373443604,
+  "contrast": 0.1733694076538086,
+  "digest": 1294.297119140625
+ }
+}

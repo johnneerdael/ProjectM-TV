@@ -1,0 +1,39 @@
+{
+ "preset": "Geiss - Motion Blur.milk",
+ "classic": {
+  "luma": 0.0,
+  "contrast": 0.0
+ },
+ "c1280": {
+  "luma": 0.0002651677350513637,
+  "luma_ratio": null,
+  "mae": 0.00041575374780222774,
+  "luma_abs_err": 0.0002651677350513637,
+  "contrast": 0.0005975799285806715,
+  "digest": 5.250004768371582
+ },
+ "v0": {
+  "luma": 0.002255336381494999,
+  "luma_ratio": null,
+  "mae": 0.0030654941219836473,
+  "luma_abs_err": 0.002255336381494999,
+  "contrast": 0.0026854723691940308,
+  "digest": 39.8320198059082
+ },
+ "v1": {
+  "luma": 0.0,
+  "luma_ratio": null,
+  "mae": 0.0,
+  "luma_abs_err": 0.0,
+  "contrast": 0.0,
+  "digest": 0.0
+ },
+ "emuc": {
+  "luma": 0.0,
+  "luma_ratio": null,
+  "mae": 0.0,
+  "luma_abs_err": 0.0,
+  "contrast": 0.0,
+  "digest": 0.0
+ }
+}

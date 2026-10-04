@@ -1,0 +1,279 @@
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Border.cpp engine/src/libprojectM/MilkdropPreset/Border.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Border.cpp	2026-07-14 13:51:03
++++ engine/src/libprojectM/MilkdropPreset/Border.cpp	2026-10-04 22:16:18
+@@ -34,6 +34,8 @@
+     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ 
+     m_presetState.untexturedShader.Bind();
++
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+     m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", 1.0f);
+ 
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/CustomShape.cpp engine/src/libprojectM/MilkdropPreset/CustomShape.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/CustomShape.cpp	2026-10-04 21:34:12
++++ engine/src/libprojectM/MilkdropPreset/CustomShape.cpp	2026-10-04 22:16:18
+@@ -153,6 +153,8 @@
+ #endif
+ 
+     m_presetState.untexturedShader.Bind();
++
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+     m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", 1.0f);
+     m_texturedShaderReady = false;
+@@ -381,6 +383,7 @@
+         {
+             // Untextured (creates a color gradient: center=r/g/b/a to border=r2/b2/g2/a2)
+             m_presetState.untexturedShader.Bind();
++            m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+             glBindVertexArray(m_vaoIdUntextured);
+             glDrawArrays(GL_TRIANGLE_FAN, draw.fillFirst, draw.sides + 2);
+         }
+@@ -398,6 +401,7 @@
+         else if (draw.borderIterations > 0)
+         {
+             m_presetState.untexturedShader.Bind();
++            m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+             glBindVertexArray(m_vaoIdUntextured);
+             for (int iteration = 0; iteration < draw.borderIterations; iteration++)
+             {
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/CustomWaveform.cpp engine/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/CustomWaveform.cpp	2026-10-04 21:34:12
++++ engine/src/libprojectM/MilkdropPreset/CustomWaveform.cpp	2026-10-04 22:16:18
+@@ -259,8 +259,11 @@
+     }
+ 
+     m_presetState.untexturedShader.Bind();
++
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+     m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", scaledDots ? dot.size : (m_drawThick ? 2.0f : 1.0f));
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {scaledDots ? dot.size : 0.0f, scaledDots ? dot.clipHalf : 0.0f});
+     const ScopedProgramPointSize programPointSize(scaledDots);
+ 
+     auto iterations = (m_drawThick && !m_useDots) ? 4 : 1;
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/DarkenCenter.cpp engine/src/libprojectM/MilkdropPreset/DarkenCenter.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/DarkenCenter.cpp	2026-07-14 13:51:03
++++ engine/src/libprojectM/MilkdropPreset/DarkenCenter.cpp	2026-10-04 22:16:18
+@@ -45,6 +45,8 @@
+     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ 
+     m_presetState.untexturedShader.Bind();
++
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+     m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", 1.0f);
+ 
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Filters.cpp engine/src/libprojectM/MilkdropPreset/Filters.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Filters.cpp	2026-07-14 13:51:03
++++ engine/src/libprojectM/MilkdropPreset/Filters.cpp	2026-10-04 22:16:18
+@@ -30,6 +30,8 @@
+     glEnable(GL_BLEND);
+ 
+     m_presetState.untexturedShader.Bind();
++
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+     m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", 1.0f);
+ 
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/LineGeometry.cpp engine/src/libprojectM/MilkdropPreset/LineGeometry.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/LineGeometry.cpp	2026-10-04 21:34:12
++++ engine/src/libprojectM/MilkdropPreset/LineGeometry.cpp	2026-10-04 22:16:08
+@@ -1,3 +1,5 @@
++#include <string>
++#include <cstdlib>
+ #include "LineGeometry.hpp"
+ 
+ #include <algorithm>
+@@ -133,8 +135,14 @@
+     DotStyle style;
+     // Points rasterise to whole pixels: draw the next whole size and fade by the area difference,
+     // so a dot keeps its share of the picture at every render size.
+-    style.size = std::max(1.0f, std::ceil(size - 0.0001f));
++    style.size = std::getenv("PM_DOT_ROUND") ? std::max(1.0f, std::round(size)) : std::max(1.0f, std::ceil(size - 0.0001f));
+     style.alphaScale = (size * size) / (style.size * style.size);
++    if (const char* m = std::getenv("PM_DOT_MODE"))
++    {
++        if (std::string(m) == "clip") { style.clipHalf = 0.5f * size; style.size = std::ceil(size) + 1.0f; style.alphaScale = 1.0f; return style; }
++        style.size = std::string(m) == "exact" ? std::max(1.0f, size) : std::string(m) == "round1" ? std::max(1.0f, std::round(size)) : std::max(1.0f, std::ceil(size - 0.0001f));
++        style.alphaScale = 1.0f;
++    }
+     return style;
+ }
+ 
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/LineGeometry.hpp engine/src/libprojectM/MilkdropPreset/LineGeometry.hpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/LineGeometry.hpp	2026-10-04 21:34:12
++++ engine/src/libprojectM/MilkdropPreset/LineGeometry.hpp	2026-10-04 22:16:08
+@@ -52,6 +52,7 @@
+ {
+     float size{1.0f};       //!< gl_PointSize: a whole number of render pixels, at least 1.
+     float alphaScale{1.0f}; //!< Alpha factor: wanted dot area divided by drawn area.
++    float clipHalf{0.0f};
+ };
+ 
+ /**
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp engine/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp	2026-10-04 21:34:12
++++ engine/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp	2026-10-04 22:01:55
+@@ -1,3 +1,4 @@
++#include <cstdlib>
+ /**
+  * projectM -- Milkdrop-esque visualisation SDK
+  * Copyright (C)2003-2004 projectM Team
+@@ -115,7 +116,9 @@
+     bool motionVectorsDrawn = false;
+     if (!m_isFirstFrame)
+     {
+-        motionVectorsDrawn = m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture(), m_feedbackDiffusion.Active());
++        motionVectorsDrawn = m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture(),
++                                                   m_feedbackDiffusion.Active() || (std::getenv("PM_PHASE_MODE") && m_diffusionAllowed &&
++                                                   LineScale(renderContext.viewportSizeX, renderContext.viewportSizeY, renderContext.lineReferenceWidth, renderContext.lineReferenceHeight) > 1.0f));
+     }
+ 
+     // y-flip the previous frame and assign the flipped texture as "main". The second flip of the
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/MilkdropShader.cpp engine/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/MilkdropShader.cpp	2026-10-04 21:34:12
++++ engine/src/libprojectM/MilkdropPreset/MilkdropShader.cpp	2026-10-04 22:13:07
+@@ -1,3 +1,5 @@
++#include <cstdlib>
++#include <fstream>
+ #include "../analysis_hooks.hpp"
+ #include "MilkdropShader.hpp"
+ 
+@@ -812,8 +814,99 @@
+     // Now we have GLSL source for the preset shader program (hopefully it's valid!)
+     // Compile the preset shader fragment shader with the standard vertex shader and cross our fingers.
+     // Cached only after it compiled: a translation that fails to compile is not reused.
+-    m_shader.CompileProgram(vertexShader, generator.GetResult());
+-    TranslationCache::Instance().Store(cacheKey, generator.GetResult());
++    std::string glsl = generator.GetResult();
++    if (const char* mode = std::getenv("PM_PHASE_MODE"); mode && m_type == ShaderType::WarpShader)
++    {
++        const std::string helper = std::string(R"(
++// PROTOTYPE: per-read reference-phase footprint.
++highp float pm_L(highp float q, highp float p) { highp float n = floor(q); highp float a = n - p; return a * a + (q - n) * (2.0 * a + 1.0); }
++highp float pm_spread(highp float p, highp float T) {
++    highp float f = fract(p);
++    if (T <= f * (1.0 - f) + 1e-4) return 0.0;
++    highp float a = sqrt(T);
++    for (int i = 0; i < 4; i++) {
++        highp float h = 0.5 * (pm_L(p + a, p) + pm_L(p - a, p));
++        a -= (h - T) / max(floor(p + a) - floor(p - a), 1.0);
++    }
++    return a;
++}
++vec4 pm_main(sampler2D s, highp vec2 uv) {
++    highp vec2 size = vec2(textureSize(s, 0));
++    highp vec2 canvas = _c7.xy;
++    highp vec2 k = size / canvas;
++    if (k.x * k.y <= 1.0001) return texture(s, uv);
++    highp vec2 fr = fract((uv - frag_TEXCOORD0.zw) * canvas);
++)") + (std::string(mode) == "emuc" ? R"(
++    if (all(lessThan(min(fr, 1.0 - fr), vec2(1e-3)))) return texture(s, uv);
++    // Native interpolation of each tap adds g(native phase)/k^2 ref px^2: shrink the tap spacing to keep f(1-f).
++    highp vec2 plo = (uv - fr / canvas) * size - 0.5;
++    highp vec2 phi = plo + k;
++    highp vec2 glo = fract(plo) * (1.0 - fract(plo));
++    highp vec2 ghi = fract(phi) * (1.0 - fract(phi));
++    highp vec2 target = fr * (1.0 - fr);
++    highp vec2 extra = ((1.0 - fr) * glo + fr * ghi) / (k * k);
++    highp vec2 w = sqrt(clamp(1.0 - extra / max(target, 1e-6), 0.0, 1.0));
++    highp vec2 lo = uv - w * fr / canvas;
++    highp vec2 hi = uv + w * (1.0 - fr) / canvas;
++    return (texture(s, lo) * (1.0 - fr.x) + texture(s, vec2(hi.x, lo.y)) * fr.x) * (1.0 - fr.y) +
++           (texture(s, vec2(lo.x, hi.y)) * (1.0 - fr.x) + texture(s, hi) * fr.x) * fr.y;
++}
++)" : std::string(mode) == "emus" ? R"(
++    if (all(lessThan(min(fr, 1.0 - fr), vec2(1e-3)))) return texture(s, uv);
++    highp vec2 lo = (floor((uv - fr / canvas) * size) + 0.5) / size;
++    highp vec2 hi = (floor((uv - fr / canvas + 1.0 / canvas) * size) + 0.5) / size;
++    return (texture(s, lo) * (1.0 - fr.x) + texture(s, vec2(hi.x, lo.y)) * fr.x) * (1.0 - fr.y) +
++           (texture(s, vec2(lo.x, hi.y)) * (1.0 - fr.x) + texture(s, hi) * fr.x) * fr.y;
++}
++)" : std::string(mode) == "emu" ? R"(
++    if (all(lessThan(min(fr, 1.0 - fr), vec2(1e-3)))) return texture(s, uv);
++    highp vec2 lo = uv - fr / canvas;
++    highp vec2 hi = lo + 1.0 / canvas;
++    return (texture(s, lo) * (1.0 - fr.x) + texture(s, vec2(hi.x, lo.y)) * fr.x) * (1.0 - fr.y) +
++           (texture(s, vec2(lo.x, hi.y)) * (1.0 - fr.x) + texture(s, hi) * fr.x) * fr.y;
++}
++)" : R"(
++    highp vec2 T = PM_ALPHA * k * k * fr * (1.0 - fr);
++    highp vec2 p = uv * size - 0.5;
++    highp vec2 a = vec2(pm_spread(p.x, T.x), pm_spread(p.y, T.y));
++    if (a.x == 0.0 && a.y == 0.0) return texture(s, uv);
++    highp vec2 o = a / size;
++    return 0.25 * (texture(s, uv - o) + texture(s, uv + vec2(o.x, -o.y)) + texture(s, uv + vec2(-o.x, o.y)) + texture(s, uv + o));
++}
++)");
++        {
++            const char* alpha = std::getenv("PM_PHASE_ALPHA");
++            const std::string value = alpha ? alpha : "1.0";
++            for (auto pos = helper.find("PM_ALPHA"); pos != std::string::npos; pos = helper.find("PM_ALPHA"))
++                const_cast<std::string&>(helper).replace(pos, 8, "float(" + value + ")");
++        }
++        bool any = false;
++        for (const auto& desc : m_mainTextureDescriptors)
++        {
++            const auto sampler = desc.Sampler();
++            if (!sampler || sampler->FilterMode() != GL_LINEAR) continue;
++            auto decl = desc.SamplerDeclaration();
++            auto b = decl.find("sampler_"), e = decl.find(';');
++            if (b == std::string::npos || e == std::string::npos) continue;
++            const std::string from = "texture(" + decl.substr(b, e - b) + ",";
++            for (size_t pos = glsl.find(from); pos != std::string::npos; pos = glsl.find(from, pos))
++            {
++                glsl.replace(pos, 8, "pm_main(");
++                any = true;
++            }
++        }
++        // After the last global uniform declaration: preset functions before PS() may read main.
++        auto lastUniform = glsl.rfind("\nuniform ", glsl.find("void PS("));
++        auto insertAt = lastUniform == std::string::npos ? std::string::npos : glsl.find('\n', lastUniform + 1);
++        if (any && insertAt != std::string::npos) glsl.insert(insertAt + 1, helper);
++    }
++    if (const char* dumpDir = std::getenv("PM_DUMP_GLSL_DIR"))
++    {
++        static int dumpIndex = 0;
++        std::ofstream(std::string(dumpDir) + "/" + shaderTypeString + "-" + std::to_string(dumpIndex++) + ".glsl") << glsl;
++    }
++    m_shader.CompileProgram(vertexShader, glsl);
++    TranslationCache::Instance().Store(cacheKey, glsl);
+ }
+ 
+ void MilkdropShader::UpdateMaxBlurLevel(BlurTexture::BlurLevel requestedLevel)
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Shaders/UntexturedDrawFragmentShaderGlsl330.frag engine/src/libprojectM/MilkdropPreset/Shaders/UntexturedDrawFragmentShaderGlsl330.frag
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Shaders/UntexturedDrawFragmentShaderGlsl330.frag	2026-07-14 13:51:03
++++ engine/src/libprojectM/MilkdropPreset/Shaders/UntexturedDrawFragmentShaderGlsl330.frag	2026-10-04 22:16:08
+@@ -4,6 +4,12 @@
+ 
+ out vec4 color;
+ 
++uniform vec2 point_clip; // PROTOTYPE: x = sprite size, y = exact half size; 0 = off
++
+ void main(){
++    if (point_clip.y > 0.0 && any(greaterThan(abs((gl_PointCoord - 0.5) * point_clip.x), vec2(point_clip.y))))
++    {
++        discard;
++    }
+     color = fragment_color;
+ }
+diff --color -ru <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Waveform.cpp engine/src/libprojectM/MilkdropPreset/Waveform.cpp
+--- <darkening-host-engine-af8202bd>/src/libprojectM/MilkdropPreset/Waveform.cpp	2026-10-04 21:34:12
++++ engine/src/libprojectM/MilkdropPreset/Waveform.cpp	2026-10-04 22:16:18
+@@ -123,11 +123,14 @@
+     glLineWidth(1);
+ 
+     m_presetState.untexturedShader.Bind();
++
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {0.0f, 0.0f});
+     m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjectionFlipped);
+     // Quad-line mode draws the main wave's 2x2 pixel dots as one scaled point instead of four.
+     const bool scaledDots = lineScale > 0.0f && m_presetState.waveDots;
+     const auto dot = DotStyleFor(LineKind::MainWave, true, lineScale);
+     m_presetState.untexturedShader.SetUniformFloat("vertex_point_size", scaledDots ? dot.size : 1.0f);
++    m_presetState.untexturedShader.SetUniformFloat2("point_clip", {scaledDots ? dot.size : 0.0f, scaledDots ? dot.clipHalf : 0.0f});
+     const ScopedProgramPointSize programPointSize(scaledDots);
+ 
+     glBindVertexArray(m_vaoID);
