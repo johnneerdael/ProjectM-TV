@@ -34,10 +34,10 @@ index c54b1dc06..4d6cc7557 100644
          FinalComposite.cpp
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
 new file mode 100644
-index 000000000..c1ff1e4c0
+index 000000000..5b6d8012b
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
-@@ -0,0 +1,330 @@
+@@ -0,0 +1,336 @@
 +#include "FeedbackDiffusion.hpp"
 +
 +#include <algorithm>
@@ -299,6 +299,12 @@ index 000000000..c1ff1e4c0
 +    }
 +    m_scale = scale;
 +    m_kernel = DiffusionKernelFor(scale);
++    if (m_usable && !Active())
++    {
++        // At or below the reference the pass cannot run: return the render-sized targets (to the
++        // bounded texture pool) instead of holding them; the next active Draw() resizes them again.
++        m_framebuffer.SetSize(1, 1);
++    }
 +    if (m_usable && !m_warnedScaleCap && DiffusionVariance(scale) > MaxDiffusionVariance)
 +    {
 +        // Q2: clamp extreme scales rather than add another full-screen pass. Warn once per preset.
@@ -370,10 +376,10 @@ index 000000000..c1ff1e4c0
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
 new file mode 100644
-index 000000000..79a7e1d66
+index 000000000..32e357644
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
-@@ -0,0 +1,138 @@
+@@ -0,0 +1,139 @@
 +/**
 + * @file FeedbackDiffusion.hpp
 + * @brief Restores MilkDrop's per-frame feedback smoothing, in picture units, at render sizes above the reference.
@@ -470,6 +476,7 @@ index 000000000..79a7e1d66
 +    /**
 +     * @brief Sets the kernel for this render/reference scale.
 +     * @return True when the scale changed; invalidate a cached filtered image before using it.
++     * An inactive scale shrinks both targets to 1x1, so they hold no render-sized memory.
 +     * @param scale LineScale() of the render and reference sizes; 0 or <= 1 turn the pass off.
 +     */
 +    auto SetScale(float scale) -> bool;
@@ -985,10 +992,10 @@ index 000000000..1d5dacb9e
 +}
 diff --git a/tests/libprojectM/FeedbackDiffusionTest.cpp b/tests/libprojectM/FeedbackDiffusionTest.cpp
 new file mode 100644
-index 000000000..6f3f17d31
+index 000000000..988c4b7a7
 --- /dev/null
 +++ b/tests/libprojectM/FeedbackDiffusionTest.cpp
-@@ -0,0 +1,322 @@
+@@ -0,0 +1,361 @@
 +#include <MilkdropPreset/FeedbackDiffusion.hpp>
 +#include <MilkdropPreset/LineGeometry.hpp>
 +
@@ -1249,6 +1256,45 @@ index 000000000..6f3f17d31
 +}
 +
 +} // namespace
++
++TEST(FeedbackDiffusion, InactiveScaleReleasesRenderSizedTargets)
++{
++    CGLPixelFormatAttribute attrs[] = {kCGLPFAOpenGLProfile,
++        static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++        static_cast<CGLPixelFormatAttribute>(0)};
++    CGLPixelFormatObj format{};
++    GLint count{};
++    ASSERT_EQ(CGLChoosePixelFormat(attrs, &format, &count), kCGLNoError);
++    CGLContextObj context{};
++    ASSERT_EQ(CGLCreateContext(format, nullptr, &context), kCGLNoError);
++    CGLDestroyPixelFormat(format);
++    ASSERT_EQ(CGLSetCurrentContext(context), kCGLNoError);
++    {
++        using libprojectM::Renderer::Texture;
++        Texture::SetPoolLimit(0);
++        auto source = std::make_shared<Texture>("release-test", 64, 32, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
++        glViewport(0, 0, 64, 32);
++        libprojectM::MilkdropPreset::FeedbackDiffusion diffusion;
++        diffusion.SetScale(2.0f);
++        diffusion.Draw(source, true);
++        ASSERT_EQ(diffusion.RawTexture()->Width(), 64);
++        ASSERT_EQ(diffusion.Texture()->Width(), 64);
++        // Lowering the render size to or below the reference turns compensation off: keep no
++        // render-sized targets while the pass cannot run.
++        diffusion.SetScale(1.0f);
++        EXPECT_FALSE(diffusion.Active());
++        EXPECT_LE(diffusion.RawTexture()->Width() * diffusion.RawTexture()->Height(), 1);
++        EXPECT_LE(diffusion.Texture()->Width() * diffusion.Texture()->Height(), 1);
++        // Raising it again restores full-size targets on the next pass.
++        diffusion.SetScale(2.0f);
++        diffusion.Draw(source, true);
++        EXPECT_EQ(diffusion.RawTexture()->Width(), 64);
++        EXPECT_EQ(diffusion.Texture()->Height(), 32);
++        EXPECT_EQ(glGetError(), GL_NO_ERROR);
++    }
++    CGLSetCurrentContext(nullptr);
++    CGLDestroyContext(context);
++}
 +
 +TEST(FeedbackDiffusion, OnePassWritesExactFlippedCopyAndFilteredCopy)
 +{
