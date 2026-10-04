@@ -1,0 +1,11 @@
+{
+  "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180",
+  "candidate28_protocol_sha256": "f9594d4482083bcedc45ebb8d7582a7dab512df28dbc44082c9bf359f5587de9",
+  "verified_existing_baseline_signatures": 783,
+  "inventory_count": 9606,
+  "baseline_identity_equal": true,
+  "pcm_bytes_equal": true,
+  "scope": "Preparation only; candidate28 emulator pilot and scan not executed. Baseline rows retain their original protocol, keys and provenance.",
+  "prepared_input_archive_sha256": "21255bf7e35c108f94f51df13689b9dfbf20fbf0c9dbb84d09d5aa2e8434dac7",
+  "prepared_input_archive_bytes": 705447
+}

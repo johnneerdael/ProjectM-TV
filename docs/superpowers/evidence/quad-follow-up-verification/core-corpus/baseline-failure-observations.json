@@ -1,0 +1,315 @@
+{
+  "observed_utc": "2026-10-04T09:10:00.095752+00:00",
+  "protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180",
+  "scope": "Partial baseline failure observations; no candidate regression verdict or proven parser/driver root cause",
+  "failures": [
+    {
+      "preset": {
+        "bytes": 9606,
+        "path": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Fruits Machine .milk",
+        "sha256": "5f985a4495b0c413df0d8965d8b3a64e22b89a005669ecea9fa8cf3b31651df1"
+      },
+      "status": "failed",
+      "pair_path": "rows/002cb320ead5f9828fcc6f8b9b6dab0f082c82c235d422795fef870126f7b7ae.json",
+      "pair_sha256": "9ef47f6ca87b1a4b277b498a3f9175c2006b79eeb97069f6c6733a5fbc6d010b",
+      "runs": [
+        {
+          "path": "jobs/00fe4021a66f213406f84113edc7447cf9a38a976cd03e0efe8fece02b65a52a/row.json",
+          "sha256": "2f7933e8ac1fa6df5414a0ea002bc13b3d73c1c9b14d330ee2269d3ff5284538",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/a861b294a97b4b81c100fdcaa32d69ff4f3f8e587a5189dc48ce78f405bf2fe4/row.json",
+          "sha256": "3cd925bd0b9947d16388b61e17da4c0f340a776dccd62bca43ffa7cd53c09972",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 9420,
+        "path": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz A.milk",
+        "sha256": "3954f2b4c566a193350b6da400eed11819d949e6cf29fa78ed241e3179774290"
+      },
+      "status": "failed",
+      "pair_path": "rows/2446004beb98ad3376a391309072ef96e9d7f4d296b48caf83e2a95c0ec04a89.json",
+      "pair_sha256": "0e62cf2f132703e8416e7d879bef27c2d7fa2e3cc9310c073f03d1dab26e4bb1",
+      "runs": [
+        {
+          "path": "jobs/3118298420dc1fb7a676d9170e41039b5ea20a05ecc49ce9f8b6640f6be20d89/row.json",
+          "sha256": "62dd8f9cc788e6b442f3179ad11d1c95645d6f81733559d0c078f2ca44854f90",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/915ab003d11e73e87138c9f03ea42789b79f6d4255d7c68fd1d07cb85836f801/row.json",
+          "sha256": "3123ee567a72cfec67c9688646355bdb1ae15c5b0dd89e512b7589bd2db38363",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "status": "failed",
+      "pair_path": "rows/432d1bad137b5b9c80613981640574aaf9308c682dce8aa11ccb0182702047a0.json",
+      "pair_sha256": "0c0525534dc864f0356cb572f9b5bf4b1589129d3fea9550ba74491fc52cfdbf",
+      "runs": [
+        {
+          "path": "jobs/4fb88579879dd12ab8b460110bae95232b1dacf8f000d3ffc09f13f2bcf0ed95/row.json",
+          "sha256": "4a1135b78f47476d0050631db0c91e8f230fe70faf3de1b9f70b59ff77d86e42",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/55488592ac720fee47231585de2da0888a82edae67a326ec65abe118a1723277/row.json",
+          "sha256": "b58f91dcadca2cc6604176c8b0d7307cefa0d7511965a320be726872f1369c3b",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 9906,
+        "path": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz .milk",
+        "sha256": "d47f1195105b7b7a618c30f29796b3a6853547433e669b50c43c5c874a1061ed"
+      },
+      "status": "failed",
+      "pair_path": "rows/559ff012d12a1acdf7d14d8ea06a877dc2fb7bf55313522725e52c06a73c0a26.json",
+      "pair_sha256": "d81a5a2df87d2cb69cd0942baa35e0711d30d39daab045aba28e0618705b8434",
+      "runs": [
+        {
+          "path": "jobs/9ca69962cd7684df1afd069e21a4a6ddf8bb55462870c45cc1d41a667166949f/row.json",
+          "sha256": "426bbe37d3b067335909f8b502720ccb544cfa7f6f855c19332f65f60a5fa053",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/72adc7e381943e83820d4823f9b948133a951b7d1cef9f96883ea19fb266e630/row.json",
+          "sha256": "9188a81424b297f25e1c748c415916ffd15e0122d2c20b0ce6bfdbb3d3e86b4e",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 10118,
+        "path": "$$$ Royal - Mashup (492).milk",
+        "sha256": "d62b37423b0d272b5240c83b349007dc9148c3f96e54c43c8f24b14902a65533"
+      },
+      "status": "failed",
+      "pair_path": "rows/58dd157daee1c341c59fbcafadbc3a181b91c09ae9c2184d1da24260005f70af.json",
+      "pair_sha256": "813050f3abbab0882b60c8bb118e0e5de6ef17aa6a1bc9fcc9c78d27bdff1555",
+      "runs": [
+        {
+          "path": "jobs/b4b0998eb2301c01bf7a7330b00ee9dc90fa2a24ca715e8cbf27633428a846e1/row.json",
+          "sha256": "6bf77ca12e4727d8f28aeb3cb275a3ae4384214ec3da3c80004503a045e7ca6f",
+          "repeat": 1,
+          "status": "failed",
+          "category": "output_transfer_failure",
+          "observed_error": "RuntimeError: owned app-created external output pull failed; partials preserved"
+        },
+        {
+          "path": "jobs/6fdc20731e0288cd92e9da63fa764456363fbf7ad82cde302e0bf4d0f6b81dc6/row.json",
+          "sha256": "8a7c9104c892bf40a2e22ab320e00725b9c0043b484edad1f8b40bc00d16ffea",
+          "repeat": 2,
+          "status": "success",
+          "category": "success",
+          "observed_error": ""
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "status": "failed",
+      "pair_path": "rows/623ce8c5fda175aa64c243ea7496a39b36c717f81bb194f4a53ef566ee9139b9.json",
+      "pair_sha256": "2fb61c6f6f636bd7e82a70be21610b7088f10a99ed8ea22dbd17d14f5e09e9ca",
+      "runs": [
+        {
+          "path": "jobs/1489e10b49398699ce6b000564837862a2e366365189aafde812ea231bd70319/row.json",
+          "sha256": "9f68b6674bb1825deecf36cdae852afd5ec66d1c4ded4a88be344294f4cc592b",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/d0d1243a7ce0fc07019851483d6a324d1c1904371be4988d8a7967e807dff240/row.json",
+          "sha256": "b065d0515198563e0b5b5a307ed97691c1d3c5c212c036e81ff88cb0da7ef4bb",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 9617,
+        "path": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz B.milk",
+        "sha256": "9787a2a09f7257a53a74cb1246282dd3a20dfd2f4310bc3f7b6b1435d27240a4"
+      },
+      "status": "failed",
+      "pair_path": "rows/802d22390f3bbde3145b482b867be93aec96f3b959592fe4fa8583fbe61f090c.json",
+      "pair_sha256": "e5dbe4d9b31c82ae41fd83eca99eaf5d37057a74407eb7ec908b877071cc7167",
+      "runs": [
+        {
+          "path": "jobs/7dd0b2c07780db9d5eaf4e372aaf70e6916b69620e6779b09e9201b3515942f2/row.json",
+          "sha256": "211a4a270103ec433d6518f6138be231ddeb964ac6754d895e29f28c54afcdca",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/5d19bcf693bace3a7e2fe4e50af0cf388b5e5641ce6ee65ff3beb8d646455617/row.json",
+          "sha256": "4ef2cef41edad88f30aef570b7d490e9803b98fbe2e7d051dca0c9f39e1f1c67",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 15172,
+        "path": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter bare.milk",
+        "sha256": "c473fed44a3de5a27c0fe10a97c7476461497f965905228218be34efcb2163f0"
+      },
+      "status": "failed",
+      "pair_path": "rows/9d48c3a969fafdb1c6a35d22e2e920e10996e513d47c88fe7bbc46e88f3de9db.json",
+      "pair_sha256": "27812473c3e30cfc6a4cc47738e8b1a800d1fa0068d2dcf5b5634299b4e94090",
+      "runs": [
+        {
+          "path": "jobs/bef9168c62abd1bc0680062eb8958e9002b96f8a53cdcfd845182001edfbcf48/row.json",
+          "sha256": "7bc39ae08a8abf5f2ef39dc3421e423ff7e971414ef88167eb57f682b2e6c8cc",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/9d731e0090a5d9f400855ba423e46bf9f7da051e086275828246f04d93399374/row.json",
+          "sha256": "86fdfd0e0f92ba350d433dbd654ad769fa5b84b8d8a6d2b069bdd1b770bba914",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 11176,
+        "path": "2009 4th of July with AdamFX n Martin - into the fireworks E.milk",
+        "sha256": "d526e7d69f3948fe37482aff9dbe0047e0c029b590a8f35c52e3e81a473da763"
+      },
+      "status": "failed",
+      "pair_path": "rows/b08ffad32cbb6769210f916ba39b5fbd6c81cf6026076e1d8a18f8817fde9613.json",
+      "pair_sha256": "5ab65c0d8f2ab79b6df2358b5a7a6bb996b1f6a2462972ef0e65690915c41281",
+      "runs": [
+        {
+          "path": "jobs/c6064662023df0088045765ccbed4aaa8df0bfc75dcd3a4f64b54dc5487d97be/row.json",
+          "sha256": "c2729e77a9b0e8d0112e07080487cce6e02ef2781b8e9fd955d45fb8b97c44b1",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/508d36eefcf7d6808fc29e309ca25250ea9640166e75fe2a9c9eeacecf2a0f7e/row.json",
+          "sha256": "e9dda52f62ba2ca56c955958fbd2d7bcd3d1b85100fa4af4ad288f18fa02ae14",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 9554,
+        "path": "A Tribute to Martin - bombyx mori - Ft Flexi - AdamFX - StahlRegen - Hd In Milk Ailen FX P.milk",
+        "sha256": "10aac1bcf86b1b7c5ed94adab8b422de2fce9559f13b0a12008a3a7f672ee9e6"
+      },
+      "status": "failed",
+      "pair_path": "rows/bd6318cb0f98ea4154effea3fb68051e1bebf9963f69c448d266255019b73ee9.json",
+      "pair_sha256": "e7fef3efe18398f9db9b1aa6e196c240b27ca0f19d352b4e16134a699ab66b85",
+      "runs": [
+        {
+          "path": "jobs/f0d5605e22dba3c4ddf352217f982e62848bc10daf4553e1a0fa98266fb4c62b/row.json",
+          "sha256": "670e39cebb6f9d5b9af85a53f3bcb25d8e6533904f3f6afb0eca88cf076f9baf",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/8a01899b021af82a0f18f7a0da12030bd14743631e1c112b41f3ebf7b85bd405/row.json",
+          "sha256": "e2efd65f8353904daf48780bab98cd9e643d70b0e1cb09e376083964cacd02b7",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    },
+    {
+      "preset": {
+        "bytes": 9713,
+        "path": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter.milk",
+        "sha256": "49e9f79c4357c2786e0c75daf99968e1f1defdd3b55dfdf745a29c958ca47a7a"
+      },
+      "status": "failed",
+      "pair_path": "rows/c5a2c901206204bc9853b203a43a6c859c0e4036813ab094cc9c9337fb2b4b81.json",
+      "pair_sha256": "3858d038c432344494e71a7ceb827b0c9493fc06fdecbf42c478b81b818965bd",
+      "runs": [
+        {
+          "path": "jobs/c3c4e84d90c267416b4c038c3fe10280f76b152364631363e902555976bcf0a5/row.json",
+          "sha256": "8cd2ee411618200605d11798265bf558ae5a49ddebda28d3c072555e6ed1a814",
+          "repeat": 1,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        },
+        {
+          "path": "jobs/a0ce9870821496d4736771208168e7dc221fd68a0f0fa88898484f093e3eba08/row.json",
+          "sha256": "837cb251769851670a34a909c425ad6218c8ef9b6b5ac344ec961f8ea2791a2b",
+          "repeat": 2,
+          "status": "failed",
+          "category": "requested_preset_load_or_fallback_failure",
+          "observed_error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed="
+        }
+      ]
+    }
+  ]
+}
