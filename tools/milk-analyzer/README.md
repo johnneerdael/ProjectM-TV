@@ -716,6 +716,23 @@ matrices, loop initialization and implicit outputs remain protected. No value is
 invented for unwritten storage. Rechecking the known 315 blocked presets clears
 15 and leaves 300. See `fixtures/focused-blockers-300-2026-10-04.json`.
 
+The entry-point body also excludes dead scalar/vector assignments in a
+conservative backwards pass. Pure texture fetches can be discarded when their
+destination is never observed; sampler discovery and compiler evidence still
+use the original tree/source. Transitive helper reads keep global stores live.
+Nested control flow, helper/output-argument effects, indexed writes, arrays,
+matrices and output stores remain protected. Live unwritten values are not
+initialized or guessed. Rechecking all original 315 witnesses clears another
+13 and leaves **287** known source blockers. See
+`fixtures/focused-blockers-287-2026-10-04.json`.
+
+A read-only join against the shared baseline found 158 exact name/source-hash
+matches in this 315-preset set, including five of the newly cleared presets.
+Saved capture success and repeatability are evidence of baseline execution,
+not shader acceptance or prediction accuracy. The local audit and join are in
+`build/milk-analyzer/focused-315-dead-stores-2026-10-04/`; no duplicate corpus
+render was started.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed

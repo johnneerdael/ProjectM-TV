@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "presets": 315,
+  "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Known source-audit parsing/lowering gaps; behavioral obligations are not yet enumerated.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 287,
+  "verified_behavior_percent": null,
+  "shader_fields_sha256": "6ddb77dd5670d7515c94c17d387b6bfea7f893c79c5baf40df701bb0b86a38e8",
+  "previous_known_blockers": 300,
+  "cleared_presets": [
+    {
+      "preset": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us.milk",
+      "preset_sha256": "9d465f76f01932af9403886f6d78e38f38770f273e1f60b334181bef429031fd"
+    },
+    {
+      "preset": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us2 nz+.milk",
+      "preset_sha256": "73d5ca1772fa8830b0fc25e5d92f89738115d3ed538af6ade8f4f448cca8ba19"
+    },
+    {
+      "preset": "suksma - absolutely solid waves of terror.milk",
+      "preset_sha256": "3514a772032af45c786373ab7bf7124c4218b1b48b2af8c2e95242f85082cf09"
+    },
+    {
+      "preset": "fiShbRaiN - plasma temptation + mrt - if i get through this, i'll be surprised.milk",
+      "preset_sha256": "07c5c08f56b2a76e7e37b31c4a2777067ec9ce5dc761927c6993a53eb56fbaf8"
+    },
+    {
+      "preset": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us nz+.milk",
+      "preset_sha256": "b11cac2fd652754fe6baeafd78978c12cb49c8dce170e78d00baf908a25e7478"
+    },
+    {
+      "preset": "martin - ghost city.milk",
+      "preset_sha256": "0dc0f6fbd3164b4a36f420fff04745a03048d45ebffdc92375490228fdd34d20"
+    },
+    {
+      "preset": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us2 nz+ qopulanth.milk",
+      "preset_sha256": "6e3add2fb2a403eab8d5bc21febb030c00f5dafa5031636d4629bea9f295493f"
+    },
+    {
+      "preset": "cope - nibbler in an oil spill - check out the featherweight roam3.milk",
+      "preset_sha256": "30472a1dc20539cb79ba2196cfe0977ac673d8a03759dd746e716ca01eba5d6c"
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - dying visions.milk",
+      "preset_sha256": "e3658877648e2633b8e537190f3d1ac71cea939c223cc9dcb08b89ba51e85c6c"
+    },
+    {
+      "preset": "niko radiative bunchess - within range of might.milk",
+      "preset_sha256": "6b6828cbb9c2fa74e7677e829c4e7881137757b49ce85c4d425f4cd3d85a5438"
+    },
+    {
+      "preset": "Rovastar - Harlequin's Fractal Encounter - piece da rats in us2.milk",
+      "preset_sha256": "c5e6bf0b2bccfae76647e41bd15b0ca0b7ea2de261bcb0b2b5fc8c5cbaa178c2"
+    },
+    {
+      "preset": "suksma - more pathetic attempts justifying my ignominious end - waning anti-tunneled.milk",
+      "preset_sha256": "336739eaf4a581ff55c18faa3c9eeade5812487c673e75b71c3b1b65b1cc5230"
+    },
+    {
+      "preset": "shifter - fuzzball 3d (glasses) false auralary2 thee mbeliefabules.milk",
+      "preset_sha256": "de7e4059407dab0019c992e7cdef8706c4dc50f62887eec698dc92fc324bea54"
+    }
+  ],
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 82,
+      "affected_units": 82,
+      "affected_source_tokens": 23352,
+      "sole_known_gap_presets": 79,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 1,
+        "same-name initializer binding differs in emitted GLSL": 2
+      }
+    },
+    {
+      "gap": "native GLSL array initializer layout mismatch",
+      "affected_presets": 56,
+      "affected_units": 56,
+      "affected_source_tokens": 21139,
+      "sole_known_gap_presets": 55,
+      "overlap_presets": {
+        "target parse unavailable": 1
+      }
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 51
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 51
+      }
+    },
+    {
+      "gap": "same-name initializer binding differs in emitted GLSL",
+      "affected_presets": 49,
+      "affected_units": 49,
+      "affected_source_tokens": 15360,
+      "sole_known_gap_presets": 47,
+      "overlap_presets": {
+        "target parse unavailable": 2
+      }
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 32,
+      "affected_units": 32,
+      "affected_source_tokens": 16789,
+      "sole_known_gap_presets": 29,
+      "overlap_presets": {
+        "arithmetic/comparison side-effect order not established": 3
+      }
+    },
+    {
+      "gap": "source outside supported numbered loader",
+      "affected_presets": 20,
+      "affected_units": 25,
+      "affected_source_tokens": 952,
+      "sole_known_gap_presets": 20,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 3
+      }
+    }
+  ],
+  "baseline_join": {
+    "matched_presets": 158,
+    "source_hash_mismatches": 0,
+    "newly_cleared_matches": 5,
+    "scope": "Read-only exact preset-name and source-hash join. Baseline success/repeatability is not shader acceptance or prediction accuracy.",
+    "matched_failed_loads": 42,
+    "failed_load_gap": "target parse unavailable"
+  },
+  "uninitialized_origins": {
+    "remaining_presets": 32,
+    "packed_uniform_replacement": 23,
+    "ordinary_storage_or_branch_coverage": 9,
+    "scope": "Origins identified in lowered source; no values inferred for unwritten storage."
+  }
+}

@@ -234,7 +234,7 @@ class ShaderFields:
             kind='uninitialized' if argument['modifier']==2 else 'input'
             self.environment[argument['name']]=Field(kind,dtype=argument['type']['name'],detail={'name':argument['name']})
             self.local_names.add(argument['name'])
-        self.statements(entries[0]['body'])
+        self.statements(self.discard_dead_assignments(entries[0]['body']))
         if 'ret' not in self.environment:return self.unsupported('missing shader result')
         result=self.environment['ret']
         if not self.complete and result.op!='unknown':
@@ -712,20 +712,46 @@ class ShaderFields:
             else:self.environment.pop(name,None)
         self.local_names=locals_before
 
-    def pure_initializer(self,node):
+    def pure_initializer(self,node,*,allow_texture=False):
         """Recognize scalar/vector computations with no calls or indexed effects."""
         if node is None:return False
         if not re.fullmatch(r'(float|int|uint|bool)[1-4]?',node.get('type',{}).get('name','float')):return False
         kind=node.get('kind')
         if kind in {'constant','variable'}:return not node.get('type',{}).get('array')
-        if kind=='member':return self.pure_initializer(node['object'])
-        if kind=='unary':return node['operator'] in {0,1,2} and self.pure_initializer(node['operand'])
-        if kind=='binary':return 0<=node['operator']<16 and all(self.pure_initializer(node[k]) for k in ('left','right'))
+        if kind=='member':return self.pure_initializer(node['object'],allow_texture=allow_texture)
+        if kind=='unary':return node['operator'] in {0,1,2} and self.pure_initializer(node['operand'],allow_texture=allow_texture)
+        if kind=='binary':return 0<=node['operator']<16 and all(self.pure_initializer(node[k],allow_texture=allow_texture) for k in ('left','right'))
         if kind in {'construct','aggregate'}:
-            return all(self.pure_initializer(a) for a in node['elements' if kind=='aggregate' else 'args'])
-        if kind=='call':return (node['function'] in PURE and node['function'] not in self.functions and
-            not self.has_shared_effects(node) and all(self.pure_initializer(a) for a in node.get('args',[])))
+            return all(self.pure_initializer(a,allow_texture=allow_texture) for a in node['elements' if kind=='aggregate' else 'args'])
+        if kind=='call':
+            pure=node['function'] in PURE or (allow_texture and node['function'] in {'tex2D','tex3D','tex2Dlod','tex3Dlod','tex2Dbias','tex3Dbias'})
+            return (pure and node['function'] not in self.functions and not self.has_shared_effects(node) and
+                    all(self.pure_initializer(a,allow_texture=allow_texture) or
+                        (allow_texture and a.get('kind')=='variable' and a.get('type',{}).get('name','').startswith('sampler'))
+                        for a in node.get('args',[])))
         return False
+
+    def discard_dead_assignments(self,body):
+        """Prune pure entry-body stores whose destinations are never observed.
+
+        Keep nested control flow, helper calls, indexed writes and output stores.
+        Transitive helper references keep global destinations live. This does
+        not modify the parsed source or compiler compatibility evidence.
+        """
+        kept=[]
+        for statement in reversed(body):
+            node=statement.get('value',{}) if statement['kind']=='expression' else {}
+            target=node.get('left',{})
+            if (node.get('kind')=='binary' and node.get('operator',0)>=16 and
+                    target.get('kind')=='variable' and
+                    target['name'] not in {'ret','_return_value','_mv_tex_coords'} and
+                    not target.get('type',{}).get('array') and
+                    re.fullmatch(r'(float|int|uint|bool)[1-4]?',target.get('type',{}).get('name','')) and
+                    target['name'] not in self._referenced_names(kept)|self.global_access(kept)[0] and
+                    self.pure_initializer(node['right'],allow_texture=True)):
+                continue
+            kept.insert(0,statement)
+        return kept
 
     def statements(self,statements:list[dict],*,allow_dead_initializers=True):
         for statement_index,statement in enumerate(statements):
