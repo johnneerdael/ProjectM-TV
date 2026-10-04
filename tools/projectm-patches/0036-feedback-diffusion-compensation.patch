@@ -4,12 +4,14 @@ Build on 0035 and PR #23's sampler and feedback-history fixes. Above the line re
 bilinear main-texture read of the warp (translated preset shaders and the default warp shader)
 reproduces MilkDrop's read on the reference canvas: its reference phase is taken relative to the
 pixel's own position (uv_orig), and the four reference-spaced neighbours are blended with MilkDrop's
-bilinear weights. The taps are pulled a quarter native texel towards the read so native pixels stay
-coupled on integer scales (2364x1330 is exactly twice the 1182x665 canvas), and their distance keeps
-the reference variance f(1-f) including their own native interpolation. Reads on reference texel
-centres (identity, whole-texel shifts) stay single plain reads; so do reads at coordinates that do not
-depend on the pixel's position (stored positions read back from the frame). Point-sampled reads, the
-composite and the blur textures read the unchanged frame.
+bilinear weights. The tap distance is solved once per render size on the CPU so that the mean total
+variance, including each tap's own native interpolation, is the reference read's f(1-f); on whole-number
+scales (2364x1330 is exactly twice the 1182x665 canvas) it is pulled in an eighth of a native texel so
+native pixels stay coupled. Per read the GPU computes only a phase and two tap positions, without
+branches, so a preset's repeated identical reads stay mergeable; off and phase 0 reduce exactly to the
+plain read. Reads at coordinates that do not depend on the pixel's position (stored positions read back
+from the frame) stay plain. Point-sampled reads, the composite and the blur textures read the unchanged
+frame. The warp's uv/uv_orig varying is highp, as the phase needs sub-texel precision at 4K.
 
 This replaces the uniform (s^2-1)/6 pre-warp blur pass: that over-smoothed identity and texel-aligned
 reads every frame (astral spinorgentics encrustcore nz+), took MilkDrop's asymmetric 2-tap shape for a
@@ -35,15 +37,16 @@ index c54b1dc06..4d6cc7557 100644
          FinalComposite.cpp
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
 new file mode 100644
-index 000000000..c14250fc9
+index 000000000..9826af55c
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
-@@ -0,0 +1,334 @@
+@@ -0,0 +1,392 @@
 +#include "FeedbackDiffusion.hpp"
 +
 +#include <algorithm>
 +#include <array>
 +#include <cctype>
++#include <cmath>
 +#include <initializer_list>
 +#include <utility>
 +#include <string>
@@ -56,33 +59,19 @@ index 000000000..c14250fc9
 +
 +// The reference-size bilinear read (FeedbackDiffusion.hpp). frag_TEXCOORD0.zw is uv_orig, the pixel's own
 +// position, which MilkDrop's pixels have on texel centres: the read's reference phase is relative to it.
-+// Highp throughout: native texel positions exceed half-float precision.
++// diffusion_canvas: xy the canvas size, zw the tap distance in uv (DiffusionTapDistance()); all 0 when off,
++// which makes every tap the read itself with weight 1 (mix(a, b, 0) is a), so the result is the plain read.
++// No branches: a preset's identical reads (GetPixel(uv) expanded many times) stay identical expressions
++// that the compiler can merge, and per read the GPU computes only a phase and two tap positions (per-read
++// divisions, square roots and branches cost Mali GPUs more than the fetches). Highp: native texel
++// positions exceed half-float precision.
 +constexpr char Helper[] = R"(
-+uniform highp vec2 diffusion_canvas;
++uniform highp vec4 diffusion_canvas;
 +vec4 diffusion_main(sampler2D source, highp vec2 uv)
 +{
-+    highp vec2 size = vec2(textureSize(source, 0));
-+    highp vec2 canvas = max(diffusion_canvas, vec2(1.0));
-+    highp vec2 scale = size / canvas;
-+    highp vec2 phase = fract((uv - frag_TEXCOORD0.zw) * canvas);
-+    if (scale.x * scale.y <= 1.0001 || all(lessThan(min(phase, 1.0 - phase), vec2(1.0 / 512.0))))
-+    {
-+        return texture(source, uv);
-+    }
-+    // MilkDrop's taps sit one reference texel apart. Pull them a quarter native texel towards the read first:
-+    // on integer scales the taps would otherwise land on native texel centres, and native pixels one or more
-+    // texels apart would never exchange values (independent copies of the reference grid that drift apart in
-+    // chaotic or sharpening feedback). Then set the tap distance so that the two-tap variance plus the taps'
-+    // own native interpolation is the reference read's phase*(1-phase).
-+    highp vec2 target = phase * (1.0 - phase) * scale * scale;
-+    highp vec2 low = (uv - phase / canvas) * size - 0.5 + 0.25 * phase;
-+    highp vec2 high = low + scale - 0.25;
-+    highp vec2 lowPhase = fract(low);
-+    highp vec2 highPhase = fract(high);
-+    highp vec2 tapVariance = (1.0 - phase) * lowPhase * (1.0 - lowPhase) + phase * highPhase * (1.0 - highPhase);
-+    highp vec2 spread = sqrt(max(target - tapVariance, vec2(0.0)) / max(phase * (1.0 - phase), vec2(1e-6))) / size;
-+    highp vec2 near = uv - spread * phase;
-+    highp vec2 far = uv + spread * (1.0 - phase);
++    highp vec2 phase = fract((uv - frag_TEXCOORD0.zw) * diffusion_canvas.xy);
++    highp vec2 near = uv - phase * diffusion_canvas.zw;
++    highp vec2 far = near + diffusion_canvas.zw;
 +    return mix(mix(texture(source, near), texture(source, vec2(far.x, near.y)), phase.x),
 +               mix(texture(source, vec2(near.x, far.y)), texture(source, far), phase.x), phase.y);
 +}
@@ -285,7 +274,78 @@ index 000000000..c14250fc9
 +        return glsl;
 +    }
 +    result.insert(insertAt + 1, Helper);
++    // The phase needs uv_orig at full precision; the default warp shader's default precision is mediump.
++    const std::string input = "in vec4 frag_TEXCOORD0;";
++    const auto declaration = result.find(input);
++    result.replace(declaration, input.size(), "in highp vec4 frag_TEXCOORD0;");
 +    return result;
++}
++
++auto DiffusionTapDistance(float scale) -> float
++{
++    if (!(scale > 1.0f))
++    {
++        return scale;
++    }
++    // Mean total variance of the two-tap read, over read phases f and (unless the scale is a whole number,
++    // where every pixel's reference grid sits on native texel centres) over the read's native sub-texel
++    // offset, relative to MilkDrop's f(1-f) reference texel^2. Each tap adds its own native interpolation.
++    const bool whole = std::abs(scale - std::round(scale)) < 1e-3f;
++    const auto meanRatio = [scale, whole](double distance) {
++        constexpr int Phases = 32;
++        const int offsets = whole ? 1 : 16;
++        const auto interpolation = [](double position) { const double t = position - std::floor(position); return t * (1.0 - t); };
++        double total = 0.0;
++        double wanted = 0.0;
++        for (int i = 0; i < Phases; ++i)
++        {
++            const double f = (i + 0.5) / Phases;
++            for (int j = 0; j < offsets; ++j)
++            {
++                const double near = (whole ? 0.0 : (j + 0.5) / offsets) + f * (scale - distance);
++                total += f * (1.0 - f) * distance * distance + (1.0 - f) * interpolation(near) + f * interpolation(near + distance);
++                wanted += f * (1.0 - f) * scale * scale;
++            }
++        }
++        return total / wanted;
++    };
++    // The variance grows with the distance. Take the distance that matches it, but at most the coupling
++    // limit: on whole-number scales the exact distance would put every tap on a native texel centre.
++    double low = 0.5 * scale;
++    double high = scale - DiffusionMinimumPullIn;
++    if (meanRatio(high) <= 1.0)
++    {
++        return static_cast<float>(high);
++    }
++    for (int i = 0; i < 30; ++i)
++    {
++        const double middle = 0.5 * (low + high);
++        (meanRatio(middle) < 1.0 ? low : high) = middle;
++    }
++    return static_cast<float>(0.5 * (low + high));
++}
++
++auto DiffusionCanvasValue(int viewportWidth, int viewportHeight, int canvasWidth, int canvasHeight) -> std::array<float, 4>
++{
++    if (canvasWidth <= 0 || canvasHeight <= 0 || viewportWidth <= 0 || viewportHeight <= 0 ||
++        static_cast<long long>(viewportWidth) * viewportHeight <= static_cast<long long>(canvasWidth) * canvasHeight)
++    {
++        return {0.0f, 0.0f, 0.0f, 0.0f};
++    }
++    // Per axis the tap distance in uv. Sizes change rarely; the last result is kept per thread.
++    thread_local std::array<int, 4> lastSizes{};
++    thread_local std::array<float, 4> lastValue{};
++    const std::array<int, 4> sizes{viewportWidth, viewportHeight, canvasWidth, canvasHeight};
++    if (sizes != lastSizes)
++    {
++        const float scaleX = static_cast<float>(viewportWidth) / static_cast<float>(canvasWidth);
++        const float scaleY = static_cast<float>(viewportHeight) / static_cast<float>(canvasHeight);
++        lastValue = {static_cast<float>(canvasWidth), static_cast<float>(canvasHeight),
++                     DiffusionTapDistance(scaleX) / static_cast<float>(viewportWidth),
++                     DiffusionTapDistance(scaleY) / static_cast<float>(viewportHeight)};
++        lastSizes = sizes;
++    }
++    return lastValue;
 +}
 +
 +auto DiffusionMotionVectorMinimum(float minimumLength, float scale, bool diffusionActive) -> float
@@ -375,10 +435,10 @@ index 000000000..c14250fc9
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
 new file mode 100644
-index 000000000..9e5756345
+index 000000000..e0a5ce43d
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp
-@@ -0,0 +1,55 @@
+@@ -0,0 +1,76 @@
 +/**
 + * @file FeedbackDiffusion.hpp
 + * @brief Gives the warp's feedback reads MilkDrop's per-frame smoothing, in picture units, at render sizes above the reference.
@@ -394,8 +454,8 @@ index 000000000..9e5756345
 + * of the warp is rewritten (DiffusionFootprintShader()) to a helper that reproduces the reference-size
 + * read: it takes the read's phase on the reference grid relative to the pixel's own position (uv_orig, as
 + * MilkDrop's pixels sit on texel centres), and blends the four reference-spaced neighbours with MilkDrop's
-+ * bilinear weights. Each of those taps is itself a native bilinear read, which adds a little smoothing of
-+ * its own; the taps move closer together by the amount that keeps the reference read's variance f(1 - f).
++ * bilinear weights, at a tap distance (DiffusionTapDistance()) that keeps the read's variance including the
++ * taps' own native interpolation. Per read the GPU computes only the phase and two tap positions.
 + * Reads with phase 0 on both axes stay a single plain read.
 + *
 + * Point-sampled reads (sampler_pw_main, sampler_pc_main and their aliases), the composite and the blur
@@ -408,14 +468,35 @@ index 000000000..9e5756345
 + */
 +#pragma once
 +
++#include <array>
 +#include <string>
 +#include <vector>
 +
 +namespace libprojectM {
 +namespace MilkdropPreset {
 +
-+/** Uniform of rewritten warp shaders: the reference canvas size (ShaderCanvasSize()), 0 for off. */
++/** Uniform of rewritten warp shaders: DiffusionCanvasValue(). */
 +constexpr char DiffusionCanvasUniform[] = "diffusion_canvas";
++
++/** Least distance the two taps are pulled in from one canvas texel, in native texels (whole-number scales). */
++constexpr float DiffusionMinimumPullIn = 0.125f;
++
++/**
++ * @brief Distance between a read's two taps per axis, in native texels, for scale = render / canvas size.
++ *
++ * MilkDrop's taps are one canvas texel (scale native texels) apart. Each tap here is itself a native
++ * bilinear read, which adds variance; the distance is chosen so that the mean total variance over read
++ * phases is MilkDrop's f(1-f) canvas texel^2. On whole-number scales that would put the taps on native
++ * texel centres, so that native pixels never exchange values (independent copies of the canvas grid that
++ * drift apart in chaotic or sharpening feedback); there the taps are pulled in DiffusionMinimumPullIn.
++ */
++auto DiffusionTapDistance(float scale) -> float;
++
++/**
++ * @brief The diffusion_canvas uniform: canvas size, and the tap distances in uv; all 0 (plain reads)
++ *        unless the render is larger than the canvas.
++ */
++auto DiffusionCanvasValue(int viewportWidth, int viewportHeight, int canvasWidth, int canvasHeight) -> std::array<float, 4>;
 +
 +/**
 + * @brief Rewrites the bilinear main-texture reads of a translated warp shader to reference-size reads.
@@ -450,7 +531,7 @@ index b8f627bbe..8c55f6a38 100755
  
      // y-flip the previous frame and assign the flipped texture as "main". The second flip of the
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
-index 956d2e9df..dc472adf2 100644
+index 956d2e9df..f344ec25c 100644
 --- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
 @@ -1,5 +1,6 @@
@@ -468,18 +549,19 @@ index 956d2e9df..dc472adf2 100644
  #include <list>
  #include <mutex>
  #include <regex>
-@@ -220,6 +222,10 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+@@ -220,6 +222,11 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
                                        blurMin[2],
                                        blurMin[0],
                                        blurMax[0]});
 +    if (m_referenceFootprint)
 +    {
-+        m_shader.SetUniformFloat2(DiffusionCanvasUniform, {canvas.width, canvas.height});
++        const auto value = DiffusionCanvasValue(context.viewportSizeX, context.viewportSizeY, canvas.width, canvas.height);
++        m_shader.SetUniformFloat4(DiffusionCanvasUniform, {value[0], value[1], value[2], value[3]});
 +    }
      m_shader.SetUniformFloat4("_c7", {canvas.width,
                                        canvas.height,
                                        1.0f / static_cast<float>(canvas.width),
-@@ -733,6 +739,7 @@ void MilkdropShader::TranspileHLSLShader(const PresetState& presetState, std::st
+@@ -733,6 +740,7 @@ void MilkdropShader::TranspileHLSLShader(const PresetState& presetState, std::st
      if (TranslationCache::Instance().Find(cacheKey, cachedGlsl))
      {
          m_shader.CompileProgram(vertexShader, cachedGlsl);
@@ -487,7 +569,7 @@ index 956d2e9df..dc472adf2 100644
          return;
      }
  
-@@ -794,10 +801,48 @@ void MilkdropShader::TranspileHLSLShader(const PresetState& presetState, std::st
+@@ -794,10 +802,48 @@ void MilkdropShader::TranspileHLSLShader(const PresetState& presetState, std::st
      // Now we have GLSL source for the preset shader program (hopefully it's valid!)
      // Compile the preset shader fragment shader with the standard vertex shader and cross our fingers.
      // Cached only after it compiled: a translation that fails to compile is not reused.
@@ -611,7 +693,7 @@ index 1d8d9b634..4affa4f38 100644
  private:
      struct MotionVectorVertex
 diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
-index b8d2a8a7a..13cfa73f5 100644
+index b8d2a8a7a..411865a58 100644
 --- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
 +++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
 @@ -1,5 +1,7 @@
@@ -665,7 +747,7 @@ index b8d2a8a7a..13cfa73f5 100644
  void PerPixelMesh::Draw(const PresetState& presetState,
                          const PerFrameContext& perFrameContext,
                          PerPixelContext& perPixelContext)
-@@ -335,6 +355,13 @@ void PerPixelMesh::WarpedBlit(const PresetState& presetState,
+@@ -335,6 +355,14 @@ void PerPixelMesh::WarpedBlit(const PresetState& presetState,
          m_perPixelMeshShader.SetUniformFloat("warpScaleInverse", warpScaleInverse);
          m_perPixelMeshShader.SetUniformFloat4("warpFactors", warpFactors);
          m_perPixelMeshShader.SetUniformFloat("decay", decay);
@@ -674,7 +756,8 @@ index b8d2a8a7a..13cfa73f5 100644
 +            const auto& context = presetState.renderContext;
 +            const auto canvas = ShaderCanvasSize(context.viewportSizeX, context.viewportSizeY,
 +                                                 context.lineReferenceWidth, context.lineReferenceHeight);
-+            m_perPixelMeshShader.SetUniformFloat2(DiffusionCanvasUniform, {canvas.width, canvas.height});
++            const auto value = DiffusionCanvasValue(context.viewportSizeX, context.viewportSizeY, canvas.width, canvas.height);
++            m_perPixelMeshShader.SetUniformFloat4(DiffusionCanvasUniform, {value[0], value[1], value[2], value[3]});
 +        }
      }
      else
@@ -703,6 +786,19 @@ index 4657a1eab..8ad038df1 100644
      std::unique_ptr<MilkdropShader> m_warpShader;           //!< The warp shader. Either preset-defined or a default shader.
      bool m_warpShaderDiscards{false};                       //!< The warp shader uses clip(), so it may leave pixels unwritten.
      Renderer::Sampler m_perPixelSampler{GL_CLAMP_TO_EDGE, GL_LINEAR}; //!< The main texture sampler.
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+index c631fcb50..aabfe55b2 100644
+--- a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
++++ b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+@@ -28,7 +28,7 @@ uniform vec4 warpFactors;
+ uniform float decay;
+ 
+ out vec4 frag_COLOR;
+-out vec4 frag_TEXCOORD0;
++out highp vec4 frag_TEXCOORD0; // uv and uv_orig: highp, as feedback diffusion takes sub-texel phases from them
+ out vec2 frag_TEXCOORD1;
+ 
+ void main() {
 diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
 index 4b9dcb7e0..edf9bb413 100644
 --- a/tests/libprojectM/CMakeLists.txt
@@ -1025,13 +1121,15 @@ index 000000000..ee7459e25
 +}
 diff --git a/tests/libprojectM/FeedbackDiffusionTest.cpp b/tests/libprojectM/FeedbackDiffusionTest.cpp
 new file mode 100644
-index 000000000..b5040b1e6
+index 000000000..18a3b9f5e
 --- /dev/null
 +++ b/tests/libprojectM/FeedbackDiffusionTest.cpp
-@@ -0,0 +1,224 @@
+@@ -0,0 +1,274 @@
 +#include <MilkdropPreset/FeedbackDiffusion.hpp>
 +
 +#include <gtest/gtest.h>
++
++#include <cmath>
 +
 +#include <string>
 +
@@ -1067,6 +1165,54 @@ index 000000000..b5040b1e6
 +
 +} // namespace
 +
++TEST(FeedbackDiffusion, CanvasValueIsOffAtOrBelowTheCanvasAndPullsTapsIn)
++{
++    using libprojectM::MilkdropPreset::DiffusionCanvasValue;
++    for (const auto& value : {DiffusionCanvasValue(1182, 665, 1182, 665), DiffusionCanvasValue(960, 540, 1182, 665),
++                              DiffusionCanvasValue(3840, 2160, 0, 0)})
++    {
++        EXPECT_EQ(value[0], 0.0f);
++    }
++    const auto value = DiffusionCanvasValue(2364, 1330, 1182, 665);
++    EXPECT_FLOAT_EQ(value[0], 1182.0f);
++    EXPECT_FLOAT_EQ(value[1], 665.0f);
++    // Twice the canvas: the exact distance would be one canvas texel (two native texels), on native texel
++    // centres; it is pulled in by the coupling minimum.
++    EXPECT_NEAR(value[2] * 2364.0f, 2.0f - libprojectM::MilkdropPreset::DiffusionMinimumPullIn, 1e-4f);
++    EXPECT_NEAR(value[3] * 1330.0f, 2.0f - libprojectM::MilkdropPreset::DiffusionMinimumPullIn, 1e-4f);
++}
++
++TEST(FeedbackDiffusion, TapDistanceKeepsTheMeanReferenceVariance)
++{
++    using libprojectM::MilkdropPreset::DiffusionTapDistance;
++    // Mean over read phase f and the read's native sub-texel offset of the two-tap variance, including
++    // each tap's own native interpolation, relative to f(1-f) scale^2.
++    const auto ratio = [](double scale, double distance) {
++        const auto g = [](double p) { const double t = p - std::floor(p); return t * (1.0 - t); };
++        double total = 0.0, wanted = 0.0;
++        for (int i = 0; i < 200; ++i)
++        {
++            const double f = (i + 0.5) / 200;
++            for (int j = 0; j < 50; ++j)
++            {
++                const double near = (j + 0.5) / 50 + f * (scale - distance);
++                total += f * (1 - f) * distance * distance + (1 - f) * g(near) + f * g(near + distance);
++                wanted += f * (1 - f) * scale * scale;
++            }
++        }
++        return total / wanted;
++    };
++    for (double scale : {1.6241, 2.1653, 3.2487})
++    {
++        SCOPED_TRACE(scale);
++        const double distance = DiffusionTapDistance(static_cast<float>(scale));
++        EXPECT_LT(distance, scale);
++        EXPECT_NEAR(ratio(scale, distance), 1.0, 0.01);
++    }
++    EXPECT_FLOAT_EQ(DiffusionTapDistance(1.0f), 1.0f);
++    EXPECT_FLOAT_EQ(DiffusionTapDistance(3.0f), 3.0f - libprojectM::MilkdropPreset::DiffusionMinimumPullIn);
++}
++
 +TEST(FeedbackDiffusion, RewritesOnlyTheNamedBilinearMainReads)
 +{
 +    const auto rewritten = DiffusionFootprintShader(Warp, {"sampler_main"});
@@ -1077,7 +1223,7 @@ index 000000000..b5040b1e6
 +    EXPECT_EQ(Count(rewritten, "mytexture(sampler_main,"), 1u);
 +    // The helper is declared once, after the uniforms and ahead of the first function that reads main.
 +    EXPECT_EQ(Count(rewritten, "vec4 diffusion_main(sampler2D source"), 1u);
-+    EXPECT_LT(rewritten.find("uniform vec4 _c7;"), rewritten.find("uniform highp vec2 diffusion_canvas;"));
++    EXPECT_LT(rewritten.find("uniform vec4 _c7;"), rewritten.find("uniform highp vec4 diffusion_canvas;"));
 +    EXPECT_LT(rewritten.find("vec4 diffusion_main(sampler2D source"), rewritten.find("vec3 Get1("));
 +}
 +
