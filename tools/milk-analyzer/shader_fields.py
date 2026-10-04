@@ -242,6 +242,31 @@ class ShaderFields:
             candidates=[f for f in candidates if [a['type'] for a in f['args']]==expected]
         return candidates
 
+    def output_targets(self,node):
+        if not isinstance(node,dict) or node.get('kind')!='call':return []
+        arguments=node.get('args',[])
+        # The pinned HLSL intrinsic table incorrectly describes modf's second
+        # parameter as input; the generated GLSL wrapper declares it out.
+        if node['function']=='modf' and 'modf' not in self.functions:
+            return arguments[1:2]
+        return [arguments[i] for i,p in enumerate(node.get('signature',[]))
+                if i<len(arguments) and p.get('modifier') in {2,3}]
+
+    def local_access(self,node):
+        """Caller-local storage touched directly by output arguments."""
+        reads=set();writes=set()
+        if isinstance(node,list):children=node
+        elif isinstance(node,dict):
+            if node.get('kind')=='variable' and not node.get('global'):reads.add(node['name'])
+            for target in self.output_targets(node):
+                while target.get('kind') in {'member','index'}:target=target['object']
+                if target.get('kind')=='variable' and not target.get('global'):writes.add(target['name'])
+            children=node.values()
+        else:return reads,writes
+        for child in children:
+            r,w=self.local_access(child);reads.update(r);writes.update(w)
+        return reads,writes
+
     def global_access(self,node,seen=None):
         """Conservative transitive read/write sets for shared shader variables."""
         seen=set() if seen is None else seen
@@ -254,6 +279,9 @@ class ShaderFields:
             elif node.get('kind')=='unary' and node['operator'] in {3,4,5,6}:target=node['operand']
             while target is not None and target.get('kind') in {'member','index'}:target=target['object']
             if target is not None and target.get('global'):writes.add(target['name'])
+            for output in self.output_targets(node):
+                while output.get('kind') in {'member','index'}:output=output['object']
+                if output.get('global'):writes.add(output['name'])
             children=list(node.values())
             if node.get('kind')=='call':
                 for function in self.helper_candidates(node):
@@ -266,12 +294,16 @@ class ShaderFields:
         return reads,writes
 
     def has_shared_effects(self,node):
-        return self.has_assignment(node) or bool(self.global_access(node)[1])
+        return self.has_assignment(node) or bool(self.global_access(node)[1]) or bool(self.local_access(node)[1])
 
     def unsequenced(self,nodes):
         if len(nodes)<2:return False
         if any(self.has_assignment(node) for node in nodes):return True
-        access=[self.global_access(node) for node in nodes]
+        access=[]
+        for node in nodes:
+            gr,gw=self.global_access(node);lr,lw=self.local_access(node)
+            access.append(({('global',n) for n in gr}|{('local',n) for n in lr},
+                           {('global',n) for n in gw}|{('local',n) for n in lw}))
         return any(writes & (other_reads|other_writes)
                    for i,(_,writes) in enumerate(access)
                    for j,(other_reads,other_writes) in enumerate(access) if i!=j)
@@ -489,7 +521,9 @@ class ShaderFields:
             if op in {0,1} and self.has_shared_effects(node):return self.unsupported('logical expression side effects not lowered',dtype=dtype)
             if op>=16:
                 destination=self.bind_destination(node['left'])
-                if op!=16 and self.global_access(node['right'])[1]&self.global_access(destination)[0]:
+                global_conflict=self.global_access(node['right'])[1]&self.global_access(destination)[0]
+                local_conflict=self.local_access(node['right'])[1]&self.local_access(destination)[0]
+                if op!=16 and (global_conflict or local_conflict):
                     return self.unsupported('compound assignment helper side-effect order not established',dtype=dtype)
                 value=self.coerce(self.expression(node["right"]),dtype)
                 if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination),dtype),value),dtype,
@@ -509,7 +543,18 @@ class ShaderFields:
                          {'zero_guard':True} if op==4 and not matrix_product else {})
         if kind=="call":
             name=node["function"];arguments=node.get("args",[])
-            if self.unsequenced(arguments):return self.unsupported('call argument side-effect order not established',dtype=dtype)
+            # GLSL330/GLES300 evaluate call arguments once, left to right.
+            if name=='modf' and name not in self.functions:
+                if len(arguments)!=2:return self.unsupported('modf requires two arguments',dtype=dtype)
+                if not re.fullmatch(r'float[1-4]?',dtype):return self.unsupported('modf numeric type not lowered',dtype=dtype)
+                value=self.coerce(self.expression(arguments[0]),dtype)
+                target=self.bind_destination(arguments[1])
+                if target.get('kind') not in {'variable','member','index'}:
+                    return self.unsupported('modf output is not writable storage',dtype=dtype)
+                if target.get('type',{}).get('name')!=dtype:
+                    return self.unsupported('modf output storage type mismatch',dtype=dtype)
+                self.write(target,Field('trunc',(value,),dtype,{'output_of':'modf'}))
+                return Field('modf_fraction',(value,),dtype)
             if name.lower().startswith("tex") and arguments:
                 if name not in {'tex2D','tex3D','texCUBE'} or len(arguments)!=2:
                     return self.unsupported('texture sampling overload not lowered: '+name,dtype=dtype)
@@ -553,6 +598,11 @@ class ShaderFields:
             if isinstance(node,list):
                 for item in node:targets(item)
             elif isinstance(node,dict):
+                for output in self.output_targets(node):
+                    while output.get('kind') in {'member','index'}:output=output['object']
+                    if output.get('kind')=='variable':
+                        writes.add(output['name'])
+                        if output.get('global'):global_writes.add(output['name'])
                 target=None
                 if node.get('kind')=='binary' and node['operator']>=16:target=node['left']
                 elif node.get('kind')=='unary' and node['operator'] in {3,4,5,6}:target=node['operand']

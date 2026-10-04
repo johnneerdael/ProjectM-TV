@@ -96,7 +96,7 @@ BINARY={'add':np.add,'subtract':np.subtract,'multiply':np.multiply,'divide':np.d
 UNARY={'sin':np.sin,'cos':np.cos,'tan':np.tan,'asin':np.arcsin,'acos':np.arccos,
        'atan':np.arctan,'abs':np.abs,'sqrt':np.sqrt,'exp':np.exp,'exp2':np.exp2,'log':np.log,
        'log2':np.log2,'floor':np.floor,'ceil':np.ceil,'round':np.rint,
-       'trunc':np.trunc,'sign':np.sign}
+       'trunc':np.trunc,'sign':np.sign,'modf_fraction':lambda value:np.modf(value)[0]}
 
 
 def evaluate(field:Field,*,inputs=None,sample=None):

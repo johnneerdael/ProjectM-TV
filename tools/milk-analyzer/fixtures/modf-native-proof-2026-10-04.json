@@ -1,0 +1,166 @@
+{
+  "basis": "Four analytic modf/state predictions versus unchanged published core on owned emulator",
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "rows": [
+    {
+      "fixture": "positive",
+      "prediction": {
+        "source_sha256": "454aeb330553c8de0a97d4c33191a388a44b79ab5c49f1641830db491fa043f9",
+        "expected_rgb": [
+          0.75,
+          0.5,
+          0.25
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Analytic prediction frozen before native observation"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "modf-positive.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "observed_colors": [
+        [
+          191,
+          128,
+          64,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "e67e0c69b4375206c23c9aa70b01405c1db8e7077e148cad6820344429065f6e"
+    },
+    {
+      "fixture": "negative",
+      "prediction": {
+        "source_sha256": "9c1fe4378d25ee3a3cab11f2576a014b75c5a4b7af558bbeded3f3c6fbc959a3",
+        "expected_rgb": [
+          0.25,
+          0.5,
+          0.25
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Analytic prediction frozen before native observation"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "modf-negative.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "observed_colors": [
+        [
+          64,
+          128,
+          64,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "bb39d750f5f495b01ccd56b3f3f0729b56e13143e0b8a28cf76954ff95ba43c8"
+    },
+    {
+      "fixture": "loop",
+      "prediction": {
+        "source_sha256": "963fd67d5803e1e762b3ee4c0defcf71c0f83d26ec0cdafd6bda529ff480320f",
+        "expected_rgb": [
+          0.75,
+          0.75,
+          0.25
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Analytic prediction frozen before native observation"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "modf-loop.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "observed_colors": [
+        [
+          191,
+          191,
+          64,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "8e1bc9ef4aeb581c440d13f7827d8a2c47a30e319fef912d2310d09cb66b9b35"
+    },
+    {
+      "fixture": "call-order",
+      "prediction": {
+        "source_sha256": "123834816d0085c5fbedc7bde34c5072b490388684dc509d42bdaa0361c930a5",
+        "expected_rgb": [
+          0.6875,
+          0.5,
+          0.25
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Analytic prediction frozen before native observation"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "modf-call-order.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "observed_colors": [
+        [
+          175,
+          128,
+          64,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "3277cb097cb55a57151a4fe5fe4f06c8b4aaa4eefba02f4a07d43585004d0e2b"
+    }
+  ],
+  "whole_preset_accuracy_verified": false
+}

@@ -643,6 +643,17 @@ isolated API34 emulator with zero RGB8 error across all30 frames each. See
 `fixtures/helper-state-native-proof-2026-10-04.json`. This does not establish
 whole-preset appearance accuracy.
 
+`modf` now returns a signed fractional value and writes the floating integral
+part to output storage without reading its old value. Output writes survive
+local/global loops, aliases, swizzles and array cells. Function-call arguments
+follow the GLSL target's left-to-right rule; unsafe operand and compound-value
+conflicts remain unknown. All nine recorded source witnesses lower completely.
+Four published-core emulator fixtures match all30 frames each with zero RGB8
+error. The pinned translator accepts scalar calls but rejects vector calls;
+numerical vector semantics and runtime compatibility stay separate. Evidence:
+`fixtures/modf-source-proof-2026-10-04.json` and
+`fixtures/modf-native-proof-2026-10-04.json`.
+
 Remaining work includes faithful source geometry/rasterization, external texture
 loading and random shader uniforms, complete drawing/blend ordering, all helper/loop/control-flow
 semantics, discarded fragments and native precision verification. The numeric
