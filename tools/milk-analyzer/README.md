@@ -1234,8 +1234,8 @@ nonnegative signed remainder produces0..7. Native rand is not assumed to return
 an integer. Negative seeds and unbounded recurrences fail to establish this domain.
 See `fixtures/ludicrous-speed-q-domain-proof-2026-10-04.json`.
 
-The shader definite-assignment analysis does not consume these domains yet, so
-**23 known blockers remain**. No appearance or whole-corpus credit is added.
+At checkpoint d7438fd8, shader integration was pending and the source audit
+retained **23** known blockers. No appearance or whole-corpus credit is added.
 
 
 The domain proof applies native frame boundaries: configuration/audio/time and
@@ -1244,4 +1244,20 @@ they reset to unknown. Main Q slots reset to their initialization snapshot while
 custom variables persist. Shared-register-dependent programs are rejected until
 other-phase writes are modeled, and exported IEEE nonfinite objects stay unknown.
 Counterexamples cover audio/configuration resets, Q resets, disabled-shape register
-initialization and overflow constants. The shader integration remains pending.
+initialization and overflow constants. Shader integration at that checkpoint was still pending; see the following update.
+
+
+### Source domain integration into shader branch coverage
+
+Proven main-Q bounds feed only original uniform components. Restricted float32-aware
+int conversion and nonnegative integer remainder infer finite selector sets;
+equality branches narrow them using immutable expression identity. Changing a
+selector cannot borrow its old constraint. Missing/negative domains, incomplete
+cases, local storage and overflow remain uncertain. Scalar and grid backends retain
+input-domain guards even when a branch/result becomes constant; inputs outside
+the premise cannot silently produce a certified output.
+
+The original315 recheck retains **22** source gaps, clearing only
+`martin - ludicrous speed.milk`. No new blockers or source-token/parsed inventory
+changes appeared. See `fixtures/focused-blockers-22-selector-domains-2026-10-04.json`.
+This is an input and definite-assignment proof, not full appearance certification.

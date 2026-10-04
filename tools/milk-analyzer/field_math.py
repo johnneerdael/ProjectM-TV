@@ -154,6 +154,11 @@ def evaluate(field:Field,*,inputs=None,sample=None):
         else:
             args=[visit(a) for a in node.args]
             if op=='sequence':raw=args[-1]
+            elif op=='source_domain_guard':
+                lo,hi=node.detail['bounds']
+                if np.any(~np.isfinite(args[0])) or np.any((args[0]<lo)|(args[0]>hi)):
+                    raise UnresolvedMath('source domain violated by shader input')
+                raw=True
             elif op=='index_guard':
                 index=args[0]
                 if index.size!=1 or index.item()<0 or index.item()>=node.detail['length']:

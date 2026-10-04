@@ -1,4 +1,4 @@
-# Engineering handoff: initialization and selector proofs (4 presets)
+# Engineering handoff: initialization and selector proofs (3 remaining presets)
 
 Date: 2026-10-04. Owner task: source predictor blocker reduction, draft PR #25.
 
@@ -7,8 +7,8 @@ unpatched upstream binary. Use a separate worktree based on current `main`.
 Implement engine fixes as `tools/projectm-patches/*.patch`; do not commit edited
 `third_party/projectm` submodule files. Keep authored presets unchanged.
 
-The checkpoint contains 23 distinct blocked presets from the original 315-case
-subset: 16 parsing, four initialization and three random-binding cases. These
+The checkpoint contains 22 distinct blocked presets from the original 315-case
+subset: 16 parsing, three initialization and three random-binding cases. These
 counts are source interpretation gaps, not failed visual predictions. Previously
 merged PRs #26/#27 must not be reimplemented. PR #28 merged into the separate
 Native4K feature branch, not into this core 2.2.8 reference.
@@ -28,28 +28,27 @@ and unresolved outcomes rather than changing source to make a test pass.
 
 ## Assignment and attribution
 
-Do not treat all four cases as native bugs. One lacks an analyzer range proof;
-three read authored globals before assignment and need a defined target-language
-and engine initialization policy. Arbitrary zero filling would mask uncertainty.
-All four exact source hashes have successful saved baseline rows; successful or
+The three remaining cases read authored globals before assignment and need a
+defined target-language and engine initialization policy. The selector case is
+resolved in the analyzer; no native repair is requested for it. Arbitrary zero filling would mask uncertainty.
+All three remaining exact source hashes have successful saved baseline rows; successful or
 repeatable rendering does not prove a read is defined.
 
 Evidence fixtures:
 `tools/milk-analyzer/fixtures/remaining-uninitialized-5-2026-10-04.json` (historical5;
 exclude the resolved New Creation case) and
 `tools/milk-analyzer/fixtures/focused-blockers-23-helper-scratch-2026-10-04.json`
-(current4). New Creation was resolved by component-level untouched-Q inference;
+(historical4; current3 in the22-case fixture). New Creation was resolved by component-level untouched-Q inference;
 the three helper scratch ordering cases were resolved separately. Do not count
 those as remaining native defects.
 
 | Exact preset filename | Full-file SHA-256 | Section |
 |---|---|---|
 | Serge + martin - crystal palace tunnel003.milk | `f4ab74c7f561e50177b1b68ecf647045de78582ba378e39bb9295d26a55fd4e2` | warp_ |
-| martin - ludicrous speed.milk | `9a99802ec59187a9f635f615db07622c5feaa15d02ed64beefb8156e68d48b22` | warp_ |
 | martin - mandelbox explorer - wreck diver nz+ liquititty.milk | `2d767a8f65168592fc25b0e70accb968fa5b118296b64f66a62e5f889a9faddd` | comp_ |
 | martin - organic light.milk | `71c481a0ebc470c3a9e717630cdd3785f4217248f81cbe6157cf1da99914698e` | comp_ |
 
-## I1: prove the selector domain in ludicrous speed
+## I1: resolved selector case — ludicrous speed (reference only)
 
 `martin - ludicrous speed.milk`, warp:
 
@@ -141,7 +140,6 @@ and actual generated declarations before patching.
 ## Exact saved baseline joins
 
 - Serge + martin - crystal palace tunnel003.milk: `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/rows/b8d846b1f9b5d1fb7245d34a36f851c1dde3d5756bcabdc5e9292ae2dab35ec2.json`; saved row hash `44ee49948d1ae0aaa080d71995528663effd85238d1fa0aba427ca88e75028de`.
-- martin - ludicrous speed.milk: `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/rows/6852a7e4fd112f67efdfb79268345a6fb86086f2144a1286437f9ebce9d7874f.json`; saved row hash `25821dfe3b187829fc472cc6285302feee9ccde24d0ec9a720ae79c7b563876d`.
 - martin - mandelbox explorer - wreck diver nz+ liquititty.milk: `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/rows/655b87fa4b14d21cccce47b1ff664038ab4a388baf5b60c9c277b7e7ca5ed19c.json`; saved row hash `d982325c510dcb721bd3a75fc675fcd60efe87d041a17776c176439d58fd529d`.
 - martin - organic light.milk: `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/rows/42d373bec3c6c33d095a4228bb43b77e77e7f9bb815fcedb640eb58f4e297587.json`; saved row hash `200287ffb3fa8c593f59765d32e9f80987a47a09dc50b5f14f73bc6c220201c4`.
 
@@ -170,7 +168,7 @@ Its instrumented protocol is distinct from published-AAR controls. Do not alter
 its devices, running processes, rows or settings.
 
 
-## Follow-up: selector equation invariant established, integration pending
+## Earlier checkpoint: equation invariant established before shader integration
 
 The new restricted `equation_domains.py` analyzer establishes an inductive q29
 bound of0..7 for the exact ludicrous-speed main equations. Native rand12 produces
@@ -179,10 +177,9 @@ boolean increment stays0..1 and the subsequent signed integer remainder is0..7.
 The state proof includes initialization and is closed under frame updates.
 Mutation controls reject negative seeds, unbounded growth and nested effects.
 
-Evidence: `fixtures/ludicrous-speed-q-domain-proof-2026-10-04.json`. The shader
-branch/definite-assignment layer still needs to consume this bound to prove all
-selector cases initialize arg. The preset remains blocked until that integration
-and its counterexamples are verified; the current total remains23.
+Evidence: `fixtures/ludicrous-speed-q-domain-proof-2026-10-04.json`. At checkpoint
+d7438fd8, shader integration was still pending and23source blockers were retained.
+The current disposition below supersedes that pending status.
 
 
 The proof now explicitly applies frame resets: built-in configuration/audio/time
@@ -192,3 +189,16 @@ until cross-phase effects are modeled. Nonfinite native constant exports stay
 unknown. These guards correct three issues found in focused review; the specific
 q29 invariant still holds. Do not infer audio/configuration persistence from an
 init assignment or ignore custom phase register writes, even for disabled shapes.
+
+
+## Current disposition: ludicrous speed resolved, three global cases remain
+
+The q29 invariant is integrated into shader analysis: q29 is0..7, conversion is
+in range, k1 is0..3, and every reachable case initializes arg. Numerical input-domain
+guards survive branch folding in scalar/grid backends. Mutation, missing/negative
+bounds, incomplete cases, local shadowing and overflow remain unresolved controls.
+
+The current22-case fixture clears only ludicrous speed. I2/I3/I4 remain engineering
+investigations. This file's historical name retains the earlier count for stable
+links; I1 is not an outstanding native bug. Current list:
+`fixtures/focused-blockers-22-selector-domains-2026-10-04.json`.

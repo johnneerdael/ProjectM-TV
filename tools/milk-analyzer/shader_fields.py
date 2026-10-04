@@ -37,7 +37,7 @@ ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul',
 
 
 class ShaderFields:
-    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,array_initializer_policy='legacy-layout-v1'):
+    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,known_uniform_component_domains=None,array_initializer_policy='legacy-layout-v1'):
         if stage not in {"warp","composite"}:raise ValueError("warp or composite stage required")
         self.stage=stage;self.frame=frame;self.warp_reads_blur=warp_reads_blur
         self.environment={};self.complete=True;self.unknown=[]
@@ -46,6 +46,9 @@ class ShaderFields:
         self.main_binding_policy=main_binding_policy
         self.known_uniforms=known_uniforms or {}
         self.known_uniform_components=known_uniform_components or {}
+        self.known_uniform_component_domains=known_uniform_component_domains or {}
+        self.case_constraints={}
+        self.domain_guards={}
         if array_initializer_policy not in {'legacy-layout-v1','grouped-elements-v1'}:raise ValueError('unsupported array initializer policy')
         self.array_initializer_policy=array_initializer_policy
         self.effects=[]
@@ -164,6 +167,62 @@ class ShaderFields:
             if item.op in {'loop_result','loop_slot','array','array_index','array_write'}:continue
             pending.extend(item.args)
         return value
+
+    @staticmethod
+    def scalar_bounds(value):
+        """Restricted finite bounds, including the native uniform float32 boundary."""
+        import math
+        if value.op=='constant' and isinstance(value.detail.get('value'),(int,float)):
+            x=float(value.detail['value']);return (x,x) if math.isfinite(x) else None
+        if value.op=='member' and 'source_domain' in value.detail:
+            import numpy as np
+            lo,hi=value.detail['source_domain']
+            if not (math.isfinite(lo) and math.isfinite(hi) and lo<=hi):return None
+            with np.errstate(over='ignore',invalid='ignore'):
+                bounds=(float(np.float32(lo)),float(np.float32(hi)))
+            return bounds if all(math.isfinite(x) for x in bounds) else None
+        if value.op in {'cast','narrow','construct'} and len(value.args)==1 and value.dtype=='int':
+            bound=ShaderFields.scalar_bounds(value.args[0])
+            if bound is None or not (-2147483648<=bound[0]<=bound[1]<=2147483647):return None
+            return tuple(math.trunc(x) for x in bound)
+        if value.op=='remainder' and value.dtype=='int':
+            left=ShaderFields.scalar_bounds(value.args[0]);right=ShaderFields.scalar_bounds(value.args[1])
+            if left is None or right is None:return None
+            if not (0<=left[0]<=left[1]<=2147483647 and right[0]==right[1] and
+                    right[0]==int(right[0]) and 1<=right[0]<=2147483647):return None
+            return (0,min(int(left[1]),int(right[0])-1))
+        return None
+
+    def condition_cases(self,condition):
+        """Narrow equality branches on one bounded integer expression identity."""
+        if condition.op not in {'equal','not_equal'} or len(condition.args)!=2:return None
+        selector,constant=condition.args
+        if selector.op=='constant':selector,constant=constant,selector
+        if constant.op!='constant' or selector.dtype!='int':return None
+        bound=self.scalar_bounds(selector)
+        if bound is None or bound[1]-bound[0]>63:return None
+        values=frozenset(range(int(bound[0]),int(bound[1])+1))
+        saved=self.case_constraints.get(id(selector))
+        if saved is not None:values&=saved[1]
+        literal=constant.detail.get('value')
+        if not isinstance(literal,(int,float)):return None
+        yes=frozenset(v for v in values if (v==literal)==(condition.op=='equal'))
+        pending=[selector]
+        while pending:
+            value=pending.pop()
+            if value.op=='member' and 'source_domain' in value.detail:
+                self.domain_guards[id(value)]=Field('source_domain_guard',(value,),'bool',
+                    {'bounds':self.scalar_bounds(value)})
+            pending.extend(value.args)
+        return selector,yes,values-yes
+
+    def scoped_cases(self,body,case):
+        before=dict(self.case_constraints)
+        if case is not None:
+            selector,values=case
+            self.case_constraints[id(selector)]=(selector,values)
+        try:self.scoped(body)
+        finally:self.case_constraints=before
 
     @staticmethod
     def shape(dtype):
@@ -298,13 +357,15 @@ class ShaderFields:
                     elif declaration['type'].get('flags',0)&4 and name in self.known_uniforms:
                         value=Field('constant',dtype=dtype,detail={'value':self.known_uniforms[name],
                                     'basis':'explicit source/context uniform binding'})
-                    elif declaration['type'].get('flags',0)&4 and dtype=='float4' and name in self.known_uniform_components:
+                    elif declaration['type'].get('flags',0)&4 and dtype=='float4' and (name in self.known_uniform_components or name in self.known_uniform_component_domains):
                         packed=Field('input',dtype=dtype,detail={'name':name})
-                        lanes=self.known_uniform_components[name]
+                        lanes=self.known_uniform_components.get(name,{})
+                        domains=self.known_uniform_component_domains.get(name,{})
                         value=Field('components',tuple(
                             Field('constant',dtype='float',detail={'value':lanes[i],
                                 'basis':'source-proven untouched main Q component'}) if i in lanes else
-                            Field('member',(packed,),'float',{'field':'xyzw'[i],'swizzle':True})
+                            Field('member',(packed,),'float',{'field':'xyzw'[i],'swizzle':True,
+                                **({'source_domain':domains[i]} if i in domains else {})})
                             for i in range(4)),dtype)
                     else:value=Field('input' if declaration['type'].get('flags',0)&4 or dtype.startswith('sampler') else 'uninitialized',dtype=dtype,detail={'name':name})
                     self.environment[name]=value
@@ -325,6 +386,7 @@ class ShaderFields:
         result=self.environment['ret']
         if not self.complete and result.op!='unknown':
             return Field('unknown',(result,),result.dtype,{'reason':'shader contains unresolved semantic effects'})
+        self.effects[:0]=self.domain_guards.values()
         if self.effects:result=Field('sequence',tuple(self.effects)+(result,),result.dtype)
         return result
 
@@ -884,7 +946,16 @@ class ShaderFields:
             elif kind in {'for','while'}:self.loop(statement)
             elif kind=="if":
                 condition=self.expression(statement["condition"])
+                cases=None
                 if not self.has_shared_effects(statement['condition']):
+                    cases=self.condition_cases(condition)
+                    if cases is not None:
+                        selector,yes_values,no_values=cases
+                        if not no_values or not yes_values:
+                            take_yes=bool(yes_values)
+                            self.scoped_cases(statement['yes'] if take_yes else statement['no'],
+                                (selector,yes_values if take_yes else no_values))
+                            continue
                     from field_math import evaluate
                     try:
                         known=evaluate(condition)
@@ -893,10 +964,10 @@ class ShaderFields:
                     except ValueError:pass
                 before=dict(self.environment);globals_before=dict(self.globals)
                 outer_effects=self.effects;self.effects=[]
-                self.scoped(statement["yes"]);yes=dict(self.environment);globals_yes=dict(self.globals)
+                self.scoped_cases(statement["yes"],None if cases is None else (cases[0],cases[1]));yes=dict(self.environment);globals_yes=dict(self.globals)
                 yes_effects=self.effects;self.effects=[]
                 self.environment=dict(before);self.globals=dict(globals_before)
-                self.scoped(statement["no"]);no=dict(self.environment);globals_no=dict(self.globals)
+                self.scoped_cases(statement["no"],None if cases is None else (cases[0],cases[2]));no=dict(self.environment);globals_no=dict(self.globals)
                 no_effects=self.effects;self.effects=outer_effects
                 true=Field('constant',dtype='bool',detail={'value':True})
                 self.effects.extend(Field('select',(condition,effect,true),'bool') for effect in yes_effects)

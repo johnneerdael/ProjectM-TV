@@ -7,8 +7,8 @@ unpatched upstream binary. Use a separate worktree based on current `main`.
 Implement engine fixes as `tools/projectm-patches/*.patch`; do not commit edited
 `third_party/projectm` submodule files. Keep authored presets unchanged.
 
-The checkpoint contains 23 distinct blocked presets from the original 315-case
-subset: 16 parsing, four initialization and three random-binding cases. These
+The checkpoint contains 22 distinct blocked presets from the original 315-case
+subset: 16 parsing, three initialization and three random-binding cases. These
 counts are source interpretation gaps, not failed visual predictions. Previously
 merged PRs #26/#27 must not be reimplemented. PR #28 merged into the separate
 Native4K feature branch, not into this core 2.2.8 reference.

@@ -1,11 +1,11 @@
 {
-  "scope": "Inductive equation range proof only; shader definite-assignment integration pending;23blockers retained",
+  "scope": "Inductive equation range proof; shader integration in focused-blockers-22-selector-domains-2026-10-04.json",
   "preset": "martin - ludicrous speed.milk",
   "preset_sha256": "9a99802ec59187a9f635f615db07622c5feaa15d02ed64beefb8156e68d48b22",
   "reader_sha256": "57b19fe4d27ea81c916052b555806a92b092dde545a4a0a8c831d189ee789ac4",
   "equation_loader_policy": "projectmtv-core-2.2.8-v1",
   "native_tree_functions_sha256": "f886626367d03d6602a87a2ebf02ec7ca4636fa9560311ffa5461fa1201f817f",
-  "implementation_sha256": "6c9c81247bc631bf7931aefd73ac863e6e5013a6eede05f9712844a90e6b8270",
+  "implementation_sha256": "d63bdda59623dbe88fb970414a93ae37fffff0cb8400ea12d3f42ee4a18a56b7",
   "main_q_output_domains": {
     "q5": [
       0,

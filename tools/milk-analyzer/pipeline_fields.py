@@ -40,6 +40,7 @@ class SourcePipeline:
         self.source_values=source_values or {};self.stage_resolution=None
         self.known_uniforms={}
         self.known_uniform_components={}
+        self.known_uniform_component_domains={}
         self.array_initializer_policies={}
         self.coordinate_profile=coordinate_profile
         self.feedback=field.copy();self.frame=0;self.warp_reads_blur=warp_reads_blur
@@ -101,6 +102,8 @@ class SourcePipeline:
         pipeline.equation_loader_policy=equation_loader_policy
         from equation_loading import constant_q_components
         pipeline.known_uniform_components=constant_q_components(source,policy=equation_loader_policy)
+        from equation_domains import q_uniform_domains
+        pipeline.known_uniform_component_domains=q_uniform_domains(source,policy=equation_loader_policy)
         pipeline.array_initializer_policies={name:source.get('sections',{}).get(prefix,{}).get('array_initializer_policy','legacy-layout-v1')
                                              for name,prefix in [('warp','warp_'),('composite','comp_')]}
         return pipeline
@@ -177,6 +180,7 @@ class SourcePipeline:
             nonlocal pending_motion_uv
             model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap,
                                main_binding_policy=self.main_binding_policy,known_uniforms=self.known_uniforms,known_uniform_components=self.known_uniform_components,
+                               known_uniform_component_domains=self.known_uniform_component_domains,
                                array_initializer_policy=self.array_initializer_policies.get(name,'legacy-layout-v1'))
             expression=model.lower(tree,language_extensions=self.language_extensions.get(name,[]),
                                    native_samplers=self.native_samplers.get(name,{}))

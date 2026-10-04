@@ -111,3 +111,12 @@ def main_q_domains(source,*,policy):
             return {f'q{i}':output[f'q{i}'] for i in range(1,33) if output.get(f'q{i}') is not None}
         state=joined
     return {}
+
+
+def q_uniform_domains(source,*,policy):
+    """Pack proven post-frame main Q domains without guessing other lanes."""
+    result={}
+    for name,bounds in main_q_domains(source,policy=policy).items():
+        index=int(name[1:])-1
+        result.setdefault('_q'+chr(ord('a')+index//4),{})[index%4]=bounds
+    return result

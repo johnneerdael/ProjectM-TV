@@ -253,6 +253,11 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
         else:
             args=[visit(a,ctx) for a in node.args]
             if op=='sequence':raw=args[-1]
+            elif op=='source_domain_guard':
+                lo,hi=node.detail['bounds']
+                if np.any(~np.isfinite(args[0])) or np.any((args[0]<lo)|(args[0]>hi)):
+                    raise UnresolvedMath('source domain violated by shader input')
+                raw=np.ones(count,dtype=bool)
             elif op=='index_guard':
                 index=args[0]
                 if index.shape!=(count,) or np.any((index<0)|(index>=node.detail['length'])):

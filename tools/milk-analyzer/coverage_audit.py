@@ -35,6 +35,8 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                    and cache.get('reader_sha256') == reader_sha)
     from equation_loading import constant_q_components
     known_q=constant_q_components(cache,policy=equation_loader_policy) if valid_cache else {}
+    from equation_domains import q_uniform_domains
+    known_q_domains=q_uniform_domains(cache,policy=equation_loader_policy) if valid_cache else {}
     stage_plan=None
     if shader_profile is not None and valid_cache:
         from stage_resolution import resolve_stages
@@ -124,6 +126,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                                for name in requested):bindings=requested
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
                                      frame=3, warp_reads_blur=False,known_uniform_components=known_q,
+                                     known_uniform_component_domains=known_q_domains,
                                      array_initializer_policy=section.get('array_initializer_policy','legacy-layout-v1'))
                 try:
                     model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings)
