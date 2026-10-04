@@ -151,3 +151,14 @@ duplicate full-corpus render. The other agent's saved baseline is read-only at:
 `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/`.
 Its instrumented protocol is distinct from published-AAR controls. Do not alter
 its devices, running processes, rows or settings.
+
+
+## Latest merged-engine predictor checkpoint
+
+PR29 and PR30 are merged into main. A fresh37-patch reader/translator recheck of
+the original315 files clears all16parser blockers, leaving **6** source/lowering
+gaps: the three global-input cases and three random-binding context cases. No new
+blockers or source-token inventory changes appeared. See
+`fixtures/focused-blockers-6-merged29-30-2026-10-04.json`. This supersedes earlier
+22-case counts; it does not certify Android/AAR appearance. The global-input owner
+continues those three cases; the predictor owner handles random context adoption.

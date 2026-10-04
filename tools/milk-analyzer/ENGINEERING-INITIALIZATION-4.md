@@ -249,3 +249,14 @@ Invoke with a prepared HLSL file, profile `ps_3_0`, explicit D3DX9_36 path and f
 wrapper can otherwise delegate to Wine's built-in compiler. No rendering/capture
 is needed to verify compiler reflection. The remaining count stays22 until the
 current core binding/default policy and analyzer adaptation are verified.
+
+
+## Latest merged-engine predictor checkpoint
+
+PR29 and PR30 are merged into main. A fresh37-patch reader/translator recheck of
+the original315 files clears all16parser blockers, leaving **6** source/lowering
+gaps: the three global-input cases and three random-binding context cases. No new
+blockers or source-token inventory changes appeared. See
+`fixtures/focused-blockers-6-merged29-30-2026-10-04.json`. This supersedes earlier
+22-case counts; it does not certify Android/AAR appearance. The global-input owner
+continues those three cases; the predictor owner handles random context adoption.

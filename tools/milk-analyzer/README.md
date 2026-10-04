@@ -1277,3 +1277,35 @@ See the initialization engineering brief,
 `fixtures/legacy-global-constant-attribution-2026-10-04.json` and optional CPU-only
 `d3dx_reference_probe.c`. DLL provenance is verified, including the native legacy
 compiler dependency; no Microsoft binaries are committed.22source blockers remain.
+
+
+### Legacy parser validity oracle
+
+All16remaining native parser witnesses compile under the verified Microsoft
+legacy compiler using official Winamp inputs and the MilkDrop2.25c wrapper.
+The14sample identifiers, declaration macro and parenthesized-expression swizzle
+are valid under the tested ps_3_0/flags65536 settings. This confirms valid-source
+compatibility failures, not malformed presets. See the shader engineering brief
+and `fixtures/legacy-parser-validity-16-2026-10-04.json`. Compiler validity does
+not certify current AAR execution or visual accuracy;22source blockers remain.
+
+
+### Merged parser/alias patches: original315 recheck
+
+A fresh37-patch source snapshot incorporating merged PRs29/30 now drives the
+native reader and unchanged CPU translation bodies. Re-reading the original315
+files clears all16parser witnesses and leaves **6** known source/lowering gaps:
+three implicit global-input cases and three random-sampler context cases. No new
+blockers appeared; original token/numbered-record inventories are preserved.
+The native parser changes increase parsing coverage; they are not hidden source
+exclusions. See `fixtures/focused-blockers-6-merged29-30-2026-10-04.json`.
+
+This is a conditional source/offline-compiler checkpoint, not a published-AAR
+Android shader-selection or whole-preset appearance certificate. The numerical
+single-asset random-alias probes confirm unqualified alias reads under a controlled
+asset pool in core2.2.8, but the analyzer's random-context guards remain pending
+explicit source/runtime-binding provenance. Production AAR assets are extracted
+into the search folder: merely placing one image there does not isolate a pool.
+The failed initial75-image probe is retained separately from the corrected
+single-asset protocol. Cross-stage same-colour controls cannot distinguish custom
+compilation from equal-colour fallback and receive no such credit.

@@ -156,3 +156,39 @@ duplicate full-corpus render. The other agent's saved baseline is read-only at:
 `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/`.
 Its instrumented protocol is distinct from published-AAR controls. Do not alter
 its devices, running processes, rows or settings.
+
+
+## Microsoft legacy compiler oracle: all16 original sections accepted
+
+All16 exact authored shader sections now compile under native Microsoft legacy
+D3DX with the official Winamp include.fx and MilkDrop2.25c PS wrapper, profile
+ps_3_0, flags65536. This includes all14 sample identifiers, the declaration/statement
+macros, and the nested parenthesized-expression swizzle. They are valid source
+under the tested legacy settings; do not classify them as malformed presets or
+repair authored filenames/equations to work around native parser defects.
+
+The D3DX9_36 wrapper and D3DX9_31 legacy dependency were both verified as native
+Microsoft DLLs under Wine, with Microsoft compiler9.15.779.0000 disassembly.
+The earlier mixed Wine compiler route is excluded. No D3D device rendering or
+current AAR shader acceptance is claimed by this compiler-only result.
+
+Evidence: `fixtures/legacy-parser-validity-16-2026-10-04.json`. It contains exact
+file/shader/prepared-HLSL hashes, result hashes and verified loader identity per
+preset. DLL/header/probe identity is in
+`fixtures/legacy-global-constant-attribution-2026-10-04.json`; complete local
+outputs are in `build/milk-analyzer/d3dx-parser-validity/`. Use the optional
+`d3dx_reference_probe.c` from the initialization brief to reproduce this oracle.
+The source-gap count stays22 until corrected native parsing and analyzer adoption
+are checked. Add these originals as parser regressions, alongside invalid-source
+and legitimate-modifier/member/type controls; acceptance must preserve semantics.
+
+
+## Latest merged-engine predictor checkpoint
+
+PR29 and PR30 are merged into main. A fresh37-patch reader/translator recheck of
+the original315 files clears all16parser blockers, leaving **6** source/lowering
+gaps: the three global-input cases and three random-binding context cases. No new
+blockers or source-token inventory changes appeared. See
+`fixtures/focused-blockers-6-merged29-30-2026-10-04.json`. This supersedes earlier
+22-case counts; it does not certify Android/AAR appearance. The global-input owner
+continues those three cases; the predictor owner handles random context adoption.
