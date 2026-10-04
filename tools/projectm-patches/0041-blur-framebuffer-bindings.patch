@@ -1,0 +1,43 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Preserve caller framebuffer bindings across blur allocation
+
+ProjectM TV-specific fix against projectM v4.1.7 plus patches 0001-0040.
+BlurTexture::AllocateTextures calls Framebuffer::SetSize, which unbinds the
+read and draw targets on first use and resize. Capture both caller bindings
+before allocation so Update restores the actual render targets. Warp shaders
+that sample blur update it after warping; losing the target sent subsequent
+waveform/border draws to framebuffer zero (error 1286 on headless macOS).
+
+Regression controls cover distinct read/draw targets, first use, unchanged
+size, resize, reference-scaled blur, numerical blur output, and the unchanged
+midgitstraights of majillaen - featy sweet.milk full renderer.
+
+diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.cpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+@@ -114,6 +114,12 @@ void BlurTexture::Update(Renderer::Texture& sourceTexture, const PerFrameContext
+         return;
+     }
+
++    // Save caller bindings before AllocateTextures: resizing its framebuffer unbinds both targets.
++    GLint origReadFramebuffer;
++    GLint origDrawFramebuffer;
++    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &origReadFramebuffer);
++    glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &origDrawFramebuffer);
++
+     // MilkDrop's blur levels are fixed fractions of its texture, blurred by a few of their texels, so
+     // their radius is a share of the picture only at one render size. Above the line reference size
+     // they are made as from a source of the reference's size (BlurSourceFor()): the blur textures keep
+@@ -156,12 +162,6 @@ void BlurTexture::Update(Renderer::Texture& sourceTexture, const PerFrameContext
+     scale[2] = 1.0f / (tempMax - tempMin);
+     bias[2] = -tempMin * scale[2];
+
+-    // Remember previously bound framebuffer
+-    GLint origReadFramebuffer;
+-    GLint origDrawFramebuffer;
+-    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &origReadFramebuffer);
+-    glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &origDrawFramebuffer);
+-
+     m_blurFramebuffer.Bind(0);
+
+     // Each pass can draw straight into its blur texture instead of drawing into the framebuffer's

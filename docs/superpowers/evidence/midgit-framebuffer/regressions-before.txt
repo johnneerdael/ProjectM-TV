@@ -1,0 +1,27 @@
+Test project <worktree>/build/framebuffer-regressions
+    Start 6: random-texture-blur-framebuffers
+1/2 Test #6: random-texture-blur-framebuffers ...***Failed    0.89 sec
+blur 1 first read=0/2 draw=0/3
+blur changed caller framebuffer: first
+
+    Start 7: random-texture-midgit-render
+2/2 Test #7: random-texture-midgit-render .......***Failed    0.77 sec
+[Preset] Loading preset from file "<worktree>/core/src/test/native/projectm-regressions/../../../main/assets/presets/midgitstraights of majillaen - featy sweet.milk".
+[Warp Shader] Loaded preset warp shader code.
+[Composite Shader] Loaded composite shader code.
+[Warp Shader] Successfully compiled warp shader code.
+Loaded texture red
+[Composite Shader] Successfully compiled composite shader code.
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 0 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+midgit frame=0 render_gl_error=1286
+midgit full render framebuffer failure
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   1.66 sec
+
+The following tests FAILED:
+	  6 - random-texture-blur-framebuffers (Failed)
+	  7 - random-texture-midgit-render (Failed)
+Errors while running CTest

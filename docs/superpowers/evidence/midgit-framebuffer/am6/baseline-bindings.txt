@@ -1,0 +1,2 @@
+blur 1 first read=0/2 draw=0/3
+blur changed caller framebuffer: first

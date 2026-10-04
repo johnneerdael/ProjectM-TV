@@ -1,0 +1,45 @@
+{
+  "base_commit": "6244a3ecad952b365e177ce3ab7cfb5081c05225",
+  "upstream_commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+  "patch_count_before": 40,
+  "patch_count_after": 41,
+  "patch_sha256": "8ac85ecb409e1344e05552a50d380051e927450ddb744f13d5e7136938be965a",
+  "preset_path": "core/src/main/assets/presets/midgitstraights of majillaen - featy sweet.milk",
+  "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+  "gl_renderer": "Apple M4 Pro",
+  "gl_version": "4.1 Metal - 89.4",
+  "failure_trace": {
+    "before_allocation": {
+      "read": 2,
+      "draw": 2,
+      "draw_status": 36053
+    },
+    "after_allocation": {
+      "read": 0,
+      "draw": 0
+    },
+    "after_blur_update": {
+      "read": 0,
+      "draw": 0,
+      "draw_status": 33305
+    },
+    "waveform_gl_error": 1286,
+    "border_gl_error": 1286
+  },
+  "full_render_before": 1286,
+  "full_render_after": 0,
+  "regressions_before": {
+    "blur-framebuffers": "failed: read=0/2 draw=0/3 on first update",
+    "midgit-render": "failed: frame 0 error1286"
+  },
+  "regressions_after": {
+    "blur-framebuffers": "pass: Blur1/Blur3 first, same-size, resize, scaled, scaled-same-size; constant source RGB within 2 bytes",
+    "midgit-render": "pass: 4 frames, resize after frame1, successful readback"
+  },
+  "limits": [
+    "Host source-bound OpenGL; not published Android AAR binding evidence",
+    "Authored-preset numerical accuracy and MilkDrop appearance unverified",
+    "Bundled JPEG diagnostic retains pre-existing SOIL2 UBSan warnings",
+    "No performance improvement measured"
+  ]
+}

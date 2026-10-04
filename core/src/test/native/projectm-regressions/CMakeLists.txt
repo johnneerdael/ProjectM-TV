@@ -69,7 +69,7 @@ if(NOT APPLE)
     target_compile_definitions(random-texture-regressions PRIVATE USE_GLES)
     target_link_libraries(random-texture-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
-foreach(control manager stages shorthand numerical lifecycle)
+foreach(control manager stages shorthand numerical lifecycle blur-framebuffers midgit-render)
     add_test(NAME random-texture-${control} COMMAND random-texture-regressions
         ${control} "${CMAKE_CURRENT_BINARY_DIR}/textures-${control}")
     set_tests_properties(random-texture-${control} PROPERTIES TIMEOUT 30

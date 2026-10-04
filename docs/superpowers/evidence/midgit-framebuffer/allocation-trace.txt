@@ -1,0 +1,30 @@
+TRACE start read=7 draw=7 status=36053 error=0
+TRACE PerFrameUpdate(); read=7 draw=7 status=36053 error=0
+TRACE m_framebuffer.Bind(m_previousFrameBuffer); read=3 draw=3 status=36053 error=0
+TRACE blur allocation read=5->0 draw=0->0 error=0
+TRACE updateBlur(); read=0 draw=0 status=33305 error=0
+TRACE m_framebuffer.Bind(m_currentFrameBuffer); read=2 draw=2 status=36053 error=0
+TRACE m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext); read=2 draw=2 status=36053 error=0
+TRACE m_waveform.Draw(m_perFrameContext); read=2 draw=2 status=36053 error=0
+TRACE m_border.Draw(m_perFrameContext); read=2 draw=2 status=36053 error=0
+TRACE m_finalComposite.Draw(m_state, m_perFrameContext); read=2 draw=7 status=36053 error=0
+TRACE start read=7 draw=7 status=36053 error=0
+TRACE PerFrameUpdate(); read=7 draw=7 status=36053 error=0
+TRACE m_framebuffer.Bind(m_previousFrameBuffer); read=3 draw=3 status=36053 error=0
+TRACE blur allocation read=5->0 draw=0->0 error=0
+TRACE updateBlur(); read=0 draw=0 status=33305 error=0
+TRACE m_framebuffer.Bind(m_currentFrameBuffer); read=2 draw=2 status=36053 error=0
+TRACE m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext); read=2 draw=2 status=36053 error=0
+TRACE m_waveform.Draw(m_perFrameContext); read=2 draw=2 status=36053 error=0
+TRACE m_border.Draw(m_perFrameContext); read=2 draw=2 status=36053 error=0
+TRACE m_finalComposite.Draw(m_state, m_perFrameContext); read=2 draw=7 status=36053 error=0
+TRACE start read=7 draw=7 status=36053 error=0
+TRACE PerFrameUpdate(); read=7 draw=7 status=36053 error=0
+TRACE m_framebuffer.Bind(m_previousFrameBuffer); read=3 draw=3 status=36053 error=0
+TRACE m_framebuffer.Bind(m_currentFrameBuffer); read=2 draw=2 status=36053 error=0
+TRACE m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext); read=2 draw=2 status=36053 error=0
+TRACE blur allocation read=2->0 draw=2->0 error=0
+TRACE updateBlur(); read=0 draw=0 status=33305 error=0
+TRACE m_waveform.Draw(m_perFrameContext); read=0 draw=0 status=33305 error=1286
+TRACE m_border.Draw(m_perFrameContext); read=0 draw=0 status=33305 error=1286
+TRACE m_finalComposite.Draw(m_state, m_perFrameContext); read=2 draw=7 status=36053 error=0

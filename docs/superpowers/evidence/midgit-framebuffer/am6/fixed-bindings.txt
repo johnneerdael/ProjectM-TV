@@ -1,0 +1,11 @@
+blur 1 first read=2/2 draw=3/3
+blur 1 same-size read=2/2 draw=3/3
+blur 1 resize read=2/2 draw=3/3
+blur 1 scaled read=2/2 draw=3/3
+blur 1 scaled-same-size read=2/2 draw=3/3
+blur 3 first read=2/2 draw=3/3
+blur 3 same-size read=2/2 draw=3/3
+blur 3 resize read=2/2 draw=3/3
+blur 3 scaled read=2/2 draw=3/3
+blur 3 scaled-same-size read=2/2 draw=3/3
+blur-framebuffers controls passed
