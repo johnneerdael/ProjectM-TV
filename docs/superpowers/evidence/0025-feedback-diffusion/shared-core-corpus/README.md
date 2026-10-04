@@ -35,10 +35,11 @@ thumbnail differences. They cannot reconstruct the spec's 1182-pixel image MAE
 if only 256-pixel thumbnails remain. Authored-resolution and native-4K evidence
 require their respective matched jobs; describe missing metrics explicitly.
 
-The peer TV pilot's latest report had seven of eight full/selected equality
+The peer TV pilot's earlier report had seven of eight full/selected equality
 checks pass, with one baseline Echasketch mismatch. The new Mac-emulator epoch
-needs its own reviewed pilot before treating its corpus as stable. Never merge
-failed or cross-device protocols into successful coverage.
+passes all eight checks; the independently reviewed report SHA256 is
+`ba49e6f7796480f0190731f980ccb39847ddf2b22c8c4f155c9e35210e0cee82`.
+Never merge failed or cross-device protocols into successful coverage.
 
 ## Prepared candidate
 
@@ -54,3 +55,29 @@ harness sources, instrumentation identity, engine-instrumentation diff,
 core-clock diff and the common twenty-four patches. Both compiled ABIs include
 all three actual core native units. The APK has not been installed on the peer
 emulator and has not yet produced shared-protocol candidate measurements.
+
+## Live baseline and prepared comparison
+
+The corpus owner started the baseline-only scan on `emulator-5580`, PID 41990,
+in `build/follow-ups/core-corpus/measurements-core-emu-baseline-v1`.
+Its immutable protocol SHA256 is
+`369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180`.
+The owner supplies remote backup and a verified-completion notifier. Do not
+start a competing emulator job, replace its APK, modify its worktree or launch
+another baseline/notification watcher.
+
+The exact shared host runner and its 31 passing tests are copied here.
+`candidate-protocol.json` prepares our candidate while retaining the baseline
+role, device, stimulus, inventory, settings and capture protocol unchanged.
+Its SHA256 is
+`8875482343c04b8c29deba8638fe12b5dc2bf1124612e7a9d57255ca40a822fe`.
+`shared-baseline-readiness.json` verifies matching render-input signatures for
+49 already completed baseline rows. Original baseline protocols, row paths and
+payload hashes remain explicit; they are not relabelled as new measurements.
+
+After baseline completion and backup verification, run only the missing
+diffusion-candidate pilot and candidate scan. Reuse the source baseline rows
+by exact `render_input_sha256`. The candidate still needs its own pilot;
+the peer's candidate pilot tested different rendering fixes and does not
+validate diffusion. The shared owner's emulator lease must be released before
+installing our APK. Prepared metadata is not an automatic job queue.

@@ -23,5 +23,18 @@
       "sha256": "627b84dcf0d48061788ffe23268b07753b905bbfb2666bb20360ef79b87c60e0"
     }
   ],
-  "purpose": "prepare diffusion candidate with shared harness; no peer worktree or emulator modification"
+  "purpose": "prepare diffusion candidate with shared harness; no peer worktree or emulator modification",
+  "additional_runner_copy": {
+    "peer_commit": "b743e1d",
+    "files": [
+      {
+        "path": "run.py",
+        "sha256": "a29c40ba919487f0fd748c0fc50421346c85983ce40b2711897a2a14766801a7"
+      },
+      {
+        "path": "test_run.py",
+        "sha256": "ece1bf41126206ff0d1cf72feb344287f82f5e29d55053b25ee220c2a59ecad9"
+      }
+    ]
+  }
 }
