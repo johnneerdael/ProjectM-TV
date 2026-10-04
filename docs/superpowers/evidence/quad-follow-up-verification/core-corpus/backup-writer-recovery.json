@@ -1,0 +1,8 @@
+{
+  "shared_checkout_lock": "Two-writer regression fails before / passes after; different checkouts may overlap; lock releases on exit",
+  "relative_dataset_paths": "Regression fails before / passes after canonicalization",
+  "host_tool_tests_passed": 67,
+  "existing_archive_integrity_verified": 241,
+  "baseline_protocol_jobs_verified_at_check": 3341,
+  "backup_collision_recovery": "Existing checkout clean; all archive/blob checks pass; remote head acknowledged. One-off physical backup completed with4 jobs; scheduled baseline writer restarted with the shared lock."
+}

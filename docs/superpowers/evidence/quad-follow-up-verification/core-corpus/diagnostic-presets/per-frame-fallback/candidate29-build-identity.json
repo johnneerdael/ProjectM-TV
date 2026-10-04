@@ -1,0 +1,196 @@
+{
+  "apk": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups/build/follow-ups/core-corpus/candidate-29-build/candidate-b55b7d97138a-0b43830171d9/candidate-core-corpus.apk",
+  "apk_sha256": "9a571f03f5df3413f8b6eb9434c6ebfc4294a7ac7b91df37f17ead6debc5fee5",
+  "package": "nl.neerdael.projectmtv.corecorpus",
+  "instrumentation_component": "nl.neerdael.projectm.corecorpus.CorpusInstrumentation",
+  "backend_identity": {
+    "backend": "projectmtv-core-android-v1",
+    "variant": "candidate",
+    "source_commit": "b55b7d97138a66b277e9f7486142eaa6be09c513",
+    "upstream_commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "ordered_patches": [
+      {
+        "name": "0001-plasma-transition-float-overflow-shield.patch",
+        "sha256": "90211950c7f5fe2c29ee0a23e0217ba44a53cbfd5fb1f77887ad242e9dd365bc"
+      },
+      {
+        "name": "0002-render-target-resize-program-cache-shader-state.patch",
+        "sha256": "f9412348e6079972ae87b20091d78888a10dd4c4b902a6f1e08856a2e19f7005"
+      },
+      {
+        "name": "0003-hlslparser-classic-locale.patch",
+        "sha256": "c2cecd1ecfa020015e929caaab7a5cf26bd6c9b0c43473861bc1aaeef5792e87"
+      },
+      {
+        "name": "0004-projectm-eval-thread-local-rand.patch",
+        "sha256": "ee624476036c144f6b9aef688da6c46772e917b208b15441982f7cf8a68e8584"
+      },
+      {
+        "name": "0005-cache-translated-preset-shaders.patch",
+        "sha256": "427847d0815576d012514345e829992608260a25f095b0ec622f53b6cf846562"
+      },
+      {
+        "name": "0006-custom-shapes-batched-draws.patch",
+        "sha256": "f582ce185e20060e6c2a65eb5bcdf5e23dd3f03949cd7666e7c42092a86f9eff"
+      },
+      {
+        "name": "0007-framebuffer-texture-pool.patch",
+        "sha256": "f6527189010d21f5180b1cd2d6ec53913fc6ceb59a4ca7024b9809ebfabbac45"
+      },
+      {
+        "name": "0008-hlsl-floating-point-modulo.patch",
+        "sha256": "8f871546bc006afee7fc520f353a6181d8aa085c0b176425475a03837b7c8d90"
+      },
+      {
+        "name": "0009-tile-gpu-invalidate-and-mesh-orphaning.patch",
+        "sha256": "b968939c0d58981a8c1a4ff100852a912dd92dd25ce9d875791dde727e6619d1"
+      },
+      {
+        "name": "0010-skip-redundant-previous-frame-flip.patch",
+        "sha256": "0b4941b388ce61166a038b0212496cd94b682da9353a2960c8c575300287a77d"
+      },
+      {
+        "name": "0011-indexed-warp-mesh.patch",
+        "sha256": "296905e75730fdb7ab39769cec8a1ee980ddb3ab3f4d0f5083b0483f4a091384"
+      },
+      {
+        "name": "0012-merged-warp-pass-direct-blur.patch",
+        "sha256": "e1acef87cfb563ce5d58d6ad6011ce745a98c77ac9465703964e596c7ca6daae"
+      },
+      {
+        "name": "0013-motion-vector-map-only-when-shown.patch",
+        "sha256": "61bfd88a026f1c5825c1827aa0993dc131956705c05aa81428f959b2f0e9500d"
+      },
+      {
+        "name": "0014-video-echo-in-final-orientation.patch",
+        "sha256": "59881214d9dfec9fd7c1b636df383612008ae2e8d2f3153ebdca70fdb0da1620"
+      },
+      {
+        "name": "0015-keep-output-for-blur-reading-and-discarding-shaders.patch",
+        "sha256": "018652ae06d4ebdc9a8080bd14ae7b20b8abc9ebb6be132967a3ea1644554190"
+      },
+      {
+        "name": "0016-direct-composite-output.patch",
+        "sha256": "364077d6131884d8b9f72718e179281722e7cfa1c9b193af6aaa244f3d135e02"
+      },
+      {
+        "name": "0017-pcm-max-samples-is-buffer-size.patch",
+        "sha256": "bfce4d6b77f9ad1bb63b93f3b4395dd0745282b89bd29a6b4f266ea20838cd9d"
+      },
+      {
+        "name": "0018-hlslparser-parenthesized-constructor-expressions.patch",
+        "sha256": "9f6cd972d67dfda9d76ebe8d168531e676c1ce32f185dcbe6c19abfabcc926ed"
+      },
+      {
+        "name": "0019-hlslparser-number-scan-without-source-copy.patch",
+        "sha256": "32a914b0ad6be0fdd8d144e0d075e9b7e5876a76ca385fcbaf555f8b6e99c8bc"
+      },
+      {
+        "name": "0020-projectm-eval-1.0.7-evaluator-fixes.patch",
+        "sha256": "de9e4f64b5e252445ae50d3f540d7b76a607cc27daceaf217a2ef901341d7b27"
+      },
+      {
+        "name": "0021-hlslparser-self-referencing-macros.patch",
+        "sha256": "71382b8ecd90a35a24023d8d16bae0f0f2881513748461166aba9faca7cf89aa"
+      },
+      {
+        "name": "0022-custom-waveform-sample-bounds.patch",
+        "sha256": "ffe85782c4689f8bc36391c3cb002b7a015467f6d50feb8353a19e045e0bd240"
+      },
+      {
+        "name": "0023-milkdrop-preset-unconditional-shader-includes.patch",
+        "sha256": "0a856f5843a75d44ad7c4ee3197936bdef450b8f33d91ed500ba36dabf468fbe"
+      },
+      {
+        "name": "0024-quad-lines.patch",
+        "sha256": "3da8433e6096a87176ef4a82bd55261e5dbb69176c0f825bb1d555fe655d82fa"
+      },
+      {
+        "name": "0025-shader-failure-handling.patch",
+        "sha256": "b9460b0d17a53f30675938efc92707258c18ed84479695cd51cf1617a792db85"
+      },
+      {
+        "name": "0026-custom-warp-sampler-binding.patch",
+        "sha256": "3bb981b2a255895f5816dc450f92ecf7ba1caabcdc94c366a84cb1ef01938d31"
+      },
+      {
+        "name": "0027-preset-exception-diagnostics.patch",
+        "sha256": "d4a802f5bfe201eabd908095d8da0fc6d55d635b36686d05b24382d2453bd37c"
+      },
+      {
+        "name": "0028-initialize-fresh-color-history.patch",
+        "sha256": "9c5cca38b6d8d19dab4f85e1e104a6a73c6a92766bdd19e8fa31aa9713706b7f"
+      },
+      {
+        "name": "0029-per-frame-record-compatibility.patch",
+        "sha256": "a79b74945135f2383e3b6003e5ba3a501389023826a98da36deb0a073fe87728"
+      }
+    ],
+    "source_patch_sha256": "0325d9960d1e39c02cedcb22a85b6ee29daf0fc805a508f6b2b347b39cd59674",
+    "original_core_source_sha256": {
+      "snapshot_fade.h": "414608fba52cc2d02af8a8e73767aa717e164cb2144120496959ee6165acdb70",
+      "CMakeLists.txt": "9e08cce467d5134489221ec1441e21cb10927354d152acba692ef8de9c7c4f27",
+      "native-lib.cpp": "fd2ebb50c096a4fba8d778a212d9e3e51cf874677139f6b3db139becd22ee76f",
+      "preset_prewarm.cpp": "607185e6ff6d492fdf96eec07f732e2df1a434151d221c25d1fab9336645f3e3",
+      "snapshot_fade.cpp": "944e7a9e9d3064801366412d942811125feaaf06006b68e2745bbaf0ba8e0269",
+      "preset_prewarm.h": "848939f80d7655f213bfc766b99a0272692bbe18fac5d2fcfeeb0236501cddd8"
+    },
+    "instrumented_core_source_sha256": {
+      "snapshot_fade.h": "414608fba52cc2d02af8a8e73767aa717e164cb2144120496959ee6165acdb70",
+      "CMakeLists.txt": "25dffa8f60afc8c5634b485713dc8dd8c18ed6aaf43351e1dcbb91c03c36f083",
+      "native-lib.cpp": "22b23efeee31bbf8825381dddda004580c9216f74a49d1a7d551432c2b3837e4",
+      "preset_prewarm.cpp": "607185e6ff6d492fdf96eec07f732e2df1a434151d221c25d1fab9336645f3e3",
+      "snapshot_fade.cpp": "944e7a9e9d3064801366412d942811125feaaf06006b68e2745bbaf0ba8e0269",
+      "preset_prewarm.h": "848939f80d7655f213bfc766b99a0272692bbe18fac5d2fcfeeb0236501cddd8",
+      "lab_bridge.cpp": "84e82c6d52c05da45ae5ce643431ea501a0415034dfb24eb9c5ab961180d57c9"
+    },
+    "instrumentation": {
+      "builder_sha256": "9dec52595390ccad79e806be69543ead19f195f13c360be8ccf87aba934f0cf5",
+      "worker_builder_sha256": "fa54c7fcf70341d3594b502a1cc1c2126e8ca769c73127ab26cf5dc1b5bf1daa",
+      "analysis_hooks_sha256": "7f5fcbfe867a8e12f97a64a06898b9e8587788c62722e009a943f0bb8252863c",
+      "lab_bridge_sha256": "84e82c6d52c05da45ae5ce643431ea501a0415034dfb24eb9c5ab961180d57c9",
+      "core_clock_transformation": "private NowSeconds returns shared atomic logical frame clock; engine TimeKeeper uses same clock",
+      "rng_transformation": "private deterministic instrumented engine; no production RNG parity claim"
+    },
+    "instrumentation_sha256": "1abc75ec9591541bc3520b80d9d1a1bc91863ab5a6c1bbcf6c41bd09dc0c183f",
+    "harness_sources_sha256": {
+      "CorpusInstrumentation.java": "789a2489d1a5a3627656da8d23c981ab9be196c970e17fc640252aba0c2621e9",
+      "LabBridge.java": "db17b2e9d92f7114c98d19c9f2565f637313ab2fc8c9dd7a68764f85b8989379",
+      "lab_bridge.cpp": "84e82c6d52c05da45ae5ce643431ea501a0415034dfb24eb9c5ab961180d57c9"
+    },
+    "core_library_entry": "lib/arm64-v8a/libprojectmtv.so",
+    "core_sha256": "8412ae670f8511c48b89b358d10dcc9fd81ec760353722d7cdfd86ea60efc5d2",
+    "gradle_variant": "release",
+    "native_build_type": "RelWithDebInfo",
+    "prewarm_setting": "actual onMemoryPressure20s pause; job<20 logicalseconds",
+    "clock_instrumentation_diff_sha256": "1f0ffbee723f5a3f53cb40eefe6bfcc449036a916bf6df5ddceb2c014b14a0da",
+    "engine_instrumentation_diff_sha256": "9d2bee48ba089f5251d9831b6679a7b327b4016aafcaa99a266243965e8804e8",
+    "cmake_instrumentation_diff_sha256": "e9c6020d2cd84f81d9ffbffab20c50164e5d5c2fda28d21c692457b623b81007",
+    "native_compile_evidence": [
+      {
+        "abi": "armeabi-v7a",
+        "build_type": "RelWithDebInfo",
+        "flags": "-O2 -g -DNDEBUG",
+        "cache_sha256": "8ed12f850c08b27b45d5c428888558239fb83ed21232eea213fbe681f0e73bca",
+        "compile_commands_sha256": "141d901ce0cd20e0563f65324481d162c079de3fb8184936fd105ecf01520fa0",
+        "core_translation_units": [
+          "native-lib.cpp",
+          "snapshot_fade.cpp",
+          "preset_prewarm.cpp"
+        ]
+      },
+      {
+        "abi": "arm64-v8a",
+        "build_type": "RelWithDebInfo",
+        "flags": "-O2 -g -DNDEBUG",
+        "cache_sha256": "fbbf2ccc985c9815eb835ee289dd8c20049f6dfdfc4b370780a855edd7bfa35c",
+        "compile_commands_sha256": "d71203122b374b0094e6ba2b0b936bb5ccc026c68086204803e964c4ea63a3cf",
+        "core_translation_units": [
+          "native-lib.cpp",
+          "snapshot_fade.cpp",
+          "preset_prewarm.cpp"
+        ]
+      }
+    ]
+  }
+}
