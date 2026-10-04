@@ -4,5 +4,29 @@
   "historical_expected": "44381ce5cd09e605e4393bd5b2de3fe9273d59b916e0f5bb96010107c8b18479",
   "header_source_tool_line": 1970,
   "patch_sha256": "9e3e5a0b4c5cb336d6e592c6cc2b19e8f5a6b2e6266c794209620cca66e98b58",
-  "source_identity": "b52b12e82dccfebb9201cbceed164aba0e7295455d1f052f47e4038a84185cc2"
+  "source_identity": "b52b12e82dccfebb9201cbceed164aba0e7295455d1f052f47e4038a84185cc2",
+  "app_source_replayed_edits": [
+    1099,
+    1115,
+    1631
+  ],
+  "app_files": [
+    {
+      "path": "app/src/main/java/com/example/projectm/visualizer/MainActivity.java",
+      "sha256": "12f611e5e5723662039b831ceba145a79405e0a3975d1301e496fa889e03e640"
+    },
+    {
+      "path": "core/src/main/java/nl/neerdael/projectm/core/QualityController.java",
+      "sha256": "dfbadc3b9d4490ad9589259fdd7bc163d49dc2537343c155837af0813fe4e20c"
+    },
+    {
+      "path": "core/src/test/java/nl/neerdael/projectm/core/QualityControllerTest.java",
+      "sha256": "ab55272e65da38af45e551a9f0417f22a16476cd0c14739f01b17cc4991cf950"
+    }
+  ],
+  "fresh_verification": {
+    "host_tests": 161,
+    "jvm_tests": 46,
+    "patches_apply": 25
+  }
 }
