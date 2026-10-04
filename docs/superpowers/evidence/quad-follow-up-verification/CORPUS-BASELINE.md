@@ -1,5 +1,11 @@
 # Shared Mac corpus baseline
 
+**Status: supplementary direct patched-projectM evidence.** The user required the actual
+`projectm-tv:core` backend. This scan is stopped; do not resume it for core validation. Its completed
+652 records are remotely backed up on `evidence/quad-lines-corpus-2026-10-04`. A core-backed scan
+must use a separate protocol and dataset. The historical resume instructions below describe only
+this supplementary renderer.
+
 This scan is owned by `/Users/jneerdael/Scripts/Projectm-TV/.worktrees/quad-lines-follow-ups`, branch `followup/quad-lines`. Keep its worker, runner and inputs unchanged while it runs. Other investigations can read completed records without waiting for the entire corpus. Do not launch another instance: the runner holds an exclusive scan lock.
 
 The evidence directory is `build/follow-ups/corpus-baseline/` in that worktree. `progress.json` gives current coverage and process ID; `protocol.json` and `inventory.json` freeze the configuration and all 9,606 preset byte hashes. `launch.json` records the original command. A `complete_coverage: false` record is a partial scan.

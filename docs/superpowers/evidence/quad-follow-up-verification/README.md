@@ -5,6 +5,11 @@ branch `followup/quad-lines`. Device testing used the approved address `192.168.
 Code and per-fix evidence were committed and pushed in `9dd8875`; `c40d987` adds the first corpus
 data checkpoint. The full corpus scan remains in progress; see [shared baseline](CORPUS-BASELINE.md).
 
+The direct patched-projectM corpus scan was stopped after the user required `projectm-tv:core`
+as its backend. Its 652 completed records are remotely backed up as supplementary evidence only;
+they do not validate the core wrapper's loading, audio, direct-output or presentation paths.
+A new core-backed protocol must establish its own baseline and repeats.
+
 ## Visual acceptance criterion
 
 The user clarified that 10% is a rough diagnostic guide, not a hard gate. Judge fidelity against
@@ -17,6 +22,12 @@ The corrected sampler sweep completed396 jobs with every repeat exact. Thirty of
 byte-identical at all tested sizes. ADAMFX2, Matrix and MoodRings change due to the sampler correction;
 nine actual matched before/after images are in `proofs/sampler-presets/`, with source/build hashes.
 Their numerical scaling errors support the assessment; visual acceptance is reviewed separately.
+
+Patch0027 restores the existing messages owned by preset-loading, expression-compilation and
+factory exceptions. Six inherited-interface/public failure-event tests fail before the correction
+and pass after it; the complete host suite passes169 tests with zero skips. This is a diagnostic
+fix, not a change to preset compatibility or rendering. [Per-fix proof](proofs/preset-diagnostics/07-preset-diagnostics.png)
+and raw logs are retained in `proofs/preset-diagnostics/`.
 
 ## Corrected custom-wave measurements
 
