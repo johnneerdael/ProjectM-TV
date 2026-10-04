@@ -117,6 +117,21 @@ class BackupTests(unittest.TestCase):
         self.assertTrue(checkpoint.final_checkpoint_ready(self.work,state))
         self.assertFalse(checkpoint.final_checkpoint_ready(self.work,dict(state,complete_baseline_remote_coverage=True)))
 
+    def test_cross_job_batches_keep_all_keys_and_deduplicate_shared_payloads(self):
+        from unittest.mock import patch
+        units=[]
+        for i in range(20):
+            path=self.work/f"file-{i}.png";path.write_bytes(b"same" if i<2 else bytes([i])*5)
+            units.append({"files":[{"source":str(path),"path":f"jobs/{i}/frame.png"}],"jobs":[{"key":str(i)}]})
+        with patch.object(checkpoint,"BATCH_LIMIT",12),patch.object(checkpoint,"CHUNK_SIZE",8):
+            batches=list(checkpoint.coalesce_units(units,set(),{}))
+        self.assertLess(len(batches),20)
+        keys=[job["key"] for batch in batches for job in batch["jobs"]]
+        self.assertEqual(set(keys),{str(i) for i in range(20)});self.assertEqual(len(keys),20)
+        blobs=[sha for batch in batches for sha in batch["payloads"]]
+        self.assertEqual(len(blobs),len(set(blobs)))
+        for batch in batches:self.assertLessEqual(sum(p["bytes"] for p in batch["payloads"].values()),12)
+
     def test_remote_push_failure_cannot_advance_acknowledgement(self):
         self.assertFalse(checkpoint.remote_acknowledged("new","old"))
         self.assertFalse(checkpoint.remote_acknowledged("new",None))

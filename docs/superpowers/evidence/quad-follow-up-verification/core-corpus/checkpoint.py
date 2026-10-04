@@ -147,6 +147,27 @@ def plan_payloads(files, known):
     return {"payloads":payloads,"files":aliases}
 
 
+def coalesce_units(units,known_blobs,known_files):
+    known=set(known_blobs);aliases=dict(known_files)
+    pending={"payloads":{},"files":[],"jobs":[],"bootstrap":False};size=0
+    for unit in units:
+        plan=plan_payloads(unit["files"],known|set(pending["payloads"]))
+        new_files=[]
+        for alias in plan["files"]:
+            if alias["path"] in aliases:
+                if aliases[alias["path"]]!=alias:raise ValueError("immutable backed-up file changed")
+            else:new_files.append(alias);aliases[alias["path"]]=alias
+        for checksum,payload in plan["payloads"].items():
+            if pending["payloads"] and size+payload["bytes"]>BATCH_LIMIT:
+                known.update(pending["payloads"])
+                yield pending
+                pending={"payloads":{},"files":[],"jobs":[],"bootstrap":False};size=0
+            pending["payloads"][checksum]=payload;size+=payload["bytes"]
+        pending["files"].extend(new_files);pending["jobs"].extend(unit["jobs"])
+        pending["bootstrap"]=pending["bootstrap"] or unit.get("bootstrap",False)
+    if pending["payloads"] or pending["files"] or pending["jobs"]:yield pending
+
+
 def remote_acknowledged(local, remote):
     return bool(local) and local==remote
 
@@ -346,8 +367,8 @@ def checkpoint_cycle(args,memo):
             batch[checksum]=payload;size+=payload["bytes"]
         if batch or new_aliases or jobs:
             publish(batch,new_aliases,jobs,bootstrap)
-    bootstrap=snapshot_files(work,protocol)
-    store_unit(bootstrap,[],True)
+    units=[{"files":snapshot_files(work,protocol),"jobs":[],"bootstrap":True}]
+    validated=0;validation_start=time.monotonic()
     for path in sorted((work/"jobs").glob("*/row.json")):
         key=path.parent.name
         if key in covered:continue
@@ -355,10 +376,16 @@ def checkpoint_cycle(args,memo):
             item=verify_job(work,protocol,inventory,key)
             if item is None:continue
             job={k:v for k,v in item.items() if k!="files"}
-            store_unit(item["files"],[job])
+            units.append({"files":item["files"],"jobs":[job]});validated+=1
         except (ValueError,OSError,KeyError,TypeError) as error:
             state["integrity_issues"].append({"key":key,"error":str(error)})
             run.atomic(state_path,state)
+    validation_seconds=time.monotonic()-validation_start
+    batches=0;publish_start=time.monotonic()
+    for batch in coalesce_units(units,blobs,files):
+        publish(batch["payloads"],batch["files"],batch["jobs"],batch["bootstrap"]);batches+=1
+    state["cycle_measurement"]={"validated_new_jobs":validated,"validation_seconds":validation_seconds,
+                                "cross_job_archives":batches,"publish_seconds":time.monotonic()-publish_start}
     state.update(state="finite_backup_finished" if args.once else "waiting",locally_committed_jobs=len(covered),
                  remote_verified_jobs=len(covered),remote_corpus_jobs=len(set(covered)&expected),
                  complete_corpus_remote_coverage=expected.issubset(covered) and not state["integrity_issues"],
