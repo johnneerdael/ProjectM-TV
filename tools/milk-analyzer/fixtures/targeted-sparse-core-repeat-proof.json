@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "basis": "Two targeted published-core presets, two full 420-frame renders each; no full corpus coordinator",
+  "run_metadata": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "model_sha256": "6ce1a9d3f31a09c5a9ca5c48716a6bb7aaaef118e923f53b1b2ddf136bdc7e8f",
+    "python_hashes": {
+      "core_corpus.py": "e27574606150f790ee51c2acdf9c79923c9b1039db0621c7ad5acb5cf2f39df6",
+      "core_backend.py": "469ee5c7db8ee3e10880dc055a2d4b850d752bad801476a59e23e023ea607be5",
+      "descriptors.py": "c74129000cd03b2123def6a4d9ff5308b48ba9a5aaca42fa222068ef87f1fa3f",
+      "intensity_calibration.py": "388d215ed7a69891e085f6a3e9b17183fe993abd4b9c94ea05c2bb32ecf8551a",
+      "intensity_evidence.py": "dead5392ae70e92f51a90a597e81820f3e04c0887750af8ad5af81edc170f7aa",
+      "audience_policy.py": "77c10ee184ae63943e4e42985123be566b0e4eb6a255bb627179b1d7fd6a0ba6"
+    },
+    "runner_java_sha256": "415d107d35f27b9d06dc9b34ca4c1e3cd9fb440a43b12bf654859fd5401ce381",
+    "clock_source_sha256": "e0880a2662b0bc99ec9c18e6d2140cbeb5a345a42b299c2776995a1ae0fe1cb8",
+    "profile": {
+      "frames": 420,
+      "warmup": 60,
+      "fps": 30,
+      "width": 128,
+      "height": 72
+    },
+    "device": "192.168.50.80:5555",
+    "runtime_hashes": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libbackendclock.so": "ed37f887dacb7828de944c8c80f926fc5a0817b065c6170ae605771cb52a51fb",
+      "libprojectmtv.so": "f9ac1b9bb2d7481d5d7947b9dbe783374fff38140ca885003ef83bcfd8961929",
+      "running.f32": "00a073ed6f4a28a98d56d495a8021fd796aa4f0c0cc14eb2a6580e5eb4b2579f",
+      "projectM-TV-core-2.2.4.aar": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60"
+    },
+    "device_fingerprint": "Ugoos/AM3/AM3:9/PPR1.180610.011/20250716:userdebug/release-keys",
+    "scope": "Only two previously unresolved presets, two repeats each; no full corpus",
+    "identity": "8cb5db1719f7eff19a8acf52df73121c504c0d6a24ab03c32adc91d15ab9124a"
+  },
+  "rows": [
+    {
+      "preset": "$$$ Royal - Mashup (28).milk",
+      "preset_sha256": "6265782818932cb3acac4eb82030fa12998058d2edb14d73158471804ba54529",
+      "repeats": [
+        {
+          "repeat": 1,
+          "score": 20.00770025,
+          "labels": [
+            "Chill"
+          ],
+          "motion_available_fraction": 0.17270194986072424,
+          "features": [
+            0.0,
+            1.434203977623838e-05,
+            0.24675237353455295,
+            0.2452345468103885
+          ],
+          "capture_sha256": "e2d9e516c5817a73a00f15d864dc620c7f9d2570c7f62b2fdb3eb6bcdb41e5a8",
+          "result_sha256": "d2f08bfd723004bf694d1b810a4a00634ce3b06c88fb261632a99d26b64c8122",
+          "metadata": {
+            "backend": "published-core-jni",
+            "core_version": "4.1.7",
+            "preset": "$$$ Royal - Mashup (28).milk",
+            "frames": 420,
+            "width": 128,
+            "height": 72,
+            "fps": 30,
+            "renderer": "Mali-G52",
+            "simulated_clock": true,
+            "skipped_count": 0,
+            "indexed_count": 1
+          }
+        },
+        {
+          "repeat": 2,
+          "score": 22.25905155,
+          "labels": [
+            "Chill"
+          ],
+          "motion_available_fraction": 0.17827298050139276,
+          "features": [
+            0.0,
+            9.254878023057245e-06,
+            0.25502088187186384,
+            0.2994125455617905
+          ],
+          "capture_sha256": "eedfe22a675c0ef8b29cb3a7beacdc6c09baaec664357987927bea8986994e73",
+          "result_sha256": "056125359742eeecd54f27bd28612c93060644dbf1dde25c1bc4162215684aef",
+          "metadata": {
+            "backend": "published-core-jni",
+            "core_version": "4.1.7",
+            "preset": "$$$ Royal - Mashup (28).milk",
+            "frames": 420,
+            "width": 128,
+            "height": 72,
+            "fps": 30,
+            "renderer": "Mali-G52",
+            "simulated_clock": true,
+            "skipped_count": 0,
+            "indexed_count": 1
+          }
+        }
+      ],
+      "absolute_score_repeat_difference": 2.2513512999999996,
+      "within_user_five_point_tolerance": true,
+      "limitations": [
+        "Motion support is sparse; repeat agreement does not prove perceptual accuracy",
+        "Original stopped corpus record remains unchanged; this is a separately identified diagnosis"
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (29).milk",
+      "preset_sha256": "05d916118a7f54c1b981e8111c6a3490872117761141829ec999544382791607",
+      "repeats": [
+        {
+          "repeat": 1,
+          "score": 13.70576475,
+          "labels": [
+            "Chill"
+          ],
+          "motion_available_fraction": 0.022284122562674095,
+          "features": [
+            0.0,
+            0.026831786148250103,
+            0.2567991997876897,
+            0.03615852422080933
+          ],
+          "capture_sha256": "17c8c3e9aac9d0071c21eb9021d036144f452e8aa1c517a95d437a930837f95c",
+          "result_sha256": "22207d24ab46d2fa5a7416b27dbc6d8e2286a62bff72648720ad976135235de8",
+          "metadata": {
+            "backend": "published-core-jni",
+            "core_version": "4.1.7",
+            "preset": "$$$ Royal - Mashup (29).milk",
+            "frames": 420,
+            "width": 128,
+            "height": 72,
+            "fps": 30,
+            "renderer": "Mali-G52",
+            "simulated_clock": true,
+            "skipped_count": 0,
+            "indexed_count": 1
+          }
+        },
+        {
+          "repeat": 2,
+          "score": 13.18608791,
+          "labels": [
+            "Chill"
+          ],
+          "motion_available_fraction": 0.022284122562674095,
+          "features": [
+            0.0,
+            0.02546100877225399,
+            0.23524568920665007,
+            0.03593018390238283
+          ],
+          "capture_sha256": "28d18c69b8542e1fb0625a21e990582cd3858128cf970abe8e4abe4f5fd1e55f",
+          "result_sha256": "793f4ee6477e5bd846a2da1ec1094d139931cad7191a726caba7770982e7a4a3",
+          "metadata": {
+            "backend": "published-core-jni",
+            "core_version": "4.1.7",
+            "preset": "$$$ Royal - Mashup (29).milk",
+            "frames": 420,
+            "width": 128,
+            "height": 72,
+            "fps": 30,
+            "renderer": "Mali-G52",
+            "simulated_clock": true,
+            "skipped_count": 0,
+            "indexed_count": 1
+          }
+        }
+      ],
+      "absolute_score_repeat_difference": 0.5196768400000007,
+      "within_user_five_point_tolerance": true,
+      "limitations": [
+        "Motion support is sparse; repeat agreement does not prove perceptual accuracy",
+        "Original stopped corpus record remains unchanged; this is a separately identified diagnosis"
+      ]
+    }
+  ],
+  "verified_score_arithmetic": true,
+  "appearance_accuracy_verified": false
+}
