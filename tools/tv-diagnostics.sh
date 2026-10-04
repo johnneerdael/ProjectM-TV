@@ -209,9 +209,19 @@ allow_listeners() {
     LISTENERS_OFF=0
     for c in $LISTENERS; do
         ash cmd notification allow_listener "$c" >/dev/null
-        ash settings get secure enabled_notification_listeners | tr ':' '\n' | grep -qxF "$c" \
-            || { LISTENERS_NOT_RESTORED="$LISTENERS_NOT_RESTORED $c"
-                 log "WARNING: could not allow the notification listener $c again. Run: adb -s $TARGET shell cmd notification allow_listener $c"; }
+    done
+    # The setting is written asynchronously (Android 14), so give it a few seconds.
+    for c in $LISTENERS; do
+        tries=0
+        until ash settings get secure enabled_notification_listeners | tr ':' '\n' | grep -qxF "$c"; do
+            tries=$((tries + 1))
+            if [ $tries -ge 10 ]; then
+                LISTENERS_NOT_RESTORED="$LISTENERS_NOT_RESTORED $c"
+                log "WARNING: could not allow the notification listener $c again. Run: adb -s $TARGET shell cmd notification allow_listener $c"
+                break
+            fi
+            sleep 0.5
+        done
     done
 }
 cleanup() {
@@ -250,8 +260,9 @@ COLD_MS="$(grep -E "TotalTime" "$OUT/am_start_cold.txt" | sed 's/[^0-9]//g')"
 LAUNCH_STATE="$(sed -n 's/^LaunchState: //p' "$OUT/am_start_cold.txt")"  # Android 10+
 sleep 1
 COLD_PID="$(ash pidof "$PKG")"
-# ActivityManager logs "Start proc <pid>:<package>/<uid> for <reason>" when it starts a process.
-START_PROC="$(grep -F "Start proc $COLD_PID:$PKG/" "$OUT/raw_logcat.txt" | tail -1 | sed 's/.* for //')"
+# ActivityManager logs "Start proc <pid>:<package>/<uid> for <reason> [{component}]" when it starts a
+# process; the reason is activity (Android 9), top-activity or pre-top-activity, service, ...
+START_PROC="$(grep -F "Start proc $COLD_PID:$PKG/" "$OUT/raw_logcat.txt" | tail -1 | sed 's/.* for \([^ ]*\).*/\1/')"
 if [ -n "$PID_BEFORE" ]; then
     COLD_KIND="warm start: process $PID_BEFORE kept running after the force-stop, so this is not a cold-start time"
 elif [ -n "$LAUNCH_STATE" ] && [ "$LAUNCH_STATE" != COLD ]; then
