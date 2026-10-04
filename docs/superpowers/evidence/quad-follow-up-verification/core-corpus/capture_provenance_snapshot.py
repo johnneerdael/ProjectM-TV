@@ -14,6 +14,10 @@ def snapshot(work, output):
     work, output = Path(work).resolve(), Path(output).resolve()
     if output.is_relative_to(work):
         raise ValueError("snapshot output must be outside the immutable dataset")
+    source_paths = {"snapshot_script_sha256": Path(__file__),
+                    "validator_sha256": Path(checkpoint.__file__),
+                    "validation_helper_sha256": Path(run.__file__)}
+    source_hashes = {key: run.file_hash(path) for key, path in source_paths.items()}
     protocol_path = work / "protocol.json"
     protocol_bytes = protocol_path.read_bytes()
     protocol = json.loads(protocol_bytes)
@@ -55,6 +59,8 @@ def snapshot(work, output):
         raise ValueError("protocol/inventory changed during validation")
     if not checked:
         raise ValueError("empty snapshot")
+    if any(run.file_hash(source_paths[key]) != checksum for key, checksum in source_hashes.items()):
+        raise ValueError("validation source changed during generation")
     manifest = {"protocol_sha256": protocol["sha256"],
                 "dataset_inputs": [{"path": "protocol.json", "sha256": hashlib.sha256(protocol_bytes).hexdigest()},
                                    {"path": "inventory.json", "sha256": hashlib.sha256(inventory_bytes).hexdigest()}],
@@ -66,8 +72,7 @@ def snapshot(work, output):
               "statuses": dict(counts), "integrity_issues": [],
               "input_manifest": manifest_path.name, "input_manifest_sha256": run.file_hash(manifest_path),
               "input_records_sha256": run.digest(checked),
-              "validator_sha256": run.file_hash(Path(checkpoint.__file__)),
-              "snapshot_script_sha256": run.file_hash(Path(__file__)),
+              **source_hashes,
               "scope": "Existing checkpoint row/job/inventory provenance, retained-file and successful-observer validation; partial baseline, not complete corpus coverage",
               "limitations": "Membership and exact checked row/packet/result hashes are frozen in the input manifest. Later jobs or storage annotations are different snapshots; these hashes do not assert equality with older remote checkpoint row metadata."}
     run.atomic(output, report)
