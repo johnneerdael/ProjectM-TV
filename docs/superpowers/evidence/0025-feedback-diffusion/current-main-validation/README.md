@@ -43,8 +43,7 @@ Further hardware-renderer controls and native-4K comparisons are in progress.
 
 ## First hardware matrix
 
-The corrected emulator reports the Apple M4 Pro renderer. Fourteen-frame
-wording in prior recovery notes does not apply here: each of the **48 jobs**
+The corrected emulator reports the Apple M4 Pro renderer. Each of the **48 jobs**
 renders all 480 frames, with eight native captures. Four presets run at
 1182×665, 2364×1330 and 3840×2160 on baseline29/candidate30, twice each.
 All jobs succeed, all repeats are byte-identical, and near-reference candidate
