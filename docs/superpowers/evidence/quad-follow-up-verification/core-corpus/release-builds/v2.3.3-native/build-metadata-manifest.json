@@ -1,0 +1,99 @@
+{
+  "apk_sha256": "25a0ee1494400780e51ec13a462d69708e22f757aad8410ed3f7d9c92637f806",
+  "archive_bytes": 55649,
+  "archive_sha256": "12c46617e2efce0487d01244aea8891ca0aa56b5eab86472953d438c44b474fe",
+  "files": [
+    {
+      "bytes": 11694,
+      "path": "worker-candidate.json",
+      "sha256": "6dce501f6d5248387ded82da705e9398d22a776ca09a1c4d6ef713c4df81ac76"
+    },
+    {
+      "bytes": 1101,
+      "path": "independent-build-verification.json",
+      "sha256": "59e01ac238f4e57fb8889a384192fea5aa6c8b4ff020ee832c452994b3eb6842"
+    },
+    {
+      "bytes": 5621,
+      "path": "input-equivalence.json",
+      "sha256": "e3e10ca8aa6929b9d05ecc3106fbcb2813e7035f95d03e0876b029262c1bec32"
+    },
+    {
+      "bytes": 562,
+      "path": "build-launch-inputs.json",
+      "sha256": "12773996b9f344fc0725b8e2b3b5716a4b2279399f16cb66e04c415d8fe39700"
+    },
+    {
+      "bytes": 9275,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/identity.json",
+      "sha256": "a231847ff2a90afc98a776e85b8f26d08d2414c849d5f159220e971919b40b5f"
+    },
+    {
+      "bytes": 33974,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/gradle.log",
+      "sha256": "3f6b9b5d64f29c6abc5f378ffde3249ecfbfc4c1a58478382d7497606a8b67b1"
+    },
+    {
+      "bytes": 4946,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/repackage.log",
+      "sha256": "2e94a3ca21aae23ecc7470ef9366487563fae6797d428eafa93b7e86a179b0cd"
+    },
+    {
+      "bytes": 461,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/private-core-diff.patch",
+      "sha256": "341ecbc94ce1397cba6eae46b948d627c337c16d744950e7ab9a250cd4ef72a7"
+    },
+    {
+      "bytes": 6183,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/private-engine-diff.patch",
+      "sha256": "bd400637c0a1fbf456c6c1ecb0f9950bb280afd7363e72a14a2ad54f85e6bfd7"
+    },
+    {
+      "bytes": 1068,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/private-cmake-diff.patch",
+      "sha256": "48d2c86fb6e02137ac8e8a83159aa105e18f45776acd4b98330f615a02ccd4f0"
+    },
+    {
+      "bytes": 15048,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/harness-source/build.py",
+      "sha256": "9dec52595390ccad79e806be69543ead19f195f13c360be8ccf87aba934f0cf5"
+    },
+    {
+      "bytes": 17518,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/harness-source/CorpusInstrumentation.java",
+      "sha256": "789a2489d1a5a3627656da8d23c981ab9be196c970e17fc640252aba0c2621e9"
+    },
+    {
+      "bytes": 444,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/harness-source/LabBridge.java",
+      "sha256": "db17b2e9d92f7114c98d19c9f2565f637313ab2fc8c9dd7a68764f85b8989379"
+    },
+    {
+      "bytes": 2918,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/harness-source/lab_bridge.cpp",
+      "sha256": "84e82c6d52c05da45ae5ce643431ea501a0415034dfb24eb9c5ab961180d57c9"
+    },
+    {
+      "bytes": 344576,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/2w4j102x/armeabi-v7a/compile_commands.json",
+      "sha256": "d6cc45409293e4734c15d96dedee6182ad6f5d409f1a3fe2270b6d78dd629348"
+    },
+    {
+      "bytes": 32798,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/2w4j102x/armeabi-v7a/CMakeCache.txt",
+      "sha256": "724c4ab488a4d150007446413b2304c1b9896443e400b2aeebc97a0cfe491848"
+    },
+    {
+      "bytes": 341639,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/2w4j102x/arm64-v8a/compile_commands.json",
+      "sha256": "c8e984ec3881f72bab3d825282a6a5a5a317cdee953973ca9bd13c08ace8dba5"
+    },
+    {
+      "bytes": 32780,
+      "path": "candidate-6e71ac2a18a9-0b43830171d9/repo/core/.cxx/RelWithDebInfo/2w4j102x/arm64-v8a/CMakeCache.txt",
+      "sha256": "a0d5a603a50c19f0e4a9b564e8dd1332d4cbaebb7dd83da8f633fd171850c93c"
+    }
+  ],
+  "policy": "native",
+  "source_commit": "6e71ac2a18a95463fbe3a21c05e6dd4027cb74a0"
+}
