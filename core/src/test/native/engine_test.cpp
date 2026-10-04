@@ -103,6 +103,7 @@ extern "C" {
 // ---- fake projectM ----
 struct projectm {};
 static projectm_preset_switch_failed_event g_failCb; static projectm_preset_switch_requested_event g_reqCb;
+static projectm_preset_initialization_warning_event g_warnCb;
 std::vector<std::string> g_loaded; bool g_locked = false; size_t g_pcmFed = 0;
 bool g_lastSmooth = false; int g_meshCalls = 0;
 std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
@@ -121,6 +122,7 @@ projectm_handle projectm_create() { g_lastFrameDirect = false; return new projec
 void projectm_destroy(projectm_handle p) { delete p; }
 int g_loadSleepMs = 0;
 int g_failNextLoads = 0;
+int g_warnNextLoads = 0;  // loads that leave out uncompilable code but succeed (patch 0032)
 void (*g_loadObserver)() = nullptr;
 void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
   if (g_lastFrameDirect) ++g_loadsAfterDirectFrame;
@@ -129,9 +131,11 @@ void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
   if (g_failNextLoads > 0) { --g_failNextLoads; g_failCb("", "compile error", nullptr); return; }
   if (g_loadSleepMs) std::this_thread::sleep_for(std::chrono::milliseconds(g_loadSleepMs));
   if (strstr(data, "BROKEN")) { g_failCb("", "compile error", nullptr); return; }
+  if (g_warnNextLoads > 0) { --g_warnNextLoads; g_warnCb("", "Could not compile per-pixel code: syntax error (line 2, column 5)", nullptr); }
   g_loaded.push_back(data); }
 void projectm_set_preset_switch_requested_event_callback(projectm_handle, projectm_preset_switch_requested_event cb, void*) { g_reqCb = cb; }
 void projectm_set_preset_switch_failed_event_callback(projectm_handle, projectm_preset_switch_failed_event cb, void*) { g_failCb = cb; }
+void projectm_set_preset_initialization_warning_event_callback(projectm_handle, projectm_preset_initialization_warning_event cb, void*) { g_warnCb = cb; }
 void projectm_set_hard_cut_enabled(projectm_handle, bool) {}
 void projectm_set_beat_sensitivity(projectm_handle, float) {}
 void projectm_set_preset_duration(projectm_handle, double) {}
@@ -307,6 +311,16 @@ int main(int argc, char** argv) {
     Java_nl_neerdael_projectm_core_ProjectMJNI_randomPreset(nullptr, nullptr, true); switchFrame();
     CHECK(current() == prepared);
   }
+
+  printf("a preset that leaves out uncompilable code is shown, logged and not skipped\n");
+  { int skippedBefore = g_library.SkippedCount(); size_t logsBefore = g_logLines.size();
+    g_warnNextLoads = 1;
+    Java_nl_neerdael_projectm_core_ProjectMJNI_nextPreset(nullptr, nullptr, true); switchFrame();
+    CHECK(g_warnNextLoads == 0 && g_library.SkippedCount() == skippedBefore);
+    std::string expected = "Preset code left out (" + current() + "): Could not compile per-pixel code: syntax error (line 2, column 5)";
+    bool logged = false;
+    for (size_t i = logsBefore; i < g_logLines.size(); ++i) logged = logged || g_logLines[i] == expected;
+    CHECK(logged); }
 
   printf("Next and Previous landing on the prepared random preset refresh its preparation\n");
   std::string prepared = g_prewarmLists.back()[1];
