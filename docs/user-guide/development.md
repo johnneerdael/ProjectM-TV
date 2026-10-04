@@ -12,7 +12,7 @@ Clone the repository with its submodules and follow the [developer build instruc
 core/src/test/native/run_native_tests.sh
 ```
 
-The native runner also builds the patched projectM engine with ASan/UBSan and checks shader macro preprocessing and custom waveform audio bounds. It requires CMake and a JDK; the GL tests use EGL/GLES development libraries on Linux or the OpenGL framework on macOS.
+The native runner also builds the patched projectM engine with ASan/UBSan and checks shader macro preprocessing and custom waveform audio bounds. It also checks random-image alias identity, requested sampler modes, shared slots and numerical samples against isolated known-value textures. It requires CMake and a JDK; the GL tests use EGL/GLES development libraries on Linux or the OpenGL framework on macOS.
 
 Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
 

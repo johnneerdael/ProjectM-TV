@@ -1,0 +1,303 @@
+Subject: [PATCH] Preserve random texture aliases, sampler modes and source identity
+
+Strip mode qualification before randNN prefix filtering. Reuse only the selected
+image for a preset slot, recreating each descriptor with its requested alias and
+sampler. Bind the emitted short randNN uniform to the same unit as its long alias.
+Retain source paths and base names for runtime association diagnostics.
+ProjectM TV-specific fix; production random_device seeding is unchanged.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+index 956d2e9df..ddabc17de 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -19,6 +19,7 @@
+ #include <mutex>
+ #include <regex>
+ #include <set>
++#include <sstream>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -65,8 +66,21 @@ void MilkdropShader::LoadTexturesAndCompile(PresetState& presetState)
+ {
+     std::locale loc;
+ 
++    // A filtered alias determines a new slot's image before any unfiltered shorthand.
++    // Competing prefixes retain lexical precedence; an existing preset slot always wins.
++    std::vector<std::string> samplerNames(m_samplerNames.begin(), m_samplerNames.end());
++    const auto hasRandomPrefix = [](const std::string& name) {
++        const size_t offset = name.size() > 3 && name[2] == '_' ? 3 : 0;
++        const auto base = Utils::ToLower(name.substr(offset));
++        return base.size() > 7 && base.substr(0, 4) == "rand" &&
++               base[4] >= '0' && base[4] <= '9' && base[5] >= '0' && base[5] <= '9' && base[6] == '_';
++    };
++    std::stable_sort(samplerNames.begin(), samplerNames.end(), [&](const std::string& a, const std::string& b) {
++        return hasRandomPrefix(a) && !hasRandomPrefix(b);
++    });
++
+     // Now request the textures and descriptors from the texture manager.
+-    for (const auto& name : m_samplerNames)
++    for (const auto& name : samplerNames)
+     {
+         std::string baseName = name;
+         if (name.length() > 3 && name.at(2) == '_')
+@@ -131,8 +145,11 @@ void MilkdropShader::LoadTexturesAndCompile(PresetState& presetState)
+             {
+                 if (presetState.randomTextureDescriptors.find(randomSlot) != presetState.randomTextureDescriptors.end())
+                 {
+-                    // Use existing texture descriptor.
+-                    m_textureSamplerDescriptors.push_back(presetState.randomTextureDescriptors.at(randomSlot));
++                    // Share the selected image, but preserve this shader's alias and sampler mode.
++                    const auto& selected = presetState.randomTextureDescriptors.at(randomSlot);
++                    m_textureSamplerDescriptors.emplace_back(selected.Texture(),
++                                                             presetState.renderContext.textureManager->GetSampler(name),
++                                                             name, baseName);
+                     continue;
+                 }
+ 
+@@ -596,17 +613,18 @@ void MilkdropShader::GetReferencedSamplers(const std::string& program)
+         while (samplerName != m_samplerNames.end())
+         {
+             std::string lowerCaseName = Utils::ToLower(*samplerName);
+-            if (lowerCaseName.length() == 6 &&
+-                lowerCaseName.substr(0, 4) == "rand" && std::isdigit(lowerCaseName.at(4), loc) && std::isdigit(lowerCaseName.at(5), loc))
++            const size_t offset = lowerCaseName.size() > 3 && lowerCaseName[2] == '_' ? 3 : 0;
++            if (lowerCaseName.length() == offset + 6 &&
++                lowerCaseName.substr(offset, 4) == "rand" && std::isdigit(lowerCaseName.at(offset + 4), loc) && std::isdigit(lowerCaseName.at(offset + 5), loc))
+             {
+                 auto additionalName = samplerName;
+                 additionalName++;
+                 if (additionalName != m_samplerNames.end())
+                 {
+                     std::string addLowerCaseName = Utils::ToLower(*additionalName);
+-                    if (addLowerCaseName.length() > 7 &&
+-                        addLowerCaseName.substr(0, 6) == lowerCaseName &&
+-                        addLowerCaseName[6] == '_')
++                    if (addLowerCaseName.length() > offset + 7 &&
++                        addLowerCaseName.substr(0, offset + 6) == lowerCaseName &&
++                        addLowerCaseName[offset + 6] == '_')
+                     {
+                         samplerName = m_samplerNames.erase(samplerName);
+                     }
+@@ -700,20 +718,30 @@ void MilkdropShader::TranspileHLSLShader(const PresetState& presetState, std::st
+     // Collect unique samplers and texsize uniforms
+     std::set<std::string> samplerDeclarations;
+     std::set<std::string> texSizeDeclarations;
++    // A descriptor can emit both full and short aliases. Deduplicate each declaration,
++    // rather than whole multi-line blocks shared by differently qualified descriptors.
++    const auto addDeclarations = [](std::set<std::string>& declarations, const std::string& block) {
++        std::istringstream lines(block);
++        std::string line;
++        while (std::getline(lines, line))
++        {
++            if (!line.empty()) declarations.insert(line + "\n");
++        }
++    };
+     for (const auto& desc : m_mainTextureDescriptors)
+     {
+-        samplerDeclarations.insert(desc.SamplerDeclaration());
+-        texSizeDeclarations.insert(desc.TexSizeDeclaration());
++        addDeclarations(samplerDeclarations, desc.SamplerDeclaration());
++        addDeclarations(texSizeDeclarations, desc.TexSizeDeclaration());
+     }
+     for (const auto& desc : presetState.blurTexture.GetDescriptorsForBlurLevel(m_maxBlurLevelRequired))
+     {
+-        samplerDeclarations.insert(desc.SamplerDeclaration());
++        addDeclarations(samplerDeclarations, desc.SamplerDeclaration());
+         // No texsize_blur1 etc.
+     }
+     for (const auto& desc : m_textureSamplerDescriptors)
+     {
+-        samplerDeclarations.insert(desc.SamplerDeclaration());
+-        texSizeDeclarations.insert(desc.TexSizeDeclaration());
++        addDeclarations(samplerDeclarations, desc.SamplerDeclaration());
++        addDeclarations(texSizeDeclarations, desc.TexSizeDeclaration());
+     }
+ 
+     const std::string& vertexShader = m_type == ShaderType::WarpShader
+diff --git a/src/libprojectM/Renderer/Texture.cpp b/src/libprojectM/Renderer/Texture.cpp
+index 075018d95..e92ae000d 100644
+--- a/src/libprojectM/Renderer/Texture.cpp
++++ b/src/libprojectM/Renderer/Texture.cpp
+@@ -195,10 +195,11 @@ Texture::Texture(std::string name, int width, int height,
+ }
+ 
+ Texture::Texture(std::string name, const GLuint texID, const GLenum target,
+-                 const int width, const int height, const bool isUserTexture)
++                 const int width, const int height, const bool isUserTexture, std::string sourcePath)
+     : m_textureId(texID)
+     , m_target(target)
+     , m_name(std::move(name))
++    , m_sourcePath(std::move(sourcePath))
+     , m_width(width)
+     , m_height(height)
+     , m_isUserTexture(isUserTexture)
+@@ -246,6 +247,11 @@ auto Texture::Name() const -> const std::string&
+     return m_name;
+ }
+ 
++auto Texture::SourcePath() const -> const std::string&
++{
++    return m_sourcePath;
++}
++
+ auto Texture::Type() const -> GLenum
+ {
+     return m_target;
+diff --git a/src/libprojectM/Renderer/Texture.hpp b/src/libprojectM/Renderer/Texture.hpp
+index 4dfb029b3..1c8fa42f4 100644
+--- a/src/libprojectM/Renderer/Texture.hpp
++++ b/src/libprojectM/Renderer/Texture.hpp
+@@ -58,7 +58,7 @@ public:
+      */
+     explicit Texture(std::string name, GLuint texID, GLenum target,
+                      int width, int height,
+-                     bool isUserTexture);
++                     bool isUserTexture, std::string sourcePath = {});
+ 
+     Texture(Texture&& other) = default;
+     auto operator=(Texture&& other) -> Texture& = default;
+@@ -91,6 +91,9 @@ public:
+      */
+     auto Name() const -> const std::string&;
+ 
++    /** @brief Exact source file of a loaded image; empty for generated/internal textures. */
++    auto SourcePath() const -> const std::string&;
++
+     /**
+      * @brief Returns the OpenGL texture type.
+      * @return The texture type, e.g. GL_TEXTURE_2D.
+@@ -172,6 +175,7 @@ private:
+     GLenum m_target{GL_NONE}; //!< The OpenGL texture target, e.g. GL_TEXTURE_2D.
+ 
+     std::string m_name;          //!< The texture name for identifying it in shaders.
++    std::string m_sourcePath;    //!< Source identity for binding diagnostics, never a shader alias.
+     int m_width{0};              //!< Texture width in pixels.
+     int m_height{0};             //!< Texture height in pixels.
+     bool m_isUserTexture{false}; //!< true if it's a user texture, false if an internal one.
+diff --git a/src/libprojectM/Renderer/TextureManager.cpp b/src/libprojectM/Renderer/TextureManager.cpp
+index 9def56c93..b19dfe4ee 100644
+--- a/src/libprojectM/Renderer/TextureManager.cpp
++++ b/src/libprojectM/Renderer/TextureManager.cpp
+@@ -203,8 +203,6 @@ auto TextureManager::TryLoadingTexture(const std::string& name) -> TextureSample
+ 
+ auto TextureManager::LoadTexture(const ScannedFile& file) -> std::shared_ptr<Texture>
+ {
+-    std::string unqualifiedName;
+-
+     if (m_textures.find(file.lowerCaseBaseName) != m_textures.end())
+     {
+         return m_textures.at(file.lowerCaseBaseName);
+@@ -225,7 +223,7 @@ auto TextureManager::LoadTexture(const ScannedFile& file) -> std::shared_ptr<Tex
+     }
+ 
+     uint32_t memoryBytes = width * height * 4; // RGBA, unsigned byte color channels.
+-    auto newTexture = std::make_shared<Texture>(unqualifiedName, tex, GL_TEXTURE_2D, width, height, true);
++    auto newTexture = std::make_shared<Texture>(file.lowerCaseBaseName, tex, GL_TEXTURE_2D, width, height, true, file.filePath);
+     m_textures[file.lowerCaseBaseName] = newTexture;
+     m_textureStats.insert({file.lowerCaseBaseName, {memoryBytes}});
+ 
+@@ -241,7 +239,11 @@ auto TextureManager::GetRandomTexture(const std::string& randomName) -> TextureS
+ 
+     ScanTextures();
+ 
+-    std::string lowerCaseName = Utils::ToLower(randomName);
++    std::string unqualifiedName;
++    GLint wrapMode;
++    GLint filterMode;
++    ExtractTextureSettings(randomName, wrapMode, filterMode, unqualifiedName);
++    std::string lowerCaseName = Utils::ToLower(unqualifiedName);
+ 
+     if (m_scannedTextureFiles.empty())
+     {
+@@ -288,7 +290,7 @@ auto TextureManager::GetRandomTexture(const std::string& randomName) -> TextureS
+     auto desc = GetTexture(selectedFilename);
+ 
+     // Create new descriptor with the original "rand00[_prefix]" name.
+-    return {desc.Texture(), desc.Sampler(), randomName, randomName};
++    return {desc.Texture(), m_samplers.at({wrapMode, filterMode}), randomName, unqualifiedName};
+ }
+ 
+ void TextureManager::AddTextureFile(const std::string& fileName, const std::string& baseName)
+diff --git a/src/libprojectM/Renderer/TextureSamplerDescriptor.cpp b/src/libprojectM/Renderer/TextureSamplerDescriptor.cpp
+index 16b56c81b..a1307519c 100644
+--- a/src/libprojectM/Renderer/TextureSamplerDescriptor.cpp
++++ b/src/libprojectM/Renderer/TextureSamplerDescriptor.cpp
+@@ -1,12 +1,27 @@
+ #include "TextureSamplerDescriptor.hpp"
+ 
+ #include "TextureManager.hpp"
++#include "Utils.hpp"
+ 
+ #include <utility>
+ 
+ namespace libprojectM {
+ namespace Renderer {
+ 
++namespace {
++// Preserve spelling and mode qualification while deriving the emitted shorthand.
++auto ShortRandomAlias(const std::string& name) -> std::string
++{
++    const size_t offset = name.size() > 3 && name[2] == '_' ? 3 : 0;
++    const auto base = Utils::ToLower(name.substr(offset));
++    if (base.size() > 7 && base.substr(0, 4) == "rand" && base[6] == '_')
++    {
++        return name.substr(0, offset + 6);
++    }
++    return {};
++}
++} // namespace
++
+ TextureSamplerDescriptor::TextureSamplerDescriptor(const std::shared_ptr<class Texture>& texture,
+                                                    const std::shared_ptr<class Sampler>& sampler,
+                                                    std::string samplerName,
+@@ -31,15 +46,20 @@ void TextureSamplerDescriptor::Bind(GLint unit, const Shader& shader) const
+         m_texture->Bind(unit, m_sampler);
+ 
+         shader.SetUniformInt(std::string("sampler_" + m_samplerName).c_str(), unit);
++        // SamplerDeclaration also emits the short alias for a prefixed random texture.
++        if (const auto shortName = ShortRandomAlias(m_samplerName); !shortName.empty())
++        {
++            shader.SetUniformInt(std::string("sampler_" + shortName).c_str(), unit);
++        }
+         // Might be setting this more than once if the texture is used with different wrap/filter modes, but this rarely happens.
+         shader.SetUniformFloat4(std::string("texsize_" + m_sizeName).c_str(), {m_texture->Width(),
+                                                                                m_texture->Height(),
+                                                                                1.0f / static_cast<float>(m_texture->Width()),
+                                                                                1.0f / static_cast<float>(m_texture->Height())});
+         // Bind shorthand random texture size uniform
+-        if (m_sizeName.substr(0, 4) == "rand" && m_sizeName.length() > 7 && m_sizeName.at(6) == '_')
++        if (const auto shortName = ShortRandomAlias(m_sizeName); !shortName.empty())
+         {
+-            shader.SetUniformFloat4(std::string("texsize_" + m_sizeName.substr(0, 6)).c_str(), {m_texture->Width(),
++            shader.SetUniformFloat4(std::string("texsize_" + shortName).c_str(), {m_texture->Width(),
+                                                                                                 m_texture->Height(),
+                                                                                                 1.0f / static_cast<float>(m_texture->Width()),
+                                                                                                 1.0f / static_cast<float>(m_texture->Height())});
+@@ -97,10 +117,10 @@ auto TextureSamplerDescriptor::SamplerDeclaration() const -> std::string
+ 
+     // Add short sampler name for prefixed random textures.
+     // E.g. "sampler_rand00" if a sampler "sampler_rand00_smalltiled" was declared
+-    if (m_samplerName.substr(0, 4) == "rand" && m_samplerName.length() > 7 && m_samplerName.at(6) == '_')
++    if (const auto shortName = ShortRandomAlias(m_samplerName); !shortName.empty())
+     {
+         declaration.append("uniform sampler2D sampler_");
+-        declaration.append(m_samplerName.substr(0, 6));
++        declaration.append(shortName);
+         declaration.append(";\n");
+     }
+ 
+@@ -123,10 +143,10 @@ auto TextureSamplerDescriptor::TexSizeDeclaration() const -> std::string
+ 
+         // Add short texsize uniform for prefixed random textures.
+         // E.g. "texsize_rand00" if a sampler "sampler_rand00_smalltiled" was declared
+-        if (m_sizeName.substr(0, 4) == "rand" && m_sizeName.length() > 7 && m_sizeName.at(6) == '_')
++        if (const auto shortName = ShortRandomAlias(m_sizeName); !shortName.empty())
+         {
+             declaration.append("uniform float4 texsize_");
+-            declaration.append(m_sizeName.substr(0, 6));
++            declaration.append(shortName);
+             declaration.append(";\n");
+         }
+     }
