@@ -128,6 +128,29 @@ class AttemptOutputTests(unittest.TestCase):
         self.assertEqual(transfer.call_count, 1)
         self.assertEqual(len(list((self.work / "jobs" / key).rglob("result.json"))), 1)
 
+    def test_repeated_force_stop_timeout_records_terminal_metadata(self):
+        record={"path":"exact.milk","sha256":"source","bytes":1}
+        protocol={"sha256":"protocol","device_serial":"192.168.51.53:5555",
+                  "config":{"width":2,"height":1,"fps":30,"seed":12345},
+                  "roles":{"baseline":{"core_sha256":"core"}},"pcm":{}}
+        key=run.job_key("protocol",record,"baseline","selected",1,2)
+        job=dict(self.job,job_id=key)
+        args=SimpleNamespace(work=self.work,timeout=600)
+        original_hash=run.file_hash
+        def file_hash(path):
+            if Path(path)==run.ROOT/"core/src/main/assets/presets/exact.milk":return "source"
+            return original_hash(path)
+        with (patch.object(run,"make_job",return_value=job),patch.object(run,"require_awake"),
+              patch.object(run,"file_hash",side_effect=file_hash),
+              patch.object(run,"adb",side_effect=subprocess.TimeoutExpired("sustained outage",120))):
+            try:row=run.run_one(args,protocol,record,"baseline","selected",1,2)
+            except subprocess.TimeoutExpired:row=None
+        self.assertIsNotNone(row,"sustained outage must preserve terminal metadata")
+        self.assertEqual(row["status"],"timeout")
+        self.assertIn("remote_partial_recovery_error",row)
+        self.assertTrue((self.work/"jobs"/key/"row.json").is_file())
+        self.assertEqual(checkpoint.verify_job(self.work,protocol,{"presets":[record]},key)["status"],"timeout")
+
 
 if __name__ == "__main__":
     unittest.main()

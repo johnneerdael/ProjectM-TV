@@ -599,8 +599,8 @@ def run_one(args, protocol, record, role, mode, repeat, measurement_frames, nati
         row.update(status="timeout", error="instrumentation/ADB job timeout")
         captured = (error.output or b"") + (error.stderr or b"")
         (directory / "timeout-command.log").write_bytes(captured)
-        adb(protocol["device_serial"], "shell", "am", "force-stop", PACKAGE, allow_failure=True)
         try:
+            adb(protocol["device_serial"], "shell", "am", "force-stop", PACKAGE, allow_failure=True)
             # Promoted output already retains this attempt's verified producer.
             if not (directory / "output").is_dir():
                 pull_external(protocol["device_serial"], job["output_directory"], incoming)
