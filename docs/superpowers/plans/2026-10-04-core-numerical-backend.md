@@ -1,5 +1,13 @@
 # Core Numerical Backend Implementation Plan
 
+The user subsequently specified the published AAR unchanged. The opt-in C ABI
+below is superseded and removed. Current implementation uses
+`tools/milk-analyzer/CoreBackendRunner.java` and the existing published JNI
+interface. The v2.2.4 checksum and constant-color test are verified. Remaining
+gates are deterministic timing, waveform/audio input, representative throughput,
+resumable corpus scoring and the review build. Retain the original proposal
+below as implementation history, not the active backend contract.
+
 > **For agentic workers:** Use superpowers:executing-plans for inline execution.
 > This is the backend subplan of the approved full-corpus audience-review design.
 
