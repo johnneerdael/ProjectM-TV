@@ -1,6 +1,6 @@
 Subject: [PATCH] MilkdropPreset: compensate reference-scale feedback diffusion
 
-Build on 0032 (numbered 0036 after PR #27's 0033-0035; previously 0030) and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
+Build on 0035 (previously numbered 0030) and PR #23's sampler and feedback-history fixes. Add (scale^2-1)/6 render pixels^2
 per axis through an exact-moment adaptive 3/4-tap stencil, capped at 1.9, for bilinear warp reads
 only. One pass with two render targets writes the exact y-flipped frame and its filtered copy.
 Point-sampled warp reads (pw/pc main and aliases, by the bound sampler's filter mode) and the
@@ -20,7 +20,7 @@ measurements and deliberate kernel/placement/routing changes are recorded under
  docs/superpowers/evidence/0025-feedback-diffusion/.
 ---
 diff --git a/src/libprojectM/MilkdropPreset/CMakeLists.txt b/src/libprojectM/MilkdropPreset/CMakeLists.txt
-index 9ca510657..d08e7a8cb 100644
+index c54b1dc06..4d6cc7557 100644
 --- a/src/libprojectM/MilkdropPreset/CMakeLists.txt
 +++ b/src/libprojectM/MilkdropPreset/CMakeLists.txt
 @@ -57,6 +57,8 @@ add_library(MilkdropPreset OBJECT
@@ -509,7 +509,7 @@ index 000000000..79a7e1d66
 +} // namespace MilkdropPreset
 +} // namespace libprojectM
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
-index ec3dfc97d..7916e7fb7 100755
+index b8f627bbe..baaa400bd 100755
 --- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
 @@ -90,6 +90,7 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
@@ -549,7 +549,8 @@ index ec3dfc97d..7916e7fb7 100755
 +    // With diffusion, the same holds for its exact and filtered copies (see FeedbackDiffusion.hpp):
 +    // bilinear warp reads get the filtered one, point-sampled warp reads the exact one.
 +    if (m_feedbackDiffusion.Active())
-+    {
+     {
+-        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
 +        if (m_isFirstFrame || motionVectorsDrawn || !m_diffusionHoldsPreviousFrame)
 +        {
 +            m_feedbackDiffusion.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), true);
@@ -558,8 +559,7 @@ index ec3dfc97d..7916e7fb7 100755
 +        m_state.rawMainTexture = m_feedbackDiffusion.RawTexture();
 +    }
 +    else
-     {
--        m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
++    {
 +        if (m_isFirstFrame || motionVectorsDrawn || !m_flipHoldsPreviousFrame)
 +        {
 +            m_flipTexture.Draw(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0), nullptr, true, false);
@@ -623,7 +623,7 @@ index ec3dfc97d..7916e7fb7 100755
      // Register code context variables
      m_perFrameContext.RegisterBuiltinVariables();
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
-index b84b27380..0edb51074 100644
+index 7c0ac0615..b1229e859 100644
 --- a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
 @@ -27,6 +27,7 @@
@@ -634,13 +634,15 @@ index b84b27380..0edb51074 100644
  #include "Filters.hpp"
  #include "FinalComposite.hpp"
  #include "MotionVectors.hpp"
-@@ -127,9 +128,12 @@ private:
+@@ -130,11 +131,14 @@ private:
      DarkenCenter m_darkenCenter;                                                        //!< Center darkening effect.
      Border m_border;                                                                    //!< Inner/outer borders.
      Renderer::CopyTexture m_flipTexture;                                                //!< Texture flip filter
 +    FeedbackDiffusion m_feedbackDiffusion;                                              //!< The warp's input above the line reference size.
  
      FinalComposite m_finalComposite; //!< Final composite shader or filters.
+ 
+     std::vector<std::string> m_initializationWarnings; //!< Equation code left out by the last Initialize().
  
 +    bool m_diffusionHoldsPreviousFrame{false}; //!< Diffusion holds the previous frame's warp inputs, invalidated by vectors/resize/initial image.
 +    bool m_diffusionAllowed{true}; //!< Load-time gate for feedback that must keep its peaks.
@@ -729,7 +731,7 @@ index aacd39d7a..26918a2b3 100644
  
      std::map<int, Renderer::TextureSamplerDescriptor> randomTextureDescriptors; //!< Descriptors for random texture IDs. Should be the same across both warp and comp shaders.
 diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
-index d7efc7d9f..a6a0302d4 100644
+index 4b9dcb7e0..edf9bb413 100644
 --- a/tests/libprojectM/CMakeLists.txt
 +++ b/tests/libprojectM/CMakeLists.txt
 @@ -1,6 +1,8 @@
