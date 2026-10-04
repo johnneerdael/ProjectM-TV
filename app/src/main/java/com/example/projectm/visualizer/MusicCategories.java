@@ -14,13 +14,26 @@ final class MusicCategories {
         return "all";
     }
     static String label(String id) {
+        return label(id,BuildConfig.AUDIENCE_REVIEW);
+    }
+    static String label(String id,boolean review) {
+        if(review) {
+            if("ambient".equals(id))return "Chill";
+            if("pop".equals(id))return "Normal";
+            if("dance".equals(id))return "Party";
+            return "All";
+        }
         for (int i = 0; i < IDS.length; i++) if (IDS[i].equals(id)) return LABELS[i];
         return LABELS[0];
     }
     static String[] available(Counts counts) {
+        return available(counts,BuildConfig.AUDIENCE_REVIEW);
+    }
+    static String[] available(Counts counts,boolean review) {
         ArrayList<String> ids = new ArrayList<>();
         ids.add("all");
-        for (int i = 1; i < IDS.length; i++) if (counts.count(IDS[i]) > 0) ids.add(IDS[i]);
+        String[] candidates=review?new String[]{"all","ambient","pop","dance"}:IDS;
+        for (int i = 1; i < candidates.length; i++) if (counts.count(candidates[i]) > 0) ids.add(candidates[i]);
         return ids.toArray(new String[0]);
     }
     static int selectedIndex(String[] ids, String selected) {

@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 
+def audienceReview = providers.gradleProperty('audienceReview').orElse('false').get().toBoolean()
+def reviewAar = file(providers.gradleProperty('audienceReviewAar').orElse('../build/core-audience-analysis/published/projectM-TV-core-2.2.4.aar').get())
+def reviewAssets = file(providers.gradleProperty('audienceReviewAssets').orElse('../build/core-audience-review-assets').get())
+if (audienceReview && gradle.startParameter.taskNames.any { it.toLowerCase().contains('release') || it.toLowerCase().contains('profile') }) {
+    throw new GradleException('Audience review is a Debug-only build')
+}
+if (audienceReview && !reviewAar.isFile()) throw new GradleException('Pinned published audience-review AAR is missing')
+
 // Floors for this release line. CI derives each patch/code from first-parent main history.
 // Reset all three only for a planned new release line; routine PRs need no version bump.
 def baseVersionName = "2.2.0"
@@ -14,6 +22,7 @@ android {
     // the app strips the engine's native library with it.
     ndkVersion "27.3.13750724"
     defaultConfig {
+        buildConfigField 'boolean', 'AUDIENCE_REVIEW', 'false'
         applicationId "nl.neerdael.projectmtv"
         minSdkVersion 21
         targetSdkVersion 34
@@ -35,7 +44,12 @@ android {
     }
     buildTypes {
         debug {
-            if (project.hasProperty('presetLabDeviceTest') || project.hasProperty('setupScreenshotTest')) {
+            if (audienceReview) {
+                buildConfigField 'boolean', 'AUDIENCE_REVIEW', 'true'
+                applicationIdSuffix '.audiencereview'
+                versionNameSuffix '-audience-review'
+                resValue 'string', 'app_name', 'ProjectM TV · Audience review'
+            } else if (project.hasProperty('presetLabDeviceTest') || project.hasProperty('setupScreenshotTest')) {
                 def setupTest = project.hasProperty('setupScreenshotTest')
                 applicationIdSuffix setupTest ? ".setuptest" : ".presettest"
                 versionNameSuffix setupTest ? "-setuptest" : "-presettest"
@@ -64,6 +78,8 @@ android {
         // android.util.Log etc. return defaults in JVM unit tests
         unitTests.returnDefaultValues = true
     }
+    buildFeatures { buildConfig true }
+    if (audienceReview) sourceSets.debug.assets.srcDir reviewAssets
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -77,8 +93,28 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
+    if (audienceReview) implementation files(reviewAar)
+    else implementation project(':core')
     // No AndroidX dependencies: the app only uses framework APIs, which keeps the APK small
     // and cold start fast on low-end TV boxes.
     testImplementation 'junit:junit:4.13.2'
+}
+
+if (audienceReview) {
+    def validateReview = tasks.register('validateAudienceReviewAssets') {
+        doLast {
+            def manifestFile = new File(reviewAssets,'audience-review.json')
+            if (!manifestFile.isFile()) throw new GradleException('Complete audience score export is required before building the review APK')
+            def manifest = new groovy.json.JsonSlurper().parse(manifestFile)
+            if (manifest.unscored != 0 || manifest.scored != manifest.corpus_count || manifest.presets.size() != manifest.corpus_count)
+                throw new GradleException('Audience review requires a score for every corpus preset')
+            def sha = { File f -> java.security.MessageDigest.getInstance('SHA-256').digest(f.bytes).encodeHex().toString() }
+            if (sha(reviewAar) != manifest.run_metadata.aar_sha256) throw new GradleException('Review AAR differs from scoring AAR')
+            manifest.checksums.each { path, expected ->
+                def artifact = new File(reviewAssets,path)
+                if (!artifact.isFile() || sha(artifact) != expected) throw new GradleException('Audience asset checksum differs: '+path)
+            }
+        }
+    }
+    tasks.matching { it.name == 'mergeDebugAssets' }.configureEach { dependsOn validateReview }
 }

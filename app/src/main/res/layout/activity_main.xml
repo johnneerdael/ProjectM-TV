@@ -91,6 +91,15 @@
             android:text="Loading…" />
 
         <TextView
+            android:id="@+id/preset_audience"
+            style="@style/Overlay.Meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/preset_meta"
             style="@style/Overlay.Meta"
             android:layout_width="match_parent"

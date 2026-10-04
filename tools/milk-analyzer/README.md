@@ -63,6 +63,31 @@ the runner-side clock helper and the unchanged extracted library. A validated
 five-preset pilot and resume check precede the complete run. The PCM fixture
 is local test input, not distributed with this repository.
 
+## Complete review export and debug build
+
+`audience_export.py` verifies every preset path/hash against the published AAR
+and requires a finite matching score for the entire corpus. It emits the agreed
+overlapping groups, a separate relative-rank table and checksummed metadata.
+The unchanged core receives Chill through `ambient`, Normal through `pop`, and
+Party through `dance`; those aliases are displayed as the requested review names.
+
+```bash
+build/preset-lab-venv/bin/python tools/milk-analyzer/audience_export.py \
+  --run build/core-audience-corpus \
+  --aar build/core-audience-analysis/published/projectM-TV-core-2.2.4.aar \
+  --output build/core-audience-review-assets
+./gradlew :app:assembleDebug -PaudienceReview=true
+```
+
+The review flag selects the pinned published AAR, generated debug assets and
+the separate app ID `nl.neerdael.projectmtv.audiencereview`. The menu shows only
+the available All/Chill/Normal/Party groups. A separate line below the preset
+name displays intensity and relative rank. Production updater checks are
+disabled in this review app. Ordinary builds retain existing categories and
+their core dependency. The review APK's asset merge is blocked until the
+complete export and AAR/asset checksums verify; incomplete exports are not a
+smaller substitute for the requested full collection.
+
 Read preset equations and shaders without audio playback, a GPU context, or
 reference images. This is research tooling under development. It does **not**
 yet produce a validated appearance prediction or replacement Dance ranking.

@@ -7,7 +7,7 @@ public class MusicCategoriesTest {
     @Test public void onlyAvailableGenresAreSelectable() {
         String[] ids = MusicCategories.available(id -> "all".equals(id) ? 14 : "dance".equals(id) ? 3 : 0);
         assertArrayEquals(new String[]{"all", "dance"}, ids);
-        assertEquals("Dance", MusicCategories.label("dance"));
+        assertEquals("Dance", MusicCategories.label("dance",false));
     }
     @Test public void unknownPersistenceFallsBackToAll() {
         assertEquals("all", MusicCategories.normalize("nonexistent"));

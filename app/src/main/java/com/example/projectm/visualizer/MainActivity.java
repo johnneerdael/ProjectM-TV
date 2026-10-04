@@ -118,6 +118,8 @@ public class MainActivity extends Activity {
     private View trackMenu;
     private View diagnosticsPanel;
     private TextView presetName;
+    private TextView presetAudience;
+    private AudienceScores audienceScores;
     private TextView presetMeta;
     private TextView statusLine;
     private TextView diagnostics;
@@ -185,6 +187,13 @@ public class MainActivity extends Activity {
         getWindow().setBackgroundDrawable(null);  // the GL surface covers the screen
 
         prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        if (BuildConfig.AUDIENCE_REVIEW) {
+            try {
+                audienceScores = AudienceScores.read(new java.io.InputStreamReader(getAssets().open("audience-scores.tsv"), "UTF-8"));
+            } catch (java.io.IOException | IllegalArgumentException error) {
+                throw new IllegalStateException("Verified audience score table unavailable", error);
+            }
+        }
         lastPlayerSession = prefs.getInt(PREF_LAST_PLAYER_SESSION, 0);
         profile = DeviceProfile.detect(this);
         display = DisplayInfo.detect(this);
@@ -343,6 +352,8 @@ public class MainActivity extends Activity {
         trackMenu = findViewById(R.id.track_menu);
         diagnosticsPanel = findViewById(R.id.diagnostics_panel);
         presetName = findViewById(R.id.preset_name);
+        presetAudience = findViewById(R.id.preset_audience);
+        presetAudience.setVisibility(BuildConfig.AUDIENCE_REVIEW ? View.VISIBLE : View.GONE);
         presetMeta = findViewById(R.id.preset_meta);
         statusLine = findViewById(R.id.status_line);
         diagnostics = findViewById(R.id.diagnostics);
@@ -364,6 +375,7 @@ public class MainActivity extends Activity {
             }
         });
         updater = Updater.get(this, prefs);
+        if (BuildConfig.AUDIENCE_REVIEW) updater.setEnabled(false);
         updater.attach(handler, updateListener);
 
         TextView versionInfo = findViewById(R.id.version_info);
@@ -637,7 +649,7 @@ public class MainActivity extends Activity {
         displayedMusicCategory = applied;
         String[] labels = new String[ids.length];
         for (int i = 0; i < ids.length; i++) labels[i] = MusicCategories.label(ids[i]);
-        musicCategoryRow.setup("Music category", labels, MusicCategories.selectedIndex(ids, applied), true, index -> {
+        musicCategoryRow.setup(BuildConfig.AUDIENCE_REVIEW ? "Preset group" : "Music category", labels, MusicCategories.selectedIndex(ids, applied), true, index -> {
             requestedMusicCategory = musicCategoryIds[index];
             prefs.edit().putString(PREF_MUSIC_CATEGORY, requestedMusicCategory).apply();
             ProjectMJNI.setMusicCategory(requestedMusicCategory);
@@ -649,7 +661,9 @@ public class MainActivity extends Activity {
         int change = ProjectMJNI.getPresetChangeCounter();
         if (change != lastPresetChange) {
             lastPresetChange = change;
-            currentPreset = displayName(ProjectMJNI.getCurrentPresetName());
+            String rawPreset = ProjectMJNI.getCurrentPresetName();
+            currentPreset = displayName(rawPreset);
+            if (audienceScores != null) setText(presetAudience, audienceScores.describe(rawPreset));
             if (!currentPreset.isEmpty()) {
                 setText(presetName, currentPreset);
                 presetName.setSelected(true);  // start marquee for long names
