@@ -10,6 +10,23 @@ READER = Path(os.environ.get("MILK_NATIVE_READER", ROOT / "build/milk-analyzer/n
 
 
 class NativeReaderTest(unittest.TestCase):
+    def test_equation_compile_failure_is_separate_from_tree_export(self):
+        result=self.read('per_frame_1=q1=1;\nper_frame_2=q2=;\n')
+        section=result['sections']['per_frame_']
+        self.assertEqual(section['projectm_native_compile_status'],'rejected')
+        error=section['projectm_native_compile_error']
+        self.assertIn('syntax error',error['message'])
+        self.assertEqual(error['line'],2)
+        self.assertGreaterEqual(error['column_start'],1)
+        self.assertGreaterEqual(error['column_end'],error['column_start'])
+
+    def test_milkdrop_assembly_success_does_not_hide_projectm_compile_rejection(self):
+        result=self.read('per_frame_1=q1=is_\nper_frame_2=beat*.2;\n')
+        section=result['sections']['per_frame_']
+        self.assertEqual(section['compile_status'],'accepted')
+        self.assertEqual(section['projectm_native_compile_status'],'rejected')
+        self.assertEqual(section['projectm_native_compile_error']['line'],2)
+
     def test_commented_texsize_does_not_invent_a_sampler_binding(self):
         result=self.read('PSVERSION_WARP=2\nwarp_1=`// float4 texsize_fc_main;\n'
                          'warp_2=`shader_body {ret=GetPixel(uv);}\n')

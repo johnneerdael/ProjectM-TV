@@ -733,6 +733,22 @@ not shader acceptance or prediction accuracy. The local audit and join are in
 `build/milk-analyzer/focused-315-dead-stores-2026-10-04/`; no duplicate corpus
 render was started.
 
+Equation reports distinguish native `compile_status` from AST export `status`.
+The raw projectM source has its own `projectm_native_compile_status` and, on
+failure, the compiler's message, line and column range. Successful MilkDrop
+numbered-line assembly does not imply projectM accepts the original boundaries.
+Compiler acceptance alone does not establish runtime domains or appearance.
+
+Fresh diagnostics for the 82 parsing witnesses identify 66 raw equation compile
+rejections and 16 shader parser gaps. Of the 66, 53 compile after MilkDrop's
+line/comment assembly; 13 still reject. The pinned engine throws on equation
+compile failure during preset initialization, rather than rendering a missing
+equation as zero. All 42 exact-source baseline matches for these 66 cases failed
+to load; there were no successful matches in that saved snapshot. These findings
+explain the blockers but do not remove them or silently repair preset source.
+See `fixtures/focused-parsing-diagnostics-2026-10-04.json` for source identities,
+native error locations and baseline evidence.
+
 Warp interpolation also accepts explicit `warp_subpixel_bits` in the forecast
 domain. The regular native mesh uses snapped window-space vertices, and its
 original-UV varying is interpolated from the same geometry instead of assumed

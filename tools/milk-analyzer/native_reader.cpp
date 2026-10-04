@@ -206,11 +206,19 @@ public:
     json parse(const std::string& code) {
         ParserDiagnostics diagnostics;
         auto program=prjm_eval_compile_code(context,code.c_str());
-        if(!program) return {{"status","unknown"},{"reason",prjm_eval_compiler_get_error(context,nullptr,nullptr,nullptr)}};
+        if(!program) {
+            int line=0,columnStart=0,columnEnd=0;
+            auto message=prjm_eval_compiler_get_error(context,&line,&columnStart,&columnEnd);
+            const std::string reason=message?message:"native equation compilation failed without diagnostic";
+            return {{"status","unknown"},{"reason",reason},{"compile_status","rejected"},
+                    {"compile_error",{{"message",reason},{"line",line},
+                                      {"column_start",columnStart},{"column_end",columnEnd}}}};
+        }
         for(auto item=context->variables.first;item;item=item->next) variables[&item->variable->value]=item->variable->name;
         json result;
         try {result={{"status","parsed"},{"tree",node(program->program)},{"numeric_bits",sizeof(PRJM_EVAL_F)*8}};}
         catch(const std::exception& error){result={{"status","unknown"},{"reason",error.what()}};}
+        result["compile_status"]="accepted";
         prjm_eval_destroy_code(program);
         return result;
     }
@@ -450,6 +458,8 @@ int main(int argc,char** argv) {
                 section["dialect"]="MilkDrop 2.25c numbered equation assembly";
                 section["assembled_source"]=assembled;
                 section["projectm_native_status"]=native["status"];
+                section["projectm_native_compile_status"]=native["compile_status"];
+                if(native.contains("compile_error"))section["projectm_native_compile_error"]=native["compile_error"];
                 if(native["status"]!="parsed")section["projectm_native_reason"]=native["reason"];
             }
             section["active"]=active;section["source"]=code;

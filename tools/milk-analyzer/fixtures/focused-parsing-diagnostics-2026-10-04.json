@@ -1,0 +1,2010 @@
+{
+  "schema_version": 1,
+  "scope": "Exact-source compiler diagnostics. Equation compile rejection aborts preset initialization in the pinned engine; shader parsing failure alone does not establish driver fallback. No source repairs or visual inspection.",
+  "counts": {
+    "equation-rejected": 66,
+    "shader-parser-gap": 16
+  },
+  "raw_rejected_milkdrop_accepted": 53,
+  "both_equation_assemblies_rejected": 13,
+  "engine_compile_sources_sha256": {
+    "PresetFileParser.cpp": "9fb7b8fed5069a3f3bb187f22072f5c9c00e30cb9e6b614e2f03c4971562eeb9",
+    "MilkdropPreset.cpp": "72fc0e3cf5d428def06bfb53fb8d679c6291bf308b3eece991c89c919899cbc3",
+    "PerFrameContext.cpp": "414e9b289eb8ae3922f4d47b74caa8df48bca0fd969beb350718733057e83c3e",
+    "PerPixelContext.cpp": "ed6ae84f5dbbc62992499937f98aaa88a4bd80804cf243c0a44c4e908da5d28c",
+    "WaveformPerFrameContext.cpp": "2f33a76187efd6f557a23e3e009dfe8104097d96dbd344540088ac884715f68c",
+    "WaveformPerPointContext.cpp": "6d3b197732d85fa27a2a6910758878b68587e160ddea7b3b63fa9b1ea3b2b36f",
+    "ShapePerFrameContext.cpp": "3f481049242ca64267745ce88b50bf2f6b84392786344c986147f4ce22416386"
+  },
+  "reader_sha256": "3add6af6ecc57aa4925a346229b5e51dcc8f86d929401be15edcec13e88f6dd1",
+  "parser_inputs": {
+    "engine": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "instrumentation_sha256": "f936d8aa1a6480e598af9e6bce89a51d8a04ab79f5660280e1fb3fc901f5daa7",
+      "patches_sha256": "3d9012b010691cef43d31d8bb7f9465348b621334bb7ae25b483e760766c0db6"
+    },
+    "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+    "shader_header_sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b"
+  },
+  "baseline_matches": [
+    {
+      "preset": "161.milk",
+      "preset_sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "0c0525534dc864f0356cb572f9b5bf4b1589129d3fea9550ba74491fc52cfdbf",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "2009 4th of July with AdamFX n Martin - into the fireworks E.milk",
+      "preset_sha256": "d526e7d69f3948fe37482aff9dbe0047e0c029b590a8f35c52e3e81a473da763",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "5ab65c0d8f2ab79b6df2358b5a7a6bb996b1f6a2462972ef0e65690915c41281",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "430.milk",
+      "preset_sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "2fb61c6f6f636bd7e82a70be21610b7088f10a99ed8ea22dbd17d14f5e09e9ca",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "A Tribute to Martin - bombyx mori - Ft Flexi - AdamFX - StahlRegen - Hd In Milk Ailen FX P.milk",
+      "preset_sha256": "10aac1bcf86b1b7c5ed94adab8b422de2fce9559f13b0a12008a3a7f672ee9e6",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "e7fef3efe18398f9db9b1aa6e196c240b27ca0f19d352b4e16134a699ab66b85",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Fruits Machine .milk",
+      "preset_sha256": "5f985a4495b0c413df0d8965d8b3a64e22b89a005669ecea9fa8cf3b31651df1",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "9ef47f6ca87b1a4b277b498a3f9175c2006b79eeb97069f6c6733a5fbc6d010b",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz .milk",
+      "preset_sha256": "d47f1195105b7b7a618c30f29796b3a6853547433e669b50c43c5c874a1061ed",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "d81a5a2df87d2cb69cd0942baa35e0711d30d39daab045aba28e0618705b8434",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz A.milk",
+      "preset_sha256": "3954f2b4c566a193350b6da400eed11819d949e6cf29fa78ed241e3179774290",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "0e62cf2f132703e8416e7d879bef27c2d7fa2e3cc9310c073f03d1dab26e4bb1",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz B.milk",
+      "preset_sha256": "9787a2a09f7257a53a74cb1246282dd3a20dfd2f4310bc3f7b6b1435d27240a4",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "e5dbe4d9b31c82ae41fd83eca99eaf5d37057a74407eb7ec908b877071cc7167",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter bare.milk",
+      "preset_sha256": "c473fed44a3de5a27c0fe10a97c7476461497f965905228218be34efcb2163f0",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "27812473c3e30cfc6a4cc47738e8b1a800d1fa0068d2dcf5b5634299b4e94090",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter.milk",
+      "preset_sha256": "49e9f79c4357c2786e0c75daf99968e1f1defdd3b55dfdf745a29c958ca47a7a",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "3858d038c432344494e71a7ceb827b0c9493fc06fdecbf42c478b81b818965bd",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Bdrv Aderrasi - Chromatic Voyage bdrv etAL.milk",
+      "preset_sha256": "8645c091f2282ef67856abec768036fdb17580917e98d59e167f4e55bec0fa43",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "32dbe9d820f09cf93f9c69ea0e9c978e21d3e0de3a5ed3901086de2b8e08bf75",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EVET + Flexi - Rainbox Splash Poolz.milk",
+      "preset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "f72322f124d15f3cbd2d7213af3701ee09e0e7402767bb283cf870b043dacfd5",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EVET - Brainsplolz.milk",
+      "preset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "427c693fec7d0f8efcd22b006d55f79b98b2f31e08d4ba2ed3385135c64ffe04",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EVET - Hypraxis.milk",
+      "preset_sha256": "61fdb1019e0a02884dd3aae0737f723bfe8c3a2c9c453249dd7bd4d1b50f9d2c",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "20bc003b0a49cfb5d7cfaeab1a1d748ee1594ce695bb36152f359170584c7816",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks -  glow - o - scope female (Milkdrop beta ver).milk",
+      "preset_sha256": "f1f2431f6db132e6da6b9a3b799c53809f274d3cf1012e35907d06e57cca819b",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "4dd3fe1e1b6f8f8b94ab88dcf100a1f5067744c3c99f8ba9fc339128ccac1d22",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks -  glow - o - scope male (Milkdrop beta ver).milk",
+      "preset_sha256": "7581d5fd243f07c05761b61b3bef1782ed83d9f94983aca23e27df5783325e14",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "39f59e2414b7a50d94a1a0eeda14c4bfe3e9a3f0d70fae566e574b8a73833943",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks -  glow - o - scope pat (Milkdrop beta ver).milk",
+      "preset_sha256": "129ff8d6d5b5acf72931e1a02dccf6df4d0646fdaef2f296b40325677973558a",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "200585d3798a83c1b38475bbc52d6cf07abdea421723cb35271feba97da70518",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks - demon's dream (Milkdrop beta ver).milk",
+      "preset_sha256": "8cac947e4b3a174b0e4737eabc29fecd5b68882fafe9ffb379a63590d94d0c69",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "b21ea9b62e01c59c06347e9e6d160eca9137ad233eac0f16aa33243389cd7b1f",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks - long armed raver (Milkdrop beta ver).milk",
+      "preset_sha256": "cb4419a9b253fa56c93504144010fc7c7eecb9b0c92930289620637827bc898f",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "60399c4a0de4dbcec87940b422f3bad4d5c1f500a00c06f5ce41afc2bbff36b7",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS - sectorLoc B_phat_ugly remix 01 EoS7p nz+ crab lardvae.milk",
+      "preset_sha256": "4026209d29ea95435d0398f7bf5b58756c51dd9e2de70eaa2dbc99fbdfc17b6d",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "28a65428633aa2bfb9f040bb66a04ef07f47b0b69470072b720bffc4e2b24057",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C.milk",
+      "preset_sha256": "3d30b54a6ac7e3e01062e4bfaab4e9e8013fdd8f376cd56dc1dfb7fb6d03d882",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "faca3b4a275420878fe3f7ad08dec5ce2f0b33c7a901b91b4f78dd3ec747c531",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C_b.milk",
+      "preset_sha256": "5dc95c5a9f8e7bd0b8d015c3b6cfcea6c54926c1c574dc01f2549a3aa0aeed58",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "6288939c9b14fd52eabf1e914dcb0bc7a13738f4d5082d24c532b7781e931c8f",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk",
+      "preset_sha256": "591567f0029068f4f1f7ec3b50d7a8fabd8c1658ece6c981a7f60cfd6f3317ea",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "d7cc098e6475b9239db5e7700b408123ebf7b09b103838edb5d10b5cce88877f",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Fed + Geiss - Color Pox Remix.milk",
+      "preset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "5e53401a537915e71f448c6372020be6be2bb2cbfceb4c1429a0a54de5252e30",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - dimension window.milk",
+      "preset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "e4085858ef58e4a67c51a371f9c0292f749a491d3172238dcd5e236261600d29",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - ianus portal.milk",
+      "preset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "4ad6a46a437a1f276a318b362b169cadd843a1641c9aef27161cdaabdd4683e5",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - madness portal.milk",
+      "preset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "8b7c813420ec3eb8aa1c47bc9048c21318112aa43febcd6a3fe95e62708f36c2",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - rorschach bomb.milk",
+      "preset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "5ebe375010c4f064166bea9dae2045c26924102d9652e02451d662ad73cf856d",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - spirally caterpillar coop mode.milk",
+      "preset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "c5603ea7b3071ec88df3f7fdd8a1ae122d2390d5cb855b1186f2068c531455b3",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - spirally repetative 2.milk",
+      "preset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "e5d1780f47798cbe5bfd748de74d828f97538d2113d235ba1d08dbe6a156d5be",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+      "preset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "e9b38b491e177723b13be8c39801730fbec036fc018319b8b17cf02ddfaad2d4",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
+      "preset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "69d279ad76964d18eb16a9b81f9bed553516777b7ba1ac784ecf348245e2d29a",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
+      "preset_sha256": "12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "33fcfce891efe79c18d80b662710c0109c28242d0cdbd35b9625f957903538c2",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Goody's Datura Bloom.milk",
+      "preset_sha256": "54a41dd9c3a93e4912bab58418912b60c75f4e1428a4aa8b71711cacae12e3cd",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "8563e98baa09ae8c00c129b2ebbcd689c23a8bb1e409d37e4ee4a179632195cc",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Halfbreak - EFFECTAMT 4PORT (Seizure Techno).milk",
+      "preset_sha256": "3b2e6bd3ab0f1e85dccab2551438a769d9e1984a7d1a87b2b7d139bd14d2e8fd",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "b1f2d33a0e4ebcdd9fe1de77c7f0d85c9ce8c43d0ef14faf8124ae9384f6281e",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Hexcollie - Hedgehog dreams.milk",
+      "preset_sha256": "9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7",
+      "native_compile_status": null,
+      "baseline_status": "success",
+      "baseline_row_sha256": "61b9d67b2502f8cc15109ec59aa328147acff47fa986aec3f26dffd5d07b38c1",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Hexcollie - Ultra daze.milk",
+      "preset_sha256": "fc6ff5d5591868ae366b619230a5533479913bf0a55f118bdacd7442a558c147",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "3578125f1dc1f1f32c233d3610d90dec02d36135faca46fca6b99d8ff00a55b4",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Idiot24-7-mindbender7(superbendmix1).milk",
+      "preset_sha256": "15aef727b786aa21601ec7fd341c7b9e580fbff254e2883c68443baeebb6d339",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "d6c782162df2c7abc22ff6935bd9eb71ef7ca3a0b0ba092d1cf0cf0a845e2d03",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Liquid Glowsticks - ATwisted Pre Set Mix By AdamFX 2 martin - disco mix Ft Hexocollie 27.milk",
+      "preset_sha256": "4da3fdb54c995d3a222340bc708ec3b44f6d9cab4f9903eae222feb2926ee788",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "59963a987ec6e019f1fa30c642d81768c2d2d5f856acaa38a32a46c269935605",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - A Sober Life (wasted).milk",
+      "preset_sha256": "ad1d4a2c1df3f223d7c018206d71e958ccb65dfae6a06eb1f9eb84c6c0bd099e",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "b86142265038ff78cd2425d84fe6bcee264c129a878ab729622f0bd3de04c581",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - All That I Am.milk",
+      "preset_sha256": "f60b1f1839f202811701c6d9b8184c415207bd2250d3efccad7492aae2619a85",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "916530e06ee5949774329158d9c5a0673bc97220221c0c359fb991ed1d4bc505",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - Beat Machina III.milk",
+      "preset_sha256": "e10e8083d95d65324c4d23ca660871960483cc6a2fb0d5b57f733e2d2fc9d8d3",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "bd502e5f6823e0bf15576a8dffd9d13c8762f31dc1ee2a9a9df5f1a4b127b678",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - Brain Grind i.milk",
+      "preset_sha256": "2068f26f9e312c7a98b3fb5d1fb4e28005bf36e97ee877c7b8982b13edc63aa3",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "2fd163110148ab21b34852aed7941315a2f9d945321d5ebb5e0d9b8bf3e2f5e7",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - Burnwheel I.milk",
+      "preset_sha256": "4072df6bbd14e058beb781afe8472d88c2b72072649a7534987d329e137bd10e",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "48fdce1674872469bfcb849cc2c798c8de312d84bf0a8f90d6375f8b30d706a8",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - Fuck ur Fractal Muscles II.milk",
+      "preset_sha256": "3c68f3ff8f902a55a189ec4ea2b08583b298d2499390d7d3e5b69c7f67c7c284",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "1e2a659c35f11c1c4f0cbf7fc19f79ff9deeee68c2501f17599c8118b86d1851",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - electric cell park a.milk",
+      "preset_sha256": "0e7c9add23496dd64455ab4117cf5c524bb7a2ed8d4ad32d588352ed04ba6580",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "38bebc9e5e2670b77fd0efc728a663398c7e8a0564e3796e7e8955400580ee94",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - electric cell park b nz+.milk",
+      "preset_sha256": "4c42076ffa0d011269691add9f3d86171902a8dd1807fb8c8938cad313b143a0",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "f3a86615af46ed97272112302f2fa8746e06bb0494321850f34f968d89289af7",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "LuxXx - electric cell park b.milk",
+      "preset_sha256": "39fe5c98aec5833051becc4daded6e159d53d386fe20353738cdf4d4e23d0954",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "2ccc856911f055c07358c2e24be2514aa9a8827fb2048f1f4aede8408a512eb9",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Milk Artist At our Best - FED - SlowFast Ft AdamFX n Martin - HD CosmoFX Also Ft Mstress n Armandio  - Thought About YouFX.milk",
+      "preset_sha256": "ae6547209756c79a3b3b17e9ab78997fd9257b5f9805eca25a67de1be31bcc61",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "4b98c50db0a69e8a366bbc1c151742a57e47b17c2663ba3105645192e4985026",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "ORB - Toy Snakes Starry Night.milk",
+      "preset_sha256": "5808eea5bb3e78e87f9d7a9cef09a0f7c315d73f80ad0c43e611f02b5bb0447c",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "778c9d4c59e4bf707aa4bf6180b932d6e5bca8dfd1fd650f1ee03cc9de0a6750",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Rarian Rakista - On the Water.milk",
+      "preset_sha256": "bef0955dbaee656bebceeb9b784500271572693ba2908d1c7b59d4d7ec365434",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "68e06532da882c715442668f95e4e190786cd0e08fcaa9ad312cb535d6aa703c",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Rozzor & Neuro - Starover (Semicolon Mix).milk",
+      "preset_sha256": "cfc114ebac787513cd136d9716391c2164191c6ff8cfcbc348ee94b2074a63dc",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "13c0650b11e1bbb0e1400d7ed58fe5ffc2ed17abeba47b68e3d30d26df58cd6c",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc nz+.milk",
+      "preset_sha256": "8f3b1f942e7ce9bbb1b85aed22188550fae2c0a3427ede79726bc7af468dc84f",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "1518866a1cfa3beab5435aab8cbf17c89c2597b38715d2c594345ae03391baa2",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+      "preset_sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "844eeceb0d061e40d4cdef730cbbc182318a36da5f722e91d697caabe212f0db",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    },
+    {
+      "preset": "Starz in MilkHDFX - Stahlregen & Aderrasi + EoS + Geiss + Unchained + Zylot + Flexi + Martin + AdamFX A.milk",
+      "preset_sha256": "821693b322e1767360505cef09654778dcdcd334462133d8915ed98f542bcf73",
+      "native_compile_status": "rejected",
+      "baseline_status": "failed",
+      "baseline_row_sha256": "290580f6a3161b0f23b918d4eb368d92f4f5e8942b4a4fdfede1ca6d9503c448",
+      "baseline_protocol_sha256": "369263c90d7089ebfebb6fcf3609b5f2554899e26bf7ef321cad1800f36b8180"
+    }
+  ],
+  "rows": [
+    {
+      "preset": "161.milk",
+      "preset_sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "da777447802da2c07925a2027a9746c0360e1a2ac960a550bc6df99a1c9e0ffa",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 463
+    },
+    {
+      "preset": "2009 4th of July with AdamFX n Martin - into the fireworks E.milk",
+      "preset_sha256": "d526e7d69f3948fe37482aff9dbe0047e0c029b590a8f35c52e3e81a473da763",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "c9c04eeabfae2770f9260d92a3903294e4828d06fa9dad995ce3290a49d4528e",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 27,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 312
+    },
+    {
+      "preset": "430.milk",
+      "preset_sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "a8f2681aed5d62564509adc95d3fa3ae313ecdf89cbb20e51dcd7b98aa076808",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 22,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 288
+    },
+    {
+      "preset": "A Tribute to Martin - bombyx mori - Ft Flexi - AdamFX - StahlRegen - Hd In Milk Ailen FX P.milk",
+      "preset_sha256": "10aac1bcf86b1b7c5ed94adab8b422de2fce9559f13b0a12008a3a7f672ee9e6",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "cca7ee4754836693e83010cb81f3e5e0a7d36c0a446f2feb52e282d3b3745f3e",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 295
+    },
+    {
+      "preset": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Fruits Machine .milk",
+      "preset_sha256": "5f985a4495b0c413df0d8965d8b3a64e22b89a005669ecea9fa8cf3b31651df1",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "dde0e9913a1c28259878754527c7b0c925ffe1de51cc4f3332901316b0281118",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 26,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 315
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz .milk",
+      "preset_sha256": "d47f1195105b7b7a618c30f29796b3a6853547433e669b50c43c5c874a1061ed",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "b78301227972dca701a5dd7ac24615c695ff0849862b53c7b59fb18fff086a85",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 27,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 299
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz A.milk",
+      "preset_sha256": "3954f2b4c566a193350b6da400eed11819d949e6cf29fa78ed241e3179774290",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "b78301227972dca701a5dd7ac24615c695ff0849862b53c7b59fb18fff086a85",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 27,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 299
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz B.milk",
+      "preset_sha256": "9787a2a09f7257a53a74cb1246282dd3a20dfd2f4310bc3f7b6b1435d27240a4",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "b78301227972dca701a5dd7ac24615c695ff0849862b53c7b59fb18fff086a85",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 27,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 299
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter bare.milk",
+      "preset_sha256": "c473fed44a3de5a27c0fe10a97c7476461497f965905228218be34efcb2163f0",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "12dd04b4e917d816b59f72c8072a4eee6c452609be49cba40711babb58931a7a",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 53,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 429
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter.milk",
+      "preset_sha256": "49e9f79c4357c2786e0c75daf99968e1f1defdd3b55dfdf745a29c958ca47a7a",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "b78301227972dca701a5dd7ac24615c695ff0849862b53c7b59fb18fff086a85",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 27,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 299
+    },
+    {
+      "preset": "Bdrv Aderrasi - Chromatic Voyage bdrv etAL.milk",
+      "preset_sha256": "8645c091f2282ef67856abec768036fdb17580917e98d59e167f4e55bec0fa43",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "d8afe128a7919996c624465cbe0c5573f0ee92ca5bec56c771ac82a700a3dd49",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 8,
+        "column_start": 1,
+        "line": 21,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;",
+      "preset_file_line": 315
+    },
+    {
+      "preset": "EVET + Flexi - Rainbox Splash Poolz.milk",
+      "preset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "EVET - Brainsplolz.milk",
+      "preset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "EVET - Hypraxis.milk",
+      "preset_sha256": "61fdb1019e0a02884dd3aae0737f723bfe8c3a2c9c453249dd7bd4d1b50f9d2c",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "a8f2681aed5d62564509adc95d3fa3ae313ecdf89cbb20e51dcd7b98aa076808",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 22,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 308
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks -  glow - o - scope female (Milkdrop beta ver).milk",
+      "preset_sha256": "f1f2431f6db132e6da6b9a3b799c53809f274d3cf1012e35907d06e57cca819b",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "23dda5121e7fb5e2b9d4b18c19d19f7a9a3510de68827f8972b71fb9fe98e889",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 1,
+        "line": 20,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "rawbeatb=0;",
+      "preset_file_line": 572
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks -  glow - o - scope male (Milkdrop beta ver).milk",
+      "preset_sha256": "7581d5fd243f07c05761b61b3bef1782ed83d9f94983aca23e27df5783325e14",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "23dda5121e7fb5e2b9d4b18c19d19f7a9a3510de68827f8972b71fb9fe98e889",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 1,
+        "line": 20,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "rawbeatb=0;",
+      "preset_file_line": 572
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks -  glow - o - scope pat (Milkdrop beta ver).milk",
+      "preset_sha256": "129ff8d6d5b5acf72931e1a02dccf6df4d0646fdaef2f296b40325677973558a",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "23dda5121e7fb5e2b9d4b18c19d19f7a9a3510de68827f8972b71fb9fe98e889",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 1,
+        "line": 20,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "rawbeatb=0;",
+      "preset_file_line": 572
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks - demon's dream (Milkdrop beta ver).milk",
+      "preset_sha256": "8cac947e4b3a174b0e4737eabc29fecd5b68882fafe9ffb379a63590d94d0c69",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "23dda5121e7fb5e2b9d4b18c19d19f7a9a3510de68827f8972b71fb9fe98e889",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 1,
+        "line": 20,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "rawbeatb=0;",
+      "preset_file_line": 572
+    },
+    {
+      "preset": "EoS + Redi Jedi - frequency analysis + glowsticks - long armed raver (Milkdrop beta ver).milk",
+      "preset_sha256": "cb4419a9b253fa56c93504144010fc7c7eecb9b0c92930289620637827bc898f",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "23dda5121e7fb5e2b9d4b18c19d19f7a9a3510de68827f8972b71fb9fe98e889",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 1,
+        "line": 20,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "rawbeatb=0;",
+      "preset_file_line": 572
+    },
+    {
+      "preset": "EoS - sectorLoc B_phat_ugly remix 01 EoS7p nz+ crab lardvae.milk",
+      "preset_sha256": "4026209d29ea95435d0398f7bf5b58756c51dd9e2de70eaa2dbc99fbdfc17b6d",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "7db4bb370fcc92b8b95c395d564ed9d2fc5672fddc58fe63e1ec53e98dbf1f6c",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 4,
+        "column_start": 1,
+        "line": 43,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "q15= tan(atime*.0043043);",
+      "preset_file_line": 329
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C.milk",
+      "preset_sha256": "3d30b54a6ac7e3e01062e4bfaab4e9e8013fdd8f376cd56dc1dfb7fb6d03d882",
+      "section": "shape_0_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "464b662430bbd43b2eb63215e3cdbd3992692baa65d49b077bafc204e1d7c3cd",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 34,
+        "column_start": 33,
+        "line": 1,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": "syntax error, unexpected VAR",
+      "source_line": "additive=above(sin(time*200),0.99l);",
+      "preset_file_line": 505
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C_b.milk",
+      "preset_sha256": "5dc95c5a9f8e7bd0b8d015c3b6cfcea6c54926c1c574dc01f2549a3aa0aeed58",
+      "section": "shape_0_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "464b662430bbd43b2eb63215e3cdbd3992692baa65d49b077bafc204e1d7c3cd",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 34,
+        "column_start": 33,
+        "line": 1,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": "syntax error, unexpected VAR",
+      "source_line": "additive=above(sin(time*200),0.99l);",
+      "preset_file_line": 505
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk",
+      "preset_sha256": "591567f0029068f4f1f7ec3b50d7a8fabd8c1658ece6c981a7f60cfd6f3317ea",
+      "section": "shape_0_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "7bc55baf40baef5ad8c8e41b1087fac309dd6f4147450fb17a359827d9a3bfda",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 34,
+        "column_start": 33,
+        "line": 1,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": "syntax error, unexpected VAR",
+      "source_line": "additive=above(sin(time*200),0.99l);",
+      "preset_file_line": 517
+    },
+    {
+      "preset": "Fed + Geiss - Color Pox Remix.milk",
+      "preset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1",
+      "section": "warp_",
+      "stage": "warp",
+      "section_source_sha256": "0265c9b6e4fc62c975f496e55466fdad2d64f6a2ac27b2f5432272dc61788346",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - dimension window.milk",
+      "preset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "14fb2740b8599f5e3b9e897a94d4a78fd0fe6915b1b1d62df4ebad7e911c9c91",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - ianus portal.milk",
+      "preset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - madness portal.milk",
+      "preset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "44051b005972dc825f827333716a31ae7d4b62d8e2709b28dd2322c31ad2a7b9",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - rorschach bomb.milk",
+      "preset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "44051b005972dc825f827333716a31ae7d4b62d8e2709b28dd2322c31ad2a7b9",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - spirally caterpillar coop mode.milk",
+      "preset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - spirally repetative 2.milk",
+      "preset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "a28f050fc2e2db496202519239eccf09700afe7916d31a4bac5c53755548f6be",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+      "preset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
+      "preset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
+      "preset_sha256": "12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Goody's Datura Bloom.milk",
+      "preset_sha256": "54a41dd9c3a93e4912bab58418912b60c75f4e1428a4aa8b71711cacae12e3cd",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "b081d16799a8aebad06c56f939af1cf1f41ebfacbec5554e0e6ac6998dee071d",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 2,
+        "column_start": 1,
+        "line": 3,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": null,
+      "source_line": "\\\\rot=sin(rot*10);",
+      "preset_file_line": 303
+    },
+    {
+      "preset": "Halfbreak - EFFECTAMT 4PORT (Seizure Techno).milk",
+      "preset_sha256": "3b2e6bd3ab0f1e85dccab2551438a769d9e1984a7d1a87b2b7d139bd14d2e8fd",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 292
+    },
+    {
+      "preset": "Hexcollie - Hedgehog dreams.milk",
+      "preset_sha256": "9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "Hexcollie - Ultra daze.milk",
+      "preset_sha256": "fc6ff5d5591868ae366b619230a5533479913bf0a55f118bdacd7442a558c147",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "89292a763624db5cc498e0c121e528df9f97f7b0df8d26a3defbac0f58c72103",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 1,
+        "column_start": 0,
+        "line": 10,
+        "message": "syntax error, unexpected end of file"
+      },
+      "syntax_reason": "syntax error, unexpected end of file",
+      "source_line": null,
+      "preset_file_line": null
+    },
+    {
+      "preset": "Idiot24-7-mindbender7(superbendmix1).milk",
+      "preset_sha256": "15aef727b786aa21601ec7fd341c7b9e580fbff254e2883c68443baeebb6d339",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "70eb30b4f0af483e671d4b5b90e13d4ea4ec0091e25bc311220fa303b0b02893",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 94,
+        "column_start": 93,
+        "line": 1,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": null,
+      "source_line": "rot=if(above(bnot(1*bass),bnot(1*bass*.24)),rot*sin(rad*sin(bass*.54)),-rot*sin(rad*cos(bass*.",
+      "preset_file_line": 73
+    },
+    {
+      "preset": "Liquid Glowsticks - ATwisted Pre Set Mix By AdamFX 2 martin - disco mix Ft Hexocollie 27.milk",
+      "preset_sha256": "4da3fdb54c995d3a222340bc708ec3b44f6d9cab4f9903eae222feb2926ee788",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "50e5a3d2e5b726dd50803d987b41d009d6ce69b288c7cd274d46129bde0d8fab",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 365
+    },
+    {
+      "preset": "LuxXx - A Sober Life (wasted).milk",
+      "preset_sha256": "ad1d4a2c1df3f223d7c018206d71e958ccb65dfae6a06eb1f9eb84c6c0bd099e",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "a8f2681aed5d62564509adc95d3fa3ae313ecdf89cbb20e51dcd7b98aa076808",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 22,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 336
+    },
+    {
+      "preset": "LuxXx - All That I Am.milk",
+      "preset_sha256": "f60b1f1839f202811701c6d9b8184c415207bd2250d3efccad7492aae2619a85",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "1eb50dd13fda2efc9db400e0c8006422c065ca16fce58cc7dc3112952217891c",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 8,
+        "column_start": 1,
+        "line": 2,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;",
+      "preset_file_line": 285
+    },
+    {
+      "preset": "LuxXx - Beat Machina III.milk",
+      "preset_sha256": "e10e8083d95d65324c4d23ca660871960483cc6a2fb0d5b57f733e2d2fc9d8d3",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "1eb50dd13fda2efc9db400e0c8006422c065ca16fce58cc7dc3112952217891c",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 8,
+        "column_start": 1,
+        "line": 2,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;",
+      "preset_file_line": 285
+    },
+    {
+      "preset": "LuxXx - Brain Grind i.milk",
+      "preset_sha256": "2068f26f9e312c7a98b3fb5d1fb4e28005bf36e97ee877c7b8982b13edc63aa3",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "cbac07477841a5ce02367ce795af22286889ad934673bf4c7256829498191f34",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 13,
+        "column_start": 12,
+        "line": 12,
+        "message": "syntax error, unexpected '*', expecting '('"
+      },
+      "syntax_reason": "syntax error, unexpected '*', expecting '('",
+      "source_line": "rot=rot*sin*cos(time)*0.7;",
+      "preset_file_line": 373
+    },
+    {
+      "preset": "LuxXx - Burnwheel I.milk",
+      "preset_sha256": "4072df6bbd14e058beb781afe8472d88c2b72072649a7534987d329e137bd10e",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 578
+    },
+    {
+      "preset": "LuxXx - Fuck ur Fractal Muscles II.milk",
+      "preset_sha256": "3c68f3ff8f902a55a189ec4ea2b08583b298d2499390d7d3e5b69c7f67c7c284",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 309
+    },
+    {
+      "preset": "LuxXx - electric cell park a.milk",
+      "preset_sha256": "0e7c9add23496dd64455ab4117cf5c524bb7a2ed8d4ad32d588352ed04ba6580",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 245
+    },
+    {
+      "preset": "LuxXx - electric cell park b nz+.milk",
+      "preset_sha256": "4c42076ffa0d011269691add9f3d86171902a8dd1807fb8c8938cad313b143a0",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "f97fd13dc4b3b3a4b6579ddc96222adfb09b5de7d63c29a656819f4baf728363",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 47,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 280
+    },
+    {
+      "preset": "LuxXx - electric cell park b.milk",
+      "preset_sha256": "39fe5c98aec5833051becc4daded6e159d53d386fe20353738cdf4d4e23d0954",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 256
+    },
+    {
+      "preset": "Milk Artist At our Best - FED - SlowFast Ft AdamFX n Martin - HD CosmoFX Also Ft Mstress n Armandio  - Thought About YouFX.milk",
+      "preset_sha256": "ae6547209756c79a3b3b17e9ab78997fd9257b5f9805eca25a67de1be31bcc61",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "cca7ee4754836693e83010cb81f3e5e0a7d36c0a446f2feb52e282d3b3745f3e",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 283
+    },
+    {
+      "preset": "ORB - Toy Snakes Starry Night.milk",
+      "preset_sha256": "5808eea5bb3e78e87f9d7a9cef09a0f7c315d73f80ad0c43e611f02b5bb0447c",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "44ad5aa40e37a811e75300abc3f628119c6a61103ce50f8d167a60ce79a087e0",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 6,
+        "column_start": 1,
+        "line": 2,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "state = 0;",
+      "preset_file_line": 251
+    },
+    {
+      "preset": "Rarian Rakista - On the Water.milk",
+      "preset_sha256": "bef0955dbaee656bebceeb9b784500271572693ba2908d1c7b59d4d7ec365434",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "dde0e9913a1c28259878754527c7b0c925ffe1de51cc4f3332901316b0281118",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 26,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 249
+    },
+    {
+      "preset": "Rozzor & Neuro - Starover (Semicolon Mix).milk",
+      "preset_sha256": "cfc114ebac787513cd136d9716391c2164191c6ff8cfcbc348ee94b2074a63dc",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "d27e43cc819e927e1abdee2b7c1bea429ac015f444e846690345ea5088d4c476",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 7,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "yspeed + ydir*yamp - ypos - yspeed*0.055*below(abs(ypos),yamp);",
+      "preset_file_line": 86
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc nz+.milk",
+      "preset_sha256": "8f3b1f942e7ce9bbb1b85aed22188550fae2c0a3427ede79726bc7af468dc84f",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "2bb3f27d8db450f0fa671df2e4e96db1116b5fd727fa52336117384580c0565c",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 24,
+        "column_start": 23,
+        "line": 9,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": "syntax error, unexpected invalid token",
+      "source_line": "zoom=zoom+.10*sin(rad+.+15.15);",
+      "preset_file_line": 332
+    },
+    {
+      "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
+      "preset_sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "2bb3f27d8db450f0fa671df2e4e96db1116b5fd727fa52336117384580c0565c",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 24,
+        "column_start": 23,
+        "line": 9,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": "syntax error, unexpected invalid token",
+      "source_line": "zoom=zoom+.10*sin(rad+.+15.15);",
+      "preset_file_line": 315
+    },
+    {
+      "preset": "Starz in MilkHDFX - Stahlregen & Aderrasi + EoS + Geiss + Unchained + Zylot + Flexi + Martin + AdamFX A.milk",
+      "preset_sha256": "821693b322e1767360505cef09654778dcdcd334462133d8915ed98f542bcf73",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "dde0e9913a1c28259878754527c7b0c925ffe1de51cc4f3332901316b0281118",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 26,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 351
+    },
+    {
+      "preset": "Zylot & Idiot24-7 - Unknown Power Source.milk",
+      "preset_sha256": "93ba841ab75cba25a94ee1b073fb79ee761113360cf0aad4f84dda546b3a619f",
+      "section": "per_pixel_",
+      "stage": "eel",
+      "section_source_sha256": "1eb50dd13fda2efc9db400e0c8006422c065ca16fce58cc7dc3112952217891c",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 8,
+        "column_start": 1,
+        "line": 2,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "reb_Att))))*sin(Rad*ang*above(Bass,bass_Att))*rad-ang;",
+      "preset_file_line": 69
+    },
+    {
+      "preset": "all death angel watch Erd 3y3 mBetraeqx.milk",
+      "preset_sha256": "661e494948cc529ff91c5c1292214a8f58dbccd1763ab4450a99c45c0a1ba26a",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "23dda5121e7fb5e2b9d4b18c19d19f7a9a3510de68827f8972b71fb9fe98e889",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 1,
+        "line": 20,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "rawbeatb=0;",
+      "preset_file_line": 287
+    },
+    {
+      "preset": "amandio c - codex 4 - cabasal dandelioness nz+wp2.milk",
+      "preset_sha256": "08f76b88828a54b296aa126bc5652c55c45d8acb7c1f1ea5748c3367b26e84ef",
+      "section": "shape_0_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "14a1c0738be905034c8531d1d930e9f9dbb924411cbc6a209a4605d416d9d8b7",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": false,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 8,
+        "line": 9,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": "syntax error, unexpected invalid token",
+      "source_line": "y=if(c,.-.4,y);",
+      "preset_file_line": 177
+    },
+    {
+      "preset": "amandio c - codex 4 - cabasal dandelioness nz+wp3.milk",
+      "preset_sha256": "dc104ae6119f0807817f8024921585fb82db1d3679aa9fb014cf872a60e84c1a",
+      "section": "shape_0_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "14a1c0738be905034c8531d1d930e9f9dbb924411cbc6a209a4605d416d9d8b7",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": false,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 8,
+        "line": 9,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": "syntax error, unexpected invalid token",
+      "source_line": "y=if(c,.-.4,y);",
+      "preset_file_line": 177
+    },
+    {
+      "preset": "amandio c - codex 4 - plot wag nz+ necrophors gadget lard.milk",
+      "preset_sha256": "0e46602e0347aba8356999918287dce07178d6a514dd1c78b6e2a1a6ca6dcc4e",
+      "section": "shape_0_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "14a1c0738be905034c8531d1d930e9f9dbb924411cbc6a209a4605d416d9d8b7",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": false,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 8,
+        "line": 9,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": "syntax error, unexpected invalid token",
+      "source_line": "y=if(c,.-.4,y);",
+      "preset_file_line": 177
+    },
+    {
+      "preset": "lice - veritubule.milk",
+      "preset_sha256": "fd1e37383cb6c78a6d1eb906ca7982db7fc0d69d8b891f71be259341029c481b",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "ba58023fbe736a5514c7912b02995f73818da067e8a0df1eb6a40dbf50625034",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 12a.milk",
+      "preset_sha256": "5d351b29598f9ab9f4090be14356866fd07871559bcaebd8fa6994cf28947d9b",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "cca7ee4754836693e83010cb81f3e5e0a7d36c0a446f2feb52e282d3b3745f3e",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 438
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 12b.milk",
+      "preset_sha256": "290dedb0d6166755779a138cdde332a5078a8392210eb08c1a43198f031146e1",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "50e5a3d2e5b726dd50803d987b41d009d6ce69b288c7cd274d46129bde0d8fab",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 274
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 13.milk",
+      "preset_sha256": "428dbb6315a9709952964b92a9b6483dc390cb1ab57af1e8218094da07454623",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "b78301227972dca701a5dd7ac24615c695ff0849862b53c7b59fb18fff086a85",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 27,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 299
+    },
+    {
+      "preset": "martin - beamer code 22h - lines - rhythmic and fast.milk",
+      "preset_sha256": "a3e3024d243ba980583ead6bea44f1afd2d8dd7d1abaf7adc92dea11199b836f",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "50de613ba361cde6ee065dd250b1c0e103299c9b10eaa35e23c933ef0abc5078",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": true,
+      "native_error": {
+        "column_end": 47,
+        "column_start": 46,
+        "line": 157,
+        "message": "syntax error, unexpected '*'"
+      },
+      "syntax_reason": "syntax error, unexpected '*'",
+      "source_line": "    gmegabuf (n+4) = bnot(schange) * blank;; * (fastpace);;",
+      "preset_file_line": 434
+    },
+    {
+      "preset": "martin - purple pulsator - mom - ns2w nz.milk",
+      "preset_sha256": "523ca37b2804c315a67fe45dd474b870f48f0083abde7deaa00d44ca2644b2eb",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 367
+    },
+    {
+      "preset": "martin - purple pulsator - mom - ns2w.milk",
+      "preset_sha256": "b485a6c83f9a8ee908f4e1d63c524255b8c8b70d37384aec35cde12576297dc0",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 367
+    },
+    {
+      "preset": "martin - purple pulsator nz+.milk",
+      "preset_sha256": "3274fe069d7cffd4ea17fbae4ac0b900423abf61674ad5141863579459c78402",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "ac9da8f2e9b52c20ca8eea614ae842638b5acbea27ab0004d418d25cc9d7aab2",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 40,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 384
+    },
+    {
+      "preset": "martin - purple pulsator.milk",
+      "preset_sha256": "11459b5cf4b250c8b9d51225cd8d4aa102f7c51b4904de7b6624bc8aee0f3815",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 363
+    },
+    {
+      "preset": "martin - sparky caleidoscope.milk",
+      "preset_sha256": "9ef89f10346e0b06d5f570513dfb088e6c5cd116fee26a10bf43f283fd630750",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "a8f2681aed5d62564509adc95d3fa3ae313ecdf89cbb20e51dcd7b98aa076808",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 22,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 301
+    },
+    {
+      "preset": "more breedre presets.milk",
+      "preset_sha256": "eb9f26d612212b99d40c4feec3d064d10a20ad2d5b82a43e548fb42d77e739c4",
+      "section": "shape_0_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "14a1c0738be905034c8531d1d930e9f9dbb924411cbc6a209a4605d416d9d8b7",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": false,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 8,
+        "line": 9,
+        "message": "syntax error, unexpected invalid token"
+      },
+      "syntax_reason": "syntax error, unexpected invalid token",
+      "source_line": "y=if(c,.-.4,y);",
+      "preset_file_line": 177
+    },
+    {
+      "preset": "sonar cow.milk",
+      "preset_sha256": "289a57aea3b7bde6324a98596ee5f4178dc4a6da9dd831c1fafb7ee5c500861d",
+      "section": "shape_1_per_frame",
+      "stage": "eel",
+      "section_source_sha256": "436230153df26882da466a00cc51d7ecd1dfc73c052b6403651dd2727d6a4d53",
+      "syntax_status": "unknown",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "rejected",
+      "active": false,
+      "native_error": {
+        "column_end": 1,
+        "column_start": 0,
+        "line": 2,
+        "message": "syntax error, unexpected end of file"
+      },
+      "syntax_reason": "syntax error, unexpected end of file",
+      "source_line": null,
+      "preset_file_line": null
+    },
+    {
+      "preset": "suksma - Hexcollie - Julian Carnival - shimmy dumb grid dogmaklyasm nz+5.milk",
+      "preset_sha256": "549accc0164b9b6bca92c54af71ecd990cd35ebfa7c397b96f3f341cd410478c",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "923b1ac2abb141a4a8339fb77516b6f0efdc64fa6627260ee2bac19ecaced0f5",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 59,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "chng=sin(time*.5);",
+      "preset_file_line": 553
+    },
+    {
+      "preset": "suksma - Hexcollie - Julian Carnival - shimmy dumb grid dogmaklyasm nz+6.milk",
+      "preset_sha256": "193ac4c7b6257e9570b28e0f25bd16cbfe61819f1e4add2686d4a71352e8c3fe",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "923b1ac2abb141a4a8339fb77516b6f0efdc64fa6627260ee2bac19ecaced0f5",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 59,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "chng=sin(time*.5);",
+      "preset_file_line": 399
+    },
+    {
+      "preset": "suksma - crisco orgy - rosvell roams nz+.milk",
+      "preset_sha256": "f99c8383eb1010a257c9188776b734edf6438c307a72f777f442b5479aad61b6",
+      "section": "warp_",
+      "stage": "warp",
+      "section_source_sha256": "e81c1a0c2056bdc3f196b1d1b2ccdaf70f091f1406f379f9353e29b9e6dffb03",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "suksma - dicked.milk",
+      "preset_sha256": "be873c0f864738e254f8a90f707466751740ae91ddf8d38b4482802e0029e42f",
+      "section": "per_frame_init_",
+      "stage": "eel",
+      "section_source_sha256": "23dda5121e7fb5e2b9d4b18c19d19f7a9a3510de68827f8972b71fb9fe98e889",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 9,
+        "column_start": 1,
+        "line": 20,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "rawbeatb=0;",
+      "preset_file_line": 270
+    },
+    {
+      "preset": "suksma - fuck retro anything.milk",
+      "preset_sha256": "d57fea66d8addb123af5327e19d7410ed923d0a64416b448fee2458510730883",
+      "section": "comp_",
+      "stage": "composite",
+      "section_source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "syntax_status": "unknown",
+      "native_compile_status": null,
+      "milkdrop_compile_status": null,
+      "active": true,
+      "native_error": null,
+      "syntax_reason": "native shader parsing failed"
+    },
+    {
+      "preset": "there is gum stuck to my hate.milk",
+      "preset_sha256": "41b71270aea8799680b79378bd8c3a6e7893b901aafde91bfff6ca057a07ff64",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "78d7da06407d6cef3209ea76a805183f9c52c26d7d3a72e361f6f2f66383a4fb",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 5,
+        "column_start": 1,
+        "line": 23,
+        "message": "syntax error, unexpected VAR"
+      },
+      "syntax_reason": null,
+      "source_line": "beat*equal(index%2,0);",
+      "preset_file_line": 451
+    },
+    {
+      "preset": "va ultramix - 290_3.milk",
+      "preset_sha256": "bf5e8c435d0032ccc40caf88eddab658f0d536bd61364a7791bee16004e5390b",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "ad90fb35d03481da7949aa5773ef246c7050ed4c90af241213a00fef9e396276",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 3,
+        "column_start": 1,
+        "line": 3,
+        "message": "syntax error, unexpected NUM"
+      },
+      "syntax_reason": null,
+      "source_line": "99;;",
+      "preset_file_line": 293
+    },
+    {
+      "preset": "va ultramix2 - 532_2.milk",
+      "preset_sha256": "97af8c946901213d1b2f7aa88c679d0129589372bb30bcd239496d0a4f51b470",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "ad90fb35d03481da7949aa5773ef246c7050ed4c90af241213a00fef9e396276",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 3,
+        "column_start": 1,
+        "line": 3,
+        "message": "syntax error, unexpected NUM"
+      },
+      "syntax_reason": null,
+      "source_line": "99;;",
+      "preset_file_line": 293
+    },
+    {
+      "preset": "va ultramix2 - 533_1.milk",
+      "preset_sha256": "bf6b095f2d6a6c8ac3b893475ea82eb8b94f20200abea0ce2c628c0af22978e4",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "ad90fb35d03481da7949aa5773ef246c7050ed4c90af241213a00fef9e396276",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 3,
+        "column_start": 1,
+        "line": 3,
+        "message": "syntax error, unexpected NUM"
+      },
+      "syntax_reason": null,
+      "source_line": "99;;",
+      "preset_file_line": 293
+    },
+    {
+      "preset": "va ultramix2 - 534.milk",
+      "preset_sha256": "765028fc69780859a2ad2ca0ceac25fe7c415c49d9a987f7ce9ae6c2a7fcaf66",
+      "section": "per_frame_",
+      "stage": "eel",
+      "section_source_sha256": "ad90fb35d03481da7949aa5773ef246c7050ed4c90af241213a00fef9e396276",
+      "syntax_status": "parsed",
+      "native_compile_status": "rejected",
+      "milkdrop_compile_status": "accepted",
+      "active": true,
+      "native_error": {
+        "column_end": 3,
+        "column_start": 1,
+        "line": 3,
+        "message": "syntax error, unexpected NUM"
+      },
+      "syntax_reason": null,
+      "source_line": "99;;",
+      "preset_file_line": 293
+    }
+  ],
+  "milkdrop_reference": {
+    "source": "MilkDrop3/code/vis_milk2/state.cpp",
+    "sha256": "137ede115d187c6f2dbd9428b0af9991d5b75b30363e56263a789bb8db603b33",
+    "functions": [
+      "ReadCode",
+      "StripLinefeedCharsAndComments"
+    ],
+    "note": "Implementation removes numbered-line control characters after stripping // and double-backslash comments; the prose comment mentioning spaces differs from the executable body."
+  }
+}
