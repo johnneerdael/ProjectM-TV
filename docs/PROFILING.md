@@ -41,7 +41,8 @@ ON=$(a settings --user current get secure enabled_notification_listeners | tr ':
 [ "$ON" = 1 ] && a cmd notification disallow_listener $L
 a am force-stop $P
 a pidof $P                            # must print nothing before the write
-# write /data/data/$P/shared_prefs/projectm_settings.xml, e.g. render_height (0 = Auto),
+# write /data/data/$P/shared_prefs/projectm_settings.xml, e.g. render_height (0 = Auto, -1 = Native
+# in a Native Core build),
 # memory_limit=false, blank_detection_v3=false: push the file to /data/local/tmp and `cat` it over
 # the old one (as root), which keeps its owner and SELinux context
 [ "$ON" = 1 ] && a cmd notification allow_listener $L
