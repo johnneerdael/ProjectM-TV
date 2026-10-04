@@ -76,9 +76,9 @@ fi
 
 # Exercise both artifact policies through the real JNI sizing/presentation paths.
 for policy in native capped; do
-    POLICY_FLAGS=()
-    if [ "$policy" = capped ]; then POLICY_FLAGS=(-DPROJECTMTV_RENDERING_POLICY_CAPPED); fi
-    g++ -std=c++17 -O1 -g $SAN -pthread "${POLICY_FLAGS[@]}" \
+    POLICY_DEFINE=""
+    if [ "$policy" = capped ]; then POLICY_DEFINE="-DPROJECTMTV_RENDERING_POLICY_CAPPED"; fi
+    g++ -std=c++17 -O1 -g $SAN -pthread ${POLICY_DEFINE:+"$POLICY_DEFINE"} \
         -I"$HERE/stubs" -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/$JNI_OS" \
         -I"$ROOT/third_party/projectm/src/api/include" -I"$ROOT/core/src/main/cpp" \
         "$HERE/render_policy_test.cpp" -o "$WORK/render_policy_$policy"
