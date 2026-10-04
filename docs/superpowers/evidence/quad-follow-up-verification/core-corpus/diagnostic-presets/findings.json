@@ -1,0 +1,105 @@
+{
+  "observed_utc": "2026-10-04T09:38:07.800172+00:00",
+  "baseline_records": [
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "repeat": 2,
+      "job_path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/jobs/55488592ac720fee47231585de2da0888a82edae67a326ec65abe118a1723277/row.json",
+      "pid": "19053",
+      "native_warnings": [
+        "         1791102528.645 19053 19071 W projectM-Native: Preset load failed (): std::exception"
+      ],
+      "source_row_sha256": "b58f91dcadca2cc6604176c8b0d7307cefa0d7511965a320be726872f1369c3b"
+    },
+    {
+      "preset": {
+        "bytes": 15036,
+        "path": "161.milk",
+        "sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+      },
+      "repeat": 1,
+      "job_path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/jobs/4fb88579879dd12ab8b460110bae95232b1dacf8f000d3ffc09f13f2bcf0ed95/row.json",
+      "pid": "18963",
+      "native_warnings": [
+        "         1791102527.573 18963 18981 W projectM-Native: Preset load failed (): std::exception"
+      ],
+      "source_row_sha256": "4a1135b78f47476d0050631db0c91e8f230fe70faf3de1b9f70b59ff77d86e42"
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "repeat": 1,
+      "job_path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/jobs/1489e10b49398699ce6b000564837862a2e366365189aafde812ea231bd70319/row.json",
+      "pid": "2395",
+      "native_warnings": [
+        "         1791103936.852  2395  2413 W projectM-Native: Preset load failed (): std::exception"
+      ],
+      "source_row_sha256": "9f68b6674bb1825deecf36cdae852afd5ec66d1c4ded4a88be344294f4cc592b"
+    },
+    {
+      "preset": {
+        "bytes": 8225,
+        "path": "430.milk",
+        "sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+      },
+      "repeat": 2,
+      "job_path": "build/follow-ups/core-corpus/measurements-core-emu-baseline-v1/jobs/d0d1243a7ce0fc07019851483d6a324d1c1904371be4988d8a7967e807dff240/row.json",
+      "pid": "2490",
+      "native_warnings": [
+        "         1791103937.822  2490  2519 W projectM-Native: Preset load failed (): std::exception"
+      ],
+      "source_row_sha256": "b065d0515198563e0b5b5a307ed97691c1d3c5c212c036e81ff88cb0da7ef4bb"
+    }
+  ],
+  "candidate_physical_summary": {
+    "protocol_sha256": "1782ff842e513bbb671f08e9ebd2cc12f5c5df92dd1e9e76e6ad9b63e00a7497",
+    "rows": [
+      {
+        "error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed=",
+        "key": "46a0e208a5e1bc41cf310a20da1f95018d65413194b4a947e1632eb0a4ed5015",
+        "pid": 26931,
+        "preset": "161.milk",
+        "repeat": 1,
+        "status": "failed"
+      },
+      {
+        "error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed=",
+        "key": "87b8e65c207ea4863ca0f3f9cac1fad45031a1804aa6b536d3985533aa990b1b",
+        "pid": 27009,
+        "preset": "161.milk",
+        "repeat": 2,
+        "status": "failed"
+      },
+      {
+        "error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed=",
+        "key": "2fcef098bc6aaa6149ac52f02ca6af575ac7318aa29e071b4a62c1b078a5b357",
+        "pid": 27096,
+        "preset": "430.milk",
+        "repeat": 1,
+        "status": "failed"
+      },
+      {
+        "error": "java.lang.IllegalStateException: requested preset failed or fallback occurred: observed=",
+        "key": "a2f019a1310a1fd81f6465510d10f2fb122ad6405aa1c53b422e5533420ab3f2",
+        "pid": 27175,
+        "preset": "430.milk",
+        "repeat": 2,
+        "status": "failed"
+      }
+    ],
+    "scope": "Actual-core candidate28 diagnostics for two failed Mac baseline presets; physical driver differs, so not a matched fidelity comparison"
+  },
+  "conclusions": [
+    "Both candidate presets fail reproducibly in two physical actual-core runs, reporting Could not compile per-frame code.",
+    "The baseline requested-preset failures are therefore not solely observations of the Mac emulator.",
+    "Existing stage diagnostics are now visible; acceptance of these presets is not fixed by the diagnostic patch."
+  ],
+  "hypothesis": "Both files split is_beat across adjacent per_frame records. The current parser inserts a newline between records. A compiler ablation and an original MilkDrop compatibility oracle are still needed before choosing a source or engine repair. No preset bytes changed."
+}
