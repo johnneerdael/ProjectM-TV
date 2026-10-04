@@ -1,0 +1,9 @@
+{
+  "exe": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/diffusion/work-reviewed/native-build/1ab75359e147643f1994cf441d12c2bbdf17817b6d18db35673a927e84d90425/preset-lab-worker",
+  "snapshot": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-feedback-recovery/build/diffusion/work-reviewed/engines/1ab75359e147643f1994cf441d12c2bbdf17817b6d18db35673a927e84d90425",
+  "identity": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "patches_sha256": "44381ce5cd09e605e4393bd5b2de3fe9273d59b916e0f5bb96010107c8b18479",
+    "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+  }
+}

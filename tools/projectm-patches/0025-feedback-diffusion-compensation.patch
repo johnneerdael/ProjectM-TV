@@ -1,7 +1,18 @@
-Subject: [PATCH] Recover native feedback diffusion compensation prototype
+Subject: [PATCH] MilkdropPreset: compensate reference-scale feedback diffusion
 
-Recovered from the deleted worktree and recorded source edits.
-Compatibility acceptance remains open; this is a feature-branch recovery checkpoint.
+Build on 0024's line reference and virtual canvas. Add (scale^2-1)/6 render pixels^2
+per axis through an exact-moment adaptive 3/4-tap stencil, capped at 1.9. Apply it
+in the first flip when vectors already require that copy, otherwise cache the
+filtered final flip for the next warp. Keep the ordinary path without a reference,
+at/below its area, for conservatively gated shaders, and after shader failure.
+
+Scale the minimum vector length only with active compensation; invalidate cached
+input when scale/reference or framebuffer state changes. Cache uniform locations
+and release intermediate vertex shaders when fragment compilation throws.
+
+The nine-tap PoC (229ae74) missed AM6 cost targets. Independent productisation
+measurements and deliberate kernel/placement changes are recorded under
+ docs/superpowers/evidence/0025-feedback-diffusion/.
 ---
 diff --git a/src/libprojectM/MilkdropPreset/CMakeLists.txt b/src/libprojectM/MilkdropPreset/CMakeLists.txt
 index 9ca510657..d08e7a8cb 100644

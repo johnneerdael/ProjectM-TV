@@ -1,0 +1,8 @@
+{
+  "scope": "Exact bytes of all25productpatches against saved final worker identity",
+  "patches_sha256": "44381ce5cd09e605e4393bd5b2de3fe9273d59b916e0f5bb96010107c8b18479",
+  "historical_expected": "44381ce5cd09e605e4393bd5b2de3fe9273d59b916e0f5bb96010107c8b18479",
+  "header_source_tool_line": 1970,
+  "patch_sha256": "9e3e5a0b4c5cb336d6e592c6cc2b19e8f5a6b2e6266c794209620cca66e98b58",
+  "source_identity": "b52b12e82dccfebb9201cbceed164aba0e7295455d1f052f47e4038a84185cc2"
+}
