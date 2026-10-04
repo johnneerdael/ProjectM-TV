@@ -4,9 +4,12 @@ Build on 0035 and PR #23's sampler and feedback-history fixes. Above the line re
 bilinear main-texture read of the warp (translated preset shaders and the default warp shader)
 reproduces MilkDrop's read on the reference canvas: its reference phase is taken relative to the
 pixel's own position (uv_orig), and the four reference-spaced neighbours are blended with MilkDrop's
-bilinear weights, the taps narrowed so that their own native interpolation keeps the reference
-variance f(1-f). Reads on reference texel centres (identity, whole-texel shifts) stay single plain
-reads. Point-sampled reads, the composite and the blur textures read the unchanged frame.
+bilinear weights. The taps are pulled a quarter native texel towards the read so native pixels stay
+coupled on integer scales (2364x1330 is exactly twice the 1182x665 canvas), and their distance keeps
+the reference variance f(1-f) including their own native interpolation. Reads on reference texel
+centres (identity, whole-texel shifts) stay single plain reads; so do reads at coordinates that do not
+depend on the pixel's position (stored positions read back from the frame). Point-sampled reads, the
+composite and the blur textures read the unchanged frame.
 
 This replaces the uniform (s^2-1)/6 pre-warp blur pass: that over-smoothed identity and texel-aligned
 reads every frame (astral spinorgentics encrustcore nz+), took MilkDrop's asymmetric 2-tap shape for a
@@ -32,16 +35,17 @@ index c54b1dc06..4d6cc7557 100644
          FinalComposite.cpp
 diff --git a/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
 new file mode 100644
-index 000000000..776a6807e
+index 000000000..c14250fc9
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp
-@@ -0,0 +1,170 @@
+@@ -0,0 +1,334 @@
 +#include "FeedbackDiffusion.hpp"
 +
 +#include <algorithm>
 +#include <array>
 +#include <cctype>
 +#include <initializer_list>
++#include <utility>
 +#include <string>
 +#include <vector>
 +
@@ -65,12 +69,18 @@ index 000000000..776a6807e
 +    {
 +        return texture(source, uv);
 +    }
-+    // Each tap's own interpolation adds its native phase variance; narrow the taps to keep phase*(1-phase).
-+    highp vec2 low = (uv - phase / canvas) * size - 0.5;
++    // MilkDrop's taps sit one reference texel apart. Pull them a quarter native texel towards the read first:
++    // on integer scales the taps would otherwise land on native texel centres, and native pixels one or more
++    // texels apart would never exchange values (independent copies of the reference grid that drift apart in
++    // chaotic or sharpening feedback). Then set the tap distance so that the two-tap variance plus the taps'
++    // own native interpolation is the reference read's phase*(1-phase).
++    highp vec2 target = phase * (1.0 - phase) * scale * scale;
++    highp vec2 low = (uv - phase / canvas) * size - 0.5 + 0.25 * phase;
++    highp vec2 high = low + scale - 0.25;
 +    highp vec2 lowPhase = fract(low);
-+    highp vec2 highPhase = fract(low + scale);
-+    highp vec2 tapVariance = ((1.0 - phase) * lowPhase * (1.0 - lowPhase) + phase * highPhase * (1.0 - highPhase)) / (scale * scale);
-+    highp vec2 spread = sqrt(clamp(1.0 - tapVariance / max(phase * (1.0 - phase), 1e-6), 0.0, 1.0)) / canvas;
++    highp vec2 highPhase = fract(high);
++    highp vec2 tapVariance = (1.0 - phase) * lowPhase * (1.0 - lowPhase) + phase * highPhase * (1.0 - highPhase);
++    highp vec2 spread = sqrt(max(target - tapVariance, vec2(0.0)) / max(phase * (1.0 - phase), vec2(1e-6))) / size;
 +    highp vec2 near = uv - spread * phase;
 +    highp vec2 far = uv + spread * (1.0 - phase);
 +    return mix(mix(texture(source, near), texture(source, vec2(far.x, near.y)), phase.x),
@@ -81,6 +91,156 @@ index 000000000..776a6807e
 +auto IsIdentifierCharacter(char ch) -> bool
 +{
 +    return std::isalnum(static_cast<unsigned char>(ch)) != 0 || ch == '_';
++}
++
++// The identifiers of an expression (not swizzles or members after '.'), with texture(...) calls left out:
++// what a texture read returns is data, whatever its coordinate.
++auto Identifiers(const std::string& code) -> std::vector<std::string>
++{
++    std::vector<std::string> identifiers;
++    for (size_t i = 0; i < code.size();)
++    {
++        if (!IsIdentifierCharacter(code[i]) || std::isdigit(static_cast<unsigned char>(code[i])))
++        {
++            ++i;
++            continue;
++        }
++        size_t end = i;
++        while (end < code.size() && IsIdentifierCharacter(code[end])) ++end;
++        const std::string word = code.substr(i, end - i);
++        size_t next = end;
++        while (next < code.size() && std::isspace(static_cast<unsigned char>(code[next]))) ++next;
++        if (word == "texture" && next < code.size() && code[next] == '(')
++        {
++            int depth = 0;
++            for (i = next; i < code.size(); ++i)
++            {
++                depth += code[i] == '(' ? 1 : code[i] == ')' ? -1 : 0;
++                if (depth == 0) break;
++            }
++            ++i;
++            continue;
++        }
++        size_t previous = i;
++        while (previous > 0 && std::isspace(static_cast<unsigned char>(code[previous - 1]))) --previous;
++        if (previous == 0 || code[previous - 1] != '.')
++        {
++            identifiers.push_back(word);
++        }
++        i = end;
++    }
++    return identifiers;
++}
++
++auto ArgumentEnd(const std::string& code, size_t open) -> size_t
++{
++    int depth = 0;
++    for (size_t i = open; i < code.size(); ++i)
++    {
++        depth += code[i] == '(' ? 1 : code[i] == ')' ? -1 : 0;
++        if (depth == 0) return i;
++    }
++    return std::string::npos;
++}
++
++auto SplitArguments(const std::string& arguments) -> std::vector<std::string>
++{
++    std::vector<std::string> parts(1);
++    int depth = 0;
++    for (char ch : arguments)
++    {
++        depth += ch == '(' ? 1 : ch == ')' ? -1 : 0;
++        if (ch == ',' && depth == 0) parts.emplace_back();
++        else parts.back() += ch;
++    }
++    return parts;
++}
++
++// Identifiers whose value depends on the pixel's position (the warp's uv inputs), by assignment or as
++// function parameters, flow-insensitively. Coordinates without that dependence (stored positions read back
++// from the frame) have no reference phase relative to the pixel; their reads stay plain.
++auto PositionDependent(const std::string& glsl) -> std::vector<std::string>
++{
++    static const std::vector<std::string> keywords{"float", "int", "bool", "vec2", "vec3", "vec4", "ivec2", "ivec3",
++                                                   "ivec4", "mat2", "mat3", "mat4", "const", "highp", "mediump", "lowp",
++                                                   "in", "out", "inout", "uniform", "return"};
++    std::vector<std::string> tainted{"_uv", "frag_TEXCOORD0"};
++    const auto isTainted = [&tainted](const std::vector<std::string>& words) {
++        return std::any_of(words.begin(), words.end(), [&tainted](const std::string& word) {
++            return std::find(tainted.begin(), tainted.end(), word) != tainted.end();
++        });
++    };
++    const auto taint = [&tainted](const std::string& word) {
++        if (std::find(tainted.begin(), tainted.end(), word) != tainted.end()) return false;
++        tainted.push_back(word);
++        return true;
++    };
++    // Function parameter names, by function.
++    std::vector<std::pair<std::string, std::vector<std::string>>> functions;
++    for (size_t open = glsl.find('('); open != std::string::npos; open = glsl.find('(', open + 1))
++    {
++        const auto close = ArgumentEnd(glsl, open);
++        size_t after = close == std::string::npos ? close : close + 1;
++        while (after != std::string::npos && after < glsl.size() && std::isspace(static_cast<unsigned char>(glsl[after]))) ++after;
++        if (after == std::string::npos || after >= glsl.size() || glsl[after] != '{') continue;
++        size_t nameEnd = open;
++        while (nameEnd > 0 && std::isspace(static_cast<unsigned char>(glsl[nameEnd - 1]))) --nameEnd;
++        size_t nameStart = nameEnd;
++        while (nameStart > 0 && IsIdentifierCharacter(glsl[nameStart - 1])) --nameStart;
++        std::vector<std::string> parameters;
++        for (const auto& parameter : SplitArguments(glsl.substr(open + 1, close - open - 1)))
++        {
++            const auto words = Identifiers(parameter);
++            parameters.push_back(words.empty() ? std::string() : words.back());
++        }
++        functions.emplace_back(glsl.substr(nameStart, nameEnd - nameStart), parameters);
++    }
++    for (bool changed = true; changed;)
++    {
++        changed = false;
++        // Assignments and initialized declarations: statement pieces between ; { and }.
++        size_t start = 0;
++        for (size_t i = 0; i <= glsl.size(); ++i)
++        {
++            if (i < glsl.size() && glsl[i] != ';' && glsl[i] != '{' && glsl[i] != '}') continue;
++            const std::string statement = glsl.substr(start, i - start);
++            start = i + 1;
++            for (size_t eq = statement.find('='); eq != std::string::npos; eq = statement.find('=', eq + 1))
++            {
++                const char before = eq > 0 ? statement[eq - 1] : ' ';
++                const char after = eq + 1 < statement.size() ? statement[eq + 1] : ' ';
++                if (after == '=' || before == '=' || before == '!' || before == '<' || before == '>') { ++eq; continue; }
++                if (!isTainted(Identifiers(statement.substr(eq + 1)))) break;
++                for (const auto& word : Identifiers(statement.substr(0, eq)))
++                {
++                    if (std::find(keywords.begin(), keywords.end(), word) != keywords.end()) continue;
++                    changed |= taint(word);
++                    break;
++                }
++                break;
++            }
++        }
++        // Calls: a position-dependent argument makes the parameter position-dependent.
++        for (const auto& function : functions)
++        {
++            const std::string call = function.first + "(";
++            for (auto at = glsl.find(call); at != std::string::npos; at = glsl.find(call, at + 1))
++            {
++                if (at > 0 && IsIdentifierCharacter(glsl[at - 1])) continue;
++                const auto close = ArgumentEnd(glsl, at + call.size() - 1);
++                if (close == std::string::npos) continue;
++                const auto arguments = SplitArguments(glsl.substr(at + call.size(), close - at - call.size()));
++                for (size_t a = 0; a < arguments.size() && a < function.second.size(); ++a)
++                {
++                    if (!function.second[a].empty() && isTainted(Identifiers(arguments[a])))
++                    {
++                        changed |= taint(function.second[a]);
++                    }
++                }
++            }
++        }
++    }
++    return tainted;
 +}
 +
 +} // namespace
@@ -95,12 +255,19 @@ index 000000000..776a6807e
 +    }
 +    std::string result = glsl;
 +    bool rewritten = false;
++    const auto positionDependent = PositionDependent(glsl);
 +    for (const auto& sampler : samplers)
 +    {
 +        const std::string read = "texture(" + sampler + ",";
 +        for (auto position = result.find(read); position != std::string::npos; position = result.find(read, position))
 +        {
-+            if (position > 0 && IsIdentifierCharacter(result[position - 1]))
++            const auto close = ArgumentEnd(result, position + 7);
++            const auto coordinate = close == std::string::npos ? std::string() : result.substr(position + read.size(), close - position - read.size());
++            const auto words = Identifiers(coordinate);
++            const bool relative = std::any_of(words.begin(), words.end(), [&positionDependent](const std::string& word) {
++                return std::find(positionDependent.begin(), positionDependent.end(), word) != positionDependent.end();
++            });
++            if ((position > 0 && IsIdentifierCharacter(result[position - 1])) || !relative)
 +            {
 +                position += read.size();
 +                continue;
@@ -551,10 +718,10 @@ index 4b9dcb7e0..edf9bb413 100644
          ShaderExceptionTest.cpp
 diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
 new file mode 100644
-index 000000000..9533cb1be
+index 000000000..ee7459e25
 --- /dev/null
 +++ b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
-@@ -0,0 +1,274 @@
+@@ -0,0 +1,301 @@
 +#include <ProjectM.hpp>
 +#include <Renderer/Shader.hpp>
 +#include <projectM-opengl.h>
@@ -563,6 +730,7 @@ index 000000000..9533cb1be
 +
 +#include <algorithm>
 +#include <cstdint>
++#include <cstdlib>
 +#include <sstream>
 +#include <string>
 +#include <utility>
@@ -622,6 +790,16 @@ index 000000000..9533cb1be
 +        different += a[i] != b[i];
 +    }
 +    return different;
++}
++
++auto AbsoluteDifference(const Image& a, const Image& b) -> size_t
++{
++    size_t total{};
++    for (size_t i = 0; i < std::min(a.size(), b.size()); ++i)
++    {
++        total += static_cast<size_t>(std::abs(static_cast<int>(a[i]) - static_cast<int>(b[i])));
++    }
++    return total;
 +}
 +
 +} // namespace
@@ -757,15 +935,18 @@ index 000000000..9533cb1be
 +    }
 +}
 +
-+TEST_F(FeedbackDiffusionRenderTest, HalfTexelReadAveragesTheReferenceNeighbours)
++TEST_F(FeedbackDiffusionRenderTest, HalfTexelReadApproachesTheReferenceNeighbourAverage)
 +{
-+    // Scale 2: half a canvas texel is one native texel, so MilkDrop's 50/50 blend of the two reference
-+    // texels is exactly the mean of two point reads one canvas texel apart.
-+    const auto footprint = Render(FeedbackPreset("GetPixel(uv + float2(0.5/64.0, 0)).rgb"), 64, 48);
++    // Scale 2: MilkDrop reads half a canvas texel as the 50/50 blend of two texels one canvas texel (two
++    // native texels) apart. The footprint keeps that read's mean and variance; its taps are pulled in a
++    // quarter native texel to keep native pixels coupled, so it is close to, not identical with, the mean
++    // of two point reads, and far closer to it than the plain read without a reference.
++    const auto read = FeedbackPreset("GetPixel(uv + float2(0.5/64.0, 0)).rgb");
 +    const auto expected = Render(FeedbackPreset("(tex2D(sampler_pw_main, uv) + tex2D(sampler_pw_main, uv + float2(1.0/64.0, 0))).rgb*0.5"), 64, 48);
-+    EXPECT_EQ(DifferentBytes(footprint, expected), 0u);
-+    // Without a reference the same read is a plain native bilinear read: a different image.
-+    EXPECT_GT(DifferentBytes(footprint, Render(FeedbackPreset("GetPixel(uv + float2(0.5/64.0, 0)).rgb"), 0, 0)), 0u);
++    const auto footprint = AbsoluteDifference(Render(read, 64, 48), expected);
++    const auto plain = AbsoluteDifference(Render(read, 0, 0), expected);
++    EXPECT_GT(plain, 0u);
++    EXPECT_LT(footprint * 4, plain);
 +}
 +
 +TEST_F(FeedbackDiffusionRenderTest, DisplacedWarpsAreCompensatedIncludingTheDefaultWarp)
@@ -796,6 +977,19 @@ index 000000000..9533cb1be
 +                EXPECT_GT(different, 0u);
 +            }
 +        }
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, ReadsAtStoredCoordinatesStayPlain)
++{
++    // The coordinate comes from the frame's own colour (Royal Mashup (255) style): no footprint, so the
++    // result does not depend on the reference size. The seed's blue channel holds uv.x, the read is at
++    // (blue, green) shifted by a third of a native texel to make the plain bilinear blend visible.
++    const auto preset = FeedbackPreset("GetPixel(tex2D(sampler_pc_main, uv_orig).bg + float2(1.0/384.0, 0)).rgb");
++    for (const auto& reference : References)
++    {
++        SCOPED_TRACE(reference.first);
++        EXPECT_EQ(DifferentBytes(Render(preset, reference.first, reference.second), Render(preset, 0, 0)), 0u);
 +    }
 +}
 +
@@ -831,10 +1025,10 @@ index 000000000..9533cb1be
 +}
 diff --git a/tests/libprojectM/FeedbackDiffusionTest.cpp b/tests/libprojectM/FeedbackDiffusionTest.cpp
 new file mode 100644
-index 000000000..85361e2f6
+index 000000000..b5040b1e6
 --- /dev/null
 +++ b/tests/libprojectM/FeedbackDiffusionTest.cpp
-@@ -0,0 +1,174 @@
+@@ -0,0 +1,224 @@
 +#include <MilkdropPreset/FeedbackDiffusion.hpp>
 +
 +#include <gtest/gtest.h>
@@ -906,6 +1100,56 @@ index 000000000..85361e2f6
 +    std::string noUvOrig = Warp;
 +    noUvOrig.erase(noUvOrig.find("in vec4 frag_TEXCOORD0;"), 23);
 +    EXPECT_EQ(DiffusionFootprintShader(noUvOrig, {"sampler_main"}), noUvOrig);
++}
++
++TEST(FeedbackDiffusion, ReadsAtStoredCoordinatesStayPlain)
++{
++    // Royal Mashup (255): seed positions are read back from the frame and the frame is sampled there. Such a
++    // coordinate does not move with the pixel, so it has no reference phase relative to it.
++    const std::string warp = R"(#version 330
++in vec4 frag_TEXCOORD0;
++uniform sampler2D sampler_main;
++uniform sampler2D sampler_pw_main;
++uniform sampler2D sampler_fw_main;
++vec2 Offset(vec2 p) { return p + vec2(0.01); }
++void PS(vec4 _uv, out vec4 _return_value) {
++    vec2 uvm = vec2( (_uv).xy );
++    vec3 ret = (texture(sampler_pw_main, uvm)).xyz;
++    vec3 rsamp = (texture(sampler_pw_main, uvm + vec2(0.01))).xyz;
++    ((ret).xy = (rsamp).xy);
++    ((ret).z = (texture(sampler_fw_main, (ret).xy)).z);
++    vec2 moved = Offset(uvm) + (texture(sampler_main, uvm)).xy * 0.01;
++    ret += (texture(sampler_fw_main, moved)).xyz + (texture(sampler_main, Offset((_uv).zw))).xyz;
++    _return_value = vec4(ret, 1.0);
++}
++)";
++    const auto rewritten = DiffusionFootprintShader(warp, {"sampler_main", "sampler_fw_main"});
++    EXPECT_EQ(Count(rewritten, "texture(sampler_fw_main, (ret).xy)"), 1u) << "stored coordinate must stay plain";
++    // Position-dependent through assignments (uvm, moved), a function result and a data-displaced position.
++    EXPECT_EQ(Count(rewritten, "diffusion_main(sampler_fw_main, moved)"), 1u);
++    EXPECT_EQ(Count(rewritten, "diffusion_main(sampler_main, uvm)"), 1u);
++    EXPECT_EQ(Count(rewritten, "diffusion_main(sampler_main, Offset((_uv).zw))"), 1u);
++}
++
++TEST(FeedbackDiffusion, FunctionParametersCarryPositionDependence)
++{
++    const std::string warp = R"(#version 330
++in vec4 frag_TEXCOORD0;
++uniform sampler2D sampler_main;
++vec3 Get1(vec2 uvi) { return (texture(sampler_main, uvi)).xyz; }
++vec3 Get2(vec2 pos) { return (texture(sampler_main, pos)).xyz; }
++void PS(vec4 _uv, out vec4 _return_value) {
++    vec2 newuv = vec2( (_uv).xy );
++    vec3 stored = (texture(sampler_main, newuv)).xyz;
++    _return_value = vec4(Get1(newuv + vec2(0.01)) + Get2((stored).xy), 1.0);
++}
++)";
++    const auto rewritten = DiffusionFootprintShader(warp, {"sampler_main"});
++    EXPECT_EQ(Count(rewritten, "diffusion_main(sampler_main, uvi)"), 1u) << "Get1's parameter gets a position";
++    // Dependence is tracked by name, so a parameter name shared with a position-dependent one would be
++    // rewritten too (the conservative direction).
++    EXPECT_EQ(Count(rewritten, "texture(sampler_main, pos)"), 1u) << "Get2's parameter only gets stored data";
++    EXPECT_EQ(Count(rewritten, "diffusion_main(sampler_main, newuv)"), 1u);
 +}
 +
 +TEST(FeedbackDiffusion, RewritesTheDefaultWarpShader)
