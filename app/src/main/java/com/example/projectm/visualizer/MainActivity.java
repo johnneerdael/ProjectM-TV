@@ -328,6 +328,7 @@ public class MainActivity extends Activity {
     }
 
     private static String heightLabel(int height) {
+        if (height == QualityController.NATIVE_HEIGHT) return "Native";
         if (height == 2160) return "4K";
         if (height == 1440) return "1440p";
         return height + "p";
@@ -473,8 +474,13 @@ public class MainActivity extends Activity {
                 });
 
         OptionRow memoryLimit = findViewById(R.id.row_memory_limit);
-        // A memory limit at or above the render height cap changes nothing; show what it allows.
-        int safeHeight = Math.min(profile.memorySafeHeight(), QualityController.RENDER_HEIGHT_CAP);
+        // Show the highest manual choice actually permitted by the memory limit, including Native.
+        int safeHeight = profile.memorySafeHeight();
+        if (safeHeight > 0) {
+            int[] allowed = QualityController.manualHeights(display, safeHeight);
+            int highest = allowed[allowed.length - 1];
+            safeHeight = highest == QualityController.NATIVE_HEIGHT ? display.physicalHeight : highest;
+        }
         memoryLimit.setup("Memory limit", new String[]{"Off", safeHeight > 0 ? "Up to " + heightLabel(safeHeight) : "On"},
                 prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? 1 : 0, true, index -> {
                     prefs.edit().putBoolean(PREF_MEMORY_LIMIT, index == 1).apply();
@@ -658,7 +664,7 @@ public class MainActivity extends Activity {
         if (menu == Menu.NONE) return;
 
         int skipped = ProjectMJNI.getSkippedCount();
-        String mode = quality.isAuto() ? "auto" : "fixed";
+        String mode = quality.isAuto() ? "auto" : quality.isNative() ? "native" : "fixed";
         if (menu == Menu.MAIN) {
             setText(presetMeta, numberFormat.format(ProjectMJNI.getPresetCount()) + " presets in rotation"
                     + (skipped > 0 ? "  ·  " + numberFormat.format(skipped) + " skipped" : ""));

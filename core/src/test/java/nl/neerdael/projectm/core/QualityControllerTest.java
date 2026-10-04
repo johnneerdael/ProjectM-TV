@@ -46,7 +46,7 @@ public class QualityControllerTest {
 
     @Test
     public void manualLevelsFollowPhysicalPanel() throws Exception {
-        assertArrayEquals(new int[]{720, 1080, 1330}, QualityController.manualHeights(display(3840, 2160), 0));
+        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT}, QualityController.manualHeights(display(3840, 2160), 0));
         assertArrayEquals(new int[]{720, 1080}, QualityController.manualHeights(display(1920, 1080), 0));
         assertEquals(2560, display(3840, 2160).widthForHeight(1440));
     }
@@ -63,10 +63,10 @@ public class QualityControllerTest {
     }
 
     @Test
-    public void renderHeightIsCappedForAutoAndFixedResolution() throws Exception {
+    public void autoAndLegacyFixedHeightsStayCapped() throws Exception {
         assertEquals(1330, QualityController.RENDER_HEIGHT_CAP);
-        // 4K and 1440p panels: no fixed level above the cap; the cap itself is offered.
-        assertArrayEquals(new int[]{720, 1080, 1330}, QualityController.manualHeights(display(2560, 1440), 0));
+        // Auto and saved numeric heights keep the cap; Native is a separate explicit option.
+        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT}, QualityController.manualHeights(display(2560, 1440), 0));
         assertEquals(1330, QualityController.validFixedHeight(display(3840, 2160), 0, 1440));
         assertEquals(1330, QualityController.validFixedHeight(display(2560, 1440), 0, 1440));
         assertEquals(1080, QualityController.validFixedHeight(display(3840, 2160), 0, 1080));
@@ -292,4 +292,47 @@ public class QualityControllerTest {
         samples(q, 3, 20);
         assertTrue(applied < 720 && applied >= 360);
     }
+    @Test
+    public void nativeIsAnExplicitOptionAboveTheCap() throws Exception {
+        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT},
+                QualityController.manualHeights(display(3840, 2160), 0));
+        assertArrayEquals(new int[]{720, 1080, 1330, QualityController.NATIVE_HEIGHT},
+                QualityController.manualHeights(display(2560, 1440), 0));
+        assertArrayEquals(new int[]{720, 1080}, QualityController.manualHeights(display(1920, 1080), 0));
+        assertEquals(QualityController.NATIVE_HEIGHT,
+                QualityController.validFixedHeight(display(3840, 2160), 0, QualityController.NATIVE_HEIGHT));
+        assertEquals(1330, QualityController.validFixedHeight(display(3840, 2160), 0, 2160));
+    }
+
+    @Test
+    public void nativeRendersAtPhysicalPanelHeightAndKeepsAutoCapped() throws Exception {
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), 0, h -> applied = h);
+        q.setMode(QualityController.NATIVE_HEIGHT, 0);
+        assertEquals(2160, applied);
+        assertEquals(3840, display(3840, 2160).widthForHeight(applied));
+        assertTrue(q.isNative());
+        assertTrue(!q.isAuto());
+        settle(q);
+        samples(q, 20, 10);
+        assertEquals("a fixed Native selection does not enter the Auto ladder", 2160, applied);
+        q.setMode(0, 2160);
+        assertEquals(1330, applied);
+        assertTrue(!q.isNative());
+        assertTrue(q.isAuto());
+    }
+
+    @Test
+    public void nativeRespectsMemoryAndChangedPanels() throws Exception {
+        assertEquals(0, QualityController.validFixedHeight(display(3840, 2160), 1260, QualityController.NATIVE_HEIGHT));
+        assertEquals(0, QualityController.validFixedHeight(display(3840, 2160), 1440, QualityController.NATIVE_HEIGHT));
+        assertEquals(0, QualityController.validFixedHeight(display(1920, 1080), 0, QualityController.NATIVE_HEIGHT));
+        assertArrayEquals(new int[]{720, 1080, 1330}, QualityController.manualHeights(display(3840, 2160), 1440));
+        QualityController q = new QualityController(display(3840, 2160),
+                profile(DeviceProfile.Tier.HIGH), 1260, h -> applied = h);
+        q.setMode(QualityController.NATIVE_HEIGHT, 0);
+        assertTrue(q.isAuto());
+        assertTrue(applied <= 1260);
+    }
+
 }
