@@ -242,9 +242,15 @@ Saved resolution preferences are kept. The former "4K" choice maps to "Native".
 
 Downloads that are no longer newer than the installed version are deleted at the next check. When the app was installed by an F-Droid client (installer package), the setting shows *Via F-Droid* and nothing runs. F-Droid's inclusion policy allows downloading updates only with explicit user consent, which the off-by-default setting is. For testing, `adb shell setprop debug.projectmtv.update_from 1.9.17` makes the app treat that as the installed version (and accept the same version code).
 
+## Random texture binding invariant (2026-10-04)
+
+Patch 0037 caches the selected image per preset slot 00–15, while each shader alias retains its own name and sampler mode. A qualified prefix such as `pc_rand00_clouds` filters the image pool by `clouds` and requests point/clamp sampling; `fw_` selects linear/wrap. The unqualified default is linear/wrap. Authored `sampler_state` fields remain ignored, as documented in patch 0032. A later stage reuses an existing slot even if its alias names another filename prefix. Within a new shader, filtered aliases take precedence over unfiltered forms; competing filters retain lexical precedence. New presets select new random images through production `std::random_device` seeding.
+
+Images are extracted from APK `textures/` into app-private `files/textures/` before the first preset. Both live and prewarm engines receive that directory. `Texture::Name()` retains the selected base name and `SourcePath()` the loaded file path; diagnostic tools must hash that file and record shader/uniform/unit identity before asserting an association. Offline sampler declarations, compilation and a successful preset load do not establish correct appearance.
+
 ## Legacy shader global inputs
 
-Patch 0037 preserves plain uninitialized scalar/vector float globals as external
+Patch 0038 preserves plain uninitialized scalar/vector float globals as external
 uniform inputs. Read-only globals stay uniforms; shader writes use the initialized
 per-invocation copy established by patch 0030. The GLES link-time default for unbound
 uniforms is zero. This is a defined current-core policy, not a claim that legacy D3D9
