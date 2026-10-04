@@ -1,0 +1,8 @@
+{
+  "scope": "Only completed candidate29 Android build intermediates; APK/data/source/worktrees unchanged",
+  "freed_file_bytes": 503688502,
+  "metadata_files": 10,
+  "archive_sha256": "548ae4bef76a3dcfec68d6bd30200d1eaa15dd644c5cfc6b273670c037fa774d",
+  "apk_sha256_preserved": "9a571f03f5df3413f8b6eb9434c6ebfc4294a7ac7b91df37f17ead6debc5fee5",
+  "free_bytes_after": 13276577792
+}
