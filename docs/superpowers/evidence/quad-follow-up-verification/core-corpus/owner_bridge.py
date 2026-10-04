@@ -54,7 +54,8 @@ def attach_epoch(module, work):
     expected_gl = None
     for row_path in (work / "jobs").glob("*/row.json"):
         row = json.loads(row_path.read_text())
-        if row.get("role") == "baseline" and row.get("status") == "success":
+        if (row.get("role") == "baseline" and row.get("status") == "success"
+                and module.read_cached(row_path, row.get("key"), protocol["sha256"]) is not None):
             expected_gl = {key: row["result"][key] for key in GL_FIELDS}
             break
     if expected_gl is None:
