@@ -141,7 +141,30 @@
           "category": "success",
           "observed_error": ""
         }
-      ]
+      ],
+      "partial_recovery": {
+        "path": "recovered-device/legacy-1791102056932456000/jobs/b4b0998eb2301c01bf7a7330b00ee9dc90fa2a24ca715e8cbf27633428a846e1/output",
+        "atomic_result_present": false,
+        "frame_trace_bytes": 0,
+        "files": [
+          {
+            "path": "recovered-device/legacy-1791102056932456000/jobs/b4b0998eb2301c01bf7a7330b00ee9dc90fa2a24ca715e8cbf27633428a846e1/output/frame-0120.png",
+            "bytes": 2308,
+            "sha256": "6ea713449436bdd9b69cbe380bca02ba311f8e310b78495fa43cc1a54a456aa2"
+          },
+          {
+            "path": "recovered-device/legacy-1791102056932456000/jobs/b4b0998eb2301c01bf7a7330b00ee9dc90fa2a24ca715e8cbf27633428a846e1/output/frame-0121.png",
+            "bytes": 2339,
+            "sha256": "c0670729c1e1044ac9c28d2e5d61b7bf2cfd94a158841eff620978c2f8cf768a"
+          },
+          {
+            "path": "recovered-device/legacy-1791102056932456000/jobs/b4b0998eb2301c01bf7a7330b00ee9dc90fa2a24ca715e8cbf27633428a846e1/output/frames.jsonl",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "conclusion": "Only two thumbnails and an empty trace were preserved; cannot verify a completed producer render. Original failed row remains unchanged; later repeat succeeded."
+      }
     },
     {
       "preset": {
