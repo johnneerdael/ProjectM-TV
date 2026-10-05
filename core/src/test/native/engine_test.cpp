@@ -113,6 +113,9 @@ std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
 bool g_directOutput = false, g_lastFrameDirect = false;
 int g_loadsAfterDirectFrame = 0;
 void projectm_opengl_set_direct_output(projectm_handle, bool enabled) { g_directOutput = enabled; }
+float g_feedbackDetailAlpha = -1.f;
+void projectm_opengl_set_feedback_detail(projectm_handle, float alpha) { g_feedbackDetailAlpha = alpha; }
+int projectm_opengl_get_feedback_detail_status(projectm_handle) { return g_feedbackDetailAlpha < 0 ? -1 : 3; }
 uint32_t g_lineReferenceWidth = 0;
 uint32_t g_lineReferenceHeight = 0;
 void projectm_opengl_set_line_reference_size(projectm_handle, uint32_t width, uint32_t height) {
@@ -140,7 +143,8 @@ void projectm_set_preset_initialization_warning_event_callback(projectm_handle, 
 void projectm_set_hard_cut_enabled(projectm_handle, bool) {}
 void projectm_set_beat_sensitivity(projectm_handle, float) {}
 void projectm_set_preset_duration(projectm_handle, double) {}
-void projectm_set_soft_cut_duration(projectm_handle, double) {}
+double g_appliedSoftCutSeconds = 7;
+void projectm_set_soft_cut_duration(projectm_handle, double seconds) { g_appliedSoftCutSeconds = seconds; }
 void projectm_set_preset_locked(projectm_handle, bool l) { g_locked = l; }
 void projectm_set_mesh_size(projectm_handle, size_t, size_t) { ++g_meshCalls; }
 void projectm_set_texture_search_paths(projectm_handle, const char** paths, size_t count) {
@@ -183,8 +187,53 @@ static void switchFrame() { bool waits = g_lastFrameDirect; frame(); if (waits) 
 static void feedAudio(uint8_t amp) { std::lock_guard<std::mutex> l(g_inputs.pcmMutex); for (int i = 0; i < 1024; ++i) g_inputs.pcm.push_back(128 + ((i & 1) ? amp : -amp)); g_inputs.audioLevel = amp / 128.f; g_inputs.audioLevelTime = NowSeconds(); }
 static std::string current() { std::lock_guard<std::mutex> l(g_published.mutex); return g_published.currentPreset; }
 
+// Exercise the Java renderer handoff through its real JNI lifecycle. Plain StatsListener
+// renderers never require/acknowledge a budget and must retain their own settings.
+static void checkManagedToLegacyRendererHandoff() {
+  for (int legacyWidth : {2560, 3840}) {
+    printf("managed release -> plain renderer (%s surface size)\n", legacyWidth == 3840 ? "same" : "different");
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+    const jlong managedGeneration = Java_nl_neerdael_projectm_core_ProjectMJNI_requireRenderBudget(nullptr, nullptr);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_configureRenderBudget(nullptr, nullptr, 3840, 2160, 2, 7, managedGeneration);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 3840, 2160);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setAutoChange(nullptr, nullptr, false);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setBlankDetection(nullptr, nullptr, false);
+    g_engine.current = "handoff fixture"; // Avoid involving asynchronous preset indexing.
+    const jlong beforeManagedFrame = Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr);
+    frame();
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr) > beforeManagedFrame);
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getCompletedRenderBudgetGeneration(nullptr, nullptr) == managedGeneration);
+    CHECK(g_feedbackDetailAlpha == 1.f && g_appliedSoftCutSeconds == 7);
+
+    Java_nl_neerdael_projectm_core_ProjectMJNI_release(nullptr, nullptr);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, 0);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 1);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+    // A delayed old managed UI callback must not reattach its request to the new owner.
+    Java_nl_neerdael_projectm_core_ProjectMJNI_configureRenderBudget(nullptr, nullptr, 3840, 2160, 2, 7, managedGeneration);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, legacyWidth, legacyWidth == 3840 ? 2160 : 1440);
+    g_engine.current = "handoff fixture";
+    const jlong beforeLegacyFrame = Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr);
+    frame();
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr) > beforeLegacyFrame);
+    CHECK(g_feedbackDetailAlpha == 0.f && g_appliedSoftCutSeconds == 1);
+    CHECK(g_locked); // Cleanup must not reset unrelated persisted engine inputs.
+    const auto legacyBudget = RenderBudgetSnapshot();
+    CHECK(!legacyBudget.managed && !legacyBudget.awaitingReview);
+    CHECK(legacyBudget.width == 0 && legacyBudget.height == 0);
+    CHECK(legacyBudget.generation > managedGeneration);
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getCompletedRenderBudgetGeneration(nullptr, nullptr) == -1);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_release(nullptr, nullptr);
+  }
+}
+
 int main(int argc, char** argv) {
   setvbuf(stdout, nullptr, _IONBF, 0);
+  if (argc == 2 && std::string(argv[1]) == "--budget-handoff") {
+    checkManagedToLegacyRendererHandoff();
+    printf("MANAGED/LEGACY HANDOFF TESTS PASSED\n");
+    return 0;
+  }
   std::string root = argv[1], skip = root + "/skip.txt", texdir = root + "/extracted_textures";
   static AAssetManager am{root};
   g_library.Start(&am, skip, texdir);
@@ -724,5 +773,6 @@ int main(int argc, char** argv) {
   g_inputs.audioLevelTime = NowSeconds() - 5;
   CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getAudioLevel(nullptr, nullptr) == 0.f);
   CHECK(g_loadsAfterDirectFrame == 0);  // every switch started from a stored frame
+  checkManagedToLegacyRendererHandoff();
   printf("ALL TESTS PASSED\n");
 }

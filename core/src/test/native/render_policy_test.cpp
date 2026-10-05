@@ -7,20 +7,18 @@ int main() {
     g_engine.pm = projectm_create();
     g_engine.width = 3840;
     g_engine.height = 2160;
+    ApplySettings();
+    assert(g_feedbackDetailAlpha == 0.f && g_lineReferenceWidth == 1280 && g_lineReferenceHeight == 720);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, 2);
+    ApplySettings();
+    assert(g_feedbackDetailAlpha == 1.f && g_lineReferenceWidth == 1280 && g_lineReferenceHeight == 720);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, 1);
+    ApplySettings(); assert(g_feedbackDetailAlpha == 0.5f);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, 0);
+    ApplySettings(); assert(g_feedbackDetailAlpha == 0.f);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, -1);
+    ApplySettings(); assert(g_feedbackDetailAlpha == -1.f && g_lineReferenceWidth == 1024);
     ApplyRenderScale(1.f);
-#ifdef PROJECTMTV_RENDERING_POLICY_CAPPED
-    assert(g_windowW == 2364 && g_windowH == 1330);
-    RenderPresetFrame();
-    assert(g_blitSrcW == 2364 && g_blitSrcH == 1330);
-    assert(g_blitDstW == 3840 && g_blitDstH == 2160);
-    ReleaseScaledTarget(true);
-    g_framebufferStatus = 0;
-    const int framesBeforeFailure = g_fboFrames;
-    RenderPresetFrame();
-    assert(g_windowH == 1330);
-    assert(g_fboFrames == framesBeforeFailure);
-    g_framebufferStatus = GL_FRAMEBUFFER_COMPLETE;
-#else
     assert(g_windowW == 3840 && g_windowH == 2160);
     RenderPresetFrame();
     assert(g_blits == 0);
@@ -29,13 +27,40 @@ int main() {
     RenderPresetFrame();
     assert(g_windowW == 3840 && g_windowH == 2160);
     g_framebufferStatus = GL_FRAMEBUFFER_COMPLETE;
-#endif
     ApplyRenderScale(0.5f);
     assert(g_windowW == 1920 && g_windowH == 1080);
     g_engine.width = 1920;
     g_engine.height = 1080;
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, 2);
+    ApplySettings(); assert(g_feedbackDetailAlpha == -1.f && g_lineReferenceWidth == 1024);
     ApplyRenderScale(1.f);
     assert(g_windowW == 1920 && g_windowH == 1080);
+    // Hold an old 4K surface while UI approves smaller dimensions for higher-cost settings.
+    g_engine.width = 3840; g_engine.height = 2160;
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, 0);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 0);
+    ApplySettings(); assert(g_feedbackDetailAlpha == 0.f && g_appliedSoftCutSeconds == 0);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_configureRenderBudget(nullptr, nullptr, 1920, 1080, 2, 7, 0);
+    assert(!ApplySettings());
+    g_engine.current = "budget fixture";
+    g_inputs.autoChange = false;
+    const jlong serial = Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onDrawFrame(nullptr, nullptr);
+    assert(Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr) == serial);
+    assert(g_feedbackDetailAlpha == 0.f && g_appliedSoftCutSeconds == 0);
+    g_engine.width = 1920; g_engine.height = 1080;
+    assert(ApplySettings());
+    assert(g_feedbackDetailAlpha == -1.f && g_appliedSoftCutSeconds == 7);
+    // Lost context must wait for a fresh budget even if the old size matches.
+    const jlong epoch = Java_nl_neerdael_projectm_core_ProjectMJNI_requireRenderBudget(nullptr, nullptr);
+    assert(!ApplySettings());
+    Java_nl_neerdael_projectm_core_ProjectMJNI_configureRenderBudget(nullptr, nullptr, 1920, 1080, 2, 7, 0);
+    assert(!ApplySettings()); // A stale queued UI request must not acknowledge a new context.
+    Java_nl_neerdael_projectm_core_ProjectMJNI_configureRenderBudget(nullptr, nullptr, 1920, 1080, 2, 7, epoch);
+    assert(ApplySettings());
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onDrawFrame(nullptr, nullptr);
+    assert(Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr) == serial + 1);
+    assert(Java_nl_neerdael_projectm_core_ProjectMJNI_getCompletedRenderBudgetGeneration(nullptr, nullptr) == epoch);
     projectm_destroy(g_engine.pm);
     g_engine.pm = nullptr;
     puts("Render policy JNI sizing/presentation checks passed");

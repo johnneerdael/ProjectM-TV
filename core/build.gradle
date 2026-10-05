@@ -1,6 +1,9 @@
 def renderingPolicy = providers.gradleProperty('projectmCoreRenderingPolicy').getOrElse('native')
-if (!(renderingPolicy in ['capped', 'native'])) {
-    throw new GradleException("projectmCoreRenderingPolicy must be 'capped' or 'native' (got '${renderingPolicy}')")
+if (renderingPolicy == 'capped') {
+    throw new GradleException("The capped core artifact is retired. Build :core without projectmCoreRenderingPolicy or with -PprojectmCoreRenderingPolicy=native.")
+}
+if (renderingPolicy != 'native') {
+    throw new GradleException("projectmCoreRenderingPolicy must be 'native' (got '${renderingPolicy}')")
 }
 
 apply plugin: 'com.android.library'
@@ -16,7 +19,7 @@ android {
         minSdk = 21
         consumerProguardFiles "consumer-rules.pro"
         buildConfigField 'String', 'RENDERING_POLICY', '"' + renderingPolicy + '"'
-        buildConfigField 'boolean', 'SUPPORTS_NATIVE_RENDERING', (renderingPolicy == 'native').toString()
+        buildConfigField 'boolean', 'SUPPORTS_NATIVE_RENDERING', 'true'
         externalNativeBuild {
             cmake {
                 arguments "-DPROJECTMTV_RENDERING_POLICY=${renderingPolicy}"

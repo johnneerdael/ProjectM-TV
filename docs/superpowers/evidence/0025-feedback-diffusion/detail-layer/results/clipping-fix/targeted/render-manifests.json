@@ -1,0 +1,317 @@
+[
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 720,
+    "identity": {
+      "label": "authored",
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 1280
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-high",
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-medium",
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-standard",
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "high",
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "medium",
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "standard",
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 720,
+    "identity": {
+      "label": "authored",
+      "preset": "Jc - Geometry 101.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 1280
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-high",
+      "preset": "Jc - Geometry 101.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-medium",
+      "preset": "Jc - Geometry 101.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-standard",
+      "preset": "Jc - Geometry 101.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "high",
+      "preset": "Jc - Geometry 101.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "medium",
+      "preset": "Jc - Geometry 101.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "standard",
+      "preset": "Jc - Geometry 101.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 720,
+    "identity": {
+      "label": "authored",
+      "preset": "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 1280
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-high",
+      "preset": "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-medium",
+      "preset": "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "before-standard",
+      "preset": "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "high",
+      "preset": "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "medium",
+      "preset": "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  },
+  {
+    "fps": 30,
+    "frames": 480,
+    "gl_error_frames": 0,
+    "gl_renderer": "Apple M4 Pro",
+    "gl_version": "4.1 Metal - 89.4",
+    "height": 2160,
+    "identity": {
+      "label": "standard",
+      "preset": "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk"
+    },
+    "seed": 12345,
+    "status": "success",
+    "width": 3840
+  }
+]

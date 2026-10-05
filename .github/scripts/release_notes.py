@@ -176,13 +176,13 @@ def install_footer(repo: str, version: str, previous_tag: str | None, readme: st
 
 Install on your TV with the Downloader app: code `{downloader_code(readme)}`. The code downloads the newest stable APK.
 
-- Latest: [Android TV APK]({latest}/projectM-TV.apk) · [capped core AAR]({latest}/projectM-TV-core.aar) · [Native core AAR]({latest}/projectM-TV-core-native.aar)
-- Version {version}: [Android TV APK]({release}/projectM-TV-{version}.apk) · [capped core AAR]({release}/projectM-TV-core-{version}.aar) · [Native core AAR]({release}/projectM-TV-core-native-{version}.aar)
+- Latest: [Android TV APK]({latest}/projectM-TV.apk) · [Native core AAR]({latest}/projectM-TV-core.aar)
+- Version {version}: [Android TV APK]({release}/projectM-TV-{version}.apk) · [Native core AAR]({release}/projectM-TV-core-{version}.aar)
 - [SHA-256 checksums]({release}/checksums.txt)
 - [User guide](https://johnneerdael.github.io/ProjectM-TV/)
 - [Full changelog]({changelog})
 
-The canonical core AAR uses capped rendering without feedback diffusion for Milkbeat and existing integrations. The Native core AAR enables feedback diffusion for eligible presets above the reference size."""
+The canonical core AAR includes Native rendering for Milkbeat and existing integrations."""
 
 
 def render_release_notes(repo: str, version: str, previous_tag: str | None, readme: str,

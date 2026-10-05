@@ -40,9 +40,7 @@ class PublishTests(unittest.TestCase):
         self.notes = self.root / "notes.md"
         self.notes.write_text("# ProjectM TV 2.1.5\n\nFixed a preset loading freeze.\n")
         for name, data in {"projectM-TV-2.1.5.apk": b"signed apk", "projectM-TV.apk": b"signed apk",
-                           "projectM-TV-core-2.1.5.aar": b"engine", "projectM-TV-core.aar": b"engine",
-                           "projectM-TV-core-native-2.1.5.aar": b"native engine",
-                           "projectM-TV-core-native.aar": b"native engine",
+                           "projectM-TV-core-2.1.5.aar": b"native engine", "projectM-TV-core.aar": b"native engine",
                            "projectM-TV-2.1.5-mapping.txt": b"a.b -> x:"}.items():
             (self.root / name).write_bytes(data)
         self.commands = []
@@ -67,9 +65,8 @@ class PublishTests(unittest.TestCase):
         self.assertIn(str(self.root / "checksums.txt"), command)
         self.assertIn(str(self.root / "projectM-TV-2.1.5-mapping.txt"), command)
         checksums = (self.root / "checksums.txt").read_text()
-        self.assertEqual(len(checksums.splitlines()), 7)
-        for name in ("projectM-TV-core-2.1.5.aar", "projectM-TV-core.aar",
-                     "projectM-TV-core-native-2.1.5.aar", "projectM-TV-core-native.aar"):
+        self.assertEqual(len(checksums.splitlines()), 5)
+        for name in ("projectM-TV-core-2.1.5.aar", "projectM-TV-core.aar"):
             self.assertIn(str(self.root / name), command)
             self.assertIn(f"{hashlib.sha256((self.root / name).read_bytes()).hexdigest()}  {name}\n", checksums)
 
@@ -135,42 +132,57 @@ class PublishTests(unittest.TestCase):
             self.publish(api)
         self.assertFalse(api.calls)
 
-    def test_mismatched_capped_or_native_alias_is_rejected_before_network_calls(self):
-        for alias in ("projectM-TV-core.aar", "projectM-TV-core-native.aar"):
-            with self.subTest(alias=alias):
-                original = (self.root / alias).read_bytes()
-                (self.root / alias).write_bytes(b"stale engine")
-                api = FakeAPI()
-                with self.assertRaisesRegex(ValueError, "alias"):
-                    self.publish(api)
-                self.assertFalse(api.calls)
-                (self.root / alias).write_bytes(original)
+    def historical_dual_assets(self):
+        # Explicit immutable historical schema: canonical capped + opt-in Native artifacts.
+        (self.root / "projectM-TV-core-2.1.5.aar").write_bytes(b"capped engine")
+        (self.root / "projectM-TV-core.aar").write_bytes(b"capped engine")
+        (self.root / "projectM-TV-core-native-2.1.5.aar").write_bytes(b"historical native engine")
+        (self.root / "projectM-TV-core-native.aar").write_bytes(b"historical native engine")
+        return [{"name": p.name, "digest": "sha256:" + hashlib.sha256(p.read_bytes()).hexdigest()}
+                for p in self.root.iterdir() if p.name != "notes.md"] + [{"name": "checksums.txt"}]
 
-    def test_new_release_requires_both_native_artifacts_before_writes(self):
-        for name in ("projectM-TV-core-native-2.1.5.aar", "projectM-TV-core-native.aar"):
-            with self.subTest(name=name):
-                original = (self.root / name).read_bytes()
-                (self.root / name).unlink()
-                api = FakeAPI()
-                with self.assertRaises(FileNotFoundError):
-                    self.publish(api)
-                self.assertTrue(all(method == "GET" for _, method, _ in api.calls))
-                self.assertFalse(self.commands)
-                (self.root / name).write_bytes(original)
+    def test_new_release_publishes_only_canonical_native_core_even_with_stale_alias_files(self):
+        self.historical_dual_assets()
+        for name in ("projectM-TV-core-2.1.5.aar", "projectM-TV-core.aar"):
+            (self.root / name).write_bytes(b"native engine")
+        self.publish(FakeAPI())
+        uploaded = {Path(arg).name for arg in self.commands[0] if arg.endswith((".aar", ".apk", ".txt"))}
+        self.assertEqual(uploaded, {"projectM-TV-2.1.5.apk", "projectM-TV.apk",
+                                   "projectM-TV-core-2.1.5.aar", "projectM-TV-core.aar",
+                                   "projectM-TV-2.1.5-mapping.txt", "checksums.txt"})
+        self.assertNotIn("core-native", (self.root / "checksums.txt").read_text())
 
-    def test_complete_legacy_release_retry_needs_no_native_files_or_mutations(self):
+    def test_complete_historical_dual_release_retry_requires_no_retired_local_files_or_mutations(self):
+        assets = self.historical_dual_assets()
         for name in ("projectM-TV-core-native-2.1.5.aar", "projectM-TV-core-native.aar"):
             (self.root / name).unlink()
         (self.root / "checksums.txt").write_text("historical checksum bytes\n")
-        legacy = ["projectM-TV-2.1.5.apk", "projectM-TV.apk", "projectM-TV-core-2.1.5.aar",
-                  "projectM-TV-core.aar", "projectM-TV-2.1.5-mapping.txt", "checksums.txt"]
-        api = FakeAPI(existing={"id": 55, "draft": False, "assets": [{"name": n} for n in legacy],
-                                "html_url": "legacy release"}, tag_commit="a" * 40)
+        api = FakeAPI(existing={"id": 55, "draft": False, "assets": assets,
+                                "html_url": "historical release"}, tag_commit="a" * 40)
         result = self.publish(api)
-        self.assertEqual(result, {"url": "legacy release", "created": False})
+        self.assertEqual(result, {"url": "historical release", "created": False})
         self.assertFalse(self.commands)
         self.assertTrue(all(method == "GET" for _, method, _ in api.calls))
         self.assertEqual((self.root / "checksums.txt").read_text(), "historical checksum bytes\n")
+
+    def test_complete_single_core_release_retry_preserves_historical_checksum_bytes(self):
+        (self.root / "checksums.txt").write_text("historical checksum bytes\n")
+        names = ["projectM-TV-2.1.5.apk", "projectM-TV.apk", "projectM-TV-core-2.1.5.aar",
+                 "projectM-TV-core.aar", "projectM-TV-2.1.5-mapping.txt", "checksums.txt"]
+        api = FakeAPI(existing={"id": 55, "draft": False, "assets": [{"name": n} for n in names],
+                                "html_url": "historical release"}, tag_commit="a" * 40)
+        self.publish(api)
+        self.assertFalse(self.commands)
+        self.assertTrue(all(method == "GET" for _, method, _ in api.calls))
+        self.assertEqual((self.root / "checksums.txt").read_text(), "historical checksum bytes\n")
+
+    def test_draft_with_retired_remote_assets_is_rejected_without_writes(self):
+        api = FakeAPI(existing={"id": 55, "draft": True, "target_commitish": "a" * 40,
+                                "assets": [{"name": "projectM-TV-core-native.aar"}]})
+        with self.assertRaisesRegex(ValueError, "retired"):
+            self.publish(api)
+        self.assertFalse(self.commands)
+        self.assertTrue(all(method == "GET" for _, method, _ in api.calls))
 
     def test_partial_native_assets_cannot_be_treated_as_a_complete_legacy_release(self):
         names = ["projectM-TV-2.1.5.apk", "projectM-TV.apk", "projectM-TV-core-2.1.5.aar",
@@ -186,9 +198,7 @@ class PublishTests(unittest.TestCase):
     def test_published_capped_and_native_remote_alias_digests_are_checked_when_available(self):
         for alias in ("projectM-TV-core.aar", "projectM-TV-core-native.aar"):
             with self.subTest(alias=alias):
-                assets = [{"name": p.name, "digest": "sha256:" + hashlib.sha256(p.read_bytes()).hexdigest()}
-                          for p in self.root.iterdir() if p.name != "notes.md"]
-                assets.append({"name": "checksums.txt"})
+                assets = self.historical_dual_assets()
                 next(a for a in assets if a["name"] == alias)["digest"] = "sha256:" + "0" * 64
                 api = FakeAPI(existing={"id": 55, "draft": False, "assets": assets,
                                         "html_url": "release"}, tag_commit="a" * 40)

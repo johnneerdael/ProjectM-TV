@@ -75,8 +75,8 @@ if ! ASAN_OPTIONS=detect_leaks=0 "$WORK/engine_test" "$WORK/assets" "$WORK/noind
     exit 1
 fi
 
-# Exercise both artifact policies through the real JNI sizing/presentation paths.
-for policy in native capped; do
+# Exercise the single Native artifact through the real JNI sizing/presentation paths.
+for policy in native; do
     POLICY_DEFINE=""
     if [ "$policy" = capped ]; then POLICY_DEFINE="-DPROJECTMTV_RENDERING_POLICY_CAPPED"; fi
     g++ -std=c++17 -O1 -g $SAN -pthread ${POLICY_DEFINE:+"$POLICY_DEFINE"} \

@@ -23,7 +23,7 @@ The numerical backend is the standard published **ProjectM-TV:core 2.3.3 AAR**, 
 
 Each preset gets one load and 420 frames at 30 fps, a 128×72 GLES3 pbuffer and a 48×32 mesh. A declared clock helper supplies the test timeline; the published native library is unchanged. The first 60 frames are warm-up. A shared synthetic mono reference contains quiet tones for 0–5 seconds, a brighter melodic section for 5–9 seconds, then the melodic section plus low-frequency kick pulses for 9–14 seconds. There are no user recordings in the shipped bundle.
 
-The standard AAR uses the **capped** rendering policy. The standard APK uses the Native-capable policy, with Auto as its resolution default. This low-resolution probe does not certify appearance or ranking at the TV's render size, including above-reference feedback compensation. The helper calls `srand(12345)`; the evaluator keeps its native thread-local Mersenne Twister seed. Shader/noise and image choices using `random_device` are not fixed by that call. One load does not sample every possible random state or image choice.
+The frozen **2.3.3** AAR used for these predictions has the **capped** rendering policy; its APK used the Native-capable policy. New APK/core releases use the single Native core with automatic resolution. The packaged predictions retain their pinned 2.3.3 measurement identity. This low-resolution probe does not certify appearance or ranking at the TV's render size, including above-reference feedback compensation. The helper calls `srand(12345)`; the evaluator keeps its native thread-local Mersenne Twister seed. Shader/noise and image choices using `random_device` are not fixed by that call. One load does not sample every possible random state or image choice.
 
 ## Activity calculation
 
