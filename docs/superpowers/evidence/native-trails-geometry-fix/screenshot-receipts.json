@@ -1,0 +1,134 @@
+[
+  {
+    "device": "Android emulator / Apple M4 Pro",
+    "preset": "Waltra - Heaven Liquid.milk",
+    "profile": "authored",
+    "frame": 300,
+    "original_png_sha256": "119be2a847e32806f3463547daf79d9d9d0fcee9ad26492ce6740b64fced3552",
+    "source_commit": "1cec55cf92a5903a9faa3b413eb4b4bfa9bd7a94",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Android emulator / Apple M4 Pro",
+    "preset": "Waltra - Heaven Liquid.milk",
+    "profile": "standard_before",
+    "frame": 300,
+    "original_png_sha256": "546ed70fa4e541e053ca0f1bbde99fe93003f2418b143881d80af824184ce84f",
+    "source_commit": "1cec55cf92a5903a9faa3b413eb4b4bfa9bd7a94",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Android emulator / Apple M4 Pro",
+    "preset": "Waltra - Heaven Liquid.milk",
+    "profile": "standard",
+    "frame": 300,
+    "original_png_sha256": "c9fe1e5011ca2fc682fb7b31b64cd5e86c092e9db734d052349a5e66fca31ce0",
+    "source_commit": "640e0b0a1aa72a8766d62e17a61628eca59a6890",
+    "role": "fixed",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Android emulator / Apple M4 Pro",
+    "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+    "profile": "authored",
+    "frame": 300,
+    "original_png_sha256": "b9d268f7eb8d51264c19ac5270e3dee9afa8dbff0ded68e37e732f65c1db1d51",
+    "source_commit": "1cec55cf92a5903a9faa3b413eb4b4bfa9bd7a94",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Android emulator / Apple M4 Pro",
+    "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+    "profile": "standard_before",
+    "frame": 300,
+    "original_png_sha256": "bc549530bdfc118694ee11e872b2c30863cec14a7cb816f9a531e09a7fcecc78",
+    "source_commit": "1cec55cf92a5903a9faa3b413eb4b4bfa9bd7a94",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Android emulator / Apple M4 Pro",
+    "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+    "profile": "standard",
+    "frame": 300,
+    "original_png_sha256": "8c51d8bdd6ab07ba8bb43b2c910025cb67736fbc0d3779a9045912f12637eec6",
+    "source_commit": "640e0b0a1aa72a8766d62e17a61628eca59a6890",
+    "role": "fixed",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Ugoos AM6 / Mali-G52",
+    "preset": "Waltra - Heaven Liquid.milk",
+    "profile": "authored",
+    "frame": 300,
+    "original_png_sha256": "f5ec7a3611e4dd6c7d49c83fda28b8574d5bdb7fa38cabb29af2910812e6170e",
+    "source_commit": "3763293f7bf5b9403becd64cb741ba4afa7f46af",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Ugoos AM6 / Mali-G52",
+    "preset": "Waltra - Heaven Liquid.milk",
+    "profile": "standard_before",
+    "frame": 300,
+    "original_png_sha256": "791e7c99a3648b4ba0de5d22fcc9d3df5f51e32566f784ce9e2b2a9899e363c6",
+    "source_commit": "3763293f7bf5b9403becd64cb741ba4afa7f46af",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Ugoos AM6 / Mali-G52",
+    "preset": "Waltra - Heaven Liquid.milk",
+    "profile": "standard",
+    "frame": 300,
+    "original_png_sha256": "b06ab87dda83529b74d7f553eebaa368fac48e305d4d3072f068d3ef633c290e",
+    "source_commit": "640e0b0a1aa72a8766d62e17a61628eca59a6890",
+    "role": "fixed",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Ugoos AM6 / Mali-G52",
+    "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+    "profile": "authored",
+    "frame": 300,
+    "original_png_sha256": "3ce52b1808955fa94d93a01d74f12647be28da761ce89a97e18229cc24838e6b",
+    "source_commit": "3763293f7bf5b9403becd64cb741ba4afa7f46af",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Ugoos AM6 / Mali-G52",
+    "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+    "profile": "standard_before",
+    "frame": 300,
+    "original_png_sha256": "a5a9b45abe0a4c8d5bdf660bb76a4ee426194e157c714df70b045306dc8c7379",
+    "source_commit": "3763293f7bf5b9403becd64cb741ba4afa7f46af",
+    "role": "current",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  },
+  {
+    "device": "Ugoos AM6 / Mali-G52",
+    "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+    "profile": "standard",
+    "frame": 300,
+    "original_png_sha256": "4264f962de0f7ef775e4223293e4c8f77fb113e7c435f63bd7f2f3c9e3ca9b8a",
+    "source_commit": "640e0b0a1aa72a8766d62e17a61628eca59a6890",
+    "role": "fixed",
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "display_transform": "INTER_AREA resize to591x332; no color, gamma, exposure or contrast modification"
+  }
+]

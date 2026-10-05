@@ -18,15 +18,27 @@ runner = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
 
 class ArtifactTests(unittest.TestCase):
-    def artifacts(self, temp, contents=b"arm64"):
+    def artifacts(self, temp, contents=b"arm64", abi="arm64-v8a"):
         aar, apk = Path(temp)/"core.aar", Path(temp)/"worker.apk"
         with zipfile.ZipFile(aar, "w") as z:
             z.writestr("jni/arm64-v8a/libprojectmtv.so", b"arm64")
             z.writestr("jni/armeabi-v7a/libprojectmtv.so", b"arm32")
         with zipfile.ZipFile(apk, "w") as z:
-            z.writestr("lib/arm64-v8a/libprojectmtv.so", contents)
+            z.writestr("lib/" + abi + "/libprojectmtv.so", contents)
         return {"aar":str(aar), "apk":str(apk), "aar_sha256":runner.file_digest(aar),
                 "apk_sha256":runner.file_digest(apk)}
+
+    def test_arm32_worker_requires_its_declared_abi(self):
+        with tempfile.TemporaryDirectory() as temp:
+            identity = self.artifacts(temp, contents=b"arm32", abi="armeabi-v7a")
+            identity["abi"] = "armeabi-v7a"
+            runner.check_artifacts(identity)
+            identity["abi"] = "arm64-v8a"
+            with self.assertRaisesRegex(ValueError, "missing the tested"):
+                runner.check_artifacts(identity)
+            identity["abi"] = "x86_64"
+            with self.assertRaisesRegex(ValueError, "Unsupported worker ABI"):
+                runner.check_artifacts(identity)
 
     def test_arm64_worker_can_use_unmodified_dual_abi_release(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -147,6 +159,18 @@ class UserScopeTests(unittest.TestCase):
     def run_with(self, fake):
         with patch.object(runner.subprocess, "check_output", side_effect=fake):
             runner.run(self.work, self.workers, self.presets, "emulator-fixture", {"authored"})
+
+    def test_mixed_worker_abis_fail_before_freezing_or_contacting_device(self):
+        directory = self.workers / "candidate-native"
+        identity = json.loads((directory / "identity.json").read_text())
+        identity.update(ArtifactTests().artifacts(directory, contents=b"arm32", abi="armeabi-v7a"))
+        identity["abi"] = "armeabi-v7a"
+        runner.write(directory / "identity.json", identity)
+        with patch.object(runner, "shell") as device_call:
+            with self.assertRaisesRegex(ValueError, "Baseline/candidate ABIs differ"):
+                runner.initialize(self.work, self.workers, self.presets, "emulator-fixture", 7)
+            device_call.assert_not_called()
+        self.assertFalse((self.work / "protocol.json").exists())
 
     def test_secondary_user_scopes_install_instrumentation_run_as_paths_and_cleanup(self):
         fake = FakeADB(self.work); self.run_with(fake)

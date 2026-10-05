@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "mac": {
+    "status": "complete_verified_matrix",
+    "terminal_jobs": 976,
+    "presets": 160,
+    "failed_jobs": 0,
+    "protocol_sha256": "49c20f6e67a60a2daf40d9433257a39a93ad88b13828f17737d023a7b9c70887",
+    "driver": [
+      [
+        "Apple M4 Pro",
+        "4.1 Metal - 89.4",
+        "Apple"
+      ]
+    ],
+    "source_scope": "shipping patches1\u201342 baseline;shipping patches1\u201343 candidate",
+    "source_commits": {
+      "baseline": "1cec55cf92a5903a9faa3b413eb4b4bfa9bd7a94",
+      "candidate": "01f808e5b74434cae99904fa6248ee0d8082c404"
+    },
+    "paired_archive_controls": {
+      "authored": 160,
+      "native_off": 160,
+      "all_byte_exact": true
+    },
+    "summary_sha256": "1cc4666e5c8b77ba70a78ec6f2934fe736ad1773968ab2f81e6059f3a37e60ba"
+  },
+  "shipping_component": {
+    "compiled_source_commit": "640e0b0a1aa72a8766d62e17a61628eca59a6890",
+    "patch43_sha256": "d9ca27873599e5c38ce88c91277f4dd9c5b0c33c6405e84bc062e1dd52f3d522"
+  },
+  "validation_tools_commit": "249f013c88c7e2c967c259b4a114f322f5f7dd10",
+  "checks": {
+    "host_gtest": 261,
+    "app_jvm": 30,
+    "core_jvm": 54,
+    "native_regressions": 15,
+    "native_trails_python": 46,
+    "release_tooling_python": 82,
+    "patches_apply": 43,
+    "docs_strict_build": "pass"
+  },
+  "limitations": [
+    "Mac full-matrix component source01f808e5 precedes removal of unused injection shader and final test/tool changes; final actual-AAR known-witness controls use640e0b0a.",
+    "Image metrics are diagnostics; chaotic phase/hue shifts can increase pixel error while brightness or contrast moves closer to the authored reference.",
+    "Serialized onDrawFrame+glFinish timings are not app FPS."
+  ],
+  "application_source_commit": "501ae5ddd3b0081c46e414f742feb28fcbcca61c",
+  "application_smoke": {
+    "emulator_setup": "PASS: Standard default, D-pad Medium, High, persistence/restart, rapid allocation generation, diagnostics",
+    "am6_normal_app": "Normal startup and Home/return render trace at about30fps, Auto2560x1440, audio0.000; no matched4K FPS claim. Projectivy globally intercepts MENU; settings controls tested through isolated emulator instrumentation.",
+    "device_settings_restored": {
+      "device": "192.168.50.80:5555",
+      "android_user": 0,
+      "screen_off_timeout_restored": "3600000",
+      "task_preset_override_cleared": true,
+      "normal_test_app_stopped": true,
+      "foreground_returned_to": "io.gh.reisxd.tizentube.cobalt/dev.cobalt.app.MainActivity",
+      "normal_installed_projectm_package_preserved": true
+    }
+  }
+}

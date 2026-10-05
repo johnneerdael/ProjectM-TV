@@ -87,8 +87,11 @@ def check_artifacts(identity):
             raise ValueError("Frozen " + name + " changed")
     with zipfile.ZipFile(identity["aar"]) as aar, zipfile.ZipFile(identity["apk"]) as apk:
         files = [name for name in apk.namelist() if name.startswith("lib/") and name.endswith(".so")]
-        if "lib/arm64-v8a/libprojectmtv.so" not in files:
-            raise ValueError("Worker is missing the tested arm64 core")
+        abi = identity.get("abi", "arm64-v8a")
+        if abi not in ("arm64-v8a", "armeabi-v7a"):
+            raise ValueError("Unsupported worker ABI: " + repr(abi))
+        if "lib/" + abi + "/libprojectmtv.so" not in files:
+            raise ValueError("Worker is missing the tested " + abi + " core")
         for name in files:
             if name.replace("lib/", "jni/", 1) not in aar.namelist() or aar.read(name.replace("lib/", "jni/", 1)) != apk.read(name):
                 raise ValueError("Worker APK is not using the frozen actual AAR")
@@ -184,6 +187,8 @@ def initialize(work, workers, presets, device, user_id):
         check_artifacts(identity)
     if len({item["assets_sha256"] for item in identities.values()}) != 1:
         raise ValueError("Baseline/candidate packaged assets differ")
+    if len({item.get("abi", "arm64-v8a") for item in identities.values()}) != 1:
+        raise ValueError("Baseline/candidate ABIs differ")
     before = identities["baseline-native"]["ordered_patches"]
     for role, identity in identities.items():
         expected = before if role.startswith("baseline") else before + identity["ordered_patches"][len(before):]
