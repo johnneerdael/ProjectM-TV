@@ -93,6 +93,12 @@ public class VisualizerView extends GLSurfaceView {
      * Sets the render (surface buffer) size. It may exceed the UI resolution: on TVs that drive
      * the UI at 1080p, a 3840x2160 SurfaceView buffer is still shown at the panel's full 4K.
      */
+    /** Publish budget-approved dimensions and allocation settings before requesting an asynchronous resize. */
+    public void setRenderConfiguration(int width, int height, int trails, int transitionSeconds, long generation) {
+        ProjectMJNI.configureRenderBudget(width, height, trails, transitionSeconds, generation);
+        setRenderSize(width, height);
+    }
+
     public void setRenderSize(int width, int height) {
         getHolder().setFixedSize(width, height);
         Log.i(TAG, "Render size " + width + "x" + height);

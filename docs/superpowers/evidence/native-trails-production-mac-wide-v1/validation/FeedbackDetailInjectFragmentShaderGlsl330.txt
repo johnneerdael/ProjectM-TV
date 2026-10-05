@@ -1,0 +1,2 @@
+build/native-trails/shader-link/FeedbackDetail.vert
+build/native-trails/shader-link/FeedbackDetailInjectFragmentShaderGlsl330.frag

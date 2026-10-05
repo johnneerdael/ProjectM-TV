@@ -1,0 +1,736 @@
+{
+  "waltra": {
+    "0": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 2496,
+        "candidate_bytes": 2496
+      },
+      "input.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "warp.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur1.rgb": {
+        "exact": true,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur2.rgb": {
+        "exact": true,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "state.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      }
+    },
+    "1": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 2496,
+        "candidate_bytes": 2496
+      },
+      "input.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "warp.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur1.rgb": {
+        "exact": true,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur2.rgb": {
+        "exact": true,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.005757378472222222,
+        "max_bytes": 4,
+        "different_bytes": 8187
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.005757378472222222,
+        "max_bytes": 4,
+        "different_bytes": 8187
+      }
+    },
+    "2": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 2496,
+        "candidate_bytes": 2496
+      },
+      "input.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.005757378472222222,
+        "max_bytes": 4,
+        "different_bytes": 8187
+      },
+      "warp.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0020992476851851853,
+        "max_bytes": 3,
+        "different_bytes": 4080
+      },
+      "blur1.rgb": {
+        "exact": false,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0.00038194444444444446,
+        "max_bytes": 1,
+        "different_bytes": 66
+      },
+      "blur2.rgb": {
+        "exact": false,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 4.528985507246377e-05,
+        "max_bytes": 1,
+        "different_bytes": 2
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.007567274305555555,
+        "max_bytes": 5,
+        "different_bytes": 11671
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.007567274305555555,
+        "max_bytes": 5,
+        "different_bytes": 11671
+      }
+    },
+    "3": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 2496,
+        "candidate_bytes": 2496
+      },
+      "input.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.007567274305555555,
+        "max_bytes": 5,
+        "different_bytes": 11671
+      },
+      "warp.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.003199508101851852,
+        "max_bytes": 4,
+        "different_bytes": 6248
+      },
+      "blur1.rgb": {
+        "exact": false,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0.0014814814814814814,
+        "max_bytes": 1,
+        "different_bytes": 256
+      },
+      "blur2.rgb": {
+        "exact": false,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0.00020380434782608695,
+        "max_bytes": 1,
+        "different_bytes": 9
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.008661024305555556,
+        "max_bytes": 6,
+        "different_bytes": 13766
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.008661024305555556,
+        "max_bytes": 6,
+        "different_bytes": 13766
+      }
+    },
+    "11": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 2496,
+        "candidate_bytes": 2496
+      },
+      "input.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.01131763599537037,
+        "max_bytes": 34,
+        "different_bytes": 18124
+      },
+      "warp.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0064876302083333335,
+        "max_bytes": 35,
+        "different_bytes": 12102
+      },
+      "blur1.rgb": {
+        "exact": false,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0.002673611111111111,
+        "max_bytes": 3,
+        "different_bytes": 454
+      },
+      "blur2.rgb": {
+        "exact": false,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0.0010643115942028986,
+        "max_bytes": 1,
+        "different_bytes": 47
+      },
+      "blur3.rgb": {
+        "exact": false,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0.00017361111111111112,
+        "max_bytes": 1,
+        "different_bytes": 2
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.011582392939814815,
+        "max_bytes": 35,
+        "different_bytes": 18517
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.011582392939814815,
+        "max_bytes": 35,
+        "different_bytes": 18517
+      }
+    }
+  },
+  "hex": {
+    "0": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 41216,
+        "candidate_bytes": 41216
+      },
+      "input.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "warp.rgb": {
+        "exact": true,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur1.rgb": {
+        "exact": true,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur2.rgb": {
+        "exact": true,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 3.436053240740741e-05,
+        "max_bytes": 1,
+        "different_bytes": 95
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 3.436053240740741e-05,
+        "max_bytes": 1,
+        "different_bytes": 95
+      }
+    },
+    "1": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 41216,
+        "candidate_bytes": 41216
+      },
+      "input.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 3.436053240740741e-05,
+        "max_bytes": 1,
+        "different_bytes": 95
+      },
+      "warp.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 3.9424189814814813e-05,
+        "max_bytes": 1,
+        "different_bytes": 109
+      },
+      "blur1.rgb": {
+        "exact": false,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 2.8935185185185186e-05,
+        "max_bytes": 1,
+        "different_bytes": 5
+      },
+      "blur2.rgb": {
+        "exact": true,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.00043872974537037036,
+        "max_bytes": 116,
+        "different_bytes": 145
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.00043872974537037036,
+        "max_bytes": 116,
+        "different_bytes": 145
+      }
+    },
+    "2": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 41216,
+        "candidate_bytes": 41216
+      },
+      "input.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.00043872974537037036,
+        "max_bytes": 116,
+        "different_bytes": 145
+      },
+      "warp.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0003761574074074074,
+        "max_bytes": 121,
+        "different_bytes": 138
+      },
+      "blur1.rgb": {
+        "exact": false,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0.0004803240740740741,
+        "max_bytes": 4,
+        "different_bytes": 43
+      },
+      "blur2.rgb": {
+        "exact": false,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0.0001358695652173913,
+        "max_bytes": 1,
+        "different_bytes": 6
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0004123263888888889,
+        "max_bytes": 121,
+        "different_bytes": 238
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0004123263888888889,
+        "max_bytes": 121,
+        "different_bytes": 238
+      }
+    },
+    "3": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 41216,
+        "candidate_bytes": 41216
+      },
+      "input.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0004123263888888889,
+        "max_bytes": 121,
+        "different_bytes": 238
+      },
+      "warp.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.00039532696759259257,
+        "max_bytes": 117,
+        "different_bytes": 296
+      },
+      "blur1.rgb": {
+        "exact": false,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0.0004398148148148148,
+        "max_bytes": 6,
+        "different_bytes": 48
+      },
+      "blur2.rgb": {
+        "exact": false,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0.0005661231884057971,
+        "max_bytes": 1,
+        "different_bytes": 25
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0007682291666666666,
+        "max_bytes": 117,
+        "different_bytes": 335
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0007682291666666666,
+        "max_bytes": 117,
+        "different_bytes": 335
+      }
+    },
+    "11": {
+      "q.bin": {
+        "exact": true,
+        "bytes": 256,
+        "candidate_bytes": 256
+      },
+      "shader-rng.bin": {
+        "exact": true,
+        "bytes": 4,
+        "candidate_bytes": 4
+      },
+      "shape0.bin": {
+        "exact": true,
+        "bytes": 41216,
+        "candidate_bytes": 41216
+      },
+      "input.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0022489872685185187,
+        "max_bytes": 56,
+        "different_bytes": 4562
+      },
+      "warp.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.002398726851851852,
+        "max_bytes": 33,
+        "different_bytes": 5479
+      },
+      "blur1.rgb": {
+        "exact": false,
+        "bytes": 172800,
+        "candidate_bytes": 172800,
+        "mae_bytes": 0.001875,
+        "max_bytes": 6,
+        "different_bytes": 297
+      },
+      "blur2.rgb": {
+        "exact": false,
+        "bytes": 44160,
+        "candidate_bytes": 44160,
+        "mae_bytes": 0.0015625,
+        "max_bytes": 2,
+        "different_bytes": 68
+      },
+      "blur3.rgb": {
+        "exact": true,
+        "bytes": 11520,
+        "candidate_bytes": 11520,
+        "mae_bytes": 0,
+        "max_bytes": 0,
+        "different_bytes": 0
+      },
+      "geometry.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0026001880787037035,
+        "max_bytes": 69,
+        "different_bytes": 5518
+      },
+      "state.rgb": {
+        "exact": false,
+        "bytes": 2764800,
+        "candidate_bytes": 2764800,
+        "mae_bytes": 0.0026001880787037035,
+        "max_bytes": 69,
+        "different_bytes": 5518
+      }
+    }
+  }
+}

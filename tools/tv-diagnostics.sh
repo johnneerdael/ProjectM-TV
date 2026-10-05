@@ -12,7 +12,7 @@
 #                      nl.neerdael.projectmtv.profile with a matching --apk or --no-install (not build/--release)
 #   --allow-uninstall  on a signing-key conflict, uninstall for this user (resets its settings)
 #                      only if no other Android user has the app; otherwise refuse
-#   --sweep            also measure each fixed resolution (drives the menu with key events)
+#   --sweep            retired: resolution is always automatic (rejected before device access)
 #   --out DIR          output directory (default diagnostics/<model>-<timestamp>)
 #
 # Output: summary.md (human readable) plus logs, dumps and screenshots in the output directory.
@@ -31,7 +31,6 @@ DURATION=180
 APK=""
 APK_SOURCE="build"
 ALLOW_UNINSTALL=0
-SWEEP=0
 OUT=""
 DEFAULT_PKG="nl.neerdael.projectmtv"                  # release application ID (1.9.7+)
 PKG="$DEFAULT_PKG"
@@ -45,7 +44,7 @@ while [ $# -gt 0 ]; do
         --release) APK_SOURCE="release" ;;
         --no-install) APK_SOURCE="none" ;;
         --allow-uninstall) ALLOW_UNINSTALL=1 ;;
-        --sweep) SWEEP=1 ;;
+        --sweep) echo "ERROR: --sweep is retired because resolution is always automatic; collect target-FPS/trails runs and actual render sizes instead."; exit 2 ;;
         --out) OUT="$2"; shift ;;
         --package) PKG="$2"; shift ;;
         -h|--help) sed -n '2,27p' "$0"; exit 0 ;;
@@ -243,24 +242,14 @@ a logcat -c
 # Run adb itself in the background (not the shell function), so $! is the adb process.
 "$ADB" -s "$TARGET" logcat -v threadtime > "$OUT/raw_logcat.txt" 2>&1 &
 LOGCAT_PID=$!
-SWEEP_ACTIVE=0
 MENU_OPEN=0
 
-open_resolution_row() {  # menu -> focus starts on shuffle -> 4x down = "Resolution"
-    key KEYCODE_DPAD_CENTER
-    MENU_OPEN=1
-    sleep 1
-    key KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN KEYCODE_DPAD_DOWN
-}
+
 close_menu() {
     key KEYCODE_BACK
     MENU_OPEN=0
 }
-restore_auto_resolution() {
-    open_resolution_row
-    key KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT KEYCODE_DPAD_LEFT
-    close_menu
-}
+
 # Enabled notification listeners of this app, disallowed during the cold start (see below).
 LISTENERS=""
 LISTENERS_OFF=0
@@ -297,13 +286,7 @@ allow_listeners() {
 }
 cleanup() {
     allow_listeners
-    if [ "$SWEEP_ACTIVE" = 1 ]; then
-        log "Interrupted during the sweep: restoring Auto resolution"
-        SWEEP_ACTIVE=0
-        # A half-navigated menu would turn the next CENTER into a click on some row.
-        [ "$MENU_OPEN" = 1 ] && close_menu && sleep 1
-        restore_auto_resolution
-    fi
+
     kill $LOGCAT_PID 2>/dev/null
 }
 trap cleanup EXIT
@@ -428,46 +411,6 @@ while [ $elapsed -lt "$DURATION" ]; do
     fi
 done
 
-# ---------------------------------------------------------------------------------------------
-# Optional resolution sweep: menu -> 4x down to "Resolution" -> left to Auto -> right per level
-# ---------------------------------------------------------------------------------------------
-SWEEP_ROWS=""
-if [ "$SWEEP" = 1 ]; then
-    # Fixed levels offered by the app (QualityController.manualHeights): 720/1080/1440/2160 up to
-    # the panel height, the render height cap and the memory limit, plus that maximum itself if it
-    # is not one of those.
-    PANEL_H="$(grep -o 'Panel [0-9]*x[0-9]*' "$OUT/raw_logcat.txt" | head -1 | sed 's/.*x//')"
-    [ -n "$PANEL_H" ] || PANEL_H=1080
-    MAX_H="$PANEL_H"
-    LIMIT_H="$(grep -o 'Memory limit: .*' "$OUT/raw_logcat.txt" | tail -1 | sed -n 's/.*up to \([0-9]*\).*/\1/p')"
-    if [ -n "$LIMIT_H" ] && [ "$LIMIT_H" -lt "$MAX_H" ]; then MAX_H="$LIMIT_H"; fi
-    CAP_H="$(grep -o 'Render height cap: [0-9]*' "$OUT/raw_logcat.txt" | tail -1 | sed 's/.*: //')"
-    if [ -n "$CAP_H" ] && [ "$CAP_H" -lt "$MAX_H" ]; then MAX_H="$CAP_H"; fi
-    LEVELS=0
-    for h in 720 1080 1440 2160; do [ "$h" -le "$MAX_H" ] && LEVELS=$((LEVELS + 1)); done
-    case "$MAX_H" in 720|1080|1440|2160) ;; *) LEVELS=$((LEVELS + 1)) ;; esac
-    log "Resolution sweep over $LEVELS fixed levels (panel height $PANEL_H, highest offered $MAX_H)"
-    SWEEP_ACTIVE=1
-    restore_auto_resolution
-    step=1
-    while [ $step -le $LEVELS ]; do
-        open_resolution_row
-        key KEYCODE_DPAD_RIGHT
-        close_menu
-        sleep 15
-        mark "SWEEP start step=$step"
-        s1="$(latency_fps)"; sleep 10; s2="$(latency_fps)"; sleep 10; s3="$(latency_fps)"
-        mark "SWEEP end step=$step"
-        SWEEP_ROWS="$SWEEP_ROWS
-$step $s1 $s2 $s3"
-        track_pid
-        step=$((step + 1))
-    done
-    log "Restoring Auto resolution"
-    restore_auto_resolution
-    SWEEP_ACTIVE=0
-fi
-
 ash dumpsys meminfo "$PKG" | grep -E "TOTAL|Graphics|GL mtrack|EGL mtrack" > "$OUT/meminfo.txt"
 ash dumpsys thermalservice 2>/dev/null | head -40 > "$OUT/thermal.txt"
 track_pid
@@ -480,7 +423,7 @@ sleep 1
 # ---------------------------------------------------------------------------------------------
 L="$OUT/raw_logcat.txt"
 # threadtime format: date time PID TID level tag: message. Keep lines from the app's processes,
-# our sweep markers, and crash-dump lines that name the package (tombstones come from crash_dump).
+# our diagnostic markers, and crash-dump lines that name the package (tombstones come from crash_dump).
 awk -v pids="$APP_PIDS" -v pkg="$PKG" '
     BEGIN { n = split(pids, p, " "); for (i = 1; i <= n; i++) mine[p[i]] = 1 }
     ($3 in mine) || /TVDIAG/ || (index($0, pkg) && /(FATAL|Fatal signal|>>>|Process: )/)
@@ -543,22 +486,7 @@ layer_excerpt() {
     echo "- SurfaceFlinger FPS samples (every 10 s):${LATENCY_SAMPLES}"
     echo "- Resolution decisions:"
     grep -h -E "QualityController" "$A" | sed 's/.*QualityController: /  - /' | head -30
-    if [ "$SWEEP" = 1 ]; then
-        echo
-        echo "## Resolution sweep (fixed levels, SurfaceFlinger FPS x3)"
-        echo
-        echo "| Step | Render size | FPS samples |"
-        echo "|---|---|---|"
-        printf '%s\n' "$SWEEP_ROWS" | while read -r step s1 s2 s3; do
-            [ -n "$step" ] || continue
-            size="$(awk -v s="step=$step" '
-                index($0, "SWEEP start " s) { on = 1; next }
-                index($0, "SWEEP end " s) { on = 0 }
-                on && match($0, /surface=[0-9]+x[0-9]+/) { v = substr($0, RSTART + 8, RLENGTH - 8) }
-                END { print v }' "$A")"
-            echo "| $step | ${size:-?} | $s1 / $s2 / $s3 |"
-        done
-    fi
+
     echo
     echo "## Preset switches (min / avg / max (count))"
     echo "- Load time, ms (parse + textures + shader compile, the stall at each switch): $(grep -h 'LOAD preset=' "$A" | field_summary ms)"
@@ -600,7 +528,7 @@ layer_excerpt() {
     fi
     echo
     echo "## Memory"
-    grep -h -o -E "Memory limit: .*|Memory pressure.*" "$A" | sort -u | sed 's/^/- /' | head -10
+    grep -h -o -E "Automatic resolution: .*|Memory pressure.*|live memory headroom.*" "$A" | sort -u | sed 's/^/- /' | head -10
     echo "- Other apps killed during the run (low memory; cached processes omitted):"
     grep -E "ActivityManager: Process .* has died: (prcp|prcl|fg|vis|svc|fore|percep)" "$L" | grep -v "$PKG" \
         | sed -E 's/.*Process ([^ ]+) \(pid [0-9]+\) has died: ([^ ]+).*/\1 (\2)/' | sort | uniq -c | sort -rn \

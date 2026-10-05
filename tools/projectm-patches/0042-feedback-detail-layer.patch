@@ -1,0 +1,1167 @@
+Subject: [PATCH] Add instance-owned authored feedback with bounded native detail
+
+Default off; Standard runs only the authored warp. Medium/High retain a centered,
+headroom-limited native band without unsigned storage bias. Each preset owns its
+canvas/resources; unsupported canvases or shaders keep patch 0038 fallback.
+
+diff --git a/src/api/include/projectM-4/render_opengl.h b/src/api/include/projectM-4/render_opengl.h
+index 0262cc7..a304070 100644
+--- a/src/api/include/projectM-4/render_opengl.h
++++ b/src/api/include/projectM-4/render_opengl.h
+@@ -87,6 +87,16 @@ PROJECTM_EXPORT void projectm_opengl_set_outgoing_preset_frame_divisor(projectm_
+  */
+ PROJECTM_EXPORT void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled);
+ 
++/** Authored-canvas feedback with native detail gain 0..1; negative/nonfinite disables it (default).
++ * Call on the rendering thread. The existing line reference controls the integer canvas.
++ * Unsupported canvases or shader failures retain the feedback diffusion fallback.
++ */
++PROJECTM_EXPORT void projectm_opengl_set_feedback_detail(projectm_handle instance, float alpha);
++
++/** Actual last-rendered preset state: -1 off, -2 canvas fallback, -3 shader/resource failure,
++ * or active integer canvas scale >=2. */
++PROJECTM_EXPORT int projectm_opengl_get_feedback_detail_status(projectm_handle instance);
++
+ /**
+  * @brief Draws waveforms, custom waves, shape outlines and motion vectors as quads, and waveform dots
+  *        with a matching point size, so they keep their share of the picture at large render sizes.
+diff --git a/src/libprojectM/MilkdropPreset/CMakeLists.txt b/src/libprojectM/MilkdropPreset/CMakeLists.txt
+index 4d6cc75..d5a017f 100644
+--- a/src/libprojectM/MilkdropPreset/CMakeLists.txt
++++ b/src/libprojectM/MilkdropPreset/CMakeLists.txt
+@@ -2,6 +2,10 @@
+ option(ENABLE_DEBUG_MILKDROP_PRESET "Enable STDERR debug output in Milkdrop preset code (Debug builds only)" OFF)
+ 
+ set(SHADER_FILES
++        Shaders/FeedbackDetailVertexShaderGlsl330.vert
++        Shaders/FeedbackDetailDownFragmentShaderGlsl330.frag
++        Shaders/FeedbackDetailCombineFragmentShaderGlsl330.frag
++        Shaders/FeedbackDetailInjectFragmentShaderGlsl330.frag
+         Shaders/Blur1FragmentShaderGlsl330.frag
+         Shaders/Blur2FragmentShaderGlsl330.frag
+         Shaders/BlurVertexShaderGlsl330.vert
+@@ -57,6 +61,8 @@ add_library(MilkdropPreset OBJECT
+         EvalLibMutex.cpp
+         Factory.cpp
+         Factory.hpp
++        FeedbackDetail.cpp
++        FeedbackDetail.hpp
+         FeedbackDiffusion.cpp
+         FeedbackDiffusion.hpp
+         Filters.cpp
+diff --git a/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp b/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp
+new file mode 100644
+index 0000000..376aaf9
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp
+@@ -0,0 +1,97 @@
++#include "FeedbackDetail.hpp"
++#include "MilkdropStaticShaders.hpp"
++#include <stdexcept>
++
++namespace libprojectM { namespace MilkdropPreset {
++FeedbackDetail::FeedbackDetail(int width, int height, DetailCanvas canvas, bool retainDetail)
++    : m_width(width), m_height(height), m_size(canvas), m_retainsDetail(retainDetail)
++{
++    auto shaders = MilkdropStaticShaders::Get();
++    const auto vertex = shaders->GetFeedbackDetailVertexShader();
++    m_down.CompileProgram(vertex, shaders->GetFeedbackDetailDownFragmentShader());
++    m_combine.CompileProgram(vertex, shaders->GetFeedbackDetailCombineFragmentShader());
++    m_inject.CompileProgram(vertex, shaders->GetFeedbackDetailInjectFragmentShader());
++    // Allocate before generating the VAO: constructor failure must not leave raw handles alive.
++    for (int i = 0; i < (retainDetail ? 3 : 2); ++i) m_canvas.CreateColorAttachment(i, 0);
++    m_canvas.SetSize(canvas.width, canvas.height);
++    for (int i = 0; i < (retainDetail ? 3 : 2); ++i) {
++        m_canvas.Bind(i);
++        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
++            throw std::runtime_error("incomplete authored feedback framebuffer");
++    }
++    if (retainDetail) {
++        m_combined = std::make_unique<Renderer::Framebuffer>();
++        m_combined->CreateColorAttachment(0, 0);
++        m_combined->SetSize(width, height);
++        m_combined->Bind(0);
++        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
++            throw std::runtime_error("incomplete native detail framebuffer");
++    }
++    glGenVertexArrays(1, &m_vao);
++}
++FeedbackDetail::~FeedbackDetail() { glDeleteVertexArrays(1, &m_vao); }
++void FeedbackDetail::BindTexture(const Renderer::Shader& shader, const char* uniform, int unit,
++                                 const std::shared_ptr<Renderer::Texture>& texture)
++{
++    texture->Bind(unit);
++    m_sampler.Bind(unit);
++    shader.SetUniformInt(uniform, unit);
++}
++void FeedbackDetail::Draw(int width, int height)
++{
++    glViewport(0, 0, width, height);
++    glDisable(GL_BLEND);
++    glBindVertexArray(m_vao);
++    glDrawArrays(GL_TRIANGLES, 0, 3);
++    glBindVertexArray(0);
++    for (int unit = 0; unit < 3; ++unit) Renderer::Sampler::Unbind(unit);
++    glActiveTexture(GL_TEXTURE0);
++    Renderer::Shader::Unbind();
++}
++void FeedbackDetail::Down(const std::shared_ptr<Renderer::Texture>& texture, int index)
++{
++    m_canvas.Bind(index);
++    m_down.Bind();
++    BindTexture(m_down, "src", 0, texture);
++    m_down.SetUniformInt("S", m_size.scale);
++    Draw(m_size.width, m_size.height);
++}
++void FeedbackDetail::Initialize(const std::shared_ptr<Renderer::Texture>& previous) { Down(previous, 0); }
++void FeedbackDetail::Combine(const std::shared_ptr<Renderer::Texture>& nativeWarp, float alpha,
++                             Renderer::Framebuffer& output, int outputIndex)
++{
++    if (m_retainsDetail) Down(nativeWarp, 2);
++    if (m_retainsDetail) m_combined->Bind(0); else output.Bind(outputIndex);
++    m_combine.Bind();
++    BindTexture(m_combine, "Lw", 0, Warped());
++    // Standard never binds/samples the native warp or allocates its intermediate textures.
++    if (m_retainsDetail) {
++        BindTexture(m_combine, "Hw", 1, nativeWarp);
++        BindTexture(m_combine, "D", 2, m_canvas.GetColorAttachmentTexture(2, 0));
++    } else {
++        // Samplers of the same type may alias; keep them valid on stricter drivers.
++        m_combine.SetUniformInt("Hw", 0); m_combine.SetUniformInt("D", 0);
++    }
++    m_combine.SetUniformFloat("alpha", alpha);
++    m_combine.SetUniformFloat2("native", {m_width, m_height});
++    Draw(m_width, m_height);
++    if (m_retainsDetail) {
++        m_combined->BindRead(0); output.BindDraw(outputIndex);
++        glBlitFramebuffer(0, 0, m_width, m_height, 0, 0, m_width, m_height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
++    }
++    output.Bind(outputIndex);
++}
++void FeedbackDetail::Inject(const std::shared_ptr<Renderer::Texture>& geometry)
++{
++    m_canvas.Bind(0);
++    m_inject.Bind();
++    BindTexture(m_inject, "Lw", 0, Warped());
++    BindTexture(m_inject, "Hp", 1, geometry);
++    if (m_retainsDetail) BindTexture(m_inject, "Hc", 2, m_combined->GetColorAttachmentTexture(0, 0));
++    else m_inject.SetUniformInt("Hc", 0);
++    m_inject.SetUniformInt("S", m_size.scale);
++    m_inject.SetUniformInt("has_detail", m_retainsDetail ? 1 : 0);
++    m_inject.SetUniformFloat2("native", {m_width, m_height});
++    Draw(m_size.width, m_size.height);
++}
++} }
+diff --git a/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp b/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp
+new file mode 100644
+index 0000000..2802363
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp
+@@ -0,0 +1,54 @@
++#pragma once
++#include <Renderer/CopyTexture.hpp>
++#include <Renderer/Framebuffer.hpp>
++#include <Renderer/Sampler.hpp>
++#include <Renderer/Shader.hpp>
++#include <cmath>
++#include <memory>
++
++namespace libprojectM { namespace MilkdropPreset {
++struct DetailCanvas { int width{}; int height{}; int scale{}; };
++inline auto FeedbackDetailCanvas(int width, int height, int referenceWidth, int referenceHeight) -> DetailCanvas
++{
++    if (width <= 0 || height <= 0 || referenceWidth <= 0 || referenceHeight <= 0) return {};
++    const int scale = static_cast<int>(std::lround(std::sqrt(
++        (static_cast<double>(width) * height) / (static_cast<double>(referenceWidth) * referenceHeight))));
++    if (scale < 2 || width % scale != 0 || height % scale != 0) return {};
++    return {width / scale, height / scale, scale};
++}
++
++/** Per-preset authored feedback and optional native detail. All resources belong to this instance. */
++class FeedbackDetail
++{
++public:
++    FeedbackDetail(int width, int height, DetailCanvas canvas, bool retainDetail);
++    ~FeedbackDetail();
++    FeedbackDetail(const FeedbackDetail&) = delete;
++    auto operator=(const FeedbackDetail&) -> FeedbackDetail& = delete;
++    void Initialize(const std::shared_ptr<Renderer::Texture>& previous);
++    void Combine(const std::shared_ptr<Renderer::Texture>& nativeWarp, float alpha,
++                 Renderer::Framebuffer& output, int outputIndex);
++    void Inject(const std::shared_ptr<Renderer::Texture>& geometry);
++    auto Previous() const -> std::shared_ptr<Renderer::Texture> { return m_canvas.GetColorAttachmentTexture(0, 0); }
++    auto Warped() const -> std::shared_ptr<Renderer::Texture> { return m_canvas.GetColorAttachmentTexture(1, 0); }
++    auto CanvasFramebuffer() -> Renderer::Framebuffer& { return m_canvas; }
++    auto Canvas() const -> DetailCanvas { return m_size; }
++    auto Width() const -> int { return m_width; }
++    auto Height() const -> int { return m_height; }
++    auto RetainsDetail() const -> bool { return m_retainsDetail; }
++    Renderer::CopyTexture flip;
++private:
++    void Draw(int width, int height);
++    void BindTexture(const Renderer::Shader& shader, const char* uniform, int unit,
++                     const std::shared_ptr<Renderer::Texture>& texture);
++    void Down(const std::shared_ptr<Renderer::Texture>& texture, int index);
++    int m_width, m_height;
++    DetailCanvas m_size;
++    bool m_retainsDetail;
++    Renderer::Framebuffer m_canvas{3};
++    std::unique_ptr<Renderer::Framebuffer> m_combined;
++    Renderer::Shader m_down, m_combine, m_inject;
++    Renderer::Sampler m_sampler{GL_CLAMP_TO_EDGE, GL_LINEAR};
++    GLuint m_vao{};
++};
++} }
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+index c16aef0..0fe7354 100755
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -28,6 +28,7 @@
+ 
+ #include <algorithm>
+ #include <cctype>
++#include <cstdio>
+ 
+ #ifdef MILKDROP_PRESET_DEBUG
+ #include <iostream>
+@@ -96,19 +97,72 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+ 
+     m_state.mainTexture = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
+ 
+-    // First evaluate per-frame code
++    glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++
++    // Create/rebuild L from the scaled native feedback on enable, resize or gain-class change.
++    // A failed driver shader disables the layer only for this preset; the ordinary path remains usable.
++    auto canvas = FeedbackDetailCanvas(renderContext.viewportSizeX, renderContext.viewportSizeY,
++                                       renderContext.lineReferenceWidth, renderContext.lineReferenceHeight);
++    const bool detailRequested = renderContext.feedbackDetailAlpha >= 0.0f;
++#ifdef PROJECTMTV_DISABLE_FEEDBACK_DIFFUSION
++    canvas = {}; // capped-library policy also excludes the detail layer.
++#endif
++    if (!detailRequested || canvas.scale == 0 || m_detailFailed) m_feedbackDetail.reset();
++    else if (!m_feedbackDetail || m_feedbackDetail->Width() != renderContext.viewportSizeX ||
++             m_feedbackDetail->Height() != renderContext.viewportSizeY ||
++             m_feedbackDetail->Canvas().scale != canvas.scale ||
++             m_feedbackDetail->RetainsDetail() != (renderContext.feedbackDetailAlpha > 0.0f))
++    {
++        m_feedbackDetail.reset(); // release/return old textures before allocating a replacement
++        try {
++            m_feedbackDetail = std::make_unique<FeedbackDetail>(renderContext.viewportSizeX,
++                renderContext.viewportSizeY, canvas, renderContext.feedbackDetailAlpha > 0.0f);
++            m_feedbackDetail->Initialize(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0));
++            m_motionVectorUVMap->SetSize(canvas.width, canvas.height);
++            m_isFirstFrame = true;
++        } catch (const std::exception& error) {
++            m_feedbackDetail.reset();
++            m_detailFailed = true;
++            std::fprintf(stderr, "projectM authored feedback disabled: %s\n", error.what());
++        }
++    }
++    auto* detail = m_feedbackDetail.get();
++    if (detail) {
++        // Integer canvases can differ from 1280x720 during scaled transitions. Every texsize,
++        // blur/sample decision and line scale must use the actual authored state of this preset.
++        m_state.renderContext.lineReferenceWidth = canvas.width;
++        m_state.renderContext.lineReferenceHeight = canvas.height;
++    }
+     PerFrameUpdate();
+ 
+-    glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++    m_detailStatus = !detailRequested ? -1 : detail ? canvas.scale : m_detailFailed ? -3 : -2;
++    if (detailRequested && !detail && !m_detailFallbackLogged) {
++        std::fprintf(stderr, "projectM authored feedback fallback at %dx%d\n",
++                     renderContext.viewportSizeX, renderContext.viewportSizeY);
++        m_detailFallbackLogged = true;
++    }
++    if (!detail) {
++        const auto uv = m_motionVectorUVMap->Texture();
++        if (uv->Width() != renderContext.viewportSizeX || uv->Height() != renderContext.viewportSizeY) {
++            m_motionVectorUVMap->SetSize(renderContext.viewportSizeX, renderContext.viewportSizeY);
++            // Returning from the canvas replaces/clears the UV map. Its first native warp must
++            // populate normalized coordinates before motion vectors can consume them.
++            m_isFirstFrame = true;
++        }
++    }
++    else if (m_isFirstFrame) detail->Initialize(m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0));
+ 
+     // Above the line reference size, the warp reads the previous frame through a small blur that gives
+     // back the per-frame smoothing feedback presets get at the reference size (see FeedbackDiffusion.hpp).
+-    if (m_feedbackDiffusion.SetScale(m_diffusionAllowed ? LineScale(renderContext.viewportSizeX, renderContext.viewportSizeY,
++    if (m_feedbackDiffusion.SetScale(m_diffusionAllowed && !detail ? LineScale(renderContext.viewportSizeX, renderContext.viewportSizeY,
+                                            renderContext.lineReferenceWidth, renderContext.lineReferenceHeight) : 0.0f))
+     {
+         m_diffusionHoldsPreviousFrame = false;
+     }
+ 
++    // Authored-state initialization draws at canvas size. Restore the native viewport before
++    // motion vectors and the first native flip/warp, including presets that read previous blur.
++    glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
+     m_framebuffer.Bind(m_previousFrameBuffer);
+     // Motion vector field. Drawn to the previous frame texture before warping it.
+     // Only do it after drawing one frame after init or resize.
+@@ -158,7 +212,9 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+     };
+     if (!m_warpSamplesBlur)
+     {
+-        updateBlur();
++        if (detail) m_state.blurTexture.Update(*detail->Previous(), m_perFrameContext, 1.0f);
++        else updateBlur();
++        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
+     }
+ 
+     // We now draw to the current framebuffer.
+@@ -171,16 +227,18 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+                                static_cast<int>(*m_perFrameContext.mv_x) > 0 &&
+                                static_cast<int>(*m_perFrameContext.mv_y) > 0;
+ 
+-    if (writeMotionUV)
++    if (writeMotionUV && !detail)
+     {
+         // Add motion vector u/v texture for the warp mesh draw and clean both buffers.
+         m_framebuffer.SetAttachment(m_currentFrameBuffer, 1, m_motionVectorUVMap);
+     }
+ 
+     // Draw previous frame image warped via per-pixel mesh and warp shader
+-    m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext);
++    if (detail && renderContext.feedbackDetailAlpha == 0.0f)
++        m_perPixelMesh.Prepare(m_state, m_perFrameContext, m_perPixelContext);
++    else m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext);
+ 
+-    if (writeMotionUV)
++    if (writeMotionUV && !detail)
+     {
+         // Stop writing to the u/v texture, but keep it attached until the frame's drawing is done:
+         // changing the attachments here would end the render pass.
+@@ -188,12 +246,44 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+         glDrawBuffers(2, buffers);
+     }
+ 
+-    if (m_warpSamplesBlur)
++    if (m_warpSamplesBlur && !detail)
+     {
+         // Binds the blur framebuffer and then restores the current one (keeping its draw buffers).
+         updateBlur();
+     }
+ 
++    if (detail)
++    {
++        // Motion vectors are part of feedback. Their normalized UV map is written by the canvas warp,
++        // so Standard needs no native warp even when vectors are visible.
++        if (!m_isFirstFrame) {
++            const auto savedContext = m_state.renderContext;
++            m_state.renderContext.viewportSizeX = canvas.width;
++            m_state.renderContext.viewportSizeY = canvas.height;
++            m_state.renderContext.lineReferenceWidth = 0;
++            m_state.renderContext.lineReferenceHeight = 0;
++            detail->CanvasFramebuffer().Bind(0);
++            glViewport(0, 0, canvas.width, canvas.height);
++            m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture(), false);
++            m_state.renderContext = savedContext;
++        }
++        glViewport(0, 0, canvas.width, canvas.height);
++        detail->flip.Draw(detail->Previous(), nullptr, true, false);
++        const auto nativeMain = m_state.mainTexture;
++        m_state.mainTexture = detail->flip.Texture();
++        auto& target = detail->CanvasFramebuffer();
++        if (writeMotionUV) target.SetAttachment(1, 1, m_motionVectorUVMap);
++        target.Bind(1);
++        glViewport(0, 0, canvas.width, canvas.height);
++        m_perPixelMesh.DrawAgain(m_state, m_perFrameContext);
++        if (writeMotionUV) target.RemoveColorAttachment(1, 1);
++        m_state.mainTexture = nativeMain;
++        if (m_warpSamplesBlur) m_state.blurTexture.Update(*detail->Previous(), m_perFrameContext, 1.0f);
++        detail->Combine(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0),
++                        renderContext.feedbackDetailAlpha, m_framebuffer, m_currentFrameBuffer);
++        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++    }
++
+     // Draw audio-data-related stuff
+     for (auto& shape : m_customShapes)
+     {
+@@ -212,12 +302,18 @@ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audio
+     }
+     m_border.Draw(m_perFrameContext);
+ 
+-    if (writeMotionUV)
++    if (writeMotionUV && !detail)
+     {
+         // Remove the u/v texture from the framebuffer.
+         m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
+     }
+ 
++    if (detail) {
++        detail->Inject(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0));
++        m_framebuffer.Bind(m_currentFrameBuffer);
++        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++    }
++
+     // Todo: Song title anim would go here
+ 
+     // y-flip the image for final compositing again. With diffusion, the same pass also filters
+@@ -293,6 +389,8 @@ void MilkdropPreset::DrawInitialImage(const std::shared_ptr<Renderer::Texture>&
+     m_flipTexture.Draw(image, m_framebuffer, m_previousFrameBuffer);
+     m_flipHoldsPreviousFrame = false;
+     m_diffusionHoldsPreviousFrame = false;
++    m_feedbackDetail.reset();
++    m_isFirstFrame = true;
+ }
+ 
+ void MilkdropPreset::PerFrameUpdate()
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+index 9340aec..ca6f986 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp
+@@ -28,6 +28,7 @@
+ #include "CustomWaveform.hpp"
+ #include "DarkenCenter.hpp"
+ #include "FeedbackDiffusion.hpp"
++#include "FeedbackDetail.hpp"
+ #include "Filters.hpp"
+ #include "FinalComposite.hpp"
+ #include "MotionVectors.hpp"
+@@ -47,6 +48,7 @@
+ #include <vector>
+ 
+ namespace libprojectM {
++class FeedbackDetailTestAccess;
+ namespace MilkdropPreset {
+ 
+ class Factory;
+@@ -74,6 +76,8 @@ public:
+      * @brief Initializes the preset with rendering-related data.
+      * @param renderContext The initial render context.
+      */
++    auto FeedbackDetailStatus() const -> int override { return m_detailStatus; }
++
+     void Initialize(const Renderer::RenderContext& renderContext) override;
+ 
+     /**
+@@ -93,6 +97,7 @@ public:
+     auto InitializationWarnings() const -> std::vector<std::string> override;
+ 
+ private:
++    friend class libprojectM::FeedbackDetailTestAccess;
+     void PerFrameUpdate();
+ 
+     void Load(const std::string& pathname);
+@@ -118,6 +123,11 @@ private:
+     int m_previousFrameBuffer{1};                                     //!< Framebuffer ID of the previous frame.
+     std::shared_ptr<Renderer::TextureAttachment> m_motionVectorUVMap; //!< The UV map of the previous frame's warp mesh, used for motion vector reverse propagation.
+ 
++    std::unique_ptr<FeedbackDetail> m_feedbackDetail;
++    bool m_detailFailed{false};
++    bool m_detailFallbackLogged{false};
++    int m_detailStatus{-1};
++
+     PresetState m_state;               //!< Preset state container.
+     PerFrameContext m_perFrameContext; //!< Preset per-frame evaluation code context.
+     PerPixelContext m_perPixelContext; //!< Preset per-pixel/per-vertex evaluation code context.
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+index 4cb2cf6..f7b83b4 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+@@ -200,10 +200,10 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+ 
+     m_shader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+ 
+-    m_shader.SetUniformFloat4("rand_frame", {floatRand(),
+-                                             floatRand(),
+-                                             floatRand(),
+-                                             floatRand()});
++    const bool reuseRandom = presetState.renderContext.feedbackDetailAlpha >= 0.0f &&
++                             m_randomFrame == presetState.renderContext.frame;
++    if (!reuseRandom) m_frameRandom = {floatRand(), floatRand(), floatRand(), floatRand()};
++    m_shader.SetUniformFloat4("rand_frame", m_frameRandom);
+     m_shader.SetUniformFloat4("rand_preset", {m_randValues[0],
+                                               m_randValues[1],
+                                               m_randValues[2],
+@@ -291,6 +291,7 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+     // the last 4 are totally random, each frame
+     for (int i = 20; i < 24; i++)
+     {
++        if (reuseRandom) { tempMatrices[i] = m_frameMatrices[i - 20]; continue; }
+         glm::mat4 const rotationX = glm::rotate(glm::mat4(1.0f), floatRand() * 6.28f, glm::vec3(1.0f, 0.0f, 0.0f));
+         glm::mat4 const rotationY = glm::rotate(glm::mat4(1.0f), floatRand() * 6.28f, glm::vec3(0.0f, 1.0f, 0.0f));
+         glm::mat4 const rotationZ = glm::rotate(glm::mat4(1.0f), floatRand() * 6.28f, glm::vec3(0.0f, 0.0f, 1.0f));
+@@ -300,8 +301,11 @@ void MilkdropShader::LoadVariables(const PresetState& presetState, const PerFram
+         tempMatrices[i] = randomTranslation * rotationX;
+         tempMatrices[i] = rotationZ * tempMatrices[i];
+         tempMatrices[i] = rotationY * tempMatrices[i];
++        m_frameMatrices[i - 20] = tempMatrices[i];
+     }
+ 
++    m_randomFrame = presetState.renderContext.frame;
++
+     m_shader.SetUniformMat3x4("rot_s1", tempMatrices[0]);
+     m_shader.SetUniformMat3x4("rot_s2", tempMatrices[1]);
+     m_shader.SetUniformMat3x4("rot_s3", tempMatrices[2]);
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropShader.hpp b/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
+index baff024..4532c52 100644
+--- a/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropShader.hpp
+@@ -1,3 +1,4 @@
++#include <array>
+ /**
+  * @file MilkdropShader
+  * @brief Holds a warp or composite shader of Milkdrop presets.
+@@ -73,6 +74,10 @@ public:
+     auto Shader() -> Renderer::Shader&;
+ 
+ private:
++    int m_randomFrame{-1};
++    glm::vec4 m_frameRandom{};
++    std::array<glm::mat4, 4> m_frameMatrices{};
++
+     /**
+      * @brief Prepares the shader code to be translated into GLSL.
+      * @param program The program code to work on.
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+index d2ab009..c6a7c19 100644
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -141,6 +141,14 @@ void PerPixelMesh::Draw(const PresetState& presetState,
+     WarpedBlit(presetState, perFrameContext);
+ }
+ 
++void PerPixelMesh::Prepare(const PresetState& presetState, const PerFrameContext& perFrameContext, PerPixelContext& perPixelContext)
++{
++    if (presetState.renderContext.viewportSizeX == 0 || presetState.renderContext.viewportSizeY == 0 ||
++        presetState.renderContext.perPixelMeshX == 0 || presetState.renderContext.perPixelMeshY == 0) return;
++    InitializeMesh(presetState);
++    CalculateMesh(presetState, perFrameContext, perPixelContext);
++}
++
+ void PerPixelMesh::InitializeMesh(const PresetState& presetState)
+ {
+     if (m_gridSizeX != presetState.renderContext.perPixelMeshX ||
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+index 5708646..4305ecc 100644
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+@@ -46,6 +46,9 @@ public:
+      * @brief Loads the required textures and compiles the warp shader.
+      * @param presetState The preset state to retrieve the configuration values from.
+      */
++    void Prepare(const PresetState& presetState, const PerFrameContext& perFrameContext, PerPixelContext& perPixelContext);
++    void DrawAgain(const PresetState& presetState, const PerFrameContext& perFrameContext) { WarpedBlit(presetState, perFrameContext); }
++
+     void CompileWarpShader(PresetState& presetState);
+ 
+     /**
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailCombineFragmentShaderGlsl330.frag b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailCombineFragmentShaderGlsl330.frag
+new file mode 100644
+index 0000000..9d6cd96
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailCombineFragmentShaderGlsl330.frag
+@@ -0,0 +1,31 @@
++precision highp float;
++precision highp int;
++precision highp sampler2D;
++uniform sampler2D Lw; uniform sampler2D Hw; uniform sampler2D D; uniform float alpha; uniform vec2 native; out vec4 o;
++vec4 Base(ivec2 p) { return texture(Lw, (vec2(p) + vec2(0.5)) / native); }
++vec4 Band(ivec2 p) { return texelFetch(Hw, p, 0) - texture(D, (vec2(p) + vec2(0.5)) / native); }
++void main() {
++  ivec2 p = ivec2(gl_FragCoord.xy); o = Base(p);
++  if (alpha != 0.0) {
++    int S = int(native.x) / textureSize(Lw, 0).x; ivec2 cell = (p / S) * S;
++    // bilinear_up(box(Hw)) is not a projection: remove the residual's
++    // actual block mean before limiting it. This also removes D's rounding.
++    vec4 mean = vec4(0.0);
++    for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i)
++      mean += Band(cell + ivec2(i, j));
++    mean /= float(S * S);
++    // One gain per block and channel preserves the centered band's zero
++    // mean. Choose the largest gain <= alpha that fits every pixel's
++    // headroom; independent per-pixel clamps would introduce another bias.
++    vec4 gain = vec4(alpha);
++    for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i) {
++      ivec2 q = cell + ivec2(i, j); vec4 b = Base(q); vec4 d = Band(q) - mean;
++      vec4 positive = (vec4(1.0) - b) / max(d, vec4(1e-6));
++      vec4 negative = b / max(-d, vec4(1e-6));
++      // Zero residual consumes no headroom, even at an exactly white pixel.
++      vec4 limit = mix(vec4(alpha), positive, greaterThan(d, vec4(0.0)));
++      gain = min(gain, mix(limit, negative, lessThan(d, vec4(0.0))));
++    }
++    o += gain * (Band(p) - mean);
++  }
++}
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailDownFragmentShaderGlsl330.frag b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailDownFragmentShaderGlsl330.frag
+new file mode 100644
+index 0000000..4ff1804
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailDownFragmentShaderGlsl330.frag
+@@ -0,0 +1,7 @@
++precision highp float;
++precision highp int;
++precision highp sampler2D;
++uniform sampler2D src; uniform int S; out vec4 o;
++void main() { ivec2 b = ivec2(gl_FragCoord.xy) * S; vec4 acc = vec4(0.0);
++  for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i) acc += texelFetch(src, b + ivec2(i, j), 0);
++  o = acc / float(S * S); }
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailInjectFragmentShaderGlsl330.frag b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailInjectFragmentShaderGlsl330.frag
+new file mode 100644
+index 0000000..f411de0
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailInjectFragmentShaderGlsl330.frag
+@@ -0,0 +1,9 @@
++precision highp float;
++precision highp int;
++precision highp sampler2D;
++uniform sampler2D Lw; uniform sampler2D Hp; uniform sampler2D Hc; uniform int S; uniform int has_detail; uniform vec2 native; out vec4 o;
++// The native pixels at the canvas pixel's centre: the middle one for an odd scale, the middle 2x2 for an even one.
++vec4 G(ivec2 p) { return texelFetch(Hp, p, 0) - (has_detail != 0 ? texelFetch(Hc, p, 0) : texture(Lw, (vec2(p) + vec2(0.5)) / native)); }
++void main() { ivec2 c = ivec2(gl_FragCoord.xy); ivec2 p = c * S + ivec2((S - 1) / 2);
++  vec4 g = (S % 2 == 1) ? G(p) : 0.25 * (G(p) + G(p + ivec2(1, 0)) + G(p + ivec2(0, 1)) + G(p + ivec2(1, 1)));
++  o = texelFetch(Lw, c, 0) + g; }
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailVertexShaderGlsl330.vert
+new file mode 100644
+index 0000000..6e2e7c0
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/Shaders/FeedbackDetailVertexShaderGlsl330.vert
+@@ -0,0 +1,3 @@
++precision highp float;
++precision highp int;
++void main() { vec2 p = vec2(gl_VertexID == 1 ? 3.0 : -1.0, gl_VertexID == 2 ? 3.0 : -1.0); gl_Position = vec4(p, 0.0, 1.0); }
+diff --git a/src/libprojectM/Preset.hpp b/src/libprojectM/Preset.hpp
+index ca5c902..e23ac2c 100644
+--- a/src/libprojectM/Preset.hpp
++++ b/src/libprojectM/Preset.hpp
+@@ -16,6 +16,9 @@ class Preset
+ public:
+     virtual ~Preset() = default;
+ 
++    /** Negative: off (-1), canvas fallback (-2), or shader/resource failure (-3); positive: actual active integer canvas scale. */
++    virtual auto FeedbackDetailStatus() const -> int { return -2; }
++
+     /**
+      * @brief Initializes additional preset resources.
+      * @param renderContext A render context with the initial data.
+diff --git a/src/libprojectM/ProjectM.cpp b/src/libprojectM/ProjectM.cpp
+index 9fee744..fdb4de8 100644
+--- a/src/libprojectM/ProjectM.cpp
++++ b/src/libprojectM/ProjectM.cpp
+@@ -308,6 +308,16 @@ void ProjectM::SetDirectOutput(bool enabled)
+     m_directOutput = enabled;
+ }
+ 
++void ProjectM::SetFeedbackDetail(float alpha)
++{
++    m_feedbackDetailAlpha = std::isfinite(alpha) && alpha >= 0.0f ? std::min(alpha, 1.0f) : -1.0f;
++}
++
++auto ProjectM::FeedbackDetailStatus() const -> int
++{
++    return m_feedbackDetailAlpha < 0.0f ? -1 : (m_activePreset ? m_activePreset->FeedbackDetailStatus() : -2);
++}
++
+ void ProjectM::SetLineReferenceSize(int width, int height)
+ {
+     const bool enabled = width > 0 && height > 0;
+@@ -504,6 +514,7 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
+     ctx.perPixelMeshX = static_cast<int>(m_meshX);
+     ctx.perPixelMeshY = static_cast<int>(m_meshY);
+     ctx.textureManager = m_textureManager.get();
++    ctx.feedbackDetailAlpha = m_feedbackDetailAlpha;
+     ctx.lineReferenceWidth = m_lineReferenceWidth;
+     ctx.lineReferenceHeight = m_lineReferenceHeight;
+     ctx.lineAntialiasing = m_lineAntialiasing;
+diff --git a/src/libprojectM/ProjectM.hpp b/src/libprojectM/ProjectM.hpp
+index 0c5fcfc..8f857c5 100644
+--- a/src/libprojectM/ProjectM.hpp
++++ b/src/libprojectM/ProjectM.hpp
+@@ -31,6 +31,7 @@
+ #include <vector>
+ 
+ namespace libprojectM {
++class FeedbackDetailTestAccess;
+ 
+ namespace Renderer {
+ class CopyTexture;
+@@ -131,6 +132,9 @@ public:
+      * keeps its share of the picture at any size and aspect ratio; dots scale the same way (see
+      * projectm_opengl_set_line_reference_size()). 0 in either keeps MilkDrop's GL lines and points.
+      */
++    void SetFeedbackDetail(float alpha);
++    auto FeedbackDetailStatus() const -> int;
++
+     void SetLineReferenceSize(int width, int height);
+ 
+     /**
+@@ -211,6 +215,7 @@ public:
+     auto WindowHeight() -> int;
+ 
+ private:
++    friend class FeedbackDetailTestAccess;
+     void Initialize();
+ 
+     void StartPresetTransition(std::unique_ptr<Preset>&& preset, bool hardCut);
+@@ -225,6 +230,7 @@ private:
+     uint32_t m_windowWidth{0};            //!< EvaluateFrameData window width. If 0, nothing is rendered.
+     uint32_t m_outgoingPresetFrameDivisor{1}; //!< Render the outgoing preset every n-th frame during a transition.
+     bool m_directOutput{false};                 //!< The active preset may draw straight into the target framebuffer.
++    float m_feedbackDetailAlpha{-1.0f};
+     int m_lineReferenceWidth{0};  //!< Render width of the size at which quad lines are 1 px wide; 0 for GL lines.
+     int m_lineReferenceHeight{0}; //!< Render height of the size at which quad lines are 1 px wide; 0 for GL lines.
+     bool m_lineAntialiasing{false}; //!< Quad lines get an anti-aliased edge.
+diff --git a/src/libprojectM/ProjectMCWrapper.cpp b/src/libprojectM/ProjectMCWrapper.cpp
+index e725ba1..fff286d 100644
+--- a/src/libprojectM/ProjectMCWrapper.cpp
++++ b/src/libprojectM/ProjectMCWrapper.cpp
+@@ -210,6 +210,16 @@ void projectm_opengl_set_direct_output(projectm_handle instance, bool enabled)
+     projectMInstance->SetDirectOutput(enabled);
+ }
+ 
++void projectm_opengl_set_feedback_detail(projectm_handle instance, float alpha)
++{
++    handle_to_instance(instance)->SetFeedbackDetail(alpha);
++}
++
++int projectm_opengl_get_feedback_detail_status(projectm_handle instance)
++{
++    return handle_to_instance(instance)->FeedbackDetailStatus();
++}
++
+ void projectm_opengl_set_line_reference_size(projectm_handle instance, uint32_t width, uint32_t height)
+ {
+     auto projectMInstance = handle_to_instance(instance);
+diff --git a/src/libprojectM/Renderer/RenderContext.hpp b/src/libprojectM/Renderer/RenderContext.hpp
+index 5cd8d3c..59c5d1a 100644
+--- a/src/libprojectM/Renderer/RenderContext.hpp
++++ b/src/libprojectM/Renderer/RenderContext.hpp
+@@ -27,6 +27,7 @@ public:
+     float invAspectY{1.0}; //!< Inverse Y aspect ratio.
+     int lineReferenceWidth{0};  //!< Render width of the size at which quad lines are 1 px wide; 0 draws MilkDrop's GL lines.
+     int lineReferenceHeight{0}; //!< Render height of the size at which quad lines are 1 px wide; 0 draws MilkDrop's GL lines.
++    float feedbackDetailAlpha{-1.0f}; //!< Negative disables the authored-canvas/detail feedback layer.
+     bool lineAntialiasing{false}; //!< Quad lines get a one-pixel anti-aliased edge instead of a hard one.
+ 
+     int perPixelMeshX{64}; //!< Per-pixel/per-vertex mesh X resolution.
+diff --git a/tests/libprojectM/CMakeLists.txt b/tests/libprojectM/CMakeLists.txt
+index edf9bb4..4186466 100644
+--- a/tests/libprojectM/CMakeLists.txt
++++ b/tests/libprojectM/CMakeLists.txt
+@@ -3,6 +3,7 @@ find_package(GTest 1.10 REQUIRED NO_MODULE)
+ add_executable(projectM-unittest
+         FeedbackDiffusionRenderTest.cpp
+         FeedbackDiffusionTest.cpp
++        FeedbackDetailTest.cpp
+         HLSLModuloTest.cpp
+         PresetShaderTranslationTest.cpp
+         ShaderExceptionTest.cpp
+@@ -49,3 +50,15 @@ target_link_libraries(projectM-unittest
+         )
+ 
+ add_test(NAME projectM-unittest COMMAND projectM-unittest)
++
++# Exercise the same production detail/diffusion shaders on Mesa in Linux CI.
++if(UNIX AND NOT APPLE)
++    find_package(PkgConfig QUIET)
++    if(PkgConfig_FOUND)
++        pkg_check_modules(TEST_EGL QUIET IMPORTED_TARGET egl)
++        if(TEST_EGL_FOUND)
++            target_link_libraries(projectM-unittest PRIVATE PkgConfig::TEST_EGL)
++            target_compile_definitions(projectM-unittest PRIVATE PROJECTM_TEST_EGL=1)
++        endif()
++    endif()
++endif()
+diff --git a/tests/libprojectM/FeedbackDetailTest.cpp b/tests/libprojectM/FeedbackDetailTest.cpp
+new file mode 100644
+index 0000000..084a2c2
+--- /dev/null
++++ b/tests/libprojectM/FeedbackDetailTest.cpp
+@@ -0,0 +1,12 @@
++#include <MilkdropPreset/FeedbackDetail.hpp>
++#include <gtest/gtest.h>
++using libprojectM::MilkdropPreset::FeedbackDetailCanvas;
++TEST(FeedbackDetail, IntegerNativeCanvasAndFallback) {
++    auto fourK = FeedbackDetailCanvas(3840, 2160, 1280, 720);
++    EXPECT_EQ(fourK.scale, 3); EXPECT_EQ(fourK.width, 1280); EXPECT_EQ(fourK.height, 720);
++    EXPECT_EQ(FeedbackDetailCanvas(2560, 1440, 1280, 720).scale, 2);
++    EXPECT_EQ(FeedbackDetailCanvas(1920, 1080, 1280, 720).scale, 2);
++    EXPECT_EQ(FeedbackDetailCanvas(3841, 2160, 1280, 720).scale, 0);
++    EXPECT_EQ(FeedbackDetailCanvas(1280, 720, 1280, 720).scale, 0);
++    EXPECT_EQ(FeedbackDetailCanvas(3840, 2160, 0, 0).scale, 0);
++}
+diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
+index 3511e54..478e061 100644
+--- a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
++++ b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
+@@ -1,3 +1,8 @@
++#include <iostream>
++#include <limits>
++#include <cmath>
++#include <MilkdropPreset/FeedbackDetail.hpp>
++#include <MilkdropPreset/MilkdropPreset.hpp>
+ #include <ProjectM.hpp>
+ #include <Renderer/Shader.hpp>
+ #include <projectM-opengl.h>
+@@ -13,8 +18,38 @@
+ 
+ #ifdef __APPLE__
+ #include <OpenGL/OpenGL.h>
++#elif defined(PROJECTM_TEST_EGL)
++#include <EGL/egl.h>
++#include <EGL/eglext.h>
+ #endif
+ 
++// Read internal pass products only from tests; no production readback or diagnostic image API.
++namespace libprojectM {
++class FeedbackDetailTestAccess {
++public:
++    static auto Active(ProjectM& engine) -> MilkdropPreset::MilkdropPreset& {
++        return dynamic_cast<MilkdropPreset::MilkdropPreset&>(*engine.m_activePreset);
++    }
++    static auto Feedback(ProjectM& engine) -> std::shared_ptr<Renderer::Texture> {
++        auto& preset=Active(engine);
++        return preset.m_feedbackDetail ? preset.m_feedbackDetail->Previous() :
++               preset.m_framebuffer.GetColorAttachmentTexture(preset.m_previousFrameBuffer,0);
++    }
++    static auto Frame(ProjectM& engine) -> int { return Active(engine).m_state.renderContext.frame; }
++    static void ClearNativeFeedback(ProjectM& engine) {
++        auto& preset=Active(engine);
++        preset.m_framebuffer.Bind(preset.m_previousFrameBuffer);
++        glClearColor(0,0,0,1);glClear(GL_COLOR_BUFFER_BIT);
++        preset.m_flipHoldsPreviousFrame=false;
++        preset.m_diffusionHoldsPreviousFrame=false;
++    }
++    static auto ReducedWarp(ProjectM& engine) -> std::shared_ptr<Renderer::Texture> {
++        auto& preset=Active(engine);
++        return preset.m_feedbackDetail->CanvasFramebuffer().GetColorAttachmentTexture(2,0);
++    }
++};
++}
++
+ // Feedback diffusion filters only the bilinear warp input. Point-sampled warp reads and the
+ // composite must see the same texels as with compensation off at the same reference size.
+ // (The reference size also changes texsize and the canvas the preset sees, so the comparisons keep
+@@ -59,6 +94,15 @@ auto FeedbackPreset(const std::string& read) -> std::string
+     return Preset(std::string("if (frame < 2) ret = ") + Seed + "; else ret = " + read + ";");
+ }
+ 
++auto ReadFeedbackTexture(const std::shared_ptr<libprojectM::Renderer::Texture>& texture) -> Image {
++    GLuint fbo{};glGenFramebuffers(1,&fbo);glBindFramebuffer(GL_FRAMEBUFFER,fbo);
++    glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,texture->TextureID(),0);
++    Image pixels(texture->Width()*texture->Height()*3);
++    glReadPixels(0,0,texture->Width(),texture->Height(),GL_RGB,GL_UNSIGNED_BYTE,pixels.data());
++    glDeleteFramebuffers(1,&fbo);
++    return pixels;
++}
++
+ auto DifferentBytes(const Image& a, const Image& b) -> size_t
+ {
+     size_t different{};
+@@ -88,6 +132,19 @@ protected:
+         }
+         CGLCreateContext(format, nullptr, &s_context);
+         CGLDestroyPixelFormat(format);
++#elif defined(PROJECTM_TEST_EGL)
++        s_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
++        if (s_display == EGL_NO_DISPLAY || !eglInitialize(s_display, nullptr, nullptr)) return;
++        if (!eglBindAPI(EGL_OPENGL_API)) return;
++        const EGLint attributes[] = {EGL_SURFACE_TYPE, EGL_PBUFFER_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_BIT,
++                                     EGL_RED_SIZE,8,EGL_GREEN_SIZE,8,EGL_BLUE_SIZE,8,EGL_ALPHA_SIZE,8,EGL_NONE};
++        EGLConfig config{}; EGLint count{};
++        if (!eglChooseConfig(s_display, attributes, &config, 1, &count) || count == 0) return;
++        const EGLint surfaceAttributes[] = {EGL_WIDTH, Width, EGL_HEIGHT, Height, EGL_NONE};
++        s_surface = eglCreatePbufferSurface(s_display, config, surfaceAttributes);
++        const EGLint contextAttributes[] = {EGL_CONTEXT_MAJOR_VERSION_KHR,3,EGL_CONTEXT_MINOR_VERSION_KHR,3,
++            EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,EGL_NONE};
++        s_context = eglCreateContext(s_display, config, EGL_NO_CONTEXT, contextAttributes);
+ #endif
+     }
+ 
+@@ -100,6 +157,14 @@ protected:
+             CGLDestroyContext(s_context);
+             s_context = nullptr;
+         }
++#elif defined(PROJECTM_TEST_EGL)
++        if (s_display != EGL_NO_DISPLAY) {
++            eglMakeCurrent(s_display,EGL_NO_SURFACE,EGL_NO_SURFACE,EGL_NO_CONTEXT);
++            if (s_context != EGL_NO_CONTEXT) eglDestroyContext(s_display,s_context);
++            if (s_surface != EGL_NO_SURFACE) eglDestroySurface(s_display,s_surface);
++            eglTerminate(s_display);
++            s_context = EGL_NO_CONTEXT; s_surface = EGL_NO_SURFACE; s_display = EGL_NO_DISPLAY;
++        }
+ #endif
+     }
+ 
+@@ -111,6 +176,14 @@ protected:
+             GTEST_SKIP() << "no macOS CGL OpenGL context";
+         }
+         ASSERT_EQ(CGLSetCurrentContext(s_context), kCGLNoError);
++#elif defined(PROJECTM_TEST_EGL)
++        ASSERT_NE(s_context, EGL_NO_CONTEXT) << "EGL desktop GL context required for rendering regressions";
++        ASSERT_NE(s_surface, EGL_NO_SURFACE);
++        ASSERT_TRUE(eglMakeCurrent(s_display,s_surface,s_surface,s_context));
++#else
++        GTEST_SKIP() << "render regression needs macOS CGL or EGL desktop GL";
++#endif
++#if defined(__APPLE__) || defined(PROJECTM_TEST_EGL)
+         libprojectM::Renderer::Shader::Unbind();
+         glGenFramebuffers(1, &m_framebuffer);
+         glGenTextures(1, &m_texture);
+@@ -121,14 +194,12 @@ protected:
+         ASSERT_EQ(glCheckFramebufferStatus(GL_FRAMEBUFFER), GL_FRAMEBUFFER_COMPLETE);
+         glPixelStorei(GL_PACK_ALIGNMENT, 1);
+         ASSERT_EQ(glGetError(), GL_NO_ERROR);
+-#else
+-        GTEST_SKIP() << "render regression needs a macOS CGL OpenGL context";
+ #endif
+     }
+ 
+     void TearDown() override
+     {
+-#ifdef __APPLE__
++#if defined(__APPLE__) || defined(PROJECTM_TEST_EGL)
+         if (s_context != nullptr)
+         {
+             libprojectM::Renderer::Shader::Unbind();
+@@ -170,6 +241,10 @@ protected:
+ 
+ #ifdef __APPLE__
+     static CGLContextObj s_context;
++#elif defined(PROJECTM_TEST_EGL)
++    static EGLDisplay s_display;
++    static EGLContext s_context;
++    static EGLSurface s_surface;
+ #endif
+     GLuint m_framebuffer{};
+     GLuint m_texture{};
+@@ -177,6 +252,10 @@ protected:
+ 
+ #ifdef __APPLE__
+ CGLContextObj FeedbackDiffusionRenderTest::s_context{};
++#elif defined(PROJECTM_TEST_EGL)
++EGLDisplay FeedbackDiffusionRenderTest::s_display{EGL_NO_DISPLAY};
++EGLContext FeedbackDiffusionRenderTest::s_context{EGL_NO_CONTEXT};
++EGLSurface FeedbackDiffusionRenderTest::s_surface{EGL_NO_SURFACE};
+ #endif
+ 
+ constexpr std::pair<int, int> References[] = {{64, 48}, {32, 24}}; // Scale 2 (three taps), 4 (four taps, capped).
+@@ -262,3 +341,225 @@ TEST_F(FeedbackDiffusionRenderTest, FramesWithMotionVectorsKeepPointReadsAndComp
+         }
+     }
+ }
++
++TEST_F(FeedbackDiffusionRenderTest, DetailLimiterPreservesReconstructedBlockMean) {
++    using libprojectM::MilkdropPreset::FeedbackDetail;
++    using libprojectM::MilkdropPreset::DetailCanvas;
++    for (int scale : {2, 3}) for (float alpha : {0.5f, 1.0f}) {
++        const int width=Width/scale*scale, height=Height/scale*scale;
++        FeedbackDetail detail(width, height, DetailCanvas{width/scale, height/scale, scale}, true);
++        std::vector<uint8_t> base(width*height*4/(scale*scale), 0); // low RGBA image: 64*48*4
++        for (size_t i=0; i<base.size(); i+=4) { base[i]=5; base[i+1]=28; base[i+2]=248; base[i+3]=255; }
++        auto low = detail.Warped(); low->Bind(0);
++        glTexSubImage2D(GL_TEXTURE_2D,0,0,0,width/scale,height/scale,GL_RGBA,GL_UNSIGNED_BYTE,base.data());
++        std::vector<uint8_t> warp(width*height*4);
++        for (int y=0;y<height;++y) for(int x=0;x<width;++x) {
++            auto i=(y*width+x)*4; warp[i]=warp[i+1]=warp[i+2]=(x%2==0)?0:255; warp[i+3]=255;
++        }
++        auto native = std::make_shared<libprojectM::Renderer::Texture>("fixture", width, height, false);
++        native->Bind(0); glTexSubImage2D(GL_TEXTURE_2D,0,0,0,width,height,GL_RGBA,GL_UNSIGNED_BYTE,warp.data());
++        libprojectM::Renderer::Framebuffer output;
++        output.CreateColorAttachment(0,0); output.SetSize(width,height);
++        detail.Combine(native,alpha,output,0);
++        output.BindRead(0);
++        std::vector<uint8_t> result(width*height*4);
++        glReadPixels(0,0,width,height,GL_RGBA,GL_UNSIGNED_BYTE,result.data());
++        for(int y=0;y<height;y+=scale) for(int x=0;x<width;x+=scale) for(int c=0;c<3;++c) {
++            int sum=0; for(int j=0;j<scale;++j) for(int i=0;i<scale;++i) sum+=result[((y+j)*width+x+i)*4+c];
++            EXPECT_NEAR(sum/static_cast<double>(scale*scale),base[c],0.51) << "channel "<<c<<" alpha "<<alpha<<" scale "<<scale;
++        }
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, StandardInjectWithoutGeometryKeepsAuthoredState) {
++    using libprojectM::MilkdropPreset::FeedbackDetail;
++    FeedbackDetail detail(Width,Height,{Width/2,Height/2,2},false);
++    std::vector<uint8_t> base(Width*Height);
++    for(int y=0;y<Height/2;++y) for(int x=0;x<Width/2;++x) {
++        auto i=(y*Width/2+x)*4;
++        base[i]=static_cast<uint8_t>((x*13+y*7)%256); base[i+1]=base[i];base[i+2]=base[i];base[i+3]=255;
++    }
++    auto low=detail.Warped();low->Bind(0);
++    glTexSubImage2D(GL_TEXTURE_2D,0,0,0,Width/2,Height/2,GL_RGBA,GL_UNSIGNED_BYTE,base.data());
++    libprojectM::Renderer::Framebuffer output;output.CreateColorAttachment(0,0);output.SetSize(Width,Height);
++    detail.Combine(output.GetColorAttachmentTexture(0,0),0,output,0);
++    detail.Inject(output.GetColorAttachmentTexture(0,0));
++    detail.CanvasFramebuffer().BindRead(0);
++    std::vector<uint8_t> result(base.size());
++    glReadPixels(0,0,Width/2,Height/2,GL_RGBA,GL_UNSIGNED_BYTE,result.data());
++    EXPECT_EQ(result,base);
++    EXPECT_EQ(glGetError(),GL_NO_ERROR);
++}
++
++TEST_F(FeedbackDiffusionRenderTest, StandardMatchesPlainCanvasAcrossAnimatedMeshFrames) {
++    const auto preset = FeedbackPreset("GetPixel(uv).rgb") +
++        "per_pixel_1=dx=0.003*sin(frame*0.31+x*5);dy=0.002*cos(frame*0.47+y*3);\n";
++    std::vector<Image> authoredState,detailState;
++    auto renderSequence = [&](int width, int height, float alpha, int refWidth, int refHeight) {
++        TestProjectM engine;
++        engine.SetWindowSize(width,height); engine.SetMeshSize(48,32);
++        engine.SetPresetLocked(true); engine.SetHardCutEnabled(false); engine.SetEasterEgg(0);
++        engine.SetLineReferenceSize(refWidth,refHeight); engine.SetFeedbackDetail(alpha);
++        // Remove the composite mesh's output-sized half-texel offset to observe the feedback pixels.
++        auto observedPreset = preset;
++        const std::string comp = "tex2D(sampler_main, uv).rgb";
++        observedPreset.replace(observedPreset.find(comp), comp.size(),
++            "tex2D(sampler_main, uv-float2(" + std::to_string(0.5/width) + "," + std::to_string(0.5/height) + ")).rgb");
++        std::istringstream data(observedPreset); engine.LoadPresetData(data,false);
++        EXPECT_TRUE(engine.failure.empty())<<engine.failure;
++        std::vector<Image> frames;
++        for(int frame=0;frame<20;++frame) {
++            engine.RenderFrame(m_framebuffer);
++            Image px(width*height*3);
++            glBindFramebuffer(GL_READ_FRAMEBUFFER,m_framebuffer);
++            glReadPixels(0,0,width,height,GL_RGB,GL_UNSIGNED_BYTE,px.data());
++            frames.push_back(std::move(px));
++            auto feedback=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::Feedback(engine));
++            (alpha<0 ? authoredState : detailState).push_back(std::move(feedback));
++            EXPECT_EQ(engine.FeedbackDetailStatus(),alpha<0 ? -1 : 2);
++        }
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++        return frames;
++    };
++    const auto canvas = renderSequence(Width/2,Height/2,-1,0,0);
++    const auto native = renderSequence(Width,Height,0,Width/2,Height/2);
++    double maxStateMean=0;
++    for(size_t f=0;f<authoredState.size();++f) {
++        ASSERT_EQ(authoredState[f].size(),detailState[f].size());
++        double stateError=0;
++        for(size_t i=0;i<authoredState[f].size();++i) stateError+=std::abs(int(authoredState[f][i])-int(detailState[f][i]));
++        stateError/=authoredState[f].size();maxStateMean=std::max(maxStateMean,stateError);
++        EXPECT_LE(stateError,0.5)<<"persistent L frame "<<f;
++    }
++    std::cout<<"Standard persistent L maximum MAE bytes: "<<maxStateMean<<"\n";
++    double maxMean=0;
++    for(size_t f=0;f<native.size();++f) {
++        double error=0;
++        for(int y=0;y<Height;++y) for(int x=0;x<Width;++x) for(int c=0;c<3;++c) {
++            const float qx=(x+0.5f)/2-0.5f,qy=(y+0.5f)/2-0.5f;
++            const int bx=static_cast<int>(std::floor(qx)),by=static_cast<int>(std::floor(qy));
++            const float fx=qx-bx,fy=qy-by;
++            auto sample=[&](int sx,int sy) { sx=std::clamp(sx,0,Width/2-1);sy=std::clamp(sy,0,Height/2-1);return canvas[f][(sy*Width/2+sx)*3+c]; };
++            const float expected=(1-fy)*((1-fx)*sample(bx,by)+fx*sample(bx+1,by))+fy*((1-fx)*sample(bx,by+1)+fx*sample(bx+1,by+1));
++            error+=std::abs(native[f][(y*Width+x)*3+c]-expected);
++        }
++        const double mean=error/(Width*Height*3);maxMean=std::max(maxMean,mean);
++        EXPECT_LT(mean,0.6)<<"frame "<<f;
++    }
++    std::cout << "Standard canvas reconstruction maximum MAE bytes: "<<maxMean<<"\n";
++}
++
++TEST_F(FeedbackDiffusionRenderTest, DetailRuntimeModesResizeFallbackAndTransition) {
++    TestProjectM engine;
++    engine.SetWindowSize(Width,Height);engine.SetLineReferenceSize(Width/2,Height/2);
++    engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++    auto load=[&](bool smooth) { std::istringstream data(FeedbackPreset("GetPixel(uv).rgb"));engine.LoadPresetData(data,smooth); EXPECT_TRUE(engine.failure.empty())<<engine.failure; };
++    load(false);engine.RenderFrame(m_framebuffer);EXPECT_EQ(engine.FeedbackDetailStatus(),-1);
++    for(float alpha : {0.f,0.5f,1.f,0.f,-1.f,1.f}) {
++        engine.SetFeedbackDetail(alpha);engine.RenderFrame(m_framebuffer);
++        EXPECT_EQ(engine.FeedbackDetailStatus(),alpha<0?-1:2);EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    }
++    load(true);engine.RenderFrame(m_framebuffer);EXPECT_EQ(engine.FeedbackDetailStatus(),2);
++    engine.SetWindowSize(126,94);engine.RenderFrame(m_framebuffer);
++    EXPECT_EQ(engine.FeedbackDetailStatus(),2);EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    engine.SetWindowSize(127,95);engine.RenderFrame(m_framebuffer);
++    EXPECT_EQ(engine.FeedbackDetailStatus(),-2);EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    engine.SetWindowSize(Width,Height);engine.RenderFrame(m_framebuffer);
++    EXPECT_EQ(engine.FeedbackDetailStatus(),2);EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    engine.SetFeedbackDetail(std::numeric_limits<float>::quiet_NaN());engine.RenderFrame(m_framebuffer);
++    EXPECT_EQ(engine.FeedbackDetailStatus(),-1);EXPECT_EQ(glGetError(),GL_NO_ERROR);
++}
++
++TEST_F(FeedbackDiffusionRenderTest, DetailPresetResourcesAreDistinctAndReleased) {
++    using libprojectM::MilkdropPreset::FeedbackDetail;
++    GLuint first,second;
++    {
++        FeedbackDetail a(Width,Height,{Width/2,Height/2,2},true);
++        FeedbackDetail b(Width,Height,{Width/2,Height/2,2},true);
++        first=a.Previous()->TextureID();second=b.Previous()->TextureID();
++        EXPECT_NE(first,second);EXPECT_TRUE(glIsTexture(first));EXPECT_TRUE(glIsTexture(second));
++    }
++    EXPECT_FALSE(glIsTexture(first));EXPECT_FALSE(glIsTexture(second));
++    EXPECT_EQ(glGetError(),GL_NO_ERROR);
++}
++
++TEST_F(FeedbackDiffusionRenderTest, DetailSecondWarpDoesNotAdvanceRandomOrRepeatEquations) {
++    auto render = [&](float alpha) {
++        TestProjectM engine;engine.SetWindowSize(Width,Height);
++        engine.SetLineReferenceSize(Width/2,Height/2);engine.SetFeedbackDetail(alpha);
++        engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++        // ProjectM's constructor seeds libc RNG from wall time. Freeze it after construction.
++        std::srand(1234);
++        std::istringstream data(FeedbackPreset("GetPixel(uv).rgb * rand_frame.x") +
++            "per_pixel_1=dx=0.002*rand(5);\n");
++        engine.LoadPresetData(data,false);EXPECT_TRUE(engine.failure.empty())<<engine.failure;
++        for(int f=0;f<5;++f) engine.RenderFrame(m_framebuffer);
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++        return std::rand();
++    };
++    const int standard=render(0.f);
++    EXPECT_EQ(render(0.5f),standard);
++    EXPECT_EQ(render(1.f),standard);
++    EXPECT_EQ(render(-1.f),standard);
++}
++
++TEST_F(FeedbackDiffusionRenderTest, DetailInitialNativeWarpCoversFullViewportForBlurPresets) {
++    for(float alpha : {0.5f,1.f}) {
++        TestProjectM engine;engine.SetWindowSize(Width,Height);
++        engine.SetLineReferenceSize(Width/2,Height/2);engine.SetFeedbackDetail(alpha);
++        engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++        std::istringstream data(Preset("ret=float3(0.2,0.4,0.6)+frame*0.02+GetBlur1(uv).rgb*0.000001;"));
++        engine.LoadPresetData(data,false);ASSERT_TRUE(engine.failure.empty())<<engine.failure;
++        auto check=[&]() {
++            engine.RenderFrame(m_framebuffer);
++            const auto reduced=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::ReducedWarp(engine));
++            int maximumError=0;
++            const int frame=libprojectM::FeedbackDetailTestAccess::Frame(engine);
++            for(size_t i=0;i<reduced.size();++i) maximumError=std::max(maximumError,std::abs(int(reduced[i])-int(std::lround(51*(i%3+1)+frame*5.1))));
++            EXPECT_LE(maximumError,1)<<"alpha "<<alpha;
++            EXPECT_EQ(glGetError(),GL_NO_ERROR);
++        };
++        check(); // initial allocation and first native warp
++        engine.SetFeedbackDetail(0);engine.RenderFrame(m_framebuffer);
++        engine.SetFeedbackDetail(alpha);check(); // gain-class replacement
++        engine.SetWindowSize(126,94);check(); // resize and rebuild from scaled feedback
++        engine.SetFeedbackDetail(-1);engine.RenderFrame(m_framebuffer);
++        engine.SetFeedbackDetail(alpha);check(); // re-enable
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, DetailFirstNativeFlipPreservesUniformFeedbackAfterEnable) {
++    for(float alpha : {0.5f,1.f}) {
++        TestProjectM engine;engine.SetWindowSize(Width,Height);
++        engine.SetLineReferenceSize(Width/2,Height/2);
++        engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++        std::istringstream data(Preset("if(frame<3) ret=float3(0.2,0.4,0.6);else ret=GetPixel(uv).rgb+GetBlur1(uv).rgb*0.000001;"));
++        engine.LoadPresetData(data,false);ASSERT_TRUE(engine.failure.empty())<<engine.failure;
++        for(int f=0;f<3;++f) engine.RenderFrame(m_framebuffer);
++        engine.SetFeedbackDetail(alpha);engine.RenderFrame(m_framebuffer);
++        const auto reduced=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::ReducedWarp(engine));
++        int maximumError=0;
++        for(size_t i=0;i<reduced.size();++i) maximumError=std::max(maximumError,std::abs(int(reduced[i])-int(51*(i%3+1))));
++        EXPECT_LE(maximumError,1)<<"alpha "<<alpha;
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, DetailOffWaitsForNativeMotionUVBeforeDrawingVectors) {
++    TestProjectM engine;engine.SetWindowSize(Width,Height);
++    engine.SetLineReferenceSize(Width/2,Height/2);engine.SetFeedbackDetail(0);
++    engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++    std::istringstream data(Preset("ret=GetPixel(uv).rgb;")+
++        "mv_a=1\nmv_x=8\nmv_y=6\nmv_l=4\nmv_r=1\nmv_g=0\nmv_b=0\n");
++    engine.LoadPresetData(data,false);ASSERT_TRUE(engine.failure.empty())<<engine.failure;
++    for(int f=0;f<3;++f) engine.RenderFrame(m_framebuffer);
++    libprojectM::FeedbackDetailTestAccess::ClearNativeFeedback(engine);
++    engine.SetFeedbackDetail(-1);engine.RenderFrame(m_framebuffer);
++    auto feedback=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::Feedback(engine));
++    EXPECT_EQ(*std::max_element(feedback.begin(),feedback.end()),0) << "new native UV map must be populated before vectors can read it";
++    engine.RenderFrame(m_framebuffer);
++    feedback=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::Feedback(engine));
++    EXPECT_GT(*std::max_element(feedback.begin(),feedback.end()),100) << "vectors must resume once the native warp writes UV";
++    EXPECT_EQ(glGetError(),GL_NO_ERROR);
++}

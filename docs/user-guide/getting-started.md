@@ -124,10 +124,8 @@ Start with these defaults:
 | Auto change | On | Turn Off to stay on the current preset. |
 | Preset duration | 30 s | Increase it for longer viewing of each preset. |
 | Transition | 7 s on most devices | Shorten it for faster changes. |
-| Resolution | Auto | Keep Auto while checking performance; it adapts to the device. |
 | Frame rate | Half the TV's refresh rate, usually 30 fps | A higher target needs more processing time and may lower Auto resolution. |
 | Advanced → Transitions | Auto | Keep Auto so blends can adapt to available performance. |
-| Advanced → Memory limit | On | Keep it On to help protect the music player from memory pressure. |
 | Advanced → Skip slow / blank presets | On | Leave On to move past presets that fail on this TV. |
 
 If playback stutters, lower **Advanced → Detail** first. The [settings reference](settings.md) explains every row, and [troubleshooting](troubleshooting.md) covers missing audio, titles and slow rendering.
@@ -139,3 +137,5 @@ If playback stutters, lower **Advanced → Detail** first. The [settings referen
 When Android asks whether ProjectM TV may install unknown apps, enable that permission for ProjectM TV, reopen it, and select **Install** again. This is separate from notification access and is only needed to install an app-downloaded update. You can also download and install the latest APK using Downloader or a computer as described above.
 
 Audio is processed in memory. The app makes no network connections while its auto-update setting is off.
+
+Resolution is always automatic up to the detected panel size, using target FPS and live memory headroom. Native trails defaults to Standard; its saved level remains available while resolution changes. The former manual Resolution and Memory limit controls are removed.

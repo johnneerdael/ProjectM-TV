@@ -2,9 +2,12 @@ cmake_minimum_required(VERSION 3.22.1)
 
 project(projectmtv)
 
-set(PROJECTMTV_RENDERING_POLICY "native" CACHE STRING "Core rendering policy: native or capped")
-set_property(CACHE PROJECTMTV_RENDERING_POLICY PROPERTY STRINGS native capped)
-if(NOT PROJECTMTV_RENDERING_POLICY STREQUAL "native" AND NOT PROJECTMTV_RENDERING_POLICY STREQUAL "capped")
+set(PROJECTMTV_RENDERING_POLICY "native" CACHE STRING "Core rendering policy: native")
+set_property(CACHE PROJECTMTV_RENDERING_POLICY PROPERTY STRINGS native)
+if(PROJECTMTV_RENDERING_POLICY STREQUAL "capped")
+    message(FATAL_ERROR "The capped core artifact is retired. Configure without PROJECTMTV_RENDERING_POLICY or use native.")
+endif()
+if(NOT PROJECTMTV_RENDERING_POLICY STREQUAL "native")
     message(FATAL_ERROR "Unknown PROJECTMTV_RENDERING_POLICY: ${PROJECTMTV_RENDERING_POLICY}")
 endif()
 
@@ -105,11 +108,6 @@ set(CMAKE_PROJECT_VERSION_PATCH ${CMAKE_MATCH_3})
 add_subdirectory(${PROJECTM_SOURCE} projectm EXCLUDE_FROM_ALL)
 
 add_library(projectmtv SHARED native-lib.cpp snapshot_fade.cpp preset_prewarm.cpp)
-
-if(PROJECTMTV_RENDERING_POLICY STREQUAL "capped")
-    target_compile_definitions(projectmtv PRIVATE PROJECTMTV_RENDERING_POLICY_CAPPED)
-    target_compile_definitions(MilkdropPreset PRIVATE PROJECTMTV_DISABLE_FEEDBACK_DIFFUSION)
-endif()
 
 # Always optimise the JNI layer, also in debug builds that are sideloaded onto TVs.
 target_compile_options(projectmtv PRIVATE -O2 -Wall -Wextra -Wno-unused-parameter)

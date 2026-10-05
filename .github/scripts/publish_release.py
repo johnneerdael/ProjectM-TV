@@ -50,18 +50,13 @@ def publish(repo, version, sha, notes, assets_dir, api=github_api, command=run):
     body = notes.read_text(encoding="utf-8")
     if not body.startswith(f"# ProjectM TV {version}\n"):
         raise ValueError("release notes do not match the built version")
-    # Canonical core names remain the capped policy used by existing integrations and Milkbeat.
+    # The single Native core uses the canonical integration filenames.
     pairs = [(f"projectM-TV-{version}.apk", "projectM-TV.apk"),
-             (f"projectM-TV-core-{version}.aar", "projectM-TV-core.aar"),
-             (f"projectM-TV-core-native-{version}.aar", "projectM-TV-core-native.aar")]
+             (f"projectM-TV-core-{version}.aar", "projectM-TV-core.aar")]
+    historical_native_pair = (f"projectM-TV-core-native-{version}.aar", "projectM-TV-core-native.aar")
     mapping = f"projectM-TV-{version}-mapping.txt"
-    legacy_names = [name for pair in pairs[:2] for name in pair] + [mapping]
-    native_names = list(pairs[2])
     names = [name for pair in pairs for name in pair] + [mapping]
-    digests = {name: hashlib.sha256((assets_dir / name).read_bytes()).hexdigest() for name in legacy_names}
-    for name in native_names:
-        if (assets_dir / name).is_file():
-            digests[name] = hashlib.sha256((assets_dir / name).read_bytes()).hexdigest()
+    digests = {name: hashlib.sha256((assets_dir / name).read_bytes()).hexdigest() for name in names}
     for versioned, alias in pairs:
         if versioned in digests and alias in digests and digests[versioned] != digests[alias]:
             raise ValueError(f"latest asset alias differs from its versioned artifact: {alias}")
@@ -76,24 +71,22 @@ def publish(repo, version, sha, notes, assets_dir, api=github_api, command=run):
             uploaded = set(assets)
             # Older releases may not expose digest metadata. When available, check remote
             # aliases too without replacing any published asset.
-            for versioned, alias in pairs:
+            for versioned, alias in [*pairs, historical_native_pair]:
                 first = assets.get(versioned, {}).get("digest")
                 second = assets.get(alias, {}).get("digest")
                 if first and second and first != second:
                     raise ValueError(f"published asset alias differs from its versioned artifact: {alias}")
-            if set(legacy_names + ["checksums.txt"]) <= uploaded and not set(native_names) & uploaded:
-                # Do not upgrade an already-complete legacy release to a new artifact schema.
-                return {"url": existing["html_url"], "created": False}
-            if not set(names + ["checksums.txt"]) <= uploaded:
+            required = set(names + ["checksums.txt"])
+            if set(historical_native_pair) & uploaded:
+                # Complete historical dual-policy releases are immutable too. A partial
+                # retired pair must never be mistaken for a complete single-core release.
+                required.update(historical_native_pair)
+            if not required <= uploaded:
                 raise ValueError("published release is incomplete; refusing to replace published artifacts")
-            for name in native_names:
-                if name not in digests:
-                    raise FileNotFoundError(assets_dir / name)
             return {"url": existing["html_url"], "created": False}
-    for name in native_names:
-        if name not in digests:
-            raise FileNotFoundError(assets_dir / name)
-    # Include versioned and stable aliases of both rendering policies, plus the R8 mapping.
+        if set(historical_native_pair) & {asset["name"] for asset in existing.get("assets", [])}:
+            raise ValueError("draft contains retired core-native assets; reconcile the draft before publishing the single-core schema")
+    # Include versioned and stable aliases of the APK/core, plus the R8 mapping.
     checksums = assets_dir / "checksums.txt"
     checksums.write_text("".join(f"{digests[name]}  {name}\n" for name in names), encoding="utf-8")
     names.append(checksums.name)

@@ -944,6 +944,7 @@ struct Inputs {
     std::atomic<int> blendLevelStart{kDefaultBlendLevel};
     std::atomic<bool> blendReset{true};  // start Auto's blend scaling over at blendLevelStart
 
+    std::atomic<int> nativeTrails{0}; // Standard by default; automatic resolution gates activation above 1330p
     std::atomic<int> presetDuration{30};
     std::atomic<int> softCutDuration{7};
     std::atomic<bool> autoChange{true};
@@ -967,15 +968,33 @@ struct Inputs {
 struct Published {
     std::mutex mutex;
     std::string currentPreset;
+    int nativeTrailsLevel{-1};
+    int nativeTrailsScale{-1};
+    int nativeTrailsCanvasWidth{0};
+    int nativeTrailsCanvasHeight{0};
+    int nativeTrailsRenderHeight{0};
+    jlong renderBudgetCompletedGeneration{-1};
+    jlong renderedFrameSerial{0};
     std::atomic<int> changeCounter{0};
     std::atomic<float> lastTransitionFps{0.f};
     std::atomic<int> transitionCounter{0};
     std::atomic<int> blendScalePercent{0};  // resolution of Auto's blends, 0 before the first one
 };
 
+struct RenderBudgetRequest {
+    bool managed{false};
+    bool awaitingReview{false};
+    int width{0}, height{0};
+    int trails{0}, transitionSeconds{7};
+    jlong generation{0};
+};
+std::mutex g_renderBudgetMutex;
+RenderBudgetRequest g_renderBudget;
+
 // GL-thread-only state.
 struct Engine {
     projectm_handle pm = nullptr;
+    int appliedNativeTrails{-1};
     int width = 0;
     int height = 0;
     std::string current;         // preset currently shown
@@ -1075,8 +1094,31 @@ void OnInitializationWarning(const char*, const char* message, void*) {
     LOGW("Preset code left out (%s): %s", g_engine.loading.c_str(), message ? message : "");
 }
 
-void ApplySettings() {
+RenderBudgetRequest RenderBudgetSnapshot() {
+    std::lock_guard<std::mutex> lock(g_renderBudgetMutex);
+    return g_renderBudget;
+}
+
+bool RenderBudgetReady(const RenderBudgetRequest& request) {
+    return !request.managed || (!request.awaitingReview &&
+           request.width == g_engine.width && request.height == g_engine.height);
+}
+
+bool ApplySettings() {
+    const auto budget = RenderBudgetSnapshot();
+    if (!RenderBudgetReady(budget)) return false;
+    if (budget.managed) {
+        // Install dimensions-dependent allocation settings only after the GL surface acknowledges them.
+        g_inputs.nativeTrails = budget.trails;
+        g_inputs.softCutDuration = budget.transitionSeconds;
+    }
     projectm_handle pm = g_engine.pm;
+    const int trails = g_inputs.nativeTrails.load();
+    const bool trailsEnabled = projectmtv::kNativeRenderingEnabled && trails >= 0 &&
+                               g_engine.height > projectmtv::kCappedRenderHeight;
+    projectm_opengl_set_line_reference_size(pm, trailsEnabled ? 1280 : 1024, trailsEnabled ? 720 : 768);
+    g_engine.appliedNativeTrails = trailsEnabled ? trails : -1;
+    projectm_opengl_set_feedback_detail(pm, trailsEnabled ? trails * 0.5f : -1.0f);
     projectm_set_preset_duration(pm, g_inputs.presetDuration.load());
     projectm_set_soft_cut_duration(pm, g_inputs.softCutDuration.load());
     projectm_set_preset_locked(pm, !g_inputs.autoChange.load());
@@ -1089,6 +1131,7 @@ void ApplySettings() {
         g_engine.appliedMeshWidth = meshWidth;
         g_engine.appliedMeshHeight = meshHeight;
     }
+    return true;
 }
 
 void Publish(const std::string& name) {
@@ -1605,6 +1648,14 @@ void TrackTransition(double now, double frameCpuSeconds) {
 
 // contextAlive: the EGL context that owns our GL objects is still current (else just forget them).
 void DestroyEngineLocked(bool contextAlive) {
+    {
+        std::lock_guard<std::mutex> lock(g_renderBudgetMutex);
+        // The managed request belongs to the destroyed renderer/context. Legacy renderers
+        // must not inherit its guard or tuple; a new managed renderer requests fresh review.
+        const jlong generation = g_renderBudget.generation + 1;
+        g_renderBudget = {};
+        g_renderBudget.generation = generation; // Reject asynchronous callbacks from the old owner.
+    }
     g_prewarmer.Stop();
     ReleaseScaledTarget(contextAlive);
     // The presets destroyed below may still add their textures to the pool: empty it afterwards.
@@ -1641,6 +1692,13 @@ void DestroyEngineLocked(bool contextAlive) {
     g_engine.lastFrameDirect = false;
     g_engine.blankSwitchPending = false;
     g_engine.detector.Disarm();
+    g_engine.appliedNativeTrails = -1;
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        g_published.nativeTrailsLevel = -1;
+        g_published.nativeTrailsScale = -1;
+        g_published.renderBudgetCompletedGeneration = -1;
+    }
 }
 
 }  // namespace
@@ -1697,6 +1755,7 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceChanged)(JNIEnv*, jclass, jint width, jin
         // The presets' frames are scaled to the new size (projectM patch 0003): no restart.
         g_engine.width = width;
         g_engine.height = height;
+        g_inputs.settingsDirty = true;
         ApplyRenderScale(g_engine.transitionScale < 1.f && NowSeconds() < g_engine.scaledUntil
                              ? g_engine.transitionScale : 1.f);
         LOGI("Render size %dx%d", width, height);
@@ -1710,7 +1769,12 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     double now = NowSeconds();
     double cpuStart = ThreadCpuSeconds();
 
-    if (g_inputs.settingsDirty.exchange(false)) ApplySettings();
+    const auto frameBudget = RenderBudgetSnapshot();
+    if (!RenderBudgetReady(frameBudget)) return;
+    if (g_inputs.settingsDirty.exchange(false) && !ApplySettings()) {
+        g_inputs.settingsDirty = true;
+        return;
+    }
     if (g_texturePoolFlush.exchange(false) && g_engine.texturePoolLimit > 0) {
         projectm_opengl_set_texture_pool_limit(0);
         g_engine.texturePoolLimit = 0;
@@ -1795,6 +1859,19 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     }
 
     // Reads the preset's own output, so it runs before the transition overlay is drawn.
+    {
+        const int scale = projectm_opengl_get_feedback_detail_status(g_engine.pm);
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        if (!g_engine.current.empty()) {
+            ++g_published.renderedFrameSerial;
+            if (frameBudget.managed) g_published.renderBudgetCompletedGeneration = frameBudget.generation;
+        }
+        g_published.nativeTrailsLevel = g_engine.appliedNativeTrails;
+        g_published.nativeTrailsRenderHeight = g_engine.renderHeight;
+        g_published.nativeTrailsScale = scale;
+        g_published.nativeTrailsCanvasWidth = scale >= 2 ? g_engine.renderWidth / scale : 0;
+        g_published.nativeTrailsCanvasHeight = scale >= 2 ? g_engine.renderHeight / scale : 0;
+    }
     const char* blank = g_engine.detector.Update(now, g_engine.width, g_engine.height, AudioPresent(now));
     if (g_engine.detector.TakeVisible()) g_engine.blankInARow = 0;
     if (blank && g_inputs.blankDetection.load() && ++g_engine.blankInARow > kMaxBlankInARow) {
@@ -1862,6 +1939,66 @@ JNIEXPORT void JNICALL JNI_FN(previousPreset)(JNIEnv*, jclass, jboolean hardCut)
 JNIEXPORT void JNICALL JNI_FN(randomPreset)(JNIEnv*, jclass, jboolean hardCut) {
     g_inputs.commandHardCut = hardCut;
     g_inputs.command = kRandom;
+}
+
+JNIEXPORT void JNICALL JNI_FN(configureRenderBudget)(JNIEnv*, jclass, jint width, jint height,
+                                                      jint trails, jint transitionSeconds, jlong generation) {
+    if (width <= 0 || height <= 0 || trails < 0 || trails > 2 || transitionSeconds < 0) return;
+    {
+        std::lock_guard<std::mutex> lock(g_renderBudgetMutex);
+        if (generation != g_renderBudget.generation) return;
+        g_renderBudget = {true, false, static_cast<int>(width), static_cast<int>(height),
+                          static_cast<int>(trails), static_cast<int>(transitionSeconds), generation};
+    }
+    g_inputs.settingsDirty = true;
+}
+
+JNIEXPORT jlong JNICALL JNI_FN(requireRenderBudget)(JNIEnv*, jclass) {
+    jlong generation;
+    {
+        std::lock_guard<std::mutex> lock(g_renderBudgetMutex);
+        g_renderBudget.managed = true;
+        g_renderBudget.awaitingReview = true;
+        generation = ++g_renderBudget.generation;
+    }
+    g_inputs.settingsDirty = true;
+    return generation;
+}
+
+JNIEXPORT jlong JNICALL JNI_FN(getCompletedRenderBudgetGeneration)(JNIEnv*, jclass) {
+    std::lock_guard<std::mutex> lock(g_published.mutex);
+    return g_published.renderBudgetCompletedGeneration;
+}
+
+JNIEXPORT jlong JNICALL JNI_FN(getRenderedFrameSerial)(JNIEnv*, jclass) {
+    std::lock_guard<std::mutex> lock(g_published.mutex);
+    return g_published.renderedFrameSerial;
+}
+
+JNIEXPORT void JNICALL JNI_FN(setNativeTrails)(JNIEnv*, jclass, jint level) {
+    g_inputs.nativeTrails = level >= 0 && level <= 2 ? static_cast<int>(level) : -1;
+    g_inputs.settingsDirty = true;
+}
+
+JNIEXPORT jstring JNICALL JNI_FN(getNativeTrailsStatus)(JNIEnv* env, jclass) {
+    std::lock_guard<std::mutex> lock(g_published.mutex);
+    std::string status = "Off";
+    if (g_published.nativeTrailsLevel >= 0) {
+        static const char* levels[] = {"Standard", "Medium", "High"};
+        status = levels[g_published.nativeTrailsLevel];
+        if (g_published.nativeTrailsScale >= 2)
+            status += " · " + std::to_string(g_published.nativeTrailsCanvasWidth) + "×" +
+                      std::to_string(g_published.nativeTrailsCanvasHeight) + " canvas";
+        else status += g_published.nativeTrailsScale == -3 ? " · shader/resource fallback" : " · canvas fallback";
+    } else {
+        const int requested = g_inputs.nativeTrails.load();
+        if (requested >= 0 && requested <= 2) {
+            static const char* levels[] = {"Standard", "Medium", "High"};
+            status = std::string(levels[requested]) + " · inactive (render " +
+                     std::to_string(g_published.nativeTrailsRenderHeight) + "p)";
+        }
+    }
+    return env->NewStringUTF(status.c_str());
 }
 
 JNIEXPORT void JNICALL JNI_FN(setPresetDuration)(JNIEnv*, jclass, jint seconds) {

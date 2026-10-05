@@ -198,17 +198,16 @@ Co-Authored-By: Agent <agent@example.org>
         for url in (
             "releases/latest/download/projectM-TV.apk",
             "releases/latest/download/projectM-TV-core.aar",
-            "releases/latest/download/projectM-TV-core-native.aar",
             "releases/download/v2.1.5/projectM-TV-2.1.5.apk",
             "releases/download/v2.1.5/projectM-TV-core-2.1.5.aar",
-            "releases/download/v2.1.5/projectM-TV-core-native-2.1.5.aar",
             "releases/download/v2.1.5/checksums.txt",
             "https://johnneerdael.github.io/ProjectM-TV/",
             "compare/v2.1.4...v2.1.5",
         ):
             self.assertIn(url, result)
         self.assertNotIn("4821216", result)
-        self.assertIn("capped", result.lower())
+        self.assertNotIn("capped", result.lower())
+        self.assertNotIn("core-native", result)
         self.assertIn("Native core AAR", result)
 
     def test_missing_canonical_downloader_code_fails_instead_of_stale_fallback(self):

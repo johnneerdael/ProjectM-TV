@@ -1,8 +1,8 @@
 name: Android CI/CD
 
-# Every push / pull request: native tests + a release APK and capped/Native core AARs.
+# Every push / pull request: native tests + a release APK and Native core AAR.
 # Every successfully tested merge to main publishes the next version with PR-sourced notes,
-# the APK/both core AARs, current install links, checksums, and a capped Milkbeat core update.
+# the APK/core AAR, current install links, checksums, and a Milkbeat core update.
 
 on:
   push:
@@ -57,7 +57,6 @@ jobs:
       release: ${{ steps.version.outputs.release }}
       apk_name: ${{ steps.apk.outputs.name }}
       aar_name: ${{ steps.aar.outputs.name }}
-      native_aar_name: ${{ steps.native_aar.outputs.name }}
       previous_tag: ${{ steps.version.outputs.previous_tag }}
     steps:
       - uses: actions/checkout@v4
@@ -128,34 +127,17 @@ jobs:
           echo "name=${NAME}" >> "$GITHUB_OUTPUT"
           ls -lh dist dist-mapping
 
-      - name: Name native core AAR
-        id: native_aar
-        run: |
-          # Preserve the Native core embedded by the APK before the capped build replaces it.
-          SHORT_SHA=$(git rev-parse --short HEAD)
-          if [ "${{ steps.version.outputs.release }}" = "true" ]; then
-            NAME="projectM-TV-core-native-${{ steps.version.outputs.version }}.aar"
-          else
-            NAME="projectM-TV-core-native-${{ steps.version.outputs.version }}-ci.${GITHUB_RUN_NUMBER}-${SHORT_SHA}.aar"
-          fi
-          mkdir -p dist-aar
-          cp core/build/outputs/aar/core-release.aar "dist-aar/${NAME}"
-          echo "name=${NAME}" >> "$GITHUB_OUTPUT"
-          ls -lh dist-aar
-
-      - name: Test and build capped core AAR
-        run: ./gradlew :core:testReleaseUnitTest :core:assembleRelease -PprojectmCoreRenderingPolicy=capped --no-daemon --stacktrace
-
-      - name: Name capped core AAR
+      - name: Name core AAR
         id: aar
         run: |
-          # Keep canonical filenames capped for existing clients and Milkbeat.
+          # Stage the same Native core embedded by the APK under canonical integration names.
           SHORT_SHA=$(git rev-parse --short HEAD)
           if [ "${{ steps.version.outputs.release }}" = "true" ]; then
             NAME="projectM-TV-core-${{ steps.version.outputs.version }}.aar"
           else
             NAME="projectM-TV-core-${{ steps.version.outputs.version }}-ci.${GITHUB_RUN_NUMBER}-${SHORT_SHA}.aar"
           fi
+          mkdir -p dist-aar
           cp core/build/outputs/aar/core-release.aar "dist-aar/${NAME}"
           echo "name=${NAME}" >> "$GITHUB_OUTPUT"
           ls -lh dist-aar
@@ -225,11 +207,9 @@ jobs:
           VERSION: ${{ needs.apk.outputs.version }}
           APK_NAME: ${{ needs.apk.outputs.apk_name }}
           AAR_NAME: ${{ needs.apk.outputs.aar_name }}
-          NATIVE_AAR_NAME: ${{ needs.apk.outputs.native_aar_name }}
         run: |
           cp "dist/$APK_NAME" dist/projectM-TV.apk
           cp "dist/$AAR_NAME" dist/projectM-TV-core.aar
-          cp "dist/$NATIVE_AAR_NAME" dist/projectM-TV-core-native.aar
           python3 .github/scripts/publish_release.py publish --repo "$GITHUB_REPOSITORY" \
             --version "$VERSION" --sha "$GITHUB_SHA" --notes notes.md --assets-dir dist
 
