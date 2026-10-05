@@ -23,9 +23,9 @@ def write_json(path,data):
 def verify_owner(path,serial):
     owner=json.loads(Path(path).read_text())
     if owner['serial']!=serial or not serial.startswith('emulator-'):raise ValueError('Owned emulator serial required')
-    command=subprocess.check_output(['ps','-p',str(owner['pid']),'-o','command='],text=True)
+    command=subprocess.check_output(['ps','-p',str(owner['pid']),'-o','command='],text=True,timeout=10)
     if owner['avd'] not in command or '-port '+serial.split('-')[1] not in command:raise ValueError('Emulator ownership differs')
-    avd=subprocess.check_output(['adb','-s',serial,'emu','avd','name'],text=True).splitlines()[0]
+    avd=subprocess.check_output(['adb','-s',serial,'emu','avd','name'],text=True,timeout=15).splitlines()[0]
     if avd!=owner['avd']:raise ValueError('AVD identity differs')
     return owner
 
@@ -34,7 +34,7 @@ def measure(case,args,identity,model):
     started=time.monotonic();key=case['sha256'];overlay=args.output/'overlays'/(key+'.apk')
     write_selection_overlay(overlay,case['preset'])
     remote_overlay=args.remote+'/selection-'+key+'.apk'
-    subprocess.run(['adb','-s',args.device,'push',str(overlay),remote_overlay],check=True,capture_output=True)
+    subprocess.run(['adb','-s',args.device,'push',str(overlay),remote_overlay],check=True,capture_output=True,timeout=15)
     prefix=args.remote+'/result-'+uuid.uuid4().hex
     command=['env','CLASSPATH='+args.remote+'/classes.dex','LD_PRELOAD='+args.remote+'/libbackendclock.so',
              '/system/bin/app_process','-Djava.library.path='+args.remote,'/system/bin',
@@ -80,7 +80,7 @@ def measure(case,args,identity,model):
                 previous=values.copy()
         if process.wait(timeout=20)!=0:raise RuntimeError('Core runner failed')
         metadata_path=args.output/'metadata'/(key+'.json')
-        subprocess.run(['adb','-s',args.device,'pull',prefix+'.json',str(metadata_path)],check=True,capture_output=True)
+        subprocess.run(['adb','-s',args.device,'pull',prefix+'.json',str(metadata_path)],check=True,capture_output=True,timeout=15)
         metadata=json.loads(metadata_path.read_text())
         if metadata['preset']!=case['preset'] or metadata['frames']!=FRAMES:raise ValueError('Selected preset/schedule differs')
         report=stream.report();motion=report['motion'];duration=(FRAMES-WARMUP)/FPS
@@ -172,10 +172,15 @@ def main():
     if args.only_preset:
         selected=[c for c in cases if c['preset']==args.only_preset]
         if len(selected)!=1:raise ValueError('Exact --only-preset name required')
-    subprocess.run(['adb','-s',args.device,'shell','-T','-n','mkdir -p '+shlex.quote(args.remote+'/work')],check=True,capture_output=True)
+    if args.retry_unscored:
+        unresolved=[c for c in selected if records.get(c['sha256'],{}).get('status')=='unscored']
+        if args.only_preset and len(unresolved)!=1 or not unresolved:
+            raise ValueError('Retry must select an existing unresolved preset')
+        selected=unresolved
+    subprocess.run(['adb','-s',args.device,'shell','-T','-n','mkdir -p '+shlex.quote(args.remote+'/work')],check=True,capture_output=True,timeout=15)
     for name,path in runtime.items():
-        subprocess.run(['adb','-s',args.device,'push',str(path),args.remote+'/'+name],check=True,capture_output=True)
-        got=subprocess.check_output(['adb','-s',args.device,'shell','-T','-n','sha256sum '+shlex.quote(args.remote+'/'+name)],text=True).split()[0]
+        subprocess.run(['adb','-s',args.device,'push',str(path),args.remote+'/'+name],check=True,capture_output=True,timeout=180)
+        got=subprocess.check_output(['adb','-s',args.device,'shell','-T','-n','sha256sum '+shlex.quote(args.remote+'/'+name)],text=True,timeout=15).split()[0]
         if got!=facts['runtime_sha256'][name]:raise ValueError('Deployed runtime differs')
     started=time.monotonic()
     def progress():

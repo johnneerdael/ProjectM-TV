@@ -215,3 +215,12 @@ python tools/milk-analyzer/fit_activity_model.py
 The timeout callback always kills its local streaming child in a `finally` block,
 even if remote ADB cleanup fails. Its diagnostic errors are retained and the timer
 is joined before the outcome is saved. Timeout still halts the batch.
+
+
+Retries now select only existing unresolved records. Naming an unmeasured or
+already scored preset with `--retry-unscored` is rejected; without `--only-preset`,
+the retry invocation repairs only selected unresolved cases. Run the normal command
+again after those failures are resolved to continue unmeasured cases. The required
+metadata pull has a 15-second timeout and records an unscored outcome if it fails,
+even after the renderer has exited. Ownership/remote setup and overlay transfers
+are bounded separately; runtime artifact pushes have a 180-second limit.

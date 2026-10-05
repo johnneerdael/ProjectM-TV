@@ -83,3 +83,28 @@ def test_runner_timeout_kills_local_child_even_when_remote_kill_fails(tmp_path,m
     assert process.killed
     assert row['status']=='unscored' and row['reason']=='Runner timeout'
     assert any(e['operation']=='timeout remote kill' for e in row['diagnostic_errors'])
+
+
+def test_required_metadata_pull_has_timeout_and_records_failure(tmp_path,monkeypatch):
+    for folder in ('overlays','logs','metadata','results'):(tmp_path/folder).mkdir()
+    case={'preset':'control.milk','sha256':'a'*64}
+    args=SimpleNamespace(output=tmp_path,remote='/task-owned',device='emulator-test')
+    class Process:
+        stdout=io.BytesIO()
+        stderr=io.BytesIO()
+        def poll(self):return 0
+        def wait(self,**kwargs):return 0
+        def kill(self):raise AssertionError('Runner already exited')
+    monkeypatch.setattr(scorer.subprocess,'Popen',lambda *a,**kw:Process())
+    monkeypatch.setattr(scorer,'read_header',lambda *a,**kw:{'pid':123})
+    monkeypatch.setattr(scorer,'read_frames',lambda *a,**kw:iter([np.zeros((72,128,3),dtype=np.uint8)]*420))
+    def run(command,**kwargs):
+        if command[3]=='pull' and command[4].endswith('.json'):
+            assert kwargs.get('timeout')==15
+            raise subprocess.TimeoutExpired(command,15)
+        return subprocess.CompletedProcess(command,0,stdout=b'',stderr=b'')
+    monkeypatch.setattr(scorer.subprocess,'run',run)
+    row=scorer.measure(case,args,'frozen-identity',{})
+    assert row['status']=='unscored' and row['raw_activity'] is None
+    assert 'timed out' in row['reason']
+    assert json.loads((tmp_path/'results'/(case['sha256']+'.json')).read_text())==row

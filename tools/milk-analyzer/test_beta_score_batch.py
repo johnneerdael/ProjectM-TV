@@ -74,3 +74,29 @@ def test_diagnosed_single_case_retry_precedes_remaining_batch(batch,monkeypatch)
     scorer.main()
     assert calls==['a.milk','b.milk']
     assert json.loads((output/'progress.json').read_text())['complete'] is True
+
+
+def test_retry_cannot_select_unmeasured_case_while_failure_remains(batch,monkeypatch):
+    output,argv,calls=batch
+    with pytest.raises(RuntimeError):scorer.main()
+    calls.clear()
+    monkeypatch.setattr(sys,'argv',argv+['--retry-unscored','--only-preset','b.milk'])
+    with pytest.raises(ValueError,match='unresolved'):scorer.main()
+    assert calls==[]
+
+
+def test_retry_without_selection_only_repairs_existing_failures(batch,monkeypatch):
+    output,argv,calls=batch
+    monkeypatch.setattr(sys,'argv',argv+['--only-preset','b.milk'])
+    with pytest.raises(RuntimeError):scorer.main()
+    calls.clear()
+    def repaired(case,args,identity,model):
+        calls.append(case['preset'])
+        row={**case,'identity':identity,'status':'scored','raw_activity':1.}
+        scorer.write_json(output/'results'/(case['sha256']+'.json'),row)
+        return row
+    monkeypatch.setattr(scorer,'measure',repaired)
+    monkeypatch.setattr(sys,'argv',argv+['--retry-unscored'])
+    scorer.main()
+    assert calls==['b.milk']
+    assert json.loads((output/'progress.json').read_text())['complete'] is False
