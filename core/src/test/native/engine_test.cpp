@@ -187,8 +187,53 @@ static void switchFrame() { bool waits = g_lastFrameDirect; frame(); if (waits) 
 static void feedAudio(uint8_t amp) { std::lock_guard<std::mutex> l(g_inputs.pcmMutex); for (int i = 0; i < 1024; ++i) g_inputs.pcm.push_back(128 + ((i & 1) ? amp : -amp)); g_inputs.audioLevel = amp / 128.f; g_inputs.audioLevelTime = NowSeconds(); }
 static std::string current() { std::lock_guard<std::mutex> l(g_published.mutex); return g_published.currentPreset; }
 
+// Exercise the Java renderer handoff through its real JNI lifecycle. Plain StatsListener
+// renderers never require/acknowledge a budget and must retain their own settings.
+static void checkManagedToLegacyRendererHandoff() {
+  for (int legacyWidth : {2560, 3840}) {
+    printf("managed release -> plain renderer (%s surface size)\n", legacyWidth == 3840 ? "same" : "different");
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+    const jlong managedGeneration = Java_nl_neerdael_projectm_core_ProjectMJNI_requireRenderBudget(nullptr, nullptr);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_configureRenderBudget(nullptr, nullptr, 3840, 2160, 2, 7, managedGeneration);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 3840, 2160);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setAutoChange(nullptr, nullptr, false);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setBlankDetection(nullptr, nullptr, false);
+    g_engine.current = "handoff fixture"; // Avoid involving asynchronous preset indexing.
+    const jlong beforeManagedFrame = Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr);
+    frame();
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr) > beforeManagedFrame);
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getCompletedRenderBudgetGeneration(nullptr, nullptr) == managedGeneration);
+    CHECK(g_feedbackDetailAlpha == 1.f && g_appliedSoftCutSeconds == 7);
+
+    Java_nl_neerdael_projectm_core_ProjectMJNI_release(nullptr, nullptr);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setNativeTrails(nullptr, nullptr, 0);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_setSoftCutDuration(nullptr, nullptr, 1);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+    // A delayed old managed UI callback must not reattach its request to the new owner.
+    Java_nl_neerdael_projectm_core_ProjectMJNI_configureRenderBudget(nullptr, nullptr, 3840, 2160, 2, 7, managedGeneration);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, legacyWidth, legacyWidth == 3840 ? 2160 : 1440);
+    g_engine.current = "handoff fixture";
+    const jlong beforeLegacyFrame = Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr);
+    frame();
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getRenderedFrameSerial(nullptr, nullptr) > beforeLegacyFrame);
+    CHECK(g_feedbackDetailAlpha == 0.f && g_appliedSoftCutSeconds == 1);
+    CHECK(g_locked); // Cleanup must not reset unrelated persisted engine inputs.
+    const auto legacyBudget = RenderBudgetSnapshot();
+    CHECK(!legacyBudget.managed && !legacyBudget.awaitingReview);
+    CHECK(legacyBudget.width == 0 && legacyBudget.height == 0);
+    CHECK(legacyBudget.generation > managedGeneration);
+    CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getCompletedRenderBudgetGeneration(nullptr, nullptr) == -1);
+    Java_nl_neerdael_projectm_core_ProjectMJNI_release(nullptr, nullptr);
+  }
+}
+
 int main(int argc, char** argv) {
   setvbuf(stdout, nullptr, _IONBF, 0);
+  if (argc == 2 && std::string(argv[1]) == "--budget-handoff") {
+    checkManagedToLegacyRendererHandoff();
+    printf("MANAGED/LEGACY HANDOFF TESTS PASSED\n");
+    return 0;
+  }
   std::string root = argv[1], skip = root + "/skip.txt", texdir = root + "/extracted_textures";
   static AAssetManager am{root};
   g_library.Start(&am, skip, texdir);
@@ -728,5 +773,6 @@ int main(int argc, char** argv) {
   g_inputs.audioLevelTime = NowSeconds() - 5;
   CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_getAudioLevel(nullptr, nullptr) == 0.f);
   CHECK(g_loadsAfterDirectFrame == 0);  // every switch started from a stored frame
+  checkManagedToLegacyRendererHandoff();
   printf("ALL TESTS PASSED\n");
 }

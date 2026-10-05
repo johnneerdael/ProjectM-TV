@@ -1648,6 +1648,14 @@ void TrackTransition(double now, double frameCpuSeconds) {
 
 // contextAlive: the EGL context that owns our GL objects is still current (else just forget them).
 void DestroyEngineLocked(bool contextAlive) {
+    {
+        std::lock_guard<std::mutex> lock(g_renderBudgetMutex);
+        // The managed request belongs to the destroyed renderer/context. Legacy renderers
+        // must not inherit its guard or tuple; a new managed renderer requests fresh review.
+        const jlong generation = g_renderBudget.generation + 1;
+        g_renderBudget = {};
+        g_renderBudget.generation = generation; // Reject asynchronous callbacks from the old owner.
+    }
     g_prewarmer.Stop();
     ReleaseScaledTarget(contextAlive);
     // The presets destroyed below may still add their textures to the pool: empty it afterwards.
