@@ -448,7 +448,7 @@ json shaderTree(std::string code,bool warp,const std::string& header) {
             targetLocalBindings(function["body"],locals);
         }
         return {{"status","parsed"},{"tree",target},
-                {"array_initializer_policy",kArrayInitializerPolicy},{"array_generator_sha256",kArrayGeneratorSha},
+                {"implicit_global_input_policy",kImplicitGlobalPolicy},{"array_initializer_policy",kArrayInitializerPolicy},{"array_generator_sha256",kArrayGeneratorSha},
                 {"target_transforms",{"HLSLTree::ReplaceUniformsAssignments"}},
                 {"uniform_local_replacements",replacements},
                 {"language_extensions",extensions},{"runtime_compatibility","not established by syntax parsing"}};

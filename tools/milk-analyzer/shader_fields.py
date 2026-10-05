@@ -37,7 +37,7 @@ ELEMENTWISE=PURE-{'length','distance','dot','cross','reflect','normalize','mul',
 
 
 class ShaderFields:
-    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,known_uniform_component_domains=None,array_initializer_policy='legacy-layout-v1'):
+    def __init__(self,*,stage:str,frame:int,warp_reads_blur:bool,frame_wrap:float|None=None,main_binding_policy='legacy-sorted-v1',known_uniforms=None,known_uniform_components=None,known_uniform_component_domains=None,global_input_policy='strict-v1',array_initializer_policy='legacy-layout-v1'):
         if stage not in {"warp","composite"}:raise ValueError("warp or composite stage required")
         self.stage=stage;self.frame=frame;self.warp_reads_blur=warp_reads_blur
         self.environment={};self.complete=True;self.unknown=[]
@@ -49,6 +49,9 @@ class ShaderFields:
         self.known_uniform_component_domains=known_uniform_component_domains or {}
         self.case_constraints={}
         self.domain_guards={}
+        if global_input_policy not in {'strict-v1','projectmtv-implicit-extern-zero-v1'}:
+            raise ValueError('unsupported implicit global input policy')
+        self.global_input_policy=global_input_policy
         if array_initializer_policy not in {'legacy-layout-v1','grouped-elements-v1'}:raise ValueError('unsupported array initializer policy')
         self.array_initializer_policy=array_initializer_policy
         self.effects=[]
@@ -285,9 +288,10 @@ class ShaderFields:
     def localize_exclusive_helper_storage(tree):
         """Localize plain unwritten globals referenced by exactly one helper.
 
-        No initializer or externally visible access may be discarded. Per-call
-        uninitialized storage is conservative: lowering must still prove each
-        read follows a write rather than inheriting a previous call's value.
+        Retain externally visible accesses and authored initializers. A generated
+        implicit-input copy may be treated as unknown per-call scratch only when
+        exclusive to one helper: every read must still follow a complete write.
+        This conservative proof cannot borrow a value from a prior helper call.
         """
         from copy import deepcopy
         tree=deepcopy(tree)
@@ -307,9 +311,17 @@ class ShaderFields:
             retained=[]
             for declaration in node['values']:
                 name=declaration['name'];usage=owners.get(name,set());type_info=declaration['type']
-                if (len(usage)==1 and None not in usage and declaration['value'] is None and
-                        not type_info.get('flags',0) and not type_info.get('array') and
+                initializer=declaration['value']
+                generated_copy=(type_info.get('flags',0)==2 and isinstance(initializer,dict) and
+                    initializer.get('kind')=='variable' and initializer.get('global') and
+                    (initializer.get('type',{}).get('flags',0)&0x400004)==0x400004)
+                plain=(initializer is None and not type_info.get('flags',0))
+                if (len(usage)==1 and None not in usage and (plain or generated_copy) and
+                        not type_info.get('array') and
                         re.fullmatch(r'(float|int|uint|bool)[1-4]?',type_info['name'])):
+                    if generated_copy:
+                        declaration['value']=None
+                        declaration['type']={**type_info,'flags':0}
                     owner=next(iter(usage));localized.setdefault(owner,[]).append(declaration)
                 else:retained.append(declaration)
             node['values']=retained
@@ -354,6 +366,10 @@ class ShaderFields:
                         value=self.array_declaration(declaration,global_scope=True)
                     elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
                     elif declaration['value'] is not None:value=self.initializer(self.expression(declaration['value']),dtype)
+                    elif ((declaration['type'].get('flags',0)&0x400004)==0x400004 and
+                          self.global_input_policy=='projectmtv-implicit-extern-zero-v1' and name not in self.known_uniforms):
+                        value=Field('input',dtype=dtype,detail={'name':name,'unbound_default':0,
+                            'basis':'GLES link-time initialization when no explicit binding is supplied'})
                     elif declaration['type'].get('flags',0)&4 and name in self.known_uniforms:
                         value=Field('constant',dtype=dtype,detail={'value':self.known_uniforms[name],
                                     'basis':'explicit source/context uniform binding'})

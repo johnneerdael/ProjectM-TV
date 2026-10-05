@@ -23,7 +23,7 @@ def maskable_math(field, inputs):
         seen.add(id(node))
         if node.op in {'unknown','uninitialized','sample','sequence','index','index_guard','write_member'} or node.op.startswith(('loop_','array')):
             return False
-        if node.op=='input' and node.detail['name'] not in inputs:return False
+        if node.op=='input' and node.detail['name'] not in inputs and 'unbound_default' not in node.detail:return False
         pending.extend(node.args)
     return True
 
@@ -121,8 +121,9 @@ def evaluate(field:Field,*,inputs=None,sample=None):
         if op=='constant':raw=node.detail['value']
         elif op=='input':
             name=node.detail['name']
-            if name not in inputs:raise UnresolvedMath('missing symbolic input: '+name)
-            raw=inputs[name]
+            if name in inputs:raw=inputs[name]
+            elif 'unbound_default' in node.detail:raw=node.detail['unbound_default']
+            else:raise UnresolvedMath('missing symbolic input: '+name)
         elif op=='select':
             condition=visit(node.args[0])
             if condition.size!=1:raise UnresolvedMath('vector condition not implemented')

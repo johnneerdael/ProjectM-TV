@@ -42,6 +42,7 @@ class SourcePipeline:
         self.known_uniform_components={}
         self.known_uniform_component_domains={}
         self.array_initializer_policies={}
+        self.global_input_policies={}
         self.coordinate_profile=coordinate_profile
         self.feedback=field.copy();self.frame=0;self.warp_reads_blur=warp_reads_blur
         self.motion_uv=None;self.motion_uv_frame=None
@@ -106,6 +107,8 @@ class SourcePipeline:
         pipeline.known_uniform_component_domains=q_uniform_domains(source,policy=equation_loader_policy)
         pipeline.array_initializer_policies={name:source.get('sections',{}).get(prefix,{}).get('array_initializer_policy','legacy-layout-v1')
                                              for name,prefix in [('warp','warp_'),('composite','comp_')]}
+        pipeline.global_input_policies={name:source.get('sections',{}).get(prefix,{}).get('implicit_global_input_policy','strict-v1')
+                                       for name,prefix in [('warp','warp_'),('composite','comp_')]}
         return pipeline
 
     def _store(self,field):
@@ -181,6 +184,7 @@ class SourcePipeline:
             model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap,
                                main_binding_policy=self.main_binding_policy,known_uniforms=self.known_uniforms,known_uniform_components=self.known_uniform_components,
                                known_uniform_component_domains=self.known_uniform_component_domains,
+                               global_input_policy=self.global_input_policies.get(name,'strict-v1'),
                                array_initializer_policy=self.array_initializer_policies.get(name,'legacy-layout-v1'))
             expression=model.lower(tree,language_extensions=self.language_extensions.get(name,[]),
                                    native_samplers=self.native_samplers.get(name,{}))

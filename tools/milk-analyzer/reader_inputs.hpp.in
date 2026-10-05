@@ -6,3 +6,5 @@ inline constexpr const char* kEngineIdentity = R"MILK_ENGINE(@ENGINE_IDENTITY_TE
 inline constexpr const char* kEngineArchiveSha = "@ENGINE_ARCHIVE_SHA@";
 constexpr const char* kArrayInitializerPolicy = "@ARRAY_INITIALIZER_POLICY@";
 constexpr const char* kArrayGeneratorSha = "@ARRAY_GENERATOR_SHA@";
+
+constexpr const char* kImplicitGlobalPolicy = "@IMPLICIT_GLOBAL_POLICY@";

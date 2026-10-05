@@ -140,6 +140,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
                                      frame=3, warp_reads_blur=False,known_uniform_components=known_q,
                                      known_uniform_component_domains=known_q_domains,
+                                     global_input_policy=section.get('implicit_global_input_policy','strict-v1'),
                                      array_initializer_policy=section.get('array_initializer_policy','legacy-layout-v1'))
                 try:
                     model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings)
