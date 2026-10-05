@@ -75,6 +75,20 @@ class EligibilityTests(unittest.TestCase):
         completed["updated_at"] = "2026-10-05T12:00:00Z"
         self.assertTrue(self.eligible([human()], [completed, request]))
 
+    def test_edited_codex_command_requires_completion_after_latest_edit(self):
+        for command, label in [("@codex review", "Code"), ("@codex security review", "Security")]:
+            with self.subTest(command=command):
+                request = dict(user=dict(login="author"), body=command,
+                               created_at="2026-10-05T09:00:00Z", updated_at="2026-10-05T11:00:00Z")
+                completed = summary()
+                completed["body"] = completed["body"].replace("**Code Review**", f"**{label} Review**")
+                self.assertFalse(self.eligible([human()], [completed, request]))
+                completed["updated_at"] = "2026-10-05T12:00:00Z"
+                self.assertTrue(self.eligible([human()], [completed, request]))
+                # Editing the command again must invalidate that newer completion too.
+                request["updated_at"] = "2026-10-05T13:00:00Z"
+                self.assertFalse(self.eligible([human()], [completed, request]))
+
     def test_completed_old_codex_request_does_not_require_codex_on_every_later_commit(self):
         request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
         self.assertTrue(self.eligible([human()], [request, summary(sha=BASE[:7])]))

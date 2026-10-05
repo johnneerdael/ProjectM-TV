@@ -45,9 +45,10 @@ def eligibility(pr, reviews, comments, threads):
         user = comment["user"]["login"]
         trusted = user == pr["user"]["login"] or comment.get("author_association") in TRUSTED
         request = re.match(r"^@codex\s+(security\s+)?review\b", (comment.get("body") or "").strip(), re.I)
-        if trusted and request and comment.get("created_at"):
+        requested_at = comment.get("updated_at") or comment.get("created_at")
+        if trusted and request and requested_at:
             kind = "security" if request[1] else "code"
-            timestamp = datetime.fromisoformat(comment["created_at"].replace("Z", "+00:00"))
+            timestamp = datetime.fromisoformat(requested_at.replace("Z", "+00:00"))
             requests[kind] = max(timestamp, requests.get(kind, timestamp))
     for comment in comments:
         if comment["user"]["login"] != CODEX:
