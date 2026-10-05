@@ -182,8 +182,14 @@ public final class QualityController {
 
     /** Standard=0, Medium=1, High=2. Medium and High allocate the same detail textures. */
     public void setNativeTrailsLevel(int level) {
+        setRenderAllocationSettings(level, (int) (transitionMs / 1000L));
+    }
+
+    /** Review the final allocation tuple, avoiding intermediate growth in opposite-field edits. */
+    public void setRenderAllocationSettings(int trailsLevel, int transitionSeconds) {
         long before = estimate(current);
-        nativeTrailsLevel = Math.max(0, Math.min(2, level));
+        nativeTrailsLevel = Math.max(0, Math.min(2, trailsLevel));
+        transitionMs = Math.max(0, transitionSeconds) * 1000L;
         recheckBudgetGrowth(before);
     }
 
@@ -203,9 +209,7 @@ public final class QualityController {
     }
 
     public void setTransitionSeconds(int seconds) {
-        long before = estimate(current);
-        transitionMs = Math.max(0, seconds) * 1000L;
-        recheckBudgetGrowth(before);
+        setRenderAllocationSettings(nativeTrailsLevel, seconds);
     }
 
     public boolean isAuto() { return true; }

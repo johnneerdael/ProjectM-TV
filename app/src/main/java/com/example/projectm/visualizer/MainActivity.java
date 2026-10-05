@@ -28,6 +28,7 @@ import nl.neerdael.projectm.core.DeviceProfile;
 import nl.neerdael.projectm.core.DisplayInfo;
 import nl.neerdael.projectm.core.ProjectMJNI;
 import nl.neerdael.projectm.core.QualityController;
+import nl.neerdael.projectm.core.RenderMemoryBudget;
 import nl.neerdael.projectm.core.VisualizerRenderer;
 import nl.neerdael.projectm.core.VisualizerView;
 
@@ -262,8 +263,7 @@ public class MainActivity extends Activity {
         Log.i(TAG, "Automatic resolution: panel up to " + display.physicalHeight
                 + "p, live memory budget (RAM " + profile.totalRamMb + " MB)");
         quality = new QualityController(display, profile, 0, this::applyRenderHeight);
-        quality.setNativeTrailsLevel(nativeTrailsLevel());
-        quality.setTransitionSeconds(transitionSeconds());
+        quality.setRenderAllocationSettings(nativeTrailsLevel(), transitionSeconds());
         quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
         quality.setTargetFps(targetFps);
         quality.setMode(0, prefs.getInt(PREF_AUTO_HEIGHT, 0));
@@ -341,7 +341,7 @@ public class MainActivity extends Activity {
     /** Keep the selected gain while automatic resolution chooses whether native trails is active. */
     private void applyNativeTrails() {
         if (quality != null) {
-            quality.setNativeTrailsLevel(nativeTrailsLevel());
+            quality.setRenderAllocationSettings(nativeTrailsLevel(), transitionSeconds());
             publishRenderConfiguration(quality.currentHeight());
         }
     }
@@ -350,12 +350,16 @@ public class MainActivity extends Activity {
         boolean detail = nativeTrailsLevel() > 0;
         boolean blend = transitionSeconds() > 0;
         if (detail != budgetedDetailAllocation || blend != budgetedBlendAllocation) {
+            int width = display.widthForHeight(height);
+            boolean growing = RenderMemoryBudget.estimatedBytes(width, height, detail ? 1 : 0, blend)
+                    > RenderMemoryBudget.estimatedBytes(width, height, budgetedDetailAllocation ? 1 : 0,
+                            budgetedBlendAllocation);
             budgetedDetailAllocation = detail;
             budgetedBlendAllocation = blend;
-            // Queued allocation changes are not resident RAM. Reject their old FPS samples
-            // and review the complete final tuple before allowing the GL thread to allocate.
+            // Invalidate queued FPS for every topology change. Growth needs a full review;
+            // reductions keep resident credit unless an earlier allocation is still pending.
             renderBudgetGeneration = ProjectMJNI.requireRenderBudget();
-            quality.revalidateForResume(true); // The listener publishes its chosen height.
+            quality.revalidateForResume(growing); // The listener publishes its chosen height.
             return;
         }
         visualizerView.setRenderConfiguration(display.widthForHeight(height), height,
@@ -501,7 +505,7 @@ public class MainActivity extends Activity {
         OptionRow transition = findViewById(R.id.row_transition);
         transition.setup("Transition", transitions, transitionSeconds(), false, index -> {
             prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
-            quality.setTransitionSeconds(index);
+            quality.setRenderAllocationSettings(nativeTrailsLevel(), index);
             publishRenderConfiguration(quality.currentHeight());
         });
 

@@ -651,4 +651,61 @@ public class QualityControllerTest {
         assertEquals("rapid unpublished edits still require the full final budget", 1440, applied);
     }
 
+    @Test
+    public void confirmedAllocationReductionsPreserveResidentHeight() throws Exception {
+        for (boolean removeTrails : new boolean[]{true, false}) {
+            FakeMemory memory = new FakeMemory();
+            QualityController q = withMemory(memory, 2048);
+            q.setNativeTrailsLevel(2);
+            q.setTransitionSeconds(10);
+            q.setMode(0, 2160);
+            q.onFpsSample(60);
+            memory.snapshot = new MemorySnapshot(2L << 30, 700L << 20, 128L << 20, false);
+            q.setRenderAllocationSettings(removeTrails ? 0 : 2, removeTrails ? 10 : 0);
+            q.revalidateForResume(false);
+            assertEquals("freeing resident allocations must not debit a full replacement", 2160, applied);
+        }
+    }
+
+    @Test
+    public void oppositeSettingsChangesReviewTheirFinalNetReduction() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 2048);
+        q.setTransitionSeconds(10);
+        q.setMode(0, 2160);
+        q.onFpsSample(60);
+        memory.snapshot = new MemorySnapshot(2L << 30, 650L << 20, 128L << 20, false);
+        q.setRenderAllocationSettings(2, 0);
+        q.revalidateForResume(false);
+        assertEquals("High without blending is cheaper than Standard with blending", 2160, applied);
+    }
+
+    @Test
+    public void pendingReductionsAndRapidGrowthDoNotInventResidentCredit() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setRenderAllocationSettings(2, 10);
+        q.setMode(0, 2160); // No confirmed rendered sample yet.
+        memory.snapshot = new MemorySnapshot(4L << 30, 1300L << 20, 128L << 20, false);
+        q.setRenderAllocationSettings(2, 0);
+        q.revalidateForResume(false);
+        assertEquals("an unrendered reduction still needs the full remaining allocation", 1800, applied);
+        q.setRenderAllocationSettings(0, 10);
+        q.revalidateForResume(true);
+        assertEquals("rapid growth cannot credit the unrendered intermediate tuple", 1440, applied);
+    }
+
+    @Test
+    public void unknownMemoryCannotAuthorizeAResidentReductionAtFullHeight() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 2048);
+        q.setRenderAllocationSettings(2, 10);
+        q.setMode(0, 2160);
+        q.onFpsSample(60);
+        memory.snapshot = null;
+        q.setRenderAllocationSettings(0, 0);
+        q.revalidateForResume(false);
+        assertTrue("a missing memory sample remains conservative", applied < 2160);
+    }
+
 }
