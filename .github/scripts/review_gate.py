@@ -195,10 +195,11 @@ def reconcile(api, number, retry=False):
     passed = f"Passed all builds against main {pr['base']['sha']}"
     if previous and previous["state"] == "success" and previous["description"] == passed:
         return
-    # A failed build is actionable; do not spend minutes retrying it every five minutes.
+    # Success without a still-valid passing status needs fresh validation after
+    # review eligibility recovers. Actual failures require an explicit retry.
     if runs and not retry:
         last = runs[0]
-        if last["conclusion"] not in {"cancelled", "skipped"}:
+        if last["conclusion"] not in {"success", "cancelled", "skipped"}:
             api.status(head, "failure", "Validation did not pass; fix the PR or rerun validation", last["html_url"])
             return
     # Dispatch reservations prevent duplicate runs while GitHub queues a new workflow.

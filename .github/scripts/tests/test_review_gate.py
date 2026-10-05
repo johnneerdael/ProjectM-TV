@@ -1,7 +1,10 @@
 """Regression coverage for review-gated PR builds."""
 import importlib.util
+import json
+import os
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 SCRIPT = Path(__file__).resolve().parents[1] / "review_gate.py"
 
@@ -218,6 +221,37 @@ class ReconciliationTests(unittest.TestCase):
         self.gate.reconcile(self.api, 42)
         self.assertEqual(self.api.writes[0][0], "failure")
         self.assertEqual(len(self.api.writes), 1)
+
+    def finish(self, results):
+        env = dict(PR_HEAD=HEAD, PR_BASE=BASE, PR_MERGE=MERGE,
+                   BUILD_RESULTS=json.dumps(results), GITHUB_RUN_ID="1")
+        with patch.object(self.gate, "GitHub", return_value=self.api), patch.dict(os.environ, env), \
+                patch("sys.argv", ["review_gate.py", "finish", "--repo", "owner/repo", "--pr", "42"]):
+            self.gate.main()
+
+    def test_successful_builds_rerun_once_after_review_eligibility_recovers(self):
+        self.api.ready = False
+        self.finish(dict(android="success", presets="success", docs="success"))
+        self.assertEqual(self.api.statuses[0]["state"], "pending")
+        self.api.runs = [self.api.run("completed", "success")]
+        self.gate.reconcile(self.api, 42)
+        self.assertFalse(any(path.endswith("/dispatches") for path, _ in self.api.writes))
+        self.api.ready = True
+        self.gate.reconcile(self.api, 42)
+        self.gate.reconcile(self.api, 42)
+        dispatches = [data for path, data in self.api.writes if path.endswith("/dispatches")]
+        self.assertEqual(dispatches, [dict(ref="main", inputs=dict(pr_number="42", head_sha=HEAD,
+                                                                 base_sha=BASE, merge_sha=MERGE))])
+        self.assertNotIn("failure", [state for state, _ in self.api.writes])
+
+    def test_failed_builds_still_need_retry_after_review_eligibility_recovers(self):
+        self.api.ready = False
+        self.finish(dict(android="success", presets="failure", docs="success"))
+        self.api.runs = [self.api.run("completed", "failure")]
+        self.api.ready = True
+        self.gate.reconcile(self.api, 42)
+        self.assertEqual(self.api.statuses[0]["state"], "failure")
+        self.assertFalse(any(path.endswith("/dispatches") for path, _ in self.api.writes))
 
     def test_push_cancels_validation_of_the_old_head_before_new_review(self):
         old = self.api.run()
