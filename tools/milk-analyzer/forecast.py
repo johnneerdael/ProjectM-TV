@@ -79,6 +79,16 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         engine = source.get('parser_inputs', {}).get('engine', {})
         if any(engine.get(key) != value for key, value in PRODUCTION_EQUATION_ENGINE.items()):
             raise ValueError('production equation RNG engine identity mismatch')
+    from quad_lines import PROFILE as quad_profile
+    line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
+    if line_profile not in {'canonical-gl-lines-v1',quad_profile}:
+        raise ValueError('unknown line rendering profile')
+    if line_profile==quad_profile:
+        if domain['profile']!='gles300' or domain['width']*domain['height']>1024*768:
+            raise ValueError('quad-line profile requires GLES within reference area')
+        engine=source.get('parser_inputs',{}).get('engine',{})
+        if any(engine.get(key)!=value for key,value in PRODUCTION_EQUATION_ENGINE.items()):
+            raise ValueError('quad-line engine identity mismatch')
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
@@ -186,7 +196,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     textures[shape_index]=lambda uv:sample2d(previous_main,uv,wrap=True,linear=True,origin='top')
             return draw_source_scene(destination,source,frame,builtin['frames'][index],custom['frames'][index],
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
-                motion_vectors_prewarped=True)
+                motion_vectors_prewarped=True,line_rendering_profile=line_profile)
 
         result = pipeline.step(warp_uv=mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
             frame_wrap=main['wrap'],stage_uniforms=random_banks,decay=main['decay'],

@@ -8,9 +8,10 @@ import numpy as np
 from primitives import draw_shape,shape_fan,draw_triangles,draw_borders,_finite
 from line_points import draw_lines,draw_points
 from scene_equations import _scalar
+from quad_lines import PROFILE,draw_quad_lines
 
 
-def _wave(target,wave,*,builtin=False,quantize=True):
+def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='canonical-gl-lines-v1'):
     if builtin:
         groups=wave['positions'];colours=wave['rgba']
     else:groups=[wave['positions']];colours=wave['colours']
@@ -22,12 +23,15 @@ def _wave(target,wave,*,builtin=False,quantize=True):
             if wave['draw_mode']=='points':
                 target=draw_points(target,shifted,colours,point_size=wave.get('point_size',1),additive=wave['additive'],quantize=quantize)
             else:
-                target=draw_lines(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],quantize=quantize)
+                draw=draw_quad_lines if line_rendering_profile==PROFILE else draw_lines
+                target=draw(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],quantize=quantize)
     return target
 
 
-def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False):
+def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1'):
     target=_finite(destination,'framebuffer').copy();height,width=target.shape[:2];main=frame['main'];values=source['values']
+    if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
+        raise ValueError('unknown line rendering profile')
     from motion_vectors import motion_active
     if motion_active(main) and not motion_vectors_prewarped:
         raise ValueError('motion vector drawing before warp requires separate source integration')
@@ -43,10 +47,11 @@ def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quant
             thick=_scalar(values,f'shapecode_{index}_thickOutline',0,'bool')
             offsets=[[0,0],[.5/width,0],[.5/width,.5/height],[0,.5/height]] if thick else [[0,0]]
             for offset in offsets:
-                target=draw_lines(target,positions+np.asarray(offset,dtype=np.float32),colour,closed=True,
+                draw=draw_quad_lines if line_rendering_profile==PROFILE else draw_lines
+                target=draw(target,positions+np.asarray(offset,dtype=np.float32),colour,closed=True,
                                   additive=int(attributes.get('additive',0))!=0,quantize=quantize)
-    for wave in custom_waves:target=_wave(target,wave,quantize=quantize)
-    if builtin_wave is not None:target=_wave(target,builtin_wave,builtin=True,quantize=quantize)
+    for wave in custom_waves:target=_wave(target,wave,quantize=quantize,line_rendering_profile=line_rendering_profile)
+    if builtin_wave is not None:target=_wave(target,builtin_wave,builtin=True,quantize=quantize,line_rendering_profile=line_rendering_profile)
     if main.get('darken_center',0)>0:
         half=np.float32(.025)
         points=np.array([[.5,.5],[.5-half*aspect_y,.5],[.5,.5-half],[.5+half*aspect_y,.5],

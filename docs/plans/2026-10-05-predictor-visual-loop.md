@@ -117,3 +117,14 @@ or random-order defect. Small-error amplification through authored feedback
 remains a hypothesis, not established root cause. Retain exact control source,
 frozen predictions and native hashes in
 `fixtures/visual-loop-feedback-localization-2026-10-05.json`.
+
+Further source inspection identifies a real unmodeled path: JNI enables the
+patched quad-line renderer at a 1024x768 reference, but the forecast used canonical
+GL lines. The named GLES profile now models hard-edge mitered strips and the
+1/64-pixel GL-Y tie bias for custom/builtin waves and shape outlines. A curved-line
+control matches the published AAR within one RGB8 level on all 60 frames; 45
+focused controls pass. Case012 now predicts flash counts 1/0, matching native,
+and peak luma jump 0.8194 versus 0.8207. Mean motion is 0.2392 versus 0.2297.
+Later contours still differ; do not grant fresh-case credit to these diagnostics.
+The exact native preset repeat is pixel-identical on all 60 frames. Larger-than-
+reference canvases, antialiasing and motion-vector quads remain explicit gaps.

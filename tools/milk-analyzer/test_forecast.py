@@ -189,6 +189,26 @@ def test_production_equation_rng_policy_rejects_another_patch_series():
         predict(source, domain=settings, audio=audio(1))
 
 
+def test_patched_quad_line_profile_reaches_custom_wave_forecast():
+    source=native(BASE+'wavecode_0_enabled=1\nwavecode_0_samples=2\n'
+                  'wavecode_0_r=1\nwavecode_0_g=0\nwavecode_0_b=0\nwavecode_0_a=1\n'
+                  'wave_0_per_point1=x=.25+.5*sample;y=.625;\n')
+    settings=domain(line_rendering_profile='projectmtv-gles-quad-lines-v1')
+    settings.update(profile='gles300',initial_rgba=[0,0,0,0])
+    result=predict(source,domain=settings,audio=audio(1))
+    np.testing.assert_array_equal(np.nonzero(result['frames'][0]['feedback'][...,0]),
+                                  (np.full(16,11),np.arange(8,24)))
+
+
+def test_quad_profile_refuses_other_contexts_and_scaled_viewports():
+    settings=domain(line_rendering_profile='projectmtv-gles-quad-lines-v1')
+    with pytest.raises(ValueError,match='quad-line profile'):
+        predict(native(BASE),domain=settings,audio=audio(1))
+    settings.update(profile='gles300',width=1920,height=1080)
+    with pytest.raises(ValueError,match='quad-line profile'):
+        predict(native(BASE),domain=settings,audio=audio(1))
+
+
 def test_streaming_forecast_does_not_retain_all_surface_arrays():
     source = native(BASE)
     visited = []

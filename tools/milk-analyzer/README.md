@@ -260,6 +260,22 @@ instances and 60 frames. These bounded controls do not certify all authored
 visuals. Correcting only the seed reduced case 012 mean RGB error from 0.15987 to
 0.10398 against its saved reference; contour timing still differs.
 
+The published JNI host also enables patch 0024 quad lines with a 1024x768
+reference, even at the 256x144 test size. The older source drawing path used
+canonical GL lines. Declare `line_rendering_profile` as
+`projectmtv-gles-quad-lines-v1` for the patched GLES hard-edge wave/shape-outline
+path: it models strip-end padding, miter joins and GLES pixel-border tie bias.
+This profile currently requires a viewport no larger than the reference area;
+high-resolution scaling, antialiasing and motion-vector quads are not certified.
+The original `canonical-gl-lines-v1` remains available for historical contexts.
+
+A frozen curved-line native control agrees within one RGB8 level over 60 frames.
+The full case 012 diagnostic now matches coherent flash counts (one brightening,
+zero darkening) and predicts peak brightness jump 0.8194 versus native 0.8207.
+Later feedback details still differ; this is not fresh-batch credit or general
+pixel equivalence. The exact native preset repeats identically across the two
+recorded loads, ruling out reference variability in that bounded comparison.
+
 The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`. Raw artifacts
 remain in ignored `build/visual-loop/`. The broader imported suite needs prepared
 historical adapter profiles and is not reported passing. No whole-corpus accuracy

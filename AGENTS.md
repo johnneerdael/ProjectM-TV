@@ -56,6 +56,15 @@ visual forecasts. Build its source adapters against a hash-
 identified host engine before `python -m pytest tools/milk-analyzer -q`; Preset Lab CI
 performs this setup. Its results are source diagnostics, not visual certification.
 
+The experimental source forecaster is `tools/milk-analyzer/forecast.py`; it keeps
+source CPU equation execution separate from published-AAR visual references.
+Its current 2.3.4 cold-thread policy checks the 41-patch engine identity and
+equation seed `0x4141f00d`. The named GLES quad-line profile models the patched
+hard-edge drawing path at/below the JNI 1024x768 reference area; larger sizes and
+antialiasing remain unverified. Prepare pinned adapters before its tests. Do not
+claim the entire imported analyzer suite passes from focused controls alone.
+See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
+
 ## Codebase navigation and knowledge tools
 
 - No `.codegraph/` or `graphify-out/` exists at the repository root (checked 2026-10-04). Use `git grep`/`rg`; do not assume a code graph.

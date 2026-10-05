@@ -3,6 +3,14 @@ import numpy as np
 
 
 class SceneDrawTest(unittest.TestCase):
+    def test_patched_quad_wave_path_uses_gles_pixel_border_tie(self):
+        from scene_draw import draw_source_scene
+        custom=[{'positions':[[.25,.375],[.75,.375]],'colours':[[1,0,0,1],[1,0,0,1]],
+                 'draw_mode':'strip','copy_offsets':[[0,0]],'additive':False}]
+        result=draw_source_scene(np.zeros((8,8,4)),{'values':{}},{'main':{},'shapes':[]},None,custom,
+                                 line_rendering_profile='projectmtv-gles-quad-lines-v1')
+        np.testing.assert_array_equal(np.nonzero(result[...,0]),([2,2,2,2],[2,3,4,5]))
+
     def test_custom_then_builtin_wave_draw_order_and_copy_offsets(self):
         from scene_draw import draw_source_scene
         source={'values':{}};frame={'main':{'darken_center':0},'shapes':[]}
