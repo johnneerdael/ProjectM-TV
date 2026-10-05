@@ -2,7 +2,9 @@
 
 ## Pull requests and release notes
 
-Each successfully tested merge to `main` publishes a versioned APK and capped/Native core AARs, then updates Milkbeat through the capped compatibility alias. Use a feature branch and PR for changes.
+Each successfully tested merge to `main` publishes a versioned APK and capped/Native core AARs, then updates Milkbeat through the capped compatibility alias. Use a feature branch and PR for changes. Android APK CI retains full Git history and
+tags with `filter: blob:none`; current source and historical version metadata are
+fetched on demand rather than downloading every historical evidence blob.
 
 - Include a substantive `## Release notes` section in every PR body. Follow `.github/pull_request_template.md`.
 - Write for people using the app: describe the changed behavior, its effect, and relevant limits. Include a concrete trigger or before/after example when useful.
