@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import threading
 
 import cv2
 import numpy as np
@@ -38,6 +39,8 @@ def main():
     indices = sorted(int(p.stem) for p in records.glob("*.json"))
     if args.indices:
         indices = [int(i) for i in args.indices.split(",")]
+    if args.jobs < 1:
+        parser.error("--jobs must be positive")
     workers = json.loads(args.workers.read_text())
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
@@ -75,6 +78,8 @@ def main():
         with (run / "stderr.txt").open("w") as log:
             process = subprocess.Popen([worker, "--job", str(run / "job.json")], env=env,
                                        stdout=subprocess.PIPE, stderr=log)
+            deadline = threading.Timer(600, process.kill)
+            deadline.start()
             try:
                 for frame in PICKS:
                     raw = read_exact(process.stdout, w * h * 3)
@@ -90,6 +95,7 @@ def main():
                 if rc or manifest["status"] != "success" or manifest["gl_error_frames"]:
                     raise RuntimeError(f"render failed: {run}, exit={rc}, manifest={manifest}")
             finally:
+                deadline.cancel()
                 if process.poll() is None:
                     process.kill()
                 process.wait()

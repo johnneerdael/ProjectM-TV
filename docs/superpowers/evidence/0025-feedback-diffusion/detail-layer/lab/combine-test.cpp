@@ -42,9 +42,10 @@ static GLuint LoadProgram(const char* path)
 struct Target {
     GLuint tex, fbo;
     int w, h;
-    Target(int width, int height, const std::vector<unsigned char>& bytes) : w(width), h(height) {
+    Target(int width, int height, const std::vector<unsigned char>& bytes, bool floating = false) : w(width), h(height) {
         glGenTextures(1, &tex); glBindTexture(GL_TEXTURE_2D, tex);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes.data());
+        glTexImage2D(GL_TEXTURE_2D, 0, floating ? GL_RGBA32F : GL_RGBA8, w, h, 0, GL_RGBA,
+                     floating ? GL_FLOAT : GL_UNSIGNED_BYTE, floating ? nullptr : bytes.data());
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -76,7 +77,7 @@ static void Draw(const Target& target)
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-static void Case(GLuint combine, GLuint down, GLuint reanchor, int scale, int base, float alpha, bool invert)
+static void Case(GLuint combine, GLuint down, int scale, int base, float alpha, bool invert)
 {
     const int count = scale * scale;
     auto bytes = Solid(count, invert ? 255 : 0);
@@ -85,22 +86,13 @@ static void Case(GLuint combine, GLuint down, GLuint reanchor, int scale, int ba
     for (int channel = 0; channel < 3; ++channel) bytes[(count / 2) * 4 + channel] = invert ? 0 : 180;
     Target low(1, 1, Solid(1, base)), warp(scale, scale, bytes);
     Target mean(1, 1, Solid(1, 0)), combined(scale, scale, Solid(count, 0));
-    Target corrected(scale, scale, Solid(count, 0));
     glUseProgram(down); Bind(down, "src", 0, warp);
     glUniform1i(glGetUniformLocation(down, "S"), scale); Draw(mean);
     glUseProgram(combine); Bind(combine, "Lw", 0, low); Bind(combine, "Hw", 1, warp); Bind(combine, "D", 2, mean);
     glUniform1f(glGetUniformLocation(combine, "alpha"), alpha);
     glUniform2f(glGetUniformLocation(combine, "native"), scale, scale); Draw(combined);
-    const Target* output = &combined;
-    if (alpha > 0 && reanchor) {
-        glUseProgram(down); Bind(down, "src", 0, combined);
-        glUniform1i(glGetUniformLocation(down, "S"), scale); Draw(mean);
-        glUseProgram(reanchor); Bind(reanchor, "Lw", 0, low); Bind(reanchor, "Hc", 1, combined); Bind(reanchor, "D", 2, mean);
-        glUniform1i(glGetUniformLocation(reanchor, "S"), scale); Draw(corrected);
-        output = &corrected;
-    }
     std::vector<unsigned char> actual(count * 4);
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, output->fbo);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, combined.fbo);
     glReadPixels(0, 0, scale, scale, GL_RGBA, GL_UNSIGNED_BYTE, actual.data());
     for (int channel = 0; channel < 3; ++channel) {
         double sum = 0;
@@ -115,22 +107,121 @@ static void Case(GLuint combine, GLuint down, GLuint reanchor, int scale, int ba
     if (glGetError() != GL_NO_ERROR) throw std::runtime_error("OpenGL error in combine regression");
 }
 
+static void Reconstruction(GLuint combine, int scale)
+{
+    auto values = Solid(3, 0);
+    for (int channel = 0; channel < 3; ++channel) values[4 + channel] = 180;
+    Target low(3, 1, values), warp(3 * scale, scale, Solid(3 * scale * scale, 0));
+    Target mean(3, 1, Solid(3, 0)), combined(3 * scale, scale, Solid(3 * scale * scale, 0));
+    glUseProgram(combine); Bind(combine, "Lw", 0, low); Bind(combine, "Hw", 1, warp); Bind(combine, "D", 2, mean);
+    glUniform1f(glGetUniformLocation(combine, "alpha"), 1);
+    glUniform2f(glGetUniformLocation(combine, "native"), 3 * scale, scale); Draw(combined);
+    std::vector<unsigned char> actual(3 * scale * scale * 4);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, combined.fbo);
+    glReadPixels(0, 0, combined.w, combined.h, GL_RGBA, GL_UNSIGNED_BYTE, actual.data());
+    // Hand-derived GL_LINEAR samples of the three authored cells [0,180,0].
+    const std::vector<int> row = scale == 2 ? std::vector<int>{0,45,135,135,45,0}
+                                          : std::vector<int>{0,0,60,120,180,120,60,0,0};
+    for (int y = 0; y < scale; ++y) for (int x = 0; x < 3 * scale; ++x) for (int channel = 0; channel < 3; ++channel)
+        if (std::abs(int(actual[(y * 3 * scale + x) * 4 + channel]) - row[x]) > 1)
+            throw std::runtime_error("zero-detail combine changed bilinear authored reconstruction");
+}
+
+static void NoClipping(GLuint combine, GLuint down, int scale, float alpha)
+{
+    const int count = scale * scale;
+    auto native = Solid(count, 0);
+    for (int channel = 0; channel < 3; ++channel) native[(count / 2) * 4 + channel] = 180;
+    Target low(1, 1, Solid(1, 5)), warp(scale, scale, native), mean(1, 1, Solid(1, 0));
+    Target output(scale, scale, {}, true);
+    glUseProgram(down); Bind(down, "src", 0, warp);
+    glUniform1i(glGetUniformLocation(down, "S"), scale); Draw(mean);
+    glUseProgram(combine); Bind(combine, "Lw", 0, low); Bind(combine, "Hw", 1, warp); Bind(combine, "D", 2, mean);
+    glUniform1f(glGetUniformLocation(combine, "alpha"), alpha);
+    glUniform2f(glGetUniformLocation(combine, "native"), scale, scale); Draw(output);
+    std::vector<float> values(count * 4);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, output.fbo);
+    glReadPixels(0, 0, scale, scale, GL_RGBA, GL_FLOAT, values.data());
+    double sum = 0;
+    for (int i = 0; i < count; ++i) {
+        float value = values[i * 4];
+        if (!std::isfinite(value) || value < -1e-6 || value > 1.0f + 1e-6)
+            throw std::runtime_error("combine requires framebuffer clipping");
+        sum += value;
+    }
+    if (std::abs(sum / count - 5.0 / 255.0) > 1e-5)
+        throw std::runtime_error("combine detail has a nonzero block mean");
+}
+
+static void ColoredFeedback(GLuint combine, GLuint down, int scale)
+{
+    const int cw = 3, ch = 2, w = cw * scale, h = ch * scale;
+    auto lowBytes = Solid(cw * ch, 0), highBytes = Solid(w * h, 0);
+    const int colors[6][3] = {{5, 120, 250}, {80, 20, 200}, {250, 128, 5},
+                              {20, 220, 80}, {128, 128, 128}, {200, 10, 240}};
+    for (int i = 0; i < cw * ch; ++i) for (int channel = 0; channel < 3; ++channel)
+        lowBytes[i * 4 + channel] = colors[i][channel];
+    uint32_t random = 12345;
+    for (int i = 0; i < w * h; ++i) for (int channel = 0; channel < 3; ++channel) {
+        random = random * 1664525u + 1013904223u;
+        highBytes[i * 4 + channel] = random >> 24;
+    }
+    Target low(cw, ch, lowBytes), warp(w, h, highBytes), mean(cw, ch, Solid(cw * ch, 0));
+    Target output(w, h, {}, true), reference(w, h, {}, true);
+    std::vector<float> actual(w * h * 4), base(actual.size());
+    glUseProgram(combine); Bind(combine, "Lw", 0, low); Bind(combine, "Hw", 1, warp); Bind(combine, "D", 2, mean);
+    glUniform1f(glGetUniformLocation(combine, "alpha"), 0);
+    glUniform2f(glGetUniformLocation(combine, "native"), w, h); Draw(reference);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, reference.fbo);
+    glReadPixels(0, 0, w, h, GL_RGBA, GL_FLOAT, base.data());
+    bool retainedDetail = false;
+    for (int frame = 0; frame < 32; ++frame) {
+        glUseProgram(down); Bind(down, "src", 0, warp);
+        glUniform1i(glGetUniformLocation(down, "S"), scale); Draw(mean);
+        glUseProgram(combine); Bind(combine, "Lw", 0, low); Bind(combine, "Hw", 1, warp); Bind(combine, "D", 2, mean);
+        glUniform1f(glGetUniformLocation(combine, "alpha"), frame % 2 ? 0.5f : 1.0f);
+        glUniform2f(glGetUniformLocation(combine, "native"), w, h); Draw(output);
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, output.fbo);
+        glReadPixels(0, 0, w, h, GL_RGBA, GL_FLOAT, actual.data());
+        for (int y = 0; y < ch; ++y) for (int x = 0; x < cw; ++x) for (int channel = 0; channel < 3; ++channel) {
+            double delta = 0;
+            for (int j = 0; j < scale; ++j) for (int i = 0; i < scale; ++i) {
+                int pixel = ((y * scale + j) * w + x * scale + i) * 4 + channel;
+                if (!std::isfinite(actual[pixel]) || actual[pixel] < -1e-6 || actual[pixel] > 1 + 1e-6)
+                    throw std::runtime_error("colored feedback requires clipping");
+                delta += actual[pixel] - base[pixel];
+                if (std::abs(actual[pixel] - base[pixel]) > 0.01) retainedDetail = true;
+            }
+            if (std::abs(delta / (scale * scale)) > 1e-5)
+                throw std::runtime_error("colored feedback accumulated block-mean drift");
+        }
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, warp.fbo);
+        glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+    }
+    if (!retainedDetail) throw std::runtime_error("limiter reduced colored feedback to Standard");
+    if (glGetError() != GL_NO_ERROR) throw std::runtime_error("OpenGL error in colored feedback");
+}
+
 int main(int argc, char** argv)
 {
     try {
-        if (argc != 4) throw std::runtime_error("expected combine, down and reanchor shader paths");
+        if (argc != 3) throw std::runtime_error("expected combine and down shader paths");
         GlCapture context(8, 8);
         GLuint vao; glGenVertexArrays(1, &vao); glBindVertexArray(vao);
         GLuint combine = LoadProgram(argv[1]), down = LoadProgram(argv[2]);
-        GLuint reanchor = std::string(argv[3]) == "-" ? 0 : LoadProgram(argv[3]);
         int cases = 0;
         for (int scale : {2, 3}) for (float alpha : {0.0f, 0.5f, 1.0f}) {
             for (int base : {0, 5, 128, 250, 255}) {
-                Case(combine, down, reanchor, scale, base, alpha, base > 128); ++cases;
+                Case(combine, down, scale, base, alpha, base > 128); ++cases;
             }
         }
-        glDeleteProgram(combine); glDeleteProgram(down); glDeleteProgram(reanchor); glDeleteVertexArrays(1, &vao);
-        std::cout << cases << " RGBA8 combine/reanchor cases passed\n";
+        for (int scale : {2, 3}) {
+            Reconstruction(combine, scale); ++cases;
+            for (float alpha : {0.5f, 1.0f}) { NoClipping(combine, down, scale, alpha); ++cases; }
+            ColoredFeedback(combine, down, scale); ++cases;
+        }
+        glDeleteProgram(combine); glDeleteProgram(down); glDeleteVertexArrays(1, &vao);
+        std::cout << cases << " combine cases passed (RGBA8 storage, float range/mean, 32-frame colored feedback)\n";
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n'; return 1;
     }

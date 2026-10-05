@@ -19,7 +19,7 @@
  
  #include "Factory.hpp"
  #include "LineGeometry.hpp"
-@@ -80,6 +88,111 @@
+@@ -80,6 +88,118 @@
      m_finalComposite.CompileCompositeShader(m_state);
  }
  
@@ -31,7 +31,7 @@
 +{
 +    int W{0}, H{0}, CW{0}, CH{0}, S{0};
 +    GLuint lTex[2]{}, lFbo[2]{}, dTex{}, dFbo{}, hcTex{}, hcFbo{}, vao{};
-+    GLuint progDown{}, progCombine{}, progInject{}, progReanchor{};
++    GLuint progDown{}, progCombine{}, progInject{};
 +    std::shared_ptr<libprojectM::Renderer::Texture> lWrap[2];
 +    libprojectM::Renderer::CopyTexture flip;
 +    bool valid{false};
@@ -75,23 +75,30 @@
 +)";
 +const char* CombineFragment = R"(#version 330
 +uniform sampler2D Lw; uniform sampler2D Hw; uniform sampler2D D; uniform float alpha; uniform vec2 native; out vec4 o;
-+void main() { vec2 uv = gl_FragCoord.xy / native; o = texture(Lw, uv);
-+  if (alpha != 0.0) o += alpha * (texelFetch(Hw, ivec2(gl_FragCoord.xy), 0) - texture(D, uv)); }
-+)";
-+// Correct the mean after RGBA8 clipping without creating negative values that
-+// would clip again: contract toward black when too bright, toward white when
-+// too dark. Use a constant affine transform per canvas cell, per channel.
-+const char* ReanchorFragment = R"(#version 330
-+uniform sampler2D Lw; uniform sampler2D Hc; uniform sampler2D D; uniform int S; out vec4 o;
++vec4 Base(ivec2 p) { return texture(Lw, (vec2(p) + vec2(0.5)) / native); }
++vec4 Band(ivec2 p) { return texelFetch(Hw, p, 0) - texture(D, (vec2(p) + vec2(0.5)) / native); }
 +void main() {
-+  ivec2 p = ivec2(gl_FragCoord.xy); ivec2 c = p / S;
-+  vec3 target = texelFetch(Lw, c, 0).rgb;
-+  vec3 mean = texelFetch(D, c, 0).rgb;
-+  vec3 h = texelFetch(Hc, p, 0).rgb;
-+  vec3 darker = h * target / max(mean, vec3(1.0 / 255.0));
-+  vec3 lighter = vec3(1.0) - (vec3(1.0) - h) * (vec3(1.0) - target)
-+                  / max(vec3(1.0) - mean, vec3(1.0 / 255.0));
-+  o = vec4(mix(darker, lighter, step(mean, target)), 1.0);
++  ivec2 p = ivec2(gl_FragCoord.xy); o = Base(p);
++  if (alpha != 0.0) {
++    int S = int(native.x) / textureSize(Lw, 0).x; ivec2 cell = (p / S) * S;
++    // bilinear_up(box(Hw)) is not a projection: remove the residual's
++    // actual block mean before limiting it. This also removes D's rounding.
++    vec4 mean = vec4(0.0);
++    for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i)
++      mean += Band(cell + ivec2(i, j));
++    mean /= float(S * S);
++    // One gain per block and channel preserves the centered band's zero
++    // mean. Choose the largest gain <= alpha that fits every pixel's
++    // headroom; independent per-pixel clamps would introduce another bias.
++    vec4 gain = vec4(alpha);
++    for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i) {
++      ivec2 q = cell + ivec2(i, j); vec4 b = Base(q); vec4 d = Band(q) - mean;
++      vec4 positive = (vec4(1.0) - b) / max(d, vec4(1e-6));
++      vec4 negative = b / max(-d, vec4(1e-6));
++      gain = min(gain, mix(positive, negative, lessThan(d, vec4(0.0))));
++    }
++    o += gain * (Band(p) - mean);
++  }
 +}
 +)";
 +// Geometry enters the authored state as MilkDrop rasterizes it at canvas size: the native pixel at each
@@ -131,7 +138,7 @@
  void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audioData, const Renderer::RenderContext& renderContext)
  {
      m_state.audioData = audioData;
-@@ -103,7 +216,7 @@
+@@ -103,7 +223,7 @@
  
      // Above the line reference size, the warp reads the previous frame through a small blur that gives
      // back the per-frame smoothing feedback presets get at the reference size (see FeedbackDiffusion.hpp).
@@ -140,7 +147,7 @@
                                             renderContext.lineReferenceWidth, renderContext.lineReferenceHeight) : 0.0f))
      {
          m_diffusionHoldsPreviousFrame = false;
-@@ -149,6 +262,45 @@
+@@ -149,6 +269,45 @@
      // here on, so this can happen before the warp: the warp and everything drawn on top of it
      // then go to the current framebuffer in one render pass. Not if the warp shader reads the
      // blur textures: it gets last frame's, as in projectM, so they are updated after the warp.
@@ -166,7 +173,7 @@
 +                detail->dTex = MakeTexture(canvas.width, canvas.height, GL_LINEAR); detail->dFbo = MakeFbo(detail->dTex);
 +                detail->hcTex = MakeTexture(detail->W, detail->H, GL_NEAREST); detail->hcFbo = MakeFbo(detail->hcTex);
 +                glGenVertexArrays(1, &detail->vao);
-+                detail->progDown = MakeProgram(DownFragment); detail->progCombine = MakeProgram(CombineFragment); detail->progInject = MakeProgram(InjectFragment); detail->progReanchor = MakeProgram(ReanchorFragment);
++                detail->progDown = MakeProgram(DownFragment); detail->progCombine = MakeProgram(CombineFragment); detail->progInject = MakeProgram(InjectFragment);
 +                detail->valid = false;
 +            }
 +            if (!detail->valid || m_isFirstFrame)
@@ -186,7 +193,7 @@
      auto const updateBlur = [this]() {
          const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
          assert(warpedImage.get());
-@@ -156,7 +308,13 @@
+@@ -156,7 +315,13 @@
                                     LineScale(m_state.renderContext.viewportSizeX, m_state.renderContext.viewportSizeY,
                                               m_state.renderContext.lineReferenceWidth, m_state.renderContext.lineReferenceHeight));
      };
@@ -201,7 +208,7 @@
      {
          updateBlur();
      }
-@@ -178,7 +336,16 @@
+@@ -178,7 +343,16 @@
      }
  
      // Draw previous frame image warped via per-pixel mesh and warp shader
@@ -219,7 +226,7 @@
  
      if (writeMotionUV)
      {
-@@ -188,22 +355,119 @@
+@@ -188,22 +362,97 @@
          glDrawBuffers(2, buffers);
      }
  
@@ -273,32 +280,10 @@
 +        glUniform1f(glGetUniformLocation(detail->progCombine, "alpha"), detailAlpha);
 +        glUniform2f(glGetUniformLocation(detail->progCombine, "native"), static_cast<float>(detail->W), static_cast<float>(detail->H));
 +        FullScreen(*detail, detail->progCombine, detail->hcFbo, detail->W, detail->H);
-+        // Re-anchor the stored (already clamped) detail result. Standard keeps
-+        // its original path, including bilinear reconstruction between cells.
-+        if (detailAlpha > 0.0f)
-+        {
-+            glUseProgram(detail->progDown); BindTex(detail->progDown, "src", 0, detail->hcTex);
-+            glUniform1i(glGetUniformLocation(detail->progDown, "S"), detail->S);
-+            FullScreen(*detail, detail->progDown, detail->dFbo, detail->CW, detail->CH);
-+            glUseProgram(detail->progReanchor);
-+            BindTex(detail->progReanchor, "Lw", 0, detail->lTex[1]);
-+            BindTex(detail->progReanchor, "Hc", 1, detail->hcTex);
-+            BindTex(detail->progReanchor, "D", 2, detail->dTex);
-+            glUniform1i(glGetUniformLocation(detail->progReanchor, "S"), detail->S);
-+            m_framebuffer.Bind(m_currentFrameBuffer);
-+            GLint targetFbo = 0; glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &targetFbo);
-+            FullScreen(*detail, detail->progReanchor, static_cast<GLuint>(targetFbo), detail->W, detail->H);
-+            // Injection must subtract the corrected pre-geometry picture.
-+            m_framebuffer.BindRead(m_currentFrameBuffer);
-+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, detail->hcFbo);
-+        }
-+        else
-+        {
-+            glBindFramebuffer(GL_READ_FRAMEBUFFER, detail->hcFbo);
-+            m_framebuffer.BindDraw(m_currentFrameBuffer);
-+        }
++        // Put H_c into the current frame, then draw this frame's geometry on it as usual.
++        glBindFramebuffer(GL_READ_FRAMEBUFFER, detail->hcFbo);
++        m_framebuffer.BindDraw(m_currentFrameBuffer);
 +        glBlitFramebuffer(0, 0, detail->W, detail->H, 0, 0, detail->W, detail->H, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-+        m_framebuffer.Bind(m_currentFrameBuffer);
 +        if (std::getenv("PM_DETAIL_DEBUG"))
 +        {
 +            fprintf(stderr, "blit: Hw-before? current-after %.5f hc %.5f err 0x%x\n",
@@ -340,7 +325,7 @@
  
      // Done in DrawSprites() in Milkdrop
      if (*m_perFrameContext.darken_center > 0)
-@@ -218,6 +482,34 @@
+@@ -218,6 +467,34 @@
          m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
      }
  
@@ -375,8 +360,9 @@
      // Todo: Song title anim would go here
  
      // y-flip the image for final compositing again. With diffusion, the same pass also filters
---- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
-+++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropShader.cpp engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+--- engine-main/src/libprojectM/MilkdropPreset/MilkdropShader.cpp	2026-10-05 02:21:33
++++ engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp	2026-10-05 02:21:33
 @@ -16,10 +16,13 @@
  
  #include <algorithm>
@@ -425,21 +411,19 @@
          tempMatrices[i] = randomTranslation * rotationX;
          tempMatrices[i] = rotationZ * tempMatrices[i];
          tempMatrices[i] = rotationY * tempMatrices[i];
--    }
 +        cached.matrices[i - 20] = tempMatrices[i];
-+    }
+     }
 +    cached.frame = presetState.renderContext.frame;
  
      m_shader.SetUniformMat3x4("rot_s1", tempMatrices[0]);
      m_shader.SetUniformMat3x4("rot_s2", tempMatrices[1]);
---- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
-+++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
-@@ -139,6 +139,17 @@
- 
-     // Render the resulting mesh.
+diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+--- engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp	2026-10-05 02:15:46
++++ engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp	2026-10-05 02:35:04
+@@ -141,6 +141,17 @@
      WarpedBlit(presetState, perFrameContext);
-+}
-+
+ }
+ 
 +void PerPixelMesh::Prepare(const PresetState& presetState, const PerFrameContext& perFrameContext, PerPixelContext& perPixelContext)
 +{
 +    if (presetState.renderContext.viewportSizeX == 0 || presetState.renderContext.viewportSizeY == 0 ||
@@ -449,20 +433,23 @@
 +    }
 +    InitializeMesh(presetState);
 +    CalculateMesh(presetState, perFrameContext, perPixelContext);
- }
- 
++}
++
  void PerPixelMesh::InitializeMesh(const PresetState& presetState)
---- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
-+++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
-@@ -47,6 +47,11 @@
-      * @param presetState The preset state to retrieve the configuration values from.
+ {
+     if (m_gridSizeX != presetState.renderContext.perPixelMeshX ||
+diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+--- engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp	2026-10-05 02:15:46
++++ engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp	2026-10-05 02:35:04
+@@ -48,6 +48,11 @@
       */
      void CompileWarpShader(PresetState& presetState);
-+
+ 
 +    /** PROTOTYPE detail layer: draw this frame's already calculated mesh again (other target/main texture). */
 +    void DrawAgain(const PresetState& presetState, const PerFrameContext& perFrameContext) { WarpedBlit(presetState, perFrameContext); }
 +    // Detail layer: evaluate the per-vertex equations without drawing (DrawAgain() draws the result).
 +    void Prepare(const PresetState& presetState, const PerFrameContext& perFrameContext, PerPixelContext& perPixelContext);
- 
++
      /**
       * @brief True if the compiled warp shader reads the main texture through a point sampler.
+      */

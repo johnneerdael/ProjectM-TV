@@ -9,6 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build", type=Path, default=Path("build/detail-clipping/combine-test"))
     parser.add_argument("--prototype", type=Path)
+    parser.add_argument("--gles", action="store_true", help="also link the GLSL ES 3.00 variants")
     args = parser.parse_args()
     here = Path(__file__).resolve().parent
     repo = next(parent for parent in here.parents if (parent / ".git").exists())
@@ -20,16 +21,26 @@ def main():
     build = args.build.resolve()
     build.mkdir(parents=True, exist_ok=True)
     paths = []
-    for name in ("CombineFragment", "DownFragment", "ReanchorFragment"):
+    shaders = {}
+    for name in ("CombineFragment", "DownFragment"):
         match = re.search(r'const char\* ' + name + r' = R"\((.*?)\)";', source, re.S)
         path = build / f"{name}.frag"
         if match:
             path.write_text(match[1])
-        elif name == "ReanchorFragment":
-            path = Path("-")  # Original prototype has no correction pass.
+            shaders[name] = match[1]
         else:
             raise ValueError(f"missing prototype shader: {name}")
         paths.append(str(path))
+    if args.gles:
+        vertex = build / "pass.vert"
+        vertex.write_text("#version 300 es\nprecision highp float;\n"
+                          "void main() { vec2 p = vec2(gl_VertexID == 1 ? 3.0 : -1.0, "
+                          "gl_VertexID == 2 ? 3.0 : -1.0); gl_Position = vec4(p, 0.0, 1.0); }\n")
+        for name, shader in shaders.items():
+            fragment = build / f"{name}-es.frag"
+            fragment.write_text("#version 300 es\nprecision highp float;\nprecision highp int;\n"
+                                "precision highp sampler2D;\n" + shader.split("\n", 1)[1])
+            subprocess.run(["glslangValidator", "-l", str(vertex), str(fragment)], check=True)
     subprocess.run(["cmake", "-S", str(here), "-B", str(build), f"-DREPO_ROOT={repo}"], check=True)
     subprocess.run(["cmake", "--build", str(build), "-j", "4"], check=True)
     subprocess.run([str(build / "detail-combine-test"), *paths], check=True)
