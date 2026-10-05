@@ -232,7 +232,7 @@ Saved resolution preferences retain the numeric migration: old 1440/2160 values 
 
 ## 8. Recommended next steps
 1. Build 1.8 locally (`./gradlew assembleRelease && ./install.sh`) and test on your weakest and strongest TVs.
-2. Run `tools/tv-diagnostics.sh <tv-ip>:5555 --sweep` (see `docs/DIAGNOSTICS.md`) for startup, FPS, resolution and composition data.
+2. Run `tools/tv-diagnostics.sh <tv-ip>:5555 --no-install --duration 180` (see `docs/DIAGNOSTICS.md`) for startup, FPS, resolution and composition data.
 3. Move Gradle to a stable release.
 4. ~~Add CI~~ Done: `.github/workflows/android.yml` (see `docs/RELEASING.md`).
 
