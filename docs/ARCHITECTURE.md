@@ -2,6 +2,8 @@
 
 This document retains the historical v1.8/v1.9 analysis and verification below. Section 5 includes current rendering and integration guidance; older measurements are identified as historical and do not establish the current Auto policy or device limits. Current settings and validation are documented in the [user guide](user-guide/settings.md) and [Native trails design](superpowers/specs/2026-10-05-native-trails.md).
 
+The maintained engine is named **ProjectM TV Engine**: an extensively modified projectM fork based on upstream 4.1.7, built from the pinned submodule plus `tools/projectm-patches/`. The app and Milkbeat's core AAR share this engine. The settings panel names the fork and shows the upstream base separately. Public Java/JNI names and artifact filenames are retained; `ProjectMJNI.getVersion()` still returns the upstream version. Identify a patched build by its release version, source revision and artifact checksum. [Third-party attribution](THIRD_PARTY.md) records upstream backports and local changes.
+
 ## 1. Summary
 
 Version 1.8 rebuilds the rendering and preset pipeline. The goals were to start visuals right away, skip presets that show nothing, and fix the causes of black presets, several of which were already present before 1.7.
