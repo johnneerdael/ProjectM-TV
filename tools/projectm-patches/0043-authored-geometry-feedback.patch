@@ -1,0 +1,609 @@
+Subject: [PATCH] Keep geometry recurrence authored while reusing native draws
+
+Evaluate geometry once, preserve authored rasterization in feedback, and replay
+prepared vertices for native presentation. Reuse existing canvas targets.
+
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+--- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+@@ -1,4 +1,6 @@
+ #include "CustomShape.hpp"
++#include "GeometryTargets.hpp"
++#include <glm/gtc/matrix_transform.hpp>
+ 
+ #include "MilkdropPresetExceptions.hpp"
+ #include "PresetFileParser.hpp"
+@@ -133,7 +135,7 @@
+     }
+ }
+ 
+-void CustomShape::Draw()
++void CustomShape::Draw(GeometryTargets* targets)
+ {
+     static constexpr float pi = 3.141592653589793f;
+ 
+@@ -142,6 +144,7 @@
+         return;
+     }
+ 
++    m_geometryTargets = targets;
+     // The instances are evaluated in order and their geometry collected in batches (m_vertices);
+     // each batch is uploaded once and drawn in instance order (FlushBatch). The result is the same
+     // as drawing every instance on its own, but without per-instance buffer uploads and state
+@@ -194,7 +197,7 @@
+         draw.borderIterations = *m_perFrameContext.border_a > 0.0001f ? (m_quadBorders ? 1 : (m_thickOutline ? 4 : 1)) : 0;
+ 
+         const size_t neededVertices = static_cast<size_t>(sides + 2 + (m_quadBorders ? 0 : draw.borderIterations * sides));
+-        const size_t neededLinePoints = m_quadBorders && draw.borderIterations > 0 ? static_cast<size_t>(sides + 3) : 0;
++        const size_t neededLinePoints = (m_quadBorders || m_geometryTargets) && draw.borderIterations > 0 ? static_cast<size_t>(sides + 3) : 0;
+         if (m_vertices.size() + neededVertices > maxBatchVertices || m_lineBatch.Points().size() + neededLinePoints > maxBatchVertices)
+         {
+             FlushBatch();
+@@ -290,7 +293,7 @@
+             }
+         }
+ 
+-        if (draw.borderIterations > 0 && m_quadBorders)
++        if (draw.borderIterations > 0 && (m_quadBorders || m_geometryTargets))
+         {
+             m_borderPoints.resize(static_cast<size_t>(sides));
+             for (int i = 0; i < sides; i++)
+@@ -311,6 +314,7 @@
+     }
+ 
+     FlushBatch();
++    m_geometryTargets=nullptr;
+ 
+     glBindBuffer(GL_ARRAY_BUFFER, 0);
+     glBindVertexArray(0);
+@@ -331,12 +335,32 @@
+     glBindBuffer(GL_ARRAY_BUFFER, m_vboIdUntextured);
+     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(TexturedPoint) * maxBatchVertices), nullptr, GL_STREAM_DRAW);
+     glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(sizeof(TexturedPoint) * m_vertices.size()), m_vertices.data());
+-    if (m_quadBorders && !m_lineBatch.Points().empty())
+-    {
+-        m_presetState.lineRenderer.Upload(m_lineBatch);
+-    }
+-    m_linesBegun = false;
+-
++    DrawBatch(false);
++    if (m_geometryTargets) {
++        m_geometryTargets->Native();
++        DrawBatch(true);
++        m_geometryTargets->Authored();
++    }
++    m_lineBatch.Clear();
++    m_vertices.clear();
++    m_draws.clear();
++}
++
++void CustomShape::DrawBatch(bool nativePass)
++{
++    if (m_geometryTargets) {
++        glEnable(GL_BLEND);
++        m_lastBlendDestination=0;
++        m_texturedShaderReady=false;
++    }
++    const auto& context=m_presetState.renderContext;
++    const float scale=LineScale(context.viewportSizeX,context.viewportSizeY,
++                                context.lineReferenceWidth,context.lineReferenceHeight);
++    const bool quadBorders=nativePass ? scale>0 && m_presetState.lineRenderer.Usable() : m_quadBorders;
++    const auto style=nativePass ? LineStyleFor(LineKind::ShapeBorder,m_thickOutline,scale,
++                                              context.viewportSizeX,context.viewportSizeY) : m_borderStyle;
++    if (quadBorders && !m_lineBatch.Points().empty()) m_presetState.lineRenderer.Upload(m_lineBatch);
++    m_linesBegun=false;
+     for (const auto& draw : m_draws)
+     {
+         // Additive Drawing or Overwrite
+@@ -385,7 +409,7 @@
+             glDrawArrays(GL_TRIANGLE_FAN, draw.fillFirst, draw.sides + 2);
+         }
+ 
+-        if (draw.borderIterations > 0 && m_quadBorders)
++        if (draw.borderIterations > 0 && quadBorders)
+         {
+             auto& lines = m_presetState.lineRenderer;
+             if (!m_linesBegun)
+@@ -393,7 +417,7 @@
+                 lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext);
+                 m_linesBegun = true;
+             }
+-            lines.Draw(draw.borderStrip, m_borderStyle);
++            lines.Draw(draw.borderStrip, style);
+         }
+         else if (draw.borderIterations > 0)
+         {
+@@ -401,8 +425,19 @@
+             glBindVertexArray(m_vaoIdUntextured);
+             for (int iteration = 0; iteration < draw.borderIterations; iteration++)
+             {
++                if (nativePass && m_geometryTargets) {
++                    static constexpr float dx[4]={0,1,1,0}, dy[4]={0,0,1,1};
++                    // First-pass vertices use authored offsets; derive its dimensions from scale.
++                    const float sourceScale=std::sqrt((double(context.viewportSizeX)*context.viewportSizeY) /
++                                                      (double(context.lineReferenceWidth)*context.lineReferenceHeight));
++                    const auto translation=glm::vec3(dx[iteration]*(1-sourceScale)/context.viewportSizeX,
++                                                     dy[iteration]*(1-sourceScale)/context.viewportSizeY,0);
++                    m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation",
++                        glm::translate(PresetState::orthogonalProjection,translation));
++                }
+                 glDrawArrays(GL_LINE_LOOP, draw.borderFirst + iteration * draw.sides, draw.sides);
+             }
++            if (nativePass) m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation",PresetState::orthogonalProjection);
+         }
+     }
+ 
+@@ -411,9 +446,6 @@
+         m_presetState.lineRenderer.End();
+         m_linesBegun = false;
+     }
+-    m_lineBatch.Clear();
+-    m_vertices.clear();
+-    m_draws.clear();
+ }
+ 
+ } // namespace MilkdropPreset
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+--- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+@@ -17,6 +17,7 @@
+ namespace MilkdropPreset {
+ 
+ class PresetFileParser;
++class GeometryTargets;
+ 
+ /**
+  * @brief Renders a custom shape with or without a texture.
+@@ -50,7 +51,7 @@
+     /**
+      * @brief Renders the shape.
+      */
+-    void Draw();
++    void Draw(GeometryTargets* targets = nullptr);
+ 
+ private:
+     struct ShapeVertex {
+@@ -122,6 +123,8 @@
+      * @brief Uploads the collected vertices once and draws the collected instances in order.
+      */
+     void FlushBatch();
++    void DrawBatch(bool nativePass);
++    GeometryTargets* m_geometryTargets{nullptr};
+ 
+     std::vector<TexturedPoint> m_vertices; //!< Current batch: fills and outlines of several instances.
+     std::vector<InstanceDraw> m_draws;     //!< Draw calls of the current batch, in instance order.
+diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+@@ -1,4 +1,5 @@
+ #include "CustomWaveform.hpp"
++#include "GeometryTargets.hpp"
+ 
+ #include "LineGeometry.hpp"
+ #include "LineRenderer.hpp"
+@@ -100,7 +101,7 @@
+     }
+ }
+ 
+-void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext)
++void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext, GeometryTargets* targets)
+ {
+     static_assert(libprojectM::Audio::WaveformSamples <= WaveformMaxPoints, "WaveformMaxPoints is larger than WaveformSamples");
+     static_assert(libprojectM::Audio::SpectrumSamples <= WaveformMaxPoints, "WaveformMaxPoints is larger than SpectrumSamples");
+@@ -206,6 +207,17 @@
+ 
+     std::vector<ColoredPoint> pointsSmoothed(sampleCount * 2);
+     auto smoothedVertexCount = SmoothWave(pointsTransformed.data(), sampleCount, pointsSmoothed.data());
++
++    if (targets) {
++        DrawPrepared(pointsSmoothed,smoothedVertexCount);
++        targets->Native();
++        DrawPrepared(std::move(pointsSmoothed),smoothedVertexCount);
++        targets->Authored();
++    } else DrawPrepared(std::move(pointsSmoothed),smoothedVertexCount);
++}
++
++void CustomWaveform::DrawPrepared(std::vector<ColoredPoint> pointsSmoothed,int smoothedVertexCount)
++{
+ 
+ #ifndef USE_GLES
+     glDisable(GL_LINE_SMOOTH);
+diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.hpp b/src/libprojectM/MilkdropPreset/CustomWaveform.hpp
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.hpp
+@@ -13,6 +13,7 @@
+ namespace MilkdropPreset {
+ 
+ class PresetFileParser;
++class GeometryTargets;
+ 
+ class CustomWaveform : public Renderer::RenderItem
+ {
+@@ -48,9 +49,10 @@
+      * @brief Renders the waveform.
+      * @param presetPerFrameContext The per-frame context to retrieve the init Q vars from.
+      */
+-    void Draw(const PerFrameContext& presetPerFrameContext);
++    void Draw(const PerFrameContext& presetPerFrameContext, GeometryTargets* targets = nullptr);
+ 
+ private:
++    void DrawPrepared(std::vector<ColoredPoint> points, int count);
+     /**
+      * @brief Initializes the per-frame context with the preset per-frame state.
+      * @param presetPerFrameContext The preset per-frame context to pull q vars from.
+diff --git a/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp b/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp
+--- a/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp
++++ b/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp
+@@ -56,7 +56,7 @@
+     m_down.SetUniformInt("S", m_size.scale);
+     Draw(m_size.width, m_size.height);
+ }
+-void FeedbackDetail::Initialize(const std::shared_ptr<Renderer::Texture>& previous) { Down(previous, 0); }
++void FeedbackDetail::Initialize(const std::shared_ptr<Renderer::Texture>& previous) { Down(previous, m_previous); }
+ void FeedbackDetail::Combine(const std::shared_ptr<Renderer::Texture>& nativeWarp, float alpha,
+                              Renderer::Framebuffer& output, int outputIndex)
+ {
+@@ -83,7 +83,7 @@
+ }
+ void FeedbackDetail::Inject(const std::shared_ptr<Renderer::Texture>& geometry)
+ {
+-    m_canvas.Bind(0);
++    m_canvas.Bind(m_previous);
+     m_inject.Bind();
+     BindTexture(m_inject, "Lw", 0, Warped());
+     BindTexture(m_inject, "Hp", 1, geometry);
+diff --git a/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp b/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp
+--- a/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp
++++ b/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp
+@@ -28,9 +28,12 @@
+     void Initialize(const std::shared_ptr<Renderer::Texture>& previous);
+     void Combine(const std::shared_ptr<Renderer::Texture>& nativeWarp, float alpha,
+                  Renderer::Framebuffer& output, int outputIndex);
++    auto PreviousIndex() const -> int { return m_previous; }
++    auto WarpedIndex() const -> int { return m_warped; }
++    void FinishGeometry() { std::swap(m_previous,m_warped); }
+     void Inject(const std::shared_ptr<Renderer::Texture>& geometry);
+-    auto Previous() const -> std::shared_ptr<Renderer::Texture> { return m_canvas.GetColorAttachmentTexture(0, 0); }
+-    auto Warped() const -> std::shared_ptr<Renderer::Texture> { return m_canvas.GetColorAttachmentTexture(1, 0); }
++    auto Previous() const -> std::shared_ptr<Renderer::Texture> { return m_canvas.GetColorAttachmentTexture(m_previous, 0); }
++    auto Warped() const -> std::shared_ptr<Renderer::Texture> { return m_canvas.GetColorAttachmentTexture(m_warped, 0); }
+     auto CanvasFramebuffer() -> Renderer::Framebuffer& { return m_canvas; }
+     auto Canvas() const -> DetailCanvas { return m_size; }
+     auto Width() const -> int { return m_width; }
+@@ -42,6 +45,7 @@
+     void BindTexture(const Renderer::Shader& shader, const char* uniform, int unit,
+                      const std::shared_ptr<Renderer::Texture>& texture);
+     void Down(const std::shared_ptr<Renderer::Texture>& texture, int index);
++    int m_previous{0}, m_warped{1};
+     int m_width, m_height;
+     DetailCanvas m_size;
+     bool m_retainsDetail;
+diff --git a/src/libprojectM/MilkdropPreset/GeometryTargets.hpp b/src/libprojectM/MilkdropPreset/GeometryTargets.hpp
+new file mode 100644
+--- /dev/null
++++ b/src/libprojectM/MilkdropPreset/GeometryTargets.hpp
+@@ -0,0 +1,43 @@
++#pragma once
++
++#include "PresetState.hpp"
++#include <Renderer/Framebuffer.hpp>
++
++namespace libprojectM { namespace MilkdropPreset {
++// Two destinations share one evaluated geometry stream. The authored target owns
++// recurrence; native rasterization contributes only to presentation/detail.
++class GeometryTargets {
++public:
++    GeometryTargets(PresetState& state, Renderer::Framebuffer& canvas, int canvasIndex,
++                    int width, int height, const std::shared_ptr<Renderer::Texture>& authoredMain,
++                    Renderer::Framebuffer& native, int nativeIndex)
++        : m_state(state), m_context(state.renderContext), m_main(state.mainTexture),
++          m_canvas(canvas), m_canvasIndex(canvasIndex), m_width(width), m_height(height),
++          m_authoredMain(authoredMain), m_native(native), m_nativeIndex(nativeIndex) {}
++    void Authored() const {
++        m_state.renderContext=m_context;
++        m_state.renderContext.viewportSizeX=m_width;
++        m_state.renderContext.viewportSizeY=m_height;
++        m_state.renderContext.lineReferenceWidth=0;
++        m_state.renderContext.lineReferenceHeight=0;
++        m_state.mainTexture=m_authoredMain;
++        m_canvas.Bind(m_canvasIndex);
++        glViewport(0,0,m_width,m_height);
++    }
++    void Native() const {
++        m_state.renderContext=m_context;
++        m_state.mainTexture=m_main;
++        m_native.Bind(m_nativeIndex);
++        glViewport(0,0,m_context.viewportSizeX,m_context.viewportSizeY);
++    }
++private:
++    PresetState& m_state;
++    Renderer::RenderContext m_context;
++    std::weak_ptr<Renderer::Texture> m_main;
++    Renderer::Framebuffer& m_canvas;
++    int m_canvasIndex, m_width, m_height;
++    std::shared_ptr<Renderer::Texture> m_authoredMain;
++    Renderer::Framebuffer& m_native;
++    int m_nativeIndex;
++};
++} }
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+@@ -20,6 +20,8 @@
+  */
+ 
+ #include "MilkdropPreset.hpp"
++#include "GeometryTargets.hpp"
++#include <optional>
+ 
+ #include "Factory.hpp"
+ #include "LineGeometry.hpp"
+@@ -262,7 +264,7 @@
+             m_state.renderContext.viewportSizeY = canvas.height;
+             m_state.renderContext.lineReferenceWidth = 0;
+             m_state.renderContext.lineReferenceHeight = 0;
+-            detail->CanvasFramebuffer().Bind(0);
++            detail->CanvasFramebuffer().Bind(detail->PreviousIndex());
+             glViewport(0, 0, canvas.width, canvas.height);
+             m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture(), false);
+             m_state.renderContext = savedContext;
+@@ -272,11 +274,11 @@
+         const auto nativeMain = m_state.mainTexture;
+         m_state.mainTexture = detail->flip.Texture();
+         auto& target = detail->CanvasFramebuffer();
+-        if (writeMotionUV) target.SetAttachment(1, 1, m_motionVectorUVMap);
+-        target.Bind(1);
++        if (writeMotionUV) target.SetAttachment(detail->WarpedIndex(), 1, m_motionVectorUVMap);
++        target.Bind(detail->WarpedIndex());
+         glViewport(0, 0, canvas.width, canvas.height);
+         m_perPixelMesh.DrawAgain(m_state, m_perFrameContext);
+-        if (writeMotionUV) target.RemoveColorAttachment(1, 1);
++        if (writeMotionUV) target.RemoveColorAttachment(detail->WarpedIndex(), 1);
+         m_state.mainTexture = nativeMain;
+         if (m_warpSamplesBlur) m_state.blurTexture.Update(*detail->Previous(), m_perFrameContext, 1.0f);
+         detail->Combine(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0),
+@@ -284,16 +286,25 @@
+         glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
+     }
+ 
++    // The native framebuffer already holds Hc. Evaluate geometry once at authored
++    // size; the same prepared vertices also draw at native size for presentation.
++    std::optional<GeometryTargets> geometry;
++    if (detail) {
++        geometry.emplace(m_state,detail->CanvasFramebuffer(),detail->WarpedIndex(),
++                         canvas.width,canvas.height,detail->flip.Texture(),m_framebuffer,m_currentFrameBuffer);
++        geometry->Authored();
++    }
++    auto* targets=geometry ? &*geometry : nullptr;
+     // Draw audio-data-related stuff
+     for (auto& shape : m_customShapes)
+     {
+-        shape->Draw();
++        shape->Draw(targets);
+     }
+     for (auto& wave : m_customWaveforms)
+     {
+-        wave->Draw(m_perFrameContext);
+-    }
+-    m_waveform.Draw(m_perFrameContext);
++        wave->Draw(m_perFrameContext,targets);
++    }
++    m_waveform.Draw(m_perFrameContext,targets);
+ 
+     // Done in DrawSprites() in Milkdrop
+     if (*m_perFrameContext.darken_center > 0)
+@@ -309,9 +320,12 @@
+     }
+ 
+     if (detail) {
+-        detail->Inject(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0));
+-        m_framebuffer.Bind(m_currentFrameBuffer);
+-        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++        geometry->Native();
++        if (*m_perFrameContext.darken_center > 0) m_darkenCenter.Draw();
++        m_border.Draw(m_perFrameContext);
++        // Lw now includes authored geometry. Swap its role with the previous
++        // canvas without sampling native rasterization or allocating/copying.
++        detail->FinishGeometry();
+     }
+ 
+     // Todo: Song title anim would go here
+diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
+--- a/src/libprojectM/MilkdropPreset/Waveform.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
+@@ -1,4 +1,5 @@
+ #include "Waveform.hpp"
++#include "GeometryTargets.hpp"
+ 
+ #include "LineRenderer.hpp"
+ #include "PerFrameContext.hpp"
+@@ -37,10 +38,8 @@
+     glBufferData(GL_ARRAY_BUFFER, sizeof(Point) * vertexData.size(), vertexData.data(), GL_STREAM_DRAW);
+ }
+ 
+-void Waveform::DrawQuadLines(const PerFrameContext& presetPerFrameContext, float lineScale)
+-{
+-    auto waves = m_waveformMath->GetVertices(m_presetState, presetPerFrameContext);
+-
++void Waveform::DrawQuadLines(const Waves& waves, const PerFrameContext& presetPerFrameContext, float lineScale)
++{
+     m_lineBatch.Clear();
+     std::vector<LineBatch::Strip> strips;
+     for (const auto& wave : waves)
+@@ -96,7 +95,7 @@
+     glDisable(GL_BLEND);
+ }
+ 
+-void Waveform::Draw(const PerFrameContext& presetPerFrameContext)
++void Waveform::Draw(const PerFrameContext& presetPerFrameContext, GeometryTargets* targets)
+ {
+     m_mode = static_cast<WaveformMode>(m_presetState.waveMode % static_cast<int>(WaveformMode::Count));
+ 
+@@ -109,11 +108,22 @@
+         }
+     }
+ 
++    auto waves=m_waveformMath->GetVertices(m_presetState,presetPerFrameContext);
++    if (targets) {
++        DrawPrepared(waves,presetPerFrameContext);
++        targets->Native();
++        DrawPrepared(std::move(waves),presetPerFrameContext);
++        targets->Authored();
++    } else DrawPrepared(std::move(waves),presetPerFrameContext);
++}
++
++void Waveform::DrawPrepared(Waves waves,const PerFrameContext& presetPerFrameContext)
++{
+     const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
+                                       m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
+     if (lineScale > 0.0f && !m_presetState.waveDots && m_presetState.lineRenderer.Usable())
+     {
+-        DrawQuadLines(presetPerFrameContext, lineScale);
++        DrawQuadLines(waves, presetPerFrameContext, lineScale);
+         return;
+     }
+ 
+@@ -144,7 +154,7 @@
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+     }
+ 
+-    auto smoothedVertices = m_waveformMath->GetVertices(m_presetState, presetPerFrameContext);
++    auto smoothedVertices = std::move(waves);
+ 
+     for (auto& smoothedWave : smoothedVertices)
+     {
+diff --git a/src/libprojectM/MilkdropPreset/Waveform.hpp b/src/libprojectM/MilkdropPreset/Waveform.hpp
+--- a/src/libprojectM/MilkdropPreset/Waveform.hpp
++++ b/src/libprojectM/MilkdropPreset/Waveform.hpp
+@@ -18,13 +18,14 @@
+ 
+ class PresetState;
+ class PerFrameContext;
++class GeometryTargets;
+ 
+ class Waveform : public Renderer::RenderItem
+ {
+ public:
+     explicit Waveform(PresetState& presetState);
+ 
+-    void Draw(const PerFrameContext& presetPerFrameContext);
++    void Draw(const PerFrameContext& presetPerFrameContext, GeometryTargets* targets = nullptr);
+ 
+     void InitVertexAttrib() override;
+ 
+@@ -35,7 +36,9 @@
+     /**
+      * @brief Draws the waveform lines as quads (line reference size set, not dots).
+      */
+-    void DrawQuadLines(const PerFrameContext& presetPerFrameContext, float lineScale);
++    using Waves = std::array<Waveforms::WaveformMath::VertexList, 2>;
++    void DrawPrepared(Waves waves, const PerFrameContext& presetPerFrameContext);
++    void DrawQuadLines(const Waves& waves, const PerFrameContext& presetPerFrameContext, float lineScale);
+ 
+     PresetState& m_presetState; //!< The preset state.
+ 
+diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
+--- a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
++++ b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
+@@ -34,6 +34,13 @@
+         auto& preset=Active(engine);
+         return preset.m_feedbackDetail ? preset.m_feedbackDetail->Previous() :
+                preset.m_framebuffer.GetColorAttachmentTexture(preset.m_previousFrameBuffer,0);
++    }
++    static auto NativeFeedback(ProjectM& engine) -> std::shared_ptr<Renderer::Texture> {
++        auto& p=Active(engine);
++        return p.m_framebuffer.GetColorAttachmentTexture(p.m_previousFrameBuffer,0);
++    }
++    static auto Register(ProjectM& engine,int index) -> double {
++        return Active(engine).m_state.globalRegisters[index];
+     }
+     static auto Frame(ProjectM& engine) -> int { return Active(engine).m_state.renderContext.frame; }
+     static void ClearNativeFeedback(ProjectM& engine) {
+@@ -563,3 +570,87 @@
+     EXPECT_GT(*std::max_element(feedback.begin(),feedback.end()),100) << "vectors must resume once the native warp writes UV";
+     EXPECT_EQ(glGetError(),GL_NO_ERROR);
+ }
++
++TEST_F(FeedbackDiffusionRenderTest, AuthoredFeedbackRetainsFaintGeometryAcrossFrames) {
++    std::string source = Preset("ret=GetPixel(uv).rgb*0.98;") +
++        "nWaveMode=6\nfWaveAlpha=0.004\nbWaveThick=1\nbAdditiveWaves=1\n"
++        "wave_r=1\nwave_g=0.4\nwave_b=0.1\n"
++        "shapecode_0_enabled=1\nshapecode_0_sides=12\nshapecode_0_num_inst=3\n"
++        "shapecode_0_x=0.43\nshapecode_0_y=0.59\nshapecode_0_rad=0.11\n"
++        "shapecode_0_r=1\nshapecode_0_g=0.4\nshapecode_0_b=0.2\nshapecode_0_a=0.033\n"
++        "shapecode_0_r2=0.2\nshapecode_0_g2=0.8\nshapecode_0_b2=0.3\nshapecode_0_a2=0.004\n"
++        "shapecode_0_border_a=0\nshapecode_0_additive=1\n";
++    source.replace(source.find("fWaveAlpha=0\n"),std::string("fWaveAlpha=0\n").size(),"fWaveAlpha=0.004\n");
++    const auto render = [&](bool detail) {
++        TestProjectM engine;
++        engine.SetWindowSize(detail ? 3840 : 1280, detail ? 2160 : 720);
++        engine.SetLineReferenceSize(detail ? 1280 : 0, detail ? 720 : 0);
++        engine.SetFeedbackDetail(detail ? 0 : -1);
++        engine.SetPresetLocked(true); engine.SetHardCutEnabled(false);
++        std::srand(12345);
++        std::istringstream preset(source); engine.LoadPresetData(preset,false);
++        EXPECT_TRUE(engine.failure.empty()) << engine.failure;
++        std::vector<Image> state;
++        std::vector<float> audio(576);
++        for (int frame=0; frame<4; ++frame) {
++            for(size_t i=0;i<audio.size();++i) audio[i]=0.4f*std::sin(float(i)*0.063f+frame*0.2f);
++            engine.PCM().Add(audio.data(),1,audio.size());
++            engine.RenderFrame(m_framebuffer);
++            state.push_back(ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::Feedback(engine)));
++        }
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++        return state;
++    };
++    const auto authored=render(false),native=render(true);
++    ASSERT_EQ(authored.size(),native.size());
++    ASSERT_GT(*std::max_element(authored.back().begin(),authored.back().end()),0);
++    for(size_t frame=0;frame<authored.size();++frame)
++        EXPECT_EQ(DifferentBytes(authored[frame],native[frame]),0u) << "feedback frame " << frame;
++}
++
++TEST_F(FeedbackDiffusionRenderTest, GeometryReplayKeepsNativePresentationSharp) {
++    const auto source=Preset("ret=float3(0,0,0);")+
++        "shapecode_0_enabled=1\nshapecode_0_sides=3\nshapecode_0_x=0.437\n"
++        "shapecode_0_y=0.533\nshapecode_0_rad=0.2713\nshapecode_0_a=1\n"
++        "shapecode_0_r=1\nshapecode_0_g=0.4\nshapecode_0_b=0.2\n"
++        "shapecode_0_r2=1\nshapecode_0_g2=0.4\nshapecode_0_b2=0.2\nshapecode_0_a2=1\n"
++        "shapecode_0_border_a=0\n";
++    const auto render=[&](float alpha) {
++        TestProjectM engine;
++        engine.SetWindowSize(126,96);engine.SetLineReferenceSize(42,32);
++        engine.SetFeedbackDetail(alpha);engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++        std::istringstream input(source);engine.LoadPresetData(input,false);
++        EXPECT_TRUE(engine.failure.empty())<<engine.failure;
++        engine.RenderFrame(m_framebuffer);
++        const auto pixels=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::NativeFeedback(engine));
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++        return pixels;
++    };
++    const auto native=render(-1);
++    ASSERT_GT(*std::max_element(native.begin(),native.end()),0);
++    for(float alpha : {0.f,0.5f,1.f})
++        EXPECT_EQ(render(alpha),native)<<"Native geometry must not be an enlarged authored image";
++}
++
++TEST_F(FeedbackDiffusionRenderTest, GeometryReplayDoesNotRepeatPersistentEquations) {
++    const auto source=Preset("ret=float3(0,0,0);")+
++        "shapecode_0_enabled=1\nshapecode_0_num_inst=3\n"
++        "shape_0_per_frame1=reg00=reg00+1;x=0.2+0.1*instance;\n"
++        "wavecode_0_enabled=1\nwavecode_0_samples=8\n"
++        "wave_0_per_frame1=reg01=reg01+1;\n"
++        "wave_0_per_point1=reg02=reg02+1;x=sample;y=0.5;\n";
++    for(float alpha : {-1.f,0.f,0.5f,1.f}) {
++        TestProjectM engine;
++        engine.SetWindowSize(126,96);engine.SetLineReferenceSize(42,32);
++        engine.SetFeedbackDetail(alpha);engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++        std::istringstream input(source);engine.LoadPresetData(input,false);
++        ASSERT_TRUE(engine.failure.empty())<<engine.failure;
++        for(int frame=1;frame<=4;++frame) {
++            engine.RenderFrame(m_framebuffer);
++            EXPECT_EQ(libprojectM::FeedbackDetailTestAccess::Register(engine,0),3*frame)<<"shape instances, alpha "<<alpha;
++            EXPECT_EQ(libprojectM::FeedbackDetailTestAccess::Register(engine,1),frame)<<"wave frame, alpha "<<alpha;
++            EXPECT_EQ(libprojectM::FeedbackDetailTestAccess::Register(engine,2),8*frame)<<"wave points, alpha "<<alpha;
++        }
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    }
++}
