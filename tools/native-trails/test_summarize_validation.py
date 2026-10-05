@@ -78,7 +78,7 @@ class SummaryTests(unittest.TestCase):
             summary.runner.write(directory / "identity.json", identity)
             workers[role] = identity
         (self.work / "audio.u8").write_bytes(b"frozen pcm")
-        self.protocol = {"schema": 1, "workers": workers, "presets": records,
+        self.protocol = {"schema": 2, "user_id": 7, "workers": workers, "presets": records,
                          "profiles": json.loads(json.dumps(self.profiles)), "runner_sha256": summary.file_digest(Path(summary.runner.__file__)),
                          "device": "emulator-fixture", "fingerprint": "fixture-driver", "frames": 480,
                          "pcm_sha256": summary.file_digest(self.work / "audio.u8"),
@@ -92,7 +92,7 @@ class SummaryTests(unittest.TestCase):
                 directory = self.work / "jobs" / key
                 directory.mkdir(parents=True)
                 package = workers[role]["package"]
-                private = "/data/user/0/" + package + "/files/native-trails/" + key
+                private = "/data/user/7/" + package + "/files/native-trails/" + key
                 request = dict(summary.runner.request(name, width, height, rw, rh, level),
                                pcmPath=private + "/audio.u8", outputDir=private + "/output")
                 manifest = {"status": "ok", "framesRendered": 480, "job": request,
@@ -279,6 +279,44 @@ class SummaryTests(unittest.TestCase):
         summary.runner.write(directory / "manifest.json", manifest)
         with self.assertRaisesRegex(ValueError, "RGB\\(A\\)8"):
             self.collect()
+
+    def test_manifest_from_user_zero_cannot_satisfy_frozen_user_seven(self):
+        directory = self.jobs[self.names[0], "authored"]
+        request = json.loads((directory / "request.json").read_text())
+        for field in ("pcmPath", "outputDir"): request[field] = request[field].replace("/data/user/7/", "/data/user/0/")
+        manifest = json.loads((directory / "manifest.json").read_text())
+        manifest["job"] = request
+        manifest["requestSha256"] = hashlib.sha256((summary.runner.canonical_json(request) + "\n").encode()).hexdigest()
+        summary.runner.write(directory / "request.json", request)
+        summary.runner.write(directory / "manifest.json", manifest)
+        with self.assertRaisesRegex(ValueError, "request"):
+            self.collect(partial=True)
+
+
+class UserScopeTests(unittest.TestCase):
+    def test_scoped_protocol_requires_a_nonnegative_integer_user(self):
+        protocol = {"schema": 2, "user_id": 7, "runner_sha256": summary.file_digest(Path(summary.runner.__file__))}
+        self.assertEqual(summary.user_scope(protocol)["user_id"], 7)
+        for user in (None, "7", -1, True):
+            with self.subTest(user=user), self.assertRaisesRegex(ValueError, "user"):
+                summary.user_scope(dict(protocol, user_id=user))
+
+    def test_legacy_user_zero_requires_explicit_frozen_source_and_rejects_drift(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "original-runner.py"
+            path.write_text("fixture original user0 validator\n")
+            sha = hashlib.sha256(path.read_bytes()).hexdigest()
+            protocol = {"schema": 1, "runner_sha256": sha}
+            with patch.object(summary, "LEGACY_RUNNER_SHA256", sha):
+                with self.assertRaisesRegex(ValueError, "legacy"):
+                    summary.user_scope(protocol)
+                scope = summary.user_scope(protocol, legacy_runner=path)
+                self.assertEqual(scope["user_id"], 0)
+                self.assertEqual(scope["mode"], "historical-user-zero")
+                self.assertEqual(scope["runner_sha256"], sha)
+                path.write_text("mutated validator\n")
+                with self.assertRaisesRegex(ValueError, "legacy.*checksum"):
+                    summary.user_scope(protocol, legacy_runner=path)
 
 
 if __name__ == "__main__":

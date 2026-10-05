@@ -62,6 +62,7 @@ public final class QualityController {
     private final int initialIndex;
     private MemorySnapshot memorySnapshot;
     private int nativeTrailsLevel;
+    private long allocationBytesBeforeSettings;
     private boolean memoryConstrained;
     private boolean lastChangeForMemoryPressure;
     private int healthyMemorySamples;
@@ -152,12 +153,7 @@ public final class QualityController {
     public void revalidateForResume(boolean contextRecreated) {
         if (contextRecreated) fullAllocationPending = true;
         memorySnapshot = sampleMemory();
-        healthyMemorySamples = 0;
-        fpsBeforeLowering = 0;
-        loweredFrom = -1;
-        cpuBoundPreset = -1;
-        lastChangeForMemoryPressure = false;
-        resetCounters(SETTLE_MS);
+        resetAllocationProbe();
         int to = current;
         if (memorySnapshot == null || !memorySnapshot.isValid()) {
             // Missing data cannot authorize reusing/rebuilding an expensive saved allocation.
@@ -180,6 +176,33 @@ public final class QualityController {
         }
     }
 
+    /**
+     * Publish a changed allocation tuple after the host invalidates its old FPS generation.
+     * Growth and unconfirmed allocations require a fresh budget. A confirmed reduction keeps
+     * its height until GL releases the old textures; the next completed-generation FPS sample
+     * then checks actual available memory. Visibility resumes still use revalidateForResume.
+     */
+    public void revalidateForAllocationChange() {
+        // The setter can lower current and invoke the host listener before it returns. Compare
+        // the resulting tuple against the allocation captured before that edit/height change.
+        boolean growing = estimate(current) > allocationBytesBeforeSettings;
+        if (growing || fullAllocationPending) {
+            revalidateForResume(growing);
+        } else {
+            resetAllocationProbe();
+            listener.onApplyRenderHeight(currentHeight());
+        }
+    }
+
+    private void resetAllocationProbe() {
+        healthyMemorySamples = 0;
+        fpsBeforeLowering = 0;
+        loweredFrom = -1;
+        cpuBoundPreset = -1;
+        lastChangeForMemoryPressure = false;
+        resetCounters(SETTLE_MS);
+    }
+
     /** Standard=0, Medium=1, High=2. Medium and High allocate the same detail textures. */
     public void setNativeTrailsLevel(int level) {
         setRenderAllocationSettings(level, (int) (transitionMs / 1000L));
@@ -187,10 +210,10 @@ public final class QualityController {
 
     /** Review the final allocation tuple, avoiding intermediate growth in opposite-field edits. */
     public void setRenderAllocationSettings(int trailsLevel, int transitionSeconds) {
-        long before = estimate(current);
+        allocationBytesBeforeSettings = estimate(current);
         nativeTrailsLevel = Math.max(0, Math.min(2, trailsLevel));
         transitionMs = Math.max(0, transitionSeconds) * 1000L;
-        recheckBudgetGrowth(before);
+        recheckBudgetGrowth(allocationBytesBeforeSettings);
     }
 
     public boolean isMemoryConstrained() { return memoryConstrained; }

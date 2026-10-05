@@ -40,7 +40,7 @@ On a signing-key conflict, `--allow-uninstall` checks `pm list users` and each o
 
 | File | Content |
 |---|---|
-| `summary.md` | Device and GPU, panel/UI size, cold start and observation start times, FPS (app and SurfaceFlinger), resolution decisions, sweep table, preset load times and transition FPS, output measurements, memory limit and other apps killed for memory, surface composition, skipped presets, crashes |
+| `summary.md` | Device and GPU, panel/UI size, cold start and observation start times, FPS (app and SurfaceFlinger), automatic resolution decisions, preset load times and transition FPS, output measurements, live memory headroom and other apps killed for memory, surface composition, skipped presets, crashes |
 | `app_log.txt` | App log lines (`STATS`, `STARTUP`, `LOAD`, `TRANSITION`, `OUTPUT`, `SKIP`, `QualityController`, crashes) |
 | `am_start_cold.txt`, `am_start.txt` | `am start -W` output of the cold start and of the start that is observed |
 | `device.txt` | System properties, display modes, CPU, memory, GLES driver |

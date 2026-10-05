@@ -60,3 +60,17 @@ python tools/native-trails/run_validation.py smoke --device OWNED_EMULATOR --apk
 
 This smoke uses the real clock and does not prove deterministic identity or
 brightness fidelity. Keep it separate from the instrumented comparison.
+
+## Android user scope and historical captures
+
+New runs capture `am get-current-user` once, reject invalid IDs, and freeze the numeric `user_id` in schema-2 protocols. Installation, package lookup, instrumentation, run-as, private request/output paths and cleanup use that same ID. The summary verifier checks the frozen user scope. Do not change users mid-run or edit a frozen protocol to resume under a different user; choose a new work directory.
+
+The completed `focused-v1` measurements used the verified user-0 emulator before this scope was recorded. Their schema-1 protocol and capture identities remain immutable. Historical verification requires the original checksum-pinned runner source explicitly; it does not pretend that the updated runner produced those captures. Recover that source from the recorded commit, then use a fresh summary output:
+
+```sh
+mkdir -p build/native-trails/legacy-validator
+git show a8a75f4435c80c46aaa99274f6007ac285170eeb:tools/native-trails/run_validation.py > build/native-trails/legacy-validator/run_validation.py
+python tools/native-trails/summarize_validation.py --work build/native-trails/focused-v1 --out build/native-trails/summary-legacy-verified --legacy-runner build/native-trails/legacy-validator/run_validation.py
+```
+
+The verifier checks the source SHA256, labels this as historical user-0 compatibility, and keeps its original unscoped-runtime limitation explicit. It refuses unknown schema-1 producers and refuses a legacy-source argument for schema 2. The archived original validators also preserve the broad Mac protocol's source identities; changing a verifier is not a new brightness measurement.

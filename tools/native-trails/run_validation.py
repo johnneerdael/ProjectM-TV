@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import re
 import shlex
 import subprocess
 import sys
@@ -49,6 +50,35 @@ def adb(device, *args, timeout=120, binary=False):
 
 def shell(device, *args, timeout=120):
     return adb(device, "shell", " ".join(shlex.quote(str(arg)) for arg in args), timeout=timeout)
+
+
+def validate_user_id(user_id):
+    if type(user_id) is not int or not 0 <= user_id <= 2147483647:
+        raise ValueError("Invalid Android user_id: " + repr(user_id))
+    return user_id
+
+
+def current_user(device):
+    value = shell(device, "am", "get-current-user").strip()
+    if re.fullmatch(r"[0-9]+", value) is None:
+        raise ValueError("Invalid current Android user: " + repr(value))
+    return validate_user_id(int(value))
+
+
+def install_worker(device, identity, user_id):
+    validate_user_id(user_id)
+    result = adb(device, "install", "-r", "--user", user_id, identity["apk"], timeout=180)
+    if not result.strip().splitlines() or result.strip().splitlines()[-1].strip() != "Success":
+        raise ValueError("Worker package install failed: " + result)
+    package = identity["package"]
+    lines = shell(device, "pm", "list", "packages", "--user", user_id, package).strip().splitlines()
+    if any(re.fullmatch(r"package:[A-Za-z0-9_.]+", line) is None for line in lines) or "package:" + package not in lines:
+        raise ValueError("Worker package lookup failed for Android user%d: %s" % (user_id, lines))
+
+
+def private_directory(package, key, user_id):
+    validate_user_id(user_id)
+    return "/data/user/%d/%s/files/native-trails/%s" % (user_id, package, key)
 
 
 def check_artifacts(identity):
@@ -98,10 +128,10 @@ def verify(directory, request, expected_hash):
     return manifest
 
 
-def render(device, identity, request, directory, pcm, preset_hash):
+def render(device, identity, request, directory, pcm, preset_hash, user_id):
     package = identity["package"]
-    private = "/data/user/0/" + package + "/files/native-trails/" + directory.name
-    staging = "/data/local/tmp/native-trails-" + directory.name
+    private = private_directory(package, directory.name, user_id)
+    staging = "/data/local/tmp/native-trails-%d-%s" % (user_id, directory.name)
     request = dict(request, pcmPath=private + "/audio.u8", outputDir=private + "/output")
     directory.mkdir(parents=True, exist_ok=True)
     if (directory / "manifest.json").exists():
@@ -109,17 +139,17 @@ def render(device, identity, request, directory, pcm, preset_hash):
     write(directory / "request.json", request)
     old_property = shell(device, "getprop", "debug.projectmtv.preset").strip()
     try:
-        shell(device, "am", "force-stop", package)
+        shell(device, "am", "force-stop", "--user", user_id, package)
         shell(device, "mkdir", "-p", staging)
-        shell(device, "run-as", package, "mkdir", "-p", private)
+        shell(device, "run-as", package, "--user", user_id, "mkdir", "-p", private)
         for name, path in (("request.json", directory / "request.json"), ("audio.u8", pcm)):
             adb(device, "push", path, staging + "/" + name)
-            shell(device, "run-as", package, "cp", staging + "/" + name, private + "/" + name)
+            shell(device, "run-as", package, "--user", user_id, "cp", staging + "/" + name, private + "/" + name)
         shell(device, "setprop", "debug.projectmtv.preset", corpus.preset_prefix(request["preset"]))
-        output = shell(device, "am", "instrument", "-w", "-e", "job", private + "/request.json",
+        output = shell(device, "am", "instrument", "--user", user_id, "-w", "-e", "job", private + "/request.json",
                        package + "/nl.neerdael.projectmtv.corpus.CorpusInstrumentation", timeout=600)
         (directory / "instrumentation.log").write_text(output)
-        archive = adb(device, "exec-out", "run-as", package, "tar", "-cf", "-", "-C", private,
+        archive = adb(device, "exec-out", "run-as", package, "--user", user_id, "tar", "-cf", "-", "-C", private,
                       "output", binary=True)
         with tempfile.TemporaryDirectory(dir=directory) as temporary:
             tar = Path(temporary) / "captures.tar"
@@ -132,9 +162,9 @@ def render(device, identity, request, directory, pcm, preset_hash):
         return result
     finally:
         shell(device, "setprop", "debug.projectmtv.preset", old_property)
-        shell(device, "am", "force-stop", package)
+        shell(device, "am", "force-stop", "--user", user_id, package)
         shell(device, "rm", "-rf", staging)
-        shell(device, "run-as", package, "rm", "-rf", private)
+        shell(device, "run-as", package, "--user", user_id, "rm", "-rf", private)
 
 
 def request(preset, width, height, rw, rh, level, instrumented=True):
@@ -146,7 +176,8 @@ def request(preset, width, height, rw, rh, level, instrumented=True):
     return result
 
 
-def initialize(work, workers, presets, device):
+def initialize(work, workers, presets, device, user_id):
+    validate_user_id(user_id)
     identities = {role: json.loads((workers / role / "identity.json").read_text())
                   for role in {profile[1] for profile in PROFILES}}
     for identity in identities.values():
@@ -161,7 +192,7 @@ def initialize(work, workers, presets, device):
     names = [name for name in presets.read_text().splitlines() if name]
     records = {name: file_digest(ROOT / "core/src/main/assets/presets" / name) for name in names}
     _, audio = corpus.signal()
-    protocol = {"schema": 1, "workers": identities, "presets": records, "profiles": PROFILES,
+    protocol = {"schema": 2, "user_id": user_id, "workers": identities, "presets": records, "profiles": PROFILES,
                 "runner_sha256": file_digest(Path(__file__)), "device": device,
                 "fingerprint": shell(device, "getprop", "ro.build.fingerprint").strip(),
                 "pcm_sha256": hashlib.sha256(audio).hexdigest(), "frames": 480,
@@ -183,7 +214,8 @@ def run(work, workers, presets, device, selected):
     work.mkdir(parents=True, exist_ok=True)
     with (work / "run.lock").open("w") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        protocol = initialize(work, workers, presets, device)
+        user_id = current_user(device)
+        protocol = initialize(work, workers, presets, device, user_id)
         installed = None
         rows = []
         for preset, sha in protocol["presets"].items():
@@ -192,12 +224,12 @@ def run(work, workers, presets, device, selected):
                     continue
                 identity = protocol["workers"][role]
                 if installed != identity["apk_sha256"]:
-                    adb(device, "install", "-r", identity["apk"], timeout=180)
+                    install_worker(device, identity, user_id)
                     installed = identity["apk_sha256"]
                 key = digest({"protocol": digest(protocol), "preset": sha, "profile": profile})
                 directory = work / "jobs" / key
                 manifest = render(device, identity, request(preset, width, height, rw, rh, level),
-                                  directory, work / "audio.u8", sha)
+                                  directory, work / "audio.u8", sha, user_id)
                 if profile in ("standard", "medium", "high", "standard_default"):
                     expected = "standard" if profile == "standard_default" else profile
                     status = str(manifest.get("nativeTrailsStatus", "")).lower()
@@ -217,18 +249,19 @@ def run(work, workers, presets, device, selected):
 
 
 def smoke(work, apk, aar, device):
+    user_id = current_user(device)
     identity = {"apk": str(apk), "aar": str(aar), "apk_sha256": file_digest(apk),
-                "aar_sha256": file_digest(aar), "package": "nl.neerdael.projectmtv.corpuspublished"}
+                "aar_sha256": file_digest(aar), "package": "nl.neerdael.projectmtv.corpuspublished", "user_id": user_id}
     check_artifacts(identity)
     work.mkdir(parents=True, exist_ok=False)
     _, audio = corpus.signal()
     pcm = work / "audio.u8"
     pcm.write_bytes(audio)
-    adb(device, "install", "-r", apk, timeout=180)
+    install_worker(device, identity, user_id)
     preset = "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk"
     sha = file_digest(ROOT / "core/src/main/assets/presets" / preset)
     manifest = render(device, identity, request(preset, 3840, 2160, 1024, 768, None, False),
-                      work / "published-acid-4k", pcm, sha)
+                      work / "published-acid-4k", pcm, sha, user_id)
     write(work / "identity.json", identity)
     print(canonical_json({key: manifest.get(key) for key in ("status", "framesRendered", "coreVersion", "glRenderer", "determinism")}))
 
