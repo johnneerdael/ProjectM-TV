@@ -1,7 +1,8 @@
 Subject: [PATCH] Keep geometry recurrence authored while reusing native draws
 
 Evaluate geometry once, preserve authored rasterization in feedback, and replay
-prepared vertices for native presentation. Reuse existing canvas targets.
+prepared vertices for native presentation. Reuse existing canvas targets and
+restore per-vertex shape input state after instanced native lines.
 
 diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/MilkdropPreset/CustomShape.cpp
 --- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
@@ -95,7 +96,25 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
      for (const auto& draw : m_draws)
      {
          // Additive Drawing or Overwrite
-@@ -385,7 +409,7 @@
+@@ -372,6 +396,10 @@
+             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+ 
+             glBindVertexArray(m_vaoIdTextured);
++            if (m_geometryTargets) {
++                // Filled geometry consumes per-vertex positions/colors/UV, not instanced line inputs.
++                for (GLuint location=0;location<3;++location) glVertexAttribDivisor(location,0);
++            }
+             glDrawArrays(GL_TRIANGLE_FAN, draw.fillFirst, draw.sides + 2);
+ 
+             glBindTexture(GL_TEXTURE_2D, 0);
+@@ -382,10 +410,14 @@
+             // Untextured (creates a color gradient: center=r/g/b/a to border=r2/b2/g2/a2)
+             m_presetState.untexturedShader.Bind();
+             glBindVertexArray(m_vaoIdUntextured);
++            if (m_geometryTargets) {
++                // Filled geometry consumes per-vertex positions/colors/UV, not instanced line inputs.
++                for (GLuint location=0;location<3;++location) glVertexAttribDivisor(location,0);
++            }
              glDrawArrays(GL_TRIANGLE_FAN, draw.fillFirst, draw.sides + 2);
          }
  
@@ -104,7 +123,7 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
          {
              auto& lines = m_presetState.lineRenderer;
              if (!m_linesBegun)
-@@ -393,7 +417,7 @@
+@@ -393,16 +425,31 @@
                  lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext);
                  m_linesBegun = true;
              }
@@ -113,8 +132,12 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
          }
          else if (draw.borderIterations > 0)
          {
-@@ -401,8 +425,19 @@
+             m_presetState.untexturedShader.Bind();
              glBindVertexArray(m_vaoIdUntextured);
++            if (m_geometryTargets) {
++                // Filled geometry consumes per-vertex positions/colors/UV, not instanced line inputs.
++                for (GLuint location=0;location<3;++location) glVertexAttribDivisor(location,0);
++            }
              for (int iteration = 0; iteration < draw.borderIterations; iteration++)
              {
 +                if (nativePass && m_geometryTargets) {
@@ -133,7 +156,7 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
          }
      }
  
-@@ -411,9 +446,6 @@
+@@ -411,9 +458,6 @@
          m_presetState.lineRenderer.End();
          m_linesBegun = false;
      }
@@ -146,7 +169,11 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
 diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp
 --- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
 +++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
-@@ -17,6 +17,7 @@
+@@ -14,9 +14,11 @@
+ #include <vector>
+ 
+ namespace libprojectM {
++class FeedbackDetailTestAccess;
  namespace MilkdropPreset {
  
  class PresetFileParser;
@@ -154,7 +181,7 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/Mi
  
  /**
   * @brief Renders a custom shape with or without a texture.
-@@ -50,7 +51,7 @@
+@@ -50,7 +52,7 @@
      /**
       * @brief Renders the shape.
       */
@@ -163,7 +190,7 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/Mi
  
  private:
      struct ShapeVertex {
-@@ -122,6 +123,8 @@
+@@ -122,6 +124,8 @@
       * @brief Uploads the collected vertices once and draws the collected instances in order.
       */
      void FlushBatch();
@@ -172,6 +199,14 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/Mi
  
      std::vector<TexturedPoint> m_vertices; //!< Current batch: fills and outlines of several instances.
      std::vector<InstanceDraw> m_draws;     //!< Draw calls of the current batch, in instance order.
+@@ -136,6 +140,7 @@
+     GLenum m_lastBlendDestination{0};  //!< Blend function set last in this frame.
+ 
+     friend class ShapePerFrameContext;
++    friend class ::libprojectM::FeedbackDetailTestAccess;
+ };
+ 
+ } // namespace MilkdropPreset
 diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
 --- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
 +++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
@@ -505,7 +540,15 @@ diff --git a/src/libprojectM/MilkdropPreset/Waveform.hpp b/src/libprojectM/Milkd
 diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
 --- a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
 +++ b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
-@@ -34,6 +34,13 @@
+@@ -2,6 +2,7 @@
+ #include <limits>
+ #include <cmath>
+ #include <MilkdropPreset/FeedbackDetail.hpp>
++#include <MilkdropPreset/CustomShape.hpp>
+ #include <MilkdropPreset/MilkdropPreset.hpp>
+ #include <ProjectM.hpp>
+ #include <Renderer/Shader.hpp>
+@@ -34,6 +35,22 @@
          auto& preset=Active(engine);
          return preset.m_feedbackDetail ? preset.m_feedbackDetail->Previous() :
                 preset.m_framebuffer.GetColorAttachmentTexture(preset.m_previousFrameBuffer,0);
@@ -516,10 +559,19 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
 +    }
 +    static auto Register(ProjectM& engine,int index) -> double {
 +        return Active(engine).m_state.globalRegisters[index];
++    }
++    static void LeaveInstancedShapeInputs(ProjectM& engine) {
++        for(auto& shape : Active(engine).m_customShapes) {
++            for(GLuint vao : {shape->m_vaoIdUntextured,shape->m_vaoIdTextured}) {
++                glBindVertexArray(vao);
++                for(GLuint location=0;location<3;++location) glVertexAttribDivisor(location,1);
++            }
++        }
++        glBindVertexArray(0);
      }
      static auto Frame(ProjectM& engine) -> int { return Active(engine).m_state.renderContext.frame; }
      static void ClearNativeFeedback(ProjectM& engine) {
-@@ -563,3 +570,87 @@
+@@ -563,3 +580,112 @@
      EXPECT_GT(*std::max_element(feedback.begin(),feedback.end()),100) << "vectors must resume once the native warp writes UV";
      EXPECT_EQ(glGetError(),GL_NO_ERROR);
  }
@@ -605,5 +657,30 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
 +            EXPECT_EQ(libprojectM::FeedbackDetailTestAccess::Register(engine,2),8*frame)<<"wave points, alpha "<<alpha;
 +        }
 +        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, GeometryReplayRestoresPerVertexShapeInputs) {
++    const auto source=Preset("ret=float3(0,0,0);")+
++        "shapecode_0_enabled=1\nshapecode_0_sides=3\nshapecode_0_x=0.437\n"
++        "shapecode_0_y=0.533\nshapecode_0_rad=0.27\nshapecode_0_a=1\n"
++        "shapecode_0_r=1\nshapecode_0_g=0.4\nshapecode_0_b=0.2\n"
++        "shapecode_0_r2=1\nshapecode_0_g2=0.4\nshapecode_0_b2=0.2\nshapecode_0_a2=1\n";
++    const auto render=[&](bool stale,float alpha) {
++        TestProjectM engine;
++        engine.SetWindowSize(126,96);engine.SetLineReferenceSize(42,32);
++        engine.SetFeedbackDetail(alpha);engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++        std::istringstream input(source);engine.LoadPresetData(input,false);
++        EXPECT_TRUE(engine.failure.empty())<<engine.failure;
++        if(stale) libprojectM::FeedbackDetailTestAccess::LeaveInstancedShapeInputs(engine);
++        engine.RenderFrame(m_framebuffer);
++        const auto pixels=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::NativeFeedback(engine));
++        EXPECT_EQ(glGetError(),GL_NO_ERROR);
++        return pixels;
++    };
++    for(float alpha : {0.f,0.5f,1.f}) {
++        const auto clean=render(false,alpha);
++        ASSERT_GT(*std::max_element(clean.begin(),clean.end()),0);
++        EXPECT_EQ(render(true,alpha),clean)<<"Fill positions/colors/UV must advance per vertex, alpha "<<alpha;
 +    }
 +}
