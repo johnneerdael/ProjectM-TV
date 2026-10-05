@@ -62,6 +62,7 @@ public final class QualityController {
     private final int initialIndex;
     private MemorySnapshot memorySnapshot;
     private int nativeTrailsLevel;
+    private long allocationBytesBeforeSettings;
     private boolean memoryConstrained;
     private boolean lastChangeForMemoryPressure;
     private int healthyMemorySamples;
@@ -181,7 +182,10 @@ public final class QualityController {
      * its height until GL releases the old textures; the next completed-generation FPS sample
      * then checks actual available memory. Visibility resumes still use revalidateForResume.
      */
-    public void revalidateForAllocationChange(boolean growing) {
+    public void revalidateForAllocationChange() {
+        // The setter can lower current and invoke the host listener before it returns. Compare
+        // the resulting tuple against the allocation captured before that edit/height change.
+        boolean growing = estimate(current) > allocationBytesBeforeSettings;
         if (growing || fullAllocationPending) {
             revalidateForResume(growing);
         } else {
@@ -206,10 +210,10 @@ public final class QualityController {
 
     /** Review the final allocation tuple, avoiding intermediate growth in opposite-field edits. */
     public void setRenderAllocationSettings(int trailsLevel, int transitionSeconds) {
-        long before = estimate(current);
+        allocationBytesBeforeSettings = estimate(current);
         nativeTrailsLevel = Math.max(0, Math.min(2, trailsLevel));
         transitionMs = Math.max(0, transitionSeconds) * 1000L;
-        recheckBudgetGrowth(before);
+        recheckBudgetGrowth(allocationBytesBeforeSettings);
     }
 
     public boolean isMemoryConstrained() { return memoryConstrained; }

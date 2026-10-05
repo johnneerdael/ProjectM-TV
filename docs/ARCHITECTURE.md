@@ -175,11 +175,14 @@ The GL surface buffer is resized with `SurfaceHolder.setFixedSize(w, h)`. The di
 On the historical2GB SHIELD, 1440p-and-above rendering caused Android’s low-memory killer to close SoundCloud and other processes. That observation motivates proactive headroom checks and cache/prewarm cleanup; it does not prove that any reserve guarantees survival under every vendor policy. Live music-process and memory validation remains necessary.
 
 Managed hosts review trails/transition settings atomically, invalidate the old FPS generation,
-then call `revalidateForAllocationChange(growing)`. A confirmed reduction publishes its current
+then call `revalidateForAllocationChange()`. A confirmed reduction publishes its current
 height before sampling memory: the next new-generation rendered-frame sample observes the
 texture release and still lowers resolution if pressure persists. Growth and unconfirmed
 allocations require a fresh full budget. Visibility/context resumes independently use
 `revalidateForResume` and always sample current memory before rendering.
+The controller captures the old allocation before changing settings or invoking a height
+listener, so enabling trails or blending can become a net reduction after a height downshift.
+Hosts do not recalculate both old and new topologies at the already-lowered height.
 
 ### Frame pacing
 Full rate renders continuously (`RENDERMODE_CONTINUOUSLY`). Half rate switches to `RENDERMODE_WHEN_DIRTY` and a `Choreographer` callback calls `requestRender()` on every second vsync: 30 fps at 60 Hz, 25 fps at 50 Hz. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so the speed of the visuals doesn't change.

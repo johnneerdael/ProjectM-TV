@@ -28,7 +28,6 @@ import nl.neerdael.projectm.core.DeviceProfile;
 import nl.neerdael.projectm.core.DisplayInfo;
 import nl.neerdael.projectm.core.ProjectMJNI;
 import nl.neerdael.projectm.core.QualityController;
-import nl.neerdael.projectm.core.RenderMemoryBudget;
 import nl.neerdael.projectm.core.VisualizerRenderer;
 import nl.neerdael.projectm.core.VisualizerView;
 
@@ -350,16 +349,12 @@ public class MainActivity extends Activity {
         boolean detail = nativeTrailsLevel() > 0;
         boolean blend = transitionSeconds() > 0;
         if (detail != budgetedDetailAllocation || blend != budgetedBlendAllocation) {
-            int width = display.widthForHeight(height);
-            boolean growing = RenderMemoryBudget.estimatedBytes(width, height, detail ? 1 : 0, blend)
-                    > RenderMemoryBudget.estimatedBytes(width, height, budgetedDetailAllocation ? 1 : 0,
-                            budgetedBlendAllocation);
             budgetedDetailAllocation = detail;
             budgetedBlendAllocation = blend;
             // Invalidate queued FPS for every topology change. Growth needs a full review;
             // confirmed reductions defer pressure sampling until GL releases the old textures.
             renderBudgetGeneration = ProjectMJNI.requireRenderBudget();
-            quality.revalidateForAllocationChange(growing); // The listener publishes its chosen height.
+            quality.revalidateForAllocationChange(); // The listener publishes its chosen height.
             return;
         }
         visualizerView.setRenderConfiguration(display.widthForHeight(height), height,
