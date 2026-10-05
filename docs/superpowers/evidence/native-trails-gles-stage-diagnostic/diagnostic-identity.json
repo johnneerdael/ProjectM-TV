@@ -1,0 +1,39 @@
+{
+  "source_commit": "55ee02f02e8a8a35616ba5ad7ef362dd6f3f0e70",
+  "shipping_patch_0042_sha256": "be3f39da0e936a48b581781ed1b8ab1e13810ac6ba55b37abba6f5efb5ad151e",
+  "seed": 12345,
+  "frames": 12,
+  "fps": 30,
+  "driver": "ANGLE2.1.1 git fbf66f49c7cc; Metal Apple M4 Pro; macOS15.8 Build24H23",
+  "shipping_byte_identity": false,
+  "paths": {
+    "instrumentation": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-trails-production/build/native-trails/engine-diagnostic/diagnostic-instrumentation.patch",
+      "sha256": "dcfb2ffca08c1e51ccc13781a2125d4b02721b4f3f759be85339a607cb9aeed9"
+    },
+    "binary": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-trails-production/build/native-trails/engine-diagnostic/angle-cmake/feedback-diagnostic",
+      "sha256": "38c06dfbb3448f91070aecd2cba8de57d03f2a787d38839933ee370ab810daaa"
+    },
+    "pcm": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-trails-production/build/native-trails/mac-wide/audio-float.f32",
+      "sha256": "c35449750c46245bf6eafabdcca040f948dc24197498c86f04470d559061b811"
+    },
+    "gles_library": {
+      "path": "/Users/jneerdael/Library/Android/sdk/emulator/lib64/gles_angle/libGLESv2.dylib",
+      "sha256": "b2b299ef7bf3ab24fdcb0b346b0329d222beeb95e12fb0a704d6a1c8ba7ecef1"
+    },
+    "egl_library": {
+      "path": "/Users/jneerdael/Library/Android/sdk/emulator/lib64/gles_angle/libEGL.dylib",
+      "sha256": "98b472757d25c9fbc961663600042597f209a2833372f60da122bc9f9be02ba8"
+    },
+    "waltra": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-trails-production/core/src/main/assets/presets/Waltra - Heaven Liquid.milk",
+      "sha256": "51cde8a9f21f6a432a5c5d3f470b771d47e96db797a7776c722a735c52316d24"
+    },
+    "hex": {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/native-trails-production/core/src/main/assets/presets/Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+      "sha256": "3ece7925f0e4b2fe83cccf07411d10a62d1599135ab71e5e7a6b634a369c0fad"
+    }
+  }
+}
