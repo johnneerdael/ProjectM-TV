@@ -67,7 +67,9 @@ def native_hashes(archive):
             for name in archive.namelist() if name.startswith("jni/") and name.endswith(".so")}
 
 
-def build(commit, policy, role, work):
+def build(commit, policy, role, work, abi="arm64-v8a"):
+    if abi not in ("arm64-v8a", "armeabi-v7a"):
+        raise ValueError("Unsupported ABI: " + abi)
     commit = subprocess.check_output(["git", "rev-parse", commit], cwd=ROOT, text=True).strip()
     destination = work.resolve() / role
     destination.mkdir(parents=True, exist_ok=False)
@@ -114,7 +116,7 @@ def build(commit, policy, role, work):
     change(cmake, text, changes, source)
     gradle = source / "core/build.gradle"
     change(gradle, once(gradle.read_text(), 'abiFilters "armeabi-v7a", "arm64-v8a"',
-                       'abiFilters "arm64-v8a"'), changes, source)
+                       'abiFilters "' + abi + '"'), changes, source)
     sdk = Path(os.environ.get("ANDROID_HOME", str(Path.home() / "Library/Android/sdk")))
     (source / "local.properties").write_text("sdk.dir=" + str(sdk) + "\n")
     patches = [{"name": p.name, "sha256": file_digest(p)}
@@ -122,7 +124,7 @@ def build(commit, policy, role, work):
     if [int(p["name"][:4]) for p in patches] != list(range(1, len(patches) + 1)):
         raise ValueError("Nonconsecutive patch series")
     (destination / "instrumentation.diff").write_text("".join(changes))
-    identity = {"source_commit": commit, "policy": policy, "role": role,
+    identity = {"source_commit": commit, "policy": policy, "role": role, "abi": abi,
                 "ordered_patches": patches, "engine_identity": asdict(engine_identity),
                 "builder_sha256": file_digest(Path(__file__)),
                 "instrumentation_diff_sha256": file_digest(destination / "instrumentation.diff"),
@@ -198,6 +200,7 @@ if __name__ == "__main__":
     parser.add_argument("--commit", required=True)
     parser.add_argument("--policy", choices=("native", "capped"), required=True)
     parser.add_argument("--role", choices=("baseline-native", "baseline-capped", "candidate-native", "candidate-capped"), required=True)
+    parser.add_argument("--abi", choices=("arm64-v8a", "armeabi-v7a"), default="arm64-v8a")
     parser.add_argument("--work", type=Path, default=ROOT / "build/native-trails/workers")
     args = parser.parse_args()
-    build(args.commit, args.policy, args.role, args.work)
+    build(args.commit, args.policy, args.role, args.work, abi=args.abi)

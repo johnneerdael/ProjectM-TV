@@ -18,6 +18,12 @@ class TransformTests(unittest.TestCase):
         self.assertNotIn('steady_clock::now()', changed)
         self.assertIn('lab::clock_seconds.load()', changed)
 
+    def test_invalid_abi_is_rejected_before_export(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError, "Unsupported ABI"):
+                builder.build("HEAD", "native", "candidate-native", Path(temp), abi="x86_64")
+            self.assertEqual(list(Path(temp).iterdir()), [])
+
     def test_native_directory_entries_are_not_artifacts(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / 'sample.aar'
