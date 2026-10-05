@@ -50,6 +50,14 @@ class DiagnosticsTestCase(unittest.TestCase):
 
 
 class PackageModeTests(DiagnosticsTestCase):
+    def test_retired_fixed_resolution_sweep_is_rejected_before_device_access(self):
+        result = self.run_script(["--sweep"])
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("automatic", result.stdout.lower())
+        self.assertIn("--sweep", result.stdout)
+        self.assertFalse(self.calls.exists(), result.stdout)
+
+
     def test_alternate_package_is_rejected_before_device_access(self):
         cases = [
             ["--package", PROFILE],

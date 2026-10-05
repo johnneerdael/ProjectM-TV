@@ -15,9 +15,7 @@ Run the scripts from the repository root.
 ```sh
 python -m unittest discover -s tools/native-trails -v
 python tools/native-trails/build_validation.py --commit BASELINE_SHA --policy native --role baseline-native --work build/native-trails/workers
-python tools/native-trails/build_validation.py --commit BASELINE_SHA --policy capped --role baseline-capped --work build/native-trails/workers
 python tools/native-trails/build_validation.py --commit CANDIDATE_SHA --policy native --role candidate-native --work build/native-trails/workers
-python tools/native-trails/build_validation.py --commit CANDIDATE_SHA --policy capped --role candidate-capped --work build/native-trails/workers
 python tools/native-trails/run_validation.py run --device OWNED_EMULATOR --workers build/native-trails/workers --presets tools/native-trails/presets.txt --work build/native-trails/focused
 ```
 
@@ -35,10 +33,13 @@ and checks instance/context cleanup. `--profiles` can select profiles from the
 frozen protocol without redefining its inputs. Inspect every completed row;
 never treat an exited runner or a partial progress file as successful coverage.
 
-Compare all selected hashes for `native_before` / `native_off`, `capped_before` /
-`capped_after`, and `authored` / `authored_repeat`. Inspect authored / old Native /
-Standard / Medium / High full frames and crops. Brightness and image-error figures
-are diagnostics; near-black and chaotic presets require particular care.
+Compare every selected hash for `native_before` / `native_off`, `authored` /
+`authored_repeat`, and `standard` / `standard_default`. Inspect authored / old
+Native / Standard / Medium / High full frames and crops. The retired capped AAR
+is a historical download only; the owner no longer requires it as a supported
+candidate or an identity gate. Brightness and image-error figures are diagnostics;
+near-black and chaotic presets require particular care. Every enabled 4K profile
+must report its active1280×720 canvas, rather than shader/resource fallback.
 
 Frame timings measure `onDrawFrame` plus `glFinish` over 360 frames, excluding PNG
 encoding and transport. They are serialized engine timings on the emulator, not

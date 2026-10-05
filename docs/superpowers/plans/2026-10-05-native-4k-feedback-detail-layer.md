@@ -1,5 +1,7 @@
 # Native 4K Feedback Detail Layer Implementation Plan
 
+> **Current owner scope (2026-10-05 follow-up):** publish one Native `:core`, retire the separate capped artifact, keep Standard/Medium/High, and make resolution always automatic up to native4K from targetFPS and live memory headroom. Remove manual Resolution/RAM controls. These decisions supersede this original plan’s retained capped/Auto1330/fixedNative-default requirements. See [the current design](../specs/2026-10-05-native-trails.md) and `tools/native-trails/README.md` for focused known-preset validation. The original plan/evidence below remains historical context.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the Native (above-1330) render look like the preset as authored. Fix the darkening of feedback presets at Native 4K (`$$$ Royal - Mashup (191)` at 0.38× brightness, `Fed - quadratrail` 0.61×, `astral spinorgentics encrustcore nz+` 0.75×, `Geiss - Motion Blur` black on current main). Keep 4K sharpness where the preset allows it, and make Native faster than today by default.

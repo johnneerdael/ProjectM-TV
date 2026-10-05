@@ -18,21 +18,20 @@ Production releases are signed by CI. See [Builds and Releases](https://github.c
 
 ## Core rendering policies
 
-The core publishes two AARs with the same Java/JNI interface. Select a policy at build time:
+The single `:core` AAR uses Native rendering. Build it with:
 
 ```sh
-./gradlew :core:assembleRelease -PprojectmCoreRenderingPolicy=capped
-./gradlew :core:assembleRelease -PprojectmCoreRenderingPolicy=native
+./gradlew :core:assembleRelease
 ```
 
-Both commands produce `core/build/outputs/aar/core-release.aar`; copy the first AAR before building the second policy. Normal Gradle and APK builds default to `native`.
-
-- **Capped:** enforces a maximum internal render height of 1330p in the core, including direct JNI surface requests. Larger destination surfaces display the upscaled render. The Native choice and feedback diffusion are absent. If the capped intermediate framebuffer cannot be created, the core skips the frame rather than breaking the cap.
-- **Native:** keeps Auto and numeric fixed choices capped at 1330p, with a separate full-panel Native option when panel and memory limits permit it. Eligible above-reference rendering uses feedback diffusion, including Auto at 1330p. Higher resolution can cost more GPU work and memory or change feedback pictures.
-
-The canonical `projectM-TV-core.aar` and versioned `projectM-TV-core-<version>.aar` downloads use **capped**, preserving Milkbeat's default core policy. The explicit `projectM-TV-core-native.aar` and `projectM-TV-core-native-<version>.aar` downloads use **native**. The standard ProjectM TV APK uses the Native-capable core and defaults to Auto. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for publication and checksums.
-
-These policies are separate build choices, not a claim that feedback compensation preserves every preset or improves TV frame rate.
+The legacy `-PprojectmCoreRenderingPolicy=native` spelling remains accepted. The
+retired `capped` build is rejected. Canonical `projectM-TV-core.aar` and versioned
+core downloads now contain Native bytes; there is no separate capped publication.
+The Java/JNI API remains additive. Standard trails is the new core default above
+1330p, with `ProjectMJNI.setNativeTrails(-1/0/1/2)` for Off/Standard/Medium/High.
+The shared QualityController is automatic up to the detected panel size, with
+FPS and live memory headroom as inputs. Legacy fixed-resolution/static-RAM
+settings normalize to Auto. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md).
 
 ## Offline preset analysis
 

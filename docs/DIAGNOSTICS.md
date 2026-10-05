@@ -10,7 +10,7 @@
 ## Run
 
 ```bash
-tools/tv-diagnostics.sh 192.168.50.105:5555 --sweep
+tools/tv-diagnostics.sh 192.168.50.105:5555 --duration 180
 ```
 
 The first connection shows an *Allow debugging?* prompt on the TV; accept it with the remote. The script captures the foreground Android user ID once, records it in the summary, and uses it for installation, permission grants, notification access, stopping/starting the app and process lookup. Keep that user in the foreground throughout the run. An APK update replaces shared package code even when installation targets one user.
@@ -23,7 +23,7 @@ The first connection shows an *Allow debugging?* prompt on the TV; accept it wit
 | `--no-install` | Tests the version that is already installed |
 | `--package ID` | Application ID to test (default `nl.neerdael.projectmtv`). Alternate IDs require a matching `--apk` or `--no-install`; building and `--release` only support the default ID |
 | `--allow-uninstall` | Attempts signing-key recovery by uninstalling only for the captured Android user (resets that user's app settings); refuses if another user has the same package or that state cannot be verified |
-| `--sweep` | Also measures each fixed resolution (720p, 1080p, …), driving the menu with key events |
+| `--sweep` | Retired and rejected before device access; resolution is always automatic |
 | `--duration SEC` | Observation time (default 180) |
 
 For an already installed profile build, run:
@@ -65,8 +65,8 @@ On a signing-key conflict, `--allow-uninstall` checks `pm list users` and each o
 - `projectM-Native: OUTPUT preset='…' samples=18 luma_range=3..9 change_pct_min=0.4 change_pct_avg=1.1 region_pct_min=2.0 luma_changes=… hue_only_changes=… flat=18/18 still=17/17 skipped=no`: what a preset showed while music played (see *Output measurements* below).
 - `projectM-Native: SKIP preset='…' reason=…`.
 - `QualityController: …`: dynamic-resolution decisions, including `Memory pressure …` when Android asks apps to free memory.
-- `ProjectMTV: Memory limit: render height up to 1260 (RAM 1941 MB)` (or `Memory limit: off`). The sweep only covers the levels up to this limit; turn *Advanced › Memory limit* off first to sweep up to the render height cap.
-- `ProjectMTV: Render height cap: 1330 (panel height 2160)`: the highest render height the app uses (`QualityController.RENDER_HEIGHT_CAP`); the sweep stops there too.
+- `ProjectMTV: Automatic resolution: panel up to2160p, live memory budget`: the current controller can reach the native panel and accounts for FPS/memory. There is no manual RAM limiter.
+- `VisualizerRenderer: STATS … surface=WxH`: the actual automatically chosen size for each FPS sample interval.
 
 ### Cold start
 
@@ -104,3 +104,5 @@ heaptrail -i restarts10.hprof --find-referrers com.example.projectm.visualizer.M
 ```
 
 Release builds are not debuggable. If `am dumpheap` refuses the process, capture from a debug build (`./gradlew assembleDebug`), then reinstall the release build afterwards.
+
+Compare target FPS, Native trails level, actual resolution distribution and memory-pressure events. FPS alone is not a fixed-size comparison when Auto changes size. Use the focused offscreen actual-core workers for fixed-size engine captures; restore profile preferences/properties and verify music playback state3 after live work.

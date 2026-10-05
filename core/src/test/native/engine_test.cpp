@@ -113,6 +113,9 @@ std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
 bool g_directOutput = false, g_lastFrameDirect = false;
 int g_loadsAfterDirectFrame = 0;
 void projectm_opengl_set_direct_output(projectm_handle, bool enabled) { g_directOutput = enabled; }
+float g_feedbackDetailAlpha = -1.f;
+void projectm_opengl_set_feedback_detail(projectm_handle, float alpha) { g_feedbackDetailAlpha = alpha; }
+int projectm_opengl_get_feedback_detail_status(projectm_handle) { return g_feedbackDetailAlpha < 0 ? -1 : 3; }
 uint32_t g_lineReferenceWidth = 0;
 uint32_t g_lineReferenceHeight = 0;
 void projectm_opengl_set_line_reference_size(projectm_handle, uint32_t width, uint32_t height) {
@@ -140,7 +143,8 @@ void projectm_set_preset_initialization_warning_event_callback(projectm_handle, 
 void projectm_set_hard_cut_enabled(projectm_handle, bool) {}
 void projectm_set_beat_sensitivity(projectm_handle, float) {}
 void projectm_set_preset_duration(projectm_handle, double) {}
-void projectm_set_soft_cut_duration(projectm_handle, double) {}
+double g_appliedSoftCutSeconds = 7;
+void projectm_set_soft_cut_duration(projectm_handle, double seconds) { g_appliedSoftCutSeconds = seconds; }
 void projectm_set_preset_locked(projectm_handle, bool l) { g_locked = l; }
 void projectm_set_mesh_size(projectm_handle, size_t, size_t) { ++g_meshCalls; }
 void projectm_set_texture_search_paths(projectm_handle, const char** paths, size_t count) {

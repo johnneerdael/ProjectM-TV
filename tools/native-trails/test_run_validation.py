@@ -3,6 +3,10 @@ from pathlib import Path
 import tempfile
 import unittest
 import zipfile
+import json
+import hashlib
+import cv2
+import numpy as np
 
 spec = importlib.util.spec_from_file_location("trails_runner", Path(__file__).with_name("run_validation.py"))
 runner = importlib.util.module_from_spec(spec)
@@ -32,5 +36,46 @@ class ArtifactTests(unittest.TestCase):
             identity = self.artifacts(temp)
             Path(identity["apk"]).write_bytes(b"changed")
             with self.assertRaisesRegex(ValueError,"Frozen apk"): runner.check_artifacts(identity)
+
+class CaptureTests(unittest.TestCase):
+    def manifest(self, path):
+        request = {"preset":"witness.milk", "width":1, "height":1}
+        manifest = {"status":"ok", "framesRendered":480, "job":request,
+            "requestSha256":hashlib.sha256((runner.canonical_json(request)+"\n").encode()).hexdigest(),
+            "presetAssetSha256":"preset-sha", "verifiedPresetName":"witness.milk",
+            "coreReleased":True, "eglDestroyed":True, "glErrorChecks":480,
+            "presetNameChecks":480, "eligiblePresetCountAfterFrame479":1, "presetChangeCounter":1,
+            "captures":[]}
+        for frame in runner.CAPTURES:
+            file = path/('frame-%03d.png' % frame)
+            pixels = np.array([[[10,20,30]]],dtype=np.uint8)
+            cv2.imwrite(str(file),pixels)
+            manifest['captures'].append({'frame':frame,'pngSha256':runner.file_digest(file),
+                'rgbSha256':hashlib.sha256(cv2.cvtColor(pixels,cv2.COLOR_BGR2RGB).tobytes()).hexdigest()})
+        runner.write(path/'manifest.json',manifest)
+        return request,manifest
+
+    def test_valid_selected_frames_and_exact_request_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,_ = self.manifest(path)
+            runner.verify(path,request,'preset-sha')
+
+    def test_missing_gl_checks_fail(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,manifest = self.manifest(path)
+            manifest['glErrorChecks'] = 479; runner.write(path/'manifest.json',manifest)
+            with self.assertRaises(ValueError): runner.verify(path,request,'preset-sha')
+
+    def test_replaced_frame_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,_ = self.manifest(path)
+            (path/'frame-120.png').write_bytes(b'corrupt')
+            with self.assertRaisesRegex(ValueError,'PNG checksum'): runner.verify(path,request,'preset-sha')
+
+    def test_missing_temporal_frame_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,manifest = self.manifest(path)
+            manifest['captures'].pop(); runner.write(path/'manifest.json',manifest)
+            with self.assertRaisesRegex(ValueError,'temporal'): runner.verify(path,request,'preset-sha')
 
 if __name__ == '__main__': unittest.main()

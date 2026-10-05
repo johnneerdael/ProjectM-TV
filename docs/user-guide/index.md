@@ -21,7 +21,7 @@ ProjectM TV visualizes music another app plays on Android TV. It runs projectM w
 
 The choice is saved. Your TV's skip list and performance checks still apply, so the eligible count can be lower than the number packaged in a collection.
 
-This guide describes the current source, including the [Native resolution option](settings.md) under evaluation. Auto remains the default. The setup walkthrough uses real screenshots from an earlier isolated test installation on an Ugoos AM6; Android settings can look different on your TV. At least 2 GB of RAM is highly recommended.
+This guide describes the current source, including [Native resolution and Native trails](settings.md). Standard trails is the default, and resolution is always automatic up to the panel’s native size, using target FPS and live memory headroom. The setup walkthrough uses real screenshots from an earlier isolated test installation on an Ugoos AM6; Android settings can look different on your TV. At least 2 GB of RAM is highly recommended.
 
 ## For the curious
 

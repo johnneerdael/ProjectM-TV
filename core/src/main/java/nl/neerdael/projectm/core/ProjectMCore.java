@@ -13,7 +13,19 @@ public final class ProjectMCore {
     private static final String SKIP_LIST_FILE = "skipped_presets.txt";
     private static final String TEXTURE_DIR = "textures";
 
+    private static volatile MemoryProvider memoryProvider = () -> null;
+    private static boolean memoryProviderInitialized;
+
     private ProjectMCore() {}
+
+    static MemoryProvider memoryProvider() { return memoryProvider; }
+
+    private static synchronized void initMemoryProvider(Context app) {
+        if (!memoryProviderInitialized) {
+            memoryProvider = new AndroidMemoryProvider(app);
+            memoryProviderInitialized = true;
+        }
+    }
 
     /**
      * Starts the engine's background work: presets are indexed straight from the APK assets, and
@@ -25,6 +37,7 @@ public final class ProjectMCore {
      */
     public static void init(Context context) {
         Context app = context.getApplicationContext();
+        initMemoryProvider(app);
         ProjectMJNI.init(app.getAssets(), skipListFile(app).getAbsolutePath(),
                 new File(app.getFilesDir(), TEXTURE_DIR).getAbsolutePath());
     }

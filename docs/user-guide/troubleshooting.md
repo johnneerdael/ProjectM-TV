@@ -15,17 +15,19 @@ If no audio is found while Android reports music playing, the app searches again
 
 ## Picture stutters
 
-Keep **Resolution** and **Transitions** on Auto, and use the default half-refresh-rate frame rate. Lower **Detail** in Advanced if the preset's equations limit the CPU. Blending two heavy presets can be slower than rendering one.
+Resolution adapts automatically to the selected target frame rate and available memory. Use the default half-refresh-rate frame rate, **Native trails → Standard**, and **Transitions → Auto**. Lower **Detail** if the preset’s equations limit the CPU. Blending two heavy presets can be slower than rendering one, and some CPU-heavy presets gain little from lower resolution.
 
-Higher resolutions use more memory. Keep Memory limit enabled, particularly on TVs with 2 GB RAM. After a memory-pressure report, automatic resolution may stay lower for the session.
+Check the actual render size and memory status in **Advanced → Diagnostics**. Memory pressure can temporarily lower resolution and pause preset prewarming to leave headroom for your music player. There is no manual RAM limiter or fixed-resolution setting.
 
-If you selected **Native**, switch back to **Auto**. Native holds the detected panel height; it does not lower the resolution when a preset is slow or Android reports memory pressure.
+## The render size is below 4K
 
-## Native is missing or the picture looks different
+A 4K panel can render natively, but automatic quality only uses a size that fits the target frame rate and live memory budget. Medium and High trails cost more than Standard, and transitions can hold two presets. Other apps also affect available memory. Diagnostics distinguishes the detected panel from the current render size; Android’s UI may still run at 1080p.
 
-Native is offered only for a detected panel height above 1330p when **Memory limit** permits the entire panel height. For example, a 4K TV whose RAM limit permits only 1440p will not offer Native. **Advanced → Diagnostics** shows the detected panel and actual render size. Keep Memory limit enabled to leave room for your music player.
+## Native trails look soft or different
 
-Feedback presets can change brightness, colour and pattern at higher resolution. The compensation under evaluation does not preserve every preset's appearance. Compare another preset or return to Auto; sharper output is not a guarantee of the same picture.
+Standard deliberately keeps the authored feedback canvas while new geometry and the composite remain native. Try Medium or High for more native trail detail. Both cost the same additional passes; High retains the larger gain. Near black or white, the renderer limits that gain to avoid clipping-driven brightness changes, so some areas may look similar at both levels.
+
+At render sizes of 1330p or below, Native trails is inactive and the existing diffusion path remains. An incompatible integer canvas or a driver shader/resource failure also uses fallback. Include the exact Diagnostics message, render size, preset and device in a bug report. Some chaotic presets vary from small input differences; compare the same audio and timing. Host/emulator validation does not establish performance or shader compatibility on every physical TV GPU.
 
 ## A preset looks different when revisited
 

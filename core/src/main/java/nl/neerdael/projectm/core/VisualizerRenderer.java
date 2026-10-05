@@ -20,6 +20,14 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
         void onPresetChanged();
     }
 
+    /** Managed clients acknowledge fresh memory budgets before the first frame of a new GL context. */
+    public interface BudgetStatsListener extends StatsListener {
+        void onRenderBudgetRequested(long generation);
+        default void onBudgetFpsSample(float fps, long generation, int width, int height) {
+            onFpsSample(fps);
+        }
+    }
+
     private final StatsListener listener;
     private int lastPresetChange = Integer.MIN_VALUE;
     private int statsCountdown;
@@ -34,6 +42,7 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     private volatile int surfaceHeight;
     private long fpsWindowStart;
     private int framesInWindow;
+    private long lastRenderedFrameSerial;
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -46,8 +55,13 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             Log.w(TAG, "Could not raise render thread priority", e);
         }
         ProjectMJNI.onSurfaceCreated();
+        if (listener instanceof BudgetStatsListener) {
+            long generation = ProjectMJNI.requireRenderBudget();
+            ((BudgetStatsListener) listener).onRenderBudgetRequested(generation);
+        }
         fpsWindowStart = System.nanoTime();
         framesInWindow = 0;
+        lastRenderedFrameSerial = ProjectMJNI.getRenderedFrameSerial();
     }
 
     @Override
@@ -56,6 +70,9 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
         surfaceWidth = width;
         surfaceHeight = height;
         ProjectMJNI.onSurfaceChanged(width, height);
+        fpsWindowStart = System.nanoTime();
+        framesInWindow = 0;
+        lastRenderedFrameSerial = ProjectMJNI.getRenderedFrameSerial();
     }
 
     @Override
@@ -69,14 +86,19 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             if (!first) listener.onPresetChanged();
         }
 
-        framesInWindow++;
+        long serial = ProjectMJNI.getRenderedFrameSerial();
+        framesInWindow += (int) Math.max(0, serial - lastRenderedFrameSerial);
+        lastRenderedFrameSerial = serial;
         long now = System.nanoTime();
         long elapsed = now - fpsWindowStart;
         if (elapsed >= 1_000_000_000L) {
             currentFps = framesInWindow * 1e9f / elapsed;
             framesInWindow = 0;
             fpsWindowStart = now;
-            listener.onFpsSample(currentFps);
+            if (listener instanceof BudgetStatsListener) {
+                ((BudgetStatsListener) listener).onBudgetFpsSample(currentFps,
+                        ProjectMJNI.getCompletedRenderBudgetGeneration(), surfaceWidth, surfaceHeight);
+            } else listener.onFpsSample(currentFps);
             // Machine-readable line for tools/tv-diagnostics.sh (cheap: once every 5 s).
             if (--statsCountdown <= 0) {
                 statsCountdown = STATS_LOG_INTERVAL_S;

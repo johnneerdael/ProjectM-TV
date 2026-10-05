@@ -27,12 +27,11 @@ PROFILES = [
     ("authored", "baseline-native", 1280, 720, 0, 0, None),
     ("authored_repeat", "baseline-native", 1280, 720, 0, 0, None),
     ("native_before", "baseline-native", 3840, 2160, 1024, 768, None),
-    ("native_off", "candidate-native", 3840, 2160, 1024, 768, None),
+    ("native_off", "candidate-native", 3840, 2160, 1024, 768, -1),
     ("standard", "candidate-native", 3840, 2160, 1280, 720, 0),
     ("medium", "candidate-native", 3840, 2160, 1280, 720, 1),
     ("high", "candidate-native", 3840, 2160, 1280, 720, 2),
-    ("capped_before", "baseline-capped", 2364, 1330, 1024, 768, None),
-    ("capped_after", "candidate-capped", 2364, 1330, 1024, 768, None),
+    ("standard_default", "candidate-native", 3840, 2160, 1280, 720, None),
 ]
 
 
@@ -78,6 +77,10 @@ def verify(directory, request, expected_hash):
         raise ValueError("Manifest is from another request")
     if manifest.get("presetAssetSha256") != expected_hash or manifest.get("verifiedPresetName") != request["preset"]:
         raise ValueError("Rendered preset identity changed")
+    if manifest.get("glErrorChecks") != 480 or manifest.get("presetNameChecks") != 480:
+        raise ValueError("Incomplete per-frame GL/preset checks")
+    if manifest.get("eligiblePresetCountAfterFrame479") != 1 or manifest.get("presetChangeCounter") != 1:
+        raise ValueError("Exact single-preset invariant failed")
     if not manifest.get("coreReleased") or not manifest.get("eglDestroyed"):
         raise ValueError("Core/context cleanup incomplete")
     if [capture["frame"] for capture in manifest["captures"]] != CAPTURES:
@@ -150,8 +153,6 @@ def initialize(work, workers, presets, device):
         check_artifacts(identity)
     if len({item["assets_sha256"] for item in identities.values()}) != 1:
         raise ValueError("Baseline/candidate packaged assets differ")
-    if identities["candidate-native"]["source_commit"] != identities["candidate-capped"]["source_commit"]:
-        raise ValueError("Candidate policies are from different revisions")
     before = identities["baseline-native"]["ordered_patches"]
     for role, identity in identities.items():
         expected = before if role.startswith("baseline") else before + identity["ordered_patches"][len(before):]
@@ -197,8 +198,11 @@ def run(work, workers, presets, device, selected):
                 directory = work / "jobs" / key
                 manifest = render(device, identity, request(preset, width, height, rw, rh, level),
                                   directory, work / "audio.u8", sha)
-                if level is not None and profile not in str(manifest.get("nativeTrailsStatus", "")).lower():
-                    raise ValueError("Production path did not activate: " + str(manifest.get("nativeTrailsStatus")))
+                if profile in ("standard", "medium", "high", "standard_default"):
+                    expected = "standard" if profile == "standard_default" else profile
+                    status = str(manifest.get("nativeTrailsStatus", "")).lower()
+                    if expected not in status or "1280×720" not in status or "canvas" not in status or "fallback" in status:
+                        raise ValueError("Production path did not activate: " + str(manifest.get("nativeTrailsStatus")))
                 row = {"preset": preset, "profile": profile, "key": key, "status": manifest["status"],
                        "frame_hashes": [capture["rgbSha256"] for capture in manifest["captures"]],
                        "trail_status": manifest.get("nativeTrailsStatus"),

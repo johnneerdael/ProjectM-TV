@@ -9,15 +9,16 @@ All is the default music category. Your selected category is saved.
 | Auto change | Off, On | On |
 | Music category | All, Dance | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
-| Resolution | Auto or numeric fixed heights up to 1330p, within the panel and memory limits; Native uses the detected panel height when it is above 1330p and memory permits | Auto |
 
-The standard APK uses the Native-capable core. **Native** is an explicit opt-in with known picture and resource limits. It uses the TV's detected panel height, such as 2160p on a 4K panel, even if Android's menus run at 1080p. It can show more detail, but can run slower and use more memory. It does not lower resolution for slow presets or memory-pressure reports; use Auto for adaptive performance. Auto transitions can still render a blend at lower resolution. Higher resolution can also change a feedback preset's brightness, colour or pattern, and the compensation does not preserve every preset's look.
+The APK and the single published core use the Native renderer with **automatic resolution**. The controller adjusts render size in real time for the selected target frame rate and available memory, up to the detected full panel size. A 4K panel can render at 3840×2160 even when Android’s menus run at 1080p. Slow or memory-heavy workloads can render lower and are scaled to fill the screen.
 
-Native appears only when the panel height exceeds 1330p and **Memory limit** permits that full height. If a saved Native choice becomes unavailable, the app uses Auto. Older saved numeric 1440p/4K choices remain capped; they do not automatically select Native. Auto remains the default and stops at 1330p even when Memory limit is off.
+There is no manual Resolution or RAM-limiter control. Old saved fixed-resolution and memory-limit values no longer override the automatic controller. It reserves memory headroom before raising resolution, accounts for the extra rendering allocations of trails and transitions, and lowers resolution under memory pressure. This reduces pressure on the music player; it cannot guarantee that every Android/vendor memory policy will keep every background process alive.
 
-In the Native-capable core, the feedback correction also applies to eligible presets above their authored reference size in Auto and numeric fixed modes, including 1330p. It can change their patterns even when the resolution setting stays the same.
+**Native trails** has three values. Standard is the default: at supported render sizes above 1330p, it keeps feedback at an authored canvas (1280×720 at 4K) and draws this frame’s waves, shapes and composite at native resolution. Medium and High add native trail detail with gain caps of 0.5 and 1; both run the same additional passes. Their difference is the amount of detail, not an intended performance saving. The gain is limited near black and white to prevent clipping from adding brightness. Higher levels use additional textures and GPU work, so automatic quality can choose a lower resolution.
 
-A build using the **capped core** has no Native choice or feedback diffusion. It keeps internal rendering at or below 1330p even when its host requests a larger surface, and upscales the result for presentation. If that render target is unavailable, the core skips the frame instead of exceeding the cap. The canonical core AAR used by Milkbeat selects this capped policy; the standard ProjectM TV APK uses the Native-capable policy. Core developers can choose the policy in the [build instructions](development.md#core-rendering-policies).
+The trails preference remains available and saved while the controller changes resolution. At smaller render sizes, or when an integer canvas is incompatible, the existing diffusion path is used. Driver shader/resource failures also fall back. **Diagnostics** shows the selected level, actual active canvas or inactive/fallback reason, the current render size, and automatic memory status.
+
+The canonical `projectM-TV-core.aar` now contains this Native core; the separate capped AAR is retired. Embedding apps use the shared automatic controller. See the [development instructions](development.md#core-rendering-policies).
 
 *Track display ›* opens a panel for the playing track:
 
@@ -33,15 +34,15 @@ A build using the **capped core** has no Native choice or feedback diffusion. It
 |---|---|---|
 | Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
 | Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
+| Native trails | Standard, Medium, High; active at supported render sizes above 1330p. Medium and High add more trail detail with the same additional rendering work | Standard |
 | Transition | How long the blend from one preset to the next takes: Instant, 1–10 s | 7 s (2 s on low-end devices) |
 | Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
 | Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
-| Memory limit | Caps render height by reported RAM: under 1600 MB 1080p, under 2600 MB 1260p, under 3600 MB 1440p, otherwise no RAM cap. Auto and numeric choices still stop at 1330p. Native appears only if the whole detected panel height fits the limit | On |
 | Skip slow presets | Skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
-| Diagnostics | Render size, panel, UI size, frame rate, blend (style and resolution), audio source and level, track display (access, corner or pill, how long), update status, device tier | – |
+| Diagnostics | Render size, panel, UI size, frame rate, Native trails level/canvas or fallback, blend (style and resolution), audio source and level, track display (access, corner or pill, how long), update status, device tier | – |
 
 
 ![Main settings panel with Music category All, next to the track in the upper left](images/setup/main-settings.png)
@@ -50,4 +51,4 @@ A build using the **capped core** has no Native choice or feedback diffusion. It
 
 ![Advanced settings panel and Diagnostics, below the track in the upper left](images/setup/advanced-settings.png)
 
-The tables describe the current source, including the optional Native mode; screenshots use an earlier isolated test installation. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+The tables describe the current source, including automatic native-capable resolution and Native trails; screenshots use an earlier isolated test installation. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.

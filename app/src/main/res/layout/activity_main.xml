@@ -190,11 +190,6 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
-            android:id="@+id/row_resolution"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_track_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -291,6 +286,11 @@
             android:layout_height="wrap_content" />
 
         <com.example.projectm.visualizer.OptionRow
+            android:id="@+id/row_native_trails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_transition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -302,11 +302,6 @@
 
         <com.example.projectm.visualizer.OptionRow
             android:id="@+id/row_beat_cuts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.example.projectm.visualizer.OptionRow
-            android:id="@+id/row_memory_limit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

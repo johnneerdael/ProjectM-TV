@@ -31,7 +31,7 @@ def packaging_scripts(release):
 
 
 class ArtifactPackagingTests(unittest.TestCase):
-    def test_native_core_is_saved_before_capped_build_overwrites_gradle_output(self):
+    def test_one_native_core_is_staged_under_canonical_name(self):
         for release in (True, False):
             with self.subTest(release=release), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
@@ -61,12 +61,27 @@ if 'assembleRelease' in sys.argv:
                     subprocess.run(["bash", "-eu", "-c", script], cwd=root, env=env,
                                    check=True, capture_output=True, text=True)
                 suffix = "" if release else "-ci.42-abc1234"
-                capped = root / f"dist-aar/projectM-TV-core-2.1.5{suffix}.aar"
-                native = root / f"dist-aar/projectM-TV-core-native-2.1.5{suffix}.aar"
-                self.assertEqual(capped.read_bytes(), b"capped engine")
-                self.assertEqual(native.read_bytes(), b"native engine")
+                core = root / f"dist-aar/projectM-TV-core-2.1.5{suffix}.aar"
+                self.assertEqual(core.read_bytes(), b"native engine")
                 self.assertEqual((root / f"dist/projectM-TV-2.1.5{suffix}.apk").read_bytes(), b"native apk")
-                self.assertEqual(len(list((root / "dist-aar").glob("*.aar"))), 2)
+                self.assertEqual(len(list((root / "dist-aar").glob("*.aar"))), 1)
+
+
+class CoreBuildPolicyTests(unittest.TestCase):
+    def test_cmake_rejects_retired_capped_policy_before_source_patching(self):
+        # Exercise the entry guard only: never configure or mutate the shared submodule.
+        source = WORKFLOW.parents[2] / "core/src/main/cpp/CMakeLists.txt"
+        guard = source.read_text().split("find_library(", 1)[0].split("project(projectmtv)", 1)[1]
+        with tempfile.TemporaryDirectory() as directory:
+            script = Path(directory) / "guard.cmake"
+            script.write_text(guard)
+            result = subprocess.run(["cmake", "-DPROJECTMTV_RENDERING_POLICY=capped", "-P", str(script)],
+                                    capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("retired", result.stderr.lower())
+            native = subprocess.run(["cmake", "-DPROJECTMTV_RENDERING_POLICY=native", "-P", str(script)],
+                                    capture_output=True, text=True)
+            self.assertEqual(native.returncode, 0, native.stderr)
 
 
 if __name__ == "__main__":

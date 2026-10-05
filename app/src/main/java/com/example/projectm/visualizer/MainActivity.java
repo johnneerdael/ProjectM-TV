@@ -66,16 +66,15 @@ public class MainActivity extends Activity {
     private static final String PREF_LAST_PLAYER_SESSION = "last_player_session";
     private static final String PREF_PRESET_DURATION = "preset_duration";
     private static final String PREF_TRANSITION_DURATION = "transition_duration";
-    private static final String PREF_RENDER_HEIGHT = "render_height";      // 0 = automatic
     private static final String PREF_AUTO_HEIGHT = "auto_render_height";  // last automatic level
     private static final String PREF_FRAME_RATE_CAP = "frame_rate_cap";
     private static final String PREF_MESH_LEVEL = "mesh_level";
+    private static final String PREF_NATIVE_TRAILS = "native_trails";
     private static final String PREF_SKIP_SLOW = "skip_slow_presets";
     // 1.9 made skipping black presets opt-in (dull output was often missing textures); 1.9.4 turns
     // it on for everyone (new key) with two strikes before a preset is skipped for good.
     private static final String PREF_BLANK_DETECTION = "blank_detection_v3";
     private static final String PREF_TRANSITION_MODE = "transition_mode";
-    private static final String PREF_MEMORY_LIMIT = "memory_limit";
 
     private static final int[] PRESET_DURATIONS = {10, 15, 20, 30, 45, 60, 90};
     private static final int[] TRACK_SECONDS = {10, 20, 30, 60, 0};  // 0 = always
@@ -91,6 +90,7 @@ public class MainActivity extends Activity {
     private QualityController quality;
     private int frameRateTarget;
     private float targetFps = 60f;
+    private long renderBudgetGeneration;
 
     private VisualizerView visualizerView;
     private VisualizerRenderer renderer;
@@ -125,6 +125,7 @@ public class MainActivity extends Activity {
     private TextView audioStatus;
     private OptionRow skippedRow;
     private OptionRow musicCategoryRow;
+    private OptionRow nativeTrailsRow;
     private String requestedMusicCategory = "all";
     private String[] musicCategoryIds = new String[]{"all"};
     private String displayedMusicCategory = "";
@@ -198,16 +199,33 @@ public class MainActivity extends Activity {
         ProjectMJNI.setMusicCategory(requestedMusicCategory);
         ProjectMJNI.setBeatCuts(prefs.getBoolean(PREF_BEAT_CUTS, false));
         ProjectMJNI.setPresetDuration(prefs.getInt(PREF_PRESET_DURATION, 30));
-        ProjectMJNI.setSoftCutDuration(transitionSeconds());
         ProjectMJNI.setBlankDetection(prefs.getBoolean(PREF_BLANK_DETECTION, true));
         ProjectMJNI.setTransitionMode(prefs.getInt(PREF_TRANSITION_MODE, ProjectMJNI.TRANSITION_AUTO),
                 profile.lowerBlendResolutionByDefault());
 
         visualizerView = findViewById(R.id.visualizer_view);
-        renderer = new VisualizerRenderer(new VisualizerRenderer.StatsListener() {
+        renderer = new VisualizerRenderer(new VisualizerRenderer.BudgetStatsListener() {
             @Override
             public void onFpsSample(float fps) {
                 handler.post(() -> onFrameRate(fps));
+            }
+
+            @Override
+            public void onBudgetFpsSample(float fps, long generation, int width, int height) {
+                handler.post(() -> {
+                    if (generation == renderBudgetGeneration && height == quality.currentHeight()
+                            && width == display.widthForHeight(height)) onFrameRate(fps);
+                });
+            }
+
+            @Override
+            public void onRenderBudgetRequested(long generation) {
+                handler.post(() -> {
+                    if (!isFinishing() && !isDestroyed() && quality != null) {
+                        renderBudgetGeneration = generation;
+                        quality.revalidateForResume(true);
+                    }
+                });
             }
 
             @Override
@@ -238,22 +256,14 @@ public class MainActivity extends Activity {
 
     /** (Re)creates dynamic resolution for the current memory limit. */
     private void createQualityController() {
-        int limit = memoryLimit();
-        // tools/tv-diagnostics.sh reads the latest of these lines to know the fixed levels offered.
-        Log.i(TAG, "Memory limit: " + (limit > 0 ? "render height up to " + limit : "off")
-                + " (RAM " + profile.totalRamMb + " MB)");
-        Log.i(TAG, "Render height cap: " + QualityController.RENDER_HEIGHT_CAP + " (panel height "
-                + display.physicalHeight + ")");
-        quality = new QualityController(display, profile, limit, this::applyRenderHeight);
+        Log.i(TAG, "Automatic resolution: panel up to " + display.physicalHeight
+                + "p, live memory budget (RAM " + profile.totalRamMb + " MB)");
+        quality = new QualityController(display, profile, 0, this::applyRenderHeight);
+        quality.setNativeTrailsLevel(nativeTrailsLevel());
         quality.setTransitionSeconds(transitionSeconds());
         quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
         quality.setTargetFps(targetFps);
-        quality.setMode(savedRenderHeight(), prefs.getInt(PREF_AUTO_HEIGHT, 0));
-    }
-
-    /** Highest render height allowed for memory reasons, 0 for none. */
-    private int memoryLimit() {
-        return prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? profile.memorySafeHeight() : 0;
+        quality.setMode(0, prefs.getInt(PREF_AUTO_HEIGHT, 0));
     }
 
     @Override
@@ -268,7 +278,8 @@ public class MainActivity extends Activity {
     }
 
     private void applyRenderHeight(int height) {
-        visualizerView.setRenderSize(display.widthForHeight(height), height);
+        if (quality != null && quality.wasLastChangeForMemoryPressure()) ProjectMJNI.onMemoryPressure();
+        publishRenderConfiguration(height);
         ProjectMJNI.setForceHardCut(false);
         if (quality != null && quality.isAuto()) {
             prefs.edit().putInt(PREF_AUTO_HEIGHT, quality.autoHeightToRemember()).apply();
@@ -276,6 +287,7 @@ public class MainActivity extends Activity {
     }
 
     private void onFrameRate(float fps) {
+        if (ProjectMJNI.getCompletedRenderBudgetGeneration() != renderBudgetGeneration) return;
         int action = quality.onFpsSample(fps);
         // Resolution changes apply by themselves (the presets' frames are scaled to the new size);
         // only a preset that is too slow even at the lowest resolution is skipped.
@@ -313,14 +325,27 @@ public class MainActivity extends Activity {
         ProjectMJNI.setForceHardCut(false);  // any queued resolution change was dropped
     }
 
-    /** Saved fixed render height if valid for the current panel, else 0 (automatic). */
-    private int savedRenderHeight() {
-        return QualityController.validFixedHeight(display, memoryLimit(), prefs.getInt(PREF_RENDER_HEIGHT, 0));
-    }
-
     private int meshLevel() {
         int level = prefs.getInt(PREF_MESH_LEVEL, profile.defaultMeshLevel());
         return Math.max(0, Math.min(level, DeviceProfile.MESH_SIZES.length - 1));
+    }
+
+    private int nativeTrailsLevel() {
+        int level = prefs.getInt(PREF_NATIVE_TRAILS, 0);
+        return level >= 0 && level <= 2 ? level : 0;
+    }
+
+    /** Keep the selected gain while automatic resolution chooses whether native trails is active. */
+    private void applyNativeTrails() {
+        if (quality != null) {
+            quality.setNativeTrailsLevel(nativeTrailsLevel());
+            publishRenderConfiguration(quality.currentHeight());
+        }
+    }
+
+    private void publishRenderConfiguration(int height) {
+        visualizerView.setRenderConfiguration(display.widthForHeight(height), height,
+                nativeTrailsLevel(), transitionSeconds(), renderBudgetGeneration);
     }
 
     private int transitionSeconds() {
@@ -400,7 +425,6 @@ public class MainActivity extends Activity {
                     prefs.edit().putInt(PREF_PRESET_DURATION, PRESET_DURATIONS[index]).apply();
                 });
 
-        setupResolutionRow();
 
         OptionRow trackDisplay = findViewById(R.id.row_track_display);
         trackDisplay.setupAction("Track display", "›", () -> showMenu(Menu.TRACK));
@@ -449,14 +473,22 @@ public class MainActivity extends Activity {
             prefs.edit().putInt(PREF_MESH_LEVEL, index).apply();
         });
 
+        nativeTrailsRow = findViewById(R.id.row_native_trails);
+        nativeTrailsRow.setup("Native trails", new String[]{"Standard", "Medium", "High"},
+                nativeTrailsLevel(), false, index -> {
+                    prefs.edit().putInt(PREF_NATIVE_TRAILS, index).apply();
+                    applyNativeTrails();
+                });
+        applyNativeTrails();
+
         String[] transitions = new String[MAX_TRANSITION + 1];
         transitions[0] = "Instant";
         for (int i = 1; i <= MAX_TRANSITION; i++) transitions[i] = i + " s";
         OptionRow transition = findViewById(R.id.row_transition);
         transition.setup("Transition", transitions, transitionSeconds(), false, index -> {
-            ProjectMJNI.setSoftCutDuration(index);
-            quality.setTransitionSeconds(index);
             prefs.edit().putInt(PREF_TRANSITION_DURATION, index).apply();
+            quality.setTransitionSeconds(index);
+            publishRenderConfiguration(quality.currentHeight());
         });
 
         OptionRow transitionMode = findViewById(R.id.row_transition_mode);
@@ -471,21 +503,6 @@ public class MainActivity extends Activity {
                 prefs.getBoolean(PREF_BEAT_CUTS, false) ? 1 : 0, true, index -> {
                     ProjectMJNI.setBeatCuts(index == 1);
                     prefs.edit().putBoolean(PREF_BEAT_CUTS, index == 1).apply();
-                });
-
-        OptionRow memoryLimit = findViewById(R.id.row_memory_limit);
-        // Show the highest manual choice actually permitted by the memory limit, including Native.
-        int safeHeight = profile.memorySafeHeight();
-        if (safeHeight > 0) {
-            int[] allowed = QualityController.manualHeights(display, safeHeight);
-            int highest = allowed[allowed.length - 1];
-            safeHeight = highest == QualityController.NATIVE_HEIGHT ? display.physicalHeight : highest;
-        }
-        memoryLimit.setup("Memory limit", new String[]{"Off", safeHeight > 0 ? "Up to " + heightLabel(safeHeight) : "On"},
-                prefs.getBoolean(PREF_MEMORY_LIMIT, true) ? 1 : 0, true, index -> {
-                    prefs.edit().putBoolean(PREF_MEMORY_LIMIT, index == 1).apply();
-                    createQualityController();
-                    setupResolutionRow();
                 });
 
         OptionRow skipSlow = findViewById(R.id.row_skip_slow);
@@ -523,25 +540,6 @@ public class MainActivity extends Activity {
         advancedMenu.setVisibility(View.GONE);
         trackMenu.setVisibility(View.GONE);
         diagnosticsPanel.setVisibility(View.GONE);
-    }
-
-    /** Resolution: Auto + fixed heights up to the panel resolution and the memory limit. */
-    private void setupResolutionRow() {
-        int[] heights = QualityController.manualHeights(display, memoryLimit());
-        String[] resolutionLabels = new String[heights.length + 1];
-        resolutionLabels[0] = "Auto";
-        int selectedResolution = 0;
-        int savedHeight = savedRenderHeight();
-        for (int i = 0; i < heights.length; i++) {
-            resolutionLabels[i + 1] = heightLabel(heights[i]);
-            if (heights[i] == savedHeight) selectedResolution = i + 1;
-        }
-        OptionRow resolution = findViewById(R.id.row_resolution);
-        resolution.setup("Resolution", resolutionLabels, selectedResolution, false, index -> {
-            int height = index == 0 ? 0 : heights[index - 1];
-            prefs.edit().putInt(PREF_RENDER_HEIGHT, height).apply();
-            quality.setMode(height, prefs.getInt(PREF_AUTO_HEIGHT, 0));
-        });
     }
 
     private static int nearestIndex(int[] values, int target) {
@@ -675,12 +673,12 @@ public class MainActivity extends Activity {
         } else {
             skippedRow.setActionValue(skipped > 0 ? numberFormat.format(skipped) + "  ·  Reset" : "None");
             setText(diagnostics, String.format(Locale.US,
-                    "Render  %dx%d (%s, limit %s)%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nBlend   %s%nAudio   %s%nTrack   %s%nUpdate  %s%nDevice  %s tier, %d MB RAM",
+                    "Render  %dx%d (%s)%nRAM     %s%nPanel   %dx%d @ %.0f Hz%nUI      %dx%d%nFPS     %.1f of %d%nTrails  %s%nBlend   %s%nAudio   %s%nTrack   %s%nUpdate  %s%nDevice  %s tier, %d MB RAM",
                     renderer.getSurfaceWidth(), renderer.getSurfaceHeight(), mode,
-                    memoryLimit() > 0 ? heightLabel(memoryLimit()) : "none",
+                    quality.isMemoryConstrained() ? "resolution reduced for memory headroom" : "automatic headroom budget",
                     display.physicalWidth, display.physicalHeight, display.refreshRate,
                     display.uiWidth, display.uiHeight,
-                    renderer.getCurrentFps(), frameRateTarget, transitionLabel(), audioLabel(), trackLabel(), updater.statusLabel(),
+                    renderer.getCurrentFps(), frameRateTarget, ProjectMJNI.getNativeTrailsStatus(), transitionLabel(), audioLabel(), trackLabel(), updater.statusLabel(),
                     profile.tier.name().toLowerCase(Locale.US), profile.totalRamMb));
         }
     }
@@ -1093,6 +1091,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        quality.revalidateForResume(false);
         visualizerView.onResume();
         resumed = true;
         if (hasAudioPermission()) audioHandler.post(this::startAudio);  // no-op if running

@@ -46,7 +46,8 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
     }
     @Override public void onStart() {
         if (setupCase != null) {
-            TrackAccessSetupTest.run(this, setupCase);
+            if ("native_trails".equals(setupCase)) NativeTrailsSetupTest.run(this);
+            else TrackAccessSetupTest.run(this, setupCase);
             return;
         }
         Bundle result = new Bundle();

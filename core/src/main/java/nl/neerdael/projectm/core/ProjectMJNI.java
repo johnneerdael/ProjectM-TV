@@ -50,6 +50,20 @@ public final class ProjectMJNI {
     public static native void nextPreset(boolean hardCut);
     public static native void previousPreset(boolean hardCut);
     public static native void randomPreset(boolean hardCut);
+    /** Native authored feedback: -1 off, 0 Standard (core default), 1 Medium, 2 High.
+     * The core activates this above 1330p; automatic quality selects the surface size. A negative value keeps the legacy path.
+     */
+    public static native void setNativeTrails(int level);
+    /** Coherent managed-view allocation settings; applies only after the requested surface size is acknowledged. */
+    public static native void configureRenderBudget(int width, int height, int trails, int transitionSeconds, long generation);
+    /** Hold managed rendering until a fresh configuration is published, for context recreation. */
+    public static native long requireRenderBudget();
+    /** Context generation that has rendered an actual preset under its approved budget. */
+    public static native long getCompletedRenderBudgetGeneration();
+    /** Monotonic completed preset-frame serial; budget-guarded calls do not advance it. */
+    public static native long getRenderedFrameSerial();
+    /** Last rendered state, including actual canvas size or the diffusion fallback. */
+    public static native String getNativeTrailsStatus();
     public static native void setPresetDuration(int seconds);
     public static native void setMusicCategory(String genreId);
     public static native String getMusicCategory();

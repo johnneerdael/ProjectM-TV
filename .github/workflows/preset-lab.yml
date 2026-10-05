@@ -69,6 +69,11 @@ jobs:
                           '-DSANITIZERS=OFF'], check=True)
           subprocess.run(['cmake', '--build', 'build/milk-analyzer/native', '-j', '4'], check=True)
           PYCODE
+      - name: Test production feedback shaders and lifecycle
+        run: |
+          sudo apt-get install -y libgtest-dev libegl-dev libgles-dev
+          core/src/test/native/run_native_tests.sh
+          xvfb-run -a tools/projectm-host-tests.sh
       - name: Test source equation domains and shader initialization
         run: python -m pytest tools/milk-analyzer -q
       - name: Test real native shader and bass response
