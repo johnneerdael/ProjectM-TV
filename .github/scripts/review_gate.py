@@ -58,26 +58,34 @@ def eligibility(pr, reviews, comments, threads):
             for row in body.splitlines():
                 if "**Code Review**" not in row and "**Security Review**" not in row:
                     continue
-                commit = re.search(r"`([0-9a-f]{7,40})`", row)
+                commit = re.search(r"`([0-9a-f]{40})`", row)
                 if commit and "**Completed**" in row:
-                    completed = completed or head.startswith(commit[1])
+                    completed = completed or commit[1] == head
                     kind = "security" if "**Security Review**" in row else "code"
                     date = re.search(r'datetime="([^"]+)"', row)
                     completed_at(kind, date[1] if date else comment.get("updated_at"))
-                elif commit and head.startswith(commit[1]):
+                elif "**Completed**" not in row and (not commit or commit[1] == head):
+                    # An abbreviated running summary cannot identify its revision
+                    # safely. Keep the gate closed until it finishes.
                     return False, "Waiting for Codex review to finish"
         else:
-            commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{7,40})`", body)
+            commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{40})`", body)
             if commit and "Codex Review" in body:
-                completed = completed or head.startswith(commit[1])
+                completed = completed or commit[1] == head
                 kind = "security" if re.search(r"Codex Security Review", body, re.I) else "code"
                 completed_at(kind, comment.get("created_at"))
     for review in reviews:
         user = review["user"]
-        trusted = user["login"] == CODEX or (
+        # Bot replies can create empty COMMENTED review records at the new head
+        # even when their inline reply concerns an older commit. Require an actual
+        # Codex review body and the API's full commit ID as completion evidence.
+        codex_review = (user["login"] == CODEX
+                        and re.search(r"\bCodex(?: Security)? Review\b", review.get("body") or "")
+                        and re.fullmatch(r"[0-9a-f]{40}", review.get("commit_id") or ""))
+        trusted = codex_review or (
             user.get("type") == "User" and user["login"] != pr["user"]["login"]
             and review.get("author_association") in TRUSTED)
-        if user["login"] == CODEX and review.get("submitted_at") and review["state"] in {"APPROVED", "COMMENTED"}:
+        if codex_review and review.get("submitted_at") and review["state"] in {"APPROVED", "COMMENTED"}:
             kind = "security" if re.search(r"Codex Security Review", review.get("body") or "", re.I) else "code"
             completed_at(kind, review["submitted_at"])
         if (trusted and review.get("submitted_at") and review["commit_id"] == head

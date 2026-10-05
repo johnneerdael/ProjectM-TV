@@ -204,7 +204,7 @@ git clone --recurse-submodules https://github.com/johnneerdael/ProjectM-TV.git
 adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-Release builds on GitHub are signed with the release key; see [docs/RELEASING.md](docs/RELEASING.md). CI skips feature-branch pushes. PRs targeting `main` run the full build suite after a completed Codex or human review of the latest commit, with all review threads resolved and no outstanding review requests or changes requested. Each successfully tested merge to `main` publishes a new version. Public release notes come from the PR’s `Release notes` section; CI adds the current Downloader code and download links.
+Release builds on GitHub are signed with the release key; see [docs/RELEASING.md](docs/RELEASING.md). CI skips feature-branch pushes. PRs targeting `main` run the full build suite after a completed Codex or human review of the latest commit, with all review threads resolved and no outstanding review requests or changes requested. Review evidence must identify the full commit SHA; abbreviated Codex completion text alone does not unlock builds. Each successfully tested merge to `main` publishes a new version. Public release notes come from the PR’s `Release notes` section; CI adds the current Downloader code and download links.
 
 The engine is the `:core` module, which the open-source music streamer [Milkbeat](https://github.com/johnneerdael/Milkbeat) also uses.
 

@@ -35,11 +35,23 @@ def human(state="APPROVED", sha=HEAD, login="reviewer"):
                 user=dict(login=login, type="User"), author_association="COLLABORATOR")
 
 
-def summary(state="Completed", sha=HEAD[:7], login=BOT):
+def codex_review(sha=HEAD):
+    review = human(state="COMMENTED", sha=sha, login=BOT)
+    review["user"]["type"] = "Bot"
+    review["body"] = f"### 💡 Codex Review\n\n**Reviewed commit:** `{sha[:10]}`"
+    return review
+
+
+def summary(state="Completed", sha=HEAD, login=BOT):
     return dict(user=dict(login=login), updated_at="2026-10-05T10:00:00Z", body=(
         "<!-- codex-pull-request-review-summary -->\n"
         "| Review | Status | Commit | Review trigger |\n"
         f"| 📝 **Code Review** | ✅ **{state}** | `{sha}` | Manual request |"))
+
+
+def legacy_completion(sha=HEAD, login=BOT):
+    return dict(user=dict(login=login), created_at="2026-10-05T10:00:00Z",
+                body=f"Codex Review: No findings.\n\n**Reviewed commit:** `{sha}`")
 
 
 class EligibilityTests(unittest.TestCase):
@@ -58,6 +70,44 @@ class EligibilityTests(unittest.TestCase):
         self.assertTrue(self.eligible([human(state="COMMENTED")]))
         self.assertTrue(self.eligible(comments=[summary()]))
 
+    def test_full_hash_completion_formats_can_qualify(self):
+        for completion in [summary(), legacy_completion()]:
+            with self.subTest(completion=completion):
+                self.assertTrue(self.eligible(comments=[completion]))
+
+    def test_abbreviated_or_colliding_codex_hashes_never_qualify(self):
+        other = HEAD[:7] + BASE[7:]
+        for format_completion in [summary, legacy_completion]:
+            for sha in [HEAD[:7], HEAD[:10], HEAD[:39], HEAD + "a", "a" * 64, other]:
+                with self.subTest(format=format_completion.__name__, sha=sha):
+                    self.assertFalse(self.eligible(comments=[format_completion(sha=sha)]))
+
+    def test_abbreviated_completion_cannot_fulfill_a_pending_request(self):
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
+        for format_completion in [summary, legacy_completion]:
+            with self.subTest(format=format_completion.__name__):
+                self.assertFalse(self.eligible([human()], [request, format_completion(sha=HEAD[:7])]))
+
+    def test_submitted_full_hash_review_can_qualify_with_short_summary(self):
+        review = codex_review()
+        self.assertTrue(self.eligible([review], [summary(sha=HEAD[:7])]))
+        review["commit_id"] = HEAD[:7] + BASE[7:]
+        self.assertFalse(self.eligible([review], [summary(sha=HEAD[:7])]))
+
+    def test_bot_reply_review_record_cannot_count_as_codex_completion(self):
+        reply = codex_review()
+        reply["body"] = ""
+        self.assertFalse(self.eligible([reply]))
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
+        self.assertFalse(self.eligible([human(), reply], [request]))
+
+    def test_submitted_codex_completion_requires_full_commit_id(self):
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
+        self.assertFalse(self.eligible([human(), codex_review(sha=HEAD[:7])], [request]))
+
+    def test_running_short_summary_blocks_despite_current_human_review(self):
+        self.assertFalse(self.eligible([human()], [summary(state="Running", sha=HEAD[:7])]))
+
     def test_author_and_untrusted_bot_or_comment_cannot_unlock(self):
         self.assertFalse(self.eligible([human(login="author")]))
         self.assertFalse(self.eligible(comments=[summary(login="author")]))
@@ -66,7 +116,7 @@ class EligibilityTests(unittest.TestCase):
         self.assertFalse(self.eligible([review]))
 
     def test_stale_or_running_codex_summary_is_not_completion(self):
-        self.assertFalse(self.eligible(comments=[summary(sha=BASE[:7])]))
+        self.assertFalse(self.eligible(comments=[summary(sha=BASE)]))
         self.assertFalse(self.eligible(comments=[summary(state="In progress")]))
         self.assertFalse(self.eligible([human()], [summary(state="In progress")]))
 
@@ -94,7 +144,7 @@ class EligibilityTests(unittest.TestCase):
 
     def test_completed_old_codex_request_does_not_require_codex_on_every_later_commit(self):
         request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
-        self.assertTrue(self.eligible([human()], [request, summary(sha=BASE[:7])]))
+        self.assertTrue(self.eligible([human()], [request, summary(sha=BASE)]))
 
     def test_unknown_commenter_cannot_request_review_or_fake_completion(self):
         request = dict(user=dict(login="stranger"), author_association="NONE", body="@codex review",
@@ -109,8 +159,7 @@ class EligibilityTests(unittest.TestCase):
         self.assertTrue(self.eligible([human()], [completed, request]))
 
     def test_submitted_codex_review_with_findings_counts_after_resolution(self):
-        review = human(state="COMMENTED", login=BOT)
-        review["user"]["type"] = "Bot"
+        review = codex_review()
         self.assertTrue(self.eligible([review], threads=[dict(isResolved=True)]))
         self.assertFalse(self.eligible([review], threads=[dict(isResolved=False)]))
 
