@@ -1,0 +1,434 @@
+diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
+--- engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp	2026-10-05 02:15:46
++++ engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp	2026-10-05 02:36:58
+@@ -1,3 +1,9 @@
++#include <string>
++#include <cstdlib>
++#include <cstdio>
++#include <memory>
++#include <unordered_map>
++#include <vector>
+ /**
+  * projectM -- Milkdrop-esque visualisation SDK
+  * Copyright (C)2003-2004 projectM Team
+@@ -20,6 +26,8 @@
+  */
+ 
+ #include "MilkdropPreset.hpp"
++#include <cstring>
++#include <string>
+ 
+ #include "Factory.hpp"
+ #include "LineGeometry.hpp"
+@@ -80,6 +88,95 @@
+     m_finalComposite.CompileCompositeShader(m_state);
+ }
+ 
++
++namespace {
++// PROTOTYPE native detail layer (env PM_DETAIL=alpha). L: authored-canvas feedback state (exactly MilkDrop),
++// H: native state = up(L_w) + alpha * (H_w - up(box(H_w))) + this frame's geometry; L' = L_w + box(H' - H_c).
++struct DetailLayer
++{
++    int W{0}, H{0}, CW{0}, CH{0}, S{0};
++    GLuint lTex[2]{}, lFbo[2]{}, dTex{}, dFbo{}, hcTex{}, hcFbo{}, vao{};
++    GLuint progDown{}, progCombine{}, progInject{};
++    std::shared_ptr<libprojectM::Renderer::Texture> lWrap[2];
++    libprojectM::Renderer::CopyTexture flip;
++    bool valid{false};
++};
++std::unordered_map<const void*, std::unique_ptr<DetailLayer>> detailLayers;
++
++GLuint MakeTexture(int w, int h, GLenum filter)
++{
++    GLuint t; glGenTextures(1, &t); glBindTexture(GL_TEXTURE_2D, t);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++    return t;
++}
++GLuint MakeFbo(GLuint tex)
++{
++    GLuint f; glGenFramebuffers(1, &f); glBindFramebuffer(GL_FRAMEBUFFER, f);
++    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
++    const GLenum b = GL_COLOR_ATTACHMENT0; glDrawBuffers(1, &b);
++    return f;
++}
++GLuint MakeProgram(const char* fragment)
++{
++    static const char* vertex = "#version 330\nvoid main() { vec2 p = vec2(gl_VertexID == 1 ? 3.0 : -1.0, gl_VertexID == 2 ? 3.0 : -1.0); gl_Position = vec4(p, 0.0, 1.0); }\n";
++    auto compile = [](GLenum type, const char* text) {
++#ifdef USE_GLES
++        std::string code = std::string("#version 300 es\nprecision highp float;\nprecision highp int;\nprecision highp sampler2D;\n") + (std::strchr(text, '\n') + 1);
++#else
++        std::string code = text;
++#endif
++        const char* src = code.c_str(); GLuint sh = glCreateShader(type); glShaderSource(sh, 1, &src, nullptr); glCompileShader(sh);
++        GLint ok = 0; glGetShaderiv(sh, GL_COMPILE_STATUS, &ok); if (!ok) { char log[2048]; glGetShaderInfoLog(sh, sizeof log, nullptr, log); fprintf(stderr, "detail shader: %s\n", log); } return sh; };
++    GLuint prog = glCreateProgram(); glAttachShader(prog, compile(GL_VERTEX_SHADER, vertex)); glAttachShader(prog, compile(GL_FRAGMENT_SHADER, fragment)); glLinkProgram(prog);
++    return prog;
++}
++const char* DownFragment = R"(#version 330
++uniform sampler2D src; uniform int S; out vec4 o;
++void main() { ivec2 b = ivec2(gl_FragCoord.xy) * S; vec4 acc = vec4(0.0);
++  for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i) acc += texelFetch(src, b + ivec2(i, j), 0);
++  o = acc / float(S * S); }
++)";
++const char* CombineFragment = R"(#version 330
++uniform sampler2D Lw; uniform sampler2D Hw; uniform sampler2D D; uniform float alpha; uniform vec2 native; out vec4 o;
++void main() { vec2 uv = gl_FragCoord.xy / native; o = texture(Lw, uv);
++  if (alpha != 0.0) o += alpha * (texelFetch(Hw, ivec2(gl_FragCoord.xy), 0) - texture(D, uv)); }
++)";
++// Geometry enters the authored state as MilkDrop rasterizes it at canvas size: the native pixel at each
++// canvas pixel's centre (a 2-native-px dot always covers exactly one such pixel), not a box average,
++// which would spread a dot over 2-4 canvas pixels at a fraction of its peak.
++const char* InjectFragment = R"(#version 330
++uniform sampler2D Lw; uniform sampler2D Hp; uniform sampler2D Hc; uniform int S; out vec4 o;
++// The native pixels at the canvas pixel's centre: the middle one for an odd scale, the middle 2x2 for an even one.
++vec4 G(ivec2 p) { return texelFetch(Hp, p, 0) - texelFetch(Hc, p, 0); }
++void main() { ivec2 c = ivec2(gl_FragCoord.xy); ivec2 p = c * S + ivec2((S - 1) / 2);
++  vec4 g = (S % 2 == 1) ? G(p) : 0.25 * (G(p) + G(p + ivec2(1, 0)) + G(p + ivec2(0, 1)) + G(p + ivec2(1, 1)));
++  o = texelFetch(Lw, c, 0) + g; }
++)";
++void FullScreen(DetailLayer& d, GLuint prog, GLuint fbo, int w, int h)
++{
++    glBindFramebuffer(GL_FRAMEBUFFER, fbo); glViewport(0, 0, w, h); glDisable(GL_BLEND);
++    glUseProgram(prog); glBindVertexArray(d.vao); glDrawArrays(GL_TRIANGLES, 0, 3); glBindVertexArray(0);
++    glUseProgram(0); libprojectM::Renderer::Shader::InvalidateBoundProgram();
++}
++void BindTex(GLuint prog, const char* name, int unit, GLuint tex)
++{
++    glActiveTexture(GL_TEXTURE0 + unit); glBindTexture(GL_TEXTURE_2D, tex); glBindSampler(unit, 0);
++    glUniform1i(glGetUniformLocation(prog, name), unit);
++}
++
++float DetailMean(GLuint tex, int w, int h)
++{
++    static std::vector<unsigned char> px; px.resize(static_cast<size_t>(w) * h * 4);
++    GLuint f; glGenFramebuffers(1, &f); glBindFramebuffer(GL_READ_FRAMEBUFFER, f);
++    glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
++    glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, px.data()); glDeleteFramebuffers(1, &f);
++    double sum = 0; for (size_t i = 0; i < px.size(); i += 4) sum += px[i] + px[i + 1] + px[i + 2];
++    return static_cast<float>(sum / (px.size() / 4 * 3 * 255.0));
++}
++} // namespace
++
+ void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audioData, const Renderer::RenderContext& renderContext)
+ {
+     m_state.audioData = audioData;
+@@ -103,7 +200,7 @@
+ 
+     // Above the line reference size, the warp reads the previous frame through a small blur that gives
+     // back the per-frame smoothing feedback presets get at the reference size (see FeedbackDiffusion.hpp).
+-    if (m_feedbackDiffusion.SetScale(m_diffusionAllowed ? LineScale(renderContext.viewportSizeX, renderContext.viewportSizeY,
++    if (m_feedbackDiffusion.SetScale(m_diffusionAllowed && !std::getenv("PM_DETAIL") ? LineScale(renderContext.viewportSizeX, renderContext.viewportSizeY,
+                                            renderContext.lineReferenceWidth, renderContext.lineReferenceHeight) : 0.0f))
+     {
+         m_diffusionHoldsPreviousFrame = false;
+@@ -149,6 +246,45 @@
+     // here on, so this can happen before the warp: the warp and everything drawn on top of it
+     // then go to the current framebuffer in one render pass. Not if the warp shader reads the
+     // blur textures: it gets last frame's, as in projectM, so they are updated after the warp.
++    // PROTOTYPE detail layer: set up / initialise the authored-canvas state.
++    DetailLayer* detail = nullptr;
++    float detailAlpha = 0.0f;
++    if (const char* a = std::getenv("PM_DETAIL"))
++    {
++        const auto canvas = ShaderCanvasSize(renderContext.viewportSizeX, renderContext.viewportSizeY,
++                                             renderContext.lineReferenceWidth, renderContext.lineReferenceHeight);
++        const int s = canvas.width > 0 ? renderContext.viewportSizeX / canvas.width : 0;
++        if (s >= 2 && canvas.width * s == renderContext.viewportSizeX && canvas.height * s == renderContext.viewportSizeY)
++        {
++            auto& slot = detailLayers[this];
++            if (!slot) slot = std::make_unique<DetailLayer>();
++            detail = slot.get();
++            detailAlpha = static_cast<float>(std::atof(a));
++            if (!detail->valid || detail->W != renderContext.viewportSizeX || detail->H != renderContext.viewportSizeY)
++            {
++                detail->W = renderContext.viewportSizeX; detail->H = renderContext.viewportSizeY; detail->CW = canvas.width; detail->CH = canvas.height; detail->S = s;
++                for (int i = 0; i < 2; ++i) { detail->lTex[i] = MakeTexture(canvas.width, canvas.height, GL_LINEAR); detail->lFbo[i] = MakeFbo(detail->lTex[i]);
++                    detail->lWrap[i] = std::make_shared<Renderer::Texture>("detailL", detail->lTex[i], GL_TEXTURE_2D, canvas.width, canvas.height, true); }
++                detail->dTex = MakeTexture(canvas.width, canvas.height, GL_LINEAR); detail->dFbo = MakeFbo(detail->dTex);
++                detail->hcTex = MakeTexture(detail->W, detail->H, GL_NEAREST); detail->hcFbo = MakeFbo(detail->hcTex);
++                glGenVertexArrays(1, &detail->vao);
++                detail->progDown = MakeProgram(DownFragment); detail->progCombine = MakeProgram(CombineFragment); detail->progInject = MakeProgram(InjectFragment);
++                detail->valid = false;
++            }
++            if (!detail->valid || m_isFirstFrame)
++            {
++                // L_prev (slot 0) = box(H_prev): the authored state starts from the current picture.
++                glUseProgram(detail->progDown);
++                BindTex(detail->progDown, "src", 0, m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0)->TextureID());
++                glUniform1i(glGetUniformLocation(detail->progDown, "S"), detail->S);
++                FullScreen(*detail, detail->progDown, detail->lFbo[0], detail->CW, detail->CH);
++                detail->valid = true;
++            }
++            glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++            m_framebuffer.Bind(m_previousFrameBuffer);
++        }
++    }
++
+     auto const updateBlur = [this]() {
+         const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
+         assert(warpedImage.get());
+@@ -156,8 +292,14 @@
+                                    LineScale(m_state.renderContext.viewportSizeX, m_state.renderContext.viewportSizeY,
+                                              m_state.renderContext.lineReferenceWidth, m_state.renderContext.lineReferenceHeight));
+     };
+-    if (!m_warpSamplesBlur)
++    if (detail && !m_warpSamplesBlur)
+     {
++        // Blur levels from the authored state at canvas size, exactly as MilkDrop makes them.
++        m_state.blurTexture.Update(*detail->lWrap[0], m_perFrameContext, 1.0f);
++        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++    }
++    else if (!detail && !m_warpSamplesBlur)
++    {
+         updateBlur();
+     }
+ 
+@@ -178,7 +320,16 @@
+     }
+ 
+     // Draw previous frame image warped via per-pixel mesh and warp shader
+-    m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext);
++    // Detail layer at alpha 0: the native warp result would be discarded (H_c = up(L_w)), so skip it
++    // unless motion vectors need the u/v map it writes.
++    if (!(detail && detailAlpha == 0.0f && !writeMotionUV))
++    {
++        m_perPixelMesh.Draw(m_state, m_perFrameContext, m_perPixelContext);
++    }
++    else
++    {
++        m_perPixelMesh.Prepare(m_state, m_perFrameContext, m_perPixelContext);
++    }
+ 
+     if (writeMotionUV)
+     {
+@@ -188,22 +339,97 @@
+         glDrawBuffers(2, buffers);
+     }
+ 
+-    if (m_warpSamplesBlur)
++    if (m_warpSamplesBlur && !detail)
+     {
+         // Binds the blur framebuffer and then restores the current one (keeping its draw buffers).
+         updateBlur();
+     }
+ 
++    std::shared_ptr<Renderer::Texture> detailNativeMain;
++    if (detail)
++    {
++        // Motion vectors are drawn onto the previous frame before the warp, so they belong to the
++        // feedback: draw them onto L too, at canvas size with MilkDrop's 1 px lines.
++        if (!m_isFirstFrame)
++        {
++            const auto savedContext = m_state.renderContext;
++            m_state.renderContext.viewportSizeX = detail->CW; m_state.renderContext.viewportSizeY = detail->CH;
++            m_state.renderContext.lineReferenceWidth = 0; m_state.renderContext.lineReferenceHeight = 0;
++            glBindFramebuffer(GL_FRAMEBUFFER, detail->lFbo[0]);
++            glViewport(0, 0, detail->CW, detail->CH);
++            m_motionVectors.Draw(m_perFrameContext, m_motionVectorUVMap->Texture(), false);
++            m_state.renderContext = savedContext;
++        }
++        // Authored warp: the same mesh and shader on the canvas-size state (plain bilinear reads).
++        glViewport(0, 0, detail->CW, detail->CH); // CopyTexture draws with the current viewport
++        detail->flip.Draw(detail->lWrap[0], nullptr, true, false);
++        auto nativeMain = m_state.mainTexture;
++        m_state.mainTexture = detail->flip.Texture();
++        glBindFramebuffer(GL_FRAMEBUFFER, detail->lFbo[1]);
++        glViewport(0, 0, detail->CW, detail->CH);
++        m_perPixelMesh.DrawAgain(m_state, m_perFrameContext);
++        m_state.mainTexture = nativeMain;
++        if (m_warpSamplesBlur)
++        {
++            // As in projectM, a warp that reads the blur levels gets last frame's: update them after both warps.
++            m_state.blurTexture.Update(*detail->lWrap[0], m_perFrameContext, 1.0f);
++        }
++        const GLuint hw = m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0)->TextureID();
++        // D = box(H_w)
++        if (detailAlpha != 0.0f)
++        {
++            glUseProgram(detail->progDown); BindTex(detail->progDown, "src", 0, hw);
++            glUniform1i(glGetUniformLocation(detail->progDown, "S"), detail->S);
++            FullScreen(*detail, detail->progDown, detail->dFbo, detail->CW, detail->CH);
++        }
++        // H_c = up(L_w) + alpha (H_w - up(D))
++        glUseProgram(detail->progCombine);
++        BindTex(detail->progCombine, "Lw", 0, detail->lTex[1]); BindTex(detail->progCombine, "Hw", 1, hw); BindTex(detail->progCombine, "D", 2, detail->dTex);
++        glUniform1f(glGetUniformLocation(detail->progCombine, "alpha"), detailAlpha);
++        glUniform2f(glGetUniformLocation(detail->progCombine, "native"), static_cast<float>(detail->W), static_cast<float>(detail->H));
++        FullScreen(*detail, detail->progCombine, detail->hcFbo, detail->W, detail->H);
++        // Put H_c into the current frame, then draw this frame's geometry on it as usual.
++        glBindFramebuffer(GL_READ_FRAMEBUFFER, detail->hcFbo);
++        m_framebuffer.BindDraw(m_currentFrameBuffer);
++        glBlitFramebuffer(0, 0, detail->W, detail->H, 0, 0, detail->W, detail->H, GL_COLOR_BUFFER_BIT, GL_NEAREST);
++        if (std::getenv("PM_DETAIL_DEBUG"))
++        {
++            fprintf(stderr, "blit: Hw-before? current-after %.5f hc %.5f err 0x%x\n",
++                    DetailMean(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0)->TextureID(), detail->W, detail->H),
++                    DetailMean(detail->hcTex, detail->W, detail->H), glGetError());
++        }
++        glActiveTexture(GL_TEXTURE0);
++    }
++
++    const bool geoDebug = std::getenv("PM_GEO_DEBUG") && m_state.renderContext.frame < 3;
++    auto geoMean = [&](const char* what) {
++        if (!geoDebug) return;
++        fprintf(stderr, "geo frame %d after %s: %.5f blend=%d\n", m_state.renderContext.frame, what,
++                DetailMean(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0)->TextureID(), renderContext.viewportSizeX, renderContext.viewportSizeY),
++                glIsEnabled(GL_BLEND));
++        m_framebuffer.Bind(m_currentFrameBuffer);
++        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++    };
++    geoMean("warp");
++    if (std::getenv("PM_REBIND_TEST"))
++    {
++        // Diagnostic: only re-bind the current framebuffer (read and draw) and the viewport after the warp.
++        m_framebuffer.Bind(m_currentFrameBuffer);
++        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++    }
+     // Draw audio-data-related stuff
+     for (auto& shape : m_customShapes)
+     {
+         shape->Draw();
++        geoMean("shape");
+     }
+     for (auto& wave : m_customWaveforms)
+     {
+         wave->Draw(m_perFrameContext);
++        geoMean("wave");
+     }
+     m_waveform.Draw(m_perFrameContext);
++    geoMean("waveform");
+ 
+     // Done in DrawSprites() in Milkdrop
+     if (*m_perFrameContext.darken_center > 0)
+@@ -218,6 +444,34 @@
+         m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
+     }
+ 
++    if (detail)
++    {
++        if (std::getenv("PM_DETAIL_DEBUG"))
++        {
++            fprintf(stderr, "detail f=%g Lprev %.4f Lw %.4f D %.4f Hc %.4f Hp %.4f err 0x%x\n", m_state.renderContext.time,
++                    DetailMean(detail->lTex[0], detail->CW, detail->CH), DetailMean(detail->lTex[1], detail->CW, detail->CH),
++                    DetailMean(detail->dTex, detail->CW, detail->CH), DetailMean(detail->hcTex, detail->W, detail->H),
++                    DetailMean(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0)->TextureID(), detail->W, detail->H), glGetError());
++            m_framebuffer.Bind(m_currentFrameBuffer);
++        }
++        // L' = L_w + box(H' - H_c): this frame's geometry enters the authored state at canvas size.
++        const GLuint hp = m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0)->TextureID();
++        glUseProgram(detail->progInject);
++        BindTex(detail->progInject, "Lw", 0, detail->lTex[1]); BindTex(detail->progInject, "Hp", 1, hp); BindTex(detail->progInject, "Hc", 2, detail->hcTex);
++        glUniform1i(glGetUniformLocation(detail->progInject, "S"), detail->S);
++        FullScreen(*detail, detail->progInject, detail->lFbo[0], detail->CW, detail->CH);
++        glActiveTexture(GL_TEXTURE0);
++        m_framebuffer.Bind(m_currentFrameBuffer);
++        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
++    }
++
++    if (std::getenv("PM_FRAME_DEBUG"))
++    {
++        fprintf(stderr, "frame t=%g H' %.4f (%dx%d)\n", m_state.renderContext.time,
++                DetailMean(m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0)->TextureID(), renderContext.viewportSizeX, renderContext.viewportSizeY),
++                renderContext.viewportSizeX, renderContext.viewportSizeY);
++        m_framebuffer.Bind(m_currentFrameBuffer);
++    }
+     // Todo: Song title anim would go here
+ 
+     // y-flip the image for final compositing again. With diffusion, the same pass also filters
+diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropShader.cpp engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
+--- engine-main/src/libprojectM/MilkdropPreset/MilkdropShader.cpp	2026-10-05 02:21:33
++++ engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp	2026-10-05 02:21:33
+@@ -16,10 +16,13 @@
+ 
+ #include <algorithm>
+ #include <cctype>
++#include <cstdlib>
+ #include <list>
+ #include <mutex>
+ #include <regex>
+ #include <set>
++#include <array>
++#include <unordered_map>
+ #include <sstream>
+ 
+ namespace libprojectM {
+@@ -201,10 +204,17 @@
+ 
+     m_shader.SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+ 
+-    m_shader.SetUniformFloat4("rand_frame", {floatRand(),
+-                                             floatRand(),
+-                                             floatRand(),
+-                                             floatRand()});
++    // PROTOTYPE detail layer: the second warp of a frame reuses that frame's random values, so the global
++    // RNG (and with it the per-frame equations' rand()) advances exactly as without the second warp.
++    struct FrameRandom { int frame{-1}; glm::vec4 randFrame; std::array<glm::mat4, 4> matrices; };
++    static std::unordered_map<const void*, FrameRandom> frameRandom;
++    auto& cached = frameRandom[this];
++    const bool reuse = std::getenv("PM_DETAIL") && cached.frame == presetState.renderContext.frame;
++    if (!reuse)
++    {
++        cached.randFrame = {floatRand(), floatRand(), floatRand(), floatRand()};
++    }
++    m_shader.SetUniformFloat4("rand_frame", cached.randFrame);
+     m_shader.SetUniformFloat4("rand_preset", {m_randValues[0],
+                                               m_randValues[1],
+                                               m_randValues[2],
+@@ -292,6 +302,7 @@
+     // the last 4 are totally random, each frame
+     for (int i = 20; i < 24; i++)
+     {
++        if (reuse) { tempMatrices[i] = cached.matrices[i - 20]; continue; }
+         glm::mat4 const rotationX = glm::rotate(glm::mat4(1.0f), floatRand() * 6.28f, glm::vec3(1.0f, 0.0f, 0.0f));
+         glm::mat4 const rotationY = glm::rotate(glm::mat4(1.0f), floatRand() * 6.28f, glm::vec3(0.0f, 1.0f, 0.0f));
+         glm::mat4 const rotationZ = glm::rotate(glm::mat4(1.0f), floatRand() * 6.28f, glm::vec3(0.0f, 0.0f, 1.0f));
+@@ -301,7 +312,9 @@
+         tempMatrices[i] = randomTranslation * rotationX;
+         tempMatrices[i] = rotationZ * tempMatrices[i];
+         tempMatrices[i] = rotationY * tempMatrices[i];
++        cached.matrices[i - 20] = tempMatrices[i];
+     }
++    cached.frame = presetState.renderContext.frame;
+ 
+     m_shader.SetUniformMat3x4("rot_s1", tempMatrices[0]);
+     m_shader.SetUniformMat3x4("rot_s2", tempMatrices[1]);
+diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+--- engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp	2026-10-05 02:15:46
++++ engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp	2026-10-05 02:35:04
+@@ -141,6 +141,17 @@
+     WarpedBlit(presetState, perFrameContext);
+ }
+ 
++void PerPixelMesh::Prepare(const PresetState& presetState, const PerFrameContext& perFrameContext, PerPixelContext& perPixelContext)
++{
++    if (presetState.renderContext.viewportSizeX == 0 || presetState.renderContext.viewportSizeY == 0 ||
++        presetState.renderContext.perPixelMeshX == 0 || presetState.renderContext.perPixelMeshY == 0)
++    {
++        return;
++    }
++    InitializeMesh(presetState);
++    CalculateMesh(presetState, perFrameContext, perPixelContext);
++}
++
+ void PerPixelMesh::InitializeMesh(const PresetState& presetState)
+ {
+     if (m_gridSizeX != presetState.renderContext.perPixelMeshX ||
+diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+--- engine-main/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp	2026-10-05 02:15:46
++++ engine-mdetail-a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp	2026-10-05 02:35:04
+@@ -48,6 +48,11 @@
+      */
+     void CompileWarpShader(PresetState& presetState);
+ 
++    /** PROTOTYPE detail layer: draw this frame's already calculated mesh again (other target/main texture). */
++    void DrawAgain(const PresetState& presetState, const PerFrameContext& perFrameContext) { WarpedBlit(presetState, perFrameContext); }
++    // Detail layer: evaluate the per-vertex equations without drawing (DrawAgain() draws the result).
++    void Prepare(const PresetState& presetState, const PerFrameContext& perFrameContext, PerPixelContext& perPixelContext);
++
+     /**
+      * @brief True if the compiled warp shader reads the main texture through a point sampler.
+      */
