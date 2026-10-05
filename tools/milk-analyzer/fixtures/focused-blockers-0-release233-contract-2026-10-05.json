@@ -1,0 +1,52 @@
+{
+  "scope": "Original315 source parsing/lowering gaps under recognized41patch source and opt-in projectmtv-random-slot-inputs-v1;not appearance or full9606 classification",
+  "remaining_language_gaps": 0,
+  "previous_language_gaps": 3,
+  "cleared": [
+    "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+    "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+    "midgitstraights of majillaen - featy sweet.milk"
+  ],
+  "newly_blocked": [],
+  "source_token_inventory_unchanged": true,
+  "reader_sha256": "3237dee183f5b8d9c28b6388c8480af7257275dca63148a24158bea63115d1d9",
+  "policy": "projectmtv-random-slot-inputs-v1",
+  "tests": {
+    "passed": 798,
+    "subtests": 35
+  },
+  "release": "v2.3.3",
+  "release_commit": "6e71ac2a18a95463fbe3a21c05e6dd4027cb74a0",
+  "aar_sha256": "e83be55299d310e6282204cb39740cfe09d1e2609471eb58c6299c8961eec9eb",
+  "native_arm64_sha256": "ee1f57e20a1f438809c8c8b2121be19fa23ff8ca640a2b50857bee9b04c9e34d",
+  "implementation_sha256": {
+    "random_binding_contract.py": "8b8b97cebf78251227b3397784d59e6149bb59ace70e64a6d750950d8eac56fd",
+    "shader_fields.py": "dbd40b1e8ddd1cba6933f1598968213f9c433e88d8535cf25090a7106a4695fc",
+    "coverage_audit.py": "ac96551633dddf99991a2e479f868f9d8aaaee38693b3859ea5706642bbf82ca",
+    "native_reader.cpp": "413037e50fa6418ecfadfd2b0c446f536c44e36a46d40dba892ff517884c228d",
+    "native_shader.cpp": "e733dc132707f845e12b3d7e9da4de89e63811773036e49f04a7b96978ff84c6"
+  },
+  "gap_priority": {
+    "schema_version": 1,
+    "presets": 315,
+    "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+    "priority_order": [
+      "affected_presets descending",
+      "affected_units descending",
+      "affected_source_tokens descending",
+      "gap name ascending"
+    ],
+    "scope": "Known source-audit parsing/lowering gaps; native-confirmed ignored source remains in the inventory without an execution gap. Behavioral obligations are not yet enumerated.",
+    "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+    "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+    "overlap_definition": "Counts share presets and must not be added as independent gains.",
+    "presets_with_known_gaps": 0,
+    "verified_behavior_percent": null,
+    "gaps": []
+  },
+  "limitations": [
+    "Runtime images,uploaded texsize,selection epochs,loading/fallback remain explicit obligations.",
+    "No full authored Android appearance or100-in-row visual gate claim.",
+    "This315subset does not establish all9606 accurate ranks."
+  ]
+}

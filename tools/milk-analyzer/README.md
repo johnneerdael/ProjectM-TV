@@ -1405,3 +1405,17 @@ Provenance and both comparisons are in
 `fixtures/strict-binding-context-source-contract-2026-10-05.json`. This is a
 commit for integration into `feat/preset-audience-scoring`; preserve its pending
 global-input/helper-copy work and merge the additive adapter metadata fields.
+
+
+### Integrated final315-subset language checkpoint
+
+Commit5e0085c6 was integrated after preserving the2.3.3 global-input adoption.
+The combined build and test suite passes **798tests and35subtests**. A fresh
+original315 recheck using the41-patch reader/translator and the explicit
+`projectmtv-random-slot-inputs-v1` policy has **zero recorded language gaps**,
+clearing the final3random-state cases with no new blockers or source-token loss.
+See `fixtures/focused-blockers-0-release233-contract-2026-10-05.json`.
+
+This is an opt-in source-contract result. Runtime textures,uploaded sizes,selection
+epochs,load/fallback and rendering remain explicit obligations. Appearance and
+all9606preset ranks are not certified by this structural checkpoint.

@@ -229,3 +229,14 @@ alone is6→3 because its helper-generated-copy follow-ups remain pending; they
 are not included in this isolated commit. Full authored Android appearance remains
 unverified. Six saved2.3.3 alias controls were independently hash/numerically
 rechecked with max1RGB8 error; no device or shared corpus was operated.
+
+
+## Integrated handback (2026-10-05)
+
+The isolated source-contract commit5e0085c6 is now cherry-picked as2a2eefbb after
+saving the pending2.3.3 global-input changes. Combined verification passes798tests
+and35subtests. The original315 source audit now reports3→0language gaps under the
+explicit pinned random-slot policy,with unchanged token inventories and no new
+blockers. `fixtures/focused-blockers-0-release233-contract-2026-10-05.json` records
+this final local integration checkpoint. Strict/default policy remains available;
+runtime texture/texsize/epoch/fallback obligations and unverified appearance remain.
