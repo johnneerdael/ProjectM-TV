@@ -6,6 +6,8 @@ from pathlib import Path
 
 LEGACY_HASH='892438f1f10f671175d19113c22795a6d7aa547bf6389044dd3f10c50fe76464'
 LEGACY_PATH='profiles/scorers/beta-score-v1.py.txt'
+ARCHIVED_SCORERS={LEGACY_HASH:LEGACY_PATH,
+ 'b1b6d29e15c72150596dcfc464216fd5a21d0b3c4c23d6079d755be1ee7cb24d':'profiles/scorers/beta-score-v1-diagnostic.py.txt'}
 
 
 def file_hash(path):
@@ -44,7 +46,16 @@ def compatible_previous(previous,current,source=None):
 
 def source_for(facts,source=None):
     source=source or Path(__file__).parent
-    if facts.get('scorer_sha256')==LEGACY_HASH and file_hash(source/LEGACY_PATH)==LEGACY_HASH:
-        return LEGACY_PATH
+    archived=ARCHIVED_SCORERS.get(facts.get('scorer_sha256'))
+    if archived and file_hash(source/archived)==facts['scorer_sha256']:return archived
     if facts.get('scorer_sha256')==file_hash(source/'beta_score.py'):return 'beta_score.py'
     raise ValueError('Unknown scorer source identity')
+
+
+def compatible_measurements(left,right,source=None):
+    """Compare known producer programs, not a later derived scoring program."""
+    source=source or Path(__file__).parent
+    if not valid_identity(left) or not valid_identity(right):return False
+    exempt={'identity','scorer_sha256'}
+    if {k:v for k,v in left.items() if k not in exempt}!={k:v for k,v in right.items() if k not in exempt}:return False
+    return numerical_program(source/source_for(left,source))==numerical_program(source/source_for(right,source))

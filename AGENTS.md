@@ -46,7 +46,10 @@ ProjectM TV is a music visualizer for Android TV. It renders [projectM](https://
 The focused `tools/milk-analyzer` subset imports PR #25's selector-domain proof and
 models the native implicit-global policy. It also includes the separate beta activity
 scorer using the published standard core AAR through JNI, and a source-bound collection
-exporter/verifier. These execution-based predictions are not independent source-only
+exporter/verifier. Its direct-delta beta model is fitted on eight historical user
+judgments transferred onto native features; archived producer and derived-scoring
+identities are kept separate. Optional offline refitting uses
+`tools/milk-analyzer/requirements-calibration.txt`. These execution-based predictions are not independent source-only
 visual forecasts. Build its source adapters against a hash-
 identified host engine before `python -m pytest tools/milk-analyzer -q`; Preset Lab CI
 performs this setup. Its results are source diagnostics, not visual certification.

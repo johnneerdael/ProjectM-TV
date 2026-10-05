@@ -13,7 +13,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'preset-lab/src'))
 from preset_lab.identity import canonical_json,digest,file_digest
 from preset_lab.inventory import inventory,read_index
 from beta_collections import BANDS,ranked_rows
-from scoring_context import compatible_previous,source_for
+from scoring_context import compatible_measurements,source_for
+from activity_model import activity,load_model,scoring_identity,FEATURE_NAMES
 
 EXPECTED_PROFILE={'frames':420,'warmup':60,'fps':30,'width':128,'height':72,'motion_fps':10}
 PUBLISHED_CORE=json.loads((Path(__file__).parent/'profiles/published-core-v2.3.3.json').read_text())
@@ -31,14 +32,9 @@ def check_identity(facts):
         raise ValueError('Published-AAR numerical protocol required')
     source=Path(__file__).parent
     source_for(facts,source)
-    if facts['scorer_sha256']!=file_digest(source/'beta_score.py'):
-        current={k:v for k,v in facts.items() if k!='identity'}
-        current['scorer_sha256']=file_digest(source/'beta_score.py')
-        current['identity']=hashlib.sha256(json.dumps(current,sort_keys=True).encode()).hexdigest()
-        if not compatible_previous(facts,current,source):raise ValueError('Legacy numerical program differs')
-    for key,path in [('descriptor_sha256',source/'descriptors.py'),
-                     ('model_sha256',source/'profiles/audience-model-v1.json')]:
-        if facts.get(key)!=file_digest(path):raise ValueError('Scoring implementation/model differs')
+    if facts.get('descriptor_sha256')!=file_digest(source/'descriptors.py'):
+        raise ValueError('Measurement descriptor differs')
+    producer_model(facts)
     runtime=facts.get('runtime_sha256',{})
     if set(runtime)!={'core.aar','libprojectmtv.so','classes.dex','libbackendclock.so','input.f32'}:
         raise ValueError('Incomplete runtime identity')
@@ -46,7 +42,14 @@ def check_identity(facts):
         raise ValueError('Runtime artifact identity differs')
 
 
-def check_activity(row):
+
+def producer_model(facts):
+    source=Path(__file__).parent
+    for relative in ('profiles/audience-model-v1.json','profiles/audience-model-direct-delta-v2.json'):
+        if facts.get('model_sha256')==file_digest(source/relative):return load(source/relative)['model']
+    raise ValueError('Unknown measurement producer model')
+
+def check_activity(row,model=None):
     features=row.get('features')
     if (not isinstance(features,list) or len(features)!=4
             or any(isinstance(x,bool) or not isinstance(x,(int,float)) or not math.isfinite(x) or x<0 for x in features)):
@@ -57,9 +60,8 @@ def check_activity(row):
         raise ValueError('Invalid coherent activity features')
     if not math.isclose(features[0],(up+down)/12,rel_tol=1e-10,abs_tol=1e-10):
         raise ValueError('Inconsistent coherent activity rate')
-    model=load(Path(__file__).parent/'profiles/audience-model-v1.json')['model']
-    raw=model['intercept']+sum(w*math.log1p(x)/s for w,x,s in zip(model['weights'],features,model['feature_scale']))
-    expected=max(raw,100*math.sqrt(peak)*min(1,min(up,down)/12))
+    model=model or load_model()['model']
+    expected=activity(model,features,up,down,peak)
     value=row.get('raw_activity')
     if (isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value)
             or not math.isclose(value,expected,rel_tol=1e-10,abs_tol=1e-10)):
@@ -98,7 +100,7 @@ def checked_contexts(facts,contexts):
     if contexts.get(facts['identity'])!=facts:raise ValueError('Current evidence context missing')
     for key,value in contexts.items():
         check_identity(value)
-        if key!=value['identity'] or value!=facts and not compatible_previous(value,facts):
+        if key!=value['identity'] or value!=facts and not compatible_measurements(value,facts):
             raise ValueError('Incompatible evidence contexts')
     return contexts
 
@@ -120,8 +122,9 @@ def read_complete_results(run,facts,known,contexts):
                 or any(meta.get(k)!=EXPECTED_PROFILE[k] for k in ('frames','width','height','fps'))
                 or meta.get('skipped_count')!=0 or meta.get('indexed_count')!=1):
             raise ValueError('Native selection/schedule/skip result differs: '+name)
-        check_activity(row)
-        rows.append({**source,'raw_activity':row.get('raw_activity'),'has_activity':row.get('has_activity'),
+        check_activity(row,producer_model(contexts[row['identity']]))
+        derived=activity(load_model()['model'],row['features'],row['coherent_up'],row['coherent_down'],row['paired_flash_peak'])
+        rows.append({**source,'raw_activity':derived,'measurement_raw_activity':row['raw_activity'],'has_activity':row.get('has_activity'),
                      'features':row.get('features'),'motion_basis':row.get('motion_basis'),
                      **{k:row[k] for k in ('coherent_up','coherent_down','paired_flash_peak')},
                      **{k:row[k] for k in ('all_stationary','mean_luma','mean_contrast') if k in row},
@@ -154,8 +157,7 @@ def export_bundle(run,aar,assets,destination):
                   'appearance_accuracy_verified':False,'rendering_policy':'capped',
                   'published_artifact':PUBLISHED_CORE,
                   'random_policy':'helper calls srand(12345); native evaluator keeps its thread-local seed; shader/noise/image random_device choices are not fixed; one load per preset',
-                  'feature_names':['coherent_luma_transitions_per_second','median_motion_viewports_per_second',
-                                   'mean_acceleration_viewports_per_second_squared','same_pixel_luma_delta_p95_over_30Hz_frame_pairs'],
+                  'feature_names':FEATURE_NAMES,'derived_scoring':scoring_identity(),
                   'evidence':facts,'library_sha256':metadata['library_sha256'],
                   'evidence_contexts':contexts,
                   'scorer_sources':{key:source_for(value) for key,value in contexts.items()},
@@ -184,6 +186,9 @@ def verify_bundle(bundle,assets):
             or manifest.get('default')!='all' or set(manifest.get('groups',{}))!=set(BANDS)
             or manifest.get('appearance_accuracy_verified') is not False or manifest.get('rendering_policy')!='capped'):
         raise ValueError('Unexpected collection policy')
+    load_model()
+    if manifest.get('derived_scoring')!=scoring_identity() or manifest.get('feature_names')!=FEATURE_NAMES:
+        raise ValueError('Derived scoring/calibration identity differs')
     check_identity(manifest['evidence'])
     contexts=checked_contexts(manifest['evidence'],manifest['evidence_contexts'])
     if manifest['scorer_sources']!={key:source_for(value) for key,value in contexts.items()}:
@@ -207,6 +212,8 @@ def verify_bundle(bundle,assets):
     expected=ranked_rows(rows)
     for row,ranked in zip(rows,expected):
         check_activity(row)
+        if row.get('evidence_identity') not in contexts:raise ValueError('Unknown measurement context')
+        check_activity({**row,'raw_activity':row.get('measurement_raw_activity')},producer_model(contexts[row['evidence_identity']]))
         if (any(row.get(k)!=v for k,v in known[row['preset']].items())
                 or any(row.get(k)!=ranked[k] for k in ('score','group_eligible','groups'))
                 or row.get('evidence_identity') not in contexts

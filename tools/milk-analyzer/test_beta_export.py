@@ -143,3 +143,25 @@ def test_activity_must_match_its_recorded_features(fixture):
     path.write_text(json.dumps(row))
     with pytest.raises(ValueError,match='activity'):
         export_bundle(run,aar,assets,bundle)
+
+
+def test_refit_is_separate_from_original_measurements(fixture):
+    from beta_export import export_bundle,verify_bundle
+    from activity_model import load_model,activity,scoring_identity
+    run,aar,assets,bundle=fixture
+    original={p:p.read_bytes() for p in (run/'results').glob('*.json')}
+    manifest=export_bundle(run,aar,assets,bundle)
+    assert original=={p:p.read_bytes() for p in original}
+    assert manifest['derived_scoring']==scoring_identity()
+    rows=[json.loads(s) for s in (bundle/'presets.jsonl').read_text().splitlines()]
+    for row in rows:
+        measurement=json.loads((run/'results'/(row['sha256']+'.json')).read_text())
+        assert row['evidence_identity']==measurement['identity']
+        assert row['measurement_raw_activity']==measurement['raw_activity']
+        assert row['raw_activity']==activity(load_model()['model'],row['features'],row['coherent_up'],row['coherent_down'],row['paired_flash_peak'])
+    assert any(r['raw_activity']!=r['measurement_raw_activity'] for r in rows)
+    manifest['derived_scoring']['model_sha256']='0'*64
+    from preset_lab.identity import digest
+    manifest['generation_identity']=digest({k:v for k,v in manifest.items() if k!='generation_identity'})
+    (bundle/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ValueError,match='Derived scoring'):verify_bundle(bundle,assets)

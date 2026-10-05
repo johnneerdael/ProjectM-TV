@@ -186,3 +186,32 @@ Diagnostic collection is best effort and its errors are separate from the primar
 measurement. For example, no `.skip` file is normally created when the engine's
 skip count is zero; failure to pull that optional file does not make a completed
 native measurement unscored.
+
+
+### Direct-delta calibration repair
+
+The current `audience-model-direct-delta-v2.json` is a fresh nonnegative interval
+fit on the actual 30-Hz direct brightness and 10-Hz native motion vectors, using the
+unchanged original eight user judgments. The old `audience-model-v1.json` expected
+motion-compensated brightness and is retained solely to validate historical
+producer activity. Both original scorer versions are archived; retained measurement
+files are not rewritten. The exporter recalculates activity with the new model,
+stores original activity separately and pins a distinct `derived_scoring` identity.
+
+Calibration inputs, original feedback, exact preset hashes and measurement
+identities are in `profiles/direct-delta-calibration/`. Feedback was on core2.2.2
+under mostly unspecified music/device conditions, with a tentative sample1 and
+possible darkness defect. This transferred-label beta fit is not perceptual
+certification: held-out base-model diagnostics match4/8strict bands and6/8within
+five points. Final corpus ranks are a separate relative transform.
+
+Reproduce the fit offline (not required for normal export/verification):
+
+```sh
+python -m pip install -r tools/milk-analyzer/requirements-calibration.txt
+python tools/milk-analyzer/fit_activity_model.py
+```
+
+The timeout callback always kills its local streaming child in a `finally` block,
+even if remote ADB cleanup fails. Its diagnostic errors are retained and the timer
+is joined before the outcome is saved. Timeout still halts the batch.

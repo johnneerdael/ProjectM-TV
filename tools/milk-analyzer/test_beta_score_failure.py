@@ -44,3 +44,42 @@ def test_diagnostic_timeout_preserves_primary_outcome(tmp_path,monkeypatch,statu
     assert saved==row
     if status=='unscored':
         assert saved['raw_activity'] is None and 'Truncated' in saved['reason']
+
+
+@pytest.mark.parametrize('error_kind',['timeout','oserror'])
+def test_runner_timeout_kills_local_child_even_when_remote_kill_fails(tmp_path,monkeypatch,error_kind):
+    for folder in ('overlays','logs','metadata','results'):(tmp_path/folder).mkdir()
+    case={'preset':'control.milk','sha256':'a'*64}
+    args=SimpleNamespace(output=tmp_path,remote='/task-owned',device='emulator-test')
+    class Process:
+        stdout=io.BytesIO()
+        stderr=io.BytesIO()
+        killed=False
+        def poll(self):return -9 if self.killed else None
+        def wait(self,**kwargs):return -9
+        def kill(self):self.killed=True
+    process=Process()
+    callbacks=[]
+    class Timer:
+        def __init__(self,seconds,callback):callbacks.append(callback)
+        def start(self):pass
+        def cancel(self):pass
+        def join(self):pass
+    monkeypatch.setattr(scorer.threading,'Timer',Timer)
+    monkeypatch.setattr(scorer.subprocess,'Popen',lambda *a,**kw:process)
+    monkeypatch.setattr(scorer,'read_header',lambda *a,**kw:{'pid':123})
+    def frames(*a,**kw):
+        callbacks[0]()
+        assert process.killed
+        raise ValueError('Truncated after timeout')
+    monkeypatch.setattr(scorer,'read_frames',frames)
+    def run(command,**kwargs):
+        if command[-1]=='kill 123':
+            if error_kind=='timeout':raise subprocess.TimeoutExpired(command,10)
+            raise OSError('ADB unavailable')
+        return subprocess.CompletedProcess(command,0,stdout=b'',stderr=b'')
+    monkeypatch.setattr(scorer.subprocess,'run',run)
+    row=scorer.measure(case,args,'frozen-identity',{})
+    assert process.killed
+    assert row['status']=='unscored' and row['reason']=='Runner timeout'
+    assert any(e['operation']=='timeout remote kill' for e in row['diagnostic_errors'])

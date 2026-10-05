@@ -27,24 +27,24 @@ The standard AAR uses the **capped** rendering policy. The standard APK uses the
 
 ## Activity calculation
 
-The frozen development model combines four numerical descriptors:
+The frozen direct-delta beta model combines four numerical descriptors:
 
 - Coherent brightness transitions per second, measured on all 30-fps frames. A transition needs a normalized pixel-brightness change of at least 0.1 across at least 20% of the image, plus a mean-brightness change of at least 0.1.
 - Median motion in viewport widths per second, using optical flow sampled at 10 fps.
 - Mean acceleration from that motion estimate.
 - The 95th percentile, over 30-fps frame pairs, of their per-pixel 95th-percentile brightness change. This uses the same pixel coordinates rather than optical-flow matching.
 
-For feature vector `x`, the raw activity is `4.3508 + sum(weight * log1p(x) / scale)`. The weights are approximately `12.5672, 27.2565, 38.1601, 12.2385`; the exact values and scales are in `audience-model-v1.json`. A paired coherent-flash proxy can raise this value. When optical flow lacks a usable result, the record explicitly identifies a temporal-change/spatial-gradient motion proxy. These are numerical activity features, not AI image labels or an independent source-only appearance prediction.
+For feature vector `x`, the raw activity is `4.3673 + sum(weight * log1p(x) / scale)`. The weights are approximately `36.9713, 2.4738, 50.6107, 23.4018`; the exact values and scales are in `audience-model-direct-delta-v2.json`. A paired coherent-flash proxy can raise this value. When optical flow lacks a usable result, the record explicitly identifies a temporal-change/spatial-gradient motion proxy. These are numerical activity features, not AI image labels or an independent source-only appearance prediction.
 
 Raw activity remains unclipped. Moving/activity-bearing presets are sorted by it, equal values share an average ordinal position, and those positions are rescaled so the lowest distinct group scores 1 and the highest scores 100. This gives a relative spread rather than measuring distance in an absolute perceptual unit. Rebuilding a changed library can shift scores. A collection with no distinct activity values would receive midpoint scores.
 
 The 382 effects with no visible activity in the probe receive score 1 with an explicit inactive flag, remain in All and are excluded from the three curated groups. Failed or missing results cannot be exported as calm presets.
 
-The model is a small development candidate, not an accuracy-certified audience classifier. Colourfulness, fractal structure, taste and long-term feedback evolution are not separately certified by this score. A 14-second probe can miss later behaviour.
+The model is refitted to these actual native features using the original eight recorded human judgments, mapping Party to Intense. Those judgments came from Milkbeat 0.9.0/core 2.2.2, with device and music mostly unspecified; sample 1's Party lean was tentative and included a possible darkness issue. They are transferred labels, not a matched-condition validation. Leave-one-out base-model diagnostics give 4/8 strict band matches and 6/8 within five points, with large misses for samples 1 and 8. These figures are not accuracy measurements for the final collection ranks. The model remains a small development candidate. Colourfulness, fractal structure, taste and long-term feedback evolution are not separately certified by this score. A 14-second probe can miss later behaviour.
 
 ## Evidence and reproducibility
 
-`core/src/main/assets/preset-genres/presets.jsonl` records every preset's full source hash, native memory weight, raw activity, score, activity state and membership. `manifest.json` records beta status, model/runtime/PCM hashes, render settings, collection counts and checksums. The three index files contain original filenames and master-index memory weights. All still uses `presets.idx`.
+`core/src/main/assets/preset-genres/presets.jsonl` records every preset's full source hash, native memory weight, derived raw activity, original measurement activity, score, activity state and membership. `manifest.json` records beta status, model/runtime/PCM hashes, render settings, collection counts and checksums. The three index files contain original filenames and master-index memory weights. All still uses `presets.idx`.
 
 The scorer stops on a failed measurement; its cause must be diagnosed and the case repaired before continuing. Diagnostic collection errors remain separate from the measurement. The exporter refuses missing or failed rows, stale source or texture hashes, another AAR flavour, mismatched runtime identities or a wrong frame schedule. Its verifier recalculates ranks and memberships and compares them with the indexes. Checksums alone are insufficient to establish correct membership.
 
@@ -64,8 +64,10 @@ python tools/milk-analyzer/beta_export.py --run build/predictive-beta/scores --a
 No full corpus is rendered during app use. The app reads the prebuilt indexes; subsequent scoring improvements can update them in a new release.
 
 
-A diagnostic-only scorer repair retains the first producer's exact source and each
+Archived scorer versions retain the first producer's exact source and each
 completed row's original evidence identity. The manifest declares both contexts;
 all numerical/render inputs must match and the measurement program is compared as
 an AST outside diagnostic cleanup and resume bookkeeping. This preserves completed
 measurements without silently relabelling them as results from the repaired code.
+
+The initial producer incorrectly applied a motion-compensated brightness model to direct pixel changes. The corrected bundle refits the coefficients to the actual direct-delta vectors rather than renaming that feature. Original measurements and their producer/model identities remain unchanged. A separate `derived_scoring` identity pins the new model, scoring function and the model's calibration evidence/fitter hashes; verification checks both original and derived activity independently. The new scorer uses the corrected model for future runs.

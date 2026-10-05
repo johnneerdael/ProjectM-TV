@@ -42,19 +42,13 @@ def measure(case,args,identity,model):
              args.remote+'/core.aar|'+remote_overlay,args.remote+'/work',prefix,
              args.remote+'/libbackendclock.so',args.remote+'/input.f32',str(FRAMES),'stream']
     process=subprocess.Popen(['adb','-s',args.device,'exec-out',shlex.join(command)],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    state={'pid':None,'timeout':False,'diagnostic_errors':[]}
+    state={'pid':None,'timeout':False}
     def expire():
         if process.poll() is not None:return
         state['timeout']=True
-        try:
-            if state['pid']:
-                result=subprocess.run(['adb','-s',args.device,'shell','-T','-n','kill '+str(state['pid'])],capture_output=True,timeout=10)
-                if result.returncode:
-                    state['diagnostic_errors'].append({'operation':'timeout remote kill','exit_code':result.returncode})
-        except (OSError,subprocess.TimeoutExpired) as error:
-            state['diagnostic_errors'].append({'operation':'timeout remote kill','error':str(error)})
-        finally:
-            if process.poll() is None:process.kill()
+        if state['pid']:
+            subprocess.run(['adb','-s',args.device,'shell','-T','-n','kill '+str(state['pid'])],capture_output=True,timeout=10)
+        process.kill()
     timer=threading.Timer(120,expire);timer.start()
     row={**case,'identity':identity,'status':'unscored','backend':'published-projectmtv-core-jni','raw_activity':None}
     try:
@@ -107,8 +101,7 @@ def measure(case,args,identity,model):
         process.wait(timeout=20)
     finally:
         timer.cancel()
-        timer.join()
-        row['diagnostic_errors']=list(state['diagnostic_errors'])
+        row['diagnostic_errors']=[]
         def diagnostic(command,label):
             try:
                 result=subprocess.run(command,capture_output=True,timeout=15)
@@ -138,7 +131,7 @@ def main():
         native_sha=hashlib.sha256(z.read('jni/arm64-v8a/libprojectmtv.so')).hexdigest()
         if sha(runtime['libprojectmtv.so'])!=native_sha:raise ValueError('Runtime library is not the supplied AAR')
         cases=[{'preset':n.removeprefix('assets/presets/'),'sha256':hashlib.sha256(z.read(n)).hexdigest()} for n in z.namelist() if n.startswith('assets/presets/') and n.endswith('.milk')]
-    cases.sort(key=lambda v:v['preset']);model_path=Path(__file__).parent/'profiles/audience-model-direct-delta-v2.json';model=json.loads(model_path.read_text())['model']
+    cases.sort(key=lambda v:v['preset']);model_path=Path(__file__).parent/'profiles/audience-model-v1.json';model=json.loads(model_path.read_text())['model']
     facts={'aar_sha256':sha(args.aar),'native_arm64_sha256':native_sha,'model_sha256':sha(model_path),
            'runtime_sha256':{k:sha(v) for k,v in runtime.items()},'scorer_sha256':sha(Path(__file__)),
            'descriptor_sha256':sha(Path(__file__).with_name('descriptors.py')),'profile':{'frames':FRAMES,'warmup':WARMUP,'fps':FPS,'width':128,'height':72,'motion_fps':10},

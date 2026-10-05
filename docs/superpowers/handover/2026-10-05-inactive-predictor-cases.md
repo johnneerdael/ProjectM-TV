@@ -2,6 +2,10 @@
 
 Date: 2026-10-05. Repository: johnneerdael/ProjectM-TV. Branch: feat/predictive-collections-beta. Code checkpoint: 2cf766fafb6ee7b665595e4decbcfa0b8ca5f355; generated collection is still pending final app/PR verification.
 
+## Calibration correction after this research snapshot
+
+The 382-case packet preserves original measurement producer results. Its original raw activity used a mismatched brightness model; PR36 now derives collection activity with a separately pinned direct-delta refit. The original results are preserved for research and must not be treated as current collection scores. The inactive gate and these 382 gate outcomes are unchanged by model refitting. See the [predictive collections article](../../user-guide/predictive-collections.md) for current calibration and limitations.
+
 ## Finding and exact scope
 
 All 9,606 presets completed the numerical run and received finite activity values. **382 have `has_activity=false`; this is an execution-probe heuristic, not a missing-language-understanding count, a renderer compile rejection count, or proof that their MilkDrop programs are always inactive.** They remain in All. Current grouping policy assigns them score 1 and excludes them from Chill/Normal/Intense, while 9,224 eligible effects establish the moving endpoints.
