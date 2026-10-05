@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import sys
 
 CONTEXT = "Reviewed PR builds"
 WORKFLOW = "pr-builds.yml"
@@ -222,12 +223,13 @@ def reconcile(api, number, retry=False):
         pr_number=str(number), head_sha=head, base_sha=pr["base"]["sha"], merge_sha=pr["merge_commit_sha"])))
 
 
-def snapshot_safely(api, number):
+def snapshot_safely(api, number, expected_head=None):
     try:
         return api.snapshot(number)
     except (RuntimeError, subprocess.CalledProcessError, KeyError):
         pr = api.get(f"pulls/{number}")
-        if pr["state"] == "open" and pr["base"]["ref"] == "main":
+        if (pr["state"] == "open" and pr["base"]["ref"] == "main"
+                and (expected_head is None or pr["head"]["sha"] == expected_head)):
             api.status(pr["head"]["sha"], "pending", "Unable to verify review state; recheck required")
         raise
 
@@ -265,30 +267,51 @@ def main():
     head, base, merge = (os.environ[name] for name in ["PR_HEAD", "PR_BASE", "PR_MERGE"])
     if any(not re.fullmatch(r"[0-9a-f]{40}", sha) for sha in [head, base, merge]):
         raise ValueError("Full commit SHAs are required")
-    pr, (ready, reason) = snapshot_safely(api, args.pr)
-    ready = ready and matches(pr, head, base, merge)
     if args.mode == "preflight":
+        pr, (ready, reason) = snapshot_safely(api, args.pr, head)
+        ready = ready and matches(pr, head, base, merge)
         if not ready:
             raise RuntimeError(f"PR is not eligible or its revision changed: {reason}")
+        api.status(head, "pending", "Preflight verified; full validation is starting")
         with Path(os.environ["GITHUB_OUTPUT"]).open("a") as output:
             output.write(f"merge_sha={merge}\n")
         return
     results = json.loads(os.environ["BUILD_RESULTS"])
-    # Never mutate the new head's status from an old validation run.
-    if pr["head"]["sha"] != head:
-        return
+    preflight = os.environ.get("PREFLIGHT_RESULT", "success")
     url = f"https://github.com/{args.repo}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
+    finish_validation(api, args.pr, head, base, merge, results, preflight, url)
+
+
+def finish_validation(api, number, head, base, merge, results, preflight, url):
     no_builds_started = (set(results) == {"android", "presets", "docs"}
                          and all(value == "skipped" for value in results.values()))
-    if os.environ.get("PREFLIGHT_RESULT", "success") != "success" and no_builds_started:
-        api.status(head, "pending", "Preflight did not start builds; fresh validation required", url)
-    elif not ready:
-        api.status(head, "pending", "Review or base changed; fresh validation required", url)
-    elif builds_passed(results):
-        api.status(head, "success", f"Passed all builds against main {base}", url)
-    else:
-        api.status(head, "failure", "Validation failed, was cancelled, or skipped a required build", url)
-        raise RuntimeError(f"Required builds did not pass: {results}")
+    retryable = builds_passed(results) or (preflight != "success" and no_builds_started)
+    try:
+        pr, (ready, _) = snapshot_safely(api, number, head)
+        # Never mutate the new head's status from an old validation run.
+        if pr["head"]["sha"] != head:
+            return
+        ready = ready and matches(pr, head, base, merge)
+        if preflight != "success" and no_builds_started:
+            api.status(head, "pending", "Preflight did not start builds; fresh validation required", url)
+        elif not ready:
+            api.status(head, "pending", "Review or base changed; fresh validation required", url)
+        elif builds_passed(results):
+            api.status(head, "success", f"Passed all builds against main {base}", url)
+        else:
+            api.status(head, "failure", "Validation failed, was cancelled, or skipped a required build", url)
+            raise RuntimeError(f"Required builds did not pass: {results}")
+    except (RuntimeError, subprocess.CalledProcessError, KeyError) as error:
+        if not retryable:
+            raise
+        # A reporter outage must not turn successful builds into an actual build
+        # failure. Return success while leaving the required gate pending; the
+        # controller rechecks eligibility before dispatching fresh validation.
+        try:
+            api.status(head, "pending", "Final reporting unavailable; fresh validation required", url)
+        except (RuntimeError, subprocess.CalledProcessError, KeyError) as status_error:
+            print(f"Cannot mark reporter outage pending: {status_error}", file=sys.stderr)
+        print(f"Final reporting will be retried: {error}", file=sys.stderr)
 
 
 if __name__ == "__main__":

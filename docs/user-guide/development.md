@@ -70,7 +70,7 @@ build/docs-env/bin/mkdocs serve
 build/docs-env/bin/mkdocs build --strict
 ```
 
-The User guide workflow builds the site as part of reviewed PR validation and the main pipeline. The main pipeline deploys the site to GitHub Pages after all validation builds pass. Every successfully tested main merge also publishes the APK and core AAR, including documentation-only merges; routine changes do not manually bump versions.
+The read-only User guide build workflow validates the site as part of reviewed PR validation and the main pipeline. The main pipeline publishes the site after all validation builds pass. A manual **User guide** run on `main` also builds and publishes it without another APK/AAR release. Both publishing paths use the same deployment queue and skip runs whose source is older than current `main`. Every successfully tested main merge also publishes the APK and core AAR, including documentation-only merges; routine changes do not manually bump versions.
 
 ## Shader initialization diagnostics
 

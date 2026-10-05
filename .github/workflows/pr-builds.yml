@@ -77,7 +77,7 @@ jobs:
   docs:
     needs: preflight
     if: needs.preflight.outputs.ready == 'true'
-    uses: ./.github/workflows/docs.yml
+    uses: ./.github/workflows/docs-build.yml
     with:
       source_ref: ${{ needs.preflight.outputs.merge_sha }}
 

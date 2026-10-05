@@ -31,7 +31,7 @@ jobs:
 
   docs:
     if: github.ref == 'refs/heads/main'
-    uses: ./.github/workflows/docs.yml
+    uses: ./.github/workflows/docs-build.yml
 
   release:
     name: Publish GitHub Release
@@ -99,13 +99,8 @@ jobs:
   deploy-guide:
     if: github.ref == 'refs/heads/main'
     needs: [build, presets, docs]
-    runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
-        id: deployment
+    uses: ./.github/workflows/pages-deploy.yml

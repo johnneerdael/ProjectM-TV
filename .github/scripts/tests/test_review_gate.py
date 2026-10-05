@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import os
+import tempfile
 from pathlib import Path
 import unittest
 from unittest.mock import patch
@@ -240,6 +241,9 @@ class FakeGitHub:
     def snapshot(self, number):
         return self.pr, (self.ready, "Waiting for review")
 
+    def get(self, path):
+        return self.pr
+
     def pages(self, path, key=None):
         return self.runs if path.startswith("actions/") else self.statuses
 
@@ -332,6 +336,52 @@ class ReconciliationTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "Required builds did not pass"):
             self.finish(dict(android="failure", presets="skipped", docs="skipped"), preflight="failure")
         self.assertEqual(self.api.statuses[0]["state"], "failure")
+
+    def test_preflight_revokes_prior_success_before_any_builds_start(self):
+        self.api.statuses = [dict(context=self.gate.CONTEXT, state="success",
+                                 description=f"Passed all builds against main {BASE}")]
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "output"
+            env = dict(PR_HEAD=HEAD, PR_BASE=BASE, PR_MERGE=MERGE, GITHUB_OUTPUT=str(output))
+            with patch.object(self.gate, "GitHub", return_value=self.api), patch.dict(os.environ, env), \
+                    patch("sys.argv", ["review_gate.py", "preflight", "--repo", "owner/repo", "--pr", "42"]):
+                self.gate.main()
+            self.assertEqual(output.read_text(), f"merge_sha={MERGE}\n")
+        self.assertEqual(self.api.statuses[0]["state"], "pending")
+
+    def test_reporter_read_error_after_successful_builds_is_retryable(self):
+        with patch.object(self.api, "snapshot", side_effect=RuntimeError("GitHub unavailable")):
+            self.finish(dict(android="success", presets="success", docs="success"))
+        self.assertEqual(self.api.statuses[0]["state"], "pending")
+        self.api.runs = [self.api.run("completed", "success")]
+        self.gate.reconcile(self.api, 42)
+        self.assertTrue(self.api.writes[-1][0].endswith("/dispatches"))
+
+    def test_old_reporter_api_error_never_invalidates_new_head_status(self):
+        self.api.pr["head"]["sha"] = BASE
+        with patch.object(self.api, "snapshot", side_effect=RuntimeError("GitHub unavailable")), \
+                patch.object(self.api, "status", wraps=self.api.status) as status:
+            self.finish(dict(android="success", presets="success", docs="success"))
+        self.assertTrue(status.called)
+        self.assertTrue(all(call.args[0] == HEAD for call in status.call_args_list))
+
+    def test_reporter_status_error_after_successful_builds_is_retryable(self):
+        original = self.api.status
+        def unavailable_once(head, state, description, url=None):
+            if state == "success":
+                raise RuntimeError("GitHub status unavailable")
+            return original(head, state, description, url)
+        with patch.object(self.api, "status", side_effect=unavailable_once):
+            self.finish(dict(android="success", presets="success", docs="success"))
+        self.assertEqual(self.api.statuses[0]["state"], "pending")
+        self.api.runs = [self.api.run("completed", "success")]
+        self.gate.reconcile(self.api, 42)
+        self.assertTrue(self.api.writes[-1][0].endswith("/dispatches"))
+
+    def test_reporter_error_does_not_mask_an_actual_failed_build(self):
+        with patch.object(self.api, "snapshot", side_effect=RuntimeError("GitHub unavailable")):
+            with self.assertRaisesRegex(RuntimeError, "GitHub unavailable"):
+                self.finish(dict(android="failure", presets="success", docs="success"))
 
     def test_failed_builds_still_need_retry_after_review_eligibility_recovers(self):
         self.api.ready = False
