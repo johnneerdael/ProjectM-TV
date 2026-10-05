@@ -35,13 +35,15 @@ Some presets choose random images from the bundled texture pack each time they l
 
 Earlier versions skipped presets whose equation code projectM could not compile, including 27 bundled presets. The app now loads equation code like MilkDrop does, so these presets play. A code block that MilkDrop cannot compile either is left out and the rest of the preset plays, as in MilkDrop. Presets skipped earlier stay on this TV's skip list until you reset it: **Advanced → Skipped presets**. A reset also clears presets skipped as slow or black; the app skips those again if they still are.
 
-## Fewer than 500 Dance presets are available
+## A collection has fewer available presets
 
-The collection packages 500, while the eligible count excludes this TV's skipped presets. **Advanced → Skipped presets** shows the skip count and lets you reset the list. Failed or consistently slow presets can be skipped again on that device.
+The eligible count excludes this TV's skipped presets. **Advanced → Skipped presets** shows the skip count and lets you reset the list. Failed or consistently slow presets can be skipped again on that device.
 
-## Dance is unavailable
+The app falls back to **All** when a selected collection has no eligible members. Saved Dance or older genre selections also return to All.
 
-The app falls back to **All** when a selected category has no eligible members. The full library remains available, subject to the same skip rules.
+## A mood prediction feels wrong
+
+The predictive preset engine is beta. A short shared audio probe orders activity within the library; different music, random inputs, render resolutions and GPUs can change the result. A low rank is not a guarantee of no flashes. Try another preset or collection, and report the preset name, selected mood, song, device and render settings in a [GitHub issue](https://github.com/johnneerdael/ProjectM-TV/issues) so the scoring can be corrected. See [Predictive collections](predictive-collections.md).
 
 ## Track titles are missing
 

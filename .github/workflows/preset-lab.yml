@@ -33,13 +33,15 @@ jobs:
         run: python -m pip install --no-deps -e tools/preset-lab
       - name: Test measurements, cache reuse and bundle integrity
         run: python -m pytest tools/preset-lab/tests -m 'not native' -q
+      - name: Verify source-bound predictive collections beta
+        run: python tools/milk-analyzer/beta_export.py --check --bundle core/src/main/assets/preset-genres
       - name: Reject tracked user audio and raw captures
         run: |
           python - <<'PY'
           import subprocess
           from pathlib import Path
           forbidden = {'.m4a', '.webm', '.wav', '.mp3', '.flac', '.ogg', '.opus', '.aac', '.f32', '.rgb', '.mp4'}
-          files = subprocess.check_output(['git', 'ls-files', '-z', 'tools/preset-lab', 'core/src/main/assets/preset-genres']).decode().split('\0')
+          files = subprocess.check_output(['git', 'ls-files', '-z', 'tools/preset-lab', 'tools/milk-analyzer', 'core/src/main/assets/preset-genres']).decode().split('\0')
           invalid = [name for name in files if name and Path(name).suffix.lower() in forbidden]
           if invalid:
               raise SystemExit('User audio/raw captures must remain untracked: ' + ', '.join(invalid))

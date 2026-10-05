@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-03T22:14:00.752455+00:00",
+  "source": "User chat feedback on installed Milkbeat Preset Review",
+  "app_version": "0.9.0",
+  "projectm_core_version": "2.2.2",
+  "device_per_sample": "Not explicitly recorded by user",
+  "audio_per_sample": "Only Sample 04 explicitly reported rock; do not assume the frozen prediction track was used for the others.",
+  "frozen_predictions_sha256": "9a30deb410e5f4162e99c51f4ab27ad2aae9b9a5cf743bc0565fc51018736d92",
+  "cases": [
+    {
+      "sample": 1,
+      "preset": "suksma - ed geining hateops - flx evil roam.milk",
+      "preset_sha256": "a362c8349da48b6fa8094a7372425a19a93a426b0df1ec2c1bd6b2421124ed40",
+      "frozen_prediction": "Uncertain",
+      "human_fit": "Party",
+      "user_observation_verbatim": "quite flashy but also to dark maybe bug? Not fully suited or party",
+      "comparison": "possible_rendering_issue",
+      "comparison_note": "The user Party lean agrees with the original tentative source interpretation. Darkness remains a possible issue; numerical prediction is still unresolved.",
+      "human_fit_confidence": "Tentative: user leans Party",
+      "clarification_verbatim": "But I leaned to party like you"
+    },
+    {
+      "sample": 2,
+      "preset": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin - elephant mating - shf thanks nz+ SWAEYY!!!!.milk",
+      "preset_sha256": "d510f6e6c146ac740ab0e6d19f93f0393022005249d8dfdef8957823f82289d4",
+      "frozen_prediction": "Party",
+      "human_fit": "Party",
+      "user_observation_verbatim": "extremely flashy, not for chill at all",
+      "comparison": "clear_agreement"
+    },
+    {
+      "sample": 3,
+      "preset": "Martin n AdamFX - Hardcore Mix Collision in Myself Ft - AC .milk",
+      "preset_sha256": "09fa7d991b29e5634cea120256ff9f4e6bc281ac5fcf95c5bdacbbe29298617b",
+      "frozen_prediction": "Party",
+      "human_fit": "Party",
+      "user_observation_verbatim": "party for sure, very flashy",
+      "comparison": "clear_agreement"
+    },
+    {
+      "sample": 4,
+      "preset": "EoS+Phat - I_v2 monks string box.milk",
+      "preset_sha256": "41b1555a3a5aa4646b41530fcf475c91113ccd8133c9801e4256638e4f823ae7",
+      "frozen_prediction": "Uncertain",
+      "human_fit": "Chill",
+      "user_observation_verbatim": "suitable or chill to nice color movement on rock not to extreme",
+      "comparison": "prediction_abstained",
+      "reported_music": "rock"
+    },
+    {
+      "sample": 5,
+      "preset": "suksma - neonlithic scrawlz.milk",
+      "preset_sha256": "cef3c2a0fe0f66f882eb0612534d6c1fd013bf6c142ab9b06c5d376d4b1e3761",
+      "frozen_prediction": "Chill",
+      "human_fit": "Chill",
+      "user_observation_verbatim": "relaxing movement ok or chill",
+      "comparison": "clear_agreement"
+    },
+    {
+      "sample": 6,
+      "preset": "shifter - spun sugar - causal mothritis.milk",
+      "preset_sha256": "42249796c0083f3090fe51409c4e2c79e515cb6ee5b61867d7304f866e2edc02",
+      "frozen_prediction": "Chill",
+      "human_fit": "Chill",
+      "user_observation_verbatim": "perfect for chill",
+      "comparison": "clear_agreement"
+    },
+    {
+      "sample": 7,
+      "preset": "Tripgnosis - Firesticks --- Isosceles edit11.milk",
+      "preset_sha256": "f19ef30a45280b6ea353cfbe2f4c67dd217afda389eb538bbc16d199e27638d1",
+      "frozen_prediction": "Chill",
+      "human_fit": "Chill",
+      "user_observation_verbatim": "chill color swirls suitable for relaxation",
+      "comparison": "clear_agreement"
+    },
+    {
+      "sample": 8,
+      "preset": "signed 'nuph phoaqing death warrants qultre ov ngread.milk",
+      "preset_sha256": "8fe1784a25d47cc7acee9ebe1cebf11931bd5db18de611bc079449d91bc16d94",
+      "frozen_prediction": "Party",
+      "human_fit": "Party",
+      "user_observation_verbatim": "now very flashy party preset",
+      "comparison": "clear_agreement"
+    },
+    {
+      "sample": 9,
+      "preset": "EoS+Phat - I_v2 sides_b.milk",
+      "preset_sha256": "080273aad1ee64958a4b94ecd8fd04b4d39abc5845c1590df3b52f4c75d6d56b",
+      "frozen_prediction": "Uncertain",
+      "human_fit": "Chill",
+      "user_observation_verbatim": "good enough for chill, on the edge but suitable :)",
+      "comparison": "prediction_abstained"
+    },
+    {
+      "sample": 10,
+      "preset": "Rozzor & Esotic - PPL (NWI) Mandala Chill Color Reactive.milk",
+      "preset_sha256": "b205c635b0115dd37f3c08e7da6104403ff839fffe46c2128b06af1e55df3b4f",
+      "frozen_prediction": "Chill",
+      "human_fit": "Normal",
+      "user_observation_verbatim": "bit more flashy, suitable as a midpoint, not for chilll, for party better exists.",
+      "comparison": "normal_category_difference",
+      "comparison_note": "Human verdict is Normal, a separate category between Chill and Party. Frozen Chill prediction differs from that verdict; user does not regard this as outright wrong. Do not count it as a clear agreement or a definite full error.",
+      "clarification_history_verbatim": [
+        "midpoint could go both ways so I wont call it wrong outright",
+        "It means its not party and not chill",
+        "Chill / Normal / Party"
+      ]
+    }
+  ],
+  "comparison_summary": {
+    "clear_agreements": 6,
+    "source_predictions_abstained": 3,
+    "definite_errors": 0,
+    "calibrated_visual_accuracy_percent": null,
+    "note": "Qualitative audience-fit feedback on ten presets; does not establish visual prediction accuracy or the 100-case target.",
+    "normal_category_difference_not_scored_as_clear_pass_or_full_error": 1
+  },
+  "classification_categories": [
+    "Chill",
+    "Normal",
+    "Party"
+  ]
+}

@@ -1,0 +1,389 @@
+{
+  "selection": "Original eight-sample training cohort, unchanged; Party maps to Intense",
+  "rows": [
+    {
+      "sample": 1,
+      "judgment": "Party",
+      "measurement_sha256": "157c6c5655c0a20f306295ebb7c79275d7e9cf0fee4a6d1eb3a8e3c57db810bb",
+      "measurement": {
+        "preset": "suksma - ed geining hateops - flx evil roam.milk",
+        "sha256": "a362c8349da48b6fa8094a7372425a19a93a426b0df1ec2c1bd6b2421124ed40",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 32.55369180455383,
+        "has_activity": false,
+        "features": [
+          0.0,
+          0.13322830200195312,
+          1.0216806985532916,
+          0.010065412521362284
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 0,
+        "coherent_down": 0,
+        "paired_flash_peak": 5.410284176024207e-06,
+        "all_stationary": false,
+        "mean_luma": 0.0009585453855980258,
+        "mean_contrast": 0.0032717203144216,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "suksma - ed geining hateops - flx evil roam.milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 1.511997833964415,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    },
+    {
+      "sample": 2,
+      "judgment": "Party",
+      "measurement_sha256": "e71493b507f6cd8b0a603fa7e48876af2a495e55bc50c12988167c767fab3be8",
+      "measurement": {
+        "preset": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin - elephant mating - shf thanks nz+ SWAEYY!!!!.milk",
+        "sha256": "d510f6e6c146ac740ab0e6d19f93f0393022005249d8dfdef8957823f82289d4",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 90.58820950820794,
+        "has_activity": true,
+        "features": [
+          9.666666666666666,
+          0.04264456033706665,
+          0.44745462786305157,
+          0.8444756627082824
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 57,
+        "coherent_down": 59,
+        "paired_flash_peak": 0.8206223701902975,
+        "all_stationary": false,
+        "mean_luma": 0.7627146436108483,
+        "mean_contrast": 0.17702600456501993,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin - elephant mating - shf thanks nz+ SWAEYY!!!!.milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 2.545305166975595,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    },
+    {
+      "sample": 3,
+      "judgment": "Party",
+      "measurement_sha256": "5cf79c874010df70a519b84cc6f27bb2f1db68ae7e208b88576028ac673ebf5f",
+      "measurement": {
+        "preset": "Martin n AdamFX - Hardcore Mix Collision in Myself Ft - AC .milk",
+        "sha256": "09fa7d991b29e5634cea120256ff9f4e6bc281ac5fcf95c5bdacbbe29298617b",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 107.18804193095039,
+        "has_activity": true,
+        "features": [
+          10.25,
+          0.24466931819915771,
+          2.9346623377691405,
+          0.8330718636512756
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 61,
+        "coherent_down": 62,
+        "paired_flash_peak": 0.6494890130124986,
+        "all_stationary": false,
+        "mean_luma": 0.337979225276245,
+        "mean_contrast": 0.22022978729671902,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Martin n AdamFX - Hardcore Mix Collision in Myself Ft - AC .milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 1.2743524169782177,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    },
+    {
+      "sample": 5,
+      "judgment": "Chill",
+      "measurement_sha256": "1492a48bd0e1c671bf6f695afdb1ce2dc80a3c21c0ef01203b85daa021336f60",
+      "measurement": {
+        "preset": "suksma - neonlithic scrawlz.milk",
+        "sha256": "cef3c2a0fe0f66f882eb0612534d6c1fd013bf6c142ab9b06c5d376d4b1e3761",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 22.91452601487031,
+        "has_activity": true,
+        "features": [
+          0.0,
+          0.12116947770118713,
+          0.17020535764405886,
+          0.0801210172474384
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 0,
+        "coherent_down": 0,
+        "paired_flash_peak": 0.00018188173877812613,
+        "all_stationary": false,
+        "mean_luma": 0.12303413119581011,
+        "mean_contrast": 0.07019647047337559,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "suksma - neonlithic scrawlz.milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 1.3592308749211952,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    },
+    {
+      "sample": 6,
+      "judgment": "Chill",
+      "measurement_sha256": "27427deee563a169f226ceeabb10e9f078c3a0a0c5194cb0aafbdb79b16e99e9",
+      "measurement": {
+        "preset": "shifter - spun sugar - causal mothritis.milk",
+        "sha256": "42249796c0083f3090fe51409c4e2c79e515cb6ee5b61867d7304f866e2edc02",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 19.509390436742084,
+        "has_activity": true,
+        "features": [
+          0.0,
+          0.07066770642995834,
+          0.23408094259231563,
+          0.08019264340400682
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 0,
+        "coherent_down": 0,
+        "paired_flash_peak": 0.000949689987363753,
+        "all_stationary": false,
+        "mean_luma": 0.08622058263669412,
+        "mean_contrast": 0.19710985695322356,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "shifter - spun sugar - causal mothritis.milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 1.6709903749870136,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    },
+    {
+      "sample": 7,
+      "judgment": "Chill",
+      "measurement_sha256": "5531bb73d870228298963af3ee257b2da329e55cf49f40eeee672821959cec43",
+      "measurement": {
+        "preset": "Tripgnosis - Firesticks --- Isosceles edit11.milk",
+        "sha256": "f19ef30a45280b6ea353cfbe2f4c67dd217afda389eb538bbc16d199e27638d1",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 7.369004635910165,
+        "has_activity": true,
+        "features": [
+          0.0,
+          0.009261404164135456,
+          0.022902882998172884,
+          0.03311011195182798
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 0,
+        "coherent_down": 0,
+        "paired_flash_peak": 0.00016888200237493342,
+        "all_stationary": false,
+        "mean_luma": 0.08195796593402822,
+        "mean_contrast": 0.17862284618119398,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Tripgnosis - Firesticks --- Isosceles edit11.milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 1.3371010409900919,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    },
+    {
+      "sample": 8,
+      "judgment": "Party",
+      "measurement_sha256": "e9a641af646c513610b32fbfc36e47862699a82ed7c6e998c590bd0be34eed35",
+      "measurement": {
+        "preset": "signed 'nuph phoaqing death warrants qultre ov ngread.milk",
+        "sha256": "8fe1784a25d47cc7acee9ebe1cebf11931bd5db18de611bc079449d91bc16d94",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 33.50282028250548,
+        "has_activity": true,
+        "features": [
+          1.5,
+          0.011324205435812473,
+          0.17941464797177498,
+          0.3917471200227736
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 7,
+        "coherent_down": 11,
+        "paired_flash_peak": 0.27300781497292015,
+        "all_stationary": false,
+        "mean_luma": 0.26148862762169706,
+        "mean_contrast": 0.14403445361337314,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "signed 'nuph phoaqing death warrants qultre ov ngread.milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 2.0587508749449626,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    },
+    {
+      "sample": 10,
+      "judgment": "Normal",
+      "measurement_sha256": "52b3ac5fcdae67c060b1924bc4c34d997e253e8a5a98cb8e9ec46d2be78f7bac",
+      "measurement": {
+        "preset": "Rozzor & Esotic - PPL (NWI) Mandala Chill Color Reactive.milk",
+        "sha256": "b205c635b0115dd37f3c08e7da6104403ff839fffe46c2128b06af1e55df3b4f",
+        "identity": "8f42aa2d9d2171ff66efda1b474c25358b70c353c53ea5d5c14204a623e275a5",
+        "status": "scored",
+        "backend": "published-projectmtv-core-jni",
+        "raw_activity": 13.224152804505312,
+        "has_activity": true,
+        "features": [
+          0.0,
+          0.034482866525650024,
+          0.23341938232073187,
+          0.019376623630523664
+        ],
+        "motion_basis": "bidirectional10Hzflow",
+        "coherent_up": 0,
+        "coherent_down": 0,
+        "paired_flash_peak": 0.0006207759343952703,
+        "all_stationary": false,
+        "mean_luma": 0.027052042774772012,
+        "mean_contrast": 0.04758783642577732,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Rozzor & Esotic - PPL (NWI) Mandala Chill Color Reactive.milk",
+          "frames": 420,
+          "width": 128,
+          "height": 72,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "elapsed_seconds": 1.2714387499727309,
+        "appearance_accuracy_verified": false,
+        "diagnostic_errors": [
+          {
+            "operation": "pull .skip",
+            "exit_code": 1
+          }
+        ]
+      }
+    }
+  ]
+}

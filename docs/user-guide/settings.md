@@ -2,12 +2,12 @@
 
 Open the panel with Center, Enter or Menu. Use Up / Down to select a row and Left / Right to change its value.
 
-All is the default music category. Your selected category is saved.
+All is the default preset mood. Your selected collection is saved. The beta predictor uses overlapping score bands: Chill 1–30, Normal 25–75 and Intense 70–100. Saved Dance selections return to All.
 
 | Setting | Values | Default |
 |---|---|---|
 | Auto change | Off, On | On |
-| Music category | All, Dance | All |
+| Preset mood | All, Chill, Normal, Intense | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 | Resolution | Auto or numeric fixed heights up to 1330p, within the panel and memory limits; Native uses the detected panel height when it is above 1330p and memory permits | Auto |
 
@@ -50,4 +50,4 @@ A build using the **capped core** has no Native choice or feedback diffusion. It
 
 ![Advanced settings panel and Diagnostics, below the track in the upper left](images/setup/advanced-settings.png)
 
-The tables describe the current source, including the optional Native mode; screenshots use an earlier isolated test installation. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+The tables describe the current source, including the optional Native mode; screenshots use an earlier isolated test installation. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.

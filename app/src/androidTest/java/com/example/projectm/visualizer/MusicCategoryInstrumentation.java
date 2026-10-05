@@ -58,15 +58,15 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
             ProjectMJNI.setAutoChange(false);
             ProjectMJNI.setMusicCategory("all");
             awaitCategory("all");
-            Set<String> dance = members("dance");
-            check(!dance.isEmpty(), "missing dance members");
-            ProjectMJNI.setMusicCategory("dance");
-            awaitCategory("dance");
-            check(dance.contains(ProjectMJNI.getCurrentPresetName()), "out-of-category initial preset");
-            int eligible = ProjectMJNI.getCategoryPresetCount("dance");
-            check(eligible > 0 && eligible <= dance.size(), "invalid eligible Dance count");
+            Set<String> intense = members("intense");
+            check(!intense.isEmpty(), "missing intense members");
+            ProjectMJNI.setMusicCategory("intense");
+            awaitCategory("intense");
+            check(intense.contains(ProjectMJNI.getCurrentPresetName()), "out-of-category initial preset");
+            int eligible = ProjectMJNI.getCategoryPresetCount("intense");
+            check(eligible > 0 && eligible <= intense.size(), "invalid eligible Intense count");
             check(ProjectMJNI.getPresetCount() == eligible, "active count is not category-specific");
-            result.putString("dance_members", "packaged=" + dance.size() + ", eligible=" + eligible);
+            result.putString("intense_members", "packaged=" + intense.size() + ", eligible=" + eligible);
             if (liveAudio) {
                 int audible = 0;
                 float peak = 0;
@@ -76,7 +76,7 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
                     float level = ProjectMJNI.getAudioLevel();
                     if (level > .001f) audible++;
                     peak = Math.max(peak, level);
-                    check(dance.contains(ProjectMJNI.getCurrentPresetName()), "live playback escaped Dance");
+                    check(intense.contains(ProjectMJNI.getCurrentPresetName()), "live playback escaped Intense");
                     SystemClock.sleep(100);
                 }
                 result.putString("live_audio", "preset=" + name + ", audible_samples=" + audible
@@ -86,15 +86,24 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
             for (int i = 0; i < 5; i++) {
                 ProjectMJNI.randomPreset(true);
                 SystemClock.sleep(300);
-                check(dance.contains(ProjectMJNI.getCurrentPresetName()), "random escaped category");
+                check(intense.contains(ProjectMJNI.getCurrentPresetName()), "random escaped category");
             }
-            ProjectMJNI.setMusicCategory("ambient");
-            if (ProjectMJNI.getCategoryPresetCount("ambient") > 0) {
-                awaitCategory("ambient");
-                check(members("ambient").contains(ProjectMJNI.getCurrentPresetName()), "ambient switch failed");
-            } else {
-                awaitCategory("all");
+            for (String mood : new String[]{"chill", "normal"}) {
+                Set<String> group = members(mood);
+                check(!group.isEmpty(), "missing " + mood + " members");
+                ProjectMJNI.setMusicCategory(mood);
+                awaitCategory(mood);
+                check(group.contains(ProjectMJNI.getCurrentPresetName()), mood + " initial selection escaped");
+                check(ProjectMJNI.getPresetCount() == ProjectMJNI.getCategoryPresetCount(mood),
+                        mood + " active count differs");
+                for (int i = 0; i < 5; i++) {
+                    ProjectMJNI.randomPreset(true);
+                    SystemClock.sleep(300);
+                    check(group.contains(ProjectMJNI.getCurrentPresetName()), mood + " random escaped");
+                }
             }
+            ProjectMJNI.setMusicCategory("dance");  // retired persisted/core identifier
+            awaitCategory("all");
             Activity target = activity;
             runOnMainSync(() -> {
                 View row = target.findViewById(R.id.row_music_category);
@@ -104,11 +113,11 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
             awaitCategory("all");
             if (liveAudio) {
                 getTargetContext().getSharedPreferences("projectm_settings", 0).edit()
-                        .putString("music_category", "dance").apply();
-                ProjectMJNI.setMusicCategory("dance");
-                awaitCategory("dance");
+                        .putString("music_category", "intense").apply();
+                ProjectMJNI.setMusicCategory("intense");
+                awaitCategory("intense");
             }
-            result.putString("stream", "PASS: category application, active count, random membership, optional category, focusable row, fallback\n");
+            result.putString("stream", "PASS: category application, active count, random membership, all three groups, focusable row, retired selection fallback\n");
             finish(Activity.RESULT_OK, result);
         } catch (Throwable failure) {
             result.putString("stream", "FAIL: " + failure + "\n");

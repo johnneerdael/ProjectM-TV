@@ -1,0 +1,97 @@
+{
+  "schema_version": 2,
+  "status": "Provisional transferred-label beta calibration; not accuracy certified",
+  "feature_names": [
+    "coherent_luma_transitions_per_second",
+    "median_motion_viewports_per_second",
+    "mean_acceleration_viewports_per_second_squared",
+    "same_pixel_luma_delta_p95_over_30Hz_frame_pairs"
+  ],
+  "model": {
+    "intercept": 4.367289950862593,
+    "weights": [
+      36.97128782881051,
+      2.4737884781711337,
+      50.61070526262697,
+      23.401785506937248
+    ],
+    "feature_scale": [
+      1.2400123380477301,
+      0.1027102757490285,
+      0.5754772224796288,
+      0.32876677475542676
+    ],
+    "transform": "log1p",
+    "method": "nonnegative minimum-norm interval fit",
+    "training_rows": 8,
+    "appearance_accuracy_verified": false
+  },
+  "calibration_sha256": {
+    "profiles/direct-delta-calibration/human-feedback.json": "e32a0e0a8930383df0dceab7dc61f8e0916151760bd7401688bbf4bfedac17cd",
+    "profiles/direct-delta-calibration/training-records.json": "5f06c573d2665fbe626eaa12dce340f20e98a8726f064c5ac6d96e1e7d264b27",
+    "fit_activity_model.py": "01a46f7f77d90a8866885e0d403b7699f1d666e73939504c15c73932179293aa"
+  },
+  "limitations": [
+    "Eight original recorded human judgments from Milkbeat0.9.0/core2.2.2 transferred onto current2.3.3 numerical features. Devices/music mostly unspecified; not matched-condition validation.",
+    "Sample1 Party lean tentative, possible darkness bug, currently inactive; no per-preset override.",
+    "Ranks are collection relative, not absolute calibrated audience probabilities.",
+    "Direct delta includes motion; weights refitted to actual direct30Hz brightness and native10Hz motion."
+  ],
+  "leave_one_out": {
+    "method": "held-out base-model intensity, clipped0..100; not corpus rank or final collection accuracy",
+    "strict_band_matches": 4,
+    "within_five_points": 6,
+    "total": 8,
+    "rows": [
+      {
+        "sample": 1,
+        "judgment": "Party",
+        "held_out_base_intensity": 28.62239862,
+        "distance_to_band": 41.37760138
+      },
+      {
+        "sample": 2,
+        "judgment": "Party",
+        "held_out_base_intensity": 100.0,
+        "distance_to_band": 0.0
+      },
+      {
+        "sample": 3,
+        "judgment": "Party",
+        "held_out_base_intensity": 100.0,
+        "distance_to_band": 0.0
+      },
+      {
+        "sample": 5,
+        "judgment": "Chill",
+        "held_out_base_intensity": 26.41625177,
+        "distance_to_band": 0
+      },
+      {
+        "sample": 6,
+        "judgment": "Chill",
+        "held_out_base_intensity": 34.35701268,
+        "distance_to_band": 4.357012679999997
+      },
+      {
+        "sample": 7,
+        "judgment": "Chill",
+        "held_out_base_intensity": 8.89954165,
+        "distance_to_band": 0
+      },
+      {
+        "sample": 8,
+        "judgment": "Party",
+        "held_out_base_intensity": 34.29945183,
+        "distance_to_band": 35.70054817
+      },
+      {
+        "sample": 10,
+        "judgment": "Normal",
+        "held_out_base_intensity": 23.1094021,
+        "distance_to_band": 1.8905978999999995
+      }
+    ]
+  },
+  "appearance_accuracy_verified": false
+}

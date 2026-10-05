@@ -1,4 +1,7 @@
-# How the Dance collection is measured
+# Historical Dance measurement
+
+> This article preserves the earlier Dance experiment. The current app ships the [predictive preset engine beta](predictive-collections.md) with All, Chill, Normal and Intense. Dance is no longer an available collection, and the old import commands below do not produce the current bundle.
+
 
 Dance is a collection of 500 existing MilkDrop presets selected for large bass-caused changes on screen. It does not modify their equations or shaders. **All remains the default**, using the full library; choosing Dance restricts automatic, random and previous selections to the collection, subject to the TV's existing skip rules.
 

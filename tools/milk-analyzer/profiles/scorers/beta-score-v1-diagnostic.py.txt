@@ -1,0 +1,192 @@
+"""Numerical activity predictor hosted by an exact published ProjectM-TV AAR.
+
+No upstream renderer or image classifier. Collection scores are provisional
+activity predictions, not certified audience/perceptual percentages.
+"""
+import argparse,hashlib,json,math,os,shlex,subprocess,time,zipfile,uuid,threading
+from pathlib import Path
+import numpy as np
+from core_backend import read_header,read_frames,write_selection_overlay
+from descriptors import DescriptorStream,LUMA
+from scoring_context import compatible_previous
+
+FRAMES=420
+WARMUP=60
+FPS=30
+
+
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def write_json(path,data):
+    temp=path.with_suffix('.tmp');temp.write_text(json.dumps(data,indent=2,allow_nan=False)+'\n');temp.replace(path)
+
+
+def verify_owner(path,serial):
+    owner=json.loads(Path(path).read_text())
+    if owner['serial']!=serial or not serial.startswith('emulator-'):raise ValueError('Owned emulator serial required')
+    command=subprocess.check_output(['ps','-p',str(owner['pid']),'-o','command='],text=True)
+    if owner['avd'] not in command or '-port '+serial.split('-')[1] not in command:raise ValueError('Emulator ownership differs')
+    avd=subprocess.check_output(['adb','-s',serial,'emu','avd','name'],text=True).splitlines()[0]
+    if avd!=owner['avd']:raise ValueError('AVD identity differs')
+    return owner
+
+
+def measure(case,args,identity,model):
+    started=time.monotonic();key=case['sha256'];overlay=args.output/'overlays'/(key+'.apk')
+    write_selection_overlay(overlay,case['preset'])
+    remote_overlay=args.remote+'/selection-'+key+'.apk'
+    subprocess.run(['adb','-s',args.device,'push',str(overlay),remote_overlay],check=True,capture_output=True)
+    prefix=args.remote+'/result-'+uuid.uuid4().hex
+    command=['env','CLASSPATH='+args.remote+'/classes.dex','LD_PRELOAD='+args.remote+'/libbackendclock.so',
+             '/system/bin/app_process','-Djava.library.path='+args.remote,'/system/bin',
+             'nl.neerdael.projectm.analysis.CoreBackendRunner',args.remote+'/libprojectmtv.so',
+             args.remote+'/core.aar|'+remote_overlay,args.remote+'/work',prefix,
+             args.remote+'/libbackendclock.so',args.remote+'/input.f32',str(FRAMES),'stream']
+    process=subprocess.Popen(['adb','-s',args.device,'exec-out',shlex.join(command)],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    state={'pid':None,'timeout':False}
+    def expire():
+        if process.poll() is not None:return
+        state['timeout']=True
+        if state['pid']:
+            subprocess.run(['adb','-s',args.device,'shell','-T','-n','kill '+str(state['pid'])],capture_output=True,timeout=10)
+        process.kill()
+    timer=threading.Timer(120,expire);timer.start()
+    row={**case,'identity':identity,'status':'unscored','backend':'published-projectmtv-core-jni','raw_activity':None}
+    try:
+        header=read_header(process.stdout,expected_frames=FRAMES);state['pid']=header['pid']
+        # Descriptor optical flow samples10Hz. Flash/directchange use every30Hz frame.
+        stream=DescriptorStream(warmup_frames=WARMUP//3)
+        previous=None;changes=[];proxy_speeds=[];mean_levels=[];contrast=[]
+        coherent_up=coherent_down=0;paired_peak=0.;identical=True
+        for i,rgb in enumerate(read_frames(process.stdout,expected_frames=FRAMES,header=header)):
+            values=rgb.astype(np.float32)/255;luma=values@LUMA
+            if i%3==0:stream.add({'time':(i+1)/FPS,'display':np.concatenate((values,np.ones((72,128,1),dtype=np.float32)),axis=-1)})
+            if i>=WARMUP:
+                mean_levels.append(float(luma.mean()));contrast.append(float(luma.std()))
+                if previous is not None:
+                    old=previous@LUMA;delta=luma-old;mean_delta=float(delta.mean())
+                    up=float((delta>=.1).mean());down=float((delta<=-.1).mean())
+                    coherent_up+=up>=.2 and mean_delta>=.1;coherent_down+=down>=.2 and mean_delta<=-.1
+                    paired_peak=max(paired_peak,abs(mean_delta)*float((np.abs(delta)>=.1).mean()))
+                    changes.append(float(np.percentile(np.abs(delta),95)))
+                    gradient=float(np.mean(np.hypot(*np.gradient(old))))
+                    proxy_speeds.append(float(np.mean(np.abs(delta)))/max(gradient,1/255)*FPS/128)
+                    identical &= bool(np.array_equal(values,previous))
+                previous=values.copy()
+        if process.wait(timeout=20)!=0:raise RuntimeError('Core runner failed')
+        metadata_path=args.output/'metadata'/(key+'.json')
+        subprocess.run(['adb','-s',args.device,'pull',prefix+'.json',str(metadata_path)],check=True,capture_output=True)
+        metadata=json.loads(metadata_path.read_text())
+        if metadata['preset']!=case['preset'] or metadata['frames']!=FRAMES:raise ValueError('Selected preset/schedule differs')
+        report=stream.report();motion=report['motion'];duration=(FRAMES-WARMUP)/FPS
+        if motion['median_speed_viewports_per_second'] is not None:
+            speed=motion['median_speed_viewports_per_second'];accel=motion['mean_acceleration_viewports_per_second_squared'] or 0
+            motion_basis='bidirectional10Hzflow'
+        else:
+            speed=float(np.median(proxy_speeds)) if proxy_speeds else 0
+            accel=float(np.mean(np.abs(np.diff(proxy_speeds))))*FPS if len(proxy_speeds)>1 else 0
+            motion_basis='direct_temporal_change_over_spatial_gradient_proxy'
+        brightness=float(np.percentile(changes,95)) if changes else 0
+        features=[(coherent_up+coherent_down)/duration,speed,accel,brightness]
+        base=model['intercept']+float(np.dot(model['weights'],np.log1p(features)/np.array(model['feature_scale'])))
+        flash=100*math.sqrt(paired_peak)*min(1,min(coherent_up,coherent_down)/duration)
+        raw=max(base,flash)
+        has_activity=not identical and (max(contrast,default=0)>.01 or coherent_up+coherent_down>0) and max(mean_levels,default=0)>.01
+        row.update(status='scored',raw_activity=raw,has_activity=has_activity,features=features,motion_basis=motion_basis,
+                   coherent_up=int(coherent_up),coherent_down=int(coherent_down),paired_flash_peak=paired_peak,
+                   all_stationary=identical,mean_luma=float(np.mean(mean_levels)),mean_contrast=float(np.mean(contrast)),
+                   metadata=metadata,elapsed_seconds=time.monotonic()-started,appearance_accuracy_verified=False)
+    except Exception as error:
+        row['reason']='Runner timeout' if state['timeout'] else str(error)
+        if process.poll() is None:process.kill()
+        process.wait(timeout=20)
+    finally:
+        timer.cancel()
+        row['diagnostic_errors']=[]
+        def diagnostic(command,label):
+            try:
+                result=subprocess.run(command,capture_output=True,timeout=15)
+                if result.returncode:
+                    row['diagnostic_errors'].append({'operation':label,'exit_code':result.returncode})
+            except (OSError,subprocess.TimeoutExpired) as error:
+                row['diagnostic_errors'].append({'operation':label,'error':str(error)})
+        for suffix in ['.log','.java.log','.skip']:
+            diagnostic(['adb','-s',args.device,'pull',prefix+suffix,str(args.output/'logs'/(key+suffix))],
+                       'pull '+suffix)
+        diagnostic(['adb','-s',args.device,'shell','-T','-n',shlex.join(['rm','-f',remote_overlay,prefix+'.json',prefix+'.log',prefix+'.java.log',prefix+'.skip'])],
+                   'remote cleanup')
+        process.stdout.close();process.stderr.close()
+    write_json(args.output/'results'/(key+'.json'),row)
+    return row
+
+
+def main():
+    p=argparse.ArgumentParser();p.add_argument('--aar',type=Path,required=True);p.add_argument('--runtime',type=Path,required=True)
+    p.add_argument('--pcm',type=Path,required=True);p.add_argument('--owner',type=Path,required=True);p.add_argument('--device',required=True)
+    p.add_argument('--remote',required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--limit',type=int)
+    p.add_argument('--retry-unscored',action='store_true');p.add_argument('--only-preset');args=p.parse_args();verify_owner(args.owner,args.device)
+    for folder in ['results','metadata','logs','overlays']:(args.output/folder).mkdir(parents=True,exist_ok=True)
+    runtime={name:args.runtime/name for name in ['classes.dex','libbackendclock.so','libprojectmtv.so']}
+    runtime.update({'core.aar':args.aar,'input.f32':args.pcm})
+    with zipfile.ZipFile(args.aar) as z:
+        native_sha=hashlib.sha256(z.read('jni/arm64-v8a/libprojectmtv.so')).hexdigest()
+        if sha(runtime['libprojectmtv.so'])!=native_sha:raise ValueError('Runtime library is not the supplied AAR')
+        cases=[{'preset':n.removeprefix('assets/presets/'),'sha256':hashlib.sha256(z.read(n)).hexdigest()} for n in z.namelist() if n.startswith('assets/presets/') and n.endswith('.milk')]
+    cases.sort(key=lambda v:v['preset']);model_path=Path(__file__).parent/'profiles/audience-model-v1.json';model=json.loads(model_path.read_text())['model']
+    facts={'aar_sha256':sha(args.aar),'native_arm64_sha256':native_sha,'model_sha256':sha(model_path),
+           'runtime_sha256':{k:sha(v) for k,v in runtime.items()},'scorer_sha256':sha(Path(__file__)),
+           'descriptor_sha256':sha(Path(__file__).with_name('descriptors.py')),'profile':{'frames':FRAMES,'warmup':WARMUP,'fps':FPS,'width':128,'height':72,'motion_fps':10},
+           'backend':'released-projectmtv-core-jni','input_policy':'fixed synthetic quiet/melodic/kick reference','release':'v2.3.3'}
+    identity=hashlib.sha256(json.dumps(facts,sort_keys=True).encode()).hexdigest();facts['identity']=identity
+    existing=args.output/'run-identity.json'
+    contexts_path=args.output/'evidence-contexts.json'
+    contexts=json.loads(contexts_path.read_text()) if contexts_path.exists() else {}
+    if existing.exists():
+        previous=json.loads(existing.read_text())
+        if previous!=facts and not compatible_previous(previous,facts):raise ValueError('Existing run identity differs')
+        contexts[previous['identity']]=previous
+    contexts[identity]=facts
+    if any(c!=facts and not compatible_previous(c,facts) for c in contexts.values()):
+        raise ValueError('Incompatible retained evidence context')
+    write_json(contexts_path,contexts)
+    write_json(existing,facts);write_json(args.output/'corpus.json',{'cases':cases})
+    records={}
+    for case in cases:
+        path=args.output/'results'/(case['sha256']+'.json')
+        if path.exists():
+            row=json.loads(path.read_text())
+            if (row.get('identity') not in contexts or row.get('preset')!=case['preset']
+                    or row.get('sha256')!=case['sha256'] or row.get('status') not in ('scored','unscored')):
+                raise ValueError('Stale or invalid retained result')
+            records[case['sha256']]=row
+    failed=sum(r['status']=='unscored' for r in records.values())
+    if failed and not args.retry_unscored:
+        raise ValueError('Resolve retained failures before continuing; an explicit diagnosed retry is required')
+    selected=cases[:args.limit] if args.limit else cases
+    if args.only_preset:
+        selected=[c for c in cases if c['preset']==args.only_preset]
+        if len(selected)!=1:raise ValueError('Exact --only-preset name required')
+    subprocess.run(['adb','-s',args.device,'shell','-T','-n','mkdir -p '+shlex.quote(args.remote+'/work')],check=True,capture_output=True)
+    for name,path in runtime.items():
+        subprocess.run(['adb','-s',args.device,'push',str(path),args.remote+'/'+name],check=True,capture_output=True)
+        got=subprocess.check_output(['adb','-s',args.device,'shell','-T','-n','sha256sum '+shlex.quote(args.remote+'/'+name)],text=True).split()[0]
+        if got!=facts['runtime_sha256'][name]:raise ValueError('Deployed runtime differs')
+    started=time.monotonic()
+    def progress():
+        write_json(args.output/'progress.json',{'processed':len(records),
+            'scored':sum(r['status']=='scored' for r in records.values()),
+            'unscored':sum(r['status']=='unscored' for r in records.values()),
+            'total':len(cases),'elapsed_seconds':time.monotonic()-started,
+            'complete':len(records)==len(cases)})
+    for case in selected:
+        old=records.get(case['sha256'])
+        if old and (old['status']=='scored' or not args.retry_unscored):continue
+        verify_owner(args.owner,args.device);row=measure(case,args,identity,model)
+        records[case['sha256']]=row;progress()
+        print(case['preset'],row['status'],round(row.get('raw_activity') or 0,2),round(row.get('elapsed_seconds') or 0,2),flush=True)
+        if row['status']!='scored':
+            raise RuntimeError('Measurement failed; diagnose the saved result before continuing: '+case['preset'])
+    progress()
+
+
+
+if __name__=='__main__':main()

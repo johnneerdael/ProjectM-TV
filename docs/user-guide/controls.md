@@ -20,6 +20,6 @@ The panel hides after ten seconds without input.
 
 ![ProjectM TV settings panel](images/setup/main-settings.png)
 
-The current preset name and audio level appear in the main panel. Use **Music category** to switch between All and Dance. Navigation stays within the selected collection, subject to device-specific skips. Changing category clears the old navigation history and applies the new selection with a hard cut.
+The current preset name and audio level appear in the main panel. Use **Preset mood** to switch between All, Chill, Normal and Intense. Navigation stays within the selected collection, subject to device-specific skips. Changing category clears the old navigation history and applies the new selection with a hard cut.
 
 The available settings are listed in the [settings reference](settings.md).
