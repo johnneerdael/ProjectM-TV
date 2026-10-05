@@ -214,3 +214,18 @@ and patch files for any engine change; do not commit edited submodule sources.
 Include exact AAR/native/source/asset hashes, before/after evidence, limitations
 and the remaining count. A valid outcome may be an analyzer/context fix with no
 additional native patch.
+
+
+## Follow-up result (2026-10-05)
+
+The isolated source-contract fix is recorded in
+`fixtures/strict-binding-context-source-contract-2026-10-05.json` and the analyzer
+README's conditional random-slot section. It leaves the observed host validator
+unchanged and does not add a native patch. Opt-in conditional GLES300 lowering
+clears all three exact random-state language gaps while retaining image/texsize/
+epoch/fallback obligations. The producer working-state original315 comparison is
+3→0, with unchanged inventories and no new blockers. The committed predictor base
+alone is6→3 because its helper-generated-copy follow-ups remain pending; they
+are not included in this isolated commit. Full authored Android appearance remains
+unverified. Six saved2.3.3 alias controls were independently hash/numerically
+rechecked with max1RGB8 error; no device or shared corpus was operated.

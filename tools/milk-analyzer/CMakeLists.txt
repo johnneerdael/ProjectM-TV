@@ -41,6 +41,23 @@ if(IMPLICIT_POSITION EQUAL -1)
 else()
     set(IMPLICIT_GLOBAL_POLICY "projectmtv-implicit-extern-zero-v1")
 endif()
+file(GLOB RANDOM_CONTRACT_SOURCES "${ENGINE_SOURCE}/src/libprojectM/Renderer/Texture*.cpp"
+    "${ENGINE_SOURCE}/src/libprojectM/Renderer/Texture*.hpp"
+    "${ENGINE_SOURCE}/src/libprojectM/Renderer/Sampler.cpp"
+    "${ENGINE_SOURCE}/src/libprojectM/Renderer/Sampler.hpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/MilkdropShader.hpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/PresetState.hpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/MilkdropShader.cpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp"
+    "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${RANDOM_CONTRACT_SOURCES}
+    "${CMAKE_CURRENT_SOURCE_DIR}/random_binding_contract.py" "${CMAKE_CURRENT_SOURCE_DIR}/sampling_policy.py"
+    "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/random_binding_contract.py"
+    --engine "${ENGINE_SOURCE}" OUTPUT_VARIABLE RANDOM_BINDING_CONTRACT_TEXT
+    OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ERROR_IS_FATAL ANY)
 configure_file(reader_inputs.hpp.in reader_inputs.hpp @ONLY)
 target_compile_features(milk-native-reader PRIVATE cxx_std_17)
 target_compile_definitions(milk-native-reader PRIVATE PROJECTM_STATIC_DEFINE ENGINE_SOURCE_DIR="${ENGINE_SOURCE}")

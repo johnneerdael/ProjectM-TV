@@ -21,7 +21,8 @@ def source_tokens(text: str, *, shader: bool) -> list[str]:
 
 def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                  equation_loader_policy='strict-raw-v1',shader_profile=None,shader_compatibility=None,
-                 random_binding_evidence=None,asset_metadata=None,random_policy_patch_sha256=None) -> dict:
+                 random_binding_evidence=None,asset_metadata=None,random_policy_patch_sha256=None,
+                 random_binding_policy='strict-v1') -> dict:
     """Count source once, including omitted code and invalid/unclassified rows.
 
     Latin-1 provides a lossless byte-to-character mapping for the inventory.
@@ -30,6 +31,9 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
     its drawing/runtime effects. No AST node count enters the denominator.
     """
     digest = hashlib.sha256(raw).hexdigest()
+    from random_binding_contract import POLICY, verified_contract
+    if random_binding_policy not in {'strict-v1', POLICY}:
+        raise ValueError('unsupported random binding policy')
     from equation_loading import select_equation
     select_equation(None,'per_frame_',policy=equation_loader_policy)
     valid_cache = (cache is not None and cache.get('preset_sha256') == digest
@@ -137,13 +141,20 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                                 all(requested[name]==random_context['samplers'][name] for name in random_names)):
                             bindings=requested
                         else:random_context=None
+                    if bindings is None and random_names and random_binding_policy == POLICY:
+                        random_context=verified_contract(cache,stage=stage_name,profile=shader_profile,
+                            compatibility=shader_compatibility[stage_name])
+                        if random_context is not None:bindings=requested
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
                                      frame=3, warp_reads_blur=False,known_uniform_components=known_q,
+                                     main_binding_policy=(random_context or {}).get('main_binding_policy','legacy-sorted-v1'),
                                      known_uniform_component_domains=known_q_domains,
                                      global_input_policy=section.get('implicit_global_input_policy','strict-v1'),
                                      array_initializer_policy=section.get('array_initializer_policy','legacy-layout-v1'))
                 try:
-                    model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings)
+                    model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings,
+                                random_texture_inputs=(random_context or {}).get('random_inputs'),
+                                random_texsize_inputs=(random_context or {}).get('texsize_inputs'))
                     lowered = model.complete
                     reasons = [str(reason) for reason in model.unknown]
                 except (KeyError, TypeError, ValueError, RecursionError) as error:

@@ -33,7 +33,10 @@ models equations, shader state and feedback separately from the Dance measuremen
 tool. Its README documents pinned source adapters, explicit runtime profiles and
 tests. Passing source checks is not a complete visual-accuracy or audience ranking
 claim; unresolved source remains recorded for diagnosis. Raw captures and audio
-stay outside Git. It does not change the installed app's preset collections.
+stay outside Git. It does not change the installed app's preset collections. Its opt-in random-slot
+source contract can interpret aliases as shared runtime inputs under a matching
+source/profile. Images and uploaded dimensions must still be supplied; this does
+not identify a future random selection or certify a preset's appearance.
 
 ## Test on a TV without replacing the release
 

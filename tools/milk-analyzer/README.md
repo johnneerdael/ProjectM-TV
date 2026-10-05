@@ -1338,3 +1338,70 @@ host uses power-of-two ceiling resampling, so decoded320x160 becomes512x256.
 Missing source/policy digests and unsupported loading policies remain invalid.
 See `fixtures/random-binding-host-assets-37.json`.7focused regressions and the
 760-test/35-subtest prepared-adapter suite pass; no Android profile credit is added.
+
+
+### Conditional random-slot source contract (2026-10-05)
+
+The strict GLES300 guard for the three EoS/midgit composite sections is a missing
+source/context association, not evidence that PR30's native fix failed. The
+observed `random_binding_context.py` route remains host-only and unchanged.
+
+An explicit `random_binding_policy="projectmtv-random-slot-inputs-v1"` argument to
+`audit_source` enables a separate conditional language contract. Rebuild both the
+native reader and translator: their `parser_inputs`/translation records stamp
+recognized source-method and header hashes for the binding path, descriptor
+dispatch, sampler initialization and warp unit-zero policy. An older adapter,
+changed implementation, mismatched archive/profile/source/scanner, unscanned alias
+or contradictory 3D declaration cannot borrow this contract. The default policy
+is `strict-v1` and keeps the guard.
+
+The contract supplies **typed runtime inputs**, not observed textures. Valid
+loaded 2D images, uploaded texsize and a selection epoch must be supplied later.
+Aliases share a preset slot and canonical uploaded dimensions while retaining
+name-based filtering/wrapping; existing slots win over later filename hints.
+`sampler_state` fields are preserved as ignored source state, as the native policy
+specifies. No selected filename, content hash, GL unit, future random choice or
+full-render success is invented. Missing/prefix-miss loads, target mismatches,
+fallback and numeric domains remain runtime obligations. Texture sampling and
+texsize evaluation refuse missing values. In particular, SOIL upload dimensions
+may differ from decoded NPOT image dimensions.
+
+```python
+report = audit_source(
+    raw, cache=source, reader_sha=reader_sha,
+    equation_loader_policy="projectmtv-core-2.2.8-v1",
+    shader_profile="gles300", shader_compatibility=compatibility,
+    random_binding_policy="projectmtv-random-slot-inputs-v1",
+)
+```
+
+This closes language-understanding gaps under declared runtime premises;
+`verified_behavior` remains unset and `visual_gate.eligible` remains false.
+`ShaderFields.lower` accepts the verified context's optional
+`random_texture_inputs`/`random_texsize_inputs` alongside `native_samplers`; the
+constructor and historical callers keep their existing behavior.
+
+Build the source adapters as described earlier. Run
+`python -m pytest tools/milk-analyzer/test_random_binding_contract.py -q` after
+building `build/milk-analyzer/random-binding-native`, or set
+`MILK_RANDOM_BINDING_READER`/`MILK_RANDOM_BINDING_TRANSLATOR` to the corresponding
+new binaries. Historical adapters remain necessary for the older full-suite
+fixtures; do not silently replace their pinned policies with this current one.
+The focused follow-up evidence distinguishes committed-branch and copied
+working-state audit results, plus independently verified saved Android controls.
+
+Validation for this isolated follow-up: the saved six standard published2.3.3
+Android alias controls were independently rechecked against their source, asset,
+AAR/native/helper/clock and capture hashes. Every positive control remains within
+1RGB8 byte over30frames; the empty-pool result stays diagnostic. No device was
+started or modified. The working-state original315 audit changes3→0 conditional
+source gaps with unchanged inventories and no new blockers. On committed
+`d0792534` alone it changes6→3, retaining the three helper-generated-copy cases
+whose fixes are pending in the producer worktree. Those changes were copied for
+compatibility validation and are not bundled into this task's commit. Neither
+result grants visual-gate or authored-preset numerical credit.
+
+Provenance and both comparisons are in
+`fixtures/strict-binding-context-source-contract-2026-10-05.json`. This is a
+commit for integration into `feat/preset-audience-scoring`; preserve its pending
+global-input/helper-copy work and merge the additive adapter metadata fields.

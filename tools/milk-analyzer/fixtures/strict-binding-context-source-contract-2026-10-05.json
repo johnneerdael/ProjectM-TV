@@ -1,0 +1,192 @@
+{
+  "scope": "Strict random-binding context follow-up; conditional source language, not image selection or appearance certification",
+  "predictor_base_commit": "d07925342dd31f88a0c79d82bb43336e5ac20a7b",
+  "policy": "projectmtv-random-slot-inputs-v1",
+  "committed_branch_comparison": {
+    "scope": "Conditional source-language contract on the predictor branch; not observed image association or appearance certification",
+    "policy": "projectmtv-random-slot-inputs-v1",
+    "profile": "gles300",
+    "presets": 315,
+    "release233_saved_gaps": 3,
+    "fresh_strict_gaps": 6,
+    "conditional_gaps": 3,
+    "cleared": [
+      "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+      "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+      "midgitstraights of majillaen - featy sweet.milk"
+    ],
+    "newly_blocked": [],
+    "inventory_changes": [],
+    "reader_sha256": "2115248128ee4d2c37d6b7b1fca386ca98a7593d5d7c4dfa40101398062ef1db",
+    "translator_sha256": "7d6aa206dd56f1a8a3a8da586f621da785a6bd631c0942979b0b929ab9a55bf8",
+    "appearance_verified": false,
+    "remaining_runtime_obligations": true
+  },
+  "producer_working_state_comparison": {
+    "scope": "Copied current predictor working-state modules plus this task patch; uncommitted producer changes retained only in this diagnostic snapshot",
+    "presets": 315,
+    "strict_gaps": 3,
+    "conditional_gaps": 0,
+    "cleared": [
+      "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+      "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+      "midgitstraights of majillaen - featy sweet.milk"
+    ],
+    "newly_blocked": [],
+    "inventory_unchanged": true,
+    "appearance_verified": false,
+    "module_sha256": {
+      "coverage_audit.py": "ac96551633dddf99991a2e479f868f9d8aaaee38693b3859ea5706642bbf82ca",
+      "shader_fields.py": "dbd40b1e8ddd1cba6933f1598968213f9c433e88d8535cf25090a7106a4695fc",
+      "random_binding_contract.py": "8b8b97cebf78251227b3397784d59e6149bb59ace70e64a6d750950d8eac56fd"
+    }
+  },
+  "android_saved_evidence_recheck": {
+    "scope": "Independent recheck of saved bounded standard published core2.3.3 controls; no device run, authored-preset appearance credit or observed arbitrary-image binding",
+    "runtime_identity": {
+      "aar_sha256": "e83be55299d310e6282204cb39740cfe09d1e2609471eb58c6299c8961eec9eb",
+      "files": {
+        "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+        "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f",
+        "libprojectmtv.so": "ee1f57e20a1f438809c8c8b2121be19fa23ff8ca640a2b50857bee9b04c9e34d"
+      },
+      "java_helper_scope": "existing unchanged JNI test host;class ABI inspected separately against2.3.3"
+    },
+    "controls": [
+      {
+        "case": "rand00",
+        "source_sha256": "9b239baff41e531f741929fc74b86d039168a383816bb362c0aa9e69f58dbe09",
+        "asset_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "maximum_rgb8_error": 1,
+        "binding_credit": true,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))"
+      },
+      {
+        "case": "rand01",
+        "source_sha256": "5ba3cd9977d0da8305c004ac3e467bb9c9c8707efd3e18432c4e52c3770538bc",
+        "asset_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "maximum_rgb8_error": 1,
+        "binding_credit": true,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))"
+      },
+      {
+        "case": "two-slots",
+        "source_sha256": "66041ae8f806ec26859315531cf7ff23f509b3669fb87c5150689daa673dd3cf",
+        "asset_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "maximum_rgb8_error": 1,
+        "binding_credit": true,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))"
+      },
+      {
+        "case": "qualified",
+        "source_sha256": "d933f4ad5cb3d61e86ed2f4f93e8196be33722b0fafe5c11ae7330ae47ee1b23",
+        "asset_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "maximum_rgb8_error": 1,
+        "binding_credit": true,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))"
+      },
+      {
+        "case": "cross-stage",
+        "source_sha256": "a233df403cbf4456bc130688758c4b91cc0ce5bdc5be9a68007288849556d3c7",
+        "asset_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "capture_sha256": "f6c55c4f0f6d22181eb93e7b03235af260d8ca677ffa37275717225453e58d35",
+        "expected_rgb8": [
+          26,
+          51,
+          77
+        ],
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "maximum_rgb8_error": 1,
+        "binding_credit": true,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))"
+      },
+      {
+        "case": "cross-qualified",
+        "source_sha256": "4478e481aa45c78a0ade77520e4eaa47cbbec30ee200d6541391bac0bb45d5f8",
+        "asset_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "capture_sha256": "f6c55c4f0f6d22181eb93e7b03235af260d8ca677ffa37275717225453e58d35",
+        "expected_rgb8": [
+          26,
+          51,
+          77
+        ],
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "maximum_rgb8_error": 1,
+        "binding_credit": true,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))"
+      },
+      {
+        "case": "empty-pool",
+        "source_sha256": "9b239baff41e531f741929fc74b86d039168a383816bb362c0aa9e69f58dbe09",
+        "asset_sha256": null,
+        "capture_sha256": "3d30a6c3b3d58e7fe722b0e29feb3417bef7eba72481ab15d0494cd8c1501dfc",
+        "expected_rgb8": null,
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "maximum_rgb8_error": null,
+        "binding_credit": false,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))"
+      }
+    ],
+    "asset_namespace_verified": "overlay-only; exactly one controlled PNG for positive controls, none for empty-pool"
+  },
+  "native_engine_changes": false,
+  "exact_preset_sources_unchanged": true,
+  "observed_host_evidence_relabelled_as_android": false,
+  "authored_android_appearance_verified": false,
+  "remaining_obligations": [
+    "Chosen loaded 2D images and uploaded dimensions per selection epoch",
+    "Matching runtime binding/asset/driver provenance for numeric use",
+    "Full authored-preset rendering and numerical/appearance validation"
+  ],
+  "adapter_inputs": {
+    "reader_sha256": "2115248128ee4d2c37d6b7b1fca386ca98a7593d5d7c4dfa40101398062ef1db",
+    "translator_sha256": "7d6aa206dd56f1a8a3a8da586f621da785a6bd631c0942979b0b929ab9a55bf8"
+  },
+  "source_modules_sha256": {
+    "random_binding_contract.py": "8b8b97cebf78251227b3397784d59e6149bb59ace70e64a6d750950d8eac56fd",
+    "coverage_audit.py": "53db51a0e79742ca9fe62cd80b261332030cfda14b468fba6412545f0d483525",
+    "shader_fields.py": "f9f8de4da422aa4b0f019b145712a914872e0917fd74a0beb5d1e21be1a1283c"
+  }
+}

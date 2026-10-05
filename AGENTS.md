@@ -186,3 +186,16 @@ If the repository requires a merge queue, enqueue the eligible PR and monitor un
 - Remove only this task's clean worktree after confirming all intended work is pushed and merged. Delete its branch only when repository policy permits. Preserve unrelated worktrees, branches, and uncommitted changes.
 - Report the outcome concisely: what changed, relevant validation, PR link, Codex review disposition, and merge confirmation.
 - If a real blocker prevents completion, report the current branch, worktree, PR, completed checks, exact blocker, and next required action. Describe the task as blocked, not completed.
+
+
+## Random-binding source diagnostics
+
+On the predictor branch, keep `random_binding_context.py` observed host evidence
+separate from the opt-in `projectmtv-random-slot-inputs-v1` source contract.
+Rebuild reader/translator adapters so their metadata stamps the recognized
+binding-method/header hashes. Preserve strict defaults and fail-closed checks for
+source, archive, profile, alias, dimensions and target contradictions. Random
+images/uploaded texsize/selection epochs remain runtime inputs; conditional
+lowering does not grant appearance or verified-behavior credit. Run the complete
+prepared-adapter analyzer suite and the focused contract controls. Do not replace
+older pinned adapters or overwrite the broader predictor worktree's pending changes.
