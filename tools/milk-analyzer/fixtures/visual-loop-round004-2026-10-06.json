@@ -1,0 +1,794 @@
+{
+  "schema_version": 1,
+  "purpose": "Compact frozen round004 comparison/failure evidence; not a trained accuracy probability or silently adjusted oracle",
+  "model_commit": "eba811b546ff0c5f509d55b37f98b28a125f353f",
+  "round_manifest_sha256": "5fe83b60cbff5f20eadfbfde48eca43a77f213a8ed78814e61a19c9c3f0370fa",
+  "reference_release": "2.3.5",
+  "settings": {
+    "width": 256,
+    "height": 144,
+    "fps": 30,
+    "frames": 60,
+    "mesh": [
+      48,
+      32
+    ],
+    "pcm_format": "float32 little-endian mono",
+    "sample_rate": 44100,
+    "samples_per_frame": 1470,
+    "clock_epoch_ns": 1000000000000000,
+    "random_seed": 12345,
+    "core_trails": "unchanged production default Standard; expected inactive below 1330p"
+  },
+  "cases": [
+    {
+      "case": 19,
+      "preset": "Flexi - space voyage [organic aftermath 1].milk",
+      "sha256": "f08152df6adcd5409ba0fc8b5cc18d534521988350d5dca5be02fd5e0dd09618",
+      "score": 97.5,
+      "critical_contradiction": false,
+      "unassessable_claim_ids": [],
+      "main_miss": "Fine accumulated feedback detail remains imperfect; dominant structure, centre movement, palette, growth and flashing agree closely. No fullaccuracy claim from low mean pixel error.",
+      "prediction_pixel_sha256": "1ac521cf10113b2452bd1c7666e317a2dd8d9ba88b8e28e1ba5e6529e8bf4d83",
+      "native_pixel_sha256": "13a524c3bb830ed58c8041d55d5d30df44a155171c49af449ad465d6464f10b3",
+      "source": {
+        "colour": {
+          "mean_luma": 0.31182935995360217,
+          "mean_contrast": 0.27361906369527184,
+          "mean_saturation": 0.7948629540701707,
+          "mean_coloured_fraction": 0.6919307002314814,
+          "mean_effective_hue_bins": 4.255434008833807,
+          "temporal_effective_hue_bins": 4.190487426191206
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.019169889390468597,
+          "peak_brightness_change_area": 0.05251736111111111,
+          "peak_paired_luma_area_product": 0.0009646306645865681,
+          "peak_brightening_screen_area": 0.049560546875,
+          "peak_darkening_screen_area": 0.010199652777777778,
+          "peak_visible_brightening_fraction": 0.4247849337363404,
+          "peak_visible_darkening_fraction": 0.03042755967473988,
+          "peak_rgb_change_area": 0.0771484375,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.688062774022345,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.041558159722222224,
+          "matched_brightness_change_p95": 0.09765345081686973,
+          "peak_matched_brightness_change_p95": 0.1273130178451538,
+          "peak_matched_brightening_screen_area": 0.018581814236111112,
+          "peak_matched_darkening_screen_area": 0.006808810763888889,
+          "mean_supported_area": 0.7475976746410077,
+          "median_speed_viewports_per_second": 0.04357359558343887,
+          "p95_speed_viewports_per_second": 0.14399717599153514,
+          "mean_acceleration_viewports_per_second_squared": 0.05890849084818819,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "native": {
+        "colour": {
+          "mean_luma": 0.3127610283903778,
+          "mean_contrast": 0.2735026100029548,
+          "mean_saturation": 0.795695300027728,
+          "mean_coloured_fraction": 0.6933440031828705,
+          "mean_effective_hue_bins": 4.254926469867455,
+          "temporal_effective_hue_bins": 4.190600130554794
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.019180312752723694,
+          "peak_brightness_change_area": 0.053059895833333336,
+          "peak_paired_luma_area_product": 0.0009646348698879592,
+          "peak_brightening_screen_area": 0.049560546875,
+          "peak_darkening_screen_area": 0.010145399305555556,
+          "peak_visible_brightening_fraction": 0.42498255408234475,
+          "peak_visible_darkening_fraction": 0.030652344773382238,
+          "peak_rgb_change_area": 0.07701280381944445,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.6849191698253195,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.04150390625,
+          "matched_brightness_change_p95": 0.0976570151746273,
+          "peak_matched_brightness_change_p95": 0.12728142738342285,
+          "peak_matched_brightening_screen_area": 0.019151475694444444,
+          "peak_matched_darkening_screen_area": 0.006998697916666667,
+          "mean_supported_area": 0.7475700881297082,
+          "median_speed_viewports_per_second": 0.043058544397354126,
+          "p95_speed_viewports_per_second": 0.14364488869905467,
+          "mean_acceleration_viewports_per_second_squared": 0.05705379231307827,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "all60_metrics_path": "build/visual-loop/case019/round004/all60-metrics.json",
+      "claim_assessment_path": "build/visual-loop/case019/round004/assessment.json",
+      "claims": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 is a sparse field of small separate coloured dots on black, not an already filled image.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "structure2",
+          "claim": "By frame20 the dots have become elongated radial curved streaks around a central starburst.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "structure3",
+          "claim": "By frame60 the streaks overlap into a dense broad yellow-green starburst, leaving only about3.3% of pixels dark.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "structure4",
+          "claim": "The composition retains many separate red/yellow/green streaks and dark gaps rather than a single solid disc or straight rectangular grid.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "motion1",
+          "claim": "The occupied area expands across the whole window: dark pixels fall from about93.5% at frame1 to3.3% at frame60.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "motion2",
+          "claim": "Radial streaks lengthen outward and curve while the central concentration remains recognizable.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "motion3",
+          "claim": "The supported motion estimate has median speed about0.0436 viewport widths/second and p95 about0.144, rather than an almost motionless result.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "motion4",
+          "claim": "Broad brightness grows progressively: luma at frames1/20/40/60 is about0.019/0.241/0.397/0.523, with no abrupt whole-image replacement.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "colour1",
+          "claim": "Green and yellow dominate the expanding streaks, with smaller orange/red parts and very little blue.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "colour2",
+          "claim": "Overall mean encoded luma across60frames is about0.312; the field becomes appreciably brighter through the window.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "colour3",
+          "claim": "The visible field is highly saturated, with mean saturation about0.795 and roughly4.26 effective hue bins per frame.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "colour4",
+          "claim": "Black gaps contrast with bright clipped yellow/green streak cores; the predicted mean spatial contrast is about0.274.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "flashing1",
+          "claim": "No transition meets the20% coherent brightening-area threshold in these60frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "flashing2",
+          "claim": "No transition meets the20% coherent darkening-area threshold in these60frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "flashing3",
+          "claim": "The largest frame-to-frame mean luma jump is about0.0192, at frames1\u21922, not a full-screen white flash.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "flashing4",
+          "claim": "The peak area changing brightness by more than0.1 is about5.25% of the screen; bright local streak changes coexist with steady overall growth.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Separate newly drawn points develop retained curved trails rather than disappearing without accumulation.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "feedback2",
+          "claim": "The retained image grows from isolated point marks toward a densely overlapping starburst over successive frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Local warp follows feedback-versus-blur contrast, producing curved displaced streaks instead of merely duplicating an unchanged dot field.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60-frame metrics and paired sheets support the described visible behaviour; numeric deltas retained below."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Noise dither and small fadeout leave fine irregular texture along the accumulated streaks rather than an entirely smooth uniform glow.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Fine irregular accumulated texture is present in both, but exact late local streak detail differs and its noise/fade contribution is not independently isolated. Peak RGB MAE is0.007703 at late frames; grant partial rather than full source-grounded feedback-detail credit."
+        }
+      ],
+      "prediction_description_sha256": "681c786cf8ae94d0cd2336feccf21dbbac78bf0ada4fbbba8a52122f0b6c66c4",
+      "assessment_sha256": "50f5e373387672ef78e4c3c58dd8d6c883b9d25c289860a395cee703d5363feb",
+      "category_scores": {
+        "structure": 20,
+        "motion": 20,
+        "colour": 20,
+        "flashing": 20,
+        "feedback": 17.5
+      }
+    },
+    {
+      "case": 20,
+      "preset": "187.milk",
+      "sha256": "ed1ab352c45381c62e9b58c951552db6ed21f876f96d04f3af746904d6976f92",
+      "score": 17.5,
+      "critical_contradiction": true,
+      "unassessable_claim_ids": [
+        "structure2",
+        "structure3",
+        "structure4",
+        "motion1",
+        "motion2",
+        "motion3",
+        "motion4",
+        "colour4",
+        "feedback1",
+        "feedback2",
+        "feedback3",
+        "feedback4"
+      ],
+      "main_miss": "Broad transient dark-red fan/line arrangement is absent from near-black forecast; no resolved spectrum trajectories or feedback.",
+      "prediction_pixel_sha256": "e6d82b2097acfebd47a7d116aa2cfbe7d601bbd24f269afcef93e8ca51d49601",
+      "native_pixel_sha256": "19b5d6e81ca99e3506724bc706aec0f2443d35d3885db7aa341dacf4a7f1d2fd",
+      "source": {
+        "colour": {
+          "mean_luma": 5.0417450218750066e-05,
+          "mean_contrast": 0.0002287028635085638,
+          "mean_saturation": 0.038207112962845714,
+          "mean_coloured_fraction": 1.1754918981481483e-05,
+          "mean_effective_hue_bins": 0.05,
+          "temporal_effective_hue_bins": 1.0
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 6.824101728852838e-05,
+          "peak_brightness_change_area": 0.0,
+          "peak_paired_luma_area_product": 0.0,
+          "peak_brightening_screen_area": 0.0,
+          "peak_darkening_screen_area": 0.0,
+          "peak_visible_brightening_fraction": 0.0,
+          "peak_visible_darkening_fraction": 0.0,
+          "peak_rgb_change_area": 0.0,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 1.0,
+          "spectral_peak_fraction": 0.48106592003243887,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.0,
+          "peak_untracked_brightness_change_screen_area": 0.0,
+          "matched_brightness_change_p95": null,
+          "peak_matched_brightness_change_p95": null,
+          "peak_matched_brightening_screen_area": null,
+          "peak_matched_darkening_screen_area": null,
+          "mean_supported_area": null,
+          "median_speed_viewports_per_second": null,
+          "p95_speed_viewports_per_second": null,
+          "mean_acceleration_viewports_per_second_squared": null,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "native": {
+        "colour": {
+          "mean_luma": 0.002666263262427056,
+          "mean_contrast": 0.0015794929530481264,
+          "mean_saturation": 0.34610855290375186,
+          "mean_coloured_fraction": 0.08508481626157408,
+          "mean_effective_hue_bins": 0.5063329161882197,
+          "temporal_effective_hue_bins": 2.171263396437982
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.012204769998788834,
+          "peak_brightness_change_area": 0.0,
+          "peak_paired_luma_area_product": 0.0,
+          "peak_brightening_screen_area": 0.0,
+          "peak_darkening_screen_area": 0.0,
+          "peak_visible_brightening_fraction": 0.0,
+          "peak_visible_darkening_fraction": 0.0,
+          "peak_rgb_change_area": 0.20540364583333334,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 1.0,
+          "spectral_peak_fraction": 0.36321920788466194,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.0,
+          "peak_untracked_brightness_change_screen_area": 0.0,
+          "matched_brightness_change_p95": null,
+          "peak_matched_brightness_change_p95": null,
+          "peak_matched_brightening_screen_area": null,
+          "peak_matched_darkening_screen_area": null,
+          "mean_supported_area": null,
+          "median_speed_viewports_per_second": null,
+          "p95_speed_viewports_per_second": null,
+          "mean_acceleration_viewports_per_second_squared": null,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "all60_metrics_path": "build/visual-loop/case020/round004/all60-metrics.json",
+      "claim_assessment_path": "build/visual-loop/case020/round004/assessment.json",
+      "claims": [
+        {
+          "id": "structure1",
+          "claim": "At normal display scale all60frames are almost entirely black; no large visible central object is predicted.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Most frames are dark, but native develops a broad red fan/line arrangement around frame20; source remains near-black and does not predict that visible event."
+        },
+        {
+          "id": "structure2",
+          "claim": "The three authored spectrum waves would need separately resolved positions and shapes; this forecast cannot resolve visible wave geometry above its near-black field.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "structure3",
+          "claim": "The authored flipped/mirrored composite should give a measurable spatial arrangement; no reliably visible symmetry or geometry can be established from this source prediction.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "structure4",
+          "claim": "The inner border and spectral marks cannot be separated into a stable visible layered arrangement in this near-black forecast.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "motion1",
+          "claim": "No motion correspondence is available in any transition; a coherent visible trajectory for the authored spectrum waves is unassessable.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "motion2",
+          "claim": "Movement of the q-driven warp centre cannot be verified visually from the near-black prediction.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "motion3",
+          "claim": "The direction and speed of retained spectral fragments cannot be established from the available source fields.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "motion4",
+          "claim": "The temporal phase of mirrored echo versus original spectral marks is unassessable within these frames.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "colour1",
+          "claim": "Mean encoded luma is only about0.0000504, so the forecast is far dimmer than a visibly filled coloured composition.",
+          "points": 0,
+          "disposition": "mismatch",
+          "evidence": "Native mean luma0.002666 is52.88 times source0.0000504; the broad red pulse is materially missing, despite both window averages being dim."
+        },
+        {
+          "id": "colour2",
+          "claim": "Every sampled frame is wholly below0.05 maximum-channel brightness apart from exceptionally faint local pixels; the maximum predicted RGB channel anywhere is about0.0667.",
+          "points": 0,
+          "disposition": "mismatch",
+          "evidence": "At native frame20 only27.2% of pixels are below0.05 maximum channel, whereas source predicts a wholly near-black screen."
+        },
+        {
+          "id": "colour3",
+          "claim": "Faint red traces supply the small nonzero signal; bright white, green or blue wave cores are not predicted.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Both have red-only low-level signal without bright white/green/blue cores, but native has a broad dark-red fan rather than only exceptionally faint traces."
+        },
+        {
+          "id": "colour4",
+          "claim": "Distinct evolving palette colours among the three spectral waves cannot be resolved; overall mean saturation is about0.0382 and coloured area about0.0012%.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "flashing1",
+          "claim": "There are zero coherent brightening transitions in these60frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both have zero coherent brightening transitions under the frozen luma/20% area definition."
+        },
+        {
+          "id": "flashing2",
+          "claim": "There are zero coherent darkening transitions in these60frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both have zero coherent darkening transitions under the frozen luma/20% area definition."
+        },
+        {
+          "id": "flashing3",
+          "claim": "The maximum mean luma jump is about0.0000682 at frames21\u219222, not a visible whole-screen flash.",
+          "points": 0,
+          "disposition": "mismatch",
+          "evidence": "Native peak mean luma jump0.012205 contradicts predicted0.00006824 (about179times)."
+        },
+        {
+          "id": "flashing4",
+          "claim": "No screen pixels change luma or maximum RGB distance by more than0.1 between adjacent frames.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Luma threshold-change area remains0 as predicted, but native peak RGB-change area is20.54%, contradicting the predicted0 RGB-change area."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Observable persistence of the authored0.95-decayed motion-blur trails cannot be established from the near-black output.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "feedback2",
+          "claim": "The relative contribution of the \u00b1one/two-pixel motion-blur samples is visually unassessable.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Blur2 gating and squared mirrored composite cannot be distinguished as visible halo or edge structure.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Whether the retained spectrum creates a stable repeating trail arrangement is unknown in this source-only result.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; matching flat frames cannot earn credit."
+        }
+      ],
+      "prediction_description_sha256": "9fa767aef90f2058b273d5cd1a35ac0c58b216519445f7f599588c42567d9418",
+      "assessment_sha256": "f00461fe6cc7a0911db1eb8bfef3e8d61d8fd7a1f6bfc01da48ed62d3d881d10",
+      "category_scores": {
+        "structure": 2.5,
+        "motion": 0,
+        "colour": 2.5,
+        "flashing": 12.5,
+        "feedback": 0
+      }
+    },
+    {
+      "case": 21,
+      "preset": "Rovastar - Hyperspace (Hyper Speed Mix).milk",
+      "sha256": "0689f82d2a4a728be7894ce67fd6a4299be40ca92a11ca14d435ce651bc69113",
+      "score": 65.0,
+      "critical_contradiction": false,
+      "unassessable_claim_ids": [
+        "motion2",
+        "motion4",
+        "feedback3",
+        "feedback4"
+      ],
+      "main_miss": "Source underestimates initial flash amplitude and later sector contrast/darkening;4 full-motion/feedback claims remain unassessable despite white-field/theme agreement.",
+      "prediction_pixel_sha256": "a72b148631441b13389a952d65ae7dd15a360983e2005d26d00889a5fa011738",
+      "native_pixel_sha256": "1faa3195a20a67e7e02a3a68658c81d5417bbe9411d7ec476110194b0b8764ac",
+      "source": {
+        "colour": {
+          "mean_luma": 0.9704249436656635,
+          "mean_contrast": 0.022953893680933864,
+          "mean_saturation": 0.04585891710649743,
+          "mean_coloured_fraction": 0.13779658564814815,
+          "mean_effective_hue_bins": 0.9802717243913185,
+          "temporal_effective_hue_bins": 1.7617705940977817
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.9457377195358276,
+          "peak_brightness_change_area": 0.9941134982638888,
+          "peak_paired_luma_area_product": 0.9401706328078742,
+          "peak_brightening_screen_area": 0.9941134982638888,
+          "peak_darkening_screen_area": 0.0011664496527777778,
+          "peak_visible_brightening_fraction": 0.9941134982638888,
+          "peak_visible_darkening_fraction": 0.0011664496527777778,
+          "peak_rgb_change_area": 0.9946831597222222,
+          "coherent_brightening_transitions": 1,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.08941689994779539,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.3898305084745763,
+          "peak_untracked_brightness_change_screen_area": 0.9921603732638888,
+          "matched_brightness_change_p95": 0.01840649303048849,
+          "peak_matched_brightness_change_p95": 0.9696077108383179,
+          "peak_matched_brightening_screen_area": 0.001953125,
+          "peak_matched_darkening_screen_area": 0.0,
+          "mean_supported_area": 0.17642049743357488,
+          "median_speed_viewports_per_second": 0.013939499855041504,
+          "p95_speed_viewports_per_second": 0.31036651283502564,
+          "mean_acceleration_viewports_per_second_squared": 0.10822596614543956,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "native": {
+        "colour": {
+          "mean_luma": 0.9651732724780838,
+          "mean_contrast": 0.03328830177908723,
+          "mean_saturation": 0.0497856039436756,
+          "mean_coloured_fraction": 0.15960602936921295,
+          "mean_effective_hue_bins": 1.3183042277475754,
+          "temporal_effective_hue_bins": 2.0498533639056538
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.9941940307617188,
+          "peak_brightness_change_area": 0.9944390190972222,
+          "peak_paired_luma_area_product": 0.9886653367429972,
+          "peak_brightening_screen_area": 0.9944390190972222,
+          "peak_darkening_screen_area": 0.00537109375,
+          "peak_visible_brightening_fraction": 0.9944390190972222,
+          "peak_visible_darkening_fraction": 0.00537109375,
+          "peak_rgb_change_area": 0.9944390190972222,
+          "coherent_brightening_transitions": 1,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.08665388147316291,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.4745762711864407,
+          "peak_untracked_brightness_change_screen_area": 0.9944390190972222,
+          "matched_brightness_change_p95": 0.03317351713776588,
+          "peak_matched_brightness_change_p95": 0.03424942493438721,
+          "peak_matched_brightening_screen_area": 0.0,
+          "peak_matched_darkening_screen_area": 0.0,
+          "mean_supported_area": 0.2289234948536706,
+          "median_speed_viewports_per_second": 0.010721798054873943,
+          "p95_speed_viewports_per_second": 0.3993698433041572,
+          "mean_acceleration_viewports_per_second_squared": 0.10957363152239896,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "all60_metrics_path": "build/visual-loop/case021/round004/all60-metrics.json",
+      "claim_assessment_path": "build/visual-loop/case021/round004/assessment.json",
+      "claims": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 is mostly black with a small pale closed dotted loop near the centre.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both first frames show a small pale closed dotted loop near centre against black; slight loop raster/detail differences retained in paired pixels."
+        },
+        {
+          "id": "structure2",
+          "claim": "By frame2 the image becomes almost entirely bright; by frame10 it is completely clipped white.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both are near-full bright by frame2 and wholly white at frame10; native already fully clips at frame2 while source frame2 mean luma is0.951883."
+        },
+        {
+          "id": "structure3",
+          "claim": "After frame30 subtle warm/pink/yellow fan-like sectors reappear around the central region while most of the frame stays pale.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Warm/pink/yellow fan sectors appear in both after frame30; native has earlier/more pronounced faint sector contrast, retained in all60 metrics."
+        },
+        {
+          "id": "structure4",
+          "claim": "The later display remains dominated by a broad white field rather than a dark tunnel with sparse visible stars.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad pale/white field dominates both later displays, not a dark sparse-star tunnel."
+        },
+        {
+          "id": "motion1",
+          "claim": "The small first-frame loop is replaced by a near-full bright field by frame2; the source predicts this abrupt early transition.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both show abrupt replacement of first-frame loop by broad bright field at frames1\u21922."
+        },
+        {
+          "id": "motion2",
+          "claim": "After initial saturation the fine flow of dotted marks cannot be recovered reliably from the clipped low-contrast source fields.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; mostly clipped matching pixels cannot establish complete motion or retained detail."
+        },
+        {
+          "id": "motion3",
+          "claim": "The late fan-like colour sectors evolve gradually while the broad bright field remains; luma decreases from about1.0 at frame20 to0.961 at frame60.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Both lose brightness later, but native frame60 luma0.948265 differs from predicted0.961168; source underestimates late darkening/contrast."
+        },
+        {
+          "id": "motion4",
+          "claim": "A complete radial trajectory and local speed of the authored hyperspace feedback cannot be established: motion correspondence exists for only about39% of transitions.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; mostly clipped matching pixels cannot establish complete motion or retained detail."
+        },
+        {
+          "id": "colour1",
+          "claim": "The60frame mean encoded luma is about0.970, with near-white output dominating the window.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Nearwhite dominance matches, but native mean luma0.965173 differs from0.970425; partial quantitative credit."
+        },
+        {
+          "id": "colour2",
+          "claim": "Overall mean saturation is low, about0.0459; later sectors are pale yellow/orange/pink instead of strongly saturated primary colours.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Both have pale warm sectors, but native saturation0.049786 versus0.045859 is8.6% higher; no postcapture acceptance band."
+        },
+        {
+          "id": "colour3",
+          "claim": "All pixels are above0.95 in every channel at frame10; about50.2% remain so at frame60.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Frame10 fullwhite matches; frame60 whitefraction0.449978 versus0.501628 differs by5.165percentage points; partial."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean spatial contrast is low, about0.0230 despite the black first frame and slightly darker late sectors.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Both have low contrast, but native0.033288 versus0.022954 is45% higher; partial."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Exactly one coherent brightening transition is predicted, at frames1\u21922.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both have exactly one coherent brightening transition at frames1\u21922."
+        },
+        {
+          "id": "flashing2",
+          "claim": "That transition raises mean luma by about0.946 and brightens about99.4% of the screen by more than0.1.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Brightening area99.44% matches approximate99.4%, but native luma jump0.994194 exceeds source0.945738 by0.048456; partial flash-amplitude credit."
+        },
+        {
+          "id": "flashing3",
+          "claim": "No coherent darkening transition is predicted in the60frame window.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both have zero coherent darkening transitions."
+        },
+        {
+          "id": "flashing4",
+          "claim": "After the initial flash the bright field stays largely sustained; no additional recurring large-area on/off flashing is predicted.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both sustain brightness after initial event with no additional coherent on/off flashing."
+        },
+        {
+          "id": "feedback1",
+          "claim": "The first drawn dotted loop is followed by rapid feedback expansion into a broadly bright field by frame2.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both show the isolated first-frame loop followed by rapid broad bright expansion at frame2."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Feedback reaches whole-screen white clipping by frame10 rather than retaining only a small dark-background loop.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Both reach whole-screen white clipping by frame10; precise clipping timing differs, retained in structure2/flash-amplitude evidence."
+        },
+        {
+          "id": "feedback3",
+          "claim": "The subsequent slight reduction in white clipping reveals faint warm sectors, but detailed persistence of the original dotted loop cannot be distinguished.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; mostly clipped matching pixels cannot establish complete motion or retained detail."
+        },
+        {
+          "id": "feedback4",
+          "claim": "The specific bass-driven radial zoom map is source-authored, but its complete visible retained-image trajectory is unassessable in the mostly clipped forecast.",
+          "points": 0,
+          "disposition": "unassessable",
+          "evidence": "Frozen source claim explicitly unassessable; mostly clipped matching pixels cannot establish complete motion or retained detail."
+        }
+      ],
+      "prediction_description_sha256": "bfe06483e22acf9f1c9855807799a1662757e40ae58c9b1ef8524532eab22e4e",
+      "assessment_sha256": "38c1ac91b5db49b152f8fe954f60cf8b8db287562c3bd0e96d459de6b287f241",
+      "category_scores": {
+        "structure": 20,
+        "motion": 7.5,
+        "colour": 10.0,
+        "flashing": 17.5,
+        "feedback": 10
+      }
+    }
+  ],
+  "reference_identity": {
+    "release_commit": "910e837b7d3eb636b3de30df402095b0a7e59a7c",
+    "aar_sha256": "ef9ae2b4af16222d945f48deb063e93e05cc7a7ecccfbb2581e469047718cf77",
+    "arm64_native_sha256": "5f625ce8e2ae9a11621406ba7ff255fcdebcf153fd619eb3b757313abd71ebad",
+    "jni_class_sha256": "b5c19509cf27c1e612f631866185aaa879a4e1ae51be6f9d02a5c5ebc822a369",
+    "source_patch_count": 42
+  },
+  "root_verification": {
+    "manifest_identities_checked": 104,
+    "unchanged": true,
+    "all_predictions_sealed_before_first_capture": true,
+    "all_frame_serial_deltas": 60,
+    "indexed_per_capture": 1,
+    "skipped_per_capture": 0,
+    "captured_shader_error_lines": 0,
+    "appearance_scope": "Two seconds at256x144; behavioural rubric, not calibrated probability or literal pixel identity."
+  },
+  "goal_met": false,
+  "next_work": "Diagnose exact cases020/021 and fine point/feedback detail019; preserve original grades. No fresh round before bounded repair evidence."
+}

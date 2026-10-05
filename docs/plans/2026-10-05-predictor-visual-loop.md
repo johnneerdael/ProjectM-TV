@@ -212,3 +212,35 @@ about4million scalar captures over60frames, noEELloops or per-vertex program.
 This supports a trace-cost explanation, not a proved language gap or runtime
 profile. Do not blindly repeat it. The next truly unused queue entries are019–021.
 Evidence: `fixtures/visual-loop-release235-migration-2026-10-06.json`.
+
+
+## First complete published2.3.5 batch
+
+Round004 cases019–021 completed with model eba811b5 unchanged. Frozen claims
+and all104 source/binary/input identities were independently checked; all three
+predictions were sealed before the first native capture. Each reference completed
+60 frames with serial delta60, one indexed preset, no skipped preset and no
+captured shader-error lines. Standard trails remained inactive at144p.
+
+Behavioural grades: Space Voyage97.5,18717.5,Hyperspace65. The perfect three-case
+gate is not met. Space Voyage retains fine accumulated-detail differences.187
+misses a broad transient dark-red fan around frame20, a critical contradiction.
+Hyperspace predicts the initial flash/white field and later warm sectors but
+underestimates flash amplitude and late contrast. Twelve claims for187 and four
+forHyperspace were explicitly unassessable before capture and earn no credit.
+Low average pixel error must not hide these misses. Numerical claim tolerances
+are not calibrated; the grades remain the explicit operational rubric.
+
+Preserve these original predictions and grades. Investigate custom-shader input/
+feedback behaviour for187, legacy feedback forHyperspace, and point raster/detail
+forSpace Voyage before a fresh round. Environment-only launch failures were
+retained: unsupervised children terminated and the default Python lacked NumPy;
+the validated existing analyzer environment completed all three forecasts. No
+predictor change was made to recover those launches. Full60frame data stays
+under ignored build; compact claims, grades, metrics and artifact identities are
+in `fixtures/visual-loop-round004-2026-10-06.json` under tools/milk-analyzer.
+
+Documentation assessment: shipped README/Pages collection instructions remain
+unchanged because this experimental prediction run changes no shipped ranking
+or collection. This plan and the analyzer research evidence record the results;
+no new production accuracy or compatibility claim is added.
