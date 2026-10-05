@@ -72,10 +72,10 @@ Run the commands in `../../README.md` from the repository root. Use empty
 output directories; the runner rejects reuse and verifies worker hashes. Add
 `--indices 3,38,40 --before --save-frames` for the temporal controls.
 
-`broad/protocol.json` records the exact prototype from commit `ca8baa65` used
-for that run. Later edits only corrected its comments; its recorded combine
-shader SHA-256 matches the final executable shader source. The targeted run
-rebuilt the final comment-corrected prototype and records that source identity.
+`broad/protocol.json` records the centered limiter from commit `ca8baa65` used
+for that run. A subsequent zero-residual/white-headroom correction is now in
+validation; the final corpus and targeted comparisons will replace these
+provisional records before merge. The GPU regression covers that edge case.
 The eight captured frames originate in the shared `lab/capture_frames.py`
 contract, embedded into the generated worker predicate and checked by the
 reader.
