@@ -2,6 +2,8 @@
 
 Open the panel with Center, Enter or Menu. Use Up / Down to select a row and Left / Right to change its value.
 
+The panel identifies **ProjectM TV Engine**, the maintained projectM fork, beside the app version. **Based on projectM 4.1.7** on the next line identifies the upstream base; it does not describe an unmodified upstream engine. Some older setup screenshots below predate this naming.
+
 All is the default preset mood. Your selected collection is saved. The beta predictor uses overlapping score bands: Chill 1–30, Normal 25–75 and Intense 70–100. Saved Dance selections return to All.
 
 | Setting | Values | Default |
