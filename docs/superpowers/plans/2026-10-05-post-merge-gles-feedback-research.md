@@ -1,5 +1,7 @@
 # Post-merge GLES feedback fidelity research
 
+Current follow-up, 2026-10-06: patch0043 now preserves authored geometry recurrence and restores per-vertex shape inputs. Final actual-AAR matrices recover the two emulator witnesses at Standard/Medium/High and pass repeat/off controls; matched Mali-G52 captures remain faithful without the emulator's dramatic collapse. The exact upstream translator fault remains unproved, and the four Mac exceptions still have mixed residual metrics. See [the source-bound fix evidence](../evidence/native-trails-geometry-fix/README.md), including matched before/after screenshots. The original handover below records historical0042 observations; its captures and source identities are preserved.
+
 Status: research handover, 2026-10-05. The owner explicitly accepted rare visual defects for post-merge investigation when the wider result improves the majority of presets. Waltra/Hexcollie fidelity defects are therefore not merge blockers under that ruling. This investigation made no tracked engine, patch, submodule, APK or Gradle changes.
 
 ## Preserved evidence and identities
