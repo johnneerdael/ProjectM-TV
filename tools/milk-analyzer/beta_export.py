@@ -45,9 +45,12 @@ def check_identity(facts):
 
 def producer_model(facts):
     source=Path(__file__).parent
-    for relative in ('profiles/audience-model-v1.json','profiles/audience-model-direct-delta-v2.json'):
-        if facts.get('model_sha256')==file_digest(source/relative):return load(source/relative)['model']
-    raise ValueError('Unknown measurement producer model')
+    producer_source=source_for(facts,source)
+    relative=('profiles/audience-model-direct-delta-v2.json' if producer_source=='beta_score.py'
+              else 'profiles/audience-model-v1.json')
+    if facts.get('model_sha256')!=file_digest(source/relative):
+        raise ValueError('Measurement producer model differs from its scorer source')
+    return load(source/relative)['model']
 
 def check_activity(row,model=None):
     features=row.get('features')

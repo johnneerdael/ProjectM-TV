@@ -31,7 +31,7 @@ def fixture(tmp_path,monkeypatch):
     source=Path(__file__).parent
     facts={'aar_sha256':sha(aar.read_bytes()),'native_arm64_sha256':sha(b'native'),
            'model_sha256':sha((source/'profiles/audience-model-v1.json').read_bytes()),
-           'scorer_sha256':sha((source/'beta_score.py').read_bytes()),
+           'scorer_sha256':sha((source/'profiles/scorers/beta-score-v1.py.txt').read_bytes()),
            'descriptor_sha256':sha((source/'descriptors.py').read_bytes()),
            'runtime_sha256':{'core.aar':sha(aar.read_bytes()),'libprojectmtv.so':sha(b'native'),
                              'classes.dex':sha(b'dex'),'libbackendclock.so':sha(b'clock'),
@@ -165,3 +165,20 @@ def test_refit_is_separate_from_original_measurements(fixture):
     manifest['generation_identity']=digest({k:v for k,v in manifest.items() if k!='generation_identity'})
     (bundle/'manifest.json').write_text(json.dumps(manifest))
     with pytest.raises(ValueError,match='Derived scoring'):verify_bundle(bundle,assets)
+
+
+@pytest.mark.parametrize('pair',['old_scorer_new_model','new_scorer_old_model'])
+def test_impossible_producer_model_pair_is_rejected(fixture,pair):
+    from beta_export import check_identity
+    from activity_model import MODEL_PATH
+    root=Path(__file__).parent
+    run,aar,assets,bundle=fixture
+    facts=json.loads((run/'run-identity.json').read_text())
+    if pair=='old_scorer_new_model':
+        facts['scorer_sha256']=sha((root/'profiles/scorers/beta-score-v1.py.txt').read_bytes())
+        facts['model_sha256']=sha((root/MODEL_PATH).read_bytes())
+    else:
+        facts['scorer_sha256']=sha((root/'beta_score.py').read_bytes())
+        facts['model_sha256']=sha((root/'profiles/audience-model-v1.json').read_bytes())
+    facts['identity']=sha(json.dumps({k:v for k,v in facts.items() if k!='identity'},sort_keys=True).encode())
+    with pytest.raises(ValueError,match='producer model'):check_identity(facts)
