@@ -94,20 +94,20 @@ final class TrackAccessSetupTest {
                     capture(test, "main-settings");
                     test.runOnMainSync(() -> target.findViewById(R.id.row_music_category).performClick());
                     long categoryDeadline = SystemClock.elapsedRealtime() + 15000;
-                    while ((ProjectMJNI.isMusicCategoryPending() || !"dance".equals(ProjectMJNI.getMusicCategory()))
+                    while ((ProjectMJNI.isMusicCategoryPending() || !"chill".equals(ProjectMJNI.getMusicCategory()))
                             && SystemClock.elapsedRealtime() < categoryDeadline)
                         SystemClock.sleep(100);
-                    check("dance".equals(ProjectMJNI.getMusicCategory()) && !ProjectMJNI.isMusicCategoryPending(),
-                            "Dance did not apply: category=" + ProjectMJNI.getMusicCategory()
+                    check("chill".equals(ProjectMJNI.getMusicCategory()) && !ProjectMJNI.isMusicCategoryPending(),
+                            "Chill did not apply: category=" + ProjectMJNI.getMusicCategory()
                             + ", pending=" + ProjectMJNI.isMusicCategoryPending()
-                            + ", packaged=" + ProjectMJNI.getCategoryPresetCount("dance")
+                            + ", packaged=" + ProjectMJNI.getCategoryPresetCount("chill")
                             + ", requested=" + prefs.getString("music_category", "missing"));
-                    // Loading Dance can outlast the panel's auto-hide: reopen it on the category row.
+                    // Loading Chill can outlast the panel's auto-hide: reopen it on the category row.
                     if (target.findViewById(R.id.overlay_menu).getVisibility() != View.VISIBLE) {
                         test.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
                         test.runOnMainSync(() -> target.findViewById(R.id.row_music_category).requestFocus());
                     }
-                    capture(test, "dance-selected");
+                    capture(test, "chill-selected");
                     test.runOnMainSync(() -> target.findViewById(R.id.row_advanced).performClick());
                     capture(test, "advanced-settings");
                     test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);  // back to the main panel

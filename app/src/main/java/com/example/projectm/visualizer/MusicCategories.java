@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 final class MusicCategories {
     interface Counts { int count(String id); }
-    private static final String[] IDS = {"all", "dance", "pop", "rock", "hip-hop", "rnb-soul", "jazz",
-            "classical", "ambient", "folk-acoustic", "country", "reggae", "latin"};
-    private static final String[] LABELS = {"All", "Dance", "Pop", "Rock", "Hip-Hop", "R&B / Soul", "Jazz",
-            "Classical", "Ambient", "Folk / Acoustic", "Country", "Reggae", "Latin"};
+    private static final String[] IDS = {"all", "chill", "normal", "intense"};
+    private static final String[] LABELS = {"All", "Chill", "Normal", "Intense"};
 
     static String normalize(String id) {
         for (String candidate : IDS) if (candidate.equals(id)) return id;

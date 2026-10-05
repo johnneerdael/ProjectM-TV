@@ -21,12 +21,12 @@ ProjectM TV is a music visualizer for Android TV. It runs [projectM](https://git
 
 ## User guide
 
-The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers installation, remote controls, settings and troubleshooting. The technical section explains [how the Dance collection is measured](https://johnneerdael.github.io/ProjectM-TV/dance-measurement/).
+The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers installation, remote controls, settings and troubleshooting. The technical section explains [how the predictive collections work](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/).
 
 ## Highlights
 
 - **9,606 curated MilkDrop presets** with smooth blends between them
-- **Dance collection:** 500 presets selected automatically for large bass-driven changes on screen. **All** remains the default, keeping the full library available.
+- **Predictive preset engine (beta):** choose **Chill**, **Normal** or **Intense** by predicted visual activity. **All** remains the default and keeps the full library available.
 - **Corrected shader maths** restores colours and detail in presets affected by projectM translator bugs; [proof and upstream contribution](https://github.com/projectM-visualizer/projectm/pull/1031)
 - **More presets run their own shaders:** 102 bundled presets that fell back to the default shader because of translator errors (flat array initializers, `sampler_state` blocks) now run as written, and shaders that change `q` variables or `time` start from their real values instead of undefined ones
 - **Additional shader compatibility fixes:** presets using a local named `sample`, declaration or statement macros, or swizzles after parenthesized constructors can use their authored shaders. GPU driver acceptance and visual fidelity remain device-dependent.
@@ -45,7 +45,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 
 - **Visualizes music from another app.** Play music in a music app, then start ProjectM TV. The visuals usually react to the music within a second or two of launch, and within a few seconds after you pause and resume. The app only looks for the music while Android reports that music is playing.
 - **Shows 9,606 presets in shuffled order, with smooth blends.** Every 30 seconds by default it blends the old preset into the new one over 7 seconds. The next preset's shaders are compiled in the background beforehand, so the switch does not freeze the picture, and the blend adapts its resolution to keep the frame rate up. Left and Right on the remote cut straight to a random or the previous preset.
-- **Offers a Dance collection.** Open the settings panel and set *Music category* to *Dance* for 500 presets ranked by measured bass-caused visual change. Automatic changes, Random and Previous stay within the selected collection, subject to the existing skip rules. The choice is saved. *All* is the default and uses the full library. [How the Dance collection was measured](https://johnneerdael.github.io/ProjectM-TV/dance-measurement/).
+- **Offers Chill, Normal and Intense collections.** Open the settings panel and set *Preset mood*. The beta predictor ranks activity from 1 to 100: Chill 1–30, Normal 25–75 and Intense 70–100. The ranges overlap. Automatic changes, Random and Previous stay within your saved collection, subject to existing skip rules. *All* remains the default. Saved Dance selections return to All. [How the predictive collections work](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/).
 - **Shows the track that is playing.** The cover, artist and title of the playing track appear in the upper left for as long as it plays (taken from the music app's media session); *Settings › Track display* shows them for 10–60 s per track instead, in the small lower-left pill, or not at all. Covers have only been verified with Spotify and [Milkbeat](https://github.com/johnneerdael/Milkbeat). SoundCloud and SmartTube have been verified to show the artist and title only, without a cover. No other music apps have been verified. This needs *notification access*, see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that used to be black render; this rule remains as a safety net (details under *Presets* below).
 - **Adapts the resolution.** *Auto* remains the default and lowers or raises the render resolution to hold the frame rate, up to 1330p and within the panel and memory limits. The TV's scaler upscales to the panel. An explicit *Native* choice uses the detected panel height when the memory limit permits it; it does not adapt to a slow preset and may change its appearance.
@@ -76,12 +76,12 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
   <img src="docs/user-guide/images/setup/advanced-settings.png" alt="The advanced settings panel with diagnostics" width="32%">
 </p>
 
-These settings captures use an isolated test installation on an Ugoos AM6. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
+These settings captures use an earlier isolated test installation on an Ugoos AM6; the current collection row is named Preset mood. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
 
 | Setting | Values | Default |
 |---|---|---|
 | Auto change | Off, On | On |
-| Music category | All, Dance | All |
+| Preset mood | All, Chill, Normal, Intense | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 | Resolution | Auto or numeric fixed heights up to 1330p, within the panel and memory limits; Native uses the detected panel height when it is above 1330p and memory permits | Auto |
 
@@ -129,8 +129,8 @@ These settings captures use an isolated test installation on an Ugoos AM6. The [
 
 **Presets**
 - 189 of the 9,795 *Cream of the Crop* presets are not included: 116 that cannot react to music, 73 that use images with text, logos or people (one preset is in both groups), and 1 whose texture could not be found.
-- You can select the prebuilt Dance collection, but cannot search for an individual preset or build custom playlists. Presets play in shuffled order within the selected category.
-- Dance ranks screen response under controlled bass tests; it is not a guarantee of the same response for every song, resolution or GPU. Some presets respond through color or brightness changes, others through geometry or feedback. Device-specific skips can reduce the number available on a TV. The [technical guide](https://johnneerdael.github.io/ProjectM-TV/dance-measurement/) documents the signals, measurements and limits.
+- You can select All, Chill, Normal or Intense, but cannot search for an individual preset or build custom playlists. Presets play in shuffled order within the selected collection.
+- The predictive engine is **beta**. Scores order activity within this library under a short shared quiet/melodic/kick probe using the published core AAR. They are not accuracy percentages or guarantees of calmness. Different songs, random inputs, render sizes and GPUs can change behaviour. Effects with no visible activity in the probe remain in All and are excluded from the curated groups. Device-specific skips can reduce the available counts. The [technical guide](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/) records the protocol and limits.
 - The black-preset check has limits. It judges each preset only in the first 20 seconds or so after it starts, and only after 3 seconds of uninterrupted music. "Black" means every sampled pixel is at or below about 8% brightness, so a very dark preset can count as black. After 3 black presets in a row it stops acting until a preset shows something, in case the fault is the renderer rather than the presets.
 - Random-image samplers keep their selected image when a preset uses it in both rendering stages, including aliases requesting different filtering or edge wrapping. Short aliases use the same image as their full filename-filtered form. The image is chosen anew for each preset load, so revisiting a preset can look different.
 - Versions before 1.9.5 marked some presets as black that now render. If you used an earlier version, reset the skip list: *Settings › Advanced › Skipped presets*.

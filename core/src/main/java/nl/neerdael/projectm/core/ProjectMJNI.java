@@ -51,6 +51,7 @@ public final class ProjectMJNI {
     public static native void previousPreset(boolean hardCut);
     public static native void randomPreset(boolean hardCut);
     public static native void setPresetDuration(int seconds);
+    /** Preset collection: all (default), chill, normal or intense. Unknown/retired IDs use all. */
     public static native void setMusicCategory(String genreId);
     public static native String getMusicCategory();
     public static native int getCategoryPresetCount(String genreId);

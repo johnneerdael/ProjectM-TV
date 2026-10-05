@@ -1,5 +1,5 @@
 site_name: ProjectM TV user guide
-site_description: Music visualization, remote controls and measured Dance presets for Android TV.
+site_description: Music visualization, remote controls and predictive preset moods for Android TV.
 site_url: https://johnneerdael.github.io/ProjectM-TV/
 repo_url: https://github.com/johnneerdael/ProjectM-TV
 edit_uri: blob/main/docs/user-guide/
@@ -22,10 +22,11 @@ nav:
   - Install and get started: getting-started.md
   - Remote controls: controls.md
   - Settings reference: settings.md
-  - Dance collection: dance.md
+  - Predictive collections (beta): predictive-collections.md
+  - Former Dance collection: dance.md
   - Troubleshooting: troubleshooting.md
   - Technical details:
-      - How Dance is measured: dance-measurement.md
+      - Historical Dance measurement: dance-measurement.md
       - Build and test: development.md
 validation:
   links:

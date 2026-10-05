@@ -1,0 +1,10 @@
+{
+  "repository": "johnneerdael/ProjectM-TV",
+  "release": "v2.3.3",
+  "release_commit": "6e71ac2a18a95463fbe3a21c05e6dd4027cb74a0",
+  "asset": "projectM-TV-core-2.3.3.aar",
+  "aar_sha256": "e83be55299d310e6282204cb39740cfe09d1e2609471eb58c6299c8961eec9eb",
+  "native_arm64_sha256": "ee1f57e20a1f438809c8c8b2121be19fa23ff8ca640a2b50857bee9b04c9e34d",
+  "rendering_policy": "capped",
+  "release_url": "https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.3.3"
+}

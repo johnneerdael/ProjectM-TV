@@ -319,8 +319,7 @@ private:
 
     void ReadCategories(const std::vector<std::string>& master,
                         const std::unordered_map<std::string, int>& weights) {
-        const char* ids[] = {"dance", "pop", "rock", "hip-hop", "rnb-soul", "jazz", "classical",
-                            "ambient", "folk-acoustic", "country", "reggae", "latin"};
+        const char* ids[] = {"chill", "normal", "intense"};
         std::unordered_set<std::string> known(master.begin(), master.end());
         for (const auto* id : ids) {
             std::string path = std::string("preset-genres/genres/") + id + ".idx";

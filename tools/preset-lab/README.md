@@ -1,6 +1,6 @@
 # projectM Preset Lab
 
-An independently installable local tool for measured preset fingerprints and reusable matching. The current priority is selecting a Dance preset by bass-caused change on screen. Broad genre matching remains experimental.
+An independently installable local tool for measured preset fingerprints and reusable matching. Its bass-response selection commands describe the historical Dance experiment. The app now ships the predictive preset engine beta; use `tools/milk-analyzer/beta_score.py` with the published ProjectM-TV:core AAR and `beta_export.py` for the current All / Chill / Normal / Intense bundle. Broad genre matching remains experimental.
 
 Install in a dedicated environment from the ProjectM-TV checkout:
 
@@ -72,7 +72,7 @@ The ranking score is the average, across the three amplitudes, of the 95th-perce
 
 A non-repeatable control, a changed pre-bass image prefix, a rendering failure or a compatibility warning produces `unknown` with no score. These checks cover the actual tested conditions. They do not prove response for all possible songs, timings, starting states, resolutions or GPU backends. The static parser is not required to understand every shader construct for this measurement.
 
-## Build a Dance collection of at least 500
+## Historical Dance selection (not the current app bundle)
 
 Choose the highest-ranked measured presets from the cached results. Collection size is separate from the strongest-response tier: selecting 500 does not label all 500 equally strong. No rendering or manual reanalysis is required.
 
@@ -80,7 +80,7 @@ Choose the highest-ranked measured presets from the cached results. Collection s
 build/preset-lab-venv/bin/preset-lab bass-select --measurements build/preset-lab/bass-screen/measurements --count 500 --destination build/preset-lab/dance-selection --import
 ```
 
-This updates the existing bundle's Dance category, preserves the other category memberships and master memory weights, and stores each selected preset's rank and screen measurements. It excludes unknown, stale, incomplete and non-finite measurements. The command fails if fewer than the requested number are eligible. Selection before scan completion is explicitly provisional; rerun it after completion to refresh the group. Increase `--count` for a larger collection. Omit `--import` to export for inspection without updating app assets.
+This legacy command updates the earlier schema-1 bundle's Dance category, preserves the other category memberships and master memory weights, and stores each selected preset's rank and screen measurements. It excludes unknown, stale, incomplete and non-finite measurements. The command fails if fewer than the requested number are eligible. Selection before scan completion is explicitly provisional; rerun it after completion to refresh the group. Increase `--count` for a larger collection. Omit `--import` to export for inspection without updating app assets.
 
 ## Verify on a TV without replacing its installed release
 
@@ -96,6 +96,6 @@ Install both APKs on the test device, grant the test app its requested RECORD_AU
 adb -s DEVICE shell am instrument -r -w -e live_audio true nl.neerdael.projectmtv.presettest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
 ```
 
-The live test checks category application, member count, random-selection containment, fallback and live audio delivery. It saves Dance as the separate test app's category. Omit `-e live_audio true` for emulator testing without music. Live audio/output motion establishes operation on that device; it does not replace the controlled bass-effect measurements or prove every selected preset on every GPU. Omit `-PpresetLabDeviceTest` when building the normal debug app.
+The live test checks category application, member count, random-selection containment, fallback and live audio delivery. It saves Intense as the separate test app's collection. Omit `-e live_audio true` for emulator testing without music. Live audio/output motion establishes operation on that device; it does not replace the controlled bass-effect measurements or prove every selected preset on every GPU. Omit `-PpresetLabDeviceTest` when building the normal debug app.
 
 The Preset Lab CI workflow runs synthetic/fake-worker tests, bundle integrity checks and real rendering fixtures on headless Mesa. Local Apple GPU and TV test evidence remains distinct from CI results.

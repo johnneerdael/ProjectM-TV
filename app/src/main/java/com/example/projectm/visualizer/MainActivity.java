@@ -643,7 +643,7 @@ public class MainActivity extends Activity {
         displayedMusicCategory = applied;
         String[] labels = new String[ids.length];
         for (int i = 0; i < ids.length; i++) labels[i] = MusicCategories.label(ids[i]);
-        musicCategoryRow.setup("Music category", labels, MusicCategories.selectedIndex(ids, applied), true, index -> {
+        musicCategoryRow.setup("Preset mood", labels, MusicCategories.selectedIndex(ids, applied), true, index -> {
             requestedMusicCategory = musicCategoryIds[index];
             prefs.edit().putString(PREF_MUSIC_CATEGORY, requestedMusicCategory).apply();
             ProjectMJNI.setMusicCategory(requestedMusicCategory);
