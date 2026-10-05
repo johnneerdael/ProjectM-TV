@@ -26,3 +26,13 @@ def test_zero_length_segments_do_not_draw_and_loops_include_closing_segment():
     colours=np.tile([1,1,1,1],(4,1))
     assert len(quad_line_vertices(points,colours,width=16,height=16))==2
     assert len(quad_line_vertices(points,colours,width=16,height=16,closed=True))==3
+
+
+def test_native_clip_coordinates_preserve_short_segment_cutoff():
+    from quad_lines import quad_line_vertices
+    clip=np.array([[0,0],[1.9e-7,0]],np.float32)
+    screen=clip*np.array([.5,-.5],np.float32)+np.float32(.5)
+    colours=np.tile([1,1,1,1],(2,1))
+    # Screen rounding turns the native 0.00009728px segment into 0.00012207px.
+    assert len(quad_line_vertices(screen,colours,width=1024,height=768))==1
+    assert quad_line_vertices(screen,colours,width=1024,height=768,clip_positions=clip)==[]

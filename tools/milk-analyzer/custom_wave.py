@@ -34,7 +34,8 @@ def source_custom_waves(source,scene):
             screen=smoothed*np.float32(.5)+np.float32(.5) # Native orthogonalProjection reverses Y before top-origin conversion.
             dots=bool(_scalar(values,prefix+'bUseDots',0,'bool'));thick=bool(_scalar(values,prefix+'bDrawThick',0,'bool'))
             offsets=[[0,0],[.5/width,0],[.5/width,.5/width],[0,.5/width]] if thick and not dots else [[0,0]]
-            waves.append({'index':index,'positions':screen.tolist(),'colours':smooth_colours.tolist(),
+            projected=smoothed*np.array([1,-1],np.float32)
+            waves.append({'index':index,'positions':screen.tolist(),'clip_positions':projected.tolist(),'colours':smooth_colours.tolist(),
                           'draw_mode':'points' if dots else 'strip','point_size':2 if thick else 1,
                           'additive':bool(_scalar(values,prefix+'bAdditive',0,'bool')),'copy_offsets':offsets})
         results.append(waves)

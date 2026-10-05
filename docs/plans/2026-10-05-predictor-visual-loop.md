@@ -150,3 +150,13 @@ builtin wave from case013 has mean RGB8 error0.00135but70pixel positions differ
 by more than1level, with maximum191. This rules out a large waveform mismatch,
 not all sparse coverage errors or their effect after feedback. Do not claim
 case013 repaired. Evidence: `fixtures/visual-loop-quad-order-control-2026-10-05.json`.
+
+The subsequent native-clip correction localizes case013's gap: normalized-screen
+rounding occurred before quad expansion, while the shader expands native clip
+coordinates first. Preserve original coordinates for builtin/custom waves and
+pass offsets. The repaired diagnostic predicts luma0.14057/native0.14144,
+motion0.17554/native0.17636 and flash peak0.01220/native0.01237; trajectories and
+central recess now agree closely. Isolated-wave large pixel differences drop
+70→14;52focused controls pass. Preserve original round grading. See
+`fixtures/visual-loop-native-clip-repair-2026-10-05.json`. Case015's randomized
+hue realization remains a separate unresolved input obligation.

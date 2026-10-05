@@ -15,7 +15,7 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
     if builtin:
         groups=wave['positions'];colours=wave['rgba']
     else:groups=[wave['positions']];colours=wave['colours']
-    for positions in groups:
+    for group_index,positions in enumerate(groups):
         if not positions:continue
         points=np.asarray(positions,dtype=np.float32)
         for offset in wave['copy_offsets']:
@@ -23,8 +23,15 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
             if wave['draw_mode']=='points':
                 target=draw_points(target,shifted,colours,point_size=wave.get('point_size',1),additive=wave['additive'],quantize=quantize)
             else:
-                draw=draw_quad_lines if line_rendering_profile==PROFILE else draw_lines
-                target=draw(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],quantize=quantize)
+                if line_rendering_profile==PROFILE:
+                    raw=wave.get('clip_positions')
+                    clip=None if raw is None else np.asarray(raw[group_index] if builtin else raw,dtype=np.float32)
+                    if clip is not None:
+                        clip=clip+np.asarray(offset,dtype=np.float32)*np.array([2,-2],np.float32)
+                    target=draw_quad_lines(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],
+                                           quantize=quantize,clip_positions=clip)
+                else:
+                    target=draw_lines(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],quantize=quantize)
     return target
 
 

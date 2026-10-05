@@ -276,6 +276,15 @@ Later feedback details still differ; this is not fresh-batch credit or general
 pixel equivalence. The exact native preset repeats identically across the two
 recorded loads, ruling out reference variability in that bounded comparison.
 
+Wave forecasts now retain projected native clip coordinates through quad-line
+expansion. Early rounding near normalized screen 0.5 could change tiny-segment
+lengths and coverage; the shader expands those coordinates before viewport
+translation. On the case013 diagnostic, mean luma improves from 0.1188 to 0.1406
+(native 0.1414), and tracked motion from 0.1305 to 0.1755 (native 0.1764). An
+isolated waveform's pixel positions differing by more than one RGB8 level drop
+from70to14across60frames. The original batch grade is preserved; these controls
+do not establish driver-wide pixel identity or earn fresh-case credit.
+
 The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`. Raw artifacts
 remain in ignored `build/visual-loop/`. The broader imported suite needs prepared
 historical adapter profiles and is not reported passing. No whole-corpus accuracy

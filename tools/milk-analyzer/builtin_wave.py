@@ -65,7 +65,8 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60):
             # Native builtin wave uses orthogonalProjectionFlipped (normal Y).
             screen=points*np.array([.5,-.5],dtype=np.float32)+np.float32(.5)
             waves.append(screen.tolist())
-        result.append({'positions':waves,'rgba':_colour(source,frame['main'],data,native['mode'],geometry['wave_a_after_geometry'],width,height),
+        result.append({'positions':waves,'clip_positions':geometry['vertex_waves'],
+                       'rgba':_colour(source,frame['main'],data,native['mode'],geometry['wave_a_after_geometry'],width,height),
                        'draw_mode':'points' if dot else 'loop' if geometry['closed_loop'] else 'strip',
                        'additive':bool(_scalar(values,'bAdditiveWaves',0,'bool')),'copy_offsets':offsets})
     return {'basis':native['basis'],'mode':native['mode'],'frames':result,'source_hashes':native['source_hashes'],

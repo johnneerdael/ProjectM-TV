@@ -11,7 +11,7 @@ from primitives import _finite, draw_triangles
 PROFILE='projectmtv-gles-quad-lines-v1'
 
 
-def quad_line_vertices(positions,colours,*,width,height,closed=False):
+def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positions=None):
     if width<=0 or height<=0 or width*height>1024*768:
         raise ValueError('quad-line profile requires viewport within 1024x768 reference area')
     points=_finite(positions,'line positions')
@@ -22,7 +22,14 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False):
     if colour.shape!=(len(points),4):raise ValueError('per-vertex RGBA required')
     if len(points)<2:return []
     size=np.array([width,height],np.float32)
-    pixels=points*size
+    if clip_positions is None:
+        pixels=points*size
+    else:
+        clip=_finite(clip_positions,'projected clip positions')
+        if clip.shape!=points.shape:raise ValueError('matching projected clip positions required')
+        # Native ToPixels runs before adding the viewport's centre. Avoid losing
+        # small segments by rounding their positions near normalized screen 0.5.
+        pixels=clip*np.array([.5,-.5],np.float32)*size
     # LineBatch repeats neighbours at strip ends, or pads a loop with last/first.
     count=len(points) if closed else len(points)-1
     result=[]
@@ -55,17 +62,23 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False):
             for side in [-1,1]:
                 corner=endpoint+offset*np.float32(side)*extent
                 corner=corner+np.array([0,-1/64],np.float32)
-                corners.append(corner/size)
+                if clip_positions is None:
+                    corners.append(corner/size)
+                else:
+                    # Mirror the shader's gl_Position division, then viewport
+                    # conversion, retaining its float32 operation boundaries.
+                    projected=corner/(np.float32(.5)*size)
+                    corners.append(projected*np.float32(.5)+np.float32(.5))
         result.append({'positions':np.array(corners,np.float32),
                        'colours':np.array([colour[first],colour[first],colour[last],colour[last]],np.float32)})
     return result
 
 
-def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True):
+def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True,clip_positions=None):
     target=_finite(destination,'framebuffer').copy()
     height,width=target.shape[:2]
     triangles=np.array([[0,1,2],[2,1,3]],np.int64)
-    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed):
+    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions):
         target=draw_triangles(target,segment['positions'],segment['colours'],triangles,
                               additive=additive,quantize=quantize)
     return target
