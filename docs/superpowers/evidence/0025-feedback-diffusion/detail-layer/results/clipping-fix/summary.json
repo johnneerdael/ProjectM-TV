@@ -1,0 +1,53 @@
+{
+  "presets": 68,
+  "all_render_frames": 480,
+  "gl_error_frames": 0,
+  "configs": {
+    "standard": {
+      "median_mae": 0.005805847235023975,
+      "mean_mae": 0.025327653799569604,
+      "median_luma_ratio": 0.9994312885619431,
+      "above_1_10": [
+        "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk",
+        "Jc - Geometry 101.milk",
+        "Geiss - Motion Blur.milk"
+      ],
+      "new_above_1_10_vs_standard": []
+    },
+    "medium": {
+      "median_mae": 0.006308999378234148,
+      "mean_mae": 0.02731752091773053,
+      "median_luma_ratio": 0.9992070319368387,
+      "above_1_10": [
+        "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk",
+        "Jc - Geometry 101.milk",
+        "Geiss - Motion Blur.milk"
+      ],
+      "new_above_1_10_vs_standard": []
+    },
+    "high": {
+      "median_mae": 0.007913188776001334,
+      "mean_mae": 0.029266325478575335,
+      "median_luma_ratio": 0.9990920345026599,
+      "above_1_10": [
+        "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk",
+        "Jc - Geometry 101.milk",
+        "Geiss - Motion Blur.milk"
+      ],
+      "new_above_1_10_vs_standard": []
+    }
+  },
+  "capture_frames": [
+    120,
+    150,
+    180,
+    210,
+    239,
+    300,
+    390,
+    479
+  ],
+  "render_manifest_count": 272,
+  "gl_renderer": "Apple M4 Pro",
+  "gl_version": "4.1 Metal - 89.4"
+}

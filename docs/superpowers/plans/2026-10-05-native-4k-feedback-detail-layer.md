@@ -6,7 +6,7 @@
 
 **Architecture:** A new projectM patch replaces patch 0038's uniform diffusion pre-pass in the Native core with a two-resolution feedback loop.
 - **State L:** the feedback state at the authored canvas size (1280×720 at 4K), warped exactly as MilkDrop would.
-- **Native frame H:** an upscale of the warped L, plus an optional native-resolution detail band weighted by α, plus this frame's waves, shapes and borders drawn at native resolution.
+- **Native frame H:** an upscale of the warped L, plus an optional native-resolution detail band weighted by a headroom-limited gain up to α, plus this frame's waves, shapes and borders drawn at native resolution.
 - **Injection:** after the geometry, the geometry is written back into L at canvas size, so L stays a faithful authored-size MilkDrop state.
 - **Setting:** a new user-facing three-level setting picks α: Standard 0 (the default), Medium 0.5 and High 1.
 
@@ -53,7 +53,7 @@ Notation: `S` = integer scale; `W×H` = render size; `CW×CH = W/S × H/S` = can
 4. **Per-vertex equations:** evaluate them once (`PerPixelMesh::Prepare`, new).
 5. **Authored warp:** `Lw = warp(L[0])` at CW×CH: `CopyTexture` flip of `L[0]`, then `PerPixelMesh::DrawAgain` into `L[1]`. Set `glViewport(CW, CH)` *before* the flip; the prototype rendered black without it.
 6. **Native warp (only if α > 0, or if motion vectors need the u/v map):** `Hw = warp(Hprev)` at W×H, as today.
-7. **Combine:** `Hc = bilinear_up(Lw) + α · (Hw − bilinear_up(D))` with `D = box_S(Hw)`. At α = 0 this is `bilinear_up(Lw)`, so no D and no Hw reads.
+7. **Combine:** `D = box_S(Hw)`. Center the block mean of `r = Hw − bilinear_up(D)` and choose a common headroom-limited gain `g ≤ α` per block/channel (Task 3). Then `Hc = bilinear_up(Lw) + g · (r − mean_block(r))`. At α = 0 this is `bilinear_up(Lw)`, so no D and no Hw reads.
 8. **Geometry:** draw this frame's shapes, waves, darken-centre and border onto `Hc` at native resolution with quad lines, as today. Call the result `Hp`.
 9. **Inject:** `L[0] = Lw + G`, where `G = Hp − Hc` at the native pixels at each canvas pixel's centre:
    - **odd S:** the middle pixel;
@@ -69,8 +69,8 @@ Shader uniforms that consume RNG (`rand_frame`, `rot_rand`, …) must be evaluat
 | Level (working name) | α | Native warp | Extra passes over today | Look |
 |---|---|---|---|---|
 | **Standard (default)** | 0 | skipped (runs only when motion vectors need the u/v map) | canvas warp, upscale, canvas inject | Authored trails (720p state ×3), native-resolution new geometry and comp. Fastest |
-| Medium | 0.5 | yes | canvas warp, down, combine, inject | Half the native trail detail |
-| High | 1 | yes | same as Medium | Full native trail detail on the authored brightness and blur base |
+| Medium | 0.5 | yes | canvas warp, down, combine, inject | Native trail detail up to α 0.5, limited by available headroom |
+| High | 1 | yes | same as Medium | Native trail detail up to α 1, limited by available headroom |
 
 Medium and High cost the same; the choice between them is taste. Performance advice is therefore Standard against Medium/High.
 
@@ -180,14 +180,57 @@ Acceptance:
 
 In `Mandala Chasers` at α 1 (PM_DETAIL_DEBUG means, sampled every 40 frames), the clipped `Hc` averaged 1.1–3.4× the authored `Lw`, typically about 2×, e.g. 0.021 against 0.006. The box-averaged native warp output was 0.04 at that point: the native frame had drifted far above the authored state. The visible result is blocky smears and 1.58× brightness. α 0 never forms the band.
 
-- [ ] Candidate fix A (re-anchor): after combine, compute `E = Lw − box_S(Hc)` and add `bilinear_up(E)` before the geometry. The native frame's S×S means then always equal the authored state. Cost: one canvas-size down pass plus a fused add.
-- [ ] Candidate fix B: keep the detail band in a signed float texture (RG/RGBA16F) owned by the layer, decayed and warped separately, and never store it in the clamped frame. Costs more memory and bandwidth.
-- [ ] Candidate fix C (cheapest, fallback): limit the band symmetrically per channel, `d = clamp(d, −min(Lw, 1−Lw), +min(Lw, 1−Lw))`. That is unbiased, but it removes detail around dots on black, which are exactly the cases High is for.
+Candidate assessment and selected fix:
 
-Acceptance:
-- On the 68-preset screen, High has no preset above 1.10× that Standard does not also have.
-- ADAMFX Creation, Mandala Chasers and Geometry 101 are within ±10 % of authored.
-- Median error stays ≤ 0.010.
+- Candidate A's single additive mean correction can clip again. Bounded
+  contraction restores the stored mean, but targeting `Lw` instead of the
+  bilinearly reconstructed base changes the image; even a corrected target
+  left ADAMFX's composite brighter in the targeted trial.
+- Candidate B retains signed float state, with additional memory/bandwidth and
+  a separate recurrence to design for nonlinear preset shaders.
+- **Selected: centered, headroom-limited candidate C**, implemented in the
+  evidence prototype. The independent symmetric per-pixel clamp originally
+  proposed was not unbiased and is superseded.
+
+For each S×S block and channel, set `r = Hw − bilinear_up(D)`,
+`d = r − mean_block(r)` and `b = bilinear_up(Lw)`. Choose a single gain for
+that block/channel:
+
+```text
+g = min(alpha, min over d>0 of (1-b)/d, min over d<0 of b/(-d))
+Hc = b + g*d
+```
+
+Ignore zero residuals when calculating the bound. The shader uses a small
+positive denominator floor to handle zero and floating-point roundoff. All
+pixels fit their headroom before RGBA8 conversion, and the detail's block mean
+is zero. Consequently `mean_block(Hc) = mean_block(b)` before quantization;
+this preserves Standard's reconstructed mean rather than assuming
+`box(bilinear_up(Lw)) = Lw`. RGBA8 rounding still applies. The gain can reduce
+detail near black/white; zero headroom cannot retain a signed excursion without
+changing the base. Standard skips this work. No passes/textures are added;
+combine has additional neighborhood reads, so the earlier Medium/High GPU
+costs do not measure this fix.
+
+Validation and quality assessment:
+
+- Execute `lab/check-combine.py --gles`: actual prototype shader, 39 GPU cases
+  at scales 2/3, RGBA8 storage, float range/means, retained detail and 32-frame
+  colored feedback. The original shader fails the black/Medium regression.
+- Run the 68-preset screen for both Medium and High and inspect the three
+  reported presets plus the gallery references. Compare temporal captures and
+  brightness with authored and Standard, and preserve original/fixed controls.
+- **Owner clarification (2026-10-05): numerical targets are diagnostics, not
+  hard gates.** Standard's roughly 13% differences are accepted; the targeted
+  Medium ADAMFX result around 14.3% is also acceptable. Prior targets (no new
+  >1.10× outliers, three named presets within ±10%, median error ≤0.010) remain
+  useful comparison figures, but do not override visual fidelity or establish
+  whether the clipping bug is fixed.
+- Fix clipping-driven feedback energy bias, preserve the preset's character,
+  and investigate remaining brightness differences independently after the fix.
+- The prototype's corrected combine must still be ported into Task 1's shipping
+  patch and validated on GLES devices. A merged prototype fix is not APK/AAR
+  rollout or evidence that the four device performance/compatibility checks pass.
 
 ### Task 4: App setting
 
@@ -195,7 +238,7 @@ Acceptance:
 - [ ] Show the row only when Native is selected and the device runs the Native-policy core, or show it disabled with a reason. It has no effect at Auto or at numeric heights (capped at 1330).
 - [ ] Persist it in `projectm_settings` with Standard as the default. A migration is needed only if the key collides.
 - [ ] Diagnostics panel: show the active level and canvas, e.g. `trails: standard (1280×720 ×3)`, or `off (0038)` with the fallback reason.
-- [ ] Until Task 3 passes, ship only Standard, or hide Medium/High behind a developer toggle.
+- [ ] Until the corrected band is ported into the shipping patch and device validation passes, ship only Standard, or hide Medium/High behind a developer toggle.
 
 ### Task 5: Tests
 

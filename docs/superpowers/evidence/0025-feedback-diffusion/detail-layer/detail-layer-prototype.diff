@@ -1,6 +1,5 @@
-diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
---- engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp	2026-10-05 02:15:46
-+++ engine-mdetail-a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp	2026-10-05 02:36:58
+--- a/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
++++ b/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp
 @@ -1,3 +1,9 @@
 +#include <string>
 +#include <cstdlib>
@@ -20,14 +19,14 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
  
  #include "Factory.hpp"
  #include "LineGeometry.hpp"
-@@ -80,6 +88,95 @@
+@@ -80,6 +88,120 @@
      m_finalComposite.CompileCompositeShader(m_state);
  }
  
 +
 +namespace {
 +// PROTOTYPE native detail layer (env PM_DETAIL=alpha). L: authored-canvas feedback state (exactly MilkDrop),
-+// H: native state = up(L_w) + alpha * (H_w - up(box(H_w))) + this frame's geometry; L' = L_w + box(H' - H_c).
++// H: native state = up(L_w) + a centered, headroom-limited detail band + geometry; L' injects geometry at canvas centres.
 +struct DetailLayer
 +{
 +    int W{0}, H{0}, CW{0}, CH{0}, S{0};
@@ -76,8 +75,33 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
 +)";
 +const char* CombineFragment = R"(#version 330
 +uniform sampler2D Lw; uniform sampler2D Hw; uniform sampler2D D; uniform float alpha; uniform vec2 native; out vec4 o;
-+void main() { vec2 uv = gl_FragCoord.xy / native; o = texture(Lw, uv);
-+  if (alpha != 0.0) o += alpha * (texelFetch(Hw, ivec2(gl_FragCoord.xy), 0) - texture(D, uv)); }
++vec4 Base(ivec2 p) { return texture(Lw, (vec2(p) + vec2(0.5)) / native); }
++vec4 Band(ivec2 p) { return texelFetch(Hw, p, 0) - texture(D, (vec2(p) + vec2(0.5)) / native); }
++void main() {
++  ivec2 p = ivec2(gl_FragCoord.xy); o = Base(p);
++  if (alpha != 0.0) {
++    int S = int(native.x) / textureSize(Lw, 0).x; ivec2 cell = (p / S) * S;
++    // bilinear_up(box(Hw)) is not a projection: remove the residual's
++    // actual block mean before limiting it. This also removes D's rounding.
++    vec4 mean = vec4(0.0);
++    for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i)
++      mean += Band(cell + ivec2(i, j));
++    mean /= float(S * S);
++    // One gain per block and channel preserves the centered band's zero
++    // mean. Choose the largest gain <= alpha that fits every pixel's
++    // headroom; independent per-pixel clamps would introduce another bias.
++    vec4 gain = vec4(alpha);
++    for (int j = 0; j < S; ++j) for (int i = 0; i < S; ++i) {
++      ivec2 q = cell + ivec2(i, j); vec4 b = Base(q); vec4 d = Band(q) - mean;
++      vec4 positive = (vec4(1.0) - b) / max(d, vec4(1e-6));
++      vec4 negative = b / max(-d, vec4(1e-6));
++      // Zero residual consumes no headroom, even at an exactly white pixel.
++      vec4 limit = mix(vec4(alpha), positive, greaterThan(d, vec4(0.0)));
++      gain = min(gain, mix(limit, negative, lessThan(d, vec4(0.0))));
++    }
++    o += gain * (Band(p) - mean);
++  }
++}
 +)";
 +// Geometry enters the authored state as MilkDrop rasterizes it at canvas size: the native pixel at each
 +// canvas pixel's centre (a 2-native-px dot always covers exactly one such pixel), not a box average,
@@ -116,7 +140,7 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
  void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audioData, const Renderer::RenderContext& renderContext)
  {
      m_state.audioData = audioData;
-@@ -103,7 +200,7 @@
+@@ -103,7 +225,7 @@
  
      // Above the line reference size, the warp reads the previous frame through a small blur that gives
      // back the per-frame smoothing feedback presets get at the reference size (see FeedbackDiffusion.hpp).
@@ -125,7 +149,7 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
                                             renderContext.lineReferenceWidth, renderContext.lineReferenceHeight) : 0.0f))
      {
          m_diffusionHoldsPreviousFrame = false;
-@@ -149,6 +246,45 @@
+@@ -149,6 +271,45 @@
      // here on, so this can happen before the warp: the warp and everything drawn on top of it
      // then go to the current framebuffer in one render pass. Not if the warp shader reads the
      // blur textures: it gets last frame's, as in projectM, so they are updated after the warp.
@@ -171,23 +195,22 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
      auto const updateBlur = [this]() {
          const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
          assert(warpedImage.get());
-@@ -156,8 +292,14 @@
+@@ -156,7 +317,13 @@
                                     LineScale(m_state.renderContext.viewportSizeX, m_state.renderContext.viewportSizeY,
                                               m_state.renderContext.lineReferenceWidth, m_state.renderContext.lineReferenceHeight));
      };
 -    if (!m_warpSamplesBlur)
 +    if (detail && !m_warpSamplesBlur)
-     {
++    {
 +        // Blur levels from the authored state at canvas size, exactly as MilkDrop makes them.
 +        m_state.blurTexture.Update(*detail->lWrap[0], m_perFrameContext, 1.0f);
 +        glViewport(0, 0, renderContext.viewportSizeX, renderContext.viewportSizeY);
 +    }
 +    else if (!detail && !m_warpSamplesBlur)
-+    {
+     {
          updateBlur();
      }
- 
-@@ -178,7 +320,16 @@
+@@ -178,7 +345,16 @@
      }
  
      // Draw previous frame image warped via per-pixel mesh and warp shader
@@ -205,7 +228,7 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
  
      if (writeMotionUV)
      {
-@@ -188,22 +339,97 @@
+@@ -188,22 +364,97 @@
          glDrawBuffers(2, buffers);
      }
  
@@ -253,7 +276,7 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
 +            glUniform1i(glGetUniformLocation(detail->progDown, "S"), detail->S);
 +            FullScreen(*detail, detail->progDown, detail->dFbo, detail->CW, detail->CH);
 +        }
-+        // H_c = up(L_w) + alpha (H_w - up(D))
++        // H_c = up(L_w) + centered band with a shared headroom-limited gain.
 +        glUseProgram(detail->progCombine);
 +        BindTex(detail->progCombine, "Lw", 0, detail->lTex[1]); BindTex(detail->progCombine, "Hw", 1, hw); BindTex(detail->progCombine, "D", 2, detail->dTex);
 +        glUniform1f(glGetUniformLocation(detail->progCombine, "alpha"), detailAlpha);
@@ -304,7 +327,7 @@ diff --color -ruN engine-main/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp 
  
      // Done in DrawSprites() in Milkdrop
      if (*m_perFrameContext.darken_center > 0)
-@@ -218,6 +444,34 @@
+@@ -218,6 +469,34 @@
          m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
      }
  
