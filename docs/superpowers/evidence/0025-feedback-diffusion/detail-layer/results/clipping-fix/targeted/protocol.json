@@ -1,0 +1,81 @@
+{
+  "workers": {
+    "engine": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "d21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818",
+      "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
+    },
+    "before_ref": "a98b932ae40c01ed6ad853f55bb56f64c15d4b60",
+    "capture_frames": [
+      120,
+      150,
+      180,
+      210,
+      239,
+      300,
+      390,
+      479
+    ],
+    "before_prototype_sha256": "3414b9e7eeee0af8b5b510b979ab90d96bf8a0e2f7c4f216614db4df29dbcb74",
+    "fixed_prototype_sha256": "c78c5cb533333366dfe26811a7e11d292ed7761b0f70a3878346691ff4550d98",
+    "capture_worker_source_sha256": "1e412041e83baf526304d35ccaadd29ad4eb216b97fd7edcb06ee85f8c952e74",
+    "workers": {
+      "authored": {
+        "path": "build/detail-clipping/screen/authored-build/preset-lab-worker",
+        "sha256": "7b103346bc57a4a08e3a7999bb3004901052c1d7922af47451916c303b86bccb"
+      },
+      "before": {
+        "path": "build/detail-clipping/screen/before-build/preset-lab-worker",
+        "sha256": "3d223b9a2c4b28ebc8639a0f330bbda600af19eb3e90237086c572e4dfb716fb"
+      },
+      "fixed": {
+        "path": "build/detail-clipping/screen/fixed-build/preset-lab-worker",
+        "sha256": "6326eb0e62a3b5847c3a5ef28785eb94f3771eea7beb0560f26de7ca92d878e0"
+      }
+    }
+  },
+  "pcm_sha256": "2bb2a666221cc3e7f647701278291b3d4c76697f393e447b1345c1013408c4fa",
+  "signal": "0.04*sin(80,440,5000 Hz) + 0.15*sin(80 Hz) for first 0.2 s of each 0.5 s",
+  "frames": 480,
+  "fps": 30,
+  "seed": 12345,
+  "capture_frames": [
+    120,
+    150,
+    180,
+    210,
+    239,
+    300,
+    390,
+    479
+  ],
+  "metrics_size": [
+    1182,
+    665
+  ],
+  "indices": [
+    3,
+    38,
+    40
+  ],
+  "assets": {
+    "presets": {
+      "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk": "cc660ee00c31fa09f5973c6f3c61cf33b39fdf9916ad72be352911b23880e356",
+      "Jc - Geometry 101.milk": "184c2761767e903ed6cb5b5c3246c129e75fc47e6f5c161fa46a1ac67194f8f8",
+      "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk": "f346d7e6e384e5b0818d11ddc8e7017c7651be352cfc628fb90e42884f191ee4"
+    },
+    "textures_sha256": "276198b7ed14ee88b6ef4c0045d91a23271380e0d50dbccf5a7baaa424cd4070",
+    "texture_count": 74
+  },
+  "before_controls": true,
+  "saved_frames": [
+    120,
+    150,
+    180,
+    210,
+    239,
+    300,
+    390,
+    479
+  ]
+}

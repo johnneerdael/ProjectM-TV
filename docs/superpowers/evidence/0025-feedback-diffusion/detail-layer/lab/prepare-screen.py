@@ -8,6 +8,7 @@ import shutil
 import subprocess
 
 from preset_lab.build_worker import prepare_engine
+from capture_frames import PICKS
 
 
 def sha(path):
@@ -21,19 +22,19 @@ def main():
     args = parser.parse_args()
     repo = Path.cwd().resolve()
     work = args.work.resolve()
+    if work.exists() and any(work.iterdir()):
+        parser.error("--work must be empty; choose a fresh directory")
     work.mkdir(parents=True, exist_ok=True)
     base, identity = prepare_engine(repo, work / "base")
     native = work / "native"
-    if native.exists():
-        shutil.rmtree(native)
     shutil.copytree(repo / "tools/preset-lab/src/preset_lab/native", native)
     # Keep the same frame clock, PCM and engine calls. Avoid reading/exporting
     # 472 unused 4K frames per job; only capture the historical eight picks.
     worker = native / "worker.cpp"
     source = worker.read_text()
     old = "            auto pixels = capture.Read();"
-    new = """            const bool selected = frame == 120 || frame == 150 || frame == 180 || frame == 210
-                || frame == 239 || frame == 300 || frame == 390 || frame == 479;
+    predicate = " || ".join(f"frame == {frame}" for frame in PICKS)
+    new = f"""            const bool selected = {predicate};
             std::vector<unsigned char> pixels;
             if (selected) pixels = capture.Read();"""
     if source.count(old) != 1:
@@ -46,11 +47,10 @@ def main():
     for label in ("authored", "before", "fixed"):
         engine = base if label == "authored" else work / f"{label}-engine"
         if label != "authored":
-            if engine.exists():
-                shutil.rmtree(engine)
             shutil.copytree(base, engine)
             patch = work / "original.diff" if label == "before" else repo / relative
-            subprocess.run(["patch", "-p1", "-i", str(patch)], cwd=engine, check=True)
+            subprocess.run(["patch", "--batch", "-p1", "-i", str(patch)], cwd=engine,
+                           check=True, stdin=subprocess.DEVNULL)
         build = work / f"{label}-build"
         with (work / f"{label}-build.log").open("w") as log:
             subprocess.run(["cmake", "-S", str(native), "-B", str(build),
@@ -61,7 +61,7 @@ def main():
         executable = build / "preset-lab-worker"
         workers[label] = {"path": str(executable), "sha256": sha(executable)}
         print(f"Built {label}", flush=True)
-    result = {"engine": asdict(identity), "before_ref": args.before_ref,
+    result = {"engine": asdict(identity), "before_ref": args.before_ref, "capture_frames": PICKS,
               "before_prototype_sha256": sha(work / "original.diff"),
               "fixed_prototype_sha256": sha(repo / relative),
               "capture_worker_source_sha256": sha(worker), "workers": workers}

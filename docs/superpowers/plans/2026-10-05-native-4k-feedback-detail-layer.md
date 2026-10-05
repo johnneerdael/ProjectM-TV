@@ -6,7 +6,7 @@
 
 **Architecture:** A new projectM patch replaces patch 0038's uniform diffusion pre-pass in the Native core with a two-resolution feedback loop.
 - **State L:** the feedback state at the authored canvas size (1280×720 at 4K), warped exactly as MilkDrop would.
-- **Native frame H:** an upscale of the warped L, plus an optional native-resolution detail band weighted by α, plus this frame's waves, shapes and borders drawn at native resolution.
+- **Native frame H:** an upscale of the warped L, plus an optional native-resolution detail band weighted by a headroom-limited gain up to α, plus this frame's waves, shapes and borders drawn at native resolution.
 - **Injection:** after the geometry, the geometry is written back into L at canvas size, so L stays a faithful authored-size MilkDrop state.
 - **Setting:** a new user-facing three-level setting picks α: Standard 0 (the default), Medium 0.5 and High 1.
 
@@ -53,7 +53,7 @@ Notation: `S` = integer scale; `W×H` = render size; `CW×CH = W/S × H/S` = can
 4. **Per-vertex equations:** evaluate them once (`PerPixelMesh::Prepare`, new).
 5. **Authored warp:** `Lw = warp(L[0])` at CW×CH: `CopyTexture` flip of `L[0]`, then `PerPixelMesh::DrawAgain` into `L[1]`. Set `glViewport(CW, CH)` *before* the flip; the prototype rendered black without it.
 6. **Native warp (only if α > 0, or if motion vectors need the u/v map):** `Hw = warp(Hprev)` at W×H, as today.
-7. **Combine:** `Hc = bilinear_up(Lw) + α · (Hw − bilinear_up(D))` with `D = box_S(Hw)`. At α = 0 this is `bilinear_up(Lw)`, so no D and no Hw reads.
+7. **Combine:** `D = box_S(Hw)`. Center the block mean of `r = Hw − bilinear_up(D)` and choose a common headroom-limited gain `g ≤ α` per block/channel (Task 3). Then `Hc = bilinear_up(Lw) + g · (r − mean_block(r))`. At α = 0 this is `bilinear_up(Lw)`, so no D and no Hw reads.
 8. **Geometry:** draw this frame's shapes, waves, darken-centre and border onto `Hc` at native resolution with quad lines, as today. Call the result `Hp`.
 9. **Inject:** `L[0] = Lw + G`, where `G = Hp − Hc` at the native pixels at each canvas pixel's centre:
    - **odd S:** the middle pixel;
@@ -69,8 +69,8 @@ Shader uniforms that consume RNG (`rand_frame`, `rot_rand`, …) must be evaluat
 | Level (working name) | α | Native warp | Extra passes over today | Look |
 |---|---|---|---|---|
 | **Standard (default)** | 0 | skipped (runs only when motion vectors need the u/v map) | canvas warp, upscale, canvas inject | Authored trails (720p state ×3), native-resolution new geometry and comp. Fastest |
-| Medium | 0.5 | yes | canvas warp, down, combine, inject | Half the native trail detail |
-| High | 1 | yes | same as Medium | Full native trail detail on the authored brightness and blur base |
+| Medium | 0.5 | yes | canvas warp, down, combine, inject | Native trail detail up to α 0.5, limited by available headroom |
+| High | 1 | yes | same as Medium | Native trail detail up to α 1, limited by available headroom |
 
 Medium and High cost the same; the choice between them is taste. Performance advice is therefore Standard against Medium/High.
 
@@ -190,7 +190,7 @@ Candidate assessment and selected fix:
   a separate recurrence to design for nonlinear preset shaders.
 - **Selected: centered, headroom-limited candidate C**, implemented in the
   evidence prototype. The independent symmetric per-pixel clamp originally
-  proposed below was not unbiased and is superseded.
+  proposed was not unbiased and is superseded.
 
 For each S×S block and channel, set `r = Hw − bilinear_up(D)`,
 `d = r − mean_block(r)` and `b = bilinear_up(Lw)`. Choose a single gain for
@@ -238,7 +238,7 @@ Validation and quality assessment:
 - [ ] Show the row only when Native is selected and the device runs the Native-policy core, or show it disabled with a reason. It has no effect at Auto or at numeric heights (capped at 1330).
 - [ ] Persist it in `projectm_settings` with Standard as the default. A migration is needed only if the key collides.
 - [ ] Diagnostics panel: show the active level and canvas, e.g. `trails: standard (1280×720 ×3)`, or `off (0038)` with the fallback reason.
-- [ ] Until Task 3 passes, ship only Standard, or hide Medium/High behind a developer toggle.
+- [ ] Until the corrected band is ported into the shipping patch and device validation passes, ship only Standard, or hide Medium/High behind a developer toggle.
 
 ### Task 5: Tests
 

@@ -26,7 +26,7 @@
 +
 +namespace {
 +// PROTOTYPE native detail layer (env PM_DETAIL=alpha). L: authored-canvas feedback state (exactly MilkDrop),
-+// H: native state = up(L_w) + alpha * (H_w - up(box(H_w))) + this frame's geometry; L' = L_w + box(H' - H_c).
++// H: native state = up(L_w) + a centered, headroom-limited detail band + geometry; L' injects geometry at canvas centres.
 +struct DetailLayer
 +{
 +    int W{0}, H{0}, CW{0}, CH{0}, S{0};
@@ -274,7 +274,7 @@
 +            glUniform1i(glGetUniformLocation(detail->progDown, "S"), detail->S);
 +            FullScreen(*detail, detail->progDown, detail->dFbo, detail->CW, detail->CH);
 +        }
-+        // H_c = up(L_w) + alpha (H_w - up(D))
++        // H_c = up(L_w) + centered band with a shared headroom-limited gain.
 +        glUseProgram(detail->progCombine);
 +        BindTex(detail->progCombine, "Lw", 0, detail->lTex[1]); BindTex(detail->progCombine, "Hw", 1, hw); BindTex(detail->progCombine, "D", 2, detail->dTex);
 +        glUniform1f(glGetUniformLocation(detail->progCombine, "alpha"), detailAlpha);

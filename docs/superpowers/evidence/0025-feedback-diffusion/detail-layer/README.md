@@ -41,13 +41,13 @@ python docs/superpowers/evidence/0025-feedback-diffusion/detail-layer/lab/prepar
 python docs/superpowers/evidence/0025-feedback-diffusion/detail-layer/lab/screen-clipping.py --workers build/detail-clipping/screen/workers.json --out build/detail-clipping/broad --jobs 2
 ```
 
-Add `--indices 3,38,40 --before` for the three reported regressions, including
+Add `--indices 3,38,40 --before --save-frames` for the three reported regressions, including
 original Medium/High and an original Standard control. Workers, the prototype,
 engine patches, capture instrumentation and generated PCM are hash-identified
 in the output protocol. The original screen's PCM is unavailable; the new
 screen uses a documented synthetic signal and does not replace the historical
 JSON. Only eight frames are read/exported per job; all 480 engine frames run.
-A failed render, truncated output or GL error fails the screen. Output and
+Worker checksums and the capture-frame contract are verified before rendering. Use fresh, empty `--work` and `--out` directories; existing data is not overwritten. A failed render, truncated output, failed PNG export or GL error fails the screen and cancels the other workers. Output and
 local captures remain under ignored `build/`; preserve selected summaries and
 comparison images with their protocol when recording evidence.
 
@@ -57,3 +57,8 @@ hard gates: fix clipping-driven feedback bias and assess fidelity by the
 original preset's character. Investigate residual brightness differences
 separately after this fix. Device costs and the production port remain tasks
 in the implementation plan; this evidence branch does not change APK/AAR code.
+
+Recorded corrected-prototype results, source identities and temporal comparisons
+are in `results/clipping-fix/README.md`. Run
+`python docs/superpowers/evidence/0025-feedback-diffusion/detail-layer/lab/test-screen.py`
+from the repository root for the eight runner failure/integrity regressions.

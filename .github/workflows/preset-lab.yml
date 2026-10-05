@@ -35,6 +35,8 @@ jobs:
         run: python -m pytest tools/preset-lab/tests -m 'not native' -q
       - name: Test prototype detail-band clipping and feedback means
         run: xvfb-run -a python docs/superpowers/evidence/0025-feedback-diffusion/detail-layer/lab/check-combine.py --gles
+      - name: Test clipping-screen evidence and worker failure handling
+        run: python docs/superpowers/evidence/0025-feedback-diffusion/detail-layer/lab/test-screen.py
       - name: Reject tracked user audio and raw captures
         run: |
           python - <<'PY'
