@@ -59,7 +59,7 @@ def eligibility(pr, reviews, comments, threads):
                 if "**Code Review**" not in row and "**Security Review**" not in row:
                     continue
                 commit = re.search(r"`([0-9a-f]{40})`", row)
-                if commit and "**Completed**" in row:
+                if commit and commit[1] == head and "**Completed**" in row:
                     completed = completed or commit[1] == head
                     kind = "security" if "**Security Review**" in row else "code"
                     date = re.search(r'datetime="([^"]+)"', row)
@@ -70,7 +70,7 @@ def eligibility(pr, reviews, comments, threads):
                     return False, "Waiting for Codex review to finish"
         else:
             commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{40})`", body)
-            if commit and "Codex Review" in body:
+            if commit and commit[1] == head and "Codex Review" in body:
                 completed = completed or commit[1] == head
                 kind = "security" if re.search(r"Codex Security Review", body, re.I) else "code"
                 completed_at(kind, comment.get("created_at"))
@@ -85,7 +85,8 @@ def eligibility(pr, reviews, comments, threads):
         trusted = codex_review or (
             user.get("type") == "User" and user["login"] != pr["user"]["login"]
             and review.get("author_association") in TRUSTED)
-        if codex_review and review.get("submitted_at") and review["state"] in {"APPROVED", "COMMENTED"}:
+        if (codex_review and review["commit_id"] == head and review.get("submitted_at")
+                and review["state"] in {"APPROVED", "COMMENTED"}):
             kind = "security" if re.search(r"Codex Security Review", review.get("body") or "", re.I) else "code"
             completed_at(kind, review["submitted_at"])
         if (trusted and review.get("submitted_at") and review["commit_id"] == head
@@ -277,7 +278,11 @@ def main():
     if pr["head"]["sha"] != head:
         return
     url = f"https://github.com/{args.repo}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
-    if not ready:
+    no_builds_started = (set(results) == {"android", "presets", "docs"}
+                         and all(value == "skipped" for value in results.values()))
+    if os.environ.get("PREFLIGHT_RESULT", "success") != "success" and no_builds_started:
+        api.status(head, "pending", "Preflight did not start builds; fresh validation required", url)
+    elif not ready:
         api.status(head, "pending", "Review or base changed; fresh validation required", url)
     elif builds_passed(results):
         api.status(head, "success", f"Passed all builds against main {base}", url)

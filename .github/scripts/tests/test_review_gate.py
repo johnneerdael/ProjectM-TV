@@ -142,9 +142,22 @@ class EligibilityTests(unittest.TestCase):
                 request["updated_at"] = "2026-10-05T13:00:00Z"
                 self.assertFalse(self.eligible([human()], [completed, request]))
 
-    def test_completed_old_codex_request_does_not_require_codex_on_every_later_commit(self):
-        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
-        self.assertTrue(self.eligible([human()], [request, summary(sha=BASE)]))
+    def test_old_commit_completion_cannot_clear_a_request_for_current_head(self):
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T11:00:00Z")
+        old_summary = summary(sha=BASE)
+        old_summary["updated_at"] = "2026-10-05T12:00:00Z"
+        old_legacy = legacy_completion(sha=BASE)
+        old_legacy["created_at"] = "2026-10-05T12:00:00Z"
+        old_review = codex_review(sha=BASE)
+        old_review["submitted_at"] = "2026-10-05T12:00:00Z"
+        for reviews, comments in [([human()], [request, old_summary]),
+                                  ([human()], [request, old_legacy]),
+                                  ([human(), old_review], [request])]:
+            with self.subTest(reviews=reviews, comments=comments):
+                self.assertFalse(self.eligible(reviews, comments))
+        current = codex_review()
+        current["submitted_at"] = "2026-10-05T12:00:00Z"
+        self.assertTrue(self.eligible([human(), current], [request]))
 
     def test_unknown_commenter_cannot_request_review_or_fake_completion(self):
         request = dict(user=dict(login="stranger"), author_association="NONE", body="@codex review",
@@ -271,9 +284,9 @@ class ReconciliationTests(unittest.TestCase):
         self.assertEqual(self.api.writes[0][0], "failure")
         self.assertEqual(len(self.api.writes), 1)
 
-    def finish(self, results):
+    def finish(self, results, preflight="success"):
         env = dict(PR_HEAD=HEAD, PR_BASE=BASE, PR_MERGE=MERGE,
-                   BUILD_RESULTS=json.dumps(results), GITHUB_RUN_ID="1")
+                   BUILD_RESULTS=json.dumps(results), GITHUB_RUN_ID="1", PREFLIGHT_RESULT=preflight)
         with patch.object(self.gate, "GitHub", return_value=self.api), patch.dict(os.environ, env), \
                 patch("sys.argv", ["review_gate.py", "finish", "--repo", "owner/repo", "--pr", "42"]):
             self.gate.main()
@@ -292,6 +305,25 @@ class ReconciliationTests(unittest.TestCase):
         self.assertEqual(dispatches, [dict(ref="main", inputs=dict(pr_number="42", head_sha=HEAD,
                                                                  base_sha=BASE, merge_sha=MERGE))])
         self.assertNotIn("failure", [state for state, _ in self.api.writes])
+
+    def test_recovered_preflight_with_no_builds_stays_pending_and_retries(self):
+        # The preflight error is handled by the workflow, so no build jobs run.
+        self.finish(dict(android="skipped", presets="skipped", docs="skipped"), preflight="failure")
+        self.assertEqual(self.api.statuses[0]["state"], "pending")
+        self.api.runs = [self.api.run("completed", "success")]
+        self.gate.reconcile(self.api, 42)
+        self.gate.reconcile(self.api, 42)
+        self.assertEqual(sum(path.endswith("/dispatches") for path, _ in self.api.writes), 1)
+
+    def test_skipped_jobs_after_successful_preflight_are_a_real_failure(self):
+        with self.assertRaisesRegex(RuntimeError, "Required builds did not pass"):
+            self.finish(dict(android="skipped", presets="skipped", docs="skipped"))
+        self.assertEqual(self.api.statuses[0]["state"], "failure")
+
+    def test_failed_preflight_does_not_hide_a_build_that_actually_failed(self):
+        with self.assertRaisesRegex(RuntimeError, "Required builds did not pass"):
+            self.finish(dict(android="failure", presets="skipped", docs="skipped"), preflight="failure")
+        self.assertEqual(self.api.statuses[0]["state"], "failure")
 
     def test_failed_builds_still_need_retry_after_review_eligibility_recovers(self):
         self.api.ready = False

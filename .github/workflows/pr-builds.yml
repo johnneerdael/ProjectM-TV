@@ -33,6 +33,8 @@ concurrency:
 
 jobs:
   preflight:
+    # A transient preflight error must remain retryable without starting builds.
+    continue-on-error: true
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     permissions:
@@ -40,6 +42,7 @@ jobs:
       pull-requests: read
       statuses: write
     outputs:
+      ready: ${{ steps.review.outcome == 'success' }}
       merge_sha: ${{ steps.review.outputs.merge_sha }}
     steps:
       - uses: actions/checkout@v4
@@ -57,6 +60,7 @@ jobs:
 
   android:
     needs: preflight
+    if: needs.preflight.outputs.ready == 'true'
     uses: ./.github/workflows/android-build.yml
     with:
       source_ref: ${{ needs.preflight.outputs.merge_sha }}
@@ -65,12 +69,14 @@ jobs:
 
   presets:
     needs: preflight
+    if: needs.preflight.outputs.ready == 'true'
     uses: ./.github/workflows/preset-lab.yml
     with:
       source_ref: ${{ needs.preflight.outputs.merge_sha }}
 
   docs:
     needs: preflight
+    if: needs.preflight.outputs.ready == 'true'
     uses: ./.github/workflows/docs.yml
     with:
       source_ref: ${{ needs.preflight.outputs.merge_sha }}
@@ -99,5 +105,6 @@ jobs:
           PR_HEAD: ${{ inputs.head_sha }}
           PR_BASE: ${{ inputs.base_sha }}
           PR_MERGE: ${{ inputs.merge_sha }}
+          PREFLIGHT_RESULT: ${{ needs.preflight.outputs.ready == 'true' && 'success' || 'failure' }}
           BUILD_RESULTS: '{"android":"${{ needs.android.result }}","presets":"${{ needs.presets.result }}","docs":"${{ needs.docs.result }}"}'
         run: python3 .github/scripts/review_gate.py finish --pr "$PR_NUMBER"
