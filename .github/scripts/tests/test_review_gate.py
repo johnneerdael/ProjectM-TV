@@ -1,5 +1,6 @@
 """Regression coverage for review-gated PR builds."""
 import importlib.util
+import copy
 import json
 import os
 import tempfile
@@ -129,6 +130,24 @@ class EligibilityTests(unittest.TestCase):
         completed["updated_at"] = "2026-10-05T12:00:00Z"
         self.assertTrue(self.eligible([human()], [completed, request]))
 
+    def test_same_second_completion_cannot_clear_a_new_or_edited_request(self):
+        request = dict(user=dict(login="author"), body="@codex review",
+                       created_at="2026-10-05T09:00:00Z", updated_at="2026-10-05T11:00:00Z")
+        for timestamp, expected in [("2026-10-05T11:00:00Z", False),
+                                    ("2026-10-05T11:00:00.999999Z", False),
+                                    ("2026-10-05T11:00:01Z", True)]:
+            completed = summary()
+            completed["updated_at"] = timestamp
+            legacy = legacy_completion()
+            legacy["created_at"] = timestamp
+            reviewed = codex_review()
+            reviewed["submitted_at"] = timestamp
+            for reviews, comments in [([human()], [request, completed]),
+                                      ([human()], [request, legacy]),
+                                      ([human(), reviewed], [request])]:
+                with self.subTest(timestamp=timestamp, reviews=reviews, comments=comments):
+                    self.assertEqual(self.eligible(reviews, comments), expected)
+
     def test_edited_codex_command_requires_completion_after_latest_edit(self):
         for command, label in [("@codex review", "Code"), ("@codex security review", "Security")]:
             with self.subTest(command=command):
@@ -210,6 +229,50 @@ class EligibilityTests(unittest.TestCase):
 
     def test_dismissed_review_does_not_count(self):
         self.assertFalse(self.eligible([human(state="DISMISSED")]))
+
+
+class SnapshotTests(unittest.TestCase):
+    def setUp(self):
+        self.gate = load_gate()
+        class Api(self.gate.GitHub):
+            def __init__(self):
+                super().__init__("owner/repo")
+                self.pr = snapshot()
+                self.main = [BASE, BASE]
+                self.parents = [BASE, HEAD]
+
+            def get(self, path):
+                if path == "pulls/42":
+                    return copy.deepcopy(self.pr)
+                if path == "git/ref/heads/main":
+                    return dict(object=dict(sha=self.main.pop(0)))
+                if path == f"git/commits/{MERGE}":
+                    return dict(parents=[dict(sha=sha) for sha in self.parents])
+                raise AssertionError(path)
+
+            def pages(self, path, key=None):
+                return [human()] if "/reviews?" in path else []
+
+            def request(self, endpoint, data=None, paginate=False):
+                return dict(data=dict(repository=dict(pullRequest=dict(reviewThreads=dict(
+                    nodes=[], pageInfo=dict(hasNextPage=False))))))
+        self.api = Api()
+
+    def test_current_main_ref_is_used_instead_of_cached_pr_base(self):
+        self.api.pr["base"]["sha"] = MERGE
+        pr, (ready, _) = self.api.snapshot(42)
+        self.assertEqual(pr["base"]["sha"], BASE)
+        self.assertTrue(ready)
+
+    def test_main_advancing_during_snapshot_requires_another_check(self):
+        self.api.main = [BASE, MERGE]
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertFalse(ready)
+
+    def test_cached_merge_without_current_main_parent_cannot_qualify(self):
+        self.api.parents = [MERGE, HEAD]
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertFalse(ready)
 
 
 class CompletionTests(unittest.TestCase):

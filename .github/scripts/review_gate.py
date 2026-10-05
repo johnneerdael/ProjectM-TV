@@ -39,7 +39,7 @@ def eligibility(pr, reviews, comments, threads):
 
     def completed_at(kind, value):
         if value:
-            timestamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            timestamp = datetime.fromisoformat(value.replace("Z", "+00:00")).replace(microsecond=0)
             completions[kind] = max(timestamp, completions.get(kind, timestamp))
 
     for comment in comments:
@@ -49,7 +49,7 @@ def eligibility(pr, reviews, comments, threads):
         requested_at = comment.get("updated_at") or comment.get("created_at")
         if trusted and request and requested_at:
             kind = "security" if request[1] else "code"
-            timestamp = datetime.fromisoformat(requested_at.replace("Z", "+00:00"))
+            timestamp = datetime.fromisoformat(requested_at.replace("Z", "+00:00")).replace(microsecond=0)
             requests[kind] = max(timestamp, requests.get(kind, timestamp))
     for comment in comments:
         if comment["user"]["login"] != CODEX:
@@ -93,7 +93,7 @@ def eligibility(pr, reviews, comments, threads):
         if (trusted and review.get("submitted_at") and review["commit_id"] == head
                 and review["state"] in {"APPROVED", "COMMENTED"}):
             completed = True
-    if any(kind not in completions or completions[kind] < timestamp for kind, timestamp in requests.items()):
+    if any(kind not in completions or completions[kind] <= timestamp for kind, timestamp in requests.items()):
         return False, "Waiting for requested Codex reviews to finish"
     if not completed:
         return False, "Waiting for a completed review of the latest commit"
@@ -136,6 +136,8 @@ class GitHub:
 
     def snapshot(self, number):
         pr = self.get(f"pulls/{number}")
+        # PR base.sha can lag behind the actual branch ref after a main push.
+        pr["base"]["sha"] = self.get("git/ref/heads/main")["object"]["sha"]
         reviews = self.pages(f"pulls/{number}/reviews?per_page=100")
         comments = self.pages(f"issues/{number}/comments?per_page=100")
         owner, name = self.repo.split("/")
@@ -161,9 +163,15 @@ class GitHub:
             cursor = connection["pageInfo"]["endCursor"]
         # Re-read to reject a snapshot collected across a push or base change.
         current = self.get(f"pulls/{number}")
+        current["base"]["sha"] = self.get("git/ref/heads/main")["object"]["sha"]
         if not matches(current, pr["head"]["sha"], pr["base"]["sha"], pr.get("merge_commit_sha")):
             return current, (False, "PR changed while reading reviews; recheck required")
-        return current, eligibility(current, reviews, comments, threads)
+        ready, reason = eligibility(current, reviews, comments, threads)
+        if ready:
+            parents = self.get(f"git/commits/{current['merge_commit_sha']}")["parents"]
+            if [parent["sha"] for parent in parents] != [current["base"]["sha"], current["head"]["sha"]]:
+                return current, (False, "Waiting for the test merge of current head and main")
+        return current, (ready, reason)
 
     def status(self, head, state, description, url=None):
         previous = next((s for s in self.pages(f"commits/{head}/statuses?per_page=100")
