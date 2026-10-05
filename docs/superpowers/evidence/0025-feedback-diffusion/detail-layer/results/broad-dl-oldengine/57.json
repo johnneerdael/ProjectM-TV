@@ -1,0 +1,67 @@
+{
+ "preset": "Geiss - Motion Blur.milk",
+ "classic": {
+  "luma": 0.0,
+  "contrast": 0.0
+ },
+ "c1280": {
+  "luma": 0.0002651677350513637,
+  "luma_ratio": null,
+  "mae": 0.00041575374780222774,
+  "contrast": 0.0005975799285806715
+ },
+ "fp1330": {
+  "ref": "classic",
+  "luma": 0.0,
+  "luma_ratio": null,
+  "mae": 0.0,
+  "luma_abs_err": 0.0,
+  "contrast": 0.0,
+  "digest": 0.0
+ },
+ "dl0_1330": {
+  "ref": "classic",
+  "luma": 0.0,
+  "luma_ratio": null,
+  "mae": 0.0,
+  "luma_abs_err": 0.0,
+  "contrast": 0.0,
+  "digest": 0.0
+ },
+ "dl05_1330": {
+  "ref": "classic",
+  "luma": 0.0,
+  "luma_ratio": null,
+  "mae": 0.0,
+  "luma_abs_err": 0.0,
+  "contrast": 0.0,
+  "digest": 0.0
+ },
+ "fp4k": {
+  "ref": "c1280",
+  "luma": 4.067450936418027e-05,
+  "luma_ratio": 0.153391623442805,
+  "mae": 0.00035629994818009436,
+  "luma_abs_err": 0.00022449322568718344,
+  "contrast": 0.000162249241839163,
+  "digest": 0.6747788190841675
+ },
+ "dl0_4k": {
+  "ref": "c1280",
+  "luma": 0.0002647636574693024,
+  "luma_ratio": 0.9984761434795866,
+  "mae": 1.7721371250445372e-06,
+  "luma_abs_err": 4.0407758206129074e-07,
+  "contrast": 0.0005973732913844287,
+  "digest": 5.23577880859375
+ },
+ "dl05_4k": {
+  "ref": "c1280",
+  "luma": 0.00026490111486054957,
+  "luma_ratio": 0.9989945225019081,
+  "mae": 1.901143718896492e-06,
+  "luma_abs_err": 2.6662019081413746e-07,
+  "contrast": 0.0005974812083877623,
+  "digest": 5.243430137634277
+ }
+}

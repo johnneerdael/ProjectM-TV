@@ -1,0 +1,56 @@
+# Focused Native trails validation
+
+Use a dedicated, task-owned Android arm64 emulator. Do not use the corpus owner's
+`emulator-5580` or reuse another task's work directory. Physical GPU performance
+and compatibility cannot be inferred from an emulator.
+
+`presets.txt` selects the known darkening, clipping, motion-vector, blur and chaotic
+witnesses from the Native 4K handover, plus midgit and Hexcollie controls. This is
+focused regression coverage, not a repeat of the full 9,606-preset corpus.
+
+Create a Python environment using `tools/preset-lab/requirements.lock`. Initialize
+submodules, supply `local.properties` and use the repository's JDK/SDK/NDK versions.
+Run the scripts from the repository root.
+
+```sh
+python -m unittest discover -s tools/native-trails -v
+python tools/native-trails/build_validation.py --commit BASELINE_SHA --policy native --role baseline-native --work build/native-trails/workers
+python tools/native-trails/build_validation.py --commit BASELINE_SHA --policy capped --role baseline-capped --work build/native-trails/workers
+python tools/native-trails/build_validation.py --commit CANDIDATE_SHA --policy native --role candidate-native --work build/native-trails/workers
+python tools/native-trails/build_validation.py --commit CANDIDATE_SHA --policy capped --role candidate-capped --work build/native-trails/workers
+python tools/native-trails/run_validation.py run --device OWNED_EMULATOR --workers build/native-trails/workers --presets tools/native-trails/presets.txt --work build/native-trails/focused
+```
+
+The builders refuse existing role directories. Each build exports a committed
+revision, composes the existing Preset Lab deterministic engine instrumentation
+with the actual core, and records transformations and compiled AAR/APK identities.
+Private line-reference controls let authored, old Native and new Native share a
+frozen harness. Production settings go through the additive public JNI API.
+Instrumented AARs are test artifacts, not byte-identical release binaries.
+
+The runner freezes PCM, clock (`frame/30`), seed, source, artifact, driver and
+preset identities. It refuses changed inputs, uses an exclusive lock, restores
+its debug preset property, verifies all eight full-resolution PNG/RGB hashes,
+and checks instance/context cleanup. `--profiles` can select profiles from the
+frozen protocol without redefining its inputs. Inspect every completed row;
+never treat an exited runner or a partial progress file as successful coverage.
+
+Compare all selected hashes for `native_before` / `native_off`, `capped_before` /
+`capped_after`, and `authored` / `authored_repeat`. Inspect authored / old Native /
+Standard / Medium / High full frames and crops. Brightness and image-error figures
+are diagnostics; near-black and chaotic presets require particular care.
+
+Frame timings measure `onDrawFrame` plus `glFinish` over 360 frames, excluding PNG
+encoding and transport. They are serialized engine timings on the emulator, not
+TV app FPS. Guest process PSS does not measure all host GPU texture memory.
+
+For an uninstrumented published-AAR smoke, first build the existing
+`tools/core-corpus/android-worker` with the checksum-verified released Native AAR,
+`-PcorpusApplicationId=nl.neerdael.projectmtv.corpuspublished`, then run:
+
+```sh
+python tools/native-trails/run_validation.py smoke --device OWNED_EMULATOR --apk WORKER_APK --aar RELEASED_NATIVE_AAR --work build/native-trails/published-smoke
+```
+
+This smoke uses the real clock and does not prove deterministic identity or
+brightness fidelity. Keep it separate from the instrumented comparison.
