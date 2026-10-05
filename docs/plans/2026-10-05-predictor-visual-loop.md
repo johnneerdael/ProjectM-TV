@@ -176,3 +176,15 @@ declared random stream per core thread; background shader-worker resets must not
 disturb renderer inputs. Input logs are numerical inputs/attribution, not rendered
 reference images. Verify source-generated hue/noise/shader inputs with bounded
 controls before using this profile in a fresh three-preset round.
+
+Matched-input controls now verify the profile: all3728renderer C-random inputs
+match an independent MT19937 lower31-bit stream;368worker draws are isolated.
+The exact source hue initializer with entropy12345matches native colours within
+1RGB8level on60frames. Noise initially failed because the native clock count is
+microseconds, and resize recreates it on first draw rather than at engine creation.
+The corrected clock count's low32seed3567620661matches HQnoise within1RGB8level.
+Preserve both failed attempts. The original case015 program under matching inputs
+has meanRGB8error0.563and closely aligned palette, layout and progression.
+82focused tests and19subtests pass. No fresh acceptance credit; new three-preset
+round still required. Evidence:
+`fixtures/visual-loop-declared-random-inputs-2026-10-05.json`.

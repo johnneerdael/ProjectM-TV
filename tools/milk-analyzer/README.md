@@ -293,6 +293,27 @@ time width, and forecasts require the prepared float32 adapter. Focused controls
 pass66tests plus19subtests; this is not a full imported-suite result. The corrected
 type does not resolve randomized hue choices on its own.
 
+For source/reference math comparisons, the user selected matching declared
+random inputs. The opt-in Android test-host in `core_random_inputs.cpp` supplies
+a uint32 entropy seed and a separate MT19937 lower-31-bit stream per core thread.
+Only callers from `PROJECTMTV_TEST_CORE_PATH` are affected; production core is
+unchanged. Enable it with `PROJECTMTV_TEST_RANDOM_SEED` and an owned
+`PROJECTMTV_TEST_RANDOM_LOG`. Without the seed variable, supplied inputs are off.
+The source shader-random bridge accepts `declared-mt19937-u31-v1`; its default
+still uses host C rand. A supplied stream is a test input, not a claim about
+production libc randomness or scheduling. The background worker's reseeding
+cannot disturb this test profile's renderer stream.
+
+The composite CPU bridge can generate hue offsets from `entropy_seed` using the
+copied native initializer, or accept explicit `hue_offsets`; provide one. Seeded
+hue and high-quality noise controls agree with the unchanged AAR within one RGB8
+level over60frames. Noise seeds use the native system-clock microsecond count's
+low32bits at the first draw, when resize recreates the textures. Both earlier
+wrong seed attempts are retained. The matching-input case015 diagnostic has mean
+RGB8 error0.563; it does not replace its failed original prediction or count as a
+fresh perfect match.82focused tests plus19subtests pass under prepared adapters.
+Random external image selection still requires a matching asset/binding context.
+
 The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`. Raw artifacts
 remain in ignored `build/visual-loop/`. The broader imported suite needs prepared
 historical adapter profiles and is not reported passing. No whole-corpus accuracy

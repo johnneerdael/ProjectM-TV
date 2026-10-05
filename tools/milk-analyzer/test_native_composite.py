@@ -7,6 +7,19 @@ import numpy as np
 
 
 class NativeCompositeTest(unittest.TestCase):
+    def test_declared_entropy_seed_generates_native_hue_offsets(self):
+        binary=Path(__file__).resolve().parents[2]/'build/milk-analyzer/native/milk-composite-inputs'
+        with tempfile.TemporaryDirectory() as directory:
+            request=Path(directory)/'request.json'
+            request.write_text(json.dumps({'width':256,'height':144,'time':0,'entropy_seed':12345}))
+            process=subprocess.run([str(binary),str(request)],capture_output=True,text=True)
+            self.assertEqual(process.returncode,0,process.stderr)
+            result=json.loads(process.stdout)
+        generator=np.random.RandomState(12345)
+        draws=generator.randint(0,2**32,size=4,dtype=np.uint32)&np.uint32(0x7fffffff)
+        expected=(draws%np.array([64841,53751,42661,31571],np.uint32)).astype(np.float32)*np.float32(.01)
+        np.testing.assert_array_equal(result['hue_offsets'],expected)
+
     def test_python_mesh_matches_unchanged_native_cpu_bodies(self):
         from composite_mesh import make_mesh,vertex_colours
         from legacy_composite import corner_shades

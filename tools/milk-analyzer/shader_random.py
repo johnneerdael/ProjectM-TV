@@ -19,7 +19,7 @@ RANDOM_NAMES = {'rand_frame', 'rand_preset'} | {
 
 
 def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
-                   adb: Path | None=None, serial: str | None=None) -> dict:
+                   adb: Path | None=None, serial: str | None=None,rand_policy='host-c-rand-v1') -> dict:
     """Replay on the host, or explicitly named Android with an Android binary.
 
     The Android path transfers only this standalone CPU adapter and request into
@@ -39,7 +39,9 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
             raise ValueError('invalid shader random lifecycle event')
         if event['kind']=='reseed' and (type(event.get('seed')) is not int or not 0<=event['seed']<2**32):
             raise ValueError('explicit uint32 reseed seed required')
-    request = json.dumps(dict(seed=seed, events=events), allow_nan=False)
+    if rand_policy not in {'host-c-rand-v1','declared-mt19937-u31-v1'}:
+        raise ValueError('unknown random input policy')
+    request = json.dumps(dict(seed=seed, events=events,rand_policy=rand_policy), allow_nan=False)
     binary = Path(binary).resolve()
     binary_sha = hashlib.sha256(binary.read_bytes()).hexdigest()
     with tempfile.TemporaryDirectory(prefix='milk-random-') as directory:
@@ -65,6 +67,9 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
     if process.returncode:
         raise ValueError('shader random source evaluation failed: ' + process.stderr.strip())
     result = json.loads(process.stdout)
+    expected_rng='host C rand' if rand_policy=='host-c-rand-v1' else rand_policy
+    if result.get('profile',{}).get('rng')!=expected_rng:
+        raise ValueError('random input policy mismatch')
     if adb is not None and result.get('profile',{}).get('platform')!='Android/bionic':
         raise ValueError('Android/bionic random execution profile required')
     if result.get('schema_version') != 1 or result.get('seed') != seed:

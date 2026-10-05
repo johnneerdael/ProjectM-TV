@@ -12,11 +12,18 @@
 #include <limits>
 #include <map>
 #include <memory>
+#include <random>
 #include <stdexcept>
 using json = nlohmann::json;
 
 static std::uint64_t drawsConsumed = 0;
-static int countedRand() { ++drawsConsumed; return rand(); }
+static bool declaredInputs=false;
+static std::mt19937 inputGenerator;
+static void seedInputs(uint32_t seed) {srand(seed);inputGenerator.seed(seed);}
+static int countedRand() {
+    ++drawsConsumed;
+    return declaredInputs?static_cast<int>(inputGenerator()&0x7fffffffU):rand();
+}
 
 struct UniformRecorder {
     json values = json::object();
@@ -70,10 +77,14 @@ int main(int argc, char** argv) {
         if (argc != 2) throw std::runtime_error("usage: milk-shader-random request.json");
         std::ifstream input(argv[1]); json request; input >> request;
         const auto seed = parseSeed(request.at("seed"));
+        const auto policy=request.value("rand_policy",std::string("host-c-rand-v1"));
+        if(policy!="host-c-rand-v1" && policy!="declared-mt19937-u31-v1")
+            throw std::runtime_error("unknown random input policy");
+        declaredInputs=policy=="declared-mt19937-u31-v1";
         const auto& events = request.at("events");
         if (!events.is_array() || events.size() > 100000)
             throw std::runtime_error("event ledger exceeds adapter budget");
-        srand(seed);
+        seedInputs(seed);
         std::map<std::string, std::unique_ptr<MilkdropShader>> states;
         json records = json::array(), loads = json::array();
         for (std::size_t i = 0; i < events.size(); ++i) {
@@ -82,7 +93,7 @@ int main(int argc, char** argv) {
             if (id.empty()) throw std::runtime_error("nonempty shader id required");
             const auto before = drawsConsumed;
             if (kind == "reseed") {
-                srand(parseSeed(event.at("seed")));
+                seedInputs(parseSeed(event.at("seed")));
             } else if (kind == "construct") {
                 if (states.count(id)) throw std::runtime_error("duplicate shader construction id");
                 // Constructor type does not affect its random initialization.
@@ -116,7 +127,7 @@ int main(int argc, char** argv) {
             {"bodies_sha256", kRandomBodiesSha}, {"glm_sha256", kRandomGlmSha},
             {"upload_source_sha256", kRandomUploadSourceSha},
             {"rendered_frames_consumed", false}, {"target_driver_verified", false},
-            {"profile", {{"rng", "host C rand"}, {"platform", platform},
+            {"profile", {{"rng", declaredInputs?"declared-mt19937-u31-v1":"host C rand"}, {"platform", platform},
                          {"compiler", __VERSION__}, {"rand_max", RAND_MAX}, {"glm_version", GLM_VERSION}}},
             {"scope", "Explicit source lifecycle, host-libc RNG and copied native CPU matrix bodies. "
                       "No inferred preset/idle/fallback lifecycle or Android equivalence."}};

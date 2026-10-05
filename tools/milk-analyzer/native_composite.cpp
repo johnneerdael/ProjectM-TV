@@ -7,6 +7,8 @@
 #include <cmath>
 #include <fstream>
 #include <iostream>
+#include <limits>
+#include <random>
 #include <stdexcept>
 using json=nlohmann::json;
 
@@ -42,11 +44,18 @@ int main(int argc,char** argv) {
         state.renderContext.aspectX=std::min(1.0f,float(width)/height);
         state.renderContext.aspectY=std::min(1.0f,float(height)/width);
         state.renderContext.time=request.at("time").get<float>();
-        if(!std::isfinite(state.renderContext.time)||request.at("hue_offsets").size()!=4)
-            throw std::runtime_error("finite time and four hue offsets required");
-        for(int i=0;i<4;++i) {
-            state.hueRandomOffsets[i]=request.at("hue_offsets").at(i);
-            if(!std::isfinite(state.hueRandomOffsets[i]))throw std::runtime_error("nonfinite hue offset");
+        if(!std::isfinite(state.renderContext.time))throw std::runtime_error("finite time required");
+        if(request.contains("entropy_seed")) {
+            const auto& seed=request.at("entropy_seed");
+            if(!seed.is_number_integer() || seed.get<double>()<0 || seed.get<double>()>UINT32_MAX || request.contains("hue_offsets"))
+                throw std::runtime_error("one explicit uint32 entropy seed or hue offsets required");
+            initializeHueOffsets(state.hueRandomOffsets,seed.get<uint32_t>());
+        } else {
+            if(request.at("hue_offsets").size()!=4)throw std::runtime_error("four hue offsets required");
+            for(int i=0;i<4;++i) {
+                state.hueRandomOffsets[i]=request.at("hue_offsets").at(i);
+                if(!std::isfinite(state.hueRandomOffsets[i]))throw std::runtime_error("nonfinite hue offset");
+            }
         }
         FinalComposite mesh;mesh.InitializeMesh(state);mesh.ApplyHueShaderColors(state);
         json result={{"positions",json::array()},{"uv",json::array()},{"polar",json::array()},
@@ -54,6 +63,7 @@ int main(int argc,char** argv) {
                      {"native_source_sha256",kCompositeSourceSha},{"native_bodies_sha256",kCompositeBodiesSha},
                      {"render_context_source_sha256",kCompositeRenderContextSha},
                      {"render_context_time_bits",sizeof(state.renderContext.time)*8},
+                     {"hue_offsets",state.hueRandomOffsets},{"hue_initializer_sha256",kHueInitializerSha},
                      {"engine",json::parse(kEngineIdentity)},{"engine_archive_sha256",kEngineArchiveSha},
                      {"native_driver_verified",false},{"adapter","data-only state; native mesh/hue bodies; GL upload omitted"}};
         for(const auto& v:mesh.m_vertices) {

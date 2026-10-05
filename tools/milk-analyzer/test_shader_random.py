@@ -2,6 +2,7 @@ import ctypes
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -14,11 +15,11 @@ ROOT = Path(__file__).resolve().parents[2]
 BINARY = ROOT / 'build/milk-analyzer/native/milk-shader-random'
 
 
-def run(events, seed=12345, *, valid=True):
+def run(events, seed=12345, *, valid=True, rand_policy='host-c-rand-v1'):
     assert BINARY.is_file(), 'source shader-random CPU bridge is not built'
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / 'request.json'
-        path.write_text(json.dumps(dict(seed=seed, events=events)))
+        path.write_text(json.dumps(dict(seed=seed, events=events,rand_policy=rand_policy)))
         result = subprocess.run([str(BINARY), str(path)], capture_output=True, text=True, timeout=10)
     if not valid:
         assert result.returncode != 0
@@ -50,6 +51,16 @@ def test_shared_rng_consumption_matches_independent_host_libc_sequence():
     assert comp['uniforms']['rand_preset'] == values(184)
     assert warp['uniforms']['rand_frame'] == values(368)
     assert comp['uniforms']['rand_frame'] == values(396)
+
+
+def test_declared_portable_random_inputs_match_independent_mt_sequence():
+    result=run([create('warp'),load('warp')],rand_policy='declared-mt19937-u31-v1')
+    generator=np.random.RandomState(12345)
+    values=generator.randint(0,2**32,size=212,dtype=np.uint32)&np.uint32(0x7fffffff)
+    expected=lambda start:(values[start:start+4]%7381).astype(np.float32)/np.float32(7380)
+    np.testing.assert_array_equal(result['loads'][0]['uniforms']['rand_preset'],expected(0))
+    np.testing.assert_array_equal(result['loads'][0]['uniforms']['rand_frame'],expected(184))
+    assert result['profile']['rng']=='declared-mt19937-u31-v1'
 
 
 def test_random_values_have_correct_lifetime_and_repeatability():
@@ -126,7 +137,9 @@ def test_bridge_records_source_identity_and_declares_host_profile_limitations():
     native = run([create('warp'), load('warp')])
     source = ROOT / ('build/preset-lab-production/engines/'
                     '96df3b3b13f0b358a26aeeafb4127dc8a62e51b0be76e56c33eeaea3faea705a/'
-                    'src/libprojectM/MilkdropPreset/MilkdropShader.cpp')
+                        'src/libprojectM/MilkdropPreset/MilkdropShader.cpp')
+    if os.environ.get('MILK_NATIVE_RANDOM_ENGINE_SOURCE'):
+        source=Path(os.environ['MILK_NATIVE_RANDOM_ENGINE_SOURCE'])/'src/libprojectM/MilkdropPreset/MilkdropShader.cpp'
     assert native['source_sha256'] == hashlib.sha256(source.read_bytes()).hexdigest()
     assert native['rendered_frames_consumed'] is False
     assert native['target_driver_verified'] is False

@@ -13,10 +13,17 @@ def generate(engine,output):
     start=source.index('float FinalComposite::SquishToCenter(')
     end=source.index('} // namespace MilkdropPreset',start)
     math=source[start:end]
+    state=(engine/'src/libprojectM/MilkdropPreset/PresetState.cpp').read_text()
+    start=state.index('    std::uniform_int_distribution<> distrib(0, std::numeric_limits<int>::max());')
+    end=state.index('\n',state.index('    hueRandomOffsets[3] =',start))
+    hue=state[start:end]
     output.write_text('#pragma once\n'+
         f'inline constexpr const char* kCompositeSourceSha="{hashlib.sha256(source.encode()).hexdigest()}";\n'+
         f'inline constexpr const char* kCompositeBodiesSha="{hashlib.sha256((mesh+math).encode()).hexdigest()}";\n'+
-        f'inline constexpr const char* kCompositeRenderContextSha="{hashlib.sha256(context).hexdigest()}";\n'+mesh+math)
+        f'inline constexpr const char* kCompositeRenderContextSha="{hashlib.sha256(context).hexdigest()}";\n'+
+        f'inline constexpr const char* kHueInitializerSha="{hashlib.sha256(hue.encode()).hexdigest()}";\n'+
+        'void initializeHueOffsets(std::array<float,4>& hueRandomOffsets,uint32_t seed) {\n'
+        '    std::mt19937 randomGenerator(seed);\n'+hue+'\n}\n'+mesh+math)
 
 
 if __name__=='__main__':
