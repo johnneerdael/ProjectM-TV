@@ -3,6 +3,16 @@ import numpy as np
 
 
 class SceneDrawTest(unittest.TestCase):
+    def test_declared_point_grid_reaches_custom_wave_rasterization(self):
+        from scene_draw import draw_source_scene
+        custom=[{'positions':[[1.001/4,1.999/4]],'colours':[[1,0,0,1]],
+                 'draw_mode':'points','point_size':1,'copy_offsets':[[0,0]],'additive':False}]
+        inputs=(np.zeros((4,4,4)),{'values':{}},{'main':{},'shapes':[]},None,custom)
+        canonical=draw_source_scene(*inputs)
+        snapped=draw_source_scene(*inputs,point_subpixel_bits=8)
+        np.testing.assert_array_equal(np.argwhere(canonical[...,0]>0),[[1,1]])
+        np.testing.assert_array_equal(np.argwhere(snapped[...,0]>0),[[2,0]])
+
     def test_patched_quad_wave_path_uses_gles_pixel_border_tie(self):
         from scene_draw import draw_source_scene
         custom=[{'positions':[[.25,.375],[.75,.375]],'colours':[[1,0,0,1],[1,0,0,1]],

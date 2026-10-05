@@ -267,3 +267,18 @@ motion-vector quads remain separate declared gaps.
 Evidence: `tools/milk-analyzer/fixtures/visual-loop-dot-fps-repair-2026-10-06.json`.
 Analyzer README records the input/drawing contracts; shipped collections and
 Pages instructions do not change. Focused drawing/geometry tests pass 35 checks.
+
+Two isolated one-frame point controls identify an 8-bit window-coordinate grid
+on the declared Apple emulator. All five finer-grid candidate predictions were
+sealed before native capture; only 8 bits match exactly. Add the explicit
+`point_subpixel_bits` input, preserving the unsnapped default and rejecting
+invalid grid values. Native halfway ties remain unverified. This correction
+reduces case019 mean RGB8 error from 1.023 to 0.748; correcting equation FPS
+does not change its pixels. Fine feedback differences remain, and no diagnostic
+receives fresh credit. Focused drawing tests pass 42 checks and 17 subtests.
+
+GitHub published 2.3.7 during diagnosis. Prepare its unchanged canonical AAR
+and real 43-patch archive before the next fresh batch. Patch0043 targets Native
+trails geometry preservation; its inactive144p path is distinct from native4K
+fidelity. Keep completed 2.3.5 rows pinned, with new 2.3.7 controls and identities
+in a separate namespace.

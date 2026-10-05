@@ -214,7 +214,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     textures[shape_index]=lambda uv:sample2d(previous_main,uv,wrap=True,linear=True,origin='top')
             return draw_source_scene(destination,source,frame,builtin['frames'][index],custom['frames'][index],
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
-                motion_vectors_prewarped=True,line_rendering_profile=line_profile)
+                motion_vectors_prewarped=True,line_rendering_profile=line_profile,
+                point_subpixel_bits=domain.get('point_subpixel_bits'))
 
         result = pipeline.step(warp_uv=mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
             frame_wrap=main['wrap'],stage_uniforms=random_banks,decay=main['decay'],

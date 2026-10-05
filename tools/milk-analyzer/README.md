@@ -311,6 +311,18 @@ fan; its 60-frame RGB8 mean error falls from 1.130 to 0.0083, with maximum 2.
 See `fixtures/visual-loop-dot-fps-repair-2026-10-06.json`. Point snapping and
 motion-vector quad rasterization remain separate gaps.
 
+Declare `point_subpixel_bits` separately when a renderer context establishes
+point-centre snapping. The Apple M4 Pro API34 emulator controls uniquely match
+nearest 1/256-pixel snapping (`8`), despite reporting `GL_SUBPIXEL_BITS=4`.
+Five candidate grids were frozen before the finer native capture; only the
+8-bit prediction matched all pixels. The setting propagates to custom and
+built-in wave point coverage; omitting it retains unsnapped canonical coverage.
+Integers 0–16 are accepted. `np.rint` halfway ties remain a declared mathematical
+policy, with native exact-halfway cases unverified. Do not assume the same grid
+on other GPUs. The case019 diagnostic mean RGB8 error improves from 1.023 to
+0.748; remaining fine feedback differences are preserved. See
+`fixtures/visual-loop-point-grid-repair-2026-10-06.json`.
+
 A frozen curved-line native control agrees within one RGB8 level over 60 frames.
 The full case 012 diagnostic now matches coherent flash counts (one brightening,
 zero darkening) and predicts peak brightness jump 0.8194 versus native 0.8207.

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "purpose": "Explicit point-grid input established by frozen synthetic published-AAR controls; no universal GPU precision claim.",
+  "reference_release": "2.3.5",
+  "reference_aar_sha256": "ef9ae2b4af16222d945f48deb063e93e05cc7a7ecccfbb2581e469047718cf77",
+  "diagnostics": {
+    "scope": "bounded diagnostics only; no freshcase/gate grades changed",
+    "controls": [
+      "thin-boundaries",
+      "fps-timeline",
+      "fine-boundaries"
+    ],
+    "thinpoint_result": {
+      "initial_shifted_vertices": 28,
+      "unique_fine_profile_bits": 8,
+      "reported_GL_SUBPIXEL_BITS": 4,
+      "pointcentre_quantum_pixels": "1/256",
+      "limit": "exacttask-ownedAPI34AppleM4Proemulatorcontext only; driverreportedbits isnotuniversalpointprecision"
+    },
+    "fps_result": {
+      "frame1_through30": 35,
+      "frame31_through60": 30,
+      "allpixels_exactmatch": true,
+      "pixel_sha256": "5499bef1c1d28aee60fcbc62b429d1137201aecc6329eab3a488b0a1f7173945"
+    },
+    "source_identity_transition": {
+      "manifest_commit": "ee804273ff4ef658c53a75fe4f2eae62663d7f6a",
+      "final_commit": "cd8fdfcd0797ed77c1a9fcf64946b888942bbeb7",
+      "module_hashes_unchanged": true,
+      "disposition": "Rootcommittedalready-frozenpendingcode; no predictor/binary/input mutation through diagnostics."
+    },
+    "completed_utc": "2026-10-05T23:13:33.469117+00:00"
+  },
+  "kernel_controls": {
+    "results": [
+      {
+        "name": "thin-boundaries",
+        "raw_source_geometry_points": 199,
+        "declared_point_subpixel_bits": 8,
+        "frames": 1,
+        "exact_native": true,
+        "different_pixels": 0,
+        "max_error_rgb8": 0,
+        "mean_error_rgb8": 0.0,
+        "predicted_sha256": "8ce2bae0b550716ca7c5fa6117197233ed073b8f64dac366042f3dc9480fd027",
+        "native_sha256": "8ce2bae0b550716ca7c5fa6117197233ed073b8f64dac366042f3dc9480fd027",
+        "basis": "existing native capture; source CPU quantizer control via temporary callback; no native rerender"
+      },
+      {
+        "name": "fine-boundaries",
+        "raw_source_geometry_points": 199,
+        "declared_point_subpixel_bits": 8,
+        "frames": 1,
+        "exact_native": true,
+        "different_pixels": 0,
+        "max_error_rgb8": 0,
+        "mean_error_rgb8": 0.0,
+        "predicted_sha256": "7e061d91dc4438c2b213fa06991073e79b07136f308b1d8acdf6205c12849a4c",
+        "native_sha256": "7e061d91dc4438c2b213fa06991073e79b07136f308b1d8acdf6205c12849a4c",
+        "basis": "existing native capture; source CPU quantizer control via temporary callback; no native rerender",
+        "matches_predeclared_8bit_pixels": true
+      }
+    ],
+    "limits": "Apple M4 Pro API34 emulator profile only; no universal8bit claim; exact halfway native ties not verified"
+  },
+  "case019_diagnostic": {
+    "scope": "Diagnostic replay against saved native; no fresh acceptance credit",
+    "variants": {
+      "round004": {
+        "mean_rgb8_error": 1.023267204378858,
+        "max_rgb8_error": 247,
+        "frame1_mean_rgb8_error": 0.03187391493055555,
+        "frame60_mean_rgb8_error": 1.96435546875,
+        "frame60_max_rgb8_error": 152,
+        "prediction_sha256": "1ac521cf10113b2452bd1c7666e317a2dd8d9ba88b8e28e1ba5e6529e8bf4d83"
+      },
+      "fps-context": {
+        "mean_rgb8_error": 1.023267204378858,
+        "max_rgb8_error": 247,
+        "frame1_mean_rgb8_error": 0.03187391493055555,
+        "frame60_mean_rgb8_error": 1.96435546875,
+        "frame60_max_rgb8_error": 152,
+        "prediction_sha256": "1ac521cf10113b2452bd1c7666e317a2dd8d9ba88b8e28e1ba5e6529e8bf4d83"
+      },
+      "point-grid": {
+        "mean_rgb8_error": 0.7479644398630402,
+        "max_rgb8_error": 186,
+        "frame1_mean_rgb8_error": 0.006890190972222222,
+        "frame60_mean_rgb8_error": 1.5504557291666667,
+        "frame60_max_rgb8_error": 102,
+        "prediction_sha256": "db1962438b71ff8f9428c1844c16ddb88fe1fc5a8bb9266066a30930d03a619e"
+      },
+      "fps-point-grid": {
+        "mean_rgb8_error": 0.7479644398630402,
+        "max_rgb8_error": 186,
+        "frame1_mean_rgb8_error": 0.006890190972222222,
+        "frame60_mean_rgb8_error": 1.5504557291666667,
+        "frame60_max_rgb8_error": 102,
+        "prediction_sha256": "db1962438b71ff8f9428c1844c16ddb88fe1fc5a8bb9266066a30930d03a619e"
+      }
+    }
+  },
+  "controls": {
+    "thin-boundaries": {
+      "source": "MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=2\nPSVERSION_COMP=2\n[preset00]\nfGammaAdj=1\nfDecay=0\nfVideoEchoAlpha=0\nfWaveAlpha=0\nob_a=0\nib_a=0\nmv_a=0\nzoom=1\nrot=0\nwarp=0\nwavecode_0_enabled=1\nwavecode_0_samples=100\nwavecode_0_bSpectrum=0\nwavecode_0_bUseDots=1\nwavecode_0_bDrawThick=0\nwavecode_0_bAdditive=0\nwavecode_0_smoothing=0\nwavecode_0_r=1\nwavecode_0_g=1\nwavecode_0_b=1\nwavecode_0_a=1\nwave_0_per_point1=k=int(sample*99+0.5);\nwave_0_per_point2=rr=int(k/10);cc=if(equal(rr%2,0),k%10,9-k%10);\nwave_0_per_point3=ox=if(equal(k%9,0),-0.501,if(equal(k%9,1),-0.5,if(equal(k%9,2),-0.499,if(equal(k%9,3),-0.001,if(equal(k%9,4),0,if(equal(k%9,5),0.001,if(equal(k%9,6),0.499,if(equal(k%9,7),0.5,0.501))))))));\nwave_0_per_point4=oy=if(equal((k*4)%9,0),-0.501,if(equal((k*4)%9,1),-0.5,if(equal((k*4)%9,2),-0.499,if(equal((k*4)%9,3),-0.001,if(equal((k*4)%9,4),0,if(equal((k*4)%9,5),0.001,if(equal((k*4)%9,6),0.499,if(equal((k*4)%9,7),0.5,0.501))))))));\nwave_0_per_point5=x=(18+22*cc+ox)/256;\nwave_0_per_point6=y=0.5+(0.5-(18+12*rr+oy)/144)*0.5625;\nwave_0_per_point7=r=(32+(k%8)*24)/255;\nwave_0_per_point8=g=(32+(int(k/8)%8)*24)/255;\nwave_0_per_point9=b=(64+(k%5)*32)/255;a=1;\nwarp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=GetPixel(uv);}\n",
+      "native_sha256": "8ce2bae0b550716ca7c5fa6117197233ed073b8f64dac366042f3dc9480fd027",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "thin-boundaries.milk",
+        "frames": 1,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 1,
+        "rendered_frame_serial_delta": 1,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "prediction_seal_sha256": "3d5358b94838a94c78ffed01fbacc27ceaf28a0f9866fc1063c2d97a2da6a382"
+    },
+    "fine-boundaries": {
+      "source": "MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=2\nPSVERSION_COMP=2\n[preset00]\nfGammaAdj=1\nfDecay=0\nfVideoEchoAlpha=0\nfWaveAlpha=0\nob_a=0\nib_a=0\nmv_a=0\nzoom=1\nrot=0\nwarp=0\nwavecode_0_enabled=1\nwavecode_0_samples=100\nwavecode_0_bSpectrum=0\nwavecode_0_bUseDots=1\nwavecode_0_bDrawThick=0\nwavecode_0_bAdditive=0\nwavecode_0_smoothing=0\nwavecode_0_r=1\nwavecode_0_g=1\nwavecode_0_b=1\nwavecode_0_a=1\nwave_0_per_point1=k=int(sample*99+0.5);\nwave_0_per_point2=rr=int(k/10);cc=if(equal(rr%2,0),k%10,9-k%10);\nwave_0_per_point3=ox=if(equal(k%10,0),-0.032,if(equal(k%10,1),-0.016,if(equal(k%10,2),-0.008,if(equal(k%10,3),-0.004,if(equal(k%10,4),-0.002,if(equal(k%10,5),0.002,if(equal(k%10,6),0.004,if(equal(k%10,7),0.008,if(equal(k%10,8),0.016,0.032)))))))));\nwave_0_per_point4=oy=if(equal(int(k/10)%10,0),-0.032,if(equal(int(k/10)%10,1),-0.016,if(equal(int(k/10)%10,2),-0.008,if(equal(int(k/10)%10,3),-0.004,if(equal(int(k/10)%10,4),-0.002,if(equal(int(k/10)%10,5),0.002,if(equal(int(k/10)%10,6),0.004,if(equal(int(k/10)%10,7),0.008,if(equal(int(k/10)%10,8),0.016,0.032)))))))));\nwave_0_per_point5=x=(18+22*cc+ox)/256;\nwave_0_per_point6=y=0.5+(0.5-(18+12*rr+oy)/144)*0.5625;\nwave_0_per_point7=r=(32+(k%8)*24)/255;\nwave_0_per_point8=g=(32+(int(k/8)%8)*24)/255;\nwave_0_per_point9=b=(64+(k%5)*32)/255;a=1;\nwarp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=GetPixel(uv);}\n",
+      "native_sha256": "7e061d91dc4438c2b213fa06991073e79b07136f308b1d8acdf6205c12849a4c",
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "fine-boundaries.milk",
+        "frames": 1,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 1,
+        "rendered_frame_serial_delta": 1,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "prediction_seal_sha256": "48dd67ba8d61f9307e07ef451a8f0c23152c9ca45e6e00fbca0f700a869bc964"
+    }
+  },
+  "limits": [
+    "np.rint half-way ties are an explicit mathematical policy; native exact-halfway ties have not been verified.",
+    "Reported GL_SUBPIXEL_BITS4 did not describe the observed point grid.",
+    "Original round004 predictions and grades remain unchanged; all reruns are diagnostic."
+  ]
+}

@@ -64,13 +64,23 @@ def draw_lines(destination,positions,colours,*,additive:bool,closed=False,quanti
     return target
 
 
-def draw_points(destination,positions,colours,*,point_size=1,additive:bool,quantize=True):
+def draw_points(destination,positions,colours,*,point_size=1,additive:bool,quantize=True,subpixel_bits=None):
+    """Optionally round window centres to an explicit grid with np.rint (ties to even).
+
+    This is a declared mathematical input, not a universal GPU precision rule.
+    Native halfway ties remain unverified; None retains canonical coverage.
+    """
     target,points,colour=_inputs(destination,positions,colours);height,width=target.shape[:2]
     if not np.isfinite(point_size) or point_size<=0:raise ValueError('positive finite point size required')
+    if subpixel_bits is not None and (type(subpixel_bits) is not int or not 0<=subpixel_bits<=16):
+        raise ValueError('point subpixel bits must be an integer within 0..16')
+    subpixel_scale=None if subpixel_bits is None else 2**subpixel_bits
     half=point_size*.5
     for point,rgba in zip(points,colour):
         if np.any((point<0)|(point>1)):continue # Point clip tests its centre, not its square.
         px,py=point*np.array([width,height])
+        if subpixel_scale is not None:
+            px,py=np.rint(np.array([px,py])*subpixel_scale)/subpixel_scale
         x0=max(0,int(np.ceil(px-half-.5)));x1=min(width-1,int(np.ceil(px+half-.5))-1)
         y0=max(0,int(np.floor(py-half-.5))+1);y1=min(height-1,int(np.floor(py+half-.5)))
         if x0>x1 or y0>y1:continue
