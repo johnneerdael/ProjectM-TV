@@ -39,6 +39,12 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
             raise ValueError('invalid shader random lifecycle event')
         if event['kind']=='reseed' and (type(event.get('seed')) is not int or not 0<=event['seed']<2**32):
             raise ValueError('explicit uint32 reseed seed required')
+        if event['kind']=='load':
+            if type(event.get('frame',0)) is not int or not 0<=event.get('frame',0)<2**31:
+                raise ValueError('nonnegative int32 shader frame required')
+            detail=event.get('feedback_detail_alpha',-1.0)
+            if type(detail) not in (int,float) or abs(detail)>float(np.finfo(np.float32).max) or not np.isfinite(detail):
+                raise ValueError('finite float32 feedback detail alpha required')
     if rand_policy not in {'host-c-rand-v1','declared-mt19937-u31-v1'}:
         raise ValueError('unknown random input policy')
     request = json.dumps(dict(seed=seed, events=events,rand_policy=rand_policy), allow_nan=False)
@@ -77,7 +83,11 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
     records = result.get('events', [])
     if len(records) != len(events):
         raise ValueError('random event ledger is incomplete')
+    cache_policy=result.get('frame_cache_policy','none')
+    if cache_policy not in {'none','core235-feedback-detail-v1'}:
+        raise ValueError('unknown shader frame cache policy')
     expected_draws = 0
+    last_frames={}
     for event, record in zip(events, records):
         if any(record.get(key) != event[key] for key in ('kind', 'id')):
             raise ValueError('random event order mismatch')
@@ -85,7 +95,17 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
             raise ValueError('random stream position mismatch')
         if event['kind']=='reseed' and record.get('seed')!=event['seed']:
             raise ValueError('random reseed identity mismatch')
-        expected_draws += {'construct':184,'load':28,'reseed':0}[event['kind']]
+        if event['kind']=='construct':
+            last_frames[event['id']]=-1
+            expected_draws+=184
+        elif event['kind']=='load':
+            frame=event.get('frame',0)
+            detail=float(np.float32(event.get('feedback_detail_alpha',-1.0)))
+            if cache_policy=='none' and detail>=0:
+                raise ValueError('feedback detail random caching unavailable in this engine')
+            reuse=cache_policy=='core235-feedback-detail-v1' and detail>=0 and last_frames.get(event['id'])==frame
+            expected_draws+=0 if reuse else 28
+            last_frames[event['id']]=frame
         if record.get('draws_after') != expected_draws:
             raise ValueError('random consumption differs from pinned source')
     if result.get('draws_consumed') != expected_draws:
@@ -95,14 +115,18 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
         raise ValueError('random load result order mismatch')
     for i in loads:
         bind_random_uniforms(result, event_index=i, shader_id=events[i]['id'],
-                             time=events[i]['time'], profile=result['profile'])
+                             time=events[i]['time'], profile=result['profile'],
+                             frame=events[i].get('frame',0) if 'frame_cache_policy' in result else None,
+                             feedback_detail_alpha=events[i].get('feedback_detail_alpha',-1.0)
+                             if 'frame_cache_policy' in result else None)
     result.update(binary_sha256=binary_sha,
                   request_sha256=hashlib.sha256(request.encode()).hexdigest())
     if adb is not None:result['execution_transport']={'kind':'adb','serial':serial}
     return result
 
 
-def bind_random_uniforms(result: dict, *, event_index: int, shader_id: str, time: float, profile: dict) -> dict:
+def bind_random_uniforms(result: dict, *, event_index: int, shader_id: str, time: float, profile: dict,
+                         frame: int | None=None, feedback_detail_alpha: float | None=None) -> dict:
     if result.get('schema_version') != 1 or result.get('profile') != profile:
         raise ValueError('shader random profile mismatch')
     if type(event_index) is not int or event_index < 0:
@@ -114,6 +138,10 @@ def bind_random_uniforms(result: dict, *, event_index: int, shader_id: str, time
         native_time = np.float32(time)
     if not np.isfinite(native_time) or matches[0].get('time') != float(native_time):
         raise ValueError('shader random load time mismatch')
+    if frame is not None and (type(frame) is not int or matches[0].get('frame') != frame):
+        raise ValueError('shader random load frame mismatch')
+    if feedback_detail_alpha is not None and matches[0].get('feedback_detail_alpha') != float(np.float32(feedback_detail_alpha)):
+        raise ValueError('shader random feedback detail alpha mismatch')
     uniforms = matches[0].get('uniforms')
     if not isinstance(uniforms, dict) or set(uniforms) != RANDOM_NAMES:
         raise ValueError('shader random uniform bank is incomplete')

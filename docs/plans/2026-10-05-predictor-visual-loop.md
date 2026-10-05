@@ -188,3 +188,27 @@ has meanRGB8error0.563and closely aligned palette, layout and progression.
 82focused tests and19subtests pass. No fresh acceptance credit; new three-preset
 round still required. Evidence:
 `fixtures/visual-loop-declared-random-inputs-2026-10-05.json`.
+
+## Published2.3.5 migration (2026-10-06)
+
+The user switched the target to canonical Native core2.3.5 at release910e837b.
+Merge that released revision and use all42patches in the CPU backend. Retain the
+clean production source separately from the lab-instrumented archive source;
+neither substitutes for the publishedAAR renderer. Source RNG adapters now copy
+0042's exact per-frame random cache logic and verify0-versus28draw consumption.
+Keep explicit historical41and new42profile identities; high-resolution/detail
+forecasting remains unsupported and must not silently use the old model.
+
+The newAAR and ARM64 library hashes are verified. Owned5596 was authoritatively
+stopped; only that dedicatedAVD was restarted. Newguestnamespace isolates235from
+oldruntime. Smoke advances60frames and reports Standardinactive144p. The actual
+42source forecaster's hue control matches235within1RGB8level. Initial malformed
+black smoke remains preserved as a failed fixture-format attempt.
+
+Round003cases016–018 had only234source computations when target changed; no
+reference images were captured. Withdraw them from acceptance and retain results.
+017timed out: read-only request inspection finds124,200shape evaluations and
+about4million scalar captures over60frames, noEELloops or per-vertex program.
+This supports a trace-cost explanation, not a proved language gap or runtime
+profile. Do not blindly repeat it. The next truly unused queue entries are019–021.
+Evidence: `fixtures/visual-loop-release235-migration-2026-10-06.json`.

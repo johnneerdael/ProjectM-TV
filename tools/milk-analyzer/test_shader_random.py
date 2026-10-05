@@ -13,6 +13,8 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 BINARY = ROOT / 'build/milk-analyzer/native/milk-shader-random'
+if os.environ.get('MILK_NATIVE_RANDOM_BINARY'):
+    BINARY=Path(os.environ['MILK_NATIVE_RANDOM_BINARY'])
 
 
 def run(events, seed=12345, *, valid=True, rand_policy='host-c-rand-v1'):
@@ -73,6 +75,57 @@ def test_random_values_have_correct_lifetime_and_repeatability():
     assert a['uniforms']['rot_s1'] == b['uniforms']['rot_s1']  # First rotation speed is exactly zero.
     assert a['uniforms']['rot_rand1'] != b['uniforms']['rot_rand1']
     assert first['loads'] != changed['loads']
+
+
+def test_released_detail_layer_reuses_random_only_for_same_shader_and_frame():
+    from shader_random import execute_ledger
+    if run([]).get('frame_cache_policy','none')=='none':
+        pytest.skip('this engine predates the feedback detail random cache')
+    events=[create('warp'),create('comp'),
+            dict(load('warp',1),frame=60,feedback_detail_alpha=0),
+            dict(load('warp',1),frame=60,feedback_detail_alpha=.5),
+            dict(load('comp',1),frame=60,feedback_detail_alpha=.5),
+            dict(load('warp',2),frame=61,feedback_detail_alpha=.5),
+            dict(load('warp',2),frame=61,feedback_detail_alpha=-1),
+            dict(load('warp',2),frame=61,feedback_detail_alpha=-1)]
+    result=execute_ledger(BINARY,seed=12345,events=events)
+    assert result['frame_cache_policy']=='core235-feedback-detail-v1'
+    assert [e['draws_after']-e['draws_before'] for e in result['events']]==[184,184,28,0,28,28,28,28]
+    first,repeated,other,next_frame,disabled,disabled_again=result['loads']
+    assert first['uniforms']==repeated['uniforms']
+    for changed in [other,next_frame,disabled,disabled_again]:
+        assert changed['uniforms']['rand_frame']!=first['uniforms']['rand_frame']
+    assert disabled['uniforms']['rand_frame']!=disabled_again['uniforms']['rand_frame']
+
+
+@pytest.mark.parametrize('key,value',[('frame',-1),('frame',2**31),('frame',True),
+                                      ('frame',1.5),('feedback_detail_alpha',True),
+                                      ('feedback_detail_alpha',float('inf')),('feedback_detail_alpha',1e100)])
+def test_frame_cache_inputs_reject_invalid_native_context_values(key,value):
+    from shader_random import execute_ledger
+    events=[create('warp'),dict(load('warp'),**{key:value})]
+    with pytest.raises(ValueError,match='frame|alpha'):
+        execute_ledger(BINARY,seed=12345,events=events)
+    error=run(events,valid=False)
+    assert 'frame' in error or 'alpha' in error
+
+
+def test_frame_cache_survives_reseed_and_binding_checks_explicit_context():
+    from shader_random import execute_ledger,bind_random_uniforms
+    if run([]).get('frame_cache_policy','none')=='none':
+        pytest.skip('this engine predates the feedback detail random cache')
+    events=[create('warp'),dict(load('warp',1),frame=60,feedback_detail_alpha=.5),
+            dict(kind='reseed',id='stream',seed=54321),
+            dict(load('warp',1),frame=60,feedback_detail_alpha=.5)]
+    result=execute_ledger(BINARY,seed=12345,events=events)
+    assert result['draws_consumed']==212
+    assert result['loads'][0]['uniforms']==result['loads'][1]['uniforms']
+    args=dict(event_index=3,shader_id='warp',time=1,profile=result['profile'],
+              frame=60,feedback_detail_alpha=.5)
+    bind_random_uniforms(result,**args)
+    for changes in [dict(frame=61),dict(feedback_detail_alpha=-1)]:
+        with pytest.raises(ValueError,match='frame|alpha'):
+            bind_random_uniforms(result,**{**args,**changes})
 
 
 def test_explicit_reseed_resets_draws_but_preserves_existing_shader_state():

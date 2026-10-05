@@ -229,8 +229,9 @@ are bounded separately; runtime artifact pushes have a 180-second limit.
 ## Full visual prediction loop (in progress)
 
 The mathematical source forecaster predicts structure, motion, colour, flashing
-and feedback before comparison with the unchanged published standard core 2.3.4
-AAR. The current goal is a fresh random batch of three presets with 100/100
+and feedback before comparison with the published standard core AAR. Fresh
+comparisons now target core 2.3.5; saved 2.3.4 rows keep their original identities.
+The current goal is a fresh random batch of three presets with 100/100
 behavioural-rubric grades for all three. Complete each batch under an unchanged
 model before repairing its gaps. Each run uses 60 frames at 30 fps. This supersedes
 the earlier ten-case 80/100 streak; neither grade is a calibrated probability.
@@ -241,33 +242,53 @@ fixture preserves predictions, identities, measurements and misses. Earlier
 Tripgnosis trajectory errors were repaired by correcting custom-wave point counts
 and PCM resampling; that diagnostic retest earns no fresh-batch credit.
 
-The source CPU adapters contain all 41 patches matching core 2.3.4, plus declared
-lab instrumentation. They are not the Android AAR. The source driver previously
+Source CPU profiles distinguish the 41 patches matching core 2.3.4 from the
+42 patches matching core 2.3.5. Prepare adapters separately for each identity;
+the existing `build/milk-analyzer/native` adapters retain their historical
+41-patch identity. Source adapters are not the Android AAR. The driver previously
 used equation seed 12345. Production projectM-eval initializes MT19937 per thread
 with `0x4141f00d`; calling C `srand` does not seed that generator.
 
-For a fresh evaluator thread, declare `equation_rng_policy` as
-`projectmtv-core-2.3.4-cold-thread-v1` and `equation_seed` as `0x4141f00d` in the
-forecast domain. The forecaster rejects another seed or patch-series identity.
+For a fresh evaluator thread, declare `equation_seed` as `0x4141f00d` and select
+the matching `equation_rng_policy` in the forecast domain:
+
+| Policy | Required patch-series SHA-256 |
+|---|---|
+| `projectmtv-core-2.3.4-cold-thread-v1` | `d21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818` |
+| `projectmtv-core-2.3.5-cold-thread-v1` | `d73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a` |
+
+Both require upstream commit `e0b0a967f0ffd7d332106c366668ed271718472b`.
+The forecaster rejects another seed or a mismatched release/patch identity;
+changing a policy name does not migrate historical rows to another engine.
 Other explicitly supplied seeds retain the `declared-seed-v1` policy. Provenance
 records the seed and cold-thread assumption; this is not a preset-switch reset
 policy and does not fix shader/noise/image randomness.
 
-A separately frozen 60-frame native control through the unchanged published AAR
+A separately frozen 60-frame native control through the unchanged 2.3.4 AAR
 matched all predicted RGB8 values exactly for three equation random draws per
 frame. An independent NumPy MT19937 control also checks draw order across 33 shape
 instances and 60 frames. These bounded controls do not certify all authored
 visuals. Correcting only the seed reduced case 012 mean RGB error from 0.15987 to
 0.10398 against its saved reference; contour timing still differs.
 
-The published JNI host also enables patch 0024 quad lines with a 1024x768
-reference, even at the 256x144 test size. The older source drawing path used
+The 2.3.4 and 2.3.5 JNI hosts enable patch 0024 quad lines with a 1024x768
+reference at the 256x144 test size. The older source drawing path used
 canonical GL lines. Declare `line_rendering_profile` as
 `projectmtv-gles-quad-lines-v1` for the patched GLES hard-edge wave/shape-outline
 path: it models strip-end padding, miter joins and GLES pixel-border tie bias.
-This profile currently requires a viewport no larger than the reference area;
+This profile accepts the two exact engine identities above and currently
+requires a viewport no larger than the reference area;
 high-resolution scaling, antialiasing and motion-vector quads are not certified.
 The original `canonical-gl-lines-v1` remains available for historical contexts.
+
+Core 2.3.5 adds authored feedback/native trail detail in patch 0042. JNI leaves
+that layer inactive through height 1330; above it, Native trails also use a
+1280x720 line reference. The source model does not implement that feedback path
+or scaled lines. Every forecast with the 2.3.5 engine identity rejects viewports
+above the 1024x768 reference area or height 1330, even with the canonical line
+profile or a declared lab equation seed. Accepting the low-resolution identity
+does not establish 4K support or appearance accuracy. The new 2.3.5 round has not
+yet been frozen; the original 2.3.4 slots 016–018 were withdrawn before captures.
 
 A frozen curved-line native control agrees within one RGB8 level over 60 frames.
 The full case 012 diagnostic now matches coherent flash counts (one brightening,

@@ -1,0 +1,104 @@
+{
+  "purpose": "Published core235 migration; not visual acceptance",
+  "release_commit": "910e837b7d3eb636b3de30df402095b0a7e59a7c",
+  "aar_sha256": "ef9ae2b4af16222d945f48deb063e93e05cc7a7ecccfbb2581e469047718cf77",
+  "native_sha256": "5f625ce8e2ae9a11621406ba7ff255fcdebcf153fd619eb3b757313abd71ebad",
+  "jni_class_sha256": "b5c19509cf27c1e612f631866185aaa879a4e1ae51be6f9d02a5c5ebc822a369",
+  "helper_sha256": "a1b9bcdacbe4e81629fa02cfa63a25e2ee59e33b0afb18191da30ea71501cc34",
+  "dex_sha256": "33730a3604b5a038405ae1230727baeeaa4797c1d7d44dc08bd6dc961b3661b4",
+  "patch_count": 42,
+  "patch_series_sha256": "d73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a",
+  "archive_sha256": "be6e4eddd1b5ed577f3aa893a1cd77d19757cfa36c760a093a7b6e660fdc4c30",
+  "backend_provenance_sha256": "6454b2d8f5b465916c77549c3595de4154c8491511cf70655bc30ed8487dca3a",
+  "cpu_binaries": {
+    "milk-audio-inputs": {
+      "sha256": "99a203cbdde74b9e22b025bf9b74b3606a2516e241a9056f3e3a3eb305bf6481",
+      "size": 238576
+    },
+    "milk-composite-inputs": {
+      "sha256": "9e2d44358bf2cadb8312430f8c7c021e4254053d05e0025f669b8aec72b7f9db",
+      "size": 199320
+    },
+    "milk-image-inputs": {
+      "sha256": "a48ea318b6a9e29dc571fdeeaf9107e154cd2ec2d85faca1fbbce4363fce8de9",
+      "size": 333376
+    },
+    "milk-native-reader": {
+      "sha256": "e159550ff02a4585513022356e09ad8e4f22a6deb834689cc57d00fd91f824ff",
+      "size": 827408
+    },
+    "milk-noise-inputs": {
+      "sha256": "7e0f85a4451d19929136eca0f5fa21ea5b3340a811dbbf4c32400474246e9d83",
+      "size": 239824
+    },
+    "milk-shader-random": {
+      "sha256": "7b913ae4b6319ed73804cbd201bfac3e2fb5ce2ecb00885fca57fda067516eb9",
+      "size": 198368
+    },
+    "milk-shader-translate": {
+      "sha256": "9eb35c0ba3723496d72f964a6c9bb3dd3ced36ccab12112d4733e46758c6d223",
+      "size": 672664
+    },
+    "milk-wave-inputs": {
+      "sha256": "cf4d8a8286c61530ffc4a6d99111b21e6985ba32543c3423ff5a9ed4aefe2d72",
+      "size": 255072
+    }
+  },
+  "render_settings": {
+    "width": 256,
+    "height": 144,
+    "fps": 30,
+    "frames": 60,
+    "mesh": [
+      48,
+      32
+    ],
+    "pcm_format": "float32 little-endian mono",
+    "sample_rate": 44100,
+    "samples_per_frame": 1470,
+    "clock_epoch_ns": 1000000000000000,
+    "random_seed": 12345,
+    "core_trails": "unchanged production default Standard; expected inactive below 1330p"
+  },
+  "native_hue_control": {
+    "mean_rgb8_error": 0.00016004774305555556,
+    "max_rgb8_error": 1
+  },
+  "old_round_disposition": {
+    "round": 3,
+    "status": "withdrawn_before_reference_capture",
+    "reason": "User switched target to published Native2.3.5 during source-only round; retain2.3.4source diagnostics and do not mixprofiles",
+    "utc": "2026-10-05T22:13:35.329794+00:00",
+    "cases": [
+      {
+        "case": 16,
+        "source_status": "computed",
+        "reason": null,
+        "reference_captured": false
+      },
+      {
+        "case": 17,
+        "source_status": "unresolved",
+        "reason": "Command '['build/milk-analyzer/native/milk-native-reader', '--equations', '/var/folders/cm/m92k6_qs115046xzbll7hfkh0000gn/T/tmpummldrxn/scene.json']' timed out after 60 seconds",
+        "reference_captured": false
+      },
+      {
+        "case": 18,
+        "source_status": "computed",
+        "reason": null,
+        "reference_captured": false
+      }
+    ]
+  },
+  "future_fresh_cases": [
+    19,
+    20,
+    21
+  ],
+  "limitations": [
+    "Authored/native detail inactive at144p; no4Kprediction parity claim",
+    "Historical234rows remainimmutable",
+    "Case017timeout indicates tracecost; rootcause notruntimeprofiled",
+    "PublishedAAR and instrumented host archive remain distinct"
+  ]
+}

@@ -18,6 +18,9 @@ def generate(engine: Path, output: Path) -> None:
     end = source.index('void MilkdropShader::LoadCode(', start)
     constructor = source[start:end]
     start = source.index('    m_shader.SetUniformFloat4("rand_frame"')
+    frame_cache = '    const bool reuseRandom =' in source
+    if frame_cache:
+        start = source.index('    const bool reuseRandom =')
     end = source.index('    m_shader.SetUniformFloat4("_c0"', start)
     vectors = source[start:end]
     start = source.index('    std::array<glm::mat4, 24> tempMatrices{};')
@@ -36,8 +39,9 @@ def generate(engine: Path, output: Path) -> None:
         f'inline constexpr const char* kRandomBodiesSha="{hashlib.sha256(bodies.encode()).hexdigest()}";\n' +
         f'inline constexpr const char* kRandomGlmSha="{glm_hash.hexdigest()}";\n' +
         f'inline constexpr const char* kRandomUploadSourceSha="{hashlib.sha256(renderer).hexdigest()}";\n' +
+        f'inline constexpr bool kRandomFrameCache={str(frame_cache).lower()};\n' +
         random_function + '\n' + constructor +
-        'void MilkdropShader::LoadRandomVariables(float floatTime) {\n' + vectors + matrices + '}\n')
+        'void MilkdropShader::LoadRandomVariables(float floatTime, const PresetState& presetState) {\n' + vectors + matrices + '}\n')
 
 
 if __name__ == '__main__':

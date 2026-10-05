@@ -31,6 +31,17 @@ PRODUCTION_EQUATION_ENGINE = {
     'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
     'patches_sha256': 'd21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818',
 }
+CORE_235_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.5-cold-thread-v1'
+CORE_235_EQUATION_ENGINE = {
+    'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
+    'patches_sha256': 'd73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a',
+}
+# Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
+# the equation RNG's cold-thread seed remains unchanged.
+PRODUCTION_EQUATION_ENGINES = {
+    PRODUCTION_EQUATION_RNG_POLICY: PRODUCTION_EQUATION_ENGINE,
+    CORE_235_EQUATION_RNG_POLICY: CORE_235_EQUATION_ENGINE,
+}
 
 
 def digest(value):
@@ -71,14 +82,22 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if type(domain['equation_seed']) is not int or not 0<=domain['equation_seed']<2**32:
         raise ValueError('explicit uint32 equation seed required')
     rng_policy = domain.get('equation_rng_policy', 'declared-seed-v1')
-    if rng_policy not in {'declared-seed-v1', PRODUCTION_EQUATION_RNG_POLICY}:
+    if rng_policy != 'declared-seed-v1' and rng_policy not in PRODUCTION_EQUATION_ENGINES:
         raise ValueError('unknown equation RNG policy: ' + str(rng_policy))
-    if rng_policy == PRODUCTION_EQUATION_RNG_POLICY and domain['equation_seed'] != PRODUCTION_EQUATION_SEED:
+    production_engine = PRODUCTION_EQUATION_ENGINES.get(rng_policy)
+    if production_engine is not None and domain['equation_seed'] != PRODUCTION_EQUATION_SEED:
         raise ValueError('production equation RNG seed must be 0x4141f00d')
-    if rng_policy == PRODUCTION_EQUATION_RNG_POLICY:
-        engine = source.get('parser_inputs', {}).get('engine', {})
-        if any(engine.get(key) != value for key, value in PRODUCTION_EQUATION_ENGINE.items()):
+    engine = source.get('parser_inputs', {}).get('engine', {})
+    if production_engine is not None:
+        if any(engine.get(key) != value for key, value in production_engine.items()):
             raise ValueError('production equation RNG engine identity mismatch')
+    if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
+        raise ValueError('positive integer forecast viewport required')
+    if all(engine.get(key) == value for key, value in CORE_235_EQUATION_ENGINE.items()):
+        # JNI enables patch 0042 only above height 1330 and changes the line reference
+        # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
+        if domain['height'] > 1330 or domain['width']*domain['height'] > 1024*768:
+            raise ValueError('2.3.5 higher-resolution lines/native feedback detail are not implemented')
     from quad_lines import PROFILE as quad_profile
     line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
     if line_profile not in {'canonical-gl-lines-v1',quad_profile}:
@@ -86,11 +105,9 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if line_profile==quad_profile:
         if domain['profile']!='gles300' or domain['width']*domain['height']>1024*768:
             raise ValueError('quad-line profile requires GLES within reference area')
-        engine=source.get('parser_inputs',{}).get('engine',{})
-        if any(engine.get(key)!=value for key,value in PRODUCTION_EQUATION_ENGINE.items()):
+        if not any(all(engine.get(key)==value for key,value in expected.items())
+                   for expected in PRODUCTION_EQUATION_ENGINES.values()):
             raise ValueError('quad-line engine identity mismatch')
-    if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
-        raise ValueError('positive integer forecast viewport required')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
     hue = np.asarray(domain['hue_offsets'], dtype=np.float32)
     if colour.shape!=(4,) or not np.all(np.isfinite(colour)) or np.any((colour<0)|(colour>1)):

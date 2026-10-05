@@ -51,6 +51,10 @@ struct UniformRecorder {
     }
 };
 
+struct PresetState {
+    struct RenderContext { int frame; float feedbackDetailAlpha; } renderContext;
+};
+
 class MilkdropShader {
 public:
     enum class ShaderType { WarpShader, CompositeShader };
@@ -59,9 +63,12 @@ public:
     std::array<glm::vec3, 20> m_randTranslation{};
     std::array<glm::vec3, 20> m_randRotationCenters{};
     std::array<glm::vec3, 20> m_randRotationSpeeds{};
+    int m_randomFrame{-1};
+    glm::vec4 m_frameRandom{};
+    std::array<glm::mat4, 4> m_frameMatrices{};
     UniformRecorder m_shader;
     explicit MilkdropShader(ShaderType type);
-    void LoadRandomVariables(float floatTime);
+    void LoadRandomVariables(float floatTime, const PresetState& presetState);
 };
 #include "cpu_random_adapter.hpp"
 
@@ -103,9 +110,21 @@ int main(int argc, char** argv) {
                 if (!event.at("time").is_number()) throw std::runtime_error("numeric shader time required");
                 float time = event.at("time").get<float>();
                 if (!std::isfinite(time)) throw std::runtime_error("finite float32 shader time required");
+                auto frameValue = event.value("frame", json(0));
+                if (!frameValue.is_number_integer() || frameValue.get<double>() < 0 ||
+                    frameValue.get<double>() > std::numeric_limits<int>::max())
+                    throw std::runtime_error("nonnegative int32 shader frame required");
+                auto detailValue = event.value("feedback_detail_alpha", json(-1.0f));
+                if (!detailValue.is_number()) throw std::runtime_error("numeric feedback detail alpha required");
+                float detail = detailValue.get<float>();
+                if (!std::isfinite(detail)) throw std::runtime_error("finite float32 feedback detail alpha required");
+                if (!kRandomFrameCache && detail >= 0.0f)
+                    throw std::runtime_error("feedback detail random caching unavailable in this engine");
+                PresetState presetState{{frameValue.get<int>(), detail}};
                 auto& state = *states.at(id);
-                state.LoadRandomVariables(time);
+                state.LoadRandomVariables(time, presetState);
                 loads.push_back({{"event_index", i}, {"id", id}, {"time", time},
+                                 {"frame", presetState.renderContext.frame}, {"feedback_detail_alpha", detail},
                                  {"uniforms", state.m_shader.values},
                                  {"draws_before", before}, {"draws_after", drawsConsumed}});
             } else throw std::runtime_error("unknown random lifecycle event");
@@ -126,6 +145,7 @@ int main(int argc, char** argv) {
             {"draws_consumed", drawsConsumed}, {"source_sha256", kRandomSourceSha},
             {"bodies_sha256", kRandomBodiesSha}, {"glm_sha256", kRandomGlmSha},
             {"upload_source_sha256", kRandomUploadSourceSha},
+            {"frame_cache_policy", kRandomFrameCache ? "core235-feedback-detail-v1" : "none"},
             {"rendered_frames_consumed", false}, {"target_driver_verified", false},
             {"profile", {{"rng", declaredInputs?"declared-mt19937-u31-v1":"host C rand"}, {"platform", platform},
                          {"compiler", __VERSION__}, {"rand_max", RAND_MAX}, {"glm_version", GLM_VERSION}}},
