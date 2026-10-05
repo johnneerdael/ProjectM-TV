@@ -204,8 +204,8 @@ int main(int argc, char** argv) {
   CHECK(g_library.Weight("crlf.milk") == 7);  // CRLF line
 
   printf("music category limits every library selection path\n");
-  CHECK(g_library.SetCategory("dance"));
-  CHECK(g_library.Category() == "dance" && g_library.CategoryCount("dance") == 3);
+  CHECK(g_library.SetCategory("intense"));
+  CHECK(g_library.Category() == "intense" && g_library.CategoryCount("intense") == 3);
   for (int i = 0; i < 30; ++i) {
     std::string pick = g_library.Next();
     CHECK(pick == "good 1.milk" || pick == "good 2.milk" || pick == "good 3.milk");
@@ -214,7 +214,7 @@ int main(int argc, char** argv) {
     CHECK(random == "good 1.milk" || random == "good 2.milk" || random == "good 3.milk");
   }
   auto generation = g_library.CategoryGeneration();
-  CHECK(g_library.SetCategory("ambient"));
+  CHECK(g_library.SetCategory("chill"));
   CHECK(g_library.CategoryGeneration() > generation);
   CHECK(g_library.Previous().empty() && g_library.PeekPrevious().empty());
   CHECK(g_library.PeekRandom() == "good 4.milk" || g_library.PeekRandom() == "good 5.milk");
@@ -223,11 +223,15 @@ int main(int argc, char** argv) {
   CHECK(g_library.PeekRandom() == "good 5.milk");
   g_library.RecordShown("good 5.milk");  // Next or Previous landed on the prepared random preset
   CHECK(g_library.PeekRandom() == "good 4.milk");
-  CHECK(g_library.SetCategory("latin"));
-  g_library.RecordShown("good 6.milk");
-  CHECK(g_library.PeekRandom() == "good 6.milk" && g_library.PeekRandom() == "good 6.milk");
-  CHECK(g_library.Random("good 6.milk") == "good 6.milk");
-  CHECK(!g_library.SetCategory("classical") && g_library.Category() == "all");
+  // A curated group reduced to one eligible member still selects that member.
+  g_library.MarkSkipped("good 5.milk", "single-member control");
+  g_library.RecordShown("good 4.milk");
+  CHECK(g_library.CategoryCount("chill") == 1);
+  CHECK(g_library.PeekRandom() == "good 4.milk" && g_library.PeekRandom() == "good 4.milk");
+  CHECK(g_library.Random("good 4.milk") == "good 4.milk");
+  g_library.ResetSkipped();
+  g_library.MarkSkipped("preskipped.milk", "fixture initial skip");
+  CHECK(!g_library.SetCategory("dance") && g_library.Category() == "all");
   CHECK(!g_library.SetCategory("unknown") && g_library.Category() == "all");
   CHECK(g_library.SetCategory("all"));
   CHECK(g_library.ActiveCount() == 13 && g_library.Weight("good 3.milk") == 40);
@@ -236,7 +240,9 @@ int main(int argc, char** argv) {
   { std::string root2 = argv[2]; static AAssetManager am2{root2}; PresetLibrary& other = *new PresetLibrary();
     other.Start(&am2, root2 + "/skip.txt", "");  // never destroyed, like the app's library
     for (int i = 0; i < 200 && !other.Ready(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
-    CHECK(other.Ready() && other.ActiveCount() == 3); }
+    CHECK(other.Ready() && other.ActiveCount() == 3);
+    CHECK(other.CategoryCount("normal") == 0);  // malformed weight must not load
+    CHECK(!other.SetCategory("normal") && other.Category() == "all"); }
   CHECK(g_library.SkippedCount() == 1);
 
   printf("texture pack extracted before the index is ready\n");
@@ -264,7 +270,7 @@ int main(int argc, char** argv) {
     g_inputs.categoryDirty = true;
   };
   std::string category = (current() == "good 1.milk" || current() == "good 2.milk" || current() == "good 3.milk")
-                          ? "ambient" : "dance";
+                          ? "chill" : "intense";
   g_loadObserver = [] { CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr)); };
   requestCategory(category);
   switchFrame();
@@ -274,7 +280,7 @@ int main(int argc, char** argv) {
   g_engine.current.clear();
   g_engine.lastFrameDirect = false;
   g_lastFrameDirect = false;  // a new context has no previously rendered direct frame
-  requestCategory(category == "dance" ? "ambient" : "dance");
+  requestCategory(category == "intense" ? "chill" : "intense");
   frame();
   CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
   CHECK(g_library.Contains(current()));
@@ -283,16 +289,16 @@ int main(int argc, char** argv) {
   switchFrame();
 
   printf("category retries bounded load failures before acknowledging completion\n");
-  requestCategory("latin");
+  requestCategory("chill");
   switchFrame();
-  CHECK(current() == "good 6.milk");
+  CHECK(current() == "good 4.milk" || current() == "good 5.milk");
   g_failNextLoads = 4;
-  requestCategory("pop");
+  requestCategory("normal");
   switchFrame();
-  CHECK(g_library.CategoryCount("pop") == 1);
+  CHECK(g_library.CategoryCount("normal") == 1);
   CHECK(Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
   for (int i = 0; i < 10 && Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr); ++i) frame();
-  CHECK(g_library.Category() == "pop" && g_library.Contains(current()));
+  CHECK(g_library.Category() == "normal" && g_library.Contains(current()));
   CHECK(!Java_nl_neerdael_projectm_core_ProjectMJNI_isMusicCategoryPending(nullptr, nullptr));
   g_library.ResetSkipped();
   g_library.MarkSkipped("preskipped.milk", "fixture initial skip");
@@ -300,10 +306,10 @@ int main(int argc, char** argv) {
   switchFrame();
 
   printf("retained category changes prepare the next selection around the preset on screen\n");
-  requestCategory("ambient");  // two good presets; switching to All retains either one
+  requestCategory("chill");  // two good presets; switching to All retains either one
   switchFrame();
   for (int i = 0; i < 20; ++i) {
-    for (const char* category : {"all", "ambient"}) {
+    for (const char* category : {"all", "chill"}) {
       std::string kept = current();
       requestCategory(category);
       switchFrame();

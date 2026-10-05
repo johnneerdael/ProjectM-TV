@@ -2,7 +2,7 @@
 
 ## Pull requests and release notes
 
-Each successfully tested merge to `main` publishes a versioned APK and one Native core AAR, then updates Milkbeat through the canonical core alias. Use a feature branch and PR for changes.
+Each successfully tested merge to `main` publishes a versioned APK and one Native core AAR, then updates Milkbeat through the canonical core alias. Use a feature branch and PR for changes. Android APK CI retains full Git history and tags with `filter: blob:none`; current source and historical version metadata are fetched on demand rather than downloading every historical evidence blob.
 
 - Include a substantive `## Release notes` section in every PR body. Follow `.github/pull_request_template.md`.
 - Write for people using the app: describe the changed behavior, its effect, and relevant limits. Include a concrete trigger or before/after example when useful.
@@ -44,7 +44,13 @@ ProjectM TV is a music visualizer for Android TV. It renders [projectM](https://
 - **Single Native core:** `:core` and the APK use Native rendering; canonical `projectM-TV-core[-<version>].aar` names contain Native bytes. The separate capped/core-native artifacts are retired for new releases; preserve historical releases. Deprecated `-PprojectmCoreRenderingPolicy=native` remains accepted; `capped` is rejected. QualityController is always Auto up to the physical panel and uses live FPS/memory headroom. Its fixed-mode/static-RAM compatibility methods normalize to Auto. JNI defaults Standard trails; settings are additive (`setNativeTrails`, `getNativeTrailsStatus`). The underlying projectM C API retains explicit-off compatibility controls. See `docs/RELEASING.md`.
 
 The focused `tools/milk-analyzer` subset imports PR #25's selector-domain proof and
-models the native implicit-global policy. Build its source adapters against a hash-
+models the native implicit-global policy. It also includes the separate beta activity
+scorer using the published standard core AAR through JNI, and a source-bound collection
+exporter/verifier. Its direct-delta beta model is fitted on eight historical user
+judgments transferred onto native features; archived producer and derived-scoring
+identities are kept separate. Optional offline refitting uses
+`tools/milk-analyzer/requirements-calibration.txt`. These execution-based predictions are not independent source-only
+visual forecasts. Build its source adapters against a hash-
 identified host engine before `python -m pytest tools/milk-analyzer -q`; Preset Lab CI
 performs this setup. Its results are source diagnostics, not visual certification.
 
@@ -54,7 +60,8 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) §5 (threading rules, transitions, resolution, frame pacing, threads, overlay UI, device tiers). Its title says v1.9 and §1–4 and §6–8 are historical analysis; verify against the code. Design specs, plans and evidence for engine work are in `docs/superpowers/{specs,plans,evidence}`.
 - projectM sources: `third_party/projectm` shows patched code only after a CMake configure or a manual apply; the committed source of truth is `tools/projectm-patches/`. Search both the submodule and the patches.
 - Logs for tracing behavior: native tag `projectM-Native` (`LOAD`, `PREWARM`, `TRANSITION`, `OUTPUT` lines per switch); `VisualizerRenderer` logs `STATS fps=… surface=… audio=…` every 5 s.
-- Committed generated data indexes (not code indexes): `core/src/main/assets/presets.idx` (regenerate with `tools/gen-preset-index.py` whenever presets or textures change; CI enforces `--check`) and the genre bundle in `core/src/main/assets/preset-genres/` (produced by Preset Lab, imported with `tools/import-preset-genres.py`).
+- Committed generated data indexes (not code indexes): `core/src/main/assets/presets.idx` (regenerate with `tools/gen-preset-index.py` whenever presets or textures change; CI enforces `--check`) and the collection bundle in `core/src/main/assets/preset-genres/` (current beta schema2 produced/verified with `tools/milk-analyzer/beta_export.py`;
+  legacy schema1 Preset Lab imports are historical).
 
 ## Design and user experience
 
@@ -161,7 +168,7 @@ Preserve the release/version rules above. Treat the core AAR’s interface and c
 - **Preset equation loading (patches 0029, 0033–0035):** code the evaluator rejects is compiled once more in MilkDrop's form (numbered records joined, `//`/`\\` comments removed, NS-EEL's stray `;` in parentheses read as a space); a lone `.` is the number 0; a block that still does not compile is left out like MilkDrop's `CState::RecompileExpressions` (q/t variables zero after a failed init) and reported through `projectm_set_preset_initialization_warning_event_callback`, which `native-lib.cpp` logs as `Preset code left out (<preset>): <reason> (line N, column M)`. Only parse errors fail a load. Keep accepted programs on the unchanged path.
 - **Random textures (0037):** image selection belongs to slots 00–15 in a preset and is reused across warp/composite and shader reloads. Rebuild the descriptor for each exact alias and requested mode. Within a shader, filtered `randNN_prefix` aliases choose an empty slot before unfiltered aliases; competing prefixes keep lexical precedence. Across stages, the already selected slot wins. `sampler_state` fields remain ignored (0032); name prefixes select mode. Default user-texture mode is linear/wrap. Bind emitted short aliases to the same unit as their full alias and deduplicate declaration lines. Preserve `Texture::SourcePath()` and base names for diagnostics; generated textures have no source path. Production uses `std::random_device` for each new texture choice; a host seed does not establish Android/AAR association.
 - **Blur framebuffer ownership (0041):** capture both caller read/draw framebuffer bindings before allocating or resizing blur textures. `Framebuffer::SetSize` unbinds both targets; saving after allocation sends later shapes/waves/borders to framebuffer zero when warp shaders sample blur. The native runner checks first use, unchanged size, resize, scaled blur, constant-color output and the unchanged midgit preset with isolated TGA assets. The same ownership control is verified on AM6/Mali-G52; Android framebuffer zero can be valid and hide the host error, so assert binding identity as well as checking GL errors (evidence: `docs/superpowers/evidence/midgit-framebuffer/`).
-- **Patch identity in the Dance bundle:** `tools/import-preset-genres.py` refuses a bundle whose `app_patches_sha256` differs from the current patch series. Changing the series means a re-measured bundle is needed before the next import.
+- **Predictive collection identity:** `tools/milk-analyzer/beta_export.py --check --bundle core/src/main/assets/preset-genres` validates the beta schema2 source/texture/weight inventory, frozen scoring code/model, standard published-AAR identity, raw activity formula, relative ranks and exact overlapping group membership. The numerical profile is capped2.3.3 at128×72, not a certificate of Native/TV fidelity. A changed renderer needs a separately identified run; historical schema1 Preset Lab imports do not produce the current bundle.
 - **Presets and textures:** CI rejects presets that cannot react to audio or use excluded or missing textures (`tools/check-presets.py`) and a stale `presets.idx` (`tools/gen-preset-index.py --check`). Preset Lab CI rejects tracked audio/raw capture files under `tools/preset-lab` and `core/src/main/assets/preset-genres`.
 - **Licensing and attribution:** app code LGPL-2.1 (`LICENSE`); presets and textures CC0 1.0 (`LICENSES/CC0-1.0.txt`). Record new third-party content and new patches in [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md); keep upstream attribution in patch headers and release notes.
 - **Privacy claims:** README states no network access except opt-in auto-update to GitHub, and in-memory audio analysis only. New network use or data storage contradicts published documentation and must update it.
@@ -250,7 +257,11 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 | `.github/pull_request_template.md` | Required PR sections and checklists |
 | `RELEASE_NOTES.md`, `fastlane/metadata/android/en-US/` | Historical release notes; F-Droid store listing and changelogs |
 
-Known documentation drift (2026-10-04, not yet fixed): README says it describes the app "as of version 2.1.5" while releases reach v2.2.6; `docs/ARCHITECTURE.md` §5 describes embedding `core/` as a Gradle module, while `docs/RELEASING.md` describes Milkbeat consuming the released AAR; the committed Dance bundle's `app_patches_sha256` does not match the current patch series (computed with Preset Lab's digest function, not by running the import check).
+Known documentation drift: `docs/ARCHITECTURE.md` §5 still describes embedding
+`core/` as a Gradle module, while `docs/RELEASING.md` describes Milkbeat consuming
+released AARs. Historical Dance research is retained; current collection behaviour
+is documented in `docs/user-guide/predictive-collections.md`. The beta exporter
+and numerical scoring commands are documented in `tools/milk-analyzer/README.md`.
 
 ## Mandatory workflow — scope and completion
 

@@ -62,6 +62,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          filter: blob:none  # Keep release history/tags; fetch current files on checkout.
           submodules: recursive  # projectM is built from source (third_party/projectm)
 
       - name: Determine version

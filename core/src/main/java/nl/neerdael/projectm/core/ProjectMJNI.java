@@ -65,6 +65,7 @@ public final class ProjectMJNI {
     /** Last rendered state, including actual canvas size or the diffusion fallback. */
     public static native String getNativeTrailsStatus();
     public static native void setPresetDuration(int seconds);
+    /** Preset collection: all (default), chill, normal or intense. Unknown/retired IDs use all. */
     public static native void setMusicCategory(String genreId);
     public static native String getMusicCategory();
     public static native int getCategoryPresetCount(String genreId);

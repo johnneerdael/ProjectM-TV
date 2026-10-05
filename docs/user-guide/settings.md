@@ -2,12 +2,12 @@
 
 Open the panel with Center, Enter or Menu. Use Up / Down to select a row and Left / Right to change its value.
 
-All is the default music category. Your selected category is saved.
+All is the default preset mood. Your selected collection is saved. The beta predictor uses overlapping score bands: Chill 1–30, Normal 25–75 and Intense 70–100. Saved Dance selections return to All.
 
 | Setting | Values | Default |
 |---|---|---|
 | Auto change | Off, On | On |
-| Music category | All, Dance | All |
+| Preset mood | All, Chill, Normal, Intense | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 
 The APK and the single published core use the Native renderer with **automatic resolution**. The controller adjusts render size in real time for the selected target frame rate and available memory, up to the detected full panel size. A 4K panel can render at 3840×2160 even when Android’s menus run at 1080p. Slow or memory-heavy workloads can render lower and are scaled to fill the screen.
@@ -51,4 +51,4 @@ The canonical `projectM-TV-core.aar` now contains this Native core; the separate
 
 ![Current Advanced settings and Diagnostics with automatic memory budgeting and High trails inactive at 1080p](images/setup/advanced-settings.png)
 
-The Advanced screenshot uses the current isolated emulator installation with no audio source; High is selected but inactive at its 1080p render size. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+The Advanced screenshot uses the current isolated emulator installation with no audio source; High is selected but inactive at its 1080p render size. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.

@@ -1,8 +1,8 @@
-# Shader initialization source analysis
+# MilkDrop source analysis and predictive collections beta
 
 This focused subset of the experimental analyzer from [PR #25](https://github.com/johnneerdael/ProjectM-TV/pull/25)
-imports its inductive main-Q domain and shader selector proof. It omits audience
-scoring, review APK configuration and device-running commands. The source analysis
+imports its inductive main-Q domain and shader selector proof. The separate beta
+collection tools below add numerical activity scoring using a published AAR. The source analysis
 is a diagnostic tool; parsing or lowering success does not certify appearance.
 
 ## Four initialization cases
@@ -88,3 +88,139 @@ Numerical source tests require NumPy and pytest from the existing
 - [D3D9 global shader inputs](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-writing-shaders-9)
 - [D3D9 application-driven constant initialization](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-using-shaders-9)
 - [GLSL ES 3.00 storage and initialization rules](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf)
+
+
+## Predictive collections beta
+
+The current app uses All (default), Chill1–30, Normal25–75 and Intense70–100.
+`beta_score.py` executes the standard published ProjectM-TV:core AAR through its
+JNI interface on a task-owned Android emulator. `beta_export.py` verifies complete
+source-bound results, preserves master memory weights and publishes the three
+indexes. This is numerical activity-based prediction, not a claim of source-only
+visual accuracy. The [Pages article](../../docs/user-guide/predictive-collections.md)
+describes the formulas, relative ranking and limitations.
+
+The initial run uses the pinned standard2.3.3AAR in
+`profiles/published-core-v2.3.3.json`. Before a new run, verify the latest published
+release and update the explicit pin if needed; never label another AAR flavour as
+capped. Do not edit a live run's scorer, descriptor, model, input or runtime files.
+A changed artifact creates a new run identity; old rows cannot be silently reused.
+
+Install the dependencies from `tools/preset-lab/requirements.lock`. An ARM64 API34
+emulator, adb, Android SDK34/build-tools34, NDK27.3.13750724 and JDK21 prepare the
+runner. No user recordings or raw frames are committed.
+
+Prepare a new runtime directory (for example `build/predictive-beta/runtime`):
+extract `classes.jar` and `jni/arm64-v8a/libprojectmtv.so` from the exact standard
+AAR. Compile the helper against that AAR's classes and Android34:
+
+```sh
+javac -source 8 -target 8 -cp ANDROID_SDK/platforms/android-34/android.jar:RUNTIME/classes.jar -d RUNTIME/java tools/milk-analyzer/CoreBackendRunner.java
+ANDROID_SDK/build-tools/34.0.0/d8 --min-api 34 --lib ANDROID_SDK/platforms/android-34/android.jar --output RUNTIME RUNTIME/classes.jar RUNTIME/java/nl/neerdael/projectm/analysis/CoreBackendRunner.class
+ANDROID_SDK/ndk/27.3.13750724/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android34-clang++ -shared -fPIC -O2 tools/milk-analyzer/core_backend_clock.cpp -o RUNTIME/libbackendclock.so
+```
+
+Replace `ANDROID_SDK` and `RUNTIME` with actual paths; use the NDK's `linux-x86_64`
+prebuilt directory on Linux. Different compiler output has a different recorded
+helper hash. The Java runner calls the published JNI API, selects one preset via
+an asset-index overlay, and keeps the AAR's original preset and texture content.
+The clock helper interposes only core-origin realtime/monotonic calls, calls
+`srand(12345)`, and streams top-left RGB bytes with a bounded header. Native
+`random_device` shader/noise/image choices remain production inputs.
+
+Generate the fixed mono float32 reference using NumPy, then keep it immutable:
+
+```python
+import numpy as np
+from pathlib import Path
+sample=np.arange(420*1470,dtype=np.float64)
+t=sample/44100
+quiet=.04*np.sin(2*np.pi*220*t)+.02*np.sin(2*np.pi*440*t)
+melody=.12*np.sin(2*np.pi*220*t)+.07*np.sin(2*np.pi*880*t)+.04*np.sin(2*np.pi*3200*t)
+phase=(t*2.3)%1
+kick=.5*np.exp(-phase*30)*np.sin(2*np.pi*55*t)
+pcm=np.where(t<5,quiet,np.where(t<9,melody,melody+kick))
+Path('build/predictive-beta/input.f32').write_bytes(pcm.astype('<f4').tobytes())
+```
+
+Launch a separate owned emulator. Record its actual PID, serial, AVD name and
+launch command in `owner.json`; the scorer verifies the live process and AVD before
+every preset. Its `pid`, `serial` and `avd` fields must refer to that owned instance.
+Never use another task's device, running process or result folder. The initial run
+owns emulator5592; this is a historical task identifier, not permission to reuse it.
+
+```sh
+python tools/milk-analyzer/beta_score.py --aar build/predictive-beta/core.aar --runtime build/predictive-beta/runtime --pcm build/predictive-beta/input.f32 --owner build/predictive-beta/owner.json --device emulator-5592 --remote /data/local/tmp/projectmtv-predictive-beta-20261005 --output build/predictive-beta/scores
+```
+
+Use `--limit 5` for a pilot. Reuse the same arguments to continue a matching run;
+use `--retry-unscored --only-preset "EXACT PRESET.milk"` to repair a diagnosed case before continuing. The batch now stops at its first failed measurement and refuses to continue past unresolved failures. A 120-second timeout
+is a failed measurement, not evidence that an effect is calm. Original315 language
+coverage and this full numerical run are different checks; the other agent's saved
+baseline stays read-only.
+
+When every source-bound row is scored:
+
+```sh
+python tools/milk-analyzer/beta_export.py --run build/predictive-beta/scores --aar build/predictive-beta/core.aar --bundle core/src/main/assets/preset-genres
+python tools/milk-analyzer/beta_export.py --check --bundle core/src/main/assets/preset-genres
+python -m pytest tools/milk-analyzer -q
+```
+
+The final command needs the prepared source adapters described above. The new beta
+unit tests do not launch devices. CI checks the committed bundle's source, weights,
+model hashes, ranks, exact overlapping memberships and checksums. Parsing success,
+compile success and these checks do not certify mood or appearance accuracy.
+
+
+The diagnostic-only repair preserves the exact original scorer in
+`profiles/scorers/beta-score-v1.py.txt`. Previously completed records retain their
+original evidence identity. `evidence-contexts.json` declares the original and
+repaired producers: all render/audio/model/runtime inputs must match, the archived
+source hash is pinned, and the numerical program AST must remain unchanged outside
+main's resume bookkeeping and measurement diagnostic cleanup. Changed numerical
+code or inputs cannot reuse those records. The bundle retains each row's producer
+identity and the exact source file for each context.
+
+Diagnostic collection is best effort and its errors are separate from the primary
+measurement. For example, no `.skip` file is normally created when the engine's
+skip count is zero; failure to pull that optional file does not make a completed
+native measurement unscored.
+
+
+### Direct-delta calibration repair
+
+The current `audience-model-direct-delta-v2.json` is a fresh nonnegative interval
+fit on the actual 30-Hz direct brightness and 10-Hz native motion vectors, using the
+unchanged original eight user judgments. The old `audience-model-v1.json` expected
+motion-compensated brightness and is retained solely to validate historical
+producer activity. Both original scorer versions are archived; retained measurement
+files are not rewritten. The exporter recalculates activity with the new model,
+stores original activity separately and pins a distinct `derived_scoring` identity.
+
+Calibration inputs, original feedback, exact preset hashes and measurement
+identities are in `profiles/direct-delta-calibration/`. Feedback was on core2.2.2
+under mostly unspecified music/device conditions, with a tentative sample1 and
+possible darkness defect. This transferred-label beta fit is not perceptual
+certification: held-out base-model diagnostics match4/8strict bands and6/8within
+five points. Final corpus ranks are a separate relative transform.
+
+Reproduce the fit offline (not required for normal export/verification):
+
+```sh
+python -m pip install -r tools/milk-analyzer/requirements-calibration.txt
+python tools/milk-analyzer/fit_activity_model.py
+```
+
+The timeout callback always kills its local streaming child in a `finally` block,
+even if remote ADB cleanup fails. Its diagnostic errors are retained and the timer
+is joined before the outcome is saved. Timeout still halts the batch.
+
+
+Retries now select only existing unresolved records. Naming an unmeasured or
+already scored preset with `--retry-unscored` is rejected; without `--only-preset`,
+the retry invocation repairs only selected unresolved cases. Run the normal command
+again after those failures are resolved to continue unmeasured cases. The required
+metadata pull has a 15-second timeout and records an unscored outcome if it fails,
+even after the renderer has exited. Ownership/remote setup and overlay transfers
+are bounded separately; runtime artifact pushes have a 180-second limit.

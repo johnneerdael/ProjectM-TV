@@ -95,19 +95,21 @@ The cover, artist and title of the playing track appear in the upper left for as
 
 Covers have only been verified with Spotify and [Milkbeat](https://github.com/johnneerdael/Milkbeat). SoundCloud and SmartTube have been verified to show the artist and title only, without a cover. No other music apps have been verified.
 
-## Choose All or Dance
+## Choose a preset mood
 
-Press **Center / Enter / Menu** on the remote to open settings. Move between rows with **Up / Down**; change a value with **Left / Right** or **Center**. **Back** closes the panel. It also hides after ten seconds without input.
+Open the panel with **Center**, **Enter** or **Menu**, move to **Preset mood**, and use **Left / Right** or **Center** to select a collection. **All** remains the default and uses the full library.
 
-**All** is the default and includes the full 9,606-preset library.
+| Collection | Beta score range | Intended starting point |
+|---|---|---|
+| Chill | 1–30 | Lower activity, gentler viewing |
+| Normal | 25–75 | A mix of activity levels |
+| Intense | 70–100 | Stronger movement and brightness changes |
 
-[![Main settings panel with Music category All selected](images/setup/main-settings.png)](images/setup/main-settings.png)
+The ranges overlap. Your choice is saved; Random, Previous and automatic changes stay within the collection, subject to your TV's skipped presets. A saved Dance choice returns to All after updating.
 
-For a collection selected for strong bass-caused changes on screen, select **Music category → Dance**. It contains 500 measured presets; your TV's slow- and blank-preset skip rules can reduce the number in rotation. The category is saved for the next launch. Random, Previous and automatic changes stay in that category.
+[![Earlier settings panel with All selected; the current row is Preset mood](images/setup/main-settings.png)](images/setup/main-settings.png)
 
-[![Main settings panel after switching Music category to Dance](images/setup/dance-selected.png)](images/setup/dance-selected.png)
-
-See [Dance](dance.md) for what the ranking measures and its limits. You can return to **All** at any time.
+The predictive preset engine is **beta**. Try it with your own music and viewing preferences; Chill is a prediction, not a guarantee of no flashing. See [Predictive collections](predictive-collections.md) for the scoring method and limits. You can return to All at any time.
 
 ## Check audio and picture settings
 

@@ -43,7 +43,7 @@ build/preset-lab-venv/bin/python -m pip install './tools/preset-lab[test]'
 build/preset-lab-venv/bin/preset-lab doctor --repo . --work build/preset-lab
 ```
 
-The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. [The Dance measurement article](dance-measurement.md) describes the protocol and exports.
+The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. That private host renderer supports historical research; the current beta collections use the **published ProjectM-TV:core AAR through JNI**. See [Predictive collections](predictive-collections.md) for scoring, export and verification commands.
 
 ## Test on a TV without replacing the release
 
