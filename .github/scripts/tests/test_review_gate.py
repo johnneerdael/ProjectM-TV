@@ -171,6 +171,14 @@ class EligibilityTests(unittest.TestCase):
         completed["body"] = completed["body"].replace("**Code Review**", "**Security Review**")
         self.assertTrue(self.eligible([human()], [completed, request]))
 
+    def test_legacy_security_completion_requires_current_full_sha(self):
+        request = dict(user=dict(login="author"), body="@codex security review", created_at="2026-10-05T09:00:00Z")
+        for sha, expected in [(HEAD, True), (HEAD[:7], False), (BASE, False)]:
+            with self.subTest(sha=sha):
+                completion = legacy_completion(sha=sha)
+                completion["body"] = completion["body"].replace("Codex Review:", "Codex Security Review:")
+                self.assertEqual(self.eligible([human()], [request, completion]), expected)
+
     def test_submitted_codex_review_with_findings_counts_after_resolution(self):
         review = codex_review()
         self.assertTrue(self.eligible([review], threads=[dict(isResolved=True)]))

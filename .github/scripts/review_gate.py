@@ -70,7 +70,7 @@ def eligibility(pr, reviews, comments, threads):
                     return False, "Waiting for Codex review to finish"
         else:
             commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{40})`", body)
-            if commit and commit[1] == head and "Codex Review" in body:
+            if commit and commit[1] == head and re.search(r"\bCodex(?: Security)? Review\b", body):
                 completed = completed or commit[1] == head
                 kind = "security" if re.search(r"Codex Security Review", body, re.I) else "code"
                 completed_at(kind, comment.get("created_at"))
