@@ -67,3 +67,21 @@ insufficient. User instruction: before any fresh run, fix the gap and retest tha
 exact preset to90or higher. The512-point/resampling correction passes24controls
 and the isolated diagnostic retest scores100. Preserve before/after artifacts;
 restart fresh acceptance at0/10from case009. No diagnostic rerun counts as fresh.
+
+
+## Superseding three-preset batch goal
+
+The user now requests batches of three never-before-attempted random presets,
+completed under one unchanged predictor before addressing any batch gaps. Repeat
+until a fresh batch grades100for3/3or the userstops; preset generation is excluded.
+Keep60frames and per-preset reports. Round001cases010–012grades97.5,100,90; the
+three-case perfect gate is not met. Source/model hashes were unchanged across the
+batch. Gaps: coherent flash counts and contour-transition timing.
+
+Investigation confirms all41engine patches match the CPU archive patch-series
+hash. Its lab instrumentation allowed an equationRNG seed override. The source
+driver used12345, whereas production eval uses fixed0x4141f00d. Changing only the
+source equationseed reduces case012RGB MAE0.15987→0.10398against the same saved
+reference, but does not yet resolve every discrepancy. A frozen analytic equation
+RNG diagnostic through the unchanged AAR is being used to check sequence/context.
+These diagnostic controls do not count as fresh acceptance or generator testing.
