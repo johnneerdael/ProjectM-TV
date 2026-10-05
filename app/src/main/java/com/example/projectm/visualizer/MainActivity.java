@@ -357,9 +357,9 @@ public class MainActivity extends Activity {
             budgetedDetailAllocation = detail;
             budgetedBlendAllocation = blend;
             // Invalidate queued FPS for every topology change. Growth needs a full review;
-            // reductions keep resident credit unless an earlier allocation is still pending.
+            // confirmed reductions defer pressure sampling until GL releases the old textures.
             renderBudgetGeneration = ProjectMJNI.requireRenderBudget();
-            quality.revalidateForResume(growing); // The listener publishes its chosen height.
+            quality.revalidateForAllocationChange(growing); // The listener publishes its chosen height.
             return;
         }
         visualizerView.setRenderConfiguration(display.widthForHeight(height), height,

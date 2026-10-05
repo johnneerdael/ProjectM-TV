@@ -228,8 +228,10 @@ static-RAM inputs normalize to Auto. Standard trails is the Android core default
 Medium and High add more trail detail with the same extra passes. Managed clients
 review trails/transition together with `setRenderAllocationSettings`, publish
 budget-approved dimensions/settings coherently, and acknowledge fresh memory checks
-on context recreation. Reducing allocations retains resident credit; net growth
-and pending allocations receive a full review. See [architecture](docs/ARCHITECTURE.md),
+on context recreation. Call `revalidateForAllocationChange` after invalidating the
+old FPS generation: confirmed reductions wait for the new tuple to render before
+sampling memory pressure; net growth and pending allocations receive a full review.
+Visibility resumes still use `revalidateForResume`. See [architecture](docs/ARCHITECTURE.md),
 [release workflow](docs/RELEASING.md) and [profiling](docs/PROFILING.md).
 
 ### projectM

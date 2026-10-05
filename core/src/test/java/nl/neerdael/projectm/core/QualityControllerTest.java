@@ -662,8 +662,64 @@ public class QualityControllerTest {
             q.onFpsSample(60);
             memory.snapshot = new MemorySnapshot(2L << 30, 700L << 20, 128L << 20, false);
             q.setRenderAllocationSettings(removeTrails ? 0 : 2, removeTrails ? 10 : 0);
-            q.revalidateForResume(false);
+            q.revalidateForAllocationChange(false);
             assertEquals("freeing resident allocations must not debit a full replacement", 2160, applied);
+        }
+    }
+
+    @Test
+    public void confirmedReductionWaitsForTexturesToBeReleasedBeforeSamplingPressure() throws Exception {
+        for (boolean removeTrails : new boolean[]{true, false}) {
+            FakeMemory memory = new FakeMemory();
+            QualityController q = withMemory(memory, 2048);
+            q.setRenderAllocationSettings(2, 10);
+            q.setMode(0, 2160);
+            q.onFpsSample(60);
+            // Below the reserve while the old, larger native allocation is still resident.
+            memory.snapshot = new MemorySnapshot(2L << 30, 400L << 20, 128L << 20, false);
+            q.setRenderAllocationSettings(removeTrails ? 0 : 2, removeTrails ? 10 : 0);
+            int reads = memory.reads;
+            q.revalidateForAllocationChange(false);
+            assertEquals("publish the cheaper tuple before assessing pressure", 2160, applied);
+            assertEquals("pre-release memory cannot judge the reduced allocation", reads, memory.reads);
+            // The host now applies the tuple and accepts only its completed-generation FPS.
+            memory.snapshot = new MemorySnapshot(2L << 30, 700L << 20, 128L << 20, false);
+            q.onFpsSample(60);
+            assertEquals(reads + 1, memory.reads);
+            assertEquals("the release itself restored the reserve", 2160, applied);
+        }
+    }
+
+    @Test
+    public void pressureRemainingAfterAConfirmedReductionStillLowersResolution() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 2048);
+        q.setRenderAllocationSettings(2, 10);
+        q.setMode(0, 2160);
+        q.onFpsSample(60);
+        memory.snapshot = new MemorySnapshot(2L << 30, 300L << 20, 128L << 20, true);
+        q.setRenderAllocationSettings(0, 0);
+        q.revalidateForAllocationChange(false);
+        assertEquals(2160, applied);
+        q.onFpsSample(60); // New tuple rendered, but its release did not relieve pressure.
+        assertTrue("pressure is checked even while the FPS probe settles", applied < 2160);
+        assertTrue(q.wasLastChangeForMemoryPressure());
+    }
+
+    @Test
+    public void allocationGrowthAndUnconfirmedReductionStillSampleBeforePublishing() throws Exception {
+        for (boolean growing : new boolean[]{true, false}) {
+            FakeMemory memory = new FakeMemory();
+            QualityController q = withMemory(memory, 2048);
+            q.setRenderAllocationSettings(growing ? 0 : 2, growing ? 0 : 10);
+            q.setMode(0, 2160);
+            if (growing) q.onFpsSample(60);
+            q.setRenderAllocationSettings(growing ? 2 : 0, growing ? 10 : 0);
+            memory.snapshot = null;
+            int reads = memory.reads;
+            q.revalidateForAllocationChange(growing);
+            assertEquals(reads + 1, memory.reads);
+            assertTrue("unknown RAM cannot authorize a pending allocation", applied < 2160);
         }
     }
 
@@ -676,7 +732,7 @@ public class QualityControllerTest {
         q.onFpsSample(60);
         memory.snapshot = new MemorySnapshot(2L << 30, 650L << 20, 128L << 20, false);
         q.setRenderAllocationSettings(2, 0);
-        q.revalidateForResume(false);
+        q.revalidateForAllocationChange(false);
         assertEquals("High without blending is cheaper than Standard with blending", 2160, applied);
     }
 
@@ -688,10 +744,10 @@ public class QualityControllerTest {
         q.setMode(0, 2160); // No confirmed rendered sample yet.
         memory.snapshot = new MemorySnapshot(4L << 30, 1300L << 20, 128L << 20, false);
         q.setRenderAllocationSettings(2, 0);
-        q.revalidateForResume(false);
+        q.revalidateForAllocationChange(false);
         assertEquals("an unrendered reduction still needs the full remaining allocation", 1800, applied);
         q.setRenderAllocationSettings(0, 10);
-        q.revalidateForResume(true);
+        q.revalidateForAllocationChange(true);
         assertEquals("rapid growth cannot credit the unrendered intermediate tuple", 1440, applied);
     }
 

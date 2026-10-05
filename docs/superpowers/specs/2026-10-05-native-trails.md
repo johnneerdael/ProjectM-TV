@@ -147,6 +147,13 @@ releasing the first-frame guard, and confirms an actual preset frame before FPS
 data can count as resident allocation. Pending initial allocations retain full
 budget accounting if settings change before that first rendered sample.
 
+For a confirmed allocation reduction, the host invalidates old FPS and calls
+`revalidateForAllocationChange(false)` to publish the cheaper tuple at the current
+height. Memory pressure is reassessed by the next completed-generation FPS sample,
+after native code releases the old textures. This avoids reducing resolution based
+on memory still occupied by the pending release. Growth or unconfirmed allocations
+retain fresh full-budget review; persistent pressure still lowers resolution.
+
 A preserved-context resume also samples current memory before rendering resumes.
 The controller resets stale growth credit and always republishes a chosen height
 for acknowledgement, even unchanged. These integration paths must be exercised

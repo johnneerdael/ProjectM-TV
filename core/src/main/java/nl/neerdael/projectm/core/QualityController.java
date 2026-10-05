@@ -152,12 +152,7 @@ public final class QualityController {
     public void revalidateForResume(boolean contextRecreated) {
         if (contextRecreated) fullAllocationPending = true;
         memorySnapshot = sampleMemory();
-        healthyMemorySamples = 0;
-        fpsBeforeLowering = 0;
-        loweredFrom = -1;
-        cpuBoundPreset = -1;
-        lastChangeForMemoryPressure = false;
-        resetCounters(SETTLE_MS);
+        resetAllocationProbe();
         int to = current;
         if (memorySnapshot == null || !memorySnapshot.isValid()) {
             // Missing data cannot authorize reusing/rebuilding an expensive saved allocation.
@@ -178,6 +173,30 @@ public final class QualityController {
                     || (fullAllocationPending && !RenderMemoryBudget.canGrow(memorySnapshot, 0, estimate(to)));
             listener.onApplyRenderHeight(currentHeight());
         }
+    }
+
+    /**
+     * Publish a changed allocation tuple after the host invalidates its old FPS generation.
+     * Growth and unconfirmed allocations require a fresh budget. A confirmed reduction keeps
+     * its height until GL releases the old textures; the next completed-generation FPS sample
+     * then checks actual available memory. Visibility resumes still use revalidateForResume.
+     */
+    public void revalidateForAllocationChange(boolean growing) {
+        if (growing || fullAllocationPending) {
+            revalidateForResume(growing);
+        } else {
+            resetAllocationProbe();
+            listener.onApplyRenderHeight(currentHeight());
+        }
+    }
+
+    private void resetAllocationProbe() {
+        healthyMemorySamples = 0;
+        fpsBeforeLowering = 0;
+        loweredFrom = -1;
+        cpuBoundPreset = -1;
+        lastChangeForMemoryPressure = false;
+        resetCounters(SETTLE_MS);
     }
 
     /** Standard=0, Medium=1, High=2. Medium and High allocate the same detail textures. */
