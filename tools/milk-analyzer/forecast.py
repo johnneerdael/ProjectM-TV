@@ -23,6 +23,15 @@ from shader_uniforms import source_uniforms
 from spatial import sample2d
 from sampling_policy import texture_settings
 
+# Patched projectM-eval TreeFunctions.c initializes MT19937 once per thread.
+# This policy covers a cold evaluator thread, not a later preset switch.
+PRODUCTION_EQUATION_SEED = 0x4141f00d
+PRODUCTION_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.4-cold-thread-v1'
+PRODUCTION_EQUATION_ENGINE = {
+    'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
+    'patches_sha256': 'd21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818',
+}
+
 
 def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
@@ -61,6 +70,15 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('explicit boolean quantization/retention settings required')
     if type(domain['equation_seed']) is not int or not 0<=domain['equation_seed']<2**32:
         raise ValueError('explicit uint32 equation seed required')
+    rng_policy = domain.get('equation_rng_policy', 'declared-seed-v1')
+    if rng_policy not in {'declared-seed-v1', PRODUCTION_EQUATION_RNG_POLICY}:
+        raise ValueError('unknown equation RNG policy: ' + str(rng_policy))
+    if rng_policy == PRODUCTION_EQUATION_RNG_POLICY and domain['equation_seed'] != PRODUCTION_EQUATION_SEED:
+        raise ValueError('production equation RNG seed must be 0x4141f00d')
+    if rng_policy == PRODUCTION_EQUATION_RNG_POLICY:
+        engine = source.get('parser_inputs', {}).get('engine', {})
+        if any(engine.get(key) != value for key, value in PRODUCTION_EQUATION_ENGINE.items()):
+            raise ValueError('production equation RNG engine identity mismatch')
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
@@ -196,7 +214,10 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                           random_sha256=None if random_inputs is None else digest(random_inputs),
                           materials_sha256=None if texture_bank is None else digest(texture_bank.manifest)),
         provenance=dict(reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
-                        engine_archive_sha256=archive,model_sha256=digest(model_hashes),model_modules=model_hashes),
+                        engine_archive_sha256=archive,model_sha256=digest(model_hashes),model_modules=model_hashes,
+                        equation_rng=dict(policy=rng_policy,seed=domain['equation_seed'],
+                            lifecycle='fresh evaluator thread; no previous equation draws',
+                            native_sequence_verified=False)),
         limitations=['GPU rasterization, sampling and arithmetic precision not validated',
                      'Target shader compilation/linking and fallback remain profile conditions',
                      'Initial state and RNG/resource lifecycle are declared inputs, not inferred engine startup'])

@@ -1,6 +1,12 @@
 # Source prediction and native validation loop
 
-User target: ten consecutive fresh randomly selected presets, each achieving at
+Current target: fresh batches of three previously untested random presets, with
+100/100 behavioural grades for all three in one batch. Complete each batch before
+repairing gaps. Use 60 frames per preset, report each outcome, and keep generation
+outside this goal. The sections below retain earlier checkpoints as history;
+the final batch-goal section supersedes their acceptance thresholds.
+
+Historical target: ten consecutive fresh randomly selected presets, each achieving at
 least 80/100 agreement for full visible behaviour: structure, motion, colour,
 flashing and feedback. Any failed comparison resets the streak. Diagnose the
 missing calculation/context, add a focused correction and regression evidence,
@@ -85,3 +91,18 @@ source equationseed reduces case012RGB MAE0.15987→0.10398against the same save
 reference, but does not yet resolve every discrepancy. A frozen analytic equation
 RNG diagnostic through the unchanged AAR is being used to check sequence/context.
 These diagnostic controls do not count as fresh acceptance or generator testing.
+
+The production-seed correction is now guarded by an explicit cold-thread profile
+and matching engine/patch-series identity. The native equation RNG control matched
+all 60 frames exactly in RGB8 through the unchanged published AAR. Direct ADB
+execution with file readback succeeded after streaming transport failed; the
+owned emulator remains live. Independent MT19937 draws match the CPU trace across
+33 shape instances and 60 frames. 36 focused controls pass. Preserve native evidence
+in `fixtures/visual-loop-equation-rng-repair-2026-10-05.json`. Remaining contour and
+flash gaps still require diagnosis before claiming the round is repaired.
+
+Documentation assessment: README and Pages predictive-collections guidance still
+describe the unchanged shipped beta scorer and its 2.3.3 corpus provenance, so no
+runtime claims or scores were changed there. Analyzer README and this research
+plan now describe the superseding batch goal and seed policy. No docs-site source
+or release-tooling behavior changed.

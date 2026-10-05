@@ -151,6 +151,44 @@ def test_frozen_domain_and_cold_reset_make_forecasts_repeatable():
     assert predict(source, domain=altered)['input_hashes']['domain_sha256'] != first['input_hashes']['domain_sha256']
 
 
+def test_production_equation_rng_contract_rejects_a_lab_seed():
+    source = native(BASE)
+    settings = domain(equation_rng_policy='projectmtv-core-2.3.4-cold-thread-v1')
+    with pytest.raises(ValueError, match='production equation RNG seed'):
+        predict(source, domain=settings, audio=audio(1))
+
+
+def test_production_equation_rng_sequence_and_provenance():
+    source = native(BASE + 'per_frame_1=q1=rand(1);q2=rand(1);q3=rand(1);\n'
+                    'comp_1=`shader_body {ret=float3(q1,q2,q3);}\n')
+    settings = domain(equation_rng_policy='projectmtv-core-2.3.4-cold-thread-v1')
+    settings['equation_seed'] = 0x4141f00d
+    result = predict(source, domain=settings, audio=audio(1))
+    # Independent MT19937 implementation; evaluator scales an unsigned draw by UINT32_MAX.
+    generator = np.random.RandomState(0x4141f00d)
+    expected = generator.randint(0, 2**32, size=3, dtype=np.uint32).astype(np.float64) / (2**32-1)
+    np.testing.assert_allclose(result['frames'][0]['display'][16,16,:3], expected, atol=1e-7)
+    contract = result['provenance']['equation_rng']
+    assert contract['seed'] == 0x4141f00d
+    assert contract['policy'] == 'projectmtv-core-2.3.4-cold-thread-v1'
+    assert contract['lifecycle'] == 'fresh evaluator thread; no previous equation draws'
+    assert contract['native_sequence_verified'] is False
+
+
+def test_unknown_equation_rng_policy_is_rejected():
+    with pytest.raises(ValueError, match='equation RNG policy'):
+        predict(native(BASE), domain=domain(equation_rng_policy='future-engine'), audio=audio(1))
+
+
+def test_production_equation_rng_policy_rejects_another_patch_series():
+    source = native(BASE)
+    source['parser_inputs']['engine']['patches_sha256'] = 'another-series'
+    settings = domain(equation_rng_policy='projectmtv-core-2.3.4-cold-thread-v1')
+    settings['equation_seed'] = 0x4141f00d
+    with pytest.raises(ValueError, match='equation RNG engine identity'):
+        predict(source, domain=settings, audio=audio(1))
+
+
 def test_streaming_forecast_does_not_retain_all_surface_arrays():
     source = native(BASE)
     visited = []

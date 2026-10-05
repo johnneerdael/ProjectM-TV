@@ -73,6 +73,24 @@ class SceneEquationsTest(unittest.TestCase):
         self.assertNotEqual(first['frames'],other['frames'])
         self.assertEqual(first['equation_rng_seed'],12345)
 
+    def test_production_rng_draws_carry_across_33_shape_instances_and_60_frames(self):
+        module=importlib.import_module('scene_equations')
+        source=native('per_frame_init_1=q1=rand(1);\n'
+                      'per_frame_1=q2=rand(1);\n'
+                      'shapecode_0_enabled=1\nshapecode_0_num_inst=33\n'
+                      'shape_0_per_frame1=x=rand(1);y=rand(1);rad=rand(1);\n')
+        inputs=[{**frames()[0],'time':(i+1)/30,'frame':i+1} for i in range(60)]
+        result=module.execute_scene(source,inputs,reader=test_native_reader.READER,
+                                    mesh_x=8,mesh_y=8,seed=0x4141f00d)
+        generator=np.random.RandomState(0x4141f00d)
+        expected=generator.randint(0,2**32,size=1+60*(1+33*3),dtype=np.uint32).astype(np.float64)*(1.0/(2**32-1))
+        self.assertEqual(result['frames'][0]['main']['q1'],expected[0])
+        for index,frame in enumerate(result['frames']):
+            first=1+index*100
+            self.assertEqual(frame['main']['q2'],expected[first])
+            actual=[[shape['values'][key] for key in ['x','y','rad']] for shape in frame['shapes']]
+            np.testing.assert_array_equal(actual,expected[first+1:first+100].reshape(33,3))
+
     def test_native_scalar_parsing_keeps_positive_bool_and_float_prefix_rules(self):
         module=importlib.import_module('scene_equations')
         source=native('zoom=1.2trailing\nshapecode_0_enabled=-1\n')

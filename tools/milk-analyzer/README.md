@@ -228,42 +228,39 @@ are bounded separately; runtime artifact pushes have a 180-second limit.
 
 ## Full visual prediction loop (in progress)
 
-The mathematical source forecaster and supporting semantic modules from the
-source-predictor branch are now integrated beside the production beta scorer.
-This research loop predicts structure, motion, colour, flashing and feedback
-before rendering with the unchanged published standard core2.3.4 AAR. It seeks
-ten consecutive fresh random presets each scoring at least80/100 under a frozen
-behavioural rubric. This is not an audience-score test or calibrated perceptual
-probability. Unknown or contradicted claims earn no credit.
+The mathematical source forecaster predicts structure, motion, colour, flashing
+and feedback before comparison with the unchanged published standard core 2.3.4
+AAR. The current goal is a fresh random batch of three presets with 100/100
+behavioural-rubric grades for all three. Complete each batch under an unchanged
+model before repairing its gaps. Each run uses 60 frames at 30 fps. This supersedes
+the earlier ten-case 80/100 streak; neither grade is a calibrated probability.
+Unknown or contradicted claims earn no credit. Generation is outside this work.
 
-The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`; live local
-artifacts remain in ignored `build/visual-loop/`. The first diagnostic comparison
-scores87.5/100, with an explicit colour-description miss despite close numerical
-colour/motion descriptors. This is one provisional pass, not the completed gate.
-The original prediction and comparison are preserved.
+Round 001 scored 97.5, 100 and 90. It did not meet the gate. Its frozen compact
+fixture preserves predictions, identities, measurements and misses. Earlier
+Tripgnosis trajectory errors were repaired by correcting custom-wave point counts
+and PCM resampling; that diagnostic retest earns no fresh-batch credit.
 
-CPU waveform adapters now copy/hash the patched line-geometry helper and declare
-its reference-size fields; they do not create a GPU renderer. Their forecast,
-waveform and draw-spec controls pass27tests plus16subtests on the prepared engine.
-The broader imported suite requires preparation of its pinned older/newer adapter
-profiles and reconciliation with production semantics; it is not reported passing.
-No source-coverage or whole-corpus accuracy claim follows from this checkpoint.
+The source CPU adapters contain all 41 patches matching core 2.3.4, plus declared
+lab instrumentation. They are not the Android AAR. The source driver previously
+used equation seed 12345. Production projectM-eval initializes MT19937 per thread
+with `0x4141f00d`; calling C `srand` does not seed that generator.
 
+For a fresh evaluator thread, declare `equation_rng_policy` as
+`projectmtv-core-2.3.4-cold-thread-v1` and `equation_seed` as `0x4141f00d` in the
+forecast domain. The forecaster rejects another seed or patch-series identity.
+Other explicitly supplied seeds retain the `declared-seed-v1` policy. Provenance
+records the seed and cold-thread assumption; this is not a preset-switch reset
+policy and does not fix shader/noise/image randomness.
 
-The user subsequently reduced the loop to60frames/30fps (2seconds). Its acceptance
-streak restarts separately: current checkpoint2/10, with100and90behavioural-rubric
-grades. Earlier540-frame observations remain diagnostics. The committed compact
-progress fixture preserves both original predictions, independent native
-measurements, numerical descriptors, misses and the profile change. Raw frames
-remain local; the final ten-case gate is not achieved yet.
+A separately frozen 60-frame native control through the unchanged published AAR
+matched all predicted RGB8 values exactly for three equation random draws per
+frame. An independent NumPy MT19937 control also checks draw order across 33 shape
+instances and 60 frames. These bounded controls do not certify all authored
+visuals. Correcting only the seed reduced case 012 mean RGB error from 0.15987 to
+0.10398 against its saved reference; contour timing still differs.
 
-
-The original short-window streak later failed on Tripgnosis - Astral Calculations:
-its line trajectories/feedback layout diverged despite broad descriptor agreement.
-The acceptance streak reset to0. The CPU custom-wave adapter had capped waveform
-points at480and centred/offset audio reads, while current core draws up to512points
-and resamples480inputs without waveform separation. Recurrent per-point state
-therefore missed32updates per wave/frame. The repaired same-preset diagnostic
-retest passes the user-required90gate with100behavioural-rubric points; it earns
-no fresh streak credit.24focused controls pass. A static config census identifies
-3261candidate presets, not3261certified visual defects. See the repair fixture.
+The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`. Raw artifacts
+remain in ignored `build/visual-loop/`. The broader imported suite needs prepared
+historical adapter profiles and is not reported passing. No whole-corpus accuracy
+claim or change to the shipped beta collections follows from this research.
