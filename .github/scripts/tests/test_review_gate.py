@@ -33,7 +33,7 @@ def human(state="APPROVED", sha=HEAD, login="reviewer"):
 
 
 def summary(state="Completed", sha=HEAD[:7], login=BOT):
-    return dict(user=dict(login=login), body=(
+    return dict(user=dict(login=login), updated_at="2026-10-05T10:00:00Z", body=(
         "<!-- codex-pull-request-review-summary -->\n"
         "| Review | Status | Commit | Review trigger |\n"
         f"| 📝 **Code Review** | ✅ **{state}** | `{sha}` | Manual request |"))
@@ -66,6 +66,30 @@ class EligibilityTests(unittest.TestCase):
         self.assertFalse(self.eligible(comments=[summary(sha=BASE[:7])]))
         self.assertFalse(self.eligible(comments=[summary(state="In progress")]))
         self.assertFalse(self.eligible([human()], [summary(state="In progress")]))
+
+    def test_authorized_codex_request_waits_for_later_completion(self):
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T11:00:00Z")
+        self.assertFalse(self.eligible([human()], [request]))
+        self.assertFalse(self.eligible([human()], [summary(), request]))
+        completed = summary()
+        completed["updated_at"] = "2026-10-05T12:00:00Z"
+        self.assertTrue(self.eligible([human()], [completed, request]))
+
+    def test_completed_old_codex_request_does_not_require_codex_on_every_later_commit(self):
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T09:00:00Z")
+        self.assertTrue(self.eligible([human()], [request, summary(sha=BASE[:7])]))
+
+    def test_unknown_commenter_cannot_request_review_or_fake_completion(self):
+        request = dict(user=dict(login="stranger"), author_association="NONE", body="@codex review",
+                       created_at="2026-10-05T11:00:00Z")
+        self.assertTrue(self.eligible([human()], [request]))
+
+    def test_security_review_request_needs_security_completion(self):
+        request = dict(user=dict(login="author"), body="@codex security review", created_at="2026-10-05T09:00:00Z")
+        self.assertFalse(self.eligible([human()], [summary(), request]))
+        completed = summary()
+        completed["body"] = completed["body"].replace("**Code Review**", "**Security Review**")
+        self.assertTrue(self.eligible([human()], [completed, request]))
 
     def test_submitted_codex_review_with_findings_counts_after_resolution(self):
         review = human(state="COMMENTED", login=BOT)
@@ -188,6 +212,19 @@ class ReconciliationTests(unittest.TestCase):
         self.api.ready = False
         self.gate.reconcile(self.api, 42)
         self.assertIn(("actions/runs/1/cancel", {}), self.api.writes)
+
+    def test_review_read_failure_invalidates_a_previous_passing_status(self):
+        class FailingApi(FakeGitHub):
+            def snapshot(self, number):
+                raise RuntimeError("GraphQL unavailable")
+
+            def get(self, path):
+                return self.pr
+
+        api = FailingApi(self.gate)
+        with self.assertRaisesRegex(RuntimeError, "GraphQL unavailable"):
+            self.gate.reconcile_safely(api, [42])
+        self.assertEqual(api.writes[0][0], "pending")
 
     def test_explicit_retry_can_restart_failed_validation(self):
         self.api.runs = [self.api.run("completed", "failure")]

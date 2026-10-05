@@ -1,0 +1,17 @@
+name: PR review signal
+
+# Review events execute the PR workflow revision. Keep this relay unprivileged;
+# workflow_run invokes the write-capable controller from the default branch.
+on:
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+permissions: {}
+
+jobs:
+  signal:
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Notify trusted default-branch review controller
+        run: echo 'Review state changed; default-branch controller will recheck it.'

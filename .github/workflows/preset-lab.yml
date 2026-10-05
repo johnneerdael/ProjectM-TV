@@ -11,10 +11,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: preset-lab-${{ inputs.source_ref || github.ref }}
-  cancel-in-progress: true
-
 jobs:
   measurements:
     if: github.ref == 'refs/heads/main'

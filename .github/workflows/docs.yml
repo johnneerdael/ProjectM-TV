@@ -11,10 +11,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: user-guide-${{ inputs.source_ref || github.ref }}
-  cancel-in-progress: true
-
 jobs:
   build:
     if: github.ref == 'refs/heads/main'

@@ -1,17 +1,17 @@
 name: PR review gate
 
 on:
+  push:
+    branches: [main]
   pull_request_target:
     branches: [main]
     types: [opened, closed, synchronize, reopened, edited, ready_for_review, converted_to_draft, review_requested, review_request_removed]
-  pull_request_review:
-    types: [submitted, edited, dismissed]
   issue_comment:
     types: [created, edited, deleted]
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
-    workflows: [Reviewed PR validation]
+    workflows: [Reviewed PR validation, PR review signal]
     types: [completed]
   workflow_dispatch:
     inputs:

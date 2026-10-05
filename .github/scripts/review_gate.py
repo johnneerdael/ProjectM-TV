@@ -32,6 +32,21 @@ def eligibility(pr, reviews, comments, threads):
         return False, "Waiting for requested changes to be accepted"
     head = pr["head"]["sha"]
     completed = False
+    requests, completions = {}, {}
+
+    def completed_at(kind, value):
+        if value:
+            timestamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            completions[kind] = max(timestamp, completions.get(kind, timestamp))
+
+    for comment in comments:
+        user = comment["user"]["login"]
+        trusted = user == pr["user"]["login"] or comment.get("author_association") in TRUSTED
+        request = re.match(r"^@codex\s+(security\s+)?review\b", (comment.get("body") or "").strip(), re.I)
+        if trusted and request and comment.get("created_at"):
+            kind = "security" if request[1] else "code"
+            timestamp = datetime.fromisoformat(comment["created_at"].replace("Z", "+00:00"))
+            requests[kind] = max(timestamp, requests.get(kind, timestamp))
     for comment in comments:
         if comment["user"]["login"] != CODEX:
             continue
@@ -41,22 +56,32 @@ def eligibility(pr, reviews, comments, threads):
                 if "**Code Review**" not in row and "**Security Review**" not in row:
                     continue
                 commit = re.search(r"`([0-9a-f]{7,40})`", row)
-                if commit and head.startswith(commit[1]):
-                    if "**Completed**" not in row:
-                        return False, "Waiting for Codex review to finish"
-                    completed = True
+                if commit and "**Completed**" in row:
+                    completed = completed or head.startswith(commit[1])
+                    kind = "security" if "**Security Review**" in row else "code"
+                    date = re.search(r'datetime="([^"]+)"', row)
+                    completed_at(kind, date[1] if date else comment.get("updated_at"))
+                elif commit and head.startswith(commit[1]):
+                    return False, "Waiting for Codex review to finish"
         else:
             commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{7,40})`", body)
-            if commit and head.startswith(commit[1]) and "Codex Review" in body:
-                completed = True
+            if commit and "Codex Review" in body:
+                completed = completed or head.startswith(commit[1])
+                kind = "security" if re.search(r"Codex Security Review", body, re.I) else "code"
+                completed_at(kind, comment.get("created_at"))
     for review in reviews:
         user = review["user"]
         trusted = user["login"] == CODEX or (
             user.get("type") == "User" and user["login"] != pr["user"]["login"]
             and review.get("author_association") in TRUSTED)
+        if user["login"] == CODEX and review.get("submitted_at") and review["state"] in {"APPROVED", "COMMENTED"}:
+            kind = "security" if re.search(r"Codex Security Review", review.get("body") or "", re.I) else "code"
+            completed_at(kind, review["submitted_at"])
         if (trusted and review.get("submitted_at") and review["commit_id"] == head
                 and review["state"] in {"APPROVED", "COMMENTED"}):
             completed = True
+    if any(kind not in completions or completions[kind] < timestamp for kind, timestamp in requests.items()):
+        return False, "Waiting for requested Codex reviews to finish"
     if not completed:
         return False, "Waiting for a completed review of the latest commit"
     if pr.get("mergeable") is not True or not pr.get("merge_commit_sha"):
@@ -184,6 +209,34 @@ def reconcile(api, number, retry=False):
         pr_number=str(number), head_sha=head, base_sha=pr["base"]["sha"], merge_sha=pr["merge_commit_sha"])))
 
 
+def snapshot_safely(api, number):
+    try:
+        return api.snapshot(number)
+    except (RuntimeError, subprocess.CalledProcessError, KeyError):
+        pr = api.get(f"pulls/{number}")
+        if pr["state"] == "open" and pr["base"]["ref"] == "main":
+            api.status(pr["head"]["sha"], "pending", "Unable to verify review state; recheck required")
+        raise
+
+
+def reconcile_safely(api, numbers, retry=False):
+    errors = []
+    for number in numbers:
+        try:
+            reconcile(api, number, retry)
+        except (RuntimeError, subprocess.CalledProcessError, KeyError) as error:
+            # Fail closed if review reads fail after a previously successful build.
+            try:
+                pr = api.get(f"pulls/{number}")
+                if pr["state"] == "open" and pr["base"]["ref"] == "main":
+                    api.status(pr["head"]["sha"], "pending", "Unable to verify review state; recheck required")
+            except (RuntimeError, subprocess.CalledProcessError, KeyError) as status_error:
+                errors.append(f"PR #{number}: cannot invalidate status: {status_error}")
+            errors.append(f"PR #{number}: {error}")
+    if errors:
+        raise RuntimeError("; ".join(errors))
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=["reconcile", "preflight", "finish"])
@@ -194,19 +247,12 @@ def main():
     api = GitHub(args.repo)
     if args.mode == "reconcile":
         numbers = [args.pr] if args.pr else [pr["number"] for pr in api.pages("pulls?state=open&base=main&per_page=100")]
-        errors = []
-        for number in numbers:
-            try:
-                reconcile(api, number, args.retry)
-            except (RuntimeError, subprocess.CalledProcessError, KeyError) as error:
-                errors.append(f"PR #{number}: {error}")
-        if errors:
-            raise RuntimeError("; ".join(errors))
+        reconcile_safely(api, numbers, args.retry)
         return
     head, base, merge = (os.environ[name] for name in ["PR_HEAD", "PR_BASE", "PR_MERGE"])
     if any(not re.fullmatch(r"[0-9a-f]{40}", sha) for sha in [head, base, merge]):
         raise ValueError("Full commit SHAs are required")
-    pr, (ready, reason) = api.snapshot(args.pr)
+    pr, (ready, reason) = snapshot_safely(api, args.pr)
     ready = ready and matches(pr, head, base, merge)
     if args.mode == "preflight":
         if not ready:

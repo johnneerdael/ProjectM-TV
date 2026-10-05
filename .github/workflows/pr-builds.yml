@@ -21,6 +21,8 @@ on:
         required: true
         type: string
 
+cache-mode: none
+
 permissions:
   contents: read
   pull-requests: read
@@ -33,6 +35,10 @@ jobs:
   preflight:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: read
+      statuses: write
     outputs:
       merge_sha: ${{ steps.review.outputs.merge_sha }}
     steps:

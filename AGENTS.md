@@ -182,7 +182,7 @@ Preserve the release/version rules above. Treat the core AAR’s interface and c
 Follow the repository's configured formatting and lint rules. Review automatic formatting changes and avoid unrelated churn. Fix violations rather than disabling checks to obtain a passing result.
 
 - No project-wide source formatter or linter is configured: no `.editorconfig`, `.clang-format`, ktlint/detekt, `lint.xml`, pre-commit or Python lint configuration outside `third_party/`. CI does not run Android Lint. Match the surrounding style (Java: 4-space indent).
-- Validate workflow changes with `actionlint`. Older local versions reject GitHub's documented `queue: max`; use only the narrow `-ignore 'unexpected key "queue" for "concurrency" section'` if necessary, and do not suppress other errors. Also run `git diff --check`.
+- Validate workflow changes with `actionlint`. Older local versions reject GitHub's documented `queue: max` and `cache-mode: none`; use narrow ignores for those two schema fields only if necessary, and do not suppress other errors. Also run `git diff --check`.
 - The JNI library compiles with `-Wall -Wextra -Wno-unused-parameter`; do not add warnings.
 - Checks that act as lint in CI: `release_notes.py validate` (PR body), `tools/gen-preset-index.py --check`, `tools/check-presets.py`, `mkdocs build --strict` (user guide). `tools/check-patch-series.sh` is not in CI; CI applies the series through CMake during the native tests and `assembleRelease`.
 
@@ -234,7 +234,8 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 |---|---|---|
 | Android CI/CD (`android.yml`) | main push or main manual run | Calls Android build, Preset Lab and User guide; publishes only after the full suite passes, updates Milkbeat and deploys Pages. Main runs queue without cancellation |
 | Android build (`android-build.yml`) | reusable call only | Native/tooling/assets and JVM tests; Native APK/AAR/mapping artifacts (30 days). Main receives signing secrets; PR calls receive none and disable Gradle cache access |
-| PR review gate (`review-gate.yml`) | PR/review/comment events, five-minute schedule, validation completion, manual | Trusted-main controller checks current Codex or qualified human review, outstanding review requests/changes and every thread; dispatches eligible PR validation and cancels obsolete runs. Schedules may be delayed by GitHub |
+| PR review gate (`review-gate.yml`) | PR/comment/main-push events, trusted workflow_run relay from an unprivileged review signal, five-minute schedule, validation completion, manual | Trusted-main controller checks current Codex or qualified human review, outstanding review requests/changes and every thread; dispatches eligible PR validation and cancels obsolete runs. Schedules may be delayed by GitHub |
+| PR review signal (`review-signal.yml`) | submitted/edited/dismissed review events | Unprivileged relay with no checkout; default-branch controller follows its completion |
 | Reviewed PR validation (`pr-builds.yml`) | controller/manual dispatch on main | Preflight validates immutable head/base/test-merge SHAs; runs all Android, Preset Lab and guide builds without secrets; required `Reviewed PR builds` status passes only after actual success and a final eligibility/revision check |
 | PR release notes (`release-notes.yml`) | PR opened, synchronized, reopened, edited, ready for review | `release_notes.py validate` on the PR body |
 | User guide (`docs.yml`) | reusable call from main/eligible PR validation, or main manual run | `mkdocs build --strict` and Pages artifact; main Android pipeline owns deployment |
