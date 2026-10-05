@@ -1,6 +1,6 @@
 # Focused Native trails validation
 
-Use a dedicated, task-owned Android arm64 emulator. Do not use the corpus owner's
+Use a dedicated, task-owned Android emulator or a physical TV authorized for this task. Do not use the corpus owner's
 `emulator-5580` or reuse another task's work directory. Physical GPU performance
 and compatibility cannot be inferred from an emulator.
 
@@ -18,6 +18,11 @@ python tools/native-trails/build_validation.py --commit BASELINE_SHA --policy na
 python tools/native-trails/build_validation.py --commit CANDIDATE_SHA --policy native --role candidate-native --work build/native-trails/workers
 python tools/native-trails/run_validation.py run --device OWNED_EMULATOR --workers build/native-trails/workers --presets tools/native-trails/presets.txt --work build/native-trails/focused
 ```
+
+The builder defaults to `--abi arm64-v8a`. For a TV running 32-bit Android (check
+`adb -s DEVICE shell getprop ro.product.cpu.abilist`), build both comparison roles
+with `--abi armeabi-v7a`. The selected ABI is recorded in the build identity;
+the production APK/core continue to include both supported ABIs.
 
 The builders refuse existing role directories. Each build exports a committed
 revision, composes the existing Preset Lab deterministic engine instrumentation
