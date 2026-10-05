@@ -8,11 +8,11 @@ import tempfile
 import unittest
 
 
-WORKFLOW = Path(__file__).resolve().parents[2] / "workflows/android.yml"
+WORKFLOW = Path(__file__).resolve().parents[2] / "workflows/android-build.yml"
 
 
 def packaging_scripts(release):
-    text = WORKFLOW.read_text().split("\n  apk:\n", 1)[1].split("\n  release:\n", 1)[0]
+    text = WORKFLOW.read_text().split("\n  apk:\n", 1)[1]
     for match in re.finditer(r"^      - name: ([^\n]+)\n(.*?)(?=^      - |\Z)", text, re.M | re.S):
         name, block = match.groups()
         if not (name.startswith("Build release APK") or name == "Name APK" or "core AAR" in name):

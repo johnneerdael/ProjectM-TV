@@ -1,0 +1,58 @@
+name: PR review gate
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, closed, synchronize, reopened, edited, ready_for_review, converted_to_draft, review_requested, review_request_removed]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+  issue_comment:
+    types: [created, edited, deleted]
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_run:
+    workflows: [Reviewed PR validation]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number; leave blank to recheck all open main PRs'
+        type: string
+        default: ''
+      retry_build:
+        description: 'Retry failed validation for the specified PR'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pull-requests: read
+  statuses: write
+  actions: write
+
+concurrency:
+  group: pr-review-controller
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  review-gate:
+    if: >-
+      github.event_name != 'issue_comment' || github.event.issue.pull_request
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      # Never check out or execute PR code with this write-capable token.
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Reconcile review eligibility and dispatch full validation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pr_number || github.event.pull_request.number || github.event.issue.number || '0' }}
+          RETRY_BUILD: ${{ inputs.retry_build }}
+        run: |
+          args=()
+          if [ "$RETRY_BUILD" = true ] && [ "$PR_NUMBER" != 0 ]; then args+=(--retry); fi
+          python3 .github/scripts/review_gate.py reconcile --pr "$PR_NUMBER" "${args[@]}"

@@ -1,54 +1,36 @@
 name: User guide
 
 on:
-  pull_request:
-    paths:
-      - 'docs/user-guide/**'
-      - 'docs/site-requirements.txt'
-      - 'mkdocs.yml'
-      - '.github/workflows/docs.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'docs/user-guide/**'
-      - 'docs/site-requirements.txt'
-      - 'mkdocs.yml'
-      - '.github/workflows/docs.yml'
+  workflow_call:
+    inputs:
+      source_ref:
+        type: string
+        default: ''
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: user-guide-${{ github.ref }}
+  group: user-guide-${{ inputs.source_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.source_ref || github.sha }}
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-          cache: pip
+          cache: ${{ inputs.source_ref == '' && 'pip' || '' }}
           cache-dependency-path: docs/site-requirements.txt
       - run: python -m pip install -r docs/site-requirements.txt
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v4
         with:
           path: build/user-guide-site
-
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
-        id: deployment

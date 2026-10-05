@@ -14,7 +14,7 @@ core/src/test/native/run_native_tests.sh
 
 The native runner also builds the patched projectM engine with ASan/UBSan and checks shader macro preprocessing, contextual identifiers such as `sample`, postfix expressions, numerical shader output and custom waveform audio bounds. It also compiles the affected shader sections of 16 unchanged bundled presets, with their file hashes checked at configure time. It also checks random-image alias identity, requested sampler modes, shared slots and numerical samples against isolated known-value textures. Blur regressions preserve separate read/draw targets on first use and resize, check constant-colour output at normal and reference-scaled sizes, and fully render the unchanged `midgitstraights of majillaen - featy sweet.milk` with isolated TGA images. It requires CMake and a JDK; the GL tests use EGL/GLES development libraries on Linux or the OpenGL framework on macOS.
 
-Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
+Feature-branch pushes do not start CI builds. A ready PR targeting `main` starts the full build suite only after a completed Codex or human review of its latest commit, with all review threads resolved and no pending reviews or changes requested. The review gate periodically rechecks thread resolution; GitHub may delay scheduled runs. Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
 
 ## Core rendering policies
 
@@ -70,7 +70,7 @@ build/docs-env/bin/mkdocs serve
 build/docs-env/bin/mkdocs build --strict
 ```
 
-The User guide workflow validates the site and deploys main-branch documentation to GitHub Pages. Documentation changes do not require an APK release or a version bump.
+The User guide workflow builds the site as part of reviewed PR validation and the main pipeline. The main pipeline deploys the site to GitHub Pages after all validation builds pass. Every successfully tested main merge also publishes the APK and core AAR, including documentation-only merges; routine changes do not manually bump versions.
 
 ## Shader initialization diagnostics
 
