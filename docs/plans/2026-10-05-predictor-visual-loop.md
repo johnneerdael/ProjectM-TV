@@ -54,3 +54,7 @@ results: case002100/100,case00390/100; provisional streak2/10. The latter retain
 brightness/overlay-attribution misses. These are frozen behavioural-rubric grades,
 not calibrated accuracy probabilities. Later changes and other music remain
 unassessed by this deliberately shortened window.
+
+Checkpoint update: four short-window passes now recorded (100,90,97.5,100).
+Case004retains a flash-event-count miss; case005shows close broad colour, glow and
+flash correspondence. Current goal remains incomplete at4/10.

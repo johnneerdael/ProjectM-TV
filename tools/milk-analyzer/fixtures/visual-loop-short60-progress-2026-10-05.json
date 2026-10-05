@@ -1,5 +1,5 @@
 {
-  "status": "incomplete2of10 consecutive short-window passes",
+  "status": "incomplete4of10 consecutive short-window passes",
   "protocol": {
     "version": 2,
     "scope": "Full visible behaviour within60frames at30fps (2seconds); no later-behaviour guarantee",
@@ -566,6 +566,558 @@
           "median_speed_viewports_per_second": 0.5693596601486206,
           "p95_speed_viewports_per_second": 3.3487977027893057,
           "mean_acceleration_viewports_per_second_squared": 5.401416153483279,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      }
+    },
+    {
+      "case": 4,
+      "prediction": {
+        "case": 4,
+        "preset": "amandio c - prime forms keylontiq pseudoskienke blanco membership tape aural plastcopule.milk",
+        "sha256": "9085fab89931f8a6ff5ea826837b2702a0341a3c74b7b5782cd16b9b016801f7",
+        "frames": 60,
+        "frozen_utc": "2026-10-05T17:54:56.235497+00:00",
+        "claims": {
+          "structure": [
+            "A bright, approximately left/right mirrored feedback pattern fills the frame.",
+            "A diffuse pale/grey central area or circular focus contrasts with more detailed coloured material around it.",
+            "The coloured regions have ragged glowing edges and noisy organic texture rather than clean flat tile boundaries.",
+            "Repeated or recirculating forms build from the source-drawn geometry and feedback, without a photographic background."
+          ],
+          "motion": [
+            "The pattern evolves mainly through local noise-driven flow and boundary deformation.",
+            "Overall tracked motion is comparatively slow/moderate, around0.078viewport widths per second; some edges move faster.",
+            "The structure morphs and smears rather than performing a rigid high-speed whole-screen rotation.",
+            "The two-second view changes in texture/brightness even while a pale central focus persists."
+          ],
+          "colour": [
+            "The scene is bright overall, with mean normalized luma around0.545.",
+            "Green/yellow and cyan/blue edge regions surround a pale central/background field.",
+            "Several hues coexist, about6.3effective spatial hue bins, with moderate saturation around0.47.",
+            "Dark or strongly coloured pockets can contrast with the pale field; the result is not consistently black."
+          ],
+          "flashing": [
+            "Strong broad brightness transitions are expected, including an early large darkening.",
+            "Source predicts two coherent brightening and two darkening transitions within60frames.",
+            "Peak mean brightness change is large, around0.57, and one transition affects nearly the whole frame.",
+            "This short-window prediction therefore includes flashing; it is not a no-flash chill prediction."
+          ],
+          "feedback": [
+            "Three colour channels undergo different sampling/decay/diffusion, producing retained coloured layers and smearing.",
+            "The composite averages the frame with a horizontal mirror, giving visible bilateral structure.",
+            "Blur subtraction magnifies edges and highlights, followed by a0.7-minus-colour operation that creates the pale/bright appearance.",
+            "The feedback evolves progressively; exact high-frequency noise patches remain stochastic."
+          ]
+        },
+        "basis": "Original full code and source-only60frame numerical forecast; no native case004frames viewed",
+        "reference_frames_seen": false
+      },
+      "seal": {
+        "prediction_sha256": "7a293b86b2e834ad861cc4967afe3ee12a9895953c7ebc14acd2e82d1f4d4230",
+        "math_prediction_sha256": "1c1cfdd65bcb74b975344c859b9671d5fd1026bc030d716ffb7076742bc0070f",
+        "pixel_sha256": "59eb67c696ee785e1442d681fa087bf9a11563fcfe52ca1881d0eab5a8e24420",
+        "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6",
+        "reference_frames_seen": false,
+        "frozen_utc": "2026-10-05T17:54:56.235497+00:00"
+      },
+      "assessment": {
+        "case": 4,
+        "profile": "short60",
+        "agreement_points": 97.5,
+        "category_points": {
+          "structure": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "motion": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "colour": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "flashing": [
+            5,
+            2.5,
+            5,
+            5
+          ],
+          "feedback": [
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        "critical_contradictions": [],
+        "passes": true,
+        "prediction_seal": {
+          "prediction_sha256": "7a293b86b2e834ad861cc4967afe3ee12a9895953c7ebc14acd2e82d1f4d4230",
+          "math_prediction_sha256": "1c1cfdd65bcb74b975344c859b9671d5fd1026bc030d716ffb7076742bc0070f",
+          "pixel_sha256": "59eb67c696ee785e1442d681fa087bf9a11563fcfe52ca1881d0eab5a8e24420",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T17:54:56.235497+00:00"
+        },
+        "evaluated_utc": "2026-10-05T17:57:43.630292+00:00",
+        "observations": [
+          "Bilateral pale centre, glowing coloured ragged regions, local flow and layered feedback agree.",
+          "Source/native mean luma0.5454/0.5531, saturation0.4715/0.4463, motion0.0784/0.0804.",
+          "Large broad flashes correctly forecast. Exact event count differs: source2brightening/2darkening, native1/2.",
+          "Peak mean brightness change0.5738predicted/0.5138observed; fine stochastic texture and threshold crossing differ."
+        ],
+        "missing_information": [
+          "Exact coherent event count under an unbound noise realization remains uncertain; the broad flashing classification agrees."
+        ],
+        "scope": "Frozen behavioural-claim rubric;2second window only, not calibrated perceptual probability"
+      },
+      "capture": {
+        "status": "captured",
+        "frames": 60,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "amandio c - prime forms keylontiq pseudoskienke blanco membership tape aural plastcopule.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "pixel_sha256": "9b9ffdd370f07a42c3f19c890746a8952b6fc5f24515df8a1ca0277b40ff110a",
+        "cleanup_errors": []
+      },
+      "source_descriptors": {
+        "schema_version": 1,
+        "basis": "source-only prediction",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.5454128200809161,
+          "mean_contrast": 0.09773838308950265,
+          "mean_saturation": 0.4714564132193724,
+          "mean_coloured_fraction": 0.6795274522569444,
+          "mean_effective_hue_bins": 6.294357887106914,
+          "temporal_effective_hue_bins": 8.06494166683338
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.5737864375114441,
+          "peak_brightness_change_area": 0.9802788628472222,
+          "peak_paired_luma_area_product": 0.5624707164808771,
+          "peak_brightening_screen_area": 0.5697699652777778,
+          "peak_darkening_screen_area": 0.9802788628472222,
+          "peak_visible_brightening_fraction": 0.5769695637841995,
+          "peak_visible_darkening_fraction": 0.9802788628472222,
+          "peak_rgb_change_area": 0.9953884548611112,
+          "coherent_brightening_transitions": 2,
+          "coherent_darkening_transitions": 2,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.27236507056697906,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.9830508474576272,
+          "peak_untracked_brightness_change_screen_area": 0.9802788628472222,
+          "matched_brightness_change_p95": 0.15715114027261728,
+          "peak_matched_brightness_change_p95": 0.22276636958122253,
+          "peak_matched_brightening_screen_area": 0.062337239583333336,
+          "peak_matched_darkening_screen_area": 0.08146158854166667,
+          "mean_supported_area": 0.705812417684387,
+          "median_speed_viewports_per_second": 0.078377615660429,
+          "p95_speed_viewports_per_second": 1.093784981966018,
+          "mean_acceleration_viewports_per_second_squared": 0.584564989313845,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "native_descriptors": {
+        "schema_version": 1,
+        "basis": "observed published-core display",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.5530528383950393,
+          "mean_contrast": 0.09548547770828009,
+          "mean_saturation": 0.4462689454356829,
+          "mean_coloured_fraction": 0.6604031032986112,
+          "mean_effective_hue_bins": 6.69744766223642,
+          "temporal_effective_hue_bins": 8.724125438965194
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.5137736797332764,
+          "peak_brightness_change_area": 0.9776475694444444,
+          "peak_paired_luma_area_product": 0.502289589235766,
+          "peak_brightening_screen_area": 0.5715874565972222,
+          "peak_darkening_screen_area": 0.9776475694444444,
+          "peak_visible_brightening_fraction": 0.5722238818129973,
+          "peak_visible_darkening_fraction": 0.9776475694444444,
+          "peak_rgb_change_area": 0.9957682291666666,
+          "coherent_brightening_transitions": 1,
+          "coherent_darkening_transitions": 2,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.3486838434864501,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.9830508474576272,
+          "peak_untracked_brightness_change_screen_area": 0.9776475694444444,
+          "matched_brightness_change_p95": 0.13713589012622826,
+          "peak_matched_brightness_change_p95": 0.2263079285621643,
+          "peak_matched_brightening_screen_area": 0.06032986111111111,
+          "peak_matched_darkening_screen_area": 0.08753797743055555,
+          "mean_supported_area": 0.7130239201688219,
+          "median_speed_viewports_per_second": 0.0804002620279789,
+          "p95_speed_viewports_per_second": 0.8863077640533438,
+          "mean_acceleration_viewports_per_second_squared": 0.4145619915521745,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      }
+    },
+    {
+      "case": 5,
+      "prediction": {
+        "case": 5,
+        "preset": "LuxXx - my flashin freyens.milk",
+        "sha256": "6b1a919dd101e6dfdc19eb012f28b5ffe36112994a70b4de30443c017ff698df",
+        "frames": 60,
+        "frozen_utc": "2026-10-05T17:59:55.452984+00:00",
+        "claims": {
+          "structure": [
+            "Very broad soft colour fields dominate, with a few intense glowing blob-like or circular highlights.",
+            "Bright highlights appear in the upper area and can approach white; no dense fine fractal/tunnel surface is predicted here.",
+            "Shapes have soft bloom/halos, amplified by several blur samples in composite.",
+            "At the end of the short window much of the picture can be dark while bright glowing remnants remain."
+          ],
+          "motion": [
+            "Glowing shapes drift or change position/size while diffuse feedback trails follow them.",
+            "Tracked motion is moderate, source median around0.155viewport widths per second with local upper tail around1.03.",
+            "The visual alternates between broad coloured fields and isolated highlights rather than a rigid camera orbit through geometry.",
+            "Feedback sampling pulls soft image material radially and spreads it into halos."
+          ],
+          "colour": [
+            "Early visible fields are strongly magenta/pink and then red, with pale or white bright cores.",
+            "By about2seconds the source prediction is mainly dark with white/pale-green remnants.",
+            "Saturation is high overall, about0.75, with low simultaneous hue diversity around1.53bins.",
+            "Average luma about0.284 masks substantial dark/bright temporal changes rather than a steady uniform dim picture."
+          ],
+          "flashing": [
+            "At least one strong broad brightening is predicted in these60frames.",
+            "Source maximum mean brightness increase is about0.56 with up to the whole picture changing brightness.",
+            "This is visibly more brightness-reactive than the preceding non-strobing tunnel example.",
+            "A broad colour/brightness excursion is expected rather than only tiny localized speckle flicker."
+          ],
+          "feedback": [
+            "Five radial texture samples spread previous-frame light into broad glow.",
+            "Subtracting0.01 and multiplying0.975 makes old material fade in the warp stage.",
+            "Composite strongly boosts blur1 and adds a centre-rescaled blur2 sample, exaggerating bloom and large soft highlights.",
+            "Persistent glowing remnants can survive into the later dark part of the short window."
+          ]
+        },
+        "basis": "Original source plus frozen60-frame numerical forecast; no native case005frames viewed",
+        "reference_frames_seen": false
+      },
+      "seal": {
+        "prediction_sha256": "cf505c944b161872d575bc60dd206b0aabad31e45e5428bb8bc68a1520e3b1b1",
+        "math_prediction_sha256": "04c89eb687e5c900f597a441af16af480b50f0e2a156c1890aa43955f15f2920",
+        "pixel_sha256": "4fab6a5a697de67a5edb8bc544e329d4bff8e4a5a5908ff80436169bee3263cf",
+        "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6",
+        "reference_frames_seen": false,
+        "frozen_utc": "2026-10-05T17:59:55.452984+00:00"
+      },
+      "assessment": {
+        "case": 5,
+        "profile": "short60",
+        "agreement_points": 100,
+        "category_points": {
+          "structure": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "motion": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "colour": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "flashing": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "feedback": [
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        "critical_contradictions": [],
+        "passes": true,
+        "prediction_seal": {
+          "prediction_sha256": "cf505c944b161872d575bc60dd206b0aabad31e45e5428bb8bc68a1520e3b1b1",
+          "math_prediction_sha256": "04c89eb687e5c900f597a441af16af480b50f0e2a156c1890aa43955f15f2920",
+          "pixel_sha256": "4fab6a5a697de67a5edb8bc544e329d4bff8e4a5a5908ff80436169bee3263cf",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T17:59:55.452984+00:00"
+        },
+        "evaluated_utc": "2026-10-05T18:01:06.598652+00:00",
+        "observations": [
+          "Broad magenta then red fields, moving glowing white blobs and later dark field match the frozen source forecast.",
+          "Mean luma0.28450/0.28458 and saturation0.74746/0.74740 closely agree.",
+          "One large brightening event predicted and observed; peak mean brightness change0.56035/0.56005.",
+          "Motion0.15487predicted/0.14444observed remains within the stated moderate range.",
+          "Radial blur/bloom, fading feedback and persistent bright remnants agree."
+        ],
+        "scope": "Frozen behavioural-claim agreement, not pixel/perceptual probability;2seconds only"
+      },
+      "capture": {
+        "status": "captured",
+        "frames": 60,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "LuxXx - my flashin freyens.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "pixel_sha256": "7d46cafe8a3db6ab2a6f23dbac4f30e384e1274ffd06c945240e15faf5e663a8",
+        "cleanup_errors": []
+      },
+      "source_descriptors": {
+        "schema_version": 1,
+        "basis": "source-only prediction",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.284497183188796,
+          "mean_contrast": 0.15353604927659034,
+          "mean_saturation": 0.7474636571481824,
+          "mean_coloured_fraction": 0.8292118778935185,
+          "mean_effective_hue_bins": 1.5250705524437975,
+          "temporal_effective_hue_bins": 2.804179839779902
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.5603468418121338,
+          "peak_brightness_change_area": 1.0,
+          "peak_paired_luma_area_product": 0.5603468418121338,
+          "peak_brightening_screen_area": 1.0,
+          "peak_darkening_screen_area": 0.22401258680555555,
+          "peak_visible_brightening_fraction": 1.0,
+          "peak_visible_darkening_fraction": 0.22401258680555555,
+          "peak_rgb_change_area": 1.0,
+          "coherent_brightening_transitions": 1,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.09044185981228413,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.4536675347222222,
+          "matched_brightness_change_p95": 0.09271432161331176,
+          "peak_matched_brightness_change_p95": 0.6929156184196472,
+          "peak_matched_brightening_screen_area": 0.5463324652777778,
+          "peak_matched_darkening_screen_area": 0.005533854166666667,
+          "mean_supported_area": 0.1548568811793785,
+          "median_speed_viewports_per_second": 0.15487349033355713,
+          "p95_speed_viewports_per_second": 1.0309760689735408,
+          "mean_acceleration_viewports_per_second_squared": 1.7151366150350191,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "native_descriptors": {
+        "schema_version": 1,
+        "basis": "observed published-core display",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.2845763750374317,
+          "mean_contrast": 0.1535332435121139,
+          "mean_saturation": 0.7474009387195111,
+          "mean_coloured_fraction": 0.8292629665798611,
+          "mean_effective_hue_bins": 1.5251063386848491,
+          "temporal_effective_hue_bins": 2.8038951757136488
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.5600517988204956,
+          "peak_brightness_change_area": 1.0,
+          "peak_paired_luma_area_product": 0.5600517988204956,
+          "peak_brightening_screen_area": 1.0,
+          "peak_darkening_screen_area": 0.2234429253472222,
+          "peak_visible_brightening_fraction": 1.0,
+          "peak_visible_darkening_fraction": 0.2234429253472222,
+          "peak_rgb_change_area": 1.0,
+          "coherent_brightening_transitions": 1,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.09089234580755286,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.4603407118055556,
+          "matched_brightness_change_p95": 0.09208632037043571,
+          "peak_matched_brightness_change_p95": 0.6906173229217529,
+          "peak_matched_brightening_screen_area": 0.5396592881944444,
+          "peak_matched_darkening_screen_area": 0.005425347222222222,
+          "mean_supported_area": 0.15473228210334275,
+          "median_speed_viewports_per_second": 0.1444414108991623,
+          "p95_speed_viewports_per_second": 1.0228663206100461,
+          "mean_acceleration_viewports_per_second_squared": 1.702412911934222,
           "mean_warp_query_displacement": null
         },
         "structure": {
