@@ -1,6 +1,8 @@
 # Build and test
 
-ProjectM TV embeds projectM 4.1.7 with the app's patch series. The Android app, offline analyzer and documentation site have separate build dependencies.
+ProjectM TV embeds **ProjectM TV Engine**, our extensively modified fork of projectM based on upstream version 4.1.7, with the ordered patch series in `tools/projectm-patches/`. The Android app, offline analyzer and documentation site have separate build dependencies.
+
+The published core AAR shares the app's release version. `ProjectMJNI.getVersion()` retains its existing meaning: the upstream projectM version, not the identity of the patched build. Record the release version, source revision and artifact checksum for reproducible engine comparisons. See the [patch inventory and upstream attribution](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/THIRD_PARTY.md).
 
 ## Android app
 

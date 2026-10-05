@@ -1,0 +1,365 @@
+{
+  "emulator-final": {
+    "presets": [
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "profiles": {
+          "standard_before": {
+            "mae_authored": 0.20079802442342043,
+            "luma_ratio": 0.9762732987406193,
+            "contrast_ratio": 0.0512641864800564,
+            "luma_absolute_error": 0.14810288790613413,
+            "contrast_absolute_error": 0.11458546161156846,
+            "frame_mean_ms": 3.483468838888888,
+            "frame_p90_ms": 4.333583
+          },
+          "standard": {
+            "mae_authored": 0.00027654484983941074,
+            "luma_ratio": 0.9999966975941859,
+            "contrast_ratio": 0.9996462722024548,
+            "luma_absolute_error": 1.2684613466262817e-06,
+            "contrast_absolute_error": 4.192302003502846e-05,
+            "frame_mean_ms": 4.417984494444444,
+            "frame_p90_ms": 6.132959
+          },
+          "medium": {
+            "mae_authored": 0.00035665267569129355,
+            "luma_ratio": 0.9999957075863,
+            "contrast_ratio": 0.999740079556438,
+            "luma_absolute_error": 3.2903626561164856e-06,
+            "contrast_absolute_error": 3.3916905522346497e-05,
+            "frame_mean_ms": 7.801648258333326,
+            "frame_p90_ms": 9.281666
+          },
+          "high": {
+            "mae_authored": 0.0004851094818150159,
+            "luma_ratio": 0.9999961324190975,
+            "contrast_ratio": 0.9998314784277137,
+            "luma_absolute_error": 4.014931619167328e-06,
+            "contrast_absolute_error": 2.8154347091913223e-05,
+            "frame_mean_ms": 8.088041880555554,
+            "frame_p90_ms": 9.436792
+          }
+        }
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "profiles": {
+          "standard_before": {
+            "mae_authored": 0.019412838388234377,
+            "luma_ratio": 0.4727003181761694,
+            "contrast_ratio": 0.5833429127016379,
+            "luma_absolute_error": 0.01165460201445967,
+            "contrast_absolute_error": 0.01249347545672208,
+            "frame_mean_ms": 4.095956588888887,
+            "frame_p90_ms": 5.064416
+          },
+          "standard": {
+            "mae_authored": 0.0008388256828766316,
+            "luma_ratio": 1.0000884120840148,
+            "contrast_ratio": 0.9954636295517727,
+            "luma_absolute_error": 1.9401777535676956e-06,
+            "contrast_absolute_error": 0.0001360713504254818,
+            "frame_mean_ms": 4.044079058333333,
+            "frame_p90_ms": 5.189834
+          },
+          "medium": {
+            "mae_authored": 0.0011260107858106494,
+            "luma_ratio": 1.0000173461764323,
+            "contrast_ratio": 0.9964397944062546,
+            "luma_absolute_error": 7.324852049350739e-07,
+            "contrast_absolute_error": 0.00010688416659832001,
+            "frame_mean_ms": 7.4904196638888925,
+            "frame_p90_ms": 8.727458
+          },
+          "high": {
+            "mae_authored": 0.0018769406742649153,
+            "luma_ratio": 1.0000280563035402,
+            "contrast_ratio": 0.9985139369508157,
+            "luma_absolute_error": 6.780028343200684e-07,
+            "contrast_absolute_error": 4.4808490201830864e-05,
+            "frame_mean_ms": 7.15668946944444,
+            "frame_p90_ms": 7.955208
+          }
+        }
+      }
+    ],
+    "controls": [
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "authored",
+          "authored_repeat"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "authored",
+          "authored_fixed"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "native_off_before",
+          "native_off"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "standard",
+          "standard_repeat"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "authored",
+          "authored_repeat"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "authored",
+          "authored_fixed"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "native_off_before",
+          "native_off"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "standard",
+          "standard_repeat"
+        ],
+        "byte_exact": true
+      }
+    ],
+    "source_commits": {
+      "current": "1cec55cf92a5903a9faa3b413eb4b4bfa9bd7a94",
+      "fixed": "640e0b0a1aa72a8766d62e17a61628eca59a6890"
+    },
+    "abis": {
+      "current": "arm64-v8a",
+      "fixed": "arm64-v8a"
+    },
+    "core_aar_sha256": {
+      "current": "0248b97c33f2e555ca5e5fe2810e11659acfbc01e80e891fe7999826d632f5a4",
+      "fixed": "7ad4434efb83e6495aefdcec925bfe904c37956a397389cbd58f6dc5969b51eb"
+    },
+    "summary_sha256": "080521c95675c6f9d3cb3bcaee0429837a077de15e07f781111b73dd1344a958",
+    "captures": [
+      120,
+      150,
+      180,
+      210,
+      239,
+      300,
+      390,
+      479
+    ],
+    "frames": 480,
+    "seed": 12345,
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "device_info": null
+  },
+  "am6-final": {
+    "presets": [
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "profiles": {
+          "standard_before": {
+            "mae_authored": 0.0003227474899176741,
+            "luma_ratio": 0.9999957826619966,
+            "contrast_ratio": 0.9996625302154891,
+            "luma_absolute_error": 2.7744099497795105e-06,
+            "contrast_absolute_error": 3.956397995352745e-05,
+            "frame_mean_ms": 46.22493414166669,
+            "frame_p90_ms": 50.484292
+          },
+          "standard": {
+            "mae_authored": 0.0002768699705484323,
+            "luma_ratio": 0.9999971348042482,
+            "contrast_ratio": 0.999637174547955,
+            "luma_absolute_error": 1.4035031199455261e-06,
+            "contrast_absolute_error": 4.1289255023002625e-05,
+            "frame_mean_ms": 47.37177905555556,
+            "frame_p90_ms": 54.586875
+          },
+          "medium": {
+            "mae_authored": 0.0003647888188424986,
+            "luma_ratio": 0.9999961382927596,
+            "contrast_ratio": 0.9997197217330263,
+            "luma_absolute_error": 3.946945071220398e-06,
+            "contrast_absolute_error": 3.410223871469498e-05,
+            "frame_mean_ms": 229.2789814583335,
+            "frame_p90_ms": 241.442667
+          },
+          "high": {
+            "mae_authored": 0.00048742462604423054,
+            "luma_ratio": 0.9999951798982056,
+            "contrast_ratio": 0.9998106450611688,
+            "luma_absolute_error": 4.910863935947418e-06,
+            "contrast_absolute_error": 2.7636997401714325e-05,
+            "frame_mean_ms": 229.4971568444445,
+            "frame_p90_ms": 241.147167
+          }
+        }
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "profiles": {
+          "standard_before": {
+            "mae_authored": 0.001759524064254947,
+            "luma_ratio": 0.9999266012373187,
+            "contrast_ratio": 0.9949623320420067,
+            "luma_absolute_error": 6.450572982430458e-06,
+            "contrast_absolute_error": 0.00015437020920217037,
+            "frame_mean_ms": 67.45079773888885,
+            "frame_p90_ms": 67.960834
+          },
+          "standard": {
+            "mae_authored": 0.0008631137825432234,
+            "luma_ratio": 0.9999930992920343,
+            "contrast_ratio": 0.9953718530183628,
+            "luma_absolute_error": 6.633345037698746e-07,
+            "contrast_absolute_error": 0.00014125090092420578,
+            "frame_mean_ms": 66.61612929722222,
+            "frame_p90_ms": 67.272833
+          },
+          "medium": {
+            "mae_authored": 0.001155080521130003,
+            "luma_ratio": 0.9999074501054882,
+            "contrast_ratio": 0.9962922848542217,
+            "luma_absolute_error": 2.0980369299650192e-06,
+            "contrast_absolute_error": 0.00011325185187160969,
+            "frame_mean_ms": 247.2193987555556,
+            "frame_p90_ms": 247.536458
+          },
+          "high": {
+            "mae_authored": 0.0019198699010303244,
+            "luma_ratio": 0.9998858600424568,
+            "contrast_ratio": 0.9983296562823789,
+            "luma_absolute_error": 2.5422777980566025e-06,
+            "contrast_absolute_error": 5.1230425015091896e-05,
+            "frame_mean_ms": 247.44079314722225,
+            "frame_p90_ms": 246.002084
+          }
+        }
+      }
+    ],
+    "controls": [
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "authored",
+          "authored_repeat"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "authored",
+          "authored_fixed"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "native_off_before",
+          "native_off"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+        "pair": [
+          "standard",
+          "standard_repeat"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "authored",
+          "authored_repeat"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "authored",
+          "authored_fixed"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "native_off_before",
+          "native_off"
+        ],
+        "byte_exact": true
+      },
+      {
+        "preset": "Waltra - Heaven Liquid.milk",
+        "pair": [
+          "standard",
+          "standard_repeat"
+        ],
+        "byte_exact": true
+      }
+    ],
+    "source_commits": {
+      "current": "3763293f7bf5b9403becd64cb741ba4afa7f46af",
+      "fixed": "640e0b0a1aa72a8766d62e17a61628eca59a6890"
+    },
+    "abis": {
+      "current": "armeabi-v7a",
+      "fixed": "armeabi-v7a"
+    },
+    "core_aar_sha256": {
+      "current": "112483bd9fe93280e88ecc5e4ab8e1342a404079eb1320c7962d12129e2f66d9",
+      "fixed": "c7932bf9fccbb014a74340d79b48e3646500798ca91f6cad323c929fc6eb073c"
+    },
+    "summary_sha256": "01f5b50895c1de65d27c3340301cfa0b1daf011edb4cbfb9b3789c2c308a6b0d",
+    "captures": [
+      120,
+      150,
+      180,
+      210,
+      239,
+      300,
+      390,
+      479
+    ],
+    "frames": 480,
+    "seed": 12345,
+    "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+    "device_info": {
+      "glRenderer": "Mali-G52",
+      "glVersion": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+      "glVendor": "ARM",
+      "eglVersion": "1.4 Android META-EGL"
+    }
+  }
+}
