@@ -36,11 +36,17 @@ CORE_235_EQUATION_ENGINE = {
     'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
     'patches_sha256': 'd73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a',
 }
+CORE_237_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.7-cold-thread-v1'
+CORE_237_EQUATION_ENGINE = {
+    'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
+    'patches_sha256': 'd70f5b5ec3f3c0b4da764cb824153f142b88e17e27c2e9e71d2b481c19998c7d',
+}
 # Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
 # the equation RNG's cold-thread seed remains unchanged.
 PRODUCTION_EQUATION_ENGINES = {
     PRODUCTION_EQUATION_RNG_POLICY: PRODUCTION_EQUATION_ENGINE,
     CORE_235_EQUATION_RNG_POLICY: CORE_235_EQUATION_ENGINE,
+    CORE_237_EQUATION_RNG_POLICY: CORE_237_EQUATION_ENGINE,
 }
 
 
@@ -93,11 +99,12 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             raise ValueError('production equation RNG engine identity mismatch')
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
-    if all(engine.get(key) == value for key, value in CORE_235_EQUATION_ENGINE.items()):
+    for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE)]:
         # JNI enables patch 0042 only above height 1330 and changes the line reference
         # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
-        if domain['height'] > 1330 or domain['width']*domain['height'] > 1024*768:
-            raise ValueError('2.3.5 higher-resolution lines/native feedback detail are not implemented')
+        if (all(engine.get(key)==value for key,value in expected.items()) and
+                (domain['height']>1330 or domain['width']*domain['height']>1024*768)):
+            raise ValueError(version+' higher-resolution lines/native feedback detail are not implemented')
     from quad_lines import PROFILE as quad_profile
     line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
     if line_profile not in {'canonical-gl-lines-v1',quad_profile}:

@@ -56,7 +56,7 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 
 The experimental source forecaster is `tools/milk-analyzer/forecast.py`; it keeps
 source CPU equation execution separate from published-AAR visual references.
-Its explicit 2.3.4/2.3.5 cold-thread policies check the 41/42-patch engine identities and
+Its explicit 2.3.4/2.3.5/2.3.7 cold-thread policies check the 41/42/43-patch engine identities and
 equation seed `0x4141f00d`. The named GLES quad-line profile models the patched
 hard-edge drawing path at/below the JNI 1024x768 reference area; larger sizes and
 antialiasing remain unverified. Prepare pinned adapters before its tests. Do not
@@ -64,6 +64,11 @@ relabel historical capped2.3.4 evidence as canonical Native2.3.5 results. Patch0
 also caches shader random values for repeated detail passes within one frame.
 Keep production source, lab-instrumented CPU archive and publishedAAR identities
 distinct; the renderer reference always uses the checksum-verified publishedAAR.
+Keep PCM cadence separate from equation FPS: the declared 30Hz cold JNI host
+uses equation FPS35 through image30, then30. Point-grid precision is an explicit
+renderer input; the verified Apple emulator grid must not be generalized to other
+GPUs. Patch0043 preserves authored geometry in Native trails, but the source
+forecaster still rejects its unmodeled high-resolution/detail path.
 Do not claim the entire imported analyzer suite passes from focused controls alone.
 See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 

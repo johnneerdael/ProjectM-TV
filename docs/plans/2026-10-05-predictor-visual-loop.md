@@ -282,3 +282,12 @@ and real 43-patch archive before the next fresh batch. Patch0043 targets Native
 trails geometry preservation; its inactive144p path is distinct from native4K
 fidelity. Keep completed 2.3.5 rows pinned, with new 2.3.7 controls and identities
 in a separate namespace.
+
+Migration controls now use the real43-patch archive and checksum-verified2.3.7
+AAR. All eight CPU binary hashes and54 runtime seal files were independently
+checked. Native FPS matches the declared35→30 timeline exactly; a complete
+43-adapter source hue forecast matches the newly captured reference within1RGB8
+level over60frames. Focused forecast/drawing tests pass99checks and17subtests.
+High-resolution/detail paths remain rejected. Preserve43source, lab archive and
+published AAR identities separately. Evidence is in
+`tools/milk-analyzer/fixtures/visual-loop-release237-migration-2026-10-06.json`.

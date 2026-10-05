@@ -229,8 +229,8 @@ are bounded separately; runtime artifact pushes have a 180-second limit.
 ## Full visual prediction loop (in progress)
 
 The mathematical source forecaster predicts structure, motion, colour, flashing
-and feedback before comparison with the published standard core AAR. Fresh
-comparisons now target core 2.3.5; saved 2.3.4 rows keep their original identities.
+and feedback before comparison with the published core AAR. Fresh comparisons
+now target canonical Native core 2.3.7; saved 2.3.4/2.3.5 rows keep their identities.
 The current goal is a fresh random batch of three presets with 100/100
 behavioural-rubric grades for all three. Complete each batch under an unchanged
 model before repairing its gaps. Each run uses 60 frames at 30 fps. This supersedes
@@ -242,8 +242,9 @@ fixture preserves predictions, identities, measurements and misses. Earlier
 Tripgnosis trajectory errors were repaired by correcting custom-wave point counts
 and PCM resampling; that diagnostic retest earns no fresh-batch credit.
 
-Source CPU profiles distinguish the 41 patches matching core 2.3.4 from the
-42 patches matching core 2.3.5. Prepare adapters separately for each identity;
+Source CPU profiles distinguish the 41 patches matching core 2.3.4, the
+42 patches matching core 2.3.5 and the 43 patches matching core 2.3.7.
+Prepare adapters separately for each identity;
 the existing `build/milk-analyzer/native` adapters retain their historical
 41-patch identity. Source adapters are not the Android AAR. The driver previously
 used equation seed 12345. Production projectM-eval initializes MT19937 per thread
@@ -256,8 +257,9 @@ the matching `equation_rng_policy` in the forecast domain:
 |---|---|
 | `projectmtv-core-2.3.4-cold-thread-v1` | `d21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818` |
 | `projectmtv-core-2.3.5-cold-thread-v1` | `d73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a` |
+| `projectmtv-core-2.3.7-cold-thread-v1` | `d70f5b5ec3f3c0b4da764cb824153f142b88e17e27c2e9e71d2b481c19998c7d` |
 
-Both require upstream commit `e0b0a967f0ffd7d332106c366668ed271718472b`.
+All three require upstream commit `e0b0a967f0ffd7d332106c366668ed271718472b`.
 The forecaster rejects another seed or a mismatched release/patch identity;
 changing a policy name does not migrate historical rows to another engine.
 Other explicitly supplied seeds retain the `declared-seed-v1` policy. Provenance
@@ -276,7 +278,7 @@ reference at the 256x144 test size. The older source drawing path used
 canonical GL lines. Declare `line_rendering_profile` as
 `projectmtv-gles-quad-lines-v1` for the patched GLES hard-edge wave/shape-outline
 path: it models strip-end padding, miter joins and GLES pixel-border tie bias.
-This profile accepts the two exact engine identities above and currently
+This profile accepts the three exact engine identities above and currently
 requires a viewport no larger than the reference area;
 high-resolution scaling, antialiasing and motion-vector quads are not certified.
 The original `canonical-gl-lines-v1` remains available for historical contexts.
@@ -291,7 +293,7 @@ does not establish 4K support or appearance accuracy. The first 2.3.5 batch,
 slots 019–021, scored 97.5/17.5/65 under the frozen behavioural rubric. The
 original 2.3.4 slots 016–018 were withdrawn before captures.
 
-With the exact 2.3.5 engine and the GLES quad profile, built-in dotted waves use
+With the exact 2.3.5 or 2.3.7 engine and the GLES quad profile, built-in dotted waves use
 one centered 2-pixel point at or below the reference area. The earlier model
 used four offset 1-pixel copies. The canonical profile retains those historical
 copies; quad-dot requests with other engine identities or larger viewports are
@@ -322,6 +324,16 @@ policy, with native exact-halfway cases unverified. Do not assume the same grid
 on other GPUs. The case019 diagnostic mean RGB8 error improves from 1.023 to
 0.748; remaining fine feedback differences are preserved. See
 `fixtures/visual-loop-point-grid-repair-2026-10-06.json`.
+
+Core 2.3.7 adds patch0043 to preserve authored geometry in Native trails. The
+separate 43-patch archive and adapters retain their actual identities; unchanged
+standalone image/random/composite adapters are reused only after source/header
+byte-equality checks. Newly captured 2.3.7 FPS and hue controls complete 60 frames
+with Standard trails inactive at144p: FPS matches exactly; hue differs by at most
+one RGB8 level. The hue control retains its original source-math identity and
+does not substitute for a full 43-adapter forecast. Larger viewports/detail paths
+remain rejected; Native4K's authored-preservation purpose does not establish our
+predictor's 4K accuracy. See `fixtures/visual-loop-release237-migration-2026-10-06.json`.
 
 A frozen curved-line native control agrees within one RGB8 level over 60 frames.
 The full case 012 diagnostic now matches coherent flash counts (one brightening,

@@ -201,13 +201,13 @@ def profile_gate(tmp_path, monkeypatch):
 
     monkeypatch.setattr(module.SourcePipeline, 'from_source', stop_before_execution)
 
-    def check(patches_sha256, settings):
+    def check(patches_sha256, settings, *, source_archive='fixture', audio_archive='fixture'):
         source = dict(parser_inputs=dict(engine=dict(
             commit='e0b0a967f0ffd7d332106c366668ed271718472b',
-            patches_sha256=patches_sha256), engine_archive_sha256='fixture'),
+            patches_sha256=patches_sha256), engine_archive_sha256=source_archive),
             reader_sha256=hashlib.sha256(reader.read_bytes()).hexdigest())
         values = dict(uses_rendered_reference=False, frames=[dict(time=0)],
-                      engine_archive_sha256='fixture')
+                      engine_archive_sha256=audio_archive)
         return module.forecast_source(source, audio=values, binaries=tmp_path,
                                       domain=settings, compatibility={})
 
@@ -216,28 +216,30 @@ def profile_gate(tmp_path, monkeypatch):
 
 PATCHES_234 = 'd21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818'
 PATCHES_235 = 'd73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a'
+PATCHES_237 = 'd70f5b5ec3f3c0b4da764cb824153f142b88e17e27c2e9e71d2b481c19998c7d'
 
 
-@pytest.mark.parametrize('version,patches', [('2.3.4', PATCHES_234), ('2.3.5', PATCHES_235)])
+@pytest.mark.parametrize('version,patches', [('2.3.4', PATCHES_234), ('2.3.5', PATCHES_235), ('2.3.7', PATCHES_237)])
 def test_release_equation_profile_accepts_only_its_source_identity(profile_gate, version, patches):
     settings = domain(equation_rng_policy=f'projectmtv-core-{version}-cold-thread-v1')
     settings['equation_seed'] = 0x4141f00d
     with pytest.raises(RuntimeError, match='profile accepted before source execution'):
         profile_gate(patches, settings)
-    other = PATCHES_234 if version == '2.3.5' else PATCHES_235
+    other = PATCHES_234 if version != '2.3.4' else PATCHES_235
     with pytest.raises(ValueError, match='equation RNG engine identity'):
         profile_gate(other, settings)
 
 
-def test_235_equation_profile_rejects_a_lab_seed(profile_gate):
-    settings = domain(equation_rng_policy='projectmtv-core-2.3.5-cold-thread-v1')
+@pytest.mark.parametrize('version,patches', [('2.3.5', PATCHES_235), ('2.3.7', PATCHES_237)])
+def test_release_equation_profile_rejects_a_lab_seed(profile_gate, version, patches):
+    settings = domain(equation_rng_policy=f'projectmtv-core-{version}-cold-thread-v1')
     with pytest.raises(ValueError, match='production equation RNG seed'):
-        profile_gate(PATCHES_235, settings)
+        profile_gate(patches, settings)
 
 
-@pytest.mark.parametrize('patches', [PATCHES_234, PATCHES_235])
+@pytest.mark.parametrize('patches', [PATCHES_234, PATCHES_235, PATCHES_237])
 @pytest.mark.parametrize('width,height', [(256, 144), (1024, 768), (256, 1330)])
-def test_quad_line_profile_accepts_both_known_low_resolution_engines(profile_gate, patches, width, height):
+def test_quad_line_profile_accepts_known_low_resolution_engines(profile_gate, patches, width, height):
     settings = domain(line_rendering_profile='projectmtv-gles-quad-lines-v1')
     settings.update(profile='gles300', width=width, height=height)
     with pytest.raises(RuntimeError, match='profile accepted before source execution'):
@@ -253,12 +255,57 @@ def test_quad_line_profile_still_rejects_unknown_patch_series(profile_gate):
 
 @pytest.mark.parametrize('line_profile', ['canonical-gl-lines-v1', 'projectmtv-gles-quad-lines-v1'])
 @pytest.mark.parametrize('width,height', [(1920, 1080), (3840, 2160), (256, 1331)])
-def test_235_engine_refuses_unimplemented_scaled_lines_and_native_detail(profile_gate, line_profile, width, height):
+@pytest.mark.parametrize('version,patches', [('2.3.5', PATCHES_235), ('2.3.7', PATCHES_237)])
+def test_release_engine_refuses_unimplemented_scaled_lines_and_native_detail(profile_gate, line_profile, width, height, version, patches):
     # Applies even with a declared lab equation seed; rendering gaps are independent of RNG.
     settings = domain(line_rendering_profile=line_profile)
     settings.update(profile='gles300', width=width, height=height)
-    with pytest.raises(ValueError, match='2.3.5.*higher-resolution'):
-        profile_gate(PATCHES_235, settings)
+    with pytest.raises(ValueError, match=version+'.*higher-resolution'):
+        profile_gate(patches, settings)
+
+
+def test_237_equation_profile_rejects_wrong_audio_archive(profile_gate):
+    settings=domain(equation_rng_policy='projectmtv-core-2.3.7-cold-thread-v1')
+    settings['equation_seed']=0x4141f00d
+    with pytest.raises(ValueError,match='source/audio engine identity'):
+        profile_gate(PATCHES_237,settings,source_archive='c17fc176d6a79556dbfd6a998bbf78350f7f6d76dcd81d0bf7f6c5febd4bc578',audio_archive='wrong-archive')
+
+
+def test_237_profile_prefix_does_not_accept_an_unregistered_policy(profile_gate):
+    settings=domain(equation_rng_policy='projectmtv-core-2.3.7-cold-thread-v2')
+    with pytest.raises(ValueError,match='unknown equation RNG policy'):
+        profile_gate(PATCHES_237,settings)
+
+
+def test_real_237_forecast_reports_true_archive_and_rejects_forged_archives(tmp_path,monkeypatch):
+    module=importlib.import_module('forecast')
+    binaries=test_native_audio.ROOT/'build/visual-loop/source237/adapters'
+    if not (binaries/'milk-native-reader').is_file():binaries=BINARIES
+    preset=tmp_path/'forecast237.milk'
+    preset.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\n'+BASE)
+    source=module.read_source(preset,reader=binaries/'milk-native-reader')
+    if source['parser_inputs']['engine']['patches_sha256']!=PATCHES_237:
+        pytest.skip('separately prepared 43-patch CPU adapters required')
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    values=audio(1)
+    settings=domain(equation_rng_policy='projectmtv-core-2.3.7-cold-thread-v1',
+                    line_rendering_profile='projectmtv-gles-quad-lines-v1')
+    settings.update(equation_seed=0x4141f00d,profile='gles300')
+
+    def compute():
+        return module.forecast_source(source,audio=values,binaries=binaries,domain=settings,compatibility={})
+
+    result=compute()
+    actual='c17fc176d6a79556dbfd6a998bbf78350f7f6d76dcd81d0bf7f6c5febd4bc578'
+    assert source['parser_inputs']['engine_archive_sha256']==values['engine_archive_sha256']==actual
+    assert result['provenance']['engine_archive_sha256']==actual
+    assert result['provenance']['equation_rng']['policy']=='projectmtv-core-2.3.7-cold-thread-v1'
+    assert result['appearance_accuracy_verified'] is False
+    values['engine_archive_sha256']='wrong-archive'
+    with pytest.raises(ValueError,match='source/audio engine identity'):compute()
+    # Even matching forged parser/audio metadata must fail the actual wave adapter identity.
+    source['parser_inputs']['engine_archive_sha256']='wrong-archive'
+    with pytest.raises(ValueError,match='builtin-wave source engine identity'):compute()
 
 
 def test_patched_quad_line_profile_reaches_custom_wave_forecast():

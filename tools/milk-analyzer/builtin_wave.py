@@ -18,6 +18,10 @@ _CORE235_ENGINE = {
     'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
     'patches_sha256': 'd73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a',
 }
+_CORE237_ENGINE = {
+    'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
+    'patches_sha256': 'd70f5b5ec3f3c0b4da764cb824153f142b88e17e27c2e9e71d2b481c19998c7d',
+}
 
 
 def _colour(source,main,frame,mode,alpha,width,height):
@@ -51,7 +55,8 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     scaled_dots=dot and line_rendering_profile==PROFILE
     if scaled_dots:
         engine=source.get('parser_inputs',{}).get('engine',{})
-        if any(engine.get(key)!=value for key,value in _CORE235_ENGINE.items()):
+        if not any(all(engine.get(key)==value for key,value in expected.items())
+                   for expected in [_CORE235_ENGINE,_CORE237_ENGINE]):
             raise ValueError('GLES builtin dot engine identity mismatch')
         if width<=0 or height<=0 or width*height>1024*768 or height>1330:
             raise ValueError('GLES builtin dot profile requires viewport within reference area')

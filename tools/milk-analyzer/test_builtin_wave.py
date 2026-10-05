@@ -73,6 +73,44 @@ def test_core235_gles_dot_policy_refuses_a_mislabeled_41_patch_source(core235_do
             line_rendering_profile='projectmtv-gles-quad-lines-v1')
 
 
+@pytest.fixture
+def core237_dot_inputs(tmp_path):
+    from forecast import read_source
+    binaries=Path(__file__).resolve().parents[2]/'build/visual-loop/source237/adapters'
+    if not (binaries/'milk-native-reader').is_file():binaries=READER.parent
+    preset=tmp_path/'dots237.milk'
+    preset.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nnWaveMode=6\nbWaveDots=1\nfWaveAlpha=.5\n')
+    source=read_source(preset,reader=binaries/'milk-native-reader')
+    if source['parser_inputs']['engine']['patches_sha256']!='d70f5b5ec3f3c0b4da764cb824153f142b88e17e27c2e9e71d2b481c19998c7d':
+        pytest.skip('separately prepared 43-patch CPU adapters required')
+    inputs=frames()[:1]
+    scene=execute_scene(source,inputs,reader=binaries/'milk-native-reader',width=256,height=144,mesh_x=8,mesh_y=8)
+    return source,scene,audio(inputs),binaries/'milk-wave-inputs'
+
+
+def test_core237_gles_dot_math_and_true_archive_match_historical_235(core237_dot_inputs,core235_dot_inputs):
+    from builtin_wave import source_builtin_wave
+    source,scene,data,binary=core237_dot_inputs
+    result=source_builtin_wave(source,scene,data,binary=binary,line_rendering_profile='projectmtv-gles-quad-lines-v1')
+    assert result['engine_archive_sha256']=='c17fc176d6a79556dbfd6a998bbf78350f7f6d76dcd81d0bf7f6c5febd4bc578'
+    assert result['engine_archive_sha256']==source['parser_inputs']['engine_archive_sha256']
+    old_source,old_scene,old_data,old_binary=core235_dot_inputs
+    historical=source_builtin_wave(old_source,old_scene,old_data,binary=old_binary,line_rendering_profile='projectmtv-gles-quad-lines-v1')
+    assert result['frames']==historical['frames']
+    assert result['frames'][0]['point_size']==2
+    assert result['frames'][0]['copy_offsets']==[[0,0]]
+    assert historical['engine_archive_sha256']!=result['engine_archive_sha256']
+
+
+@pytest.mark.parametrize('viewport', [[1920,1080],[3840,2160],[256,1331]])
+def test_core237_gles_dots_reject_unimplemented_feedback_viewports(core237_dot_inputs,viewport):
+    from builtin_wave import source_builtin_wave
+    source,scene,data,binary=core237_dot_inputs
+    scene['viewport']=viewport
+    with pytest.raises(ValueError,match='dot.*reference area'):
+        source_builtin_wave(source,scene,data,binary=binary,line_rendering_profile='projectmtv-gles-quad-lines-v1')
+
+
 def audio(inputs):
     return {'frames':[{**frame(),**values,'vol':1} for values in inputs]}
 
