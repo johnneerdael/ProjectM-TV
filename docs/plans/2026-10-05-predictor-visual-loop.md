@@ -141,3 +141,12 @@ not proof of a shader operator bug. Preserve the original grade; no retrospectiv
 palette relabelling or native-pixel fitting is permitted. Next work: represent
 native hue realization/uncertainty correctly, and isolate case013 texture/feedback.
 Evidence: `fixtures/visual-loop-round002-2026-10-05.json`.
+
+Post-round controls: preserve native quad-strip vertex order when reflecting GL
+Y into top-row coordinates. The corrected side/miter sign keeps the triangle
+diagonal and varying interpolation faithful to the shader. A curved gradient
+control agrees within1RGB8level on60frames;46focused tests pass. The isolated
+builtin wave from case013 has mean RGB8 error0.00135but70pixel positions differ
+by more than1level, with maximum191. This rules out a large waveform mismatch,
+not all sparse coverage errors or their effect after feedback. Do not claim
+case013 repaired. Evidence: `fixtures/visual-loop-quad-order-control-2026-10-05.json`.

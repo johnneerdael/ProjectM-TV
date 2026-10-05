@@ -6,7 +6,9 @@ def test_right_angle_miter_matches_patched_vertex_shader():
     points=np.array([[.25,.25],[.75,.25],[.75,.75]],np.float32)
     colours=np.tile([1,0,0,1],(3,1)).astype(np.float32)
     vertices=quad_line_vertices(points,colours,width=8,height=8)
-    expected=np.array([[2,1.5],[2,2.5],[6.5,1.5],[5.5,2.5]],np.float32)
+    # Reflect native GL Y after expansion; preserve gl_VertexID order. Swapping
+    # the sides also swaps the triangle diagonal and changes colour interpolation.
+    expected=np.array([[2,2.5],[2,1.5],[5.5,2.5],[6.5,1.5]],np.float32)
     expected[:,1]-=1/64  # Patched GLES tie bias is positive GL Y, negative top-row Y.
     np.testing.assert_allclose(vertices[0]['positions']*8,expected,atol=1e-6)
 

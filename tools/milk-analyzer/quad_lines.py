@@ -33,7 +33,9 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False):
         length=np.float32(np.sqrt(np.dot(delta,delta)))
         if not length>np.float32(.0001) or not np.isfinite(length):continue
         direction=delta/length
-        normal=np.array([-direction[1],direction[0]],np.float32)
+        # Reflect the GL normal into top-row coordinates, keeping vertex side
+        # order (and thus the native triangle-strip diagonal) intact.
+        normal=np.array([direction[1],-direction[0]],np.float32)
         major=np.max(np.abs(direction))
         extent=np.float32(.5)*major
         previous=pixels[(first-1)%len(points)] if closed or first else a
@@ -47,7 +49,7 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False):
                 tangent_length=np.float32(np.sqrt(np.dot(tangent_sum,tangent_sum)))
                 if tangent_length>np.float32(.0001):
                     tangent=tangent_sum/tangent_length
-                    miter=np.array([-tangent[1],tangent[0]],np.float32)
+                    miter=np.array([tangent[1],-tangent[0]],np.float32)
                     cosine=np.dot(miter,normal)
                     if cosine>np.float32(.49):offset=miter/cosine
             for side in [-1,1]:
