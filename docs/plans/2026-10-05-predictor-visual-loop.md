@@ -291,3 +291,12 @@ level over60frames. Focused forecast/drawing tests pass99checks and17subtests.
 High-resolution/detail paths remain rejected. Preserve43source, lab archive and
 published AAR identities separately. Evidence is in
 `tools/milk-analyzer/fixtures/visual-loop-release237-migration-2026-10-06.json`.
+
+The next reference release is2.3.8. Its independently downloaded complete AAR is
+byte-identical to2.3.7 (SHA4a6a8fef...), and the release changes onlyCI/docs, with
+no engine/JNI/patch changes. Keep the verified43source/runtime and record2.3.8
+as the fresh reference release; historical controls keep their original labels.
+The next unused random queue entries are022–024. Preserve60frames and freeze
+all predictions/claims before any fresh native capture. No model changes until
+all three are assessed. Keep correctedFPScontext and explicitly declared8-bit
+point grid. The remaining fine-detail residuals stay documented.

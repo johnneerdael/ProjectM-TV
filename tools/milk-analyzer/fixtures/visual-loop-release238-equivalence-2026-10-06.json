@@ -1,0 +1,12 @@
+{
+  "reference_release": "2.3.8",
+  "release_commit": "f745670d35d3a362bea1a6a56928b55b70cc9887",
+  "aar_path": "build/visual-loop/published238/projectM-TV-core-2.3.8.aar",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "byte_identical_to_verified_237_aar": true,
+  "native_source_patch_java_changes": [],
+  "active_engine_profile": "projectmtv-core-2.3.7-cold-thread-v1",
+  "reason": "CI-only release; actual43engine/runtimebytes unchanged. Historical237controlrows retain originalrelease tag; freshbatch usesverifiedlatest238artifact.",
+  "runtime_namespace": "/data/local/tmp/projectmtv-predictor-loop-237-20261006/",
+  "source_backend": "build/visual-loop/source237/adapters"
+}

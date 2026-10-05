@@ -230,7 +230,8 @@ are bounded separately; runtime artifact pushes have a 180-second limit.
 
 The mathematical source forecaster predicts structure, motion, colour, flashing
 and feedback before comparison with the published core AAR. Fresh comparisons
-now target canonical Native core 2.3.7; saved 2.3.4/2.3.5 rows keep their identities.
+now target canonical Native core 2.3.8, whose downloaded AAR is byte-identical to
+2.3.7; saved 2.3.4/2.3.5/2.3.7 rows keep their identities.
 The current goal is a fresh random batch of three presets with 100/100
 behavioural-rubric grades for all three. Complete each batch under an unchanged
 model before repairing its gaps. Each run uses 60 frames at 30 fps. This supersedes
@@ -334,6 +335,12 @@ one RGB8 level. The hue control retains its original source-math identity and
 does not substitute for a full 43-adapter forecast. Larger viewports/detail paths
 remain rejected; Native4K's authored-preservation purpose does not establish our
 predictor's 4K accuracy. See `fixtures/visual-loop-release237-migration-2026-10-06.json`.
+
+The CI-only 2.3.8 release changes no engine, JNI or patch source and publishes
+the same complete AAR bytes. Its reference uses the existing verified 43-patch
+engine policy, source backend and runtime namespace, with the new release label
+recorded for fresh rows. Do not relabel earlier controls. The download and source
+equivalence are in `fixtures/visual-loop-release238-equivalence-2026-10-06.json`.
 
 A frozen curved-line native control agrees within one RGB8 level over 60 frames.
 The full case 012 diagnostic now matches coherent flash counts (one brightening,
