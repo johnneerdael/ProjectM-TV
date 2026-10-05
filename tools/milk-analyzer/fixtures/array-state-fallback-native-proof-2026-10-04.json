@@ -1,0 +1,2013 @@
+{
+  "schema_version": 1,
+  "scope": "Two frozen default-composite numerical controls, not whole-preset appearance validation. Offline plans remain conditional on explicit descriptor/profile matching. Authored-source blocker count stays220.",
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "serial": "emulator-5592",
+  "avd": "projectmtv-learning-api34",
+  "implementation_sha256": "8a23215e60583257721169dab96373cf70d4111ab20cd0810af56c82ae552060",
+  "controls": [
+    {
+      "fixture": "fallback-array",
+      "prediction": {
+        "source_sha256": "4cbbe857330e07a7d5bd12de1309e2ba9111c3d9581aa80bdbc307993aa2a0a9",
+        "expected_rgb": [
+          0.4,
+          0.4,
+          0.4
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen composite-rejection fallback prediction; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "fallback-array.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "fc80ea0da1f502b7553388d156bd2fa8bc396833f8b6576cf74699f0e36fa314"
+    },
+    {
+      "fixture": "fallback-state",
+      "prediction": {
+        "source_sha256": "6107460439e16e76aab8fdf3fb5e92ab6f3904e8c4900b118469bdad4cd3a086",
+        "expected_rgb": [
+          0.4,
+          0.4,
+          0.4
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen composite-rejection fallback prediction; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "fallback-state.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "fc80ea0da1f502b7553388d156bd2fa8bc396833f8b6576cf74699f0e36fa314"
+    }
+  ],
+  "stage_plan_counts": {
+    "default_composite": 100,
+    "fixed_warp": 7,
+    "native_equation_rejected_presets": 1
+  },
+  "source_bound_offline_plans": [
+    {
+      "preset": "EoS+Phat - spectrum bubble new colors - orb sth go 4-ret brothers organs.milk",
+      "preset_sha256": "244b7e7589bc6bf58242b85041e3cb97b800614a0d73b1dc71fa90e76d8398a3",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Flexi - wave function collapse - major dick.milk",
+      "preset_sha256": "0d79247a8de280e66e69c0fadac127ed5219b197803010d754e35acf4277b88a",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Flexi - wave function collapse - majorly dickless combatanth.milk",
+      "preset_sha256": "d376201257624655b93459c8b247978d6a16c1e99a867c05b4f3e4c6145231e0",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "a2d5bc7f856291eb0d04f5bddd59e04523ac935b2e4da54e29e7dfb149f2aed4",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "a2d5bc7f856291eb0d04f5bddd59e04523ac935b2e4da54e29e7dfb149f2aed4",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Flexi - wave function collapse - majorly dickless nz+ puke mash.milk",
+      "preset_sha256": "866131d9c4557ceb4f36949c29135842a8b3648305c7c25ca13d53e56da71dc1",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "18a6a012d01bfedd8a19f6eae64832d938066e6396792b306ec1aa5b1e20f8b9",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "18a6a012d01bfedd8a19f6eae64832d938066e6396792b306ec1aa5b1e20f8b9",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Flexi - wave function collapse - majorly dickless nz+.milk",
+      "preset_sha256": "ddad1d6ab3507fbf7b1ce0b3756cd2743e3095f9bd202eac8051137b64938884",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "18a6a012d01bfedd8a19f6eae64832d938066e6396792b306ec1aa5b1e20f8b9",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "18a6a012d01bfedd8a19f6eae64832d938066e6396792b306ec1aa5b1e20f8b9",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Flexi - wave function collapse - majorly dickless.milk",
+      "preset_sha256": "b17fee8006e59220ee3ace8f32cda438bb223511371d1017845d3863eb666a45",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "a2d5bc7f856291eb0d04f5bddd59e04523ac935b2e4da54e29e7dfb149f2aed4",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "a2d5bc7f856291eb0d04f5bddd59e04523ac935b2e4da54e29e7dfb149f2aed4",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Geiss - Flexi - Redi Jedi - Shifter - Phat - Rovastar - 120287110113(457) - orb sth go 4-ret cataclysmi.milk",
+      "preset_sha256": "e0d1baa67c16c336bb88400a1ff0fa09d049a2447238a96c5387b8fe9ba315bd",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Geiss - Flexi - Redi Jedi - Shifter - Phat - Rovastar - 120287110113(457) - orb sth go 4-ret cataclysmic sound roam2.milk",
+      "preset_sha256": "c697ae8b4a3b5039ca1111271dcbcd7960617621d60d34a54c4269de05ca7367",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Geiss - Flexi - Redi Jedi - Shifter - Phat - Rovastar - 120287110113(457) - orb sth go 4-ret cataclysmic sound.milk",
+      "preset_sha256": "41701fb2f25a1b4628a6eaf025a4441bc6b5424082142dd0d74941febda34052",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Geiss - Iris Storm - greyed-out options.milk",
+      "preset_sha256": "ad88e3cd3c80de58b9bb1fe421514b2bbc6fbfaace10af426eee2566b9aef149",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "NeW Adam Master Mashup FX 2 Geiss and Zylot - Reaction Diffusion 3 (Overload Mix 2) AMAZING MASUP  - orb sth go 4-ret tork.milk",
+      "preset_sha256": "4f8fd8e1e657dc0d87ed4d8bc2a3ee4e15efa5310223d53a125434582ecb47d1",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - 3 Pointed Flame.milk",
+      "preset_sha256": "c4cc4236b7c7a8ed0023c83e4b3855ca6c734e752ef60240158a6165dde13d83",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Planetary Alignment vs Martin - sparky caleidoscope.milk",
+      "preset_sha256": "8456cc311aec289dbfdef0e345367f98c5fb4ac87888a1511dfb3de46d98c8db",
+      "section": "warp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "76a8234791ab5eb0724574ae6bb4eaac18e4715d45828d765a9b7fae45f24a09",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "fixed_warp",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "76a8234791ab5eb0724574ae6bb4eaac18e4715d45828d765a9b7fae45f24a09",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Planetary Alignment.milk",
+      "preset_sha256": "436abe81fe0615642bca8706981e6b6d1c378628177ecd75edbb9f0473ba54bc",
+      "section": "warp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "76a8234791ab5eb0724574ae6bb4eaac18e4715d45828d765a9b7fae45f24a09",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "fixed_warp",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "76a8234791ab5eb0724574ae6bb4eaac18e4715d45828d765a9b7fae45f24a09",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Quicksand Lab.milk",
+      "preset_sha256": "80f11873f7e81063020a9d21f58e255d2efd4bcddb183d05c8b41dd16215ffeb",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "6567c9f1b2b453469420b62a357f14aaaeaeea2e339f44321e8d7a1af3176479",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "6567c9f1b2b453469420b62a357f14aaaeaeea2e339f44321e8d7a1af3176479",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Sandblade.milk",
+      "preset_sha256": "1233f931653927c6446b09ed10019c15fd948884dc79f1adaedaa283f3d644ca",
+      "section": "warp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "6c7d2c4094bf5da8a6bd653d7a15c8c60378f23cc55741bdf9547c5a21e30129",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "fixed_warp",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "6c7d2c4094bf5da8a6bd653d7a15c8c60378f23cc55741bdf9547c5a21e30129",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Solar Fire.milk",
+      "preset_sha256": "854d9145964d8d3740ec095bd7253c54d3235c274a44c1ffb7dfe346a75128f5",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Stahl - Fire Worm.milk",
+      "preset_sha256": "9e839def6d8ae9755a923939c8e0ae0717b7b0950bc540ee98279b66aec676a8",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "70b0c3d35f23d1db2b239910ec16b991b18f74e644e8a787e123495b0ee8d3db",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "70b0c3d35f23d1db2b239910ec16b991b18f74e644e8a787e123495b0ee8d3db",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Stahl - Glass Ocean.milk",
+      "preset_sha256": "499d464efca2e65d04c943ee4877c46d4dc533b70b2ba42fcb1c923d2cd64d9c",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Stahl - Liquid Eyeball.milk",
+      "preset_sha256": "ab1c819230e84ceb86ae4b29afe287379842bebe0d8174057b80804102989f3c",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "b584c8f80b912b5df52ccabbc57635d89a2575e027ea69f1e3af526bd32d3a1a",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "b584c8f80b912b5df52ccabbc57635d89a2575e027ea69f1e3af526bd32d3a1a",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Stahl - Sunburn.milk",
+      "preset_sha256": "47dd7a418dd51994432554bfac05924587fe752c3b7174f2f6c248357785b394",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "5b67d55ae51e6ce9427744f1f387c9b2e51d349acad93a7f5a5c6132ccf778b4",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "5b67d55ae51e6ce9427744f1f387c9b2e51d349acad93a7f5a5c6132ccf778b4",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Stahl - Tantalum Gran random tex not worthy to comment on your potential love life failth.milk",
+      "preset_sha256": "7658991f83afc743775ca9a8ff0eb55473182a8cd185df5fc45caee15eaa4b04",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "13cc3d0a938d18fddd289532a122611bb9531ec0e9ec7fa7d5311f1bd1b9a128",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "13cc3d0a938d18fddd289532a122611bb9531ec0e9ec7fa7d5311f1bd1b9a128",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Stahl - Tantalum Gran sky.milk",
+      "preset_sha256": "68d137f51da4e51b944b00ca909d29a636dcf32a940d209f218b885a305e42b6",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "21f7311667ef6f088111ecaa95510ad828a6cff7ace40e768a1856f78fb37e37",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "21f7311667ef6f088111ecaa95510ad828a6cff7ace40e768a1856f78fb37e37",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Stahl - The Claw.milk",
+      "preset_sha256": "3e5772297ffb05b3afbd086af9197e9e107f4774d99e831259ebad6bfe4608c1",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "5b67d55ae51e6ce9427744f1f387c9b2e51d349acad93a7f5a5c6132ccf778b4",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "5b67d55ae51e6ce9427744f1f387c9b2e51d349acad93a7f5a5c6132ccf778b4",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Stahlregen & Boz - Machine Code (Reaction Diffusion) genial cores.milk",
+      "preset_sha256": "d0fd1f809045b02e33c002b8da53ff56407c12dc5918cdc0dcf0f82817e50d52",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "Syst3mFailur - satanic ring V2 nz+ toby f-zero.milk",
+      "preset_sha256": "5e79eb3005b114342f9cf07ca397424726e02a621596a920dc506ded632ffdc4",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "c2ce19f08cc3709833701097127eb9ff584a054ec69942801f270e4dd605dd56",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "c2ce19f08cc3709833701097127eb9ff584a054ec69942801f270e4dd605dd56",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "amandio c - prime forms 2 minor full.milk",
+      "preset_sha256": "db751a78480f59343867ac9cab2ff23fa558c681920b531c057e7375f4ceceec",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "18a6a012d01bfedd8a19f6eae64832d938066e6396792b306ec1aa5b1e20f8b9",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "18a6a012d01bfedd8a19f6eae64832d938066e6396792b306ec1aa5b1e20f8b9",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "blood red raw holy - i am an insulted prude and a concerned parent and a disappearing goat.milk",
+      "preset_sha256": "e9b498556e073a206d8c1029b55a5e9ee4d03deaf028eafb39ebe8ad7d741132",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "b584c8f80b912b5df52ccabbc57635d89a2575e027ea69f1e3af526bd32d3a1a",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "b584c8f80b912b5df52ccabbc57635d89a2575e027ea69f1e3af526bd32d3a1a",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway nz+.milk",
+      "preset_sha256": "0244f2bb90dfaa4327dcda0adf47410f85c73c68835a21ab3f7d9f1f1c7eb71f",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "c30ecef9e2a096a991ea7c0721c722358f8cd48ff1572d75dc1f38e39b92db35",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "c30ecef9e2a096a991ea7c0721c722358f8cd48ff1572d75dc1f38e39b92db35",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway nz.milk",
+      "preset_sha256": "ab27fb421fc04c35227fd7abb6b1f0f0aae3ac6bc4fc5254b5d8f62e5083516e",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "71bc605851ac98d961e8fe66260adb87bdedfe9160fea6cf505d027322e6577f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "71bc605851ac98d961e8fe66260adb87bdedfe9160fea6cf505d027322e6577f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway roam nz+.milk",
+      "preset_sha256": "c3550aedd7a3dd73f3ea60334246f53632801e166ccee93bdf3ef384ae7ee8cb",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "f2eb06db346e5354cc067141be9ba8a43f792b4adfb7f110435f3f2f62e2f3e1",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "f2eb06db346e5354cc067141be9ba8a43f792b4adfb7f110435f3f2f62e2f3e1",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway roam.milk",
+      "preset_sha256": "9f9ef68b701623f7f7128ab24406f1e76f2e1c12560d23d611a198bce97bead5",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "dab8a6c939445abba1f64f637bf3db47642c4d90214826194a18ba2e6f04912e",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "dab8a6c939445abba1f64f637bf3db47642c4d90214826194a18ba2e6f04912e",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "cpe domains flacc - portable massation segway.milk",
+      "preset_sha256": "7b63b17da8495b37e15c5340dc3e6483be47192394e5ba0d4172d56404cacef0",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "do not fear me, but eat me braqre briq awakened to infinite disappointment my believers follow me to a land.milk",
+      "preset_sha256": "1c63490faa1ba880e1b4735a9f9438fc8713f56686769e1007c99dfe093279af",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "a2d5bc7f856291eb0d04f5bddd59e04523ac935b2e4da54e29e7dfb149f2aed4",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "a2d5bc7f856291eb0d04f5bddd59e04523ac935b2e4da54e29e7dfb149f2aed4",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "fat cancer cun cet.milk",
+      "preset_sha256": "f0662191c1c1d91b96df8a31d782e21c531a63619a8c29bac69c9505a4e02e3d",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "b6bd7740be2b4244c49f88e337cda1efd73853c237b1a59cbcc7f43add0e037d",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "b6bd7740be2b4244c49f88e337cda1efd73853c237b1a59cbcc7f43add0e037d",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "flertiveneth ov model stain.milk",
+      "preset_sha256": "5e467f8248bd0f41c048f24ca55ffc74890775fec16f6cdba3d25635f3c17202",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "d950fdc4306ecacf4339aad75db977b0dd5f47e33d24fb5fd63adcfd5a74214e",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "d950fdc4306ecacf4339aad75db977b0dd5f47e33d24fb5fd63adcfd5a74214e",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "flexi, stahlregen, geiss + tobias wolfboi - space gelatine burst [golden brilliance rmx]_1 - orb sth go .milk",
+      "preset_sha256": "fbc79608ce42ab8544e65a1e9a2bc2f106babc74892e0adb9c6ec74c8389f99a",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "hexcollie, ti@n, suksma, zylot, orb n flexi - blarffff bubble.milk",
+      "preset_sha256": "2ad621b5196980729d2f9249f106d06949217ab510b1371c786f034025d42b78",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "2c968feaf4d3fa358bade3354e5974220cd10ee87d997a59c003b021c8ab5b8d",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "2c968feaf4d3fa358bade3354e5974220cd10ee87d997a59c003b021c8ab5b8d",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "mouthful o sand.milk",
+      "preset_sha256": "a45105e86ee41b1bcfacc0e29119458e4891d8785e1595e92f254ddc0f6bbcdc",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "70b0c3d35f23d1db2b239910ec16b991b18f74e644e8a787e123495b0ee8d3db",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "70b0c3d35f23d1db2b239910ec16b991b18f74e644e8a787e123495b0ee8d3db",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "nontuplet corpse sterility.milk",
+      "preset_sha256": "7f89564b479e42e01f82061ca69020c0c022647460446e1c15903406d542e3f1",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "1d07e86b66f14a6a54f00829f34673b59308435b7613e3bb6572ac710e293f5e",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "1d07e86b66f14a6a54f00829f34673b59308435b7613e3bb6572ac710e293f5e",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "orb - quicksand sharp.milk",
+      "preset_sha256": "02edab80c5cf8c8e3bdd6a16be70c8283213c20dfa40e16e89cae77ecf548b8a",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "6567c9f1b2b453469420b62a357f14aaaeaeea2e339f44321e8d7a1af3176479",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "6567c9f1b2b453469420b62a357f14aaaeaeea2e339f44321e8d7a1af3176479",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "pair up gnothing knew nz.milk",
+      "preset_sha256": "de5deed49ba06c946215781245e4c853363f504701ec4cc62808e41ef603a69d",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ab80f50d18dc03fe86a632fe0cb28b10801be19466969cdbe2b082a5dbc81dc1",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ab80f50d18dc03fe86a632fe0cb28b10801be19466969cdbe2b082a5dbc81dc1",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "pair up gnothing knew nz2.milk",
+      "preset_sha256": "b94e63c46e808a106948713f09c14425c7ce025f74b24842c513a17b1f5e004d",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "7d41d924a05832aa61b8d2593c5359f0b7504bc2eb76ddea10cfb26e650cc238",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "7d41d924a05832aa61b8d2593c5359f0b7504bc2eb76ddea10cfb26e650cc238",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "pair up gnothing knew nz3.milk",
+      "preset_sha256": "f7b8b7f7dc9990a6b6ce28a49a59af682b2be769a89f7c916c6e3ca2c46462cb",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "c006e01876e9a52a8f46341491cc7e23f9cc24455219a11df59d9d102d0b5d44",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "c006e01876e9a52a8f46341491cc7e23f9cc24455219a11df59d9d102d0b5d44",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "pair up gnothing knew.milk",
+      "preset_sha256": "b9d395f575a0b66fc4c82e4d1f70ecb4795791dfcb76c6933365802aba86de97",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "6dfc0ebfdb0694eb8d2d8ae240085360524937fecc65e0b8a43133273dc20fc0",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "6dfc0ebfdb0694eb8d2d8ae240085360524937fecc65e0b8a43133273dc20fc0",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "sonar cow.milk",
+      "preset_sha256": "289a57aea3b7bde6324a98596ee5f4178dc4a6da9dd831c1fafb7ee5c500861d",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "5b67d55ae51e6ce9427744f1f387c9b2e51d349acad93a7f5a5c6132ccf778b4",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [
+        "shape_1_per_frame"
+      ],
+      "translation_status": "translated",
+      "source_sha256": "5b67d55ae51e6ce9427744f1f387c9b2e51d349acad93a7f5a5c6132ccf778b4",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - frazzle.milk",
+      "preset_sha256": "23b49eeacef9f2340f9a9d9a168d0637cd0da108f56e6d7db7a66f8d532269f6",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "21f7311667ef6f088111ecaa95510ad828a6cff7ace40e768a1856f78fb37e37",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "21f7311667ef6f088111ecaa95510ad828a6cff7ace40e768a1856f78fb37e37",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - mash vs expand - flacc - orb sth go 4-ret bowel studies.milk",
+      "preset_sha256": "d622954d5f9e0da40171114bc8166433f3927ad9a9fbc41ac0f8792587a5a951",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - dotes hostile undertake - mess - orb sth go 4-ret raygun anti-masturbation.milk",
+      "preset_sha256": "2f2699d87d522e7945c42fec84026275bdd4ef0f9a0ae0d12072e49f121b2acb",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "ac433f880d73157ca52db3b3ed09bbdb49493a14f04ed9c6a8e2183b7c433979",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - ed geining hateops - flx matilda nz.milk",
+      "preset_sha256": "2c728b04a7774ad7fbdf125ddadcc72f27d0dcebcb5370f79123c73a25e71387",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "7579425eddc3f11c1185dfe780649d2c427ae64cb71c8de25c9d9bd27bdf7db9",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "7579425eddc3f11c1185dfe780649d2c427ae64cb71c8de25c9d9bd27bdf7db9",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - ed geining hateops - flx matilda roam3- nz+.milk",
+      "preset_sha256": "6dee7ee43e26708cb4cc00f85d9c34c9d79103454d5e05d2782c36faebd9003e",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "8de687b311d73ad1c9987b097914422518e4ddda3ca8d7fc0ee5fe3bf7f11c99",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "8de687b311d73ad1c9987b097914422518e4ddda3ca8d7fc0ee5fe3bf7f11c99",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - ed geining hateops - flx matilda roam3-2.milk",
+      "preset_sha256": "ad433c65e94a95d9a84a000ab67d8ae0bcb0c059053070db9fc3a27ebcc56848",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "70cbee9d1e8ae0fecc516e004b14269b1dcc8384ca3d60d4005a7698c9374c69",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "70cbee9d1e8ae0fecc516e004b14269b1dcc8384ca3d60d4005a7698c9374c69",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - ed geining hateops - flx matilda.milk",
+      "preset_sha256": "dd37abaaf03c47c2304c3ce9d537d355cabcb9e47e6b6feabc9f0818d7b67a6c",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - flexi coheres vacuum energy - shf fab in miatas - orb sth go tableaux.milk",
+      "preset_sha256": "f0e8fd6939bc38f4a45db340a309bd690576ad469d49f65215986d4c46be1186",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "4faa633f2cc99f373d71aef125d69c4abe539b9a14e8d88033b2291cabdcd36f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - kabbalih yao hymanifolder - frazzle.milk",
+      "preset_sha256": "5e7dc14b45e39b85697238058dc4bc5cff6bdfe3c46f9fc96078bc92ea730565",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "21f7311667ef6f088111ecaa95510ad828a6cff7ace40e768a1856f78fb37e37",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "21f7311667ef6f088111ecaa95510ad828a6cff7ace40e768a1856f78fb37e37",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - negative infinity for not flinching - orb.milk",
+      "preset_sha256": "062aab485ffa1d1dcec3c0d929e02e2baa74f93397e3f567ca8c1de958c35953",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "translated",
+      "source_sha256": "e409b6d4813711a0c8edf6b0b3392a239761dd6ab580c1a718591f2bb2827232",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+      "preset_sha256": "5dd383cf79e1aacbed944ded85d70a365dde2c51f2ca7646ed0b7fde0cf4c79f",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+      "preset_sha256": "06b84ff69c3aeeb88eff3dea63dd3c1f5b146b4c2afb9df204f5f2561e7aee15",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial.milk",
+      "preset_sha256": "5f2e3c5732513d8f2c14a6c6dd2255fc38e1f7034a1906dc02726e47fc8585ad",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Arctic Chill.milk",
+      "preset_sha256": "6baf4215af49e53e20ccd810497ed72b0d59347236546e5438a5edde638ad13f",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "1f6584c66dfce69281c070ce1117f49ad7ad1c98636ddcf80356591d4781f21f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "1f6584c66dfce69281c070ce1117f49ad7ad1c98636ddcf80356591d4781f21f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Flexi - Chilled Element.milk",
+      "preset_sha256": "e1cbf8d01bc0e37234d8ed2c7ca1413c8af7d4dbd11dd1d59f7bf4b545e6e8dc",
+      "section": "warp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "9d740e9bb7e774cc51e1cf3246c6a66c04625e40f462f7b729514f3374db1065",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "fixed_warp",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "9d740e9bb7e774cc51e1cf3246c6a66c04625e40f462f7b729514f3374db1065",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Flexi - Eleventh Element.milk",
+      "preset_sha256": "343a22ab6e971222d3baea473b9d16a5c8598ef4378bbba5ceee5467201bce2a",
+      "section": "warp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "a1732d5ad905bc0781501064f74442075185063de2546ea0e73b8ed5d739c1f3",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "fixed_warp",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "a1732d5ad905bc0781501064f74442075185063de2546ea0e73b8ed5d739c1f3",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Flexi - Ninth Element.milk",
+      "preset_sha256": "94b518dc38d136b265b6493b4bc3fd32faaaf2abf14b9a7a31b24ea51886a465",
+      "section": "warp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "9d740e9bb7e774cc51e1cf3246c6a66c04625e40f462f7b729514f3374db1065",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "fixed_warp",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "9d740e9bb7e774cc51e1cf3246c6a66c04625e40f462f7b729514f3374db1065",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Flexi - Tenth Element.milk",
+      "preset_sha256": "537501c8a8ac320c39c6a7519f78ee076a5068848b3429fb20e9ac6d71af6b6e",
+      "section": "warp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "c7e5a28ab4aa61226a0b398bc1e94c434fde6135562f524aa8cff7b800c208f4",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "fixed_warp",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "c7e5a28ab4aa61226a0b398bc1e94c434fde6135562f524aa8cff7b800c208f4",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Smoke and Fire.milk",
+      "preset_sha256": "5b79ec3443c5dc54b89d148e8e2f88fd0b39917797abb22b25c57826ad4bcab1",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "b7eb2a4d8e526d147fc61d6e6a65e7dc988964a5dd1e97e540a0aee0e02067d7",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "b7eb2a4d8e526d147fc61d6e6a65e7dc988964a5dd1e97e540a0aee0e02067d7",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "ORB - Smoke and Ice.milk",
+      "preset_sha256": "e26af58e2ab773d1021de5af1e475a2de5938812a036e19dfc98cff4036e5f97",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "d67a0d6b2bf7f71548900e1b1518a75db773b9414aaef6384df61236624d4c68",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "d67a0d6b2bf7f71548900e1b1518a75db773b9414aaef6384df61236624d4c68",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "7904cb659869118fed10df59aeb127f3597b34b8abf400b7e0cb5ec7482bedc3",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "7904cb659869118fed10df59aeb127f3597b34b8abf400b7e0cb5ec7482bedc3",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "shifter - mosaic mitosis - j4 all servants left to gare.milk",
+      "preset_sha256": "b9212257a4199186202a1d6fba5d46e0fbb581db1a8f5645414323f6189651cc",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - amental ruiner broach2.milk",
+      "preset_sha256": "007a3729feffc0baf0debd44e56458976abad241ae4a01e7be87f4d293f0e2db",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - anti-tank tamm 1-50.milk",
+      "preset_sha256": "f22b913aa3d8d260cdd5a800b2f1644cd64c752b1983a30785ec059cba2cfec2",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "ceb5f8862d77079a195f963c6b9e79c08f81367936a040f78e7fdf294d78bf5c",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "ceb5f8862d77079a195f963c6b9e79c08f81367936a040f78e7fdf294d78bf5c",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - astral project x.milk",
+      "preset_sha256": "3f3562873e8ebd57435da5fcd3cd42a0a21c028bfc923a075e1a8ea527e26352",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - bonnie self.milk",
+      "preset_sha256": "f2e83d0b868d7e609588777c03f30dd827dda1753679c1be01d3bd0e6659137e",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - borat pubis jokulars.milk",
+      "preset_sha256": "e74a28440be792d6fc8ef83087b8eb5acd8b89492826bff6b4cff2759e3ff62b",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - care puts us through more pain, which is doubly ironically good.milk",
+      "preset_sha256": "41f127b78ac58610438013e80fe91034d126b1210a406a141ae53920b005c97b",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "2220bcca1ef4aebe555419bd70076f0f98020a0b0ea32114b3835834032da307",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "2220bcca1ef4aebe555419bd70076f0f98020a0b0ea32114b3835834032da307",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - chernobyl pie for dessert - more lateral shade of masueality.milk",
+      "preset_sha256": "c9f6b2b167de683e64426cadc684b1a76f43a91728f03c72070d93f29162dd21",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - chernobyl pie for dessert - sanguine lococlustarz banefilamanes.milk",
+      "preset_sha256": "913f45a044dae4b6aa342560754e846d3c8729fbf68c837a026ae82ee9d9e9c2",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - dikso lactose.milk",
+      "preset_sha256": "74d9b1050f5ed14df424b30a2886032e0dfe3e90fcf2e4d9ed44039636ee184f",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - do get your hopes down.milk",
+      "preset_sha256": "556d402c9f021e1e9292a2085fb38e24a9904e93ad108ded7ee9e0f14b239267",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - egg space ad hoc kludge regurge.milk",
+      "preset_sha256": "98ea6d655b9c427e67b131f878d251ffcda6333974fa39913f49285cee5b1814",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - eyes that will not see.milk",
+      "preset_sha256": "c050efb6fce70abe6b12c73d70f081de34cbfec7aeae5f050a0d90a867682826",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "0636b45d86f5fc087159ad27876a810d00d2c0b8e62aea78e71ad688de93a9ee",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "0636b45d86f5fc087159ad27876a810d00d2c0b8e62aea78e71ad688de93a9ee",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - fiShbRaiN - witchcraft (phugly megalopolish remix)2 - horse mane mattresside.milk",
+      "preset_sha256": "d1d2be17abeb05c12361834ba340fee7cdbf53d98b302a6711256bbd4988e83d",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "894044546db8627778eb6bf9da8641ffe8caf8ff900c34a7fa74d1005c4c3691",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "894044546db8627778eb6bf9da8641ffe8caf8ff900c34a7fa74d1005c4c3691",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - for all your banking needs.milk",
+      "preset_sha256": "16a5559295292f17cc0895354d2a47a9d9acdf685f610457739fda9293d987db",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - fram oil filter ad.milk",
+      "preset_sha256": "78cc704d86e901d69198a98d7aa21fc4875015c162b4bd3d7b9a0fabec085596",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - gambling with my life is ok, go for it.milk",
+      "preset_sha256": "b763050f5b3c019eb2dfee64a09114aa9d0506653ad5fe905fbdc2cf3e37fc3b",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "75a1b2db25d3bb599b5bd8610c20c22df6190afd177cb4d80db6dc1f3a81b63a",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "75a1b2db25d3bb599b5bd8610c20c22df6190afd177cb4d80db6dc1f3a81b63a",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - infinitely versatile virtual stringed biofeedback instrument.milk",
+      "preset_sha256": "210a0931e2761bfb782695a658bab04d936dc558770c51e733cd05c23a57cf61",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - insect coarse hair poizen stingers - southern cross jupiter misalignment --- Isosceles edit.milk",
+      "preset_sha256": "768710055fd0bb96eeba51cb87ce4beca03970044b061136435a2d802194554f",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - involuntarily sliding up the dimly lit floorless corroded walls.milk",
+      "preset_sha256": "4b5c31124f349a9752e4ce2ddba9b8fe23870bb7a4d9f24f102afedfb8307a4b",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - kakafonouz larquidark --- Isosceles edit.milk",
+      "preset_sha256": "30b0c90dce1da1a8dbaae8311af70a8f00446411d593e7ccc47ef9ab4a2fe881",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - keep up with invalid retrogress.milk",
+      "preset_sha256": "f48efa525d19c4ebb58f9ffd7a18e059d0cedfbc122cab568a285b446e9a0f13",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - lackstastique.milk",
+      "preset_sha256": "1ce72df71ec6f4208dc7384b46443a67022a638d3cc761862790ca114b7cf8b4",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - league fathom slide molech.milk",
+      "preset_sha256": "06c5f803dc5c71eddadfd176737b5d58deb3c239ab2ec90af20b4516cb785180",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - my pal, ball.milk",
+      "preset_sha256": "3a5c8760f3d0551d35b2e2f1330948b077d606a2399521f41ce2cabdb9453aca",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - negative infinity for not flinching - neg3.milk",
+      "preset_sha256": "cb76c1c73afec3b6f87436090b3318fd29215e84c057a0023200a960e1cdce96",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "0636b45d86f5fc087159ad27876a810d00d2c0b8e62aea78e71ad688de93a9ee",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "0636b45d86f5fc087159ad27876a810d00d2c0b8e62aea78e71ad688de93a9ee",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - never bam.milk",
+      "preset_sha256": "1e75702b33ce57180bb57aaf06bc5da0f221509d7255df1714388342ca573b01",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "bc1468dbaeab3239c1f44f2049c254f409db6d42fc4016146652973ec5394843",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - no beat forensic.milk",
+      "preset_sha256": "9d710acfe4856fca848e908eaec7013b29ca09ccdd82a90ac57e16ba50610955",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - not like this, not like this.milk",
+      "preset_sha256": "b2998ce6a2c6992ce7fe97850ec8db54c5bb9b5de700e5dd9fceaa4f0d28d24c",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "9d9fd889ca556b5b94d0423abff1aa0e1dbdcaff85dcd6c4c10df58d24721459",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "9d9fd889ca556b5b94d0423abff1aa0e1dbdcaff85dcd6c4c10df58d24721459",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - outre seepia sweyy lurk memephetase (2).milk",
+      "preset_sha256": "1964ec095a1a4821d896c35494ff6125de983eded24371a9f5989a4fd9d9047d",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - popart death smock leftbrain.milk",
+      "preset_sha256": "d0041e489835fc537211a8582f3370b8ce81d37c4d7563f9f0dd88f9e7aeb99e",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - shadowgate melt ghoul.milk",
+      "preset_sha256": "8c880c5a33ebc8d873118b3344eb9d6927363fc7dd87f8e154e97a4e0a176d92",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "261953aa9695e95e65ce406d3e996249b524173863b8a903880763fa0a57b32f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - shiny-bladed homicide machine at dusk - occult calendar time lapse slice.milk",
+      "preset_sha256": "0773fc7b69a44545b4b4e0f5e6a9945868c06e5a57e3204e9284043ec82b24d1",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "803b26a6d1d437cdfa62ed23f4c4f939b3e2705281f608a34a2f2d0ef9b08206",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "803b26a6d1d437cdfa62ed23f4c4f939b3e2705281f608a34a2f2d0ef9b08206",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - shiny-bladed homicide machine at dusk - quantum liquid beads riding cosmic strings.milk",
+      "preset_sha256": "cc85b04956f4e9aa97c6e336d578e12c400ce3898cdbc625f22fe2f9907836d9",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "ceb5f8862d77079a195f963c6b9e79c08f81367936a040f78e7fdf294d78bf5c",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "ceb5f8862d77079a195f963c6b9e79c08f81367936a040f78e7fdf294d78bf5c",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - thought she knew something about the middle east because she grew up there.milk",
+      "preset_sha256": "bec08797e519d44196fafa29821a1530c4d5fe01e945f795a486d3658721f5c3",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "7563f8c5fe7eafd52d5af69bbeaed4f27ea2f2cfa28f4a2e4851d9a105a27e54",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "7563f8c5fe7eafd52d5af69bbeaed4f27ea2f2cfa28f4a2e4851d9a105a27e54",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - to finally feel like a cyborg.milk",
+      "preset_sha256": "027a136d3330b5f384bb562d9b5af39b28c906fef29cc8fbbcdf3f0acc95c11e",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - water + god roam3.milk",
+      "preset_sha256": "fe77f903e21fd5eb9a4e7a3bbffd1dc9c7e9b91af5b9a89b63f8dbf86908bd05",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "fca8761c2c15571418e737614c30a5838883035ef573e1e45209f62e75d5921f",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "fca8761c2c15571418e737614c30a5838883035ef573e1e45209f62e75d5921f",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - water + god.milk",
+      "preset_sha256": "1634fdb50f1ada951996a3a0898056332a10819a2b3c2afeb7d4f462d576bbc3",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 3,
+        "source_sha256": "5f5367aed95cacd145b0ec133766fd73191ac5c264451fb1fa747147a98a366b",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "5f5367aed95cacd145b0ec133766fd73191ac5c264451fb1fa747147a98a366b",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - water god.milk",
+      "preset_sha256": "47ec30203c9ed7f2015d059e563b65b3cf5a19cf1ecccb1cbbfa79588a91c42e",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "329841f2fb9f9c494439ffd29f944cf51f7477ee041df3e464124dc8fb0ca0b6",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    },
+    {
+      "preset": "suksma - yaqui mirage master.milk",
+      "preset_sha256": "4fcd6be698a29ecb680d3f1933c62c9bbcc37f79f1ffa4a55e5b51a7e39b28b3",
+      "section": "comp_",
+      "stage_resolution": {
+        "shader_version": 2,
+        "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+        "conditional_on_native_profile": true,
+        "source_contains_clip": false,
+        "kind": "default_composite",
+        "reason": "offline target rejected"
+      },
+      "equation_rejections": [],
+      "translation_status": "rejected",
+      "source_sha256": "31ba9381fc99facc153f63a74b360254aa8068a79454bbbf0716f7a88ed26252",
+      "engine_archive_sha256": "1209ee81dacbc772931e2d66337d1e574d8ebf1b806c5f575eccfc812eceedb4",
+      "native_driver_verified": false
+    }
+  ],
+  "whole_preset_accuracy_verified": false
+}

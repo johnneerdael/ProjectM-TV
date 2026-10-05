@@ -6,7 +6,6 @@ import hashlib
 import json
 from pathlib import Path
 import re
-import sys
 from source_inventory import CODE_KEY,TOKEN,COMMENT,EEL_COMMENT,SUPPORTED_PREFIXES
 
 from shader_fields import ShaderFields
@@ -21,7 +20,9 @@ def source_tokens(text: str, *, shader: bool) -> list[str]:
 
 
 def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
-                 equation_loader_policy='strict-raw-v1',shader_profile=None,shader_compatibility=None) -> dict:
+                 equation_loader_policy='strict-raw-v1',shader_profile=None,shader_compatibility=None,
+                 random_binding_evidence=None,asset_metadata=None,random_policy_patch_sha256=None,
+                 random_binding_policy='strict-v1') -> dict:
     """Count source once, including omitted code and invalid/unclassified rows.
 
     Latin-1 provides a lossless byte-to-character mapping for the inventory.
@@ -30,6 +31,9 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
     its drawing/runtime effects. No AST node count enters the denominator.
     """
     digest = hashlib.sha256(raw).hexdigest()
+    from random_binding_contract import POLICY, verified_contract
+    if random_binding_policy not in {'strict-v1', POLICY}:
+        raise ValueError('unsupported random binding policy')
     from equation_loading import select_equation
     select_equation(None,'per_frame_',policy=equation_loader_policy)
     valid_cache = (cache is not None and cache.get('preset_sha256') == digest
@@ -115,6 +119,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                 parsed=selected['compile_status']=='accepted' and selected['tree_status']=='parsed'
             lowered = False
             reasons = []
+            random_context=None
             if shader and parsed:
                 stage_name='warp' if stage=='warp' else 'composite'
                 bindings=None
@@ -122,16 +127,34 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                     requested=shader_compatibility[stage_name]['request']['samplers']
                     # A declared sampler type can make offline compilation pass
                     # without proving TextureManager preserves a random alias.
-                    # The merged engine still has known randNN association gaps.
-                    if not any(re.fullmatch(r'sampler_(?:[A-Za-z]{2}_)?rand[0-9]+(?:_[A-Za-z0-9_]+)?',name,re.I)
-                               for name in requested):bindings=requested
+                    # Source-bound observed aliases may clear this only in their
+                    # verified profile; Android and future selections stay separate.
+                    random_names={name for name in requested if re.fullmatch(
+                        r'sampler_(?:[A-Za-z]{2}_)?rand[0-9]+(?:_[A-Za-z0-9_]+)?',name,re.I)}
+                    if not random_names:bindings=requested
+                    elif random_binding_evidence is not None and random_policy_patch_sha256 is not None:
+                        from random_binding_context import verified_context
+                        random_context=verified_context(cache,stage=stage_name,profile=shader_profile,
+                            evidence=random_binding_evidence,asset_metadata=asset_metadata or {},
+                            policy_patch_sha256=random_policy_patch_sha256)
+                        if (random_context is not None and random_names<=random_context['samplers'].keys() and
+                                all(requested[name]==random_context['samplers'][name] for name in random_names)):
+                            bindings=requested
+                        else:random_context=None
+                    if bindings is None and random_names and random_binding_policy == POLICY:
+                        random_context=verified_contract(cache,stage=stage_name,profile=shader_profile,
+                            compatibility=shader_compatibility[stage_name])
+                        if random_context is not None:bindings=requested
                 model = ShaderFields(stage='warp' if stage == 'warp' else 'composite',
                                      frame=3, warp_reads_blur=False,known_uniform_components=known_q,
+                                     main_binding_policy=(random_context or {}).get('main_binding_policy','legacy-sorted-v1'),
                                      known_uniform_component_domains=known_q_domains,
                                      global_input_policy=section.get('implicit_global_input_policy','strict-v1'),
                                      array_initializer_policy=section.get('array_initializer_policy','legacy-layout-v1'))
                 try:
-                    model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings)
+                    model.lower(section['tree'],language_extensions=section.get('language_extensions',[]),native_samplers=bindings,
+                                random_texture_inputs=(random_context or {}).get('random_inputs'),
+                                random_texsize_inputs=(random_context or {}).get('texsize_inputs'))
                     lowered = model.complete
                     reasons = [str(reason) for reason in model.unknown]
                 except (KeyError, TypeError, ValueError, RecursionError) as error:
@@ -142,6 +165,7 @@ def audit_source(raw: bytes, *, cache: dict | None = None, reader_sha: str,
                     'loader_numbering_reachable': visited, 'target_parsed': bool(parsed),
                     'lowering_complete': lowered if shader else None,
                     'lowering_unknowns': reasons, 'verified_behavior': None}
+            if random_context is not None:unit['random_binding_context']=random_context
             unit['loader_ignored_confirmed']=bool(stage!='configuration' and not visited and native_loader and
                                                   native_source_matches and first_values_match)
             if selected is not None:
@@ -224,7 +248,7 @@ def main() -> None:
                 'cache_identity_matches', 'source_tokens', 'code_tokens',
                 'parsed_code_tokens', 'unvisited_code_tokens')})
             if index % 1000 == 0:
-                print(f'Audited {index}/{len(paths)}', file=sys.stderr, flush=True)
+                print(f'Audited {index}/{len(paths)}', flush=True)
     source_count = sum(row['source_tokens'] for row in presets)
     code_count = sum(row['code_tokens'] for row in presets)
     parsed_count = sum(row['parsed_code_tokens'] for row in presets)

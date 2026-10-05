@@ -1,0 +1,82 @@
+import unittest
+import importlib
+import numpy as np
+import test_field_math
+
+
+class GridMathTest(unittest.TestCase):
+    def test_logical_guards_do_not_evaluate_invalid_unselected_rhs_domains(self):
+        module=importlib.import_module('grid_math')
+        for body,positions,expected in [
+            ('ret=(uv.x!=0 && 1/uv.x>0) ? float3(1) : float3(0);',[-1,0,1],[0,0,1]),
+            ('ret=(uv.x==0 || log(uv.x)>0) ? float3(1) : float3(0);',[0,.5,2],[1,0,1])]:
+            _,field=test_field_math.lower(body)
+            uv=np.zeros((3,4),dtype=np.float32);uv[:,0]=positions
+            actual=module.evaluate_grid(field,batch_shape=(3,),inputs={'_uv':uv})
+            np.testing.assert_allclose(actual,np.repeat(np.array(expected)[:,None],3,axis=1))
+
+    def test_native_vector_operations_match_known_value_and_scalar_execution(self):
+        module=importlib.import_module('grid_math')
+        from field_math import evaluate
+        _,field=test_field_math.lower('float3 a=float3(uv,bass);a.yx=a.xy+float2(.1,.2);ret=normalize(a)+float3(length(uv),0,0);')
+        uv=np.zeros((2,3,4),dtype=np.float32)
+        uv[...,0]=np.array([[0,.25,.5],[.75,.8,1]])
+        uv[...,1]=np.array([[0,.2,.4],[.6,.8,1]])
+        inputs={'_uv':uv,'_c3':[.5,0,0,0]}
+        actual=module.evaluate_grid(field,batch_shape=(2,3),inputs=inputs)
+        np.testing.assert_allclose(actual[0,0],[.2,.1,.5]/np.sqrt(.3),atol=1e-6)
+        for i in range(2):
+            for j in range(3):
+                np.testing.assert_allclose(actual[i,j],evaluate(field,inputs={'_uv':uv[i,j],'_c3':[.5,0,0,0]}),atol=1e-6)
+
+    def test_selected_domains_only_are_evaluated_in_mixed_grid_conditions(self):
+        module=importlib.import_module('grid_math')
+        _,field=test_field_math.lower('ret=uv.x>0 ? float3(log(uv.x)) : float3(0);')
+        uv=np.array([[-1,0,0,0],[0,0,0,0],[.5,0,0,0]],dtype=np.float32)
+        result=module.evaluate_grid(field,batch_shape=(3,),inputs={'_uv':uv})
+        np.testing.assert_allclose(result,[[0]*3,[0]*3,[np.log(.5)]*3],atol=1e-6)
+
+    def test_matrix_rotation_preserves_each_lane_and_row_vector_convention(self):
+        module=importlib.import_module('grid_math')
+        _,field=test_field_math.lower('float2x2 m=float2x2(cos(time),-sin(time),sin(time),cos(time));ret=float3(mul(uv,m),0);')
+        uv=np.array([[[1,0,0,0],[0,1,0,0]]],dtype=np.float32)
+        result=module.evaluate_grid(field,batch_shape=(1,2),inputs={'_uv':uv,'_c2':[np.pi/2,30,0,0]})
+        np.testing.assert_allclose(result,[[[0,-1,0],[1,0,0]]],atol=1e-6)
+
+    def test_matrix_index_can_differ_per_lane(self):
+        module=importlib.import_module('grid_math')
+        _,field=test_field_math.lower('float2x2 m=float2x2(1,2,3,4);ret=float3(m[(int)uv.x],0);')
+        result=module.evaluate_grid(field,batch_shape=(2,),inputs={'_uv':[[0,0,0,0],[1,0,0,0]]})
+        np.testing.assert_allclose(result,[[1,2,0],[3,4,0]])
+
+    def test_texture_callback_gets_exact_coordinates_and_history_for_all_lanes(self):
+        module=importlib.import_module('grid_math')
+        _,field=test_field_math.lower('ret=GetPixel(uv+float2(.01,0))*bass;')
+        uv=np.array([[[.25,.25,0,0],[.75,.25,0,0]],[[.25,.75,0,0],[.75,.75,0,0]]],dtype=np.float32)
+        seen=[]
+        def sample(detail,coordinates):
+            seen.append((detail['frame'],coordinates.copy()))
+            u,v=coordinates[:,0],coordinates[:,1]
+            return np.stack((u,v,u*v,np.ones_like(u)),axis=-1)
+        actual=module.evaluate_grid(field,batch_shape=(2,2),inputs={'_uv':uv,'_c3':[2,0,0,0]},sample=sample)
+        self.assertEqual(seen[0][0],2)
+        self.assertEqual(seen[0][1].shape,(4,2))
+        np.testing.assert_allclose(actual[0,0],[.52,.5,.13],atol=1e-6)
+
+    def test_uniform_vector_is_not_confused_with_equal_length_batch(self):
+        module=importlib.import_module('grid_math')
+        _,field=test_field_math.lower('ret=float3(bass,mid,treb);')
+        actual=module.evaluate_grid(field,batch_shape=(4,),inputs={'_c3':[.2,.4,.6,1]})
+        np.testing.assert_allclose(actual,np.tile([.2,.4,.6],(4,1)),atol=1e-6)
+
+    def test_nonfinite_selected_domain_and_invalid_input_shapes_remain_unresolved(self):
+        module=importlib.import_module('grid_math')
+        from field_math import UnresolvedMath
+        _,field=test_field_math.lower('ret=float3(log(uv.x));')
+        with self.assertRaises(UnresolvedMath):
+            module.evaluate_grid(field,batch_shape=(2,),inputs={'_uv':[[1,0,0,0],[0,0,0,0]]})
+        with self.assertRaises(UnresolvedMath):
+            module.evaluate_grid(field,batch_shape=(2,),inputs={'_uv':np.zeros((2,3))})
+
+
+if __name__=='__main__':unittest.main()

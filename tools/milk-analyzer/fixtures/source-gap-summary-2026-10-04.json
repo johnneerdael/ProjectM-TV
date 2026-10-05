@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "presets": 9606,
+  "corpus_sha256": "fd34e89d27d6a2a90b43a09f599ce03347d474bb5044578703420738f9ac4ff0",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Known source-audit parsing/lowering gaps; behavioral obligations are not yet enumerated.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 490,
+  "verified_behavior_percent": null,
+  "details_sha256": "e39bdb98a57b8bbe563b351efd4f6919eda2004d019b1cc571836c2ff4b28db9",
+  "implementation_sha256": "9d5166d4bc9cf0df817903b8cf9f19e5b5c7324244f7db4951015b9a7463dae7",
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 149,
+      "affected_units": 149,
+      "affected_source_tokens": 49694,
+      "sole_known_gap_presets": 145,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 2,
+        "same-name initializer binding differs in emitted GLSL": 2
+      }
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 127,
+      "affected_units": 129,
+      "affected_source_tokens": 49982,
+      "sole_known_gap_presets": 106,
+      "overlap_presets": {
+        "nonterminal shader helper return not lowered: hardcore_stars": 4,
+        "shader helper global writes not lowered: project": 8,
+        "shader helper/intrinsic not lowered: modf": 9
+      }
+    },
+    {
+      "gap": "native GLSL array initializer layout mismatch",
+      "affected_presets": 56,
+      "affected_units": 56,
+      "affected_source_tokens": 21139,
+      "sole_known_gap_presets": 49,
+      "overlap_presets": {
+        "nonterminal shader helper return not lowered: all": 5,
+        "target parse unavailable": 2
+      }
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 51
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 51
+      }
+    },
+    {
+      "gap": "same-name initializer binding differs in emitted GLSL",
+      "affected_presets": 49,
+      "affected_units": 49,
+      "affected_source_tokens": 15360,
+      "sole_known_gap_presets": 47,
+      "overlap_presets": {
+        "target parse unavailable": 2
+      }
+    },
+    {
+      "gap": "nonterminal shader helper return not lowered: all",
+      "affected_presets": 27,
+      "affected_units": 27,
+      "affected_source_tokens": 9588,
+      "sole_known_gap_presets": 22,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 5
+      }
+    },
+    {
+      "gap": "source outside supported numbered loader",
+      "affected_presets": 20,
+      "affected_units": 25,
+      "affected_source_tokens": 952,
+      "sole_known_gap_presets": 20,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "texture sampling overload not lowered: tex2Dbias",
+      "affected_presets": 13,
+      "affected_units": 13,
+      "affected_source_tokens": 3934,
+      "sole_known_gap_presets": 13,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "shader helper global writes not lowered: project",
+      "affected_presets": 11,
+      "affected_units": 11,
+      "affected_source_tokens": 10654,
+      "sole_known_gap_presets": 3,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 8
+      }
+    },
+    {
+      "gap": "shader helper/intrinsic not lowered: modf",
+      "affected_presets": 9,
+      "affected_units": 9,
+      "affected_source_tokens": 8112,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 9
+      }
+    },
+    {
+      "gap": "nonterminal shader helper return not lowered: hardcore_stars",
+      "affected_presets": 4,
+      "affected_units": 4,
+      "affected_source_tokens": 3632,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 4
+      }
+    },
+    {
+      "gap": "shader helper global writes not lowered: dz",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2367,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader helper global writes not lowered: rs2": 3
+      }
+    },
+    {
+      "gap": "shader helper global writes not lowered: rs2",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2367,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader helper global writes not lowered: dz": 3
+      }
+    },
+    {
+      "gap": "texture sampling overload not lowered: tex2Dlod",
+      "affected_presets": 1,
+      "affected_units": 1,
+      "affected_source_tokens": 169,
+      "sole_known_gap_presets": 1,
+      "overlap_presets": {}
+    }
+  ],
+  "lowering_inputs": {
+    "shader_fields.py": "e10ccc4904ba43cfe2526b4dceb923aae9d520d066f1d1b36a23ec5c05618096",
+    "sampling_policy.py": "0efa2ecbe8e2894897a7d91130cb198ef9a694f111e00d429470aece7da7093f"
+  },
+  "reader_sha256": "9d935f2fbd4994c0c0b374ec3208bd26042f0efe4492913937b5de5ac503d7c4",
+  "basis": "Current symbolic source audit; not behavioral or score coverage",
+  "branch_commit": "8afa20d"
+}

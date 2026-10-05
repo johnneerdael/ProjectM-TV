@@ -92,8 +92,8 @@ def main_q_domains(source,*,policy):
     # Mirror the reset names already used by scene equation orchestration.
     # Configuration and frame inputs remain unknown without explicit bounds;
     # main Q values reload their init snapshot, custom variables persist.
-    from source_context import FRAME_INPUTS
-    reset_names=set(FRAME_INPUTS)
+    from scene_equations import MAIN,READONLY
+    reset_names=set(MAIN)|set(READONLY)|{'meshx','meshy','pixelsx','pixelsy','aspectx','aspecty'}
     q_defaults={f'q{i}':state.get(f'q{i}') for i in range(1,33)}
     growth={}
     for _ in range(16):

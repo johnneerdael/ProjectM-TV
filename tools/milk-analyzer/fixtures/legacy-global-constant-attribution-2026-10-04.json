@@ -1,0 +1,221 @@
+{
+  "scope": "Compiler/reflection attribution, not rendered appearance or D3D device constant-state proof;22known source blockers remain",
+  "date": "2026-10-04",
+  "download_source": "https://www.microsoft.com/en-us/download/details.aspx?id=8109",
+  "download_url": "https://download.microsoft.com/download/8/4/a/84a35bf1-dafe-4ae8-82af-ad2ae20b6b14/directx_Jun2010_redist.exe",
+  "artifact_sha256": {
+    "directx_Jun2010_redist.exe": "053f76dcbb28802e23341b6a787e3b0791c0fa5c8d4d011b1044172dbf89c73b",
+    "native/d3dx9_36.dll": "c12f0ab0338eb5031d3d04beaf7208ac848f7e037d21ff963d2af90221cbe935",
+    "d3dx9_31.dll": "e2065619fe6eb0034833b1dc0369deb4a6edc3110e38a1132eeafcf430c578a5",
+    "probe.c": "4edbf4da9fec4798bbab70eb5965df40466c07c8daceb9332e0277ed2af8bbda",
+    "probe.exe": "4114678a7c0b6e3f01f92128bca6df13e4833865d1ad92580aa1c6d833b2893d"
+  },
+  "profile": "ps_3_0",
+  "flags": 65536,
+  "compiler_chain": "Native Microsoft D3DX9_36\u2192native Microsoft D3DX9_31;loader trace confirms both;Microsoft compiler9.15.779.0000 disassembly;Wine supplies host/validator only",
+  "rejected_earlier_probe": "Microsoft wrapper without native legacy dependency delegated toWine/vkd3d;notused asMicrosoft evidence",
+  "rows": [
+    {
+      "preset": "Serge + martin - crystal palace tunnel003.milk",
+      "preset_sha256": "f4ab74c7f561e50177b1b68ecf647045de78582ba378e39bb9295d26a55fd4e2",
+      "section": "warp_",
+      "source_sha256": "22b78004b2c590d88b0489fdd688f6d43dbea589ca3a307e7a379b5f26143800",
+      "prepared_hlsl_sha256": "79a3e40954c30d2a0649351a060cbaeb6e6273ab58f02950dd6490fc7880b55f",
+      "include_sha256": "700c38fbebcd3fa51ec5dd1696ec7ce27a5898b98ae46284396c4cda82265e81",
+      "legacy_constant": "CONSTANT name=mus set=2 register=6 count=1 class=1 type=3 rows=1 columns=3 bytes=12 default=NULL",
+      "native_loads": [
+        "07e0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "07e0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ],
+      "legacy_output_sha256": "e45f21837dd509b4e8c9e0adec22bda098ddff2a97ceb03ff99e3675c27350d6",
+      "current_native_glsl": {
+        "status": "translated",
+        "storage_lines": [
+          "vec3 mus;",
+          "    vec3 ret1 = vec3( ((crisp + mus) + dots) );"
+        ],
+        "identity": {
+          "engine": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e",
+            "patches_sha256": "a0c7ddefb6e18c13641b3aaa48a0b90abc78b2f27f3f688ea5d02a551697895c"
+          },
+          "engine_archive_sha256": "01c128d5bca6e27b834878a437088ab63294ff8a99dac2abe3211486f68c9963",
+          "native_source_sha256": "e09f6f4181499c70aa58aa79c5cd9550eb2343346274b0fb309ed311091921c2",
+          "preprocess_body_sha256": "682d0cb71050ea603069f3fb201d26410262a710455503f41a716f6e736754e5",
+          "sampler_reference_body_sha256": "d152584656b3764d66775f10a8ef2301e79b53ee144c5c76e3c35af8bd466f57",
+          "shader_header_sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b",
+          "translation_body_sha256": "c02ea51b77933d13ddb12f5b14adb263944a0cae580a136e54318a4fbc93b5f2"
+        },
+        "request": {
+          "code": "float3 mus;\nfloat2 rs, uv1, uv6, uv7, uv8;\nfloat dx,dy;\nshader_body {\nuv = uv_orig;\nuv1 = (uv-.5) * aspect.xy;\n\n//BACKGROUND\nfloat z = 16*length(uv1)+time;\nfloat2 uvn =normalize(uv1);\nrs = clamp(tan(z)*uvn,-5,5)/2;\n\n//CRYSTAL\nfloat mult = q31;\nuv7 = sin(uv1*mult);\nuv8 = uv7;\nfloat dist = length(uv8);\ndist *= (abs(uv1.x) + abs(uv1.y))+ q32;\n\nfloat ang2 = atan2 (uv8.y,uv8.x);\nang2 =  .1*floor (16* ang2);\nfloat2 dir = .5*uv8+float2 (cos(ang2), sin(ang2));\n\n\nz = (1-cos(8*dist));\nz = saturate (z);\n\n//ADD\nfloat mask = (z >= .5); //momentan beliebig\nrs = q28*rs + (1-q28)*rs.yx;\nuv += (1-mask)*.03*(rs.yx) + .5*mask*z*normalize(dir);\n\n\n\n//DOTS\nfloat2 uv2 = .7*uv1+.3*sin(uv1*16+4*float2 (q5,q6));\nuv2 *= .2;\nfloat3 dots = q26*saturate(.001/(length(uv2)));\nfloat3 blur = GetBlur1(frac(uv));\nfloat3 crisp= GetPixel(uv);\nfloat3 diff = (crisp) - .5*blur;\nfloat3 ret1 = crisp + mus + dots;\n\nfloat3 mod = tex2D (sampler_noise_lq,.5*uv+time*.01)-.2;\nmod = 1 - mod*diff;\n\nret = (1-mask)*ret1*mod + mask*ret1*mod;\nret = ret *.98- .03;\n\n}\n",
+          "stage": "warp",
+          "profile": "gles300",
+          "samplers": {
+            "sampler_blur1": "sampler2D",
+            "sampler_blur3": "sampler2D",
+            "sampler_main": "sampler2D",
+            "sampler_noise_lq": "sampler2D",
+            "sampler_blur2": "sampler2D"
+          },
+          "texture_sizes": []
+        }
+      }
+    },
+    {
+      "preset": "martin - mandelbox explorer - wreck diver nz+ liquititty.milk",
+      "preset_sha256": "2d767a8f65168592fc25b0e70accb968fa5b118296b64f66a62e5f889a9faddd",
+      "section": "comp_",
+      "source_sha256": "ee6f0a1fa8446e3938b4ed98f71c82e7d32e24de800f2cc16f6b89de6ba38b44",
+      "prepared_hlsl_sha256": "cee64806ec9c3bb959b8c6d3e1cf0ebec3bc6e8a1a45cf185fa86ee2cc5762dd",
+      "include_sha256": "700c38fbebcd3fa51ec5dd1696ec7ce27a5898b98ae46284396c4cda82265e81",
+      "legacy_constant": "CONSTANT name=dist_c set=2 register=13 count=1 class=0 type=3 rows=1 columns=1 bytes=4 default=NULL",
+      "native_loads": [
+        "07f4:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "07f4:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ],
+      "legacy_output_sha256": "55749e29372dc645ccf70b85b3e3ec0fe8cc779d004ea40ef607d8f07f6d790c",
+      "current_native_glsl": {
+        "status": "translated",
+        "storage_lines": [
+          "float glow, tmp, lamp, dist, bdist, b2dist, dist_c, smask, z;",
+          "    float focus = float( clamp(mult0(abs((GetDistB((_uv).xy) - dist_c)),float (3)), 0.0, 1.0) );",
+          "    (dist_c = clamp(GetDistB2(center), float(0.1), float(0.4)));"
+        ],
+        "identity": {
+          "engine": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e",
+            "patches_sha256": "a0c7ddefb6e18c13641b3aaa48a0b90abc78b2f27f3f688ea5d02a551697895c"
+          },
+          "engine_archive_sha256": "01c128d5bca6e27b834878a437088ab63294ff8a99dac2abe3211486f68c9963",
+          "native_source_sha256": "e09f6f4181499c70aa58aa79c5cd9550eb2343346274b0fb309ed311091921c2",
+          "preprocess_body_sha256": "682d0cb71050ea603069f3fb201d26410262a710455503f41a716f6e736754e5",
+          "sampler_reference_body_sha256": "d152584656b3764d66775f10a8ef2301e79b53ee144c5c76e3c35af8bd466f57",
+          "shader_header_sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b",
+          "translation_body_sha256": "c02ea51b77933d13ddb12f5b14adb263944a0cae580a136e54318a4fbc93b5f2"
+        },
+        "request": {
+          "code": "#define sat saturate\nsampler sampler_pw_noise_lq;\nfloat mask1, gmask, bsize, rad1, slot, grid, anz, bcentre;\nfloat glow, tmp, lamp, dist, bdist, b2dist, dist_c, smask, z;\nfloat2 rs, rs0, uv0, uv1, uv2, uv3,uv4, rsk, bubble, dz;\nfloat3 noise, bubbles;\n\nstatic const float2 pix = texsize.zw, center = float2 (q1,q2);\nstatic const float3 CamPos = float3(q4,q5,q6);\nstatic const float myzoom = q7;\nstatic const float3x3 RotMat = float3x3(q20,q21,q22,q23,q24,q25,q26,q27,q28);\nstatic const float3 col_struc =  float3(1,.4,.1)/4;\n\nfloat3 GetBlurX (float2 uvi, float x) {return lerp (GetPixel(uvi), GetBlur1(uvi), x);}\nfloat GetDist(float2 uvi)   {return 1-GetPixel(uvi).b;}\nfloat GetDistB(float2 uvi)  {return 1-GetBlur1(uvi).b;}\nfloat GetDistB2(float2 uvi) {return 1-GetBlur2(uvi).b;}\n\nfloat MinDistB (float2 uvi) {float tmp; float4 nb; //##nicht ideal\n  tmp = GetDist(uvi);\n  return min(tmp,GetDistB(uvi)) ;}\n\nfloat shadow (float2 uvi) {int n; float dark; float2 uvc, dx;\n  dark = 0; n = 1;\n  while ( (n <= 2)) \n     {dx = .04*n * (center-.5); \n      uvc = (uvi+dx); \n      dark = dark + sat(4*(GetBlur1(uvi).b-GetBlur1(uvc).b) -dx*4); \n      n++;}\n  return (dark/2);}\n\nshader_body {\nuv = (uv-.5)*.9 + .5;\nuv0 = uv;\n\ndist = MinDistB(uv);\nbdist = lerp(dist,GetDistB(uv),.2);\nfloat focus = sat(abs(GetDistB(uv)-dist_c)*3);\n\nfloat2 noise = tex2D (sampler_noise_mq,float2(uv.x,uv.y/4-.1*time)).xy;\nuv += .004*bdist*noise ;\nfloat2 uv5 = (uv-.5)*aspect.xy  - float2(q11,q12);\nbubbles = 0; gmask = 0; anz = 3; bcentre = 0;\nfor (int m= 1; m<= anz; m++)\n{\n  z = 1-frac(1.0/anz*m+q9); \n  uv1 = uv5*z;\n//  uv1 = mul(uv1, float2x2(.7,.7,-.7,.7));\n  \n  grid = 16.0*m/512;\n  \n  slot = tex2D(sampler_pw_noise_lq,uv1.x*grid)+.5;\n  uv1.y += slot*time*.06;\n  bsize = tex2D(sampler_pw_noise_lq,uv1*grid);\n  rsk = frac(8*m*uv1)-.5 ;\n  dz = normalize(rsk);\n  rad1 = 3*length (rsk) *(2+m);\n  uv4 =  (rad1*rad1)*dz;\n  mask1 = saturate(9-8*rad1) * (bsize > .85) ;\n  gmask = gmask || mask1;\n  bubbles += float3 (uv4,.1/(rad1)) * (1-z) * mask1;\n}\ngmask *= sat (bdist*16-8*z);\nuv +=  .1*bubbles*gmask;\n\ndist = MinDistB(uv);\nbdist = lerp(dist,GetDistB(uv),.2);\ndist_c = clamp(GetDistB2 (center),.1,.4); //center distance\n\nfloat struc = GetBlurX(uv,focus).r;\n\nret = struc* col_struc *float3(1-bdist,1,1)+ pow(sat(struc),4) * float3 (0,1,.2);\nfloat4 noise9 = tex3D(sampler_noisevol_hq, \n                      ((uv.xyy*q28\n                       )*texsize.xyy*texsize_noisevol_hq.zww\n                      ).xyz*\n                      float3(1,1,0)*0.05 + \n                      time*float3(0,0,1)*q31\n                     );\nif(ret.x> q26*q13         && ret.x<= q23*q11        )ret.z -= (noise9).x*.5; \nif(ret.y> q25*q11         && ret.y<= q22*q12        )ret.x -= (noise9).y*.5; \nif(ret.z> q24*q12         && ret.z<= q21*q13        )ret.y -= (noise9).z*.5; \n\n\n//distant light\nret += gmask*bubbles.z * (1+slow_roam_cos);\n\nret = lerp(ret, float3(0,.05,.1)*4*q19, sat(pow(bdist,1.5)));\n\nfloat moon = (.5/length(sin(3*(uv5))));\nret += sat(MinDistB(uv)*6-5)*moon*float3(0,.1,.1);\n\n//Lamp\nuv3 = uv-center; \nfloat ddd = GetPixel(uv).r - GetPixel((uv-.5)*(1.01)+.5).r;\nlamp = saturate(1-4*length(uv3)) * (.1+struc+ddd);\nret += lamp*(saturate(1-bdist/2))*(1-0*shadow(uv)) * float3(1,.8,.3);\n\nret = 1-exp((-1.6)*ret);\n//ret += shadow(uv);\n//ret = GetPixel(uv0).r;\n}\n\n//-------------------------------------------\n//Written by martin\n\n",
+          "stage": "composite",
+          "profile": "gles300",
+          "samplers": {
+            "sampler_noise_mq": "sampler2D",
+            "sampler_blur1": "sampler2D",
+            "sampler_pw_noise_lq": "sampler2D",
+            "sampler_blur2": "sampler2D",
+            "sampler_blur3": "sampler2D",
+            "sampler_main": "sampler2D",
+            "sampler_noisevol_hq": "sampler3D"
+          },
+          "texture_sizes": [
+            "texsize_noisevol_hq"
+          ]
+        }
+      }
+    },
+    {
+      "preset": "martin - organic light.milk",
+      "preset_sha256": "71c481a0ebc470c3a9e717630cdd3785f4217248f81cbe6157cf1da99914698e",
+      "section": "comp_",
+      "source_sha256": "84b1eb4138280dc697d0b50b1ce0fca5720235c59e3cdbbaa6823ce2f786f190",
+      "prepared_hlsl_sha256": "fc664b804f5c8d2e592eacb33d5be69f4715a284529be325d74b402de74d0dd3",
+      "include_sha256": "700c38fbebcd3fa51ec5dd1696ec7ce27a5898b98ae46284396c4cda82265e81",
+      "legacy_constant": "CONSTANT name=uv3 set=2 register=2 count=1 class=1 type=3 rows=1 columns=2 bytes=8 default=NULL",
+      "native_loads": [
+        "0804:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0804:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ],
+      "legacy_output_sha256": "37d1bf1dacc4c07c2bf5a11b173113d06f3964e63b5380889e410f52d32e7ea2",
+      "current_native_glsl": {
+        "status": "translated",
+        "storage_lines": [
+          "vec2 rs, rs2, uv1, uv2, uv3, uv4, uv6, dz, dz1;",
+          "    (uv3 = (mult0(vec2 (float(0.4)),cos(mult0(vec2 (42),uv3))) + mult0(vec2 (64),dz)));",
+          "    (neu = vec3 (clamp((float(0.01) / length(uv3)), 0.0, 1.0)));"
+        ],
+        "identity": {
+          "engine": {
+            "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+            "instrumentation_sha256": "5bc595dcca2b85a705ad491f8b2636c03968960ade5adea4a253abf79857b93e",
+            "patches_sha256": "a0c7ddefb6e18c13641b3aaa48a0b90abc78b2f27f3f688ea5d02a551697895c"
+          },
+          "engine_archive_sha256": "01c128d5bca6e27b834878a437088ab63294ff8a99dac2abe3211486f68c9963",
+          "native_source_sha256": "e09f6f4181499c70aa58aa79c5cd9550eb2343346274b0fb309ed311091921c2",
+          "preprocess_body_sha256": "682d0cb71050ea603069f3fb201d26410262a710455503f41a716f6e736754e5",
+          "sampler_reference_body_sha256": "d152584656b3764d66775f10a8ef2301e79b53ee144c5c76e3c35af8bd466f57",
+          "shader_header_sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b",
+          "translation_body_sha256": "c02ea51b77933d13ddb12f5b14adb263944a0cae580a136e54318a4fbc93b5f2"
+        },
+        "request": {
+          "code": "float z;\nfloat3 ret1, neu, mus;\nfloat2 rs,rs2,uv1,uv2, uv3,uv4,uv6,dz,dz1;\nshader_body\n{\nfloat2 uv2;\n//uv = (uv-0.5) * aspect.xy + .5;    \ndz = 0;\n\n\nfloat2 hor = float2(texsize.z,0);\nfloat2 ver = float2(0,texsize.w);\n\nfloat dist = 1;\nfloat inten = 1;\nret1 = 0;\nfloat anz = 1;\nfloat n = 0;\n//uv = mul(uv-.5, float2x2(_qa))+.5;\nfloat z = uv.y/2+1; z = z/1.2; z = 1;\nuv4 = float2((uv.x-.5)/z+.5,uv.y/z);\n    dz.x = lum(GetPixel(uv4+hor)- GetPixel (uv4-hor));\n    dz.y = lum(GetPixel(uv4+ver)- GetPixel (uv4-ver));\n\n//uv4 = 0;\n\nmus = 1*GetPixel(uv4+.2*dz)-q1*1*dz.y+.04;\n\nuv2 = uv-.5;\n    dist = 1-frac(1.0/anz*n-.1); //evtl sqrt !;\n\n    inten =  sqrt(dist)*(1-dist*dist)*4;\n\n\n    uv3 = .4 * cos(42*uv3) + 64*dz;\n    neu = saturate(.01/length(uv3)) ;\n    neu = dist*neu + (1-dist)*lum(neu);\n    ret1 = max(ret1,neu*inten);\n\n\nret = -0*ret1  +  saturate(12*mus*(.1+ret1))-.05;\n}\n",
+          "stage": "composite",
+          "profile": "gles300",
+          "samplers": {
+            "sampler_main": "sampler2D",
+            "sampler_blur1": "sampler2D",
+            "sampler_blur2": "sampler2D",
+            "sampler_blur3": "sampler2D"
+          },
+          "texture_sizes": []
+        }
+      }
+    }
+  ],
+  "controls": [
+    {
+      "case": "global-mus",
+      "source": "float3 mus;float4 PS(float2 uv:TEXCOORD0):COLOR{return float4(.2+mus,1);}",
+      "source_sha256": "4fb22656238c1679f148af9304f5046e1b1d80042e70a2f3156607d226a005ee",
+      "returncode": 0,
+      "constant_rows": [
+        "CONSTANTS 1",
+        "CONSTANT name=mus set=2 register=0 count=1 class=1 type=3 rows=1 columns=3 bytes=12 default=NULL"
+      ],
+      "diagnostic_rows": []
+    },
+    {
+      "case": "global-dist",
+      "source": "float dist_c;float4 PS(float2 uv:TEXCOORD0):COLOR{float focus=abs(uv.x-dist_c);dist_c=.3;return float4(focus,dist_c,0,1);}",
+      "source_sha256": "e78222169d309735671f8de8544869887185bbf0b5519dc67a3edace4eb70e48",
+      "returncode": 0,
+      "constant_rows": [
+        "CONSTANTS 1",
+        "CONSTANT name=dist_c set=2 register=0 count=1 class=0 type=3 rows=1 columns=1 bytes=4 default=NULL"
+      ],
+      "diagnostic_rows": []
+    },
+    {
+      "case": "global-uv3",
+      "source": "float2 uv3;float4 PS(float2 uv:TEXCOORD0):COLOR{uv3=.4*cos(42*uv3)+uv;return float4(uv3,0,1);}",
+      "source_sha256": "dead6d51a05515eba5e1918a3ac357175b70027708ddebc66598a23660ef533d",
+      "returncode": 0,
+      "constant_rows": [
+        "CONSTANTS 1",
+        "CONSTANT name=uv3 set=2 register=0 count=1 class=1 type=3 rows=1 columns=2 bytes=8 default=NULL"
+      ],
+      "diagnostic_rows": []
+    },
+    {
+      "case": "static-uv3",
+      "source": "static float2 uv3;float4 PS(float2 uv:TEXCOORD0):COLOR{uv3=.4*cos(42*uv3)+uv;return float4(uv3,0,1);}",
+      "source_sha256": "825e7b7fcc6321fb1a4fb13aa362e69f6c39efbf4484c096f1170011d818636a",
+      "returncode": 0,
+      "constant_rows": [
+        "CONSTANTS 0"
+      ],
+      "diagnostic_rows": []
+    },
+    {
+      "case": "local-uv3",
+      "source": "float4 PS(float2 uv:TEXCOORD0):COLOR{float2 uv3;uv3=.4*cos(42*uv3)+uv;return float4(uv3,0,1);}",
+      "source_sha256": "12a8f8034f1dcd3339a57439c8661eac3a5d41df3a12faee898b8d9024dc62fa",
+      "returncode": 7,
+      "constant_rows": [],
+      "diagnostic_rows": [
+        "(1): error X4000: variable 'uv3' used without having been completely initialized"
+      ]
+    }
+  ],
+  "committed_probe_source_sha256": "d5b6c5de0a86b6eb536e065aa13d1c4ae0f74528a61a5e47d776c71728b18df9"
+}

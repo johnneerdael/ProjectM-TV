@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "presets": 315,
+  "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Merged PR26 source-language audit under explicit sampler descriptors, rejecting unverified randNN association; equation policy stillcore2.2.6 until PR27adapteradoption. Not fullAAR appearance classification.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 54,
+  "verified_behavior_percent": null,
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 43,
+      "affected_units": 43,
+      "affected_source_tokens": 8983,
+      "sole_known_gap_presets": 43,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 5,
+      "affected_units": 5,
+      "affected_source_tokens": 2298,
+      "sole_known_gap_presets": 5,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 3,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 573,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 3
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 573,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 3
+      }
+    }
+  ],
+  "merge_revision": "ce9b80aa65860a81efa7ca90ad4763fcd96a2f58",
+  "implementation_sha256": {
+    "native_reader.cpp": "ad524c49d4cd201f1cdc1753ae8985fa1b89949912967ab4132a57bd54fbe3bf",
+    "shader_fields.py": "7ce6baeacb1611497a6dafedf12720ea952e92ba3a61bae92b71a2cf6524d17f",
+    "coverage_audit.py": "348b0858db388a76fa10c5c458cced68dc98c533dd0fe079e3cfa2cbb195b766",
+    "equation_loading.py": "132b62e481a13edc4eb8c8adc407bb9d8f391c74fa7f03fc4360d3ecccb83cc4"
+  }
+}

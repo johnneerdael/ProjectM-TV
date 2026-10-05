@@ -1,0 +1,124 @@
+{
+  "basis": "Original warp/composite lexical random-name references with comments removed; disabled and unreachable source retained; runtime use unproven",
+  "presets": 9606,
+  "corpus_sha256": "fd34e89d27d6a2a90b43a09f599ce03347d474bb5044578703420738f9ac4ff0",
+  "affected_presets": {
+    "rand_preset": 412,
+    "any_shader_random": 3205,
+    "rand_frame": 2908,
+    "rot_d": 12,
+    "rot_uf": 1,
+    "rot_f": 3
+  },
+  "witnesses": {
+    "rand_preset": [
+      {
+        "preset": "$$$ Royal - Mashup (1).milk",
+        "preset_sha256": "a7c9240f57f8a448b8a6dfd7fbe9f0501419da9d4ae987ca2961e6733c3e3078"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (135).milk",
+        "preset_sha256": "14d830f48fa00ce19e4c479542d02973aac4388beeb49208813722751a8abcbf"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (136).milk",
+        "preset_sha256": "a3e3609e99dc457320596b1f28d21f1a5febc064bc43d598f5925ae3a8d7fd40"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (137).milk",
+        "preset_sha256": "39c7b6e9b6b7c2a3afcb1dd0c1935101a32c297f1bbb1d88d3232441a38d566f"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (153).milk",
+        "preset_sha256": "9c6cecd72d53ba699f64a6f98ca66392a5314ccf3de8012c22189dbae84e5cc9"
+      }
+    ],
+    "any_shader_random": [
+      {
+        "preset": "$$$ Royal - Mashup (1).milk",
+        "preset_sha256": "a7c9240f57f8a448b8a6dfd7fbe9f0501419da9d4ae987ca2961e6733c3e3078"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (111).milk",
+        "preset_sha256": "bd2e61dc42306239ef156b1ef2f3f77448d9e60295d626a81c55829db5f15ccb"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (120).milk",
+        "preset_sha256": "76bc8bb4e156a4ab59a80ea45aa6bc7e74698c0462dd1805c2366c2e9db4bb9e"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (127).milk",
+        "preset_sha256": "2baab5f2d17a57536de1f2a85bd0ced45a03ee0a681138b264a954d42b50b425"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (129).milk",
+        "preset_sha256": "1e358d1214efc01cbbe66e4a00b35af9a28685d30329760badce32d92b6a9422"
+      }
+    ],
+    "rand_frame": [
+      {
+        "preset": "$$$ Royal - Mashup (111).milk",
+        "preset_sha256": "bd2e61dc42306239ef156b1ef2f3f77448d9e60295d626a81c55829db5f15ccb"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (120).milk",
+        "preset_sha256": "76bc8bb4e156a4ab59a80ea45aa6bc7e74698c0462dd1805c2366c2e9db4bb9e"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (127).milk",
+        "preset_sha256": "2baab5f2d17a57536de1f2a85bd0ced45a03ee0a681138b264a954d42b50b425"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (129).milk",
+        "preset_sha256": "1e358d1214efc01cbbe66e4a00b35af9a28685d30329760badce32d92b6a9422"
+      },
+      {
+        "preset": "$$$ Royal - Mashup (130).milk",
+        "preset_sha256": "e68335464cab7a6efd1cdbceabc1767bcbf1d448ca937a2d040ae3328f3eb943"
+      }
+    ],
+    "rot_d": [
+      {
+        "preset": "Zylot - True Visionary (Final Mix) false auralary nz+ munchkin.milk",
+        "preset_sha256": "80c56a3c7d68757a4d12ec67ad50b3c00860307128d095e92da7f44c74abbb27"
+      },
+      {
+        "preset": "dylan - LED ravers addition (spectratex).milk",
+        "preset_sha256": "55bd505a7550bd87df88a5f08ca10f4effb2f216856945d6c35d6ff37e0c444b"
+      },
+      {
+        "preset": "fed + Goody + Flexi - bicycle year.milk",
+        "preset_sha256": "ccb5b531d7f13ecdd4997b30887be60784d59d992ec6cc175e8683679d1bad7f"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2 --- Isosceles edit1.milk",
+        "preset_sha256": "e16896433b87bd122965f9f2aeb0aa483426e6e8744542ee2cf595eebdd1e81c"
+      },
+      {
+        "preset": "fed - DSC-011 LSD Edit 2 --- Isosceles edit2.milk",
+        "preset_sha256": "189e9790e3207e9c2d94ba34d1296beb5149b9eb059a51cc3518038298a787b0"
+      }
+    ],
+    "rot_uf": [
+      {
+        "preset": "dylan - LED ravers addition (spectratex).milk",
+        "preset_sha256": "55bd505a7550bd87df88a5f08ca10f4effb2f216856945d6c35d6ff37e0c444b"
+      }
+    ],
+    "rot_f": [
+      {
+        "preset": "fed - slowfast 2-11 [Killa].milk",
+        "preset_sha256": "f88be76c59db0c3d511f7b4449b35bcda3fb71b658fec5d5acc1fa698ea6f2b5"
+      },
+      {
+        "preset": "fed's stoboscopix.milk",
+        "preset_sha256": "12339c417aca9062626c657a5c5407288a7c30bfdd0919ec613f79ec017cbf10"
+      },
+      {
+        "preset": "fed's stroboscopix.milk",
+        "preset_sha256": "d4a9780dd74e4b917341d47e0541576ee45ee5f8f7da5dd21f3284a8364ca7ce"
+      }
+    ]
+  },
+  "renderer_lifecycle_verified": false
+}

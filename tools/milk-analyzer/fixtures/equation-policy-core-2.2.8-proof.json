@@ -1,0 +1,76 @@
+{
+  "core_release": "2.2.8",
+  "policy": "projectmtv-core-2.2.8-v1",
+  "scope": "Two frozen init-retry and warning-only init-omission numerical controls;60 frames total. Not full-preset appearance verification.",
+  "runtime": {
+    "aar_sha256": "97d832fb5a10beb3828e465486c6664497b0a0d1d1234d81717106f8fd35ac28",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f",
+      "libprojectmtv.so": "85ae024c44664d034c16b356d9010a1fb1da7b4055ff475171d56937c97e6e95"
+    }
+  },
+  "rows": [
+    {
+      "fixture": "current-init-retry",
+      "prediction": {
+        "source_sha256": "1167cd103c8953f4e7c65cadd6b85d1530dc192babedf9036b3db563a40236be",
+        "expected_rgb": [
+          0.2,
+          0.2,
+          0.2
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen published core2.2.8 init-retry/omission prediction; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "current-init-retry.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "5ccc596e7a75e35a5ba790b89669f3cf2f0b8043181706137a030867891dffe0"
+    },
+    {
+      "fixture": "current-init-omitted",
+      "prediction": {
+        "source_sha256": "3633b66d460808fd4ec130205d69aeb447a896bbf2224baaa40a9dc9b5244e26",
+        "expected_rgb": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen published core2.2.8 init-retry/omission prediction; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "current-init-omitted.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "320cff98586b22e220b99d00b2de8b4bf499f0f02199743f9cf1df1cab8cd907"
+    }
+  ],
+  "probe_sha256": "6a3e2e9d8b5f233a84d8d02efa00a29e1a56e89ed95569f695b55d3c765f745a"
+}

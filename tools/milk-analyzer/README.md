@@ -224,3 +224,27 @@ again after those failures are resolved to continue unmeasured cases. The requir
 metadata pull has a 15-second timeout and records an unscored outcome if it fails,
 even after the renderer has exited. Ownership/remote setup and overlay transfers
 are bounded separately; runtime artifact pushes have a 180-second limit.
+
+
+## Full visual prediction loop (in progress)
+
+The mathematical source forecaster and supporting semantic modules from the
+source-predictor branch are now integrated beside the production beta scorer.
+This research loop predicts structure, motion, colour, flashing and feedback
+before rendering with the unchanged published standard core2.3.4 AAR. It seeks
+ten consecutive fresh random presets each scoring at least80/100 under a frozen
+behavioural rubric. This is not an audience-score test or calibrated perceptual
+probability. Unknown or contradicted claims earn no credit.
+
+The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`; live local
+artifacts remain in ignored `build/visual-loop/`. The first diagnostic comparison
+scores87.5/100, with an explicit colour-description miss despite close numerical
+colour/motion descriptors. This is one provisional pass, not the completed gate.
+The original prediction and comparison are preserved.
+
+CPU waveform adapters now copy/hash the patched line-geometry helper and declare
+its reference-size fields; they do not create a GPU renderer. Their forecast,
+waveform and draw-spec controls pass27tests plus16subtests on the prepared engine.
+The broader imported suite requires preparation of its pinned older/newer adapter
+profiles and reconciliation with production semantics; it is not reported passing.
+No source-coverage or whole-corpus accuracy claim follows from this checkpoint.

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "basis": "Re-lowering every witness of exp2/log10/reflect in the saved 9606-preset audit; source-only, no rendering",
+  "source_audit_corpus_sha256": "fd34e89d27d6a2a90b43a09f599ce03347d474bb5044578703420738f9ac4ff0",
+  "current_implementation_sha256": {
+    "shader_fields.py": "e10ccc4904ba43cfe2526b4dceb923aae9d520d066f1d1b36a23ec5c05618096",
+    "field_math.py": "5b8094d3fe682d423e4238566e721e21d275b0ab5c6d25426082d3f15498c956",
+    "grid_math.py": "7d64d785216272a5bb494c50e6a1399868fd8932158ec0dd02dbd250b0b48d3b"
+  },
+  "distinct_presets": 5,
+  "sections": 6,
+  "complete_sections": 6,
+  "rows": [
+    {
+      "preset": "Cope - domains (this apparatus must be unearthed).milk",
+      "preset_sha256": "c962f5b0b949e543d52403df0b12239bdde2e18b101254800d1655d344ec994c",
+      "section": "comp_",
+      "source_sha256": "17708d82c5682f213b7ffa9ba021cca59e3c4225e6463d29baf598eb968559a8",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Fumbling_Foo + En D & Martin - Mandelverse 31.milk",
+      "preset_sha256": "dc3ce11ce0474c928b7952524f870d7ca8b1574e45dbbc5ef25fe1f5efde209e",
+      "section": "comp_",
+      "source_sha256": "50d202b26635c4c04535ae1558fdbd4c6d2d8192faacc5c3374debee51f65831",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Fumbling_Foo + En D & Martin - Mandelverse 31.milk",
+      "preset_sha256": "dc3ce11ce0474c928b7952524f870d7ca8b1574e45dbbc5ef25fe1f5efde209e",
+      "section": "warp_",
+      "source_sha256": "331e8834ebd78631f2e74bf58c0140a808296bcce9177c53268076fc2933f1ee",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Fumbling_Foo + En D & Martin - Mandelverse.milk",
+      "preset_sha256": "e67d288f3c6bd0957a2dc9ce10ae5c4639e15db29827e761331e2abd46319eb6",
+      "section": "comp_",
+      "source_sha256": "dd1bc0f55371d5ab8d22517158b74d7c1c69a86f24e91bb73a5d30110d850d9e",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "GreatWho - Addicted log10.milk",
+      "preset_sha256": "1156c1913a740d661abf8dc7751bc1471c1a923952795ed7ca30f13135c466b4",
+      "section": "comp_",
+      "source_sha256": "1f7d528b558c1e38bf69d8a2aa84d1a397b694f76e60cfd516ac2cf9d35250ce",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "cope - ants on acid orchestrate chaos.milk",
+      "preset_sha256": "fdd0808a53eaf8ef74d69c079203c8ed66865a7aafff4529efbb086ef535d8ad",
+      "section": "comp_",
+      "source_sha256": "fd24615087775966f79c0bf5699099b3d24d8b2a4da99891bb38978f3410a55a",
+      "complete": true,
+      "remaining_reasons": []
+    }
+  ],
+  "behavioral_accuracy_verified": false
+}

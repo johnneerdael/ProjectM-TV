@@ -1,0 +1,42 @@
+{
+  "scope": "Independently decoded originalasset sizes;declared observedhostSOIL ceil-POT upload policy;not Android profile extrapolation",
+  "assets": {
+    "core/src/main/assets/textures/pano_earth_clouds.jpg": {
+      "sha256": "5aff1ed93a9801193da7bcd964de3dd493c5615165e5cbdd3698421be0a7d877",
+      "width": 320,
+      "height": 160,
+      "loading_policy": "soil2-multiply-alpha-pot-ceil"
+    },
+    "core/src/main/assets/textures/fire_alpha5.jpg": {
+      "sha256": "e1fe5e6540a4a1cfcf4871dd737d23d940a64e95e9d2e36a635827daaa134275",
+      "width": 500,
+      "height": 400,
+      "loading_policy": "soil2-multiply-alpha-pot-ceil"
+    },
+    "core/src/main/assets/textures/OIparallel1.jpg": {
+      "sha256": "d2c4478178386397092b996c1189e8ea10907aaf8612bfd093de0f2c2fc74f16",
+      "width": 497,
+      "height": 497,
+      "loading_policy": "soil2-multiply-alpha-pot-ceil"
+    },
+    "core/src/main/assets/textures/devboxb.jpg": {
+      "sha256": "b4227883ecce1f50ef7951bec4de43c2ab168e3fbc4cd19e6109adc3a0551802",
+      "width": 190,
+      "height": 200,
+      "loading_policy": "soil2-multiply-alpha-pot-ceil"
+    },
+    "core/src/main/assets/textures/smalltiled_lizard_scales.jpg": {
+      "sha256": "ab00cccaf3191faf28489b46fcfb568802db3a5b8c51f7efecb3d7b5c22f191a",
+      "width": 256,
+      "height": 256,
+      "loading_policy": "soil2-multiply-alpha-pot-ceil"
+    },
+    "core/src/main/assets/textures/fire_base.jpg": {
+      "sha256": "4b98aa0d4092977b133f1e75532756975d91d345a01ed3fbd6f6433714d8cb23",
+      "width": 500,
+      "height": 400,
+      "loading_policy": "soil2-multiply-alpha-pot-ceil"
+    }
+  },
+  "policy_patch_sha256": "92905a34b19ada2128d3c4fd7e603bd6c52acf9f22b27f4678aadf38d4c22652"
+}

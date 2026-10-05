@@ -83,6 +83,7 @@ int main(int argc, char** argv) {
             {"preprocess_body_sha256", kNativePreprocessBodySha},
             {"translation_body_sha256", kNativeTranslationBodySha},
             {"sampler_reference_body_sha256", kNativeSamplerReferenceBodySha},
+            {"random_binding_contract", json::parse(kRandomBindingContract)},
             {"adapter", "unchanged native CPU bodies; explicit descriptor declarations and static header/version views"},
             {"native_driver_verified", false}};
         {

@@ -1,0 +1,97 @@
+{
+  "status": "incomplete checkpoint; one provisional fresh-case pass",
+  "source_branch_commit": "4cd38ad9881bb9ce968620c8bfc80a2ab16716fa",
+  "case": {
+    "case": 1,
+    "preset": "shifter + EoS + phat - static creep [flexis quasi-static fix].milk",
+    "preset_sha256": "80986922000514e24f004d29a165586d1417deb751165326aa5ede9e1bd3fcb4",
+    "evaluation_utc": "2026-10-05T17:23:18.914023+00:00",
+    "prediction_seal": {
+      "prediction_sha256": "18c2e8f7bca9fed8299d71262a2ef412b293919be039c51a3609aa58e4f7c02b",
+      "protocol_sha256": "c0142ed62f45b53f24b23271b43a4cd6d06819953ddfafd5e75b0d551ec1c5d0",
+      "preset_sha256": "80986922000514e24f004d29a165586d1417deb751165326aa5ede9e1bd3fcb4",
+      "frozen_utc": "2026-10-05T16:58:35.452790+00:00",
+      "reference_frames_seen": false
+    },
+    "grading_basis": "Frozen20claim behavioural rubric; all540nativeframes measured plus eightpaired temporal image samples inspected. Not calibrated perceptual probability.",
+    "category_points": {
+      "structure": [
+        2.5,
+        5,
+        5,
+        2.5
+      ],
+      "motion": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "colour": [
+        0,
+        2.5,
+        5,
+        5
+      ],
+      "flashing": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "feedback": [
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    "category_totals": {
+      "structure": 15.0,
+      "motion": 20,
+      "colour": 12.5,
+      "flashing": 20,
+      "feedback": 20
+    },
+    "agreement_points": 87.5,
+    "critical_contradictions": [],
+    "passes": true,
+    "notes": {
+      "structure": "Luminous curled filaments and halos match; the visible field is less centrally confined than the text suggests.",
+      "motion": "Source/native median speed0.264/0.270viewport widths per second; upper tail1.531/1.538. Curved motion and local changes match; acceleration is overpredicted by17percent.",
+      "colour": "Mathematical field gives blue/cyan/white. Frozen verbal claims incorrectly mention purple/magenta/pink. Powers(5,1,.5) on0..1 imply R<=G<=B. Mean source/native luma0.14494/0.14440 and saturation0.9672/0.9663agree.",
+      "flashing": "Both have0coherent brightening/darkening transitions. Native maximum mean luma jump0.039 versus source0.054; localized flicker forecast matches.",
+      "feedback": "Retained filaments/blurred halos persist through the silence tail. Noise changes fine patch locations; no wrapped mirror stack or instantaneous disappearance observed."
+    },
+    "numerical_diagnostics": {
+      "rgb_mae": 0.10758230171951594,
+      "meaning": "Diagnostic only, not converted to accuracy percentage; exact random realization differs."
+    },
+    "missing_information": [
+      "Description generation misread ordered per-channel powers and overlocalized the structure. Numeric colour transfer itself is correct."
+    ],
+    "learning": "Use source-predicted colour statistics and RGB inequalities in subsequent descriptions. Original colour wording retained; numeric model unchanged."
+  },
+  "published_artifact": {
+    "release": "v2.3.4",
+    "release_commit": "7f9e6bd64ee214b5a6e8862c4e3b5342d4a72962",
+    "aar_sha256": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+    "native_sha256": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+    "rendering_policy": "standard published capped AAR"
+  },
+  "runtime_deployment": {
+    "serial": "emulator-5596",
+    "remote": "/data/local/tmp/projectmtv-predictor-loop-20261005",
+    "sha256": {
+      "core.aar": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+      "libprojectmtv.so": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+      "classes.dex": "3f93c1af10556e20dfd65f7dc3b60614e00cfe411ca8e40345036984c0abd9d1",
+      "libbackendclock.so": "2dda44fc8f68ad3ae86f6ea69a5f6e4613e015465d5e0c755610669669f22f76",
+      "input.f32": "45a3cd9d36f2aaaf04a2f69c2c7d484976b3248291bb6e21209942e5578b9d20"
+    }
+  },
+  "math_prediction_sha256": "f5818f629701fb072c8aefa7c2aa7501788cd14de224a6811aa6347dd94c873b",
+  "native_capture_sha256": "5dbe44f1cd0320182aa2e886025debda0d220179c8b773da49e9548608ccd9ca",
+  "sequence_seed": "31966905787810700105037795948026714061",
+  "raw_artifacts_committed": false
+}

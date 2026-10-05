@@ -1,0 +1,170 @@
+{
+  "basis": "Four precommitted non-mipmap texture sampling predictions versus unchanged published core2.2.4",
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "rows": [
+    {
+      "fixture": "tex2Dbias--8",
+      "prediction": {
+        "source_sha256": "d5fdf4b75c178f64a4e5526cdcf6081548af968821b115b15cdf26f2114659bb",
+        "expected_rgb": [
+          0,
+          0.25,
+          0.75
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen non-mipmap base-level prediction on high-frequency texture bands"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "lod-tex2Dbias--8.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "distinct_color_count": 1,
+      "observed_colors": [
+        [
+          0,
+          64,
+          191,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "c591a7dbc506f6e9ae722e585d2503252acd3981645afa09bae4344bf9dd8f3e"
+    },
+    {
+      "fixture": "tex2Dbias-8",
+      "prediction": {
+        "source_sha256": "a8ea8bffa86092842522aef65ee7406d2a8212a231be384f740a70f1c4218659",
+        "expected_rgb": [
+          0,
+          0.25,
+          0.75
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen non-mipmap base-level prediction on high-frequency texture bands"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "lod-tex2Dbias-8.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "distinct_color_count": 1,
+      "observed_colors": [
+        [
+          0,
+          64,
+          191,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "c591a7dbc506f6e9ae722e585d2503252acd3981645afa09bae4344bf9dd8f3e"
+    },
+    {
+      "fixture": "tex2Dlod--8",
+      "prediction": {
+        "source_sha256": "015cba7137ba50b541cfab0e619673c7f6186bf7bce30ac20e292f876c4f6d53",
+        "expected_rgb": [
+          0,
+          0.25,
+          0.75
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen non-mipmap base-level prediction on high-frequency texture bands"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "lod-tex2Dlod--8.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "distinct_color_count": 1,
+      "observed_colors": [
+        [
+          0,
+          64,
+          191,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "c591a7dbc506f6e9ae722e585d2503252acd3981645afa09bae4344bf9dd8f3e"
+    },
+    {
+      "fixture": "tex2Dlod-8",
+      "prediction": {
+        "source_sha256": "816217172467eedd81af96e4573640430d8bd259acec722beea879e60ea6d4a8",
+        "expected_rgb": [
+          0,
+          0.25,
+          0.75
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen non-mipmap base-level prediction on high-frequency texture bands"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "lod-tex2Dlod-8.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "distinct_color_count": 1,
+      "observed_colors": [
+        [
+          0,
+          64,
+          191,
+          255
+        ]
+      ],
+      "maximum_rgb8_error": 0,
+      "passed": true,
+      "capture_sha256": "c591a7dbc506f6e9ae722e585d2503252acd3981645afa09bae4344bf9dd8f3e"
+    }
+  ],
+  "whole_preset_accuracy_verified": false
+}

@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "presets": 315,
+  "corpus_sha256": "576e08478afe9529bb5f9421e0bb7f14901e8f7e7c885fc389d6a892d116a19c",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Known source-audit parsing/lowering gaps; native-confirmed ignored source remains in the inventory without an execution gap. Behavioral obligations are not yet enumerated.",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 178,
+  "verified_behavior_percent": null,
+  "previous_known_blockers": 217,
+  "cleared_presets": [
+    {
+      "preset": "Starz in MilkHDFX - Stahlregen & Aderrasi + EoS + Geiss + Unchained + Zylot + Flexi + Martin + AdamFX A.milk",
+      "preset_sha256": "821693b322e1767360505cef09654778dcdcd334462133d8915ed98f542bcf73"
+    },
+    {
+      "preset": "va ultramix2 - 534.milk",
+      "preset_sha256": "765028fc69780859a2ad2ca0ceac25fe7c415c49d9a987f7ce9ae6c2a7fcaf66"
+    },
+    {
+      "preset": "martin - purple pulsator - mom - ns2w nz.milk",
+      "preset_sha256": "523ca37b2804c315a67fe45dd474b870f48f0083abde7deaa00d44ca2644b2eb"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz B.milk",
+      "preset_sha256": "9787a2a09f7257a53a74cb1246282dd3a20dfd2f4310bc3f7b6b1435d27240a4"
+    },
+    {
+      "preset": "LuxXx - Burnwheel I.milk",
+      "preset_sha256": "4072df6bbd14e058beb781afe8472d88c2b72072649a7534987d329e137bd10e"
+    },
+    {
+      "preset": "martin - purple pulsator - mom - ns2w.milk",
+      "preset_sha256": "b485a6c83f9a8ee908f4e1d63c524255b8c8b70d37384aec35cde12576297dc0"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 12a.milk",
+      "preset_sha256": "5d351b29598f9ab9f4090be14356866fd07871559bcaebd8fa6994cf28947d9b"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter.milk",
+      "preset_sha256": "49e9f79c4357c2786e0c75daf99968e1f1defdd3b55dfdf745a29c958ca47a7a"
+    },
+    {
+      "preset": "LuxXx - electric cell park b nz+.milk",
+      "preset_sha256": "4c42076ffa0d011269691add9f3d86171902a8dd1807fb8c8938cad313b143a0"
+    },
+    {
+      "preset": "LuxXx - A Sober Life (wasted).milk",
+      "preset_sha256": "ad1d4a2c1df3f223d7c018206d71e958ccb65dfae6a06eb1f9eb84c6c0bd099e"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz A.milk",
+      "preset_sha256": "3954f2b4c566a193350b6da400eed11819d949e6cf29fa78ed241e3179774290"
+    },
+    {
+      "preset": "Rarian Rakista - On the Water.milk",
+      "preset_sha256": "bef0955dbaee656bebceeb9b784500271572693ba2908d1c7b59d4d7ec365434"
+    },
+    {
+      "preset": "EVET - Hypraxis.milk",
+      "preset_sha256": "61fdb1019e0a02884dd3aae0737f723bfe8c3a2c9c453249dd7bd4d1b50f9d2c"
+    },
+    {
+      "preset": "suksma - Hexcollie - Julian Carnival - shimmy dumb grid dogmaklyasm nz+6.milk",
+      "preset_sha256": "193ac4c7b6257e9570b28e0f25bd16cbfe61819f1e4add2686d4a71352e8c3fe"
+    },
+    {
+      "preset": "Milk Artist At our Best - FED - SlowFast Ft AdamFX n Martin - HD CosmoFX Also Ft Mstress n Armandio  - Thought About YouFX.milk",
+      "preset_sha256": "ae6547209756c79a3b3b17e9ab78997fd9257b5f9805eca25a67de1be31bcc61"
+    },
+    {
+      "preset": "LuxXx - electric cell park a.milk",
+      "preset_sha256": "0e7c9add23496dd64455ab4117cf5c524bb7a2ed8d4ad32d588352ed04ba6580"
+    },
+    {
+      "preset": "EoS - sectorLoc B_phat_ugly remix 01 EoS7p nz+ crab lardvae.milk",
+      "preset_sha256": "4026209d29ea95435d0398f7bf5b58756c51dd9e2de70eaa2dbc99fbdfc17b6d"
+    },
+    {
+      "preset": "Adam Eatit Mashup FX 2 martin - disco mix + Lodus + Geiss + Fruits Machine .milk",
+      "preset_sha256": "5f985a4495b0c413df0d8965d8b3a64e22b89a005669ecea9fa8cf3b31651df1"
+    },
+    {
+      "preset": "A Tribute to Martin - bombyx mori - Ft Flexi - AdamFX - StahlRegen - Hd In Milk Ailen FX P.milk",
+      "preset_sha256": "10aac1bcf86b1b7c5ed94adab8b422de2fce9559f13b0a12008a3a7f672ee9e6"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 12b.milk",
+      "preset_sha256": "290dedb0d6166755779a138cdde332a5078a8392210eb08c1a43198f031146e1"
+    },
+    {
+      "preset": "there is gum stuck to my hate.milk",
+      "preset_sha256": "41b71270aea8799680b79378bd8c3a6e7893b901aafde91bfff6ca057a07ff64"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz .milk",
+      "preset_sha256": "d47f1195105b7b7a618c30f29796b3a6853547433e669b50c43c5c874a1061ed"
+    },
+    {
+      "preset": "430.milk",
+      "preset_sha256": "a1cec1b62bf14f0792d46ac20716cbb78608a367894e3cf8baa961c65f0d9e63"
+    },
+    {
+      "preset": "va ultramix2 - 533_1.milk",
+      "preset_sha256": "bf6b095f2d6a6c8ac3b893475ea82eb8b94f20200abea0ce2c628c0af22978e4"
+    },
+    {
+      "preset": "LuxXx - Fuck ur Fractal Muscles II.milk",
+      "preset_sha256": "3c68f3ff8f902a55a189ec4ea2b08583b298d2499390d7d3e5b69c7f67c7c284"
+    },
+    {
+      "preset": "161.milk",
+      "preset_sha256": "abc94b9d0ea3820eb8f08aaf6061511146da51014f43d3f1ba8ddc7a2cfc224b"
+    },
+    {
+      "preset": "martin - purple pulsator nz+.milk",
+      "preset_sha256": "3274fe069d7cffd4ea17fbae4ac0b900423abf61674ad5141863579459c78402"
+    },
+    {
+      "preset": "2009 4th of July with AdamFX n Martin - into the fireworks E.milk",
+      "preset_sha256": "d526e7d69f3948fe37482aff9dbe0047e0c029b590a8f35c52e3e81a473da763"
+    },
+    {
+      "preset": "AdamFX Enterz Tha Mash With Martin + stahlregen - AdamFX - In Tha Mash Effectz nz splatter bare.milk",
+      "preset_sha256": "c473fed44a3de5a27c0fe10a97c7476461497f965905228218be34efcb2163f0"
+    },
+    {
+      "preset": "va ultramix - 290_3.milk",
+      "preset_sha256": "bf5e8c435d0032ccc40caf88eddab658f0d536bd61364a7791bee16004e5390b"
+    },
+    {
+      "preset": "martin + stahlregen - martin in da mash 13.milk",
+      "preset_sha256": "428dbb6315a9709952964b92a9b6483dc390cb1ab57af1e8218094da07454623"
+    },
+    {
+      "preset": "Liquid Glowsticks - ATwisted Pre Set Mix By AdamFX 2 martin - disco mix Ft Hexocollie 27.milk",
+      "preset_sha256": "4da3fdb54c995d3a222340bc708ec3b44f6d9cab4f9903eae222feb2926ee788"
+    },
+    {
+      "preset": "martin - sparky caleidoscope.milk",
+      "preset_sha256": "9ef89f10346e0b06d5f570513dfb088e6c5cd116fee26a10bf43f283fd630750"
+    },
+    {
+      "preset": "suksma - Hexcollie - Julian Carnival - shimmy dumb grid dogmaklyasm nz+5.milk",
+      "preset_sha256": "549accc0164b9b6bca92c54af71ecd990cd35ebfa7c397b96f3f341cd410478c"
+    },
+    {
+      "preset": "Rozzor & Neuro - Starover (Semicolon Mix).milk",
+      "preset_sha256": "cfc114ebac787513cd136d9716391c2164191c6ff8cfcbc348ee94b2074a63dc"
+    },
+    {
+      "preset": "va ultramix2 - 532_2.milk",
+      "preset_sha256": "97af8c946901213d1b2f7aa88c679d0129589372bb30bcd239496d0a4f51b470"
+    },
+    {
+      "preset": "LuxXx - electric cell park b.milk",
+      "preset_sha256": "39fe5c98aec5833051becc4daded6e159d53d386fe20353738cdf4d4e23d0954"
+    },
+    {
+      "preset": "Halfbreak - EFFECTAMT 4PORT (Seizure Techno).milk",
+      "preset_sha256": "3b2e6bd3ab0f1e85dccab2551438a769d9e1984a7d1a87b2b7d139bd14d2e8fd"
+    },
+    {
+      "preset": "martin - purple pulsator.milk",
+      "preset_sha256": "11459b5cf4b250c8b9d51225cd8d4aa102f7c51b4904de7b6624bc8aee0f3815"
+    }
+  ],
+  "equation_loader_policy": "projectmtv-core-2.2.6-v1",
+  "target_scope": "Current core2.2.6 equation-loader retry only; shader CPU adapter remains pinned historical engine. No complete current-engine appearance claim.",
+  "reader_sha256": "319c230bdc1840e67c1f8bcb7f70181a8d2301b997f87ff41e66264b22de8e78",
+  "gaps": [
+    {
+      "gap": "native GLSL array initializer layout mismatch",
+      "affected_presets": 56,
+      "affected_units": 56,
+      "affected_source_tokens": 21139,
+      "sole_known_gap_presets": 55,
+      "overlap_presets": {
+        "target parse unavailable": 1
+      }
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 51
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 51
+      }
+    },
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 43,
+      "affected_units": 43,
+      "affected_source_tokens": 8983,
+      "sole_known_gap_presets": 42,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 1
+      }
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 29,
+      "affected_units": 29,
+      "affected_source_tokens": 14275,
+      "sole_known_gap_presets": 26,
+      "overlap_presets": {
+        "arithmetic/comparison side-effect order not established": 3
+      }
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 3
+      }
+    }
+  ],
+  "policy_implementation_sha256": "d251c08879fbad29cda67ff21eaf2e063567b5ce028b39b03bb1d1beb23c9a2d"
+}

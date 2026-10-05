@@ -469,7 +469,8 @@ int main(int argc,char** argv) {
             {"reader","pinned projectM native EEL/HLSL frontends"},{"sections",json::object()},{"values",file.PresetValues()}};
         const std::string header=kShaderHeader;
         report["parser_inputs"]={{"shader_header_sha256",kShaderHeaderSha},{"engine_archive_sha256",kEngineArchiveSha},
-                                 {"engine",json::parse(kEngineIdentity)}};
+                                 {"engine",json::parse(kEngineIdentity)},
+                                 {"random_binding_contract",json::parse(kRandomBindingContract)}};
 #ifdef MILK_HAS_LEGACY_EQUATION_CODE
         report["equation_assembly_policy"]="projectmtv-core-2.2.8-v1";
 #else

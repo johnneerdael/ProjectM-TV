@@ -1,0 +1,91 @@
+{
+  "basis": "Frozen texsize binding/deletion controls versus unchanged published core2.2.4",
+  "rows": [
+    {
+      "fixture": "texsize-uniform",
+      "prediction": {
+        "source_sha256": "68cb8823ff54601678daa33e7221fcc1bf348878d60d8d5d1c43a768c93b9a12",
+        "expected_rgb": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen authored texture-size declaration interpreted through native uniform rebuilding",
+        "explicit_input_bank": {
+          "texsize_main": [
+            128,
+            72,
+            0.0078125,
+            0.013888888888888888
+          ]
+        }
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "texsize-uniform.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "efdb76409a40312c8c8b28da662cc90d0a0c4841644322b971ebdc595a7a4b19"
+    },
+    {
+      "fixture": "texsize-deleted-tail",
+      "prediction": {
+        "source_sha256": "988d4cc39bec1117bfd898fc7cac1afac40f1aec83967eb0c037737f2c06d7d8",
+        "expected_rgb": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen authored texture-size declaration interpreted through native uniform rebuilding",
+        "explicit_input_bank": {
+          "texsize_main": [
+            128,
+            72,
+            0.0078125,
+            0.013888888888888888
+          ]
+        }
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "texsize-deleted-tail.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "5e66ee10e2613550dbd0bfe8e414fb016329723152eda2c47bca756c135e6d8c"
+    }
+  ],
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "whole_preset_accuracy_verified": false,
+  "reader_source_sha256": "53205b2e8e57adcfc51e73b64dd310d6fb1a2f46595801f6430fdbee7318e4a5"
+}

@@ -1,0 +1,29 @@
+MILKDROP_PRESET_VERSION=201
+PSVERSION=2
+PSVERSION_WARP=0
+PSVERSION_COMP=2
+[preset00]
+fRating=3
+fDecay=0.96
+fGammaAdj=1
+fVideoEchoAlpha=0
+fWaveAlpha=0
+bTexWrap=0
+zoom=1
+rot=0
+warp=0
+dx=0
+dy=0
+sx=1
+sy=1
+comp_1=`shader_body
+comp_2=`{
+comp_3=`    float t = time*0.12;
+comp_4=`    float2 p = (uv-0.5)*float2(texsize.x/texsize.y,1.0);
+comp_5=`    float2 drift = float2(0.12*sin(t),0.10*sin(t*0.71+2.0));
+comp_6=`    float d = length(p-drift);
+comp_7=`    float gentle = 0.018*saturate(bass_att*0.5);
+comp_8=`    float envelope = exp(-d*d*3.5);
+comp_9=`    float ribbon = 0.75+0.25*sin(p.x*5.0+p.y*3.0-time*0.09);
+comp_10=`    ret = float3(0.008,0.012,0.023) + float3(0.07,0.26,0.32)*envelope*ribbon*(0.85+gentle);
+comp_11=`}

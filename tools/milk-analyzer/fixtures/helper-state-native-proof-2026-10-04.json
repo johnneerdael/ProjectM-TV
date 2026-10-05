@@ -1,0 +1,135 @@
+{
+  "basis": "Analytic predictions followed by unchanged published-core execution on isolated owned Android API34 emulator",
+  "runtime": {
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "11169fb1a75ee9ccfe607db44bee5022a42410486605a3eb01f43e0e65221755",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "pcm_sha256": "399510ac6dfc4575d1d91b73cd50a024b49b90d881efd29a890bb4b69871a659",
+  "rows": [
+    {
+      "prediction": {
+        "preset": "helper-state-sequenced.milk",
+        "source_sha256": "855404799e303530a7d49ec2a0ef66aaf35dca07460f3191022e4577c3ffae48",
+        "expected_rgb": [
+          0.3,
+          0.7,
+          0.7
+        ],
+        "width": 128,
+        "height": 72,
+        "frames": 30,
+        "maximum_rgb8_error_allowed": 1,
+        "basis": "Analytic helper state calculation frozen before native observation"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "helper-state-sequenced.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "capture_sha256": "f9f96294331aef38078a5af2fce0b054fdae1df1de2abaf17415fadc9c60bdaa",
+      "max_rgb8_error": 0,
+      "passed": true,
+      "distinct_rgba": [
+        [
+          76,
+          178,
+          178,
+          255
+        ]
+      ]
+    },
+    {
+      "prediction": {
+        "preset": "helper-state-shadow.milk",
+        "source_sha256": "68d48ee97baa5890d8b55a5fc63524daa2783e3e4847e786068581861bc1f4ff",
+        "expected_rgb": [
+          0.1,
+          0.3,
+          0
+        ],
+        "width": 128,
+        "height": 72,
+        "frames": 30,
+        "maximum_rgb8_error_allowed": 1,
+        "basis": "Analytic helper state calculation frozen before native observation"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "helper-state-shadow.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "capture_sha256": "e7322daf20f9686544fb484a8501a0d6908ebca75a0e521879e10ccb13363fce",
+      "max_rgb8_error": 0,
+      "passed": true,
+      "distinct_rgba": [
+        [
+          26,
+          76,
+          0,
+          255
+        ]
+      ]
+    },
+    {
+      "prediction": {
+        "preset": "helper-state-loop.milk",
+        "source_sha256": "d18da09989dd9787f87dd87889594a074e2604bb7dc81a106cd3cf2b2e799638",
+        "expected_rgb": [
+          0.4,
+          0.4,
+          0.4
+        ],
+        "width": 128,
+        "height": 72,
+        "frames": 30,
+        "maximum_rgb8_error_allowed": 1,
+        "basis": "Analytic helper state calculation frozen before native observation"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "helper-state-loop.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "capture_sha256": "fc80ea0da1f502b7553388d156bd2fa8bc396833f8b6576cf74699f0e36fa314",
+      "max_rgb8_error": 0,
+      "passed": true,
+      "distinct_rgba": [
+        [
+          102,
+          102,
+          102,
+          255
+        ]
+      ]
+    }
+  ],
+  "whole_preset_accuracy_verified": false
+}

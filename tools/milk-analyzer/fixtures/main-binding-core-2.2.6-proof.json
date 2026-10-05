@@ -1,0 +1,110 @@
+{
+  "core_release": "2.2.6",
+  "policy": "projectmtv-core-2.2.6-v1",
+  "scope": "Named-main clamp and point-filter controls after two source-generated seed frames;84 measured frames,90 captured. No full-preset visual certification.",
+  "runtime": {
+    "aar_sha256": "0e61b2ad0de62a71a1cf837706821c14a536568fa85b6359a5e8321b63226b3e",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libprojectmtv.so": "cd66617d35c266e862324163931262e2478a9eb658ecaa227fddabbd4a6eece4",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f"
+    }
+  },
+  "rows": [
+    {
+      "fixture": "main-binding-fc",
+      "prediction": {
+        "source_sha256": "ce552f5537170937c213c206477b60fc58321b5666fa828d66ae15b41266aec9",
+        "expected_rgb": [
+          0.996078431372549,
+          0.2,
+          0.3
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen core2.2.6 named-main clamp prediction after two seed frames; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "main-binding-fc.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "d7367d47bd211ad0c807d54f70d638a24877791bc2315b8f32bfb886118a8566"
+    },
+    {
+      "fixture": "main-binding-pc",
+      "prediction": {
+        "source_sha256": "cf8c282371163027dd4bea6337ecac053e819a8d875de8cdc3e20c594a7c5e4e",
+        "expected_rgb": [
+          0.996078431372549,
+          0.2,
+          0.3
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen core2.2.6 named-main clamp prediction after two seed frames; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "main-binding-pc.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "d7367d47bd211ad0c807d54f70d638a24877791bc2315b8f32bfb886118a8566"
+    },
+    {
+      "fixture": "main-binding-point-filter",
+      "prediction": {
+        "source_sha256": "405efe3da69c0adf6837d14678a3e8cf64e296fffdb6142efc4fa66fc60d3d68",
+        "expected_rgb": [
+          0.1,
+          0,
+          0.3
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen core2.2.6 named-main point-filter prediction after two seed frames; no rendered input"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "main-binding-point-filter.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "passed": true,
+      "capture_sha256": "c96196a52f5971892d432b0623156a2a0635dc57d154e84377c928395381f0b9"
+    }
+  ],
+  "probe_sha256": {
+    "probe-main-binding.py": "41eba11f037a874e4383c011a249004e39856776ab5fd96fffd6a51ced4b9722",
+    "probe-main-point.py": "79813cdd64034e1926c7d4c6902ac10eda8725521dba8c2ed998968dde7e1e5b"
+  },
+  "shipped_patch_sha256": "3bb981b2a255895f5816dc450f92ecf7ba1caabcdc94c366a84cb1ef01938d31"
+}

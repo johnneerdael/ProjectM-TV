@@ -1,0 +1,557 @@
+{
+  "scope": "Research request for3strictGLES binding-context gaps;not3confirmednativebugs",
+  "release": "v2.3.3",
+  "release_commit": "6e71ac2a18a95463fbe3a21c05e6dd4027cb74a0",
+  "runtime_identity": {
+    "aar_sha256": "e83be55299d310e6282204cb39740cfe09d1e2609471eb58c6299c8961eec9eb",
+    "files": {
+      "classes.dex": "ca07aba01095d2f59a0923c5154dc84adf29d30a8e0d0fd866f93d6d3f4503d4",
+      "libbackendclock.so": "168ee9cb0afb9a7c54e54e2931c5dd76be7348a14b6b1a6122b6b3ffadf5a58f",
+      "libprojectmtv.so": "ee1f57e20a1f438809c8c8b2121be19fa23ff8ca640a2b50857bee9b04c9e34d"
+    },
+    "java_helper_scope": "existing unchanged JNI test host;class ABI inspected separately against2.3.3"
+  },
+  "strict_gaps": [
+    {
+      "section": "comp_",
+      "stage": "composite",
+      "lines": [
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        720,
+        721,
+        722,
+        723,
+        724,
+        725,
+        726,
+        727,
+        728,
+        729,
+        730,
+        731,
+        732,
+        733,
+        734,
+        735,
+        736,
+        737,
+        738,
+        739,
+        740,
+        741,
+        742,
+        743,
+        744,
+        745
+      ],
+      "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+      "source_tokens": 193,
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk",
+      "preset_sha256": "5dd383cf79e1aacbed944ded85d70a365dde2c51f2ca7646ed0b7fde0cf4c79f"
+    },
+    {
+      "section": "comp_",
+      "stage": "composite",
+      "lines": [
+        655,
+        656,
+        657,
+        658,
+        659,
+        660,
+        661,
+        662,
+        663,
+        664,
+        665,
+        666,
+        667,
+        668,
+        669,
+        670,
+        671,
+        672,
+        673,
+        674,
+        675,
+        676,
+        677,
+        678,
+        679,
+        680,
+        681,
+        682,
+        683,
+        684,
+        685,
+        686
+      ],
+      "source_sha256": "829742c66b7b88cf305c32924842b12fec26a26bf367ef4b861975e2ee0e5c5d",
+      "source_tokens": 193,
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3.milk",
+      "preset_sha256": "06b84ff69c3aeeb88eff3dea63dd3c1f5b146b4c2afb9df204f5f2561e7aee15"
+    },
+    {
+      "section": "comp_",
+      "stage": "composite",
+      "lines": [
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535
+      ],
+      "source_sha256": "7904cb659869118fed10df59aeb127f3597b34b8abf400b7e0cb5ec7482bedc3",
+      "source_tokens": 187,
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba"
+    }
+  ],
+  "controls": [
+    {
+      "case": "rand00",
+      "prediction": {
+        "source_sha256": "9b239baff41e531f741929fc74b86d039168a383816bb362c0aa9e69f58dbe09",
+        "texture_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "rand00.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 1.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+      "first_pixel": [
+        51,
+        102,
+        152
+      ]
+    },
+    {
+      "case": "rand01",
+      "prediction": {
+        "source_sha256": "5ba3cd9977d0da8305c004ac3e467bb9c9c8707efd3e18432c4e52c3770538bc",
+        "texture_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "rand01.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 1.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+      "first_pixel": [
+        51,
+        102,
+        152
+      ]
+    },
+    {
+      "case": "two-slots",
+      "prediction": {
+        "source_sha256": "66041ae8f806ec26859315531cf7ff23f509b3669fb87c5150689daa673dd3cf",
+        "texture_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "two-slots.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 1.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+      "first_pixel": [
+        51,
+        102,
+        152
+      ]
+    },
+    {
+      "case": "qualified",
+      "prediction": {
+        "source_sha256": "d933f4ad5cb3d61e86ed2f4f93e8196be33722b0fafe5c11ae7330ae47ee1b23",
+        "texture_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "expected_rgb8": [
+          51,
+          102,
+          153
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "qualified.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 1.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "d1c77d5870b321438d57c486c2d54369f29bb3433f883d6a43342dc30cba9ba6",
+      "first_pixel": [
+        51,
+        102,
+        152
+      ]
+    },
+    {
+      "case": "cross-stage",
+      "prediction": {
+        "source_sha256": "a233df403cbf4456bc130688758c4b91cc0ce5bdc5be9a68007288849556d3c7",
+        "texture_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "expected_rgb8": [
+          26,
+          51,
+          77
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "cross-stage.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 1.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "f6c55c4f0f6d22181eb93e7b03235af260d8ca677ffa37275717225453e58d35",
+      "first_pixel": [
+        25,
+        51,
+        76
+      ]
+    },
+    {
+      "case": "cross-qualified",
+      "prediction": {
+        "source_sha256": "4478e481aa45c78a0ade77520e4eaa47cbbec30ee200d6541391bac0bb45d5f8",
+        "texture_sha256": "618c6ab5da640b46d609a7446358934bfe5b6aeb321c70ceb2c38158e3763ae7",
+        "expected_rgb8": [
+          26,
+          51,
+          77
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "cross-qualified.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 1.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "f6c55c4f0f6d22181eb93e7b03235af260d8ca677ffa37275717225453e58d35",
+      "first_pixel": [
+        25,
+        51,
+        76
+      ]
+    },
+    {
+      "case": "empty-pool",
+      "prediction": {
+        "source_sha256": "9b239baff41e531f741929fc74b86d039168a383816bb362c0aa9e69f58dbe09",
+        "texture_sha256": null,
+        "expected_rgb8": null,
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "empty-pool.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": null,
+      "matched_single_asset_prediction": null,
+      "capture_sha256": "3d30a6c3b3d58e7fe722b0e29feb3417bef7eba72481ab15d0494cd8c1501dfc",
+      "first_pixel": [
+        18,
+        23,
+        28
+      ]
+    },
+    {
+      "case": "implicit-mus",
+      "prediction": {
+        "source_sha256": "44dbb3fe682e446ad7d6e871b5888fa8968d8287aac2dceb849964cd8916ac97",
+        "texture_sha256": null,
+        "expected_rgb8": [
+          51,
+          51,
+          51
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "implicit-mus.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "5ccc596e7a75e35a5ba790b89669f3cf2f0b8043181706137a030867891dffe0",
+      "first_pixel": [
+        51,
+        51,
+        51
+      ]
+    },
+    {
+      "case": "implicit-dist",
+      "prediction": {
+        "source_sha256": "11093cda043a58d0e9e5e5a0494c78b75ed8bb9fde1e0c3d5846a985eeba776f",
+        "texture_sha256": null,
+        "expected_rgb8": [
+          51,
+          77,
+          0
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "implicit-dist.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 1.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "d055f7efef3056e1939d82f7ce60aa5e906b1ba4e003862a247e136c9e0ca38b",
+      "first_pixel": [
+        51,
+        76,
+        0
+      ]
+    },
+    {
+      "case": "implicit-uv3",
+      "prediction": {
+        "source_sha256": "561048b53f8edf2e59632436ce6a4277c238b33dc1784731ebd09d193c7cc099",
+        "texture_sha256": null,
+        "expected_rgb8": [
+          102,
+          102,
+          0
+        ],
+        "frames": 30,
+        "allowed_rgb8_error": 1,
+        "basis": "Frozen single-asset pool alias prediction;unchanged published core2.3.3;no rendered input;empty-pool is diagnostic"
+      },
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "implicit-uv3.milk",
+        "frames": 30,
+        "width": 128,
+        "height": 72,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "maximum_rgb8_error": 0.0,
+      "matched_single_asset_prediction": true,
+      "capture_sha256": "cd703839fd7cd48952da8c5b85e6e81941311a6e3507b3fdc9adce005202ff30",
+      "first_pixel": [
+        102,
+        102,
+        0
+      ]
+    }
+  ],
+  "source_recheck": {
+    "old_gaps": 6,
+    "new_gaps": 3,
+    "cleared": [
+      "Serge + martin - crystal palace tunnel003.milk",
+      "martin - mandelbox explorer - wreck diver nz+ liquititty.milk",
+      "martin - organic light.milk"
+    ],
+    "newly_blocked": [],
+    "parse_changes": [],
+    "reader_sha256": "98b9658e8be7990fb14813d78967e89829134c2a86b7f2f6c0c6eb47b747fd35",
+    "main_snapshot": {
+      "release_commit": "6e71ac2a18a95463fbe3a21c05e6dd4027cb74a0",
+      "patches": [
+        "tools/projectm-patches/0001-plasma-transition-float-overflow-shield.patch",
+        "tools/projectm-patches/0002-render-target-resize-program-cache-shader-state.patch",
+        "tools/projectm-patches/0003-hlslparser-classic-locale.patch",
+        "tools/projectm-patches/0004-projectm-eval-thread-local-rand.patch",
+        "tools/projectm-patches/0005-cache-translated-preset-shaders.patch",
+        "tools/projectm-patches/0006-custom-shapes-batched-draws.patch",
+        "tools/projectm-patches/0007-framebuffer-texture-pool.patch",
+        "tools/projectm-patches/0008-hlsl-floating-point-modulo.patch",
+        "tools/projectm-patches/0009-tile-gpu-invalidate-and-mesh-orphaning.patch",
+        "tools/projectm-patches/0010-skip-redundant-previous-frame-flip.patch",
+        "tools/projectm-patches/0011-indexed-warp-mesh.patch",
+        "tools/projectm-patches/0012-merged-warp-pass-direct-blur.patch",
+        "tools/projectm-patches/0013-motion-vector-map-only-when-shown.patch",
+        "tools/projectm-patches/0014-video-echo-in-final-orientation.patch",
+        "tools/projectm-patches/0015-keep-output-for-blur-reading-and-discarding-shaders.patch",
+        "tools/projectm-patches/0016-direct-composite-output.patch",
+        "tools/projectm-patches/0017-pcm-max-samples-is-buffer-size.patch",
+        "tools/projectm-patches/0018-hlslparser-parenthesized-constructor-expressions.patch",
+        "tools/projectm-patches/0019-hlslparser-number-scan-without-source-copy.patch",
+        "tools/projectm-patches/0020-projectm-eval-1.0.7-evaluator-fixes.patch",
+        "tools/projectm-patches/0021-hlslparser-self-referencing-macros.patch",
+        "tools/projectm-patches/0022-custom-waveform-sample-bounds.patch",
+        "tools/projectm-patches/0023-milkdrop-preset-unconditional-shader-includes.patch",
+        "tools/projectm-patches/0024-quad-lines.patch",
+        "tools/projectm-patches/0025-shader-failure-handling.patch",
+        "tools/projectm-patches/0026-custom-warp-sampler-binding.patch",
+        "tools/projectm-patches/0027-preset-exception-diagnostics.patch",
+        "tools/projectm-patches/0028-initialize-fresh-color-history.patch",
+        "tools/projectm-patches/0029-per-frame-record-compatibility.patch",
+        "tools/projectm-patches/0030-hlslparser-uniform-write-copies.patch",
+        "tools/projectm-patches/0031-hlslparser-array-initializer-layout.patch",
+        "tools/projectm-patches/0032-sampler-state-preprocessing.patch",
+        "tools/projectm-patches/0033-legacy-equation-code-all-phases.patch",
+        "tools/projectm-patches/0034-projectm-eval-lone-dot-number.patch",
+        "tools/projectm-patches/0035-leave-out-uncompilable-equation-code.patch",
+        "tools/projectm-patches/0036-hlslparser-contextual-identifiers-macro-tokens-postfix.patch",
+        "tools/projectm-patches/0037-random-texture-alias-bindings.patch",
+        "tools/projectm-patches/0038-feedback-diffusion-compensation.patch",
+        "tools/projectm-patches/0039-feedback-diffusion-build-policy.patch",
+        "tools/projectm-patches/0040-hlslparser-implicit-global-inputs.patch",
+        "tools/projectm-patches/0041-blur-framebuffer-bindings.patch"
+      ]
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "basis": "Targeted authored texture-size uniform rebuilding source witnesses",
+  "reader_sha256": "b629e5bcf942b7abda1ae72edca4c669b0f91f68a18dfea6a3ac9424eaac6ff0",
+  "rows": [
+    {
+      "preset": "Adam Fx 2 Zylot - Age of Science Fierceness viynal - mash0000 - wheel of misanthropic misfortune.milk",
+      "preset_sha256": "015dc05ff90323b80f27492846313f8fa1d2f43b67eff4bead24d40b6ef78caf",
+      "section": "comp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Hexcollie, Rova n EOS - Flatliner (flexi shaded).milk",
+      "preset_sha256": "664ecfddf8ea44b5a121fdc8c62cf28c6a4df67d7ea71391709908eebf02797e",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Stahlregen & EoS + Geiss + Phat + yin - Gaping Hole (Multicolor Glow)_2.milk",
+      "preset_sha256": "6fab118d08b5e028516abd274abe892b295a4ff117f1b4aef3bc87c9de767cc6",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Stahlregen & Flexi + Geiss + ORB - Spotted Blob_2 - usheriah colobot - could-scape.milk",
+      "preset_sha256": "5eb77240150a9fbb713603f6073bbf1a9c1bb77b43e807fe4640fbedb898d0b9",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Stahlregen & Flexi + Geiss + ORB - Spotted Blob_2 - usheriah colobot - fecemaster.milk",
+      "preset_sha256": "bac689fa10c7f4a4cf68e085144cc88d026d222dcb234144373ba47372b9e372",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Tripgnosis - Astral Feedback.milk",
+      "preset_sha256": "33e900d651cf11c18d0ae4bc88d397cc977655a81e94b2a55cd26b7dee77b575",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Tripgnosis - Spynadelica.milk",
+      "preset_sha256": "1a9f3980eb0924937be7203505741a8f4967504b753dcd1cd371d573085a95f3",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Tripgnosis - Starblast.milk",
+      "preset_sha256": "292ab796ecbdbfceeee3c8117abb2d4421b3f1b8de21acd34337954fabc87d19",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "Tripgnosis - Wormhole.milk",
+      "preset_sha256": "0f97041fb08feeccb88dbf2948be10fa4ee744e2a2ab5a959d5824bd23842d94",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ flashcards for immunity, no good.milk",
+      "preset_sha256": "640cf67c82b9e430bb7ca2e6aac89016904c27d5911a374991a68f264404fdd3",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "cleave and cleave to thine w gurrrrtrude.milk",
+      "preset_sha256": "a0f12a791b568069bb97b32e665fd6e80da600d5909daf690cb4d16767984253",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "ewephlai.milk",
+      "preset_sha256": "482628d58c10a2934a07edfc4d51327ced69e2301c0546362443bdf5542567c1",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "shamuflex.milk",
+      "preset_sha256": "9dad6186b3c7eeacdef776c400bc9756b4bbb34f433c0a89e5f45e85fb10a766",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - dorsal forsal - like you don't want to be in hell.milk",
+      "preset_sha256": "06386db6759ad4084805693d430a8a83836acdfca35655083e0215dc0714c3bc",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - geiss pill dreampt - crop coicle.milk",
+      "preset_sha256": "d23fc18c1e85fd7a5cfe7813a575b0116c20aaff0a1e699cb01be3a1042ff63f",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "suksma - shifter - spincycle + labor of others.milk",
+      "preset_sha256": "0bd2b75ee877b8a198bd30e79f5f1495a5575357603aeb046bf157ec601c2d5c",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    }
+  ],
+  "whole_preset_accuracy_verified": false,
+  "reader_source_sha256": "53205b2e8e57adcfc51e73b64dd310d6fb1a2f46595801f6430fdbee7318e4a5"
+}

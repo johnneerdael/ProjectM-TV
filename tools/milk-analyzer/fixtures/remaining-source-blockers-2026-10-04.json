@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "presets": 371,
+  "corpus_sha256": "0355879550bb6bae9d2d938c59236161fc78a86f12a50cd27762229ba206e4be",
+  "priority_order": [
+    "affected_presets descending",
+    "affected_units descending",
+    "affected_source_tokens descending",
+    "gap name ascending"
+  ],
+  "scope": "Fresh recheck of all371previously blocked presets; not a new full9606regression census",
+  "use_count_definition": "One section partition needing a gap; repeated expressions/frames do not add uses.",
+  "sole_known_gap_definition": "Removing this gap would leave no recorded structural gaps for these presets. This does not establish verified behavior or successful prediction.",
+  "overlap_definition": "Counts share presets and must not be added as independent gains.",
+  "presets_with_known_gaps": 315,
+  "verified_behavior_percent": null,
+  "reader_sha256": "b629e5bcf942b7abda1ae72edca4c669b0f91f68a18dfea6a3ac9424eaac6ff0",
+  "gaps": [
+    {
+      "gap": "target parse unavailable",
+      "affected_presets": 82,
+      "affected_units": 82,
+      "affected_source_tokens": 23352,
+      "sole_known_gap_presets": 79,
+      "overlap_presets": {
+        "native GLSL array initializer layout mismatch": 1,
+        "same-name initializer binding differs in emitted GLSL": 2
+      }
+    },
+    {
+      "gap": "uninitialized shader value reaches a read",
+      "affected_presets": 60,
+      "affected_units": 60,
+      "affected_source_tokens": 26414,
+      "sole_known_gap_presets": 57,
+      "overlap_presets": {
+        "arithmetic/comparison side-effect order not established": 3
+      }
+    },
+    {
+      "gap": "native GLSL array initializer layout mismatch",
+      "affected_presets": 56,
+      "affected_units": 56,
+      "affected_source_tokens": 21139,
+      "sole_known_gap_presets": 55,
+      "overlap_presets": {
+        "target parse unavailable": 1
+      }
+    },
+    {
+      "gap": "dynamic sampler expression",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "shader expression not lowered: sampler_state": 51
+      }
+    },
+    {
+      "gap": "shader expression not lowered: sampler_state",
+      "affected_presets": 51,
+      "affected_units": 51,
+      "affected_source_tokens": 9778,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "dynamic sampler expression": 51
+      }
+    },
+    {
+      "gap": "same-name initializer binding differs in emitted GLSL",
+      "affected_presets": 49,
+      "affected_units": 49,
+      "affected_source_tokens": 15360,
+      "sole_known_gap_presets": 47,
+      "overlap_presets": {
+        "target parse unavailable": 2
+      }
+    },
+    {
+      "gap": "source outside supported numbered loader",
+      "affected_presets": 20,
+      "affected_units": 25,
+      "affected_source_tokens": 952,
+      "sole_known_gap_presets": 20,
+      "overlap_presets": {}
+    },
+    {
+      "gap": "arithmetic/comparison side-effect order not established",
+      "affected_presets": 3,
+      "affected_units": 3,
+      "affected_source_tokens": 2713,
+      "sole_known_gap_presets": 0,
+      "overlap_presets": {
+        "uninitialized shader value reaches a read": 3
+      }
+    }
+  ],
+  "previous_blocked_presets": 371,
+  "newly_clear_presets": 56,
+  "report_sha256": "66c8d72c1c630a0540c3d8772d3811c7faefd8825d141b6e6a79567936474b60",
+  "full_collection_regression_rechecked": false,
+  "scoring_run_count_not_applicable": true
+}

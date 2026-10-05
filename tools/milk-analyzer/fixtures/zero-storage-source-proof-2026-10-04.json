@@ -1,0 +1,280 @@
+{
+  "basis": "Targeted literal-zero products of plain uninitialized rs storage under pinned mult0 semantics",
+  "rows": [
+    {
+      "preset": "142 nz.milk",
+      "preset_sha256": "10c1183dd48a03330d010fe54c66c76a9eea072f66eb3aed589241bb2b4d0de3",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "142.milk",
+      "preset_sha256": "91b47464903f0efa35bccbb060004ed4b569e530d568b7efed4b7fabe89479af",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "143.milk",
+      "preset_sha256": "09e79947ac21434ae0042e664b03bf2e41470d581d4b8ff98bc30e12c8901198",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "165.milk",
+      "preset_sha256": "3e59483c1805d82e775f2d047d735a1cc13bc0f420cf93fbb1061bc87fe2a4c8",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "167.milk",
+      "preset_sha256": "1382cec5cd5b7a0e2a001db9eeaab73d6cc186ac1a3684b18f5e1de95124415a",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "175.milk",
+      "preset_sha256": "cc84f071ae9bb8b74ca49df9dacf00c51b61f6cad252d35b66b0fc26ad73f949",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "177.milk",
+      "preset_sha256": "2c4808dcfe5e7066f7e1c209122405e90c482ca317f280190f8f3721cd356e53",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "178.milk",
+      "preset_sha256": "579ab84de9c9131d9c00e8294b89e9e16405b55c1111337bc4d61bb78eddd7ab",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "199.milk",
+      "preset_sha256": "0af5a7e97cd89da43fdf205d5c2cb384168ce3767f7ccf1b7339791595af8962",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "200.milk",
+      "preset_sha256": "56b0f2140db17e13ce34f6b7534192304b168cfeaf634c567cd3b372b80b7d10",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "201.milk",
+      "preset_sha256": "50ec6f655be1d112f5534a87135195c375069641b78702bb492667114d862b9f",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "202.milk",
+      "preset_sha256": "be5fd03d5c8589b94d89808640aded4084621a197de60053484027ac33536984",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "203.milk",
+      "preset_sha256": "fd2ddf8b4157eb46642158f382c331947c8a5201419eedacad9da83cea7fc12a",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "204.milk",
+      "preset_sha256": "a054419551d5fbad1cbaa82e5f85a6d4213a15ec293612930ea004aa0d450ded",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "205.milk",
+      "preset_sha256": "e066911ac901fa38630e832c3ae46f9211791d88f3f3a0a79dfb7bf2f0e65129",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "206.milk",
+      "preset_sha256": "57bfaac0d3d3b29dcefbf7e62375647a95683b2bd36e3e499ff2a606327e08ce",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "207.milk",
+      "preset_sha256": "c56ca5f89a1f43196ccf6026a2e0dd94f81f3ff59f3588ffa12ba0e1cd6b267f",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "208.milk",
+      "preset_sha256": "5d9fb13ed77821fce881fa1c7e9c399690c3f687ca9ee1c005582a62876c924c",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "209.milk",
+      "preset_sha256": "f9fddb7513ead1ebae6b9d9bb1cb492dafc59c0b64c5b752835312071d1d0b71",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "210.milk",
+      "preset_sha256": "dd9c121401e38ea65d14666823b87f6247ecf1a39270bada278275ac4ccdad37",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "235.milk",
+      "preset_sha256": "d93b828d8f28d1fdcc083a1f21091ac149c5cd22dc7a5dc400d831d113f44ad8",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "236.milk",
+      "preset_sha256": "7987dd4359a9180a58414680a8e39573a9806229d6b998562f99638c5e249cb7",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "237 nz eat the fruit, pros.milk",
+      "preset_sha256": "3701d9937b80293ce464395b2f2ab0a5464fa76aa7ffc61a0fe249035f219482",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "237 nz shit the seeds, esco.milk",
+      "preset_sha256": "4751539a01ca262e3d71d68c5f3f57b04df98c409035e4168727555ce60689b4",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "237.milk",
+      "preset_sha256": "bbac1eebc38b5dd58094ba22031ca4c554409f70c76edbe0c1acc7c56968b6a6",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "324.milk",
+      "preset_sha256": "baf849617669d472d2c5de578931be3ff5dcd5317a039eb19f6c45ae9c39b334",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "397.milk",
+      "preset_sha256": "f8a78650355885dffb19c3a4ddf1cf7d87fe9fbe9634b8b39441e1fa4dbdf3f1",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "399.milk",
+      "preset_sha256": "9ed60962849c4ae4835995e381177cc66a6b5f92e1140f8f9ab042c05dd83f1e",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "400.milk",
+      "preset_sha256": "719def495957fe38bc1ea50eefe37a2bc2361936f18184f590f7bcf871e3b2a0",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "401.milk",
+      "preset_sha256": "45e1016ca889583347b9c61cf730546b55c8333690f1e4ae404daeec382aeedc",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "402.milk",
+      "preset_sha256": "e2801e9414b466f5e62de7c09c6bb763c887b9b825b5dfa4aceb3452396af687",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "403.milk",
+      "preset_sha256": "289fa7998e365991a51525146b01cc346fe353771c1a4f82c52b8bb7e21fe3ff",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "404.milk",
+      "preset_sha256": "0245055b4d917b6add3aa8757b95a60a6758f8c59d93a4bf615a898b2410730f",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "405.milk",
+      "preset_sha256": "4491ca8b3fff8f91246c853ffaef2394fce957b005eb937ee141ec7ee43d84a0",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "406.milk",
+      "preset_sha256": "20c167a0e5ce49cedb8bbe923c34b796090b2b9a97932b2ff139b2c13f9a8883",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "434.milk",
+      "preset_sha256": "922901f136fa33ab7d0e7bf733211c86335137f06a985f2667b92bac4cabe3d8",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "BADAZJust a TwistFX - Martin - Foggy Notation - Ft AdamFX n Eos - Ufoz in the Fog .milk",
+      "preset_sha256": "2a992942bad5d5710df695e700310f46d39e03f93c32bc3d057827a9c6a1fb41",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "LuxXx - Dead Planet I.milk",
+      "preset_sha256": "980fbe1872b9058ef9f26cce997c1c83c464a88970314c8004a41741b50a17a1",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    },
+    {
+      "preset": "martin - foggy notion.milk",
+      "preset_sha256": "06f2dc0bf66f38982b4b26cdc7eb50871ee19af9587fe9bbaacb3299beca7478",
+      "section": "warp_",
+      "complete": true,
+      "remaining_reasons": []
+    }
+  ],
+  "implementation_sha256": "88af732ef0a0a0fc49f8d1de5c358421354a1c562cfa0ee822fcbf05b8c6b8ae",
+  "whole_preset_accuracy_verified": false
+}

@@ -1,0 +1,162 @@
+{
+  "backend": "Unmodified published ProjectM-TV core v2.2.4 JNI",
+  "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+  "library_sha256": "f9ac1b9bb2d7481d5d7947b9dbe783374fff38140ca885003ef83bcfd8961929",
+  "constant_test": {
+    "status": "passed",
+    "backend": "Unmodified published ProjectM-TV core v2.2.4 JNI",
+    "frames": 30,
+    "maximum_byte_error": 0,
+    "expected_rgba": [
+      64,
+      128,
+      191,
+      255
+    ],
+    "aar_sha256": "75e8cbb9ce4ab9340ac9514c16812bbf79e5b3dfa8f29db22d653c601323ce60",
+    "selected_preset": "constant.milk",
+    "correct_read_target": "Default presentation framebuffer0; core returns with private read framebuffer bound",
+    "apps_installed": false,
+    "library_modified": false
+  },
+  "time_test": {
+    "status": "passed",
+    "core_library_modified": false,
+    "clock_scope": "Runner-side interposition only for clock calls from exact published core library path",
+    "frames": 30,
+    "fps": 30,
+    "maximum_byte_error": 1.0,
+    "actual_red": [
+      8.0,
+      17.0,
+      26.0,
+      34.0,
+      43.0,
+      51.0,
+      60.0,
+      68.0,
+      77.0,
+      85.0,
+      94.0,
+      102.0,
+      111.0,
+      119.0,
+      128.0,
+      136.0,
+      144.0,
+      153.0,
+      161.0,
+      170.0,
+      178.0,
+      187.0,
+      195.0,
+      204.0,
+      212.0,
+      221.0,
+      229.0,
+      238.0,
+      246.0,
+      255.0
+    ],
+    "expected_red": [
+      8.0,
+      17.0,
+      26.0,
+      34.0,
+      42.0,
+      51.0,
+      60.0,
+      68.0,
+      76.0,
+      85.0,
+      94.0,
+      102.0,
+      110.0,
+      119.0,
+      128.0,
+      136.0,
+      144.0,
+      153.0,
+      162.0,
+      170.0,
+      178.0,
+      187.0,
+      196.0,
+      204.0,
+      212.0,
+      221.0,
+      230.0,
+      238.0,
+      246.0,
+      255.0
+    ]
+  },
+  "benchmark": {
+    "status": "Representative published-core JNI execution benchmark",
+    "cases": [
+      {
+        "id": "chill",
+        "preset": "shifter - spun sugar - causal mothritis.milk",
+        "preset_sha256": "42249796c0083f3090fe51409c4e2c79e515cb6ee5b61867d7304f866e2edc02",
+        "archive_sha256": "2b83bdd33cb2879c5e39720ccf1895a0275a3b87f48971613cc78c47af891e5e",
+        "exit_code": 0,
+        "elapsed_seconds": 8.517726458027028,
+        "nonzero_rgb_samples": 4539002,
+        "mean_rgb": 0.09583955219176148,
+        "rgb_sha256": "b6b5d813db914e27a682bb9d10c731256806a62a0ca2dd9daf2c2156b17b6e14"
+      },
+      {
+        "id": "party",
+        "preset": "signed 'nuph phoaqing death warrants qultre ov ngread.milk",
+        "preset_sha256": "8fe1784a25d47cc7acee9ebe1cebf11931bd5db18de611bc079449d91bc16d94",
+        "archive_sha256": "33d6d21c7f1edc79154dc4004b4d0fd3c8a7f5e8acd7bf27d691cb55972fff79",
+        "exit_code": 0,
+        "elapsed_seconds": 12.303242500056513,
+        "nonzero_rgb_samples": 7841311,
+        "mean_rgb": 0.2014258312876977,
+        "rgb_sha256": "85f18e6da04b4c9c34e2d908e5def32d3abf52994782bf190baacb400e5e2a9c"
+      },
+      {
+        "id": "domain",
+        "preset": "Tripgnosis - K Hole 2.milk",
+        "preset_sha256": "63a1ec2fa6b1a2e0a15894170ee46d34405f812cf4bd8131cf268b1b7cbc01ec",
+        "archive_sha256": "7e7a820d56bf9ac0798218c24e16036c8e0cfccc5f406e294a94136f3e7dedea",
+        "exit_code": 0,
+        "elapsed_seconds": 3.9348992090672255,
+        "nonzero_rgb_samples": 9942184,
+        "mean_rgb": 0.8826806711544571,
+        "rgb_sha256": "db2f92c62ebf906e39b8d0b300591dd3d997f96aa909266ec0fe6838b0f36fb2"
+      }
+    ],
+    "corpus_run_started": false
+  },
+  "benchmark_scores": [
+    {
+      "id": "chill",
+      "preset": "shifter - spun sugar - causal mothritis.milk",
+      "score": 30.81667731,
+      "labels": [
+        "Normal"
+      ]
+    },
+    {
+      "id": "party",
+      "preset": "signed 'nuph phoaqing death warrants qultre ov ngread.milk",
+      "score": 77.41597578,
+      "labels": [
+        "Party"
+      ]
+    },
+    {
+      "id": "domain",
+      "preset": "Tripgnosis - K Hole 2.milk",
+      "score": 58.11641577528349,
+      "labels": [
+        "Normal"
+      ]
+    }
+  ],
+  "scope": "Three-preset throughput sample; no full-corpus or independent audience accuracy claim",
+  "corpus_presets": 9606,
+  "serial_renderer_only_extrapolation_hours": 22.01896940867132
+}

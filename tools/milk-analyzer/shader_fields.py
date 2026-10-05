@@ -43,6 +43,8 @@ class ShaderFields:
         self.environment={};self.complete=True;self.unknown=[]
         self.functions={};self.global_names=set();self.globals={};self.call_stack=[]
         self.frame_wrap=frame_wrap;self.sampler_bindings={}
+        self.random_texture_inputs={}
+        self.random_texsize_inputs={}
         self.main_binding_policy=main_binding_policy
         self.known_uniforms=known_uniforms or {}
         self.known_uniform_components=known_uniform_components or {}
@@ -338,7 +340,7 @@ class ShaderFields:
             function['body'].insert(0,{'kind':'declarations','values':declarations})
         return tree
 
-    def lower(self,tree:list[dict],*,language_extensions=(),native_samplers=None)->Field:
+    def lower(self,tree:list[dict],*,language_extensions=(),native_samplers=None,random_texture_inputs=None,random_texsize_inputs=None)->Field:
         """Lower the entry body; uniforms stay symbolic rather than guessed zero."""
         tree=self.localize_exclusive_helper_storage(tree)
         self.collect_matrix_constructors(tree)
@@ -350,6 +352,8 @@ class ShaderFields:
             dtype not in {'sampler2D','sampler3D'} for name,dtype in native_samplers.items()):
             raise ValueError('explicit native sampler names and dimensions required')
         self.native_samplers=dict(native_samplers)
+        self.random_texture_inputs=random_texture_inputs or {}
+        self.random_texsize_inputs=random_texsize_inputs or {}
         for node in tree:
             if node['kind']=='function':
                 # Only the reader's explicitly tagged standard declaration is
@@ -365,6 +369,10 @@ class ShaderFields:
                     if declaration['type'].get('array'):
                         value=self.array_declaration(declaration,global_scope=True)
                     elif self.native_sampler(declaration) is not None:value=self.native_sampler(declaration)
+                    elif (name in self.random_texsize_inputs and dtype=='float4' and
+                          declaration['type'].get('flags',0)&4):
+                        value=Field('input',dtype=dtype,detail={'name':self.random_texsize_inputs[name],
+                            'alias':name,'basis':'shared uploaded texsize for the random slot selection epoch'})
                     elif declaration['value'] is not None:value=self.initializer(self.expression(declaration['value']),dtype)
                     elif ((declaration['type'].get('flags',0)&0x400004)==0x400004 and
                           self.global_input_policy=='projectmtv-implicit-extern-zero-v1' and name not in self.known_uniforms):
@@ -412,7 +420,8 @@ class ShaderFields:
         if (declaration['type']['name'].startswith('sampler') and value is not None and
                 value.get('kind')=='sampler_state' and name in self.native_samplers):
             return Field('input',dtype=self.native_samplers[name],detail={
-                'name':name,'binding_basis':'explicit native descriptor',
+                'name':name,'binding_basis':('native source contract; conditional runtime input'
+                    if name in self.random_texture_inputs else 'explicit native descriptor'),
                 'source_sampler_states_ignored':value['states']})
         return None
 
@@ -558,6 +567,10 @@ class ShaderFields:
 
     def texture(self,name:str,args:tuple,dtype:str)->Field:
         policy=self.sampler_bindings.get(name,texture_settings(name));base=policy['texture'].lower()
+        random_input=self.random_texture_inputs.get(name)
+        if random_input is not None:
+            base=random_input['texture_input']
+            policy={**policy,'texture':base,'random_texture_input':random_input}
         if base=='main':
             if name not in self.sampler_bindings:
                 if self.stage=='warp':
@@ -577,6 +590,7 @@ class ShaderFields:
             source_frame=None;surface="procedural_or_external_texture"
         site_index=self.sample_counter;self.sample_counter+=1
         return Field("sample",args,dtype,{"sampler":name,"surface":surface,"frame":source_frame,'site_index':site_index,
+            **({'random_texture_input':random_input} if random_input is not None else {}),
             'canonical_texture':base,'sampling_policy':policy,
             "coordinate_convention":"MilkDrop shader UV; underlying main/blur flips remain explicit pipeline requirements"})
 

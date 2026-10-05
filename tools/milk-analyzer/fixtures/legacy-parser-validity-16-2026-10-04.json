@@ -1,0 +1,248 @@
+{
+  "scope": "Legacy source validity for16remaining parser cases,not current-core shader acceptance or appearance;22known source blockers retained",
+  "profile": "ps_3_0",
+  "flags": 65536,
+  "compiler_identity_fixture": "legacy-global-constant-attribution-2026-10-04.json",
+  "rows": [
+    {
+      "preset": "EVET + Flexi - Rainbox Splash Poolz.milk",
+      "preset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "95c80f1be7076bb67f367f27bbecf0c45e362d509f5a812cd90fe5ac130a0f09",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "53877a665e698c9b59c841dcd6378644dafd4e1856c6a0a38242eaae70e55d64",
+      "native_loads": [
+        "0234:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0234:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "EVET - Brainsplolz.milk",
+      "preset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "95c80f1be7076bb67f367f27bbecf0c45e362d509f5a812cd90fe5ac130a0f09",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "53877a665e698c9b59c841dcd6378644dafd4e1856c6a0a38242eaae70e55d64",
+      "native_loads": [
+        "0244:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0244:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Fed + Geiss - Color Pox Remix.milk",
+      "preset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1",
+      "stage": "warp",
+      "source_sha256": "0265c9b6e4fc62c975f496e55466fdad2d64f6a2ac27b2f5432272dc61788346",
+      "issue": "T5: object macro token spacing/wrapping",
+      "prepared_hlsl_sha256": "489a82d661bd0ff7a576d6da3930b9e89500ebd13a5d9e22b3596f0973b52aa7",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "645915728ed28e3a2a121b4e2ed59a9c5dcb48349e30500365e9db0186fa65ba",
+      "native_loads": [
+        "0254:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0254:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - dimension window.milk",
+      "preset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d",
+      "stage": "composite",
+      "source_sha256": "14fb2740b8599f5e3b9e897a94d4a78fd0fe6915b1b1d62df4ebad7e911c9c91",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "827741bd8dc6e38168beb65df299a192d471c697499e01fd604d1026e5397483",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "5dbc41e699a2531be9ecd5da0d61df13db097f2310ceea3984fe33bb3f54ef28",
+      "native_loads": [
+        "026c:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "026c:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - ianus portal.milk",
+      "preset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef",
+      "stage": "composite",
+      "source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "f63e3fcbb27130e99ad8b3611a82a1933d697cd7561126053d5c76db89457704",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "875cc35988c10b5d974995d0e663c7cadbd5aca017a7e1599b3bcd664febf129",
+      "native_loads": [
+        "027c:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "027c:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - madness portal.milk",
+      "preset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+      "stage": "composite",
+      "source_sha256": "44051b005972dc825f827333716a31ae7d4b62d8e2709b28dd2322c31ad2a7b9",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "8edd6bd82fd414151dbce0b8b026527e26cdb26a888811f58fbdccb85cc0da93",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "c8c9e240bcef4c22266a5de0a30ebb5d8ca32aec7972306f7ffbd04bb346be34",
+      "native_loads": [
+        "0294:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0294:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - rorschach bomb.milk",
+      "preset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801",
+      "stage": "composite",
+      "source_sha256": "44051b005972dc825f827333716a31ae7d4b62d8e2709b28dd2322c31ad2a7b9",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "8edd6bd82fd414151dbce0b8b026527e26cdb26a888811f58fbdccb85cc0da93",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "c8c9e240bcef4c22266a5de0a30ebb5d8ca32aec7972306f7ffbd04bb346be34",
+      "native_loads": [
+        "02e0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "02e0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - spirally caterpillar coop mode.milk",
+      "preset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22",
+      "stage": "composite",
+      "source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "f63e3fcbb27130e99ad8b3611a82a1933d697cd7561126053d5c76db89457704",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "875cc35988c10b5d974995d0e663c7cadbd5aca017a7e1599b3bcd664febf129",
+      "native_loads": [
+        "01d8:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "01d8:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - spirally repetative 2.milk",
+      "preset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd",
+      "stage": "composite",
+      "source_sha256": "a28f050fc2e2db496202519239eccf09700afe7916d31a4bac5c53755548f6be",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "f135e7c58468ef3a795a6bb77dba8d671ac26567b2232d39b8e6af04fa0aa1b7",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "be0b2e7018fc8f87735f17d73f3a4b5a4519e507381a2742427d18bcd94ff97a",
+      "native_loads": [
+        "01cc:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "01cc:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+      "preset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "95c80f1be7076bb67f367f27bbecf0c45e362d509f5a812cd90fe5ac130a0f09",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "53877a665e698c9b59c841dcd6378644dafd4e1856c6a0a38242eaae70e55d64",
+      "native_loads": [
+        "01e0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "01e0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi - truly soft piece of software - topology - cohere.milk",
+      "preset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "95c80f1be7076bb67f367f27bbecf0c45e362d509f5a812cd90fe5ac130a0f09",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "53877a665e698c9b59c841dcd6378644dafd4e1856c6a0a38242eaae70e55d64",
+      "native_loads": [
+        "0218:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0218:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Flexi, Geiss and Rovastar - tokamak, the ultimate plasma torus.milk",
+      "preset_sha256": "12064864d58f8337ca1ede72f20ce2ead38a1a591c75cf810cdcbed167db670b",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "95c80f1be7076bb67f367f27bbecf0c45e362d509f5a812cd90fe5ac130a0f09",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "53877a665e698c9b59c841dcd6378644dafd4e1856c6a0a38242eaae70e55d64",
+      "native_loads": [
+        "0278:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0278:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "Hexcollie - Hedgehog dreams.milk",
+      "preset_sha256": "9b7d343de88e5a59363152b2161ae4aa98d8b4f323eb4cdd0fdb91374f3887c7",
+      "stage": "composite",
+      "source_sha256": "e878b5c524eb0f7583a9c0e928cb7c780563d8000410a8116fc362358d370ef3",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "95c80f1be7076bb67f367f27bbecf0c45e362d509f5a812cd90fe5ac130a0f09",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "53877a665e698c9b59c841dcd6378644dafd4e1856c6a0a38242eaae70e55d64",
+      "native_loads": [
+        "01b0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "01b0:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "lice - veritubule.milk",
+      "preset_sha256": "fd1e37383cb6c78a6d1eb906ca7982db7fc0d69d8b891f71be259341029c481b",
+      "stage": "composite",
+      "source_sha256": "ba58023fbe736a5514c7912b02995f73818da067e8a0df1eb6a40dbf50625034",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "9b4374d298aa68bda1892d58fdd896130b7d11c48d18c0a7e529036a9a46f604",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "65db5ffe1adf5bcc2cd1a511d6d82307a92cbb2a72b7d17355d94bc7d27b43f6",
+      "native_loads": [
+        "0300:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0300:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "suksma - crisco orgy - rosvell roams nz+.milk",
+      "preset_sha256": "f99c8383eb1010a257c9188776b734edf6438c307a72f777f442b5479aad61b6",
+      "stage": "warp",
+      "source_sha256": "e81c1a0c2056bdc3f196b1d1b2ccdaf70f091f1406f379f9353e29b9e6dffb03",
+      "issue": "T6: parenthesized expression swizzle",
+      "prepared_hlsl_sha256": "afb563f2f73d1a04a9138f3dd17a461ae6c82ddb4ae2fa565fd4049610e5ea32",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "be94a54e33acf2c3e8feee4e3dc67527320e320ac40096f88f161252132d669d",
+      "native_loads": [
+        "030c:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "030c:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    },
+    {
+      "preset": "suksma - fuck retro anything.milk",
+      "preset_sha256": "d57fea66d8addb123af5327e19d7410ed923d0a64416b448fee2458510730883",
+      "stage": "composite",
+      "source_sha256": "fdf4d9c56b60117aae01ff07e2f00c67df515a41144fe46556c5046bbadebd39",
+      "issue": "T4: sample modifier ambiguity",
+      "prepared_hlsl_sha256": "f63e3fcbb27130e99ad8b3611a82a1933d697cd7561126053d5c76db89457704",
+      "returncode": 0,
+      "result": "accepted by Microsoft legacy compiler",
+      "output_sha256": "875cc35988c10b5d974995d0e663c7cadbd5aca017a7e1599b3bcd664febf129",
+      "native_loads": [
+        "0330:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\native\\\\d3dx9_36.dll\" at 79900000: native",
+        "0330:trace:loaddll:build_module Loaded L\"Z:\\\\Users\\\\jneerdael\\\\Scripts\\\\Projectm-TV\\\\.worktrees\\\\preset-genre-analyzer\\\\build\\\\milk-analyzer\\\\d3dx-global-defaults\\\\d3dx9_31.dll\" at 01B50000: native"
+      ]
+    }
+  ]
+}
