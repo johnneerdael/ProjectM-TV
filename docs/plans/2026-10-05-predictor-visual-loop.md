@@ -41,3 +41,16 @@ Archive each prediction and outcome; when ten consecutive fresh cases pass,
 audit the frozen artifacts, random sequence, five category scores and final model
 revision. Follow repository validation, documentation and PR/review workflow for
 retained code changes. Do not mark the goal complete before the streak is proved.
+
+
+## User-directed60-frame profile update
+
+The user shortened each prediction/reference run to60frames at30fps. The current
+acceptance window is therefore2seconds, with no descriptor warmup and the fixed
+quiet input prefix. Preserve the older18-second runs as diagnostics; restart the
+acceptance streak rather than combining the two profiles. Case001was already
+observed and is excluded from fresh short-window acceptance. Current new-profile
+results: case002100/100,case00390/100; provisional streak2/10. The latter retains
+brightness/overlay-attribution misses. These are frozen behavioural-rubric grades,
+not calibrated accuracy probabilities. Later changes and other music remain
+unassessed by this deliberately shortened window.

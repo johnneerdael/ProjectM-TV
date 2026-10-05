@@ -248,3 +248,11 @@ waveform and draw-spec controls pass27tests plus16subtests on the prepared engin
 The broader imported suite requires preparation of its pinned older/newer adapter
 profiles and reconciliation with production semantics; it is not reported passing.
 No source-coverage or whole-corpus accuracy claim follows from this checkpoint.
+
+
+The user subsequently reduced the loop to60frames/30fps (2seconds). Its acceptance
+streak restarts separately: current checkpoint2/10, with100and90behavioural-rubric
+grades. Earlier540-frame observations remain diagnostics. The committed compact
+progress fixture preserves both original predictions, independent native
+measurements, numerical descriptors, misses and the profile change. Raw frames
+remain local; the final ten-case gate is not achieved yet.
