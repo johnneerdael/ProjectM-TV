@@ -244,3 +244,26 @@ Documentation assessment: shipped README/Pages collection instructions remain
 unchanged because this experimental prediction run changes no shipped ranking
 or collection. This plan and the analyzer research evidence record the results;
 no new production accuracy or compatibility claim is added.
+
+## Round004 diagnosis: dots and equation FPS
+
+The native quad profile draws built-in wave dots as one centered 2px point;
+the source used four shifted 1px copies. Correct the explicit 2.3.5 low-resolution
+profile while preserving canonical historical drawing and rejecting unsupported
+engine/viewport requests. The dot-only diagnostic makes Hyperspace frame 2 match
+exactly and lowers 60-frame RGB8 mean error from 2.951 to 0.416.
+
+The clock cadence is 30 Hz but native equation FPS starts at 35, with the JNI
+tracker setting 30 only after rendered image 30. A frozen fps/256 shader control
+matches all native pixels: red 35 for images 1–30, red 30 for 31–60. Retain
+physical PCM/FFT arrays and timestamps and provide that separate equation
+context. With the original frozen 63-module model and only FPS input corrected,
+187's missing red fan returns; mean RGB8 error falls from 1.130 to 0.0083, maximum
+2. Adding the correct context to Hyperspace's dot repair lowers mean RGB8 error
+further to 0.112, but residual maximum 23 remains. No diagnostics receive fresh
+acceptance credit; original grades stay unchanged. Point-grid snapping and
+motion-vector quads remain separate declared gaps.
+
+Evidence: `tools/milk-analyzer/fixtures/visual-loop-dot-fps-repair-2026-10-06.json`.
+Analyzer README records the input/drawing contracts; shipped collections and
+Pages instructions do not change. Focused drawing/geometry tests pass 35 checks.

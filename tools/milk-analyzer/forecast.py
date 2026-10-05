@@ -163,7 +163,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     scene = execute_scene(source,audio['frames'],reader=reader,width=width,height=height,
         mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))
-    builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs')
+    builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs',
+                                  line_rendering_profile=line_profile)
     if builtin['engine_archive_sha256']!=archive:
         raise ValueError('builtin-wave source engine identity mismatch')
     custom = source_custom_waves(source,scene)

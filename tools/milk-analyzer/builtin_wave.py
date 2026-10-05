@@ -11,6 +11,13 @@ import tempfile
 from pathlib import Path
 import numpy as np
 from scene_equations import _scalar
+from quad_lines import PROFILE
+
+
+_CORE235_ENGINE = {
+    'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
+    'patches_sha256': 'd73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a',
+}
 
 
 def _colour(source,main,frame,mode,alpha,width,height):
@@ -34,9 +41,20 @@ def _colour(source,main,frame,mode,alpha,width,height):
     return rgba.tolist()
 
 
-def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60):
+def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
+                        line_rendering_profile='canonical-gl-lines-v1'):
     if len(scene['frames'])!=len(audio['frames']):raise ValueError('wave/audio frame schedule mismatch')
     values=source['values'];width,height=scene['viewport']
+    if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
+        raise ValueError('unknown builtin wave line rendering profile')
+    dot=bool(_scalar(values,'bWaveDots',0,'bool'))
+    scaled_dots=dot and line_rendering_profile==PROFILE
+    if scaled_dots:
+        engine=source.get('parser_inputs',{}).get('engine',{})
+        if any(engine.get(key)!=value for key,value in _CORE235_ENGINE.items()):
+            raise ValueError('GLES builtin dot engine identity mismatch')
+        if width<=0 or height<=0 or width*height>1024*768 or height>1330:
+            raise ValueError('GLES builtin dot profile requires viewport within reference area')
     mode=_scalar(values,'nWaveMode',0,'int')
     request_frames=[]
     for frame,data in zip(scene['frames'],audio['frames']):
@@ -56,8 +74,10 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60):
         native=json.loads(output.read_text())
     if native.get('render_context_time_bits')!=32:
         raise ValueError('prepared native waveform adapter with float32 render context required')
-    dot=bool(_scalar(values,'bWaveDots',0,'bool'));thick=dot or bool(_scalar(values,'bWaveThick',0,'bool'))
-    offsets=[[0,0],[1/width,0],[1/width,-1/height],[0,-1/height]] if thick else [[0,0]]
+    thick=dot or bool(_scalar(values,'bWaveThick',0,'bool'))
+    # Waveform::Draw uses one DotStyleFor(MainWave) point when quad mode is on.
+    # At/below the reference area LineScale=1, hence size=2 and alphaScale=1.
+    offsets=[[0,0]] if scaled_dots or not thick else [[0,0],[1/width,0],[1/width,-1/height],[0,-1/height]]
     result=[]
     for frame,data,geometry in zip(scene['frames'],audio['frames'],native['frames']):
         waves=[]
@@ -70,6 +90,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60):
         result.append({'positions':waves,'clip_positions':geometry['vertex_waves'],
                        'rgba':_colour(source,frame['main'],data,native['mode'],geometry['wave_a_after_geometry'],width,height),
                        'draw_mode':'points' if dot else 'loop' if geometry['closed_loop'] else 'strip',
+                       'point_size':2 if scaled_dots else 1,
                        'additive':bool(_scalar(values,'bAdditiveWaves',0,'bool')),'copy_offsets':offsets})
     return {'basis':native['basis'],'mode':native['mode'],'frames':result,'source_hashes':native['source_hashes'],
             'adapter_sha256':native['adapter_sha256'],

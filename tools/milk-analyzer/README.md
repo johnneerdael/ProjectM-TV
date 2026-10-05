@@ -287,8 +287,29 @@ that layer inactive through height 1330; above it, Native trails also use a
 or scaled lines. Every forecast with the 2.3.5 engine identity rejects viewports
 above the 1024x768 reference area or height 1330, even with the canonical line
 profile or a declared lab equation seed. Accepting the low-resolution identity
-does not establish 4K support or appearance accuracy. The new 2.3.5 round has not
-yet been frozen; the original 2.3.4 slots 016–018 were withdrawn before captures.
+does not establish 4K support or appearance accuracy. The first 2.3.5 batch,
+slots 019–021, scored 97.5/17.5/65 under the frozen behavioural rubric. The
+original 2.3.4 slots 016–018 were withdrawn before captures.
+
+With the exact 2.3.5 engine and the GLES quad profile, built-in dotted waves use
+one centered 2-pixel point at or below the reference area. The earlier model
+used four offset 1-pixel copies. The canonical profile retains those historical
+copies; quad-dot requests with other engine identities or larger viewports are
+rejected. Correcting only this draw path makes Hyperspace's second frame match
+the saved native white frame exactly and reduces its 60-frame RGB8 mean error
+from 2.951 to 0.416. This is diagnostic evidence, not fresh acceptance credit.
+
+Separate PCM cadence from the equation `fps` input. In the declared cold JNI
+test host, the engine starts with target FPS 35. The JNI tracker updates it after
+the 30th rendered image at simulated time 1 second. Supply equation FPS 35 for
+images 1–30 and 30 for images 31–60 while retaining the 30 Hz PCM arrays and
+timestamps. A separately frozen `q1=fps/256` control through the unchanged AAR
+matches the expected red bytes 35 then 30 on every pixel. This timeline describes
+that exact host lifecycle, not arbitrary app startup or device frame rates.
+Correcting only this input in the unchanged frozen model restores `187`'s red
+fan; its 60-frame RGB8 mean error falls from 1.130 to 0.0083, with maximum 2.
+See `fixtures/visual-loop-dot-fps-repair-2026-10-06.json`. Point snapping and
+motion-vector quad rasterization remain separate gaps.
 
 A frozen curved-line native control agrees within one RGB8 level over 60 frames.
 The full case 012 diagnostic now matches coherent flash counts (one brightening,

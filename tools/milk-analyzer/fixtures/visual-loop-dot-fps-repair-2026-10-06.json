@@ -1,0 +1,453 @@
+{
+  "schema_version": 1,
+  "purpose": "Bounded published2.3.5 input-context and built-in dot repair evidence; original round004 unchanged, no fresh acceptance credit.",
+  "reference_identity": {
+    "release_commit": "910e837b7d3eb636b3de30df402095b0a7e59a7c",
+    "aar_sha256": "ef9ae2b4af16222d945f48deb063e93e05cc7a7ecccfbb2581e469047718cf77",
+    "native_sha256": "5f625ce8e2ae9a11621406ba7ff255fcdebcf153fd619eb3b757313abd71ebad"
+  },
+  "fps_context": {
+    "diagnosis_case": 20,
+    "release_commit": "910e837b7d3eb636b3de30df402095b0a7e59a7c",
+    "source_backed_not_device_observed": true,
+    "ordered_steps": [
+      "configureClock base1e15ns",
+      "onSurfaceCreated createsprojectM withtarget35;fpsWindowStart=NowSeconds",
+      "forframeindexi setClockround((i+1)*1e9/30)",
+      "RenderPresetFrame usescurrenttargetFps",
+      "afterrender UpdateFps(now) incrementscounter,setsnexttargetifelapsed>=1"
+    ],
+    "timeline": [
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30
+    ],
+    "updates": [
+      {
+        "after_zero_based_frame": 29,
+        "ns": 1000001000000000,
+        "now_seconds": 1000001.0,
+        "elapsed_seconds": 1.0,
+        "window_frame_count": 30,
+        "measured_fps": 30.0,
+        "next_equation_fps": 30
+      },
+      {
+        "after_zero_based_frame": 59,
+        "ns": 1000002000000000,
+        "now_seconds": 1000002.0,
+        "elapsed_seconds": 1.0,
+        "window_frame_count": 30,
+        "measured_fps": 30.0,
+        "next_equation_fps": 30
+      }
+    ],
+    "source_evidence": {
+      "engine_default": "source235/production-engine/src/libprojectM/ProjectM.hpp:229",
+      "engine_context": "source235/production-engine/src/libprojectM/ProjectM.cpp:508",
+      "jni_creation": "core/src/main/cpp/native-lib.cpp:1729",
+      "jni_window": "core/src/main/cpp/native-lib.cpp:1745",
+      "jni_fps_update": "core/src/main/cpp/native-lib.cpp:1546",
+      "jni_postrender_call": "core/src/main/cpp/native-lib.cpp:1900",
+      "runner_clock": "runtime235/CoreBackendRunner.java:65",
+      "clock_interposer": "runtime235/core_backend_clock.cpp:28"
+    },
+    "original_driver_sha256": "021955138a1d0f05465431f200319d00644866616849c2b5fdda761db21e3699",
+    "diagnostic_driver_sha256": "9443d7ff04abcf6dbfbd5fc45406e8c7dcf7c309ca3a593a6c5ec6a3bcd4ab6b",
+    "changed_input": "Onlycopiedaudioframes[*].fpsfirst30are35;last30remain30. PCM/audioarrays,time,framecadence,preset,domain,random/materialinputsunchanged.",
+    "ret_initialization_control": {
+      "exact_native_zero_initializer": true,
+      "cpu_constant_main_blur_half_result": [
+        0.3374999761581421,
+        0.6000000238418579,
+        0.8624999523162842
+      ],
+      "expected": [
+        0.3375,
+        0.6,
+        0.8625
+      ]
+    },
+    "credit_eligible": false,
+    "source_json_changed_fields": [
+      "elapsed_ms"
+    ],
+    "model_provenance_unchanged": false,
+    "only_changed_input_hash": [
+      "audio_sha256"
+    ],
+    "native_glue_matches_release": true,
+    "native_glue_sha256": "20e03c253592a8170deaa515d6c75393a340698ea5417a2021a20c9ba9695a09",
+    "physical_audio_unchanged": "PCMfiles/quantizednativeFFTarrays/time/frame/top-levelcadence unchanged. Copiedframesfps only isengineequationcontext. PCM/Loudnessnative APIsreadelapsedseconds/frame, neverm_targetFps. Built-inCPUwave request hasnofpsfield; contextfpscheckonlycomparesscheduleidentity.",
+    "scope": "Fresh CoreBackendRunnerprocess/currentclockinterposition only. Not ageneralTVruntimeFPSschedule; a reusedengine/process, realclock, or earlieronDrawFrames requiresitsownexplicitcontext."
+  },
+  "fps_control": {
+    "scope": "bounded fps/256 diagnostic, not freshcase",
+    "all60_exact_uniform_rgb_match": true,
+    "equation_fps_observed_frames1_through30": 35,
+    "equation_fps_observed_frames31_through60": 30,
+    "mean_rgb8_mae": 0.0,
+    "root_cause": "Native equation fps starts35, distinct from runner clock30fps;nativeUpdateFps runs after render and first updates target30 after image30.",
+    "frames": [
+      {
+        "frame": 1,
+        "expected_rgb8": [
+          35,
+          0,
+          0
+        ],
+        "predicted_unique_rgb8": [
+          [
+            35,
+            0,
+            0
+          ]
+        ],
+        "native_unique_rgb8": [
+          [
+            35,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "frame": 30,
+        "expected_rgb8": [
+          35,
+          0,
+          0
+        ],
+        "predicted_unique_rgb8": [
+          [
+            35,
+            0,
+            0
+          ]
+        ],
+        "native_unique_rgb8": [
+          [
+            35,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "frame": 31,
+        "expected_rgb8": [
+          30,
+          0,
+          0
+        ],
+        "predicted_unique_rgb8": [
+          [
+            30,
+            0,
+            0
+          ]
+        ],
+        "native_unique_rgb8": [
+          [
+            30,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "frame": 60,
+        "expected_rgb8": [
+          30,
+          0,
+          0
+        ],
+        "predicted_unique_rgb8": [
+          [
+            30,
+            0,
+            0
+          ]
+        ],
+        "native_unique_rgb8": [
+          [
+            30,
+            0,
+            0
+          ]
+        ]
+      }
+    ],
+    "prediction_sha256": "5499bef1c1d28aee60fcbc62b429d1137201aecc6329eab3a488b0a1f7173945",
+    "native_sha256": "5499bef1c1d28aee60fcbc62b429d1137201aecc6329eab3a488b0a1f7173945",
+    "full_result_sha256": "90aebf58abf8bc94dca87ef18df47cc04b5829e6a3e2055213f79faeb17879c9"
+  },
+  "fps_control_source": "MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=2\nPSVERSION_COMP=2\n[preset00]\nfGammaAdj=1\nfWaveAlpha=0\nfVideoEchoAlpha=0\nob_a=0\nib_a=0\nmv_a=0\nper_frame_1=q1=fps/256;\nwarp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=float3(q1,0,0);}\n",
+  "fps_control_seal": {
+    "frozen_utc": "2026-10-05T23:08:10.178321+00:00",
+    "source_only": true,
+    "reference_frames_seen": false,
+    "hashes": {
+      "domain.json": "d3add6751fed2b07f575e206d7923ef544fe07dd3ad55b8490f752c24329735b",
+      "custom-geometry.json": "3aa972de6eff927f410599cd9818ac1662002a77dfae15597f16464e3a2160fd",
+      "source.json": "0c8c35f432bcb0729cf9215bc70b1080cf9a0bd015c732e2936653702ee8d842",
+      "expected-timeline.json": "63a5f77fcf5c4199502edf417ac246aec228e3770bf673c67c3b609ce6b45aba",
+      "audio-declared.json": "b40bea3fd41f7ffafdefad70d016b3618f2b0b5237788a5bfff66f5584966f83",
+      "compatibility.json": "a166ad88a4c55db047b9850829f8306d736dfec7778f02ab156a9dcae8dc30b6",
+      "selection.apk": "d63c09c5d8c4713662366d336918cda6fd28d19d6e751fd5abbb5505e5f198e7",
+      "fps-timeline.milk": "a9c171a45fb207a9a72f6bb47c5e38e7243f5a8264bd0a2637677dc0d0e7bd9d",
+      "prediction.json": "6d01d969a1f780570da68cfc61dfbcba0f1b52bc2e96213705ef238a50b793bc",
+      "equation-scene.json": "5ff43cf4da423a837eed219edb42be9e3dbf55f5f243a998b023214fb09ab7fe",
+      "manifest.json": "1390d247dbd721c21651cb685b82aa5f58bc3a4d80846959958748260816e1fa",
+      "feedback.rgb.u8": "221dac1318bbf1f02ca0621b646e038c553c7475a04d3a17e911388f0cabd4f2",
+      "prediction.rgb.u8": "5499bef1c1d28aee60fcbc62b429d1137201aecc6329eab3a488b0a1f7173945",
+      "input60.f32": "3c5b0801d7085d4cc2b41fcc4ec5058b800dd332f66c7bf1e0708ba1443a399d"
+    }
+  },
+  "fps_control_native_metadata": {
+    "backend": "published-core-jni",
+    "core_version": "4.1.7",
+    "preset": "fps-timeline.milk",
+    "frames": 60,
+    "width": 256,
+    "height": 144,
+    "fps": 30,
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "simulated_clock": true,
+    "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+    "gl_vendor": "Google (Apple)",
+    "egl_version_major": 1,
+    "egl_version_minor": 0,
+    "mesh_width": 48,
+    "mesh_height": 32,
+    "pcm_sample_rate": 44100,
+    "pcm_channels": 1,
+    "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+    "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+    "rendered_frame_serial_initial": 0,
+    "rendered_frame_serial": 60,
+    "rendered_frame_serial_delta": 60,
+    "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+    "skipped_count": 0,
+    "indexed_count": 1
+  },
+  "case020_frozen_model_diagnosis": {
+    "case": 20,
+    "preset": "187.milk",
+    "preset_sha256": "ed1ab352c45381c62e9b58c951552db6ed21f876f96d04f3af746904d6976f92",
+    "root_cause": "Source-driver conflated physical30HzPCM/capturecadence with ProjectM per-frameequationfps. FreshpublishedJNIengine targetFpsdefault35 persists through renderedimage30 because UpdateFpsrunsafterrender. Authoredmusictime+=mid^3*.02*(75/fps) thenchangesq4/q5/per-pixelwarpcentre, radicallychangingfeedbackretention/fan.",
+    "ruled_out": [
+      "Unassignedcomposite ret: nativepreprocessor and archivedGLESshader both explicitlyinitializeit0. CPUloweringconstantmain=.5,blur2=.5 matchesexactexpression(.3375,.6,.8625).",
+      "AudioFFT mismatch: physicalarrays retained; onlyfpscontextchanged.",
+      "Preset modification, model change, or learnedpixel fit: frozenHEADeba811b5all63modelmodulesmatchsealedRound004beforeandafter;allmodel/binary/sourceprovenanceidentical. Onlychangedinputhashiscopiedaudioframesfps."
+    ],
+    "smallest_control": {
+      "source": "[preset00]\nMILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=2\nPSVERSION_COMP=2\nfWaveAlpha=0\nob_a=0\nib_a=0\nper_frame_1=q1=fps/256;\nwarp_1=`shader_body { ret=0; }\ncomp_1=`shader_body { ret=float3(q1,0,0); }\n",
+      "fresh_JNI_runner_expected": "Renderedframes1..30flatredbyte35,frames31..60byte30 underexistingfixed30Hzclock; freezebeforeanynewcapture.",
+      "CPU_failing_condition": "Feedaudioadapterdefaultframesfps30toexecute_scene;incorrectflatredbyte30forfirst30images. Keepaudioarrays/timephysicalcadence30unchanged;correctonlycontexttimelinecopy."
+    },
+    "affected_functions": [
+      "build/visual-loop/predict-one235.py:audioframecontextconstruction",
+      "forecast.py:forecast_source passesaudioframes unchanged toexecute_scene",
+      "scene_equations.py:_frame_input exposesframesfps asREADONLYfps",
+      "shader_uniforms.py:source_uniforms mapsnativeequationfps to_c2.y",
+      "NoengineEEL/shaderloweringchange required bythiscase; useexplicitidentifieddrivercontextprofile."
+    ],
+    "diagnostic_result": {
+      "mae_before": 0.0044313231483101845,
+      "mae_after": 3.243269748054445e-05,
+      "relative_mae_reduction": 0.9926810353487959,
+      "frame20": {
+        "original": {
+          "frame": 20,
+          "mae": 0.02121218480169773,
+          "rmse": 0.03591522201895714,
+          "mean_rgb": [
+            0.0005588050116784871,
+            0.0,
+            0.00044859686749987304
+          ],
+          "mean_luma": 0.0001511922018835321,
+          "dark_fraction": 1.0,
+          "max_rgb": 0.0313725508749485
+        },
+        "fps_timeline_frozen_model": {
+          "frame": 20,
+          "mae": 0.00015056226402521133,
+          "rmse": 0.0007684011361561716,
+          "mean_rgb": [
+            0.05751798674464226,
+            0.0,
+            0.00651042815297842
+          ],
+          "mean_luma": 0.012696879915893078,
+          "dark_fraction": 0.274658203125,
+          "max_rgb": 0.23529411852359772
+        },
+        "native": {
+          "frame": 20,
+          "mae": 0.0,
+          "rmse": 0.0,
+          "mean_rgb": [
+            0.05783335864543915,
+            0.0,
+            0.006488939747214317
+          ],
+          "mean_luma": 0.012762408703565598,
+          "dark_fraction": 0.2721625434027778,
+          "max_rgb": 0.23529411852359772
+        }
+      },
+      "first_source_change": {
+        "frame": 3,
+        "pixel_count": 66,
+        "bounds_xyxy": [
+          0,
+          47,
+          255,
+          129
+        ]
+      }
+    },
+    "native_control_status": "TimelinederivedfromexactreleaseJNIandengine source, clockinterposerandhelperordering; independentfreshJNIcontrolrequestedbyroot/runtimeagent, notrunbythisagent.",
+    "credit_eligible": false,
+    "original_assessment_unchanged": true,
+    "remaining_limits": [
+      "ResidualGPUraster/sampling/arithmeticdifferencesremain; correcteddiagnosticisnotbyteidentical.",
+      "Read-onlydiagnosis; notrackededits/Git/device/nativecaptures made."
+    ],
+    "frozen_model_control_directory": "build/visual-loop/case020/fps-timeline-frozen-model-control",
+    "frozen_model_verification": {
+      "all63_model_module_hashes_unchanged_before_after": true,
+      "all_provenance_identical_to_sealed_round004": true,
+      "model_sha256": "4491f24c511d782b781e54b09c38f2e97d1e51835359e579798b70278f6e1fb7",
+      "only_changed_input_hash": [
+        "audio_sha256"
+      ],
+      "diagnostic_only": true,
+      "credit_eligible": false
+    },
+    "concurrent_dot_change_audit": "Earlierdiagnosticusedinapplicableconcurrentbuiltin-wave-dotchanges. Retainedforaudit;frozenmodelrerunproducesbitidenticalpixelsandoriginalmodelidentity."
+  },
+  "dot_root_cause": {
+    "source": "Waveform::Draw/ DotStyleFor(MainWave): quad mode draws one2px point at reference scale1, rather than four offset1px copies.",
+    "changed_code": [
+      "builtin_wave.py",
+      "forecast.py"
+    ],
+    "regression_controls": "single centered2px raster coverage, original canonical4copies, mismatched engine guard, unsupported viewport guard"
+  },
+  "dot_first_two": {
+    "basis": "source-only diagnostic; repaired dot specification only; fps30 retained; no native rendering",
+    "frames": [
+      {
+        "frame": 1,
+        "native_mae_rgb8": 0.0023148148148148147,
+        "old_mae_rgb8": 0.5890661168981481,
+        "nonblack": 326,
+        "fully_white": 205,
+        "mean_rgb": [
+          1.4843478732638888,
+          1.4809299045138888,
+          1.4756130642361112
+        ],
+        "exact_native": false,
+        "max_error_rgb8": 2
+      },
+      {
+        "frame": 2,
+        "native_mae_rgb8": 0.0,
+        "old_mae_rgb8": 15.37620261863426,
+        "nonblack": 36864,
+        "fully_white": 36864,
+        "mean_rgb": [
+          255.0,
+          255.0,
+          255.0
+        ],
+        "exact_native": true,
+        "max_error_rgb8": 0
+      }
+    ]
+  },
+  "case021_diagnostics": {
+    "dot-only-60": {
+      "prediction_sha256": "7edb9618250308563ee0241ef95763f89800d4ae49234b6ea2da7eb1ff1f068e",
+      "mean_rgb8_error": 0.4159172152295525,
+      "maximum_rgb8_error": 45,
+      "frame2_exact": true,
+      "frame60_maximum_rgb8_error": 4,
+      "report_path": "build/visual-loop/case021/round004/diagnosis/dot-only-60-comparison.json"
+    },
+    "dot-native-fps-60": {
+      "prediction_sha256": "1beb313fce823bd2225b479eabc1bbccf2db7814ac0243c18abf38447bfcd93e",
+      "mean_rgb8_error": 0.11213604962384259,
+      "maximum_rgb8_error": 23,
+      "frame2_exact": true,
+      "frame60_maximum_rgb8_error": 2,
+      "report_path": "build/visual-loop/case021/round004/diagnosis/dot-native-fps-60-comparison.json"
+    }
+  },
+  "remaining_limits": [
+    "Point raster snapping and GPU precision remain explicit gaps.",
+    "Motion-vector quad drawing is not modeled; causal contribution to remaining errors has not been proved.",
+    "These are diagnostic reruns against saved native frames; original grades remain97.5/17.5/65."
+  ]
+}

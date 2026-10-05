@@ -1,10 +1,76 @@
 import unittest
+from pathlib import Path
 import numpy as np
+import pytest
 from test_shader_components import lower
 from test_scene_equations import native,frames
 from scene_equations import execute_scene
 from test_native_reader import READER
 from test_native_wave import frame,BINARY
+
+
+@pytest.fixture
+def core235_dot_inputs(tmp_path):
+    from forecast import read_source
+    binaries = Path(__file__).resolve().parents[2] / 'build/visual-loop/source235/adapters'
+    if not (binaries/'milk-native-reader').is_file():
+        binaries = READER.parent
+    # This fixture executes the separately prepared 42-patch CPU adapters.
+    preset = tmp_path / 'dots.milk'
+    preset.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nnWaveMode=6\nbWaveDots=1\nfWaveAlpha=.5\n')
+    source = read_source(preset, reader=binaries/'milk-native-reader')
+    if source['parser_inputs']['engine']['patches_sha256'] != 'd73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a':
+        pytest.skip('separately prepared 42-patch CPU adapters required')
+    inputs = frames()[:1]
+    scene = execute_scene(source, inputs, reader=binaries/'milk-native-reader',
+                          width=256, height=144, mesh_x=8, mesh_y=8)
+    return source, scene, audio(inputs), binaries/'milk-wave-inputs'
+
+
+def test_core235_gles_dots_use_one_two_pixel_point_without_changing_opacity(core235_dot_inputs):
+    from builtin_wave import source_builtin_wave
+    source, scene, data, binary = core235_dot_inputs
+    legacy = source_builtin_wave(source, scene, data, binary=binary)['frames'][0]
+    predicted = source_builtin_wave(source, scene, data, binary=binary,
+        line_rendering_profile='projectmtv-gles-quad-lines-v1')['frames'][0]
+    assert predicted['draw_mode'] == 'points'
+    assert predicted['point_size'] == 2
+    assert predicted['copy_offsets'] == [[0, 0]]
+    assert predicted['rgba'] == legacy['rgba']  # DotStyleFor alphaScale is exactly 1 here.
+    assert len(legacy['copy_offsets']) == 4
+    assert legacy.get('point_size', 1) == 1
+
+
+def test_core235_gles_dots_reject_unimplemented_scaled_size(core235_dot_inputs):
+    from builtin_wave import source_builtin_wave
+    source, scene, data, binary = core235_dot_inputs
+    scene['viewport'] = [1920, 1080]
+    with pytest.raises(ValueError, match='dot.*reference area'):
+        source_builtin_wave(source, scene, data, binary=binary,
+            line_rendering_profile='projectmtv-gles-quad-lines-v1')
+
+
+def test_core235_dot_spec_draws_a_centered_two_pixel_square(core235_dot_inputs):
+    from builtin_wave import source_builtin_wave
+    from scene_draw import _wave
+    source, scene, data, binary = core235_dot_inputs
+    wave = source_builtin_wave(source, scene, data, binary=binary,
+        line_rendering_profile='projectmtv-gles-quad-lines-v1')['frames'][0]
+    # Subpixel position distinguishes one centered 2px dot from four shifted 1px dots.
+    wave['positions'] = [[[128.25/256, 72.25/144]]]
+    rendered = _wave(np.zeros((144, 256, 4), np.float32), wave,
+                     builtin=True, quantize=False)
+    np.testing.assert_array_equal(np.argwhere(rendered[..., 0]>0),
+                                  [[71, 127], [71, 128], [72, 127], [72, 128]])
+
+
+def test_core235_gles_dot_policy_refuses_a_mislabeled_41_patch_source(core235_dot_inputs):
+    from builtin_wave import source_builtin_wave
+    source, scene, data, binary = core235_dot_inputs
+    source['parser_inputs']['engine']['patches_sha256'] = 'd21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818'
+    with pytest.raises(ValueError, match='dot.*engine identity'):
+        source_builtin_wave(source, scene, data, binary=binary,
+            line_rendering_profile='projectmtv-gles-quad-lines-v1')
 
 
 def audio(inputs):
