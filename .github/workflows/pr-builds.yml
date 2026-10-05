@@ -1,0 +1,110 @@
+name: Reviewed PR validation
+run-name: 'Reviewed PR #${{ inputs.pr_number }} @ ${{ inputs.head_sha }} + ${{ inputs.base_sha }}'
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR targeting main'
+        required: true
+        type: string
+      head_sha:
+        description: 'Reviewed head commit (40 hexadecimal characters)'
+        required: true
+        type: string
+      base_sha:
+        description: 'Main commit used by the test merge'
+        required: true
+        type: string
+      merge_sha:
+        description: 'Immutable test merge commit'
+        required: true
+        type: string
+
+cache-mode: none
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: reviewed-pr-${{ inputs.pr_number }}
+  cancel-in-progress: true
+
+jobs:
+  preflight:
+    # A transient preflight error must remain retryable without starting builds.
+    continue-on-error: true
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: read
+      statuses: write
+    outputs:
+      ready: ${{ steps.review.outcome == 'success' }}
+      merge_sha: ${{ steps.review.outputs.merge_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify review and immutable revision before builds
+        id: review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+          PR_HEAD: ${{ inputs.head_sha }}
+          PR_BASE: ${{ inputs.base_sha }}
+          PR_MERGE: ${{ inputs.merge_sha }}
+        run: python3 .github/scripts/review_gate.py preflight --pr "$PR_NUMBER"
+
+  android:
+    needs: preflight
+    if: needs.preflight.outputs.ready == 'true'
+    uses: ./.github/workflows/android-build.yml
+    with:
+      source_ref: ${{ needs.preflight.outputs.merge_sha }}
+      pr_build: true
+    # Deliberately pass no repository secrets to PR code.
+
+  presets:
+    needs: preflight
+    if: needs.preflight.outputs.ready == 'true'
+    uses: ./.github/workflows/preset-lab.yml
+    with:
+      source_ref: ${{ needs.preflight.outputs.merge_sha }}
+
+  docs:
+    needs: preflight
+    if: needs.preflight.outputs.ready == 'true'
+    uses: ./.github/workflows/docs-build.yml
+    with:
+      source_ref: ${{ needs.preflight.outputs.merge_sha }}
+
+  result:
+    if: always() && github.ref == 'refs/heads/main'
+    needs: [preflight, android, presets, docs]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: read
+      statuses: write
+    concurrency:
+      group: pr-review-controller
+      queue: max
+      cancel-in-progress: false
+    steps:
+      # A fresh runner and trusted main checkout; no PR artifacts are executed here.
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Report only fully built, still reviewed PR revisions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+          PR_HEAD: ${{ inputs.head_sha }}
+          PR_BASE: ${{ inputs.base_sha }}
+          PR_MERGE: ${{ inputs.merge_sha }}
+          PREFLIGHT_RESULT: ${{ needs.preflight.outputs.ready == 'true' && 'success' || 'failure' }}
+          BUILD_RESULTS: '{"android":"${{ needs.android.result }}","presets":"${{ needs.presets.result }}","docs":"${{ needs.docs.result }}"}'
+        run: python3 .github/scripts/review_gate.py finish --pr "$PR_NUMBER"

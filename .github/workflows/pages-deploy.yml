@@ -1,0 +1,41 @@
+name: Publish user guide
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Both manual User guide runs and main Android pipelines hold the same queue.
+# Keep this separate from build concurrency so manual publishing cannot cancel builds.
+concurrency:
+  group: projectm-tv-pages
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check deployment is still current main
+        id: fresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          current_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')
+          if [ "$GITHUB_SHA" = "$current_sha" ]; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+            echo 'Skipping Pages publication from an older source revision.'
+          fi
+      - uses: actions/deploy-pages@v4
+        if: steps.fresh.outputs.current == 'true'
+        id: deployment

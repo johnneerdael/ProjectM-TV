@@ -1,24 +1,26 @@
 name: Preset Lab
 
 on:
-  push:
-  pull_request:
+  workflow_call:
+    inputs:
+      source_ref:
+        type: string
+        default: ''
   workflow_dispatch:
 
 permissions:
   contents: read
 
-concurrency:
-  group: preset-lab-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   measurements:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.source_ref || github.sha }}
+          persist-credentials: false
           submodules: recursive
       - uses: actions/setup-python@v5
         with:
