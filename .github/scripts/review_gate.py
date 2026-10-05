@@ -21,8 +21,10 @@ def eligibility(pr, reviews, comments, threads):
         return False, "Waiting for requested reviews"
     if any(not thread["isResolved"] for thread in threads):
         return False, "Waiting for all review threads to be resolved"
+    # GitHub hides other users' private drafts. Outstanding review requests above
+    # are the observable blocking signal; also reject any draft the API does expose.
     if any(review["state"] == "PENDING" for review in reviews):
-        return False, "Waiting for pending reviews"
+        return False, "Waiting for a visible pending review"
     # A comment-only follow-up does not revoke a request for changes.
     decisions = {}
     for review in reviews:
