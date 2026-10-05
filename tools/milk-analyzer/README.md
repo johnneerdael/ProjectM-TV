@@ -154,7 +154,7 @@ python tools/milk-analyzer/beta_score.py --aar build/predictive-beta/core.aar --
 ```
 
 Use `--limit 5` for a pilot. Reuse the same arguments to continue a matching run;
-use `--retry-unscored` for retained failures after diagnosis. A 120-second timeout
+use `--retry-unscored --only-preset "EXACT PRESET.milk"` to repair a diagnosed case before continuing. The batch now stops at its first failed measurement and refuses to continue past unresolved failures. A 120-second timeout
 is a failed measurement, not evidence that an effect is calm. Original315 language
 coverage and this full numerical run are different checks; the other agent's saved
 baseline stays read-only.
@@ -171,3 +171,18 @@ The final command needs the prepared source adapters described above. The new be
 unit tests do not launch devices. CI checks the committed bundle's source, weights,
 model hashes, ranks, exact overlapping memberships and checksums. Parsing success,
 compile success and these checks do not certify mood or appearance accuracy.
+
+
+The diagnostic-only repair preserves the exact original scorer in
+`profiles/scorers/beta-score-v1.py.txt`. Previously completed records retain their
+original evidence identity. `evidence-contexts.json` declares the original and
+repaired producers: all render/audio/model/runtime inputs must match, the archived
+source hash is pinned, and the numerical program AST must remain unchanged outside
+main's resume bookkeeping and measurement diagnostic cleanup. Changed numerical
+code or inputs cannot reuse those records. The bundle retains each row's producer
+identity and the exact source file for each context.
+
+Diagnostic collection is best effort and its errors are separate from the primary
+measurement. For example, no `.skip` file is normally created when the engine's
+skip count is zero; failure to pull that optional file does not make a completed
+native measurement unscored.

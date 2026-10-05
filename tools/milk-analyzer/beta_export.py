@@ -13,6 +13,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'preset-lab/src'))
 from preset_lab.identity import canonical_json,digest,file_digest
 from preset_lab.inventory import inventory,read_index
 from beta_collections import BANDS,ranked_rows
+from scoring_context import compatible_previous,source_for
 
 EXPECTED_PROFILE={'frames':420,'warmup':60,'fps':30,'width':128,'height':72,'motion_fps':10}
 PUBLISHED_CORE=json.loads((Path(__file__).parent/'profiles/published-core-v2.3.3.json').read_text())
@@ -29,8 +30,13 @@ def check_identity(facts):
     if facts.get('backend')!='released-projectmtv-core-jni' or facts.get('profile')!=EXPECTED_PROFILE:
         raise ValueError('Published-AAR numerical protocol required')
     source=Path(__file__).parent
-    for key,path in [('scorer_sha256',source/'beta_score.py'),
-                     ('descriptor_sha256',source/'descriptors.py'),
+    source_for(facts,source)
+    if facts['scorer_sha256']!=file_digest(source/'beta_score.py'):
+        current={k:v for k,v in facts.items() if k!='identity'}
+        current['scorer_sha256']=file_digest(source/'beta_score.py')
+        current['identity']=hashlib.sha256(json.dumps(current,sort_keys=True).encode()).hexdigest()
+        if not compatible_previous(facts,current,source):raise ValueError('Legacy numerical program differs')
+    for key,path in [('descriptor_sha256',source/'descriptors.py'),
                      ('model_sha256',source/'profiles/audience-model-v1.json')]:
         if facts.get(key)!=file_digest(path):raise ValueError('Scoring implementation/model differs')
     runtime=facts.get('runtime_sha256',{})
@@ -88,7 +94,16 @@ def check_aar(aar,assets,facts,known,metadata):
             raise ValueError('Texture pack differs from scored AAR')
 
 
-def read_complete_results(run,facts,known):
+def checked_contexts(facts,contexts):
+    if contexts.get(facts['identity'])!=facts:raise ValueError('Current evidence context missing')
+    for key,value in contexts.items():
+        check_identity(value)
+        if key!=value['identity'] or value!=facts and not compatible_previous(value,facts):
+            raise ValueError('Incompatible evidence contexts')
+    return contexts
+
+
+def read_complete_results(run,facts,known,contexts):
     cases=load(run/'corpus.json')['cases']
     if len(cases)!=len(known) or {r['preset']:r['sha256'] for r in cases}!={n:r['sha256'] for n,r in known.items()}:
         raise ValueError('Run corpus differs from complete source inventory')
@@ -97,7 +112,7 @@ def read_complete_results(run,facts,known):
         path=run/'results'/(source['sha256']+'.json')
         if not path.is_file():raise ValueError('Missing result: '+name)
         row=load(path)
-        if (row.get('status')!='scored' or row.get('identity')!=facts['identity']
+        if (row.get('status')!='scored' or row.get('identity') not in contexts
                 or row.get('preset')!=name or row.get('sha256')!=source['sha256']):
             raise ValueError('Unscored/stale result: '+name)
         meta=row.get('metadata',{})
@@ -111,14 +126,17 @@ def read_complete_results(run,facts,known):
                      **{k:row[k] for k in ('coherent_up','coherent_down','paired_flash_peak')},
                      **{k:row[k] for k in ('all_stationary','mean_luma','mean_contrast') if k in row},
                      'metadata':meta,
+                     'evidence_identity':row['identity'],
                      'appearance_accuracy_verified':False})
     return ranked_rows(rows)
 
 
 def export_bundle(run,aar,assets,destination):
     facts=load(run/'run-identity.json');check_identity(facts)
+    context_path=run/'evidence-contexts.json'
+    contexts=checked_contexts(facts,load(context_path) if context_path.exists() else {facts['identity']:facts})
     known,metadata=source_inventory(assets);check_aar(aar,assets,facts,known,metadata)
-    rows=read_complete_results(run,facts,known)
+    rows=read_complete_results(run,facts,known,contexts)
     destination.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(dir=destination.parent) as temporary:
         staged=Path(temporary)/'bundle';(staged/'genres').mkdir(parents=True)
@@ -139,6 +157,8 @@ def export_bundle(run,aar,assets,destination):
                   'feature_names':['coherent_luma_transitions_per_second','median_motion_viewports_per_second',
                                    'mean_acceleration_viewports_per_second_squared','same_pixel_luma_delta_p95_over_30Hz_frame_pairs'],
                   'evidence':facts,'library_sha256':metadata['library_sha256'],
+                  'evidence_contexts':contexts,
+                  'scorer_sources':{key:source_for(value) for key,value in contexts.items()},
                   'texture_sha256':metadata['texture_sha256'],
                   'checksums':{p.relative_to(staged).as_posix():file_digest(p)
                                for p in sorted(staged.rglob('*')) if p.is_file()}}
@@ -165,6 +185,9 @@ def verify_bundle(bundle,assets):
             or manifest.get('appearance_accuracy_verified') is not False or manifest.get('rendering_policy')!='capped'):
         raise ValueError('Unexpected collection policy')
     check_identity(manifest['evidence'])
+    contexts=checked_contexts(manifest['evidence'],manifest['evidence_contexts'])
+    if manifest['scorer_sources']!={key:source_for(value) for key,value in contexts.items()}:
+        raise ValueError('Scorer provenance source differs')
     if manifest.get('published_artifact')!=PUBLISHED_CORE:
         raise ValueError('Published artifact identity differs')
     if any(manifest['evidence'].get(k)!=PUBLISHED_CORE[k] for k in ('release','aar_sha256','native_arm64_sha256')):
@@ -186,6 +209,7 @@ def verify_bundle(bundle,assets):
         check_activity(row)
         if (any(row.get(k)!=v for k,v in known[row['preset']].items())
                 or any(row.get(k)!=ranked[k] for k in ('score','group_eligible','groups'))
+                or row.get('evidence_identity') not in contexts
                 or row.get('appearance_accuracy_verified') is not False):
             raise ValueError('Source/weight/score/membership mismatch')
     if manifest['total_presets']!=len(rows) or manifest['inactive_presets']!=sum(not r['group_eligible'] for r in rows):

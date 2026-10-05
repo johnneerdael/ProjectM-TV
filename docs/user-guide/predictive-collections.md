@@ -41,7 +41,7 @@ The model is a small development candidate, not an accuracy-certified audience c
 
 `core/src/main/assets/preset-genres/presets.jsonl` records every preset's full source hash, native memory weight, raw activity, score, activity state and membership. `manifest.json` records beta status, model/runtime/PCM hashes, render settings, collection counts and checksums. The three index files contain original filenames and master-index memory weights. All still uses `presets.idx`.
 
-The exporter refuses missing or failed rows, stale source or texture hashes, another AAR flavour, mismatched runtime identities or a wrong frame schedule. Its verifier recalculates ranks and memberships and compares them with the indexes. Checksums alone are insufficient to establish correct membership.
+The scorer stops on a failed measurement; its cause must be diagnosed and the case repaired before continuing. Diagnostic collection errors remain separate from the measurement. The exporter refuses missing or failed rows, stale source or texture hashes, another AAR flavour, mismatched runtime identities or a wrong frame schedule. Its verifier recalculates ranks and memberships and compares them with the indexes. Checksums alone are insufficient to establish correct membership.
 
 ```sh
 python tools/milk-analyzer/beta_export.py --check --bundle core/src/main/assets/preset-genres
@@ -57,3 +57,10 @@ python tools/milk-analyzer/beta_export.py --run build/predictive-beta/scores --a
 ```
 
 No full corpus is rendered during app use. The app reads the prebuilt indexes; subsequent scoring improvements can update them in a new release.
+
+
+A diagnostic-only scorer repair retains the first producer's exact source and each
+completed row's original evidence identity. The manifest declares both contexts;
+all numerical/render inputs must match and the measurement program is compared as
+an AST outside diagnostic cleanup and resume bookkeeping. This preserves completed
+measurements without silently relabelling them as results from the repaired code.

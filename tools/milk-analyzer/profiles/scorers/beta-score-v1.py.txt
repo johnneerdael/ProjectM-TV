@@ -8,7 +8,6 @@ from pathlib import Path
 import numpy as np
 from core_backend import read_header,read_frames,write_selection_overlay
 from descriptors import DescriptorStream,LUMA
-from scoring_context import compatible_previous
 
 FRAMES=420
 WARMUP=60
@@ -101,19 +100,9 @@ def measure(case,args,identity,model):
         process.wait(timeout=20)
     finally:
         timer.cancel()
-        row['diagnostic_errors']=[]
-        def diagnostic(command,label):
-            try:
-                result=subprocess.run(command,capture_output=True,timeout=15)
-                if result.returncode:
-                    row['diagnostic_errors'].append({'operation':label,'exit_code':result.returncode})
-            except (OSError,subprocess.TimeoutExpired) as error:
-                row['diagnostic_errors'].append({'operation':label,'error':str(error)})
         for suffix in ['.log','.java.log','.skip']:
-            diagnostic(['adb','-s',args.device,'pull',prefix+suffix,str(args.output/'logs'/(key+suffix))],
-                       'pull '+suffix)
-        diagnostic(['adb','-s',args.device,'shell','-T','-n',shlex.join(['rm','-f',remote_overlay,prefix+'.json',prefix+'.log',prefix+'.java.log',prefix+'.skip'])],
-                   'remote cleanup')
+            subprocess.run(['adb','-s',args.device,'pull',prefix+suffix,str(args.output/'logs'/(key+suffix))],capture_output=True,timeout=15)
+        subprocess.run(['adb','-s',args.device,'shell','-T','-n',shlex.join(['rm','-f',remote_overlay,prefix+'.json',prefix+'.log',prefix+'.java.log',prefix+'.skip'])],capture_output=True,timeout=15)
         process.stdout.close();process.stderr.close()
     write_json(args.output/'results'/(key+'.json'),row)
     return row
@@ -123,7 +112,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--aar',type=Path,required=True);p.add_argument('--runtime',type=Path,required=True)
     p.add_argument('--pcm',type=Path,required=True);p.add_argument('--owner',type=Path,required=True);p.add_argument('--device',required=True)
     p.add_argument('--remote',required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--limit',type=int)
-    p.add_argument('--retry-unscored',action='store_true');p.add_argument('--only-preset');args=p.parse_args();verify_owner(args.owner,args.device)
+    p.add_argument('--retry-unscored',action='store_true');args=p.parse_args();verify_owner(args.owner,args.device)
     for folder in ['results','metadata','logs','overlays']:(args.output/folder).mkdir(parents=True,exist_ok=True)
     runtime={name:args.runtime/name for name in ['classes.dex','libbackendclock.so','libprojectmtv.so']}
     runtime.update({'core.aar':args.aar,'input.f32':args.pcm})
@@ -138,55 +127,23 @@ def main():
            'backend':'released-projectmtv-core-jni','input_policy':'fixed synthetic quiet/melodic/kick reference','release':'v2.3.3'}
     identity=hashlib.sha256(json.dumps(facts,sort_keys=True).encode()).hexdigest();facts['identity']=identity
     existing=args.output/'run-identity.json'
-    contexts_path=args.output/'evidence-contexts.json'
-    contexts=json.loads(contexts_path.read_text()) if contexts_path.exists() else {}
-    if existing.exists():
-        previous=json.loads(existing.read_text())
-        if previous!=facts and not compatible_previous(previous,facts):raise ValueError('Existing run identity differs')
-        contexts[previous['identity']]=previous
-    contexts[identity]=facts
-    if any(c!=facts and not compatible_previous(c,facts) for c in contexts.values()):
-        raise ValueError('Incompatible retained evidence context')
-    write_json(contexts_path,contexts)
+    if existing.exists() and json.loads(existing.read_text())!=facts:raise ValueError('Existing run identity differs')
     write_json(existing,facts);write_json(args.output/'corpus.json',{'cases':cases})
-    records={}
-    for case in cases:
-        path=args.output/'results'/(case['sha256']+'.json')
-        if path.exists():
-            row=json.loads(path.read_text())
-            if (row.get('identity') not in contexts or row.get('preset')!=case['preset']
-                    or row.get('sha256')!=case['sha256'] or row.get('status') not in ('scored','unscored')):
-                raise ValueError('Stale or invalid retained result')
-            records[case['sha256']]=row
-    failed=sum(r['status']=='unscored' for r in records.values())
-    if failed and not args.retry_unscored:
-        raise ValueError('Resolve retained failures before continuing; an explicit diagnosed retry is required')
-    selected=cases[:args.limit] if args.limit else cases
-    if args.only_preset:
-        selected=[c for c in cases if c['preset']==args.only_preset]
-        if len(selected)!=1:raise ValueError('Exact --only-preset name required')
     subprocess.run(['adb','-s',args.device,'shell','-T','-n','mkdir -p '+shlex.quote(args.remote+'/work')],check=True,capture_output=True)
     for name,path in runtime.items():
         subprocess.run(['adb','-s',args.device,'push',str(path),args.remote+'/'+name],check=True,capture_output=True)
         got=subprocess.check_output(['adb','-s',args.device,'shell','-T','-n','sha256sum '+shlex.quote(args.remote+'/'+name)],text=True).split()[0]
         if got!=facts['runtime_sha256'][name]:raise ValueError('Deployed runtime differs')
-    started=time.monotonic()
-    def progress():
-        write_json(args.output/'progress.json',{'processed':len(records),
-            'scored':sum(r['status']=='scored' for r in records.values()),
-            'unscored':sum(r['status']=='unscored' for r in records.values()),
-            'total':len(cases),'elapsed_seconds':time.monotonic()-started,
-            'complete':len(records)==len(cases)})
-    for case in selected:
-        old=records.get(case['sha256'])
-        if old and (old['status']=='scored' or not args.retry_unscored):continue
-        verify_owner(args.owner,args.device);row=measure(case,args,identity,model)
-        records[case['sha256']]=row;progress()
+    scored=failed=0;started=time.monotonic()
+    for i,case in enumerate(cases[:args.limit] if args.limit else cases):
+        path=args.output/'results'/(case['sha256']+'.json')
+        if path.exists():
+            old=json.loads(path.read_text())
+            if old.get('identity')==identity and (old.get('status')=='scored' or not args.retry_unscored):
+                scored+=old['status']=='scored';failed+=old['status']!='scored';continue
+        verify_owner(args.owner,args.device);row=measure(case,args,identity,model);scored+=row['status']=='scored';failed+=row['status']!='scored'
+        write_json(args.output/'progress.json',{'processed':i+1,'scored':scored,'unscored':failed,'total':len(cases),'elapsed_seconds':time.monotonic()-started,'complete':i+1==len(cases)})
         print(case['preset'],row['status'],round(row.get('raw_activity') or 0,2),round(row.get('elapsed_seconds') or 0,2),flush=True)
-        if row['status']!='scored':
-            raise RuntimeError('Measurement failed; diagnose the saved result before continuing: '+case['preset'])
-    progress()
-
 
 
 if __name__=='__main__':main()
