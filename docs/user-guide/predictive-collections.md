@@ -2,11 +2,16 @@
 
 Choose **Preset mood** in the settings panel: **All**, **Chill**, **Normal** or **Intense**. All stays the default and keeps the full library available. The choice is saved; automatic changes, Random and Previous stay within your collection, subject to the TV's skip rules. Saved Dance or earlier genre choices return to All.
 
-| Collection | Score range | Intended starting point |
-|---|---|---|
-| Chill | 1–30 | Lower activity and gentler viewing |
-| Normal | 25–75 | Moderate activity, with room at both edges |
-| Intense | 70–100 | Stronger movement and brightness changes |
+| Collection | Score range | Packaged presets | Intended starting point |
+|---|---|---|---|
+| All — default | Unfiltered | 9,606 | The complete library |
+| Chill | 1–30 | 2,702 | Lower activity and gentler viewing |
+| Normal | 25–75 | 4,658 | Moderate activity, with room at both edges |
+| Intense | 70–100 | 2,795 | Stronger movement and brightness changes |
+
+![Preset mood Normal selected, showing the packaged collection count](images/predictive-moods.png)
+
+This settings capture is from the isolated API34 emulator test app, with no music playing. It verifies the control label and count, not the appearance or suitability of that preset.
 
 Ranges are inclusive. Scores 25–30 belong to both Chill and Normal; 70–75 belong to both Normal and Intense. Original preset equations and shaders are unchanged.
 
@@ -33,7 +38,7 @@ For feature vector `x`, the raw activity is `4.3508 + sum(weight * log1p(x) / sc
 
 Raw activity remains unclipped. Moving/activity-bearing presets are sorted by it, equal values share an average ordinal position, and those positions are rescaled so the lowest distinct group scores 1 and the highest scores 100. This gives a relative spread rather than measuring distance in an absolute perceptual unit. Rebuilding a changed library can shift scores. A collection with no distinct activity values would receive midpoint scores.
 
-Effects with no visible activity in the probe receive score 1 with an explicit inactive flag, remain in All and are excluded from the three curated groups. Failed or missing results cannot be exported as calm presets.
+The 382 effects with no visible activity in the probe receive score 1 with an explicit inactive flag, remain in All and are excluded from the three curated groups. Failed or missing results cannot be exported as calm presets.
 
 The model is a small development candidate, not an accuracy-certified audience classifier. Colourfulness, fractal structure, taste and long-term feedback evolution are not separately certified by this score. A 14-second probe can miss later behaviour.
 
