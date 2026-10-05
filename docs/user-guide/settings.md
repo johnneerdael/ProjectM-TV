@@ -49,6 +49,6 @@ The canonical `projectM-TV-core.aar` now contains this Native core; the separate
 
 ![Track display panel with Track info On, Show for Always and Pill style Off](images/setup/track-display-settings.png)
 
-![Advanced settings panel and Diagnostics, below the track in the upper left](images/setup/advanced-settings.png)
+![Current Advanced settings and Diagnostics with automatic memory budgeting and High trails inactive at 1080p](images/setup/advanced-settings.png)
 
-The tables describe the current source, including automatic native-capable resolution and Native trails; screenshots use an earlier isolated test installation. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+The Advanced screenshot uses the current isolated emulator installation with no audio source; High is selected but inactive at its 1080p render size. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Dance](dance.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.

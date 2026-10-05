@@ -29,6 +29,8 @@ Standard deliberately keeps the authored feedback canvas while new geometry and 
 
 At render sizes of 1330p or below, Native trails is inactive and the existing diffusion path remains. An incompatible integer canvas or a driver shader/resource failure also uses fallback. Include the exact Diagnostics message, render size, preset and device in a bug report. Some chaotic presets vary from small input differences; compare the same audio and timing. Host/emulator validation does not establish performance or shader compatibility on every physical TV GPU.
 
+Known Android emulator exceptions include **Waltra - Heaven Liquid**, which can be dimmer, and **Hexcollie - Julian Shader Wars4 nz+ sports fart**, which can lose its spiral structure. All three trail levels showed these differences in matched captures; the Mac GPU captures did not. Their behavior on physical TVs has not been established. They are recorded for [post-merge GLES research](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/plans/2026-10-05-post-merge-gles-feedback-research.md); use another preset if affected.
+
 ## A preset looks different when revisited
 
 Some presets choose random images from the bundled texture pack each time they load. Those choices stay fixed while the preset plays and are shared by its rendering stages. Revisiting the preset can choose other images; the renderer preserves each alias's requested filtering and edge wrapping. This does not guarantee the same appearance as MilkDrop on Windows.

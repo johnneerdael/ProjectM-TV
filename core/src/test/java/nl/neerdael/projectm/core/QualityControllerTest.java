@@ -630,4 +630,25 @@ public class QualityControllerTest {
         assertEquals(reads, memory.reads);
     }
 
+    @Test
+    public void batchedUnallocatedTrailsAndBlendCannotSpendResidentCreditTwice() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 2048);
+        q.setMode(0, 2160);
+        q.onFpsSample(60); // Standard/no-blend resources are genuinely resident.
+        memory.snapshot = new MemorySnapshot(2L << 30, 1050L << 20, 128L << 20, false);
+        q.setTransitionSeconds(10);
+        q.setNativeTrailsLevel(2);
+        // Setters describe desired settings; neither intermediate allocation has reached GL.
+        assertEquals("sequential incremental reviews alone are insufficient", 2160, applied);
+        q.revalidateForResume(true);
+        assertEquals("full final-tuple review cannot credit unallocated RAM", 1440, applied);
+        q.setNativeTrailsLevel(0);
+        q.setTransitionSeconds(0);
+        q.setNativeTrailsLevel(2);
+        q.setTransitionSeconds(10);
+        q.revalidateForResume(true);
+        assertEquals("rapid unpublished edits still require the full final budget", 1440, applied);
+    }
+
 }

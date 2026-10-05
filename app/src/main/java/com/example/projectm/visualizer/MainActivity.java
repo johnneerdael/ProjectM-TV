@@ -91,6 +91,8 @@ public class MainActivity extends Activity {
     private int frameRateTarget;
     private float targetFps = 60f;
     private long renderBudgetGeneration;
+    private boolean budgetedDetailAllocation;
+    private boolean budgetedBlendAllocation;
 
     private VisualizerView visualizerView;
     private VisualizerRenderer renderer;
@@ -221,7 +223,8 @@ public class MainActivity extends Activity {
             @Override
             public void onRenderBudgetRequested(long generation) {
                 handler.post(() -> {
-                    if (!isFinishing() && !isDestroyed() && quality != null) {
+                    if (!isFinishing() && !isDestroyed() && quality != null
+                            && generation > renderBudgetGeneration) {
                         renderBudgetGeneration = generation;
                         quality.revalidateForResume(true);
                     }
@@ -344,6 +347,17 @@ public class MainActivity extends Activity {
     }
 
     private void publishRenderConfiguration(int height) {
+        boolean detail = nativeTrailsLevel() > 0;
+        boolean blend = transitionSeconds() > 0;
+        if (detail != budgetedDetailAllocation || blend != budgetedBlendAllocation) {
+            budgetedDetailAllocation = detail;
+            budgetedBlendAllocation = blend;
+            // Queued allocation changes are not resident RAM. Reject their old FPS samples
+            // and review the complete final tuple before allowing the GL thread to allocate.
+            renderBudgetGeneration = ProjectMJNI.requireRenderBudget();
+            quality.revalidateForResume(true); // The listener publishes its chosen height.
+            return;
+        }
         visualizerView.setRenderConfiguration(display.widthForHeight(height), height,
                 nativeTrailsLevel(), transitionSeconds(), renderBudgetGeneration);
     }

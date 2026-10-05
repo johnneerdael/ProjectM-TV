@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import java.lang.reflect.Method;
+import java.lang.reflect.Field;
+import java.io.File;
+import java.io.FileOutputStream;
 import nl.neerdael.projectm.core.ProjectMJNI;
 
 /** Exercises persistence, D-pad focus and resolution gating in the isolated setup APK. */
@@ -29,6 +33,22 @@ final class NativeTrailsSetupTest {
         }
         throw new AssertionError("expected trails " + expected + ", actual=" + status());
     }
+    private static void awaitReviewedFrame(Instrumentation test, Activity activity) throws Exception {
+        Field generation = MainActivity.class.getDeclaredField("renderBudgetGeneration");
+        generation.setAccessible(true);
+        long deadline = SystemClock.elapsedRealtime() + 15000;
+        while (SystemClock.elapsedRealtime() < deadline) {
+            long[] expected = new long[1];
+            test.runOnMainSync(() -> {
+                try { expected[0] = generation.getLong(activity); }
+                catch (IllegalAccessException error) { throw new AssertionError(error); }
+            });
+            if (expected[0] > 0 && ProjectMJNI.getCompletedRenderBudgetGeneration() == expected[0]
+                    && ProjectMJNI.getRenderedFrameSerial() > 0) return;
+            SystemClock.sleep(100);
+        }
+        throw new AssertionError("final allocation budget never rendered");
+    }
     static void run(Instrumentation test) {
         Bundle result = new Bundle();
         Activity activity = null;
@@ -39,7 +59,7 @@ final class NativeTrailsSetupTest {
             prefs.edit().putBoolean("track_access_explained", true).putBoolean("auto_change_enabled", false)
                     .putBoolean("skip_slow_presets", false).putBoolean("blank_detection_v3", false)
                     .putBoolean("memory_limit", true).putInt("render_height", -1) // retired settings must not override Auto
-                    .remove("native_trails").commit();
+                    .putInt("transition_duration", 0).remove("native_trails").commit();
             Intent launch = new Intent(test.getTargetContext(), MainActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             activity = test.startActivitySync(launch);
@@ -48,6 +68,7 @@ final class NativeTrailsSetupTest {
                     test.getTargetContext().getPackageName());
             check(rowId != 0, "Native trails row missing");
             awaitStatus("standard");
+            awaitReviewedFrame(test, target);
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
             test.runOnMainSync(() -> target.findViewById(R.id.row_advanced).performClick());
             SystemClock.sleep(300); // panel entrance; D-pad exits touch mode on the phone emulator
@@ -63,6 +84,17 @@ final class NativeTrailsSetupTest {
             test.runOnMainSync(() -> target.findViewById(rowId).performClick());
             awaitStatus("high");
             check(prefs.getInt("native_trails", -1) == 2, "High not persisted");
+            long previousGeneration = ProjectMJNI.getCompletedRenderBudgetGeneration();
+            test.runOnMainSync(() -> {
+                target.findViewById(rowId).performClick(); // High -> Standard
+                target.findViewById(rowId).performClick(); // Standard -> Medium
+                target.findViewById(R.id.row_transition).performClick();
+                target.findViewById(rowId).performClick(); // Medium -> High
+            });
+            awaitStatus("high");
+            awaitReviewedFrame(test, target);
+            check(ProjectMJNI.getCompletedRenderBudgetGeneration() > previousGeneration,
+                    "rapid allocation changes did not renew the reviewed generation");
             check(test.getTargetContext().getResources().getIdentifier("row_resolution", "id",
                     test.getTargetContext().getPackageName()) == 0, "manual resolution row remains");
             check(test.getTargetContext().getResources().getIdentifier("row_memory_limit", "id",
@@ -82,6 +114,12 @@ final class NativeTrailsSetupTest {
                         && diagnostics.toLowerCase(java.util.Locale.ROOT).contains("high"),
                         "diagnostics missing automatic mode/selected trails: " + diagnostics);
             });
+            Bitmap screenshot = test.getUiAutomation().takeScreenshot();
+            check(screenshot != null, "advanced settings screenshot unavailable");
+            try (FileOutputStream output = new FileOutputStream(new File(
+                    test.getTargetContext().getExternalCacheDir(), "native-trails-advanced.png"))) {
+                check(screenshot.compress(Bitmap.CompressFormat.PNG, 100, output), "screenshot write failed");
+            } finally { screenshot.recycle(); }
             result.putString("stream", "PASS: Auto-only UI, Standard default, D-pad Medium, High selection, persisted High, retired manual controls absent, diagnostics\n");
             code = Activity.RESULT_OK;
         } catch (Throwable failure) {
