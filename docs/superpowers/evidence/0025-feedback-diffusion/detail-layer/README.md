@@ -14,3 +14,17 @@ Implementation plan: `docs/superpowers/plans/2026-10-05-native-4k-feedback-detai
 | `pmbench/gpubench.cpp`, `*.frag` | Per-pass GPU micro-benchmark (alternating FBOs + glFlush against Mali forward pixel kill) |
 
 Unpatched libprojectM 4.1.7 renders to framebuffer 0. For `-DUPSTREAM=ON` the lab engine's `ProjectM.cpp` was changed to bind `libprojectM::lab_target_fbo` (defined there, default 0) instead of 0 after the preset renders; `bench.cpp` sets it to its FBO. Upstream also lacks `SetLineReferenceSize`, which `bench.cpp` skips under `PMBENCH_UPSTREAM`.
+
+## Clipping correction work in progress
+
+The prototype now tests a bounded version of candidate A: after combine is
+stored in RGBA8, measure each canvas block and contract its RGB values toward
+black or white to restore the authored mean. Preserve the corrected picture
+as the pre-geometry baseline for injection. Standard bypasses the correction.
+This is a candidate, not a shipping patch or completed quality gate.
+
+Run `python lab/check-combine.py` from this directory, or pass the full script
+path from the repository root. It extracts the actual GLSL from the prototype
+and executes 30 RGBA8 cases using SDL/OpenGL. The original prototype fails on
+black at Medium; the candidate passes the isolated cases. Full-preset feedback
+and device acceptance still require validation.
