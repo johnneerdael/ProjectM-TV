@@ -17,20 +17,20 @@
       479
     ],
     "before_prototype_sha256": "3414b9e7eeee0af8b5b510b979ab90d96bf8a0e2f7c4f216614db4df29dbcb74",
-    "fixed_prototype_sha256": "c78c5cb533333366dfe26811a7e11d292ed7761b0f70a3878346691ff4550d98",
+    "fixed_prototype_sha256": "77f1b25c9a18464bc1183a592e10bc2232e761ba6ac55d699b64a60eea1653aa",
     "capture_worker_source_sha256": "1e412041e83baf526304d35ccaadd29ad4eb216b97fd7edcb06ee85f8c952e74",
     "workers": {
       "authored": {
-        "path": "build/detail-clipping/screen/authored-build/preset-lab-worker",
+        "path": "build/detail-clipping/screen-white-zero/authored-build/preset-lab-worker",
         "sha256": "7b103346bc57a4a08e3a7999bb3004901052c1d7922af47451916c303b86bccb"
       },
       "before": {
-        "path": "build/detail-clipping/screen/before-build/preset-lab-worker",
+        "path": "build/detail-clipping/screen-white-zero/before-build/preset-lab-worker",
         "sha256": "3d223b9a2c4b28ebc8639a0f330bbda600af19eb3e90237086c572e4dfb716fb"
       },
       "fixed": {
-        "path": "build/detail-clipping/screen/fixed-build/preset-lab-worker",
-        "sha256": "6326eb0e62a3b5847c3a5ef28785eb94f3771eea7beb0560f26de7ca92d878e0"
+        "path": "build/detail-clipping/screen-white-zero/fixed-build/preset-lab-worker",
+        "sha256": "4e9c1e9a8bb9f4977b171198afacaddfce88d91d0ea94ae7daa5a03a69be763c"
       }
     }
   },
@@ -77,5 +77,7 @@
     300,
     390,
     479
-  ]
+  ],
+  "prototype_source_ref": "e51be09fd88b027c91392f23e9d7b43d988f2153",
+  "combine_shader_sha256": "40672bdf0fcc4ed6413ea7260b45924e5bd6008ba52b1d29e68900b633bbba56"
 }

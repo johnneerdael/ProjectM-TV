@@ -6,21 +6,31 @@
       "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8"
     },
     "before_ref": "a98b932ae40c01ed6ad853f55bb56f64c15d4b60",
+    "capture_frames": [
+      120,
+      150,
+      180,
+      210,
+      239,
+      300,
+      390,
+      479
+    ],
     "before_prototype_sha256": "3414b9e7eeee0af8b5b510b979ab90d96bf8a0e2f7c4f216614db4df29dbcb74",
-    "fixed_prototype_sha256": "c309eac309653f2e00532c214be769e1b86d3654ec6c5c36538eac436d198a04",
-    "capture_worker_source_sha256": "7fde38b6a272c3dfdbc1799713a0933a061a889b76257406fce13a45f9c04805",
+    "fixed_prototype_sha256": "77f1b25c9a18464bc1183a592e10bc2232e761ba6ac55d699b64a60eea1653aa",
+    "capture_worker_source_sha256": "1e412041e83baf526304d35ccaadd29ad4eb216b97fd7edcb06ee85f8c952e74",
     "workers": {
       "authored": {
-        "path": "build/detail-clipping/screen/authored-build/preset-lab-worker",
+        "path": "build/detail-clipping/screen-white-zero/authored-build/preset-lab-worker",
         "sha256": "7b103346bc57a4a08e3a7999bb3004901052c1d7922af47451916c303b86bccb"
       },
       "before": {
-        "path": "build/detail-clipping/screen/before-build/preset-lab-worker",
+        "path": "build/detail-clipping/screen-white-zero/before-build/preset-lab-worker",
         "sha256": "3d223b9a2c4b28ebc8639a0f330bbda600af19eb3e90237086c572e4dfb716fb"
       },
       "fixed": {
-        "path": "build/detail-clipping/screen/fixed-build/preset-lab-worker",
-        "sha256": "6326eb0e62a3b5847c3a5ef28785eb94f3771eea7beb0560f26de7ca92d878e0"
+        "path": "build/detail-clipping/screen-white-zero/fixed-build/preset-lab-worker",
+        "sha256": "4e9c1e9a8bb9f4977b171198afacaddfce88d91d0ea94ae7daa5a03a69be763c"
       }
     }
   },
@@ -113,6 +123,84 @@
     66,
     67
   ],
-  "prototype_source_ref": "ca8baa65468ac16f2dbafcdf1032b4ecfef9ccb2",
-  "combine_shader_sha256": "271f80227a8c68b7c7d82b6187269d1c0408e864eb3d8c70ac9a5d8393aa597d"
+  "assets": {
+    "presets": {
+      "Krash & yin + Phat - Electric universe (uncertainty principle)_remix_v2.milk": "9bc4ce47f1e92f7811c4848b9f3df08f4ba7e750ed513b11a7e8c8276dd2d0ec",
+      "MilkTop HDFX Presets  Ft Aderrasi,AdamFX,RovaStar,ShadowHarlequin,Martin n Flexi - BitStorm AftermathFX D.milk": "33f13df56d863f17ad3caf03ec43245ea4aaeaac2e3e62187dac786d023c80c1",
+      "ShadowHarlequin-DreamingOfFluorescentThings.milk": "216f702494b661ff9abc13f30011543ed28a8ebdfcb23b9c20130be4fae9cd1b",
+      "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk": "cc660ee00c31fa09f5973c6f3c61cf33b39fdf9916ad72be352911b23880e356",
+      "TonyMilkdrop - Nuclear [Flexi - why even bother + alien complex] --- Isosceles edit1.milk": "85661a7b4044705a2620f24ef11f1c68408996f35ea0438fc82bab9967a96117",
+      "The NG + EoS - A Burst of Adrenaline.milk": "ce29e09775cb7b1979107a20a40ad50f7fb0c6873256b59b598f50bfc7cc3888",
+      "Stahlregen & flexi + Geiss + martin + Rovastar - Tides (martin's metallics).milk": "616b7ddec1e6c9eeb49aa51da9b4ea289af8ae7bb9a13471bd227a27a09b44e1",
+      "Martin - Pixies Party (Hakan mash-up) 3-2.milk": "570e7b3672c05c4764d171ea260a7f0f0f610c2079b5ec4a8b50e5afdbd4e491",
+      "Phat_Rovastar - What_does_your_soul_look_like2.milk": "6cc237f315276238dfd7983a2a790b98c30efe741cb2f9a0c895e36c1ab31213",
+      "ShadowHarlequin - Dancing Petals - [EoS + Phat - chasers 11 sentinel C].milk": "c9b85b2951e9844fb53a10f089c260790391450a0215b2e4f9abaf1c9c773363",
+      "3dRaGoNs & Rovastar - StarGate rEmIx (Jelly).milk": "aa458c07f42063a20d036bac438f05522455c03258a596077dfc288b3184499e",
+      "Mig_068.milk": "8c5a67ececc2e3ceefa316b93c8a7ea17886e694eb3e366b623162f8ef9346f1",
+      "Krash and Rovastar - Rainbow Orb 2 Peacock (Sumpkin Tweak).milk": "873bc600a74425ab6aa05e787162e78f90686ccbb7b8d49df45c0e9543ed4e54",
+      "Tag - Cradle of Life(remix of yin 315).milk": "abd9761d5550e037a7eaec61bfb0a4424cf5d5409395845c8b9cb24b5c445715",
+      "Zylot & Shifter - Tartan (Silent Heaven Mix).milk": "8175c4c5159846442bb11e74666390470edcb82191e201129ea5203f02e95673",
+      "Goody's Molten Wavepool.milk": "8025213e52fe34556b7e5d3330f1754cf261bedfd45005d9fdae4b4ef20af4ad",
+      "EVET + Esotic & Krash - Rolly Poly.milk": "6f5e40d55d001cb257ca22e82dba61333cf4b740bfdcc76804705ad6edd2f649",
+      "298 nz+.milk": "548aa96ef70bc66b354072afdfbf929acadab5d112263f2b4de30e6a29e32932",
+      "Rovastar - Hyperspace nossa.milk": "fcfbee317ff6a9214e2f806c284f9ccf2b084dc72a866fa4b91a0a0c20d7f9ac",
+      "$$$ Royal - Mashup (123).milk": "7eb52fd11dc742db4d61b000e381cfeeebf569c2422044ddca71bcb00abb243d",
+      "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  + Geiss + Martini .milk": "7dceec6d8d344e48e008055fd72363ea485a0cea10199a933b8b30e12ec66f70",
+      "Milk Artist At our Best - FED - SlowFast Ft AdamFX n Martin - HD CosmoFX.milk": "43aa1ca309749eafbcc9ae33a397e5f313c850644245d76d49ea1db26c328e2c",
+      "Halfbreak - Lucid and Hypnotize.milk": "c3346b72f46a43ce8a56ef8e7fb12f5afa55ecd88d0615ebec33788c96c13524",
+      "299.milk": "87cc6000bad77c98af1a3ef3eebdf25f90100130275a17646f883e2c5f63b915",
+      "BADAZJust a TwistFX - Martin - Foggy Notation - Ft AdamFX n Eos - Ufoz in the Fog .milk": "2a992942bad5d5710df695e700310f46d39e03f93c32bc3d057827a9c6a1fb41",
+      "Rovastar + Stahlregen - Touchdown on Jelly Planet (bccn V4).milk": "beebb8ff1937d11d711eb8d40fcca0cd55fb82b66a2bfb798cca7fa828ca3410",
+      "29.milk": "529e506d3d9a098e18ff81d92ab4c246b1c78fe2510a0f32e779f3d2e9da4416",
+      "276.milk": "a2638b6f96815bcd55cbb06d50cf7733c5291acb5c9113c17e8bedfb92fc5f75",
+      "bdrv + al Rovastar - Fractopia bdrv132456 mix bleuarg - dimension crowley slave.milk": "90fabc2fdf288f52ae41c47bbba1a6d046c871194aa7ec2b14d246dea4016534",
+      "256.milk": "969947bd6f220e5b59cd17e284fad44adcc4ad59e86e008b10dd835ec39447de",
+      "143.milk": "09e79947ac21434ae0042e664b03bf2e41470d581d4b8ff98bc30e12c8901198",
+      "bdrv + al - dude's starpulse vector - duck farm plus maggot pig.milk": "0a0109de9abb80c068406d358b18c8d4c4522b761c247d0f79fa5a6814c958b1",
+      "EVET - Scanazoic --- Isosceles edit.milk": "d5b351797af60543cfd3d4230c0ebb708f71c74d53f9a86cd592a79585ba0075",
+      "EoS + Phat - chasers 11 sentinel C_poltergeist_Blue_mix_2 hog rot.milk": "5d68d48074decb9c8b7cc19f33da2f57161e8c7c4a775ce418f2893db42c4fa9",
+      "Fumbling_Foo & Flexi, Martin, Orb - Star Forge v14.milk": "b9296ec83a25a7f4fe3af34db2e0496ccdfda884979890341481502aa4e27f0a",
+      "MegalomaGreg - Ambitions [Flexi's mix 33 highest grade pixel fucker] [remix 07 washing away all the neon paint] --- Isosceles edit.milk": "e8922200f6f9213468cc9445db80b6b281764cd05ffe3cd2dd212a5d2cd3e03d",
+      "Isosceles mashup11.milk": "e5b4e4864490540d79f3f2f81de299fa5da27f02abaf8e9d36c0212748eca28a",
+      "Stahlregen + Unchained - Dot Kung Fu (fucked up reflecto) hog rot.milk": "011a464106e1f3f9d1748260b7d908c3efec6b79a44f1b38475230a31a69e363",
+      "Jc - Geometry 101.milk": "184c2761767e903ed6cb5b5c3246c129e75fc47e6f5c161fa46a1ac67194f8f8",
+      "$$$ Royal - Mashup (255).milk": "4994529a1dfd4081c92b99a90960c264a727e2c49257604137455546085137bd",
+      "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk": "f346d7e6e384e5b0818d11ddc8e7017c7651be352cfc628fb90e42884f191ee4",
+      "Phat_Zylot_EoS Come_fly_with_me_vidio_echo_v2 nz+ digitalia dildoniq law divorcement.milk": "c5fa557bb223750b01a5011d1869722264e6e119f069b77d0ccb4db4b62d47bc",
+      "Fumbling_Foo + En D & Martin - Mandelverse.milk": "e67d288f3c6bd0957a2dc9ce10ae5c4639e15db29827e761331e2abd46319eb6",
+      "Flexi + bdrv - ultramix #46 test [all your base].milk": "2b1f6ed6711781490eb2f4505d1a3da479fcbb8a7f3d10e017aab7de2b42f6aa",
+      "amandio c - embrace 07 z in the unlikely uneventuality a.milk": "4884c0187202e13b9a59b1a2319dcbc621341d9c5bff2a3c957d8fd4a99be499",
+      "Stahlregen + Geiss - Old school, baby! (Flower V2)_1 - lack-of-torture torture mess.milk": "53753691006809b61f09725f5d896999d62a513f0fd72fb3eaad7fa033814641",
+      "Flexi + geiss - botnet nz+ let us out fractal spiders2 pure opulenth pony.milk": "767c0093fad7245a4fc7f01f66fdc2a77e26adf97b8ffdb314e8492495dee579",
+      "Stahlregen & Flexi + Geiss + Martin + Rovastar + Telek - DiskWasher (Gentle RMX).milk": "5eba0797e746af8238af4b7129d255a1113893414f5ee0654bdaef2e1507a3af",
+      "Stahlregen & fiShbRaiN + Geiss + spookytay - Circuits in Flames (Jelly V3).milk": "86dc22f3984b3d05e659f746ecac1f8ac95c311cbcb8f1c861e7738b32d21bf4",
+      "Stahlregen & Aderrasi + Geiss + Vovan - Journeying Nowhere - lazy mercaba.milk": "ff9dc3c6f902064c4d109b8fe0b5a944ba392c32b10fb27cfbcf1ed8ac04cd1d",
+      "Flexi + orb + geiss - the computer is your friend trust the computer.milk": "42b014a2d7287a3e811740371c0494b3baabd1443ec0fda73aa50519e5325c87",
+      "Serge circles003b.milk": "9722c51639a5da8a70702e87e43d234c9e656ad6e669ea02a67bf6ecdcfdfc92",
+      "Mig_Oscilloscope022 b.milk": "d3f4b554a89b6f1a02edc3c635de3700f8c17bb78f3fb5119924bd8c0c3e68a7",
+      "Stahlregen & Esotic + Idiot24-7 + Rozzer + Zylot - Digital Heartbeat (Reverse Jelly V3) ___.milk": "aaf6d052e67f9ce594c344114b5f8f271215c3d3b0ac6e331fe1e5231e6588e5",
+      "Rovastar Geiss - Rose 4 Shifted Tiles (Digital Ghost Mix).milk": "411e1bac79d466be2e8746e7963036fa6a7c990df479f2cc56cc0e1764c41d94",
+      "astral spinorgentics encrustcore nz+.milk": "e94d07220b1e2dcde7279449639d19ec1ebda39a4e90a17b15f4b405a4574dfb",
+      "Stahlregen & Geiss + Idiot24-7 + Illusion + Zylot - Twist (Hue Shaded Mirror)_2.milk": "aba2caaad5b7654ec22f4f856a20df79bd7fbcb11e731df5159365bcd326ed62",
+      "Geiss - Motion Blur.milk": "c53790f06509e839eaa0f4b46e3744655d1030000b61ce22ff991d837afa6877",
+      "AdamFx 2 Aderrasi - Airhandler (Last Breath - Calm)Ilusional Discontent2.milk": "05e4dcb1502aef58371e8f3b4c7b99404e622048cf8cbff5c0137bb6553a3162",
+      "Goody - Lightning - Vegas Dreamer remix (PS2-0) - mix.milk": "b9986198dfd96f456e2b58480bf29447f2226b2358a802bac1774bcb51da629a",
+      "Waltra - Heaven Liquid.milk": "51cde8a9f21f6a432a5c5d3f470b771d47e96db797a7776c722a735c52316d24",
+      "amandio c - pulse - we are going to need your permission.milk": "3c9c3e1d2395289c3a2017d82ccbdaa699b184f4fa812cb52d8966400980cc0d",
+      "Martin - Pixies Party (Hakan mash-up) 3-4.milk": "3da892b17b53b80e2c1498f4afe7ffe9180b28a0c748ffc6eb3ac9c59407414e",
+      "Martin - Pixies Party (Hakan mash-up) 3-3.milk": "4a7c2c5ebad94ed83421cd53a58c4d035f2f329ce3264b4b9d00c5b0236bab63",
+      "$$$ Royal - Mashup (191).milk": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "Fed - quadratrail.milk": "2bdf01d1500258f71d077e5fb225d5e4be97f9b15a1af48b5705ff61982104d0",
+      "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk": "163034eb002666dfd1966444dedd1a47853131e915a5cb2745bd09ff52a4e230",
+      "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk": "977813afc416dca4e1fc4443964661cdaa185728f3d004e7a60a46a1b4d735a7"
+    },
+    "textures_sha256": "276198b7ed14ee88b6ef4c0045d91a23271380e0d50dbccf5a7baaa424cd4070",
+    "texture_count": 74
+  },
+  "before_controls": false,
+  "saved_frames": [
+    300
+  ],
+  "prototype_source_ref": "e51be09fd88b027c91392f23e9d7b43d988f2153",
+  "combine_shader_sha256": "40672bdf0fcc4ed6413ea7260b45924e5bd6008ba52b1d29e68900b633bbba56"
 }

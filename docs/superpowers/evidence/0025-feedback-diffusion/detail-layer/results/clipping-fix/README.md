@@ -72,10 +72,10 @@ Run the commands in `../../README.md` from the repository root. Use empty
 output directories; the runner rejects reuse and verifies worker hashes. Add
 `--indices 3,38,40 --before --save-frames` for the temporal controls.
 
-`broad/protocol.json` records the centered limiter from commit `ca8baa65` used
-for that run. A subsequent zero-residual/white-headroom correction is now in
-validation; the final corpus and targeted comparisons will replace these
-provisional records before merge. The GPU regression covers that edge case.
+`broad/protocol.json` and `targeted/protocol.json` identify the final prototype
+from commit `e51be09f`, including the zero-residual/white-headroom correction.
+Their full prototype and combine shader SHA-256 values match the committed
+source. Both screens were rerun after that correction.
 The eight captured frames originate in the shared `lab/capture_frames.py`
 contract, embedded into the generated worker predicate and checked by the
 reader.
