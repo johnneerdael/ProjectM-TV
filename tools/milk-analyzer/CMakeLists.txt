@@ -95,6 +95,7 @@ execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/gen
 add_executable(milk-composite-inputs native_composite.cpp)
 target_compile_features(milk-composite-inputs PRIVATE cxx_std_17)
 target_include_directories(milk-composite-inputs PRIVATE "${CMAKE_CURRENT_BINARY_DIR}"
+    "${ENGINE_SOURCE}/src/libprojectM"
     "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native")
 execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/generate_shader_adapter.py"
     --engine "${ENGINE_SOURCE}" --output "${CMAKE_CURRENT_BINARY_DIR}/cpu_shader_adapter.hpp"
@@ -146,6 +147,7 @@ foreach(INPUT IN LISTS WAVE_INPUTS)
 endforeach()
 string(REGEX REPLACE ",$" "}" WAVE_SOURCE_HASHES "${WAVE_SOURCE_HASHES}")
 file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/cpu_wave_state.hpp" CPU_WAVE_ADAPTER_SHA)
+file(SHA256 "${ENGINE_SOURCE}/src/libprojectM/Renderer/RenderContext.hpp" RENDER_CONTEXT_SHA)
 configure_file(cpu_wave_inputs.hpp.in cpu_wave_inputs.hpp @ONLY)
 add_executable(milk-wave-inputs native_wave.cpp ${CPU_WAVE_SOURCES})
 target_compile_features(milk-wave-inputs PRIVATE cxx_std_17)

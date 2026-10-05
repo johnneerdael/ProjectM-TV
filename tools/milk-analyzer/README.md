@@ -285,6 +285,14 @@ isolated waveform's pixel positions differing by more than one RGB8 level drop
 from70to14across60frames. The original batch grade is preserved; these controls
 do not establish driver-wide pixel identity or earn fresh-case credit.
 
+CPU wave/composite adapters now include the actual pinned `RenderContext.hpp`
+instead of duplicating its structure. Its time field is float32; an earlier stub
+used double and the long-clock tests mistakenly validated that stub. Hue math now
+preserves native float intermediates. Adapter output records the header hash and
+time width, and forecasts require the prepared float32 adapter. Focused controls
+pass66tests plus19subtests; this is not a full imported-suite result. The corrected
+type does not resolve randomized hue choices on its own.
+
 The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`. Raw artifacts
 remain in ignored `build/visual-loop/`. The broader imported suite needs prepared
 historical adapter profiles and is not reported passing. No whole-corpus accuracy

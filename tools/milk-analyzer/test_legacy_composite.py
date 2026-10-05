@@ -8,6 +8,20 @@ from field_math import UnresolvedMath
 class LegacyCompositeTest(unittest.TestCase):
     def module(self):return importlib.import_module('legacy_composite')
 
+    def test_hue_uses_float_context_time_and_float_intermediates(self):
+        time=np.float32(10001.123456789)
+        offsets=np.array([0,11,23,37],np.float32)
+        channels=[]
+        for rate,phase,slot in [(.0143,3,3),(.0107,1,1),(.0129,6,2)]:
+            angle=time*np.float32(30)*np.float32(rate)
+            angle=angle+np.float32(phase)
+            angle=angle+offsets[slot]
+            channels.append(np.float32(.6)+np.float32(.3)*np.sin(angle))
+        raw=np.array(channels,np.float32)
+        expected=np.float32(.5)+np.float32(.5)*(raw/raw.max())
+        np.testing.assert_allclose(self.module().corner_shades(10001.123456789,offsets)[0],
+                                    expected,atol=2e-7,rtol=0)
+
     def test_gamma_redraw_weights_match_native_branch_rules(self):
         m=self.module()
         self.assertEqual(m.gamma_weights(2.5,echo=False),[1,1,.5])

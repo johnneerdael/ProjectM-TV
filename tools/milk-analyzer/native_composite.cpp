@@ -1,6 +1,7 @@
 // Unchanged native geometry/hue bodies, with data-only state. No GL calls.
 #include "vendor/json.hpp"
 #include "reader_inputs.hpp"
+#include "Renderer/RenderContext.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -10,7 +11,7 @@
 using json=nlohmann::json;
 
 struct PresetState {
-    struct {int viewportSizeX,viewportSizeY;float aspectX,aspectY;double time;} renderContext;
+    libprojectM::Renderer::RenderContext renderContext;
     std::array<float,4> hueRandomOffsets;
 };
 class FinalComposite {
@@ -35,8 +36,12 @@ int main(int argc,char** argv) {
             throw std::runtime_error("integer viewport required");
         int width=request.at("width"),height=request.at("height");
         if(width<=0||height<=0||width>16384||height>16384)throw std::runtime_error("viewport outside bridge budget");
-        PresetState state{};state.renderContext={width,height,std::min(1.0f,float(width)/height),
-                                                    std::min(1.0f,float(height)/width),request.at("time")};
+        PresetState state{};
+        state.renderContext.viewportSizeX=width;
+        state.renderContext.viewportSizeY=height;
+        state.renderContext.aspectX=std::min(1.0f,float(width)/height);
+        state.renderContext.aspectY=std::min(1.0f,float(height)/width);
+        state.renderContext.time=request.at("time").get<float>();
         if(!std::isfinite(state.renderContext.time)||request.at("hue_offsets").size()!=4)
             throw std::runtime_error("finite time and four hue offsets required");
         for(int i=0;i<4;++i) {
@@ -47,6 +52,8 @@ int main(int argc,char** argv) {
         json result={{"positions",json::array()},{"uv",json::array()},{"polar",json::array()},
                      {"colours",json::array()},{"indices",mesh.m_indices},
                      {"native_source_sha256",kCompositeSourceSha},{"native_bodies_sha256",kCompositeBodiesSha},
+                     {"render_context_source_sha256",kCompositeRenderContextSha},
+                     {"render_context_time_bits",sizeof(state.renderContext.time)*8},
                      {"engine",json::parse(kEngineIdentity)},{"engine_archive_sha256",kEngineArchiveSha},
                      {"native_driver_verified",false},{"adapter","data-only state; native mesh/hue bodies; GL upload omitted"}};
         for(const auto& v:mesh.m_vertices) {

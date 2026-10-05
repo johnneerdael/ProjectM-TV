@@ -6,6 +6,7 @@ from pathlib import Path
 
 def generate(engine,output):
     source=(engine/'src/libprojectM/MilkdropPreset/FinalComposite.cpp').read_text()
+    context=(engine/'src/libprojectM/Renderer/RenderContext.hpp').read_bytes()
     start=source.index('void FinalComposite::InitializeMesh(')
     end=source.index('    // Store indices.',start)
     mesh=source[start:end]+'}\n'
@@ -14,7 +15,8 @@ def generate(engine,output):
     math=source[start:end]
     output.write_text('#pragma once\n'+
         f'inline constexpr const char* kCompositeSourceSha="{hashlib.sha256(source.encode()).hexdigest()}";\n'+
-        f'inline constexpr const char* kCompositeBodiesSha="{hashlib.sha256((mesh+math).encode()).hexdigest()}";\n'+mesh+math)
+        f'inline constexpr const char* kCompositeBodiesSha="{hashlib.sha256((mesh+math).encode()).hexdigest()}";\n'+
+        f'inline constexpr const char* kCompositeRenderContextSha="{hashlib.sha256(context).hexdigest()}";\n'+mesh+math)
 
 
 if __name__=='__main__':

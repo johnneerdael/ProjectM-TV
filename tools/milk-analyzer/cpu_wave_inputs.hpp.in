@@ -1,3 +1,4 @@
 #pragma once
 static constexpr char kWaveSourceHashes[]=R"wave(@WAVE_SOURCE_HASHES@)wave";
 static constexpr char kCpuWaveAdapterSha[]="@CPU_WAVE_ADAPTER_SHA@";
+static constexpr char kWaveRenderContextSha[]="@RENDER_CONTEXT_SHA@";

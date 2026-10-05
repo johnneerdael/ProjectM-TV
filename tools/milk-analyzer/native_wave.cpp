@@ -37,6 +37,8 @@ int main(int argc,char** argv) {
         json report={{"schema_version",1},{"basis","pinned waveform math bodies with data-only state adapter; no graphics context"},
             {"uses_rendered_reference",false},{"engine_archive_sha256",kEngineArchiveSha},
             {"source_hashes",json::parse(kWaveSourceHashes)},{"adapter_sha256",kCpuWaveAdapterSha},
+            {"render_context_source_sha256",kWaveRenderContextSha},
+            {"render_context_time_bits",sizeof(state.renderContext.time)*8},
             {"engine_identity",json::parse(kEngineIdentity)},{"mode",mode},{"frames",json::array()}};
         for(const auto& frame:request.at("frames")) {
             arrayInput(frame.at("waveform_left"),state.audioData.waveformLeft);

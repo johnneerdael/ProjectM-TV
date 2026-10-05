@@ -54,6 +54,8 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60):
         process=subprocess.run([str(binary),str(path)],capture_output=True,text=True,timeout=timeout_seconds)
         if process.returncode:raise ValueError('native waveform execution unresolved: '+process.stderr)
         native=json.loads(output.read_text())
+    if native.get('render_context_time_bits')!=32:
+        raise ValueError('prepared native waveform adapter with float32 render context required')
     dot=bool(_scalar(values,'bWaveDots',0,'bool'));thick=dot or bool(_scalar(values,'bWaveThick',0,'bool'))
     offsets=[[0,0],[1/width,0],[1/width,-1/height],[0,-1/height]] if thick else [[0,0]]
     result=[]
@@ -73,4 +75,6 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60):
             'adapter_sha256':native['adapter_sha256'],
             'native_binary_sha256':hashlib.sha256(Path(binary).read_bytes()).hexdigest(),
             'engine_archive_sha256':native['engine_archive_sha256'],'uses_rendered_reference':False,
+            'render_context_source_sha256':native['render_context_source_sha256'],
+            'render_context_time_bits':native['render_context_time_bits'],
             'appearance_prediction_complete':False,'remaining':['hardware line/point rasterization and full draw integration']}

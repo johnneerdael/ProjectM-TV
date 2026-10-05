@@ -15,11 +15,13 @@ def frame(**settings):
 
 
 class NativeWaveTest(unittest.TestCase):
-    def test_circle_time_matches_native_double_before_float_angle_storage(self):
+    def test_circle_time_matches_native_float_context_and_operations(self):
         time=10001.123456789
         process,report=self.run_wave(0,[frame(time=time,wave_x=.5,wave_y=.5,wave_mystery=0)],wave_smoothing=0)
         self.assertEqual(process.returncode,0,process.stderr)
-        angle=np.float32(time*float(np.float32(.2)))
+        self.assertEqual(report['render_context_time_bits'],32)
+        self.assertEqual(len(report['render_context_source_sha256']),64)
+        angle=np.float32(time)*np.float32(.2)
         expected=[np.float32(.5)*np.cos(angle)*np.float32(288/512),np.float32(.5)*np.sin(angle)]
         np.testing.assert_allclose(report['frames'][0]['vertex_waves'][0][0],expected,atol=1e-7,rtol=0)
 

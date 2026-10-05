@@ -1,0 +1,29 @@
+{
+  "purpose": "Correct source CPU adapter render-context type using actual pinned header",
+  "render_context_header_sha256": "a5c95fc271d413d4e30c1232d38cabfe4ab58ea9c5f8e8b28d2d104edf1a85ac",
+  "native_declaration": "float time{0.0f};",
+  "previous_adapter_declaration": "double time",
+  "native_library_changed": false,
+  "affected": [
+    "native_composite.cpp",
+    "cpu_wave_state.hpp",
+    "legacy_composite.corner_shades"
+  ],
+  "tests": {
+    "passed": 66,
+    "subtests": 19
+  },
+  "long_clock_regression": {
+    "time": 10001.123456789,
+    "old_circle_x": -0.1590394675731659,
+    "expected_float_circle_x": -0.15901115536689758,
+    "old_hue_green": 0.7028159499168396,
+    "expected_float_hue_green": 0.7027909159660339
+  },
+  "adapter_hashes": {
+    "milk-wave-inputs": "e997334043cd75ccf01fe86fecc7f66ba118dd8dd4c76d919d93d57e91eca29e",
+    "milk-composite-inputs": "b37aea894ac0a53cf415db30bd2d594e7b8028eca549b3dafaac0ed233921f0e"
+  },
+  "case013_diagnostic_unchanged_by_time_fix": true,
+  "source15_randomized_palette_still_requires_matching_inputs": true
+}

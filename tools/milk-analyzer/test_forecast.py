@@ -227,14 +227,14 @@ def test_native_source_loader_binds_original_bytes_and_actual_parser(tmp_path):
     assert source['reader_sha256']==hashlib.sha256((BINARIES/'milk-native-reader').read_bytes()).hexdigest()
 
 
-def test_renderer_hue_time_keeps_double_precision_before_native_sinf_narrowing():
+def test_renderer_hue_time_uses_native_float_context():
     from composite_mesh import composite_fields
     source=native(BASE+'comp_1=`shader_body {ret=_vDiffuse.rgb;}\n')
     values=audio()
     for frame in values['frames']:
         frame['time']+=10001.123456789
     result=predict(source,audio=values)
-    expected=composite_fields(32,32,time=values['frames'][0]['time'],hue_offsets=[0]*4)['diffuse'][...,:3]
+    expected=composite_fields(32,32,time=float(np.float32(values['frames'][0]['time'])),hue_offsets=[0]*4)['diffuse'][...,:3]
     np.testing.assert_allclose(result['frames'][0]['display'][...,:3],expected,atol=3e-7,rtol=0)
 
 

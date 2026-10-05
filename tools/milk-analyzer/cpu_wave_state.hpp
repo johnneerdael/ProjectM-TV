@@ -1,5 +1,6 @@
 #pragma once
 #include "Audio/FrameAudioData.hpp"
+#include "Renderer/RenderContext.hpp"
 #include <array>
 namespace milk_wave_cpu {
 namespace Audio=libprojectM::Audio;
@@ -12,8 +13,7 @@ struct RenderItem {
 namespace MilkdropPreset {
 struct PresetState {
     libprojectM::Audio::FrameAudioData audioData{};
-    struct Context {int viewportSizeX{512},viewportSizeY{288};
-        int lineReferenceWidth{0},lineReferenceHeight{0};double time{};} renderContext;
+    libprojectM::Renderer::RenderContext renderContext;
     float waveScale{1},waveSmoothing{.75f};
     bool modWaveAlphaByvolume{false};
 };

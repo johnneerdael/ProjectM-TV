@@ -34,9 +34,9 @@ def corner_shades(time,hue_offsets):
     index=np.arange(4,dtype=np.float32)
     result=[]
     for rate,phase,mult,offset in [(.0143,3,21,3),(.0107,1,13,1),(.0129,6,9,2)]:
-        # RenderContext.time is double; sinf receives its narrowed argument.
-        angle=np.asarray(float(time)*float(np.float32(30))*float(np.float32(rate))+
-                         phase+index.astype(np.float64)*mult+float(offsets[offset]),dtype=np.float32)
+        # Pinned RenderContext.time is float; preserve each native float operation.
+        angle=np.float32(time)*np.float32(30)*np.float32(rate)
+        angle=angle+np.float32(phase)+index*np.float32(mult)+offsets[offset]
         result.append(np.float32(.6)+np.float32(.3)*np.sin(angle))
     shade=np.stack(result,axis=-1)
     return np.float32(.5)+np.float32(.5)*(shade/np.max(shade,axis=1,keepdims=True))

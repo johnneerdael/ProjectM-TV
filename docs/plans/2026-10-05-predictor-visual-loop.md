@@ -160,3 +160,19 @@ central recess now agree closely. Isolated-wave large pixel differences drop
 70→14;52focused controls pass. Preserve original round grading. See
 `fixtures/visual-loop-native-clip-repair-2026-10-05.json`. Case015's randomized
 hue realization remains a separate unresolved input obligation.
+
+Source-type audit finds another adapter defect: native RenderContext.time is
+float, while both CPU wave/composite state substitutes declared double. Include
+the pinned engine header directly and preserve float hue arithmetic. Correct the
+older tests that asserted the substitute's double semantics. 66 focused tests and
+19 subtests pass; the long-clock regression now matches native float semantics.
+Case013's two-second diagnostic is unchanged by this separate type repair.
+Evidence: `fixtures/visual-loop-float-context-repair-2026-10-05.json`.
+
+User selected matching declared random inputs for future reference comparisons.
+Use an explicit new test profile, retain earlier inputs/results, and keep the
+published AAR unchanged. An opt-in test-host supplies entropy seeds and a separate
+declared random stream per core thread; background shader-worker resets must not
+disturb renderer inputs. Input logs are numerical inputs/attribution, not rendered
+reference images. Verify source-generated hue/noise/shader inputs with bounded
+controls before using this profile in a fresh three-preset round.

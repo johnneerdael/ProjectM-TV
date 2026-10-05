@@ -19,6 +19,8 @@ class NativeCompositeTest(unittest.TestCase):
                     request.write_text(json.dumps({'width':width,'height':height,'time':time,'hue_offsets':offsets}))
                     result=subprocess.run([str(binary),str(request)],check=True,capture_output=True,text=True)
                     native=json.loads(result.stdout)
+                self.assertEqual(native['render_context_time_bits'],32)
+                self.assertEqual(len(native['render_context_source_sha256']),64)
                 mesh=make_mesh(width,height)
                 np.testing.assert_allclose(mesh['positions'].reshape(-1,2),native['positions'],atol=2e-7,rtol=0)
                 np.testing.assert_allclose(mesh['uv'].reshape(-1,2),native['uv'],atol=2e-7,rtol=0)
