@@ -3,6 +3,7 @@ import importlib.util
 import copy
 import json
 import os
+import re
 import tempfile
 from pathlib import Path
 import unittest
@@ -48,7 +49,12 @@ def summary(state="Completed", sha=HEAD, login=BOT):
     return dict(user=dict(login=login), updated_at="2026-10-05T10:00:00Z", body=(
         "<!-- codex-pull-request-review-summary -->\n"
         "| Review | Status | Commit | Review trigger |\n"
-        f"| 📝 **Code Review** | ✅ **{state}** | `{sha}` | Manual request |"))
+        f'| 📝 **Code Review** | ✅ **{state}** <relative-time datetime="2026-10-05T10:00:00Z">10:00</relative-time> | `{sha}` | Manual request |'))
+
+
+def set_summary_time(comment, timestamp):
+    comment["updated_at"] = timestamp
+    comment["body"] = re.sub(r'datetime="[^"]+"', f'datetime="{timestamp}"', comment["body"])
 
 
 def legacy_completion(sha=HEAD, login=BOT):
@@ -127,8 +133,21 @@ class EligibilityTests(unittest.TestCase):
         self.assertFalse(self.eligible([human()], [request]))
         self.assertFalse(self.eligible([human()], [summary(), request]))
         completed = summary()
-        completed["updated_at"] = "2026-10-05T12:00:00Z"
+        set_summary_time(completed, "2026-10-05T12:00:00Z")
         self.assertTrue(self.eligible([human()], [completed, request]))
+
+    def test_summary_without_its_own_time_cannot_clear_a_later_request(self):
+        request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T11:00:00Z")
+        completed = summary()
+        completed["body"] = re.sub(r' <relative-time.*?</relative-time>', '', completed["body"])
+        completed["updated_at"] = "2026-10-05T12:00:00Z"
+        completed["body"] += (f'\n| **Security Review** | **Completed** '
+                              f'<relative-time datetime="2026-10-05T12:00:00Z">12:00</relative-time> | `{HEAD}` | Manual request |')
+        self.assertFalse(self.eligible([human()], [request, completed]))
+        # A row-specific timestamp proves which review completed after the request.
+        completed["body"] = completed["body"].replace('**Code Review** | ✅ **Completed**',
+            '**Code Review** | ✅ **Completed** <relative-time datetime="2026-10-05T12:00:00Z">12:00</relative-time>')
+        self.assertTrue(self.eligible([human()], [request, completed]))
 
     def test_same_second_completion_cannot_clear_a_new_or_edited_request(self):
         request = dict(user=dict(login="author"), body="@codex review",
@@ -137,7 +156,7 @@ class EligibilityTests(unittest.TestCase):
                                     ("2026-10-05T11:00:00.999999Z", False),
                                     ("2026-10-05T11:00:01Z", True)]:
             completed = summary()
-            completed["updated_at"] = timestamp
+            set_summary_time(completed, timestamp)
             legacy = legacy_completion()
             legacy["created_at"] = timestamp
             reviewed = codex_review()
@@ -156,7 +175,7 @@ class EligibilityTests(unittest.TestCase):
                 completed = summary()
                 completed["body"] = completed["body"].replace("**Code Review**", f"**{label} Review**")
                 self.assertFalse(self.eligible([human()], [completed, request]))
-                completed["updated_at"] = "2026-10-05T12:00:00Z"
+                set_summary_time(completed, "2026-10-05T12:00:00Z")
                 self.assertTrue(self.eligible([human()], [completed, request]))
                 # Editing the command again must invalidate that newer completion too.
                 request["updated_at"] = "2026-10-05T13:00:00Z"
@@ -165,7 +184,7 @@ class EligibilityTests(unittest.TestCase):
     def test_old_commit_completion_cannot_clear_a_request_for_current_head(self):
         request = dict(user=dict(login="author"), body="@codex review", created_at="2026-10-05T11:00:00Z")
         old_summary = summary(sha=BASE)
-        old_summary["updated_at"] = "2026-10-05T12:00:00Z"
+        set_summary_time(old_summary, "2026-10-05T12:00:00Z")
         old_legacy = legacy_completion(sha=BASE)
         old_legacy["created_at"] = "2026-10-05T12:00:00Z"
         old_review = codex_review(sha=BASE)

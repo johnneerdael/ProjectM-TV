@@ -64,7 +64,7 @@ def eligibility(pr, reviews, comments, threads):
                     completed = completed or commit[1] == head
                     kind = "security" if "**Security Review**" in row else "code"
                     date = re.search(r'datetime="([^"]+)"', row)
-                    completed_at(kind, date[1] if date else comment.get("updated_at"))
+                    completed_at(kind, date[1] if date else None)
                 elif "**Completed**" not in row and (not commit or commit[1] == head):
                     # An abbreviated running summary cannot identify its revision
                     # safely. Keep the gate closed until it finishes.
