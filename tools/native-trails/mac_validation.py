@@ -293,12 +293,13 @@ def prepare_workers(work, exports, source_commit):
     output = work / "workers"
     output.mkdir(parents=True, exist_ok=False)
     identities = {}
-    for role, export_role, count in (("baseline", "baseline-native", 41), ("candidate", "candidate-native", 42)):
+    for role, export_role in (("baseline", "baseline-native"), ("candidate", "candidate-native")):
         frozen = read(exports / export_role / "identity.json")
+        count = len(frozen["ordered_patches"])
         selected = {name: file_digest(ROOT / "core/src/main/assets/presets" / name)
                     for name in Path(__file__).with_name("presets.txt").read_text().splitlines() if name}
         metrics.verify_worker(frozen, selected)
-        require(len(frozen["ordered_patches"]) == count and
+        require(count >= 41 and
                 [int(p["name"][:4]) for p in frozen["ordered_patches"]] == list(range(1, count + 1)), "Unexpected shipping patch series")
         if role == "candidate":
             require(frozen["source_commit"].startswith(source_commit), "Candidate source commit differs")
@@ -380,7 +381,7 @@ def initialize_run(work, selection_path, run_name, pilot, parallel, retain_full)
     textures = ROOT / "core/src/main/assets/textures"
     repeats = names if pilot else selection["authored_repeats"]
     protocol = {"schema": 1, "backend": "direct-macOS-SDL-OpenGL", "host": platform.platform(),
-                "machine": platform.machine(), "source_scope": "shipping patches1–41 baseline;1–42 candidate",
+                "machine": platform.machine(), "source_scope": ";".join("shipping patches1–%d %s" % (len(identity["ordered_patches"]), role) for role, identity in workers.items()),
                 "workers": workers, "selection_file": str(selection_path), "selection_sha256": file_digest(selection_path),
                 "records": records, "presets": names, "authored_repeats": repeats,
                 "profiles": json.loads(canonical_json(PROFILES)), "parallel_contexts": parallel, "retain_full_frame300": pilot or retain_full,

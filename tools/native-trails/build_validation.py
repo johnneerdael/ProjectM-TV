@@ -62,6 +62,10 @@ def command(args, cwd=None, log=None):
                           stderr=subprocess.STDOUT if log else None)
 
 
+def instrument_worker_abi(text, abi):
+    return once(text, "ndk { abiFilters 'arm64-v8a' }", "ndk { abiFilters '" + abi + "' }")
+
+
 def native_hashes(archive):
     return {name: hashlib.sha256(archive.read(name)).hexdigest()
             for name in archive.namelist() if name.startswith("jni/") and name.endswith(".so")}
@@ -117,6 +121,9 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
     gradle = source / "core/build.gradle"
     change(gradle, once(gradle.read_text(), 'abiFilters "armeabi-v7a", "arm64-v8a"',
                        'abiFilters "' + abi + '"'), changes, source)
+    worker = source / "tools/core-corpus/android-worker"
+    worker_gradle = worker / "app/build.gradle"
+    change(worker_gradle, instrument_worker_abi(worker_gradle.read_text(), abi), changes, source)
     sdk = Path(os.environ.get("ANDROID_HOME", str(Path.home() / "Library/Android/sdk")))
     (source / "local.properties").write_text("sdk.dir=" + str(sdk) + "\n")
     patches = [{"name": p.name, "sha256": file_digest(p)}
@@ -130,6 +137,7 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
                 "instrumentation_diff_sha256": file_digest(destination / "instrumentation.diff"),
                 "bridge_sha256": {p.name: file_digest(p) for p in (cpp / "lab_bridge.cpp", cpp / "lab_bridge.hpp")},
                 "shipping_byte_identity": False,
+                "worker_gradle_sha256": file_digest(worker_gradle),
                 "source_files_sha256": {p.relative_to(source).as_posix(): file_digest(p)
                                         for base in (cpp, engine / "src", engine / "vendor/projectm-eval")
                                         for p in sorted(base.rglob("*")) if p.is_file()}}
@@ -143,7 +151,6 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
         identity["native_sha256"] = native_hashes(archive)
         identity["assets_sha256"] = digest({name: hashlib.sha256(archive.read(name)).hexdigest()
                                            for name in archive.namelist() if name.startswith("assets/")})
-    worker = source / "tools/core-corpus/android-worker"
     shutil.copyfile(source / "local.properties", worker / "local.properties")
     instrument = worker / "app/src/main/java/nl/neerdael/projectmtv/corpus/CorpusInstrumentation.java"
     text = instrument.read_text()

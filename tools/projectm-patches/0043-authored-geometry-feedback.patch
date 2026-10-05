@@ -134,7 +134,7 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
          {
              auto& lines = m_presetState.lineRenderer;
              if (!m_linesBegun)
-@@ -393,16 +425,30 @@
+@@ -393,16 +425,31 @@
                  lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext);
                  m_linesBegun = true;
              }
@@ -153,10 +153,11 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
              {
 +                if (nativePass && m_geometryTargets) {
 +                    static constexpr float dx[4]={0,1,1,0}, dy[4]={0,0,1,1};
-+                    // Canvas scale is rounded; use its actual dimensions for the prepared offsets.
-+                    const auto translation=glm::vec3(
-+                        dx[iteration]*(1.0f/context.viewportSizeX-1.0f/m_geometryTargets->AuthoredWidth()),
-+                        dy[iteration]*(1.0f/context.viewportSizeY-1.0f/m_geometryTargets->AuthoredHeight()),0);
++                    // MilkdropPreset sets the reference to the actual rounded authored canvas.
++                    const float sourceScale=std::sqrt((double(context.viewportSizeX)*context.viewportSizeY) /
++                                                      (double(context.lineReferenceWidth)*context.lineReferenceHeight));
++                    const auto translation=glm::vec3(dx[iteration]*(1-sourceScale)/context.viewportSizeX,
++                                                     dy[iteration]*(1-sourceScale)/context.viewportSizeY,0);
 +                    m_presetState.untexturedShader.SetUniformMat4x4("vertex_transformation",
 +                        glm::translate(PresetState::orthogonalProjection,translation));
 +                }
@@ -166,7 +167,7 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
          }
      }
 
-@@ -411,9 +457,6 @@
+@@ -411,9 +458,6 @@
          m_presetState.lineRenderer.End();
          m_linesBegun = false;
      }
@@ -351,7 +352,7 @@ diff --git a/src/libprojectM/MilkdropPreset/GeometryTargets.hpp b/src/libproject
 new file mode 100644
 --- /dev/null
 +++ b/src/libprojectM/MilkdropPreset/GeometryTargets.hpp
-@@ -0,0 +1,45 @@
+@@ -0,0 +1,43 @@
 +#pragma once
 +
 +#include "PresetState.hpp"
@@ -384,8 +385,6 @@ new file mode 100644
 +        m_native.Bind(m_nativeIndex);
 +        glViewport(0,0,m_context.viewportSizeX,m_context.viewportSizeY);
 +    }
-+    auto AuthoredWidth() const -> int { return m_width; }
-+    auto AuthoredHeight() const -> int { return m_height; }
 +private:
 +    PresetState& m_state;
 +    Renderer::RenderContext m_context;
@@ -664,7 +663,7 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
      std::vector<uint8_t> result(base.size());
      glReadPixels(0,0,Width/2,Height/2,GL_RGBA,GL_UNSIGNED_BYTE,result.data());
      EXPECT_EQ(result,base);
-@@ -563,3 +584,195 @@
+@@ -563,3 +584,234 @@
      EXPECT_GT(*std::max_element(feedback.begin(),feedback.end()),100) << "vectors must resume once the native warp writes UV";
      EXPECT_EQ(glGetError(),GL_NO_ERROR);
  }
@@ -805,7 +804,7 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
 +
 +TEST_F(FeedbackDiffusionRenderTest, TexturedShapesAndBordersRestoreVertexInputsAcrossFrames) {
 +    for(bool thick : {false,true}) {
-+        const auto source=Preset("ret=float3(uv.x,uv.y,0.2);")+
++        const auto source=Preset("ret=float3(0.2,0.4,0.6);")+
 +            "shapecode_0_enabled=1\nshapecode_0_textured=1\nshapecode_0_sides=7\n"
 +            "shapecode_0_x=0.437\nshapecode_0_y=0.533\nshapecode_0_rad=0.37\n"
 +            "shapecode_0_r=1\nshapecode_0_g=1\nshapecode_0_b=1\nshapecode_0_a=1\n"
@@ -813,8 +812,8 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
 +            "shapecode_0_border_r=0.1\nshapecode_0_border_g=0.8\nshapecode_0_border_b=0.3\n"
 +            "shapecode_0_border_a=0.7\nshapecode_0_thickOutline="+std::to_string(thick)+"\n";
 +        const auto render=[&](bool stale,float alpha) {
-+            TestProjectM engine;engine.SetWindowSize(192,108);engine.SetLineReferenceSize(128,72);
-+            engine.SetFeedbackDetail(alpha);engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++            TestProjectM engine;engine.SetWindowSize(alpha==-1?96:192,alpha==-1?54:108);engine.SetLineReferenceSize(alpha==-1?0:alpha==-2?96:128,alpha==-1?0:alpha==-2?54:72);
++            engine.SetFeedbackDetail(alpha<0?-1:alpha);engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
 +            std::istringstream input(source);engine.LoadPresetData(input,false);
 +            EXPECT_TRUE(engine.failure.empty())<<engine.failure;
 +            std::vector<Image> images;
@@ -826,9 +825,17 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
 +            }
 +            EXPECT_EQ(glGetError(),GL_NO_ERROR);return images;
 +        };
++        const auto authored=render(false,-1),nativeReference=render(false,-2);
 +        for(float alpha : {0.f,0.5f,1.f}) {
 +            const auto clean=render(false,alpha);
 +            ASSERT_GT(*std::max_element(clean.back().begin(),clean.back().end()),100);
++            for(size_t frame=0;frame<3;++frame) EXPECT_EQ(clean[frame*2],authored[frame*2])<<"independent authored texture/border reference";
++            for(size_t frame=0;frame<1;++frame) {
++                const auto& expected=nativeReference[frame*2+1];const auto& result=clean[frame*2+1];
++                ASSERT_EQ(result.size(),expected.size());int maximumError=0;
++                for(size_t i=0;i<result.size();++i) maximumError=std::max(maximumError,std::abs(int(result[i])-int(expected[i])));
++                EXPECT_LE(maximumError,1)<<"independent native texture/border reference, frame "<<frame;
++            }
 +            EXPECT_EQ(render(true,alpha),clean)<<"textured fill and border, thick "<<thick<<" alpha "<<alpha;
 +        }
 +    }
@@ -842,7 +849,7 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
 +        "shapecode_0_border_a=0.17\nshapecode_0_thickOutline=1\n"
 +        "shape_0_per_frame1=reg00=reg00+1;x=0.1+0.04*instance;y=0.4+0.005*instance;"
 +        "r=instance/20;g=1-r;b=0.2;r2=r;g2=g;b2=b;\n";
-+    const auto render=[&](bool detail,float alpha) {
++    const auto render=[&](bool detail,float alpha,std::vector<Image>* nativeImages=nullptr) {
 +        TestProjectM engine;engine.SetWindowSize(detail?192:96,detail?108:54);
 +        engine.SetLineReferenceSize(detail?128:0,detail?72:0);engine.SetFeedbackDetail(detail?alpha:-1);
 +        engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
@@ -854,9 +861,40 @@ diff --git a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp b/tests/libprojec
 +            engine.RenderFrame(m_framebuffer);
 +            EXPECT_EQ(libprojectM::FeedbackDetailTestAccess::Register(engine,0),20*frame);
 +            frames.push_back(ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::Feedback(engine)));
++            if(nativeImages) nativeImages->push_back(ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::NativeFeedback(engine)));
 +        }
 +        EXPECT_EQ(glGetError(),GL_NO_ERROR);return frames;
 +    };
 +    const auto authored=render(false,-1);ASSERT_GT(*std::max_element(authored.back().begin(),authored.back().end()),0);
-+    for(float alpha : {0.f,0.5f,1.f}) EXPECT_EQ(render(true,alpha),authored)<<"multi-batch recurrence, alpha "<<alpha;
++    std::vector<Image> nativeReference;render(true,-1,&nativeReference);
++    for(float alpha : {0.f,0.5f,1.f}) {
++        std::vector<Image> nativeImages;EXPECT_EQ(render(true,alpha,&nativeImages),authored)<<"multi-batch recurrence, alpha "<<alpha;
++        const auto& expected=nativeReference.front();const auto& result=nativeImages.front();
++        ASSERT_EQ(result.size(),expected.size());int maximumError=0;
++        for(size_t i=0;i<result.size();++i) maximumError=std::max(maximumError,std::abs(int(result[i])-int(expected[i])));
++        EXPECT_LE(maximumError,1)<<"all native batches must draw in independent native order, alpha "<<alpha;
++    }
++}
++
++TEST_F(FeedbackDiffusionRenderTest, VisibleGeometrySurvivesGainResizeAndReenable) {
++    const auto source=Preset("ret=float3(0,0,0);")+
++        "shapecode_0_enabled=1\nshapecode_0_sides=9\nshapecode_0_rad=0.3\n"
++        "shapecode_0_r=1\nshapecode_0_g=0.4\nshapecode_0_b=0.2\nshapecode_0_a=1\n"
++        "shapecode_0_r2=1\nshapecode_0_g2=0.4\nshapecode_0_b2=0.2\nshapecode_0_a2=1\n";
++    const auto load=[&](TestProjectM& engine) {
++        engine.SetPresetLocked(true);engine.SetHardCutEnabled(false);
++        std::istringstream input(source);engine.LoadPresetData(input,false);EXPECT_TRUE(engine.failure.empty())<<engine.failure;
++    };
++    TestProjectM engine;engine.SetWindowSize(126,96);engine.SetLineReferenceSize(42,32);engine.SetFeedbackDetail(0);load(engine);
++    const auto check=[&](int width,int height) {
++        engine.RenderFrame(m_framebuffer);
++        const auto actual=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::Feedback(engine));
++        TestProjectM reference;reference.SetWindowSize(width,height);reference.SetFeedbackDetail(-1);load(reference);reference.RenderFrame(m_framebuffer);
++        const auto expected=ReadFeedbackTexture(libprojectM::FeedbackDetailTestAccess::Feedback(reference));
++        ASSERT_GT(*std::max_element(expected.begin(),expected.end()),0);EXPECT_EQ(actual,expected);EXPECT_EQ(glGetError(),GL_NO_ERROR);
++    };
++    check(42,32);engine.SetFeedbackDetail(0.5f);check(42,32);
++    engine.SetWindowSize(192,108);engine.SetLineReferenceSize(128,72);check(96,54);
++    engine.SetFeedbackDetail(1);check(96,54);engine.SetFeedbackDetail(-1);engine.RenderFrame(m_framebuffer);
++    engine.SetFeedbackDetail(0);check(96,54);
 +}

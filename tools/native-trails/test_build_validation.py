@@ -18,6 +18,16 @@ class TransformTests(unittest.TestCase):
         self.assertNotIn('steady_clock::now()', changed)
         self.assertIn('lab::clock_seconds.load()', changed)
 
+    def test_worker_keeps_the_selected_native_abi(self):
+        source = (builder.ROOT / "tools/core-corpus/android-worker/app/build.gradle").read_text()
+        for abi in ("armeabi-v7a", "arm64-v8a"):
+            changed = builder.instrument_worker_abi(source, abi)
+            self.assertIn("ndk { abiFilters '" + abi + "' }", changed)
+            if abi == "armeabi-v7a":
+                self.assertNotIn("arm64-v8a", changed)
+        with self.assertRaises(ValueError):
+            builder.instrument_worker_abi(source + source, "armeabi-v7a")
+
     def test_invalid_abi_is_rejected_before_export(self):
         with tempfile.TemporaryDirectory() as temp:
             with self.assertRaisesRegex(ValueError, "Unsupported ABI"):
