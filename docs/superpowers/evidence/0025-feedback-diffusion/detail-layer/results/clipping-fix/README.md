@@ -80,7 +80,7 @@ The eight captured frames originate in the shared `lab/capture_frames.py`
 contract, embedded into the generated worker predicate and checked by the
 reader.
 
-The GPU check extracts the prototype's actual GLSL and executes 38 cases:
+The GPU check extracts the prototype's actual GLSL and executes 39 cases:
 RGBA8 black/white headroom, float output bounds and block means, bilinear
 reconstruction, retained sparse detail, and 32-frame colored feedback at scales
 2 and 3. The original shader fails the black/Medium case. Eight runner tests

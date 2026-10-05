@@ -214,7 +214,7 @@ costs do not measure this fix.
 
 Validation and quality assessment:
 
-- Execute `lab/check-combine.py --gles`: actual prototype shader, 38 GPU cases
+- Execute `lab/check-combine.py --gles`: actual prototype shader, 39 GPU cases
   at scales 2/3, RGBA8 storage, float range/means, retained detail and 32-frame
   colored feedback. The original shader fails the black/Medium regression.
 - Run the 68-preset screen for both Medium and High and inspect the three

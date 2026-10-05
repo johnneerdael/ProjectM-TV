@@ -202,6 +202,30 @@ static void ColoredFeedback(GLuint combine, GLuint down, int scale)
     if (glGetError() != GL_NO_ERROR) throw std::runtime_error("OpenGL error in colored feedback");
 }
 
+static void ZeroResidualAtWhite(GLuint combine, GLuint down)
+{
+    auto lowBytes = Solid(2, 128), highBytes = Solid(8, 85);
+    for (int channel = 0; channel < 3; ++channel) {
+        lowBytes[channel] = 255;
+        highBytes[4 + channel] = 0;
+        highBytes[5 * 4 + channel] = 170;
+    }
+    Target low(2, 1, lowBytes), warp(4, 2, highBytes), mean(2, 1, Solid(2, 0));
+    Target output(4, 2, {}, true);
+    glUseProgram(down); Bind(down, "src", 0, warp);
+    glUniform1i(glGetUniformLocation(down, "S"), 2); Draw(mean);
+    glUseProgram(combine); Bind(combine, "Lw", 0, low); Bind(combine, "Hw", 1, warp); Bind(combine, "D", 2, mean);
+    glUniform1f(glGetUniformLocation(combine, "alpha"), 1);
+    glUniform2f(glGetUniformLocation(combine, "native"), 4, 2); Draw(output);
+    std::vector<float> values(8 * 4);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, output.fbo);
+    glReadPixels(0, 0, 4, 2, GL_RGBA, GL_FLOAT, values.data());
+    // White pixels have exactly zero residual; only the +/-85/255 pair
+    // should bound the gain. Their available headroom permits visible detail.
+    if (values[5 * 4] - values[4] < 0.1f)
+        throw std::runtime_error("zero residual at white suppressed valid neighboring detail");
+}
+
 int main(int argc, char** argv)
 {
     try {
@@ -220,6 +244,7 @@ int main(int argc, char** argv)
             for (float alpha : {0.5f, 1.0f}) { NoClipping(combine, down, scale, alpha); ++cases; }
             ColoredFeedback(combine, down, scale); ++cases;
         }
+        ZeroResidualAtWhite(combine, down); ++cases;
         glDeleteProgram(combine); glDeleteProgram(down); glDeleteVertexArrays(1, &vao);
         std::cout << cases << " combine cases passed (RGBA8 storage, float range/mean, 32-frame colored feedback)\n";
     } catch (const std::exception& error) {

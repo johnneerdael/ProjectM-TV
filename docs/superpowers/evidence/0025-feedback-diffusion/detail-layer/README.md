@@ -27,7 +27,7 @@ added, but Medium/High perform additional neighborhood reads in combine.
 
 Run `python lab/check-combine.py --gles` from this directory, or pass the full
 script path from the repository root. The test extracts the actual GLSL from
-the prototype, links its ES 3.00 form and executes 38 GPU cases. Coverage
+the prototype, links its ES 3.00 form and executes 39 GPU cases. Coverage
 includes RGBA8 black/white headroom, unclamped float output range and block
 means, bilinear reconstruction, retained sparse detail, and 32 frames of
 colored feedback at scales 2 and 3. The original prototype fails on black at

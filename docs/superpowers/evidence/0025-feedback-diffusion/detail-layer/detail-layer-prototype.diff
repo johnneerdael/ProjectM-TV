@@ -19,7 +19,7 @@
  
  #include "Factory.hpp"
  #include "LineGeometry.hpp"
-@@ -80,6 +88,118 @@
+@@ -80,6 +88,120 @@
      m_finalComposite.CompileCompositeShader(m_state);
  }
  
@@ -95,7 +95,9 @@
 +      ivec2 q = cell + ivec2(i, j); vec4 b = Base(q); vec4 d = Band(q) - mean;
 +      vec4 positive = (vec4(1.0) - b) / max(d, vec4(1e-6));
 +      vec4 negative = b / max(-d, vec4(1e-6));
-+      gain = min(gain, mix(positive, negative, lessThan(d, vec4(0.0))));
++      // Zero residual consumes no headroom, even at an exactly white pixel.
++      vec4 limit = mix(vec4(alpha), positive, greaterThan(d, vec4(0.0)));
++      gain = min(gain, mix(limit, negative, lessThan(d, vec4(0.0))));
 +    }
 +    o += gain * (Band(p) - mean);
 +  }
@@ -138,7 +140,7 @@
  void MilkdropPreset::RenderFrame(const libprojectM::Audio::FrameAudioData& audioData, const Renderer::RenderContext& renderContext)
  {
      m_state.audioData = audioData;
-@@ -103,7 +223,7 @@
+@@ -103,7 +225,7 @@
  
      // Above the line reference size, the warp reads the previous frame through a small blur that gives
      // back the per-frame smoothing feedback presets get at the reference size (see FeedbackDiffusion.hpp).
@@ -147,7 +149,7 @@
                                             renderContext.lineReferenceWidth, renderContext.lineReferenceHeight) : 0.0f))
      {
          m_diffusionHoldsPreviousFrame = false;
-@@ -149,6 +269,45 @@
+@@ -149,6 +271,45 @@
      // here on, so this can happen before the warp: the warp and everything drawn on top of it
      // then go to the current framebuffer in one render pass. Not if the warp shader reads the
      // blur textures: it gets last frame's, as in projectM, so they are updated after the warp.
@@ -193,7 +195,7 @@
      auto const updateBlur = [this]() {
          const auto warpedImage = m_framebuffer.GetColorAttachmentTexture(m_previousFrameBuffer, 0);
          assert(warpedImage.get());
-@@ -156,7 +315,13 @@
+@@ -156,7 +317,13 @@
                                     LineScale(m_state.renderContext.viewportSizeX, m_state.renderContext.viewportSizeY,
                                               m_state.renderContext.lineReferenceWidth, m_state.renderContext.lineReferenceHeight));
      };
@@ -208,7 +210,7 @@
      {
          updateBlur();
      }
-@@ -178,7 +343,16 @@
+@@ -178,7 +345,16 @@
      }
  
      // Draw previous frame image warped via per-pixel mesh and warp shader
@@ -226,7 +228,7 @@
  
      if (writeMotionUV)
      {
-@@ -188,22 +362,97 @@
+@@ -188,22 +364,97 @@
          glDrawBuffers(2, buffers);
      }
  
@@ -325,7 +327,7 @@
  
      // Done in DrawSprites() in Milkdrop
      if (*m_perFrameContext.darken_center > 0)
-@@ -218,6 +467,34 @@
+@@ -218,6 +469,34 @@
          m_framebuffer.RemoveColorAttachment(m_currentFrameBuffer, 1);
      }
  
