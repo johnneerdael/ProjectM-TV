@@ -106,3 +106,14 @@ describe the unchanged shipped beta scorer and its 2.3.3 corpus provenance, so n
 runtime claims or scores were changed there. Analyzer README and this research
 plan now describe the superseding batch goal and seed policy. No docs-site source
 or release-tooling behavior changed.
+
+Two additional independently frozen 60-frame diagnostic controls localize the
+remaining case012 mismatch. A changing asymmetric gradient through GetBlur3
+has mean RGB8 error 0.2915 and maximum 2. The exact authored shape1 equations,
+33 instances and matching audio, isolated from feedback, have mean RGB8 error
+0.04631 and maximum 17 (local raster edges). Both use the unchanged published
+AAR and matching viewport. These controls did not reproduce a large orientation
+or random-order defect. Small-error amplification through authored feedback
+remains a hypothesis, not established root cause. Retain exact control source,
+frozen predictions and native hashes in
+`fixtures/visual-loop-feedback-localization-2026-10-05.json`.
