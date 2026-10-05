@@ -1,0 +1,1081 @@
+{
+  "round_manifest": {
+    "round": 2,
+    "created_utc": "2026-10-05T20:09:58.767925+00:00",
+    "model_commit": "180a6101366cb2715131242d4c3bba73b14701b7",
+    "source_modules": {
+      "tools/milk-analyzer/activity_model.py": "1955526da80753dd235a7a72353e0c4953624c234a1fd864dd8ef99c5dd7d052",
+      "tools/milk-analyzer/audience_export.py": "b31fb9538920a598aa649963652580d52740e526413b0c195d20fa1afe47486b",
+      "tools/milk-analyzer/audience_policy.py": "77c10ee184ae63943e4e42985123be566b0e4eb6a255bb627179b1d7fd6a0ba6",
+      "tools/milk-analyzer/audience_ranking.py": "1d103a2c12a16868bb4530654b94692f28437cd97ed69f51d404c60ad04a1ad4",
+      "tools/milk-analyzer/behavior_evidence.py": "faa9cac24539ceda0953cdbc52e5867949ca8837d72171ed0f6dc73544693c3b",
+      "tools/milk-analyzer/beta_collections.py": "8719e77c1cf196fc8206399281be45ba27597cfb8c9c89af141eea4d116d5692",
+      "tools/milk-analyzer/beta_export.py": "d65ca3d61c391bc1b2e681fd16fc566254898baba85dd8d52fd8438f44eca886",
+      "tools/milk-analyzer/beta_score.py": "c7179d0f1d17a23685f78c8f0f91b5d5b5d783f7e8467ba49da484ef08a834a4",
+      "tools/milk-analyzer/blur.py": "d4746f79931f3d5e2544eb6a9edb3dcecb7f17240a0a0fc2c554b5a076a16b3d",
+      "tools/milk-analyzer/builtin_wave.py": "a08d88b77804fc7613cc1334cf63634ee582ce53c1bbcc2b1b67f5af3c1df26c",
+      "tools/milk-analyzer/component_influence.py": "afe4d6e90351d2e5bc53b7cea209564c8a35949c8797ab902ebfbcda551b579c",
+      "tools/milk-analyzer/composite_mesh.py": "5e6a46d34a0649aaed744c41eae35b02d68d96ce0f69f794333d9e2c77042a1e",
+      "tools/milk-analyzer/core_backend.py": "469ee5c7db8ee3e10880dc055a2d4b850d752bad801476a59e23e023ea607be5",
+      "tools/milk-analyzer/core_corpus.py": "e27574606150f790ee51c2acdf9c79923c9b1039db0621c7ad5acb5cf2f39df6",
+      "tools/milk-analyzer/coverage_audit.py": "ac96551633dddf99991a2e479f868f9d8aaaee38693b3859ea5706642bbf82ca",
+      "tools/milk-analyzer/custom_wave.py": "be73539652f03901c2d1492eb8ac7944bbe86e980a4ff0193a36d132b5689e0d",
+      "tools/milk-analyzer/descriptors.py": "c74129000cd03b2123def6a4d9ff5308b48ba9a5aaca42fa222068ef87f1fa3f",
+      "tools/milk-analyzer/effect_bursts.py": "6f2396d6ec1901919a5494f011d12b92f7e329281c2313a15a1ae793f3769cf4",
+      "tools/milk-analyzer/equation_domains.py": "d63bdda59623dbe88fb970414a93ae37fffff0cb8400ea12d3f42ee4a18a56b7",
+      "tools/milk-analyzer/equation_loading.py": "e164850d796e51c69c0aaad9d668847b607b708c0577123fe8a8f2c75bfd7cd0",
+      "tools/milk-analyzer/feedback.py": "e698ff1fede1264970689c60129d2768c3b2d80a34628fbe52154ec22634b1c8",
+      "tools/milk-analyzer/feedback_field.py": "0ffa24c5eca22e188082436c237e2e04ab7c7ac8457ce598831fd48fef16a65e",
+      "tools/milk-analyzer/field_math.py": "712bfcae41b228e2b7941eaf599e6e76a8828eb08793497fd9e8151c8effdaf2",
+      "tools/milk-analyzer/fit_activity_model.py": "01a46f7f77d90a8866885e0d403b7699f1d666e73939504c15c73932179293aa",
+      "tools/milk-analyzer/forecast.py": "51de0aecb169c307d606c6dddfb88735b671670f4a16c14943d598240abbab7b",
+      "tools/milk-analyzer/frame_chain.py": "5f8e9c10bfb70f4f0a4fa5981d8ac174cf37c851e808129facb8e3937ff2e7e0",
+      "tools/milk-analyzer/gap_priority.py": "7843b151cf759496fcac8ba3fd9dea738a21abb87860a295d8861814ffdfdbf8",
+      "tools/milk-analyzer/generate_composite_adapter.py": "77ef0b11433501b5847bdd2635d814f71a07213474f7239d82eceac8d5fa39ca",
+      "tools/milk-analyzer/generate_random_adapter.py": "c5030a5b9d146ea17327ca0b8559e7f2324b47596360bd2faf65fd4660fe0acb",
+      "tools/milk-analyzer/generate_shader_adapter.py": "ff5b1a87e146807dceab7a29228999240b805a527b27a30399e44e67f08be5ae",
+      "tools/milk-analyzer/geometry.py": "15fab828160996974595e2dae39510df9ad6144d77704e81c4cf4f4c8f291991",
+      "tools/milk-analyzer/grid_math.py": "65b2229b55f2ee7d23cd686e30ecb1ff542c254250c73cbea3f0e6376a76c47c",
+      "tools/milk-analyzer/intensity_calibration.py": "388d215ed7a69891e085f6a3e9b17183fe993abd4b9c94ea05c2bb32ecf8551a",
+      "tools/milk-analyzer/intensity_evidence.py": "dead5392ae70e92f51a90a597e81820f3e04c0887750af8ad5af81edc170f7aa",
+      "tools/milk-analyzer/legacy_composite.py": "0730a1ab0831081ac1182b35b6b444ccd610dcd9a62ae5e9cae00bd907486fe7",
+      "tools/milk-analyzer/line_points.py": "555fb00edfccf752e3076b832fb823ad9ba6ead11ef18f77b727896fa5450671",
+      "tools/milk-analyzer/materials.py": "c0c198276f5dc5478170e513435bfe6eb05a32a18ad67743f0f4d9c1c1c766db",
+      "tools/milk-analyzer/motion_vectors.py": "f44cdfc8217c6696052711e8df0c5db1c05f4c3b3b47053a670d74fa3061410e",
+      "tools/milk-analyzer/noise_inputs.py": "d8dde19a07321dbb3ce78b31e1115e9e944fd3353ff35a11fd4f3a1bc590eb48",
+      "tools/milk-analyzer/pipeline_fields.py": "7dddfc67c6aad4b6e6d6593e38a0048d8c5e6839de66e657a0a01d4c7a638474",
+      "tools/milk-analyzer/primitives.py": "79100988fc2ac4ca70d34023f36754f8de9e9ad34a979a670ca50971efa8d552",
+      "tools/milk-analyzer/progress_report.py": "b01f72cd50c0edbdb0f1c8c45502fd5016e4610d21119188280f9ae16b4addc8",
+      "tools/milk-analyzer/quad_lines.py": "2221d6c8a0e9302d769763e530dd3589a0ab7fed5948d3c50f21b5e8825908e5",
+      "tools/milk-analyzer/random_binding_context.py": "45b43d08719dbdca6dbe7e64de962d43132a58a31369947c81ad85938ff0714c",
+      "tools/milk-analyzer/random_binding_contract.py": "8b8b97cebf78251227b3397784d59e6149bb59ace70e64a6d750950d8eac56fd",
+      "tools/milk-analyzer/sampling_policy.py": "c6e8767540704444fcada9a6b8d1c75da934bf13528c31b26abbf6b05aaab30f",
+      "tools/milk-analyzer/scan.py": "b1c953d0dd545e514a493c8c339be080ebf74d38870987e1deda00459fe158cd",
+      "tools/milk-analyzer/scene_draw.py": "6617be4631d4a750c6611dd6fe575df6ca9a9404fcfaaa3d14bdc7f8eb78a4d9",
+      "tools/milk-analyzer/scene_equations.py": "9fc6e3d03fd631eb00cad9e706a4cd999295e4ccdac3e1f9f95a666e83b09873",
+      "tools/milk-analyzer/scene_warp.py": "2d193f5499f7ff5dd813d3fa6a75c7c0ec7bc6c5260b9a67701183ee28561113",
+      "tools/milk-analyzer/score_audit.py": "1d4326a433949c5405b0e32ab8667c5f71f07f61b019d166fd8e7eb60a18e7d6",
+      "tools/milk-analyzer/scoring_context.py": "c93c721068c75acb32a69ef5f8da53530d1567be9a8f7cb7f2dd87d5d1c54fce",
+      "tools/milk-analyzer/shader_compat.py": "a51f0d7fb84ed6c484b2fbab3d3b22aa40c236bab862b58a89c124288aba1e99",
+      "tools/milk-analyzer/shader_fields.py": "dbd40b1e8ddd1cba6933f1598968213f9c433e88d8535cf25090a7106a4695fc",
+      "tools/milk-analyzer/shader_random.py": "72512ff72b2fdc033fdb1e7813abd725da1cf65af568b72f197f172d656c911c",
+      "tools/milk-analyzer/shader_uniforms.py": "4e303507e16e27cefad31f090b90f5d22de06f4bc4f37ab16ed1cb240c69952b",
+      "tools/milk-analyzer/source_bass.py": "df7b04726377beeb22e07f660d5ca2b3acfa790edd8fa75f283cefa2db293086",
+      "tools/milk-analyzer/source_context.py": "796a048fcba2996ac397be290ac27eed7c14bcf6b69837413cae5bcfe26279ea",
+      "tools/milk-analyzer/source_inventory.py": "b480521afb68cd3dfda3a4d97f9073f9d39a68bbb73a14838943d38a40007a01",
+      "tools/milk-analyzer/spatial.py": "e092f7f6445d43d8c7cd89ca5553002ce813b903ed8ed56fb4571d13084313ab",
+      "tools/milk-analyzer/stage_resolution.py": "3c70bacef514cccc35d180751dc54b830f02affb30a1b0a3ebe4a4fa23bbe837",
+      "tools/milk-analyzer/transport.py": "6c5cf734ff942277e7dc0e52108de150cec9b17e5f4c5c9a81a260b2844259de",
+      "tools/milk-analyzer/unorm_sampler.py": "1656f410d98858ac6fa2a046fb2b83662b3cccfa222232443be34d951ca77147"
+    },
+    "cpu_binaries": {
+      "milk-audio-inputs": "68c9e4e7a39c5116a060ea88c79e3400687c6ab97c88c2202123b5bd0a535b78",
+      "milk-composite-inputs": "708da1109d5dcf006cff3828213d133857ee033a757b8f26f2e14bfff09ba980",
+      "milk-image-inputs": "5a93d88479bd4afbe7404d49a68f5ba696d6f4540eb08c1fe0c1752d41f8fbca",
+      "milk-native-reader": "fc35104909ec550085795d38c1626c734e8645987cb4d4e7d8783e461e44acd2",
+      "milk-noise-inputs": "0dac60328aeeefc97d1a82295c92826eb7d419630635fb480ee1928397a7d8c6",
+      "milk-shader-random": "d053a36ab1c4d68d01d22caa5bba336927578f118ba74a9469270c7be7fb8e14",
+      "milk-shader-translate": "7d6aa206dd56f1a8a3a8da586f621da785a6bd631c0942979b0b929ab9a55bf8",
+      "milk-wave-inputs": "1c9a35930b2a100513c457dd5426578adf35e16c9734b1754c28743a10f621e4"
+    },
+    "artifact": {
+      "release": "v2.3.4",
+      "release_commit": "7f9e6bd64ee214b5a6e8862c4e3b5342d4a72962",
+      "aar_sha256": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+      "native_sha256": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+      "rendering_policy": "standard published capped AAR"
+    },
+    "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6",
+    "required_grade_each": 100,
+    "frames_each": 60,
+    "cases": [
+      {
+        "case": 13,
+        "preset": "Stahlregen - Eckshack's Eyeball (floater mix) (Plastic).milk",
+        "sha256": "629d13042f79eaa3280ae7daf6c80f06f1a0a7e9eaca6cebe44ae3c0d9a5f9e9"
+      },
+      {
+        "case": 14,
+        "preset": "repressed americans - gamer.milk",
+        "sha256": "db78c261cb8fa900ed880a2f5ef1f2825f60d5243fe2ca97256acdf7e3a73b1a"
+      },
+      {
+        "case": 15,
+        "preset": "A Remixed Digital Echasketch  Again 2 martin - no religion - Reaction in Color  - chastity belted radials.milk",
+        "sha256": "ff37e49a45b3d5ea8aa564ad9bba136bd47f183cf49da467a0d38a8e34d487a8"
+      }
+    ],
+    "model_mutation_allowed_after": "all three completed and assessed",
+    "latest_release_verification": {
+      "method": "GitHub visible releases/latest redirect and Latest badge via Chrome",
+      "url": "https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.3.4",
+      "release": "v2.3.4",
+      "commit": "7f9e6bd64ee214b5a6e8862c4e3b5342d4a72962",
+      "checked_utc": "2026-10-05T20:13:12.154504+00:00"
+    }
+  },
+  "result": {
+    "round": 2,
+    "status": "all_three_assessed",
+    "cases": [
+      {
+        "case": 13,
+        "grade": 92.5
+      },
+      {
+        "case": 14,
+        "grade": 100
+      },
+      {
+        "case": 15,
+        "grade": 82.5
+      }
+    ],
+    "perfect_count": 1,
+    "target_achieved": false,
+    "model_commit": "180a6101366cb2715131242d4c3bba73b14701b7",
+    "next": "Diagnose brightness/motion in13and composite hue initialization in15; retain14as unaffected control"
+  },
+  "cases": [
+    {
+      "case": 13,
+      "preset": "Stahlregen - Eckshack's Eyeball (floater mix) (Plastic).milk",
+      "sha256": "629d13042f79eaa3280ae7daf6c80f06f1a0a7e9eaca6cebe44ae3c0d9a5f9e9",
+      "prediction": {
+        "case": 13,
+        "preset": "Stahlregen - Eckshack's Eyeball (floater mix) (Plastic).milk",
+        "sha256": "629d13042f79eaa3280ae7daf6c80f06f1a0a7e9eaca6cebe44ae3c0d9a5f9e9",
+        "round": 2,
+        "frames": 60,
+        "frozen_utc": "2026-10-05T20:15:19.733079+00:00",
+        "claims": {
+          "structure": [
+            "A central rounded swirl grows from sparse white points into a broad cloudy disc.",
+            "Separate oval or crescent lobes sit outside the central disc, including upper-right and lower-left areas.",
+            "Soft plastic-like shading gives curved surfaces small white specular highlights.",
+            "The disc has a dark central recess and curved internal seams rather than dense straight-line mesh."
+          ],
+          "motion": [
+            "The main rounded form expands substantially through the two-second window.",
+            "Curved internal seams rotate/deform while the outer lobes drift around the centre.",
+            "Tracked median motion is about 0.13 viewport widths per second, with faster local highlights.",
+            "Movement is continuous across the window rather than repeated full-screen cuts."
+          ],
+          "colour": [
+            "Large unoccupied regions remain black; mean luma is about 0.119.",
+            "Most visible material is grey/white with subdued green, purple and pink tinting.",
+            "Small white highlights are substantially brighter than the central recess.",
+            "Coloured tinting strengthens over time, but mean saturation remains low, about 0.079."
+          ],
+          "flashing": [
+            "Zero coherent brightening transitions are predicted in these 60 frames.",
+            "Zero coherent darkening transitions are predicted in these 60 frames.",
+            "Maximum mean brightness jump is small, about 0.010.",
+            "Occasional local highlight changes affect much less than 20 percent of the screen."
+          ],
+          "feedback": [
+            "An initially sparse image accumulates into larger cloudy rounded surfaces.",
+            "Per-vertex warp is gated to a radial band, so deformation is spatially localized.",
+            "Blur gradients drive the composite bump lighting and sculpt the highlighted seams.",
+            "Retained structures persist between frames, producing layered surfaces and curved lobes."
+          ]
+        },
+        "reference_frames_seen": false,
+        "basis": "Authored source and frozen source-only mathematical forecast; no native case reference inspected",
+        "stochastic_limit": "Representative source random inputs; exact native realization not bound"
+      },
+      "seal": {
+        "prediction_sha256": "828b9d9a80af961133cf147275a5baa605feb6ab16175b41a966d3ed0534a19f",
+        "math_prediction_sha256": "b2c6608d466d53e92f1c5df3f0fa4bbe64f37e4d3c98f977b9f14d64261d820a",
+        "pixel_sha256": "f88b305fb045bfd0450fbb6b1006d9f1c55d2ccc8fb6bd50f3a4c744c6929d7f",
+        "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+        "reference_frames_seen": false,
+        "frozen_utc": "2026-10-05T20:15:19.733079+00:00",
+        "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+      },
+      "assessment": {
+        "round": 2,
+        "case": 13,
+        "agreement_points": 92.5,
+        "category_points": {
+          "structure": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "motion": [
+            5,
+            5,
+            2.5,
+            5
+          ],
+          "colour": [
+            2.5,
+            5,
+            5,
+            5
+          ],
+          "flashing": [
+            5,
+            5,
+            2.5,
+            5
+          ],
+          "feedback": [
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        "critical_contradictions": [],
+        "perfect": false,
+        "prediction_seal": {
+          "prediction_sha256": "828b9d9a80af961133cf147275a5baa605feb6ab16175b41a966d3ed0534a19f",
+          "math_prediction_sha256": "b2c6608d466d53e92f1c5df3f0fa4bbe64f37e4d3c98f977b9f14d64261d820a",
+          "pixel_sha256": "f88b305fb045bfd0450fbb6b1006d9f1c55d2ccc8fb6bd50f3a4c744c6929d7f",
+          "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T20:15:19.733079+00:00",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+        },
+        "evaluated_utc": "2026-10-05T20:17:51.371518+00:00",
+        "observations": [
+          "Rounded plastic swirl, outside lobes, black background and progressive accumulation match.",
+          "Source underpredicts mean brightness0.11885 versus native0.14144 and median tracked motion0.13055 versus0.17636.",
+          "No broad flashes matches0/0, but predicted peak luma jump0.01005 versus0.01237 remains partial.",
+          "Native central seam/recess is stronger earlier, although dominant geometry and progression agree."
+        ],
+        "grade_kind": "Frozen behavioural-claim grade; not calibrated perceptual probability or exact pixel score",
+        "model_unchanged_within_round": true
+      },
+      "source_descriptors": {
+        "schema_version": 1,
+        "basis": "source-only prediction",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.11884734739384537,
+          "mean_contrast": 0.12102011026193699,
+          "mean_saturation": 0.07905816373982474,
+          "mean_coloured_fraction": 0.25098017939814815,
+          "mean_effective_hue_bins": 2.423954468080305,
+          "temporal_effective_hue_bins": 4.745542170810808
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.010053122416138649,
+          "peak_brightness_change_area": 0.029920789930555556,
+          "peak_paired_luma_area_product": 0.00014989222159379601,
+          "peak_brightening_screen_area": 0.014567057291666666,
+          "peak_darkening_screen_area": 0.019558376736111112,
+          "peak_visible_brightening_fraction": 0.6862745098039216,
+          "peak_visible_darkening_fraction": 0.18947368421052632,
+          "peak_rgb_change_area": 0.037407769097222224,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.7368822920054426,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.008680555555555556,
+          "matched_brightness_change_p95": 0.14231256246566737,
+          "peak_matched_brightness_change_p95": 0.4128005802631378,
+          "peak_matched_brightening_screen_area": 0.0011121961805555555,
+          "peak_matched_darkening_screen_area": 0.0010850694444444445,
+          "mean_supported_area": 0.3907854615407251,
+          "median_speed_viewports_per_second": 0.1305466890335083,
+          "p95_speed_viewports_per_second": 0.579507303237915,
+          "mean_acceleration_viewports_per_second_squared": 0.52324489292626,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "native_descriptors": {
+        "schema_version": 1,
+        "basis": "observed published-core display",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.1414415278758194,
+          "mean_contrast": 0.13252860410138964,
+          "mean_saturation": 0.08567250931740204,
+          "mean_coloured_fraction": 0.2883807146990741,
+          "mean_effective_hue_bins": 2.628448726639255,
+          "temporal_effective_hue_bins": 4.835764094412521
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.012369883246719837,
+          "peak_brightness_change_area": 0.058783637152777776,
+          "peak_paired_luma_area_product": 0.0006193038552737562,
+          "peak_brightening_screen_area": 0.028727213541666668,
+          "peak_darkening_screen_area": 0.038872612847222224,
+          "peak_visible_brightening_fraction": 0.8387096774193549,
+          "peak_visible_darkening_fraction": 0.13675213675213677,
+          "peak_rgb_change_area": 0.07647026909722222,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.8331711871768693,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.016248914930555556,
+          "matched_brightness_change_p95": 0.1262557744979853,
+          "peak_matched_brightness_change_p95": 0.44726741313934326,
+          "peak_matched_brightening_screen_area": 0.0016547309027777778,
+          "peak_matched_darkening_screen_area": 0.001437717013888889,
+          "mean_supported_area": 0.40096672331096983,
+          "median_speed_viewports_per_second": 0.17636117339134216,
+          "p95_speed_viewports_per_second": 0.6409035146236419,
+          "mean_acceleration_viewports_per_second_squared": 0.6183684154682847,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "capture": {
+        "status": "captured",
+        "transport": "direct ADB shell plus bounded file readback",
+        "artifact": {
+          "release": "v2.3.4",
+          "release_commit": "7f9e6bd64ee214b5a6e8862c4e3b5342d4a72962",
+          "aar_sha256": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+          "native_sha256": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+          "rendering_policy": "standard published capped AAR"
+        },
+        "runtime_deployment": {
+          "serial": "emulator-5596",
+          "remote": "/data/local/tmp/projectmtv-predictor-loop-20261005",
+          "sha256": {
+            "core.aar": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+            "libprojectmtv.so": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+            "classes.dex": "3f93c1af10556e20dfd65f7dc3b60614e00cfe411ca8e40345036984c0abd9d1",
+            "libbackendclock.so": "2dda44fc8f68ad3ae86f6ea69a5f6e4613e015465d5e0c755610669669f22f76",
+            "input.f32": "45a3cd9d36f2aaaf04a2f69c2c7d484976b3248291bb6e21209942e5578b9d20"
+          }
+        },
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Stahlregen - Eckshack's Eyeball (floater mix) (Plastic).milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "rgba_sha256": "00a73e149e33f258fadddec6ceef97865e65a5afa5d631b12299b81cc895c869",
+        "rgb_sha256": "b9128b8d0d3889ff02b607758b8500d1e47da1c7c0dabee215c82fa5ecfd4f7d",
+        "prediction_seal": {
+          "prediction_sha256": "828b9d9a80af961133cf147275a5baa605feb6ab16175b41a966d3ed0534a19f",
+          "math_prediction_sha256": "b2c6608d466d53e92f1c5df3f0fa4bbe64f37e4d3c98f977b9f14d64261d820a",
+          "pixel_sha256": "f88b305fb045bfd0450fbb6b1006d9f1c55d2ccc8fb6bd50f3a4c744c6929d7f",
+          "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T20:15:19.733079+00:00",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+        },
+        "recorded_utc": "2026-10-05T20:17:07.130674+00:00"
+      }
+    },
+    {
+      "case": 14,
+      "preset": "repressed americans - gamer.milk",
+      "sha256": "db78c261cb8fa900ed880a2f5ef1f2825f60d5243fe2ca97256acdf7e3a73b1a",
+      "prediction": {
+        "case": 14,
+        "preset": "repressed americans - gamer.milk",
+        "sha256": "db78c261cb8fa900ed880a2f5ef1f2825f60d5243fe2ca97256acdf7e3a73b1a",
+        "round": 2,
+        "frames": 60,
+        "frozen_utc": "2026-10-05T20:15:19.739001+00:00",
+        "claims": {
+          "structure": [
+            "Most of the viewport stays black, with a few narrow coloured fragments.",
+            "Dark red, green and blue bead-like or segmented trails occur near the outer parts of the view.",
+            "Faint broad grey/coloured halos surround those small trails.",
+            "The active fragments change sides/positions while the centre remains mostly empty."
+          ],
+          "motion": [
+            "Some fragments move into and out of the edges, although most pixels remain dark.",
+            "Tracked median motion is very low, about 0.0066 viewport widths per second.",
+            "A small active subset can move much faster than that median.",
+            "Late in the window a brighter coloured patch develops near the right edge."
+          ],
+          "colour": [
+            "Overall brightness is extremely low; mean luma is about 0.010.",
+            "Red, green and blue components separate within the small moving trails.",
+            "Soft halos are dimmer and less saturated than the trail cores.",
+            "Most pixels remain black even when the late coloured patch becomes visible."
+          ],
+          "flashing": [
+            "Zero coherent brightening transitions are predicted.",
+            "Zero coherent darkening transitions are predicted.",
+            "Peak mean brightness jump is about 0.0025.",
+            "Brightness changes are localized, with peak brightness-change area about 1.7 percent."
+          ],
+          "feedback": [
+            "Warp samples colour channels at different zoom factors, splitting retained trails by channel.",
+            "A strong subtraction/decay suppresses most retained brightness.",
+            "Blur3 minus scaled main colour in the composite creates dim halo/edge regions.",
+            "Retained trails shift with slow zoom/rotation rather than filling the centre with a persistent tunnel."
+          ]
+        },
+        "reference_frames_seen": false,
+        "basis": "Authored source and frozen source-only mathematical forecast; no native case reference inspected",
+        "stochastic_limit": "Representative source random inputs; exact native realization not bound"
+      },
+      "seal": {
+        "prediction_sha256": "a285874ea0464a7700814946c64e6f5cb8363fa62a853282507097e4805eccf4",
+        "math_prediction_sha256": "7db8b9a7f1eb12a5442a1cc7488dcf2cc4718855f60086b3288cd379a78b73f8",
+        "pixel_sha256": "ccb6f3f15f397cd27196f623b2b743366ad017c503fd643b3a48cd957b6f1824",
+        "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+        "reference_frames_seen": false,
+        "frozen_utc": "2026-10-05T20:15:19.739001+00:00",
+        "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+      },
+      "assessment": {
+        "round": 2,
+        "case": 14,
+        "agreement_points": 100,
+        "category_points": {
+          "structure": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "motion": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "colour": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "flashing": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "feedback": [
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        "critical_contradictions": [],
+        "perfect": true,
+        "prediction_seal": {
+          "prediction_sha256": "a285874ea0464a7700814946c64e6f5cb8363fa62a853282507097e4805eccf4",
+          "math_prediction_sha256": "7db8b9a7f1eb12a5442a1cc7488dcf2cc4718855f60086b3288cd379a78b73f8",
+          "pixel_sha256": "ccb6f3f15f397cd27196f623b2b743366ad017c503fd643b3a48cd957b6f1824",
+          "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T20:15:19.739001+00:00",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+        },
+        "evaluated_utc": "2026-10-05T20:18:39.390393+00:00",
+        "observations": [
+          "The dark fragmented RGB trails, empty centre and later right-edge patch match in position and progression.",
+          "Luma0.01009/0.01017, coherent flashes0/0forboth, and peak jump0.002485/0.002507 agree closely.",
+          "Very low median motion0.00660/0.00719and moving-fragment tail1.53766/1.53703support the predicted motion behaviour.",
+          "No literal pixel or calibrated-probability claim follows from100behavioural points."
+        ],
+        "grade_kind": "Frozen behavioural-claim grade; not calibrated perceptual probability or exact pixel score",
+        "model_unchanged_within_round": true
+      },
+      "source_descriptors": {
+        "schema_version": 1,
+        "basis": "source-only prediction",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.010090533759406146,
+          "mean_contrast": 0.025168376522681987,
+          "mean_saturation": 0.08350181330364043,
+          "mean_coloured_fraction": 0.06615758825231481,
+          "mean_effective_hue_bins": 4.253839837813582,
+          "temporal_effective_hue_bins": 6.113063385327035
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.0024845381267368793,
+          "peak_brightness_change_area": 0.01708984375,
+          "peak_paired_luma_area_product": 2.4237783009084524e-05,
+          "peak_brightening_screen_area": 0.012234157986111112,
+          "peak_darkening_screen_area": 0.006293402777777778,
+          "peak_visible_brightening_fraction": 0.048209513629075364,
+          "peak_visible_darkening_fraction": 0.044045994932761644,
+          "peak_rgb_change_area": 0.06529405381944445,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.6031782960544957,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.9322033898305084,
+          "peak_untracked_brightness_change_screen_area": 0.010579427083333334,
+          "matched_brightness_change_p95": 0.020880323462188245,
+          "peak_matched_brightness_change_p95": 0.022258974611759186,
+          "peak_matched_brightening_screen_area": 0.0,
+          "peak_matched_darkening_screen_area": 0.0,
+          "mean_supported_area": 0.14513987531565659,
+          "median_speed_viewports_per_second": 0.006597657687962055,
+          "p95_speed_viewports_per_second": 1.537662899494171,
+          "mean_acceleration_viewports_per_second_squared": 0.06939203614555359,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "native_descriptors": {
+        "schema_version": 1,
+        "basis": "observed published-core display",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.010172133013353839,
+          "mean_contrast": 0.02526465356737996,
+          "mean_saturation": 0.08325511039292906,
+          "mean_coloured_fraction": 0.06652696397569445,
+          "mean_effective_hue_bins": 4.296405010271834,
+          "temporal_effective_hue_bins": 6.115986239895944
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.002507201861590147,
+          "peak_brightness_change_area": 0.017225477430555556,
+          "peak_paired_luma_area_product": 2.4406755509668678e-05,
+          "peak_brightening_screen_area": 0.012315538194444444,
+          "peak_darkening_screen_area": 0.006537543402777778,
+          "peak_visible_brightening_fraction": 0.04828246304370946,
+          "peak_visible_darkening_fraction": 0.04683249125534396,
+          "peak_rgb_change_area": 0.06561957465277778,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.6045707605040155,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.9322033898305084,
+          "peak_untracked_brightness_change_screen_area": 0.0107421875,
+          "matched_brightness_change_p95": 0.020622046291828157,
+          "peak_matched_brightness_change_p95": 0.022159544751048088,
+          "peak_matched_brightening_screen_area": 0.0,
+          "peak_matched_darkening_screen_area": 0.0,
+          "mean_supported_area": 0.14634479561237376,
+          "median_speed_viewports_per_second": 0.007193076424300671,
+          "p95_speed_viewports_per_second": 1.537031650543213,
+          "mean_acceleration_viewports_per_second_squared": 0.0756825213123486,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "capture": {
+        "status": "captured",
+        "transport": "direct ADB shell plus bounded file readback",
+        "artifact": {
+          "release": "v2.3.4",
+          "release_commit": "7f9e6bd64ee214b5a6e8862c4e3b5342d4a72962",
+          "aar_sha256": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+          "native_sha256": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+          "rendering_policy": "standard published capped AAR"
+        },
+        "runtime_deployment": {
+          "serial": "emulator-5596",
+          "remote": "/data/local/tmp/projectmtv-predictor-loop-20261005",
+          "sha256": {
+            "core.aar": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+            "libprojectmtv.so": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+            "classes.dex": "3f93c1af10556e20dfd65f7dc3b60614e00cfe411ca8e40345036984c0abd9d1",
+            "libbackendclock.so": "2dda44fc8f68ad3ae86f6ea69a5f6e4613e015465d5e0c755610669669f22f76",
+            "input.f32": "45a3cd9d36f2aaaf04a2f69c2c7d484976b3248291bb6e21209942e5578b9d20"
+          }
+        },
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "repressed americans - gamer.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "rgba_sha256": "13a9d5f5b1c8a53922ba8c76e77caa6f76f4ebb47b4f313bcd5abd81e23dcc0c",
+        "rgb_sha256": "dc6cd1631adbcd45927f17df1aa0d02ab466146e83499b40b2df116344d6a365",
+        "prediction_seal": {
+          "prediction_sha256": "a285874ea0464a7700814946c64e6f5cb8363fa62a853282507097e4805eccf4",
+          "math_prediction_sha256": "7db8b9a7f1eb12a5442a1cc7488dcf2cc4718855f60086b3288cd379a78b73f8",
+          "pixel_sha256": "ccb6f3f15f397cd27196f623b2b743366ad017c503fd643b3a48cd957b6f1824",
+          "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T20:15:19.739001+00:00",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+        },
+        "recorded_utc": "2026-10-05T20:18:10.150169+00:00"
+      }
+    },
+    {
+      "case": 15,
+      "preset": "A Remixed Digital Echasketch  Again 2 martin - no religion - Reaction in Color  - chastity belted radials.milk",
+      "sha256": "ff37e49a45b3d5ea8aa564ad9bba136bd47f183cf49da467a0d38a8e34d487a8",
+      "prediction": {
+        "case": 15,
+        "preset": "A Remixed Digital Echasketch  Again 2 martin - no religion - Reaction in Color  - chastity belted radials.milk",
+        "sha256": "ff37e49a45b3d5ea8aa564ad9bba136bd47f183cf49da467a0d38a8e34d487a8",
+        "round": 2,
+        "frames": 60,
+        "frozen_utc": "2026-10-05T20:15:19.744253+00:00",
+        "claims": {
+          "structure": [
+            "Four rounded wrinkled clusters form a mirrored two-by-two arrangement.",
+            "Horizontal dark slots with bright rims separate the clusters and appear above/below them.",
+            "The arrangement is mirrored about both central axes.",
+            "Later frames add thin horizontal/vertical straight boundaries around the textured clusters."
+          ],
+          "motion": [
+            "Fine curled/rippled details evolve within the four clusters.",
+            "The broad mirrored arrangement stays recognizable while slot/rim details build up.",
+            "Median tracked motion is low, about 0.010 viewport widths per second.",
+            "Movement is smooth within this quiet two-second window rather than abrupt whole-screen replacement."
+          ],
+          "colour": [
+            "Deep red and purple backgrounds support saturated pink/purple/red/orange ridges.",
+            "The left side tends warmer while the right side tends purple/blue in this declared hue realization.",
+            "Small ridges and slot rims carry brighter near-white highlights.",
+            "Overall luma is low, about 0.101, while saturation is high, about 0.797."
+          ],
+          "flashing": [
+            "Zero coherent brightening transitions are predicted.",
+            "Zero coherent darkening transitions are predicted.",
+            "Peak mean brightness jump is about 0.0066.",
+            "Local sparkle/edge changes occur while broad brightness remains steady."
+          ],
+          "feedback": [
+            "Mirrored composite UV coordinates create the fourfold arrangement from retained material.",
+            "Noise and image gradients perturb feedback sampling, creating organic wrinkled detail.",
+            "Blur-based normal shading emphasizes curling surfaces and ridges.",
+            "Motion-vector/drawn straight marks coexist with organic feedback texture late in the window."
+          ]
+        },
+        "reference_frames_seen": false,
+        "basis": "Authored source and frozen source-only mathematical forecast; no native case reference inspected",
+        "stochastic_limit": "Representative source random inputs; exact native realization not bound"
+      },
+      "seal": {
+        "prediction_sha256": "05818e6b89f1ffc7f46274830b658b624f64f3bd371d93135c6587e7bf1d6d5c",
+        "math_prediction_sha256": "f8edbd5a8b333e585a51e854c4d38ef5fc03a139f30d8e0fdff5dad66ef849bd",
+        "pixel_sha256": "b99f7f83ef181f1e2b2cd3ed11a6a252413e2905235ea47232680a425103a5f1",
+        "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+        "reference_frames_seen": false,
+        "frozen_utc": "2026-10-05T20:15:19.744253+00:00",
+        "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+      },
+      "assessment": {
+        "round": 2,
+        "case": 15,
+        "agreement_points": 82.5,
+        "category_points": {
+          "structure": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "motion": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "colour": [
+            0,
+            0,
+            5,
+            0
+          ],
+          "flashing": [
+            5,
+            5,
+            2.5,
+            5
+          ],
+          "feedback": [
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        "critical_contradictions": [],
+        "perfect": false,
+        "prediction_seal": {
+          "prediction_sha256": "05818e6b89f1ffc7f46274830b658b624f64f3bd371d93135c6587e7bf1d6d5c",
+          "math_prediction_sha256": "f8edbd5a8b333e585a51e854c4d38ef5fc03a139f30d8e0fdff5dad66ef849bd",
+          "pixel_sha256": "b99f7f83ef181f1e2b2cd3ed11a6a252413e2905235ea47232680a425103a5f1",
+          "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T20:15:19.744253+00:00",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+        },
+        "evaluated_utc": "2026-10-05T20:19:45.033149+00:00",
+        "observations": [
+          "Fourfold wrinkled clusters, dark slots, growing rims and straight late marks match the spatial arrangement and progression.",
+          "Palette prediction fails: source red/purple versus native cyan/green/yellow; source luma0.10144versusnative0.26342.",
+          "Source uses representative zero hue offsets; actual composite hue initialization/binding must be diagnosed.",
+          "No coherent broad flashes agrees0/0; peak jump0.006625/0.008912remains partial.",
+          "Low tracked median motion0.01001/0.00903supports the slow movement claim."
+        ],
+        "grade_kind": "Frozen behavioural-claim grade; not calibrated perceptual probability or exact pixel score",
+        "model_unchanged_within_round": true
+      },
+      "source_descriptors": {
+        "schema_version": 1,
+        "basis": "source-only prediction",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.10144163792332013,
+          "mean_contrast": 0.06551363818968335,
+          "mean_saturation": 0.7966900895039241,
+          "mean_coloured_fraction": 0.9752201786747684,
+          "mean_effective_hue_bins": 4.528197152282133,
+          "temporal_effective_hue_bins": 4.641825967889248
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.006624960340559483,
+          "peak_brightness_change_area": 0.030653211805555556,
+          "peak_paired_luma_area_product": 0.00016749302944339838,
+          "peak_brightening_screen_area": 0.017279730902777776,
+          "peak_darkening_screen_area": 0.026665581597222224,
+          "peak_visible_brightening_fraction": 0.017879697981867684,
+          "peak_visible_darkening_fraction": 0.027575179533213645,
+          "peak_rgb_change_area": 0.06100802951388889,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.7374042230147265,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.8813559322033898,
+          "peak_untracked_brightness_change_screen_area": 0.029378255208333332,
+          "matched_brightness_change_p95": 0.024946362525224686,
+          "peak_matched_brightness_change_p95": 0.03301786258816719,
+          "peak_matched_brightening_screen_area": 0.0009494357638888889,
+          "peak_matched_darkening_screen_area": 0.0006781684027777778,
+          "mean_supported_area": 0.7773030598958333,
+          "median_speed_viewports_per_second": 0.010014258325099945,
+          "p95_speed_viewports_per_second": 0.09199046380817888,
+          "mean_acceleration_viewports_per_second_squared": 0.010417649152117306,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "native_descriptors": {
+        "schema_version": 1,
+        "basis": "observed published-core display",
+        "appearance_accuracy_verified": false,
+        "frames_measured": 60,
+        "warmup_frames": 0,
+        "settings": {
+          "hue_bins": 12,
+          "value_floor": 0.05,
+          "saturation_floor": 0.15,
+          "brightness_jump": 0.1,
+          "rgb_jump": 0.1,
+          "coherent_area": 0.2,
+          "motion_min_contrast": 0.02,
+          "flow_consistency_pixels": 0.5,
+          "flow_residual_levels": 20,
+          "motion_support_pixels": 12
+        },
+        "colour": {
+          "mean_luma": 0.2634227762619654,
+          "mean_contrast": 0.12384490420420964,
+          "mean_saturation": 0.7122858474651973,
+          "mean_coloured_fraction": 0.982546657986111,
+          "mean_effective_hue_bins": 4.065178234871329,
+          "temporal_effective_hue_bins": 4.238547072203339
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.008911567740142345,
+          "peak_brightness_change_area": 0.036566840277777776,
+          "peak_paired_luma_area_product": 0.0003258678741783822,
+          "peak_brightening_screen_area": 0.023057725694444444,
+          "peak_darkening_screen_area": 0.023763020833333332,
+          "peak_visible_brightening_fraction": 0.02343405381561535,
+          "peak_visible_darkening_fraction": 0.024132231404958678,
+          "peak_rgb_change_area": 0.06081814236111111,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.4513116077426999,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.9830508474576272,
+          "peak_untracked_brightness_change_screen_area": 0.032172309027777776,
+          "matched_brightness_change_p95": 0.04391610380262136,
+          "peak_matched_brightness_change_p95": 0.05107269063591957,
+          "peak_matched_brightening_screen_area": 0.0013292100694444445,
+          "peak_matched_darkening_screen_area": 0.0011393229166666667,
+          "mean_supported_area": 0.6813539234614463,
+          "median_speed_viewports_per_second": 0.009025938343256712,
+          "p95_speed_viewports_per_second": 0.07176296152174473,
+          "mean_acceleration_viewports_per_second_squared": 0.0070059127869242415,
+          "mean_warp_query_displacement": null
+        },
+        "structure": {
+          "fractal": null
+        },
+        "bass_response": null,
+        "mood_assignment": null,
+        "aggregation": {
+          "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+          "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+          "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+          "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+        },
+        "limitations": [
+          "Motion is an estimator with incomplete texture/correspondence support",
+          "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+          "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+          "Fractal structure, causal bass response and audience thresholds need separate evidence"
+        ]
+      },
+      "capture": {
+        "status": "captured",
+        "transport": "direct ADB shell plus bounded file readback",
+        "artifact": {
+          "release": "v2.3.4",
+          "release_commit": "7f9e6bd64ee214b5a6e8862c4e3b5342d4a72962",
+          "aar_sha256": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+          "native_sha256": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+          "rendering_policy": "standard published capped AAR"
+        },
+        "runtime_deployment": {
+          "serial": "emulator-5596",
+          "remote": "/data/local/tmp/projectmtv-predictor-loop-20261005",
+          "sha256": {
+            "core.aar": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+            "libprojectmtv.so": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+            "classes.dex": "3f93c1af10556e20dfd65f7dc3b60614e00cfe411ca8e40345036984c0abd9d1",
+            "libbackendclock.so": "2dda44fc8f68ad3ae86f6ea69a5f6e4613e015465d5e0c755610669669f22f76",
+            "input.f32": "45a3cd9d36f2aaaf04a2f69c2c7d484976b3248291bb6e21209942e5578b9d20"
+          }
+        },
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "A Remixed Digital Echasketch  Again 2 martin - no religion - Reaction in Color  - chastity belted radials.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "rgba_sha256": "d14e79a9529171d9ca1c08b8946e826cd67d20f9f4d163a6c8ff6dfdc0764d37",
+        "rgb_sha256": "77794daff26a574d4a006344f74a36eebf16524d4c672b37c666630ebe883a15",
+        "prediction_seal": {
+          "prediction_sha256": "05818e6b89f1ffc7f46274830b658b624f64f3bd371d93135c6587e7bf1d6d5c",
+          "math_prediction_sha256": "f8edbd5a8b333e585a51e854c4d38ef5fc03a139f30d8e0fdff5dad66ef849bd",
+          "pixel_sha256": "b99f7f83ef181f1e2b2cd3ed11a6a252413e2905235ea47232680a425103a5f1",
+          "round_manifest_sha256": "c0f60e38a6c4056c3c66c50f87abb3365df25bd7c047999f8fa45cfa358587ed",
+          "reference_frames_seen": false,
+          "frozen_utc": "2026-10-05T20:15:19.744253+00:00",
+          "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6"
+        },
+        "recorded_utc": "2026-10-05T20:18:59.578453+00:00"
+      }
+    }
+  ],
+  "case015_repeat": {
+    "mean_rgb8_error": 37.7914507077064,
+    "max_rgb8_error": 255,
+    "native_repeat_rgba_sha256": "5d330d2f2e15eb2ab5980ae4cbc09f001f78646f80a909180e1e1cb9ee05deac",
+    "same_source_pcm_clock_and_runtime": true,
+    "random_device_hue_offsets_unbound": true
+  },
+  "gap_attribution": {
+    "case013": "Brightness/motion underestimate; root cause not established",
+    "case015": "Unbound production random_device hue offsets versus source offsets0; native reload demonstrates palette variability"
+  },
+  "retrospective_changes_to_frozen_predictions": false
+}

@@ -128,3 +128,16 @@ and peak luma jump 0.8194 versus 0.8207. Mean motion is 0.2392 versus 0.2297.
 Later contours still differ; do not grant fresh-case credit to these diagnostics.
 The exact native preset repeat is pixel-identical on all 60 frames. Larger-than-
 reference canvases, antialiasing and motion-vector quads remain explicit gaps.
+
+Round002 (cases013–015) completed under unchanged model180a6101: 92.5,100,82.5.
+All source predictions/descriptions were sealed before native capture. The latest
+GitHub release page reconfirmed2.3.4 and the live guest artifact hashes matched.
+Case013 underpredicts brightness and motion; retain the gap without an invented
+root cause. Case015 gets the fourfold arrangement and movement but misses palette
+and brightness. A native reload changes cyan/green/yellow into red/purple under
+the same file/PCM/clock. PresetState initializes composite hue offsets from
+random_device; the source driver supplied zeros. This is an unbound-input issue,
+not proof of a shader operator bug. Preserve the original grade; no retrospective
+palette relabelling or native-pixel fitting is permitted. Next work: represent
+native hue realization/uncertainty correctly, and isolate case013 texture/feedback.
+Evidence: `fixtures/visual-loop-round002-2026-10-05.json`.
