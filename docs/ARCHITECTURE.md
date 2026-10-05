@@ -219,7 +219,7 @@ Saved resolution preferences retain the numeric migration: old 1440/2160 values 
 | Risk | Likelihood | Mitigation |
 |---|---|---|
 | Black detector skips a legitimately very dark preset | Low (off by default since 1.9) | Only when enabled, only while audio plays, 5 consecutive samples; *Reset* restores all |
-| Memory limit too strict on a device with plenty of free RAM, or too loose once textures are loaded | Medium | Estimates from one SHIELD run; *Memory limit › Off*; `onTrimMemory` lowers further at runtime; confirm with the next diagnostics run |
+| Live render-footprint/reserve estimates are too conservative or miss driver resource costs | Medium | Validate actual Auto sizes, memory headroom and trails/transition workloads. Review allocation settings atomically, preserve resident credit for reductions, and lower under pressure; no manual RAM toggle remains |
 | `glCopyTexImage2D` from the window is slow or unsupported on a driver | Low | Only on switch frames; any GL error falls back to classic; *Transitions › Classic* |
 | Two heavy presets do not fit in a frame on the CPU even with the outgoing one at half rate | Medium (preset-dependent) | Such blends still dip (the SHIELD: 15–30 fps for the heaviest pairs). Since 1.9.16 custom shapes are drawn in batches (patch 0006, +74–93% fps on shape-heavy presets); waveform-heavy presets are limited by the projectm-eval interpreter |
 | The texture pool keeps the discarded preset's frame buffer textures (patch 0007; up to 48 MB, typically 16 MB at 720p) | Low | Only while at least 20% of RAM is free and no pressure pause runs; emptied at the first `onTrimMemory`; reused textures are cleared first, so rendering is identical (verified on Mesa) |
