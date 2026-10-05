@@ -43,6 +43,7 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
     private long fpsWindowStart;
     private int framesInWindow;
     private long lastRenderedFrameSerial;
+    private long fpsWindowGeneration;
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -59,9 +60,8 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             long generation = ProjectMJNI.requireRenderBudget();
             ((BudgetStatsListener) listener).onRenderBudgetRequested(generation);
         }
-        fpsWindowStart = System.nanoTime();
-        framesInWindow = 0;
-        lastRenderedFrameSerial = ProjectMJNI.getRenderedFrameSerial();
+        resetFrameRateWindow(System.nanoTime(), ProjectMJNI.getRenderedFrameSerial(),
+                ProjectMJNI.getCompletedRenderBudgetGeneration());
     }
 
     @Override
@@ -70,9 +70,8 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
         surfaceWidth = width;
         surfaceHeight = height;
         ProjectMJNI.onSurfaceChanged(width, height);
-        fpsWindowStart = System.nanoTime();
-        framesInWindow = 0;
-        lastRenderedFrameSerial = ProjectMJNI.getRenderedFrameSerial();
+        resetFrameRateWindow(System.nanoTime(), ProjectMJNI.getRenderedFrameSerial(),
+                ProjectMJNI.getCompletedRenderBudgetGeneration());
     }
 
     @Override
@@ -86,18 +85,13 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
             if (!first) listener.onPresetChanged();
         }
 
-        long serial = ProjectMJNI.getRenderedFrameSerial();
-        framesInWindow += (int) Math.max(0, serial - lastRenderedFrameSerial);
-        lastRenderedFrameSerial = serial;
-        long now = System.nanoTime();
-        long elapsed = now - fpsWindowStart;
-        if (elapsed >= 1_000_000_000L) {
-            currentFps = framesInWindow * 1e9f / elapsed;
-            framesInWindow = 0;
-            fpsWindowStart = now;
+        long completedGeneration = ProjectMJNI.getCompletedRenderBudgetGeneration();
+        float sample = sampleRenderedFrameRate(System.nanoTime(), ProjectMJNI.getRenderedFrameSerial(), completedGeneration);
+        if (!Float.isNaN(sample)) {
+            currentFps = sample;
             if (listener instanceof BudgetStatsListener) {
                 ((BudgetStatsListener) listener).onBudgetFpsSample(currentFps,
-                        ProjectMJNI.getCompletedRenderBudgetGeneration(), surfaceWidth, surfaceHeight);
+                        fpsWindowGeneration, surfaceWidth, surfaceHeight);
             } else listener.onFpsSample(currentFps);
             // Machine-readable line for tools/tv-diagnostics.sh (cheap: once every 5 s).
             if (--statsCountdown <= 0) {
@@ -106,6 +100,30 @@ public class VisualizerRenderer implements GLSurfaceView.Renderer {
                         currentFps, surfaceWidth, surfaceHeight, ProjectMJNI.getAudioLevel()));
             }
         }
+    }
+
+    /** Deterministic sampling boundary; generation ownership is supplied by the completed native draw. */
+    float sampleRenderedFrameRate(long now, long serial, long generation) {
+        if (generation != fpsWindowGeneration) {
+            resetFrameRateWindow(now, serial, generation);
+            return Float.NaN;
+        }
+        framesInWindow += (int) Math.max(0, serial - lastRenderedFrameSerial);
+        lastRenderedFrameSerial = serial;
+        long elapsed = now - fpsWindowStart;
+        if (elapsed < 1_000_000_000L) return Float.NaN;
+        float sample = framesInWindow * 1e9f / elapsed;
+        framesInWindow = 0;
+        fpsWindowStart = now;
+        return sample;
+    }
+
+    private void resetFrameRateWindow(long now, long serial, long generation) {
+        fpsWindowStart = now;
+        framesInWindow = 0;
+        lastRenderedFrameSerial = serial;
+        fpsWindowGeneration = generation;
+        currentFps = 0;
     }
 
     /** Must run on the GL thread (use GLSurfaceView.queueEvent). */
