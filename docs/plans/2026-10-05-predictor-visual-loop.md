@@ -58,3 +58,12 @@ unassessed by this deliberately shortened window.
 Checkpoint update: four short-window passes now recorded (100,90,97.5,100).
 Case004retains a flash-event-count miss; case005shows close broad colour, glow and
 flash correspondence. Current goal remains incomplete at4/10.
+
+
+## Critical failure and required repair gate
+
+Case008failed on deterministic trajectories/layout; broad theme agreement was
+insufficient. User instruction: before any fresh run, fix the gap and retest that
+exact preset to90or higher. The512-point/resampling correction passes24controls
+and the isolated diagnostic retest scores100. Preserve before/after artifacts;
+restart fresh acceptance at0/10from case009. No diagnostic rerun counts as fresh.

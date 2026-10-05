@@ -115,29 +115,30 @@ json executeEquations(const json& request) {
             double requested=frameValue("samples");
             if(!std::isfinite(requested)||requested<INT32_MIN||requested>INT32_MAX)throw std::runtime_error("custom wave sample count domain unresolved");
             bool spectrum=wave.at("spectrum").get<bool>();int maximum=spectrum?512:480;
-            int count=std::min(maximum,static_cast<int>(requested));
+            int count=std::min(512,std::max(0,static_cast<int>(requested)));
             json group={{"sample_count",count},{"points",json::array()}};
             if(count<2){result["steps"].push_back(group);continue;}
             auto left=wave.at("left").get<std::vector<float>>(),right=wave.at("right").get<std::vector<float>>();
             if(left.size()!=maximum||right.size()!=maximum)throw std::runtime_error("custom wave native audio array size mismatch");
             for(float value:left)if(!std::isfinite(value))throw std::runtime_error("nonfinite custom wave audio");
             for(float value:right)if(!std::isfinite(value))throw std::runtime_error("nonfinite custom wave audio");
-            int separation=wave.at("separation").get<int>();
-            int offset1=spectrum?0:(maximum-count)/2-separation/2;
-            int offset2=spectrum?0:(maximum-count)/2+separation/2;
-            int64_t spectrumSpan=static_cast<int64_t>(maximum)-separation;
-            if(spectrum&&(spectrumSpan<INT32_MIN||spectrumSpan>INT32_MAX))throw std::runtime_error("custom wave spectrum span overflow");
-            float stride=spectrum?static_cast<float>(spectrumSpan)/count:1.f;
+            // ProjectM-TV current CustomWaveform::Draw uses up to512 points,
+            // independent of its480-waveform/512-spectrum input length. It
+            // clamps separation for spectrum trimming; oscilloscope mode
+            // ignores separation and upsamples when more than480 are requested.
+            int separation=std::min(count-1,std::max(0,wave.at("separation").get<int>()));
+            float stride=spectrum?static_cast<float>(maximum-separation)/count:
+                count>maximum?static_cast<float>(maximum)/count:1.f;
             float mix1=std::pow(wave.at("smoothing").get<float>()*.98f,.5f),mix2=1.f-mix1;
             float multiplier=wave.at("scaling").get<float>()*wave.at("preset_wave_scale").get<float>()*(spectrum?.15f:.004f);
             if(!std::isfinite(stride)||!std::isfinite(mix1)||!std::isfinite(multiplier))throw std::runtime_error("custom wave audio domain unresolved");
             auto read=[&](const std::vector<float>& data,int index){if(index<0||index>=maximum)throw std::runtime_error("custom wave audio index out of bounds");return data[index];};
-            std::vector<float> smoothL(count),smoothR(count);smoothL[0]=read(left,offset1);smoothR[0]=read(right,offset2);
+            std::vector<float> smoothL(count),smoothR(count);smoothL[0]=read(left,0);smoothR[0]=read(right,0);
             for(int i=1;i<count;++i) {
                 float coordinate=static_cast<float>(i)*stride;
                 if(!std::isfinite(coordinate)||static_cast<double>(coordinate)<INT32_MIN||static_cast<double>(coordinate)>INT32_MAX)throw std::runtime_error("custom wave audio index domain unresolved");
-                smoothL[i]=read(left,static_cast<int>(coordinate)+offset1)*mix2+smoothL[i-1]*mix1;
-                smoothR[i]=read(right,static_cast<int>(coordinate)+offset2)*mix2+smoothR[i-1]*mix1;
+                smoothL[i]=read(left,static_cast<int>(coordinate))*mix2+smoothL[i-1]*mix1;
+                smoothR[i]=read(right,static_cast<int>(coordinate))*mix2+smoothR[i-1]*mix1;
             }
             for(int i=count-2;i>=0;--i){smoothL[i]=smoothL[i]*mix2+smoothL[i+1]*mix1;smoothR[i]=smoothR[i]*mix2+smoothR[i+1]*mix1;}
             float sampleScale=1.f/static_cast<float>(count-1);

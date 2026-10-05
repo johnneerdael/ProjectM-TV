@@ -256,3 +256,14 @@ grades. Earlier540-frame observations remain diagnostics. The committed compact
 progress fixture preserves both original predictions, independent native
 measurements, numerical descriptors, misses and the profile change. Raw frames
 remain local; the final ten-case gate is not achieved yet.
+
+
+The original short-window streak later failed on Tripgnosis - Astral Calculations:
+its line trajectories/feedback layout diverged despite broad descriptor agreement.
+The acceptance streak reset to0. The CPU custom-wave adapter had capped waveform
+points at480and centred/offset audio reads, while current core draws up to512points
+and resamples480inputs without waveform separation. Recurrent per-point state
+therefore missed32updates per wave/frame. The repaired same-preset diagnostic
+retest passes the user-required90gate with100behavioural-rubric points; it earns
+no fresh streak credit.24focused controls pass. A static config census identifies
+3261candidate presets, not3261certified visual defects. See the repair fixture.

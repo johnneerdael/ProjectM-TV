@@ -10,10 +10,32 @@ def audio_frames():
 
 
 class CustomWaveSceneTest(unittest.TestCase):
-    def test_invalid_separation_does_not_read_outside_native_audio(self):
-        source=native('wavecode_0_enabled=1\nwavecode_0_samples=512\nwavecode_0_sep=10\n')
-        with self.assertRaisesRegex(ValueError,'index out of bounds'):
-            execute_scene(source,audio_frames()[:1],reader=READER,mesh_x=8,mesh_y=8)
+    def test_current_waveform_512_points_preserve_recurrent_state_and_resample_pcm(self):
+        source=native('wavecode_0_enabled=1\nwavecode_0_samples=512\nwavecode_0_sep=10\n'
+                      'wavecode_0_smoothing=0\nfWaveScale=1\n'
+                      'wave_0_per_point1=counter+=1;x=counter;y=value1;\n')
+        data=audio_frames()
+        for frame in data:
+            frame['waveform_left']=list(range(480))
+            frame['waveform_right']=list(range(480))
+        result=execute_scene(source,data,reader=READER,mesh_x=8,mesh_y=8)
+        first,second=[f['waves'][0] for f in result['frames']]
+        self.assertEqual(first['sample_count'],512)
+        self.assertEqual(len(first['points']),512)
+        self.assertEqual(first['points'][-1]['x'],512)
+        self.assertEqual(second['points'][-1]['x'],1024)
+        self.assertAlmostEqual(first['points'][256]['y'],240*.004,places=6)
+        self.assertAlmostEqual(first['points'][-1]['y'],479*.004,places=6)
+
+    def test_current_negative_separation_is_clamped_not_an_out_of_bounds_read(self):
+        source=native('wavecode_0_enabled=1\nwavecode_0_samples=3\nwavecode_0_sep=-10\n'
+                      'wavecode_0_smoothing=0\nfWaveScale=1\nwave_0_per_point1=x=value1;\n')
+        data=audio_frames()[:1]
+        data[0]['waveform_left']=list(range(480))
+        result=execute_scene(source,data,reader=READER,mesh_x=8,mesh_y=8)
+        self.assertEqual(result['frames'][0]['waves'][0]['sample_count'],3)
+        self.assertAlmostEqual(result['frames'][0]['waves'][0]['points'][0]['x'],0)
+        self.assertAlmostEqual(result['frames'][0]['waves'][0]['points'][2]['x'],2*.004,places=6)
 
     def test_wave_init_frame_point_contexts_and_qt_boundaries_are_native(self):
         source=native('wavecode_0_enabled=1\nwavecode_0_samples=3\n'

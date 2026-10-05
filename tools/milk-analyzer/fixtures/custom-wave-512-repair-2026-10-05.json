@@ -1,0 +1,287 @@
+{
+  "before": {
+    "case": 8,
+    "profile": "short60",
+    "agreement_points": null,
+    "broad_descriptor_points": 87.5,
+    "passes": false,
+    "critical_contradictions": [
+      "Deterministic line trajectories and resulting feedback layout differ materially: source predicts a largely vertical right-side trace where native shows multiple diagonal paths and later a broad crisscross layout. Theme-level claims are insufficient for full visual acceptance."
+    ],
+    "prediction_seal": {
+      "prediction_sha256": "1f50949db5afe1c69e1814d5581534a0b654996b63534e6ee8a7688d52c941c1",
+      "math_prediction_sha256": "b29b56ae01c58b2f3cdb6196cf719e85c03254295ccdc818570f4690175decb6",
+      "pixel_sha256": "654bcb45dd81e15681d5512cdf19303a3f64b37514ae8c17c62c2fbdd5a247d3",
+      "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6",
+      "reference_frames_seen": false,
+      "frozen_utc": "2026-10-05T18:11:43.973532+00:00"
+    },
+    "evaluated_utc": "2026-10-05T18:16:20.207051+00:00",
+    "observations": [
+      "Sparse RGB strokes, dark background and absence of broad strobes agree.",
+      "Source/native tracked speed0.07234/0.12130 differs by68percent; mean luma0.02277/0.02530 is close but coloured footprint0.09365/0.13084 differs by40percent.",
+      "At1.33s source and native paths occupy different locations/orientations; at2s native has additional horizontal/diagonal feedback structure."
+    ],
+    "missing_information": [
+      "Root cause of deterministic trajectory/layout mismatch unresolved; investigate initialization, frame order, physics state and legacy feedback mapping before proceeding."
+    ],
+    "scope": "No >=80full-behaviour pass credited; unresolved critical mismatch cannot be hidden by easy descriptive claims."
+  },
+  "after": {
+    "case": 8,
+    "kind": "diagnostic repair retest; no fresh streak credit",
+    "agreement_points": 100,
+    "category_points": {
+      "structure": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "motion": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "colour": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "flashing": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "feedback": [
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    "passes_user_90_gate": true,
+    "prediction_seal": {
+      "prediction_sha256": "b55b8d3a23108c1f79efb99ada1b527431a6698c7cb4564a1d04d29a89174e7f",
+      "math_prediction_sha256": "e37d7b6c555d31965e0c6bfea59320db2c925e28777b5665914f7dc24a9684d8",
+      "pixel_sha256": "d805bde2fa9260565d8cd7687d5b7b5393025129817725e60241d37ceca8815a",
+      "protocol_sha256": "6231c54403ab070bf1f7b664c7041caea7b4ddbbf227067265aa865bdf04d1f6",
+      "new_native_reference_frames_seen": false,
+      "frozen_utc": "2026-10-05T18:25:04.123928+00:00",
+      "diagnostic_only": true
+    },
+    "evaluated_utc": "2026-10-05T18:27:06.255555+00:00",
+    "root_cause": "Adapter used min480for waveform point count and incorrectly centred/separated waveform reads. Native current Draw clamps requested count to512, uses initial PCMindex0, ignores separation in waveform mode and resamples480inputs across512outputs. Recurrent point equations were missing32updates per wave/frame.",
+    "observations": [
+      "Nearly dark early image, diagonal RGB segments at1.33s and later crisscross grid now match fresh native output.",
+      "Source/native luma0.02890/0.03010,coloured footprint0.13333/0.13510,motion0.13774/0.14352.",
+      "Both report0coherent whole-screen flash events; peak luma step0.01564/0.01675."
+    ],
+    "controls": "24focused custom-wave/forecast controls pass; two new analytic controls reproduced the failure before the patch.",
+    "static_candidate_count": 3261,
+    "candidate_scope": "Static authored config only; dynamic samples/visibility not certified",
+    "scope": "Frozen behavioural-claim grade, not calibrated perceptual probability;60frame declared profile only"
+  },
+  "prediction": {
+    "case": 8,
+    "preset": "Tripgnosis - Astral Calculations.milk",
+    "sha256": "eb8890fca249c906e7c30caee42a8c3aeb5e4d2f7497c6233b41750e43049473",
+    "frames": 60,
+    "retest": "after512-point/resampling repair",
+    "frozen_utc": "2026-10-05T18:25:04.123928+00:00",
+    "claims": {
+      "structure": [
+        "At about0.67seconds the picture remains nearly black with only a few small coloured marks.",
+        "At about1.33seconds several separated diagonal/bent RGB segments are visible, including upper and lower-right paths.",
+        "By2seconds the traces form a sparse crisscross layout with vertical and horizontal coloured ghosts across much of the view.",
+        "Background remains dark; the later grid is made from thin trails rather than large solid filled shapes."
+      ],
+      "motion": [
+        "Persistent per-point state now executes512times per frame; the resulting line paths should follow the corrected diagonal-to-crisscross sequence.",
+        "Motion is localized to line trajectories/ghosts; source tracked median speed is approximately0.138viewport widths per second with incomplete sparse-line support.",
+        "Lines bend and shift through their recurrence, without a rigid whole-screen camera rotation.",
+        "The visible trace area builds substantially between the first and last sampled times."
+      ],
+      "colour": [
+        "Red, green and blue separated strokes dominate the visible foreground, with pale overlap portions.",
+        "The overall picture is dim, source mean luma about0.029.",
+        "The coloured footprint is small but greater than the failed forecast: about13.3percent of the screen.",
+        "The dark background and vivid thin coloured strokes coexist; a broad bright colour field is not expected."
+      ],
+      "flashing": [
+        "No coherent broad brightening/darkening transitions are predicted in the60frames.",
+        "Peak mean brightness change is small, approximately0.0156.",
+        "Brightness changes are mainly localized to the thin trajectories and their ghosts.",
+        "A regular whole-screen white/black strobe is not predicted."
+      ],
+      "feedback": [
+        "Slightly different RGB zoom sampling creates visibly separated layered trails.",
+        "The half-opacity orientation3echo contributes mirrored/recirculated paths to the later layout.",
+        "Repeated point updates and retained history should now produce the diagonal segments and subsequent grid rather than the failed mostly vertical right-side result.",
+        "High-frequency dither can change fine pixels, while gross path orientation and layout should agree."
+      ]
+    },
+    "basis": "Corrected source-only mathematical forecast before new native retest capture; historical failed capture already known and kept as diagnostic",
+    "new_native_reference_frames_seen": false,
+    "acceptance_credit": "diagnostic only; cannot count toward fresh random streak"
+  },
+  "source_descriptors": {
+    "schema_version": 1,
+    "basis": "source-only prediction",
+    "appearance_accuracy_verified": false,
+    "frames_measured": 60,
+    "warmup_frames": 0,
+    "settings": {
+      "hue_bins": 12,
+      "value_floor": 0.05,
+      "saturation_floor": 0.15,
+      "brightness_jump": 0.1,
+      "rgb_jump": 0.1,
+      "coherent_area": 0.2,
+      "motion_min_contrast": 0.02,
+      "flow_consistency_pixels": 0.5,
+      "flow_residual_levels": 20,
+      "motion_support_pixels": 12
+    },
+    "colour": {
+      "mean_luma": 0.028899873913906048,
+      "mean_contrast": 0.05141433601190026,
+      "mean_saturation": 0.6602033955355485,
+      "mean_coloured_fraction": 0.13332700376157408,
+      "mean_effective_hue_bins": 4.231520684966298,
+      "temporal_effective_hue_bins": 7.072570396120344
+    },
+    "flashing": {
+      "peak_mean_luma_jump": 0.015642033889889717,
+      "peak_brightness_change_area": 0.08414713541666667,
+      "peak_paired_luma_area_product": 0.0009918939603166007,
+      "peak_brightening_screen_area": 0.04796006944444445,
+      "peak_darkening_screen_area": 0.041748046875,
+      "peak_visible_brightening_fraction": 1.0,
+      "peak_visible_darkening_fraction": 0.29508196721311475,
+      "peak_rgb_change_area": 0.2419162326388889,
+      "coherent_brightening_transitions": 0,
+      "coherent_darkening_transitions": 0,
+      "dominant_sampled_brightness_hz": 0.5,
+      "spectral_peak_fraction": 0.8897935778333511,
+      "frequency_resolution_hz": 0.5,
+      "nyquist_hz": 15.0,
+      "uniform_sampling": true
+    },
+    "motion": {
+      "available_transition_fraction": 0.559322033898305,
+      "peak_untracked_brightness_change_screen_area": 0.04576280381944445,
+      "matched_brightness_change_p95": 0.05592609196901321,
+      "peak_matched_brightness_change_p95": 0.05780082568526268,
+      "peak_matched_brightening_screen_area": 0.001736111111111111,
+      "peak_matched_darkening_screen_area": 0.014811197916666666,
+      "mean_supported_area": 0.6274093473800504,
+      "median_speed_viewports_per_second": 0.137737438082695,
+      "p95_speed_viewports_per_second": 0.36676605939865115,
+      "mean_acceleration_viewports_per_second_squared": 0.08523662496241939,
+      "mean_warp_query_displacement": null
+    },
+    "structure": {
+      "fractal": null
+    },
+    "bass_response": null,
+    "mood_assignment": null,
+    "aggregation": {
+      "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+      "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+      "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+      "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+    },
+    "limitations": [
+      "Motion is an estimator with incomplete texture/correspondence support",
+      "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+      "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+      "Fractal structure, causal bass response and audience thresholds need separate evidence"
+    ]
+  },
+  "native_descriptors": {
+    "schema_version": 1,
+    "basis": "observed published-core display",
+    "appearance_accuracy_verified": false,
+    "frames_measured": 60,
+    "warmup_frames": 0,
+    "settings": {
+      "hue_bins": 12,
+      "value_floor": 0.05,
+      "saturation_floor": 0.15,
+      "brightness_jump": 0.1,
+      "rgb_jump": 0.1,
+      "coherent_area": 0.2,
+      "motion_min_contrast": 0.02,
+      "flow_consistency_pixels": 0.5,
+      "flow_residual_levels": 20,
+      "motion_support_pixels": 12
+    },
+    "colour": {
+      "mean_luma": 0.030103184041702966,
+      "mean_contrast": 0.05208539081310543,
+      "mean_saturation": 0.6543534542433918,
+      "mean_coloured_fraction": 0.13510154441550926,
+      "mean_effective_hue_bins": 4.2166260623844005,
+      "temporal_effective_hue_bins": 7.112831509163814
+    },
+    "flashing": {
+      "peak_mean_luma_jump": 0.016749713569879532,
+      "peak_brightness_change_area": 0.0857204861111111,
+      "peak_paired_luma_area_product": 0.0011272797137280577,
+      "peak_brightening_screen_area": 0.049858940972222224,
+      "peak_darkening_screen_area": 0.042290581597222224,
+      "peak_visible_brightening_fraction": 0.9791666666666666,
+      "peak_visible_darkening_fraction": 0.272,
+      "peak_rgb_change_area": 0.2463107638888889,
+      "coherent_brightening_transitions": 0,
+      "coherent_darkening_transitions": 0,
+      "dominant_sampled_brightness_hz": 0.5,
+      "spectral_peak_fraction": 0.8966784182750721,
+      "frequency_resolution_hz": 0.5,
+      "nyquist_hz": 15.0,
+      "uniform_sampling": true
+    },
+    "motion": {
+      "available_transition_fraction": 0.5084745762711864,
+      "peak_untracked_brightness_change_screen_area": 0.04893663194444445,
+      "matched_brightness_change_p95": 0.053975621983408925,
+      "peak_matched_brightness_change_p95": 0.06100030615925789,
+      "peak_matched_brightening_screen_area": 0.0017903645833333333,
+      "peak_matched_darkening_screen_area": 0.013671875,
+      "mean_supported_area": 0.6030598958333333,
+      "median_speed_viewports_per_second": 0.1435224935412407,
+      "p95_speed_viewports_per_second": 0.37261377573013305,
+      "mean_acceleration_viewports_per_second_squared": 0.09524726580538219,
+      "mean_warp_query_displacement": null
+    },
+    "structure": {
+      "fractal": null
+    },
+    "bass_response": null,
+    "mood_assignment": null,
+    "aggregation": {
+      "motion_speed": "Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values",
+      "matched_brightness": "Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.",
+      "palette": "Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately",
+      "flashing": "Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee"
+    },
+    "limitations": [
+      "Motion is an estimator with incomplete texture/correspondence support",
+      "Frequency covers this sampled window only; aliasing and later events are not ruled out",
+      "RGB luma is an encoded display proxy; physical screen luminance is not calibrated",
+      "Fractal structure, causal bass response and audience thresholds need separate evidence"
+    ]
+  },
+  "artifact": {
+    "release": "v2.3.4",
+    "release_commit": "7f9e6bd64ee214b5a6e8862c4e3b5342d4a72962",
+    "aar_sha256": "9f37e5377ae966abb810325815e49693d2baebe060c067c7932381ce224553d4",
+    "native_sha256": "7d540e0091fe5a7f4e8328e993f7a28efbb8ce8597eaa721777b4840fd982b6e",
+    "rendering_policy": "standard published capped AAR"
+  },
+  "raw_captures_committed": false
+}
