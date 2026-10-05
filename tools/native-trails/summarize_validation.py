@@ -28,6 +28,10 @@ CONTROLS = (("authored", "authored_repeat"), ("native_before", "native_off"),
             ("standard", "standard_default"))
 DISPLAY = ("authored", "native_before", "standard", "medium", "high")
 TIMING_SCOPE = "onDrawFrame plus glFinish; 360 frames; excludes capture/PNG I/O; emulator engine, not TV app fps"
+# The completed focused-v1 run predates explicit Android-user scoping. Verify
+# its immutable source explicitly; never silently waive a changed runner hash.
+LEGACY_RUNNER_SHA256 = "a3cc20476cfa8e0cab65669b91e321e8963ed8bacbf9bd7bbd73791b405dd1be"
+LEGACY_SOURCE_COMMIT = "a8a75f4435c80c46aaa99274f6007ac285170eeb"
 # Historical plan identifies these witnesses as chaotic. This is a review cue,
 # not a classifier or an excuse to waive identity checks.
 CHAOTIC = {"TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk",
@@ -41,6 +45,23 @@ def read(path):
 def require(condition, message):
     if not condition:
         raise ValueError(message)
+
+
+def user_scope(protocol, legacy_runner=None):
+    require(type(protocol.get("schema")) is int and protocol["schema"] in (1, 2), "Unsupported frozen protocol schema")
+    if protocol["schema"] == 2:
+        require(legacy_runner is None, "Use legacy source only with historical schema1")
+        user_id = runner.validate_user_id(protocol.get("user_id"))
+        require(protocol["runner_sha256"] == file_digest(Path(runner.__file__)), "Frozen runner changed")
+        return {"mode": "explicit-user", "user_id": user_id, "runner_sha256": protocol["runner_sha256"]}
+    require(legacy_runner is not None, "Historical schema1 requires explicit --legacy-runner source; it did not freeze the Android user")
+    require("user_id" not in protocol and protocol["runner_sha256"] == LEGACY_RUNNER_SHA256,
+            "Unknown legacy user scope/source")
+    legacy_runner = Path(legacy_runner).resolve()
+    require(file_digest(legacy_runner) == LEGACY_RUNNER_SHA256, "Frozen legacy runner checksum differs")
+    return {"mode": "historical-user-zero", "user_id": 0, "runner_sha256": LEGACY_RUNNER_SHA256,
+            "original_validator_source": str(legacy_runner), "source_commit": LEGACY_SOURCE_COMMIT,
+            "limitation": "Static verification of previously verified user0 captures; original runtime commands were unscoped and schema1 did not capture the active user"}
 
 
 def verify_worker(identity, presets):
@@ -75,15 +96,15 @@ def verify_worker(identity, presets):
             require(assets.get("assets/presets/" + name) == sha, "Packaged preset differs: " + name)
 
 
-def verify_protocol(work, preset_root, names):
+def verify_protocol(work, preset_root, names, legacy_runner=None):
     protocol = read(work / "protocol.json")
+    user_scope(protocol, legacy_runner)
     require(len(names) == 17 and len(set(names)) == 17, "Expected the 17 selected presets")
     require(set(protocol["presets"]) == set(names), "Frozen selected presets differ")
     require(protocol["profiles"] == json.loads(canonical_json(runner.PROFILES)), "Frozen profiles differ")
-    require(protocol["schema"] == 1 and protocol["captures"] == runner.CAPTURES
+    require(protocol["captures"] == runner.CAPTURES
             and protocol["frames"] == 480 and protocol["seed"] == 12345
             and protocol["clock"] == "frame/30.0", "Frozen capture/clock/seed protocol differs")
-    require(protocol["runner_sha256"] == file_digest(Path(runner.__file__)), "Frozen runner changed")
     require(protocol["pcm_sha256"] == file_digest(work / "audio.u8"), "Frozen PCM changed")
     for name, sha in protocol["presets"].items():
         require(file_digest(preset_root / name) == sha, "Frozen preset changed: " + name)
@@ -99,9 +120,10 @@ def verify_protocol(work, preset_root, names):
     return protocol
 
 
-def collect_matrix(work, preset_root, names, partial=False):
+def collect_matrix(work, preset_root, names, partial=False, legacy_runner=None):
     """Missing work is diagnostic only with partial; corrupted work always fails."""
-    protocol = verify_protocol(work, preset_root, names)
+    protocol = verify_protocol(work, preset_root, names, legacy_runner)
+    scope = user_scope(protocol, legacy_runner)
     protocol_sha = digest(protocol)
     expected = {}
     for preset, sha in protocol["presets"].items():
@@ -129,7 +151,7 @@ def collect_matrix(work, preset_root, names, partial=False):
             continue
         label, role, width, height, rw, rh, level = profile
         identity = protocol["workers"][role]
-        private = "/data/user/0/" + identity["package"] + "/files/native-trails/" + key
+        private = runner.private_directory(identity["package"], key, scope["user_id"])
         request = dict(runner.request(preset, width, height, rw, rh, level),
                        pcmPath=private + "/audio.u8", outputDir=private + "/output")
         require(read(directory / "request.json") == request, "Frozen request differs: " + key)
@@ -181,7 +203,8 @@ def collect_matrix(work, preset_root, names, partial=False):
     require(digest(read(work / "protocol.json")) == protocol_sha, "Protocol changed during summary")
     return {"protocol": protocol, "protocol_sha256": protocol_sha, "jobs": jobs,
             "expected_jobs": 136, "verified_jobs": len(jobs), "missing_jobs": missing,
-            "complete": not missing and len(jobs) == 136, "identity_checks": checks, "environment": environment}
+            "complete": not missing and len(jobs) == 136, "identity_checks": checks, "environment": environment,
+            "user_scope": scope}
 
 
 def decode(job, frame):
@@ -325,13 +348,13 @@ def export_images(matrix, names, output):
     return "".join(sections)
 
 
-def summarize(work, output, partial=False, preset_root=None, names=None):
+def summarize(work, output, partial=False, preset_root=None, names=None, legacy_runner=None):
     work, output = Path(work).resolve(), Path(output).resolve()
     preset_root = preset_root or runner.ROOT / "core/src/main/assets/presets"
     names = names or [name for name in Path(__file__).with_name("presets.txt").read_text().splitlines() if name]
     require(not output.exists(), "Output already exists; choose a fresh evidence directory")
     require(output != work and not output.is_relative_to(work / "jobs"), "Output must not replace raw jobs")
-    matrix = collect_matrix(work, preset_root, names, partial=partial)
+    matrix = collect_matrix(work, preset_root, names, partial=partial, legacy_runner=legacy_runner)
     rows = measurements(matrix, names)
     status = "partial_progress" if partial else "complete_verified_matrix"
     data = {key: value for key, value in matrix.items() if key not in ("jobs", "protocol")}
@@ -394,9 +417,11 @@ def main():
     parser.add_argument("--work", required=True, type=Path)
     parser.add_argument("--out", required=True, type=Path, help="fresh explicit evidence directory")
     parser.add_argument("--partial", action="store_true", help="progress diagnostics only; never final evidence")
+    parser.add_argument("--legacy-runner", type=Path,
+                        help="explicit immutable schema1 user0 runner source from a8a75f44; checksum required")
     args = parser.parse_args()
     try:
-        result = summarize(args.work, args.out, args.partial)
+        result = summarize(args.work, args.out, args.partial, legacy_runner=args.legacy_runner)
     except (ValueError, KeyError, OSError, zipfile.BadZipFile) as error:
         parser.exit(1, "Evidence rejected: %s\n" % error)
     print(canonical_json({key: result[key] for key in ("status", "final_evidence", "verified_jobs", "expected_jobs", "protocol_sha256")}))
