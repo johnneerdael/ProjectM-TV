@@ -130,3 +130,16 @@ fidelity. Source comments now state that policy, and separate native compatibili
 handoffs preserve exact examples, source hashes and bounded controls. Reviewer
 acceptance or explicit maintainer disposition remains pending; the predictor's
 behavior and old audit grades are unchanged.
+
+
+## Superseding acceptance requirement
+
+The user requires every preset in the randomized100set to score95or higher.
+The85/100historical result is a failed100gate, not completion of the milestone.
+Preserve that audit and its grades. Repair the12unresolved predictions and three
+completed misses first, then freeze new predictions and recheck the entire set
+under unchanged strict geometry/event and5% numerical rules. Unresolved results,
+critical mismatches and easy replacements cannot satisfy the gate. Retests of
+already observed presets are labeled repair controls, not fresh blinded evidence.
+See `visual-loop-100-repair-target-2026-10-06.json`. Repository integration remains
+secondary until this visual acceptance requirement is achieved.

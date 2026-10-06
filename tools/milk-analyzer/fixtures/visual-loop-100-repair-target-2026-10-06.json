@@ -1,0 +1,131 @@
+{
+  "status": "active_repair",
+  "requirement": "All100original randomized cases must each score>=95; unknowns andcriticalmisses fail.",
+  "historical_audit_immutable": true,
+  "historical_passed": 85,
+  "required_passed": 100,
+  "frames_each": 60,
+  "failed_cases": [
+    {
+      "case": 58,
+      "preset": "141 nz.milk",
+      "sha256": "5b5961c19df019755dd44baf1cb7b15965a17b7590a7968939bfeb458a6c0c6a",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 71,
+      "preset": "one-stop step-by-step deviance cure 13th step devolution reprisal loss-through-finding inverse paradigm degenerating entropy gain.milk",
+      "sha256": "2ebe9e23eca8d52ccb0772b2bacac867b76de962ba7e2d97bd281467eb88db27",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 75,
+      "preset": "TonyMilkdrop - RGB.milk",
+      "sha256": "9dac46b20b53d2eef955b504b0aa128ddfb7b70c2dbc145441fa6fe57be06c34",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 80,
+      "preset": "Benjam & Zylot - Fractal Timepiece - joyous leap into razors.milk",
+      "sha256": "b67a9979943fbc86fe32c2e79e5e2dac5993d94ffe4eb2dd8a26896a6ea161b6",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 85,
+      "preset": "bmelgren - Getter Sun tweek 3.milk",
+      "sha256": "3b55f5e0d8019b9c0c4f2a41725c9c4bb92b42a4d750131e3834bb1e6067b653",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 86,
+      "preset": "suksma - Chemlock - Spot (Zylot & Aderrasi equations) and martin shaders + christ's eternal damnation - if the condom fits vampires.milk",
+      "sha256": "7f369ea9c8bc36bc4961ee1980149efd540f35598b985d5767841271093eea4b",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 88,
+      "preset": "custom10.milk",
+      "sha256": "ef9a2e5ed73e76484b5a5b47db9b3514d269d831bd0ab9516e01cf5a33fb5c5a",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 104,
+      "preset": "phledge lasso blaq wholes aren't natural wr disequilibir.milk",
+      "sha256": "f43f32bbb705dc0705a2557b358780d866c4330d1f2037cdc3abf4041528bbc6",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 107,
+      "preset": "$$$ Royal - Mashup (255) --- Isosceles edit.milk",
+      "sha256": "f854c5342b32c64da82253f489d457983752b4a164933422652005e95c38359f",
+      "source_status": "computed",
+      "score": 90,
+      "critical_mismatch": false
+    },
+    {
+      "case": 108,
+      "preset": "$$$ Royal - Mashup (452).milk",
+      "sha256": "dfdfab30b2fe81e2cd6080c85e11d49480fc6113019bac0d2cdb4bd77bfad760",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 124,
+      "preset": "suksma - chernobyl pie for dessert - semi-autoplasmitic copulateshow.milk",
+      "sha256": "20c0ce7906c4375db27ca08b4c4dc325a42126aa6d2da9667e041de3b4d159df",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 125,
+      "preset": "suksma - god might as well2 - rst jaw complex ap3+ roam3.milk",
+      "sha256": "c9cff2427d9ce4c7244358369f3cbd970b439b08e92a00b3f0c9271b2f770dec",
+      "source_status": "computed",
+      "score": 65,
+      "critical_mismatch": true
+    },
+    {
+      "case": 138,
+      "preset": "Goody - Acid Angel ap4+.milk",
+      "sha256": "304220e4e5a6b790ca2d2b86af89153a9cc3fa417e8cd82edd279c92e31b7aad",
+      "source_status": "computed",
+      "score": 90,
+      "critical_mismatch": false
+    },
+    {
+      "case": 141,
+      "preset": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam.milk",
+      "sha256": "598b10f13d4013677062fc5783d0c752ce4aefefb6d37b48ac646d0c37451e55",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    },
+    {
+      "case": 145,
+      "preset": "suksma - feeling abort.milk",
+      "sha256": "faa8a658e08d0bd3ff9038d7d43ad810fa46630fc5d04be162126b2b48614732",
+      "source_status": "unresolved",
+      "score": 0,
+      "critical_mismatch": false
+    }
+  ],
+  "review_integration_secondary_until_visual_gate": true
+}

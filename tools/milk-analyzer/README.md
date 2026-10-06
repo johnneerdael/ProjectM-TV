@@ -656,3 +656,13 @@ read static PresetState despite live EEL counterparts. Switching only the predic
 to those live values would mismatch the AAR. MilkDrop3 consumes live controls, so
 these native compatibility gaps have separate engineering handoffs in Downloads;
 a future native repair needs a versioned predictor policy and fresh controls.
+
+
+The current acceptance requirement is all100randomized presets at95or higher.
+The historical85/100audit failed that gate; completing its captures/report did not
+complete the goal. The12unresolved predictions and three scored misses remain
+explicit repair targets. Preserve old grades and label repeat comparisons as
+repair controls; no replacements, imputed unknowns or loosened rubric qualify.
+Nine warp diagnostics identify six negative-zoom cases and three centre-vertex
+zero-zoom cases. PR47 repairs only signed negative zoom with unit zoom exponent;
+other domains require separate interpretation/target controls.
