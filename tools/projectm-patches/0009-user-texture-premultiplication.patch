@@ -13,10 +13,7 @@ GLES 3.0 repeats with this isolated change. See the rebase evidence.
 
 --- a/src/libprojectM/Renderer/TextureManager.cpp
 +++ b/src/libprojectM/Renderer/TextureManager.cpp
-@@ -270,6 +270,15 @@
-         return {};
-     }
- 
+@@ -274,1 +274,10 @@
 +    // Preserve SOIL2 multiply-alpha pixel bytes used by the released TV engine.
 +    auto* img = imageData.get();
 +    for (int i = 0; i < 4 * width * height; i += 4)
@@ -27,5 +24,3 @@ GLES 3.0 repeats with this isolated change. See the rebase evidence.
 +    }
 +
      auto format = TextureFormatFromChannels(4);
-     auto newTexture = std::make_shared<Texture>(file.lowerCaseBaseName, reinterpret_cast<const void*>(imageData.get()), GL_TEXTURE_2D, width, height, 0, format, format, GL_UNSIGNED_BYTE, true, file.filePath);
- 
