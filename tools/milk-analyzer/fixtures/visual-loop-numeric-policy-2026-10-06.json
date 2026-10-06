@@ -1,0 +1,23 @@
+{
+  "protocol_file": "build/visual-loop/protocol-staged95-v2.json",
+  "protocol_sha256": "c0cbc065f2d62796f76984457dabffdc3f432e00b3a4dcfc01c34abae11aef6c",
+  "scope": "Future source/native full-behaviour batches only",
+  "user_approved": true,
+  "numeric_policy": {
+    "version": "user-approved-relative5-v1",
+    "approved_before_next_native_batch_utc": "2026-10-06T09:49:27.789999+00:00",
+    "rule": "abs(observed - predicted) <= 0.05 * abs(predicted)",
+    "zero_prediction": "Requires exact zero; no unrequested absolute floor.",
+    "scope": "Numerical estimates only.",
+    "geometry_trajectories": "Strict; critical deterministic mismatch fails regardless of score.",
+    "flash_event_timing_and_counts": "Strict;5% numeric allowance does not alter event frames/counts.",
+    "unknown": "No accuracy credit.",
+    "historical_scores": "Immutable; allowance applies only to future batches frozen under this protocol."
+  },
+  "gates_unchanged": {
+    "three": 3,
+    "ten": 10,
+    "minimum_score_each": 95,
+    "final_random_audit": 100
+  }
+}

@@ -501,3 +501,9 @@ The control uses the production mesh on the owned Apple M4 Pro API34 emulator at
 completes60source frames without a fabricated epsilon or NaN rule. No full authored
 native appearance is credited yet. Other viewport/GPU/4K contexts remain unverified;
 the portable default is unchanged. See `fixtures/composite-uv-raster-control-2026-10-06.json`.
+
+Future batches use the user's approved5% allowance for numerical estimates:
+`abs(observed-predicted) <= .05*abs(predicted)`. Zero predictions require zero.
+Geometry, trajectories, critical feedback mismatch, flash counts and event timing
+remain strict. Freeze this rule with all claims before any new native reference;
+earlier grades and the92.5 diagnostic remain unchanged.
