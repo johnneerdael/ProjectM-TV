@@ -27,8 +27,8 @@ _LIBC.strtol.restype = ctypes.c_long
 
 
 def scalar(values, key, default, kind):
-    """Match native std::stof/std::stoi prefix and range conversion."""
-    text = ctypes.create_string_buffer(str(values.get(key, default)).encode('utf-8'))
+    """Look up native lowercase file keys and match stof/stoi conversion."""
+    text = ctypes.create_string_buffer(str(values.get(key.lower(), default)).encode('utf-8'))
     end = ctypes.c_void_p()
     ctypes.set_errno(0)
     if kind in {'int', 'bool'}:

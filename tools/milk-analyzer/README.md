@@ -81,6 +81,16 @@ assembled equation trees separately and stamp the selected loading policy. Prepa
 historical adapters cannot certify the new target policy. The broader original
 PR #25 suite remains a supplemental compatibility check; it is not imported here.
 
+Source stage selection uses the native preset parser’s lowercase key map with
+case-insensitive setting lookups. Version flags such as `PSVERSION_WARP` therefore
+select active stages; missing compatibility evidence remains unknown rather than
+being classified as disabled. Results produced with the earlier case-sensitive
+lookup can misclassify active shader stages and require a fresh analysis run.
+Record the new source revision and hashes of `source_context.py` and
+`stage_resolution.py` in that run’s identity. Keep historical exports, producer
+identities and calibrated models unchanged; parsing and stage selection remain
+source diagnostics, not fidelity certification.
+
 The native tests exercise actual parser generation, default and nonzero input values,
 copy reset across invocations, local/static/initialized controls and preset hashes
 checked each time the tests run. Offline translator tests require `glslangValidator`.
