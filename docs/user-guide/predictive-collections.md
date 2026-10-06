@@ -82,3 +82,8 @@ predictions and three completed misses; behavioural agreement in a short declare
 window does not certify calmness or genre suitability. See
 [Experimental source visual forecasting](development.md#experimental-source-visual-forecasting)
 for the test context, results and technical report.
+
+Its newer feature records separate shape-geometry speed, acceleration and jerk
+from simulated-display measurements, preserving missing support as unknown.
+These research calculations have not changed the packaged scores. Geometry alone
+does not prove that a preset has visible movement or is suitable for Chill.

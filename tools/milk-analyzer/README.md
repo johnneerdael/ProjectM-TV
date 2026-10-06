@@ -6,6 +6,11 @@ an experimental numerical source forecaster and separate collection tools that
 score activity using a published AAR. Parsing or lowering success alone does not
 certify appearance; the forecaster's frozen visual comparisons are described below.
 
+The [source feature contract](SOURCE_FEATURES.md) now separates strict custom-shape
+trajectory evidence from optional simulated-display statistics. Forecast reports
+include context-bound feature records with raw units, support and explicit unknowns;
+these are physical evidence, not new mood scores or regenerated app indexes.
+
 ## Four initialization cases
 
 `martin - ludicrous speed.milk` initializes `index4` with native `rand(12)` and

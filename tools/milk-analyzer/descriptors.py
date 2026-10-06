@@ -164,7 +164,8 @@ class DescriptorStream:
                 acceleration.append(float(np.linalg.norm(np.array(b['velocity'])-a['velocity'])/
                     ((transitions[i]['dt']+transitions[i-1]['dt'])/2)))
         return dict(schema_version=1,basis='Numerical source-predicted display fields; no native visual inspection',
-            appearance_accuracy_verified=False,frames_measured=len(rows),warmup_frames=self.warmup,settings=dict(self.settings),
+            appearance_accuracy_verified=False,frames_measured=len(rows),transitions_measured=len(transitions),
+            warmup_frames=self.warmup,settings=dict(self.settings),
             colour=dict(mean_luma=mean('mean_luma'),mean_contrast=mean('contrast'),mean_saturation=mean('saturation'),
                         mean_coloured_fraction=mean('coloured_fraction'),mean_effective_hue_bins=mean('effective_hue_bins'),
                         temporal_effective_hue_bins=effective_bins(self.hue_mass)),

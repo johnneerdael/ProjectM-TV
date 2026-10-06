@@ -22,6 +22,8 @@ from shader_random import bind_random_uniforms
 from shader_uniforms import source_uniforms
 from spatial import sample2d
 from sampling_policy import texture_settings
+from geometry_features import scene_geometry_features
+from source_features import forecast_feature_record, SIMULATED
 from shape_sampling import LEGACY as LEGACY_SHAPE_POLICY,CORE_238 as CORE_238_SHAPE_POLICY,native_blur_level,shape_sampling_modes
 
 # Patched projectM-eval TreeFunctions.c initializes MT19937 once per thread.
@@ -226,6 +228,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     scene = execute_scene(source,audio['frames'],reader=reader,width=width,height=height,
         mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))
+    geometry_features = scene_geometry_features(scene)
     builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs',
                                   line_rendering_profile=line_profile)
     if builtin['engine_archive_sha256']!=archive:
@@ -313,7 +316,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                       {key:value for key,value in predicted.items() if key not in {'display','feedback','warp_uv'}})
     if model_file_hashes()!=model_hashes:
         raise ValueError('forecast model files changed during evaluation')
-    return dict(status='computed',frames=frames,domain=domain,stage_resolution=pipeline.stage_resolution,
+    report = dict(status='computed',frames=frames,domain=domain,stage_resolution=pipeline.stage_resolution,
+        feature_basis=SIMULATED,geometry_features=geometry_features,
         descriptors=descriptors.report(),
         uses_rendered_reference=False,appearance_accuracy_verified=False,
         input_hashes=dict(preset_sha256=source['preset_sha256'],pcm_sha256=audio['pcm_sha256'],
@@ -322,7 +326,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                           compatibility_sha256=digest(compatibility),
                           random_sha256=None if random_inputs is None else digest(random_inputs),
                           materials_sha256=None if texture_bank is None else digest(texture_bank.manifest)),
-        provenance=dict(reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
+        provenance=dict(engine=copy.deepcopy(engine),reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
                         main_binding_policy=main_binding_policy,
                         shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
                         render_context_source_sha256=builtin['render_context_source_sha256'],
@@ -334,3 +338,5 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         limitations=['GPU rasterization, sampling and arithmetic precision not validated',
                      'Target shader compilation/linking and fallback remain profile conditions',
                      'Initial state and RNG/resource lifecycle are declared inputs, not inferred engine startup'])
+    report['source_features'] = forecast_feature_record(report)
+    return report

@@ -447,3 +447,12 @@ scores as pixel accuracy, calibrated probabilities or shipped mood-index validat
 Source adapterCMake accepts `ENGINE_IDENTITY_FILE` or defaults to the identified
 engine build's `build-identity.json`; pass `-DSANITIZERS=OFF` for non-sanitized archives.
 Never rebuild adapters inside a frozen audit directory; use a new build location.
+
+Source feature integration (2026-10-07): `geometry_features.py` computes custom-shape
+vertex trajectories without display fields; speed/acceleration/jerk are sampled
+divided-difference estimates, not visibility or whole-domain smoothness proofs.
+`source_features.py` keeps strict geometry evidence separate from source-field
+simulation, preserves units/unknown support and hashes the declared context.
+Do not promote missing motion to zero or relabel native beta descriptors as source
+evidence. See `tools/milk-analyzer/SOURCE_FEATURES.md`; shipped mood indexes remain
+on their original beta identity until a separately validated migration.

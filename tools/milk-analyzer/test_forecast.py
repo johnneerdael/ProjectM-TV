@@ -64,6 +64,23 @@ def test_complete_equation_warp_draw_composite_forecast_keeps_feedback_separate(
     assert result['input_hashes']['preset_sha256'] == source['preset_sha256']
 
 
+def test_forecast_exposes_geometry_and_display_evidence_without_conflating_them():
+    source = native(BASE+'shapecode_0_enabled=1\nshapecode_0_rad=.1\nshapecode_0_num_inst=2\n'
+                    'shape_0_per_frame1=instance=0;x=.2+time*.1;\n'
+                    'comp_1=`shader_body {ret=GetPixel(uv);}\n')
+    result = predict(source, audio=audio(4), retain_surfaces=False)
+    assert result['feature_basis'] == 'source-field-simulation'
+    assert 'display' not in result['frames'][0]
+    geometry = result['geometry_features']
+    assert geometry['components_seen'] == 2
+    assert geometry['uses_display_fields'] is False
+    assert geometry['speed']['p95'] == pytest.approx(.1, abs=1e-6)
+    features = result['source_features']['features']
+    assert features['geometry.speed_p95']['evidence_kind'] == 'sampled-source-geometry'
+    assert features['colour.mean_luma']['evidence_kind'] == 'source-field-statistic'
+    assert result['source_features']['context']['provenance']['engine'] == source['parser_inputs']['engine']
+
+
 def test_unused_transformed_uv_domain_does_not_block_original_coordinate_shader():
     source=native(BASE+'per_frame_1=zoom=0;\n'
                   'warp_1=`shader_body {ret=uv_orig.x;}\n'

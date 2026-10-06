@@ -97,6 +97,15 @@ prediction is produced before comparison with the unchanged published core AAR
 through JNI. The source CPU adapters and native reference have separate identities.
 Unsupported arithmetic remains unknown rather than being silently treated as calm.
 
+The feature report now distinguishes geometry calculated without display fields
+from statistics of simulated display fields. Shape trajectories provide sampled
+speed, acceleration and jerk, with component/topology changes and missing support
+recorded explicitly. These coordinates do not establish visible movement or
+smoothness between samples. Each feature carries units, evidence kind and context
+identity; discarding a simulated frame does not turn its statistics into frame-free
+analysis. The [source feature contract](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_FEATURES.md)
+records the supported scope and remaining work.
+
 The October 2026 experiment passed a three-preset and then a ten-preset gate at
 95 or higher on twenty frozen behavioural claims. In the subsequent randomized
 100-preset audit,85met that threshold,12predictions remained unresolved, and three
