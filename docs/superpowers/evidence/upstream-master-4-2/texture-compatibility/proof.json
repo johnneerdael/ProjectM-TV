@@ -1,0 +1,44 @@
+{
+  "scope": "Causal fixed-seed source comparison; not final random/regression certificate or unchanged-AAR deterministic comparison",
+  "preset": "suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk",
+  "seed": 12345,
+  "clock": "frame/30",
+  "frame": 0,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "baseline_release": "v2.3.15",
+  "baseline_source": "43023889ec38cf1250f3bfcaaf079a840acbdf76",
+  "source_images": [
+    {
+      "role": "baseline",
+      "png_sha256": "27017481592778512bb9fd3ab926a7d8e88db00444c43890f6ca8ca540869c9b",
+      "rgb_sha256": "fbf65516a8ffc2ee106512a203e59f5da08eb55c9e2b4aa6a025c766fd63d42c"
+    },
+    {
+      "role": "before",
+      "png_sha256": "7eac7e166b0a5bca39f3f703fd235b296f23e568f294d0d1bbd152eb92c79f3e",
+      "rgb_sha256": "3a7248a7f5aa41678284cca9762f06c11b8b6d9b4351eb4b99288d48084a0f28"
+    },
+    {
+      "role": "corrected",
+      "png_sha256": "27017481592778512bb9fd3ab926a7d8e88db00444c43890f6ca8ca540869c9b",
+      "rgb_sha256": "fbf65516a8ffc2ee106512a203e59f5da08eb55c9e2b4aa6a025c766fd63d42c"
+    }
+  ],
+  "before": {
+    "rgb_mae": 0.1980566808127572,
+    "max_channel_difference": 1,
+    "changed_pixels": 1101827
+  },
+  "corrected_causal_result": {
+    "matching_frames": [
+      480,
+      480
+    ],
+    "same_role_repeats_equal": true
+  },
+  "figure_sha256": "2c73bdf900cb829cb96a30c555a331b91d9fdead4e68c91675f86981fc416f18",
+  "raw_protocol_sha256": "3f093713e439fc4ef878e42114378de341abec62b00c1c4860f88c94224104de"
+}
