@@ -216,6 +216,12 @@ copies for each invocation. Local variables keep their authored initialization
 requirements. See [shader initialization analysis](tools/milk-analyzer/README.md)
 for the target policy and its legacy-compatibility limits.
 
+Shader translation preserves parsed finite float32 constants, including coefficients
+that need more than six significant digits. Earlier builds rounded these values
+again when generating GLSL, which could change a preset’s output. The preset files
+remain unchanged; GPU arithmetic and full MilkDrop appearance can still differ.
+Nonfinite shader literals are rejected through the existing shader fallback path.
+
 ### Core rendering policies
 
 Build the single Native `:core` with `./gradlew :core:assembleRelease`. Canonical

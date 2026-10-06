@@ -87,3 +87,19 @@ source-analysis evaluations, and writable copies begin with the chosen input on 
 invocation. This gives the affected older presets defined inputs without
 changing their source or assignment order. Local variables still require an authored
 initialization. The policy does not reproduce arbitrary old Direct3D register history.
+
+## Shader literal precision
+
+The native runner checks finite float32 constants by comparing their bits after
+formatting and reparsing, including negative zero, boundary values, randomized
+values and a comma-decimal locale. It also renders a one-frame warp/composite
+control and directly compiles 95 unchanged, hash-checked preset shader sections.
+Source-analysis adapters rebuilt against the current engine record
+`float_literal_policy` and `float_formatter_sha256`; the reader’s `renderer_literal`
+values use the production formatter. Rebuild adapters when the engine patch series
+changes. Historical fixtures retain their historical engine identity.
+
+Nonfinite shader literals are rejected by the generator rather than emitted as
+identifiers such as `inf`. Runtime nonfinite arithmetic and driver precision remain
+separate questions. These checks do not establish every preset’s visual fidelity
+or physical-TV performance.

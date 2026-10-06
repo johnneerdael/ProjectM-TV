@@ -8,3 +8,5 @@ constexpr const char* kArrayInitializerPolicy = "@ARRAY_INITIALIZER_POLICY@";
 constexpr const char* kArrayGeneratorSha = "@ARRAY_GENERATOR_SHA@";
 
 constexpr const char* kImplicitGlobalPolicy = "@IMPLICIT_GLOBAL_POLICY@";
+constexpr const char* kFloatFormatterSha = "@FLOAT_FORMATTER_SHA@";
+constexpr const char* kFloatLiteralPolicy = "@FLOAT_LITERAL_POLICY@";

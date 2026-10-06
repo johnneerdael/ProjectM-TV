@@ -224,3 +224,18 @@ again after those failures are resolved to continue unmeasured cases. The requir
 metadata pull has a 15-second timeout and records an unscored outcome if it fails,
 even after the renderer has exited. Ownership/remote setup and overlay transfers
 are bounded separately; runtime artifact pushes have a 180-second limit.
+
+## Shader literal identity
+
+Current source adapters stamp `float_literal_policy` as `float32-roundtrip-v1` and the production formatter’s `float_formatter_sha256`.
+The reader exports `renderer_literal` through that formatter, and lowering uses its
+reparsed value. Rebuilding against patch 0044 therefore models the new renderer
+rather than retaining the old six-digit emission. Historical adapters and archived
+measurement fixtures keep their original identities; do not relabel them.
+
+`test_float_literals.py` checks 99 authored AST witnesses in 95 hash-verified presets,
+the adjacent-to-one coefficient and scale, both GLSL targets, and rejection of an
+overflowed literal even when the shader declares `inf`. Native tests additionally
+exercise finite float32 boundaries, signed zero, randomized bits, locale and a
+one-frame full-engine render. These are source/controlled execution checks, not a
+visual forecast for every affected preset.
