@@ -522,3 +522,25 @@ handoff, `~/Downloads/projectm-tv-aar-engineering-issues-2026-10-06/blur-range-c
 records the source-confirmed guard typo and nine static investigation candidates;
 native raw-bank consequences remain uncertified. Evidence:
 `tools/milk-analyzer/fixtures/visual-loop-round007-2026-10-06.json`.
+
+
+## Randomized100 checkpoint: captures complete, grading in progress
+
+Queue049–148 is unchanged. All100 canonical published2.3.11 JNI captures completed
+60frames, totaling6000; the canonical AAR is byte-identical to qualified2.3.10.
+All2000claims were frozen before the first native reference. Root rechecked every
+prediction seal/file hash, original AAR preset hash, selection index, pixel hash,
+frame serial delta and capture timestamp. No missing native cases were replaced.
+
+Source completed88predictions;12 numerical-domain gaps retain zero credit. The
+first50assessments score43passes at95+ and7source unknowns. Full100 grading and
+improvement attribution remain open. The checkpoint fixture is
+`tools/milk-analyzer/fixtures/visual-loop-round010-checkpoint-2026-10-06.json`.
+
+A provenance defect is retained explicitly: the frozen manifest inherited an old
+runtime artifact map, while its named release and source44 identities are current.
+The unchanged capture script independently asserts guest versus current local
+published library/AAR/DEX/helper hashes before every capture. Supplementary
+actual hashes are recorded; no retrospective edit to the freeze is permitted.
+The original assertion stdout hashes were not stored separately, so retain that
+provenance limit. This is not an identified engine or visual behavior defect.

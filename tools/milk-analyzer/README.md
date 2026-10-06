@@ -541,3 +541,22 @@ worktree's `tools/preset-lab`. The complete matched-source44 suite passes1010tes
 and67subtests with no skips. Coverage CLI progress goes to stderr, keeping JSON
 stdout parseable. The explicit44 built-in dot identity guard preserves the existing
 single2px GLES point contract and rejects unknown source identities/large viewports.
+
+### Randomized100 audit checkpoint
+
+The unchanged queue049–148 has100 successful published2.3.11 JNI captures,
+6000native frames. All2000claims and source results were frozen before the first
+reference. Source forecasting completed88cases;12 numerical-domain gaps remain
+included with zero credit. The first50cases are graded:43 at95+ and7 source
+unknowns. Remaining grades are pending; this is not a100-case pass claim.
+See `fixtures/visual-loop-round010-checkpoint-2026-10-06.json`.
+
+Published2.3.11 is byte-identical to the qualified2.3.10 AAR. The frozen manifest's
+`runtime.artifact_sha256` map accidentally retained older2.3.8 library/transport/
+runner hashes. Preserve that original metadata as evidence of the discrepancy;
+it is not the current runtime identity. The capture script independently checked
+current host/guest published library, AAR, DEX and helper hashes before each
+capture. The supplementary fixture records actual artifact identities and this
+limitation; per-capture successful assertions did not save their hash stdout.
+Every capture's source/overlay, frame count, pixel hash and pre-capture freeze was
+independently rechecked. No predictions or model were changed during the audit.
