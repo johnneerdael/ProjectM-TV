@@ -63,6 +63,16 @@
     },
     "zero_input_frames_1_and_3_all_passes_exact": true,
     "all_alpha_bytes_exact": true,
+    "threshold_diagnostic": {
+      "all_first_pass_differences_red_only": true,
+      "max_distance_to_half_byte_in_differing_lanes": 0.000037103891372680664,
+      "native_pass5_input_diagnostic_only": true,
+      "pass6_red_mae_before": 0.3958333333333333,
+      "pass6_red_mae_with_observed_input": 0.025607638888888888,
+      "acceptance_credit": false,
+      "simple_f32_product_half_up_remaining_pass5_red_mismatches": 2137,
+      "scope": "Threshold localization does not identify the native pre-conversion value or output conversion rule"
+    },
     "runtime_shader_source_capture": false,
     "limits": [
       "No attached shader source was available after linking",
@@ -71,6 +81,17 @@
       "Sampling or arithmetic remains unresolved; this is not an additional confirmed AAR bug",
       "Diagnostic observations do not replace frozen full-preset grades"
     ]
+  },
+  "rational_unorm8_sampler_prototype": {
+    "scope": "Offline exact integer-weighted UNORM8 interpolation, nearest8 fractions and one final float32 rounding",
+    "adopted": false,
+    "linear_filter_8frame_mae_before": 0.4583333333333333,
+    "linear_filter_8frame_mae_candidate": 0.5,
+    "linear_filter_8frame_max_error": 6,
+    "source_pass5_all_rgb_mae_before": 0.11635561342592593,
+    "source_pass5_all_rgb_mae_candidate": 0.1345486111111111,
+    "constant_field_normalization_exact": true,
+    "path": "build/visual-loop/precision-controls238/rational-unorm8-linear-prototype/"
   },
   "blur_fma_prototype": {
     "production_patch": false,

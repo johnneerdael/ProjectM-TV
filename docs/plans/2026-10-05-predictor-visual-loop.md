@@ -409,3 +409,14 @@ changed from3567653994 to3567620661. Entropy, C seeds and both per-thread random
 sequences match, but the clock difference has not been certified irrelevant.
 Keep these readbacks as conditional diagnostic evidence, not proof of an entirely
 identical execution context. No retry was launched to discard the discrepancy.
+
+Every differing first-pass value is red and within3.71e-5 byte units of a
+half-byte boundary. A labeled diagnostic using native pass5 as input reduces
+pass6 red error from0.395833 to0.025608; it is never credited as a source forecast.
+Simple float32-product half-up conversion still leaves2,137 first-pass mismatches.
+An exact integer-weighted nearest8 UNORM sampler candidate worsens both the saved
+filter control and source-defined blur input, so it is not adopted. The next
+bounded control directly writes float32 neighbors of half-byte boundaries through
+Q uniforms, separating output conversion from texture filtering. Its60-frame inputs
+and three candidates were frozen before capture; the patched source evaluator
+independently confirms all180 Q-component float32 bits.
