@@ -1,3 +1,5 @@
+import os
+import test_native_reader
 import json,subprocess,tempfile
 from pathlib import Path
 import numpy as np
@@ -6,7 +8,7 @@ from shader_fields import ShaderFields
 from field_math import evaluate,UnresolvedMath
 from grid_math import evaluate_grid
 
-READER=Path(__file__).resolve().parents[2]/'build/milk-analyzer/release233-native/milk-native-reader'
+READER=Path(os.environ.get("MILK_TEST_CURRENT_BINARIES",test_native_reader.READER.parent))/"milk-native-reader"
 POLICY='projectmtv-implicit-extern-zero-v1'
 
 

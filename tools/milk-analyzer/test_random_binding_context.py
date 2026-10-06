@@ -1,4 +1,6 @@
-import copy,hashlib,json,subprocess
+import pytest
+from analyzer_test_profiles import historical_source, historical_shader
+import copy,hashlib,json
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -15,7 +17,7 @@ def inputs():
         image=cv2.imdecode(np.frombuffer(path.read_bytes(),dtype=np.uint8),cv2.IMREAD_UNCHANGED)
         height,width=image.shape[:2]
         assets[row['asset_path']]={'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'width':width,'height':height,'loading_policy':'soil2-multiply-alpha-pot-ceil'}
-    patch=hashlib.sha256(subprocess.check_output(['git','show','origin/main:tools/projectm-patches/0037-random-texture-alias-bindings.patch'])).hexdigest()
+    patch=hashlib.sha256((ROOT/'tools/projectm-patches/0037-random-texture-alias-bindings.patch').read_bytes()).hexdigest()
     return source,evidence,assets,patch
 
 
@@ -56,19 +58,18 @@ def test_framebuffer_error_is_retained_with_valid_binding_identity():
     assert result['appearance_verified'] is False
 
 
+@pytest.mark.historical_profile("merged37")
 def test_exact_three_shader_sections_lower_only_with_valid_context():
     from coverage_audit import audit_source
-    from shader_compat import check_shader
     source_stub,evidence,assets,patch=inputs()
-    tree_root=ROOT/'build/milk-analyzer/focused-315-merged37-2026-10-04/trees'
     for outcome in evidence['preset_results']:
         path=ROOT/outcome['preset_path'];raw=path.read_bytes()
-        cache_path=next(tree_root.rglob(outcome['preset_sha256']+'.json'))
-        source=json.loads(cache_path.read_text());section=source['sections']['comp_']
+        assert hashlib.sha256(raw).hexdigest()==outcome['preset_sha256']
+        # Read exact archived source evidence; no ignored corpus cache.
+        source=historical_source('merged37',raw)
+        section=source['sections']['comp_']
         declarations=[v for n in section['tree'] if n['kind']=='declarations' for v in n['values']]
-        compat=check_shader(section['source'],stage='composite',profile='glsl330',
-            translator=ROOT/'build/milk-analyzer/merged37-native/milk-shader-translate',
-            validator=Path('/opt/homebrew/bin/glslangValidator'),
+        compat=historical_shader('merged37',section['source'],stage='composite',profile='glsl330',
             samplers={v['name']:v['type']['name'] for v in declarations if v['type']['name'] in {'sampler2D','sampler3D'}},
             texture_sizes=[v['name'] for v in declarations if v['name'].startswith('texsize_') and v['type']['name']=='float4'])
         kwargs=dict(cache=source,reader_sha=source['reader_sha256'],equation_loader_policy='projectmtv-core-2.2.8-v1',

@@ -1,3 +1,4 @@
+import pytest
 import json
 import os
 import subprocess
@@ -112,7 +113,7 @@ class NativeReaderTest(unittest.TestCase):
         self.assertEqual(evaluate(field).tolist(),[0,0,0])
 
     def test_custom_wave_forward_backward_audio_smoothing_matches_known_kernel(self):
-        left=[0]*480;left[239]=1
+        left=[0]*480;left[1]=1
         settings={'frame_program':'frame','spectrum':False,'separation':0,'scaling':1,'smoothing':.5,
                   'preset_wave_scale':1,'left':left,'right':[0]*480}
         result=self.execute({'frame':'samples=3;','point':'0;'},
@@ -142,7 +143,9 @@ class NativeReaderTest(unittest.TestCase):
         self.assertEqual([p['y'] for p in group['points']],[3,4,5])
         self.assertEqual([p['counter'] for p in group['points']],[1,2,3])
         self.assertEqual([p['sample'] for p in group['points']],[0,.5,1])
-        self.assertAlmostEqual(group['points'][0]['value1'],238*.004,places=6)
+        # Current CustomWaveform::Draw starts PCM at index zero, with unit stride.
+        for point,expected in zip(group['points'],[0,.004,.008]):
+            self.assertAlmostEqual(point['value1'],expected,places=9)
         self.assertEqual([p['r'] for p in group['points']],[.4]*3)
 
     def test_native_custom_wave_skips_one_sample_even_for_dots(self):
@@ -189,6 +192,7 @@ class NativeReaderTest(unittest.TestCase):
         self.assertEqual(result['steps'][2],{'counter':0,'q1':0})
         self.assertAlmostEqual(result['steps'][3]['q1'],7.4)
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_float_literal_preserves_native_and_renderer_values_separately(self):
         result=self.read('PSVERSION_COMP=2\ncomp_1=`shader_body {ret=16777216.;}\n')
         nodes=[]

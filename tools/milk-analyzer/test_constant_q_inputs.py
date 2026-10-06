@@ -1,3 +1,4 @@
+import pytest
 import test_native_reader
 from shader_fields import ShaderFields
 
@@ -31,6 +32,7 @@ def test_known_q_input_resolves_only_selected_initialization_branch():
     assert model.complete,model.unknown
 
 
+@pytest.mark.historical_profile("legacy_pre30")
 def test_known_uniform_does_not_initialize_generated_writable_replacement():
     source=test_native_reader.NativeReaderTest().read('PSVERSION_COMP=2\n'
         'comp_1=`shader_body {q18=1;ret=q19;}\n')

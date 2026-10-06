@@ -1,25 +1,19 @@
 """Conditional language understanding must not fabricate selected images."""
+from analyzer_test_profiles import historical_source, historical_shader, FIXTURES
 import copy
 import hashlib
 import json
-import os
-import shutil
 from pathlib import Path
-import subprocess
 
 import numpy as np
 import pytest
 
 from coverage_audit import audit_source
 from field_math import evaluate, UnresolvedMath
-from shader_compat import check_shader
 from shader_fields import ShaderFields
 from random_binding_contract import native_contract, METHODS, SOURCE_FILES
 
 ROOT = Path(__file__).resolve().parents[2]
-READER = Path(os.environ.get('MILK_RANDOM_BINDING_READER', ROOT/'build/milk-analyzer/random-binding-native/milk-native-reader'))
-TRANSLATOR = Path(os.environ.get('MILK_RANDOM_BINDING_TRANSLATOR', ROOT/'build/milk-analyzer/random-binding-native/milk-shader-translate'))
-VALIDATOR = os.environ.get('MILK_GLSLANG_VALIDATOR') or shutil.which('glslangValidator')
 POLICY = 'projectmtv-random-slot-inputs-v1'
 CASES = [
     ('EoS - glowsticks v2 04 music minimal - swim  - dictatutorial rt roam3 2.milk',
@@ -32,16 +26,14 @@ CASES = [
 
 def inputs(path):
     raw = path.read_bytes()
-    source = json.loads(subprocess.check_output([str(READER), str(path)]))
-    source.update(preset_sha256=hashlib.sha256(raw).hexdigest(),
-                  reader_sha256=hashlib.sha256(READER.read_bytes()).hexdigest())
+    source = historical_source('random_contract',raw)
     section = source['sections']['comp_']
     declarations = [v for node in section['tree'] if node['kind'] == 'declarations'
                     for v in node['values']]
     samplers = {v['name']: 'sampler2D' if v['type']['name']=='sampler' else v['type']['name']
                 for v in declarations if v['type']['name'] in {'sampler', 'sampler2D', 'sampler3D'}}
-    compatibility = check_shader(section['source'], stage='composite', profile='gles300',
-        translator=TRANSLATOR, validator=Path(VALIDATOR), samplers=samplers,
+    compatibility = historical_shader('random_contract',section['source'], stage='composite', profile='gles300',
+        samplers=samplers,
         texture_sizes=[v['name'] for v in declarations
                        if v['name'].startswith('texsize_') and v['type']['name'] == 'float4'])
     assert compatibility['offline_accepted'], compatibility
@@ -108,8 +100,8 @@ def test_slot_input_identity_preserves_alias_modes_and_requires_texture_values(t
         'sampler sampler_fw_rand00=sampler_state {AddressU=CLAMP;};'
         'shader_body {ret=(tex2D(sampler_pc_rand00,uv)+tex2D(sampler_fw_rand00,uv)).rgb*.5;}\n')
     raw, source, compatibility = inputs(path)
-    compatibility = check_shader(source['sections']['comp_']['source'], stage='composite',
-        profile='gles300', translator=TRANSLATOR, validator=Path(VALIDATOR),
+    compatibility = historical_shader('random_contract',source['sections']['comp_']['source'], stage='composite',
+        profile='gles300',
         samplers={'sampler_pc_rand00': 'sampler2D', 'sampler_fw_rand00': 'sampler2D'}, texture_sizes=[])
     context = verified_contract(source, stage='composite', profile='gles300', compatibility=compatibility)
     assert context is not None
@@ -168,11 +160,12 @@ def test_direct_verifier_fails_closed_on_malformed_containers(container, invalid
 
 def test_changed_warp_sampler_initializer_or_dispatcher_revokes_contract(tmp_path):
     # Reconstruct only the files the policy stamps; never edit a shared engine.
-    cache = json.loads(subprocess.check_output([str(READER),str(ROOT/'core/src/main/assets/presets'/CASES[0][0])]))
+    cache = historical_source('random_contract',(ROOT/'core/src/main/assets/presets'/CASES[0][0]).read_bytes())
     assert cache['parser_inputs']['random_binding_contract']['policy'] == POLICY
-    configured = (ROOT/'build/milk-analyzer/random-binding-native/CMakeCache.txt').read_text()
-    engine = Path(next(line.split('=',1)[1] for line in configured.splitlines()
-                       if line.startswith('ENGINE_SOURCE:')))
+    engine = FIXTURES/'random_contract'/'source'
+    manifest=json.loads((engine/'sha256.json').read_text())
+    for relative,digest in manifest.items():
+        assert hashlib.sha256((engine/relative).read_bytes()).hexdigest()==digest
     for name in {row[0] for row in METHODS.values()} | set(SOURCE_FILES):
         relative = Path('src/libprojectM')/name
         (tmp_path/relative).parent.mkdir(parents=True,exist_ok=True)
@@ -189,3 +182,6 @@ def test_changed_warp_sampler_initializer_or_dispatcher_revokes_contract(tmp_pat
     shader.write_text(shader.read_text().replace('desc.Bind(textureUnit, m_shader);',
                                                  'desc.Bind(textureUnit + 1, m_shader);'))
     assert native_contract(tmp_path) is None
+
+# Recognized pre43 random-slot source contract; newer source remains fail-closed.
+pytestmark = pytest.mark.historical_profile("random_contract")

@@ -1,6 +1,6 @@
 """Runtime name bindings must not pretend authored sampler directives apply."""
+from analyzer_test_profiles import validator_path
 import numpy as np
-from pathlib import Path
 
 import test_native_reader
 from shader_fields import ShaderFields
@@ -55,9 +55,8 @@ def test_name_qualifiers_control_native_policy_instead_of_state_block():
 
 
 def compatibility(parsed):
-    native=Path(__file__).resolve().parents[2]/'build/milk-analyzer/native'
     return check_shader(parsed['sections']['comp_']['source'],stage='composite',profile='glsl330',
-        translator=native/'milk-shader-translate',validator=Path('/opt/homebrew/bin/glslangValidator'),
+        translator=test_native_reader.READER.parent/"milk-shader-translate",validator=validator_path(),
         samplers={'sampler_main':'sampler2D'},texture_sizes=[])
 
 
@@ -73,6 +72,7 @@ def test_source_pipeline_only_binds_state_after_source_matched_compiler_acceptan
     assert result.history['composite_kind']=='custom_composite'
 
 
+@pytest.mark.historical_profile("legacy_pre30")
 def test_multiline_rejection_predicts_default_composite_not_authored_colour():
     parsed=source('sampler sampler_main=sampler_state {\nAddressU=CLAMP;\n};',
                   'ret=float3(.9,.1,.2);')

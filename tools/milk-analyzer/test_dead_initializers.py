@@ -1,3 +1,4 @@
+import pytest
 import numpy as np
 from test_helper_state import lower
 from field_math import evaluate
@@ -9,6 +10,7 @@ def test_unused_pure_initializer_does_not_make_output_depend_on_unwritten_global
     np.testing.assert_allclose(evaluate(result),[.4]*3)
 
 
+@pytest.mark.historical_profile("legacy_pre30")
 def test_live_initializer_and_helper_returns_remain_obligations():
     model,result=lower('float used=dot(back,float3(1));ret=used;','float3 back;')
     assert not model.complete
@@ -22,6 +24,7 @@ def test_unused_initializer_does_not_discard_shared_helper_effects():
     np.testing.assert_array_equal(evaluate(result),[3]*3)
 
 
+@pytest.mark.historical_profile("legacy_pre30")
 def test_later_declaration_in_same_statement_keeps_earlier_value_live():
     model,result=lower('float a=dot(back,float3(1)),b=a;ret=b;','float3 back;')
     assert not model.complete

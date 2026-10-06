@@ -1,0 +1,16 @@
+{
+  "src/libprojectM/MilkdropPreset/MilkdropPreset.cpp": "4fb71c41c7149c121cb06a66e937b1c9c69373da34bdaad3a58589cbed52d770",
+  "src/libprojectM/MilkdropPreset/MilkdropShader.cpp": "f6b336c6071e3e66928d0c3bde2e9409ffbe58baf17acc0d68c174abe2bcf5f8",
+  "src/libprojectM/MilkdropPreset/MilkdropShader.hpp": "d5ff7a12145c9e6771072744757b569cee1e7e13477f54f726df26b147efd83a",
+  "src/libprojectM/MilkdropPreset/PerPixelMesh.cpp": "f05a755d34533f23637477757487ea6c24714479392029f1683440188722d69f",
+  "src/libprojectM/MilkdropPreset/PerPixelMesh.hpp": "bc12286c4d12e4208d65c09bbdad16cb7fe41b5c57d03f19239fd21e42323dff",
+  "src/libprojectM/MilkdropPreset/PresetState.hpp": "834412310ad591ed7d25fd0d1d565cb69737bb6c6db0780596bda15d0cd51595",
+  "src/libprojectM/Renderer/Sampler.cpp": "2f4f7a4dfb69323ce16f0432889437d9173e155a41c7261f5293dbb4259a43d9",
+  "src/libprojectM/Renderer/Sampler.hpp": "2e99730e688f6b74568871ab364e34b35c57bb55094164bcd881369896084678",
+  "src/libprojectM/Renderer/Texture.cpp": "cb206fa907073bc6453eb64c280c40022683637596b981190cd5dbb21b15154d",
+  "src/libprojectM/Renderer/Texture.hpp": "762917b61eeb4b692d477e7c906d51d5798439e1bdb3aab9c4e030ee0f4dae86",
+  "src/libprojectM/Renderer/TextureManager.cpp": "782ddade73b037e991467982c03167790dd0e597c1249b60593f99973f95ad5f",
+  "src/libprojectM/Renderer/TextureManager.hpp": "a865479a47cdd4ba64a8b74f90fd0f1823a9914c90f245d4a4ae20566918fc00",
+  "src/libprojectM/Renderer/TextureSamplerDescriptor.cpp": "fbc6b94a73eafe1a0594923b1aa3177ccb88aaef7ede4941a45a967f2ffa5144",
+  "src/libprojectM/Renderer/TextureSamplerDescriptor.hpp": "adc68ba5b14f28e1d9829b719bb05fb959a41aed8105cfc615865c6baf9fc7cf"
+}

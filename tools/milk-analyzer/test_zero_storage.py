@@ -10,6 +10,7 @@ from grid_math import evaluate_grid
     ('float2 rs;','0*rs'),('float2 rs;','rs*0'),
     ('float2 rs;','0*rs.xy'),('float rs;','0*rs'),
 ])
+@pytest.mark.historical_profile("legacy_pre30")
 def test_literal_zero_product_has_defined_value_without_initializing_storage(prefix,expression):
     model,result=lower('ret=float3('+expression+(',0' if 'float2' in prefix else '')+');',prefix)
     assert model.complete,model.unknown
@@ -17,6 +18,7 @@ def test_literal_zero_product_has_defined_value_without_initializing_storage(pre
     np.testing.assert_array_equal(evaluate_grid(result,batch_shape=(2,)),np.zeros((2,3)))
 
 
+@pytest.mark.historical_profile("legacy_pre30")
 def test_zero_product_does_not_initialize_the_storage_for_later_reads():
     model,result=lower('float2 a=0*rs;ret=float3(rs,0);','float2 rs;')
     assert not model.complete

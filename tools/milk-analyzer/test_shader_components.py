@@ -1,3 +1,4 @@
+import pytest
 import unittest
 import numpy as np
 from test_shader_loops import lower
@@ -13,6 +14,7 @@ class ShaderComponentsTest(unittest.TestCase):
             self.assertTrue(model.complete,model.unknown)
             np.testing.assert_array_equal(evaluate(result),[expected]*3)
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_same_name_initializer_does_not_define_unwritten_outer_storage(self):
         model,result=lower('float g;shader_body {float g=g;ret=g;}')
         self.assertFalse(model.complete)
@@ -40,6 +42,7 @@ class ShaderComponentsTest(unittest.TestCase):
         self.assertTrue(model.complete,model.unknown)
         np.testing.assert_array_equal(evaluate(result),[2]*3)
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_uniform_replacement_does_not_initialize_other_packed_components(self):
         model,result=lower('shader_body {bass=2;ret=mid;}')
         self.assertFalse(model.complete)
@@ -51,11 +54,13 @@ class ShaderComponentsTest(unittest.TestCase):
         self.assertTrue(model.complete,model.unknown)
         np.testing.assert_array_equal(evaluate(result,inputs={'_qe':[0,2,0,0]}),[3]*3)
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_compound_assignment_reads_uninitialized_replacement(self):
         model,result=lower('shader_body {q18+=1;ret=q18;}')
         self.assertFalse(model.complete)
         self.assertIn('uninitialized shader value reaches a read',model.unknown)
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_uniform_replacements_are_local_to_each_helper_call(self):
         model,result=lower('float f(){q18=1;return q18;}shader_body {q18=2;ret=f()+q18;}')
         self.assertTrue(model.complete,model.unknown)
@@ -149,6 +154,7 @@ class ShaderComponentsTest(unittest.TestCase):
         self.assertTrue(model.complete,model.unknown)
         np.testing.assert_array_equal(evaluate(result),[0,1,0])
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_ordinary_uninitialized_global_is_not_treated_as_an_external_uniform(self):
         model,result=lower('float3 g;shader_body {ret=g;}')
         self.assertFalse(model.complete)

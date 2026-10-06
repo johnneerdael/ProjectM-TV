@@ -1,19 +1,15 @@
-import json,subprocess,tempfile
-from pathlib import Path
+from analyzer_test_profiles import historical_source
+import pytest
 from pytest import approx
 from shader_fields import ShaderFields
 from field_math import evaluate
 
-READER=Path(__file__).resolve().parents[2]/'build/milk-analyzer/merged37-native/milk-native-reader'
 
 
 def lower(code):
-    with tempfile.TemporaryDirectory() as directory:
-        path=Path(directory)/'control.milk'
-        records=['MILKDROP_PRESET_VERSION=201','PSVERSION_COMP=2']
-        records += ['comp_'+str(i)+'='+chr(96)+line for i,line in enumerate(code.splitlines(),1)]
-        path.write_text('\n'.join(records)+'\n')
-        source=json.loads(subprocess.check_output([str(READER),str(path)]))
+    records=['MILKDROP_PRESET_VERSION=201','PSVERSION_COMP=2']
+    records += ['comp_'+str(i)+'='+chr(96)+line for i,line in enumerate(code.splitlines(),1)]
+    source=historical_source('merged37', ('\n'.join(records)+'\n').encode())
     section=source['sections']['comp_']
     assert section['status']=='parsed'
     model=ShaderFields(stage='composite',frame=1,warp_reads_blur=False,
@@ -33,3 +29,5 @@ def test_merged_macro_preserves_token_precedence_and_declaration_expansion():
 
 def test_merged_parser_preserves_parenthesized_expression_swizzle():
     assert lower('shader_body {ret=(float3(.2,.4,.6)*2).xyy;}')==approx([.4,.8,.8])
+
+pytestmark = pytest.mark.historical_profile("merged37")

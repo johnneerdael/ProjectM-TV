@@ -1,3 +1,5 @@
+import os
+from analyzer_test_profiles import validator_path
 import importlib
 import hashlib
 from pathlib import Path
@@ -13,12 +15,12 @@ BINARIES = test_native_audio.ROOT / 'build/milk-analyzer/native'
 BASE = 'warp=0\nfWaveAlpha=0\nnWaveMode=6\nfDecay=1\n'
 
 
-def native(body):
+def native(body,*,binaries=BINARIES):
     module=importlib.import_module('forecast')
     with tempfile.TemporaryDirectory() as directory:
         path=Path(directory)/'fixture.milk'
         path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\n'+body)
-        return module.read_source(path,reader=BINARIES/'milk-native-reader')
+        return module.read_source(path,reader=binaries/'milk-native-reader')
 
 
 def domain(**updates):
@@ -41,7 +43,7 @@ def compatibility(source):
 
 def predict(source, **settings):
     return importlib.import_module('forecast').forecast_source(
-        source, audio=settings.pop('audio', audio()), binaries=BINARIES,
+        source, audio=settings.pop('audio', audio()), binaries=settings.pop('binaries',BINARIES),
         domain=settings.pop('domain', domain()),
         compatibility=settings.pop('compatibility', compatibility(source)), **settings)
 
@@ -100,7 +102,7 @@ def test_verified_engine_defaults_clamp_main_before_qualified_alias():
     from shader_compat import check_shader
     stages={stage:check_shader(source['sections'][prefix]['source'],stage=stage,profile='glsl330',
                               translator=BINARIES/'milk-shader-translate',
-                              validator=Path('/opt/homebrew/bin/glslangValidator'),
+                              validator=validator_path(),
                               samplers={'sampler_main':'sampler2D','sampler_fc_main':'sampler2D'},
                               texture_sizes=['texsize_main'])
             for stage,prefix in [('warp','warp_'),('composite','comp_')]}
@@ -139,12 +141,13 @@ def test_textured_shape_samples_previous_main_instead_of_current_warp_output():
 
 def test_shape_instances_receive_distinct_inherited_and_texture_sampler_modes(monkeypatch):
     module=importlib.import_module('forecast')
+    binaries=Path(os.environ.get('MILK_TEST_CURRENT_BINARIES',BINARIES))
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
     source=native(BASE+'bTexWrap=0\nwarp_1=`shader_body {ret=GetBlur1(uv)*0;}\ncomp_1=`shader_body {ret=GetPixel(uv);}\n'
                   'shapecode_0_enabled=1\nshapecode_0_textured=1\nshapecode_0_num_inst=2\n'
                   'shapecode_0_rad=.4\nshapecode_0_a=1\nshapecode_0_a2=1\n'
-                  'shape_0_per_frame1=x=.25+.5*instance;y=.5;\n')
-    if source['parser_inputs']['engine']['patches_sha256']!=module.CORE_237_EQUATION_ENGINE['patches_sha256']:
-        pytest.skip('Requires prepared 43-patch adapters for the observed shape-state contract')
+                  'shape_0_per_frame1=x=.25+.5*instance;y=.5;\n',binaries=binaries)
+    assert module.source_shape_sampler_policy(source['parser_inputs']['engine'],None)=='projectmtv-core-2.3.8-shape-state-v1'
     calls=[];original=module.sample2d
     def observe(field,uv,**settings):
         calls.append((settings['wrap'],settings['linear']))
@@ -152,14 +155,13 @@ def test_shape_instances_receive_distinct_inherited_and_texture_sampler_modes(mo
     monkeypatch.setattr(module,'sample2d',observe)
     from shader_compat import check_shader
     stages={stage:check_shader(source['sections'][prefix]['source'],stage=stage,profile='glsl330',
-                              translator=BINARIES/'milk-shader-translate',
-                              validator=Path('/opt/homebrew/bin/glslangValidator'),
+                              translator=binaries/'milk-shader-translate',validator=validator_path(),
                               samplers={'sampler_main':'sampler2D','sampler_blur1':'sampler2D'},
                               texture_sizes=['texsize_main'])
             for stage,prefix in [('warp','warp_'),('composite','comp_')]}
     assert all(item['offline_accepted'] for item in stages.values()),stages
     settings=domain();settings['blur_levels']=1
-    result=predict(source,audio=audio(1),domain=settings,compatibility=stages)
+    result=predict(source,audio=audio(1),binaries=binaries,domain=settings,compatibility=stages)
     assert calls and set(calls)=={(False,True),(True,False)}
     split=calls.index((True,False))
     assert all(value==(False,True) for value in calls[:split])

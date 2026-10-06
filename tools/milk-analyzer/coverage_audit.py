@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import sys
 from source_inventory import CODE_KEY,TOKEN,COMMENT,EEL_COMMENT,SUPPORTED_PREFIXES
 
 from shader_fields import ShaderFields
@@ -248,7 +249,7 @@ def main() -> None:
                 'cache_identity_matches', 'source_tokens', 'code_tokens',
                 'parsed_code_tokens', 'unvisited_code_tokens')})
             if index % 1000 == 0:
-                print(f'Audited {index}/{len(paths)}', flush=True)
+                print(f'Audited {index}/{len(paths)}', file=sys.stderr, flush=True)
     source_count = sum(row['source_tokens'] for row in presets)
     code_count = sum(row['code_tokens'] for row in presets)
     parsed_count = sum(row['parsed_code_tokens'] for row in presets)

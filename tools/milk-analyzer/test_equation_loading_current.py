@@ -1,15 +1,12 @@
-import json,subprocess,tempfile
-from pathlib import Path
+from analyzer_test_profiles import historical_source
 import pytest
 from equation_loading import select_equation
 
-READER=Path(__file__).resolve().parents[2]/'build/milk-analyzer/merged35-native/milk-native-reader'
+from test_native_reader import READER
 
 
 def source(body):
-    with tempfile.TemporaryDirectory() as directory:
-        path=Path(directory)/'test.milk';path.write_text('MILKDROP_PRESET_VERSION=201\n'+body)
-        return json.loads(subprocess.check_output([str(READER),str(path)]))
+    return historical_source('merged35', ('MILKDROP_PRESET_VERSION=201\n'+body).encode())
 
 
 @pytest.mark.parametrize('prefix',['per_frame_init_','per_pixel_','wave_0_per_frame','shape_0_per_frame'])
@@ -74,3 +71,5 @@ def test_old_retry_cannot_borrow_new_parenthesis_semicolon_rule():
     section=s['sections']['per_frame_']
     assert select_equation(section,'per_frame_',policy='projectmtv-core-2.2.8-v1')['compile_status']=='accepted'
     assert select_equation(section,'per_frame_',policy='projectmtv-core-2.2.6-v1')['compile_status']=='unknown'
+
+pytestmark = pytest.mark.historical_profile("merged35")

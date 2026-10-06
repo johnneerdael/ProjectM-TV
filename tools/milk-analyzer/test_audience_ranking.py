@@ -21,6 +21,11 @@ def test_no_spread_is_invented_for_a_single_value_or_all_ties():
     assert relative_activity_ranks([20,20,20]) == [50.5]*3
 
 
-@pytest.mark.parametrize('value',[True,float('nan'),float('inf'),-1,101,'50'])
+@pytest.mark.parametrize('value',[True,float('nan'),float('inf'),-1,'50'])
 def test_invalid_measured_scores_are_rejected(value):
     with pytest.raises(ValueError):relative_activity_ranks([value])
+
+
+def test_raw_activity_above_100_is_ranked_without_clipping():
+    assert relative_activity_ranks([101,102,1000]) == [1,50.5,100]
+    assert relative_activity_ranks([1000,101,101]) == [100,1,1]

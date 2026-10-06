@@ -1,3 +1,4 @@
+import pytest
 import numpy as np
 from test_shader_loops import lower
 from field_math import evaluate
@@ -10,6 +11,7 @@ def test_discarded_noise_chain_does_not_require_unwritten_coordinate():
     np.testing.assert_allclose(evaluate(result),[.4]*3)
 
 
+@pytest.mark.historical_profile("legacy_pre30")
 def test_live_noise_chain_still_requires_coordinate():
     model,result=lower('float noise;float2 uv3;shader_body {'
                        'noise=tex2D(sampler_main,uv3).x;noise*=noise>=.9;ret=noise;}')

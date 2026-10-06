@@ -522,3 +522,22 @@ remain rejected. Actual source44 forecasting reproduces the fixed literal contro
 and two unchanged-AAR one-frame controls match frozen RGB exactly. CPU source44
 PCM/FFT arrays match all60 source43 frames; artifact identities remain distinct.
 The100-preset audit uses the latest published AAR and its matching source adapters.
+
+### Reproducible historical and current tests
+
+Historical parser/translation controls use90 source-bound snapshots and14 policy
+source files in `fixtures/historical-profiles`, with explicit profile markers.
+Request, payload, engine/archive/header and source-file hashes are checked; original
+adapter digests are retained as provenance and checked for format length. Actual
+installed GLSL compilation and current native EEL execution remain live. Snapshots
+do not establish historical GPU appearance. Regeneration requires exact archived
+adapters; normal tests no longer need another worktree's build/cache directories.
+Current paired adapters are selected with `MILK_TEST_CURRENT_BINARIES`; validator
+selection uses `MILK_GLSLANG_VALIDATOR` or PATH.
+
+The task-owned `build/preset-lab-venv` replaces the old external environment. Its
+NumPy/OpenCV/pytest versions are unchanged; the editable package now points to this
+worktree's `tools/preset-lab`. The complete matched-source44 suite passes1010tests
+and67subtests with no skips. Coverage CLI progress goes to stderr, keeping JSON
+stdout parseable. The explicit44 built-in dot identity guard preserves the existing
+single2px GLES point contract and rejects unknown source identities/large viewports.

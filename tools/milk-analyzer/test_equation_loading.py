@@ -83,3 +83,6 @@ def test_raw_execution_request_does_not_silently_join_records():
     with pytest.raises(AssertionError,match='compile error'):
         test_native_reader.NativeReaderTest().execute(
             {'frame':{'code':'is_beat=2;q1=is_\nbeat;','assembly':'raw'}},[])
+
+# Original pre0030 regression controls; current-profile behavior is tested separately.
+pytestmark = pytest.mark.historical_profile("legacy_pre30")

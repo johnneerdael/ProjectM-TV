@@ -188,11 +188,15 @@ def test_invalid_lifecycle_or_seed_does_not_return_plausible_uniforms():
 
 def test_bridge_records_source_identity_and_declares_host_profile_limitations():
     native = run([create('warp'), load('warp')])
-    source = ROOT / ('build/preset-lab-production/engines/'
-                    '96df3b3b13f0b358a26aeeafb4127dc8a62e51b0be76e56c33eeaea3faea705a/'
-                        'src/libprojectM/MilkdropPreset/MilkdropShader.cpp')
-    if os.environ.get('MILK_NATIVE_RANDOM_ENGINE_SOURCE'):
-        source=Path(os.environ['MILK_NATIVE_RANDOM_ENGINE_SOURCE'])/'src/libprojectM/MilkdropPreset/MilkdropShader.cpp'
+    configured=os.environ.get('MILK_NATIVE_RANDOM_ENGINE_SOURCE')
+    if configured:
+        engine=Path(configured)
+    else:
+        # CMake records the exact source paired with this adapter build.
+        cache=(BINARY.parent/'CMakeCache.txt').read_text()
+        source_line=next(line for line in cache.splitlines() if line.startswith('ENGINE_SOURCE:'))
+        engine=Path(source_line.split('=',1)[1])
+    source=engine/'src/libprojectM/MilkdropPreset/MilkdropShader.cpp'
     assert native['source_sha256'] == hashlib.sha256(source.read_bytes()).hexdigest()
     assert native['rendered_frames_consumed'] is False
     assert native['target_driver_verified'] is False

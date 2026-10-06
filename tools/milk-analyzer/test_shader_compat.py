@@ -1,16 +1,19 @@
+from analyzer_test_profiles import validator_path
+import pytest
 import importlib
 from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
+TRANSLATOR = ROOT/"build/milk-analyzer/native/milk-shader-translate"
 
 
 class ShaderCompatibilityTest(unittest.TestCase):
     def check(self, code, stage='composite', profile='glsl330'):
         module = importlib.import_module('shader_compat')
         return module.check_shader(code, stage=stage, profile=profile,
-            translator=ROOT/'build/milk-analyzer/native/milk-shader-translate',
-            validator=Path('/opt/homebrew/bin/glslangValidator'),
+            translator=TRANSLATOR,
+            validator=validator_path(),
             samplers={'sampler_main': 'sampler2D'}, texture_sizes=['texsize_main'])
 
     def test_reading_uniforms_compiles_in_both_target_profiles(self):
@@ -111,3 +114,6 @@ class ShaderCompatibilityTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+# Original pre0030 regression controls; current-profile behavior is tested separately.
+pytestmark = pytest.mark.historical_profile("legacy_pre30")

@@ -1,3 +1,4 @@
+from analyzer_test_profiles import validator_path
 import importlib
 import struct
 import zlib
@@ -62,7 +63,7 @@ def test_named_material_enters_shader_forecast(tmp_path):
                                'comp_1=`shader_body {ret=tex2D(sampler_colour,uv).rgb*q1*.5;}\n')
     from shader_compat import check_shader
     evidence={'composite':check_shader(source['sections']['comp_']['source'],stage='composite',profile='glsl330',
-        translator=test_forecast.BINARIES/'milk-shader-translate',validator=Path('/opt/homebrew/bin/glslangValidator'),
+        translator=test_forecast.BINARIES/'milk-shader-translate',validator=validator_path(),
         samplers={'sampler_main':'sampler2D','sampler_colour':'sampler2D'},texture_sizes=[])}
     result=test_forecast.predict(source,compatibility=evidence,materials=inputs)
     np.testing.assert_allclose(result['frames'][0]['display'][...,:3],np.broadcast_to([254/255,0,0],(32,32,3)),atol=1e-7)
@@ -83,7 +84,7 @@ def test_original_case_texture_size_uniform_is_bound_to_the_named_material(tmp_p
     source=test_forecast.native(test_forecast.BASE+'comp_1=`shader_body {ret=texsize_COLOUR.xy/2;}\n')
     from shader_compat import check_shader
     evidence={'composite':check_shader(source['sections']['comp_']['source'],stage='composite',profile='glsl330',
-        translator=test_forecast.BINARIES/'milk-shader-translate',validator=Path('/opt/homebrew/bin/glslangValidator'),
+        translator=test_forecast.BINARIES/'milk-shader-translate',validator=validator_path(),
         samplers={'sampler_main':'sampler2D'},texture_sizes=['texsize_COLOUR'])}
     result=test_forecast.predict(source,compatibility=evidence,materials=inputs)
     np.testing.assert_allclose(result['frames'][0]['display'][...,:3],np.broadcast_to([1,.5,0],(32,32,3)),atol=1e-7)

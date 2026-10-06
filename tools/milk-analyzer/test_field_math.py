@@ -1,4 +1,5 @@
 """Source arithmetic tests, with no rendered/reference images."""
+import pytest
 import math
 import unittest
 import numpy as np
@@ -87,6 +88,7 @@ class FieldMathTest(unittest.TestCase):
         _,result=lower('int i=16777217;ret=float3(i - bass);')
         np.testing.assert_allclose(field_math.evaluate(result,inputs={'_c3':[16777216,0,0,0]}),[0,0,0])
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_constant_uses_the_actual_renderer_decimal_literal(self):
         import field_math
         _,result=lower('ret=float3(16777216.);')

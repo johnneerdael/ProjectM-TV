@@ -1,3 +1,4 @@
+import pytest
 import importlib
 import unittest
 import numpy as np
@@ -24,6 +25,7 @@ class StageResolutionTest(unittest.TestCase):
         plan=self.resolve({'values':{'MILKDROP_PRESET_VERSION':'200','PSVERSION':'0','PSVERSION_COMP':'2'},'sections':{}})
         self.assertEqual(plan['composite']['kind'],'legacy_composite')
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_rejected_composite_uses_default_with_verified_source_identity(self):
         source=test_native_reader.NativeReaderTest().read('PSVERSION_COMP=2\ncomp_1=`shader_body {q18++;ret=q18;}\n')
         code=source['sections']['comp_']['source']
@@ -52,6 +54,7 @@ class StageResolutionTest(unittest.TestCase):
         source=test_native_reader.NativeReaderTest().read('comp_1=`shader_body {ret=1;}\n')
         self.assertTrue(source['sections']['comp_']['active'])
 
+    @pytest.mark.historical_profile("legacy_pre30")
     def test_rejected_array_and_state_execute_fallback_not_authored_shader(self):
         from pipeline_fields import SourcePipeline
         cases=['shader_body {float2 a[2]={1,2,3,4};ret=a[0].xxx;}',

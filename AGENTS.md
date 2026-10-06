@@ -428,3 +428,11 @@ If the repository requires a merge queue, enqueue the eligible PR and monitor un
 - Automatic quality JVM suite42 tests passes (FPS/memory/migration/budget). Release tooling82 tests passes. Revalidate after final integration/review changes.
 - Focused actual-AAR workers: `tools/native-trails/README.md`; no full-corpus claim. Released2.3.3 Native/capped AARs are local historical controls only. Native AAR Acid4K smoke480frames passed. Instrumented comparison, liveAM6, finalCI/Codex/merge/release remain required evidence, not established by these host results.
 - Owner authorizes awake rootedAM6 at192.168.50.80 for live debug/profile in this task. Verify current Android user and media-session state3; never wake remotely; restore task properties/profile preferences. Initial link briefly connected then went offline before player/user queries.
+
+Experimental analyzer validation uses paired current adapters through
+`MILK_TEST_CURRENT_BINARIES`, `MILK_NATIVE_READER`,
+`MILK_NATIVE_RANDOM_BINARY` and `MILK_NATIVE_RANDOM_ENGINE_SOURCE`. Historical
+source/translation fixtures live in `tools/milk-analyzer/fixtures/historical-profiles`;
+keep their request/payload/engine/header identities intact and retain real native
+EEL/installed GLSL checks. Normal tests do not require another worktree.
+Use this task's `build/preset-lab-venv`; keep transport/effective audio hashes distinct.
