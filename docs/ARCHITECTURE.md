@@ -337,7 +337,8 @@ frames skip filter GL work. Filter order and blend formulas remain brighten,
 darken, solarize, invert. Flags use nonzero truth. `PerFrameUpdate` retains the
 existing gamma [0,8] and echo zoom [0.001,1000] clamps. Echo orientation truncates
 toward zero and uses signed remainder modulo four; an undefined integer
-conversion omits echo and draws gamma-only output. Existing echo threshold,
+conversion omits echo and draws gamma-only output. The echo branch compares narrowed float alpha to0.001f, matching the
+MilkDrop3 legacy consumer (float conversion at4065, comparison at4085). Existing echo threshold,
 gamma redraws, UV math and GL cleanup remain intact. Custom composite shaders
 retain their existing uniform/branch policy.
 

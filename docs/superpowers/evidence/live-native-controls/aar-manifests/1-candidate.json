@@ -1,7 +1,7 @@
 {
   "protocol": "projectmtv-core-corpus-v1",
   "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
-  "pid": 3210,
+  "pid": 3754,
   "job": {
     "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
     "width": 512,
@@ -10,11 +10,11 @@
     "referenceHeight": 0,
     "seed": 12345,
     "instrumented": false,
-    "pcmPath": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/audio.u8",
-    "outputDir": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output",
+    "pcmPath": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/audio.u8",
+    "outputDir": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output",
     "expectedPresetCount": 9606
   },
-  "requestSha256": "8d67066f41a59d2343cbfc788690442edb1222887a5915f2370484b915280e79",
+  "requestSha256": "36c8468e5ec7843c1cabbb906efed1f5951d69f332a89daf54fac52f863996e0",
   "determinism": "nondeterministic-real-clock-smoke",
   "frameCountExpected": 480,
   "fps": 30,
@@ -37,141 +37,141 @@
     {
       "frame": 120,
       "simulatedSeconds": 4,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-120.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-120.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "968a08e6b260e921eb50586ff40d4adca6ece57a5260c59d29c1a303f68784d6",
-      "pngBytes": 241994,
-      "pngSha256": "6baad29803fc37ab1d3470e777974a45b508065ffce4f353bbfabc6bd609cc59",
+      "rgbSha256": "2f0973541675fbb9e5bc5325997cd039165db7c8debefb3544bedff678b52b05",
+      "pngBytes": 233960,
+      "pngSha256": "c83305b2ea40163bf4f67a2cb705b4306f72dea9406fce31881be08d7e86fd36",
       "rgbMean": [
-        89.03729629516602,
-        99.06293869018555,
-        117.31582641601562
+        91.85003280639648,
+        106.57605361938477,
+        119.70223999023438
       ],
-      "exactBlackFraction": 0.2603645324707031
+      "exactBlackFraction": 0.22966766357421875
     },
     {
       "frame": 150,
       "simulatedSeconds": 5,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-150.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-150.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "718acb996f5ad77dd4e480c9dd5618594dbb5b971a5f238639f6da5c82b9901b",
-      "pngBytes": 225090,
-      "pngSha256": "7fbb487bed3e4b62956c9a0452fdec160c5816e76c6510f04c56176fffcf2d0a",
+      "rgbSha256": "06fb7b60f37879869a896212a87756781c9f6e032a1ca37f6afc06298558df53",
+      "pngBytes": 155433,
+      "pngSha256": "58bf93c2ef93db46e5082e21ffa6cfbd2da58ee6d33f1000f5152412248ebf61",
       "rgbMean": [
-        93.44719314575195,
-        103.25552749633789,
-        122.30485916137695
+        89.84580612182617,
+        101.18314743041992,
+        112.82987213134766
       ],
-      "exactBlackFraction": 0.2571525573730469
+      "exactBlackFraction": 0.2962799072265625
     },
     {
       "frame": 180,
       "simulatedSeconds": 6,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-180.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-180.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "2515d1106a5ddf2482f9d0a9d84886be425b3f189063ca0009c68cdef4928f81",
-      "pngBytes": 218923,
-      "pngSha256": "a2e2ad7c3e861627578348ebf40b7778fb2da29e977f2040bacdf3368e6e1299",
+      "rgbSha256": "7026d68129bb6b5191785755017f590a0fc27a080485e7e2e79822406ba2fb38",
+      "pngBytes": 207006,
+      "pngSha256": "031efdd43c18bd695662745fcd9be3211dd6e0f703a29e04e97825828f4a6a3b",
       "rgbMean": [
-        92.89916229248047,
-        100.97599792480469,
-        118.29317092895508
+        84.03567123413086,
+        97.28257751464844,
+        108.94833374023438
       ],
-      "exactBlackFraction": 0.2970314025878906
+      "exactBlackFraction": 0.28047943115234375
     },
     {
       "frame": 210,
       "simulatedSeconds": 7,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-210.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-210.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "4ebb491bf806effd7936fe3cd04f096f7450f9c7125f8d916855c0b04a014289",
-      "pngBytes": 245066,
-      "pngSha256": "33ec1d44b7d71c44930e11d9622560cf37f37406d68968ddd6c201b7770465aa",
+      "rgbSha256": "a826dc63136d7551d70ca28e875537c18cb3b173037254d52af833dc2e3c3531",
+      "pngBytes": 142764,
+      "pngSha256": "dbe1da05c7d6e62951f0397c906c9c5d8940731c11cfe814f768fdc13f93bbe6",
       "rgbMean": [
-        84.13910675048828,
-        95.04667663574219,
-        115.26245498657227
+        90.59849166870117,
+        102.58691024780273,
+        115.44998550415039
       ],
-      "exactBlackFraction": 0.2775917053222656
+      "exactBlackFraction": 0.29268646240234375
     },
     {
       "frame": 239,
       "simulatedSeconds": 7.966666666666667,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-239.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-239.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "3ca90f66c471fe5f5764c38616e0cd8c42b8f7c61f67c62227e91999a1f6ff1a",
-      "pngBytes": 194590,
-      "pngSha256": "9a6d0f7825e1d7127e7155d4698384501509927587330a8b671eb4bbc307d0a4",
+      "rgbSha256": "b1b55d8160824567b79a5fc3196af81ab8ba1338827e2a7048bcacd923b396dc",
+      "pngBytes": 149369,
+      "pngSha256": "4078639c3b512236c36e3d616db8b00feab1644f0029b77008bbb2ca48a15587",
       "rgbMean": [
-        92.41902923583984,
-        103.75737380981445,
-        123.57080841064453
+        93.74645614624023,
+        107.92500686645508,
+        122.0628890991211
       ],
-      "exactBlackFraction": 0.2671966552734375
+      "exactBlackFraction": 0.281646728515625
     },
     {
       "frame": 300,
       "simulatedSeconds": 10,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-300.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-300.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "85c360f1b77e9b855f078fe5e2e7750cdaefbfc4e417728a122bc73fbca08b9e",
-      "pngBytes": 281856,
-      "pngSha256": "b72e63734c219e049df59d996ca15e72f423dce301a795a85d2c0d02e2040913",
+      "rgbSha256": "b6e05d05ecf73805abfadf871d78424431900428d4d21660e8c9d693e2c38e43",
+      "pngBytes": 218682,
+      "pngSha256": "43bcba10c810f2e9161061eaae48046d91cec02e8c28fed8b87ab736905c5dcf",
       "rgbMean": [
-        79.46946334838867,
-        88.9537353515625,
-        106.43570709228516
+        86.24652099609375,
+        99.29517364501953,
+        110.99247360229492
       ],
-      "exactBlackFraction": 0.261383056640625
+      "exactBlackFraction": 0.28801727294921875
     },
     {
       "frame": 390,
       "simulatedSeconds": 13,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-390.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-390.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "5579688f3fc66a60d9257baee9684fb59c5f16dace7105d1a47f6f73bdacf098",
-      "pngBytes": 241700,
-      "pngSha256": "6b1017af3f886e2d5fdeca0e22eda044b3def096088e29830ddb76b40a626494",
+      "rgbSha256": "dd0eb9631994f4f9ca6c94bbde8ae6ea87f72010867269c593879e28cbaa0dd8",
+      "pngBytes": 195461,
+      "pngSha256": "555ba5de015c9fb2b32fa8bb6e4229ad9ecef291878b1e3cfcef3dddc26720fb",
       "rgbMean": [
-        87.19281005859375,
-        96.0505256652832,
-        113.38716125488281
+        92.55570220947266,
+        105.21691513061523,
+        120.03989028930664
       ],
-      "exactBlackFraction": 0.2929534912109375
+      "exactBlackFraction": 0.2790069580078125
     },
     {
       "frame": 479,
       "simulatedSeconds": 15.966666666666667,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298910733674000/output/frame-479.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299980006308000/output/frame-479.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "f60787642f2c9283717321fd5adebac245b74f39f7f6f00bd9cebf3f7fb9ef30",
-      "pngBytes": 347565,
-      "pngSha256": "2d56cecc9010d87c486ab954048d2aa8f6792fe840f8d9ca72618dcefe1c5aeb",
+      "rgbSha256": "e777bc58e04d2257e4a8e666e6131ca17bbe25d3cfcfc2072f3a1c05e9790bb7",
+      "pngBytes": 465588,
+      "pngSha256": "b314147a5d9f033d4b61378d12c46e5e8ee20067974b053befaae4cf1bbaa822",
       "rgbMean": [
-        102.76072311401367,
-        160.8336410522461,
-        113.20680618286133
+        104.83854675292969,
+        169.74009323120117,
+        116.50861358642578
       ],
-      "exactBlackFraction": 0.16659927368164062
+      "exactBlackFraction": 0.137481689453125
     }
   ],
   "memoryPressureCalls": [
     {
       "beforeFrame": -1,
-      "elapsedRealtimeMs": 585048,
+      "elapsedRealtimeMs": 1654287,
       "productionPauseSeconds": 20
     },
     {
       "beforeFrame": 301,
-      "elapsedRealtimeMs": 595148,
+      "elapsedRealtimeMs": 1664412,
       "productionPauseSeconds": 20
     }
   ],
@@ -196,12 +196,12 @@
   "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
   "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
   "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
-  "startupIndexWaitMs": 13,
+  "startupIndexWaitMs": 11,
   "eligiblePresetCountBeforeFrame0": 1,
   "coreVersion": "4.1.7",
   "coreSurfaceAttempted": true,
   "framesRendered": 480,
-  "renderWallDurationMs": 16031,
+  "renderWallDurationMs": 16060,
   "verifiedPresetName": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
   "presetNameChecks": 480,
   "glErrorChecks": 480,
@@ -210,5 +210,5 @@
   "coreReleased": true,
   "eglDestroyed": true,
   "status": "ok",
-  "wallDurationMs": 16339
+  "wallDurationMs": 16345
 }

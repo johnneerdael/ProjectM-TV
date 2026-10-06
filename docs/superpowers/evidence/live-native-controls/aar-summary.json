@@ -1,6 +1,25 @@
 {
-  "protocol": "live-controls-aar-smoke-v1",
+  "protocol": "live-controls-aar-smoke-v2",
   "serial": "emulator-5620",
+  "androidUser": 0,
+  "installedPackages": {
+    "baseline": {
+      "package": "nl.neerdael.projectmtv.corpusbaseline",
+      "androidUser": 0,
+      "installedApkPath": "/data/app/~~BFgOx3zN_4YE1O6-dqumzQ==/nl.neerdael.projectmtv.corpusbaseline-0v7j4njj1cKiH9tj8Q5t7A==/base.apk",
+      "installedApkSha256": "0c2cf808345c7df83caf7ae5d4f80e53ae5ef724984a7ed6637779933f0fb25b",
+      "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+      "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
+    },
+    "candidate": {
+      "package": "nl.neerdael.projectmtv.corpuscandidate",
+      "androidUser": 0,
+      "installedApkPath": "/data/app/~~vZy9A41dFzl-VcMjfcBBAA==/nl.neerdael.projectmtv.corpuscandidate-L-cH9HZKbnfy6A2fKxnJdg==/base.apk",
+      "installedApkSha256": "023b609b59a7a7700168a400da23fd4ca25e011b876520be0a431532ed09e5f2",
+      "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
+      "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
+    }
+  },
   "gpu": "GLES: Google (Apple), Android Emulator OpenGL ES Translator (Apple M4 Pro), OpenGL ES 3.0 (4.1 Metal - 89.4)",
   "pcmSha256": "d6e4054db81613a755c78a89464ef5d65fc223391174eadc459ab1b50eb6449e",
   "frames": 480,
@@ -12,57 +31,104 @@
       "preset": "319.milk",
       "role": "baseline",
       "frames": 480,
-      "wallMs": 16014,
-      "deliveredFps": 29.973772948669914,
+      "wallMs": 16061,
+      "deliveredFps": 29.886059398543054,
       "sourceSha256": "ce88b6ef2083122dc103e270fbfee6f6abab02517e56932164f3c7faa456a989",
-      "manifest": "build/live-controls-aar-results-api34/0-baseline/manifest.json"
-    },
-    {
-      "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
-      "role": "baseline",
-      "frames": 480,
-      "wallMs": 16040,
-      "deliveredFps": 29.925187032418954,
-      "sourceSha256": "df44c85b71513f603fdff7e5d8b751b4de81a969d0af66f8acada49fd76e8449",
-      "manifest": "build/live-controls-aar-results-api34/1-baseline/manifest.json"
-    },
-    {
-      "preset": "idiot - Forty Six and 2 (pushit!).milk",
-      "role": "baseline",
-      "frames": 480,
-      "wallMs": 16031,
-      "deliveredFps": 29.941987399413637,
-      "sourceSha256": "e0747d71b11ae571f9c6917962b62d197757a05379342c11ca350bb28d43e693",
-      "manifest": "build/live-controls-aar-results-api34/2-baseline/manifest.json"
+      "installedProducer": {
+        "package": "nl.neerdael.projectmtv.corpusbaseline",
+        "androidUser": 0,
+        "installedApkPath": "/data/app/~~BFgOx3zN_4YE1O6-dqumzQ==/nl.neerdael.projectmtv.corpusbaseline-0v7j4njj1cKiH9tj8Q5t7A==/base.apk",
+        "installedApkSha256": "0c2cf808345c7df83caf7ae5d4f80e53ae5ef724984a7ed6637779933f0fb25b",
+        "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+        "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
+      },
+      "manifest": "build/live-controls-aar-results-v2/0-baseline/manifest.json"
     },
     {
       "preset": "319.milk",
       "role": "candidate",
       "frames": 480,
-      "wallMs": 16030,
-      "deliveredFps": 29.94385527136619,
+      "wallMs": 16031,
+      "deliveredFps": 29.941987399413637,
       "sourceSha256": "ce88b6ef2083122dc103e270fbfee6f6abab02517e56932164f3c7faa456a989",
-      "manifest": "build/live-controls-aar-results-final/0-candidate/manifest.json"
+      "installedProducer": {
+        "package": "nl.neerdael.projectmtv.corpuscandidate",
+        "androidUser": 0,
+        "installedApkPath": "/data/app/~~vZy9A41dFzl-VcMjfcBBAA==/nl.neerdael.projectmtv.corpuscandidate-L-cH9HZKbnfy6A2fKxnJdg==/base.apk",
+        "installedApkSha256": "023b609b59a7a7700168a400da23fd4ca25e011b876520be0a431532ed09e5f2",
+        "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
+        "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
+      },
+      "manifest": "build/live-controls-aar-results-v2/0-candidate/manifest.json"
+    },
+    {
+      "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
+      "role": "baseline",
+      "frames": 480,
+      "wallMs": 16070,
+      "deliveredFps": 29.869321717486,
+      "sourceSha256": "df44c85b71513f603fdff7e5d8b751b4de81a969d0af66f8acada49fd76e8449",
+      "installedProducer": {
+        "package": "nl.neerdael.projectmtv.corpusbaseline",
+        "androidUser": 0,
+        "installedApkPath": "/data/app/~~BFgOx3zN_4YE1O6-dqumzQ==/nl.neerdael.projectmtv.corpusbaseline-0v7j4njj1cKiH9tj8Q5t7A==/base.apk",
+        "installedApkSha256": "0c2cf808345c7df83caf7ae5d4f80e53ae5ef724984a7ed6637779933f0fb25b",
+        "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+        "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
+      },
+      "manifest": "build/live-controls-aar-results-v2/1-baseline/manifest.json"
     },
     {
       "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
       "role": "candidate",
       "frames": 480,
-      "wallMs": 16031,
-      "deliveredFps": 29.941987399413637,
+      "wallMs": 16060,
+      "deliveredFps": 29.8879202988792,
       "sourceSha256": "df44c85b71513f603fdff7e5d8b751b4de81a969d0af66f8acada49fd76e8449",
-      "manifest": "build/live-controls-aar-results-final/1-candidate/manifest.json"
+      "installedProducer": {
+        "package": "nl.neerdael.projectmtv.corpuscandidate",
+        "androidUser": 0,
+        "installedApkPath": "/data/app/~~vZy9A41dFzl-VcMjfcBBAA==/nl.neerdael.projectmtv.corpuscandidate-L-cH9HZKbnfy6A2fKxnJdg==/base.apk",
+        "installedApkSha256": "023b609b59a7a7700168a400da23fd4ca25e011b876520be0a431532ed09e5f2",
+        "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
+        "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
+      },
+      "manifest": "build/live-controls-aar-results-v2/1-candidate/manifest.json"
+    },
+    {
+      "preset": "idiot - Forty Six and 2 (pushit!).milk",
+      "role": "baseline",
+      "frames": 480,
+      "wallMs": 16064,
+      "deliveredFps": 29.8804780876494,
+      "sourceSha256": "e0747d71b11ae571f9c6917962b62d197757a05379342c11ca350bb28d43e693",
+      "installedProducer": {
+        "package": "nl.neerdael.projectmtv.corpusbaseline",
+        "androidUser": 0,
+        "installedApkPath": "/data/app/~~BFgOx3zN_4YE1O6-dqumzQ==/nl.neerdael.projectmtv.corpusbaseline-0v7j4njj1cKiH9tj8Q5t7A==/base.apk",
+        "installedApkSha256": "0c2cf808345c7df83caf7ae5d4f80e53ae5ef724984a7ed6637779933f0fb25b",
+        "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+        "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
+      },
+      "manifest": "build/live-controls-aar-results-v2/2-baseline/manifest.json"
     },
     {
       "preset": "idiot - Forty Six and 2 (pushit!).milk",
       "role": "candidate",
       "frames": 480,
-      "wallMs": 16022,
-      "deliveredFps": 29.958806640868804,
+      "wallMs": 16055,
+      "deliveredFps": 29.89722827779508,
       "sourceSha256": "e0747d71b11ae571f9c6917962b62d197757a05379342c11ca350bb28d43e693",
-      "manifest": "build/live-controls-aar-results-final/2-candidate/manifest.json"
+      "installedProducer": {
+        "package": "nl.neerdael.projectmtv.corpuscandidate",
+        "androidUser": 0,
+        "installedApkPath": "/data/app/~~vZy9A41dFzl-VcMjfcBBAA==/nl.neerdael.projectmtv.corpuscandidate-L-cH9HZKbnfy6A2fKxnJdg==/base.apk",
+        "installedApkSha256": "023b609b59a7a7700168a400da23fd4ca25e011b876520be0a431532ed09e5f2",
+        "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
+        "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
+      },
+      "manifest": "build/live-controls-aar-results-v2/2-candidate/manifest.json"
     }
   ],
-  "propertyRestored": true,
-  "candidateRevision": "final 0048\u20130049 source; exact patch hashes in identity.json"
+  "propertyRestored": true
 }

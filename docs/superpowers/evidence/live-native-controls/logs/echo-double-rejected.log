@@ -1,0 +1,14 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/live-native-controls/build/live-controls
+    Start 4: dynamic-display-controls
+1/1 Test #4: dynamic-display-controls .........***Failed    3.96 sec
+renderer=Apple M4 Pro version=4.1 Metal - 89.4
+legacy float-alpha branch conversion changed
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   3.96 sec
+
+The following tests FAILED:
+	  4 - dynamic-display-controls (Failed)
+Errors while running CTest

@@ -337,6 +337,20 @@ static void DisplayControls()
             SamePixels(actual, output.Pixels(), "gamma=" + std::to_string(gamma) + " alpha=" + std::to_string(alpha) + " zoom=" + std::to_string(zoom) + " orientation=" + std::to_string(orientation));
             Check(state.gammaAdj == 1 && state.videoEchoAlpha == 0, "echo defaults overwritten");
         }
+        // MilkDrop3's legacy consumer casts evaluated alpha to float before the
+        // threshold (milkdropfs.cpp:4065,4085). Prove the draw branch at the
+        // review's double-rounding witness, not only rounded framebuffer pixels.
+        for (const double alpha : {.001, .00100000006,
+                                  static_cast<double>(std::nextafter(.001f, 1.f))})
+        {
+            frame.LoadStateVariables(state);
+            *frame.gamma = 1; *frame.echo_alpha = alpha;
+            *frame.echo_zoom = 2; *frame.echo_orient = 0;
+            output.Bind(); draws.clear(); observe = true;
+            composite.Draw(state, frame); observe = false;
+            const size_t expectedDraws = static_cast<float>(alpha) > .001f ? 2 : 1;
+            Check(draws.size() == expectedDraws, "legacy float-alpha branch conversion changed");
+        }
         std::cout << "legacy display controls: size=" << size << " pass\n";
     }
 }

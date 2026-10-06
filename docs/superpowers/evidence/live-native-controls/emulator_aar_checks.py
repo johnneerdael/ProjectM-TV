@@ -2,6 +2,7 @@
 """Six focused jobs through actual core AARs on this task's dedicated emulator."""
 import argparse
 import hashlib
+import io
 import json
 import math
 from pathlib import Path
@@ -48,6 +49,35 @@ def main():
     def shell(*command, **kwargs):
         return adb("shell", shlex.join(map(str, command)), **kwargs)
 
+    user_text = shell("am", "get-current-user").strip()
+    if not user_text.isdecimal():
+        raise ValueError("Cannot resolve the active Android user")
+    android_user = int(user_text)
+
+    def as_package(package, *command):
+        return shell("run-as", package, "--user", android_user, *command)
+
+    # Bind the native producer actually installed on the device to each supplied
+    # AAR before staging jobs. A stale worker must never inherit a new AAR identity.
+    installed = {}
+    for role in args.roles:
+        package = "nl.neerdael.projectmtv.corpus" + role
+        paths = shell("pm", "path", "--user", android_user, package).strip().splitlines()
+        if len(paths) != 1 or not paths[0].startswith("package:"):
+            raise ValueError("Expected one installed worker APK for " + package)
+        apk_path = paths[0].removeprefix("package:")
+        apk_bytes = adb("exec-out", "cat", apk_path, binary=True)
+        aar = args.baseline_aar if role == "baseline" else args.candidate_aar
+        with zipfile.ZipFile(aar) as archive:
+            expected_native = digest(archive.read("jni/arm64-v8a/libprojectmtv.so"))
+        with zipfile.ZipFile(io.BytesIO(apk_bytes)) as archive:
+            actual_native = digest(archive.read("lib/arm64-v8a/libprojectmtv.so"))
+        if actual_native != expected_native:
+            raise ValueError(f"Installed {package} native hash {actual_native} does not match supplied AAR {expected_native}")
+        installed[role] = {"package": package, "androidUser": android_user,
+                           "installedApkPath": apk_path, "installedApkSha256": digest(apk_bytes),
+                           "aarSha256": digest(aar.read_bytes()), "nativeSha256": actual_native}
+
     gpu = shell("dumpsys", "SurfaceFlinger")
     gpu_line = next(line for line in gpu.splitlines() if line.startswith("GLES:"))
     assert "Apple M4 Pro" in gpu_line and "Metal" in gpu_line, gpu_line
@@ -60,7 +90,8 @@ def main():
     audio.write_bytes(pcm)
     old_property = shell("getprop", "debug.projectmtv.preset").strip()
     rows = []
-    metadata = {"protocol": "live-controls-aar-smoke-v1", "serial": args.serial,
+    metadata = {"protocol": "live-controls-aar-smoke-v2", "serial": args.serial,
+                "androidUser": android_user, "installedPackages": installed,
                 "gpu": gpu_line, "pcmSha256": digest(pcm), "frames": 480,
                 "clock": "production real clock, paced at 30 fps; RNG not fixed",
                 "baselineAarSha256": digest(baseline),
@@ -69,7 +100,7 @@ def main():
         for witness, preset in enumerate(PRESETS):
             for role in args.roles:
                 package = "nl.neerdael.projectmtv.corpus" + role
-                job = f"/data/user/0/{package}/files/live-controls-{time.time_ns()}"
+                job = f"/data/user/{android_user}/{package}/files/live-controls-{time.time_ns()}"
                 staging = f"/data/local/tmp/live-controls-{time.time_ns()}"
                 local = args.output / f"{witness}-{role}"
                 local.mkdir()
@@ -80,19 +111,21 @@ def main():
                            "expectedPresetCount": 9606}
                 request_file = local / "request.json"
                 request_file.write_text(json.dumps(request, indent=2) + "\n")
-                shell("am", "force-stop", package)
-                shell("run-as", package, "mkdir", "-p", job)
+                if shell("am", "get-current-user").strip() != user_text:
+                    raise ValueError("Foreground Android user changed during the checks")
+                shell("am", "force-stop", "--user", android_user, package)
+                as_package(package, "mkdir", "-p", job)
                 shell("mkdir", "-p", staging)
                 try:
                     for file in (audio, request_file):
                         adb("push", file, staging + "/" + file.name)
-                        shell("run-as", package, "cp", staging + "/" + file.name, job + "/" + file.name)
+                        as_package(package, "cp", staging + "/" + file.name, job + "/" + file.name)
                     # The worker's skip mask leaves only this exact preset eligible.
                     shell("setprop", "debug.projectmtv.preset", preset.encode()[:80].decode())
-                    log = adb("shell", "am", "instrument", "-w", "-e", "job", job + "/request.json",
+                    log = adb("shell", "am", "instrument", "--user", android_user, "-w", "-e", "job", job + "/request.json",
                               package + "/nl.neerdael.projectmtv.corpus.CorpusInstrumentation", timeout=180)
                     (local / "instrumentation.log").write_text(log)
-                    manifest = json.loads(shell("run-as", package, "cat", job + "/output/manifest.json"))
+                    manifest = json.loads(as_package(package, "cat", job + "/output/manifest.json"))
                     (local / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
                     assert manifest["status"] == "ok" and manifest["framesRendered"] == 480, manifest
                     assert manifest["verifiedPresetName"] == preset and manifest["pcmSha256"] == digest(pcm)
@@ -100,7 +133,7 @@ def main():
                     assert manifest["coreReleased"] and manifest["eglDestroyed"]
                     for capture in manifest["captures"]:
                         name = f"frame-{capture['frame']:03d}.png"
-                        raw = adb("exec-out", "run-as", package, "cat", job + "/output/" + name, binary=True)
+                        raw = adb("exec-out", "run-as", package, "--user", android_user, "cat", job + "/output/" + name, binary=True)
                         assert raw.startswith(b"\x89PNG\r\n\x1a\n")
                         assert digest(raw) == capture["pngSha256"]
                         (local / name).write_bytes(raw)
@@ -108,11 +141,12 @@ def main():
                                  "wallMs": manifest["renderWallDurationMs"],
                                  "deliveredFps": 480000 / manifest["renderWallDurationMs"],
                                  "sourceSha256": manifest["presetAssetSha256"],
+                                 "installedProducer": installed[role],
                                  "manifest": str(local / "manifest.json")})
                     print(json.dumps(rows[-1]), flush=True)
                 finally:
-                    shell("am", "force-stop", package)
-                    shell("run-as", package, "rm", "-rf", job)
+                    shell("am", "force-stop", "--user", android_user, package)
+                    as_package(package, "rm", "-rf", job)
                     shell("rm", "-rf", staging)
     finally:
         shell("setprop", "debug.projectmtv.preset", old_property)

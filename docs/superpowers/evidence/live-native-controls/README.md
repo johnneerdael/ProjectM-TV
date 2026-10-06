@@ -68,9 +68,9 @@ baseline also lacks previously merged0045–0047). Historical audits stay intact
 
 | Original witness | Before delivered fps | After delivered fps |
 |---|---:|---:|
-| 319 |29.974|29.944|
-| Hexcollie wormhole2 |29.925|29.942|
-| idiot Forty Six and 2 |29.942|29.959|
+| 319 |29.886|29.942|
+| Hexcollie wormhole2 |29.869|29.888|
+| idiot Forty Six and 2 |29.880|29.897|
 
 These rates are paced delivery including captures, not maximum-throughput
 benchmarks or physical-TV performance claims. Candidate AAR identity is
@@ -106,3 +106,19 @@ failed pipeline creation on the original319 shader. These failed trials are
 not credited as passing or silently cleared; Android14's Metal translator
 passes the declared controls without a renderer workaround. This evidence
 does not claim Android16 or Windows compatibility.
+
+## Review corrections
+
+The v2 AAR runner captures the current Android user and uses it consistently for
+private job paths, `run-as`, package lookup, force-stop and instrumentation.
+Before creating device jobs it reads each installed worker APK and verifies its
+ARM64 native-library SHA-256 against the supplied AAR, recording both APK and
+AAR/native identities. A deliberately mismatched candidate was rejected before
+staging a job; six correct jobs were rerun with this binding and scoped user0.
+
+The echo alpha conversion remains float-before-threshold, matching the supplied
+MilkDrop3 source at4065/4085 and the original native float-state consumer. A
+real-draw regression covers0.00100000006 and the next float above0.001f. The
+suggested double-first comparison fails that compatibility regression; keeping
+the float conversion passes. This preserves the requested legacy conversion
+rules rather than selecting a new precision policy.

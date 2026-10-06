@@ -8,6 +8,7 @@ their existing shader policy. Undefined echo orientation conversion omits echo.
 
 Compatibility reference: MilkDrop3 code/vis_milk2/milkdropfs.cpp evaluated
 gamma/echo (4064-4067), brighten/darken/solarize/invert (4199-4270).
+Echo alpha is narrowed to float at 4065 before the float threshold at 4085.
 Independent local repair; no MilkDrop3 implementation copied.
 ---
 diff --git a/src/libprojectM/MilkdropPreset/Filters.cpp b/src/libprojectM/MilkdropPreset/Filters.cpp

@@ -1,7 +1,7 @@
 {
   "protocol": "projectmtv-core-corpus-v1",
   "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
-  "pid": 3113,
+  "pid": 3559,
   "job": {
     "preset": "319.milk",
     "width": 512,
@@ -10,11 +10,11 @@
     "referenceHeight": 0,
     "seed": 12345,
     "instrumented": false,
-    "pcmPath": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/audio.u8",
-    "outputDir": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output",
+    "pcmPath": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/audio.u8",
+    "outputDir": "/data/user/0/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output",
     "expectedPresetCount": 9606
   },
-  "requestSha256": "ad20a3c79029a0d0b946951b5eef1c4bb22679188945a745527fbe6080dd43db",
+  "requestSha256": "dff167cf48c4ab24722420004a6923751fb6b5ca2208098df69fd7eaba320d33",
   "determinism": "nondeterministic-real-clock-smoke",
   "frameCountExpected": 480,
   "fps": 30,
@@ -37,141 +37,141 @@
     {
       "frame": 120,
       "simulatedSeconds": 4,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-120.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-120.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "539e9b82181b371f7151d3c190ae2d12a11bba3d311826dcc5b0b827164bc985",
-      "pngBytes": 27887,
-      "pngSha256": "272dde083b1b7e0bd28ac8f19f8bf1dacdef79fe596bab49046c6e60552b2fe9",
+      "rgbSha256": "72a1f830a922efe45589fda17acb9f096e5dff6ee9e99f9aee93eab9044000f4",
+      "pngBytes": 68656,
+      "pngSha256": "ee6f995966c90e2cdcb86d83e9984a262f5c21eb09fb797854b384212223dc34",
       "rgbMean": [
-        2.9623489379882812,
-        2.755359649658203,
-        3.576324462890625
+        5.060840606689453,
+        4.5374298095703125,
+        5.726387023925781
       ],
-      "exactBlackFraction": 0.8218765258789062
+      "exactBlackFraction": 0.5631942749023438
     },
     {
       "frame": 150,
       "simulatedSeconds": 5,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-150.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-150.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "ca4b44f9965e4730941fa138cdd9ab0a07f13d886cbcdf325403b5ac8259face",
-      "pngBytes": 25862,
-      "pngSha256": "477641f47c7552d6fa0b431bd90edaa21ad9c3c6a06983eeaa3ae3d0a199488b",
+      "rgbSha256": "65d1d2f5a4f7775fa99445c5067da419bb570acc45adae4b3b9845cf13bf711b",
+      "pngBytes": 33039,
+      "pngSha256": "60059674876eb69e4a8b9c99c82026bb30ef6ac3ea5c16da3d7c014a10eb4800",
       "rgbMean": [
-        0.3537178039550781,
-        0.60455322265625,
-        0.5202598571777344
+        0.7833976745605469,
+        1.28448486328125,
+        1.7356071472167969
       ],
-      "exactBlackFraction": 0.7971763610839844
+      "exactBlackFraction": 0.7089958190917969
     },
     {
       "frame": 180,
       "simulatedSeconds": 6,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-180.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-180.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "e26ab5575cde50e3a7f261af60b2b7acfc77fa7898bb947a8c0bc127c560346e",
-      "pngBytes": 41955,
-      "pngSha256": "5c972ff8f78e14e13aeb995e5e32ce53e5463c7587c2bbfcfd8d2fd7ea4094a5",
+      "rgbSha256": "927e787048eb4b10626a40737e092db9a1da53ce56b54ba1333cf8fb41234a56",
+      "pngBytes": 33608,
+      "pngSha256": "1cd6122171231208bd410e61785e6fda1d9e4616745ffae3d4822d78935e874b",
       "rgbMean": [
-        0.14329147338867188,
-        1.5544586181640625,
-        1.3650245666503906
+        0.011981964111328125,
+        1.1064224243164062,
+        1.2825431823730469
       ],
-      "exactBlackFraction": 0.659515380859375
+      "exactBlackFraction": 0.5273323059082031
     },
     {
       "frame": 210,
       "simulatedSeconds": 7,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-210.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-210.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "72e1e32dcf42b1e9741cb067aefe023ed3cd4f187c7edb49832d32303d9cf4a5",
-      "pngBytes": 63519,
-      "pngSha256": "460fa28041090f065c0e4d244641d3e31dbca8535170d9af5776cec7898a99fc",
+      "rgbSha256": "017ce89a40377fa67da21ccc6bee79ef525a748aa3acf84a2d01af56a526bc38",
+      "pngBytes": 87125,
+      "pngSha256": "8fa3beb2bfaff7b00060afc5a7f1fb66ec6d48619d25991a9f6e617e8cfc029e",
       "rgbMean": [
-        0.00464630126953125,
-        5.148658752441406,
-        4.314899444580078
+        0.29400634765625,
+        5.807895660400391,
+        4.990364074707031
       ],
-      "exactBlackFraction": 0.2211761474609375
+      "exactBlackFraction": 0.30279541015625
     },
     {
       "frame": 239,
       "simulatedSeconds": 7.966666666666667,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-239.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-239.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "1a95f3550821e1a887a156ee45127e435b7d8d2ea59d9f1963655093d56b1069",
-      "pngBytes": 110836,
-      "pngSha256": "61d2ba3beeef502bc01ddb37e11d5bd4d01ff2e14baa7fe3c039ffb530221e94",
+      "rgbSha256": "abd1d8adf51fa2431a73f8cc78cfe6b7afe24140b8c45acc54d8499cef6b8658",
+      "pngBytes": 24462,
+      "pngSha256": "048b249cd129a9927935615b8a6502398b85d484f76b93488933ea89c7d4bcaf",
       "rgbMean": [
-        5.022956848144531,
-        10.353446960449219,
-        14.944080352783203
+        0.4601860046386719,
+        1.300689697265625,
+        3.1469573974609375
       ],
-      "exactBlackFraction": 0.20922470092773438
+      "exactBlackFraction": 0.16368865966796875
     },
     {
       "frame": 300,
       "simulatedSeconds": 10,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-300.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-300.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "ab565a3be99271454aae79293860c7348260cc2a984abbe7bf74e12750f440ac",
-      "pngBytes": 25670,
-      "pngSha256": "6d60b8c99851ab5f4f42f8fc4b69c4ff652025ada80e93efd0a10fe30b64f0dd",
+      "rgbSha256": "bc9061635dab6e34e4e71befa5cba2119aa24e6027ff94c60f17ef291bfe6078",
+      "pngBytes": 21992,
+      "pngSha256": "86d8d7b1481d79563a49a25f5ff7b9ed3c47039a9f6e2c7ca86b070a9cd5b88c",
       "rgbMean": [
-        1.0834884643554688,
-        0.8899154663085938,
-        0.5739288330078125
+        0.4725456237792969,
+        0.24724578857421875,
+        0.5515632629394531
       ],
-      "exactBlackFraction": 0.8262710571289062
+      "exactBlackFraction": 0.8600959777832031
     },
     {
       "frame": 390,
       "simulatedSeconds": 13,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-390.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-390.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "66c30c3f226745fc778abcc004421c5cb89a7ac4c1d49ced34219ae008b7ba89",
-      "pngBytes": 124022,
-      "pngSha256": "4cb7fdcfd4f40ac1e54e133d1b64687e3d02a44e05e0b0787a4ce968d0891b17",
+      "rgbSha256": "020452014d185e83ee90467b1cd924a01fc4e53f0a52316a50591111023a2085",
+      "pngBytes": 124120,
+      "pngSha256": "f2659bc9dd2dfdd2cd815141b6c167c1429783237bdf82ced40385289ab29cdd",
       "rgbMean": [
-        18.624671936035156,
-        6.885883331298828,
-        13.837821960449219
+        16.535781860351562,
+        7.480339050292969,
+        15.941471099853516
       ],
-      "exactBlackFraction": 0.09643173217773438
+      "exactBlackFraction": 0.09479904174804688
     },
     {
       "frame": 479,
       "simulatedSeconds": 15.966666666666667,
-      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791298893504281000/output/frame-479.png",
+      "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/live-controls-1791299945605485000/output/frame-479.png",
       "width": 512,
       "height": 512,
-      "rgbSha256": "298065f97df18db5ed28a95bd2ecaaf38ab81705133e67093e9d33d92d338695",
-      "pngBytes": 145507,
-      "pngSha256": "b79cd7f268618ded2316b31d0043c2bab045ed8a7cb8d2824a9ab415cafa6a15",
+      "rgbSha256": "3ca15174521407d8b9d8f8380f758215c2487a834163dddca6e88b9bb2654beb",
+      "pngBytes": 84415,
+      "pngSha256": "71281bf043c19de0783f5b6775595cc5b696e7e165c2feaa4b96dac19bb32c50",
       "rgbMean": [
-        16.76024627685547,
-        14.315757751464844,
-        7.216621398925781
+        8.42318344116211,
+        5.898151397705078,
+        2.6049766540527344
       ],
-      "exactBlackFraction": 0.17300033569335938
+      "exactBlackFraction": 0.15317535400390625
     }
   ],
   "memoryPressureCalls": [
     {
       "beforeFrame": -1,
-      "elapsedRealtimeMs": 567873,
+      "elapsedRealtimeMs": 1619913,
       "productionPauseSeconds": 20
     },
     {
       "beforeFrame": 301,
-      "elapsedRealtimeMs": 577973,
+      "elapsedRealtimeMs": 1630000,
       "productionPauseSeconds": 20
     }
   ],
@@ -196,12 +196,12 @@
   "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
   "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
   "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
-  "startupIndexWaitMs": 15,
+  "startupIndexWaitMs": 11,
   "eligiblePresetCountBeforeFrame0": 1,
   "coreVersion": "4.1.7",
   "coreSurfaceAttempted": true,
   "framesRendered": 480,
-  "renderWallDurationMs": 16030,
+  "renderWallDurationMs": 16031,
   "verifiedPresetName": "319.milk",
   "presetNameChecks": 480,
   "glErrorChecks": 480,
@@ -210,5 +210,5 @@
   "coreReleased": true,
   "eglDestroyed": true,
   "status": "ok",
-  "wallDurationMs": 16376
+  "wallDurationMs": 16320
 }
