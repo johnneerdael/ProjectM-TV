@@ -150,3 +150,71 @@ def test_one_frame_has_palette_support_but_no_temporal_events():
     features = build(data)['features']
     assert features['colour.mean_luma']['value'] == 0
     assert features['flashing.coherent_darkening_transitions']['value'] is None
+
+
+def test_new_palette_and_event_evidence_keeps_units_and_timing_in_record_hash():
+    data = prediction()
+    data['descriptors']['colour'].update(warm_cool=.8, mean_hue_entropy_nats=.3,
+                                         hue_rate_p95_cycles_s=.1)
+    event = {'start_time': 0, 'end_time': 1, 'dt': 1,
+             'signed_mean_luma_delta': .2,
+             'brightening': {'area': .25, 'mean_amplitude': .8, 'maximum_amplitude': .8},
+             'darkening': {'area': 0, 'mean_amplitude': None, 'maximum_amplitude': None},
+             'rgb': {'area': .25, 'mean_amplitude': .8, 'maximum_amplitude': .8},
+             'coherent_up': True, 'coherent_down': False, 'motion_crossing_ruled_out': False}
+    data['descriptors']['flashing'] = {'events': [event]}
+    first = build(data)
+    assert first['features']['colour.warm_cool']['value'] == .8
+    assert first['features']['colour.mean_hue_entropy_nats']['unit'] == 'nats'
+    assert first['features']['flashing.events']['value'][0]['brightening']['area'] == .25
+    changed = copy.deepcopy(data)
+    changed['descriptors']['flashing']['events'][0].update(start_time=1, end_time=2)
+    assert build(changed)['record_sha256'] != first['record_sha256']
+    assert first['features']['flashing.events']['value'][0]['start_time'] == 0
+
+
+def test_event_evidence_is_unknown_with_no_transitions_and_rejects_missing_rows():
+    data = prediction()
+    data['descriptors']['transitions_measured'] = 0
+    data['descriptors']['flashing'] = {'events': []}
+    assert build(data)['features']['flashing.events']['status'] == 'unknown'
+    data['descriptors']['transitions_measured'] = 1
+    with pytest.raises(ValueError, match='event'):
+        build(data)
+
+
+def test_hue_rate_needs_temporal_support_even_when_palette_has_one_frame():
+    data = prediction()
+    data['descriptors'].update(frames_measured=1, transitions_measured=0)
+    data['descriptors']['colour']['hue_rate_p95_cycles_s'] = 0
+    assert build(data)['features']['colour.hue_rate_p95_cycles_s']['value'] is None
+
+
+def test_nonconsecutive_event_intervals_cannot_be_cached_as_a_complete_window():
+    data = prediction()
+    data['descriptors']['flashing'] = {'events': [{'start_time': 0, 'end_time': 1,
+                                                'dt': .5, 'signed_mean_luma_delta': .2}]}
+    with pytest.raises(ValueError, match='interval'):
+        build(data)
+
+
+def test_negative_duration_cannot_pass_an_absolute_tolerance_check():
+    data = prediction()
+    empty = {'area': 0, 'mean_amplitude': None, 'maximum_amplitude': None}
+    data['descriptors']['flashing'] = {'events': [{'start_time': 0, 'end_time': 1e-13,
+        'dt': -1e-13, 'signed_mean_luma_delta': 0, 'brightening': empty,
+        'darkening': empty, 'rgb': empty, 'coherent_up': False,
+        'coherent_down': False, 'motion_crossing_ruled_out': False}]}
+    with pytest.raises(ValueError, match='interval'):
+        build(data)
+
+
+def test_encoded_luma_event_delta_cannot_exceed_normalized_rgb_range():
+    data = prediction()
+    empty = {'area': 0, 'mean_amplitude': None, 'maximum_amplitude': None}
+    data['descriptors']['flashing'] = {'events': [{'start_time': 0, 'end_time': 1,
+        'dt': 1, 'signed_mean_luma_delta': 2, 'brightening': empty,
+        'darkening': empty, 'rgb': empty, 'coherent_up': False,
+        'coherent_down': False, 'motion_crossing_ruled_out': False}]}
+    with pytest.raises(ValueError, match='luma'):
+        build(data)

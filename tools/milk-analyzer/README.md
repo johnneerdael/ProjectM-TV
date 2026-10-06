@@ -10,6 +10,11 @@ The [source feature contract](SOURCE_FEATURES.md) now separates strict custom-sh
 trajectory evidence from optional simulated-display statistics. Forecast reports
 include context-bound feature records with raw units, support and explicit unknowns;
 these are physical evidence, not new mood scores or regenerated app indexes.
+The palette math adds chromatically supported warm/cool balance, spatial/temporal
+hue entropy and circular hue-change estimates. Simulated-field transitions retain
+correlated time, direction, amplitude and area records, including small and
+colour-only changes. Their sampled change rates do not establish flash cycles or
+whole-program no-flash guarantees.
 
 ## Four initialization cases
 

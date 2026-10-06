@@ -456,3 +456,8 @@ simulation, preserves units/unknown support and hashes the declared context.
 Do not promote missing motion to zero or relabel native beta descriptors as source
 evidence. See `tools/milk-analyzer/SOURCE_FEATURES.md`; shipped mood indexes remain
 on their original beta identity until a separately validated migration.
+Palette/event evidence uses `palette_features.py`: no hue meaning for achromatic
+queries, fixed circular entropy bins and explicit weighting/sector policy.
+Keep correlated transition records and their positive durations intact when
+caching; local/colour change rates are not flash cycles. Same-position changes
+do not rule out motion crossings. Simulated-display values retain mode B evidence.

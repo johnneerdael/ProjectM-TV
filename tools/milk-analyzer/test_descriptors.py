@@ -223,3 +223,46 @@ def test_unobserved_structure_and_causal_bass_response_remain_unknown():
     assert result['structure']['fractal'] is None
     assert result['bass_response'] is None
     assert result['mood_assignment'] is None
+
+
+def test_palette_report_separates_spatial_and_temporal_entropy():
+    target=stream()
+    add(target,[1,0,0],0);add(target,[0,0,1],1)
+    result=target.report()['colour']
+    assert result['mean_hue_entropy_nats']==pytest.approx(0)
+    assert result['temporal_hue_entropy_nats']==pytest.approx(np.log(2))
+    assert result['warm_cool']==pytest.approx(0)
+    assert result['mean_coloured_fraction']==1
+
+
+def test_small_local_change_keeps_its_correlated_event_without_coherent_gate():
+    target=stream()
+    first=np.zeros((64,64,3),dtype=np.float32)
+    second=first.copy();second[:8,:8]=1
+    add(target,first,0);add(target,second,.1)
+    result=target.report()['flashing']
+    assert result['coherent_transitions_per_second']==0
+    assert result['local_or_colour_change_transitions_per_second']==10
+    event=result['events'][0]
+    assert event['start_time']==0 and event['end_time']==.1
+    assert event['brightening']['area']==1/64
+    assert event['brightening']['mean_amplitude']==pytest.approx(1)
+    assert event['coherent_up'] is False
+    assert event['motion_crossing_ruled_out'] is False
+
+
+def test_colour_event_is_retained_even_when_luma_does_not_change():
+    target=stream()
+    add(target,[1,0,0],0);add(target,[0,.2126/.7152,0],.1)
+    event=target.report()['flashing']['events'][0]
+    assert abs(event['signed_mean_luma_delta'])<1e-6
+    assert event['rgb']['area']==1
+    assert event['rgb']['mean_amplitude']==pytest.approx(1)
+
+
+def test_single_measured_frame_cannot_supply_an_event_rate():
+    target=stream();add(target,[1,0,0],0)
+    result=target.report()['flashing']
+    assert result['coherent_transitions_per_second'] is None
+    assert result['local_or_colour_change_transitions_per_second'] is None
+    assert result['events']==[]

@@ -6,6 +6,7 @@ reported separately. Sampling/estimator limits remain explicit.
 """
 import cv2
 import numpy as np
+from palette_features import palette_summary, hue_change_summary, hue_entropy, WARM_COOL_POLICY
 
 
 DEFAULTS = dict(hue_bins=12, value_floor=.05, saturation_floor=.15,
@@ -86,6 +87,7 @@ class DescriptorStream:
         if type(self.settings['hue_bins']) is not int:raise ValueError('integer hue bin count required')
         self.warmup=warmup_frames;self.seen=0;self.previous=None;self.previous_time=None
         self.rows=[];self.transitions=[];self.hue_mass=np.zeros(self.settings['hue_bins'])
+        self.warm_mass=0.;self.chromatic_mass=0.
 
     def add(self, frame):
         time=float(frame['time']);rgba=np.asarray(frame['display'],dtype=np.float32)
@@ -108,13 +110,16 @@ class DescriptorStream:
                             (np.arange(height,dtype=np.float32)+.5)/height)
             query_displacement=float(np.mean(np.linalg.norm(coordinates.astype(np.float64)-np.stack((x,y),axis=-1),axis=-1)))
         if self.seen>=self.warmup:
+            palette=palette_summary(rgb.reshape(-1,3),hue_bins=self.settings['hue_bins'],
+                                    value_floor=self.settings['value_floor'],saturation_floor=self.settings['saturation_floor'])
             hsv=cv2.cvtColor(rgb,cv2.COLOR_RGB2HSV)
-            coloured=(hsv[...,1]>=self.settings['saturation_floor'])&(hsv[...,2]>=self.settings['value_floor'])
-            bins=np.floor(hsv[...,0]/360*self.settings['hue_bins']).astype(int)%self.settings['hue_bins']
-            histogram=np.bincount(bins[coloured],minlength=self.settings['hue_bins'])
+            histogram=np.asarray(palette['hue_histogram'])
             self.hue_mass+=histogram
+            self.chromatic_mass+=palette['chromatic_weight']
+            if palette['warm_cool'] is not None:self.warm_mass+=palette['warm_cool']*palette['chromatic_weight']
             self.rows.append(dict(time=time,mean_luma=float(luma.mean()),contrast=float(luma.std()),
-                saturation=float(hsv[...,1].mean()),coloured_fraction=float(coloured.mean()),
+                saturation=float(hsv[...,1].mean()),coloured_fraction=palette['chromatic_support'],
+                hue_entropy=palette['hue_entropy_nats'],
                 effective_hue_bins=effective_bins(histogram),query_displacement=query_displacement))
             if len(self.rows)>1:
                 dt=time-self.previous_time;old_luma=self.previous@LUMA;delta=luma-old_luma
@@ -126,7 +131,22 @@ class DescriptorStream:
                 local_up=float(np.count_nonzero((delta>=self.settings['brightness_jump'])&visible)/support) if support else 0.
                 local_down=float(np.count_nonzero((delta<=-self.settings['brightness_jump'])&visible)/support) if support else 0.
                 motion=visible_motion(old_luma,luma,dt,self.settings)
-                self.transitions.append(dict(dt=dt,mean_luma_jump=change,
+                hue_change=hue_change_summary(self.previous.reshape(-1,3),rgb.reshape(-1,3),dt=dt,
+                    value_floor=self.settings['value_floor'],saturation_floor=self.settings['saturation_floor'])
+                rgb_delta=np.max(np.abs(rgb-self.previous),axis=-1)
+                def region(mask,amplitude):
+                    return {'area':float(mask.mean()),
+                            'mean_amplitude':float(amplitude[mask].mean()) if np.any(mask) else None,
+                            'maximum_amplitude':float(amplitude[mask].max()) if np.any(mask) else None}
+                event=dict(start_time=self.previous_time,end_time=time,dt=dt,
+                           signed_mean_luma_delta=float(delta.mean()),
+                           brightening=region(delta>=self.settings['brightness_jump'],delta),
+                           darkening=region(delta<=-self.settings['brightness_jump'],-delta),
+                           rgb=region(rgb_delta>=self.settings['rgb_jump'],rgb_delta),
+                           coherent_up=bool(positive>=self.settings['coherent_area'] and float(delta.mean())>=self.settings['brightness_jump']),
+                           coherent_down=bool(negative>=self.settings['coherent_area'] and float(delta.mean())<=-self.settings['brightness_jump']),
+                           motion_crossing_ruled_out=False)
+                self.transitions.append(dict(dt=dt,mean_luma_jump=change,event=event,hue_change=hue_change,
                     paired_luma_area_product=change*float(np.mean(np.abs(delta)>=self.settings['brightness_jump'])),
                     brightening_area=positive,darkening_area=negative,
                     visible_brightening_fraction=local_up,visible_darkening_fraction=local_down,
@@ -163,12 +183,27 @@ class DescriptorStream:
             if a['available'] and b['available']:
                 acceleration.append(float(np.linalg.norm(np.array(b['velocity'])-a['velocity'])/
                     ((transitions[i]['dt']+transitions[i-1]['dt'])/2)))
+        entropy_values=[row['hue_entropy'] for row in rows if row['hue_entropy'] is not None]
+        hue_rates=[row['hue_change']['p95_cycles_per_second'] for row in transitions
+                   if row['hue_change']['p95_cycles_per_second'] is not None]
+        hue_maxima=[row['hue_change']['maximum_cycles_per_second'] for row in transitions
+                    if row['hue_change']['maximum_cycles_per_second'] is not None]
+        duration=sum(row['dt'] for row in transitions)
+        coherent=sum(row['coherent_up'] or row['coherent_down'] for row in transitions)
+        local_changes=sum(row['brightness_area']>0 or row['rgb_area']>0 for row in transitions)
         return dict(schema_version=1,basis='Numerical source-predicted display fields; no native visual inspection',
             appearance_accuracy_verified=False,frames_measured=len(rows),transitions_measured=len(transitions),
             warmup_frames=self.warmup,settings=dict(self.settings),
             colour=dict(mean_luma=mean('mean_luma'),mean_contrast=mean('contrast'),mean_saturation=mean('saturation'),
                         mean_coloured_fraction=mean('coloured_fraction'),mean_effective_hue_bins=mean('effective_hue_bins'),
-                        temporal_effective_hue_bins=effective_bins(self.hue_mass)),
+                        temporal_effective_hue_bins=effective_bins(self.hue_mass),
+                        mean_hue_entropy_nats=float(np.mean(entropy_values)) if entropy_values else None,
+                        temporal_hue_entropy_nats=hue_entropy(self.hue_mass),
+                        warm_cool=self.warm_mass/self.chromatic_mass if self.chromatic_mass else None,
+                        warm_cool_policy=WARM_COOL_POLICY,
+                        hue_rate_p95_cycles_s=float(np.percentile(hue_rates,95)) if hue_rates else None,
+                        maximum_hue_rate_cycles_s=max(hue_maxima) if hue_maxima else None,
+                        mean_hue_query_support=float(np.mean([row['hue_change']['matched_chromatic_fraction'] for row in transitions])) if transitions else None),
             flashing=dict(peak_mean_luma_jump=peak('mean_luma_jump'),peak_brightness_change_area=peak('brightness_area'),
                           peak_paired_luma_area_product=peak('paired_luma_area_product'),
                           peak_brightening_screen_area=peak('brightening_area'),peak_darkening_screen_area=peak('darkening_area'),
@@ -177,7 +212,11 @@ class DescriptorStream:
                           peak_rgb_change_area=peak('rgb_area'),coherent_brightening_transitions=sum(row['coherent_up'] for row in transitions),
                           coherent_darkening_transitions=sum(row['coherent_down'] for row in transitions),
                           dominant_sampled_brightness_hz=frequency,spectral_peak_fraction=spectral_fraction,
-                          frequency_resolution_hz=resolution,nyquist_hz=nyquist,uniform_sampling=regular),
+                          frequency_resolution_hz=resolution,nyquist_hz=nyquist,uniform_sampling=regular,
+                          measured_duration_seconds=duration if transitions else None,
+                          coherent_transitions_per_second=coherent/duration if duration else None,
+                          local_or_colour_change_transitions_per_second=local_changes/duration if duration else None,
+                          events=[row['event'] for row in transitions]),
             motion=dict(available_transition_fraction=len(valid)/len(transitions) if transitions else 0.,
                         peak_untracked_brightness_change_screen_area=max((row['motion']['untracked_brightness_change_screen_area'] for row in transitions),default=None),
                         matched_brightness_change_p95=float(np.percentile([row['brightness_change_p95'] for row in valid],95)) if valid else None,
@@ -193,6 +232,9 @@ class DescriptorStream:
             aggregation={'motion_speed':'Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values',
                          'matched_brightness':'Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.',
                          'palette':'Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately',
+                         'warm_cool':'Chromatic-query weighted sector coordinate; achromatic output is unknown',
+                         'hue_rate':'p95 of transition query-p95 shortest circular same-position differences; motion crossings and faster hue evolution remain possible',
+                         'events':'Each transition retains signed mean luma, regional amplitudes, areas and timestamps; change counts are not flash cycles or proof of stationary flashing',
                          'flashing':'Peak sampled changes and coherent transition counts; no whole-program no-flashing guarantee'},
             limitations=['Motion is an estimator with incomplete texture/correspondence support',
                          'Frequency covers this sampled window only; aliasing and later events are not ruled out',

@@ -106,6 +106,13 @@ identity; discarding a simulated frame does not turn its statistics into frame-f
 analysis. The [source feature contract](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_FEATURES.md)
 records the supported scope and remaining work.
 
+Palette research now reports warm/cool balance separately from hue diversity,
+excluding grey and dark output from hue-dependent calculations. Transition records
+keep brightness/colour amplitude, affected area, direction and timing together,
+including changes smaller than the coherent full-screen gate. These sampled
+changes may include moving edges; their absence does not prove a preset never
+flashes. They remain research evidence rather than new app mood scores.
+
 The October 2026 experiment passed a three-preset and then a ten-preset gate at
 95 or higher on twenty frozen behavioural claims. In the subsequent randomized
 100-preset audit,85met that threshold,12predictions remained unresolved, and three

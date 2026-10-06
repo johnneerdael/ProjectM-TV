@@ -98,10 +98,45 @@ Palette statistics require measured frames; temporal event and motion statistics
 require measured transitions. An empty warmup-only window cannot supply a computed
 zero flash count, hue diversity or motion-availability fraction.
 
+## Palette and correlated events
+
+`palette_features.py` summarizes normalized N×3 RGB queries without constructing
+a display field. The producer must establish where those queries came from;
+feeding flattened simulated pixels into the helper remains mode B. Equal weights
+measure query frequency, while explicit weights carry the producer's relative
+weighting. They are not automatically screen-area weights.
+
+`warm-cool-sectors-v1` assigns warm plateaus at −30…90 hue degrees and cool
+plateaus at 150…270, joined with cosine tapers. Green120 and purple300 are neutral.
+This is an editable vocabulary convention, not a measured audience preference.
+The mean uses chromatic weight only. Grey, black and below-threshold queries have
+no warmth or hue entropy. Positive weight underflow remains an explicit numerical
+failure rather than being reported as zero chromatic support.
+
+Hue entropy is `−sum(p*log(p))` in nats, with effective bins `exp(H)`. Spatial
+per-frame entropy and pooled temporal entropy remain separate. The simulated-field
+descriptor computes warmth over all supported chromatic pixels and samples. Its
+hue-rate summary is the p95 of transition query-p95 shortest circular hue changes
+per second; both query endpoints must be chromatic. Maximum hue rate and matched
+chromatic-query support are also retained. Same-position colour changes can include
+moving edges or changed textures; they do not establish object colour blending.
+
+Every measured transition now preserves a correlated event record with start/end
+time, positive duration, signed mean-luma change, brightening/darkening/RGB affected
+areas and mean/maximum amplitudes within those areas. RGB amplitude uses the largest
+absolute channel change; brightness uses encoded RGB luma. Empty affected regions
+have null amplitudes. The source feature record hashes and retains these tuples.
+
+Coherent and local/colour change rates use the sum of measured transition durations.
+Local/colour changes are retained independently of the coherent 20% gate. These
+are **sampled changes per second**, not flash cycles: every event keeps
+`motion_crossing_ruled_out=false`. Do not use a zero sampled event rate as a proof
+that arbitrary future audio, assets, state or time cannot produce flashes.
+
 ## Current implementation boundary
 
-Palette warmth/hue blending, correlated flash-event records, strict shader colour
-queries/bounds, visibility-supported motion, causal response, structure tags and
+Strict shader colour query orchestration/bounds, visibility-supported motion,
+causal response, structure tags and
 mood/profile transformations remain follow-up work. The published 2.3.15 AAR is
 downloaded and byte-verified in the task workspace, but the forecaster's source44
 policies have not yet been migrated to its five newer patches. Historical evidence
@@ -112,6 +147,7 @@ Validate the pure calculations without a device:
 
 ```sh
 python -m pytest tools/milk-analyzer/test_geometry_features.py tools/milk-analyzer/test_source_features.py -q
+python -m pytest tools/milk-analyzer/test_palette_features.py tools/milk-analyzer/test_descriptors.py -q
 ```
 
 Run the analyzer suite with prepared source-bound adapters as documented in the
