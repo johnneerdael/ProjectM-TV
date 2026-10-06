@@ -1,0 +1,31 @@
+Subject: [PATCH] Preserve legacy premultiplied user-texture bytes on 4.2
+
+The ProjectM-TV 4.1.7 loader at source 43023889 uses SOIL_LOAD_RGBA with
+SOIL_FLAG_MULTIPLY_ALPHA. The 4.2 stbi upload previously skipped that step.
+Preserve the exact integer (rgb * alpha + 128) >> 8 arithmetic, including
+its opaque-channel rounding, before the existing RGBA upload. Alpha bytes
+retain their decoded values. This is a TV migration compatibility repair.
+
+Reference: historical vendor/SOIL2/SOIL2.c multiply-alpha loop, lines 1523-1527.
+The frozen rand-tritex regression differs at all 480 RGB frames before this
+step and matches the released-source baseline at all 480 frames in two
+GLES 3.0 repeats with this isolated change. See the rebase evidence.
+
+--- a/src/libprojectM/Renderer/TextureManager.cpp
++++ b/src/libprojectM/Renderer/TextureManager.cpp
+@@ -270,6 +270,15 @@
+         return {};
+     }
+ 
++    // Preserve SOIL2 multiply-alpha pixel bytes used by the released TV engine.
++    auto* img = imageData.get();
++    for (int i = 0; i < 4 * width * height; i += 4)
++    {
++        img[i + 0] = (img[i + 0] * img[i + 3] + 128) >> 8;
++        img[i + 1] = (img[i + 1] * img[i + 3] + 128) >> 8;
++        img[i + 2] = (img[i + 2] * img[i + 3] + 128) >> 8;
++    }
++
+     auto format = TextureFormatFromChannels(4);
+     auto newTexture = std::make_shared<Texture>(file.lowerCaseBaseName, reinterpret_cast<const void*>(imageData.get()), GL_TEXTURE_2D, width, height, 0, format, format, GL_UNSIGNED_BYTE, true, file.filePath);
+ 

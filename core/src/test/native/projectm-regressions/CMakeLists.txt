@@ -61,6 +61,23 @@ if(NOT APPLE)
     target_link_libraries(projectm-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
 enable_testing()
+add_executable(user-texture-premultiplication-regressions user_texture_premultiplication_test.cpp)
+target_compile_features(user-texture-premultiplication-regressions PRIVATE cxx_std_17)
+target_compile_definitions(user-texture-premultiplication-regressions PRIVATE GL_SILENCE_DEPRECATION)
+target_include_directories(user-texture-premultiplication-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM"
+    "${PROJECTM_SOURCE}/vendor")
+target_link_libraries(user-texture-premultiplication-regressions PRIVATE libprojectM::projectM)
+if(APPLE)
+    target_link_libraries(user-texture-premultiplication-regressions PRIVATE "${REGRESSION_OPENGL_FRAMEWORK}")
+else()
+    target_compile_definitions(user-texture-premultiplication-regressions PRIVATE USE_GLES)
+    target_link_libraries(user-texture-premultiplication-regressions PRIVATE ${REGRESSION_GL_TARGET})
+endif()
+add_test(NAME user-texture-premultiplication-regressions COMMAND user-texture-premultiplication-regressions
+    "${CMAKE_CURRENT_BINARY_DIR}/user-texture-premultiplication-fixtures")
+set_tests_properties(user-texture-premultiplication-regressions PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_executable(warp-zoom-regressions warp_zoom_test.cpp)
 target_compile_features(warp-zoom-regressions PRIVATE cxx_std_17)
 target_compile_definitions(warp-zoom-regressions PRIVATE GL_SILENCE_DEPRECATION)

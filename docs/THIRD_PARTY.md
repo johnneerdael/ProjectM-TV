@@ -11,6 +11,8 @@
 
 Before this rebase, the maintained engine used upstream 4.1.7 (`e0b0a967`) plus the historical 49-patch series through main `43023889` (the original 44 plus the later sampler, blur, signed-zoom and live-control repairs). Up to app 1.9.4, the app shipped a prebuilt master snapshot, commit `d89c09ef` (August 2025); app 1.9.5 shipped prebuilt 4.1.7. These historical identities remain unchanged in release notes and evidence.
 
+The separately stored laboratory preset `martin + Se7enSlasher - pixies party (random texture edit).milk` is recovered unchanged from [Milkwave](https://github.com/IkeC/Milkwave/blob/e1c4210275153ffa7203430b0a8583600e383e79/Visualizer/resources/presets/Incubo_/martin%20%2B%20Se7enSlasher%20-%20pixies%20party%20%28random%20texture%20edit%29.milk), commit `e1c4210275153ffa7203430b0a8583600e383e79`. Its exact byte identity, original macro trigger and source provenance are recorded in the [regression coverage](superpowers/evidence/upstream-master-4-2/patch-regressions/REFERENCE-COVERAGE.md). The repository's [distributed licence notice](superpowers/evidence/upstream-master-4-2/patch-regressions/external-witnesses/LICENSE-VISUALIZER.txt), including its BSD 3-Clause terms and additional usage wording, is retained verbatim. This is an external test fixture, stored outside the shipping app/core assets; it is not part of this project's bundled CC0 collection.
+
 ## Presets and textures
 
 This project distributes the bundled presets (`core/src/main/assets/presets`) and textures (`core/src/main/assets/textures`) under **CC0 1.0 Universal** ([LICENSES/CC0-1.0.txt](../LICENSES/CC0-1.0.txt)): free for any use, without conditions.

@@ -42,6 +42,14 @@ The original 44-patch assessment above is historical. Main `43023889ec38cf1250f3
 
 All five original attribution headers are retained. Incoming native fixtures were adapted for GLAD draw-pointer observation, ShaderCache ownership, current texture constructor arguments and vertex attribute slots, with original pixel assertions and tolerances preserved. The [regression inventory](superpowers/evidence/upstream-master-4-2/patch-regressions/README.md) records the required named presets and unresolved historical references. These scoped controls do not establish the final 100-random-plus-regressions pixel-perfect comparison or universal GLES compatibility.
 
+### Migration repair: user-texture premultiplication
+
+Current patch `0009-user-texture-premultiplication.patch` restores the released 4.1.7 loader's `SOIL_FLAG_MULTIPLY_ALPHA` arithmetic before the new stbi-backed RGBA upload. It preserves `(rgb * alpha + 128) >> 8`, including opaque-channel rounding, and leaves decoded alpha unchanged. This is a migration compatibility repair: the behavior previously came from SOIL2 rather than a separately numbered TV patch.
+
+The frozen random `rand tritex - inv play` preset differed at all 480 frames, with first-frame RGB MAE 0.198 and maximum channel difference 1. Both engines repeated exactly. A single-variable premultiplication intervention matched the released-source baseline at all 480 frames in two GLES3.0 repeats. A production upload regression independently enumerates 60 expected RGBA bytes; it fails before the repair and passes afterward. The full native suite passes 30/30 normally and with ASan/UBSan. The complete nine-patch series applies cleanly, and Android debug/release core and release APK builds pass.
+
+Potential libprojectM value: make historical premultiplied texture semantics explicit when replacing image backends. The exact SOIL rounding is a compatibility choice; it should be assessed separately from an upstream policy for straight or premultiplied alpha. No performance gain or complete corpus equivalence is claimed by this single-preset repair.
+
 ## Patches 0001–0016
 
 | Original patch filename | 4.2 disposition | Evidence and remaining behavior | Potential value to libprojectM and tradeoffs |
