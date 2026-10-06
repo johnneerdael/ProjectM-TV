@@ -26,6 +26,30 @@ class LoopPlan:
     iteration_limit:int=1024
 
 
+def uses_input_components(expression,name,components):
+    """Conservatively inspect direct packed-input reads in a lowered graph."""
+    swizzles={c:i for letters in ('xyzw','rgba') for i,c in enumerate(letters)}
+    pending=[expression];seen=set()
+    while pending:
+        node=pending.pop()
+        if id(node) in seen:continue
+        seen.add(id(node))
+        # Loop bodies can live in plans rather than args; do not infer absence.
+        if node.op.startswith('loop_') or node.op in {'unknown','uninitialized'}:return True
+        if node.op=='input' and node.detail.get('name')==name:return True
+        for arg in node.args:
+            if arg.op=='input' and arg.detail.get('name')==name:
+                if node.op=='member' and node.detail.get('swizzle'):
+                    fields=node.detail.get('field','')
+                    if fields and all(c in swizzles for c in fields):
+                        if not (set(swizzles[c] for c in fields)&set(components)):continue
+                elif node.op=='flat_component' and node.detail.get('index') not in components:
+                    continue
+                return True
+            pending.append(arg)
+    return False
+
+
 BINARY={0:"and",1:"or",2:"add",3:"subtract",4:"multiply",5:"divide",6:"remainder",
         7:"less",8:"greater",9:"less_equal",10:"greater_equal",11:"equal",12:"not_equal",
         13:"bit_and",14:"bit_or",15:"bit_xor"}

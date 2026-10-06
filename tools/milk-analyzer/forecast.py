@@ -240,8 +240,16 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     for index, frame in enumerate(scene['frames']):
         main = frame['main']
         render_time=audio['frames'][index]['time']
-        mesh = warp_fields(source,scene,index,numeric_profile=domain.get('numeric_profile','portable'),
-                           raster_subpixel_bits=domain.get('warp_subpixel_bits'))
+        unused_warp_uv_domain=None
+        try:
+            mesh = warp_fields(source,scene,index,numeric_profile=domain.get('numeric_profile','portable'),
+                               raster_subpixel_bits=domain.get('warp_subpixel_bits'))
+        except ValueError as error:
+            if str(error) not in {'unresolved warp numeric domain','unresolved warp power domain','zero spatial divisor'}:raise
+            if pipeline.requires_warp_uv(frame_wrap=main['wrap'],motion_state=main):raise
+            unused_warp_uv_domain=str(error)
+            mesh=warp_fields(source,scene,index,raster_subpixel_bits=domain.get('warp_subpixel_bits'),
+                             omit_transformed_uv=True)
         common = source_uniforms(scene,index)
         if texture_bank is not None:
             common.update(material_uniforms)
@@ -288,7 +296,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                 point_subpixel_bits=domain.get('point_subpixel_bits'),
                 triangle_subpixel_bits=domain.get('triangle_subpixel_bits'))
 
-        result = pipeline.step(warp_uv=mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
+        result = pipeline.step(warp_uv=mesh['original_uv'] if mesh['uv'] is None else mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
             frame_wrap=main['wrap'],stage_uniforms=random_banks,decay=main['decay'],
             minimum=[main[f'blur{i}_min'] for i in range(1,4)],
             maximum=[main[f'blur{i}_max'] for i in range(1,4)],edge_darken=main['blur1_edge_darken'],
@@ -296,6 +304,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             hue_offsets=hue.tolist(),external_sample=None if texture_bank is None else texture_bank.sample)
         predicted = dict(frame=frame['render_inputs']['frame'],time=render_time,
                          display=result.display,feedback=result.feedback,warp_uv=mesh['uv'],history=result.history)
+        if unused_warp_uv_domain is not None:
+            predicted['history']['unused_warp_uv_domain']=unused_warp_uv_domain
         descriptors.add(predicted)
         if on_frame is not None:
             on_frame(predicted)

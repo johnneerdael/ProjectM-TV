@@ -64,6 +64,42 @@ def test_complete_equation_warp_draw_composite_forecast_keeps_feedback_separate(
     assert result['input_hashes']['preset_sha256'] == source['preset_sha256']
 
 
+def test_unused_transformed_uv_domain_does_not_block_original_coordinate_shader():
+    source=native(BASE+'per_frame_1=zoom=0;\n'
+                  'warp_1=`shader_body {ret=uv_orig.x;}\n'
+                  'comp_1=`shader_body {ret=GetPixel(uv);}\n')
+    result=predict(source,audio=audio(1))
+    assert result['status']=='computed'
+    assert np.mean(result['frames'][0]['display'][...,:3])>.4
+    assert result['frames'][0]['warp_uv'] is None
+    assert result['descriptors']['motion']['mean_warp_query_displacement'] is None
+    assert result['frames'][0]['history']['unused_warp_uv_domain']
+
+
+@pytest.mark.parametrize('body',[
+    'ret=uv.x;',
+    'ret=uv.x>.5 ? uv_orig.x : uv_orig.y;',
+])
+def test_consumed_transformed_uv_domain_remains_unresolved(body):
+    source=native(BASE+'per_frame_1=zoom=0;\n'
+                  'warp_1=`shader_body {'+body+'}\n')
+    with pytest.raises(ValueError,match='warp numeric domain'):
+        predict(source,audio=audio(1))
+
+
+def test_unused_uv_does_not_bypass_unknown_numeric_profile():
+    source=native(BASE+'warp_1=`shader_body {ret=uv_orig.x;}\n')
+    with pytest.raises(ValueError,match='unsupported spatial runtime profile'):
+        predict(source,audio=audio(1),domain=domain(numeric_profile='unverified'))
+
+
+def test_motion_vectors_keep_transformed_uv_observable():
+    source=native(BASE+'per_frame_1=zoom=0;mv_a=1;mv_x=2;mv_y=2;\n'
+                  'warp_1=`shader_body {ret=uv_orig.x;}\n')
+    with pytest.raises(ValueError,match='warp numeric domain'):
+        predict(source,audio=audio(1))
+
+
 def test_explicit_composite_raster_setting_reaches_the_source_forecast():
     source=native(BASE+'warp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=uv.x;}\n')
     result=predict(source,domain=domain(composite_subpixel_bits=4),audio=audio(1))

@@ -666,3 +666,18 @@ repair controls; no replacements, imputed unknowns or loosened rubric qualify.
 Nine warp diagnostics identify six negative-zoom cases and three centre-vertex
 zero-zoom cases. PR47 repairs only signed negative zoom with unit zoom exponent;
 other domains require separate interpretation/target controls.
+
+
+The forecaster now checks whether transformed warpUV actually reaches a custom
+shader's result/effects before making its numerical failure fatal. A shader using
+only the packed originalUV components may omit the unread transform after a
+specific spatial-domain error, while the source equations still execute in order.
+Loops/unknown graphs, consumedXY/conditions and active motion vectors remain
+conservative. Unknown profiles cannot bypass validation. OmittedUV is reported as
+unknown with no query-displacement credit; only the unread internal input receives
+a finite placeholder for field evaluation. No observed native image supplies it.
+
+Exactcase124now completes60source frames instead of failing atframe0. This is a
+repair control, not a95+visual pass or fresh blinded audit. Original grades remain
+unchanged; source/newpublished-AAR comparison is still required. See
+`fixtures/unused-warp-uv-repair124-2026-10-06.json`.

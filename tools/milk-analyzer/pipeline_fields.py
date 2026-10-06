@@ -7,7 +7,7 @@ rendered frames are consumed. Discard/unsupported language remains unresolved.
 """
 from dataclasses import dataclass
 import numpy as np
-from shader_fields import ShaderFields,Field
+from shader_fields import ShaderFields,Field,uses_input_components
 from grid_math import evaluate_grid
 from field_math import UnresolvedMath
 from spatial import sample2d
@@ -25,6 +25,23 @@ class PipelineResult:
 
 
 class SourcePipeline:
+    def _lower_stage(self,tree,name,frame_wrap):
+        model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap,
+                           main_binding_policy=self.main_binding_policy,known_uniforms=self.known_uniforms,known_uniform_components=self.known_uniform_components,
+                           known_uniform_component_domains=self.known_uniform_component_domains,
+                           global_input_policy=self.global_input_policies.get(name,'strict-v1'),
+                           array_initializer_policy=self.array_initializer_policies.get(name,'legacy-layout-v1'))
+        expression=model.lower(tree,language_extensions=self.language_extensions.get(name,[]),
+                               native_samplers=self.native_samplers.get(name,{}))
+        if not model.complete:raise UnresolvedMath('unsupported source shader: '+'; '.join(model.unknown))
+        return model,expression
+
+    def requires_warp_uv(self,*,frame_wrap,motion_state):
+        from motion_vectors import motion_active
+        if self.warp_tree is None or motion_active(motion_state):return True
+        _,expression=self._lower_stage(self.warp_tree,'warp',frame_wrap)
+        return uses_input_components(expression,'_uv',{0,1})
+
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
                  blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1'):
         if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
@@ -181,14 +198,7 @@ class SourcePipeline:
 
         def stage(tree,name,main,blur,coordinates,polar,colour=None):
             nonlocal pending_motion_uv
-            model=ShaderFields(stage=name,frame=self.frame,warp_reads_blur=self.warp_reads_blur,frame_wrap=frame_wrap,
-                               main_binding_policy=self.main_binding_policy,known_uniforms=self.known_uniforms,known_uniform_components=self.known_uniform_components,
-                               known_uniform_component_domains=self.known_uniform_component_domains,
-                               global_input_policy=self.global_input_policies.get(name,'strict-v1'),
-                               array_initializer_policy=self.array_initializer_policies.get(name,'legacy-layout-v1'))
-            expression=model.lower(tree,language_extensions=self.language_extensions.get(name,[]),
-                                   native_samplers=self.native_samplers.get(name,{}))
-            if not model.complete:raise UnresolvedMath('unsupported source shader: '+'; '.join(model.unknown))
+            model,expression=self._lower_stage(tree,name,frame_wrap)
             values={**uniforms,**stage_uniforms.get(name,{}),**lowlevel,'_uv':coordinates}
             if name=='warp' and diffuse is not None:values['_vDiffuse']=diffuse
             if colour is not None:values['_vDiffuse']=colour

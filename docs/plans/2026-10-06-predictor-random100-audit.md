@@ -143,3 +143,13 @@ critical mismatches and easy replacements cannot satisfy the gate. Retests of
 already observed presets are labeled repair controls, not fresh blinded evidence.
 See `visual-loop-100-repair-target-2026-10-06.json`. Repository integration remains
 secondary until this visual acceptance requirement is achieved.
+
+
+The unused-transformed-UV repair is implemented. Case124's custom warp consumes
+original coordinates only, so a centre-vertex zero-zoom error in an unread varying
+no longer blocks its output. All60source frames now compute. Conditions or shader
+outputs consumingXY, active motion vectors, loop/unknown dependency graphs and
+unknown numeric profiles remain unresolved. Omitted coordinates receive no motion
+query estimate or visual credit. Independent renderer review found no hidden
+consumer; matched native visual validation remains pending. This lowers a source
+interpretation gap, not yet the100gate's failed-case count.
