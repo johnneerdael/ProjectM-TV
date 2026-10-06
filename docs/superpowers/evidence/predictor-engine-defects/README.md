@@ -75,6 +75,11 @@ are restored except `update_checked_at`, which advanced during the app's normal
 update check before auto-update was disabled for matching. Playback remains paused;
 no TV is woken, and other tasks' packages are preserved.
 
+[Final cleanup](tv-cleanup.json) verifies that task TV workers stopped, the unique
+profile was uninstalled only for user0, and the task-owned guest namespace was
+removed. The original launcher, listener components and empty preset property
+remain restored; other test packages are preserved.
+
 ## Regression checks
 
 - `tools/check-patch-series.sh`: all 47 patches apply to the pinned recursive source.
