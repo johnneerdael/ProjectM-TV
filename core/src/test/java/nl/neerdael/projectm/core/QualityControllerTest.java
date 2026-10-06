@@ -147,6 +147,39 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void nativeRecoveryResizeStaysPendingForAllocationSettings() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        q.onMemoryPressure(15);
+        assertEquals(1440, applied);
+        q.onFpsSample(30); // completed 1440p allocation
+        endPressureQuiet(q);
+        healthySamples(q, 2);
+        assertEquals(1800, applied); // recovery requested, not completed
+        memory.snapshot = new MemorySnapshot(4L << 30, 970L << 20, 128L << 20, false);
+        q.setNativeTrailsLevel(2);
+        q.revalidateForAllocationChange();
+        assertTrue("unrendered recovery cannot credit 1800p resident textures", applied <= 900);
+    }
+
+    @Test
+    public void nativePressureResizeIsNotAcknowledgedByTheOldFpsSample() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, true);
+        q.onFpsSample(30); // confirms 2160p, then pressure requests a smaller height
+        assertTrue(applied < 2160);
+        int reads = memory.reads;
+        q.setNativeTrailsLevel(0);
+        q.revalidateForAllocationChange();
+        assertTrue("replacement tuple still requires memory review", memory.reads > reads);
+    }
+
+    @Test
     public void reducedModeCannotSupplyCreditUntilItsFrameCompletes() throws Exception {
         FakeMemory memory = new FakeMemory();
         QualityController q = withMemory(memory, 4096);

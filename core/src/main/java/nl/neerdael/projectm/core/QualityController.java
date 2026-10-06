@@ -401,9 +401,11 @@ public final class QualityController {
      * stale or render-guarded callbacks. Samples memory even during preset/FPS settling.
      */
     public int onFpsSample(float fps) {
-        if (fps > 0) completedIndex = current;
+        if (fps > 0) {
+            completedIndex = current;
+            fullAllocationPending = false;
+        }
         updateMemory();
-        if (fps > 0) fullAllocationPending = false;
         if (System.currentTimeMillis() < settleUntil || fps <= 0) return ACTION_NONE;
         if (!isAuto()) {
             // Memory relief may lower a selected size. Restore it only after healthy samples,
@@ -507,6 +509,7 @@ public final class QualityController {
         if (index == current) return;
         Log.i(TAG, "Render height " + levels[current] + " -> " + levels[index] + ": " + reason);
         current = index;
+        if (!isAuto()) fullAllocationPending = true;
         if (isAuto() && !forMemoryPressure) rememberedAutoIndex = index;
         lastChangeForMemoryPressure = forMemoryPressure;
         listener.onApplyRenderHeight(levels[current]);
