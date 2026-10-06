@@ -1,0 +1,1251 @@
+{
+  "scope": "PhysicalAM6 user0 MaliG52 GLES3.2 Android9 armeabi-v7a; frozen historical238AARassets/PCMseed12345/clock30Hz;256x144,pbuffer,48x32mesh,standardtrailsinactive144p; AAR238vsunpublishedcandidate45-47release",
+  "native_hashes": {
+    "before-libprojectmtv.so": "239b791827936ac68e7f61d1cb2585515f4e4ce3a69a52bad405b4fb913a50ed",
+    "after-libprojectmtv.so": "b5d75beecb9a0802590185bff94eba71a2364cd94c83049bbef7c9b2a4bb27e4"
+  },
+  "render_timing_scope": "Java realSystem.nanoTime around onDrawFrame;CPUsubmission only, excludesexplicitGPUfinish and readback; noderivedFPSclaim. Before60serial andafter60plain executedoneprocessatatime. Initial overlappingbeforebatch excludedfromtimingreport.",
+  "uv_limit": "Mali actualfixedprogram loadedthroughprogrambinarycache; transform-feedbacklink configuration didnot follow actualprogram, so noUVreadback and noNaNclaimonMali. EmulatoractualprogramUV proof remains distinct.",
+  "cases": {
+    "negative": {
+      "before_rgba_sha256": "d4e3ee64ab63dde46434fc698602cd7908ec918b9384ea13104ef3c38e232995",
+      "after_rgba_sha256": "4743380d812b45df3cef4f1f7db8bcc96d48bfa00cec57d99d3f63abc4c61409",
+      "observer_before_equal_plain": true,
+      "observer_after_equal_plain": true,
+      "all60_mae_rgb8": 6.535739776234569,
+      "png_sha256": "ac246022e0112b3bf3e14a3dca50713d06a1ad5a610a25ca954dad2b47cc1d5b",
+      "layout": "before238left/candidatereleaseright; rowsframe1,2,59",
+      "metadata": {
+        "before": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Hexcollie - This is where we begin stripped.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Mali-G52",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+          "gl_vendor": "ARM",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "after": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Hexcollie - This is where we begin stripped.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Mali-G52",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+          "gl_vendor": "ARM",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      "cpu_submission_ms": {
+        "before": {
+          "median_after_first": 5.52625,
+          "mean_after_first": 5.687513508474576,
+          "max_after_first": 9.982708,
+          "cold_first": 309.184417
+        },
+        "after": {
+          "median_after_first": 5.515,
+          "mean_after_first": 5.579509254237288,
+          "max_after_first": 6.997375,
+          "cold_first": 312.779334
+        }
+      },
+      "selected_frames": [
+        {
+          "frame": 1,
+          "before_mean_rgb8": 4.691840277777778,
+          "after_mean_rgb8": 4.691840277777778,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 2,
+          "before_mean_rgb8": 0.6491427951388888,
+          "after_mean_rgb8": 4.380154079861111,
+          "mae_rgb8": 3.7769458912037037
+        },
+        {
+          "frame": 59,
+          "before_mean_rgb8": 2.3961317274305554,
+          "after_mean_rgb8": 12.524260344328704,
+          "mae_rgb8": 10.166359230324074
+        },
+        {
+          "frame": 60,
+          "before_mean_rgb8": 2.087429470486111,
+          "after_mean_rgb8": 11.631302445023149,
+          "mae_rgb8": 9.588939525462964
+        }
+      ]
+    },
+    "blur": {
+      "before_rgba_sha256": "8c8420bce0550aacabed91dcbc8aed3067fde8b33d8e95e47e636f91534c6e25",
+      "after_rgba_sha256": "8c8420bce0550aacabed91dcbc8aed3067fde8b33d8e95e47e636f91534c6e25",
+      "observer_before_equal_plain": true,
+      "observer_after_equal_plain": true,
+      "all60_mae_rgb8": 0.0,
+      "png_sha256": "e67ec0c50b1a60acd55c982ddc3b03b1e22441b506467f6e315ad1891d431d17",
+      "layout": "before238left/candidatereleaseright; rowsframe1,2,59",
+      "metadata": {
+        "before": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Mali-G52",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+          "gl_vendor": "ARM",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "after": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Mali-G52",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+          "gl_vendor": "ARM",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      "cpu_submission_ms": {
+        "before": {
+          "median_after_first": 3.250625,
+          "mean_after_first": 3.3247768305084744,
+          "max_after_first": 5.958916,
+          "cold_first": 387.780375
+        },
+        "after": {
+          "median_after_first": 3.117458,
+          "mean_after_first": 3.2112726101694915,
+          "max_after_first": 4.341208,
+          "cold_first": 379.768667
+        }
+      },
+      "actual_blur_state": {
+        "before": [
+          {
+            "event": 1,
+            "frame_expected": 1,
+            "pass_expected": 1,
+            "kind": "Blur1",
+            "program": 21,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 7,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event01.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "7f800000",
+                "ff800000",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 0,
+            "natural_error_seq_after": 0,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "event": 2,
+            "frame_expected": 1,
+            "pass_expected": 2,
+            "kind": "Blur2",
+            "program": 22,
+            "viewport": [
+              0,
+              0,
+              64,
+              36
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 9,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event02.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43000000",
+                "42900000",
+                "3c000000",
+                "3c638e39"
+              ],
+              "_c1": null,
+              "_c2": null,
+              "_c3": null,
+              "_c5": [
+                "41633334",
+                "40833333",
+                "3f66c2b4",
+                "401f3832"
+              ],
+              "_c6": [
+                "3cdfd33b",
+                "00000000",
+                "3f800000",
+                "40a00000"
+              ]
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 0,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 0,
+            "natural_error_seq_after": 0,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "natural_gl_error_event": 1,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 2,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 3,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "event": 3,
+            "frame_expected": 1,
+            "pass_expected": 3,
+            "kind": "Blur1",
+            "program": 21,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 3,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event03.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "7f800000",
+                "ff800000",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 3,
+            "natural_error_seq_after": 3,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "event": 4,
+            "frame_expected": 1,
+            "pass_expected": 4,
+            "kind": "Blur2",
+            "program": 22,
+            "viewport": [
+              0,
+              0,
+              64,
+              36
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 9,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event04.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43000000",
+                "42900000",
+                "3c000000",
+                "3c638e39"
+              ],
+              "_c1": null,
+              "_c2": null,
+              "_c3": null,
+              "_c5": [
+                "41633334",
+                "40833333",
+                "3f66c2b4",
+                "401f3832"
+              ],
+              "_c6": [
+                "3cdfd33b",
+                "00000000",
+                "3f800000",
+                "40a00000"
+              ]
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 0,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 3,
+            "natural_error_seq_after": 3,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "natural_gl_error_event": 4,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 5,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 6,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "event": 5,
+            "frame_expected": 2,
+            "pass_expected": 1,
+            "kind": "Blur1",
+            "program": 21,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 7,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event05.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "7f800000",
+                "ff800000",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 6,
+            "natural_error_seq_after": 6,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "event": 6,
+            "frame_expected": 2,
+            "pass_expected": 2,
+            "kind": "Blur2",
+            "program": 22,
+            "viewport": [
+              0,
+              0,
+              64,
+              36
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 9,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event06.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43000000",
+                "42900000",
+                "3c000000",
+                "3c638e39"
+              ],
+              "_c1": null,
+              "_c2": null,
+              "_c3": null,
+              "_c5": [
+                "41633334",
+                "40833333",
+                "3f66c2b4",
+                "401f3832"
+              ],
+              "_c6": [
+                "3cdfd33b",
+                "00000000",
+                "3f800000",
+                "40a00000"
+              ]
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 0,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 6,
+            "natural_error_seq_after": 6,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "natural_gl_error_event": 7,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 8,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 9,
+            "value": 0,
+            "core_origin": false
+          }
+        ],
+        "after": [
+          {
+            "event": 1,
+            "frame_expected": 1,
+            "pass_expected": 1,
+            "kind": "Blur1",
+            "program": 21,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 7,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event01.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "41200004",
+                "c1180004",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 0,
+            "natural_error_seq_after": 0,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "event": 2,
+            "frame_expected": 1,
+            "pass_expected": 2,
+            "kind": "Blur2",
+            "program": 22,
+            "viewport": [
+              0,
+              0,
+              64,
+              36
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 9,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event02.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43000000",
+                "42900000",
+                "3c000000",
+                "3c638e39"
+              ],
+              "_c1": null,
+              "_c2": null,
+              "_c3": null,
+              "_c5": [
+                "41633334",
+                "40833333",
+                "3f66c2b4",
+                "401f3832"
+              ],
+              "_c6": [
+                "3cdfd33b",
+                "00000000",
+                "3f800000",
+                "40a00000"
+              ]
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 0,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 0,
+            "natural_error_seq_after": 0,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "natural_gl_error_event": 1,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 2,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 3,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "event": 3,
+            "frame_expected": 1,
+            "pass_expected": 3,
+            "kind": "Blur1",
+            "program": 21,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 3,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event03.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "41200004",
+                "c1180004",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 3,
+            "natural_error_seq_after": 3,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "event": 4,
+            "frame_expected": 1,
+            "pass_expected": 4,
+            "kind": "Blur2",
+            "program": 22,
+            "viewport": [
+              0,
+              0,
+              64,
+              36
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 9,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event04.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43000000",
+                "42900000",
+                "3c000000",
+                "3c638e39"
+              ],
+              "_c1": null,
+              "_c2": null,
+              "_c3": null,
+              "_c5": [
+                "41633334",
+                "40833333",
+                "3f66c2b4",
+                "401f3832"
+              ],
+              "_c6": [
+                "3cdfd33b",
+                "00000000",
+                "3f800000",
+                "40a00000"
+              ]
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 0,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 3,
+            "natural_error_seq_after": 3,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "natural_gl_error_event": 4,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 5,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 6,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "event": 5,
+            "frame_expected": 2,
+            "pass_expected": 1,
+            "kind": "Blur1",
+            "program": 21,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 7,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event05.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "41200004",
+                "c1180004",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 6,
+            "natural_error_seq_after": 6,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "event": 6,
+            "frame_expected": 2,
+            "pass_expected": 2,
+            "kind": "Blur2",
+            "program": 22,
+            "viewport": [
+              0,
+              0,
+              64,
+              36
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 9,
+            "sampler0": 4,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event06.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43000000",
+                "42900000",
+                "3c000000",
+                "3c638e39"
+              ],
+              "_c1": null,
+              "_c2": null,
+              "_c3": null,
+              "_c5": [
+                "41633334",
+                "40833333",
+                "3f66c2b4",
+                "401f3832"
+              ],
+              "_c6": [
+                "3cdfd33b",
+                "00000000",
+                "3f800000",
+                "40a00000"
+              ]
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 0,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 6,
+            "natural_error_seq_after": 6,
+            "last_natural_error": 0,
+            "state_restored": true
+          },
+          {
+            "natural_gl_error_event": 7,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 8,
+            "value": 0,
+            "core_origin": false
+          },
+          {
+            "natural_gl_error_event": 9,
+            "value": 0,
+            "core_origin": false
+          }
+        ]
+      },
+      "selected_frames": [
+        {
+          "frame": 1,
+          "before_mean_rgb8": 249.66485821759258,
+          "after_mean_rgb8": 249.66485821759258,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 2,
+          "before_mean_rgb8": 249.66485821759258,
+          "after_mean_rgb8": 249.66485821759258,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 59,
+          "before_mean_rgb8": 249.66499385127315,
+          "after_mean_rgb8": 249.66499385127315,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 60,
+          "before_mean_rgb8": 249.66485821759258,
+          "after_mean_rgb8": 249.66485821759258,
+          "mae_rgb8": 0.0
+        }
+      ]
+    },
+    "shape": {
+      "before_rgba_sha256": "0dd76bd5921fe0bd701e9af8cec9b58f795ba07e5c4061ba81587e1328379757",
+      "after_rgba_sha256": "d928932f71193d616e57c708402f75d638cbd21f45188aabdc2572effad852d4",
+      "observer_before_equal_plain": true,
+      "observer_after_equal_plain": true,
+      "all60_mae_rgb8": 35.684848964361485,
+      "png_sha256": "d51eebf436d9efa047b93a7392d9780a8d47aa57796343a7882f51ff74aba2a6",
+      "layout": "before238left/candidatereleaseright; rowsframe1,2,59",
+      "metadata": {
+        "before": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "widest swing.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Mali-G52",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+          "gl_vendor": "ARM",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "after": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "widest swing.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Mali-G52",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+          "gl_vendor": "ARM",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      "cpu_submission_ms": {
+        "before": {
+          "median_after_first": 10.107084,
+          "mean_after_first": 10.99093786440678,
+          "max_after_first": 18.078584,
+          "cold_first": 461.376625
+        },
+        "after": {
+          "median_after_first": 10.151625,
+          "mean_after_first": 11.143103847457628,
+          "max_after_first": 25.391458,
+          "cold_first": 464.960042
+        }
+      },
+      "actual_sampler_state": {
+        "before": [
+          {
+            "event": 1,
+            "program": 19,
+            "texture_sampler_unit": 0,
+            "active_texture": 33984,
+            "observed_unit_is_sampler_unit": true,
+            "texture2d": 6,
+            "sampler_binding": 4,
+            "texture_wrap_s": 10497,
+            "texture_wrap_t": 10497,
+            "texture_min_filter": 9728,
+            "texture_mag_filter": 9728,
+            "sampler_wrap_s": 33071,
+            "sampler_wrap_t": 33071,
+            "sampler_min_filter": 9729,
+            "sampler_mag_filter": 9729,
+            "state_preserved": true
+          },
+          {
+            "event": 2,
+            "program": 19,
+            "texture_sampler_unit": 0,
+            "active_texture": 33984,
+            "observed_unit_is_sampler_unit": true,
+            "texture2d": 6,
+            "sampler_binding": 4,
+            "texture_wrap_s": 10497,
+            "texture_wrap_t": 10497,
+            "texture_min_filter": 9728,
+            "texture_mag_filter": 9728,
+            "sampler_wrap_s": 33071,
+            "sampler_wrap_t": 33071,
+            "sampler_min_filter": 9729,
+            "sampler_mag_filter": 9729,
+            "state_preserved": true
+          },
+          {
+            "event": 3,
+            "program": 19,
+            "texture_sampler_unit": 0,
+            "active_texture": 33984,
+            "observed_unit_is_sampler_unit": true,
+            "texture2d": 6,
+            "sampler_binding": 4,
+            "texture_wrap_s": 10497,
+            "texture_wrap_t": 10497,
+            "texture_min_filter": 9728,
+            "texture_mag_filter": 9728,
+            "sampler_wrap_s": 33071,
+            "sampler_wrap_t": 33071,
+            "sampler_min_filter": 9729,
+            "sampler_mag_filter": 9729,
+            "state_preserved": true
+          }
+        ],
+        "after": [
+          {
+            "event": 1,
+            "program": 19,
+            "texture_sampler_unit": 0,
+            "active_texture": 33984,
+            "observed_unit_is_sampler_unit": true,
+            "texture2d": 6,
+            "sampler_binding": 26,
+            "texture_wrap_s": 33071,
+            "texture_wrap_t": 33071,
+            "texture_min_filter": 9728,
+            "texture_mag_filter": 9728,
+            "sampler_wrap_s": 10497,
+            "sampler_wrap_t": 10497,
+            "sampler_min_filter": 9729,
+            "sampler_mag_filter": 9729,
+            "state_preserved": true
+          },
+          {
+            "event": 2,
+            "program": 19,
+            "texture_sampler_unit": 0,
+            "active_texture": 33984,
+            "observed_unit_is_sampler_unit": true,
+            "texture2d": 6,
+            "sampler_binding": 26,
+            "texture_wrap_s": 33071,
+            "texture_wrap_t": 33071,
+            "texture_min_filter": 9728,
+            "texture_mag_filter": 9728,
+            "sampler_wrap_s": 10497,
+            "sampler_wrap_t": 10497,
+            "sampler_min_filter": 9729,
+            "sampler_mag_filter": 9729,
+            "state_preserved": true
+          },
+          {
+            "event": 3,
+            "program": 19,
+            "texture_sampler_unit": 0,
+            "active_texture": 33984,
+            "observed_unit_is_sampler_unit": true,
+            "texture2d": 6,
+            "sampler_binding": 26,
+            "texture_wrap_s": 33071,
+            "texture_wrap_t": 33071,
+            "texture_min_filter": 9728,
+            "texture_mag_filter": 9728,
+            "sampler_wrap_s": 10497,
+            "sampler_wrap_t": 10497,
+            "sampler_min_filter": 9729,
+            "sampler_mag_filter": 9729,
+            "state_preserved": true
+          }
+        ]
+      },
+      "selected_frames": [
+        {
+          "frame": 1,
+          "before_mean_rgb8": 9.950837311921296,
+          "after_mean_rgb8": 9.950837311921296,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 2,
+          "before_mean_rgb8": 18.524070457175927,
+          "after_mean_rgb8": 18.244484230324073,
+          "mae_rgb8": 3.692238136574074
+        },
+        {
+          "frame": 59,
+          "before_mean_rgb8": 17.21535915798611,
+          "after_mean_rgb8": 20.108326099537038,
+          "mae_rgb8": 4.652804904513889
+        },
+        {
+          "frame": 60,
+          "before_mean_rgb8": 17.49713360821759,
+          "after_mean_rgb8": 18.865885416666668,
+          "mae_rgb8": 3.7261375144675926
+        }
+      ]
+    }
+  },
+  "raw_result_sha256": "c6d683857cdf10bf1bab97f023117a125135202b6bc5d669a56d427ec3482b6a"
+}

@@ -34,8 +34,7 @@ public final class QualityController {
     @Deprecated
     public static final int RENDER_HEIGHT_CAP = 1330;
 
-    /** @deprecated Legacy Native preference; every saved mode now normalizes to Auto. */
-    @Deprecated
+    /** Native selection sentinel; legacy setMode still normalizes it to Auto. */
     public static final int NATIVE_HEIGHT = -1;
 
     /** Auto ladder, filtered to the panel resolution. */
@@ -69,6 +68,8 @@ public final class QualityController {
     private boolean started;
     // Until a confirmed rendered FPS sample, available memory still includes resources to allocate.
     private boolean fullAllocationPending;
+    private int completedIndex = -1; // height acknowledged by a completed-generation FPS sample
+    private int resolutionMode;     // 0 Auto, -1 Native, positive fixed height
     private int current;            // index into levels (auto mode)
     private float targetFps = 60f;
     private long settleUntil;
@@ -84,7 +85,7 @@ public final class QualityController {
     private float fpsBeforeLowering;         // > 0: judge whether the last lowering helped
     private int loweredFrom = -1;            // level before the last lowering
     private int cpuBoundPreset = -1;         // preset for which a lower resolution did not help
-    private int beforePressure = -1;         // auto level when memory pressure first lowered the ceiling
+    private int rememberedAutoIndex;         // FPS-chosen target; independent of memory/explicit modes
 
     /** Legacy memoryLimit is ignored; live memory headroom controls automatic resolution. */
     public QualityController(DisplayInfo display, DeviceProfile profile, int memoryLimit, Listener listener) {
@@ -108,6 +109,7 @@ public final class QualityController {
         minIndex = indexAtMost(profile.minAutoHeight());
         initialIndex = Math.max(minIndex, indexAtMost(profile.initialAutoHeight()));
         current = initialIndex;
+        rememberedAutoIndex = initialIndex;
         ceiling = levels.length - 1;
     }
 
@@ -123,25 +125,82 @@ public final class QualityController {
     @Deprecated
     public static int validFixedHeight(DisplayInfo display, int memoryLimit, int savedHeight) { return 0; }
 
+    /** Explicit menu choices: Auto, standard heights supported by the panel, and Native. */
+    public static int[] resolutionModes(DisplayInfo display) {
+        List<Integer> modes = new ArrayList<>();
+        modes.add(0);
+        for (int height : new int[]{720, 1080, 1440, 2160}) {
+            if (height <= display.physicalHeight) modes.add(height);
+        }
+        modes.add(NATIVE_HEIGHT);
+        int[] result = new int[modes.size()];
+        for (int i = 0; i < result.length; i++) result[i] = modes.get(i);
+        return result;
+    }
+
+    /** Reject unsupported saved choices after a display change. */
+    public static int validResolutionMode(DisplayInfo display, int mode) {
+        for (int choice : resolutionModes(display)) if (choice == mode) return mode;
+        return 0;
+    }
+
+    /**
+     * Opt-in resolution selector. Fixed/Native ignore FPS downshifts and slow-preset skipping,
+     * but retain live memory checks; the actual height can temporarily be below the selection.
+     * Legacy setMode keeps its Auto-only contract for existing embedding apps.
+     */
+    public void setResolutionMode(int mode, int lastAutoHeight) {
+        resolutionMode = validResolutionMode(display, mode);
+        startMode(lastAutoHeight);
+    }
+
     /** @deprecated height is ignored; lastAutoHeight is a remembered automatic starting point. */
     @Deprecated
     public void setMode(int height, int lastAutoHeight) {
-        fullAllocationPending = true;
+        resolutionMode = 0;
+        startMode(lastAutoHeight);
+    }
+
+    private void startMode(int lastAutoHeight) {
+        boolean confirmed = started && !fullAllocationPending && current == completedIndex;
+        long residentBytes = confirmed ? estimate(current) : 0;
+        resetAllocationProbe();
         resetCounters(0);
-        memorySnapshot = sampleMemory();
-        int wanted = lastAutoHeight > 0 ? indexAtMost(lastAutoHeight) : initialIndex;
-        wanted = Math.max(minIndex, Math.min(ceiling, wanted));
-        current = wanted;
-        if (memorySnapshot == null || !memorySnapshot.isValid()) {
-            current = Math.min(current, initialIndex);
-            memoryConstrained = true;
-        } else {
-            while (current > minIndex && !RenderMemoryBudget.canGrow(memorySnapshot, 0, estimate(current))) current--;
-            memoryConstrained = current < wanted || !RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot);
+        if (isAuto()) {
+            // Remember the requested FPS target before memory review clamps the actual size.
+            // The host persists this inside the synchronous height callback below.
+            rememberedAutoIndex = Math.max(minIndex,
+                    lastAutoHeight > 0 ? indexAtMost(lastAutoHeight) : initialIndex);
         }
-        lastChangeForMemoryPressure = false;
+        int requested = Math.max(minIndex, isAuto() ? rememberedAutoIndex : selectedIndex());
+        int wanted = Math.min(ceiling, requested);
+        current = wanted;
+        if (confirmed && estimate(current) <= residentBytes) {
+            // No growth: do not charge the old tuple while GL is still releasing it.
+            // The next completed-generation FPS sample observes the actual available RAM.
+            memoryConstrained = current < requested || !RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot);
+            if (current != completedIndex) fullAllocationPending = true;
+        } else {
+            fullAllocationPending = true;
+            memorySnapshot = sampleMemory();
+            reviewModeGrowth(residentBytes, requested);
+        }
+        // Expose the memory clamp before the host publishes the size, so it can discard
+        // cached textures and pause prewarming instead of retaining the old allocation.
+        lastChangeForMemoryPressure = current < requested;
         started = true;
         listener.onApplyRenderHeight(currentHeight());
+    }
+
+    private void reviewModeGrowth(long residentBytes, int requested) {
+        if (memorySnapshot == null || !memorySnapshot.isValid()) {
+            // Keep the legacy startup candidate; live edits cannot grow with unknown RAM.
+            current = started ? minIndex : Math.min(current, initialIndex);
+            memoryConstrained = true;
+        } else {
+            while (current > minIndex && !RenderMemoryBudget.canGrow(memorySnapshot, residentBytes, estimate(current))) current--;
+            memoryConstrained = current < requested || !RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot);
+        }
     }
 
     /**
@@ -235,11 +294,14 @@ public final class QualityController {
         setRenderAllocationSettings(nativeTrailsLevel, seconds);
     }
 
-    public boolean isAuto() { return true; }
+    public boolean isAuto() { return resolutionMode == 0; }
 
-    /** @deprecated There is no fixed Native mode; currentHeight can automatically reach the panel. */
-    @Deprecated
-    public boolean isNative() { return false; }
+    /** Whether the explicit Native selection follows the physical panel. */
+    public boolean isNative() { return resolutionMode == NATIVE_HEIGHT; }
+
+    private int selectedIndex() {
+        return isNative() ? levels.length - 1 : indexAtMost(resolutionMode);
+    }
 
     public int currentHeight() { return levels[current]; }
 
@@ -248,7 +310,7 @@ public final class QualityController {
      * the lower one memory pressure imposed on this session (that limit must not carry over).
      */
     public int autoHeightToRemember() {
-        return current == ceiling && beforePressure > current ? levels[beforePressure] : levels[current];
+        return levels[rememberedAutoIndex];
     }
 
     /** Called when a new preset starts: its load and blend are not judged. */
@@ -297,7 +359,6 @@ public final class QualityController {
     private void constrainTo(int index) {
         memoryConstrained = true;
         healthyMemorySamples = 0;
-        if (beforePressure < 0) beforePressure = current;
         ceiling = Math.min(ceiling, index);
         fpsBeforeLowering = 0;
         if (current > ceiling) {
@@ -320,7 +381,6 @@ public final class QualityController {
         } else if (RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot)) {
             if (++healthyMemorySamples >= 3 && System.currentTimeMillis() >= pressureQuietUntil) {
                 ceiling = levels.length - 1;
-                beforePressure = -1;
                 memoryConstrained = false;
             }
         } else {
@@ -341,9 +401,21 @@ public final class QualityController {
      * stale or render-guarded callbacks. Samples memory even during preset/FPS settling.
      */
     public int onFpsSample(float fps) {
+        if (fps > 0) {
+            completedIndex = current;
+            fullAllocationPending = false;
+        }
         updateMemory();
-        if (fps > 0) fullAllocationPending = false;
         if (System.currentTimeMillis() < settleUntil || fps <= 0) return ACTION_NONE;
+        if (!isAuto()) {
+            // Memory relief may lower a selected size. Restore it only after healthy samples,
+            // bounded by the selection, independent of FPS and automatic preset backoff.
+            int wanted = Math.min(selectedIndex(), ceiling);
+            if (current < wanted && canGrowTo(current + 1)) {
+                apply(current + 1, "selected resolution restored after memory relief");
+            }
+            return ACTION_NONE;
+        }
 
         // Presets that stay far below target even at the lowest resolution, or that a lower
         // resolution did not help (CPU-bound), are too heavy for this device: optionally skip them
@@ -437,6 +509,8 @@ public final class QualityController {
         if (index == current) return;
         Log.i(TAG, "Render height " + levels[current] + " -> " + levels[index] + ": " + reason);
         current = index;
+        if (!isAuto()) fullAllocationPending = true;
+        if (isAuto() && !forMemoryPressure) rememberedAutoIndex = index;
         lastChangeForMemoryPressure = forMemoryPressure;
         listener.onApplyRenderHeight(levels[current]);
         resetCounters(SETTLE_MS);

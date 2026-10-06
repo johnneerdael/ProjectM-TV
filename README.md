@@ -10,7 +10,7 @@ The engine is designed to preserve the authored look as resolution increases; so
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the current source. The APK and published `:core` library use the Native renderer with Standard trails. Resolution is always automatic: the controller targets the selected frame rate, uses live memory headroom, and can reach the panel’s native 4K size.
+**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the current source. The APK and published `:core` library use the Native renderer with Standard trails. Resolution defaults to Auto, which targets the selected frame rate and live memory headroom up to the panel’s native size. Settings › Advanced › Resolution also offers fixed sizes and Native (4K on a 4K panel).
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's cover, artist and title in the upper left" width="100%">
@@ -31,6 +31,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Predictive preset engine (beta):** choose **Chill**, **Normal** or **Intense** by predicted visual activity. **All** remains the default and keeps the full library available.
 - **Corrected shader maths** restores colours and detail in presets affected by projectM translator bugs; [proof and upstream contribution](https://github.com/projectM-visualizer/projectm/pull/1031)
 - **Preset shader compatibility:** retained fixes handle flat array initializers and `sampler_state` blocks, and shaders that change `q` variables or `time` start from their input values instead of undefined ones. Earlier preset-count measurements belong to the 4.1.7 engine; the 4.2 snapshot uses the current upstream translator plus the retained fixes.
+- **Live preset controls:** per-frame equations can change the built-in waveform mode, dots, thickness and additive blending. Legacy composites also use live gamma, video echo and colour filters; custom composite shaders retain their own behaviour.
 - **Additional shader compatibility fixes:** presets using a local named `sample`, declaration or statement macros, or swizzles after parenthesized constructors can use their authored shaders. GPU driver acceptance and visual fidelity remain device-dependent.
 - **Audio detected about 1 second after launch**, from the music app's own audio session
 - **Cover, artist and title** of the playing track on screen, as in Milkbeat
@@ -50,7 +51,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Offers Chill, Normal and Intense collections.** Open the settings panel and set *Preset mood*. The beta predictor ranks activity from 1 to 100: Chill 1–30, Normal 25–75 and Intense 70–100. The ranges overlap. Automatic changes, Random and Previous stay within your saved collection, subject to existing skip rules. *All* remains the default. Saved Dance selections return to All. [How the predictive collections work](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/).
 - **Shows the track that is playing.** The cover, artist and title of the playing track appear in the upper left for as long as it plays (taken from the music app's media session); *Settings › Track display* shows them for 10–60 s per track instead, in the small lower-left pill, or not at all. Covers have only been verified with Spotify and [Milkbeat](https://github.com/johnneerdael/Milkbeat). SoundCloud and SmartTube have been verified to show the artist and title only, without a cover. No other music apps have been verified. This needs *notification access*, see [Track titles](#track-titles) below; without it, nothing is shown. The preset name is in the settings panel.
 - **Replaces presets that stay black.** If a preset shows only black for about 7 seconds while music plays, the app moves on. A preset that is black a second time is skipped from then on. Since 1.9.5, the presets that used to be black render; this rule remains as a safety net (details under *Presets* below).
-- **Automatic resolution up to native 4K.** The render size follows the target frame rate and live memory headroom. Standard trails keep feedback at an authored canvas while drawing new geometry and the composite at native resolution. Medium and High add more native trail detail when the current render size supports it.
+- **Auto resolution by default, up to native 4K.** Auto follows the target frame rate and live memory headroom. Advanced › Resolution also offers supported fixed sizes and Native for full-panel testing, retaining automatic memory protection. Standard trails keep feedback at an authored canvas while drawing new geometry and the composite at native resolution. Medium and High add more native trail detail when the current render size supports it.
 - **Budgets memory for playback.** Automatic resolution uses live available memory and estimates the rendering allocations of trails and transitions. It reserves headroom before growth and lowers resolution under memory pressure. Installed RAM does not impose a fixed 1260p cap; Android/vendor process policies can still reclaim background apps.
 - **Starts quickly.** The first preset appears a few seconds after launch.
 - **Updates itself, if you want.** With *Settings › Advanced › Auto-update* on, the app checks GitHub for a new release at every launch and every 6 hours while it is open, downloads it in the background, and offers to install it: a notice in the lower left, and an *Install* row at the top of the settings panel. Android's installer asks you to confirm. The first time, it asks you to allow installs from ProjectM TV instead; Android then restarts the app, and you select *Install* once more. Off by default; apps installed from F-Droid are updated by F-Droid.
@@ -78,7 +79,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
   <img src="docs/user-guide/images/setup/advanced-settings.png" alt="The advanced settings panel with diagnostics" width="32%">
 </p>
 
-These settings captures use an earlier isolated test installation on an Ugoos AM6; the current collection row is named Preset mood. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
+Main and Track display captures use an earlier isolated test installation on an Ugoos AM6; the current collection row is named Preset mood. Advanced shows the restored Resolution selector on an isolated TV emulator. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
 
 | Setting | Values | Default |
 |---|---|---|
@@ -98,13 +99,14 @@ These settings captures use an earlier isolated test installation on an Ugoos AM
 
 | Setting | What it does | Default |
 |---|---|---|
+| Resolution | Auto; supported fixed sizes (720p, 1080p, 1440p, 4K); Native follows the physical panel. Memory protection remains active | Auto |
 | Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
 | Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
 | Native trails | Standard, Medium, High; active at supported render sizes above 1330p. Medium and High add sharper trail detail and run the same additional passes | Standard |
 | Transition | How long the blend from one preset to the next takes: Instant, 1–10 s | 7 s (2 s on low-end devices) |
 | Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
 | Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
-| Skip slow presets | Skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
+| Skip slow presets | In Auto resolution only, skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
@@ -123,7 +125,7 @@ These settings captures use an earlier isolated test installation on an Ugoos AM
 **Picture and performance**
 - **A preset change is only smooth when it was prepared.** The next preset, and the ones *Random* and *Previous* on the remote would pick, are prepared in the background, so a switch takes a few hundredths of a second. For 20 seconds after Android reports low memory, and while less than 15% of the memory is free, nothing is prepared; a switch then pauses the picture for up to about half a second.
 - **Blending two heavy presets is slow.** A blend renders both presets at once. With presets whose equations run for many points or shapes per frame, the CPU is the limit, and the frame rate drops for the length of the blend.
-- **Resolution stays automatic.** The controller lowers or raises resolution for the target frame rate and available memory, up to the panel’s native size. The manual Resolution and Memory limit controls are removed; their saved values no longer force a render size or static RAM cap. Standard keeps authored-scale feedback with native new geometry and composite output. Medium and High retain more native trail detail and require more GPU work and texture memory; Medium is a lower gain, not a cheaper mode.
+- **Resolution defaults to Auto.** Settings › Advanced › Resolution offers Auto, 720p, 1080p, 1440p and 4K up to the panel size, plus Native. Native uses the detected physical panel, including 3840×2160 with a 1080p Android UI. Fixed/Native selections ignore FPS-driven downshifts and slow-preset skipping; memory protection can still temporarily lower the actual size. Auto retains its existing FPS and memory adaptation. Old `render_height` and Memory limit preferences stay retired; the new selection is saved separately. Standard keeps authored-scale feedback with native new geometry and composite output. Medium and High retain more native trail detail and require more GPU work and texture memory; Medium is a lower gain, not a cheaper mode.
 - **One Native core is published.** `projectM-TV-core.aar` and its versioned filename now contain the Native renderer. The separate capped 1330 AAR is retired. At supported render sizes above 1330p, Native trails replaces the old feedback pre-pass. Smaller render sizes or incompatible canvases retain the existing diffusion path. Driver shader/resource failures use the documented fallback, shown in Diagnostics. Waves and shapes now preserve authored feedback behavior while remaining sharp at native resolution; their equations still run once per frame.
 - **Memory protection is automatic.** Resolution growth must leave memory headroom for other apps, and memory pressure lowers the render size and pauses preset prewarming. Available memory and estimated rendering allocations guide this decision; Android/vendor process-killing behavior still varies.
 - projectM is a reimplementation of MilkDrop. Some presets look different from MilkDrop on Windows, or still render incorrectly.
@@ -133,6 +135,7 @@ These settings captures use an earlier isolated test installation on an Ugoos AM
 - You can select All, Chill, Normal or Intense, but cannot search for an individual preset or build custom playlists. Presets play in shuffled order within the selected collection.
 - The predictive engine is **beta**. Scores order activity within this library under a short shared quiet/melodic/kick probe using the published core AAR. They are not accuracy percentages or guarantees of calmness. Different songs, random inputs, render sizes and GPUs can change behaviour. Effects with no visible activity in the probe remain in All and are excluded from the curated groups. Device-specific skips can reduce the available counts. The [technical guide](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/) records the protocol and limits.
 - The black-preset check has limits. It judges each preset only in the first 20 seconds or so after it starts, and only after 3 seconds of uninterrupted music. "Black" means every sampled pixel is at or below about 8% brightness, so a very dark preset can count as black. After 3 black presets in a row it stops acting until a preset shows something, in case the fault is the renderer rather than the presets.
+- Main-textured shapes use repeat wrapping and linear filtering for every instance, independent of earlier blur or shape draws. Blur ranges that are equal, reversed or too narrow are separated; unsupported float32 ranges use the default 0–1 range. Negative motion zoom preserves signed reflection when the zoom exponent is exactly 1. Other negative-base power domains and identical Windows appearance remain outside this compatibility fix.
 - Random-image samplers keep their selected image when a preset uses it in both rendering stages, including aliases requesting different filtering or edge wrapping. Short aliases use the same image as their full filename-filtered form. The image is chosen anew for each preset load, so revisiting a preset can look different.
 - Versions before 1.9.5 marked some presets as black that now render. If you used an earlier version, reset the skip list: *Settings › Advanced › Skipped presets*.
 - Presets whose equations MilkDrop accepts now load: code split across numbered lines, a lone `.` as the number 0, and a stray `;` inside parentheses. Equation code that does not compile in MilkDrop either is left out, as MilkDrop does, and the rest of the preset plays. Earlier versions skipped 27 bundled presets for this reason. If you used an earlier version, reset the skip list to bring them back.
@@ -191,7 +194,7 @@ A version you built yourself is signed with your own debug key: uninstall it bef
 
 <a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). Select **Configure** in the startup dialog to open the closest supported Android notification-access page. **Dismiss** permanently hides the automatic reminder. *Settings › Track display › Track info* always reopens setup, and *Diagnostics* shows whether access is granted. See the [screenshot walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/#track-titles).
 
-**The music app closes while the visualizer runs.** Resolution and memory budgeting are always automatic. Use Standard trails and shorter transitions to reduce rendering allocations, and check actual render size and memory status in Diagnostics. Other apps and vendor process policies also affect playback; there is no manual memory-limit switch.
+**The music app closes while the visualizer runs.** Memory budgeting is automatic in every resolution mode. Return Resolution to Auto if a fixed size is too demanding. Use Standard trails and shorter transitions to reduce rendering allocations, and check actual render size and memory status in Diagnostics. Other apps and vendor process policies also affect playback; there is no manual memory-limit switch.
 
 **A preset is black.** The app moves on by itself after about 7 seconds of music, as long as *Skip blank presets* is on. To bring back presets skipped earlier, reset *Skipped presets* in *Advanced*.
 
@@ -230,8 +233,8 @@ AAR as the APK. Separate capped and `core-native` artifacts are retired for new
 releases; old releases remain immutable. The legacy `native` build-property
 spelling is accepted, while `capped` is rejected.
 
-The shared QualityController always chooses resolution automatically up to the
-panel, using target FPS and live memory headroom. Its legacy fixed-resolution and
+The shared QualityController defaults to choosing resolution automatically up to the
+panel, using target FPS and live memory headroom. Explicit hosts can opt into `setResolutionMode(mode, lastAutoHeight)` (0 Auto, -1 Native, or a height from `resolutionModes(display)`); fixed/Native bypass FPS adaptation and slow-preset skipping while retaining memory checks. Its legacy fixed-resolution and
 static-RAM inputs normalize to Auto. Standard trails is the Android core default;
 Medium and High add more trail detail with the same extra passes. Managed clients
 review trails/transition together with `setRenderAllocationSettings`, publish
@@ -292,7 +295,7 @@ The bundled presets and textures are distributed under CC0 1.0 ([LICENSES/CC0-1.
 
 ## Appendix: measurements on the NVIDIA SHIELD
 
-These historical figures were measured before the current always-Auto/live-budget policy; they are not current resource limits. They come from two NVIDIA SHIELD Android TVs with Android 11: the 2019 SHIELD TV (`sif`, 2 GB RAM, runs the app 32-bit) and the 2019 SHIELD TV Pro (`mdarcy`, 3 GB RAM, 64-bit). Other devices differ.
+These historical figures were measured before the current default-Auto/live-budget policy and restored Resolution selector; they are not current resource limits. They come from two NVIDIA SHIELD Android TVs with Android 11: the 2019 SHIELD TV (`sif`, 2 GB RAM, runs the app 32-bit) and the 2019 SHIELD TV Pro (`mdarcy`, 3 GB RAM, 64-bit). Other devices differ.
 
 - **Startup:** 3–6 seconds from launch to the first preset.
 - **Audio:** the visuals react about 1 second after launch (about 5 seconds the very first time). With Dolby or passthrough output, Android's visualizer on the TV's main output (session 0) and Android's playback capture both hear nothing; the music app's own session does. Details in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#audio-source).

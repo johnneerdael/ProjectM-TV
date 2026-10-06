@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/live-native-controls/docs/superpowers/evidence/live-native-controls/emulator_aar_checks.py", line 158, in <module>
+    main()
+    ~~~~^^
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/live-native-controls/docs/superpowers/evidence/live-native-controls/emulator_aar_checks.py", line 76, in main
+    raise ValueError(f"Installed {package} native hash {actual_native} does not match supplied AAR {expected_native}")
+ValueError: Installed nl.neerdael.projectmtv.corpuscandidate native hash 9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299 does not match supplied AAR 8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0

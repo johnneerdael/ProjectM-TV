@@ -18,6 +18,16 @@ The native runner also builds the patched projectM engine with ASan/UBSan and ch
 
 Feature-branch pushes do not start CI builds. A ready PR targeting `main` starts the full build suite only after a completed Codex or human review of its latest commit, with all review threads resolved and no outstanding review requests or changes requested. Codex’s thumbs-up reaction on the PR is its approval signal. The gate uses completed review metadata to bind that reaction to the current revision, resolving shortened IDs through GitHub; a completion comment without the reaction cannot unlock builds. GitHub hides private draft reviews from automation: request a reviewer to keep the gate closed until submission. The review gate periodically rechecks thread resolution; GitHub may delay scheduled runs. Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
 
+The native suite also observes effective samplers at actual custom-shape draws,
+checks repeat/bilinear samples and named-image qualifiers across instances and
+context recreation, and separates blur mentions from actual allocation. Blur
+controls exercise the production bounds and progressive float32 uniform producer.
+Warp controls execute the shared production vertex source and read transformed UVs
+for signed negative unit-exponent zoom and ordinary positive transforms. Native GL regressions inherit
+the engine's GL link dependencies; Linux uses the harness-selected EGL target for
+context creation. Both ordinary system discovery and explicit EGL/GLES link-flag
+overrides are supported without depending on a child-directory imported target. Sampling fixtures allocate storage matching their upload format and check GL errors immediately; unit-slope, binary-exact coordinates keep strict pixel oracles portable across the tested drivers.
+
 ## Core rendering policies
 
 The single `:core` AAR uses Native rendering. Build it with:
@@ -31,9 +41,9 @@ retired `capped` build is rejected. Canonical `projectM-TV-core.aar` and version
 core downloads now contain Native bytes; there is no separate capped publication.
 The Java/JNI API remains additive. Standard trails is the new core default above
 1330p, with `ProjectMJNI.setNativeTrails(-1/0/1/2)` for Off/Standard/Medium/High.
-The shared QualityController is automatic up to the detected panel size, with
+The shared QualityController defaults to Auto up to the detected panel size, with
 FPS and live memory headroom as inputs. Legacy fixed-resolution/static-RAM
-settings normalize to Auto. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md).
+settings normalize to Auto. New hosts may explicitly opt into `setResolutionMode(mode, lastAutoHeight)` using 0 for Auto, -1 for Native or a height from `resolutionModes(display)`. Fixed/Native retain memory protection and bypass FPS adaptation and slow-preset skipping; they do not guarantee a fixed actual size under memory pressure. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md).
 
 ## Offline preset analysis
 
@@ -108,3 +118,15 @@ Nonfinite shader literals are rejected by the generator rather than emitted as
 identifiers such as `inf`. Runtime nonfinite arithmetic and driver precision remain
 separate questions. These checks do not establish every preset’s visual fidelity
 or physical-TV performance.
+
+## Live preset controls
+
+Native regressions include `dynamic-wave-controls`, `dynamic-display-controls`
+and `dynamic-original-presets`. They compare real draw state and pixels with
+unchanged static controls, check independent filter blend predictions, preserve
+per-frame reset defaults, exercise paired authored/native geometry targets, and
+render three unchanged SHA-256-pinned witnesses in Off/Standard/Medium/High paths.
+See the [versioned engine policy and evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/live-native-controls/README.md).
+Historical predictor/static-engine policies remain historical controls; these
+fixes do not regenerate collection scores. Host and emulator checks do not
+establish physical-TV performance.

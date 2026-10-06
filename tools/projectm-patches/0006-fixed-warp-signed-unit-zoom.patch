@@ -1,0 +1,35 @@
+From: ProjectM TV contributors
+Subject: Preserve signed motion zoom when zoom exponent is exactly one
+
+MilkDrop3 ComputeGridAlphaValues (milkdropfs.cpp) computes nested powf on
+the CPU. For finite negative zoom and zoom exponent 1, the effective zoom
+is the signed base, reflecting UV displacement around the warp center.
+GLSL pow has an undefined negative-base domain even with exponent 1.
+Select the signed base only for this narrow case. Preserve the existing
+positive-zoom and nonunit-exponent calculations and custom HLSL translation.
+The shared vertex source supplies both legacy and custom warp stages.
+
+Reference: https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/main/es3.0/pow.xml
+This is a local compatibility repair, not an upstream backport.
+
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+index 501260465008677db1c65f0e92dced5228804b6c..fbe181720d59b376c77dc6027e70c304bfa7ed3d 100644
+--- a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
++++ b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+@@ -35,7 +35,15 @@ out vec2 frag_TEXCOORD1;
+ void main() {
+     gl_Position = vertex_transformation * vec4(pos, 0.0, 1.0);
+ 
+-    float zoom2 = pow(zoom, pow(zoomExp, radius * 2.0 - 1.0));
++    // MilkDrop's CPU powf retains signed zoom when the nested exponent is one.
++    // GLSL pow is undefined for any negative base, including this defined case.
++    float zoom2;
++    if (zoom < 0.0 && zoomExp == 1.0) {
++        zoom2 = zoom;
++    }
++    else {
++        zoom2 = pow(zoom, pow(zoomExp, radius * 2.0 - 1.0));
++    }
+     float zoom2Inverse = 1.0 / zoom2;
+ 
+     // Initial texture coordinates, with built-in zoom factor

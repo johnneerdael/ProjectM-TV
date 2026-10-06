@@ -1,0 +1,44 @@
+Subject: [PATCH] Own repeat/bilinear sampling for main-textured shapes
+
+Texture-only binding left unrelated unit0 sampler objects active. Their state
+superseded texture wrap requests, and the post-draw unbind made later instances
+fall back to the framebuffer texture's nearest filter. Bind an instance-owned
+repeat/linear sampler on every main-textured fill, including both geometry passes.
+Keep named-image descriptor samplers and stop mutating their texture parameters.
+
+MilkDrop3 code/vis_milk2/milkdropfs.cpp restores wrap/linear stage state before
+custom shapes (WarpedBlit_Shaders -> RestoreShaderParams -> DrawCustomShapes).
+Khronos GLES3 glBindSampler specifies that bound sampler state supersedes texture
+state; unbinding alone would activate nearest filtering here.
+ProjectM TV fix against upstream 4.1.7 plus patches 0001-0044.
+
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+index 26ece1597d30d9803bc7760c5b98e0ccd5c30737..155ab06d5fea94cb434b19ad7713878ff5f16d63 100644
+--- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+@@ -378,12 +378,9 @@ void CustomShape::DrawBatch(bool nativePass)
+             {
+                 // No "image" texture (or not found): the main texture.
+                 assert(!m_presetState.mainTexture.expired());
+-                m_presetState.mainTexture.lock()->Bind(0);
++                m_presetState.mainTexture.lock()->Bind(0, m_mainTextureSampler);
+             }
+ 
+-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+-
+             m_texturedArray.Bind();
+             if (m_geometryTargets) {
+                 // Filled geometry consumes per-vertex positions/colors/UV, not instanced line inputs.
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+index 119f4f7170be47dcc1e95a6687859e7acc18098a..fb475d0e948a3c5ed4f3ac14c9c44e79bbe2fcb8 100644
+--- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+@@ -135,6 +135,7 @@ private:
+     bool m_quadBorders{false};                                 //!< This frame draws outlines as quads (reference size set, line program usable).
+     LineStyle m_borderStyle;                                   //!< Outline width, passes and pass offsets this frame (quad lines).
+     bool m_linesBegun{false};                                  //!< LineRenderer::Begin() called for this batch.
++    Renderer::Sampler::Ptr m_mainTextureSampler{std::make_shared<Renderer::Sampler>(GL_REPEAT, GL_LINEAR)}; //!< The main-textured shape sampling contract.
+     Renderer::TextureSamplerDescriptor m_imageTexture; //!< The "image" texture, looked up once per frame.
+     bool m_imageLookedUp{false};
+     bool m_texturedShaderReady{false}; //!< Textured shader uniforms set in this frame.

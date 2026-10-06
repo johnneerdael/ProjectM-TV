@@ -28,6 +28,20 @@ Verified migration checks on 2026-10-06:
 
 Source manifests and logs are in ignored `build/upstream-rebase/`, including `legacy-series.json`, vendor disposition reports, `milkbeat-consumer-report.json`, `pilot-diff-report.json` and worker identities. Historical device timings and predictive-collection producer identities remain historical. The four-witness TV matrix has completed 32 runs; same-role captures repeat exactly, while midgit has a material difference and Acid Mandala/Geometry 101 also have nonzero sampled differences. See the [device evidence](superpowers/evidence/upstream-master-4-2/README.md). The random 100-preset zero-change gate, final-revision CI/GitHub Codex review, merge, publication and automatic Milkbeat update remain open. No whole-corpus equivalence or new performance gain is established here.
 
+## Subsequent 4.1.7 fixes synchronized from main
+
+The original 44-patch assessment above is historical. Main `43023889ec38cf1250f3bfcaaf079a840acbdf76` also includes resolution selector PR #44 and historical patches 0045–0049 from PRs #47–#49. The migration retains those five renderer repairs as new patches 0004–0008 after the original three consolidated patches. The complete eight-patch series applies to a fresh upstream export; Android debug/release core and release APK builds, 101 JVM tests and 29 native controls in normal and ASan/UBSan builds pass. Final released-AAR identity and pixel fidelity remain separate gates.
+
+| Historical patch | Current patch | Adaptation and potential libprojectM value |
+|---|---|---|
+| 0045 textured shape sampler | 0004 | Own a repeat/linear sampler for main-textured fills and preserve named-image qualifiers. Retain upstream VertexArray/ShaderCache ownership. This is a general sampler-state correctness candidate; it adds one instance-owned sampler. |
+| 0046 blur range interval | 0005 | Retain exact float32 normalization order, upward expansion of upper bounds and coherent defaults for unsupported ranges. Helper bodies match the final 4.1.7 fix. Useful defensive math for blur storage and decoding; no performance claim. |
+| 0047 signed unit zoom | 0006 | Preserve finite negative zoom when the exponent is exactly one, avoiding undefined GLSL power behavior. Other negative-base power domains stay unsupported. The original repair applies without changing its shader math. |
+| 0048 live built-in wave controls | 0007 | Consume evaluated waveform mode/dots/thickness/blending and rebuild mode math when needed, while retaining Mesh rendering and evaluated geometry reuse. Useful for authored per-frame controls. Original MilkDrop2 `milkdropfs.cpp:2852` reads the evaluated mode with integer truncation and remainder; projectM retains its own 16-mode extension. |
+| 0049 live legacy display controls | 0008 | Consume evaluated gamma, echo and filter flags, including equation-only activation, through current Mesh and weak ShaderCache ownership. Preserve custom-composite policy and configuration defaults. Useful for compatibility with authored legacy effects. |
+
+All five original attribution headers are retained. Incoming native fixtures were adapted for GLAD draw-pointer observation, ShaderCache ownership, current texture constructor arguments and vertex attribute slots, with original pixel assertions and tolerances preserved. The [regression inventory](superpowers/evidence/upstream-master-4-2/patch-regressions/README.md) records the required named presets and unresolved historical references. These scoped controls do not establish the final 100-random-plus-regressions pixel-perfect comparison or universal GLES compatibility.
+
 ## Patches 0001–0016
 
 | Original patch filename | 4.2 disposition | Evidence and remaining behavior | Potential value to libprojectM and tradeoffs |
