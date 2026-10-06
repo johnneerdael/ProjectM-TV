@@ -146,3 +146,9 @@ frame and ordinary draw state. Detail passes remain unsupported. The separate
 review collection verifier also checks preset memory weights against the published
 AAR's master index, so changing a weight and its checksum cannot produce a verified
 review bundle. These checks do not regenerate the packaged mood indexes.
+
+
+Numerical corpus tools must use the native library extracted from the same supplied
+AAR. The ARMv7 runner checks that relationship before device access and records the
+native checksum; the ARM64 beta runner has its own equivalent check. Comparing an
+uploaded standalone library only with its local copy is insufficient release evidence.

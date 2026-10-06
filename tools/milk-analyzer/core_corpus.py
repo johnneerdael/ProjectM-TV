@@ -23,6 +23,17 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def verify_runtime_library(aar,library):
+    with zipfile.ZipFile(aar) as archive:
+        try:published=archive.read('jni/armeabi-v7a/libprojectmtv.so')
+        except KeyError as error:
+            raise ValueError('Supplied AAR has no armeabi-v7a runtime library') from error
+    native_sha=hashlib.sha256(published).hexdigest()
+    if digest(library)!=native_sha:
+        raise ValueError('Runtime library is not the supplied AAR armeabi-v7a library')
+    return native_sha
+
+
 def atomic_json(path, data):
     temporary=path.with_suffix(path.suffix+'.tmp')
     temporary.write_text(json.dumps(data,indent=2,allow_nan=False)+'\n')
@@ -104,11 +115,13 @@ def main():
     parser.add_argument('--pcm',type=Path,required=True)
     parser.add_argument('--limit',type=int);parser.add_argument('--retry-unscored',action='store_true')
     args=parser.parse_args();output=args.output
+    native_library=args.runtime/'jni/armeabi-v7a/libprojectmtv.so'
+    native_sha=verify_runtime_library(args.aar,native_library)
     for folder in ('results','overlays','metadata','logs'):(output/folder).mkdir(parents=True,exist_ok=True)
     candidate=json.loads(args.model.read_text());model=candidate['model']
     runtime_files={'classes.dex':args.runtime/'dex/classes.dex',
                    'libbackendclock.so':args.runtime/'libbackendclock.so',
-                   'libprojectmtv.so':args.runtime/'jni/armeabi-v7a/libprojectmtv.so',
+                   'libprojectmtv.so':native_library,
                    'running.f32':args.pcm,'projectM-TV-core-2.2.4.aar':args.aar}
     runtime_hashes={name:digest(path) for name,path in runtime_files.items()}
     for name,expected in runtime_hashes.items():
@@ -119,7 +132,8 @@ def main():
     relevant=('core_corpus.py','core_backend.py','descriptors.py','intensity_calibration.py',
               'intensity_evidence.py','audience_policy.py')
     code_hashes={name:digest(Path(__file__).with_name(name)) for name in relevant}
-    identity_data={'aar_sha256':digest(args.aar),'model_sha256':digest(args.model),'python_hashes':code_hashes,
+    identity_data={'aar_sha256':digest(args.aar),'native_armeabi_v7a_sha256':native_sha,
+                   'model_sha256':digest(args.model),'python_hashes':code_hashes,
                    'runner_java_sha256':digest(Path(__file__).with_name('CoreBackendRunner.java')),
                    'clock_source_sha256':digest(Path(__file__).with_name('core_backend_clock.cpp')),
                    'profile':{'frames':420,'warmup':60,'fps':30,'width':128,'height':72},'device':args.device,

@@ -623,3 +623,12 @@ unmodeled and rejected; a matching timestamp alone cannot select a different
 frame's cached uniforms. Preserve historical ledgers without cache metadata under
 their existing limited policy. The frozen100-preset audit declared correct frame
 and ordinary-draw inputs; these new guards do not rerate its existing evidence.
+
+
+The older `core_corpus.py` ARMv7 runner now verifies its local native library
+against `jni/armeabi-v7a/libprojectmtv.so` inside the supplied AAR before creating
+a run identity or contacting a device. Stale libraries, a library from another ABI,
+or an AAR missing that ABI fail immediately. Its run identity records the verified
+native hash; deployed copies are still checked separately. The ARM64 beta scorer
+already performs its corresponding AAR/library check. This does not replace
+checking Java/JNI compatibility, clock/audio settings or actual rendering.

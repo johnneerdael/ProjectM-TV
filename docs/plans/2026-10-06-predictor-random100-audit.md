@@ -106,3 +106,12 @@ preset/weight pairs with the published master index, including when checksums
 are updated after tampering. Positive matching inputs and empty groups remain
 supported. The affected77tests pass; final-head review and CI are still required.
 These are predictor/export validation defects, not AAR bugs or changed audit scores.
+
+
+A second GitHub review found that the older ARMv7 corpus CLI verified local-versus-
+deployed files without proving the native library came from its supplied AAR.
+The CLI now verifies the exact `jni/armeabi-v7a/libprojectmtv.so` first, records its
+hash and refuses mismatched or absent-ABI inputs before device access. Focused
+negative controls intercept any adb attempt; the matching pair passes. This is a
+runner provenance repair. The completed audit independently checked its unchanged
+ARM64 AAR/library relationship and does not inherit this ARMv7 CLI's defect.
