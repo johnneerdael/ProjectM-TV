@@ -468,3 +468,11 @@ The observed zero-stretch profile does not authorize a negative-power interpreta
 CASE037's original feedback mismatch remains a failed prediction; a source-only
 corner-sampling diagnostic isolates the warp path, but target-GLES power/UV behaviour
 requires independent controls before any numerical runtime policy is added.
+
+Round008 source preparation uses the next unchanged ten queue positions038–047
+with a frozen stronger two-second stimulus: nine complete60-frame forecasts and
+one unresolved complex-reciprocal singularity. This is source computation only,
+with no native accuracy scores or TEN-gate credit. The exact centre coordinate
+differs under the existing optional composite raster model; target varying controls
+are required before selecting that policy. Published2.3.8 and candidate44 adapter
+identities remain separate while PR41's publication is blocked by its render test.

@@ -1,0 +1,128 @@
+{
+  "source_only": true,
+  "native_comparisons": 0,
+  "scores": null,
+  "model_commit": "8dc2a381",
+  "published_reference_target": "2.3.8",
+  "provisional_before_patch0044": true,
+  "audio_file": "stimulus2s-v2/audio-equation-context.json",
+  "cases": [
+    {
+      "case": 38,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "6d923b9d55dba900b86d8da23cf27adfc52967c2bb9c48c12ae7502c48752d41",
+      "pixels_sha256": "16501edfd6f6219273939de2e26091616a898b68441a612a55dc70c3b3806939"
+    },
+    {
+      "case": 39,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "23bcd2956be36ea64a21fd8d3cb87ae72207c2d4146eb623f51d198523951dfe",
+      "pixels_sha256": "3d6c098e696c9bc138a83bc3cbd37db56b42721ea2d9d19659a71b5e6ae3e0a8"
+    },
+    {
+      "case": 40,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "679e3bdb6922f88fb1ab4ab21b6465c19b817967f671af14ce332ff320c1aba9",
+      "pixels_sha256": "50c78a9166dbbc4e8c305be4bc7f61dd790e1fbe5c7fece4e3e9b9581cb55482"
+    },
+    {
+      "case": 41,
+      "status": "unresolved",
+      "predicted_frames": 0,
+      "reason": "unresolved grid numeric domain: divide",
+      "prediction_math_sha256": "6e6de11dcf985e8afe9013f95860e797d396a87d94de36c4ce6247ab2ed79737",
+      "pixels_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": 42,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "2049843f5d98561c29f0e918e34c17ea38a19f4f749933d3c14df0474a254a4a",
+      "pixels_sha256": "c4ae5827f4827bc847c28de4b839d15247de7a986dbbf6e83a9a076422dc1ca5"
+    },
+    {
+      "case": 43,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "46796874442d85fcb161fc764992697e8f74dc509508aa335ed890a6d9628ca7",
+      "pixels_sha256": "221e0f5780a035235efb85efaedda88a975afa8abc51edab41bdee7bcb2de7c2"
+    },
+    {
+      "case": 44,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "658bac76812b2bdb15524c0f9255c623d81dc88a2b401e3df9fcef4323b02217",
+      "pixels_sha256": "29e675e148e9755d4be57e85e3a57cf6a7a135688fe2eeb910d7cc0f0f6c621a"
+    },
+    {
+      "case": 45,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "8de30d8b7860762fa9a525b324358f5a3fb26eb6f26fd85d107090f479c44832",
+      "pixels_sha256": "76741d3fef6d42a77b3319478bdd6c7137bccdf2f9980ea95bd904f3d7cdcc0a"
+    },
+    {
+      "case": 46,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "a1d66889f9317d1bf03b34e9611c8683d6781ac5a32dbc447245d742d4c47142",
+      "pixels_sha256": "a0cc57217c4cfb3bb44b1605eaebbcc32d9ff6b94ec94b7bddb35510098749cd"
+    },
+    {
+      "case": 47,
+      "status": "computed",
+      "predicted_frames": 60,
+      "reason": null,
+      "prediction_math_sha256": "8afe8f6b8353360a0e5cc5238bd2641f595a422bf52e34aff39e082be5dddd87",
+      "pixels_sha256": "ff1e0df82354fca7d779a3b82c2b8d2996e2a36ca0d8684387a0794b7416c4c3"
+    }
+  ],
+  "checkpoint_sha256": "71da1f0e3dec099ccc9ddc6ac3412e72fb2b12b8a59d2dfb625975265a9d601f",
+  "preparation_seal_sha256": "6208ffb966f9dd2d7e3ceddcf8b1fabb39dd4897906046e0cc057ea6d8dcdef0",
+  "stimulus_pcm_sha256": "6d17ad2fa7d1e9465e5ee80291275f25a701e52aebcdef22d24a42ed25430bf8",
+  "audio_equation_sha256": "6f9eea3673726712d3c421245e4d1f47c976c5f14ecb611b5d69edd5c37cc7d5",
+  "gate_credit": false,
+  "computed_cases": 9,
+  "unresolved_cases": 1,
+  "computed_frames": 540,
+  "case041_diagnosis": {
+    "expression": "complex reciprocal of uv-.5",
+    "lane": [
+      71,
+      127
+    ],
+    "numerator": [
+      0,
+      0
+    ],
+    "denominator": [
+      0,
+      0
+    ],
+    "unsnapped_uv": [
+      0.5,
+      0.5
+    ],
+    "explicit_raster8_uv": [
+      0.50000304,
+      0.5000056
+    ],
+    "scope": "source CPU diagnostic; no native varying evidence; no raster policy adoption"
+  },
+  "limits": [
+    "No native references or accuracy scores in this checkpoint.",
+    "Current published2.3.8 target is43-patch; candidate44 source adapters are separate and unpublished.",
+    "The TEN gate and100-preset audit remain unmet."
+  ]
+}
