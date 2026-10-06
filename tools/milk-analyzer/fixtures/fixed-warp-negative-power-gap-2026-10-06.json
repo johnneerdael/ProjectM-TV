@@ -1,0 +1,28 @@
+{
+  "preset": "Hexcollie - This is where we begin stripped.milk",
+  "preset_sha256": "bbe1542bc2b8ce32fc159d88b68f03b19db7a4f8ebc5dfb9c319a5d2287a968d",
+  "historical_score": 62.5,
+  "critical_mismatch": "feedback history/brightness",
+  "source_root_cause": "Per-pixel zoom approximately -0.9 enters handwritten GLSL nested pow; NumPy signed integral power silently treated it as defined.",
+  "language_reference": "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/main/es3.0/pow.xml",
+  "diagnostic_scope": "Source-only replacement of fixed-warp UV by clamp-corner coordinates against existing native frames. No new native render; no gate credit.",
+  "two_frame_diagnostic": [
+    {
+      "frame": 1,
+      "source_mean_rgb8": 4.692645,
+      "native_mean_rgb8": 4.692573,
+      "mae_rgb8": 0.001393
+    },
+    {
+      "frame": 2,
+      "source_mean_rgb8": 0.651449,
+      "native_mean_rgb8": 0.651521,
+      "mae_rgb8": 0.000561
+    }
+  ],
+  "previous_frame2_mae_rgb8": 3.778,
+  "fix_scope": "Reject undefined negative-base and zero/nonpositive exponent domains in both fixed-warp powers. Existing zero-stretch runtime profile cannot authorize this separate domain.",
+  "remaining_requirement": "Target published-AAR GLES power and downstream warp-UV controls before adding a versioned observed numerical policy, then full60-frame repair replay at least90.",
+  "aar_bug_confirmed": false,
+  "appearance_fixed": false
+}

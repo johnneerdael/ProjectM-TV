@@ -48,3 +48,19 @@ def test_apple_profile_cannot_be_applied_to_a_different_shader_backend(tmp_path)
                 equation_seed=1,blur_levels=0,quantize=True)
     with pytest.raises(ValueError,match='requires glsl330'):
         forecast_source({},audio={},binaries=tmp_path,domain=domain,compatibility={})
+
+
+@pytest.mark.parametrize('profile',['portable',PROFILE])
+@pytest.mark.parametrize('settings',[{'zoom':-.9},{'zoomexp':-1},{'zoom':0,'zoomexp':0}])
+def test_undefined_nested_glsl_power_domain_is_not_numpy_integer_power(settings,profile):
+    # radius1 makes the inner exponent exactly1. NumPy would accept a
+    # negative base here, but GLSL pow remains undefined for any negative base.
+    with pytest.raises(ValueError,match='unresolved warp power domain'):
+        warp_vertex_uv(np.array([[1,0]],dtype=np.float32),numeric_profile=profile,**settings)
+
+
+def test_zero_zoom_exponent_is_allowed_when_the_inner_power_domain_is_defined():
+    # radius1: pow(0,1)=0, then pow(2,0)=1. Rejecting every zero base
+    # would incorrectly reject this well-defined nested expression.
+    uv=warp_vertex_uv(np.array([[1,0]],dtype=np.float32),zoom=2,zoomexp=0)
+    np.testing.assert_array_equal(uv,[[1,.5]])

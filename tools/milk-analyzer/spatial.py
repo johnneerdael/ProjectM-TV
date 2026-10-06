@@ -70,7 +70,16 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     x,y=p[...,0],p[...,1]
     with np.errstate(all='ignore'):
         radius=np.hypot(x*a['aspect_x'],y*a['aspect_y'])
-        effective_zoom=np.power(a['zoom'],np.power(a['zoomexp'],radius*2-1))
+        radial_exponent=radius*2-1
+        # The handwritten native vertex shader uses GLSL pow directly. Its
+        # negative-base domain is undefined even for integral exponents;
+        # NumPy's signed integer-power result cannot establish GPU behavior.
+        if np.any(a['zoomexp']<0) or np.any((a['zoomexp']==0)&(radial_exponent<=0)):
+            raise ValueError('unresolved warp power domain')
+        zoom_exponent=np.power(a['zoomexp'],radial_exponent)
+        if np.any(a['zoom']<0) or np.any((a['zoom']==0)&(zoom_exponent<=0)):
+            raise ValueError('unresolved warp power domain')
+        effective_zoom=np.power(a['zoom'],zoom_exponent)
         inverse_zoom=np.float32(1)/effective_zoom
         u=x*a['aspect_x']*.5*inverse_zoom+.5
         v=y*a['aspect_y']*.5*inverse_zoom+.5

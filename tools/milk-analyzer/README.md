@@ -457,3 +457,14 @@ The current plan is `docs/plans/2026-10-05-predictor-visual-loop.md`. Raw artifa
 remain in ignored `build/visual-loop/`. The broader imported suite needs prepared
 historical adapter profiles and is not reported passing. No whole-corpus accuracy
 claim or change to the shipped beta collections follows from this research.
+
+### Fixed-warp power domains
+
+The handwritten warp vertex shader uses nested GLSL `pow` for zoom and zoomexp.
+A negative base is undefined even with an integer exponent; zero with a nonpositive
+exponent is also undefined ([Khronos ES reference](https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/main/es3.0/pow.xml)).
+The source predictor rejects those domains instead of adopting NumPy signed powers.
+The observed zero-stretch profile does not authorize a negative-power interpretation.
+CASE037's original feedback mismatch remains a failed prediction; a source-only
+corner-sampling diagnostic isolates the warp path, but target-GLES power/UV behaviour
+requires independent controls before any numerical runtime policy is added.
