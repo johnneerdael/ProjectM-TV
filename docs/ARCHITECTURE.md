@@ -320,3 +320,30 @@ These changes add no Java/JNI API and leave preset assets unchanged. Host UV,
 sampler and normalization controls are separate from device appearance and
 performance evidence; they do not establish identical rendering on Windows or
 all TV GPUs.
+
+## Evaluated waveform and legacy display controls
+
+Engine policy `live-controls-v1` starts with patches 0048–0049. `Waveform` reads
+evaluated `wave_mode`, `wave_usedots`, `wave_thick` and `wave_additive`. Mode
+conversion truncates toward zero, then takes signed remainder over projectM's
+16 modes. Negative remainders have no factory implementation; nonfinite or
+unrepresentable integer inputs draw nothing. Math is rebuilt when the effective
+mode changes. Authored/native targets share one generated geometry stream and
+the same evaluated flags, retaining mode-specific alpha and recurrence.
+
+`FinalComposite` passes `PerFrameContext` to legacy `VideoEcho` and `Filters`.
+Every legacy composite owns filters even when all defaults are off; inactive
+frames skip filter GL work. Filter order and blend formulas remain brighten,
+darken, solarize, invert. Flags use nonzero truth. `PerFrameUpdate` retains the
+existing gamma [0,8] and echo zoom [0.001,1000] clamps. Echo orientation truncates
+toward zero and uses signed remainder modulo four; an undefined integer
+conversion omits echo and draws gamma-only output. The echo branch compares narrowed float alpha to0.001f, matching the
+MilkDrop3 legacy consumer (float conversion at4065, comparison at4085). Existing echo threshold,
+gamma redraws, UV math and GL cleanup remain intact. Custom composite shaders
+retain their existing uniform/branch policy.
+
+Neither repair copies evaluated outputs into `PresetState`: configuration
+defaults still reset each frame, and each preset instance owns its state. No
+public Java/JNI/C API changes, preset edits or predictor policy changes are
+included. Historical static-policy audit results remain unchanged. See
+[controls and validation](superpowers/evidence/live-native-controls/README.md).

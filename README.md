@@ -31,6 +31,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Predictive preset engine (beta):** choose **Chill**, **Normal** or **Intense** by predicted visual activity. **All** remains the default and keeps the full library available.
 - **Corrected shader maths** restores colours and detail in presets affected by projectM translator bugs; [proof and upstream contribution](https://github.com/projectM-visualizer/projectm/pull/1031)
 - **More presets run their own shaders:** 102 bundled presets that fell back to the default shader because of translator errors (flat array initializers, `sampler_state` blocks) now run as written, and shaders that change `q` variables or `time` start from their real values instead of undefined ones
+- **Live preset controls:** per-frame equations can change the built-in waveform mode, dots, thickness and additive blending. Legacy composites also use live gamma, video echo and colour filters; custom composite shaders retain their own behaviour.
 - **Additional shader compatibility fixes:** presets using a local named `sample`, declaration or statement macros, or swizzles after parenthesized constructors can use their authored shaders. GPU driver acceptance and visual fidelity remain device-dependent.
 - **Audio detected about 1 second after launch**, from the music app's own audio session
 - **Cover, artist and title** of the playing track on screen, as in Milkbeat

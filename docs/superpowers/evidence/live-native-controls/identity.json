@@ -1,0 +1,295 @@
+{
+  "policy": "live-controls-v1",
+  "baseMain": "2c1110b5",
+  "host": "Apple M4 Pro",
+  "emulator": "37.1.11.0 / API34 default arm64-v8a / emulator-5620",
+  "graphics": "host GPU, OpenGL ES Translator (Apple M4 Pro), OpenGL ES3.0 (4.1 Metal -89.4)",
+  "captures": [
+    {
+      "role": "before",
+      "case": "darken-0",
+      "rawRgbPpmSha256": "620e8283c62cbf66a48f6176ca91e1d2cd060fa1448028b3fee69397eda747c0",
+      "pngSha256": "daba07780ba911a61275b0f144367170daebb1d9956e9d3d8769b1491da1aca8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "after",
+      "case": "darken-0",
+      "rawRgbPpmSha256": "620e8283c62cbf66a48f6176ca91e1d2cd060fa1448028b3fee69397eda747c0",
+      "pngSha256": "daba07780ba911a61275b0f144367170daebb1d9956e9d3d8769b1491da1aca8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "before",
+      "case": "darken-1",
+      "rawRgbPpmSha256": "620e8283c62cbf66a48f6176ca91e1d2cd060fa1448028b3fee69397eda747c0",
+      "pngSha256": "daba07780ba911a61275b0f144367170daebb1d9956e9d3d8769b1491da1aca8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "after",
+      "case": "darken-1",
+      "rawRgbPpmSha256": "8fda275418342b66a9d9d56924ba0f770f1d10b00057858d7e6005ec0231ad12",
+      "pngSha256": "ad8d3091c498e4b124de50ec89300f603b15090b6888515bc3cb7b573ffd020e",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "before",
+      "case": "wave-0",
+      "rawRgbPpmSha256": "b87df4fc9912406912dc2722d3cf8e323edbcf656f0cd2268f9271dc1e3cc1ba",
+      "pngSha256": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "after",
+      "case": "wave-0",
+      "rawRgbPpmSha256": "b87df4fc9912406912dc2722d3cf8e323edbcf656f0cd2268f9271dc1e3cc1ba",
+      "pngSha256": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "before",
+      "case": "wave-1",
+      "rawRgbPpmSha256": "b87df4fc9912406912dc2722d3cf8e323edbcf656f0cd2268f9271dc1e3cc1ba",
+      "pngSha256": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "after",
+      "case": "wave-1",
+      "rawRgbPpmSha256": "3ef1bf1eb994fab64a116a02fd39ff253ecc959b3481cae976f98eca2901f64e",
+      "pngSha256": "18e6fe1b2aad61b2b2ac147d8156b9cd4d673d93fd459967d9c134e0f42681d0",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "before",
+      "case": "wave-2",
+      "rawRgbPpmSha256": "b87df4fc9912406912dc2722d3cf8e323edbcf656f0cd2268f9271dc1e3cc1ba",
+      "pngSha256": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "after",
+      "case": "wave-2",
+      "rawRgbPpmSha256": "53eeff465cb1ebf5050f3592e7f3726e77822f58087e5cb42ccb6f8d0303ba4d",
+      "pngSha256": "a9b38ad950722b2f89cb97e792a46c084bfa71c212cd4f907425f88e459625c2",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "before",
+      "case": "wave-3",
+      "rawRgbPpmSha256": "b87df4fc9912406912dc2722d3cf8e323edbcf656f0cd2268f9271dc1e3cc1ba",
+      "pngSha256": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "after",
+      "case": "wave-3",
+      "rawRgbPpmSha256": "b866e901e468bfb9aba88fe73255eee04b781378b733efa7745faa95d0ffeb5f",
+      "pngSha256": "4c14c88edce96929a2a4cb30786202a08305618d6e1726279f66d4ee02510a73",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "before",
+      "case": "wave-4",
+      "rawRgbPpmSha256": "b87df4fc9912406912dc2722d3cf8e323edbcf656f0cd2268f9271dc1e3cc1ba",
+      "pngSha256": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "role": "after",
+      "case": "wave-4",
+      "rawRgbPpmSha256": "b866e901e468bfb9aba88fe73255eee04b781378b733efa7745faa95d0ffeb5f",
+      "pngSha256": "4c14c88edce96929a2a4cb30786202a08305618d6e1726279f66d4ee02510a73",
+      "size": [
+        128,
+        128
+      ]
+    }
+  ],
+  "sourceFiles": {
+    "src/libprojectM/MilkdropPreset/Waveform.cpp": {
+      "before": "b4695aa3e68cf1fd4d8b337675506674bf31bdcc50172de5772af37377c54c7e",
+      "after": "f9b41143253470b682e8fc2b3e370cc01fc7526c7365b031382917446d28fff4"
+    },
+    "src/libprojectM/MilkdropPreset/Filters.cpp": {
+      "before": "19addc984f53f9be55edc6c98a3b51298dff35f0f7e821b728e3aed98cc62771",
+      "after": "d9eb7b2a4a760c3d2c727db4d0c12b472f5978eb83e949baf37d08796b982c8b"
+    },
+    "src/libprojectM/MilkdropPreset/VideoEcho.cpp": {
+      "before": "15d602cc1f1aa2bbf62afafba828da4a318c864b8148f62eb1187427afa32335",
+      "after": "adec51211102fcbf756ef5ce09840a0100696ac113e67a8a1b9f048fbb401561"
+    },
+    "src/libprojectM/MilkdropPreset/FinalComposite.cpp": {
+      "before": "46f6c293f5a8ebe42d40ac7e5eae2f84355d0d0a194670671aec0e628e5c7956",
+      "after": "041061a99f0e6a043aa367ed9f3d02717dcaed7eea7dd8509fef909f4f2ad9fa"
+    },
+    "src/libprojectM/MilkdropPreset/PerFrameContext.cpp": {
+      "before": "7103c313986720e4949212826f5fac23ff4483053ae5adac57b05a309a0dc1b7",
+      "after": "7103c313986720e4949212826f5fac23ff4483053ae5adac57b05a309a0dc1b7"
+    },
+    "src/libprojectM/MilkdropPreset/MilkdropPreset.cpp": {
+      "before": "532e280e4812c02a104878f1ff77cf41cb7a566c54bd64eee75f1bb252135419",
+      "after": "532e280e4812c02a104878f1ff77cf41cb7a566c54bd64eee75f1bb252135419"
+    },
+    "src/libprojectM/MilkdropPreset/PresetState.cpp": {
+      "before": "d97c79540a068714baf1964905f2fce19b3af20e9da6c1d622590c94a19ff881",
+      "after": "d97c79540a068714baf1964905f2fce19b3af20e9da6c1d622590c94a19ff881"
+    }
+  },
+  "aar": {
+    "before": {
+      "sha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+      "arm64LibrarySha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
+    },
+    "after": {
+      "sha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
+      "arm64LibrarySha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
+    }
+  },
+  "sourcePatchHashes": {
+    "0001-plasma-transition-float-overflow-shield.patch": "90211950c7f5fe2c29ee0a23e0217ba44a53cbfd5fb1f77887ad242e9dd365bc",
+    "0002-render-target-resize-program-cache-shader-state.patch": "f9412348e6079972ae87b20091d78888a10dd4c4b902a6f1e08856a2e19f7005",
+    "0003-hlslparser-classic-locale.patch": "c2cecd1ecfa020015e929caaab7a5cf26bd6c9b0c43473861bc1aaeef5792e87",
+    "0004-projectm-eval-thread-local-rand.patch": "ee624476036c144f6b9aef688da6c46772e917b208b15441982f7cf8a68e8584",
+    "0005-cache-translated-preset-shaders.patch": "427847d0815576d012514345e829992608260a25f095b0ec622f53b6cf846562",
+    "0006-custom-shapes-batched-draws.patch": "f582ce185e20060e6c2a65eb5bcdf5e23dd3f03949cd7666e7c42092a86f9eff",
+    "0007-framebuffer-texture-pool.patch": "f6527189010d21f5180b1cd2d6ec53913fc6ceb59a4ca7024b9809ebfabbac45",
+    "0008-hlsl-floating-point-modulo.patch": "8f871546bc006afee7fc520f353a6181d8aa085c0b176425475a03837b7c8d90",
+    "0009-tile-gpu-invalidate-and-mesh-orphaning.patch": "b968939c0d58981a8c1a4ff100852a912dd92dd25ce9d875791dde727e6619d1",
+    "0010-skip-redundant-previous-frame-flip.patch": "0b4941b388ce61166a038b0212496cd94b682da9353a2960c8c575300287a77d",
+    "0011-indexed-warp-mesh.patch": "296905e75730fdb7ab39769cec8a1ee980ddb3ab3f4d0f5083b0483f4a091384",
+    "0012-merged-warp-pass-direct-blur.patch": "e1acef87cfb563ce5d58d6ad6011ce745a98c77ac9465703964e596c7ca6daae",
+    "0013-motion-vector-map-only-when-shown.patch": "61bfd88a026f1c5825c1827aa0993dc131956705c05aa81428f959b2f0e9500d",
+    "0014-video-echo-in-final-orientation.patch": "59881214d9dfec9fd7c1b636df383612008ae2e8d2f3153ebdca70fdb0da1620",
+    "0015-keep-output-for-blur-reading-and-discarding-shaders.patch": "018652ae06d4ebdc9a8080bd14ae7b20b8abc9ebb6be132967a3ea1644554190",
+    "0016-direct-composite-output.patch": "364077d6131884d8b9f72718e179281722e7cfa1c9b193af6aaa244f3d135e02",
+    "0017-pcm-max-samples-is-buffer-size.patch": "bfce4d6b77f9ad1bb63b93f3b4395dd0745282b89bd29a6b4f266ea20838cd9d",
+    "0018-hlslparser-parenthesized-constructor-expressions.patch": "9f6cd972d67dfda9d76ebe8d168531e676c1ce32f185dcbe6c19abfabcc926ed",
+    "0019-hlslparser-number-scan-without-source-copy.patch": "32a914b0ad6be0fdd8d144e0d075e9b7e5876a76ca385fcbaf555f8b6e99c8bc",
+    "0020-projectm-eval-1.0.7-evaluator-fixes.patch": "de9e4f64b5e252445ae50d3f540d7b76a607cc27daceaf217a2ef901341d7b27",
+    "0021-hlslparser-self-referencing-macros.patch": "71382b8ecd90a35a24023d8d16bae0f0f2881513748461166aba9faca7cf89aa",
+    "0022-custom-waveform-sample-bounds.patch": "ffe85782c4689f8bc36391c3cb002b7a015467f6d50feb8353a19e045e0bd240",
+    "0023-milkdrop-preset-unconditional-shader-includes.patch": "0a856f5843a75d44ad7c4ee3197936bdef450b8f33d91ed500ba36dabf468fbe",
+    "0024-quad-lines.patch": "3da8433e6096a87176ef4a82bd55261e5dbb69176c0f825bb1d555fe655d82fa",
+    "0025-shader-failure-handling.patch": "b9460b0d17a53f30675938efc92707258c18ed84479695cd51cf1617a792db85",
+    "0026-custom-warp-sampler-binding.patch": "3bb981b2a255895f5816dc450f92ecf7ba1caabcdc94c366a84cb1ef01938d31",
+    "0027-preset-exception-diagnostics.patch": "d4a802f5bfe201eabd908095d8da0fc6d55d635b36686d05b24382d2453bd37c",
+    "0028-initialize-fresh-color-history.patch": "9c5cca38b6d8d19dab4f85e1e104a6a73c6a92766bdd19e8fa31aa9713706b7f",
+    "0029-per-frame-record-compatibility.patch": "a79b74945135f2383e3b6003e5ba3a501389023826a98da36deb0a073fe87728",
+    "0030-hlslparser-uniform-write-copies.patch": "aa5d7d37c8216feec833171eedd20d057c4e256636fbaede01a506c7bc454b33",
+    "0031-hlslparser-array-initializer-layout.patch": "475d804a35875a4bb1b8b86bc3cbe8d535f29af0e2f1f3514e43f0a263fd46fe",
+    "0032-sampler-state-preprocessing.patch": "c8950136ef61a9b1090ba29e3f49d6c59c8d74ef75f4590f36b6eb6fe15ce049",
+    "0033-legacy-equation-code-all-phases.patch": "5b86bcb46e832eb8c241b41f456e5ca2ae5284fe16a12ef43dae093b85b571b4",
+    "0034-projectm-eval-lone-dot-number.patch": "6768bc1343049bafe8590893a762d94d68f57740e7b6154a9303f586999ff791",
+    "0035-leave-out-uncompilable-equation-code.patch": "690950939f284b9d4831548cd03cb129b1f138809c16228631a72cea3e41e6ec",
+    "0036-hlslparser-contextual-identifiers-macro-tokens-postfix.patch": "addd1f64eff60da530a7aa764b3b6af9253dcd64cc3c4361fe8860e2c25864a9",
+    "0037-random-texture-alias-bindings.patch": "92905a34b19ada2128d3c4fd7e603bd6c52acf9f22b27f4678aadf38d4c22652",
+    "0038-feedback-diffusion-compensation.patch": "7dab8ec89bd3e4e61d469185235ac6a48e7ff6a8410190cd0d211959470401e2",
+    "0039-feedback-diffusion-build-policy.patch": "7f3b543d9c42172d95f49582e91883bde0718a556962b30b8a847e65f5c00011",
+    "0040-hlslparser-implicit-global-inputs.patch": "e2f902214bea04657c92c0572af0e47d32cc71b0d3f64437deb327dbb058e907",
+    "0041-blur-framebuffer-bindings.patch": "8ac85ecb409e1344e05552a50d380051e927450ddb744f13d5e7136938be965a",
+    "0042-feedback-detail-layer.patch": "be3f39da0e936a48b581781ed1b8ab1e13810ac6ba55b37abba6f5efb5ad151e",
+    "0043-authored-geometry-feedback.patch": "d9ca27873599e5c38ce88c91277f4dd9c5b0c33c6405e84bc062e1dd52f3d522",
+    "0044-hlslparser-float-literal-roundtrip.patch": "aa8cdb27f42a9f8213ffc3d11abed23d2e7528c2cb1f2386dea2da6526794e93",
+    "0045-textured-shape-sampler.patch": "875d5e8389a13ec14eae224c9f71d56bc6de03faeb2d62c346650443c5c2cb4f",
+    "0046-blur-range-interval.patch": "d5aca2d3be2e3f10e33430936ff559aa4231366b9644f120a09ec12a8ea239a2",
+    "0047-fixed-warp-signed-unit-zoom.patch": "62b649f36c7eb7139909825f4de5a99e79cf7014eab1c50498af6934fb81b7cf",
+    "0048-live-builtin-wave-controls.patch": "b77c14ad4bbd06d146e603289fbb78534762cf8dc5db4988b4ba23f001d20c6d",
+    "0049-live-legacy-display-controls.patch": "c76331026eef4786d4b4f82e7e137cbe02b50d6fbd865f0a19e7cd54a5934619"
+  },
+  "handoffBundles": {
+    "projectm-tv-issue-legacy-display-dynamic-controls-2026-10-06": {
+      "legacy-display-dynamic-controls.md": "55ba754150cf4e1be53523a1c66c02e8a5e6dfa6717f5370910a86dd1d94c6b7",
+      "legacy-display-dynamic-controls-candidates.json": "b42da4ab0924aa3926c214088093f195092a66f735800db1438d707a290320c3"
+    },
+    "projectm-tv-issue-builtin-wave-dynamic-controls-2026-10-06": {
+      "builtin-wave-dynamic-controls.md": "25715512676113e096f2e7347b4ba3e4be856c0ff4407b7fcf4678eb7b160341",
+      "builtin-wave-dynamic-controls-candidates.json": "da19fe4ba281fb5dfb6f7f07e0ce986d5affe1508bbcf18d12e3dd810a6cd3a8"
+    }
+  },
+  "milkDrop3ReferenceSha256": "27911dc3b024e437a52216ceced7150c4bf7413e197d9c70aa892ee504273cea",
+  "testSourceSha256": "39a517d49e8b5846cc7be8568d279defa470f6780dc25dd1be49080fbc4055d3",
+  "candidateTestExecutableSha256": "1ebe4e9dc4172bf4b84495f391882bebb7e5af9e98015199f61c7ad562f670c9",
+  "storedImagesSha256": {
+    "aar-0-baseline-frame-479.png": "09d2b250264222f6e138458db3e00884645ce1172ae383f92752037fc2a9ab16",
+    "aar-0-candidate-frame-479.png": "71281bf043c19de0783f5b6775595cc5b696e7e165c2feaa4b96dac19bb32c50",
+    "aar-1-baseline-frame-479.png": "17cedc76a80398a1c5a93999206bbfdabf03fcb8431cf1ff1f63eca0416a1634",
+    "aar-1-candidate-frame-479.png": "b314147a5d9f033d4b61378d12c46e5e8ee20067974b053befaae4cf1bbaa822",
+    "aar-2-baseline-frame-479.png": "832d1dd1365ffd57e80196c524bc124cfc1beca1f55a1c77d6dac6d6d23aa7c5",
+    "aar-2-candidate-frame-479.png": "9491d30a7964e7a6177d2fd1606e86ab956aa26b6d90fe2eb1c65d750ba7c9e0",
+    "aar-originals.png": "b86ca34c6487e17c4d5bc4731b9b3e0c7409a4ae5941b4cdcaeafc58989b570e",
+    "after-darken-0.png": "daba07780ba911a61275b0f144367170daebb1d9956e9d3d8769b1491da1aca8",
+    "after-darken-1.png": "ad8d3091c498e4b124de50ec89300f603b15090b6888515bc3cb7b573ffd020e",
+    "after-wave-0.png": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+    "after-wave-1.png": "18e6fe1b2aad61b2b2ac147d8156b9cd4d673d93fd459967d9c134e0f42681d0",
+    "after-wave-2.png": "a9b38ad950722b2f89cb97e792a46c084bfa71c212cd4f907425f88e459625c2",
+    "after-wave-3.png": "4c14c88edce96929a2a4cb30786202a08305618d6e1726279f66d4ee02510a73",
+    "after-wave-4.png": "4c14c88edce96929a2a4cb30786202a08305618d6e1726279f66d4ee02510a73",
+    "before-darken-0.png": "daba07780ba911a61275b0f144367170daebb1d9956e9d3d8769b1491da1aca8",
+    "before-darken-1.png": "daba07780ba911a61275b0f144367170daebb1d9956e9d3d8769b1491da1aca8",
+    "before-wave-0.png": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+    "before-wave-1.png": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+    "before-wave-2.png": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+    "before-wave-3.png": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+    "before-wave-4.png": "b40a3033fa504061a60c01d978333c5f930e9f6286113384cc1765e640bdc6d8",
+    "synthetic-controls.png": "f6f7c34723e717eaf38b634029c208b4c71e58fc6e0805979b2ad2be3d572201"
+  },
+  "installedProducers": {
+    "baseline": {
+      "package": "nl.neerdael.projectmtv.corpusbaseline",
+      "androidUser": 0,
+      "installedApkPath": "/data/app/~~BFgOx3zN_4YE1O6-dqumzQ==/nl.neerdael.projectmtv.corpusbaseline-0v7j4njj1cKiH9tj8Q5t7A==/base.apk",
+      "installedApkSha256": "0c2cf808345c7df83caf7ae5d4f80e53ae5ef724984a7ed6637779933f0fb25b",
+      "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+      "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
+    },
+    "candidate": {
+      "package": "nl.neerdael.projectmtv.corpuscandidate",
+      "androidUser": 0,
+      "installedApkPath": "/data/app/~~vZy9A41dFzl-VcMjfcBBAA==/nl.neerdael.projectmtv.corpuscandidate-L-cH9HZKbnfy6A2fKxnJdg==/base.apk",
+      "installedApkSha256": "023b609b59a7a7700168a400da23fd4ca25e011b876520be0a431532ed09e5f2",
+      "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
+      "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
+    }
+  }
+}

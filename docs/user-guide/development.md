@@ -118,3 +118,15 @@ Nonfinite shader literals are rejected by the generator rather than emitted as
 identifiers such as `inf`. Runtime nonfinite arithmetic and driver precision remain
 separate questions. These checks do not establish every preset’s visual fidelity
 or physical-TV performance.
+
+## Live preset controls
+
+Native regressions include `dynamic-wave-controls`, `dynamic-display-controls`
+and `dynamic-original-presets`. They compare real draw state and pixels with
+unchanged static controls, check independent filter blend predictions, preserve
+per-frame reset defaults, exercise paired authored/native geometry targets, and
+render three unchanged SHA-256-pinned witnesses in Off/Standard/Medium/High paths.
+See the [versioned engine policy and evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/live-native-controls/README.md).
+Historical predictor/static-engine policies remain historical controls; these
+fixes do not regenerate collection scores. Host and emulator checks do not
+establish physical-TV performance.

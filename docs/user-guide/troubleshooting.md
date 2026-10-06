@@ -78,3 +78,10 @@ or unrepresentable float32 ranges use the default 0–1 range at all three level
 Negative motion zoom retains its signed reflection when the zoom exponent is
 exactly 1. Other negative-base power domains remain unsupported. These engine
 corrections preserve preset files and do not certify identical Windows appearance.
+
+Per-frame equations now drive built-in waveform mode, dots, thickness and additive
+blending, and legacy gamma, video echo, brighten, darken, solarize and invert.
+For example, `319.milk` can disable its default darken filter when its treble
+condition changes. Custom composite shaders keep their own display behaviour.
+This correction leaves the preset files unchanged; it does not certify every
+candidate preset's appearance or change the historical predictive collections.
