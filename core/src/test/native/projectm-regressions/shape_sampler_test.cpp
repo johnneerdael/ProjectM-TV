@@ -99,7 +99,7 @@ static std::unique_ptr<CustomShape> Shape(PresetState& state, bool textured,
     std::ostringstream text;
     text << "[preset00]\nshapecode_0_enabled=1\nshapecode_0_sides=4\n"
          << "shapecode_0_textured=" << textured << "\nshapecode_0_num_inst=" << instances
-         << "\nshapecode_0_rad=2\nshapecode_0_tex_zoom=0.2\n"
+         << "\nshapecode_0_rad=2\nshapecode_0_tex_zoom=0.25\n"
          << "shapecode_0_r=1\nshapecode_0_g=1\nshapecode_0_b=1\nshapecode_0_a=1\n"
          << "shapecode_0_r2=1\nshapecode_0_g2=1\nshapecode_0_b2=1\nshapecode_0_a2=1\n"
          << "shapecode_0_border_a=0\nshapecode_0_image=" << image << '\n';
@@ -139,10 +139,12 @@ static void AssertEdgePixels()
     glReadPixels(0, 0, 16, 16, GL_RGBA, GL_UNSIGNED_BYTE, output.data());
     for (int y : {1, 5, 10, 14}) for (int x : {1, 5, 10, 14})
     {
-        // The authored rad=2/zoom=.2 fan maps the pixel centers affinely;
-        // the projection flips v. Bilinear weights are independently calculated.
-        const float u = .5f + ((x + .5f) / 8.f - 1.f) / .8f;
-        const float v = .5f - ((y + .5f) / 8.f - 1.f) / .8f;
+        // The authored rad=2/zoom=.25 fan maps pixel centers affinely, with
+        // a projection flip in v. Use this unit-slope UV mapping so the sample
+        // coordinates and bilinear weights are exact multiples of 1/16 and 1/8.
+        // Both axes still cross the texture edges, so clamp/nearest must fail.
+        const float u = .5f + ((x + .5f) / 8.f - 1.f);
+        const float v = .5f - ((y + .5f) / 8.f - 1.f);
         const float tx = u * 2.f - .5f, ty = v * 2.f - .5f;
         const int ix = static_cast<int>(std::floor(tx)), iy = static_cast<int>(std::floor(ty));
         const float fx = tx - ix, fy = ty - iy;
@@ -173,9 +175,14 @@ static void Controls(const std::filesystem::path& fixtures)
     state.renderContext.viewportSizeX = state.renderContext.viewportSizeY = 16;
     state.renderContext.aspectX = state.renderContext.aspectY = 1;
     state.renderContext.invAspectX = state.renderContext.invAspectY = 1;
-    auto source = std::make_shared<Texture>("shape-source", 2, 2, false);
+    // The default Texture constructor creates unsized RGB storage, which GLES
+    // rejects for this RGBA upload. Allocate matching sized fixture storage.
+    auto source = std::make_shared<Texture>("shape-source", 2, 2,
+                                            GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
     source->Bind(0);
+    Check(glGetError() == GL_NO_ERROR, "shape source allocation or binding failed");
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 2, 2, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+    Check(glGetError() == GL_NO_ERROR, "shape fixture texture upload failed");
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     state.mainTexture = source;
