@@ -147,6 +147,45 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void modeSwitchMemoryClampSignalsNativeCleanupInsideHeightCallback() throws Exception {
+        for (int mode : new int[]{0, 2160, -1}) {
+            FakeMemory memory = new FakeMemory();
+            boolean[] cleanup = new boolean[1];
+            QualityController[] owner = new QualityController[1];
+            owner[0] = new QualityController(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                    0, height -> {
+                        applied = height;
+                        cleanup[0] = owner[0].wasLastChangeForMemoryPressure();
+                    }, memory);
+            QualityController q = owner[0];
+            q.setResolutionMode(-1, 2160);
+            assertEquals(2160, applied);
+            assertTrue(!cleanup[0]);
+            memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, false);
+            q.setResolutionMode(mode, 2160);
+            assertTrue(applied < 2160);
+            assertTrue("memory-clamped callback must flush caches and pause prewarming", cleanup[0]);
+            assertTrue(q.isMemoryConstrained());
+        }
+    }
+
+    @Test
+    public void userRequestedReductionDoesNotReportMemoryPressureButExistingCeilingDoes() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.setResolutionMode(720, 2160);
+        assertEquals(720, applied);
+        assertTrue(!q.wasLastChangeForMemoryPressure());
+        q.setResolutionMode(-1, 2160);
+        q.onMemoryPressure(15);
+        q.setResolutionMode(0, 2160); // healthy sample, but the temporary ceiling remains
+        assertTrue(applied < 2160);
+        assertTrue(q.wasLastChangeForMemoryPressure());
+        assertTrue(q.isMemoryConstrained());
+    }
+
+    @Test
     public void temporaryCeilingSurvivesExplicitModeRoundTripWithoutReplacingAutoHistory() throws Exception {
         for (int explicit : new int[]{720, 2160, -1}) {
             FakeMemory memory = new FakeMemory();
