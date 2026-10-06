@@ -28,6 +28,39 @@
     "runtime_uniform_readback": false,
     "path": "build/visual-loop/precision-controls238/blur-kernel-fma-prototype/uniform-constant-crosscheck.json"
   },
+  "native_pass_observation": {
+    "scope": "One three-frame replay with an opt-in test-host observer; published AAR unchanged",
+    "path": "build/visual-loop/precision-controls238/blur-pass-trace/",
+    "events_sha256": "1d615cced044581533f488de4c5420301c48453174399328e3e975fabcd0d012",
+    "manifest_sha256": "1cf86df77a044a003ddd9a67eb628665f040e3ea805150b6c78be40444a4f36c",
+    "source_pass_seal_sha256": "f2ef592f41c132587215f1d700b6d82e8c3b35f2200e6dd2fd30be3eee13fcc6",
+    "helper_sha256": "33a2163ffdd5792e3bd06087c29e7ca7f5f9993003e0892860449a247eb612db",
+    "passes_saved": 12,
+    "all_recorded_state_restored": true,
+    "final_display_matches_prior_native_bytes": true,
+    "all_runtime_uniform_bits_match_source_predictions": true,
+    "all_samplers": "unit0, GL_LINEAR, GL_CLAMP_TO_EDGE",
+    "natural_nonzero_gl_errors": 0,
+    "first_difference": {
+      "event": 5,
+      "frame": 2,
+      "direction": "horizontal",
+      "width": 128,
+      "height": 72,
+      "rgb8_mae": 0.11635561342592593,
+      "rgb8_max": 1,
+      "signed_scalar_histogram": {"-1": 181, "0": 24431, "1": 3036}
+    },
+    "zero_input_frames_1_and_3_all_passes_exact": true,
+    "all_alpha_bytes_exact": true,
+    "runtime_shader_source_capture": false,
+    "limits": [
+      "No attached shader source was available after linking",
+      "Recorded GL state and final-output preservation do not prove every internal driver operation",
+      "Sampling or arithmetic remains unresolved; this is not an additional confirmed AAR bug",
+      "Diagnostic observations do not replace frozen full-preset grades"
+    ]
+  },
   "blur_fma_prototype": {
     "production_patch": false,
     "blur1_mae_before": 0.3958333333,

@@ -392,3 +392,14 @@ C++ formulas bit-for-bit, without claiming runtime uniform readback. Evidence:
 The next useful localization is bounded native pass-level observation through
 test-host instrumentation, keeping the published AAR unchanged; another guessed
 sampling rule or repeated full-preset render is not justified by these results.
+
+The bounded pass observation now retains twelve native pass readbacks. The final
+display is byte-identical to the original control, every recorded state is restored,
+and all runtime uniform bits match the frozen CPU predictions. Samplers use unit0,
+linear filtering and clamp-to-edge. Zero-input frames match at every pass. The first
+difference is frame2's horizontal pass: at most one RGB8 step, with181 negative,
+24,431 equal and3,036 positive scalar RGB samples. Subsequent differences therefore
+do not originate in a wrong kernel upload or blur-history phase in this control.
+Sampling/arithmetic remains unresolved; this is not another confirmed AAR bug.
+Attached shader sources were unavailable after linking, so the trace does not
+certify runtime shader text. Original full-preset grades remain unchanged.
