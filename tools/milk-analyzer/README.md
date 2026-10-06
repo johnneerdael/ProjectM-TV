@@ -507,3 +507,10 @@ Future batches use the user's approved5% allowance for numerical estimates:
 Geometry, trajectories, critical feedback mismatch, flash counts and event timing
 remain strict. Freeze this rule with all claims before any new native reference;
 earlier grades and the92.5 diagnostic remain unchanged.
+
+Round009 clears the TEN gate: cases039–048 score100/100/100/95/100/100/100/100/100/100,
+with no critical mismatch or unknown. All200claims were frozen before600native
+frames;308result files were sealed. Case042 lost five points for speed estimates
+outside5%, despite matched geometry; late046 and sparse041/042pixel residuals remain.
+These are operational behavioural grades, not pixel identity or calibrated probabilities.
+The randomized100-preset audit and final reviewed integration remain required.
