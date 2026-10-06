@@ -18,7 +18,7 @@ diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl33
 @@ -34,7 +34,15 @@
  void main() {
      gl_Position = vertex_transformation * vec4(pos, 0.0, 1.0);
- 
+
 -    float zoom2 = pow(zoom, pow(zoomExp, radius * 2.0 - 1.0));
 +    // MilkDrop's CPU powf retains signed zoom when the nested exponent is one.
 +    // GLSL pow is undefined for any negative base, including this defined case.
@@ -30,5 +30,5 @@ diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl33
 +        zoom2 = pow(zoom, pow(zoomExp, radius * 2.0 - 1.0));
 +    }
      float zoom2Inverse = 1.0 / zoom2;
- 
+
      // Initial texture coordinates, with built-in zoom factor

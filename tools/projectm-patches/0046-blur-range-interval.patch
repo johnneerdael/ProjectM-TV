@@ -16,17 +16,17 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/Mi
 +++ b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
 @@ -6,6 +6,8 @@
  #include "MilkdropStaticShaders.hpp"
- 
+
  #include <array>
 +#include <cmath>
 +#include <limits>
- 
+
  namespace libprojectM {
  namespace MilkdropPreset {
 @@ -149,18 +151,7 @@
      std::array<float, 3> scale{};
      std::array<float, 3> bias{};
- 
+
 -    // figure out the progressive scale & bias needed, at each step,
 -    // to go from one [min..max] range to the next.
 -    scale[0] = 1.0f / (blurMax[0] - blurMin[0]);
@@ -40,9 +40,9 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/Mi
 -    scale[2] = 1.0f / (tempMax - tempMin);
 -    bias[2] = -tempMin * scale[2];
 +    GetBlurScaleAndBias(blurMin, blurMax, scale, bias);
- 
+
      m_blurFramebuffer.Bind(0);
- 
+
 @@ -341,12 +332,27 @@
                                            Values& blurMin,
                                            Values& blurMax)
@@ -74,7 +74,7 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/Mi
 +        blurMin[i] = static_cast<float>(inputMin[i]);
 +        blurMax[i] = static_cast<float>(inputMax[i]);
 +    }
- 
+
      // check that precision isn't wasted in later blur passes [...min-max gap can't grow!]
      // also, if min-max are close to each other, push them apart:
 @@ -355,7 +361,7 @@
@@ -151,14 +151,14 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/Mi
 +    return true;
 +
  }
- 
+
  void BlurTexture::AllocateTextures(int sourceWidth, int sourceHeight)
 diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.hpp b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
 --- a/src/libprojectM/MilkdropPreset/BlurTexture.hpp
 +++ b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
 @@ -83,7 +83,8 @@
      void Bind(GLint& unit, Renderer::Shader& shader) const;
- 
+
      /**
 -     * @brief Returns properly scaled and clamped vlur values from the given context.
 +     * @brief Returns adjusted blur bounds, preserving the legacy clamp-then-expand order.
@@ -178,6 +178,6 @@ diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.hpp b/src/libprojectM/Mi
 +     */
 +    static bool GetBlurScaleAndBias(const Values& blurMin, const Values& blurMax,
 +                                   Values& scale, Values& bias);
- 
+
  private:
      static constexpr int NumBlurTextures = 6; //!< Maximum number of blur passes/textures.

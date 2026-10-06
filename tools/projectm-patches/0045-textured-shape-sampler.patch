@@ -26,7 +26,7 @@ diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/Mi
 -            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 +                m_presetState.mainTexture.lock()->Bind(0, m_mainTextureSampler);
 +            }
- 
+
              glBindVertexArray(m_vaoIdTextured);
              if (m_geometryTargets) {
 diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp

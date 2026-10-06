@@ -1,0 +1,587 @@
+{
+  "scope": "API36 ownTV emulator5612 AppleM4Pro GLES3 translator; 256x144,48x32mesh,30Hz60frames; same PCM1470/frame clock seed12345 historical238 texture assets. NoTV/Windows/corpus claim. Candidate is unpublished local release AAR.",
+  "host_limitation": "Initial GL_INVALID_OPERATION1282 before framebuffer0bind appears in most plain and observed runs. Host separately consumes/logs pre-bind andpost-bind errors; all readbacks pass and all later pre/postbind errors0. Exact origin not localized; this is not a universal noGLerror claim.",
+  "instrumentation": "PublishedAAR/nativebytes unchanged. UVobserver adds transform-feedbackvarying to actualprogram at initial link; replays same actualprogram/currentVBO/uniforms with GL_POINTS/rasterizerdiscard; then actual indexed draw once. UV inner/effective powers not exported. Blurqueries/readback restore bindings; shapequeries read-only. Instrumented3-frame finalpixels mustequalplain.",
+  "raw_result_sha256": "7a133ae445cf866bdd98a39e303d810ecf00ebf704f1a833f4952b8f50ac2d83",
+  "published": {
+    "core_random_inputs.cpp": "3bf936357b5dfcd18dc58fe93f0421c2938d8b18ee9b429fedff656c65272477",
+    "published-core.aar": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+    "CoreBackendRunner.java": "3fbb80275524c1be998f7a37dd5b0553dfd346c942f20805169142eaead707d4",
+    "classes.dex": "33730a3604b5a038405ae1230727baeeaa4797c1d7d44dc08bd6dc961b3661b4",
+    "core_backend_clock.cpp": "45f9cb1895023341e13b7382e0f2d4dd3e68eb3c8b65173f12c9ffdb5ebc5e58",
+    "libprojectmtv.so": "a46f190829d636c08d6a0fdd48bc6db970b6381d834eccd2e5f47948c838cbb2",
+    "input60.f32": "3c5b0801d7085d4cc2b41fcc4ec5058b800dd332f66c7bf1e0708ba1443a399d",
+    "libbackendclock.so": "a1b9bcdacbe4e81629fa02cfa63a25e2ee59e33b0afb18191da30ea71501cc34",
+    "Hexcollie - This is where we begin stripped.milk": "bbe1542bc2b8ce32fc159d88b68f03b19db7a4f8ebc5dfb9c319a5d2287a968d",
+    "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk": "af2294355b6d5f4ce72b8c3ea31f6e531a546547ea390dd53a5be353e542f13d",
+    "widest swing.milk": "91fbdd07995c8a820c78513c899f60a0cbc950fcf52c90bbbf42cc51fb7b4604"
+  },
+  "candidate": {
+    "aar": "9eaccc59b0ba49aa339f8a559752ef9cca5d350d1e66977fc74cd230ee35fd2c",
+    "arm64_native": "9d8744eee95f53f2e56663d0c9ccdecc65d4f61385e7aa05ec3ca365b45c0242",
+    "source_head": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+    "scope": "release candidate45-47, build from task working tree; unpublished; paired historical238 assets plus exact source-selection overlays",
+    "build_patch_sha256": {
+      "tools/projectm-patches/0045-textured-shape-sampler.patch": "b6009993b4e07343503b0448d320cb414403c4f5703a2af93448caf7c952b54f",
+      "tools/projectm-patches/0046-blur-range-interval.patch": "c3aad218de26d50e258c3b11086e9bfe0f0c0dc00e279b6f999d6fdd8673e7bc",
+      "tools/projectm-patches/0047-fixed-warp-signed-unit-zoom.patch": "ba9ff12a0801960e5277e7f05f192083bcebec133833295c338ef6712b5281a6"
+    },
+    "final_patch_sha256": {
+      "tools/projectm-patches/0045-textured-shape-sampler.patch": "875d5e8389a13ec14eae224c9f71d56bc6de03faeb2d62c346650443c5c2cb4f",
+      "tools/projectm-patches/0046-blur-range-interval.patch": "d5aca2d3be2e3f10e33430936ff559aa4231366b9644f120a09ec12a8ea239a2",
+      "tools/projectm-patches/0047-fixed-warp-signed-unit-zoom.patch": "62b649f36c7eb7139909825f4de5a99e79cf7014eab1c50498af6934fb81b7cf"
+    },
+    "applied_source_sha256": {
+      "src/libprojectM/MilkdropPreset/CustomShape.cpp": "d6e59c7614f2f8740792284622de804fd19d7e5429b70859281656c5b0a5752a",
+      "src/libprojectM/MilkdropPreset/CustomShape.hpp": "37d3807dd13d233b2aa4c70ec62081ddb2f42f1ab33e77c4df4016ec6cbcb9f8",
+      "src/libprojectM/MilkdropPreset/BlurTexture.cpp": "cc7f6d067946a23194fddf19ce9ad13e072c0e2526f990f2341e65228fcd6d0b",
+      "src/libprojectM/MilkdropPreset/BlurTexture.hpp": "2718df1782135985942f0fda77d8a913e2f9d54fb9ceb73912d660513c2cec57",
+      "src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert": "eb069744dcf6adf9b8a75d604886a771e14bf58b25a2961b7eefd99ced9a171f"
+    },
+    "provenance_note": "Built from base b1bb994d plus task patches before implementation checkpoint d76407f2. Final patch text removes blank-context trailing whitespace only; applied production source is unchanged and identified by hashes. AAR remains unpublished local release candidate.",
+    "final_patch_series_sha256": "4ab28ed06f93d605b029319487f9248a267bb5509da0256a8052c1696bbaed16"
+  },
+  "cases": {
+    "negative": {
+      "before60_rgba_sha256": "2970336645e2680b0a103e218035f9cca568db44e897cefee2ccbfa72600e216",
+      "after60_rgba_sha256": "dba3af2f01b825641473d7281a9e462fdb37d818446c5d79553684a884d67295",
+      "before3_observer_equal_plain": true,
+      "after3_observer_equal_plain": true,
+      "prefix3_equal_60_before": true,
+      "prefix3_equal_60_after": true,
+      "all60_mae_rgb8": 6.537823260271992,
+      "comparison_png_sha256": "f6da8f9877a031e6f7f177aef1b733b31b82a864a5b3a3e665b13415251f4acd",
+      "comparison_layout": "before238left/candidatereleaseright; row frames1,2,59 top-to-bottom",
+      "selected_frames": [
+        {
+          "frame": 1,
+          "before_mean_rgb8": 4.692572699652778,
+          "after_mean_rgb8": 4.692572699652778,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 2,
+          "before_mean_rgb8": 0.6515209056712963,
+          "after_mean_rgb8": 4.381202980324074,
+          "mae_rgb8": 3.778202763310185
+        },
+        {
+          "frame": 59,
+          "before_mean_rgb8": 2.3971535011574074,
+          "after_mean_rgb8": 12.534496166087964,
+          "mae_rgb8": 10.176061559606481
+        },
+        {
+          "frame": 60,
+          "before_mean_rgb8": 2.087140118634259,
+          "after_mean_rgb8": 11.638518156828704,
+          "mae_rgb8": 9.596010561342593
+        }
+      ],
+      "uv": [
+        {
+          "phase": "before",
+          "frame": 1,
+          "program": 67,
+          "vertices": 1617,
+          "zoom_range": [
+            -0.8999999761581421,
+            -0.8885264992713928
+          ],
+          "zoom_exp": [
+            1.0
+          ],
+          "nonfinite_uv_components": 3234,
+          "cpu_signed_uv_max_abs_error": null
+        },
+        {
+          "phase": "before",
+          "frame": 2,
+          "program": 67,
+          "vertices": 1617,
+          "zoom_range": [
+            -0.8999999761581421,
+            -0.8885264992713928
+          ],
+          "zoom_exp": [
+            1.0
+          ],
+          "nonfinite_uv_components": 3234,
+          "cpu_signed_uv_max_abs_error": null
+        },
+        {
+          "phase": "before",
+          "frame": 3,
+          "program": 67,
+          "vertices": 1617,
+          "zoom_range": [
+            -0.8999999761581421,
+            -0.8885264992713928
+          ],
+          "zoom_exp": [
+            1.0
+          ],
+          "nonfinite_uv_components": 3234,
+          "cpu_signed_uv_max_abs_error": null
+        },
+        {
+          "phase": "after",
+          "frame": 1,
+          "program": 67,
+          "vertices": 1617,
+          "zoom_range": [
+            -0.8999999761581421,
+            -0.8885264992713928
+          ],
+          "zoom_exp": [
+            1.0
+          ],
+          "nonfinite_uv_components": 0,
+          "cpu_signed_uv_max_abs_error": 1.121611177268278e-07
+        },
+        {
+          "phase": "after",
+          "frame": 2,
+          "program": 67,
+          "vertices": 1617,
+          "zoom_range": [
+            -0.8999999761581421,
+            -0.8885264992713928
+          ],
+          "zoom_exp": [
+            1.0
+          ],
+          "nonfinite_uv_components": 0,
+          "cpu_signed_uv_max_abs_error": 1.121611177268278e-07
+        },
+        {
+          "phase": "after",
+          "frame": 3,
+          "program": 67,
+          "vertices": 1617,
+          "zoom_range": [
+            -0.8999999761581421,
+            -0.8885264992713928
+          ],
+          "zoom_exp": [
+            1.0
+          ],
+          "nonfinite_uv_components": 0,
+          "cpu_signed_uv_max_abs_error": 1.121611177268278e-07
+        }
+      ],
+      "metadata": {
+        "before": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Hexcollie - This is where we begin stripped.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "after": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Hexcollie - This is where we begin stripped.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      }
+    },
+    "blur": {
+      "before60_rgba_sha256": "6e1fcb668e7fcf4c27ee7e40cbb5ad02d084fb4e77f6af305b172af016dd17ef",
+      "after60_rgba_sha256": "6e1fcb668e7fcf4c27ee7e40cbb5ad02d084fb4e77f6af305b172af016dd17ef",
+      "before3_observer_equal_plain": true,
+      "after3_observer_equal_plain": true,
+      "prefix3_equal_60_before": true,
+      "prefix3_equal_60_after": true,
+      "all60_mae_rgb8": 0.0,
+      "comparison_png_sha256": "1b733bf4372dd803453c14ede9b138a0821405b3c4e5d218883fff150a8b5750",
+      "comparison_layout": "before238left/candidatereleaseright; row frames1,2,59 top-to-bottom",
+      "selected_frames": [
+        {
+          "frame": 1,
+          "before_mean_rgb8": 249.66469545717592,
+          "after_mean_rgb8": 249.66469545717592,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 2,
+          "before_mean_rgb8": 249.66469545717592,
+          "after_mean_rgb8": 249.66469545717592,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 59,
+          "before_mean_rgb8": 249.66480396412038,
+          "after_mean_rgb8": 249.66480396412038,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 60,
+          "before_mean_rgb8": 249.66469545717592,
+          "after_mean_rgb8": 249.66469545717592,
+          "mae_rgb8": 0.0
+        }
+      ],
+      "blur_passes": {
+        "before": {
+          "observed_pass_count": 15,
+          "first_pass": {
+            "event": 1,
+            "frame_expected": 1,
+            "pass_expected": 1,
+            "kind": "Blur1",
+            "program": 57,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 20,
+            "sampler0": 17,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event01.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "7f800000",
+                "ff800000",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 0,
+            "natural_error_seq_after": 0,
+            "last_natural_error": 0,
+            "state_restored": true
+          }
+        },
+        "after": {
+          "observed_pass_count": 15,
+          "first_pass": {
+            "event": 1,
+            "frame_expected": 1,
+            "pass_expected": 1,
+            "kind": "Blur1",
+            "program": 57,
+            "viewport": [
+              0,
+              0,
+              128,
+              72
+            ],
+            "read_fbo": 9,
+            "draw_fbo": 9,
+            "pack_alignment": 4,
+            "pack_buffer": 0,
+            "active_texture": 33984,
+            "texture0_if_active": 20,
+            "sampler0": 21,
+            "wrap_s": 33071,
+            "wrap_t": 33071,
+            "min_filter": 9729,
+            "mag_filter": 9729,
+            "safe": true,
+            "saved": true,
+            "file": "event01.rgba-bottom",
+            "uniform_bits": {
+              "_c0": [
+                "43800000",
+                "43100000",
+                "3b800000",
+                "3be38e39"
+              ],
+              "_c1": [
+                "40f9999a",
+                "40cccccd",
+                "40466666",
+                "3f800000"
+              ],
+              "_c2": [
+                "3f796f96",
+                "403a0000",
+                "4098c632",
+                "40d33333"
+              ],
+              "_c3": [
+                "41200004",
+                "c1180004",
+                "3cdfd33b",
+                "00000000"
+              ],
+              "_c5": null,
+              "_c6": null
+            },
+            "source_lod_bits": "00000000",
+            "flip_vertical": 1,
+            "texture_sampler_unit": 0,
+            "natural_error_seq_before": 0,
+            "natural_error_seq_after": 0,
+            "last_natural_error": 0,
+            "state_restored": true
+          }
+        }
+      },
+      "metadata": {
+        "before": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "after": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      }
+    },
+    "shape": {
+      "before60_rgba_sha256": "5831101af6a1a54df0cadc84d47932a5d1a7e47bb98998ee70fc2753a3669fb2",
+      "after60_rgba_sha256": "468c177ade6e8dc76d0bd9d2a30b0ee3d68cdf5daf806a2c632405304f0b4719",
+      "before3_observer_equal_plain": true,
+      "after3_observer_equal_plain": true,
+      "prefix3_equal_60_before": true,
+      "prefix3_equal_60_after": true,
+      "all60_mae_rgb8": 35.56589822651427,
+      "comparison_png_sha256": "a9da3593bd96ce6de355ec8a7111dd25cce2c358a9f001ba07833ef5f38da16f",
+      "comparison_layout": "before238left/candidatereleaseright; row frames1,2,59 top-to-bottom",
+      "selected_frames": [
+        {
+          "frame": 1,
+          "before_mean_rgb8": 9.904197410300926,
+          "after_mean_rgb8": 9.904197410300926,
+          "mae_rgb8": 0.0
+        },
+        {
+          "frame": 2,
+          "before_mean_rgb8": 18.216462311921298,
+          "after_mean_rgb8": 17.89459454571759,
+          "mae_rgb8": 3.7870008680555554
+        },
+        {
+          "frame": 59,
+          "before_mean_rgb8": 17.169117115162038,
+          "after_mean_rgb8": 20.06619827835648,
+          "mae_rgb8": 4.670138888888889
+        },
+        {
+          "frame": 60,
+          "before_mean_rgb8": 17.510127314814813,
+          "after_mean_rgb8": 18.875316478587962,
+          "mae_rgb8": 3.8009711371527777
+        }
+      ],
+      "shape_sampler": {
+        "before": {
+          "event": 1,
+          "program": 53,
+          "texture_sampler_unit": 0,
+          "active_texture": 33984,
+          "observed_unit_is_sampler_unit": true,
+          "texture2d": 22,
+          "sampler_binding": 17,
+          "texture_wrap_s": 10497,
+          "texture_wrap_t": 10497,
+          "texture_min_filter": 9728,
+          "texture_mag_filter": 9728,
+          "sampler_wrap_s": 33071,
+          "sampler_wrap_t": 33071,
+          "sampler_min_filter": 9729,
+          "sampler_mag_filter": 9729,
+          "state_preserved": true
+        },
+        "after": {
+          "event": 1,
+          "program": 53,
+          "texture_sampler_unit": 0,
+          "active_texture": 33984,
+          "observed_unit_is_sampler_unit": true,
+          "texture2d": 22,
+          "sampler_binding": 30,
+          "texture_wrap_s": 33071,
+          "texture_wrap_t": 33071,
+          "texture_min_filter": 9728,
+          "texture_mag_filter": 9728,
+          "sampler_wrap_s": 10497,
+          "sampler_wrap_t": 10497,
+          "sampler_min_filter": 9729,
+          "sampler_mag_filter": 9729,
+          "state_preserved": true
+        }
+      },
+      "metadata": {
+        "before": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "widest swing.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        },
+        "after": {
+          "backend": "published-core-jni",
+          "core_version": "4.1.7",
+          "preset": "widest swing.milk",
+          "frames": 60,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 60,
+          "rendered_frame_serial_delta": 60,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      }
+    }
+  }
+}
