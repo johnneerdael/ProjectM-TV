@@ -191,3 +191,20 @@ passed all engine/policy checks, all 18 groups and the EGL fade tests under
 ASan/UBSan with `GALLIUM_DRIVER=softpipe`. This emulation-side instability is
 recorded separately from the deterministic RGB readback failure; no check or
 timeout was disabled to obtain the successful sanitized runs.
+
+## Published AAR verification
+
+Release [v2.3.10](https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.3.10)
+from `fa18cbab14552a2903e331f74102260fc29c2455` published after the native,
+Preset Lab, APK/AAR and documentation jobs passed. Its public notes include the
+unpublished PR #41 fixes and the PR #42 readback correction.
+
+The downloaded published core AAR SHA-256 is
+`3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6`.
+The same unchanged one-frame control through its extracted ARM64 JNI library
+produces `(128,96,0)` at every pixel, raw RGB hash
+`14e97d8c85b433581afa4a126f40344345c18150e4dbb5392b16370576e6a257`.
+The task-owned API34 emulator used the original capture dimensions, mesh and zero
+PCM; one preset, no skips and frame serial delta1 were verified. Source/AAR/native,
+helper hashes and metadata are recorded in `published-2.3.10.json`. This completes
+the published-AAR control without broadening the appearance/performance claim.
