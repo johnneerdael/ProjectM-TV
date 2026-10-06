@@ -42,7 +42,7 @@
         "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
         "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
       },
-      "manifest": "build/live-controls-aar-results-v2/0-baseline/manifest.json"
+      "manifest": "docs/superpowers/evidence/live-native-controls/aar-manifests/0-baseline.json"
     },
     {
       "preset": "319.milk",
@@ -59,7 +59,7 @@
         "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
         "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
       },
-      "manifest": "build/live-controls-aar-results-v2/0-candidate/manifest.json"
+      "manifest": "docs/superpowers/evidence/live-native-controls/aar-manifests/0-candidate.json"
     },
     {
       "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
@@ -76,7 +76,7 @@
         "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
         "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
       },
-      "manifest": "build/live-controls-aar-results-v2/1-baseline/manifest.json"
+      "manifest": "docs/superpowers/evidence/live-native-controls/aar-manifests/1-baseline.json"
     },
     {
       "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
@@ -93,7 +93,7 @@
         "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
         "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
       },
-      "manifest": "build/live-controls-aar-results-v2/1-candidate/manifest.json"
+      "manifest": "docs/superpowers/evidence/live-native-controls/aar-manifests/1-candidate.json"
     },
     {
       "preset": "idiot - Forty Six and 2 (pushit!).milk",
@@ -110,7 +110,7 @@
         "aarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
         "nativeSha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0"
       },
-      "manifest": "build/live-controls-aar-results-v2/2-baseline/manifest.json"
+      "manifest": "docs/superpowers/evidence/live-native-controls/aar-manifests/2-baseline.json"
     },
     {
       "preset": "idiot - Forty Six and 2 (pushit!).milk",
@@ -127,8 +127,9 @@
         "aarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
         "nativeSha256": "9a3f9be7ee812fa0720ada093df06a845dcc4bed05e1d7fb3991e1a229762299"
       },
-      "manifest": "build/live-controls-aar-results-v2/2-candidate/manifest.json"
+      "manifest": "docs/superpowers/evidence/live-native-controls/aar-manifests/2-candidate.json"
     }
   ],
-  "propertyRestored": true
+  "propertyRestored": true,
+  "manifestPathBase": "repository-root"
 }
