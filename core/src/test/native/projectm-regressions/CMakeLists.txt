@@ -56,10 +56,11 @@ enable_testing()
 add_executable(warp-zoom-regressions warp_zoom_test.cpp)
 target_compile_features(warp-zoom-regressions PRIVATE cxx_std_17)
 target_compile_definitions(warp-zoom-regressions PRIVATE GL_SILENCE_DEPRECATION)
-if(APPLE)
-    target_link_libraries(warp-zoom-regressions PRIVATE "-framework OpenGL")
-else()
-    target_link_libraries(warp-zoom-regressions PRIVATE ${REGRESSION_GL_TARGET} OpenGL::GLES3)
+# Use the engine's exported GL dependencies: system discovery creates its GLES
+# imported target in the projectM subdirectory, outside this target's scope.
+target_link_libraries(warp-zoom-regressions PRIVATE libprojectM::projectM)
+if(NOT APPLE)
+    target_link_libraries(warp-zoom-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
 add_test(NAME warp-zoom-regressions COMMAND warp-zoom-regressions
     "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert")
