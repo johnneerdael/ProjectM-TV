@@ -15,13 +15,13 @@ If no audio is found while Android reports music playing, the app searches again
 
 ## Picture stutters
 
-Resolution adapts automatically to the selected target frame rate and available memory. Use the default half-refresh-rate frame rate, **Native trails → Standard**, and **Transitions → Auto**. Lower **Detail** if the preset’s equations limit the CPU. Blending two heavy presets can be slower than rendering one, and some CPU-heavy presets gain little from lower resolution.
+In Auto, resolution adapts to the selected target frame rate and available memory. Use the default half-refresh-rate frame rate, **Native trails → Standard**, and **Transitions → Auto**. Lower **Detail** if the preset’s equations limit the CPU. Blending two heavy presets can be slower than rendering one, and some CPU-heavy presets gain little from lower resolution.
 
 Check the actual render size and memory status in **Advanced → Diagnostics**. Memory pressure can temporarily lower resolution and pause preset prewarming to leave headroom for your music player. There is no manual RAM limiter. If a selected fixed/Native resolution is too slow, switch **Advanced → Resolution** back to **Auto**; slow-preset skipping is active only in Auto.
 
 ## The render size is below 4K
 
-A 4K panel can render natively, but automatic quality only uses a size that fits the target frame rate and live memory budget. Medium and High trails cost more than Standard, and transitions can hold two presets. Other apps also affect available memory. Diagnostics distinguishes the detected panel from the current render size; Android’s UI may still run at 1080p.
+A 4K panel can render natively. Select **Advanced → Resolution → Native (4K)** to request the full physical panel independently of FPS adaptation. Live memory protection can still temporarily reduce fixed/Native sizes. Auto also lowers resolution for the target frame rate. Medium and High trails cost more than Standard, and transitions can hold two presets. Other apps also affect available memory. Diagnostics distinguishes the detected panel from the current render size; Android’s UI may still run at 1080p.
 
 ## Native trails look soft or different
 
