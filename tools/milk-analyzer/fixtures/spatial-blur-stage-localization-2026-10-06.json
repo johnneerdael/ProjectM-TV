@@ -41,6 +41,16 @@
     "all_runtime_uniform_bits_match_source_predictions": true,
     "all_samplers": "unit0, GL_LINEAR, GL_CLAMP_TO_EDGE",
     "natural_nonzero_gl_errors": 0,
+    "strict_full_clock_random_log_invariance": false,
+    "clock_event_difference": {
+      "previous_low32_microseconds": 3567653994,
+      "observed_low32_microseconds": 3567620661,
+      "entropy_and_c_seed_unchanged": true,
+      "per_thread_c_rand_sequences_unchanged": true,
+      "renderer_c_rand_count": 536,
+      "worker_c_rand_count": 368,
+      "scope": "One clock observation differs; relevance to this deterministic blur control is not yet certified"
+    },
     "first_difference": {
       "event": 5,
       "frame": 2,
@@ -57,6 +67,7 @@
     "limits": [
       "No attached shader source was available after linking",
       "Recorded GL state and final-output preservation do not prove every internal driver operation",
+      "Strict full clock/random log invariance failed; do not treat this as an entirely identical execution context",
       "Sampling or arithmetic remains unresolved; this is not an additional confirmed AAR bug",
       "Diagnostic observations do not replace frozen full-preset grades"
     ]

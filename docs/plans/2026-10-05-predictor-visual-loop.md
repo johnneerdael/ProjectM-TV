@@ -403,3 +403,9 @@ do not originate in a wrong kernel upload or blur-history phase in this control.
 Sampling/arithmetic remains unresolved; this is not another confirmed AAR bug.
 Attached shader sources were unavailable after linking, so the trace does not
 certify runtime shader text. Original full-preset grades remain unchanged.
+
+The stronger whole-log invariant did fail: one low32-microsecond clock observation
+changed from3567653994 to3567620661. Entropy, C seeds and both per-thread random
+sequences match, but the clock difference has not been certified irrelevant.
+Keep these readbacks as conditional diagnostic evidence, not proof of an entirely
+identical execution context. No retry was launched to discard the discrepancy.
