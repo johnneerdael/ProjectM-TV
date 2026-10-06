@@ -1,0 +1,18 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/live-native-controls/build/live-controls
+    Start 2: dynamic-wave-controls
+1/2 Test #2: dynamic-wave-controls ............***Failed    0.52 sec
+mode=0 flags=1 quad=0: pixels differ by 229
+
+    Start 3: dynamic-display-controls
+2/2 Test #3: dynamic-display-controls .........***Failed    0.46 sec
+filter flags=2: wrong known-colour output
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.98 sec
+
+The following tests FAILED:
+	  2 - dynamic-wave-controls (Failed)
+	  3 - dynamic-display-controls (Failed)
+Errors while running CTest

@@ -72,6 +72,302 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void explicitResolutionChoicesFollowPanelAndDefaultToAuto() throws Exception {
+        assertArrayEquals(new int[]{0, 720, 1080, 1440, 2160, -1},
+                QualityController.resolutionModes(display(3840, 2160)));
+        assertArrayEquals(new int[]{0, 720, 1080, -1},
+                QualityController.resolutionModes(display(1920, 1080)));
+        QualityController q = controller(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                0, h -> applied = h);
+        q.setResolutionMode(0, 1440);
+        assertTrue(q.isAuto());
+        assertEquals(1440, applied);
+        q.setResolutionMode(2160, 1440);
+        assertTrue(!q.isAuto());
+        assertTrue(!q.isNative());
+        assertEquals(2160, applied);
+        q.setResolutionMode(-1, 1440);
+        assertTrue(q.isNative());
+        assertEquals(2160, applied);
+        q.setResolutionMode(1234, 1440);
+        assertTrue(q.isAuto());
+        assertEquals(1440, applied);
+    }
+
+    @Test
+    public void fixedAndNativeStaySelectedThroughSlowFpsWithoutSkipping() throws Exception {
+        QualityController q = controller(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                0, h -> applied = h);
+        q.setSkipSlowPresets(true);
+        for (int mode : new int[]{720, 1080, 1440, 2160, -1}) {
+            q.setResolutionMode(mode, 1440);
+            int expected = mode == -1 ? 2160 : mode;
+            assertEquals(expected, applied);
+            settle(q);
+            assertEquals(QualityController.ACTION_NONE, samples(q, 40, 5));
+            assertEquals(expected, applied);
+            q.onPresetChanged();
+            settle(q);
+            samples(q, 40, 60);
+            assertEquals(expected, applied);
+            q.revalidateForResume(true);
+            assertEquals(expected, applied);
+        }
+        q.setResolutionMode(0, 1080);
+        settle(q);
+        samples(q, 3, 40);
+        assertEquals(900, applied);
+    }
+
+    @Test
+    public void explicitResolutionStillReviewsMemoryAndRecoversOnlyToSelectedHeight() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(1440, 1080);
+        assertEquals(1440, applied);
+        memory.snapshot = new MemorySnapshot(4L << 30, 256L << 20, 128L << 20, true);
+        q.onFpsSample(30);
+        assertTrue(applied < 1440);
+        assertTrue(!q.isAuto());
+        memory.snapshot = new MemorySnapshot(4L << 30, 3L << 30, 128L << 20, false);
+        endPressureQuiet(q);
+        healthySamples(q, 20);
+        assertEquals(1440, applied);
+        q.setResolutionMode(-1, 1080);
+        assertEquals(2160, applied);
+        q.onMemoryPressure(15);
+        assertTrue(applied < 2160);
+        assertTrue(q.isNative());
+        endPressureQuiet(q);
+        healthySamples(q, 20);
+        assertEquals(2160, applied);
+        q.setResolutionMode(2160, 1080);
+        q.setMode(-1, 1080);
+        assertTrue("legacy consumers still normalize to Auto", q.isAuto());
+    }
+
+    @Test
+    public void nativeRecoveryResizeStaysPendingForAllocationSettings() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        q.onMemoryPressure(15);
+        assertEquals(1440, applied);
+        q.onFpsSample(30); // completed 1440p allocation
+        endPressureQuiet(q);
+        healthySamples(q, 2);
+        assertEquals(1800, applied); // recovery requested, not completed
+        memory.snapshot = new MemorySnapshot(4L << 30, 970L << 20, 128L << 20, false);
+        q.setNativeTrailsLevel(2);
+        q.revalidateForAllocationChange();
+        assertTrue("unrendered recovery cannot credit 1800p resident textures", applied <= 900);
+    }
+
+    @Test
+    public void nativePressureResizeIsNotAcknowledgedByTheOldFpsSample() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, true);
+        q.onFpsSample(30); // confirms 2160p, then pressure requests a smaller height
+        assertTrue(applied < 2160);
+        int reads = memory.reads;
+        q.setNativeTrailsLevel(0);
+        q.revalidateForAllocationChange();
+        assertTrue("replacement tuple still requires memory review", memory.reads > reads);
+    }
+
+    @Test
+    public void reducedModeCannotSupplyCreditUntilItsFrameCompletes() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        q.setResolutionMode(720, 2160); // requested, not yet rendered
+        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        q.setResolutionMode(-1, 2160);
+        assertTrue("unrendered reduction supplies no resident credit", applied < 2160);
+        q.onFpsSample(30);
+        q.setResolutionMode(-1, 2160);
+        assertEquals("a completed frame makes the resident allocation usable", 2160, applied);
+    }
+
+    @Test
+    public void automaticHeightChangeCannotSupplyUnacknowledgedModeCredit() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(0, 1440);
+        settle(q);
+        samples(q, 3, 40); // Auto requests 1260p; GL has not acknowledged it
+        assertEquals(1260, applied);
+        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        q.setResolutionMode(-1, 1440);
+        assertTrue(applied < 2160);
+    }
+
+    @Test
+    public void confirmedSameSizeModeSwitchDoesNotChargeResidentTexturesAgain() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30); // confirmed rendered allocation
+        memory.snapshot = new MemorySnapshot(4L << 30, 950L << 20, 128L << 20, false);
+        q.setResolutionMode(2160, 2160);
+        assertEquals(2160, applied);
+        assertTrue(!q.wasLastChangeForMemoryPressure());
+        q.setResolutionMode(-1, 2160);
+        assertEquals(2160, applied);
+    }
+
+    @Test
+    public void confirmedModeGrowthCreditsTheExistingAllocation() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(1440, 1440);
+        q.onFpsSample(30);
+        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        q.setResolutionMode(-1, 1440);
+        assertEquals(2160, applied);
+    }
+
+    @Test
+    public void confirmedModeReductionSamplesPressureAfterNewTexturesRender() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, false);
+        int reads = memory.reads;
+        q.setResolutionMode(1440, 2160);
+        assertEquals(1440, applied);
+        assertEquals("sampling before release would charge the old resident tuple", reads, memory.reads);
+        q.onFpsSample(30); // the host confirms the new tuple before forwarding this callback
+        assertEquals(reads + 1, memory.reads);
+        assertTrue(applied < 1440);
+        assertTrue(q.wasLastChangeForMemoryPressure());
+    }
+
+    @Test
+    public void unknownMemoryCannotGrowAnExplicitModeAboveTheExistingSize() throws Exception {
+        for (boolean confirmed : new boolean[]{false, true}) {
+            FakeMemory memory = new FakeMemory();
+            QualityController q = withMemory(memory, 4096);
+            q.setResolutionMode(720, 720);
+            if (confirmed) q.onFpsSample(30);
+            memory.snapshot = null;
+            q.setResolutionMode(-1, 720);
+            assertTrue(applied <= 720);
+            assertTrue(q.isMemoryConstrained());
+        }
+    }
+
+    @Test
+    public void pendingAndRecreatedAllocationsCannotProvideResidentCreditForModes() throws Exception {
+        for (boolean recreated : new boolean[]{false, true}) {
+            FakeMemory memory = new FakeMemory();
+            QualityController q = withMemory(memory, 4096);
+            q.setResolutionMode(1440, 1440);
+            if (recreated) {
+                q.onFpsSample(30);
+                q.revalidateForResume(true);
+            }
+            memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+            q.setResolutionMode(-1, 1440);
+            assertTrue(applied < 2160);
+            assertTrue(q.wasLastChangeForMemoryPressure());
+        }
+    }
+
+    @Test
+    public void modeSwitchMemoryClampSignalsNativeCleanupInsideHeightCallback() throws Exception {
+        for (int mode : new int[]{0, 2160, -1}) {
+            FakeMemory memory = new FakeMemory();
+            boolean[] cleanup = new boolean[1];
+            QualityController[] owner = new QualityController[1];
+            owner[0] = new QualityController(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                    0, height -> {
+                        applied = height;
+                        cleanup[0] = owner[0].wasLastChangeForMemoryPressure();
+                    }, memory);
+            QualityController q = owner[0];
+            q.setResolutionMode(-1, 2160);
+            assertEquals(2160, applied);
+            assertTrue(!cleanup[0]);
+            memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, false);
+            q.setResolutionMode(mode, 2160);
+            assertTrue(applied < 2160);
+            assertTrue("memory-clamped callback must flush caches and pause prewarming", cleanup[0]);
+            assertTrue(q.isMemoryConstrained());
+        }
+    }
+
+    @Test
+    public void userRequestedReductionDoesNotReportMemoryPressureButExistingCeilingDoes() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.setResolutionMode(720, 2160);
+        assertEquals(720, applied);
+        assertTrue(!q.wasLastChangeForMemoryPressure());
+        q.setResolutionMode(-1, 2160);
+        q.onMemoryPressure(15);
+        q.setResolutionMode(0, 2160); // healthy sample, but the temporary ceiling remains
+        assertTrue(applied < 2160);
+        assertTrue(q.wasLastChangeForMemoryPressure());
+        assertTrue(q.isMemoryConstrained());
+    }
+
+    @Test
+    public void temporaryCeilingSurvivesExplicitModeRoundTripWithoutReplacingAutoHistory() throws Exception {
+        for (int explicit : new int[]{720, 2160, -1}) {
+            FakeMemory memory = new FakeMemory();
+            int[] persisted = new int[1];
+            QualityController[] owner = new QualityController[1];
+            owner[0] = new QualityController(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                    0, height -> {
+                        applied = height;
+                        if (owner[0].isAuto()) persisted[0] = owner[0].autoHeightToRemember();
+                    }, memory);
+            QualityController q = owner[0];
+            q.setResolutionMode(0, 2160);
+            q.onMemoryPressure(15);
+            assertTrue(applied < 2160);
+            assertEquals(2160, persisted[0]);
+            q.setResolutionMode(explicit, persisted[0]);
+            q.onMemoryPressure(15);
+            q.setResolutionMode(0, persisted[0]);
+            assertTrue(applied < 2160);
+            assertEquals("synchronous Auto persistence retains FPS-chosen target", 2160, persisted[0]);
+            q.setResolutionMode(explicit, persisted[0]);
+            q.setMode(-1, persisted[0]);
+            assertEquals("legacy Auto path also preserves remembered target", 2160, persisted[0]);
+        }
+    }
+
+    @Test
+    public void nativePressureHistoryDoesNotBecomeRememberedAutoHeight() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 1080);
+        q.onMemoryPressure(15);
+        q.setResolutionMode(0, 1440);
+        assertEquals(1440, q.autoHeightToRemember());
+    }
+
+    @Test
+    public void explicitResolutionOnSmallerPanelRejectsSaved4kAndNativeUsesPanel() throws Exception {
+        QualityController q = controller(display(1920, 1080), profile(DeviceProfile.Tier.HIGH),
+                0, h -> applied = h);
+        q.setResolutionMode(2160, 720);
+        assertTrue(q.isAuto());
+        assertEquals(720, applied);
+        q.setResolutionMode(-1, 720);
+        assertEquals(1080, applied);
+    }
+
+    @Test
     public void everySavedModeNormalizesToAutomatic() throws Exception {
         DisplayInfo panel = display(3840, 2160);
         assertEquals(0, QualityController.defaultMode(panel, 1260));

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ProjectM TV</string>
+    <string name="resolution">Resolution</string>
+    <string name="resolution_auto">Auto</string>
+    <string name="resolution_native">Native (%1$s)</string>
 </resources>

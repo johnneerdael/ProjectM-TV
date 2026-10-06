@@ -1,0 +1,8 @@
+renderer=Android Emulator OpenGL ES Translator (Apple M4 Pro) version=OpenGL ES 3.0 (4.1 Metal - 89.4)
+darken frame=0 evaluated=0 static=0
+darken frame=1 evaluated=1 static=0
+wave frame=0 evaluated_mode=0 dots=0 thick=0 additive=0 draws=1 [primitive=2 vertices=479 blend=770,771]
+wave frame=1 evaluated_mode=6 dots=0 thick=0 additive=0 draws=1 [primitive=3 vertices=159 blend=770,771]
+wave frame=2 evaluated_mode=6 dots=1 thick=0 additive=0 draws=4 [primitive=0 vertices=159 blend=770,771] [primitive=0 vertices=159 blend=770,771] [primitive=0 vertices=159 blend=770,771] [primitive=0 vertices=159 blend=770,771]
+wave frame=3 evaluated_mode=6 dots=1 thick=0 additive=1 draws=4 [primitive=0 vertices=159 blend=770,1] [primitive=0 vertices=159 blend=770,1] [primitive=0 vertices=159 blend=770,1] [primitive=0 vertices=159 blend=770,1]
+wave frame=4 evaluated_mode=6 dots=1 thick=1 additive=1 draws=4 [primitive=0 vertices=159 blend=770,1] [primitive=0 vertices=159 blend=770,1] [primitive=0 vertices=159 blend=770,1] [primitive=0 vertices=159 blend=770,1]

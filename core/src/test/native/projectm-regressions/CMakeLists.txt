@@ -53,6 +53,89 @@ if(NOT APPLE)
     target_link_libraries(projectm-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
 enable_testing()
+add_executable(warp-zoom-regressions warp_zoom_test.cpp)
+target_compile_features(warp-zoom-regressions PRIVATE cxx_std_17)
+target_compile_definitions(warp-zoom-regressions PRIVATE GL_SILENCE_DEPRECATION)
+# Use the engine's exported GL dependencies: system discovery creates its GLES
+# imported target in the projectM subdirectory, outside this target's scope.
+target_link_libraries(warp-zoom-regressions PRIVATE libprojectM::projectM)
+if(NOT APPLE)
+    target_link_libraries(warp-zoom-regressions PRIVATE ${REGRESSION_GL_TARGET})
+endif()
+add_test(NAME warp-zoom-regressions COMMAND warp-zoom-regressions
+    "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert")
+set_tests_properties(warp-zoom-regressions PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+foreach(control shape-sampler blur-range dynamic-controls)
+    string(REPLACE "-" "_" source_name "${control}")
+    add_executable(${control}-regressions ${source_name}_test.cpp)
+    target_compile_features(${control}-regressions PRIVATE cxx_std_17)
+    target_compile_definitions(${control}-regressions PRIVATE GL_SILENCE_DEPRECATION)
+    target_include_directories(${control}-regressions PRIVATE
+        "${PROJECTM_SOURCE}/src/libprojectM"
+        "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset"
+        "${PROJECTM_SOURCE}/vendor"
+        "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+    target_link_libraries(${control}-regressions PRIVATE libprojectM::projectM ${CMAKE_DL_LIBS})
+    if(NOT APPLE)
+        target_compile_definitions(${control}-regressions PRIVATE USE_GLES)
+        target_link_libraries(${control}-regressions PRIVATE ${REGRESSION_GL_TARGET})
+    endif()
+endforeach()
+set(DYNAMIC_PRESETS
+    "319.milk"
+    "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk"
+    "idiot - Forty Six and 2 (pushit!).milk")
+set(DYNAMIC_HASHES
+    ce88b6ef2083122dc103e270fbfee6f6abab02517e56932164f3c7faa456a989
+    df44c85b71513f603fdff7e5d8b751b4de81a969d0af66f8acada49fd76e8449
+    e0747d71b11ae571f9c6917962b62d197757a05379342c11ca350bb28d43e693)
+foreach(index RANGE 0 2)
+    list(GET DYNAMIC_PRESETS ${index} name)
+    list(GET DYNAMIC_HASHES ${index} expected)
+    file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/${name}" actual)
+    if(NOT actual STREQUAL expected)
+        message(FATAL_ERROR "Dynamic-control witness changed: ${name}")
+    endif()
+endforeach()
+add_test(NAME dynamic-original-presets COMMAND dynamic-controls-regressions presets
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets")
+set_tests_properties(dynamic-original-presets PROPERTIES TIMEOUT 120
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+foreach(control wave display)
+    add_test(NAME dynamic-${control}-controls COMMAND dynamic-controls-regressions ${control})
+    set_tests_properties(dynamic-${control}-controls PROPERTIES TIMEOUT 60
+        ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+endforeach()
+add_test(NAME shape-sampler-regressions COMMAND shape-sampler-regressions
+    "${CMAKE_CURRENT_BINARY_DIR}/shape-sampler-fixtures")
+set(SHAPE_PRESET "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/widest swing.milk")
+file(SHA256 "${SHAPE_PRESET}" SHAPE_PRESET_HASH)
+if(NOT SHAPE_PRESET_HASH STREQUAL "91fbdd07995c8a820c78513c899f60a0cbc950fcf52c90bbbf42cc51fb7b4604")
+    message(FATAL_ERROR "The textured-shape witness preset changed")
+endif()
+add_test(NAME shape-sampler-preset COMMAND shape-sampler-regressions
+    "${CMAKE_CURRENT_BINARY_DIR}/shape-sampler-preset-fixtures" "${SHAPE_PRESET}")
+add_test(NAME blur-range-regressions COMMAND blur-range-regressions)
+file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/blur-range-presets.tsv" BLUR_PRESET_ROWS)
+foreach(row IN LISTS BLUR_PRESET_ROWS)
+    string(REGEX MATCH "^([0-9a-f]+)\t(.+)$" matched "${row}")
+    if(NOT matched)
+        message(FATAL_ERROR "Invalid blur witness manifest row: ${row}")
+    endif()
+    set(expected "${CMAKE_MATCH_1}")
+    set(preset_name "${CMAKE_MATCH_2}")
+    file(SHA256 "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets/presets/${preset_name}" actual)
+    if(NOT actual STREQUAL expected)
+        message(FATAL_ERROR "Blur witness preset changed: ${preset_name}")
+    endif()
+endforeach()
+add_test(NAME blur-range-render COMMAND blur-range-regressions gl
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets")
+set_tests_properties(shape-sampler-regressions shape-sampler-preset blur-range-regressions PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+set_tests_properties(blur-range-render PROPERTIES TIMEOUT 120
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_executable(float-literal-regressions float_literal_test.cpp)
 target_compile_features(float-literal-regressions PRIVATE cxx_std_17)
 target_include_directories(float-literal-regressions PRIVATE "${PROJECTM_SOURCE}/vendor/hlslparser/src")
