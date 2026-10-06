@@ -1,0 +1,1249 @@
+{
+  "schema_version": 1,
+  "purpose": "CompactfrozenRound005failures/comparison evidence;notatrainedprobabilitymodel/oralteredclaimoracle",
+  "model_commit": "cedf001c24b57dd6057d6f28e73b7908531d01bd",
+  "reference_release": "2.3.8",
+  "reference_aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "engine_archive_sha256": "c17fc176d6a79556dbfd6a998bbf78350f7f6d76dcd81d0bf7f6c5febd4bc578",
+  "round_manifest_sha256": "06fac08aab1cd420bb9542b6ef0a544dfe674ff5b6f44c98e4f7ec834185e29b",
+  "settings": {
+    "width": 256,
+    "height": 144,
+    "clock_fps": 30,
+    "frames": 60,
+    "mesh": [
+      48,
+      32
+    ],
+    "initial_rgba": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "point_subpixel_bits": 8,
+    "point_grid_context": "AppleM4ProAPI34emulator;exacthalfwaytiesunverified",
+    "equation_fps": [
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      35,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30,
+      30
+    ],
+    "entropy_seed": 12345,
+    "c_stream": "per-threadMT19937u31",
+    "noise_initialization_clock_ns": 1000000033333333,
+    "pcm": "runtime237rawfloat32LE\u2192nativeU8;audio237samequantizedPCMsource",
+    "native_trails": "productionStandardinactive144p",
+    "profile": "gles300",
+    "equation_seed": 1094840333,
+    "quantize": true,
+    "zero_descriptor_warmup": true
+  },
+  "cases": [
+    {
+      "case": 22,
+      "preset": "suksma - dmt is the middle income man's this --- Isosceles edit.milk",
+      "sha256": "6a5a998f7c48582b42c6fa4b8b7432ac588908368869293870e65742b34c17e3",
+      "score": 92.5,
+      "critical_contradiction": false,
+      "main_miss": "Very close structure/centre/layout/phase agreement; p95speed, final-luma and palette statistics miss frozen numerical precision; late fine feedback pixels differ.",
+      "prediction_pixel_sha256": "ae4027c04ccb32a9d2b2387b9685100e0424cb7f4c5efab10bedd19fe1cc89d4",
+      "native_pixel_sha256": "76f3394fa7956e7f8e6f7cf7bb70194912bb252754202a079c827b34c732ce32",
+      "source": {
+        "colour": {
+          "mean_luma": 0.2628692790865898,
+          "mean_contrast": 0.2387152606000503,
+          "mean_saturation": 0.534004541238149,
+          "mean_coloured_fraction": 0.667601634837963,
+          "mean_effective_hue_bins": 5.103374681412758,
+          "temporal_effective_hue_bins": 5.152103092598906
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.020554307848215103,
+          "peak_brightness_change_area": 0.3926323784722222,
+          "peak_paired_luma_area_product": 0.0021147051429579733,
+          "peak_brightening_screen_area": 0.2041286892361111,
+          "peak_darkening_screen_area": 0.19962565104166666,
+          "peak_visible_brightening_fraction": 0.22212055020957552,
+          "peak_visible_darkening_fraction": 0.21663869999116842,
+          "peak_rgb_change_area": 0.5588107638888888,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.32765012039631164,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.06005859375,
+          "matched_brightness_change_p95": 0.10078820437192916,
+          "peak_matched_brightness_change_p95": 0.10184916853904724,
+          "peak_matched_brightening_screen_area": 0.020128038194444444,
+          "peak_matched_darkening_screen_area": 0.029920789930555556,
+          "mean_supported_area": 0.7702540165960453,
+          "median_speed_viewports_per_second": 0.3821564316749573,
+          "p95_speed_viewports_per_second": 0.7202600777149201,
+          "mean_acceleration_viewports_per_second_squared": 0.3793691053164887,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "native": {
+        "colour": {
+          "mean_luma": 0.2627528357009093,
+          "mean_contrast": 0.2386785015463829,
+          "mean_saturation": 0.5352950632572174,
+          "mean_coloured_fraction": 0.66697998046875,
+          "mean_effective_hue_bins": 5.110218733067054,
+          "temporal_effective_hue_bins": 5.191784740881855
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.020550290122628212,
+          "peak_brightness_change_area": 0.3930935329861111,
+          "peak_paired_luma_area_product": 0.002107187001153458,
+          "peak_brightening_screen_area": 0.2038845486111111,
+          "peak_darkening_screen_area": 0.1987575954861111,
+          "peak_visible_brightening_fraction": 0.22220249718918278,
+          "peak_visible_darkening_fraction": 0.21605284109338602,
+          "peak_rgb_change_area": 0.5589735243055556,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.32564206979763455,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.05872938368055555,
+          "matched_brightness_change_p95": 0.10048406720161437,
+          "peak_matched_brightness_change_p95": 0.10198327153921127,
+          "peak_matched_brightening_screen_area": 0.019992404513888888,
+          "peak_matched_darkening_screen_area": 0.029134114583333332,
+          "mean_supported_area": 0.7702760858050848,
+          "median_speed_viewports_per_second": 0.382470965385437,
+          "p95_speed_viewports_per_second": 0.7238341748714447,
+          "mean_acceleration_viewports_per_second_squared": 0.3862557496509835,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "all60_metrics_path": "build/visual-loop/case022/round005/all60-metrics.json",
+      "assessment_path": "build/visual-loop/case022/round005/assessment.json",
+      "frame1_2_20_40_60": {
+        "source": [
+          {
+            "frame": 1,
+            "time": 0.03333333333333333,
+            "mean_luma": 0.23129254579544067,
+            "spatial_luma_std": 0.07985801994800568,
+            "mean_rgb": [
+              0.5074607133865356,
+              0.1527201533317566,
+              0.19635100662708282
+            ],
+            "dark_fraction": 0.0,
+            "white_fraction": 0.0,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 2,
+            "time": 0.06666666666666667,
+            "mean_luma": 0.23114320635795593,
+            "spatial_luma_std": 0.0686798170208931,
+            "mean_rgb": [
+              0.583013653755188,
+              0.12617626786231995,
+              0.23489981889724731
+            ],
+            "dark_fraction": 0.0,
+            "white_fraction": 0.0,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 20,
+            "time": 0.6666666666666666,
+            "mean_luma": 0.1812381148338318,
+            "spatial_luma_std": 0.19214901328086853,
+            "mean_rgb": [
+              0.39276695251464844,
+              0.11487828195095062,
+              0.21565906703472137
+            ],
+            "dark_fraction": 0.1733940972222222,
+            "white_fraction": 0.0015190972222222222,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 40,
+            "time": 1.3333333333333333,
+            "mean_luma": 0.3275924324989319,
+            "spatial_luma_std": 0.32381150126457214,
+            "mean_rgb": [
+              0.3878118097782135,
+              0.30554112792015076,
+              0.3685988187789917
+            ],
+            "dark_fraction": 0.14293077256944445,
+            "white_fraction": 0.12565104166666666,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 60,
+            "time": 2.0,
+            "mean_luma": 0.34333091974258423,
+            "spatial_luma_std": 0.306387335062027,
+            "mean_rgb": [
+              0.38534533977508545,
+              0.33039939403533936,
+              0.34756922721862793
+            ],
+            "dark_fraction": 0.1378851996527778,
+            "white_fraction": 0.0746799045138889,
+            "max_rgb": 1.0
+          }
+        ],
+        "native": [
+          {
+            "frame": 1,
+            "time": 0.03333333333333333,
+            "mean_luma": 0.23128557205200195,
+            "spatial_luma_std": 0.07984762638807297,
+            "mean_rgb": [
+              0.5074640512466431,
+              0.15271031856536865,
+              0.19634273648262024
+            ],
+            "dark_fraction": 0.0,
+            "white_fraction": 0.0,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 2,
+            "time": 0.06666666666666667,
+            "mean_luma": 0.23112837970256805,
+            "spatial_luma_std": 0.0686739906668663,
+            "mean_rgb": [
+              0.5830144286155701,
+              0.12615472078323364,
+              0.23490656912326813
+            ],
+            "dark_fraction": 0.0,
+            "white_fraction": 0.0,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 20,
+            "time": 0.6666666666666666,
+            "mean_luma": 0.18113142251968384,
+            "spatial_luma_std": 0.19200091063976288,
+            "mean_rgb": [
+              0.39276379346847534,
+              0.11474408209323883,
+              0.2155182808637619
+            ],
+            "dark_fraction": 0.1731228298611111,
+            "white_fraction": 0.001491970486111111,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 40,
+            "time": 1.3333333333333333,
+            "mean_luma": 0.3271937370300293,
+            "spatial_luma_std": 0.32344090938568115,
+            "mean_rgb": [
+              0.3872867822647095,
+              0.3050912916660309,
+              0.3690855801105499
+            ],
+            "dark_fraction": 0.1413302951388889,
+            "white_fraction": 0.1251898871527778,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 60,
+            "time": 2.0,
+            "mean_luma": 0.344200998544693,
+            "spatial_luma_std": 0.30700692534446716,
+            "mean_rgb": [
+              0.38622966408729553,
+              0.3311327397823334,
+              0.3497553765773773
+            ],
+            "dark_fraction": 0.137939453125,
+            "white_fraction": 0.0751953125,
+            "max_rgb": 1.0
+          }
+        ]
+      },
+      "claim_assessments": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 is a large soft magenta/red central disc surrounded by a dark green/black halo.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "structure2",
+          "claim": "By frame20 that disc has become a fine cellular or net-like radial texture with bright lobes above and below the centre.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "structure3",
+          "claim": "Later frames form a central dark pinched junction with paired diagonal red/orange streaks and bright white/pink upper/lower lobes.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "structure4",
+          "claim": "By frame60 the viewport is densely filled with irregular lattice texture and curved coloured borders, rather than returning to the simple initial disc.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "motion1",
+          "claim": "The initial disc breaks into textured lobes by frame20 and then evolves into a pinched radial arrangement through frames30\u201360.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "motion2",
+          "claim": "The brightest paired diagonal streaks shift and rotate around a central junction while their net-like surrounding texture keeps deforming.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "motion3",
+          "claim": "Supported motion is substantial: median speed0.382viewport widths/second and p950.720, with about77.0% supported image area.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Median0.382156source/0.382471native and support0.770254/0.770276 agree closely; p950.720260/0.723834 differs from frozen rounded0.720. Retain partial quantitative credit; no widened acceptanceband."
+        },
+        {
+          "id": "motion4",
+          "claim": "The sampled luma falls from0.231 at frame1 to0.135 at frame10, then rises to0.343 at frame60; this two-phase evolution is predicted.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Two-phase evolution matches; frame1/10 agree at frozen precision, but source/native frame60luma0.343331/0.344201 round0.343/0.344. Partial numerical trajectory credit; centre/layout phase agrees."
+        },
+        {
+          "id": "colour1",
+          "claim": "Magenta/red dominates early; later white/pink lobes, orange/red streaks, cyan/blue/green outer accents and black recesses coexist.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "colour2",
+          "claim": "Across60frames mean encoded luma is0.263 and mean spatial contrast0.239.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "colour3",
+          "claim": "The palette is moderately saturated and diverse: mean saturation0.534 and mean effective hue bins5.10.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Saturation0.534005source/0.535295native and effectivehuebins5.103375/5.110219 differ at frozen precision; diverse moderate palette agrees qualitatively, partial numerical credit."
+        },
+        {
+          "id": "colour4",
+          "claim": "Bright near-white lobes are separated by dark web-like troughs and coloured rim accents, rather than a uniformly bright grey field.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Zero transitions satisfy the joint coherent brightening descriptor definition in this60frame window.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Zero transitions satisfy the joint coherent darkening descriptor definition in this60frame window.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Peak mean luma jump is0.0206 at frames4\u21925, despite substantial local texture changes.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Local changes are broad: peak brightness-change area39.3% and peak RGB-change area55.9%; no whole-program no-flashing claim is made.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "feedback1",
+          "claim": "A soft deposited central form develops retained fine cellular texture instead of merely tracking two clean newly drawn circles.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "feedback2",
+          "claim": "The later image keeps accumulated net-like folds and pinched lobe outlines from preceding frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Mirrored and scaled main-image sampling yields paired upper/lower lobes and opposing diagonal streaks rather than a single unreflected object.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Feedback edges become progressively brighter and more intricate from frames20\u201360 while the central junction remains dark.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Pairedtemporal sheets andall60 metrics support this visible claim; no pixelperfect or complete denseflow assertion."
+        }
+      ],
+      "description_sha256": "2d065dcf9121662389d2f783ab0f56ff7a0f17bfefac8e1cbff66353012d384f",
+      "assessment_sha256": "1b89adb2e86885238424782c12c588c2be1096366ef6165c964832b74fc809ff"
+    },
+    {
+      "case": 23,
+      "preset": "widest swing.milk",
+      "sha256": "91fbdd07995c8a820c78513c899f60a0cbc950fcf52c90bbbf42cc51fb7b4604",
+      "score": 77.5,
+      "critical_contradiction": true,
+      "main_miss": "Finefeedback state/texture diverges materially; largestlumaevent occurs earlynative3\u21924 versus predictedlate51\u219252, despite matching ribbonposes and overallgrowth/collapse.",
+      "prediction_pixel_sha256": "16167b0c38262f6160d31431e80f77254dd8be339c5e3d082fb304b1c08727d5",
+      "native_pixel_sha256": "d2759e9cb54cfc38081423d34b5ea4c2c6927dfa24e5ed8e034ac9928bdd42e1",
+      "source": {
+        "colour": {
+          "mean_luma": 0.20515482475360233,
+          "mean_contrast": 0.2677632657190164,
+          "mean_saturation": 0.4091111391161879,
+          "mean_coloured_fraction": 0.5002400716145833,
+          "mean_effective_hue_bins": 4.4331370842550735,
+          "temporal_effective_hue_bins": 4.522249433028136
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.08488918840885162,
+          "peak_brightness_change_area": 0.7233072916666666,
+          "peak_paired_luma_area_product": 0.044427065950811896,
+          "peak_brightening_screen_area": 0.3755967881944444,
+          "peak_darkening_screen_area": 0.3646918402777778,
+          "peak_visible_brightening_fraction": 0.5757002271006812,
+          "peak_visible_darkening_fraction": 0.5259807023093958,
+          "peak_rgb_change_area": 0.8488226996527778,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.47510481811580696,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.6255967881944444,
+          "matched_brightness_change_p95": 0.21577283591032026,
+          "peak_matched_brightness_change_p95": 0.23190626502037048,
+          "peak_matched_brightening_screen_area": 0.059326171875,
+          "peak_matched_darkening_screen_area": 0.035834418402777776,
+          "mean_supported_area": 0.18573032530014125,
+          "median_speed_viewports_per_second": 0.5832037925720215,
+          "p95_speed_viewports_per_second": 2.04344789981842,
+          "mean_acceleration_viewports_per_second_squared": 8.892958737133444,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "native": {
+        "colour": {
+          "mean_luma": 0.19999504908919336,
+          "mean_contrast": 0.26696343819300333,
+          "mean_saturation": 0.39112987158199153,
+          "mean_coloured_fraction": 0.4842949761284722,
+          "mean_effective_hue_bins": 4.521783155895528,
+          "temporal_effective_hue_bins": 4.599640953939587
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.08551415055990219,
+          "peak_brightness_change_area": 0.7214626736111112,
+          "peak_paired_luma_area_product": 0.05119923350826462,
+          "peak_brightening_screen_area": 0.3959418402777778,
+          "peak_darkening_screen_area": 0.37646484375,
+          "peak_visible_brightening_fraction": 0.5845535714285715,
+          "peak_visible_darkening_fraction": 0.5061048304213772,
+          "peak_rgb_change_area": 0.8398980034722222,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.47664300341624,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 1.0,
+          "peak_untracked_brightness_change_screen_area": 0.5962727864583334,
+          "matched_brightness_change_p95": 0.22261802405118938,
+          "peak_matched_brightness_change_p95": 0.23396629095077515,
+          "peak_matched_brightening_screen_area": 0.046061197916666664,
+          "peak_matched_darkening_screen_area": 0.050618489583333336,
+          "mean_supported_area": 0.19151935469632764,
+          "median_speed_viewports_per_second": 0.5460384488105774,
+          "p95_speed_viewports_per_second": 1.7989067196846007,
+          "mean_acceleration_viewports_per_second_squared": 7.689579957563075,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "all60_metrics_path": "build/visual-loop/case023/round005/all60-metrics.json",
+      "assessment_path": "build/visual-loop/case023/round005/assessment.json",
+      "frame1_2_20_40_60": {
+        "source": [
+          {
+            "frame": 1,
+            "time": 0.03333333333333333,
+            "mean_luma": 0.04161375015974045,
+            "spatial_luma_std": 0.17754055559635162,
+            "mean_rgb": [
+              0.03734876960515976,
+              0.043460503220558167,
+              0.03587982803583145
+            ],
+            "dark_fraction": 0.9378797743055556,
+            "white_fraction": 0.011528862847222222,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 2,
+            "time": 0.06666666666666667,
+            "mean_luma": 0.0748237892985344,
+            "spatial_luma_std": 0.21677345037460327,
+            "mean_rgb": [
+              0.0713120549917221,
+              0.0771767720580101,
+              0.06185891851782799
+            ],
+            "dark_fraction": 0.8503146701388888,
+            "white_fraction": 0.012424045138888888,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 20,
+            "time": 0.6666666666666666,
+            "mean_luma": 0.23382551968097687,
+            "spatial_luma_std": 0.2723866105079651,
+            "mean_rgb": [
+              0.24742886424064636,
+              0.23466737568378448,
+              0.1854097545146942
+            ],
+            "dark_fraction": 0.3642035590277778,
+            "white_fraction": 0.020182291666666668,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 40,
+            "time": 1.3333333333333333,
+            "mean_luma": 0.24348586797714233,
+            "spatial_luma_std": 0.27779367566108704,
+            "mean_rgb": [
+              0.25122153759002686,
+              0.24717365205287933,
+              0.18416661024093628
+            ],
+            "dark_fraction": 0.3509928385416667,
+            "white_fraction": 0.011528862847222222,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 60,
+            "time": 2.0,
+            "mean_luma": 0.0818234384059906,
+            "spatial_luma_std": 0.22005759179592133,
+            "mean_rgb": [
+              0.08052340149879456,
+              0.08477278798818588,
+              0.056432705372571945
+            ],
+            "dark_fraction": 0.8081597222222222,
+            "white_fraction": 0.012125651041666666,
+            "max_rgb": 1.0
+          }
+        ],
+        "native": [
+          {
+            "frame": 1,
+            "time": 0.03333333333333333,
+            "mean_luma": 0.04155426472425461,
+            "spatial_luma_std": 0.1774260401725769,
+            "mean_rgb": [
+              0.03735292702913284,
+              0.04338603839278221,
+              0.035781312733888626
+            ],
+            "dark_fraction": 0.9384765625,
+            "white_fraction": 0.011528862847222222,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 2,
+            "time": 0.06666666666666667,
+            "mean_luma": 0.07626041769981384,
+            "spatial_luma_std": 0.22020113468170166,
+            "mean_rgb": [
+              0.07370934635400772,
+              0.0784425437450409,
+              0.06216007471084595
+            ],
+            "dark_fraction": 0.8524305555555556,
+            "white_fraction": 0.013129340277777778,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 20,
+            "time": 0.6666666666666666,
+            "mean_luma": 0.23196490108966827,
+            "spatial_luma_std": 0.2756430506706238,
+            "mean_rgb": [
+              0.24421286582946777,
+              0.2328168749809265,
+              0.1874190866947174
+            ],
+            "dark_fraction": 0.3777126736111111,
+            "white_fraction": 0.024631076388888888,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 40,
+            "time": 1.3333333333333333,
+            "mean_luma": 0.23375463485717773,
+            "spatial_luma_std": 0.28383490443229675,
+            "mean_rgb": [
+              0.23721782863140106,
+              0.2375996708869934,
+              0.18546926975250244
+            ],
+            "dark_fraction": 0.3965657552083333,
+            "white_fraction": 0.013454861111111112,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 60,
+            "time": 2.0,
+            "mean_luma": 0.07616540789604187,
+            "spatial_luma_std": 0.21971160173416138,
+            "mean_rgb": [
+              0.07492390275001526,
+              0.07896187901496887,
+              0.05211583152413368
+            ],
+            "dark_fraction": 0.8413899739583334,
+            "white_fraction": 0.013102213541666666,
+            "max_rgb": 1.0
+          }
+        ]
+      },
+      "claim_assessments": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 is mostly black with a thin large curved rim near the edges and sparse bright ribbon fragments.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "structure2",
+          "claim": "Frames10\u201340 fill much of the view with dense fine gold/blue edge texture around a darker central hole or recess.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Densephase/darkcentralrecess exists in both, but native finefeedback is coarser, strongly elongated/striped and spatially different from predicted finecellulartexture throughout middleframes. Partial ratherthan full texture/retainedstate match."
+        },
+        {
+          "id": "structure3",
+          "claim": "Long bright white/cyan/yellow curved ribbon loops cross the fine texture, including broad upper and lower arcs.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "structure4",
+          "claim": "By frame60 much of the fine texture has disappeared, leaving isolated bright loops/ribbons on black while the large outer rim remains.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "motion1",
+          "claim": "Ribbon loops swing, curl and change orientation over the window rather than staying fixed in the first-frame arrangement.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "motion2",
+          "claim": "Dense fine texture grows by frame10, remains active through frame40, then collapses substantially near the final frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "motion3",
+          "claim": "Supported motion is rapid: median speed0.583viewport widths/second, p952.04, with correspondence support averaging only18.6% of pixels.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Median/p95 source0.583204/2.043448 versus native0.546038/1.798907 (about6.4%/12.0% lower), support0.185730/0.191519. Rapidmotion qualitativelymatches; numericclaimpartial."
+        },
+        {
+          "id": "motion4",
+          "claim": "Mean luma is0.0416 at frame1,0.229 at frame10,0.243 at frame40 and0.0818 at frame60; a late drop follows the dense phase.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Growth\u2192densephase\u2192latedrop timing matches, but luma differs: frame10 source0.229108/native0.225530;frame40 0.243486/0.233755;frame60 0.081823/0.076165. Partial numerictrajectory."
+        },
+        {
+          "id": "colour1",
+          "claim": "Fine texture is largely gold/orange with blue/cyan details, contrasting with black gaps and bright white ribbon highlights.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "colour2",
+          "claim": "Mean encoded luma is0.205 with high spatial contrast0.268.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Meanluma0.205155/0.199995 and contrast0.267763/0.266963 differ at frozen precision; partial."
+        },
+        {
+          "id": "colour3",
+          "claim": "Mean saturation is0.409 and spatial palette diversity about4.43 effective hue bins; the display is not monochrome.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Mean saturation0.409111/0.391130 and spatialhuebins4.433137/4.521783 differ at frozen precision; multicolouredpalette remains, partial."
+        },
+        {
+          "id": "colour4",
+          "claim": "White/cyan/yellow ribbon cores are brighter than the fine grain, and the final sparse image restores large black regions.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Zero transitions meet the joint coherent brightening descriptor definition in this60frame window; this does not imply quiet local texture.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Zero transitions meet the joint coherent darkening descriptor definition in this60frame window.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "flashing3",
+          "claim": "The largest mean luma jump is0.0849 at frames51\u219252, reflecting the late loss of the dense phase.",
+          "points": 0,
+          "disposition": "mismatch",
+          "evidence": "Largestsource meanlumajump0.084889 occursframes51\u219252 (latecollapse);largestnative0.085514 occursframes3\u21924 (earlybrightening). Similar amplitudes do not validate the wrong frozen peak-event timing; score0."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Large local changes are predicted: peak brightness-change area72.3% and peak RGB-change area84.9%; rapidly changing fine texture remains visible.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Peakbrightnessarea source0.723307/native0.721463;RGBchangearea0.848823/0.839898. Broadrapidchanges match qualitatively; frozenarea values differ, partial."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Drawn curved strands coexist with retained edge texture, so the view is more than four clean moving wave curves.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "feedback2",
+          "claim": "The dense phase produces layered fine cellular/edge detail around a darker central recess.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Densephase/darkcentralrecess exists in both, but native finefeedback is coarser, strongly elongated/striped and spatially different from predicted finecellulartexture throughout middleframes. Partial ratherthan full texture/retainedstate match."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Strong channel subtraction and blur/gradient emphasis preserve thin high-contrast coloured edges rather than a smooth filled glow.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        },
+        {
+          "id": "feedback4",
+          "claim": "The final frames lose much accumulated fine texture while surviving bright ribbon structures and the outer curved boundary remain.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "Broad observable structure/palette/phase agrees in all60 metrics and paired sheets; no literalpixel or completefeedbackequivalence claimed."
+        }
+      ],
+      "description_sha256": "793830d474b95ccc93c0632b5e53c0d1faa101fbd7ba5d296bc3854b150d5dbe",
+      "assessment_sha256": "ec5307be85ec2db306253f689889f42468687bbb4b7f9892ef258460fdb742d8"
+    },
+    {
+      "case": 24,
+      "preset": "TonyMilkdrop - Blood In Me --- Isosceles edit2.milk",
+      "sha256": "a3ee904791fd4523febcb7ef4d6553d7ca9f998c53e663a98a738e25e2c3ed00",
+      "score": 65.0,
+      "critical_contradiction": true,
+      "main_miss": "Later centralgeometry deforms inwrongdirection/topology; sourcehorizontaleye/compactbox versusnativeuprightloopscorridor. Flashpeak timing/amplitude andcolour/motionvalues differ.",
+      "prediction_pixel_sha256": "8d2dc741ca1aaf316dffa5c758f149c4d42bff294b37ceadb4af733e4de73d81",
+      "native_pixel_sha256": "a71b6700d04e5fb7cb24a1a3a3ba8f26153cb9a1e3ea5170bd45248f55ec61d2",
+      "source": {
+        "colour": {
+          "mean_luma": 0.12148586616385729,
+          "mean_contrast": 0.1891085340641439,
+          "mean_saturation": 0.6179990043242772,
+          "mean_coloured_fraction": 0.5659889503761574,
+          "mean_effective_hue_bins": 4.582394572786671,
+          "temporal_effective_hue_bins": 6.376989269157929
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.024221794679760933,
+          "peak_brightness_change_area": 0.1166720920138889,
+          "peak_paired_luma_area_product": 0.001624905008763259,
+          "peak_brightening_screen_area": 0.06787109375,
+          "peak_darkening_screen_area": 0.05221896701388889,
+          "peak_visible_brightening_fraction": 0.08657139891353241,
+          "peak_visible_darkening_fraction": 0.08084651560495938,
+          "peak_rgb_change_area": 0.3174641927083333,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.9456126651972555,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.8813559322033898,
+          "peak_untracked_brightness_change_screen_area": 0.10137261284722222,
+          "matched_brightness_change_p95": 0.08634556159377096,
+          "peak_matched_brightness_change_p95": 0.08939000964164734,
+          "peak_matched_brightening_screen_area": 0.004665798611111111,
+          "peak_matched_darkening_screen_area": 0.005588107638888889,
+          "mean_supported_area": 0.28548072749732906,
+          "median_speed_viewports_per_second": 0.06120086647570133,
+          "p95_speed_viewports_per_second": 0.793975207209587,
+          "mean_acceleration_viewports_per_second_squared": 0.10108200109181321,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "native": {
+        "colour": {
+          "mean_luma": 0.12704409122622262,
+          "mean_contrast": 0.19086780820119506,
+          "mean_saturation": 0.5750334541002909,
+          "mean_coloured_fraction": 0.5729392722800924,
+          "mean_effective_hue_bins": 4.83359277743673,
+          "temporal_effective_hue_bins": 6.702866125170467
+        },
+        "flashing": {
+          "peak_mean_luma_jump": 0.01751886121928692,
+          "peak_brightness_change_area": 0.10894097222222222,
+          "peak_paired_luma_area_product": 0.001212415510154743,
+          "peak_brightening_screen_area": 0.06599934895833333,
+          "peak_darkening_screen_area": 0.050726996527777776,
+          "peak_visible_brightening_fraction": 0.08114057028514257,
+          "peak_visible_darkening_fraction": 0.07383378442923101,
+          "peak_rgb_change_area": 0.2811957465277778,
+          "coherent_brightening_transitions": 0,
+          "coherent_darkening_transitions": 0,
+          "dominant_sampled_brightness_hz": 0.5,
+          "spectral_peak_fraction": 0.9531562292175084,
+          "frequency_resolution_hz": 0.5,
+          "nyquist_hz": 15.0,
+          "uniform_sampling": true
+        },
+        "motion": {
+          "available_transition_fraction": 0.8813559322033898,
+          "peak_untracked_brightness_change_screen_area": 0.0986056857638889,
+          "matched_brightness_change_p95": 0.08812097571790219,
+          "peak_matched_brightness_change_p95": 0.09469789266586304,
+          "peak_matched_brightening_screen_area": 0.004638671875,
+          "peak_matched_darkening_screen_area": 0.007758246527777778,
+          "mean_supported_area": 0.26420188969017094,
+          "median_speed_viewports_per_second": 0.06324100494384766,
+          "p95_speed_viewports_per_second": 0.9130787253379822,
+          "mean_acceleration_viewports_per_second_squared": 0.11587635285537326,
+          "mean_warp_query_displacement": null
+        }
+      },
+      "all60_metrics_path": "build/visual-loop/case024/round005/all60-metrics.json",
+      "assessment_path": "build/visual-loop/case024/round005/assessment.json",
+      "frame1_2_20_40_60": {
+        "source": [
+          {
+            "frame": 1,
+            "time": 0.03333333333333333,
+            "mean_luma": 0.006261886563152075,
+            "spatial_luma_std": 0.0016004606150090694,
+            "mean_rgb": [
+              0.004262983333319426,
+              0.006899661384522915,
+              0.005828863941133022
+            ],
+            "dark_fraction": 1.0,
+            "white_fraction": 0.0,
+            "max_rgb": 0.0117647061124444
+          },
+          {
+            "frame": 2,
+            "time": 0.06666666666666667,
+            "mean_luma": 0.012627437710762024,
+            "spatial_luma_std": 0.0029775286093354225,
+            "mean_rgb": [
+              0.00832873210310936,
+              0.013990900479257107,
+              0.011819190345704556
+            ],
+            "dark_fraction": 1.0,
+            "white_fraction": 0.0,
+            "max_rgb": 0.0235294122248888
+          },
+          {
+            "frame": 20,
+            "time": 0.6666666666666666,
+            "mean_luma": 0.14152449369430542,
+            "spatial_luma_std": 0.18417230248451233,
+            "mean_rgb": [
+              0.17488841712474823,
+              0.13582080602645874,
+              0.0997907817363739
+            ],
+            "dark_fraction": 0.2929144965277778,
+            "white_fraction": 0.002224392361111111,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 40,
+            "time": 1.3333333333333333,
+            "mean_luma": 0.15281108021736145,
+            "spatial_luma_std": 0.2615724503993988,
+            "mean_rgb": [
+              0.2277347296476364,
+              0.13703256845474243,
+              0.08847465366125107
+            ],
+            "dark_fraction": 0.4754503038194444,
+            "white_fraction": 0.0,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 60,
+            "time": 2.0,
+            "mean_luma": 0.10111090540885925,
+            "spatial_luma_std": 0.24508868157863617,
+            "mean_rgb": [
+              0.09516248106956482,
+              0.1067923977971077,
+              0.06234171614050865
+            ],
+            "dark_fraction": 0.6143391927083334,
+            "white_fraction": 0.0,
+            "max_rgb": 1.0
+          }
+        ],
+        "native": [
+          {
+            "frame": 1,
+            "time": 0.03333333333333333,
+            "mean_luma": 0.006261886563152075,
+            "spatial_luma_std": 0.0016004606150090694,
+            "mean_rgb": [
+              0.004262983333319426,
+              0.006899661384522915,
+              0.005828863941133022
+            ],
+            "dark_fraction": 1.0,
+            "white_fraction": 0.0,
+            "max_rgb": 0.0117647061124444
+          },
+          {
+            "frame": 2,
+            "time": 0.06666666666666667,
+            "mean_luma": 0.012627567164599895,
+            "spatial_luma_std": 0.0029776704031974077,
+            "mean_rgb": [
+              0.008328625001013279,
+              0.013991113752126694,
+              0.011819190345704556
+            ],
+            "dark_fraction": 1.0,
+            "white_fraction": 0.0,
+            "max_rgb": 0.0235294122248888
+          },
+          {
+            "frame": 20,
+            "time": 0.6666666666666666,
+            "mean_luma": 0.14942339062690735,
+            "spatial_luma_std": 0.1826080083847046,
+            "mean_rgb": [
+              0.17955607175827026,
+              0.14479555189609528,
+              0.10655489563941956
+            ],
+            "dark_fraction": 0.23963758680555555,
+            "white_fraction": 0.0016004774305555555,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 40,
+            "time": 1.3333333333333333,
+            "mean_luma": 0.15504364669322968,
+            "spatial_luma_std": 0.26368391513824463,
+            "mean_rgb": [
+              0.21679219603538513,
+              0.14305032789707184,
+              0.09200545400381088
+            ],
+            "dark_fraction": 0.4982367621527778,
+            "white_fraction": 0.002251519097222222,
+            "max_rgb": 1.0
+          },
+          {
+            "frame": 60,
+            "time": 2.0,
+            "mean_luma": 0.10062127560377121,
+            "spatial_luma_std": 0.23627091944217682,
+            "mean_rgb": [
+              0.11777111887931824,
+              0.09988716244697571,
+              0.057386696338653564
+            ],
+            "dark_fraction": 0.5842556423611112,
+            "white_fraction": 0.0,
+            "max_rgb": 1.0
+          }
+        ]
+      },
+      "claim_assessments": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 is almost black; a faint rectangular inset begins to emerge by frame10.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "structure2",
+          "claim": "By frame20 a bright red rim surrounds a dark rounded rectangular interior, with green/cyan inner bands and bright outer-edge accents.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "structure3",
+          "claim": "Frames30\u201340 develop several nested irregular rectangular loops, with an eye-like horizontal constriction near the centre by frame40.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Both acquire nested loops, but sourcecentralhorizontaleye atframe40 doesnotmatch native upright/vertical loop-and-panel geometry; partial broadnestedstructure only."
+        },
+        {
+          "id": "structure4",
+          "claim": "At frame60 the nested box arrangement persists on black with thinner red and green loops; it does not become the cellular starburst of the other cases.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "motion1",
+          "claim": "The initially faint box brightens and gains nested rims through roughly frames20\u201330, then broad brightness subsides.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "motion2",
+          "claim": "Inner rectangular loops bend and pinch horizontally around the centre while the larger outer frame remains recognizable.",
+          "points": 0,
+          "disposition": "mismatch",
+          "evidence": "Wrong deterministicdeformationdirection/topology: source innerloops pinchhorizontally; native centres extend/narrow vertically, especiallyframes40\u201360."
+        },
+        {
+          "id": "motion3",
+          "claim": "Supported median motion is0.0612viewport widths/second with p950.794; source correspondence exists for88.1% of transitions but covers only28.5% of pixels on average.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Median/p95 source0.061201/0.793975 versusnative0.063241/0.913079;transitionavailability0.881356same, meansupport0.285481/0.264202. Frozennumericmotion claim partial."
+        },
+        {
+          "id": "motion4",
+          "claim": "Luma evolves from0.00626 at frame1 to0.190 at frame30, then falls to0.101 at frame60 rather than remaining steadily increasing.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Rise-then-fall phase matches and first/finalroundedvalues largelyagree, but frame30native0.203669 versuspredicted0.189969 is materiallybrighter; partial."
+        },
+        {
+          "id": "colour1",
+          "claim": "Bright red outer/nested rims contrast with green/cyan horizontal inner bands, darker bluish interior material and black gaps.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "colour2",
+          "claim": "Mean encoded luma is0.121 with spatial contrast0.189.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Meanluma0.121486/0.127044 and contrast0.189109/0.190868 missfrozenprecision; partial."
+        },
+        {
+          "id": "colour3",
+          "claim": "The display is substantially coloured: mean saturation0.618 and mean effective hue bins4.58.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Saturation0.617999/0.575033 and spatialhuebins4.582395/4.833593 differ materially; both remain stronglycoloured, partial."
+        },
+        {
+          "id": "colour4",
+          "claim": "Late bright rim thickness/area declines, leaving black background around a smaller coloured nested arrangement rather than a uniform red wash.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Blackbackground andlate reductionagree, but finalretained arrangement is upright/tall innative versus morecompact horizontal source; contraction/area claimpartial."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Zero coherent brightening transitions are predicted in these60frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Zero coherent darkening transitions are predicted in these60frames.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Peak mean luma jump is0.0242 at frames17\u219218; broad phase changes are gradual rather than a whole-screen white flash.",
+          "points": 0,
+          "disposition": "mismatch",
+          "evidence": "Frozenlargestlumaeventsource17\u219218 at0.024222 differs fromnative19\u219220 at0.017519; bothtiming andamplitude mismatch, score0."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak brightness-change area is11.7% and peak RGB-change area31.7%, consistent with local changing coloured rims.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Peakbrightnessarea0.116672/0.108941 and RGBchangearea0.317464/0.281196 differ; localrimchange phenomenon agrees, numericpartial."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Persistent image rims accumulate into multiple nested rectangular layers instead of displaying only a moving waveform trace.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Different channel feedback displacements separate red outer loops from green/cyan inner bands.",
+          "points": 5,
+          "disposition": "supported",
+          "evidence": "All60 metrics andpairedtemporal sheets support this visibleclaim; no pixelperfect orcompletefeedbackaccuracy inference."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Warp blur gradients deform retained rectangular edges into the central eye-like narrowing visible around frame40.",
+          "points": 0,
+          "disposition": "mismatch",
+          "evidence": "Predictedcentralhorizontaleye-like narrowing aroundframe40 is absent fromnative retained-imagegeometry; actualcentre remains upright/vertical."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Some retained nested loops persist into frame60 while outer brightness recedes, giving a layered contracting appearance.",
+          "points": 2.5,
+          "disposition": "partial",
+          "evidence": "Nestedloops persist andbroadbrightness recedes inboth, but their finalextent/orientation is materiallydifferent, partial persistence only."
+        }
+      ],
+      "description_sha256": "04b6f6534b97ee5b20e9a3362376166d12bad53c85f3172285778556e1c71305",
+      "assessment_sha256": "76bb9d3963fc6f929ec9bf3081e66a4bb322d7d917209973f7384cbbff3f69a0"
+    }
+  ],
+  "root_verified_all_claims_sealed_before_first_capture": true,
+  "goal_met": false,
+  "root_verified_source_input_binary_preset_hashes": 188
+}

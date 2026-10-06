@@ -300,3 +300,29 @@ The next unused random queue entries are022–024. Preserve60frames and freeze
 all predictions/claims before any fresh native capture. No model changes until
 all three are assessed. Keep correctedFPScontext and explicitly declared8-bit
 point grid. The remaining fine-detail residuals stay documented.
+
+## Round005: latest identical2.3.8 AAR, three fresh cases
+
+Cases022–024 completed under unchanged cedf001c:92.5,77.5,65. All188 pinned
+identities and60 frozen claims were independently checked. Claims precede the
+first native capture; each capture advances60frames with inactive144pStandard
+trails, one indexed preset and no captured shader errors. Actual per-stage
+program selection is not independently certified by absence of error logs.
+No case reaches100; the three-perfect gate remains unmet.
+
+022's dominant structure, motion phases, palette and feedback match closely,
+with small numerical differences.023 matches ribbons and the dense-to-sparse
+phase but misses retained texture and peak-change timing (source51→52 versus
+native3→4). Its provisional80 assessment was corrected to77.5 before final seal;
+the draft and revision trace are preserved, with original predictions unchanged.
+024 matches early boxes but predicts horizontal inner narrowing where native
+output develops tall upright loops. Preserve this critical trajectory miss.
+Evidence: `tools/milk-analyzer/fixtures/visual-loop-round005-2026-10-06.json`.
+
+Investigate earliest errors and their propagation before another fresh batch.
+024 begins with only three1-level channel differences in frame2, then feedback
+amplifies them; this is not evidence of an initial90-degree coordinate reversal.
+Native custom shaders declare highpfloat but default sampler2D precision, and
+blur/primitive fragment shaders declare mediumpfloat. Their actual precision
+must be measured with bounded controls, not assumed from the qualifiers alone.
+No native patch, full-corpus render or production collection change is requested.
