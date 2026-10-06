@@ -12,10 +12,20 @@ from preset_lab.inventory import read_index
 
 from audience_policy import labels_for_intensity
 from audience_ranking import relative_activity_ranks
-from core_backend import reusable_result
+from core_backend import reusable_result, core_run_identity
+
+
+def verify_run_identity(metadata,identity):
+    required={'identity','aar_sha256','model_sha256','python_hashes','runtime_hashes',
+              'runner_java_sha256','clock_source_sha256','profile','device','device_fingerprint'}
+    if not isinstance(metadata,dict) or not required.issubset(metadata):
+        raise ValueError('Complete review run provenance required')
+    if identity!=metadata['identity'] or core_run_identity(metadata)!=metadata['identity']:
+        raise ValueError('Review run identity differs from recorded provenance')
 
 
 def export_collection(corpus, results, output, *, identity, weights, run_metadata=None):
+    if run_metadata is not None:verify_run_identity(run_metadata,identity)
     rows=[];paths=set()
     for preset in corpus:
         name=preset['preset'];sha=preset['sha256'];row=results.get(sha)
@@ -24,7 +34,8 @@ def export_collection(corpus, results, output, *, identity, weights, run_metadat
         paths.add(name)
         if not row or not reusable_result(row,identity) or row.get('preset')!=name or row.get('sha256')!=sha:
             raise ValueError('Complete matching score required: '+name)
-        rows.append({'preset':name,'sha256':sha,'score':row['score'],'labels':labels_for_intensity(row['score'])})
+        rows.append({'preset':name,'sha256':sha,'identity':row['identity'],
+                     'score':row['score'],'labels':labels_for_intensity(row['score'])})
     if not rows:raise ValueError('Empty corpus cannot be a complete review collection')
     for row,rank in zip(rows,relative_activity_ranks([r['score'] for r in rows])):row['rank']=rank
     groups={'all':rows,'chill':[r for r in rows if 'Chill' in r['labels']],
@@ -52,6 +63,8 @@ def export_collection(corpus, results, output, *, identity, weights, run_metadat
 def verify_review_assets(output, aar):
     output=Path(output);aar=Path(aar)
     manifest=json.loads((output/'audience-review.json').read_text())
+    metadata=manifest['run_metadata']
+    verify_run_identity(metadata,manifest['identity'])
     if hashlib.sha256(aar.read_bytes()).hexdigest()!=manifest['run_metadata']['aar_sha256']:
         raise ValueError('Review AAR identity differs')
     with zipfile.ZipFile(aar) as archive:
@@ -72,6 +85,8 @@ def verify_review_assets(output, aar):
             or len(rows)!=len(expected) or {r['preset']:r['sha256'] for r in rows}!=expected):
         raise ValueError('Review collection is not the complete published corpus')
     for row in rows:
+        if row.get('identity')!=metadata['identity']:
+            raise ValueError('Review preset score belongs to another run identity')
         if not reusable_result({'identity':'verified','status':'scored','score':row['score']},'verified'):
             raise ValueError('Invalid review intensity')
         if row['labels']!=labels_for_intensity(row['score']):raise ValueError('Score labels differ from bands')

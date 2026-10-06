@@ -8,6 +8,17 @@ import pytest
 from audience_export import export_collection, verify_review_assets
 
 
+def run_metadata(aar,**updates):
+    facts={'aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest(),
+           'model_sha256':'a'*64,'python_hashes':{'core_corpus.py':'b'*64},
+           'runner_java_sha256':'c'*64,'clock_source_sha256':'d'*64,
+           'runtime_hashes':{'libprojectmtv.so':'e'*64},
+           'profile':{'fps':30,'frames':420,'warmup':60,'width':128,'height':72},
+           'device':'fixture-device','device_fingerprint':'fixture-fingerprint'}
+    facts.update(updates)
+    return {'identity':hashlib.sha256(json.dumps(facts,sort_keys=True).encode()).hexdigest(),**facts}
+
+
 def inputs():
     scores=[0,25,30,70,75,100]
     corpus=[{'preset':f'{i}.milk','sha256':str(i)} for i in range(len(scores))]
@@ -35,7 +46,7 @@ def test_incomplete_or_changed_results_cannot_be_exported(tmp_path,failure):
     assert not (tmp_path/'audience-review.json').exists()
 
 
-@pytest.mark.parametrize('tamper',[None,'membership','memory_weight','extra_weight_column','score','corpus','rank','bands','aliases'])
+@pytest.mark.parametrize('tamper',[None,'membership','memory_weight','extra_weight_column','score','corpus','rank','bands','aliases','run_identity','run_model','run_runtime','row_identity'])
 def test_verify_checks_real_corpus_scores_and_membership_even_with_updated_checksums(tmp_path,tamper):
     corpus,results=inputs();aar=tmp_path/'core.aar'
     with zipfile.ZipFile(aar,'w') as archive:
@@ -43,8 +54,9 @@ def test_verify_checks_real_corpus_scores_and_membership_even_with_updated_check
             payload=row['preset'].encode();row['sha256']=hashlib.sha256(payload).hexdigest()
             archive.writestr('assets/presets/'+row['preset'],payload)
         archive.writestr('assets/presets.idx',''.join(f"{row['preset']}\t{i+1}\n" for i,row in enumerate(corpus)))
-    results={row['sha256']:{'preset':row['preset'],'sha256':row['sha256'],'identity':'run','status':'scored','score':i*20} for i,row in enumerate(corpus)}
-    output=tmp_path/'assets';manifest=export_collection(corpus,results,output,identity='run',weights={row['preset']:i+1 for i,row in enumerate(corpus)},run_metadata={'aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest()})
+    metadata=run_metadata(aar)
+    results={row['sha256']:{'preset':row['preset'],'sha256':row['sha256'],'identity':metadata['identity'],'status':'scored','score':i*20} for i,row in enumerate(corpus)}
+    output=tmp_path/'assets';manifest=export_collection(corpus,results,output,identity=metadata['identity'],weights={row['preset']:i+1 for i,row in enumerate(corpus)},run_metadata=metadata)
     if tamper=='membership':
         path=output/'preset-genres/genres/ambient.idx';path.write_text('5.milk\t0\n')
         manifest['checksums']['preset-genres/genres/ambient.idx']=hashlib.sha256(path.read_bytes()).hexdigest()
@@ -59,6 +71,10 @@ def test_verify_checks_real_corpus_scores_and_membership_even_with_updated_check
     if tamper=='rank':manifest['presets'][0]['rank']=float('nan')
     if tamper=='bands':manifest['bands']['Chill']=[0,100]
     if tamper=='aliases':manifest['core_aliases']['chill']='jazz'
+    if tamper=='run_identity':manifest['run_metadata']['identity']='f'*64
+    if tamper=='run_model':manifest['run_metadata']['model_sha256']='f'*64
+    if tamper=='run_runtime':manifest['run_metadata']['runtime_hashes']['libprojectmtv.so']='f'*64
+    if tamper=='row_identity':manifest['presets'][0]['identity']='f'*64
     (output/'audience-review.json').write_text(json.dumps(manifest))
     if tamper:
         with pytest.raises(ValueError):verify_review_assets(output,aar)
@@ -76,13 +92,11 @@ def cli_run(tmp_path):
             archive.writestr('assets/presets/'+name,raw);cases.append({'preset':name,'sha256':sha})
         archive.writestr('assets/presets.idx','a.milk\t0\nb.milk\t0\n')
     (run/'corpus.json').write_text(json.dumps({'cases':cases}))
-    (run/'run-identity.json').write_text(json.dumps({
-        'identity':'run','aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest(),
-        'model_sha256':hashlib.sha256(model.read_bytes()).hexdigest(),
-        'profile':{'fps':30,'frames':420,'warmup':60}}))
+    metadata=run_metadata(aar,model_sha256=hashlib.sha256(model.read_bytes()).hexdigest())
+    (run/'run-identity.json').write_text(json.dumps(metadata))
     for row in cases:
         (run/'results'/(row['sha256']+'.json')).write_text(json.dumps({**row,
-            'identity':'run','status':'scored','score':20,'features':[0,0,0,0],
+            'identity':metadata['identity'],'status':'scored','score':20,'features':[0,0,0,0],
             'descriptors':{'frames_measured':360,'flashing':{
                 'coherent_brightening_transitions':0,'coherent_darkening_transitions':0,
                 'peak_paired_luma_area_product':0},'motion':{
@@ -135,3 +149,15 @@ runpy.run_path(path,run_name="__main__")
                             capture_output=True,text=True,timeout=20)
     assert verified.returncode==0,verified.stderr
     assert json.loads(verified.stdout)['status']=='verified'
+
+
+def test_cli_rejects_stale_provenance_before_exporting_assets(tmp_path):
+    command,run,aar,output,script=cli_run(tmp_path)
+    path=run/'run-identity.json'
+    metadata=json.loads(path.read_text())
+    metadata['python_hashes']['core_corpus.py']='f'*64
+    path.write_text(json.dumps(metadata))
+    result=subprocess.run(command,capture_output=True,text=True,timeout=20)
+    assert result.returncode!=0
+    assert not output.exists()
+    assert 'identity' in result.stderr.lower()

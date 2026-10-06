@@ -115,3 +115,18 @@ hash and refuses mismatched or absent-ABI inputs before device access. Focused
 negative controls intercept any adb attempt; the matching pair passes. This is a
 runner provenance repair. The completed audit independently checked its unchanged
 ARM64 AAR/library relationship and does not inherit this ARMv7 CLI's defect.
+
+
+Further review identified missing run-provenance consistency and late-only model
+hashing. Both were reproduced and repaired: review metadata is canonically hashed
+and compared with the bundle/per-row identities; source module hashes are captured
+before evaluation, checked against import state and rechecked before completion.
+Fresh processes remain required after code changes. Focused90tests pass.
+
+Three review suggestions to consume live waveform/legacy display variables conflict
+with the current source44 native consumers, which use static PresetState and do not
+receive a per-frame write-back. Changing only the predictor would break target
+fidelity. Source comments now state that policy, and separate native compatibility
+handoffs preserve exact examples, source hashes and bounded controls. Reviewer
+acceptance or explicit maintainer disposition remains pending; the predictor's
+behavior and old audit grades are unchanged.

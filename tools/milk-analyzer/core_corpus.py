@@ -13,7 +13,7 @@ from pathlib import Path
 import numpy as np
 
 from audience_policy import labels_for_intensity
-from core_backend import read_header, read_frames, reusable_result, write_selection_overlay
+from core_backend import read_header, read_frames, reusable_result, write_selection_overlay, core_run_identity
 from descriptors import DescriptorStream, LUMA
 from intensity_calibration import predict_intensity
 from intensity_evidence import combine_activity, coherent_flash_proxy
@@ -138,7 +138,7 @@ def main():
                    'clock_source_sha256':digest(Path(__file__).with_name('core_backend_clock.cpp')),
                    'profile':{'frames':420,'warmup':60,'fps':30,'width':128,'height':72},'device':args.device,
                    'runtime_hashes':runtime_hashes,'device_fingerprint':fingerprint}
-    identity=hashlib.sha256(json.dumps(identity_data,sort_keys=True).encode()).hexdigest()
+    identity=core_run_identity(identity_data)
     atomic_json(output/'run-identity.json',{'identity':identity,**identity_data})
     with zipfile.ZipFile(args.aar) as archive:
         cases=[{'preset':name.removeprefix('assets/presets/'),'sha256':hashlib.sha256(archive.read(name)).hexdigest()}

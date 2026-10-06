@@ -632,3 +632,27 @@ or an AAR missing that ABI fail immediately. Its run identity records the verifi
 native hash; deployed copies are still checked separately. The ARM64 beta scorer
 already performs its corresponding AAR/library check. This does not replace
 checking Java/JNI compatibility, clock/audio settings or actual rendering.
+
+
+Review verification recomputes the canonical core-corpus identity from recorded
+model, code, runner, runtime, profile and device facts. The top-level, metadata and
+per-preset score identities must agree. Older review exports without complete
+provenance/per-row identity must be re-exported from a validated original run;
+this does not require new captures. Identity consistency is not a signature or
+proof that declared measurements are authentic. Score arithmetic still needs the
+separate run audit. This verification remains usable without SciPy.
+
+Forecasts record the source module hash map before evaluation, compare it with
+the import snapshot, and recheck it at completion. Edits/rebuild checkouts affecting
+Python model files invalidate the forecast instead of attributing old code to new
+file hashes. Run fresh Python processes after code changes; importing against an
+already stale dependency cache is unsupported. Start/end checks are not an OS-level
+immutable snapshot and do not claim to detect a file changed and restored between
+checks. Batch freezes and isolated worktrees remain required.
+
+Current published core through source44 deliberately remains the prediction target:
+built-in waveform mode/dot/thick/additive and legacy gamma/echo/filter consumers
+read static PresetState despite live EEL counterparts. Switching only the predictor
+to those live values would mismatch the AAR. MilkDrop3 consumes live controls, so
+these native compatibility gaps have separate engineering handoffs in Downloads;
+a future native repair needs a versioned predictor policy and fresh controls.

@@ -152,3 +152,12 @@ Numerical corpus tools must use the native library extracted from the same suppl
 AAR. The ARMv7 runner checks that relationship before device access and records the
 native checksum; the ARM64 beta runner has its own equivalent check. Comparing an
 uploaded standalone library only with its local copy is insufficient release evidence.
+
+
+Review bundles also verify complete run provenance and each score's run identity.
+Forecasts freeze model file hashes before calculation and reject changes after
+import or during evaluation. Use a fresh process after source changes. These checks
+protect identity consistency; they are not signatures or whole-program correctness
+proofs. The source model currently follows the published engine's static waveform
+and legacy display controls; corresponding MilkDrop compatibility investigations
+must change the engine before a new prediction policy is adopted.

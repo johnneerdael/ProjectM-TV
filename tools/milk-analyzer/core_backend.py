@@ -4,11 +4,17 @@ Native measurements are execution evidence, not independent source forecasts.
 """
 import math
 import hashlib
+import json
 import struct
 import zipfile
 from numbers import Real
 
 import numpy as np
+
+
+def core_run_identity(metadata):
+    facts={key:value for key,value in metadata.items() if key!='identity'}
+    return hashlib.sha256(json.dumps(facts,sort_keys=True,allow_nan=False).encode()).hexdigest()
 
 
 def _read_exact(stream, count):

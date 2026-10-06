@@ -56,6 +56,10 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     values=source['values'];width,height=scene['viewport']
     if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
         raise ValueError('unknown builtin wave line rendering profile')
+    # Published core through source44 reads these controls from PresetState in
+    # Waveform::Draw/DrawPrepared. PerFrameUpdate never copies their live EEL
+    # counterparts back to state. Model that engine, not ideal MilkDrop behavior;
+    # a future native compatibility repair requires a separately versioned policy.
     dot=bool(_scalar(values,'bWaveDots',0,'bool'))
     scaled_dots=dot and line_rendering_profile==PROFILE
     if scaled_dots:

@@ -90,6 +90,15 @@ def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
 
 
+def model_file_hashes():
+    return {path.name:hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in sorted(Path(__file__).parent.glob('*.py'))
+            if not path.name.startswith('test_')}
+
+
+_MODEL_IMPORT_HASHES=model_file_hashes()
+
+
 def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
     path=Path(path);reader=Path(reader).resolve()
     raw=path.read_bytes()
@@ -109,6 +118,9 @@ def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
 def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     compatibility: dict, random_inputs=None, noise_bank=None, materials=None,
                     retain_surfaces=True, on_frame=None) -> dict:
+    model_hashes=model_file_hashes()
+    if model_hashes!=_MODEL_IMPORT_HASHES:
+        raise ValueError('forecast model files changed since import; start a fresh process')
     source=copy.deepcopy(source);audio=copy.deepcopy(audio);domain=copy.deepcopy(domain)
     random_inputs=copy.deepcopy(random_inputs)
     descriptors=DescriptorStream(warmup_frames=domain.get('descriptor_warmup_frames',0),
@@ -289,9 +301,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             on_frame(predicted)
         frames.append(predicted if retain_surfaces else
                       {key:value for key,value in predicted.items() if key not in {'display','feedback','warp_uv'}})
-    modules = sorted(Path(__file__).parent.glob('*.py'))
-    model_hashes = {path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in modules
-                   if not path.name.startswith('test_')}
+    if model_file_hashes()!=model_hashes:
+        raise ValueError('forecast model files changed during evaluation')
     return dict(status='computed',frames=frames,domain=domain,stage_resolution=pipeline.stage_resolution,
         descriptors=descriptors.report(),
         uses_rendered_reference=False,appearance_accuracy_verified=False,

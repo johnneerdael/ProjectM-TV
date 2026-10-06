@@ -487,6 +487,32 @@ def test_callback_cannot_mutate_the_declared_domain_during_forecast():
     assert result['domain']==original
 
 
+@pytest.mark.parametrize('when',['during','before'])
+def test_forecast_rejects_model_file_changes_during_evaluation(tmp_path,monkeypatch,when):
+    module=importlib.import_module('forecast')
+    source=native(BASE)
+    model_file=tmp_path/'forecast.py';model_file.write_text('model version one')
+    monkeypatch.setattr(module,'__file__',str(model_file))
+    expected={'forecast.py':hashlib.sha256(model_file.read_bytes()).hexdigest()}
+    monkeypatch.setattr(module,'_MODEL_IMPORT_HASHES',expected,raising=False)
+    def callback(frame):
+        model_file.write_text('model version two')
+    if when=='before':callback(None)
+    with pytest.raises(ValueError,match='model.*changed'):
+        predict(source,on_frame=callback)
+
+
+def test_forecast_records_the_unchanged_pre_execution_model_hashes(tmp_path,monkeypatch):
+    module=importlib.import_module('forecast')
+    model_file=tmp_path/'forecast.py';model_file.write_text('frozen model')
+    monkeypatch.setattr(module,'__file__',str(model_file))
+    expected={'forecast.py':hashlib.sha256(model_file.read_bytes()).hexdigest()}
+    monkeypatch.setattr(module,'_MODEL_IMPORT_HASHES',expected,raising=False)
+    result=predict(native(BASE))
+    assert result['provenance']['model_modules']==expected
+    assert result['provenance']['model_sha256']==module.digest(expected)
+
+
 def test_streamed_forecast_returns_source_colour_flash_and_motion_descriptors():
     source=native(BASE)
     result=predict(source,retain_surfaces=False)

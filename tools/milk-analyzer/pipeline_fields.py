@@ -234,6 +234,10 @@ class SourcePipeline:
         if composite_polar is None:composite_polar=composite['polar']
         if self.composite_kind=='legacy_composite':
             from legacy_composite import legacy_display
+            # Current VideoEcho/Filters read static PresetState, and Filters is
+            # allocated from file flags. Live main controls are not written back
+            # by the native engine; consuming motion_state here would disagree
+            # with published core through source44. Preserve its target policy.
             displayed=legacy_display(drawn,values=self.source_values,time=time,
                                      hue_offsets=hue_offsets,quantize=self.quantize)
         elif self.composite_tree is None:
