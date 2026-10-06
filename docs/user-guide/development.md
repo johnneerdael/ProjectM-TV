@@ -23,7 +23,10 @@ checks repeat/bilinear samples and named-image qualifiers across instances and
 context recreation, and separates blur mentions from actual allocation. Blur
 controls exercise the production bounds and progressive float32 uniform producer.
 Warp controls execute the shared production vertex source and read transformed UVs
-for signed negative unit-exponent zoom and ordinary positive transforms.
+for signed negative unit-exponent zoom and ordinary positive transforms. Native GL regressions inherit
+the engine's GL link dependencies; Linux uses the harness-selected EGL target for
+context creation. Both ordinary system discovery and explicit EGL/GLES link-flag
+overrides are supported without depending on a child-directory imported target. Sampling fixtures allocate storage matching their upload format and check GL errors immediately; unit-slope, binary-exact coordinates keep strict pixel oracles portable across the tested drivers.
 
 ## Core rendering policies
 
