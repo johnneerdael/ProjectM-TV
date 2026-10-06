@@ -1,0 +1,17 @@
+{
+  "users": [
+    "0"
+  ],
+  "package_before": {
+    "0": "package:nl.neerdael.projectmtv.predictordefects.profile"
+  },
+  "owned_active_workers": [],
+  "uninstall_result": "Success",
+  "package_after": "",
+  "own_guest_namespace_removed": true,
+  "preset_property": "",
+  "foreground": "com.spocky.projengmenu/.ui.home.MainActivity",
+  "listeners": "nl.neerdael.projectmtv/com.example.projectm.visualizer.TrackListenerService:com.google.android.tvrecommendations/com.google.android.tvrecommendations.NotificationsService:com.spocky.projengmenu/com.spocky.projengmenu.services.notification.NotificationListener",
+  "power_awake": true,
+  "raw_sha256": "ac79af780d35a700b21008497f241ac8f063f7c879550e1137e085c94f9a15a4"
+}

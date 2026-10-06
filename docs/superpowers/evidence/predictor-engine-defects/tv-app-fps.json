@@ -1,0 +1,231 @@
+{
+  "user": 0,
+  "serial": "192.168.50.80:5555",
+  "initial_foreground": "com.spocky.projengmenu/.ui.home.MainActivity",
+  "initial_preset_property": "",
+  "audio_scope": "Milkbeatpausedspeed0; do not start/changeplayback. Silence/ambienthost audio only. Compare STATS audio observed, noliveplayingmusic claim.",
+  "restored_preset_property": "",
+  "final_foreground_component": "com.spocky.projengmenu/.ui.home.MainActivity",
+  "listeners_restored": true,
+  "matched_target_presets": true,
+  "cases": [
+    {
+      "case": "negative",
+      "phase": "before",
+      "package": "nl.neerdael.projectmtv",
+      "pid": 2004,
+      "duration_seconds": 21.458422899246216,
+      "stats_rows": [
+        "10-06 13:59:16.695  2004  2043 I VisualizerRenderer: STATS fps=31.3 surface=1920x1080 audio=0.000",
+        "10-06 13:59:21.768  2004  2043 I VisualizerRenderer: STATS fps=30.1 surface=1920x1080 audio=0.000",
+        "10-06 13:59:26.900  2004  2043 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 13:59:31.967  2004  2043 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000"
+      ],
+      "benchmark_rows": [
+        "10-06 13:59:15.607  2004  2043 I projectM-Native: BENCHMARK preset='Hexcollie - This is where we begin stripped.milk' (debug.projectmtv.preset), auto change off"
+      ],
+      "load_rows": [
+        "10-06 13:59:15.644  2004  2043 I projectM-Native: LOAD preset='Hexcollie - This is where we begin stripped.milk' ms=29 smooth=0 size=1920x1080 weight_mb=0 shader_kb=0.0 loops=0 programs_cached=10 programs_compiled=0 pool_mb=0 avail_drop_mb=11 rss_growth_mb=26"
+      ],
+      "gl_renderer": [
+        "10-06 13:59:14.917  2004  2043 I VisualizerRenderer: GL: OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479 | Mali-G52"
+      ],
+      "audio_notifications": [
+        "10-06 13:59:16.695  2004  2043 I VisualizerRenderer: STATS fps=31.3 surface=1920x1080 audio=0.000",
+        "10-06 13:59:21.768  2004  2043 I VisualizerRenderer: STATS fps=30.1 surface=1920x1080 audio=0.000",
+        "10-06 13:59:26.900  2004  2043 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 13:59:31.967  2004  2043 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000"
+      ],
+      "fps_excluding_first_interval": [
+        30.1,
+        30.0,
+        30.0
+      ]
+    },
+    {
+      "case": "negative",
+      "phase": "after",
+      "package": "nl.neerdael.projectmtv.predictordefects.profile",
+      "pid": 2167,
+      "duration_seconds": 21.33021903038025,
+      "stats_rows": [
+        "10-06 13:59:39.028  2167  2215 I VisualizerRenderer: STATS fps=31.8 surface=1920x1080 audio=0.000",
+        "10-06 13:59:44.133  2167  2215 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 13:59:49.200  2167  2215 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 13:59:54.304  2167  2215 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000"
+      ],
+      "benchmark_rows": [
+        "10-06 13:59:37.953  2167  2215 I projectM-Native: BENCHMARK preset='Hexcollie - This is where we begin stripped.milk' (debug.projectmtv.preset), auto change off"
+      ],
+      "load_rows": [
+        "10-06 13:59:37.991  2167  2215 I projectM-Native: LOAD preset='Hexcollie - This is where we begin stripped.milk' ms=36 smooth=0 size=1920x1080 weight_mb=0 shader_kb=0.0 loops=0 programs_cached=10 programs_compiled=0 pool_mb=0 avail_drop_mb=18 rss_growth_mb=26"
+      ],
+      "gl_renderer": [
+        "10-06 13:59:37.326  2167  2215 I VisualizerRenderer: GL: OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479 | Mali-G52"
+      ],
+      "audio_notifications": [
+        "10-06 13:59:39.028  2167  2215 I VisualizerRenderer: STATS fps=31.8 surface=1920x1080 audio=0.000",
+        "10-06 13:59:44.133  2167  2215 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 13:59:49.200  2167  2215 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 13:59:54.304  2167  2215 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000"
+      ],
+      "fps_excluding_first_interval": [
+        30.0,
+        30.0,
+        29.9
+      ]
+    },
+    {
+      "case": "blur",
+      "phase": "before",
+      "package": "nl.neerdael.projectmtv",
+      "pid": 2351,
+      "duration_seconds": 21.107383966445923,
+      "stats_rows": [
+        "10-06 14:00:01.474  2351  2398 I VisualizerRenderer: STATS fps=31.1 surface=1920x1080 audio=0.000",
+        "10-06 14:00:06.546  2351  2398 I VisualizerRenderer: STATS fps=30.1 surface=1920x1080 audio=0.000",
+        "10-06 14:00:11.645  2351  2398 I VisualizerRenderer: STATS fps=30.1 surface=1920x1080 audio=0.000",
+        "10-06 14:00:16.748  2351  2398 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000"
+      ],
+      "benchmark_rows": [
+        "10-06 14:00:00.366  2351  2398 I projectM-Native: BENCHMARK preset='Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk' (debug.projectmtv.preset), auto change off"
+      ],
+      "load_rows": [
+        "10-06 14:00:00.435  2351  2398 I projectM-Native: LOAD preset='Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk' ms=63 smooth=0 size=1920x1080 weight_mb=0 shader_kb=0.5 loops=0 programs_cached=10 programs_compiled=2 pool_mb=0 avail_drop_mb=2 rss_growth_mb=29"
+      ],
+      "gl_renderer": [
+        "10-06 13:59:59.655  2351  2398 I VisualizerRenderer: GL: OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479 | Mali-G52"
+      ],
+      "audio_notifications": [
+        "10-06 14:00:01.474  2351  2398 I VisualizerRenderer: STATS fps=31.1 surface=1920x1080 audio=0.000",
+        "10-06 14:00:06.546  2351  2398 I VisualizerRenderer: STATS fps=30.1 surface=1920x1080 audio=0.000",
+        "10-06 14:00:11.645  2351  2398 I VisualizerRenderer: STATS fps=30.1 surface=1920x1080 audio=0.000",
+        "10-06 14:00:16.748  2351  2398 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000"
+      ],
+      "fps_excluding_first_interval": [
+        30.1,
+        30.1,
+        29.9
+      ]
+    },
+    {
+      "case": "blur",
+      "phase": "after",
+      "package": "nl.neerdael.projectmtv.predictordefects.profile",
+      "pid": 2494,
+      "duration_seconds": 21.363771200180054,
+      "stats_rows": [
+        "10-06 14:00:23.391  2494  2529 I VisualizerRenderer: STATS fps=31.0 surface=1920x1080 audio=0.000",
+        "10-06 14:00:28.495  2494  2529 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 14:00:33.562  2494  2529 I VisualizerRenderer: STATS fps=30.5 surface=1920x1080 audio=0.000",
+        "10-06 14:00:38.628  2494  2529 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000"
+      ],
+      "benchmark_rows": [
+        "10-06 14:00:22.254  2494  2529 I projectM-Native: BENCHMARK preset='Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk' (debug.projectmtv.preset), auto change off"
+      ],
+      "load_rows": [
+        "10-06 14:00:22.340  2494  2529 I projectM-Native: LOAD preset='Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk' ms=84 smooth=0 size=1920x1080 weight_mb=0 shader_kb=0.5 loops=0 programs_cached=10 programs_compiled=2 pool_mb=0 avail_drop_mb=27 rss_growth_mb=29"
+      ],
+      "gl_renderer": [
+        "10-06 14:00:21.614  2494  2529 I VisualizerRenderer: GL: OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479 | Mali-G52"
+      ],
+      "audio_notifications": [
+        "10-06 14:00:23.391  2494  2529 I VisualizerRenderer: STATS fps=31.0 surface=1920x1080 audio=0.000",
+        "10-06 14:00:28.495  2494  2529 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 14:00:33.562  2494  2529 I VisualizerRenderer: STATS fps=30.5 surface=1920x1080 audio=0.000",
+        "10-06 14:00:38.628  2494  2529 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000"
+      ],
+      "fps_excluding_first_interval": [
+        30.0,
+        30.5,
+        30.0
+      ]
+    },
+    {
+      "case": "shape",
+      "phase": "before",
+      "package": "nl.neerdael.projectmtv",
+      "pid": 3197,
+      "duration_seconds": 23.517637014389038,
+      "stats_rows": [
+        "10-06 14:03:10.148  3197  3247 I VisualizerRenderer: STATS fps=30.9 surface=1920x1080 audio=0.000",
+        "10-06 14:03:15.190  3197  3247 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000",
+        "10-06 14:03:20.328  3197  3247 I VisualizerRenderer: STATS fps=29.8 surface=1920x1080 audio=0.000",
+        "10-06 14:03:25.452  3197  3247 I VisualizerRenderer: STATS fps=30.2 surface=1920x1080 audio=0.000"
+      ],
+      "benchmark_rows": [
+        "10-06 14:03:09.036  3197  3247 I projectM-Native: BENCHMARK preset='widest swing.milk' (debug.projectmtv.preset), auto change off"
+      ],
+      "load_rows": [
+        "10-06 14:03:09.125  3197  3247 I projectM-Native: LOAD preset='widest swing.milk' ms=88 smooth=0 size=1920x1080 weight_mb=0 shader_kb=2.6 loops=0 programs_cached=10 programs_compiled=2 pool_mb=0 avail_drop_mb=-4 rss_growth_mb=30"
+      ],
+      "gl_renderer": [
+        "10-06 14:03:08.395  3197  3247 I VisualizerRenderer: GL: OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479 | Mali-G52"
+      ],
+      "audio_notifications": [
+        "10-06 14:03:10.148  3197  3247 I VisualizerRenderer: STATS fps=30.9 surface=1920x1080 audio=0.000",
+        "10-06 14:03:15.190  3197  3247 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000",
+        "10-06 14:03:20.328  3197  3247 I VisualizerRenderer: STATS fps=29.8 surface=1920x1080 audio=0.000",
+        "10-06 14:03:25.452  3197  3247 I VisualizerRenderer: STATS fps=30.2 surface=1920x1080 audio=0.000"
+      ],
+      "fps_excluding_first_interval": [
+        29.9,
+        29.8,
+        30.2
+      ]
+    },
+    {
+      "case": "shape",
+      "phase": "after",
+      "package": "nl.neerdael.projectmtv.predictordefects.profile",
+      "pid": 3458,
+      "duration_seconds": 23.867089986801147,
+      "stats_rows": [
+        "10-06 14:03:34.515  3458  3543 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 14:03:39.587  3458  3543 I VisualizerRenderer: STATS fps=30.2 surface=1920x1080 audio=0.000",
+        "10-06 14:03:44.687  3458  3543 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000",
+        "10-06 14:03:49.759  3458  3543 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000"
+      ],
+      "benchmark_rows": [
+        "10-06 14:03:33.388  3458  3543 I projectM-Native: BENCHMARK preset='widest swing.milk' (debug.projectmtv.preset), auto change off"
+      ],
+      "load_rows": [
+        "10-06 14:03:33.446  3458  3543 I projectM-Native: LOAD preset='widest swing.milk' ms=57 smooth=0 size=1920x1080 weight_mb=0 shader_kb=2.6 loops=0 programs_cached=10 programs_compiled=2 pool_mb=0 avail_drop_mb=9 rss_growth_mb=26"
+      ],
+      "gl_renderer": [
+        "10-06 14:03:32.759  3458  3543 I VisualizerRenderer: GL: OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479 | Mali-G52"
+      ],
+      "audio_notifications": [
+        "10-06 14:03:34.515  3458  3543 I VisualizerRenderer: STATS fps=30.0 surface=1920x1080 audio=0.000",
+        "10-06 14:03:39.587  3458  3543 I VisualizerRenderer: STATS fps=30.2 surface=1920x1080 audio=0.000",
+        "10-06 14:03:44.687  3458  3543 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000",
+        "10-06 14:03:49.759  3458  3543 I VisualizerRenderer: STATS fps=29.9 surface=1920x1080 audio=0.000"
+      ],
+      "fps_excluding_first_interval": [
+        30.2,
+        29.9,
+        29.9
+      ]
+    }
+  ],
+  "raw_results_sha256": {
+    "app-fps-matched-results.json": "cc4c6e03abf285be8b22da2eaf01db36600505cd1c77d41f9797dc75ae85c5f8",
+    "app-fps-exact-shape-results.json": "1ca3931b57e2ce6c62ff4ba73ec4c2fc079ace866913b6160f664d7a8caad7e0"
+  },
+  "profile_apk_sha256": "510907f6dfb6cf37194863a669d387a08fc433039ce8b003b5881e67f12df6c7",
+  "production_preferences_restored": true,
+  "normal_app_preference_change": {
+    "update_checked_at": [
+      [
+        "long",
+        "1791278017002"
+      ],
+      [
+        "long",
+        "1791294877430"
+      ]
+    ]
+  },
+  "warmup_scope": "First reporting interval excluded; raw rows retained; short silence windows, no live-music or improvement claim",
+  "discarded_attempts": "Initial Chill-filtered windows and ambiguous widest-prefix windows are excluded"
+}
