@@ -134,8 +134,12 @@ evidence; accepted individual presets do not prove an acceptable transition.
 python -m pytest tools/milk-analyzer/test_mood_scoring.py tools/milk-analyzer/test_source_classify.py -q
 ```
 
+The primary [strict extractor](STRICT_EXTRACTION.md) now supplies equation/shape,
+sparse warp and supported uniform-composite palette evidence without a display
+field. Spatial palette coverage and complete visible motion remain explicit gaps.
+
 These analytic/hypothetical feature controls validate mappings, unknown propagation,
 context guards and profile behavior, not whole-corpus prediction quality. Strict
-colour-query orchestration, complete geometry/transport visibility, pulse proofs,
+spatial colour/region proofs, complete geometry/transport visibility, pulse proofs,
 causal-response integration, structure extraction and an intentional validated
 source-index migration remain separate work. The existing beta indexes are unchanged.

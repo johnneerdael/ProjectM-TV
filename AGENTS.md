@@ -486,3 +486,13 @@ genre/viewing defaults; optional70+first-use defaults never override explicit ta
 See `tools/milk-analyzer/SOURCE_SCORING.md`. A one-frame exact2.3.15JNI control is
 bounded loading/readback evidence; published appearance and index calibration are
 separate. Keep all shipped beta identities/indexes unchanged until validated migration.
+
+Strict extraction (2026-10-07): `source_extract.py` is the no-display-frame entry
+point. It runs source equations, custom-shape trajectories, sparse warp queries
+and isolated typed shader-colour queries. Do not promote spatial samples into
+screen-area proofs, query displacement into visible speed, or scalar recurrence
+estimates into a preset proof. `source_transport.py` supplies restricted inverse
+affine transport/linear decay helpers. `SOURCE_MATH.md` pins the user's beta guide
+and original `~/Scripts/milkdrop2` reference, keeping original intent, historical
+defects and TV policies distinct. Review the mathematical reference before filling
+missing data; do not use an image classifier as the strict path's fallback.

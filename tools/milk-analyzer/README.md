@@ -1,5 +1,13 @@
 # MilkDrop source analysis and predictive collections beta
 
+The primary no-image entry point is [strict source extraction](STRICT_EXTRACTION.md):
+`source_extract.py` runs equations, geometry and isolated shader-colour queries,
+then `source_classify.py` scores cached evidence. It constructs no display fields
+or native frames. [Source math references](SOURCE_MATH.md) explain how remaining
+motion, pulses, feedback and structure data is obtained algorithmically and pin the
+beta guide plus original MilkDrop2 source. Unsupported paths stay unknown while the
+interpreter is expanded; they do not trigger hidden visual analysis.
+
 This analyzer began with the inductive main-Q domain and shader selector proof
 from [PR #25](https://github.com/johnneerdael/ProjectM-TV/pull/25). It now includes
 an experimental numerical source forecaster and separate collection tools that

@@ -4,6 +4,12 @@ Use the [creator's preset authoring guide](https://www.geisswerks.com/milkdrop/m
 for authoring intent. Cross-check runtime details against the pinned projectM
 source and executable fixtures.
 
+The [source-math reference](SOURCE_MATH.md) records the beta projectM authoring
+guide and stable `~/Scripts/milkdrop2` source identities, verified mathematical
+details, distinctions between intent/implementation/TV fixes, and contribution
+candidates. Missing motion/pulse/feedback/style data is gathered by source program
+analysis and explicitly declared numerical queries, not a hidden image classifier.
+
 Implementation map:
 
 | Guide topic | Analyzer work |
@@ -97,13 +103,14 @@ named file, so missing names must not automatically be treated as previous main.
 Known named inputs now resolve through the source material registry; missing
 placeholder initialization remains unresolved. The final display is not fed back.
 
-`Renderer/RenderContext.hpp` declares double time. Hue calculations and waveform
-expressions can multiply that double before narrowing for `sinf`/float storage.
-This differs from EEL/shader time, which is loaded as float. The waveform CPU
-facade and JSON bridge now preserve double time, and `source_builtin_wave` uses
-the original audio-schedule time rather than the narrowed equation copy.
-Long-clock numerical fixtures detected the previous early narrowing. The
-forecaster passes original render time to composite hue math as well.
+The current pinned `Renderer/RenderContext.hpp` declares float32 time. The CPU
+wave facade and hue model preserve the native narrowing point and float
+intermediates; source audio-schedule time is passed to those boundaries before
+the native conversion. Earlier double-time assumptions are historical and must
+not be reused for the current source49 profile. Long-clock controls check the
+source-header hash, `render_context_time_bits=32` and operation ordering separately
+from the external clock schedule and EEL state. See the current waveform/legacy
+composite controls; this does not establish every GPU transcendental result.
 
 ## Named image decoding and sampling
 

@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-07",
+  "references": {
+    "beta_guide": {
+      "remote": "https://github.com/projectM-visualizer/projectm-visualizer.org/",
+      "commit": "a7036b8f90046513dd2dc0be09a99879f0556cd9",
+      "files": {
+        "content/1.docs/3.preset-authoring/3.preset-rendering-process.md": "0b9107496741377fa654860c8f82dbe4ded5be063c6fb5806f7ab7475268724e",
+        "content/1.docs/3.preset-authoring/4.effects/04.image-warp.md": "e0f36e4aead863b33fad43568aa6e846df69f3d6d0499e4a93bf086aa60e471f",
+        "content/1.docs/3.preset-authoring/4.effects/03.image-decay.md": "03b3e40403d9ee39387f02edf54f9247eea49cf71faad58bac49b247343eb061",
+        "content/1.docs/3.preset-authoring/4.effects/05.blur-textures.md": "92691644a950b373c6e003654b6445533441996c1878dc03477d7bfe84c57960",
+        "content/1.docs/3.preset-authoring/4.effects/11.post-processing-noshaders.md": "fd84c41f9561349e23949421aa1c38cb9c06e3569d700a720148089838e091f2",
+        "content/1.docs/3.preset-authoring/6.expression-reference/5.functions.md": "bcfad93fd11b96d51ec9b40385992a9cef6654a285b77a4a153f796abc750c40"
+      }
+    },
+    "milkdrop2": {
+      "remote": "https://github.com/projectM-visualizer/milkdrop2",
+      "commit": "f05b0d811a87a17c4624170c26c93bac39b05bde",
+      "files": {
+        "src/vis_milk2/milkdropfs.cpp": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+        "src/vis_milk2/plugin.cpp": "c768b9a3a2f434a1a29155eceea32ade812c7cd65f73bf05f63823b9f7dc7d65",
+        "src/ns-eel2/nseel-eval.c": "0020e0caaa5696c00476c1337c381766575734166232ab4f45cf8d7f0bffcd14",
+        "src/ns-eel2/asm-nseel-x86-msvc.c": "57484a08429ff49067e99e618d1bae7b0b84edb3f737396193044ff5420458a2"
+      }
+    }
+  },
+  "milkdropfs_matches_user_original225c": true,
+  "scope": "Source/documentation reference inspection; no original Windows execution or arbitrary visual correctness certification"
+}

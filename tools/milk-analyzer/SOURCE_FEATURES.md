@@ -136,8 +136,10 @@ that arbitrary future audio, assets, state or time cannot produce flashes.
 ## Current implementation boundary
 
 The [source scoring layer](SOURCE_SCORING.md) now consumes cached evidence using
-explicit assumed mood/profile mappings. Strict shader colour query orchestration,
-visibility-supported motion, causal-response integration and structural extraction
+explicit assumed mood/profile mappings. [Strict source extraction](STRICT_EXTRACTION.md)
+executes geometry, sparse warp points and isolated shader-colour queries without
+display fields; spatially independent supported composite colours can supply palette
+features. Visibility-supported motion, causal-response integration and structural extraction
 remain follow-up work. The published 2.3.15 AAR is
 downloaded and byte-verified in the task workspace. The forecaster now selects
 its five new policies from the exact source49 commit/patch identity: repeat/linear

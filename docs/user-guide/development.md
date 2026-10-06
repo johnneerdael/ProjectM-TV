@@ -131,6 +131,16 @@ These mappings are not yet calibrated or used by the app's packaged collections.
 See the [source scoring contract](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_SCORING.md)
 for supported fields and remaining extraction gaps.
 
+The primary strict extractor now reads preset source, executes equations/shape
+geometry and evaluates sparse warp and isolated shader-colour queries without
+building a display image. Missing feedback, material or spatial-coverage data remains
+unknown while its mathematics is added; no hidden image classifier fills the gaps.
+The [strict extraction reference](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/STRICT_EXTRACTION.md)
+and [source mathematics](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_MATH.md)
+record current coverage, the beta authoring guide and stable original MilkDrop2
+source. Restricted transport/decay helpers describe potential motion and recurrence
+assumptions, not a complete appearance or calmness guarantee.
+
 The October 2026 experiment passed a three-preset and then a ten-preset gate at
 95 or higher on twenty frozen behavioural claims. In the subsequent randomized
 100-preset audit,85met that threshold,12predictions remained unresolved, and three
