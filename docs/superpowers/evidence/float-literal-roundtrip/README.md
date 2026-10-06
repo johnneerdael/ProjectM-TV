@@ -137,3 +137,57 @@ were reproduced with synthetic inputs; this patch does not change their contract
 These need separate parsing/evaluator policy work and regression coverage. They are
 recorded rather than hidden by a claim that this serializer fix makes all numerical
 behavior exact.
+
+## CI GLES readback portability follow-up
+
+[Main run 37439022977](https://github.com/johnneerdael/ProjectM-TV/actions/runs/37439022977)
+at merge `b62511ccd96fb868024fdfb9afac677bfe557b10` built the APK and core AAR,
+but both native-test jobs failed only `float-literal-render` with `float control GL error`.
+The earlier local CGL and Android JNI captures used different readback paths:
+the CGL regression requested RGB, while the JNI helper already requested RGBA.
+The GLES regression's RGB request was a test portability defect.
+
+An isolated Ubuntu 24.04 ARM64 Mesa probe reported llvmpipe (LLVM 20.1.2),
+OpenGL ES 3.2 Mesa 25.2.8. Its RGBA8 framebuffer advertised implementation read
+format `0x1908` (RGBA), type `0x1401` (unsigned byte). Before readback there was
+no GL error; RGB readback returned `0x502` (INVALID_OPERATION); RGBA readback
+returned no error and `(128,96,0,255)`. The
+[OpenGL ES specification](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf)
+guarantees RGBA/UNSIGNED_BYTE for normalized fixed-point read buffers, with
+additional implementation-selected pairs. Desktop OpenGL's RGB support cannot
+be assumed in GLES.
+
+The regression now reads four bytes per pixel as RGBA, keeps its exact RGB
+assertions at four-byte offsets, and drops alpha only when writing the optional
+three-byte RGB PPM. A separate pre-readback error check distinguishes rendering
+errors from readback errors. Production renderer, formatter patch 0044, authored
+presets and the independent `(128,96,0)` prediction are unchanged.
+
+The original test also fails at readback on Linux x86_64 Mesa softpipe with
+ASan/UBSan enabled; changing only the readback/conversion code makes the same
+control pass and restores `(128,96,0)` at every pixel. Its optional P6 export is
+still packed RGB, with raw hash
+`14e97d8c85b433581afa4a126f40344345c18150e4dbb5392b16370576e6a257`,
+matching both the original CGL and Android JNI preserved-literal captures.
+Corrected macOS CGL runs pass all 18 groups under ASan/UBSan and preserve that
+same P6 byte hash.
+
+Local driver limitations were kept separate from the reported CI failure. A native
+ARM64 Linux container on llvmpipe timed out in 12 baseline GL groups (random-texture
+manager/stages/shorthand/numerical/lifecycle/blur-framebuffers/midgit-render,
+shader-render, float-literal-render, parser-presets, initialization-presets and
+float-literal-presets). An emulated x86_64 llvmpipe run crashed in LLVM's JIT during
+EGL context creation, before rendering/readback. These were observed on unchanged
+baseline source and do not supply a passing suite. The functional red/green
+comparison uses Mesa softpipe on x86_64 with sanitizer checks retained; neither
+repository timeouts nor the CI llvmpipe backend were changed. See
+[Mesa's backend selection documentation](https://docs.mesa3d.org/envvars.html).
+
+The first full softpipe pass completed 17 of 18 groups; `implicit-input-bindings`
+printed its successful assertions but timed out during process exit. Its isolated
+rerun passed in 0.34 seconds. The complete repeat then passed all 18 groups in
+24.89 seconds. The exact `core/src/test/native/run_native_tests.sh` command also
+passed all engine/policy checks, all 18 groups and the EGL fade tests under
+ASan/UBSan with `GALLIUM_DRIVER=softpipe`. This emulation-side instability is
+recorded separately from the deterministic RGB readback failure; no check or
+timeout was disabled to obtain the successful sanitized runs.
