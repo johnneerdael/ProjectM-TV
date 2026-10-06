@@ -1,0 +1,57 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/live-native-controls/build/live-controls
+      Start  1: warp-zoom-regressions
+ 1/26 Test  #1: warp-zoom-regressions ..............   Passed    0.50 sec
+      Start  2: dynamic-original-presets
+ 2/26 Test  #2: dynamic-original-presets ...........   Passed    1.91 sec
+      Start  3: dynamic-wave-controls
+ 3/26 Test  #3: dynamic-wave-controls ..............   Passed    1.74 sec
+      Start  4: dynamic-display-controls
+ 4/26 Test  #4: dynamic-display-controls ...........   Passed    9.15 sec
+      Start  5: shape-sampler-regressions
+ 5/26 Test  #5: shape-sampler-regressions ..........   Passed    1.60 sec
+      Start  6: shape-sampler-preset
+ 6/26 Test  #6: shape-sampler-preset ...............   Passed    0.81 sec
+      Start  7: blur-range-regressions
+ 7/26 Test  #7: blur-range-regressions .............   Passed    0.26 sec
+      Start  8: blur-range-render
+ 8/26 Test  #8: blur-range-render ..................   Passed    1.67 sec
+      Start  9: float-literal-regressions
+ 9/26 Test  #9: float-literal-regressions ..........   Passed    0.32 sec
+      Start 10: random-texture-manager
+10/26 Test #10: random-texture-manager .............   Passed    0.52 sec
+      Start 11: random-texture-stages
+11/26 Test #11: random-texture-stages ..............   Passed    0.40 sec
+      Start 12: random-texture-shorthand
+12/26 Test #12: random-texture-shorthand ...........   Passed    0.33 sec
+      Start 13: random-texture-numerical
+13/26 Test #13: random-texture-numerical ...........   Passed    0.84 sec
+      Start 14: random-texture-lifecycle
+14/26 Test #14: random-texture-lifecycle ...........   Passed    0.96 sec
+      Start 15: random-texture-blur-framebuffers
+15/26 Test #15: random-texture-blur-framebuffers ...   Passed    0.68 sec
+      Start 16: random-texture-midgit-render
+16/26 Test #16: random-texture-midgit-render .......   Passed    0.84 sec
+      Start 17: shader-parser-regressions
+17/26 Test #17: shader-parser-regressions ..........   Passed    0.19 sec
+      Start 18: hlsl-self-reference
+18/26 Test #18: hlsl-self-reference ................   Passed    0.26 sec
+      Start 19: custom-waveform-bounds
+19/26 Test #19: custom-waveform-bounds .............   Passed    0.10 sec
+      Start 20: shader-render-regressions
+20/26 Test #20: shader-render-regressions ..........   Passed    5.59 sec
+      Start 21: float-literal-render
+21/26 Test #21: float-literal-render ...............   Passed    0.74 sec
+      Start 22: parser-presets
+22/26 Test #22: parser-presets .....................   Passed    0.67 sec
+      Start 23: implicit-global-regressions
+23/26 Test #23: implicit-global-regressions ........   Passed    0.19 sec
+      Start 24: implicit-input-bindings
+24/26 Test #24: implicit-input-bindings ............   Passed    0.47 sec
+      Start 25: initialization-presets
+25/26 Test #25: initialization-presets .............   Passed    0.50 sec
+      Start 26: float-literal-presets
+26/26 Test #26: float-literal-presets ..............   Passed    2.78 sec
+
+100% tests passed, 0 tests failed out of 26
+
+Total Test time (real) =  34.04 sec

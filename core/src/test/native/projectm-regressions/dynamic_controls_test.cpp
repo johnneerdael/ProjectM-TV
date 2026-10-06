@@ -35,7 +35,12 @@ static void Check(bool value, const std::string& message)
 {
     if (!value) throw std::runtime_error(message);
 }
-struct Draw { GLenum mode; GLsizei count; GLint source, destination; };
+struct Draw {
+    GLenum mode; GLsizei count; GLint source, destination;
+    GLsizei instances{1};
+    std::array<float, 3> style{};
+    std::vector<unsigned char> geometry;
+};
 static bool observe = false;
 static std::vector<Draw> draws;
 extern "C" void glDrawArrays(GLenum mode, GLint first, GLsizei count)
@@ -51,6 +56,30 @@ extern "C" void glDrawArrays(GLenum mode, GLint first, GLsizei count)
         draws.push_back(draw);
     }
     real(mode, first, count);
+}
+extern "C" void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instances)
+{
+    using Function = void (*)(GLenum, GLint, GLsizei, GLsizei);
+    static auto real = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "glDrawArraysInstanced"));
+    if (!real) std::abort();
+    if (observe)
+    {
+        Draw draw{mode, count, 0, 0}; draw.instances = instances;
+        glGetIntegerv(GL_BLEND_SRC_RGB, &draw.source); glGetIntegerv(GL_BLEND_DST_RGB, &draw.destination);
+        GLint program{}, buffer{}, previous{}, size{};
+        glGetIntegerv(GL_CURRENT_PROGRAM, &program);
+        glGetUniformfv(program, glGetUniformLocation(program, "half_width"), &draw.style[0]);
+        glGetUniformfv(program, glGetUniformLocation(program, "pass_offset"), &draw.style[1]);
+        glGetVertexAttribiv(0, GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, &buffer);
+        glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &previous); glBindBuffer(GL_ARRAY_BUFFER, buffer);
+        glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+        const auto* points = static_cast<unsigned char*>(glMapBufferRange(GL_ARRAY_BUFFER, 0, size, GL_MAP_READ_BIT));
+        Check(points != nullptr, "quad geometry readback failed");
+        draw.geometry.assign(points, points + size); glUnmapBuffer(GL_ARRAY_BUFFER);
+        glBindBuffer(GL_ARRAY_BUFFER, previous);
+        draws.push_back(std::move(draw));
+    }
+    real(mode, first, count, instances);
 }
 struct Surface
 {
@@ -111,7 +140,7 @@ static void SamePixels(const std::vector<unsigned char>& a, const std::vector<un
 static void WaveControls()
 {
     // Retain one dynamic Waveform across switches. Compare actual draws/pixels to
-    // freshly constructed static controls at the same PCM/clock and raster size.
+    // static controls with matching per-mode smoothing history and PCM/clock.
     for (const bool quad : {false, true})
     {
         Surface surface(128, 128);
@@ -126,42 +155,49 @@ static void WaveControls()
         Waveform waveform(live);
         Check(glGetError() == GL_NO_ERROR, "wave construction GL error");
         for (const int mode : {0, 6, 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22})
-        for (const int flags : {0, 1, 2, 4, 7})
         {
-            frame.LoadStateVariables(live);
-            *frame.q_vars[0] = mode + .75;
-            *frame.q_vars[1] = flags & 1 ? 1 : 0;
-            *frame.q_vars[2] = flags & 2 ? 1 : 0;
-            *frame.q_vars[3] = flags & 4 ? 1 : 0;
-            frame.ExecutePerFrameCode();
-            Check(*frame.wave_mode == mode + .75, "mode equation did not evaluate");
-            surface.Bind(); glClearColor(.1f, .15f, .2f, 1); glClear(GL_COLOR_BUFFER_BIT);
-            Check(glGetError() == GL_NO_ERROR, "wave predraw GL error");
-            draws.clear(); observe = true; waveform.Draw(frame); observe = false;
-            Check(glGetError() == GL_NO_ERROR, "wave draw GL error");
-            const auto actual = surface.Pixels();
-            const auto actualDraws = draws;
             PresetState reference;
             Configure(reference, 128, quad);
             reference.waveMode = mode % 16;
-            reference.waveDots = flags & 1; reference.waveThick = flags & 2; reference.additiveWaves = flags & 4;
             PerFrameContext staticFrame(reference.globalMemory, &reference.globalRegisters);
-            staticFrame.RegisterBuiltinVariables(); staticFrame.LoadStateVariables(reference);
+            staticFrame.RegisterBuiltinVariables();
             Waveform staticWave(reference);
-            surface.Bind(); glClear(GL_COLOR_BUFFER_BIT);
-            draws.clear(); observe = true; staticWave.Draw(staticFrame); observe = false;
-            const auto label = "mode=" + std::to_string(mode) + " flags=" + std::to_string(flags) + " quad=" + std::to_string(quad);
-            SamePixels(actual, surface.Pixels(), label);
-            Check(actualDraws.size() == draws.size(), label + ": wrong offset/draw count");
-            for (size_t i = 0; i < draws.size(); ++i)
+            for (const int flags : {0, 1, 2, 4, 7})
             {
-                Check(actualDraws[i].mode == draws[i].mode && actualDraws[i].count == draws[i].count,
-                      label + ": wrong primitive/geometry count");
-                Check(actualDraws[i].source == GL_SRC_ALPHA &&
-                      actualDraws[i].destination == (flags & 4 ? GL_ONE : GL_ONE_MINUS_SRC_ALPHA), label + ": wrong blending");
-                if (flags & 1) Check(actualDraws[i].mode == GL_POINTS, label + ": dots not selected");
+                frame.LoadStateVariables(live);
+                *frame.q_vars[0] = mode + .75;
+                *frame.q_vars[1] = flags & 1 ? 1 : 0;
+                *frame.q_vars[2] = flags & 2 ? 1 : 0;
+                *frame.q_vars[3] = flags & 4 ? 1 : 0;
+                frame.ExecutePerFrameCode();
+                Check(*frame.wave_mode == mode + .75, "mode equation did not evaluate");
+                surface.Bind(); glClearColor(.1f, .15f, .2f, 1); glClear(GL_COLOR_BUFFER_BIT);
+                Check(glGetError() == GL_NO_ERROR, "wave predraw GL error");
+                draws.clear(); observe = true; waveform.Draw(frame); observe = false;
+                Check(glGetError() == GL_NO_ERROR, "wave draw GL error");
+                const auto actual = surface.Pixels();
+                const auto actualDraws = draws;
+                reference.waveDots = flags & 1; reference.waveThick = flags & 2; reference.additiveWaves = flags & 4;
+                staticFrame.LoadStateVariables(reference);
+                surface.Bind(); glClear(GL_COLOR_BUFFER_BIT);
+                draws.clear(); observe = true; staticWave.Draw(staticFrame); observe = false;
+                const auto label = "mode=" + std::to_string(mode) + " flags=" + std::to_string(flags) + " quad=" + std::to_string(quad);
+                const auto expected = surface.Pixels();
+                Check(actualDraws.size() == draws.size(), label + ": wrong offset/draw count");
+                for (size_t i = 0; i < draws.size(); ++i)
+                {
+                    Check(actualDraws[i].mode == draws[i].mode && actualDraws[i].count == draws[i].count,
+                          label + ": wrong primitive/geometry count");
+                    Check(actualDraws[i].instances == draws[i].instances, label + ": wrong quad segment count");
+                    Check(actualDraws[i].style == draws[i].style, label + ": wrong quad width/offset");
+                    Check(actualDraws[i].geometry == draws[i].geometry, label + ": wrong quad geometry");
+                    Check(actualDraws[i].source == GL_SRC_ALPHA &&
+                          actualDraws[i].destination == (flags & 4 ? GL_ONE : GL_ONE_MINUS_SRC_ALPHA), label + ": wrong blending");
+                    if (flags & 1) Check(actualDraws[i].mode == GL_POINTS, label + ": dots not selected");
+                }
+                SamePixels(actual, expected, label);
+                Check(live.waveMode == 0 && !live.waveDots && !live.waveThick && !live.additiveWaves, "wave defaults overwritten");
             }
-            Check(live.waveMode == 0 && !live.waveDots && !live.waveThick && !live.additiveWaves, "wave defaults overwritten");
         }
         // Conditional assignments must start from config every frame, not yesterday's output.
         frame.CompilePerFrameCode("if(equal(frame,1),wave_usedots=1,0);");
@@ -281,23 +317,24 @@ static void DisplayControls()
         frame.CompilePerFrameCode("gamma=q1;echo_alpha=q2;echo_zoom=q3;echo_orient=q4;");
         for (const float gamma : {0.f, .5f, 1.f, 1.5f, 3.f, 8.f})
         for (const float alpha : {0.f, .001f, .5f, 1.f})
-        for (const int orientation : {0, 1, 2, 3, 5})
+        for (const float zoom : {.001f, 1.f, 2.f, 1000.f})
+        for (const int orientation : {-1, 0, 1, 2, 3, 5})
         {
             frame.LoadStateVariables(state);
             *frame.q_vars[0] = gamma; *frame.q_vars[1] = alpha;
-            *frame.q_vars[2] = 2; *frame.q_vars[3] = orientation + .75;
+            *frame.q_vars[2] = zoom; *frame.q_vars[3] = orientation + .75;
             frame.ExecutePerFrameCode(); output.Bind(); composite.Draw(state, frame);
             const auto actual = output.Pixels();
             PresetState reference; Configure(reference, size, false);
             reference.mainTexture = source.texture; reference.gammaAdj = gamma;
-            reference.videoEchoAlpha = alpha; reference.videoEchoZoom = 2; reference.videoEchoOrientation = orientation;
+            reference.videoEchoAlpha = alpha; reference.videoEchoZoom = zoom; reference.videoEchoOrientation = orientation;
             reference.compositeShaderVersion = 0;
             reference.brighten = reference.darken = reference.solarize = reference.invert = false;
             PerFrameContext staticFrame(reference.globalMemory, &reference.globalRegisters);
             staticFrame.RegisterBuiltinVariables(); staticFrame.LoadStateVariables(reference);
             FinalComposite staticComposite; staticComposite.LoadCompositeShader(reference);
             output.Bind(); staticComposite.Draw(reference, staticFrame);
-            SamePixels(actual, output.Pixels(), "gamma/echo control", 0);
+            SamePixels(actual, output.Pixels(), "gamma=" + std::to_string(gamma) + " alpha=" + std::to_string(alpha) + " zoom=" + std::to_string(zoom) + " orientation=" + std::to_string(orientation));
             Check(state.gammaAdj == 1 && state.videoEchoAlpha == 0, "echo defaults overwritten");
         }
         std::cout << "legacy display controls: size=" << size << " pass\n";
@@ -372,13 +409,13 @@ static void PresetControls(const std::filesystem::path& assets, const std::files
         Check(libprojectM::FeedbackDetailTestAccess::Composite(preset) == (witness == 1), "unexpected composite path");
         if (witness == 0) Check(state.darken, "319 source-default bDarken must be 1");
         PresetState audioSource; Configure(audioSource, 256, false);
+        preset.DrawInitialImage(initial.texture, render);
         for (int index = 0; index < 6; ++index)
         {
             auto audio = audioSource.audioData;
             audio.treb = audio.bass = audio.mid = audio.vol = index % 2 == 0 ? .5f : 2.f;
             audio.trebAtt = audio.bassAtt = audio.midAtt = audio.volAtt = 1;
             render.frame = index; render.time = index / 30.f;
-            preset.DrawInitialImage(initial.texture, render);
             Check(preset.SetOutputTarget(true, output.framebuffer), "original preset output rejected");
             preset.RenderFrame(audio, render);
             if (witness == 0) Check(*frame.darken == (audio.treb < 1 ? 1 : 0), "319 darken equation mismatch");
@@ -401,6 +438,7 @@ int main(int argc, char** argv)
     {
         Check(argc >= 2, "pass wave, display, capture or presets");
         GLContext context; Shader::InvalidateBoundProgram();
+        std::cout << "renderer=" << glGetString(GL_RENDERER) << " version=" << glGetString(GL_VERSION) << '\n';
         Check(glGetError() == GL_NO_ERROR, "context GL error");
         if (std::string(argv[1]) == "wave") { WaveControls(); DualWaveControls(); }
         else if (std::string(argv[1]) == "display") DisplayControls();

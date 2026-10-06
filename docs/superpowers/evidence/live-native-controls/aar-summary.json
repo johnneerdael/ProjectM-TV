@@ -1,0 +1,68 @@
+{
+  "protocol": "live-controls-aar-smoke-v1",
+  "serial": "emulator-5620",
+  "gpu": "GLES: Google (Apple), Android Emulator OpenGL ES Translator (Apple M4 Pro), OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "pcmSha256": "d6e4054db81613a755c78a89464ef5d65fc223391174eadc459ab1b50eb6449e",
+  "frames": 480,
+  "clock": "production real clock, paced at 30 fps; RNG not fixed",
+  "baselineAarSha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+  "candidateAarSha256": "6019fd9c53c9bb30b67cddbce8f5c4abadffd6af40f8ea1a03db1dc891cde9de",
+  "runs": [
+    {
+      "preset": "319.milk",
+      "role": "baseline",
+      "frames": 480,
+      "wallMs": 16014,
+      "deliveredFps": 29.973772948669914,
+      "sourceSha256": "ce88b6ef2083122dc103e270fbfee6f6abab02517e56932164f3c7faa456a989",
+      "manifest": "build/live-controls-aar-results-api34/0-baseline/manifest.json"
+    },
+    {
+      "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
+      "role": "baseline",
+      "frames": 480,
+      "wallMs": 16040,
+      "deliveredFps": 29.925187032418954,
+      "sourceSha256": "df44c85b71513f603fdff7e5d8b751b4de81a969d0af66f8acada49fd76e8449",
+      "manifest": "build/live-controls-aar-results-api34/1-baseline/manifest.json"
+    },
+    {
+      "preset": "idiot - Forty Six and 2 (pushit!).milk",
+      "role": "baseline",
+      "frames": 480,
+      "wallMs": 16031,
+      "deliveredFps": 29.941987399413637,
+      "sourceSha256": "e0747d71b11ae571f9c6917962b62d197757a05379342c11ca350bb28d43e693",
+      "manifest": "build/live-controls-aar-results-api34/2-baseline/manifest.json"
+    },
+    {
+      "preset": "319.milk",
+      "role": "candidate",
+      "frames": 480,
+      "wallMs": 16030,
+      "deliveredFps": 29.94385527136619,
+      "sourceSha256": "ce88b6ef2083122dc103e270fbfee6f6abab02517e56932164f3c7faa456a989",
+      "manifest": "build/live-controls-aar-results-final/0-candidate/manifest.json"
+    },
+    {
+      "preset": "Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
+      "role": "candidate",
+      "frames": 480,
+      "wallMs": 16031,
+      "deliveredFps": 29.941987399413637,
+      "sourceSha256": "df44c85b71513f603fdff7e5d8b751b4de81a969d0af66f8acada49fd76e8449",
+      "manifest": "build/live-controls-aar-results-final/1-candidate/manifest.json"
+    },
+    {
+      "preset": "idiot - Forty Six and 2 (pushit!).milk",
+      "role": "candidate",
+      "frames": 480,
+      "wallMs": 16022,
+      "deliveredFps": 29.958806640868804,
+      "sourceSha256": "e0747d71b11ae571f9c6917962b62d197757a05379342c11ca350bb28d43e693",
+      "manifest": "build/live-controls-aar-results-final/2-candidate/manifest.json"
+    }
+  ],
+  "propertyRestored": true,
+  "candidateRevision": "final 0048\u20130049 source; exact patch hashes in identity.json"
+}

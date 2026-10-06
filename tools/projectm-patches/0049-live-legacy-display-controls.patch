@@ -120,7 +120,7 @@ index 7ccd5b426..15b984d6c 100644
      }
  
 diff --git a/src/libprojectM/MilkdropPreset/VideoEcho.cpp b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
-index d714a90e2..8a9a9b8a0 100644
+index d714a90e2..99522d4de 100644
 --- a/src/libprojectM/MilkdropPreset/VideoEcho.cpp
 +++ b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
 @@ -1,5 +1,8 @@
@@ -146,7 +146,7 @@ index d714a90e2..8a9a9b8a0 100644
      }
  
 -    if (m_presetState.videoEchoAlpha > 0.001f)
-+    if (*perFrameContext.echo_alpha > 0.001f)
++    if (static_cast<float>(*perFrameContext.echo_alpha) > 0.001f)
      {
 -        DrawVideoEcho();
 +        DrawVideoEcho(perFrameContext);

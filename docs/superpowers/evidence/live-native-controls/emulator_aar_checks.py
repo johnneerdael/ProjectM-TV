@@ -30,6 +30,7 @@ def main():
     parser.add_argument("--baseline-aar", type=Path, required=True)
     parser.add_argument("--candidate-aar", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--roles", choices=["baseline", "candidate"], nargs="+", default=["baseline", "candidate"])
     args = parser.parse_args()
     if args.serial != "emulator-5620":
         raise ValueError("This protocol owns only the dedicated emulator-5620")
@@ -66,7 +67,7 @@ def main():
                 "candidateAarSha256": digest(args.candidate_aar.read_bytes()), "runs": rows}
     try:
         for witness, preset in enumerate(PRESETS):
-            for role in ("baseline", "candidate"):
+            for role in args.roles:
                 package = "nl.neerdael.projectmtv.corpus" + role
                 job = f"/data/user/0/{package}/files/live-controls-{time.time_ns()}"
                 staging = f"/data/local/tmp/live-controls-{time.time_ns()}"
@@ -101,6 +102,7 @@ def main():
                         name = f"frame-{capture['frame']:03d}.png"
                         raw = adb("exec-out", "run-as", package, "cat", job + "/output/" + name, binary=True)
                         assert raw.startswith(b"\x89PNG\r\n\x1a\n")
+                        assert digest(raw) == capture["pngSha256"]
                         (local / name).write_bytes(raw)
                     rows.append({"preset": preset, "role": role, "frames": 480,
                                  "wallMs": manifest["renderWallDurationMs"],
