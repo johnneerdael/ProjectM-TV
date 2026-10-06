@@ -11,7 +11,7 @@ from scene_equations import _scalar
 from quad_lines import PROFILE,draw_quad_lines
 
 
-def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None):
+def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None):
     if builtin:
         groups=wave['positions'];colours=wave['rgba']
     else:groups=[wave['positions']];colours=wave['colours']
@@ -30,13 +30,13 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
                     if clip is not None:
                         clip=clip+np.asarray(offset,dtype=np.float32)*np.array([2,-2],np.float32)
                     target=draw_quad_lines(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],
-                                           quantize=quantize,clip_positions=clip)
+                                           quantize=quantize,clip_positions=clip,raster_subpixel_bits=triangle_subpixel_bits)
                 else:
                     target=draw_lines(target,shifted,colours,closed=wave['draw_mode']=='loop',additive=wave['additive'],quantize=quantize)
     return target
 
 
-def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None):
+def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None):
     target=_finite(destination,'framebuffer').copy();height,width=target.shape[:2];main=frame['main'];values=source['values']
     if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
         raise ValueError('unknown line rendering profile')
@@ -48,7 +48,7 @@ def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quant
         attributes=shape['values'];index=shape['index'];fill=dict(attributes);fill['border_a']=0
         texture=shape_textures.get(index)
         target=draw_shape(target,fill,aspect_y=aspect_y,quantize=quantize,texture_sample=texture,
-                          texture_aspect_y=shape_texture_aspects.get(index))
+                          texture_aspect_y=shape_texture_aspects.get(index),raster_subpixel_bits=triangle_subpixel_bits)
         if attributes.get('border_a',0)>.0001:
             fan=shape_fan(attributes,aspect_y=aspect_y);positions=fan['positions'][1:-1]
             colour=np.array([attributes.get('border_'+c,1 if c!='a' else 0) for c in 'rgba'],dtype=np.float32)
@@ -56,14 +56,15 @@ def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quant
             offsets=[[0,0],[.5/width,0],[.5/width,.5/height],[0,.5/height]] if thick else [[0,0]]
             for offset in offsets:
                 draw=draw_quad_lines if line_rendering_profile==PROFILE else draw_lines
+                raster={'raster_subpixel_bits':triangle_subpixel_bits} if line_rendering_profile==PROFILE else {}
                 target=draw(target,positions+np.asarray(offset,dtype=np.float32),colour,closed=True,
-                                  additive=int(attributes.get('additive',0))!=0,quantize=quantize)
-    for wave in custom_waves:target=_wave(target,wave,quantize=quantize,line_rendering_profile=line_rendering_profile,point_subpixel_bits=point_subpixel_bits)
-    if builtin_wave is not None:target=_wave(target,builtin_wave,builtin=True,quantize=quantize,line_rendering_profile=line_rendering_profile,point_subpixel_bits=point_subpixel_bits)
+                                  additive=int(attributes.get('additive',0))!=0,quantize=quantize,**raster)
+    for wave in custom_waves:target=_wave(target,wave,quantize=quantize,line_rendering_profile=line_rendering_profile,point_subpixel_bits=point_subpixel_bits,triangle_subpixel_bits=triangle_subpixel_bits)
+    if builtin_wave is not None:target=_wave(target,builtin_wave,builtin=True,quantize=quantize,line_rendering_profile=line_rendering_profile,point_subpixel_bits=point_subpixel_bits,triangle_subpixel_bits=triangle_subpixel_bits)
     if main.get('darken_center',0)>0:
         half=np.float32(.025)
         points=np.array([[.5,.5],[.5-half*aspect_y,.5],[.5,.5-half],[.5+half*aspect_y,.5],
                          [.5,.5+half],[.5-half*aspect_y,.5]],dtype=np.float32)
         colours=np.zeros((6,4),dtype=np.float32);colours[0,3]=np.float32(3)/32
-        target=draw_triangles(target,points,colours,[[0,i,i+1] for i in range(1,5)],additive=False,quantize=quantize)
-    return draw_borders(target,main,quantize=quantize)
+        target=draw_triangles(target,points,colours,[[0,i,i+1] for i in range(1,5)],additive=False,quantize=quantize,raster_subpixel_bits=triangle_subpixel_bits)
+    return draw_borders(target,main,quantize=quantize,raster_subpixel_bits=triangle_subpixel_bits)

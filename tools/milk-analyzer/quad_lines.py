@@ -74,11 +74,13 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positi
     return result
 
 
-def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True,clip_positions=None):
+def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True,clip_positions=None,raster_subpixel_bits=None):
+    if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
+        raise ValueError('raster subpixel bits must be an integer within 4..16')
     target=_finite(destination,'framebuffer').copy()
     height,width=target.shape[:2]
     triangles=np.array([[0,1,2],[2,1,3]],np.int64)
     for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions):
         target=draw_triangles(target,segment['positions'],segment['colours'],triangles,
-                              additive=additive,quantize=quantize)
+                              additive=additive,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits)
     return target

@@ -352,6 +352,15 @@ handling and other dithering states remain unverified. This correction does not
 by itself certify feedback-sensitive presets. See
 `fixtures/visual-loop-unorm-conversion-repair-2026-10-06.json`.
 
+Drawn geometry accepts a separate `triangle_subpixel_bits` input (integer4–16;
+omission preserves canonical coverage). Snapped vertices remain in window-pixel
+space for triangle coverage and interpolation; colors and UV attributes are not
+snapped. This propagates through shapes, borders, center darkening and quad waves.
+The declared Apple emulator's8-bit input makes case023's first pass-through
+feedback frame match every native pixel. Later feedback still diverges; this is
+not complete preset certification or a universalGPU rule. See
+`fixtures/visual-loop-triangle-grid-repair-2026-10-06.json`.
+
 A frozen curved-line native control agrees within one RGB8 level over 60 frames.
 The full case 012 diagnostic now matches coherent flash counts (one brightening,
 zero darkening) and predicts peak brightness jump 0.8194 versus native 0.8207.

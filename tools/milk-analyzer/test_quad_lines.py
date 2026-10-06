@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 
 def test_right_angle_miter_matches_patched_vertex_shader():
@@ -36,3 +37,22 @@ def test_native_clip_coordinates_preserve_short_segment_cutoff():
     # Screen rounding turns the native 0.00009728px segment into 0.00012207px.
     assert len(quad_line_vertices(screen,colours,width=1024,height=768))==1
     assert quad_line_vertices(screen,colours,width=1024,height=768,clip_positions=clip)==[]
+
+
+def test_quad_line_forwards_explicit_triangle_grid_to_coverage():
+    from quad_lines import draw_quad_lines
+    image=np.zeros((4,4,4),np.float32)
+    # GLES tie bias lowers the top-row centre by1/64px. Arrange the upper edge
+    # just past a pixel centre; an8bit triangle grid resolves it onto that centre.
+    y=(1.0005+1/64)/4
+    default=draw_quad_lines(image,[[.125,y],[.875,y]],[1,0,0,1],additive=False,quantize=False)
+    snapped=draw_quad_lines(image,[[.125,y],[.875,y]],[1,0,0,1],additive=False,quantize=False,raster_subpixel_bits=8)
+    np.testing.assert_array_equal(np.argwhere(default[...,0]>0),[[1,0],[1,1],[1,2]])
+    np.testing.assert_array_equal(np.argwhere(snapped[...,0]>0),[[0,0],[0,1],[0,2]])
+
+
+@pytest.mark.parametrize('bits',[True,3,17,np.nan])
+def test_quad_line_rejects_bad_triangle_grid_even_when_no_segment_draws(bits):
+    from quad_lines import draw_quad_lines
+    with pytest.raises(ValueError,match='raster subpixel bits'):
+        draw_quad_lines(np.zeros((4,4,4)),[[.5,.5],[.5,.5]],[1]*4,additive=False,raster_subpixel_bits=bits)

@@ -344,3 +344,20 @@ predictions remain unchanged. Case023 meanRGB8error changes36.1358→36.1301;
 case024 changes11.4269→11.2045, retaining large feedback/trajectory errors.
 This is a correct small repair, not a complete explanation of the failed batch.
 Evidence: `tools/milk-analyzer/fixtures/visual-loop-unorm-conversion-repair-2026-10-06.json`.
+
+Derived pass-through controls localize early feedback separately from original
+composite output.024's first three feedback frames match exactly.023 initially
+differs only within drawn geometry: nine pixels have errors above1RGB8level.
+Keeping the measured8-bit triangle grid in pixel space removes every first-frame
+difference, including smaller interpolation errors. Add optional
+`triangle_subpixel_bits` through primitive/shape/border/quad drawing and forecast
+domain; retain canonical defaults.113focused tests and25subtests pass.
+Later feedback differences remain, so this does not certify the full preset.
+
+A separate scalar shader control confirms contraction/more precise intermediates
+for one expression, but an isolated FMA prototype barely changes024's error
+(11.2045→11.2002RGB8). It remains build-only; no production arithmetic profile
+is adopted. Scalar temporary boundaries are erased in the existing lowered DAG,
+which prevents claiming general storage-boundary-preserving contraction.
+The next bounded investigation is2Dlinear filter precision; preserve all frozen
+candidate/reference data and do not fit undocumented coefficients to pixels.

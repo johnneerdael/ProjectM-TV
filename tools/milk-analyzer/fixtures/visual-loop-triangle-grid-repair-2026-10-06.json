@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "purpose": "Optional drawn-triangle raster input with native first-frame geometry proof; no full-preset accuracy claim.",
+  "reference_release": "2.3.8",
+  "reference_aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "setting": {
+    "domain_key": "triangle_subpixel_bits",
+    "observed_context_value": 8,
+    "mathematical_range": "integer4..16;None preserves canonicalunsnapped",
+    "context": "AppleM4ProAPI34emulator,256x144GLES3;notuniversalGPUclaim"
+  },
+  "algorithm": "Castverticesfloat32, snaptheirwindowcoordinates tonearest2^-bits, keepinpixelspaceforcoverage/interpolation;attributevaluesnot snapped.",
+  "comparison": {
+    "scope": "Existing three-frame feedback-passthrough reference; exactpixel-space trianglegrid implementation; no native rerender/no freshgrade",
+    "elapsed_seconds": 2.3764644999992015,
+    "rows": [
+      {
+        "frame": 1,
+        "implemented": {
+          "mae_rgb8": 0.0,
+          "max_rgb8": 0,
+          "pixels_gt1": 0
+        },
+        "old_wrapper": {
+          "mae_rgb8": 0.00244140625,
+          "max_rgb8": 1,
+          "pixels_gt1": 0
+        },
+        "baseline": {
+          "mae_rgb8": 0.006302445023148148,
+          "max_rgb8": 61,
+          "pixels_gt1": 9
+        }
+      },
+      {
+        "frame": 2,
+        "implemented": {
+          "mae_rgb8": 0.18004918981481483,
+          "max_rgb8": 36,
+          "pixels_gt1": 1572
+        },
+        "old_wrapper": {
+          "mae_rgb8": 0.18325014467592593,
+          "max_rgb8": 36,
+          "pixels_gt1": 1572
+        },
+        "baseline": {
+          "mae_rgb8": 0.18467881944444445,
+          "max_rgb8": 37,
+          "pixels_gt1": 1578
+        }
+      },
+      {
+        "frame": 3,
+        "implemented": {
+          "mae_rgb8": 0.6166630497685185,
+          "max_rgb8": 127,
+          "pixels_gt1": 3656
+        },
+        "old_wrapper": {
+          "mae_rgb8": 0.6193938078703703,
+          "max_rgb8": 127,
+          "pixels_gt1": 3656
+        },
+        "baseline": {
+          "mae_rgb8": 0.6279929832175926,
+          "max_rgb8": 127,
+          "pixels_gt1": 3674
+        }
+      }
+    ],
+    "prediction_sha256": "185511c4052a46949cff75dde7b970d63ade7d221882ade45f4feb49fce60da7",
+    "input_hashes": {
+      "preset_sha256": "9c257b75c53759e8c9157afbd6264422135c21cca705c8181e4459b6c8d177eb",
+      "pcm_sha256": "62a6255d17130328b51e286976e5e294af11851c94c39915f72a8dd08e55ce22",
+      "parsed_source_sha256": "1038be89f6f1ea271ace9f950316f37640fa64dee09fce529a1b3cd1ba07e778",
+      "domain_sha256": "1bab4f4e5380269024e5c7eb66be08825e1a255e88e4a8d161cd35d4aacd42b2",
+      "audio_sha256": "89bd0d24e6e8a02b65fba8f6ee1c4bd29b3b4d8459069bfa682b4781826aaf73",
+      "compatibility_sha256": "908fc7e666a4439cbbace26c4b459bf1bf5181bea2b7bfcf5a580f01802d3a61",
+      "random_sha256": "45fefa3062f019f4567ff9cea7119ad15d52b66cade5ec95a6146a92349741be",
+      "materials_sha256": "c688251a2be11804e5607b122365ce95579e9d02d68b42ba5e0433e0cdd39941"
+    },
+    "model_sha256": "ac12a91f435a47a8cbaa0a8f5abe1f22c2083bb66847ec20883b65a2c4b1e6e0",
+    "tracked_model_stable": true,
+    "model_modules": {
+      "audience_ranking.py": "1d103a2c12a16868bb4530654b94692f28437cd97ed69f51d404c60ad04a1ad4",
+      "source_inventory.py": "b480521afb68cd3dfda3a4d97f9073f9d39a68bbb73a14838943d38a40007a01",
+      "beta_score.py": "c7179d0f1d17a23685f78c8f0f91b5d5b5d783f7e8467ba49da484ef08a834a4",
+      "builtin_wave.py": "f0d36fd224603995c1b3aacc1af5f8e36d1e241ec20d971fd741fdf1f191772e",
+      "frame_chain.py": "5f8e9c10bfb70f4f0a4fa5981d8ac174cf37c851e808129facb8e3937ff2e7e0",
+      "forecast.py": "b8cb700193625777e8dc0d2b2505cf8482f18c349855afb4d39ff5f51f9833da",
+      "beta_export.py": "d65ca3d61c391bc1b2e681fd16fc566254898baba85dd8d52fd8438f44eca886",
+      "legacy_composite.py": "9fc6dc50a4529e6fe4c532a2244dfb802646a0c8884e0865ab9a563f550da753",
+      "transport.py": "6c5cf734ff942277e7dc0e52108de150cec9b17e5f4c5c9a81a260b2844259de",
+      "custom_wave.py": "0580a81bea5d27ce52e1979514764d757ffd8bd36c10729c62e1c6b8b184aa5b",
+      "primitives.py": "7f76bac2179b22b86c214db5bcb16d9b748dcdb509357f243e7bcaeaaeb70b86",
+      "score_audit.py": "1d4326a433949c5405b0e32ab8667c5f71f07f61b019d166fd8e7eb60a18e7d6",
+      "behavior_evidence.py": "faa9cac24539ceda0953cdbc52e5867949ca8837d72171ed0f6dc73544693c3b",
+      "feedback.py": "e698ff1fede1264970689c60129d2768c3b2d80a34628fbe52154ec22634b1c8",
+      "intensity_evidence.py": "dead5392ae70e92f51a90a597e81820f3e04c0887750af8ad5af81edc170f7aa",
+      "quad_lines.py": "90b458df7890aeb50382ecfebb08a98d61fe64794aa682a449fd35ae80df5900",
+      "core_backend.py": "469ee5c7db8ee3e10880dc055a2d4b850d752bad801476a59e23e023ea607be5",
+      "sampling_policy.py": "c6e8767540704444fcada9a6b8d1c75da934bf13528c31b26abbf6b05aaab30f",
+      "component_influence.py": "afe4d6e90351d2e5bc53b7cea209564c8a35949c8797ab902ebfbcda551b579c",
+      "materials.py": "c0c198276f5dc5478170e513435bfe6eb05a32a18ad67743f0f4d9c1c1c766db",
+      "unorm_sampler.py": "1656f410d98858ac6fa2a046fb2b83662b3cccfa222232443be34d951ca77147",
+      "progress_report.py": "b01f72cd50c0edbdb0f1c8c45502fd5016e4610d21119188280f9ae16b4addc8",
+      "field_math.py": "712bfcae41b228e2b7941eaf599e6e76a8828eb08793497fd9e8151c8effdaf2",
+      "scoring_context.py": "c93c721068c75acb32a69ef5f8da53530d1567be9a8f7cb7f2dd87d5d1c54fce",
+      "motion_vectors.py": "f44cdfc8217c6696052711e8df0c5db1c05f4c3b3b47053a670d74fa3061410e",
+      "activity_model.py": "1955526da80753dd235a7a72353e0c4953624c234a1fd864dd8ef99c5dd7d052",
+      "stage_resolution.py": "3c70bacef514cccc35d180751dc54b830f02affb30a1b0a3ebe4a4fa23bbe837",
+      "shader_uniforms.py": "4e303507e16e27cefad31f090b90f5d22de06f4bc4f37ab16ed1cb240c69952b",
+      "effect_bursts.py": "6f2396d6ec1901919a5494f011d12b92f7e329281c2313a15a1ae793f3769cf4",
+      "spatial.py": "e092f7f6445d43d8c7cd89ca5553002ce813b903ed8ed56fb4571d13084313ab",
+      "grid_math.py": "65b2229b55f2ee7d23cd686e30ecb1ff542c254250c73cbea3f0e6376a76c47c",
+      "composite_mesh.py": "5e6a46d34a0649aaed744c41eae35b02d68d96ce0f69f794333d9e2c77042a1e",
+      "descriptors.py": "c74129000cd03b2123def6a4d9ff5308b48ba9a5aaca42fa222068ef87f1fa3f",
+      "blur.py": "d4746f79931f3d5e2544eb6a9edb3dcecb7f17240a0a0fc2c554b5a076a16b3d",
+      "equation_domains.py": "d63bdda59623dbe88fb970414a93ae37fffff0cb8400ea12d3f42ee4a18a56b7",
+      "scene_warp.py": "2d193f5499f7ff5dd813d3fa6a75c7c0ec7bc6c5260b9a67701183ee28561113",
+      "core_corpus.py": "e27574606150f790ee51c2acdf9c79923c9b1039db0621c7ad5acb5cf2f39df6",
+      "source_bass.py": "df7b04726377beeb22e07f660d5ca2b3acfa790edd8fa75f283cefa2db293086",
+      "pipeline_fields.py": "7dddfc67c6aad4b6e6d6593e38a0048d8c5e6839de66e657a0a01d4c7a638474",
+      "random_binding_context.py": "45b43d08719dbdca6dbe7e64de962d43132a58a31369947c81ad85938ff0714c",
+      "feedback_field.py": "db25176d26e619ac7d952fbdb96110bac200768bab75359509c475f63e464288",
+      "gap_priority.py": "7843b151cf759496fcac8ba3fd9dea738a21abb87860a295d8861814ffdfdbf8",
+      "geometry.py": "15fab828160996974595e2dae39510df9ad6144d77704e81c4cf4f4c8f291991",
+      "scene_equations.py": "9fc6e3d03fd631eb00cad9e706a4cd999295e4ccdac3e1f9f95a666e83b09873",
+      "source_context.py": "796a048fcba2996ac397be290ac27eed7c14bcf6b69837413cae5bcfe26279ea",
+      "noise_inputs.py": "d8dde19a07321dbb3ce78b31e1115e9e944fd3353ff35a11fd4f3a1bc590eb48",
+      "scan.py": "b1c953d0dd545e514a493c8c339be080ebf74d38870987e1deda00459fe158cd",
+      "shader_random.py": "7bdb1c0f96bc815e1c48b82751c89fb622b2853541265b810d2804b31740942e",
+      "generate_shader_adapter.py": "ff5b1a87e146807dceab7a29228999240b805a527b27a30399e44e67f08be5ae",
+      "audience_policy.py": "77c10ee184ae63943e4e42985123be566b0e4eb6a255bb627179b1d7fd6a0ba6",
+      "scene_draw.py": "937a405152261d023a7df59c45f7642784a9c490968cfa74647f6a955e4170c2",
+      "equation_loading.py": "e164850d796e51c69c0aaad9d668847b607b708c0577123fe8a8f2c75bfd7cd0",
+      "generate_random_adapter.py": "e6d17325feb9bb7e09f922059ae45307fb90f5969ef800fdc22ed71b7a455b75",
+      "coverage_audit.py": "ac96551633dddf99991a2e479f868f9d8aaaee38693b3859ea5706642bbf82ca",
+      "random_binding_contract.py": "8b8b97cebf78251227b3397784d59e6149bb59ace70e64a6d750950d8eac56fd",
+      "audience_export.py": "b31fb9538920a598aa649963652580d52740e526413b0c195d20fa1afe47486b",
+      "generate_composite_adapter.py": "3d1d5bc1d666764852de6d39cdcd85f1823422b923d20cf9a0d143458d38c844",
+      "line_points.py": "285fc5c4e514f4110d8c715d6d77c105ee5d6a9a12bd4281a4887dfe2865092b",
+      "fit_activity_model.py": "01a46f7f77d90a8866885e0d403b7699f1d666e73939504c15c73932179293aa",
+      "shader_compat.py": "a51f0d7fb84ed6c484b2fbab3d3b22aa40c236bab862b58a89c124288aba1e99",
+      "shader_fields.py": "dbd40b1e8ddd1cba6933f1598968213f9c433e88d8535cf25090a7106a4695fc",
+      "beta_collections.py": "8719e77c1cf196fc8206399281be45ba27597cfb8c9c89af141eea4d116d5692",
+      "intensity_calibration.py": "388d215ed7a69891e085f6a3e9b17183fe993abd4b9c94ea05c2bb32ecf8551a"
+    },
+    "domain": {
+      "width": 256,
+      "height": 144,
+      "mesh_x": 48,
+      "mesh_y": 32,
+      "profile": "gles300",
+      "initial_rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hue_offsets": [
+        67.04999542236328,
+        143.0800018310547,
+        271.739990234375,
+        196.01998901367188
+      ],
+      "equation_seed": 1094840333,
+      "blur_levels": 3,
+      "quantize": true,
+      "descriptor_warmup_frames": 0,
+      "line_rendering_profile": "projectmtv-gles-quad-lines-v1",
+      "point_subpixel_bits": 8,
+      "warp_subpixel_bits": null,
+      "composite_subpixel_bits": null,
+      "main_binding_policy": "projectmtv-core-2.2.6-v1",
+      "point_grid_context": "Apple M4 Pro API34 emulator; independently frozen controls, exact-halfway ties unverified",
+      "equation_rng_policy": "projectmtv-core-2.3.7-cold-thread-v1",
+      "declared_random_profile": {
+        "policy": "core-thread-inputs-v1",
+        "entropy_seed": 12345,
+        "c_stream": "declared-mt19937-u31-v1",
+        "noise_initialization_clock_ns": 1000000033333333
+      },
+      "triangle_subpixel_bits": 8
+    },
+    "limits": [
+      "Measured8bit polygoncandidate context only",
+      "Default raster path unchanged",
+      "Frames2/3stillfeedbackdivergent; no fullpresetrepair"
+    ]
+  },
+  "negative_fma_prototype": {
+    "location": "build/visual-loop/case024/round005/diagnosis/fma-prototype",
+    "baseline_mean_rgb8_error": 11.204503490306713,
+    "candidate_mean_rgb8_error": 11.2001791872,
+    "production_profile_added": false,
+    "limitations": [
+      "Singlecontrol supportscontraction;doesnotcertifyallshadercompileroptimization.",
+      "Scalar-temporaryboundarieserasedincurrentDAG.",
+      "No demonstratedstructuralrepair;notadopted."
+    ]
+  },
+  "limitations": [
+    "Exacthalfwayvertexroundingremainsdeclarednp.rintpolicy;notuniversallyverified.",
+    "Nativeframes2/3stilldivergeinfeedback.",
+    "005predictions/gradesunchanged;diagnosticsnofreshcredit."
+  ]
+}

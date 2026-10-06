@@ -46,7 +46,12 @@ def shape_fan(values:dict,*,aspect_y:float)->dict:
 
 
 def draw_triangles(destination,positions,colours,triangles,*,additive:bool,
-                   quantize:bool=True,texture_uv=None,texture_sample=None):
+                   quantize:bool=True,texture_uv=None,texture_sample=None,raster_subpixel_bits=None):
+    """Optionally snap window vertices to a declared grid, leaving attributes intact.
+
+    Keep snapped coordinates in pixel space for coverage and interpolation;
+    the numerical grid is an input, not a universal GPU precision assertion.
+    """
     target=_finite(destination,'framebuffer').copy()
     points=_finite(positions,'positions');colour=_finite(colours,'colours')
     indices=np.asarray(triangles)
@@ -59,6 +64,14 @@ def draw_triangles(destination,positions,colours,triangles,*,additive:bool,
     if textured and (texture_sample is None or uv is None or uv.shape!=(len(points),2)):
         raise ValueError('textured fills require UV attributes and an explicit sampler')
     height,width=target.shape[:2]
+    if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
+        raise ValueError('raster subpixel bits must be an integer within 4..16')
+    pixel_space=raster_subpixel_bits is not None
+    if pixel_space:
+        scale=2**raster_subpixel_bits
+        points=np.rint(points.astype(np.float64)*np.array([width,height])*scale)/scale
+    coordinate_width,coordinate_height=(1,1) if pixel_space else (width,height)
+    query_dtype=np.float64 if pixel_space else np.float32
     def edge(a,b,x,y):return (b[0]-a[0])*(y-a[1])-(b[1]-a[1])*(x-a[0])
     def inclusive(a,b):
         dx,dy=b-a
@@ -69,11 +82,11 @@ def draw_triangles(destination,positions,colours,triangles,*,additive:bool,
         if area==0:continue
         if area<0:ids[[1,2]]=ids[[2,1]];a,b,c=points[ids];area=-area
         minimum=np.min([a,b,c],axis=0);maximum=np.max([a,b,c],axis=0)
-        x0=max(0,int(np.ceil(float(minimum[0])*width-.5)));x1=min(width-1,int(np.floor(float(maximum[0])*width-.5)))
-        y0=max(0,int(np.ceil(float(minimum[1])*height-.5)));y1=min(height-1,int(np.floor(float(maximum[1])*height-.5)))
+        x0=max(0,int(np.ceil(float(minimum[0])*coordinate_width-.5)));x1=min(width-1,int(np.floor(float(maximum[0])*coordinate_width-.5)))
+        y0=max(0,int(np.ceil(float(minimum[1])*coordinate_height-.5)));y1=min(height-1,int(np.floor(float(maximum[1])*coordinate_height-.5)))
         if x0>x1 or y0>y1:continue
-        x,y=np.meshgrid((np.arange(x0,x1+1,dtype=np.float32)+.5)/width,
-                        (np.arange(y0,y1+1,dtype=np.float32)+.5)/height)
+        x,y=np.meshgrid((np.arange(x0,x1+1,dtype=query_dtype)+.5)/coordinate_width,
+                        (np.arange(y0,y1+1,dtype=query_dtype)+.5)/coordinate_height)
         ea=edge(b,c,x,y);eb=edge(c,a,x,y);ec=edge(a,b,x,y)
         coverage=((ea>0)|((ea==0)&inclusive(b,c)))&((eb>0)|((eb==0)&inclusive(c,a)))&((ec>0)|((ec==0)&inclusive(a,b)))
         if not np.any(coverage):continue
@@ -89,7 +102,7 @@ def draw_triangles(destination,positions,colours,triangles,*,additive:bool,
 
 
 def draw_shape(destination,values:dict,*,aspect_y:float,quantize:bool=True,
-               texture_sample=None,texture_aspect_y:float|None=None):
+               texture_sample=None,texture_aspect_y:float|None=None,raster_subpixel_bits=None):
     """Render a source-equation shape fill; unresolved outlines remain explicit.
 
     The caller supplies the correct previous-main or named-image sampler. It
@@ -113,12 +126,14 @@ def draw_shape(destination,values:dict,*,aspect_y:float,quantize:bool=True,
         uv[-1]=uv[1]
     return draw_triangles(destination,fan['positions'],fan['colours'],fan['triangles'],
                           additive=int(values.get('additive',0))!=0,quantize=quantize,
-                          texture_uv=uv,texture_sample=texture_sample)
+                          texture_uv=uv,texture_sample=texture_sample,raster_subpixel_bits=raster_subpixel_bits)
 
 
-def draw_borders(destination,values:dict,*,quantize:bool=True):
+def draw_borders(destination,values:dict,*,quantize:bool=True,raster_subpixel_bits=None):
     """Pinned Border::Draw fans, outer then inner, with ordinary alpha blending."""
     target=_finite(destination,'framebuffer').copy()
+    if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
+        raise ValueError('raster subpixel bits must be an integer within 4..16')
     outer=np.float32(values.get('ob_size',.01));inner=np.float32(values.get('ib_size',.01))
     if not np.all(np.isfinite([outer,inner])):raise ValueError('nonfinite border size')
     for index,prefix in enumerate(['ob_','ib_']):
@@ -132,6 +147,7 @@ def draw_borders(destination,values:dict,*,quantize:bool=True):
         for rotation in range(4):
             # Native inverted projection followed by top-origin coordinates.
             positions=vertices*np.float32(.5)+np.float32(.5)
-            target=draw_triangles(target,positions,colours,[[0,1,2],[0,2,3]],additive=False,quantize=quantize)
+            target=draw_triangles(target,positions,colours,[[0,1,2],[0,2,3]],additive=False,quantize=quantize,
+                                  raster_subpixel_bits=raster_subpixel_bits)
             x=vertices[:,0].copy();vertices[:,0]=-vertices[:,1];vertices[:,1]=x
     return target

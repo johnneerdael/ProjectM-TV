@@ -3,6 +3,18 @@ import numpy as np
 
 
 class SceneDrawTest(unittest.TestCase):
+    def test_declared_triangle_grid_reaches_quad_wave_coverage(self):
+        from scene_draw import draw_source_scene
+        y=(1.0005+1/64)/4
+        custom=[{'positions':[[.125,y],[.875,y]],'colours':[[1,0,0,1],[1,0,0,1]],
+                 'draw_mode':'strip','copy_offsets':[[0,0]],'additive':False}]
+        inputs=(np.zeros((4,4,4)),{'values':{}},{'main':{},'shapes':[]},None,custom)
+        default=draw_source_scene(*inputs,line_rendering_profile='projectmtv-gles-quad-lines-v1')
+        snapped=draw_source_scene(*inputs,line_rendering_profile='projectmtv-gles-quad-lines-v1',
+                                  triangle_subpixel_bits=8)
+        np.testing.assert_array_equal(np.argwhere(default[...,0]>0),[[1,0],[1,1],[1,2]])
+        np.testing.assert_array_equal(np.argwhere(snapped[...,0]>0),[[0,0],[0,1],[0,2]])
+
     def test_declared_point_grid_reaches_custom_wave_rasterization(self):
         from scene_draw import draw_source_scene
         custom=[{'positions':[[1.001/4,1.999/4]],'colours':[[1,0,0,1]],
