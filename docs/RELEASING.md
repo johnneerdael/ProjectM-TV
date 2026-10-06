@@ -36,7 +36,10 @@ any written marker. Human-authored comments, lookalike accounts and empty bot
 review replies cannot qualify. GitHub's reactions endpoint can label the connector
 as `User` while its comments identify it as `Bot`; reaction authentication uses
 its reserved `chatgpt-codex-connector[bot]` login, never the generic user-type field.
-The connector cannot use the qualified-human-review fallback.
+The connector cannot use the qualified-human-review fallback. The trusted controller,
+preflight and final reporter receive `issues: read` to read PR-body reactions
+through GitHub’s issues reactions endpoint; PR build jobs receive no added
+write permission.
 
 An approving/comment-only review from another repository owner, member or
 collaborator remains a separate qualification path. Author self-reviews and stale
