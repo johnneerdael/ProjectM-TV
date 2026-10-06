@@ -20,7 +20,7 @@ The other three presets are `Serge + martin - crystal palace tunnel003.milk`
 (`mus`), `martin - mandelbox explorer - wreck diver nz+ liquititty.milk`
 (`dist_c`) and `martin - organic light.milk` (`uv3`). The Microsoft legacy compiler
 reflects these globals as external constants with NULL defaults. Previously they
-became uninitialized ordinary GLSL globals. Patch 0040 preserves uninitialized
+became uninitialized ordinary GLSL globals. Historical patch 0040 (retained in the 4.2 series as `0002-hlsl-compatibility-and-float-roundtrip.patch`) preserves uninitialized
 scalar/vector float globals as uniform inputs and uses the existing initialized
 per-invocation copies when shaders write them. Mixed comma declarations preserve
 individual storage classes. Locals, static/const declarations, initialized globals,
@@ -233,7 +233,7 @@ are bounded separately; runtime artifact pushes have a 180-second limit.
 
 Current source adapters stamp `float_literal_policy` as `float32-roundtrip-v1` and the production formatter’s `float_formatter_sha256`.
 The reader exports `renderer_literal` through that formatter, and lowering uses its
-reparsed value. Rebuilding against patch 0044 therefore models the new renderer
+reparsed value. Rebuilding against historical patch 0044, retained in the consolidated 4.2 HLSL patch, therefore models the current renderer
 rather than retaining the old six-digit emission. Historical adapters and archived
 measurement fixtures keep their original identities; do not relabel them.
 
