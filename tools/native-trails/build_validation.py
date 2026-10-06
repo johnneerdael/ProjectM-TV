@@ -27,6 +27,15 @@ from preset_lab.identity import canonical_json, digest, file_digest
 sys.path.insert(0, str(ROOT / "tools/core-corpus"))
 from build_core_aars import checkout_pinned_engine, set_native_frame_time
 
+ROLE_PACKAGES = {
+    "baseline-native": "nl.neerdael.projectmtv.corpusbaseline",
+    "baseline-capped": "nl.neerdael.projectmtv.corpusbaseline",
+    "candidate-native": "nl.neerdael.projectmtv.corpuscandidate",
+    "candidate-capped": "nl.neerdael.projectmtv.corpuscandidate",
+    "rebase-baseline": "nl.neerdael.projectmtv.corpusrebasebaseline",
+    "rebase-candidate": "nl.neerdael.projectmtv.corpusrebasecandidate",
+}
+
 CLOCK_BODY = """double NowSeconds() {
     using namespace std::chrono;
     return duration<double>(steady_clock::now().time_since_epoch()).count();
@@ -69,6 +78,23 @@ def instrument_worker_abi(text, abi):
     return once(text, "ndk { abiFilters 'arm64-v8a' }", "ndk { abiFilters '" + abi + "' }")
 
 
+def worker_package(role):
+    if role not in ROLE_PACKAGES:
+        raise ValueError("Unsupported worker role: " + role)
+    return ROLE_PACKAGES[role]
+
+
+def instrument_worker_package(text, package):
+    existing = ("'nl.neerdael.projectmtv.corpuspublished', "
+                "'nl.neerdael.projectmtv.corpusbaseline', "
+                "'nl.neerdael.projectmtv.corpuscandidate'")
+    if package in ("nl.neerdael.projectmtv.corpusbaseline", "nl.neerdael.projectmtv.corpuscandidate"):
+        return text
+    if package not in ROLE_PACKAGES.values():
+        raise ValueError("Unsupported worker package: " + package)
+    return once(text, existing, existing + ", '" + package + "'")
+
+
 def native_hashes(archive):
     return {name: hashlib.sha256(archive.read(name)).hexdigest()
             for name in archive.namelist() if name.startswith("jni/") and name.endswith(".so")}
@@ -77,6 +103,7 @@ def native_hashes(archive):
 def build(commit, policy, role, work, abi="arm64-v8a"):
     if abi not in ("arm64-v8a", "armeabi-v7a"):
         raise ValueError("Unsupported ABI: " + abi)
+    package = worker_package(role)
     commit = subprocess.check_output(["git", "rev-parse", commit], cwd=ROOT, text=True).strip()
     destination = work.resolve() / role
     destination.mkdir(parents=True, exist_ok=False)
@@ -131,7 +158,8 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
                        'abiFilters "' + abi + '"'), changes, source)
     worker = source / "tools/core-corpus/android-worker"
     worker_gradle = worker / "app/build.gradle"
-    change(worker_gradle, instrument_worker_abi(worker_gradle.read_text(), abi), changes, source)
+    worker_settings = instrument_worker_package(worker_gradle.read_text(), package)
+    change(worker_gradle, instrument_worker_abi(worker_settings, abi), changes, source)
     sdk = Path(os.environ.get("ANDROID_HOME", str(Path.home() / "Library/Android/sdk")))
     (source / "local.properties").write_text("sdk.dir=" + str(sdk) + "\n")
     patches = [{"name": p.name, "sha256": file_digest(p)}
@@ -194,8 +222,7 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
     instrument.write_text(text)
     identity["worker_java_sha256"] = file_digest(instrument)
     wrapper = [str(source / "gradlew"), "-p", str(worker), ":app:assembleDebug", "--console=plain",
-               "-PcoreAar=" + str(aar), "-PcorpusApplicationId=nl.neerdael.projectmtv.corpus" +
-               ("baseline" if role.startswith("baseline") else "candidate")]
+               "-PcoreAar=" + str(aar), "-PcorpusApplicationId=" + package]
     with (destination / "worker-build.log").open("w") as log:
         command(wrapper, source, log)
     apk = destination / (role + ".apk")
@@ -205,8 +232,7 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
             if hashlib.sha256(archive.read(name.replace("jni/", "lib/", 1))).hexdigest() != expected:
                 raise ValueError("Worker native bytes differ from the supplied AAR")
     identity.update({"aar": str(aar), "apk": str(apk), "apk_sha256": file_digest(apk),
-                     "package": "nl.neerdael.projectmtv.corpus" +
-                     ("baseline" if role.startswith("baseline") else "candidate")})
+                     "package": package})
     (destination / "identity.json").write_text(canonical_json(identity) + "\n")
     print(canonical_json({key: identity[key] for key in ("source_commit", "policy", "role", "aar", "apk", "apk_sha256")}))
     return identity
@@ -216,7 +242,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--commit", required=True)
     parser.add_argument("--policy", choices=("native", "capped"), required=True)
-    parser.add_argument("--role", choices=("baseline-native", "baseline-capped", "candidate-native", "candidate-capped"), required=True)
+    parser.add_argument("--role", choices=tuple(ROLE_PACKAGES), required=True)
     parser.add_argument("--abi", choices=("arm64-v8a", "armeabi-v7a"), default="arm64-v8a")
     parser.add_argument("--work", type=Path, default=ROOT / "build/native-trails/workers")
     args = parser.parse_args()

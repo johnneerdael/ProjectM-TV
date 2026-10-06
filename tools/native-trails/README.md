@@ -19,6 +19,16 @@ python tools/native-trails/build_validation.py --commit CANDIDATE_SHA --policy n
 python tools/native-trails/run_validation.py run --device OWNED_EMULATOR --workers build/native-trails/workers --presets tools/native-trails/presets.txt --work build/native-trails/focused
 ```
 
+For an upstream rebase comparison, use `--role rebase-baseline` and
+`--role rebase-candidate` in a new work directory. Their worker packages are
+`nl.neerdael.projectmtv.corpusrebasebaseline` and
+`nl.neerdael.projectmtv.corpusrebasecandidate`; the existing corpus packages remain
+separate. The builder records the private Gradle package allowlist transformation
+and the resulting package in its identity. Historical role/package assignments
+and frozen runner protocol contracts are unchanged. A migration with a different
+patch series needs a separately recorded bounded comparison protocol; the old
+runner's prefix/+1-patch provenance gate cannot validate that migration.
+
 The builder defaults to `--abi arm64-v8a`. For a TV running 32-bit Android (check
 `adb -s DEVICE shell getprop ro.product.cpu.abilist`), build both comparison roles
 with `--abi armeabi-v7a`. The selected ABI is recorded in the build identity;
