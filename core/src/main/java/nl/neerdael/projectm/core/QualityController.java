@@ -148,13 +148,16 @@ public final class QualityController {
      * Legacy setMode keeps its Auto-only contract for existing embedding apps.
      */
     public void setResolutionMode(int mode, int lastAutoHeight) {
-        resolutionMode = validResolutionMode(display, mode);
+        int normalized = validResolutionMode(display, mode);
+        if (resolutionMode != normalized) beforePressure = -1;
+        resolutionMode = normalized;
         startMode(lastAutoHeight);
     }
 
     /** @deprecated height is ignored; lastAutoHeight is a remembered automatic starting point. */
     @Deprecated
     public void setMode(int height, int lastAutoHeight) {
+        if (resolutionMode != 0) beforePressure = -1;
         resolutionMode = 0;
         startMode(lastAutoHeight);
     }

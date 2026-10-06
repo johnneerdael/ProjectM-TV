@@ -147,6 +147,16 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void nativePressureHistoryDoesNotBecomeRememberedAutoHeight() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 1080);
+        q.onMemoryPressure(15);
+        q.setResolutionMode(0, 1440);
+        assertEquals(1440, q.autoHeightToRemember());
+    }
+
+    @Test
     public void explicitResolutionOnSmallerPanelRejectsSaved4kAndNativeUsesPanel() throws Exception {
         QualityController q = controller(display(1920, 1080), profile(DeviceProfile.Tier.HIGH),
                 0, h -> applied = h);

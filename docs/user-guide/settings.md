@@ -52,6 +52,6 @@ The canonical `projectM-TV-core.aar` now contains this Native core; the separate
 
 ![Track display panel with Track info On, Show for Always and Pill style Off](images/setup/track-display-settings.png)
 
-![Earlier Advanced settings and Diagnostics with automatic memory budgeting and High trails inactive at 1080p](images/setup/advanced-settings.png)
+![Advanced settings with the restored Resolution selector, Auto memory budgeting and High trails inactive at 540p](images/setup/advanced-settings.png)
 
-The Advanced screenshot predates the restored Resolution row and uses an isolated emulator installation with no audio source; High is selected but inactive at its 1080p render size. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+The Advanced screenshot uses this change’s isolated 4K TV emulator with no audio source; Auto is selected and memory budgeting reduces the render size to 540p, where High trails is inactive. The panel scrolls vertically when needed, keeping all rows reachable by D-pad. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.

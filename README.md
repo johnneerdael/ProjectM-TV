@@ -78,7 +78,7 @@ The main panel shows the current preset and a live audio level (*Listening*, *Ve
   <img src="docs/user-guide/images/setup/advanced-settings.png" alt="The advanced settings panel with diagnostics" width="32%">
 </p>
 
-These settings captures use an earlier isolated test installation on an Ugoos AM6; the current collection row is named Preset mood. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
+Main and Track display captures use an earlier isolated test installation on an Ugoos AM6; the current collection row is named Preset mood. Advanced shows the restored Resolution selector on an isolated TV emulator. The [setup walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/) shows audio permission and notification access step by step.
 
 | Setting | Values | Default |
 |---|---|---|
