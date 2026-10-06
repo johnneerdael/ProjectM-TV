@@ -30,13 +30,13 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **9,606 curated MilkDrop presets** with smooth blends between them
 - **Predictive preset engine (beta):** choose **Chill**, **Normal** or **Intense** by predicted visual activity. **All** remains the default and keeps the full library available.
 - **Corrected shader maths** restores colours and detail in presets affected by projectM translator bugs; [proof and upstream contribution](https://github.com/projectM-visualizer/projectm/pull/1031)
-- **More presets run their own shaders:** 102 bundled presets that fell back to the default shader because of translator errors (flat array initializers, `sampler_state` blocks) now run as written, and shaders that change `q` variables or `time` start from their real values instead of undefined ones
+- **Preset shader compatibility:** retained fixes handle flat array initializers and `sampler_state` blocks, and shaders that change `q` variables or `time` start from their input values instead of undefined ones. Earlier preset-count measurements belong to the 4.1.7 engine; the 4.2 snapshot uses the current upstream translator plus the retained fixes.
 - **Additional shader compatibility fixes:** presets using a local named `sample`, declaration or statement macros, or swizzles after parenthesized constructors can use their authored shaders. GPU driver acceptance and visual fidelity remain device-dependent.
 - **Audio detected about 1 second after launch**, from the music app's own audio session
 - **Cover, artist and title** of the playing track on screen, as in Milkbeat
 - **No freezes at preset switches**: upcoming presets are prepared in the background, with cached shaders
 - **Adaptive resolution** that holds the frame rate, also during blends, without interrupting the picture
-- **Optimised projectM**: batched shape drawing (70–90% faster on shape-heavy presets), less memory traffic per frame (on a Mali-G52 10–26% more frames per second on presets with a composite shader, up to twice as many on presets without one), reused picture buffers, fewer redundant GL calls, a faster shader parser
+- **Maintained TV renderer**: batched shape drawing, reused picture buffers, fewer redundant GL calls and shader caches, adapted to unreleased projectM 4.2 master. Earlier 4.1.7 speed measurements are historical; they do not establish gains for this rebase.
 - **Memory-aware**: adjusts resolution to leave headroom for the music app
 - **Skips presets that stay black**
 - **Optional auto-update**: downloads new releases in the background and offers to install them (off by default)

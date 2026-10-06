@@ -12,7 +12,7 @@
 
 ## Global constraints
 
-No routine version bump; no commits of modified upstream source; keep API21 and both Android ABIs; preserve Native trails, audio, lifecycle and host integration; honor repository review/merge/release gates. Scratch clones are ignored build artifacts, not shipped dependencies.
+No routine version bump; no commits of modified upstream source; keep API 21 and both Android ABIs; preserve Native trails, audio, lifecycle and host integration; honor repository review/merge/release gates. Scratch clones are ignored build artifacts, not shipped dependencies.
 
 ## Units
 
@@ -22,8 +22,8 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 - [x] Recover any prior work; no prior migration artifact was found.
 - [x] Reconstruct all 44 old patches with per-patch commit IDs.
 - [x] Read current public board and cited vcpkg comment.
-- [x] Run the reconstructed baseline host suite:261/261 pass.
-- [x] Write separate per-item/per-patch report in docs/UPSTREAM_PATCH_VALUE.md; final-device limits remain explicit.
+- [x] Run the reconstructed baseline host suite: 261/261 pass.
+- [x] Write separate per-item/per-patch report in `docs/UPSTREAM_PATCH_VALUE.md`; final-device limits remain explicit.
 
 ### 2. HLSL compatibility port (independent agent)
 
@@ -38,7 +38,7 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 
 **Goal:** Keep per-thread random state and lone-dot compatibility against upstream evaluator 1.0.7+.
 **Files:** scratch flattened `vendor/projectm-eval/`, `tests/libprojectM/EvaluatorLoneDotTest.cpp`; output `build/upstream-rebase/evaluator-port.patch` and disposition JSON.
-**Approach:** Assess old0004/0020/0034 against evaluator22fb0cfd; drop upstream equivalents, preserve focused tests. Do not edit shared tests CMake or other files.
+**Approach:** Assess old 0004/0020/0034 against evaluator `22fb0cfd`; drop upstream equivalents, preserve focused tests. Do not edit shared tests CMake or other files.
 **Execution:** Characterization first.
 **Verification:** Evaluator delta applies against pinned nested gitlink; evaluator tests pass after integration.
 - [x] Complete port and disposition.
@@ -51,8 +51,8 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 **Execution:** Characterization first; regression first for migration-specific loader/resource changes.
 **Verification:** Fresh series application, host suite, sanitizer controls, Java tests and both ABI builds.
 - [x] Resolve source conflicts, preserve upstream Mesh/ShaderCache ownership, add burn-in and blur controls.
-- [x] Integrate3patches with master6f6480746/evaluator22fb0cfd; clean-export application passes.
-- [ ] Validate native/JVM/APK/AAR and core API consumer.
+- [x] Integrate three patches with master `6f6480746` / evaluator `22fb0cfd`; clean-export application passes.
+- [x] Validate native/JVM/APK/AAR and the exact-AAR Milkbeat consumer; final CI remains separate.
 
 ### 5. Docs, review, merge and release (root)
 
@@ -60,15 +60,27 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 **Verification:** Docs agree with final implementation, strict MkDocs passes, PR includes substantive release notes, validation and documentation assessment. Final-head Codex review, required CI, merged main SHA, publication and Milkbeat update are verified.
 - [ ] Evaluate and update all affected documentation.
 - [ ] Obtain comparable TV rendering/lifecycle evidence or record concrete blocker.
-- [ ] Open ready PR, complete final-head Codex review and CI.
+- [ ] Make [draft PR #46](https://github.com/johnneerdael/ProjectM-TV/pull/46) ready after device evidence; complete final-head Codex review and CI.
 - [ ] Merge and verify automatic release/Milkbeat update.
 
-## Checkpoint 2026-10-06
+## Verified local checkpoint (2026-10-06)
 
-Port-host329/329 pass; full production native runner passes engine/render-policy tests and21ASan/UBSan controls (CGL); standalone EGL transition overlay skipped because EGL/GLES development files are absent on macOS. Debugcore AAR, profile APK, releasecore AAR and releaseJVM builds pass for ARM64/ARMv7. Strict MkDocs passes. Both historic4.1.7 and new4.2 lab workers build, repeat identical simple-shape captures with0GLerrors, and5worker build tests pass. These are focused controls, not full preset-corpus or TV evidence. AM6 observed awake with Milkbeat playing; no device mutation performed yet. FinalTV, releaseAPK, Milkbeatconsumer, LinuxEGL CI, Codexreview, merge/publication remain open.
+These checks cover the recorded migration revisions. They do not replace final-head CI, GitHub Codex review or the TV matrix.
+
+- Reconstructed baseline host suite: 261/261. Integrated master host suite: 329/329. Production native runner passes engine/render-policy checks and 21/21 ASan/UBSan CGL controls. EGL transition overlay skips on macOS because EGL/GLES development files are unavailable; Linux EGL CI remains open.
+- Three patches apply to a clean upstream export. ARM64/ARMv7 debug/release core and profile APK builds pass. A fresh recursive `85ceac83` checkout builds debug core and release APK for both ABIs. Release JVM reports 30 app + 54 core tests without failures.
+- Milkbeat `6802630c2db1983607b8693ac4bd4ce208f80c74` builds `githubDebug` against the exact migration AAR, SHA256 `c57c823d18e5e33c0fcb4c779e41eece0a3d613cf95092351a86a4332c864075`; all 28 focused consumer tests pass and ARM packaging matches that artifact. This completes the local consumer check, not the automatic release/update gate.
+- Standard Preset Lab full suite: 164/164 including three native controls. Later focused worker-build/Android-header guard suite: 7/7; no inferred full-suite total. Milk-analyzer: 199 passing tests. Native trails/corpus tooling: 75 passing tests plus 35 subtests. Release tooling: 157 passing tests. Strict MkDocs build passes.
+- AM6 Android 9 live-Milkbeat smoke renders at 1920×1080 and the three-line unreleased-master/pin label fits. Tracks differed between smoke runs, so sampled FPS is not a causal performance comparison. Task properties/preferences/listener state were restored after that profile check.
 
 ## Validation tooling review corrections
 
-Local review of85ceac83 found two valid issues: copied native CPU shader bodies needed production logging declarations, and the new public frame-time API left constructor/init timing unfrozen. The adapters now retain unchanged copied bodies while using production logging; both adapters build and199analyzer tests pass. Private snapshot timing now freezes constructor/init origins and uses the native frame-time API for both JNI render calls. Builders resolve engine/evaluator gitlinks from each requested source commit, preserving historical24/44patch controls. Full standard-worker PresetLab164/164, NativeTrails/CoreCorpus74tests+35subtests and release tooling157tests pass. CI now collects the pytest-style builder controls.
+Local review found that copied CPU shader bodies needed production logging declarations and that public frame-time assignment alone left constructor/init timing unfrozen. The adapters now retain unchanged copied bodies with production logging; private clocks start at zero and use the upstream API before both JNI render calls. A time/progress-sensitive preset repeats six frames exactly across delayed fresh processes, while the uncorrected constructor-clock control diverges. The Android GLES compile regression prevents the private hook from importing desktop GLAD on Android.
 
-Fresh recursive85ceac83 checkout builds debugcore and releaseAPK for bothABIs. Milkbeat main6802630c builds GitHubdebug against the exact newAAR bytes;28focused visualizer tests pass. AM6Android9 smoke rendered AcidMandala with liveMilkbeat at1920x1080,29.79FPSbaseline/29.67FPScandidate sample means; tracks differed, so these are not causal performance or image-equivalence results. The3-line unreleased-master/pin label fits onTV. Debugpreset restored, profile stopped and its added listener disallowed. Frozen-audio/device comparisons, finalCI/Codex/merge/publication remain open.
+Builders resolve engine/evaluator pins from the requested source commit. Frozen 24/44-patch historical sources retain their own identities; the candidate uses the three-patch master series. Rebase worker packages are distinct from existing corpus packages. Instrumented workers are separately hash-identified test artifacts, not shipping-byte-identical releases. Their historical timing/sample metadata literals require the explicit source-based limits in the comparison protocol.
+
+## Device evidence and remaining gates
+
+The completed frozen-audio pilot covers one preset, 1920×1080, Standard inactive, eight selected captures among 480 frames, two repeats per role and one Mali-G52/GLES 3.2 TV. Captures repeat bit-for-bit within each role, while cross-role differences are localized and reach RGB byte MAE 2.66 at frame 479. The source analysis does not support attributing this difference to the coordinate correction; its cause remains unproven. This is not a 4K/native-active, minimum-GLES-3.0-only, full-corpus or performance conclusion.
+
+The full frozen-audio TV matrix is in progress. Final documentation/evidence reconciliation, ready-PR status, final-revision CI and GitHub Codex review, merge, publication and automatic Milkbeat update remain unchecked. Keep the existing migration patches and historical source identities intact while assessing device evidence; do not present source consolidation as measured visual or performance equivalence.
