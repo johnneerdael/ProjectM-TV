@@ -62,7 +62,7 @@
     "name": "projectmtv-core-2.3.8-shape-state-v1",
     "default_scope": "Verified43-patch source identity",
     "unknown_identity": "Retains legacy-repeat-linear-v1; explicit current policy rejected",
-    "instances": "First main draw inherits sampler0; textured draws clear it; later main draws use repeat/nearest",
+    "instances": "Warp clears sampler0; only delayed blur is inherited by first main draw. Without it, and after textured draws clear sampler0, main draws use repeat/nearest",
     "named_images": "Own descriptor sampler modes preserved",
     "future_engine_fix": "Requires source/AAR identity and policy update"
   },

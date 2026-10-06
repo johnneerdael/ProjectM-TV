@@ -14,12 +14,12 @@ def test_first_main_shape_inherits_delayed_blur_clamp_linear():
     assert modes[1]=={'wrap':True,'linear':False}
 
 
-@pytest.mark.parametrize('frame_wrap,expected',[(0,False),(1,True)])
-def test_no_delayed_blur_inherits_warp_sampler(frame_wrap,expected):
+@pytest.mark.parametrize('frame_wrap',[0,1])
+def test_no_delayed_blur_uses_texture_state_after_warp_unbind(frame_wrap):
     for reads,level in [(False,3),(True,0)]:
         modes=module.shape_sampling_modes(shapes(False,True),image_names={},policy=module.CORE_238,
                                          warp_reads_blur=reads,blur_level=level,frame_wrap=frame_wrap)
-        assert modes[1]=={'wrap':expected,'linear':True}
+        assert modes[1]=={'wrap':True,'linear':False}
 
 
 def test_named_image_owns_sampler_and_clears_prior_inheritance():

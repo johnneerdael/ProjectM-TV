@@ -296,8 +296,9 @@ domain or its hash. Diagnostic retests retain their original grades.
 
 The verified43-patch source defaults to
 `projectmtv-core-2.3.8-shape-state-v1`, modeling the published core's sampler-state
-leak. The first unnamed main-textured shape inherits the bound linear sampler:
-clamp after a delayed blur update, otherwise the warp's frame wrap. Each textured
+leak. The warp draw clears sampler0. Only a delayed blur update subsequently
+binds clamp/linear before the first unnamed main-textured shape. Without that
+update the first main shape uses repeat/nearest texture settings. Each textured
 draw clears sampler0 afterward; later unnamed instances use the framebuffer
 texture's repeat/nearest settings. Named-image descriptors keep their own modes.
 Actual blur requests come from active custom source, including sampler/texsize

@@ -31,15 +31,16 @@ def shape_sampling_modes(shapes:list,*,image_names:dict,policy:str,
     """Return a mode for each textured draw, retaining instance order.
 
     In the verified old core, a texture-only bind preserves sampler0. The first
-    main-textured draw inherits linear warp/blur sampling; each textured draw
+    main-textured draw inherits delayed blur sampling; each textured draw
     then clears sampler0. Later main draws use the attachment's repeat/nearest
     settings. Named images explicitly bind their own descriptor samplers.
     """
     if policy not in {LEGACY,CORE_238}:raise ValueError('unsupported shape sampler policy')
     if type(blur_level) is not int or not 0<=blur_level<=3:raise ValueError('native blur level0..3 required')
     if type(warp_reads_blur) is not bool or not math.isfinite(frame_wrap):raise ValueError('finite shape sampler context required')
-    inherited=True
-    first_wrap=False if warp_reads_blur and blur_level else frame_wrap>.0001
+    # PerPixelMesh clears sampler0 after its draw. Only a later blur update
+    # binds another sampler before geometry; pre-warp blur does not survive.
+    inherited=bool(warp_reads_blur and blur_level)
     modes={}
     for ordinal,shape in enumerate(shapes):
         if not int(shape['values'].get('textured',0)):continue
@@ -48,7 +49,7 @@ def shape_sampling_modes(shapes:list,*,image_names:dict,policy:str,
             settings=texture_settings(image)
             mode={'wrap':settings['wrap'],'linear':settings['linear']}
         elif policy==LEGACY:mode={'wrap':True,'linear':True}
-        elif inherited:mode={'wrap':first_wrap,'linear':True}
+        elif inherited:mode={'wrap':False,'linear':True}
         else:mode={'wrap':True,'linear':False}
         modes[ordinal]=mode
         inherited=False
