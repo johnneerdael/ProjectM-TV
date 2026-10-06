@@ -1,0 +1,35 @@
+{
+  "role": "published",
+  "aar_sha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+  "native_sha256": "8bb82903af3825e16b734ceddf7316ba83da43509fb3fa3614537749a5c124f0",
+  "rgb_sha256": "14e97d8c85b433581afa4a126f40344345c18150e4dbb5392b16370576e6a257",
+  "rgb": [
+    128,
+    96,
+    0
+  ],
+  "metadata": {
+    "backend": "unchanged-core-jni",
+    "rendered_frame_serial_delta": 1,
+    "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+    "core_version": "4.1.7",
+    "preset": "literal-roundtrip-control238.milk",
+    "frames": 1,
+    "width": 256,
+    "height": 144,
+    "fps": 30,
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "simulated_clock": true,
+    "skipped_count": 0,
+    "indexed_count": 1
+  },
+  "release": "v2.3.10",
+  "source_commit": "fa18cbab14552a2903e331f74102260fc29c2455",
+  "release_url": "https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.3.10",
+  "helpers": {
+    "classes.dex": "bc7b2baf3a5793966d2984718c0675a6136f97c451752d9c9cd79b2e701d87f1",
+    "libbackendclock.so": "4a6820e57020ff56cf7731f8286d848d4693c0d3820e44606c44e76ce57ef9fd"
+  },
+  "scope": "one-frame unchanged synthetic preset; unchanged published AAR native library; runner-side clock only",
+  "limits": "No physical-TV performance or full-preset visual fidelity claim."
+}

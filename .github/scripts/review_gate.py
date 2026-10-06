@@ -15,7 +15,15 @@ CODEX = "chatgpt-codex-connector[bot]"
 TRUSTED = {"OWNER", "MEMBER", "COLLABORATOR"}
 
 
-def eligibility(pr, reviews, comments, threads):
+def reviewed_commit_matches(record, written, head):
+    if not re.fullmatch(r"[0-9a-f]{7,40}", written):
+        return False
+    resolved = record.get("_reviewed_commits", {}).get(written, written if len(written) == 40 else None)
+    return (isinstance(resolved, str) and re.fullmatch(r"[0-9a-f]{40}", resolved)
+            and resolved.startswith(written) and resolved == head)
+
+
+def eligibility(pr, reviews, comments, threads, reactions=()):
     if pr["state"] != "open" or pr["draft"] or pr["base"]["ref"] != "main":
         return False, "Waiting for an open, ready PR targeting main"
     if pr.get("requested_reviewers") or pr.get("requested_teams"):
@@ -52,27 +60,25 @@ def eligibility(pr, reviews, comments, threads):
             timestamp = datetime.fromisoformat(requested_at.replace("Z", "+00:00")).replace(microsecond=0)
             requests[kind] = max(timestamp, requests.get(kind, timestamp))
     for comment in comments:
-        if comment["user"]["login"] != CODEX:
+        if comment["user"]["login"] != CODEX or comment["user"].get("type") != "Bot":
             continue
         body = comment.get("body") or ""
         if "<!-- codex-pull-request-review-summary -->" in body:
             for row in body.splitlines():
                 if "**Code Review**" not in row and "**Security Review**" not in row:
                     continue
-                commit = re.search(r"`([0-9a-f]{40})`", row)
-                if commit and commit[1] == head and "**Completed**" in row:
-                    completed = completed or commit[1] == head
+                commit = re.search(r"`([0-9a-f]{7,40})`", row)
+                if commit and reviewed_commit_matches(comment, commit[1], head) and "**Completed**" in row:
                     kind = "security" if "**Security Review**" in row else "code"
                     date = re.search(r'datetime="([^"]+)"', row)
                     completed_at(kind, date[1] if date else None)
-                elif "**Completed**" not in row and (not commit or commit[1] == head):
-                    # An abbreviated running summary cannot identify its revision
-                    # safely. Keep the gate closed until it finishes.
+                elif "**Completed**" not in row and (not commit or reviewed_commit_matches(comment, commit[1], head)):
+                    # A running review of this revision keeps the gate closed,
+                    # even when an older thumbs-up remains on the PR.
                     return False, "Waiting for Codex review to finish"
         else:
-            commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{40})`", body)
-            if commit and commit[1] == head and re.search(r"\bCodex(?: Security)? Review\b", body):
-                completed = completed or commit[1] == head
+            commit = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{7,40})`", body)
+            if commit and reviewed_commit_matches(comment, commit[1], head) and re.search(r"\bCodex(?: Security)? Review\b", body):
                 kind = "security" if re.search(r"Codex Security Review", body, re.I) else "code"
                 completed_at(kind, comment.get("created_at"))
     for review in reviews:
@@ -80,23 +86,36 @@ def eligibility(pr, reviews, comments, threads):
         # Bot replies can create empty COMMENTED review records at the new head
         # even when their inline reply concerns an older commit. Require an actual
         # Codex review body and the API's full commit ID as completion evidence.
-        codex_review = (user["login"] == CODEX
+        codex_review = (user["login"] == CODEX and user.get("type") == "Bot"
                         and re.search(r"\bCodex(?: Security)? Review\b", review.get("body") or "")
                         and re.fullmatch(r"[0-9a-f]{40}", review.get("commit_id") or ""))
+        marker = re.search(r"\*\*Reviewed commit:\*\*\s*`([0-9a-f]{7,40})`", review.get("body") or "")
+        if marker:
+            codex_review = codex_review and review.get("commit_id", "").startswith(marker[1])
         trusted = codex_review or (
-            user.get("type") == "User" and user["login"] != pr["user"]["login"]
+            user.get("type") == "User" and user["login"] not in {CODEX, pr["user"]["login"]}
             and review.get("author_association") in TRUSTED)
         if (codex_review and review["commit_id"] == head and review.get("submitted_at")
                 and review["state"] in {"APPROVED", "COMMENTED"}):
             kind = "security" if re.search(r"Codex Security Review", review.get("body") or "", re.I) else "code"
             completed_at(kind, review["submitted_at"])
-        if (trusted and review.get("submitted_at") and review["commit_id"] == head
+        if (trusted and not codex_review and review.get("submitted_at") and review["commit_id"] == head
                 and review["state"] in {"APPROVED", "COMMENTED"}):
             completed = True
-    if any(kind not in completions or completions[kind] <= timestamp for kind, timestamp in requests.items()):
+    # The PR reaction is Codex's approval signal. Completion text/reviews identify
+    # the revision and time only; they cannot approve a PR without its thumbs-up.
+    # GitHub's reactions endpoint represents this bot as type=User, so authenticate
+    # its reserved connector login rather than relying on that inconsistent field.
+    thumbs = [datetime.fromisoformat(reaction["created_at"].replace("Z", "+00:00")).replace(microsecond=0)
+              for reaction in reactions if reaction["user"]["login"] == CODEX
+              and reaction.get("content") == "+1" and reaction.get("created_at")]
+    codex_approved = (bool(completions) and any(thumb >= max(completions.values()) for thumb in thumbs))
+    completed = completed or codex_approved
+    if requests and (not codex_approved or any(kind not in completions or completions[kind] <= timestamp
+                                              for kind, timestamp in requests.items())):
         return False, "Waiting for requested Codex reviews to finish"
     if not completed:
-        return False, "Waiting for a completed review of the latest commit"
+        return False, "Waiting for current Codex thumbs-up approval or a qualified review"
     if pr.get("mergeable") is not True or not pr.get("merge_commit_sha"):
         return False, "Waiting for a mergeable PR and its test merge commit"
     return True, "Review complete; no outstanding findings"
@@ -134,12 +153,39 @@ class GitHub:
         pages = self.request(f"repos/{self.repo}/{path}", paginate=True)
         return [item for page in pages for item in (page[key] if key else page)]
 
+    def resolve_review_commit(self, written):
+        if not re.fullmatch(r"[0-9a-f]{7,40}", written):
+            return None
+        if len(written) == 40:
+            return written
+        # The commits endpoint also accepts ref names. Reject hex-named refs so
+        # it resolves a commit abbreviation rather than a mutable branch/tag alias.
+        for namespace in ("heads", "tags"):
+            refs = self.get(f"git/matching-refs/{namespace}/{written}")
+            if any(ref["ref"] == f"refs/{namespace}/{written}" for ref in refs):
+                return None
+        resolved = self.get(f"commits/{written}")["sha"]
+        if not isinstance(resolved, str) or not re.fullmatch(r"[0-9a-f]{40}", resolved) or not resolved.startswith(written):
+            raise RuntimeError("GitHub did not resolve the reviewed commit abbreviation")
+        return resolved
+
     def snapshot(self, number):
         pr = self.get(f"pulls/{number}")
         # PR base.sha can lag behind the actual branch ref after a main push.
         pr["base"]["sha"] = self.get("git/ref/heads/main")["object"]["sha"]
         reviews = self.pages(f"pulls/{number}/reviews?per_page=100")
         comments = self.pages(f"issues/{number}/comments?per_page=100")
+        reactions = self.pages(f"issues/{number}/reactions?per_page=100")
+        resolved = {}
+        for record in comments:
+            if record["user"]["login"] != CODEX or record["user"].get("type") != "Bot":
+                continue
+            written = [token for token in re.findall(r"`([0-9a-f]{7,40})`", record.get("body") or "")
+                       if pr["head"]["sha"].startswith(token)]
+            for token in written:
+                if token not in resolved:
+                    resolved[token] = self.resolve_review_commit(token)
+            record["_reviewed_commits"] = {token: resolved[token] for token in written}
         owner, name = self.repo.split("/")
         threads, cursor = [], None
         while True:
@@ -166,7 +212,7 @@ class GitHub:
         current["base"]["sha"] = self.get("git/ref/heads/main")["object"]["sha"]
         if not matches(current, pr["head"]["sha"], pr["base"]["sha"], pr.get("merge_commit_sha")):
             return current, (False, "PR changed while reading reviews; recheck required")
-        ready, reason = eligibility(current, reviews, comments, threads)
+        ready, reason = eligibility(current, reviews, comments, threads, reactions)
         if ready:
             parents = self.get(f"git/commits/{current['merge_commit_sha']}")["parents"]
             if [parent["sha"] for parent in parents] != [current["base"]["sha"], current["head"]["sha"]]:
@@ -234,7 +280,7 @@ def reconcile(api, number, retry=False):
 def snapshot_safely(api, number, expected_head=None):
     try:
         return api.snapshot(number)
-    except (RuntimeError, subprocess.CalledProcessError, KeyError):
+    except (RuntimeError, subprocess.CalledProcessError, KeyError, ValueError, TypeError):
         pr = api.get(f"pulls/{number}")
         if (pr["state"] == "open" and pr["base"]["ref"] == "main"
                 and (expected_head is None or pr["head"]["sha"] == expected_head)):
@@ -247,13 +293,13 @@ def reconcile_safely(api, numbers, retry=False):
     for number in numbers:
         try:
             reconcile(api, number, retry)
-        except (RuntimeError, subprocess.CalledProcessError, KeyError) as error:
+        except (RuntimeError, subprocess.CalledProcessError, KeyError, ValueError, TypeError) as error:
             # Fail closed if review reads fail after a previously successful build.
             try:
                 pr = api.get(f"pulls/{number}")
                 if pr["state"] == "open" and pr["base"]["ref"] == "main":
                     api.status(pr["head"]["sha"], "pending", "Unable to verify review state; recheck required")
-            except (RuntimeError, subprocess.CalledProcessError, KeyError) as status_error:
+            except (RuntimeError, subprocess.CalledProcessError, KeyError, ValueError, TypeError) as status_error:
                 errors.append(f"PR #{number}: cannot invalidate status: {status_error}")
             errors.append(f"PR #{number}: {error}")
     if errors:
@@ -262,12 +308,19 @@ def reconcile_safely(api, numbers, retry=False):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=["reconcile", "preflight", "finish"])
+    parser.add_argument("mode", choices=["reconcile", "preflight", "finish", "inspect"])
     parser.add_argument("--repo", default=os.environ.get("GITHUB_REPOSITORY"), required=not os.environ.get("GITHUB_REPOSITORY"))
     parser.add_argument("--pr", type=int, default=0)
     parser.add_argument("--retry", action="store_true")
     args = parser.parse_args()
     api = GitHub(args.repo)
+    if args.mode == "inspect":
+        if args.pr <= 0:
+            raise ValueError("A positive PR number is required")
+        pr, (ready, reason) = api.snapshot(args.pr)
+        print(json.dumps(dict(pr=args.pr, head=pr["head"]["sha"], base=pr["base"]["sha"],
+                              merge=pr.get("merge_commit_sha"), eligible=ready, reason=reason)))
+        return
     if args.mode == "reconcile":
         numbers = [args.pr] if args.pr else [pr["number"] for pr in api.pages("pulls?state=open&base=main&per_page=100")]
         reconcile_safely(api, numbers, args.retry)
@@ -309,7 +362,7 @@ def finish_validation(api, number, head, base, merge, results, preflight, url):
         else:
             api.status(head, "failure", "Validation failed, was cancelled, or skipped a required build", url)
             raise RuntimeError(f"Required builds did not pass: {results}")
-    except (RuntimeError, subprocess.CalledProcessError, KeyError) as error:
+    except (RuntimeError, subprocess.CalledProcessError, KeyError, ValueError, TypeError) as error:
         if not retryable:
             raise
         # A reporter outage must not turn successful builds into an actual build
@@ -317,7 +370,7 @@ def finish_validation(api, number, head, base, merge, results, preflight, url):
         # controller rechecks eligibility before dispatching fresh validation.
         try:
             api.status(head, "pending", "Final reporting unavailable; fresh validation required", url)
-        except (RuntimeError, subprocess.CalledProcessError, KeyError) as status_error:
+        except (RuntimeError, subprocess.CalledProcessError, KeyError, ValueError, TypeError) as status_error:
             print(f"Cannot mark reporter outage pending: {status_error}", file=sys.stderr)
         print(f"Final reporting will be retried: {error}", file=sys.stderr)
 

@@ -18,7 +18,36 @@ CI fetches full tag history and rejects conflicting tags, inconsistent retry met
 
 ## Review gate
 
-A ready, mergeable PR targeting `main` needs at least one completed review of its **latest head commit**, identified by an exact 40-character SHA match. Either a submitted Codex code/security review, Codex's authenticated completion summary/comment identifying that commit, or an approving/comment-only review from another repository owner, member or collaborator qualifies. An author self-review, arbitrary comment, reaction, stale review or dismissed review does not qualify. Codex completion summaries and legacy comments must carry a full 40-character SHA; abbreviated text alone cannot qualify the PR or satisfy an outstanding Codex request. A submitted Codex review must contain its code/security review body and provide the full SHA through its API `commit_id`; empty review records created by unrelated bot replies do not count. If Codex publishes only abbreviated text without a submitted review, Codex-only qualification remains pending until unambiguous full-SHA evidence is available. A current or ambiguously abbreviated Codex summary still showing work in progress keeps the gate closed even when another review has finished.
+A ready, mergeable PR targeting `main` needs approval for its **latest head commit**.
+For Codex, the validator is the connector's **thumbs-up (`+1`) reaction on the PR
+itself**, not a completion comment or a reaction on a review comment. A completed
+summary or submitted code/security review supplies the reviewed revision and its
+completion time; it does not approve anything without the PR reaction. The reaction
+must be at or after that current review's completion. A missing/removed reaction,
+a stale reaction after a push, running review, or incomplete review metadata keeps
+the gate closed.
+
+Codex normally writes seven-character summary IDs and ten-character footer IDs.
+The controller resolves authenticated 7–40-character identifiers through GitHub
+and compares the result with the full current head. It rejects failed or ambiguous
+resolution, responses with a different prefix, and hex-named branches/tags that
+could shadow SHA lookup. A submitted review's full API `commit_id` must agree with
+any written marker. Human-authored comments, lookalike accounts and empty bot
+review replies cannot qualify. GitHub's reactions endpoint can label the connector
+as `User` while its comments identify it as `Bot`; reaction authentication uses
+its reserved `chatgpt-codex-connector[bot]` login, never the generic user-type field.
+The connector cannot use the qualified-human-review fallback.
+
+An approving/comment-only review from another repository owner, member or
+collaborator remains a separate qualification path. Author self-reviews and stale
+or dismissed reviews do not qualify. Full 40-character head/base/test-merge IDs
+remain mandatory in validation dispatch, preflight and final status reporting.
+Inspect current eligibility without writing statuses or dispatching jobs:
+
+```sh
+python3 .github/scripts/review_gate.py inspect --repo johnneerdael/ProjectM-TV --pr NUMBER
+```
+
 
 All review threads, including outdated threads, must be resolved. Outstanding review requests, any pending review exposed by the API, authorized `@codex review` or `@codex security review` requests awaiting subsequent completion, and outstanding changes-requested decisions also block builds. An explicit Codex command requires a completion for the current head, even when a human has also reviewed it; completions for older commits never clear the request. After a new push, retained commands require a new current-head Codex completion. Codex request commands use the comment's latest update time (creation time only if no update time is available), so editing an old comment into a review command requires a new completion after that edit. Summary rows must provide their own completion datetime; edits to the enclosing comment never supply a review completion time. Completion must be strictly later at whole-second precision; equal-second timestamps remain pending because GitHub request timestamps do not prove their order. A comment-only follow-up does not clear a changes-requested decision: the reviewer must approve or the decision must be explicitly dismissed. Express blocking findings as review threads or a changes-requested review; free-form issue comments do not have a GitHub resolution state.
 
