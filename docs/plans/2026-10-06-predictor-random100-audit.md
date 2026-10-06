@@ -4,7 +4,7 @@ Date:2026-10-06. Model freeze:483258f3. Reference:canonical publishedProjectM-TV
 
 ## Result
 
-The requested THREE gate passed3/3 at95; TEN gate passed10/10 at95+. The subsequent unchanged randomized100 audit has85presets at95+,12source predictions unresolved with0credit, two90scores and one65score with a critical trajectory mismatch. Mean score86.95including unknowns;98.8068among88completed predictions. No additional fresh100-pass requirement was imposed.
+The historical THREE gate used published2.3.8 and passed3/3 at95; TEN also used2.3.8 and passed10/10 at95+. The subsequent unchanged randomized100 audit has85presets at95+,12source predictions unresolved with0credit, two90scores and one65score with a critical trajectory mismatch. Mean score86.95including unknowns;98.8068among88completed predictions. No additional fresh100-pass requirement was imposed.
 
 | Score | Presets |
 |---|---:|
@@ -66,3 +66,30 @@ No newAARdefect is established by this100audit. Case125and the12source gaps need
 Keep this audit immutable. Add first-failure operand/stage/frame tracing; diagnose the six warp-power cases together, then nonfinite UVs. Localize125with separately frozen minimal controls and the matchingAAR before changing feedback math. Separate trajectory correctness, motion-estimator uncertainty and pixel detail in the next rubric. Derive future source-based mood/genre features only with declared coverage/uncertainty; this audit does not certify Chill/Normal/Intense memberships.
 
 Repository integration remains pending: sync currentmain, validate merged code/docs, obtain final-headCodexreview, merge and verify release workflow.
+
+
+## Post-audit independent review and repair
+
+Independent review rechecked all2,939sealed files, original source/input hashes,
+2,000claims, random selection and gate evidence. It independently recalculated
+264numerical row credits and264strict flash grades without discrepancies.
+`capture2311.py` is outside the final seal; the checkpoint separately records its
+hash. Preserve this and the missing assertion stdout as provenance limitations.
+The frozen audit report/grades remain unchanged; this presentation clarifies the
+historical gate releases.
+
+Code review then found two predictor multiplication errors. Native bare `*` uses
+`mult0`, which narrows integer operands tofloat32 and returns a float result;
+compound `*=` is direct GLSL arithmetic. The predictor incorrectly applied the
+zero-helper guard to compound multiplication and could round a large integer
+through grid scratch storage. It now keeps direct compound arithmetic separate.
+The bare helper's input narrowing and effective floating result are also modeled
+through parent arithmetic/comparisons and explicit declaration casts. Scalar/grid
+controls cover invalid logarithm masking and integers above2^24; both failed before
+the repair and pass afterward. No native engine, authored preset or original audit
+prediction/grade was changed. This is a predictor repair, not an AAR handoff.
+
+71of the100original parsed shader ASTs contain compound multiplication. This is
+an affected-code inventory, not evidence that71visual predictions were wrong:
+ordinary finite values can agree in both paths. No post-repair100render is claimed.
+Future fresh predictions must use the repaired model and a new freeze.

@@ -21,6 +21,7 @@
 #endif
 
 #include <cmath>
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -109,6 +110,51 @@ static void TestImplicitInputBindings()
         glDeleteVertexArrays(1,&vao);glDeleteTextures(1,&texture);glDeleteFramebuffers(1,&framebuffer);
         std::cout<<"bound and unbound implicit input: "<<test.input<<std::endl;
     }
+}
+
+static void TestFloatLiteralRendering(const std::string& preset, const std::string& capture)
+{
+    GLContext gl;
+    GLuint framebuffer, texture;
+    glGenFramebuffers(1, &framebuffer);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 256, 144, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+    Check(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "float control framebuffer incomplete");
+    libprojectM::ProjectM engine;
+    engine.SetWindowSize(256, 144);
+    engine.SetMeshSize(48, 32);
+    engine.SetPresetLocked(true);
+    engine.SetHardCutEnabled(false);
+    engine.SetEasterEgg(0);
+    engine.LoadPresetFile(preset, false);
+    engine.RenderFrame(framebuffer);
+    Check(glGetError() == GL_NO_ERROR, "float control rendering GL error");
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
+    glReadBuffer(GL_COLOR_ATTACHMENT0);
+    // RGBA/UNSIGNED_BYTE is guaranteed for normalized GLES framebuffers; RGB is optional.
+    std::vector<unsigned char> pixels(256 * 144 * 4);
+    glReadPixels(0, 0, 256, 144, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+    Check(glGetError() == GL_NO_ERROR, "float control RGBA readback GL error");
+    if (!capture.empty())
+    {
+        std::vector<unsigned char> rgb(256 * 144 * 3);
+        for (size_t i = 0; i < pixels.size(); i += 4)
+            std::copy_n(pixels.data() + i, 3, rgb.data() + (i / 4) * 3);
+        std::ofstream out(capture, std::ios::binary);
+        out << "P6\n256 144\n255\n";
+        out.write(reinterpret_cast<const char*>(rgb.data()), rgb.size());
+        Check(out.good(), "float control capture failed");
+    }
+    std::cout << "float control RGB=" << int(pixels[0]) << ',' << int(pixels[1]) << ',' << int(pixels[2])
+              << " expected=128,96,0" << std::endl;
+    for (size_t i = 0; i < pixels.size(); i += 4)
+        Check(pixels[i] == 128 && pixels[i + 1] == 96 && pixels[i + 2] == 0,
+              "float literal one-frame result mismatch (including fallback markers)");
+    glDeleteTextures(1, &texture);
+    glDeleteFramebuffers(1, &framebuffer);
 }
 
 static void TestShaderRendering()
@@ -299,9 +345,11 @@ int main(int argc, char** argv)
         Check(argc >= 2, "expected test mode");
         const std::string mode(argv[1]);
         if (mode == "macro") TestMacros();
+        else if (mode == "float-render" && (argc == 3 || argc == 4)) TestFloatLiteralRendering(argv[2], argc == 4 ? argv[3] : "");
         else if (mode == "shader-render") TestShaderRendering();
         else if (mode == "implicit-bindings") TestImplicitInputBindings();
         else if (mode == "parser-presets" && argc == 4) TestParserPresets(argv[2], argv[3]);
+        else if (mode == "float-presets" && argc == 4) TestParserPresets(argv[2], argv[3],95);
         else if (mode == "initialization-presets" && argc == 4) TestParserPresets(argv[2], argv[3],4);
         else if (mode == "waveform") TestWaveforms();
         else throw std::runtime_error("unknown test mode");

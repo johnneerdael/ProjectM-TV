@@ -80,6 +80,7 @@ int main(int argc, char** argv) {
         json result = {{"profile", profile}, {"stage", stage},
             {"engine", json::parse(kEngineIdentity)}, {"engine_archive_sha256", kEngineArchiveSha},
             {"shader_header_sha256", kShaderHeaderSha}, {"native_source_sha256", kNativeShaderSourceSha},
+            {"float_formatter_sha256", kFloatFormatterSha}, {"float_literal_policy", kFloatLiteralPolicy},
             {"preprocess_body_sha256", kNativePreprocessBodySha},
             {"translation_body_sha256", kNativeTranslationBodySha},
             {"sampler_reference_body_sha256", kNativeSamplerReferenceBodySha},

@@ -46,6 +46,42 @@ class FieldMathTest(unittest.TestCase):
         with self.assertRaisesRegex(field_math.UnresolvedMath, 'texture function'):
             field_math.evaluate(texture, inputs={'_uv': [.5, .5, .5, .5]})
 
+    def test_compound_multiplication_does_not_inherit_bare_mult0_domain_mask(self):
+        import field_math
+        from grid_math import evaluate_grid
+        _, result = lower('float x=0;x*=log(bass);ret=float3(x);')
+        inputs = {'_c3': [0, 0, 0, 0]}
+        with self.assertRaises(field_math.UnresolvedMath):
+            field_math.evaluate(result, inputs=inputs)
+        with self.assertRaises(field_math.UnresolvedMath):
+            evaluate_grid(result, batch_shape=(2,), inputs=inputs)
+
+    def test_compound_integer_multiplication_retains_exact_int32_value(self):
+        import field_math
+        from grid_math import evaluate_grid
+        _, result = lower('int i=16777217;int j=i;j*=1;ret=float3(j==16777217);')
+        np.testing.assert_array_equal(field_math.evaluate(result), [1, 1, 1])
+        np.testing.assert_array_equal(evaluate_grid(result, batch_shape=(2,)), np.ones((2, 3)))
+
+    def test_bare_integer_mult0_narrows_inputs_and_propagates_native_float_result(self):
+        import field_math
+        from grid_math import evaluate_grid
+        for body in [
+            'int i=16777217;int j=i*3;ret=float3(j==50331648);',
+            'int i=16777217;ret=float3(i*1==16777217);',
+            'int i=16777217;ret=float3((i*1)+1==16777217);',
+            'int i=16777217;int j=(i*1)+1;ret=float3(j==16777216);',
+            'int i=16777217;ret=float3(-(i*1)==-16777217);',
+            'int i=16777217;ret=float3((true?i*1:i)==16777217);',
+            'int i=16777217;ret=float3((false?i*1:i)==16777217);',
+            'int2 i=int2(16777217,16777217);ret=float3((i*1).x==16777217);',
+            'int2 i=int2(16777217,16777217);ret=float3((i*1)[0]==16777217);',
+        ]:
+            with self.subTest(body=body):
+                _, result = lower(body)
+                np.testing.assert_array_equal(field_math.evaluate(result), [1, 1, 1])
+                np.testing.assert_array_equal(evaluate_grid(result, batch_shape=(2,)), np.ones((2, 3)))
+
     def test_unmasked_horizon_division_stays_unresolved(self):
         import field_math
         _, result = lower('ret=float3(3/(uv_orig.y-1));', stage='composite')

@@ -1,0 +1,924 @@
+{
+  "status": "post_audit_source_repairs_verified",
+  "historical_audit_model": "483258f31cd88f78ac8311073c53ffd01707b9cf",
+  "historical_audit_unchanged": true,
+  "repairs": [
+    "Distinguish compound *= from native bare mult0 helper; preserve integer arithmetic and unresolved domains.",
+    "Convert native mult0 operands/result to binary32; propagate effectivefloat type through arithmetic/comparison/unary/conditional/member/index.",
+    "Merge current44-patch formatter metadata with randombinding/sourceadapter contracts.",
+    "Portable current literal controls use same pairedadapter namespace and installed validator; avoid inherited test duplication."
+  ],
+  "controls": {
+    "red_before_fix": true,
+    "independent_full_forecasts": 12,
+    "independent_focused_tests": 86,
+    "independent_subtests": 9,
+    "native_capture_credit": false,
+    "explicit_integer_casts_preserved": true
+  },
+  "validation": {
+    "analyzer_tests": 1113,
+    "analyzer_subtests": 76,
+    "analyzer_skips": 0,
+    "preset_lab_tests": 159,
+    "native_tests_deselected": 3,
+    "release_tooling_tests": 157,
+    "mkdocs_strict": true,
+    "log_sha256": {
+      "analyzer-suite-reviewed.log": "e254aae16cd8e2741821186e3a8f6726ac95e373fd5381008d84895dfae993a1",
+      "preset-lab-suite.log": "1212ce660d8961cb8de460954fda604114b56aa547e5b2ec39795564dd729669",
+      "release-tests.log": "00953b1fdcf75e22c4c4f52f2bbca379acf1d77a1b5fa18cbdf467172e7fd2cb"
+    }
+  },
+  "static_compound_presence": {
+    "basis": "Parsed original audit shader ASTs; presence is not proof of observable error",
+    "affected_sample_cases": 71,
+    "cases": [
+      {
+        "case": 49,
+        "preset": "Serge + martin - crystal palace star005.milk",
+        "sha256": "4847f7b689a2262e30580c5eff493efa4e9318e80c8f4206b58bf4071059106a",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 50,
+        "preset": "suksma - bing means cold.milk",
+        "sha256": "88b967885aa19bf49ee0e85465af161957f1d93fe8145f7e1c5c732bd08b4c41",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 51,
+        "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ bun in the owen.milk",
+        "sha256": "b8a3aff51a1cff7464c6849471a8fb3977a4a2dc7b4646d07a171f0689ffab89",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 3
+          }
+        ]
+      },
+      {
+        "case": 52,
+        "preset": "bowel trounce i fucking HATE kalaidesqopz.milk",
+        "sha256": "f0c79aa6033ea82396e766932826a89e451898ff96d3abef9c7134e1262d7d9c",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 53,
+        "preset": "Mig_208.milk",
+        "sha256": "e690930932698da9e056e50cfcaa41c55d48808112ad61249f949702a8177b9e",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 56,
+        "preset": "Stahlregen & flexi + Geiss + shifter - Swirlz.milk",
+        "sha256": "4004962ae4d92b1106b41b9b95faec16f59547722565e498a425a03caf1aa51d",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 57,
+        "preset": "AkashaDude & Geiss - Phahlsce Pseye kniqmbatlechniq.milk",
+        "sha256": "389ded11522ef4794b9577edd38f561bc074ad9b9b3105fc35062fe8c813ec59",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 58,
+        "preset": "141 nz.milk",
+        "sha256": "5b5961c19df019755dd44baf1cb7b15965a17b7590a7968939bfeb458a6c0c6a",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 60,
+        "preset": "suksma - ed geining hateops - Fixation Nail Trimmer.milk",
+        "sha256": "7d5dc77e687a1953eb77e1b7c02fe7b6dc65eea37faead66191594c29513dc9d",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 61,
+        "preset": "EVET- Esotic & Rozzer - Slazer Eyes.milk",
+        "sha256": "5b48d883855ef7b37893a9472f599b1643a5a24621792825d17d33619e264be9",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 64,
+        "preset": "434.milk",
+        "sha256": "922901f136fa33ab7d0e7bf733211c86335137f06a985f2667b92bac4cabe3d8",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 65,
+        "preset": "pig.milk",
+        "sha256": "10dc5070cf66a8b733b93435b3bb232bc862c7c5286296b5a1d2b9dc5710f379",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 66,
+        "preset": "shadowharlequin + flexi - lovely shiney squares [originally bipolar] hose of bounes.milk",
+        "sha256": "2d875848b36b4924ddcb98e83a173e2fa29e34d848e16551d24b7a31b74587ab",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 67,
+        "preset": "fat cancer arched ass nun nz+ oughtside.milk",
+        "sha256": "8d5453349aae7b7aa579dfd81fef1135dee974ba23e860af276d47589eaa619c",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 69,
+        "preset": "amandio c - the green machine 4 - radial nature sludge semi-proficient at self-annihilation.milk",
+        "sha256": "23c0c8de93320bcfb51a069063607c9360c58f9a8e77a16c38d0f626a7e2a563",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 70,
+        "preset": "blood red raw holy - an evaporative dip in the frost of mind hibernation nz.milk",
+        "sha256": "75d04a82d09c383246e7ab08f702d0eedad6fd2b7a016b59a62d493620444cb6",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 72,
+        "preset": "Shifter & EoS+Phat - Fractical dancer (inside the neural net_axon_mix) flx mrt nz alien device for destroying alien devices.milk",
+        "sha256": "5a9a34efdd60f37bbd5bea3b46167f85ecc8f898426a688cc25420a4e2c37cd4",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 4
+          }
+        ]
+      },
+      {
+        "case": 73,
+        "preset": "flexi + bdrv - ultramix#05 [alien complex mix] [not roaring at all].milk",
+        "sha256": "659e1c38b791a802b1478f0455956453e56dddc5c2a687bfef4251ccfd4fcb23",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 75,
+        "preset": "TonyMilkdrop - RGB.milk",
+        "sha256": "9dac46b20b53d2eef955b504b0aa128ddfb7b70c2dbc145441fa6fe57be06c34",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 77,
+        "preset": "suksma - barium titanate --- Isosceles edit11.milk",
+        "sha256": "88475a10bc5b39a089dbd5ec466d7f5843a62668a7d2dd6e1f370d710c7eef85",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 79,
+        "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration E Adam HD INFECTIONFX A.milk",
+        "sha256": "a999420dcae192b9a40a203f337386b3920f1cf32a75680ccf470bd467c3c5e5",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 4
+          }
+        ]
+      },
+      {
+        "case": 80,
+        "preset": "Benjam & Zylot - Fractal Timepiece - joyous leap into razors.milk",
+        "sha256": "b67a9979943fbc86fe32c2e79e5e2dac5993d94ffe4eb2dd8a26896a6ea161b6",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 5
+          }
+        ]
+      },
+      {
+        "case": 83,
+        "preset": "afunction knegatson windpissinglistening.milk",
+        "sha256": "1b342d75b18cf782b7c11798d54538bf58738b026f447a729ae6d9b807cff4d7",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 84,
+        "preset": "Infused by Flexi with AdamFX 2 Stahlregen & Aderrasi + EoS + Geiss + Unchained + Zylot - Slowflowers F7.milk",
+        "sha256": "4eaae889bb4acb509e48a614698a7b6f541682ab43f8211da12f560cc69a24d7",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 86,
+        "preset": "suksma - Chemlock - Spot (Zylot & Aderrasi equations) and martin shaders + christ's eternal damnation - if the condom fits vampires.milk",
+        "sha256": "7f369ea9c8bc36bc4961ee1980149efd540f35598b985d5767841271093eea4b",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 87,
+        "preset": "amandio c - embrace 07 z in the unlikely uneventuality c.milk",
+        "sha256": "0c02bb8fe2c155091c19714132f9c65301902c6d68573dd8959255f5cb72f02a",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 88,
+        "preset": "custom10.milk",
+        "sha256": "ef9a2e5ed73e76484b5a5b47db9b3514d269d831bd0ab9516e01cf5a33fb5c5a",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 90,
+        "preset": "Hexcollie - Julian Shader Wars3 - endlessly tired.milk",
+        "sha256": "ef54cdbe41f284bdc3bddcc40d1228918168b4323a4b7d0b270ab48123e08bbc",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 91,
+        "preset": "suksma - biotoxins on strings - busy highway ignores + flx per vtx equ.milk",
+        "sha256": "6f11b01659ced81871bf0847ab4c6d84a41a4f7188532e34aeabb9899e56166f",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 92,
+        "preset": "Phmall - Whipped (y) - flx mgr siamese declination scotsdale roams --- Isosceles edit.milk",
+        "sha256": "756fe99d5b24380b9f6a8d731e59f42d44a5b626445489c124f618f4498ed51b",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 93,
+        "preset": "423.milk",
+        "sha256": "ca909a10767a03f37fd244ec3bb469ff80da4d40b4108c0b143b6c2a242f4f32",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 94,
+        "preset": "bdrv + al Rovastar - Fractopia bdrv132456 mix bleuarg - squirming brewery.milk",
+        "sha256": "6a071a137ab00255fd8efaea1dac6eee25825d863852106b5843c4bc276a5219",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 95,
+        "preset": "LuxXx - Daily Data (alien seed deposite).milk",
+        "sha256": "c224a5d2c99c7158fad496845a8407d3fb8c3a50bc30816e1ebc4718e6e1a261",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 3
+          }
+        ]
+      },
+      {
+        "case": 96,
+        "preset": "449.milk",
+        "sha256": "6f4af252d88fd4e3738571ed2bf62911e41011fca241e3a85e83cb5d1572f147",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 98,
+        "preset": "$$$ Royal - Mashup (370).milk",
+        "sha256": "628aa3fe34ac9c941803dfef2260eafa48c4cc9ed141a125f19e1c45a4dc6eec",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 6
+          }
+        ]
+      },
+      {
+        "case": 99,
+        "preset": "ougiel nz novel ways of hating your family.milk",
+        "sha256": "e9dcd21ba5a9d28dd057985ea9feb0638cbee77092902434d56a8c1bc6af5716",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 101,
+        "preset": "GreatWho + Flexi - Lasershow [bipolar growing party].milk",
+        "sha256": "d746f95b4575bdb78c00a903879971c7207666cecd2a2c6da1a386cc4c15d58f",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 102,
+        "preset": "martin - lightning.milk",
+        "sha256": "5637613c4e279257a7fb447275a81f7bcdfbb892dfc2267ac7deaf1e2eb33ee7",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 106,
+        "preset": "suksma - my face is black pus - video game cluster bombs.milk",
+        "sha256": "9fcbf31c1b39acd2af3d7aa8bb79072c8dedeef70b75194a01202d62a88af1d7",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 107,
+        "preset": "$$$ Royal - Mashup (255) --- Isosceles edit.milk",
+        "sha256": "f854c5342b32c64da82253f489d457983752b4a164933422652005e95c38359f",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 108,
+        "preset": "$$$ Royal - Mashup (452).milk",
+        "sha256": "dfdfab30b2fe81e2cd6080c85e11d49480fc6113019bac0d2cdb4bd77bfad760",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 109,
+        "preset": "shifter - mosaic mitosis - will they find me roam2 nz+ souprae.milk",
+        "sha256": "8f662e52b882ef7af98344477f3647931ca6efc269dcaed727e7ce9d32af1398",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 110,
+        "preset": "Tripgnosis - Glowsticks (Blacklight Remix) inthracks.milk",
+        "sha256": "3455a2f80e1b1adc5211dd2d8c572e731710dab5b98747da6c0100e99b84994a",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 112,
+        "preset": "A Tribute to Martin - bombyx mori - Ft Flexi - AdamFX - StahlRegen - Krash - Rovastar -  Hd in Milk V.milk",
+        "sha256": "579047cc839a672a95b05e7672c7ee57a8794b4a104caf9d0bd61ecf36e71978",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 113,
+        "preset": "undulate harque - auto thef.milk",
+        "sha256": "be6ad831837f357c9abc8d2e1fbea14385595bbcf6ef1e7d52158158fcd8f381",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 116,
+        "preset": "Stahlregen & Geiss + TobiasWolfBoi - Space Gelatin (Color Xplosion 2-975).milk",
+        "sha256": "2b326a13fe810718f4dd6eb84f9e23ba73cd2675996e63790744a9bf21f4db73",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 6
+          }
+        ]
+      },
+      {
+        "case": 117,
+        "preset": "Geiss - Explosion 3 (Jelly).milk",
+        "sha256": "b79300f623cc5ba8c899c51950a568db3c63d7c1569cb859212be4617445f3df",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 3
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 118,
+        "preset": "Geiss - Mash-Up 1.milk",
+        "sha256": "568734c5ceb829d79e9045500b7e83cb1d61ab65af69721e180d80128f86edf7",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 119,
+        "preset": "suksma - water god.milk",
+        "sha256": "47ec30203c9ed7f2015d059e563b65b3cf5a19cf1ecccb1cbbfa79588a91c42e",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 120,
+        "preset": "shifter - parchment (MGMT) roamvar nz+ phormidabule psuqumominbus.milk",
+        "sha256": "831fb5b00befa0175530a3910bbeb8dbfeae2c17b45b41acb8ec6510f032e05b",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 4
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 121,
+        "preset": "cancer of the imploding.milk",
+        "sha256": "26a0ad4433dba6597d8d69c5234eafefbcc1d2c2363947db59c22cc3dde11f07",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 123,
+        "preset": "Stahlregen - splash! (Tricolor Spiral).milk",
+        "sha256": "1d04c00fd162263a2f5264120fa98e499eb3d573a83440bf6fb8051cc606888d",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 124,
+        "preset": "suksma - chernobyl pie for dessert - semi-autoplasmitic copulateshow.milk",
+        "sha256": "20c0ce7906c4375db27ca08b4c4dc325a42126aa6d2da9667e041de3b4d159df",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 125,
+        "preset": "suksma - god might as well2 - rst jaw complex ap3+ roam3.milk",
+        "sha256": "c9cff2427d9ce4c7244358369f3cbd970b439b08e92a00b3f0c9271b2f770dec",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 3
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 126,
+        "preset": "$$$ Royal - Mashup (151).milk",
+        "sha256": "b6592d6d1d745142621e839fcaf5a14469978041310012b088cbf38aff87925f",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 130,
+        "preset": "xtramartin (278).milk",
+        "sha256": "c6a544baa7104aa1d2ea00e79cd7dffc2726476e6504aa5171e982f056e1ec6d",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 5
+          }
+        ]
+      },
+      {
+        "case": 132,
+        "preset": "Tripgnosis - Triadular.milk",
+        "sha256": "233c4447a00b9b000b969af1c3de72f5b00432c6dea7c93266479c68252003ea",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 133,
+        "preset": "suksma - satanic teleprompter - john dee enochian alien summons.milk",
+        "sha256": "795a4b808c0bfd58a42b145a84db09f85591dbeee643d5821e576eda08c737b1",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 134,
+        "preset": "Serge + martin - crystal palace007b.milk",
+        "sha256": "2a8ff7cc6589ca08cd53f40af6379e474cf6fec707c6589e38a0aa23a43cc7b6",
+        "stages": [
+          {
+            "stage": "warp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 135,
+        "preset": "suksma - i don't know anymore, nor used to i.milk",
+        "sha256": "70f5a137a31358b56eaec3065e9acf4e2e67014cb367ae065750adff00eb14f6",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 137,
+        "preset": "ShadowHarlequin - mashup - Satin Sunburst (Neon Tokyo Mix) v2.milk",
+        "sha256": "92eee56808dd656b8d67f9bd982b39ba033dac00f548f347afc4902c3d8f87a2",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 138,
+        "preset": "Goody - Acid Angel ap4+.milk",
+        "sha256": "304220e4e5a6b790ca2d2b86af89153a9cc3fa417e8cd82edd279c92e31b7aad",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 139,
+        "preset": "suksma - flexi coheres vacuum energy - mbk vs thm.milk",
+        "sha256": "b95fd07cd3bae080d692fee70a935d821d5713435b5c66770e49d7b350deeaa7",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          }
+        ]
+      },
+      {
+        "case": 140,
+        "preset": "i am only here to die slowly in pain stupid girl.milk",
+        "sha256": "604a349490a183f133c8566115259957a9dc9ea1876f18743d5bd03c2aea8299",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 141,
+        "preset": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam.milk",
+        "sha256": "598b10f13d4013677062fc5783d0c752ce4aefefb6d37b48ac646d0c37451e55",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 142,
+        "preset": "EoS + flexi + geiss - glowsticks v2 05 and proton lights (+Krash's beat code) (Painterly Oil Reflections).milk",
+        "sha256": "b735c08d9dea58e4e02c9c5dab44fa28561801b9251bbfd39055678ca6d9bfd1",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 4
+          }
+        ]
+      },
+      {
+        "case": 143,
+        "preset": "Nivush - Crazy Diamonds.milk",
+        "sha256": "31ec688577a888e65d6f63b945fe2d123da5a3971acd1eb9ca17f4cd58cf12f0",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 144,
+        "preset": "martin - disco mix 2.milk",
+        "sha256": "5363b258cdd59b81228c0718094a1fb50ea3e0f905cb55a433005742f8cf4e10",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 2
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 146,
+        "preset": "ORB - Flexi - Chilled Element.milk",
+        "sha256": "e1cbf8d01bc0e37234d8ed2c7ca1413c8af7d4dbd11dd1d59f7bf4b545e6e8dc",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 147,
+        "preset": "suksma - to dwell in wood rot - swept  - inf fin bnd.milk",
+        "sha256": "35d0685219814fa3eacd4f6fbc903bf6b33f9c2653e2794bf420a8a9f1c2ce07",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      },
+      {
+        "case": 148,
+        "preset": "shifter - spincycle(remix) - spark 30 nz+.milk",
+        "sha256": "5d53ba163c4e14f441d1dd768bf4a1da9e6b942c7b7e1045dd8d900340109f7c",
+        "stages": [
+          {
+            "stage": "comp_",
+            "compound_multiplications": 1
+          },
+          {
+            "stage": "warp_",
+            "compound_multiplications": 1
+          }
+        ]
+      }
+    ]
+  },
+  "review": {
+    "final_audit_no_blocking_findings": true,
+    "equation_findings_resolved": true,
+    "renderer_scope_no_findings": true,
+    "github_final_head_codex_review": "pending"
+  },
+  "limits": [
+    "All100original predictions/grades remain on frozen earliermodel; no post-repair100rerender or score claim.",
+    "Static compound presence doesnot establish observable error in eachpreset.",
+    "LocalmacOS checks; CI/Linux results pending.",
+    "Native publishedAARengine and authoredpreset assets unchanged bythese predictor repairs."
+  ]
+}

@@ -9,3 +9,6 @@ constexpr const char* kArrayGeneratorSha = "@ARRAY_GENERATOR_SHA@";
 
 constexpr const char* kImplicitGlobalPolicy = "@IMPLICIT_GLOBAL_POLICY@";
 inline constexpr const char* kRandomBindingContract = R"SLOT(@RANDOM_BINDING_CONTRACT_TEXT@)SLOT";
+
+constexpr const char* kFloatFormatterSha = "@FLOAT_FORMATTER_SHA@";
+constexpr const char* kFloatLiteralPolicy = "@FLOAT_LITERAL_POLICY@";

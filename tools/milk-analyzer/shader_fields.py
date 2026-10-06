@@ -697,6 +697,7 @@ class ShaderFields:
             return value if defer_read else self.read(value)
         if kind=="member":
             value=self.expression(node['object'],defer_read=True)
+            if value.dtype.startswith('float'):dtype=re.sub(r'^(?:int|uint|bool)', 'float', dtype)
             if value.op in {'uninitialized','components','select'} or 'x' in value.dtype or self.shape(value.dtype)==(value.dtype,1):
                 indices=self.member_indices(value.dtype,node['field'])
                 if indices is None:return self.unsupported('unsupported shader member',dtype=dtype)
@@ -709,6 +710,7 @@ class ShaderFields:
                 return self.unsupported('array index side-effect order unresolved' if node['object'].get('type',{}).get('array')
                                         else 'shader index side-effect order unresolved',dtype=dtype)
             value=self.expression(node['object'],defer_read=True)
+            if value.dtype.startswith('float'):dtype=re.sub(r'^(?:int|uint|bool)', 'float', dtype)
             op='array_index' if self.array_type(value.dtype) else 'index'
             result=Field(op,(value,self.coerce(self.expression(node['index']),'int')),dtype)
             return result if defer_read else self.read(result)
@@ -739,10 +741,16 @@ class ShaderFields:
                 stored=self.write(node['operand'],updated)
                 return stored if node['operator'] in {3,4} else previous
             if node['operator'] not in {0,1,2}:return self.unsupported('bitwise unary operator not lowered',dtype=dtype)
-            return Field("unary",(self.expression(node["operand"],defer_read=defer_read),),dtype,{"operator":node["operator"]})
+            operand=self.expression(node["operand"],defer_read=defer_read)
+            if node['operator'] in {0,1} and operand.dtype.startswith('float'):
+                dtype=re.sub(r'^(?:int|uint|bool)', 'float', dtype)
+            return Field("unary",(operand,),dtype,{"operator":node["operator"]})
         if kind=="conditional":
             if self.has_shared_effects(node):return self.unsupported('conditional expression side effects not lowered',dtype=dtype)
-            return Field("select",tuple(self.expression(node[key]) for key in ["condition","yes","no"]),dtype)
+            arguments=tuple(self.expression(node[key]) for key in ["condition","yes","no"])
+            if any(branch.dtype.startswith('float') for branch in arguments[1:]):
+                dtype=re.sub(r'^(?:int|uint|bool)', 'float', dtype)
+            return Field("select",arguments,dtype)
         if kind=="binary":
             op=node["operator"]
             if 2<=op<16 and (self.has_assignment(node) or self.unsequenced([node['left'],node['right']])):
@@ -762,16 +770,27 @@ class ShaderFields:
                     return self.unsupported('compound assignment helper side-effect order not established',dtype=dtype)
                 deferred=(bool(re.fullmatch(r'float[2-4]',dtype)) and self.componentwise_storage(node['right']))
                 value=self.coerce(self.expression(node["right"],defer_read=deferred),dtype)
-                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination,defer_read=deferred),dtype),value),dtype,
-                                      {'zero_guard':True} if op==19 and not matrix_product else {})
+                # GLSL compound *= is emitted directly; only bare * uses mult0.
+                # Keep its domains and integer arithmetic out of the float helper path.
+                if op!=16:value=Field('matrix_product' if matrix_product else {17:"add",18:"subtract",19:"multiply",20:"divide"}[op],(self.coerce(self.expression(destination,defer_read=deferred),dtype),value),dtype)
                 return self.write(destination,value)
             args=(self.expression(node['left'],defer_read=defer_read),self.expression(node['right'],defer_read=defer_read))
-            if op in {2,3,4,5,6}:args=tuple(self.coerce(arg,dtype) for arg in args)
+            if op in {2,3,4,5,6}:
+                # OutputExpression casts only when the authored source type differs
+                # from its target. mult0 can return float despite an integer AST type.
+                args=tuple(arg if node[key]['type']['name']==dtype else self.coerce(arg,dtype)
+                           for key,arg in zip(['left','right'],args))
+                if not matrix_product and (op==4 or any(arg.dtype.startswith('float') for arg in args)):
+                    dtype=re.sub(r'^(?:int|uint|bool)', 'float', dtype)
+                    args=tuple(self.coerce(arg,dtype) for arg in args)
             elif op in {7,8,9,10,11,12,13,14,15}:
                 names=[node[key]['type']['name'] for key in ['left','right']]
                 if all(name in {'float','uint','int','bool'} for name in names):
                     common=next(name for name in ['float','uint','int','bool'] if name in names)
-                    args=tuple(self.coerce(arg,common) for arg in args)
+                    args=tuple(arg if source==common else self.coerce(arg,common)
+                               for source,arg in zip(names,args))
+                    if any(arg.dtype=='float' for arg in args):
+                        args=tuple(self.coerce(arg,'float') for arg in args)
                 elif op in {7,8,9,10,11,12}:
                     if names[0] in {'float','uint','int','bool'}:args=(self.coerce(args[0],names[1]),args[1])
                     elif names[1] in {'float','uint','int','bool'}:args=(args[0],self.coerce(args[1],names[0]))

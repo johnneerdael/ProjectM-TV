@@ -16,7 +16,7 @@ core/src/test/native/run_native_tests.sh
 
 The native runner also builds the patched projectM engine with ASan/UBSan and checks shader macro preprocessing, contextual identifiers such as `sample`, postfix expressions, numerical shader output and custom waveform audio bounds. It also compiles the affected shader sections of 16 unchanged bundled presets, with their file hashes checked at configure time. It also checks random-image alias identity, requested sampler modes, shared slots and numerical samples against isolated known-value textures. Blur regressions preserve separate read/draw targets on first use and resize, check constant-colour output at normal and reference-scaled sizes, and fully render the unchanged `midgitstraights of majillaen - featy sweet.milk` with isolated TGA images. It requires CMake and a JDK; the GL tests use EGL/GLES development libraries on Linux or the OpenGL framework on macOS.
 
-Feature-branch pushes do not start CI builds. A ready PR targeting `main` starts the full build suite only after a completed Codex or human review of its latest commit, with all review threads resolved and no outstanding review requests or changes requested. The gate requires full commit-SHA evidence; abbreviated Codex completion text alone cannot unlock builds. GitHub hides private draft reviews from automation: request a reviewer to keep the gate closed until submission. The review gate periodically rechecks thread resolution; GitHub may delay scheduled runs. Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
+Feature-branch pushes do not start CI builds. A ready PR targeting `main` starts the full build suite only after a completed Codex or human review of its latest commit, with all review threads resolved and no outstanding review requests or changes requested. Codex’s thumbs-up reaction on the PR is its approval signal. The gate uses completed review metadata to bind that reaction to the current revision, resolving shortened IDs through GitHub; a completion comment without the reaction cannot unlock builds. GitHub hides private draft reviews from automation: request a reviewer to keep the gate closed until submission. The review gate periodically rechecks thread resolution; GitHub may delay scheduled runs. Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
 
 ## Core rendering policies
 
@@ -110,3 +110,32 @@ and [analyzer instructions](https://github.com/johnneerdael/ProjectM-TV/blob/mai
 The packaged mood collections still use their pinned2.3.3numerical measurements,
 as described in [Predictive collections](predictive-collections.md). The experiment
 has not regenerated those indexes or changed their classifications.
+
+## Shader literal precision
+
+The native runner checks finite float32 constants by comparing their bits after
+formatting and reparsing, including negative zero, boundary values, randomized
+values and a comma-decimal locale. It also renders a one-frame warp/composite
+control and directly compiles 95 unchanged, hash-checked preset shader sections.
+The render control reads normalized framebuffers as RGBA bytes, then exports RGB
+when saving a capture. This uses the portable GLES readback format; desktop OpenGL
+can accept RGB-only reads that Linux GLES drivers reject. Validate GL readback
+changes with the Linux EGL/Mesa tests as well as macOS CGL.
+
+Source-analysis adapters rebuilt against the current engine record
+`float_literal_policy` and `float_formatter_sha256`; the reader’s `renderer_literal`
+values use the production formatter. Rebuild adapters when the engine patch series
+changes. Historical fixtures retain their historical engine identity.
+
+Nonfinite shader literals are rejected by the generator rather than emitted as
+identifiers such as `inf`. Runtime nonfinite arithmetic and driver precision remain
+separate questions. These checks do not establish every preset’s visual fidelity
+or physical-TV performance.
+
+
+The source model distinguishes the renderer's ordinary multiplication helper from
+compound assignment. The helper converts integer inputs tofloat32; compound
+integer `*=` preserves integer arithmetic. These source checks prevent a numerical
+forecast from silently rounding large integer state or masking invalid arithmetic.
+The recorded100-preset audit predates this review repair; its original grades remain
+unchanged, and fresh predictions require a new model freeze.

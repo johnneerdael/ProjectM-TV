@@ -3,6 +3,17 @@ project(milk_code_reader LANGUAGES C CXX)
 if(NOT ENGINE_BUILD OR NOT ENGINE_SOURCE)
     message(FATAL_ERROR "Pass the existing production preset-lab ENGINE_BUILD and ENGINE_SOURCE")
 endif()
+option(SANITIZERS "Match the host regression archive sanitizer setting" ON)
+if(SANITIZERS)
+    add_compile_options(-fsanitize=address,undefined -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=address,undefined)
+endif()
+find_library(ENGINE_ARCHIVE NAMES projectM-4d projectM-4
+    PATHS "${ENGINE_BUILD}/projectm/src/libprojectM" NO_DEFAULT_PATH REQUIRED)
+if(NOT ENGINE_IDENTITY_FILE)
+    set(ENGINE_IDENTITY_FILE "${ENGINE_BUILD}/build-identity.json")
+endif()
+file(READ "${ENGINE_IDENTITY_FILE}" ENGINE_IDENTITY_TEXT)
 
 add_executable(milk-audio-inputs native_audio.cpp)
 target_compile_features(milk-audio-inputs PRIVATE cxx_std_17)
@@ -13,7 +24,7 @@ target_include_directories(milk-audio-inputs PRIVATE
     "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/src/api/include"
     "${ENGINE_SOURCE}/vendor/projectm-eval/projectm-eval"
     "${ENGINE_BUILD}/projectm/src/api/include")
-target_link_libraries(milk-audio-inputs PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+target_link_libraries(milk-audio-inputs PRIVATE "${ENGINE_ARCHIVE}")
 if(NOT APPLE)
     find_package(OpenSSL REQUIRED)
     target_link_libraries(milk-audio-inputs PRIVATE OpenSSL::Crypto)
@@ -24,8 +35,15 @@ if(EXISTS "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/LegacyEquationCode.hp
 endif()
 file(READ "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetShaderHeaderGlsl330.inc" SHADER_HEADER_TEXT)
 file(SHA256 "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetShaderHeaderGlsl330.inc" SHADER_HEADER_SHA)
-file(READ "${ENGINE_BUILD}/build-identity.json" ENGINE_IDENTITY_TEXT)
-file(SHA256 "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a" ENGINE_ARCHIVE_SHA)
+file(SHA256 "${ENGINE_ARCHIVE}" ENGINE_ARCHIVE_SHA)
+file(READ "${ENGINE_SOURCE}/vendor/hlslparser/src/Engine.cpp" FLOAT_FORMATTER_TEXT)
+file(SHA256 "${ENGINE_SOURCE}/vendor/hlslparser/src/Engine.cpp" FLOAT_FORMATTER_SHA)
+string(FIND "${FLOAT_FORMATTER_TEXT}" "std::numeric_limits<float>::max_digits10" FLOAT_ROUNDTRIP_POSITION)
+if(FLOAT_ROUNDTRIP_POSITION EQUAL -1)
+    set(FLOAT_LITERAL_POLICY "six-significant-digits-v1")
+else()
+    set(FLOAT_LITERAL_POLICY "float32-roundtrip-v1")
+endif()
 file(READ "${ENGINE_SOURCE}/vendor/hlslparser/src/GLSLGenerator.cpp" ARRAY_GENERATOR_TEXT)
 file(SHA256 "${ENGINE_SOURCE}/vendor/hlslparser/src/GLSLGenerator.cpp" ARRAY_GENERATOR_SHA)
 string(FIND "${ARRAY_GENERATOR_TEXT}" "void GLSLGenerator::OutputArrayInitializer(" GROUPED_ARRAY_POSITION)
@@ -53,7 +71,7 @@ file(GLOB RANDOM_CONTRACT_SOURCES "${ENGINE_SOURCE}/src/libprojectM/Renderer/Tex
     "${ENGINE_SOURCE}/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp")
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${RANDOM_CONTRACT_SOURCES}
     "${CMAKE_CURRENT_SOURCE_DIR}/random_binding_contract.py" "${CMAKE_CURRENT_SOURCE_DIR}/sampling_policy.py"
-    "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+    "${ENGINE_ARCHIVE}")
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/random_binding_contract.py"
     --engine "${ENGINE_SOURCE}" OUTPUT_VARIABLE RANDOM_BINDING_CONTRACT_TEXT
@@ -68,9 +86,9 @@ target_include_directories(milk-native-reader PRIVATE
     "${ENGINE_SOURCE}/vendor/projectm-eval/projectm-eval" "${ENGINE_SOURCE}/src/api/include"
     "${ENGINE_SOURCE}/vendor/projectm-eval/projectm-eval/api"
     "${ENGINE_BUILD}/projectm/src/api/include")
-target_link_libraries(milk-native-reader PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+target_link_libraries(milk-native-reader PRIVATE "${ENGINE_ARCHIVE}")
 if(APPLE)
-    target_link_libraries(milk-native-reader PRIVATE "-framework CoreFoundation")
+    target_link_libraries(milk-native-reader PRIVATE "-framework CoreFoundation" "-framework OpenGL")
 endif()
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
@@ -107,9 +125,9 @@ target_include_directories(milk-shader-translate PRIVATE "${CMAKE_CURRENT_BINARY
     "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native"
     "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/vendor/hlslparser/src"
     "${ENGINE_SOURCE}/src/api/include" "${ENGINE_BUILD}/projectm/src/api/include")
-target_link_libraries(milk-shader-translate PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+target_link_libraries(milk-shader-translate PRIVATE "${ENGINE_ARCHIVE}")
 if(APPLE)
-    target_link_libraries(milk-shader-translate PRIVATE "-framework CoreFoundation")
+    target_link_libraries(milk-shader-translate PRIVATE "-framework CoreFoundation" "-framework OpenGL")
 endif()
 
 # Compile unchanged native CPU math bodies, replacing only GL-owning state
@@ -168,11 +186,17 @@ target_include_directories(milk-noise-inputs PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../preset-lab/src/preset_lab/native"
     "${ENGINE_SOURCE}/src/libprojectM" "${ENGINE_SOURCE}/src/api/include"
     "${ENGINE_BUILD}/projectm/src/api/include")
-target_link_libraries(milk-noise-inputs PRIVATE "${ENGINE_BUILD}/projectm/src/libprojectM/libprojectM-4.a")
+target_link_libraries(milk-noise-inputs PRIVATE "${ENGINE_ARCHIVE}")
 if(APPLE)
     target_link_libraries(milk-noise-inputs PRIVATE "-framework CoreFoundation" "-framework OpenGL")
 else()
     find_package(OpenGL REQUIRED)
     find_package(OpenSSL REQUIRED)
     target_link_libraries(milk-noise-inputs PRIVATE OpenGL::GL OpenSSL::Crypto)
+endif()
+
+if(NOT APPLE)
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(milk-native-reader PRIVATE OpenGL::GL)
+    target_link_libraries(milk-shader-translate PRIVATE OpenGL::GL)
 endif()

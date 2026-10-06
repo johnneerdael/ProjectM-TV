@@ -581,3 +581,27 @@ handoffs remain under Downloads; the released literal repair passes its exactRGB
 control. See `fixtures/visual-loop-round010-2026-10-06.json` and
 [the final audit report](../../docs/plans/2026-10-06-predictor-random100-audit.md).
 The intermediate checkpoint remains historical; final reviewed integration is pending.
+
+## Shader literal identity
+
+Current source adapters stamp `float_literal_policy` as `float32-roundtrip-v1` and the production formatter’s `float_formatter_sha256`.
+The reader exports `renderer_literal` through that formatter, and lowering uses its
+reparsed value. Rebuilding against patch 0044 therefore models the new renderer
+rather than retaining the old six-digit emission. Historical adapters and archived
+measurement fixtures keep their original identities; do not relabel them.
+
+`test_float_literals.py` checks 99 authored AST witnesses in 95 hash-verified presets,
+the adjacent-to-one coefficient and scale, both GLSL targets, and rejection of an
+overflowed literal even when the shader declares `inf`. Native tests additionally
+exercise finite float32 boundaries, signed zero, randomized bits, locale and a
+one-frame full-engine render. These are source/controlled execution checks, not a
+visual forecast for every affected preset.
+
+
+Post-audit code review repaired multiplication semantics: native bare scalar/vector
+`*` calls `mult0` with binary32 input/result conversion, including integer operands;
+compound `*=` uses ordinary GLSL arithmetic and does not inherit its zero guard.
+Preserve effective helper return types through parent arithmetic/comparisons;
+explicit declarations still cast to their authored type. New scalar/grid controls
+cover values above2^24and unresolved logarithms. The sealed audit remains on its
+original model revision; these repairs do not retroactively change its grades.

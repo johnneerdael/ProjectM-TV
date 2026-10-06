@@ -64,3 +64,9 @@ For unresolved problems, include the app version, device, Android version and re
 ## A preset looks different from MilkDrop
 
 Some presets can fall back to a simpler shader when their custom shader cannot compile. The engine includes fixes for local variables named `sample`, declaration and statement macros, and swizzles after parenthesized constructors. These fixes leave the preset files unchanged. Passing parser and compiler checks does not establish identical appearance across GPUs; include the preset name, device and app version when reporting a difference.
+
+Shader constants now retain their parsed float32 precision instead of being rounded
+to six significant digits during translation. This can correct output that depended
+on closely spaced coefficients. Preset files are unchanged; the correction does not
+guarantee identical MilkDrop appearance on every GPU. Nonfinite literals fail shader
+translation and use the existing simpler-shader fallback.

@@ -27,6 +27,7 @@ on:
 permissions:
   contents: read
   pull-requests: read
+  issues: read  # PR-body reactions use the issues reactions endpoint
   statuses: write
   actions: write
 

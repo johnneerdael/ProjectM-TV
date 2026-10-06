@@ -1,6 +1,7 @@
 """Regression coverage for review-gated PR builds."""
 import importlib.util
 import copy
+import io
 import json
 import os
 import re
@@ -46,7 +47,7 @@ def codex_review(sha=HEAD):
 
 
 def summary(state="Completed", sha=HEAD, login=BOT):
-    return dict(user=dict(login=login), updated_at="2026-10-05T10:00:00Z", body=(
+    return dict(user=dict(login=login, type="Bot" if login == BOT else "User"), updated_at="2026-10-05T10:00:00Z", body=(
         "<!-- codex-pull-request-review-summary -->\n"
         "| Review | Status | Commit | Review trigger |\n"
         f'| 📝 **Code Review** | ✅ **{state}** <relative-time datetime="2026-10-05T10:00:00Z">10:00</relative-time> | `{sha}` | Manual request |'))
@@ -58,7 +59,7 @@ def set_summary_time(comment, timestamp):
 
 
 def legacy_completion(sha=HEAD, login=BOT):
-    return dict(user=dict(login=login), created_at="2026-10-05T10:00:00Z",
+    return dict(user=dict(login=login, type="Bot" if login == BOT else "User"), created_at="2026-10-05T10:00:00Z",
                 body=f"Codex Review: No findings.\n\n**Reviewed commit:** `{sha}`")
 
 
@@ -66,24 +67,26 @@ class EligibilityTests(unittest.TestCase):
     def setUp(self):
         self.gate = load_gate()
 
-    def eligible(self, reviews=None, comments=None, threads=None, pr=None):
-        return self.gate.eligibility(pr or snapshot(), reviews or [], comments or [], threads or [])[0]
+    def eligible(self, reviews=None, comments=None, threads=None, pr=None, reactions=None):
+        if reactions is None:
+            reactions = [dict(user=dict(login=BOT, type="User"), content="+1", created_at="2026-10-05T23:00:00Z")]
+        return self.gate.eligibility(pr or snapshot(), reviews or [], comments or [], threads or [], reactions)[0]
 
     def test_no_review_or_stale_review_does_not_unlock_builds(self):
         self.assertFalse(self.eligible())
         self.assertFalse(self.eligible([human(sha=BASE)]))
 
-    def test_current_human_review_or_codex_completion_unlocks(self):
+    def test_current_human_review_or_codex_thumb_with_metadata_unlocks(self):
         self.assertTrue(self.eligible([human()]))
         self.assertTrue(self.eligible([human(state="COMMENTED")]))
         self.assertTrue(self.eligible(comments=[summary()]))
 
-    def test_full_hash_completion_formats_can_qualify(self):
+    def test_full_hash_completion_metadata_and_thumb_can_qualify(self):
         for completion in [summary(), legacy_completion()]:
             with self.subTest(completion=completion):
                 self.assertTrue(self.eligible(comments=[completion]))
 
-    def test_abbreviated_or_colliding_codex_hashes_never_qualify(self):
+    def test_unresolved_abbreviations_or_colliding_codex_hashes_never_qualify(self):
         other = HEAD[:7] + BASE[7:]
         for format_completion in [summary, legacy_completion]:
             for sha in [HEAD[:7], HEAD[:10], HEAD[:39], HEAD + "a", "a" * 64, other]:
@@ -114,7 +117,9 @@ class EligibilityTests(unittest.TestCase):
         self.assertFalse(self.eligible([human(), codex_review(sha=HEAD[:7])], [request]))
 
     def test_running_short_summary_blocks_despite_current_human_review(self):
-        self.assertFalse(self.eligible([human()], [summary(state="Running", sha=HEAD[:7])]))
+        running = summary(state="Running", sha=HEAD[:7])
+        running["_reviewed_commits"] = {HEAD[:7]: HEAD}
+        self.assertFalse(self.eligible([human()], [running]))
 
     def test_author_and_untrusted_bot_or_comment_cannot_unlock(self):
         self.assertFalse(self.eligible([human(login="author")]))
@@ -259,8 +264,19 @@ class SnapshotTests(unittest.TestCase):
                 self.pr = snapshot()
                 self.main = [BASE, BASE]
                 self.parents = [BASE, HEAD]
+                self.reviews = [human()]
+                self.comments = []
+                self.reactions = []
+                self.resolved = HEAD
+                self.resolution_error = None
 
             def get(self, path):
+                if path.startswith("git/matching-refs/"):
+                    return []
+                if path.startswith("commits/"):
+                    if self.resolution_error:
+                        raise self.resolution_error
+                    return dict(sha=self.resolved)
                 if path == "pulls/42":
                     return copy.deepcopy(self.pr)
                 if path == "git/ref/heads/main":
@@ -270,12 +286,42 @@ class SnapshotTests(unittest.TestCase):
                 raise AssertionError(path)
 
             def pages(self, path, key=None):
-                return [human()] if "/reviews?" in path else []
+                if "/reviews?" in path:
+                    return self.reviews
+                if "/comments?" in path:
+                    return self.comments
+                if "/reactions?" in path:
+                    return self.reactions
+                return []
 
             def request(self, endpoint, data=None, paginate=False):
                 return dict(data=dict(repository=dict(pullRequest=dict(reviewThreads=dict(
                     nodes=[], pageInfo=dict(hasNextPage=False))))))
         self.api = Api()
+
+    def use_codex_approval(self):
+        self.api.reviews = []
+        self.api.comments = [summary(sha=HEAD[:7])]
+        self.api.reactions = [dict(user=dict(login=BOT, type="User"), content="+1",
+                                   created_at="2026-10-05T10:00:03Z")]
+
+    def test_real_codex_short_summary_and_pr_reaction_are_loaded(self):
+        self.use_codex_approval()
+        pr, (ready, _) = self.api.snapshot(42)
+        self.assertTrue(ready)
+        self.assertEqual(pr["head"]["sha"], HEAD)
+
+    def test_api_resolved_collision_cannot_approve_another_head(self):
+        self.use_codex_approval()
+        self.api.resolved = HEAD[:7] + BASE[7:]
+        _, (ready, _) = self.api.snapshot(42)
+        self.assertFalse(ready)
+
+    def test_resolution_error_does_not_fall_back_to_prefix_matching(self):
+        self.use_codex_approval()
+        self.api.resolution_error = RuntimeError("Ambiguous commit")
+        with self.assertRaises(RuntimeError):
+            self.api.snapshot(42)
 
     def test_current_main_ref_is_used_instead_of_cached_pr_base(self):
         self.api.pr["base"]["sha"] = MERGE
@@ -292,6 +338,124 @@ class SnapshotTests(unittest.TestCase):
         self.api.parents = [MERGE, HEAD]
         _, (ready, _) = self.api.snapshot(42)
         self.assertFalse(ready)
+
+
+class ReactionApprovalTests(unittest.TestCase):
+    def setUp(self):
+        self.gate = load_gate()
+
+    def check(self, comments, reactions, reviews=None):
+        # Raw reactions can label the connector account as User even though comments say Bot.
+        pr = snapshot()
+        return self.gate.eligibility(pr, reviews or [], comments, [], reactions)[0]
+
+    def thumb(self, timestamp="2026-10-05T10:00:03Z", login=BOT, content="+1"):
+        return dict(id=7, user=dict(login=login, type="User"), content=content, created_at=timestamp)
+
+    def resolved(self, completion, sha=HEAD):
+        completion["_reviewed_commits"] = {HEAD[:7]: sha, HEAD[:10]: sha}
+        return completion
+
+    def test_actual_short_summary_and_pr_thumb_unlock_current_head(self):
+        self.assertTrue(self.check([self.resolved(summary(sha=HEAD[:7]))], [self.thumb()]))
+
+    def test_completion_comment_without_pr_thumb_never_approves(self):
+        self.assertFalse(self.check([summary()], []))
+        self.assertFalse(self.check([legacy_completion()], []))
+        self.assertFalse(self.check([], [], [codex_review()]))
+
+    def test_thumb_without_current_revision_metadata_never_approves(self):
+        self.assertFalse(self.check([], [self.thumb()]))
+        self.assertFalse(self.check([summary(sha=BASE)], [self.thumb()]))
+        self.assertFalse(self.check([self.resolved(summary(sha=HEAD[:7]), BASE)], [self.thumb()]))
+
+    def test_only_connector_plus_one_on_pr_counts(self):
+        for login, content in [("author", "+1"), ("stranger", "+1"), (BOT, "eyes"), (BOT, "heart")]:
+            with self.subTest(login=login, content=content):
+                self.assertFalse(self.check([summary()], [self.thumb(login=login, content=content)]))
+
+    def test_old_thumb_cannot_approve_new_review_of_same_head(self):
+        self.assertFalse(self.check([summary()], [self.thumb("2026-10-05T09:59:59Z")]))
+
+    def test_running_review_blocks_even_with_pr_thumb(self):
+        self.assertFalse(self.check([self.resolved(summary("Running", HEAD[:7]))], [self.thumb()]))
+
+    def test_conflicting_written_and_api_review_revisions_cannot_approve(self):
+        report = codex_review()
+        report["body"] = f"### Codex Review\n**Reviewed commit:** `{BASE[:10]}`"
+        self.assertFalse(self.check([], [self.thumb()], [report]))
+
+    def test_connector_user_typed_review_cannot_bypass_thumb_as_human(self):
+        report = codex_review()
+        report["user"]["type"] = "User"
+        report["body"] = ""
+        self.assertFalse(self.check([], [], [report]))
+
+    def test_resolved_short_legacy_metadata_and_thumb_can_approve(self):
+        self.assertTrue(self.check([self.resolved(legacy_completion(HEAD[:10]))], [self.thumb()]))
+
+    def test_reaction_does_not_override_unresolved_findings(self):
+        pr = snapshot()
+        self.assertFalse(self.gate.eligibility(pr, [], [summary()], [dict(isResolved=False)], [self.thumb()])[0])
+
+
+class CommitResolutionTests(unittest.TestCase):
+    def setUp(self):
+        self.gate = load_gate()
+        class Api(self.gate.GitHub):
+            def __init__(self):
+                super().__init__("owner/repo")
+                self.paths = []
+                self.refs = {"heads": [], "tags": []}
+                self.resolved = HEAD
+                self.error = None
+
+            def get(self, path):
+                self.paths.append(path)
+                if path.startswith("git/matching-refs/"):
+                    return self.refs[path.split("/")[2]]
+                if self.error:
+                    raise self.error
+                return {"sha": self.resolved}
+        self.api = Api()
+
+    def test_short_hash_resolves_to_full_commit(self):
+        self.assertEqual(self.api.resolve_review_commit(HEAD[:7]), HEAD)
+        self.assertEqual(self.api.paths[-1], "commits/" + HEAD[:7])
+
+    def test_full_hash_needs_no_network_resolution(self):
+        self.assertEqual(self.api.resolve_review_commit(HEAD), HEAD)
+        self.assertEqual(self.api.paths, [])
+
+    def test_named_refs_cannot_shadow_a_commit_abbreviation(self):
+        for namespace in ["heads", "tags"]:
+            with self.subTest(namespace=namespace):
+                self.api.paths = []
+                self.api.refs[namespace] = [{"ref": f"refs/{namespace}/{HEAD[:7]}"}]
+                self.assertIsNone(self.api.resolve_review_commit(HEAD[:7]))
+                self.assertNotIn("commits/" + HEAD[:7], self.api.paths)
+                self.api.refs[namespace] = []
+
+    def test_similar_named_refs_do_not_block_commit_resolution(self):
+        self.api.refs["heads"] = [{"ref": "refs/heads/" + HEAD[:7] + "-feature"}]
+        self.assertEqual(self.api.resolve_review_commit(HEAD[:7]), HEAD)
+
+    def test_invalid_or_wrong_prefix_response_fails_closed(self):
+        for sha in [BASE, HEAD[:10], "a" * 64, None]:
+            with self.subTest(sha=sha):
+                self.api.resolved = sha
+                with self.assertRaises(RuntimeError):
+                    self.api.resolve_review_commit(HEAD[:7])
+
+    def test_ambiguous_or_unavailable_resolution_fails_closed(self):
+        self.api.error = RuntimeError("Ambiguous commit or API unavailable")
+        with self.assertRaises(RuntimeError):
+            self.api.resolve_review_commit(HEAD[:7])
+
+    def test_invalid_identifiers_cannot_be_used_as_api_paths(self):
+        for written in [HEAD[:6], HEAD + "a", "a" * 64, "main", "../main"]:
+            self.assertIsNone(self.api.resolve_review_commit(written))
+        self.assertEqual(self.api.paths, [])
 
 
 class CompletionTests(unittest.TestCase):
@@ -481,6 +645,23 @@ class ReconciliationTests(unittest.TestCase):
         self.api.ready = False
         self.gate.reconcile(self.api, 42)
         self.assertIn(("actions/runs/1/cancel", {}), self.api.writes)
+
+    def test_inspect_reports_revisions_without_writing_or_dispatching(self):
+        output = io.StringIO()
+        with patch.object(self.gate, "GitHub", return_value=self.api), \
+                patch("sys.argv", ["review_gate.py", "inspect", "--repo", "owner/repo", "--pr", "42"]), \
+                patch("sys.stdout", output):
+            self.gate.main()
+        self.assertEqual(json.loads(output.getvalue()), dict(pr=42, head=HEAD, base=BASE,
+                         merge=MERGE, eligible=True, reason="Waiting for review"))
+        self.assertEqual(self.api.writes, [])
+
+    def test_inspect_requires_one_specific_pr(self):
+        with patch.object(self.gate, "GitHub", return_value=self.api), \
+                patch("sys.argv", ["review_gate.py", "inspect", "--repo", "owner/repo"]):
+            with self.assertRaisesRegex(ValueError, "positive PR"):
+                self.gate.main()
+        self.assertEqual(self.api.writes, [])
 
     def test_review_read_failure_invalidates_a_previous_passing_status(self):
         class FailingApi(FakeGitHub):
