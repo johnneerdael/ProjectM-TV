@@ -232,10 +232,11 @@ The mathematical source forecaster predicts structure, motion, colour, flashing
 and feedback before comparison with the published core AAR. Fresh comparisons
 now target canonical Native core 2.3.8, whose downloaded AAR is byte-identical to
 2.3.7; saved 2.3.4/2.3.5/2.3.7 rows keep their identities.
-The current goal is a fresh random batch of three presets with 100/100
-behavioural-rubric grades for all three. Complete each batch under an unchanged
-model before repairing its gaps. Each run uses 60 frames at 30 fps. This supersedes
-the earlier ten-case 80/100 streak; neither grade is a calibrated probability.
+The current goal progresses through three-preset batches with all three at95+
+behavioural-rubric grades, then ten-preset batches with all ten at95+, followed
+by a randomized100-preset final audit. Complete each batch under an unchanged
+model before repairing its gaps. Each run uses60frames at30fps. This supersedes
+the earlier100-for-three gate and ten-case80/100 streak; none is a calibrated probability.
 Unknown or contradicted claims earn no credit. Generation is outside this work.
 
 Round 001 scored 97.5, 100 and 90. It did not meet the gate. Its frozen compact

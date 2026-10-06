@@ -1,10 +1,13 @@
 # Source prediction and native validation loop
 
-Current target: fresh batches of three previously untested random presets, with
-100/100 behavioural grades for all three in one batch. Complete each batch before
-repairing gaps. Use 60 frames per preset, report each outcome, and keep generation
-outside this goal. The sections below retain earlier checkpoints as history;
-the final batch-goal section supersedes their acceptance thresholds.
+Current target: iterate three-preset batches until all three achieve at least
+95/100, then iterate ten-preset batches until all ten achieve at least95/100.
+After that, predict a randomized100-preset set as the final improvement audit.
+Complete each batch under one frozen model before repairing its gaps. Use60
+frames per preset and report each outcome. Generation stays outside this goal.
+Preserve prior predictions and grades; diagnostic reruns do not silently replace
+fresh acceptance evidence. The sections below retain earlier checkpoints as
+history; this staged95+ objective supersedes their acceptance thresholds.
 
 Historical target: ten consecutive fresh randomly selected presets, each achieving at
 least 80/100 agreement for full visible behaviour: structure, motion, colour,
