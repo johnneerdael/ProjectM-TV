@@ -1,0 +1,224 @@
+ProjectM TV: consume evaluated legacy display controls
+
+Pass the frame context to legacy gamma/echo and filters. Allocate Filters for
+every legacy composite, then skip inactive frames before touching GL state, so
+equation-only activation works. Preserve filter order, gamma branches, echo
+UV/orientation math and preset configuration defaults. Custom composites keep
+their existing shader policy. Undefined echo orientation conversion omits echo.
+
+Compatibility reference: MilkDrop3 code/vis_milk2/milkdropfs.cpp evaluated
+gamma/echo (4064-4067), brighten/darken/solarize/invert (4199-4270).
+Independent local repair; no MilkDrop3 implementation copied.
+---
+diff --git a/src/libprojectM/MilkdropPreset/Filters.cpp b/src/libprojectM/MilkdropPreset/Filters.cpp
+index d3acd56e9..5aa48ebcc 100644
+--- a/src/libprojectM/MilkdropPreset/Filters.cpp
++++ b/src/libprojectM/MilkdropPreset/Filters.cpp
+@@ -1,4 +1,5 @@
+ #include "Filters.hpp"
++#include "PerFrameContext.hpp"
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -18,8 +19,15 @@ void Filters::InitVertexAttrib()
+     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Point), reinterpret_cast<void*>(offsetof(Point, x)));
+ }
+ 
+-void Filters::Draw()
++void Filters::Draw(const PerFrameContext& perFrameContext)
+ {
++    // Filters can become active only through equations. Keep allocation separate
++    // from activation, and leave GL state untouched on inactive frames.
++    if (!*perFrameContext.brighten && !*perFrameContext.darken &&
++        !*perFrameContext.solarize && !*perFrameContext.invert)
++    {
++        return;
++    }
+     UpdateMesh();
+ 
+     if (m_viewportWidth == 0 || m_viewportHeight == 0)
+@@ -36,19 +44,19 @@ void Filters::Draw()
+     glBindVertexArray(m_vaoID);
+     glVertexAttrib4f(1, 1.0, 1.0, 1.0, 1.0);
+ 
+-    if (m_presetState.brighten)
++    if (*perFrameContext.brighten != 0)
+     {
+         Brighten();
+     }
+-    if (m_presetState.darken)
++    if (*perFrameContext.darken != 0)
+     {
+         Darken();
+     }
+-    if (m_presetState.solarize)
++    if (*perFrameContext.solarize != 0)
+     {
+         Solarize();
+     }
+-    if (m_presetState.invert)
++    if (*perFrameContext.invert != 0)
+     {
+         Invert();
+     }
+diff --git a/src/libprojectM/MilkdropPreset/Filters.hpp b/src/libprojectM/MilkdropPreset/Filters.hpp
+index c00084654..29cd4b961 100644
+--- a/src/libprojectM/MilkdropPreset/Filters.hpp
++++ b/src/libprojectM/MilkdropPreset/Filters.hpp
+@@ -7,6 +7,8 @@
+ namespace libprojectM {
+ namespace MilkdropPreset {
+ 
++class PerFrameContext;
++
+ /**
+  * @brief Classic Milkdrop 1 postprocessing effects.
+  */
+@@ -19,9 +21,9 @@ public:
+     void InitVertexAttrib();
+ 
+     /**
+-     * @brief Applies the configured filters to the current output.
++     * @brief Applies the evaluated per-frame filters to the current output.
+      */
+-    void Draw();
++    void Draw(const PerFrameContext& perFrameContext);
+ 
+ private:
+     void UpdateMesh();
+diff --git a/src/libprojectM/MilkdropPreset/FinalComposite.cpp b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+index 7ccd5b426..15b984d6c 100644
+--- a/src/libprojectM/MilkdropPreset/FinalComposite.cpp
++++ b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+@@ -79,13 +79,8 @@ void FinalComposite::LoadCompositeShader(const PresetState& presetState)
+     {
+         // Video echo OR gamma adjustment with random hue.
+         m_videoEcho = std::make_unique<VideoEcho>(presetState);
+-        if (presetState.brighten ||
+-            presetState.darken ||
+-            presetState.solarize ||
+-            presetState.invert)
+-        {
+-            m_filters = std::make_unique<Filters>(presetState);
+-        }
++        // Static defaults do not predict whether equations activate a filter.
++        m_filters = std::make_unique<Filters>(presetState);
+     }
+ }
+ 
+@@ -144,10 +139,10 @@ void FinalComposite::Draw(const PresetState& presetState, const PerFrameContext&
+     else
+     {
+         // Apply old-school filters
+-        m_videoEcho->Draw();
++        m_videoEcho->Draw(perFrameContext);
+         if (m_filters)
+         {
+-            m_filters->Draw();
++            m_filters->Draw(perFrameContext);
+         }
+     }
+ 
+diff --git a/src/libprojectM/MilkdropPreset/VideoEcho.cpp b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+index d714a90e2..8a9a9b8a0 100644
+--- a/src/libprojectM/MilkdropPreset/VideoEcho.cpp
++++ b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+@@ -1,5 +1,8 @@
+ #include "VideoEcho.hpp"
+ 
++#include <cmath>
++#include <limits>
++
+ namespace libprojectM {
+ namespace MilkdropPreset {
+ 
+@@ -21,7 +24,7 @@ void VideoEcho::InitVertexAttrib()
+     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(TexturedPoint), reinterpret_cast<void*>(offsetof(TexturedPoint, u))); // Texture coordinates
+ }
+ 
+-void VideoEcho::Draw()
++void VideoEcho::Draw(const PerFrameContext& perFrameContext)
+ {
+     float const aspect = m_presetState.renderContext.viewportSizeX / static_cast<float>(m_presetState.renderContext.viewportSizeY * m_presetState.renderContext.invAspectY);
+     float aspectMultX = 1.0f;
+@@ -92,13 +95,13 @@ void VideoEcho::Draw()
+         glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 1, &attachment);
+     }
+ 
+-    if (m_presetState.videoEchoAlpha > 0.001f)
++    if (*perFrameContext.echo_alpha > 0.001f)
+     {
+-        DrawVideoEcho();
++        DrawVideoEcho(perFrameContext);
+     }
+     else
+     {
+-        DrawGammaAdjustment();
++        DrawGammaAdjustment(perFrameContext);
+     }
+ 
+     glBindBuffer(GL_ARRAY_BUFFER, 0);
+@@ -115,12 +118,20 @@ void VideoEcho::Draw()
+     }
+ }
+ 
+-void VideoEcho::DrawVideoEcho()
++void VideoEcho::DrawVideoEcho(const PerFrameContext& perFrameContext)
+ {
+-    auto const videoEchoZoom = m_presetState.videoEchoZoom;
+-    auto const videoEchoAlpha = m_presetState.videoEchoAlpha;
+-    auto const videoEchoOrientation = m_presetState.videoEchoOrientation % 4;
+-    auto const gammaAdj = m_presetState.gammaAdj;
++    auto const videoEchoZoom = static_cast<float>(*perFrameContext.echo_zoom);
++    auto const videoEchoAlpha = static_cast<float>(*perFrameContext.echo_alpha);
++    const auto orientationValue = std::trunc(*perFrameContext.echo_orient);
++    if (!std::isfinite(orientationValue) || orientationValue < std::numeric_limits<int>::min() ||
++        orientationValue > std::numeric_limits<int>::max())
++    {
++        // Undefined float-to-int input: omit echo, retaining gamma-only output.
++        DrawGammaAdjustment(perFrameContext);
++        return;
++    }
++    auto const videoEchoOrientation = static_cast<int>(orientationValue) % 4;
++    auto const gammaAdj = static_cast<float>(*perFrameContext.gamma);
+ 
+     glEnable(GL_BLEND);
+     glBlendFunc(GL_ONE, GL_ZERO);
+@@ -204,7 +215,7 @@ void VideoEcho::DrawVideoEcho()
+     }
+ }
+ 
+-void VideoEcho::DrawGammaAdjustment()
++void VideoEcho::DrawGammaAdjustment(const PerFrameContext& perFrameContext)
+ {
+     m_vertices[0].u = 0.0f;
+     m_vertices[0].v = 0.0f;
+@@ -218,7 +229,7 @@ void VideoEcho::DrawGammaAdjustment()
+     glDisable(GL_BLEND);
+     glBlendFunc(GL_ONE, GL_ZERO);
+ 
+-    auto const gammaAdj = m_presetState.gammaAdj;
++    auto const gammaAdj = static_cast<float>(*perFrameContext.gamma);
+     int const redrawCount = static_cast<int>(gammaAdj - 0.0001f) + 1;
+ 
+     for (int redraw = 0; redraw < redrawCount; redraw++)
+diff --git a/src/libprojectM/MilkdropPreset/VideoEcho.hpp b/src/libprojectM/MilkdropPreset/VideoEcho.hpp
+index dce3cace9..526af88de 100644
+--- a/src/libprojectM/MilkdropPreset/VideoEcho.hpp
++++ b/src/libprojectM/MilkdropPreset/VideoEcho.hpp
+@@ -21,12 +21,12 @@ public:
+ 
+     void InitVertexAttrib() override;
+ 
+-	void Draw();
++	void Draw(const PerFrameContext& perFrameContext);
+ 
+ private:
+-    void DrawVideoEcho();
++    void DrawVideoEcho(const PerFrameContext& perFrameContext);
+ 
+-    void DrawGammaAdjustment();
++    void DrawGammaAdjustment(const PerFrameContext& perFrameContext);
+ 
+     const PresetState& m_presetState; //!< The global preset state.
+ 
