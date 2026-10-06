@@ -91,6 +91,13 @@ See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 - Committed generated data indexes (not code indexes): `core/src/main/assets/presets.idx` (regenerate with `tools/gen-preset-index.py` whenever presets or textures change; CI enforces `--check`) and the collection bundle in `core/src/main/assets/preset-genres/` (current beta schema2 produced/verified with `tools/milk-analyzer/beta_export.py`;
   legacy schema1 Preset Lab imports are historical).
 
+For published-JNI predictor controls, use `core_backend.jni_pcm_inputs` before
+CPU audio evaluation and `validate_jni_audio_context` before native capture.
+Preserve raw transport and effective PCM hashes separately: the runner rounds
+float32 samples to unsigned bytes; raw float FFT reports are a different input.
+A shared input mismatch invalidates the comparison; stop remaining captures,
+preserve artifacts, repair the contract and refreeze before resuming.
+
 ## Design and user experience
 
 Follow the project's established design system and platform conventions. Reuse existing theme tokens and components. Preserve accessibility, keyboard/focus behavior, responsiveness, and supported input methods. Avoid introducing decorative styles or changing appearance incidentally during a refactor.

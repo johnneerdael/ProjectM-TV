@@ -1,0 +1,57 @@
+{
+  "status": "aborted_context_mismatch",
+  "captured_cases": [
+    38
+  ],
+  "uncaptured_cases": [
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "accuracy_scores": null,
+  "gate_credit": false,
+  "cause": "Source audio used rawFloat PCM instead of the published runner U8 round/clamp ingress.",
+  "source_raw_pcm_sha256": "6d17ad2fa7d1e9465e5ee80291275f25a701e52aebcdef22d24a42ed25430bf8",
+  "correct_effective_source_pcm_sha256": "028c703ebd373ebe46a8b8d08d70b3de2f7760259c5136f93b5e127693ea8ddd",
+  "native_library_changed": false,
+  "source_predictions_regenerated_from_native_pixels": false,
+  "corrected38_replay": "jni-ingress-repair1",
+  "original_mae_rgb8": 27.408549141589507,
+  "corrected_diagnostic_mae_rgb8": 0.1525146484375,
+  "all_original_files_preserved": true,
+  "time": "2026-10-06T09:27:03.810400+00:00",
+  "independent_java_conformance": {
+    "jdk": "OpenJDK21.0.11",
+    "raw_samples": 88200,
+    "boundary_controls": 1541,
+    "matched": true
+  },
+  "regression_tests": {
+    "focused_command": "python -m pytest tools/milk-analyzer/test_core_backend.py tools/milk-analyzer/test_native_audio.py -q",
+    "passed": 13
+  },
+  "fix_files": [
+    "core_backend.py",
+    "test_core_backend.py"
+  ],
+  "engine_bug": false,
+  "full_suite": {
+    "passed": 918,
+    "failed": 55,
+    "skipped": 3,
+    "subtests_passed": 63,
+    "new_failure_nodes": [],
+    "scope": "Same55historical/setup failures retained; fullsuite notgreen"
+  },
+  "independent_review": {
+    "status": "no_actionable_findings",
+    "focused_tests_passed": 13,
+    "scope": "JNIround/clamp/U8Float/hashsemantics/docs/caller; notGitHubfinalPRreview"
+  }
+}

@@ -476,3 +476,20 @@ with no native accuracy scores or TEN-gate credit. The exact centre coordinate
 differs under the existing optional composite raster model; target varying controls
 are required before selecting that policy. Published2.3.8 and candidate44 adapter
 identities remain separate while PR41's publication is blocked by its render test.
+
+### Published-JNI audio ingress
+
+Match the published runner's audio conversion before CPU PCM/FFT evaluation:
+float32 `value*128+128`, Java rounding toward positive infinity at half ties,
+clamp0..255, then native unsigned-byte input. `core_backend.jni_pcm_inputs` produces
+the exactly equivalent float PCM; `validate_jni_audio_context` rejects a report
+whose PCM hash does not match that converted input. Keep transport and effective
+source PCM hashes separate. Do not use raw float audio reports for this JNI host.
+
+Round008 was aborted after its first native capture because the stronger stimulus
+was evaluated before this conversion. No cases039–047 were captured, no accuracy
+scores were credited, and original predictions/seals remain unchanged. An input-only
+CASE038 diagnostic reduced mean RGB8 error27.4085→0.1525 against the existing capture.
+It earns no fresh gate credit. Independent Java execution matched88200samples and
+1541boundary controls. New predictions and claim freezes must use the corrected input
+contract before comparisons resume.

@@ -34,3 +34,31 @@ def test_resume_requires_same_identity_and_finite_score():
     assert not reusable_result({'identity':'old','status':'scored','score':30},'abc')
     for value in (None,float('nan'),101,True):
         assert not reusable_result({'identity':'abc','status':'scored','score':value},'abc')
+
+
+def test_jni_audio_quantization_matches_unsigned_byte_rounding_and_saturation():
+    import core_backend
+    convert=getattr(core_backend,'jni_pcm_inputs',None)
+    assert callable(convert),'published JNI audio conversion is missing'
+    # Java round ties toward +infinity; +1 saturates to255.
+    raw=np.array([-1,-1/256,0,1/256,1],np.float32)
+    np.testing.assert_array_equal(convert(raw),[-1,0,0,1/128,127/128])
+
+
+def test_jni_audio_context_rejects_a_report_from_unquantized_source_pcm():
+    import hashlib,core_backend
+    validate=getattr(core_backend,'validate_jni_audio_context',None)
+    assert callable(validate),'shared input validation is missing'
+    raw=np.array([.03,-.03],dtype='<f4')
+    with pytest.raises(ValueError,match='JNI audio ingress differs'):
+        validate(raw,{'pcm_sha256':hashlib.sha256(raw.tobytes()).hexdigest()})
+    effective=np.array([4/128,-4/128],dtype='<f4')
+    validate(raw,{'pcm_sha256':hashlib.sha256(effective.tobytes()).hexdigest()})
+
+
+@pytest.mark.parametrize('raw',[np.array([np.nan]),np.array([np.inf]),np.array([1.01])])
+def test_jni_pcm_rejects_values_the_published_runner_refuses(raw):
+    import core_backend
+    convert=getattr(core_backend,'jni_pcm_inputs',None)
+    assert callable(convert),'published JNI audio conversion is missing'
+    with pytest.raises(ValueError):convert(raw)
