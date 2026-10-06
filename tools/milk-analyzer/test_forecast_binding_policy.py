@@ -26,3 +26,12 @@ def test_explicit_historical_diagnostic_policy_is_retained():
 def test_unsupported_policy_is_rejected():
     with pytest.raises(ValueError,match='main binding policy'):
         forecast.source_main_binding_policy(forecast.CORE_237_EQUATION_ENGINE,'latest')
+
+
+def test_shape_state_policy_requires_the_verified_43_patch_identity():
+    from shape_sampling import CORE_238,LEGACY
+    assert forecast.source_shape_sampler_policy(forecast.CORE_237_EQUATION_ENGINE,None)==CORE_238
+    assert forecast.source_shape_sampler_policy(forecast.CORE_235_EQUATION_ENGINE,None)==LEGACY
+    assert forecast.source_shape_sampler_policy({},None)==LEGACY
+    with pytest.raises(ValueError,match='engine identity'):
+        forecast.source_shape_sampler_policy(forecast.CORE_235_EQUATION_ENGINE,CORE_238)

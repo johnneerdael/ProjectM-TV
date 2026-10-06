@@ -442,3 +442,39 @@ Documentation assessment: this changes the experimental source predictor only,
 not the shipped collections or app configuration. Maintain the analyzer README,
 this research plan and AGENTS guidance; no new user-facing app claims or release
 version changes are introduced.
+
+## Textured-shape sampler state localization
+
+The original widest-swing warp program is directly verified as custom on three
+frames; fallback is excluded. Its first two pre-geometry warp surfaces exactly
+match the source model, localizing the first substantial difference afterward.
+The main-textured shape has no named image and samples coordinates beyond the
+texture. A read-only observer then confirms texture repeat/nearest settings are
+overridden by a bound clamp/linear sampler at all three shape draws.
+Texture::Bind without a sampler preserves the prior binding; CustomShape clears
+it only after drawing. The preceding blur update's ownership is inferred from
+source/order, while the effective object state is directly measured.
+
+A source-only clamp diagnostic reduces frame2 display error3.801857→0.023003RGB8
+and post-geometry error against the saved passthrough reference to0.000326(max1).
+Across60frames the diagnostic error falls35.907832→9.948559 and restores the
+elongated feedback pattern. Fine numerical differences remain; original grades
+and fresh-batch acceptance are unchanged. Native outputs remain byte-identical
+to the saved original prefix during both read-only observations.
+
+The forecaster now models this source-identified state transition for the verified
+43-patch target, including first versus later instances and named-image samplers.
+Only actual blur requests trigger delayed-blur clamp inheritance. The separate
+engineering report and candidate inventory are in
+`~/Downloads/projectm-tv-aar-engineering-issues-2026-10-06/`.
+Only widest swing is runtime-confirmed;3,940 statically configured main-textured
+presets are investigation candidates. No full-corpus render was started, and no
+native patch or preset edit is made here.
+
+The production forecaster reproduces the clamp diagnostic pixel bytes exactly.
+Independent evaluation of all60frames scores this known training retest90/100,
+with no critical structural/trajectory contradiction. Four strict numerical point
+claims remain partial; no tolerance was widened. This satisfies the requested
+90+ repair sanity check, not the fresh95+ gate. Focused code review reports no
+blocking findings, and72 forecast/binding plus10 shape-policy tests pass with
+the prepared43-patch adapters.

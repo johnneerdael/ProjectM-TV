@@ -278,6 +278,25 @@ default; an explicit historical policy remains available for labeled diagnostics
 Provenance records the effective binding policy without modifying the requested
 domain or its hash. Diagnostic retests retain their original grades.
 
+The verified43-patch source defaults to
+`projectmtv-core-2.3.8-shape-state-v1`, modeling the published core's sampler-state
+leak. The first unnamed main-textured shape inherits the bound linear sampler:
+clamp after a delayed blur update, otherwise the warp's frame wrap. Each textured
+draw clears sampler0 afterward; later unnamed instances use the framebuffer
+texture's repeat/nearest settings. Named-image descriptors keep their own modes.
+Actual blur requests come from active custom source, including sampler/texsize
+references and native GetBlur substring checks, with comments removed. Draw
+ordinals keep separate instances from sharing the wrong callback.
+
+This is compatibility with an observed engine defect, not an intended universal
+MilkDrop rule. Unknown source identities retain `legacy-repeat-linear-v1`; the
+current policy rejects an unverified source identity. Provenance records the
+effective policy and native required blur level. Update this contract after an
+engine fix; do not apply the old leak to another AAR identity. The separate
+Downloads handoff identifies `widest swing.milk` as runtime-confirmed and3,940
+statically configured main-textured sources as investigation candidates, not
+certified defects across the library.
+
 A separately frozen 60-frame native control through the unchanged 2.3.4 AAR
 matched all predicted RGB8 values exactly for three equation random draws per
 frame. An independent NumPy MT19937 control also checks draw order across 33 shape

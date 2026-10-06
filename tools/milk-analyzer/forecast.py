@@ -22,6 +22,7 @@ from shader_random import bind_random_uniforms
 from shader_uniforms import source_uniforms
 from spatial import sample2d
 from sampling_policy import texture_settings
+from shape_sampling import LEGACY as LEGACY_SHAPE_POLICY,CORE_238 as CORE_238_SHAPE_POLICY,native_blur_level,shape_sampling_modes
 
 # Patched projectM-eval TreeFunctions.c initializes MT19937 once per thread.
 # This policy covers a cold evaluator thread, not a later preset switch.
@@ -64,6 +65,16 @@ def source_main_binding_policy(engine: dict, requested: str | None) -> str:
            for expected in PRODUCTION_EQUATION_ENGINES.values()):
         return 'projectmtv-core-2.2.6-v1'
     return 'legacy-sorted-v1'
+
+
+def source_shape_sampler_policy(engine: dict, requested: str | None) -> str:
+    verified=all(engine.get(key)==value for key,value in CORE_237_EQUATION_ENGINE.items())
+    policy=requested if requested is not None else CORE_238_SHAPE_POLICY if verified else LEGACY_SHAPE_POLICY
+    if policy not in {LEGACY_SHAPE_POLICY,CORE_238_SHAPE_POLICY}:
+        raise ValueError('unsupported shape sampler policy')
+    if policy==CORE_238_SHAPE_POLICY and not verified:
+        raise ValueError('shape sampler engine identity mismatch')
+    return policy
 
 
 def digest(value):
@@ -111,6 +122,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('production equation RNG seed must be 0x4141f00d')
     engine = source.get('parser_inputs', {}).get('engine', {})
     main_binding_policy=source_main_binding_policy(engine,domain.get('main_binding_policy'))
+    shape_sampler_policy=source_shape_sampler_policy(engine,domain.get('shape_sampler_policy'))
     if production_engine is not None:
         if any(engine.get(key) != value for key, value in production_engine.items()):
             raise ValueError('production equation RNG engine identity mismatch')
@@ -159,6 +171,9 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
         main_sampling_profile=domain.get('main_sampling_profile','portable'))
+    required_blur_level=native_blur_level(source,pipeline.stage_resolution)
+    if shape_sampler_policy==CORE_238_SHAPE_POLICY and domain['blur_levels']<required_blur_level:
+        raise ValueError('declared blur levels omit native required resources')
     if materials is not None and noise_bank is not None:
         if materials.noise_bank is None or digest(materials.noise_bank.manifest)!=digest(noise_bank.manifest):
             raise ValueError('combine procedural noise into the declared material bank')
@@ -218,10 +233,14 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
 
         def draw(destination, frame_index, previous_main):
             textures = {}; texture_aspects = {}
-            for shape in frame['shapes']:
+            images={shape['index']:source['values'].get(f"shapecode_{shape['index']}_image",'') for shape in frame['shapes']}
+            modes=shape_sampling_modes(frame['shapes'],image_names=images,policy=shape_sampler_policy,
+                                       warp_reads_blur=warp_reads_blur,blur_level=required_blur_level,frame_wrap=main['wrap'])
+            for ordinal,shape in enumerate(frame['shapes']):
                 if not int(shape['values'].get('textured',0)):
                     continue
                 shape_index = shape['index']
+                binding_key=(shape_index,ordinal)
                 image = source['values'].get(f'shapecode_{shape_index}_image','')
                 if image:
                     # Named-image loading/missing-image fallback needs a bound
@@ -232,10 +251,10 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     if texture_bank.textures[name].ndim!=3:
                         raise ValueError('source shape image must be a two-dimensional texture')
                     detail={'canonical_texture':name,'sampling_policy':{'wrap':policy['wrap'],'linear':policy['linear']}}
-                    textures[shape_index]=lambda uv, detail=detail:texture_bank.sample(detail,uv)
+                    textures[binding_key]=lambda uv, detail=detail:texture_bank.sample(detail,uv)
                     texture_aspects[shape_index]=1
                 else:
-                    textures[shape_index]=lambda uv:sample2d(previous_main,uv,wrap=True,linear=True,origin='top')
+                    textures[binding_key]=lambda uv, mode=modes[ordinal]:sample2d(previous_main,uv,wrap=mode['wrap'],linear=mode['linear'],origin='top')
             return draw_source_scene(destination,source,frame,builtin['frames'][index],custom['frames'][index],
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
                 motion_vectors_prewarped=True,line_rendering_profile=line_profile,
@@ -269,6 +288,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                           materials_sha256=None if texture_bank is None else digest(texture_bank.manifest)),
         provenance=dict(reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
                         main_binding_policy=main_binding_policy,
+                        shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
                         render_context_source_sha256=builtin['render_context_source_sha256'],
                         render_context_time_bits=builtin['render_context_time_bits'],
                         engine_archive_sha256=archive,model_sha256=digest(model_hashes),model_modules=model_hashes,

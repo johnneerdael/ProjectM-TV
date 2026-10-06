@@ -44,9 +44,9 @@ def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quant
     if motion_active(main) and not motion_vectors_prewarped:
         raise ValueError('motion vector drawing before warp requires separate source integration')
     aspect_y=np.float32(min(1,height/width));shape_textures=shape_textures or {};shape_texture_aspects=shape_texture_aspects or {}
-    for shape in frame['shapes']:
+    for ordinal,shape in enumerate(frame['shapes']):
         attributes=shape['values'];index=shape['index'];fill=dict(attributes);fill['border_a']=0
-        texture=shape_textures.get(index)
+        texture=shape_textures.get((index,ordinal),shape_textures.get(index))
         target=draw_shape(target,fill,aspect_y=aspect_y,quantize=quantize,texture_sample=texture,
                           texture_aspect_y=shape_texture_aspects.get(index),raster_subpixel_bits=triangle_subpixel_bits)
         if attributes.get('border_a',0)>.0001:

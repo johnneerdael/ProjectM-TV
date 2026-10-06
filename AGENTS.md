@@ -73,6 +73,11 @@ Verified41/42/43-patch source identities default to the patched main-sampler
 binding order (unqualified main on unit0); unknown identities retain legacy order.
 Keep the requested domain/hash unchanged and record the effective policy in
 provenance. Explicit legacy policy is for labeled historical/diagnostic controls.
+The43-patch shape sampler compatibility policy models the published2.3.8 state
+leak: first main-textured draw inherits blur/warp sampler0; later draws after
+unbinding use repeat/nearest attachment settings. Keep per-instance draw order,
+named-image modes and actual blur allocation distinct. Unknown engine identities
+retain the historical model; update the policy after a native repair.
 Do not claim the entire imported analyzer suite passes from focused controls alone.
 See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 

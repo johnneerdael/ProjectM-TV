@@ -137,6 +137,27 @@ def test_textured_shape_samples_previous_main_instead_of_current_warp_output():
     np.testing.assert_allclose(result['frames'][0]['feedback'][16,16,:3], [.2,.4,.6], atol=2e-6)
 
 
+def test_shape_instances_receive_distinct_inherited_and_texture_sampler_modes(monkeypatch):
+    module=importlib.import_module('forecast')
+    source=native(BASE+'bTexWrap=0\nwarp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=GetPixel(uv);}\n'
+                  'shapecode_0_enabled=1\nshapecode_0_textured=1\nshapecode_0_num_inst=2\n'
+                  'shapecode_0_rad=.4\nshapecode_0_a=1\nshapecode_0_a2=1\n'
+                  'shape_0_per_frame1=x=.25+.5*instance;y=.5;\n')
+    if source['parser_inputs']['engine']['patches_sha256']!=module.CORE_237_EQUATION_ENGINE['patches_sha256']:
+        pytest.skip('Requires prepared 43-patch adapters for the observed shape-state contract')
+    calls=[];original=module.sample2d
+    def observe(field,uv,**settings):
+        calls.append((settings['wrap'],settings['linear']))
+        return original(field,uv,**settings)
+    monkeypatch.setattr(module,'sample2d',observe)
+    result=predict(source,audio=audio(1))
+    assert calls and set(calls)=={(False,True),(True,False)}
+    split=calls.index((True,False))
+    assert all(value==(False,True) for value in calls[:split])
+    assert all(value==(True,False) for value in calls[split:])
+    assert result['provenance']['shape_sampler_policy']=='projectmtv-core-2.3.8-shape-state-v1'
+
+
 def test_named_shape_image_is_not_silently_replaced_with_main():
     source = native(BASE + 'shapecode_0_enabled=1\nshapecode_0_textured=1\nshapecode_0_image=missing\n')
     with pytest.raises(ValueError, match='image'):

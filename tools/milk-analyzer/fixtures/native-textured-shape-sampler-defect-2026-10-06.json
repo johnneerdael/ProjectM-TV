@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "component": "Published AAR sampler state plus source predictor compatibility",
+  "reference_release": "2.3.8",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "native_library_sha256": "a46f190829d636c08d6a0fdd48bc6db970b6381d834eccd2e5f47948c838cbb2",
+  "preset": "widest swing.milk",
+  "preset_sha256": "91fbdd07995c8a820c78513c899f60a0cbc950fcf52c90bbbf42cc51fb7b4604",
+  "native_prefix_sha256": "d3a82bd61fa700fbf51c3485ee82c52ce04cd3ffb512439254b7bd511c326e84",
+  "program_selection": {
+    "custom_warp_verified_three_frames": true,
+    "seal_sha256": "bf5f7cdb720c03e64a2cf9dfe68f3406200be20ca58fde21b1906953bb37f69a",
+    "active_q_float32_values_matching": 82,
+    "active_q_float32_values_total": 84,
+    "q_difference": "q26 differs by one ULP at frames0 and2"
+  },
+  "warp_observation": {
+    "seal_sha256": "206381ea7e24abd72ea42dd14d01f062735890835e6147096dbc3fa46f99f462",
+    "first_two_warp_surfaces_exact": true,
+    "first_substantial_display_difference_after_second_warp": true,
+    "third_warp_difference_green_only": true
+  },
+  "shape_sampler_observation": {
+    "seal_sha256": "8b0967c72cb7deb51b11864d1fbc2ef970fd4a2a28dc85104362467559449221",
+    "result_sha256": "167ed60fcb054140b8f6c996376aedb626db7d5d40a96bf600944c6e0470d352",
+    "draws": 3,
+    "texture": "repeat/nearest",
+    "bound_sampler": "clamp-to-edge/linear",
+    "effective_mode": "clamp-to-edge/linear",
+    "all_recorded_state_preserved": true,
+    "final_native_pixels_unchanged": true,
+    "no_gl_writes_extra_error_reads_or_observer_pixel_reads": true,
+    "blur_object_origin": "Source/order inference; effective object state directly observed"
+  },
+  "source_clamp_diagnostic": {
+    "no_native_surface_inputs": true,
+    "acceptance_credit": false,
+    "frame2_display_rgb8_mae_before": 3.801857,
+    "frame2_display_rgb8_mae_after": 0.023003472222222224,
+    "frame2_feedback_vs_derived_reference_rgb8_mae_before": 0.18004918981481483,
+    "frame2_feedback_vs_derived_reference_rgb8_mae_after": 0.0003255208333333333,
+    "frame2_feedback_max_error": 1,
+    "full60_rgb8_mae_before": 35.90783194082755,
+    "full60_rgb8_mae_after": 9.948558666087964,
+    "source_prediction_sha256": "21c3363ea7906c3e28d68dcfee321bf7d54e409c66d1590dd776334bc8dae5a0",
+    "production_forecaster_matches_candidate_pixels_exactly": true,
+    "independent_training_diagnostic_score": 90,
+    "critical_mismatch": false,
+    "assessment_sha256": "d88309828e4aa4736de14a4d1dc5db363f36f744d61318d495eb189088648f28",
+    "remaining_partial_claims": "Four strict numerical point claims; original score and fresh-batch credit unchanged"
+  },
+  "handoff": {
+    "directory": "~/Downloads/projectm-tv-aar-engineering-issues-2026-10-06",
+    "document": "textured-shape-sampler-state.md",
+    "inventory": "textured-shape-sampler-candidates.json",
+    "inventory_sha256": "83f99c4397d6b043c70d79d4faf5e3268944c052ce251875b0897217b4885d34",
+    "static_candidates": 3940,
+    "library_size": 9606,
+    "runtime_confirmed_presets": 1
+  },
+  "source_policy": {
+    "name": "projectmtv-core-2.3.8-shape-state-v1",
+    "default_scope": "Verified43-patch source identity",
+    "unknown_identity": "Retains legacy-repeat-linear-v1; explicit current policy rejected",
+    "instances": "First main draw inherits sampler0; textured draws clear it; later main draws use repeat/nearest",
+    "named_images": "Own descriptor sampler modes preserved",
+    "future_engine_fix": "Requires source/AAR identity and policy update"
+  },
+  "limits": [
+    "No native repair or preset edits",
+    "Candidate inventory is not a runtime defect count",
+    "Derived passthrough reference is supporting post-geometry evidence",
+    "No new full-preset gate grade is established by diagnostic pixel error",
+    "Whole-clock invariance against historical60-frame context is not claimed"
+  ]
+}
