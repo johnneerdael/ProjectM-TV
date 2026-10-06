@@ -21,6 +21,7 @@
 #endif
 
 #include <cmath>
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -130,21 +131,26 @@ static void TestFloatLiteralRendering(const std::string& preset, const std::stri
     engine.SetEasterEgg(0);
     engine.LoadPresetFile(preset, false);
     engine.RenderFrame(framebuffer);
+    Check(glGetError() == GL_NO_ERROR, "float control rendering GL error");
     glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
-    std::vector<unsigned char> pixels(256 * 144 * 3);
-    glReadPixels(0, 0, 256, 144, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
-    Check(glGetError() == GL_NO_ERROR, "float control GL error");
+    // RGBA/UNSIGNED_BYTE is guaranteed for normalized GLES framebuffers; RGB is optional.
+    std::vector<unsigned char> pixels(256 * 144 * 4);
+    glReadPixels(0, 0, 256, 144, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+    Check(glGetError() == GL_NO_ERROR, "float control RGBA readback GL error");
     if (!capture.empty())
     {
+        std::vector<unsigned char> rgb(256 * 144 * 3);
+        for (size_t i = 0; i < pixels.size(); i += 4)
+            std::copy_n(pixels.data() + i, 3, rgb.data() + (i / 4) * 3);
         std::ofstream out(capture, std::ios::binary);
         out << "P6\n256 144\n255\n";
-        out.write(reinterpret_cast<const char*>(pixels.data()), pixels.size());
+        out.write(reinterpret_cast<const char*>(rgb.data()), rgb.size());
         Check(out.good(), "float control capture failed");
     }
     std::cout << "float control RGB=" << int(pixels[0]) << ',' << int(pixels[1]) << ',' << int(pixels[2])
               << " expected=128,96,0" << std::endl;
-    for (size_t i = 0; i < pixels.size(); i += 3)
+    for (size_t i = 0; i < pixels.size(); i += 4)
         Check(pixels[i] == 128 && pixels[i + 1] == 96 && pixels[i + 2] == 0,
               "float literal one-frame result mismatch (including fallback markers)");
     glDeleteTextures(1, &texture);

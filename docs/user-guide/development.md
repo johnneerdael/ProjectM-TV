@@ -94,6 +94,11 @@ The native runner checks finite float32 constants by comparing their bits after
 formatting and reparsing, including negative zero, boundary values, randomized
 values and a comma-decimal locale. It also renders a one-frame warp/composite
 control and directly compiles 95 unchanged, hash-checked preset shader sections.
+The render control reads normalized framebuffers as RGBA bytes, then exports RGB
+when saving a capture. This uses the portable GLES readback format; desktop OpenGL
+can accept RGB-only reads that Linux GLES drivers reject. Validate GL readback
+changes with the Linux EGL/Mesa tests as well as macOS CGL.
+
 Source-analysis adapters rebuilt against the current engine record
 `float_literal_policy` and `float_formatter_sha256`; the reader’s `renderer_literal`
 values use the production formatter. Rebuild adapters when the engine patch series

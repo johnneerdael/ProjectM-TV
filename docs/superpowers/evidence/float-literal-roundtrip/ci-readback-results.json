@@ -1,0 +1,28 @@
+{
+  "base": "b62511ccd96fb868024fdfb9afac677bfe557b10",
+  "failed_ci_run": 37439022977,
+  "scope": "native test readback only; no production/patch/preset/version changes",
+  "mesa_probe": "driver=llvmpipe (LLVM 20.1.2, 128 bits)\nversion=OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4\nimplementation format=0x1908 type=0x1401\nbefore=0x0 RGB=0x502 RGBA=0x0 pixel=128,96,0,255\n",
+  "linux": {
+    "os": "Ubuntu 24.04",
+    "arch": "x86_64 under Docker/Rosetta on Apple Silicon",
+    "driver": "Mesa softpipe 25.2.8",
+    "sanitizers": "ASan/UBSan ON",
+    "baseline_control": "fails: float control GL error",
+    "corrected_control": "pass: every pixel128,96,0",
+    "ctest_groups": 18,
+    "native_runner": "engine/policy,18groups,EGL fade pass"
+  },
+  "mac": {
+    "driver": "CGL",
+    "sanitizers": "ASan/UBSan ON",
+    "ctest_groups": 18
+  },
+  "rgb_sha256": "14e97d8c85b433581afa4a126f40344345c18150e4dbb5392b16370576e6a257",
+  "limitations": [
+    "ARM64 llvmpipe baseline12GLtimeouts",
+    "x86_64 emulated llvmpipe ASan crashes inLLVMduringEGLinit",
+    "first softpipe suite17/18dueimplicit-input-bindings process-exit timeout; isolatedretry andfullrepeat pass",
+    "no physical-TV/runtime-engine changes tested; test-only fix"
+  ]
+}
