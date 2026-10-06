@@ -1,0 +1,81 @@
+{
+  "status": "captured",
+  "reference_release": {
+    "tagName": "v2.3.8",
+    "targetCommitish": "f745670d35d3a362bea1a6a56928b55b70cc9887"
+  },
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "native_sha256": "a46f190829d636c08d6a0fdd48bc6db970b6381d834eccd2e5f47948c838cbb2",
+  "preset_sha256": "9bc887094d6f745962dac4b1be205a50ab01df67551d67489004da2d19a75d78",
+  "prediction_seal_sha256": "4da092ba67c177385a21493bd057df0d681508531e0431d6c5db879610d14f13",
+  "capture_started_utc": "2026-10-06T09:40:14.635868+00:00",
+  "capture_finished_utc": "2026-10-06T09:40:15.125634+00:00",
+  "frames": 1,
+  "centre_rgb8": [
+    140,
+    151,
+    96
+  ],
+  "native_rgb_sha256": "3f0b93b38fc6cb202a9a86103256ab5d9e8071d660e8e9134170ad6acc71c729",
+  "blue_marker_every_pixel": true,
+  "alpha_measured": false,
+  "header": {
+    "width": 256,
+    "height": 144,
+    "frames": 1,
+    "fps": 30,
+    "pid": 1976
+  },
+  "fresh_gate_credit": false,
+  "transport_dependency_changes": [
+    "core_backend.py",
+    "test_core_backend.py"
+  ],
+  "source_math_changes": false,
+  "comparison": {
+    "native_centre": [
+      140,
+      151,
+      96
+    ],
+    "candidates": {
+      "analytic": {
+        "different_channels": 400,
+        "max_rgb8_error": 23,
+        "mae_rgb8": 0.06886574074074074,
+        "centre_prediction": [
+          128,
+          128,
+          96
+        ]
+      },
+      "composite-grid8": {
+        "different_channels": 0,
+        "max_rgb8_error": 0,
+        "mae_rgb8": 0.0,
+        "centre_prediction": [
+          140,
+          151,
+          96
+        ]
+      }
+    },
+    "scope": "Encoded one-frame viewport/mesh control; no complete varying float-bit readback; no arbitrary shader numeric policy",
+    "driver": "Apple M4 Pro API34 GLES3",
+    "alpha_measured": false,
+    "appearance_credit": false
+  },
+  "native_result_seal_sha256": "df83303707d7ddf56271edcdcf7d5535efd8be5ba726267a3251c7c60b322faf",
+  "case041_source_repair": {
+    "status": "computed",
+    "frames": 60,
+    "source_only": true,
+    "reference_frames_seen": false,
+    "math_sha256": "13c6bfbbd4531aec546c2dba825605c46a07cc6a48446b3de1702775e99acb78",
+    "pixels_sha256": "2c16862a9787a5764d5fa9457bff461bb1e0425f41b7f0ca9120897433301402",
+    "appearance_credit": false,
+    "native_authored_preset_capture": false
+  },
+  "default_policy_changed": false,
+  "scope": "Explicit composite_subpixel_bits8 for tested AppleM4Pro API34 GLES256x144/production composite mesh; otherGPUs/sizes/4K remain unverified"
+}

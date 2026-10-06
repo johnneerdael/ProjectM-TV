@@ -53,5 +53,17 @@
     "status": "no_actionable_findings",
     "focused_tests_passed": 13,
     "scope": "JNIround/clamp/U8Float/hashsemantics/docs/caller; notGitHubfinalPRreview"
+  },
+  "corrected_diagnostic_assessment": {
+    "score": 92.5,
+    "required_repair_score": 90,
+    "passed": true,
+    "fresh_gate_credit": false,
+    "critical_mismatch": false,
+    "claim_sha256": "fd7ebcbfd0bc623d2b529d7bdaa5f7999b8819c60b66e03c669c820b92b2bb29",
+    "mean_rgb8_mae": 0.1525146484375,
+    "sparse_max_channel_error": 191,
+    "coherent_brightening": 3,
+    "coherent_darkening": 6
   }
 }

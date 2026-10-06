@@ -493,3 +493,11 @@ CASE038 diagnostic reduced mean RGB8 error27.4085→0.1525 against the existing 
 It earns no fresh gate credit. Independent Java execution matched88200samples and
 1541boundary controls. New predictions and claim freezes must use the corrected input
 contract before comparisons resume.
+
+The isolated published2.3.8 composite-UV control now matches the explicit eight-bit
+raster prediction at every RGB8 channel: centre140/151/96 versus analytical128/128/96.
+The control uses the production mesh on the owned Apple M4 Pro API34 emulator at
+256×144. Under that explicit setting, the original CASE041 complex-reciprocal shader
+completes60source frames without a fabricated epsilon or NaN rule. No full authored
+native appearance is credited yet. Other viewport/GPU/4K contexts remain unverified;
+the portable default is unchanged. See `fixtures/composite-uv-raster-control-2026-10-06.json`.
