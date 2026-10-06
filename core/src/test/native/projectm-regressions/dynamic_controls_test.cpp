@@ -9,6 +9,7 @@
 #include <Renderer/Texture.hpp>
 #include <Renderer/TextureManager.hpp>
 #include <dlfcn.h>
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <cstdlib>
@@ -40,6 +41,7 @@ struct Draw {
     GLsizei instances{1};
     std::array<float, 3> style{};
     std::vector<unsigned char> geometry;
+    GLint program{};
 };
 static bool observe = false;
 static std::vector<Draw> draws;
@@ -51,6 +53,7 @@ extern "C" void glDrawArrays(GLenum mode, GLint first, GLsizei count)
     if (observe)
     {
         Draw draw{mode, count, 0, 0};
+        glGetIntegerv(GL_CURRENT_PROGRAM, &draw.program);
         glGetIntegerv(GL_BLEND_SRC_RGB, &draw.source);
         glGetIntegerv(GL_BLEND_DST_RGB, &draw.destination);
         draws.push_back(draw);
@@ -362,6 +365,57 @@ static void Save(const std::filesystem::path& file, const std::vector<unsigned c
     for (size_t i = 0; i < pixels.size(); i += 4) image.write(reinterpret_cast<const char*>(&pixels[i]), 3);
     Check(image.good(), "capture write failed");
 }
+static void GammaBoundsControls()
+{
+    TextureManager manager(std::vector<std::string>{});
+    for (const float trails : {-1.f, 0.f, .5f, 1.f})
+    for (const bool constant : {false, true})
+    {
+        std::istringstream text(std::string("[preset00]\nPSVERSION=0\nPSVERSION_WARP=0\nPSVERSION_COMP=0\n") +
+            "fGammaAdj=1\nfVideoEchoAlpha=0\nfVideoEchoZoom=2\nfWaveAlpha=0\n" +
+            "bBrighten=0\nbDarken=0\nbSolarize=0\nbInvert=0\nper_frame_1=" +
+            (constant ? "gamma=1e100;echo_zoom=1e100;\n" : "gamma=bass;echo_zoom=bass;\n"));
+        MilkdropPreset preset(text);
+        RenderContext render;
+        render.textureManager = &manager;
+        render.viewportSizeX = render.viewportSizeY = 128;
+        render.aspectX = render.aspectY = render.invAspectX = render.invAspectY = 1;
+        render.lineReferenceWidth = render.lineReferenceHeight = 32;
+        render.feedbackDetailAlpha = trails;
+        render.perPixelMeshX = render.perPixelMeshY = 8;
+        render.fps = 30;
+        preset.Initialize(render);
+        Check(preset.InitializationWarnings().empty(), "gamma bounds equation compile warning");
+        Surface initial(128, 128), output(128, 128);
+        initial.Bind(); glClearColor(.2f, .35f, .5f, 1); glClear(GL_COLOR_BUFFER_BIT);
+        preset.DrawInitialImage(initial.texture, render);
+        Check(preset.SetOutputTarget(true, output.framebuffer), "gamma bounds output rejected");
+        auto& state = libprojectM::FeedbackDetailTestAccess::State(preset);
+        auto& frame = libprojectM::FeedbackDetailTestAccess::Frame(preset);
+        state.texturedShader.Bind();
+        GLint echoProgram{}; glGetIntegerv(GL_CURRENT_PROGRAM, &echoProgram);
+        Shader::Unbind();
+        for (const float input : {1e30f, std::numeric_limits<float>::infinity(),
+                                  std::numeric_limits<float>::quiet_NaN(),
+                                  -std::numeric_limits<float>::infinity(), -1.f, 1.f})
+        {
+            libprojectM::Audio::FrameAudioData audio{}; audio.bass = input;
+            draws.clear(); observe = true;
+            preset.RenderFrame(audio, render); observe = false;
+            const double expected = constant || std::isnan(input) || input > 8 ? 8 : input < 0 ? 0 : input;
+            Check(*frame.gamma == expected && std::isfinite(*frame.gamma), "production gamma clamp failed");
+            Check(std::isfinite(*frame.echo_zoom) && *frame.echo_zoom >= .001 && *frame.echo_zoom <= 1000,
+                  "production echo zoom clamp failed");
+            const auto redraws = std::count_if(draws.begin(), draws.end(),
+                [echoProgram](const Draw& draw) { return draw.program == echoProgram; });
+            Check(redraws == (expected == 0 ? 1 : static_cast<int>(expected)) && redraws <= 8,
+                  "legacy gamma exceeded the production redraw budget");
+            Check(state.gammaAdj == 1 && state.videoEchoZoom == 2, "bounds overwrote config defaults");
+            output.Bind(); output.Pixels();
+        }
+    }
+    std::cout << "full-frame gamma/echo bounds: large/Inf/NaN, Off/Standard/Medium/High pass\n";
+}
 static void Capture(const std::filesystem::path& directory)
 {
     Surface source(128, 128), output(128, 128);
@@ -455,7 +509,7 @@ int main(int argc, char** argv)
         std::cout << "renderer=" << glGetString(GL_RENDERER) << " version=" << glGetString(GL_VERSION) << '\n';
         Check(glGetError() == GL_NO_ERROR, "context GL error");
         if (std::string(argv[1]) == "wave") { WaveControls(); DualWaveControls(); }
-        else if (std::string(argv[1]) == "display") DisplayControls();
+        else if (std::string(argv[1]) == "display") { DisplayControls(); GammaBoundsControls(); }
         else if (std::string(argv[1]) == "capture" && argc == 3) Capture(argv[2]);
         else if (std::string(argv[1]) == "presets" && argc >= 3) PresetControls(argv[2], argc == 4 ? argv[3] : "");
         else throw std::runtime_error("unknown control");

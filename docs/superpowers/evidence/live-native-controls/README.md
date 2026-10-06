@@ -122,3 +122,10 @@ real-draw regression covers0.00100000006 and the next float above0.001f. The
 suggested double-first comparison fails that compatibility regression; keeping
 the float conversion passes. This preserves the requested legacy conversion
 rules rather than selecting a new precision policy.
+
+Full-frame gamma bounds controls execute real per-frame equations (`gamma=1e100`)
+and feed large/Inf/NaN audio values through `MilkdropPreset::RenderFrame` in all
+four detail policies. The existing `PerFrameUpdate` clamp runs before the legacy
+consumer: gamma stays finite in[0,8], echo zoom in[0.001,1000], and gamma-only
+output issues at most8 actual draws. Config defaults remain unchanged. These
+controls pass on the host and M4 Metal emulator with no consumer-side clamp added.

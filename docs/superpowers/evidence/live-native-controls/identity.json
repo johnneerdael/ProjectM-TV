@@ -248,8 +248,8 @@
     }
   },
   "milkDrop3ReferenceSha256": "27911dc3b024e437a52216ceced7150c4bf7413e197d9c70aa892ee504273cea",
-  "testSourceSha256": "2667a9843d6c95fe0c9dd9ecec9f5e29bfbf9515d7a558e7ff1f0245c1143a21",
-  "candidateTestExecutableSha256": "391fab4b78b6156730933c2ca270bf3a4631e5da045ec1dea5711161ce650dee",
+  "testSourceSha256": "39a517d49e8b5846cc7be8568d279defa470f6780dc25dd1be49080fbc4055d3",
+  "candidateTestExecutableSha256": "1ebe4e9dc4172bf4b84495f391882bebb7e5af9e98015199f61c7ad562f670c9",
   "storedImagesSha256": {
     "aar-0-baseline-frame-479.png": "09d2b250264222f6e138458db3e00884645ce1172ae383f92752037fc2a9ab16",
     "aar-0-candidate-frame-479.png": "71281bf043c19de0783f5b6775595cc5b696e7e165c2feaa4b96dac19bb32c50",
