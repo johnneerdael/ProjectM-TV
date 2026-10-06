@@ -135,9 +135,10 @@ that arbitrary future audio, assets, state or time cannot produce flashes.
 
 ## Current implementation boundary
 
-Strict shader colour query orchestration/bounds, visibility-supported motion,
-causal response, structure tags and
-mood/profile transformations remain follow-up work. The published 2.3.15 AAR is
+The [source scoring layer](SOURCE_SCORING.md) now consumes cached evidence using
+explicit assumed mood/profile mappings. Strict shader colour query orchestration,
+visibility-supported motion, causal-response integration and structural extraction
+remain follow-up work. The published 2.3.15 AAR is
 downloaded and byte-verified in the task workspace. The forecaster now selects
 its five new policies from the exact source49 commit/patch identity: repeat/linear
 unnamed shape sampling, coherent float32 blur ranges, signed negative zoom only
@@ -149,8 +150,11 @@ The unreleased 4.2 rebase remains a separate future semantic identity.
 The pinned AAR and both ABI/class hashes are in
 `profiles/published-core-v2.3.15.json`. Source CPU controls verify modeled math,
 including explicit reader IEEE tags at native-defined fallback/clamp boundaries.
-Omitted waves do not consume unused geometry or draw controls. This is not
-published-AAR JNI numerical or appearance qualification; that remains pending.
+Omitted waves do not consume unused geometry or draw controls. A separate fresh
+JNI host built from the exact published classes/library passed one frozen
+256×144 constant-RGB control with zero channel error. This establishes bounded
+JNI loading/readback; it does not certify all five policies' GPU parity or authored
+preset appearance. See `fixtures/published2315-jni-qualification-2026-10-07.json`.
 
 Validate the pure calculations without a device:
 

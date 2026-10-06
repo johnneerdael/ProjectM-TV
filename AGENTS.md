@@ -476,3 +476,13 @@ known consumer boundaries; preserve gamma/echo-zoom min/max order and skip unuse
 wave inputs after mode omission. `test_core2315_wave.py` uses prepared source49 CPU
 adapters (`MILK_TEST_2315_BINARIES`); CPU checks are not published-AAR JNI appearance
 certification. Keep the standard AAR as the native reference, not the CPU archive.
+
+Cached source scoring (2026-10-07): `source_classify.py` consumes source feature
+records, with mode B allowed only explicitly. `mood_scoring.py` preserves missing
+components as intervals, checks context/domain identities and applies strict Chill
+bound declarations; it does not prove those bounds or substitute partial shape
+motion for complete preset motion. `mood_profiles.py` contains editable assumed
+genre/viewing defaults; optional70+first-use defaults never override explicit tastes.
+See `tools/milk-analyzer/SOURCE_SCORING.md`. A one-frame exact2.3.15JNI control is
+bounded loading/readback evidence; published appearance and index calibration are
+separate. Keep all shipped beta identities/indexes unchanged until validated migration.

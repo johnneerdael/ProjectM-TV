@@ -17,7 +17,9 @@
     "published_bytes_verified": true,
     "jni_declarations_checked": true,
     "source_policy_controls_passed": true,
-    "published_runtime_numerical_controls_passed": false,
-    "appearance_certified": false
+    "published_runtime_numerical_controls_passed": true,
+    "appearance_certified": false,
+    "runtime_scope": "one frozen synthetic256x144 constant-RGB JNI control; exact pixel match; not authored-preset or five-policy GPU parity",
+    "control_evidence_sha256": "8d5f72fcc92a2477daab129b8f03ae29b590a2db0be5db268650893ba76e7e45"
   }
 }

@@ -87,3 +87,8 @@ Its newer feature records separate shape-geometry speed, acceleration and jerk
 from simulated-display measurements, preserving missing support as unknown.
 These research calculations have not changed the packaged scores. Geometry alone
 does not prove that a preset has visible movement or is suitable for Chill.
+
+An offline experimental mapping now applies assumed mood and music/viewing
+profiles to cached source evidence. It preserves unknown inputs, requires stronger
+bound evidence for Chill, and keeps simulated-field calculations explicitly labeled.
+It has not replaced this page's frozen beta model or regenerated the shipped indexes.

@@ -123,6 +123,14 @@ including changes smaller than the coherent full-screen gate. These sampled
 changes may include moving edges; their absence does not prove a preset never
 flashes. They remain research evidence rather than new app mood scores.
 
+The offline source scoring layer can now apply explicit assumed intensity,
+smoothness, warm/cold and psychedelic mappings, then editable music/viewing
+profiles, to cached feature evidence. Unknown inputs retain their weight as score
+intervals; a short quiet sample is insufficient for the strict Chill constraints.
+These mappings are not yet calibrated or used by the app's packaged collections.
+See the [source scoring contract](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_SCORING.md)
+for supported fields and remaining extraction gaps.
+
 The October 2026 experiment passed a three-preset and then a ten-preset gate at
 95 or higher on twenty frozen behavioural claims. In the subsequent randomized
 100-preset audit,85met that threshold,12predictions remained unresolved, and three
@@ -187,8 +195,9 @@ protect identity consistency; they are not signatures or whole-program correctne
 proofs. Historical source44 profiles retain their static waveform and legacy
 display policies. The source predictor now models the2.3.15live controls under a
 separate exact source identity, alongside its corrected shape sampling, blur
-intervals and signed unit zoom. Its CPU controls do not certify published-AAR JNI
-appearance; that qualification remains separate. These changes have not regenerated
+intervals and signed unit zoom. A fresh published2.3.15JNI host passes a frozen
+one-frame constant-RGB control exactly; this checks loading/readback, not full
+authored-preset appearance or all-policy GPU parity. These changes have not regenerated
 the packaged mood indexes.
 
 ## Live preset controls

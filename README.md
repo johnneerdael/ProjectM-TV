@@ -23,7 +23,7 @@ The engine is designed to preserve the authored look as resolution increases; so
 
 ## User guide
 
-The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers installation, remote controls, settings and troubleshooting. The technical section explains [how the predictive collections work](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/). Separate [source forecasting research](https://johnneerdael.github.io/ProjectM-TV/development/#experimental-source-visual-forecasting) predicts preset equations, shaders and feedback, with explicit evidence separating geometry trajectories from simulated-display statistics. Its experimental audit has not regenerated the packaged mood collections.
+The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers installation, remote controls, settings and troubleshooting. The technical section explains [how the predictive collections work](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/). Separate [source forecasting research](https://johnneerdael.github.io/ProjectM-TV/development/#experimental-source-visual-forecasting) predicts preset equations, shaders and feedback, with explicit evidence separating geometry trajectories from simulated-display statistics and experimental mood/profile mappings over cached features. This research has not regenerated the packaged mood collections.
 
 ## Highlights
 

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-07",
+  "release": "v2.3.15",
+  "release_commit": "43023889ec38cf1250f3bfcaaf079a840acbdf76",
+  "aar_sha256": "fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327",
+  "native_arm64_sha256": "5f6aab4f774f90d4912229bb4262f79bc246e12bf4cd838cc4a7a67354e42766",
+  "classes_jar_sha256": "119b34434739ea0dffa2e5f5b8d9af2313a45068ff771f6bd9dc453c015e4d85",
+  "helper_sha256": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953",
+  "dex_sha256": "68a9bbe5306dac7bf83b9f451353d3c61d1d19ecca1fe17b9876d9fc51dd1fac",
+  "preset_sha256": "817989f4d8d127aa7babac61bba7c7944271de880a1e3539ee223fd140bbf908",
+  "frozen_prediction_sha256": "5af2369f6f4ac9cdb070ab1872ada02dde77420aa4dee0491a95d2f2535651d6",
+  "checks": {
+    "matching_preset": true,
+    "indexed_only_control": true,
+    "no_preset_skips": true,
+    "one_real_render": true,
+    "numeric_error_within_frozen_tolerance": true
+  },
+  "maximum_rgb8_error": 0,
+  "frames": 1,
+  "viewport": [
+    256,
+    144
+  ],
+  "scope": "One synthetic numeric JNI linkage/readback control; no full-preset appearance or five-policy parity certificate",
+  "emulator_stopped": true,
+  "appearance_certified": false
+}

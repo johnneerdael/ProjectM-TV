@@ -31,8 +31,10 @@ triplets use coherent defaults. Nonzero flag predicates include known IEEE value
 Omitted waves bypass unused controls. No generic nonfinite-to-zero policy is added.
 
 Source CPU controls and old profiles remain separate from unchanged published-AAR
-JNI numerical/appearance qualification. The latter is still pending for2.3.15;
-the downloaded archive and declared JNI interface alone do not establish it.
+JNI qualification. A fresh2.3.15host built with the published classes/library passes
+one frozen256×144constant-RGB control exactly. This is bounded linkage/readback
+evidence, not all-policy GPU parity or authored-preset appearance certification.
+See `fixtures/published2315-jni-qualification-2026-10-07.json`.
 Source44 profiles and all sealed visual grades retain their original context.
 Explicit historical policy overrides are counterfactual diagnostics, not a
 claim that the new renderer executes those old policies. Native4K/detail paths
@@ -44,6 +46,21 @@ The data-only controls can run without a device using prepared source49 adapters
 MILK_TEST_2315_BINARIES=/absolute/path/to/source49/adapters \
 python -m pytest tools/milk-analyzer/test_core2315_semantics.py tools/milk-analyzer/test_core2315_wave.py -q
 ```
+
+## Cached source mood/profile mappings
+
+`source_classify.py` scores a cached source feature record without executing a
+preset or consuming a native frame. It implements the explicit initial activity,
+smoothness, warm/cold and psychedelic mappings plus editable music/audience
+profiles. Missing inputs produce intervals and reduce preference support; Chill
+requires matching-domain full-preset bound declarations for smooth/no-flash
+constraints. Simulated-field evidence requires `--allow-simulated` and remains
+labeled mode B. Partial shape geometry is not silently substituted for complete
+preset motion, so many current records still abstain from activity assignment.
+
+These are assumed research mappings, not calibrated correctness percentages or
+updated app collections. Read [the scoring contract](SOURCE_SCORING.md) for exact
+input names, formulas, defaults, command examples and remaining extraction work.
 
 ## Four initialization cases
 
