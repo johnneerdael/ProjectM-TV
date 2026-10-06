@@ -30,6 +30,51 @@ The Hexcollie reflected history returns after the first frame. Shape feedback ch
 
 [Nine candidate controls](nine-candidates.json) preserve hashes, successful three-frame load/render results and actual blur uniforms. Eight candidates have observed nonfinite normalization before repair and none afterward. EVET Scanazoic is the negative control: its statically suspicious level does not produce an observed invalid used normalizer. Observations are capped at 12 blur passes per run and do not certify nine visible defects.
 
+## Physical AM6 verification
+
+The owner assigned AM6 `192.168.50.80:5555` for this task. It was awake on user0,
+Android9/ARMv7/Mali-G52 GLES3.2, with unchanged production release2.3.8 installed.
+[Matched TV captures](tv-summary.json) use the same frozen PCM, clock, seed,
+assets, preset hashes and 256×144/48×32 settings as the emulator. Three-frame
+observers preserve original final pixels on both revisions. Actual sampler and
+blur uniform changes reproduce on Mali. The negative-zoom reflected history
+returns in matched 60-frame images. Exact Flexi remains bit-identical over60frames.
+Mali loads the active fixed warp from a program binary, whose transform-feedback
+layout does not retain the observer's varying; therefore no direct Mali UV/NaN
+claim is made. Direct UV attribution is established on the separately identified
+emulator only.
+
+| Shape sampler | Signed zoom | Blur bounds |
+|---|---|---|
+| ![TV shape](tv-shape-before-after.png) | ![TV zoom](tv-negative-before-after.png) | ![TV blur](tv-blur-before-after.png) |
+
+[App FPS logs](tv-app-fps.json) compare installed production2.3.8 against a
+separately installed `nl.neerdael.projectmtv.predictordefects.profile`, preserving
+existing profile packages. The accepted six windows verify exact `BENCHMARK` and
+`LOAD` filenames at1920×1080/cap30, matching mesh/trails/transitions and observed
+`audio=0.000`; Milkbeat stays paused. Excluding the first reporting interval as
+startup warm-up:
+
+| Exact witness | Before FPS | Candidate FPS |
+|---|---:|---:|
+| Hexcollie stripped | 30.0–30.1 | 29.9–30.0 |
+| Flexi edit4b | 29.9–30.1 | 30.0–30.5 |
+| widest swing | 29.8–30.2 | 29.9–30.2 |
+
+These short silence windows are not a performance-improvement or live-music claim.
+The candidate includes already-merged post2.3.8 corrections, including float-literal
+precision. The first attempt failed to pin witnesses in Chill, and an ambiguous
+`widest swing` prefix selected a sibling; both rejected attempts are excluded.
+The corrected setup temporarily used All and restored Chill afterward.
+Direct-AAR onDrawFrame medians record CPU submission only, exclude GPU completion,
+and must not be converted into displayed FPS.
+
+Final checks verify original collection/auto-update preferences, listener access,
+the empty debug property and launcher foreground. All original preference values
+are restored except `update_checked_at`, which advanced during the app's normal
+update check before auto-update was disabled for matching. Playback remains paused;
+no TV is woken, and other tasks' packages are preserved.
+
 ## Regression checks
 
 - `tools/check-patch-series.sh`: all 47 patches apply to the pinned recursive source.
@@ -43,4 +88,4 @@ The Hexcollie reflected history returns after the first frame. Shape feedback ch
 
 ## Limits and predictor identity handoff
 
-Host/emulator controls do not establish Windows appearance, every GPU, full-corpus behavior or performance improvement. Physical-TV observations and final publication are separate gates. Keep old 2.3.8/2.3.10 identities and their inherited sampler/collapsed-blur/undefined-power policies frozen. A new published engine identity must select explicit repeat/linear shapes, separated/coherent safe blur bounds and signed negative unit-exponent zoom; never reuse an old observed sampler or undefined-coordinate policy under new hashes. The source-only forecast implementation lives in the separate predictor PR and is not modified by this native repair.
+Host/emulator controls do not establish Windows appearance, every GPU, full-corpus behavior or performance improvement. The recorded physical-TV checks do not establish live-music or 4K performance; final publication is a separate gate. Keep old 2.3.8/2.3.10 identities and their inherited sampler/collapsed-blur/undefined-power policies frozen. A new published engine identity must select explicit repeat/linear shapes, separated/coherent safe blur bounds and signed negative unit-exponent zoom; never reuse an old observed sampler or undefined-coordinate policy under new hashes. The source-only forecast implementation lives in the separate predictor PR and is not modified by this native repair.
