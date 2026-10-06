@@ -161,10 +161,10 @@ public final class QualityController {
     }
 
     private void startMode(int lastAutoHeight) {
-        fullAllocationPending = true;
+        boolean confirmed = started && !fullAllocationPending;
+        long residentBytes = confirmed ? estimate(current) : 0;
         resetAllocationProbe();
         resetCounters(0);
-        memorySnapshot = sampleMemory();
         if (isAuto()) {
             // Remember the requested FPS target before memory review clamps the actual size.
             // The host persists this inside the synchronous height callback below.
@@ -174,18 +174,31 @@ public final class QualityController {
         int requested = Math.max(minIndex, isAuto() ? rememberedAutoIndex : selectedIndex());
         int wanted = Math.min(ceiling, requested);
         current = wanted;
-        if (memorySnapshot == null || !memorySnapshot.isValid()) {
-            current = Math.min(current, initialIndex);
-            memoryConstrained = true;
-        } else {
-            while (current > minIndex && !RenderMemoryBudget.canGrow(memorySnapshot, 0, estimate(current))) current--;
+        if (confirmed && estimate(current) <= residentBytes) {
+            // No growth: do not charge the old tuple while GL is still releasing it.
+            // The next completed-generation FPS sample observes the actual available RAM.
             memoryConstrained = current < requested || !RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot);
+        } else {
+            fullAllocationPending = true;
+            memorySnapshot = sampleMemory();
+            reviewModeGrowth(residentBytes, requested);
         }
         // Expose the memory clamp before the host publishes the size, so it can discard
         // cached textures and pause prewarming instead of retaining the old allocation.
         lastChangeForMemoryPressure = current < requested;
         started = true;
         listener.onApplyRenderHeight(currentHeight());
+    }
+
+    private void reviewModeGrowth(long residentBytes, int requested) {
+        if (memorySnapshot == null || !memorySnapshot.isValid()) {
+            // Keep the legacy startup candidate; live edits cannot grow with unknown RAM.
+            current = started ? minIndex : Math.min(current, initialIndex);
+            memoryConstrained = true;
+        } else {
+            while (current > minIndex && !RenderMemoryBudget.canGrow(memorySnapshot, residentBytes, estimate(current))) current--;
+            memoryConstrained = current < requested || !RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot);
+        }
     }
 
     /**

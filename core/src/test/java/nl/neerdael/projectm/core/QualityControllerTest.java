@@ -147,6 +147,79 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void confirmedSameSizeModeSwitchDoesNotChargeResidentTexturesAgain() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30); // confirmed rendered allocation
+        memory.snapshot = new MemorySnapshot(4L << 30, 950L << 20, 128L << 20, false);
+        q.setResolutionMode(2160, 2160);
+        assertEquals(2160, applied);
+        assertTrue(!q.wasLastChangeForMemoryPressure());
+        q.setResolutionMode(-1, 2160);
+        assertEquals(2160, applied);
+    }
+
+    @Test
+    public void confirmedModeGrowthCreditsTheExistingAllocation() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(1440, 1440);
+        q.onFpsSample(30);
+        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        q.setResolutionMode(-1, 1440);
+        assertEquals(2160, applied);
+    }
+
+    @Test
+    public void confirmedModeReductionSamplesPressureAfterNewTexturesRender() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, false);
+        int reads = memory.reads;
+        q.setResolutionMode(1440, 2160);
+        assertEquals(1440, applied);
+        assertEquals("sampling before release would charge the old resident tuple", reads, memory.reads);
+        q.onFpsSample(30); // the host confirms the new tuple before forwarding this callback
+        assertEquals(reads + 1, memory.reads);
+        assertTrue(applied < 1440);
+        assertTrue(q.wasLastChangeForMemoryPressure());
+    }
+
+    @Test
+    public void unknownMemoryCannotGrowAnExplicitModeAboveTheExistingSize() throws Exception {
+        for (boolean confirmed : new boolean[]{false, true}) {
+            FakeMemory memory = new FakeMemory();
+            QualityController q = withMemory(memory, 4096);
+            q.setResolutionMode(720, 720);
+            if (confirmed) q.onFpsSample(30);
+            memory.snapshot = null;
+            q.setResolutionMode(-1, 720);
+            assertTrue(applied <= 720);
+            assertTrue(q.isMemoryConstrained());
+        }
+    }
+
+    @Test
+    public void pendingAndRecreatedAllocationsCannotProvideResidentCreditForModes() throws Exception {
+        for (boolean recreated : new boolean[]{false, true}) {
+            FakeMemory memory = new FakeMemory();
+            QualityController q = withMemory(memory, 4096);
+            q.setResolutionMode(1440, 1440);
+            if (recreated) {
+                q.onFpsSample(30);
+                q.revalidateForResume(true);
+            }
+            memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+            q.setResolutionMode(-1, 1440);
+            assertTrue(applied < 2160);
+            assertTrue(q.wasLastChangeForMemoryPressure());
+        }
+    }
+
+    @Test
     public void modeSwitchMemoryClampSignalsNativeCleanupInsideHeightCallback() throws Exception {
         for (int mode : new int[]{0, 2160, -1}) {
             FakeMemory memory = new FakeMemory();
