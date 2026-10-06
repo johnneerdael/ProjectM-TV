@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
     private static final String PREF_LAST_PLAYER_SESSION = "last_player_session";
     private static final String PREF_PRESET_DURATION = "preset_duration";
     private static final String PREF_TRANSITION_DURATION = "transition_duration";
+    private static final String PREF_RESOLUTION_MODE = "resolution_mode";  // new opt-in; legacy render_height stays retired
     private static final String PREF_AUTO_HEIGHT = "auto_render_height";  // last automatic level
     private static final String PREF_FRAME_RATE_CAP = "frame_rate_cap";
     private static final String PREF_MESH_LEVEL = "mesh_level";
@@ -265,7 +266,8 @@ public class MainActivity extends Activity {
         quality.setRenderAllocationSettings(nativeTrailsLevel(), transitionSeconds());
         quality.setSkipSlowPresets(prefs.getBoolean(PREF_SKIP_SLOW, profile.defaultSkipSlowPresets()));
         quality.setTargetFps(targetFps);
-        quality.setMode(0, prefs.getInt(PREF_AUTO_HEIGHT, 0));
+        quality.setResolutionMode(QualityController.validResolutionMode(display,
+                prefs.getInt(PREF_RESOLUTION_MODE, 0)), prefs.getInt(PREF_AUTO_HEIGHT, 0));
     }
 
     @Override
@@ -467,6 +469,27 @@ public class MainActivity extends Activity {
         });
 
         // Advanced panel
+        int[] resolutions = QualityController.resolutionModes(display);
+        String[] resolutionLabels = new String[resolutions.length];
+        int selectedResolution = 0;
+        int savedResolution = QualityController.validResolutionMode(display,
+                prefs.getInt(PREF_RESOLUTION_MODE, 0));
+        for (int i = 0; i < resolutions.length; i++) {
+            int height = resolutions[i];
+            resolutionLabels[i] = height == 0 ? getString(R.string.resolution_auto)
+                    : height == QualityController.NATIVE_HEIGHT
+                    ? getString(R.string.resolution_native, heightLabel(display.physicalHeight))
+                    : heightLabel(height);
+            if (height == savedResolution) selectedResolution = i;
+        }
+        OptionRow resolution = findViewById(R.id.row_resolution);
+        resolution.setup(getString(R.string.resolution), resolutionLabels, selectedResolution, true, index -> {
+            prefs.edit().putInt(PREF_RESOLUTION_MODE, resolutions[index]).apply();
+            // Reject queued samples from the old mode before publishing its replacement tuple.
+            renderBudgetGeneration = ProjectMJNI.requireRenderBudget();
+            quality.setResolutionMode(resolutions[index], prefs.getInt(PREF_AUTO_HEIGHT, 0));
+            refreshStatus();
+        });
         int[] caps = frameRateOptions();
         String[] capLabels = new String[caps.length];
         int selectedCap = caps.length - 1;
@@ -608,7 +631,7 @@ public class MainActivity extends Activity {
             slide(panel(target), true);
             if (target == Menu.ADVANCED) {
                 fade(diagnosticsPanel, true);
-                findViewById(R.id.row_frame_rate).requestFocus();
+                findViewById(R.id.row_resolution).requestFocus();
             } else {
                 trackInfoRow.requestFocus();
             }
