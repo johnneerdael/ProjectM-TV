@@ -1,0 +1,183 @@
+Correct collapsed blur bounds and reject unsupported float32 normalization domains.
+
+MilkDrop3 code/vis_milk2/milkdropfs.cpp GetSafeBlurMinMax contains the same
+avg-minus typo. Correct the documented push-apart intent at all three levels;
+retain its clamp-then-expand ordering and ordinary float32 coefficient arithmetic.
+This is a safety correction, not a backport of an already-fixed reference.
+
+Reject nonfinite or out-of-float32 equation inputs. If adjustment overflows,
+0.1 cannot be represented around its midpoint, or progressive float32 coordinates
+or shader coefficients are nonfinite/zero, use coherent [0,1] bounds at all levels.
+Representable ordinary and extreme ranges retain their bounds and coefficients.
+GetSafeBlurMinMaxValues and Update share the actual coefficient producer.
+
+diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.cpp b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.cpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.cpp
+@@ -6,6 +6,8 @@
+ #include "MilkdropStaticShaders.hpp"
+ 
+ #include <array>
++#include <cmath>
++#include <limits>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -149,18 +151,7 @@
+     std::array<float, 3> scale{};
+     std::array<float, 3> bias{};
+ 
+-    // figure out the progressive scale & bias needed, at each step,
+-    // to go from one [min..max] range to the next.
+-    scale[0] = 1.0f / (blurMax[0] - blurMin[0]);
+-    bias[0] = -blurMin[0] * scale[0];
+-    float tempMin = (blurMin[1] - blurMin[0]) / (blurMax[0] - blurMin[0]);
+-    float tempMax = (blurMax[1] - blurMin[0]) / (blurMax[0] - blurMin[0]);
+-    scale[1] = 1.0f / (tempMax - tempMin);
+-    bias[1] = -tempMin * scale[1];
+-    tempMin = (blurMin[2] - blurMin[1]) / (blurMax[1] - blurMin[1]);
+-    tempMax = (blurMax[2] - blurMin[1]) / (blurMax[1] - blurMin[1]);
+-    scale[2] = 1.0f / (tempMax - tempMin);
+-    bias[2] = -tempMin * scale[2];
++    GetBlurScaleAndBias(blurMin, blurMax, scale, bias);
+ 
+     m_blurFramebuffer.Bind(0);
+ 
+@@ -341,12 +332,27 @@
+                                           Values& blurMin,
+                                           Values& blurMax)
+ {
+-    blurMin[0] = static_cast<float>(*perFrameContext.blur1_min);
+-    blurMin[1] = static_cast<float>(*perFrameContext.blur2_min);
+-    blurMin[2] = static_cast<float>(*perFrameContext.blur3_min);
+-    blurMax[0] = static_cast<float>(*perFrameContext.blur1_max);
+-    blurMax[1] = static_cast<float>(*perFrameContext.blur2_max);
+-    blurMax[2] = static_cast<float>(*perFrameContext.blur3_max);
++    const std::array<PRJM_EVAL_F, 3> inputMin = {
++        *perFrameContext.blur1_min, *perFrameContext.blur2_min, *perFrameContext.blur3_min};
++    const std::array<PRJM_EVAL_F, 3> inputMax = {
++        *perFrameContext.blur1_max, *perFrameContext.blur2_max, *perFrameContext.blur3_max};
++    const auto useDefaults = [&]() {
++        blurMin.fill(0.0f);
++        blurMax.fill(1.0f);
++    };
++    for (size_t i = 0; i < blurMin.size(); ++i)
++    {
++        // Reject unsupported equation values before narrowing them to shader float32.
++        if (!std::isfinite(inputMin[i]) || !std::isfinite(inputMax[i]) ||
++            std::fabs(inputMin[i]) > std::numeric_limits<float>::max() ||
++            std::fabs(inputMax[i]) > std::numeric_limits<float>::max())
++        {
++            useDefaults();
++            return;
++        }
++        blurMin[i] = static_cast<float>(inputMin[i]);
++        blurMax[i] = static_cast<float>(inputMax[i]);
++    }
+ 
+     // check that precision isn't wasted in later blur passes [...min-max gap can't grow!]
+     // also, if min-max are close to each other, push them apart:
+@@ -355,7 +361,7 @@
+     {
+         float avg = (blurMin[0] + blurMax[0]) * 0.5f;
+         blurMin[0] = avg - fMinDist * 0.5f;
+-        blurMax[0] = avg - fMinDist * 0.5f;
++        blurMax[0] = avg + fMinDist * 0.5f;
+     }
+     blurMax[1] = std::min(blurMax[0], blurMax[1]);
+     blurMin[1] = std::max(blurMin[0], blurMin[1]);
+@@ -363,7 +369,7 @@
+     {
+         float avg = (blurMin[1] + blurMax[1]) * 0.5f;
+         blurMin[1] = avg - fMinDist * 0.5f;
+-        blurMax[1] = avg - fMinDist * 0.5f;
++        blurMax[1] = avg + fMinDist * 0.5f;
+     }
+     blurMax[2] = std::min(blurMax[1], blurMax[2]);
+     blurMin[2] = std::max(blurMin[1], blurMin[2]);
+@@ -371,8 +377,55 @@
+     {
+         float avg = (blurMin[2] + blurMax[2]) * 0.5f;
+         blurMin[2] = avg - fMinDist * 0.5f;
+-        blurMax[2] = avg - fMinDist * 0.5f;
+-    }
++        blurMax[2] = avg + fMinDist * 0.5f;
++    }
++
++    // Float32 cannot express a 0.1 interval at every magnitude, and progressive
++    // coordinates can cancel even for positive gaps. Keep ordinary legacy results;
++    // reject the entire unsupported triplet so storage and decoding use one policy.
++    Values scale;
++    Values bias;
++    if (!GetBlurScaleAndBias(blurMin, blurMax, scale, bias))
++    {
++        useDefaults();
++    }
++}
++
++bool BlurTexture::GetBlurScaleAndBias(const Values& blurMin, const Values& blurMax,
++                                    Values& scale, Values& bias)
++{
++    for (size_t i = 0; i < blurMin.size(); ++i)
++    {
++        const float gap = blurMax[i] - blurMin[i];
++        if (!std::isfinite(blurMin[i]) || !std::isfinite(blurMax[i]) ||
++            !std::isfinite(gap) || gap <= 0.0f)
++        {
++            return false;
++        }
++    }
++
++    // Retain MilkDrop's progressive float32 arithmetic (including rounding).
++    for (size_t i = 0; i < blurMin.size(); ++i)
++    {
++        const float tempMin = i == 0 ? blurMin[i] :
++            (blurMin[i] - blurMin[i - 1]) / (blurMax[i - 1] - blurMin[i - 1]);
++        const float tempMax = i == 0 ? blurMax[i] :
++            (blurMax[i] - blurMin[i - 1]) / (blurMax[i - 1] - blurMin[i - 1]);
++        const float denominator = tempMax - tempMin;
++        if (!std::isfinite(tempMin) || !std::isfinite(tempMax) ||
++            !std::isfinite(denominator) || denominator <= 0.0f)
++        {
++            return false;
++        }
++        scale[i] = 1.0f / denominator;
++        bias[i] = -tempMin * scale[i];
++        if (!std::isfinite(scale[i]) || scale[i] <= 0.0f || !std::isfinite(bias[i]))
++        {
++            return false;
++        }
++    }
++    return true;
++
+ }
+ 
+ void BlurTexture::AllocateTextures(int sourceWidth, int sourceHeight)
+diff --git a/src/libprojectM/MilkdropPreset/BlurTexture.hpp b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
+--- a/src/libprojectM/MilkdropPreset/BlurTexture.hpp
++++ b/src/libprojectM/MilkdropPreset/BlurTexture.hpp
+@@ -83,7 +83,8 @@
+     void Bind(GLint& unit, Renderer::Shader& shader) const;
+ 
+     /**
+-     * @brief Returns properly scaled and clamped vlur values from the given context.
++     * @brief Returns adjusted blur bounds, preserving the legacy clamp-then-expand order.
++     * Unsupported float32 input or normalization domains use [0,1] at all levels.
+      * @param perFrameContext The per-frame context to retrieve the initial values from.
+      * @param blurMin The calculated min values.
+      * @param blurMax The calculated max values.
+@@ -91,6 +92,14 @@
+     static void GetSafeBlurMinMaxValues(const PerFrameContext& perFrameContext,
+                                         Values& blurMin,
+                                         Values& blurMax);
++
++    /**
++     * @brief Produces the progressive float32 scale/bias used by the blur shader.
++     * @return False if bounds or resulting shader coefficients are unsupported.
++     *         Outputs are usable only when this returns true.
++     */
++    static bool GetBlurScaleAndBias(const Values& blurMin, const Values& blurMax,
++                                   Values& scale, Values& bias);
+ 
+ private:
+     static constexpr int NumBlurTextures = 6; //!< Maximum number of blur passes/textures.

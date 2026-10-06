@@ -302,3 +302,21 @@ no nonfinite literal is silently changed to zero or emitted as an authored `inf`
 identifier. Runtime arithmetic and the tokenizer’s initial decimal-to-double-to-float
 conversion are outside this serialization contract. See
 [the reproduction and related-code audit](superpowers/evidence/float-literal-roundtrip/README.md).
+
+## Renderer compatibility corrections (2026-10-06)
+
+Patches 0045–0047 keep sampling and arithmetic owned by the consuming draw.
+Main-textured custom shapes bind their own repeat/linear sampler on every fill;
+named images retain their descriptors. Blur upper bounds expand upward when the
+interval is too narrow, retaining the legacy clamp-then-expand order. A shared
+float32 coefficient producer rejects nonfinite or unrepresentable inputs and
+progressive cancellation; storage and decoded getters use the same default 0–1
+triplet in that case. The shared warp vertex shader uses signed negative zoom
+directly when the zoom exponent is exactly one, as MilkDrop CPU `powf` does.
+Positive zoom and other exponent calculations retain their previous path.
+Authored custom HLSL power translation is unchanged.
+
+These changes add no Java/JNI API and leave preset assets unchanged. Host UV,
+sampler and normalization controls are separate from device appearance and
+performance evidence; they do not establish identical rendering on Windows or
+all TV GPUs.

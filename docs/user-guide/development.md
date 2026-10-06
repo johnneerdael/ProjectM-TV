@@ -18,6 +18,13 @@ The native runner also builds the patched projectM engine with ASan/UBSan and ch
 
 Feature-branch pushes do not start CI builds. A ready PR targeting `main` starts the full build suite only after a completed Codex or human review of its latest commit, with all review threads resolved and no outstanding review requests or changes requested. Codex’s thumbs-up reaction on the PR is its approval signal. The gate uses completed review metadata to bind that reaction to the current revision, resolving shortened IDs through GitHub; a completion comment without the reaction cannot unlock builds. GitHub hides private draft reviews from automation: request a reviewer to keep the gate closed until submission. The review gate periodically rechecks thread resolution; GitHub may delay scheduled runs. Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
 
+The native suite also observes effective samplers at actual custom-shape draws,
+checks repeat/bilinear samples and named-image qualifiers across instances and
+context recreation, and separates blur mentions from actual allocation. Blur
+controls exercise the production bounds and progressive float32 uniform producer.
+Warp controls execute the shared production vertex source and read transformed UVs
+for signed negative unit-exponent zoom and ordinary positive transforms.
+
 ## Core rendering policies
 
 The single `:core` AAR uses Native rendering. Build it with:
