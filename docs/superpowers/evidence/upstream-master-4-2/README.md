@@ -1,10 +1,10 @@
 # Upstream master rebase: focused physical-TV validation
 
-Status: four-witness instrumented source checks completed; the material midgit image difference is under investigation. The user requires all 9,606 presets to preserve fidelity against the latest unchanged released ProjectM TV AAR. These preliminary controls do not satisfy that full gate. PR #46 remains a draft. Final CI, final-head Codex review, merge and publication are pending.
+Status: four-witness instrumented source checks completed; the material midgit image difference is under investigation. The user's latest completion gate requires at least 100 randomly chosen presets with the same fixed seed and zero pixel changes, using the verified released ProjectM TV source baseline alongside unchanged-AAR runtime checks. The sample will be frozen with selection seed 12345 and render seed 12345; failures cannot be replaced. Midgit remains an additional required regression witness. These preliminary controls do not satisfy that gate. PR #46 remains a draft. Final CI, final-head Codex review, merge and publication are pending.
 
 ## Authoritative released baseline
 
-Latest verified release: ProjectM TV v2.3.11, source `b1bb994d`, published core AAR SHA256 `3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6`. Downloaded unchanged and verified against release checksums and GitHub asset digest. The source baseline below contains all 44 ProjectM TV patches and is not stock libprojectM, but instrumentation makes its binary distinct from the published AAR. Unchanged-AAR workers and full inventory impact/fidelity coverage are being prepared.
+Latest verified release: ProjectM TV v2.3.11, source `b1bb994d`, published core AAR SHA256 `3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6`. Downloaded unchanged and verified against release checksums and GitHub asset digest. The source baseline below contains all 44 ProjectM TV patches and is not stock libprojectM, but instrumentation makes its binary distinct from the published AAR. Separate unchanged-AAR workers preserve all 9,686 packaged assets and their ARMv7 native library bytes; baseline and candidate each passed a 480-frame Oscilloscope runtime control with preset, GL and cleanup checks. Their real clock/RNG prevents deterministic image certification. The [44-patch/all-preset source impact inventory](patch-impact/README.md) covers all 9,606 presets without visual certification.
 
 ## Protocol and scope
 
