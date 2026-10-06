@@ -478,3 +478,24 @@ claims remain partial; no tolerance was widened. This satisfies the requested
 90+ repair sanity check, not the fresh95+ gate. Focused code review reports no
 blocking findings, and72 forecast/binding plus10 shape-policy tests pass with
 the prepared43-patch adapters.
+
+## Round006: three-preset95 gate passed
+
+Cases025–027 were the next entries in the frozen random queue, under unchanged
+model49448140 and published core2.3.8. Each completes60frames and scores95/100
+without a critical contradiction. The two strict numeric motion/colour claims
+per case retain partial credit. Structure, trajectory, palette phases, flashing
+timing and retained feedback agree across all60frames. All60 claims were sealed
+before the first native capture; no post-reference edits or tolerance changes.
+
+Root verification checks all106 final sealed files, every case seal, the187
+shared model/input identities, frozen timestamps before the earliest capture,
+all claim totals, matching preset/serial/index/skip metadata and paired visual
+sheets. Final seal:93d6963985352e7bd2509707e415c48e7230f82edc3ccf16af338b52fc177ad1.
+Evidence: `tools/milk-analyzer/fixtures/visual-loop-round006-2026-10-06.json`.
+
+This establishes the requested three-preset gate under the declared low-resolution
+profile. Ten-preset95+ validation and the randomized100-case audit remain required.
+Per-stage native program handles were not observed in this fresh batch; error-free
+loading does not independently certify every authored shader choice. Neither this
+gate nor the pixel deltas establishes corpus-wide or native4K accuracy.

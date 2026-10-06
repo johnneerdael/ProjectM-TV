@@ -239,6 +239,15 @@ model before repairing its gaps. Each run uses60frames at30fps. This supersedes
 the earlier100-for-three gate and ten-case80/100 streak; none is a calibrated probability.
 Unknown or contradicted claims earn no credit. Generation is outside this work.
 
+Fresh Round006 passes the three-preset stage: MoltenWheel, demonizer and
+glassworms flip each score95/100 with no critical mismatch. All60 claims and
+source predictions were frozen before the first published-AAR capture, and the
+model/inputs stayed unchanged through the batch. Motion and colour point
+estimates receive partial credit; these are operational behaviour grades, not
+pixel-perfect or calibrated accuracy percentages. The next gate is ten fresh
+presets with all ten at95+, before the randomized100-preset audit. Evidence:
+`fixtures/visual-loop-round006-2026-10-06.json`.
+
 Round 001 scored 97.5, 100 and 90. It did not meet the gate. Its frozen compact
 fixture preserves predictions, identities, measurements and misses. Earlier
 Tripgnosis trajectory errors were repaired by correcting custom-wave point counts

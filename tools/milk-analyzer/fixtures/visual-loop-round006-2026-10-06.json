@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "fresh-round006-staged95-root-verified",
+  "reference_release": "2.3.8",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "model_commit": "49448140858ca2bf590601d929f576db994d0bb4",
+  "manifest_sha256": "d3355c371a0f20242ba7bd609db4b08cc5ba53eee2e48ca4d5b07fbe53127f92",
+  "predictions_seal_sha256": "1e09c549a23bbfc8c60e208e8e707524dec5af9a32bcb917572993115da8d0a2",
+  "protocol_sha256": "ea9e136d4621bd1539420d57c7d39ff7d174fb92b9587232b6dd85c3397c44f6",
+  "cases": [
+    {
+      "case": 25,
+      "preset": "LuxXx - MoltenWheel i --- Isosceles edit8.milk",
+      "score": 95.0,
+      "critical_mismatch": false,
+      "source_sha256": "cf2441c02ed75c290a1b3bd4957a4541cf6e70f0bcdde44b39dc99eebf5c8a8d",
+      "native_sha256": "9c4b8045011822aded685749d6bc118f721cfa3fa6abc998eb99e354a15d4eb1",
+      "assessment_sha256": "ef0348b89a4c2037b6a076122ef84b82609a69dfab9851772b429dc0d8d51c2b",
+      "partial_claims": [
+        "motion3",
+        "colour3"
+      ]
+    },
+    {
+      "case": 26,
+      "preset": "suksma - demonizer - a shot.milk",
+      "score": 95.0,
+      "critical_mismatch": false,
+      "source_sha256": "13b71f50615f0f5731cbc9af194a930456a0650cb8b22fa80dd0232bebcde196",
+      "native_sha256": "ddf1193ab144c9ae2fd9509ccc0f663fa022466e2cdda8ab2fa3c28e5a1ae5f9",
+      "assessment_sha256": "0ae0669dce005fb6f5c10d281894d6c26f1d65cb1e47072483ba125cf341e2bb",
+      "partial_claims": [
+        "motion3",
+        "colour3"
+      ]
+    },
+    {
+      "case": 27,
+      "preset": "shifter - glassworms flip.milk",
+      "score": 95.0,
+      "critical_mismatch": false,
+      "source_sha256": "9b3ef388179fdbf5225d51cacb7f8877ff649ee9c50c4a890371e7d8886ac352",
+      "native_sha256": "19ef7f991ff273f35bf7e5f16431c958869c1334f2a468fe156f8692fb661612",
+      "assessment_sha256": "d520e269680c0c0fecad70c33e80f882419af5f65d31a32357df32cbd7d07b4f",
+      "partial_claims": [
+        "motion3",
+        "colour3"
+      ]
+    }
+  ],
+  "independent_root_verification": {
+    "all_106_final_sealed_files_verified": true,
+    "all_case_seal_files_verified": true,
+    "all_187_shared_model_input_hashes_unchanged": true,
+    "all_60_claims_frozen_before_first_capture": true,
+    "all_20_claim_totals_and_60frame_metadata_verified": true,
+    "paired_visual_sheets_reviewed": true,
+    "critical_mismatches_absent": true
+  },
+  "acceptance_limit": "Operational full-behaviour rubric in the frozen 60frame/256x144/declared-input profile; not calibrated probability, pixel identity, corpus-wide or4K certification",
+  "final_seal_sha256": "93d6963985352e7bd2509707e415c48e7230f82edc3ccf16af338b52fc177ad1",
+  "result_sha256": "2644170b8dc8104cb3775c744209e2d3028945306d208cf0f5a5c8a6770f5175",
+  "stage_three_passed": true,
+  "next_stage": "Ten fresh presets, all scores at least95; full goal remains incomplete"
+}
