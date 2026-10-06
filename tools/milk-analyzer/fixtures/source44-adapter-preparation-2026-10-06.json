@@ -1,0 +1,47 @@
+{
+  "status": "source_cpu_prepared",
+  "publication_status": "Unpublished PR41 source44; published native reference remains2.3.8",
+  "native_frames": 0,
+  "engine": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8",
+    "patches_sha256": "545ca48adad787f963f9b29c1fc4fd7e8a71fb910f586c8747f96a075d130ddf"
+  },
+  "source44_seal_sha256": "5eaf10a63746d8f47321b04da88397990b0bdf390fa3b37ae8e57af7b77fb82a",
+  "provenance_sha256": "c1ebc3063811718a1e84c46536c253a16db26126838ea4aeb8a676f46521ac40",
+  "verified_artifact_count": 22,
+  "adapters": {
+    "milk-native-reader": "417de77e4466409dc15052117630b511fcd7481d7867485e0b416da2c10720dc",
+    "milk-audio-inputs": "a454f417f38ab1dfa79359899cf3fa2278e80b10bd53266b4a2d43690135ffc7",
+    "milk-shader-translate": "440c69470a4ffb3cbd487fcf726006cb36c4e8cd6efcc77301b478b07645302a",
+    "milk-image-inputs": "a48ea318b6a9e29dc571fdeeaf9107e154cd2ec2d85faca1fbbce4363fce8de9",
+    "milk-shader-random": "7b913ae4b6319ed73804cbd201bfac3e2fb5ce2ecb00885fca57fda067516eb9",
+    "milk-composite-inputs": "eb60572f2c8830a4d0d21b8956a80b2b1e375fa6f42a554f4a84bf7be6ce6ac6",
+    "milk-wave-inputs": "7382fff68f5bbb837b8c4c682ecde0acb47956ef92c22017d5e06921aa7fa1f7",
+    "milk-noise-inputs": "6259747a5ba46bad54e75b8ec4f62a56014c9b191489e255e333c1d4732dd0ce"
+  },
+  "literal_controls": {
+    "literal_policy": "projectmtv-finite-f32-roundtrip-v1",
+    "reader_formatter": "archive-linked actual String_FormatFloat; renderer_literal is exported",
+    "formatter_source_sha256": "674b79986fcd33e3b1354d7b24a9e64efe37de3139b2bb6e2977adf1524b4788",
+    "generator_source_sha256": "e6020a03d240d53bf4ad3877201ae4bdb2352e78afc30541116f21dd09535507",
+    "old43_coefficient_renderer_literal": "float(1)",
+    "new44_coefficient_renderer_literal": "float(1.00000012)",
+    "coefficient_f32_bits_preserved": "3f800001",
+    "scale4194304_preserved": true,
+    "old43_artifacts_unchanged": true,
+    "translations": {
+      "warp": "9b175e57d72ff2799a3985f2cdd4f2487dc8edef6981d998de757790605f3a6d",
+      "composite": "a2cfb47f8e80612c1e4f48fc22f0ae7f3b1eb20fc658b8743a84d669fa0b59d1"
+    },
+    "offline_GLES_accepted": true,
+    "native_frames": 0,
+    "publication_status": "UNPUBLISHED SOURCE44; no reference rendering"
+  },
+  "full_forecast_ready": false,
+  "pending": [
+    "Explicit tested new identity for equation RNG and main/shape sampler policies.",
+    "New canonical published AAR download/hash and matching native controls."
+  ],
+  "appearance_credit": false
+}
