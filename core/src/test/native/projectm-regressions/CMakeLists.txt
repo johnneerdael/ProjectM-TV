@@ -53,6 +53,12 @@ if(NOT APPLE)
     target_link_libraries(projectm-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
 enable_testing()
+add_executable(float-literal-regressions float_literal_test.cpp)
+target_compile_features(float-literal-regressions PRIVATE cxx_std_17)
+target_include_directories(float-literal-regressions PRIVATE "${PROJECTM_SOURCE}/vendor/hlslparser/src")
+target_link_libraries(float-literal-regressions PRIVATE libprojectM::projectM)
+add_test(NAME float-literal-regressions COMMAND float-literal-regressions)
+set_tests_properties(float-literal-regressions PROPERTIES TIMEOUT 10 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0")
 target_compile_features(random-texture-regressions PRIVATE cxx_std_17)
 target_compile_definitions(random-texture-regressions PRIVATE GL_SILENCE_DEPRECATION)
 target_compile_definitions(random-texture-regressions PRIVATE
@@ -86,6 +92,8 @@ set_tests_properties(shader-parser-regressions PROPERTIES
 add_test(NAME hlsl-self-reference COMMAND projectm-regressions macro)
 add_test(NAME custom-waveform-bounds COMMAND projectm-regressions waveform)
 add_test(NAME shader-render-regressions COMMAND projectm-regressions shader-render)
+add_test(NAME float-literal-render COMMAND projectm-regressions float-render "${CMAKE_CURRENT_SOURCE_DIR}/float-literal-control.milk")
+set_tests_properties(float-literal-render PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_test(NAME parser-presets COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/check_preset_hashes.py"
     "$<TARGET_FILE:projectm-regressions>" parser-presets
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets"
@@ -109,3 +117,9 @@ add_test(NAME initialization-presets COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CU
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets"
     "${CMAKE_CURRENT_SOURCE_DIR}/initialization-presets.tsv")
 set_tests_properties(initialization-presets PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+add_test(NAME float-literal-presets COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/check_preset_hashes.py"
+    "$<TARGET_FILE:projectm-regressions>" float-presets
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../tools/milk-analyzer/fixtures/float-literal-presets.json")
+set_tests_properties(float-literal-presets PROPERTIES TIMEOUT 120 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

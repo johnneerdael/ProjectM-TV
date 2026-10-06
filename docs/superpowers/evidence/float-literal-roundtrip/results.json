@@ -1,0 +1,94 @@
+{
+  "base_commit": "f745670d35d3a362bea1a6a56928b55b70cc9887",
+  "upstream_projectm": "e0b0a967f0ffd7d332106c366668ed271718472b",
+  "patches": 44,
+  "scope": "one-frame unchanged synthetic preset; production JNI in unchanged extracted AAR libraries; runner-side clock only",
+  "artifacts": {
+    "tools/projectm-patches/0044-hlslparser-float-literal-roundtrip.patch": "aa8cdb27f42a9f8213ffc3d11abed23d2e7528c2cb1f2386dea2da6526794e93",
+    "third_party/projectm/vendor/hlslparser/src/Engine.cpp": "674b79986fcd33e3b1354d7b24a9e64efe37de3139b2bb6e2977adf1524b4788",
+    "third_party/projectm/vendor/hlslparser/src/GLSLGenerator.cpp": "e6020a03d240d53bf4ad3877201ae4bdb2352e78afc30541116f21dd09535507",
+    "build/float-regressions/projectm/src/libprojectM/libprojectM-4d.a": "79fe5030eedf567fcb4cda4d43c9554ba3e7994359fcde7896dfc71abd529f1c",
+    "build/milk-analyzer/native/milk-native-reader": "af8945ff2b4401c6854f0ed0d21dd578d85f23164e820adbb4c8a735fc3b7a40",
+    "build/milk-analyzer/native/milk-shader-translate": "a48450523617521902da5c2e07fbfd7f495e2cf96d93a9daef2e2baeb2229981",
+    "build/float-device/runtime/classes.dex": "bc7b2baf3a5793966d2984718c0675a6136f97c451752d9c9cd79b2e701d87f1",
+    "build/float-device/runtime/libbackendclock.so": "4a6820e57020ff56cf7731f8286d848d4693c0d3820e44606c44e76ce57ef9fd",
+    "core/src/test/native/projectm-regressions/float-literal-control.milk": "bc45a7bf0f70af9a451aeb79ebb329d32f4d7e1a4fdc669ac469b69b4a2d988f"
+  },
+  "captures": [
+    {
+      "role": "baseline",
+      "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+      "native_sha256": "a46f190829d636c08d6a0fdd48bc6db970b6381d834eccd2e5f47948c838cbb2",
+      "rgb_sha256": "2f4f540e783fcdb105a0f641ceb8509c9f8d63f1661caed04033e88326388774",
+      "rgb": [
+        64,
+        96,
+        0
+      ],
+      "metadata": {
+        "backend": "unchanged-core-jni",
+        "rendered_frame_serial_delta": 1,
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "core_version": "4.1.7",
+        "preset": "literal-roundtrip-control238.milk",
+        "frames": 1,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "aar_sha256": "2ad2d07886035bfdc78e8a27c8ddb366ef253e6ee92ba3e526b4c2b3ad57250c",
+      "native_sha256": "0396dea37f73c650bb4519b47811c2cc1ff6cb2155ce0150ba172af09dd8f70a",
+      "rgb_sha256": "14e97d8c85b433581afa4a126f40344345c18150e4dbb5392b16370576e6a257",
+      "rgb": [
+        128,
+        96,
+        0
+      ],
+      "metadata": {
+        "backend": "unchanged-core-jni",
+        "rendered_frame_serial_delta": 1,
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "core_version": "4.1.7",
+        "preset": "literal-roundtrip-control238.milk",
+        "frames": 1,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "skipped_count": 0,
+        "indexed_count": 1
+      }
+    }
+  ],
+  "limits": [
+    "candidate is local release AAR (default local base version), not yet a published release",
+    "no physical TV, FPS/thermal comparison, full affected-preset appearance or custom-program handle attribution from JNI",
+    "AST bit preservation concerns parsed float32, not exact authored real-number decimals"
+  ],
+  "validation": {
+    "native_regression_groups": 18,
+    "native_sanitizers": "ASan/UBSan",
+    "fade_gl": "skipped; no EGL/GLES development libraries on macOS",
+    "projectm_host_tests": 261,
+    "source_analyzer_tests": 199,
+    "finite_random_bit_patterns": 99609,
+    "float_boundary_values": 20,
+    "offline_boundary_gles_links": 20,
+    "affected_preset_hashes": 95,
+    "authored_ast_witnesses": 99,
+    "affected_preset_direct_cgl_links": 95,
+    "affected_preset_offline_gles_links": 95,
+    "release_tooling_tests": 135,
+    "mkdocs_strict": "passed",
+    "android": ":core:assembleDebug :core:assembleRelease :app:assembleDebug testDebugUnitTest passed; armv7/arm64"
+  },
+  "offline_descriptors_summary_sha256": "a86d62050b86fb059b90f1c6f58c241fdc42eb3d7e0e02ac684b4d696766de58"
+}

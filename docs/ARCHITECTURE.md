@@ -287,3 +287,18 @@ registers always held zero. Locals and explicit static/const/initialized storage
 their previous classification. Mixed comma declarations are emitted separately when
 needed to preserve different storage classes. The focused source analyzer and target
 policy are documented in `tools/milk-analyzer/README.md`.
+
+### Shader literal serialization
+
+Patch 0044 formats parsed finite float32 shader literals using the classic locale
+and `std::numeric_limits<float>::max_digits10`. Decimal/exponent spelling preserves
+float type and negative zero when GLSL is parsed; integer and Boolean AST literals
+retain separate emission paths. This prevents the inherited six-significant-digit
+formatter from changing coefficients before the driver sees them.
+
+`GLSLGenerator` rejects nonfinite literal nodes through its existing error state.
+`MilkdropShader` reports translation failure and retains its existing stage fallback;
+no nonfinite literal is silently changed to zero or emitted as an authored `inf`/`nan`
+identifier. Runtime arithmetic and the tokenizer’s initial decimal-to-double-to-float
+conversion are outside this serialization contract. See
+[the reproduction and related-code audit](superpowers/evidence/float-literal-roundtrip/README.md).
