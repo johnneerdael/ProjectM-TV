@@ -560,3 +560,24 @@ capture. The supplementary fixture records actual artifact identities and this
 limitation; per-capture successful assertions did not save their hash stdout.
 Every capture's source/overlay, frame count, pixel hash and pre-capture freeze was
 independently rechecked. No predictions or model were changed during the audit.
+
+### Final randomized100 audit
+
+The sealed audit is complete:85/100 cases score95+,12 source arithmetic-domain
+gaps retain0credit,107/138score90, and125scores65with a critical trajectory
+mismatch. Mean86.95including unknowns;98.8068among88completed predictions.
+The125preliminary85grade is preserved alongside a stricter separate adjudication.
+71scores of100indicate agreement with the20frozen observables, not pixel identity.
+Case121's fine-grainRGB8MAE48.88remains a documented fidelity gap despite its
+matching larger forms and aggregate claims. Three black/nearblack cases earn
+no credit for unobservable motion.
+
+All100original queue entries,2000pre-capture claims,5336source frames and6000native
+frames remain in the evidence. Root verified2939sealed files, row sums and the
+recreated random permutation. The final report prioritizes12domain gaps,125's
+geometry/history,11computed speed misses and five computed flash-miss cases.
+No new AAR defect is established by those misses. Existing separate engineering
+handoffs remain under Downloads; the released literal repair passes its exactRGB
+control. See `fixtures/visual-loop-round010-2026-10-06.json` and
+[the final audit report](../../docs/plans/2026-10-06-predictor-random100-audit.md).
+The intermediate checkpoint remains historical; final reviewed integration is pending.

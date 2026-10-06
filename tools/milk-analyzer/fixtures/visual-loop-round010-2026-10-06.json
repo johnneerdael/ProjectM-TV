@@ -1,0 +1,4048 @@
+{
+  "round": 10,
+  "status": "randomized_100_audit_complete",
+  "finished_utc": "2026-10-06T12:15:07.431265+00:00",
+  "cases": [
+    {
+      "case": 49,
+      "preset": "Serge + martin - crystal palace star005.milk",
+      "sha256": "4847f7b689a2262e30580c5eff493efa4e9318e80c8f4206b58bf4071059106a",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case049/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "e6a4314260d8b7b2d486cc41791b4d0764b2c974788d3ac228ccceed8bfa2cc8",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "4c48d412d09220a3c9749c0ddf166cee33986b9daf6b8263ef902c843f8ba2c6",
+      "prediction_seal_sha256": "47c242293c5f019d360c3867a66cb1d64b7c545f74b38ac3fea5496dcaf7b746",
+      "lost_claims": []
+    },
+    {
+      "case": 50,
+      "preset": "suksma - bing means cold.milk",
+      "sha256": "88b967885aa19bf49ee0e85465af161957f1d93fe8145f7e1c5c732bd08b4c41",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case050/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "2c54372541e450efa45a610f5832eb4ef8d2ea2fa82b390131d099cd1253f1d1",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "e5205bcc2ab75523153bde482c97123bc3142db48d85713835845f26ee1d9976",
+      "prediction_seal_sha256": "80f1364573a73cfff8129d88f45422e55c12834e1ea3e656f54b145e1f38f7f3",
+      "lost_claims": []
+    },
+    {
+      "case": 51,
+      "preset": "Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ bun in the owen.milk",
+      "sha256": "b8a3aff51a1cff7464c6849471a8fb3977a4a2dc7b4646d07a171f0689ffab89",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case051/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "ce0f8a7da9f8ff5844fec73971be9892cd7209c49f67707e7f3a6e5623db7271",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "830839041b011cfc831459e1d72db44cbb16f16ec5fc6fa0f840b2e6899b5b1e",
+      "prediction_seal_sha256": "ba10f5ae95b3c1855a9542c345e94462e20c4a8975e6d6cd0e5db84049f9d702",
+      "lost_claims": []
+    },
+    {
+      "case": 52,
+      "preset": "bowel trounce i fucking HATE kalaidesqopz.milk",
+      "sha256": "f0c79aa6033ea82396e766932826a89e451898ff96d3abef9c7134e1262d7d9c",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case052/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "aa3067f5c3ca8b96e78b877d5a2bd17842009632ef6afe608db2c85f4c03f7ea",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "d56b32b0736d7edc98c68f90f64251ad36de6f57c8b33cfefc450d382d427e7b",
+      "prediction_seal_sha256": "066772f3ab1bd48de7df47f9b4eed84aa50ae846dd8005647650ee2b9ea2630e",
+      "lost_claims": []
+    },
+    {
+      "case": 53,
+      "preset": "Mig_208.milk",
+      "sha256": "e690930932698da9e056e50cfcaa41c55d48808112ad61249f949702a8177b9e",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case053/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "2a83055f142246bdd41afcf85acdc9e13cfaf4012776050fec65c0e7cd267569",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "52f8a0a0e582f465700ac11ab5b4827c84daafce2bc37f958f2d4771242961a4",
+      "prediction_seal_sha256": "18dc28718dcbd03e5ea08cb84ea0cba2e8d6904c306cc884706c73f0815a515f",
+      "lost_claims": []
+    },
+    {
+      "case": 54,
+      "preset": "Geiss - Game of Life 3.milk",
+      "sha256": "cf34ebf04bb9feada20e5932041c3d6996a0627cae40857a4eb3b3f2767b8f90",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case054/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "65466f700177bf5572a84f07c405401e07f8c27cb96c36955462b8ae219b4a66",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "0b97f79a3c0925abcda79d2c449eec72ab5c2d30801ee735fa833cac003e93a9",
+      "prediction_seal_sha256": "f4658c9965423f7610a43c6f7f6a4b60800bb6409ff361f2bb7a06e05bed6195",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": 0.21848756074905396, \"observed\": 0.21702370047569275, \"delta\": -0.001463860273361206, \"relative_delta\": -0.006699970782513048, \"allowance\": 0.0109243780374527, \"passed\": true, \"known\": true}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": 1.3860046863555908, \"observed\": 1.2398857116699216, \"delta\": -0.14611897468566926, \"relative_delta\": -0.10542458919809254, \"allowance\": 0.06930023431777954, \"passed\": false, \"known\": true}]"
+        }
+      ]
+    },
+    {
+      "case": 55,
+      "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3_fire_works_uninverted seizure.milk",
+      "sha256": "bbc9b00e38a7e8bde8528b68e88ebec1776f9d3f4495b7c94b8bb775c0c73864",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 95.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case055/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "d650edee839cb41471caecf799e0d1583825bb3095fa16c2850562a9de089e27",
+      "preliminary_score": 95.0,
+      "assessment_seal_sha256": "6f9a7716f13c05dcefaca25f8653559c27b13def41145fcc4ad4d69a439741da",
+      "prediction_seal_sha256": "d9a38a6a2a269f6a129a44a49d1524f97d322bc59031caff603dc04a6fda8a1e",
+      "lost_claims": [
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": "Strict source/native peak_luma_jump_transition: source=[53, 54], native=[11, 12]; no timing/count tolerance."
+        }
+      ]
+    },
+    {
+      "case": 56,
+      "preset": "Stahlregen & flexi + Geiss + shifter - Swirlz.milk",
+      "sha256": "4004962ae4d92b1106b41b9b95faec16f59547722565e498a425a03caf1aa51d",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case056/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "c28c04b025e592e4783119a315cda96b183f0360d781d653e3ad383437588fdc",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "a7145a1b09ffcade0d9d9d53628e94960c1360f89ca90fbbf8eee81fbf8c45e3",
+      "prediction_seal_sha256": "2b9077c4e6c99c828b89c3549ba1c8681a5450c942f7fd33585a101e7501d1e7",
+      "lost_claims": []
+    },
+    {
+      "case": 57,
+      "preset": "AkashaDude & Geiss - Phahlsce Pseye kniqmbatlechniq.milk",
+      "sha256": "389ded11522ef4794b9577edd38f561bc074ad9b9b3105fc35062fe8c813ec59",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case057/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "2b784698303794bde287b4608a2dc84939913e3ed94846158bf44dd0ba1eb807",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "4d71490a11adf7da9c77c882fdba63b6ce5d061ef0c177a020c0b55d40334e76",
+      "prediction_seal_sha256": "afcb46535dff198b511f66ae582eee84205d8a32847a58ceec8e4424482bed13",
+      "lost_claims": []
+    },
+    {
+      "case": 58,
+      "preset": "141 nz.milk",
+      "sha256": "5b5961c19df019755dd44baf1cb7b15965a17b7590a7968939bfeb458a6c0c6a",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case058/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "1f8fe343ee89b5a0563aa1d0bd8029072b3b51ee3ef6601c1a400eb8c19a1d8d",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "5acb573616a4604509ec7b287c2ba37c0a70ed910935dce728bcb0eae932f2de",
+      "prediction_seal_sha256": "446a4bbc74cac86641829cb02c1abf83e73b557618100f41b1d6c653ddd05476",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: divide. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        }
+      ]
+    },
+    {
+      "case": 59,
+      "preset": "EoS + Phat - chasers 14 sentinel 616.milk",
+      "sha256": "a822ba385d102395b2fbd17628cd902181f1acb5a0c58d906401c0b56bb38f67",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case059/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "9c5855099c5fc07f5b2845cdfa0923c59b60ebb367506ff1b5955c94513f2bf0",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "d3080f2cbf3d14a9fefc5c801143096404f1c88a3d89b49724dfb99fca3a39dd",
+      "prediction_seal_sha256": "96c2bc31c4a3d149d08d1ee043d9dd8187aa963383309bdb3ca65215a1f1e82c",
+      "lost_claims": []
+    },
+    {
+      "case": 60,
+      "preset": "suksma - ed geining hateops - Fixation Nail Trimmer.milk",
+      "sha256": "7d5dc77e687a1953eb77e1b7c02fe7b6dc65eea37faead66191594c29513dc9d",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case060/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f5d2e13c13dd36bbc8f7672ddadb595ba445c027fd76fdf1dc3242ee0865d172",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "d4bef7e5597e80a3c1a2019f55547e69734c6b6300c8cc88f454577713e9d897",
+      "prediction_seal_sha256": "db4ba53acd4dd14d2b401a76694e13e00762df5769da281dbb63b17e1f1ad432",
+      "lost_claims": []
+    },
+    {
+      "case": 61,
+      "preset": "EVET- Esotic & Rozzer - Slazer Eyes.milk",
+      "sha256": "5b48d883855ef7b37893a9472f599b1643a5a24621792825d17d33619e264be9",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case061/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "5bd5333ea28c255a6bb76e4df9df6e13cb535bd040d640145cfbc584bf57d890",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "a2e9c41a830d27b1cd222b6fbf6889b5731963070720dca68642d231ca91e637",
+      "prediction_seal_sha256": "b1415cdee5e027524c5324337d7c58fc650cf57a2cdd5b9111b13c1edc3077e9",
+      "lost_claims": []
+    },
+    {
+      "case": 62,
+      "preset": "flexi - grind my glitch up [003].milk",
+      "sha256": "116cd5f65e429b496ca4d97e703a0f3d6ed01922eb25a2e8d94ccbb09e215393",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case062/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "fed16e08421fc1dd241c86f0f913be6adcab9fb92db8b97496f4998cacfbb043",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "222e80e06280c574ce9d563dee237675bd3eaaace505fd5f2cca301e98b7042b",
+      "prediction_seal_sha256": "fc957dc8466766d95dd519ab9785b0c4dd09361ac5deb1699f600c6089f40bc0",
+      "lost_claims": []
+    },
+    {
+      "case": 63,
+      "preset": "Redi Jedi - this is my brain on milk(drop the habbit) - slaviour (infinite primes require).milk",
+      "sha256": "b03eadfdbf2519efa255e63a8cd637366da90f9276cedc2d1e6ca1e7e1f089d1",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case063/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "d5c28925d511e63b18eefc0d2dbfaa2789280e45e530981b92c18fc110da063a",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "310d269bc5d28b41cc241700d63d64056c45f3a6c985f28f52cc8693ac033125",
+      "prediction_seal_sha256": "0db7c830535ead06502bb13b8c2be1cfc9f4b30a0c7d3809cf2cdfcc85d66b25",
+      "lost_claims": []
+    },
+    {
+      "case": 64,
+      "preset": "434.milk",
+      "sha256": "922901f136fa33ab7d0e7bf733211c86335137f06a985f2667b92bac4cabe3d8",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case064/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "e53c0f2adefe5d230d93b4c1d6d69bcc7ee3e78bc116bfd730b9b14f99065e4e",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "f20e852198a19353d573202d1defea047523eeaa80d402feb0bf761533e2efac",
+      "prediction_seal_sha256": "c97da0c0859aa717b77087aa9a2ceba3447424a129c522023898d6d326a5ff88",
+      "lost_claims": []
+    },
+    {
+      "case": 65,
+      "preset": "pig.milk",
+      "sha256": "10dc5070cf66a8b733b93435b3bb232bc862c7c5286296b5a1d2b9dc5710f379",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 95.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case065/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "3b271a589c0b7efdd7bb6874643b76deac3447187b0e2f37cc54be0966e60a53",
+      "preliminary_score": 95.0,
+      "assessment_seal_sha256": "320e7811d44789b947edc833517c4e0f905b8f74e7cf111d07f34e0281b763c0",
+      "prediction_seal_sha256": "fadc2771feb124774819bbc7e6c47db2fcabeec4714d8357292681b2be0db9b5",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": 0.6257815361022949, \"observed\": 0.5759477615356445, \"delta\": -0.04983377456665039, \"relative_delta\": -0.07963445977815521, \"allowance\": 0.031289076805114745, \"passed\": false, \"known\": true}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": 3.266906261444092, \"observed\": 2.596245050430298, \"delta\": -0.670661211013794, \"relative_delta\": -0.2052893953306567, \"allowance\": 0.1633453130722046, \"passed\": false, \"known\": true}]"
+        }
+      ]
+    },
+    {
+      "case": 66,
+      "preset": "shadowharlequin + flexi - lovely shiney squares [originally bipolar] hose of bounes.milk",
+      "sha256": "2d875848b36b4924ddcb98e83a173e2fa29e34d848e16551d24b7a31b74587ab",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case066/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "d9b1ecb0b07dee6cb7cfce9e9e3e4a0aad1f0a96e89f4dc181262ea64ebe25b4",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "b4fd82e7d8d661d4a066aaf93f08a2131278f45490406cd6c221371537853326",
+      "prediction_seal_sha256": "93129545d5042debe6e4ad8c88505120654a8e6198c0763bb1019a92086538c5",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": 0.2519931197166443, \"observed\": 0.249772310256958, \"delta\": -0.0022208094596862793, \"relative_delta\": -0.008812976569294775, \"allowance\": 0.012599655985832216, \"passed\": true, \"known\": true}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": 1.5261582136154173, \"observed\": 1.3701047182083121, \"delta\": -0.15605349540710511, \"relative_delta\": -0.10225250174909432, \"allowance\": 0.07630791068077086, \"passed\": false, \"known\": true}]"
+        }
+      ]
+    },
+    {
+      "case": 67,
+      "preset": "fat cancer arched ass nun nz+ oughtside.milk",
+      "sha256": "8d5453349aae7b7aa579dfd81fef1135dee974ba23e860af276d47589eaa619c",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case067/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "8d135416c74933cf5a9b27a01a216fe35b300c32433d3f92f90905e0ed818519",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "085a5b6ab57485c09b24a4a78e9ae691639bb155c117b2cf425eecb63d3c8b64",
+      "prediction_seal_sha256": "2ad8140fa3c3bffdca5c10613828bcdd2ccf383307f348aee3a0cb0a94ebf78f",
+      "lost_claims": []
+    },
+    {
+      "case": 68,
+      "preset": "Geiss - Brain Zoom 4.milk",
+      "sha256": "44888c6885efb4201e3a0247b6771c4428aa5ff3f1b1ea7a6fa76c84c4ca35e7",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case068/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "d71a533800b14ed9208a10d8a259af4f11a918a6a8c6ff69bebe5bbf300991b1",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "ff6d96a989e3c844a3f5d7a9f11d1473677d87a9c096939619067f0117231fb4",
+      "prediction_seal_sha256": "0fd400390254a3d66401228cd949960baa7130f5c26adbdf83e11aa64fa65bea",
+      "lost_claims": []
+    },
+    {
+      "case": 69,
+      "preset": "amandio c - the green machine 4 - radial nature sludge semi-proficient at self-annihilation.milk",
+      "sha256": "23c0c8de93320bcfb51a069063607c9360c58f9a8e77a16c38d0f626a7e2a563",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case069/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "c4c4f21751eec69dc0d4b09b7c68d83bd7c45893d9572e2696408fa3f0d44b24",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "55937b5764aaa7426452d1cd9a30d7669b8a77acd77b3f26f3a3d58faa04c4b6",
+      "prediction_seal_sha256": "76c4b1c98b0b16be07ea7c1d09317923a7cc085f672196aeb043147ed47b0450",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": 0.04131096601486206, \"observed\": 0.042368996888399124, \"delta\": 0.0010580308735370636, \"relative_delta\": 0.025611380599437586, \"allowance\": 0.002065548300743103, \"passed\": true, \"known\": true}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": 0.7014292180538177, \"observed\": 0.5940324783325189, \"delta\": -0.10739673972129882, \"relative_delta\": -0.1531113004093005, \"allowance\": 0.035071460902690886, \"passed\": false, \"known\": true}]"
+        }
+      ]
+    },
+    {
+      "case": 70,
+      "preset": "blood red raw holy - an evaporative dip in the frost of mind hibernation nz.milk",
+      "sha256": "75d04a82d09c383246e7ab08f702d0eedad6fd2b7a016b59a62d493620444cb6",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case070/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "6a2469eae30c1bf564f871a6552a34bf6e04129ecc5081cb00c3a8f4a78ec6bb",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "cdae9140dc2a33ae4b1916779d5e6344718860c3d0a1f6412d02f5919cde6b73",
+      "prediction_seal_sha256": "4a31bf2f773b2071eab0b9e2bfa33d4e59477e74ddcb905c81b465454aa4e58f",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": 0.15109942853450775, \"observed\": 0.15496298670768738, \"delta\": 0.0038635581731796265, \"relative_delta\": 0.025569641200180154, \"allowance\": 0.007554971426725388, \"passed\": true, \"known\": true}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": 1.3874652147293087, \"observed\": 1.4790833711624145, \"delta\": 0.09161815643310578, \"relative_delta\": 0.06603275920757427, \"allowance\": 0.06937326073646544, \"passed\": false, \"known\": true}]"
+        }
+      ]
+    },
+    {
+      "case": 71,
+      "preset": "one-stop step-by-step deviance cure 13th step devolution reprisal loss-through-finding inverse paradigm degenerating entropy gain.milk",
+      "sha256": "2ebe9e23eca8d52ccb0772b2bacac867b76de962ba7e2d97bd281467eb88db27",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case071/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "72f5aacd527d502e4623eacd35afb1593c90e3270987c9c41e639f0eacdf55b9",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "0455d3098a78848c7e945b2d499ca7fc7c7ef3ad2e71ee3b5f7c0b0b4cc7fa19",
+      "prediction_seal_sha256": "2fafa3cee9ebe1c0a0d4b36163ccb30d6e6ed8982b7216f475094e14ccc789a3",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        }
+      ]
+    },
+    {
+      "case": 72,
+      "preset": "Shifter & EoS+Phat - Fractical dancer (inside the neural net_axon_mix) flx mrt nz alien device for destroying alien devices.milk",
+      "sha256": "5a9a34efdd60f37bbd5bea3b46167f85ecc8f898426a688cc25420a4e2c37cd4",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case072/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "11450256eaafdb18b4571b31746190375c72cd1cfc2ea49a7e36fda5b97d4d79",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "b249d02954746a366fb59598eb4eb246bd6e78d5da0c16a332a59ebdc39d8781",
+      "prediction_seal_sha256": "607dbe4479b9c1f80316a2ad93881f10906fc7487fdc8469a6baef3bdcd882bb",
+      "lost_claims": []
+    },
+    {
+      "case": 73,
+      "preset": "flexi + bdrv - ultramix#05 [alien complex mix] [not roaring at all].milk",
+      "sha256": "659e1c38b791a802b1478f0455956453e56dddc5c2a687bfef4251ccfd4fcb23",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case073/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "dbb0173d3919b1c6fd9e00b26c237a85b6505ebeba50a6f0cb2e137c4a86b057",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "2dd4b7b9ed72336c4ef2dcdd381016aed788a6f6f4d954d08c55cc9191249b70",
+      "prediction_seal_sha256": "dca3acd7dfc2e1b41084188c5525d5d6ac865ab45397088592f8a8a01af62737",
+      "lost_claims": []
+    },
+    {
+      "case": 74,
+      "preset": "EoS+Phat - spectrum bubble new colors.milk",
+      "sha256": "a99765846f5e58f383a052a6a3d6b6fc630ae61b98ed8ae34928401cf22b028c",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case074/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "082e94d88eb2d2cf2da5daa015480a4546fe44db3eb44f2687e628d727471167",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "7ec2c70f90fe652cc4dfab1311b991c515e0c7493df7ce5b87d6320caa0f06bf",
+      "prediction_seal_sha256": "48e8527e280b9fa11b06a025f12f7bed20701d6e1700fd737874a4eb4b06c2db",
+      "lost_claims": []
+    },
+    {
+      "case": 75,
+      "preset": "TonyMilkdrop - RGB.milk",
+      "sha256": "9dac46b20b53d2eef955b504b0aa128ddfb7b70c2dbc145441fa6fe57be06c34",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case075/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "ffa738f1e3184c36978a6a4afc41ffbeafab19d78a379fa122a0264c3a3eaca2",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "cf06c4e72d1d4d14eb694458b9136fb7be7ac0c36b68c61fb84f0a1662665466",
+      "prediction_seal_sha256": "6fc15c6978e69de1867b4bf17a513469b2b9e4567cf914815978c2d527aa9d01",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        }
+      ]
+    },
+    {
+      "case": 76,
+      "preset": "shifter + Flexi - liquid circuitry from the hive qongugaething the pisspondenseath ferocious butt hounds.milk",
+      "sha256": "df6bf02f92cabefdc8f2c1fed8813883fcb2f3abb32b7e6e5be741d788ad9157",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case076/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "cbb74ad552f326e42a9e09c24843cb43167a2c6fe7d745946fa60ae90d278128",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "b73b8985defbbb33bb765100a3290c7b5cc5842a40a53dbef08d8743fac246ae",
+      "prediction_seal_sha256": "9ebb9e25b15949ccf9b4dcdb06c9f79799767b1185863806e58ddedb133b40c0",
+      "lost_claims": []
+    },
+    {
+      "case": 77,
+      "preset": "suksma - barium titanate --- Isosceles edit11.milk",
+      "sha256": "88475a10bc5b39a089dbd5ec466d7f5843a62668a7d2dd6e1f370d710c7eef85",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 95.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case077/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "4d77d66ca6414c6db8f7b6d18ca5e96f7f56cab125d1818e5acc1342cc52af92",
+      "preliminary_score": 95.0,
+      "assessment_seal_sha256": "45b8d64664c9f53bab39e8d607f80f85e645db7899b59405a7639f866eff6df5",
+      "prediction_seal_sha256": "b4f48ee255354e4151fffe1f7857cab2f12b132158665bb4055034cc61d42a18",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": null, \"observed\": null, \"delta\": null, \"relative_delta\": null, \"allowance\": null, \"passed\": false, \"known\": false}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": null, \"observed\": null, \"delta\": null, \"relative_delta\": null, \"allowance\": null, \"passed\": false, \"known\": false}]"
+        }
+      ]
+    },
+    {
+      "case": 78,
+      "preset": "Goody - Unstable Sonic Reactor - Final.milk",
+      "sha256": "4d116fa5aa4f114b4e93b03ad2ca6d75e6d16aa025a44ce94385569c7663792d",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case078/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "b60b4ccffb756c0f7243275ef9f980c1e5f47e73e8432b71440846c2a8929b48",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "b1068022e2dc11823e64478ef6a4578119523c10e0317382912d7ad03dcd9f22",
+      "prediction_seal_sha256": "839ba5126e823f8017e15013fa3ce50c639df84f033ebbd080f5e72025921b69",
+      "lost_claims": []
+    },
+    {
+      "case": 79,
+      "preset": "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration E Adam HD INFECTIONFX A.milk",
+      "sha256": "a999420dcae192b9a40a203f337386b3920f1cf32a75680ccf470bd467c3c5e5",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case079/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "28e73fc5b1ae618bce1727832bacd4f797e47fbb1b42a16534e33d7bafe5ec3e",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "b13912cd9ff6bbd60e95b8f7bb37a12ac503cf1cc8a4bd5e299d58c49b716141",
+      "prediction_seal_sha256": "4b0bb10d6b99fb5e04fdf9a0dc9bddf80c21cb7c7eeccc710b4f50e55d9a71fa",
+      "lost_claims": []
+    },
+    {
+      "case": 80,
+      "preset": "Benjam & Zylot - Fractal Timepiece - joyous leap into razors.milk",
+      "sha256": "b67a9979943fbc86fe32c2e79e5e2dac5993d94ffe4eb2dd8a26896a6ea161b6",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case080/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "862d12ba7fdc2dca5de06227880bd9324d156f51590d1f52e87c51574b40564e",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "df8ddca3a03155bb1aef0c10762af91693d43618135233ee768f71e257e5d6b9",
+      "prediction_seal_sha256": "10a8cb78d62d5db8c9c3b3a11d0bf968f832e1e44b1e08188541969cde159e29",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        }
+      ]
+    },
+    {
+      "case": 81,
+      "preset": "Geiss - Surface (1-02 Version).milk",
+      "sha256": "977724e4e553ecb466bf9a5dcacc32cf5bc6fdc95cdb58dcb6f49166bc4acafc",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case081/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "b0307e99477312dcd514ea7578090d37cddbf39b1b6fb43104b3d3a0c6b08b0c",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "f15b6db426ba2919b644d69f27b1482a8970aca3f64bf73c7f121507281eac41",
+      "prediction_seal_sha256": "5a4cbd62a2bc6c43ab098eee802c6034bb071291a54b86c0cdea813671b3adf0",
+      "lost_claims": []
+    },
+    {
+      "case": 82,
+      "preset": "EoS - Phat - randombox - mantra 5 response lullquestent vlasphume your perfect tiling whore nz+.milk",
+      "sha256": "019aec5006e639e6068b411514aaa595b6a8f4e17b0393760c75901da6a5066e",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case082/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "09e28e8ea9bc68fd8b2c95697a08bb63196904ccba14fd2b272bb0c5dee4b252",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "e48da5d712142aa99bb920b28bc8fca132751e5efc5c5850c95af804909a2b9f",
+      "prediction_seal_sha256": "18f016dce7f84257919ca12eb091c430aab11cdf4c8bcd43b9ab7c4777e90332",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": 0.3396550416946411, \"observed\": 0.34853553771972656, \"delta\": 0.00888049602508545, \"relative_delta\": 0.02614563287733927, \"allowance\": 0.016982752084732055, \"passed\": true, \"known\": true}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": 1.6405103325843804, \"observed\": 1.5532156229019165, \"delta\": -0.08729470968246389, \"relative_delta\": -0.05321192311233056, \"allowance\": 0.08202551662921903, \"passed\": false, \"known\": true}]"
+        }
+      ]
+    },
+    {
+      "case": 83,
+      "preset": "afunction knegatson windpissinglistening.milk",
+      "sha256": "1b342d75b18cf782b7c11798d54538bf58738b026f447a729ae6d9b807cff4d7",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case083/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "5a0249b35a37698eb8bbd07c6db7d22ed87206d97db90f99c8533919b6620dc9",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "405ab8e5c9a22a0a59a4371ece824aa3b04833c0bd8f3d7f0be65ef9f98804b8",
+      "prediction_seal_sha256": "f52f4094223b6c4ca2f8e35c5ce7b5eee8691ac28f80dfd71e9eb0dc268f8465",
+      "lost_claims": []
+    },
+    {
+      "case": 84,
+      "preset": "Infused by Flexi with AdamFX 2 Stahlregen & Aderrasi + EoS + Geiss + Unchained + Zylot - Slowflowers F7.milk",
+      "sha256": "4eaae889bb4acb509e48a614698a7b6f541682ab43f8211da12f560cc69a24d7",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case084/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "4fcb7951af6128d61da9630cdc420e41d6e9b4d32fc84563290998cc1a29d7d6",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "5a333284d56efbeaf657d4a02bb410868ccc91eb4571ffb3ea357c7fd80742f4",
+      "prediction_seal_sha256": "33acbd65eb4ca1a9f04e235a044280ba1061039109587a37625d62383b5bce2d",
+      "lost_claims": []
+    },
+    {
+      "case": 85,
+      "preset": "bmelgren - Getter Sun tweek 3.milk",
+      "sha256": "3b55f5e0d8019b9c0c4f2a41725c9c4bb92b42a4d750131e3834bb1e6067b653",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case085/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "30e7c603acad70c097347895af3be2bcfef90d2605ea44987b9c1b86e7d4d627",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "361b24aaf6473f3e9b04a86254b46f4ee35d5b4a743e014221504d84ba840b56",
+      "prediction_seal_sha256": "dd4e52dad15a1e02bacf1f2d199414c37c3564e097af37dd78788e232c0b3107",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved warp numeric domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        }
+      ]
+    },
+    {
+      "case": 86,
+      "preset": "suksma - Chemlock - Spot (Zylot & Aderrasi equations) and martin shaders + christ's eternal damnation - if the condom fits vampires.milk",
+      "sha256": "7f369ea9c8bc36bc4961ee1980149efd540f35598b985d5767841271093eea4b",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case086/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "0434d6b8fdd6fa36bcb261455a0bb052a85da4d786f378836c5d7c515fbec477",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "984227c1ffa11d77a70629e39d1bbafe1090e794144f797df55b379aafccadcf",
+      "prediction_seal_sha256": "228cd34bb8aa62d4f67d2943672c6eb2537f40c5c45b43a02ca39c546f50def3",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with0frames: unresolved grid numeric domain: dot. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        }
+      ]
+    },
+    {
+      "case": 87,
+      "preset": "amandio c - embrace 07 z in the unlikely uneventuality c.milk",
+      "sha256": "0c02bb8fe2c155091c19714132f9c65301902c6d68573dd8959255f5cb72f02a",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case087/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "bf48bebf0b08fce02e1cacccfa39ff3c2ac97ee10971f823eb984dee0980b537",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "bb33a0f579cac663c2b9bb09211ca0a07590cf892ec4ca2225d34e6837c8da5a",
+      "prediction_seal_sha256": "c80a34fb93b958da6878bcb533021d2f86e9fc6afe6b50bd3214e091730c8627",
+      "lost_claims": []
+    },
+    {
+      "case": 88,
+      "preset": "custom10.milk",
+      "sha256": "ef9a2e5ed73e76484b5a5b47db9b3514d269d831bd0ab9516e01cf5a33fb5c5a",
+      "source_status": "unresolved",
+      "source_frames": 51,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case088/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "1a90c40f8c11d37a95d2adb3a3ed59f500a5492105451e286ac66c8513bef68a",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "620cb9589fcc8602a44f121c234a8c1e184a432ef4cff9ee8aec2bc16072453c",
+      "prediction_seal_sha256": "b950aae5457fb81965ec7bed6b1dc1f298e8a6d16abc82422ff1911d54799f64",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Source prediction is unresolved with51frames: unresolved warp power domain. Native capture succeeded with60frames, but cannot convert frozen unassessable source observations into appearance credit."
+        }
+      ]
+    },
+    {
+      "case": 89,
+      "preset": "va ultramix2 - 54.milk",
+      "sha256": "6ca8ade1ded759b6fef1531153b7341e1ac3c42ec2388681902b35bf5e85d92e",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case089/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "d992cd69d504aa03038ec14140992637cbe269278509d52649a9c0bc9e7e58a0",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "f6128c8343ed4b3c0483f4baf10319686c93cd1ac565703be5e51c8a0ea62604",
+      "prediction_seal_sha256": "1edc8c2347a6ea7f3c7aa9358722ae7808c2e462575d3f6c16f26c7bf450df5b",
+      "lost_claims": []
+    },
+    {
+      "case": 90,
+      "preset": "Hexcollie - Julian Shader Wars3 - endlessly tired.milk",
+      "sha256": "ef54cdbe41f284bdc3bddcc40d1228918168b4323a4b7d0b270ab48123e08bbc",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case090/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "55901b0b6bcc85afe34765cb325460d0bf39be20e618139ea8c407f91c28ce94",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "6c587d107da8b5fa402f7daad489af151b9cef6365752c9f1666cb65f6855244",
+      "prediction_seal_sha256": "f89e4e4ab1f2d6151cf7c5884601f19cc8c04a2a67aaa45602ada2ce4e3dfa12",
+      "lost_claims": []
+    },
+    {
+      "case": 91,
+      "preset": "suksma - biotoxins on strings - busy highway ignores + flx per vtx equ.milk",
+      "sha256": "6f11b01659ced81871bf0847ab4c6d84a41a4f7188532e34aeabb9899e56166f",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case091/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "39dc245611f9963f9f36ad7ca0db2a2fdc8e7d160ae01746ebc08a6604e82243",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "d392abfc074f3288f171db091e5c5855b14efe0063d23fc953bfe57cedf57542",
+      "prediction_seal_sha256": "9c0a4a5a46ecb81e3a761f10831bbaf64b0092d2e0fbb73122aac84db36e1540",
+      "lost_claims": []
+    },
+    {
+      "case": 92,
+      "preset": "Phmall - Whipped (y) - flx mgr siamese declination scotsdale roams --- Isosceles edit.milk",
+      "sha256": "756fe99d5b24380b9f6a8d731e59f42d44a5b626445489c124f618f4498ed51b",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case092/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "c5ea54da05c89ddf4469cc1e8dbb7f2336cfff3d618288b30ba84ea75ebb823d",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "05de5d275448868e9b7e7c2273ce57cc08d36718133cfd6d34d9198d88fa044b",
+      "prediction_seal_sha256": "348d78af19bb6b63f3e317c0f82fca2fd8392f9be33595f9f4a726571562d000",
+      "lost_claims": []
+    },
+    {
+      "case": 93,
+      "preset": "423.milk",
+      "sha256": "ca909a10767a03f37fd244ec3bb469ff80da4d40b4108c0b143b6c2a242f4f32",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case093/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f9216a95bcf4e2c4b7de8788035877793754b78a6867edbdbe131ae158c1395a",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "50752f197d4ae1e7e8e3d9a15a7d4aa0e790c29811a2ea0f1eac78933891c201",
+      "prediction_seal_sha256": "42e5fb704b98acb4f58feb927cd07e5274c4fe5dbbb86a1862dfae8d56e22b59",
+      "lost_claims": []
+    },
+    {
+      "case": 94,
+      "preset": "bdrv + al Rovastar - Fractopia bdrv132456 mix bleuarg - squirming brewery.milk",
+      "sha256": "6a071a137ab00255fd8efaea1dac6eee25825d863852106b5843c4bc276a5219",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case094/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "4dee59d67ea759bc32947545b89f5b0a0131e7c00482812d7db3195854a5f6d0",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "fa2b1f1c4aac2443c920de416fe81ae514db7136ea8042dd1c44ed12656bb5f0",
+      "prediction_seal_sha256": "284bae3dbed05ece49555c8144869a5b5d4ca5053613f9fbfc8783e455999e57",
+      "lost_claims": []
+    },
+    {
+      "case": 95,
+      "preset": "LuxXx - Daily Data (alien seed deposite).milk",
+      "sha256": "c224a5d2c99c7158fad496845a8407d3fb8c3a50bc30816e1ebc4718e6e1a261",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case095/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "9cc4930e82f33ab94acea03a585c2748243032db3494849f8cf097e15d8870ae",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "753cd3f3741cd4b87a5c865e2885a79e4b2087ce4829b6475ff026007e1e1f96",
+      "prediction_seal_sha256": "1cba1a8d8442ba0730270a1e4c12043952b9245524b00d40b344ea3ac9382658",
+      "lost_claims": []
+    },
+    {
+      "case": 96,
+      "preset": "449.milk",
+      "sha256": "6f4af252d88fd4e3738571ed2bf62911e41011fca241e3a85e83cb5d1572f147",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case096/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "cdd8f37f37c33aa74ca44eabf6175b8ece1d7fd6d12bfe0f7b567e64c9f2a3fc",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "cf1559267229a512a87b5daaf3eaf84113e450e560e075980c39021971992461",
+      "prediction_seal_sha256": "f591e7d3013f8d4e4c262a5092aff6bfe7419b65ae1706bb1474e9f028c9a778",
+      "lost_claims": []
+    },
+    {
+      "case": 97,
+      "preset": "va ultramix - 28.milk",
+      "sha256": "8cffe7cc42927824b8d753fac4abb527a22920e4506ff9eb7da157df66c4ba2a",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100.0,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case097/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "5df76524df4a8fba127a894b5b7a48c700642d78f7fa4dde420889fd62c84b04",
+      "preliminary_score": 100.0,
+      "assessment_seal_sha256": "ebb5126b0f379091721e1e88a0c1ca0d551051f81911ed6e8f86e965134f70e6",
+      "prediction_seal_sha256": "13d53d21a5804135a642b5678bf47c3ed8defe8d1037124940bfc66a4db368c9",
+      "lost_claims": []
+    },
+    {
+      "case": 98,
+      "preset": "$$$ Royal - Mashup (370).milk",
+      "sha256": "628aa3fe34ac9c941803dfef2260eafa48c4cc9ed141a125f19e1c45a4dc6eec",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case098/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "7854d79334241b9d90bd0e6202086c6b6d79fa731024a89ed2cdb1b489ab939d",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "d81c5236b671f943733c7d12f8b8673a514ce5302680441855c39506d39bb927",
+      "prediction_seal_sha256": "1895fe5a4cf0e682634d013df48c8c07c39d04923cfaaac240e893c7cf9dea05",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": "All60frames numerical comparison under exact relative5%/zero-exact rule: [{\"metric\": \"motion.median_speed_viewports_per_second\", \"predicted\": 0.11891014873981476, \"observed\": 0.11639119684696198, \"delta\": -0.002518951892852783, \"relative_delta\": -0.021183657741144182, \"allowance\": 0.005945507436990738, \"passed\": true, \"known\": true}, {\"metric\": \"motion.p95_speed_viewports_per_second\", \"predicted\": 2.567098236083984, \"observed\": 2.4095952987670897, \"delta\": -0.15750293731689435, \"relative_delta\": -0.06135446439212214, \"allowance\": 0.1283549118041992, \"passed\": false, \"known\": true}]"
+        }
+      ]
+    },
+    {
+      "case": 99,
+      "preset": "ougiel nz novel ways of hating your family.milk",
+      "sha256": "e9dcd21ba5a9d28dd057985ea9feb0638cbee77092902434d56a8c1bc6af5716",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case099/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "eac75397b8ded0f0f2a6bcf62d5a277369e7fad0db52febe86f253cb84f49674",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "4bcda916f8fa611b0f4eda2007617b3d9d75489b70492742a48ad86fdaf3d4a1",
+      "prediction_seal_sha256": "1a4cc94090c18107941d878d27d22c9946128904b5c71ff2b736a7973634c0d1",
+      "lost_claims": []
+    },
+    {
+      "case": 100,
+      "preset": "shifter - urchin.milk",
+      "sha256": "6e2e8ce49d62597b6a491f5f77ecfabf6ced20da2962b553af2791cf76b73e7f",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case100/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "02032fc00e60812d26842d13b3171fb022722c6c290f07b37439606b2091552c",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "fe64ee183042dc7111313b5ae04a6f5a95cb7a7eb5fcaad2d4593f0e7f0fc0a7",
+      "prediction_seal_sha256": "59b2c8959cfc0e48e03b7a8c43b2695a90d6b110775495c36c113b6845c84020",
+      "lost_claims": []
+    },
+    {
+      "case": 101,
+      "preset": "GreatWho + Flexi - Lasershow [bipolar growing party].milk",
+      "sha256": "d746f95b4575bdb78c00a903879971c7207666cecd2a2c6da1a386cc4c15d58f",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case101/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "7183c05ff07e54b46eb2c4b5bc61db4ded2bdfa68b1e87a5f3af12b0f6e46702",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "e350ec05cab4e7dabcdfda0638218f4a711cb4eaf12252a06cd5045049e6111e",
+      "prediction_seal_sha256": "e1784b48a5c97e6e2ac659f35b945c92b29b72e75bcf6402632eda081664bb48",
+      "lost_claims": []
+    },
+    {
+      "case": 102,
+      "preset": "martin - lightning.milk",
+      "sha256": "5637613c4e279257a7fb447275a81f7bcdfbb892dfc2267ac7deaf1e2eb33ee7",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case102/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "dd0691a3271ea03247840efdd667cddfbb4c6b25f4b7b283f0b70e91497a9683",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "61893dc17ce95eab055e316686c1faba1a3cf1ac967dcf608bf3618f18685b98",
+      "prediction_seal_sha256": "0ebb085d844383f53acf0fe055cf914216aa99ad2b1341d7e62f85fcf9e4fea0",
+      "lost_claims": []
+    },
+    {
+      "case": 103,
+      "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3_fire_works_uninverted.milk",
+      "sha256": "9adeb2a0fd612fe637c10d5750b6396a5ff031baf44694fbc74ca859c22955ec",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case103/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "b355ea0bef66370852a4fb5b36295dd090a4b4cffe5c7912b96a28480c2a3ca9",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "1dc9fc1cd976b8d9a85fd7b41a0a151bb63a7370f73351b277d99b7bc1c970ca",
+      "prediction_seal_sha256": "346da344529765be50d8af08fa2121c5961c42f8e6fd932838e85d70f02e7c38",
+      "lost_claims": []
+    },
+    {
+      "case": 104,
+      "preset": "phledge lasso blaq wholes aren't natural wr disequilibir.milk",
+      "sha256": "f43f32bbb705dc0705a2557b358780d866c4330d1f2037cdc3abf4041528bbc6",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case104/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "5f76da5a5fc908e43e8ed0f24ea6178038a104ed0ee9752a57cc92bd944ff4a6",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "7e41e55e6b7a25b4f9e8c2a2a5d4dd40811673b6894e228ba1bc50476969d304",
+      "prediction_seal_sha256": "33f09232edfa2be52a5ece21d3c1129ed9004ab64ae48e88a4c4827a080e1a43",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening geometry; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle-frame layout; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late geometry; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 geometry; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening trajectory; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle trajectory; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late trajectory; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: motion median/p95 estimates; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening palette; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle palette; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late palette; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: mean luma/saturation estimates; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak transition timing; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: brightening event frames/count; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: darkening event frames/count; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak jump amplitude; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: initial history; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle history layering; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: history transformation; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 retained history; final source status unresolved. pow grid zero base with nonpositive exponent domain No prediction is substituted; this slot earns zero accuracy credit."
+        }
+      ]
+    },
+    {
+      "case": 105,
+      "preset": "ORB - Mental jellyfish.milk",
+      "sha256": "bea7c7508a464497667ede5e3f935ed5f7319dab453db06e1da58ea98d2b5bf8",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case105/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "a06f96eb17c0701bd9571392e1e2de29cfcd2f0fb07c8eb0d9ea50f561eecd47",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "31016a6b2d0a0299dc5eb2dff4c566fba10aaee83aca807acfa82b9356a5ee96",
+      "prediction_seal_sha256": "3737024443c20d5976f0a0e393f385a9956475d7405f0f2c9a6339573a59a986",
+      "lost_claims": []
+    },
+    {
+      "case": 106,
+      "preset": "suksma - my face is black pus - video game cluster bombs.milk",
+      "sha256": "9fcbf31c1b39acd2af3d7aa8bb79072c8dedeef70b75194a01202d62a88af1d7",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case106/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "408b01e6a757ddb7128c2d52d5984f986a52b356dbd6b6aa116af33b2e2b0658",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "d1273fdc7d955d6a5b56e7ec71baa56a6901cd63286878d9763b5b1eef6af936",
+      "prediction_seal_sha256": "97d6c44ead1910e113c94906363b6744064e792f89f422c652badec13018cbe9",
+      "lost_claims": []
+    },
+    {
+      "case": 107,
+      "preset": "$$$ Royal - Mashup (255) --- Isosceles edit.milk",
+      "sha256": "f854c5342b32c64da82253f489d457983752b4a164933422652005e95c38359f",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 90,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case107/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f1fc9e18e0b3d72be705cbcd6d5d264398636c3d884496f306928e8a5794828b",
+      "preliminary_score": 90,
+      "assessment_seal_sha256": "54956dbe652dda5b084b4923b56f6106961aec0a445ee4a62eb2c269788e7ebb",
+      "prediction_seal_sha256": "4f81b9af96971fa173c0e78c4a8743edf932becbd50c78e59c94b20773df2b4b",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "motion_median": {
+              "predicted": 0.031019977293908596,
+              "observed": 0.025130541995167732,
+              "delta": -0.005889435298740864,
+              "relative_delta": -0.18985943293702456,
+              "allowed_absolute_delta": 0.0015509988646954299,
+              "within_relative5": false
+            },
+            "motion_p95": {
+              "predicted": 0.6050390511751174,
+              "observed": 0.5259880781173705,
+              "delta": -0.07905097305774689,
+              "relative_delta": -0.13065433198768361,
+              "allowed_absolute_delta": 0.03025195255875587,
+              "within_relative5": false
+            }
+          }
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "predicted": [
+              [
+                2,
+                3
+              ],
+              [
+                35,
+                36
+              ]
+            ],
+            "observed": [
+              [
+                2,
+                3
+              ],
+              [
+                35,
+                36
+              ],
+              [
+                44,
+                45
+              ]
+            ],
+            "strict_match": false
+          }
+        }
+      ]
+    },
+    {
+      "case": 108,
+      "preset": "$$$ Royal - Mashup (452).milk",
+      "sha256": "dfdfab30b2fe81e2cd6080c85e11d49480fc6113019bac0d2cdb4bd77bfad760",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case108/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "22afe1af91fc01b8e79f9469a3e7e9aa7666b5e61c960cd449f08d49c3954334",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "bfdce9f6cbafc962ead025c87988efc0b41bb9bfb79f8c3776d2655343891a4a",
+      "prediction_seal_sha256": "3bc74e3573e771862899974fd82c0eef808322701b204dbf9c7378e75ee1ec37",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle-frame layout; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: motion median/p95 estimates; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: mean luma/saturation estimates; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak transition timing; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: brightening event frames/count; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: darkening event frames/count; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak jump amplitude; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: initial history; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle history layering; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: history transformation; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 retained history; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        }
+      ]
+    },
+    {
+      "case": 109,
+      "preset": "shifter - mosaic mitosis - will they find me roam2 nz+ souprae.milk",
+      "sha256": "8f662e52b882ef7af98344477f3647931ca6efc269dcaed727e7ce9d32af1398",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 95,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case109/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f500c1dcc2b3b745c1b3ef8cbce4378dc157f60b508b39f90a3ae15a40d8950c",
+      "preliminary_score": 95,
+      "assessment_seal_sha256": "31f32b5f3f93333856d6cb102e804bcdafa04c24f02bcbb25c4d39ed02c08391",
+      "prediction_seal_sha256": "5a60212c325a575710eb0c339ba7f7c417af03eee215bd64d99ec725c4396c11",
+      "lost_claims": [
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "predicted": [
+              [
+                1,
+                2
+              ],
+              [
+                18,
+                19
+              ],
+              [
+                24,
+                25
+              ],
+              [
+                34,
+                35
+              ],
+              [
+                40,
+                41
+              ],
+              [
+                42,
+                43
+              ],
+              [
+                44,
+                45
+              ],
+              [
+                48,
+                49
+              ],
+              [
+                49,
+                50
+              ],
+              [
+                51,
+                52
+              ],
+              [
+                52,
+                53
+              ],
+              [
+                54,
+                55
+              ],
+              [
+                56,
+                57
+              ]
+            ],
+            "observed": [
+              [
+                1,
+                2
+              ],
+              [
+                18,
+                19
+              ],
+              [
+                23,
+                24
+              ],
+              [
+                24,
+                25
+              ],
+              [
+                34,
+                35
+              ],
+              [
+                40,
+                41
+              ],
+              [
+                42,
+                43
+              ],
+              [
+                44,
+                45
+              ],
+              [
+                48,
+                49
+              ],
+              [
+                49,
+                50
+              ],
+              [
+                51,
+                52
+              ],
+              [
+                52,
+                53
+              ],
+              [
+                54,
+                55
+              ],
+              [
+                56,
+                57
+              ]
+            ],
+            "strict_match": false
+          }
+        }
+      ]
+    },
+    {
+      "case": 110,
+      "preset": "Tripgnosis - Glowsticks (Blacklight Remix) inthracks.milk",
+      "sha256": "3455a2f80e1b1adc5211dd2d8c572e731710dab5b98747da6c0100e99b84994a",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case110/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "4d1837517fda7c7433359d3fc663dcd71f3b986a34ff5f28d900a5b731f67343",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "ca5980f133ad89d52e6332c9ca9924db37d0f3b411b276d64d113ee461d35e39",
+      "prediction_seal_sha256": "5d7f59a93d4d9eed3a452395145d7fa8864f4478d1a7f88051e4ba14cc659dbb",
+      "lost_claims": []
+    },
+    {
+      "case": 111,
+      "preset": "Stahlregen - Spiral (Fugly).milk",
+      "sha256": "f9dc356d7d829833cd984abb8337fa1cbdd5319f089d8943dfb62589bc0e8b93",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case111/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "cbba21cf8efe7906b8f637192e82f325c7366c7f954748987f48bfe059a0c98d",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "da85b6355d714375bd5b4e27cdb514c3cc6c11b3bf3ddef8c8140a57fa46a9c5",
+      "prediction_seal_sha256": "d03c378f3247f0b33039eeb4dcb24710fe1c6e15d76ed2857fef378000fa6cb2",
+      "lost_claims": []
+    },
+    {
+      "case": 112,
+      "preset": "A Tribute to Martin - bombyx mori - Ft Flexi - AdamFX - StahlRegen - Krash - Rovastar -  Hd in Milk V.milk",
+      "sha256": "579047cc839a672a95b05e7672c7ee57a8794b4a104caf9d0bd61ecf36e71978",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case112/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "802b7f031529c2efd28e61dacab881463a4a3c3486a1dbdf5bcaa0033a497a92",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "5abb2b4e8fc16472084fbb63a77e4aa385dea803dfcfb48311181ad15136e9fc",
+      "prediction_seal_sha256": "87569e9f9b97e67ae8fbd196470839966c30973052eb21f57c01464f3054acf3",
+      "lost_claims": []
+    },
+    {
+      "case": 113,
+      "preset": "undulate harque - auto thef.milk",
+      "sha256": "be6ad831837f357c9abc8d2e1fbea14385595bbcf6ef1e7d52158158fcd8f381",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case113/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "e2ef42febaf74b62c3135e249cf43c48557c73b1e1f72a96e6db893b3d291818",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "19831315adaaa5ff0a08c4252d38cff0c1d08d63b35a32025c610846b101bee7",
+      "prediction_seal_sha256": "829d884e77c6c4ea3cdacdbb6c484b99ec62ef2661c28a4a9f899e652a63dde0",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": {
+            "motion_median": {
+              "predicted": 0.06447482109069824,
+              "observed": 0.06433027982711792,
+              "delta": -0.00014454126358032227,
+              "relative_delta": -0.002241824965702389,
+              "allowed_absolute_delta": 0.003223741054534912,
+              "within_relative5": true
+            },
+            "motion_p95": {
+              "predicted": 0.8082116425037368,
+              "observed": 0.9791346073150634,
+              "delta": 0.17092296481132663,
+              "relative_delta": 0.21148292826100482,
+              "allowed_absolute_delta": 0.04041058212518684,
+              "within_relative5": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": 114,
+      "preset": "EoS - glowsticks v2 05 and proton lights (+Krash's beat code) _Phat_remix08.milk",
+      "sha256": "09e7e6474b0a7794340585ff0b025334884a3f34dff5fa16605a70b6c40fe489",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case114/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "4ee790ad494eb7b4b88033373852935f9d29f962aaa06f0c8ec01f433e4d37b1",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "9e2158d984e5da8d585a45dc1334659afe4a3b6260651a356c27542915c1b0b1",
+      "prediction_seal_sha256": "887da96aebcb872da6ba05e2823edb92f726e13b452194ea96b4c1a789c238b9",
+      "lost_claims": []
+    },
+    {
+      "case": 115,
+      "preset": "my dismal dream i live and breath i realize i cannot leave nz+.milk",
+      "sha256": "fb65a2100c9656de9f436931600d547da7f424284b0da0c74369072e58187bda",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case115/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "3433aa3724925dd70897cae1ce518f7ca2050743adf4c1480b381e12ec158f06",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "f4add5420313b56b4a6783462100b42d315330e991164fdddb111f3996258dcd",
+      "prediction_seal_sha256": "13d0aefa3a2821598012791cb3d70216bb2cfbe5cdfeb4381ecc91b2497d26e4",
+      "lost_claims": []
+    },
+    {
+      "case": 116,
+      "preset": "Stahlregen & Geiss + TobiasWolfBoi - Space Gelatin (Color Xplosion 2-975).milk",
+      "sha256": "2b326a13fe810718f4dd6eb84f9e23ba73cd2675996e63790744a9bf21f4db73",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case116/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "cf2d5bed37b6be653eaa815a887df62b1f3bbb84e0e001f9045ec11b49615e58",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "0125e29206d5f809a1ea671b5254374b23bf64f1913c4c51e8f46e1ebc8fc65a",
+      "prediction_seal_sha256": "8bbd82e9eff522ddcf284d8fe31c68f032a8243cf55b2b94d53abdeaba101ac3",
+      "lost_claims": []
+    },
+    {
+      "case": 117,
+      "preset": "Geiss - Explosion 3 (Jelly).milk",
+      "sha256": "b79300f623cc5ba8c899c51950a568db3c63d7c1569cb859212be4617445f3df",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case117/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "4246bc60f4b194ecc67c5de3ea0666ddca51f77074ac66c1d7137db740c75aa0",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "392107c9bca346f349e633cfa39f68f1484382d7cefe6cd3b0b9223b7d4be8f8",
+      "prediction_seal_sha256": "24a6e2f229b0001b6000c506bb191c3add74966139225f6f9416f8c1c0b86561",
+      "lost_claims": []
+    },
+    {
+      "case": 118,
+      "preset": "Geiss - Mash-Up 1.milk",
+      "sha256": "568734c5ceb829d79e9045500b7e83cb1d61ab65af69721e180d80128f86edf7",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case118/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f060fe69b9e5229ef79c2b010075ea629ed63a2498aff49f89bfcbf72a0a0361",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "7d1792d0206c3c0bda54995e3ee88fc66b742d9b5dcfc1a4b51b0858284c6263",
+      "prediction_seal_sha256": "291abf40fba483cbeac70e27d0b4ba68a208c6dfec3598b5fce2380d2f7e562e",
+      "lost_claims": []
+    },
+    {
+      "case": 119,
+      "preset": "suksma - water god.milk",
+      "sha256": "47ec30203c9ed7f2015d059e563b65b3cf5a19cf1ecccb1cbbfa79588a91c42e",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case119/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "dd6fb508ca0926ddd23db34651b9eb79f5fcea6e4c8c92a820843ee141b1559a",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "295233363e14181496358ccb324bcffb092f940ea8d39c7959637105c46e53dc",
+      "prediction_seal_sha256": "7eda2aa8518a84a457a3670ecb8549d499322244b12a51ef4e8170fb507fed42",
+      "lost_claims": []
+    },
+    {
+      "case": 120,
+      "preset": "shifter - parchment (MGMT) roamvar nz+ phormidabule psuqumominbus.milk",
+      "sha256": "831fb5b00befa0175530a3910bbeb8dbfeae2c17b45b41acb8ec6510f032e05b",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case120/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "c77fe81e8fc0d08558b8932d3e923e89e104fcdae44d18820ac11968921d7319",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "a997ce7e83afd79bf91fc3293d97e220b7807e30834534d64b4700185376d008",
+      "prediction_seal_sha256": "f3ac0abe512473e7de61936f33dbc475f132276d8894bc49cef90cf10751ea56",
+      "lost_claims": []
+    },
+    {
+      "case": 121,
+      "preset": "cancer of the imploding.milk",
+      "sha256": "26a0ad4433dba6597d8d69c5234eafefbcc1d2c2363947db59c22cc3dde11f07",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case121/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "a93f7129691eff606d70248d6f63286d4ede71fc7afa2833991df28f80e1ba7c",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "61f8d271322671153154de54725d75a9f8bc263dafb920a61c6f788e757fe034",
+      "prediction_seal_sha256": "0992be536f3d00af4dcbab8b3b916fabd4a2fb8f528f9105d40a191790a9ff73",
+      "lost_claims": []
+    },
+    {
+      "case": 122,
+      "preset": "Phat+fiShbRaiN_Looker --- Isosceles Edit.milk",
+      "sha256": "e70c97c9bd0e9f217e96ad3d0dd374cfa525d8a9a67f4fae7957f3ee6d6bb06a",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case122/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "3e869450cc249f0392fc0a0581b82aefe848976dd1b511802c1ce18c262b571e",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "7601ce0d8eb5877b1b00876da21063f54d3c7aac41c76fd3aabcc1d4b6d55fba",
+      "prediction_seal_sha256": "2f2718799c2dc985ab48cc484d2fb2793f09ae52ceb5918ba3a28fbdde93e27e",
+      "lost_claims": []
+    },
+    {
+      "case": 123,
+      "preset": "Stahlregen - splash! (Tricolor Spiral).milk",
+      "sha256": "1d04c00fd162263a2f5264120fa98e499eb3d573a83440bf6fb8051cc606888d",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case123/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "e7fd8104bbc905abc8f57038366908ddf92a2f0bd9128b2a8c495c1b540ba2a2",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "8d181876ccf5a85e2e12a3e89d8f9e49663a9beb909d28f3ae8fcfef02aefa88",
+      "prediction_seal_sha256": "fc4e9891b75b82f85eb33ef01fb92948bf0402ddc84a2e0bd93b82fc879dfa45",
+      "lost_claims": []
+    },
+    {
+      "case": 124,
+      "preset": "suksma - chernobyl pie for dessert - semi-autoplasmitic copulateshow.milk",
+      "sha256": "20c0ce7906c4375db27ca08b4c4dc325a42126aa6d2da9667e041de3b4d159df",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case124/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "d8fd9797c02848810c56345884771fc341d214e5988a72aedd53ffb81be65cd3",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "3e0fc8c78fec1d974faca7ac89b9e59fd1c3c00d28fd02a10c90ca6cc027f583",
+      "prediction_seal_sha256": "7c03e8e7f3dd7b8ccd22ae68127326aa8eb25d3c23111deebbc71fd6ba041093",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening geometry; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle-frame layout; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late geometry; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 geometry; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening trajectory; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle trajectory; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late trajectory; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: motion median/p95 estimates; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening palette; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle palette; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late palette; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: mean luma/saturation estimates; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak transition timing; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: brightening event frames/count; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: darkening event frames/count; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak jump amplitude; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: initial history; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle history layering; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: history transformation; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 retained history; final source status unresolved. unresolved warp numeric domain No prediction is substituted; this slot earns zero accuracy credit."
+        }
+      ]
+    },
+    {
+      "case": 125,
+      "preset": "suksma - god might as well2 - rst jaw complex ap3+ roam3.milk",
+      "sha256": "c9cff2427d9ce4c7244358369f3cbd970b439b08e92a00b3f0c9271b2f770dec",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 65,
+      "passed": false,
+      "critical_mismatch": true,
+      "critical_unknown": false,
+      "effective_assessment": "case125/round010-restart1/assessment-adjudication.json",
+      "effective_assessment_sha256": "5c20bfb6595539644777a40b99388fe62910fb315f1e7c580425af27170e44dd",
+      "preliminary_score": 85,
+      "assessment_seal_sha256": "7952c5beccb9903db750e203e476e58b5692408ba6f81bf45d19a5fa573a22bb",
+      "prediction_seal_sha256": "5fcca5435b53cb259805ffdf80cb434df70b4d0885e82d950ff3d58191885b20",
+      "lost_claims": [
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": "Mismatch: frozen frame43 requires a large blue diamond with green edge and bright inner square. Native43 has a broad blue cloudy/granular field and a small central bright square; the large sharp lime-edged diamond boundary is absent. Full-resolution detail confirms this is geometry, not merely fine grain."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": "Critical trajectory mismatch: source20 becomes sparse/dark while native20 retains a broad bright blue/cyan field; at29 source carries a broad blue lobe whereas native has separated smaller blue fragments and large black gaps. Through29\u201334 and40\u201343 the polygon/cloud boundaries follow materially different spatial and phase histories."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": "Mismatch: the late diamond/patch evolution differs. Source42 has a small blue outlined diamond on sparse black, then43 a large sharp lime-edged blue diamond; native42 has a much broader granular cloud field and43 a broad blue cloud around a tiny bright square. Shared eventual fading does not establish the described diamond trajectory."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "motion_median": {
+              "predicted": 0.6265827715396881,
+              "observed": 0.4767562001943588,
+              "delta": -0.14982657134532928,
+              "relative_delta": -0.23911696610675032,
+              "allowed_absolute_delta": 0.031329138576984404,
+              "within_relative5": false
+            },
+            "motion_p95": {
+              "predicted": 3.0328975319862366,
+              "observed": 2.496390402317047,
+              "delta": -0.5365071296691895,
+              "relative_delta": -0.17689589707893374,
+              "allowed_absolute_delta": 0.15164487659931183,
+              "within_relative5": false
+            }
+          }
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "predicted": [
+              [
+                20,
+                21
+              ],
+              [
+                26,
+                27
+              ],
+              [
+                28,
+                29
+              ]
+            ],
+            "observed": [
+              [
+                19,
+                20
+              ],
+              [
+                42,
+                43
+              ],
+              [
+                44,
+                45
+              ]
+            ],
+            "strict_match": false
+          }
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "predicted": [
+              [
+                1,
+                2
+              ],
+              [
+                34,
+                35
+              ],
+              [
+                37,
+                38
+              ],
+              [
+                45,
+                46
+              ]
+            ],
+            "observed": [
+              [
+                1,
+                2
+              ],
+              [
+                22,
+                23
+              ],
+              [
+                43,
+                44
+              ],
+              [
+                45,
+                46
+              ]
+            ],
+            "strict_match": false
+          }
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": "Mismatch: the asserted bright diamond phase overlaying earlier grainy patches is not reproduced with the frozen geometry/history. Native43 preserves broad cloudy/granular mass rather than source43 large sharp green-edged diamond over sparse dark history; this is a different layered history."
+        }
+      ]
+    },
+    {
+      "case": 126,
+      "preset": "$$$ Royal - Mashup (151).milk",
+      "sha256": "b6592d6d1d745142621e839fcaf5a14469978041310012b088cbf38aff87925f",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 95,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case126/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "461377a49d9ec924f7a66199926e3aa1c29c51fbc7731b93ef3e6a3e1b3e5517",
+      "preliminary_score": 95,
+      "assessment_seal_sha256": "2f22f165d549c58bdba5b3833726e5fd64b07e119363f9d8380e5050d83e9d64",
+      "prediction_seal_sha256": "4689bf4354bcbaa644fb2d5609370253eced0a1c59e23a6d369cb8971411b494",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": {
+            "motion_median": {
+              "predicted": null,
+              "observed": null,
+              "within_relative5": null,
+              "status": "unassessable",
+              "points": 0
+            },
+            "motion_p95": {
+              "predicted": null,
+              "observed": null,
+              "within_relative5": null,
+              "status": "unassessable",
+              "points": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": 127,
+      "preset": "suksma - coal drapes - mrt fsh gordo - no genius, just charlatan insanity holy fancy vomiths.milk",
+      "sha256": "e85d477ce1b142ac8f30c77f10c0a35d7d2152666e7b0e8db8dd51efd57012eb",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case127/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "71f90c95c72a945d4471ac279434a9c99044f54bae6edece3649088d4699f495",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "ad72e1bed8a1ff00246af5c3e6fbe0749d6665c47f6c09a482e3f2c8e14a954b",
+      "prediction_seal_sha256": "e9bbd28d5c5a4da859ea0fba94ce8bc3e5dc70226715cf597582cb4e14e42859",
+      "lost_claims": []
+    },
+    {
+      "case": 128,
+      "preset": "eye disease ngornggniq no business mashing.milk",
+      "sha256": "013f04d978cbec7855aa8e973b5037cf6012d44b6c08a4d1297c5febe0df7cc9",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 97.5,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case128/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "0ba2d22a728b412fd3195996a8f35a943c35f3e9643d5378ad799ddbfd8e5e65",
+      "preliminary_score": 97.5,
+      "assessment_seal_sha256": "127bc0685db606a55c1609dfecaa12299b259bf11e0f4c042fae0d4ed7f5d166",
+      "prediction_seal_sha256": "1d54bf6d6c0c7ef394010895cd880902195900a9da51f121a5a826356f6fb42b",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 2.5,
+          "disposition": "partial",
+          "evidence": {
+            "motion_median": {
+              "predicted": 0.05463065952062607,
+              "observed": 0.04704885184764862,
+              "delta": -0.0075818076729774475,
+              "relative_delta": -0.13878301560893475,
+              "allowed_absolute_delta": 0.0027315329760313036,
+              "within_relative5": false
+            },
+            "motion_p95": {
+              "predicted": 2.9655604362487793,
+              "observed": 2.931019425392151,
+              "delta": -0.03454101085662842,
+              "relative_delta": -0.011647380520196147,
+              "allowed_absolute_delta": 0.14827802181243896,
+              "within_relative5": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": 129,
+      "preset": "suksma - martin - neon space ps3 - dotes2 - flx flacc roam3 piss verticle nz+.milk",
+      "sha256": "17f176ef70fa428437282fe9de45f7ac342bedbc010c8c6ed632955867f474c1",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case129/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "9cbd3477ac85ecaab71e7233afea2889a9a2a6daffca32db085b92551dce20e9",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "9e8785f89140762681c16596ae117bb98c943b7a513458470a6a50c641f92c6a",
+      "prediction_seal_sha256": "728c341a4a1541c6e65e66db71cc37efbd505e11eca80a0044db75ddc0c3aa55",
+      "lost_claims": []
+    },
+    {
+      "case": 130,
+      "preset": "xtramartin (278).milk",
+      "sha256": "c6a544baa7104aa1d2ea00e79cd7dffc2726476e6504aa5171e982f056e1ec6d",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case130/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f7b143e4eb85d76d21d01042d74d32abb1ffd4c62d0f6d1c1ce6d4ab88051a3c",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "7e21256442efdee65380811ddae87fec5b955da5790158c5e5c69ea305f4d841",
+      "prediction_seal_sha256": "16fa165557bd219065c2b37f8463db97cd9c335cf21dbcb42208e85043985896",
+      "lost_claims": []
+    },
+    {
+      "case": 131,
+      "preset": "$$$ Royal - Mashup (314).milk",
+      "sha256": "185183382db43a6055ba5af883b2e71e74fc7181de5eb518a3861f83108da89d",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case131/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "b4b79602276fe25a706031a47daa0f7f31ad65ead583d99083e6c7dd606aa6a2",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "0c6176f32c118a6f74df5e55860f210bb7c92249a23f0989b057dab0eebafcb2",
+      "prediction_seal_sha256": "4acec12327c168d80d3b611183594d326dcdeca243c746d9a5e3bca36af538e0",
+      "lost_claims": []
+    },
+    {
+      "case": 132,
+      "preset": "Tripgnosis - Triadular.milk",
+      "sha256": "233c4447a00b9b000b969af1c3de72f5b00432c6dea7c93266479c68252003ea",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case132/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f98c99e48e2ba3ce636747fbc21575e57612b9d8de589d4591b92542a1416759",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "4a4a12ecc215133ab62093ebc322c69465db87f55872e98878cdf9abb622dbc3",
+      "prediction_seal_sha256": "95188a85e8bbe35dcb2fbbb6aeb313d9c29a01c5d3f3c0bb0347dbc8f685f2fc",
+      "lost_claims": []
+    },
+    {
+      "case": 133,
+      "preset": "suksma - satanic teleprompter - john dee enochian alien summons.milk",
+      "sha256": "795a4b808c0bfd58a42b145a84db09f85591dbeee643d5821e576eda08c737b1",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 95,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case133/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "5a6fc96b6da50f39a07f668fbc194ebece4fa1b58f3a0c7a22da83514073adea",
+      "preliminary_score": 95,
+      "assessment_seal_sha256": "ddfa4c3165b44f4a20141925f16f651ad2b88c8c99d4e25e9e875d4dff4d6ab4",
+      "prediction_seal_sha256": "c016064a244cb6c9c2b5ec392fa635a987d7bcaf4b1993e4aae7fb6b5c629ba5",
+      "lost_claims": [
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": {
+            "motion_median": {
+              "predicted": null,
+              "observed": null,
+              "within_relative5": null,
+              "status": "unassessable",
+              "points": 0
+            },
+            "motion_p95": {
+              "predicted": null,
+              "observed": null,
+              "within_relative5": null,
+              "status": "unassessable",
+              "points": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": 134,
+      "preset": "Serge + martin - crystal palace007b.milk",
+      "sha256": "2a8ff7cc6589ca08cd53f40af6379e474cf6fec707c6589e38a0aa23a43cc7b6",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case134/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "731912f93f101aa50e3bc4a54ece5045dff86d2ad1d30f041eedaf9a3612d5e2",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "e0766e117d761cc77169850c3f40e0662c480ae31f36ab65707583eb269381a7",
+      "prediction_seal_sha256": "930a01d70790e6a205e0d7d54fee88dd606e0adad103cf1697509277aaa595cd",
+      "lost_claims": []
+    },
+    {
+      "case": 135,
+      "preset": "suksma - i don't know anymore, nor used to i.milk",
+      "sha256": "70f5a137a31358b56eaec3065e9acf4e2e67014cb367ae065750adff00eb14f6",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case135/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "188d7431e8b41d3333709a61602727996ef3f38c6286e3ab46a8ec8cc89c343c",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "d7e8978b402053896b752020b389d97518971bedfb19388412b45e292bf514b1",
+      "prediction_seal_sha256": "5e11e300ee08318ac10c6cea455d64d64b98dc17b336838f5c3c40b9569f298f",
+      "lost_claims": []
+    },
+    {
+      "case": 136,
+      "preset": "suksma - ed geining hateops - flx fracto-emission.milk",
+      "sha256": "101fec54b352728ce1dae23b58f9968e48717f70ce5ea53df897989cbf0ecc42",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case136/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "260d3895e581fd1e5fb3b49c6d7b18dff5c3fa07e664a4bcc229214ee851b169",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "9b2dfc00715dee03551d16fb78a46ae29cd5e515140cc345e14cfc8fae2ba074",
+      "prediction_seal_sha256": "5807c966bd2195a1d29ead54cb879ef09186128980a083550fb2b71d3b1efe4e",
+      "lost_claims": []
+    },
+    {
+      "case": 137,
+      "preset": "ShadowHarlequin - mashup - Satin Sunburst (Neon Tokyo Mix) v2.milk",
+      "sha256": "92eee56808dd656b8d67f9bd982b39ba033dac00f548f347afc4902c3d8f87a2",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case137/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "44b8d46267a35ed1f057dfc809077b6b927bbb970af8b998abd0b2d6a96bef75",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "30d48e8bd8b33af2dc8af3d0748e8cf422f179860c9d72be994c587c2c8e9670",
+      "prediction_seal_sha256": "d3950119b5f7ec9a8c41296cd3b9ea4c2356078553387a3fa05642c1f3eb76b4",
+      "lost_claims": []
+    },
+    {
+      "case": 138,
+      "preset": "Goody - Acid Angel ap4+.milk",
+      "sha256": "304220e4e5a6b790ca2d2b86af89153a9cc3fa417e8cd82edd279c92e31b7aad",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 90,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case138/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "62a7fe972c21aad33a466267ec4ee642f2a21e79dc241faf49c8052179f5b083",
+      "preliminary_score": 90,
+      "assessment_seal_sha256": "e5ba19bef8d415253e3d6c0f6e87f29f4eb0309e27ea2e0561316bcad034f044",
+      "prediction_seal_sha256": "8caabe3f9b4832dd92227d80ce4fd4f121076e081e98c54f6ca74175783a6ba9",
+      "lost_claims": [
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "predicted": [
+              51,
+              52
+            ],
+            "observed": [
+              9,
+              10
+            ],
+            "strict_match": false
+          }
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "mismatch",
+          "evidence": {
+            "predicted": 0.04916532710194588,
+            "observed": 0.04347630962729454,
+            "delta": -0.005689017474651337,
+            "relative_delta": -0.11571198261032571,
+            "allowed_absolute_delta": 0.002458266355097294,
+            "within_relative5": false
+          }
+        }
+      ]
+    },
+    {
+      "case": 139,
+      "preset": "suksma - flexi coheres vacuum energy - mbk vs thm.milk",
+      "sha256": "b95fd07cd3bae080d692fee70a935d821d5713435b5c66770e49d7b350deeaa7",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case139/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "066854d42c6399b42c7fd0d0a038074573e593780486e5c6af7c8c975c5c3f09",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "b1b1c142dcb0db5a4fe7c43da5b809947118fb45513bf80797289e40eaf05723",
+      "prediction_seal_sha256": "0fd72335178cae5eb8c4be12c073cc0a602c5358638a4fe6a777b911a2fd819d",
+      "lost_claims": []
+    },
+    {
+      "case": 140,
+      "preset": "i am only here to die slowly in pain stupid girl.milk",
+      "sha256": "604a349490a183f133c8566115259957a9dc9ea1876f18743d5bd03c2aea8299",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case140/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "5a2282541c9ce8c5d786bc745c9fbe725dde00428c57fd5c5456ed85774b07b1",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "b77b8489f61f114ce38c1276651609e366d6d011d1a91aee503eab1db9f78aef",
+      "prediction_seal_sha256": "8fd976f3af819004dad89b28b1effedaa7cad739945c3be827faadc50cd097e9",
+      "lost_claims": []
+    },
+    {
+      "case": 141,
+      "preset": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam.milk",
+      "sha256": "598b10f13d4013677062fc5783d0c752ce4aefefb6d37b48ac646d0c37451e55",
+      "source_status": "unresolved",
+      "source_frames": 5,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case141/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "4d8612a9afd2f4faf68acf809b1cee6db3d5373f6f101933d7f45964387eec0c",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "e818c141a655e81e9c297b5881e10c884926e63d3c2986550beb5bb5a209dd0c",
+      "prediction_seal_sha256": "74ed374711fb20d94138a8a8bab1c5e9e6eaaaa861db050730c3a6a6bd236488",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle-frame layout; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: motion median/p95 estimates; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: mean luma/saturation estimates; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak transition timing; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: brightening event frames/count; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: darkening event frames/count; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak jump amplitude; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: initial history; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle history layering; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: history transformation; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 5 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 retained history; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        }
+      ]
+    },
+    {
+      "case": 142,
+      "preset": "EoS + flexi + geiss - glowsticks v2 05 and proton lights (+Krash's beat code) (Painterly Oil Reflections).milk",
+      "sha256": "b735c08d9dea58e4e02c9c5dab44fa28561801b9251bbfd39055678ca6d9bfd1",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case142/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "e5b69e3a9a291b0ee10b1512637129096540c3b63ba83eb109a4fe5192478aa3",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "c32b6a4204bcc9ef47ace314a46bd66c0cc92a25f849f844fa45ad3f840798c0",
+      "prediction_seal_sha256": "6b5aaf27a0b9ce835e663609facfa9883e7413b419f6e3019ebcb3e0977d1c4f",
+      "lost_claims": []
+    },
+    {
+      "case": 143,
+      "preset": "Nivush - Crazy Diamonds.milk",
+      "sha256": "31ec688577a888e65d6f63b945fe2d123da5a3971acd1eb9ca17f4cd58cf12f0",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case143/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "b141ca775549fc06348b3ca117bd097bca992f5982baed8bde4eee35b7584b1b",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "da346dbdcc35ddf2145dc67ceeaa47a9abfc8f468924f473fe4eb138ae9b0a07",
+      "prediction_seal_sha256": "ac16953e829209747094c91517c62eb3ffa357adccfc35f12e25bb9383f6b0f7",
+      "lost_claims": []
+    },
+    {
+      "case": 144,
+      "preset": "martin - disco mix 2.milk",
+      "sha256": "5363b258cdd59b81228c0718094a1fb50ea3e0f905cb55a433005742f8cf4e10",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case144/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "da549437ab927486c99e456802fa8aba6fae46e19194cf314a93be5132bb3115",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "bd654850981158ce7edad84c2e6a5d89a0fea1f7949901f0156aa289c691dab0",
+      "prediction_seal_sha256": "354ae03835a5923f42daa0aab59ac7821fc74e006943139f3302c2ae45a9a496",
+      "lost_claims": []
+    },
+    {
+      "case": 145,
+      "preset": "suksma - feeling abort.milk",
+      "sha256": "faa8a658e08d0bd3ff9038d7d43ad810fa46630fc5d04be162126b2b48614732",
+      "source_status": "unresolved",
+      "source_frames": 0,
+      "score": 0,
+      "passed": false,
+      "critical_mismatch": false,
+      "critical_unknown": true,
+      "effective_assessment": "case145/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "51663f388bbe0291ffce02ca8566a15b11392f3d19e0f068e675f9ee75f1ecfd",
+      "preliminary_score": 0,
+      "assessment_seal_sha256": "0cde4379e8cffacff727978f89bac31dd9a6e96e252bf5c1d794fcd62c8bef6c",
+      "prediction_seal_sha256": "61302a1c4836c4885d50c7cdc044cf8322a16789961d65d0c4a231e157fc686c",
+      "lost_claims": [
+        {
+          "id": "structure1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle-frame layout; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "structure4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 geometry; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late trajectory; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "motion4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: motion median/p95 estimates; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: opening palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: late palette; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "colour4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: mean luma/saturation estimates; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak transition timing; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: brightening event frames/count; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: darkening event frames/count; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "flashing4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: peak jump amplitude; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback1",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: initial history; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback2",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: middle history layering; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback3",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: history transformation; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        },
+        {
+          "id": "feedback4",
+          "score": 0,
+          "disposition": "unknown",
+          "evidence": "Frozen source status unresolved with 0 source frames. No full-window prediction; native appearance is not substituted. Frozen slot: UNASSESSABLE: frame60 retained history; final source status unresolved. unresolved warp power domain No prediction is substituted; this slot earns zero accuracy credit."
+        }
+      ]
+    },
+    {
+      "case": 146,
+      "preset": "ORB - Flexi - Chilled Element.milk",
+      "sha256": "e1cbf8d01bc0e37234d8ed2c7ca1413c8af7d4dbd11dd1d59f7bf4b545e6e8dc",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case146/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "dd8c6677b530f159d8b2309da9248a01da50c44a33b024cbfcf4fdc750a95ccd",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "a8649a0c6820c207baa36fa35f726950b7392902ecd2a68e078d00c4ac78cb01",
+      "prediction_seal_sha256": "22868286e34106536c769ca99d77c521967a62cfe8e8393b1b90988263c7bb82",
+      "lost_claims": []
+    },
+    {
+      "case": 147,
+      "preset": "suksma - to dwell in wood rot - swept  - inf fin bnd.milk",
+      "sha256": "35d0685219814fa3eacd4f6fbc903bf6b33f9c2653e2794bf420a8a9f1c2ce07",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case147/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "adc9070ab20788b725f3335aaad6d3ce7cd6f5b0de0088892772842eeef49c3a",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "5d3b317bc3756b7617bb519ce180d12e53b1233ed100e5ec9ccd05cede10c3d3",
+      "prediction_seal_sha256": "5dc78391e04126841b7948edd257019a5a8d33b096ea1db384521a699c125485",
+      "lost_claims": []
+    },
+    {
+      "case": 148,
+      "preset": "shifter - spincycle(remix) - spark 30 nz+.milk",
+      "sha256": "5d53ba163c4e14f441d1dd768bf4a1da9e6b942c7b7e1045dd8d900340109f7c",
+      "source_status": "computed",
+      "source_frames": 60,
+      "score": 100,
+      "passed": true,
+      "critical_mismatch": false,
+      "critical_unknown": false,
+      "effective_assessment": "case148/round010-restart1/assessment.json",
+      "effective_assessment_sha256": "f6517f297e265c6c725e578da6009e9005a12a47ea1d0294e5dd47697b3ab302",
+      "preliminary_score": 100,
+      "assessment_seal_sha256": "1a4dc1acaa74f01ebd2fa03335d610c069592c4f2c5908b8efb41514daad659e",
+      "prediction_seal_sha256": "e4a15e870cdb30180426b5947372d04df11a664197c7db7d59d96ee96272597a",
+      "lost_claims": []
+    }
+  ],
+  "case_count": 100,
+  "source_complete_count": 88,
+  "source_unknown_count": 12,
+  "source_frames": 5336,
+  "native_frames": 6000,
+  "claim_count": 2000,
+  "passed_count": 85,
+  "mean_score_all_including_unknowns": 86.95,
+  "mean_score_computed_only": 98.80681818181819,
+  "score_distribution": {
+    "0": 12,
+    "100": 71,
+    "65": 1,
+    "90": 2,
+    "95": 6,
+    "97.5": 8
+  },
+  "critical_mismatches": [
+    125
+  ],
+  "category_points_out_of_2000_each": {
+    "structure": 1755,
+    "motion": 1700.0,
+    "colour": 1760.0,
+    "feedback": 1755,
+    "flashing": 1725
+  },
+  "lost_claim_cases": {
+    "motion4": [
+      54,
+      58,
+      65,
+      66,
+      69,
+      70,
+      71,
+      75,
+      77,
+      80,
+      82,
+      85,
+      86,
+      88,
+      98,
+      104,
+      107,
+      108,
+      113,
+      124,
+      125,
+      126,
+      128,
+      133,
+      141,
+      145
+    ],
+    "flashing1": [
+      55,
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      138,
+      141,
+      145
+    ],
+    "structure1": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "structure2": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "structure3": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      125,
+      141,
+      145
+    ],
+    "structure4": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "motion1": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "motion2": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      125,
+      141,
+      145
+    ],
+    "motion3": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      125,
+      141,
+      145
+    ],
+    "colour1": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "colour2": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "colour3": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "colour4": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "flashing2": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      125,
+      141,
+      145
+    ],
+    "flashing3": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      107,
+      108,
+      109,
+      124,
+      125,
+      141,
+      145
+    ],
+    "flashing4": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      138,
+      141,
+      145
+    ],
+    "feedback1": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "feedback2": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ],
+    "feedback3": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      125,
+      141,
+      145
+    ],
+    "feedback4": [
+      58,
+      71,
+      75,
+      80,
+      85,
+      86,
+      88,
+      104,
+      108,
+      124,
+      141,
+      145
+    ]
+  },
+  "source_gap_groups": {
+    "unresolved grid numeric domain: divide": [
+      58
+    ],
+    "unresolved warp power domain": [
+      71,
+      75,
+      88,
+      108,
+      141,
+      145
+    ],
+    "unresolved warp numeric domain": [
+      80,
+      85,
+      124
+    ],
+    "unresolved grid numeric domain: dot": [
+      86
+    ],
+    "pow grid zero base with nonpositive exponent domain": [
+      104
+    ]
+  },
+  "numeric_policy": {
+    "version": "user-approved-relative5-v1",
+    "approved_before_next_native_batch_utc": "2026-10-06T09:49:27.789999+00:00",
+    "rule": "abs(observed - predicted) <= 0.05 * abs(predicted)",
+    "zero_prediction": "Requires exact zero; no unrequested absolute floor.",
+    "scope": "Numerical estimates only.",
+    "geometry_trajectories": "Strict; critical deterministic mismatch fails regardless of score.",
+    "flash_event_timing_and_counts": "Strict;5% numeric allowance does not alter event frames/counts.",
+    "unknown": "No accuracy credit.",
+    "historical_scores": "Immutable; allowance applies only to future batches frozen under this protocol."
+  },
+  "manifest_sha256": "8fdd325d3fd9324dfe862734425cbea3871308f6e2c98f877a0ea1f9c7a31d15",
+  "prediction_seal_sha256": "373123d31c133a5693ecb483aef18814b1a91814d76e12f0fdba78b5d6ec9169",
+  "runtime_correction_sha256": "de81741f8d6885ba3fa7076b4911c262fc7ecb987ff27909dc8b21e24bce14b9",
+  "randomization_verification": {
+    "seed": "31966905787810700105037795948026714061",
+    "sampling": "uniform permutation of complete authoritative library; no filtering for predictability",
+    "library_size": 9606,
+    "queue_size": 9606,
+    "full_sorted_library_seed_recreation": true,
+    "audit_exact_original_queue_49_to148": true,
+    "sequence_sha256": "c792fdd7e1b70cccfd03a6f547891d3e8ab2055125ced3110d3d0455bd55fa36",
+    "limits": "Sequence contains mutable historical progress fields; queue identity independently compared with frozen manifest."
+  },
+  "reference_release": "2.3.11",
+  "aar_sha256": "3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6",
+  "model_commit": "483258f31cd88f78ac8311073c53ffd01707b9cf",
+  "source_model_unchanged_during_audit": true,
+  "limits": [
+    "Operational observable-claim scores are not pixel accuracy or calibrated probabilities.",
+    "12source numeric gaps retain all20unknown claims and zero credit.",
+    "Black/nearblack computed results retain unobservable motion with zero credit for that claim.",
+    "All100 retained;60frames at256x144,one declared audio/random/GPU context.",
+    "Frozen manifest has inherited historical runtime map; supplementary provenance discloses actual published files.",
+    "Native per-stage custom/fallback program identity is not directly exposed by unchanged JNI.",
+    "Pixel/finegrain divergence remains separate even when broad frozen observables agree.",
+    "Candidate causes do not establish AAR defects."
+  ],
+  "final_seal_sha256": "9bef0720ecc6ecac35a3ef949e44e936c81d136f4798fda6a11def13725187fb",
+  "sealed_file_count": 2939,
+  "audit_report_sha256": "5118eefb08ff0c201c9ecedbd8d29a73e79ff1e484074cf003003e2331381534"
+}

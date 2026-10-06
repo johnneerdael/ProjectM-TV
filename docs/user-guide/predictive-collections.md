@@ -71,3 +71,14 @@ an AST outside diagnostic cleanup and resume bookkeeping. This preserves complet
 measurements without silently relabelling them as results from the repaired code.
 
 The initial producer incorrectly applied a motion-compensated brightness model to direct pixel changes. The corrected bundle refits the coefficients to the actual direct-delta vectors rather than renaming that feature. Original measurements and their producer/model identities remain unchanged. A separate `derived_scoring` identity pins the new model, scoring function and the model's calibration evidence/fitter hashes; verification checks both original and derived activity independently. The new scorer uses the corrected model for future runs.
+
+
+## Source predictor research
+
+A separate experimental forecaster predicts equations, shader effects and feedback
+before comparing them with the published core. It has not supplied the packaged
+collection scores above. Its randomized100-preset audit retained twelve unresolved
+predictions and three completed misses; behavioural agreement in a short declared
+window does not certify calmness or genre suitability. See
+[Experimental source visual forecasting](development.md#experimental-source-visual-forecasting)
+for the test context, results and technical report.

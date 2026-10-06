@@ -87,3 +87,26 @@ source-analysis evaluations, and writable copies begin with the chosen input on 
 invocation. This gives the affected older presets defined inputs without
 changing their source or assignment order. Local variables still require an authored
 initialization. The policy does not reproduce arbitrary old Direct3D register history.
+
+
+## Experimental source visual forecasting
+
+`tools/milk-analyzer/forecast.py` interprets preset equations, shader fields and
+feedback using explicit audio, random, texture and render inputs. Its numerical
+prediction is produced before comparison with the unchanged published core AAR
+through JNI. The source CPU adapters and native reference have separate identities.
+Unsupported arithmetic remains unknown rather than being silently treated as calm.
+
+The October 2026 experiment passed a three-preset and then a ten-preset gate at
+95 or higher on twenty frozen behavioural claims. In the subsequent randomized
+100-preset audit,85met that threshold,12predictions remained unresolved, and three
+completed predictions failed. These are observable-claim scores, not pixel accuracy,
+whole-program guarantees or validated mood/genre assignments. The test covers only
+60frames at256×144 with one declared audio/random/GPU context; native4Kdetail and
+longer or different inputs remain unverified. See the
+[audit report](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/plans/2026-10-06-predictor-random100-audit.md)
+and [analyzer instructions](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/README.md).
+
+The packaged mood collections still use their pinned2.3.3numerical measurements,
+as described in [Predictive collections](predictive-collections.md). The experiment
+has not regenerated those indexes or changed their classifications.
