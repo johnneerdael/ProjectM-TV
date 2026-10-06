@@ -177,3 +177,23 @@ int main(int argc, char** argv) {
     assert values[3] == 0
     assert values[4] == 0.5
     assert values[5] == 2
+
+
+def test_analysis_hook_can_follow_android_gles_headers(tmp_path):
+    import os
+    import pytest
+    sdk = Path(os.environ.get("ANDROID_HOME", str(Path.home() / "Library/Android/sdk")))
+    compilers = sorted((sdk / "ndk/27.3.13750724/toolchains/llvm/prebuilt").glob("*/bin/clang++"))
+    if not compilers:
+        pytest.skip("Android NDK27.3.13750724 is required for GLES header compatibility")
+    compiler = compilers[0]
+    source = tmp_path / "android_analysis_hooks.cpp"
+    source.write_text('#include <GLES3/gl3.h>\n#include "analysis_hooks.hpp"\n'
+                      'int main() { return lab::Seed(1) == 0; }\n')
+    repo = Path(__file__).parents[3]
+    result = subprocess.run([str(compiler), "--target=armv7-none-linux-androideabi21",
+                             "--sysroot=" + str(compiler.parent.parent / "sysroot"),
+                             "-std=c++17", "-fsyntax-only", "-I", str(NATIVE),
+                             "-I", str(repo / "third_party/projectm/vendor/glad/include"),
+                             str(source)], text=True, capture_output=True)
+    assert result.returncode == 0, result.stderr

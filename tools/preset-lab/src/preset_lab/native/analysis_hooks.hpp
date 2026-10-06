@@ -1,6 +1,8 @@
 #ifndef PRESET_LAB_ANALYSIS_HOOKS_HPP
 #define PRESET_LAB_ANALYSIS_HOOKS_HPP
-#if __has_include(<glad/gl.h>)
+// Only the macOS discard shim needs desktop GL declarations in this hook.
+// Android/Linux renderer headers select their own configured GL or GLES backend.
+#if defined(__APPLE__) && __has_include(<glad/gl.h>)
 #include <glad/gl.h>
 #endif
 #include <cstdint>
