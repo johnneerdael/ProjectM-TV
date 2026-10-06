@@ -59,6 +59,105 @@ final class ResolutionSetupTest {
         SystemClock.sleep(300);
     }
 
+    /** Optional 4K hardware recording fixture; synthetic PCM is test input, not player capture. */
+    static void record(Instrumentation test) {
+        Bundle result = new Bundle();
+        Activity activity = null;
+        java.util.concurrent.atomic.AtomicBoolean feeding = new java.util.concurrent.atomic.AtomicBoolean(true);
+        Thread signal = null;
+        int code = Activity.RESULT_CANCELED;
+        try {
+            check(test.getTargetContext().getPackageName().endsWith(".setuptest"), "requires isolated setup APK");
+            SharedPreferences prefs = test.getTargetContext().getSharedPreferences("projectm_settings", 0);
+            prefs.edit().putBoolean("track_access_explained", true).putBoolean("auto_change_enabled", false)
+                    .putBoolean("blank_detection_v3", false).putInt("transition_duration", 0)
+                    .putInt("native_trails", 0).remove("resolution_mode").remove("auto_render_height").commit();
+            File directory = test.getTargetContext().getExternalCacheDir();
+            check(directory != null, "external cache unavailable");
+            File ready = new File(directory, "resolution-recording.ready");
+            File go = new File(directory, "resolution-recording.go");
+            check(!ready.exists() || ready.delete(), "cannot clear old recording readiness");
+            check(!go.exists() || go.delete(), "cannot clear old recording trigger");
+            activity = test.startActivitySync(new Intent(test.getTargetContext(), MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            Activity target = activity;
+            QualityController controller = quality(target);
+            Field rendererField = MainActivity.class.getDeclaredField("renderer");
+            rendererField.setAccessible(true);
+            nl.neerdael.projectm.core.VisualizerRenderer renderer =
+                    (nl.neerdael.projectm.core.VisualizerRenderer) rendererField.get(target);
+            signal = new Thread(() -> {
+                byte[] waveform = new byte[1024];
+                while (feeding.get()) {
+                    double time = SystemClock.elapsedRealtime() / 1000.0;
+                    double pulse = .25 + .20 * Math.pow(Math.max(0, Math.sin(time * Math.PI * 3)), 4);
+                    for (int i = 0; i < waveform.length; i++) {
+                        double tone = Math.sin(2 * Math.PI * 220 * (time + i / 44100.0));
+                        waveform[i] = (byte) Math.round(128 + 127 * pulse * tone);
+                    }
+                    ProjectMJNI.addWaveform(waveform, waveform.length);
+                    SystemClock.sleep(50);
+                }
+            }, "RecordingTestSignal");
+            signal.start();
+            awaitFrame(test, target);
+            onUi(test, () -> check(controller.isAuto(), "recording must start with Auto default"));
+            check(ready.createNewFile(), "cannot publish recording readiness");
+            long deadline = SystemClock.elapsedRealtime() + 45000;
+            while (!go.exists() && SystemClock.elapsedRealtime() < deadline) SystemClock.sleep(50);
+            check(go.exists(), "recorder did not send its start trigger");
+            SystemClock.sleep(2000);
+            openAdvanced(test, target);
+            SystemClock.sleep(2000);
+            onUi(test, () -> target.findViewById(R.id.row_resolution).requestFocus());
+            test.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_LEFT); // Auto -> Native
+            awaitFrame(test, target);
+            long first = ProjectMJNI.getRenderedFrameSerial();
+            for (int level = 0; level <= 2; level++) {
+                if (level == 1) {
+                    for (int down = 0; down < 3; down++) test.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_DOWN);
+                    onUi(test, () -> check(target.findViewById(R.id.row_native_trails).hasFocus(),
+                            "D-pad did not reach Native trails"));
+                }
+                if (level > 0) test.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_RIGHT);
+                awaitFrame(test, target);
+                long until = SystemClock.elapsedRealtime() + 5000;
+                while (SystemClock.elapsedRealtime() < until) {
+                    onUi(test, () -> check(controller.isNative() && controller.currentHeight() == 2160
+                            && renderer.getSurfaceWidth() == 3840 && renderer.getSurfaceHeight() == 2160,
+                            "recording left actual 3840x2160 Native rendering"));
+                    check(ProjectMJNI.getAudioLevel() > .001f, "synthetic PCM did not reach the renderer");
+                    SystemClock.sleep(250);
+                }
+                String status = ProjectMJNI.getNativeTrailsStatus();
+                check(status.contains("1280×720 canvas"), "Native trails fallback: " + status);
+                check(status.startsWith(new String[]{"Standard", "Medium", "High"}[level]), "wrong trails level: " + status);
+                Bitmap screenshot = test.getUiAutomation().takeScreenshot();
+                check(screenshot != null, "4K screenshot unavailable");
+                try (FileOutputStream output = new FileOutputStream(new File(directory, "native-4k-" + level + ".png"))) {
+                    check(screenshot.compress(Bitmap.CompressFormat.PNG, 100, output), "4K screenshot failed");
+                } finally { screenshot.recycle(); }
+            }
+            check(ProjectMJNI.getRenderedFrameSerial() - first >= 50, "insufficient completed Native frames");
+            test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK); // Advanced -> main
+            test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK); // close panel
+            SystemClock.sleep(4000);
+            result.putString("stream", "PASS: Auto default to actual Native 3840x2160, Standard/Medium/High at 1280x720 canvas, synthetic unsigned mono PCM, completed frames; preset="
+                    + ProjectMJNI.getCurrentPresetName() + ", final_fps=" + renderer.getCurrentFps() + "\n");
+            code = Activity.RESULT_OK;
+        } catch (Throwable failure) {
+            result.putString("stream", "FAIL: " + failure + "; cause=" + failure.getCause() + "\n");
+        } finally {
+            feeding.set(false);
+            if (signal != null) {
+                try { signal.join(1000); }
+                catch (InterruptedException interrupted) { Thread.currentThread().interrupt(); }
+            }
+            if (activity != null) onUi(test, activity::finish);
+        }
+        test.finish(code, result);
+    }
+
     static void run(Instrumentation test) {
         Bundle result = new Bundle();
         Activity activity = null;

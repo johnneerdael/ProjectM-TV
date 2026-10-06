@@ -46,7 +46,8 @@ public final class MusicCategoryInstrumentation extends Instrumentation {
     }
     @Override public void onStart() {
         if (setupCase != null) {
-            if ("resolution".equals(setupCase)) ResolutionSetupTest.run(this);
+            if ("resolution_recording".equals(setupCase)) ResolutionSetupTest.record(this);
+            else if ("resolution".equals(setupCase)) ResolutionSetupTest.run(this);
             else if ("native_trails".equals(setupCase)) NativeTrailsSetupTest.run(this);
             else TrackAccessSetupTest.run(this, setupCase);
             return;

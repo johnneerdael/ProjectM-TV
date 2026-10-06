@@ -147,6 +147,34 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void reducedModeCannotSupplyCreditUntilItsFrameCompletes() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(-1, 2160);
+        q.onFpsSample(30);
+        q.setResolutionMode(720, 2160); // requested, not yet rendered
+        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        q.setResolutionMode(-1, 2160);
+        assertTrue("unrendered reduction supplies no resident credit", applied < 2160);
+        q.onFpsSample(30);
+        q.setResolutionMode(-1, 2160);
+        assertEquals("a completed frame makes the resident allocation usable", 2160, applied);
+    }
+
+    @Test
+    public void automaticHeightChangeCannotSupplyUnacknowledgedModeCredit() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(0, 1440);
+        settle(q);
+        samples(q, 3, 40); // Auto requests 1260p; GL has not acknowledged it
+        assertEquals(1260, applied);
+        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        q.setResolutionMode(-1, 1440);
+        assertTrue(applied < 2160);
+    }
+
+    @Test
     public void confirmedSameSizeModeSwitchDoesNotChargeResidentTexturesAgain() throws Exception {
         FakeMemory memory = new FakeMemory();
         QualityController q = withMemory(memory, 4096);

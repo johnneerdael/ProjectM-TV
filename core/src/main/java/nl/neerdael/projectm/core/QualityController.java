@@ -68,6 +68,7 @@ public final class QualityController {
     private boolean started;
     // Until a confirmed rendered FPS sample, available memory still includes resources to allocate.
     private boolean fullAllocationPending;
+    private int completedIndex = -1; // height acknowledged by a completed-generation FPS sample
     private int resolutionMode;     // 0 Auto, -1 Native, positive fixed height
     private int current;            // index into levels (auto mode)
     private float targetFps = 60f;
@@ -161,7 +162,7 @@ public final class QualityController {
     }
 
     private void startMode(int lastAutoHeight) {
-        boolean confirmed = started && !fullAllocationPending;
+        boolean confirmed = started && !fullAllocationPending && current == completedIndex;
         long residentBytes = confirmed ? estimate(current) : 0;
         resetAllocationProbe();
         resetCounters(0);
@@ -178,6 +179,7 @@ public final class QualityController {
             // No growth: do not charge the old tuple while GL is still releasing it.
             // The next completed-generation FPS sample observes the actual available RAM.
             memoryConstrained = current < requested || !RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot);
+            if (current != completedIndex) fullAllocationPending = true;
         } else {
             fullAllocationPending = true;
             memorySnapshot = sampleMemory();
@@ -399,6 +401,7 @@ public final class QualityController {
      * stale or render-guarded callbacks. Samples memory even during preset/FPS settling.
      */
     public int onFpsSample(float fps) {
+        if (fps > 0) completedIndex = current;
         updateMemory();
         if (fps > 0) fullAllocationPending = false;
         if (System.currentTimeMillis() < settleUntil || fps <= 0) return ACTION_NONE;
