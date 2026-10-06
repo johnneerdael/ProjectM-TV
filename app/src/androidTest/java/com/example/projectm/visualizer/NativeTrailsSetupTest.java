@@ -59,7 +59,7 @@ final class NativeTrailsSetupTest {
             prefs.edit().putBoolean("track_access_explained", true).putBoolean("auto_change_enabled", false)
                     .putBoolean("skip_slow_presets", false).putBoolean("blank_detection_v3", false)
                     .putBoolean("memory_limit", true).putInt("render_height", -1) // retired settings must not override Auto
-                    .putInt("transition_duration", 0).remove("native_trails").commit();
+                    .putInt("transition_duration", 0).remove("native_trails").remove("resolution_mode").commit();
             Intent launch = new Intent(test.getTargetContext(), MainActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             activity = test.startActivitySync(launch);
@@ -96,7 +96,7 @@ final class NativeTrailsSetupTest {
             check(ProjectMJNI.getCompletedRenderBudgetGeneration() > previousGeneration,
                     "rapid allocation changes did not renew the reviewed generation");
             check(test.getTargetContext().getResources().getIdentifier("row_resolution", "id",
-                    test.getTargetContext().getPackageName()) == 0, "manual resolution row remains");
+                    test.getTargetContext().getPackageName()) != 0, "resolution selector missing");
             check(test.getTargetContext().getResources().getIdentifier("row_memory_limit", "id",
                     test.getTargetContext().getPackageName()) == 0, "manual RAM limiter row remains");
             test.runOnMainSync(target::finish);
@@ -120,7 +120,7 @@ final class NativeTrailsSetupTest {
                     test.getTargetContext().getExternalCacheDir(), "native-trails-advanced.png"))) {
                 check(screenshot.compress(Bitmap.CompressFormat.PNG, 100, output), "screenshot write failed");
             } finally { screenshot.recycle(); }
-            result.putString("stream", "PASS: Auto-only UI, Standard default, D-pad Medium, High selection, persisted High, retired manual controls absent, diagnostics\n");
+            result.putString("stream", "PASS: Auto default, Standard default, D-pad Medium, High selection, persisted High, resolution selector, retired RAM control absent, diagnostics\n");
             code = Activity.RESULT_OK;
         } catch (Throwable failure) {
             result.putString("stream", "FAIL: " + failure + "\n");

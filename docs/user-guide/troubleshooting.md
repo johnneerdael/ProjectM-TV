@@ -2,7 +2,7 @@
 
 ## Visuals do not react to the music
 
-Start music in the player before opening ProjectM TV. Open **Settings → Advanced → Diagnostics** and check the audio source and level.
+Start music in the player before opening ProjectM TV. Open **Settings › Advanced › Diagnostics** and check the audio source and level.
 
 | Audio status | Next step |
 |---|---|
@@ -15,13 +15,13 @@ If no audio is found while Android reports music playing, the app searches again
 
 ## Picture stutters
 
-Resolution adapts automatically to the selected target frame rate and available memory. Use the default half-refresh-rate frame rate, **Native trails → Standard**, and **Transitions → Auto**. Lower **Detail** if the preset’s equations limit the CPU. Blending two heavy presets can be slower than rendering one, and some CPU-heavy presets gain little from lower resolution.
+In Auto, resolution adapts to the selected target frame rate and available memory. Use the default half-refresh-rate frame rate, **Native trails › Standard**, and **Transitions › Auto**. Lower **Detail** if the preset’s equations limit the CPU. Blending two heavy presets can be slower than rendering one, and some CPU-heavy presets gain little from lower resolution.
 
-Check the actual render size and memory status in **Advanced → Diagnostics**. Memory pressure can temporarily lower resolution and pause preset prewarming to leave headroom for your music player. There is no manual RAM limiter or fixed-resolution setting.
+Check the actual render size and memory status in **Advanced › Diagnostics**. Memory pressure can temporarily lower resolution and pause preset prewarming to leave headroom for your music player. There is no manual RAM limiter. If a selected fixed/Native resolution is too slow, switch **Advanced › Resolution** back to **Auto**; slow-preset skipping is active only in Auto.
 
 ## The render size is below 4K
 
-A 4K panel can render natively, but automatic quality only uses a size that fits the target frame rate and live memory budget. Medium and High trails cost more than Standard, and transitions can hold two presets. Other apps also affect available memory. Diagnostics distinguishes the detected panel from the current render size; Android’s UI may still run at 1080p.
+A 4K panel can render natively. Select **Advanced › Resolution › Native (4K)** to request the full physical panel independently of FPS adaptation. Live memory protection can still temporarily reduce fixed/Native sizes. Auto also lowers resolution for the target frame rate. Medium and High trails cost more than Standard, and transitions can hold two presets. Other apps also affect available memory. Diagnostics distinguishes the detected panel from the current render size; Android’s UI may still run at 1080p.
 
 ## Native trails look soft or different
 
@@ -37,11 +37,11 @@ Some presets choose random images from the bundled texture pack each time they l
 
 ## Presets skipped by an earlier version
 
-Earlier versions skipped presets whose equation code projectM could not compile, including 27 bundled presets. The app now loads equation code like MilkDrop does, so these presets play. A code block that MilkDrop cannot compile either is left out and the rest of the preset plays, as in MilkDrop. Presets skipped earlier stay on this TV's skip list until you reset it: **Advanced → Skipped presets**. A reset also clears presets skipped as slow or black; the app skips those again if they still are.
+Earlier versions skipped presets whose equation code projectM could not compile, including 27 bundled presets. The app now loads equation code like MilkDrop does, so these presets play. A code block that MilkDrop cannot compile either is left out and the rest of the preset plays, as in MilkDrop. Presets skipped earlier stay on this TV's skip list until you reset it: **Advanced › Skipped presets**. A reset also clears presets skipped as slow or black; the app skips those again if they still are.
 
 ## A collection has fewer available presets
 
-The eligible count excludes this TV's skipped presets. **Advanced → Skipped presets** shows the skip count and lets you reset the list. Failed or consistently slow presets can be skipped again on that device.
+The eligible count excludes this TV's skipped presets. **Advanced › Skipped presets** shows the skip count and lets you reset the list. Failed or consistently slow presets can be skipped again on that device.
 
 The app falls back to **All** when a selected collection has no eligible members. Saved Dance or older genre selections also return to All.
 
@@ -51,7 +51,7 @@ The predictive preset engine is beta. A short shared audio probe orders activity
 
 ## Track titles are missing
 
-Open **Track display → Track info → Configure**, then enable ProjectM TV in Android's notification-access settings. **Dismiss** permanently hides the automatic reminder; Track display still reopens setup. See the [screenshot walkthrough](getting-started.md#track-titles). The app reads the player's media session for titles. Titles are optional and do not control visualizer audio capture.
+Open **Track display › Track info › Configure**, then enable ProjectM TV in Android's notification-access settings. **Dismiss** permanently hides the automatic reminder; Track display still reopens setup. See the [screenshot walkthrough](getting-started.md#track-titles). The app reads the player's media session for titles. Titles are optional and do not control visualizer audio capture.
 
 If the artist and title appear but the cover does not, the music app may not provide one. Covers have only been verified with Spotify and [Milkbeat](https://github.com/johnneerdael/Milkbeat); SoundCloud and SmartTube show the artist and title only.
 
