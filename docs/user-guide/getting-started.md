@@ -39,14 +39,14 @@ Android asks **Allow ProjectM TV to record audio?** Choose **Allow**. Android re
 
 Wait a second or two while the app finds the player session. A preset can move even before music is detected, so use the **Audio** meter in the settings panel to check that music is reaching the app.
 
-If you selected Deny, allow the permission under Android **Settings → Apps → ProjectM TV → Permissions**, then reopen the app. If the meter remains silent while music plays, see [audio troubleshooting](troubleshooting.md).
+If you selected Deny, allow the permission under Android **Settings › Apps › ProjectM TV › Permissions**, then reopen the app. If the meter remains silent while music plays, see [audio troubleshooting](troubleshooting.md).
 
 ## Track titles
 
 Title and artist are optional. After audio permission, a **Show track titles** dialog offers two choices:
 
 - **Configure** opens Android's notification-access settings. On supported Android 11+ devices it tries the page for ProjectM TV directly; otherwise it opens the list of apps, then falls back to Apps or the main Settings screen if necessary.
-- **Dismiss** permanently hides the automatic prompt for this installation. It stays dismissed after restarting the app. You can still open it yourself from **Settings → Track display → Track info**.
+- **Dismiss** permanently hides the automatic prompt for this installation. It stays dismissed after restarting the app. You can still open it yourself from **Settings › Track display › Track info**.
 
 [![Show track titles dialog with Dismiss and Configure buttons](images/setup/track-titles-prompt.png)](images/setup/track-titles-prompt.png)
 
@@ -71,7 +71,7 @@ Choosing Configure does not grant access automatically or permanently dismiss th
 
 ### Find the setting manually
 
-If your TV opens a more general settings screen, look for **Apps → Special app access → Notification access**. Some devices put Apps under **Device Preferences** first.
+If your TV opens a more general settings screen, look for **Apps › Special app access › Notification access**. Some devices put Apps under **Device Preferences** first.
 
 **1. Open Apps.** Select **Special app access**. You may need to scroll below the recently opened apps.
 
@@ -91,7 +91,7 @@ Open the app's settings with **Center / Enter / Menu**, select **Track display**
 
 [![Track-title configuration opened manually from Track display](images/setup/track-titles-manual.png)](images/setup/track-titles-manual.png)
 
-The cover, artist and title of the playing track appear in the upper left for as long as it plays; **Settings → Track display** shows them for 10–60 s per track instead, in the lower-left pill, or not at all. **Up / Down / Info** shows the current track again. The preset's name is shown separately in the settings panel.
+The cover, artist and title of the playing track appear in the upper left for as long as it plays; **Settings › Track display** shows them for 10–60 s per track instead, in the lower-left pill, or not at all. **Up / Down / Info** shows the current track again. The preset's name is shown separately in the settings panel.
 
 Covers have only been verified with Spotify and [Milkbeat](https://github.com/johnneerdael/Milkbeat). SoundCloud and SmartTube have been verified to show the artist and title only, without a cover. No other music apps have been verified.
 
@@ -125,17 +125,17 @@ Start with these defaults:
 | Preset duration | 30 s | Increase it for longer viewing of each preset. |
 | Transition | 7 s on most devices | Shorten it for faster changes. |
 | Frame rate | Half the TV's refresh rate, usually 30 fps | A higher target needs more processing time and may lower Auto resolution. |
-| Advanced → Transitions | Auto | Keep Auto so blends can adapt to available performance. |
-| Advanced → Skip slow / blank presets | On | Leave On to move past presets that fail on this TV. |
+| Advanced › Transitions | Auto | Keep Auto so blends can adapt to available performance. |
+| Advanced › Skip slow / blank presets | On | Leave On to move past presets that fail on this TV. |
 
-If playback stutters, lower **Advanced → Detail** first. The [settings reference](settings.md) explains every row, and [troubleshooting](troubleshooting.md) covers missing audio, titles and slow rendering.
+If playback stutters, lower **Advanced › Detail** first. The [settings reference](settings.md) explains every row, and [troubleshooting](troubleshooting.md) covers missing audio, titles and slow rendering.
 
 ## Updates
 
-**Settings → Advanced → Auto-update** is off by default. When enabled, the app checks GitHub at launch and every six hours while open, downloads a new release and offers an Install row. Android asks you to confirm installation. F-Droid installations use F-Droid for updates.
+**Settings › Advanced › Auto-update** is off by default. When enabled, the app checks GitHub at launch and every six hours while open, downloads a new release and offers an Install row. Android asks you to confirm installation. F-Droid installations use F-Droid for updates.
 
 When Android asks whether ProjectM TV may install unknown apps, enable that permission for ProjectM TV, reopen it, and select **Install** again. This is separate from notification access and is only needed to install an app-downloaded update. You can also download and install the latest APK using Downloader or a computer as described above.
 
 Audio is processed in memory. The app makes no network connections while its auto-update setting is off.
 
-Resolution defaults to Auto up to the detected panel size, using target FPS and live memory headroom. Use **Settings → Advanced → Resolution → Native (4K)** for full-panel 4K testing; supported fixed sizes are also available. Fixed/Native ignore FPS downshifts, but live memory protection can still lower the actual size shown in Diagnostics. Native trails defaults to Standard; its saved level remains available while resolution changes. The manual Memory limit remains retired.
+Resolution defaults to Auto up to the detected panel size, using target FPS and live memory headroom. Use **Settings › Advanced › Resolution › Native (4K)** for full-panel 4K testing; supported fixed sizes are also available. Fixed/Native ignore FPS downshifts, but live memory protection can still lower the actual size shown in Diagnostics. Native trails defaults to Standard; its saved level remains available while resolution changes. The manual Memory limit remains retired.

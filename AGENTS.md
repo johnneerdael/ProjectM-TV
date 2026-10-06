@@ -131,7 +131,7 @@ Follow the existing dependency injection and ownership model. Prefer explicit de
 
 Use the project's established resource or localization mechanism for user-facing text. Follow its locale ownership and translation workflow; do not invent an English-only or all-locales policy.
 
-- **Not localized today.** `app/src/main/res/values/strings.xml` holds only `app_name` (overridden by `resValue` for test builds); there are no `values-*` locale directories and no translation workflow. UI text is English literals in Java (`MainActivity`, `OptionRow`, …) and the layout XML. Introducing localization is a deliberate change that should move strings to resources consistently.
+- **Not localized today.** `app/src/main/res/values/strings.xml` holds `app_name` (overridden by `resValue` for test builds) and the Resolution selector labels; there are no `values-*` locale directories and no translation workflow. UI text is English literals in Java (`MainActivity`, `OptionRow`, …) and the layout XML. Introducing localization is a deliberate change that should move strings to resources consistently.
 - **Wording conventions:** the app name is "ProjectM TV" and its maintained engine is "ProjectM TV Engine". Use "based on projectM 4.1.7" for upstream provenance; do not present the patched engine as stock upstream 4.1.7. The core AAR shares the app release version; `ProjectMJNI.getVersion()` still reports the upstream version. Preserve package/API/artifact names and historical evidence identities. Menu paths use `›` (e.g. *Settings › Advanced › Auto-update*). Keep setting names and values identical in the UI, the README settings tables and `docs/user-guide/settings.md`.
 - Store listing text: `fastlane/metadata/android/en-US/` (F-Droid metadata, English only).
 
