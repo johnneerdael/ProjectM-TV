@@ -71,6 +71,24 @@ adb -s DEVICE shell am instrument -r -w -e live_audio true nl.neerdael.projectmt
 
 The test checks category application, eligible counts, navigation containment, fallback and live audio delivery. Omit the live-audio argument for emulator testing without music. Results verify operation; they do not prove every selected preset's strength on every GPU.
 
+## Resolution and Native trails setup checks
+
+Build and install the separate setup app and its test APK on the selected development device:
+
+```sh
+./gradlew :app:assembleDebug :app:assembleDebugAndroidTest -PsetupScreenshotTest
+```
+
+These builds use package `nl.neerdael.projectmtv.setuptest`. Grant Record audio and stop this isolated app before instrumentation so the case starts cold:
+
+```sh
+adb -s DEVICE shell pm grant --user USER nl.neerdael.projectmtv.setuptest android.permission.RECORD_AUDIO
+adb -s DEVICE shell am force-stop --user USER nl.neerdael.projectmtv.setuptest
+adb -s DEVICE shell am instrument --user USER -r -w -e setup_case resolution nl.neerdael.projectmtv.setuptest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
+```
+
+Use `setup_case native_trails` for the Native trails case. An unanswered permission dialog can pause rendering and time out the completed-generation check; a warm activity can retain menu and focus state. These checks exercise settings, navigation and completed frames, not preset pixel fidelity or performance.
+
 ## Documentation site
 
 The site uses MkDocs and the same dark Read the Docs layout as the Milkbeat guide. Markdown in `docs/user-guide/` is the source for these pages.

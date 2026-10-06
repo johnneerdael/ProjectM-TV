@@ -1,0 +1,91 @@
+{
+  "source_repository": "IkeC/Milkwave",
+  "commit": "e1c4210275153ffa7203430b0a8583600e383e79",
+  "blob_sha": "372b4b988b1fa25ed8fb832a070cbe91a0ba4a35",
+  "filename": "martin + Se7enSlasher - pixies party (random texture edit).milk",
+  "asset_sha256": "990472f4a5af7fbff629fd2340b14753a7fd1ec7ffc77203267dfdfbf4c8e37e",
+  "bytes": 47750,
+  "exact_reported_macro_line": 1307,
+  "pinned_contents_api_response_sha256": "d310fafe1f2331b7338435196149df9bdd0afd2449e947004c93f88eca581575",
+  "upstream_pr1025_response_sha256": "928d473cffdf5f6e327e7eb2f15735d6fc9dde8f3434c7fbd492e6e5e405ad4a",
+  "pr26_response_sha256": "314ef9c9cd74b42405b266bde0f2d4f85d3d1c03640976332ba43665f65d0986",
+  "public_tree_searches": [
+    {
+      "record": "public-Milkwave-tree.json",
+      "response_sha256": "96e3f0fc02045de21f93dc4daafcc4c6aefd9fd0ff5b14bfe9d3e3ca38960182",
+      "tree_sha": "e1c4210275153ffa7203430b0a8583600e383e79",
+      "entry_count": 14783,
+      "truncated": false,
+      "request_status": "retrieved"
+    },
+    {
+      "record": "public-museum-tree.json",
+      "response_sha256": "89e0ae38582a5dd13dd46dd66402f42d98e7efceb09e330dd5448ed3e19bfe83",
+      "tree_sha": "2a0385b51a6443dbe6048c687c3f7dd13e28301c",
+      "entry_count": 217,
+      "truncated": false,
+      "request_status": "retrieved"
+    },
+    {
+      "record": "public-presets-community-tree.json",
+      "response_sha256": "a483f6d8461b1571cfd3f56c3b61141dac80b93dc67372500bde06c65eadd2a1",
+      "tree_sha": null,
+      "entry_count": 0,
+      "truncated": null,
+      "request_status": "empty repository"
+    },
+    {
+      "record": "public-presets-cream-of-the-crop-tree.json",
+      "response_sha256": "25cded4612404515b73cb5e4b7b90d7a7c16d693946b6002b1bf8a9e24b3d3de",
+      "tree_sha": "0180df21f5e0bd39b9060cc5de420ed2f1f9e509",
+      "entry_count": 9991,
+      "truncated": false,
+      "request_status": "retrieved"
+    },
+    {
+      "record": "public-presets-en-d-tree.json",
+      "response_sha256": "8d7972a3b3ba8a960f7e856b79b68d14354aefef017df8657b9adbb1e5c91cd8",
+      "tree_sha": "fff71ea81223109f3558351667eef851f2781c96",
+      "entry_count": 61,
+      "truncated": false,
+      "request_status": "retrieved"
+    },
+    {
+      "record": "public-presets-milkdrop-original-tree.json",
+      "response_sha256": "cba6d5f168e1b09c3c79a5dd0b7b8cd15bdcab1ab35b8e5c612d00ddc9ca597e",
+      "tree_sha": "e03b83e3338d8f1ed6cbcf908c719f249ef24288",
+      "entry_count": 554,
+      "truncated": false,
+      "request_status": "retrieved"
+    },
+    {
+      "record": "public-presets-projectm-classic-tree.json",
+      "response_sha256": "e69056da0c93c1a7ae5df9ef1ea62506a7656f5cf5bd9a9d0e0eb592e1a2c32d",
+      "tree_sha": "14a6244a7d32eb7e114e1a92d1cb93358cdcc54a",
+      "entry_count": 4238,
+      "truncated": false,
+      "request_status": "retrieved"
+    }
+  ],
+  "bundled_ambiguous_candidates": [
+    {
+      "filename": "ORB - Stahl - Tantalum Gran random tex not worthy to comment on your potential love life failth.milk",
+      "catalog_id": 3354,
+      "asset_sha256": "7658991f83afc743775ca9a8ff0eb55473182a8cd185df5fc45caee15eaa4b04"
+    },
+    {
+      "filename": "ORB - Stahl - Tantalum Gran random tex - j4+.milk",
+      "catalog_id": 3353,
+      "asset_sha256": "14ab622dc479848f6ed20e99a0ddf4e5454c06f1b0152f3d74b03dee6216a29f"
+    }
+  ],
+  "scope_delta": {
+    "before_required_bundled": 349,
+    "after_required_bundled": 351,
+    "before_required_external_available": 0,
+    "after_required_external_available": 1,
+    "optional_only_unchanged": 133,
+    "historical_original_identity_resolved": false,
+    "source_inventory_sha256": "ebcca9678131d3a42294a1f7cf7024ec9a09e4940806092445804e857ea51f5b"
+  }
+}
