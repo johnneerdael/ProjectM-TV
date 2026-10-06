@@ -5,7 +5,7 @@
 Each of the 44 ordered `patches` retains the original filename/SHA, legacy applied commit, touched paths, activation condition, current port/upstream mapping, confidence, witness/control metadata and counts.
 
 - `potential_scope.kind == "all"` references every catalog entry, subject to activation conditions. It means potentially affected by a shared path, not confirmed changed output.
-- `potential_scope.kind == "candidate_ids"` lists source-domain priority IDs. It is not an exclusion certificate; the full fidelity gate still includes all presets.
+- `potential_scope.kind == "candidate_ids"` lists source-domain priority IDs. It is not an exclusion certificate: source-impact scope remains all 9,606 presets, while the current acceptance gate uses the unbiased 100-preset seed-12345 sample plus the explicit midgit regression described in the README.
 - `positive_source_matches` gives IDs plus the original matching feature labels. `unresolved_priority.ids` preserves unresolved membership. `known_witnesses` preserves evidence basis/stage/limits against catalog IDs; witnesses are not full-render certificates.
 - `all_preset_fidelity_gate_exemptions` remains empty for every patch.
 - `source_full_artifact_sha256` and `compaction_validation` bind this export to the ignored explicit-list artifact. All memberships/features/witnesses were expanded and compared exactly during export.

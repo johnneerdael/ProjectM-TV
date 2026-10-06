@@ -2,6 +2,7 @@
 import importlib.util
 import inspect
 from pathlib import Path
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -136,6 +137,44 @@ class PinnedCheckoutTests(unittest.TestCase):
             self.assertEqual(self.git(engine, "rev-parse", "HEAD"), revisions[1][1])
             self.assertEqual(self.git(evaluator, "rev-parse", "HEAD"), revisions[1][2])
             self.assertEqual(self.git(repo, "status", "--porcelain"), "")
+
+
+class NativeBridgeSeedTests(unittest.TestCase):
+    def test_initialize_resets_actual_shader_rng_for_each_job(self):
+        compiler = shutil.which("c++")
+        if compiler is None:
+            self.skipTest("C++ compiler required for the actual bridge RNG regression")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            # JNI declarations are the only stub; compile the actual bridge and
+            # hook, including the same atomic-clock transformation as Android.
+            (root / "jni.h").write_text(
+                "#define JNIEXPORT\n#define JNICALL\n"
+                "struct JNIEnv; using jclass=void*; using jlong=long long; "
+                "using jint=int; using jdouble=double;\n")
+            hook = (builder.REPO / "tools/preset-lab/src/preset_lab/native/analysis_hooks.hpp").read_text()
+            hook = hook.replace("#include <cstdint>", "#include <cstdint>\n#include <atomic>")
+            hook = hook.replace("inline double clock_seconds = 0.0;", "inline std::atomic<double> clock_seconds{0.0};")
+            (root / "analysis_hooks.hpp").write_text(hook)
+            bridge = HERE / "native-lab/lab_bridge.cpp"
+            (root / "check.cpp").write_text(
+                '#include "' + str(bridge) + '"\n#include <iostream>\n'
+                'int main() {\n'
+                '  for (unsigned seed : {12345u, 54321u, 12345u}) {\n'
+                '    lab::shader_random_state = 777; lab::clock_seconds = 12.0;\n'
+                '    Java_nl_neerdael_projectmtv_corpus_LabBridge_initialize(nullptr, nullptr, seed, 1024, 768);\n'
+                '    const uint32_t configured = seed ^ 0x9e3779b9u;\n'
+                '    const uint32_t expected = (uint64_t(configured) * 16807u) % 2147483647u;\n'
+                '    const uint32_t actual = lab::ShaderRandom();\n'
+                '    if (actual != expected || lab::clock_seconds != 0.0) {\n'
+                '      std::cerr << "configured seed " << seed << ": expected " << expected << ", got " << actual << "\\n"; return 1;\n'
+                '    }\n'
+                '  }\n  return 0;\n}\n')
+            executable = root / "check"
+            subprocess.run([compiler, "-std=c++17", "-I", str(root), str(root / "check.cpp"),
+                            "-o", str(executable)], check=True, capture_output=True, text=True)
+            result = subprocess.run([str(executable)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
 
 
 

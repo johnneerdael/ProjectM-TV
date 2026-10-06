@@ -19,6 +19,13 @@ submodule HEADs. The current candidate uses unreleased projectM 4.2 master,
 pinned to `6f6480746`, with its retained TV patches.
 
 Both roles use the private shader RNG and logical frame clock. The private
+bridge resets the shader RNG after setting each job's seed environment, including
+engines whose constructors no longer seed libc rand. Reinitializing a job must
+restart the same stream; a native regression compiles the actual bridge/hooks
+and checks two seeds and a repeated seed. Earlier rebase workers omitted this
+reset on 4.2 and therefore used a different shader stream despite matching seed
+metadata. Preserve those artifacts and rerun comparisons under new identities.
+The private
 constructor clock starts at zero before preset initialization. Engines with
 `projectm_set_frame_time` also receive that clock before each normal or framebuffer
 render call; older engines keep the historical TimeKeeper clock hook.

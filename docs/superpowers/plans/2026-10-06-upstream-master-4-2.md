@@ -79,6 +79,8 @@ Local review found that copied CPU shader bodies needed production logging decla
 
 Builders resolve engine/evaluator pins from the requested source commit. Frozen 24/44-patch historical sources retain their own identities; the candidate uses the three-patch master series. Rebase worker packages are distinct from existing corpus packages. Instrumented workers are separately hash-identified test artifacts, not shipping-byte-identical releases. Their historical timing/sample metadata literals require the explicit source-based limits in the comparison protocol.
 
+The midgit investigation subsequently found a shader RNG initialization mismatch: the old ProjectM constructor resets the private stream, while the new engine no longer does so, and LabBridge previously omitted a shared reset. LabBridge now resets after setting the seed environment. A compiled actual-bridge/hook regression fails before the correction and passes after it; the affected tooling suite passes 76 tests and 35 subtests. The existing TV matrix is preserved but cannot establish matched-seed cross-role fidelity. Rebuild workers under new identities and rerun before assessing migration pixels.
+
 ## Device evidence and remaining gates
 
 The completed frozen-audio pilot covers one preset, 1920×1080, Standard inactive, eight selected captures among 480 frames, two repeats per role and one Mali-G52/GLES 3.2 TV. Captures repeat bit-for-bit within each role, while cross-role differences are localized and reach RGB byte MAE 2.66 at frame 479. The source analysis does not support attributing this difference to the coordinate correction; its cause remains unproven. This is not a 4K/native-active, minimum-GLES-3.0-only, full-corpus or performance conclusion.
