@@ -364,3 +364,20 @@ is adopted. Scalar temporary boundaries are erased in the existing lowered DAG,
 which prevents claiming general storage-boundary-preserving contraction.
 The next bounded investigation is2Dlinear filter precision; preserve all frozen
 candidate/reference data and do not fit undocumented coefficients to pixels.
+
+The centered sampler-return control matches float32-normalized79/255 and254/255
+under signed-error amplification; tested float16 and fixed16 negative-bias models
+are rejected. The nearest8filter prototype reproduces its independent candidate
+but worsens024 (11.2045→11.4356RGB8), so no sampling patch is adopted from it.
+A separately frozen three-frame constant-field blur control is the next boundary
+test, distinguishing old warp blur from fresh composite blur.
+
+At the user's request, confirmed AAR defects get separate engineering documents
+in Downloads. The first is shader literal round-trip loss: the native translator
+uses six significant digits, changing1.0000001192092896 to1. One controlled AAR
+frame matches the emitted-literal prediction(64,96,0), while authored float32
+semantics predict(128,96,0). The95-preset/99-literal AST inventory proves emission
+changes but not each preset's visual impact. The predictor already honors actual
+`renderer_literal`, so this is an engine authored-semantics handoff, not a newly
+unmodeled predictor gap. Evidence:
+`tools/milk-analyzer/fixtures/native-literal-roundtrip-defect-2026-10-06.json`.

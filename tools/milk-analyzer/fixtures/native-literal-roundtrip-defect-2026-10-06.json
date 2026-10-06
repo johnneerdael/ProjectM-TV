@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "purpose": "ConfirmedProjectM-TVAARauthor-literalroundtripdefect;predictoralreadymodelsemittedliteral",
+  "reference_release": "2.3.8",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "native_sha256": "a46f190829d636c08d6a0fdd48bc6db970b6381d834eccd2e5f47948c838cbb2",
+  "native_rgb8": [
+    64,
+    96,
+    0
+  ],
+  "authored_float32_rgb8": [
+    128,
+    96,
+    0
+  ],
+  "control_result": {
+    "scope": "oneframe nativeAARengine authorliteralsemantics test;not predictorbug/newfreshcase",
+    "reference_release": "2.3.8",
+    "observed_rgb8_counts": {
+      "(64, 96, 0)": 36864
+    },
+    "candidate_comparisons": [
+      {
+        "candidate": "author-float32-literals",
+        "expected_rgb8": [
+          128,
+          96,
+          0
+        ],
+        "exact_match": false,
+        "mean_rgb8_mae": 21.333333333333332,
+        "max_rgb8_error": 64
+      },
+      {
+        "candidate": "actual-six-significant-digit-generated-literals",
+        "expected_rgb8": [
+          64,
+          96,
+          0
+        ],
+        "exact_match": true,
+        "mean_rgb8_mae": 0.0,
+        "max_rgb8_error": 0
+      }
+    ],
+    "native_pixel_sha256": "2f4f540e783fcdb105a0f641ceb8509c9f8d63f1661caed04033e88326388774",
+    "prediction_seal_sha256": "f795b30bc651abb3175f9e62f5ac0d0243df8ff805812c521f6f7b97b717cd93",
+    "actual_parser_proof_sha256": "4862d899cfbc6e7e999ecf3aa5041056408d17cc8b699c587adb17a04a122024",
+    "captured_shader_errors": [],
+    "known_target_model_contract": "NativeReader exportsrenderer_literal;ShaderFields honorsit. No source/predictorfix requested.",
+    "fallback_discriminator": "NativeG96 requiresnonzeroWarp.375 contribution;R64 compoffsetcannotbereplicatedbyemptyblackwarp/defaultpass alone. DirectJNIshaderhandlesnotexposed.",
+    "limits": [
+      "Confirms thiscontrolledliteral value-loss/outcome;doesnotclaimalllexicalcandidatepresetsreachaffectedexpressions",
+      "Authorexpectationandemittedtargetbehaviorareseparatemodels",
+      "No performance/crash/generalvisualaccuracy claim"
+    ],
+    "completed_utc": "2026-10-06T01:21:06.948187+00:00",
+    "metadata": {
+      "backend": "published-core-jni",
+      "core_version": "4.1.7",
+      "preset": "literal-roundtrip-control238.milk",
+      "frames": 1,
+      "width": 256,
+      "height": 144,
+      "fps": 30,
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "simulated_clock": true,
+      "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "gl_vendor": "Google (Apple)",
+      "egl_version_major": 1,
+      "egl_version_minor": 0,
+      "mesh_width": 48,
+      "mesh_height": 32,
+      "pcm_sample_rate": 44100,
+      "pcm_channels": 1,
+      "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+      "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+      "rendered_frame_serial_initial": 0,
+      "rendered_frame_serial": 1,
+      "rendered_frame_serial_delta": 1,
+      "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+      "skipped_count": 0,
+      "indexed_count": 1
+    },
+    "transport_header": {
+      "width": 256,
+      "height": 144,
+      "frames": 1,
+      "fps": 30,
+      "pid": 2791
+    },
+    "source_emission_proof": "Actual43 AST preservescoefficient0x3f800001 thenrenderer_literal/generatedGLSL writesfloat(1). Sourceformatterdefault6significantdigits demonstratedbeforeGPU;nativecontrol matchesemissionsemantics. Knownpredictorcontractalreadymodelsrenderer_literal."
+  },
+  "native_pixels_sha256": "2f4f540e783fcdb105a0f641ceb8509c9f8d63f1661caed04033e88326388774",
+  "final_seal_sha256": "eb6d5e715ad4a924d69de39b42a81fa8f2add72aa69ceaac37404a5dff736c6f",
+  "ast_inventory_count": 95,
+  "ast_literal_count": 99,
+  "inventory_sha256": "85f541b90dbbedfcf626220ef76d0dec2adf53e7948849ca4df1f5daf8c74ab0",
+  "handoff_path": "/Users/jneerdael/Downloads/projectm-tv-aar-engineering-issues-2026-10-06/shader-float-literal-roundtrip.md",
+  "limitations": [
+    "Realpresetreachability/visualimpactnotvalidated",
+    "CompilerliteralalreadyhonoredbyShaderFields;notcauseclaimedforRound005feedback",
+    "Enginepatchisdelegatedtoengineer,nopreset/nativeSOeditedhere"
+  ]
+}
