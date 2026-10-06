@@ -24,3 +24,11 @@ The cited vcpkg comment explains that stb_image implementation macros produce ou
 ## Verification and completion
 
 Keep existing functional controls for shader translation, numerical render output, custom-waveform bounds, random texture identity, Native feedback/geometry and JNI ownership. Add focused regression coverage for migration-specific loader/resource changes. Run patch application, host and sanitizer native suites, JVM tests, both Android ABIs, release APK/AAR and strict MkDocs checks. Compare before/after rendering and lifecycle on an available awake TV without waking it remotely. Verify Milkbeat compatibility. Obtain completed Codex review for the final PR head, required CI, merge into main, and verify the automated publication/update results. Record unavailable prerequisites honestly and keep the task open when a required gate is unproven.
+
+## User clarification: full library and released baseline
+
+The authoritative baseline is the latest released ProjectM TV core AAR, not stock libprojectM and not an instrumented rebuild. Verified on 2026-10-06: v2.3.11, source `b1bb994dbfaa04159630570cd9b2c255b173a6bd`, AAR SHA256 `3bc37560a87000ec7ac446895fee8ad09e93b5c83a601014b5fc396bd1f3e6d6`, checked against GitHub asset digest and release checksums. Freeze this artifact; record any later baseline change explicitly.
+
+Evaluate all 44 historical patches and their affected or potentially affected presets across the full 9,606-preset inventory. Static candidates are not visual certification; resource/lifecycle changes can affect the whole inventory. Exact fidelity is required for all presets. The previous four-witness/32-job instrumented ProjectM TV source comparison is supplementary and does not establish unchanged released-AAR fidelity or whole-corpus coverage.
+
+Build private workers embedding unchanged released baseline and candidate AAR bytes and verify packaged library/asset identity. The released JNI lacks deterministic seed/initial-clock controls. Keep unchanged-AAR runtime evidence separate from source-instrumented deterministic diagnostics; the user measurement-criterion clarification is pending. Do not silently relax exact fidelity, label untested presets verified, or proceed to readiness/merge before the expanded gate is satisfied.
