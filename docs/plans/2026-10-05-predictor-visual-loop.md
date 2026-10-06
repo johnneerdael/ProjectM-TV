@@ -326,3 +326,21 @@ Native custom shaders declare highpfloat but default sampler2D precision, and
 blur/primitive fragment shaders declare mediumpfloat. Their actual precision
 must be measured with bounded controls, not assumed from the qualifiers alone.
 No native patch, full-corpus render or production collection change is requested.
+
+## Bounded precision controls and UNORM repair
+
+The uniform sampler-return control rejects the tested float16-return hypothesis:
+the captured two-frame output matches float32 exactly. The driver's low/medium/
+high float capability reports all advertise23bits; that is not proof about every
+instruction. Independent UV probes favor8-bit polygon coordinates over4, but
+neither separate raster4 nor raster8 diagnostic repairs cases023/024. Preserve
+those negative results instead of treating a grid choice as a demonstrated fix.
+
+A60-frame uniform half-byte conversion control exposes a genuine source bug:
+float32 scaling prematurely rounds the represented value onto a halfway boundary.
+Preserve the float32 input value, scale/round in float64 and return normalized
+float32. The repaired conversion matches all native control pixels; original
+predictions remain unchanged. Case023 meanRGB8error changes36.1358→36.1301;
+case024 changes11.4269→11.2045, retaining large feedback/trajectory errors.
+This is a correct small repair, not a complete explanation of the failed batch.
+Evidence: `tools/milk-analyzer/fixtures/visual-loop-unorm-conversion-repair-2026-10-06.json`.

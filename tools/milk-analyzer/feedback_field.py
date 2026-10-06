@@ -89,10 +89,14 @@ def affine_main_transfer(expression:Field,*,inputs=None)->AffineTransfer|None:
 
 
 def unorm8(value):
-    """Declared nearest 8-bit normalized storage; GPU dithering may differ1LSB."""
+    """Round represented float32 inputs to UNORM8 without premature product rounding.
+
+    Nearest-even remains the mathematical contract; native exact halfway ties
+    and dithering are not universally verified.
+    """
     array=np.asarray(value,dtype=np.float32)
     if not np.all(np.isfinite(array)):raise ValueError('nonfinite framebuffer output')
-    return np.rint(np.clip(array,0,1)*255)/np.float32(255)
+    return (np.rint(np.clip(array,0,1).astype(np.float64)*255)/255).astype(np.float32)
 
 
 def apply_affine_transfer(previous,sampling_uv,transfer:AffineTransfer,*,wrap:bool,quantize:bool=True):

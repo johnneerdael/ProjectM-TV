@@ -1,0 +1,1282 @@
+{
+  "schema_version": 1,
+  "purpose": "Correct source UNORM conversion without premature float32-product rounding; bounded native controls, not full appearance certification.",
+  "reference_release": "2.3.8",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "native_sha256": "a46f190829d636c08d6a0fdd48bc6db970b6381d834eccd2e5f47948c838cbb2",
+  "control_source": "MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=2\nPSVERSION_COMP=2\n[preset00]\nfGammaAdj=1\nfVideoEchoAlpha=0\nfWaveAlpha=0\nob_a=0\nib_a=0\nmv_a=0\nshapecode_0_enabled=0\nshapecode_1_enabled=0\nshapecode_2_enabled=0\nshapecode_3_enabled=0\nwavecode_0_enabled=0\nwavecode_1_enabled=0\nwavecode_2_enabled=0\nwavecode_3_enabled=0\nper_frame_1=q1=frame;\nwarp_1=`shader_body {ret=float3(q1+.5,q1+.25,q1+.75)/255.0;}\ncomp_1=`shader_body {ret=tex2D(sampler_pw_main,uv).xyz;}\n",
+  "pre_capture_seal": {
+    "reference_frames_seen": false,
+    "frozen_utc": "2026-10-06T00:14:11.259220+00:00",
+    "files": {
+      "unorm-rounding238.milk": "99605059ed0863ecf0b9636bc73f343ec3d6dfb0956c2244c69e68880ac6416a",
+      "float32-division__float32-product-ties-even.rgb.u8": "64df0c602ec12c8d03657f17bcf36fedbc832fd453c6cdba5514dca9ba1e9967",
+      "selection.apk": "83c54eb8c2c2ad32674594f24e006dce7366d2b6c1a4023667e417e5ae56a343",
+      "float32-reciprocal-multiply__exact-float32-value-times255-in-f64-ties-even.rgb.u8": "c36de9133b04199ef3e4d95324879739c70d093339dae17a5767d7597b97b227",
+      "float32-division__exact-float32-value-times255-in-f64-ties-even.rgb.u8": "c36de9133b04199ef3e4d95324879739c70d093339dae17a5767d7597b97b227",
+      "manifest.json": "40991605f492be3d7a2b4f4f9a14c09a31f77398fd47e547e89e81add0708477",
+      "float32-reciprocal-multiply__float32-product-ties-even.rgb.u8": "91256a2e483b01acf2b8a855909f5751f3b6df68a7808cfb0f46a94c3bd3dbe9",
+      "input60-zero.f32": "19f0212a2c85ff556ebeb0e7ec8d5ac64299145a606f207ac650c4aab24bf73c"
+    }
+  },
+  "result": {
+    "scope": "60frame uniformUNORM8 stageinput/output test;notfreshgate",
+    "actual_all60_spatially_uniform": true,
+    "actual_rgb8_per_frame": [
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        2,
+        1,
+        2
+      ],
+      [
+        3,
+        2,
+        3
+      ],
+      [
+        4,
+        3,
+        4
+      ],
+      [
+        5,
+        4,
+        5
+      ],
+      [
+        6,
+        5,
+        6
+      ],
+      [
+        7,
+        6,
+        7
+      ],
+      [
+        8,
+        7,
+        8
+      ],
+      [
+        9,
+        8,
+        9
+      ],
+      [
+        10,
+        9,
+        10
+      ],
+      [
+        11,
+        10,
+        11
+      ],
+      [
+        12,
+        11,
+        12
+      ],
+      [
+        13,
+        12,
+        13
+      ],
+      [
+        14,
+        13,
+        14
+      ],
+      [
+        15,
+        14,
+        15
+      ],
+      [
+        16,
+        15,
+        16
+      ],
+      [
+        17,
+        16,
+        17
+      ],
+      [
+        18,
+        17,
+        18
+      ],
+      [
+        19,
+        18,
+        19
+      ],
+      [
+        20,
+        19,
+        20
+      ],
+      [
+        21,
+        20,
+        21
+      ],
+      [
+        22,
+        21,
+        22
+      ],
+      [
+        23,
+        22,
+        23
+      ],
+      [
+        24,
+        23,
+        24
+      ],
+      [
+        25,
+        24,
+        25
+      ],
+      [
+        26,
+        25,
+        26
+      ],
+      [
+        27,
+        26,
+        27
+      ],
+      [
+        28,
+        27,
+        28
+      ],
+      [
+        29,
+        28,
+        29
+      ],
+      [
+        30,
+        29,
+        30
+      ],
+      [
+        31,
+        30,
+        31
+      ],
+      [
+        32,
+        31,
+        32
+      ],
+      [
+        33,
+        32,
+        33
+      ],
+      [
+        34,
+        33,
+        34
+      ],
+      [
+        35,
+        34,
+        35
+      ],
+      [
+        36,
+        35,
+        36
+      ],
+      [
+        37,
+        36,
+        37
+      ],
+      [
+        38,
+        37,
+        38
+      ],
+      [
+        39,
+        38,
+        39
+      ],
+      [
+        40,
+        39,
+        40
+      ],
+      [
+        41,
+        40,
+        41
+      ],
+      [
+        42,
+        41,
+        42
+      ],
+      [
+        43,
+        42,
+        43
+      ],
+      [
+        44,
+        43,
+        44
+      ],
+      [
+        45,
+        44,
+        45
+      ],
+      [
+        46,
+        45,
+        46
+      ],
+      [
+        47,
+        46,
+        47
+      ],
+      [
+        48,
+        47,
+        48
+      ],
+      [
+        49,
+        48,
+        49
+      ],
+      [
+        50,
+        49,
+        50
+      ],
+      [
+        51,
+        50,
+        51
+      ],
+      [
+        52,
+        51,
+        52
+      ],
+      [
+        53,
+        52,
+        53
+      ],
+      [
+        54,
+        53,
+        54
+      ],
+      [
+        55,
+        54,
+        55
+      ],
+      [
+        56,
+        55,
+        56
+      ],
+      [
+        57,
+        56,
+        57
+      ],
+      [
+        58,
+        57,
+        58
+      ],
+      [
+        59,
+        58,
+        59
+      ],
+      [
+        60,
+        59,
+        60
+      ]
+    ],
+    "candidate_comparisons": [
+      {
+        "candidate": "float32-division__float32-product-ties-even",
+        "exact_match": false,
+        "mismatch_frames": [
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          15,
+          17,
+          19,
+          21,
+          23,
+          25,
+          27,
+          29,
+          31,
+          33,
+          35,
+          37,
+          39,
+          41,
+          43,
+          45,
+          47,
+          49,
+          51,
+          53,
+          55,
+          57,
+          59
+        ],
+        "mismatches": [
+          {
+            "frame": 1,
+            "equation_frame": 0,
+            "expected": [
+              0,
+              0,
+              1
+            ],
+            "actual": [
+              1,
+              0,
+              1
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 3,
+            "equation_frame": 2,
+            "expected": [
+              2,
+              2,
+              3
+            ],
+            "actual": [
+              3,
+              2,
+              3
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 5,
+            "equation_frame": 4,
+            "expected": [
+              4,
+              4,
+              5
+            ],
+            "actual": [
+              5,
+              4,
+              5
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 7,
+            "equation_frame": 6,
+            "expected": [
+              6,
+              6,
+              7
+            ],
+            "actual": [
+              7,
+              6,
+              7
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 9,
+            "equation_frame": 8,
+            "expected": [
+              8,
+              8,
+              9
+            ],
+            "actual": [
+              9,
+              8,
+              9
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 11,
+            "equation_frame": 10,
+            "expected": [
+              10,
+              10,
+              11
+            ],
+            "actual": [
+              11,
+              10,
+              11
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 13,
+            "equation_frame": 12,
+            "expected": [
+              12,
+              12,
+              13
+            ],
+            "actual": [
+              13,
+              12,
+              13
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 15,
+            "equation_frame": 14,
+            "expected": [
+              14,
+              14,
+              15
+            ],
+            "actual": [
+              15,
+              14,
+              15
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 17,
+            "equation_frame": 16,
+            "expected": [
+              16,
+              16,
+              17
+            ],
+            "actual": [
+              17,
+              16,
+              17
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 19,
+            "equation_frame": 18,
+            "expected": [
+              18,
+              18,
+              19
+            ],
+            "actual": [
+              19,
+              18,
+              19
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 21,
+            "equation_frame": 20,
+            "expected": [
+              20,
+              20,
+              21
+            ],
+            "actual": [
+              21,
+              20,
+              21
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 23,
+            "equation_frame": 22,
+            "expected": [
+              22,
+              22,
+              23
+            ],
+            "actual": [
+              23,
+              22,
+              23
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 25,
+            "equation_frame": 24,
+            "expected": [
+              24,
+              24,
+              25
+            ],
+            "actual": [
+              25,
+              24,
+              25
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 27,
+            "equation_frame": 26,
+            "expected": [
+              26,
+              26,
+              27
+            ],
+            "actual": [
+              27,
+              26,
+              27
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 29,
+            "equation_frame": 28,
+            "expected": [
+              28,
+              28,
+              29
+            ],
+            "actual": [
+              29,
+              28,
+              29
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 31,
+            "equation_frame": 30,
+            "expected": [
+              30,
+              30,
+              31
+            ],
+            "actual": [
+              31,
+              30,
+              31
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 33,
+            "equation_frame": 32,
+            "expected": [
+              32,
+              32,
+              33
+            ],
+            "actual": [
+              33,
+              32,
+              33
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 35,
+            "equation_frame": 34,
+            "expected": [
+              34,
+              34,
+              35
+            ],
+            "actual": [
+              35,
+              34,
+              35
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 37,
+            "equation_frame": 36,
+            "expected": [
+              36,
+              36,
+              37
+            ],
+            "actual": [
+              37,
+              36,
+              37
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 39,
+            "equation_frame": 38,
+            "expected": [
+              38,
+              38,
+              39
+            ],
+            "actual": [
+              39,
+              38,
+              39
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 41,
+            "equation_frame": 40,
+            "expected": [
+              40,
+              40,
+              41
+            ],
+            "actual": [
+              41,
+              40,
+              41
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 43,
+            "equation_frame": 42,
+            "expected": [
+              42,
+              42,
+              43
+            ],
+            "actual": [
+              43,
+              42,
+              43
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 45,
+            "equation_frame": 44,
+            "expected": [
+              44,
+              44,
+              45
+            ],
+            "actual": [
+              45,
+              44,
+              45
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 47,
+            "equation_frame": 46,
+            "expected": [
+              46,
+              46,
+              47
+            ],
+            "actual": [
+              47,
+              46,
+              47
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 49,
+            "equation_frame": 48,
+            "expected": [
+              48,
+              48,
+              49
+            ],
+            "actual": [
+              49,
+              48,
+              49
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 51,
+            "equation_frame": 50,
+            "expected": [
+              50,
+              50,
+              51
+            ],
+            "actual": [
+              51,
+              50,
+              51
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 53,
+            "equation_frame": 52,
+            "expected": [
+              52,
+              52,
+              53
+            ],
+            "actual": [
+              53,
+              52,
+              53
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 55,
+            "equation_frame": 54,
+            "expected": [
+              54,
+              54,
+              55
+            ],
+            "actual": [
+              55,
+              54,
+              55
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 57,
+            "equation_frame": 56,
+            "expected": [
+              56,
+              56,
+              57
+            ],
+            "actual": [
+              57,
+              56,
+              57
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 59,
+            "equation_frame": 58,
+            "expected": [
+              58,
+              58,
+              59
+            ],
+            "actual": [
+              59,
+              58,
+              59
+            ],
+            "channels": [
+              "R"
+            ]
+          }
+        ],
+        "mean_rgb8_mae": 0.16666666666666666,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "candidate": "float32-division__exact-float32-value-times255-in-f64-ties-even",
+        "exact_match": true,
+        "mismatch_frames": [],
+        "mismatches": [],
+        "mean_rgb8_mae": 0.0,
+        "maximum_rgb8_error": 0
+      },
+      {
+        "candidate": "float32-reciprocal-multiply__float32-product-ties-even",
+        "exact_match": false,
+        "mismatch_frames": [
+          1,
+          3,
+          5,
+          9,
+          11,
+          17,
+          19,
+          21,
+          23,
+          33,
+          35,
+          37,
+          39,
+          41,
+          43,
+          45,
+          47
+        ],
+        "mismatches": [
+          {
+            "frame": 1,
+            "equation_frame": 0,
+            "expected": [
+              0,
+              0,
+              1
+            ],
+            "actual": [
+              1,
+              0,
+              1
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 3,
+            "equation_frame": 2,
+            "expected": [
+              2,
+              2,
+              3
+            ],
+            "actual": [
+              3,
+              2,
+              3
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 5,
+            "equation_frame": 4,
+            "expected": [
+              4,
+              4,
+              5
+            ],
+            "actual": [
+              5,
+              4,
+              5
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 9,
+            "equation_frame": 8,
+            "expected": [
+              8,
+              8,
+              9
+            ],
+            "actual": [
+              9,
+              8,
+              9
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 11,
+            "equation_frame": 10,
+            "expected": [
+              10,
+              10,
+              11
+            ],
+            "actual": [
+              11,
+              10,
+              11
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 17,
+            "equation_frame": 16,
+            "expected": [
+              16,
+              16,
+              17
+            ],
+            "actual": [
+              17,
+              16,
+              17
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 19,
+            "equation_frame": 18,
+            "expected": [
+              18,
+              18,
+              19
+            ],
+            "actual": [
+              19,
+              18,
+              19
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 21,
+            "equation_frame": 20,
+            "expected": [
+              20,
+              20,
+              21
+            ],
+            "actual": [
+              21,
+              20,
+              21
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 23,
+            "equation_frame": 22,
+            "expected": [
+              22,
+              22,
+              23
+            ],
+            "actual": [
+              23,
+              22,
+              23
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 33,
+            "equation_frame": 32,
+            "expected": [
+              32,
+              32,
+              33
+            ],
+            "actual": [
+              33,
+              32,
+              33
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 35,
+            "equation_frame": 34,
+            "expected": [
+              34,
+              34,
+              35
+            ],
+            "actual": [
+              35,
+              34,
+              35
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 37,
+            "equation_frame": 36,
+            "expected": [
+              36,
+              36,
+              37
+            ],
+            "actual": [
+              37,
+              36,
+              37
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 39,
+            "equation_frame": 38,
+            "expected": [
+              38,
+              38,
+              39
+            ],
+            "actual": [
+              39,
+              38,
+              39
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 41,
+            "equation_frame": 40,
+            "expected": [
+              40,
+              40,
+              41
+            ],
+            "actual": [
+              41,
+              40,
+              41
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 43,
+            "equation_frame": 42,
+            "expected": [
+              42,
+              42,
+              43
+            ],
+            "actual": [
+              43,
+              42,
+              43
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 45,
+            "equation_frame": 44,
+            "expected": [
+              44,
+              44,
+              45
+            ],
+            "actual": [
+              45,
+              44,
+              45
+            ],
+            "channels": [
+              "R"
+            ]
+          },
+          {
+            "frame": 47,
+            "equation_frame": 46,
+            "expected": [
+              46,
+              46,
+              47
+            ],
+            "actual": [
+              47,
+              46,
+              47
+            ],
+            "channels": [
+              "R"
+            ]
+          }
+        ],
+        "mean_rgb8_mae": 0.09444444444444444,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "candidate": "float32-reciprocal-multiply__exact-float32-value-times255-in-f64-ties-even",
+        "exact_match": true,
+        "mismatch_frames": [],
+        "mismatches": [],
+        "mean_rgb8_mae": 0.0,
+        "maximum_rgb8_error": 0
+      }
+    ],
+    "exact_matching_candidates": [
+      "float32-division__exact-float32-value-times255-in-f64-ties-even",
+      "float32-reciprocal-multiply__exact-float32-value-times255-in-f64-ties-even"
+    ],
+    "supports": "Candidate-specific rounding evidence only; no sampled-value fitting. Compiler arithmetic and UNORMconversion jointly tested; integer point-samplecomposite transfer is byte-stable inthiscontrol.",
+    "dither_limit": "No within-frame variation detected for these60inputs; fresh-contextDITHER=true query doesnotestablish core-drawstate or ruleoutditherforother values.",
+    "native_pixel_sha256": "c36de9133b04199ef3e4d95324879739c70d093339dae17a5767d7597b97b227",
+    "prediction_seal_sha256": "18b591f1271c21b0187e0530732cd4e23f57a731734830c60e87177763477ebf",
+    "shader_program_choice_limit": "unknownbydirectJNI;outputstrongbutperstagefallbacknotexposed"
+  },
+  "implementation_check": {
+    "scope": "Existing frozen native238capture compared with implemented UNORM8 conversion; no native/device rerender; no freshgrade",
+    "feedback_field_sha256": "db25176d26e619ac7d952fbdb96110bac200768bab75359509c475f63e464288",
+    "native_sha256": "c36de9133b04199ef3e4d95324879739c70d093339dae17a5767d7597b97b227",
+    "candidates": [
+      {
+        "candidate": "f32-division",
+        "all60_pixels_exact": true,
+        "different_pixels": 0,
+        "max_error_rgb8": 0,
+        "pixels_sha256": "c36de9133b04199ef3e4d95324879739c70d093339dae17a5767d7597b97b227"
+      },
+      {
+        "candidate": "f32-reciprocal-multiply",
+        "all60_pixels_exact": true,
+        "different_pixels": 0,
+        "max_error_rgb8": 0,
+        "pixels_sha256": "c36de9133b04199ef3e4d95324879739c70d093339dae17a5767d7597b97b227"
+      }
+    ],
+    "limits": "Shown uniform represented-f32 conversion values only; no universal halfway tie/dither proof; doesnotrepaircase024byitself"
+  },
+  "raw_native_pixels_sha256": "c36de9133b04199ef3e4d95324879739c70d093339dae17a5767d7597b97b227",
+  "changes": [
+    "Preserve float32 input narrowing; promote that represented value to float64 for scaling and nearest-even conversion; return float32 normalized storage."
+  ],
+  "limitations": [
+    "Exact mathematical-halfway hardware tie policy remains unverified.",
+    "No spatial dither was observed for these uniform inputs; other states/drivers remain outside this control.",
+    "Original005gradesunchanged; full23/24replays stillmissfeedback. Realconversionbugrepaired, notcompleteappearance."
+  ],
+  "full60_diagnostic_effect": {
+    "23": {
+      "round005": {
+        "mean_rgb8_error": 36.13581603250386,
+        "max_rgb8_error": 255,
+        "frame60_mean": 3.858425564236111,
+        "prediction_sha256": "16167b0c38262f6160d31431e80f77254dd8be339c5e3d082fb304b1c08727d5"
+      },
+      "unorm-repair-60": {
+        "mean_rgb8_error": 36.13008113908179,
+        "max_rgb8_error": 255,
+        "frame60_mean": 3.8569878472222223,
+        "prediction_sha256": "52f37ea67e49dc35f76077dc068446a932d5b5bf65538f00f899055bc0d32c44"
+      }
+    },
+    "24": {
+      "round005": {
+        "mean_rgb8_error": 11.426903392650463,
+        "max_rgb8_error": 255,
+        "frame60_mean": 11.689154730902779,
+        "prediction_sha256": "8d2dc741ca1aaf316dffa5c758f149c4d42bff294b37ceadb4af733e4de73d81"
+      },
+      "unorm-repair-60": {
+        "mean_rgb8_error": 11.204503490306713,
+        "max_rgb8_error": 255,
+        "frame60_mean": 11.965368200231481,
+        "prediction_sha256": "40d84f2a457a261b0db4c3596e627d9de6bd0642163d54623f2a234066f5b7f2"
+      }
+    }
+  }
+}

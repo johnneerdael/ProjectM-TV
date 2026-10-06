@@ -342,6 +342,16 @@ engine policy, source backend and runtime namespace, with the new release label
 recorded for fresh rows. Do not relabel earlier controls. The download and source
 equivalence are in `fixtures/visual-loop-release238-equivalence-2026-10-06.json`.
 
+Framebuffer conversion preserves the represented float32 shader value when
+scaling to UNORM8. A float32 intermediate product can incorrectly round a value
+just above a half-byte boundary back onto the boundary. Scaling in float64
+avoids that extra rounding, then returns normalized float32 storage. An
+independently frozen 60-frame AAR control matches all pixels under this rule;
+the previous rule misses one channel in 30 frames. Native exact-halfway tie
+handling and other dithering states remain unverified. This correction does not
+by itself certify feedback-sensitive presets. See
+`fixtures/visual-loop-unorm-conversion-repair-2026-10-06.json`.
+
 A frozen curved-line native control agrees within one RGB8 level over 60 frames.
 The full case 012 diagnostic now matches coherent flash counts (one brightening,
 zero darkening) and predicts peak brightness jump 0.8194 versus native 0.8207.
