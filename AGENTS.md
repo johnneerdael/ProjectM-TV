@@ -69,6 +69,10 @@ uses equation FPS35 through image30, then30. Point-grid precision is an explicit
 renderer input; the verified Apple emulator grid must not be generalized to other
 GPUs. Patch0043 preserves authored geometry in Native trails, but the source
 forecaster still rejects its unmodeled high-resolution/detail path.
+Verified41/42/43-patch source identities default to the patched main-sampler
+binding order (unqualified main on unit0); unknown identities retain legacy order.
+Keep the requested domain/hash unchanged and record the effective policy in
+provenance. Explicit legacy policy is for labeled historical/diagnostic controls.
 Do not claim the entire imported analyzer suite passes from focused controls alone.
 See the analyzer README and `docs/plans/2026-10-05-predictor-visual-loop.md`.
 

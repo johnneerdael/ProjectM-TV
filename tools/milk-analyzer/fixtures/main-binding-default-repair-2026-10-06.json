@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "purpose": "Repair historical sampler defaults under verified patched source identities",
+  "component": "Source predictor and experimental driver; not an AAR defect",
+  "reference_release": "2.3.8",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "native_library_sha256": "a46f190829d636c08d6a0fdd48bc6db970b6381d834eccd2e5f47948c838cbb2",
+  "preset": "TonyMilkdrop - Blood In Me --- Isosceles edit2.milk",
+  "preset_sha256": "a3ee904791fd4523febcb7ef4d6553d7ca9f998c53e663a98a738e25e2c3ed00",
+  "native_reference_sha256": "a71b6700d04e5fb7cb24a1a3a3ba8f26153cb9a1e3ea5170bd45248f55ec61d2",
+  "root_cause": "The driver omitted the patched main-binding policy. Lexical order put fc_main on unit0 and left unqualified main on unit1 with repeat addressing despite bTexWrap=0.",
+  "native_contract": "Patched MilkdropShader reserves unit0 for unqualified main; PerPixelMesh applies frame wrap there, and qualified aliases retain their own modes.",
+  "diagnostic_ablations": {
+    "frozen_round005_mean_rgb8_error": 11.426903392650463,
+    "current_unorm_triangle8_with_historical_binding_mean_rgb8_error": 11.204503490306713,
+    "current_unorm_patched_binding_only_mean_rgb8_error": 3.867896110628858,
+    "current_unorm_patched_binding_and_triangle8_mean_rgb8_error": 3.867896110628858,
+    "binding_only_and_combined_pixels_identical": true,
+    "automatic_known_engine_default_and_explicit_current_policy_pixels_identical": true,
+    "corrected_prediction_sha256": "1d6c48cf402c7f429b536ad55a362b00365559f1073269e057578c88cbd4c8ee",
+    "visual_observation": "Corrected prediction retains upright late nested loops rather than the earlier horizontal eye-like structure",
+    "acceptance_credit": false,
+    "path": "build/visual-loop/case024/diagnostic-triangle8-20261006/"
+  },
+  "fix": {
+    "known_41_42_43_patch_source_identities": "Default to projectmtv-core-2.2.6-v1",
+    "unknown_source_identity": "Retain legacy-sorted-v1",
+    "explicit_historical_policy": "Retained for labeled historical or diagnostic use",
+    "requested_domain_and_hash": "Preserved",
+    "effective_policy": "Recorded in provenance.main_binding_policy"
+  },
+  "regression": {
+    "fixture": "Frame0 writes a UV gradient; frame1 samples main at negative X alongside fc_main",
+    "patched_default_red": 0.015625,
+    "explicit_historical_red": 0.9,
+    "additional_checks": ["Engine identity guards", "Unknown identities", "Invalid policy", "Requested domain/hash and effective provenance"]
+  },
+  "conversion_control": {
+    "source_manifest_sha256": "9d680f73bdbb98aa5d8ed3dbd0db16929ffcfef1d91e882d40e584427008b076",
+    "final_seal_sha256": "a5594307a28c4b2eb02564aab33fba2651dadf1089d3216dbae1e60ac276be55",
+    "native_pixels_sha256": "b9e7b2faf0505acf271b7de8d061c6f3bfbcbe87c36d8a290710d5307faa36ec",
+    "all_60_frames_match_existing_conversion_policy": true,
+    "f32_product_nearest_even_mismatched_lane_values": 28,
+    "f32_product_half_up_mismatched_lane_values": 26,
+    "scope": "Bounded highp custom-shader conversion control on the declared Apple emulator"
+  },
+  "limits": [
+    "Original frozen scores remain unchanged",
+    "Diagnostic visual improvement is not a fresh three-preset gate result",
+    "Residual raster/sampling/arithmetic errors remain",
+    "widest swing's fine feedback texture remains discrepant",
+    "No duplicate full-corpus render or shared-device work"
+  ]
+}

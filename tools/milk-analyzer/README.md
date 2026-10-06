@@ -268,6 +268,16 @@ Other explicitly supplied seeds retain the `declared-seed-v1` policy. Provenance
 records the seed and cold-thread assumption; this is not a preset-switch reset
 policy and does not fix shader/noise/image randomness.
 
+For these three verified patched source identities, an omitted
+`main_binding_policy` now resolves to `projectmtv-core-2.2.6-v1`: unqualified
+`sampler_main` occupies unit0, where the warp pass applies the preset wrap mode;
+qualified aliases retain their own filtering/wrap settings. The historical sorted
+order could instead put `sampler_fc_main` on unit0 and leave unqualified main
+wrapping, despite `bTexWrap=0`. Unknown source identities retain the historical
+default; an explicit historical policy remains available for labeled diagnostics.
+Provenance records the effective binding policy without modifying the requested
+domain or its hash. Diagnostic retests retain their original grades.
+
 A separately frozen 60-frame native control through the unchanged 2.3.4 AAR
 matched all predicted RGB8 values exactly for three equation random draws per
 frame. An independent NumPy MT19937 control also checks draw order across 33 shape

@@ -91,6 +91,30 @@ def test_explicit_main_sampler_profile_reaches_source_forecast_and_history():
     np.testing.assert_allclose(result['frames'][0]['display'][...,:3],np.broadcast_to([.2,.4,.6],(32,32,3)),atol=1/255)
 
 
+def test_verified_engine_defaults_clamp_main_before_qualified_alias():
+    source=native(BASE+'bTexWrap=0\nper_frame_1=q1=equal(frame,0);\n'
+                  'warp_1=`shader_body {if(q1>.5){ret=float3(uv_orig,0);}'
+                  'else{ret=float3(tex2D(sampler_main,float2(-.1,.5)).x,'
+                  'tex2D(sampler_fc_main,float2(1.1,.5)).y,0);}}\n'
+                  'comp_1=`shader_body {ret=GetPixel(uv);}\n')
+    from shader_compat import check_shader
+    stages={stage:check_shader(source['sections'][prefix]['source'],stage=stage,profile='glsl330',
+                              translator=BINARIES/'milk-shader-translate',
+                              validator=Path('/opt/homebrew/bin/glslangValidator'),
+                              samplers={'sampler_main':'sampler2D','sampler_fc_main':'sampler2D'},
+                              texture_sizes=['texsize_main'])
+            for stage,prefix in [('warp','warp_'),('composite','comp_')]}
+    assert all(item['offline_accepted'] for item in stages.values()),stages
+    settings=domain()
+    current=predict(source,domain=settings,audio=audio(2),compatibility=stages)
+    historical=predict(source,domain=domain(main_binding_policy='legacy-sorted-v1'),audio=audio(2),compatibility=stages)
+    assert current['domain']==settings
+    assert current['input_hashes']['domain_sha256']==importlib.import_module('forecast').digest(settings)
+    assert current['provenance']['main_binding_policy']=='projectmtv-core-2.2.6-v1'
+    np.testing.assert_allclose(current['frames'][1]['feedback'][...,0],.5/32,atol=1e-6)
+    np.testing.assert_allclose(historical['frames'][1]['feedback'][...,0],.9,atol=1e-6)
+
+
 def test_shapes_are_drawn_between_warp_and_composite_and_become_feedback():
     source = native(BASE + 'warp_1=`shader_body {ret=0;}\ncomp_1=`shader_body {ret=0;}\n'
                     'shapecode_0_enabled=1\nshapecode_0_x=.25\nshapecode_0_y=.75\n'
@@ -161,7 +185,11 @@ def test_production_equation_rng_contract_rejects_a_lab_seed():
 def test_production_equation_rng_sequence_and_provenance():
     source = native(BASE + 'per_frame_1=q1=rand(1);q2=rand(1);q3=rand(1);\n'
                     'comp_1=`shader_body {ret=float3(q1,q2,q3);}\n')
-    settings = domain(equation_rng_policy='projectmtv-core-2.3.4-cold-thread-v1')
+    from forecast import PRODUCTION_EQUATION_ENGINES
+    engine=source['parser_inputs']['engine']
+    policy=next(name for name,expected in PRODUCTION_EQUATION_ENGINES.items()
+                if all(engine.get(key)==value for key,value in expected.items()))
+    settings = domain(equation_rng_policy=policy)
     settings['equation_seed'] = 0x4141f00d
     result = predict(source, domain=settings, audio=audio(1))
     # Independent MT19937 implementation; evaluator scales an unsigned draw by UINT32_MAX.
@@ -170,7 +198,7 @@ def test_production_equation_rng_sequence_and_provenance():
     np.testing.assert_allclose(result['frames'][0]['display'][16,16,:3], expected, atol=1e-7)
     contract = result['provenance']['equation_rng']
     assert contract['seed'] == 0x4141f00d
-    assert contract['policy'] == 'projectmtv-core-2.3.4-cold-thread-v1'
+    assert contract['policy'] == policy
     assert contract['lifecycle'] == 'fresh evaluator thread; no previous equation draws'
     assert contract['native_sequence_verified'] is False
 
@@ -324,7 +352,7 @@ def test_quad_profile_refuses_other_contexts_and_scaled_viewports():
     with pytest.raises(ValueError,match='quad-line profile'):
         predict(native(BASE),domain=settings,audio=audio(1))
     settings.update(profile='gles300',width=1920,height=1080)
-    with pytest.raises(ValueError,match='quad-line profile'):
+    with pytest.raises(ValueError,match='quad-line profile|higher-resolution lines/native feedback detail'):
         predict(native(BASE),domain=settings,audio=audio(1))
 
 

@@ -420,3 +420,25 @@ bounded control directly writes float32 neighbors of half-byte boundaries throug
 Q uniforms, separating output conversion from texture filtering. Its60-frame inputs
 and three candidates were frozen before capture; the patched source evaluator
 independently confirms all180 Q-component float32 bits.
+
+That conversion control matches the existing represented-float32/exact-scale
+policy at every pixel of all60 frames. Both float32-product alternatives fail,
+so no conversion repair is adopted.
+
+A full failed-case diagnostic exposed a larger configuration error: the driver
+omitted the patched main-binding policy and inherited historical lexical order.
+For Blood In Me, this leaves unqualified main wrapping despite `bTexWrap=0`.
+Correct policy alone reduces mean RGB8 error from11.4269 to3.86790 and restores
+the upright late nested-loop geometry. Triangle8 alone reaches11.2045; combining
+it with correct binding is byte-identical to binding alone for this case.
+The source forecaster now selects the verified41/42/43-patch engine contract by
+default. Unknown engines and explicit historical diagnostic requests keep their
+separate behavior. Effective policy is recorded without changing caller domain
+or domain hash. Original frozen grades are unchanged; these are diagnostic
+results, not a new three-preset gate pass. Wider shader arithmetic/feedback gaps
+remain, including widest swing's fine retained texture pattern.
+
+Documentation assessment: this changes the experimental source predictor only,
+not the shipped collections or app configuration. Maintain the analyzer README,
+this research plan and AGENTS guidance; no new user-facing app claims or release
+version changes are introduced.

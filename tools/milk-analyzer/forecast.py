@@ -50,6 +50,22 @@ PRODUCTION_EQUATION_ENGINES = {
 }
 
 
+def source_main_binding_policy(engine: dict, requested: str | None) -> str:
+    """Use the verified engine's unit-zero contract unless explicitly overridden.
+
+    Unknown sources retain the historical default. An explicit historical policy
+    remains available for labeled diagnostics, not current-AAR certification.
+    """
+    if requested is not None:
+        if requested not in {'legacy-sorted-v1','projectmtv-core-2.2.6-v1'}:
+            raise ValueError('unsupported main binding policy')
+        return requested
+    if any(all(engine.get(key)==value for key,value in expected.items())
+           for expected in PRODUCTION_EQUATION_ENGINES.values()):
+        return 'projectmtv-core-2.2.6-v1'
+    return 'legacy-sorted-v1'
+
+
 def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
 
@@ -94,6 +110,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if production_engine is not None and domain['equation_seed'] != PRODUCTION_EQUATION_SEED:
         raise ValueError('production equation RNG seed must be 0x4141f00d')
     engine = source.get('parser_inputs', {}).get('engine', {})
+    main_binding_policy=source_main_binding_policy(engine,domain.get('main_binding_policy'))
     if production_engine is not None:
         if any(engine.get(key) != value for key, value in production_engine.items()):
             raise ValueError('production equation RNG engine identity mismatch')
@@ -137,7 +154,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     warp_reads_blur = 'blur' in warp_code.lower()
     pipeline = SourcePipeline.from_source(source, profile=domain['profile'], compatibility=compatibility,
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'),
-        main_binding_policy=domain.get('main_binding_policy','legacy-sorted-v1'),
+        main_binding_policy=main_binding_policy,
         initial_feedback=initial, warp_reads_blur=warp_reads_blur, blur_levels=domain['blur_levels'],
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
@@ -251,6 +268,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                           random_sha256=None if random_inputs is None else digest(random_inputs),
                           materials_sha256=None if texture_bank is None else digest(texture_bank.manifest)),
         provenance=dict(reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
+                        main_binding_policy=main_binding_policy,
                         render_context_source_sha256=builtin['render_context_source_sha256'],
                         render_context_time_bits=builtin['render_context_time_bits'],
                         engine_archive_sha256=archive,model_sha256=digest(model_hashes),model_modules=model_hashes,
