@@ -514,3 +514,11 @@ frames;308result files were sealed. Case042 lost five points for speed estimates
 outside5%, despite matched geometry; late046 and sparse041/042pixel residuals remain.
 These are operational behavioural grades, not pixel identity or calibrated probabilities.
 The randomized100-preset audit and final reviewed integration remain required.
+
+The source44 profile is bound separately to published2.3.10 (commitfa18cbab):
+`projectmtv-core-2.3.10-cold-thread-v1`, patch digest545ca48a. Main binding and shape
+sampler ownership retain the43-patch contract; higher-resolution/native-detail paths
+remain rejected. Actual source44 forecasting reproduces the fixed literal control,
+and two unchanged-AAR one-frame controls match frozen RGB exactly. CPU source44
+PCM/FFT arrays match all60 source43 frames; artifact identities remain distinct.
+The100-preset audit uses the latest published AAR and its matching source adapters.

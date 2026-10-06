@@ -42,12 +42,20 @@ CORE_237_EQUATION_ENGINE = {
     'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
     'patches_sha256': 'd70f5b5ec3f3c0b4da764cb824153f142b88e17e27c2e9e71d2b481c19998c7d',
 }
+CORE_2310_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.10-cold-thread-v1'
+CORE_2310_EQUATION_ENGINE = {
+    'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
+    'patches_sha256': '545ca48adad787f963f9b29c1fc4fd7e8a71fb910f586c8747f96a075d130ddf',
+}
+# Patch0044 changes literal formatting; equation RNG and sampler ownership
+# retain the verified43-patch contracts. Keep44 as a distinct source identity.
 # Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
 # the equation RNG's cold-thread seed remains unchanged.
 PRODUCTION_EQUATION_ENGINES = {
     PRODUCTION_EQUATION_RNG_POLICY: PRODUCTION_EQUATION_ENGINE,
     CORE_235_EQUATION_RNG_POLICY: CORE_235_EQUATION_ENGINE,
     CORE_237_EQUATION_RNG_POLICY: CORE_237_EQUATION_ENGINE,
+    CORE_2310_EQUATION_RNG_POLICY: CORE_2310_EQUATION_ENGINE,
 }
 
 
@@ -68,7 +76,8 @@ def source_main_binding_policy(engine: dict, requested: str | None) -> str:
 
 
 def source_shape_sampler_policy(engine: dict, requested: str | None) -> str:
-    verified=all(engine.get(key)==value for key,value in CORE_237_EQUATION_ENGINE.items())
+    verified=any(all(engine.get(key)==value for key,value in expected.items())
+                 for expected in (CORE_237_EQUATION_ENGINE,CORE_2310_EQUATION_ENGINE))
     policy=requested if requested is not None else CORE_238_SHAPE_POLICY if verified else LEGACY_SHAPE_POLICY
     if policy not in {LEGACY_SHAPE_POLICY,CORE_238_SHAPE_POLICY}:
         raise ValueError('unsupported shape sampler policy')
@@ -128,7 +137,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             raise ValueError('production equation RNG engine identity mismatch')
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
-    for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE)]:
+    for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE),
+                              ('2.3.10',CORE_2310_EQUATION_ENGINE)]:
         # JNI enables patch 0042 only above height 1330 and changes the line reference
         # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
         if (all(engine.get(key)==value for key,value in expected.items()) and

@@ -73,7 +73,7 @@ Verified41/42/43-patch source identities default to the patched main-sampler
 binding order (unqualified main on unit0); unknown identities retain legacy order.
 Keep the requested domain/hash unchanged and record the effective policy in
 provenance. Explicit legacy policy is for labeled historical/diagnostic controls.
-The43-patch shape sampler compatibility policy models the published2.3.8 state
+The43/44-patch shape sampler compatibility policy models the published2.3.8/2.3.10 state
 leak: warp clears sampler0; first main-textured draw inherits only delayed blur
 sampler0, otherwise uses repeat/nearest. Later draws after
 unbinding use repeat/nearest attachment settings. Keep per-instance draw order,
