@@ -1,6 +1,11 @@
 #pragma once
 #include <SDL.h>
-#ifdef __APPLE__
+#if __has_include(<Renderer/Platform/GladLoader.hpp>)
+#include <Renderer/OpenGL.h>
+#include <Renderer/Platform/GLResolver.hpp>
+#include <Renderer/Platform/GladLoader.hpp>
+#define PRESET_LAB_GLAD_LOADER
+#elif defined(__APPLE__)
 #include <OpenGL/gl3.h>
 #else
 #define GL_GLEXT_PROTOTYPES
@@ -27,6 +32,13 @@ public:
         if (!window) throw std::runtime_error(SDL_GetError());
         context = SDL_GL_CreateContext(window);
         if (!context) throw std::runtime_error(SDL_GetError());
+        if (SDL_GL_MakeCurrent(window, context)) throw std::runtime_error(SDL_GetError());
+#ifdef PRESET_LAB_GLAD_LOADER
+        if (!libprojectM::Renderer::Platform::GLResolver::Instance().Initialize(nullptr, nullptr))
+            throw std::runtime_error("could not initialize GL resolver for SDL context");
+        if (!libprojectM::Renderer::Platform::GladLoader::Instance().Initialize())
+            throw std::runtime_error("could not load entry points for the available SDL GL context");
+#endif
         glGenFramebuffers(1, &framebuffer);
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);

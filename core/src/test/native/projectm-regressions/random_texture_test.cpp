@@ -7,6 +7,7 @@
 #include <MilkdropPreset/MilkdropPreset.hpp>
 #include <MilkdropPreset/FinalComposite.hpp>
 #include <Renderer/TextureManager.hpp>
+#include <Renderer/ShaderCache.hpp>
 #include <vendor/json.hpp>
 #include <filesystem>
 #include <fstream>
@@ -55,14 +56,17 @@ private:
     }
 };
 
-static void Setup(PresetState& state, TextureManager& textures)
+static void Setup(PresetState& state, TextureManager& textures, ShaderCache& shaders)
 {
     state.renderContext.textureManager = &textures;
+    state.renderContext.shaderCache = &shaders;
     state.renderContext.viewportSizeX = 16;
     state.renderContext.viewportSizeY = 16;
     state.renderContext.aspectX = state.renderContext.aspectY = 1;
     state.renderContext.invAspectX = state.renderContext.invAspectY = 1;
     state.renderContext.fps = 30;
+    state.blurTexture.Initialize(state.renderContext);
+    state.LoadShaders();
 }
 
 static GLint BoundTexture(MilkdropShader& shader, PresetState& state, const std::string& alias,
@@ -140,8 +144,9 @@ static void ExpectPixel(MilkdropShader& shader, PresetState& state, int red, int
 
 static void NumericalControls(TextureManager& manager)
 {
+    ShaderCache shaders;
     PresetState state;
-    Setup(state, manager);
+    Setup(state, manager, shaders);
     for (const auto& alias : std::vector<std::string>{"rand00_red", "rand01_green"})
     {
         MilkdropShader comp(MilkdropShader::ShaderType::CompositeShader);
@@ -173,13 +178,13 @@ static void NumericalControls(TextureManager& manager)
         ExpectPixel(aliases, state, expression.find("green") == std::string::npos ? 128 : 192, 0);
     }
     PresetState prefixFirst;
-    Setup(prefixFirst, manager);
+    Setup(prefixFirst, manager, shaders);
     MilkdropShader prefixed(MilkdropShader::ShaderType::CompositeShader);
     prefixed.LoadCode("shader_body { ret=(tex2D(sampler_fc_rand00,uv).rgb+tex2D(sampler_pw_rand00_red,uv).rgb)*0.5; }");
     prefixed.LoadTexturesAndCompile(prefixFirst);
     ExpectPixel(prefixed, prefixFirst, 64, 0);
     PresetState spelling;
-    Setup(spelling, manager);
+    Setup(spelling, manager, shaders);
     MilkdropShader caseSensitive(MilkdropShader::ShaderType::CompositeShader);
     caseSensitive.LoadCode("sampler sampler_pc_rand00_red=sampler_state {AddressU=WRAP;};\n"
                            "shader_body { ret=tex2D(sampler_pc_RAND00,uv).rgb; }");
@@ -190,8 +195,9 @@ static void NumericalControls(TextureManager& manager)
 
 static void LifecycleControls(TextureManager& manager)
 {
+    ShaderCache shaders;
     PresetState state;
-    Setup(state, manager);
+    Setup(state, manager, shaders);
     MilkdropShader first(MilkdropShader::ShaderType::CompositeShader);
     first.LoadCode("sampler sampler_rand00_red=sampler_state {AddressU=CLAMP;AddressV=CLAMP;};\n"
                    "shader_body { ret=tex2D(sampler_rand00_red,uv).rgb; }");
@@ -210,7 +216,7 @@ static void LifecycleControls(TextureManager& manager)
           "reload discarded the preset slot's image");
     ExpectPixel(reload, state, 64, 0);
     PresetState next;
-    Setup(next, manager);
+    Setup(next, manager, shaders);
     MilkdropShader switched(MilkdropShader::ShaderType::CompositeShader);
     switched.LoadCode("shader_body { ret=tex2D(sampler_rand00_green,uv).rgb; }");
     switched.LoadTexturesAndCompile(next);
@@ -219,7 +225,7 @@ static void LifecycleControls(TextureManager& manager)
     TextureManager empty(std::vector<std::string>{});
     Check(empty.GetRandomTexture("rand00").Empty(), "empty texture path selected an image");
     PresetState missing;
-    Setup(missing, empty);
+    Setup(missing, empty, shaders);
     MilkdropShader rejected(MilkdropShader::ShaderType::CompositeShader);
     rejected.LoadCode("shader_body { ret=tex2D(sampler_rand00,uv).rgb; }");
     bool failed = false;
@@ -240,9 +246,10 @@ static void PresetControls()
         PresetFileParser parsed;
         const auto path = assets / "presets" / name;
         Check(parsed.Read(path.string()), "exact preset did not parse");
+        ShaderCache shaders;
         PresetState state;
         state.Initialize(parsed);
-        Setup(state, manager);
+        Setup(state, manager, shaders);
         state.renderContext.viewportSizeX = 128;
         state.renderContext.viewportSizeY = 96;
         auto main = std::make_shared<Texture>("main", 128, 96, false);
@@ -293,8 +300,9 @@ static void PresetControls()
 // on the first frame, after resizing, and when reference-scale blur is enabled.
 static void BlurFramebufferControls(TextureManager& manager)
 {
+    ShaderCache shaders;
     PresetState state;
-    Setup(state, manager);
+    Setup(state, manager, shaders);
     PerFrameContext frame(state.globalMemory, &state.globalRegisters);
     frame.RegisterBuiltinVariables();
     frame.LoadStateVariables(state);
@@ -307,9 +315,26 @@ static void BlurFramebufferControls(TextureManager& manager)
     glGenFramebuffers(1, &draw);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw);
     glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output->TextureID(), 0);
+    // An unavailable shader is an inactive blur pass and must leave the caller's targets intact.
+    {
+        BlurTexture uninitialized;
+        uninitialized.SetRequiredBlurLevel(BlurTexture::BlurLevel::Blur1);
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, read);
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw);
+        uninitialized.Update(*output, frame, 0);
+        GLint actualRead{}, actualDraw{};
+        glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &actualRead);
+        glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &actualDraw);
+        std::cout << "uninitialized blur read=" << actualRead << '/' << read
+                  << " draw=" << actualDraw << '/' << draw << '\n';
+        Check(actualRead == static_cast<GLint>(read) && actualDraw == static_cast<GLint>(draw),
+              "uninitialized blur changed caller framebuffer");
+        Check(glGetError() == GL_NO_ERROR, "uninitialized blur driver error");
+    }
     for (const auto level : {BlurTexture::BlurLevel::Blur1, BlurTexture::BlurLevel::Blur3})
     {
         BlurTexture blur;
+        blur.Initialize(state.renderContext);
         blur.SetRequiredBlurLevel(level);
         struct Case { const char* name; int width; int height; float scale; };
         for (const auto& test : {
@@ -359,8 +384,9 @@ static void MidgitRenderControls(TextureManager& manager)
     // Use the exact bundled source with the two generated TGA assets. JPEG decoder
     // warnings and production-random image choice are separate from FBO ownership.
     const fs::path path = fs::path(BUNDLED_ASSETS) / "presets" / "midgitstraights of majillaen - featy sweet.milk";
+    ShaderCache shaders;
     PresetState state;
-    Setup(state, manager);
+    Setup(state, manager, shaders);
     state.renderContext.viewportSizeX = 128;
     state.renderContext.viewportSizeY = 96;
     libprojectM::MilkdropPreset::MilkdropPreset preset(path.string());
@@ -412,8 +438,9 @@ static void ManagerControls(TextureManager& manager)
 
 static void StageControls(TextureManager& manager)
 {
+    ShaderCache shaders;
     PresetState state;
-    Setup(state, manager);
+    Setup(state, manager, shaders);
     MilkdropShader warp(MilkdropShader::ShaderType::WarpShader);
     warp.LoadCode("shader_body { ret=tex2D(sampler_rand00_red,uv).rgb; }");
     warp.LoadTexturesAndCompile(state);
@@ -433,8 +460,9 @@ static void StageControls(TextureManager& manager)
 
 static void ShorthandControls(TextureManager& manager)
 {
+    ShaderCache shaders;
     PresetState state;
-    Setup(state, manager);
+    Setup(state, manager, shaders);
     MilkdropShader comp(MilkdropShader::ShaderType::CompositeShader);
     comp.LoadCode("shader_body { ret=tex2D(sampler_rand00_red,uv).rgb+tex2D(sampler_rand00,uv).rgb; }");
     comp.LoadTexturesAndCompile(state);

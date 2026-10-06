@@ -3,7 +3,7 @@ import tempfile
 import shutil
 import subprocess
 
-from preset_lab.build_worker import prepare_engine
+from preset_lab.build_worker import _instrument, prepare_engine
 from preset_lab.build_worker import NATIVE
 from preset_lab.identity import file_digest
 
@@ -15,7 +15,11 @@ def test_preparation_instruments_only_a_private_copy(tmp_path):
     snapshot, identity = prepare_engine(repo, tmp_path)
     assert snapshot != repo / "third_party/projectm"
     assert file_digest(original) == before
-    assert file_digest(snapshot / "src/libprojectM/TimeKeeper.cpp") != before
+    instrumented_clock = file_digest(snapshot / "src/libprojectM/TimeKeeper.cpp")
+    if "SetFrameTime(" in (snapshot / "src/libprojectM/ProjectM.hpp").read_text():
+        assert instrumented_clock == before
+    else:
+        assert instrumented_clock != before
     assert (snapshot / "vendor/projectm-eval/projectm-eval/TreeFunctions.c").is_file()
     assert len(identity.commit) == 40
     assert len(identity.patches_sha256) == 64
@@ -76,3 +80,45 @@ int main() {
     env = dict(os.environ, PRESET_LAB_SEED="12345")
     result = subprocess.run([str(executable)], env=env, text=True, capture_output=True)
     assert result.returncode == 0, result.stderr
+
+
+def test_instrumentation_preserves_native_time_and_hooks_historical_snapshots(tmp_path):
+    # Keep both clock implementations usable: old snapshots are comparison oracles.
+    clock = ("auto currentTime = std::chrono::high_resolution_clock::now();\n\n"
+             "    double currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();")
+    files = {
+        "TimeKeeper.cpp": clock,
+        "TimeKeeper.hpp": "m_randomGenerator{m_randomDevice()}",
+        "ProjectM.cpp": "srand(time(nullptr));",
+        "Renderer/MilkdropNoise.cpp": "\n".join([
+            "static_cast<uint32_t>(std::chrono::system_clock::now().time_since_epoch().count())"] * 2),
+        "Renderer/TextureManager.cpp": ("std::random_device rndDevice;\n"
+                                       "    std::default_random_engine rndEngine(rndDevice());\n"
+                                       "m_filesScanned = true;"),
+        "Renderer/TransitionShaderManager.cpp": "m_mersenneTwister(m_randomDevice())",
+        "MilkdropPreset/PresetState.cpp": ("std::random_device randomDevice;\n"
+                                          "    std::mt19937 randomGenerator(randomDevice());"),
+        "MilkdropPreset/MilkdropShader.cpp": (
+            "static auto floatRand = []() { return static_cast<float>(rand() % 7381) / 7380.0f; };"),
+    }
+    for native_time in (False, True):
+        engine = tmp_path / ("current" if native_time else "historical")
+        library = engine / "src/libprojectM"
+        for relative, text in files.items():
+            target = library / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(text)
+        (library / "ProjectM.hpp").write_text("void SetFrameTime(double seconds);" if native_time else "class ProjectM;")
+        evaluator = engine / "vendor/projectm-eval/projectm-eval/TreeFunctions.c"
+        evaluator.parent.mkdir(parents=True)
+        evaluator.write_text("uint32_t s = 0x4141f00d; // Initial Mersenne Twister seed")
+        _instrument(engine)
+        if native_time:
+            assert (library / "TimeKeeper.cpp").read_text() == clock
+            assert (library / "ProjectM.cpp").read_text() == files["ProjectM.cpp"]
+        else:
+            assert "double currentFrameTime = lab::clock_seconds;" in (library / "TimeKeeper.cpp").read_text()
+            assert "srand(lab::Seed(1));" in (library / "ProjectM.cpp").read_text()
+            assert "lab::ResetShaderRandom();" in (library / "ProjectM.cpp").read_text()
+        assert "lab::Seed(11)" in (library / "TimeKeeper.hpp").read_text()
+        assert "lab::ShaderRandom()" in (library / "MilkdropPreset/MilkdropShader.cpp").read_text()

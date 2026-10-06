@@ -1,6 +1,9 @@
-// Forced into the host build of projectM by tools/projectm-host-tests.sh. Apple's OpenGL 4.1 has no
-// glInvalidateFramebuffer (used by patch 0009); a no-op stands in, as in preset-lab's worker.
 #pragma once
+#if __has_include(<glad/gl.h>)
+#include <glad/gl.h>
+#endif
+// macOS OpenGL 4.1 lacks the framebuffer-discard hint. Retaining contents is safe.
 #ifdef __APPLE__
+#undef glInvalidateFramebuffer
 #define glInvalidateFramebuffer(target, count, attachments) ((void)0)
 #endif

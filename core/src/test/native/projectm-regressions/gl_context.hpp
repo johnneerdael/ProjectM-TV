@@ -1,5 +1,8 @@
 #pragma once
 #include <stdexcept>
+#include <Renderer/OpenGL.h>
+#include <Renderer/Platform/GLResolver.hpp>
+#include <Renderer/Platform/GladLoader.hpp>
 #ifdef __APPLE__
 #include <OpenGL/OpenGL.h>
 #else
@@ -42,6 +45,10 @@ public:
               "could not create a GLES3 context");
         Require(eglMakeCurrent(display, surface, surface, context), "could not make GLES current");
 #endif
+        Require(libprojectM::Renderer::Platform::GLResolver::Instance().Initialize(nullptr, nullptr),
+                "could not initialize GL resolver for the current context");
+        Require(libprojectM::Renderer::Platform::GladLoader::Instance().Initialize(),
+                "could not load entry points for the available GL context");
     }
 
     ~GLContext()

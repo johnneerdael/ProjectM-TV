@@ -12,7 +12,8 @@
 #include <MilkdropPreset/PresetState.hpp>
 #include <MilkdropPreset/MilkdropShader.hpp>
 #include <ProjectM.hpp>
-#include <projectM-opengl.h>
+#include <projectM-4/projectM.h>
+#include <Renderer/ShaderCache.hpp>
 
 #ifdef __APPLE__
 #include <OpenGL/OpenGL.h>
@@ -225,6 +226,7 @@ static void TestParserPresets(const std::string& assets, const std::string& mani
 {
     GLContext gl;
     using namespace libprojectM;
+    Renderer::ShaderCache shaders;
     Renderer::TextureManager textures({assets + "/textures"});
     auto mainTexture = std::make_shared<Renderer::Texture>("main", 16, 16, false);
     std::ifstream list(manifest);
@@ -246,6 +248,7 @@ static void TestParserPresets(const std::string& assets, const std::string& mani
         state.renderContext.viewportSizeX = 16;
         state.renderContext.viewportSizeY = 16;
         state.renderContext.textureManager = &textures;
+        state.renderContext.shaderCache = &shaders;
         state.mainTexture = mainTexture;
         MilkdropPreset::MilkdropShader shader(stage == "warp"
             ? MilkdropPreset::MilkdropShader::ShaderType::WarpShader
@@ -273,7 +276,10 @@ static void TestWaveforms()
 {
     GLContext gl;
     using namespace libprojectM::MilkdropPreset;
+    libprojectM::Renderer::ShaderCache shaders;
     PresetState state;
+    state.renderContext.shaderCache = &shaders;
+    state.LoadShaders();
     state.renderContext.viewportSizeX = 16;
     state.renderContext.viewportSizeY = 16;
     state.renderContext.invAspectX = 1;

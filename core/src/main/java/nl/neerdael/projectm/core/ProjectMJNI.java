@@ -107,5 +107,9 @@ public final class ProjectMJNI {
     public static native float getLastTransitionFps();
     public static native int getSkippedCount();
     public static native void resetSkippedPresets();
+    /**
+     * Upstream numeric version (4.2.0 for the pinned unreleased projectM 4.2 master snapshot).
+     * This is not the app/core release version or proof of an upstream release.
+     */
     public static native String getVersion();
 }

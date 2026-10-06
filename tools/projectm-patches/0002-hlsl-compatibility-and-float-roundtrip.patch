@@ -1,0 +1,1271 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Retain HLSL compatibility and finite float32 round trips
+
+Retain the remaining local HLSL parser/emitter fixes on unreleased upstream master 6f6480746. Consolidates the retained portions of historical 0003, 0030, 0031, 0036, 0040 and 0044. Upstream now supplies the original 0008/0018/0019/0021 behavior, so omit those duplicate source changes. Preserve characterization and real-GL render controls. Original patch attribution and value assessment: ProjectM-TV docs/UPSTREAM_PATCH_VALUE.md.
+
+---
+diff --git a/tests/libprojectM/PresetShaderTranslationTest.cpp b/tests/libprojectM/PresetShaderTranslationTest.cpp
+new file mode 100644
+index 0000000000000000000000000000000000000000..7177144dc55d2615014857c63839327888d71e66
+--- /dev/null
++++ b/tests/libprojectM/PresetShaderTranslationTest.cpp
+@@ -0,0 +1,571 @@
++#include <Renderer/Platform/GLResolver.hpp>
++#include <Renderer/Platform/GladLoader.hpp>
++#include <gtest/gtest.h>
++
++#include <Engine.h>
++#include <GLSLGenerator.h>
++#include <HLSLParser.h>
++#include <HLSLTree.h>
++#include <ProjectM.hpp>
++#include <Renderer/Shader.hpp>
++#include <projectM-4/projectM.h>
++
++#include <cstdint>
++#include <cstring>
++#include <limits>
++#include <locale>
++#include <cstdlib>
++#include <sstream>
++#include <string>
++#include <vector>
++
++#ifdef __APPLE__
++#include <OpenGL/OpenGL.h>
++#endif
++
++namespace {
++
++// A preset shader may assign to a uniform, e.g. "q18 = 1;" with q18 defined as _qe.y. GLSL uniforms
++// are read-only, so the generator moves the shader's reads and writes to a global copy ("new_qe") that
++// main() initializes from the uniform before calling the entry point, as MilkDrop's HLSL compiler
++// starts such a write from the uniform's value.
++class UniformReplacementTest : public testing::Test
++{
++protected:
++    M4::Allocator allocator;
++    M4::HLSLTree tree{&allocator};
++    M4::HLSLParser parser{&allocator, &tree};
++
++    std::string Generate(const char* globals, const char* body)
++    {
++        std::string source = "uniform float4 _qe; uniform float4 _c1, _c2;\n";
++        source += globals;
++        source += "\nvoid PS(out float4 _return_value : COLOR0)\n{\n";
++        source += body;
++        source += "\n}\n";
++        if (!parser.Parse("uniforms.hlsl", source.c_str(), source.size()))
++            return {};
++        M4::GLSLGenerator generator;
++        if (!generator.Generate(&tree, M4::GLSLGenerator::Target_FragmentShader,
++                                M4::GLSLGenerator::Version_300_ES, "PS"))
++            return {};
++        return generator.GetResult();
++    }
++
++    static std::string Between(const std::string& glsl, const std::string& from, const std::string& to)
++    {
++        auto begin = glsl.find(from);
++        if (begin == std::string::npos)
++            return {};
++        auto end = glsl.find(to, begin);
++        return glsl.substr(begin, end == std::string::npos ? std::string::npos : end - begin);
++    }
++
++    static std::string EntryPoint(const std::string& glsl)
++    {
++        return Between(glsl, "void PS(", "\n}\n");
++    }
++
++    static std::string Main(const std::string& glsl)
++    {
++        return Between(glsl, "void main() {", "\n}\n");
++    }
++
++    // References to the uniform itself, as opposed to its copy.
++    static int CountUncopied(const std::string& glsl, const std::string& uniform)
++    {
++        int count = 0;
++        for (auto at = glsl.find(uniform); at != std::string::npos; at = glsl.find(uniform, at + 1))
++        {
++            if (at < 3 || glsl.compare(at - 3, 3, "new") != 0)
++                ++count;
++        }
++        return count;
++    }
++
++    static void ExpectCopyInitializedBeforeEntry(const std::string& glsl, const std::string& uniform)
++    {
++        const std::string copy = "new" + uniform;
++        EXPECT_NE(glsl.find("\nvec4 " + copy + ";"), std::string::npos) << glsl;
++        const std::string main = Main(glsl);
++        const auto init = main.find(copy + " = vec4( " + uniform + " );");
++        ASSERT_NE(init, std::string::npos) << glsl;
++        EXPECT_LT(init, main.find("PS(")) << glsl;
++    }
++};
++
++TEST_F(UniformReplacementTest, WritingOneComponentKeepsTheOthers)
++{
++    // "q18 = 1; ret = q19;"
++    const auto glsl = Generate("", "_qe.y = 1; _return_value = _qe.z;");
++    ASSERT_FALSE(glsl.empty());
++    ExpectCopyInitializedBeforeEntry(glsl, "_qe");
++    const auto entry = EntryPoint(glsl);
++    EXPECT_NE(entry.find("(new_qe).y = float (1)"), std::string::npos) << glsl;
++    EXPECT_NE(entry.find("(new_qe).z"), std::string::npos) << glsl;
++    EXPECT_EQ(entry.find("vec4 new_qe"), std::string::npos) << "no uninitialized local copy\n" << glsl;
++}
++
++TEST_F(UniformReplacementTest, CompoundAssignmentStartsFromTheUniform)
++{
++    // "time *= 0.4;" with time defined as _c2.x
++    const auto glsl = Generate("", "_c2.x *= 0.4; _return_value = _c2.x;");
++    ASSERT_FALSE(glsl.empty());
++    ExpectCopyInitializedBeforeEntry(glsl, "_c2");
++    EXPECT_NE(EntryPoint(glsl).find("(new_c2).x *= "), std::string::npos) << glsl;
++}
++
++TEST_F(UniformReplacementTest, SelfReferencingFirstAssignmentReadsTheCopy)
++{
++    // "q18 = q18 + 1;"
++    const auto glsl = Generate("", "_qe.y = _qe.y + 1; _return_value = _qe;");
++    ASSERT_FALSE(glsl.empty());
++    ExpectCopyInitializedBeforeEntry(glsl, "_qe");
++    const auto entry = EntryPoint(glsl);
++    EXPECT_NE(entry.find("(new_qe).y = ((new_qe).y + "), std::string::npos) << glsl;
++    EXPECT_EQ(CountUncopied(entry, "_qe"), 0) << "every reference uses the copy\n" << glsl;
++}
++
++TEST_F(UniformReplacementTest, ConditionalWriteLeavesTheValueDefined)
++{
++    const auto glsl = Generate("", "if (_qe.x > 0) _qe.y = 1; _return_value = _qe.y;");
++    ASSERT_FALSE(glsl.empty());
++    ExpectCopyInitializedBeforeEntry(glsl, "_qe");
++}
++
++TEST_F(UniformReplacementTest, IncrementAndOutArgumentsAreWrites)
++{
++    const auto glsl = Generate("void Set(out float v) { v = 1; }",
++                               "_qe.w++; Set(_c1.x); _return_value = _qe + _c1;");
++    ASSERT_FALSE(glsl.empty());
++    ExpectCopyInitializedBeforeEntry(glsl, "_qe");
++    ExpectCopyInitializedBeforeEntry(glsl, "_c1");
++}
++
++TEST_F(UniformReplacementTest, HelpersShareTheCopyWithTheEntryPoint)
++{
++    // HLSL globals are shared by all functions: a helper sees the entry point's writes and vice versa.
++    const auto glsl = Generate("float Read() { return _qe.z; }\n"
++                               "void Write() { _c2.y = 3; }",
++                               "_qe.z = 2; Write(); _return_value = Read() + _c2.y;");
++    ASSERT_FALSE(glsl.empty());
++    ExpectCopyInitializedBeforeEntry(glsl, "_qe");
++    ExpectCopyInitializedBeforeEntry(glsl, "_c2");
++    EXPECT_NE(Between(glsl, "float Read(", "\n}\n").find("(new_qe).z"), std::string::npos) << glsl;
++    EXPECT_NE(Between(glsl, "void Write(", "\n}\n").find("(new_c2).y = "), std::string::npos) << glsl;
++    EXPECT_NE(EntryPoint(glsl).find("(new_c2).y"), std::string::npos) << glsl;
++}
++
++TEST_F(UniformReplacementTest, GlobalInitializersReadTheUniform)
++{
++    // Static initializers run before the shader body writes anything.
++    const auto glsl = Generate("static float2 start = _qe.xy;", "_qe.x = 5; _return_value = start.xyxy;");
++    ASSERT_FALSE(glsl.empty());
++    ExpectCopyInitializedBeforeEntry(glsl, "_qe");
++    EXPECT_NE(Main(glsl).find("start = vec2( (_qe).xy );"), std::string::npos) << glsl;
++}
++
++TEST_F(UniformReplacementTest, UniformsThatAreOnlyReadAreNotCopied)
++{
++    const auto glsl = Generate("", "_qe.x = 1; _return_value = _c1 + _c2;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_EQ(glsl.find("new_c1"), std::string::npos) << glsl;
++    EXPECT_EQ(glsl.find("new_c2"), std::string::npos) << glsl;
++    EXPECT_NE(EntryPoint(glsl).find("(_c1 + _c2)"), std::string::npos) << glsl;
++}
++
++TEST_F(UniformReplacementTest, ShaderWithoutUniformWritesIsUnchanged)
++{
++    const auto glsl = Generate("", "_return_value = _qe;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_EQ(glsl.find("new_"), std::string::npos) << glsl;
++}
++
++// HLSL fills an array from its initializer list component by component; GLSL takes one constructor
++// argument per array element.
++class ArrayInitializerTest : public testing::Test
++{
++protected:
++    // The GLSL for a shader with these globals and entry point body, or "" if translation fails.
++    std::string Generate(const char* globals, const char* body)
++    {
++        M4::Allocator allocator;
++        M4::HLSLTree tree{&allocator};
++        M4::HLSLParser parser{&allocator, &tree};
++        std::string source = globals;
++        source += "\nvoid PS(out float4 r : COLOR0)\n{\n";
++        source += body;
++        source += "\n}\n";
++        std::string preprocessed;
++        if (!parser.ApplyPreprocessor("arrays.hlsl", source.c_str(), source.size(), preprocessed))
++            return {};
++        if (!parser.Parse("arrays.hlsl", preprocessed.c_str(), preprocessed.size()))
++            return {};
++        M4::GLSLGenerator generator;
++        if (!generator.Generate(&tree, M4::GLSLGenerator::Target_FragmentShader,
++                                M4::GLSLGenerator::Version_300_ES, "PS"))
++            return {};
++        return generator.GetResult();
++    }
++};
++
++TEST_F(ArrayInitializerTest, FlatScalarsAreGroupedIntoVectors)
++{
++    const auto glsl = Generate("", "float2 a[2] = {1, 2, 3, 4}; r = a[1].xyxy;");
++    EXPECT_NE(glsl.find("vec2 a[2] = vec2[]( vec2(1, 2), vec2(3, 4) );"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, GroupedVectorsKeepTheirLayout)
++{
++    const auto glsl = Generate("", "float2 a[2] = {float2(1, 2), float2(3, 4)}; r = a[1].xyxy;");
++    EXPECT_NE(glsl.find("vec2 a[2] = vec2[]( vec2(1, 2), vec2(3, 4) );"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, VectorsAndScalarsFillElementsInOrder)
++{
++    const auto glsl = Generate("", "float4 a[2] = {float2(1, 2), 3, 4, float3(5, 6, 7), 8}; r = a[1];");
++    EXPECT_NE(glsl.find("vec4[]( vec4(vec2(1, 2), 3, 4), vec4(vec3(5, 6, 7), 8) )"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, ScalarArrayConvertsIntegerLiterals)
++{
++    // GLSL ES array constructors do not convert int arguments to float.
++    const auto glsl = Generate("", "float a[3] = {1, 2, 3}; r = a[2];");
++    EXPECT_NE(glsl.find("float[]( float (1), float (2), float (3) )"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, GlobalArrayIsAssignedWholeInMain)
++{
++    // The layout of "const float4 samples[5] = {...20 values...}" in 56 bundled presets.
++    const auto glsl = Generate("const float4 samples[2] = {\n"
++                               "    0.0, 0.0, 0, 11.0/3.0,\n"
++                               "    0.0, 1.0, 0, -2.0/3.0\n"
++                               "};",
++                               "r = samples[1];");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("\nvec4 samples[2];"), std::string::npos) << glsl;
++    const auto main = glsl.substr(glsl.find("void main() {"));
++    EXPECT_NE(main.find("    samples = vec4[]( vec4(float(0.0), float(0.0), 0, (float(11.0) / float(3.0))), "
++                        "vec4(float(0.0), float(1.0), 0, ((-float(2.0)) / float(3.0))) );"),
++              std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, ListsThatDoNotFillTheArrayAreRejected)
++{
++    EXPECT_EQ(Generate("", "float4 a[2] = {1, 2, 3, 4, 5}; r = a[1];"), "");
++    EXPECT_EQ(Generate("", "float4 a[2] = {1, 2, 3, 4, 5, 6, 7, 8, 9}; r = a[1];"), "");
++    EXPECT_EQ(Generate("", "float2 a[3] = {float2(1, 2), float2(3, 4)}; r = a[1].xyxy;"), "");
++}
++
++TEST_F(ArrayInitializerTest, VectorSpanningTwoElementsIsRejected)
++{
++    EXPECT_EQ(Generate("", "float4 a[2] = {1, 2, 3, float2(4, 5), 6, 7, 8}; r = a[1];"), "");
++}
++
++// These cases distinguish the retained compatibility rules from the upstream constructor fix.
++TEST_F(ArrayInitializerTest, ParenthesizedConstructorExpressionKeepsAllOperators)
++{
++    EXPECT_FALSE(Generate("", "r = (float4(1, 2, 3, 4) * 0.5 + float4(0, 1, 0, 1)).w;").empty());
++}
++
++TEST_F(ArrayInitializerTest, ParenthesizedConstructorAcceptsPostfixSwizzle)
++{
++    EXPECT_FALSE(Generate("", "r = (float4(1, 2, 3, 4)).w;").empty());
++}
++
++TEST_F(ArrayInitializerTest, ContextualSampleIdentifierIsRenamedForGLSL)
++{
++    const auto glsl = Generate("", "float sample = 0.5; r = sample;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("float sample0 = "), std::string::npos) << glsl;
++    EXPECT_NE(glsl.find("vec4 (sample0)"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, ObjectMacrosPreserveDeclarationTokens)
++{
++    const auto glsl = Generate("#define DECL float value = 0.5;\n", "DECL r = value;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("float value = "), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, FunctionMacrosPreserveStatementTokensAndArgumentBoundaries)
++{
++    const auto glsl = Generate("#define SET(v) float value = v;\n", "SET(0.5) r = value;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("float value = "), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, MacroKeepsAuthoredParenthesesAndPrecedence)
++{
++    const auto glsl = Generate("#define SCALE(v) ((v) + 1)\n", "r = 2 * SCALE(3);");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("(2 * (3 + 1))"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, PlainUninitializedFloatGlobalsBecomeInputs)
++{
++    const auto glsl = Generate("float legacyInput; float4 color;", "r = color * legacyInput;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("uniform float legacyInput;"), std::string::npos) << glsl;
++    EXPECT_NE(glsl.find("uniform vec4 color;"), std::string::npos) << glsl;
++    EXPECT_EQ(glsl.find("newlegacyInput"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, ImplicitInputWritesUseInitializedCopies)
++{
++    const auto glsl = Generate("float4 color;", "color.x += 0.5; r = color;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("uniform vec4 color;"), std::string::npos) << glsl;
++    const auto init = glsl.find("newcolor = vec4( color );");
++    ASSERT_NE(init, std::string::npos) << glsl;
++    EXPECT_LT(init, glsl.find("PS(r);")) << glsl;
++    EXPECT_NE(glsl.find("(newcolor).x += "), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, MixedCommaDeclarationKeepsInitializedStorageSeparate)
++{
++    const auto glsl = Generate("float legacyInput, stored = 0.25;", "r = legacyInput + stored;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_NE(glsl.find("uniform float legacyInput;"), std::string::npos) << glsl;
++    EXPECT_NE(glsl.find("\nfloat stored;"), std::string::npos) << glsl;
++    EXPECT_EQ(glsl.find("uniform float stored"), std::string::npos) << glsl;
++    EXPECT_NE(glsl.find("stored = float( float(0.25) );"), std::string::npos) << glsl;
++}
++
++TEST_F(ArrayInitializerTest, StaticConstAndLocalStorageDoNotBecomeImplicitInputs)
++{
++    const auto glsl = Generate("static float state; const float fixedValue = 0.25;",
++                               "float local; local = fixedValue; state = local; r = state;");
++    ASSERT_FALSE(glsl.empty());
++    EXPECT_EQ(glsl.find("uniform float state"), std::string::npos) << glsl;
++    EXPECT_EQ(glsl.find("uniform float local"), std::string::npos) << glsl;
++    EXPECT_EQ(glsl.find("uniform float fixedValue"), std::string::npos) << glsl;
++}
++
++TEST(ShaderFloatLiteral, RepresentativeFiniteValuesRoundTripExactly)
++{
++    for (float value : {0.0f, -0.0f, 0.1f, 1.23456789f, -123456.789f,
++                        16777216.0f, std::numeric_limits<float>::max(),
++                        std::numeric_limits<float>::lowest(), std::numeric_limits<float>::min(),
++                        std::numeric_limits<float>::denorm_min()})
++    {
++        char formatted[64];
++        ASSERT_GT(M4::String_FormatFloat(formatted, sizeof(formatted), value), 0);
++        const std::string text(formatted);
++        SCOPED_TRACE(text);
++        ASSERT_EQ(text.substr(0, 6), "float(");
++        std::istringstream input(text.substr(6, text.size() - 7));
++        input.imbue(std::locale::classic());
++        double wide{};
++        input >> wide;
++        ASSERT_FALSE(input.fail());
++        const float reparsed = static_cast<float>(wide);
++        uint32_t before{}, after{};
++        std::memcpy(&before, &value, sizeof(before));
++        std::memcpy(&after, &reparsed, sizeof(after));
++        EXPECT_EQ(before, after);
++        EXPECT_NE(text.find_first_of(".eE", 6), std::string::npos);
++    }
++}
++
++TEST_F(ArrayInitializerTest, NonfiniteFloatLiteralIsRejectedDuringGeneration)
++{
++    // 1e39 is finite as the tokenizer's double, but overflows the HLSL float value.
++    EXPECT_TRUE(Generate("", "r = 1e39;").empty());
++}
++
++class FailureRecordingProjectM : public libprojectM::ProjectM
++{
++public:
++    mutable std::string failure;
++    void PresetSwitchFailedEvent(const std::string&, const std::string& reason) const override
++    {
++        failure = reason;
++    }
++};
++
++// Renders a composite shader through the engine and reads back the centre pixel. Per-frame equations
++// set q19 = 0.5 and the warp shader outputs black, so the composite shader alone sets the colour.
++class PresetShaderRenderTest : public testing::Test
++{
++protected:
++    static constexpr int Width = 32;
++    static constexpr int Height = 24;
++
++    static void SetUpTestSuite()
++    {
++#ifdef __APPLE__
++        CGLPixelFormatAttribute attributes[] = {
++            kCGLPFAOpenGLProfile, static_cast<CGLPixelFormatAttribute>(kCGLOGLPVersion_3_2_Core),
++            static_cast<CGLPixelFormatAttribute>(0)};
++        CGLPixelFormatObj format{};
++        GLint count{};
++        if (CGLChoosePixelFormat(attributes, &format, &count) != kCGLNoError || format == nullptr)
++        {
++            return;
++        }
++        CGLCreateContext(format, nullptr, &s_context);
++        CGLDestroyPixelFormat(format);
++#endif
++    }
++
++    static void TearDownTestSuite()
++    {
++#ifdef __APPLE__
++        if (s_context != nullptr)
++        {
++            CGLSetCurrentContext(nullptr);
++            CGLDestroyContext(s_context);
++            s_context = nullptr;
++        }
++#endif
++    }
++
++    void SetUp() override
++    {
++#ifdef __APPLE__
++        if (s_context == nullptr)
++        {
++            GTEST_SKIP() << "no macOS CGL OpenGL context";
++        }
++        ASSERT_EQ(CGLSetCurrentContext(s_context), kCGLNoError);
++        ASSERT_TRUE(libprojectM::Renderer::Platform::GLResolver::Instance().Initialize(nullptr, nullptr))
++            << "could not initialize the GL resolver for the current context";
++        ASSERT_TRUE(libprojectM::Renderer::Platform::GladLoader::Instance().Initialize())
++            << "could not load OpenGL entry points for the available context";
++        m_glReady = true;
++        libprojectM::Renderer::Shader::Unbind();
++        glGenFramebuffers(1, &m_framebuffer);
++        glGenTextures(1, &m_texture);
++        glBindTexture(GL_TEXTURE_2D, m_texture);
++        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
++        glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
++        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
++        ASSERT_EQ(glCheckFramebufferStatus(GL_FRAMEBUFFER), GL_FRAMEBUFFER_COMPLETE);
++        glPixelStorei(GL_PACK_ALIGNMENT, 1);
++        ASSERT_EQ(glGetError(), GL_NO_ERROR);
++#else
++        GTEST_SKIP() << "render regression needs a macOS CGL OpenGL context";
++#endif
++    }
++
++    void TearDown() override
++    {
++#ifdef __APPLE__
++        if (m_glReady)
++        {
++            libprojectM::Renderer::Shader::Unbind();
++            glDeleteFramebuffers(1, &m_framebuffer);
++            glDeleteTextures(1, &m_texture);
++        }
++#endif
++    }
++
++    // The red channel of the centre pixel; the composite shader's lines become comp_1, comp_2, ...
++    auto RenderRed(const std::string& compositeShader) -> int
++    {
++        std::string preset = "MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=3\nPSVERSION_COMP=3\n"
++                             "[preset00]\nfDecay=1\nfGammaAdj=1\nfWaveAlpha=0\nfVideoEchoAlpha=0\n"
++                             "fShader=0\nzoom=1\nwarp=0\nrot=0\n"
++                             "per_frame_1=q19 = 0.5;\n"
++                             "warp_1=`shader_body { ret = 0; }\n";
++        std::istringstream lines(compositeShader);
++        std::string line;
++        for (int number = 1; std::getline(lines, line); ++number)
++        {
++            preset += "comp_" + std::to_string(number) + "=`" + line + "\n";
++        }
++        glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
++        glClearColor(0, 0, 0, 1);
++        glClear(GL_COLOR_BUFFER_BIT);
++        FailureRecordingProjectM engine;
++        engine.SetWindowSize(Width, Height);
++        engine.SetPresetLocked(true);
++        engine.SetHardCutEnabled(false);
++        engine.SetEasterEgg(0);
++        std::istringstream data(preset);
++        engine.LoadPresetData(data, false);
++        EXPECT_TRUE(engine.failure.empty()) << engine.failure;
++        for (int frame = 0; frame < 2; ++frame)
++        {
++            engine.RenderFrame(m_framebuffer);
++        }
++        std::vector<uint8_t> pixel(3);
++        glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer);
++        glReadBuffer(GL_COLOR_ATTACHMENT0);
++        glReadPixels(Width / 2, Height / 2, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel.data());
++        EXPECT_EQ(glGetError(), GL_NO_ERROR);
++        return pixel[0];
++    }
++
++#ifdef __APPLE__
++    static CGLContextObj s_context;
++#endif
++    bool m_glReady{false};
++    GLuint m_framebuffer{};
++    GLuint m_texture{};
++};
++
++#ifdef __APPLE__
++CGLContextObj PresetShaderRenderTest::s_context{};
++#endif
++
++TEST_F(PresetShaderRenderTest, ReadingAUniformIsTheControl)
++{
++    EXPECT_NEAR(RenderRed("shader_body { ret = q19; }"), 128, 2);
++}
++
++TEST_F(PresetShaderRenderTest, WritingAnotherUniformComponentKeepsTheValue)
++{
++    EXPECT_NEAR(RenderRed("shader_body { q18 = 1; ret = q19; }"), 128, 2);
++}
++
++TEST_F(PresetShaderRenderTest, CompoundAssignmentToAUniformStartsFromItsValue)
++{
++    EXPECT_NEAR(RenderRed("shader_body { q19 *= 1.5; ret = q19; }"), 191, 2);
++}
++
++TEST_F(PresetShaderRenderTest, FlatGlobalArrayInitializerKeepsTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("const float4 samples[2] = {\n"
++                          "    0, 0, 0, 0,\n"
++                          "    0.25, 0.5, 0.75, 1\n"
++                          "};\n"
++                          "shader_body { ret = samples[1].xyz; }"),
++                64, 2);
++}
++
++TEST_F(PresetShaderRenderTest, FlatLocalArrayInitializerKeepsTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("shader_body { float2 a[2] = {1, 0.5, 0.25, 0}; ret = a[1].x; }"), 64, 2);
++}
++
++TEST_F(PresetShaderRenderTest, SamplerStateBlockBeforeShaderBodyKeepsTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("sampler sampler_main = sampler_state {\n"
++                          "    AddressU = CLAMP;\n"
++                          "    AddressV = WRAP;\n"
++                          "};\n"
++                          "shader_body { ret = .8; }"),
++                204, 2);
++}
++
++TEST_F(PresetShaderRenderTest, SeveralSamplerStateBlocksKeepTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("sampler sampler_noise_lq = sampler_state {\n"
++                          "    AddressU = WRAP;\n"
++                          "};\n"
++                          "sampler3D sampler_noisevol_lq = sampler_state { AddressU = WRAP; };\n"
++                          "shader_body { ret = 0.25 + 0 * (tex2D(sampler_noise_lq, uv).x +\n"
++                          "    tex3D(sampler_noisevol_lq, float3(uv, 0)).x); }"),
++                64, 2);
++}
++
++TEST_F(PresetShaderRenderTest, UnspacedSamplerStateAssignmentKeepsTheAuthoredShader)
++{
++    EXPECT_NEAR(RenderRed("sampler sampler_noise_lq=sampler_state{AddressU=WRAP;AddressV=WRAP;};\n"
++                          "shader_body { ret = 0.25 + 0 * tex2D(sampler_noise_lq, uv).x; }"),
++                64, 2);
++}
++
++} // namespace
+diff --git a/vendor/hlslparser/src/Engine.cpp b/vendor/hlslparser/src/Engine.cpp
+index 04b87f966900422510c563b31bf4c0fc2e92f458..58adb36fc33b522c1725ca1a1903c7b1d304afd0 100644
+--- a/vendor/hlslparser/src/Engine.cpp
++++ b/vendor/hlslparser/src/Engine.cpp
+@@ -1,6 +1,8 @@
+ 
+ #include "Engine.h"
+ #include <cctype>
++#include <cmath>
++#include <limits>
+ 
+ //#include "libprojectM/Logging.hpp"
+ 
+@@ -48,10 +50,17 @@ int String_Printf(char * buffer, int size, const char * format, ...) {
+ 
+ int String_FormatFloat(char * buffer, int size, float value) {
+     std::ostringstream oss;
+-    oss.imbue(std::locale("C"));
++    oss.imbue(std::locale::classic()); // the prebuilt "C" locale: std::locale("C") builds one per call
++    // Preserve the parsed float32 value when the shader compiler reparses the text.
++    oss.precision(std::numeric_limits<float>::max_digits10);
+     oss << value;
++    std::string literal = oss.str();
++    // Integer conversion loses the sign of -0 and can overflow for large integral floats.
++    if (std::isfinite(value) && literal.find_first_of(".eE") == std::string::npos)
++        literal += ".0";
+ 
+-    return String_Printf(buffer, size, "float(%s)", oss.str().c_str());
++    // Retain nonfinite text for diagnostics; GLSLGenerator rejects it before shader emission.
++    return String_Printf(buffer, size, "float(%s)", literal.c_str());
+ }
+ 
+ bool String_Equal(const char * a, const char * b) {
+diff --git a/vendor/hlslparser/src/GLSLGenerator.cpp b/vendor/hlslparser/src/GLSLGenerator.cpp
+index dbe0c1349f4859dfa5cba7f6c4b8d8b5c449b02a..10085c5433f0b0edc4cea0092494ee84f703a785 100644
+--- a/vendor/hlslparser/src/GLSLGenerator.cpp
++++ b/vendor/hlslparser/src/GLSLGenerator.cpp
+@@ -19,6 +19,7 @@
+ #include <string.h>
+ #include <vector>
+ #include <algorithm>
++#include <cmath>
+ #include <string>
+ 
+ namespace M4
+@@ -40,6 +41,7 @@ const char* GLSLGenerator::s_reservedWord[] =
+         "dFdx",
+         "dFdy",
+         "filter",
++        "sample",
+ 		"main",
+     };
+ 
+@@ -652,6 +654,11 @@ void GLSLGenerator::OutputExpression(HLSLExpression* expression, const HLSLType*
+         {
+         case HLSLBaseType_Float:
+             {
++                if (!std::isfinite(literalExpression->fValue))
++                {
++                    Error("Nonfinite float literal at line %d", literalExpression->line);
++                    return;
++                }
+                 // Don't use printf directly so that we don't use the system locale.
+                 char buffer[64];
+                 String_FormatFloat(buffer, sizeof(buffer), literalExpression->fValue);
+@@ -2033,7 +2040,8 @@ void GLSLGenerator::OutputEntryCaller(HLSLFunction* entryFunction)
+     for(HLSLDeclaration *declaration : globalVarsAssignments)
+     {
+         m_writer.BeginLine(1, declaration->fileName, declaration->line);
+-        OutputDeclarationBody( declaration->type, GetSafeIdentifierName( declaration->name ) );
++        // An assignment, not a declarator: "g = vec4[](...)" rather than "g[2] = ...".
++        m_writer.Write("%s", GetSafeIdentifierName(declaration->name));
+ 
+         OutputDeclarationAssignment(declaration);
+         m_writer.EndLine(";");
+@@ -2129,9 +2137,7 @@ void GLSLGenerator::OutputDeclarationAssignment(HLSLDeclaration* declaration)
+    m_writer.Write( " = " );
+    if( declaration->type.array )
+    {
+-       m_writer.Write( "%s[]( ", GetTypeName( declaration->type ) );
+-       OutputExpressionList( declaration->assignment );
+-       m_writer.Write( " )" );
++       OutputArrayInitializer( declaration );
+    }
+    else
+    {
+@@ -2162,6 +2168,104 @@ void GLSLGenerator::OutputDeclarationAssignment(HLSLDeclaration* declaration)
+    }
+ }
+ 
++// HLSL fills an array from its initializer list component by component, so
++// "float4 a[2] = {1, 2, 3, 4, 5, 6, 7, 8}" holds two float4s. A GLSL array constructor takes one
++// argument per element: group such a list into element constructors, here
++// "vec4[]( vec4(1, 2, 3, 4), vec4(5, 6, 7, 8) )". A list whose component count does not fill the
++// declared size, or whose vector would span two elements, is reported instead of guessed.
++void GLSLGenerator::OutputArrayInitializer(HLSLDeclaration* declaration)
++{
++    HLSLType elementType = declaration->type;
++    elementType.array = false;
++    elementType.arraySize = NULL;
++    const BaseTypeDescription& element = baseTypeDescriptions[elementType.baseType];
++    const bool elementIsScalarOrVector = IsScalarType(elementType) || IsVectorType(elementType);
++
++    int arraySize = -1;
++    if (declaration->type.arraySize != NULL && !m_tree->GetExpressionValue(declaration->type.arraySize, arraySize))
++    {
++        arraySize = -1;
++    }
++
++    // An element per item: "{float2(1, 2), float2(3, 4)}" or the scalars of a scalar array.
++    int numItems = 0;
++    int numComponents = 0;
++    bool onePerElement = true;
++    bool flattenable = elementIsScalarOrVector;
++    for (HLSLExpression* item = declaration->assignment; item != NULL; item = item->nextExpression)
++    {
++        const HLSLType& itemType = item->expressionType;
++        const BaseTypeDescription& itemDescription = baseTypeDescriptions[itemType.baseType];
++        ++numItems;
++        if (itemType.array || itemDescription.numComponents != element.numComponents ||
++            itemDescription.numDimensions != element.numDimensions || itemDescription.height != element.height)
++        {
++            onePerElement = false;
++        }
++        if (itemType.array || !(IsScalarType(itemType) || IsVectorType(itemType)))
++        {
++            flattenable = false;
++        }
++        numComponents += itemDescription.numComponents;
++    }
++
++    if (onePerElement)
++    {
++        if (arraySize >= 0 && numItems != arraySize)
++        {
++            Error("Array '%s' has %d elements but %d initializers", declaration->name, arraySize, numItems);
++            return;
++        }
++        // Converts each item to the element type, e.g. the int literals of a float array, which GLSL ES
++        // array constructors do not convert.
++        m_writer.Write("%s[]( ", GetTypeName(elementType));
++        int index = 0;
++        for (HLSLExpression* item = declaration->assignment; item != NULL; item = item->nextExpression)
++        {
++            m_writer.Write(index++ > 0 ? ", " : "");
++            OutputExpression(item, &elementType);
++        }
++        m_writer.Write(" )");
++        return;
++    }
++
++    if (!flattenable)
++    {
++        Error("Array '%s' initializer list does not match its element type", declaration->name);
++        return;
++    }
++    if (arraySize >= 0 ? numComponents != arraySize * element.numComponents
++                       : numComponents % element.numComponents != 0)
++    {
++        Error("Array '%s' initializer list has %d components for %d elements of %d", declaration->name,
++              numComponents, arraySize, element.numComponents);
++        return;
++    }
++
++    m_writer.Write("%s[]( ", GetTypeName(elementType));
++    HLSLExpression* item = declaration->assignment;
++    for (int index = 0; item != NULL; ++index)
++    {
++        m_writer.Write(index > 0 ? ", %s(" : "%s(", GetTypeName(elementType));
++        int filled = 0;
++        while (filled < element.numComponents)
++        {
++            const int components = baseTypeDescriptions[item->expressionType.baseType].numComponents;
++            if (filled + components > element.numComponents)
++            {
++                Error("Array '%s' initializer has a vector spanning two elements", declaration->name);
++                return;
++            }
++            m_writer.Write(filled > 0 ? ", " : "");
++            OutputExpression(item, NULL);
++            filled += components;
++            item = item->nextExpression;
++        }
++        m_writer.Write(")");
++    }
++    m_writer.Write(" )");
++}
++
+ void GLSLGenerator::OutputDeclaration(const HLSLType& type, const char* name)
+ {
+ 	OutputDeclarationType( type );
+diff --git a/vendor/hlslparser/src/GLSLGenerator.h b/vendor/hlslparser/src/GLSLGenerator.h
+index 370583566dc3b8d386d1959489a7d3e79c1552ac..84d51c73b2ca3c22241c5fd8febfe1fc2e97222c 100644
+--- a/vendor/hlslparser/src/GLSLGenerator.h
++++ b/vendor/hlslparser/src/GLSLGenerator.h
+@@ -96,6 +96,7 @@ private:
+ 	void OutputDeclarationBody( const HLSLType& type, const char* name );
+     void OutputDeclaration(const HLSLType& type, const char* name);
+     void OutputDeclarationAssignment(HLSLDeclaration* declaration);
++    void OutputArrayInitializer(HLSLDeclaration* declaration);
+     void OutputCast(const HLSLType& type);
+ 
+     void OutputSetOutAttribute(const char* semantic, const char* resultName);
+@@ -131,7 +132,7 @@ private:
+ 
+ private:
+ 
+-    static const int    s_numReservedWords = 9;
++    static const int    s_numReservedWords = 10;
+     static const char*  s_reservedWord[s_numReservedWords];
+ 
+     CodeWriter          m_writer;
+diff --git a/vendor/hlslparser/src/HLSLParser.cpp b/vendor/hlslparser/src/HLSLParser.cpp
+index da708aabfc6d60aeecd07cc664f451655fff6e84..161fcb8e4795b58e84dc3deaffca2292203ee2c5 100644
+--- a/vendor/hlslparser/src/HLSLParser.cpp
++++ b/vendor/hlslparser/src/HLSLParser.cpp
+@@ -2429,14 +2429,9 @@ bool HLSLParser::ParseTerminalExpression(HLSLExpression*& expression, char& need
+     {
+         // Check for a casting operator.
+         HLSLType type;
+-        if (AcceptType(false, type))
++        const HLSLTokenizer expressionStart = m_tokenizer;
++        if (AcceptType(false, type) && m_tokenizer.GetToken() != '(')
+         {
+-            // This is actually a type constructor like (float2(...
+-            if (Accept('('))
+-            {
+-                needsExpressionEndChar = expressionEndChar;
+-                return ParsePartialConstructor(expression, type.baseType, type.typeName);
+-            }
+             HLSLCastingExpression* castingExpression = m_tree->AddNode<HLSLCastingExpression>(fileName, line);
+             castingExpression->type = type;
+             expression = castingExpression;
+@@ -2444,6 +2439,9 @@ bool HLSLParser::ParseTerminalExpression(HLSLExpression*& expression, char& need
+             return Expect(')') && ParseExpression(castingExpression->expression);
+         }
+ 
++        // A constructor is an ordinary expression inside the parentheses. Parse
++        // the entire expression before applying postfix operators to its result.
++        m_tokenizer = expressionStart;
+         int numArguments = 0;
+         if (!ParseExpressionList(expressionEndChar, false, expression, numArguments))
+         {
+@@ -3474,7 +3472,7 @@ bool HLSLParser::ParsePreprocessorDefine()
+                 {
+                     if (String_Equal(argument->name, m_tokenizer.GetIdentifier()))
+                     {
+-                        value.append("#" + std::to_string(argNum) + "#");
++                        value.append(" #" + std::to_string(argNum) + "# ");
+                         addOriginalSource = false;
+                         break;
+                     }
+@@ -3486,8 +3484,8 @@ bool HLSLParser::ParsePreprocessorDefine()
+ 
+             if (addOriginalSource)
+             {
+-                value.append(m_tokenizer.getLastPos(true),
+-                             m_tokenizer.getCurrentPos() - m_tokenizer.getLastPos(true));
++                value.append(m_tokenizer.getLastPos(false),
++                             m_tokenizer.getCurrentPos() - m_tokenizer.getLastPos(false));
+             }
+ 
+             m_tokenizer.Next(false);
+@@ -3500,7 +3498,7 @@ bool HLSLParser::ParsePreprocessorDefine()
+         // Macro value
+         while(m_tokenizer.GetToken() != HLSLToken_EndOfLine)
+         {
+-            const char * start = m_tokenizer.getLastPos(true);
++            const char * start = m_tokenizer.getLastPos(false);
+ 
+             std::string valueAdd(start, m_tokenizer.getCurrentPos() - start);
+             value.append(valueAdd);
+@@ -3509,12 +3507,13 @@ bool HLSLParser::ParsePreprocessorDefine()
+         }
+     }
+ 
+-    // Remove extra parenthesis
+-    if (value[0] == '(')
+-    {
+-        value.erase(value.length()-1, 1);
+-        value.erase(0, 1);
+-    }
++    // Keep authored parentheses and token separation. Only trim the edges so
++    // identity and alias macros retain their existing lookup behavior.
++    const auto first = value.find_first_not_of(" \t\r\n");
++    if (first == std::string::npos)
++        value.clear();
++    else
++        value = value.substr(first, value.find_last_not_of(" \t\r\n") - first + 1);
+ 
+     macro->value = m_tree->AddString(value.c_str());
+ 
+@@ -3566,13 +3565,19 @@ bool HLSLParser::ApplyPreprocessor(const char* fileName, const char* buffer, siz
+ 
+             if (addOriginalSource)
+             {
+-                valueProcessed.append(m_tokenizer.getLastPos(true),
+-                                      m_tokenizer.getCurrentPos() - m_tokenizer.getLastPos(true));
++                valueProcessed.append(m_tokenizer.getLastPos(false),
++                                      m_tokenizer.getCurrentPos() - m_tokenizer.getLastPos(false));
+             }
+ 
+             m_tokenizer.Next();
+         }
+ 
++        const auto first = valueProcessed.find_first_not_of(" \t\r\n");
++        if (first == std::string::npos)
++            valueProcessed.clear();
++        else
++            valueProcessed = valueProcessed.substr(first, valueProcessed.find_last_not_of(" \t\r\n") - first + 1);
++
+         if (valueProcessed == "main")
+ 		{
+             valueProcessed = "sampler_fw_main";
+@@ -3697,9 +3702,11 @@ HLSLMacro * HLSLParser::ProcessMacroFromIdentifier(std::string & sourcePreproces
+                 }
+                 else
+                 {
+-                    sourcePreprocessed.append("(");
++                    // A replacement list can be a declaration or statement,
++                    // not just an expression. Do not invent parentheses.
++                    sourcePreprocessed.append(" ");
+                     sourcePreprocessed.append(m_macros[i]->value);
+-                    sourcePreprocessed.append(")");
++                    sourcePreprocessed.append(" ");
+                     addOriginalSource = false;
+                 }
+             }
+@@ -3797,8 +3804,8 @@ bool HLSLParser::ProcessMacroArguments(HLSLMacro* macro, std::string & sourcePre
+         return false;
+     }
+ 
+-    // Surround macro definition with parenthesis
+-    sourcePreprocessed.append("(");
++    // Keep replacement tokens separate from the surrounding source.
++    sourcePreprocessed.append(" ");
+ 
+     // Write arguments value
+     unsigned index = 0;
+@@ -3832,8 +3839,7 @@ bool HLSLParser::ProcessMacroArguments(HLSLMacro* macro, std::string & sourcePre
+         index++;
+     }
+ 
+-    // Surround macro definition with parenthesis
+-    sourcePreprocessed.append(")");
++    sourcePreprocessed.append(" ");
+ 
+     return true;
+ }
+@@ -3910,6 +3916,9 @@ bool HLSLParser::AcceptInterpolationModifier(int& flags)
+ 
+ bool HLSLParser::AcceptType(bool allowVoid, HLSLType& type/*, bool acceptFlags*/)
+ {
++    // Type lookahead must not consume contextual modifiers such as a local
++    // named "sample" when the following tokens do not form a type.
++    const HLSLTokenizer typeStart = m_tokenizer;
+     //if (type.flags != NULL)
+     {
+         type.flags = 0;
+@@ -4110,6 +4119,8 @@ bool HLSLParser::AcceptType(bool allowVoid, HLSLType& type/*, bool acceptFlags*/
+             return true;
+         }
+     }
++    m_tokenizer = typeStart;
++    type.flags = 0;
+     return false;
+ }
+ 
+diff --git a/vendor/hlslparser/src/HLSLTree.cpp b/vendor/hlslparser/src/HLSLTree.cpp
+index 563c87a8f9263950feb5bb4bace32a7cbe0d3f50..60c14cbbb0a91638908e1028195cf4a670cb93d7 100644
+--- a/vendor/hlslparser/src/HLSLTree.cpp
++++ b/vendor/hlslparser/src/HLSLTree.cpp
+@@ -4,6 +4,7 @@
+ #include "HLSLTree.h"
+ #include <assert.h>
+ #include <map>
++#include <set>
+ #include <string>
+ #include <algorithm>
+ 
+@@ -612,97 +613,237 @@ int HLSLTree::GetExpressionValue(HLSLExpression * expression, float values[4])
+ 
+ bool HLSLTree::ReplaceUniformsAssignments()
+ {
+-    struct ReplaceUniformsAssignmentsVisitor: HLSLTreeVisitor
++    // Preserve the external-input classification of plain uninitialized legacy
++    // HLSL float globals. GLES initializes these uniforms at link time; writes
++    // use the existing per-invocation copies below. Locals, initialized globals,
++    // static/const storage and unsupported aggregate types retain their rules.
++    for (HLSLStatement* statement = m_root->statement; statement != NULL; statement = statement->nextStatement)
+     {
+-        HLSLTree * tree;
+-        std::map<std::string, HLSLDeclaration *> uniforms;
+-        std::map<std::string, std::string> uniformsReplaced;
+-        bool withinAssignment;
++        if (statement->nodeType != HLSLNodeType_Declaration) continue;
++        HLSLDeclaration* first = static_cast<HLSLDeclaration*>(statement);
++        bool changed = false;
++        for (HLSLDeclaration* declaration = first; declaration != NULL; declaration = declaration->nextDeclaration)
++        {
++            if (declaration->assignment == NULL && !declaration->type.array &&
++                declaration->type.baseType >= HLSLBaseType_Float && declaration->type.baseType <= HLSLBaseType_Float4 &&
++                !(declaration->type.flags & (HLSLTypeFlag_Uniform | HLSLTypeFlag_Static | HLSLTypeFlag_Const)))
++            {
++                declaration->type.flags |= HLSLTypeFlag_Uniform | HLSLTypeFlag_ImplicitUniform;
++                changed = true;
++            }
++        }
++        if (!changed) continue;
++        // A comma declaration can mix initialized storage with an implicit input.
++        // GLSL emits one qualifier for the whole statement, so separate the chain
++        // while keeping source declaration order and initializer evaluation order.
++        HLSLStatement* after = statement->nextStatement;
++        HLSLDeclaration* declaration = first;
++        while (declaration->nextDeclaration != NULL)
++        {
++            HLSLDeclaration* next = declaration->nextDeclaration;
++            declaration->nextDeclaration = NULL;
++            declaration->nextStatement = next;
++            declaration = next;
++        }
++        declaration->nextStatement = after;
++        statement = declaration;
++    }
+ 
+-        virtual void VisitDeclaration(HLSLDeclaration * node)
++    // MilkDrop's HLSL compiler lets a shader assign to a global uniform, e.g. "q18 = 1;" with q18
++    // defined as _qe.y. The write goes to a per-invocation copy that starts with the uniform's value
++    // and that every function sees. GLSL uniforms are read-only, so each assigned uniform gets a global
++    // copy ("new_qe") initialized from the uniform before the entry point runs (the generator emits
++    // global initializers at the start of main()), and every function reads and writes the copy. The
++    // components a shader does not write, and compound assignments such as "time *= 0.4", therefore
++    // keep the uniform's value. Global initializers keep reading the uniform: they run before any write.
++
++    // Finds the uniforms that functions assign to, directly, with ++/-- or as out/inout arguments.
++    struct FindAssignedUniformsVisitor: HLSLTreeVisitor
++    {
++        std::set<std::string> uniforms;
++        std::set<std::string> assigned;
++        bool withinFunction = false;
++        bool withinAssignment = false;
++
++        void VisitAssigned(HLSLExpression * node)
+         {
+-            HLSLTreeVisitor::VisitDeclaration(node);
++            bool outer = withinAssignment;
++            withinAssignment = true;
++            VisitExpression(node);
++            withinAssignment = outer;
++        }
++
++        void VisitRead(HLSLExpression * node)
++        {
++            bool outer = withinAssignment;
++            withinAssignment = false;
++            VisitExpression(node);
++            withinAssignment = outer;
++        }
+ 
+-            // Enumerate uniforms
+-            if (node->type.flags & HLSLTypeFlag_Uniform)
++        virtual void VisitDeclaration(HLSLDeclaration * node)
++        {
++            if (!withinFunction && (node->type.flags & HLSLTypeFlag_Uniform))
+             {
+-                uniforms[node->name] = node;
++                uniforms.insert(node->name);
+             }
++            HLSLTreeVisitor::VisitDeclaration(node);
+         }
+ 
+         virtual void VisitFunction(HLSLFunction * node)
+         {
+-            uniformsReplaced.clear();
+-
+-            // Detect uniforms assignments
++            withinFunction = true;
+             HLSLTreeVisitor::VisitFunction(node);
++            withinFunction = false;
++        }
+ 
+-            // Declare uniforms replacements
+-            std::map<std::string, std::string>::const_iterator iter = uniformsReplaced.cbegin();
+-            for ( ; iter != uniformsReplaced.cend(); ++iter)
++        virtual void VisitBinaryExpression(HLSLBinaryExpression * node)
++        {
++            if (IsAssignOp(node->binaryOp))
+             {
+-                HLSLDeclaration * uniformDeclaration = uniforms[iter->first];
+-                HLSLDeclaration * declaration = tree->AddNode<HLSLDeclaration>(node->fileName, node->line);
+-
+-                declaration->name = tree->AddString(iter->second.c_str());
+-                declaration->type = uniformDeclaration->type;
+-
+-                // Add declaration within function statements
+-                declaration->nextStatement = node->statement;
+-                node->statement = declaration;
++                VisitAssigned(node->expression1);
++                VisitRead(node->expression2);
++            }
++            else
++            {
++                HLSLTreeVisitor::VisitBinaryExpression(node);
+             }
+         }
+ 
+-        virtual void VisitBinaryExpression(HLSLBinaryExpression * node)
++        virtual void VisitUnaryExpression(HLSLUnaryExpression * node)
+         {
+-            // Visit expression 2 first to not replace possible uniform reading
+-            VisitExpression(node->expression2);
+-
+-            if (IsAssignOp(node->binaryOp))
++            if (node->unaryOp == HLSLUnaryOp_PreIncrement || node->unaryOp == HLSLUnaryOp_PreDecrement ||
++                node->unaryOp == HLSLUnaryOp_PostIncrement || node->unaryOp == HLSLUnaryOp_PostDecrement)
++            {
++                VisitAssigned(node->expression);
++            }
++            else
+             {
+-                withinAssignment = true;
++                HLSLTreeVisitor::VisitUnaryExpression(node);
+             }
++        }
+ 
+-            VisitExpression(node->expression1);
++        virtual void VisitArrayAccess(HLSLArrayAccess * node)
++        {
++            VisitExpression(node->array);
++            VisitRead(node->index);
++        }
+ 
+-            withinAssignment = false;
++        virtual void VisitFunctionCall(HLSLFunctionCall * node)
++        {
++            const HLSLArgument * parameter = node->function != NULL ? node->function->argument : NULL;
++            for (HLSLExpression * argument = node->argument; argument != NULL; argument = argument->nextExpression)
++            {
++                if (parameter != NULL && (parameter->modifier == HLSLArgumentModifier_Out ||
++                                          parameter->modifier == HLSLArgumentModifier_Inout))
++                {
++                    VisitAssigned(argument);
++                }
++                else
++                {
++                    VisitRead(argument);
++                }
++                parameter = parameter != NULL ? parameter->nextArgument : NULL;
++            }
+         }
+ 
+         virtual void VisitIdentifierExpression(HLSLIdentifierExpression * node)
+         {
+-            if (withinAssignment)
++            if (withinFunction && withinAssignment && node->global && uniforms.count(node->name) > 0)
+             {
+-                // Check if variable is a uniform
+-                if (uniforms.find(node->name) != uniforms.end())
+-                {
+-                    // Check if variable is not already replaced
+-                    if (uniformsReplaced.find(node->name) == uniformsReplaced.end())
+-                    {
+-                        std::string newName(node->name);
+-                        do
+-                        {
+-                            newName.insert(0, "new");
+-                        }
+-                        while(tree->GetContainsString(newName.c_str()));
++                assigned.insert(node->name);
++            }
++        }
++    };
+ 
+-                        uniformsReplaced[node->name] = newName;
+-                    }
+-                }
++    // Points every reference to an assigned uniform inside a function at its copy. Global initializers
++    // run before the entry point, so they keep reading the uniforms.
++    struct RenameAssignedUniformsVisitor: HLSLTreeVisitor
++    {
++        const std::map<std::string, const char *> * copies = NULL;
++        bool withinFunction = false;
++
++        virtual void VisitDeclaration(HLSLDeclaration * node)
++        {
++            if (withinFunction)
++            {
++                HLSLTreeVisitor::VisitDeclaration(node);
+             }
++        }
+ 
+-            // Check if variable need to be replaced
+-            if (uniformsReplaced.find(node->name) != uniformsReplaced.end())
++        virtual void VisitFunction(HLSLFunction * node)
++        {
++            withinFunction = true;
++            HLSLTreeVisitor::VisitFunction(node);
++            withinFunction = false;
++        }
++
++        virtual void VisitIdentifierExpression(HLSLIdentifierExpression * node)
++        {
++            std::map<std::string, const char *>::const_iterator copy = copies->find(node->name);
++            if (node->global && copy != copies->end())
+             {
+-                // Replace
+-                node->name = tree->AddString( uniformsReplaced[node->name].c_str() );
++                node->name = copy->second;
+             }
+         }
+     };
+ 
+-    ReplaceUniformsAssignmentsVisitor visitor;
+-    visitor.tree = this;
+-    visitor.withinAssignment = false;
+-    visitor.VisitRoot(m_root);
++    FindAssignedUniformsVisitor finder;
++    finder.VisitRoot(m_root);
++    if (finder.assigned.empty())
++    {
++        return true;
++    }
++
++    std::map<std::string, const char *> copies;
++    for (const std::string & uniform : finder.assigned)
++    {
++        std::string newName(uniform);
++        do
++        {
++            newName.insert(0, "new");
++        }
++        while (GetContainsString(newName.c_str()));
++        copies[uniform] = AddString(newName.c_str());
++    }
++
++    RenameAssignedUniformsVisitor renamer;
++    renamer.copies = &copies;
++    renamer.VisitRoot(m_root);
++
++    // Declare the copies right after their uniforms, so they precede every function that uses them.
++    for (HLSLStatement * statement = m_root->statement; statement != NULL; statement = statement->nextStatement)
++    {
++        if (statement->nodeType != HLSLNodeType_Declaration)
++        {
++            continue;
++        }
++        HLSLStatement * insertAfter = statement;
++        for (HLSLDeclaration * uniform = (HLSLDeclaration *)statement; uniform != NULL; uniform = uniform->nextDeclaration)
++        {
++            std::map<std::string, const char *>::const_iterator copy = copies.find(uniform->name);
++            if (!(uniform->type.flags & HLSLTypeFlag_Uniform) || copy == copies.end())
++            {
++                continue;
++            }
++
++            HLSLIdentifierExpression * value = AddNode<HLSLIdentifierExpression>(uniform->fileName, uniform->line);
++            value->name = uniform->name;
++            value->global = true;
++            value->expressionType = uniform->type;
++
++            HLSLDeclaration * declaration = AddNode<HLSLDeclaration>(uniform->fileName, uniform->line);
++            declaration->name = copy->second;
++            declaration->type = uniform->type;
++            declaration->type.flags = (declaration->type.flags & ~(HLSLTypeFlag_Uniform | HLSLTypeFlag_Const | HLSLTypeFlag_ImplicitUniform)) | HLSLTypeFlag_Static;
++            declaration->assignment = value;
++
++            declaration->nextStatement = insertAfter->nextStatement;
++            insertAfter->nextStatement = declaration;
++            insertAfter = declaration;
++        }
++        statement = insertAfter;
++    }
+ 
+     return true;
+ }
+diff --git a/vendor/hlslparser/src/HLSLTree.h b/vendor/hlslparser/src/HLSLTree.h
+index ff8bf8a3e02d94949b493054ed43a27e10983c2a..836e227976b1af31f45153c934a85e711b3c368f 100644
+--- a/vendor/hlslparser/src/HLSLTree.h
++++ b/vendor/hlslparser/src/HLSLTree.h
+@@ -335,6 +335,8 @@ enum HLSLTypeFlags
+ 
+     // Misc.
+     HLSLTypeFlag_NoPromote = 0x200000,
++    // Uninitialized scalar/vector float globals are legacy external inputs.
++    HLSLTypeFlag_ImplicitUniform = 0x400000,
+ };
+ 
+ enum HLSLAttributeType

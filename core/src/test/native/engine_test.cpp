@@ -173,7 +173,7 @@ void projectm_opengl_forget_texture_pool() { ++g_poolForgets; }
 size_t projectm_opengl_texture_pool_bytes() { return 0; }
 uint32_t g_cacheHits = 0, g_cacheMisses = 0;
 void projectm_opengl_program_cache_stats(uint32_t* hits, uint32_t* misses) { *hits = g_cacheHits; *misses = g_cacheMisses; }
-char* projectm_get_version_string() { return strdup("4.1.0"); }
+char* projectm_get_version_string() { return strdup("4.2.0"); }
 void projectm_free_string(const char* s) { free((void*)s); }
 }
 

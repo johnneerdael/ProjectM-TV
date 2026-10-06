@@ -406,8 +406,8 @@ public class MainActivity extends Activity {
         updater.attach(handler, updateListener);
 
         TextView versionInfo = findViewById(R.id.version_info);
-        versionInfo.setText("v" + appVersion() + "  ·  ProjectM TV Engine"
-                + "\nBased on projectM " + ProjectMJNI.getVersion());
+        versionInfo.setText(getString(R.string.engine_version_info,
+                appVersion(), ProjectMJNI.getVersion()));
 
         findViewById(R.id.prev_preset_button).setOnClickListener(v -> ProjectMJNI.previousPreset(true));
         findViewById(R.id.random_preset_button).setOnClickListener(v -> ProjectMJNI.randomPreset(true));

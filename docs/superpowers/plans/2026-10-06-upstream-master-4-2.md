@@ -22,8 +22,8 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 - [x] Recover any prior work; no prior migration artifact was found.
 - [x] Reconstruct all 44 old patches with per-patch commit IDs.
 - [x] Read current public board and cited vcpkg comment.
-- [ ] Run the reconstructed baseline host suite and record failures.
-- [ ] Write per-item relevance and per-patch disposition reports.
+- [x] Run the reconstructed baseline host suite:261/261 pass.
+- [x] Write separate per-item/per-patch report in docs/UPSTREAM_PATCH_VALUE.md; final-device limits remain explicit.
 
 ### 2. HLSL compatibility port (independent agent)
 
@@ -32,7 +32,7 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 **Approach:** Apply the cumulative old delta with three-way merge against current upstream; resolve against current upstream implementation, preserve tests and attribution. Do not edit renderer, shared tests CMake or tracked patch series.
 **Execution:** Characterization first with existing regression tests; add focused coverage for changed semantics.
 **Verification:** Final diff has no conflict markers and upstream-equivalent fixes are omitted; root integrates and runs host/parser/render controls.
-- [ ] Complete port and disposition.
+- [x] Complete port and disposition.
 
 ### 3. Evaluator compatibility port (independent agent)
 
@@ -41,7 +41,7 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 **Approach:** Assess old0004/0020/0034 against evaluator22fb0cfd; drop upstream equivalents, preserve focused tests. Do not edit shared tests CMake or other files.
 **Execution:** Characterization first.
 **Verification:** Evaluator delta applies against pinned nested gitlink; evaluator tests pass after integration.
-- [ ] Complete port and disposition.
+- [x] Complete port and disposition.
 
 ### 4. Renderer and API port (root)
 
@@ -50,8 +50,8 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 **Approach:** Port the cumulative local renderer delta with three-way source comparison; remove obsolete fixes, adapt texture/mesh/GL-loader ownership explicitly, preserve new upstream behavior. Integrate independent vendor ports into a clean series.
 **Execution:** Characterization first; regression first for migration-specific loader/resource changes.
 **Verification:** Fresh series application, host suite, sanitizer controls, Java tests and both ABI builds.
-- [ ] Resolve source conflicts.
-- [ ] Integrate complete ordered patch series and new pin.
+- [x] Resolve source conflicts, preserve upstream Mesh/ShaderCache ownership, add burn-in and blur controls.
+- [x] Integrate3patches with master6f6480746/evaluator22fb0cfd; clean-export application passes.
 - [ ] Validate native/JVM/APK/AAR and core API consumer.
 
 ### 5. Docs, review, merge and release (root)
@@ -62,3 +62,7 @@ No routine version bump; no commits of modified upstream source; keep API21 and 
 - [ ] Obtain comparable TV rendering/lifecycle evidence or record concrete blocker.
 - [ ] Open ready PR, complete final-head Codex review and CI.
 - [ ] Merge and verify automatic release/Milkbeat update.
+
+## Checkpoint 2026-10-06
+
+Port-host329/329 pass; full production native runner passes engine/render-policy tests and21ASan/UBSan controls (CGL); standalone EGL transition overlay skipped because EGL/GLES development files are absent on macOS. Debugcore AAR, profile APK, releasecore AAR and releaseJVM builds pass for ARM64/ARMv7. Strict MkDocs passes. Both historic4.1.7 and new4.2 lab workers build, repeat identical simple-shape captures with0GLerrors, and5worker build tests pass. These are focused controls, not full preset-corpus or TV evidence. AM6 observed awake with Milkbeat playing; no device mutation performed yet. FinalTV, releaseAPK, Milkbeatconsumer, LinuxEGL CI, Codexreview, merge/publication remain open.

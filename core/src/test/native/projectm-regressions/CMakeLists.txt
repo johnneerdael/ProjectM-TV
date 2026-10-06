@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(projectm_regressions VERSION 4.1.7 LANGUAGES C CXX)
+project(projectm_regressions VERSION 4.2.0 LANGUAGES C CXX)
 
 if(NOT PROJECTM_SOURCE)
     message(FATAL_ERROR "PROJECTM_SOURCE must point to the patched projectM checkout")
@@ -21,6 +21,9 @@ set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 set(BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(CMAKE_DISABLE_FIND_PACKAGE_FLEX ON)
 set(CMAKE_DISABLE_FIND_PACKAGE_BISON ON)
+if(APPLE)
+    find_library(REGRESSION_OPENGL_FRAMEWORK OpenGL REQUIRED)
+endif()
 if(NOT APPLE)
     set(ENABLE_GLES ON CACHE BOOL "" FORCE)
     if(GL_LIBS)
@@ -37,6 +40,8 @@ if(NOT APPLE)
         endif()
     endif()
 endif()
+# Internal renderer headers use GLAD; load its declarations before forced GL shims.
+include_directories("${PROJECTM_SOURCE}/vendor/glad/include")
 add_subdirectory("${PROJECTM_SOURCE}" projectm)
 add_executable(projectm-regressions regression_test.cpp)
 add_executable(random-texture-regressions random_texture_test.cpp)
@@ -48,6 +53,9 @@ target_include_directories(projectm-regressions PRIVATE
     "${PROJECTM_SOURCE}/vendor"
     "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
 target_link_libraries(projectm-regressions PRIVATE libprojectM::projectM)
+if(APPLE)
+    target_link_libraries(projectm-regressions PRIVATE "${REGRESSION_OPENGL_FRAMEWORK}")
+endif()
 if(NOT APPLE)
     target_compile_definitions(projectm-regressions PRIVATE USE_GLES)
     target_link_libraries(projectm-regressions PRIVATE ${REGRESSION_GL_TARGET})
@@ -71,6 +79,9 @@ target_include_directories(random-texture-regressions PRIVATE
 target_include_directories(random-texture-regressions PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../tools/preset-lab/src/preset_lab/native")
 target_link_libraries(random-texture-regressions PRIVATE libprojectM::projectM)
+if(APPLE)
+    target_link_libraries(random-texture-regressions PRIVATE "${REGRESSION_OPENGL_FRAMEWORK}")
+endif()
 if(NOT APPLE)
     target_compile_definitions(random-texture-regressions PRIVATE USE_GLES)
     target_link_libraries(random-texture-regressions PRIVATE ${REGRESSION_GL_TARGET})
@@ -123,3 +134,37 @@ add_test(NAME float-literal-presets COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CUR
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../main/assets"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../tools/milk-analyzer/fixtures/float-literal-presets.json")
 set_tests_properties(float-literal-presets PROPERTIES TIMEOUT 120 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+# Load the GLES implementation in isolated processes, separate from desktop projectM's
+# GLAD globals and resolver singleton. The fixtures still exercise the production checks.
+find_package(Threads REQUIRED)
+add_executable(gles-loader-regressions
+    gles_loader_test.cpp
+    "${PROJECTM_SOURCE}/src/libprojectM/Renderer/Platform/GladLoader.cpp"
+    "${PROJECTM_SOURCE}/src/libprojectM/Renderer/Platform/GLProbe.cpp"
+    "${PROJECTM_SOURCE}/src/libprojectM/Renderer/Platform/GLResolver.cpp"
+    "${PROJECTM_SOURCE}/src/libprojectM/Renderer/Platform/DynamicLibrary.cpp"
+    "${PROJECTM_SOURCE}/src/libprojectM/Renderer/Platform/DynamicLibrary_posix.cpp"
+    "${PROJECTM_SOURCE}/src/libprojectM/Renderer/Platform/DynamicLibrary_win32.cpp"
+    "${PROJECTM_SOURCE}/src/libprojectM/Renderer/Platform/DynamicLibrary_emscripten.cpp"
+    "${PROJECTM_SOURCE}/src/libprojectM/Logging.cpp"
+    "${PROJECTM_SOURCE}/vendor/glad/src/gles2.c"
+    "${PROJECTM_SOURCE}/vendor/glad/src/egl.c")
+target_compile_features(gles-loader-regressions PRIVATE cxx_std_17)
+target_compile_definitions(gles-loader-regressions PRIVATE USE_GLES PROJECTM_CXX_STATIC_DEFINE)
+target_include_directories(gles-loader-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM"
+    "${CMAKE_CURRENT_BINARY_DIR}/projectm/src/api/include")
+target_link_libraries(gles-loader-regressions PRIVATE Threads::Threads ${CMAKE_DL_LIBS})
+if(APPLE)
+    # This GLES-only executable must not include desktop GLAD through the macOS shim.
+    get_target_property(GLES_LOADER_COMPILE_OPTIONS gles-loader-regressions COMPILE_OPTIONS)
+    list(REMOVE_ITEM GLES_LOADER_COMPILE_OPTIONS
+        "$<$<COMPILE_LANGUAGE:CXX>:-include${CMAKE_CURRENT_SOURCE_DIR}/macos_gl.hpp>")
+    set_property(TARGET gles-loader-regressions PROPERTY COMPILE_OPTIONS "${GLES_LOADER_COMPILE_OPTIONS}")
+endif()
+foreach(control gles30 gles20 glsl100)
+    add_test(NAME gles-loader-${control} COMMAND gles-loader-regressions ${control})
+    set_tests_properties(gles-loader-${control} PROPERTIES TIMEOUT 10
+        ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0")
+endforeach()
