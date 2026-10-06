@@ -1,5 +1,6 @@
 """Guard the narrow Core transformation and source provenance contracts."""
 import importlib.util
+import inspect
 from pathlib import Path
 import subprocess
 import tempfile
@@ -65,6 +66,29 @@ class CoreTransformationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "expected 3"):
                 builder.patch_manifest(root, 3)
 
+    def test_candidate_patch_count_comes_from_the_revision(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            patches = root / "tools/projectm-patches"
+            patches.mkdir(parents=True)
+            for number in range(1, 4):
+                (patches / f"{number:04}-candidate.patch").write_text(str(number))
+            try:
+                manifest = builder.patch_manifest(root, None)
+            except ValueError as error:
+                self.fail(f"candidate revision's consecutive patch count rejected: {error}")
+            self.assertEqual(len(manifest), 3)
+
+    def test_current_engine_clock_is_set_before_each_actual_render(self):
+        source = self.source("HEAD")
+        self.assertIn("native_frame_time", inspect.signature(builder.transform_core_native).parameters)
+        transformed = builder.transform_core_native(source, native_frame_time=True)
+        for render in ("projectm_opengl_render_frame(g_engine.pm);",
+                       "projectm_opengl_render_frame_fbo(g_engine.pm, g_engine.scaledFbo);"):
+            prefix = transformed[:transformed.index(render)].rstrip()
+            self.assertTrue(prefix.endswith("projectm_set_frame_time(g_engine.pm, lab::clock_seconds);"))
+        self.assertNotIn("projectm_set_frame_time", builder.transform_core_native(self.source(builder.BASELINE)))
+
     def test_metadata_requires_all_three_production_cpp_and_java(self):
         required = {builder.CPP + name for name in
                     ("native-lib.cpp", "snapshot_fade.cpp", "preset_prewarm.cpp")}
@@ -72,6 +96,47 @@ class CoreTransformationTests(unittest.TestCase):
         self.assertTrue(required <= set(builder.CORE_INPUTS))
         for relative in required:
             self.assertTrue((builder.REPO / relative).is_file(), relative)
+
+
+class PinnedCheckoutTests(unittest.TestCase):
+    def git(self, root, *args):
+        return subprocess.check_output(["git", "-C", str(root), *args], text=True, stderr=subprocess.PIPE).strip()
+
+    def commit_file(self, root, value):
+        (root / "version.txt").write_text(value)
+        self.git(root, "add", "version.txt")
+        self.git(root, "-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "-qm", value)
+        return self.git(root, "rev-parse", "HEAD")
+
+    def test_requested_revision_pins_win_over_live_checkout_heads(self):
+        self.assertTrue(callable(getattr(builder, "checkout_pinned_engine", None)),
+                        "builder must resolve requested revision gitlinks into a private checkout")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            repo = root / "repo"
+            engine = repo / "third_party/projectm"
+            evaluator = engine / "vendor/projectm-eval"
+            evaluator.mkdir(parents=True)
+            for path in (repo, engine, evaluator):
+                self.git(path, "init", "-q")
+            revisions = []
+            for value in ("old", "new"):
+                eval_commit = self.commit_file(evaluator, value)
+                self.git(engine, "update-index", "--add", "--cacheinfo", "160000", eval_commit, "vendor/projectm-eval")
+                engine_commit = self.commit_file(engine, value)
+                self.git(repo, "update-index", "--add", "--cacheinfo", "160000", engine_commit, "third_party/projectm")
+                source_commit = self.commit_file(repo, value)
+                revisions.append((source_commit, engine_commit, eval_commit))
+            for index, (source_commit, engine_commit, eval_commit) in enumerate(revisions):
+                checkout, engine_pin, evaluator_pin = builder.checkout_pinned_engine(repo, source_commit, root / str(index))
+                self.assertEqual((engine_pin, evaluator_pin), (engine_commit, eval_commit))
+                self.assertEqual(self.git(checkout, "rev-parse", "HEAD"), engine_commit)
+                self.assertEqual(self.git(checkout / "vendor/projectm-eval", "rev-parse", "HEAD"), eval_commit)
+                self.assertEqual((checkout / "version.txt").read_text(), ("old", "new")[index])
+            self.assertEqual(self.git(engine, "rev-parse", "HEAD"), revisions[1][1])
+            self.assertEqual(self.git(evaluator, "rev-parse", "HEAD"), revisions[1][2])
+            self.assertEqual(self.git(repo, "status", "--porcelain"), "")
+
 
 
 if __name__ == "__main__":

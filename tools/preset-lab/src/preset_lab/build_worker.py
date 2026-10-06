@@ -37,16 +37,23 @@ def _instrument(root: Path) -> None:
     shutil.copyfile(NATIVE / "analysis_hooks.hpp", library / "analysis_hooks.hpp")
     # Historical snapshots need clock/constructor hooks; current upstream exposes frame time.
     native_frame_time = "SetFrameTime(" in (library / "ProjectM.hpp").read_text()
-    paths = ["TimeKeeper.hpp", "Renderer/MilkdropNoise.cpp",
+    paths = ["TimeKeeper.cpp", "TimeKeeper.hpp", "Renderer/MilkdropNoise.cpp",
              "Renderer/TextureManager.cpp", "Renderer/TransitionShaderManager.cpp",
              "MilkdropPreset/PresetState.cpp", "MilkdropPreset/MilkdropShader.cpp"]
     if not native_frame_time:
-        paths.extend(["TimeKeeper.cpp", "ProjectM.cpp"])
+        paths.append("ProjectM.cpp")
     for name in paths:
         file = library / name
         relative = os.path.relpath(library / "analysis_hooks.hpp", file.parent)
         file.write_text(f'#include "{relative}"\n' + file.read_text())
-    if not native_frame_time:
+    # The constructor updates timers before a host can call SetFrameTime. Freeze
+    # its initial clock too, while preserving the explicit public-time branch.
+    if native_frame_time:
+        _replace(library, "TimeKeeper.cpp",
+                 "auto currentTime = std::chrono::high_resolution_clock::now();\n"
+                 "        currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();",
+                 "currentFrameTime = lab::clock_seconds;")
+    else:
         _replace(library, "TimeKeeper.cpp",
                  "auto currentTime = std::chrono::high_resolution_clock::now();\n\n    double currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();",
                  "double currentFrameTime = lab::clock_seconds;")

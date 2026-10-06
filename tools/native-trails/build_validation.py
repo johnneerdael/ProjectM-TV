@@ -24,6 +24,9 @@ sys.path.insert(0, str(ROOT / "tools/preset-lab/src"))
 from preset_lab.build_worker import prepare_engine
 from preset_lab.identity import canonical_json, digest, file_digest
 
+sys.path.insert(0, str(ROOT / "tools/core-corpus"))
+from build_core_aars import checkout_pinned_engine, set_native_frame_time
+
 CLOCK_BODY = """double NowSeconds() {
     using namespace std::chrono;
     return duration<double>(steady_clock::now().time_since_epoch()).count();
@@ -36,7 +39,7 @@ def once(text, old, new):
     return text.replace(old, new)
 
 
-def instrument_core(text):
+def instrument_core(text, native_frame_time=False):
     text = once(text, '#include "snapshot_fade.h"',
                 '#include "snapshot_fade.h"\n#include "lab_bridge.hpp"')
     text = once(text, CLOCK_BODY, "double NowSeconds() { return lab::clock_seconds.load(); }")
@@ -46,7 +49,7 @@ def instrument_core(text):
                          + ", core_corpus::reference_width, core_corpus::reference_height);", text)
     if count == 0:
         raise ValueError("No production line reference setter found")
-    return text
+    return set_native_frame_time(text, "lab::clock_seconds.load()") if native_frame_time else text
 
 
 def change(path, text, changes, root):
@@ -84,14 +87,19 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
         command(["git", "archive", commit, "-o", str(archive)], ROOT)
         with tarfile.open(archive) as stream:
             stream.extractall(source, filter="data")
+    # Freeze gitlinks from the requested revision, regardless of live checkout HEADs.
+    pinned_engine, engine_pin, evaluator_pin = checkout_pinned_engine(
+        ROOT, commit, destination / "engine-checkout")
     # prepare_engine archives the pinned submodules and applies this revision's
     # ordered patches before the standard deterministic transformations.
     engine = source / "third_party/projectm"
     engine.rmdir()
-    engine.symlink_to((ROOT / "third_party/projectm").resolve(), target_is_directory=True)
+    engine.symlink_to(pinned_engine, target_is_directory=True)
     snapshot, engine_identity = prepare_engine(source, destination / "snapshots")
     engine.unlink()
     shutil.copytree(snapshot, engine)
+    native_frame_time = "projectm_set_frame_time(" in (
+        engine / "src/api/include/projectM-4/parameters.h").read_text()
     changes = []
     hooks = engine / "src/libprojectM/analysis_hooks.hpp"
     change(hooks, once(once(hooks.read_text(), "#include <cstdint>",
@@ -100,7 +108,7 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
            changes, source)
     cpp = source / "core/src/main/cpp"
     native = cpp / "native-lib.cpp"
-    change(native, instrument_core(native.read_text()), changes, source)
+    change(native, instrument_core(native.read_text(), native_frame_time=native_frame_time), changes, source)
     for name in ("lab_bridge.cpp", "lab_bridge.hpp"):
         shutil.copyfile(ROOT / "tools/core-corpus/native-lab" / name, cpp / name)
     bridge = cpp / "lab_bridge.cpp"
@@ -133,6 +141,8 @@ def build(commit, policy, role, work, abi="arm64-v8a"):
     (destination / "instrumentation.diff").write_text("".join(changes))
     identity = {"source_commit": commit, "policy": policy, "role": role, "abi": abi,
                 "ordered_patches": patches, "engine_identity": asdict(engine_identity),
+                "engine_commit": engine_pin, "evaluator_commit": evaluator_pin,
+                "native_frame_time_api": native_frame_time,
                 "builder_sha256": file_digest(Path(__file__)),
                 "instrumentation_diff_sha256": file_digest(destination / "instrumentation.diff"),
                 "bridge_sha256": {p.name: file_digest(p) for p in (cpp / "lab_bridge.cpp", cpp / "lab_bridge.hpp")},

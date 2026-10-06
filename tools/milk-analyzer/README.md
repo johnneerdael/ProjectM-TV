@@ -71,6 +71,10 @@ cmake -S tools/milk-analyzer -B build/milk-analyzer/native \
 cmake --build build/milk-analyzer/native -j 4
 ```
 
+The shader adapter uses the engine’s `Logging.hpp` and existing `Logging` interface
+for the diagnostic macros in its copied CPU bodies. Keep those bodies unchanged
+when adapting to upstream headers so their recorded hashes remain source-bound.
+
 Match `SANITIZERS` to the linked archive. The identity JSON records pinned commit,
 patch digest and instrumentation scope. Native reader fixtures retain raw and
 assembled equation trees separately and stamp the selected loading policy. Prepared

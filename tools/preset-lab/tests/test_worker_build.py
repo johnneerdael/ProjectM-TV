@@ -16,10 +16,8 @@ def test_preparation_instruments_only_a_private_copy(tmp_path):
     assert snapshot != repo / "third_party/projectm"
     assert file_digest(original) == before
     instrumented_clock = file_digest(snapshot / "src/libprojectM/TimeKeeper.cpp")
-    if "SetFrameTime(" in (snapshot / "src/libprojectM/ProjectM.hpp").read_text():
-        assert instrumented_clock == before
-    else:
-        assert instrumented_clock != before
+    assert instrumented_clock != before
+    assert "lab::clock_seconds" in (snapshot / "src/libprojectM/TimeKeeper.cpp").read_text()
     assert (snapshot / "vendor/projectm-eval/projectm-eval/TreeFunctions.c").is_file()
     assert len(identity.commit) == 40
     assert len(identity.patches_sha256) == 64
@@ -107,6 +105,12 @@ def test_instrumentation_preserves_native_time_and_hooks_historical_snapshots(tm
         for relative, text in files.items():
             target = library / relative
             target.parent.mkdir(parents=True, exist_ok=True)
+            if relative == "TimeKeeper.cpp" and native_time:
+                text = ("double currentFrameTime{m_userSpecifiedTime};\n"
+                        "if (m_userSpecifiedTime < 0.0) {\n"
+                        "    auto currentTime = std::chrono::high_resolution_clock::now();\n"
+                        "        currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();\n"
+                        "}\n")
             target.write_text(text)
         (library / "ProjectM.hpp").write_text("void SetFrameTime(double seconds);" if native_time else "class ProjectM;")
         evaluator = engine / "vendor/projectm-eval/projectm-eval/TreeFunctions.c"
@@ -114,7 +118,10 @@ def test_instrumentation_preserves_native_time_and_hooks_historical_snapshots(tm
         evaluator.write_text("uint32_t s = 0x4141f00d; // Initial Mersenne Twister seed")
         _instrument(engine)
         if native_time:
-            assert (library / "TimeKeeper.cpp").read_text() == clock
+            hooked = (library / "TimeKeeper.cpp").read_text()
+            assert "currentFrameTime = lab::clock_seconds;" in hooked
+            assert "double currentFrameTime{m_userSpecifiedTime};" in hooked
+            assert "high_resolution_clock::now()" not in hooked
             assert (library / "ProjectM.cpp").read_text() == files["ProjectM.cpp"]
         else:
             assert "double currentFrameTime = lab::clock_seconds;" in (library / "TimeKeeper.cpp").read_text()
@@ -122,3 +129,51 @@ def test_instrumentation_preserves_native_time_and_hooks_historical_snapshots(tm
             assert "lab::ResetShaderRandom();" in (library / "ProjectM.cpp").read_text()
         assert "lab::Seed(11)" in (library / "TimeKeeper.hpp").read_text()
         assert "lab::ShaderRandom()" in (library / "MilkdropPreset/MilkdropShader.cpp").read_text()
+
+
+def test_constructor_and_preset_origin_use_frozen_clock_across_delayed_processes(tmp_path):
+    repo = Path(__file__).parents[3]
+    snapshot, _ = prepare_engine(repo, tmp_path / "snapshot")
+    library = snapshot / "src/libprojectM"
+    source = tmp_path / "clock_origin.cpp"
+    executable = tmp_path / "clock_origin"
+    source.write_text(r'''#include "TimeKeeper.hpp"
+#include "analysis_hooks.hpp"
+#include <chrono>
+#include <iomanip>
+#include <iostream>
+#include <thread>
+int main(int argc, char** argv) {
+    lab::clock_seconds = 0;
+    libprojectM::TimeKeeper keeper(30, 3, 1, 0);
+    const double initializationTime = keeper.GetRunningTime();
+    std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(argv[1])));
+    keeper.StartPreset();
+    lab::clock_seconds = 1.0 / 30;
+    keeper.SetFrameTime(lab::clock_seconds);
+    keeper.UpdateTimers();
+    std::cout << std::setprecision(17) << initializationTime << " "
+              << keeper.SecondsSinceLastFrame() << " " << keeper.PresetProgressA() << " "
+              << keeper.PresetTimeA();
+    lab::clock_seconds = 10;
+    keeper.SetFrameTime(0.5);
+    keeper.UpdateTimers();
+    std::cout << " " << keeper.GetRunningTime();
+    lab::clock_seconds = 2;
+    keeper.SetFrameTime(-1);
+    keeper.UpdateTimers();
+    std::cout << " " << keeper.GetRunningTime() << "\n";
+}
+''')
+    subprocess.run(["c++", "-std=c++17", "-I", str(library), str(source),
+                    str(library / "TimeKeeper.cpp"), "-o", str(executable)], check=True)
+    outputs = [subprocess.check_output([str(executable), str(delay)], text=True)
+               for delay in (5, 40)]
+    assert outputs[0] == outputs[1]
+    values = [float(value) for value in outputs[0].split()]
+    assert values[0] == 0
+    assert values[1] == 1.0 / 30
+    assert values[2] == (1.0 / 30) / 30
+    assert values[3] == 0
+    assert values[4] == 0.5
+    assert values[5] == 2

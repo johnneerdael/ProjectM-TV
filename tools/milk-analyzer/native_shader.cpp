@@ -3,6 +3,7 @@
 #include "vendor/json.hpp"
 #include "GLSLGenerator.h"
 #include "HLSLParser.h"
+#include "Logging.hpp"
 #include "Utils.hpp"
 #include <cstdio>
 #include <fstream>
@@ -15,6 +16,7 @@
 #include <unistd.h>
 
 using json = nlohmann::json;
+using libprojectM::Logging;
 namespace Utils = libprojectM::Utils;
 namespace Renderer { using ShaderException = std::runtime_error; }
 

@@ -1,4 +1,5 @@
 import importlib.util
+import inspect
 from pathlib import Path
 import unittest
 import tempfile
@@ -17,6 +18,19 @@ class TransformTests(unittest.TestCase):
         self.assertEqual(changed.count('core_corpus::reference_width, core_corpus::reference_height'), 2)
         self.assertNotIn('steady_clock::now()', changed)
         self.assertIn('lab::clock_seconds.load()', changed)
+
+    def test_native_frame_time_reaches_both_core_render_paths(self):
+        source = self.source() + ("    projectm_opengl_render_frame(g_engine.pm);\n"
+                                  "    projectm_opengl_render_frame_fbo(g_engine.pm, target);\n")
+        self.assertIn("native_frame_time", inspect.signature(builder.instrument_core).parameters)
+        changed = builder.instrument_core(source, native_frame_time=True)
+        for render in ("projectm_opengl_render_frame(g_engine.pm);",
+                       "projectm_opengl_render_frame_fbo(g_engine.pm, target);"):
+            self.assertIn("projectm_set_frame_time(g_engine.pm, lab::clock_seconds.load());\n    " + render, changed)
+        self.assertEqual(changed.count("projectm_set_frame_time("), 2)
+        self.assertNotIn("projectm_set_frame_time", builder.instrument_core(source))
+        with self.assertRaisesRegex(ValueError, "render"):
+            builder.instrument_core(self.source(), native_frame_time=True)
 
     def test_worker_keeps_the_selected_native_abi(self):
         source = (builder.ROOT / "tools/core-corpus/android-worker/app/build.gradle").read_text()

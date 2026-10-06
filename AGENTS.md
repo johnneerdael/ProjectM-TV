@@ -20,7 +20,7 @@ For release tooling changes, run `python3 -m unittest discover -s .github/script
 
 Keep the repository-specific sections below current whenever a task changes architecture, commands, dependencies, documentation or constraints, in the same worktree and PR as that task. Record only facts backed by repository files or observed command results; mark unverified commands and unresolved facts explicitly, and link to existing docs instead of duplicating them. Do not import assumptions from other repositories (including Milkbeat).
 
-Upstream rebase checkpoint:2026-10-06, pin `6f6480746` (unreleased4.2master), evaluator `22fb0cfd`;3consolidated patches apply;329host controls,21native sanitizer controls, both AndroidABIcore builds/profileAPK and strictMkDocs verified. TV, Milkbeatconsumer and finalCI remain required task gates.
+Upstream rebase checkpoint: 2026-10-06, pin `6f6480746` (unreleased 4.2 master), evaluator `22fb0cfd`;3 consolidated patches apply;329 host controls,21 native sanitizer controls, both AndroidABIcore builds/profileAPK and strict MkDocs verified. TV, Milkbeatconsumer and finalCI remain required task gates.
 
 CI/review workflow discovery: 2026-10-05 against `main` at `910e837b`; JDK 21.0.11, resolved JUnit 4.13.2/Hamcrest 1.3, release JVM tests, release APK/Native AAR and strict MkDocs build verified. Last full discovery: 2026-10-04, against `main` at `4fc66208` (projectM patch series 0001–0029). "Verified" below means the command was run with the stated result on that date; everything else is described from the source files and CI configuration.
 
@@ -261,7 +261,7 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 | `docs/user-guide/*.md` + `mkdocs.yml` | User guide source, built by the User guide build reusable workflow and published through the shared main/manual Pages deployer to https://johnneerdael.github.io/ProjectM-TV/ (`docs/user-guide/development.md` covers build/test and the docs site) |
 | `docs/ARCHITECTURE.md` | Engine design, threading, transitions, resolution, device tiers, measurements |
 | `docs/RELEASING.md` | CI publishing, versioning, signing, downloads, Milkbeat |
-| `docs/UPSTREAM_PATCH_VALUE.md` | Historical44-patch applicability/value assessment against the pinned unreleased4.2master; update with pin/patch/evidence changes |
+| `docs/UPSTREAM_PATCH_VALUE.md` | Historical44-patch applicability/value assessment against the pinned unreleased 4.2 master; update with pin/patch/evidence changes |
 | `docs/THIRD_PARTY.md` | projectM pin, link to patch provenance, presets/textures sources and licences |
 | `docs/PROFILING.md`, `docs/DIAGNOSTICS.md` | Profile build + simpleperf; `tools/tv-diagnostics.sh` |
 | `docs/DANCE-COLLECTION.md` | Pointer to `docs/user-guide/dance-measurement.md` |
@@ -397,3 +397,7 @@ If the repository requires a merge queue, enqueue the eligible PR and monitor un
 - Automatic quality JVM suite42 tests passes (FPS/memory/migration/budget). Release tooling82 tests passes. Revalidate after final integration/review changes.
 - Focused actual-AAR workers: `tools/native-trails/README.md`; no full-corpus claim. Released2.3.3 Native/capped AARs are local historical controls only. Native AAR Acid4K smoke480frames passed. Instrumented comparison, liveAM6, finalCI/Codex/merge/release remain required evidence, not established by these host results.
 - Owner authorizes awake rootedAM6 at192.168.50.80 for live debug/profile in this task. Verify current Android user and media-session state3; never wake remotely; restore task properties/profile preferences. Initial link briefly connected then went offline before player/user queries.
+
+## 4.2 migration validation tooling
+
+Private Preset Lab snapshots freeze TimeKeeper constructor/init timing as well as frame updates; public SetFrameTime alone only stores a requested value until UpdateTimers. Actual-core JNI workers set the upstream frame time before both render calls when the pinned source provides the API. Comparison builders derive engine/evaluator gitlinks from the requested source revision using private checkouts; never substitute the live engine HEAD for a historical comparison role. Historical24/44patch controls and original producer metadata remain immutable. Run `python -m pytest tools/native-trails tools/core-corpus -q` (CI) and `python -m pytest tools/preset-lab/tests -q` from the installed Preset Lab environment when these builders change. Copied native CPU shader bodies must retain their source hashes; include production logging declarations in adapters rather than stubbing copied logging calls.
