@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "purpose": "Spatialblurstage localization; no inferreduniversalGPUrule orfullpresetrepair",
+  "reference_release": "2.3.8",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "native_pixels_sha256": "7d7c4b3debf46f102fdd4830402a12e7839068d514dc00e9b540fb9cad17684c",
+  "prediction_pixels_sha256": "cc2edf3b4608142cd0e2219c92f0d4bee4bf303eebe91aab98b66c9cca0eb552",
+  "prediction_seal_sha256": "a4c4cb23c6ce46741aae479841866475269dda5bbb8412a3aedffbc9f5c3848f",
+  "native_final_seal_sha256": "d54e6486bf1ec1b3541f14a259fb6751dadd6d44283181a7c8b01758d40de07c",
+  "seed_uploaded_exact": true,
+  "phase_history_carry_exact": true,
+  "blur1_mean_rgb8_error": 0.3958333333333333,
+  "blur2_mean_rgb8_error": 0.436198,
+  "max_error_rgb8": 1,
+  "negative_hypotheses": [
+    "Nearest8fraction2Dprototypeworsens024fullerror11.2045\u219211.4356",
+    "ShaderFMAprototypebarelychanges02411.2045\u219211.2002",
+    "Blurweighted-sumFMAprototypeonlyslightlychangesbasicspatialblur;notadopted"
+  ],
+  "limits": [
+    "Nativecontrolsource/contextbounded",
+    "No new source sampling/arithmeticmodel established",
+    "005gradesimmutable and95stagedgatestillunmet"
+  ],
+  "kernel_constant_crosscheck": {
+    "count_float32_values": 22,
+    "all_bits_match_host_compiled_cpp_formulas": true,
+    "runtime_uniform_readback": false,
+    "path": "build/visual-loop/precision-controls238/blur-kernel-fma-prototype/uniform-constant-crosscheck.json"
+  },
+  "blur_fma_prototype": {
+    "production_patch": false,
+    "blur1_mae_before": 0.3958333333,
+    "blur1_mae_after": 0.390625,
+    "blur2_bank_mae_before": 0.435938,
+    "blur2_bank_mae_after": 0.428125,
+    "max_error_remains": 1
+  }
+}

@@ -381,3 +381,14 @@ changes but not each preset's visual impact. The predictor already honors actual
 `renderer_literal`, so this is an engine authored-semantics handoff, not a newly
 unmodeled predictor gap. Evidence:
 `tools/milk-analyzer/fixtures/native-literal-roundtrip-defect-2026-10-06.json`.
+
+Constant-field blur history matches all three native matrices exactly. The
+spatially varying seed also matches exactly, but resulting Blur1/Blur2 samples
+differ by at most one RGB8 level, predominantly upward along the horizontal
+ramp. A build-only fused blur accumulation only slightly reduces this error;
+no arithmetic profile is adopted. All22 kernel constants match host-compiled
+C++ formulas bit-for-bit, without claiming runtime uniform readback. Evidence:
+`tools/milk-analyzer/fixtures/spatial-blur-stage-localization-2026-10-06.json`.
+The next useful localization is bounded native pass-level observation through
+test-host instrumentation, keeping the published AAR unchanged; another guessed
+sampling rule or repeated full-preset render is not justified by these results.
