@@ -35,17 +35,24 @@ def test_incomplete_or_changed_results_cannot_be_exported(tmp_path,failure):
     assert not (tmp_path/'audience-review.json').exists()
 
 
-@pytest.mark.parametrize('tamper',[None,'membership','score','corpus','rank','bands','aliases'])
+@pytest.mark.parametrize('tamper',[None,'membership','memory_weight','extra_weight_column','score','corpus','rank','bands','aliases'])
 def test_verify_checks_real_corpus_scores_and_membership_even_with_updated_checksums(tmp_path,tamper):
     corpus,results=inputs();aar=tmp_path/'core.aar'
     with zipfile.ZipFile(aar,'w') as archive:
         for row in corpus:
             payload=row['preset'].encode();row['sha256']=hashlib.sha256(payload).hexdigest()
             archive.writestr('assets/presets/'+row['preset'],payload)
+        archive.writestr('assets/presets.idx',''.join(f"{row['preset']}\t{i+1}\n" for i,row in enumerate(corpus)))
     results={row['sha256']:{'preset':row['preset'],'sha256':row['sha256'],'identity':'run','status':'scored','score':i*20} for i,row in enumerate(corpus)}
-    output=tmp_path/'assets';manifest=export_collection(corpus,results,output,identity='run',weights={},run_metadata={'aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest()})
+    output=tmp_path/'assets';manifest=export_collection(corpus,results,output,identity='run',weights={row['preset']:i+1 for i,row in enumerate(corpus)},run_metadata={'aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest()})
     if tamper=='membership':
         path=output/'preset-genres/genres/ambient.idx';path.write_text('5.milk\t0\n')
+        manifest['checksums']['preset-genres/genres/ambient.idx']=hashlib.sha256(path.read_bytes()).hexdigest()
+    if tamper in {'memory_weight','extra_weight_column'}:
+        path=output/'preset-genres/genres/ambient.idx'
+        original=path.read_text()
+        changed='0.milk\t0' if tamper=='memory_weight' else '0.milk\t1\t999'
+        path.write_text(original.replace('0.milk\t1',changed))
         manifest['checksums']['preset-genres/genres/ambient.idx']=hashlib.sha256(path.read_bytes()).hexdigest()
     if tamper=='score':manifest['presets'][0]['score']=float('nan')
     if tamper=='corpus':manifest['presets'][0]['sha256']='wrong'

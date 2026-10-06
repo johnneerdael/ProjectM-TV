@@ -437,7 +437,7 @@ def test_random_bindings_enter_full_forecast_and_wrong_frame_time_is_rejected():
     bindings=[]
     for frame in values['frames']:
         bindings.append({'composite':{'event_index':len(events),'shader_id':'comp'}})
-        events.append({'kind':'load','id':'comp','time':frame['time']})
+        events.append({'kind':'load','id':'comp','time':frame['time'],'frame':int(frame['frame']),'feedback_detail_alpha':-1.0})
     ledger=execute_ledger(BINARIES/'milk-shader-random',seed=12345,events=events)
     inputs={'ledger':ledger,'profile':ledger['profile'],'bindings':bindings}
     result=predict(source,audio=values,random_inputs=inputs)
@@ -447,6 +447,33 @@ def test_random_bindings_enter_full_forecast_and_wrong_frame_time_is_rejected():
     inputs['bindings'][0]['composite']['event_index']=2
     with pytest.raises(ValueError,match='time'):
         predict(source,audio=values,random_inputs=inputs)
+
+
+@pytest.mark.parametrize('context', ['matching', 'wrong_frame', 'detail_pass'])
+def test_random_frame_cache_context_must_match_full_forecast(context,monkeypatch):
+    from shader_random import execute_ledger
+    binaries=Path(os.environ.get('MILK_TEST_CURRENT_BINARIES',BINARIES))
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    monkeypatch.setattr(test_shader_compat,'TRANSLATOR',binaries/'milk-shader-translate')
+    source=native(BASE+'comp_1=`shader_body {ret=rand_frame.xyz;}\n',binaries=binaries)
+    values=audio(1)
+    frame=values['frames'][0]
+    events=[{'kind':'construct','id':'comp'},
+            {'kind':'load','id':'comp','time':frame['time'],
+             'frame':int(frame['frame'])+(1 if context=='wrong_frame' else 0),
+             'feedback_detail_alpha':.5 if context=='detail_pass' else -1.0}]
+    ledger=execute_ledger(binaries/'milk-shader-random',seed=12345,events=events)
+    inputs={'ledger':ledger,'profile':ledger['profile'],
+            'bindings':[{'composite':{'event_index':1,'shader_id':'comp'}}]}
+    if context=='matching':
+        result=predict(source,audio=values,random_inputs=inputs,binaries=binaries)
+        assert result['status']=='computed'
+        expected=ledger['loads'][0]['uniforms']['rand_frame'][:3]
+        np.testing.assert_allclose(result['frames'][0]['display'][...,:3],
+                                   np.broadcast_to(expected,(32,32,3)),atol=1e-7)
+    else:
+        with pytest.raises(ValueError,match='frame|detail alpha'):
+            predict(source,audio=values,random_inputs=inputs,binaries=binaries)
 
 
 def test_callback_cannot_mutate_the_declared_domain_during_forecast():

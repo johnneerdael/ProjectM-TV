@@ -1,9 +1,10 @@
 # MilkDrop source analysis and predictive collections beta
 
-This focused subset of the experimental analyzer from [PR #25](https://github.com/johnneerdael/ProjectM-TV/pull/25)
-imports its inductive main-Q domain and shader selector proof. The separate beta
-collection tools below add numerical activity scoring using a published AAR. The source analysis
-is a diagnostic tool; parsing or lowering success does not certify appearance.
+This analyzer began with the inductive main-Q domain and shader selector proof
+from [PR #25](https://github.com/johnneerdael/ProjectM-TV/pull/25). It now includes
+an experimental numerical source forecaster and separate collection tools that
+score activity using a published AAR. Parsing or lowering success alone does not
+certify appearance; the forecaster's frozen visual comparisons are described below.
 
 ## Four initialization cases
 
@@ -33,9 +34,9 @@ values for different grid lanes. The policy is enabled only for declarations car
 implicit-uniform marker, in a reader stamped for the new engine. `strict-v1` keeps
 external inputs symbolic. It never initializes a local just because its name matches.
 
-This focused tool retains source parsing, equation-domain proof, shader lowering,
-and offline compatibility checks. It does not include the experimental pipeline
-simulation from PR #25. No image or device result is inferred from source checks.
+Initialization diagnostics retain source parsing, equation-domain proof, shader
+lowering and offline compatibility checks. They are separate from the full pipeline
+forecaster below. No image or device result is inferred from parsing alone.
 
 This policy defines current core behavior. It does not claim equivalence to old
 D3D9 device-register history, nor does NULL legacy reflection prove a zero value.
@@ -53,8 +54,9 @@ host regressions using the normal repository prerequisites:
 bash core/src/test/native/run_native_tests.sh
 ```
 
-The Preset Lab CI job reuses its prepared engine and archive, builds the two CPU-only
-adapters (`milk-native-reader`, `milk-shader-translate`), and runs:
+The Preset Lab CI job reuses its prepared engine and archive and builds eight
+source adapters for reader, translator, audio, wave, image, noise, composite and
+shader-random inputs. It then runs:
 
 ```sh
 python -m pytest tools/milk-analyzer -q
@@ -74,8 +76,8 @@ cmake --build build/milk-analyzer/native -j 4
 Match `SANITIZERS` to the linked archive. The identity JSON records pinned commit,
 patch digest and instrumentation scope. Native reader fixtures retain raw and
 assembled equation trees separately and stamp the selected loading policy. Prepared
-historical adapters cannot certify the new target policy. The broader original
-PR #25 suite remains a supplemental compatibility check; it is not imported here.
+historical adapters cannot certify the new target policy. Historical source
+fixtures and live current adapters have separate policies and evidence identities.
 
 The native tests exercise actual parser generation, default and nonzero input values,
 copy reset across invocations, local/static/initialized controls and preset hashes
@@ -605,3 +607,19 @@ Preserve effective helper return types through parent arithmetic/comparisons;
 explicit declarations still cast to their authored type. New scalar/grid controls
 cover values above2^24and unresolved logarithms. The sealed audit remains on its
 original model revision; these repairs do not retroactively change its grades.
+
+
+Review asset verification reuses Preset Lab's strict index reader. Install the
+package in the same environment (`python -m pip install -e tools/preset-lab`).
+It compares ordered preset names and memory weights with the published AAR's
+`assets/presets.idx`, in addition to scores, memberships and checksums. A changed
+weight or extra column fails verification even when its checksum is updated.
+Empty groups remain supported. This concerns the review exporter; the shipped
+beta bundle and native category checks remain separate.
+
+Frame-cache-aware random ledgers must match each scene's declared render-input
+frame and ordinary draw state (`feedback_detail_alpha=-1`). Detail passes are
+unmodeled and rejected; a matching timestamp alone cannot select a different
+frame's cached uniforms. Preserve historical ledgers without cache metadata under
+their existing limited policy. The frozen100-preset audit declared correct frame
+and ordinary-draw inputs; these new guards do not rerate its existing evidence.

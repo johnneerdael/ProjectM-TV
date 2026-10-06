@@ -93,3 +93,16 @@ prediction/grade was changed. This is a predictor repair, not an AAR handoff.
 an affected-code inventory, not evidence that71visual predictions were wrong:
 ordinary finite values can agree in both paths. No post-repair100render is claimed.
 Future fresh predictions must use the repaired model and a new freeze.
+
+
+## GitHub review follow-up
+
+The completed review of5491d44found missing frame-cache context checks in the
+forecaster and missing memory-weight comparisons in the review exporter. Both
+were reproduced with focused negative controls. The forecaster now checks the
+scene render frame and ordinary drawalpha=-1; unsupported detail passes are
+rejected. The verifier reuses Preset Lab's index parser and compares ordered
+preset/weight pairs with the published master index, including when checksums
+are updated after tampering. Positive matching inputs and empty groups remain
+supported. The affected77tests pass; final-head review and CI are still required.
+These are predictor/export validation defects, not AAR bugs or changed audit scores.

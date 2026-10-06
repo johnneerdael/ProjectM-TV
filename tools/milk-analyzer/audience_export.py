@@ -4,8 +4,11 @@ import hashlib
 import json
 import math
 import sys
+import tempfile
 import zipfile
 from pathlib import Path
+
+from preset_lab.inventory import read_index
 
 from audience_policy import labels_for_intensity
 from audience_ranking import relative_activity_ranks
@@ -54,6 +57,12 @@ def verify_review_assets(output, aar):
     with zipfile.ZipFile(aar) as archive:
         expected={name.removeprefix('assets/presets/'):hashlib.sha256(archive.read(name)).hexdigest()
                   for name in archive.namelist() if name.startswith('assets/presets/') and name.lower().endswith('.milk')}
+        with tempfile.TemporaryDirectory(prefix='milk-review-index-') as temporary:
+            master=Path(temporary)/'presets.idx'
+            master.write_bytes(archive.read('assets/presets.idx'))
+            weights=read_index(master)
+    if weights.keys()!=expected.keys() or any(weight>2**31-1 for weight in weights.values()):
+        raise ValueError('Published master index differs from supported preset corpus/weights')
     rows=manifest['presets']
     if manifest['core_aliases']!={'all':'all','chill':'ambient','normal':'pop','party':'dance'}:
         raise ValueError('Review core aliases differ')
@@ -76,10 +85,11 @@ def verify_review_assets(output, aar):
         raise ValueError('Displayed scores differ from manifest')
     for group,label in (('all',None),('chill','Chill'),('normal','Normal'),('party','Party')):
         alias=manifest['core_aliases'][group]
-        actual=[line.split('\t')[0] for line in (output/f'preset-genres/genres/{alias}.idx').read_text().splitlines()]
+        index=output/f'preset-genres/genres/{alias}.idx'
+        actual=list(read_index(index).items()) if index.stat().st_size else []
         selected=[r['preset'] for r in rows if label is None or label in r['labels']]
-        if actual!=selected or manifest['counts'][group]!=len(selected):
-            raise ValueError('Group membership differs from scores: '+group)
+        if actual!=[(name,weights[name]) for name in selected] or manifest['counts'][group]!=len(selected):
+            raise ValueError('Group membership or memory weights differ from published scores/index: '+group)
     for name,expected_hash in manifest['checksums'].items():
         if hashlib.sha256((output/name).read_bytes()).hexdigest()!=expected_hash:
             raise ValueError('Review asset checksum differs: '+name)

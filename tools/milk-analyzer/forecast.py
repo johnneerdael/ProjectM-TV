@@ -121,6 +121,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('Apple numeric profile requires glsl330 shader backend')
     if type(domain['quantize']) is not bool or type(retain_surfaces) is not bool:
         raise ValueError('explicit boolean quantization/retention settings required')
+    if domain.get('feedback_detail_alpha',-1.0)!=-1.0:
+        raise ValueError('feedback detail alpha passes are not implemented in source forecasts')
     if type(domain['equation_seed']) is not int or not 0<=domain['equation_seed']<2**32:
         raise ValueError('explicit uint32 equation seed required')
     rng_policy = domain.get('equation_rng_policy', 'declared-seed-v1')
@@ -237,9 +239,12 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             if set(bindings)-{'warp','composite'}:
                 raise ValueError('random binding stage must be warp/composite')
             for stage, binding in bindings.items():
+                cache_context = ({'frame':int(frame['render_inputs']['frame']),
+                                  'feedback_detail_alpha':-1.0}
+                                 if 'frame_cache_policy' in random_inputs['ledger'] else {})
                 random_banks[stage] = bind_random_uniforms(random_inputs['ledger'],
                     event_index=binding['event_index'],shader_id=binding['shader_id'],
-                    time=render_time,profile=random_inputs['profile'])
+                    time=render_time,profile=random_inputs['profile'],**cache_context)
 
         def draw(destination, frame_index, previous_main):
             textures = {}; texture_aspects = {}

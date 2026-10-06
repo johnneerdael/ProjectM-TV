@@ -139,3 +139,10 @@ integer `*=` preserves integer arithmetic. These source checks prevent a numeric
 forecast from silently rounding large integer state or masking invalid arithmetic.
 The recorded100-preset audit predates this review repair; its original grades remain
 unchanged, and fresh predictions require a new model freeze.
+
+
+Source forecasts check frame-cache-aware random inputs against the declared render
+frame and ordinary draw state. Detail passes remain unsupported. The separate
+review collection verifier also checks preset memory weights against the published
+AAR's master index, so changing a weight and its checksum cannot produce a verified
+review bundle. These checks do not regenerate the packaged mood indexes.
