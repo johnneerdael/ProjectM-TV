@@ -1,0 +1,2610 @@
+{
+  "scope": "nine staticblurmentions; exact original bytes;3frames only; actualused blur horizontalnormalizer bitclassification; notvisualcertification",
+  "cases": [
+    {
+      "phase": "before",
+      "preset": "$$$ Royal - Mashup (29).milk",
+      "sha256": "05d916118a7f54c1b981e8111c6a3490872117761141829ec999544382791607",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "$$$ Royal - Mashup (29).milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 6,
+      "display_sha256": "e6e248468023686c60857f8e4f0a919bd2c34cb724919733adddc21a2c03b5cd"
+    },
+    {
+      "phase": "before",
+      "preset": "Cope - The Cloud.milk",
+      "sha256": "9c93b7182617fc543a329b094067136fde5e67a6ccf78047d350dc7c7f90ad9c",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Cope - The Cloud.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 6,
+      "display_sha256": "e6e248468023686c60857f8e4f0a919bd2c34cb724919733adddc21a2c03b5cd"
+    },
+    {
+      "phase": "before",
+      "preset": "EVET - Scanazoic --- Isosceles edit.milk",
+      "sha256": "d5b351797af60543cfd3d4230c0ebb708f71c74d53f9a86cd592a79585ba0075",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "EVET - Scanazoic --- Isosceles edit.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fb6db6e",
+            "bea83a84",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fb6db6e",
+            "bea83a84",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fb6db6e",
+            "bea83a84",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "47f8f22685dc40d3bdab70b8ecbc866e741872b3b42d67593a8ff5920c8dc5c5"
+    },
+    {
+      "phase": "before",
+      "preset": "Flexi - emergencey 2 --- Isosceles edit4a enhance.milk",
+      "sha256": "e5389c815f0f3b89227722f9deff98b190663ed5fb9b4aef26067a1ff3ab6734",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Flexi - emergencey 2 --- Isosceles edit4a enhance.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 6,
+      "nonfinite_normalizer_pass_count": 3,
+      "display_sha256": "c79367844b5cc5e77d76ad4cb171d25ed964f0675ecc4b874e3242f74fb617f1"
+    },
+    {
+      "phase": "before",
+      "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+      "sha256": "af2294355b6d5f4ce72b8c3ea31f6e531a546547ea390dd53a5be353e542f13d",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 6,
+      "nonfinite_normalizer_pass_count": 3,
+      "display_sha256": "c79367844b5cc5e77d76ad4cb171d25ed964f0675ecc4b874e3242f74fb617f1"
+    },
+    {
+      "phase": "before",
+      "preset": "Mig_015.milk",
+      "sha256": "4b2f227da1789b1be41aea662d163032eaa9f74e3642f91d8f6b5ff1250d795f",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Mig_015.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40a00000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40a00000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 4,
+      "display_sha256": "4d383b9bd3cf47aa5c3efa68fa5d7c4a95a70bed8236e3534a94e95e9a7cbf0f"
+    },
+    {
+      "phase": "before",
+      "preset": "flexi - a julia fractal for hexcollie embossed (Jelly).milk",
+      "sha256": "32041049d4da1b22e8015c5c77c717220a65fbeb3a614ced302ace026a9b532b",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "flexi - a julia fractal for hexcollie embossed (Jelly).milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fe08fba",
+            "bef286bf",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fe08fba",
+            "bef286bf",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "ff800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7fc00000",
+            "7fc00000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 4,
+      "display_sha256": "d2d7179c33addde227123474105a3088552f30fd5b2d6019ed920ec11ed234ce"
+    },
+    {
+      "phase": "before",
+      "preset": "goody - woven beads (ps2-0).milk",
+      "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "goody - woven beads (ps2-0).milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 3,
+      "display_sha256": "979d6bccb9f55273487171678dbec83f7682231f674d00e70445bb860896aff6"
+    },
+    {
+      "phase": "before",
+      "preset": "shadowharlequin, goody - woven beads (ps2-0) [outlined].milk",
+      "sha256": "61f1423c040cabdcb37c5caa9294313b5c5692bc7c0ab3c04d7d4e499677487f",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "shadowharlequin, goody - woven beads (ps2-0) [outlined].milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "7f800000",
+            "7f800000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": false
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 3,
+      "display_sha256": "931057f4c2be7a54b6df30bd100190501ff1d17061d907b762d39bd5469b9e37"
+    },
+    {
+      "phase": "after",
+      "preset": "$$$ Royal - Mashup (29).milk",
+      "sha256": "05d916118a7f54c1b981e8111c6a3490872117761141829ec999544382791607",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "$$$ Royal - Mashup (29).milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3e7ffff6",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3e000023",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3e7ffff6",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3e000023",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "e6e248468023686c60857f8e4f0a919bd2c34cb724919733adddc21a2c03b5cd"
+    },
+    {
+      "phase": "after",
+      "preset": "Cope - The Cloud.milk",
+      "sha256": "9c93b7182617fc543a329b094067136fde5e67a6ccf78047d350dc7c7f90ad9c",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Cope - The Cloud.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3e7ffff6",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3e7ffff6",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3e7ffff6",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "e6e248468023686c60857f8e4f0a919bd2c34cb724919733adddc21a2c03b5cd"
+    },
+    {
+      "phase": "after",
+      "preset": "EVET - Scanazoic --- Isosceles edit.milk",
+      "sha256": "d5b351797af60543cfd3d4230c0ebb708f71c74d53f9a86cd592a79585ba0075",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "EVET - Scanazoic --- Isosceles edit.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fb6db6e",
+            "bea83a84",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fb6db6e",
+            "bea83a84",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fb6db6e",
+            "bea83a84",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "47f8f22685dc40d3bdab70b8ecbc866e741872b3b42d67593a8ff5920c8dc5c5"
+    },
+    {
+      "phase": "after",
+      "preset": "Flexi - emergencey 2 --- Isosceles edit4a enhance.milk",
+      "sha256": "e5389c815f0f3b89227722f9deff98b190663ed5fb9b4aef26067a1ff3ab6734",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Flexi - emergencey 2 --- Isosceles edit4a enhance.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 6,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "c79367844b5cc5e77d76ad4cb171d25ed964f0675ecc4b874e3242f74fb617f1"
+    },
+    {
+      "phase": "after",
+      "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+      "sha256": "af2294355b6d5f4ce72b8c3ea31f6e531a546547ea390dd53a5be353e542f13d",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200004",
+            "c1180004",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 6,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "c79367844b5cc5e77d76ad4cb171d25ed964f0675ecc4b874e3242f74fb617f1"
+    },
+    {
+      "phase": "after",
+      "preset": "Mig_015.milk",
+      "sha256": "4b2f227da1789b1be41aea662d163032eaa9f74e3642f91d8f6b5ff1250d795f",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "Mig_015.milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40a00000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40000000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40a00000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40000000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "2ec05c97c6b9b91041bd91d10703819db7214ad68e9364185c23d7c9fdfea3cd"
+    },
+    {
+      "phase": "after",
+      "preset": "flexi - a julia fractal for hexcollie embossed (Jelly).milk",
+      "sha256": "32041049d4da1b22e8015c5c77c717220a65fbeb3a614ced302ace026a9b532b",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "flexi - a julia fractal for hexcollie embossed (Jelly).milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fe08fba",
+            "bef286bf",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40b66663",
+            "c09cccc9",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3fd99993",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3fe08fba",
+            "bef286bf",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "40b66663",
+            "c09cccc9",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "3fd99993",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "ca25bb646920a9d6bc8bcc3c45808421eb002ae6090a489fe2da991211122c95"
+    },
+    {
+      "phase": "after",
+      "preset": "goody - woven beads (ps2-0).milk",
+      "sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "goody - woven beads (ps2-0).milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "979d6bccb9f55273487171678dbec83f7682231f674d00e70445bb860896aff6"
+    },
+    {
+      "phase": "after",
+      "preset": "shadowharlequin, goody - woven beads (ps2-0) [outlined].milk",
+      "sha256": "61f1423c040cabdcb37c5caa9294313b5c5692bc7c0ab3c04d7d4e499677487f",
+      "exit_code": 0,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.1.7",
+        "preset": "shadowharlequin, goody - woven beads (ps2-0) [outlined].milk",
+        "frames": 3,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 3,
+        "rendered_frame_serial_delta": 3,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "actual_blur_passes": [
+        {
+          "event": 1,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 2,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 3,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 4,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 5,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 6,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 7,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 8,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 9,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "3f800000",
+            "80000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 10,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        },
+        {
+          "event": 11,
+          "kind": "Blur1",
+          "_c3_bits": [
+            "41200000",
+            "3f000000",
+            "3cdfd33b",
+            "00000000"
+          ],
+          "state_restored": true,
+          "pixel_saved": true,
+          "normalization_finite": true
+        },
+        {
+          "event": 12,
+          "kind": "Blur2",
+          "_c3_bits": null,
+          "state_restored": true,
+          "pixel_saved": true
+        }
+      ],
+      "blur_pass_count_observed_cap12": 12,
+      "nonfinite_normalizer_pass_count": 0,
+      "display_sha256": "b4beb2a4e1fecb211f5acd75ff2c61007cf2c7c9fb5d0786fc8d8dbfbad8decc"
+    }
+  ],
+  "raw_result_sha256": "bf6be602aabb61f4e5ed1b1b6954ccf5c65a2ec3ce103e4e53fd504d1219bb82"
+}

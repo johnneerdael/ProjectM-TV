@@ -70,3 +70,11 @@ to six significant digits during translation. This can correct output that depen
 on closely spaced coefficients. Preset files are unchanged; the correction does not
 guarantee identical MilkDrop appearance on every GPU. Nonfinite literals fail shader
 translation and use the existing simpler-shader fallback.
+
+Main-textured shapes now select repeat wrapping and linear filtering for every
+instance, so earlier blur draws cannot change their sampler. Equal or narrow blur
+bounds are separated instead of producing a zero normalization interval; nonfinite
+or unrepresentable float32 ranges use the default 0–1 range at all three levels.
+Negative motion zoom retains its signed reflection when the zoom exponent is
+exactly 1. Other negative-base power domains remain unsupported. These engine
+corrections preserve preset files and do not certify identical Windows appearance.

@@ -72,6 +72,23 @@ Then check that every `VisualizerRenderer: STATS … surface=WxH` line from this
 
 Why the listener is disallowed: Android rebinds the app's notification listener about a second after a force-stop, which starts the app's process again, and `ProjectMApplication` reads `projectm_settings` at that moment. If that happens before the write, the process keeps the previous run's settings. If it reads the file while `cat` has emptied it, it gets no settings, and its one-time migrations then save that nearly empty map over the new file, so even another force-stop before `am start` gives the defaults (Auto, 30 fps cap). Measured with alternating render heights: on an Ugoos AM6 (Android 9), 4 of 7 runs were wrong with a single force-stop and 8 of 8 right with a second force-stop after the write; on an Ugoos AM9 Pro (Android 14), 1 of 16 runs with the second force-stop still got the defaults. With the listener disallowed no app process exists during the write. Clear `debug.projectmtv.preset` afterwards if you pinned a preset.
 
+## Verify the pinned preset
+
+`debug.projectmtv.preset` selects the first eligible filename beginning with its
+value. A curated mood can exclude the witness, and a short prefix can choose a
+sibling: `widest swing` can select `widest swing zero-sum.milk`. Use the exact full
+filename when it fits the Android property length limit; otherwise verify the
+chosen filename before accepting a measurement.
+
+For a paired benchmark, record the original mood and temporarily use All when
+needed, then restore the original mood and debug property. Confirm an exact
+`BENCHMARK preset=...` and `LOAD` filename in each process's logs, along with actual
+surface size and audio level. Cold-start with the captured-user/listener procedure
+so a preserved preset from an old GL context cannot override the pin. Discard
+windows with missing or different filenames. Keep the first reporting interval as
+startup data, separate from steady samples. Paused-playback windows must be
+identified as silence checks, not live-music performance evidence.
+
 ## Native trails and automatic memory checks
 
 Use Standard/Medium/High with the same target frame rate and pinned preset. Record
