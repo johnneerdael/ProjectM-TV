@@ -94,3 +94,17 @@ The authoritative baseline is the latest released ProjectM TV core AAR, not stoc
 Evaluate all 44 historical patches and their affected or potentially affected presets across the full 9,606-preset inventory. Static candidates are not visual certification; resource/lifecycle changes can affect the whole inventory. The user's latest completion criterion is at least **100 randomly chosen presets with the same fixed seed and zero pixel changes**. Freeze the unbiased sample before rendering, without replacing failed presets. Use selection seed 12345 and render seed 12345, matching initial clock, PCM, settings, frame numbers and device/backend. Require same-role repeatability and exact old/new RGB equality; include midgit as an additional regression witness. The previous four-witness/32-job comparison does not satisfy this gate. Do not certify untested presets or infer full-corpus equivalence from the sample.
 
 Build private workers embedding unchanged released baseline and candidate AAR bytes and verify packaged library/asset identity. The released JNI lacks deterministic seed/initial-clock controls. Keep unchanged-AAR runtime evidence separate from source-instrumented deterministic diagnostics; the user approved fixed-seed/fixed-clock deterministic source comparisons alongside unchanged released-AAR runtime checks. Do not silently relax exact fidelity, label untested presets verified, or proceed to readiness/merge before the expanded gate is satisfied.
+
+## Resumed work after the 4.1.7 fixes
+
+The latest user objective supersedes the earlier TV-only and four-witness scope. PR #44 is merged at main `347fca38`; PR #49 remains pending. Monitor #49's merge and resulting build every three minutes, without interfering with its implementation. After completion:
+
+- [ ] Fetch final main and enumerate all new patches, app/core changes and regression tests since `b1bb994d`.
+- [ ] Integrate every new fix/feature into the 4.2 branch, adapting renderer patches against current upstream ownership and preserving final 4.1.7 behavior. Run appropriate source, native, JVM, Android and consumer checks; fix all migration failures.
+- [ ] Verify the latest released ProjectM-TV AAR, source revision, asset/library bytes and checksums as the new baseline. Preserve earlier baseline identities as historical.
+- [ ] Freeze the seed-12345 random 100 plus all explicitly evidenced patch regression presets, with exact names/hashes and patch associations. Require zero RGB differences at every declared frame and repeated same-role runs; retain first-divergence evidence and fix any mismatches.
+- [ ] Run separate unchanged-AAR runtime journeys on the task-owned GPU emulator. The user authorizes stopping previous emulators and waives TV validation; API36 ARM64 `emulator-5622` currently reports Apple M4 Pro/OpenGL ES 3.0. Audit GLES requirements and validate actual final shaders/rendering on this backend.
+- [ ] Use original MilkDrop2 source at the supplied local path for behavior questions, with specific file/symbol evidence.
+- [ ] Attach image proof and complete evidence/documentation assessment to PR #46; obtain final-head Codex review and passing CI, then follow the repository's merge/publication gates.
+
+The reset-only midgit rerun finished all four TV controls before the pause: 1080p and 4K, two repeats, eight captures each, all matching the old baseline exactly. This demonstrates the shader seed initialization cause for that recorded mismatch. It is neither a post-#49 baseline comparison nor the final every-frame/random-preset certificate.
