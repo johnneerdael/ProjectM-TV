@@ -248,6 +248,13 @@ pixel-perfect or calibrated accuracy percentages. The next gate is ten fresh
 presets with all ten at95+, before the randomized100-preset audit. Evidence:
 `fixtures/visual-loop-round006-2026-10-06.json`.
 
+The first ten-case Round007 does not pass: six reach95, two source-domain
+attempts remain unresolved, one black-output case lacks motion/history coverage,
+and one retained-history prediction is materially too bright. Original records
+are preserved. Repair these gaps and improve the declared60-frame stimulus before
+another ten-case gate; the randomized100-case audit remains pending. Evidence:
+`fixtures/visual-loop-round007-2026-10-06.json`.
+
 Round 001 scored 97.5, 100 and 90. It did not meet the gate. Its frozen compact
 fixture preserves predictions, identities, measurements and misses. Earlier
 Tripgnosis trajectory errors were repaired by correcting custom-wave point counts

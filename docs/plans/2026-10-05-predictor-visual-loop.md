@@ -499,3 +499,26 @@ profile. Ten-preset95+ validation and the randomized100-case audit remain requir
 Per-stage native program handles were not observed in this fresh batch; error-free
 loading does not independently certify every authored shader choice. Neither this
 gate nor the pixel deltas establishes corpus-wide or native4K accuracy.
+
+## Round007: first ten-preset gate failed
+
+The next ten frozen random entries028–037 score95,0,95,95,95,60,95,95,0,62.5.
+Six meet95; the gate fails. All200 claims and96 source files were sealed before
+native observations, with unchanged model8936fd24 and core2.3.8. Root verifies
+the324-file final seal, original prediction files, claim totals and runtime metadata.
+
+029 stops on a collapsed native blur range;036 stops on an active zero-base
+power domain. Both retain zero source frames and zero prediction credit despite
+successful native observations.033 predicts all-black pixels exactly but earns
+only60 because motion/history cannot be assessed. Its wave visibility gates need
+q3 above1.8/2.2; isolated main-equation execution under the current reference
+never exceeds0.9993.037 scores62.5 with critical excess retained history/brightness
+and wrong peak-change timing.
+
+Preserve these outcomes. Improve the domain handling, stimulus coverage and
+037's source/native state model before another ten-preset attempt. No randomized
+100-case final audit is authorized by this failed gate. The third separate native
+handoff, `~/Downloads/projectm-tv-aar-engineering-issues-2026-10-06/blur-range-collapse.md`,
+records the source-confirmed guard typo and nine static investigation candidates;
+native raw-bank consequences remain uncertified. Evidence:
+`tools/milk-analyzer/fixtures/visual-loop-round007-2026-10-06.json`.

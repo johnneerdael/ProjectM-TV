@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "fresh-ten-batch-root-verified-failure",
+  "stage": "ten",
+  "model_commit": "8936fd2446a5c29155e35b85472379e88b8886c9",
+  "aar_sha256": "4a6a8fef4ae3b44450f9392edecfee39b6c2274aa68138062742adbf3cbac08f",
+  "reference_release": "2.3.8",
+  "manifest_sha256": "e94f7394bde214bb0135d823140c30907d055fa60faa841051dd4e2301f8b81d",
+  "all_predictions_seal_sha256": "ee0f4da0e79bf3e6f0d93ceeb3bb662ac8138822895a6ef103f904d3356beeea",
+  "final_seal_sha256": "3a00eb7f790cc110c087f21034f45310fb92d15f0d7924c7a3e5b000c82a8017",
+  "cases": [
+    {
+      "case": 28,
+      "score": 95.0
+    },
+    {
+      "case": 29,
+      "score": 0
+    },
+    {
+      "case": 30,
+      "score": 95.0
+    },
+    {
+      "case": 31,
+      "score": 95.0
+    },
+    {
+      "case": 32,
+      "score": 95.0
+    },
+    {
+      "case": 33,
+      "score": 60
+    },
+    {
+      "case": 34,
+      "score": 95.0
+    },
+    {
+      "case": 35,
+      "score": 95.0
+    },
+    {
+      "case": 36,
+      "score": 0
+    },
+    {
+      "case": 37,
+      "score": 62.5
+    }
+  ],
+  "passed_count": 6,
+  "case_count": 10,
+  "gate_passed": false,
+  "root_verification": {
+    "all_324_final_files": true,
+    "all_96_frozen_prediction_files": true,
+    "all_claim_totals_and_native_60frame_metadata": true,
+    "model_and_inputs_unchanged": true
+  },
+  "failure_groups": {
+    "source_domain_unresolved": [
+      29,
+      36
+    ],
+    "insufficient_motion_feedback_coverage": [
+      33
+    ],
+    "critical_retained_history_mismatch": [
+      37
+    ]
+  },
+  "history": "All originals retained; fixes/replays receive diagnostic identity, not retroactive fresh credit",
+  "remaining": "Repair/coverage improvements, another all10>=95 batch, then randomized100 audit"
+}
