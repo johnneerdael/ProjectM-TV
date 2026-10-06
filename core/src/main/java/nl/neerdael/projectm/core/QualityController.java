@@ -84,7 +84,7 @@ public final class QualityController {
     private float fpsBeforeLowering;         // > 0: judge whether the last lowering helped
     private int loweredFrom = -1;            // level before the last lowering
     private int cpuBoundPreset = -1;         // preset for which a lower resolution did not help
-    private int beforePressure = -1;         // auto level when memory pressure first lowered the ceiling
+    private int rememberedAutoIndex;         // FPS-chosen target; independent of memory/explicit modes
 
     /** Legacy memoryLimit is ignored; live memory headroom controls automatic resolution. */
     public QualityController(DisplayInfo display, DeviceProfile profile, int memoryLimit, Listener listener) {
@@ -108,6 +108,7 @@ public final class QualityController {
         minIndex = indexAtMost(profile.minAutoHeight());
         initialIndex = Math.max(minIndex, indexAtMost(profile.initialAutoHeight()));
         current = initialIndex;
+        rememberedAutoIndex = initialIndex;
         ceiling = levels.length - 1;
     }
 
@@ -148,16 +149,13 @@ public final class QualityController {
      * Legacy setMode keeps its Auto-only contract for existing embedding apps.
      */
     public void setResolutionMode(int mode, int lastAutoHeight) {
-        int normalized = validResolutionMode(display, mode);
-        if (resolutionMode != normalized) beforePressure = -1;
-        resolutionMode = normalized;
+        resolutionMode = validResolutionMode(display, mode);
         startMode(lastAutoHeight);
     }
 
     /** @deprecated height is ignored; lastAutoHeight is a remembered automatic starting point. */
     @Deprecated
     public void setMode(int height, int lastAutoHeight) {
-        if (resolutionMode != 0) beforePressure = -1;
         resolutionMode = 0;
         startMode(lastAutoHeight);
     }
@@ -167,8 +165,13 @@ public final class QualityController {
         resetAllocationProbe();
         resetCounters(0);
         memorySnapshot = sampleMemory();
-        int wanted = !isAuto() ? selectedIndex()
-                : lastAutoHeight > 0 ? indexAtMost(lastAutoHeight) : initialIndex;
+        if (isAuto()) {
+            // Remember the requested FPS target before memory review clamps the actual size.
+            // The host persists this inside the synchronous height callback below.
+            rememberedAutoIndex = Math.max(minIndex,
+                    lastAutoHeight > 0 ? indexAtMost(lastAutoHeight) : initialIndex);
+        }
+        int wanted = isAuto() ? rememberedAutoIndex : selectedIndex();
         wanted = Math.max(minIndex, Math.min(ceiling, wanted));
         current = wanted;
         if (memorySnapshot == null || !memorySnapshot.isValid()) {
@@ -290,7 +293,7 @@ public final class QualityController {
      * the lower one memory pressure imposed on this session (that limit must not carry over).
      */
     public int autoHeightToRemember() {
-        return current == ceiling && beforePressure > current ? levels[beforePressure] : levels[current];
+        return levels[rememberedAutoIndex];
     }
 
     /** Called when a new preset starts: its load and blend are not judged. */
@@ -339,7 +342,6 @@ public final class QualityController {
     private void constrainTo(int index) {
         memoryConstrained = true;
         healthyMemorySamples = 0;
-        if (beforePressure < 0) beforePressure = current;
         ceiling = Math.min(ceiling, index);
         fpsBeforeLowering = 0;
         if (current > ceiling) {
@@ -362,7 +364,6 @@ public final class QualityController {
         } else if (RenderMemoryBudget.hasRecoveryHeadroom(memorySnapshot)) {
             if (++healthyMemorySamples >= 3 && System.currentTimeMillis() >= pressureQuietUntil) {
                 ceiling = levels.length - 1;
-                beforePressure = -1;
                 memoryConstrained = false;
             }
         } else {
@@ -488,6 +489,7 @@ public final class QualityController {
         if (index == current) return;
         Log.i(TAG, "Render height " + levels[current] + " -> " + levels[index] + ": " + reason);
         current = index;
+        if (isAuto() && !forMemoryPressure) rememberedAutoIndex = index;
         lastChangeForMemoryPressure = forMemoryPressure;
         listener.onApplyRenderHeight(levels[current]);
         resetCounters(SETTLE_MS);

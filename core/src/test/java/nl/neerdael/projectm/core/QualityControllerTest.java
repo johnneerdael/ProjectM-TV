@@ -147,6 +147,33 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void temporaryCeilingSurvivesExplicitModeRoundTripWithoutReplacingAutoHistory() throws Exception {
+        for (int explicit : new int[]{720, 2160, -1}) {
+            FakeMemory memory = new FakeMemory();
+            int[] persisted = new int[1];
+            QualityController[] owner = new QualityController[1];
+            owner[0] = new QualityController(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                    0, height -> {
+                        applied = height;
+                        if (owner[0].isAuto()) persisted[0] = owner[0].autoHeightToRemember();
+                    }, memory);
+            QualityController q = owner[0];
+            q.setResolutionMode(0, 2160);
+            q.onMemoryPressure(15);
+            assertTrue(applied < 2160);
+            assertEquals(2160, persisted[0]);
+            q.setResolutionMode(explicit, persisted[0]);
+            q.onMemoryPressure(15);
+            q.setResolutionMode(0, persisted[0]);
+            assertTrue(applied < 2160);
+            assertEquals("synchronous Auto persistence retains FPS-chosen target", 2160, persisted[0]);
+            q.setResolutionMode(explicit, persisted[0]);
+            q.setMode(-1, persisted[0]);
+            assertEquals("legacy Auto path also preserves remembered target", 2160, persisted[0]);
+        }
+    }
+
+    @Test
     public void nativePressureHistoryDoesNotBecomeRememberedAutoHeight() throws Exception {
         FakeMemory memory = new FakeMemory();
         QualityController q = withMemory(memory, 4096);
