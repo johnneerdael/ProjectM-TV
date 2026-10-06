@@ -34,8 +34,7 @@ public final class QualityController {
     @Deprecated
     public static final int RENDER_HEIGHT_CAP = 1330;
 
-    /** @deprecated Legacy Native preference; every saved mode now normalizes to Auto. */
-    @Deprecated
+    /** Native selection sentinel; legacy setMode still normalizes it to Auto. */
     public static final int NATIVE_HEIGHT = -1;
 
     /** Auto ladder, filtered to the panel resolution. */
@@ -69,6 +68,7 @@ public final class QualityController {
     private boolean started;
     // Until a confirmed rendered FPS sample, available memory still includes resources to allocate.
     private boolean fullAllocationPending;
+    private int resolutionMode;     // 0 Auto, -1 Native, positive fixed height
     private int current;            // index into levels (auto mode)
     private float targetFps = 60f;
     private long settleUntil;
@@ -123,13 +123,49 @@ public final class QualityController {
     @Deprecated
     public static int validFixedHeight(DisplayInfo display, int memoryLimit, int savedHeight) { return 0; }
 
+    /** Explicit menu choices: Auto, standard heights supported by the panel, and Native. */
+    public static int[] resolutionModes(DisplayInfo display) {
+        List<Integer> modes = new ArrayList<>();
+        modes.add(0);
+        for (int height : new int[]{720, 1080, 1440, 2160}) {
+            if (height <= display.physicalHeight) modes.add(height);
+        }
+        modes.add(NATIVE_HEIGHT);
+        int[] result = new int[modes.size()];
+        for (int i = 0; i < result.length; i++) result[i] = modes.get(i);
+        return result;
+    }
+
+    /** Reject unsupported saved choices after a display change. */
+    public static int validResolutionMode(DisplayInfo display, int mode) {
+        for (int choice : resolutionModes(display)) if (choice == mode) return mode;
+        return 0;
+    }
+
+    /**
+     * Opt-in resolution selector. Fixed/Native ignore FPS downshifts and slow-preset skipping,
+     * but retain live memory checks; the actual height can temporarily be below the selection.
+     * Legacy setMode keeps its Auto-only contract for existing embedding apps.
+     */
+    public void setResolutionMode(int mode, int lastAutoHeight) {
+        resolutionMode = validResolutionMode(display, mode);
+        startMode(lastAutoHeight);
+    }
+
     /** @deprecated height is ignored; lastAutoHeight is a remembered automatic starting point. */
     @Deprecated
     public void setMode(int height, int lastAutoHeight) {
+        resolutionMode = 0;
+        startMode(lastAutoHeight);
+    }
+
+    private void startMode(int lastAutoHeight) {
         fullAllocationPending = true;
+        resetAllocationProbe();
         resetCounters(0);
         memorySnapshot = sampleMemory();
-        int wanted = lastAutoHeight > 0 ? indexAtMost(lastAutoHeight) : initialIndex;
+        int wanted = !isAuto() ? selectedIndex()
+                : lastAutoHeight > 0 ? indexAtMost(lastAutoHeight) : initialIndex;
         wanted = Math.max(minIndex, Math.min(ceiling, wanted));
         current = wanted;
         if (memorySnapshot == null || !memorySnapshot.isValid()) {
@@ -235,11 +271,14 @@ public final class QualityController {
         setRenderAllocationSettings(nativeTrailsLevel, seconds);
     }
 
-    public boolean isAuto() { return true; }
+    public boolean isAuto() { return resolutionMode == 0; }
 
-    /** @deprecated There is no fixed Native mode; currentHeight can automatically reach the panel. */
-    @Deprecated
-    public boolean isNative() { return false; }
+    /** Whether the explicit Native selection follows the physical panel. */
+    public boolean isNative() { return resolutionMode == NATIVE_HEIGHT; }
+
+    private int selectedIndex() {
+        return isNative() ? levels.length - 1 : indexAtMost(resolutionMode);
+    }
 
     public int currentHeight() { return levels[current]; }
 
@@ -344,6 +383,15 @@ public final class QualityController {
         updateMemory();
         if (fps > 0) fullAllocationPending = false;
         if (System.currentTimeMillis() < settleUntil || fps <= 0) return ACTION_NONE;
+        if (!isAuto()) {
+            // Memory relief may lower a selected size. Restore it only after healthy samples,
+            // bounded by the selection, independent of FPS and automatic preset backoff.
+            int wanted = Math.min(selectedIndex(), ceiling);
+            if (current < wanted && canGrowTo(current + 1)) {
+                apply(current + 1, "selected resolution restored after memory relief");
+            }
+            return ACTION_NONE;
+        }
 
         // Presets that stay far below target even at the lowest resolution, or that a lower
         // resolution did not help (CPU-bound), are too heavy for this device: optionally skip them

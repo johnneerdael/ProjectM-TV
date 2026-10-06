@@ -72,6 +72,92 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void explicitResolutionChoicesFollowPanelAndDefaultToAuto() throws Exception {
+        assertArrayEquals(new int[]{0, 720, 1080, 1440, 2160, -1},
+                QualityController.resolutionModes(display(3840, 2160)));
+        assertArrayEquals(new int[]{0, 720, 1080, -1},
+                QualityController.resolutionModes(display(1920, 1080)));
+        QualityController q = controller(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                0, h -> applied = h);
+        q.setResolutionMode(0, 1440);
+        assertTrue(q.isAuto());
+        assertEquals(1440, applied);
+        q.setResolutionMode(2160, 1440);
+        assertTrue(!q.isAuto());
+        assertTrue(!q.isNative());
+        assertEquals(2160, applied);
+        q.setResolutionMode(-1, 1440);
+        assertTrue(q.isNative());
+        assertEquals(2160, applied);
+        q.setResolutionMode(1234, 1440);
+        assertTrue(q.isAuto());
+        assertEquals(1440, applied);
+    }
+
+    @Test
+    public void fixedAndNativeStaySelectedThroughSlowFpsWithoutSkipping() throws Exception {
+        QualityController q = controller(display(3840, 2160), profile(DeviceProfile.Tier.HIGH),
+                0, h -> applied = h);
+        q.setSkipSlowPresets(true);
+        for (int mode : new int[]{720, 1080, 1440, 2160, -1}) {
+            q.setResolutionMode(mode, 1440);
+            int expected = mode == -1 ? 2160 : mode;
+            assertEquals(expected, applied);
+            settle(q);
+            assertEquals(QualityController.ACTION_NONE, samples(q, 40, 5));
+            assertEquals(expected, applied);
+            q.onPresetChanged();
+            settle(q);
+            samples(q, 40, 60);
+            assertEquals(expected, applied);
+            q.revalidateForResume(true);
+            assertEquals(expected, applied);
+        }
+        q.setResolutionMode(0, 1080);
+        settle(q);
+        samples(q, 3, 40);
+        assertEquals(900, applied);
+    }
+
+    @Test
+    public void explicitResolutionStillReviewsMemoryAndRecoversOnlyToSelectedHeight() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        QualityController q = withMemory(memory, 4096);
+        q.setResolutionMode(1440, 1080);
+        assertEquals(1440, applied);
+        memory.snapshot = new MemorySnapshot(4L << 30, 256L << 20, 128L << 20, true);
+        q.onFpsSample(30);
+        assertTrue(applied < 1440);
+        assertTrue(!q.isAuto());
+        memory.snapshot = new MemorySnapshot(4L << 30, 3L << 30, 128L << 20, false);
+        endPressureQuiet(q);
+        healthySamples(q, 20);
+        assertEquals(1440, applied);
+        q.setResolutionMode(-1, 1080);
+        assertEquals(2160, applied);
+        q.onMemoryPressure(15);
+        assertTrue(applied < 2160);
+        assertTrue(q.isNative());
+        endPressureQuiet(q);
+        healthySamples(q, 20);
+        assertEquals(2160, applied);
+        q.setResolutionMode(2160, 1080);
+        q.setMode(-1, 1080);
+        assertTrue("legacy consumers still normalize to Auto", q.isAuto());
+    }
+
+    @Test
+    public void explicitResolutionOnSmallerPanelRejectsSaved4kAndNativeUsesPanel() throws Exception {
+        QualityController q = controller(display(1920, 1080), profile(DeviceProfile.Tier.HIGH),
+                0, h -> applied = h);
+        q.setResolutionMode(2160, 720);
+        assertTrue(q.isAuto());
+        assertEquals(720, applied);
+        q.setResolutionMode(-1, 720);
+        assertEquals(1080, applied);
+    }
+
+    @Test
     public void everySavedModeNormalizesToAutomatic() throws Exception {
         DisplayInfo panel = display(3840, 2160);
         assertEquals(0, QualityController.defaultMode(panel, 1260));

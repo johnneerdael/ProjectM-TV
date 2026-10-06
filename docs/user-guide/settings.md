@@ -12,9 +12,9 @@ All is the default preset mood. Your selected collection is saved. The beta pred
 | Preset mood | All, Chill, Normal, Intense | All |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 
-The APK and the single published core use the Native renderer with **automatic resolution**. The controller adjusts render size in real time for the selected target frame rate and available memory, up to the detected full panel size. A 4K panel can render at 3840×2160 even when Android’s menus run at 1080p. Slow or memory-heavy workloads can render lower and are scaled to fill the screen.
+The APK and the single published core use the Native renderer with **Auto resolution by default**. The controller adjusts render size in real time for the selected target frame rate and available memory, up to the detected full panel size. A 4K panel can render at 3840×2160 even when Android’s menus run at 1080p. Slow or memory-heavy workloads can render lower and are scaled to fill the screen.
 
-There is no manual Resolution or RAM-limiter control. Old saved fixed-resolution and memory-limit values no longer override the automatic controller. It reserves memory headroom before raising resolution, accounts for the extra rendering allocations of trails and transitions, and lowers resolution under memory pressure. This reduces pressure on the music player; it cannot guarantee that every Android/vendor memory policy will keep every background process alive.
+**Advanced › Resolution** switches between Auto, 720p, 1080p, 1440p and 4K (only sizes supported by the detected panel), plus Native. Native means the full physical panel: **Native (4K)** requests 3840×2160 on a 4K TV, even with a 1080p Android UI. The choice is saved. Fixed/Native modes keep the requested size regardless of FPS and disable slow-preset skipping so a demanding preset can be tested. Memory protection can still lower the actual render size temporarily and restore it after headroom recovers; check Diagnostics before claiming a 4K run. Auto retains its existing behavior and remembered starting height. There is no manual RAM-limiter control. Old saved fixed-resolution and memory-limit values no longer override the automatic controller. It reserves memory headroom before raising resolution, accounts for the extra rendering allocations of trails and transitions, and lowers resolution under memory pressure. This reduces pressure on the music player; it cannot guarantee that every Android/vendor memory policy will keep every background process alive.
 
 **Native trails** has three values. Standard is the default: at supported render sizes above 1330p, it keeps feedback at an authored canvas (1280×720 at 4K) and draws this frame’s waves, shapes and composite at native resolution. Medium and High add native trail detail with gain caps of 0.5 and 1; both run the same additional passes. Their difference is the amount of detail, not an intended performance saving. The gain is limited near black and white to prevent clipping from adding brightness. Higher levels use additional textures and GPU work, so automatic quality can choose a lower resolution. Waves and shapes use authored-size feedback while the same evaluated geometry is drawn sharply at native size; changing trail level does not run their equations twice.
 
@@ -34,13 +34,14 @@ The canonical `projectM-TV-core.aar` now contains this Native core; the separate
 
 | Setting | What it does | Default |
 |---|---|---|
+| Resolution | Auto; supported fixed sizes (720p, 1080p, 1440p, 4K); Native follows the physical panel. Memory protection remains active | Auto |
 | Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
 | Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
 | Native trails | Standard, Medium, High; active at supported render sizes above 1330p. Medium and High add more trail detail with the same additional rendering work | Standard |
 | Transition | How long the blend from one preset to the next takes: Instant, 1–10 s | 7 s (2 s on low-end devices) |
 | Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
 | Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
-| Skip slow presets | Skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
+| Skip slow presets | In Auto resolution only, skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
@@ -51,6 +52,6 @@ The canonical `projectM-TV-core.aar` now contains this Native core; the separate
 
 ![Track display panel with Track info On, Show for Always and Pill style Off](images/setup/track-display-settings.png)
 
-![Current Advanced settings and Diagnostics with automatic memory budgeting and High trails inactive at 1080p](images/setup/advanced-settings.png)
+![Earlier Advanced settings and Diagnostics with automatic memory budgeting and High trails inactive at 1080p](images/setup/advanced-settings.png)
 
-The Advanced screenshot uses the current isolated emulator installation with no audio source; High is selected but inactive at its 1080p render size. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+The Advanced screenshot predates the restored Resolution row and uses an isolated emulator installation with no audio source; High is selected but inactive at its 1080p render size. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.

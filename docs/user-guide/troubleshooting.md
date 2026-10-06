@@ -17,7 +17,7 @@ If no audio is found while Android reports music playing, the app searches again
 
 Resolution adapts automatically to the selected target frame rate and available memory. Use the default half-refresh-rate frame rate, **Native trails → Standard**, and **Transitions → Auto**. Lower **Detail** if the preset’s equations limit the CPU. Blending two heavy presets can be slower than rendering one, and some CPU-heavy presets gain little from lower resolution.
 
-Check the actual render size and memory status in **Advanced → Diagnostics**. Memory pressure can temporarily lower resolution and pause preset prewarming to leave headroom for your music player. There is no manual RAM limiter or fixed-resolution setting.
+Check the actual render size and memory status in **Advanced → Diagnostics**. Memory pressure can temporarily lower resolution and pause preset prewarming to leave headroom for your music player. There is no manual RAM limiter. If a selected fixed/Native resolution is too slow, switch **Advanced → Resolution** back to **Auto**; slow-preset skipping is active only in Auto.
 
 ## The render size is below 4K
 

@@ -10,7 +10,7 @@ The engine is designed to preserve the authored look as resolution increases; so
 >
 > Install *Downloader* by AFTVnews on the TV, open it, enter **4821216** and install the APK it downloads. The code always points to the newest stable release. Details under [Install](#install).
 
-**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the current source. The APK and published `:core` library use the Native renderer with Standard trails. Resolution is always automatic: the controller targets the selected frame rate, uses live memory headroom, and can reach the panel’s native 4K size.
+**Based on testing, at least 2 GB of RAM is highly recommended.** This README describes the current source. The APK and published `:core` library use the Native renderer with Standard trails. Resolution defaults to Auto, which targets the selected frame rate and live memory headroom up to the panel’s native size. Settings › Advanced › Resolution also offers fixed sizes and Native (4K on a 4K panel).
 
 <p align="center">
   <img src="docs/screenshots/launch.jpg" alt="ProjectM TV showing a preset, with the playing track's cover, artist and title in the upper left" width="100%">
@@ -123,7 +123,7 @@ These settings captures use an earlier isolated test installation on an Ugoos AM
 **Picture and performance**
 - **A preset change is only smooth when it was prepared.** The next preset, and the ones *Random* and *Previous* on the remote would pick, are prepared in the background, so a switch takes a few hundredths of a second. For 20 seconds after Android reports low memory, and while less than 15% of the memory is free, nothing is prepared; a switch then pauses the picture for up to about half a second.
 - **Blending two heavy presets is slow.** A blend renders both presets at once. With presets whose equations run for many points or shapes per frame, the CPU is the limit, and the frame rate drops for the length of the blend.
-- **Resolution stays automatic.** The controller lowers or raises resolution for the target frame rate and available memory, up to the panel’s native size. The manual Resolution and Memory limit controls are removed; their saved values no longer force a render size or static RAM cap. Standard keeps authored-scale feedback with native new geometry and composite output. Medium and High retain more native trail detail and require more GPU work and texture memory; Medium is a lower gain, not a cheaper mode.
+- **Resolution defaults to Auto.** Settings › Advanced › Resolution offers Auto, 720p, 1080p, 1440p and 4K up to the panel size, plus Native. Native uses the detected physical panel, including 3840×2160 with a 1080p Android UI. Fixed/Native selections ignore FPS-driven downshifts and slow-preset skipping; memory protection can still temporarily lower the actual size. Auto retains its existing FPS and memory adaptation. Old `render_height` and Memory limit preferences stay retired; the new selection is saved separately. Standard keeps authored-scale feedback with native new geometry and composite output. Medium and High retain more native trail detail and require more GPU work and texture memory; Medium is a lower gain, not a cheaper mode.
 - **One Native core is published.** `projectM-TV-core.aar` and its versioned filename now contain the Native renderer. The separate capped 1330 AAR is retired. At supported render sizes above 1330p, Native trails replaces the old feedback pre-pass. Smaller render sizes or incompatible canvases retain the existing diffusion path. Driver shader/resource failures use the documented fallback, shown in Diagnostics. Waves and shapes now preserve authored feedback behavior while remaining sharp at native resolution; their equations still run once per frame.
 - **Memory protection is automatic.** Resolution growth must leave memory headroom for other apps, and memory pressure lowers the render size and pauses preset prewarming. Available memory and estimated rendering allocations guide this decision; Android/vendor process-killing behavior still varies.
 - projectM is a reimplementation of MilkDrop. Some presets look different from MilkDrop on Windows, or still render incorrectly.
@@ -191,7 +191,7 @@ A version you built yourself is signed with your own debug key: uninstall it bef
 
 <a id="track-titles"></a>**No track titles.** Android only shares the playing track with apps that have *notification access* (the app reads no notifications, it needs the access for the media session). Switch it on in the TV's settings under *Apps › Special app access › Notification access › ProjectM TV* (on the NVIDIA SHIELD: *Settings › Device Preferences › Apps › Special app access › Notification access*). Select **Configure** in the startup dialog to open the closest supported Android notification-access page. **Dismiss** permanently hides the automatic reminder. *Settings › Track display › Track info* always reopens setup, and *Diagnostics* shows whether access is granted. See the [screenshot walkthrough](https://johnneerdael.github.io/ProjectM-TV/getting-started/#track-titles).
 
-**The music app closes while the visualizer runs.** Resolution and memory budgeting are always automatic. Use Standard trails and shorter transitions to reduce rendering allocations, and check actual render size and memory status in Diagnostics. Other apps and vendor process policies also affect playback; there is no manual memory-limit switch.
+**The music app closes while the visualizer runs.** Memory budgeting is automatic in every resolution mode. Return Resolution to Auto if a fixed size is too demanding. Use Standard trails and shorter transitions to reduce rendering allocations, and check actual render size and memory status in Diagnostics. Other apps and vendor process policies also affect playback; there is no manual memory-limit switch.
 
 **A preset is black.** The app moves on by itself after about 7 seconds of music, as long as *Skip blank presets* is on. To bring back presets skipped earlier, reset *Skipped presets* in *Advanced*.
 
@@ -230,8 +230,8 @@ AAR as the APK. Separate capped and `core-native` artifacts are retired for new
 releases; old releases remain immutable. The legacy `native` build-property
 spelling is accepted, while `capped` is rejected.
 
-The shared QualityController always chooses resolution automatically up to the
-panel, using target FPS and live memory headroom. Its legacy fixed-resolution and
+The shared QualityController defaults to choosing resolution automatically up to the
+panel, using target FPS and live memory headroom. Explicit hosts can opt into `setResolutionMode(mode, lastAutoHeight)` (0 Auto, -1 Native, or a height from `resolutionModes(display)`); fixed/Native bypass FPS adaptation and slow-preset skipping while retaining memory checks. Its legacy fixed-resolution and
 static-RAM inputs normalize to Auto. Standard trails is the Android core default;
 Medium and High add more trail detail with the same extra passes. Managed clients
 review trails/transition together with `setRenderAllocationSettings`, publish

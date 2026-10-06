@@ -138,4 +138,4 @@ When Android asks whether ProjectM TV may install unknown apps, enable that perm
 
 Audio is processed in memory. The app makes no network connections while its auto-update setting is off.
 
-Resolution is always automatic up to the detected panel size, using target FPS and live memory headroom. Native trails defaults to Standard; its saved level remains available while resolution changes. The former manual Resolution and Memory limit controls are removed.
+Resolution defaults to Auto up to the detected panel size, using target FPS and live memory headroom. Use **Settings → Advanced → Resolution → Native (4K)** for full-panel 4K testing; supported fixed sizes are also available. Fixed/Native ignore FPS downshifts, but live memory protection can still lower the actual size shown in Diagnostics. Native trails defaults to Standard; its saved level remains available while resolution changes. The manual Memory limit remains retired.

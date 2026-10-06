@@ -33,7 +33,7 @@ The Java/JNI API remains additive. Standard trails is the new core default above
 1330p, with `ProjectMJNI.setNativeTrails(-1/0/1/2)` for Off/Standard/Medium/High.
 The shared QualityController is automatic up to the detected panel size, with
 FPS and live memory headroom as inputs. Legacy fixed-resolution/static-RAM
-settings normalize to Auto. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md).
+settings normalize to Auto. New hosts may explicitly opt into `setResolutionMode(mode, lastAutoHeight)` using 0 for Auto, -1 for Native or a height from `resolutionModes(display)`. Fixed/Native retain memory protection and bypass FPS adaptation and slow-preset skipping; they do not guarantee a fixed actual size under memory pressure. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md).
 
 ## Offline preset analysis
 
