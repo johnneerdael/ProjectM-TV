@@ -10,6 +10,8 @@ differ from a GPU, and this is not a complete appearance predictor.
 import numpy as np
 from spatial import sample2d
 from feedback_field import unorm8
+from engine_profiles import CORE_2315_BLUR, LEGACY_BLUR
+from native_values import native_scalar
 
 
 def pass_dimensions(width:int,height:int)->list[tuple[int,int]]:
@@ -22,29 +24,57 @@ def pass_dimensions(width:int,height:int)->list[tuple[int,int]]:
     return result
 
 
-def native_ranges(minimum,maximum):
+def _coefficients(low, high):
+    """Mirror patch0046's progressive float32 normalization producer."""
+    scales=[];biases=[]
+    with np.errstate(all='ignore'):
+        gaps=high-low
+        if not np.all(np.isfinite([low,high,gaps])) or np.any(gaps<=0):return None
+        for i in range(3):
+            a=low[i] if i==0 else np.float32((low[i]-low[i-1])/gaps[i-1])
+            b=high[i] if i==0 else np.float32((high[i]-low[i-1])/gaps[i-1])
+            denominator=np.float32(b-a)
+            if not np.all(np.isfinite([a,b,denominator])) or denominator<=0:return None
+            scale=np.float32(1)/denominator;bias=np.float32(-a*scale)
+            if not np.all(np.isfinite([scale,bias])) or scale<=0:return None
+            scales.append(scale);biases.append(bias)
+    return scales,biases
+
+
+def native_ranges(minimum,maximum,*,policy=LEGACY_BLUR):
+    if policy not in {LEGACY_BLUR,CORE_2315_BLUR}:raise ValueError('unsupported blur range policy')
+    current=policy==CORE_2315_BLUR
+    if current:
+        raw_low=np.asarray([native_scalar(v,allow_ieee=True) for v in minimum],dtype=np.float64)
+        raw_high=np.asarray([native_scalar(v,allow_ieee=True) for v in maximum],dtype=np.float64)
+        if raw_low.shape!=(3,) or raw_high.shape!=(3,):raise ValueError('three blur ranges required')
+        if not np.all(np.isfinite([raw_low,raw_high])) or np.any(np.abs([raw_low,raw_high])>np.finfo(np.float32).max):
+            return np.zeros(3,dtype=np.float32),np.ones(3,dtype=np.float32)
+        minimum,maximum=raw_low,raw_high
     low=np.asarray(minimum,dtype=np.float32).copy();high=np.asarray(maximum,dtype=np.float32).copy()
     if low.shape!=(3,) or high.shape!=(3,) or not np.all(np.isfinite([low,high])):
         raise ValueError('three finite blur ranges required')
-    for i in range(3):
-        if i:
-            high[i]=min(high[i-1],high[i]);low[i]=max(low[i-1],low[i])
-        if high[i]-low[i]<np.float32(.1):
-            average=(low[i]+high[i])*.5
-            # Preserve the pinned implementation's collapsed interval. Do not
-            # silently replace its second subtraction with an intended plus.
-            low[i]=average-np.float32(.1)*.5;high[i]=low[i]
+    with np.errstate(all='ignore'):
+        for i in range(3):
+            if i:
+                high[i]=min(high[i-1],high[i]);low[i]=max(low[i-1],low[i])
+            if high[i]-low[i]<np.float32(.1):
+                average=np.float32((low[i]+high[i])*np.float32(.5))
+                low[i]=np.float32(average-np.float32(.1)*np.float32(.5))
+                high[i]=np.float32(average+np.float32(.1)*np.float32(.5)) if current else low[i]
+    if current and _coefficients(low,high) is None:
+        return np.zeros(3,dtype=np.float32),np.ones(3,dtype=np.float32)
     return low,high
 
 
 def blur_bank(source,*,levels:int,minimum=(0,0,0),maximum=(1,1,1),
-              edge_darken:float=0,quantize:bool=True)->dict[int,np.ndarray]:
+              edge_darken:float=0,quantize:bool=True,policy=LEGACY_BLUR)->dict[int,np.ndarray]:
     field=np.asarray(source,dtype=np.float32)
     if field.ndim!=3 or field.shape[2]!=3 or min(field.shape[:2])<=0 or not np.all(np.isfinite(field)):
         raise ValueError('finite RGB feedback source required')
     if type(levels) is not int or levels not in (1,2,3):raise ValueError('blur level1..3 required')
     if not np.isfinite(edge_darken):raise ValueError('finite edge darkening required')
-    low,high=native_ranges(minimum,maximum)
+    low,high=native_ranges(minimum,maximum,policy=policy)
     if np.any(high[:levels]-low[:levels]==0):raise ValueError('collapsed native blur range; division domain unresolved')
     scales=[];biases=[]
     for i in range(levels):

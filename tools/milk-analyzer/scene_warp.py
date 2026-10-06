@@ -9,7 +9,7 @@ from scene_equations import WARP,_scalar
 from spatial import mesh_inputs,warp_vertex_uv,interpolate_mesh,PORTABLE_PROFILE
 
 
-def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None,omit_transformed_uv=False)->dict:
+def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None,omit_transformed_uv=False,zoom_policy='legacy-glsl-pow-v1')->dict:
     width,height=scene['viewport'];grid_x,grid_y=scene['mesh_size']
     frame=scene['frames'][frame_index]
     aspect_x=float(np.float32(min(1,width/height)))
@@ -29,7 +29,7 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
         vertex_uv=warp_vertex_uv(mesh['position'],aspect_x=aspect_x,aspect_y=aspect_y,
                                  **parameters,time=frame['render_inputs']['time'],
                                  warp_anim_speed=_scalar(values,'fWarpAnimSpeed',1,'float'),
-                                 warp_scale=_scalar(values,'fWarpScale',1,'float'),numeric_profile=numeric_profile)
+                                 warp_scale=_scalar(values,'fWarpScale',1,'float'),numeric_profile=numeric_profile,zoom_policy=zoom_policy)
     x,y=np.meshgrid((np.arange(width,dtype=np.float32)+.5)/np.float32(width),
                     (np.arange(height,dtype=np.float32)+.5)/np.float32(height))
     original_uv=np.stack((x,y),axis=-1)

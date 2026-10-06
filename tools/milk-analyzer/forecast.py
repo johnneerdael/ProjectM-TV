@@ -24,6 +24,8 @@ from spatial import sample2d
 from sampling_policy import texture_settings
 from geometry_features import scene_geometry_features
 from source_features import forecast_feature_record, SIMULATED
+from engine_profiles import (CORE_2315_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
+    CORE_2315_DISPLAY,CORE_2315_WAVE,LEGACY_BLUR,LEGACY_ZOOM,LEGACY_DISPLAY,LEGACY_WAVE,matches,select_policy)
 from shape_sampling import LEGACY as LEGACY_SHAPE_POLICY,CORE_238 as CORE_238_SHAPE_POLICY,native_blur_level,shape_sampling_modes
 
 # Patched projectM-eval TreeFunctions.c initializes MT19937 once per thread.
@@ -49,6 +51,7 @@ CORE_2310_EQUATION_ENGINE = {
     'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
     'patches_sha256': '545ca48adad787f963f9b29c1fc4fd7e8a71fb910f586c8747f96a075d130ddf',
 }
+CORE_2315_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.15-cold-thread-v1'
 # Patch0044 changes literal formatting; equation RNG and sampler ownership
 # retain the verified43-patch contracts. Keep44 as a distinct source identity.
 # Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
@@ -58,6 +61,7 @@ PRODUCTION_EQUATION_ENGINES = {
     CORE_235_EQUATION_RNG_POLICY: CORE_235_EQUATION_ENGINE,
     CORE_237_EQUATION_RNG_POLICY: CORE_237_EQUATION_ENGINE,
     CORE_2310_EQUATION_RNG_POLICY: CORE_2310_EQUATION_ENGINE,
+    CORE_2315_EQUATION_RNG_POLICY: CORE_2315_ENGINE,
 }
 
 
@@ -78,8 +82,12 @@ def source_main_binding_policy(engine: dict, requested: str | None) -> str:
 
 
 def source_shape_sampler_policy(engine: dict, requested: str | None) -> str:
+    if matches(engine):
+        if requested is None or requested == CORE_2315_SHAPE:return CORE_2315_SHAPE
+    elif requested == CORE_2315_SHAPE:
+        raise ValueError('shape sampler engine identity mismatch')
     verified=any(all(engine.get(key)==value for key,value in expected.items())
-                 for expected in (CORE_237_EQUATION_ENGINE,CORE_2310_EQUATION_ENGINE))
+                 for expected in (CORE_237_EQUATION_ENGINE,CORE_2310_EQUATION_ENGINE,CORE_2315_ENGINE))
     policy=requested if requested is not None else CORE_238_SHAPE_POLICY if verified else LEGACY_SHAPE_POLICY
     if policy not in {LEGACY_SHAPE_POLICY,CORE_238_SHAPE_POLICY}:
         raise ValueError('unsupported shape sampler policy')
@@ -148,13 +156,17 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     engine = source.get('parser_inputs', {}).get('engine', {})
     main_binding_policy=source_main_binding_policy(engine,domain.get('main_binding_policy'))
     shape_sampler_policy=source_shape_sampler_policy(engine,domain.get('shape_sampler_policy'))
+    blur_range_policy=select_policy(engine,domain.get('blur_range_policy'),current=CORE_2315_BLUR,legacy=LEGACY_BLUR)
+    warp_zoom_policy=select_policy(engine,domain.get('warp_zoom_policy'),current=CORE_2315_ZOOM,legacy=LEGACY_ZOOM)
+    legacy_control_policy=select_policy(engine,domain.get('legacy_control_policy'),current=CORE_2315_DISPLAY,legacy=LEGACY_DISPLAY)
+    wave_control_policy=select_policy(engine,domain.get('wave_control_policy'),current=CORE_2315_WAVE,legacy=LEGACY_WAVE)
     if production_engine is not None:
         if any(engine.get(key) != value for key, value in production_engine.items()):
             raise ValueError('production equation RNG engine identity mismatch')
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
     for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE),
-                              ('2.3.10',CORE_2310_EQUATION_ENGINE)]:
+                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE)]:
         # JNI enables patch 0042 only above height 1330 and changes the line reference
         # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
         if (all(engine.get(key)==value for key,value in expected.items()) and
@@ -193,12 +205,13 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     pipeline = SourcePipeline.from_source(source, profile=domain['profile'], compatibility=compatibility,
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'),
         main_binding_policy=main_binding_policy,
+        blur_range_policy=blur_range_policy,legacy_control_policy=legacy_control_policy,
         initial_feedback=initial, warp_reads_blur=warp_reads_blur, blur_levels=domain['blur_levels'],
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
         main_sampling_profile=domain.get('main_sampling_profile','portable'))
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
-    if shape_sampler_policy==CORE_238_SHAPE_POLICY and domain['blur_levels']<required_blur_level:
+    if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
     if materials is not None and noise_bank is not None:
         if materials.noise_bank is None or digest(materials.noise_bank.manifest)!=digest(noise_bank.manifest):
@@ -230,7 +243,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))
     geometry_features = scene_geometry_features(scene)
     builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs',
-                                  line_rendering_profile=line_profile)
+                                  line_rendering_profile=line_profile,control_policy=wave_control_policy)
     if builtin['engine_archive_sha256']!=archive:
         raise ValueError('builtin-wave source engine identity mismatch')
     custom = source_custom_waves(source,scene)
@@ -246,13 +259,13 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         unused_warp_uv_domain=None
         try:
             mesh = warp_fields(source,scene,index,numeric_profile=domain.get('numeric_profile','portable'),
-                               raster_subpixel_bits=domain.get('warp_subpixel_bits'))
+                               raster_subpixel_bits=domain.get('warp_subpixel_bits'),zoom_policy=warp_zoom_policy)
         except ValueError as error:
             if str(error) not in {'unresolved warp numeric domain','unresolved warp power domain','zero spatial divisor'}:raise
             if pipeline.requires_warp_uv(frame_wrap=main['wrap'],motion_state=main):raise
             unused_warp_uv_domain=str(error)
             mesh=warp_fields(source,scene,index,raster_subpixel_bits=domain.get('warp_subpixel_bits'),
-                             omit_transformed_uv=True)
+                             omit_transformed_uv=True,zoom_policy=warp_zoom_policy)
         common = source_uniforms(scene,index)
         if texture_bank is not None:
             common.update(material_uniforms)
@@ -329,6 +342,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         provenance=dict(engine=copy.deepcopy(engine),reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
                         main_binding_policy=main_binding_policy,
                         shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
+                        blur_range_policy=blur_range_policy,warp_zoom_policy=warp_zoom_policy,
+                        legacy_control_policy=legacy_control_policy,wave_control_policy=wave_control_policy,
                         render_context_source_sha256=builtin['render_context_source_sha256'],
                         render_context_time_bits=builtin['render_context_time_bits'],
                         engine_archive_sha256=archive,model_sha256=digest(model_hashes),model_modules=model_hashes,

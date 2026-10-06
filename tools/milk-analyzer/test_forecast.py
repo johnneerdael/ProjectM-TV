@@ -192,7 +192,7 @@ def test_textured_shape_samples_previous_main_instead_of_current_warp_output():
     np.testing.assert_allclose(result['frames'][0]['feedback'][16,16,:3], [.2,.4,.6], atol=2e-6)
 
 
-def test_shape_instances_receive_distinct_inherited_and_texture_sampler_modes(monkeypatch):
+def test_explicit_historical_shape_policy_retains_distinct_sampler_inheritance(monkeypatch):
     module=importlib.import_module('forecast')
     binaries=Path(os.environ.get('MILK_TEST_CURRENT_BINARIES',BINARIES))
     monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
@@ -200,7 +200,8 @@ def test_shape_instances_receive_distinct_inherited_and_texture_sampler_modes(mo
                   'shapecode_0_enabled=1\nshapecode_0_textured=1\nshapecode_0_num_inst=2\n'
                   'shapecode_0_rad=.4\nshapecode_0_a=1\nshapecode_0_a2=1\n'
                   'shape_0_per_frame1=x=.25+.5*instance;y=.5;\n',binaries=binaries)
-    assert module.source_shape_sampler_policy(source['parser_inputs']['engine'],None)=='projectmtv-core-2.3.8-shape-state-v1'
+    historical='projectmtv-core-2.3.8-shape-state-v1'
+    assert module.source_shape_sampler_policy(source['parser_inputs']['engine'],historical)==historical
     calls=[];original=module.sample2d
     def observe(field,uv,**settings):
         calls.append((settings['wrap'],settings['linear']))
@@ -213,7 +214,7 @@ def test_shape_instances_receive_distinct_inherited_and_texture_sampler_modes(mo
                               texture_sizes=['texsize_main'])
             for stage,prefix in [('warp','warp_'),('composite','comp_')]}
     assert all(item['offline_accepted'] for item in stages.values()),stages
-    settings=domain();settings['blur_levels']=1
+    settings=domain(shape_sampler_policy=historical);settings['blur_levels']=1
     result=predict(source,audio=audio(1),binaries=binaries,domain=settings,compatibility=stages)
     assert calls and set(calls)=={(False,True),(True,False)}
     split=calls.index((True,False))

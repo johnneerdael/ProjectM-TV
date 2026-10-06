@@ -13,6 +13,7 @@ from field_math import UnresolvedMath
 from spatial import sample2d
 from blur import blur_bank,native_ranges,pass_dimensions
 from feedback_field import unorm8
+from engine_profiles import LEGACY_BLUR,CORE_2315_BLUR,LEGACY_DISPLAY,CORE_2315_DISPLAY
 
 
 @dataclass(frozen=True)
@@ -43,7 +44,7 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY):
         if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
             raise ValueError('unsupported shader coordinate profile')
         field=np.asarray(initial_feedback,dtype=np.float32)
@@ -71,6 +72,9 @@ class SourcePipeline:
         from sampling_policy import main_sampler_bindings
         main_sampler_bindings([],stage='warp',frame_wrap=None,policy=main_binding_policy)
         self.main_binding_policy=main_binding_policy
+        if blur_range_policy not in {LEGACY_BLUR,CORE_2315_BLUR}:raise ValueError('unsupported blur range policy')
+        if legacy_control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy control policy')
+        self.blur_range_policy=blur_range_policy;self.legacy_control_policy=legacy_control_policy
         self.height,self.width=field.shape[:2]
         x,y=np.meshgrid((np.arange(self.width,dtype=np.float32)+.5)/self.width,
                         (np.arange(self.height,dtype=np.float32)+.5)/self.height)
@@ -183,11 +187,11 @@ class SourcePipeline:
         def update_blur():
             if not self.blur_levels:return {}
             return blur_bank(previous[...,:3],levels=self.blur_levels,minimum=minimum,
-                             maximum=maximum,edge_darken=edge_darken,quantize=self.quantize)
+                             maximum=maximum,edge_darken=edge_darken,quantize=self.quantize,policy=self.blur_range_policy)
         old_blur=self.blur;warp_blur_frame=self.blur_source_frame
         if not self.warp_reads_blur:
             old_blur=update_blur();warp_blur_frame=self.frame-1
-        low,high=native_ranges(minimum,maximum)
+        low,high=native_ranges(minimum,maximum,policy=self.blur_range_policy)
         aspect_x=min(1,self.width/self.height);aspect_y=min(1,self.height/self.width)
         lowlevel={'_c0':[aspect_x,aspect_y,1/aspect_x,1/aspect_y],
                   '_c1':[0,0,0,0],
@@ -244,12 +248,9 @@ class SourcePipeline:
         if composite_polar is None:composite_polar=composite['polar']
         if self.composite_kind=='legacy_composite':
             from legacy_composite import legacy_display
-            # Current VideoEcho/Filters read static PresetState, and Filters is
-            # allocated from file flags. Live main controls are not written back
-            # by the native engine; consuming motion_state here would disagree
-            # with published core through source44. Preserve its target policy.
             displayed=legacy_display(drawn,values=self.source_values,time=time,
-                                     hue_offsets=hue_offsets,quantize=self.quantize)
+                                     hue_offsets=hue_offsets,quantize=self.quantize,
+                                     main=motion_state,control_policy=self.legacy_control_policy)
         elif self.composite_tree is None:
             displayed=self._rgba(self._sample_main(drawn,composite_uv,wrap=True,linear=True)[...,:3])
         else:displayed=self._rgba(stage(self.composite_tree,'composite',drawn,new_blur,composite_uv,composite_polar,composite.get('diffuse')))

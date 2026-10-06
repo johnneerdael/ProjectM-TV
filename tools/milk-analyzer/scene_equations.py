@@ -264,7 +264,10 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     for frame in result:
         for name,low,high in [('gamma',0,8),('echo_zoom',.001,1000)]:
             value=frame['main'][name]
-            if isinstance(value,(int,float)):frame['main'][name]=max(low,min(high,value))
+            from native_values import native_scalar
+            value=native_scalar(value,allow_ieee=True)
+            # std::min(high,value) chooses high for NaN; preserve operand order.
+            frame['main'][name]=max(low,min(high,value))
     return {'basis':'native source equation orchestration; no rendered inputs','frames':result,
             'equation_rng_seed':seed,
             'equation_loader_policy':equation_loader_policy,

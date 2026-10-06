@@ -3,6 +3,7 @@ import math
 import re
 from sampling_policy import texture_settings
 from source_inventory import mask_comments
+from engine_profiles import CORE_2315_SHAPE
 
 LEGACY='legacy-repeat-linear-v1'
 CORE_238='projectmtv-core-2.3.8-shape-state-v1'
@@ -35,7 +36,7 @@ def shape_sampling_modes(shapes:list,*,image_names:dict,policy:str,
     then clears sampler0. Later main draws use the attachment's repeat/nearest
     settings. Named images explicitly bind their own descriptor samplers.
     """
-    if policy not in {LEGACY,CORE_238}:raise ValueError('unsupported shape sampler policy')
+    if policy not in {LEGACY,CORE_238,CORE_2315_SHAPE}:raise ValueError('unsupported shape sampler policy')
     if type(blur_level) is not int or not 0<=blur_level<=3:raise ValueError('native blur level0..3 required')
     if type(warp_reads_blur) is not bool or not math.isfinite(frame_wrap):raise ValueError('finite shape sampler context required')
     # PerPixelMesh clears sampler0 after its draw. Only a later blur update
@@ -48,7 +49,7 @@ def shape_sampling_modes(shapes:list,*,image_names:dict,policy:str,
         if image:
             settings=texture_settings(image)
             mode={'wrap':settings['wrap'],'linear':settings['linear']}
-        elif policy==LEGACY:mode={'wrap':True,'linear':True}
+        elif policy in {LEGACY,CORE_2315_SHAPE}:mode={'wrap':True,'linear':True}
         elif inherited:mode={'wrap':False,'linear':True}
         else:mode={'wrap':True,'linear':False}
         modes[ordinal]=mode

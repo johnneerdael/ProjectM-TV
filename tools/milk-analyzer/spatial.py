@@ -40,7 +40,8 @@ def mesh_inputs(grid_x:int,grid_y:int,*,aspect_x:float,aspect_y:float)->dict:
 
 def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
                    sx=1,sy=1,cx=.5,cy=.5,rot=0,dx=0,dy=0,warp=0,
-                   time=0,warp_anim_speed=1,warp_scale=1,numeric_profile=PORTABLE_PROFILE):
+                   time=0,warp_anim_speed=1,warp_scale=1,numeric_profile=PORTABLE_PROFILE,
+                   zoom_policy='legacy-glsl-pow-v1'):
     """Evaluate PresetWarpVertexShader in its original float32 operation order.
 
     Parameters can be scalar or per-vertex fields matching position's leading
@@ -51,6 +52,8 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     for interpolation; it rejects infinity and unrelated numeric failures.
     """
     _runtime_profile(numeric_profile)
+    from engine_profiles import LEGACY_ZOOM,CORE_2315_ZOOM
+    if zoom_policy not in {LEGACY_ZOOM,CORE_2315_ZOOM}:raise ValueError('unsupported warp zoom policy')
     p=_finite(position,'position')
     if p.shape[-1:]!=(2,):raise ValueError('position requires two components')
     names=('aspect_x','aspect_y','zoom','zoomexp','sx','sy','cx','cy','rot','dx','dy',
@@ -66,7 +69,7 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
         # observed profile does not authorize unrelated invalid arithmetic.
         safe={key:value for key,value in a.items()}
         safe['sx']=np.where(a['sx']==0,1,a['sx']);safe['sy']=np.where(a['sy']==0,1,a['sy'])
-        warp_vertex_uv(p,**safe)
+        warp_vertex_uv(p,**safe,zoom_policy=zoom_policy)
     x,y=p[...,0],p[...,1]
     with np.errstate(all='ignore'):
         radius=np.hypot(x*a['aspect_x'],y*a['aspect_y'])
@@ -77,9 +80,10 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
         if np.any(a['zoomexp']<0) or np.any((a['zoomexp']==0)&(radial_exponent<=0)):
             raise ValueError('unresolved warp power domain')
         zoom_exponent=np.power(a['zoomexp'],radial_exponent)
-        if np.any(a['zoom']<0) or np.any((a['zoom']==0)&(zoom_exponent<=0)):
+        signed=(a['zoom']<0)&(a['zoomexp']==1)&(zoom_policy==CORE_2315_ZOOM)
+        if np.any((a['zoom']<0)&~signed) or np.any((a['zoom']==0)&(zoom_exponent<=0)):
             raise ValueError('unresolved warp power domain')
-        effective_zoom=np.power(a['zoom'],zoom_exponent)
+        effective_zoom=np.where(signed,a['zoom'],np.power(np.where(signed,1,a['zoom']),zoom_exponent))
         inverse_zoom=np.float32(1)/effective_zoom
         u=x*a['aspect_x']*.5*inverse_zoom+.5
         v=y*a['aspect_y']*.5*inverse_zoom+.5

@@ -4,6 +4,15 @@ from field_math import UnresolvedMath
 from feedback_field import unorm8
 from spatial import sample2d,interpolate_mesh
 from scene_equations import _scalar
+from engine_profiles import CORE_2315_DISPLAY,LEGACY_DISPLAY
+from native_values import native_scalar
+
+
+def _live(main, name, *, finite=True):
+    if main is None or name not in main:
+        raise UnresolvedMath('live legacy control unresolved: '+name)
+    try:return native_scalar(main[name],allow_ieee=not finite)
+    except ValueError as error:raise UnresolvedMath('live legacy control unresolved: '+name) from error
 
 
 def store(values,quantize):
@@ -42,26 +51,38 @@ def corner_shades(time,hue_offsets):
     return np.float32(.5)+np.float32(.5)*(shade/np.max(shade,axis=1,keepdims=True))
 
 
-def apply_filters(field,values,*,quantize):
+def apply_filters(field,values,*,quantize,main=None,control_policy=LEGACY_DISPLAY):
+    if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy display policy')
+    def enabled(name,key):
+        return _live(main,name,finite=False)!=0 if control_policy==CORE_2315_DISPLAY else bool(_scalar(values,key,0,'bool'))
     result=np.asarray(field,dtype=np.float32)
-    if _scalar(values,'bBrighten',0,'bool'):
+    if enabled('brighten','bBrighten'):
         result=store(1-result,quantize);result=store(result*result,quantize);result=store(1-result,quantize)
-    if _scalar(values,'bDarken',0,'bool'):result=store(result*result,quantize)
-    if _scalar(values,'bSolarize',0,'bool'):
+    if enabled('darken','bDarken'):result=store(result*result,quantize)
+    if enabled('solarize','bSolarize'):
         result=store(result*(1-result),quantize);result=store(result+result,quantize)
-    if _scalar(values,'bInvert',0,'bool'):result=store(1-result,quantize)
+    if enabled('invert','bInvert'):result=store(1-result,quantize)
     return result
 
 
-def legacy_display(feedback,*,values,time,hue_offsets,quantize=True):
+def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,control_policy=LEGACY_DISPLAY):
+    if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy display policy')
+    live=control_policy==CORE_2315_DISPLAY
     source=np.asarray(feedback,dtype=np.float32)
     if source.ndim!=3 or source.shape[-1]!=4 or min(source.shape[:2])<=0 or not np.all(np.isfinite(source)):
         raise UnresolvedMath('finite RGBA legacy feedback required')
     height,width=source.shape[:2]
     shade=corner_shades(time,hue_offsets)
-    gamma=_scalar(values,'fGammaAdj',2,'float')
-    alpha=_scalar(values,'fVideoEchoAlpha',0,'float')
+    gamma=np.float32(_live(main,'gamma')) if live else _scalar(values,'fGammaAdj',2,'float')
+    alpha=np.float32(_live(main,'echo_alpha',finite=False)) if live else _scalar(values,'fVideoEchoAlpha',0,'float')
     echo=alpha>np.float32(.001)
+    orientation=0
+    if live and echo:
+        raw=_live(main,'echo_orient',finite=False)
+        truncated=np.trunc(raw)
+        if not np.isfinite(truncated) or not -(2**31)<=truncated<=2**31-1:
+            echo=False
+        else:orientation=int(truncated)
     weights=gamma_weights(gamma,echo=echo)
     inverse_aspect_y=np.float32(1)/np.float32(min(1,height/width))
     aspect=np.float32(width)/np.float32(np.float32(height)*inverse_aspect_y)
@@ -73,9 +94,9 @@ def legacy_display(feedback,*,values,time,hue_offsets,quantize=True):
                     (np.arange(height,dtype=np.float32)+.5)/height)
     local_uv=(np.stack((x,y),axis=-1)-.5)/extent+.5
     colours=interpolate_mesh(shade.reshape(2,2,3),local_uv)
-    zoom=_scalar(values,'fVideoEchoZoom',2,'float') if echo else 1
+    zoom=(np.float32(_live(main,'echo_zoom')) if live else _scalar(values,'fVideoEchoZoom',2,'float')) if echo else 1
     if zoom==0:raise UnresolvedMath('legacy echo zoom division by zero')
-    orientation=_scalar(values,'nVideoEchoOrientation',0,'int')
+    if not live:orientation=_scalar(values,'nVideoEchoOrientation',0,'int')
     orientation-=int(orientation/4)*4  # C++ remainder retains the dividend's sign.
     passes=[(1,1)] if not echo else [(1,np.float32(1)-np.float32(alpha)),(zoom,np.float32(alpha))]
     output=None
@@ -92,4 +113,4 @@ def legacy_display(feedback,*,values,time,hue_offsets,quantize=True):
                                    np.ones((height,width,1),dtype=np.float32)),axis=-1)
             fragment=store(sampled*colour,False)
             output=store(fragment if output is None else output+fragment,quantize)
-    return apply_filters(output,values,quantize=quantize)
+    return apply_filters(output,values,quantize=quantize,main=main,control_policy=control_policy)

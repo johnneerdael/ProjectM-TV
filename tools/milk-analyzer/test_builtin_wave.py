@@ -7,6 +7,10 @@ from test_scene_equations import native,frames
 from scene_equations import execute_scene
 from test_native_reader import READER
 from test_native_wave import frame,BINARY
+from engine_profiles import LEGACY_WAVE
+
+# Pair the waveform binary with the reader rather than the old canonical build.
+BINARY=READER.parent/'milk-wave-inputs'
 
 
 @pytest.fixture
@@ -139,13 +143,13 @@ class BuiltinWaveTest(unittest.TestCase):
         wave=source_builtin_wave(source,scene,audio(inputs),binary=BINARY)['frames'][0]
         self.assertAlmostEqual(wave['rgba'][3],.8,places=6)
 
-    def test_file_mode_flags_and_native_projection_drive_drawing_spec(self):
+    def test_historical_static_flags_and_native_projection_drive_drawing_spec(self):
         from builtin_wave import source_builtin_wave
         source=native('nWaveMode=6\nbWaveThick=1\nfWaveSmoothing=0\nwave_x=.25\nwave_y=.9\n'
                       'wave_r=.5\nwave_g=.5\nwave_b=.5\nfWaveAlpha=1.17\nbMaximizeWaveColor=0\n'
                       'per_frame_1=wave_mode=0;wave_thick=0;wave_additive=1;\n')
         scene=execute_scene(source,frames()[:1],reader=READER,width=512,height=288,mesh_x=8,mesh_y=8)
-        result=source_builtin_wave(source,scene,audio(frames()[:1]),binary=BINARY)
+        result=source_builtin_wave(source,scene,audio(frames()[:1]),binary=BINARY,control_policy=LEGACY_WAVE)
         wave=result['frames'][0]
         self.assertEqual(result['mode'],6)
         self.assertEqual(wave['draw_mode'],'strip')

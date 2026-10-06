@@ -16,6 +16,35 @@ correlated time, direction, amplitude and area records, including small and
 colour-only changes. Their sampled change rates do not establish flash cycles or
 whole-program no-flash guarantees.
 
+## Current source target: published2.3.15
+
+`profiles/published-core-v2.3.15.json` pins the exact published AAR, ARM64/ARMv7
+libraries, classes and release-source identity. The forecaster's source49 policies
+consume the engine fixes in0045–0049: explicit unnamed-shape sampling, coherent
+float32 blur ranges, signed unit zoom, live waveform mode/dots/thickness/additive,
+and live legacy gamma/echo/filter controls. Mode changes recreate waveform math;
+invalid conversions omit waveform/echo as defined by the engine.
+
+The equation reader's explicit IEEE tags are decoded only at modeled native
+consumers. Gamma/echo-zoom clamps preserve C++ operand ordering; blur nonfinite
+triplets use coherent defaults. Nonzero flag predicates include known IEEE values.
+Omitted waves bypass unused controls. No generic nonfinite-to-zero policy is added.
+
+Source CPU controls and old profiles remain separate from unchanged published-AAR
+JNI numerical/appearance qualification. The latter is still pending for2.3.15;
+the downloaded archive and declared JNI interface alone do not establish it.
+Source44 profiles and all sealed visual grades retain their original context.
+Explicit historical policy overrides are counterfactual diagnostics, not a
+claim that the new renderer executes those old policies. Native4K/detail paths
+remain outside the source model's supported viewport.
+
+The data-only controls can run without a device using prepared source49 adapters:
+
+```sh
+MILK_TEST_2315_BINARIES=/absolute/path/to/source49/adapters \
+python -m pytest tools/milk-analyzer/test_core2315_semantics.py tools/milk-analyzer/test_core2315_wave.py -q
+```
+
 ## Four initialization cases
 
 `martin - ludicrous speed.milk` initializes `index4` with native `rand(12)` and

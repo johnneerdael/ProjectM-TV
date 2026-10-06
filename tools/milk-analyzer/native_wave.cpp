@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 
 using json=nlohmann::json;
@@ -20,10 +21,20 @@ int main(int argc,char** argv) {
         if(argc!=2)throw std::runtime_error("usage: milk-wave-inputs request.json");
         std::ifstream input(argv[1]);json request;input>>request;
         if(!request.at("mode").is_number_integer())throw std::runtime_error("integer native mode required");
+        const auto policy=request.value("mode_policy",std::string("static-v1"));
+        if(policy!="static-v1"&&policy!="evaluated-live-v1")throw std::runtime_error("unknown waveform mode policy");
+        const bool live=policy=="evaluated-live-v1";
+        const auto engine=json::parse(kEngineIdentity);
+        if(live&&(engine.at("commit")!="e0b0a967f0ffd7d332106c366668ed271718472b"||
+                  engine.at("patches_sha256")!="7ef297fcab5d42d0531ec621ac6a464a5a0e7982da02bb40996bc62a886ae527"))
+            throw std::runtime_error("live waveform engine identity mismatch");
         int mode=request.at("mode").get<int>()%16;
-        if(mode<0)throw std::runtime_error("negative native mode has no waveform factory");
-        auto math=milk_wave_cpu::MilkdropPreset::Waveforms::Factory::Create(static_cast<milk_wave_cpu::MilkdropPreset::WaveformMode>(mode));
-        if(!math)throw std::runtime_error("native waveform factory unavailable");
+        std::unique_ptr<milk_wave_cpu::MilkdropPreset::Waveforms::WaveformMath> math;
+        if(!live) {
+            if(mode<0)throw std::runtime_error("negative native mode has no waveform factory");
+            math=milk_wave_cpu::MilkdropPreset::Waveforms::Factory::Create(static_cast<milk_wave_cpu::MilkdropPreset::WaveformMode>(mode));
+            if(!math)throw std::runtime_error("native waveform factory unavailable");
+        }
         milk_wave_cpu::MilkdropPreset::PresetState state;
         state.renderContext.viewportSizeX=request.value("width",512);state.renderContext.viewportSizeY=request.value("height",288);
         if(state.renderContext.viewportSizeX<=0||state.renderContext.viewportSizeY<=0)throw std::runtime_error("positive viewport required");
@@ -39,8 +50,36 @@ int main(int argc,char** argv) {
             {"source_hashes",json::parse(kWaveSourceHashes)},{"adapter_sha256",kCpuWaveAdapterSha},
             {"render_context_source_sha256",kWaveRenderContextSha},
             {"render_context_time_bits",sizeof(state.renderContext.time)*8},
-            {"engine_identity",json::parse(kEngineIdentity)},{"mode",mode},{"frames",json::array()}};
+            {"engine_identity",engine},{"mode",mode},{"mode_policy",policy},{"frames",json::array()}};
         for(const auto& frame:request.at("frames")) {
+            if(live) {
+                if(!frame.contains("wave_mode"))throw std::runtime_error("explicit evaluated waveform mode required");
+                const auto& value=frame.at("wave_mode");
+                double raw;
+                if(value.is_number())raw=value.get<double>();
+                else if(value.is_object()&&value.size()==1&&value.contains("ieee")&&value.at("ieee").is_string()) {
+                    const auto tag=value.at("ieee").get<std::string>();
+                    if(tag!="nan"&&tag!="positive_infinity"&&tag!="negative_infinity")
+                        throw std::runtime_error("unknown waveform IEEE tag");
+                    raw=std::numeric_limits<double>::quiet_NaN();
+                }else throw std::runtime_error("explicit evaluated waveform mode required");
+                const auto truncated=std::trunc(raw);
+                if(!std::isfinite(truncated)||truncated<std::numeric_limits<int>::min()||truncated>std::numeric_limits<int>::max()) {
+                    report["frames"].push_back({{"mode",nullptr},{"omitted",true},{"vertex_waves",json::array()},
+                        {"closed_loop",false},{"wave_a_after_geometry",0}});
+                    continue;
+                }
+                const int next=static_cast<int>(truncated)%16;
+                if(!math||next!=mode) {
+                    mode=next;
+                    math=milk_wave_cpu::MilkdropPreset::Waveforms::Factory::Create(static_cast<milk_wave_cpu::MilkdropPreset::WaveformMode>(mode));
+                }
+                if(!math) {
+                    report["frames"].push_back({{"mode",nullptr},{"omitted",true},{"vertex_waves",json::array()},
+                        {"closed_loop",false},{"wave_a_after_geometry",0}});
+                    continue;
+                }
+            }
             arrayInput(frame.at("waveform_left"),state.audioData.waveformLeft);
             arrayInput(frame.at("waveform_right"),state.audioData.waveformRight);
             arrayInput(frame.at("spectrum_left"),state.audioData.spectrumLeft);
@@ -58,7 +97,8 @@ int main(int argc,char** argv) {
                     points.push_back({point.x,point.y});
                 }waves.push_back(points);
             }
-            report["frames"].push_back({{"vertex_waves",waves},{"closed_loop",math->IsLoop()},{"wave_a_after_geometry",context.alpha}});
+            report["frames"].push_back({{"mode",mode},{"omitted",false},{"vertex_waves",waves},
+                {"closed_loop",math->IsLoop()},{"wave_a_after_geometry",context.alpha}});
         }
         std::filesystem::path output=request.at("output").get<std::string>();
         if(!output.parent_path().empty())std::filesystem::create_directories(output.parent_path());

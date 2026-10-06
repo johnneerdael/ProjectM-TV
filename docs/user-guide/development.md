@@ -185,8 +185,11 @@ Forecasts freeze model file hashes before calculation and reject changes after
 import or during evaluation. Use a fresh process after source changes. These checks
 protect identity consistency; they are not signatures or whole-program correctness
 proofs. Historical source44 profiles retain their static waveform and legacy
-display policies. The source predictor's migration to the current engine's live
-controls is separate from the native fixes below and remains in progress.
+display policies. The source predictor now models the2.3.15live controls under a
+separate exact source identity, alongside its corrected shape sampling, blur
+intervals and signed unit zoom. Its CPU controls do not certify published-AAR JNI
+appearance; that qualification remains separate. These changes have not regenerated
+the packaged mood indexes.
 
 ## Live preset controls
 

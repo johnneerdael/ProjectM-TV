@@ -468,3 +468,11 @@ queries, fixed circular entropy bins and explicit weighting/sector policy.
 Keep correlated transition records and their positive durations intact when
 caching; local/colour change rates are not flash cycles. Same-position changes
 do not rule out motion crossings. Simulated-display values retain mode B evidence.
+
+Source49 predictor policy (2026-10-07): `engine_profiles.py` pins published2.3.15's
+49-patch digest and versioned shape/blur/zoom/wave/display math. Keep exact-source
+selection guards and historical profiles. Decode native reader IEEE tags only at
+known consumer boundaries; preserve gamma/echo-zoom min/max order and skip unused
+wave inputs after mode omission. `test_core2315_wave.py` uses prepared source49 CPU
+adapters (`MILK_TEST_2315_BINARIES`); CPU checks are not published-AAR JNI appearance
+certification. Keep the standard AAR as the native reference, not the CPU archive.

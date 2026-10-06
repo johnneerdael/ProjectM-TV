@@ -138,10 +138,19 @@ that arbitrary future audio, assets, state or time cannot produce flashes.
 Strict shader colour query orchestration/bounds, visibility-supported motion,
 causal response, structure tags and
 mood/profile transformations remain follow-up work. The published 2.3.15 AAR is
-downloaded and byte-verified in the task workspace, but the forecaster's source44
-policies have not yet been migrated to its five newer patches. Historical evidence
-is not relabeled as 2.3.15. The unreleased 4.2 rebase remains a separate future
-semantic identity.
+downloaded and byte-verified in the task workspace. The forecaster now selects
+its five new policies from the exact source49 commit/patch identity: repeat/linear
+unnamed shape sampling, coherent float32 blur ranges, signed negative zoom only
+at unit exponent, evaluated built-in waveform controls, and evaluated legacy
+gamma/echo/filter controls. Source44 and earlier policies remain historical or
+explicit counterfactual controls; their evidence is not relabeled as 2.3.15.
+The unreleased 4.2 rebase remains a separate future semantic identity.
+
+The pinned AAR and both ABI/class hashes are in
+`profiles/published-core-v2.3.15.json`. Source CPU controls verify modeled math,
+including explicit reader IEEE tags at native-defined fallback/clamp boundaries.
+Omitted waves do not consume unused geometry or draw controls. This is not
+published-AAR JNI numerical or appearance qualification; that remains pending.
 
 Validate the pure calculations without a device:
 
