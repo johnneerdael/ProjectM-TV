@@ -1071,3 +1071,21 @@ withholds partial bounds. Opposing components must not be labelled central
 because their average centre is 0.5. These custom-shape bounds do not locate
 every shader or feedback feature: mirrored/remapped output needs separate
 source evidence. Wrong-location archived claims retain their failed grade.
+
+Predicted-field descriptors also retain per-frame thresholded spatial support:
+top-origin 3×3 occupancy counts, support in the central half-width/half-height
+rectangle, and union bounds covering occupied pixel cells. Pixel centres select
+half-open regions; the maximum encoded RGB channel must reach the recorded
+`value_floor`. Empty measured frames remain present with null bounds. This
+source-model calculation includes shader remapping and feedback, unlike raw
+custom-shape bounds. Union bounds do not identify objects or establish that an
+opposed pair is central. Below-threshold output and events outside the sampled
+window remain unknown. Native inspection is not an input to this calculation.
+
+The fourth frozen batch scored 100, 100, 100, 100, 100, 60, 95, 85, 95, 60
+after independent review (mean 89.5). Unknown clauses for sparse/dark outputs
+and unsupported motion retain zero credit; Type24's centre-location prose fails
+despite matching predicted fields. No successful batch is credited. Existing
+captures are reported, but further randomized batches are gated on fixing open
+predictor issues and retesting the affected originals. Dark-preset appearance
+requires deeper investigation; matching near-black output is not certification.

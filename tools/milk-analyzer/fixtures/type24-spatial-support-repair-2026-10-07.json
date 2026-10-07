@@ -1,0 +1,1055 @@
+{
+  "schema_version": 1,
+  "preset": "flexi - identity-killing petting - colon gonad type24.milk",
+  "source_prediction_only": true,
+  "original_score": 95,
+  "randomized_credit": 0,
+  "issue": "Opposed edge lobes were incorrectly described as central",
+  "repair": "Per-frame source-predicted spatial support; corrected claim retained as learning evidence",
+  "source_location": {
+    "scope": "Same-preset learning evidence; source prediction only; original score95 retained; no randomized credit",
+    "prediction_sha256": "002589a2e4b7742668b84b6815b1c906a5f224562dc678d4520b65594f12d03f",
+    "spatial_support": {
+      "basis": "Thresholded source-predicted display field, not native image inspection",
+      "value_floor": 0.05,
+      "threshold_channel": "maximum encoded RGB",
+      "grid_shape": [
+        3,
+        3
+      ],
+      "grid_origin": "top-left",
+      "centre_region": {
+        "minimum": [
+          0.25,
+          0.25
+        ],
+        "maximum": [
+          0.75,
+          0.75
+        ]
+      },
+      "coordinate_rule": "Pixel centres select half-open regions; bounds cover complete pixel cells",
+      "frames": [
+        {
+          "time": 0.03333333333333333,
+          "supported_pixels": 8,
+          "screen_fraction": 0.00021701388888888888,
+          "bounds": {
+            "minimum": [
+              0.046875,
+              0.4375
+            ],
+            "maximum": [
+              0.94921875,
+              0.5555555555555556
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              4,
+              0,
+              4
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.06666666666666667,
+          "supported_pixels": 39,
+          "screen_fraction": 0.0010579427083333333,
+          "bounds": {
+            "minimum": [
+              0.04296875,
+              0.4375
+            ],
+            "maximum": [
+              0.953125,
+              0.5555555555555556
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              22,
+              0,
+              17
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.1,
+          "supported_pixels": 66,
+          "screen_fraction": 0.0017903645833333333,
+          "bounds": {
+            "minimum": [
+              0.04296875,
+              0.4305555555555556
+            ],
+            "maximum": [
+              0.953125,
+              0.5625
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              38,
+              0,
+              28
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.13333333333333333,
+          "supported_pixels": 137,
+          "screen_fraction": 0.003716362847222222,
+          "bounds": {
+            "minimum": [
+              0.04296875,
+              0.4236111111111111
+            ],
+            "maximum": [
+              0.94921875,
+              0.5694444444444444
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              74,
+              0,
+              63
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.16666666666666666,
+          "supported_pixels": 204,
+          "screen_fraction": 0.005533854166666667,
+          "bounds": {
+            "minimum": [
+              0.04296875,
+              0.4236111111111111
+            ],
+            "maximum": [
+              0.953125,
+              0.5694444444444444
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              107,
+              0,
+              97
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.2,
+          "supported_pixels": 293,
+          "screen_fraction": 0.007948133680555556,
+          "bounds": {
+            "minimum": [
+              0.03515625,
+              0.4236111111111111
+            ],
+            "maximum": [
+              0.953125,
+              0.5694444444444444
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              154,
+              0,
+              139
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.23333333333333334,
+          "supported_pixels": 367,
+          "screen_fraction": 0.009955512152777778,
+          "bounds": {
+            "minimum": [
+              0.00390625,
+              0.4236111111111111
+            ],
+            "maximum": [
+              0.9609375,
+              0.5694444444444444
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              187,
+              0,
+              180
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.26666666666666666,
+          "supported_pixels": 438,
+          "screen_fraction": 0.011881510416666666,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.4236111111111111
+            ],
+            "maximum": [
+              0.96875,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              220,
+              0,
+              217
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.3,
+          "supported_pixels": 571,
+          "screen_fraction": 0.015489366319444444,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.4166666666666667
+            ],
+            "maximum": [
+              0.99609375,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              300,
+              0,
+              261
+            ],
+            [
+              10,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.3333333333333333,
+          "supported_pixels": 904,
+          "screen_fraction": 0.024522569444444444,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.4166666666666667
+            ],
+            "maximum": [
+              0.9921875,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              465,
+              0,
+              427
+            ],
+            [
+              12,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.36666666666666664,
+          "supported_pixels": 1181,
+          "screen_fraction": 0.032036675347222224,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.4166666666666667
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              604,
+              0,
+              565
+            ],
+            [
+              12,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.4,
+          "supported_pixels": 1431,
+          "screen_fraction": 0.038818359375,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.4097222222222222
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 17,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              740,
+              0,
+              677
+            ],
+            [
+              14,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.43333333333333335,
+          "supported_pixels": 1757,
+          "screen_fraction": 0.047661675347222224,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.4097222222222222
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 2,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              902,
+              0,
+              837
+            ],
+            [
+              18,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.4666666666666667,
+          "supported_pixels": 1960,
+          "screen_fraction": 0.053168402777777776,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.4027777777777778
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 0,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1009,
+              0,
+              931
+            ],
+            [
+              20,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.5,
+          "supported_pixels": 2184,
+          "screen_fraction": 0.059244791666666664,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.375
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 44,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1140,
+              0,
+              1021
+            ],
+            [
+              23,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.5333333333333333,
+          "supported_pixels": 2429,
+          "screen_fraction": 0.0658908420138889,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3680555555555556
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 70,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1267,
+              6,
+              1131
+            ],
+            [
+              25,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.5666666666666667,
+          "supported_pixels": 2655,
+          "screen_fraction": 0.072021484375,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3611111111111111
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 78,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1365,
+              12,
+              1251
+            ],
+            [
+              27,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.6,
+          "supported_pixels": 2845,
+          "screen_fraction": 0.0771755642361111,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3611111111111111
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 89,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1469,
+              17,
+              1331
+            ],
+            [
+              28,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.6333333333333333,
+          "supported_pixels": 3158,
+          "screen_fraction": 0.0856662326388889,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3611111111111111
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 141,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1629,
+              20,
+              1480
+            ],
+            [
+              29,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.6666666666666666,
+          "supported_pixels": 3527,
+          "screen_fraction": 0.0956759982638889,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3611111111111111
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 320,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1816,
+              20,
+              1660
+            ],
+            [
+              31,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.7,
+          "supported_pixels": 3803,
+          "screen_fraction": 0.10316297743055555,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3611111111111111
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 445,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1952,
+              30,
+              1790
+            ],
+            [
+              31,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.7333333333333333,
+          "supported_pixels": 4114,
+          "screen_fraction": 0.1115993923611111,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3541666666666667
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 568,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              2071,
+              84,
+              1923
+            ],
+            [
+              36,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.7666666666666667,
+          "supported_pixels": 4517,
+          "screen_fraction": 0.1225314670138889,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3472222222222222
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 760,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              2235,
+              179,
+              2055
+            ],
+            [
+              48,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.8,
+          "supported_pixels": 4926,
+          "screen_fraction": 0.13362630208333334,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3402777777777778
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 986,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              2375,
+              283,
+              2202
+            ],
+            [
+              66,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.8333333333333334,
+          "supported_pixels": 5261,
+          "screen_fraction": 0.14271375868055555,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3402777777777778
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 1175,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              2474,
+              385,
+              2318
+            ],
+            [
+              84,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.8666666666666667,
+          "supported_pixels": 5635,
+          "screen_fraction": 0.1528591579861111,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3333333333333333
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 1371,
+          "grid_counts": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              2604,
+              474,
+              2456
+            ],
+            [
+              101,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.9,
+          "supported_pixels": 6000,
+          "screen_fraction": 0.16276041666666666,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3263888888888889
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 1532,
+          "grid_counts": [
+            [
+              5,
+              0,
+              0
+            ],
+            [
+              2722,
+              577,
+              2571
+            ],
+            [
+              125,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.9333333333333333,
+          "supported_pixels": 6347,
+          "screen_fraction": 0.1721733940972222,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3194444444444444
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 1702,
+          "grid_counts": [
+            [
+              11,
+              0,
+              6
+            ],
+            [
+              2829,
+              677,
+              2682
+            ],
+            [
+              142,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 0.9666666666666667,
+          "supported_pixels": 6665,
+          "screen_fraction": 0.18079969618055555,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3125
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 1849,
+          "grid_counts": [
+            [
+              23,
+              0,
+              13
+            ],
+            [
+              2904,
+              778,
+              2795
+            ],
+            [
+              152,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "time": 1.0,
+          "supported_pixels": 7021,
+          "screen_fraction": 0.1904568142361111,
+          "bounds": {
+            "minimum": [
+              0.0,
+              0.3055555555555556
+            ],
+            "maximum": [
+              1.0,
+              1.0
+            ]
+          },
+          "centre_support_pixels": 2034,
+          "grid_counts": [
+            [
+              40,
+              0,
+              34
+            ],
+            [
+              2989,
+              897,
+              2893
+            ],
+            [
+              168,
+              0,
+              0
+            ]
+          ]
+        }
+      ],
+      "limitations": [
+        "Union bounds and grid occupancy do not identify objects, depth or trajectories",
+        "Thresholded absence does not prove mathematical zero or absence outside the sampled window"
+      ]
+    }
+  },
+  "validation": {
+    "change": "Add source-predicted thresholded per-frame spatial support to prevent averaging opposed edge features into a central claim",
+    "tests": {
+      "red": "2 tests failed with KeyError spatial_support",
+      "focused": "29 passed",
+      "full": "1406 passed;78subtests passed",
+      "docs": "mkdocs build --strict passed",
+      "diff_check": "passed"
+    },
+    "documentation_assessment": {
+      "updated": [
+        "tools/milk-analyzer/README.md"
+      ],
+      "evaluated": [
+        "README.md",
+        "docs/user-guide/predictive-collections.md",
+        "AGENTS.md"
+      ],
+      "no_user_docs_change_reason": "Experimental source descriptor addition does not regenerate shipped beta collection scores or alter app behavior; existing guide accurately separates those mechanisms"
+    },
+    "original_score": 95,
+    "randomized_credit": 0,
+    "review": "pending independent code and same-preset review"
+  },
+  "existing_activity_score_inputs_changed": false
+}

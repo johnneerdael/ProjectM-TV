@@ -24,6 +24,28 @@ def effective_bins(histogram):
     return float(np.exp(-np.sum(probabilities*np.log(probabilities))))
 
 
+def _spatial_support(rgb, time, value_floor):
+    """Locate thresholded predicted output; a union is not an object identity."""
+    height,width=rgb.shape[:2]
+    mask=np.max(rgb,axis=-1)>=value_floor
+    ys,xs=np.nonzero(mask)
+    bounds=None
+    if len(xs):
+        bounds={'minimum':[float(xs.min()/width),float(ys.min()/height)],
+                'maximum':[float((xs.max()+1)/width),float((ys.max()+1)/height)]}
+    x=(np.arange(width)+.5)/width
+    y=(np.arange(height)+.5)/height
+    centre=(y[:,None]>=.25)&(y[:,None]<.75)&(x[None,:]>=.25)&(x[None,:]<.75)
+    counts=np.zeros((3,3),dtype=np.int64)
+    if len(xs):
+        np.add.at(counts,(np.minimum((y[ys]*3).astype(int),2),
+                          np.minimum((x[xs]*3).astype(int),2)),1)
+    return {'time':time,'supported_pixels':int(len(xs)),
+            'screen_fraction':float(mask.mean()),'bounds':bounds,
+            'centre_support_pixels':int(np.count_nonzero(mask&centre)),
+            'grid_counts':counts.tolist()}
+
+
 def visible_motion(old, new, dt, settings):
     changed=np.abs(new-old)>=settings['brightness_jump']
     empty=dict(available=False,support=0.,median_speed=None,p95_speed=None,
@@ -90,6 +112,7 @@ class DescriptorStream:
         if type(self.settings['hue_bins']) is not int:raise ValueError('integer hue bin count required')
         self.warmup=warmup_frames;self.seen=0;self.previous=None;self.previous_time=None
         self.rows=[];self.transitions=[];self.hue_mass=np.zeros(self.settings['hue_bins'])
+        self.spatial_rows=[]
         self.warm_mass=0.;self.chromatic_mass=0.
 
     def add(self, frame):
@@ -113,6 +136,7 @@ class DescriptorStream:
                             (np.arange(height,dtype=np.float32)+.5)/height)
             query_displacement=float(np.mean(np.linalg.norm(coordinates.astype(np.float64)-np.stack((x,y),axis=-1),axis=-1)))
         if self.seen>=self.warmup:
+            self.spatial_rows.append(_spatial_support(rgb,time,self.settings['value_floor']))
             palette=palette_summary(rgb.reshape(-1,3),hue_bins=self.settings['hue_bins'],
                                     value_floor=self.settings['value_floor'],saturation_floor=self.settings['saturation_floor'])
             hsv=cv2.cvtColor(rgb,cv2.COLOR_RGB2HSV)
@@ -239,7 +263,16 @@ class DescriptorStream:
                         p95_speed_viewports_per_second=float(np.percentile([row['p95_speed'] for row in speed_samples],95)) if speed_samples else None,
                         mean_acceleration_viewports_per_second_squared=float(np.mean(acceleration)) if acceleration else None,
                         mean_warp_query_displacement=float(np.mean(displacements)) if displacements else None),
-            structure={'fractal':None},bass_response=None,mood_assignment=None,
+            structure={'fractal':None,'spatial_support':{
+                'basis':'Thresholded source-predicted display field, not native image inspection',
+                'value_floor':self.settings['value_floor'],'threshold_channel':'maximum encoded RGB',
+                'grid_shape':[3,3],'grid_origin':'top-left',
+                'centre_region':{'minimum':[.25,.25],'maximum':[.75,.75]},
+                'coordinate_rule':'Pixel centres select half-open regions; bounds cover complete pixel cells',
+                'frames':list(self.spatial_rows),
+                'limitations':['Union bounds and grid occupancy do not identify objects, depth or trajectories',
+                               'Thresholded absence does not prove mathematical zero or absence outside the sampled window']}},
+            bass_response=None,mood_assignment=None,
             aggregation={'motion_speed':'Median of per-transition supported-pixel medians; upper-tail summary is the 95th percentile of transition pixel-p95 values',
                          'matched_brightness':'Changes along estimated motion correspondence; screen areas include only valid pixels. Missing correspondence is unknown. Peak summaries retain rare transitions; separate peaks need not refer to the same event.',
                          'palette':'Hard circular hue bins on coloured pixels; spatial per-frame and combined temporal diversity reported separately',

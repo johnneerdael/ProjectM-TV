@@ -80,6 +80,42 @@ def test_empty_visible_support_does_not_invent_a_local_flash():
     assert result['peak_visible_darkening_fraction']==0
 
 
+def test_opposing_edge_support_does_not_invent_a_central_feature():
+    target=stream()
+    image=np.zeros((64,64,3),np.float32)
+    image[24:40,:8]=1
+    image[24:40,-8:]=1
+    add(target,image,0)
+    location=target.report()['structure']['spatial_support']
+    row=location['frames'][0]
+    assert row['centre_support_pixels']==0
+    assert row['supported_pixels']==256
+    assert row['grid_counts'][1][0]==128
+    assert row['grid_counts'][1][2]==128
+    assert row['bounds']=={'minimum':[0,24/64], 'maximum':[1,40/64]}
+    assert location['grid_shape']==[3,3]
+    assert location['value_floor']==.05
+
+
+def test_spatial_support_retains_empty_frames_and_uses_half_open_centre():
+    target=stream(warmup_frames=1)
+    add(target,[1,1,1],0)
+    add(target,[0,0,0],1/30)
+    image=np.zeros((8,8,3),np.float32)
+    # Independent stream: viewport dimensions cannot change within one stream.
+    small=stream()
+    image[2,2]=.05
+    image[6,6]=1
+    add(small,image,0)
+    row=small.report()['structure']['spatial_support']['frames'][0]
+    assert row['centre_support_pixels']==1
+    assert sum(map(sum,row['grid_counts']))==2
+    empty=target.report()['structure']['spatial_support']['frames']
+    assert len(empty)==1
+    assert empty[0]['bounds'] is None
+    assert empty[0]['supported_pixels']==0
+
+
 def test_shifted_textured_field_has_visible_speed_not_coherent_flashing():
     target=stream()
     rng=np.random.default_rng(413)
