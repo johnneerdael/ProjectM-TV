@@ -191,3 +191,11 @@ and full repeated proof are retained in `recognizable-pack-fixture/` and
 `recognizable-pack-switch-results.json`. This is explicitly a host-level fixture;
 no named-image custom-shape fields were found in the bundled artist presets.
 The separately requested predictor brief is `predictor-patch-0010-brief.md`.
+
+## Predictor-created Aurora ownership witness
+
+The user supplied animated SOL/LUNA packs and a forecast written before the GPU
+test. The frozen witness makes patch 0010's failure visible at frame 20, before
+the fade: a blue LUNA emblem replaces SOL inside its still-orange portal.
+All three roles repeat exactly with zero GL errors; the patched reset/no-reset
+sequences match all 120 frames. See [frozen inputs, screenshots and audit](aurora-ownership/README.md).

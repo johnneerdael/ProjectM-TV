@@ -326,6 +326,28 @@ the same image name and different pixels; capture fade, reset and retirement.
 No unique bundled preset can demonstrate a host changing its roots. ZIP upload,
 QR codes and category UI are app features outside this patch.
 
+![Aurora portal uses the wrong pack image before the fade starts](superpowers/evidence/current-patch-proof/0010-aurora-ownership.png)
+
+**What to look for:** the orange portal belongs to SOL. At frame 20 the host has
+changed texture roots to the LUNA pack but has not loaded LUNA yet. Upstream and
+the engine with only 0010 removed replace its orange SOL emblem with the blue
+LUNA emblem. The patched engine keeps SOL. The full frames and aligned 2× crops
+use the captured pixels without brightness changes.
+
+These animated SOL/LUNA presets and images were created by the user's predictor
+specifically to expose this bug. Its written forecast preceded the GPU test and
+correctly identified frame 20 as the first unambiguous failure. Both packs use
+`shapecode_0_image=aurora_ownership_core.png`, with different image bytes. This is
+a generated diagnostic witness, separate from the unchanged artist presets used
+for other patches. All three roles repeat all 120 frames exactly with zero GL
+errors. The causal pair first differs at frame 20; 100 frames differ overall.
+After the two-second fade, both show LUNA, while their earlier feedback histories
+can still differ. A separate patched replay without the frame-40 reset matches
+the reset replay across all 120 frames. See the [forecast, frozen packs, frame
+sequence and audit](superpowers/evidence/current-patch-proof/aurora-ownership/README.md).
+
+The earlier bundled-image fixture remains a separate control:
+
 ![Recognizable texture-pack ownership failure during a fade](superpowers/evidence/current-patch-proof/0010-recognizable-pack-switch.png)
 
 **What to look for:** Pack A contains the bundled spotted texture `onefish.jpg`;

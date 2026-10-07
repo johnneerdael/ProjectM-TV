@@ -16,6 +16,12 @@ The separately stored laboratory preset `martin + Se7enSlasher - pixies party (r
 
 ## Presets and textures
 
+The [Aurora Ownership SOL/LUNA diagnostic packs](superpowers/evidence/current-patch-proof/aurora-ownership/README.md)
+were created by the user's predictor and supplied for the patch0010 experiment.
+Their frozen source and image bytes are retained as test evidence outside the
+shipping assets; they are not part of the bundled CC0 collection. The capture
+records the supplied forecast and actual GPU results separately.
+
 This project distributes the bundled presets (`core/src/main/assets/presets`) and textures (`core/src/main/assets/textures`) under **CC0 1.0 Universal** ([LICENSES/CC0-1.0.txt](../LICENSES/CC0-1.0.txt)): free for any use, without conditions.
 
 - CC0 covers what this project holds: the selection and curation of the collection and any changes made to it (presets removed, textures converted from DDS to PNG).
