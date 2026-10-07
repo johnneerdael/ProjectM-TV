@@ -1445,3 +1445,14 @@ profile is now admitted for exact CORE2322 source identity and declared GLES300.
 Other shader arithmetic and motion-storage guards stay separate. The repaired
 same-preset p95 estimate differs by 0.058%; this is retrospective and grants no new
 streak credit. See `fixtures/core2322-blur-arithmetic-repair-2026-10-07.json`.
+
+Forecast reports now expose `source_proofs.untouched_main_q_components`, the existing
+source-equation write proof used by shader lowering. Packed `_qa.xyzw` maps to
+q1–q4 through `_qh.xyzw` for q29–q32; absent components are not proven constant.
+Check this proof before describing a texture reference as an active effect.
+`325.milk` was numerically predicted correctly but its frozen warp-retention
+explanation was wrong: untouched q32=0 removes the main-feedback term, and its
+normalized-noise contribution remains negative and clamps to black. Its composite
+blur history is separate. The original97.5 grade stays failed; corrected explanations
+and repeat controls are retrospective. See
+`fixtures/core42-inactive-warp-explanation-2026-10-07.json`.

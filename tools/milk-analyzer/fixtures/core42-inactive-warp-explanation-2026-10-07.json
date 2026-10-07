@@ -1,0 +1,94 @@
+{
+  "scope": "Source explanation correction; no native or image-forecast math bug established",
+  "preset": "325.milk",
+  "preset_sha256": "3382e12951122c77099f1fd3e86cda55ecb141a08de8e9c95c830d798694df22",
+  "original_score": 97.5,
+  "false_claim": "Warp adds procedural noise while retaining scaled feedback",
+  "source_proofs": {
+    "basis": "source-equation-write-analysis",
+    "untouched_main_q_components": {
+      "_qa": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "_qb": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "_qc": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "_qd": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "_qe": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "_qf": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "_qg": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "_qh": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      }
+    },
+    "scope": "Proven untouched components under the declared equation loader; absent components are not proven constant",
+    "effect_rule": "A texture read does not establish an active visual effect; check coefficients, branches and storage clipping"
+  },
+  "proof": {
+    "q27": 0,
+    "q28": 0,
+    "q29": 0,
+    "q32": 0,
+    "zz": "0 under declared finite inputs",
+    "selected_branch": "tan(0), zero displacement",
+    "previous_main_rgb_coefficient": 0,
+    "normalized_noise_range": [
+      0,
+      1
+    ],
+    "warp_output_rgb_range": [
+      -0.03,
+      -0.006
+    ],
+    "stored_warp_rgb": 0
+  },
+  "history_scope": "This establishes absent previous-main RGB contribution in warp, not absent whole-preset feedback; compositeBlur1 may retain history",
+  "repair": "Expose existing proven untouched Q components in forecasts; check live coefficients, branch reachability and storage clipping before describing active effects",
+  "written_components": "Absent from zero proof, not guessed zero",
+  "image_forecast_changed": false,
+  "original_failed_claims_preserved": true,
+  "repair_credit": 0,
+  "validation_status": "Resolved:1490tests+78subtests pass; strictMkDocs passes; independent export/narrative review clear",
+  "repair_assessment": {
+    "score": 100,
+    "full_claims": 20,
+    "fresh_score_credit": 0,
+    "streak_credit": 0,
+    "fresh_native_byte_exact": true,
+    "rendering_math_unchanged": true
+  }
+}

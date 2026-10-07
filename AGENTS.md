@@ -589,3 +589,9 @@ and `core2322-blur-arithmetic-repair-2026-10-07.json`. The randomized goal remai
 20rounds of3presets/30frames,60consecutive100scores; preserve original failed
 predictions and give retrospective repairs zero streak credit. No main merge is
 authorized yet.
+
+Forecast explanations must inspect `source_proofs.untouched_main_q_components`
+before asserting active shader effects. Presence of a texture sample is not proof
+of visible influence: zero coefficients, inactive branches and framebuffer clipping
+can remove it. Preserve original failed narrative grades even when predicted RGB
+already matches; retrospective explanation repairs receive no fresh streak credit.

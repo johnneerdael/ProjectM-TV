@@ -937,3 +937,17 @@ def test_forecast_forwards_declared_geometry_budget(monkeypatch):
     assert seen==[1234]
     assert result['geometry_features']['derivative_sample_budget']==1234
     assert result['domain']['geometry_derivative_sample_budget']==1234
+
+
+def test_forecast_exposes_proven_q_constants_without_zeroing_written_components(monkeypatch):
+    import forecast
+    binaries=Path(os.environ.get('MILK_TEST_CURRENT_BINARIES',BINARIES))
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    source=native(BASE+'per_frame_1=q1=bass;q32=treb;\n',binaries=binaries)
+    result=forecast.forecast_source(source,audio=audio(1),binaries=binaries,
+                                    domain=domain(),compatibility={})
+    constants=result['source_proofs']['untouched_main_q_components']
+    assert 0 not in constants['_qa']
+    assert constants['_qa'][1]==0
+    assert 3 not in constants['_qh']
+    assert result['source_proofs']['basis']=='source-equation-write-analysis'
