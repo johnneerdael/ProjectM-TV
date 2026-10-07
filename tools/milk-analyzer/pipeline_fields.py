@@ -207,6 +207,9 @@ class SourcePipeline:
                   '_c5':[high[0]-low[0],low[0],high[1]-low[1],low[1]],
                   '_c6':[high[2]-low[2],low[2],low[0],high[0]],
                   '_c7':[self.width,self.height,1/self.width,1/self.height],
+                  # MilkdropShader always binds the owned main texture, even
+                  # when the authored section references only its dimensions.
+                  'texsize_main':[self.width,self.height,1/self.width,1/self.height],
                   '_c13':[low[1],high[1],low[2],high[2]]}
 
         def stage(tree,name,main,blur,coordinates,polar,colour=None):

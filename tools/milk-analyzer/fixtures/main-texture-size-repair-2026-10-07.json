@@ -1,0 +1,28 @@
+{
+  "resolved": "Missing texsize_main in source pipeline",
+  "native_reference": "MilkdropShader::GetReferencedSamplers always inserts main; TextureSamplerDescriptor::Bind exports dimensions and reciprocals",
+  "source_fix": "SourcePipeline.stage lowlevel inputs bind texsize_main to owned feedback dimensions; caller overrides cannot displace them",
+  "supported_scope": "Current guarded resolution domain; high-resolution shader canvas override remains unsupported",
+  "suite": "1373 tests and78 subtests pass",
+  "native_controls": {
+    "x": {
+      "original.milk": "6ea5dcb0ecc9f510ba3097906d384412f79d2d5b1e7057ea18766b92d013958a",
+      "source.json": "ee0ab93042423fca3a28ed95b25243edbadd235e02e80abe8609b400cb58b304",
+      "prediction-math.json": "5ffad9ca1db3a7a3f434b4a392af0f4d7b8bf384d87f2d5d3b0749dbc81ae813",
+      "prediction.rgb.u8": "43f148f5004e550d4d1286c7d64bdd181c968002c0436e362726a7b588fe32c9",
+      "native.rgb.u8": "70514a7212d2644c933da5371b928ffb50d5989fa7458b4424a693b163f12f6c",
+      "freeze.json": "81d1a86deafb71c36d5724474ce93f501d26102919ca31a2b2e08e1437b44ebc",
+      "capture.json": "3e961c858c618afec2c20c6c37d20c92636112f9829c0b198394cbf1ebfb91bd"
+    },
+    "y": {
+      "original.milk": "0afc577a2a05ffb32e07bc5dafec6a7868c56d98c1a161604eba69259a2598a0",
+      "source.json": "d169e2ef8dff9bbc6b6630d9693410a203c10ca275c56f5913cf13ecf110262f",
+      "prediction-math.json": "a331f8fcec8aa5625880fbd1647b466ab749f75f48081b958764febd08ff364a",
+      "prediction.rgb.u8": "2936905aeb82435c1af28185d511de20e6259b5451e90973aed7fa7f9429f925",
+      "native.rgb.u8": "ffc05a364d5e2489f423d1a78328416910b5748c54f7bb279fa48303ae5aba24",
+      "freeze.json": "b2e86a3eb88ae692c95e6d01efb152ffde03f52c511e12646a517f7735a9f202",
+      "capture.json": "c44b8c4ffb4bc489d103c89f937e902df884506eca6ccdd8a311e87923de71db"
+    }
+  },
+  "not_random_accuracy_credit": true
+}

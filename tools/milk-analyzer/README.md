@@ -891,3 +891,12 @@ also exposes unresolved low-bit differences; grid8 alone and blanket half
 precision are not established repairs. These controls do not demonstrate an AAR
 bug or change the original 95 score. Exact hashes and numerical outcomes are in
 `fixtures/feedback-precision-resource-controls-2026-10-07.json`.
+
+
+`SourcePipeline` binds `texsize_main` from its owned feedback dimensions in
+both shader stages, matching the native main descriptor within the supported
+resolution domain. No material bank is required for this built-in texture size,
+and caller values cannot replace it. Unknown external/blur size inputs and
+high-resolution shader-canvas overrides retain their existing guards. See
+`fixtures/main-texture-size-repair-2026-10-07.json` for the regression and
+published-AAR control identities. The fix grants no credit to archived forecasts.

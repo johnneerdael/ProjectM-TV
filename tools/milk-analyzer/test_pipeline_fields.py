@@ -11,6 +11,28 @@ def trees(warp,composite):
 
 
 class PipelineFieldsTest(unittest.TestCase):
+    def test_main_texture_size_uses_owned_feedback_dimensions_in_both_stages(self):
+        module=importlib.import_module('pipeline_fields')
+        warp,comp=trees('ret=float3(texsize_main.zw,texsize_main.x/64);',
+                        'ret=GetPixel(uv)*texsize_main.x*texsize_main.z;')
+        expected=np.broadcast_to([1/32,1/16,.5],(16,32,3))
+        for uniforms in ({},{'texsize_main':[999,999,999,999]}):
+            with self.subTest(uniforms=uniforms):
+                pipeline=module.SourcePipeline(warp,comp,initial_feedback=np.zeros((16,32,4)),
+                    warp_reads_blur=False,blur_levels=0,quantize=False)
+                result=pipeline.step(warp_uv=pipeline.original_uv,uniforms=uniforms,frame_wrap=1)
+                np.testing.assert_allclose(result.feedback[...,:3],expected,atol=1e-7)
+                np.testing.assert_allclose(result.display[...,:3],expected,atol=1e-7)
+
+    def test_main_dimensions_do_not_invent_an_unknown_texture_size(self):
+        from pipeline_fields import SourcePipeline
+        from field_math import UnresolvedMath
+        warp,comp=trees('ret=GetPixel(uv);','ret=float3(texsize_unknown.zw,0);')
+        pipeline=SourcePipeline(warp,comp,initial_feedback=np.zeros((16,32,4)),
+            warp_reads_blur=False,blur_levels=0,quantize=False)
+        with self.assertRaises(UnresolvedMath):
+            pipeline.step(warp_uv=pipeline.original_uv,uniforms={},frame_wrap=1)
+
     def test_tagged_reduction_controls_warp_and_composite_display_fields(self):
         module=importlib.import_module('pipeline_fields')
         source=test_native_reader.NativeReaderTest().read('PSVERSION_WARP=2\nPSVERSION_COMP=2\n'
