@@ -3,151 +3,70 @@
 @@ -0,0 +1 @@
 +{"commit":"6f64807467e312034883a4389e6aa80a675458bc","instrumentation_sha256":"2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e","patches_sha256":"3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"}--- a/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
 +++ b/src/libprojectM/MilkdropPreset/MilkdropShader.cpp
-@@ -1,3 +1,4 @@
+@@ -0,0 +1 @@
 +#include "../analysis_hooks.hpp"
- #include "MilkdropShader.hpp"
- 
- #include "LineGeometry.hpp"
-@@ -27,7 +28,7 @@
- 
- using libprojectM::MilkdropPreset::MilkdropStaticShaders;
- 
+@@ -30 +31 @@
 -static auto floatRand = []() { return static_cast<float>(rand() % 7381) / 7380.0f; };
 +static auto floatRand = []() { return static_cast<float>(lab::ShaderRandom() % 7381) / 7380.0f; };
- 
- MilkdropShader::MilkdropShader(ShaderType type)
-     : m_type(type)
 --- a/src/libprojectM/MilkdropPreset/PresetState.cpp
 +++ b/src/libprojectM/MilkdropPreset/PresetState.cpp
-@@ -1,3 +1,4 @@
+@@ -0,0 +1 @@
 +#include "../analysis_hooks.hpp"
- #include "PresetState.hpp"
- 
- #include "MilkdropStaticShaders.hpp"
-@@ -18,8 +19,7 @@
- PresetState::PresetState()
-     : globalMemory(projectm_eval_memory_buffer_create())
- {
+@@ -21,2 +22 @@
 -    std::random_device randomDevice;
 -    std::mt19937 randomGenerator(randomDevice());
 +    std::mt19937 randomGenerator(lab::Seed(104));
-     std::uniform_int_distribution<> distrib(0, std::numeric_limits<int>::max());
- 
-     hueRandomOffsets[0] = static_cast<float>(distrib(randomGenerator) % 64841L) * 0.01f;
 --- a/src/libprojectM/Renderer/MilkdropNoise.cpp
 +++ b/src/libprojectM/Renderer/MilkdropNoise.cpp
-@@ -1,3 +1,4 @@
+@@ -0,0 +1 @@
 +#include "../analysis_hooks.hpp"
- #include "Renderer/MilkdropNoise.hpp"
- 
- #include "Renderer/OpenGL.h"
-@@ -53,7 +54,7 @@
- 
- auto MilkdropNoise::generate2D(int size, int zoomFactor) -> std::vector<uint32_t>
- {
+@@ -56 +57 @@
 -    uint32_t randomSeed = static_cast<uint32_t>(std::chrono::system_clock::now().time_since_epoch().count());
 +    uint32_t randomSeed = lab::Seed(101) ^ static_cast<uint32_t>(size * 31 + zoomFactor);
-     std::default_random_engine randomGenerator(randomSeed);
-     std::uniform_int_distribution<int> randomDistribution(0, INT32_MAX);
- 
-@@ -140,7 +141,7 @@
- 
- auto MilkdropNoise::generate3D(int size, int zoomFactor) -> std::vector<uint32_t>
- {
+@@ -143 +144 @@
 -    uint32_t randomSeed = static_cast<uint32_t>(std::chrono::system_clock::now().time_since_epoch().count());
 +    uint32_t randomSeed = lab::Seed(101) ^ static_cast<uint32_t>(size * 31 + zoomFactor);
-     std::default_random_engine randomGenerator(randomSeed);
-     std::uniform_int_distribution<int> randomDistribution(0, INT32_MAX);
- 
 --- a/src/libprojectM/Renderer/Shader.cpp
 +++ b/src/libprojectM/Renderer/Shader.cpp
-@@ -209,7 +209,7 @@
-     glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &programLinked);
-     if (programLinked == GL_TRUE)
-     {
+@@ -212 +212 @@
 -        ProgramCache::Instance().Store(m_shaderProgram, cacheKey);
 +        // Image-proof harness: guest binary metadata export is broken; do not cache.
-         return;
-     }
- 
 --- a/src/libprojectM/Renderer/TextureManager.cpp
 +++ b/src/libprojectM/Renderer/TextureManager.cpp
-@@ -1,3 +1,5 @@
+@@ -0,0 +1,2 @@
 +#include <tuple>
 +#include "../analysis_hooks.hpp"
- #include "Renderer/TextureManager.hpp"
- 
- #include "Renderer/FileScanner.hpp"
-@@ -306,8 +308,7 @@
- {
-     std::string selectedFilename;
- 
+@@ -309,2 +311 @@
 -    std::random_device rndDevice;
 -    std::default_random_engine rndEngine(rndDevice());
 +    std::mt19937 rndEngine(lab::Seed(103) ^ lab::StringSeed(randomName));
- 
-     ScanTextures();
- 
-@@ -434,6 +435,10 @@
- 
-         using namespace std::placeholders;
-         fileScanner.Scan(std::bind(&TextureManager::AddTextureFile, this, _1, _2));
+@@ -436,0 +438,4 @@
 +        std::sort(m_scannedTextureFiles.begin(), m_scannedTextureFiles.end(),
 +            [](const auto& a, const auto& b) {
 +                return std::tie(a.lowerCaseBaseName, a.filePath) < std::tie(b.lowerCaseBaseName, b.filePath);
 +            });
-         m_filesScanned = true;
-     }
- }
 --- a/src/libprojectM/Renderer/TransitionShaderManager.cpp
 +++ b/src/libprojectM/Renderer/TransitionShaderManager.cpp
-@@ -1,3 +1,4 @@
+@@ -0,0 +1 @@
 +#include "../analysis_hooks.hpp"
- #include "Renderer/TransitionShaderManager.hpp"
- 
- #include "BuiltInTransitionsResources.hpp"
-@@ -12,7 +13,7 @@
-                            CompileTransitionShader(kTransitionShaderBuiltInSweepGlsl330),
-                            CompileTransitionShader(kTransitionShaderBuiltInWarpGlsl330),
-                            CompileTransitionShader(kTransitionShaderBuiltInZoomBlurGlsl330)})
+@@ -15 +16 @@
 -    , m_mersenneTwister(m_randomDevice())
 +    , m_mersenneTwister(lab::Seed(105))
- {
- }
- 
 --- a/src/libprojectM/TimeKeeper.cpp
 +++ b/src/libprojectM/TimeKeeper.cpp
-@@ -1,3 +1,4 @@
+@@ -0,0 +1 @@
 +#include "analysis_hooks.hpp"
- #include "TimeKeeper.hpp"
- 
- #include <algorithm>
-@@ -30,8 +31,7 @@
- 
-     if (m_userSpecifiedTime < 0.0)
-     {
+@@ -33,2 +34 @@
 -        auto currentTime = std::chrono::high_resolution_clock::now();
 -        currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();
 +        currentFrameTime = lab::clock_seconds;
-     }
- 
-     m_secondsSinceLastFrame = currentFrameTime - m_currentTime;
 --- a/src/libprojectM/TimeKeeper.hpp
 +++ b/src/libprojectM/TimeKeeper.hpp
-@@ -1,3 +1,4 @@
+@@ -0,0 +1 @@
 +#include "analysis_hooks.hpp"
- #pragma once
- 
- #include <chrono>
-@@ -110,7 +111,7 @@
-     std::chrono::high_resolution_clock::time_point m_startTime{std::chrono::high_resolution_clock::now()};
- 
-     std::random_device m_randomDevice{};
+@@ -113 +114 @@
 -    std::mt19937 m_randomGenerator{m_randomDevice()};
 +    std::mt19937 m_randomGenerator{lab::Seed(11)};
- 
-     double m_userSpecifiedTime{-1.0}; //!< User-specifed run time. If set to a value >= 0.0, this time is used instead of the system clock.
- 
 --- a/src/libprojectM/analysis_hooks.hpp
 +++ b/src/libprojectM/analysis_hooks.hpp
 @@ -0,0 +1,45 @@
@@ -198,17 +117,8 @@
 +#endif
 --- a/vendor/projectm-eval/projectm-eval/TreeFunctions.c
 +++ b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
-@@ -1,3 +1,4 @@
+@@ -0,0 +1 @@
 +#include <stdlib.h>
- /**
-  * @file TreeFunctions.c
-  * @brief Implements all intrinsic projectM-EvalLib functions and helpers.
-@@ -166,7 +167,7 @@
- 
-     if (!mti)
-     {
+@@ -169 +170 @@
 -        uint32_t s = 0x4141f00d; // Initial Mersenne Twister seed
 +        uint32_t s = getenv("PRESET_LAB_SEED") ? (uint32_t)strtoul(getenv("PRESET_LAB_SEED"), NULL, 10) : 0x4141f00d;
-         mt[0] = s & 0xffffffffUL;
-         for (mti = 1; mti < N; mti++)
-         {

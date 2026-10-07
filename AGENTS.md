@@ -430,3 +430,19 @@ If the repository requires a merge queue, enqueue the eligible PR and monitor un
 - Run `python -m pytest tools/native-trails tools/core-corpus -q` (CI): current combined run passes 75 tests plus 35 subtests. Run `python -m pytest tools/preset-lab/tests -q` with the standard native worker and its build identity: recorded full run is 164/164; the later focused Android-header guard suite is 7/7. The private GL hook includes desktop GLAD outside Android/GLES builds and omits the optional discard hint when its declarations lack GL4.3 (also on Apple OpenGL4.1). Twelve worker controls and the full 170-test Preset Lab suite pass; compiled desktop GL3.3/GL4.3 branches and real NDK GLES API guards cover both the analysis hook and separate host-control shim. All 329 host engine controls pass. Rebuild into a fresh role directory after an instrumentation identity changes.
 - Keep copied native CPU shader bodies and their source hashes intact; include production logging declarations rather than stubbing copied calls. Both source adapters build and the recorded milk-analyzer suite passes 199 tests.
 - Treat AM6's reported GLES 3.2 runtime as that driver's coverage, not proof for a GLES 3.0-only driver. The completed 1080p single-preset pilot repeats its eight selected captures within each role, but cross-role RGB byte MAE reaches 2.66 at frame 479 with localized differences. It does not establish a coordinate-change cause, full-corpus equivalence or a speedup. The historical TV matrix is superseded for fidelity readiness by the completed release-bound API34 GPU validation under the user’s TV waiver. Preserve its original captures/timings; final CI/review/release gates remain separate.
+
+## Current-patch image proof maintenance
+
+The current-series reference is `docs/UPSTREAM_PATCH_VALUE.md`; historical
+dispositions remain in its linked archive. `tools/patch-proof/README.md` documents
+fresh source-bound preparation, repeated direct-libprojectM EGL captures and an
+offline source/binary/image verifier. The verified 2026-10-07 checkpoint uses the
+task-owned API36 Android TV `emulator-5630` (host GPU/HVF, M4 Pro/GLES3.0), not
+the API34 phone image used for historical migration fidelity. Baseline source
+matches observed upstream master e98fca85 before common deterministic hooks.
+Patched image workers disable binary-cache export due to the API36 guest error;
+do not infer cache validation, production RNG parity or app/Windows appearance.
+Use fresh work directories and explicit serial/user arguments; keep failures and
+source identities separate from successful images. The new original lone-dot
+witness is Stahlregen's funky Blur base preset (plus an unrendered nz+ source
+match); isolated controls distinguish accepted code from tolerant omission.

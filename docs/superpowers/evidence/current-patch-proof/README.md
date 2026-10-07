@@ -1,6 +1,6 @@
 # Current 4.2 patch image proof
 
-Status: **in progress**, 2026-10-07. Assessment source is `654815d8`; all 13 ordered
+Status: image captures and integrity audit recorded, 2026-10-07. Final repository review remains open. Assessment source is `654815d8`; all 13 ordered
 patch hashes are in [series.json](series.json). The main
 [patch reference](../../../UPSTREAM_PATCH_VALUE.md) covers only that current series.
 The [archived assessment](pre-rewrite-assessment.md) preserves earlier attribution.
@@ -24,7 +24,7 @@ The images show the actual library framebuffer rendered on the TV emulator GPU.
 
 Each named preset keeps its exact bundled bytes. Each successful role runs twice
 from a fresh process. Audio is identical mono float32 at44100Hz; logical time is
-frame/30, seed12345, mesh48×32, dimensions512×288 and frames0–119. Feedback detail
+frame/30, seed 12345, mesh48×32, dimensions512×288 and frames0–119. Feedback detail
 and reference-scaled lines are off in this first comparison. Read back RGBA8,
 reverse rows and exclude alpha to produce RGB8. Record every frame's SHA256;
 retain lossless PNGs at29,59,119. Headers add labels without altering frame pixels.
@@ -77,7 +77,7 @@ witness needs a numerical or lifecycle fixture as well as an honest image result
 |---|---|---|
 |0001|161.milk|Upstream rejects equations; patched renders and repeats. Consolidated renderer subfeatures need separate review; no cache/performance proof.|
 |0002|Flexi - dimension window.milk|Removing 0002 changes 120/120 frames; all successful roles repeat.|
-|0003|Unchanged Stahlregen funky Blur base preset; lone-dot fixture|Stock rejects code; tolerant no0003 role renders differently; removing0003 changes 120 frames. Fresh-thread isolation still needs its non-image control.|
+|0003|Unchanged Stahlregen funky Blur base preset; lone-dot fixture|Stock rejects code; tolerant no 0003 role renders differently; removing0003 changes 120 frames. Fresh-thread isolation still needs its non-image control.|
 |0004|widest swing.milk|Removing 0004 changes 119 frames.|
 |0005|Cope - The Cloud; collapsed-range fixture|Original is unchanged by ablation in this input. Correctly versioned custom-shader diagnostic changes 119 frames.|
 |0006|Hexcollie - This is where we begin stripped.milk|Removing 0006 changes 119 frames.|
@@ -86,8 +86,8 @@ witness needs a numerical or lifecycle fixture as well as an honest image result
 |0009|Unchanged suksma rand tritex preset|Removing 0009 changes 120 frames; exact-byte and alpha policy analysis remain separate.|
 |0010|Duplicate-name shape image roots; fade/reset|Removing 0010 changes 59 frames. Static shader descriptor control is unchanged and retained.|
 |0011|Unchanged EoS_Phat_PeterP_Sentinel_Aware_6 witness|Stock fails shape equations first; isolated removal changes 118 frames without that confounder.|
-|0012|Unchanged sample06; subpixel shape fixture|Original and synthetic ablations change120 frames. Synthetic no0012 loses coverage entirely.|
-|0013|Unchanged sample06; custom-composite impulse|Both ablations change120 frames. Impulse becomes four max 64 pixels without 0013 versus one max 255 pixel with it.|
+|0012|Unchanged sample 06; subpixel shape fixture|Original and synthetic ablations change120 frames. Synthetic no0012 loses coverage entirely.|
+|0013|Unchanged sample 06; custom-composite impulse|Both ablations change120 frames. Impulse becomes four max 64 pixels without 0013 versus one max 255 pixel with it.|
 
 Every successful role has two identical120-frame RGB sequences and zero GL-error
 frames. These counts refer to each recorded scenario, not universal patch effects.
@@ -108,8 +108,11 @@ instrumentation is retained as [upstream diff](upstream-instrumentation.diff) an
 [patched diff](patched-instrumentation.diff), with full source inventories.
 The texture-root event harness uses a separate [identity](events-worker-identity.json)
 and `harness-events/`; its callback records available upstream logs and patched
-initialization warnings. Earlier screenshots did not install a logging callback,
-so complete fallback/active-program classification remains a final audit item.
+initialization warnings. Earlier screenshots did not install a logging callback. A fresh portable-harness
+replay records the original translator witness's composite fallback in upstream
+and no 0002, with no such warning in the patched role; all 120 frame hashes match
+the original images. It also records per-pixel code omission in the no 0003 witness.
+No universal active-program classification is claimed for every pictured preset.
 
 ## MilkDrop 2 and limits
 
@@ -126,7 +129,15 @@ ignored `build/patch-proof/`. `harness/` preserves the exact standalone worker,
 EGL capture and CMake sources; it reuses Preset Lab's existing JSON library and
 analysis hooks. The archived `capture_pairs_checkpoint.py` preserves the helper
 bytes but contains this checkpoint's absolute ADB path/device/private-work layout;
-it is not yet a portable public command. Generalized preparation, full image/link/source audit, callback/active-program
-classification, relevant non-image controls and final repository review remain open.
+it is not yet a portable public command. [Portable preparation/capture/verification tools](../../../../tools/patch-proof/README.md)
+are now verified through fresh exports and GPU captures. The
+[reproduction receipt](reproduction-validation.json) records evaluator contracts,
+logging and exact historical-frame matches. The [checkpoint audit](checkpoint-audit.json)
+checks 31 images and 134 successful run entries, with 10 explicit failed runs retained.
+Final repository review remains open.
 Do not run archived scripts against another device without deliberately creating
 new task-owned paths and identities. Do not overwrite existing attempt directories.
+
+The source receipts use zero-context unified diffs. Apply them only to the
+identified parent source with `git apply --unidiff-zero`; source hash inventories
+provide the full-file verification.

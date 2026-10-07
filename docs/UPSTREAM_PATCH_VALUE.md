@@ -49,7 +49,7 @@ No original Windows appearance is certified here.
 
 ## 0001 — TV rendering and preset compatibility
 
-Source: `0001-tv-rendering-and-preset-compatibility.patch`. This is a consolidated
+Source: [0001-tv-rendering-and-preset-compatibility.patch](../tools/projectm-patches/0001-tv-rendering-and-preset-compatibility.patch). This is a consolidated
 patch, not one independently attributable defect. Split its general correctness
 changes from host policy and optimizations for upstream proposals.
 
@@ -78,7 +78,7 @@ Upstream rejects the unchanged preset in both runs; the left panel quotes its lo
 
 ## 0002 — HLSL compatibility and finite float round trips
 
-Source: `0002-hlsl-compatibility-and-float-roundtrip.patch`. Preserve classic-locale
+Source: [0002-hlsl-compatibility-and-float-roundtrip.patch](../tools/projectm-patches/0002-hlsl-compatibility-and-float-roundtrip.patch). Preserve classic-locale
 emission and finite float32 round trips with `max_digits10`, integral-float/signed-zero
 spelling and rejection of nonfinite AST literals. Initialize writable copies from
 incoming uniforms while preserving other components. Retain compatible modulo
@@ -94,6 +94,10 @@ Witness candidates include `Flexi - dimension window.milk`,
 `Serge + martin - crystal palace tunnel003.milk`. The hash-pinned
 `float-literal-control.milk` is synthetic, not an unchanged bundled preset.
 Retain translation errors and active shader status beside pixels.
+A fresh logging replay of the original `Flexi - dimension window.milk` confirms
+that upstream and the no-0002 role use a fallback composite shader; the patched
+role emits no such warning. All 120 frames match the prior image evidence.
+See the [reproduction receipt](superpowers/evidence/current-patch-proof/reproduction-validation.json).
 
 ![Upstream versus current patched renderer: Flexi - dimension window.milk](superpowers/evidence/current-patch-proof/0002-translator.png)
 
@@ -105,10 +109,15 @@ Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing
 
 ## 0003 — Evaluator random state and lone-dot numbers
 
-Source: `0003-evaluator-thread-local-rand-and-lone-dot.patch`. Make Mersenne Twister
+Source: [0003-evaluator-thread-local-rand-and-lone-dot.patch](../tools/projectm-patches/0003-evaluator-thread-local-rand-and-lone-dot.patch). Make Mersenne Twister
 state thread-local so background evaluation does not advance the foreground stream.
 Accept a lone `.` as zero, matching NS-EEL, while preserving ordinary numbers and
 invalid-code rejection. Keep `Scanner.l` and checked-in `Scanner.c` synchronized.
+
+Fresh evaluator controls also distinguish the non-image contract: patched fresh
+threads produce independent identical streams and a lone dot executes as zero.
+Upstream and the no-0003 role retain shared stream progression and reject the dot.
+Both runs repeat; see the [source/binary-bound reproduction receipt](superpowers/evidence/current-patch-proof/reproduction-validation.json).
 
 Submit evaluator changes to projectm-eval. Each thread begins the same fixed-seed
 stream; this changes cross-thread coupling, not the generator algorithm. A
@@ -128,7 +137,7 @@ Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing
 
 ## 0004 — Main-textured shape sampler ownership
 
-Source: `0004-textured-shape-sampler.patch`. Bind an instance-owned repeat/linear
+Source: [0004-textured-shape-sampler.patch](../tools/projectm-patches/0004-textured-shape-sampler.patch). Bind an instance-owned repeat/linear
 sampler for every main-textured fill, including geometry replay. A sampler left on
 unit zero could override texture state; unbinding could expose nearest filtering.
 Preserve named-image descriptor qualifiers instead of mutating shared texture state.
@@ -147,7 +156,7 @@ Isolated removal of 0004, same inputs: 119/120 RGB frames differ; both roles rep
 
 ## 0005 — Safe blur intervals
 
-Source: `0005-blur-range-interval.patch`. Expand the upper bound upward when a range
+Source: [0005-blur-range-interval.patch](../tools/projectm-patches/0005-blur-range-interval.patch). Expand the upper bound upward when a range
 collapses. Preserve clamp-then-expand ordering and ordinary float32 arithmetic.
 Reject nonfinite, unrepresentable or progressively degenerate normalization domains
 with coherent `[0,1]` defaults for all levels and their decoding coefficients.
@@ -169,7 +178,7 @@ Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing
 
 ## 0006 — Signed unit-exponent zoom
 
-Source: `0006-fixed-warp-signed-unit-zoom.patch`. For finite negative zoom and an
+Source: [0006-fixed-warp-signed-unit-zoom.patch](../tools/projectm-patches/0006-fixed-warp-signed-unit-zoom.patch). For finite negative zoom and an
 exponent exactly one, use the signed base directly in the shared warp vertex shader.
 GLSL `pow` has an undefined negative-base domain even for exponent one. This reflects
 UV displacement around the warp centre; positive zoom and other exponent paths remain.
@@ -188,7 +197,7 @@ Isolated removal of 0006, same inputs: 119/120 RGB frames differ; both roles rep
 
 ## 0007 — Evaluated built-in waveform controls
 
-Source: `0007-live-builtin-wave-controls.patch`. Consume evaluated mode, dots,
+Source: [0007-live-builtin-wave-controls.patch](../tools/projectm-patches/0007-live-builtin-wave-controls.patch). Consume evaluated mode, dots,
 thickness and additive blending without overwriting defaults. Rebuild mode math
 when the evaluated mode changes; retain integer truncation, signed remainder and
 projectM's 16-mode extension. Reuse prepared geometry for the second draw.
@@ -212,7 +221,7 @@ Synthetic activation fixture, not an unchanged bundled preset: 60/120 RGB frames
 
 ## 0008 — Evaluated legacy display controls
 
-Source: `0008-live-legacy-display-controls.patch`. Consume evaluated gamma, echo
+Source: [0008-live-legacy-display-controls.patch](../tools/projectm-patches/0008-live-legacy-display-controls.patch). Consume evaluated gamma, echo
 and legacy filter flags, including equation-only activation. Preserve configuration
 defaults, Mesh/ShaderCache ownership and custom-composite policy. Custom composites
 do not gain legacy effects through this patch.
@@ -235,7 +244,7 @@ Synthetic activation fixture, not an unchanged bundled preset: 60/120 RGB frames
 
 ## 0009 — User-texture premultiplication bytes
 
-Source: `0009-user-texture-premultiplication.patch`. Apply
+Source: [0009-user-texture-premultiplication.patch](../tools/projectm-patches/0009-user-texture-premultiplication.patch). Apply
 `(rgb * alpha + 128) >> 8` before stbi-backed RGBA upload, preserving alpha. This
 includes opaque-channel rounding. Internal generated textures are a separate path.
 
@@ -253,7 +262,7 @@ Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing
 
 ## 0010 — Per-preset texture search-path ownership
 
-Source: `0010-preset-texture-search-path-ownership.patch`. New roots apply to newly
+Source: [0010-preset-texture-search-path-ownership.patch](../tools/projectm-patches/0010-preset-texture-search-path-ownership.patch). New roots apply to newly
 loaded presets; live incoming/outgoing presets retain their own texture manager
 through soft cuts. Reset reloads live image caches using their original paths and
 preserves feedback. Retain callbacks and strong descriptor/ShaderCache ownership.
@@ -272,7 +281,7 @@ its result is retained separately. This scene activates repeated shape-image loo
 
 ## 0011 — CPU warp rotation trigonometry
 
-Source: `0011-cpu-warp-rotation-trig.patch`. Convert evaluated rotation to float,
+Source: [0011-cpu-warp-rotation-trig.patch](../tools/projectm-patches/0011-cpu-warp-rotation-trig.patch). Convert evaluated rotation to float,
 then compute CPU sine/cosine as MilkDrop 2 does. Reuse sine and supply cosine through
 an instance-owned four-byte VertexBuffer at attribute 8. Preserve prepared-mesh
 replay and authored/nonfinite equation values.
@@ -298,7 +307,7 @@ Isolated removal of 0011, same inputs: 118/120 RGB frames differ; both roles rep
 
 ## 0012 — Custom-shape pixel centres
 
-Source: `0012-shape-pixel-centers.patch`. Translate fills/outlines by half a
+Source: [0012-shape-pixel-centers.patch](../tools/projectm-patches/0012-shape-pixel-centers.patch). Translate fills/outlines by half a
 destination pixel in each authored/native target, restoring shared shader matrices.
 Preserve equations, radii, colours, UVs and assets. D3D9 samples integer pixel centres;
 GLES samples half-integers, so copying coordinates alone can lose subpixel shapes.
@@ -318,7 +327,7 @@ Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing
 
 ## 0013 — Custom-composite texel centres
 
-Source: `0013-composite-texel-centers.patch`. Remove a redundant half-texel UV bias.
+Source: [0013-composite-texel-centers.patch](../tools/projectm-patches/0013-composite-texel-centers.patch). Remove a redundant half-texel UV bias.
 MilkDrop 2 shifts its D3D9 mesh positions by half a pixel while retaining UVs. GLES
 already interpolates the unbiased mesh at texel centres; another UV offset dilutes
 an impulse over four pixels.
@@ -334,7 +343,7 @@ Synthetic activation fixture, not an unchanged bundled preset: 120/120 RGB frame
 
 ![Unchanged original preset control for0013](superpowers/evidence/current-patch-proof/0013-original.png)
 
-Removing only 0013 changes all 120 RGB frames for this unchanged sample06 preset.
+Removing only 0013 changes all 120 RGB frames for this unchanged sample 06 preset.
 All three roles repeat exactly with zero GL-error frames. This is a256×144
 source control under the recorded input, not a Windows appearance prediction.
 
