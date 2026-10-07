@@ -8,6 +8,10 @@ CORE_2316_ENGINE = {
     'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
     'patches_sha256': 'cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded',
 }
+CORE_2317_ENGINE = {
+    'commit': 'e0b0a967f0ffd7d332106c366668ed271718472b',
+    'patches_sha256': 'bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8',
+}
 # Patch0050 changes texture lookup lifetime; the established scalar/drawing math
 # policies are shared, while source and runtime identities remain distinct.
 CORE_2315_BLUR = 'projectmtv-core-2.3.15-blur-ranges-v1'
@@ -22,7 +26,7 @@ LEGACY_WAVE = 'legacy-static-wave-controls-v1'
 
 
 def matches(engine, expected=None):
-    targets=(CORE_2315_ENGINE,CORE_2316_ENGINE) if expected is None else (expected,)
+    targets=(CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE) if expected is None else (expected,)
     return any(all(engine.get(key)==value for key,value in target.items()) for target in targets)
 
 

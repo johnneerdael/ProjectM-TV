@@ -4,6 +4,21 @@ import numpy as np
 
 
 class SpatialTest(unittest.TestCase):
+    def test_cpu_rotation_policy_uses_float_libm_without_rounded_period_reduction(self):
+        import ctypes
+        spatial=importlib.import_module('spatial')
+        lib=ctypes.CDLL(None)
+        for name in ('sinf','cosf'):
+            fn=getattr(lib,name);fn.argtypes=[ctypes.c_float];fn.restype=ctypes.c_float
+        angle=float(np.finfo(np.float32).max)
+        expected=np.array([[np.float32(.5)+np.float32(.5)*lib.cosf(angle),
+                            np.float32(.5)+np.float32(.5)*lib.sinf(angle)]],np.float32)
+        actual=spatial.warp_vertex_uv([[1,0]],rot=angle,
+                                    rotation_policy='projectmtv-core-2.3.17-cpu-float-trig-v1')
+        np.testing.assert_array_equal(actual,expected)
+        with self.assertRaisesRegex(ValueError,'rotation policy'):
+            spatial.warp_vertex_uv([[1,0]],rotation_policy='unknown')
+
     def test_native_aspect_restore_multiplies_the_stored_float32_reciprocal(self):
         spatial=importlib.import_module('spatial')
         aspect=np.float32(.5625);dy=np.float32(.1412)

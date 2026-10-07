@@ -25,7 +25,7 @@ from sampling_policy import texture_settings
 from geometry_features import scene_geometry_features
 from materials import material_input_identity
 from source_features import forecast_feature_record, SIMULATED
-from engine_profiles import (CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
+from engine_profiles import (CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
     CORE_2315_DISPLAY,CORE_2315_WAVE,LEGACY_BLUR,LEGACY_ZOOM,LEGACY_DISPLAY,LEGACY_WAVE,matches,select_policy)
 from shape_sampling import LEGACY as LEGACY_SHAPE_POLICY,CORE_238 as CORE_238_SHAPE_POLICY,native_blur_level,shape_sampling_modes
 
@@ -54,6 +54,7 @@ CORE_2310_EQUATION_ENGINE = {
 }
 CORE_2315_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.15-cold-thread-v1'
 CORE_2316_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.16-cold-thread-v1'
+CORE_2317_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.17-cold-thread-v1'
 # Patch0044 changes literal formatting; equation RNG and sampler ownership
 # retain the verified43-patch contracts. Keep44 as a distinct source identity.
 # Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
@@ -65,6 +66,7 @@ PRODUCTION_EQUATION_ENGINES = {
     CORE_2310_EQUATION_RNG_POLICY: CORE_2310_EQUATION_ENGINE,
     CORE_2315_EQUATION_RNG_POLICY: CORE_2315_ENGINE,
     CORE_2316_EQUATION_RNG_POLICY: CORE_2316_ENGINE,
+    CORE_2317_EQUATION_RNG_POLICY: CORE_2317_ENGINE,
 }
 
 
@@ -90,7 +92,7 @@ def source_shape_sampler_policy(engine: dict, requested: str | None) -> str:
     elif requested == CORE_2315_SHAPE:
         raise ValueError('shape sampler engine identity mismatch')
     verified=any(all(engine.get(key)==value for key,value in expected.items())
-                 for expected in (CORE_237_EQUATION_ENGINE,CORE_2310_EQUATION_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE))
+                 for expected in (CORE_237_EQUATION_ENGINE,CORE_2310_EQUATION_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE))
     policy=requested if requested is not None else CORE_238_SHAPE_POLICY if verified else LEGACY_SHAPE_POLICY
     if policy not in {LEGACY_SHAPE_POLICY,CORE_238_SHAPE_POLICY}:
         raise ValueError('unsupported shape sampler policy')
@@ -175,20 +177,26 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
     for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE),
-                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE),('2.3.16',CORE_2316_ENGINE)]:
+                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE),('2.3.16',CORE_2316_ENGINE),('2.3.17',CORE_2317_ENGINE)]:
         # JNI enables patch 0042 only above height 1330 and changes the line reference
         # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
         if (all(engine.get(key)==value for key,value in expected.items()) and
                 (domain['height']>1330 or domain['width']*domain['height']>1024*768)):
             raise ValueError(version+' higher-resolution lines/native feedback detail are not implemented')
     from quad_lines import PROFILE as quad_profile
+    from spatial import LEGACY_ROTATION,CPU_ROTATION,rotation_producer
+    current_rotation=matches(engine,CORE_2317_ENGINE)
+    rotation_policy=domain.get('warp_rotation_policy',CPU_ROTATION if current_rotation else LEGACY_ROTATION)
+    if rotation_policy not in (LEGACY_ROTATION,CPU_ROTATION):raise ValueError('unknown warp rotation policy')
+    if rotation_policy==CPU_ROTATION and not current_rotation:
+        raise ValueError('CPU rotation engine identity mismatch')
     from motion_vectors import PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
     motion_storage_profile=domain.get('motion_uv_storage_profile',PORTABLE_STORAGE)
     if motion_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
         raise ValueError('unknown motion UV storage profile')
-    if motion_storage_profile!=PORTABLE_STORAGE and (domain['profile']!='gles300' or
-            any(engine.get(key)!=value for key,value in CORE_2316_ENGINE.items())):
-        raise ValueError('half motion storage requires declared GLES300 and pinned2.3.16engine')
+    qualified_float_engine=any(matches(engine,target) for target in (CORE_2316_ENGINE,CORE_2317_ENGINE))
+    if motion_storage_profile!=PORTABLE_STORAGE and (domain['profile']!='gles300' or not qualified_float_engine):
+        raise ValueError('half motion storage requires declared GLES300 and pinned2.3.16/2.3.17engine')
     line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
     if line_profile not in {'canonical-gl-lines-v1',quad_profile}:
         raise ValueError('unknown line rendering profile')
@@ -201,9 +209,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     smoothing_profile=domain.get('custom_wave_smoothing_profile',DEFAULT_SMOOTHING)
     if smoothing_profile not in (DEFAULT_SMOOTHING,FMA_SMOOTHING):
         raise ValueError('unknown custom-wave smoothing profile')
-    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or
-            any(engine.get(key)!=value for key,value in CORE_2316_ENGINE.items())):
-        raise ValueError('fused custom-wave smoothing requires declared GLES core2.3.16 context')
+    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or not qualified_float_engine):
+        raise ValueError('fused custom-wave smoothing requires declared GLES core2.3.16/2.3.17 context')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
     hue = np.asarray(domain['hue_offsets'], dtype=np.float32)
     if colour.shape!=(4,) or not np.all(np.isfinite(colour)) or np.any((colour<0)|(colour>1)):
@@ -300,13 +307,13 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         unused_warp_uv_domain=None
         try:
             mesh = warp_fields(source,scene,index,numeric_profile=domain.get('numeric_profile','portable'),
-                               raster_subpixel_bits=domain.get('warp_subpixel_bits'),zoom_policy=warp_zoom_policy)
+                               raster_subpixel_bits=domain.get('warp_subpixel_bits'),zoom_policy=warp_zoom_policy,rotation_policy=rotation_policy)
         except ValueError as error:
             if str(error) not in {'unresolved warp numeric domain','unresolved warp power domain','zero spatial divisor'}:raise
             if pipeline.requires_warp_uv(frame_wrap=main['wrap'],motion_state=main):raise
             unused_warp_uv_domain=str(error)
             mesh=warp_fields(source,scene,index,raster_subpixel_bits=domain.get('warp_subpixel_bits'),
-                             omit_transformed_uv=True,zoom_policy=warp_zoom_policy)
+                             omit_transformed_uv=True,zoom_policy=warp_zoom_policy,rotation_policy=rotation_policy)
         common = source_uniforms(scene,index)
         if texture_bank is not None:
             common.update(material_uniforms)
@@ -388,6 +395,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                         main_binding_policy=main_binding_policy,
                         shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
                         blur_range_policy=blur_range_policy,warp_zoom_policy=warp_zoom_policy,
+                        warp_rotation_policy=rotation_policy,
+                        warp_rotation_producer=rotation_producer(rotation_policy),
                         legacy_control_policy=legacy_control_policy,wave_control_policy=wave_control_policy,
                         render_context_source_sha256=builtin['render_context_source_sha256'],
                         render_context_time_bits=builtin['render_context_time_bits'],

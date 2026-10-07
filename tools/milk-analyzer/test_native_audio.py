@@ -127,5 +127,21 @@ class NativeAudioTest(unittest.TestCase):
             self.assertNotEqual(process.returncode,0)
             self.assertIsNone(report)
 
+    def test_2317_cold_policy_keeps_exact_engine_identity(self):
+        binary=Path(os.environ.get('MILK_TEST_2317_BINARIES',BINARY.parent))/'milk-audio-inputs'
+        baseline,identity=self.run_audio(np.zeros(2940),binary=binary)
+        self.assertEqual(baseline.returncode,0,baseline.stderr)
+        process,report=self.run_audio(np.zeros(2940),binary=binary,
+            clock_policy='projectmtv-jni-rounded-nanoseconds30-v1',
+            preset_progress_policy='projectmtv-core-2.3.17-cold-jni-v1',entropy_seed=12345)
+        qualified=identity.get('duration_distribution_model')=='libcxx-200100-fresh-normal-v1'
+        matching=identity['engine_identity']['patches_sha256']=='bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8'
+        if qualified and matching:
+            self.assertEqual(process.returncode,0,process.stderr)
+            self.assertEqual(report['preset_timing']['sampled_duration_seconds'],29.618844229502262)
+        else:
+            self.assertNotEqual(process.returncode,0)
+            self.assertIsNone(report)
+
 
 if __name__=='__main__':unittest.main()

@@ -1151,5 +1151,18 @@ its retained frozen source forecast. All five numeric checks meet the original
 the retest earns no fresh randomized credit. Exact identities, numerical results
 and the independent full-claim review's current disposition are retained in
 `fixtures/large-rotation-published2317-retest-2026-10-07.json`.
-The isolated 51-patch source archive/adapters are prepared; forecast-profile and
-cold-clock adaptation remain pending and are not inferred from this one retest.
+The isolated 51-patch source archive/adapters and exact 2.3.17 equation, live-wave
+and cold-clock profiles are now integrated. Old profiles retain their original
+identities; wrong-version requests are rejected. Source51 selects CPU float
+rotation automatically, and records the effective policy and host producer in
+provenance without changing the requested domain/hash. The historical NumPy
+rotation default remains available for earlier source identities.
+
+The CPU path calls host `sinf`/`cosf` after float32 conversion, without reduction
+by a rounded 2π constant. One read-only published-AAR mesh control observes a
+one-float32-step sine difference between this host and Android at rotation
+10,000,000; cosine matches and the observer preserves all output bytes. The
+source51 same-preset forecast still passes all five numerical checks, but this
+does not certify arbitrary-angle host/Android bit parity. A stable suite passes
+1,422 tests and 78 subtests. Earlier integrity failures from editing model files
+during a running suite are retained; validation must run against fixed code.

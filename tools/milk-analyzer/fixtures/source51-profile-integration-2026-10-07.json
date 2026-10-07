@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "source51_identity": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "patches_sha256": "bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8"
+  },
+  "native_release_identity": {
+    "release": "v2.3.17",
+    "commit": "16a37189478771da591d134a6bd1f8fc46eee808",
+    "aar_sha256": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+    "entries": {
+      "classes.jar": {
+        "sha256": "948b9a2293ad2f6d0a112f286cd93883031e3673f9def7ca0bb73337116f3428",
+        "unchanged_from2316": true
+      },
+      "jni/arm64-v8a/libprojectmtv.so": {
+        "sha256": "0f6cbdc607bf03fc24466015c128f0fbfdae9f771e914f6c1b652a6d3bf691ee",
+        "unchanged_from2316": false
+      }
+    },
+    "asset_count": 9686,
+    "assets_unchanged": true,
+    "source_engine": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8"
+    },
+    "first50_patches_unchanged": true,
+    "patch51_scope": "CPU sine/cosine afterfloatrotationconversion; internalmeshattributechange; publicJNI/classes/assetsunchanged",
+    "qualification_scope": "Sameauthoredlarge-rotationpreset30framecapture complete; independent20claimreviewpending"
+  },
+  "numeric_retest": {
+    "source_release": "2.3.17",
+    "native_release": "2.3.17",
+    "learning": true,
+    "original_score_retained": 65,
+    "randomized_credit": 0,
+    "metrics": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "predicted": 0.01734024565666914,
+        "native": 0.01760387048125267,
+        "relative_error_percent": 1.5203061698387133,
+        "passes": true
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "predicted": 0.9118863388895975,
+        "native": 0.916057580709456,
+        "relative_error_percent": 0.4574300153391728,
+        "passes": true
+      },
+      {
+        "feature": "mean_luma",
+        "predicted": 0.011246810015290976,
+        "native": 0.011248185454557339,
+        "relative_error_percent": 0.01222959456496983,
+        "passes": true
+      },
+      {
+        "feature": "mean_saturation",
+        "predicted": 0.05041529734929403,
+        "native": 0.050428725220263,
+        "relative_error_percent": 0.026634517051324982,
+        "passes": true
+      },
+      {
+        "feature": "peak_mean_luma_jump",
+        "predicted": 0.0072692688554525375,
+        "native": 0.007256103213876486,
+        "relative_error_percent": 0.18111369709728675,
+        "passes": true
+      }
+    ],
+    "all_pass": true,
+    "rotation_producer": {
+      "policy": "projectmtv-core-2.3.17-cpu-float-trig-v1",
+      "producer": "ctypes.CDLL(None) host sinf/cosf",
+      "platform": "macOS-15.8-arm64-arm-64bit-Mach-O",
+      "python_version": "3.14.5",
+      "android_bit_parity_verified": false
+    }
+  },
+  "mesh_pair_control": {
+    "scope": "Read-onlyobservedpublished2.3.17firstauthoredmeshupload; unchangedpixels verified",
+    "angle_emitted_float32": 10000000.0,
+    "source_sin_cos": [
+      0.42054781317710876,
+      -0.9072703719139099
+    ],
+    "native_sin_cos": [
+      0.4205477833747864,
+      -0.9072703719139099
+    ],
+    "difference": [
+      2.9802322387695312e-08,
+      0.0
+    ],
+    "producer": {
+      "platform": "macOS-15.8-arm64-arm-64bit-Mach-O",
+      "python": "3.14.5",
+      "libm": "ctypes.CDLL(None)sinf/cosf from currenthost; noAndroidbitparityclaim"
+    },
+    "mesh_vertices": 1617,
+    "all_native_pairs_same": true,
+    "mesh_sha256": "735f8122c4c0ae441974fb852bfa4f0e6e7dcec77b4c33ba01b463c09f453a69",
+    "observer_sha256": "baf60ce72c4c735531a150709ce84578c4ec3001bf2ec7f25a399ec331f8f827",
+    "original_pixels_byte_identical": true,
+    "limitation": "Onefloat32sineULPdiffers; broaderangle/fullforecastaccuracymust becheckedseparately"
+  },
+  "input_audio": "Freshsource51audio30framesexactlymatchpreviousqualifiedinputs; archiveidentitydistinct",
+  "qualification_limit": "Singleauthoredlargeanglewindow passes; hostlibm differsonefloat32ULPfromAndroid; arbitraryanglesnotcertified",
+  "validation": {
+    "stable_full_suite": "1422passed,78subtests",
+    "docs": "strictMkDocs passed",
+    "diff": "gitdiffcheck passed",
+    "focused_review": "No codecorrectnessfindings; finalproducerprovenanceupdatepending",
+    "previous_integrity_failure": "125failurescausedmodelchanged sinceimport whileeditingduringrunningtest; retainedlogs, freshfixedcoderunpassed"
+  },
+  "randomized_credit": 0,
+  "documentation_assessment": {
+    "updated": [
+      "tools/milk-analyzer/README.md"
+    ],
+    "evaluated": [
+      "README.md",
+      "docs/user-guide/predictive-collections.md",
+      "AGENTS.md"
+    ],
+    "reason": "Experimentalsourceprofileintegration, shippedbetaindexes/appbehaviorunchanged"
+  },
+  "source51_prediction_byte_identical_original_frozen_prediction": true,
+  "source_prediction_sha256": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7"
+}

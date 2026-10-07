@@ -509,6 +509,56 @@ def profile_gate(tmp_path, monkeypatch):
 PATCHES_234 = 'd21d4e3d9725178c000fd6f7ea5cd331389fb1100b70fce51341ece65d3fd818'
 PATCHES_235 = 'd73c955a26380a502516e6ba3a18baf753851244de4de2e5a3083930766a539a'
 PATCHES_237 = 'd70f5b5ec3f3c0b4da764cb824153f142b88e17e27c2e9e71d2b481c19998c7d'
+PATCHES_2317 = 'bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8'
+
+
+def test_2317_equation_profile_accepts_only_exact_source_and_cold_seed(profile_gate):
+    settings=domain(equation_rng_policy='projectmtv-core-2.3.17-cold-thread-v1')
+    settings['equation_seed']=0x4141f00d
+    with pytest.raises(RuntimeError,match='profile accepted before source execution'):
+        profile_gate(PATCHES_2317,settings)
+    with pytest.raises(ValueError,match='equation RNG engine identity'):
+        profile_gate(PATCHES_237,settings)
+    settings['equation_seed']=12345
+    with pytest.raises(ValueError,match='production equation RNG seed'):
+        profile_gate(PATCHES_2317,settings)
+
+
+def test_cpu_rotation_policy_requires_2317_source(profile_gate):
+    settings=domain(warp_rotation_policy='projectmtv-core-2.3.17-cpu-float-trig-v1')
+    with pytest.raises(ValueError,match='rotation.*engine identity'):
+        profile_gate(PATCHES_237,settings)
+    with pytest.raises(RuntimeError,match='profile accepted before source execution'):
+        profile_gate(PATCHES_2317,settings)
+
+
+def test_2317_retains_qualified_gles_smoothing_and_storage_contracts(profile_gate):
+    settings=domain(custom_wave_smoothing_profile='float32-fma-first-v1',
+                    motion_uv_storage_profile='apple-m4pro-gles-rg16f-rtz-finite-v1')
+    settings['profile']='gles300'
+    with pytest.raises(RuntimeError,match='profile accepted before source execution'):
+        profile_gate(PATCHES_2317,settings)
+    with pytest.raises(ValueError,match='half motion storage requires'):
+        profile_gate(PATCHES_237,settings)
+
+
+def test_2317_real_forecast_forwards_cpu_rotation_and_live_wave_contract(monkeypatch):
+    import forecast
+    binaries=Path(os.environ.get('MILK_TEST_2317_BINARIES',BINARIES))
+    source=native(BASE,binaries=binaries)
+    if source['parser_inputs']['engine'].get('patches_sha256')!=PATCHES_2317:
+        pytest.skip('Prepared51patchadapters required')
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    seen=[];original=forecast.warp_fields
+    def observe(*args,**kwargs):
+        seen.append(kwargs.get('rotation_policy'))
+        return original(*args,**kwargs)
+    monkeypatch.setattr(forecast,'warp_fields',observe)
+    settings=domain(equation_rng_policy='projectmtv-core-2.3.17-cold-thread-v1')
+    settings.update(profile='gles300',equation_seed=0x4141f00d)
+    result=forecast.forecast_source(source,audio=audio(1),binaries=binaries,domain=settings,compatibility={})
+    assert seen==['projectmtv-core-2.3.17-cpu-float-trig-v1']
+    assert result['status']=='computed'
 
 
 @pytest.mark.parametrize('version,patches', [('2.3.4', PATCHES_234), ('2.3.5', PATCHES_235), ('2.3.7', PATCHES_237)])

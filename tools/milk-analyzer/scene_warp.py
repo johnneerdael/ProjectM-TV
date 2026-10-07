@@ -9,7 +9,7 @@ from scene_equations import WARP,_scalar
 from spatial import mesh_inputs,warp_vertex_uv,interpolate_mesh,PORTABLE_PROFILE
 
 
-def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None,omit_transformed_uv=False,zoom_policy='legacy-glsl-pow-v1',query_uv=None)->dict:
+def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABLE_PROFILE,raster_subpixel_bits=None,omit_transformed_uv=False,zoom_policy='legacy-glsl-pow-v1',rotation_policy='legacy-numpy-float-trig-v1',query_uv=None)->dict:
     width,height=scene['viewport'];grid_x,grid_y=scene['mesh_size']
     frame=scene['frames'][frame_index]
     aspect_x=float(np.float32(min(1,width/height)))
@@ -29,7 +29,7 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
         vertex_uv=warp_vertex_uv(mesh['position'],aspect_x=aspect_x,aspect_y=aspect_y,
                                  **parameters,time=frame['render_inputs']['time'],
                                  warp_anim_speed=_scalar(values,'fWarpAnimSpeed',1,'float'),
-                                 warp_scale=_scalar(values,'fWarpScale',1,'float'),numeric_profile=numeric_profile,zoom_policy=zoom_policy)
+                                 warp_scale=_scalar(values,'fWarpScale',1,'float'),numeric_profile=numeric_profile,zoom_policy=zoom_policy,rotation_policy=rotation_policy)
     if query_uv is None:
         x,y=np.meshgrid((np.arange(width,dtype=np.float32)+.5)/np.float32(width),
                         (np.arange(height,dtype=np.float32)+.5)/np.float32(height))
@@ -46,7 +46,7 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
     interpolated_original=(original_uv if raster_subpixel_bits is None else
         interpolate_mesh(mesh['position']*.5+.5,original_uv,**raster))
     return {'uv':uv,'original_uv':interpolated_original,'polar':polar,'vertex_uv':vertex_uv,'numeric_profile':numeric_profile,
-            'raster_subpixel_bits':raster_subpixel_bits,
+            'raster_subpixel_bits':raster_subpixel_bits,'rotation_policy':rotation_policy,
             'query_kind':'isolated mesh queries' if query_uv is not None else 'viewport mesh field',
             'basis':'native source equations, float32 vertex storage and warp mesh interpolation',
             'appearance_prediction_complete':False}

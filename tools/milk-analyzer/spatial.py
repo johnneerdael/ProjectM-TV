@@ -6,9 +6,45 @@ triangle diagonal, texel-centre sampling and addressing. They are building block
 for the full pipeline, not a complete preset appearance predictor.
 """
 import numpy as np
+import ctypes
+import platform
+from functools import lru_cache
 
 PORTABLE_PROFILE='portable'
 APPLE_NAN_MESH_PROFILE='apple-m4pro-gl41-nan-mesh-v1'
+LEGACY_ROTATION='legacy-numpy-float-trig-v1'
+CPU_ROTATION='projectmtv-core-2.3.17-cpu-float-trig-v1'
+
+
+@lru_cache(maxsize=1)
+def _float_trig():
+    library=ctypes.CDLL(None)
+    try:
+        functions=[library.sinf,library.cosf]
+    except AttributeError as error:
+        raise ValueError('CPU float rotation requires available sinf/cosf') from error
+    for function in functions:
+        function.argtypes=[ctypes.c_float]
+        function.restype=ctypes.c_float
+    return functions
+
+
+def rotation_pair(angle,policy=LEGACY_ROTATION):
+    values=_finite(angle,'rotation')
+    if policy==LEGACY_ROTATION:return np.sin(values),np.cos(values)
+    if policy!=CPU_ROTATION:raise ValueError('unsupported warp rotation policy')
+    sine,cosine=_float_trig()
+    return tuple(np.asarray([function(float(v)) for v in values.flat],np.float32).reshape(values.shape)
+                 for function in (sine,cosine))
+
+
+def rotation_producer(policy):
+    if policy==LEGACY_ROTATION:return {'policy':policy,'producer':'NumPy float32 trigonometry','numpy_version':np.__version__}
+    if policy!=CPU_ROTATION:raise ValueError('unsupported warp rotation policy')
+    _float_trig()
+    return {'policy':policy,'producer':'ctypes.CDLL(None) host sinf/cosf',
+            'platform':platform.platform(),'python_version':platform.python_version(),
+            'android_bit_parity_verified':False}
 
 
 def _runtime_profile(profile):
@@ -41,7 +77,7 @@ def mesh_inputs(grid_x:int,grid_y:int,*,aspect_x:float,aspect_y:float)->dict:
 def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
                    sx=1,sy=1,cx=.5,cy=.5,rot=0,dx=0,dy=0,warp=0,
                    time=0,warp_anim_speed=1,warp_scale=1,numeric_profile=PORTABLE_PROFILE,
-                   zoom_policy='legacy-glsl-pow-v1'):
+                   zoom_policy='legacy-glsl-pow-v1',rotation_policy=LEGACY_ROTATION):
     """Evaluate PresetWarpVertexShader in its original float32 operation order.
 
     Parameters can be scalar or per-vertex fields matching position's leading
@@ -54,6 +90,7 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
     _runtime_profile(numeric_profile)
     from engine_profiles import LEGACY_ZOOM,CORE_2315_ZOOM
     if zoom_policy not in {LEGACY_ZOOM,CORE_2315_ZOOM}:raise ValueError('unsupported warp zoom policy')
+    if rotation_policy not in (LEGACY_ROTATION,CPU_ROTATION):raise ValueError('unsupported warp rotation policy')
     p=_finite(position,'position')
     if p.shape[-1:]!=(2,):raise ValueError('position requires two components')
     names=('aspect_x','aspect_y','zoom','zoomexp','sx','sy','cx','cy','rot','dx','dy',
@@ -69,7 +106,7 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
         # observed profile does not authorize unrelated invalid arithmetic.
         safe={key:value for key,value in a.items()}
         safe['sx']=np.where(a['sx']==0,1,a['sx']);safe['sy']=np.where(a['sy']==0,1,a['sy'])
-        warp_vertex_uv(p,**safe,zoom_policy=zoom_policy)
+        warp_vertex_uv(p,**safe,zoom_policy=zoom_policy,rotation_policy=rotation_policy)
     x,y=p[...,0],p[...,1]
     with np.errstate(all='ignore'):
         radius=np.hypot(x*a['aspect_x'],y*a['aspect_y'])
@@ -97,7 +134,7 @@ def warp_vertex_uv(position,*,aspect_x=1,aspect_y=1,zoom=1,zoomexp=1,
         v+=a['warp']*np.float32(.0035)*np.cos(wt*np.float32(.375)-ws*(x*f2+y*f1))
         u+=a['warp']*np.float32(.0035)*np.cos(wt*np.float32(.753)-ws*(x*f1-y*f2))
         v+=a['warp']*np.float32(.0035)*np.sin(wt*np.float32(.825)+ws*(x*f0+y*f3))
-        u2=u-a['cx'];v2=v-a['cy'];cos=np.cos(a['rot']);sin=np.sin(a['rot'])
+        u2=u-a['cx'];v2=v-a['cy'];sin,cos=rotation_pair(a['rot'],rotation_policy)
         u=u2*cos-v2*sin+a['cx'];v=u2*sin+v2*cos+a['cy']
         u-=a['dx'];v-=a['dy']
         inverse_aspect_x=np.float32(1)/a['aspect_x']
