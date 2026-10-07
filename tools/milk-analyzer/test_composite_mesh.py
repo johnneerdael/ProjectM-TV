@@ -93,4 +93,31 @@ class CompositeMeshTest(unittest.TestCase):
             pipeline.step(warp_uv=pipeline.original_uv,uniforms={},frame_wrap=1)
 
 
+    def test_corrected_composite_centres_copy_asymmetric_impulse_without_blur(self):
+        from spatial import sample2d
+        module=self.module();mesh=module.make_mesh(32,18,centre_policy='projectmtv-core-2.3.22-texel-centres-v1')
+        field=np.zeros((18,32,3),np.float32);field[7,11]=[1,.5,.25]
+        uv=module.composite_fields(32,18,mesh=mesh)['uv']
+        actual=sample2d(field,uv,wrap=False,linear=True,origin='top')
+        np.testing.assert_allclose(actual,field,atol=2e-6,rtol=0)
+        old=sample2d(field,module.composite_fields(32,18)['uv'],wrap=False,linear=True,origin='top')
+        self.assertGreater(np.count_nonzero(old[...,0]),1)
+        self.assertLess(float(old[...,0].max()),.26)
+
+    def test_unknown_composite_centre_policy_is_rejected(self):
+        with self.assertRaisesRegex(ValueError,'centre policy'):
+            self.module().make_mesh(32,18,centre_policy='unknown')
+
+
+    def test_pipeline_forwards_corrected_composite_centres(self):
+        warp,comp=test_pipeline_fields.trees('ret=.5;','ret=uv.x;')
+        pipeline=SourcePipeline(warp,comp,initial_feedback=np.zeros((18,32,4)),
+            warp_reads_blur=False,blur_levels=0,quantize=False,
+            composite_centre_policy='projectmtv-core-2.3.22-texel-centres-v1')
+        result=pipeline.step(warp_uv=pipeline.original_uv,uniforms={},frame_wrap=1)
+        expected=np.broadcast_to((np.arange(32)+.5)/32,(18,32))
+        np.testing.assert_allclose(result.display[...,0],expected,atol=2e-7)
+        self.assertEqual(result.history['composite_centre_policy'],'projectmtv-core-2.3.22-texel-centres-v1')
+
+
 if __name__=='__main__':unittest.main()

@@ -103,3 +103,28 @@ def test_core42_noise_uses_raw_declared_seed_repeatably(tmp_path,qualified_core4
         assert manifest['seed_model']=='raw-declared-native-noise-v1'
         rows.append((out/'noise_lq_lite.u32le').read_bytes())
     assert rows[0]==rows[1] and rows[0]!=rows[2]
+
+
+def test_corrected_centre_policies_require_the_exact_2322_identity():
+    import engine_profiles,forecast
+    from composite_mesh import CORE_2322_CENTRES,LEGACY_CENTRES
+    from primitives import CORE_2322_SHAPE_CENTRES,LEGACY_SHAPE_CENTRES
+    expected={'commit':'6f64807467e312034883a4389e6aa80a675458bc',
+        'patches_sha256':'3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381'}
+    assert engine_profiles.CORE_2322_ENGINE==expected
+    assert forecast.source_centre_policies(expected,{})==(CORE_2322_CENTRES,CORE_2322_SHAPE_CENTRES)
+    assert forecast.source_centre_policies(engine_profiles.CORE_2321_ENGINE,{})==(LEGACY_CENTRES,LEGACY_SHAPE_CENTRES)
+    with pytest.raises(ValueError,match='centre.*identity'):
+        forecast.source_centre_policies(engine_profiles.CORE_2321_ENGINE,
+            {'composite_centre_policy':CORE_2322_CENTRES})
+
+
+def test_corrected_engine_keeps_unmodeled_high_resolution_guard(tmp_path,qualified_core42_adapters):
+    import forecast
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nfWaveAlpha=0\n')
+    source=forecast.read_source(path,reader=BINARIES/'milk-native-reader')
+    source['parser_inputs']['engine']=dict(forecast.CORE_2322_ENGINE)
+    domain=dict(width=1920,height=1080,mesh_x=48,mesh_y=32,profile='gles300',
+        initial_rgba=[0]*4,hue_offsets=[0]*4,equation_seed=0x4141f00d,blur_levels=0,quantize=True)
+    with pytest.raises(ValueError,match='2.3.22 higher-resolution'):
+        forecast.forecast_source(source,audio={},binaries=BINARIES,domain=domain,compatibility={})

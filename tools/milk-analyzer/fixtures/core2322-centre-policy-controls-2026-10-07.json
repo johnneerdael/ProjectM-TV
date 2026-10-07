@@ -1,0 +1,61 @@
+{
+  "scope": "Official2322coordinate-policy qualification; no randomscorecredit",
+  "aar_sha256": "c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"
+  },
+  "corrected_composite_native_cpu_uv_exact": true,
+  "shape_sign_repair": {
+    "scope": "Retrospective samecontrol signrepair, no freshcredit",
+    "original_predicted_row": 71,
+    "corrected_predicted_row": 72,
+    "results": [
+      {
+        "repeat": 0,
+        "all30_exact": true,
+        "max_error": 0
+      },
+      {
+        "repeat": 1,
+        "all30_exact": true,
+        "max_error": 0
+      }
+    ]
+  },
+  "fresh_asymmetric": {
+    "expected_coordinate": [
+      108,
+      64
+    ],
+    "observed_coordinate": [
+      108,
+      64
+    ],
+    "expected_rgb8": [
+      0,
+      255,
+      128
+    ],
+    "observed_rgb8": [
+      0,
+      255,
+      127
+    ],
+    "frames": 60,
+    "geometry_exact": true,
+    "colour_max_error_rgb8": 1,
+    "disposition": "Boundedroundingdifference retained; genericquantizer unchanged"
+  },
+  "source_defaults": "Oldprofiles preserved; newcentredefaults require exact13patchidentity",
+  "fullpreset_parity": "Pending; scoresnotassigned",
+  "startup_replay": {
+    "bands": 0,
+    "attenuated": 0,
+    "clock": 1,
+    "progress": 0,
+    "noise": 0,
+    "rand-frame": 0,
+    "rand-preset": 0
+  }
+}

@@ -101,8 +101,17 @@ def draw_triangles(destination,positions,colours,triangles,*,additive:bool,
     return target
 
 
+LEGACY_SHAPE_CENTRES='legacy-unshifted-shape-v1'
+CORE_2322_SHAPE_CENTRES='projectmtv-core-2.3.22-shape-pixel-centres-v1'
+
+def shape_centre_shift(width,height,policy):
+    if policy not in (LEGACY_SHAPE_CENTRES,CORE_2322_SHAPE_CENTRES):
+        raise ValueError('unknown shape centre policy')
+    if width<=0 or height<=0:raise ValueError('positive shape target dimensions required')
+    return np.asarray([.5/width,.5/height] if policy==CORE_2322_SHAPE_CENTRES else [0,0],np.float32)
+
 def draw_shape(destination,values:dict,*,aspect_y:float,quantize:bool=True,
-               texture_sample=None,texture_aspect_y:float|None=None,raster_subpixel_bits=None):
+               texture_sample=None,texture_aspect_y:float|None=None,raster_subpixel_bits=None,centre_policy=LEGACY_SHAPE_CENTRES):
     """Render a source-equation shape fill; unresolved outlines remain explicit.
 
     The caller supplies the correct previous-main or named-image sampler. It
@@ -124,7 +133,9 @@ def draw_shape(destination,values:dict,*,aspect_y:float,quantize:bool=True,
         uv[1:sides+1,0]=.5+.5*np.cos(theta)/zoom*texture_aspect
         uv[1:sides+1,1]=.5+.5*np.sin(theta)/zoom
         uv[-1]=uv[1]
-    return draw_triangles(destination,fan['positions'],fan['colours'],fan['triangles'],
+    height,width=np.asarray(destination).shape[:2]
+    positions=fan['positions']+shape_centre_shift(width,height,centre_policy)
+    return draw_triangles(destination,positions,fan['colours'],fan['triangles'],
                           additive=int(values.get('additive',0))!=0,quantize=quantize,
                           texture_uv=uv,texture_sample=texture_sample,raster_subpixel_bits=raster_subpixel_bits)
 

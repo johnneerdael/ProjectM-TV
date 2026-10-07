@@ -45,7 +45,7 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1'):
         from quad_lines import PROFILE as quad_profile
         if line_rendering_profile not in ('canonical-gl-lines-v1',quad_profile):
             raise ValueError('unknown motion-vector line profile')
@@ -120,7 +120,7 @@ class SourcePipeline:
                    for level in range(1,blur_levels+1)}
         self.blur_source_frame=-2
         from composite_mesh import make_mesh
-        self.composite_mesh=make_mesh(self.width,self.height,raster_subpixel_bits=composite_subpixel_bits)
+        self.composite_mesh=make_mesh(self.width,self.height,raster_subpixel_bits=composite_subpixel_bits,centre_policy=composite_centre_policy)
 
     @classmethod
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
@@ -329,6 +329,7 @@ class SourcePipeline:
         history['motion_vector_raster_subpixel_bits']=self.motion_raster_subpixel_bits
         history['main_sampling_profile']=self.main_sampling_profile
         if self.texture_sampling_profile!='portable':history['texture_sampling_profile']=self.texture_sampling_profile
+        history['composite_centre_policy']=self.composite_mesh['centre_policy']
         history['composite_subpixel_bits']=self.composite_mesh.get('raster_subpixel_bits') if self.composite_kind!='legacy_composite' else None
         result=PipelineResult(self.frame,warped.copy(),drawn.copy(),displayed,history)
         # Commit only after both shader stages succeed; failed evaluation must

@@ -25,7 +25,7 @@ from sampling_policy import texture_settings
 from geometry_features import scene_geometry_features
 from materials import material_input_identity
 from source_features import forecast_feature_record, SIMULATED
-from engine_profiles import (CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
+from engine_profiles import (CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
     CORE_2315_DISPLAY,CORE_2315_WAVE,LEGACY_BLUR,LEGACY_ZOOM,LEGACY_DISPLAY,LEGACY_WAVE,matches,select_policy)
 from shape_sampling import LEGACY as LEGACY_SHAPE_POLICY,CORE_238 as CORE_238_SHAPE_POLICY,native_blur_level,shape_sampling_modes
 
@@ -70,6 +70,19 @@ PRODUCTION_EQUATION_ENGINES = {
     CORE_2317_EQUATION_RNG_POLICY: CORE_2317_ENGINE,
     CORE_2321_EQUATION_RNG_POLICY: CORE_2321_ENGINE,
 }
+
+
+def source_centre_policies(engine,domain):
+    from composite_mesh import LEGACY_CENTRES,CORE_2322_CENTRES
+    from primitives import LEGACY_SHAPE_CENTRES,CORE_2322_SHAPE_CENTRES
+    corrected=matches(engine,CORE_2322_ENGINE)
+    composite=domain.get('composite_centre_policy',CORE_2322_CENTRES if corrected else LEGACY_CENTRES)
+    shape=domain.get('shape_centre_policy',CORE_2322_SHAPE_CENTRES if corrected else LEGACY_SHAPE_CENTRES)
+    if composite not in (LEGACY_CENTRES,CORE_2322_CENTRES) or shape not in (LEGACY_SHAPE_CENTRES,CORE_2322_SHAPE_CENTRES):
+        raise ValueError('unknown centre policy')
+    if not corrected and (composite==CORE_2322_CENTRES or shape==CORE_2322_SHAPE_CENTRES):
+        raise ValueError('corrected centre policy engine identity mismatch')
+    return composite,shape
 
 
 def source_main_binding_policy(engine: dict, requested: str | None) -> str:
@@ -179,7 +192,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
     for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE),
-                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE),('2.3.16',CORE_2316_ENGINE),('2.3.17',CORE_2317_ENGINE),('2.3.21',CORE_2321_ENGINE)]:
+                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE),('2.3.16',CORE_2316_ENGINE),('2.3.17',CORE_2317_ENGINE),('2.3.21',CORE_2321_ENGINE),('2.3.22',CORE_2322_ENGINE)]:
         # JNI enables patch 0042 only above height 1330 and changes the line reference
         # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
         if (all(engine.get(key)==value for key,value in expected.items()) and
@@ -222,6 +235,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     qualified_float_engine=any(matches(engine,target) for target in (CORE_2316_ENGINE,CORE_2317_ENGINE))
     if motion_storage_profile!=PORTABLE_STORAGE and (domain['profile']!='gles300' or not qualified_float_engine):
         raise ValueError('half motion storage requires declared GLES300 and pinned2.3.16/2.3.17engine')
+    composite_centre_policy,shape_centre_policy=source_centre_policies(engine,domain)
     line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
     if line_profile not in {'canonical-gl-lines-v1',quad_profile}:
         raise ValueError('unknown line rendering profile')
@@ -276,7 +290,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         motion_raster_subpixel_bits=domain.get('triangle_subpixel_bits'),
         motion_uv_storage_profile=motion_storage_profile,blur_arithmetic_profile=blur_arithmetic_profile,
         shader_arithmetic_profile=shader_arithmetic_profile,
-        motion_uv_sampling_profile=motion_sampling_profile,motion_uv_sampler=motion_uv_sampler)
+        motion_uv_sampling_profile=motion_sampling_profile,motion_uv_sampler=motion_uv_sampler,
+        composite_centre_policy=composite_centre_policy)
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
@@ -386,7 +401,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
                 motion_vectors_prewarped=True,line_rendering_profile=line_profile,
                 point_subpixel_bits=domain.get('point_subpixel_bits'),
-                triangle_subpixel_bits=domain.get('triangle_subpixel_bits'))
+                triangle_subpixel_bits=domain.get('triangle_subpixel_bits'),shape_centre_policy=shape_centre_policy)
 
         result = pipeline.step(warp_uv=mesh['original_uv'] if mesh['uv'] is None else mesh['uv'],warp_original_uv=mesh['original_uv'],warp_polar=mesh['polar'],uniforms=common,
             frame_wrap=main['wrap'],stage_uniforms=random_banks,decay=main['decay'],
@@ -417,7 +432,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                           compatibility_sha256=digest(compatibility),
                           random_sha256=None if random_inputs is None else digest(random_inputs),
                           materials_sha256=material_sha),
-        provenance=dict(engine=copy.deepcopy(engine),reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
+        provenance=dict(engine=copy.deepcopy(engine),composite_centre_policy=composite_centre_policy,
+                        shape_centre_policy=shape_centre_policy,reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
                         material_input_policy=None if material_identity is None else material_identity['policy'],
                         shader_numeric_policy=shader_numeric_policy,
                         shader_arithmetic_profile=shader_arithmetic_profile,

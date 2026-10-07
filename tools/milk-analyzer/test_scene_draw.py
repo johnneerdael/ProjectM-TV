@@ -65,4 +65,18 @@ class SceneDrawTest(unittest.TestCase):
             draw_source_scene(np.zeros((16,16,4)),{'values':{}},frame,None,[])
 
 
+    def test_shape_centre_correction_moves_fill_and_border_without_changing_source(self):
+        from scene_draw import draw_source_scene
+        values={'x':.5,'y':.5,'rad':.1,'sides':4,'r':1,'g':0,'b':0,'a':1,
+                'r2':1,'g2':0,'b2':0,'a2':1,'border_r':0,'border_g':1,'border_b':0,'border_a':1}
+        shifted={**values,'x':.5+.5/32,'y':.5-.5/32}
+        # Projection and framebuffer conversion place the correction downward in top-origin output.
+        target=np.zeros((32,32,4),np.float32);source={'values':{}}
+        actual=draw_source_scene(target,source,{'main':{},'shapes':[{'index':0,'values':values}]},None,[],
+            shape_centre_policy='projectmtv-core-2.3.22-shape-pixel-centres-v1')
+        expected=draw_source_scene(target,source,{'main':{},'shapes':[{'index':0,'values':shifted}]},None,[])
+        np.testing.assert_array_equal(actual,expected)
+        self.assertEqual(values['x'],.5);self.assertEqual(values['y'],.5)
+
+
 if __name__=='__main__':unittest.main()

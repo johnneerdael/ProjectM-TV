@@ -5,7 +5,7 @@ Use an explicit canonical line/point model; hardware raster differences and
 unsupported material/motion stages remain limitations, not claimed equivalence.
 """
 import numpy as np
-from primitives import draw_shape,shape_fan,draw_triangles,draw_borders,_finite
+from primitives import draw_shape,shape_fan,draw_triangles,draw_borders,_finite,shape_centre_shift,LEGACY_SHAPE_CENTRES
 from line_points import draw_lines,draw_points
 from scene_equations import _scalar
 from quad_lines import PROFILE,draw_quad_lines
@@ -36,21 +36,22 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
     return target
 
 
-def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None):
+def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None,shape_centre_policy=LEGACY_SHAPE_CENTRES):
     target=_finite(destination,'framebuffer').copy();height,width=target.shape[:2];main=frame['main'];values=source['values']
     if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
         raise ValueError('unknown line rendering profile')
     from motion_vectors import motion_active
     if motion_active(main) and not motion_vectors_prewarped:
         raise ValueError('motion vector drawing before warp requires separate source integration')
+    shift=shape_centre_shift(width,height,shape_centre_policy)
     aspect_y=np.float32(min(1,height/width));shape_textures=shape_textures or {};shape_texture_aspects=shape_texture_aspects or {}
     for ordinal,shape in enumerate(frame['shapes']):
         attributes=shape['values'];index=shape['index'];fill=dict(attributes);fill['border_a']=0
         texture=shape_textures.get((index,ordinal),shape_textures.get(index))
         target=draw_shape(target,fill,aspect_y=aspect_y,quantize=quantize,texture_sample=texture,
-                          texture_aspect_y=shape_texture_aspects.get(index),raster_subpixel_bits=triangle_subpixel_bits)
+                          texture_aspect_y=shape_texture_aspects.get(index),raster_subpixel_bits=triangle_subpixel_bits,centre_policy=shape_centre_policy)
         if attributes.get('border_a',0)>.0001:
-            fan=shape_fan(attributes,aspect_y=aspect_y);positions=fan['positions'][1:-1]
+            fan=shape_fan(attributes,aspect_y=aspect_y);positions=fan['positions'][1:-1]+shift
             colour=np.array([attributes.get('border_'+c,1 if c!='a' else 0) for c in 'rgba'],dtype=np.float32)
             thick=_scalar(values,f'shapecode_{index}_thickOutline',0,'bool')
             offsets=[[0,0],[.5/width,0],[.5/width,.5/height],[0,.5/height]] if thick else [[0,0]]

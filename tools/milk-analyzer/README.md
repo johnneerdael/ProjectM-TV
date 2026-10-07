@@ -1379,3 +1379,22 @@ noise probe and `rand_frame`/`rand_preset` ledger probes match exactly across tw
 A simple three-frame source forecast executes with the new identity. Full suite:
 1,467 tests and 78 subtests. See
 `fixtures/core42-cold-input-policy-2026-10-07.json`.
+
+Official v2.3.22 now supplies the two coordinate fixes (AAR
+`c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65`,
+13-patch digest `3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381`).
+The exact source identity selects a composite mesh without the old half-texel
+UV bias and custom-shape fills/borders shifted half a destination pixel down/right
+in top-origin output. Authored shape values and texture UVs, waves and global
+borders stay unchanged; historical centre defaults remain available. Corrected
+labels require the exact new identity. The unmodeled high-resolution exclusion
+still applies to v2.3.22.
+
+A frozen native impulse exposed an initial predictor Y-sign error: source row71
+versus native row72. The repaired model matches all60 saved control frames exactly.
+A fresh asymmetric control has exact support at(108,64) in all60frames, with one
+RGB8 blue-level difference retained. The generic quantizer is unchanged. Native
+CPU corrected mesh UVs match exactly. These are qualification/learning controls,
+not random scoring credit. See
+`fixtures/core2322-centre-policy-controls-2026-10-07.json`. New release stochastic
+and waveform identity guards still need explicit admission before round one.

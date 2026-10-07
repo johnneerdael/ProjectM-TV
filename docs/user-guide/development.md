@@ -125,6 +125,14 @@ not claim an independent reconstruction of GPU arithmetic or change the packaged
 mood collections. Reference capture remains a separate step after the forecast
 is frozen. Missing or mismatched operator evidence stops the calculation.
 
+The v2.3.22 coordinate policy now mirrors the native custom-shape pixel-centre
+translation and removes the old composite UV half-texel bias. Policies are bound
+to the exact patched source identity, with historical behavior preserved for old
+checkpoints. An initial vertical-sign prediction error was caught by a frozen
+full-AAR impulse control and repaired before random validation. Bounded centre
+controls do not establish full-preset or high-resolution fidelity.
+
+
 Matched timing matters even in short comparisons. The declared 30 Hz JNI test
 host rounds its clock to integer nanoseconds; the source audio producer has an
 explicit matching policy that applies this elapsed time to both equations and

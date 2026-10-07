@@ -151,3 +151,15 @@ class PrimitivesTest(unittest.TestCase):
 
 
 if __name__=='__main__':unittest.main()
+
+
+def test_corrected_shape_centres_cover_tiny_authored_integer_pixel():
+    from primitives import draw_shape
+    target=np.zeros((144,256,4),np.float32)
+    values={'x':.5,'y':.5,'rad':.002,'sides':4,'r':1,'g':0,'b':0,'a':1,'r2':1,'g2':0,'b2':0,'a2':1}
+    before=draw_shape(target,values,aspect_y=144/256,raster_subpixel_bits=8)
+    after=draw_shape(target,values,aspect_y=144/256,raster_subpixel_bits=8,
+                     centre_policy='projectmtv-core-2.3.22-shape-pixel-centres-v1')
+    assert np.count_nonzero(before[...,0])==0
+    assert np.count_nonzero(after[...,0])==1
+    assert after[72,128,0]==1

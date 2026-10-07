@@ -11,7 +11,12 @@ def axis(count):
                     (1-np.power(1-x*2,np.float32(3)))*.5).astype(np.float32)
 
 
-def make_mesh(width,height,*,raster_subpixel_bits=None):
+LEGACY_CENTRES='legacy-positive-half-texel-v1'
+CORE_2322_CENTRES='projectmtv-core-2.3.22-texel-centres-v1'
+
+def make_mesh(width,height,*,raster_subpixel_bits=None,centre_policy=LEGACY_CENTRES):
+    if centre_policy not in (LEGACY_CENTRES,CORE_2322_CENTRES):
+        raise ValueError('unknown composite centre policy')
     if any(type(n) is not int or n<=0 for n in (width,height)):raise ValueError('positive integer viewport required')
     u=axis(32);v=axis(24);uu,vv=np.meshgrid(u,v)
     positions=np.stack((uu*2-1,-(vv*2-1)),axis=-1)
@@ -39,9 +44,9 @@ def make_mesh(width,height,*,raster_subpixel_bits=None):
                 triangles.extend([[a,b,d],[d,c,a]])
             else:triangles.extend([[c,a,b],[b,d,c]])
     result={'u':u,'v':v,'positions':positions,
-            'uv':np.stack((uu+np.float32(.5)/width,vv+np.float32(.5)/height),axis=-1),
+            'uv':np.stack((uu,vv),axis=-1) if centre_policy==CORE_2322_CENTRES else np.stack((uu+np.float32(.5)/width,vv+np.float32(.5)/height),axis=-1),
             'polar':np.stack((rad,ang),axis=-1),
-            'triangles':np.asarray(triangles,dtype=np.int32)}
+            'triangles':np.asarray(triangles,dtype=np.int32),'centre_policy':centre_policy}
     if raster_subpixel_bits is not None:
         if type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16:
             raise ValueError('supported explicit raster subpixel bits required (4..16)')
