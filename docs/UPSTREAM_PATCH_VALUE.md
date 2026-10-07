@@ -63,6 +63,56 @@ changes from host policy and optimizations for upstream proposals.
 | Native trails | Maintain authored feedback with optional bounded native detail and diffusion fallback. Standard/Medium/High are host choices. | Product policy rather than an unconditional appearance default. Additional targets, shader restrictions, memory and driver cost matter. |
 | Pass and cache work | Retain translated GLSL/program caches, texture pooling, optional pass elimination, direct output and reduced outgoing-preset cadence. | Evaluate context/driver identity, bounds, failed-load fallback and retirement. Reduced cadence changes animation. No current-driver speedup is established. |
 
+### Retained high-resolution line enhancement — upstream #682
+
+[Upstream #682](https://github.com/projectM-visualizer/projectm/issues/682) requests
+resolution-scaled line rendering and anti-aliasing because fixed-width lines occupy
+a smaller fraction of the image at high resolutions. The issue remains an open
+enhancement. This work is retained inside current 0001; consolidation did not remove it.
+
+`MilkdropPreset/LineGeometry` and `LineRenderer` implement an opt-in quad-segment
+renderer for main/custom waveforms, shape outlines and motion vectors. With
+`projectm_opengl_set_line_reference_size`, width scales by the square root of
+render/reference pixel area above the reference, with a one-pixel minimum at or
+below it. Thick lines retain four offset passes to preserve hit/alpha behavior;
+waveform dots retain GL points with scaled size and fractional-area compensation.
+Edges are hard by default, with optional one-pixel anti-aliasing through
+`projectm_opengl_set_line_antialiasing` and a GL-line fallback if its shader fails.
+
+The contribution has boundaries: joins are miters and open ends are flat, while
+#682 also suggests round waveform joins and caps. The retained path therefore
+addresses the high-resolution/scaling portion without completing every suggested
+detail. Its associated reference-size policy also changes sample decisions,
+dense-wave fading, blur source/LOD and reported shader canvas dimensions; those
+must be reviewed separately from the quad primitive itself.
+
+The [historical quad-line experiments](superpowers/evidence/quad-follow-up-verification/README.md)
+provide prior geometry and device evidence with their original 4.1.7 identities.
+They are not current 4.2 certification. The 512×288 equation image below has
+reference-scaled lines disabled and does not demonstrate the high-resolution
+enhancement. Current-source `LineGeometryTest` controls remain part of 0001;
+no present-driver performance gain or complete #682 implementation is claimed.
+
+### Other retained components with separate upstream value
+
+These are components of current 0001, rather than additional active patches.
+Each deserves its own proposal scope and validation:
+
+| Component and source | Classification and upstream value | Acceptance boundary |
+|---|---|---|
+| Fragment-failure cleanup, `Renderer/Shader::CompileProgram` | Correctness: delete the successful, still-unattached vertex shader when fragment compilation throws, then preserve the original exception. | `ShaderFailureTest` covers rejection, repeated failures and retry. Upstream already owns the `ShaderException::what()` behavior; do not claim it again. |
+| Defined fresh/reused feedback, `TextureAttachment::ReplaceTexture` / `ClearPooledTexture` | Correctness: initialize fresh and pooled color attachments to transparent black before their first read. | Use a context-local scratch FBO and restore caller bindings, clear color, mask and scissor. `TextureHistoryTest` includes recreated-context FBO-name controls; no new allocation-time measurement is implied. |
+| Qualified warp samplers, `MilkdropShader::LoadTexturesAndCompile` | Correctness: reserve warp unit zero for unqualified `main`, so the fixed bind cannot overwrite an earlier-sorting point/filter/wrap alias. | `WarpSamplerTest` checks mixed aliases and packed point state. Preserve random-slot identity and strong descriptor ownership separately. |
+| Ordered shape batching and evaluated-geometry replay | Optimization and reusable primitive: reduce draws while preserving authored evaluation/draw order; replay prepared geometry for another target without rerunning equations or RNG. | Preserve blending and persistent state. Extra CPU geometry storage must be bounded; no current-driver speedup is established. |
+| Color-attachment pool, `Renderer/Texture` | Opt-in resource enhancement/optimization: byte-limited storage belongs to the calling thread's current GL context and is disabled by default. | Exclude externally owned textures, define clears, support pressure release and forget old context names. Retained GPU memory is a cost. |
+| Translation/program caches and uniform/bind caches, `MilkdropShader` / `Renderer/Shader` | Optimization: identify translated-source caching, driver program binaries, uniform-location caching and redundant program-bind suppression as distinct mechanisms. | Review keys, context/driver identity, bounds and failure paths. The current image protocol disables binary export and cannot validate its benefit. Reduced outgoing-frame cadence is a separate host policy. |
+| Flip reuse, direct blur, visibility-gated motion-vector UV output and final-orientation echo | Optimization: retain individually identifiable pass reductions instead of treating them as one generic performance change. | Invalidate reused history on resize, motion-vector drawing and external edits; direct blur needs an attachment-completeness fallback. Preserve echo orientation, shade and alpha. |
+| Discard-aware targets, blur-read timing and opt-in direct composite output | Correctness prerequisites and host capability: preserve prior target contents and the authored frame that a blur read sees; `SetOutputTarget` can draw directly into the caller target. | Store a frame before host-initiated switches, and retain safe clip/discard behavior. The existing caller-FBO API alone does not provide those history guarantees. |
+
+Historical provenance and the already-upstream/omitted dispositions remain in the
+archive. Only work still present in this current patch is assessed above; previous
+measurements keep their original source and backend identities.
+
 Named candidates include `161.milk` and `430.milk` for rejected equations;
 `midgitstraights of majillaen - featy sweet.milk` for blur/texture paths; and
 `Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk` for feedback policy.
@@ -81,10 +131,22 @@ Upstream rejects the unchanged preset in both runs; the left panel quotes its lo
 Source: [0002-hlsl-compatibility-and-float-roundtrip.patch](../tools/projectm-patches/0002-hlsl-compatibility-and-float-roundtrip.patch). Preserve classic-locale
 emission and finite float32 round trips with `max_digits10`, integral-float/signed-zero
 spelling and rejection of nonfinite AST literals. Initialize writable copies from
-incoming uniforms while preserving other components. Retain compatible modulo
-handling, contextual identifiers, macro token spacing and parenthesized postfix
+incoming uniforms while preserving other components. Retain contextual identifiers,
+macro token spacing and parenthesized postfix
 expressions. Plain uninitialized scalar/vector float globals become external
 uniforms; static, const, initialized and local storage retain their rules.
+
+Retain `GLSLGenerator::OutputArrayInitializer`: translate flat scalar/vector array
+initializer lists into correctly typed GLSL elements, preserve local/global layout
+and assign global arrays as whole arrays. Reject incomplete or cross-element vector
+layouts instead of guessing. `ArrayInitializerTest` and the real-GL
+`FlatGlobalArrayInitializerKeepsTheAuthoredShader` /
+`FlatLocalArrayInitializerKeepsTheAuthoredShader` controls identify this component;
+the reserved-identifier screenshot below does not independently prove array layout.
+
+Modulo type, precedence and emission compatibility is supplied by upstream
+[PR #1031](https://github.com/projectM-visualizer/projectm/pull/1031), rather than a
+separate retained modulo implementation in current 0002.
 
 General translator correctness value; longer generated source is a tradeoff.
 Unbound GLES uniforms start at zero, which does not reproduce arbitrary D3D9
