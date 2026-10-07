@@ -1074,5 +1074,37 @@
       "frame30_rgba_sha256": "183c7a1ecc785e13231051befe7fb07c6d7f8e902a1cad5d12c7f7c01c5f5eba"
     }
   },
-  "final_candidate_assets_identical": true
+  "final_candidate_assets_identical": true,
+  "final_candidate_native_trails": {
+    "metadata": {
+      "backend": "published-core-jni",
+      "core_version": "4.2.0",
+      "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+      "frames": 30,
+      "width": 2560,
+      "height": 1440,
+      "fps": 30,
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "simulated_clock": true,
+      "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "gl_vendor": "Google (Apple)",
+      "egl_version_major": 1,
+      "egl_version_minor": 0,
+      "mesh_width": 48,
+      "mesh_height": 32,
+      "pcm_sample_rate": 44100,
+      "pcm_channels": 1,
+      "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+      "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+      "rendered_frame_serial_initial": 0,
+      "rendered_frame_serial": 30,
+      "rendered_frame_serial_delta": 30,
+      "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+      "skipped_count": 0,
+      "indexed_count": 1
+    },
+    "max_rgb8": 247,
+    "mean_rgb8": 0.0014360652970679011,
+    "frame30_rgba_sha256": "d29c141b248ad6f4f1f59e7671be8972921a7915c0a80cada27b0a1127c03309"
+  }
 }
