@@ -1,0 +1,113 @@
+{
+  "scope": "Standalone sampler numerical diagnostics; no AAR loaded, no preset-score or fresh randomized credit",
+  "disposition": "OPEN; no qualified general filtering rule",
+  "finding": "Same X252/256, identical rows: Y0 chooses upper; Y211..215 chooses lower independent of sibling G0/G1. Complete Y0..256 sweep chooses upper only every16 steps, lower at other240. Cross-row accumulation implicated.",
+  "controls": [
+    {
+      "control": "half-case55-cross-y-g0",
+      "path": "build/visual-loop/runtime2317/controls/half-case55-cross-y-g0",
+      "files": [
+        {
+          "name": "HalfCase55G0Probe.java",
+          "sha256": "317e4084d6cbcb99d37b74175f4bd09eb7f2e27cd28eb195c3f0c5f5317687dc"
+        },
+        {
+          "name": "comparison.json",
+          "sha256": "c1d424091a197378b9da2c99231f68319dbef32a72f0ebaed3f368c97ffde7ab"
+        },
+        {
+          "name": "texture.rg.f32",
+          "sha256": "020f030f878fb3e58b17b72d998e9d641ad79bc7ef3bdbe6d8ea66301e903bff"
+        },
+        {
+          "name": "stdout.json",
+          "sha256": "a9812ac50cfda1a71b205e213e6b61623db219c473ff7e3c922af99a52c3faed"
+        },
+        {
+          "name": "freeze.json",
+          "sha256": "fd0fca0192a7c9bdd74c8a21ab14cf9b4d3fc6ca8709fefc544a92a489e8c057"
+        }
+      ]
+    },
+    {
+      "control": "half-case55-cross-y-g1",
+      "path": "build/visual-loop/runtime2317/controls/half-case55-cross-y-g1",
+      "files": [
+        {
+          "name": "comparison.json",
+          "sha256": "c1d424091a197378b9da2c99231f68319dbef32a72f0ebaed3f368c97ffde7ab"
+        },
+        {
+          "name": "HalfCase55G1Probe.java",
+          "sha256": "f39e9a5e98c71c5dbcdd0c6303e89d03d1d0d40c258b108e5e6ccf631fe98e1e"
+        },
+        {
+          "name": "texture.rg.f32",
+          "sha256": "076bcdc2beee3d2b182f02dab53ea3842bcc1d7e91a85312f5b6d7d67b5226da"
+        },
+        {
+          "name": "stdout.json",
+          "sha256": "e69c29e9ac4cc376736b82696449bf4d5d4e667e6c8acd0e7be30ed9a548d926"
+        },
+        {
+          "name": "freeze.json",
+          "sha256": "f811a256c674edc4edb85d84a4fdf033965add875dde2b97fd6e3f9dc13f052c"
+        }
+      ]
+    },
+    {
+      "control": "half-case55-axis-only",
+      "path": "build/visual-loop/runtime2317/controls/half-case55-axis-only",
+      "files": [
+        {
+          "name": "comparison.json",
+          "sha256": "153217ce3e5a92894ca08f2e9cc31484989ce4c400ee85a89a79750e0009c7bb"
+        },
+        {
+          "name": "texture.rg.f32",
+          "sha256": "020f030f878fb3e58b17b72d998e9d641ad79bc7ef3bdbe6d8ea66301e903bff"
+        },
+        {
+          "name": "HalfCase55AxisProbe.java",
+          "sha256": "8b42e0d7994782d55f207917e930103d616ce4981a5a279a9983d24af08280f2"
+        },
+        {
+          "name": "stdout.json",
+          "sha256": "65212bf23a0e597055a8414915762df9a040b2944ec7d2a39fa25baa1de65653"
+        },
+        {
+          "name": "freeze.json",
+          "sha256": "7fc0f1c06dfb590909674029994abc60c575dd7d7d78904ba5251c88abb9d0cd"
+        }
+      ]
+    },
+    {
+      "control": "half-case55-y-full-sweep",
+      "path": "build/visual-loop/runtime2317/controls/half-case55-y-full-sweep",
+      "files": [
+        {
+          "name": "HalfCase55YSweepProbe.java",
+          "sha256": "66a65dc55e4e046e93c2f1326d7909e50751037353c937acff04f1e365c273c3"
+        },
+        {
+          "name": "comparison.json",
+          "sha256": "4c0a22350bd1f84af5e376d7be738235a4d15c8cb0eda139b783f2161980b325"
+        },
+        {
+          "name": "texture.rg.f32",
+          "sha256": "020f030f878fb3e58b17b72d998e9d641ad79bc7ef3bdbe6d8ea66301e903bff"
+        },
+        {
+          "name": "stdout.json",
+          "sha256": "2d9a0c9efcd368005c4cfb602f3275b075503cbe88a6563fd8bc37dc40fd80ea"
+        },
+        {
+          "name": "freeze.json",
+          "sha256": "1390efaa9db21fc852a4634d1b075e61843f568560e7e03518e6c903d7a61f5b"
+        }
+      ]
+    }
+  ],
+  "original_cosmic_score": 95,
+  "latest_full_aar_p95_error_percent": 8.36484
+}

@@ -1218,10 +1218,10 @@ uses two ctypes calls per output component; no performance improvement is claime
 The nested rule matches 32 initial numerical observations and all 64 independently
 frozen fresh signed-input observations. A simpler weighted FMA rule was rejected
 by fresh controls. These are bounded numerical controls, not universal compiler
-or GPU guarantees. The unchanged original Zylot learning retest still misses
-median motion by 19.78%, so its issue remains open. `pow` precision and feedback
-residuals require further diagnosis; implementing the mix correction alone does
-not earn an original-preset pass or randomized credit.
+or GPU guarantees. The mix-only original Zylot learning retest missed median motion by 19.78%;
+that historical failure is preserved. Subsequent horizontal-blur diagnosis and
+the combined correction below close its tested window. Mix correction alone
+did not earn an original-preset pass or randomized credit.
 
 The separate combined blur profile `apple-m4pro-gles-blur-forward-fma-v1`
 adds three forward float32 FMAs to the horizontal kernel after its rounded first
@@ -1239,3 +1239,12 @@ geometry moves left/down, while changing halo intensity shifts the whole-field
 brightness centroid upward; those measurements are distinct.
 Cosmic's corresponding latest-AAR retest still misses p95 motion by 8.36%, so
 half-texture filtering remains open and no new randomized batch is started.
+
+Cosmic's exact-half midpoint control now isolates Y-stage accumulation: at the
+same X252/256 and identical rows, Y0 chooses the upper result, while the complete
+Y0..256 sweep chooses it only every 16 steps (17 points); the other 240 choose
+the lower result. Lowp/highp agree and changing the constant sibling channel
+from zero to one does not affect the result. These standalone sampler controls
+load no AAR and earn no preset or randomized credit. The finding rejects an
+X-only explanation for this control, but no general filter rule is qualified;
+see `fixtures/half-filter-y-stage-attribution-2026-10-07.json`.
