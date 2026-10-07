@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "scope": "Read-onlypublishedfull2.3.17feedbackepochobservation, unchangedfinalpixels; numericallearningnoaccuracycredit",
+  "observer": {
+    "final_pixels_unchanged": true,
+    "feedback_frames": [
+      {
+        "frame": 1,
+        "max": 255,
+        "mean": 3.7329644097222223
+      },
+      {
+        "frame": 2,
+        "max": 255,
+        "mean": 3.3162706163194446
+      },
+      {
+        "frame": 3,
+        "max": 255,
+        "mean": 5.580964265046297
+      },
+      {
+        "frame": 4,
+        "max": 255,
+        "mean": 6.383345992476852
+      },
+      {
+        "frame": 5,
+        "max": 255,
+        "mean": 8.522542317708334
+      },
+      {
+        "frame": 6,
+        "max": 255,
+        "mean": 9.016411675347221
+      },
+      {
+        "frame": 7,
+        "max": 255,
+        "mean": 11.20364040798611
+      }
+    ]
+  },
+  "source_feedback_comparison": [
+    {
+      "frame": 1,
+      "different_channels": 0,
+      "max_rgb8": 0,
+      "mean_rgb8": 0.0
+    },
+    {
+      "frame": 2,
+      "different_channels": 0,
+      "max_rgb8": 0,
+      "mean_rgb8": 0.0
+    },
+    {
+      "frame": 3,
+      "different_channels": 0,
+      "max_rgb8": 0,
+      "mean_rgb8": 0.0
+    },
+    {
+      "frame": 4,
+      "different_channels": 0,
+      "max_rgb8": 0,
+      "mean_rgb8": 0.0
+    },
+    {
+      "frame": 5,
+      "different_channels": 0,
+      "max_rgb8": 0,
+      "mean_rgb8": 0.0
+    },
+    {
+      "frame": 6,
+      "different_channels": 0,
+      "max_rgb8": 0,
+      "mean_rgb8": 0.0
+    },
+    {
+      "frame": 7,
+      "different_channels": 189,
+      "max_rgb8": 1,
+      "mean_rgb8": 0.001708984375
+    }
+  ],
+  "first_region": {
+    "frame": 7,
+    "rows": [
+      10,
+      22
+    ],
+    "columns": [
+      150,
+      164
+    ],
+    "different_channels": 189,
+    "max_rgb8_error": 1
+  },
+  "rejected_uv_order_prototype": {
+    "median_relative_error_percent": 19.7775839266117,
+    "passes": false,
+    "first_diff": 7,
+    "rgb_mae": 1.4545604121278141e-05,
+    "randomized_credit": 0,
+    "scope": "DisposableUVorderhypothesis noimplementationcredit"
+  },
+  "localization": "Main-texturedshapevertexglow firstdivergesbeforecomposite; UVorderalone didnotclearfailure; nativeuploadcomparisonnext",
+  "observer_sha256": "b5fc3cd2950a078d4e61f020ca50b29be44e11488858aea1ff907916ea50b925",
+  "randomized_credit": 0
+}
