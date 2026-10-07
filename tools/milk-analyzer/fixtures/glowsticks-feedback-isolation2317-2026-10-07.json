@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "scope": "FrozenlatestfullAARstagecontrol,nooriginalpresetpass/randomcredit",
+  "result": {
+    "scope": "Diagnosticidentitycomposite only,nooriginalpresetpass",
+    "motion": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "source": 0.00580914132297039,
+        "native": 0.005474600940942764,
+        "relative_predicted_error_percent": 5.758861136753433
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "source": 0.31089040040969845,
+        "native": 0.3180153489112854,
+        "relative_predicted_error_percent": 2.2917878751474925
+      }
+    ],
+    "pixels": {
+      "mean_mae_rgb": 5.138005144544877e-05,
+      "mean_rmse_rgb": 0.00041742317262105644,
+      "peak_mae_rgb": 9.62733174674213e-05,
+      "peak_rmse_rgb": 0.0006144448416307569,
+      "source_sha256": "0018a287130064c94b5c32e66704a9cec5ba63641be8a71e73e9bc889ef49464",
+      "native_sha256": "e27692d5a8f3b979ec2f66fc460687f7bf04611ec35504bf722e8c72c5dd000b"
+    }
+  },
+  "capture": {
+    "status": "captured",
+    "frames": 30,
+    "command": "env CLASSPATH=/data/local/tmp/projectmtv-2317-qualification-20261007/classes.dex LD_PRELOAD=/data/local/tmp/projectmtv-2317-qualification-20261007/libbackendclock.so PROJECTMTV_TEST_RANDOM_SEED=12345 PROJECTMTV_TEST_CORE_PATH=/data/local/tmp/projectmtv-2317-qualification-20261007/libprojectmtv.so PROJECTMTV_TEST_RANDOM_LOG=/data/local/tmp/projectmtv-2317-qualification-20261007/glowsticks-feedback-isolation.random.jsonl /system/bin/app_process -Djava.library.path=/data/local/tmp/projectmtv-2317-qualification-20261007 /system/bin nl.neerdael.projectm.analysis.CoreBackendRunner /data/local/tmp/projectmtv-2317-qualification-20261007/libprojectmtv.so '/data/local/tmp/projectmtv-2317-qualification-20261007/published-core.aar|/data/local/tmp/projectmtv-2317-qualification-20261007/glowsticks-feedback-isolation-selection.apk' /data/local/tmp/projectmtv-2317-qualification-20261007/glowsticks-feedback-isolation-work /data/local/tmp/projectmtv-2317-qualification-20261007/glowsticks-feedback-isolation /data/local/tmp/projectmtv-2317-qualification-20261007/libbackendclock.so /data/local/tmp/projectmtv-2317-qualification-20261007/transport30.f32 30 stream",
+    "capture_started_utc": "2026-10-07T14:18:36.797016+00:00",
+    "release": "v2.3.17",
+    "aar_sha256": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+    "batch_freeze_sha256": "cda6da3e17fd6365802cf6061d77c674578a4a33d48824e135a2b5d0624d9d1b",
+    "header": {
+      "width": 256,
+      "height": 144,
+      "frames": 30,
+      "fps": 30,
+      "pid": 8208
+    },
+    "metadata": {
+      "backend": "published-core-jni",
+      "core_version": "4.1.7",
+      "preset": "predictor glowsticks feedback isolation2317.milk",
+      "frames": 30,
+      "width": 256,
+      "height": 144,
+      "fps": 30,
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "simulated_clock": true,
+      "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "gl_vendor": "Google (Apple)",
+      "egl_version_major": 1,
+      "egl_version_minor": 0,
+      "mesh_width": 48,
+      "mesh_height": 32,
+      "pcm_sample_rate": 44100,
+      "pcm_channels": 1,
+      "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+      "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+      "rendered_frame_serial_initial": 0,
+      "rendered_frame_serial": 30,
+      "rendered_frame_serial_delta": 30,
+      "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+      "skipped_count": 0,
+      "indexed_count": 1
+    },
+    "pixel_sha256": "e27692d5a8f3b979ec2f66fc460687f7bf04611ec35504bf722e8c72c5dd000b",
+    "diagnostic_errors": [],
+    "capture_finished_utc": "2026-10-07T14:18:37.482480+00:00"
+  },
+  "freeze_sha256": "cda6da3e17fd6365802cf6061d77c674578a4a33d48824e135a2b5d0624d9d1b",
+  "localization": "Originalwarpfeedbackrestoresmedianmiss versusblackwarpdrawcontrol; partofgap prefinalcolourshader",
+  "remaining": "Identifyfeedbacktransport/blurprecision rootcause; originalmissretained"
+}
