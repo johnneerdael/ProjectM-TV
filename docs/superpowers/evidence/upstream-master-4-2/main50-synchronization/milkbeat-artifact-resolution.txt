@@ -1,0 +1,11 @@
+
+> Configure project :app
+WARNING: Release keystore not found. Building UNSIGNED release APK.
+
+> Task :app:verifyLocalProjectMArtifact
+PROJECTM_RESOLVED_MODULE=nl.neerdael.projectm:projectM-TV-core:4.2.0-dev-6f6480746-main50-1f0a43df
+PROJECTM_RESOLVED_FILE=/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/build/projectm42-main50-core/download/v4.2.0-dev-6f6480746-main50-1f0a43df/projectM-TV-core-4.2.0-dev-6f6480746-main50-1f0a43df.aar
+PROJECTM_RESOLVED_SHA256=85dfb1fc6bdbd50336e0e361fdb594221efae40ca95b3d1127f392cbbd1d6008
+
+BUILD SUCCESSFUL in 2s
+1 actionable task: 1 executed

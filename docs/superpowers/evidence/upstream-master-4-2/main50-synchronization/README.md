@@ -14,6 +14,10 @@ Main `dd59a791fd2af6b7ad2fffcb389e0bc178905959` is incorporated by migration `1f
 
 ![Actual passing custom-pack upload journey](custom-pack-upload.png)
 
+## Current Milkbeat consumer boundary
+
+Milkbeat main `59996e6a991c60b9843ce68565e7c783c0fef4c6` builds its GitHub debug APKs and passes all 28 focused visualizer/clock/waveform tests against the exact **production** 4.2 migration AAR, SHA256 `85dfb1fc6bdbd50336e0e361fdb594221efae40ca95b3d1127f392cbbd1d6008`. [Resolved artifact verification](milkbeat-artifact-resolution.txt) requires exactly one matching core dependency with that checksum. [Consumer certificate](milkbeat-consumer.json) records all five APK digests; packaged ARM64/ARMv7 libraries match the supplied AAR. Consumer tracked files remain unchanged. This does not claim release/R8 or live consumer pixel validation.
+
 ## Latest-baseline fidelity in progress
 
 Six new private workers build and verify their AAR/APK payloads. Protocol `0e462a837e79c5e44bd2c2712bf12f565a6b1171ee16e62e6ee29fe1afa68305`, frozen in ignored `build/upstream-rebase/random100-main50-final/`, requires the same unbiased 100 random presets and original regression union: 448 unique presets, 509 profile cases, 2,036 fixed-seed source runs, 509 unchanged-AAR runtime runs and 48 image-proof replays. All source frames 0–479 use seed 12345 and frame/30 clock. Four initial source runs match exactly; this is not completion of the matrix. The driver stops on failures/differences and preserves evidence.
