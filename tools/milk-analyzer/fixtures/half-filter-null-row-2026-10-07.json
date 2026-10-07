@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "scope": "Independentlyfrozenrow-nullspacemaps numerical-onlynoAAR/randomcredit",
+  "freeze_sha256": "d52c609cf771bc2989eb0b561f2e0c38971405821e35fb4b53708db535d82647",
+  "results": [
+    {
+      "k": -2,
+      "observed": [
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        }
+      ],
+      "exact_red": 0.5813013790175319
+    },
+    {
+      "k": -1,
+      "observed": [
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        }
+      ],
+      "exact_red": 0.5813013790175319
+    },
+    {
+      "k": 0,
+      "observed": [
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        }
+      ],
+      "exact_red": 0.5813013790175319
+    },
+    {
+      "k": 1,
+      "observed": [
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        }
+      ],
+      "exact_red": 0.5813013790175319
+    },
+    {
+      "k": 2,
+      "observed": [
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.5810546875
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.72802734375
+        }
+      ],
+      "exact_red": 0.5813013790175319
+    }
+  ],
+  "disposition": "All5redoutputs invariantdespiteproductredistribution; consistentwithlossafterrowdot butnotproof ofseparablehardwaremath; no exactfilteraccepted"
+}

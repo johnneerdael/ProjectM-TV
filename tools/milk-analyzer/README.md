@@ -1141,3 +1141,15 @@ thresholds. They identify required small pre-final deficits in two fresh cases,
 but do not establish an exact arithmetic rule. These failures are preserved in
 `fixtures/half-filter-local-thresholds-2026-10-07.json`; no predictor filtering
 change or repaired-preset credit follows from the diagnostic.
+
+Published 2.3.17 contains patch 0051, which computes warp rotation sine/cosine
+on the CPU after conversion of the authored result to float. The full AAR was
+checksum-verified; Java classes and bundled assets are byte-identical to 2.3.16.
+The original large-rotation preset completes a new 30-frame JNI retest against
+its retained frozen source forecast. All five numeric checks meet the original
+5% of predicted-value allowance; the original 65 grade remains historical and
+the retest earns no fresh randomized credit. Exact identities, numerical results
+and the independent full-claim review's current disposition are retained in
+`fixtures/large-rotation-published2317-retest-2026-10-07.json`.
+The isolated 51-patch source archive/adapters are prepared; forecast-profile and
+cold-clock adaptation remain pending and are not inferred from this one retest.

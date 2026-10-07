@@ -1,0 +1,475 @@
+{
+  "schema_version": 1,
+  "scope": "Originalfailedpresetretested against latestpublishedfullAAR; originalfrozenforecast and65score preserved; no randomizedcredit",
+  "release_identity": {
+    "release": "v2.3.17",
+    "commit": "16a37189478771da591d134a6bd1f8fc46eee808",
+    "aar_sha256": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+    "entries": {
+      "classes.jar": {
+        "sha256": "948b9a2293ad2f6d0a112f286cd93883031e3673f9def7ca0bb73337116f3428",
+        "unchanged_from2316": true
+      },
+      "jni/arm64-v8a/libprojectmtv.so": {
+        "sha256": "0f6cbdc607bf03fc24466015c128f0fbfdae9f771e914f6c1b652a6d3bf691ee",
+        "unchanged_from2316": false
+      }
+    },
+    "asset_count": 9686,
+    "assets_unchanged": true,
+    "source_engine": {
+      "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+      "patches_sha256": "bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8"
+    },
+    "first50_patches_unchanged": true,
+    "patch51_scope": "CPU sine/cosine afterfloatrotationconversion; internalmeshattributechange; publicJNI/classes/assetsunchanged",
+    "qualification_scope": "Sameauthoredlarge-rotationpreset30framecapture complete; independent20claimreviewpending"
+  },
+  "runtime_deployment": {
+    "release": "v2.3.17",
+    "commit": "16a37189478771da591d134a6bd1f8fc46eee808",
+    "remote": "/data/local/tmp/projectmtv-2317-qualification-20261007",
+    "sha256": {
+      "classes.dex": "f956933b4d8628487f1e610b7b6f9e93f8ac6c9d61ae5e4544c37effdfce5338",
+      "libbackendclock.so": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953",
+      "libprojectmtv.so": "0f6cbdc607bf03fc24466015c128f0fbfdae9f771e914f6c1b652a6d3bf691ee",
+      "published-core.aar": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+      "transport30.f32": "0640617ef6dcdf81f9af180ebb827c88ae8d570ec0abc96bf6f52f00bcab488c"
+    },
+    "java_classes_identical_to2316": true,
+    "helper_abi": "PublicJNI classes byteidentical; runnerandhelper unchanged; no coremodification",
+    "scope": "NewpublishedfullAAR, ownedemulator only"
+  },
+  "capture": {
+    "status": "captured",
+    "frames": 30,
+    "command": "env CLASSPATH=/data/local/tmp/projectmtv-2317-qualification-20261007/classes.dex LD_PRELOAD=/data/local/tmp/projectmtv-2317-qualification-20261007/libbackendclock.so PROJECTMTV_TEST_RANDOM_SEED=12345 PROJECTMTV_TEST_CORE_PATH=/data/local/tmp/projectmtv-2317-qualification-20261007/libprojectmtv.so PROJECTMTV_TEST_RANDOM_LOG=/data/local/tmp/projectmtv-2317-qualification-20261007/batch002-preset04.random.jsonl /system/bin/app_process -Djava.library.path=/data/local/tmp/projectmtv-2317-qualification-20261007 /system/bin nl.neerdael.projectm.analysis.CoreBackendRunner /data/local/tmp/projectmtv-2317-qualification-20261007/libprojectmtv.so '/data/local/tmp/projectmtv-2317-qualification-20261007/published-core.aar|/data/local/tmp/projectmtv-2317-qualification-20261007/batch002-preset04-selection.apk' /data/local/tmp/projectmtv-2317-qualification-20261007/batch002-preset04-work /data/local/tmp/projectmtv-2317-qualification-20261007/batch002-preset04 /data/local/tmp/projectmtv-2317-qualification-20261007/libbackendclock.so /data/local/tmp/projectmtv-2317-qualification-20261007/transport30.f32 30 stream",
+    "capture_started_utc": "2026-10-07T13:36:26.366889+00:00",
+    "release": "v2.3.17",
+    "aar_sha256": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+    "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+    "header": {
+      "width": 256,
+      "height": 144,
+      "frames": 30,
+      "fps": 30,
+      "pid": 7877
+    },
+    "metadata": {
+      "backend": "published-core-jni",
+      "core_version": "4.1.7",
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk",
+      "frames": 30,
+      "width": 256,
+      "height": 144,
+      "fps": 30,
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "simulated_clock": true,
+      "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "gl_vendor": "Google (Apple)",
+      "egl_version_major": 1,
+      "egl_version_minor": 0,
+      "mesh_width": 48,
+      "mesh_height": 32,
+      "pcm_sample_rate": 44100,
+      "pcm_channels": 1,
+      "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+      "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+      "rendered_frame_serial_initial": 0,
+      "rendered_frame_serial": 30,
+      "rendered_frame_serial_delta": 30,
+      "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+      "skipped_count": 0,
+      "indexed_count": 1
+    },
+    "pixel_sha256": "127cdcd311c8daa2607b572dbe4d3a021b155756b1522af4d122614dae3f783a",
+    "noise_initialization_inputs_verified": {
+      "seed_low32_microseconds": 3567620661,
+      "active_bank_clock_entries": [
+        3567620661,
+        3567620661,
+        3567620661,
+        3567620661,
+        3567620661,
+        3567620661
+      ],
+      "discarded_initial_bank_clock_entries": [
+        3567587328,
+        3567587328,
+        3567587328,
+        3567587328,
+        3567587328,
+        3567587328
+      ],
+      "source_bank_seed": 3567620661
+    },
+    "diagnostic_errors": [],
+    "capture_finished_utc": "2026-10-07T13:36:27.076217+00:00"
+  },
+  "numerical_validation": {
+    "release": "v2.3.17",
+    "metrics": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "predicted": 0.01734024565666914,
+        "native": 0.01760387048125267,
+        "relative_error_percent": 1.5203061698387133,
+        "passes": true
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "predicted": 0.9118863388895975,
+        "native": 0.916057580709456,
+        "relative_error_percent": 0.4574300153391728,
+        "passes": true
+      },
+      {
+        "feature": "mean_luma",
+        "predicted": 0.011246810015290976,
+        "native": 0.011248185454557339,
+        "relative_error_percent": 0.01222959456496983,
+        "passes": true
+      },
+      {
+        "feature": "mean_saturation",
+        "predicted": 0.05041529734929403,
+        "native": 0.050428725220263,
+        "relative_error_percent": 0.026634517051324982,
+        "passes": true
+      },
+      {
+        "feature": "peak_mean_luma_jump",
+        "predicted": 0.0072692688554525375,
+        "native": 0.007256103213876486,
+        "relative_error_percent": 0.18111369709728675,
+        "passes": true
+      }
+    ],
+    "all_pass": true,
+    "original_score_retained": 65,
+    "randomized_credit": 0,
+    "paired": {
+      "mean_mae_rgb": 1.5773695849929936e-05,
+      "mean_rmse_rgb": 0.0002783039235509932,
+      "peak_mae_rgb": 6.244468386285007e-05,
+      "peak_rmse_rgb": 0.0014232072280719876,
+      "source_sha256": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7",
+      "native_sha256": "127cdcd311c8daa2607b572dbe4d3a021b155756b1522af4d122614dae3f783a"
+    },
+    "tolerance_basis": "Absolute error relative to frozen predicted value;5percent"
+  },
+  "source51_archive_sha256": "1f3c4ff9a1e68cf7169c2beff515bd58ad3147e2929b3946e061466d391d6cbb",
+  "source51_status": "Preparedverified51patchCPUsourcearchive; Pythonforecastcontextadaptationpending",
+  "visual_review": "Completeindependent20claimall30frame review, learning100",
+  "source51_adapters": {
+    "source_release": "v2.3.17",
+    "archive_sha256": "1f3c4ff9a1e68cf7169c2beff515bd58ad3147e2929b3946e061466d391d6cbb",
+    "adapters": {
+      "milk-native-reader": "b3af547da99cc1bc5800dfdd411554c732fbdbe0440d6e156aeef301954d9974",
+      "milk-audio-inputs": "bfc32e0fad4e79e64744260c7c01dbf7c27c9b3129e369356225b5a34a710702",
+      "milk-image-inputs": "1db0e566445acbfd8431b24e48f9e118f9b6dc354ba3c6079bc0fb92a98c0a00",
+      "milk-shader-random": "0d898c3dc28a2fefd942aac24852ad85fccc84803c443cd3bd46ee822c9d3197",
+      "milk-composite-inputs": "da756049b51726a9505b984d603e54492e94e1a5763ac2b9434f1367ae14e1cc",
+      "milk-shader-translate": "e307038941129417b01f0f058bbd9201fac677d399d95829703e87d91bffb0d7",
+      "milk-wave-inputs": "f1be6f0193536efe4150eeb103fdb6e36f5064b66abeafa26e352f502758e590",
+      "milk-noise-inputs": "8b048348f8494249dee35ced70e715df86662ecaed6b622f4a69176b1fdeb1d1"
+    },
+    "scope": "Pinned51patchsourceCPUadapters built, not nativevisualbackend; forecastprofile/clockadaptationpending"
+  },
+  "repair_assessment": {
+    "scope": "Same-original-preset learning repair using unchangedoriginal2.3.16sourceforecast againstnewfullpublished2.3.17AAR onownedAppleM4ProAPI34backend; nofreshrandomizedcredit.",
+    "position": 21,
+    "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk",
+    "original_score_retained": 65,
+    "repair_score": 100,
+    "score": 100,
+    "rows": [
+      {
+        "id": "structure1",
+        "claim": "The sequence opens black or nearly black.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Frame1 is black on both source/native; small pale accents firstappear inframe2."
+      },
+      {
+        "id": "structure2",
+        "claim": "Faint large folded/triangular dark shapes become detectable behind small highlights.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "All30 rawpairs and identically gain4-enhanced diagnosticpairs show matching large faint folded/triangular contours behindthehighlights, particularly3\u201310; the original2316missing shadowgeometry is restored on thisreference."
+      },
+      {
+        "id": "structure3",
+        "claim": "A few pale cyan/white curved glints appear near the lower central-left region.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Pale cyan/white curvedglints occupy the same lower central-left and adjacentcentral regions in both, includingtwo developed glints from3 onward."
+      },
+      {
+        "id": "structure4",
+        "claim": "Late frames remain very dark with dim residual curved accents.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Frames20\u201330 remainverydark with matching faint contours anddim residualcurved accents. Gain4 is diagnostic only; rawfields determine appearance."
+      },
+      {
+        "id": "motion1",
+        "claim": "Small pale glints change their shape and position during the early phase.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Earlyglint positions andshapeprogression agree acrossconsecutive framepairs2\u20138; no omitted secondglint orreversedtrajectory."
+      },
+      {
+        "id": "motion2",
+        "claim": "The large shadow-like contours shift subtly while remaining faint.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Largefaint contour boundaries subtly evolve andshift in corresponding framepairs3\u201330; no absentfolded contour orstructuraltrajectory failure seen."
+      },
+      {
+        "id": "motion3",
+        "claim": "The highlights fade and become dimmer later in the sequence.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Strong cyan/whiteearlyglints decline tosmall dimblue/grey accents later inbothsource/native."
+      },
+      {
+        "id": "motion4",
+        "claim": "Median motion=0.01734024565666914, p95=0.9118863388895975 viewport/s; relative5%.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Frozenmedian andp95 values comparewithin5% usingPREDICTED denominators; bothstreams have28/29supported transitions."
+      },
+      {
+        "id": "colour1",
+        "claim": "Black dominates almost the entire viewport.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Rawblack field dominates allframes andsurrounds thelocalizedglints; matching dark-contour geometry is stillvisible."
+      },
+      {
+        "id": "colour2",
+        "claim": "Visible early highlights are pale cyan/white.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Earlyglints arepalecyan/white in both matched sequences."
+      },
+      {
+        "id": "colour3",
+        "claim": "Later highlights become dim blue/grey rather than broad saturated colour.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Later localizedglints aredim blue/grey withsmall paleaccents; no broad saturated fieldappears."
+      },
+      {
+        "id": "colour4",
+        "claim": "Mean luma=0.011246810015290976; saturation=0.05041529734929403; relative5%.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Originalfrozen luma/saturation comparewithin5% ofpredicted values; no estimate changed."
+      },
+      {
+        "id": "feedback1",
+        "claim": "Composite selects blur2 or blur3 according to a neighbouring-main brightness difference.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged authoredcomposite selects blur2/blur3 byneighbor-main difference; observedpaired feedbackfield corroborates output. Nativeprogram choice is not directly exposed."
+      },
+      {
+        "id": "feedback2",
+        "claim": "It combines several blur levels with an amplifying coefficient.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Unchanged source combines blurlevels with amplifyingcoefficient; matching shadowfield andglint history corroborate appearance. Nohidden JNIshader identity certified."
+      },
+      {
+        "id": "feedback3",
+        "claim": "Luminance conversion removes most colour before hue/audio/Q-dependent weighting.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged source luminance conversion andhue/audio/Qweighting remain sourceconfirmed; matching mostlydesaturatedglints corroborate appearance."
+      },
+      {
+        "id": "feedback4",
+        "claim": "A final square darkens the field and leaves sparse glints.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged sourcefinalsquare explains darkfield/sparseglints andisappearance corroborated byall30pairs."
+      },
+      {
+        "id": "flashing1",
+        "claim": "Peak jump at[2, 3], brightening.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Frozen descriptor recomputation independentlyfinds peak2\u21923brightening in source/native."
+      },
+      {
+        "id": "flashing2",
+        "claim": "Exact coherent brightening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independently recomputed coherentbrightening list is[] exactly forbothsource/native."
+      },
+      {
+        "id": "flashing3",
+        "claim": "Exact coherent darkening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independently recomputed coherentdarkening list is[] exactly forbothsource/native."
+      },
+      {
+        "id": "flashing4",
+        "claim": "Peak mean-luma jump=0.0072692688554525375; relative5%, exacteventtiming.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Nativepeak amplitude0.007256103213876486 differs.181113697% fromoriginal0.0072692688554525375; exacteventtiming preserved."
+      }
+    ],
+    "critical_failure": false,
+    "critical_mismatch_claims": [],
+    "critical_unknown": false,
+    "fresh_random_credit": 0,
+    "successful_batch_credit": 0,
+    "original_prediction_rewritten": false,
+    "original_capture_rewritten": false,
+    "source_fields_and_all20_claims_byte_identical": true,
+    "numeric_checks": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "predicted": 0.01734024565666914,
+        "native": 0.01760387048125267,
+        "relative_error_percent": 1.5203061698387133,
+        "passes": true,
+        "relative_error_percent_predicted_denominator": 1.5203061698387133,
+        "frozen_rule_passes": true
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "predicted": 0.9118863388895975,
+        "native": 0.916057580709456,
+        "relative_error_percent": 0.4574300153391728,
+        "passes": true,
+        "relative_error_percent_predicted_denominator": 0.4574300153391728,
+        "frozen_rule_passes": true
+      },
+      {
+        "feature": "mean_luma",
+        "predicted": 0.011246810015290976,
+        "native": 0.011248185454557339,
+        "relative_error_percent": 0.01222959456496983,
+        "passes": true,
+        "relative_error_percent_predicted_denominator": 0.01222959456496983,
+        "frozen_rule_passes": true
+      },
+      {
+        "feature": "mean_saturation",
+        "predicted": 0.05041529734929403,
+        "native": 0.050428725220263,
+        "relative_error_percent": 0.026634517051324982,
+        "passes": true,
+        "relative_error_percent_predicted_denominator": 0.026634517051324982,
+        "frozen_rule_passes": true
+      },
+      {
+        "feature": "peak_mean_luma_jump",
+        "predicted": 0.0072692688554525375,
+        "native": 0.007256103213876486,
+        "relative_error_percent": 0.18111369709728675,
+        "passes": true,
+        "relative_error_percent_predicted_denominator": 0.18111369709728675,
+        "frozen_rule_passes": true
+      }
+    ],
+    "numeric_error_rule": "abs(native-predicted)/abs(predicted); predicted0 requires exact; relative5% unchanged",
+    "events": {
+      "peak_luma_jump_transition": [
+        2,
+        3
+      ],
+      "peak_direction": "brightening",
+      "coherent_brightening_transitions": [],
+      "coherent_darkening_transitions": []
+    },
+    "pixel_metrics": {
+      "mean_mae_rgb": 1.5773695849929936e-05,
+      "mean_rmse_rgb": 0.0002783039235509932,
+      "peak_mae_rgb": 6.244468386285007e-05,
+      "peak_rmse_rgb": 0.0014232072280719876,
+      "source_sha256": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7",
+      "native_sha256": "127cdcd311c8daa2607b572dbe4d3a021b155756b1522af4d122614dae3f783a"
+    },
+    "max_channel_error_rgb8": 75.0,
+    "validation": {
+      "original_case11frozen_files": true,
+      "frozen_producer_modules79": true,
+      "frozen_context_files179": true,
+      "copied_source_files5_byte_identical": true,
+      "published2317fullAAR_sha256": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+      "published2317native_sha256": "0f6cbdc607bf03fc24466015c128f0fbfdae9f771e914f6c1b652a6d3bf691ee",
+      "deployment_artifact_hashes5_verified": true,
+      "published_JAR_byte_identical_to2316": true,
+      "assets9686_names_CRC_size_identical_to2316": true,
+      "selected_preset_exactly_matches_AAR": true,
+      "DEX_helper_byte_identical_to2316": true,
+      "transport30_byte_identical_to_original": true,
+      "source_PCM_hash_matches_JNI_equivalent_transport": true,
+      "active_mainPID_noise_seed3567620661_verified": true,
+      "discarded_surface_seed3567587328_separate": true,
+      "native_indexed_count": 1,
+      "native_skipped_count": 0,
+      "native_frame_serial_delta": 30,
+      "all30_frames_reviewed_raw_and_diagnosticgain4": true,
+      "numeric_and_events_recomputed_with_frozen_descriptor_module": true,
+      "motion_supported_transitions": 28,
+      "no_devices_or_new_capture": true
+    },
+    "hashes": {
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/original.milk": "591567f0029068f4f1f7ec3b50d7a8fabd8c1658ece6c981a7f60cfd6f3317ea",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/prediction-description.json": "5c20a341501ce2e7e5e281e5a737568cdf125c3e3e1d90fd63d819cf7701e234",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/prediction-math.json": "b6478e55ca29bf00533e0ff6e8e05658d08485c19938266ba5beb52c075c4ed2",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/prediction.rgb.u8": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/native.rgb.u8": "127cdcd311c8daa2607b572dbe4d3a021b155756b1522af4d122614dae3f783a",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/domain.json": "f31cf6c05536a21c8b95997c6ed60838d71a95fd7af890fb3ae0aa39fcdf2bd8",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/capture.json": "901bca4ca136b8ff4d74110ae3020d2c0f401c6e24e3fbb713cb2b43d1c211cc",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/native-metadata.json": "9fe4c58b6966d98b44af5e0a3be199080407bfa9dc1056bc97be8eae19495111",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/native.random.jsonl": "3e3cf80af6146ccbfbc4fcd9108904867eeabdb168570c5b4b82d8f278cd1393",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/numeric-validation.json": "55cc5d3e85650843697db60ef8429bcebd8f4cb8310bc2ea41f7a1b91edee5fe",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/all30-metrics.json": "86a50759274da29685b2d63ec3d85e53273e21252820c73628282173ec8d7ee9",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/all30-comparison.png": "c512ee3f8b82839c572ee1bc77c727fda3ef017cdeae8999a1c00d1b92c849bc",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/large-rotation-published2317/all30-comparison-diagnostic-gain4.png": "4a53c9e5b3dc1d6b6d67f3a9948d2aa7bc945ce460a9018ed2012faffa4e0c1b",
+      "build/visual-loop/random30frames-core2316-2026-10-07/batch002/preset04/assessment.json": "df20e42b115aacdeac5da05321bcbbcc7c9e1df6cabdfeec31fa056d82192b66",
+      "build/visual-loop/random30frames-core2316-2026-10-07/batch002/complete-batch-freeze.json": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "build/visual-loop/published2317/identity.json": "6dfa67349e62261523b2d4f4f67a3c07635b09d3c80a9c3af96bb4d2361c690a",
+      "build/visual-loop/runtime2317/deployment.json": "fad53615bd29c37970b36a8c69a58e789472c962f2fbdd6f4621b93638f3d9db"
+    },
+    "limits": [
+      "Original65 andoriginalfailed2316capture remain unchanged; thisrepairgrade isnotfreshrandom/streakcredit.",
+      "A passing30-frameowned-backend repair doesnotcertify otherdrivers, presets or arbitraryrotations.",
+      "MeanRGBMAE isnotpixelidentity; smallresidualpixel differences retained.",
+      "Feedback mechanisms are sourceconfirmed andappearancecorroborated; hidden nativeprogram identity not directly exposed.",
+      "Gain4display isdiagnostic only anddoesnotchange rawframes ornumericclaims.",
+      "Sourceforecast remains the unchangedoriginal2.3.16forecast; thisretrospective comparison doesnot qualify a newsource51forecast policy or adapter."
+    ],
+    "created_utc": "2026-10-07T13:44:52.738574+00:00"
+  }
+}
