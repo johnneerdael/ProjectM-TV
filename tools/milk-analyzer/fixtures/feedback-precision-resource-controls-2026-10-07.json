@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-07",
+  "scope": "Diagnostic research; unresolved predictor precision, no established AAR defect",
+  "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial.milk",
+  "preset_sha256": "5f2e3c5732513d8f2c14a6c6dd2255fc38e1f7034a1906dc02726e47fc8585ad",
+  "published_runtime": "v2.3.16",
+  "aar_sha256": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+  "frames": 30,
+  "original_score": 95,
+  "original_grade_retained": true,
+  "fresh_acceptance_credit": false,
+  "resource_preserving_feedback": {
+    "diagnostic_only": true,
+    "frames": 30,
+    "mean_rgb_mae": 0.003108278347025538,
+    "per_frame_mean_rgb_mae": [
+      9.379113335148873e-05,
+      0.00037934878812636165,
+      0.0014859777823166302,
+      0.0036415781590413946,
+      0.004485485600490197,
+      0.005851006490559186,
+      0.007158550630900508,
+      0.006849270379448076,
+      0.005582575912309368,
+      0.004141809356844589,
+      0.003495058324255628,
+      0.0029719201048474943,
+      0.0025893799360021787,
+      0.002329920683551198,
+      0.002196556429284677,
+      0.002021881524600581,
+      0.0019656068445896876,
+      0.0019239061365286855,
+      0.0020345052083333335,
+      0.002124502144607843,
+      0.0022739296818264343,
+      0.00218120234204793,
+      0.0022763409472585333,
+      0.0026485268586601304,
+      0.002912950481118373,
+      0.003586402732389252,
+      0.0032859874273783586,
+      0.003450769051833696,
+      0.0035834241103848944,
+      0.003726185207879448
+    ],
+    "first_frame_max_rgb8_error": 1,
+    "first_frame_different_channels": 2645,
+    "same_prediction_pixels_as_previous_resource_removed_control": true,
+    "same_native_pixels_as_previous_resource_removed_control": true
+  },
+  "resource_preserving_artifacts": {
+    "original.milk": "05691c34acec446deba2a40f71cdea773ede9ea6be7d7a9f6a653c4311310aa4",
+    "predict-control.py": "36268a9959b51909d7692a48a634a51d33d26b8704260c2e9d56b1ed21bd7bfc",
+    "capture-control.py": "94f21a3912aa4fcab87e3acb2c8f76e1143b5501eabc4a7edb665f853c0f11d0",
+    "prediction.rgb.u8": "768e4a285ac013fb74fa2a9f7dceec930488acd09d182a4d8f318a0f8519cca1",
+    "native.rgb.u8": "023da0ce4cb297b1e766bcb6993fccd3bec675252131448afe25237fb434815b",
+    "freeze.json": "1a78ad690ce6da9ddc9fa2882e3d504be171fb9964fe2f01fcc0d9c34d905299",
+    "capture.json": "7ce03c13bfef3011ea924aa0b89d6848f637b68555f368d9d3d74a312cae71d6",
+    "comparison.json": "cdfb807828aab4081195d16469709d9f2692067718278831add35c15ef436cda"
+  },
+  "amplified_uv_control": {
+    "scope": "One-frame discontinuous numerical diagnostic, not authored visual defect",
+    "comparison": {
+      "native_mean": [
+        127.09765625,
+        70.6875,
+        0.0
+      ],
+      "native_unique_count": 120,
+      "unsnapped": {
+        "mean_error_rgb8": 65.0574363425926,
+        "max_error_rgb8": 255.0,
+        "different_channels": 53504
+      },
+      "grid8": {
+        "mean_error_rgb8": 23.679832175925927,
+        "max_error_rgb8": 255.0,
+        "different_channels": 32912
+      }
+    },
+    "artifacts": {
+      "original.milk": "c82d8236871f88ffe20ef68dae2760939f53c0cb9e74523beec7e69f5af11b90",
+      "unsnapped.rgb.u8": "f72003ca4af9dc99df24ec80e3a51324015d6d7be8132f0e98e646936d1f7b25",
+      "grid8.rgb.u8": "5f2f8a54f7ebd9b4976770b5f042438cef922515c20d2e306e202db37f61afd7",
+      "native.rgb.u8": "7335fcbf980aa12c50e0bb41688328a8b1ba387e3d8ccc4972df3c2982da4daf",
+      "freeze.json": "950eb32452ef02dd235cacc04e51d30686d0bab66990d60390c78d4421faf062",
+      "capture.json": "e4b94625bff86565733b51e99d7ebd56f3866015c6b4546b56ad29d21ce3641c"
+    }
+  },
+  "unresolved": [
+    "GPU coordinate interpolation and shader arithmetic precision",
+    "First-frame blend/line raster differences",
+    "Nonlinear nearest-sample and recurrent feedback amplification"
+  ],
+  "rejected_repairs": [
+    "Blanket RGBA8 input quantization",
+    "Blanket float16 rounding",
+    "Warp-grid8 alone"
+  ],
+  "next_requirement": "Establish a scoped numeric model with independent controls before changing predictor behavior or rescoring."
+}

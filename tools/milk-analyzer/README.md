@@ -880,3 +880,14 @@ policy preserves archived semantics. Forecast domains may select the new policy
 through `motion_window_policy`; use the same policy for paired comparisons and
 freeze it before capture. Keep old grades unchanged and state uncertainty before
 drafting numerical movement claims.
+
+
+Thirty-frame feedback diagnostics remain separate from acceptance scores.
+The EoS glowsticks control retains the authored blur and gradient resource
+references while displaying raw feedback. Its source and native pixel sequences
+are identical to the earlier resource-removed control; first-frame error is at
+most 1 RGB8 level, followed by feedback divergence. An amplified identity-UV control
+also exposes unresolved low-bit differences; grid8 alone and blanket half
+precision are not established repairs. These controls do not demonstrate an AAR
+bug or change the original 95 score. Exact hashes and numerical outcomes are in
+`fixtures/feedback-precision-resource-controls-2026-10-07.json`.
