@@ -72,6 +72,8 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 
 ## Codebase navigation and knowledge tools
 
+- BrainStain legacy compatibility (2026-10-08): patch 0014 respects authored `fShader` in legacy echo/gamma output and restores mode-1 alpha ×1.25 before clamp and open-strip topology, following MilkDrop 2.25c. Keep custom composite hue behaviour and preset assets unchanged. See [focused evidence](docs/superpowers/evidence/brainstain-dark-output/README.md); predictor agreement alone does not establish MilkDrop correctness. Three independent controls fail before/pass after; 37 normal renderer controls, 329 host controls, both-ABI release builds and 137 JVM tests pass. First-frame black is explained by the authored echo crop despite bright raw feedback. Sanitizers, fresh debug build and external review/release gates remain open at this checkpoint.
+
 - Focused dark-preset investigation: [evidence](docs/superpowers/evidence/dark-presets-06-10/README.md). Keep direct framebuffer coverage tests separate from final-composite brightness tests; one-second cold captures do not prove intended appearance. Keep the release gate’s Native-trails-only validation policy; do not reintroduce the legacy corpus or historical source dependencies.
 - No `.codegraph/` or `graphify-out/` exists at the repository root (checked 2026-10-04). Use `git grep`/`rg`; do not assume a code graph.
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) §5 (threading rules, transitions, resolution, frame pacing, threads, overlay UI, device tiers). Its title says v1.9 and §1–4 and §6–8 are historical analysis; verify against the code. Design specs, plans and evidence for engine work are in `docs/superpowers/{specs,plans,evidence}`.

@@ -1,0 +1,59 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Restore MilkDrop legacy tint and mode-1 waveform semantics
+
+Reference: MilkDrop 2.25c vis_milk2/milkdropfs.cpp, lines 2927-2946,
+3359-3365 and 4117-4144. Respect fShader when mixing legacy hue shading;
+restore the mode-1 alpha multiplier and open spiral topology. Preserve
+authored echo, gamma, darken and waveform equations.
+
+diff --git a/src/libprojectM/MilkdropPreset/VideoEcho.cpp b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+--- a/src/libprojectM/MilkdropPreset/VideoEcho.cpp
++++ b/src/libprojectM/MilkdropPreset/VideoEcho.cpp
+@@ -38,6 +38,8 @@
+                                {-fOnePlusInvWidth * aspectMultX, fOnePlusInvHeight * aspectMultY},
+                                {fOnePlusInvWidth * aspectMultX, fOnePlusInvHeight * aspectMultY}});
+ 
++    // MilkDrop 2.25c leaves legacy output untinted when fShader is disabled.
++    const float shaderAmount = m_presetState.shader;
+     auto& colors = m_echoMesh.Colors();
+     for (int i = 0; i < 4; i++)
+     {
+@@ -52,6 +54,9 @@
+         {
+             m_shade[i][k] /= max;
+             m_shade[i][k] = 0.5f + 0.5f * m_shade[i][k];
++            m_shade[i][k] = shaderAmount > 0.001f
++                                ? m_shade[i][k] * shaderAmount + 1.0f * (1.0f - shaderAmount)
++                                : 1.0f;
+         }
+ 
+         colors[i] = {m_shade[i][0],
+diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
+--- a/src/libprojectM/MilkdropPreset/Waveform.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
+@@ -303,6 +303,12 @@
+         ModulateOpacityByVolume(presetPerFrameContext);
+     }
+ 
++    // MilkDrop mode 1 boosts alpha before the final clamp (milkdropfs.cpp:2930).
++    if (m_mode == WaveformMode::XYOscillationSpiral)
++    {
++        m_tempAlpha *= 1.25f;
++    }
++
+     if (m_tempAlpha < 0.0f)
+     {
+         m_tempAlpha = 0.0f;
+diff --git a/src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.cpp b/src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.cpp
+--- a/src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.cpp
+@@ -8,7 +8,8 @@
+ 
+ auto XYOscillationSpiral::IsLoop() -> bool
+ {
+-    return true;
++    // MilkDrop draws mode 1 as an open line strip, not a closed circle.
++    return false;
+ }
+ 
+ auto XYOscillationSpiral::UsesNormalizedMysteryParam() -> bool
