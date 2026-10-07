@@ -967,3 +967,24 @@ def test_forecast_reports_conditional_q_state_for_its_declared_window(monkeypatc
     assert [state['q']['q32'] for state in trace['states']]==[0,1]
     assert [state['custom']['threshold'] for state in trace['states']]==[.05,.05]
     assert 3 not in result['source_proofs']['untouched_main_q_components']['_qh']
+
+
+def test_forecast_distinguishes_encoded_black_from_a_single_dim_trace(monkeypatch):
+    import forecast
+    binaries=Path(os.environ.get('MILK_TEST_CURRENT_BINARIES',BINARIES))
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    source=native(BASE,binaries=binaries)
+    settings=domain();settings['initial_rgba']=[0,0,0,1]
+    result=forecast.forecast_source(source,audio=audio(1),binaries=binaries,
+                                    domain=settings,compatibility={},retain_surfaces=False)
+    visibility=result['frames'][0]['visibility']
+    assert visibility['uniformly_black_rgb8'] is True
+    assert visibility['peak_rgb8']==0
+    assert visibility['nonzero_rgb8_pixels']==0
+    assert result['visibility_frames'][0]['nonzero_rgb8_pixels']==0
+    assert result['visibility_frames'][0]['frame']==0
+    dim=np.zeros((2,2,4),np.float32);dim[1,1,0]=1/255
+    facts=forecast.display_visibility(dim)
+    assert facts['uniformly_black_rgb8'] is False
+    assert facts['peak_rgb8']==1
+    assert facts['nonzero_rgb8_pixels']==1

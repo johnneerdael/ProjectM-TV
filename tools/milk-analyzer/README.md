@@ -1468,3 +1468,9 @@ Original sound-reactive SOL/LUNA examples and the patch0010 host ownership witne
 are in `witnesses/patch-0010-aurora/README.md`. Their new source creations have
 separate published-AAR creation checks and engine-source patch ablations; neither
 grants randomized-streak credit.
+
+Source forecasts export `visibility_frames` with exact encoded-RGB8 peak and
+nonzero-pixel counts. An all-zero frame must be described as uniformly black;
+nonzero samples do not establish human-visible or trackable motion. The
+randomized description freezer generates its first-frame statement from these
+facts before native capture, preventing guesses about faint traces.

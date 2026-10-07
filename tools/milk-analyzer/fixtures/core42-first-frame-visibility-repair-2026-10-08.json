@@ -1,0 +1,15 @@
+{
+  "preset": "BrainStain- boiling-mix2(redi jedi full carb mix).milk",
+  "preset_sha256": "fb9465f0f3d78d9fc32c473f0163c443bbadbbc2855ead1bd020689ee9601019",
+  "original_score": 97.5,
+  "miss": "Narrativeclaimedfirstframecolouredtraces whileboth source/native RGBwereuniformzero",
+  "repair": "ExactsourceencodedRGB8facts exportedperframe/topreport;firstcaption generatedfromfacts;nonzeronotclaimedhumanvisible",
+  "rendering_math_changed": false,
+  "prediction/native30framearrays_unchanged": true,
+  "test_black_and_one_dim_pixel": true,
+  "prepared_suite": "1492tests+78subtestspass",
+  "earlier_invalid_suite": "Sourceeditduringruntrippedmodel-hashguard;preservedandrerunafterterminalwithfrozencode",
+  "retrospective_credit": 0,
+  "research_scope": "Separatepossibleauthored/nativebrightnessissue documented inDownloads;notconfirmedAARbug",
+  "review": "Independentreviewclear;retrospective20claimsfull/score100/zerofreshcredit"
+}

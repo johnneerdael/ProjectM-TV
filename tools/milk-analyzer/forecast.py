@@ -157,6 +157,19 @@ def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
     return result
 
 
+def display_visibility(display):
+    """Exact encoded RGB8 facts; nonzero does not imply perceptual visibility."""
+    values=np.asarray(display,dtype=np.float32)
+    if values.ndim!=3 or values.shape[-1]!=4 or not np.all(np.isfinite(values)):
+        raise ValueError('finite RGBA display field required for visibility facts')
+    rgb8=np.rint(np.clip(values[...,:3],0,1)*np.float32(255)).astype(np.uint8)
+    count=int(np.count_nonzero(np.any(rgb8!=0,axis=-1)))
+    return dict(basis='source-predicted-encoded-rgb8',peak_rgb8=int(rgb8.max()),
+                nonzero_rgb8_pixels=count,total_pixels=int(rgb8.shape[0]*rgb8.shape[1]),
+                uniformly_black_rgb8=count==0,
+                limitation='Nonzero encoded samples do not prove human-visible or trackable motion')
+
+
 def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     compatibility: dict, random_inputs=None, noise_bank=None, materials=None,
                     retain_surfaces=True, on_frame=None, motion_uv_sampler=None) -> dict:
@@ -423,7 +436,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             motion_state=main,draw_scene=draw,render_time=render_time,
             hue_offsets=hue.tolist(),external_sample=None if texture_bank is None else sample_external)
         predicted = dict(frame=frame['render_inputs']['frame'],time=render_time,
-                         display=result.display,feedback=result.feedback,warp_uv=mesh['uv'],history=result.history)
+                         display=result.display,feedback=result.feedback,warp_uv=mesh['uv'],history=result.history,
+                         visibility=display_visibility(result.display))
         if unused_warp_uv_domain is not None:
             predicted['history']['unused_warp_uv_domain']=unused_warp_uv_domain
         descriptors.add(predicted)
@@ -437,6 +451,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('forecast sampled material inputs changed during evaluation')
     report = dict(status='computed',frames=frames,domain=domain,stage_resolution=pipeline.stage_resolution,
         feature_basis=SIMULATED,geometry_features=geometry_features,
+        visibility_frames=[dict(frame=frame['frame'],time=frame['time'],**frame['visibility']) for frame in frames],
         source_proofs=dict(basis='source-equation-write-analysis',
             untouched_main_q_components=copy.deepcopy(pipeline.known_uniform_components),
             scope='Proven untouched components under the declared equation loader; absent components are not proven constant',
