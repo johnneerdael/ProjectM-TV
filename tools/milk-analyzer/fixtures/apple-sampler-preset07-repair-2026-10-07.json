@@ -1,0 +1,22 @@
+{
+  "original_preset_sha256": "5f2e3c5732513d8f2c14a6c6dd2255fc38e1f7034a1906dc02726e47fc8585ad",
+  "original_score": 95,
+  "learning_retest_score": 100,
+  "fresh_random_credit": false,
+  "source_pixels_identical_to_reviewed_prototype": true,
+  "native_pixels_identical_to_reviewed_prototype": true,
+  "suite": "1380tests+78subtests pass",
+  "normal_api_no_global_rebinding": true,
+  "artifacts": {
+    "original.milk": "5f2e3c5732513d8f2c14a6c6dd2255fc38e1f7034a1906dc02726e47fc8585ad",
+    "predict-control.py": "8544cd35ae2cc549a4a944991045c8c6e988302578960c0eb28855c2e4f63a79",
+    "domain.json": "6d6b08ad8d37c5290130cc6150439dae73d85fe6a05959798c4919618bd15c72",
+    "prediction-math.json": "faeeb1d8edbaeeacdcbbaee063ba033fe3f4dd110974e2bbf5ef5c1a6a6482de",
+    "prediction-description.json": "fa7467e28c797ed9e8655e34038f7ce52b469414fff868aedf7530cdbff13d88",
+    "prediction.rgb.u8": "72c0d47361ad739a6a9c83f6bfcff15badccc3e32baa623ccecdc0d35035f748",
+    "native.rgb.u8": "cc6c9a51c75bc5fcba8376a12cf85cd36f7c31628d48cb642485551c91d4d129",
+    "capture.json": "609f9a9399285df06201e00c71d5dcc98ab0a2591ff470fdaa24cf38a1472d78",
+    "freeze.json": "b30ded9aa794a59b7a68a6561e077ff2c54fa79e28630fe4a24644ebe5ae445d",
+    "assessment.json": "2627fc5f1c8ac558f22493a0821c23fe14b263a50fdde09d102e070b229e0ae0"
+  }
+}

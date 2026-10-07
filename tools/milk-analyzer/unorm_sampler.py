@@ -1,4 +1,4 @@
-"""Explicit SwiftShader UNORM8 2D addressing/filter arithmetic.
+"""Explicit driver profiles for UNORM8 2D addressing/filter arithmetic.
 
 Validated against float readbacks on the recorded emulator. This is a named
 numerical profile, not portable GPU equivalence or support for float/sRGB images.
@@ -6,6 +6,50 @@ numerical profile, not portable GPU equivalence or support for float/sRGB images
 import numpy as np
 
 PROFILE='swiftshader-unorm8-fixed16-v1'
+APPLE_PROFILE='apple-m4pro-gles-unorm8-fixed8-fraction4-v1'
+
+
+def sampler_2d(profile):
+    if profile==APPLE_PROFILE:return sample_apple_unorm8
+    if profile=='portable':
+        from spatial import sample2d
+        return sample2d
+    raise ValueError('unsupported texture sampling profile')
+
+
+def sample_apple_unorm8(texture,uv,*,wrap:bool,linear:bool,origin:str):
+    """Apply the observed Apple emulator's 2D UNORM8 sampler arithmetic.
+
+    Fractions round to eight bits; filtered byte values round to four fractional
+    bits. Both exact half-way rules round upward. This is an explicit driver
+    profile, not a portable texture-language rule or support for float/sRGB.
+    """
+    field=np.asarray(texture,dtype=np.float32);coords=np.asarray(uv,dtype=np.float32)
+    if (field.ndim!=3 or field.shape[-1] not in (3,4) or min(field.shape[:2])<1 or
+            max(field.shape[:2])>32768 or coords.shape[-1:]!=(2,) or
+            not np.all(np.isfinite(field)) or not np.all(np.isfinite(coords))):
+        raise ValueError('finite RGB/RGBA unorm texture and two-component coordinates required')
+    if origin not in ('top','bottom') or type(wrap) is not bool or type(linear) is not bool:
+        raise ValueError('explicit sampling origin/wrap/filter required')
+    packed=np.rint(field*255)
+    if np.any((packed<0)|(packed>255)) or not np.allclose(field,packed/255,rtol=0,atol=1e-7):
+        raise ValueError('actual unorm8 texels required for Apple sampler profile')
+    height,width=field.shape[:2]
+    coords=np.mod(coords,1) if wrap else np.clip(coords,0,1)
+    query=coords*np.array([width,height],dtype=np.float32)
+    def fetch(x,y):
+        x=np.mod(x,width) if wrap else np.clip(x,0,width-1)
+        y=np.mod(y,height) if wrap else np.clip(y,0,height-1)
+        if origin=='bottom':y=height-1-y
+        return packed[y,x]
+    if not linear:
+        index=np.floor(query).astype(np.int64)
+        return (fetch(index[...,0],index[...,1])/255).astype(np.float32)
+    query-=np.float32(.5);index=np.floor(query).astype(np.int64)
+    fraction=np.floor((query-index)*256+.5).astype(np.float32)/256
+    x,y=index[...,0],index[...,1];fx,fy=fraction[...,0,None],fraction[...,1,None]
+    raw=(fetch(x,y)*(1-fx)+fetch(x+1,y)*fx)*(1-fy)+(fetch(x,y+1)*(1-fx)+fetch(x+1,y+1)*fx)*fy
+    return (np.floor(raw*16+.5)/16/255).astype(np.float32)
 
 
 def sample_unorm8(texture,uv,*,wrap:bool,linear:bool,origin:str):

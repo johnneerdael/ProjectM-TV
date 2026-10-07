@@ -68,7 +68,11 @@ def native_ranges(minimum,maximum,*,policy=LEGACY_BLUR):
 
 
 def blur_bank(source,*,levels:int,minimum=(0,0,0),maximum=(1,1,1),
-              edge_darken:float=0,quantize:bool=True,policy=LEGACY_BLUR)->dict[int,np.ndarray]:
+              edge_darken:float=0,quantize:bool=True,policy=LEGACY_BLUR,sampling_profile='portable')->dict[int,np.ndarray]:
+    from unorm_sampler import sampler_2d
+    sample=sampler_2d(sampling_profile)
+    if sampling_profile!='portable' and not quantize:
+        raise ValueError('texture profile requires actual unorm blur storage')
     field=np.asarray(source,dtype=np.float32)
     if field.ndim!=3 or field.shape[2]!=3 or min(field.shape[:2])<=0 or not np.all(np.isfinite(field)):
         raise ValueError('finite RGB feedback source required')
@@ -102,15 +106,15 @@ def blur_bank(source,*,levels:int,minimum=(0,0,0),maximum=(1,1,1),
             uv=uv+np.array([1/source_width,1/source_height],dtype=np.float32)
             for weight,offset in zip(horizontal,horizontal_offset):
                 delta=np.array([offset/source_width,0],dtype=np.float32)
-                output+=(sample2d(field,uv+delta,wrap=False,linear=True,origin='bottom')+
-                         sample2d(field,uv-delta,wrap=False,linear=True,origin='bottom'))*weight
+                output+=(sample(field,uv+delta,wrap=False,linear=True,origin='bottom')+
+                         sample(field,uv-delta,wrap=False,linear=True,origin='bottom'))*weight
             output*=np.float32(.5)/horizontal.sum()
             output=output*scales[index//2]+biases[index//2]
         else:
             for weight,offset in zip(vertical,vertical_offset):
                 delta=np.array([0,offset/source_height],dtype=np.float32)
-                output+=(sample2d(field,uv+delta,wrap=False,linear=True,origin='bottom')+
-                         sample2d(field,uv-delta,wrap=False,linear=True,origin='bottom'))*weight
+                output+=(sample(field,uv+delta,wrap=False,linear=True,origin='bottom')+
+                         sample(field,uv-delta,wrap=False,linear=True,origin='bottom'))*weight
             output*=np.float32(1)/(vertical.sum()*2)
             if index==1:
                 t=np.minimum(np.minimum(u,v),1-np.maximum(u,v))

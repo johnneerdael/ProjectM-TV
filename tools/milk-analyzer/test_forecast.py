@@ -35,6 +35,27 @@ def audio(count=3):
     return result
 
 
+def test_declared_texture_profile_reaches_pipeline_without_mutating_global_sampling(monkeypatch):
+    import forecast
+    import spatial
+    from unorm_sampler import APPLE_PROFILE
+    from shader_compat import check_shader
+    source=native(BASE+'comp_1=`shader_body {ret=.4;}\n')
+    original=forecast.SourcePipeline.from_source;sampler=spatial.sample2d;seen=[]
+    def observe(*args,**kwargs):
+        seen.append(kwargs.get('texture_sampling_profile'))
+        return original(*args,**kwargs)
+    monkeypatch.setattr(forecast.SourcePipeline,'from_source',observe)
+    settings=domain();settings.update(profile='gles300',quantize=True,texture_sampling_profile=APPLE_PROFILE)
+    evidence={'composite':check_shader(source['sections']['comp_']['source'],stage='composite',
+        profile='gles300',translator=BINARIES/'milk-shader-translate',validator=validator_path(),
+        samplers={'sampler_main':'sampler2D'},texture_sizes=[])}
+    result=predict(source,audio=audio(1),domain=settings,compatibility=evidence)
+    assert result['status']=='computed'
+    assert seen==[APPLE_PROFILE]
+    assert spatial.sample2d is sampler
+
+
 def compatibility(source):
     return {stage: test_shader_compat.ShaderCompatibilityTest().check(source['sections'][prefix]['source'], stage=stage)
             for stage, prefix in [('warp','warp_'),('composite','comp_')]

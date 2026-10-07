@@ -208,6 +208,11 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('source parser binary identity mismatch')
     width, height = domain['width'], domain['height']
     shader_numeric_policy=domain.get('shader_numeric_policy','strict')
+    texture_sampling_profile=domain.get('texture_sampling_profile','portable')
+    from unorm_sampler import sampler_2d
+    sample_texture_2d=sample2d if texture_sampling_profile=='portable' else sampler_2d(texture_sampling_profile)
+    if texture_sampling_profile!='portable' and domain['profile']!='gles300':
+        raise ValueError('observed texture profile requires declared GLES300 context')
     if shader_numeric_policy!='strict' and domain['profile']!='gles300':
         raise ValueError('highp shader numeric policy requires GLES300')
     initial = np.broadcast_to(colour,(height,width,4)).copy()
@@ -221,7 +226,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         initial_feedback=initial, warp_reads_blur=warp_reads_blur, blur_levels=domain['blur_levels'],
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
-        main_sampling_profile=domain.get('main_sampling_profile','portable'),shader_numeric_policy=shader_numeric_policy)
+        main_sampling_profile=domain.get('main_sampling_profile','portable'),shader_numeric_policy=shader_numeric_policy,
+        texture_sampling_profile=texture_sampling_profile)
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
@@ -239,6 +245,9 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         if procedural.upload_format!=expected_upload:
             raise ValueError('procedural material upload profile mismatch')
     material_uniforms={} if texture_bank is None else texture_bank.uniforms()
+    def sample_external(detail,coordinates):
+        if texture_sampling_profile=='portable':return texture_bank.sample(detail,coordinates)
+        return texture_bank.sample(detail,coordinates,sampling_profile=texture_sampling_profile)
     # Lookup names are case-insensitive; generated uniform identifiers retain
     # their original spelling and sampler qualifiers.
     if texture_bank is not None:
@@ -319,10 +328,10 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     if texture_bank.textures[name].ndim!=3:
                         raise ValueError('source shape image must be a two-dimensional texture')
                     detail={'canonical_texture':name,'sampling_policy':{'wrap':policy['wrap'],'linear':policy['linear']}}
-                    textures[binding_key]=lambda uv, detail=detail:texture_bank.sample(detail,uv)
+                    textures[binding_key]=lambda uv, detail=detail:sample_external(detail,uv)
                     texture_aspects[shape_index]=1
                 else:
-                    textures[binding_key]=lambda uv, mode=modes[ordinal]:sample2d(previous_main,uv,wrap=mode['wrap'],linear=mode['linear'],origin='top')
+                    textures[binding_key]=lambda uv, mode=modes[ordinal]:sample_texture_2d(previous_main,uv,wrap=mode['wrap'],linear=mode['linear'],origin='top')
             return draw_source_scene(destination,source,frame,builtin['frames'][index],custom['frames'][index],
                 quantize=domain['quantize'],shape_textures=textures,shape_texture_aspects=texture_aspects,
                 motion_vectors_prewarped=True,line_rendering_profile=line_profile,
@@ -334,7 +343,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             minimum=[main[f'blur{i}_min'] for i in range(1,4)],
             maximum=[main[f'blur{i}_max'] for i in range(1,4)],edge_darken=main['blur1_edge_darken'],
             motion_state=main,draw_scene=draw,render_time=render_time,
-            hue_offsets=hue.tolist(),external_sample=None if texture_bank is None else texture_bank.sample)
+            hue_offsets=hue.tolist(),external_sample=None if texture_bank is None else sample_external)
         predicted = dict(frame=frame['render_inputs']['frame'],time=render_time,
                          display=result.display,feedback=result.feedback,warp_uv=mesh['uv'],history=result.history)
         if unused_warp_uv_domain is not None:

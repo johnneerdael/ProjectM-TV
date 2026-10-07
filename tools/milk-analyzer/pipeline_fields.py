@@ -45,7 +45,7 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable'):
         if shader_numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise ValueError('unsupported shader numeric policy')
         if shader_numeric_policy==GLES_HIGHP_INFINITY and coordinate_profile!='strict':raise ValueError('unsupported mixed shader numeric/coordinate policies')
         self.shader_numeric_policy=shader_numeric_policy
@@ -69,10 +69,15 @@ class SourcePipeline:
         self.feedback=field.copy();self.frame=0;self.warp_reads_blur=warp_reads_blur
         self.motion_uv=None;self.motion_uv_frame=None
         self.blur_levels=blur_levels;self.quantize=quantize
-        from unorm_sampler import PROFILE
+        from unorm_sampler import PROFILE,sampler_2d
         if main_sampling_profile not in ('portable',PROFILE) or (main_sampling_profile==PROFILE and not quantize):
             raise ValueError('supported main sampling profile with actual unorm storage required')
         self.main_sampling_profile=main_sampling_profile
+        self.sample_2d=sampler_2d(texture_sampling_profile)
+        if texture_sampling_profile!='portable' and (not quantize or main_sampling_profile!='portable'):
+            raise ValueError('texture profile requires unorm storage and no conflicting main profile')
+        self.texture_sampling_profile=texture_sampling_profile
+        if texture_sampling_profile!='portable':self.main_sampling_profile=texture_sampling_profile
         from sampling_policy import main_sampler_bindings
         main_sampler_bindings([],stage='warp',frame_wrap=None,policy=main_binding_policy)
         self.main_binding_policy=main_binding_policy
@@ -94,6 +99,8 @@ class SourcePipeline:
 
     @classmethod
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
+        if kwargs.get('texture_sampling_profile','portable')!='portable' and profile!='gles300':
+            raise ValueError('observed texture profile requires declared GLES300 context')
         if kwargs.get('shader_numeric_policy','strict')!='strict' and profile!='gles300':
             raise ValueError('highp shader numeric policy requires GLES300')
         if kwargs.get('coordinate_profile','strict')!='strict' and profile!='glsl330':
@@ -153,7 +160,7 @@ class SourcePipeline:
     def _sample_main(self,field,uv,*,wrap,linear):
         from unorm_sampler import PROFILE,sample_unorm8
         if self.main_sampling_profile==PROFILE:return sample_unorm8(field,uv,wrap=wrap,linear=linear,origin='top')
-        return sample2d(field,uv,wrap=wrap,linear=linear,origin='top')
+        return self.sample_2d(field,uv,wrap=wrap,linear=linear,origin='top')
 
     def step(self,*,warp_uv,uniforms:dict,frame_wrap:float,stage_uniforms=None,minimum=(0,0,0),maximum=(1,1,1),
              edge_darken:float=0,warp_polar=None,composite_polar=None,draw=None,draw_scene=None,
@@ -196,7 +203,8 @@ class SourcePipeline:
         def update_blur():
             if not self.blur_levels:return {}
             return blur_bank(previous[...,:3],levels=self.blur_levels,minimum=minimum,
-                             maximum=maximum,edge_darken=edge_darken,quantize=self.quantize,policy=self.blur_range_policy)
+                             maximum=maximum,edge_darken=edge_darken,quantize=self.quantize,policy=self.blur_range_policy,
+                             sampling_profile=self.texture_sampling_profile)
         old_blur=self.blur;warp_blur_frame=self.blur_source_frame
         if not self.warp_reads_blur:
             old_blur=update_blur();warp_blur_frame=self.frame-1
@@ -228,7 +236,7 @@ class SourcePipeline:
                 if texture in {'blur1','blur2','blur3'}:
                     level=int(texture[-1])
                     if level not in blur:raise UnresolvedMath('required blur level was not supplied')
-                    sampled=sample2d(blur[level],sample_uv,wrap=False,linear=True,origin='bottom')
+                    sampled=self.sample_2d(blur[level],sample_uv,wrap=False,linear=True,origin='bottom')
                     return np.concatenate((sampled,np.ones(sampled.shape[:-1]+(1,),dtype=np.float32)),axis=-1)
                 if external_sample is None:raise UnresolvedMath('external texture input missing: '+texture)
                 return external_sample(detail,sample_uv)
@@ -262,7 +270,8 @@ class SourcePipeline:
             from legacy_composite import legacy_display
             displayed=legacy_display(drawn,values=self.source_values,time=time,
                                      hue_offsets=hue_offsets,quantize=self.quantize,
-                                     main=motion_state,control_policy=self.legacy_control_policy)
+                                     main=motion_state,control_policy=self.legacy_control_policy,
+                                     sampling_profile=self.texture_sampling_profile)
         elif self.composite_tree is None:
             displayed=self._rgba(self._sample_main(drawn,composite_uv,wrap=True,linear=True)[...,:3])
         else:displayed=self._rgba(stage(self.composite_tree,'composite',drawn,new_blur,composite_uv,composite_polar,composite.get('diffuse')))
@@ -273,6 +282,7 @@ class SourcePipeline:
                  'composite_kind':self.composite_kind}
         history['motion_vector_source_frame']=motion_source_frame
         history['main_sampling_profile']=self.main_sampling_profile
+        if self.texture_sampling_profile!='portable':history['texture_sampling_profile']=self.texture_sampling_profile
         history['composite_subpixel_bits']=self.composite_mesh.get('raster_subpixel_bits') if self.composite_kind!='legacy_composite' else None
         result=PipelineResult(self.frame,warped.copy(),drawn.copy(),displayed,history)
         # Commit only after both shader stages succeed; failed evaluation must

@@ -69,12 +69,16 @@ class NoiseBank:
         return {'texsize_'+name:[row['dimensions'][0],row['dimensions'][1],1/row['dimensions'][0],1/row['dimensions'][1]]
                 for name,row in self.manifest['textures'].items()}
 
-    def sample(self,detail:dict,coordinates:np.ndarray)->np.ndarray:
+    def sample(self,detail:dict,coordinates:np.ndarray,*,sampling_profile='portable')->np.ndarray:
+        from unorm_sampler import sampler_2d
+        sample=sampler_2d(sampling_profile)
         name=detail['canonical_texture'];policy=detail['sampling_policy']
         if name not in self.textures:raise ValueError('procedural texture input missing: '+name)
         if policy.get('wrap') is None or policy.get('linear') is None:raise ValueError('procedural sampler policy unresolved')
         texture=self.textures[name]
-        if texture.ndim==4:return sample3d(texture,coordinates,wrap=policy['wrap'],linear=policy['linear'])
+        if texture.ndim==4:
+            if sampling_profile!='portable':raise ValueError('declared texture profile supports only2D inputs')
+            return sample3d(texture,coordinates,wrap=policy['wrap'],linear=policy['linear'])
         # Raw generator row0 is normalized GL-v0; sample2d's top-origin option
         # maps coordinates directly to array rows without a framebuffer flip.
-        return sample2d(texture,coordinates,wrap=policy['wrap'],linear=policy['linear'],origin='top')
+        return sample(texture,coordinates,wrap=policy['wrap'],linear=policy['linear'],origin='top')

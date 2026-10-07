@@ -900,3 +900,28 @@ and caller values cannot replace it. Unknown external/blur size inputs and
 high-resolution shader-canvas overrides retain their existing guards. See
 `fixtures/main-texture-size-repair-2026-10-07.json` for the regression and
 published-AAR control identities. The fix grants no credit to archived forecasts.
+
+
+The opt-in `texture_sampling_profile` value
+`apple-m4pro-gles-unorm8-fixed8-fraction4-v1` models observed two-dimensional
+UNORM8 sampling on the Android Emulator OpenGL ES Translator for Apple M4 Pro.
+Coordinate fractions round to eight bits; filtered raw byte values round to
+four fractional bits, with exact half-way values rounding upward in both steps.
+Fresh four-corner tests matched all 32 frozen packed values; additional controls
+established both tie rules. Isolated shader tests are joined to eight samples
+from the unchanged full published 2.3.16 AAR; they are not a replacement AAR.
+
+Forecasts must declare GLES300 and quantized feedback to select this profile.
+It applies consistently to main, blur, named/procedural 2D textures, textured
+shapes and legacy echo reads. Floating-point textures and 3D volume lookups are
+not qualified by this profile and remain rejected when it is selected. Portable
+and historical SwiftShader defaults retain their existing meanings. Pipeline
+history records the effective main and texture sampling profiles. This observed
+driver model is not a portable language rule or a high-resolution certificate.
+
+The original EoS glowsticks 30-frame result remains 95. A learning repair retest
+with this sampler model and grid8 warp interpolation independently scored 100:
+median motion error 2.83%, p95 error 1.03%, and exact flash-event timing matched.
+Mean RGB error fell from 0.01697 to 0.00073; isolated pixel differences remain.
+The repair earns no fresh randomized-run credit. See
+`fixtures/apple-gles-sampler-learning-2026-10-07.json` for numerical evidence.

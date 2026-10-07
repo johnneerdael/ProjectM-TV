@@ -14,6 +14,30 @@ ROOT=Path(__file__).resolve().parents[2]
 BINARY=Path(os.environ.get('MILK_NATIVE_NOISE_BINARY',ROOT/'build/milk-analyzer/native/milk-noise-inputs'))
 
 
+def test_apple_profile_routes_noise_and_delegated_materials_and_rejects_volume(tmp_path):
+    from noise_inputs import NoiseBank
+    from materials import MaterialBank
+    from test_materials import BINARY as decoder
+    from unorm_sampler import APPLE_PROFILE
+    pixels=np.array([[[0,0,0,255],[8,0,8,255]],[[0,8,8,255],[8,8,0,255]]],np.uint8)
+    textures={}
+    for name,payload,dims in [('noise_lq',pixels.tobytes(),[2,2,1]),
+                              ('noisevol_hq',pixels.tobytes()*2,[2,2,2])]:
+        (tmp_path/(name+'.bin')).write_bytes(payload)
+        textures[name]={'file':name+'.bin','dimensions':dims,'sha256':hashlib.sha256(payload).hexdigest()}
+    (tmp_path/'manifest.json').write_text(json.dumps({'schema_version':1,'uses_rendered_reference':False,
+        'packed_word_encoding':'uint32 little endian','native_upload_format':'RGBA','textures':textures}))
+    noise=NoiseBank(tmp_path);materials=MaterialBank([],decoder=decoder,noise_bank=noise)
+    uv=np.array([[.25+.5/256/2,.25]],np.float32)
+    detail={'canonical_texture':'noise_lq','sampling_policy':{'wrap':True,'linear':True}}
+    for bank in [noise,materials]:
+        values=bank.sample(detail,uv,sampling_profile=APPLE_PROFILE)
+        assert int(np.floor(values[0,0]*16777216))==4112
+        volume={**detail,'canonical_texture':'noisevol_hq'}
+        with pytest.raises(ValueError,match='2D'):
+            bank.sample(volume,[[.5,.5,.5]],sampling_profile=APPLE_PROFILE)
+
+
 class NoiseInputsTest(unittest.TestCase):
     def test_packed_channels_follow_declared_upload_format(self):
         module=importlib.import_module('noise_inputs')

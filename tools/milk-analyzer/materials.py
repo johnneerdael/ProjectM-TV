@@ -72,10 +72,14 @@ class MaterialBank:
             result['texsize_'+name]=[row['width'],row['height'],1/row['width'],1/row['height']]
         return result
 
-    def sample(self, detail, coordinates):
+    def sample(self, detail, coordinates,*,sampling_profile='portable'):
+        from unorm_sampler import sampler_2d
+        sample=sampler_2d(sampling_profile)
         name=detail['canonical_texture'].lower();policy=detail['sampling_policy']
         if name not in self.textures:raise ValueError('source texture input missing: '+name)
         if name not in self.manifest['images']:
-            return self.noise_bank.sample({**detail,'canonical_texture':name},coordinates)
+            if sampling_profile=='portable':
+                return self.noise_bank.sample({**detail,'canonical_texture':name},coordinates)
+            return self.noise_bank.sample({**detail,'canonical_texture':name},coordinates,sampling_profile=sampling_profile)
         if policy.get('wrap') is None or policy.get('linear') is None:raise ValueError('source texture sampler unresolved')
-        return sample2d(self.textures[name],coordinates,wrap=policy['wrap'],linear=policy['linear'],origin='top')
+        return sample(self.textures[name],coordinates,wrap=policy['wrap'],linear=policy['linear'],origin='top')

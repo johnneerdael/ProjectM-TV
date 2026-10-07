@@ -65,7 +65,11 @@ def apply_filters(field,values,*,quantize,main=None,control_policy=LEGACY_DISPLA
     return result
 
 
-def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,control_policy=LEGACY_DISPLAY):
+def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,control_policy=LEGACY_DISPLAY,sampling_profile='portable'):
+    from unorm_sampler import sampler_2d
+    sample=sampler_2d(sampling_profile)
+    if sampling_profile!='portable' and not quantize:
+        raise ValueError('texture profile requires actual unorm feedback storage')
     if control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy display policy')
     live=control_policy==CORE_2315_DISPLAY
     source=np.asarray(feedback,dtype=np.float32)
@@ -107,7 +111,7 @@ def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,co
         if pass_index==1:
             if orientation%2==1 and orientation>0:uv[...,0]=1-uv[...,0]
             if orientation>=2:uv[...,1]=1-uv[...,1]
-        sampled=sample2d(source,uv,wrap=False,linear=True,origin='top')
+        sampled=sample(source,uv,wrap=False,linear=True,origin='top')
         for weight in weights:
             colour=np.concatenate((colours*np.float32(mix)*np.float32(weight),
                                    np.ones((height,width,1),dtype=np.float32)),axis=-1)

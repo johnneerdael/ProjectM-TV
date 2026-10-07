@@ -1,0 +1,946 @@
+{
+  "profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-v1",
+  "scope": "Observed Android Emulator OpenGL ES Translator Apple M4 Pro; UNORM8 2D only, not portable or preset appearance credit",
+  "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "coordinate_fraction_bits": 8,
+  "filtered_raw_byte_fraction_bits": 4,
+  "tie_rule": "half_up",
+  "dimensions": [
+    256,
+    144
+  ],
+  "corners": [
+    [
+      15,
+      132,
+      221,
+      17
+    ],
+    [
+      73,
+      245,
+      21,
+      219
+    ],
+    [
+      214,
+      79,
+      111,
+      61
+    ],
+    [
+      129,
+      25,
+      168,
+      187
+    ]
+  ],
+  "cases": [
+    {
+      "case": 1,
+      "phase": [
+        0.091,
+        0.137
+      ],
+      "fraction": [
+        0.08984375,
+        0.13671875
+      ],
+      "raw": [
+        45.66145324707031,
+        132.8549346923828,
+        191.1490020751953,
+        40.23052978515625
+      ],
+      "rounded_raw": [
+        45.6875,
+        132.875,
+        191.125,
+        40.25
+      ],
+      "predicted_values": [
+        0.17916665971279144,
+        0.5210784077644348,
+        0.7495098114013672,
+        0.15784314274787903
+      ],
+      "predicted_packed_bits": [
+        3005917,
+        8742245,
+        12574688,
+        2648168
+      ]
+    },
+    {
+      "case": 2,
+      "phase": [
+        0.419,
+        0.359
+      ],
+      "fraction": [
+        0.41796875,
+        0.359375
+      ],
+      "raw": [
+        89.27813720703125,
+        135.09893798828125,
+        136.47833251953125,
+        105.826416015625
+      ],
+      "rounded_raw": [
+        89.25,
+        135.125,
+        136.5,
+        105.8125
+      ],
+      "predicted_values": [
+        0.3499999940395355,
+        0.5299019813537598,
+        0.5352941155433655,
+        0.414950966835022
+      ],
+      "predicted_packed_bits": [
+        5872025,
+        8890280,
+        8980745,
+        6961722
+      ]
+    },
+    {
+      "case": 3,
+      "phase": [
+        0.677,
+        0.853
+      ],
+      "fraction": [
+        0.67578125,
+        0.8515625
+      ],
+      "raw": [
+        141.36404418945312,
+        67.12698364257812,
+        140.06765747070312,
+        147.2408447265625
+      ],
+      "rounded_raw": [
+        141.375,
+        67.125,
+        140.0625,
+        147.25
+      ],
+      "predicted_values": [
+        0.554411768913269,
+        0.26323530077934265,
+        0.5492647290229797,
+        0.5774509906768799
+      ],
+      "predicted_packed_bits": [
+        9301486,
+        4416355,
+        9215133,
+        9688020
+      ]
+    },
+    {
+      "case": 4,
+      "phase": [
+        0.947,
+        0.983
+      ],
+      "fraction": [
+        0.9453125,
+        0.984375
+      ],
+      "raw": [
+        132.6512451171875,
+        31.2479248046875,
+        162.8055419921875,
+        180.54443359375
+      ],
+      "rounded_raw": [
+        132.625,
+        31.25,
+        162.8125,
+        180.5625
+      ],
+      "predicted_values": [
+        0.5200980305671692,
+        0.12254901975393295,
+        0.6384803652763367,
+        0.708088219165802
+      ],
+      "predicted_packed_bits": [
+        8725797,
+        2056031,
+        10711923,
+        11879749
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "precision": "default",
+      "axis": 0,
+      "case": 1,
+      "sample_value": 0.17916661500930786,
+      "packed_bits": 3005917
+    },
+    {
+      "precision": "default",
+      "axis": 0,
+      "case": 2,
+      "sample_value": 0.34999996423721313,
+      "packed_bits": 5872025
+    },
+    {
+      "precision": "default",
+      "axis": 0,
+      "case": 3,
+      "sample_value": 0.554411768913269,
+      "packed_bits": 9301486
+    },
+    {
+      "precision": "default",
+      "axis": 0,
+      "case": 4,
+      "sample_value": 0.5200980305671692,
+      "packed_bits": 8725797
+    },
+    {
+      "precision": "default",
+      "axis": 1,
+      "case": 1,
+      "sample_value": 0.5210784077644348,
+      "packed_bits": 8742245
+    },
+    {
+      "precision": "default",
+      "axis": 1,
+      "case": 2,
+      "sample_value": 0.5299019813537598,
+      "packed_bits": 8890280
+    },
+    {
+      "precision": "default",
+      "axis": 1,
+      "case": 3,
+      "sample_value": 0.26323527097702026,
+      "packed_bits": 4416355
+    },
+    {
+      "precision": "default",
+      "axis": 1,
+      "case": 4,
+      "sample_value": 0.12254899740219116,
+      "packed_bits": 2056031
+    },
+    {
+      "precision": "default",
+      "axis": 2,
+      "case": 1,
+      "sample_value": 0.7495098114013672,
+      "packed_bits": 12574688
+    },
+    {
+      "precision": "default",
+      "axis": 2,
+      "case": 2,
+      "sample_value": 0.5352941155433655,
+      "packed_bits": 8980745
+    },
+    {
+      "precision": "default",
+      "axis": 2,
+      "case": 3,
+      "sample_value": 0.5492647290229797,
+      "packed_bits": 9215133
+    },
+    {
+      "precision": "default",
+      "axis": 2,
+      "case": 4,
+      "sample_value": 0.6384803652763367,
+      "packed_bits": 10711923
+    },
+    {
+      "precision": "default",
+      "axis": 3,
+      "case": 1,
+      "sample_value": 0.15784311294555664,
+      "packed_bits": 2648168
+    },
+    {
+      "precision": "default",
+      "axis": 3,
+      "case": 2,
+      "sample_value": 0.414950966835022,
+      "packed_bits": 6961722
+    },
+    {
+      "precision": "default",
+      "axis": 3,
+      "case": 3,
+      "sample_value": 0.5774509906768799,
+      "packed_bits": 9688020
+    },
+    {
+      "precision": "default",
+      "axis": 3,
+      "case": 4,
+      "sample_value": 0.708088219165802,
+      "packed_bits": 11879749
+    },
+    {
+      "precision": "highp",
+      "axis": 0,
+      "case": 1,
+      "sample_value": 0.17916661500930786,
+      "packed_bits": 3005917
+    },
+    {
+      "precision": "highp",
+      "axis": 0,
+      "case": 2,
+      "sample_value": 0.34999996423721313,
+      "packed_bits": 5872025
+    },
+    {
+      "precision": "highp",
+      "axis": 0,
+      "case": 3,
+      "sample_value": 0.554411768913269,
+      "packed_bits": 9301486
+    },
+    {
+      "precision": "highp",
+      "axis": 0,
+      "case": 4,
+      "sample_value": 0.5200980305671692,
+      "packed_bits": 8725797
+    },
+    {
+      "precision": "highp",
+      "axis": 1,
+      "case": 1,
+      "sample_value": 0.5210784077644348,
+      "packed_bits": 8742245
+    },
+    {
+      "precision": "highp",
+      "axis": 1,
+      "case": 2,
+      "sample_value": 0.5299019813537598,
+      "packed_bits": 8890280
+    },
+    {
+      "precision": "highp",
+      "axis": 1,
+      "case": 3,
+      "sample_value": 0.26323527097702026,
+      "packed_bits": 4416355
+    },
+    {
+      "precision": "highp",
+      "axis": 1,
+      "case": 4,
+      "sample_value": 0.12254899740219116,
+      "packed_bits": 2056031
+    },
+    {
+      "precision": "highp",
+      "axis": 2,
+      "case": 1,
+      "sample_value": 0.7495098114013672,
+      "packed_bits": 12574688
+    },
+    {
+      "precision": "highp",
+      "axis": 2,
+      "case": 2,
+      "sample_value": 0.5352941155433655,
+      "packed_bits": 8980745
+    },
+    {
+      "precision": "highp",
+      "axis": 2,
+      "case": 3,
+      "sample_value": 0.5492647290229797,
+      "packed_bits": 9215133
+    },
+    {
+      "precision": "highp",
+      "axis": 2,
+      "case": 4,
+      "sample_value": 0.6384803652763367,
+      "packed_bits": 10711923
+    },
+    {
+      "precision": "highp",
+      "axis": 3,
+      "case": 1,
+      "sample_value": 0.15784311294555664,
+      "packed_bits": 2648168
+    },
+    {
+      "precision": "highp",
+      "axis": 3,
+      "case": 2,
+      "sample_value": 0.414950966835022,
+      "packed_bits": 6961722
+    },
+    {
+      "precision": "highp",
+      "axis": 3,
+      "case": 3,
+      "sample_value": 0.5774509906768799,
+      "packed_bits": 9688020
+    },
+    {
+      "precision": "highp",
+      "axis": 3,
+      "case": 4,
+      "sample_value": 0.708088219165802,
+      "packed_bits": 11879749
+    }
+  ],
+  "fresh_frozen_max_packed_error": 0,
+  "published_aar_join": {
+    "aar_sha256": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+    "eight_baseline_samples_match_raw_driver": true,
+    "scope": "Full published AAR binary-checker controls join same-driver isolated sampling, not a new core implementation"
+  },
+  "evidence_hashes": {
+    "sampler-four-corners/SamplerFourCornerProbe.java": "19c3dca7f877103c626f668cb1d81d01d8d57ca81e8eef45304ca2dcdbbee1ab",
+    "sampler-four-corners/frozen-predictions.json": "a93fa0593a738dd5fe4ab03a01b96a24d9e0735edfc43f8fc5927fbcfb930f3a",
+    "sampler-four-corners/stdout.json": "533d8bedadd7204bb1b2cf658c7a8974e0b84ab52418324e7f06770821439574",
+    "sampler-four-corners/comparison.json": "79211ee3f4cf1746bdad8316c419f51ee104cef7df335166e3b5b0ec8209420a",
+    "sampler-rounding-ties/SamplerRoundingTieProbe.java": "c6bf3722beebbd84471a06f4444f0dfaca9e580d8ad5b92217f8bb4f9ee530fd",
+    "sampler-rounding-ties/frozen-predictions.json": "f2dadc3640355dacc64a329186f48c5f439bec3ea94f6d07ff9617cb32ec6295",
+    "sampler-rounding-ties/stdout.json": "5ba3f755549636cbc7ad59c52ddf3e9ea6e686a6ea57d7cc414629b8f2546f25",
+    "sampler-rounding-ties/comparison.json": "b76668b9a141c815740ca863b3c03b3f3a784747d093f3a99ffbfef3c3d7a0c5",
+    "sampler-coordinate-ties/SamplerCoordinateTieProbe.java": "bf331bcafb9540ef15f54cb2c261fe5f17e327075bf805e3e41a071e508e16fa",
+    "sampler-coordinate-ties/frozen-predictions.json": "becd8b874419f843b9bb61f15d3a6287d241e7ca5cba2348a8f1ab936b434e6c",
+    "sampler-coordinate-ties/stdout.json": "12ec95e5351b4842b4b7c69dbffde8975cf959dbece6b717648826f8260d602b",
+    "sampler-coordinate-ties/comparison.json": "c17ca3444b0e54ff06dca4264eb728c26b43edc7a8917cbd3bb91b201b796a09",
+    "linear-sampler-packed/comparison.json": "bcb99cde9a552ace108bc4274ab47e762d0748174f13e1ee10f5c4bd8e2d9cf6",
+    "sampler-precision-isolation/SamplerPrecisionProbe.java": "c15b7cb685cbebfd164b793ee40e699b9775d0dad9dadceda2f9f4768d94b067",
+    "sampler-precision-isolation/stdout.json": "5c03396642b9e33dfc05e0fe7b7d20c5d2287f70d8381dedb1e4e6189f681acf"
+  },
+  "raw_tie_controls": {
+    "frozen": {
+      "records": [
+        {
+          "case": 1,
+          "phase": [
+            0.00390625,
+            0
+          ],
+          "predictions": {
+            "nearest_even": {
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "packed": [
+                0,
+                0,
+                0
+              ]
+            },
+            "half_up": {
+              "values": [
+                0.00024509805371053517,
+                0.0,
+                0.00024509805371053517
+              ],
+              "packed": [
+                4112,
+                0,
+                4112
+              ]
+            }
+          }
+        },
+        {
+          "case": 2,
+          "phase": [
+            0.01171875,
+            0
+          ],
+          "predictions": {
+            "nearest_even": {
+              "values": [
+                0.0004901961074210703,
+                0.0,
+                0.0004901961074210703
+              ],
+              "packed": [
+                8224,
+                0,
+                8224
+              ]
+            },
+            "half_up": {
+              "values": [
+                0.0004901961074210703,
+                0.0,
+                0.0004901961074210703
+              ],
+              "packed": [
+                8224,
+                0,
+                8224
+              ]
+            }
+          }
+        },
+        {
+          "case": 3,
+          "phase": [
+            0.01953125,
+            0
+          ],
+          "predictions": {
+            "nearest_even": {
+              "values": [
+                0.0004901961074210703,
+                0.0,
+                0.0004901961074210703
+              ],
+              "packed": [
+                8224,
+                0,
+                8224
+              ]
+            },
+            "half_up": {
+              "values": [
+                0.000735294132027775,
+                0.0,
+                0.000735294132027775
+              ],
+              "packed": [
+                12336,
+                0,
+                12336
+              ]
+            }
+          }
+        },
+        {
+          "case": 4,
+          "phase": [
+            0.02734375,
+            0
+          ],
+          "predictions": {
+            "nearest_even": {
+              "values": [
+                0.0009803922148421407,
+                0.0,
+                0.0009803922148421407
+              ],
+              "packed": [
+                16448,
+                0,
+                16448
+              ]
+            },
+            "half_up": {
+              "values": [
+                0.0009803922148421407,
+                0.0,
+                0.0009803922148421407
+              ],
+              "packed": [
+                16448,
+                0,
+                16448
+              ]
+            }
+          }
+        }
+      ],
+      "frozen_before_native": true,
+      "packed_tolerance": 1,
+      "source_sha256": "c6bf3722beebbd84471a06f4444f0dfaca9e580d8ad5b92217f8bb4f9ee530fd"
+    },
+    "observed": [
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 2,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 3,
+        "sample_value": 0.0007352828979492188,
+        "packed_bits": 12336
+      },
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 4,
+        "sample_value": 0.000980377197265625,
+        "packed_bits": 16448
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 1,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 2,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 3,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 4,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 2,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 3,
+        "sample_value": 0.0007352828979492188,
+        "packed_bits": 12336
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 4,
+        "sample_value": 0.000980377197265625,
+        "packed_bits": 16448
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 2,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 3,
+        "sample_value": 0.0007352828979492188,
+        "packed_bits": 12336
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 4,
+        "sample_value": 0.000980377197265625,
+        "packed_bits": 16448
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 1,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 2,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 3,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 4,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 2,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 3,
+        "sample_value": 0.0007352828979492188,
+        "packed_bits": 12336
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 4,
+        "sample_value": 0.000980377197265625,
+        "packed_bits": 16448
+      }
+    ]
+  },
+  "coordinate_tie_controls": {
+    "frozen": {
+      "records": [
+        {
+          "case": 1,
+          "expected_R_B_packed": {
+            "even": 0,
+            "half_up": 4112
+          }
+        },
+        {
+          "case": 2,
+          "expected_R_B_packed": {
+            "even": 4112,
+            "half_up": 4112
+          }
+        },
+        {
+          "case": 3,
+          "expected_R_B_packed": {
+            "even": 4112,
+            "half_up": 8224
+          }
+        },
+        {
+          "case": 4,
+          "expected_R_B_packed": {
+            "even": 8224,
+            "half_up": 8224
+          }
+        }
+      ],
+      "frozen_before_native": true
+    },
+    "observed": [
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 2,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 3,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "default",
+        "axis": 0,
+        "case": 4,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 1,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 2,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 3,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 1,
+        "case": 4,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 2,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 3,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "default",
+        "axis": 2,
+        "case": 4,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 2,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 3,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "highp",
+        "axis": 0,
+        "case": 4,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 1,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 2,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 3,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 1,
+        "case": 4,
+        "sample_value": 0,
+        "packed_bits": 0
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 1,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 2,
+        "sample_value": 0.00024509429931640625,
+        "packed_bits": 4112
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 3,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      },
+      {
+        "precision": "highp",
+        "axis": 2,
+        "case": 4,
+        "sample_value": 0.0004901885986328125,
+        "packed_bits": 8224
+      }
+    ]
+  }
+}
