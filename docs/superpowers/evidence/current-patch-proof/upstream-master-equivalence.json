@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "observed_master": "e98fca85e57802d27a6d11499642de2a1d5e994e",
+  "producer_base": "6f64807467e312034883a4389e6aa80a675458bc",
+  "only_changed_file": "src/libprojectM/Renderer/Platform/GladLoader.cpp",
+  "changed_file_sha256": "0a3946ac4c1f109e4e7580b7248ad99b6d751f0539dbb331fa6ab322d84dc664",
+  "comparison": "Producer base plus gles30-admission.diff is byte-identical to observed master source before shared deterministic instrumentation",
+  "source_file_inventory": "upstream-source-hashes.json"
+}

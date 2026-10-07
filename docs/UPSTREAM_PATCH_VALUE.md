@@ -1,189 +1,351 @@
-# Historical patch value against upstream 4.2 development
+# Current patches against upstream projectM 4.2 master
 
-Assessment date: **2026-10-06**. This document assesses the 44 ProjectM TV Engine patches over upstream **4.1.7**, as present in ProjectM TV `b1bb994dbfaa04159630570cd9b2c255b173a6bd`. The target is immutable upstream master **`6f64807467e312034883a4389e6aa80a675458bc`**, whose CMake version is 4.2.0; it is a **development snapshot, not an upstream 4.2 release**. Its evaluator pin is `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a` (1.0.7).
+This reference covers the **13 current patches**, in build order, over upstream
+[`6f64807467e312034883a4389e6aa80a675458bc`](https://github.com/projectM-visualizer/projectm/tree/6f64807467e312034883a4389e6aa80a675458bc).
+That pin reports CMake version 4.2.0 and is an **unreleased development snapshot**.
+The evaluator pin is `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a`.
+Assessment source: ProjectM TV `654815d8`, 2026-10-07. The
+[ordered series manifest](superpowers/evidence/current-patch-proof/series.json)
+records each patch's SHA-256. Reassess after changing a pin or patch.
+Observed upstream master is `e98fca85e57802d27a6d11499642de2a1d5e994e`. Its only
+change from the app pin is the GLES3.0 admission adjustment used in these captures;
+[byte-verified equivalence](superpowers/evidence/current-patch-proof/upstream-master-equivalence.json)
+establishes that the baseline renderer source matches current master before
+the shared deterministic instrumentation.
 
-**Update guard:** Reassess this document after changing the upstream/evaluator pins, migration patches, public API contracts or validation evidence. Record new checks against their exact revision and refresh the applicable validation, CI, review and release gates. The source dispositions below cover the current ten-patch series; they are not a claim of universal visual or performance equivalence. Historical patch numbers identify provenance; they need not match the new series numbering.
+This is a reference for libprojectM maintainers evaluating behavior, compatibility
+limits and possible contributions. A contribution candidate is not a submitted or
+accepted upstream change. The old migration assessment and attribution remain in a
+[separate archive](superpowers/evidence/current-patch-proof/pre-rewrite-assessment.md).
+Patch numbers below always refer to the current series.
 
-This reference supports two decisions: which old behavior the TV migration must retain, and which remaining changes might usefully be proposed to libprojectM. A potential upstream contribution is an assessment, not a submitted or accepted upstream change. Read the [migration specification](superpowers/specs/2026-10-06-upstream-master-4-2-design.md) and [implementation plan](superpowers/plans/2026-10-06-upstream-master-4-2.md) for completion gates.
+## Reading the image evidence
 
-## Evidence and status boundaries
+The requested comparison is **the pinned upstream renderer versus the current
+patched renderer**, with identical preset bytes, textures, audio, clock, dimensions
+and seeds. Existing migration fidelity images compare two patched ProjectM TV
+engines and do not provide that comparison.
 
-- **Upstream equivalent** means the pinned source supplies the relevant behavior; duplicate local source is omitted and attribution is preserved.
-- **Retained/consolidated** means the behavior is implemented in the named new patch. Integrated host and sanitizer controls exercise scoped fixtures, not the complete preset corpus or every driver.
-- **Partial upstream** separates an upstream implementation from remaining local behavior or a deliberately changed mechanism. Performance equivalence is not inferred from source similarity or passing functional controls.
+The new [image-proof record](superpowers/evidence/current-patch-proof/README.md)
+tracks GPU Android TV captures and their status. The baseline discloses a
+**GLES 3.0 admission adjustment**: the emulator exposes GLES 3.0 while unmodified
+upstream requires GLES 3.2. Lowering only the admission check allows rendering
+comparisons without importing preset compatibility or image fixes. It is labeled
+**upstream + GLES 3.0 admission**, not an untouched stock binary.
+The patched capture variant disables program-binary caching because the API36
+guest reports binary-export GL errors. The exact adjustments and failed initial
+attempts are retained in the image-proof record. These images do not validate caches.
 
-Source evidence comes from all 44 original patch headers/diffs, the reconstructed old chain, the immutable upstream source and the final three patches. The [historical series](https://github.com/johnneerdael/ProjectM-TV/tree/b1bb994dbfaa04159630570cd9b2c255b173a6bd/tools/projectm-patches) remains the provenance reference. New `0001` is TV rendering/preset compatibility, new `0002` is HLSL compatibility/float round trips, and new `0003` is evaluator thread-local random state/lone-dot compatibility; historical numbers below are not current filenames.
+A full-series comparison demonstrates the combined library change. An adjacent
+before/after or single-patch ablation is needed to attribute a difference to one
+patch. Preserve load failures, equation omissions, shader fallbacks and GL errors
+beside images. A failed renderer has no valid screenshot; an error panel must not
+be represented as its rendered output.
 
-The [all-preset impact inventory](superpowers/evidence/upstream-master-4-2/patch-impact/README.md) maps each historical patch to potentially affected presets, positive source matches, activation conditions and exact asset identities across all 9,606 presets. Shared rendering/lifecycle paths retain an all-presets potential scope. This is source evidence, not visual certification. The final release-bound gate covers 100 unbiased random presets plus all required original patch regressions and their activation profiles. It passed all 509 preset/profile comparisons across 448 unique presets, with seed 12345 and every RGB frame 0–479 equal across both engines and repeats. [Completed source/runtime/image evidence](superpowers/evidence/upstream-master-4-2/fidelity-final/README.md) records the exact scope; it is not whole-corpus certification.
+MilkDrop 2 source and D3D9 specifications explain intended operations. They are
+not screenshots from Windows. Label numerical oracles, altered diagnostic presets
+and reference-size projectM captures separately from real MilkDrop 2/D3DX renders.
+No original Windows appearance is certified here.
 
-The evaluator port retains historical 0004/0034 and omits 0020. Its 70 upstream tests and four compatibility controls pass in Debug and ASan/UBSan; unmodified upstream fails the positive lone-dot and fresh-thread random-stream controls. The HLSL port's 48 standalone parser/modulo/translation controls pass on the port and reconstructed legacy source, including ASan/UBSan for the port; unmodified upstream passes 25 and fails 23 characterization controls. Integrated shader/render controls are included in the 329-test host suite below. Existing HLSL compiler warnings remain unchanged.
+## 0001 — TV rendering and preset compatibility
 
-Historical initial migration checks on 2026-10-06 (before synchronization with #49 and texture repair):
+Source: `0001-tv-rendering-and-preset-compatibility.patch`. This is a consolidated
+patch, not one independently attributable defect. Split its general correctness
+changes from host policy and optimizations for upstream proposals.
 
-- Reconstructed baseline host suite: 261/261. Integrated master host suite: 329/329. Production native runner: 21/21 sanitizer controls plus engine/render-policy checks on macOS CGL. The separate EGL transition-overlay test skips because macOS lacks the required EGL/GLES development files; Linux EGL CI remains open.
-- Three patches apply to a clean upstream export. Debug/release core AARs and profile APK build for ARM64/ARMv7. A fresh recursive checkout at `85ceac83` builds debug core and the release APK for both ABIs. App/core release JVM results total 84 tests without failures.
-- Milkbeat `6802630c2db1983607b8693ac4bd4ce208f80c74` builds `githubDebug` against the exact migration AAR (`c57c823d18e5e33c0fcb4c779e41eece0a3d613cf95092351a86a4332c864075`); all 28 focused consumer tests pass. ARM native packaging matches those AAR bytes. This is a consumer build/test check, not a completed publication or automatic Milkbeat update.
-- Standard Preset Lab worker: 164/164 including three native controls before the additional Android-header guard test. The later focused worker-build suite passes 7/7, including the NDK armv7 GLES-header regression. Do not infer a new full-suite total from those separate runs. Milk-analyzer: 199 passing tests. Native trails/corpus tooling: 75 passing tests plus 35 subtests. Release tooling: 157 passing tests. Strict MkDocs build passes.
-- AM6 Android 9 live-audio/profile smoke renders at 1920×1080, and the three-line unreleased-master/pin settings label fits. Different tracks prevent interpreting its sampled FPS as a causal comparison. The completed single-preset frozen-audio pilot repeats all eight selected captures bit-for-bit within each role; cross-role differences are localized and reach RGB byte MAE 2.66 at frame 479. The report does not establish a cause, including the upstream coordinate changes.
-
-Source manifests and logs are in ignored `build/upstream-rebase/`, including `legacy-series.json`, vendor disposition reports, `milkbeat-consumer-report.json`, `pilot-diff-report.json` and worker identities. Historical device timings and predictive-collection producer identities remain historical. The four-witness TV matrix has completed 32 runs; same-role captures repeat exactly, while midgit has a material difference and Acid Mandala/Geometry 101 also have nonzero sampled differences. See the [device evidence](superpowers/evidence/upstream-master-4-2/README.md). Those historical differences were investigated and superseded by the completed final fixed-seed source matrix and unchanged-v2.3.15-AAR runtime/image checks. Final-revision CI/GitHub Codex review, merge, publication and automatic Milkbeat update remain separate gates. No whole-corpus equivalence or new performance gain is established here.
-
-## Subsequent 4.1.7 fixes synchronized from main
-
-The original 44-patch assessment above is historical. Main `43023889ec38cf1250f3bfcaaf079a840acbdf76` also includes resolution selector PR #44 and historical patches 0045–0049 from PRs #47–#49. The migration retains those five renderer repairs as new patches 0004–0008 after the original three consolidated patches. The complete eight-patch series applies to a fresh upstream export; Android debug/release core and release APK builds, 101 JVM tests and 29 native controls in normal and ASan/UBSan builds pass. That eight-patch checkpoint predates the texture repair below. The final nine-patch renderer at `c3872be3` passes 30 normal and 30 sanitizer native controls, 101 JVM tests, both-ABI Android builds and the complete release-bound fidelity/runtime/image matrix. Its fresh recursive checkout builds, and Milkbeat `6802630c` passes 28 focused debug consumer tests with exact production AAR SHA256 `b333d26d782fa86978213be689db6f4948e01cfb6e51e02b39813e5280b9f2bd`.
-
-| Historical patch | Current patch | Adaptation and potential libprojectM value |
+| Area | Current behavior and activation | Potential upstream value and limits |
 |---|---|---|
-| 0045 textured shape sampler | 0004 | Own a repeat/linear sampler for main-textured fills and preserve named-image qualifiers. Retain upstream VertexArray/ShaderCache ownership. This is a general sampler-state correctness candidate; it adds one instance-owned sampler. |
-| 0046 blur range interval | 0005 | Retain exact float32 normalization order, upward expansion of upper bounds and coherent defaults for unsupported ranges. Helper bodies match the final 4.1.7 fix. Useful defensive math for blur storage and decoding; no performance claim. |
-| 0047 signed unit zoom | 0006 | Preserve finite negative zoom when the exponent is exactly one, avoiding undefined GLSL power behavior. Other negative-base power domains stay unsupported. The original repair applies without changing its shader math. |
-| 0048 live built-in wave controls | 0007 | Consume evaluated waveform mode/dots/thickness/blending and rebuild mode math when needed, while retaining Mesh rendering and evaluated geometry reuse. Useful for authored per-frame controls. Original MilkDrop2 `milkdropfs.cpp:2852` reads the evaluated mode with integer truncation and remainder; projectM retains its own 16-mode extension. |
-| 0049 live legacy display controls | 0008 | Consume evaluated gamma, echo and filter flags, including equation-only activation, through current Mesh and weak ShaderCache ownership. Preserve custom-composite policy and configuration defaults. Useful for compatibility with authored legacy effects. |
+| GLES integration | Admit GLES 3.0 through the current GLAD resolver. | Already present in observed master e98fca85; this retained portion is redundant against that revision. Runtime checks still matter. |
+| Resize and GL ownership | Preserve feedback history, caller read/draw bindings around blur allocation and required texture contents across passes. | General state correctness. Exercise first use, resize and distinct caller targets. |
+| Sampling and user textures | Preserve explicit sampler aliases and random-slot image identity; parse sampler identifiers; ignore `sampler_state` blocks without shifting source offsets. | General preset compatibility. Authored sampler-state fields remain unsupported; random binding repair is not a new seeding policy. |
+| Equation compatibility | Retry rejected legacy records across preset/wave/shape phases; omit still-rejected blocks with defined state and an initialization-warning callback. | Preserve accepted programs. Tolerant loading can hide authored errors if a host ignores warnings. |
+| Lines and geometry | Draw reference-scaled quad lines, batch shapes in authored order and replay evaluated geometry without rerunning equations or RNG. | Separate reusable primitives from TV defaults. Check blend order, dots, borders and stateful equations. |
+| Native trails | Maintain authored feedback with optional bounded native detail and diffusion fallback. Standard/Medium/High are host choices. | Product policy rather than an unconditional appearance default. Additional targets, shader restrictions, memory and driver cost matter. |
+| Pass and cache work | Retain translated GLSL/program caches, texture pooling, optional pass elimination, direct output and reduced outgoing-preset cadence. | Evaluate context/driver identity, bounds, failed-load fallback and retirement. Reduced cadence changes animation. No current-driver speedup is established. |
 
-All five original attribution headers are retained. Incoming native fixtures were adapted for GLAD draw-pointer observation, ShaderCache ownership, current texture constructor arguments and vertex attribute slots, with original pixel assertions and tolerances preserved. The [regression inventory](superpowers/evidence/upstream-master-4-2/patch-regressions/README.md) records the required named presets and unresolved historical references. The scoped native controls and final pixel matrix are distinct evidence; together they cover the declared migration cases. They do not establish universal GLES compatibility.
+Named candidates include `161.milk` and `430.milk` for rejected equations;
+`midgitstraights of majillaen - featy sweet.milk` for blur/texture paths; and
+`Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk` for feedback policy.
+The [regression inventory](superpowers/evidence/upstream-master-4-2/patch-regressions/README.md)
+provides their source evidence. Historical issue membership does not establish a
+current upstream failure. Capture separate equation/sampler and high-resolution
+trails cases. A still image cannot establish cache correctness, concurrent
+preparation, context loss, retirement or performance.
 
-### Migration repair: user-texture premultiplication
+![Upstream versus current patched renderer: 161.milk](superpowers/evidence/current-patch-proof/0001-equations.png)
 
-Current patch `0009-user-texture-premultiplication.patch` restores the released 4.1.7 loader's `SOIL_FLAG_MULTIPLY_ALPHA` arithmetic before the new stbi-backed RGBA upload. It preserves `(rgb * alpha + 128) >> 8`, including opaque-channel rounding, and leaves decoded alpha unchanged. This is a migration compatibility repair: the behavior previously came from SOIL2 rather than a separately numbered TV patch.
+Upstream rejects the unchanged preset in both runs; the left panel quotes its load error. The patched role repeats all 120 frames exactly. This panel is a full-series comparison; the separate ablation addresses single-patch causality.
 
-The frozen random `rand tritex - inv play` preset differed at all 480 frames, with first-frame RGB MAE 0.198 and maximum channel difference 1. Both engines repeated exactly. A single-variable premultiplication intervention matched the released-source baseline at all 480 frames in two GLES3.0 repeats. A production upload regression independently enumerates 60 expected RGBA bytes; it fails before the repair and passes afterward. The full native suite passes 30/30 normally and with ASan/UBSan. The complete nine-patch series applies cleanly, and Android debug/release core and release APK builds pass.
+## 0002 — HLSL compatibility and finite float round trips
 
-Potential libprojectM value: make historical premultiplied texture semantics explicit when replacing image backends. The exact SOIL rounding is a compatibility choice; it should be assessed separately from an upstream policy for straight or premultiplied alpha. No performance gain or complete corpus equivalence is claimed by this single-preset repair.
+Source: `0002-hlsl-compatibility-and-float-roundtrip.patch`. Preserve classic-locale
+emission and finite float32 round trips with `max_digits10`, integral-float/signed-zero
+spelling and rejection of nonfinite AST literals. Initialize writable copies from
+incoming uniforms while preserving other components. Retain compatible modulo
+handling, contextual identifiers, macro token spacing and parenthesized postfix
+expressions. Plain uninitialized scalar/vector float globals become external
+uniforms; static, const, initialized and local storage retain their rules.
 
-## Patches 0001–0016
+General translator correctness value; longer generated source is a tradeoff.
+Unbound GLES uniforms start at zero, which does not reproduce arbitrary D3D9
+register history. Independently test each language change before combining proposals.
+Witness candidates include `Flexi - dimension window.milk`,
+`EVET + Flexi - Rainbox Splash Poolz.milk`, `martin - organic light.milk` and
+`Serge + martin - crystal palace tunnel003.milk`. The hash-pinned
+`float-literal-control.milk` is synthetic, not an unchanged bundled preset.
+Retain translation errors and active shader status beside pixels.
 
-| Original patch filename | 4.2 disposition | Evidence and remaining behavior | Potential value to libprojectM and tradeoffs |
-|---|---|---|---|
-| `0001-plasma-transition-float-overflow-shield.patch` | Upstream equivalent; duplicate source omitted | Pinned transition shader contains the overflow fix from upstream `0227b7a61` (Kai Blaschke). | Already benefits libprojectM; omit duplicate source and preserve attribution. |
-| `0002-render-target-resize-program-cache-shader-state.patch` | Partial upstream; retained in new 0001 | Caller-FBO rendering is upstream. New 0001 retains resize history, cross-instance program binaries, uniform lookup/bind caching and outgoing-frame divisor while adapting upstream ShaderCache ownership. | Separate broadly useful resize/state work from TV prewarming and reduced outgoing cadence. Binary caches need driver/context identity, size limits and failed-load fallback; reduced cadence changes transition animation. |
-| `0003-hlslparser-classic-locale.patch` | Partial upstream; retained in new 0002 | Upstream bounded numeric parsing already uses classic locale; retain classic locale for float emission. | Small portable emitter change avoids repeated locale construction. No new timing claim; overlaps the 0044 emitter port. |
-| `0004-projectm-eval-thread-local-rand.patch` | Retained/consolidated in new 0003 | Pinned evaluator still has mutable process-wide `mt`/`mti`. Retain `_Thread_local` state; fresh-thread random-stream regression fails upstream and passes the port. | Useful for simultaneous instances/prewarming. Each thread starts the same fixed-seed stream; this changes cross-thread coupling, not the generator algorithm. |
-| `0005-cache-translated-preset-shaders.patch` | Retained/consolidated in new 0001 | New 0001 retains the bounded translated-GLSL cache alongside the binary cache. Upstream static-shader caching does not replace cross-instance translation caching; target-driver benefit remains unmeasured. | Possible libprojectM performance candidate after cache-key, thread safety and eviction review. Sampler declarations and translation options must be in the key; memory cost and target-device benefit need measurement. |
-| `0006-custom-shapes-batched-draws.patch` | Retained/consolidated in new 0001 | New 0001 retains ordered shape batching and adapts it to upstream Mesh/VertexBuffer ownership and evaluated-geometry replay. Scoped geometry controls pass; no 4.2 speedup is established. | General batching candidate if evaluation/blend/draw order remains equivalent. Extra CPU geometry storage and line/native replay must be bounded; no speedup is established on 4.2. |
-| `0007-framebuffer-texture-pool.patch` | Retained/consolidated in new 0001 | New 0001 retains the per-thread, byte-limited color-attachment pool, context-loss forgetting, defined clears and external-texture ownership exclusions using current texture descriptors. | Reusable opt-in host API candidate. Costs retained GPU memory; clearing, context ownership, pressure release and external-texture exclusion are required. |
-| `0008-hlsl-floating-point-modulo.patch` | Upstream equivalent; duplicate source omitted | Upstream `051766048`/PR #1031 supplies remainder types/precedence and GLSL modulo emission; no compatibility delta is retained. | Already benefits libprojectM. Keep upstream regression coverage and omit duplicate source. |
-| `0009-tile-gpu-invalidate-and-mesh-orphaning.patch` | Retained invalidation in new 0001; warp orphaning omitted | New 0001 retains framebuffer invalidation with full-coverage/discard safeguards. The old unconditional warp-mesh orphan policy is deliberately not retained: upstream VertexBuffer::Update uses glBufferSubData for unchanged sizes and reallocates on size changes. This is a mechanism choice, not a proven performance equivalent. | Driver-dependent optimization candidate, not a universal win. Validate clip/discard and retained contents; assess orphaning with Mali/NVIDIA memory and timing evidence. An upstream proposal must guard optional desktop discard: this pin’s GLAD3.3 declarations lack glInvalidateFramebuffer. Android retains GLES3 hints; private host shims preserve contents. |
-| `0010-skip-redundant-previous-frame-flip.patch` | Retained/consolidated in new 0001 | New 0001 retains flipped-input reuse with motion-vector/resize invalidation. Integrated image controls exercise orientation and history; target-driver pass-cost savings remain unmeasured. | Possible redundant-pass reduction for libprojectM, subject to image/orientation controls and strict cache invalidation. |
-| `0011-indexed-warp-mesh.patch` | Partial upstream; retained in new 0001 | Upstream supplies unique-grid indices and Mesh::Draw/glDrawElements. New 0001 retains Prepare/DrawAgain replay for Native feedback without duplicating the indexed mechanism or restoring warp-buffer orphaning. | Use upstream indexed mesh rather than duplicate it. Consider a generic evaluate-once/replay boundary separately; maintain per-pixel expression order and shared register semantics. |
-| `0012-merged-warp-pass-direct-blur.patch` | Retained/consolidated in new 0001 | New 0001 retains merged warp/geometry and direct blur rendering, adapted to upstream attachment ownership. Blur-read timing and caller read/draw binding controls pass in scoped fixtures. | Potential pass reduction. Must preserve which frame warp blur reads, caller bindings and first-use/resize behavior; depends on 0015/0041. |
-| `0013-motion-vector-map-only-when-shown.patch` | Retained/consolidated in new 0001 | New 0001 retains visibility-gated motion-vector UV output and invalidation needed by Native feedback. Functional controls cover visibility/state; performance gain is not measured. | General optional-work candidate. Eligibility must follow actual visibility and fallback state; Native feedback consumers require reassessment. |
-| `0014-video-echo-in-final-orientation.patch` | Retained/consolidated in new 0001 | New 0001 retains classic echo in final orientation while preserving shade, alpha and blending semantics. Orientation/output controls pass; reduced-copy performance is not measured. | Potential copy reduction. Validate echo orientation, shade, alpha, blend mode and caller/default framebuffer semantics. |
-| `0015-keep-output-for-blur-reading-and-discarding-shaders.patch` | Retained/consolidated in new 0001 | New 0001 retains target contents for clip/discard and schedules blur according to warp blur references. This is a correctness condition for retained pass changes, not a claim that every preset is pixel-identical. | Correctness prerequisite for pass optimizations. Conservative shader-text detection can reduce optimization opportunities; retain safe fallback. |
-| `0016-direct-composite-output.patch` | Retained/consolidated in new 0001 | New 0001 retains opt-in direct composite output with stored-history requirements for transitions, pending switches and discard behavior. The caller-FBO API alone is not equivalent. | General host API candidate with an explicit output-history contract. External preset switches need a stored frame first; clipping requires prior target contents. |
+![Upstream versus current patched renderer: Flexi - dimension window.milk](superpowers/evidence/current-patch-proof/0002-translator.png)
 
-## Patches 0017–0032
+Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
 
-| Original patch filename | 4.2 disposition | Evidence and remaining behavior | Potential value to libprojectM and tradeoffs |
-|---|---|---|---|
-| `0017-pcm-max-samples-is-buffer-size.patch` | Upstream equivalent; duplicate source omitted | Pinned projectm_pcm_get_max_samples returns AudioBufferSamples, from upstream `dd89dfba0`/PR #1032 (ksooo). | Already benefits audio hosts; omit duplicate source. Preserve upstream attribution and buffer-capacity contract. |
-| `0018-hlslparser-parenthesized-constructor-expressions.patch` | Upstream equivalent; duplicate source omitted | Upstream `c86dee9b7`/PR #948 (Mischa) contains original parenthesized-constructor continuation fix. 0036 separately covers fuller expression/postfix behavior. | Already benefits shader compatibility; omit duplicate fix while retaining the later distinct controls. |
-| `0019-hlslparser-number-scan-without-source-copy.patch` | Upstream equivalent; duplicate source omitted | Upstream `a4e86cd82`/PR #1030 (ksooo) bounds numeric-token copies and uses classic locale. | Already benefits translation. Historical quadratic-copy concern is addressed upstream; no new migration timing claim. |
-| `0020-projectm-eval-1.0.7-evaluator-fixes.patch` | Upstream equivalent; duplicate source omitted | Evaluator gitlink `22fb0cfd` is 1.0.7: prior error strings are freed and COMPARE_CLOSEFACTOR is used throughout relevant comparisons/control/math. | Already benefits libprojectM through evaluator 1.0.7; omit source backport. Thread-local randomness remains separate 0004 work. |
-| `0021-hlslparser-self-referencing-macros.patch` | Upstream equivalent; duplicate source omitted | Pinned master includes `c1469f0e5` identity-macro expansion fix, equivalent to Kai Blaschke’s old `2a3c3603`/PR #1025 backport. | Already prevents identity-macro loops; keep upstream implementation alongside 0036 token semantics. Do not claim all recursive macro forms are solved. |
-| `0022-custom-waveform-sample-bounds.patch` | Upstream equivalent; duplicate source omitted | Pinned master `6f6480746` is the custom-waveform out-of-bounds fix equivalent to `3b82f41f`/PR #1029, the old backport from Kai Blaschke. | Already benefits waveform safety. Preserve upstream sample smoothing/bounds behavior; adapt surrounding native/line code without restoring old offset calculations. |
-| `0023-milkdrop-preset-unconditional-shader-includes.patch` | Retained/consolidated in new 0001 | New 0001 supplies the required algorithm/cctype includes in the adapted shader analysis. Debug and release builds pass; the historical include-only patch is consolidated rather than reapplied separately. | No separate user-facing feature or upstream proposal. Ensure each migrated use includes its dependency in debug and release builds. |
-| `0024-quad-lines.patch` | Retained/consolidated in new 0001 | New 0001 retains opt-in reference-sized quad lines, points, joins, AA/fallback and related blur/fade/sample rules through upstream Mesh ownership. Scoped GL controls pass; device fidelity/resource coverage remains bounded. | Line rendering/host controls are a possible generic libprojectM contribution; reference-scale appearance policy needs review. Additional geometry/shaders, hard-edge fidelity and fallback behavior require GL/GLES controls. |
-| `0025-shader-failure-handling.patch` | Partial upstream; retained in new 0001 | ShaderException::what is upstream. New 0001 retains vertex-shader cleanup when fragment compilation fails and the related failure/retry controls, omitting the duplicate exception override. | Retain focused object-lifetime cleanup as a general correctness candidate; omit duplicate what override. Real-driver failure/retry tests must validate the migrated implementation. |
-| `0026-custom-warp-sampler-binding.patch` | Retained/consolidated in new 0001 | Old sampler binding reserves warp unit 0 for unqualified main so sorted explicit sampler aliases are not overwritten; upstream renderer still forces main/wrap on unit 0. | General preset-correctness candidate. Preserve point/clamp/wrap and composite semantics; test mixed alias ordering and packed-state inputs. |
-| `0027-preset-exception-diagnostics.patch` | Upstream equivalent; duplicate source omitted | Pinned exceptions provide owned-message what overrides; duplicate source fixes are omitted. Integrated event/diagnostic controls accept current logging prefixes without promising identical historical text. | Diagnostic behavior is already upstream. Retain useful public-event regression coverage without duplicating overrides or promising identical old text. |
-| `0028-initialize-fresh-color-history.patch` | Retained/consolidated in new 0001 | New 0001 initializes fresh/reused color history through a context-safe local FBO while preserving caller state. First-frame/history/binding controls pass; allocation-time cost is not measured. | General correctness candidate: undefined history can affect first-frame feedback. Costs an allocation-time clear; protect external FBOs and restored context names. |
-| `0029-per-frame-record-compatibility.patch` | Consolidated with 0033 in new 0001 | The per-frame retry is retained through the all-phase 0033 helper in new 0001. Accepted programs keep their normal compile path; there are not two separate retry implementations. | Keep the behavior and regression controls through 0033, not two retry implementations. Accepted programs must stay on the original path. |
-| `0030-hlslparser-uniform-write-copies.patch` | Retained/consolidated in new 0002 | Writable uniform copies start from the input and are shared across functions within one shader invocation; includes compound writes and out/inout. | General MilkDrop/HLSL compatibility candidate. Requires initialization order and global-initializer controls; standalone translation evidence does not establish all rendered presets. |
-| `0031-hlslparser-array-initializer-layout.patch` | Retained/consolidated in new 0002 | Group flat scalar/vector array lists into element constructors, convert element types, reject mismatches and assign whole global arrays. | General GLSL/GLES compatibility candidate. Reject ambiguous layouts instead of guessing; integrated render controls pass in scoped fixtures; full-preset fidelity remains separate. |
-| `0032-sampler-state-preprocessing.patch` | Retained/consolidated in new 0001 | New 0001 blanks sampler_state blocks without shifting source/search positions and stops sampler/texsize names at their identifiers. Translation/render controls pass; authored sampler_state fields remain ignored. | General preset-translation correctness candidate. Sampler-state fields remain ignored; avoid implying support for those authored states. |
+![Original preset control for patch 0002](superpowers/evidence/current-patch-proof/0002-original.png)
 
-## Patches 0033–0044
+Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing only 0002 changes 120/120 RGB frames under these inputs. All successful roles repeat exactly with zero GL-error frames; rejected roles are explicitly labeled.
 
-| Original patch filename | 4.2 disposition | Evidence and remaining behavior | Potential value to libprojectM and tradeoffs |
-|---|---|---|---|
-| `0033-legacy-equation-code-all-phases.patch` | Retained/consolidated in new 0001 | New 0001 retains one legacy retry helper for preset, wave and shape phases, with original-record diagnostics and comment/semicolon compatibility. Scoped equation controls pass; accepted programs stay on their original path. | General MilkDrop equation compatibility candidate. Retry only rejected input; match record/comment/semicolon rules and avoid silently altering accepted programs. |
-| `0034-projectm-eval-lone-dot-number.patch` | Retained/consolidated in new 0003 | Pinned lexer rejects a lone dot. Preserve zero-valued token and exact pre-generated scanner table/action delta; positive/normal-number/invalid-code controls pass. | Small evaluator/NS-EEL compatibility candidate with narrow grammar change. Keep Scanner.l and checked-in Scanner.c synchronized without unrelated generator churn. |
-| `0035-leave-out-uncompilable-equation-code.patch` | Retained/consolidated in new 0001 | New 0001 retains omission of rejected equation blocks, defined initialization state and the public initialization-warning callback. Malformed preset data still fails; the host must surface warnings. | General compatibility plus host-warning API candidate. Tolerant loading can mask authored errors unless warnings are surfaced; public callback ownership/API review is required. |
-| `0036-hlslparser-contextual-identifiers-macro-tokens-postfix.patch` | Retained/consolidated in new 0002 | Restore unsuccessful contextual type lookahead, map reserved sample, preserve macro tokens/spacing and parse full parenthesized expressions before postfix access. | General parser compatibility candidate. Preserve true modifiers/casts, identity macros and authored grouping; macro expansion must not invent expression wrappers. |
-| `0037-random-texture-alias-bindings.patch` | Partial upstream; retained in new 0001 | Upstream supplies long/short random sampler names. New 0001 retains slot image identity, mode-qualified aliases, descriptors and source metadata using strong ownership. Scoped sampler/image controls pass; production random selection is not changed into a deterministic lab policy. | General random-texture correctness candidate, not a new seeding policy. Rebase on strong descriptor ownership and callback textures; test mixed filter/wrap aliases. |
-| `0038-feedback-diffusion-compensation.patch` | Retained/consolidated in new 0001 | New 0001 retains reference-scale diffusion as the Native trails fallback, including point-sampling/composite gating. Fidelity/resource controls are scoped; it remains a host policy, not an unconditional upstream default. | TV/reference-appearance policy rather than an unconditional libprojectM default. Additional targets, shader gating, variance cap and fallback need fidelity/resource evidence. |
-| `0039-feedback-diffusion-build-policy.patch` | Retained internally in new 0001; public capped retired | New 0001 retains internal PROJECTMTV_DISABLE_FEEDBACK_DIFFUSION guards in FeedbackDiffusion and MilkdropPreset for legacy laboratory controls. The public capped AAR/build policy remains retired; this macro does not reinstate a supported capped artifact. | No general upstream candidate. Keep the switch internal to legacy laboratory controls; do not advertise a supported capped build or artifact. No general upstream contribution is established. |
-| `0040-hlslparser-implicit-global-inputs.patch` | Retained/consolidated in new 0002 | Plain uninitialized float scalar/vector globals become external uniforms; writable copies initialize from them. Static/const/initialized/local storage keeps prior rules. | General legacy-HLSL compatibility candidate with explicit limits. Unbound GLES uniforms start at zero; this does not reproduce arbitrary D3D9 register history. |
-| `0041-blur-framebuffer-bindings.patch` | Retained/consolidated in new 0001 | New 0001 saves caller read/draw bindings before blur texture allocation/resizing, then restores them. Integrated first-use, resize and blur-after-warp numerical controls pass. | Small general GL state-correctness candidate. Validate distinct targets, allocation/resize and blur-after-warp numerical output under the new renderer. |
-| `0042-feedback-detail-layer.patch` | Retained/consolidated in new 0001 | New 0001 retains instance-owned authored feedback, bounded native detail, Standard/Medium/High and unsupported-path fallback. Scoped host/resource controls pass; the full TV matrix and driver costs remain open. | TV-specific Native trails policy. Potential reusable primitives need separation from defaults/gain choices; memory, unsigned-storage bias and shader compatibility require evidence. |
-| `0043-authored-geometry-feedback.patch` | Retained/consolidated in new 0001 | New 0001 retains evaluate-once geometry replay, authored feedback rasterization and restored per-vertex shape inputs through current Mesh abstractions. Stateful equations are not rerun for native presentation; full-preset fidelity remains separately bounded. | Mostly part of 0042 policy; a general replay primitive may be useful separately. Must not re-execute stateful equations or change authored blend order. |
-| `0044-hlslparser-float-literal-roundtrip.patch` | Retained/consolidated in new 0002 | Emit finite float32 literals with `max_digits10`, preserve integral-float/signed-zero spelling and reject nonfinite AST literals. | General numerical-correctness candidate. Longer generated source is a tradeoff; finite coefficient round trips are tested, not a claim of universal visual equivalence. |
+## 0003 — Evaluator random state and lone-dot numbers
 
-## Custom-pack synchronization from PR #50
+Source: `0003-evaluator-thread-local-rand-and-lone-dot.patch`. Make Mersenne Twister
+state thread-local so background evaluation does not advance the foreground stream.
+Accept a lone `.` as zero, matching NS-EEL, while preserving ordinary numbers and
+invalid-code rejection. Keep `Scanner.l` and checked-in `Scanner.c` synchronized.
 
-Main `dd59a791` adds historical **0050**, retained as migration **0010**. Changing search paths affects newly loaded presets; outgoing/incoming presets retain their own texture manager through a soft cut. Reset reloads each live user-image cache using its original paths and preserves feedback. The port preserves 4.2 ShaderCache ownership, frame-time transition completion and texture-load callbacks. The associated real-GL regression exercises duplicate image names across packs, bundled fallback, late images, reset, interrupted fades, hard cuts and C API transition retirement.
+Submit evaluator changes to projectm-eval. Each thread begins the same fixed-seed
+stream; this changes cross-thread coupling, not the generator algorithm. A
+single-thread screenshot cannot prove isolation. Use the fresh-thread random-stream
+control plus an explicit lone-dot fixture. A fresh source search recovered two bundled positive matches: the base and `nz+`
+versions of `Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk`.
+Both contain `zoom=zoom+.10*sin(rad+.+15.15)` in per-pixel code. This establishes
+current source membership; it does not identify the original private issue report.
 
-This could add general texture lifetime and host integration correctness to libprojectM: hosts changing asset roots should not invalidate or redirect live presets. An upstream proposal needs explicit cache/reset and callback ownership contracts, with retained-resource retirement tests. App ZIP upload, QR codes and category UI remain ProjectM-TV product features. Fresh validation against unchanged ProjectM-TV v2.3.16 is pending; the completed v2.3.15 matrix is historical evidence.
+![Controlled diagnostic for patch 0003](superpowers/evidence/current-patch-proof/0003-lone-dot-v2.png)
 
-## Large-rotation synchronization from PR #51
+Synthetic activation fixture, not an unchanged bundled preset: 120/120 RGB frames differ when removing only 0003. Successful roles repeat exactly; zero GL-error frames.
 
-Main `16a37189478771da591d134a6bd1f8fc46eee808` publishes v2.3.17 and historical **0051**, retained as migration **0011**. It computes CPU sine/cosine after converting the final evaluated rotation to float, following MilkDrop 2. GPU sine and cosine both become zero for `rot=±10000000` on the observed Apple GLES translator, collapsing feedback to the rotation centre. Raising shader precision does not fix that driver behavior. CPU libm also covers maximum finite float angles, where a rounded `2π` remainder is insufficient. Authored equations and nonfinite handling stay unchanged.
+![Original preset control for patch 0003](superpowers/evidence/current-patch-proof/0003-original.png)
 
-The 4.2 port uses the existing transform component for sine and adds one four-byte cosine VertexBuffer at attribute8. It resizes/uploads that buffer with the current mesh and preserves `Prepare`/`DrawAgain` reuse. The original 4.1.7 patch’s interleaved mesh layout cannot be copied into 4.2. The adapted real-GL fixture supplies 4.2 ShaderCache ownership and current Texture constructor arguments. Before the port, its large-angle UV check fails on Apple M4 Pro; afterward, direct/prepared legacy/custom per-frame/per-pixel UV and multi-frame feedback controls pass under ASan/UBSan. The direct vertex-source zoom fixture is updated for the same internal interface.
+Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing only 0003 changes 120/120 RGB frames under these inputs. All successful roles repeat exactly with zero GL-error frames; rejected roles are explicitly labeled.
 
-Potential libprojectM value: a general MilkDrop compatibility correction that avoids driver-dependent large-angle range reduction in the built-in warp rotation. It costs a small vertex buffer/attribute and CPU trig per evaluated vertex (cached per frame without per-pixel code). The public C/Java/JNI interface does not change. Other shader trigonometry remains unchanged; no speedup or universal GPU behavior is claimed. The supplied v2.3.17 handoff verifies the unchanged original witness and both ARM artifacts; migration-specific Android witness checks remain pending at this checkpoint.
+## 0004 — Main-textured shape sampler ownership
 
-The user explicitly limits this new-release migration to rotation-bug validation. Preserve the completed full matrix checkpoints and finish the already running v2.3.16 pass once; do not repeat the full preset matrix for v2.3.17.
+Source: `0004-textured-shape-sampler.patch`. Bind an instance-owned repeat/linear
+sampler for every main-textured fill, including geometry replay. A sampler left on
+unit zero could override texture state; unbinding could expose nearest filtering.
+Preserve named-image descriptor qualifiers instead of mutating shared texture state.
 
-## Contribution candidates versus product policy
+`widest swing.milk` is the recovered exact production witness. Compare repeated
+instances and edge-crossing samples, with a separate analytical bilinear fixture.
+General sampler correctness with one sampler per shape instance; no new quality setting.
 
-The strongest broadly applicable candidates are the remaining evaluator fixes 0004/0034 and HLSL compatibility/numerical fixes 0003/0030/0031/0036/0040/0044, because their isolated ports have direct controls distinguishing old, upstream and ported behavior. Upstream submission should include narrow reproductions, the relevant specification/NS-EEL rationale and attribution, with integrated rendered controls where behavior reaches GLSL. Submit evaluator changes to the evaluator project rather than treating a libprojectM gitlink update as the complete evaluator fix.
+![Upstream versus current patched renderer: widest swing.milk](superpowers/evidence/current-patch-proof/0004-sampler.png)
 
-Renderer correctness candidates 0025/0026/0028/0032/0033/0035/0037/0041 are retained in new 0001 with scoped integrated controls; broader driver/fidelity validation and generic API review remain separate requirements. Line APIs 0024, resize retention 0002’s subset, opt-in pooling 0007 and direct output 0016 may benefit other hosts, but need generic ownership/API contracts. Batching and pass/cache work 0005/0006/0009–0015 needs target-driver measurements and image equivalence, particularly for discard, point sampling, transitions, context loss and stateful equations.
+Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
 
-TV choices belong behind explicit host controls: outgoing preset cadence and cross-context binary prewarming from 0002, reference diffusion 0038, the historical capped-build switch 0039, and Native trails/geometry recurrence 0042/0043. Their constituent resource/replay primitives may become useful upstream separately. Their defaults, reference size, gain/headroom policy and supported fallback combinations should not be presented as requirements for every libprojectM host.
+![Current series without and with patch 0004](superpowers/evidence/current-patch-proof/0004-sampler-isolated.png)
 
-## Upstream board and integration risks
+Isolated removal of 0004, same inputs: 119/120 RGB frames differ; both roles repeat exactly with zero GL-error frames.
 
-The [public 4.2 board view](https://github.com/orgs/projectM-visualizer/projects/3/views/1), inspected during this migration, still lists unfinished GL/GLES selection 1004, texture loading/ownership 970/974, expression monitoring 664/971 and vendored symbols 1038. The maintainer’s warning that the board is stale was supplied through the user’s private discussion; it has no public permalink. Board status alone does not prove missing or completed source behavior. Use the pinned source and direct integration tests, and refresh public statuses before making a release claim.
+## 0005 — Safe blur intervals
 
-[Issue 1004](https://github.com/projectM-visualizer/projectm/issues/1004) is relevant to the GLAD loader and Android GLES integration; the current process-level loader/API selection needs source and runtime assessment for foreground/background instances. [Texture API work 970](https://github.com/projectM-visualizer/projectm/pull/970) and [image-loading issue 974](https://github.com/projectM-visualizer/projectm/issues/974) are relevant to callback ownership, externally supplied texture IDs, pooling and decoder failure paths. Variable monitoring [664](https://github.com/projectM-visualizer/projectm/issues/664)/[971](https://github.com/projectM-visualizer/projectm/pull/971) is not required to retain existing TV rendering and should not expand this migration into a monitoring UI/API implementation.
+Source: `0005-blur-range-interval.patch`. Expand the upper bound upward when a range
+collapses. Preserve clamp-then-expand ordering and ordinary float32 arithmetic.
+Reject nonfinite, unrepresentable or progressively degenerate normalization domains
+with coherent `[0,1]` defaults for all levels and their decoding coefficients.
 
-The [vcpkg comment on stb_image](https://github.com/microsoft/vcpkg/pull/52895#issuecomment-5058737441) explains that its implementation macros produce out-of-line definitions; a header-only label does not guarantee link compatibility. The maintainer’s [vendored-symbol issue 1038](https://github.com/projectM-visualizer/projectm/issues/1038) distinguishes shared-library exports from collisions when static libprojectM and another copy of a dependency are linked together. It discusses external dependency support and notes GLAD/stb_image integration costs. ProjectM TV links projectM statically into JNI, so inspect the final `libprojectmtv.so` symbols and link behavior. Source names or shared-library visibility flags alone do not establish isolation. This is a migration verification requirement and possible separate upstream contribution, not a verified benefit of one of the 44 old patches.
+Defensive numerical correctness. The reference has the same upper-bound typo;
+this is not a backport of an already-correct reference implementation. Candidates
+include `Cope - The Cloud.milk`, `Mig_015.milk` and `$$$ Royal - Mashup (29).milk`.
+`EVET - Scanazoic --- Isosceles edit.milk` is a negative control. Record evaluated
+bounds/coefficients: a historical blur witness had unchanged pixels despite its
+reported unsafe domain. Do not promise a visible improvement for every fixture.
 
-A libprojectM proposal should preserve the new upstream Mesh, ShaderCache, loader and strong texture-descriptor ownership rather than reintroduce 4.1.7 abstractions. In particular, indexed drawing from 0011 is already implemented upstream, while `Renderer/VertexBuffer.hpp::Update()` uses `glBufferSubData` for an unchanged size; the migration deliberately adopts that same-size update policy rather than retaining per-frame warp orphaning. Mali/NVIDIA timing and memory assessment remains open. Keep those two conclusions distinct when simplifying the old series.
+![Controlled diagnostic for patch 0005](superpowers/evidence/current-patch-proof/0005-blur-collapsed-v2.png)
 
-## Integrated migration checkpoint
+Synthetic activation fixture, not an unchanged bundled preset: 119/120 RGB frames differ when removing only 0005. Successful roles repeat exactly; zero GL-error frames.
 
-The original three-patch consolidation contains `0001-tv-rendering-and-preset-compatibility.patch`, `0002-hlsl-compatibility-and-float-roundtrip.patch` and `0003-evaluator-thread-local-rand-and-lone-dot.patch`. New 0001 adds GLES 3.0/GLSL ES 3.00 loader compatibility, uses current Mesh/VertexArray/ShaderCache ownership and retains the renderer behavior identified in the table. New 0002/0003 consolidate the vendor behavior. Historical 0001/0008/0017/0018/0019/0020/0021/0022/0027 duplicate source is omitted where the pinned upstream supplies it. All 44 historical filenames and attributions remain in this report.
+![Original preset control for patch 0005](superpowers/evidence/current-patch-proof/0005-original.png)
 
-The release AAR's ARM64/ARMv7 JNI dynamic exports contain no `glad_`, `stbi_` or `prjm_eval_` symbols in the NDK llvm-nm audit. This supports shared-JNI artifact isolation, not arbitrary static libprojectM/vcpkg linking. External texture/WIP APIs and expression-monitoring UI have not been adopted.
+Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing only 0005 changes 0/120 RGB frames under these inputs. This is a preservation control for this input, not a visible benefit. All successful roles repeat exactly with zero GL-error frames; rejected roles are explicitly labeled.
 
-The completed AM6 pilot covers one preset at 1920×1080 with Standard inactive, eight selected captures among 480 frames, and two repeats per role on a GLES 3.2 driver. Same-role captures repeat exactly; cross-role captures do not. Its low global mean error includes larger localized differences, and no causal attribution is established. The original TV matrix is retained as historical evidence. The final API34 GPU matrix passes all declared cases under the user’s TV waiver; final CI/review/merge/publication remain separate gates. Successful compilation, host controls and Milkbeat consumer checks do not establish 9,606-preset visual equivalence, a minimum-GLES-3.0-only runtime result or a 4.2 performance gain.
+## 0006 — Signed unit-exponent zoom
 
-## Custom shape pixel centres (0012)
+Source: `0006-fixed-warp-signed-unit-zoom.patch`. For finite negative zoom and an
+exponent exactly one, use the signed base directly in the shared warp vertex shader.
+GLSL `pow` has an undefined negative-base domain even for exponent one. This reflects
+UV displacement around the warp centre; positive zoom and other exponent paths remain.
 
-`0012-shape-pixel-centers.patch` corrects a D3D9-to-GLES rasterization mismatch in
-custom shape fills and outlines. MilkDrop 2 copies the authored shape position into
-an orthographic projection without a position bias; D3D9 samples integer pixel
-centres. OpenGL/GLES samples half-integers. Preserving only the vertex coordinates
-can therefore lose a centred subpixel shape entirely.
+`Hexcollie - This is where we begin stripped.milk` is the exact recovered witness.
+Narrow compatibility correction, not arbitrary negative-base power support. Retain a
+UV readback oracle beside the preset image.
 
-The patch applies a half destination pixel translation in each actual draw pass,
-including authored/native geometry replay, and restores shared shader matrices.
-It preserves equations, radii, colours, UVs and assets. The direct framebuffer
-regression fails before the patch and passes for textured/untextured shapes at
-256×144 and 512×288, including repeated draws and matrix restoration. The existing
-sampler regression retains its analytical bilinear weights with the corrected
-sample positions. See [the focused investigation](superpowers/evidence/dark-presets-06-10/README.md).
+![Upstream versus current patched renderer: Hexcollie - This is where we begin stripped.milk](superpowers/evidence/current-patch-proof/0006-zoom.png)
 
-This is a general MilkDrop compatibility correction, not a brightness adjustment
-or Windows appearance certification. Source attribution: MilkDrop 2
-`milkdropfs.cpp` (`DrawCustomShapes`) and `support.cpp` (orthographic setup), plus
-[Microsoft's D3D9 rasterization specification](https://learn.microsoft.com/en-us/windows/win32/direct3d9/rasterization-rules)
-and [GLES 3.0 §3.6](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf).
+Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
 
-## Composite texel centres (0013)
+![Current series without and with patch 0006](superpowers/evidence/current-patch-proof/0006-zoom-isolated.png)
 
-`0013-composite-texel-centers.patch` removes a redundant half-texel UV bias in the
-custom composite mesh. MilkDrop 2's `plugin.cpp` moves the D3D9 mesh positions by
-half a pixel while retaining its UVs. On the unbiased GLES mesh, raster samples
-already interpolate at texel centres. The additional bias diluted a single bright
-feedback pixel over four quarter-bright pixels. The direct impulse/pattern control
-fails before and passes after the correction, including viewport resize and repeats.
+Isolated removal of 0006, same inputs: 119/120 RGB frames differ; both roles repeat exactly with zero GL-error frames.
 
-The animated Standard/plain-canvas host comparison now removes its diagnostic
-compensation for the old bias; its numerical tolerances remain unchanged. Explicit
-warp texel offsets default to zero and remain unchanged. This corrects image
-sampling without replacing authored blur or shader brightness, and is a general
-libprojectM correctness candidate rather than a performance claim.
+## 0007 — Evaluated built-in waveform controls
+
+Source: `0007-live-builtin-wave-controls.patch`. Consume evaluated mode, dots,
+thickness and additive blending without overwriting defaults. Rebuild mode math
+when the evaluated mode changes; retain integer truncation, signed remainder and
+projectM's 16-mode extension. Reuse prepared geometry for the second draw.
+
+Witnesses: `319.milk`, `idiot - Forty Six and 2 (pushit!).milk` and
+`Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk`.
+Use multiple timestamps to show an authored mode/flag change. General compatibility;
+not all 16 modes belong to original MilkDrop 2.
+
+![Upstream versus current patched renderer: 319.milk](superpowers/evidence/current-patch-proof/0007-wave.png)
+
+Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
+
+![Current series without and with patch 0007](superpowers/evidence/current-patch-proof/0007-wave-isolated.png)
+
+Isolated removal of 0007, same inputs: 0/120 RGB frames differ; both roles repeat exactly with zero GL-error frames. This selected input does not activate a visible difference from this patch.
+
+![Controlled diagnostic for patch 0007](superpowers/evidence/current-patch-proof/0007-wave-mode.png)
+
+Synthetic activation fixture, not an unchanged bundled preset: 60/120 RGB frames differ when removing only 0007. Successful roles repeat exactly; zero GL-error frames.
+
+## 0008 — Evaluated legacy display controls
+
+Source: `0008-live-legacy-display-controls.patch`. Consume evaluated gamma, echo
+and legacy filter flags, including equation-only activation. Preserve configuration
+defaults, Mesh/ShaderCache ownership and custom-composite policy. Custom composites
+do not gain legacy effects through this patch.
+
+Use the same three live-control witnesses, plus an equation-only filter fixture to
+separate this change from 0007. Record active display values and selected timestamps;
+do not attribute every full-series difference to this patch.
+
+![Upstream versus current patched renderer: idiot - Forty Six and 2 (pushit!).milk](superpowers/evidence/current-patch-proof/0008-display.png)
+
+Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
+
+![Current series without and with patch 0008](superpowers/evidence/current-patch-proof/0008-display-isolated.png)
+
+Isolated removal of 0008, same inputs: 0/120 RGB frames differ; both roles repeat exactly with zero GL-error frames. This selected input does not activate a visible difference from this patch.
+
+![Controlled diagnostic for patch 0008](superpowers/evidence/current-patch-proof/0008-display-invert.png)
+
+Synthetic activation fixture, not an unchanged bundled preset: 60/120 RGB frames differ when removing only 0008. Successful roles repeat exactly; zero GL-error frames.
+
+## 0009 — User-texture premultiplication bytes
+
+Source: `0009-user-texture-premultiplication.patch`. Apply
+`(rgb * alpha + 128) >> 8` before stbi-backed RGBA upload, preserving alpha. This
+includes opaque-channel rounding. Internal generated textures are a separate path.
+
+`suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk` is the recovered witness. Retain a known-byte upload
+control beside its image. Upstream value is an explicit user-texture alpha policy;
+exact SOIL rounding is a compatibility choice rather than a universal loader rule.
+
+![Upstream versus current patched renderer: suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk](superpowers/evidence/current-patch-proof/0009-texture.png)
+
+Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
+
+![Original preset control for patch 0009](superpowers/evidence/current-patch-proof/0009-original.png)
+
+Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing only 0009 changes 120/120 RGB frames under these inputs. All successful roles repeat exactly with zero GL-error frames; rejected roles are explicitly labeled.
+
+## 0010 — Per-preset texture search-path ownership
+
+Source: `0010-preset-texture-search-path-ownership.patch`. New roots apply to newly
+loaded presets; live incoming/outgoing presets retain their own texture manager
+through soft cuts. Reset reloads live image caches using their original paths and
+preserves feedback. Retain callbacks and strong descriptor/ShaderCache ownership.
+
+General host integration and lifetime correctness. Use two controlled packs with
+the same image name and different pixels; capture fade, reset and retirement.
+No unique bundled preset can demonstrate a host changing its roots. ZIP upload,
+QR codes and category UI are app features outside this patch.
+
+![Texture-root lifetime at fade/reset timestamps](superpowers/evidence/current-patch-proof/0010-texture-roots-shapes.png)
+
+Controlled duplicate-name shape textures, a root change at frame 20, a soft cut at21
+and reset at40. Removing only 0010 changes 59/120 frames. All roles repeat exactly,
+with zero GL errors. An earlier static shader-binding control produced no difference;
+its result is retained separately. This scene activates repeated shape-image lookup.
+
+## 0011 — CPU warp rotation trigonometry
+
+Source: `0011-cpu-warp-rotation-trig.patch`. Convert evaluated rotation to float,
+then compute CPU sine/cosine as MilkDrop 2 does. Reuse sine and supply cosine through
+an instance-owned four-byte VertexBuffer at attribute 8. Preserve prepared-mesh
+replay and authored/nonfinite equation values.
+
+Witness: `EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk`,
+whose per-pixel code sets `rot=10000000`. On the observed Apple GLES translator,
+GPU sine/cosine became zero, collapsing feedback to the rotation centre. Higher
+precision did not repair that observation. CPU libm covers maximum finite float
+angles where a rounded `2π` remainder is insufficient.
+
+General compatibility value, with CPU trig and another buffer/attribute as costs.
+Other custom shader trig is unchanged. Keep a UV oracle and distinguish a
+rotation-only diagnostic variant from the original preset. No universal driver
+failure or speedup is claimed.
+
+![Upstream versus current patched renderer: EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk](superpowers/evidence/current-patch-proof/0011-rotation.png)
+
+Upstream rejects the unchanged preset in both runs; the left panel quotes its load error. The patched role repeats all 120 frames exactly. This panel is a full-series comparison; the separate ablation addresses single-patch causality.
+
+![Current series without and with patch 0011](superpowers/evidence/current-patch-proof/0011-rotation-isolated.png)
+
+Isolated removal of 0011, same inputs: 118/120 RGB frames differ; both roles repeat exactly with zero GL-error frames. This removes the upstream equation-load failure as a confounder and exposes the rotation correction.
+
+## 0012 — Custom-shape pixel centres
+
+Source: `0012-shape-pixel-centers.patch`. Translate fills/outlines by half a
+destination pixel in each authored/native target, restoring shared shader matrices.
+Preserve equations, radii, colours, UVs and assets. D3D9 samples integer pixel centres;
+GLES samples half-integers, so copying coordinates alone can lose subpixel shapes.
+
+Use sample 06 identified by exact hash in the
+[dark-preset investigation](superpowers/evidence/dark-presets-06-10/README.md), plus
+the `rad=.002`, `x=y=.5` diagnostic shape. Compare textured/untextured draws and
+different target dimensions. A D3D9 coverage oracle is not a MilkDrop 2 screenshot.
+
+![Controlled diagnostic for patch 0012](superpowers/evidence/current-patch-proof/0012-subpixel-shape.png)
+
+Synthetic activation fixture, not an unchanged bundled preset: 120/120 RGB frames differ when removing only 0012. Successful roles repeat exactly; zero GL-error frames. Removing the patch loses all subpixel shape coverage; the current renderer produces nonzero pixels.
+
+![Original preset control for patch 0012](superpowers/evidence/current-patch-proof/0012-original.png)
+
+Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing only 0012 changes 120/120 RGB frames under these inputs. All successful roles repeat exactly with zero GL-error frames; rejected roles are explicitly labeled.
+
+## 0013 — Custom-composite texel centres
+
+Source: `0013-composite-texel-centers.patch`. Remove a redundant half-texel UV bias.
+MilkDrop 2 shifts its D3D9 mesh positions by half a pixel while retaining UVs. GLES
+already interpolates the unbiased mesh at texel centres; another UV offset dilutes
+an impulse over four pixels.
+
+Compare original sample 06/10 and a pass-through impulse/asymmetric-pattern fixture.
+Expected output is one full-bright texel rather than four quarter-bright pixels.
+Retain resize/repeated-draw controls and unchanged warp offsets. Sampling correctness,
+not a brightness setting or speedup; the original presets remain authored sparse/dark.
+
+![Controlled diagnostic for patch 0013](superpowers/evidence/current-patch-proof/0013-composite-impulse-zoom.png)
+
+Synthetic activation fixture, not an unchanged bundled preset: 120/120 RGB frames differ when removing only 0013. Successful roles repeat exactly; zero GL-error frames. The isolated old composite spreads the impulse into four RGB8≤64 pixels; corrected output is one pixel with maximum 255. The lower row enlarges an identical 8×8 centre crop 16× with nearest sampling; it changes no brightness.
+
+![Unchanged original preset control for0013](superpowers/evidence/current-patch-proof/0013-original.png)
+
+Removing only 0013 changes all 120 RGB frames for this unchanged sample06 preset.
+All three roles repeat exactly with zero GL-error frames. This is a256×144
+source control under the recorded input, not a Windows appearance prediction.
+
+## Contribution order and acceptance boundaries
+
+Start with narrow evaluator, translator and renderer correctness proposals whose
+controls distinguish each change from upstream. Separate 0001's correctness from
+cache/resource optimizations and Native trails policy. Preserve upstream Mesh,
+VertexBuffer, ShaderCache and texture-descriptor ownership in proposals.
+
+Images need exact input, source, binary, instrumentation and GPU identities plus
+same-role repeats. Numerical/lifecycle controls remain necessary where images
+cannot show the contract. Captures do not certify every preset, other seeds,
+physical TVs, Windows/D3DX appearance or a performance gain.

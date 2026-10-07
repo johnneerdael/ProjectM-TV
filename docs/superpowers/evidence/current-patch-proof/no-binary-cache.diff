@@ -1,0 +1,11 @@
+--- a/src/libprojectM/Renderer/Shader.cpp
++++ b/src/libprojectM/Renderer/Shader.cpp
+@@ -209,7 +209,7 @@
+     glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &programLinked);
+     if (programLinked == GL_TRUE)
+     {
+-        ProgramCache::Instance().Store(m_shaderProgram, cacheKey);
++        // Image-proof harness: guest binary metadata export is broken; do not cache.
+         return;
+     }
+ 

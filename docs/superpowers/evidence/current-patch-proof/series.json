@@ -1,0 +1,73 @@
+{
+  "schema": "projectmtv-current-patch-series-v1",
+  "source_commit": "654815d84d00cc14b2e81880bf4c91db467cb1d8",
+  "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
+  "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+  "patches": [
+    {
+      "number": "0001",
+      "filename": "0001-tv-rendering-and-preset-compatibility.patch",
+      "sha256": "65900645b989f653d697bdce5cdc265ab9cbf5b5f0ac699d737fb09488033dd7"
+    },
+    {
+      "number": "0002",
+      "filename": "0002-hlsl-compatibility-and-float-roundtrip.patch",
+      "sha256": "eb210256beb15ba61b3989b072e0a245e02baf8b7b983550de1e6773249e6571"
+    },
+    {
+      "number": "0003",
+      "filename": "0003-evaluator-thread-local-rand-and-lone-dot.patch",
+      "sha256": "dc9ba43e32b9894e01a897f0f5727cae1cbb1b6cd9643f85b4dcd240cabc1419"
+    },
+    {
+      "number": "0004",
+      "filename": "0004-textured-shape-sampler.patch",
+      "sha256": "3601f673c62f48f44757c8956910a6930e37eb0bb5116fc6a3d90ab6964690d9"
+    },
+    {
+      "number": "0005",
+      "filename": "0005-blur-range-interval.patch",
+      "sha256": "e77e4bde96d5ef60576f618359540e24a9e1df5bb729a043ff527e70be67e31a"
+    },
+    {
+      "number": "0006",
+      "filename": "0006-fixed-warp-signed-unit-zoom.patch",
+      "sha256": "44703476e7ebdc189c053b31a23b14a4beb45e17304def8c53adf52f0b68f90d"
+    },
+    {
+      "number": "0007",
+      "filename": "0007-live-builtin-wave-controls.patch",
+      "sha256": "1c2bb9ac7328fec193c7b60a84df980afe4ac872e74dc8e8b6984ac7e83fc700"
+    },
+    {
+      "number": "0008",
+      "filename": "0008-live-legacy-display-controls.patch",
+      "sha256": "322335d4638e3513bf8a00d6bd2d9d39436647cc368cc32a79ea28cb420c93b6"
+    },
+    {
+      "number": "0009",
+      "filename": "0009-user-texture-premultiplication.patch",
+      "sha256": "2f62c09e83b45ac25a4161be1f71f941a3e9852fa5401a930e00fc19836be6d0"
+    },
+    {
+      "number": "0010",
+      "filename": "0010-preset-texture-search-path-ownership.patch",
+      "sha256": "62740719eacde9bfd12f8d3caf83413d2e3a744d0f4b713693f8eade4e049296"
+    },
+    {
+      "number": "0011",
+      "filename": "0011-cpu-warp-rotation-trig.patch",
+      "sha256": "c99a6221174a33a7d87381e055ee3187a91edea403fe0d5ea9a9efb9a502488b"
+    },
+    {
+      "number": "0012",
+      "filename": "0012-shape-pixel-centers.patch",
+      "sha256": "9e4614734be2eced389433bcdef2afd3292afaebac3330fee55222a25c9fa7be"
+    },
+    {
+      "number": "0013",
+      "filename": "0013-composite-texel-centers.patch",
+      "sha256": "85edc00b4adcc725c6b824673ec24dd756bded652511b170b62f91912e8dd2d2"
+    }
+  ]
+}
