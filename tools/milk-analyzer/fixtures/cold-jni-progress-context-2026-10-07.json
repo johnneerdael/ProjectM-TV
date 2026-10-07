@@ -1,0 +1,51 @@
+{
+  "policy": "projectmtv-core-2.3.16-cold-jni-v1",
+  "producer_distribution": "libcxx-200100-fresh-normal-v1",
+  "reference": "Unchanged full published AAR2.3.16 numerical-input-only controls",
+  "randomized_credit": false,
+  "original_grades_unchanged": true,
+  "source_lifecycle": [
+    "Initialize LoadIdlePreset hard load ->StartPreset",
+    "Initialize explicit StartPreset",
+    "Ready firstJNI draw authored hard load ->StartPreset"
+  ],
+  "duration_parameters": {
+    "mean_seconds": 30,
+    "modifier_seconds": 1,
+    "minimum_seconds": 1,
+    "fresh_distribution_per_draw": true,
+    "preset_start_seconds": 0
+  },
+  "scope": "Pinned50patch source, qualifiedproducer, cold ready single-preset mono30Hz <=30frames, no failure/retry/smoothing/configuration change",
+  "controls": [
+    {
+      "seed": 12345,
+      "duration_seconds": 29.618844229502262,
+      "frames": 30,
+      "matched_float32_values": 360,
+      "comparison_sha256": "e03a2920f79d546e2d7317a3b6dfb63612b03bd0d2c37842c4b97c83caa86937",
+      "uniforms_sha256": "dd055f70ebf47d32d412eef3ee7fd10d959f155918a2f0a0b22eb54ee7eb8334",
+      "frozen_source_before_capture": false
+    },
+    {
+      "seed": 9917,
+      "duration_seconds": 31.90240405881748,
+      "frames": 30,
+      "matched_float32_values": 360,
+      "comparison_sha256": "502ba8d05c246ef1bb3ab4940210b5837f3129e3bb2d0b38f0943e4de7c9e469",
+      "uniforms_sha256": "780a45f0277d9c024c1ac4b59fbc523d572ed671836ab9e5dbc87000da4e17fb",
+      "frozen_source_before_capture": true
+    }
+  ],
+  "matched_values_total": 720,
+  "source_hashes": {
+    "build/visual-loop/published2316/native-lib-reference.cpp": "5c6459969036d4ce21d1d7767cdc8b7cb9bcd3072d11934477c87d68969983fe",
+    "build/visual-loop/source50/production-engine/src/libprojectM/ProjectM.cpp": "3daf94255115a1a3e9945e3efe3e69dedad0c7e589caa294a07d667067622c60",
+    "build/visual-loop/source50/production-engine/src/libprojectM/TimeKeeper.cpp": "dca2b1ffbdd2fa2c1cf4ed97cceaf2e975e89a7bbb655a9149274e8deed049ff",
+    "build/visual-loop/source50/production-engine/src/libprojectM/TimeKeeper.hpp": "13cba61528b4047d7da12888c75c724fbd7e7064d6bac1f8ef3fae5ad8528d58"
+  },
+  "remaining_visual_misses": {
+    "preset05_median_relative_error": 0.07935320114041985,
+    "preset08_median_relative_error": 0.17977483155235377
+  }
+}

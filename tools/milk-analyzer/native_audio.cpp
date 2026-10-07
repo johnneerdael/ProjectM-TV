@@ -2,6 +2,7 @@
 #include "Audio/PCM.hpp"
 #include "vendor/json.hpp"
 #include "reader_inputs.hpp"
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 #include <cstring>
@@ -11,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <random>
 #ifdef __APPLE__
 #include <CommonCrypto/CommonDigest.h>
 #else
@@ -18,6 +20,13 @@
 #endif
 
 using json=nlohmann::json;
+#if defined(_LIBCPP_VERSION) && _LIBCPP_VERSION == 200100
+constexpr bool kQualifiedDurationDistribution=true;
+constexpr const char* kDurationDistribution="libcxx-200100-fresh-normal-v1";
+#else
+constexpr bool kQualifiedDurationDistribution=false;
+constexpr const char* kDurationDistribution="unqualified-standard-library";
+#endif
 std::string digest(const std::vector<unsigned char>& bytes) {
     unsigned char hash[32];
 #ifdef __APPLE__
@@ -43,6 +52,31 @@ int main(int argc,char** argv) {
         const bool roundedClock=clockPolicy=="projectmtv-jni-rounded-nanoseconds30-v1";
         if((clockPolicy!="ideal-frame-fractions-v1"&&!roundedClock)||(roundedClock&&fps!=30))
             throw std::runtime_error("unsupported audio clock policy/cadence");
+        const auto progressPolicy=request.value("preset_progress_policy",std::string("explicit-zero-placeholder-v1"));
+        const bool coldProgress=progressPolicy=="projectmtv-core-2.3.16-cold-jni-v1";
+        double presetDuration=0.0;
+        uint32_t entropySeed=0;
+        if(coldProgress) {
+            if(!kQualifiedDurationDistribution)
+                throw std::runtime_error("cold JNI progress requires qualified libcxx-200100 duration distribution");
+            const auto identity=json::parse(kEngineIdentity);
+            if(!roundedClock||frames>30||channels!=1||
+               identity.value("patches_sha256","")!="cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded"||
+               identity.value("commit","")!="e0b0a967f0ffd7d332106c366668ed271718472b"||
+               !request.contains("entropy_seed")||!request.at("entropy_seed").is_number_integer()||
+               request.at("entropy_seed").get<double>()<0||request.at("entropy_seed").get<double>()>UINT32_MAX)
+                throw std::runtime_error("cold JNI progress requires pinned 2.3.16, mono rounded-clock <=30 frames and uint32 entropy seed");
+            entropySeed=request.at("entropy_seed").get<uint32_t>();
+            std::mt19937 generator(entropySeed);
+            // Initialize: idle hard load, explicit StartPreset; first JNI draw: authored hard load.
+            // TimeKeeper constructs a fresh distribution each call, discarding its cached companion.
+            for(int load=0;load<3;++load) {
+                std::normal_distribution<double> distribution(30.0,1.0);
+                presetDuration=std::max(1.0,distribution(generator));
+            }
+        } else if(progressPolicy!="explicit-zero-placeholder-v1"||request.contains("entropy_seed")) {
+            throw std::runtime_error("unsupported preset progress policy/seed");
+        }
         const size_t block=44100/fps;
         std::ifstream pcmFile(request.at("pcm_path").get<std::string>(),std::ios::binary);
         if(!pcmFile)throw std::runtime_error("cannot read PCM");
@@ -57,7 +91,14 @@ int main(int argc,char** argv) {
         json report={{"schema_version",1},{"basis","pinned native PCM/FFT/alignment and relative bands; no graphics context"},
             {"uses_rendered_reference",false},{"engine_archive_sha256",kEngineArchiveSha},{"engine_identity",json::parse(kEngineIdentity)},
             {"pcm_sha256",digest(bytes)},{"pcm_encoding","float32 little endian interleaved"},{"sample_rate",44100},
-            {"fps",fps},{"channels",channels},{"render_clock_policy",clockPolicy},{"frames",json::array()}};
+            {"fps",fps},{"channels",channels},{"render_clock_policy",clockPolicy},
+            {"preset_progress_policy",progressPolicy},{"duration_distribution_model",kDurationDistribution},
+            {"frames",json::array()}};
+        if(coldProgress)report["preset_timing"]={{"sampled_duration_seconds",presetDuration},
+            {"entropy_seed",entropySeed},{"duration_draws",3},{"mean_seconds",30.0},{"modifier_seconds",1.0},
+            {"distribution_lifetime","fresh per draw"},{"preset_start_seconds",0.0},
+            {"equation_fps",35},{"physical_fps",30},
+            {"conditional_host","cold ready single-preset JNI host; no intervening reload, failure or smoothing"}};
         libprojectM::Audio::PCM pcm;double previous=0;
         for(int frame=0;frame<frames;++frame) {
             size_t count=std::min<size_t>(block,libprojectM::Audio::AudioBufferSamples);
@@ -72,7 +113,8 @@ int main(int argc,char** argv) {
             }
             pcm.UpdateFrameAudioData(time-previous,frame);previous=time;
             auto values=pcm.GetFrameAudioData();
-            report["frames"].push_back({{"time",time},{"frame",frame},{"fps",fps},{"progress",0},
+            report["frames"].push_back({{"time",time},{"frame",frame},{"fps",coldProgress?35:fps},
+                {"progress",coldProgress?std::min(1.0,time/presetDuration):0.0},
                 {"bass",values.bass},{"mid",values.mid},{"treb",values.treb},{"bass_att",values.bassAtt},
                 {"mid_att",values.midAtt},{"treb_att",values.trebAtt},{"vol",values.vol},{"vol_att",values.volAtt},
                 {"waveform_left",values.waveformLeft},{"waveform_right",values.waveformRight},

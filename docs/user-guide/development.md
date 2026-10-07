@@ -114,6 +114,12 @@ loudness decay. Exact time/audio-band input agreement does not certify the full
 appearance: GPU drawing precision and the sampled preset-progress context remain
 separate checks. Historical failed forecasts keep their original grades.
 
+The bounded cold JNI progress policy now models initialization and the first
+hard preset load with declared random inputs. It matches numerical-only AAR
+controls under two seeds and rejects unqualified producer libraries. Warm loads,
+longer windows and changed configurations are outside its contract. This is input-context verification,
+not a new visual score or a change to the packaged mood collections.
+
 The feature report now distinguishes geometry calculated without display fields
 from statistics of simulated display fields. Shape trajectories provide sampled
 speed, acceleration and jerk, with component/topology changes and missing support

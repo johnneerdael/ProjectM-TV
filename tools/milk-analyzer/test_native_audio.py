@@ -12,7 +12,8 @@ CLOCK_BINARY=Path(os.environ.get('MILK_NATIVE_CLOCK_AUDIO_BINARY', BINARY))
 
 
 class NativeAudioTest(unittest.TestCase):
-    def run_audio(self,data,channels=1,frames=2,fps=30,clock_policy=None,binary=None):
+    def run_audio(self,data,channels=1,frames=2,fps=30,clock_policy=None,binary=None,
+                  preset_progress_policy=None,entropy_seed=None):
         binary=BINARY if binary is None else binary
         self.assertTrue(binary.is_file(),'native CPU audio bridge has not been built')
         with tempfile.TemporaryDirectory() as temporary:
@@ -20,6 +21,8 @@ class NativeAudioTest(unittest.TestCase):
             request=root/'request.json';output=root/'audio.json'
             settings={'pcm_path':str(pcm),'output':str(output),'fps':fps,'frames':frames,'channels':channels}
             if clock_policy is not None:settings['clock_policy']=clock_policy
+            if preset_progress_policy is not None:settings['preset_progress_policy']=preset_progress_policy
+            if entropy_seed is not None:settings['entropy_seed']=entropy_seed
             request.write_text(json.dumps(settings))
             result=subprocess.run([str(binary),str(request)],capture_output=True,text=True)
             report=json.loads(output.read_text()) if output.exists() else None
@@ -88,6 +91,41 @@ class NativeAudioTest(unittest.TestCase):
         self.assertEqual(process.returncode,0,process.stderr)
         self.assertEqual(baseline.returncode,0,baseline.stderr)
         self.assertNotEqual(rounded['frames'][0]['bass_att'],ideal['frames'][0]['bass_att'])
+
+    def test_cold_jni_progress_matches_qualified_context_or_rejects_other_producers(self):
+        baseline,identity=self.run_audio(np.zeros(2940),binary=CLOCK_BINARY)
+        self.assertEqual(baseline.returncode,0,baseline.stderr)
+        process,report=self.run_audio(np.zeros(44100),frames=30,binary=CLOCK_BINARY,
+            clock_policy='projectmtv-jni-rounded-nanoseconds30-v1',
+            preset_progress_policy='projectmtv-core-2.3.16-cold-jni-v1',entropy_seed=12345)
+        if identity.get('duration_distribution_model')!='libcxx-200100-fresh-normal-v1':
+            self.assertNotEqual(process.returncode,0)
+            self.assertIn('qualified libcxx-200100',process.stderr)
+            self.assertIsNone(report)
+            return
+        if identity['engine_identity']['patches_sha256']!='cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded':
+            self.assertNotEqual(process.returncode,0)
+            self.assertIn('pinned 2.3.16',process.stderr)
+            self.assertIsNone(report)
+            return
+        self.assertEqual(process.returncode,0,process.stderr)
+        self.assertEqual(report['preset_timing']['sampled_duration_seconds'],29.618844229502262)
+        self.assertEqual(np.float32(report['frames'][0]['progress']),np.float32(.001125409617088735))
+        self.assertEqual(np.float32(report['frames'][-1]['progress']),np.float32(.03376229107379913))
+
+    def test_cold_jni_progress_requires_known_clock_and_uint32_seed(self):
+        for options in [dict(),dict(entropy_seed=-1),dict(entropy_seed=True),
+                        dict(entropy_seed=.5),dict(entropy_seed=2**32),
+                        dict(entropy_seed=12345,frames=31),dict(entropy_seed=12345,channels=2),
+                        dict(entropy_seed=12345,clock_policy='ideal-frame-fractions-v1'),
+                        dict(entropy_seed=12345,preset_progress_policy='unknown')]:
+            settings=dict(binary=CLOCK_BINARY,clock_policy='projectmtv-jni-rounded-nanoseconds30-v1',
+                          preset_progress_policy='projectmtv-core-2.3.16-cold-jni-v1')
+            settings.update(options)
+            frames=settings.get('frames',2);channels=settings.get('channels',1)
+            process,report=self.run_audio(np.zeros(frames*1470*channels),**settings)
+            self.assertNotEqual(process.returncode,0)
+            self.assertIsNone(report)
 
 
 if __name__=='__main__':unittest.main()

@@ -1000,3 +1000,26 @@ by 7.94%. Its original grade and source remain unchanged. Preset progress also
 differs from the archived zero placeholder and requires a matching sampled
 lifetime context; the clock fix does not establish progress parity. See
 `fixtures/jni-rounded-clock-audio-2026-10-07.json`.
+
+The subsequent `preset_progress_policy` value
+`projectmtv-core-2.3.16-cold-jni-v1` models the ready, single-preset cold JNI
+setup for at most 30 mono frames. It requires the pinned 2.3.16 source identity,
+rounded 30 Hz clock and an explicit uint32 `entropy_seed`. Two initialization
+duration draws and the first authored hard-load draw each construct a fresh
+normal distribution; cached companion values are discarded. Mean duration is
+30 seconds, modifier is 1 second, and the preset starts at elapsed time zero.
+Progress uses the sampled third duration, with the native one-second minimum
+duration and maximum progress of one. Equation FPS is 35 for this bounded
+window; physical PCM/render cadence remains 30 Hz.
+
+The source producer is qualified only with libc++ version 200100 and records
+`duration_distribution_model=libcxx-200100-fresh-normal-v1`. Other standard
+libraries/versions are rejected for this opt-in policy: their normal-distribution
+sequences are not assumed identical. Warm loads, retries, smoothing, changed
+settings and longer windows require another declared context. Two numerical-only
+full-AAR controls, including a second seed frozen before capture, match all
+720 float32 clock/progress/FPS/frame/audio-band values. This resolves the progress
+input gap in this context, not the remaining raster/feedback precision misses.
+Default historical reports retain `explicit-zero-placeholder-v1`; zero is a
+supplied placeholder, not proof of native progress. See
+`fixtures/cold-jni-progress-context-2026-10-07.json`.
