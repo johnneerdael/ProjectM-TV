@@ -246,7 +246,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     field=texture_bank.textures[texture]
                     h,w=field.shape[-3:-1]
                     material_uniforms[name]=[w,h,1/w,1/h]
-    scene = execute_scene(source,audio['frames'],reader=reader,width=width,height=height,
+    scene = execute_scene(source,audio['frames'],reader=reader,expected_reader_sha256=reader_sha,width=width,height=height,
         mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],
         timeout_seconds=domain.get('equation_timeout_seconds',60),
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))

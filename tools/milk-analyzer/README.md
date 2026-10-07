@@ -795,3 +795,15 @@ Exactcase124now completes60source frames instead of failing atframe0. This is a
 repair control, not a95+visual pass or fresh blinded audit. Original grades remain
 unchanged; source/newpublished-AAR comparison is still required. See
 `fixtures/unused-warp-uv-repair124-2026-10-06.json`.
+
+
+Equation scene execution resolves the reader path before constructing its request,
+checks the original binary digest against the caller’s expected identity when supplied,
+and rechecks that digest immediately before and after execution. A rebuild during
+request preparation or execution rejects the result instead of crediting another
+producer. The scene reports the original verified `reader_sha256`; a relative
+reader path cannot execute a same-named PATH shadow. Do not rebuild pinned adapters
+during active forecasts. This guards producer attribution, not visual accuracy.
+Forecast and strict-feature callers supply their verified parser digest. Standalone
+historical equation diagnostics may intentionally use a newer evaluator; their
+reported execution digest stays separate from the archived source parser identity.

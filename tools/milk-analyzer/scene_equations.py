@@ -6,6 +6,7 @@ Custom-wave points use native stateful execution and source audio preparation.
 Complete drawing integration remains unresolved.
 """
 import json
+import hashlib
 import ctypes
 import errno
 import os
@@ -112,7 +113,7 @@ def _frame_input(frame):
 
 def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,height:int=72,
                   mesh_x:int=48,mesh_y:int=32,timeout_seconds:float=60,seed:int|None=None,
-                  equation_loader_policy='strict-raw-v1')->dict:
+                  equation_loader_policy='strict-raw-v1',expected_reader_sha256:str|None=None)->dict:
     if isinstance(timeout_seconds,bool) or not isinstance(timeout_seconds,(int,float)) or not np.isfinite(timeout_seconds) or not 0<timeout_seconds<=3600:
         raise ValueError('finite equation timeout in (0,3600] seconds required')
     from equation_loading import select_equation
@@ -126,6 +127,10 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     if any(type(n) is not int or n<=0 for n in [width,height]):raise ValueError('positive integer viewport required')
     if seed is not None and (type(seed) is not int or not 0<=seed<2**32):
         raise ValueError('equation RNG seed must be uint32')
+    reader=Path(reader).resolve(strict=True)
+    reader_sha256=hashlib.sha256(reader.read_bytes()).hexdigest()
+    if expected_reader_sha256 is not None and expected_reader_sha256!=reader_sha256:
+        raise ValueError('source equation reader identity mismatch')
     audio_frames=frames
     frames=[_frame_input(frame) for frame in frames]
     values=source['values']
@@ -244,8 +249,12 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
         environment=os.environ.copy()
         environment.pop('PRESET_LAB_SEED',None)
         if seed is not None:environment['PRESET_LAB_SEED']=str(seed)
+        if hashlib.sha256(reader.read_bytes()).hexdigest()!=reader_sha256:
+            raise ValueError('equation reader changed before execution')
         process=subprocess.run([str(reader),'--equations',str(path)],capture_output=True,text=True,
                                timeout=timeout_seconds,env=environment)
+        if hashlib.sha256(reader.read_bytes()).hexdigest()!=reader_sha256:
+            raise ValueError('equation reader changed during execution')
         if process.returncode:raise ValueError('native scene execution failed: '+process.stderr)
         native=json.loads(process.stdout)
     result=[{'main':{},'main_custom':{},'mesh':[],'shapes':[],'waves':[],'render_inputs':frame} for frame in frames]
@@ -271,6 +280,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
             # std::min(high,value) chooses high for NaN; preserve operand order.
             frame['main'][name]=max(low,min(high,value))
     return {'basis':'native source equation orchestration; no rendered inputs','frames':result,
+            'reader_sha256':reader_sha256,
             'equation_rng_seed':seed,
             'equation_loader_policy':equation_loader_policy,
             'equation_warnings':warnings,

@@ -120,9 +120,10 @@ def test_callback_cannot_change_compatibility_identity_after_pipeline_constructi
 
 def test_declared_equation_timeout_reaches_native_execution(monkeypatch):
     import forecast
-    original=forecast.execute_scene;seen=[]
+    original=forecast.execute_scene;seen=[];identities=[]
     def observe(*args,**kwargs):
         seen.append(kwargs.get('timeout_seconds'))
+        identities.append(kwargs.get('expected_reader_sha256'))
         return original(*args,**kwargs)
     monkeypatch.setattr(forecast,'execute_scene',observe)
     source=native(BASE+'comp_1=`shader_body {ret=.4;}\n')
@@ -130,6 +131,7 @@ def test_declared_equation_timeout_reaches_native_execution(monkeypatch):
     result=predict(source,audio=audio(1),domain=settings)
     assert result['status']=='computed'
     assert seen==[180]
+    assert identities==[source['reader_sha256']]
 
 
 @pytest.mark.parametrize('timeout',[0,-1,float('nan'),float('inf'),True,'90',3601])

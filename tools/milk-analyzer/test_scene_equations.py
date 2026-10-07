@@ -10,6 +10,62 @@ def frames():
              'bass':1,'mid':1,'treb':1,'bass_att':1,'mid_att':1,'treb_att':1} for i in range(2)]
 
 
+def test_scene_reader_rebuild_during_request_cannot_change_producer(tmp_path,monkeypatch):
+    import shutil
+    import pytest
+    import scene_equations
+    source=native('per_frame_1=q1=42;\n')
+    binary=tmp_path/'reader';shutil.copy2(test_native_reader.READER,binary)
+    original=scene_equations.mesh_inputs
+    def replace(*args,**kwargs):
+        binary.write_text('#!/bin/sh\nexit 7\n');binary.chmod(0o755)
+        return original(*args,**kwargs)
+    monkeypatch.setattr(scene_equations,'mesh_inputs',replace)
+    with pytest.raises(ValueError,match='reader.*changed'):
+        scene_equations.execute_scene(source,frames()[:1],reader=binary,mesh_x=8,mesh_y=8)
+
+
+def test_scene_reader_replacement_after_execution_rejects_wrong_credit(tmp_path,monkeypatch):
+    import shutil
+    import subprocess
+    import pytest
+    import scene_equations
+    source=native('per_frame_1=q1=42;\n')
+    binary=tmp_path/'reader';shutil.copy2(test_native_reader.READER,binary)
+    original=subprocess.run
+    def replace(*args,**kwargs):
+        result=original(*args,**kwargs)
+        binary.write_bytes(b'replacement did not produce these equations')
+        return result
+    monkeypatch.setattr(subprocess,'run',replace)
+    with pytest.raises(ValueError,match='reader.*changed'):
+        scene_equations.execute_scene(source,frames()[:1],reader=binary,mesh_x=8,mesh_y=8)
+
+
+def test_scene_reader_cwd_identity_cannot_execute_path_shadow(tmp_path,monkeypatch):
+    import shutil,os,hashlib
+    from pathlib import Path
+    import scene_equations
+    source=native('per_frame_1=q1=42;\n')
+    binary=tmp_path/'reader';shutil.copy2(test_native_reader.READER,binary)
+    expected=hashlib.sha256(binary.read_bytes()).hexdigest()
+    other=tmp_path/'path-bin';other.mkdir();shadow=other/'reader'
+    shadow.write_text('#!/bin/sh\nexit 7\n');shadow.chmod(0o755)
+    monkeypatch.chdir(tmp_path);monkeypatch.setenv('PATH',str(other)+os.pathsep+os.environ['PATH'])
+    result=scene_equations.execute_scene(source,frames()[:1],reader=Path('reader'),mesh_x=8,mesh_y=8)
+    assert result['frames'][0]['main']['q1']==42
+    assert result['reader_sha256']==expected
+
+
+def test_scene_reader_rejects_stale_source_identity(tmp_path):
+    import shutil,pytest
+    import scene_equations
+    source=native('per_frame_1=q1=42;\n')
+    binary=tmp_path/'reader';shutil.copy2(test_native_reader.READER,binary)
+    with pytest.raises(ValueError,match='reader.*identity'):
+        scene_equations.execute_scene(source,frames()[:1],reader=binary,mesh_x=8,mesh_y=8,expected_reader_sha256='0'*64)
+
+
 class SceneEquationsTest(unittest.TestCase):
     def test_legacy_motion_enable_is_the_fallback_for_missing_or_invalid_alpha(self):
         module=importlib.import_module('scene_equations')

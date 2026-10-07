@@ -111,7 +111,7 @@ def test_strict_cli_outputs_cached_evidence_without_native_frame_arrays(tmp_path
     assert 'display' not in evidence and 'feedback' not in evidence
 
 
-def test_unused_frame_wrap_does_not_block_uniform_composite_queries(tmp_path):
+def test_unused_frame_wrap_does_not_block_uniform_composite_queries(tmp_path,monkeypatch):
     folder=source49_binaries()
     if not (folder/'milk-native-reader').is_file():pytest.skip('prepared source49 adapters required')
     from forecast import read_source
@@ -119,6 +119,12 @@ def test_unused_frame_wrap_does_not_block_uniform_composite_queries(tmp_path):
     from analyzer_test_profiles import validator_path
     from test_scene_equations import frames
     from strict_source_features import strict_features
+    import strict_source_features
+    original_execute=strict_source_features.execute_scene;seen=[]
+    def observe(*args,**kwargs):
+        seen.append(kwargs.get('expected_reader_sha256'))
+        return original_execute(*args,**kwargs)
+    monkeypatch.setattr(strict_source_features,'execute_scene',observe)
     preset=tmp_path/'unused-wrap.milk'
     preset.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\n'
         'per_frame_1=wrap=exp(1000);\ncomp_1=`shader_body {ret=float3(.8,.2,.1);}\n')
@@ -131,6 +137,7 @@ def test_unused_frame_wrap_does_not_block_uniform_composite_queries(tmp_path):
     domain={'profile':'gles300','width':32,'height':32,'mesh_x':8,'mesh_y':8,'equation_seed':1}
     result=strict_features(source,audio=audio,binaries=folder,domain=domain,compatibility=compatibility)
     assert result['features']['palette.warm_cool']['value']==pytest.approx(1)
+    assert seen==[source['reader_sha256']]
 
 
 def test_first_direct_api_call_cannot_stamp_changed_disk_code_as_loaded_code(tmp_path):
