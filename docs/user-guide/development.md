@@ -148,3 +148,15 @@ adb -s SERIAL shell am instrument --user USER -w -e setup_case custom_pack_resta
 ```
 
 Resolve `USER` from `adb -s SERIAL shell am get-current-user`. Use a fresh test-app data directory for `custom_pack`; it imports 50,000 synthetic presets and then replaces them with two. It checks the Advanced row with D-pad input, HTTP upload, rendering during import, collection membership, replacement, invalid-ZIP preservation, uploaded PNG pixel output before/after replacement, decoding the rendered QR code to the current upload endpoint and listener closure. The second case checks a cold restart retaining the two-preset pack and Custom selection, and asserts the pack resides in the no-backup directory, and verifies its uploaded image still renders. The full case also checks that normal files storage contains no custom pack. Use `-e setup_case custom_pack_qr` for a shorter screen-layout check: it decodes the displayed code and checks Close is visible/focusable within the display. Screenshots are written to the target test app’s external files directory. These cases do not validate physical-TV GPU performance or arbitrary preset compatibility.
+
+## Warp rotation validation
+
+The native runner includes `warp-rotation-regressions`, which evaluates actual
+per-frame/per-pixel inputs, uploads the production mesh and reads real legacy and
+custom warp draws. It compares UVs for signed, moderate, large and maximum finite
+float angles, varying per-vertex equations and four feedback frames. It also
+checks recovery after nonfinite inputs without assigning those inputs a defined
+image. The direct vertex-source zoom test uses the same updated internal attribute
+layout. These controls are separate from original-preset appearance, high-resolution
+trail paths and physical-TV performance; record those separately when validating
+an engine release.

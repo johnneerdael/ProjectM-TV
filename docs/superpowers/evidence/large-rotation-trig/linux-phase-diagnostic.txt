@@ -1,0 +1,12 @@
+GL ready ms=52.4889
+textures ready ms=41318.2
+llvmpipe (LLVM 20.1.2, 128 bits)
+control ready ms=41373.3
+control ready ms=41676.4
+legacy per-frame UV controls pass
+legacy per-pixel UV controls pass
+control ready ms=42770.3
+custom per-frame UV controls pass
+control ready ms=44365.8
+custom per-pixel UV controls pass
+multi-frame feedback controls pass

@@ -1,0 +1,46 @@
+{
+  "scope": "30 frames per mode; full local release AAR at3840x2160 with256x144 downscaled readback; original vs rotation-only small-angle diagnostic variant, not Windows/device performance certification",
+  "control_identity": {
+    "original_preset_sha256": "591567f0029068f4f1f7ec3b50d7a8fabd8c1658ece6c981a7f60cfd6f3317ea",
+    "wrapped_preset_sha256": "e17d8ad6a452e6b1342ef3ac9026f71d7bafb66d14c471e761aac13313a17b54",
+    "scope": "diagnostic rotation-only variant; no production preset edits"
+  },
+  "rows": [
+    {
+      "mode": "off",
+      "status": "Off",
+      "mean_mae_rgb": 4.491572624942819e-08,
+      "peak_frame_mae_rgb": 3.545978586316778e-07,
+      "last_frame_spatial_rgb_std": 0.00883586513437173,
+      "original_capture_sha256": "4e6dc54bce110c927e460e8bd7fc2768884509cf846370ef70889fedee7322be",
+      "wrapped_capture_sha256": "c586674f0c464b8274b601774a203e3145258845f6cfcacd0033589230882c29"
+    },
+    {
+      "mode": "standard",
+      "status": "Standard \u00b7 1280\u00d7720 canvas",
+      "mean_mae_rgb": 4.491572624942819e-08,
+      "peak_frame_mae_rgb": 2.482184982000035e-07,
+      "last_frame_spatial_rgb_std": 0.009243699696421652,
+      "original_capture_sha256": "78012ac52db83d8fb6a367fcaa797ff15723ad35dfdff2a32a2db8fbc21b588e",
+      "wrapped_capture_sha256": "e248a9f475529747f59bae08d006e8a3bc14ad5212316705b67cc547657c562b"
+    },
+    {
+      "mode": "medium",
+      "status": "Medium \u00b7 1280\u00d7720 canvas",
+      "mean_mae_rgb": 6.146363062953242e-08,
+      "peak_frame_mae_rgb": 4.609772190633521e-07,
+      "last_frame_spatial_rgb_std": 0.009265731008997418,
+      "original_capture_sha256": "0cfbcb04aee7bf1cb0069c7818e5249d56a9a8a5c11da3899bf2958bf94e8381",
+      "wrapped_capture_sha256": "56ac7cbbcac40944814188d99884f6569dd698f0d9ab0d186ef42026bb189f76"
+    },
+    {
+      "mode": "high",
+      "status": "High \u00b7 1280\u00d7720 canvas",
+      "mean_mae_rgb": 2.718583687055798e-07,
+      "peak_frame_mae_rgb": 1.3829316003466374e-06,
+      "last_frame_spatial_rgb_std": 0.009329030257363358,
+      "original_capture_sha256": "bcb3ad7213e2a0bf7af1bcb952d0831e6ee4461a5012712011ec8ad47f498514",
+      "wrapped_capture_sha256": "af94081e9704ba40d4cefcdda3f87f73eafe8e3418a28479a2c73d70f1d636c2"
+    }
+  ]
+}

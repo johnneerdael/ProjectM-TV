@@ -1,0 +1,82 @@
+Subject: [PATCH] Compute warp rotation sine/cosine on the CPU after float conversion
+
+ProjectM TV-specific MilkDrop 2 compatibility correction. MilkDrop 2's
+milkdropfs.cpp rotation step uses cosf(fRot)/sinf(fRot). The observed Apple
+GLES translator returns zero for both functions at +/-10000000 even with
+highp, collapsing feedback UVs. CPU libm avoids driver range reduction and
+retains the emitted float semantics even at FLT_MAX, where a double 2*pi
+remainder is insufficient. Do not rewrite authored equation state.
+
+Reuse transforms.z for sine and add one internal float vertex attribute
+for cosine (56 -> 60 bytes, six -> seven attributes). Both warp programs
+use this shared vertex source, including authored/native prepared mesh
+replay. No public C/Java/JNI API changes. Cache the pair once per frame
+when no per-pixel code is present; otherwise use its final evaluated rot.
+Nonfinite angles remain nonfinite/unsupported; no identity substitution.
+
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -50,2 +50,3 @@
+     glEnableVertexAttribArray(5);
++    glEnableVertexAttribArray(6);
+
+@@ -54,3 +55,3 @@
+     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, radius)));    // Position, radius & angle
+-    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, zoom)));      // zoom, zoom exponent, rotation & warp
++    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, zoom)));      // zoom, zoom exponent, rotation sine & warp
+     glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, centerX)));   // Center coord
+@@ -58,2 +59,3 @@
+     glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, stretchX)));  // Stretch
++    glVertexAttribPointer(6, 1, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, cosRot)));    // Rotation cosine
+
+@@ -241,3 +243,8 @@
+     float zoomExp = static_cast<float>(*perFrameContext.zoomexp);
++    // MilkDrop 2 computes sinf/cosf after converting the evaluated angle to float.
++    // GPU trig can collapse both outputs for large angles even at highp; CPU libm
++    // also reduces the entire finite float domain, unlike remainder(angle, 2*pi).
+     float rot = static_cast<float>(*perFrameContext.rot);
++    float sinRot = std::sin(rot);
++    float cosRot = std::cos(rot);
+     float warp = static_cast<float>(*perFrameContext.warp);
+@@ -281,3 +288,5 @@
+                 curVertex.zoomExp = static_cast<float>(*perPixelContext.zoomexp);
+-                curVertex.rot = static_cast<float>(*perPixelContext.rot);
++                float const pixelRot = static_cast<float>(*perPixelContext.rot);
++                curVertex.sinRot = std::sin(pixelRot);
++                curVertex.cosRot = std::cos(pixelRot);
+                 curVertex.warp = static_cast<float>(*perPixelContext.warp);
+@@ -294,3 +303,4 @@
+                 curVertex.zoomExp = zoomExp;
+-                curVertex.rot = rot;
++                curVertex.sinRot = sinRot;
++                curVertex.cosRot = cosRot;
+                 curVertex.warp = warp;
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+@@ -81,3 +81,3 @@
+         float zoomExp{};
+-        float rot{};
++        float sinRot{};
+         float warp{};
+@@ -92,2 +92,4 @@
+         float stretchY{};
++
++        float cosRot{};
+     };
+--- a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
++++ b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+@@ -7,3 +7,3 @@
+ #define zoomExp transforms.y
+-#define rot transforms.z
++#define sinRotation transforms.z
+ #define warp transforms.w
+@@ -21,2 +21,3 @@
+ layout(location = 5) in vec2 stretch;
++layout(location = 6) in float cosRotation;
+
+@@ -69,4 +70,3 @@
+
+-    float cosRotation = cos(rot);
+-    float sinRotation = sin(rot);
++    // CPU-computed from the emitted float angle, including large finite values.
+     u = u2 * cosRotation - v2 * sinRotation + warp_center.x;

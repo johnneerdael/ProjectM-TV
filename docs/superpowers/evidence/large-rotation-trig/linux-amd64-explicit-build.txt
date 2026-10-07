@@ -1,0 +1,145 @@
+[  0%] Built target glm
+[  0%] Built target projectM_api
+[  1%] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/CodeWriter.cpp.o
+[  2%] Building C object projectm/vendor/SOIL2/CMakeFiles/SOIL2.dir/etc1_utils.c.o
+[  3%] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/Engine.cpp.o
+[  4%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/Compiler.c.o
+[  5%] Building C object projectm/vendor/SOIL2/CMakeFiles/SOIL2.dir/image_DXT.c.o
+[  6%] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/GLSLGenerator.cpp.o
+[  6%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/Scanner.c.o
+[  6%] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLParser.cpp.o
+[  7%] Building C object projectm/vendor/SOIL2/CMakeFiles/SOIL2.dir/image_helper.c.o
+/src/third_party/projectm/vendor/hlslparser/src/GLSLGenerator.cpp: In member function 'void M4::GLSLGenerator::OutputExpression(M4::HLSLExpression*, const M4::HLSLType*)':
+/src/third_party/projectm/vendor/hlslparser/src/GLSLGenerator.cpp:798:40: warning: too many arguments for format [-Wformat-extra-args]
+  798 |                         m_writer.Write(",", op);
+      |                                        ^~~
+[  8%] Building C object projectm/vendor/SOIL2/CMakeFiles/SOIL2.dir/SOIL2.c.o
+[  9%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/CompileContext.c.o
+[ 10%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/CompilerFunctions.c.o
+[ 11%] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLTokenizer.cpp.o
+[ 12%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/ExpressionTree.c.o
+[ 13%] Building CXX object projectm/vendor/hlslparser/CMakeFiles/hlslparser.dir/src/HLSLTree.cpp.o
+[ 13%] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/MilkdropFFT.cpp.o
+[ 14%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/MemoryBuffer.c.o
+[ 14%] Built target SOIL2
+[ 16%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/TreeFunctions.c.o
+[ 16%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/TreeVariables.c.o
+[ 16%] Building C object projectm/vendor/projectm-eval/projectm-eval/CMakeFiles/projectM_eval.dir/api/projectm-eval.c.o
+[ 17%] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/PCM.cpp.o
+[ 18%] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/Loudness.cpp.o
+[ 19%] Linking C static library libprojectM_evald.a
+[ 19%] Built target projectM_eval
+[ 19%] Built target hlslparser
+[ 20%] Building CXX object projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/WaveformAligner.cpp.o
+[ 21%] Generating BuiltInTransitionsResources.hpp
+[ 22%] Generating MilkdropStaticShaders.cpp, MilkdropStaticShaders.hpp
+[ 23%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/CopyTexture.cpp.o
+[ 24%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/FileScanner.cpp.o
+[ 25%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropStaticShaders.cpp.o
+[ 25%] Built target Audio
+[ 26%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Framebuffer.cpp.o
+/src/third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp: In member function 'void libprojectM::Renderer::Framebuffer::MaskDrawBuffer(int, bool)':
+/src/third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp:341:38: warning: unused parameter 'bufferIndex' [-Wunused-parameter]
+  341 | void Framebuffer::MaskDrawBuffer(int bufferIndex, bool masked)
+      |                                  ~~~~^~~~~~~~~~~
+[ 27%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/MilkdropNoise.cpp.o
+[ 28%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/PresetTransition.cpp.o
+[ 29%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/BlurTexture.cpp.o
+[ 29%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/RenderItem.cpp.o
+[ 30%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Sampler.cpp.o
+[ 31%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Shader.cpp.o
+[ 32%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/Texture.cpp.o
+[ 33%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureAttachment.cpp.o
+[ 33%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Border.cpp.o
+[ 34%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureManager.cpp.o
+[ 35%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TextureSamplerDescriptor.cpp.o
+[ 35%] Building CXX object projectm/src/libprojectM/Renderer/CMakeFiles/Renderer.dir/TransitionShaderManager.cpp.o
+[ 36%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/CustomShape.cpp.o
+[ 37%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/CustomWaveform.cpp.o
+[ 38%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/DarkenCenter.cpp.o
+[ 38%] Built target Renderer
+[ 39%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/EvalLibMutex.cpp.o
+[ 40%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Factory.cpp.o
+[ 41%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FeedbackDetail.cpp.o
+[ 41%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FeedbackDiffusion.cpp.o
+[ 42%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Filters.cpp.o
+[ 43%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/FinalComposite.cpp.o
+[ 44%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LegacyEquationCode.cpp.o
+[ 45%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LineGeometry.cpp.o
+[ 46%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/LineRenderer.cpp.o
+[ 47%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/IdlePreset.cpp.o
+[ 47%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropPreset.cpp.o
+[ 48%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MilkdropShader.cpp.o
+[ 49%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/MotionVectors.cpp.o
+[ 50%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerFrameContext.cpp.o
+[ 51%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelContext.cpp.o
+[ 52%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PerPixelMesh.cpp.o
+[ 53%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PresetFileParser.cpp.o
+[ 54%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/PresetState.cpp.o
+[ 54%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/ShapePerFrameContext.cpp.o
+[ 55%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/VideoEcho.cpp.o
+[ 56%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveform.cpp.o
+[ 57%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/WaveformPerFrameContext.cpp.o
+[ 58%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/WaveformPerPointContext.cpp.o
+[ 59%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/CenteredSpiro.cpp.o
+[ 60%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Circle.cpp.o
+[ 60%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/DerivativeLine.cpp.o
+[ 61%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/DoubleLine.cpp.o
+[ 62%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/ExplosiveHash.cpp.o
+[ 63%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Factory.cpp.o
+[ 64%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Line.cpp.o
+[ 65%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/LineBase.cpp.o
+[ 66%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077Wave11.cpp.o
+[ 66%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077Wave9.cpp.o
+[ 67%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveFlower.cpp.o
+[ 68%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveLasso.cpp.o
+[ 69%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveSkewed.cpp.o
+[ 70%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveStar.cpp.o
+[ 71%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/Milkdrop2077WaveX.cpp.o
+[ 72%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/SpectrumLine.cpp.o
+[ 72%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/WaveformMath.cpp.o
+[ 73%] Building CXX object projectm/src/libprojectM/MilkdropPreset/CMakeFiles/MilkdropPreset.dir/Waveforms/XYOscillationSpiral.cpp.o
+[ 73%] Built target MilkdropPreset
+[ 75%] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/PresetFactory.cpp.o
+[ 75%] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/PresetFactoryManager.cpp.o
+[ 76%] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/ProjectMCWrapper.cpp.o
+[ 77%] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/ProjectM.cpp.o
+[ 78%] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/TimeKeeper.cpp.o
+[ 78%] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM_main.dir/Utils.cpp.o
+[ 78%] Built target projectM_main
+[ 79%] Building CXX object projectm/src/libprojectM/CMakeFiles/projectM.dir/__/__/dummy.cpp.o
+[ 80%] Linking CXX static library libprojectM-4d.a
+[ 80%] Built target projectM
+[ 81%] Building CXX object CMakeFiles/texture-routing-regressions.dir/texture_routing_test.cpp.o
+[ 83%] Building CXX object CMakeFiles/random-texture-regressions.dir/random_texture_test.cpp.o
+[ 83%] Building CXX object CMakeFiles/projectm-regressions.dir/regression_test.cpp.o
+[ 84%] Building CXX object CMakeFiles/warp-rotation-regressions.dir/warp_rotation_test.cpp.o
+[ 85%] Linking CXX executable warp-rotation-regressions
+[ 86%] Linking CXX executable texture-routing-regressions
+[ 87%] Linking CXX executable projectm-regressions
+[ 87%] Built target warp-rotation-regressions
+[ 88%] Building CXX object CMakeFiles/warp-zoom-regressions.dir/warp_zoom_test.cpp.o
+[ 88%] Built target projectm-regressions
+[ 88%] Built target texture-routing-regressions
+[ 88%] Building CXX object CMakeFiles/shape-sampler-regressions.dir/shape_sampler_test.cpp.o
+[ 89%] Building CXX object CMakeFiles/blur-range-regressions.dir/blur_range_test.cpp.o
+[ 90%] Linking CXX executable warp-zoom-regressions
+[ 90%] Built target warp-zoom-regressions
+[ 90%] Building CXX object CMakeFiles/dynamic-controls-regressions.dir/dynamic_controls_test.cpp.o
+[ 91%] Linking CXX executable random-texture-regressions
+[ 92%] Linking CXX executable blur-range-regressions
+[ 93%] Linking CXX executable shape-sampler-regressions
+[ 93%] Built target random-texture-regressions
+[ 93%] Built target blur-range-regressions
+[ 94%] Building CXX object CMakeFiles/float-literal-regressions.dir/float_literal_test.cpp.o
+[ 95%] Building CXX object CMakeFiles/shader-parser-regressions.dir/shader_parser_test.cpp.o
+[ 96%] Linking CXX executable dynamic-controls-regressions
+[ 96%] Built target shape-sampler-regressions
+[ 97%] Building CXX object CMakeFiles/implicit-global-regressions.dir/implicit_global_test.cpp.o
+[ 98%] Linking CXX executable shader-parser-regressions
+[ 99%] Linking CXX executable implicit-global-regressions
+[100%] Linking CXX executable float-literal-regressions
+[100%] Built target shader-parser-regressions
+[100%] Built target implicit-global-regressions
+[100%] Built target float-literal-regressions
+[100%] Built target dynamic-controls-regressions
