@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "package": "nl.neerdael.projectmtv.memorybaseline",
+    "apk_sha256": "b6c610e47db9fcffc6b4a4aa0d50b4833b829b67fe92dc1832416499bf8dc83e",
+    "native_sha256": {
+      "lib/arm64-v8a/libprojectmtv.so": "0b1225e1aa5b95afcb5f4f04170ec780a920e348963f0afd9efa026b1682be17",
+      "lib/armeabi-v7a/libprojectmtv.so": "229cdce834d7d21dcce3275a4e1c3009bf8acdddd77f62e462d45de5e2bc6f74"
+    }
+  },
+  "candidate": {
+    "package": "nl.neerdael.projectmtv.memorycandidate",
+    "apk_sha256": "7664650d91221d5a9e9105be6239ff2ab6f6c800ac5ed088568c3043b7687149",
+    "native_sha256": {
+      "lib/arm64-v8a/libprojectmtv.so": "0b1225e1aa5b95afcb5f4f04170ec780a920e348963f0afd9efa026b1682be17",
+      "lib/armeabi-v7a/libprojectmtv.so": "229cdce834d7d21dcce3275a4e1c3009bf8acdddd77f62e462d45de5e2bc6f74"
+    }
+  }
+}

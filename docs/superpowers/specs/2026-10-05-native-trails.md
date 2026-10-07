@@ -87,9 +87,11 @@ An ActivityManager sampler initialized by ProjectMCore.init uses application
 context and runs on the existing ~1sFPS callback. The available-memory reading
 already accounts for current app/other-process usage. Before growth, estimate
 additional rendering allocations for the candidate size/level, budget two
-presets for enabled transitions and temporary resize overlap. A reserve of
-max(totalRAM/5, Android.threshold+128MiB), with64MiB recovery margin, provides
-headroom. Current policy estimates32bytes/pixel/preset for Standard and40 for
+presets for enabled transitions and temporary resize overlap. The current reserve is Android.threshold+128MiB on devices with at least
+3,584MiB kernel-visible RAM (nominal4GB+), and
+max(totalRAM/5, Android.threshold+128MiB) on smaller devices. Both retain a64MiB
+recovery margin. Android manages cached-process reclamation; no root or app
+cleanup setting is used. See [automatic memory policy](2026-10-07-reclaim-aware-memory.md). Current policy estimates32bytes/pixel/preset for Standard and40 for
 native detail; these are conservative factors, not measured bounds. Invalid
 samples forbid growth. Low-memory/reserve checks precede FPS settling; healthy
 memory and candidate-safeFPS samples are required before upward probes. Recovery

@@ -27,14 +27,35 @@ public class RenderMemoryBudgetTest {
             assertFalse(RenderMemoryBudget.canGrow(sample, 0, 1L << 20));
         }
     }
-    @Test public void reserveHonorsBothInstalledRamFractionAndAndroidThreshold() {
-        assertEquals((4L << 30) / 5, RenderMemoryBudget.reserveBytes(
-                new MemorySnapshot(4L << 30, 3L << 30, 128L << 20, false)));
+    @Test public void largerDevicesReserveForAndroidPressureRatherThanInstalledRamFraction() {
+        assertEquals(256L << 20, RenderMemoryBudget.reserveBytes(
+                new MemorySnapshot(3960360L << 10, 740L << 20, 128L << 20, false)));
+        assertEquals(256L << 20, RenderMemoryBudget.reserveBytes(
+                new MemorySnapshot(8L << 30, 740L << 20, 128L << 20, false)));
+        assertEquals(640L << 20, RenderMemoryBudget.reserveBytes(
+                new MemorySnapshot(4L << 30, 900L << 20, 512L << 20, false)));
+    }
+    @Test public void smallerDevicesRetainConservativeReserveAndLargeDeviceBoundaryIsExplicit() {
+        assertEquals((2L << 30) / 5, RenderMemoryBudget.reserveBytes(
+                new MemorySnapshot(2L << 30, 900L << 20, 128L << 20, false)));
         assertEquals(640L << 20, RenderMemoryBudget.reserveBytes(
                 new MemorySnapshot(2L << 30, 1L << 30, 512L << 20, false)));
+        long boundary = 3584L << 20;
+        assertEquals((boundary - 1) / 5, RenderMemoryBudget.reserveBytes(
+                new MemorySnapshot(boundary - 1, 900L << 20, 128L << 20, false)));
+        assertEquals(256L << 20, RenderMemoryBudget.reserveBytes(
+                new MemorySnapshot(boundary, 900L << 20, 128L << 20, false)));
+    }
+    @Test public void moderateAvailableMemoryCanGrowButCannotAuthorizeAnUnsafeAllocation() {
+        MemorySnapshot sample = new MemorySnapshot(3960360L << 10, 740L << 20, 184L << 20, false);
+        long current = RenderMemoryBudget.estimatedBytes(1920, 1080, 0, true);
+        assertTrue(RenderMemoryBudget.canGrow(sample, current,
+                RenderMemoryBudget.estimatedBytes(2240, 1260, 0, true)));
+        assertFalse(RenderMemoryBudget.canGrow(sample, current,
+                RenderMemoryBudget.estimatedBytes(3840, 2160, 0, true)));
     }
     @Test public void downshiftSelectsEnoughEstimatedReleaseToRecoverReserve() {
-        MemorySnapshot sample = new MemorySnapshot(4L << 30, 700L << 20, 128L << 20, false);
+        MemorySnapshot sample = new MemorySnapshot(4L << 30, 200L << 20, 128L << 20, false);
         assertFalse(RenderMemoryBudget.canRecoverByShrinking(sample, 500L << 20, 450L << 20));
         assertTrue(RenderMemoryBudget.canRecoverByShrinking(sample, 500L << 20, 250L << 20));
     }
