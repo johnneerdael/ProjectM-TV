@@ -1,0 +1,971 @@
+{
+  "schema": "projectmtv-random100-frame-rgb-v1",
+  "mode": "final",
+  "backend": "android-gpu-emulator",
+  "device": "emulator-5624",
+  "expected_user_id": 0,
+  "seed": 12345,
+  "clock": "frame/30.0",
+  "fps": 30,
+  "frames": 480,
+  "frame_indices": [
+    0,
+    479
+  ],
+  "hash_scope": "every full-resolution top-down RGB8 frame; alpha excluded; zero tolerance",
+  "base_profiles": [
+    "1080p"
+  ],
+  "profiles": {
+    "1080p": {
+      "expected_level": "standard",
+      "expected_trails": "inactive (render 1080p)",
+      "height": 1080,
+      "nativeTrails": 0,
+      "referenceHeight": 768,
+      "referenceWidth": 1024,
+      "width": 1920
+    },
+    "native4k": {
+      "expected_level": "standard",
+      "expected_trails": "1280×720",
+      "height": 2160,
+      "nativeTrails": 0,
+      "referenceHeight": 768,
+      "referenceWidth": 1024,
+      "width": 3840
+    },
+    "native4k-high": {
+      "expected_level": "high",
+      "expected_trails": "1280×720",
+      "height": 2160,
+      "nativeTrails": 2,
+      "referenceHeight": 720,
+      "referenceWidth": 1280,
+      "width": 3840
+    },
+    "native4k-medium": {
+      "expected_level": "medium",
+      "expected_trails": "1280×720",
+      "height": 2160,
+      "nativeTrails": 1,
+      "referenceHeight": 720,
+      "referenceWidth": 1280,
+      "width": 3840
+    }
+  },
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "lowEndDevice": false,
+    "mesh": [
+      48,
+      32
+    ],
+    "musicCategory": "all",
+    "nativeTrails": "per declared profile",
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC"
+  },
+  "repeats": [
+    0,
+    1
+  ],
+  "random_sample_count": 100,
+  "named_regression_count": 351,
+  "additional_regression_count": 347,
+  "selection_sha256": "6a6aae38fc8fd25e1ccdf00cbfed8641dcc18fd4bb5db9316edd98f8d5038ef8",
+  "pcm_sha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "helper_sha256": {
+    "docs/superpowers/evidence/upstream-master-4-2/random-100/common.py": "99db1a7be86494c8497f29e57e7fb42323cfdc7ea00bc243e4287a355e116c45",
+    "docs/superpowers/evidence/upstream-master-4-2/random-100/harness/EveryFrameHashes.java": "19f084a111bee7b2a1f43fd082fd7e2f2599ec0f1568dd25452239066015da43",
+    "docs/superpowers/evidence/upstream-master-4-2/random-100/prepare_worker.py": "1a781079546c33221b78be257ada8721773a0a16ce1fc22e9c14585ff5f7bef4",
+    "docs/superpowers/evidence/upstream-master-4-2/random-100/q2160-profile-evidence.json": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+    "docs/superpowers/evidence/upstream-master-4-2/random-100/run_sample.py": "fdb7e2d7bdfbc256c4b83f18457c01624019732a0bbe7f8795b7b475cb1f06e5",
+    "tools/core-corpus/run_corpus.py": "ea1754b2fbe7888b0f1dcc95a94c4bdca90071de02488ba64cdd308b26791aec",
+    "tools/native-trails/run_validation.py": "27543d1f8a70d4b34065d20de32b5b3a2ec40134cb20861fa382528fa667c0bf",
+    "tools/preset-lab/src/preset_lab/identity.py": "56cdd90cb4ee3990f0da4eac6ea43abcca30d1dbc1c3148994d3a394a2504bdd"
+  },
+  "published_aar_sha256": "fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327",
+  "positive_proof_frames": [
+    120,
+    479
+  ],
+  "positive_proof_presets": [
+    "suksma - borat pubis jokulars.milk",
+    "suksma - dinner - ratios that make you feel hopeless - flx spr col(1).milk",
+    "amandio c - log tower 1 pig vomit 2uqle4 dorqstre l-egrunth.milk",
+    "midgitstraights of majillaen - featy sweet.milk",
+    "$$$ Royal - Mashup (191).milk",
+    "martin + Se7enSlasher - pixies party (random texture edit).milk"
+  ],
+  "positive_proof_repeats": [
+    0,
+    1
+  ],
+  "archives": {
+    "protocol.json": {
+      "uncompressed_sha256": "64a2ac7652e762bcd13cb5d7c8c657e828fa2d65517b60f013386db49f45679a",
+      "compressed_sha256": "2177f85ca0840b2409fc837ff16996efb490cfc35030c473709d37fe02a053b3",
+      "compressed_bytes": 3844821
+    },
+    "selection.json": {
+      "uncompressed_sha256": "6a6aae38fc8fd25e1ccdf00cbfed8641dcc18fd4bb5db9316edd98f8d5038ef8",
+      "compressed_sha256": "569001322b049c2715dc945db1b195b8d0a7ff702f97b48741906c7aefc02699",
+      "compressed_bytes": 730183
+    }
+  },
+  "release": {
+    "release_tag": "v2.3.15",
+    "source_commit": "43023889ec38cf1250f3bfcaaf079a840acbdf76",
+    "engine_commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "aar_sha256": "fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327",
+    "ordered_patches": [
+      {
+        "name": "0001-plasma-transition-float-overflow-shield.patch",
+        "sha256": "90211950c7f5fe2c29ee0a23e0217ba44a53cbfd5fb1f77887ad242e9dd365bc"
+      },
+      {
+        "name": "0002-render-target-resize-program-cache-shader-state.patch",
+        "sha256": "f9412348e6079972ae87b20091d78888a10dd4c4b902a6f1e08856a2e19f7005"
+      },
+      {
+        "name": "0003-hlslparser-classic-locale.patch",
+        "sha256": "c2cecd1ecfa020015e929caaab7a5cf26bd6c9b0c43473861bc1aaeef5792e87"
+      },
+      {
+        "name": "0004-projectm-eval-thread-local-rand.patch",
+        "sha256": "ee624476036c144f6b9aef688da6c46772e917b208b15441982f7cf8a68e8584"
+      },
+      {
+        "name": "0005-cache-translated-preset-shaders.patch",
+        "sha256": "427847d0815576d012514345e829992608260a25f095b0ec622f53b6cf846562"
+      },
+      {
+        "name": "0006-custom-shapes-batched-draws.patch",
+        "sha256": "f582ce185e20060e6c2a65eb5bcdf5e23dd3f03949cd7666e7c42092a86f9eff"
+      },
+      {
+        "name": "0007-framebuffer-texture-pool.patch",
+        "sha256": "f6527189010d21f5180b1cd2d6ec53913fc6ceb59a4ca7024b9809ebfabbac45"
+      },
+      {
+        "name": "0008-hlsl-floating-point-modulo.patch",
+        "sha256": "8f871546bc006afee7fc520f353a6181d8aa085c0b176425475a03837b7c8d90"
+      },
+      {
+        "name": "0009-tile-gpu-invalidate-and-mesh-orphaning.patch",
+        "sha256": "b968939c0d58981a8c1a4ff100852a912dd92dd25ce9d875791dde727e6619d1"
+      },
+      {
+        "name": "0010-skip-redundant-previous-frame-flip.patch",
+        "sha256": "0b4941b388ce61166a038b0212496cd94b682da9353a2960c8c575300287a77d"
+      },
+      {
+        "name": "0011-indexed-warp-mesh.patch",
+        "sha256": "296905e75730fdb7ab39769cec8a1ee980ddb3ab3f4d0f5083b0483f4a091384"
+      },
+      {
+        "name": "0012-merged-warp-pass-direct-blur.patch",
+        "sha256": "e1acef87cfb563ce5d58d6ad6011ce745a98c77ac9465703964e596c7ca6daae"
+      },
+      {
+        "name": "0013-motion-vector-map-only-when-shown.patch",
+        "sha256": "61bfd88a026f1c5825c1827aa0993dc131956705c05aa81428f959b2f0e9500d"
+      },
+      {
+        "name": "0014-video-echo-in-final-orientation.patch",
+        "sha256": "59881214d9dfec9fd7c1b636df383612008ae2e8d2f3153ebdca70fdb0da1620"
+      },
+      {
+        "name": "0015-keep-output-for-blur-reading-and-discarding-shaders.patch",
+        "sha256": "018652ae06d4ebdc9a8080bd14ae7b20b8abc9ebb6be132967a3ea1644554190"
+      },
+      {
+        "name": "0016-direct-composite-output.patch",
+        "sha256": "364077d6131884d8b9f72718e179281722e7cfa1c9b193af6aaa244f3d135e02"
+      },
+      {
+        "name": "0017-pcm-max-samples-is-buffer-size.patch",
+        "sha256": "bfce4d6b77f9ad1bb63b93f3b4395dd0745282b89bd29a6b4f266ea20838cd9d"
+      },
+      {
+        "name": "0018-hlslparser-parenthesized-constructor-expressions.patch",
+        "sha256": "9f6cd972d67dfda9d76ebe8d168531e676c1ce32f185dcbe6c19abfabcc926ed"
+      },
+      {
+        "name": "0019-hlslparser-number-scan-without-source-copy.patch",
+        "sha256": "32a914b0ad6be0fdd8d144e0d075e9b7e5876a76ca385fcbaf555f8b6e99c8bc"
+      },
+      {
+        "name": "0020-projectm-eval-1.0.7-evaluator-fixes.patch",
+        "sha256": "de9e4f64b5e252445ae50d3f540d7b76a607cc27daceaf217a2ef901341d7b27"
+      },
+      {
+        "name": "0021-hlslparser-self-referencing-macros.patch",
+        "sha256": "71382b8ecd90a35a24023d8d16bae0f0f2881513748461166aba9faca7cf89aa"
+      },
+      {
+        "name": "0022-custom-waveform-sample-bounds.patch",
+        "sha256": "ffe85782c4689f8bc36391c3cb002b7a015467f6d50feb8353a19e045e0bd240"
+      },
+      {
+        "name": "0023-milkdrop-preset-unconditional-shader-includes.patch",
+        "sha256": "0a856f5843a75d44ad7c4ee3197936bdef450b8f33d91ed500ba36dabf468fbe"
+      },
+      {
+        "name": "0024-quad-lines.patch",
+        "sha256": "3da8433e6096a87176ef4a82bd55261e5dbb69176c0f825bb1d555fe655d82fa"
+      },
+      {
+        "name": "0025-shader-failure-handling.patch",
+        "sha256": "b9460b0d17a53f30675938efc92707258c18ed84479695cd51cf1617a792db85"
+      },
+      {
+        "name": "0026-custom-warp-sampler-binding.patch",
+        "sha256": "3bb981b2a255895f5816dc450f92ecf7ba1caabcdc94c366a84cb1ef01938d31"
+      },
+      {
+        "name": "0027-preset-exception-diagnostics.patch",
+        "sha256": "d4a802f5bfe201eabd908095d8da0fc6d55d635b36686d05b24382d2453bd37c"
+      },
+      {
+        "name": "0028-initialize-fresh-color-history.patch",
+        "sha256": "9c5cca38b6d8d19dab4f85e1e104a6a73c6a92766bdd19e8fa31aa9713706b7f"
+      },
+      {
+        "name": "0029-per-frame-record-compatibility.patch",
+        "sha256": "a79b74945135f2383e3b6003e5ba3a501389023826a98da36deb0a073fe87728"
+      },
+      {
+        "name": "0030-hlslparser-uniform-write-copies.patch",
+        "sha256": "aa5d7d37c8216feec833171eedd20d057c4e256636fbaede01a506c7bc454b33"
+      },
+      {
+        "name": "0031-hlslparser-array-initializer-layout.patch",
+        "sha256": "475d804a35875a4bb1b8b86bc3cbe8d535f29af0e2f1f3514e43f0a263fd46fe"
+      },
+      {
+        "name": "0032-sampler-state-preprocessing.patch",
+        "sha256": "c8950136ef61a9b1090ba29e3f49d6c59c8d74ef75f4590f36b6eb6fe15ce049"
+      },
+      {
+        "name": "0033-legacy-equation-code-all-phases.patch",
+        "sha256": "5b86bcb46e832eb8c241b41f456e5ca2ae5284fe16a12ef43dae093b85b571b4"
+      },
+      {
+        "name": "0034-projectm-eval-lone-dot-number.patch",
+        "sha256": "6768bc1343049bafe8590893a762d94d68f57740e7b6154a9303f586999ff791"
+      },
+      {
+        "name": "0035-leave-out-uncompilable-equation-code.patch",
+        "sha256": "690950939f284b9d4831548cd03cb129b1f138809c16228631a72cea3e41e6ec"
+      },
+      {
+        "name": "0036-hlslparser-contextual-identifiers-macro-tokens-postfix.patch",
+        "sha256": "addd1f64eff60da530a7aa764b3b6af9253dcd64cc3c4361fe8860e2c25864a9"
+      },
+      {
+        "name": "0037-random-texture-alias-bindings.patch",
+        "sha256": "92905a34b19ada2128d3c4fd7e603bd6c52acf9f22b27f4678aadf38d4c22652"
+      },
+      {
+        "name": "0038-feedback-diffusion-compensation.patch",
+        "sha256": "7dab8ec89bd3e4e61d469185235ac6a48e7ff6a8410190cd0d211959470401e2"
+      },
+      {
+        "name": "0039-feedback-diffusion-build-policy.patch",
+        "sha256": "7f3b543d9c42172d95f49582e91883bde0718a556962b30b8a847e65f5c00011"
+      },
+      {
+        "name": "0040-hlslparser-implicit-global-inputs.patch",
+        "sha256": "e2f902214bea04657c92c0572af0e47d32cc71b0d3f64437deb327dbb058e907"
+      },
+      {
+        "name": "0041-blur-framebuffer-bindings.patch",
+        "sha256": "8ac85ecb409e1344e05552a50d380051e927450ddb744f13d5e7136938be965a"
+      },
+      {
+        "name": "0042-feedback-detail-layer.patch",
+        "sha256": "be3f39da0e936a48b581781ed1b8ab1e13810ac6ba55b37abba6f5efb5ad151e"
+      },
+      {
+        "name": "0043-authored-geometry-feedback.patch",
+        "sha256": "d9ca27873599e5c38ce88c91277f4dd9c5b0c33c6405e84bc062e1dd52f3d522"
+      },
+      {
+        "name": "0044-hlslparser-float-literal-roundtrip.patch",
+        "sha256": "aa8cdb27f42a9f8213ffc3d11abed23d2e7528c2cb1f2386dea2da6526794e93"
+      },
+      {
+        "name": "0045-textured-shape-sampler.patch",
+        "sha256": "875d5e8389a13ec14eae224c9f71d56bc6de03faeb2d62c346650443c5c2cb4f"
+      },
+      {
+        "name": "0046-blur-range-interval.patch",
+        "sha256": "d5aca2d3be2e3f10e33430936ff559aa4231366b9644f120a09ec12a8ea239a2"
+      },
+      {
+        "name": "0047-fixed-warp-signed-unit-zoom.patch",
+        "sha256": "62b649f36c7eb7139909825f4de5a99e79cf7014eab1c50498af6934fb81b7cf"
+      },
+      {
+        "name": "0048-live-builtin-wave-controls.patch",
+        "sha256": "b77c14ad4bbd06d146e603289fbb78534762cf8dc5db4988b4ba23f001d20c6d"
+      },
+      {
+        "name": "0049-live-legacy-display-controls.patch",
+        "sha256": "c76331026eef4786d4b4f82e7e137cbe02b50d6fbd865f0a19e7cd54a5934619"
+      }
+    ]
+  },
+  "named_profile_extensions": {
+    "$$$ Royal - Mashup (191).milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 1,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        },
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "3dRaGoNs & Rovastar - StarGate rEmIx (Jelly).milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 13,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "A HD ADAMFX Creation  !!FT  Martin + flexi +  Rovastar MDropFX Collaboration  AdamFX HD INFECTIONFX WitchCraft Disruption .milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 9,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "A Remixed Digital Echasketch  Again 2 martin - no religion  + disco Fruits Machine + Raron + mstress + 8.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "Fed - quadratrail.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 2,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Flexi + orb + geiss - the computer is your friend trust the computer.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 16,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Fumbling_Foo & Flexi, Martin, Orb - Acid Mandala v1c.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 6,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Geiss - Motion Blur.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 5,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Goody - Lightning - Vegas Dreamer remix (PS2-0) - mix.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Reported feedback/reference-scale issue context; hypotheses in the source are not confirmed causes.",
+          "basis": "Explicit measured remaining brightness-loss investigation witnesses.",
+          "category": "required-issue-witness",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 566,
+            "path": "docs/superpowers/evidence/0025-feedback-diffusion/current-main-validation/remaining-brightness-analysis/remaining-mechanisms.json",
+            "sha256": "8123e4b5ac24ec7dc32b146b98b3a35f6c488a99f4a3a05602e57d06446b0519"
+          },
+          "patches": [
+            "0038",
+            "0042"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 17,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Hexcollie - Virtual LSD (martin shader) newborns of satan.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "Jc - Geometry 101.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 11,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "LuxXx - Growing Alien Organs i.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "Mig_Oscilloscope022 b.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 14,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Phat+EoS_Mandala_Chasers_remix_Targeting_mix shf what too much activity.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 10,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Stahlregen & Flexi + Geiss + Martin + Rovastar + Telek - DiskWasher (Gentle RMX).milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Reported feedback/reference-scale issue context; hypotheses in the source are not confirmed causes.",
+          "basis": "Explicit measured remaining brightness-loss investigation witnesses.",
+          "category": "required-issue-witness",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 403,
+            "path": "docs/superpowers/evidence/0025-feedback-diffusion/current-main-validation/remaining-brightness-analysis/remaining-mechanisms.json",
+            "sha256": "8123e4b5ac24ec7dc32b146b98b3a35f6c488a99f4a3a05602e57d06446b0519"
+          },
+          "patches": [
+            "0038",
+            "0042"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "Stahlregen & flexi + Geiss + martin + Rovastar - Tides (martin's metallics).milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 12,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "TonyMilkdrop - I Like Cartoon --- Isosceles edit.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 8,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Waltra - Heaven Liquid.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 7,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "Zylot & Shifter - Tartan (Silent Heaven Mix).milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 3,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "astral spinorgentics encrustcore nz+.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 4,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "fed - glowing 5 - fingers rmx nz+.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "fed - glowing 5 - fingers rmx.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "midgitstraights of majillaen - featy sweet.milk": {
+      "activation_reasons": [
+        {
+          "attribution": "Owner-required focused matrix; patch-family association does not mean each preset was defective under each member.",
+          "basis": "Existing frozen 17-preset focused Native trails control matrix, including named line/shape/feedback regression witnesses.",
+          "category": "owner-required-control",
+          "evidence": {
+            "commit": "b1bb994dbfaa04159630570cd9b2c255b173a6bd",
+            "line": 15,
+            "path": "tools/native-trails/presets.txt",
+            "sha256": "c147476473d93c3e88e71be7c8dacc0819dcd2356976f29e8cbf5f94a77e4942"
+          },
+          "patches": [
+            "0038",
+            "0042",
+            "0043"
+          ]
+        }
+      ],
+      "profiles": [
+        "native4k",
+        "native4k-medium",
+        "native4k-high"
+      ]
+    },
+    "shifter - mosaique simple - foobar2000 nz+ covet that which is sacred.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "suksma - mood rings for masochist alien deities - portentous anskeptising.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    },
+    "suksma - negative infinity for not flinching - couldn't not.milk": {
+      "activation_reasons": [
+        {
+          "category": "explicit-original-q2160-control",
+          "evidence_sha256": "e6ee2159649fa637d26a899244ea6d9d9fd9b3880f70420126146ad16903f6c8",
+          "mapping_note": "Historical controls predate Native gain selector; Standard0 is the current corresponding source profile, not a claimed historical setting.",
+          "original_profile": {
+            "height": 2160,
+            "line_reference_height": 768,
+            "line_reference_width": 1024,
+            "native_trails_integer": null,
+            "quad": true,
+            "width": 3840
+          }
+        }
+      ],
+      "profiles": [
+        "native4k"
+      ]
+    }
+  },
+  "renderer_source_commit": "c3872be3fec33318265172b5b41972aa9571efb7",
+  "candidate_engine": "6f64807467e312034883a4389e6aa80a675458bc",
+  "candidate_evaluator": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a"
+}

@@ -1,0 +1,160 @@
+{
+  "schema": "projectmtv-authentic-comparison-figure-v1",
+  "protocol_sha256": "7eaf62a6dba9804a31df9154208859845f663cb685d32728132682af8f7ddbb5",
+  "release_tag": "v2.3.15",
+  "released_aar_sha256": "fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327",
+  "figure_sha256": "41937cc250d657afda33f76d50137d11887685915cc0416007b23eac17f094f2",
+  "scope": "First three predeclared random representatives; source RGB equality and separate uncontrolled released-AAR runtime images",
+  "records": [
+    {
+      "preset": "suksma - borat pubis jokulars.milk",
+      "profile": "1080p",
+      "frame": 479,
+      "source_rgb_pixels_changed": 0,
+      "source_max_channel_delta": 0,
+      "inputs": [
+        {
+          "role": "baseline",
+          "repeat": 0,
+          "job_key": "c9d595205dfa051df7448f1af212b7c28c37f656baff6a51fd960c7f3325788e",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/c9d595205dfa051df7448f1af212b7c28c37f656baff6a51fd960c7f3325788e/frame-479.png",
+          "png_sha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgb_sha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        },
+        {
+          "role": "baseline",
+          "repeat": 1,
+          "job_key": "bb4abf417940d649b28c01be17f3c3accac522516ad92d895f7c9a2dba07df46",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/bb4abf417940d649b28c01be17f3c3accac522516ad92d895f7c9a2dba07df46/frame-479.png",
+          "png_sha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgb_sha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        },
+        {
+          "role": "candidate",
+          "repeat": 0,
+          "job_key": "07108dbb6ddcce98332e9981d8ed0e9b335c529fc8203b35efb95c7ced73ab44",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/07108dbb6ddcce98332e9981d8ed0e9b335c529fc8203b35efb95c7ced73ab44/frame-479.png",
+          "png_sha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgb_sha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        },
+        {
+          "role": "candidate",
+          "repeat": 1,
+          "job_key": "93cf024417ac103bffff2ff3e85166926050eb5c3568229c1535de827181d64e",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/93cf024417ac103bffff2ff3e85166926050eb5c3568229c1535de827181d64e/frame-479.png",
+          "png_sha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgb_sha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        },
+        {
+          "role": "released",
+          "repeat": 0,
+          "job_key": "2ff9864a5edaba6db160b66ec831f4c26f0c2fa3144d0dd26d58677b2719cfb6",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/jobs/2ff9864a5edaba6db160b66ec831f4c26f0c2fa3144d0dd26d58677b2719cfb6/frame-479.png",
+          "png_sha256": "d51e39527795372e861226b5d137ce60d0aa9daf0e55a13d1132aa25b6250bbb",
+          "rgb_sha256": "8b8764fcc163427aa4837f4bb890a6e8191ca9fbc6c3baa69cd2e270e0fce2de",
+          "clock_rng": "uncontrolled"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - dinner - ratios that make you feel hopeless - flx spr col(1).milk",
+      "profile": "1080p",
+      "frame": 479,
+      "source_rgb_pixels_changed": 0,
+      "source_max_channel_delta": 0,
+      "inputs": [
+        {
+          "role": "baseline",
+          "repeat": 0,
+          "job_key": "c8744509fc6e92ce491a76af976722b5a189eeea5337096f5338dc2c2e0e66a7",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/c8744509fc6e92ce491a76af976722b5a189eeea5337096f5338dc2c2e0e66a7/frame-479.png",
+          "png_sha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgb_sha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        },
+        {
+          "role": "baseline",
+          "repeat": 1,
+          "job_key": "776aca3a01762be52dbd6be1bc65d8d734cea3ad10799a9a6e6de19fad794d27",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/776aca3a01762be52dbd6be1bc65d8d734cea3ad10799a9a6e6de19fad794d27/frame-479.png",
+          "png_sha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgb_sha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        },
+        {
+          "role": "candidate",
+          "repeat": 0,
+          "job_key": "4deb08a7f6b101da04abcd36b7c1e11a994c2382d5e082e6da950a008981e7c3",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/4deb08a7f6b101da04abcd36b7c1e11a994c2382d5e082e6da950a008981e7c3/frame-479.png",
+          "png_sha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgb_sha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        },
+        {
+          "role": "candidate",
+          "repeat": 1,
+          "job_key": "119cb9a913ccaea8501113ae1accffbea784438b7b77f9b44c13c49e78c2725d",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/119cb9a913ccaea8501113ae1accffbea784438b7b77f9b44c13c49e78c2725d/frame-479.png",
+          "png_sha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgb_sha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        },
+        {
+          "role": "released",
+          "repeat": 0,
+          "job_key": "1fa583a9ac692891a79fc74c43fcc69613d0a53de5fc54396fb14f40df8b7c79",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/jobs/1fa583a9ac692891a79fc74c43fcc69613d0a53de5fc54396fb14f40df8b7c79/frame-479.png",
+          "png_sha256": "5e9318468c93b913350032cfc6fbdd635b752ed8a899371b5206ea937b47fff1",
+          "rgb_sha256": "3329a92240049b70dc47aa1a799089ed05018cd91acbfecec3984bab393a46d0",
+          "clock_rng": "uncontrolled"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - log tower 1 pig vomit 2uqle4 dorqstre l-egrunth.milk",
+      "profile": "1080p",
+      "frame": 479,
+      "source_rgb_pixels_changed": 0,
+      "source_max_channel_delta": 0,
+      "inputs": [
+        {
+          "role": "baseline",
+          "repeat": 0,
+          "job_key": "1faea8f39f8438d1cf83f04155a3d5c5b690ce0f15cf67abf5868224aa67ab5e",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/1faea8f39f8438d1cf83f04155a3d5c5b690ce0f15cf67abf5868224aa67ab5e/frame-479.png",
+          "png_sha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgb_sha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        },
+        {
+          "role": "baseline",
+          "repeat": 1,
+          "job_key": "4d60ab4c04f7e8e664af95ccff565261c71e6541064882a1f6bd540cfab6f895",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/4d60ab4c04f7e8e664af95ccff565261c71e6541064882a1f6bd540cfab6f895/frame-479.png",
+          "png_sha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgb_sha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        },
+        {
+          "role": "candidate",
+          "repeat": 0,
+          "job_key": "b20963f6a60c16a5de9ed0ed0fafd5ad7d6e5288b9b1f793a5d2860ace0183b3",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/b20963f6a60c16a5de9ed0ed0fafd5ad7d6e5288b9b1f793a5d2860ace0183b3/frame-479.png",
+          "png_sha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgb_sha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        },
+        {
+          "role": "candidate",
+          "repeat": 1,
+          "job_key": "3e88e772b23ca038344d9054b6496f8f66364f083c61a98f50a122ff1aa3f7b2",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/positive-proof/3e88e772b23ca038344d9054b6496f8f66364f083c61a98f50a122ff1aa3f7b2/frame-479.png",
+          "png_sha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgb_sha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        },
+        {
+          "role": "released",
+          "repeat": 0,
+          "job_key": "b825f17bc151f5b44422225c0b70aad459f29c0c4768eff05aae0e7be7f3d9dd",
+          "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/random100-round2-final/jobs/b825f17bc151f5b44422225c0b70aad459f29c0c4768eff05aae0e7be7f3d9dd/frame-479.png",
+          "png_sha256": "8c5a1a2d94edcea1bf3435523208cd355b87266c2b3a7584753486bbf1a6fd1d",
+          "rgb_sha256": "667cc33c06b5d7cc19eafafc2bf801be268eaa712d95c8267bec58a0ffbe28b7",
+          "clock_rng": "uncontrolled"
+        }
+      ]
+    }
+  ]
+}
