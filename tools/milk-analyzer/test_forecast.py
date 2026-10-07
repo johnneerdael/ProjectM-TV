@@ -35,6 +35,38 @@ def audio(count=3):
     return result
 
 
+def test_fused_wave_smoothing_does_not_inherit_an_unqualified_engine_context():
+    import forecast
+    source=native(BASE)
+    with pytest.raises(ValueError,match='fused custom-wave smoothing requires'):
+        forecast.forecast_source(source,audio={},binaries=BINARIES,
+            domain=domain(custom_wave_smoothing_profile='float32-fma-first-v1'),compatibility={})
+
+
+def test_declared_fused_wave_smoothing_reaches_the_source_draw_chain(monkeypatch):
+    import forecast
+    binaries=Path(os.environ.get('MILK_TEST_2316_BINARIES',
+                   os.environ.get('MILK_TEST_CURRENT_BINARIES',BINARIES)))
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    source=native(BASE+'wavecode_0_enabled=1\nwavecode_0_samples=2\n',binaries=binaries)
+    seen=[];original=forecast.source_custom_waves
+    def observe(*args,**kwargs):
+        seen.append(kwargs['smoothing_profile'])
+        return original(*args,**kwargs)
+    monkeypatch.setattr(forecast,'source_custom_waves',observe)
+    settings=domain(custom_wave_smoothing_profile='float32-fma-first-v1');settings['profile']='gles300'
+    engine=source['parser_inputs']['engine']
+    if any(engine.get(key)!=value for key,value in forecast.CORE_2316_ENGINE.items()):
+        with pytest.raises(ValueError,match='fused custom-wave smoothing requires'):
+            forecast.forecast_source(source,audio={},binaries=binaries,domain=settings,compatibility={})
+        assert seen==[]
+        return
+    result=forecast.forecast_source(source,audio=audio(1),binaries=binaries,
+                                   domain=settings,compatibility={})
+    assert seen==['float32-fma-first-v1']
+    assert result['domain']['custom_wave_smoothing_profile']=='float32-fma-first-v1'
+
+
 def test_declared_texture_profile_reaches_pipeline_without_mutating_global_sampling(monkeypatch):
     import forecast
     import spatial

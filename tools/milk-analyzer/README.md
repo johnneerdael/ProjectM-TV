@@ -1023,3 +1023,18 @@ input gap in this context, not the remaining raster/feedback precision misses.
 Default historical reports retain `explicit-zero-placeholder-v1`; zero is a
 supplied placeholder, not proof of native progress. See
 `fixtures/cold-jni-progress-context-2026-10-07.json`.
+
+Custom-wave smoothing has an explicit `custom_wave_smoothing_profile` option,
+`float32-fma-first-v1`, for the qualified GLES 2.3.16 source context. It models
+observed ARM64 contraction of the four-position interpolation: round the second
+coefficient's product, fuse the first coefficient into it, then fuse the third
+and fourth before the final half-scale. True float32 `fmaf` is required; an
+unavailable intrinsic is rejected. The separate-operation float32 default keeps
+historical behavior. Domain and custom-wave reports record the selection.
+
+With native unsmoothed positions supplied solely to isolate this arithmetic,
+the fused formula matches all 2,044 observed smoothed coordinate components.
+Those controls do not establish every evaluated point, raster coverage or visible
+trajectory. Learning retests still miss median motion by 7.94% and 17.98%; their
+original grades remain unchanged and no fresh random credit is awarded. See
+`fixtures/custom-wave-fma-smoothing-2026-10-07.json`.

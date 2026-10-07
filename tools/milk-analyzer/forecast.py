@@ -12,7 +12,7 @@ import subprocess
 import tempfile
 import numpy as np
 from builtin_wave import source_builtin_wave
-from custom_wave import source_custom_waves
+from custom_wave import source_custom_waves, DEFAULT_SMOOTHING, FMA_SMOOTHING
 from descriptors import DescriptorStream
 from pipeline_fields import SourcePipeline
 from scene_draw import draw_source_scene
@@ -189,8 +189,14 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         if domain['profile']!='gles300' or domain['width']*domain['height']>1024*768:
             raise ValueError('quad-line profile requires GLES within reference area')
         if not any(all(engine.get(key)==value for key,value in expected.items())
-                   for expected in PRODUCTION_EQUATION_ENGINES.values()):
-            raise ValueError('quad-line engine identity mismatch')
+                       for expected in PRODUCTION_EQUATION_ENGINES.values()):
+                raise ValueError('quad-line engine identity mismatch')
+    smoothing_profile=domain.get('custom_wave_smoothing_profile',DEFAULT_SMOOTHING)
+    if smoothing_profile not in (DEFAULT_SMOOTHING,FMA_SMOOTHING):
+        raise ValueError('unknown custom-wave smoothing profile')
+    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or
+            any(engine.get(key)!=value for key,value in CORE_2316_ENGINE.items())):
+        raise ValueError('fused custom-wave smoothing requires declared GLES core2.3.16 context')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
     hue = np.asarray(domain['hue_offsets'], dtype=np.float32)
     if colour.shape!=(4,) or not np.all(np.isfinite(colour)) or np.any((colour<0)|(colour>1)):
@@ -272,7 +278,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                                   line_rendering_profile=line_profile,control_policy=wave_control_policy)
     if builtin['engine_archive_sha256']!=archive:
         raise ValueError('builtin-wave source engine identity mismatch')
-    custom = source_custom_waves(source,scene)
+    custom = source_custom_waves(source,scene,smoothing_profile=smoothing_profile)
     if random_inputs is not None:
         if random_inputs.get('ledger',{}).get('rendered_frames_consumed') is not False:
             raise ValueError('source-generated random input ledger required')

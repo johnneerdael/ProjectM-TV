@@ -1,5 +1,7 @@
 import unittest
 import numpy as np
+import json
+from pathlib import Path
 from test_custom_wave_scene import native,audio_frames,READER,execute_scene
 
 
@@ -24,6 +26,20 @@ class CustomWaveTest(unittest.TestCase):
         self.assertEqual(wave['draw_mode'],'points')
         self.assertEqual(wave['point_size'],2)
         self.assertEqual(wave['copy_offsets'],[[0,0]])
+
+    def test_fused_smoothing_matches_observed_scalar_controls_without_changing_default(self):
+        import custom_wave
+        control=json.loads((Path(__file__).parent/'fixtures/custom-wave-fma-smoothing-2026-10-07.json').read_text())
+        for row in control['cases']:
+            points=np.asarray(row['points'],np.float32)
+            np.testing.assert_array_equal(custom_wave.smooth_position(points,profile='float32-fma-first-v1'),
+                                          row['native_fused_point'])
+            np.testing.assert_array_equal(custom_wave.smooth_position(points),row['separate_point'])
+
+    def test_unknown_smoothing_profile_is_not_silently_defaulted(self):
+        from custom_wave import source_custom_waves
+        with self.assertRaisesRegex(ValueError,'smoothing profile'):
+            source_custom_waves({'values':{}},{'viewport':[32,32],'frames':[]},smoothing_profile='unknown')
 
 
 if __name__=='__main__':unittest.main()
