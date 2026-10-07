@@ -1,4 +1,5 @@
 """Named source texture inputs from pinned decoding and explicit file bindings."""
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -6,6 +7,26 @@ import subprocess
 import tempfile
 import numpy as np
 from spatial import sample2d
+
+
+def material_input_identity(bank):
+    """Identify decoded arrays used by sampling, separately from file provenance."""
+    if bank is None:return None
+    textures={}
+    for name,array in sorted(bank.textures.items()):
+        values=np.ascontiguousarray(array,dtype=np.float32)
+        if values.ndim not in (3,4) or values.shape[-1]!=4 or not all(values.shape):
+            raise ValueError('RGBA material array dimensions required: '+name)
+        if not np.all(np.isfinite(values)):raise ValueError('Finite material array required: '+name)
+        textures[name]={'shape':list(values.shape),'dtype':'float32',
+                        'sha256':hashlib.sha256(memoryview(values)).hexdigest()}
+    result={'policy':'effective-texture-arrays-v1','manifest':copy.deepcopy(bank.manifest),'textures':textures}
+    if hasattr(bank,'upload_format'):result['upload_format']=bank.upload_format
+    if getattr(bank,'noise_bank',None) is not None:
+        # MaterialBank delegates procedural sampling to this bank, which can
+        # differ from its constructor-time shallow texture dictionary.
+        result['procedural_inputs']=material_input_identity(bank.noise_bank)
+    return result
 
 
 class MaterialBank:

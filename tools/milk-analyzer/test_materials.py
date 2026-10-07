@@ -24,6 +24,38 @@ def bank(paths,**options):
     return importlib.import_module('materials').MaterialBank(paths,decoder=BINARY,**options)
 
 
+def test_effective_identity_tracks_delegated_noise_and_freezes_manifest():
+    from types import SimpleNamespace
+    from materials import material_input_identity
+    pixels=np.ones((1,1,4),dtype=np.float32)
+    noise=SimpleNamespace(textures={'noise':pixels},manifest={'producer':'unchanged'},upload_format='RGBA')
+    inputs=SimpleNamespace(textures={'noise':pixels},manifest={'images':{}},noise_bank=noise)
+    baseline=material_input_identity(inputs)
+    noise.textures['noise']=np.zeros_like(pixels)
+    actual=material_input_identity(inputs)
+    assert actual['textures']==baseline['textures']
+    assert actual['procedural_inputs']!=baseline['procedural_inputs']
+    noise.manifest['producer']='changed'
+    assert baseline['procedural_inputs']['manifest']['producer']=='unchanged'
+
+
+def test_named_texture_callback_mutation_cannot_change_frozen_forecast_inputs(tmp_path):
+    image=png(tmp_path/'colour.png',[[[255,0,0,255]]]);inputs=bank([image])
+    source=test_forecast.native(test_forecast.BASE+'comp_1=`shader_body {ret=tex2D(sampler_colour,uv).rgb;}\n')
+    from shader_compat import check_shader
+    evidence={'composite':check_shader(source['sections']['comp_']['source'],stage='composite',profile='glsl330',
+        translator=test_forecast.BINARIES/'milk-shader-translate',validator=validator_path(),
+        samplers={'sampler_main':'sampler2D','sampler_colour':'sampler2D'},texture_sizes=[])}
+    baseline=test_forecast.predict(source,materials=inputs,compatibility=evidence)
+    def edit(frame):inputs.textures['colour']=np.zeros_like(inputs.textures['colour'])
+    actual=test_forecast.predict(source,materials=inputs,compatibility=evidence,on_frame=edit)
+    for observed,expected in zip(actual['frames'],baseline['frames']):
+        np.testing.assert_array_equal(observed['display'],expected['display'])
+    assert actual['input_hashes']['materials_sha256']==baseline['input_hashes']['materials_sha256']
+    changed=test_forecast.predict(source,materials=inputs,compatibility=evidence)
+    assert changed['input_hashes']['materials_sha256']!=baseline['input_hashes']['materials_sha256']
+
+
 def test_native_source_decode_preserves_rows_and_soil_alpha_rounding(tmp_path):
     path=png(tmp_path/'colour.png',[[[255,0,0,255],[0,128,0,128]],[[0,0,255,0],[1,2,3,255]]])
     inputs=bank([path])

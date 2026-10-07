@@ -23,6 +23,7 @@ from shader_uniforms import source_uniforms
 from spatial import sample2d
 from sampling_policy import texture_settings
 from geometry_features import scene_geometry_features
+from materials import material_input_identity
 from source_features import forecast_feature_record, SIMULATED
 from engine_profiles import (CORE_2315_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
     CORE_2315_DISPLAY,CORE_2315_WAVE,LEGACY_BLUR,LEGACY_ZOOM,LEGACY_DISPLAY,LEGACY_WAVE,matches,select_policy)
@@ -133,6 +134,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('forecast model files changed since import; start a fresh process')
     source=copy.deepcopy(source);audio=copy.deepcopy(audio);domain=copy.deepcopy(domain)
     random_inputs=copy.deepcopy(random_inputs)
+    noise_bank,materials=copy.deepcopy((noise_bank,materials))
     descriptors=DescriptorStream(warmup_frames=domain.get('descriptor_warmup_frames',0),
                                  settings=domain.get('descriptor_settings'))
     required = {'width','height','mesh_x','mesh_y','profile','initial_rgba',
@@ -214,9 +216,11 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
     if materials is not None and noise_bank is not None:
-        if materials.noise_bank is None or digest(materials.noise_bank.manifest)!=digest(noise_bank.manifest):
+        if materials.noise_bank is None or digest(material_input_identity(materials.noise_bank))!=digest(material_input_identity(noise_bank)):
             raise ValueError('combine procedural noise into the declared material bank')
     texture_bank=materials if materials is not None else noise_bank
+    material_identity=material_input_identity(texture_bank)
+    material_sha=None if material_identity is None else digest(material_identity)
     procedural=noise_bank if materials is None else materials.noise_bank
     if procedural is not None:
         expected_upload = 'RGBA' if domain['profile']=='gles300' else 'BGRA'
@@ -329,6 +333,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                       {key:value for key,value in predicted.items() if key not in {'display','feedback','warp_uv'}})
     if model_file_hashes()!=model_hashes:
         raise ValueError('forecast model files changed during evaluation')
+    if material_input_identity(texture_bank)!=material_identity:
+        raise ValueError('forecast sampled material inputs changed during evaluation')
     report = dict(status='computed',frames=frames,domain=domain,stage_resolution=pipeline.stage_resolution,
         feature_basis=SIMULATED,geometry_features=geometry_features,
         descriptors=descriptors.report(),
@@ -338,8 +344,9 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                           domain_sha256=digest(domain),audio_sha256=digest(audio),
                           compatibility_sha256=digest(compatibility),
                           random_sha256=None if random_inputs is None else digest(random_inputs),
-                          materials_sha256=None if texture_bank is None else digest(texture_bank.manifest)),
+                          materials_sha256=material_sha),
         provenance=dict(engine=copy.deepcopy(engine),reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
+                        material_input_policy=None if material_identity is None else material_identity['policy'],
                         main_binding_policy=main_binding_policy,
                         shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
                         blur_range_policy=blur_range_policy,warp_zoom_policy=warp_zoom_policy,

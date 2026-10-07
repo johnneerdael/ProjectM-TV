@@ -512,3 +512,8 @@ Cached mood scoring and feature-record creation use the same import-checked
 source guard. Scores record the frozen production-module map; the classifier
 rechecks it before atomic result replacement. Do not label loaded code with a
 late filesystem digest or silently accept an edited scoring module.
+Source-field forecasts privately copy material/noise banks together, preserving
+shared array aliases. `materials_sha256` uses the effective decoded float32 arrays
+and manifests under `effective-texture-arrays-v1`, including delegated procedural
+sampling. Revalidate before returning; do not substitute unchanged file manifests
+for the texture bytes actually consumed. Historical material identities stay sealed.

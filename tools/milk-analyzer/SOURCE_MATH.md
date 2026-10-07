@@ -79,6 +79,39 @@ double-width seed. Preserve the target's numerical semantics and reference the
 original backend separately. Neither instruction inspection nor CPU execution
 alone certifies published-AAR parity for exceptional inputs.
 
+## Exceptional shader arithmetic: precision and consumers matter
+
+The [GLSL ES3.00 specification](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf)
+section4.5.1 specifies IEEE32 storage for `highp` floats and generation of infinities
+for applicable highp operations. Nonzero division by zero has an infinity rule,
+with a signed-zero qualification. Subnormals may be flushed; NaN generation and
+propagation are not universally required. Section8.2 leaves `pow(x,y)` undefined
+for negative x, and for zero x with nonpositive y. Do not replace those domains
+with NumPy's convenient result or a generic zero/epsilon.
+
+Current source49 `GLSLGenerator.cpp:248–252` emits a `highp float` default for
+translated GLES300 custom shaders. The handwritten warp vertex shader starts
+with `mediump float`. A rule justified for the former must not silently be applied
+to the latter, desktop GL, integer conversions or nonfinite texture coordinates.
+The native translator's literal-exponent1 optimization is already modeled;
+other exponents still use `pow(abs(base),exponent)` and retain its zero-base limits.
+
+The current finite-only scalar/grid evaluators reject some intermediate infinities
+before their consumers can be analyzed. A useful next extension is a versioned
+highp arithmetic policy that permits only justified infinities through supported
+operations and a proved finite/normalized-output sink, while retaining unknowns
+for NaNs, unsupported precision, signed-zero ambiguity, nonfinite sampling and
+undefined power. Preserve the strict default until that policy has controls;
+arbitrarily allowing every nonfinite intermediate is not an implementation.
+
+Three exact audit sources supply research cases:058 contains reciprocal blur and
+normalization paths;086 contains a repeated quadratic map followed by a squared
+norm;104 contains blur values raised to an audio/colour-dependent exponent.
+These identify candidate invalid operands, not independently localized first
+failures or native defects. Trace the actual stage, node, inputs and selected lanes
+before crediting a repair. Case104's zero/nonpositive power remains distinct from
+defined highp infinity generation. Full authored-preset appearance is unverified.
+
 ## Verified mathematical details worth retaining
 
 | Topic | Reference evidence | Predictor implication |

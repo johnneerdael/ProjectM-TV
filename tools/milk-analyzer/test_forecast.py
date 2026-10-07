@@ -48,6 +48,34 @@ def predict(source, **settings):
         compatibility=settings.pop('compatibility', compatibility(source)), **settings)
 
 
+def test_noise_mutation_in_callback_cannot_change_frozen_forecast_inputs(tmp_path):
+    import json
+    from noise_inputs import NoiseBank
+    payload=np.array([0xff663311],dtype='<u4').tobytes()
+    (tmp_path/'noise.bin').write_bytes(payload)
+    manifest={'schema_version':1,'uses_rendered_reference':False,
+              'packed_word_encoding':'uint32 little endian','native_upload_format':'BGRA',
+              'textures':{'noise_lq':{'file':'noise.bin','dimensions':[1,1,1],
+                                    'sha256':hashlib.sha256(payload).hexdigest()}}}
+    (tmp_path/'manifest.json').write_text(json.dumps(manifest))
+    inputs=NoiseBank(tmp_path)
+    source=native(BASE+'comp_1=`shader_body {ret=tex2D(sampler_noise_lq,uv).rgb;}\n')
+    from shader_compat import check_shader
+    evidence={'composite':check_shader(source['sections']['comp_']['source'],stage='composite',profile='glsl330',
+        translator=BINARIES/'milk-shader-translate',validator=validator_path(),
+        samplers={'sampler_main':'sampler2D','sampler_noise_lq':'sampler2D'},texture_sizes=[])}
+    baseline=predict(source,noise_bank=inputs,compatibility=evidence)
+    assert baseline['stage_resolution']['composite']['kind']=='custom_composite'
+    np.testing.assert_allclose(baseline['frames'][0]['display'][0,0,:3],[.4,.2,17/255],atol=1e-7)
+    def edit(frame):inputs.textures['noise_lq'][:]=0
+    actual=predict(source,noise_bank=inputs,on_frame=edit,compatibility=evidence)
+    assert actual['input_hashes']['materials_sha256']==baseline['input_hashes']['materials_sha256']
+    for observed,expected in zip(actual['frames'],baseline['frames']):
+        np.testing.assert_array_equal(observed['display'],expected['display'])
+    changed=predict(source,noise_bank=inputs,compatibility=evidence)
+    assert changed['input_hashes']['materials_sha256']!=baseline['input_hashes']['materials_sha256']
+
+
 def test_complete_equation_warp_draw_composite_forecast_keeps_feedback_separate():
     source = native(BASE + 'per_frame_1=q1=bass*.5;\n'
                     'warp_1=`shader_body {ret=GetPixel(uv)*q1;}\n'

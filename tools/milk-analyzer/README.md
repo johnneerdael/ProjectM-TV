@@ -24,6 +24,15 @@ correlated time, direction, amplitude and area records, including small and
 colour-only changes. Their sampled change rates do not establish flash cycles or
 whole-program no-flash guarantees.
 
+Source-field forecasts copy material/noise banks into private inputs before
+evaluation. `materials_sha256` records the manifests and effective decoded
+float32 arrays, including the procedural bank used by delegated sampling, under
+`effective-texture-arrays-v1`. Mutation of a caller's bank during a callback cannot
+change later frames. Different arrays supplied before a later call receive a new
+identity even when file manifests are unchanged. Large banks require memory for
+the private copy; no memory/performance improvement is claimed. Historical seals
+retain their original manifest-based hashes and evidence scope.
+
 ## Current source target: published2.3.15
 
 `profiles/published-core-v2.3.15.json` pins the exact published AAR, ARM64/ARMv7
