@@ -1,0 +1,498 @@
+{
+  "source_only": true,
+  "display_fields_constructed": false,
+  "native_frames_consumed": false,
+  "aar_sha256": "fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327",
+  "reader_sha256": "4f9149265e2e268fe0948235f0e7d959df4a24bcd2c53811a2656eeb0a77fc61",
+  "source_engine": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8",
+    "patches_sha256": "7ef297fcab5d42d0531ec621ac6a464a5a0e7982da02bb40996bc62a886ae527"
+  },
+  "audio_sha256": "ed730487e701f8e42d82d46c719632037d3a194965e69a264f9ada9203e8e460",
+  "context": "60 steps; historical declared time/frame/fps/progress with newly recomputed source49 audio; cold equation seed; portable arithmetic; current signed-unit zoom policy",
+  "appearance_credit": false,
+  "date": "2026-10-07",
+  "status": "source_only_transformed_uv_recheck",
+  "script_sha256": "c925c812434cf7b1b99db423eeceee4a13e4da73d87bd80da5b05f4c49e6bb03",
+  "raw_report_sha256": "b497ce693221e694ebb19f69f5ede890f17819d3d9248ce5ba0e9b2157fa8d1e",
+  "source_model_sha256": "baa09ff584887b083bfe584c84be47eb4fa379cbfb6da9300aac469f4f78ba2d",
+  "selected_cases": 9,
+  "cases_without_transformed_uv_failure": [
+    88,
+    108,
+    145
+  ],
+  "recomputed_audio_frames_match_historical_declared_frames": true,
+  "historical_audit_unchanged": true,
+  "full_forecast_rechecked": false,
+  "visual_gate_credit": false,
+  "rows": [
+    {
+      "case": 71,
+      "preset": "one-stop step-by-step deviance cure 13th step devolution reprisal loss-through-finding inverse paradigm degenerating entropy gain.milk",
+      "preset_sha256": "2ebe9e23eca8d52ccb0772b2bacac867b76de962ba7e2d97bd281467eb88db27",
+      "first_transformed_uv_failure": {
+        "index": 0,
+        "render_frame": 0,
+        "time": 0.03333333507180214,
+        "reason": "unresolved warp power domain",
+        "ranges": {
+          "zoom": {
+            "min": -0.03999999165534973,
+            "max": -0.03999999165534973,
+            "zeros": 0,
+            "negatives": 1617
+          },
+          "zoomexp": {
+            "min": 1.0081499814987183,
+            "max": 1.0081499814987183,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "rot": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "warp": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "cx": {
+            "min": 0.4699999988079071,
+            "max": 0.4699999988079071,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "cy": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dx": {
+            "min": -0.09687723219394684,
+            "max": 0.09687451273202896,
+            "zeros": 0,
+            "negatives": 833
+          },
+          "dy": {
+            "min": -0.0968739241361618,
+            "max": 0.09687120467424393,
+            "zeros": 0,
+            "negatives": 833
+          },
+          "sx": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "sy": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          }
+        }
+      },
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 75,
+      "preset": "TonyMilkdrop - RGB.milk",
+      "preset_sha256": "9dac46b20b53d2eef955b504b0aa128ddfb7b70c2dbc145441fa6fe57be06c34",
+      "first_transformed_uv_failure": {
+        "index": 0,
+        "render_frame": 0,
+        "time": 0.03333333507180214,
+        "reason": "unresolved warp power domain",
+        "ranges": {
+          "zoom": {
+            "min": -18075.400390625,
+            "max": -18075.400390625,
+            "zeros": 0,
+            "negatives": 1617
+          },
+          "zoomexp": {
+            "min": 0.9998300075531006,
+            "max": 0.9998300075531006,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "rot": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "warp": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "cx": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "cy": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dx": {
+            "min": 9.999999747378752e-06,
+            "max": 9.999999747378752e-06,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dy": {
+            "min": 9.999999747378752e-06,
+            "max": 9.999999747378752e-06,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "sx": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "sy": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          }
+        }
+      },
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 80,
+      "preset": "Benjam & Zylot - Fractal Timepiece - joyous leap into razors.milk",
+      "preset_sha256": "b67a9979943fbc86fe32c2e79e5e2dac5993d94ffe4eb2dd8a26896a6ea161b6",
+      "first_transformed_uv_failure": {
+        "index": 0,
+        "render_frame": 0,
+        "time": 0.03333333507180214,
+        "reason": "unresolved warp numeric domain",
+        "ranges": {
+          "zoom": {
+            "min": 0.0,
+            "max": 1.1473474502563477,
+            "zeros": 1,
+            "negatives": 0
+          },
+          "zoomexp": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "rot": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "warp": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "cx": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "cy": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dx": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "dy": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "sx": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "sy": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          }
+        }
+      },
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 85,
+      "preset": "bmelgren - Getter Sun tweek 3.milk",
+      "preset_sha256": "3b55f5e0d8019b9c0c4f2a41725c9c4bb92b42a4d750131e3834bb1e6067b653",
+      "first_transformed_uv_failure": {
+        "index": 0,
+        "render_frame": 0,
+        "time": 0.03333333507180214,
+        "reason": "unresolved warp numeric domain",
+        "ranges": {
+          "zoom": {
+            "min": 0.0,
+            "max": 56.88887405395508,
+            "zeros": 1,
+            "negatives": 0
+          },
+          "zoomexp": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "rot": {
+            "min": 0.07788365334272385,
+            "max": 0.07788365334272385,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "warp": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "cx": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "cy": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dx": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "dy": {
+            "min": 0.0,
+            "max": 0.0,
+            "zeros": 1617,
+            "negatives": 0
+          },
+          "sx": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "sy": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          }
+        }
+      },
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 88,
+      "preset": "custom10.milk",
+      "preset_sha256": "ef9a2e5ed73e76484b5a5b47db9b3514d269d831bd0ab9516e01cf5a33fb5c5a",
+      "first_transformed_uv_failure": null,
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 108,
+      "preset": "$$$ Royal - Mashup (452).milk",
+      "preset_sha256": "dfdfab30b2fe81e2cd6080c85e11d49480fc6113019bac0d2cdb4bd77bfad760",
+      "first_transformed_uv_failure": null,
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 124,
+      "preset": "suksma - chernobyl pie for dessert - semi-autoplasmitic copulateshow.milk",
+      "preset_sha256": "20c0ce7906c4375db27ca08b4c4dc325a42126aa6d2da9667e041de3b4d159df",
+      "first_transformed_uv_failure": {
+        "index": 0,
+        "render_frame": 0,
+        "time": 0.03333333507180214,
+        "reason": "unresolved warp numeric domain",
+        "ranges": {
+          "zoom": {
+            "min": 0.0,
+            "max": 0.038237836211919785,
+            "zeros": 1,
+            "negatives": 0
+          },
+          "zoomexp": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "rot": {
+            "min": 6.666654371656477e-05,
+            "max": 6.666654371656477e-05,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "warp": {
+            "min": -2.3937933444976807,
+            "max": 2.3435871601104736,
+            "zeros": 0,
+            "negatives": 822
+          },
+          "cx": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "cy": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dx": {
+            "min": 0.0007290316862054169,
+            "max": 0.002603684552013874,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dy": {
+            "min": 0.0,
+            "max": 0.10000000149011612,
+            "zeros": 33,
+            "negatives": 0
+          },
+          "sx": {
+            "min": 0.006666617467999458,
+            "max": 2.301361560821533,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "sy": {
+            "min": 0.9998611211776733,
+            "max": 3.294555902481079,
+            "zeros": 0,
+            "negatives": 0
+          }
+        }
+      },
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 141,
+      "preset": "to know the reason i am trapped is my own weakness and fear - the trap is the trap roam.milk",
+      "preset_sha256": "598b10f13d4013677062fc5783d0c752ce4aefefb6d37b48ac646d0c37451e55",
+      "first_transformed_uv_failure": {
+        "index": 5,
+        "render_frame": 5,
+        "time": 0.20000000298023224,
+        "reason": "unresolved warp power domain",
+        "ranges": {
+          "zoom": {
+            "min": -340.8080749511719,
+            "max": 52.798038482666016,
+            "zeros": 0,
+            "negatives": 362
+          },
+          "zoomexp": {
+            "min": 0.8852652311325073,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "rot": {
+            "min": -3.0391952991485596,
+            "max": 3.1006274223327637,
+            "zeros": 25,
+            "negatives": 784
+          },
+          "warp": {
+            "min": 0.009999999776482582,
+            "max": 0.009999999776482582,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "cx": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "cy": {
+            "min": 0.5,
+            "max": 0.5,
+            "zeros": 0,
+            "negatives": 0
+          },
+          "dx": {
+            "min": -0.1201346293091774,
+            "max": -0.021650169044733047,
+            "zeros": 0,
+            "negatives": 1617
+          },
+          "dy": {
+            "min": -0.11539730429649353,
+            "max": -0.008102444931864738,
+            "zeros": 0,
+            "negatives": 1617
+          },
+          "sx": {
+            "min": -1.0,
+            "max": -1.0,
+            "zeros": 0,
+            "negatives": 1617
+          },
+          "sy": {
+            "min": 1.0,
+            "max": 1.0,
+            "zeros": 0,
+            "negatives": 0
+          }
+        }
+      },
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    },
+    {
+      "case": 145,
+      "preset": "suksma - feeling abort.milk",
+      "preset_sha256": "faa8a658e08d0bd3ff9038d7d43ad810fa46630fc5d04be162126b2b48614732",
+      "first_transformed_uv_failure": null,
+      "scope": "Transformed-UV diagnostic, not complete forecast. Does not decide whether those coordinates are consumed."
+    }
+  ],
+  "case124_note": "The transformed-UV arithmetic still fails, but the separately verified predictor repair can omit this unused path. This diagnostic does not determine consumption or rescind that repair."
+}

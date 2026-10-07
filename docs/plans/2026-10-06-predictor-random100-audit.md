@@ -153,3 +153,25 @@ unknown numeric profiles remain unresolved. Omitted coordinates receive no motio
 query estimate or visual credit. Independent renderer review found no hidden
 consumer; matched native visual validation remains pending. This lowers a source
 interpretation gap, not yet the100gate's failed-case count.
+
+## Source49 repair checkpoint and merge hold
+
+On7October, the owner explicitly requires PR45 to stay draft and unmerged until
+the predictor is finished and its predictions are near perfect. The all100>=95,
+no-unresolved acceptance gate remains unmet; source-contract additions, code
+review and passing implementation tests do not replace it.
+
+The current2.3.15/source49 transformed-UV diagnostic rechecks nine previously
+affected originals for60steps using their exact published-AAR bytes. Audio is
+recomputed with the current source adapter and the declared historical time,
+frame,FPS and progress; all resulting frame inputs match the historical declared
+frames. Sparse queries construct no display fields and consume no native frames.
+Cases088,108and145 now complete this specific check under the signed-unit-zoom
+policy. Cases071,075and141 still reach non-unit negative powers;080,085and124
+reach zero-zoom numeric failure. Case124's separately resolved unused-coordinate
+path remains distinct from this arithmetic diagnostic.
+
+This recheck does not establish complete forecast support, shader-coordinate
+consumption or any new visual pass. Preserve the old grades and investigate the
+remaining consumed paths before new comparisons. Exact identities and first
+failure values are in `fixtures/source49-warp-blocker-recheck-2026-10-07.json`.
