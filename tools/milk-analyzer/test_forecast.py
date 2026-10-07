@@ -690,3 +690,17 @@ def test_read_source_executes_snapshotted_reader_when_original_is_rebuilt(tmp_pa
     result=read_source(preset,reader=reader)
     assert result['reader_sha256']==expected
     assert float(result['values']['zoom'])==1.25
+
+
+def test_forecast_forwards_declared_motion_window_policy(monkeypatch):
+    import forecast
+    original=forecast.DescriptorStream;seen=[]
+    def observe(*args,**kwargs):
+        seen.append(kwargs.get('motion_window_policy'))
+        return original(*args,**kwargs)
+    monkeypatch.setattr(forecast,'DescriptorStream',observe)
+    settings=domain();settings['motion_window_policy']='coverage-gated-window-v2'
+    result=predict(native(BASE),audio=audio(1),domain=settings)
+    assert seen==['coverage-gated-window-v2']
+    assert result['descriptors']['motion_window_policy']=='coverage-gated-window-v2'
+    assert result['descriptors']['motion']['window_speed_supported'] is False

@@ -266,3 +266,31 @@ def test_single_measured_frame_cannot_supply_an_event_rate():
     assert result['coherent_transitions_per_second'] is None
     assert result['local_or_colour_change_transitions_per_second'] is None
     assert result['events']==[]
+
+
+def test_sparse_transition_subset_does_not_publish_confident_window_speed(monkeypatch):
+    import descriptors
+    calls=0
+    def sample(*args):
+        nonlocal calls
+        calls+=1
+        available=calls in [16,28]
+        return dict(available=available,support=17/(256*144) if available else 0,
+                    median_speed=3.1 if available else None,p95_speed=5.0 if available else None,
+                    velocity=[1,0] if available else None,brightness_change_p95=.01 if available else None,
+                    brightening_screen_area=0,darkening_screen_area=0,untracked_brightness_change_screen_area=0)
+    monkeypatch.setattr(descriptors,'visible_motion',sample)
+    target=stream(motion_window_policy='coverage-gated-window-v2')
+    for i in range(30):add(target,[0,0,0],i/30)
+    motion=target.report()['motion']
+    assert motion['window_speed_supported'] is False
+    assert motion['median_speed_viewports_per_second'] is None
+    assert motion['p95_speed_viewports_per_second'] is None
+    assert motion['supported_transition_count']==2
+    assert motion['diagnostic_supported_subset']['median_speed_viewports_per_second']==3.1
+    assert motion['available_transition_fraction']==pytest.approx(2/29)
+
+
+def test_coverage_policy_rejects_unknown_names():
+    with pytest.raises(ValueError,match='motion window policy'):
+        stream(motion_window_policy='guess-zero-speed')

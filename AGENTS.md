@@ -559,3 +559,8 @@ Before freezing temporal colour prose, validate the claimed RGB/area predicate
 on every stated source frame and list exact phases when colour alternates.
 Preserve an incorrect frozen sentence as a prediction miss; do not reinterpret
 it after viewing the native result.
+
+For new source comparisons, declare the motion-window reporting policy.
+Coverage-gated speed requires >=3 supported transitions and >=50% temporal
+coverage; retain sparse samples as diagnostics, never replace unknown speed by0.
+Use the same frozen policy on source/native arrays; preserve legacy evidence.

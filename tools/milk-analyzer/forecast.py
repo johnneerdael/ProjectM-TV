@@ -142,7 +142,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     random_inputs=copy.deepcopy(random_inputs)
     noise_bank,materials=copy.deepcopy((noise_bank,materials))
     descriptors=DescriptorStream(warmup_frames=domain.get('descriptor_warmup_frames',0),
-                                 settings=domain.get('descriptor_settings'))
+                                 settings=domain.get('descriptor_settings'),
+                                 motion_window_policy=domain.get('motion_window_policy','legacy-supported-subset-v1'))
     required = {'width','height','mesh_x','mesh_y','profile','initial_rgba',
                 'hue_offsets','equation_seed','blur_levels','quantize'}
     if not required.issubset(domain):

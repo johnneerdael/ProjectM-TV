@@ -77,9 +77,12 @@ def visible_motion(old, new, dt, settings):
 
 
 class DescriptorStream:
-    def __init__(self, *, warmup_frames=0, settings=None):
+    def __init__(self, *, warmup_frames=0, settings=None, motion_window_policy='legacy-supported-subset-v1'):
         if type(warmup_frames) is not int or warmup_frames<0:
             raise ValueError('nonnegative integer descriptor warmup required')
+        if motion_window_policy not in {'legacy-supported-subset-v1','coverage-gated-window-v2'}:
+            raise ValueError('unsupported motion window policy')
+        self.motion_window_policy=motion_window_policy
         self.settings={**DEFAULTS,**(settings or {})}
         if set(self.settings)!=set(DEFAULTS):raise ValueError('unknown descriptor setting')
         for key,value in self.settings.items():
@@ -162,6 +165,9 @@ class DescriptorStream:
         mean=lambda key:float(np.mean([row[key] for row in rows])) if rows else None
         peak=lambda key:max((row[key] for row in transitions),default=None)
         valid=[row['motion'] for row in transitions if row['motion']['available']]
+        fraction=len(valid)/len(transitions) if transitions else 0.
+        window_supported=len(valid)>=3 and fraction>=.5
+        speed_samples=valid if self.motion_window_policy=='legacy-supported-subset-v1' or window_supported else []
         displacements=[row['query_displacement'] for row in rows if row['query_displacement'] is not None]
         frequency=resolution=nyquist=None;regular=None;spectral_fraction=None
         if len(rows)>=3:
@@ -192,7 +198,7 @@ class DescriptorStream:
         coherent=sum(row['coherent_up'] or row['coherent_down'] for row in transitions)
         local_changes=sum(row['brightness_area']>0 or row['rgb_area']>0 for row in transitions)
         return dict(schema_version=1,basis='Numerical source-predicted display fields; no native visual inspection',
-            appearance_accuracy_verified=False,frames_measured=len(rows),transitions_measured=len(transitions),
+            appearance_accuracy_verified=False,motion_window_policy=self.motion_window_policy,frames_measured=len(rows),transitions_measured=len(transitions),
             warmup_frames=self.warmup,settings=dict(self.settings),
             colour=dict(mean_luma=mean('mean_luma'),mean_contrast=mean('contrast'),mean_saturation=mean('saturation'),
                         mean_coloured_fraction=mean('coloured_fraction'),mean_effective_hue_bins=mean('effective_hue_bins'),
@@ -217,15 +223,20 @@ class DescriptorStream:
                           coherent_transitions_per_second=coherent/duration if duration else None,
                           local_or_colour_change_transitions_per_second=local_changes/duration if duration else None,
                           events=[row['event'] for row in transitions]),
-            motion=dict(available_transition_fraction=len(valid)/len(transitions) if transitions else 0.,
+            motion=dict(available_transition_fraction=fraction,
+                        window_speed_supported=window_supported,supported_transition_count=len(valid),
+                        window_support_rule={'minimum_transition_count':3,'minimum_transition_fraction':.5},
+                        diagnostic_supported_subset={
+                            'median_speed_viewports_per_second':float(np.median([row['median_speed'] for row in valid])) if valid else None,
+                            'p95_speed_viewports_per_second':float(np.percentile([row['p95_speed'] for row in valid],95)) if valid else None},
                         peak_untracked_brightness_change_screen_area=max((row['motion']['untracked_brightness_change_screen_area'] for row in transitions),default=None),
                         matched_brightness_change_p95=float(np.percentile([row['brightness_change_p95'] for row in valid],95)) if valid else None,
                         peak_matched_brightness_change_p95=max((row['brightness_change_p95'] for row in valid),default=None),
                         peak_matched_brightening_screen_area=max((row['brightening_screen_area'] for row in valid),default=None),
                         peak_matched_darkening_screen_area=max((row['darkening_screen_area'] for row in valid),default=None),
                         mean_supported_area=float(np.mean([row['support'] for row in valid])) if valid else None,
-                        median_speed_viewports_per_second=float(np.median([row['median_speed'] for row in valid])) if valid else None,
-                        p95_speed_viewports_per_second=float(np.percentile([row['p95_speed'] for row in valid],95)) if valid else None,
+                        median_speed_viewports_per_second=float(np.median([row['median_speed'] for row in speed_samples])) if speed_samples else None,
+                        p95_speed_viewports_per_second=float(np.percentile([row['p95_speed'] for row in speed_samples],95)) if speed_samples else None,
                         mean_acceleration_viewports_per_second_squared=float(np.mean(acceleration)) if acceleration else None,
                         mean_warp_query_displacement=float(np.mean(displacements)) if displacements else None),
             structure={'fractal':None},bass_response=None,mood_assignment=None,

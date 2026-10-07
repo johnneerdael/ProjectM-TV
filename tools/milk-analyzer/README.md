@@ -869,3 +869,14 @@ if any intervening frame fails. `describe_colour_presence` formats only verified
 frame IDs. This numeric helper does not parse arbitrary prose, inspect native
 references, or establish structure/motion accuracy. A closely matching numerical
 forecast cannot silently repair an overbroad frozen description.
+
+Whole-window motion speed has an explicit coverage policy.
+`coverage-gated-window-v2` requires at least three supported transitions and
+support on at least half the window before publishing median/p95 speed.
+Sparse supported-subset values remain diagnostic, with counts and fractions;
+unavailable speed stays null. This is an estimator reporting rule, not proof of
+stationary geometry or no visible movement. The default legacy-supported-subset
+policy preserves archived semantics. Forecast domains may select the new policy
+through `motion_window_policy`; use the same policy for paired comparisons and
+freeze it before capture. Keep old grades unchanged and state uncertainty before
+drafting numerical movement claims.
