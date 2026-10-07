@@ -45,7 +45,7 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1'):
         from quad_lines import PROFILE as quad_profile
         if line_rendering_profile not in ('canonical-gl-lines-v1',quad_profile):
             raise ValueError('unknown motion-vector line profile')
@@ -57,6 +57,10 @@ class SourcePipeline:
         from blur import SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA
         if blur_arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):
             raise ValueError('unsupported blur arithmetic profile')
+        from field_math import SEPARATE_ARITHMETIC as separate_shader,APPLE_MIX_FMA
+        if shader_arithmetic_profile not in (separate_shader,APPLE_MIX_FMA):
+            raise ValueError('unsupported shader arithmetic profile')
+        self.shader_arithmetic_profile=shader_arithmetic_profile
         self.blur_arithmetic_profile=blur_arithmetic_profile
         self.motion_uv_storage_profile=motion_uv_storage_profile
         self.line_rendering_profile=line_rendering_profile
@@ -118,6 +122,8 @@ class SourcePipeline:
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
         from quad_lines import PROFILE as quad_profile
         from motion_vectors import PORTABLE_STORAGE
+        if kwargs.get('shader_arithmetic_profile','separate-float32-v1')!='separate-float32-v1' and profile!='gles300':
+            raise ValueError('shader arithmetic profile requires GLES300')
         if kwargs.get('blur_arithmetic_profile','separate-float32-v1')!='separate-float32-v1' and profile!='gles300':
             raise ValueError('blur arithmetic profile requires GLES300')
         if kwargs.get('motion_uv_storage_profile',PORTABLE_STORAGE)!=PORTABLE_STORAGE and profile!='gles300':
@@ -268,13 +274,13 @@ class SourcePipeline:
                 if external_sample is None:raise UnresolvedMath('external texture input missing: '+texture)
                 return external_sample(detail,sample_uv)
             trace=None if on_sample is None else lambda detail,uv,lanes:on_sample(name,detail,uv,lanes)
-            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy)
+            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile)
             if name=='warp' and write_motion:
                 motion=model.environment.get('_mv_tex_coords')
                 if motion is None:raise UnresolvedMath('custom warp motion output is missing')
                 motion=Field('member',(motion,),'float2',{'field':'xy','swizzle':True})
                 if model.effects:motion=Field('sequence',tuple(model.effects)+(motion,),'float2')
-                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy)
+                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy,arithmetic_profile=self.shader_arithmetic_profile)
             return output
 
         warp_coordinates=np.concatenate((uv,original),axis=-1)
@@ -308,6 +314,7 @@ class SourcePipeline:
                  'warp_kind':'fixed_warp' if self.warp_tree is None else 'custom_warp',
                  'composite_kind':self.composite_kind}
         history['motion_vector_source_frame']=motion_source_frame
+        history['shader_arithmetic_profile']=self.shader_arithmetic_profile
         history['blur_arithmetic_profile']=self.blur_arithmetic_profile
         history['motion_uv_storage_profile']=self.motion_uv_storage_profile
         history['motion_vector_line_profile']=self.line_rendering_profile

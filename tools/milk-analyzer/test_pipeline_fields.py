@@ -11,6 +11,34 @@ def trees(warp,composite):
 
 
 class PipelineFieldsTest(unittest.TestCase):
+    def test_mix_arithmetic_reaches_shader_output_and_rejects_wrong_backend(self):
+        from pipeline_fields import SourcePipeline
+        from field_math import APPLE_MIX_FMA
+        with self.assertRaisesRegex(ValueError,'GLES300'):
+            SourcePipeline.from_source({},profile='glsl330',compatibility={},shader_arithmetic_profile=APPLE_MIX_FMA)
+        warp,comp=trees('ret=lerp(float3(.01025390625),float3(.78466796875),.00804591178894043);',
+                        'ret=GetPixel(uv);')
+        arguments=dict(initial_feedback=np.zeros((16,16,4)),warp_reads_blur=False,blur_levels=0,quantize=False)
+        current=SourcePipeline(warp,comp,**arguments,shader_arithmetic_profile=APPLE_MIX_FMA)
+        legacy=SourcePipeline(warp,comp,**arguments)
+        a=current.step(warp_uv=current.original_uv,uniforms={},frame_wrap=1)
+        b=legacy.step(warp_uv=legacy.original_uv,uniforms={},frame_wrap=1)
+        assert a.history['shader_arithmetic_profile']==APPLE_MIX_FMA
+        assert np.any(a.feedback!=b.feedback)
+        from unittest.mock import patch
+        import pipeline_fields
+        actual=pipeline_fields.evaluate_grid
+        calls=[]
+        def observe(*args,**kwargs):
+            calls.append((args[0].dtype,kwargs['arithmetic_profile']))
+            return actual(*args,**kwargs)
+        motion=SourcePipeline(warp,comp,**arguments,shader_arithmetic_profile=APPLE_MIX_FMA)
+        with patch.object(pipeline_fields,'evaluate_grid',side_effect=observe):
+            motion.step(warp_uv=motion.original_uv,uniforms={},frame_wrap=1,
+                        motion_state={'mv_a':1,'mv_x':2,'mv_y':2})
+        assert ('float2',APPLE_MIX_FMA) in calls
+        assert all(profile==APPLE_MIX_FMA for _,profile in calls)
+
     def test_blur_arithmetic_profile_requires_gles_and_reaches_update(self):
         from pipeline_fields import SourcePipeline
         with self.assertRaisesRegex(ValueError,'GLES300'):

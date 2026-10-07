@@ -184,6 +184,12 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                 (domain['height']>1330 or domain['width']*domain['height']>1024*768)):
             raise ValueError(version+' higher-resolution lines/native feedback detail are not implemented')
     from quad_lines import PROFILE as quad_profile
+    from field_math import SEPARATE_ARITHMETIC as separate_shader,APPLE_MIX_FMA
+    shader_arithmetic_profile=domain.get('shader_arithmetic_profile',separate_shader)
+    if shader_arithmetic_profile not in (separate_shader,APPLE_MIX_FMA):
+        raise ValueError('unsupported shader arithmetic profile')
+    if shader_arithmetic_profile==APPLE_MIX_FMA and (domain['profile']!='gles300' or not matches(engine,CORE_2317_ENGINE)):
+        raise ValueError('mix FMA requires declared GLES300 and pinned2.3.17engine')
     from blur import SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA
     blur_arithmetic_profile=domain.get('blur_arithmetic_profile',SEPARATE_ARITHMETIC)
     if blur_arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):
@@ -255,7 +261,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         main_sampling_profile=domain.get('main_sampling_profile','portable'),shader_numeric_policy=shader_numeric_policy,
         texture_sampling_profile=texture_sampling_profile,line_rendering_profile=line_profile,
         motion_raster_subpixel_bits=domain.get('triangle_subpixel_bits'),
-        motion_uv_storage_profile=motion_storage_profile,blur_arithmetic_profile=blur_arithmetic_profile)
+        motion_uv_storage_profile=motion_storage_profile,blur_arithmetic_profile=blur_arithmetic_profile,
+        shader_arithmetic_profile=shader_arithmetic_profile)
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
@@ -398,6 +405,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         provenance=dict(engine=copy.deepcopy(engine),reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
                         material_input_policy=None if material_identity is None else material_identity['policy'],
                         shader_numeric_policy=shader_numeric_policy,
+                        shader_arithmetic_profile=shader_arithmetic_profile,
                         main_binding_policy=main_binding_policy,
                         shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
                         blur_range_policy=blur_range_policy,warp_zoom_policy=warp_zoom_policy,

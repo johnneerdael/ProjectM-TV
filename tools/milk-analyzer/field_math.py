@@ -132,8 +132,24 @@ UNARY={'sin':np.sin,'cos':np.cos,'tan':np.tan,'asin':np.arcsin,'acos':np.arccos,
        'log2':np.log2,'floor':np.floor,'ceil':np.ceil,'round':np.rint,
        'trunc':np.trunc,'sign':np.sign,'modf_fraction':lambda value:np.modf(value)[0]}
 
+SEPARATE_ARITHMETIC='separate-float32-v1'
+APPLE_MIX_FMA='apple-m4pro-gles-mix-nested-fma-v1'
 
-def evaluate(field:Field,*,inputs=None,sample=None,numeric_policy='strict'):
+
+def mix_values(a,b,t,*,arithmetic_profile=SEPARATE_ARITHMETIC):
+    if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_MIX_FMA):
+        raise UnresolvedMath('unsupported shader arithmetic profile')
+    a,b,t=np.broadcast_arrays(*(np.asarray(x,np.float32) for x in (a,b,t)))
+    if arithmetic_profile==SEPARATE_ARITHMETIC:return a+t*(b-a)
+    if not np.all(np.isfinite([a,b,t])):
+        raise UnresolvedMath('finite inputs required for fused mix')
+    from custom_wave import _fmaf
+    fused=_fmaf()
+    return np.asarray([fused(y,z,fused(-x,z,x)) for x,y,z in zip(a.flat,b.flat,t.flat)],np.float32).reshape(a.shape)
+
+
+def evaluate(field:Field,*,inputs=None,sample=None,numeric_policy='strict',arithmetic_profile=SEPARATE_ARITHMETIC):
+    if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_MIX_FMA):raise UnresolvedMath('unsupported shader arithmetic profile')
     if numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise UnresolvedMath('unsupported shader numeric policy')
     highp=numeric_policy==GLES_HIGHP_INFINITY
     inputs=inputs or {};cache={}
@@ -147,7 +163,7 @@ def evaluate(field:Field,*,inputs=None,sample=None,numeric_policy='strict'):
             # outputs share one execution and its texture samples.
             from grid_math import evaluate_grid
             def one_sample(detail,coordinates):return sample(detail,coordinates[0])
-            return evaluate_grid(field,batch_shape=(1,),inputs=inputs,sample=one_sample if sample else None,numeric_policy=numeric_policy)[0]
+            return evaluate_grid(field,batch_shape=(1,),inputs=inputs,sample=one_sample if sample else None,numeric_policy=numeric_policy,arithmetic_profile=arithmetic_profile)[0]
         pending.extend(node.args)
     def visit(node):
         key=id(node)
@@ -260,7 +276,7 @@ def evaluate(field:Field,*,inputs=None,sample=None,numeric_policy='strict'):
             elif op=='max':raw=np.maximum(*args)
             elif op=='clamp':raw=np.clip(*args)
             elif op=='saturate':raw=np.clip(args[0],0,1)
-            elif op=='lerp':raw=args[0]+args[2]*(args[1]-args[0])
+            elif op=='lerp':raw=mix_values(*args,arithmetic_profile=arithmetic_profile)
             elif op=='frac':raw=args[0]-np.floor(args[0])
             elif op=='step':raw=np.asarray(args[1]>=args[0],dtype=np.float32)
             elif op=='smoothstep':

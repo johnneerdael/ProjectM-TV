@@ -1205,3 +1205,20 @@ five numerical clauses and independent full-claim review now scores its repaired
 credit. The warm tail's down/right movement is relative to its start; its endpoint
 is still left of the viewport centre, so absolute right-half placement is not
 certified. Final stable validation passes 1,427 tests and 78 subtests.
+
+The optional `shader_arithmetic_profile`
+`apple-m4pro-gles-mix-nested-fma-v1` evaluates HLSL `lerp`/translated GLSL
+`mix` as `fmaf(b, t, fmaf(-a, t, a))` after float32 narrowing. It is qualified
+only for the declared Apple GLES/source51 context; scalar, grid, array fallback
+and consumed motion-UV evaluation share it. The separate-operation default and
+the shader nonfinite policy remain unchanged; fused mix requires finite inputs.
+Pipeline history and forecast provenance retain the selection. The implementation
+uses two ctypes calls per output component; no performance improvement is claimed.
+
+The nested rule matches 32 initial numerical observations and all 64 independently
+frozen fresh signed-input observations. A simpler weighted FMA rule was rejected
+by fresh controls. These are bounded numerical controls, not universal compiler
+or GPU guarantees. The unchanged original Zylot learning retest still misses
+median motion by 19.78%, so its issue remains open. `pow` precision and feedback
+residuals require further diagnosis; implementing the mix correction alone does
+not earn an original-preset pass or randomized credit.

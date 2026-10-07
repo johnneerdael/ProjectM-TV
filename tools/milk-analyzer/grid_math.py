@@ -9,6 +9,7 @@ import re
 import numpy as np
 from field_math import UnresolvedMath,typed,SWIZZLE,BINARY,UNARY,matrix_cast,matrix_constructor,numeric_layout,maskable_math
 from field_math import GLES_HIGHP_INFINITY,INFINITY_OPERATIONS,check_infinity_operation
+from field_math import SEPARATE_ARITHMETIC,APPLE_MIX_FMA,mix_values
 from shader_fields import Field
 
 
@@ -37,7 +38,8 @@ def _convert(value,dtype,count,*,zero_extend=False,allow_nan=False,allow_infinit
     return result
 
 
-def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict',numeric_policy='strict'):
+def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict',numeric_policy='strict',arithmetic_profile=SEPARATE_ARITHMETIC):
+    if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_MIX_FMA):raise UnresolvedMath('unsupported shader arithmetic profile')
     if numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise UnresolvedMath('unsupported shader numeric policy')
     highp=numeric_policy==GLES_HIGHP_INFINITY
     if highp and coordinate_profile!='strict':raise UnresolvedMath('unsupported mixed shader numeric/coordinate policies')
@@ -340,7 +342,7 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
             elif op=='clamp':raw=np.clip(*align(args))
             elif op=='saturate':raw=np.clip(args[0],0,1)
             elif op=='lerp':
-                a,b,t=align(args);raw=a+t*(b-a)
+                a,b,t=align(args);raw=mix_values(a,b,t,arithmetic_profile=arithmetic_profile)
             elif op=='frac':raw=args[0]-np.floor(args[0])
             elif op=='step':
                 a,b=align(args);raw=np.asarray(b>=a,dtype=np.float32)

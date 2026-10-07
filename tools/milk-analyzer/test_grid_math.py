@@ -5,6 +5,32 @@ import test_field_math
 
 
 class GridMathTest(unittest.TestCase):
+    def test_declared_mix_profile_preserves_nested_fma_in_scalar_and_grid(self):
+        from field_math import evaluate
+        from grid_math import evaluate_grid
+        _,field=test_field_math.lower('ret=lerp(float3(uv.x),float3(uv.y),bass);')
+        inputs={'_uv':[2.0584590435028076,1.4206379652023315,0,0],
+                '_c3':[.9552963972091675,0,0,0]}
+        profile='apple-m4pro-gles-mix-nested-fma-v1'
+        expected=np.full(3,np.float32(1.4491509199142456))
+        np.testing.assert_array_equal(evaluate(field,inputs=inputs,arithmetic_profile=profile),expected)
+        np.testing.assert_array_equal(evaluate_grid(field,batch_shape=(2,),inputs=inputs,
+                                                   arithmetic_profile=profile),np.tile(expected,(2,1)))
+        self.assertFalse(np.array_equal(evaluate(field,inputs=inputs),expected))
+        inputs={'_uv':[[2.0584590435028076,1.4206379652023315,0,0],
+                       [.01025390625,.78466796875,0,0]],'_c3':[.9552963972091675,0,0,0]}
+        actual=evaluate_grid(field,batch_shape=(2,),inputs=inputs,arithmetic_profile=profile)
+        for lane in range(2):
+            np.testing.assert_array_equal(actual[lane],evaluate(field,
+                inputs={'_uv':inputs['_uv'][lane],'_c3':inputs['_c3']},arithmetic_profile=profile))
+
+    def test_scalar_loop_fallback_retains_mix_profile(self):
+        from field_math import evaluate
+        _,field=test_field_math.lower('float a[2]={.125,.75};ret=lerp(a[0],a[1],bass);')
+        result=evaluate(field,inputs={'_c3':[.25,0,0,0]},
+                        arithmetic_profile='apple-m4pro-gles-mix-nested-fma-v1')
+        np.testing.assert_array_equal(result,np.full(3,np.float32(.28125)))
+
     def test_logical_guards_do_not_evaluate_invalid_unselected_rhs_domains(self):
         module=importlib.import_module('grid_math')
         for body,positions,expected in [

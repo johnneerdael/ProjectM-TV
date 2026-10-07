@@ -562,6 +562,17 @@ def test_vertical_blur_profile_reaches_real_source51_pipeline(monkeypatch):
     assert result['provenance']['blur_arithmetic_profile']==seen[0]
 
 
+def test_mix_profile_checks_gles_and_exact_source_identity(profile_gate):
+    settings=domain(shader_arithmetic_profile='apple-m4pro-gles-mix-nested-fma-v1')
+    with pytest.raises(ValueError,match='mix.*requires'):
+        profile_gate(PATCHES_2317,settings)
+    settings['profile']='gles300'
+    with pytest.raises(ValueError,match='mix.*requires'):
+        profile_gate(PATCHES_237,settings)
+    with pytest.raises(RuntimeError,match='profile accepted before source execution'):
+        profile_gate(PATCHES_2317,settings)
+
+
 def test_2317_retains_qualified_gles_smoothing_and_storage_contracts(profile_gate):
     settings=domain(custom_wave_smoothing_profile='float32-fma-first-v1',
                     motion_uv_storage_profile='apple-m4pro-gles-rg16f-rtz-finite-v1')
