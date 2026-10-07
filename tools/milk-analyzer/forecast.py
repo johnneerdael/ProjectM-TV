@@ -25,7 +25,7 @@ from sampling_policy import texture_settings
 from geometry_features import scene_geometry_features
 from materials import material_input_identity
 from source_features import forecast_feature_record, SIMULATED
-from engine_profiles import (CORE_2315_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
+from engine_profiles import (CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2315_SHAPE,CORE_2315_BLUR,CORE_2315_ZOOM,
     CORE_2315_DISPLAY,CORE_2315_WAVE,LEGACY_BLUR,LEGACY_ZOOM,LEGACY_DISPLAY,LEGACY_WAVE,matches,select_policy)
 from shape_sampling import LEGACY as LEGACY_SHAPE_POLICY,CORE_238 as CORE_238_SHAPE_POLICY,native_blur_level,shape_sampling_modes
 
@@ -53,6 +53,7 @@ CORE_2310_EQUATION_ENGINE = {
     'patches_sha256': '545ca48adad787f963f9b29c1fc4fd7e8a71fb910f586c8747f96a075d130ddf',
 }
 CORE_2315_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.15-cold-thread-v1'
+CORE_2316_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.16-cold-thread-v1'
 # Patch0044 changes literal formatting; equation RNG and sampler ownership
 # retain the verified43-patch contracts. Keep44 as a distinct source identity.
 # Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
@@ -63,6 +64,7 @@ PRODUCTION_EQUATION_ENGINES = {
     CORE_237_EQUATION_RNG_POLICY: CORE_237_EQUATION_ENGINE,
     CORE_2310_EQUATION_RNG_POLICY: CORE_2310_EQUATION_ENGINE,
     CORE_2315_EQUATION_RNG_POLICY: CORE_2315_ENGINE,
+    CORE_2316_EQUATION_RNG_POLICY: CORE_2316_ENGINE,
 }
 
 
@@ -88,7 +90,7 @@ def source_shape_sampler_policy(engine: dict, requested: str | None) -> str:
     elif requested == CORE_2315_SHAPE:
         raise ValueError('shape sampler engine identity mismatch')
     verified=any(all(engine.get(key)==value for key,value in expected.items())
-                 for expected in (CORE_237_EQUATION_ENGINE,CORE_2310_EQUATION_ENGINE,CORE_2315_ENGINE))
+                 for expected in (CORE_237_EQUATION_ENGINE,CORE_2310_EQUATION_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE))
     policy=requested if requested is not None else CORE_238_SHAPE_POLICY if verified else LEGACY_SHAPE_POLICY
     if policy not in {LEGACY_SHAPE_POLICY,CORE_238_SHAPE_POLICY}:
         raise ValueError('unsupported shape sampler policy')
@@ -172,7 +174,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if any(type(domain[k]) is not int or domain[k]<=0 for k in ['width','height']):
         raise ValueError('positive integer forecast viewport required')
     for version, expected in [('2.3.5',CORE_235_EQUATION_ENGINE),('2.3.7',CORE_237_EQUATION_ENGINE),
-                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE)]:
+                              ('2.3.10',CORE_2310_EQUATION_ENGINE),('2.3.15',CORE_2315_ENGINE),('2.3.16',CORE_2316_ENGINE)]:
         # JNI enables patch 0042 only above height 1330 and changes the line reference
         # to 1280x720 there. Neither that feedback path nor scaled lines is modeled.
         if (all(engine.get(key)==value for key,value in expected.items()) and

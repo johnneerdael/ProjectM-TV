@@ -15,13 +15,45 @@ from audience_ranking import relative_activity_ranks
 from core_backend import reusable_result, core_run_identity
 
 
-def verify_run_identity(metadata,identity):
+def verify_run_identity(metadata,identity,*,aar=None):
     required={'identity','aar_sha256','model_sha256','python_hashes','runtime_hashes',
-              'runner_java_sha256','clock_source_sha256','profile','device','device_fingerprint'}
+              'runner_java_sha256','clock_source_sha256','profile','device','device_fingerprint',
+              'native_armeabi_v7a_sha256','java_runtime_binding'}
     if not isinstance(metadata,dict) or not required.issubset(metadata):
         raise ValueError('Complete review run provenance required')
     if identity!=metadata['identity'] or core_run_identity(metadata)!=metadata['identity']:
         raise ValueError('Review run identity differs from recorded provenance')
+    def sha(value):
+        return isinstance(value,str) and len(value)==64 and all(c in '0123456789abcdef' for c in value)
+    runtime=metadata.get('runtime_hashes');binding=metadata.get('java_runtime_binding')
+    if not isinstance(runtime,dict) or not isinstance(binding,dict):
+        raise ValueError('Review runtime binding objects required')
+    if runtime.get('projectM-TV-core-2.2.4.aar')!=metadata['aar_sha256']:
+        raise ValueError('Review deployed AAR binding differs')
+    native=metadata['native_armeabi_v7a_sha256']
+    if not sha(native) or native!=runtime.get('libprojectmtv.so'):
+        raise ValueError('Review native runtime binding differs')
+    hashes=['aar_sha256','classes_jar_sha256','dex_sha256','reconstructed_dex_sha256',
+            'd8_jar_sha256','android_jar_sha256','proof_sha256']
+    helpers=binding.get('helper_classes_sha256')
+    if (binding.get('policy')!='published-aar-reproduced-dex-v1' or
+            any(not sha(binding.get(key)) for key in hashes) or
+            type(binding.get('min_api')) is not int or not 21<=binding['min_api']<=34 or
+            not isinstance(helpers,dict) or not helpers or any(not sha(v) for v in helpers.values()) or
+            binding['aar_sha256']!=metadata['aar_sha256'] or
+            binding['dex_sha256']!=binding['reconstructed_dex_sha256'] or
+            binding['dex_sha256']!=runtime.get('classes.dex')):
+        raise ValueError('Review Java runtime binding differs or is incomplete')
+    if aar is not None:
+        if hashlib.sha256(Path(aar).read_bytes()).hexdigest()!=metadata['aar_sha256']:
+            raise ValueError('Review AAR binding differs')
+        with zipfile.ZipFile(aar) as archive:
+            try:
+                actual_native=hashlib.sha256(archive.read('jni/armeabi-v7a/libprojectmtv.so')).hexdigest()
+                classes=hashlib.sha256(archive.read('classes.jar')).hexdigest()
+            except KeyError as error:raise ValueError('Review AAR binding inputs missing') from error
+        if actual_native!=native or classes!=binding['classes_jar_sha256']:
+            raise ValueError('Review runtime does not belong to supplied AAR')
 
 
 def export_collection(corpus, results, output, *, identity, weights, run_metadata=None):
@@ -64,7 +96,7 @@ def verify_review_assets(output, aar):
     output=Path(output);aar=Path(aar)
     manifest=json.loads((output/'audience-review.json').read_text())
     metadata=manifest['run_metadata']
-    verify_run_identity(metadata,manifest['identity'])
+    verify_run_identity(metadata,manifest['identity'],aar=aar)
     if hashlib.sha256(aar.read_bytes()).hexdigest()!=manifest['run_metadata']['aar_sha256']:
         raise ValueError('Review AAR identity differs')
     with zipfile.ZipFile(aar) as archive:
@@ -131,6 +163,7 @@ def main():
                 '--output',str(args.output.parent/'score-audit.json')]}))
         raise SystemExit(1)
     metadata=json.loads((args.run/'run-identity.json').read_text())
+    verify_run_identity(metadata,metadata['identity'],aar=args.aar)
     if hashlib.sha256(args.aar.read_bytes()).hexdigest()!=metadata['aar_sha256']:
         raise ValueError('Review AAR differs from scoring AAR')
     corpus=json.loads((args.run/'corpus.json').read_text())['cases']

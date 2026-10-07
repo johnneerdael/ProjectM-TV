@@ -1,0 +1,48 @@
+{
+  "release": "v2.3.16",
+  "release_commit": "dd59a791fd2af6b7ad2fffcb389e0bc178905959",
+  "aar_sha256": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+  "runtime_sha256": {
+    "runtime-java.json": "311371b692e15c521c4c757f8b45279ebfb989a50b5acafb12b1ddf75fff7b5f",
+    "core_random_inputs.cpp": "3bf936357b5dfcd18dc58fe93f0421c2938d8b18ee9b429fedff656c65272477",
+    "classes.jar": "948b9a2293ad2f6d0a112f286cd93883031e3673f9def7ca0bb73337116f3428",
+    "CoreBackendRunner.java": "3fbb80275524c1be998f7a37dd5b0553dfd346c942f20805169142eaead707d4",
+    "classes.dex": "f956933b4d8628487f1e610b7b6f9e93f8ac6c9d61ae5e4544c37effdfce5338",
+    "core_backend_clock.cpp": "45f9cb1895023341e13b7382e0f2d4dd3e68eb3c8b65173f12c9ffdb5ebc5e58",
+    "java-reproduction-verification.json": "793a560f4561787ad587d126efae502692d36b4f5fb555afcbc2b3d2e5ab61cb",
+    "libprojectmtv.so": "55fef95b3740d17543ec11e9d39dacf0526cdd929b79e4a14fb2bc2817639a73",
+    "libbackendclock.so": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953"
+  },
+  "source_engine": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "patches_sha256": "cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded"
+  },
+  "native_reference": "unchanged full published AAR library/classes, test-host helper provides declared clock/random inputs",
+  "previous_release": "2.3.15",
+  "first49_patches_unchanged": true,
+  "patch50_scope": "per-preset texture-manager ownership; no altered noise math, EEL math, draw controls or shaders",
+  "java_binding": {
+    "aar_sha256": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+    "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+    "classes_jar_sha256": "948b9a2293ad2f6d0a112f286cd93883031e3673f9def7ca0bb73337116f3428",
+    "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+    "dex_sha256": "f956933b4d8628487f1e610b7b6f9e93f8ac6c9d61ae5e4544c37effdfce5338",
+    "helper_classes_sha256": {
+      "helper-classes/nl/neerdael/projectm/analysis/CoreBackendRunner.class": "a77ffaf53aa1712e4e1e393c85a13e93cd84b48b2b3d1bf29f3f3d4ed5b59fba"
+    },
+    "min_api": 21,
+    "policy": "published-aar-reproduced-dex-v1",
+    "proof_sha256": "311371b692e15c521c4c757f8b45279ebfb989a50b5acafb12b1ddf75fff7b5f",
+    "reconstructed_dex_sha256": "f956933b4d8628487f1e610b7b6f9e93f8ac6c9d61ae5e4544c37effdfce5338"
+  },
+  "qualification_controls_pending": false,
+  "noise_control": {
+    "max_rgb8_error": 1,
+    "mean_rgb8_error": 0.08947301793981481,
+    "all_channels_within_one": true,
+    "release": "2.3.16",
+    "scope": "one-frame direct noise texture control, no randomized scoring credit"
+  },
+  "cold_bundled_scope_only": true,
+  "source_only_not_random_accuracy_credit": true
+}

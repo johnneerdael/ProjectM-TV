@@ -545,3 +545,12 @@ Paired production noise must use the explicit raw-clock export policy and
 effective per-texture generator seeds. The default exporter retains Preset Lab’s
 subsystem/dimension seed mixing; it is not a production clock-seed bank. Verify
 the private instrumentation identity before reversing that mixing.
+
+The predictor’s exact50-patch2.3.16 identity shares49-patch scalar/drawing
+policies while retaining distinct source/archive/AAR/Java identities. Cold
+bundled-load compatibility does not model cross-pack transitions or cache resets.
+Prepare source50 adapters separately; preserve older frozen binaries and grades.
+
+Audience review exports require native/AAR and reproduced-DEX binding metadata;
+verification also checks actual embedded ARMv7 native/classes bytes. Independent
+runtime hashes alone cannot certify an exported review collection.

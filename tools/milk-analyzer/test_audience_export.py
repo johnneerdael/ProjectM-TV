@@ -9,10 +9,20 @@ from audience_export import export_collection, verify_review_assets
 
 
 def run_metadata(aar,**updates):
+    with zipfile.ZipFile(aar) as z:
+        native=hashlib.sha256(z.read('jni/armeabi-v7a/libprojectmtv.so')).hexdigest()
+        classes=hashlib.sha256(z.read('classes.jar')).hexdigest()
     facts={'aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest(),
            'model_sha256':'a'*64,'python_hashes':{'core_corpus.py':'b'*64},
            'runner_java_sha256':'c'*64,'clock_source_sha256':'d'*64,
-           'runtime_hashes':{'libprojectmtv.so':'e'*64},
+           'runtime_hashes':{'libprojectmtv.so':native,'classes.dex':'e'*64,
+             'projectM-TV-core-2.2.4.aar':hashlib.sha256(aar.read_bytes()).hexdigest()},
+           'native_armeabi_v7a_sha256':native,
+           'java_runtime_binding':{'policy':'published-aar-reproduced-dex-v1',
+             'aar_sha256':hashlib.sha256(aar.read_bytes()).hexdigest(),'classes_jar_sha256':classes,
+             'dex_sha256':'e'*64,'reconstructed_dex_sha256':'e'*64,'d8_jar_sha256':'1'*64,
+             'android_jar_sha256':'2'*64,'proof_sha256':'3'*64,'min_api':21,
+             'helper_classes_sha256':{'helper.class':'4'*64}},
            'profile':{'fps':30,'frames':420,'warmup':60,'width':128,'height':72},
            'device':'fixture-device','device_fingerprint':'fixture-fingerprint'}
     facts.update(updates)
@@ -50,6 +60,8 @@ def test_incomplete_or_changed_results_cannot_be_exported(tmp_path,failure):
 def test_verify_checks_real_corpus_scores_and_membership_even_with_updated_checksums(tmp_path,tamper):
     corpus,results=inputs();aar=tmp_path/'core.aar'
     with zipfile.ZipFile(aar,'w') as archive:
+        archive.writestr('jni/armeabi-v7a/libprojectmtv.so',b'fixture-native')
+        archive.writestr('classes.jar',b'fixture-classes')
         for row in corpus:
             payload=row['preset'].encode();row['sha256']=hashlib.sha256(payload).hexdigest()
             archive.writestr('assets/presets/'+row['preset'],payload)
@@ -87,6 +99,8 @@ def cli_run(tmp_path):
     aar=tmp_path/'core.aar';run=tmp_path/'run';run.mkdir();(run/'results').mkdir()
     cases=[]
     with zipfile.ZipFile(aar,'w') as archive:
+        archive.writestr('jni/armeabi-v7a/libprojectmtv.so',b'fixture-native')
+        archive.writestr('classes.jar',b'fixture-classes')
         for name in ('a.milk','b.milk'):
             raw=name.encode();sha=hashlib.sha256(raw).hexdigest()
             archive.writestr('assets/presets/'+name,raw);cases.append({'preset':name,'sha256':sha})
@@ -161,3 +175,41 @@ def test_cli_rejects_stale_provenance_before_exporting_assets(tmp_path):
     assert result.returncode!=0
     assert not output.exists()
     assert 'identity' in result.stderr.lower()
+
+
+@pytest.mark.parametrize('removed',['native_armeabi_v7a_sha256','java_runtime_binding'])
+def test_review_cannot_verify_independent_runtime_hashes_without_aar_bindings(tmp_path,removed):
+    from audience_export import verify_run_identity
+    from core_backend import core_run_identity
+    _,_,aar,_,_=cli_run(tmp_path)
+    metadata=run_metadata(aar)
+    metadata.pop(removed,None)
+    metadata['identity']=core_run_identity(metadata)
+    with pytest.raises(ValueError,match='provenance|binding'):
+        verify_run_identity(metadata,metadata['identity'])
+
+
+@pytest.mark.parametrize('tamper',['library','classes','dex','policy','reconstruction'])
+def test_binding_tamper_rejected_even_after_rehashing_entire_metadata(tmp_path,tamper):
+    from audience_export import verify_run_identity
+    from core_backend import core_run_identity
+    _,_,aar,_,_=cli_run(tmp_path);metadata=run_metadata(aar)
+    if tamper=='library':
+        metadata['native_armeabi_v7a_sha256']='f'*64;metadata['runtime_hashes']['libprojectmtv.so']='f'*64
+    if tamper=='classes':metadata['java_runtime_binding']['classes_jar_sha256']='f'*64
+    if tamper=='dex':metadata['runtime_hashes']['classes.dex']='f'*64
+    if tamper=='policy':metadata['java_runtime_binding']['policy']='independent-hashes-only'
+    if tamper=='reconstruction':metadata['java_runtime_binding']['reconstructed_dex_sha256']='f'*64
+    metadata['identity']=core_run_identity(metadata)
+    with pytest.raises(ValueError,match='binding|belong'):
+        verify_run_identity(metadata,metadata['identity'],aar=aar)
+
+
+def test_deployed_aar_role_must_match_binding_not_only_local_archive(tmp_path):
+    from audience_export import verify_run_identity
+    from core_backend import core_run_identity
+    _,_,aar,_,_=cli_run(tmp_path);metadata=run_metadata(aar)
+    metadata['runtime_hashes']['projectM-TV-core-2.2.4.aar']='f'*64
+    metadata['identity']=core_run_identity(metadata)
+    with pytest.raises(ValueError,match='AAR.*binding|binding.*AAR'):
+        verify_run_identity(metadata,metadata['identity'],aar=aar)

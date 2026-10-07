@@ -26,7 +26,8 @@ int main(int argc,char** argv) {
         const bool live=policy=="evaluated-live-v1";
         const auto engine=json::parse(kEngineIdentity);
         if(live&&(engine.at("commit")!="e0b0a967f0ffd7d332106c366668ed271718472b"||
-                  engine.at("patches_sha256")!="7ef297fcab5d42d0531ec621ac6a464a5a0e7982da02bb40996bc62a886ae527"))
+                 (engine.at("patches_sha256")!="7ef297fcab5d42d0531ec621ac6a464a5a0e7982da02bb40996bc62a886ae527"&&
+                  engine.at("patches_sha256")!="cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded")))
             throw std::runtime_error("live waveform engine identity mismatch");
         int mode=request.at("mode").get<int>()%16;
         std::unique_ptr<milk_wave_cpu::MilkdropPreset::Waveforms::WaveformMath> math;

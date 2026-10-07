@@ -842,3 +842,22 @@ the repaired source samples within1RGB8 at256×144. This bounded control does no
 certify arbitrary drivers, complete presets or fresh randomized accuracy.
 Build new adapters in a separate directory; do not overwrite frozen binaries.
 `MILK_NATIVE_NOISE_BINARY` selects the prepared noise adapter for its tests.
+
+
+The exact published2.3.16/50-patch source has a separate cold-thread RNG
+identity and shares the49-patch scalar/drawing policies. Patch0050 retains
+per-preset texture-manager ownership; it does not change those equations or
+shader math. This compatibility is limited to declared cold bundled loads;
+custom-pack precedence, transitions between packs and texture-cache resets need
+their own source/context modeling. Unknown source digests remain rejected.
+Runtime qualification uses the unchanged full2.3.16 AAR/classes through JNI,
+not the CPU archive. Its frozen one-frame noise control matches within1RGB8;
+this is not a fresh randomized or high-resolution appearance certificate.
+
+Review collection verification requires the producer’s native/AAR digest and
+reproduced-DEX binding record. It cross-checks the runtime library, executed and
+reconstructed DEX hashes, and embedded AAR native library/classes. Legacy records
+with only independent runtime hashes cannot be marked verified. This validates
+recorded producer proofs and AAR membership; the review asset verifier does not
+rerun D8 without the producer’s toolchain/helper artifacts. Preserve legacy
+records and revalidate their original runtime before producing a new bound export.
