@@ -1,0 +1,1807 @@
+{
+  "batch": 1,
+  "frames_per_preset": 30,
+  "positions": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "scores": [
+    100,
+    95,
+    100,
+    100,
+    0,
+    100,
+    95,
+    97.5,
+    100,
+    97.5
+  ],
+  "perfect_presets": 5,
+  "all_ten_perfect": false,
+  "successful_batches": 0,
+  "computed_presets": 9,
+  "unresolved_presets": 1,
+  "published_release": "v2.3.16",
+  "original_predictions_retained": true,
+  "claims_per_preset": 20,
+  "repair_credit": false,
+  "report_sha256": "67602f65f95bbb93977dd43c377b871567afcd7ae96698dc3e559fb02ee6934d",
+  "handoff_folders": [
+    "projectm-predictor-vector-index-research-2026-10-07",
+    "projectm-predictor-sparse-motion-estimate-2026-10-07",
+    "projectm-predictor-feedback-precision-research-2026-10-07",
+    "projectm-predictor-layered-bowl-motion-2026-10-07",
+    "projectm-predictor-grey-curl-feedback-2026-10-07"
+  ],
+  "final_seal_sha256": "7f73ac3c8babda3a4c3d38a8c2dd73e897cc50f2b07f1f622417e38b342e9d44",
+  "assessments": {
+    "1": {
+      "position": 8,
+      "preset": "suksma - autoerotic solipsistic omniversal meme - convoluted debt saturation.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "frozen_claims_sha256": "5af66e7dceb8b5b3f4b8a94b87089485b6c971eacdafaf877ef1536b47fa7f89",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 is mostly black with a dim rounded object near the upper right.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "structure2",
+          "claim": "Early frames develop a small multicoloured curved fragment near the upper-right side.",
+          "score": 5,
+          "critical": true,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "structure3",
+          "claim": "The fragment shifts toward the central-right area and elongates during the window.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "structure4",
+          "claim": "Frame30 retains a localized upright curled form with bright edges and large black surroundings.",
+          "score": 5,
+          "critical": true,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "motion1",
+          "claim": "The lit fragment moves from upper right toward the central area while changing shape.",
+          "score": 5,
+          "critical": true,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "motion2",
+          "claim": "Separated coloured contours deform relative to one another.",
+          "score": 5,
+          "critical": true,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "motion3",
+          "claim": "Visible support remains localized while its curved outline grows.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=1.0767314434051514, p95=2.1118550539016723 viewport/s; relative5%.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "colour1",
+          "claim": "Early highlights include pale yellow/white and red, green and blue edges.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "colour2",
+          "claim": "The evolved curl keeps bright warm/green accents with smaller blue contours.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "colour3",
+          "claim": "Black dominates the surrounding field throughout this short sequence.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.007738475901229928; saturation=0.05327861377348502; relative5%.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp samples each colour channel at different blur-gradient displaced coordinates.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Channel sharpening/decay and subtraction maintain separated coloured contours and dark gaps.",
+          "score": 5,
+          "critical": true,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite adds warm and cool directional blur-gradient terms to half main feedback.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Conditional bright-output noise and nonlinear gain modify the accumulated curl.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at1\u21922, brightening.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.004019294865429401; relative5%, exacteventtiming.",
+          "score": 5,
+          "critical": false,
+          "evidence": "All30paired displays reviewed; localized curved form, trajectories, dark space, colour separation/feedback agree. Exactevents andall5estimates pass."
+        }
+      ],
+      "missed": [],
+      "fix": null,
+      "numeric_validation": "numeric-validation.json",
+      "independent_auditor": "/root/audit_final_verification"
+    },
+    "2": {
+      "position": 9,
+      "preset": "Flexi - leaving colors - crazy cogitations centrifuge.milk",
+      "score": 95,
+      "status": "independently_validated",
+      "missed": [
+        "motion4 unassessable native speed, source tiny/rare optical-flow support"
+      ],
+      "critical_failure": false,
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The opening frame is visually black or nearly black.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "structure2",
+          "claim": "Later frames contain narrow diagonal warm wedges at upper-left/lower-right edges.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "structure3",
+          "claim": "The central majority of the viewport remains black during the30frame window.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "structure4",
+          "claim": "Frame30 still has sparse corner wedges rather than a large central figure.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion1",
+          "claim": "Warm corner wedges change width and colour while remaining near opposite edges.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion2",
+          "claim": "No bright moving central object develops in these30frames.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion3",
+          "claim": "Movement remains confined to sparse edge detail.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=3.1289005279541016, p95=5.07658998966217 viewport/s; relative5%.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "colour1",
+          "claim": "Visible edge detail is warm red/orange/yellow.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "colour2",
+          "claim": "Most of the screen stays black; total mean brightness remains very low.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "colour3",
+          "claim": "The warm edge colours vary across the sequence.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.0030184291312859084; saturation=0.032681709807366136; relative5%.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback1",
+          "claim": "The preset uses legacy warp/composite rather than authored custom shaders.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback2",
+          "claim": "Evaluated coloured borders and rotated/deformed previous feedback leave diagonal corner fragments.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback3",
+          "claim": "Legacy echo/gamma/darkening apply to accumulated output.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback4",
+          "claim": "Feedback remains limited to sparse edge detail within the declared window.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at5\u21926, darkening.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.003750280011445284; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported"
+        }
+      ],
+      "fix_pending": "Motion aggregate confidence gate; retain sparse estimates as diagnostics, no invented speed",
+      "renderer_error_established": false,
+      "raw_rgb_mae": 8.699468025952228e-07
+    },
+    "3": {
+      "position": 10,
+      "preset": "beta106i - Molten Core.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "frozen_claims_sha256": "6e33be374cac1bb2fdb85a39de35145db9e7e617ca00f74ae6751f3d56590e3c",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The sequence starts almost black with a very small central light.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "structure2",
+          "claim": "The light stays near centre while becoming a soft rounded glow.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "structure3",
+          "claim": "Late frames contain a larger pale glow but it remains a small object on a dark field.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "structure4",
+          "claim": "No full-screen bands or dense large geometry develop within30frames.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "motion1",
+          "claim": "The central glow expands gradually while its centre stays anchored.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "motion2",
+          "claim": "Its soft surrounding halo spreads over the window.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "motion3",
+          "claim": "There is no long translation of the centre across the screen.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.07370531558990479, p95=0.2730872392654419 viewport/s; relative5%.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "colour1",
+          "claim": "The visible source is pale warm white/yellow.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "colour2",
+          "claim": "The background stays predominantly black.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "colour3",
+          "claim": "Lit coverage increases gradually but total brightness remains low.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.004854506765210923; saturation=0.014191686608440553; relative5%.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "feedback1",
+          "claim": "This is a legacy shader-free warp/composite path.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Feedback decay and source drawing grow a soft accumulated central glow.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Legacy darkening retains a dark background instead of a bright uniform wash.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "feedback4",
+          "claim": "The glow has a soft halo rather than only one sharp isolated point.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at22\u219223, brightening.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.0021111175883561373; relative5%, exacteventtiming.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchinganchoredpaleglowgrowth/halo/darkfield; sourcelegacypathmechanismsconsistent. All5metrics<1%,exactpeak22\u219223/updownnone."
+        }
+      ],
+      "missed": [],
+      "fix": null
+    },
+    "4": {
+      "position": 11,
+      "preset": "beta106i - Straight Tropical Coal (Hypnotricks Stable Mix).milk",
+      "score": 100,
+      "status": "independently_validated",
+      "frozen_claims_sha256": "5c2679adc35fc2338fd710c3be4f629282da9a147b80ae93fd53fcf2ae6e8141",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The opening contains small green ring-like loops above/right of a dim rounded region.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "structure2",
+          "claim": "More repeated loops and soft rounded layers accumulate around the central area.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "structure3",
+          "claim": "Mid-window rings form a broad multicoloured spiral around a dark central opening.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames fill most of the viewport with a broad spiral/ring field.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "motion1",
+          "claim": "Small loops accumulate and spread into larger circular layers.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "motion2",
+          "claim": "Angular positions evolve around a persistent dark central anchor.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "motion3",
+          "claim": "Soft rings move outward while inner contours remain layered.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.4545730948448181, p95=1.1408787012100219 viewport/s; relative5%.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "colour1",
+          "claim": "Early visible loops are mainly green with pale purple surrounding layers.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "colour2",
+          "claim": "Growing layers add purple, yellow/green and cyan regions.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "colour3",
+          "claim": "Later colour occupies far more area than the opening, with a dark central hole remaining.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.3315125061199069; saturation=0.2693806864321232; relative5%.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "feedback1",
+          "claim": "The shader-free legacy warp accumulates earlier ring/loop geometry.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Persistent feedback repeats source contours into circular layers.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Blurred/soft appearance coexists with brighter narrow outlines.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "feedback4",
+          "claim": "The accumulated field grows in coverage rather than replacing the opening with unrelated flat colour.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at13\u219214, brightening.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.0314236581325531; relative5%, exacteventtiming.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingsmallloops, growingmulticolouredspiral/layers anddarkcentralanchor; all5metrics<=1.01%,exactpeak13\u219214/updownnone."
+        }
+      ],
+      "missed": [],
+      "fix": null
+    },
+    "5": {
+      "position": 12,
+      "preset": "Stahlregen & Flexi + Geiss + ORB - Spotted Blob_2 - usheriah colobot.milk",
+      "score": 0,
+      "status": "unresolved source: zero credit, native not captured",
+      "missed": [
+        "output cannot be independently predicted under strict undefined-vector-index policy"
+      ],
+      "fix": "Separate engineering research handoff; no authored preset repair or invented clamp",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "structure2",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "structure3",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "structure4",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "motion1",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "motion2",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "motion3",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "motion4",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "colour1",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "colour2",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "colour3",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "colour4",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "feedback1",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "feedback2",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "feedback3",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "feedback4",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "flashing1",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "flashing2",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "flashing3",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        },
+        {
+          "id": "flashing4",
+          "claim": "Unknown: dynamic vec3 reads exceed bounds under this declared input; no visual-output claim or credit.",
+          "score": 0,
+          "disposition": "unknown"
+        }
+      ]
+    },
+    "6": {
+      "position": 13,
+      "preset": "TonyMilkdrop - Dawning The Peacocks [Flexi - quitter] --- Isosceles edit.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "frozen_claims_sha256": "5bc497e8bbdc42e22a24adc17b48d3aa1da63d66e5cf5467c654632b86b7f19e",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 is mostly dark with a small bright source near centre.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "structure2",
+          "claim": "Early frames grow warm orange line/spiral structure around a large central rounded form.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "structure3",
+          "claim": "Mid-window a bright yellow central mass and curved edge contours fill most of the screen.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames remain bright yellow/green with a curved cooler accent near the upper centre.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "motion1",
+          "claim": "Curved contours grow rapidly outward from the central source.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "motion2",
+          "claim": "The central rounded region grows as accumulated colour spreads.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "motion3",
+          "claim": "Small repeated bright fragments move along the curved structure.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.28641074895858765, p95=2.148150777816771 viewport/s; relative5%.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "colour1",
+          "claim": "Opening colour develops through orange into yellow.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "colour2",
+          "claim": "Late output is predominantly very bright yellow with green/cyan accents.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "colour3",
+          "claim": "Dark background coverage falls strongly after the initial frames.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.7176911691824596; saturation=0.8638381063938141; relative5%.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Custom warp uses colour-specific blur gradients to move feedback.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Sharpening terms and positive channel additions grow brightness over time.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Different channel growth/decay produces warm accumulated colour and cooler accents.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Legacy composite displays the accumulated custom-warp field without an authored custom composite.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at2\u21923, brightening.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.09489837288856506; relative5%, exacteventtiming.",
+          "score": 5,
+          "evidence": "All30paired displays showmatchingdarkpoint\u2192orangecurves\u2192largebrightyellowgreenroundedfield/coolupperaccent. Geometric trajectories andfeedbackagree; all5estimates<=1.82%,peak2\u21923exact."
+        }
+      ],
+      "missed": [],
+      "fix": null
+    },
+    "7": {
+      "position": 14,
+      "preset": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial.milk",
+      "score": 95,
+      "status": "independently_validated",
+      "missed": [
+        "motion4 median26.1535% andp957.8015% outside5%"
+      ],
+      "critical_failure": false,
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The opening is black or nearly black before a bright blue curved ribbon appears.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "structure2",
+          "claim": "Early frames grow a broad blue curled/circular mass with a green/yellow inner highlight.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "structure3",
+          "claim": "The broad early blue field recedes, leaving a smaller cyan/green inner curl and faint blue surrounding lines.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames contain a bright cyan U-like loop connected to a magenta/blue trailing ribbon from the left.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion1",
+          "claim": "The initial curved ribbon rotates/deforms into a larger curled mass.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion2",
+          "claim": "The bright inner curl changes position and orientation while the broad outer blue layer fades.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion3",
+          "claim": "A narrow coloured trail develops toward the left as the U-like loop evolves.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.049761928617954254, p95=2.1268964052200316 viewport/s; relative5%.",
+          "score": 0,
+          "disposition": "miss"
+        },
+        {
+          "id": "colour1",
+          "claim": "Blue is prominent in the early curved ribbon and surrounding field.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "colour2",
+          "claim": "Inner highlights include green/yellow and later cyan/white.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "colour3",
+          "claim": "A magenta/purple trail coexists with dark blue detail and a black backdrop.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.06404282388587793; saturation=0.7511004070440929; relative5%.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp compares noisy neighbouring point samples to transport feedback coordinates.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback2",
+          "claim": "It then samples a stored blue-channel image at those transported coordinates.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite uses rotated external gradient textures multiplied by a cross product of sampled feedback fields.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "feedback4",
+          "claim": "Nonlinear colour power and audio gain retain bright curled layers against dark surroundings.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at2\u21923, brightening.",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported"
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.0507829487323761; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported"
+        }
+      ],
+      "root_cause_not_established": true,
+      "fix_pending": "Stage-localize feedback/wave/raster/sampling precision before nextcapture",
+      "native_bug_established": false
+    },
+    "8": {
+      "position": 15,
+      "preset": "suksma - yin - 395 - Artificial Inspiration (brainstorming - outward) + martin - elephant mating - shf thanks2.milk",
+      "score": 97.5,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "Opening frames have a large bright central rounded/cavity-like structure.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Opening rounded cavity and bright central field match in paired frames1\u20135."
+        },
+        {
+          "id": "structure2",
+          "claim": "Several early frames become mostly bright white before darker blue detail returns.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Several early white phases occur in both streams before the blue bowl returns."
+        },
+        {
+          "id": "structure3",
+          "claim": "Mid-window a blue oval/bowl is surrounded by bright cyan rim fragments and fine gold/green outer texture.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Mid-window blue oval/bowl, cyan rim fragments and gold/green outer texture match."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames develop two vertically stacked blue rounded regions with cyan crossing/rim lines.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Both late streams develop vertically stacked rounded blue lobes and crossing cyan/rim lines."
+        },
+        {
+          "id": "motion1",
+          "claim": "The central cavity changes scale and contours across the sequence.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Central cavity scale and contour phases agree across all30 pairs."
+        },
+        {
+          "id": "motion2",
+          "claim": "Bright cyan fragments move along rims and cross the central area.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Moving cyan rim fragments and crossing highlights agree across all30 pairs."
+        },
+        {
+          "id": "motion3",
+          "claim": "The single rounded early region develops into vertically related upper/lower lobes.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Single early cavity develops into upper/lower lobes in the same sequence."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.23588067293167114, p95=1.8498333930969229 viewport/s; relative5%.",
+          "score": 2.5,
+          "disposition": "partial",
+          "critical": false,
+          "evidence": "Median estimate misses7.1461691844%; p95 passes0.0328841054%. Retain2.5/5 under prior equal-weight numeric partial-credit practice. Both streams have29/29 observable motion transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "The opening is bright white/green.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Bright white/green opening matches."
+        },
+        {
+          "id": "colour2",
+          "claim": "Later central regions are mainly blue/cyan with gold or green texture outside.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blue/cyan centre and gold/green outer texture match."
+        },
+        {
+          "id": "colour3",
+          "claim": "Large brightness reduction follows the early white phases while cyan highlights remain.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Early white phases darken to blue while cyan highlights remain, matching the frozen sequence."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.40986473361651105; saturation=0.6661114272971947; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Mean luma passes0.0352156722%; saturation passes0.0076590565%."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp combines channel growth/decay, blur and conditional volume-noise additions.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-defined channel/blur/conditional-volume-noise mechanism is corroborated by matching accumulated appearance; native shader selection is not directly exposed."
+        },
+        {
+          "id": "feedback2",
+          "claim": "It also uses neighbouring point-sampled cells and branch thresholds.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Source-defined point-sample/threshold mechanism is corroborated by matching appearance; no critical deterministic history discrepancy established."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite combines main/blur fields with horizontal and vertical mirrored samples.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-defined mirrored main/blur composition is corroborated by matching paired lobe/rim layout."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Nonlinear per-channel powers and noise conditionals produce repeated blue/cyan lobes and textured outer layers.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Repeated blue/cyan lobes and textured outer layers agree. Fine pixel residuals remain separate from these frozen observable claims."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at5\u21926, darkening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact largest mean-luma transition5\u21926, darkening, independently recomputed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[[1, 2]].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[[1,2]], independently recomputed."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[[5, 6], [6, 7]].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[[5,6],[6,7]], independently recomputed."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.28555235266685486; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude passes0.0430828132%; event timing and lists remain strict."
+        }
+      ],
+      "critical_failure": false,
+      "critical_unknown": false,
+      "perfect_credit": false,
+      "missed": [
+        "motion4: median motion7.1461691844% outside5%; p95 passes and retains2.5numeric partial credit"
+      ],
+      "fix_pending": "Localize the motion-estimate/fine-feedback residual under separately identified controls; preserve this frozen score and the5% allowance.",
+      "root_cause_not_established": true,
+      "native_bug_established": false,
+      "frozen_claims_sha256": "f77ae6b79f34fc137c1a296174ce773a5c27fb286f01774c7a965316eeaf1a8d",
+      "batch_freeze_sha256": "2925f1d24fcf547a556b908db199e461b3e51363d58fb48edc1f287b571aa768",
+      "numeric_validation_sha256": "0330651a60197337830746b1b48fc664706d3c44dd86f3584a9f713e622fb027",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.23588067293167114,
+          "native": 0.2527371048927307,
+          "relative_error": 0.07146169184425918,
+          "passes": false
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 1.8498333930969229,
+          "native": 1.8504416942596424,
+          "relative_error": 0.0003288410540049761,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.40986473361651105,
+          "native": 0.4097203969955444,
+          "relative_error": 0.00035215672178734545,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.6661114272971947,
+          "native": 0.6660604094465573,
+          "relative_error": 7.659056510176578e-05,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.28555235266685486,
+          "native": 0.28542932868003845,
+          "relative_error": 0.00043082813245084534,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            5,
+            6
+          ],
+          "direction": "darkening",
+          "up": [
+            [
+              1,
+              2
+            ]
+          ],
+          "down": [
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              7
+            ]
+          ]
+        },
+        "native": {
+          "peak": [
+            5,
+            6
+          ],
+          "direction": "darkening",
+          "up": [
+            [
+              1,
+              2
+            ]
+          ],
+          "down": [
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              7
+            ]
+          ]
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 0.004824599716812372,
+        "mean_rmse_rgb": 0.018906939774751663,
+        "peak_mae_rgb": 0.015111897140741348,
+        "peak_rmse_rgb": 0.04807983711361885,
+        "source_sha256": "2fd2630e0f2846e4c0a9954e04ccee293442704a7171dec22f48fc93e85c5a9e",
+        "native_sha256": "f2da46dbfe2444b17fd4c6e2fe7086b27ba61d6316ea68d8465b2638344a0d46"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all100_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Frozen observable-claim scoring is not pixel identity.",
+        "Source mechanism clauses are source-confirmed and appearance-corroborated; unchangedJNI does not directly expose per-stage custom/fallback selection."
+      ],
+      "created_utc": "2026-10-07T05:17:47.261450+00:00"
+    },
+    "9": {
+      "position": 16,
+      "preset": "LuxXx - GrindPuff.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "Frame1 contains a sparse pink/purple pixel-like angular outline near centre.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Sparse pink/purple angular opening outline matches."
+        },
+        {
+          "id": "structure2",
+          "claim": "Early frames develop a jagged multicoloured branching/coastline-like shape.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Jagged branching/coastline-like growth matches across the early paired frames."
+        },
+        {
+          "id": "structure3",
+          "claim": "A broad black diagonal gap separates glowing warm left and green right regions.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Black diagonal separation between warm left and green right regions is retained."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames expand the angular coloured form while retaining dark holes and gaps.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Late expansion retains corresponding dark holes and gaps."
+        },
+        {
+          "id": "motion1",
+          "claim": "The angular form grows outward and changes its boundary shape.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Outward growth and changing angular boundaries agree across all 30 paired frames."
+        },
+        {
+          "id": "motion2",
+          "claim": "Coloured edge fragments change position along the jagged outline.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Coloured fragments evolve along corresponding jagged edges."
+        },
+        {
+          "id": "motion3",
+          "claim": "The central dark division remains while the surrounding luminous regions expand.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "The central dark division persists as the surrounding regions expand."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.19721758365631104, p95=0.5098917841911316 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Both motion estimates pass: median error 0.784455%; p95 error 0.198402%. All 29 transitions have measurable support in both streams."
+        },
+        {
+          "id": "colour1",
+          "claim": "Pink/purple appears in the initial angular outline.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Initial pink/purple outline agrees."
+        },
+        {
+          "id": "colour2",
+          "claim": "Warm red/orange spreads on one side while bright green occupies the other.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Warm left and bright green right colour development agrees."
+        },
+        {
+          "id": "colour3",
+          "claim": "Dark gaps contrast with saturated coloured outlines and soft surrounding glow.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Black gaps, saturated outlines and soft surrounding glow agree."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.26527542571226753; saturation=0.6347062130769093; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Mean luma error 0.070508% and saturation error 0.016301% pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp displaces green/blue separately using blur gradients and procedural noise.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Separate green/blue blur-gradient/noise mechanism is confirmed in source and corroborated by paired appearance."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Red feedback receives a strong sharpening term against blur3.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Red sharpening against blur3 is source-confirmed and its jagged layered effect is appearance-corroborated."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite uses blur-derived displacement and nonlinear hue_shader weights.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blur displacement and hue weights are source-confirmed; the resulting regional palette agrees."
+        },
+        {
+          "id": "feedback4",
+          "claim": "These feedback/colour combinations grow jagged layered contours with differently coloured regions.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Layered jagged contours and differently coloured regions agree; this does not assert exact native shader program identity."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at1\u21922, brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak 1\u21922, brightening, independently recomputed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list [], independently recomputed."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list [], independently recomputed."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.04812731221318245; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error 2.349587% passes the unchanged 5% allowance."
+        }
+      ],
+      "critical_failure": false,
+      "critical_unknown": false,
+      "perfect_credit": true,
+      "missed": [],
+      "fix_pending": null,
+      "root_cause_not_established": false,
+      "native_bug_established": false,
+      "frozen_claims_sha256": "82a72cd572112c286ff592db785d86b2797d617b55b7ee7a6b96a03967553557",
+      "batch_freeze_sha256": "2925f1d24fcf547a556b908db199e461b3e51363d58fb48edc1f287b571aa768",
+      "numeric_validation_sha256": "d149928cfe7e5a49a43bd4b485ae2126e3c98440887ecfa89e4edc9d650e31d8",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.19721758365631104,
+          "native": 0.19876466691493988,
+          "relative_error": 0.007844550318215696,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.5098917841911316,
+          "native": 0.5109034180641174,
+          "relative_error": 0.0019840168136669835,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.26527542571226753,
+          "native": 0.26508838633696236,
+          "relative_error": 0.0007050761479431159,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.6347062130769093,
+          "native": 0.6348096787929535,
+          "relative_error": 0.0001630135547949968,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.04812731221318245,
+          "native": 0.04925810545682907,
+          "relative_error": 0.023495873582919276,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 0.003071113023906946,
+        "mean_rmse_rgb": 0.015020404942333698,
+        "peak_mae_rgb": 0.0038130618631839752,
+        "peak_rmse_rgb": 0.021721255034208298,
+        "source_sha256": "486167ba2ff83ad027b3fd4c4f413fbdfec88dec76021a3bad4c5f9ba96af3c1",
+        "native_sha256": "b4f4a69970c23c9f17eef1855fc91d348e04913d374e619d9218da3204756c0a"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "full_resolution_comparison_sheet_reviewed": false,
+        "all179_context_hashes_verified": true,
+        "all100_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Score is for the exact frozen observable claims, not pixel identity or complete fine-contour trajectory fidelity.",
+        "Source mechanism clauses are source-confirmed and appearance-corroborated; unchanged JNI does not directly expose per-stage custom/fallback selection."
+      ],
+      "created_utc": "2026-10-07T05:22:06.083868+00:00"
+    },
+    "10": {
+      "position": 17,
+      "preset": "LuxXx - Dancing (Or Mating) Blobs III nz+.milk",
+      "score": 97.5,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The opening develops a dim grey field with a darker rounded central region.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Dim grey opening field and darker rounded central region agree."
+        },
+        {
+          "id": "structure2",
+          "claim": "Early frames form a soft ring around that dark centre.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "The early soft central ring agrees in layout and growth."
+        },
+        {
+          "id": "structure3",
+          "claim": "Mid-window diagonal grey luminous bands cross the screen.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Mid-window diagonal luminous bands cross the viewport in both streams."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames show thin silver/grey curling streaks and layered wave-like loops on black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Both late streams show pale curling streaks and layered loops on black. Fine late contour shape/intensity differs and is retained separately; no required categorical structure is absent."
+        },
+        {
+          "id": "motion1",
+          "claim": "The central soft ring grows/deforms during early frames.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Early central ring growth/deformation agrees across paired frames."
+        },
+        {
+          "id": "motion2",
+          "claim": "Diagonal bands shift and reshape as the initial ring loses its dominance.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Mid-window diagonal band displacement and loss of ring dominance agree."
+        },
+        {
+          "id": "motion3",
+          "claim": "Late thin curls and wave-like streaks change position across the dark field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Late curls and wave-like streaks change position in both streams; precise fine contour history is not identical and is not certified by this broad frozen clause."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.07969575375318527, p95=2.3286868572235107 viewport/s; relative5%.",
+          "score": 2.5,
+          "disposition": "partial",
+          "critical": false,
+          "evidence": "Median error 5.670605% exceeds 5%; p95 error 2.876268% passes. Retain 2.5/5 under established equal-weight numeric partial-credit practice. Both streams have 25/29 measurable transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "The sequence is predominantly achromatic black/grey/white.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Achromatic black/grey/white throughout; saturation is exactly zero in both streams."
+        },
+        {
+          "id": "colour2",
+          "claim": "The opening grey field becomes darker and more selectively lit.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Grey opening becomes darker with selective luminous detail."
+        },
+        {
+          "id": "colour3",
+          "claim": "Late visible detail is mainly thin pale grey/silver rather than a saturated rainbow.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Late thin silver/grey detail remains achromatic."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.11766207305093607; saturation=0.0; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Mean luma error 0.627328% passes; predicted and observed saturation are exactly zero."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp applies a reaction/diffusion-like red/green update and neighbourhood blur.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-defined reaction/diffusion-like update and blur are corroborated by the matching ring/band/curl phases."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Conditional volume noise and red-channel noise injection perturb feedback.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Volume-noise/red-noise mechanism is source-confirmed; categorical accumulated appearance agrees, while fine late residuals remain."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite combines blur levels, rotated/displaced samples and stored colour parameters.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blur/rotated-displaced composition is source-confirmed and appearance-corroborated; exact native program choice remains unexposed."
+        },
+        {
+          "id": "feedback4",
+          "claim": "The resulting accumulated appearance is a changing grey ring/band/curl field with dark gaps.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Both streams retain the grey ring-to-band-to-curl field and dark gaps. Late fine contours differ visibly, so this score does not certify full fine-geometry or pixel identity."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at13\u219214, darkening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak 13\u219214, darkening, independently recomputed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list [], independently recomputed."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list [], independently recomputed."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.08761117607355118; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error 3.313359% passes the unchanged 5% allowance."
+        }
+      ],
+      "critical_failure": false,
+      "critical_unknown": false,
+      "perfect_credit": false,
+      "missed": [
+        "motion4: median motion error 5.670605% outside 5%; p95 passes and retains 2.5/5 numeric partial credit"
+      ],
+      "fix_pending": "Localize motion-estimate and visible late fine-feedback differences under separately identified controls; do not rewrite frozen claims or widen tolerance.",
+      "root_cause_not_established": true,
+      "native_bug_established": false,
+      "frozen_claims_sha256": "1043707a287b6caa69f6aecf00d976e64787afd9f12ddd48821ca87037edb784",
+      "batch_freeze_sha256": "2925f1d24fcf547a556b908db199e461b3e51363d58fb48edc1f287b571aa768",
+      "numeric_validation_sha256": "5fefa0414ec651f66c93a0324c8178fe45f1fddcae97e0edbc034834f0007f64",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.07969575375318527,
+          "native": 0.07517652213573456,
+          "relative_error": 0.05670605276470065,
+          "passes": false
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 2.3286868572235107,
+          "native": 2.3956661224365234,
+          "relative_error": 0.02876267584250123,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.11766207305093607,
+          "native": 0.11840020020802816,
+          "relative_error": 0.006273280233406718,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.0,
+          "native": 0.0,
+          "relative_error": 0,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.08761117607355118,
+          "native": 0.09051404893398285,
+          "relative_error": 0.03313359083314504,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            13,
+            14
+          ],
+          "direction": "darkening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            13,
+            14
+          ],
+          "direction": "darkening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 0.009370805695652962,
+        "mean_rmse_rgb": 0.020325370132923126,
+        "peak_mae_rgb": 0.035706549882888794,
+        "peak_rmse_rgb": 0.07563867419958115,
+        "source_sha256": "bf58852058598aebcd3c03112f38ec95b6df65e62a650565d315d3342bf2c787",
+        "native_sha256": "ea1c2d80b38894913a49d1653f896e1efc9405ab4462e1e337078f62b396231c"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "full_resolution_comparison_sheet_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all100_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Score is for the exact frozen observable claims, not pixel identity or complete fine-contour trajectory fidelity.",
+        "Source mechanism clauses are source-confirmed and appearance-corroborated; unchanged JNI does not directly expose per-stage custom/fallback selection."
+      ],
+      "created_utc": "2026-10-07T05:22:06.085483+00:00"
+    }
+  }
+}
