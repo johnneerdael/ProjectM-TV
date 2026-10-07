@@ -43,7 +43,7 @@ public class ProjectMApplication extends Application {
 
         ProjectMCore.init(this);
 
-        File customRoot = new File(getFilesDir(), "custom-presets");
+        File customRoot = new File(getNoBackupFilesDir(), "custom-presets");
         File custom = CustomPresetPack.current(customRoot);
         // Recover the default if a process died after the durable pointer was saved but before
         // the asynchronous preference write. Later user mood choices keep the same generation.

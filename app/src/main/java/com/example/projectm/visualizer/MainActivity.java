@@ -694,7 +694,7 @@ public class MainActivity extends Activity {
 
     private void showCustomPackUpload() {
         if (customPackServer != null) return;
-        File root = new File(getFilesDir(), "custom-presets");
+        File root = new File(getNoBackupFilesDir(), "custom-presets");
         TextView message = new TextView(this);
         message.setPadding(dp(24), dp(12), dp(24), dp(12));
         message.setTextSize(18);

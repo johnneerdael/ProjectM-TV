@@ -63,7 +63,7 @@ Open **Advanced › Custom preset pack** and enter the TV’s displayed address 
 
 One active pack supports up to **50,000 `.milk` files**, including nested folders and `.MILK` extensions. Other files, including textures, are ignored. Presets use bundled textures, so missing custom images can affect their appearance. ZIP limits: 2 GiB compressed, 4 GiB of extracted presets, 8 MiB per preset and 250,000 total entries. Replacement temporarily needs storage for the old pack, the incoming ZIP and the new pack. Invalid names, corruption, cancellation and insufficient storage leave the previous pack in place.
 
-A successful import replaces the previous pack and saves **Custom** as the selected mood. Custom plays only uploaded presets. **All** combines bundled and custom presets; **Chill**, **Normal** and **Intense** continue using only their scored bundled presets. Existing load-failure, blank and slow-preset skips apply to custom presets. The pack and selected mood persist across app restarts. No file picker or storage permission is needed.
+A successful import replaces the previous pack and saves **Custom** as the selected mood. Custom plays only uploaded presets. **All** combines bundled and custom presets; **Chill**, **Normal** and **Intense** continue using only their scored bundled presets. Existing load-failure, blank and slow-preset skips apply to custom presets. The pack and selected mood persist across app restarts and updates. Custom packs are excluded from Android backup; upload the ZIP again after reinstalling, clearing app data or restoring onto another device. No file picker or storage permission is needed.
 
 ![Custom preset pack upload address on the isolated API36 Android TV emulator](images/setup/custom-pack-upload.png)
 

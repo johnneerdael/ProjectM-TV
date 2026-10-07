@@ -80,7 +80,7 @@ final class CustomPackSetupTest {
         upload.start();
         int renderingIntervals = 0;
         long previous = ProjectMJNI.getRenderedFrameSerial();
-        File incoming = new File(test.getTargetContext().getFilesDir(), "custom-presets/incoming.zip");
+        File incoming = new File(test.getTargetContext().getNoBackupFilesDir(), "custom-presets/incoming.zip");
         while (upload.isAlive()) {
             SystemClock.sleep(500);
             long current = ProjectMJNI.getRenderedFrameSerial();
@@ -103,6 +103,8 @@ final class CustomPackSetupTest {
             activity = test.startActivitySync(intent);
             ProjectMJNI.setAutoChange(false);
             if (restart) {
+                check(CustomPresetPack.current(new File(test.getTargetContext().getNoBackupFilesDir(), "custom-presets")) != null,
+                        "custom pack is not stored outside Auto Backup");
                 await("custom", 2);
                 check(ProjectMJNI.getCurrentPresetName().contains("/replacement/"), "restart lost replacement pack");
                 result.putString("stream", "PASS: cold restart retains pack and Custom selection\n");
@@ -152,12 +154,13 @@ final class CustomPackSetupTest {
             check(ProjectMJNI.getCategoryPresetCount("all") == bundled + 2, "replacement accumulated old entries");
             check(ProjectMJNI.getCurrentPresetName().contains("/replacement/"), "old custom preset remained on screen");
             check(ProjectMJNI.getCurrentPresetName().contains("😀"), "JNI corrupted supplementary Unicode");
-            File previousPack = CustomPresetPack.current(new File(test.getTargetContext().getFilesDir(), "custom-presets"));
+            check(!new File(test.getTargetContext().getFilesDir(), "custom-presets").exists(), "pack leaked into Auto Backup storage");
+            File previousPack = CustomPresetPack.current(new File(test.getTargetContext().getNoBackupFilesDir(), "custom-presets"));
             File bad = new File(test.getTargetContext().getCacheDir(), "invalid.zip");
             try (FileOutputStream out = new FileOutputStream(bad)) { out.write(new byte[]{1,2,3}); }
             check(upload(url, bad).startsWith("HTTP/1.1 400"), "invalid ZIP succeeded");
             await("custom", 2);
-            check(previousPack.equals(CustomPresetPack.current(new File(test.getTargetContext().getFilesDir(), "custom-presets"))), "invalid ZIP changed the active pointer");
+            check(previousPack.equals(CustomPresetPack.current(new File(test.getTargetContext().getNoBackupFilesDir(), "custom-presets"))), "invalid ZIP changed the active pointer");
             check(ProjectMJNI.getCurrentPresetName().startsWith("custom/" + previousPack.getName() + "/"), "invalid ZIP changed the native generation");
             check("custom".equals(test.getTargetContext().getSharedPreferences("projectm_settings", 0).getString("music_category", "")), "Custom was not saved");
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
