@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from PIL import Image, ImageDraw
 
@@ -16,6 +17,8 @@ SERIES = json.loads((Path(__file__).resolve().parents[2] /
 
 class RetainedEvidenceIntegrity(unittest.TestCase):
     def setUp(self):
+        self.source_validation = patch.object(VERIFY, 'validate_prepared_source')
+        self.source_validation.start()
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
         self.work = self.root / 'capture'
@@ -32,17 +35,20 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                     'binary': str(binary), 'binary_sha256': VERIFY.sha(binary.read_bytes()),
                     'source_hashes': str(manifest)}
         backend = ['vendor', 'hardware GPU', 'GLES3.0', 'GLSL3.00']
+        self.frame_data = bytes([255, 0, 0, 0, 255, 0]) * 120
         row = {'status': 'success', 'manifest': {'status': 'success', 'gl_error_frames': 0,
                'frames': 120, 'width': 2, 'height': 1,
                **dict(zip(('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version'), backend))},
-               'frame_hashes': [VERIFY.sha(bytes([255, 0, 0, 0, 255, 0]))] * 120}
+               'frame_hashes': [VERIFY.sha(self.frame_data[i * 6:(i + 1) * 6]) for i in range(120)],
+               'stream_sha256': VERIFY.sha(self.frame_data)}
         self.result = {'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
             'patched': {'worker': identity, 'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
         for repeat in (0, 1):
             directory = self.work / 'patched' / str(repeat)
             directory.mkdir(parents=True)
+            (directory / 'frames.rgb').write_bytes(self.frame_data)
             for frame in (29, 59, 119):
-                Image.frombytes('RGB', (2, 1), bytes([255, 0, 0, 0, 255, 0])).save(directory / f'{frame}.png')
+                Image.frombytes('RGB', (2, 1), self.frame_data[frame * 6:(frame + 1) * 6]).save(directory / f'{frame}.png')
         image = Image.new('RGB', (2, 33), '#171717')
         ImageDraw.Draw(image).text((4, 8), 'patched', fill='white')
         image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
@@ -50,7 +56,13 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.save()
 
     def tearDown(self):
+        self.disable_source_validation()
         self.temporary.cleanup()
+
+    def disable_source_validation(self):
+        if self.source_validation is not None:
+            self.source_validation.stop()
+            self.source_validation = None
 
     def save(self):
         (self.work / 'results.json').write_text(json.dumps(self.result))
@@ -113,19 +125,22 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def test_rejects_swapped_worker_role(self):
         self.result['roles']['patched']['worker']['role'] = 'without-0010'
         self.save()
-        with self.assertRaisesRegex(ValueError, 'Worker role identity differs'):
+        self.disable_source_validation()
+        with self.assertRaisesRegex(ValueError, 'Worker role metadata differs'):
             VERIFY.verify(self.work)
 
     def test_rejects_wrong_patch_removal_metadata(self):
         self.result['roles']['patched']['worker']['patch_removed'] = 10
         self.save()
-        with self.assertRaisesRegex(ValueError, 'Worker patch removal differs'):
+        self.disable_source_validation()
+        with self.assertRaisesRegex(ValueError, 'Worker role metadata differs'):
             VERIFY.verify(self.work)
 
     def test_rejects_wrong_prepared_patch_inventory(self):
         self.result['roles']['patched']['worker']['ordered_patches'] = []
         self.save()
-        with self.assertRaisesRegex(ValueError, 'Worker patch inventory differs'):
+        self.disable_source_validation()
+        with self.assertRaisesRegex(ValueError, 'Worker role metadata differs'):
             VERIFY.verify(self.work)
 
     def test_rejects_matching_repeats_with_missing_frames(self):
@@ -133,6 +148,28 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             row['frame_hashes'] = row['frame_hashes'][:-1]
         self.save()
         with self.assertRaisesRegex(ValueError, 'frame count'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_changed_unretained_rgb_frame(self):
+        stream = bytearray(self.frame_data)
+        stream[50 * 6] ^= 1
+        (self.work / 'patched/0/frames.rgb').write_bytes(stream)
+        with self.assertRaisesRegex(ValueError, 'frame hashes|stream hash'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_changed_stream_digest(self):
+        for row in self.result['roles']['patched']['runs']:
+            row['stream_sha256'] = '0' * 64
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'stream hash'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_matching_tampered_unretained_frame_hashes(self):
+        changed_hash = VERIFY.sha(bytes([254, 0, 0, 0, 255, 0]))
+        for row in self.result['roles']['patched']['runs']:
+            row['frame_hashes'][50] = changed_hash
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'frame hashes|stream hash'):
             VERIFY.verify(self.work)
 
     def test_rejects_backend_change(self):

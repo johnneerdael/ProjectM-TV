@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 
 from PIL import Image, ImageDraw
+from source_identity import validate_prepared_source
 
 
 def sha(data: bytes) -> str:
@@ -18,7 +19,7 @@ def sha(data: bytes) -> str:
 def verify(work: Path) -> dict:
     result = json.loads((work / 'results.json').read_text())
     series = json.loads((Path(__file__).resolve().parents[2] /
-                         'docs/superpowers/evidence/current-patch-proof/series.json').read_text())['patches']
+                         'docs/superpowers/evidence/current-patch-proof/series.json').read_text())
     width, height = result['dimensions']
     kind = result.get('capture_kind')
     if kind not in ('image', 'texture-journey', 'evaluator'):
@@ -27,17 +28,7 @@ def verify(work: Path) -> dict:
     previous = None
     for role, value in result['roles'].items():
         identity = value['worker']
-        supported_roles = {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
-        if role not in supported_roles:
-            raise ValueError('Unsupported worker role: ' + role)
-        if identity.get('role') != role:
-            raise ValueError('Worker role identity differs: ' + role)
-        removed = int(role[8:]) if role.startswith('without-') else None
-        if ('patch_removed' not in identity or identity['patch_removed'] != removed or
-                type(identity['patch_removed']) is not type(removed)):
-            raise ValueError('Worker patch removal differs: ' + role)
-        if identity.get('ordered_patches') != ([] if role == 'upstream' else series):
-            raise ValueError('Worker patch inventory differs: ' + role)
+        validate_prepared_source(role, identity, series)
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary changed: ' + role)
         source_manifest = Path(identity['source_hashes'])
@@ -95,6 +86,16 @@ def verify(work: Path) -> dict:
             backend = [manifest[k] for k in ('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version')]
             if backend != result['backend'] or len(run['frame_hashes']) != 120:
                 raise ValueError('Backend or frame count differs')
+            stream = (work / role / str(repeat) / 'frames.rgb').read_bytes()
+            frame_size = width * height * 3
+            if len(stream) != frame_size * 120:
+                raise ValueError('RGB stream length differs')
+            if sha(stream) != run['stream_sha256']:
+                raise ValueError('RGB stream hash differs')
+            actual_hashes = [sha(stream[index * frame_size:(index + 1) * frame_size])
+                             for index in range(120)]
+            if actual_hashes != run['frame_hashes']:
+                raise ValueError('RGB stream frame hashes differ')
             frames = [29, 40, 59, 119] if kind == 'texture-journey' else [29, 59, 119]
             for frame in frames:
                 image = Image.open(work / role / str(repeat) / f'{frame}.png').convert('RGB')
@@ -126,7 +127,7 @@ def verify(work: Path) -> dict:
             raise ValueError('Comparison changed framebuffer pixels, labels or rejection panels')
     return {'status': 'verified', 'successful_roles': verified, 'rejected_roles': rejected,
             'different_frames_between_adjacent_successful_roles': comparisons,
-            'scope': 'retained images/repeats/source/binary identities; load rejection remains a rejection'}
+            'scope': 'retained full RGB streams/images/repeats/reconstructed source/binary identities; load rejection remains a rejection'}
 
 
 if __name__ == '__main__':
@@ -135,5 +136,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     report = verify(args.work.resolve())
     report['verifier_sha256'] = sha(Path(__file__).read_bytes())
+    report['source_identity_sha256'] = sha(Path(__file__).with_name('source_identity.py').read_bytes())
     (args.work / 'verification.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report))

@@ -1,0 +1,53 @@
+{
+  "status": "verified",
+  "private_work_directory": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/review-full-payload-texture-v1",
+  "roles": {
+    "upstream": [
+      {
+        "frames": 120,
+        "bytes": 53084160,
+        "stream_sha256": "6ae13c2ba0aeff9a947ad2d2ca9896c0937282c5beb3e03eaf22f2175eff117b",
+        "matches_historical_all120_frames": true
+      },
+      {
+        "frames": 120,
+        "bytes": 53084160,
+        "stream_sha256": "6ae13c2ba0aeff9a947ad2d2ca9896c0937282c5beb3e03eaf22f2175eff117b",
+        "matches_historical_all120_frames": true
+      }
+    ],
+    "without-0010": [
+      {
+        "frames": 120,
+        "bytes": 53084160,
+        "stream_sha256": "807624a19b484f0daf0640476ec4ca7d8f6abe08787a76f68167c86412d42e74",
+        "matches_historical_all120_frames": true
+      },
+      {
+        "frames": 120,
+        "bytes": 53084160,
+        "stream_sha256": "807624a19b484f0daf0640476ec4ca7d8f6abe08787a76f68167c86412d42e74",
+        "matches_historical_all120_frames": true
+      }
+    ],
+    "patched": [
+      {
+        "frames": 120,
+        "bytes": 53084160,
+        "stream_sha256": "8741c10a497dd6c1b1e2d6e6d780609bb93d97bf4b5ba69894a34d9cf00140fc",
+        "matches_historical_all120_frames": true
+      },
+      {
+        "frames": 120,
+        "bytes": 53084160,
+        "stream_sha256": "8741c10a497dd6c1b1e2d6e6d780609bb93d97bf4b5ba69894a34d9cf00140fc",
+        "matches_historical_all120_frames": true
+      }
+    ]
+  },
+  "helpers_sha256": {
+    "capture.py": "1e2446d54c8a76f817e57822ddb5e88ff077446b37655bc491ed95428ed653dd",
+    "verify.py": "0ffa30432af62c947b4ea3e841881e6b425c25e84b93d4b8e420019a5c639ef3",
+    "source_identity.py": "b23d8da961d425192c0423540c8ffb539b31d184a47146a4e7d61f2ca21bf1f7"
+  }
+}

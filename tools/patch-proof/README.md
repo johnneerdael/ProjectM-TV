@@ -32,7 +32,9 @@ at 29/59/119. The comparison adds labels above unchanged framebuffer pixels. Fai
 or unstable roles have an explicit panel rather than a fabricated render.
 `results.json` preserves load errors and available engine logs/warnings. A repeated
 load failure is still a failure. `verify.py` checks source/binary identities, repeat
-hashes, retained image payloads, counts, backend and comparison pixels.
+hashes, retained image payloads, counts, backend and comparison pixels. Successful
+runs retain the complete `frames.rgb` stream locally; verification recomputes its
+SHA256 and all 120 frame hashes. At 512×288 this adds about 50 MB per successful run.
 Capture rejects unsupported role names before creating output directories, and
 both capture and verification require each role label to match its worker identity
 and removed-patch metadata. Swapped worker records cannot silently relabel a run.
@@ -79,6 +81,10 @@ to upstream's documented global texture-path reset behavior.
 New capture records identify their producer script; verification records identify
 the verifier. The capture tool removes only its own hashed remote scratch directory
 after pulling evidence, including on handled failures. Local records remain intact.
+Capture and verification rebuild the prepared source from the pinned engine/evaluator
+checkouts and patch inputs, then check the role-specific source tree and capture
+adjustments against that reconstruction. The role labels and removed-patch fields
+are checked against the reconstructed source.
 For a nonzero worker exit, it independently attempts to retain the engine log,
 structured manifest and partial RGB stream before cleanup. It records unavailable
 pulls explicitly and keeps the run failed. Raw failed streams stay in the ignored

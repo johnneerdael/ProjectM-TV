@@ -124,7 +124,7 @@ Real MilkDrop 2 GPU capture remains an optional investigation. No whole-corpus f
 
 ## Reproduction state
 
-Private build outputs, full captures and live handles are under this task worktree's
+Private build outputs, retained frames and controller records are under this task worktree's
 ignored `build/patch-proof/`. `harness/` preserves the exact standalone worker,
 EGL capture and CMake sources; it reuses Preset Lab's existing JSON library and
 analysis hooks. The archived `capture_pairs_checkpoint.py` preserves the helper
@@ -135,6 +135,19 @@ are now verified through fresh exports and GPU captures. The
 logging and exact historical-frame matches. The [checkpoint audit](checkpoint-audit.json)
 checks 31 images and 134 successful run entries, with 10 explicit failed runs retained.
 Final repository review remains open.
+Historical receipts retain frame hashes and the producer's repeat-check results,
+along with selected PNG payloads. For runs whose complete RGB streams were deleted,
+those PNGs remain independently checkable, but the other frame hashes cannot be
+recomputed from the retained payloads. A full-frame verifier must require complete
+streams; matching hash lists alone do not establish independently verified repeats.
+The [full-payload replay](full-payload-replay-results.json) repeats the recognizable
+texture journey with upstream, without0010 and patched workers. Its
+[verification](full-payload-replay-verification.json) reconstructs each source role
+and recomputes every frame hash from the complete retained RGB streams. The
+[audit](full-payload-replay-audit.json) records 720 verified frames matching the
+earlier journey, with zero GL errors. Raw streams remain in the ignored private
+build directory; they are required for future full-frame verification and are
+not committed as documentation assets.
 Do not run archived scripts against another device without deliberately creating
 new task-owned paths and identities. Do not overwrite existing attempt directories.
 

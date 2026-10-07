@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools/core-corpus'))
 from run_corpus import session_lock
 from PIL import Image, ImageDraw
+from source_identity import validate_prepared_source
 
 
 def sha(data: bytes) -> str:
@@ -76,7 +77,7 @@ def main() -> None:
     if args.texture_journey and (not (textures / 'a').is_dir() or not (textures / 'b').is_dir()):
         parser.error('--texture-journey requires a and b directories under --textures')
     workers = json.loads(args.workers.read_text())
-    series = json.loads((ROOT / 'docs/superpowers/evidence/current-patch-proof/series.json').read_text())['patches']
+    series = json.loads((ROOT / 'docs/superpowers/evidence/current-patch-proof/series.json').read_text())
     supported_roles = {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
     for role in workers:
         if role not in supported_roles:
@@ -88,8 +89,9 @@ def main() -> None:
         if ('patch_removed' not in identity or identity['patch_removed'] != removed or
                 type(identity['patch_removed']) is not type(removed)):
             raise ValueError('Worker patch removal differs: ' + role)
-        if identity.get('ordered_patches') != ([] if role == 'upstream' else series):
+        if identity.get('ordered_patches') != ([] if role == 'upstream' else series['patches']):
             raise ValueError('Worker patch inventory differs: ' + role)
+        validate_prepared_source(role, identity, series)
     for identity in workers.values():
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary identity changed')
@@ -213,7 +215,6 @@ def main() -> None:
                     for frame in ([29, 40, 59, 119] if args.texture_journey else [29, 59, 119]):
                         Image.frombytes('RGB', (width, height),
                                         data[frame * size:(frame + 1) * size]).save(directory / f'{frame}.png')
-                    (directory / 'frames.rgb').unlink()
                     runs.append({'status': 'success', 'manifest': manifest, 'frame_hashes': hashes,
                                  'stream_sha256': sha(data)})
                 if args.evaluator_control:

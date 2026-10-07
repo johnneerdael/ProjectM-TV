@@ -99,6 +99,7 @@ class FailedCaptureRetention(unittest.TestCase):
                     '--textures', str(textures), '--device', 'emulator-5630',
                     '--user', '0', '--work', str(work)]
             with patch.object(sys, 'argv', argv), patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
+                    patch.object(CAPTURE, 'validate_prepared_source'), \
                     patch.object(CAPTURE.subprocess, 'run', side_effect=fake_run):
                 CAPTURE.main()
             result = json.loads((work / 'results.json').read_text())
@@ -115,6 +116,64 @@ class FailedCaptureRetention(unittest.TestCase):
                     self.assertTrue((directory / 'manifest.json').is_file())
                 self.assertFalse(result['roles']['patched']['repeat_equal'])
             self.assertEqual(calls[-1][:3], ['shell', 'rm', '-rf'])
+
+    def test_retains_successful_full_rgb_streams(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            binary = root / 'worker'
+            binary.write_bytes(b'worker identity')
+            workers = root / 'workers.json'
+            workers.write_text(json.dumps({'patched': {
+                'role': 'patched', 'patch_removed': None, 'ordered_patches': SERIES,
+                'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}}))
+            preset = root / 'preset.milk'
+            preset.write_text('[preset00]\n')
+            textures = root / 'textures'
+            textures.mkdir()
+            work = root / 'capture'
+            width, height = 256, 144
+            frame_size = width * height * 3
+            rgb = bytes([9, 11, 13]) * width * height * 120
+
+            def fake_run(command, **kwargs):
+                args = command[3:]
+                if args == ['shell', 'am', 'get-current-user']:
+                    return subprocess.CompletedProcess(command, 0, '0\n', '')
+                if args == ['shell', 'getprop', 'ro.kernel.qemu']:
+                    return subprocess.CompletedProcess(command, 0, '1\n', '')
+                if args == ['shell', 'pm', 'list', 'features']:
+                    return subprocess.CompletedProcess(command, 0,
+                        'feature:android.software.leanback\nfeature:android.hardware.type.television\n', '')
+                if args[0] == 'pull':
+                    target = Path(args[2])
+                    name = Path(args[1]).name
+                    if name == 'render.log':
+                        target.write_text('')
+                    elif name == 'manifest.json':
+                        target.write_text(json.dumps({
+                            'status': 'success', 'gl_error_frames': 0, 'frames': 120,
+                            'width': width, 'height': height,
+                            'gl_vendor': 'vendor', 'gl_renderer': 'hardware GPU',
+                            'gl_version': 'GLES3.0', 'glsl_version': 'GLSL3.00'}))
+                    elif name == 'frames.rgb':
+                        target.write_bytes(rgb)
+                return subprocess.CompletedProcess(command, 0, '', '')
+
+            argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
+                    '--textures', str(textures), '--device', 'emulator-5630',
+                    '--user', '0', '--width', str(width), '--work', str(work)]
+            with patch.object(sys, 'argv', argv), \
+                    patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
+                    patch.object(CAPTURE, 'validate_prepared_source'), \
+                    patch.object(CAPTURE.subprocess, 'run', side_effect=fake_run):
+                CAPTURE.main()
+
+            result = json.loads((work / 'results.json').read_text())
+            for repeat, run in enumerate(result['roles']['patched']['runs']):
+                stream = work / 'patched' / str(repeat) / 'frames.rgb'
+                self.assertEqual(stream.stat().st_size, len(rgb))
+                self.assertEqual(CAPTURE.sha(stream.read_bytes()), run['stream_sha256'])
+                self.assertEqual(len(run['frame_hashes']), 120)
 
     def test_retains_gl_failed_manifest_and_stream(self):
         self.run_failed_worker()
