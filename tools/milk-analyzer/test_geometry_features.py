@@ -130,3 +130,22 @@ def test_budget_failure_withholds_partial_signed_translation():
     result = importlib.import_module('geometry_features').trajectory_summary(
         [row(t, [t, 0]) for t in range(5)], max_derivative_samples=1)
     assert result['component_translation'] == {}
+    assert result['component_bounds'] == {}
+
+
+def test_separated_source_components_keep_individual_location_bounds():
+    result=summarize([{'time':0,'components':{'left':[[.02,.4],[.08,.6]],
+                                             'right':[[.92,.4],[.98,.6]]}}])
+    assert result['component_bounds']['left']['first']['minimum']==pytest.approx([.02,.4])
+    assert result['component_bounds']['left']['first']['maximum']==pytest.approx([.08,.6])
+    assert result['component_bounds']['right']['first']['minimum']==pytest.approx([.92,.4])
+    assert result['uses_display_fields'] is False
+
+
+def test_source_bounds_track_window_extent_without_clipping_outside_geometry():
+    result=summarize([row(0,[-.2,.5]),row(1,[1.2,.6])])
+    bounds=result['component_bounds']['shape:0:0']
+    assert bounds['window']['minimum']==pytest.approx([-.2,.5])
+    assert bounds['window']['maximum']==pytest.approx([1.2,.6])
+    assert bounds['last']['minimum']==pytest.approx([1.2,.6])
+    assert bounds['frames']==2

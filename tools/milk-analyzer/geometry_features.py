@@ -30,6 +30,7 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
     seen = set()
     values = {order: [] for order in (1, 2, 3)}
     translations = {}
+    bounds = {}
     previous_time = None
     births = deaths = topology = 0
     sample_count = 0
@@ -67,6 +68,15 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
             if sample_count+required > max_derivative_samples:
                 budget_exceeded = True
                 break
+            extent={'minimum':points.min(axis=0).tolist(),'maximum':points.max(axis=0).tolist()}
+            location=bounds.setdefault(key,{'first':extent,'last':extent,
+                                           'window':extent,'frames':0})
+            location['last']=extent
+            location['window']={
+                'minimum':np.minimum(location['window']['minimum'],extent['minimum']).tolist(),
+                'maximum':np.maximum(location['window']['maximum'],extent['maximum']).tolist(),
+            }
+            location['frames']+=1
             if len(history) >= 2:
                 displacement = np.mean(history[-1][1]-history[-2][1], axis=0)
                 if not np.all(np.isfinite(displacement)):
@@ -95,6 +105,7 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
             # Withhold every derivative rather than silently truncating support.
             values = {order: [] for order in (1, 2, 3)}
             translations = {}
+            bounds = {}
             break
         frames_sampled += 1
         previous_time = time
@@ -114,6 +125,8 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
             'components_seen': len(seen), 'component_births': births,
             'component_deaths': deaths, 'topology_changes': topology,
             'component_translation': signed_translation,
+            'component_bounds': bounds,
+            'bounds_basis': 'Per-component source vertex extents in normalized top-origin coordinates, before visibility or viewport clipping',
             'translation_basis': 'Sum of equal-vertex centroid displacements over matched intervals; top-origin normalized screen coordinates',
             'speed': _summary(values[1], 'normalized viewport coordinates/s'),
             'acceleration': _summary(values[2], 'normalized viewport coordinates/s²'),

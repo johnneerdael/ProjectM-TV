@@ -1063,3 +1063,11 @@ The integrated cosmic-tear learning retest still has 2.30% median-motion and
 texture filtering is a separate unresolved numerical boundary: isolated tests
 reject exact bilinear interpolation, while simple fixed8/half-rounding models
 still miss some cases. No unqualified half-sampler rule is added or credited.
+
+Source geometry reports first, last and window bounds for each physical
+component separately. Extents use normalized top-origin coordinates before
+visibility or viewport clipping; outside geometry is retained. Budget failure
+withholds partial bounds. Opposing components must not be labelled central
+because their average centre is 0.5. These custom-shape bounds do not locate
+every shader or feedback feature: mirrored/remapped output needs separate
+source evidence. Wrong-location archived claims retain their failed grade.
