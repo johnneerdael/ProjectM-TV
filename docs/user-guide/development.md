@@ -102,7 +102,14 @@ initialization. The policy does not reproduce arbitrary old Direct3D register hi
 ## Experimental source visual forecasting
 
 `tools/milk-analyzer/forecast.py` interprets preset equations, shader fields and
-feedback using explicit audio, random, texture and render inputs. Its numerical
+feedback using explicit audio, random, texture and render inputs.
+The 4.2 migration prepares versioned CPU adapters for separate composite buffers
+and native Point waveform data. Published-AAR references stay separate from
+those adapters. Bounded constant/input controls and historical regressions are
+qualification evidence; they do not establish a new preset-prediction score.
+The current experimental target is 20 rounds of three presets, 30 frames each, with
+60 consecutive scores of 100 and predictor failures repaired before another round.
+ Its numerical
 prediction is produced before comparison with the unchanged published core AAR
 through JNI. The source CPU adapters and native reference have separate identities.
 Unsupported arithmetic remains unknown rather than being silently treated as calm.

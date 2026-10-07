@@ -1328,3 +1328,36 @@ Do not skip the early frames or insert black feedback to credit a complete forec
 Legacy compiler semantics or an explicit versioned target policy remains required.
 This source-domain calculation consumes no reference frames and earns no score.
 See `fixtures/spotted-blob2-source51-index-domain-2026-10-07.json`.
+
+The resumed validation target is 20 rounds of three random presets, 30 frames each,
+requiring 60 consecutive scores of 100. A fresh MT19937 queue is frozen before
+predictions and references; historical scores and repairs do not contribute. Any
+predictor bug gates the next round. Library defects receive separate handoffs.
+
+Published v2.3.21 uses the 4.2 master pin
+`6f64807467e312034883a4389e6aa80a675458bc` with 11 retained patches, digest
+`fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb`.
+Its full AAR checksum is
+`941108bb16279cb77a3b4db430ef4befcfe9706abbc87afe87745d53e3424e3a`.
+CPU adapters now support separate composite vertex, UV, polar and colour buffers
+and native Point waveform coordinates. They extract native numerical bodies, omit
+GPU uploads and hash original and adapted sources. The newer stbi decoder retains
+the released multiply-alpha byte rule through the target patch. Its manifest names
+the actual backend and implementation path/hash; its SOIL field is null. Historical
+SOIL manifests retain the real SOIL implementation hash.
+
+Bounded migration controls: mesh positions and UVs match exactly, with maximum
+polar difference 5.96e-8; all 16 safe waveform modes match historical geometry; a
+premultiplied RGBA image matches exactly. The unchanged full AAR passes 180 constant
+frames exactly. Another 180 packed input frames have exact band and attenuated-band
+values and at most one RGB8 level of time/frame/FPS error. Two separately frozen
+30-frame progress controls match the candidate three-fresh-duration-draw startup
+model exactly. These observations support a future explicit 4.2 policy, not
+automatic reuse of old source guards.
+
+Qualification controls earn zero random prediction credit. Cold progress, complete
+stochastic inputs and source42 policy guards remain pending. Historical source51
+guards are not relabelled as 4.2 fidelity. The historical suite passes 1,459 tests
+and 78 subtests. The unpublished coordinate-fix candidate remains a different
+source/AAR identity and will be integrated after publication. Evidence is in
+`fixtures/core42-adapter-qualification-2026-10-07.json`.

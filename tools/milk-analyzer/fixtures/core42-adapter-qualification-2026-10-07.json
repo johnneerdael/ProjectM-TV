@@ -1,0 +1,43 @@
+{
+  "scope": "4.2 CPUadapterand fullAAR boundedqualification; not randompredictionpass",
+  "release": "v2.3.21",
+  "release_commit": "6feb100b2ee1524f3da72216e582c7133cd726a2",
+  "aar_sha256": "941108bb16279cb77a3b4db430ef4befcfe9706abbc87afe87745d53e3424e3a",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb"
+  },
+  "native_cpu_archive_sha256": "b73df7fc6b4a1e42c3f7f6322f78e4dc355650f22605a69e942e886f76fdc1c0",
+  "adapter_sha256": {
+    "milk-composite-inputs": "622faf2484c22ec5f817e0beb1f021e4405ae2c6d93aa1661530d463c429dc30",
+    "milk-shader-random": "06687508602598d435848bbe2df489d88c96255a1df158a92d1acb9116f2ed99",
+    "milk-shader-translate": "2eea36fe836bab827bd2b4622ffaa4136b49e98aeeac15786e01808544bb5b85",
+    "milk-noise-inputs": "ed4c0aefbaecf4ff117c19a96c098fc15a796d06726362545011944810feee86",
+    "milk-wave-inputs": "86d944e0a22ca19d178ee53518ebe6be31494a5722bbd7ff55c95473e3d1c16a",
+    "milk-native-reader": "52410d6ef97ebc805be81e294e724da25cc3e2d9d5c16ad55b9f7c2a3b6ca0e6",
+    "milk-audio-inputs": "c7b8172b6930f1f4cc2bb1951b5202ab5faa178e483713a6ccf3d96433a68d06",
+    "milk-image-inputs": "2f8392fed3e2a718cda7faf961e6d57738e1b676c0ee0d2dc0c808046e6bd59b"
+  },
+  "bounded_controls": {
+    "constant_frames": 180,
+    "constant_max_rgb8_error": 0,
+    "bands_attenuated_frames": 120,
+    "bands_max_rgb8_error": 0,
+    "time_frame_fps_frames": 60,
+    "clock_max_rgb8_error": 1,
+    "progress_frames": 60,
+    "progress_max_rgb8_error": 0,
+    "safe_waveform_modes_exact": 16,
+    "composite_position_uv_exact": true,
+    "composite_polar_max_error": 5.960464477539063e-08,
+    "decoded_premultiplied_rgba_exact": true
+  },
+  "remaining": [
+    "Coldprogress/context policy for4.2",
+    "CPUforecast guards/versionedsourceidentity",
+    "Nativeequation/shaderrandom/noisesequence qualification",
+    "New3preset protocol/20roundstreak; allforecasts beforecapture",
+    "Upgradecoordinatefixes whenofficialreleasepublishes"
+  ],
+  "fresh_randomized_credit": 0
+}

@@ -16,6 +16,11 @@ template<size_t N> void arrayInput(const json& values,std::array<float,N>& targe
     if(!values.is_array()||values.size()!=N)throw std::runtime_error("native waveform/spectrum length mismatch");
     for(size_t i=0;i<N;++i){target[i]=values[i].get<float>();if(!std::isfinite(target[i]))throw std::runtime_error("nonfinite waveform input");}
 }
+template<class T> auto pointX(const T& point) -> decltype(point.X()){return point.X();}
+template<class T> auto pointY(const T& point) -> decltype(point.Y()){return point.Y();}
+inline float pointX(const milk_wave_cpu::Renderer::RenderItem::Point& point){return point.x;}
+inline float pointY(const milk_wave_cpu::Renderer::RenderItem::Point& point){return point.y;}
+
 int main(int argc,char** argv) {
     try {
         if(argc!=2)throw std::runtime_error("usage: milk-wave-inputs request.json");
@@ -95,8 +100,8 @@ int main(int argc,char** argv) {
             auto vertices=math->GetVertices(state,context);json waves=json::array();
             for(const auto& wave:vertices) {
                 json points=json::array();for(const auto& point:wave) {
-                    if(!std::isfinite(point.x)||!std::isfinite(point.y))throw std::runtime_error("undefined native waveform geometry domain");
-                    points.push_back({point.x,point.y});
+                    if(!std::isfinite(pointX(point))||!std::isfinite(pointY(point)))throw std::runtime_error("undefined native waveform geometry domain");
+                    points.push_back({pointX(point),pointY(point)});
                 }waves.push_back(points);
             }
             report["frames"].push_back({{"mode",mode},{"omitted",false},{"vertex_waves",waves},

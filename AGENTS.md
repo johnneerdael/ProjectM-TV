@@ -56,6 +56,16 @@ visual forecasts. Build its source adapters against a hash-
 identified host engine before `python -m pytest tools/milk-analyzer -q`; Preset Lab CI
 performs this setup. Its results are source diagnostics, not visual certification.
 
+Analyzer migration checkpoint (2026-10-07): source CPU adapters now support 4.2
+split composite buffers/native Point waveform data and the patched stbi decoder,
+while retaining historical 4.1.7 paths. New decoder manifests distinguish STBI
+implementation identity from SOIL. Prepare the exact release snapshot before
+adapter builds; bounded constants/input controls do not certify preset fidelity
+or authorize relabelling historical engine guards. Revised experimental target:
+20 rounds × 3 random presets × 30 frames, 60 consecutive scores of 100. Predictor failures gate
+the next round. See `tools/milk-analyzer/README.md`; no app/AAR behavior changes
+are made by this adapter checkpoint.
+
 The experimental source forecaster is `tools/milk-analyzer/forecast.py`; it keeps
 source CPU equation execution separate from published-AAR visual references.
 Its explicit 2.3.4/2.3.5/2.3.7 cold-thread policies check the 41/42/43-patch engine identities and

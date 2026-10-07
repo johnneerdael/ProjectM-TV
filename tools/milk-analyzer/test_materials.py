@@ -136,3 +136,16 @@ def test_original_case_texture_size_uniform_is_bound_to_the_named_material(tmp_p
         samplers={'sampler_main':'sampler2D'},texture_sizes=['texsize_COLOUR'])}
     result=test_forecast.predict(source,compatibility=evidence,materials=inputs)
     np.testing.assert_allclose(result['frames'][0]['display'][...,:3],np.broadcast_to([1,.5,0],(32,32,3)),atol=1e-7)
+
+
+def test_migrated_decoder_provenance_does_not_claim_a_soil_source(tmp_path):
+    import os,json,subprocess
+    binary=Path(os.environ.get('MILK_TEST_2321_BINARIES','build/visual-loop/source2321/adapters'))/'milk-image-inputs'
+    if not binary.is_file():pytest.skip('prepared4.2 decoderrequired')
+    image=png(tmp_path/'image.png',[[[255,0,0,255]]]);request=tmp_path/'request.json'
+    request.write_text(json.dumps({'maximum_texture_size':32,'files':[{'input':str(image),'output':str(tmp_path/'image.rgba')}]}))
+    result=json.loads(subprocess.check_output([str(binary),str(request)],text=True))
+    assert result['decoder_backend']=='stbi-with-tv-premultiply-v1'
+    assert result['soil_source_sha256'] is None
+    assert result['decoder_implementation_source_path']=='vendor/stb_image/stb_image.c'
+    assert len(result['decoder_implementation_source_sha256'])==64

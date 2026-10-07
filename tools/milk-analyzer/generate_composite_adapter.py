@@ -1,6 +1,7 @@
 """Extract native composite CPU math; omit the final GL buffer upload only."""
 import argparse
 import hashlib
+import re
 from pathlib import Path
 
 
@@ -8,16 +9,25 @@ def generate(engine,output):
     source=(engine/'src/libprojectM/MilkdropPreset/FinalComposite.cpp').read_text()
     context=(engine/'src/libprojectM/Renderer/RenderContext.hpp').read_bytes()
     start=source.index('void FinalComposite::InitializeMesh(')
-    end=source.index('    // Store indices.',start)
+    split='m_compositeMesh.Vertices()' in source
+    marker='// Update mesh geometry and indices.' if split else '// Store indices.'
+    end=source.index(marker,start)
+    end=source.rfind('\n',start,end)+1
     mesh=source[start:end]+'}\n'
     start=source.index('float FinalComposite::SquishToCenter(')
     end=source.index('} // namespace MilkdropPreset',start)
     math=source[start:end]
+    if split:
+        # Different indentation is harmless; the three native upload operations
+        # must be found together, never remove arbitrary statements.
+        math,count=re.subn(r'\s*// Only update color buffer\.\s*m_compositeMesh\.Bind\(\);\s*m_compositeMesh\.Colors\(\)\.Update\(\);', '\n', math)
+        if count!=1:raise ValueError('split composite color upload boundary changed')
     state=(engine/'src/libprojectM/MilkdropPreset/PresetState.cpp').read_text()
     start=state.index('    std::uniform_int_distribution<> distrib(0, std::numeric_limits<int>::max());')
     end=state.index('\n',state.index('    hueRandomOffsets[3] =',start))
     hue=state[start:end]
     output.write_text('#pragma once\n'+
+        ('#define MILK_COMPOSITE_SPLIT_MESH 1\n' if split else '')+
         f'inline constexpr const char* kCompositeSourceSha="{hashlib.sha256(source.encode()).hexdigest()}";\n'+
         f'inline constexpr const char* kCompositeBodiesSha="{hashlib.sha256((mesh+math).encode()).hexdigest()}";\n'+
         f'inline constexpr const char* kCompositeRenderContextSha="{hashlib.sha256(context).hexdigest()}";\n'+

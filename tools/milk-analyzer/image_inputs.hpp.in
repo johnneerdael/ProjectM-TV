@@ -2,3 +2,6 @@
 inline constexpr const char* kImageDecoderSha="@IMAGE_DECODER_SHA@";
 inline constexpr const char* kSoilSourceSha="@SOIL_SOURCE_SHA@";
 inline constexpr const char* kTextureManagerSha="@TEXTURE_MANAGER_SHA@";
+inline constexpr const char* kImageDecoderBackend="@IMAGE_DECODER_BACKEND@";
+inline constexpr const char* kImageImplementationPath="@IMAGE_IMPLEMENTATION_PATH@";
+inline constexpr const char* kImageImplementationSha="@IMAGE_IMPLEMENTATION_SHA@";

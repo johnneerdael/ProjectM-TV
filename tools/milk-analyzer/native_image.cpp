@@ -39,7 +39,11 @@ int main(int argc,char** argv) {
             rows.push_back({{"width",width},{"height",height},{"channels",4},{"output",output}});
         }
         std::cout<<json({{"schema_version",1},{"rows",rows},{"uses_rendered_reference",false},
-            {"decoder_source_sha256",kImageDecoderSha},{"soil_source_sha256",kSoilSourceSha},
+            {"decoder_source_sha256",kImageDecoderSha},
+            {"decoder_backend",kImageDecoderBackend},
+            {"decoder_implementation_source_path",kImageImplementationPath},
+            {"decoder_implementation_source_sha256",kImageImplementationSha},
+            {"soil_source_sha256",std::string(kSoilSourceSha).empty()?json(nullptr):json(kSoilSourceSha)},
             {"texture_manager_sha256",kTextureManagerSha},{"upload_encoding","RGBA8 premultiplied; original row order"},
             {"limits","No GL texture-size query/rescaling, mipmaps, missing-placeholder state or target driver validation"}}).dump()<<'\n';
         return 0;

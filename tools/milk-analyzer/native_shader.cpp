@@ -4,6 +4,9 @@
 #include "GLSLGenerator.h"
 #include "HLSLParser.h"
 #include "Utils.hpp"
+#if __has_include("Logging.hpp")
+#include "Logging.hpp"
+#endif
 #include <cstdio>
 #include <fstream>
 #include <iostream>

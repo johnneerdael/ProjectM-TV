@@ -2,6 +2,9 @@
 #include "Audio/FrameAudioData.hpp"
 #include "Renderer/RenderContext.hpp"
 #include <array>
+#if __has_include("Renderer/Point.hpp")
+#include "Renderer/Point.hpp"
+#endif
 namespace milk_wave_cpu {
 namespace Audio=libprojectM::Audio;
 namespace Renderer {

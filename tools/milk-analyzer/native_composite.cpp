@@ -16,11 +16,23 @@ struct PresetState {
     libprojectM::Renderer::RenderContext renderContext;
     std::array<float,4> hueRandomOffsets;
 };
+// CMake selects the native split-buffer layout; these are data-only views.
+struct CpuPoint {float x{},y{};float X() const{return x;}float Y() const{return y;}};
+struct CpuColor {float r{},g{},b{},a{};};
+struct CpuMesh {
+    std::array<CpuPoint,32*24> vertices{},uv{};
+    std::array<CpuColor,32*24> colors{};
+    std::array<int,30*22*6> indices{};
+    auto& Vertices(){return vertices;} auto& UVs(){return uv;}
+    auto& Colors(){return colors;} auto& Indices(){return indices;}
+};
 class FinalComposite {
 public:
     static constexpr int compositeGridWidth=32,compositeGridHeight=24;
     struct Vertex {float x,y,u,v,radius,angle,r,g,b,a;};
     std::array<Vertex,32*24> m_vertices;
+    CpuMesh m_compositeMesh;
+    std::array<CpuPoint,32*24> m_radiusAngle;
     std::array<int,30*22*6> m_indices;
     int m_viewportWidth=0,m_viewportHeight=0;
     void InitializeMesh(const PresetState&);
@@ -58,6 +70,14 @@ int main(int argc,char** argv) {
             }
         }
         FinalComposite mesh;mesh.InitializeMesh(state);mesh.ApplyHueShaderColors(state);
+        #ifdef MILK_COMPOSITE_SPLIT_MESH
+        for(size_t i=0;i<mesh.m_vertices.size();++i) {
+            auto p=mesh.m_compositeMesh.vertices[i],u=mesh.m_compositeMesh.uv[i],r=mesh.m_radiusAngle[i];
+            auto c=mesh.m_compositeMesh.colors[i];
+            mesh.m_vertices[i]={p.x,p.y,u.x,u.y,r.x,r.y,c.r,c.g,c.b,c.a};
+        }
+        mesh.m_indices=mesh.m_compositeMesh.indices;
+#endif
         json result={{"positions",json::array()},{"uv",json::array()},{"polar",json::array()},
                      {"colours",json::array()},{"indices",mesh.m_indices},
                      {"native_source_sha256",kCompositeSourceSha},{"native_bodies_sha256",kCompositeBodiesSha},
