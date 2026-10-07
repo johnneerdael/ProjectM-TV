@@ -190,17 +190,15 @@ runs Preset Lab and Native trails tooling tests, source-analysis checks and
 current-engine native rendering regressions. It does not rerender or regenerate
 the full collection scores; their published core 2.3.3 provenance remains intact.
 
-Historical Android core-corpus tooling tests are outside this release gate. Run
-`python -m pytest tools/core-corpus -q` separately when changing that tooling; its
-source-transformation controls require the frozen historical commit documented
-in `tools/core-corpus/README.md`. These historical controls do not establish the
-validity of the shipped collection scores or current-renderer appearance.
+The retired historical core-corpus scanner is outside this release gate. Focused
+Native trails tools retain its shared signal, session, PNG, worker and engine-pin
+components; their compatibility tests can be run with
+`python -m pytest tools/native-trails tools/core-corpus -q`.
 
-## Standalone historical source controls
+## Archived corpus evidence
 
-The standalone core-corpus source controls read current source and a fixed
-historical release commit. Keep that commit available when running these tools
-locally. If explicitly invoked under GitHub Actions, the test class fetches the
-exact pinned fixture only when missing; assertions and source identity remain
-unchanged. This bootstrap is outside the Preset Lab release gate and does not
-require that gate to fetch repository history.
+The obsolete bulk AAR/scanner CLI, hard-coded smoke command and frozen-source
+transformation controls have been retired. Shared helpers remain available to
+focused Native trails validation. Recorded protocols, capture hashes and scoring
+provenance remain unchanged; use the original recorded Git revision when
+reverifying historical corpus evidence. See `tools/core-corpus/README.md`.
