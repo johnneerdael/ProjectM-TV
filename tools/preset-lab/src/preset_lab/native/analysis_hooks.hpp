@@ -1,17 +1,18 @@
 #ifndef PRESET_LAB_ANALYSIS_HOOKS_HPP
 #define PRESET_LAB_ANALYSIS_HOOKS_HPP
-// Only the macOS discard shim needs desktop GL declarations in this hook.
-// Android/Linux renderer headers select their own configured GL or GLES backend.
-#if defined(__APPLE__) && __has_include(<glad/gl.h>)
+// Select desktop declarations before applying the optional discard shim.
+// Android and configured GLES builds keep their GLES headers and real discard API.
+#if !defined(__ANDROID__) && !defined(USE_GLES) && __has_include(<glad/gl.h>)
 #include <glad/gl.h>
 #endif
 #include <cstdint>
 #include <cstdlib>
 #include <string>
 
-// Apple's desktop OpenGL 4.1 lacks the GLES3 discard hint used by app patch 0009.
-// Keeping those attachment contents is equivalent for rendering correctness.
-#ifdef __APPLE__
+// Apple OpenGL 4.1 and the pinned desktop GLAD 3.3 API lack this optional hint.
+// Keeping attachment contents is equivalent for rendering correctness; host
+// timings from these private workers do not establish Android GPU performance.
+#if defined(__APPLE__) || (!defined(__ANDROID__) && !defined(USE_GLES) && !defined(GL_VERSION_4_3))
 #undef glInvalidateFramebuffer
 #define glInvalidateFramebuffer(target, count, attachments) ((void)0)
 #endif

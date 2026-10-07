@@ -55,7 +55,7 @@ build/preset-lab-venv/bin/python -m pip install './tools/preset-lab[test]'
 build/preset-lab-venv/bin/preset-lab doctor --repo . --work build/preset-lab
 ```
 
-The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. That private host renderer supports historical research; the current beta collections use the **published ProjectM-TV:core AAR through JNI**. See [Predictive collections](predictive-collections.md) for scoring, export and verification commands.
+The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. The private desktop worker preserves attachment contents when its GL declarations lack the optional framebuffer discard hint; Android/GLES keeps the real GLES3 API. Desktop timings do not establish TV performance. That private host renderer supports historical research; the current beta collections use the **published ProjectM-TV:core AAR through JNI**. See [Predictive collections](predictive-collections.md) for scoring, export and verification commands.
 
 ## Test on a TV without replacing the release
 

@@ -2,6 +2,7 @@ from pathlib import Path
 import tempfile
 import shutil
 import subprocess
+import pytest
 
 from preset_lab.build_worker import _instrument, prepare_engine
 from preset_lab.build_worker import NATIVE
@@ -189,7 +190,9 @@ def test_analysis_hook_can_follow_android_gles_headers(tmp_path):
     compiler = compilers[0]
     source = tmp_path / "android_analysis_hooks.cpp"
     source.write_text('#include <GLES3/gl3.h>\n#include "analysis_hooks.hpp"\n'
-                      'int main() { return lab::Seed(1) == 0; }\n')
+                      '#ifdef glInvalidateFramebuffer\n#error Android discard must remain the real GLES API\n#endif\n'
+                      'int main() { glInvalidateFramebuffer(GL_DRAW_FRAMEBUFFER, 0, nullptr); '
+                      'return lab::Seed(1) == 0; }\n')
     repo = Path(__file__).parents[3]
     result = subprocess.run([str(compiler), "--target=armv7-none-linux-androideabi21",
                              "--sysroot=" + str(compiler.parent.parent / "sysroot"),
@@ -197,3 +200,28 @@ def test_analysis_hook_can_follow_android_gles_headers(tmp_path):
                              "-I", str(repo / "third_party/projectm/vendor/glad/include"),
                              str(source)], text=True, capture_output=True)
     assert result.returncode == 0, result.stderr
+
+
+@pytest.mark.parametrize("has_discard", [False, True], ids=["desktop-gl33", "desktop-gl43"])
+def test_desktop_hook_supports_optional_framebuffer_discard(tmp_path, has_discard):
+    glad = tmp_path / "glad/gl.h"
+    glad.parent.mkdir()
+    glad.write_text("#pragma once\ninline int discard_calls = 0;\n" +
+                    ("#define GL_VERSION_4_3 1\n"
+                     "inline void glInvalidateFramebuffer(unsigned, int, const unsigned*) { ++discard_calls; }\n"
+                     if has_discard else "#define GL_VERSION_3_3 1\n"))
+    source = tmp_path / "desktop_discard.cpp"
+    source.write_text('#include <glad/gl.h>\n#include "analysis_hooks.hpp"\n'
+                      'int main() { glInvalidateFramebuffer(0, 0, nullptr); '
+                      'return discard_calls == ' + str(int(has_discard)) + ' ? 0 : 1; }\n')
+    executable = tmp_path / "desktop_discard"
+    # Load host standard headers with their real platform macros, then exercise
+    # the non-Apple branch without requiring a separate Linux compiler.
+    prelude = tmp_path / "platform_prelude.hpp"
+    prelude.write_text("#include <cstdint>\n#include <cstdlib>\n#include <string>\n#undef __APPLE__\n")
+    result = subprocess.run(["c++", "-std=c++17", "-I", str(tmp_path),
+                             "-I", str(NATIVE), "-include", str(prelude),
+                             "-include", str(NATIVE / "analysis_hooks.hpp"),
+                             str(source), "-o", str(executable)], text=True, capture_output=True)
+    assert result.returncode == 0, result.stderr
+    subprocess.run([str(executable)], check=True)

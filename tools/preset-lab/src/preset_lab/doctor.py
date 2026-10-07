@@ -66,4 +66,4 @@ def doctor(repo: Path, work: Path, worker: Path | None = None) -> dict:
                   and c["statuses"] == ["success"] * 3 for c in checks)
     return {"healthy": healthy, "tools": tools, "worker": str(worker),
             "identity": asdict(identity), "backend": backend, "repeatability": checks,
-            "desktop_discard_hint": "no-op on Apple OpenGL; timings are desktop-only"}
+            "desktop_discard_hint": "no-op on Apple OpenGL or desktop declarations without GL4.3; GLES unchanged; timings are desktop-only"}
