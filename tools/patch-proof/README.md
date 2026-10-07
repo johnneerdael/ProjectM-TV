@@ -36,6 +36,9 @@ hashes, retained image payloads, counts, backend and comparison pixels.
 Capture rejects unsupported role names before creating output directories, and
 both capture and verification require each role label to match its worker identity
 and removed-patch metadata. Swapped worker records cannot silently relabel a run.
+Both also check the prepared patch inventory against the recorded series. In the
+identity, `ordered_patches` lists the complete input series for patched/ablation
+roles; `patch_removed` names the omitted patch. Upstream has an empty inventory.
 
 Preparation requires the documented 13-patch series and pins. Supported roles are
 `upstream`, `patched`, and `without-0002` through `without-0013`. Patch0001 is

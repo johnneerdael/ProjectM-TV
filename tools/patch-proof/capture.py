@@ -76,6 +76,7 @@ def main() -> None:
     if args.texture_journey and (not (textures / 'a').is_dir() or not (textures / 'b').is_dir()):
         parser.error('--texture-journey requires a and b directories under --textures')
     workers = json.loads(args.workers.read_text())
+    series = json.loads((ROOT / 'docs/superpowers/evidence/current-patch-proof/series.json').read_text())['patches']
     supported_roles = {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
     for role in workers:
         if role not in supported_roles:
@@ -87,6 +88,8 @@ def main() -> None:
         if ('patch_removed' not in identity or identity['patch_removed'] != removed or
                 type(identity['patch_removed']) is not type(removed)):
             raise ValueError('Worker patch removal differs: ' + role)
+        if identity.get('ordered_patches') != ([] if role == 'upstream' else series):
+            raise ValueError('Worker patch inventory differs: ' + role)
     for identity in workers.values():
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary identity changed')

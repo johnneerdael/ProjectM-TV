@@ -10,6 +10,8 @@ from PIL import Image, ImageDraw
 SPEC = importlib.util.spec_from_file_location('patch_proof_verify', Path(__file__).with_name('verify.py'))
 VERIFY = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(VERIFY)
+SERIES = json.loads((Path(__file__).resolve().parents[2] /
+                    'docs/superpowers/evidence/current-patch-proof/series.json').read_text())['patches']
 
 
 class RetainedEvidenceIntegrity(unittest.TestCase):
@@ -26,6 +28,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         manifest = self.root / 'worker/source-hashes.json'
         manifest.write_text(json.dumps({'renderer.cpp': VERIFY.sha((source / 'renderer.cpp').read_bytes())}))
         identity = {'role': 'patched', 'patch_removed': None,
+                    'ordered_patches': SERIES,
                     'binary': str(binary), 'binary_sha256': VERIFY.sha(binary.read_bytes()),
                     'source_hashes': str(manifest)}
         backend = ['vendor', 'hardware GPU', 'GLES3.0', 'GLSL3.00']
@@ -78,7 +81,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def add_rejected_role(self, row, repeat_equal=False):
         self.result['roles']['upstream'] = {
-            'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream'},
+            'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream', 'ordered_patches': []},
             'repeat_equal': repeat_equal, 'runs': [row, dict(row)]}
         self.save()
         image = Image.new('RGB', (4, 33), '#171717')
@@ -117,6 +120,12 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.result['roles']['patched']['worker']['patch_removed'] = 10
         self.save()
         with self.assertRaisesRegex(ValueError, 'Worker patch removal differs'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_wrong_prepared_patch_inventory(self):
+        self.result['roles']['patched']['worker']['ordered_patches'] = []
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Worker patch inventory differs'):
             VERIFY.verify(self.work)
 
     def test_rejects_matching_repeats_with_missing_frames(self):
@@ -163,7 +172,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_rejects_altered_rejection_panel(self):
         self.result['roles']['upstream'] = {
-            'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream'},
+            'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream', 'ordered_patches': []},
             'repeat_equal': False, 'runs': [{'status': 'failed', 'exit': 1}] * 2}
         self.save()
         image = Image.new('RGB', (4, 33), '#171717')

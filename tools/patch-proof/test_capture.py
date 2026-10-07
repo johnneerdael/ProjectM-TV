@@ -12,6 +12,8 @@ from unittest.mock import patch
 SPEC = importlib.util.spec_from_file_location('patch_proof_capture', Path(__file__).with_name('capture.py'))
 CAPTURE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CAPTURE)
+SERIES = json.loads((Path(__file__).resolve().parents[2] /
+                    'docs/superpowers/evidence/current-patch-proof/series.json').read_text())['patches']
 
 
 class FailedCaptureRetention(unittest.TestCase):
@@ -30,12 +32,14 @@ class FailedCaptureRetention(unittest.TestCase):
                      ('../escaped', str(root / 'absolute'), 'without-0001', 'unknown')]
             cases.extend([('patched', 'without-0010', 10, 'Worker role identity differs'),
                           ('patched', 'patched', 10, 'Worker patch removal differs'),
-                          ('without-0010', 'without-0010', None, 'Worker patch removal differs')])
+                          ('without-0010', 'without-0010', None, 'Worker patch removal differs'),
+                          ('patched', 'patched', None, 'Worker patch inventory differs')])
             for index, (role, inner_role, removed, message) in enumerate(cases):
                 with self.subTest(role=role):
                     work = root / ('capture-' + str(index))
                     workers.write_text(json.dumps({role: {
                         'role': inner_role, 'patch_removed': removed,
+                        'ordered_patches': [] if 'inventory' in message else SERIES,
                         'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}}))
                     argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
                             '--textures', str(textures), '--device', 'emulator-5630',
@@ -56,6 +60,7 @@ class FailedCaptureRetention(unittest.TestCase):
             workers = root / 'workers.json'
             workers.write_text(json.dumps({'patched': {
                 'role': 'patched', 'patch_removed': None,
+                'ordered_patches': SERIES,
                 'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}}))
             preset = root / 'preset.milk'
             preset.write_text('[preset00]\n')

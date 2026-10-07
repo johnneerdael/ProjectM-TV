@@ -17,6 +17,8 @@ def sha(data: bytes) -> str:
 
 def verify(work: Path) -> dict:
     result = json.loads((work / 'results.json').read_text())
+    series = json.loads((Path(__file__).resolve().parents[2] /
+                         'docs/superpowers/evidence/current-patch-proof/series.json').read_text())['patches']
     width, height = result['dimensions']
     kind = result.get('capture_kind')
     if kind not in ('image', 'texture-journey', 'evaluator'):
@@ -34,6 +36,8 @@ def verify(work: Path) -> dict:
         if ('patch_removed' not in identity or identity['patch_removed'] != removed or
                 type(identity['patch_removed']) is not type(removed)):
             raise ValueError('Worker patch removal differs: ' + role)
+        if identity.get('ordered_patches') != ([] if role == 'upstream' else series):
+            raise ValueError('Worker patch inventory differs: ' + role)
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary changed: ' + role)
         source_manifest = Path(identity['source_hashes'])
