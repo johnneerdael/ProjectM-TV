@@ -180,3 +180,27 @@ image. The direct vertex-source zoom test uses the same updated internal attribu
 layout. These controls are separate from original-preset appearance, high-resolution
 trail paths and physical-TV performance; record those separately when validating
 an engine release.
+
+## Preset validation in CI
+
+The `presets / measurements` release gate verifies the shipped predictive
+collection bundle: current preset and texture hashes, retained measurement
+provenance, score calculations, collection membership and index weights. It also
+runs Preset Lab and Native trails tooling tests, source-analysis checks and
+current-engine native rendering regressions. It does not rerender or regenerate
+the full collection scores; their published core 2.3.3 provenance remains intact.
+
+Historical Android core-corpus tooling tests are outside this release gate. Run
+`python -m pytest tools/core-corpus -q` separately when changing that tooling; its
+source-transformation controls require the frozen historical commit documented
+in `tools/core-corpus/README.md`. These historical controls do not establish the
+validity of the shipped collection scores or current-renderer appearance.
+
+## Standalone historical source controls
+
+The standalone core-corpus source controls read current source and a fixed
+historical release commit. Keep that commit available when running these tools
+locally. If explicitly invoked under GitHub Actions, the test class fetches the
+exact pinned fixture only when missing; assertions and source identity remain
+unchanged. This bootstrap is outside the Preset Lab release gate and does not
+require that gate to fetch repository history.

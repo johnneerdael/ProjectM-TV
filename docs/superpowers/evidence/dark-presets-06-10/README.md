@@ -106,10 +106,16 @@ Long runs repeat the frozen one-second audio transport; they do not model arbitr
 music or normal app skipping. No original Windows/D3DX rendering, whole-corpus
 fidelity or performance gain is claimed.
 
-## Release state
+## Release state and main synchronization
 
-CI run 37639894403 built the 2.3.18 APK/core successfully but failed Preset Lab's
+CI run 37639894403 built the original 2.3.18 APK/core successfully but failed
 historical source controls because checkout was shallow. Publication and the
-Milkbeat update were skipped. This PR retains full history with `filter: blob:none`
-for those controls. A fresh depth-one clone reproduces the missing-source failure; a fresh full-history `blob:none` clone retrieves the identical baseline source. Reviewed PRs use trusted-main workflow definitions before merge, so the transformation tests additionally use a checked-in full baseline source fixture pinned to SHA256 `3172d17e20019cb1b34e634f108edc3b669e5a663c18d843f32abac5f15603a6`. Those tests pass in a fresh shallow checkout without changing or skipping the historical-source checks. The local candidate is not the unchanged CI artifact or an
-official 2.3.18 release; the next reviewed main merge uses normal automatic versioning.
+Milkbeat update were skipped. The earlier historical-source workaround on this
+branch has been superseded by main’s removal of legacy corpus checks from the
+release gate (PR #52 / main `6feb100b`). The final renderer PR retains that policy
+and includes no baseline fixture or corpus-test changes.
+
+The metrics and CI-history reproduction recorded above are historical evidence,
+not dependencies of the current release gate. The local candidate is not the
+unchanged CI artifact or an official 2.3.18 release; the next reviewed main merge
+uses normal automatic versioning.

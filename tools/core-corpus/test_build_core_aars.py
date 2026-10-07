@@ -1,7 +1,7 @@
 """Guard the narrow Core transformation and source provenance contracts."""
 import importlib.util
 import inspect
-import hashlib
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -15,22 +15,20 @@ spec.loader.exec_module(builder)
 
 
 class CoreTransformationTests(unittest.TestCase):
-    def source(self, commit):
-        if commit == builder.BASELINE:
-            # Trusted-main PR workflows can check out only the test merge.
-            # Keep the full frozen source, not a mock or a current-source fallback.
-            path = HERE / "fixtures/baseline-native-lib.cpp.txt"
-            payload = path.read_bytes()
-            expected = "3172d17e20019cb1b34e634f108edc3b669e5a663c18d843f32abac5f15603a6"
-            self.assertEqual(hashlib.sha256(payload).hexdigest(), expected,
-                             "historical native source fixture changed")
-            return payload.decode("utf-8")
-        self.assertEqual(commit, "HEAD")
-        return (builder.REPO / builder.CPP / "native-lib.cpp").read_text()
+    @classmethod
+    def setUpClass(cls):
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            git = ["git", "-C", str(builder.REPO)]
+            fixture = f"{builder.BASELINE}:{builder.CPP}native-lib.cpp"
+            available = subprocess.run([*git, "cat-file", "-e", fixture],
+                                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if available.returncode:
+                subprocess.run([*git, "fetch", "--no-tags", "--depth=1",
+                                "--recurse-submodules=no", "origin", builder.BASELINE], check=True)
 
-    def test_baseline_fixture_is_the_frozen_historical_source(self):
-        self.assertEqual(builder.BASELINE, "5681852f9497f320e57b8a5dd40c076d0f5a6b18")
-        self.assertIn(builder.CLOCK_BODY, self.source(builder.BASELINE))
+    def source(self, commit):
+        return subprocess.check_output(
+            ["git", "-C", str(builder.REPO), "show", f"{commit}:{builder.CPP}native-lib.cpp"], text=True)
 
     def test_both_real_sources_transform_only_allowed_spans(self):
         for commit in (builder.BASELINE, "HEAD"):

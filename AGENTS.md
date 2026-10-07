@@ -70,7 +70,7 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 
 ## Codebase navigation and knowledge tools
 
-- Focused dark-preset investigation: [evidence](docs/superpowers/evidence/dark-presets-06-10/README.md). Keep direct framebuffer coverage tests separate from final-composite brightness tests; one-second cold captures do not prove intended appearance. Retain full-history `filter: blob:none` for historical corpus builders. Unit transformation guards use `tools/core-corpus/fixtures/baseline-native-lib.cpp.txt`, hash-pinned to the original baseline, so trusted-main shallow PR checkouts remain supported.
+- Focused dark-preset investigation: [evidence](docs/superpowers/evidence/dark-presets-06-10/README.md). Keep direct framebuffer coverage tests separate from final-composite brightness tests; one-second cold captures do not prove intended appearance. Keep the release gate’s Native-trails-only validation policy; do not reintroduce the legacy corpus or historical source dependencies.
 - No `.codegraph/` or `graphify-out/` exists at the repository root (checked 2026-10-04). Use `git grep`/`rg`; do not assume a code graph.
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) §5 (threading rules, transitions, resolution, frame pacing, threads, overlay UI, device tiers). Its title says v1.9 and §1–4 and §6–8 are historical analysis; verify against the code. Design specs, plans and evidence for engine work are in `docs/superpowers/{specs,plans,evidence}`.
 - projectM sources: `third_party/projectm` shows patched code only after a CMake configure or a manual apply; the committed source of truth is `tools/projectm-patches/`. Search both the submodule and the patches.
@@ -211,6 +211,9 @@ Follow the repository's configured formatting and lint rules. Review automatic f
 - Checks that act as lint in CI: `release_notes.py validate` (PR body), `tools/gen-preset-index.py --check`, `tools/check-presets.py`, `mkdocs build --strict` (user guide). `tools/check-patch-series.sh` is not in CI; CI applies the series through CMake during the native tests and `assembleRelease`.
 
 ## Building and testing
+
+The release gate runs Preset Lab and Native trails checks without the historical core-corpus suite. Standalone `tools/core-corpus` source controls read frozen commit `5681852f`; if explicitly run under GitHub Actions, their test class fetches that exact fixture only when missing, without submodule recursion. Preserve fixture hashes and assertions; do not add historical source tests or full-history fetching to the release gate.
+
 
 Choose validation that exercises the changed behavior. Compilation alone does not establish functional correctness. For UI or integration changes, exercise relevant user journeys and error paths when the environment supports them. Record baseline failures and environmental limitations honestly.
 

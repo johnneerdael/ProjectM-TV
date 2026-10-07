@@ -16,13 +16,6 @@ Main publishing runs queue instead of canceling previous builds. Obsolete PR val
 
 CI fetches full tag history and rejects conflicting tags, inconsistent retry metadata and invalid Android codes. An older retry does not replace a newer release as latest. Missing release signing fails a publishing build; PR artifacts may use a temporary debug key.
 
-Preset Lab retains full Git history with `filter: blob:none` for historical corpus
-builders. Transformation unit tests use the full hash-pinned baseline source in
-`tools/core-corpus/fixtures/baseline-native-lib.cpp.txt`, so trusted-main PR workflows
-also work before this checkout change merges. They verify the fixture digest and
-exercise the current native source directly; missing history does not cause a skip
-or substitute current code for the historical baseline.
-
 ## Review gate
 
 A ready, mergeable PR targeting `main` needs approval for its **latest head commit**.
