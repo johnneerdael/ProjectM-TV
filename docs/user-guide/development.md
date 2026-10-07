@@ -188,3 +188,7 @@ fixed historical release commit. Keep Git history available when running these
 tests. Preset Lab CI uses `fetch-depth: 0` and `filter: blob:none`: commit metadata
 is available, while historical file contents load on demand. A shallow checkout
 without that history can fail at `git show` before a renderer is exercised.
+Reviewed previews use the trusted workflow from main. Their source controls
+fetch the exact pinned fixture commit when it is missing in CI, so a checkout
+workflow repair can be validated before it reaches main. Existing fixtures and
+assertions stay unchanged.
