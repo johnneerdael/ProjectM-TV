@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "scope": "three selected unchanged originals, each upstream/no-patch/current two-repeat120-frame zeroGL-error proof; full-frame and nearest-crop image payloads, image/input hashes",
+  "figures": "visible-original-figures.json",
+  "render_proof": "visible-confirmed-results.json"
+}

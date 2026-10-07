@@ -329,6 +329,32 @@ Use sample 06 identified by exact hash in the
 the `rad=.002`, `x=y=.5` diagnostic shape. Compare textured/untextured draws and
 different target dimensions. A D3D9 coverage oracle is not a MilkDrop 2 screenshot.
 
+![Full original preset showing the shape-coverage correction](superpowers/evidence/current-patch-proof/0012-visible-original.png)
+
+**What to look for:** in the unchanged `amandio c - the green machine … btbam
+covers sepultura` preset, the uncorrected frame has pink/brown radial wedges and
+a small centre; the corrected frame develops a green/yellow curved structure
+around the centre. This is visible in the full frame, without a difference map.
+The lower row shows the same source region enlarged with nearest sampling and
+no brightness adjustment.
+
+**How the bug causes it:** this preset draws thousands of very small custom shapes
+and uses the resulting image in a gradient-driven feedback shader. Copying D3D9
+shape coordinates directly into GLES places them against a different pixel-centre
+grid. The wrong coverage changes which tiny shape fragments seed the feedback;
+that difference grows into the different pattern and colours shown here.
+Patch 0012 translates each shape draw by half a destination pixel, preserving its
+authored position/radius/colour equations. This corrects raster sampling rather
+than applying a colour or brightness filter.
+
+At frame 59 and 256×144, removing only 0012 changes all 120 recorded frames; both
+roles repeat exactly with zero GL errors. The selected frame's RGB8 mean absolute
+difference is 44.837, with 34,365/36,864 pixels differing by more than 16 in at least
+one channel. These are scoped observations, not a whole-library appearance claim.
+[Raw upstream/current-minus0012/current panel](superpowers/evidence/current-patch-proof/0012-c767a5b893.png).
+
+The earlier dark-preset crops below remain secondary coverage records.
+
 ![Original dark witness: enlarged shape seed coverage](superpowers/evidence/current-patch-proof/0012-visible.png)
 
 The original stays dark. At frame 29, removing only 0012 changes **three pixels**,
@@ -354,6 +380,32 @@ Compare original sample 06/10 and a pass-through impulse/asymmetric-pattern fixt
 Expected output is one full-bright texel rather than four quarter-bright pixels.
 Retain resize/repeated-draw controls and unchanged warp offsets. Sampling correctness,
 not a brightness setting or speedup; the original presets remain authored sparse/dark.
+
+![Full original preset showing the composite sampling correction](superpowers/evidence/current-patch-proof/0013-visible-original.png)
+
+**What to look for:** the unchanged `DemonLD – Toxic water diffusion` preset has
+bright green/cyan contour rims around its red and blue regions. Without 0013,
+those rims and their nearby colours are sampled differently and the frame is
+brighter. With 0013, the contour intensities change while the underlying scene and
+motion remain the same. The lower row provides an aligned close-up, with no
+brightness gain or amplified difference map.
+
+**How the bug causes it:** GLES already interpolates the composite mesh at texel
+centres. The extra half-texel UV offset moved the reads between neighbouring texels,
+so linear filtering mixed their colours. This preset then adds a nearby sample,
+multiplies the result by its fractional part (`ret *= frac(ret)`), and subtracts
+blur. Those nonlinear colour operations turn the unwanted mixtures into different
+contour brightness and colour. Removing the extra UV bias restores the centre
+sampling; the preset's own shader code and blur remain unchanged.
+
+At frame 59 and 256×144, mean luma is 57.02 without 0013 and 48.39 with it: the bugged
+frame is about 18% brighter in this measured window. The RGB8 mean absolute
+difference is 25.846. Both roles repeat every one of 120 frames exactly, with zero
+GL errors. This does not imply that the patch always darkens a preset or certifies
+original Windows appearance. [Raw upstream/current-minus0013/current panel](superpowers/evidence/current-patch-proof/0013-6d2783a426.png).
+
+The direct impulse control below explains the same sampling error numerically;
+it is a supporting diagnostic rather than a replacement for the artist preset.
 
 ![Composite impulse at native pixels and enlarged scale](superpowers/evidence/current-patch-proof/0013-composite-impulse-zoom.png)
 

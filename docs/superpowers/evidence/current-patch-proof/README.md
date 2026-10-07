@@ -157,3 +157,21 @@ The unchanged Hexcollie wormhole preset evaluates wave_mode=q8%7; new
 `wave-witness-results.json` records exact two-repeat/all120-frame controls for
 upstream, current minus0007 and current. Its all120-frame causal change is now the
 primary original waveform example. Initial captures remain preserved.
+
+## More visible unchanged originals selected from the full bundle
+
+A source scan inspected all9,606 bundled presets with the existing Preset Lab
+parser. It found5 direct alpha-image references for0009,6,123 enabled-shape
+candidates for0012 and4,513 custom-main-composite candidates for0013. These are
+source matches, not proven defects. Source ranking and the exploratory screens
+remain separate from final two-repeat proof; zero effects and failures are retained.
+35 initial candidate/patch scenarios,24 threshold candidates and6 further colour
+threshold candidates were rendered exploratorily. None is whole-corpus certification.
+
+The main document now leads0012 with the unchanged btbam green-machine variant
+and0013 with the unchanged DemonLD Toxic water variant. Their repeat evidence is
+in `visible-confirmed-results.json`, with the source hashes, frame images and
+measurements identified in `visible-original-figures.json`. The originals are
+not edited, and the figures use unbrightened full frames and aligned nearest
+crops. They replace the tiny dark witness as the primary explanation; numerical
+controls and the old records remain secondary.

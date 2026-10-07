@@ -1,0 +1,1187 @@
+[
+  {
+    "patch": "0009",
+    "filename": "no rules, no judgement, only hate.milk",
+    "texture": "chloemall",
+    "score": 100,
+    "asset_sha256": "f0a34aaa40a99bc22707348d319c411becb7e0c98f23b23a093cf1fd65ed823a"
+  },
+  {
+    "patch": "0009",
+    "filename": "ORB - Gramaton.milk",
+    "texture": "plane",
+    "score": 90,
+    "asset_sha256": "5de63bbc69666c0aded092af5be59bda4f3eee036f331da115f31ca26a1865d4"
+  },
+  {
+    "patch": "0009",
+    "filename": "ORB - Neon Nebula.milk",
+    "texture": "plane",
+    "score": 90,
+    "asset_sha256": "c754a182334436aa82e8d6fa3378394411304952b0e5c00b5bc0c3ca8674963c"
+  },
+  {
+    "patch": "0009",
+    "filename": "ORB - The Deep Blue --- Isosceles edit.milk",
+    "texture": "plane",
+    "score": 90,
+    "asset_sha256": "9b6053d3db139d06a5b40fd73e9481a0e647c7806c353f8e22b30ab0866578c2"
+  },
+  {
+    "patch": "0009",
+    "filename": "ORB - The Deep Blue.milk",
+    "texture": "plane",
+    "score": 90,
+    "asset_sha256": "7373382cfb8d960832cec340f16c467d2094248b234a47a243a2c1f6e41be16c"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - the green machine 2 skin lard bone beacon nz+ btbam covers sepultura.milk",
+    "score": 173.02111879635643,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 512.0,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "23aff47afac99484e61d109a3c8222cb1a55f2a61b179077fdee91d8eeda986c"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - the green machine 2 skin lard bone beacon nz+ equifux.milk",
+    "score": 173.02111879635643,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 512.0,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.03682,
+        "literal_radius_hint": 0.03682,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "858465c087d694f841001d3b1355876d95ce3046d7f8e05103183a2085b60f43"
+  },
+  {
+    "patch": "0012",
+    "filename": "martin - pixies party d-strux wille itunes.milk",
+    "score": 167.19228605805546,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.0006,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.5
+      },
+      {
+        "shape": 3,
+        "instances": 300.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "4da4df6766d53506fbd67db4a1a11b236804c36d12b2897bdb2d2a62cdfd8591"
+  },
+  {
+    "patch": "0012",
+    "filename": "martin - pixies party d-strux wille.milk",
+    "score": 167.19228605805546,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.0006,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.5
+      },
+      {
+        "shape": 3,
+        "instances": 300.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "d6d84a86f3872ba4a8c3a4767052d912e6de3192a29dfac23a5dd9781b37ca8d"
+  },
+  {
+    "patch": "0012",
+    "filename": "martin - pixies party filth edition.milk",
+    "score": 167.19228605805546,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.0006,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.5
+      },
+      {
+        "shape": 3,
+        "instances": 300.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "a504a2ab80dca27bb56f6cef0513ce6df4c3785144c578c7fe11489c70b8a6b6"
+  },
+  {
+    "patch": "0012",
+    "filename": "martin - pixies party linkwurst love.milk",
+    "score": 167.19228605805546,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.0006,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.5
+      },
+      {
+        "shape": 3,
+        "instances": 300.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "69fd259f770611eff3c26e3e524a966ff21479e88b3c5fa3211a1104afa34d38"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - all in one radial 2 nz+.milk",
+    "score": 161.76582882307207,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 200.0,
+        "configured_radius": 0.03048,
+        "literal_radius_hint": 0.03048,
+        "alpha": 0.1
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.02988,
+        "literal_radius_hint": 0.02988,
+        "alpha": 0.1
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.02988,
+        "literal_radius_hint": 0.02988,
+        "alpha": 0.1
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.02988,
+        "literal_radius_hint": 0.02988,
+        "alpha": 0.1
+      }
+    ],
+    "asset_sha256": "95ee2db8f56fd291bf194209997f496bd65d32b09bff24d911880636f1deb169"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - prime forms keylontiq pseudoskienke spatial segweight feel nonfancunt.milk",
+    "score": 158.4821322562677,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 1024,
+        "configured_radius": 0.08081,
+        "literal_radius_hint": 0.002,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.02987,
+        "literal_radius_hint": 0.02987,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "e041aca12f5ae6e6be6b62d3ce4c4e9b09b5e2b2e5917e71fb6fbf5386019de4"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - prime forms keylontiq pseudoskienke spatial segweight feel welcome in my pure hate of you.milk",
+    "score": 158.4821322562677,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 1024,
+        "configured_radius": 0.08081,
+        "literal_radius_hint": 0.002,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.02987,
+        "literal_radius_hint": 0.02987,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "6bb7f49a7055f1c3e73f35067c1dea413c52fc034751564165ce17f7b5ad740e"
+  },
+  {
+    "patch": "0012",
+    "filename": "suksma - coal drapes - mrt fsh spell for hate dimension remote dreaming nickel advice a show of farce.milk",
+    "score": 155.63015018285938,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.03646,
+        "literal_radius_hint": 0.03646,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.03646,
+        "literal_radius_hint": 0.03646,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.03646,
+        "literal_radius_hint": 0.03646,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "569e42546518f87da51a980e9141de5e65beffabf2e9e9e9aee62ca4365fb87d"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - prime forms 2 nz+ adam kreighble' youtube user-allseeingeye93#p-u-1-Ew6_tqnPYoU cop web death piss r.milk",
+    "score": 147.4821322562677,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 1024,
+        "configured_radius": 2.90521,
+        "literal_radius_hint": 0.00015,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.10262,
+        "literal_radius_hint": 0.10262,
+        "alpha": 0.5
+      }
+    ],
+    "asset_sha256": "ac93f6c3f1dad83e8bb27a9919283f66a99f1ddd6059bdaf1f345af27017d192"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - prime forms 2 nz+ adam kreighble' youtube user-allseeingeye93#p-u-1-Ew6_tqnPYoU cop web death piss.milk",
+    "score": 147.4821322562677,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 1024,
+        "configured_radius": 2.90521,
+        "literal_radius_hint": 0.00015,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.10262,
+        "literal_radius_hint": 0.10262,
+        "alpha": 0.5
+      }
+    ],
+    "asset_sha256": "8fd0d0c11537a6155642c93e3ae555a1d20dd9dd1fbee5032b5c671d246f811a"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - epicenter the end of the world we never knew.milk",
+    "score": 145.4357277733138,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 10.0,
+        "configured_radius": 0.19398,
+        "literal_radius_hint": 0.19398,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 821.0,
+        "configured_radius": 0.01489,
+        "literal_radius_hint": 0.01489,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.01474,
+        "literal_radius_hint": 0.01474,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.0146,
+        "literal_radius_hint": 0.0146,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "8f4f9166bf331d9804bf30e4828da90b39933c2767e859949d5d80e9f75dfdb0"
+  },
+  {
+    "patch": "0012",
+    "filename": "amandio c - epicenter zero improvement hackery.milk",
+    "score": 145.4357277733138,
+    "features": [
+      {
+        "shape": 0,
+        "instances": 10.0,
+        "configured_radius": 0.19398,
+        "literal_radius_hint": 0.19398,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 821.0,
+        "configured_radius": 0.01489,
+        "literal_radius_hint": 0.01489,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.01474,
+        "literal_radius_hint": 0.01474,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.0146,
+        "literal_radius_hint": 0.0146,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "71ea16ea77f8568e1f200e348fd531b84641a58373ef176241a5858dbf46b1d8"
+  },
+  {
+    "patch": "0012",
+    "filename": "Martin - Pixies Party (Hakan mash-up) 1-3.milk",
+    "score": 144.23993225536594,
+    "features": [
+      {
+        "shape": 1,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.0005,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.5
+      },
+      {
+        "shape": 3,
+        "instances": 350.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "555ca711af93c13dd6c8b57648a2f5e1aedfa763ad1f16a348d540d83c02a5e0"
+  },
+  {
+    "patch": "0013",
+    "filename": "Stahlregen & Boz - Machine Code (Reaction Diffusion) qrimbinael quiqmalth.milk",
+    "score": 63,
+    "features": [
+      "texsize",
+      "sin(",
+      "cos(",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.03646,
+        "literal_radius_hint": 0.03646,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.03646,
+        "literal_radius_hint": 0.03646,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "df4535afa06af837522008575627bb7a176b19259071078cc4adaa702805297f"
+  },
+  {
+    "patch": "0013",
+    "filename": "Martin - Pixies Party (Hakan mash-up) 3-2.milk",
+    "score": 57,
+    "features": [
+      "texsize",
+      "frac",
+      "sin(",
+      "cos(",
+      "pow(",
+      "blur",
+      "sampler_pc_main"
+    ],
+    "shapes": [
+      {
+        "shape": 1,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.0005,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.5
+      },
+      {
+        "shape": 3,
+        "instances": 350.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "570e7b3672c05c4764d171ea260a7f0f0f610c2079b5ec4a8b50e5afdbd4e491"
+  },
+  {
+    "patch": "0013",
+    "filename": "Stahlregen & Boz - Machine Code (Reaction Diffusion) do you not like my cliche pretentious angst.milk",
+    "score": 57,
+    "features": [
+      "texsize",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 1024,
+        "configured_radius": 0.03646,
+        "literal_radius_hint": 0.03646,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.03646,
+        "literal_radius_hint": 0.03646,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "3a3d3117807a36ea64e051d10fa868e0b9621a3821a42f6f26701fcf83980d2a"
+  },
+  {
+    "patch": "0013",
+    "filename": "Martin - Pixies Party (Hakan mash-up) 3-4.milk",
+    "score": 53,
+    "features": [
+      "pow("
+    ],
+    "shapes": [
+      {
+        "shape": 1,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.0005,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 800.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.5
+      },
+      {
+        "shape": 3,
+        "instances": 350.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "3da892b17b53b80e2c1498f4afe7ffe9180b28a0c748ffc6eb3ac9c59407414e"
+  },
+  {
+    "patch": "0013",
+    "filename": "amandio c - green machinery 1a hell if i could nz+2 why not, right3 prime form lex implex.milk",
+    "score": 51,
+    "features": [
+      "texsize",
+      "sin(",
+      "cos(",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 1024,
+        "configured_radius": 0.02987,
+        "literal_radius_hint": 0.02987,
+        "alpha": 0.1
+      },
+      {
+        "shape": 1,
+        "instances": 33.0,
+        "configured_radius": 0.1,
+        "literal_radius_hint": 0.09,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "1166d55b574ff1a4d40ac498b6497e20cfa40be93dfcbce78287623d0abd0a1d"
+  },
+  {
+    "patch": "0013",
+    "filename": "massive crack hit butt burnre.milk",
+    "score": 51,
+    "features": [
+      "texsize",
+      "sin(",
+      "cos(",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 33.0,
+        "configured_radius": 0.1,
+        "literal_radius_hint": 0.09,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.34
+      },
+      {
+        "shape": 2,
+        "instances": 100.0,
+        "configured_radius": 0.29767,
+        "literal_radius_hint": 0.29767,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "3e327fac7cb37516e5acd0c077527fa62624681c9fff26d0bf1a2b0fa455c3ee"
+  },
+  {
+    "patch": "0013",
+    "filename": "suksma - chemosynthetic nosferatu - automating transformation with b n s3.milk",
+    "score": 51,
+    "features": [
+      "texsize",
+      "frac",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 366.0,
+        "configured_radius": 0.0303,
+        "literal_radius_hint": 0.0303,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 408.0,
+        "configured_radius": 0.03,
+        "literal_radius_hint": 0.03,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 262.0,
+        "configured_radius": 0.0297,
+        "literal_radius_hint": 0.0297,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 276.0,
+        "configured_radius": 0.0303,
+        "literal_radius_hint": 0.0303,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "0686737fa0ee5c8bdbb79ff85db17ce8d2198510b121d79606b2e8c55027e612"
+  },
+  {
+    "patch": "0013",
+    "filename": "suksma - chemosynthetic nosferatu - automating transformation with biochrome nostril suppositories2 nz+.milk",
+    "score": 51,
+    "features": [
+      "texsize",
+      "frac",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 366.0,
+        "configured_radius": 0.0303,
+        "literal_radius_hint": 0.0303,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 408.0,
+        "configured_radius": 0.03,
+        "literal_radius_hint": 0.03,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 262.0,
+        "configured_radius": 0.0297,
+        "literal_radius_hint": 0.0297,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 276.0,
+        "configured_radius": 0.0303,
+        "literal_radius_hint": 0.0303,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "7b0148544d2026eb7bfe9ba706710102cbcbc0bf17e434b0e9b623b9dcaf9eb9"
+  },
+  {
+    "patch": "0013",
+    "filename": "stupid mash4 my will is perfect entropy, no life.milk",
+    "score": 50.2964256273464,
+    "features": [
+      "texsize",
+      "pow(",
+      "grad",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 512.0,
+        "configured_radius": 0.1026,
+        "literal_radius_hint": 0.1026,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1,
+        "configured_radius": 0.03333,
+        "literal_radius_hint": 0.03333,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "b679a510e7db26a85532e351bd0d7896b3762d9ca45c0fd7826007f94d94eb25"
+  },
+  {
+    "patch": "0013",
+    "filename": "flexi + geiss - bipolar vs- reaction diffusion [mirror scoped] (Jelly 5-5) threx nz+ fresnel pretuberenthsche.milk",
+    "score": 49.147214322732374,
+    "features": [
+      "texsize",
+      "frac",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 33.0,
+        "configured_radius": 0.1,
+        "literal_radius_hint": 0.09,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 7.0,
+        "configured_radius": 0.03333,
+        "literal_radius_hint": 0.03333,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "1f6bcd960cdc92e6e69728c436eb086b6b94612051972111a21669be90bfe007"
+  },
+  {
+    "patch": "0013",
+    "filename": "i am only here to die slowly in pain i dethrone metatron with my qumb.milk",
+    "score": 49.02456395270324,
+    "features": [
+      "texsize",
+      "sin(",
+      "cos(",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 7.0,
+        "configured_radius": 0.03333,
+        "literal_radius_hint": 0.03333,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.10262,
+        "literal_radius_hint": 0.10262,
+        "alpha": 0.5
+      },
+      {
+        "shape": 2,
+        "instances": 33.0,
+        "configured_radius": 0.1,
+        "literal_radius_hint": 0.09,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "cbe236ee17157a664fe679261963bdce5917e72d1b8735ce8336023f638c978d"
+  },
+  {
+    "patch": "0013",
+    "filename": "DemonLD_-_Toxic_water_diffusion threx angela vs debi brown (nice) qovboit (SNIIIWS).milk",
+    "score": 49,
+    "features": [
+      "frac",
+      "sin(",
+      "cos(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.02987,
+        "literal_radius_hint": 0.02987,
+        "alpha": 0.1
+      },
+      {
+        "shape": 2,
+        "instances": 7.0,
+        "configured_radius": 0.03333,
+        "literal_radius_hint": 0.03333,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "3e2e2cd67d55560d1565aefaff878341207764dd716b9becdebd53f4f92963ea"
+  },
+  {
+    "patch": "0013",
+    "filename": "fiShbRaiN + geiss - witchcraft (Grow Mix 3 - reflecto) - more fluxlraft.milk",
+    "score": 49,
+    "features": [
+      "frac",
+      "floor",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 366.0,
+        "configured_radius": 0.0303,
+        "literal_radius_hint": 0.0303,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 408.0,
+        "configured_radius": 0.03,
+        "literal_radius_hint": 0.03,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 262.0,
+        "configured_radius": 0.0297,
+        "literal_radius_hint": 0.0297,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 276.0,
+        "configured_radius": 0.0303,
+        "literal_radius_hint": 0.0303,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "a86455eddfdbc58d24eecd5261e8639c6fa1b678fb07b07f3353c7f495ea566e"
+  },
+  {
+    "patch": "0013",
+    "filename": "suksma - selectron validumb blegula auralsect muert.milk",
+    "score": 49,
+    "features": [
+      "texsize",
+      "frac",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.02987,
+        "literal_radius_hint": 0.02987,
+        "alpha": 1.0
+      },
+      {
+        "shape": 2,
+        "instances": 33.0,
+        "configured_radius": 0.1,
+        "literal_radius_hint": 0.09,
+        "alpha": 1.0
+      },
+      {
+        "shape": 3,
+        "instances": 1024,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 0.24
+      }
+    ],
+    "asset_sha256": "137bf70599ff49e24c1d295a89b1f0a2a7a9d75ca2af205d86469fe83e3a0a9f"
+  },
+  {
+    "patch": "0013",
+    "filename": "shifter + Flexi - liquid circuitry from the zeropoint derivation hive nibruth.milk",
+    "score": 48.93558153461785,
+    "features": [
+      "texsize",
+      "sin(",
+      "cos(",
+      "pow(",
+      "blur"
+    ],
+    "shapes": [
+      {
+        "shape": 0,
+        "instances": 92.0,
+        "configured_radius": 0.02705,
+        "literal_radius_hint": 0.02705,
+        "alpha": 1.0
+      },
+      {
+        "shape": 1,
+        "instances": 1024,
+        "configured_radius": 0.10262,
+        "literal_radius_hint": 0.10262,
+        "alpha": 0.5
+      },
+      {
+        "shape": 2,
+        "instances": 1,
+        "configured_radius": 0.16777,
+        "literal_radius_hint": 0.16777,
+        "alpha": 0.6
+      },
+      {
+        "shape": 3,
+        "instances": 311.0,
+        "configured_radius": 0.01,
+        "literal_radius_hint": 0.01,
+        "alpha": 1.0
+      }
+    ],
+    "asset_sha256": "fec88274cf4a02c234bc8a68a5f6eb11e7d947d33e6097bffa631129fee31dc4"
+  }
+]
