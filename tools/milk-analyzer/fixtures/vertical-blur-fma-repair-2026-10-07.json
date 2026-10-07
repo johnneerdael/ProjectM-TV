@@ -80,7 +80,7 @@
     "full_suite": "1427tests+78subtests passed finalstablecode",
     "strengthened_tests": "19+2component/pipeline and2forecastprofile/forwardingtests passed",
     "strict_docs": "passed",
-    "independent_code_review": "No correctnessfindings; differingpair/actualforwarding gaps addressed; visualassessmentpending"
+    "independent_code_review": "Complete,no remainingfindings; full20claim/all30framereview learning100"
   },
   "original_preset_retest": {
     "scope": "Repairedsameoriginalpresetlearning,no randomizedcredit",
@@ -132,5 +132,297 @@
     }
   },
   "original_source_sha256": "50439de6fcd3ea3b0ec8ad9376eb1755ec842b2b60449bf42e7f403c030897f4",
-  "repair_freeze_sha256": "ab962cac8b6c67efee08936bbad4312aa3e0a1d347aba94095ef73b2a3bf135f"
+  "repair_freeze_sha256": "ab962cac8b6c67efee08936bbad4312aa3e0a1d347aba94095ef73b2a3bf135f",
+  "repair_assessment": {
+    "scope": "Retrospective learning repair of unchanged original batch002 preset05: a source51 forecast with declared vertical blur FMA compared with the full published2.3.17 AAR; no fresh randomized credit.",
+    "position": 22,
+    "preset": "EoS - glowsticks v2 04 music minimal oscilloscope vomit mix rnz.milk",
+    "original_score_retained": 97.5,
+    "repair_score": 100,
+    "score": 100,
+    "rows": [
+      {
+        "id": "structure1",
+        "claim": "Thin yellow/green curved strands appear on black in the opening.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Thin yellow/green opening strands and curved tips match on black in frames1\u20133."
+      },
+      {
+        "id": "structure2",
+        "claim": "The strands form a small incomplete loop or curled arc.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Small incomplete loops and curled arcs match through frames3\u201310, including their gaps and orientation."
+      },
+      {
+        "id": "structure3",
+        "claim": "A soft green glow develops near the central curve before receding.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "The soft green halo develops around the central curve around frames10\u201316 and then recedes on both sides."
+      },
+      {
+        "id": "structure4",
+        "claim": "Late output includes a sparse red/pink trailing curved line toward the lower-right region.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "The late red/pink tail curves down and right from its own start; its endpoint remains left of viewport centre. This preserves the earlier toward-direction adjudication and certifies no right-half placement."
+      },
+      {
+        "id": "motion1",
+        "claim": "The strand bends and changes its curvature through the window.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "The strand bends and changes curvature in corresponding frame pairs throughout the window; no reversal or omitted curve is visible."
+      },
+      {
+        "id": "motion2",
+        "claim": "The incomplete loop grows and then shifts/deforms.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "The incomplete loop grows, shifts, deforms and opens with matching timing, including the green halo and later warm trails."
+      },
+      {
+        "id": "motion3",
+        "claim": "The warm trailing line changes position while much of the field remains black.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "The warm trail changes position correspondingly while most of the field remains black."
+      },
+      {
+        "id": "motion4",
+        "claim": "Median motion=0.054821476340293884, p95=0.9474932670593252 viewport/s; relative5%.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Revised source RGB median/p95 estimates independently reproduce. Native errors are0.070630472%/0.052600922% of predicted; both streams support all29 transitions."
+      },
+      {
+        "id": "colour1",
+        "claim": "Early visible lines are mainly yellow/green.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Early yellow/green lines on black match."
+      },
+      {
+        "id": "colour2",
+        "claim": "Intermediate arcs introduce orange and a soft green halo.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Intermediate orange arcs and soft green halo phases match."
+      },
+      {
+        "id": "colour3",
+        "claim": "Late trails include red/pink with a predominantly black background.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Late sparse red/pink trails and predominantly black backgrounds match."
+      },
+      {
+        "id": "colour4",
+        "claim": "Mean luma=0.006793031571820999; saturation=0.13676759774486225; relative5%.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Revised luma/saturation estimates independently reproduce from source RGB. Native errors are0.054666791%/0.181306025% of predicted."
+      },
+      {
+        "id": "feedback1",
+        "claim": "Warp combines blur2 with an exponential luminance suppression term.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged authored warp combines blur2 and exponential luminance suppression. Source code confirms the mechanism; matching fields corroborate appearance. Native program identity is not directly exposed."
+      },
+      {
+        "id": "feedback2",
+        "claim": "It subtracts a small constant and takes a maximum against retained main feedback.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Unchanged authored subtraction and maximum with retained main feedback are source-confirmed; matching loop and halo history corroborates appearance."
+      },
+      {
+        "id": "feedback3",
+        "claim": "Composite subtracts slow roaming colour values and increases colour gain.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged composite colour subtraction and gain are source-confirmed; corresponding yellow, orange, green and pink phases corroborate appearance."
+      },
+      {
+        "id": "feedback4",
+        "claim": "Volume-noise multiplication modulates the retained thin structures.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Volume-noise modulation is source-confirmed; the declared raw noise epoch and matching thin structures corroborate appearance without certifying native program identity."
+      },
+      {
+        "id": "flashing1",
+        "claim": "Peak jump at[28, 29], darkening.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independent source/native descriptor recomputation finds the exact peak28\u219229, darkening."
+      },
+      {
+        "id": "flashing2",
+        "claim": "Exact coherent brightening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independent recomputation gives an empty coherent brightening list on both sides."
+      },
+      {
+        "id": "flashing3",
+        "claim": "Exact coherent darkening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independent recomputation gives an empty coherent darkening list on both sides."
+      },
+      {
+        "id": "flashing4",
+        "claim": "Peak mean-luma jump=0.00459787342697382; relative5%, exacteventtiming.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Revised peak0.00459787342697382 independently reproduces. Native0.004617440048605204 differs by0.425558075% of predicted; event timing matches."
+      }
+    ],
+    "critical_failure": false,
+    "critical_mismatch_claims": [],
+    "critical_unknown": false,
+    "unknown_claim_ids": [],
+    "fresh_random_credit": 0,
+    "successful_batch_credit": 0,
+    "revised_claim_ids": [
+      "motion4",
+      "colour4",
+      "flashing4"
+    ],
+    "original_authored_preset_byte_identical": true,
+    "original_prediction_and_grade_unchanged": true,
+    "numeric_checks": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "predicted": 0.054821476340293884,
+        "native": 0.0548601970076561,
+        "relative_predicted_error_percent": 0.07063047175501433,
+        "passes": true
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "predicted": 0.9474932670593252,
+        "native": 0.9479916572570792,
+        "relative_predicted_error_percent": 0.052600922358088845,
+        "passes": true
+      },
+      {
+        "feature": "mean_luma",
+        "predicted": 0.006793031571820999,
+        "native": 0.0067967451041719565,
+        "relative_predicted_error_percent": 0.05466679069124232,
+        "passes": true
+      },
+      {
+        "feature": "mean_saturation",
+        "predicted": 0.13676759774486225,
+        "native": 0.13701556563998263,
+        "relative_predicted_error_percent": 0.1813060251178517,
+        "passes": true
+      },
+      {
+        "feature": "peak_mean_luma_jump",
+        "predicted": 0.00459787342697382,
+        "native": 0.004617440048605204,
+        "relative_predicted_error_percent": 0.4255580746654448,
+        "passes": true
+      }
+    ],
+    "numeric_error_rule": "abs(native-predicted)/abs(predicted), relative5%; predicted0 exact",
+    "events": {
+      "peak_luma_jump_transition": [
+        28,
+        29
+      ],
+      "peak_direction": "darkening",
+      "coherent_brightening_transitions": [],
+      "coherent_darkening_transitions": []
+    },
+    "pixel_metrics": {
+      "mean_mae_rgb": 7.106140856194543e-06,
+      "mean_rmse_rgb": 0.00020113095524720848,
+      "peak_mae_rgb": 3.489242590148933e-05,
+      "peak_rmse_rgb": 0.0005822571692988276,
+      "source_sha256": "b8f2474758c398a9be9eed35bccb88aa65b5b98f8268fee0e5987f742317d1f0",
+      "native_sha256": "836e65a05436134168811dd33982351b6c18bc5efa3306f125335db0f1210c6c"
+    },
+    "max_channel_difference_rgb8": 15,
+    "validation": {
+      "repair_files8_hashes_verified": true,
+      "producer_model_modules79_verified": true,
+      "repair_context80_hashes_verified": true,
+      "source_prediction_frozen_utc": "2026-10-07T14:35:43.831314+00:00",
+      "capture_started_utc": "2026-10-07T14:36:11.542914+00:00",
+      "original_preset_from_full_published_AAR_exact": true,
+      "source51_reader_binary_identity_exact": true,
+      "source51_commit_patch_exact": true,
+      "requested_blur_profile": "apple-m4pro-gles-vertical-blur-fma-v1",
+      "effective_blur_profile": "apple-m4pro-gles-vertical-blur-fma-v1",
+      "full_published2317_AAR_JNI_deployment_hashes_verified": true,
+      "active_mainPID_noise_seed3567620661_verified": true,
+      "discarded_initial_seed3567587328_separate": true,
+      "indexed_count": 1,
+      "skipped_count": 0,
+      "rendered_frame_serial_delta": 30,
+      "source_and_native_rawRGB_descriptors_recomputed": true,
+      "source_native_supported_flow_transitions": 29,
+      "all30pairs_visually_reviewed": true,
+      "repaired_description_post_observation_chronology_explicit": true,
+      "exactly3numeric_clauses_changed": true,
+      "producer_snapshot_metadata_corrected": true,
+      "no_device_or_new_capture_actions": true
+    },
+    "hashes": {
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/original.milk": "50439de6fcd3ea3b0ec8ad9376eb1755ec842b2b60449bf42e7f403c030897f4",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/repaired-description.json": "f968c37588957db8d993c8c6a71da481a4f699568cbc6e5871c0a2289f17afa6",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/repair-freeze.json": "ab962cac8b6c67efee08936bbad4312aa3e0a1d347aba94095ef73b2a3bf135f",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/prediction-math.json": "dd80bb56a8b4b27c2854a3082aac399621fb9600e104317beff465baf013fc14",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/prediction.rgb.u8": "b8f2474758c398a9be9eed35bccb88aa65b5b98f8268fee0e5987f742317d1f0",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/native.rgb.u8": "836e65a05436134168811dd33982351b6c18bc5efa3306f125335db0f1210c6c",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/source.json": "59a4d837afbc8ab91f94e703f85d6e2dc14fcf73ed793b85eb727978afea2119",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/domain.json": "398d91e8653f5b6a803a3fbb1c87446cafecf2bc0a6e011d2d4b2b7dc3abf69a",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/numeric-validation.json": "4ff6abeb7f188658a0f0ac9782fbd495b12e9a62343cfa0b60ceec13715080cd",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/capture.json": "613c0c8d8451a5200efe9fd8f71773e99fbee33b6332762ce75a4d8e8534c1f8",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/native-metadata.json": "b2c93edb2a5780831c372d0b8ff8dcede7956c15d46842eefaad0f9089ef102a",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/native.random.jsonl": "29429a748ebc1cf1a01253f77c3f6252db91cb31dc433b7e62332f54939483ce",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/all30-metrics.json": "bae71f2891db93b3378b47aa0f4ca059d27af19a9a36309fbf2ba67fffdf9e58",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/glowsticks-original-fma2317/all30-comparison.png": "10ca852a5dbf0ff2908d679b5e27d951d67ffcc988b4a0b0e2dc1d73c5d95d5c",
+      "build/visual-loop/random30frames-core2316-2026-10-07/batch002/preset05/assessment.json": "67277fd52e73746674c97a93e852815b095b6dd45caba2a4a28b5978d137bfa0",
+      "build/visual-loop/random30frames-core2316-2026-10-07/batch002/preset05/prediction-description.json": "3cd1e0bf0fa2b1d18f513c9e22dedcff67d3de94e167b2f075db03357e5964fd"
+    },
+    "limits": [
+      "The original97.5 grade and original blind prediction remain unchanged. Repair100 earns no fresh, streak or batch credit.",
+      "Structure4 retains its previously recorded toward-direction reading. An absolute right-half endpoint is false and is not certified.",
+      "The three revised numerical clauses are retrospective. Source fields were frozen before capture; this is not a blind new-preset audit.",
+      "Feedback mechanisms are confirmed in source code and corroborated by appearance; native program selection is not directly observed.",
+      "Mean RGB MAE7.10614e-6 does not mean pixel identity. The maximum single-channel difference is15 RGB8 units.",
+      "Host libm/Android rotation bit identity remains false. Vertical FMA controls retain float differences despite quantized byte agreement.",
+      "A single preset and owned-backend window do not certify arbitrary presets, drivers or all float inputs."
+    ],
+    "created_utc": "2026-10-07T14:44:48.531178+00:00"
+  }
 }

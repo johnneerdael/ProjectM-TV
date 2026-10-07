@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "scope": "Frozenidentitycomposite latestfull2.3.17/source51control,nooriginalpresetpass/randomcredit",
+  "result": {
+    "scope": "Diagnosticidentitycomposite nooriginalpresetpass",
+    "frames": [
+      {
+        "frame": 1,
+        "different_channels": 0,
+        "maximum_rgb8_error": 0
+      },
+      {
+        "frame": 2,
+        "different_channels": 0,
+        "maximum_rgb8_error": 0
+      },
+      {
+        "frame": 3,
+        "different_channels": 0,
+        "maximum_rgb8_error": 0
+      },
+      {
+        "frame": 4,
+        "different_channels": 0,
+        "maximum_rgb8_error": 0
+      },
+      {
+        "frame": 5,
+        "different_channels": 0,
+        "maximum_rgb8_error": 0
+      },
+      {
+        "frame": 6,
+        "different_channels": 0,
+        "maximum_rgb8_error": 0
+      },
+      {
+        "frame": 7,
+        "different_channels": 192,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 8,
+        "different_channels": 326,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 9,
+        "different_channels": 887,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 10,
+        "different_channels": 785,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 11,
+        "different_channels": 2041,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 12,
+        "different_channels": 2812,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 13,
+        "different_channels": 2286,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 14,
+        "different_channels": 3731,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 15,
+        "different_channels": 1613,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 16,
+        "different_channels": 3793,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 17,
+        "different_channels": 1878,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 18,
+        "different_channels": 3304,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 19,
+        "different_channels": 4000,
+        "maximum_rgb8_error": 2
+      },
+      {
+        "frame": 20,
+        "different_channels": 5840,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 21,
+        "different_channels": 4642,
+        "maximum_rgb8_error": 2
+      },
+      {
+        "frame": 22,
+        "different_channels": 5680,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 23,
+        "different_channels": 6199,
+        "maximum_rgb8_error": 2
+      },
+      {
+        "frame": 24,
+        "different_channels": 7362,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 25,
+        "different_channels": 9243,
+        "maximum_rgb8_error": 2
+      },
+      {
+        "frame": 26,
+        "different_channels": 10062,
+        "maximum_rgb8_error": 1
+      },
+      {
+        "frame": 27,
+        "different_channels": 9273,
+        "maximum_rgb8_error": 2
+      },
+      {
+        "frame": 28,
+        "different_channels": 10838,
+        "maximum_rgb8_error": 2
+      },
+      {
+        "frame": 29,
+        "different_channels": 11809,
+        "maximum_rgb8_error": 2
+      },
+      {
+        "frame": 30,
+        "different_channels": 12113,
+        "maximum_rgb8_error": 2
+      }
+    ],
+    "motion_relative_errors_percent": {
+      "median_speed_viewports_per_second": 4.013468698530755,
+      "p95_speed_viewports_per_second": 0.11881529093602847
+    }
+  },
+  "capture": {
+    "status": "captured",
+    "frames": 30,
+    "command": "env CLASSPATH=/data/local/tmp/projectmtv-2317-qualification-20261007/classes.dex LD_PRELOAD=/data/local/tmp/projectmtv-2317-qualification-20261007/libbackendclock.so PROJECTMTV_TEST_RANDOM_SEED=12345 PROJECTMTV_TEST_CORE_PATH=/data/local/tmp/projectmtv-2317-qualification-20261007/libprojectmtv.so PROJECTMTV_TEST_RANDOM_LOG=/data/local/tmp/projectmtv-2317-qualification-20261007/zylot-feedback-isolation.random.jsonl /system/bin/app_process -Djava.library.path=/data/local/tmp/projectmtv-2317-qualification-20261007 /system/bin nl.neerdael.projectm.analysis.CoreBackendRunner /data/local/tmp/projectmtv-2317-qualification-20261007/libprojectmtv.so '/data/local/tmp/projectmtv-2317-qualification-20261007/published-core.aar|/data/local/tmp/projectmtv-2317-qualification-20261007/zylot-feedback-isolation-selection.apk' /data/local/tmp/projectmtv-2317-qualification-20261007/zylot-feedback-isolation-work /data/local/tmp/projectmtv-2317-qualification-20261007/zylot-feedback-isolation /data/local/tmp/projectmtv-2317-qualification-20261007/libbackendclock.so /data/local/tmp/projectmtv-2317-qualification-20261007/transport30.f32 30 stream",
+    "capture_started_utc": "2026-10-07T14:49:20.862892+00:00",
+    "release": "v2.3.17",
+    "aar_sha256": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+    "batch_freeze_sha256": "1a5f85e39a1ac1abee6583f57b5f3e398f65e4deee457f4a6b7b24651c1bafdb",
+    "header": {
+      "width": 256,
+      "height": 144,
+      "frames": 30,
+      "fps": 30,
+      "pid": 8535
+    },
+    "metadata": {
+      "backend": "published-core-jni",
+      "core_version": "4.1.7",
+      "preset": "predictor zylot feedback isolation2317.milk",
+      "frames": 30,
+      "width": 256,
+      "height": 144,
+      "fps": 30,
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "simulated_clock": true,
+      "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "gl_vendor": "Google (Apple)",
+      "egl_version_major": 1,
+      "egl_version_minor": 0,
+      "mesh_width": 48,
+      "mesh_height": 32,
+      "pcm_sample_rate": 44100,
+      "pcm_channels": 1,
+      "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+      "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+      "rendered_frame_serial_initial": 0,
+      "rendered_frame_serial": 30,
+      "rendered_frame_serial_delta": 30,
+      "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+      "skipped_count": 0,
+      "indexed_count": 1
+    },
+    "pixel_sha256": "c608ef5ff709b20f6e81495641c5b66b171a9e8a5592d715678b9a4612d1a1c3",
+    "diagnostic_errors": [],
+    "capture_finished_utc": "2026-10-07T14:49:21.493773+00:00"
+  },
+  "freeze_sha256": "1a5f85e39a1ac1abee6583f57b5f3e398f65e4deee457f4a6b7b24651c1bafdb",
+  "localization": "Smallprefinalfeedbackdifference firstframe7; originalcolour/noiseamplifiesmedianmotionmiss",
+  "remaining": "Feedbackprecision andcompositepow/noisecausality unresolved"
+}

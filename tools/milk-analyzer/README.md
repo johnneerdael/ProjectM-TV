@@ -1200,5 +1200,8 @@ this contraction order. A separately frozen random texture matches 6,476 of
 Those controls establish bounded evidence, not universal float identity. The
 opt-in path makes one cached ctypes `fmaf` call per output component; no speed
 improvement is claimed. The original Glowsticks learning retest passes all
-five numerical clauses; independent full-claim review remains pending and the
-original 97.5 score is preserved.
+five numerical clauses and independent full-claim review now scores its repaired
+30-frame window 100. The original 97.5 score is preserved, with zero fresh random
+credit. The warm tail's down/right movement is relative to its start; its endpoint
+is still left of the viewport centre, so absolute right-half placement is not
+certified. Final stable validation passes 1,427 tests and 78 subtests.
