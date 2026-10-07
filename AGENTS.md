@@ -595,3 +595,15 @@ before asserting active shader effects. Presence of a texture sample is not proo
 of visible influence: zero coefficients, inactive branches and framebuffer clipping
 can remove it. Preserve original failed narrative grades even when predicted RGB
 already matches; retrospective explanation repairs receive no fresh streak credit.
+
+
+Original patch0010 animation witness (2026-10-08):
+`tools/milk-analyzer/witnesses/patch-0010-aurora/` contains a deterministic builder,
+SOL/LUNA MilkDrop files and distinct PNGs sharing one basename. Build with
+`build/preset-lab-venv/bin/python tools/milk-analyzer/witnesses/patch-0010-aurora/build_witness.py`.
+Shape0 performs the per-frame named-image lookup; shaders never cache that emblem.
+The matched host sequence changes roots at20, soft-loads at21, resets at40.
+Published-AAR30frame creation forecasts and source-ablation120frame ownership checks
+are separate; the latter removes only0010. Both ablation roles repeat exactly and
+first differ at20. See the fixture README and verification-summary.json. No random
+streak credit is granted to authored/retrospective controls.

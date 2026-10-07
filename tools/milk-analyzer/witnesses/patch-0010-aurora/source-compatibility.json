@@ -1,0 +1,54 @@
+[
+  {
+    "pack": "pack-a",
+    "preset": "Aurora Ownership - SOL.milk",
+    "preset_sha256": "e55ccb2dcb3942d0a3d43fabe9ec839ae7f1212db29937b57b781d00d2edf039",
+    "shader": {
+      "warp": {
+        "accepted": true,
+        "shader_source_sha256": "2051ed04c47da48f0f0242f4721128dd8618d79043b7016d7a2a93b0c005da70",
+        "translator_sha256": "83022f58252dffa541cdbdd669e65988fc1cb128318ef2bd2531ff71acbac04e",
+        "engine": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"
+        }
+      },
+      "composite": {
+        "accepted": true,
+        "shader_source_sha256": "060e41aeb7e80aee2e5f53e383391b48180e9769d93b8d610b631199839b3d9b",
+        "translator_sha256": "83022f58252dffa541cdbdd669e65988fc1cb128318ef2bd2531ff71acbac04e",
+        "engine": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"
+        }
+      }
+    },
+    "runtime_loaded_successfully": true
+  },
+  {
+    "pack": "pack-b",
+    "preset": "Aurora Ownership - LUNA.milk",
+    "preset_sha256": "8b2f6686e6245655632230e710f729cf359837e613f57293693ef7db3b49048f",
+    "shader": {
+      "warp": {
+        "accepted": true,
+        "shader_source_sha256": "2051ed04c47da48f0f0242f4721128dd8618d79043b7016d7a2a93b0c005da70",
+        "translator_sha256": "83022f58252dffa541cdbdd669e65988fc1cb128318ef2bd2531ff71acbac04e",
+        "engine": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"
+        }
+      },
+      "composite": {
+        "accepted": true,
+        "shader_source_sha256": "060e41aeb7e80aee2e5f53e383391b48180e9769d93b8d610b631199839b3d9b",
+        "translator_sha256": "83022f58252dffa541cdbdd669e65988fc1cb128318ef2bd2531ff71acbac04e",
+        "engine": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381"
+        }
+      }
+    },
+    "runtime_loaded_successfully": true
+  }
+]

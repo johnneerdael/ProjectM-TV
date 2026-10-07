@@ -1456,3 +1456,15 @@ normalized-noise contribution remains negative and clamps to black. Its composit
 blur history is separate. The original97.5 grade stays failed; corrected explanations
 and repeat controls are retrospective. See
 `fixtures/core42-inactive-warp-explanation-2026-10-07.json`.
+
+Forecasts also expose `source_equation_states`: sampled main Q and custom-variable
+values from the already executed equations, before shader float32 packing. This
+helps distinguish controls that are assigned but stay inactive in a declared
+window from source-proven untouched constants. It is not an all-time invariant or
+a shader branch-activation proof. Record `frame` and `time` from declared render
+inputs; keep authored mutable `frame` separately as `eel_frame`.
+
+Original sound-reactive SOL/LUNA examples and the patch0010 host ownership witness
+are in `witnesses/patch-0010-aurora/README.md`. Their new source creations have
+separate published-AAR creation checks and engine-source patch ablations; neither
+grants randomized-streak credit.

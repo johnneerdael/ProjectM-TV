@@ -951,3 +951,19 @@ def test_forecast_exposes_proven_q_constants_without_zeroing_written_components(
     assert constants['_qa'][1]==0
     assert 3 not in constants['_qh']
     assert result['source_proofs']['basis']=='source-equation-write-analysis'
+
+
+def test_forecast_reports_conditional_q_state_for_its_declared_window(monkeypatch):
+    import forecast
+    binaries=Path(os.environ.get('MILK_TEST_CURRENT_BINARIES',BINARIES))
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    source=native(BASE+'per_frame_init_1=threshold=.05;\nper_frame_1=frame=123;q32=above(time,threshold);\n',binaries=binaries)
+    result=forecast.forecast_source(source,audio=audio(2),binaries=binaries,
+                                    domain=domain(),compatibility={})
+    trace=result['source_equation_states']
+    assert trace['basis']=='sampled-source-equation-execution'
+    assert [state['frame'] for state in trace['states']]==[0,1]
+    assert [state['eel_frame'] for state in trace['states']]==[123,123]
+    assert [state['q']['q32'] for state in trace['states']]==[0,1]
+    assert [state['custom']['threshold'] for state in trace['states']]==[.05,.05]
+    assert 3 not in result['source_proofs']['untouched_main_q_components']['_qh']

@@ -1,0 +1,312 @@
+{
+  "asset_hashes": {
+    "pack-a/presets/Aurora Ownership - SOL.milk": "e55ccb2dcb3942d0a3d43fabe9ec839ae7f1212db29937b57b781d00d2edf039",
+    "pack-a/textures/aurora_ownership_core.png": "5f25cec7b583f99bc668c5613a5ec3327d50c35ec536db19b385cdbef9c715d4",
+    "pack-b/presets/Aurora Ownership - LUNA.milk": "8b2f6686e6245655632230e710f729cf359837e613f57293693ef7db3b49048f",
+    "pack-b/textures/aurora_ownership_core.png": "d8a32a258cc8d990de98e6b20acd045356992f9dd698589a773ad22d96678325"
+  },
+  "created_presets": "Original SOL/LUNA with per-frame texturedcustomshape image; finalribbon/starrevision",
+  "source_prediction_before_render": true,
+  "creation_verification": {
+    "pack-a": {
+      "pack": "pack-a",
+      "frames": 30,
+      "metrics": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.06720861792564392,
+          "native": 0.06725955009460449,
+          "relative_error": 0.0007578219956393086,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.4330286800861359,
+          "native": 0.4329765975475311,
+          "relative_error": 0.0001202750325784905,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.07089911550283431,
+          "native": 0.07092215046286583,
+          "relative_error": 0.000324897706665986,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.6645478347937266,
+          "native": 0.6645418266455333,
+          "relative_error": 9.040956690736447e-06,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.011906687170267105,
+          "native": 0.011912260204553604,
+          "relative_error": 0.0004680591844569309,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "events_match": true,
+      "numeric_gate_pass": true,
+      "uses_full_aar": true,
+      "random_streak_credit": 0
+    },
+    "pack-b": {
+      "pack": "pack-b",
+      "frames": 30,
+      "metrics": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.06992065906524658,
+          "native": 0.06990770995616913,
+          "relative_error": 0.00018519718278642267,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.442704164981842,
+          "native": 0.44271114468574524,
+          "relative_error": 1.576606785146878e-05,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.0678678793211778,
+          "native": 0.0678929191082716,
+          "relative_error": 0.00036894901305666505,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.5784883975982666,
+          "native": 0.5784787555535634,
+          "relative_error": 1.6667654430492922e-05,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.012818757444620132,
+          "native": 0.012825376354157925,
+          "relative_error": 0.0005163456416417394,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "events_match": true,
+      "numeric_gate_pass": true,
+      "uses_full_aar": true,
+      "random_streak_credit": 0
+    }
+  },
+  "max_creation_relative_error": 0.0007578219956393086,
+  "ownership_ablation": {
+    "roles": "Allcurrentpatches versus only0010removed;engine-sourceworkers distinct from publishedAAR controls",
+    "source_commit": "654815d84d00cc14b2e81880bf4c91db467cb1d8",
+    "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+    "first_different_frame": 20,
+    "same_until_frame19": true,
+    "repeats_identical": {
+      "without-0010": true,
+      "patched": true
+    },
+    "no_gl_error_frames": true,
+    "left_core_colour_checks": {
+      "without-0010": {
+        "19": {
+          "left_core_mean_rgb8": [
+            120.72135416666667,
+            53.200954861111114,
+            8.878472222222221
+          ],
+          "warm_r_minus_b": 111.84288194444444
+        },
+        "20": {
+          "left_core_mean_rgb8": [
+            11.005208333333334,
+            31.48263888888889,
+            54.686197916666664
+          ],
+          "warm_r_minus_b": -43.680989583333336
+        },
+        "40": {
+          "left_core_mean_rgb8": [
+            9.366753472222221,
+            25.848524305555557,
+            44.16059027777778
+          ],
+          "warm_r_minus_b": -34.79383680555556
+        },
+        "59": {
+          "left_core_mean_rgb8": [
+            5.975260416666667,
+            14.31423611111111,
+            21.78472222222222
+          ],
+          "warm_r_minus_b": -15.809461805555555
+        },
+        "81": {
+          "left_core_mean_rgb8": [
+            3.521267361111111,
+            6.829427083333333,
+            8.791666666666666
+          ],
+          "warm_r_minus_b": -5.270399305555555
+        },
+        "119": {
+          "left_core_mean_rgb8": [
+            1.7048611111111112,
+            3.9696180555555554,
+            5.595486111111111
+          ],
+          "warm_r_minus_b": -3.890625
+        }
+      },
+      "patched": {
+        "19": {
+          "left_core_mean_rgb8": [
+            120.72135416666667,
+            53.200954861111114,
+            8.878472222222221
+          ],
+          "warm_r_minus_b": 111.84288194444444
+        },
+        "20": {
+          "left_core_mean_rgb8": [
+            123.05685763888889,
+            54.434895833333336,
+            9.29904513888889
+          ],
+          "warm_r_minus_b": 113.7578125
+        },
+        "40": {
+          "left_core_mean_rgb8": [
+            93.13758680555556,
+            42.50390625,
+            9.253038194444445
+          ],
+          "warm_r_minus_b": 83.88454861111111
+        },
+        "59": {
+          "left_core_mean_rgb8": [
+            36.947482638888886,
+            20.549479166666668,
+            8.832465277777779
+          ],
+          "warm_r_minus_b": 28.11501736111111
+        },
+        "81": {
+          "left_core_mean_rgb8": [
+            3.7057291666666665,
+            6.829427083333333,
+            8.772569444444445
+          ],
+          "warm_r_minus_b": -5.066840277777778
+        },
+        "119": {
+          "left_core_mean_rgb8": [
+            1.7048611111111112,
+            3.9696180555555554,
+            5.595486111111111
+          ],
+          "warm_r_minus_b": -3.890625
+        }
+      }
+    }
+  },
+  "video": {
+    "frames": 300,
+    "header": {
+      "width": 960,
+      "height": 540,
+      "frames": 300,
+      "fps": 30,
+      "pid": 15237
+    },
+    "raw_rgb_sha256": "5a0b4a47a47eac63d0f2df7e9e7437baec84c59536037f1925b7c69778b9be72",
+    "files_sha256": {
+      "classes.dex": "9ff6d0791b6ad57d56cb0f1c848787279595dc644f82dae0d90eeabc9ef1d7a4",
+      "libbackendclock.so": "177ece135179f132291b6c1e27278262cb2f02517399ab0142939f83d5d94d06",
+      "libprojectmtv.so": "4357f4bd398aa12934b95519c31e87c0447ef2189bc59e5ca7d5311446280c6e",
+      "published-core.aar": "c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65",
+      "selection.apk": "4192cc8ee84eadfc4acef6e67fe0f82ae816d9cce89e6d206cd5a2563db7efbb",
+      "audio.f32": "a85453de374189c9b5b0fcd91447e013fcde873329f5a4f254818a98d030297a"
+    },
+    "video_sha256": "87e85ae710fb7aface8912b4cf139d14ecb9a6f21a16fdf195e03a895f64cf86",
+    "metadata": {
+      "backend": "published-core-jni",
+      "core_version": "4.2.0",
+      "preset": "Aurora Ownership - SOL Centered Demo.milk",
+      "frames": 300,
+      "width": 960,
+      "height": 540,
+      "fps": 30,
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "simulated_clock": true,
+      "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "gl_vendor": "Google (Apple)",
+      "egl_version_major": 1,
+      "egl_version_minor": 0,
+      "mesh_width": 48,
+      "mesh_height": 32,
+      "pcm_sample_rate": 44100,
+      "pcm_channels": 1,
+      "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+      "native_trails_status": "Standard \u00b7 inactive (render 540p)",
+      "rendered_frame_serial_initial": 0,
+      "rendered_frame_serial": 300,
+      "rendered_frame_serial_delta": 300,
+      "native_trails_policy": "production default Standard; expected inactive below 1330p at 960x540",
+      "skipped_count": 0,
+      "indexed_count": 1
+    }
+  },
+  "random_streak_credit": 0,
+  "limits": [
+    "Creationnumericverification covers30frozenframes peroriginalpreset",
+    "Fullbugownershiptest covers120frames matchedper-role audio/timing andtwo repeats",
+    "Transition-shader-specific exactblendedRGB wasnotclaimed",
+    "10scentredvideo is a presentationvariant,not a300framepredictoraccuracyclaim"
+  ]
+}
