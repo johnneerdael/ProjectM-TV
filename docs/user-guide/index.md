@@ -1,35 +1,47 @@
-# ProjectM TV user guide
+# ProjectM TV
 
-ProjectM TV visualizes music another app plays on Android TV. It uses **ProjectM TV Engine**, our extensively modified fork of projectM based on unreleased projectM 4.2 master, pinned to commit `6f6480746`, with 9,606 MilkDrop presets. Start music in your player, open ProjectM TV and control it with your TV remote.
+**ProjectM TV** turns the music playing on your Android TV into MilkDrop visuals, at up to 4K. It ships **9,606 presets** and runs **ProjectM TV Engine**, a version of projectM tuned to behave like the original MilkDrop 2 and to run well on TV hardware.
 
-The engine combines expanded preset compatibility with authored-scale feedback and native-resolution geometry and output, up to 4K. It is designed to preserve the authored look as resolution increases, with [known visual and device limits](troubleshooting.md#native-trails-look-soft-or-different). The settings panel shows **ProjectM TV Engine** and labels the upstream version separately as **Based on unreleased projectM 4.2 master**, with pinned commit `6f6480746`. This development snapshot is not an upstream 4.2 release.
+![A ProjectM TV preset with the playing track's cover, artist and title](images/launch.jpg)
 
-![ProjectM TV showing a preset and the playing track](images/launch.jpg)
+> **Install on your TV with the Downloader app: code `4821216`**. See [Install and get started](getting-started.md).
 
-## Start here
+## Use it
 
-- [Install and get started](getting-started.md)
-- [Use the remote controls](controls.md)
-- [Adjust settings](settings.md)
-- [Choose a predictive collection](predictive-collections.md)
-- [Troubleshoot audio and performance](troubleshooting.md)
+- **[Install and get started](getting-started.md):** permissions, track titles, first settings.
+- **[Remote controls](controls.md)** and the **[settings reference](settings.md)**.
+- **[Preset moods](predictive-collections.md) (beta):** Chill, Normal and Intense, with example captures.
+- **[Custom preset packs](custom-packs.md):** upload up to 50,000 of your own presets from a phone.
+- **[Picture quality and performance](picture-quality.md):** resolution, Native trails, transitions, device tiers.
+- **[Troubleshooting](troubleshooting.md)**.
 
-## Choose the visuals
+ProjectM TV listens to the music app's own audio session. It never uses the microphone, stores no audio, and connects to the internet only if you enable auto-update.
 
-| Preset mood | What it includes |
-|---|---|
-| **All — default** | The bundled 9,606-preset library plus any uploaded pack, in shuffled order |
-| **Chill** | Beta activity scores 1–30 |
-| **Normal** | Beta activity scores 25–75 |
-| **Intense** | Beta activity scores 70–100 |
-| **Custom** | Only the uploaded pack; appears and becomes selected after upload |
+## What makes it different
 
-The choice is saved. Your TV's skip list and performance checks still apply, so the eligible count can be lower than the number packaged in a collection.
+**Presets that work.** MilkDrop presets were written for Windows and Direct3D 9. Many fail or look wrong in other players because of equation syntax MilkDrop tolerated, HLSL its compiler accepted, or pixel rules that differ between Direct3D and OpenGL. ProjectM TV Engine carries [13 patches](engine/patches.md) that restore MilkDrop 2's behaviour, each proven with before/after captures.
 
-This guide describes the current source, including [Native resolution and Native trails](settings.md). Standard trails is the default, and resolution defaults to Auto up to the panel’s native size, using target FPS and live memory headroom. Advanced › Resolution also offers fixed sizes and Native for full-panel testing, with memory protection retained. The setup walkthrough uses real screenshots from an earlier isolated test installation on an Ugoos AM6; Android settings can look different on your TV. At least 2 GB of RAM is highly recommended.
+**4K without the darkness.** At 4K, MilkDrop's one-pixel lines and pixel-sized blurs shrink to a fraction of the picture they covered on the author's screen, and many presets go dark. ProjectM TV scales lines, blur and texel steps to their authored size, and keeps feedback trails on an authored-scale canvas while drawing new geometry sharply at native resolution. Read [Rendering MilkDrop at 4K](engine/resolution.md).
 
-## For the curious
+**Built for a TV box.** Shaders compile in the background, so preset changes don't freeze the picture. Resolution adapts to frame rate and free memory, protecting the music app. Blends adapt to whether the GPU or the CPU is the limit. Read [How a frame reaches your TV](engine/pipeline.md).
 
-The [predictive collections article](predictive-collections.md) explains the beta activity scores, overlapping bands, published-AAR backend and limits. [Build and test](development.md) covers the source and verification tools.
+**Presets understood from their source.** This project has analysed every bundled preset: parsing it, translating every shader, and running it under controlled audio. It is now learning to predict a preset's behaviour from its code alone. In a randomized test, behaviour predicted from source matched the rendered result almost exactly for 85 of 100 presets. Read [The road ahead](predictor.md).
 
-[Project and releases](https://github.com/johnneerdael/ProjectM-TV) · [README quick start](https://github.com/johnneerdael/ProjectM-TV#readme) · [Milkbeat user guide](https://johnneerdael.github.io/Milkbeat/)
+## Write presets
+
+The **[preset authoring section](authoring/index.md)** documents how a `.milk` preset really executes, from MilkDrop 2's source code and the analysis of thousands of real presets:
+
+- the [file format](authoring/milk-format.md) and the [order of each frame](authoring/execution.md);
+- [equation semantics](authoring/equations.md), [shaders](authoring/shaders.md) and [textures](authoring/textures.md);
+- [motion, waves, shapes and blur](authoring/effects.md);
+- [how to test and predict presets](authoring/testing.md), and a [checklist](authoring/checklist.md) of mistakes found in real presets.
+
+## Under the hood
+
+- [ProjectM TV Engine](engine/index.md): lineage, design rules and the patch series.
+- [Validation and evidence](engine/validation.md): how changes are proven, and what the proofs do not cover.
+- [Build and test](development.md): building the app, using the engine in another app, and the test suites.
+
+ProjectM TV is open source (LGPL-2.1), and the presets and textures are CC0. Its engine also powers **[Milkbeat](https://github.com/johnneerdael/Milkbeat)**, a music player for Android TV by the same author, which plays local files, network shares and streaming services with MilkDrop visuals.
+
+[Project on GitHub](https://github.com/johnneerdael/ProjectM-TV) · [Releases](https://github.com/johnneerdael/ProjectM-TV/releases) · [Report an issue](https://github.com/johnneerdael/ProjectM-TV/issues)
