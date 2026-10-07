@@ -202,22 +202,28 @@ thickness and additive blending without overwriting defaults. Rebuild mode math
 when the evaluated mode changes; retain integer truncation, signed remainder and
 projectM's 16-mode extension. Reuse prepared geometry for the second draw.
 
-Witnesses: `319.milk`, `idiot - Forty Six and 2 (pushit!).milk` and
+Witness candidates: `idiot - Forty Six and 2 (pushit!).milk` and
 `Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk`.
 Use multiple timestamps to show an authored mode/flag change. General compatibility;
 not all 16 modes belong to original MilkDrop 2.
 
-![Upstream versus current patched renderer: 319.milk](superpowers/evidence/current-patch-proof/0007-wave.png)
+![Unchanged original waveform-mode witness](superpowers/evidence/current-patch-proof/0007-wormhole-visible.png)
 
-Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
+This original Hexcollie wormhole preset has `nWaveMode=3` but evaluates
+`wave_mode=q8%7` every frame. Removing only 0007 changes all 120 frames; both roles
+repeat exactly with zero GL errors. At frame 29,135,296/147,456 pixels differ through
+waveform geometry and feedback. The raw images/crops retain brightness; the right
+column is a labeled ×2 absolute-difference map. [Raw upstream/no0007/current panel](superpowers/evidence/current-patch-proof/0007-wormhole.png).
 
-![Current series without and with patch 0007](superpowers/evidence/current-patch-proof/0007-wave-isolated.png)
+![Controlled waveform mode switch, enlarged](superpowers/evidence/current-patch-proof/0007-wave-mode-visible.png)
 
-Isolated removal of 0007, same inputs: 0/120 RGB frames differ; both roles repeat exactly with zero GL-error frames. This selected input does not activate a visible difference from this patch.
+The synthetic mode switch changes 60 frames after frame 60. Its aligned crops show
+the waveform geometry directly; it is labeled as a diagnostic rather than an
+original artist preset.
 
-![Controlled diagnostic for patch 0007](superpowers/evidence/current-patch-proof/0007-wave-mode.png)
-
-Synthetic activation fixture, not an unchanged bundled preset: 60/120 RGB frames differ when removing only 0007. Successful roles repeat exactly; zero GL-error frames.
+`319.milk` sets `wave_a=0`, so it is **not a visual waveform-fix witness**. Its earlier
+[zero-effect ablation](superpowers/evidence/current-patch-proof/0007-wave-isolated.png)
+remains a preservation record, but receives no positive 0007 proof credit.
 
 ## 0008 — Evaluated legacy display controls
 
@@ -252,13 +258,19 @@ includes opaque-channel rounding. Internal generated textures are a separate pat
 control beside its image. Upstream value is an explicit user-texture alpha policy;
 exact SOIL rounding is a compatibility choice rather than a universal loader rule.
 
-![Upstream versus current patched renderer: suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk](superpowers/evidence/current-patch-proof/0009-texture.png)
+![Visible texture-compatibility comparison at frame 29](superpowers/evidence/current-patch-proof/0009-visible.png)
 
-Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
+Frame 29 isolates only 0009. The outlined rectangle marks the same source crop in
+both raw images; lower crops use nearest enlargement with **no brightness gain**.
+The right column is **max absolute RGB difference ×8, clipped at 255**, not rendered
+appearance. 79,638/147,456 pixels change, mean RGB8 absolute difference 3.657 and
+maximum channel difference 201. Small upload-byte changes can amplify through
+feedback; this is compatibility evidence, not a Windows appearance claim.
 
-![Original preset control for patch 0009](superpowers/evidence/current-patch-proof/0009-original.png)
-
-Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing only 0009 changes 120/120 RGB frames under these inputs. All successful roles repeat exactly with zero GL-error frames; rejected roles are explicitly labeled.
+[Raw upstream/current comparison](superpowers/evidence/current-patch-proof/0009-texture.png)
+and [raw upstream/no 0009/current endpoint](superpowers/evidence/current-patch-proof/0009-original.png)
+remain available. At frame 119 the difference is quieter (mean RGB8 delta 0.485);
+the previous full-frame endpoint alone was poor visual presentation.
 
 ## 0010 — Per-preset texture search-path ownership
 
@@ -317,13 +329,19 @@ Use sample 06 identified by exact hash in the
 the `rad=.002`, `x=y=.5` diagnostic shape. Compare textured/untextured draws and
 different target dimensions. A D3D9 coverage oracle is not a MilkDrop 2 screenshot.
 
-![Controlled diagnostic for patch 0012](superpowers/evidence/current-patch-proof/0012-subpixel-shape.png)
+![Original dark witness: enlarged shape seed coverage](superpowers/evidence/current-patch-proof/0012-visible.png)
 
-Synthetic activation fixture, not an unchanged bundled preset: 120/120 RGB frames differ when removing only 0012. Successful roles repeat exactly; zero GL-error frames. Removing the patch loses all subpixel shape coverage; the current renderer produces nonzero pixels.
+The original stays dark. At frame 29, removing only 0012 changes **three pixels**,
+with maximum channel difference 167/255. The same 24×16 source rectangle is enlarged
+20× with nearest sampling and **no brightness gain**. The right column is a
+labeled ×4 absolute-difference map. This shows restored subpixel seed coverage,
+not a broadly brightened preset. [Raw three-role endpoint](superpowers/evidence/current-patch-proof/0012-original.png).
 
-![Original preset control for patch 0012](superpowers/evidence/current-patch-proof/0012-original.png)
+![Controlled subpixel shape coverage](superpowers/evidence/current-patch-proof/0012-subpixel-shape.png)
 
-Unchanged bundled preset; upstream/current-minus-patch/current columns. Removing only 0012 changes 120/120 RGB frames under these inputs. All successful roles repeat exactly with zero GL-error frames; rejected roles are explicitly labeled.
+The separate diagnostic loses all shape coverage without 0012 and produces nonzero
+pixels with it. Its dimensions, source and hashes are retained; it is not the
+unchanged original preset or a MilkDrop 2 screenshot.
 
 ## 0013 — Custom-composite texel centres
 
@@ -337,15 +355,20 @@ Expected output is one full-bright texel rather than four quarter-bright pixels.
 Retain resize/repeated-draw controls and unchanged warp offsets. Sampling correctness,
 not a brightness setting or speedup; the original presets remain authored sparse/dark.
 
-![Controlled diagnostic for patch 0013](superpowers/evidence/current-patch-proof/0013-composite-impulse-zoom.png)
+![Composite impulse at native pixels and enlarged scale](superpowers/evidence/current-patch-proof/0013-composite-impulse-zoom.png)
 
-Synthetic activation fixture, not an unchanged bundled preset: 120/120 RGB frames differ when removing only 0013. Successful roles repeat exactly; zero GL-error frames. The isolated old composite spreads the impulse into four RGB8≤64 pixels; corrected output is one pixel with maximum 255. The lower row enlarges an identical 8×8 centre crop 16× with nearest sampling; it changes no brightness.
+**The clearest sampling control:** without 0013, one impulse becomes four pixels
+with maximum RGB8=64; with 0013, it remains one pixel at 255. The lower row enlarges
+an identical 8×8 centre crop 16× using nearest sampling; brightness is unchanged.
+This diagnostic directly exposes the redundant half-texel bias.
 
-![Unchanged original preset control for0013](superpowers/evidence/current-patch-proof/0013-original.png)
+![Original dark preset: enlarged composite sampling difference](superpowers/evidence/current-patch-proof/0013-visible.png)
 
-Removing only 0013 changes all 120 RGB frames for this unchanged sample 06 preset.
-All three roles repeat exactly with zero GL-error frames. This is a256×144
-source control under the recorded input, not a Windows appearance prediction.
+For the unchanged original at frame 29, only **six pixels** change, maximum channel
+difference 115/255. Raw aligned crops are enlarged20× without brightness gain;
+the right column is a labeled ×4 absolute-difference map. This is a small sampled
+seed change, not a large whole-scene improvement.
+[Raw original three-role endpoint](superpowers/evidence/current-patch-proof/0013-original.png).
 
 ## Contribution order and acceptance boundaries
 

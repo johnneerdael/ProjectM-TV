@@ -141,3 +141,19 @@ new task-owned paths and identities. Do not overwrite existing attempt directori
 The source receipts use zero-context unified diffs. Apply them only to the
 identified parent source with `git apply --unidiff-zero`; source hash inventories
 provide the full-file verification.
+
+## Where subtle differences are visible
+
+The primary patch document now uses earlier retained frames, aligned nearest
+crops and explicitly labeled difference maps for9/12/13. Raw before/after crops
+are never brightened. Whole-frame crop outlines are annotations; the third column
+is derived data, not rendered appearance. `visibility-figures.json` records the
+source RGB hashes, crop, map formula/gain/clipping and numeric differences.
+The original dark witness changes only3 pixels for0012 and6 for0013 at frame29;
+those small seed changes must not be sold as whole-scene brightness fixes.
+
+The earlier319 waveform example sets wave_a=0 and receives no positive0007 credit.
+The unchanged Hexcollie wormhole preset evaluates wave_mode=q8%7; new
+`wave-witness-results.json` records exact two-repeat/all120-frame controls for
+upstream, current minus0007 and current. Its all120-frame causal change is now the
+primary original waveform example. Initial captures remain preserved.
