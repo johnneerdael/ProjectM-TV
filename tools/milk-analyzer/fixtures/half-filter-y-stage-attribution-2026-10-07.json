@@ -131,5 +131,15 @@
   "rejected_bounded_hypotheses": [
     "Shared five-guard-bit Yproduct truncation failscase14.",
     "Independent15fractional-mantissa product truncation failsboth completeY sweeps."
-  ]
+  ],
+  "coefficient_normalized_rejection": {
+    "rule": "fixed8nearestphase; E=maxtexel exponent + maxcoefficient exponent; truncate4products at2^(E\u221217); finalhalf tiesaway",
+    "complete_y_sweeps_matches": 514,
+    "complete_y_sweeps_total": 514,
+    "saved_broader_control_matches": 1746,
+    "saved_broader_control_total": 1824,
+    "disposition": "Rejected ascompletegeneralrule despite exacttwo-sweepfit",
+    "artifact_sha256": "1294cfd93187ac74739b4e17675e8bc81c012f9f075e3295309145956987cd28",
+    "artifact": "build/visual-loop/half-filter-review/coefficient-normalized-product-candidate.json"
+  }
 }
