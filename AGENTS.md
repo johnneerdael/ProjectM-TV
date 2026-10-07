@@ -517,3 +517,7 @@ shared array aliases. `materials_sha256` uses the effective decoded float32 arra
 and manifests under `effective-texture-arrays-v1`, including delegated procedural
 sampling. Revalidate before returning; do not substitute unchanged file manifests
 for the texture bytes actually consumed. Historical material identities stay sealed.
+Pass observers private frame copies; callback edits must not change retained
+frames after descriptor calculation. The opt-in GLES300 highp infinity policy
+applies only to supported custom-shader math and normalized output, not mediump
+warp coordinates. Keep NaN/pow/FTZ/sign and sampler-domain negative controls.

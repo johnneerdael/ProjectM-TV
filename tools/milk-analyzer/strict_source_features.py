@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from field_math import evaluate,UnresolvedMath
+from field_math import evaluate,UnresolvedMath,GLES_HIGHP_INFINITY
 from palette_features import palette_summary
 from shader_fields import ShaderFields
 from shader_uniforms import source_uniforms
@@ -36,7 +36,7 @@ def input_dependencies(expression):
     return names,hidden,textures
 
 
-def colour_queries(expression,query_inputs,*,max_queries=128):
+def colour_queries(expression,query_inputs,*,max_queries=128,numeric_policy='strict'):
     if type(max_queries) is not int or max_queries<=0:raise ValueError('positive query budget required')
     if not isinstance(query_inputs,list) or not query_inputs or len(query_inputs)>max_queries:
         raise ValueError('nonempty query list within declared budget required')
@@ -45,6 +45,7 @@ def colour_queries(expression,query_inputs,*,max_queries=128):
     spatial=bool(names&{'_uv','_rad_ang','_vDiffuse','_uv_orig'}) or hidden or textures
     report={'status':'unknown','basis':STRICT,'uses_display_fields':False,
             'query_count':len(query_inputs),'max_queries':max_queries,
+            'numeric_policy':numeric_policy,
             'dependencies':sorted(names),'hidden_plan_dependencies':hidden,
             'spatially_uniform':not spatial,'coverage_kind':
                 'source expression independent of spatial/texture inputs' if not spatial else
@@ -53,8 +54,8 @@ def colour_queries(expression,query_inputs,*,max_queries=128):
     try:
         rgb=[]
         for inputs in query_inputs:
-            value=np.asarray(evaluate(expression,inputs=inputs),dtype=np.float32)
-            if value.shape!=(3,) or not np.all(np.isfinite(value)):
+            value=np.asarray(evaluate(expression,inputs=inputs,numeric_policy=numeric_policy),dtype=np.float32)
+            if value.shape!=(3,) or np.any(np.isnan(value)) or (np.any(np.isinf(value)) and numeric_policy!=GLES_HIGHP_INFINITY):
                 raise UnresolvedMath('finite shader RGB return required')
             rgb.append(np.clip(value,0,1))
         palette=palette_summary(np.asarray(rgb))
@@ -78,6 +79,9 @@ def strict_features(source,*,audio,binaries,domain,compatibility):
     if audio.get('uses_rendered_reference') is not False or not audio.get('frames'):
         raise ValueError('source-generated audio/context required')
     profile=domain['profile'];width=domain['width'];height=domain['height']
+    numeric_policy=domain.get('shader_numeric_policy','strict')
+    if numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise ValueError('unsupported shader numeric policy')
+    if numeric_policy!='strict' and profile!='gles300':raise ValueError('highp shader numeric policy requires GLES300')
     if any(type(value) is not int or value<=0 for value in (width,height)):raise ValueError('positive viewport required')
     engine=source.get('parser_inputs',{}).get('engine',{})
     archive=source['parser_inputs']['engine_archive_sha256']
@@ -140,7 +144,7 @@ def strict_features(source,*,audio,binaries,domain,compatibility):
             try:
                 common=source_uniforms(scene,index,names=None if hidden else names)
                 result=colour_queries(expression,[{**common,**query} for query in queries],
-                                      max_queries=domain.get('max_shader_queries',128))
+                                      max_queries=domain.get('max_shader_queries',128),numeric_policy=numeric_policy)
             except (ValueError,TypeError) as error:
                 unknown.append(str(error));continue
             if result['status']!='computed':unknown.extend(result['unknown_reasons']);continue

@@ -200,6 +200,9 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if source.get('reader_sha256')!=reader_sha:
         raise ValueError('source parser binary identity mismatch')
     width, height = domain['width'], domain['height']
+    shader_numeric_policy=domain.get('shader_numeric_policy','strict')
+    if shader_numeric_policy!='strict' and domain['profile']!='gles300':
+        raise ValueError('highp shader numeric policy requires GLES300')
     initial = np.broadcast_to(colour,(height,width,4)).copy()
     warp_code = source.get('sections',{}).get('warp_',{}).get('source','')
     # Native MilkdropPreset uses this literal substring test, including comments.
@@ -211,7 +214,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         initial_feedback=initial, warp_reads_blur=warp_reads_blur, blur_levels=domain['blur_levels'],
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
-        main_sampling_profile=domain.get('main_sampling_profile','portable'))
+        main_sampling_profile=domain.get('main_sampling_profile','portable'),shader_numeric_policy=shader_numeric_policy)
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
@@ -328,7 +331,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
             predicted['history']['unused_warp_uv_domain']=unused_warp_uv_domain
         descriptors.add(predicted)
         if on_frame is not None:
-            on_frame(predicted)
+            on_frame(copy.deepcopy(predicted))
         frames.append(predicted if retain_surfaces else
                       {key:value for key,value in predicted.items() if key not in {'display','feedback','warp_uv'}})
     if model_file_hashes()!=model_hashes:
@@ -347,6 +350,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                           materials_sha256=material_sha),
         provenance=dict(engine=copy.deepcopy(engine),reader_sha256=reader_sha,wave_binary_sha256=builtin['native_binary_sha256'],
                         material_input_policy=None if material_identity is None else material_identity['policy'],
+                        shader_numeric_policy=shader_numeric_policy,
                         main_binding_policy=main_binding_policy,
                         shape_sampler_policy=shape_sampler_policy,native_required_blur_level=required_blur_level,
                         blur_range_policy=blur_range_policy,warp_zoom_policy=warp_zoom_policy,

@@ -82,6 +82,13 @@ domain, compatibility, engine/archive and reader identities. Query policy is par
 of the declared domain. Output is a cached strict source feature record; profile
 changes can rescore it without executing source again.
 
+`--shader-numeric-policy gles300-highp-infinity-v1` explicitly enables the
+restricted highp infinity policy for GLES300 custom shader queries. Supported
+infinities may reach a finite consumer or the declared normalized RGB sink.
+Incoming nonfinite inputs, NaNs, ambiguous/subnormal division, nonfinite texture
+arguments and undefined powers stay unknown. The default remains `strict`;
+the policy does not change handwritten mediump warp math or certify GPU parity.
+
 ```sh
 python -m pytest tools/milk-analyzer/test_strict_source_features.py tools/milk-analyzer/test_source_transport.py -q
 ```

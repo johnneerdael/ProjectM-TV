@@ -1,0 +1,710 @@
+{
+  "date": "2026-10-07",
+  "release": "2.3.15",
+  "aar_sha256": "fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327",
+  "scope": "One-step optional source-field-simulation arithmetic diagnosis; no native capture or image inspection",
+  "default_policy": "strict",
+  "opt_in_policy": "gles300-highp-infinity-v1",
+  "native_frames_consumed": false,
+  "display_fields_constructed": true,
+  "appearance_credit": false,
+  "full_60_step_recheck": false,
+  "cases": [
+    {
+      "case": 58,
+      "preset": "141 nz.milk",
+      "preset_sha256": "5b5961c19df019755dd44baf1cb7b15965a17b7590a7968939bfeb458a6c0c6a",
+      "before": {
+        "status": "unresolved",
+        "reason": "unresolved grid numeric domain: divide",
+        "failure": {
+          "reason": "unresolved grid numeric domain: divide",
+          "stage": "composite",
+          "pipeline_frame": 0,
+          "operation": "divide",
+          "lane": 0,
+          "pixel_yx": [
+            0,
+            0
+          ],
+          "bad_lane_count": 36864,
+          "raw": [
+            {
+              "ieee": "positive_infinity"
+            },
+            {
+              "ieee": "positive_infinity"
+            },
+            {
+              "ieee": "positive_infinity"
+            }
+          ],
+          "arguments": [
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "expression": {
+            "op": "divide",
+            "dtype": "float3",
+            "detail": {},
+            "args": [
+              {
+                "op": "cast",
+                "dtype": "float3",
+                "detail": {
+                  "target_type": "float3"
+                },
+                "args": [
+                  {
+                    "op": "constant",
+                    "dtype": "int",
+                    "detail": {
+                      "value": 1,
+                      "native_value": 1,
+                      "renderer_literal": null
+                    },
+                    "args": []
+                  }
+                ]
+              },
+              {
+                "op": "add",
+                "dtype": "float3",
+                "detail": {},
+                "args": [
+                  {
+                    "op": "multiply",
+                    "dtype": "float3",
+                    "detail": {
+                      "zero_guard": true
+                    },
+                    "args": [
+                      {
+                        "op": "member",
+                        "dtype": "float3",
+                        "detail": {
+                          "field": "xyz",
+                          "swizzle": true
+                        },
+                        "args": [
+                          {
+                            "op": "sample",
+                            "dtype": "float4",
+                            "detail": {
+                              "sampler": "sampler_blur2",
+                              "surface": "blur_of_pre_composite_feedback",
+                              "frame": -1,
+                              "site_index": 3,
+                              "canonical_texture": "blur2",
+                              "coordinate_convention": "MilkDrop shader UV; underlying main/blur flips remain explicit pipeline requirements",
+                              "intrinsic": "tex2D"
+                            },
+                            "args": []
+                          }
+                        ]
+                      },
+                      {
+                        "op": "cast",
+                        "dtype": "float3",
+                        "detail": {
+                          "target_type": "float3"
+                        },
+                        "args": [
+                          {
+                            "op": "member",
+                            "dtype": "float",
+                            "detail": {
+                              "field": "z",
+                              "swizzle": true
+                            },
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "cast",
+                    "dtype": "float3",
+                    "detail": {
+                      "target_type": "float3"
+                    },
+                    "args": [
+                      {
+                        "op": "member",
+                        "dtype": "float",
+                        "detail": {
+                          "field": "w",
+                          "swizzle": true
+                        },
+                        "args": [
+                          {
+                            "op": "input",
+                            "dtype": "float4",
+                            "detail": {
+                              "name": "_c5"
+                            },
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "after": {
+        "status": "computed",
+        "reason": null,
+        "failure": null
+      }
+    },
+    {
+      "case": 86,
+      "preset": "suksma - Chemlock - Spot (Zylot & Aderrasi equations) and martin shaders + christ's eternal damnation - if the condom fits vampires.milk",
+      "preset_sha256": "7f369ea9c8bc36bc4961ee1980149efd540f35598b985d5767841271093eea4b",
+      "before": {
+        "status": "unresolved",
+        "reason": "unresolved grid numeric domain: dot",
+        "failure": {
+          "reason": "unresolved grid numeric domain: dot",
+          "stage": "warp",
+          "pipeline_frame": 0,
+          "operation": "dot",
+          "lane": 0,
+          "pixel_yx": [
+            0,
+            0
+          ],
+          "bad_lane_count": 8282,
+          "raw": [
+            {
+              "ieee": "positive_infinity"
+            }
+          ],
+          "arguments": [
+            [
+              2.2630283818517287e+28,
+              1.0635653346428034e+29
+            ],
+            [
+              2.2630283818517287e+28,
+              1.0635653346428034e+29
+            ]
+          ],
+          "expression": {
+            "op": "dot",
+            "dtype": "float",
+            "detail": {},
+            "args": [
+              {
+                "op": "loop_result",
+                "dtype": "float2",
+                "detail": {
+                  "name": "newzz",
+                  "termination": "runtime checked; iteration budget is not a termination proof"
+                },
+                "args": [
+                  {
+                    "op": "constant",
+                    "dtype": "int",
+                    "detail": {
+                      "value": 1,
+                      "native_value": 1,
+                      "renderer_literal": null
+                    },
+                    "args": []
+                  },
+                  {
+                    "op": "input",
+                    "dtype": "float2",
+                    "detail": {
+                      "name": "tmp",
+                      "unbound_default": 0,
+                      "basis": "GLES link-time initialization when no explicit binding is supplied"
+                    },
+                    "args": []
+                  },
+                  {
+                    "op": "add",
+                    "dtype": "float2",
+                    "detail": {},
+                    "args": [
+                      {
+                        "op": "multiply",
+                        "dtype": "float2",
+                        "detail": {
+                          "zero_guard": true
+                        },
+                        "args": [
+                          {
+                            "op": "subtract",
+                            "dtype": "float2",
+                            "detail": {},
+                            "args": []
+                          },
+                          {
+                            "op": "cast",
+                            "dtype": "float2",
+                            "detail": {
+                              "target_type": "float2"
+                            },
+                            "args": []
+                          }
+                        ]
+                      },
+                      {
+                        "op": "construct",
+                        "dtype": "float2",
+                        "detail": {},
+                        "args": [
+                          {
+                            "op": "unary",
+                            "dtype": "float",
+                            "detail": {
+                              "operator": 0
+                            },
+                            "args": []
+                          },
+                          {
+                            "op": "constant",
+                            "dtype": "int",
+                            "detail": {
+                              "value": 0,
+                              "native_value": 0,
+                              "renderer_literal": null
+                            },
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "loop_result",
+                "dtype": "float2",
+                "detail": {
+                  "name": "newzz",
+                  "termination": "runtime checked; iteration budget is not a termination proof"
+                },
+                "args": [
+                  {
+                    "op": "constant",
+                    "dtype": "int",
+                    "detail": {
+                      "value": 1,
+                      "native_value": 1,
+                      "renderer_literal": null
+                    },
+                    "args": []
+                  },
+                  {
+                    "op": "input",
+                    "dtype": "float2",
+                    "detail": {
+                      "name": "tmp",
+                      "unbound_default": 0,
+                      "basis": "GLES link-time initialization when no explicit binding is supplied"
+                    },
+                    "args": []
+                  },
+                  {
+                    "op": "add",
+                    "dtype": "float2",
+                    "detail": {},
+                    "args": [
+                      {
+                        "op": "multiply",
+                        "dtype": "float2",
+                        "detail": {
+                          "zero_guard": true
+                        },
+                        "args": [
+                          {
+                            "op": "subtract",
+                            "dtype": "float2",
+                            "detail": {},
+                            "args": []
+                          },
+                          {
+                            "op": "cast",
+                            "dtype": "float2",
+                            "detail": {
+                              "target_type": "float2"
+                            },
+                            "args": []
+                          }
+                        ]
+                      },
+                      {
+                        "op": "construct",
+                        "dtype": "float2",
+                        "detail": {},
+                        "args": [
+                          {
+                            "op": "unary",
+                            "dtype": "float",
+                            "detail": {
+                              "operator": 0
+                            },
+                            "args": []
+                          },
+                          {
+                            "op": "constant",
+                            "dtype": "int",
+                            "detail": {
+                              "value": 0,
+                              "native_value": 0,
+                              "renderer_literal": null
+                            },
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "after": {
+        "status": "computed",
+        "reason": null,
+        "failure": null
+      }
+    },
+    {
+      "case": 104,
+      "preset": "phledge lasso blaq wholes aren't natural wr disequilibir.milk",
+      "preset_sha256": "f43f32bbb705dc0705a2557b358780d866c4330d1f2037cdc3abf4041528bbc6",
+      "before": {
+        "status": "unresolved",
+        "reason": "pow grid zero base with nonpositive exponent domain",
+        "failure": {
+          "reason": "pow grid zero base with nonpositive exponent domain",
+          "stage": "composite",
+          "pipeline_frame": 0,
+          "operation": "pow",
+          "lane": 0,
+          "pixel_yx": [
+            0,
+            0
+          ],
+          "bad_lane_count": null,
+          "raw": null,
+          "arguments": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -0.10000002384185791,
+              -0.10000002384185791,
+              -0.10000002384185791
+            ]
+          ],
+          "expression": {
+            "op": "pow",
+            "dtype": "float3",
+            "detail": {},
+            "args": [
+              {
+                "op": "abs",
+                "dtype": "float3",
+                "detail": {
+                  "lowering": "pinned projectM DX9 compatibility"
+                },
+                "args": [
+                  {
+                    "op": "divide",
+                    "dtype": "float3",
+                    "detail": {},
+                    "args": [
+                      {
+                        "op": "member",
+                        "dtype": "float3",
+                        "detail": {
+                          "field": "xyz",
+                          "swizzle": true
+                        },
+                        "args": [
+                          {
+                            "op": "add",
+                            "dtype": "float3",
+                            "detail": {},
+                            "args": []
+                          }
+                        ]
+                      },
+                      {
+                        "op": "cast",
+                        "dtype": "float3",
+                        "detail": {
+                          "target_type": "float3"
+                        },
+                        "args": [
+                          {
+                            "op": "member",
+                            "dtype": "float",
+                            "detail": {
+                              "field": "z",
+                              "swizzle": true
+                            },
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "cast",
+                "dtype": "float3",
+                "detail": {
+                  "target_type": "float3"
+                },
+                "args": [
+                  {
+                    "op": "subtract",
+                    "dtype": "float",
+                    "detail": {},
+                    "args": [
+                      {
+                        "op": "cast",
+                        "dtype": "float",
+                        "detail": {
+                          "target_type": "float"
+                        },
+                        "args": [
+                          {
+                            "op": "constant",
+                            "dtype": "int",
+                            "detail": {
+                              "value": 1,
+                              "native_value": 1,
+                              "renderer_literal": null
+                            },
+                            "args": []
+                          }
+                        ]
+                      },
+                      {
+                        "op": "dot",
+                        "dtype": "float",
+                        "detail": {},
+                        "args": [
+                          {
+                            "op": "saturate",
+                            "dtype": "float3",
+                            "detail": {},
+                            "args": []
+                          },
+                          {
+                            "op": "construct",
+                            "dtype": "float3",
+                            "detail": {},
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "after": {
+        "status": "unresolved",
+        "reason": "pow grid zero base with nonpositive exponent domain",
+        "failure": {
+          "reason": "pow grid zero base with nonpositive exponent domain",
+          "stage": "composite",
+          "pipeline_frame": 0,
+          "operation": "pow",
+          "lane": 0,
+          "pixel_yx": [
+            0,
+            0
+          ],
+          "bad_lane_count": null,
+          "raw": null,
+          "arguments": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -0.10000002384185791,
+              -0.10000002384185791,
+              -0.10000002384185791
+            ]
+          ],
+          "expression": {
+            "op": "pow",
+            "dtype": "float3",
+            "detail": {},
+            "args": [
+              {
+                "op": "abs",
+                "dtype": "float3",
+                "detail": {
+                  "lowering": "pinned projectM DX9 compatibility"
+                },
+                "args": [
+                  {
+                    "op": "divide",
+                    "dtype": "float3",
+                    "detail": {},
+                    "args": [
+                      {
+                        "op": "member",
+                        "dtype": "float3",
+                        "detail": {
+                          "field": "xyz",
+                          "swizzle": true
+                        },
+                        "args": [
+                          {
+                            "op": "add",
+                            "dtype": "float3",
+                            "detail": {},
+                            "args": []
+                          }
+                        ]
+                      },
+                      {
+                        "op": "cast",
+                        "dtype": "float3",
+                        "detail": {
+                          "target_type": "float3"
+                        },
+                        "args": [
+                          {
+                            "op": "member",
+                            "dtype": "float",
+                            "detail": {
+                              "field": "z",
+                              "swizzle": true
+                            },
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "cast",
+                "dtype": "float3",
+                "detail": {
+                  "target_type": "float3"
+                },
+                "args": [
+                  {
+                    "op": "subtract",
+                    "dtype": "float",
+                    "detail": {},
+                    "args": [
+                      {
+                        "op": "cast",
+                        "dtype": "float",
+                        "detail": {
+                          "target_type": "float"
+                        },
+                        "args": [
+                          {
+                            "op": "constant",
+                            "dtype": "int",
+                            "detail": {
+                              "value": 1,
+                              "native_value": 1,
+                              "renderer_literal": null
+                            },
+                            "args": []
+                          }
+                        ]
+                      },
+                      {
+                        "op": "dot",
+                        "dtype": "float",
+                        "detail": {},
+                        "args": [
+                          {
+                            "op": "saturate",
+                            "dtype": "float3",
+                            "detail": {},
+                            "args": []
+                          },
+                          {
+                            "op": "construct",
+                            "dtype": "float3",
+                            "detail": {},
+                            "args": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evidence": {
+    "build/visual-loop/repair15-source49/shader-trace/report.json": "66355c901adff427999ce58408019e6d23e8bbc82f952d36e6dcb21b548ad838",
+    "build/visual-loop/repair15-source49/shader-trace-highp/report.json": "5170fa530d517605037f123b5bbe2de27b110e6b542caa853e101eed0dc1a1b7",
+    "build/visual-loop/repair15-source49/trace-shader-domains.py": "c90e90a157b96abbf16b59427c77d62a436696a1db3dceeb8aac1a2940913428",
+    "build/visual-loop/repair15-source49/trace-shader-domains-highp.py": "7f2c8c4d14a26e10a0d8f40bb9da02f26ae2a8866aafc0552bffce5bf889eecc"
+  },
+  "notes": [
+    "Each local report retains its own model hashes; reviewed first-step guard controls preserve 58/86 computed and 104 unresolved",
+    "Unknown NaN/undefined pow/mediump/FTZ/sampling domains stay distinct",
+    "Historical audit grades and gate failure count are unchanged"
+  ],
+  "review_guard_recheck": {
+    "scope": "One-step recheck after input/LOD/profile/FTZ guards; no native capture or image inspection",
+    "rows": [
+      {
+        "case": 58,
+        "status": "computed",
+        "reason": null
+      },
+      {
+        "case": 86,
+        "status": "computed",
+        "reason": null
+      },
+      {
+        "case": 104,
+        "status": "unresolved",
+        "reason": "pow grid zero base with nonpositive exponent domain"
+      }
+    ],
+    "report_sha256": "be0f5d5fc60b24ea83f77111482578cee243cec434cd4b0147822821995a07ec",
+    "script_sha256": "0177e3c7a10070d5bcf5d2e5fed3686043b9ba8b0ec71dd39a1a6a0d4a0e1c6e"
+  }
+}

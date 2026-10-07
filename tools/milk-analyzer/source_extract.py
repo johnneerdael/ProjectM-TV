@@ -7,6 +7,7 @@ import shutil
 from forecast import read_source,PRODUCTION_EQUATION_SEED,CORE_2315_EQUATION_RNG_POLICY
 from shader_compat import check_shader
 from strict_source_features import strict_features
+from field_math import GLES_HIGHP_INFINITY
 
 
 def main():
@@ -24,6 +25,7 @@ def main():
                         default='projectmtv-core-2.2.8-v1')
     parser.add_argument('--queries',type=Path)
     parser.add_argument('--validator',type=Path)
+    parser.add_argument('--shader-numeric-policy',choices=['strict',GLES_HIGHP_INFINITY],default='strict')
     args=parser.parse_args()
     source=read_source(args.preset,reader=args.binaries/'milk-native-reader')
     audio=json.loads(args.audio.read_text())
@@ -40,6 +42,7 @@ def main():
             'mesh_x':args.mesh_x,'mesh_y':args.mesh_y,'equation_seed':args.equation_seed,
             'equation_rng_policy':args.equation_rng_policy,'equation_loader_policy':args.equation_loader_policy,
             'shader_queries':json.loads(args.queries.read_text()) if args.queries else [{'_uv':[.5,.5]}],
+            'shader_numeric_policy':args.shader_numeric_policy,
             'max_shader_queries':128}
     record=strict_features(source,audio=audio,binaries=args.binaries,domain=domain,compatibility=compatibility)
     args.output.parent.mkdir(parents=True,exist_ok=True)

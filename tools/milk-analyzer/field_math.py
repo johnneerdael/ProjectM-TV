@@ -14,6 +14,26 @@ class UnresolvedMath(ValueError):
     pass
 
 
+GLES_HIGHP_INFINITY='gles300-highp-infinity-v1'
+INFINITY_OPERATIONS={'add','subtract','multiply','divide','dot','mul','member','index','components',
+    'cast','construct','aggregate','unary','abs','min','max','clamp','saturate',
+    'sequence','select','write_member','less','greater','less_equal','greater_equal',
+    'equal','not_equal','and','or','all','any','loop_result','loop_slot'}
+
+
+def check_infinity_operation(op,args):
+    if any(np.any(np.isinf(a)) for a in args) and op not in INFINITY_OPERATIONS:
+        raise UnresolvedMath('highp infinity consumer not established: '+op)
+    if op=='divide':
+        numerator,denominator=np.broadcast_arrays(*args)
+        tiny=np.finfo(np.float32).tiny
+        if np.any((np.abs(numerator)>0)&(np.abs(numerator)<tiny)) or np.any((np.abs(denominator)>0)&(np.abs(denominator)<tiny)):
+            raise UnresolvedMath('highp division subnormal flushing policy unresolved')
+        zero=denominator==0
+        if np.any(zero&((numerator<=0)|np.signbit(denominator))):
+            raise UnresolvedMath('highp zero division sign or NaN domain unresolved')
+
+
 def maskable_math(field, inputs):
     """Only discard pure numeric work; preserve unresolved reads and effects."""
     pending=[field];seen=set()
@@ -23,7 +43,19 @@ def maskable_math(field, inputs):
         seen.add(id(node))
         if node.op in {'unknown','uninitialized','sample','sequence','index','index_guard','write_member'} or node.op.startswith(('loop_','array')):
             return False
-        if node.op=='input' and node.detail['name'] not in inputs and 'unbound_default' not in node.detail:return False
+        if node.op=='input':
+            name=node.detail['name']
+            if name not in inputs and 'unbound_default' not in node.detail:return False
+            value=inputs.get(name,node.detail.get('unbound_default'))
+            try:
+                if not np.all(np.isfinite(value)):return False
+                base,_=numeric_layout(node.dtype)
+                if base=='float':
+                    with np.errstate(over='ignore',invalid='ignore'):
+                        if not np.all(np.isfinite(np.asarray(value,dtype=np.float32))):return False
+                elif base=='int' and np.any((np.asarray(value)<np.iinfo(np.int32).min)|(np.asarray(value)>np.iinfo(np.int32).max)):
+                    return False
+            except (ValueError,TypeError,OverflowError):return False
         pending.extend(node.args)
     return True
 
@@ -69,10 +101,11 @@ def numeric_layout(dtype):
     return base,shape
 
 
-def typed(value,dtype):
+def typed(value,dtype,*,allow_infinity=False):
     base,shape=numeric_layout(dtype)
     data=np.asarray(value)
-    if not np.all(np.isfinite(data)):raise UnresolvedMath('nonfinite value for '+dtype)
+    if np.any(np.isnan(data)) or (np.any(np.isinf(data)) and not (allow_infinity and base in {'float','bool'})):
+        raise UnresolvedMath('nonfinite value for '+dtype)
     size=int(np.prod(shape)) if shape else 1
     flat=data.reshape(-1)
     if ('[' in dtype or len(shape)==2) and flat.size!=size:
@@ -83,7 +116,8 @@ def typed(value,dtype):
     if base=='int' and np.any((flat<np.iinfo(np.int32).min)|(flat>np.iinfo(np.int32).max)):
         raise UnresolvedMath('integer conversion outside signed 32-bit range')
     converted=flat.astype({'float':np.float32,'int':np.int32,'bool':np.bool_}[base]).reshape(shape)
-    if not np.all(np.isfinite(converted)):raise UnresolvedMath('nonfinite narrowing to '+dtype)
+    if np.any(np.isnan(converted)) or (np.any(np.isinf(converted)) and not (allow_infinity and base=='float')):
+        raise UnresolvedMath('nonfinite narrowing to '+dtype)
     return converted
 
 
@@ -99,7 +133,9 @@ UNARY={'sin':np.sin,'cos':np.cos,'tan':np.tan,'asin':np.arcsin,'acos':np.arccos,
        'trunc':np.trunc,'sign':np.sign,'modf_fraction':lambda value:np.modf(value)[0]}
 
 
-def evaluate(field:Field,*,inputs=None,sample=None):
+def evaluate(field:Field,*,inputs=None,sample=None,numeric_policy='strict'):
+    if numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise UnresolvedMath('unsupported shader numeric policy')
+    highp=numeric_policy==GLES_HIGHP_INFINITY
     inputs=inputs or {};cache={}
     pending=[field];seen=set()
     while pending:
@@ -111,7 +147,7 @@ def evaluate(field:Field,*,inputs=None,sample=None):
             # outputs share one execution and its texture samples.
             from grid_math import evaluate_grid
             def one_sample(detail,coordinates):return sample(detail,coordinates[0])
-            return evaluate_grid(field,batch_shape=(1,),inputs=inputs,sample=one_sample if sample else None)[0]
+            return evaluate_grid(field,batch_shape=(1,),inputs=inputs,sample=one_sample if sample else None,numeric_policy=numeric_policy)[0]
         pending.extend(node.args)
     def visit(node):
         key=id(node)
@@ -140,6 +176,7 @@ def evaluate(field:Field,*,inputs=None,sample=None):
                     and node.detail.get('sampling_policy',{}).get('base_level')==0):
                 raise UnresolvedMath('texture overload not implemented')
             values=[visit(arg) for arg in node.args]
+            if any(not np.all(np.isfinite(v)) for v in values):raise UnresolvedMath('nonfinite texture coordinates')
             raw=sample(node.detail,values[0])
         elif op=='multiply' and node.detail.get('zero_guard') and all(maskable_math(a,inputs) for a in node.args):
             # Native GLSL mult0 returns zero regardless of the other numeric
@@ -151,9 +188,11 @@ def evaluate(field:Field,*,inputs=None,sample=None):
                 raw=np.zeros(numeric_layout(node.dtype)[1],dtype=np.float32)
             else:
                 if np.all(right==0):raw=np.zeros(numeric_layout(node.dtype)[1],dtype=np.float32)
-                else:raw=visit(node.args[0])*right
+                else:
+                    left=visit(node.args[0]);raw=np.where((left==0)|(right==0),0,left*right)
         else:
             args=[visit(a) for a in node.args]
+            if highp:check_infinity_operation(op,args)
             if op=='sequence':raw=args[-1]
             elif op=='source_domain_guard':
                 lo,hi=node.detail['bounds']
@@ -200,6 +239,8 @@ def evaluate(field:Field,*,inputs=None,sample=None):
             elif op in BINARY:
                 operands=[a.astype(np.int64) for a in args] if node.dtype.startswith('int') and op in {'add','subtract','multiply'} else args
                 raw=BINARY[op](*operands)
+                if op=='multiply' and node.detail.get('zero_guard'):
+                    raw=np.where((operands[0]==0)|(operands[1]==0),0,raw)
             elif op in UNARY:raw=UNARY[op](args[0])
             elif op=='mul':raw=args[0]*args[1] if args[0].ndim==0 or args[1].ndim==0 else np.matmul(*args)
             elif op=='dot':raw=np.dot(*args)
@@ -228,8 +269,10 @@ def evaluate(field:Field,*,inputs=None,sample=None):
             elif op=='all':raw=np.all(args[0])
             elif op=='any':raw=np.any(args[0])
             else:raise UnresolvedMath('operation not implemented: '+op)
-        if not np.all(np.isfinite(raw)):raise UnresolvedMath('unresolved numeric domain: '+op)
-        result=typed(raw,node.dtype);cache[key]=result
+        allow_infinity=highp and op in INFINITY_OPERATIONS
+        if np.any(np.isnan(raw)) or (np.any(np.isinf(raw)) and not allow_infinity):
+            raise UnresolvedMath('unresolved numeric domain: '+op)
+        result=typed(raw,node.dtype,allow_infinity=allow_infinity);cache[key]=result
         return result
     try:
         with np.errstate(all='ignore'):return visit(field)

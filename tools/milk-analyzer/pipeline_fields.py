@@ -10,6 +10,7 @@ import numpy as np
 from shader_fields import ShaderFields,Field,uses_input_components
 from grid_math import evaluate_grid
 from field_math import UnresolvedMath
+from field_math import GLES_HIGHP_INFINITY
 from spatial import sample2d
 from blur import blur_bank,native_ranges,pass_dimensions
 from feedback_field import unorm8
@@ -44,7 +45,10 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict'):
+        if shader_numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise ValueError('unsupported shader numeric policy')
+        if shader_numeric_policy==GLES_HIGHP_INFINITY and coordinate_profile!='strict':raise ValueError('unsupported mixed shader numeric/coordinate policies')
+        self.shader_numeric_policy=shader_numeric_policy
         if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
             raise ValueError('unsupported shader coordinate profile')
         field=np.asarray(initial_feedback,dtype=np.float32)
@@ -90,6 +94,8 @@ class SourcePipeline:
 
     @classmethod
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
+        if kwargs.get('shader_numeric_policy','strict')!='strict' and profile!='gles300':
+            raise ValueError('highp shader numeric policy requires GLES300')
         if kwargs.get('coordinate_profile','strict')!='strict' and profile!='glsl330':
             raise ValueError('Apple shader coordinate profile requires glsl330')
         # The pinned preset loader compiles custom equations even for disabled
@@ -139,6 +145,9 @@ class SourcePipeline:
 
     def _rgba(self,rgb):
         if rgb.shape!=(self.height,self.width,3):raise UnresolvedMath('shader ret must be a viewport-sized RGB field')
+        if self.shader_numeric_policy==GLES_HIGHP_INFINITY:
+            if np.any(np.isnan(rgb)):raise UnresolvedMath('NaN normalized shader output remains unresolved')
+            rgb=np.clip(rgb,0,1)
         return self._store(np.concatenate((rgb,np.ones(rgb.shape[:2]+(1,),dtype=np.float32)),axis=-1))
 
     def _sample_main(self,field,uv,*,wrap,linear):
@@ -221,13 +230,13 @@ class SourcePipeline:
                 if external_sample is None:raise UnresolvedMath('external texture input missing: '+texture)
                 return external_sample(detail,sample_uv)
             trace=None if on_sample is None else lambda detail,uv,lanes:on_sample(name,detail,uv,lanes)
-            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile)
+            output=evaluate_grid(expression,batch_shape=(self.height,self.width),inputs=values,sample=sample,on_sample=trace,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy)
             if name=='warp' and write_motion:
                 motion=model.environment.get('_mv_tex_coords')
                 if motion is None:raise UnresolvedMath('custom warp motion output is missing')
                 motion=Field('member',(motion,),'float2',{'field':'xy','swizzle':True})
                 if model.effects:motion=Field('sequence',tuple(model.effects)+(motion,),'float2')
-                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile)
+                pending_motion_uv=evaluate_grid(motion,batch_shape=(self.height,self.width),inputs=values,sample=sample,coordinate_profile=self.coordinate_profile,numeric_policy=self.shader_numeric_policy)
             return output
 
         warp_coordinates=np.concatenate((uv,original),axis=-1)

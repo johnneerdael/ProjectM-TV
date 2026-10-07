@@ -96,21 +96,24 @@ to the latter, desktop GL, integer conversions or nonfinite texture coordinates.
 The native translator's literal-exponent1 optimization is already modeled;
 other exponents still use `pow(abs(base),exponent)` and retain its zero-base limits.
 
-The current finite-only scalar/grid evaluators reject some intermediate infinities
-before their consumers can be analyzed. A useful next extension is a versioned
-highp arithmetic policy that permits only justified infinities through supported
-operations and a proved finite/normalized-output sink, while retaining unknowns
-for NaNs, unsupported precision, signed-zero ambiguity, nonfinite sampling and
-undefined power. Preserve the strict default until that policy has controls;
-arbitrarily allowing every nonfinite intermediate is not an implementation.
+The opt-in `gles300-highp-infinity-v1` scalar/grid policy now carries infinities
+through supported basic arithmetic/storage and finite or declared normalized-RGB
+consumers. The strict default is unchanged. Source entry points require GLES300;
+the handwritten mediump warp and Apple NaN addressing policy remain separate.
+Incoming nonfinite inputs cannot be hidden by a zero multiplier. NaNs, ambiguous
+zero-division signs, division depending on subnormal flushing, integer conversion,
+nonfinite texture/LOD arguments and undefined powers remain unresolved. This is
+controlled source math, not bit-identical GPU arithmetic or appearance certification.
 
 Three exact audit sources supply research cases:058 contains reciprocal blur and
 normalization paths;086 contains a repeated quadratic map followed by a squared
 norm;104 contains blur values raised to an audio/colour-dependent exponent.
-These identify candidate invalid operands, not independently localized first
-failures or native defects. Trace the actual stage, node, inputs and selected lanes
-before crediting a repair. Case104's zero/nonpositive power remains distinct from
-defined highp infinity generation. Full authored-preset appearance is unverified.
+The first-step source-field diagnostic localizes058 to composite1/blur2 with a
+zero denominator in all36,864lanes;086 to warp dot(zz,zz), overflowing8,282lanes;
+and104 to composite pow(0,-0.100000024). With the opt-in policy,058/086 compute
+that one source step;104 remains unresolved. These are math controls, not new
+visual passes or native defects. Full60-step and authored appearance validation
+remain separate. No new native frames or image inspection were used.
 
 ## Verified mathematical details worth retaining
 

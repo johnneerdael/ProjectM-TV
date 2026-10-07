@@ -92,6 +92,21 @@ def test_complete_equation_warp_draw_composite_forecast_keeps_feedback_separate(
     assert result['input_hashes']['preset_sha256'] == source['preset_sha256']
 
 
+def test_callback_cannot_mutate_retained_frames_or_descriptor_evidence():
+    source=native(BASE+'comp_1=`shader_body {ret=float3(.2,.4,.6);}\n')
+    baseline=predict(source)
+    def edit(frame):
+        frame['display'][:]=0
+        frame['feedback'][:]=0
+        frame.clear()
+    actual=predict(source,on_frame=edit)
+    assert actual['descriptors']==baseline['descriptors']
+    for observed,expected in zip(actual['frames'],baseline['frames']):
+        assert observed.keys()==expected.keys()
+        np.testing.assert_array_equal(observed['display'],expected['display'])
+        np.testing.assert_array_equal(observed['feedback'],expected['feedback'])
+
+
 def test_forecast_exposes_geometry_and_display_evidence_without_conflating_them():
     source = native(BASE+'shapecode_0_enabled=1\nshapecode_0_rad=.1\nshapecode_0_num_inst=2\n'
                     'shape_0_per_frame1=instance=0;x=.2+time*.1;\n'

@@ -141,6 +141,13 @@ record current coverage, the beta authoring guide and stable original MilkDrop2
 source. Restricted transport/decay helpers describe potential motion and recurrence
 assumptions, not a complete appearance or calmness guarantee.
 
+An explicit GLES300 highp math policy now distinguishes supported infinity
+intermediates from undefined powers, NaNs and unsupported precision/sampling.
+Source-mode controls can therefore follow an overflow to a finite or normalized
+colour result instead of rejecting every intermediate. The default stays strict;
+these controls add no authored-preset visual pass. Source-field observers receive
+private frame copies, and effective material arrays are frozen and identified.
+
 The October 2026 experiment passed a three-preset and then a ten-preset gate at
 95 or higher on twenty frozen behavioural claims. In the subsequent randomized
 100-preset audit,85met that threshold,12predictions remained unresolved, and three

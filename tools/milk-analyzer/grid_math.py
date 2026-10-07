@@ -8,6 +8,7 @@ coordinates and native history metadata. Unknown operations/domains remain error
 import re
 import numpy as np
 from field_math import UnresolvedMath,typed,SWIZZLE,BINARY,UNARY,matrix_cast,matrix_constructor,numeric_layout,maskable_math
+from field_math import GLES_HIGHP_INFINITY,INFINITY_OPERATIONS,check_infinity_operation
 from shader_fields import Field
 
 
@@ -15,10 +16,10 @@ def _layout(dtype):
     return numeric_layout(dtype)
 
 
-def _convert(value,dtype,count,*,zero_extend=False,allow_nan=False):
+def _convert(value,dtype,count,*,zero_extend=False,allow_nan=False,allow_infinity=False):
     base,shape=_layout(dtype);array=np.asarray(value)
     if array.shape[:1]!=(count,):raise UnresolvedMath('grid operation lost its lane axis')
-    if np.any(np.isinf(array)) or (np.any(np.isnan(array)) and not (allow_nan and base=='float')):
+    if (np.any(np.isinf(array)) and not (allow_infinity and base in {'float','bool'})) or (np.any(np.isnan(array)) and not (allow_nan and base=='float')):
         raise UnresolvedMath('nonfinite grid value for '+dtype)
     size=int(np.prod(shape)) if shape else 1
     flat=array.reshape(count,-1)
@@ -31,12 +32,15 @@ def _convert(value,dtype,count,*,zero_extend=False,allow_nan=False):
     if base=='int' and np.any((flat<np.iinfo(np.int32).min)|(flat>np.iinfo(np.int32).max)):
         raise UnresolvedMath('integer grid conversion outside signed32-bit range')
     result=flat.astype({'float':np.float32,'int':np.int32,'bool':np.bool_}[base]).reshape((count,)+shape)
-    if np.any(np.isinf(result)) or (np.any(np.isnan(result)) and not (allow_nan and base=='float')):
+    if (np.any(np.isinf(result)) and not (allow_infinity and base=='float')) or (np.any(np.isnan(result)) and not (allow_nan and base=='float')):
         raise UnresolvedMath('nonfinite grid narrowing to '+dtype)
     return result
 
 
-def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict'):
+def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=None,on_sample=None,coordinate_profile='strict',numeric_policy='strict'):
+    if numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise UnresolvedMath('unsupported shader numeric policy')
+    highp=numeric_policy==GLES_HIGHP_INFINITY
+    if highp and coordinate_profile!='strict':raise UnresolvedMath('unsupported mixed shader numeric/coordinate policies')
     if coordinate_profile not in ('strict','apple-m4pro-gl41-nan-sampler-v1'):
         raise UnresolvedMath('unsupported shader coordinate profile')
     if not batch_shape or any(type(n) is not int or n<=0 for n in batch_shape):
@@ -47,7 +51,7 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
     nan_coordinates=False
 
     def convert(value,dtype,count,**kwargs):
-        return _convert(value,dtype,count,allow_nan=nan_coordinates,**kwargs)
+        return _convert(value,dtype,count,allow_nan=nan_coordinates,allow_infinity=highp,**kwargs)
 
     def context(indices,parent,update=None):
         contexts.append(indices);states.append({**states[parent],**(update or {})});return len(contexts)-1
@@ -223,7 +227,9 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 nan_coordinates=coordinate_profile!='strict'
                 coordinates=visit(node.args[0],ctx)
             finally:nan_coordinates=prior
-            for argument in node.args[1:]:visit(argument,ctx)
+            for argument in node.args[1:]:
+                if not np.all(np.isfinite(visit(argument,ctx))):raise UnresolvedMath('nonfinite texture argument')
+            if np.any(np.isinf(coordinates)):raise UnresolvedMath('nonfinite texture coordinates')
             if np.any(np.isnan(coordinates)):
                 policy=node.detail.get('sampling_policy',{})
                 if coordinates.shape[-1]!=2 or type(policy.get('wrap')) is not bool:
@@ -252,9 +258,11 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 if np.any(~zero):
                     active=ctx if not np.any(zero) else context(lanes[~zero],ctx)
                     left=visit(node.args[0],active)
-                    raw[~zero]=np.multiply(*align([left,right[~zero]]))
+                    operands=align([left,right[~zero]])
+                    raw[~zero]=np.where((operands[0]==0)|(operands[1]==0),0,np.multiply(*operands))
         else:
             args=[visit(a,ctx) for a in node.args]
+            if highp:check_infinity_operation(op,args)
             if op=='sequence':raw=args[-1]
             elif op=='source_domain_guard':
                 lo,hi=node.detail['bounds']
@@ -298,7 +306,7 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 if node.dtype.startswith('int') and op in {'add','subtract','multiply'}:
                     operands=[a.astype(np.int64) for a in operands]
                 raw=BINARY[op](*operands)
-                if nan_coordinates and op=='multiply' and node.detail.get('zero_guard'):
+                if (nan_coordinates or highp) and op=='multiply' and node.detail.get('zero_guard'):
                     raw=np.where((operands[0]==0)|(operands[1]==0),0,raw)
             elif op in UNARY:raw=UNARY[op](args[0])
             elif op=='mul':
@@ -344,7 +352,7 @@ def evaluate_grid(field:Field,*,batch_shape:tuple[int,...],inputs=None,sample=No
                 raw=function(args[0],axis=tuple(range(1,args[0].ndim)))
             else:raise UnresolvedMath('grid operation not implemented: '+op)
         propagates_nan={'divide','add','subtract','multiply','dot','member','components','cast','construct','aggregate','unary'}
-        if np.any(np.isinf(raw)) or (np.any(np.isnan(raw)) and not (nan_coordinates and op in propagates_nan)):
+        if (np.any(np.isinf(raw)) and not (highp and op in INFINITY_OPERATIONS)) or (np.any(np.isnan(raw)) and not (nan_coordinates and op in propagates_nan)):
             raise UnresolvedMath('unresolved grid numeric domain: '+op)
         result=convert(raw,node.dtype,count,zero_extend=op=='cast');cache[key]=result
         return result

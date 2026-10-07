@@ -33,6 +33,18 @@ identity even when file manifests are unchanged. Large banks require memory for
 the private copy; no memory/performance improvement is claimed. Historical seals
 retain their original manifest-based hashes and evidence scope.
 
+An `on_frame` observer receives a private frame copy. Changes to its dictionary,
+arrays or history cannot alter retained frames or make them disagree with the
+descriptors already calculated. Callbacks can still write their own external
+artifacts; those writes are not authenticated by the predictor.
+
+The explicit `gles300-highp-infinity-v1` shader numeric policy carries justified
+infinities through supported operations and the normalized RGB sink. Set
+`shader_numeric_policy` in the forecast domain, or pass the corresponding strict
+extractor CLI option. It requires GLES300 at source entry points; strict remains
+the default. NaNs, unresolved signs/subnormal flushing, integer conversion,
+nonfinite sampling/LOD and undefined powers stay guarded. See [source math](SOURCE_MATH.md).
+
 ## Current source target: published2.3.15
 
 `profiles/published-core-v2.3.15.json` pins the exact published AAR, ARM64/ARMv7
