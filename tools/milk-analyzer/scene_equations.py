@@ -113,6 +113,8 @@ def _frame_input(frame):
 def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,height:int=72,
                   mesh_x:int=48,mesh_y:int=32,timeout_seconds:float=60,seed:int|None=None,
                   equation_loader_policy='strict-raw-v1')->dict:
+    if isinstance(timeout_seconds,bool) or not isinstance(timeout_seconds,(int,float)) or not np.isfinite(timeout_seconds) or not 0<timeout_seconds<=3600:
+        raise ValueError('finite equation timeout in (0,3600] seconds required')
     from equation_loading import select_equation
     def code(name):return _code(source,name,equation_loader_policy)
     def tree(name):return select_equation(source.get('sections',{}).get(name),name,policy=equation_loader_policy)['tree']

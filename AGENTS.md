@@ -521,3 +521,6 @@ Pass observers private frame copies; callback edits must not change retained
 frames after descriptor calculation. The opt-in GLES300 highp infinity policy
 applies only to supported custom-shader math and normalized output, not mediump
 warp coordinates. Keep NaN/pow/FTZ/sign and sampler-domain negative controls.
+Copy compatibility evidence at forecast entry. Longer equation schedules may
+declare a finite `equation_timeout_seconds` in (0,3600], default60; preserve
+deadline failures and distinguish wall-clock cost from the predicted duration.

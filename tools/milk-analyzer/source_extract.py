@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--width',type=int,required=True);parser.add_argument('--height',type=int,required=True)
     parser.add_argument('--mesh-x',type=int,default=48);parser.add_argument('--mesh-y',type=int,default=32)
     parser.add_argument('--equation-seed',type=int,default=PRODUCTION_EQUATION_SEED)
+    parser.add_argument('--equation-timeout-seconds',type=float,default=60)
     parser.add_argument('--equation-rng-policy',default=CORE_2315_EQUATION_RNG_POLICY)
     parser.add_argument('--equation-loader-policy',choices=['strict-raw-v1','projectmtv-core-2.2.8-v1'],
                         default='projectmtv-core-2.2.8-v1')
@@ -40,6 +41,7 @@ def main():
                 samplers={'sampler_main':'sampler2D'},texture_sizes=['texsize_main'])
     domain={'profile':args.profile,'width':args.width,'height':args.height,
             'mesh_x':args.mesh_x,'mesh_y':args.mesh_y,'equation_seed':args.equation_seed,
+            'equation_timeout_seconds':args.equation_timeout_seconds,
             'equation_rng_policy':args.equation_rng_policy,'equation_loader_policy':args.equation_loader_policy,
             'shader_queries':json.loads(args.queries.read_text()) if args.queries else [{'_uv':[.5,.5]}],
             'shader_numeric_policy':args.shader_numeric_policy,

@@ -96,7 +96,8 @@ def strict_features(source,*,audio,binaries,domain,compatibility):
     if source.get('reader_sha256')!=reader_sha:raise ValueError('source reader identity mismatch')
     loader=domain.get('equation_loader_policy','strict-raw-v1')
     scene=execute_scene(source,audio['frames'],reader=reader,width=width,height=height,
-        mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],equation_loader_policy=loader)
+        mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],equation_loader_policy=loader,
+        timeout_seconds=domain.get('equation_timeout_seconds',60))
     geometry=scene_geometry_features(scene)
     context={'input_hashes':{'preset_sha256':source['preset_sha256'],
         'parsed_source_sha256':digest({key:source[key] for key in ['values','sections','parser_inputs']}),

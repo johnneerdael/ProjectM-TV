@@ -38,6 +38,13 @@ arrays or history cannot alter retained frames or make them disagree with the
 descriptors already calculated. Callbacks can still write their own external
 artifacts; those writes are not authenticated by the predictor.
 
+Compatibility evidence is copied before pipeline construction; observer edits to
+the caller's dictionary cannot change the recorded identity. Long source workloads
+can declare `equation_timeout_seconds` in the domain (default60, finite positive,
+at most3600). This bounds wall-clock equation execution, independently of the
+predicted timeline. The strict CLI exposes `--equation-timeout-seconds`; an expired
+deadline remains an unresolved preparation result and receives no accuracy credit.
+
 The explicit `gles300-highp-infinity-v1` shader numeric policy carries justified
 infinities through supported operations and the normalized RGB sink. Set
 `shader_numeric_policy` in the forecast domain, or pass the corresponding strict

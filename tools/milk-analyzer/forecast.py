@@ -133,6 +133,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if model_hashes!=_MODEL_IMPORT_HASHES:
         raise ValueError('forecast model files changed since import; start a fresh process')
     source=copy.deepcopy(source);audio=copy.deepcopy(audio);domain=copy.deepcopy(domain)
+    compatibility=copy.deepcopy(compatibility)
     random_inputs=copy.deepcopy(random_inputs)
     noise_bank,materials=copy.deepcopy((noise_bank,materials))
     descriptors=DescriptorStream(warmup_frames=domain.get('descriptor_warmup_frames',0),
@@ -247,6 +248,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     material_uniforms[name]=[w,h,1/w,1/h]
     scene = execute_scene(source,audio['frames'],reader=reader,width=width,height=height,
         mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],
+        timeout_seconds=domain.get('equation_timeout_seconds',60),
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))
     geometry_features = scene_geometry_features(scene)
     builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs',

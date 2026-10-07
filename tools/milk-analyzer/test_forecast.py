@@ -107,6 +107,38 @@ def test_callback_cannot_mutate_retained_frames_or_descriptor_evidence():
         np.testing.assert_array_equal(observed['feedback'],expected['feedback'])
 
 
+def test_callback_cannot_change_compatibility_identity_after_pipeline_construction():
+    from forecast import digest
+    source=native(BASE+'comp_1=`shader_body {ret=float3(.2,.4,.6);}\n')
+    evidence=compatibility(source);expected=digest(evidence)
+    def edit(frame):evidence.clear()
+    result=predict(source,compatibility=evidence,on_frame=edit)
+    assert result['input_hashes']['compatibility_sha256']==expected
+    assert result['stage_resolution']['composite']['kind']=='custom_composite'
+    np.testing.assert_allclose(result['frames'][0]['display'][0,0,:3],[.2,.4,.6],atol=1e-7)
+
+
+def test_declared_equation_timeout_reaches_native_execution(monkeypatch):
+    import forecast
+    original=forecast.execute_scene;seen=[]
+    def observe(*args,**kwargs):
+        seen.append(kwargs.get('timeout_seconds'))
+        return original(*args,**kwargs)
+    monkeypatch.setattr(forecast,'execute_scene',observe)
+    source=native(BASE+'comp_1=`shader_body {ret=.4;}\n')
+    settings=domain(equation_timeout_seconds=180)
+    result=predict(source,audio=audio(1),domain=settings)
+    assert result['status']=='computed'
+    assert seen==[180]
+
+
+@pytest.mark.parametrize('timeout',[0,-1,float('nan'),float('inf'),True,'90',3601])
+def test_invalid_equation_deadline_is_rejected_before_process_execution(timeout):
+    from scene_equations import execute_scene
+    with pytest.raises(ValueError,match='equation timeout'):
+        execute_scene({},[],reader=Path('/unavailable'),timeout_seconds=timeout)
+
+
 def test_forecast_exposes_geometry_and_display_evidence_without_conflating_them():
     source = native(BASE+'shapecode_0_enabled=1\nshapecode_0_rad=.1\nshapecode_0_num_inst=2\n'
                     'shape_0_per_frame1=instance=0;x=.2+time*.1;\n'
