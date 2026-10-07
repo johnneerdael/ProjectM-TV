@@ -262,7 +262,7 @@ Saved fixed-resolution values, including 1440/2160 and the legacy `NATIVE_HEIGHT
 
 ## Auto-update
 
-`Updater` (off by default, *Settings › Advanced › Auto-update*) is the only code that opens a network connection. While it is on, it runs on its own background thread, 10 s after each launch, then every 6 hours while the activity stays resumed (right away when switched on). Resuming without a new launch checks only once 6 hours have passed since the last completed check; a failed check is retried at the next launch or interval:
+`Updater` (off by default, *Settings › Advanced › Auto-update*) opens outbound network connections for updates. The separate temporary custom-pack listener accepts local HTTP uploads only while its dialog is open. While it is on, it runs on its own background thread, 10 s after each launch, then every 6 hours while the activity stays resumed (right away when switched on). Resuming without a new launch checks only once 6 hours have passed since the last completed check; a failed check is retried at the next launch or interval:
 
 1. `HEAD github.com/johnneerdael/ProjectM-TV/releases/latest`: GitHub answers with a redirect to `/releases/tag/v<version>`, so no API call (or rate limit) is needed.
 2. If that version is newer than the installed one (CI suffixes like `-ci.42` ignored), it downloads `releases/download/v<version>/projectM-TV-<version>.apk` into `no_backup/update-download` (excluded from backups).
@@ -347,3 +347,9 @@ defaults still reset each frame, and each preset instance owns its state. No
 public Java/JNI/C API changes, preset edits or predictor policy changes are
 included. Historical static-policy audit results remain unchanged. See
 [controls and validation](superpowers/evidence/live-native-controls/README.md).
+
+## Custom preset packs
+
+`PresetPackUploadServer` binds one IPv4 LAN interface on a random port with a SecureRandom session URL. One worker accepts bounded HTTP requests and raw ZIP bodies; the page has no external resources. Dismiss/pause closes both listener and client socket. `CustomPresetPack` uses platform `ZipFile` to skip non-milk compressed entries, bounds extraction, checks CRC/size, writes generated storage paths and a UTF-8 index, then atomically replaces the active-generation pointer under app-private `files/custom-presets/`. Failed staging is removed. The previous pack remains active until a validated import commits.
+
+The additive `ProjectMJNI.setCustomPresetPack` queues index loading on the native preset worker; category requests wait for it. Immutable generation-qualified identities keep custom skips, history and prewarm data distinct from bundled presets and replaced packs. All combines bundled/custom entries; scored category indexes remain unchanged. Presets are read individually on demand rather than retained as one 50,000-file buffer. No texture import or predictive scoring occurs.

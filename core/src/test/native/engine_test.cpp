@@ -281,6 +281,41 @@ int main(int argc, char** argv) {
   CHECK(g_library.SetCategory("all"));
   CHECK(g_library.ActiveCount() == 13 && g_library.Weight("good 3.milk") == 40);
 
+  printf("custom packs join All but never join scored categories\n");
+  std::string pack = root + "/pack-generation-one";
+  mkdir(pack.c_str(), 0700);
+  mkdir((pack + "/0").c_str(), 0700);
+  { FILE* f = fopen((pack + "/0/0.milk").c_str(), "w"); fputs("custom first", f); fclose(f); }
+  { FILE* f = fopen((pack + "/0/1.milk").c_str(), "w"); fputs("custom second", f); fclose(f); }
+  { FILE* f = fopen((pack + "/presets.idx").c_str(), "w");
+    fputs("0/0.milk\tnested/good 1.milk\n0/1.milk\tother/good 1.milk\n", f); fclose(f); }
+  auto installPack = [](const std::string& directory) {
+    g_library.RequestCustomPack(directory);
+    for (int i = 0; i < 1000 && g_library.CustomPackPending(); ++i)
+      std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    CHECK(!g_library.CustomPackPending());
+  };
+  installPack(pack);
+  CHECK(g_library.CategoryCount("all") == 15 && g_library.CategoryCount("custom") == 2);
+  CHECK(g_library.CategoryCount("chill") == 2 && g_library.CategoryCount("intense") == 3);
+  CHECK(g_library.SetCategory("custom"));
+  std::string first = g_library.Next();
+  CHECK(first.find("custom/pack-generation-one/") == 0);
+  CHECK(g_library.Load(first) == "custom first" || g_library.Load(first) == "custom second");
+  g_library.RecordShown(first);
+  std::string second = g_library.Random(first);
+  CHECK(first != second && g_library.Contains(second));
+  g_library.RecordShown(second);
+  CHECK(g_library.Previous() == first);
+  g_library.MarkSkipped(first, "custom skip identity");
+  CHECK(g_library.CategoryCount("custom") == 1 && g_library.CategoryCount("intense") == 3);
+  installPack("");
+  CHECK(g_library.Category() == "all" && g_library.CategoryCount("custom") == 0);
+  CHECK(!g_library.Contains(first) && g_library.Read(first).empty());
+  CHECK(g_library.ActiveCount() == 13);
+  g_library.ResetSkipped();
+  g_library.MarkSkipped("preskipped.milk", "fixture initial skip");
+
   printf("indexing falls back to listing the folder without presets.idx\n");
   { std::string root2 = argv[2]; static AAssetManager am2{root2}; PresetLibrary& other = *new PresetLibrary();
     other.Start(&am2, root2 + "/skip.txt", "");  // never destroyed, like the app's library

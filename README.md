@@ -41,7 +41,7 @@ The [ProjectM TV user guide](https://johnneerdael.github.io/ProjectM-TV/) covers
 - **Memory-aware**: adjusts resolution to leave headroom for the music app
 - **Skips presets that stay black**
 - **Optional auto-update**: downloads new releases in the background and offers to install them (off by default)
-- **Private by design**: no network access unless you switch on auto-update; audio is analysed in memory only
+- **Private by design**: audio is analysed in memory only; network use is limited to opt-in auto-update and the temporary local custom-pack upload dialog
 - **Remote-only control** with a settings panel and live diagnostics
 
 ## What it does
@@ -84,7 +84,7 @@ Main and Track display captures use an earlier isolated test installation on an 
 | Setting | Values | Default |
 |---|---|---|
 | Auto change | Off, On | On |
-| Preset mood | All, Chill, Normal, Intense | All |
+| Preset mood | All, Chill, Normal, Intense, Custom (after upload) | All; Custom after an upload |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 
 *Track display ›* opens a panel for the playing track:
@@ -109,8 +109,19 @@ Main and Track display captures use an earlier isolated test installation on an 
 | Skip slow presets | In Auto resolution only, skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
+| Custom preset pack | Upload one ZIP from a phone/computer on the same network; replaces the previous pack and selects Custom | No pack |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
 | Diagnostics | Render size, panel, UI size, frame rate, Native trails level/canvas or fallback, blend (style and resolution), audio source and level, track display (access, corner or pill, how long), update status, device tier | – |
+
+## Custom preset pack
+
+Open **Settings › Advanced › Custom preset pack**, then open the address shown on the TV in a phone or computer browser on the same network. Choose a ZIP and select **Upload ZIP**. Keep the TV dialog open until import finishes. Closing it or leaving the app cancels an unfinished upload.
+
+A pack can contain up to **50,000 `.milk` presets**, including nested folders and uppercase `.MILK` extensions. Non-preset files, including textures, are ignored. Custom presets use the bundled textures; presets needing other images may look different or fail. Limits are 2 GiB per ZIP, 8 MiB per preset, 4 GiB of extracted presets and 250,000 total ZIP entries. Leave enough TV storage for the old pack, incoming ZIP and new pack during replacement.
+
+Only one custom pack is active. A successful upload replaces it, adds **Custom** to **Preset mood**, and saves Custom as the selected mood. **Custom** plays only uploaded presets; **All** includes both bundled and uploaded presets. Uploaded presets never enter **Chill**, **Normal** or **Intense** and are not scored. Existing load-failure, blank and slow-preset skips apply. A failed import preserves the previous pack and selection. The pack and selection survive app restarts.
+
+The address is temporary and changes each time the dialog opens. Use a trusted local network: uploads use HTTP, not encryption. Guest Wi-Fi isolation can prevent a phone from reaching the TV. No Android file picker or storage permission is required.
 
 ## What it does not do, and known limits
 
@@ -132,7 +143,7 @@ Main and Track display captures use an earlier isolated test installation on an 
 
 **Presets**
 - 189 of the 9,795 *Cream of the Crop* presets are not included: 116 that cannot react to music, 73 that use images with text, logos or people (one preset is in both groups), and 1 whose texture could not be found.
-- You can select All, Chill, Normal or Intense, but cannot search for an individual preset or build custom playlists. Presets play in shuffled order within the selected collection.
+- You can select All, Chill, Normal, Intense or an uploaded Custom pack, but cannot search for an individual preset or build individual playlists. Presets play in shuffled order within the selected collection.
 - The predictive engine is **beta**. Scores order activity within this library under a short shared quiet/melodic/kick probe using the published core AAR. They are not accuracy percentages or guarantees of calmness. Different songs, random inputs, render sizes and GPUs can change behaviour. Effects with no visible activity in the probe remain in All and are excluded from the curated groups. Device-specific skips can reduce the available counts. The [technical guide](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/) records the protocol and limits.
 - The black-preset check has limits. It judges each preset only in the first 20 seconds or so after it starts, and only after 3 seconds of uninterrupted music. "Black" means every sampled pixel is at or below about 8% brightness, so a very dark preset can count as black. After 3 black presets in a row it stops acting until a preset shows something, in case the fault is the renderer rather than the presets.
 - Main-textured shapes use repeat wrapping and linear filtering for every instance, independent of earlier blur or shape draws. Blur ranges that are equal, reversed or too narrow are separated; unsupported float32 ranges use the default 0–1 range. Negative motion zoom preserves signed reflection when the zoom exponent is exactly 1. Other negative-base power domains and identical Windows appearance remain outside this compatibility fix.
@@ -152,12 +163,12 @@ Main and Track display captures use an earlier isolated test installation on an 
 
 ## Permissions
 
-The app opens no network connection unless you switch on *Auto-update*, and then only to GitHub, to check for and download a new release. Nothing it hears or reads leaves the TV: audio is analysed in memory for the visuals and never recorded or stored, and track titles are only shown.
+Network use is limited to *Auto-update* (off by default, GitHub release checks/downloads) and the temporary local HTTP listener while the custom-pack upload dialog is open. Closing that dialog or leaving the app stops the listener. Custom packs are stored privately on the TV; there is no cloud upload. Nothing it hears or reads leaves the TV: audio is analysed in memory for the visuals and never recorded or stored, and track titles are only shown.
 
 | Permission | Why | When it is asked |
 |---|---|---|
 | Record audio (`RECORD_AUDIO`) | Android's audio visualizer counts as recording. The app attaches it only to the music app's audio session, to animate the presets; the microphone is not used. | At first launch |
-| Internet (`INTERNET`) | Only for *Auto-update* (off by default): at every launch and every 6 hours while open, the app asks GitHub for the newest release and downloads it. While *Auto-update* is off, the app makes no connection. Android grants this permission at install and has no switch for it, which is why the app's own setting controls it. | Granted at install |
+| Internet (`INTERNET`) | For *Auto-update* (off by default) and receiving a custom ZIP over the local network only while its upload dialog is open. Android grants this permission at install and has no switch for it, which is why the app's own setting controls it. | Granted at install |
 | Install apps (`REQUEST_INSTALL_PACKAGES`) | Only for *Auto-update*: hands a downloaded update to Android's installer, which asks you to confirm. | The first time you install an update, Android asks you to allow installs from ProjectM TV |
 | Notification access (special access) | Only to read which track the music app is playing (its media session), for the track titles. The app reads no notifications. | You switch it on in the TV's settings (*Apps › Special app access › Notification access*); the startup dialog offers Configure to open Android settings and Dismiss to permanently hide the reminder. Optional: without it no titles are shown |
 

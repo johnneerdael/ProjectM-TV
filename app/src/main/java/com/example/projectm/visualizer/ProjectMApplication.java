@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import nl.neerdael.projectm.core.ProjectMCore;
+import nl.neerdael.projectm.core.ProjectMJNI;
 
 import java.io.File;
 
@@ -40,11 +41,24 @@ public class ProjectMApplication extends Application {
 
         ProjectMCore.init(this);
 
+        File customRoot = new File(getFilesDir(), "custom-presets");
+        File custom = CustomPresetPack.current(customRoot);
+        if (custom != null) ProjectMJNI.setCustomPresetPack(custom.getAbsolutePath());
+
         // Versions up to 1.7 extracted ~130MB of presets on every launch; reclaim that space.
         new Thread(() -> {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
             deleteRecursively(new File(getCacheDir(), "projectM"));
             deleteRecursively(new File(getFilesDir(), "projectM"));
+            synchronized (CustomPresetPack.STORE_LOCK) {
+                // Once the worker's index owns the active generation, remove interrupted imports.
+                while (ProjectMJNI.isCustomPresetPackPending()) {
+                    try { Thread.sleep(50); } catch (InterruptedException interrupted) { return; }
+                }
+                CustomPresetPack.cleanUnused(customRoot, CustomPresetPack.current(customRoot));
+                new File(customRoot, "incoming.zip").delete();
+                new File(customRoot, "current.tmp").delete();
+            }
         }, "LegacyCleanup").start();
     }
 

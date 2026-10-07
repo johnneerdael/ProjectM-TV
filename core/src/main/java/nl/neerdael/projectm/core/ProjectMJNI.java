@@ -65,11 +65,20 @@ public final class ProjectMJNI {
     /** Last rendered state, including actual canvas size or the diffusion fallback. */
     public static native String getNativeTrailsStatus();
     public static native void setPresetDuration(int seconds);
-    /** Preset collection: all (default), chill, normal or intense. Unknown/retired IDs use all. */
+    /** Preset collection: all (default), chill, normal, intense or an installed custom pack. */
     public static native void setMusicCategory(String genreId);
     public static native String getMusicCategory();
     public static native int getCategoryPresetCount(String genreId);
     public static native boolean isMusicCategoryPending();
+    /**
+     * Index an immutable host-owned preset directory on the native worker. An empty path removes
+     * the pack. presets.idx contains generated relative storage paths, a tab, and display paths.
+     * Custom presets join All only. Use setMusicCategory("custom") to select the pack; category
+     * application waits for indexing. Preserve directory contents until replacement is applied.
+     */
+    public static native void setCustomPresetPack(String directory);
+    /** True until the worker has processed the latest custom-pack index request. */
+    public static native boolean isCustomPresetPackPending();
     public static native void setSoftCutDuration(int seconds);
     public static native void setAutoChange(boolean enabled);
     /** projectM's hard cut to the next preset on a loud beat (off: presets only change by blending). */
