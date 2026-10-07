@@ -3,8 +3,7 @@
 
     <!-- Required permissions -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <!-- Auto-update (Settings › Advanced, off by default): the only network access, to check the
-         GitHub releases and download a newer APK, which Android's installer then installs -->
+    <!-- Opt-in auto-update to GitHub and the temporary LAN custom preset ZIP upload listener. -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     

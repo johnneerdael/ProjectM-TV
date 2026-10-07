@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import nl.neerdael.projectm.core.ProjectMCore;
+import nl.neerdael.projectm.core.ProjectMJNI;
 
 import java.io.File;
 
@@ -11,6 +12,8 @@ public class ProjectMApplication extends Application {
     private static final String TAG = "ProjectMApplication";
     private static final String PREF_SKIP_LIST_RESET = "skip_list_reset_1_9";
     private static final String PREF_FRAME_RATE_RESET = "frame_rate_reset_30";
+    private volatile long customRestoreRequest;
+    long customRestoreRequest() { return customRestoreRequest; }
 
     @Override
     public void onCreate() {
@@ -40,11 +43,35 @@ public class ProjectMApplication extends Application {
 
         ProjectMCore.init(this);
 
+        File customRoot = new File(getNoBackupFilesDir(), "custom-presets");
+        File custom = CustomPresetPack.current(customRoot);
+        // Recover the default if a process died after the durable pointer was saved but before
+        // the asynchronous preference write. Later user mood choices keep the same generation.
+        if (custom != null && !custom.getName().equals(prefs.getString("custom_pack_generation", "")))
+            prefs.edit().putString("music_category", "custom")
+                    .putString("custom_pack_generation", custom.getName()).apply();
+        long customRequest = custom == null ? 0 : ProjectMJNI.setCustomPresetPack(custom.getAbsolutePath());
+        customRestoreRequest = customRequest;
+
         // Versions up to 1.7 extracted ~130MB of presets on every launch; reclaim that space.
         new Thread(() -> {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
             deleteRecursively(new File(getCacheDir(), "projectM"));
             deleteRecursively(new File(getFilesDir(), "projectM"));
+            try {
+                if (customRequest != 0) CustomPresetPack.awaitStatus(customRequest, 2,
+                        ProjectMJNI::getCustomPresetPackStatus, () -> false, 30000);
+                customRestoreRequest = 0;
+                synchronized (CustomPresetPack.STORE_LOCK) {
+                    new File(customRoot, "incoming.zip").delete();
+                    new File(customRoot, "current.tmp").delete();
+                    CustomPresetPack.scheduleCleanup(customRoot);
+                }
+            } catch (java.io.IOException failedIndex) {
+                ProjectMJNI.discardCustomPresetPack(customRequest);
+                customRestoreRequest = 0;
+                Log.w(TAG, "Custom pack restore did not finish; preserving its files", failedIndex);
+            }
         }, "LegacyCleanup").start();
     }
 

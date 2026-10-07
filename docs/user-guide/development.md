@@ -130,3 +130,21 @@ See the [versioned engine policy and evidence](https://github.com/johnneerdael/P
 Historical predictor/static-engine policies remain historical controls; these
 fixes do not regenerate collection scores. Host and emulator checks do not
 establish physical-TV performance.
+
+## Custom preset pack validation
+
+The app JVM tests exercise ZIP extraction at exactly 50,000 presets, oversized/invalid packs, cancellation, ignored files, replacement and real HTTP sockets (including idle browser preconnections). Native library tests cover Custom/All membership, scored exclusions, generated storage, duplicate basenames, history, skips and long-name persistence.
+
+Use an isolated Android TV test installation for the full upload journey:
+
+```sh
+./gradlew :app:assembleDebug :app:assembleDebugAndroidTest -PsetupScreenshotTest
+adb -s SERIAL install -r app/build/outputs/apk/debug/app-debug.apk
+adb -s SERIAL install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+adb -s SERIAL shell pm grant --user USER nl.neerdael.projectmtv.setuptest android.permission.RECORD_AUDIO
+adb -s SERIAL shell am instrument --user USER -w -e setup_case custom_pack nl.neerdael.projectmtv.setuptest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
+adb -s SERIAL shell am force-stop --user USER nl.neerdael.projectmtv.setuptest
+adb -s SERIAL shell am instrument --user USER -w -e setup_case custom_pack_restart nl.neerdael.projectmtv.setuptest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
+```
+
+Resolve `USER` from `adb -s SERIAL shell am get-current-user`. Use a fresh test-app data directory for `custom_pack`; it imports 50,000 synthetic presets and then replaces them with two. It checks the Advanced row with D-pad input, HTTP upload, rendering during import, collection membership, replacement, invalid-ZIP preservation, uploaded PNG pixel output before/after replacement, decoding the rendered QR code to the current upload endpoint and listener closure. The second case checks a cold restart retaining the two-preset pack and Custom selection, and asserts the pack resides in the no-backup directory, and verifies its uploaded image still renders. The full case also checks that normal files storage contains no custom pack. Use `-e setup_case custom_pack_qr` for a shorter screen-layout check: it decodes the displayed code and checks Close is visible/focusable within the display. Screenshots are written to the target test app’s external files directory. These cases do not validate physical-TV GPU performance or arbitrary preset compatibility.

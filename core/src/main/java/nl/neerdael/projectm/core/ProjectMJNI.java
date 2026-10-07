@@ -65,11 +65,30 @@ public final class ProjectMJNI {
     /** Last rendered state, including actual canvas size or the diffusion fallback. */
     public static native String getNativeTrailsStatus();
     public static native void setPresetDuration(int seconds);
-    /** Preset collection: all (default), chill, normal or intense. Unknown/retired IDs use all. */
+    /** Preset collection: all (default), chill, normal, intense or an installed custom pack. */
     public static native void setMusicCategory(String genreId);
     public static native String getMusicCategory();
     public static native int getCategoryPresetCount(String genreId);
     public static native boolean isMusicCategoryPending();
+    /**
+     * Index an immutable host-owned preset directory on the native worker. An empty path removes
+     * the pack. presets.idx contains generated relative storage paths, a tab, and display paths.
+     * Custom presets join All only. Use setMusicCategory("custom") to select the pack; category
+     * application waits for indexing. Preserve directory contents until replacement is applied.
+     */
+    public static native long setCustomPresetPack(String directory);
+    /** True until the worker has processed the latest custom-pack index request. */
+    public static native boolean isCustomPresetPackPending();
+    /** Stage an index without replacing the live pack. Commit only after status 1 (ready). */
+    public static native long prepareCustomPresetPack(String directory);
+    /** 0 preparing, 1 ready, 2 applied, -1 rejected or superseded; tied to the returned request ID. */
+    public static native int getCustomPresetPackStatus(long request);
+    /** Publish prepared metadata and select Custom. False leaves the live catalog unchanged. */
+    public static native boolean commitCustomPresetPack(long request);
+    /** Cancel a queued/prepared request without changing an already applied pack. */
+    public static native void discardCustomPresetPack(long request);
+    /** Live rendering/transition or prewarming can still need an immutable generation's images. */
+    public static native boolean isCustomPresetPackInUse(String directory);
     public static native void setSoftCutDuration(int seconds);
     public static native void setAutoChange(boolean enabled);
     /** projectM's hard cut to the next preset on a loud beat (off: presets only change by blending). */

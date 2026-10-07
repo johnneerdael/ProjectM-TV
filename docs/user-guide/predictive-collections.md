@@ -1,6 +1,6 @@
 # Predictive collections (beta)
 
-Choose **Preset mood** in the settings panel: **All**, **Chill**, **Normal** or **Intense**. All stays the default and keeps the full library available. The choice is saved; automatic changes, Random and Previous stay within your collection, subject to the TV's skip rules. Saved Dance or earlier genre choices return to All.
+Choose **Preset mood** in the settings panel: **All**, **Chill**, **Normal** or **Intense**. All is the initial default and keeps the full library available. Uploading a [custom ZIP pack](settings.md#custom-preset-pack) selects Custom, which plays only that pack. Custom presets also join All, but never the three scored collections. The choice is saved; automatic changes, Random and Previous stay within your collection, subject to the TV's skip rules. Saved Dance or earlier genre choices return to All.
 
 | Collection | Score range | Packaged presets | Intended starting point |
 |---|---|---|---|
@@ -44,7 +44,7 @@ The model is refitted to these actual native features using the original eight r
 
 ## Evidence and reproducibility
 
-`core/src/main/assets/preset-genres/presets.jsonl` records every preset's full source hash, native memory weight, derived raw activity, original measurement activity, score, activity state and membership. `manifest.json` records beta status, model/runtime/PCM hashes, render settings, collection counts and checksums. The three index files contain original filenames and master-index memory weights. All still uses `presets.idx`.
+`core/src/main/assets/preset-genres/presets.jsonl` records every preset's full source hash, native memory weight, derived raw activity, original measurement activity, score, activity state and membership. `manifest.json` records beta status, model/runtime/PCM hashes, render settings, collection counts and checksums. The three index files contain original filenames and master-index memory weights. All uses `presets.idx` plus the active custom-pack index, if present.
 
 The scorer stops on a failed measurement; its cause must be diagnosed and the case repaired before continuing. Retry mode accepts only existing unresolved records; it cannot bypass a failure by selecting a different, unmeasured preset. The required metadata transfer is bounded and records a failed measurement if it times out. Diagnostic collection errors remain separate from the measurement. The exporter refuses missing or failed rows, stale source or texture hashes, another AAR flavour, mismatched runtime identities or a wrong frame schedule. Its verifier recalculates ranks and memberships and compares them with the indexes. Checksums alone are insufficient to establish correct membership.
 

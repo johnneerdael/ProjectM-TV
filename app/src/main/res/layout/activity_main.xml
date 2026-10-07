@@ -333,6 +333,11 @@
                 android:layout_height="wrap_content" />
 
             <com.example.projectm.visualizer.OptionRow
+                android:id="@+id/row_custom_pack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.example.projectm.visualizer.OptionRow
                 android:id="@+id/row_skipped"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

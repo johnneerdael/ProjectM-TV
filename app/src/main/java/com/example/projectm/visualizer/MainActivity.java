@@ -8,6 +8,8 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
 import android.media.audiofx.Visualizer;
 import android.os.Build;
@@ -18,9 +20,11 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,8 @@ import nl.neerdael.projectm.core.VisualizerRenderer;
 import nl.neerdael.projectm.core.VisualizerView;
 
 import java.text.NumberFormat;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -62,6 +68,9 @@ public class MainActivity extends Activity {
     private static final String PREF_TRACK_PILL = "track_pill";
     private boolean trackAccessPromptShown;
     private AlertDialog trackAccessDialog;
+    private AlertDialog customPackDialog;
+    private PresetPackUploadServer customPackServer;
+    private volatile boolean customPackCommitting;
     // The music player's audio session found last: tried first at the next launch.
     private static final String PREF_LAST_PLAYER_SESSION = "last_player_session";
     private static final String PREF_PRESET_DURATION = "preset_duration";
@@ -469,6 +478,8 @@ public class MainActivity extends Activity {
         });
 
         // Advanced panel
+        OptionRow customPack = findViewById(R.id.row_custom_pack);
+        customPack.setupAction("Custom preset pack", "Upload ZIP ›", this::showCustomPackUpload);
         int[] resolutions = QualityController.resolutionModes(display);
         String[] resolutionLabels = new String[resolutions.length];
         int selectedResolution = 0;
@@ -664,7 +675,7 @@ public class MainActivity extends Activity {
     }
 
     private void refreshMusicCategory() {
-        if (musicCategoryRow == null) return;
+        if (musicCategoryRow == null || customPackCommitting) return;
         String applied = MusicCategories.appliedSelection(requestedMusicCategory,
                 ProjectMJNI.getMusicCategory(), ProjectMJNI.isMusicCategoryPending());
         if (!ProjectMJNI.isMusicCategoryPending() && !applied.equals(requestedMusicCategory)) {
@@ -685,7 +696,103 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void showCustomPackUpload() {
+        if (customPackServer != null) return;
+        File root = new File(getNoBackupFilesDir(), "custom-presets");
+        TextView message = new TextView(this);
+        message.setTextSize(18);
+        try {
+            customPackServer = new PresetPackUploadServer(root, PresetPackUploadServer.localAddress(), new PresetPackUploadServer.Commit() {
+                private long request;
+                @Override public void prepare(CustomPresetPack.Pack pack, CustomPresetPack.Cancellation cancel) throws IOException {
+                    long restore = ((ProjectMApplication)getApplication()).customRestoreRequest();
+                    if (restore != 0) CustomPresetPack.awaitStatus(restore, 2,
+                            ProjectMJNI::getCustomPresetPackStatus, cancel, 30000);
+                    request = ProjectMJNI.prepareCustomPresetPack(pack.directory.getAbsolutePath());
+                    CustomPresetPack.awaitStatus(request, 1, ProjectMJNI::getCustomPresetPackStatus, cancel, 30000);
+                }
+                @Override public void imported(CustomPresetPack.Pack pack) throws IOException {
+                    File previous = CustomPresetPack.current(root);
+                    customPackCommitting = true;
+                    boolean committed = false;
+                    try {
+                        CustomPresetPack.activate(root, pack);
+                        if (!ProjectMJNI.commitCustomPresetPack(request)) {
+                            CustomPresetPack.restore(root, previous);
+                            throw new IOException("Preset library changed during import; previous pack retained. Try again.");
+                        }
+                        prefs.edit().putString(PREF_MUSIC_CATEGORY, "custom")
+                                .putString("custom_pack_generation", pack.directory.getName()).apply();
+                        CustomPresetPack.scheduleCleanup(root, directory -> ProjectMJNI.isCustomPresetPackInUse(directory.getAbsolutePath()));
+                        committed = true;
+                        handler.post(() -> {
+                            requestedMusicCategory = "custom";
+                            customPackCommitting = false;
+                            refreshMusicCategory();
+                            if (customPackDialog != null)
+                                message.setText("Imported " + numberFormat.format(pack.count) + " presets and "
+                                        + numberFormat.format(pack.textureCount) + " textures. Custom is now selected.\n\n"
+                                        + "You can close this dialog or upload another ZIP to replace the pack.");
+                        });
+                    } finally {
+                        if (!committed) customPackCommitting = false;
+                    }
+                }
+                @Override public void abandoned() { ProjectMJNI.discardCustomPresetPack(request); }
+            }, count -> handler.post(() -> {
+                if (customPackDialog != null) message.setText(customUploadInstructions()
+                        + "\n\n" + (count < 0 ? "Upload unsuccessful. Check the message in your browser and try again."
+                        : "Importing: " + numberFormat.format(count) + " presets…"));
+            }));
+            message.setText(customUploadInstructions());
+            int side = Math.min(dp(240), getResources().getDisplayMetrics().heightPixels - dp(160));
+            Bitmap bitmap = Bitmap.createBitmap(UploadQrCode.pixels(customPackServer.url(), side), side, side, Bitmap.Config.ARGB_8888);
+            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+            drawable.setFilterBitmap(false);
+            ImageView qr = new ImageView(this);
+            qr.setId(R.id.custom_upload_qr);
+            qr.setImageDrawable(drawable);
+            qr.setContentDescription("Scan to upload a custom preset pack");
+            LinearLayout content = new LinearLayout(this);
+            content.setOrientation(LinearLayout.HORIZONTAL);
+            content.setGravity(Gravity.CENTER_VERTICAL);
+            content.setPadding(dp(24), dp(16), dp(24), dp(8));
+            content.addView(qr, new LinearLayout.LayoutParams(side, side));
+            LinearLayout.LayoutParams copy = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+            copy.leftMargin = dp(24);
+            content.addView(message, copy);
+            customPackDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                    .setTitle("Custom preset pack")
+                    .setView(content)
+                    .setNegativeButton("Close", (dialog, which) -> {})
+                    .create();
+            customPackDialog.setOnDismissListener(dialog -> closeCustomPackUpload());
+            handler.removeCallbacks(hideMenu);
+            customPackDialog.show();
+            customPackDialog.getWindow().setLayout(Math.min(dp(720), getResources().getDisplayMetrics().widthPixels - dp(96)),
+                    android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+        } catch (IOException failure) {
+            closeCustomPackUpload();
+            Toast.makeText(this, failure.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String customUploadInstructions() {
+        return "Upload one ZIP with up to 50,000 .milk presets. "
+                + "Supported texture images are imported too. Other files are ignored. "
+                + "A successful upload replaces the previous pack and selects Custom. Keep this dialog open.";
+    }
+
+    private void closeCustomPackUpload() {
+        if (customPackServer != null) { customPackServer.close(); customPackServer = null; }
+        AlertDialog dialog = customPackDialog;
+        customPackDialog = null;
+        if (dialog != null && dialog.isShowing()) dialog.dismiss();
+        if (resumed && menu != Menu.NONE) handler.postDelayed(hideMenu, MENU_AUTO_HIDE_MS);
+    }
+
     private void refreshStatus() {
+        CustomPresetPack.retryPendingCleanups(directory -> ProjectMJNI.isCustomPresetPackInUse(directory.getAbsolutePath()));
         refreshMusicCategory();
         int change = ProjectMJNI.getPresetChangeCounter();
         if (change != lastPresetChange) {
@@ -1201,6 +1308,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onPause() {
+        closeCustomPackUpload();
         trackWatcher.stop();
         handler.removeCallbacks(uiRefresh);
         handler.removeCallbacks(audioMeterRefresh);

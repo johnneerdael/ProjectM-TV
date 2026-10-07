@@ -9,7 +9,7 @@ All is the default preset mood. Your selected collection is saved. The beta pred
 | Setting | Values | Default |
 |---|---|---|
 | Auto change | Off, On | On |
-| Preset mood | All, Chill, Normal, Intense | All |
+| Preset mood | All, Chill, Normal, Intense, Custom (after upload) | All; Custom after upload |
 | Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
 
 The APK and the single published core use the Native renderer with **Auto resolution by default**. The controller adjusts render size in real time for the selected target frame rate and available memory, up to the detected full panel size. A 4K panel can render at 3840×2160 even when Android’s menus run at 1080p. Slow or memory-heavy workloads can render lower and are scaled to fill the screen.
@@ -44,6 +44,7 @@ The canonical `projectM-TV-core.aar` now contains this Native core; the separate
 | Skip slow presets | In Auto resolution only, skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
 | Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
 | Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
+| Custom preset pack | Upload one ZIP from a browser on the same network; replaces the previous pack and selects Custom | No pack |
 | Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
 | Diagnostics | Render size, panel, UI size, frame rate, Native trails level/canvas or fallback, blend (style and resolution), audio source and level, track display (access, corner or pill, how long), update status, device tier | – |
 
@@ -55,3 +56,17 @@ The canonical `projectM-TV-core.aar` now contains this Native core; the separate
 ![Advanced settings with the restored Resolution selector, Auto memory budgeting and High trails inactive at 540p](images/setup/advanced-settings.png)
 
 The Advanced screenshot uses this change’s isolated 4K TV emulator with no audio source; Auto is selected and memory budgeting reduces the render size to 540p, where High trails is inactive. The panel scrolls vertically when needed, keeping all rows reachable by D-pad. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+
+## Custom preset pack
+
+Open **Advanced › Custom preset pack** and scan the TV’s QR code with a phone on the same network to open the upload page. Choose a ZIP, select **Upload ZIP**, and keep the TV dialog open until import finishes. Closing the dialog or leaving ProjectM TV stops the listener and cancels an unfinished upload. The temporary QR code changes every time the dialog opens. A reachable IPv4 LAN address is required; Wi-Fi/Ethernet is preferred over VPN interfaces. ZIP transfer has a one-hour total limit. Use trusted local Wi-Fi or Ethernet; HTTP uploads are not encrypted. Guest-network isolation may block access.
+
+One active pack supports up to **50,000 `.milk` files**, including nested folders and `.MILK` extensions. Include up to 5,000 textures as PNG, JPG/JPEG, TGA, BMP/DIB or DDS. Texture stems (filenames without extensions) must be unique ignoring case, even across folders/formats, because presets refer to images by that name. Custom presets prefer their pack’s images and fall back to bundled textures; bundled presets retain bundled textures during All/blends. Unsupported files are ignored. Some DDS compression formats are not supported by all TV GPUs. ZIP limits: 2 GiB compressed, 4 GiB of combined extracted presets/images, 8 MiB per preset, 64 MiB per texture and 250,000 total entries. Replacement temporarily needs storage for the old pack, the incoming ZIP and the new pack. Invalid names, corruption, cancellation and insufficient storage leave the previous pack in place.
+
+A successful import replaces the previous pack and saves **Custom** as the selected mood. Custom plays only uploaded presets. **All** combines bundled and custom presets; **Chill**, **Normal** and **Intense** continue using only their scored bundled presets. Existing load-failure, blank and slow-preset skips apply to custom presets. The pack and selected mood persist across app restarts and updates. Custom packs are excluded from Android backup; upload the ZIP again after reinstalling, clearing app data or restoring onto another device. No file picker or storage permission is needed.
+
+![Custom preset pack QR code on the isolated API36 Android TV emulator](images/setup/custom-pack-upload.png)
+
+![Browser upload page after importing a two-preset synthetic ZIP at a 390px viewport](images/setup/custom-pack-browser.png)
+
+The TV capture uses the task’s isolated API36 Android TV emulator; its QR code is an example and is no longer active. The browser capture uses the same upload endpoint on localhost with a synthetic ZIP. Scan the current QR code displayed by your own TV. These captures verify the controls, not the appearance of uploaded presets.
