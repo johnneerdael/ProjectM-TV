@@ -1125,3 +1125,13 @@ independently frozen fresh discriminator rejects every candidate (best 62/64).
 Nearest fetch verifies all 16 fresh uploaded values against the declared RTZ
 input. No filtering implementation is credited from the near-fit; the failed
 preset remains open. See `fixtures/half-uv-fresh-discriminator-2026-10-07.json`.
+
+Identical half-exact texels sampled from RG32F follow exact bilinear arithmetic
+within the packed readback precision; the disputed deficit occurs in RG16F.
+Four power-of-two scales preserve all 256 observed scaled outputs exactly,
+excluding fixed absolute quantization in that range. Isolated corner and paired
+maps largely follow nearest-half output, but summing their already-rounded
+results fails to reproduce the full map. These controls narrow the gap to the
+half-format accumulation path without qualifying an exact predictor rule or
+establishing a production engine defect. See
+`fixtures/half-filter-format-accumulation-2026-10-07.json`.

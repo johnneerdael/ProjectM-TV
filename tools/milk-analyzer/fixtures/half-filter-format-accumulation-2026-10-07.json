@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "scope": "Frozen numerical-only GPU half-format filtering attribution; noAARloaded orrandomizedcredit",
+  "findings": {
+    "power_of_two_homogeneity": "256/256 exact across4scales",
+    "rg32f_same_actual_texels": "Exactbilinear within4.10e-8readbackerror; neither disputed halfdeficit occurs",
+    "isolated_corner_nearest_half": "254/256; two duplicated exactpositivehalf-tieup observations",
+    "pair_nearest_half": "256/256",
+    "sum_observed_half_partials": "44/64corner or42/64pair; rejected as full filtering model"
+  },
+  "disposition": "No exactfilterimplementation accepted; Cosmicp95miss remainsopen",
+  "artifacts": {
+    "half-uv-scale-1": {
+      "comparison.json": "b39a6bb4725b7f1755bbe10ed4cd5ef3d8b3d9f6e948a7fa46901e2eea9beb6c",
+      "HalfUvScale1Probe.java": "49c41190afdfbc31cf63bd8e07844e336b03fdb19453e910135c0a186398f275",
+      "stdout.json": "66ce2fa7162e50b2d4f9d81e4e8f0bb0591d2ab63aaa12c95029709e030933ca",
+      "freeze.json": "095021751bf629143b2640e0e97576ad553d26be090ccb13cff8139b22061cda"
+    },
+    "half-uv-scale-2": {
+      "HalfUvScale2Probe.java": "fe765b6d2e37cbf28b0c7326d1d558e567142e861a7b799bdaec44d5889284c5",
+      "comparison.json": "beb107fd4003ea1fdadbe991663345f1e9c64fe20b97645367c62b447eff16b1",
+      "stdout.json": "990e02951bbd3b455d06043b90a9644175b9d20058da6774a63c47449ac30e02",
+      "freeze.json": "b8ab45c53c27a5c949f5393a8c99c07d6ea6ebfd7d84ab3def7520ca7ac04a3a"
+    },
+    "half-uv-scale-3": {
+      "HalfUvScale3Probe.java": "a3085a7a44f189ff0893e2129420922e30bc52b04cd5ca4b9f793d241a6d3f8d",
+      "comparison.json": "800742890a32ba163fdc046f00c765c1cd9729c54058cd2718d14fd9539fa144",
+      "stdout.json": "5c1482c98d7644ca370d2aa9824a9104e95ee3db1ed6d0315a330bd171e5b0d2",
+      "freeze.json": "c6584563620739f5bad5d72425599e1f3fbc0e2073fb4530a0e3b3904805c548"
+    },
+    "half-uv-scale-4": {
+      "HalfUvScale4Probe.java": "ff0ab3debc4a3933e1716d308a9c59b73beee1d61fbf06fd4daab54ef28b699e",
+      "comparison.json": "648f7c25537829ce3df3ce8a69748a27f7e2d0297df0c82f9c4aa6e1639399ff",
+      "stdout.json": "bd655dfb50089ed675f118ed99677063439960f8a1657732fe5ca1a80b922e96",
+      "freeze.json": "3970810b91c68f38ea643784d2eae16d0d83eec75277e55edf40e4c8f64ee492"
+    },
+    "half-uv-rg32f-identical": {
+      "HalfUvRg32Probe.java": "a3e4060cb8f93d1834845230a824316f378920347826dbd2f9008be669ecc821",
+      "comparison.json": "029ad462880fb8e49cf36e02c47569d299d5d282925aa8523102ad1ba4c93150",
+      "stdout.json": "8ce33a0dd07416299d99a1f252975e42089b7bf2f678c3f149807fd458cb2a59",
+      "freeze.json": "aed735b35b89fe2bf870dc2c1d9afac126addb1fb6592cbc6b894fd66957f334"
+    },
+    "half-uv-basis-corner-0": {
+      "comparison.json": "2809c3693db73ffaa5370c6cec6f2f6142a07ff819400ab1c75a5de4566944c3",
+      "HalfUvBasis0Probe.java": "3425e6d2db59f732a49fe2a9f9dac758eb64fff0f1c201dd1ef7d037daf04b43",
+      "stdout.json": "b0958085fc3165f61e41cb4539a11b942b90be20efde87c44fae3db8e1832eec",
+      "freeze.json": "38813a369545a2405314f510f93bb0496cae602f2de1da276901b1a940be1f57"
+    },
+    "half-uv-basis-corner-1": {
+      "comparison.json": "3e7588cb0148c1b32d36206e126862838bd71eef35503ea5045428a5eb2b65cd",
+      "HalfUvBasis1Probe.java": "93ab80018fbbe811e2f0bd27798d660646791589b9bcd25b396826eb85294d61",
+      "stdout.json": "28681610b33bb25d423497d62edd0151942a8bcc75f3fb3b3d00225da39df46b",
+      "freeze.json": "9abc21f257d02d1d9f5ad9b6eb3e20c0d48aa47461b0dc52249515cec4730e31"
+    },
+    "half-uv-basis-corner-2": {
+      "HalfUvBasis2Probe.java": "29efed8633e5c109f209c12b7ba4a419003c00b6a19461c9d51bb39842d0c117",
+      "comparison.json": "83388288cfd0924eeccbda2b45c5204a46bb56b2c8b6dea9c998356f3be97776",
+      "stdout.json": "af4fc9f74730e51126a818f351a4c0bc1d4605b72b5f85a48dc34dfd66ec1a54",
+      "freeze.json": "054e64db81485bcfa8fd1fe97e8302142a3429f2209f87d7fb127efe0f2d97a4"
+    },
+    "half-uv-basis-corner-3": {
+      "HalfUvBasis3Probe.java": "74dd74664dd58d5c8ef68de6ed29c71bb5aad2fb502e3ef1cfc817b0fc397619",
+      "comparison.json": "eccfe97d8de70fa371a22b5949c438a3dd8a8fc0f58f104e74a7a7173be6756f",
+      "stdout.json": "84efcc45ceffeaac76cf37157e21db5eeb32df16131fef6546fd33da39ec07b7",
+      "freeze.json": "80982de693c0c67a26c41b86b4baedea7e9ef2267f12089eb869011bf98659ae"
+    },
+    "half-uv-pair-top": {
+      "HalfUvPairTopProbe.java": "b1fa9156c7026e1af66ffe0551d7e0a573de2076cb6bf333880ae6f3bba006f6",
+      "comparison.json": "0aa8df0463f3ea4622a25ad69bb7c1cc7f207dcc038af0b8d88d4547a2ee7f54",
+      "stdout.json": "1ec3e76d1e2de963e65c3d4240422212e3102268cb1cc25ab17bbe7b421a4d7a",
+      "freeze.json": "efff5cb225c739a71a5871e83dc17a840e9a18cfc71488ef8baba9414791d4c9"
+    },
+    "half-uv-pair-bottom": {
+      "comparison.json": "eca7d2a71ed169f396ecbffa8f914aaaea89fcb02dfe7baad99c0df467433a4c",
+      "HalfUvPairBottomProbe.java": "0b3ef6b2a190d3ae4d6ec2e2e31391b35203a4624fd1c0b23823dc8cb777768b",
+      "stdout.json": "255afcfa5798a9aca66016131500396a049f0112311697695a707831952a22a8",
+      "freeze.json": "7162c8e0d3d8376ac9cc276e6033288afd8291ea4e3b7159a4725da9c95b6e7f"
+    },
+    "half-uv-pair-left": {
+      "comparison.json": "efbefc5da567412a67d6cd0cd7e49055ed413aaf8992b86179012dae75fe090d",
+      "stdout.json": "323dffe2b6752ff2d678de6b0a25caa9a9b2f7d56dc5d8197cbbcb5f6de531c7",
+      "freeze.json": "48f702521d840709ae4ad2179de36336b4ff4928c6518c48644b792824bbff8a",
+      "HalfUvPairLeftProbe.java": "ac995eb49748500decf32a8f2bc8895128500bcc6d70ba15f4c635d314def0eb"
+    },
+    "half-uv-pair-right": {
+      "comparison.json": "c12bace3d2f6bd984b931b487b16f55abad40b9b0ab95809c83b0ee8c30efdb5",
+      "HalfUvPairRightProbe.java": "c6dc8fae330de8746d08e6e8a75a148bcfac1678461dca71a9a5db00632123a3",
+      "stdout.json": "ffbee433d0e78d4c54c8b1c8e55677218883fe280488339f57f7facdcb6b7850",
+      "freeze.json": "4a6165b38f65139813e235ba4d365530bb70686ac3dd7196297bd37d57015bd8"
+    }
+  }
+}
