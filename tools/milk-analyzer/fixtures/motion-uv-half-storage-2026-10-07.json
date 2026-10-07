@@ -1,0 +1,432 @@
+{
+  "schema_version": 1,
+  "profile": "apple-m4pro-gles-rg16f-rtz-normal-v1",
+  "scope": "Apple M4 Pro API34 GLES framebuffer-to-RG16F normal finite storage only; no filtering/subnormal/other-driver certification",
+  "controls": [
+    {
+      "control": "half-uv-render-storage",
+      "case": 0,
+      "channel": 0,
+      "input": 0.17299999296665192,
+      "predicted": 0.1729736328125,
+      "native": 0.1729736328125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 0,
+      "channel": 1,
+      "input": 0.21899999678134918,
+      "predicted": 0.218994140625,
+      "native": 0.218994140625,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 1,
+      "channel": 0,
+      "input": 0.7310000061988831,
+      "predicted": 0.73095703125,
+      "native": 0.73095703125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 1,
+      "channel": 1,
+      "input": 0.38100001215934753,
+      "predicted": 0.380859375,
+      "native": 0.380859375,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 2,
+      "channel": 0,
+      "input": 0.28700000047683716,
+      "predicted": 0.286865234375,
+      "native": 0.286865234375,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 2,
+      "channel": 1,
+      "input": 0.6669999957084656,
+      "predicted": 0.6669921875,
+      "native": 0.6669921875,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 3,
+      "channel": 0,
+      "input": 0.8190000057220459,
+      "predicted": 0.81884765625,
+      "native": 0.81884765625,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 3,
+      "channel": 1,
+      "input": 0.5929999947547913,
+      "predicted": 0.5927734375,
+      "native": 0.5927734375,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 4,
+      "channel": 0,
+      "input": 0.3333333432674408,
+      "predicted": 0.333251953125,
+      "native": 0.333251953125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 4,
+      "channel": 1,
+      "input": 0.7000000476837158,
+      "predicted": 0.69970703125,
+      "native": 0.69970703125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 5,
+      "channel": 0,
+      "input": -0.17299999296665192,
+      "predicted": -0.1729736328125,
+      "native": -0.1729736328125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage",
+      "case": 5,
+      "channel": 1,
+      "input": -0.21899999678134918,
+      "predicted": -0.218994140625,
+      "native": -0.218994140625,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 0,
+      "channel": 0,
+      "input": 0.500244140625,
+      "predicted": 0.5,
+      "native": 0.5,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 0,
+      "channel": 1,
+      "input": -0.500244140625,
+      "predicted": -0.5,
+      "native": -0.5,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 1,
+      "channel": 0,
+      "input": 0.500732421875,
+      "predicted": 0.50048828125,
+      "native": 0.50048828125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 1,
+      "channel": 1,
+      "input": -0.500732421875,
+      "predicted": -0.50048828125,
+      "native": -0.50048828125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 2,
+      "channel": 0,
+      "input": 0.12506103515625,
+      "predicted": 0.125,
+      "native": 0.125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 2,
+      "channel": 1,
+      "input": -0.12506103515625,
+      "predicted": -0.125,
+      "native": -0.125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 3,
+      "channel": 0,
+      "input": 0.12518310546875,
+      "predicted": 0.1251220703125,
+      "native": 0.1251220703125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 3,
+      "channel": 1,
+      "input": -0.12518310546875,
+      "predicted": -0.1251220703125,
+      "native": -0.1251220703125,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 4,
+      "channel": 0,
+      "input": 2.9999999242136255e-05,
+      "predicted": null,
+      "native": 3.0040740966796875e-05,
+      "qualified": false,
+      "matches": null
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 4,
+      "channel": 1,
+      "input": -2.9999999242136255e-05,
+      "predicted": null,
+      "native": -3.0040740966796875e-05,
+      "qualified": false,
+      "matches": null
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 5,
+      "channel": 0,
+      "input": 0.9998999834060669,
+      "predicted": 0.99951171875,
+      "native": 0.99951171875,
+      "qualified": true,
+      "matches": true
+    },
+    {
+      "control": "half-uv-render-storage-boundaries",
+      "case": 5,
+      "channel": 1,
+      "input": -0.9998999834060669,
+      "predicted": -0.99951171875,
+      "native": -0.99951171875,
+      "qualified": true,
+      "matches": true
+    }
+  ],
+  "qualified_count": 22,
+  "matches": 22,
+  "control_hashes": {
+    "build/visual-loop/runtime2316/controls/half-uv-render-storage/frozen-hypotheses.json": "49ed1f070522cf57fc7b6b95f237661059487cb197fc7099149809258e529e97",
+    "build/visual-loop/runtime2316/controls/half-uv-render-storage/stdout.json": "13132ef94e77d73b23338741906bb1d72cfbd6f70041b73624918bc216df513c",
+    "build/visual-loop/runtime2316/controls/half-uv-render-storage-boundaries/frozen-hypotheses.json": "2970651f3d484f527146e4c8f243f73b80eb9e8b6b5e3880e532e68c3564ece5",
+    "build/visual-loop/runtime2316/controls/half-uv-render-storage-boundaries/stdout.json": "f49032c69a47463645574fdf0b758db9c599b12934fb0291331e890bc5d720a9"
+  },
+  "randomized_credit": 0,
+  "finite_profile": "apple-m4pro-gles-rg16f-rtz-finite-v1",
+  "finite_profile_evidence": {
+    "frozen": {
+      "scope": "Frozen before capture; abs signed samples scaled2^24 preserves half-subnormal units; numerical-only GPU storage control, no randomized credit",
+      "raw": [
+        2.9999999242136255e-05,
+        9.000000034120603e-08,
+        2.999999892949745e-08,
+        6.099000165704638e-05,
+        6.103515625e-05,
+        0.0
+      ],
+      "nearest": [
+        2.9981136322021484e-05,
+        1.1920928955078125e-07,
+        5.960464477539063e-08,
+        6.097555160522461e-05,
+        6.103515625e-05,
+        0.0
+      ],
+      "toward_zero": [
+        2.9981136322021484e-05,
+        5.960464477539063e-08,
+        0.0,
+        6.097555160522461e-05,
+        6.103515625e-05,
+        0.0
+      ],
+      "source_sha256": "a59694112e5018cda624fd4ffdebc695601ad1031e83c2a7f15cc8b4dfb6c6d5"
+    },
+    "comparison": [
+      {
+        "case": 0,
+        "channel": 0,
+        "sample": 2.9981136322021484e-05,
+        "raw_magnitude": 2.9999999242136255e-05,
+        "nearest": 2.9981136322021484e-05,
+        "toward_zero": 2.9981136322021484e-05,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 0,
+        "channel": 1,
+        "sample": 2.9981136322021484e-05,
+        "raw_magnitude": 2.9999999242136255e-05,
+        "nearest": 2.9981136322021484e-05,
+        "toward_zero": 2.9981136322021484e-05,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 1,
+        "channel": 0,
+        "sample": 5.960464477539063e-08,
+        "raw_magnitude": 9.000000034120603e-08,
+        "nearest": 1.1920928955078125e-07,
+        "toward_zero": 5.960464477539063e-08,
+        "nearest_matches": false,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 1,
+        "channel": 1,
+        "sample": 5.960464477539063e-08,
+        "raw_magnitude": 9.000000034120603e-08,
+        "nearest": 1.1920928955078125e-07,
+        "toward_zero": 5.960464477539063e-08,
+        "nearest_matches": false,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 2,
+        "channel": 0,
+        "sample": 0,
+        "raw_magnitude": 2.999999892949745e-08,
+        "nearest": 5.960464477539063e-08,
+        "toward_zero": 0.0,
+        "nearest_matches": false,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 2,
+        "channel": 1,
+        "sample": 0,
+        "raw_magnitude": 2.999999892949745e-08,
+        "nearest": 5.960464477539063e-08,
+        "toward_zero": 0.0,
+        "nearest_matches": false,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 3,
+        "channel": 0,
+        "sample": 6.097555160522461e-05,
+        "raw_magnitude": 6.099000165704638e-05,
+        "nearest": 6.097555160522461e-05,
+        "toward_zero": 6.097555160522461e-05,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 3,
+        "channel": 1,
+        "sample": 6.097555160522461e-05,
+        "raw_magnitude": 6.099000165704638e-05,
+        "nearest": 6.097555160522461e-05,
+        "toward_zero": 6.097555160522461e-05,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 4,
+        "channel": 0,
+        "sample": 6.103515625e-05,
+        "raw_magnitude": 6.103515625e-05,
+        "nearest": 6.103515625e-05,
+        "toward_zero": 6.103515625e-05,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 4,
+        "channel": 1,
+        "sample": 6.103515625e-05,
+        "raw_magnitude": 6.103515625e-05,
+        "nearest": 6.103515625e-05,
+        "toward_zero": 6.103515625e-05,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 5,
+        "channel": 0,
+        "sample": 0,
+        "raw_magnitude": 0.0,
+        "nearest": 0.0,
+        "toward_zero": 0.0,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      },
+      {
+        "case": 5,
+        "channel": 1,
+        "sample": 0,
+        "raw_magnitude": 0.0,
+        "nearest": 0.0,
+        "toward_zero": 0.0,
+        "nearest_matches": true,
+        "toward_zero_matches": true
+      }
+    ],
+    "hashes": {
+      "frozen-hypotheses.json": "6b55bf6d1de8d71d999dcce4ed8bea32767ff297a92d2ffaf9e5f237f180b7c1",
+      "stdout.json": "ad6d24cf3808df128b78ec2c24e664e85ac68c71501a2b6121ec6269f50c5b27",
+      "HalfUvSubnormalProbe.java": "a59694112e5018cda624fd4ffdebc695601ad1031e83c2a7f15cc8b4dfb6c6d5"
+    },
+    "scope": "Scaled absolute magnitude observations; no GPU signed-zero certification",
+    "matches": 12
+  },
+  "validation": {
+    "full_suite": "1414 passed,78subtests passed",
+    "post_suite_both_profile_forwarding": "4 selected tests passed",
+    "strict_docs": "passed",
+    "review": "Independent arithmetic/control/guard/forwarding/docs review; no remaining findings",
+    "same_preset_storage_only": {
+      "relative_motion_error_percent": {
+        "median_speed_viewports_per_second": 2.7475262128402447,
+        "p95_speed_viewports_per_second": 8.353225911460935
+      },
+      "repair_passes": false,
+      "original_score_retained": 95,
+      "randomized_credit": 0,
+      "remaining": "Half texture filtering unresolved; storage-only correction does not close entire preset miss"
+    }
+  }
+}

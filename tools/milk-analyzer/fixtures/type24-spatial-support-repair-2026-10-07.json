@@ -1049,7 +1049,2217 @@
     },
     "original_score": 95,
     "randomized_credit": 0,
-    "review": "Provenance finding corrected; same-preset and final code review pending"
+    "review": "Independent code/retrospective same-preset review complete; no remaining findings; learning100, original95 retained"
   },
-  "existing_activity_score_inputs_changed": false
+  "existing_activity_score_inputs_changed": false,
+  "repair_assessment": {
+    "scope": "Retrospective same-preset Type24 location-claim learning validation on existing original frames; no fresh native capture or randomized/streak credit.",
+    "position": 46,
+    "preset": "flexi - identity-killing petting - colon gonad type24.milk",
+    "original_score": 95,
+    "learning_repair_score": 100,
+    "score": 100,
+    "fresh_random_credit": 0,
+    "successful_batch_credit": 0,
+    "critical_failure": false,
+    "changed_claim_ids": [
+      "structure2"
+    ],
+    "rows": [
+      {
+        "id": "structure1",
+        "claim": "A few tiny coloured traces open against black.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "structure2",
+        "claim": "The bright lobes develop at opposing left and right edges; sampled central support is absent at frame5, small at frame15, and expands by frame30.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Existing native frames at the SAME max-normalized-RGB>=0.05 threshold show opposing edge lobes, central-half support0 at frame5,44 at15 and2037 at30; source counts0/44/2034. Full30 source records independently reproduce. Central-half support is not the middle3x3 cell: at15 that cell has0 on both sides. This is retrospective same-preset learning, not a blind prediction."
+      },
+      {
+        "id": "structure3",
+        "claim": "The source splits into horizontal paired prongs or lobes.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "structure4",
+        "claim": "Late output retains bright pale cyan/white/green horizontal shapes on black.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Available luma/saturation values independently pass5%; missing motion values are not substituted with zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "motion1",
+        "claim": "The tiny traces grow into paired horizontal lobes.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "motion2",
+        "claim": "The lobes change width and internal colour through the window.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "motion3",
+        "claim": "The compact luminous source remains surrounded by a broad black field.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "motion4",
+        "claim": "Median motion=0.08574628084897995, p95=0.4844769313931465 viewport/s; relative5%; unavailable values are unknown, zero credit.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Available luma/saturation values independently pass5%; missing motion values are not substituted with zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "colour1",
+        "claim": "Early traces contain green and cyan.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "colour2",
+        "claim": "Developed lobes combine green, blue and near-white.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "colour3",
+        "claim": "Black remains dominant around the localized bright source.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Green/cyan and blue paired prongs develop at opposing viewport edges, leaving a black centre; other growth, colour and local prong-shape phases agree. This limited known clause is supported; predeclared unknown clauses remain zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "colour4",
+        "claim": "Mean luma=0.029781314264982938; saturation=0.8354099810123443; relative5%.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Available luma/saturation values independently pass5%; missing motion values are not substituted with zero.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "feedback1",
+        "claim": "Warp blends original/transformedUV differently by channel and blur gradients.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Source-level mechanism/limitation is confirmed in the unchanged authored code. This does not certify hidden native shader choice or unseen geometry; matching clipped/dark output alone earns no additional appearance credit.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "feedback2",
+        "claim": "Retained channels decay with contrast-sensitive subtraction and noise.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Source-level mechanism/limitation is confirmed in the unchanged authored code. This does not certify hidden native shader choice or unseen geometry; matching clipped/dark output alone earns no additional appearance credit.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "feedback3",
+        "claim": "Composite folds/mirrors coordinates and combines several blur levels.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Source-level mechanism/limitation is confirmed in the unchanged authored code. This does not certify hidden native shader choice or unseen geometry; matching clipped/dark output alone earns no additional appearance credit.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "feedback4",
+        "claim": "Hue-dependent nonlinear mixing and squaring emphasize the paired bright source.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Source-level mechanism/limitation is confirmed in the unchanged authored code. This does not certify hidden native shader choice or unseen geometry; matching clipped/dark output alone earns no additional appearance credit.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "flashing1",
+        "claim": "Peak jump at[26, 27], brightening.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Exact frozen event list/timing/direction or numerical amplitude independently recomputed;5% rule unchanged and no absolute floor.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "flashing2",
+        "claim": "Exact coherent brightening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Exact frozen event list/timing/direction or numerical amplitude independently recomputed;5% rule unchanged and no absolute floor.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "flashing3",
+        "claim": "Exact coherent darkening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Exact frozen event list/timing/direction or numerical amplitude independently recomputed;5% rule unchanged and no absolute floor.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      },
+      {
+        "id": "flashing4",
+        "claim": "Peak mean-luma jump=0.007124858442693949; relative5%, exacteventtiming.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Exact frozen event list/timing/direction or numerical amplitude independently recomputed;5% rule unchanged and no absolute floor.",
+        "assessment_basis": "Unchanged clause; retained independent original-case adjudication, not a new broad certificate."
+      }
+    ],
+    "threshold": {
+      "value_floor": 0.05,
+      "channel": "maximum normalized encoded RGB",
+      "centre_region": "pixel centres in top-origin [.25,.75)x[.25,.75)",
+      "grid": "top-origin3x3; independent from central-half region"
+    },
+    "source_records_reproduced_exactly": true,
+    "source_spatial_support_frames": [
+      {
+        "time": 0.03333333333333333,
+        "supported_pixels": 8,
+        "screen_fraction": 0.00021701388888888888,
+        "bounds": {
+          "minimum": [
+            0.046875,
+            0.4375
+          ],
+          "maximum": [
+            0.94921875,
+            0.5555555555555556
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            4
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.06666666666666667,
+        "supported_pixels": 39,
+        "screen_fraction": 0.0010579427083333333,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4375
+          ],
+          "maximum": [
+            0.953125,
+            0.5555555555555556
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            22,
+            0,
+            17
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.1,
+        "supported_pixels": 66,
+        "screen_fraction": 0.0017903645833333333,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4305555555555556
+          ],
+          "maximum": [
+            0.953125,
+            0.5625
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            38,
+            0,
+            28
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.13333333333333333,
+        "supported_pixels": 137,
+        "screen_fraction": 0.003716362847222222,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.94921875,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            74,
+            0,
+            63
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.16666666666666666,
+        "supported_pixels": 204,
+        "screen_fraction": 0.005533854166666667,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.953125,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            107,
+            0,
+            97
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.2,
+        "supported_pixels": 293,
+        "screen_fraction": 0.007948133680555556,
+        "bounds": {
+          "minimum": [
+            0.03515625,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.953125,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            154,
+            0,
+            139
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.23333333333333334,
+        "supported_pixels": 367,
+        "screen_fraction": 0.009955512152777778,
+        "bounds": {
+          "minimum": [
+            0.00390625,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.9609375,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            187,
+            0,
+            180
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.26666666666666666,
+        "supported_pixels": 438,
+        "screen_fraction": 0.011881510416666666,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.96875,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            220,
+            0,
+            217
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.3,
+        "supported_pixels": 571,
+        "screen_fraction": 0.015489366319444444,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4166666666666667
+          ],
+          "maximum": [
+            0.99609375,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            300,
+            0,
+            261
+          ],
+          [
+            10,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.3333333333333333,
+        "supported_pixels": 904,
+        "screen_fraction": 0.024522569444444444,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4166666666666667
+          ],
+          "maximum": [
+            0.9921875,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            465,
+            0,
+            427
+          ],
+          [
+            12,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.36666666666666664,
+        "supported_pixels": 1181,
+        "screen_fraction": 0.032036675347222224,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4166666666666667
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            604,
+            0,
+            565
+          ],
+          [
+            12,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.4,
+        "supported_pixels": 1431,
+        "screen_fraction": 0.038818359375,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4097222222222222
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 17,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            740,
+            0,
+            677
+          ],
+          [
+            14,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.43333333333333335,
+        "supported_pixels": 1757,
+        "screen_fraction": 0.047661675347222224,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4097222222222222
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 2,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            902,
+            0,
+            837
+          ],
+          [
+            18,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.4666666666666667,
+        "supported_pixels": 1960,
+        "screen_fraction": 0.053168402777777776,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4027777777777778
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1009,
+            0,
+            931
+          ],
+          [
+            20,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.5,
+        "supported_pixels": 2184,
+        "screen_fraction": 0.059244791666666664,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.375
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 44,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1140,
+            0,
+            1021
+          ],
+          [
+            23,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.5333333333333333,
+        "supported_pixels": 2429,
+        "screen_fraction": 0.0658908420138889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3680555555555556
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 70,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1267,
+            6,
+            1131
+          ],
+          [
+            25,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.5666666666666667,
+        "supported_pixels": 2655,
+        "screen_fraction": 0.072021484375,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 78,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1365,
+            12,
+            1251
+          ],
+          [
+            27,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.6,
+        "supported_pixels": 2845,
+        "screen_fraction": 0.0771755642361111,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 89,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1469,
+            17,
+            1331
+          ],
+          [
+            28,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.6333333333333333,
+        "supported_pixels": 3158,
+        "screen_fraction": 0.0856662326388889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 141,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1629,
+            20,
+            1480
+          ],
+          [
+            29,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.6666666666666666,
+        "supported_pixels": 3527,
+        "screen_fraction": 0.0956759982638889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 320,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1816,
+            20,
+            1660
+          ],
+          [
+            31,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.7,
+        "supported_pixels": 3803,
+        "screen_fraction": 0.10316297743055555,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 445,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1952,
+            30,
+            1790
+          ],
+          [
+            31,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.7333333333333333,
+        "supported_pixels": 4114,
+        "screen_fraction": 0.1115993923611111,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3541666666666667
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 568,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2071,
+            84,
+            1923
+          ],
+          [
+            36,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.7666666666666667,
+        "supported_pixels": 4517,
+        "screen_fraction": 0.1225314670138889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3472222222222222
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 760,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2235,
+            179,
+            2055
+          ],
+          [
+            48,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.8,
+        "supported_pixels": 4926,
+        "screen_fraction": 0.13362630208333334,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3402777777777778
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 986,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2375,
+            283,
+            2202
+          ],
+          [
+            66,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.8333333333333334,
+        "supported_pixels": 5261,
+        "screen_fraction": 0.14271375868055555,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3402777777777778
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1175,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2474,
+            385,
+            2318
+          ],
+          [
+            84,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.8666666666666667,
+        "supported_pixels": 5635,
+        "screen_fraction": 0.1528591579861111,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3333333333333333
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1371,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2604,
+            474,
+            2456
+          ],
+          [
+            101,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.9,
+        "supported_pixels": 6000,
+        "screen_fraction": 0.16276041666666666,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3263888888888889
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1532,
+        "grid_counts": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            2722,
+            577,
+            2571
+          ],
+          [
+            125,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.9333333333333333,
+        "supported_pixels": 6347,
+        "screen_fraction": 0.1721733940972222,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3194444444444444
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1702,
+        "grid_counts": [
+          [
+            11,
+            0,
+            6
+          ],
+          [
+            2829,
+            677,
+            2682
+          ],
+          [
+            142,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.9666666666666667,
+        "supported_pixels": 6665,
+        "screen_fraction": 0.18079969618055555,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3125
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1849,
+        "grid_counts": [
+          [
+            23,
+            0,
+            13
+          ],
+          [
+            2904,
+            778,
+            2795
+          ],
+          [
+            152,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 1.0,
+        "supported_pixels": 7021,
+        "screen_fraction": 0.1904568142361111,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3055555555555556
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 2034,
+        "grid_counts": [
+          [
+            40,
+            0,
+            34
+          ],
+          [
+            2989,
+            897,
+            2893
+          ],
+          [
+            168,
+            0,
+            0
+          ]
+        ]
+      }
+    ],
+    "native_spatial_support_frames": [
+      {
+        "time": 0.03333333333333333,
+        "supported_pixels": 8,
+        "screen_fraction": 0.00021701388888888888,
+        "bounds": {
+          "minimum": [
+            0.046875,
+            0.4375
+          ],
+          "maximum": [
+            0.94921875,
+            0.5555555555555556
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            4
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.06666666666666667,
+        "supported_pixels": 39,
+        "screen_fraction": 0.0010579427083333333,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4375
+          ],
+          "maximum": [
+            0.953125,
+            0.5555555555555556
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            22,
+            0,
+            17
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.1,
+        "supported_pixels": 66,
+        "screen_fraction": 0.0017903645833333333,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4305555555555556
+          ],
+          "maximum": [
+            0.953125,
+            0.5625
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            38,
+            0,
+            28
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.13333333333333333,
+        "supported_pixels": 137,
+        "screen_fraction": 0.003716362847222222,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.94921875,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            74,
+            0,
+            63
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.16666666666666666,
+        "supported_pixels": 204,
+        "screen_fraction": 0.005533854166666667,
+        "bounds": {
+          "minimum": [
+            0.04296875,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.953125,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            107,
+            0,
+            97
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.2,
+        "supported_pixels": 293,
+        "screen_fraction": 0.007948133680555556,
+        "bounds": {
+          "minimum": [
+            0.03515625,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.953125,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            154,
+            0,
+            139
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.23333333333333334,
+        "supported_pixels": 367,
+        "screen_fraction": 0.009955512152777778,
+        "bounds": {
+          "minimum": [
+            0.00390625,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.9609375,
+            0.5694444444444444
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            187,
+            0,
+            180
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.26666666666666666,
+        "supported_pixels": 438,
+        "screen_fraction": 0.011881510416666666,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4236111111111111
+          ],
+          "maximum": [
+            0.96875,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            220,
+            0,
+            217
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.3,
+        "supported_pixels": 571,
+        "screen_fraction": 0.015489366319444444,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4166666666666667
+          ],
+          "maximum": [
+            0.99609375,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            300,
+            0,
+            261
+          ],
+          [
+            10,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.3333333333333333,
+        "supported_pixels": 904,
+        "screen_fraction": 0.024522569444444444,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4166666666666667
+          ],
+          "maximum": [
+            0.9921875,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            465,
+            0,
+            427
+          ],
+          [
+            12,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.36666666666666664,
+        "supported_pixels": 1181,
+        "screen_fraction": 0.032036675347222224,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4166666666666667
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            604,
+            0,
+            565
+          ],
+          [
+            12,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.4,
+        "supported_pixels": 1431,
+        "screen_fraction": 0.038818359375,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4097222222222222
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 17,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            740,
+            0,
+            677
+          ],
+          [
+            14,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.43333333333333335,
+        "supported_pixels": 1757,
+        "screen_fraction": 0.047661675347222224,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4097222222222222
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 2,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            902,
+            0,
+            837
+          ],
+          [
+            18,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.4666666666666667,
+        "supported_pixels": 1960,
+        "screen_fraction": 0.053168402777777776,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.4027777777777778
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 0,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1009,
+            0,
+            931
+          ],
+          [
+            20,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.5,
+        "supported_pixels": 2184,
+        "screen_fraction": 0.059244791666666664,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.375
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 44,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1140,
+            0,
+            1021
+          ],
+          [
+            23,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.5333333333333333,
+        "supported_pixels": 2429,
+        "screen_fraction": 0.0658908420138889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3680555555555556
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 70,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1267,
+            6,
+            1131
+          ],
+          [
+            25,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.5666666666666667,
+        "supported_pixels": 2654,
+        "screen_fraction": 0.0719943576388889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 78,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1364,
+            12,
+            1251
+          ],
+          [
+            27,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.6,
+        "supported_pixels": 2844,
+        "screen_fraction": 0.0771484375,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 89,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1468,
+            17,
+            1331
+          ],
+          [
+            28,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.6333333333333333,
+        "supported_pixels": 3156,
+        "screen_fraction": 0.08561197916666667,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 141,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1628,
+            20,
+            1479
+          ],
+          [
+            29,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.6666666666666666,
+        "supported_pixels": 3527,
+        "screen_fraction": 0.0956759982638889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 320,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1816,
+            20,
+            1660
+          ],
+          [
+            31,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.7,
+        "supported_pixels": 3802,
+        "screen_fraction": 0.10313585069444445,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3611111111111111
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 445,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1951,
+            30,
+            1790
+          ],
+          [
+            31,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.7333333333333333,
+        "supported_pixels": 4113,
+        "screen_fraction": 0.111572265625,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3541666666666667
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 568,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2070,
+            84,
+            1923
+          ],
+          [
+            36,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.7666666666666667,
+        "supported_pixels": 4517,
+        "screen_fraction": 0.1225314670138889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3472222222222222
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 760,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2235,
+            179,
+            2055
+          ],
+          [
+            48,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.8,
+        "supported_pixels": 4923,
+        "screen_fraction": 0.133544921875,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3402777777777778
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 986,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2373,
+            283,
+            2201
+          ],
+          [
+            66,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.8333333333333334,
+        "supported_pixels": 5260,
+        "screen_fraction": 0.14268663194444445,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3402777777777778
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1175,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2474,
+            385,
+            2317
+          ],
+          [
+            84,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.8666666666666667,
+        "supported_pixels": 5636,
+        "screen_fraction": 0.1528862847222222,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3333333333333333
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1371,
+        "grid_counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2604,
+            474,
+            2457
+          ],
+          [
+            101,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.9,
+        "supported_pixels": 6002,
+        "screen_fraction": 0.1628146701388889,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3263888888888889
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1532,
+        "grid_counts": [
+          [
+            5,
+            0,
+            0
+          ],
+          [
+            2723,
+            577,
+            2572
+          ],
+          [
+            125,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.9333333333333333,
+        "supported_pixels": 6347,
+        "screen_fraction": 0.1721733940972222,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3194444444444444
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1702,
+        "grid_counts": [
+          [
+            11,
+            0,
+            7
+          ],
+          [
+            2826,
+            677,
+            2684
+          ],
+          [
+            142,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 0.9666666666666667,
+        "supported_pixels": 6666,
+        "screen_fraction": 0.18082682291666666,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3125
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 1849,
+        "grid_counts": [
+          [
+            23,
+            0,
+            13
+          ],
+          [
+            2905,
+            778,
+            2795
+          ],
+          [
+            152,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "time": 1.0,
+        "supported_pixels": 7023,
+        "screen_fraction": 0.19051106770833334,
+        "bounds": {
+          "minimum": [
+            0.0,
+            0.3055555555555556
+          ],
+          "maximum": [
+            1.0,
+            1.0
+          ]
+        },
+        "centre_support_pixels": 2037,
+        "grid_counts": [
+          [
+            39,
+            0,
+            34
+          ],
+          [
+            2991,
+            897,
+            2894
+          ],
+          [
+            168,
+            0,
+            0
+          ]
+        ]
+      }
+    ],
+    "hashes": {
+      "batch004/preset09/prediction.rgb.u8": "002589a2e4b7742668b84b6815b1c906a5f224562dc678d4520b65594f12d03f",
+      "batch004/preset09/native.rgb.u8": "cd192d669b6d7074220f6c20557898252c2ffda235e3d0158407b89f2367a7dc",
+      "batch004/preset09/original.milk": "990828d27805df33bf74e4d833990480979a0952130ecdae17c4bf660c81ac82",
+      "batch004/preset09/assessment.json": "5b9d1c7d063e224c355910f3713b8d98b2c87aec103f91a9fea7b4235ebc6a26",
+      "batch004/preset09/prediction-description.json": "03d4b6bb6f08de849f4a78ad47955abd297ea1e7ebf8d84d2fcbd4cc78982942",
+      "repairs/type24-location-source/repaired-description.json": "a520b28d18a360e96d41895e847ed8395ab5656eb1566bd890e4379c91f4308a",
+      "repairs/type24-location-source/source-location.json": "487362df2846a856674e53c83faa5043075fd033ee0039da8ead3463dfeab49c"
+    },
+    "limits": [
+      "No inference of object identity or full trajectories from thresholded occupancy/union bounds.",
+      "Central support is not absent throughout the window: source/native nonzero starts at12 and is nonmonotonic through15.",
+      "The original critical centre-location miss and95grade remain unchanged.",
+      "Source-confirmed feedback mechanisms do not certify hidden native shader selection."
+    ],
+    "created_utc": "2026-10-07T12:40:59.041411+00:00",
+    "repair_chronology": {
+      "original_frozen_utc": "2026-10-07T11:48:17.041600+00:00",
+      "repair_created_utc": "2026-10-07T12:40:40.367053+00:00",
+      "reference_frames_seen": true,
+      "final_frozen": false,
+      "learning_after_observation": true,
+      "scope": "Post-observation same-preset learning repair; original frozen prediction and95score unchanged; no randomized credit"
+    }
+  }
 }

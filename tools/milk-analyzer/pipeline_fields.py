@@ -45,12 +45,16 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1'):
         from quad_lines import PROFILE as quad_profile
         if line_rendering_profile not in ('canonical-gl-lines-v1',quad_profile):
             raise ValueError('unknown motion-vector line profile')
         if motion_raster_subpixel_bits is not None and (type(motion_raster_subpixel_bits) is not int or not 4<=motion_raster_subpixel_bits<=16):
             raise ValueError('motion raster subpixel bits must be an integer within4..16')
+        from motion_vectors import PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
+        if motion_uv_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
+            raise ValueError('unknown motion UV storage profile')
+        self.motion_uv_storage_profile=motion_uv_storage_profile
         self.line_rendering_profile=line_rendering_profile
         self.motion_raster_subpixel_bits=motion_raster_subpixel_bits
         if shader_numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise ValueError('unsupported shader numeric policy')
@@ -109,6 +113,9 @@ class SourcePipeline:
     @classmethod
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
         from quad_lines import PROFILE as quad_profile
+        from motion_vectors import PORTABLE_STORAGE
+        if kwargs.get('motion_uv_storage_profile',PORTABLE_STORAGE)!=PORTABLE_STORAGE and profile!='gles300':
+            raise ValueError('motion half storage profile requires declared GLES300 context')
         if kwargs.get('line_rendering_profile','canonical-gl-lines-v1')==quad_profile and profile!='gles300':
             raise ValueError('motion quad profile requires declared GLES300 context')
         if kwargs.get('texture_sampling_profile','portable')!='portable' and profile!='gles300':
@@ -269,7 +276,7 @@ class SourcePipeline:
             if diffuse is None:raise UnresolvedMath('fixed warp requires live decay')
             warped=self._store(self._sample_main(previous,uv,wrap=frame_wrap>.0001,linear=True)*diffuse)
         else:warped=self._rgba(stage(self.warp_tree,'warp',previous,old_blur,warp_coordinates,warp_polar))
-        pending_motion_uv=motion_uv_surface(pending_motion_uv) if write_motion else None
+        pending_motion_uv=motion_uv_surface(pending_motion_uv,storage_profile=self.motion_uv_storage_profile) if write_motion else None
         new_blur=update_blur() if self.warp_reads_blur else old_blur
         drawn=warped.copy() if draw is None else self._store(draw(warped.copy(),self.frame))
         if draw_scene is not None:
@@ -295,6 +302,7 @@ class SourcePipeline:
                  'warp_kind':'fixed_warp' if self.warp_tree is None else 'custom_warp',
                  'composite_kind':self.composite_kind}
         history['motion_vector_source_frame']=motion_source_frame
+        history['motion_uv_storage_profile']=self.motion_uv_storage_profile
         history['motion_vector_line_profile']=self.line_rendering_profile
         history['motion_vector_raster_subpixel_bits']=self.motion_raster_subpixel_bits
         history['main_sampling_profile']=self.main_sampling_profile

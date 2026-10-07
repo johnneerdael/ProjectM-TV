@@ -11,6 +11,20 @@ def trees(warp,composite):
 
 
 class PipelineFieldsTest(unittest.TestCase):
+    def test_motion_half_storage_profile_is_recorded_and_applied(self):
+        from pipeline_fields import SourcePipeline
+        from motion_vectors import APPLE_RTZ_STORAGE,motion_uv_surface
+        warp,comp=trees('ret=GetPixel(uv);','ret=GetPixel(uv);')
+        pipeline=SourcePipeline(warp,comp,initial_feedback=np.zeros((32,32,4)),
+            warp_reads_blur=False,blur_levels=0,motion_uv_storage_profile=APPLE_RTZ_STORAGE)
+        uv=pipeline.original_uv+np.float32(.00013)
+        result=pipeline.step(warp_uv=uv,uniforms={},frame_wrap=1,motion_state={'mv_a':1})
+        np.testing.assert_array_equal(pipeline.motion_uv,motion_uv_surface(uv,storage_profile=APPLE_RTZ_STORAGE))
+        assert result.history['motion_uv_storage_profile']==APPLE_RTZ_STORAGE
+        with self.assertRaisesRegex(ValueError,'GLES300'):
+            SourcePipeline.from_source({},profile='glsl330',compatibility={},
+                motion_uv_storage_profile=APPLE_RTZ_STORAGE)
+
     def test_quad_context_and_large_viewport_are_rejected_before_first_frame(self):
         from pipeline_fields import SourcePipeline
         from quad_lines import PROFILE

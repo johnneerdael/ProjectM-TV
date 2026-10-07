@@ -43,6 +43,54 @@ def test_fused_wave_smoothing_does_not_inherit_an_unqualified_engine_context():
             domain=domain(custom_wave_smoothing_profile='float32-fma-first-v1'),compatibility={})
 
 
+def test_half_motion_storage_does_not_inherit_an_unqualified_engine_context():
+    import forecast
+    from motion_vectors import APPLE_RTZ_STORAGE
+    source=native(BASE)
+    with pytest.raises(ValueError,match='half motion storage requires'):
+        forecast.forecast_source(source,audio={},binaries=BINARIES,
+            domain=domain(motion_uv_storage_profile=APPLE_RTZ_STORAGE),compatibility={})
+
+
+def test_half_motion_storage_checks_backend_and_engine_separately(monkeypatch):
+    import copy
+    import forecast
+    from motion_vectors import APPLE_RTZ_STORAGE
+    source=native(BASE)
+    settings=domain(motion_uv_storage_profile=APPLE_RTZ_STORAGE)
+    settings['profile']='gles300'
+    with pytest.raises(ValueError,match='half motion storage requires'):
+        forecast.forecast_source(source,audio={},binaries=BINARIES,domain=settings,compatibility={})
+    pinned=copy.deepcopy(source)
+    pinned['parser_inputs']['engine']=dict(forecast.CORE_2316_ENGINE)
+    settings['profile']='glsl330'
+    with pytest.raises(ValueError,match='half motion storage requires'):
+        forecast.forecast_source(pinned,audio={},binaries=BINARIES,domain=settings,compatibility={})
+
+
+@pytest.mark.parametrize('storage_profile', ['apple-m4pro-gles-rg16f-rtz-normal-v1',
+                                            'apple-m4pro-gles-rg16f-rtz-finite-v1'])
+def test_half_motion_storage_reaches_pinned_forecast_pipeline(monkeypatch,storage_profile):
+    import forecast
+    binaries=Path(os.environ.get('MILK_TEST_2316_BINARIES',BINARIES))
+    source=native(BASE,binaries=binaries)
+    settings=domain(motion_uv_storage_profile=storage_profile)
+    settings['profile']='gles300'
+    if any(source['parser_inputs']['engine'].get(k)!=v for k,v in forecast.CORE_2316_ENGINE.items()):
+        with pytest.raises(ValueError,match='half motion storage requires'):
+            forecast.forecast_source(source,audio={},binaries=binaries,domain=settings,compatibility={})
+        return
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    seen=[];original=forecast.SourcePipeline.from_source
+    def observe(*args,**kwargs):
+        seen.append(kwargs.get('motion_uv_storage_profile'))
+        return original(*args,**kwargs)
+    monkeypatch.setattr(forecast.SourcePipeline,'from_source',observe)
+    result=forecast.forecast_source(source,audio=audio(1),binaries=binaries,domain=settings,compatibility={})
+    assert seen==[storage_profile]
+    assert result['domain']['motion_uv_storage_profile']==storage_profile
+
+
 def test_declared_fused_wave_smoothing_reaches_the_source_draw_chain(monkeypatch):
     import forecast
     binaries=Path(os.environ.get('MILK_TEST_2316_BINARIES',

@@ -11,6 +11,10 @@ from quad_lines import PROFILE,draw_quad_lines
 from scene_equations import MAIN
 from spatial import sample2d
 
+PORTABLE_STORAGE='portable-half-nearest-v1'
+APPLE_RTZ_STORAGE='apple-m4pro-gles-rg16f-rtz-normal-v1'
+APPLE_FINITE_STORAGE='apple-m4pro-gles-rg16f-rtz-finite-v1'
+
 
 def _value(state, name, *, single=False):
     value = float(state.get(name, MAIN[name][1]))
@@ -36,12 +40,24 @@ def motion_active(state):
     return min(counts) > 0
 
 
-def motion_uv_surface(uv):
+def motion_uv_surface(uv, *, storage_profile=PORTABLE_STORAGE):
+    if storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
+        raise ValueError('unknown motion UV storage profile')
     values = np.asarray(uv, dtype=np.float32)
     if values.ndim != 3 or values.shape[-1] != 2 or not np.all(np.isfinite(values)):
         raise ValueError('finite two-channel motion UV surface required')
+    if storage_profile!=PORTABLE_STORAGE:
+        magnitude=np.abs(values)
+        if np.any(magnitude>np.finfo(np.float16).max):
+            raise ValueError('half-storage profile requires finite half range')
+        if storage_profile==APPLE_RTZ_STORAGE and np.any((magnitude!=0)&(magnitude<np.finfo(np.float16).tiny)):
+            raise ValueError('half-storage profile requires zero or finite normal half range')
     with np.errstate(over='ignore'):
-        stored = values.astype(np.float16).astype(np.float32)
+        half=values.astype(np.float16)
+        if storage_profile!=PORTABLE_STORAGE:
+            overshoot=np.abs(half.astype(np.float32))>np.abs(values)
+            half=np.where(overshoot,np.nextafter(half,np.float16(0)),half)
+        stored=half.astype(np.float32)
     if not np.all(np.isfinite(stored)):
         raise ValueError('motion UV exceeds finite native half-precision storage')
     return stored

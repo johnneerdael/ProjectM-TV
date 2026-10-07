@@ -1091,3 +1091,20 @@ despite matching predicted fields. No successful batch is credited. Existing
 captures are reported, but further randomized batches are gated on fixing open
 predictor issues and retesting the affected originals. Dark-preset appearance
 requires deeper investigation; matching near-black output is not certification.
+
+The optional `motion_uv_storage_profile` selects
+`apple-m4pro-gles-rg16f-rtz-normal-v1` for qualified Apple M4 Pro/API34
+GLES motion-map framebuffer writes. It truncates finite normal half-range
+values toward zero; zero is supported, while subnormal and overflow inputs are
+rejected. The default `portable-half-nearest-v1` preserves historical behavior.
+Forecasting requires the pinned 2.3.16 engine and GLES context, and pipeline
+history records the selection. Twenty-two saved normal framebuffer controls
+match exactly. The separately declared
+`apple-m4pro-gles-rg16f-rtz-finite-v1` also permits subnormals and underflow:
+twelve frozen scaled-magnitude framebuffer observations match, including cases
+that reject nearest rounding. Signed-zero behavior is retained by the source
+conversion but is not certified by the absolute-magnitude GPU readback.
+Both profiles reject nonfinite input and finite values above 65,504.
+This models storage only: half-texture filtering remains an
+independent unresolved boundary, and the cosmic-tear motion miss stays open.
+See `fixtures/motion-uv-half-storage-2026-10-07.json`.

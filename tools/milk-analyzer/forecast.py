@@ -182,6 +182,13 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                 (domain['height']>1330 or domain['width']*domain['height']>1024*768)):
             raise ValueError(version+' higher-resolution lines/native feedback detail are not implemented')
     from quad_lines import PROFILE as quad_profile
+    from motion_vectors import PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
+    motion_storage_profile=domain.get('motion_uv_storage_profile',PORTABLE_STORAGE)
+    if motion_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
+        raise ValueError('unknown motion UV storage profile')
+    if motion_storage_profile!=PORTABLE_STORAGE and (domain['profile']!='gles300' or
+            any(engine.get(key)!=value for key,value in CORE_2316_ENGINE.items())):
+        raise ValueError('half motion storage requires declared GLES300 and pinned2.3.16engine')
     line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
     if line_profile not in {'canonical-gl-lines-v1',quad_profile}:
         raise ValueError('unknown line rendering profile')
@@ -234,7 +241,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
         main_sampling_profile=domain.get('main_sampling_profile','portable'),shader_numeric_policy=shader_numeric_policy,
         texture_sampling_profile=texture_sampling_profile,line_rendering_profile=line_profile,
-        motion_raster_subpixel_bits=domain.get('triangle_subpixel_bits'))
+        motion_raster_subpixel_bits=domain.get('triangle_subpixel_bits'),
+        motion_uv_storage_profile=motion_storage_profile)
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')

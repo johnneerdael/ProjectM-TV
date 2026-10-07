@@ -81,6 +81,41 @@ def test_motion_map_uses_half_precision_and_rejects_overflow():
         module.motion_uv_surface(uv * 1e8)
 
 
+def test_declared_half_storage_truncates_normal_values_toward_zero():
+    module=importlib.import_module('motion_vectors')
+    values=np.array([[[.500732421875,-.500732421875],
+                      [.12518310546875,-.12518310546875],
+                      [.9998999834060669,0]]],np.float32)
+    actual=module.motion_uv_surface(values,storage_profile='apple-m4pro-gles-rg16f-rtz-normal-v1')
+    np.testing.assert_array_equal(actual,np.array([[[.50048828125,-.50048828125],
+                                                   [.1251220703125,-.1251220703125],
+                                                   [.99951171875,0]]],np.float32))
+    assert not np.array_equal(actual,module.motion_uv_surface(values))
+
+
+def test_declared_half_storage_rejects_unqualified_domains():
+    module=importlib.import_module('motion_vectors')
+    for value in [2**-15,-2**-15,65536,np.inf,np.nan]:
+        with pytest.raises(ValueError,match='half|finite'):
+            module.motion_uv_surface(np.full((1,1,2),value,np.float32),
+                                    storage_profile='apple-m4pro-gles-rg16f-rtz-normal-v1')
+    with pytest.raises(ValueError,match='storage profile'):
+        module.motion_uv_surface(identity(),storage_profile='unknown')
+
+
+def test_finite_half_storage_preserves_subnormals_and_underflows_toward_zero():
+    module=importlib.import_module('motion_vectors')
+    values=np.array([[[9e-8,-9e-8],[3e-8,-3e-8],[6.099e-5,-6.099e-5]]],np.float32)
+    result=module.motion_uv_surface(values,storage_profile='apple-m4pro-gles-rg16f-rtz-finite-v1')
+    np.testing.assert_array_equal(result,np.array([[[2**-24,-2**-24],[0,-0.],
+                        [6.097555160522461e-5,-6.097555160522461e-5]]],np.float32))
+    assert np.signbit(result[0,1,1])
+    for value in [65536,np.inf,np.nan]:
+        with pytest.raises(ValueError,match='half|finite'):
+            module.motion_uv_surface(np.full((1,1,2),value,np.float32),
+                                     storage_profile='apple-m4pro-gles-rg16f-rtz-finite-v1')
+
+
 def test_drawing_uses_independent_segments_and_alpha_colour():
     module = importlib.import_module('motion_vectors')
     values = state()
