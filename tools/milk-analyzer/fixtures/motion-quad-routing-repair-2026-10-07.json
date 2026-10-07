@@ -1,0 +1,21 @@
+{
+  "issue": "Declared GLES lineprofile not forwarded to motion-vector drawing",
+  "profile": "projectmtv-gles-quad-lines-v1",
+  "published_release": "v2.3.16",
+  "original_preset": "suksma - no god here, cosmic tear.milk",
+  "original_score": 95,
+  "original_score_unchanged": true,
+  "randomized_credit": false,
+  "repair_kind": "Sourceforecaster/pipeline/independentquadmotiondrawing; rawclipcoords andpolicyhistory",
+  "learning_errors": {
+    "median_speed_viewports_per_second": 0.022960388740065257,
+    "p95_speed_viewports_per_second": 0.09599884723703442
+  },
+  "learning_mae_rgb": 0.01221922505646944,
+  "remaining": "p95 stillmisses5%; halfUVfiltering andrasterprecision notcertified",
+  "evidence_sha256": {
+    "prediction-math.json": "f598b78fb6646395396bfa05aec9272f2dbe6dfd8e6e29b47af523442869923b",
+    "all30-metrics.json": "d5d1c3d42b0f86610ca2df4b51d0c5d0bf4f8a5bb71bc5b05f2c355aef7b4627",
+    "scope.json": "da0924d095828c4b8aca6447e31cf457d8d52b9ef1ecb13aff1916b230fb0ac2"
+  }
+}

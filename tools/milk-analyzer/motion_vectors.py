@@ -7,6 +7,7 @@ profile limitations; canonical unsmoothed lines are not driver-exact coverage.
 """
 import numpy as np
 from line_points import draw_lines
+from quad_lines import PROFILE,draw_quad_lines
 from scene_equations import MAIN
 from spatial import sample2d
 
@@ -91,23 +92,35 @@ def motion_geometry(state, *, previous_uv, width, height):
     delta[zero] = minimum  # Native fallback deliberately sets both components.
     ends = starts + delta
     positions = np.stack((starts, ends), axis=1)
+    clip_positions=positions*np.float32(2)-np.float32(1)
     positions[..., 1] = np.float32(1) - positions[..., 1]
     if not np.all(np.isfinite(positions)):
         raise ValueError('nonfinite motion-vector endpoint')
-    result.update(positions=positions, minimum_length=float(minimum))
+    result.update(positions=positions,clip_positions=clip_positions, minimum_length=float(minimum))
     return result
 
 
-def draw_motion_vectors(destination, state, *, previous_uv, quantize=True):
+def draw_motion_vectors(destination, state, *, previous_uv, quantize=True,
+                        line_rendering_profile='canonical-gl-lines-v1',raster_subpixel_bits=None):
+    if line_rendering_profile not in ('canonical-gl-lines-v1',PROFILE):
+        raise ValueError('unknown motion-vector line profile')
+    if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
+        raise ValueError('motion raster subpixel bits must be an integer within4..16')
     target = np.asarray(destination, dtype=np.float32).copy()
     if target.ndim != 3 or target.shape[-1] != 4:
         raise ValueError('RGBA motion-vector framebuffer required')
     height, width = target.shape[:2]
+    if line_rendering_profile==PROFILE and (min(width,height)<=0 or width*height>1024*768):
+        raise ValueError('motion quad profile requires viewport within reference area')
     geometry = motion_geometry(state, previous_uv=previous_uv, width=width, height=height)
     if not len(geometry['positions']):
         return target
     colour = [_value(state, 'mv_' + channel, single=True) for channel in 'rgba']
-    for segment in geometry['positions']:
-        # Native GL_LINES, not a connected line strip across the grid.
-        target = draw_lines(target, segment, colour, additive=False, quantize=quantize)
+    for index,segment in enumerate(geometry['positions']):
+        # Independent flat-ended vectors, not a connected strip across the grid.
+        if line_rendering_profile==PROFILE:
+            target=draw_quad_lines(target,segment,colour,additive=False,quantize=quantize,
+                clip_positions=geometry['clip_positions'][index],raster_subpixel_bits=raster_subpixel_bits)
+        else:
+            target = draw_lines(target, segment, colour, additive=False, quantize=quantize)
     return target

@@ -11,6 +11,35 @@ def trees(warp,composite):
 
 
 class PipelineFieldsTest(unittest.TestCase):
+    def test_quad_context_and_large_viewport_are_rejected_before_first_frame(self):
+        from pipeline_fields import SourcePipeline
+        from quad_lines import PROFILE
+        with self.assertRaisesRegex(ValueError,'GLES300'):
+            SourcePipeline.from_source({},profile='glsl330',compatibility={},
+                                       line_rendering_profile=PROFILE)
+        with self.assertRaisesRegex(ValueError,'reference area'):
+            SourcePipeline(None,None,initial_feedback=np.zeros((900,900,4)),
+                warp_reads_blur=False,blur_levels=0,line_rendering_profile=PROFILE)
+
+    def test_declared_quad_profile_reaches_motion_vectors_on_second_frame(self):
+        from pipeline_fields import SourcePipeline
+        from motion_vectors import draw_motion_vectors
+        from quad_lines import PROFILE
+        warp,comp=trees('ret=GetPixel(uv);','ret=GetPixel(uv);')
+        pipeline=SourcePipeline(warp,comp,initial_feedback=np.zeros((32,32,4)),
+            warp_reads_blur=False,blur_levels=0,quantize=True,line_rendering_profile=PROFILE,
+            motion_raster_subpixel_bits=8)
+        state=dict(mv_a=1,mv_x=2,mv_y=2,mv_dx=.05,mv_dy=-.05,mv_l=1,mv_r=1,mv_g=0,mv_b=0)
+        first=pipeline.step(warp_uv=pipeline.original_uv+[.125,0],uniforms={},frame_wrap=1,motion_state=state)
+        assert np.count_nonzero(first.feedback[...,:3])==0
+        expected=draw_motion_vectors(first.feedback,state,previous_uv=pipeline.motion_uv,
+            line_rendering_profile=PROFILE,raster_subpixel_bits=8)
+        second=pipeline.step(warp_uv=pipeline.original_uv,uniforms={},frame_wrap=1,motion_state=state)
+        np.testing.assert_array_equal(second.feedback,expected)
+        assert second.history['motion_vector_line_profile']==PROFILE
+        assert second.history['motion_vector_raster_subpixel_bits']==8
+        assert second.history['motion_vector_source_frame']==0
+
     def test_main_texture_size_uses_owned_feedback_dimensions_in_both_stages(self):
         module=importlib.import_module('pipeline_fields')
         warp,comp=trees('ret=float3(texsize_main.zw,texsize_main.x/64);',

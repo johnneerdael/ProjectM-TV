@@ -1049,3 +1049,17 @@ an unforwarded GLES quad-line policy in the motion-vector path. A disposable
 quad-path prototype improves the two errors to 2.30% and 9.60%, still a miss;
 no completed repair or fresh credit is claimed. See
 `fixtures/random30-batch003-results-2026-10-07.json`.
+
+The declared GLES quad-line profile now also reaches motion-vector drawing
+through the forecaster and feedback pipeline. Motion vectors use independent
+flat-ended quads with the same declared tie bias and triangle subpixel grid;
+raw clip coordinates are retained before top-origin conversion. Historical
+canonical line coverage remains the default. Pipeline history records the
+motion line profile and grid, and vectors still use the previous frame's UV map.
+This repairs the missing routing, not every endpoint/raster calculation.
+
+The integrated cosmic-tear learning retest still has 2.30% median-motion and
+9.60% p95 error. Its original 95 grade stays unchanged. Half-float motion-UV
+texture filtering is a separate unresolved numerical boundary: isolated tests
+reject exact bilinear interpolation, while simple fixed8/half-rounding models
+still miss some cases. No unqualified half-sampler rule is added or credited.

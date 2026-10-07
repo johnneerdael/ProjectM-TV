@@ -90,3 +90,38 @@ def test_drawing_uses_independent_segments_and_alpha_colour():
     assert np.count_nonzero(result[..., 0]) > 0
     assert np.max(result[..., 0]) == .5
     assert np.count_nonzero(result[..., 1:3]) == 0
+
+
+def test_declared_quad_profile_uses_native_flat_ended_band_coverage():
+    from motion_vectors import draw_motion_vectors,motion_geometry
+    from quad_lines import PROFILE,draw_quad_lines
+    target=np.zeros((32,32,4),np.float32)
+    values=state();uv=identity()+[.125,0]
+    segment=motion_geometry(values,previous_uv=uv,width=32,height=32)['positions'][0]
+    expected=draw_quad_lines(target,segment,[1,0,0,1],additive=False,
+        clip_positions=segment*np.array([2,-2],np.float32)+np.array([-1,1],np.float32),
+        raster_subpixel_bits=8)
+    actual=draw_motion_vectors(target,values,previous_uv=uv,
+        line_rendering_profile=PROFILE,raster_subpixel_bits=8)
+    np.testing.assert_array_equal(actual,expected)
+    assert not np.array_equal(actual,draw_motion_vectors(target,values,previous_uv=uv))
+
+
+def test_motion_line_profile_rejects_unknown_coverage_rules():
+    from motion_vectors import draw_motion_vectors
+    with pytest.raises(ValueError,match='motion.*line profile'):
+        draw_motion_vectors(np.zeros((32,32,4),np.float32),state(),previous_uv=identity(),
+                            line_rendering_profile='unknown')
+
+
+def test_motion_grid_and_viewport_guards_do_not_depend_on_visible_vectors():
+    from motion_vectors import draw_motion_vectors
+    from quad_lines import PROFILE
+    hidden=state();hidden['mv_a']=0
+    for bits in [True,3,17]:
+        with pytest.raises(ValueError,match='subpixel'):
+            draw_motion_vectors(np.zeros((32,32,4)),hidden,previous_uv=None,
+                                raster_subpixel_bits=bits)
+    with pytest.raises(ValueError,match='reference area'):
+        draw_motion_vectors(np.zeros((900,900,4)),hidden,previous_uv=None,
+                            line_rendering_profile=PROFILE)

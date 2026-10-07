@@ -45,7 +45,14 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None):
+        from quad_lines import PROFILE as quad_profile
+        if line_rendering_profile not in ('canonical-gl-lines-v1',quad_profile):
+            raise ValueError('unknown motion-vector line profile')
+        if motion_raster_subpixel_bits is not None and (type(motion_raster_subpixel_bits) is not int or not 4<=motion_raster_subpixel_bits<=16):
+            raise ValueError('motion raster subpixel bits must be an integer within4..16')
+        self.line_rendering_profile=line_rendering_profile
+        self.motion_raster_subpixel_bits=motion_raster_subpixel_bits
         if shader_numeric_policy not in {'strict',GLES_HIGHP_INFINITY}:raise ValueError('unsupported shader numeric policy')
         if shader_numeric_policy==GLES_HIGHP_INFINITY and coordinate_profile!='strict':raise ValueError('unsupported mixed shader numeric/coordinate policies')
         self.shader_numeric_policy=shader_numeric_policy
@@ -54,6 +61,8 @@ class SourcePipeline:
         field=np.asarray(initial_feedback,dtype=np.float32)
         if field.ndim!=3 or field.shape[2]!=4 or min(field.shape[:2])<=0 or not np.all(np.isfinite(field)):
             raise ValueError('explicit finite RGBA initial feedback required')
+        if line_rendering_profile==quad_profile and field.shape[0]*field.shape[1]>1024*768:
+            raise ValueError('motion quad profile requires viewport within reference area')
         if type(blur_levels) is not int or not 0<=blur_levels<=3:raise ValueError('blur level0..3 required')
         self.warp_tree=warp_tree;self.composite_tree=composite_tree
         self.language_extensions=language_extensions or {}
@@ -99,6 +108,9 @@ class SourcePipeline:
 
     @classmethod
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
+        from quad_lines import PROFILE as quad_profile
+        if kwargs.get('line_rendering_profile','canonical-gl-lines-v1')==quad_profile and profile!='gles300':
+            raise ValueError('motion quad profile requires declared GLES300 context')
         if kwargs.get('texture_sampling_profile','portable')!='portable' and profile!='gles300':
             raise ValueError('observed texture profile requires declared GLES300 context')
         if kwargs.get('shader_numeric_policy','strict')!='strict' and profile!='gles300':
@@ -195,7 +207,9 @@ class SourcePipeline:
         pending_motion_uv=uv
         if write_motion and self.frame>0:
             previous=self._store(draw_motion_vectors(previous,motion_state,
-                previous_uv=self.motion_uv,quantize=self.quantize))
+                previous_uv=self.motion_uv,quantize=self.quantize,
+                line_rendering_profile=self.line_rendering_profile,
+                raster_subpixel_bits=self.motion_raster_subpixel_bits))
             motion_source_frame=self.motion_uv_frame
         if motion_vectors is not None and self.frame>0:
             previous=self._store(motion_vectors(previous,self.frame))
@@ -281,6 +295,8 @@ class SourcePipeline:
                  'warp_kind':'fixed_warp' if self.warp_tree is None else 'custom_warp',
                  'composite_kind':self.composite_kind}
         history['motion_vector_source_frame']=motion_source_frame
+        history['motion_vector_line_profile']=self.line_rendering_profile
+        history['motion_vector_raster_subpixel_bits']=self.motion_raster_subpixel_bits
         history['main_sampling_profile']=self.main_sampling_profile
         if self.texture_sampling_profile!='portable':history['texture_sampling_profile']=self.texture_sampling_profile
         history['composite_subpixel_bits']=self.composite_mesh.get('raster_subpixel_bits') if self.composite_kind!='legacy_composite' else None

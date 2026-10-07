@@ -233,7 +233,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         quantize=domain['quantize'],coordinate_profile=domain.get('coordinate_profile','strict'),
         composite_subpixel_bits=domain.get('composite_subpixel_bits'),
         main_sampling_profile=domain.get('main_sampling_profile','portable'),shader_numeric_policy=shader_numeric_policy,
-        texture_sampling_profile=texture_sampling_profile)
+        texture_sampling_profile=texture_sampling_profile,line_rendering_profile=line_profile,
+        motion_raster_subpixel_bits=domain.get('triangle_subpixel_bits'))
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
