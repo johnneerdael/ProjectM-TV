@@ -1,0 +1,23 @@
+{
+  "scope": "Independentlyassessed retrospectiveCosmic30frame repair; no freshrandomcredit",
+  "preset": "suksma - no god here, cosmic tear.milk",
+  "preset_sha256": "41796b2784e83a886ec221f8a8dc19fdd303d41a056ec3a48e9e85201b70cbee",
+  "score": 100,
+  "original_score": 95,
+  "fresh_randomized_credit": 0,
+  "prediction_basis": "source-with-measured-operator",
+  "independent_hardware_sampler_math": false,
+  "assessment_sha256": "0233732194a3135ab90dca34a141f724bfb8f68f86f76f2340e3f40a752442f7",
+  "assessment_path": "build/visual-loop/random30frames-core2316-2026-10-07/repairs/cosmic-measured-motion2317-bound-v2/repair-assessment.json",
+  "maximum_relative_error_percent": 2.2076753166981415,
+  "events_match": true,
+  "limitations": [
+    "This is a retrospective known-preset learning assessment and grants zero fresh randomized, successful-batch or streak credit; the original 95 remains unchanged.",
+    "The auxiliary numerical GPU sampler measures hardware behaviour. This repair is not an independent source-only hardware sampler reconstruction and cannot certify strict-source math.",
+    "Validation is limited to the declared 256x144, 48x32 mesh, 30 paired frames at 30 Hz, matched audio/random inputs, published v2.3.17 core and Apple M4 Pro API34 GLES emulator context. It does not establish cross-GPU/TV/Windows/high-resolution or longer-window fidelity.",
+    "Host sinf/cosf Android bit parity remains unverified, as stated in frozen provenance; exact raster/sampler arithmetic is not generally proved by this visual repair.",
+    "The frozen model is historical. Current forecast.py and geometry_features.py differ after af04165a; matching ef8728b3 bytes establish historical identity, and current-model drift is explicitly retained.",
+    "No renderer bug or native hardware-arithmetic derivation is established by the repaired comparison."
+  ],
+  "remaining": "Independenthalf-sampler reconstruction remainsresearch; dark/clipped/indexing failures remainopen"
+}

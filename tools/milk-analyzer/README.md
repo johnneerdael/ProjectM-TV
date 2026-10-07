@@ -1310,3 +1310,13 @@ does not change the predicted output. This establishes source-model suppression,
 not native/legacy appearance parity or a supported visible speed. Original60 and
 unknown clauses remain. See
 `fixtures/dark10-composite-factor-attribution-2026-10-07.json`.
+
+The corrected bound-v2 Cosmic learning retest now has a written independent
+assessment: all20claims and30pairs score100 under the unchanged numerical5% and
+exact-event rules. Maximum numeric error is2.2076753%. All29 actual-consumed
+operator bindings and the305-artifact/86-context seal verify; current geometry-
+budget code changes are separated from matching historical model bytes. Original95
+is retained, with zero fresh randomized/batch/streak credit. This closes only the
+declared measured-operator repair window, not independent hardware-sampler math
+or the other dark/clipped/indexing cases. See
+`fixtures/cosmic-measured-operator-repair-2026-10-07.json`.
