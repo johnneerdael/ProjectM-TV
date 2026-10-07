@@ -109,5 +109,27 @@
     }
   ],
   "original_cosmic_score": 95,
-  "latest_full_aar_p95_error_percent": 8.36484
+  "latest_full_aar_p95_error_percent": 8.36484,
+  "second_sweep": {
+    "control": "half-case14-y-full-sweep",
+    "input_red": [
+      0.615234375,
+      0.619140625
+    ],
+    "x_fraction": 0.3125,
+    "upper_count": 95,
+    "lower_count": 162,
+    "finding": "Upper at multiples4 near endpoints and evens inmiddle; low/high agree. Prior step4sampling hid failures.",
+    "files": {
+      "HalfCase14YSweepProbe.java": "00b21193a1074d50fc3bcd7a02c5aabdea4872ea469093460e277c7a6b5b88cc",
+      "texture14.rg.f32": "1cf78a38cc76a006f37deeea59f9922e8de8bd9cfe2b5ed7663c401a1247ca04",
+      "comparison.json": "176a9f70d9546dcba14695b672397e4b10d939abe7c614766217945d03b2bc61",
+      "stdout.json": "dbf422d4fdda08074c05d0393efcbfebbdcbbd80c7846ea55e0d6138ed802d44",
+      "freeze.json": "ee16b3382d9e398ce23ffb00ed2e1d0aaf44dd98929cc3e4178194ee617e1ce8"
+    }
+  },
+  "rejected_bounded_hypotheses": [
+    "Shared five-guard-bit Yproduct truncation failscase14.",
+    "Independent15fractional-mantissa product truncation failsboth completeY sweeps."
+  ]
 }
