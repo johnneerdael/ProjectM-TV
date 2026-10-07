@@ -149,9 +149,11 @@ static void AssertEdgePixels()
         // The authored rad=2/zoom=.25 fan maps pixel centers affinely, with
         // a projection flip in v. Use this unit-slope UV mapping so the sample
         // coordinates and bilinear weights are exact multiples of 1/16 and 1/8.
+        // Subtract the half-pixel D3D9 geometry alignment: GL samples x+.5/y+.5,
+        // but the source geometry sees x/y+1 after its projection Y flip.
         // Both axes still cross the texture edges, so clamp/nearest must fail.
-        const float u = .5f + ((x + .5f) / 8.f - 1.f);
-        const float v = .5f - ((y + .5f) / 8.f - 1.f);
+        const float u = .5f + (x / 8.f - 1.f);
+        const float v = .5f - ((y + 1.f) / 8.f - 1.f);
         const float tx = u * 2.f - .5f, ty = v * 2.f - .5f;
         const int ix = static_cast<int>(std::floor(tx)), iy = static_cast<int>(std::floor(ty));
         const float fx = tx - ix, fy = ty - iy;
