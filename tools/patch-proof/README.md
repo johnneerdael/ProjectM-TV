@@ -67,3 +67,7 @@ and its containing folder for `--textures`, then add `--texture-journey`. It use
 roots `a`/`b`, switches the root at 20, starts a two-second soft cut at 21 and resets
 textures at 40. The worker retains 40/59/119 PNGs as well as 29; the generic comparison
 shows 119 after the transition completes, so inspect 40/59 for the lifetime defect.
+
+New capture records identify their producer script; verification records identify
+the verifier. The capture tool removes only its own hashed remote scratch directory
+after pulling evidence, including on handled failures. Local records remain intact.

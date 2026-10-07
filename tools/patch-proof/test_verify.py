@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 SPEC = importlib.util.spec_from_file_location('patch_proof_verify', Path(__file__).with_name('verify.py'))
 VERIFY = importlib.util.module_from_spec(SPEC)
@@ -32,13 +32,17 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                'frames': 120, 'width': 2, 'height': 1,
                **dict(zip(('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version'), backend))},
                'frame_hashes': [VERIFY.sha(bytes([255, 0, 0, 0, 255, 0]))] * 120}
-        self.result = {'dimensions': [2, 1], 'backend': backend, 'roles': {
+        self.result = {'capture_kind': 'image', 'dimensions': [2, 1], 'backend': backend, 'roles': {
             'patched': {'worker': identity, 'repeat_equal': True, 'runs': [row, json.loads(json.dumps(row))]}}}
         for repeat in (0, 1):
             directory = self.work / 'patched' / str(repeat)
             directory.mkdir(parents=True)
             for frame in (29, 59, 119):
                 Image.frombytes('RGB', (2, 1), bytes([255, 0, 0, 0, 255, 0])).save(directory / f'{frame}.png')
+        image = Image.new('RGB', (2, 33), '#171717')
+        ImageDraw.Draw(image).text((4, 8), 'patched', fill='white')
+        image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
+        image.save(self.work / 'comparison.png')
         self.save()
 
     def tearDown(self):
@@ -83,6 +87,71 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.save()
         with self.assertRaisesRegex(ValueError, 'Backend'):
             VERIFY.verify(self.work)
+
+    def test_rejects_missing_comparison(self):
+        (self.work / 'comparison.png').unlink()
+        with self.assertRaisesRegex(ValueError, 'Missing comparison'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_missing_texture_journey_frame(self):
+        self.result['capture_kind'] = 'texture-journey'
+        self.save()
+        with self.assertRaises(FileNotFoundError):
+            VERIFY.verify(self.work)
+
+    def test_rejects_broken_evaluator_thread_contract(self):
+        self.result['capture_kind'] = 'evaluator'
+        control = {'compiled': [True, True], 'streams': [list(range(128)), list(range(1, 129))],
+                   'fresh_thread_streams_equal': False, 'lone_dot_is_zero': True}
+        self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'thread-isolation'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_broken_evaluator_lone_dot_contract(self):
+        self.result['capture_kind'] = 'evaluator'
+        control = {'compiled': [True, True], 'streams': [list(range(128))] * 2,
+                   'fresh_thread_streams_equal': True, 'lone_dot_is_zero': False}
+        self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'lone-dot'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_altered_rejection_panel(self):
+        self.result['roles']['upstream'] = {
+            'worker': self.result['roles']['patched']['worker'],
+            'repeat_equal': False, 'runs': [{'status': 'failed', 'exit': 1}] * 2}
+        self.save()
+        image = Image.new('RGB', (4, 33), '#171717')
+        ImageDraw.Draw(image).text((4, 8), 'patched', fill='white')
+        image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
+        image.putpixel((2, 32), (255, 255, 255))
+        image.save(self.work / 'comparison.png')
+        with self.assertRaisesRegex(ValueError, 'rejection panels'):
+            VERIFY.verify(self.work)
+
+
+    def evaluator_fixture(self, stream):
+        self.result['capture_kind'] = 'evaluator'
+        control = {'compiled': [True, True], 'streams': [stream, stream],
+                   'fresh_thread_streams_equal': True, 'lone_dot_is_zero': True}
+        self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
+        self.save()
+
+    def test_accepts_valid_evaluator_contract(self):
+        self.evaluator_fixture(list(range(128)))
+        self.assertEqual(VERIFY.verify(self.work)['successful_roles'], ['patched'])
+
+    def test_rejects_constant_random_stream(self):
+        self.evaluator_fixture([0] * 128)
+        with self.assertRaisesRegex(ValueError, 'constant'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_nonfinite_random_stream(self):
+        self.evaluator_fixture(list(range(127)) + [float('nan')])
+        with self.assertRaisesRegex(ValueError, 'samples are invalid'):
+            VERIFY.verify(self.work)
+
 
 
 if __name__ == '__main__':

@@ -133,7 +133,7 @@ def main() -> None:
                             'harness_sha256': {p.relative_to(harness).as_posix(): sha(p)
                                               for p in sorted(harness.rglob('*')) if p.is_file()},
                             'adjustments_sha256': sha(dest / 'capture-adjustments.diff'),
-                            'shipping_binary': False}
+                            'prepare_sha256': sha(Path(__file__)), 'shipping_binary': False}
         write(dest / 'identity.json', identities[role])
         print(role + ': built', flush=True)
     write(work / 'workers.json', identities)
