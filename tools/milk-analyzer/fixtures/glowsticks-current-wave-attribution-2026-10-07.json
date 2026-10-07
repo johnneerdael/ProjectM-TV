@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "scope": "Current source first-frame evaluated projection/smoothing compared with archived unchangedpublishedAARuploads; no newrandomizedcredit",
+  "original_preset": "EoS - glowsticks v2 04 music minimal oscilloscope vomit mix rnz.milk",
+  "comparison": [
+    {
+      "wave": 0,
+      "strip_endpoint_padding_verified": true,
+      "different_per_component": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maximum_per_component": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "wave": 1,
+      "strip_endpoint_padding_verified": true,
+      "different_per_component": [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maximum_per_component": [
+        0.0,
+        5.960464477539063e-08,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "mismatches": [
+    {
+      "index": 352,
+      "source": [
+        0.5384177565574646,
+        -0.4504137635231018
+      ],
+      "native": [
+        0.5384177565574646,
+        -0.4504137933254242
+      ]
+    },
+    {
+      "index": 353,
+      "source": [
+        0.5373163819313049,
+        -0.45773646235466003
+      ],
+      "native": [
+        0.5373163819313049,
+        -0.4577364921569824
+      ]
+    },
+    {
+      "index": 755,
+      "source": [
+        0.6474234461784363,
+        -0.7091311812400818
+      ],
+      "native": [
+        0.6474234461784363,
+        -0.7091312408447266
+      ]
+    },
+    {
+      "index": 756,
+      "source": [
+        0.6483141779899597,
+        -0.6910613179206848
+      ],
+      "native": [
+        0.6483141779899597,
+        -0.6910613775253296
+      ]
+    },
+    {
+      "index": 757,
+      "source": [
+        0.6478450298309326,
+        -0.7091277241706848
+      ],
+      "native": [
+        0.6478450298309326,
+        -0.7091277837753296
+      ]
+    }
+  ],
+  "native_strip_padding_verified": true,
+  "remaining": "Two unsmoothedYvalues differ before smoothing; final raster/blend feedback diagnosis remains open",
+  "original_score_retained": 97.5,
+  "randomized_credit": 0
+}

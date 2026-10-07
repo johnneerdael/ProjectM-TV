@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "scope": "Fresh numerical filtering hypotheses rejected; noAARor newrandomizedcredit",
+  "fresh_freeze_sha256": "bafe13b2d309f05b4722e9518bb6455d099165587171970b3e740eb58e18f912",
+  "candidate_results": {
+    "T18": {
+      "matches": 32,
+      "total": 64
+    },
+    "T19": {
+      "matches": 46,
+      "total": 64
+    },
+    "T20": {
+      "matches": 58,
+      "total": 64
+    },
+    "P17": {
+      "matches": 30,
+      "total": 64
+    },
+    "P18": {
+      "matches": 50,
+      "total": 64
+    },
+    "P19": {
+      "matches": 62,
+      "total": 64
+    },
+    "Min19": {
+      "matches": 62,
+      "total": 64
+    },
+    "Out19": {
+      "matches": 60,
+      "total": 64
+    },
+    "fixed8-even": {
+      "matches": 60,
+      "total": 64
+    },
+    "fixed8-up": {
+      "matches": 60,
+      "total": 64
+    }
+  },
+  "uploaded_texel_identity": {
+    "matches": 16,
+    "count": 16
+  },
+  "disposition": "No exactsamplingruleaccepted; nextbatchgate staysclosed",
+  "artifacts": {
+    "half-uv-axis-slope": {
+      "disposition.json": "3a3329b4e94dadc54f137ca0aadd0804eaaf43fabacd4ee2a47e953a35535e71",
+      "coefficient-mantissa-rejection.json": "1326218ef8bf46a567e404d941001a1162367f8cecc4ce0ba96f341f69778b90",
+      "HalfUvAxisSlopeProbe.java": "2797d1bb84318d9352ef103641f42ee5f23cdc4d00f2d05a01dfa7d240e77400",
+      "gfxstream-gl-index.json": "a196f15a70c095d4905a96f7603dcbeb5e3952bba3f70699cc3cfcb240c6b3fb",
+      "comparison.json": "02b2c56b5435980c0261448ae7268ec63bc547fd0bf107888ba1de5f9e948a47",
+      "product11-final-rounding.json": "a7fc9def1d2fea4369b8d2279614657aaaad4123ef6e42f31f1e930c1dab6aaf",
+      "product11-other-controls.json": "d698196d396e5f452452fff08f3493ea10c0512c4d2aedcbd41f7c8d9a811b3b",
+      "gfxstream-v2-index.json": "d530ac3f27f3ee44f28d9148a67193d5adb9c1b01377fe86a8acccb3974995c0",
+      "frozen-predictions.json": "473546601860bb632241768b4de1d99c1ebe71378450604a6b8a17378ba01872",
+      "stdout.json": "b2f01f644a2a7872912f7ceaaf197ffca33dfa0a00a024d8ed35535721886b5d",
+      "gfxstream-translator-index.json": "e148a323aaa7b1390e76779e69db69ef234a2ba07c3c80b293d7f4590f6d1535",
+      "mantissa-products-rejection.json": "87406a10f86e28437bf7d8bb58a973c9d7a48abab86cedaf9774a801e8582050",
+      "staged-product-rounding.json": "f60ed6141634ec9482b70eaef4d356dfab412733d70edeab47441311e9c4fcee"
+    },
+    "half-uv-crossed-y": {
+      "shared-exponent-hypotheses.json": "3f6d251e357237ed31e0bf0f9b1de206bf71a0ed1b053283355eab963e4f03c2",
+      "HalfUvCrossedProbe.java": "6e72f8207636e528da56d03a1a39efa95cbf83945b7d4f7a922a325bd1a25e11",
+      "stdout.json": "fc63bee1be72f28c3b3110f7d319b33d998c88aa2ec6178f7634732694617142",
+      "freeze.json": "982ec698083b3a6ea85021432f236bc37db12132bfe4740f78298dddac8d3ba0"
+    },
+    "half-uv-shared-exponent-fresh": {
+      "HalfUvSharedFreshProbe.java": "67618e6a5d68888ec2e229ae85c3cb77dee3d11117087d164270cc44da434786",
+      "comparison.json": "18b0a8dd9913fc507e3716e90097f3e94727f381693ce524ec928552a1adc0fa",
+      "frozen-predictions.json": "bafe13b2d309f05b4722e9518bb6455d099165587171970b3e740eb58e18f912",
+      "identity.json": "93401034586168427a7654bba497906eccd8c6bab4454171c11e34391a5f9b4b",
+      "stdout.json": "33b47ca742f50cfc13aa5cc62dbd9d9bad851bdd35d8f13675888631c8d3359c"
+    },
+    "half-uv-shared-fresh-upload": {
+      "comparison.json": "39cdffe45d1380d5d00e00ca4e7d09ca4b9f05dbd3fb12ed6f2ea10a5b79b304",
+      "stdout.json": "af2b316e596a469d7d30975e962251af6b835a518b9b4bd8e571a6842c789242",
+      "HalfUvSharedUploadProbe.java": "f55f403fd88d8736fcc96d0a069339a8d7486fb00fc2f3a8432b8fde60cc73b9",
+      "freeze.json": "02c1f2b2f609228fe28b29306cc9d9335568fba4798bd165bcb08df2170122ac"
+    }
+  }
+}

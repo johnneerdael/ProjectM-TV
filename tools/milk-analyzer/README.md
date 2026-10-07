@@ -1117,3 +1117,11 @@ Exact fixed-fraction ties and nearby nonexact coordinates differ. No exact
 filter rule is accepted from these controls, and the original motion miss stays
 open. Sources, frozen alternatives and observed hashes are recorded in
 `fixtures/half-uv-filtering-axis-research-2026-10-07.json`.
+
+A crossed-Y control establishes that four-product accumulation can change a
+horizontal ramp's half tie even when its texels are constant along Y. Shared
+exponent truncation candidates fit all 224 earlier observations, but an
+independently frozen fresh discriminator rejects every candidate (best 62/64).
+Nearest fetch verifies all 16 fresh uploaded values against the declared RTZ
+input. No filtering implementation is credited from the near-fit; the failed
+preset remains open. See `fixtures/half-uv-fresh-discriminator-2026-10-07.json`.
