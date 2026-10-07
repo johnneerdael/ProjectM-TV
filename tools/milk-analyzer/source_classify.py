@@ -5,9 +5,11 @@ from pathlib import Path
 
 from mood_profiles import PROFILES,get_profile
 from mood_scoring import score_source_features
+from core_backend import freeze_scorer_sources,verify_scorer_sources
 
 
 def main():
+    source_hashes=freeze_scorer_sources()
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--features',type=Path,required=True)
     parser.add_argument('--output',type=Path,required=True)
@@ -20,9 +22,11 @@ def main():
     record=json.loads(args.features.read_text())
     profile=json.loads(args.profile_file.read_text()) if args.profile_file else get_profile(args.profile,age_band=args.age_band)
     result=score_source_features(record,profile=profile,allow_simulated=args.allow_simulated)
+    verify_scorer_sources(source_hashes)
     args.output.parent.mkdir(parents=True,exist_ok=True)
     temporary=args.output.with_suffix(args.output.suffix+'.tmp')
     temporary.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
+    verify_scorer_sources(source_hashes)
     temporary.replace(args.output)
     print(json.dumps({'model':result['model_id'],'profile':result['profile']['id'],
                       'eligible':result['profile']['eligible'],'bands':result['bands'],'output':str(args.output)}))

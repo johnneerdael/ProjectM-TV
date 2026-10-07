@@ -11,6 +11,7 @@ import math
 from numbers import Real
 from pathlib import Path
 import re
+from core_backend import freeze_scorer_sources,verify_scorer_sources
 
 
 STRICT = 'strict-source-no-display-frames'
@@ -65,7 +66,7 @@ def _hash(value, length=64):
         raise ValueError('exact source/context hash required')
 
 
-def _context(context, *, require_wave):
+def _context(context, *, require_wave,source_hashes):
     result = copy.deepcopy(context)
     inputs = result.get('input_hashes', {})
     for name in INPUT_HASHES:
@@ -86,7 +87,7 @@ def _context(context, *, require_wave):
         raise ValueError('declared feature domain required')
     if _digest(result['domain']) != inputs['domain_sha256']:
         raise ValueError('feature domain payload differs from its hash')
-    result['feature_extractor_sha256'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    result['feature_extractor_sha256'] = source_hashes[Path(__file__).name]
     return result
 
 
@@ -124,7 +125,8 @@ def _geometry(geometry):
 
 
 def _record(context, features, basis):
-    context = _context(context, require_wave=basis == SIMULATED)
+    source_hashes=freeze_scorer_sources()
+    context = _context(context, require_wave=basis == SIMULATED,source_hashes=source_hashes)
     result = {'schema_version': 1, 'feature_basis': basis, 'context': context,
               'context_sha256': _digest(context), 'features': features,
               'uses_rendered_reference': False, 'appearance_accuracy_verified': False,
@@ -132,6 +134,7 @@ def _record(context, features, basis):
                               'Dependencies identify calculation inputs, not a complete audio/material influence proof',
                               'Unknown motion/flash evidence must not be replaced with zero for collection eligibility']}
     result['record_sha256'] = _digest(result)
+    verify_scorer_sources(source_hashes)
     return result
 
 

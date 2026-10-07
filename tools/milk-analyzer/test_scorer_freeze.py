@@ -61,3 +61,59 @@ else:raise AssertionError('Old loaded scorer accepted new source')
 '''
     result=subprocess.run([sys.executable,'-c',code],cwd=tmp_path,capture_output=True,text=True)
     assert result.returncode==0,result.stderr
+
+
+@pytest.mark.parametrize('phase',['before','during','persist'])
+def test_cached_mood_scoring_cannot_attribute_loaded_code_to_new_source(tmp_path,phase):
+    from test_mood_scoring import record,complete
+    source=Path(__file__).parent
+    for path in source.glob('*.py'):shutil.copy2(path,tmp_path/path.name)
+    import json
+    (tmp_path/'features.json').write_text(json.dumps(record(complete())))
+    code='''
+import json,sys
+from pathlib import Path
+import mood_scoring,source_classify
+record=json.loads(Path('features.json').read_text())
+def edit():
+    p=Path('mood_scoring.py');p.write_text(p.read_text()+'\\n# replaced cached scoring source\\n')
+phase=PHASE
+if phase=='before':edit()
+elif phase=='during':
+    original=mood_scoring._verify
+    def changed(*args):original(*args);edit()
+    mood_scoring._verify=changed
+else:
+    original=source_classify.score_source_features
+    def changed(*args,**kwargs):
+        result=original(*args,**kwargs);edit();return result
+    source_classify.score_source_features=changed
+try:
+    if phase=='persist':
+        sys.argv=['source_classify.py','--features','features.json','--output','output/scores.json']
+        source_classify.main()
+    else:mood_scoring.score_source_features(record)
+except ValueError as error:assert 'source' in str(error) and 'changed' in str(error),str(error)
+else:raise AssertionError('Old loaded mood scoring received a new source identity')
+assert not Path('output').exists()
+'''.replace('PHASE',repr(phase))
+    result=subprocess.run([sys.executable,'-c',code],cwd=tmp_path,capture_output=True,text=True)
+    assert result.returncode==0,result.stderr
+
+
+def test_feature_extractor_cannot_record_a_new_hash_for_old_loaded_code(tmp_path):
+    source=Path(__file__).parent
+    for path in source.glob('*.py'):shutil.copy2(path,tmp_path/path.name)
+    code='''
+from pathlib import Path
+import source_features
+from test_source_features import prediction
+data=prediction()
+p=Path('source_features.py');p.write_text(p.read_text()+'\\n# replaced feature extractor\\n')
+try:source_features.geometry_feature_record(data['geometry_features'],context={
+    key:data[key] for key in ['input_hashes','provenance','domain']})
+except ValueError as error:assert 'source' in str(error) and 'changed' in str(error)
+else:raise AssertionError('Old extractor recorded a new source identity')
+'''
+    result=subprocess.run([sys.executable,'-c',code],cwd=tmp_path,capture_output=True,text=True)
+    assert result.returncode==0,result.stderr

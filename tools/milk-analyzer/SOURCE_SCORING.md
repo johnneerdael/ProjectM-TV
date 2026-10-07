@@ -27,6 +27,15 @@ declared conservative bound evidence with `require_bound:true`.
 
 Profile changes rescore the same record without source execution. Output preserves
 the feature-record/context hashes, scoring-code hash and profile hash separately.
+
+Scoring and feature-record creation check production-module hashes against their
+import snapshot, keep those hashes through calculation, and reject source edits
+before returning evidence. `scoring_source_sha256` comes from that frozen map;
+`scoring_sources_sha256` records the full map including profile/default helpers.
+The CLI rechecks before replacing the result file. Feature records and profile
+objects are copied before scoring so their identity describes the consumed values.
+Use a fresh process after code edits; these boundary checks do not detect every
+possible transient edit-and-restore or authenticate externally supplied evidence.
 Unknown measurements retain their requested preference weight. Equal large weights
 are normalized safely; numeric underflow is unresolved rather than silently losing
 that preference. A profile with no measurements is not automatically eligible.

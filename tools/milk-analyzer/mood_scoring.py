@@ -12,6 +12,7 @@ from numbers import Real
 from pathlib import Path
 
 from source_features import STRICT, SIMULATED
+from core_backend import freeze_scorer_sources,verify_scorer_sources
 
 
 MODEL_ID = 'source-moods-assumed-v1'
@@ -175,6 +176,8 @@ def _profile(record, scores, profile):
 
 
 def score_source_features(record, *, profile=None, allow_simulated=False):
+    source_hashes=freeze_scorer_sources()
+    record=copy.deepcopy(record);profile=copy.deepcopy(profile)
     _verify(record,allow_simulated)
     motion=_normalized(record,'motion.speed_p95_vp_s',.75)
     acceleration=_normalized(record,'motion.acceleration_p95_vp_s2',3.)
@@ -228,7 +231,8 @@ def score_source_features(record, *, profile=None, allow_simulated=False):
                    ('structure.nonlinear_warp','feedback.complexity','structure.symmetry'))
     if scores['psychedelic']['interval'][0]>=70 and structural>=2:tags.append('Psychedelic')
     result={'schema_version':1,'model_id':MODEL_ID,'model_status':'initial assumed weights; not calibrated',
-            'scoring_source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'scoring_source_sha256':source_hashes[Path(__file__).name],
+            'scoring_sources_sha256':source_hashes,
             'feature_record_sha256':record['record_sha256'],'context_sha256':record['context_sha256'],
             'feature_basis':record['feature_basis'],'scores':scores,'bands':bands,
             'ambiguous_bands':ambiguous,'tags':tags,'chill_constraints':constraints,
@@ -239,4 +243,5 @@ def score_source_features(record, *, profile=None, allow_simulated=False):
     if profile is not None:
         result['profile_sha256']=_digest(profile)
         result['profile']=_profile(record,scores,profile)
+    verify_scorer_sources(source_hashes)
     return result

@@ -508,3 +508,7 @@ with build-tools36.1.0; an absent SDK/JDK skips those compiler tests explicitly.
 Freeze scorer sources before preflight, compare with import hashes, and reject
 source changes before result persistence. Model identities hash the once-read
 model bytes. Source edits require a fresh scorer process.
+Cached mood scoring and feature-record creation use the same import-checked
+source guard. Scores record the frozen production-module map; the classifier
+rechecks it before atomic result replacement. Do not label loaded code with a
+late filesystem digest or silently accept an edited scoring module.
