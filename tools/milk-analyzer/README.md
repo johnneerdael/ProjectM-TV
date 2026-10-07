@@ -1269,4 +1269,14 @@ independently frozen signed/subnormal/edge-clamp texel-centre inputs. This quali
 the numerical operator within the recorded backend, not portable GPU behavior.
 The same-preset Cosmic forecast/comparison remains pending; its original 95 and
 latest 8.36% p95 miss are retained. See
-`fixtures/measured-motion-operator-qualification-2026-10-07.json`.
+`fixtures/measured-motion-operator-bound-v2-2026-10-07.json`.
+
+Independent review found binding gaps in the initial auxiliary adapter. That
+first Cosmic comparison remains an uncertified diagnostic, despite passing its
+numerical clauses. The corrected adapter compares actual runtime hashes directly
+to the qualified AAR/library/class/operator identity, uses a unique per-instance
+remote namespace, and verifies hashes produced by Java for the input bytes it
+actually consumed and the output it returned. The wrapper also verifies the
+bottom-origin physical-map bytes and executor-source identity. Saved evidence
+cannot change without invalidating the report. Corrected controls again match
+1,420/1,420 components; a new same-preset forecast/capture is required.

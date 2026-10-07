@@ -26,9 +26,11 @@ def _bytes(values):
 class MeasuredMotionSampler:
     def __init__(self, executor, *, identity, directory):
         qualified = json.loads((Path(__file__).parent /
-            'fixtures/measured-motion-operator-qualification-2026-10-07.json').read_text())['identity']
+            'fixtures/measured-motion-operator-bound-v2-2026-10-07.json').read_text())['identity']
         source_hash = _sha((Path(__file__).parent / 'MotionSamplerOperator.java').read_bytes())
-        if identity != qualified or identity.get('operator_source_sha256') != source_hash:
+        executor_hash = _sha((Path(__file__).parent / 'native_motion_executor.py').read_bytes())
+        if (identity != qualified or identity.get('operator_source_sha256') != source_hash or
+                identity.get('executor_source_sha256') != executor_hash):
             raise ValueError('measured motion operator identity is not qualified')
         if not callable(executor):
             raise ValueError('measured motion operator executor required')
@@ -83,7 +85,9 @@ class MeasuredMotionSampler:
                 if type(evidence.get(key)) is not int or evidence[key] != 0:
                     raise ValueError('measured motion operator rendered or unknown core frames')
             for key, expected in [('input_map_sha256', map_hash),
-                    ('input_queries_sha256', query_hash), ('output_sha256', _sha(_bytes(output)))]:
+                    ('input_queries_sha256', query_hash), ('output_sha256', _sha(_bytes(output))),
+                    ('physical_map_sha256', _sha(_bytes(field[::-1]))),
+                    ('executor_source_sha256', self._identity['executor_source_sha256'])]:
                 if evidence.get(key) != expected:
                     raise ValueError('measured motion operator result is not bound to input/output: ' + key)
             save('output.f32', _bytes(output))

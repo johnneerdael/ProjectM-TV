@@ -107,6 +107,17 @@ prediction is produced before comparison with the unchanged published core AAR
 through JNI. The source CPU adapters and native reference have separate identities.
 Unsupported arithmetic remains unknown rather than being silently treated as calm.
 
+An experimental opt-in numerical operator can resolve motion-map sampling under
+the declared GPU context. It receives only UV maps and query coordinates computed
+by the predictor, samples them in the vertex stage and returns coordinates through
+transform feedback. It loads the published core identity but initializes no preset
+and advances no core rendered frames. The forecast labels this path
+`source-with-measured-operator`, seals actual consumed input/output hashes and
+records the AAR, helper and GPU context. This measures hardware sampling; it does
+not claim an independent reconstruction of GPU arithmetic or change the packaged
+mood collections. Reference capture remains a separate step after the forecast
+is frozen. Missing or mismatched operator evidence stops the calculation.
+
 Matched timing matters even in short comparisons. The declared 30 Hz JNI test
 host rounds its clock to integer nanoseconds; the source audio producer has an
 explicit matching policy that applies this elapsed time to both equations and
