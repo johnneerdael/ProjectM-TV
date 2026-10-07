@@ -1,0 +1,2718 @@
+{
+  "batch": 2,
+  "frames_per_preset": 30,
+  "positions": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27
+  ],
+  "scores": [
+    100,
+    100,
+    100,
+    65,
+    97.5,
+    100,
+    100,
+    92.5,
+    100,
+    100
+  ],
+  "mean_score": 95.5,
+  "perfect_presets": 7,
+  "all_ten_perfect": false,
+  "successful_batches": 0,
+  "published_release": "v2.3.16",
+  "original_predictions_retained": true,
+  "claims_per_preset": 20,
+  "repair_credit": false,
+  "report_sha256": "28537d5f155e3ea2ea567ba427dfaa90d019df80e7b75168bd58f4f087d27077",
+  "final_seal_sha256": "9f7866f05dfa46cb55629344520ab308ad10656b9c8870e0c95227ab8d80099d",
+  "handoff_folders": [
+    "projectm-tv-aar-large-rotation-trig-2026-10-07",
+    "projectm-predictor-glowsticks-motion-gap-2026-10-07",
+    "projectm-predictor-zylot-triangle-motion-gap-2026-10-07",
+    "projectm-predictor-zylot-direction-claim-2026-10-07"
+  ],
+  "assessments": {
+    "1": {
+      "position": 18,
+      "preset": "suksma - coal drapes - mrt fsh smelter nz+ wanting no part of myself.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "A dark rounded intertwined central form opens on a brown rectangular field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Dark rounded intertwined centre and brown opening field match."
+        },
+        {
+          "id": "structure2",
+          "claim": "Three-dimensional-looking blue/purple loops and enclosing rounded layers grow around centre.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Blue/purple loops and enclosing rounded layers grow in corresponding positions."
+        },
+        {
+          "id": "structure3",
+          "claim": "A pale rectangular/frame-like background becomes increasingly bright behind the central loops.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Pale rectangular background/frame becomes progressively bright behind the central loops."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames retain the central intertwined figure with dense colourful surrounding borders.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Late central intertwined figure and dense colourful surrounding borders agree."
+        },
+        {
+          "id": "motion1",
+          "claim": "The intertwined central contours expand and change orientation.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Expansion and orientation changes of central intertwined contours agree across all 30 pairs."
+        },
+        {
+          "id": "motion2",
+          "claim": "Successive rounded layers build around the core and alter its outline.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Successive rounded layers build around the same core and alter the outline in corresponding phases."
+        },
+        {
+          "id": "motion3",
+          "claim": "The outer frame and bright surrounding texture become more prominent over time.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Outer framing and bright surrounding texture become increasingly prominent."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.1335582435131073, p95=0.46264903545379626 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Both numerical estimates pass: median error 1.196304%, p95 error 0.454720%; all 29 transitions are supported."
+        },
+        {
+          "id": "colour1",
+          "claim": "Muted brown/grey dominates the opening background.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Muted brown/grey opening agrees."
+        },
+        {
+          "id": "colour2",
+          "claim": "Blue/purple contours acquire green/yellow and pale highlights.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blue/purple contours gain green/yellow and pale highlights in both streams."
+        },
+        {
+          "id": "colour3",
+          "claim": "Late frames are much brighter with yellow/green/red/cyan accents around the central loops.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Late brighter output and yellow/green/red/cyan accents around the loops agree."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.5963806986808777; saturation=0.25550868809223176; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Mean luma error 0.014718% and saturation error 0.011030% pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp samples red,green,blue at differently mixed transformed/original coordinates.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-confirmed channel-specific coordinate mixing is corroborated by paired appearance."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Blur subtraction sharpens feedback, with decay and a positive constant colour addition.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Source-confirmed blur sharpening, decay and positive colour additions produce matching accumulated layers."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Thresholded volume noise modifies individual channels.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-confirmed thresholded volume-noise mechanism is corroborated by appearance, without asserting direct native program selection."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Composite iterates radial layers with cosine/gradient-derived contours and combines them with previous feedback.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Radial/cosine/gradient layers and previous feedback combine into the corresponding central figure and outer layers."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[2, 3], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak 2\u21923 brightening, independently recomputed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list [], independently recomputed."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list [], independently recomputed."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.05852830410003662; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error 0.025371% passes the unchanged 5% allowance."
+        }
+      ],
+      "critical_failure": false,
+      "critical_unknown": false,
+      "fresh_random_credit": true,
+      "successful_batch_credit": "pending all ten comparisons",
+      "missed": [],
+      "fix_pending": null,
+      "native_bug_established": false,
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "frozen_claims_sha256": "d6e2d97b8b5cd35fc663892824918c78689a3a564c6f4a851eec5070dcff6f54",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "0c950ecc39135e1a9c98c875c34e8c545db7be29485ed51129546fb93ccfc0a6",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.1335582435131073,
+          "native": 0.13515600562095642,
+          "relative_error": 0.011963036244126092,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.46264903545379626,
+          "native": 0.4605452775955199,
+          "relative_error": 0.004547200355044242,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.5963806986808777,
+          "native": 0.5964684764544169,
+          "relative_error": 0.00014718412875088364,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.25550868809223176,
+          "native": 0.2555368706583977,
+          "relative_error": 0.00011029983511074202,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.05852830410003662,
+          "native": 0.05854315310716629,
+          "relative_error": 0.00025370643072605104,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            2,
+            3
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            2,
+            3
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 0.0033589082304388285,
+        "mean_rmse_rgb": 0.011931170709431171,
+        "peak_mae_rgb": 0.00981597788631916,
+        "peak_rmse_rgb": 0.029324132949113846,
+        "source_sha256": "7b8fa1151167f4a0d980ce738225a10c8581e24099e2d77ea6265380b54534c8",
+        "native_sha256": "1157218e0089f097d6af99c322617aceda231e1c1aed09d82578c1676c14dbb9"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "all200_claims_before_first_capture": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable-claim scoring is not pixel identity or complete fine-detail certification.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program selection.",
+        "The declared sampler profile is specific to the qualified Apple emulator context."
+      ],
+      "created_utc": "2026-10-07T07:46:52.620945+00:00"
+    },
+    "2": {
+      "position": 19,
+      "preset": "Stahlregen & fishbrain + Geiss - Witchcraft (Dense) - painterly oil reflections - forcing the stars righ.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The opening is almost entirely black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Almost-black opening agrees."
+        },
+        {
+          "id": "structure2",
+          "claim": "Tiny bright fragments appear near opposing upper/lower edges.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Tiny opposing upper/lower edge fragments appear in corresponding positions."
+        },
+        {
+          "id": "structure3",
+          "claim": "The central majority stays black with no large central object.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "The central majority stays black without a large central object."
+        },
+        {
+          "id": "structure4",
+          "claim": "Later fragments remain sparse and small rather than filling the screen.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Later fragments remain sparse and small across all 30 pairs."
+        },
+        {
+          "id": "motion1",
+          "claim": "The tiny edge fragments change contour and position slightly.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Small contour and position changes agree across the opposing groups."
+        },
+        {
+          "id": "motion2",
+          "claim": "Highlights brighten and fade locally within the sparse groups.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Local brightening and fading of the highlights agree."
+        },
+        {
+          "id": "motion3",
+          "claim": "The opposing groups remain separated by a large dark central field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Opposing groups remain separated by the dark central field."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.046172745525836945, p95=0.47251836061477653 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Median error 1.441457% and p95 error 0.000117% pass; both streams retain 27/29 supported transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "The small visible fragments have yellow/green and pale highlights.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Yellow/green fragments and pale highlights agree."
+        },
+        {
+          "id": "colour2",
+          "claim": "Overall brightness and coloured screen coverage remain very low.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Low overall brightness and small coloured coverage agree."
+        },
+        {
+          "id": "colour3",
+          "claim": "Most of the viewport stays black throughout the window.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Black dominates the surrounding viewport throughout."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.0027930130142825266; saturation=0.019355752923487065; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error 0.174338% and saturation error 0.373493% pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Composite folds doubled UV coordinates into mirrored tiled samples.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-confirmed mirrored/tiled UV composition is corroborated by opposing fragment layout."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Neighbouring blur differences contribute differently coloured edge detail.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Source-confirmed blur differences are corroborated by coloured edge details."
+        },
+        {
+          "id": "feedback3",
+          "claim": "A brightness threshold can blend procedural noise into bright samples.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "The thresholded noise clause is conditional; source defines the branch, and paired appearance agrees without assuming it is always active."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Squared colour and random-preset/blur weighting suppress most background output.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Squared colour and preset/blur weighting are source-confirmed and appearance-corroborated by the suppressed background."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[3, 4], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak 3\u21924 brightening, independently recomputed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list [], independently recomputed."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list [], independently recomputed."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.003267648397013545; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude matches exactly."
+        }
+      ],
+      "critical_failure": false,
+      "critical_unknown": false,
+      "fresh_random_credit": true,
+      "successful_batch_credit": "pending all ten comparisons",
+      "missed": [],
+      "fix_pending": null,
+      "native_bug_established": false,
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "frozen_claims_sha256": "44b0667cadda694207fa965cbd3ac5d3f3b846b1e5b21283a86ff0d7f2780a49",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "6fb3a2f74bd9a88c74a30d14f15c7d1b4d8aada5b31767a57bf6c64d5dfc2b1b",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.046172745525836945,
+          "native": 0.04683830589056015,
+          "relative_error": 0.014414571997906796,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.47251836061477653,
+          "native": 0.47251891493797293,
+          "relative_error": 1.1731252002119467e-06,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.0027930130142825266,
+          "native": 0.002797882284964241,
+          "relative_error": 0.0017433755792810278,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.019355752923487065,
+          "native": 0.01928346056083683,
+          "relative_error": 0.003734928986539801,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.003267648397013545,
+          "native": 0.003267648397013545,
+          "relative_error": 0.0,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 8.558810804970562e-06,
+        "mean_rmse_rgb": 0.0001911214058054611,
+        "peak_mae_rgb": 5.886324288439937e-05,
+        "peak_rmse_rgb": 0.0010215140646323562,
+        "source_sha256": "3f32d3f7419344a3fd33d4cdb738976da966aed4d1156a3924ba5a88b7addd4b",
+        "native_sha256": "f52646ff80c30641c3acb002c039314a7b9dab00f29492fddeace10356c959e5"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "all200_claims_before_first_capture": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable-claim scoring is not pixel identity or complete fine-detail certification.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program selection.",
+        "The declared sampler profile is specific to the qualified Apple emulator context."
+      ],
+      "created_utc": "2026-10-07T07:50:18.784443+00:00"
+    },
+    "3": {
+      "position": 20,
+      "preset": "suksma - 3125 bad attempts2 - drive you to the liquor store and you dis soundgarden - canary dissector.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "An initially dark centre is enclosed by a thin pale rectangular edge.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Thin pale rectangular boundary encloses the initially dark centre in both streams."
+        },
+        {
+          "id": "structure2",
+          "claim": "A coloured red/blue/yellow border develops around the black interior.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Red/blue/yellow border develops around the black interior."
+        },
+        {
+          "id": "structure3",
+          "claim": "The coloured edge thickens into rough branching/scalloped texture.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "The edge thickens into corresponding branching/scalloped texture."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames retain a large black central opening while coloured borders occupy more screen area.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Late coloured borders occupy more area while the central black opening remains."
+        },
+        {
+          "id": "motion1",
+          "claim": "Boundary texture grows inward and changes its irregular contour.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Corresponding irregular boundary texture grows inward."
+        },
+        {
+          "id": "motion2",
+          "claim": "Coloured edge fragments shift along the rectangular perimeter.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Coloured fragments shift along the rectangular perimeter in the same paired phases."
+        },
+        {
+          "id": "motion3",
+          "claim": "The central dark region remains dominant as the outer bands develop.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Central darkness remains dominant while outer bands develop."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.17077352106571198, p95=0.5166611790657041 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Median error 0.016771% and p95 error 0.024757% pass; 29/29 supported transitions in both streams."
+        },
+        {
+          "id": "colour1",
+          "claim": "The opening border is pale against black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Pale opening border against black agrees."
+        },
+        {
+          "id": "colour2",
+          "claim": "Later borders include saturated red,blue,purple and yellow.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Saturated red/blue/purple/yellow border palette agrees."
+        },
+        {
+          "id": "colour3",
+          "claim": "The colour remains concentrated around edges with a large dark interior.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Colour remains concentrated at the edges around the dark interior."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.10934985329707464; saturation=0.3106076347331206; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error 0.002872% and saturation error 0.001090% pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp averages eight luminance-dependent offset main-texture samples.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-defined eight offset samples are corroborated by the boundary development."
+        },
+        {
+          "id": "feedback2",
+          "claim": "A luminance controller adds or removes energy before nonlinear colour multiplication.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Source-defined luminance controller/nonlinear energy changes are appearance-corroborated."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite compares main feedback with a slightly enlarged flipped sample.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Source-defined enlarged flipped comparison is corroborated by the paired edge field."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Absolute channel-swizzled differences create the changing coloured boundary texture.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Channel-swizzled differences produce the corresponding coloured boundary texture; direct native shader program identity is not asserted."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[20, 21], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak 20\u219221 brightening, independently recomputed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list [], independently recomputed."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list [], independently recomputed."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.01340218260884285; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error 0.043063% passes the unchanged 5% allowance."
+        }
+      ],
+      "critical_failure": false,
+      "critical_unknown": false,
+      "fresh_random_credit": true,
+      "successful_batch_credit": "pending all ten comparisons",
+      "missed": [],
+      "fix_pending": null,
+      "native_bug_established": false,
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "frozen_claims_sha256": "c37acb708abc878ad4501d45a747ca68dd517ca1d3dcbae41bd089239f4ec8d1",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "7fffd35b5eefd18b28467994f3556ec11b932469314a72a6a49b88acd3a43e63",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.17077352106571198,
+          "native": 0.1707448810338974,
+          "relative_error": 0.0001677076846331159,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.5166611790657041,
+          "native": 0.5167890906333921,
+          "relative_error": 0.00024757340568783414,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.10934985329707464,
+          "native": 0.10935299433767795,
+          "relative_error": 2.872468968730278e-05,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.3106076347331206,
+          "native": 0.31060424956182636,
+          "relative_error": 1.0898545031360999e-05,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.01340218260884285,
+          "native": 0.013407954014837742,
+          "relative_error": 0.00043063179806877936,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            20,
+            21
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            20,
+            21
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 2.03787385544274e-05,
+        "mean_rmse_rgb": 0.0006241333903744817,
+        "peak_mae_rgb": 0.00010336527338949963,
+        "peak_rmse_rgb": 0.0036029820330441,
+        "source_sha256": "437272d09d23354dc5af47c18b07bad462e3df661462e1afee87a808e569e531",
+        "native_sha256": "87d547ec2df95ff1aa6ae504c638356c2971393bbf0cdd128ac886116f66ca9b"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "all200_claims_before_first_capture": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable-claim scoring is not pixel identity or complete fine-detail certification.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program selection.",
+        "The declared sampler profile is specific to the qualified Apple emulator context."
+      ],
+      "created_utc": "2026-10-07T07:50:18.786218+00:00"
+    },
+    "4": {
+      "position": 21,
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk",
+      "score": 65,
+      "status": "independently_validated_original_failed",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The sequence opens black or nearly black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Opening black/nearly black field agrees."
+        },
+        {
+          "id": "structure2",
+          "claim": "Faint large folded/triangular dark shapes become detectable behind small highlights.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": true,
+          "evidence": "Critical mismatch: the predicted large folded/triangular shadow field is absent from native output; selected full-resolution frames5/10/15/20/30 show only the localized primary glint."
+        },
+        {
+          "id": "structure3",
+          "claim": "A few pale cyan/white curved glints appear near the lower central-left region.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": false,
+          "evidence": "Mismatch: the source develops multiple separate pale curved glints, including a persistent second glint; native retains primarily one localized glint and does not reproduce that group layout."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames remain very dark with dim residual curved accents.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Both late outputs remain globally very dark with a small curved residual accent. Its brightness/distribution is different, retained in the other failed rows; this broad clause does not establish whole-layout agreement."
+        },
+        {
+          "id": "motion1",
+          "claim": "Small pale glints change their shape and position during the early phase.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "The native primary pale glint does change shape and position during the early phase; this limited clause holds despite the missing additional history."
+        },
+        {
+          "id": "motion2",
+          "claim": "The large shadow-like contours shift subtly while remaining faint.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": true,
+          "evidence": "Critical mismatch: predicted large shadow-like contours and their subtle shifting history are absent in the native stream."
+        },
+        {
+          "id": "motion3",
+          "claim": "The highlights fade and become dimmer later in the sequence.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Native local highlight support decreases later, so the broad fading clause holds; its fading is weaker than the predicted distributed highlights, and numerical brightness claims fail."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.01734024565666914, p95=0.9118863388895975 viewport/s; relative5%.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": false,
+          "evidence": "Both motion estimates fail: median33.465400%, p9547.677554%, with28/29 measurable transitions in both streams."
+        },
+        {
+          "id": "colour1",
+          "claim": "Black dominates almost the entire viewport.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Black dominates both viewports."
+        },
+        {
+          "id": "colour2",
+          "claim": "Visible early highlights are pale cyan/white.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Native early primary highlights are pale cyan/white."
+        },
+        {
+          "id": "colour3",
+          "claim": "Later highlights become dim blue/grey rather than broad saturated colour.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "The later accent remains pale blue/grey rather than a broad saturated colour field. This limited palette clause does not certify matching highlight brightness or distribution."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.011246810015290976; saturation=0.05041529734929403; relative5%.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": false,
+          "evidence": "Both estimates fail: mean luma49.681159%, saturation76.383528%."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Composite selects blur2 or blur3 according to a neighbouring-main brightness difference.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "The blur2/blur3 conditional is confirmed in authored composite source and supplemented by active-program observer evidence, without converting load/compile success into appearance credit."
+        },
+        {
+          "id": "feedback2",
+          "claim": "It combines several blur levels with an amplifying coefficient.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Several blur levels and amplification are source-confirmed and supplemented by active-composite uniform evidence; the upstream warp feedback differs."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Luminance conversion removes most colour before hue/audio/Q-dependent weighting.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luminance/hue/audio/Q-dependent weighting is source-confirmed; observer evidence localizes divergence before this composite stage."
+        },
+        {
+          "id": "feedback4",
+          "claim": "A final square darkens the field and leaves sparse glints.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Squared output is dark with sparse local glinting in both streams; missing folded feedback geometry is separately failed."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[2, 3], brightening.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": false,
+          "evidence": "Mismatch: source peak2\u21923, native peak1\u21922; both brightening. Exact timing is not relaxed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[] agrees."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[] agrees."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.0072692688554525375; relative5%, exacteventtiming.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": false,
+          "evidence": "Peak amplitude error37.068253% fails5%."
+        }
+      ],
+      "critical_failure": true,
+      "critical_mismatch_claims": [
+        "structure2",
+        "motion2"
+      ],
+      "critical_unknown": false,
+      "fresh_random_credit": false,
+      "successful_batch_credit": false,
+      "missed": [
+        "colour4",
+        "flashing1",
+        "flashing4",
+        "motion2",
+        "motion4",
+        "structure2",
+        "structure3"
+      ],
+      "counterfactual_credit": false,
+      "fix_pending": "Engine compatibility handoff for huge-angle vertex rotation on the observed Apple driver; retest the exact original preset with a separately identified published repair. Do not replace this original grade with the wrapped-angle diagnostic.",
+      "root_cause_evidence": "Per-pixel rot=10000000; isolated GPU vertex probes return zero for both sin/cos at positive and negative1e7, under default/highp on this driver. Raw-feedback, active-program, hue and wrapped-angle controls are supplementary localization evidence, not original-source acceptance.",
+      "native_compatibility_finding_scope": "Published core2.3.16 on API34 ARM64 Apple M4 Pro GLES3/Metal89.4; no universal GPU claim or production-fix claim.",
+      "frozen_claims_sha256": "5c20a341501ce2e7e5e281e5a737568cdf125c3e3e1d90fd63d819cf7701e234",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "abc83e4fc42f7403b90f0a427b5d8efee2f5beaacfd7cf1061fb0f1f4f70f60d",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.01734024565666914,
+          "native": 0.011537263169884682,
+          "relative_error": 0.33465399520176947,
+          "passes": false
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.9118863388895975,
+          "native": 0.477121233940124,
+          "relative_error": 0.47677554362628816,
+          "passes": false
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.011246810015290976,
+          "native": 0.005659264496838053,
+          "relative_error": 0.4968115857613127,
+          "passes": false
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.05041529734929403,
+          "native": 0.011906314392884572,
+          "relative_error": 0.7638352837553719,
+          "passes": false
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.0072692688554525375,
+          "native": 0.004574677906930447,
+          "relative_error": 0.3706825269643082,
+          "passes": false
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            2,
+            3
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 0.009713358245790005,
+        "mean_rmse_rgb": 0.03430797532200813,
+        "peak_mae_rgb": 0.011490637436509132,
+        "peak_rmse_rgb": 0.06506723910570145,
+        "source_sha256": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7",
+        "native_sha256": "b8ba88d5ffa47017f2d9b8a9ada017343d34dba056e07fc9eba8077f4803d610"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "full_resolution_selected_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Score uses the unchanged original authored preset and original capture.",
+        "Wrapped-angle authored variation is a counterfactual diagnostic and earns no original-source or fresh randomized credit.",
+        "Remaining supported broad dark-field/palette/mechanism clauses do not imply matching complete feedback geometry or trajectories."
+      ],
+      "created_utc": "2026-10-07T08:51:35.549595+00:00"
+    },
+    "5": {
+      "position": 22,
+      "preset": "EoS - glowsticks v2 04 music minimal oscilloscope vomit mix rnz.milk",
+      "score": 97.5,
+      "status": "independently_validated_original_failed",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "Thin yellow/green curved strands appear on black in the opening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Yellow/green opening curved strands on black agree."
+        },
+        {
+          "id": "structure2",
+          "claim": "The strands form a small incomplete loop or curled arc.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Small incomplete loop/curl agrees in shape and location."
+        },
+        {
+          "id": "structure3",
+          "claim": "A soft green glow develops near the central curve before receding.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Soft green glow around the central curve develops and recedes in corresponding phases."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late output includes a sparse red/pink trailing curved line toward the lower-right region.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Late sparse red/pink trailing segment curves down and to the right from the strand; its endpoint remains left of viewport centre. Credit is for the stated toward-direction, not an invented right-half position."
+        },
+        {
+          "id": "motion1",
+          "claim": "The strand bends and changes its curvature through the window.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Bending and curvature changes match across all30 pairs."
+        },
+        {
+          "id": "motion2",
+          "claim": "The incomplete loop grows and then shifts/deforms.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Loop growth, shifting and deformation match."
+        },
+        {
+          "id": "motion3",
+          "claim": "The warm trailing line changes position while much of the field remains black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Warm trailing-line displacement and the dominant black field match."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.04937037080526352, p95=0.9470854282379142 viewport/s; relative5%.",
+          "score": 2.5,
+          "disposition": "partial",
+          "critical": false,
+          "evidence": "Median error11.119678% fails5%; p95 error0.095686% passes. Retain2.5/5 consistent equal-weight numeric partial credit;29/29 supported transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "Early visible lines are mainly yellow/green.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Early yellow/green lines agree."
+        },
+        {
+          "id": "colour2",
+          "claim": "Intermediate arcs introduce orange and a soft green halo.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Intermediate orange arcs and green halo agree."
+        },
+        {
+          "id": "colour3",
+          "claim": "Late trails include red/pink with a predominantly black background.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Late red/pink trail on black agrees."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.0067405617970507595; saturation=0.1344765346807738; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error0.833511% and saturation error1.888085% pass5%."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp combines blur2 with an exponential luminance suppression term.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blur2/exponential luminance suppression is source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback2",
+          "claim": "It subtracts a small constant and takes a maximum against retained main feedback.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Constant subtraction and maximum against retained main feedback are source-confirmed; the corresponding loop/strand history agrees."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite subtracts slow roaming colour values and increases colour gain.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Roaming-colour subtraction and increased gain are source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Volume-noise multiplication modulates the retained thin structures.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Volume-noise modulation is source-confirmed with the declared volume sampler profile; no direct native program-selection assertion."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[28, 29], darkening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak28\u219229 darkening, independently recomputed."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[] agrees."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[] agrees."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.004603201523423195; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error0.309318% passes5%."
+        }
+      ],
+      "critical_failure": false,
+      "critical_unknown": false,
+      "fresh_random_credit": false,
+      "successful_batch_credit": false,
+      "missed": [
+        "motion4: median motion11.119678% outside5%, p95 passes;2.5/5 partial numeric credit"
+      ],
+      "fix_pending": "Localize motion-estimate sensitivity and source/native pixel residuals without altering the original score or tolerance.",
+      "root_cause_not_established": true,
+      "native_bug_established": false,
+      "frozen_claims_sha256": "3cd1e0bf0fa2b1d18f513c9e22dedcff67d3de94e167b2f075db03357e5964fd",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "348aed14a69fc562633858abb81a2aad6670f10ff32494736a52912f8932fedc",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.04937037080526352,
+          "native": 0.0548601970076561,
+          "relative_error": 0.11119677881388916,
+          "passes": false
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.9470854282379142,
+          "native": 0.9479916572570792,
+          "relative_error": 0.0009568609041436843,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.0067405617970507595,
+          "native": 0.0067967451041719565,
+          "relative_error": 0.008335107489969042,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.1344765346807738,
+          "native": 0.13701556563998263,
+          "relative_error": 0.018880847615802134,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.004603201523423195,
+          "native": 0.004617440048605204,
+          "relative_error": 0.0030931787603815765,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            28,
+            29
+          ],
+          "direction": "darkening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            28,
+            29
+          ],
+          "direction": "darkening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 4.745465048472397e-05,
+        "mean_rmse_rgb": 0.0006490848609246314,
+        "peak_mae_rgb": 0.00017212179955095053,
+        "peak_rmse_rgb": 0.0013415246503427625,
+        "source_sha256": "9c4ff9daca26683970d964df893afa758a820d36cc7f546e27b35f54d4e8377d",
+        "native_sha256": "836e65a05436134168811dd33982351b6c18bc5efa3306f125335db0f1210c6c"
+      },
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "full_resolution_selected_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable scoring is not pixel identity or every fine detail.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program choice."
+      ],
+      "created_utc": "2026-10-07T08:57:25.556378+00:00"
+    },
+    "6": {
+      "position": 23,
+      "preset": "martin - time machine amn.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The opening is a broad blue/purple field with many small bead-like spots.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blue/purple opening field and bead-like spots agree."
+        },
+        {
+          "id": "structure2",
+          "claim": "Bright rows or diagonal chains of rounded highlights emerge across the field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Rows and diagonal rounded highlight chains emerge in corresponding locations."
+        },
+        {
+          "id": "structure3",
+          "claim": "Repeated curved/rounded layered structures occupy most of the viewport.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Repeated curved/rounded layers occupy most of both viewports."
+        },
+        {
+          "id": "structure4",
+          "claim": "Later fields become pink/purple with denser folded and ring-like texture.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Later dense pink/purple folded and ring-like texture agrees."
+        },
+        {
+          "id": "motion1",
+          "claim": "Bead-like highlights change positions along developing rows and curved forms.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Bead positions evolve along the same rows and curves."
+        },
+        {
+          "id": "motion2",
+          "claim": "Large blue structures stretch and alter their contours.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Large blue structures stretch and change corresponding contours."
+        },
+        {
+          "id": "motion3",
+          "claim": "The field reorganizes into denser pink/purple loops and layers later.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Reorganization into dense pink/purple layers agrees."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.07579725980758667, p95=1.2651229858398434 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Median error0.184256% and p95 error0.163839% pass;29/29 measurable transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "Blue/purple dominates early output.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Early blue/purple dominance agrees."
+        },
+        {
+          "id": "colour2",
+          "claim": "Pale white/cyan/yellow highlights punctuate the blue field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Pale white/cyan/yellow highlights punctuate the field in both streams."
+        },
+        {
+          "id": "colour3",
+          "claim": "Later output shifts toward pink/magenta/purple with dark outline detail.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Later pink/magenta/purple and dark outlines agree."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.3008759006857872; saturation=0.7117262462774913; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error0.002639% and saturation error0.001310% pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp uses radial coordinates and tangent/cosine UV displacement.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Radial/tangent/cosine displacement is source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback2",
+          "claim": "A reciprocal square-root term contributes growing luminous structures.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Reciprocal square-root emission is source-confirmed and its luminous structural growth agrees."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite displaces samples using blur gradients and combines multiple blur levels.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blur-gradient displacement and multilevel blur are source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Volume-noise/luminance gain and a square-root transform brighten the layered result.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Volume-noise/luminance gain and square root are source-confirmed; corresponding bright layered result agrees."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[24, 25], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak24\u219225 brightening agrees."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[] agrees."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[] agrees."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.06702388823032379; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error0.000011% passes5%."
+        }
+      ],
+      "critical_failure": false,
+      "critical_mismatch_claims": [],
+      "critical_unknown": false,
+      "fresh_random_credit": true,
+      "successful_batch_credit": false,
+      "missed": [],
+      "fix_pending": null,
+      "native_bug_established": false,
+      "root_cause_not_established": false,
+      "frozen_claims_sha256": "197a3f5452496f570d3d0f871aa2c594aa7825b61f70010280b2c666dc47c1e8",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "dd5316d49610293778c2b9ea36517751d1ed04b33875540fe13268754875264d",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.07579725980758667,
+          "native": 0.07593692094087601,
+          "relative_error": 0.001842561771281318,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 1.2651229858398434,
+          "native": 1.2630502223968503,
+          "relative_error": 0.001638388888821848,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.3008759006857872,
+          "native": 0.300867959856987,
+          "relative_error": 2.6392372343812386e-05,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.7117262462774913,
+          "native": 0.7117355724175771,
+          "relative_error": 1.3103549482180261e-05,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.06702388823032379,
+          "native": 0.0670238807797432,
+          "relative_error": 1.1116306131509903e-07,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            24,
+            25
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            24,
+            25
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 3.903886681655422e-05,
+        "mean_rmse_rgb": 0.0005017091752961278,
+        "peak_mae_rgb": 0.00018499371071811765,
+        "peak_rmse_rgb": 0.001813368289731443,
+        "source_sha256": "551018e99aa943aed56555e39c30ed3844d9b204ab5563db66a76c06004b46f3",
+        "native_sha256": "6cdf439317eadd187e82996f4ea2a4e58c0d191e9e5386c92409bb803a3b170a"
+      },
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable scoring is not pixel identity or every fine detail.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program choice.",
+        "Batch cannot earn success credit because original presets04/05/08 fail, irrespective of passing individual comparisons."
+      ],
+      "created_utc": "2026-10-07T09:07:20.509382+00:00"
+    },
+    "7": {
+      "position": 24,
+      "preset": "bdrv etAL Aderrasi - Accelerator (reactor Chamber) rmx.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "A very small yellow source opens on black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Small yellow opening source on black agrees."
+        },
+        {
+          "id": "structure2",
+          "claim": "A rough angular/star-like yellow pattern grows around centre.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Rough angular/star-like yellow expansion agrees."
+        },
+        {
+          "id": "structure3",
+          "claim": "A bright circular central core emerges within repeating angular/diagonal layers.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Bright circular core emerges inside the same repeated layers."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames show a large bright yellow disc/core and a broad angular surrounding field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Large late yellow disc/core and broad angular surroundings agree."
+        },
+        {
+          "id": "motion1",
+          "claim": "The small source spreads outward into angular repeated layers.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Outward repeated angular growth agrees."
+        },
+        {
+          "id": "motion2",
+          "claim": "The central bright region grows substantially during the window.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Central bright-region growth agrees through the window."
+        },
+        {
+          "id": "motion3",
+          "claim": "Outer angular contours shift and deform as the centre becomes a disc.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Outer contour deformation around the developing disc agrees."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.27480755746364594, p95=2.0622985541820524 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Median error0.018398% and p95 error0.014123% pass;28/29 measurable transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "Yellow is the main visible colour.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Yellow dominance agrees."
+        },
+        {
+          "id": "colour2",
+          "claim": "The outer field becomes dark yellow/olive as coverage grows.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Growing dark yellow/olive outer coverage agrees."
+        },
+        {
+          "id": "colour3",
+          "claim": "Late output has a very bright yellow core against darker structured surroundings.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Bright yellow core on darker structured surroundings agrees."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.22791123435793756; saturation=0.8068922529064972; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error0.001134% and saturation exact equality pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "The preset uses the legacy fixed warp/composite path rather than authored pixel shaders.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Legacy fixed warp/composite path is confirmed in source and corroborated by paired appearance."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Per-pixel equations produce angle/radius-dependent rotation and zoom.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Angle/radius rotation and zoom equations are source-confirmed and corresponding layers agree."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Bass-threshold state adds changing translations and tangent-dependent zoom variation.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Bass-state translations and tangent zoom are source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Accumulated waveform/feedback produces repeated angular layers around the bright central source.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Accumulated angular waveform/feedback layers agree around the central source."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[5, 6], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak5\u21926 brightening agrees."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[] agrees."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[] agrees."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.0834454819560051; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error0.001277% passes5%."
+        }
+      ],
+      "critical_failure": false,
+      "critical_mismatch_claims": [],
+      "critical_unknown": false,
+      "fresh_random_credit": true,
+      "successful_batch_credit": false,
+      "missed": [],
+      "fix_pending": null,
+      "native_bug_established": false,
+      "root_cause_not_established": false,
+      "frozen_claims_sha256": "a1f615b33676256581318110f85003762a82b54461cf3c956549f953df531eee",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "95b14927f1f2037f232bfa9c6ad9313e0ddc86e74b32d472822bb1a5511aacf5",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.27480755746364594,
+          "native": 0.27485811710357666,
+          "relative_error": 0.00018398198505662855,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 2.0622985541820524,
+          "native": 2.0625898122787474,
+          "relative_error": 0.00014122984089976482,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.22791123435793756,
+          "native": 0.2279086505586747,
+          "relative_error": 1.1336866610063215e-05,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.8068922529064972,
+          "native": 0.8068922529064972,
+          "relative_error": 0.0,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.0834454819560051,
+          "native": 0.08344441652297974,
+          "relative_error": 1.2768013323020112e-05,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            5,
+            6
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            5,
+            6
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 8.642731700092554e-06,
+        "mean_rmse_rgb": 0.00018981257744599134,
+        "peak_mae_rgb": 2.241058427898679e-05,
+        "peak_rmse_rgb": 0.0003496168937999755,
+        "source_sha256": "4d7f2ace00d541544eff471991f684c386ec215d785270dc2c265c0f5bc9dfda",
+        "native_sha256": "e3bd7612931410d8ad5b71c81fcc1530470210f5c960d60cce4075bb811c1212"
+      },
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable scoring is not pixel identity or every fine detail.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program choice.",
+        "Batch cannot earn success credit because original presets04/05/08 fail, irrespective of passing individual comparisons."
+      ],
+      "created_utc": "2026-10-07T09:07:20.510648+00:00"
+    },
+    "8": {
+      "position": 25,
+      "preset": "Zylot - new work.milk",
+      "score": 92.5,
+      "status": "independently_validated_original_failed",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "A small pale outlined triangular object appears on black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Small pale outlined triangular opening object agrees."
+        },
+        {
+          "id": "structure2",
+          "claim": "Three vertices are distinguishable with a lightly filled triangular interior.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Three vertices and a lightly filled interior remain distinguishable in both streams."
+        },
+        {
+          "id": "structure3",
+          "claim": "The object remains compact with most screen area black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "The object stays compact against the predominantly black viewport."
+        },
+        {
+          "id": "structure4",
+          "claim": "Later frames retain the triangle with brighter glowing vertex points.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Late triangle and bright vertex glows agree."
+        },
+        {
+          "id": "motion1",
+          "claim": "The compact triangle shifts slightly toward the right over the window.",
+          "score": 0,
+          "disposition": "mismatch",
+          "critical": true,
+          "evidence": "Critical frozen narrative mismatch: triangle/light moves LEFT, not toward the right. Source weighted x-centre127.279\u219283.290px; native127.279\u219283.268px; luminous x bounds104\u2013145\u219221\u2013127. Field predictions agree, but the frozen direction clause is false."
+        },
+        {
+          "id": "motion2",
+          "claim": "The triangle changes orientation or contour slightly without becoming a large full-screen object.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Small orientation/contour changes occur while the object remains compact."
+        },
+        {
+          "id": "motion3",
+          "claim": "Vertex glows increase while the basic three-corner structure remains recognizable.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Increasing vertex glows retain the recognizable three-corner structure."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.001618503127247095, p95=0.336288833618164 viewport/s; relative5%.",
+          "score": 2.5,
+          "disposition": "partial",
+          "critical": false,
+          "evidence": "Median error17.977483% fails5%; p95 matches exactly. Retain2.5/5 numeric partial credit;29/29 measurable transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "The object is mainly pale white/grey.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Pale white/grey object agrees."
+        },
+        {
+          "id": "colour2",
+          "claim": "Some edges have small warm/cool accents but broad saturation remains low.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Small warm/cool edge accents and low broad saturation agree."
+        },
+        {
+          "id": "colour3",
+          "claim": "The black backdrop remains dominant with localized white glows.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Dominant black backdrop and localized white glows agree."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.029966731028010448; saturation=0.018853699951432646; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error0.226160% and saturation error4.614505% pass5%."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp applies a treble-dependent power and blends main feedback with blur2.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Treble-dependent power/main-blur2 blending is source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback2",
+          "claim": "It decays retained feedback slightly each frame.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Feedback decay is source-confirmed and corresponding retained triangle/glow appearance agrees."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite uses procedural 2D noise with high powers of retained colour and Q/audio weighting.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Procedural noise/high powers/Q-audio weighting is source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback4",
+          "claim": "A final square keeps most output dark and emphasizes the compact bright object.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Squared dark output emphasizing the compact object agrees."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[3, 4], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak3\u21924 brightening agrees."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[] agrees."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[] agrees."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.0067323981784284115; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude matches exactly."
+        }
+      ],
+      "critical_failure": true,
+      "critical_mismatch_claims": [
+        "motion1"
+      ],
+      "critical_unknown": false,
+      "fresh_random_credit": false,
+      "successful_batch_credit": false,
+      "missed": [
+        "motion1 wrong left/right narrative",
+        "motion4 median17.977483% outside5%"
+      ],
+      "fix_pending": "Correct signed-direction claim generation in a future separately frozen run; investigate the small-motion numeric gap without rewriting this grade.",
+      "native_bug_established": false,
+      "root_cause_not_established": true,
+      "frozen_claims_sha256": "343d3660a3a0a7aa502221db12fcf538ded5b51fefc0029ce81e4210f7352091",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "4c1c04fcdeade74497c9683e0f3b401068188a20bd070515cfca5f98434fad03",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.001618503127247095,
+          "native": 0.0013275370001792908,
+          "relative_error": 0.17977483155235377,
+          "passes": false
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.336288833618164,
+          "native": 0.336288833618164,
+          "relative_error": 0.0,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.029966731028010448,
+          "native": 0.030034503868470588,
+          "relative_error": 0.0022616027219248954,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.018853699951432646,
+          "native": 0.017983695049770175,
+          "relative_error": 0.046145048659075615,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.0067323981784284115,
+          "native": 0.0067323981784284115,
+          "relative_error": 0.0,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 6.636299076490104e-05,
+        "mean_rmse_rgb": 0.00044093557517044246,
+        "peak_mae_rgb": 0.00019641175458673388,
+        "peak_rmse_rgb": 0.0009472809615544975,
+        "source_sha256": "a32f26535147a19253947159b477d94f9b82e6d81746402474d74776386e8232",
+        "native_sha256": "95f26401a6ee7d7b9365d6d85856e498a1aa42680b653f86d005a2551866fdac"
+      },
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable scoring is not pixel identity or every fine detail.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program choice.",
+        "Batch cannot earn success credit because original presets04/05/08 fail, irrespective of passing individual comparisons."
+      ],
+      "created_utc": "2026-10-07T09:07:20.511630+00:00"
+    },
+    "9": {
+      "position": 26,
+      "preset": "EVET - Ball Lightning 1.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "A tiny warm light opens near centre above a dim lower-screen gradient.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Tiny warm opening light above the lower gradient agrees."
+        },
+        {
+          "id": "structure2",
+          "claim": "The central source becomes a small brighter glowing spot.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Compact source brightening agrees."
+        },
+        {
+          "id": "structure3",
+          "claim": "The source stays compact while faint tails or surrounding soft glow develop.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Small tails and soft glow around the compact source agree."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late output retains a small cool-white/blue central light over a broad dark grey background gradient.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Cool-white/blue late central light and dark grey gradient agree."
+        },
+        {
+          "id": "motion1",
+          "claim": "The compact central source changes contour slightly rather than sweeping across the viewport.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Small contour changes occur without a long viewport sweep."
+        },
+        {
+          "id": "motion2",
+          "claim": "Its surrounding glow and small tail change shape through the window.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Glow and tail shape changes agree across all30 pairs."
+        },
+        {
+          "id": "motion3",
+          "claim": "The broad dark background gradient remains largely stationary.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Broad background gradient remains largely stationary in both streams."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=3.319818642921746e-05, p95=0.14741380214691158 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Median matches exactly; p95 error0.251256% passes;29/29 measurable transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "The opening light is red/orange.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Opening red/orange light agrees."
+        },
+        {
+          "id": "colour2",
+          "claim": "Intermediate light becomes pink/pale white.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Intermediate pink/pale-white light agrees."
+        },
+        {
+          "id": "colour3",
+          "claim": "Late light becomes cool-white/blue while the background is subdued grey/black.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Late cool-white/blue and subdued grey/black background agree."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.12497627660632134; saturation=0.08818591150144736; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error0.001255% and saturation error0.008262% pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Warp sums volume noise at several spatial/temporal frequencies.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Multifrequency volume noise is source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback2",
+          "claim": "It mixes noise-displaced cloud/ring emission with retained main feedback and blur subtraction.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Noise-displaced cloud/ring emission, retained feedback and blur subtraction are source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Composite blends main feedback with blur according to the background luminance.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Background-luminance main/blur mixing is source-confirmed; paired soft gradient appearance agrees."
+        },
+        {
+          "id": "feedback4",
+          "claim": "A vertical gradient and reflected-shadow term establish the dim background around the compact source.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Vertical gradient and reflected-shadow construction is source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[3, 4], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak3\u21924 brightening agrees."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[] agrees."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[] agrees."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.0014943305868655443; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error0.006606% passes5%."
+        }
+      ],
+      "critical_failure": false,
+      "critical_mismatch_claims": [],
+      "critical_unknown": false,
+      "fresh_random_credit": true,
+      "successful_batch_credit": false,
+      "missed": [],
+      "fix_pending": null,
+      "native_bug_established": false,
+      "root_cause_not_established": false,
+      "frozen_claims_sha256": "df80ebbbc857ba0bcfdb22c118e65ff56b3891af1ac6d17208416435cc72d28b",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "3b132ed475288b1c94ae9c0ddf0e05914b599f854aea6a5d819ebfe796aa65a1",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 3.319818642921746e-05,
+          "native": 3.319818642921746e-05,
+          "relative_error": 0.0,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.14741380214691158,
+          "native": 0.14778418838977808,
+          "relative_error": 0.002512561493376181,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.12497627660632134,
+          "native": 0.12497470825910569,
+          "relative_error": 1.2549159394408925e-05,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.08818591150144736,
+          "native": 0.08817862557868163,
+          "relative_error": 8.262003126899704e-05,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.0014943305868655443,
+          "native": 0.001494231866672635,
+          "relative_error": 6.606315481791265e-05,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        },
+        "native": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [],
+          "down": []
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 4.564856226352276e-06,
+        "mean_rmse_rgb": 7.068025297485292e-05,
+        "peak_mae_rgb": 4.074329626746476e-05,
+        "peak_rmse_rgb": 0.0003997219610027969,
+        "source_sha256": "f435baa1f42257852bab61ef4883df94bcda69664a67e5db32e253e6834c911c",
+        "native_sha256": "4a5b2944607c418b91f05ecc21cc144c9f05e2079d728f0443c0f04a8549477d"
+      },
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable scoring is not pixel identity or every fine detail.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program choice.",
+        "Batch cannot earn success credit because original presets04/05/08 fail, irrespective of passing individual comparisons."
+      ],
+      "created_utc": "2026-10-07T09:07:20.512482+00:00"
+    },
+    "10": {
+      "position": 27,
+      "preset": "bdrv + al Rovastar - Fractopia bdrv132456 mix bleuarg - squirming brewery.milk",
+      "score": 100,
+      "status": "independently_validated",
+      "rows": [
+        {
+          "id": "structure1",
+          "claim": "The opening is dark with bright narrow fragments near opposing edges.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Dark opening and narrow opposing-edge fragments agree."
+        },
+        {
+          "id": "structure2",
+          "claim": "Large grey folded or ring-like masses develop through the central field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Large folded/ring-like grey central masses agree."
+        },
+        {
+          "id": "structure3",
+          "claim": "Bright bead-like diagonal chains appear within dense layered contours.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Bright diagonal bead chains within dense contours agree."
+        },
+        {
+          "id": "structure4",
+          "claim": "Late frames retain a pale layered/marbled central field with narrow multicoloured edge accents.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Late pale layered/marbled field and narrow multicoloured edge accents agree."
+        },
+        {
+          "id": "motion1",
+          "claim": "Large grey contours expand and reconfigure during the window.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Large grey contour expansion/reconfiguration agrees."
+        },
+        {
+          "id": "motion2",
+          "claim": "Bright bead-like chains change positions and shape within the layered field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Bead-chain position and shape evolution agrees."
+        },
+        {
+          "id": "motion3",
+          "claim": "The narrow edge fragments shift while the central field becomes denser.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Edge-fragment shifting and increasingly dense central field agree."
+        },
+        {
+          "id": "motion4",
+          "claim": "Median motion=0.1946479231119156, p95=2.283792924880981 viewport/s; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Median error1.062981% and p95 error0.355161% pass;29/29 measurable transitions."
+        },
+        {
+          "id": "colour1",
+          "claim": "Black and grey dominate early output with small coloured edge highlights.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Early black/grey and small coloured-edge accents agree."
+        },
+        {
+          "id": "colour2",
+          "claim": "Pale white/silver chains and broad grey layers brighten later frames.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "White/silver chains and brighter grey layers agree."
+        },
+        {
+          "id": "colour3",
+          "claim": "Warm/cool saturated accents remain relatively narrow compared with the grey field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Saturated accents stay narrow relative to the grey field."
+        },
+        {
+          "id": "colour4",
+          "claim": "Mean luma=0.36161963244279227; saturation=0.14596916077037653; relative5%.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Luma error0.013015% and saturation error0.134477% pass."
+        },
+        {
+          "id": "feedback1",
+          "claim": "Per-pixel equations alter stretch,centre,zoom and translation before warp.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Per-pixel stretch/centre/zoom/translation is source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback2",
+          "claim": "Warp adds tangent and noise-derived displacement with reciprocal square-root emission.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": true,
+          "evidence": "Tangent/noise displacement and reciprocal square-root emission are source-confirmed and appearance-corroborated."
+        },
+        {
+          "id": "feedback3",
+          "claim": "Blur subtraction controls the retained high-contrast feedback.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Blur subtraction is source-confirmed; corresponding contrast structure agrees."
+        },
+        {
+          "id": "feedback4",
+          "claim": "Composite uses volume noise and blur-gradient displacement, then a square root brightens the layered field.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Volume noise/blur-gradient composition and square root are source-confirmed; layered appearance agrees."
+        },
+        {
+          "id": "flashing1",
+          "claim": "Peak jump at[1, 2], brightening.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact peak1\u21922 brightening agrees."
+        },
+        {
+          "id": "flashing2",
+          "claim": "Exact coherent brightening transitions[[1, 2]].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent brightening list[[1,2]] agrees."
+        },
+        {
+          "id": "flashing3",
+          "claim": "Exact coherent darkening transitions[[2, 3]].",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Exact coherent darkening list[[2,3]] agrees."
+        },
+        {
+          "id": "flashing4",
+          "claim": "Peak mean-luma jump=0.7009194493293762; relative5%, exacteventtiming.",
+          "score": 5,
+          "disposition": "supported",
+          "critical": false,
+          "evidence": "Peak amplitude error0.004609% passes5%."
+        }
+      ],
+      "critical_failure": false,
+      "critical_mismatch_claims": [],
+      "critical_unknown": false,
+      "fresh_random_credit": true,
+      "successful_batch_credit": false,
+      "missed": [],
+      "fix_pending": null,
+      "native_bug_established": false,
+      "root_cause_not_established": false,
+      "frozen_claims_sha256": "dc93b21b521130197510a9a98ac55f2303697d048a0f2081ca8f5a4d32656946",
+      "batch_freeze_sha256": "e3f74fb0bcbdd9a6bc350f7e4784f99c932ee4a5080d9d2507596df9b378c280",
+      "numeric_validation_sha256": "0d71963c510fa696b0c30903cdfc1fcb58f955e0c0056efcc43b40229b240bb5",
+      "numeric_checks": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.1946479231119156,
+          "native": 0.19671699404716492,
+          "relative_error": 0.010629812546521171,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 2.283792924880981,
+          "native": 2.2756817817687987,
+          "relative_error": 0.003551610578969298,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.36161963244279227,
+          "native": 0.36157256811857225,
+          "relative_error": 0.00013014869768573965,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.14596916077037653,
+          "native": 0.14577286603550116,
+          "relative_error": 0.0013447685376787152,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.7009194493293762,
+          "native": 0.700887143611908,
+          "relative_error": 4.609048514657582e-05,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [
+            [
+              1,
+              2
+            ]
+          ],
+          "down": [
+            [
+              2,
+              3
+            ]
+          ]
+        },
+        "native": {
+          "peak": [
+            1,
+            2
+          ],
+          "direction": "brightening",
+          "up": [
+            [
+              1,
+              2
+            ]
+          ],
+          "down": [
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      },
+      "pixel_metrics": {
+        "mean_mae_rgb": 0.0001379515597363934,
+        "mean_rmse_rgb": 0.0012425926979631186,
+        "peak_mae_rgb": 0.0005456551443785429,
+        "peak_rmse_rgb": 0.0027034953236579895,
+        "source_sha256": "01cf9796661fa69b4b44873d687ed8a16d371a8c80890dfb13f93560612116ee",
+        "native_sha256": "7ad6e99feaf74253c52a3fcf98dbb629fcaa16848148a980eda8a58db013e3d4"
+      },
+      "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+      "motion_policy": "coverage-gated-window-v2",
+      "validation": {
+        "all30_pairs_reviewed": true,
+        "all179_context_hashes_verified": true,
+        "all110_frozen_outcome_hashes_verified": true,
+        "all79_producer_snapshot_hashes_verified": true,
+        "native_preset_count": 1,
+        "native_skipped_count": 0,
+        "native_frame_serial_delta": 30,
+        "main_pid_active_noise_epoch_verified": true,
+        "published_aar_native_library_relationship_verified": true
+      },
+      "limits": [
+        "Exact frozen observable scoring is not pixel identity or every fine detail.",
+        "Source mechanisms are source-confirmed and appearance-corroborated; unchanged JNI does not expose exact native custom/fallback program choice.",
+        "Batch cannot earn success credit because original presets04/05/08 fail, irrespective of passing individual comparisons."
+      ],
+      "created_utc": "2026-10-07T09:07:20.513463+00:00"
+    }
+  }
+}

@@ -972,3 +972,12 @@ Its nonzero direction has no perceptual threshold. Use it to check directional
 prose against source trajectories before freezing future descriptions; do not
 infer left/right from unsigned speed. A contradictory archived description keeps
 its failed grade even when its predicted fields agree with the renderer.
+
+The second frozen ten-preset/30-frame batch against published 2.3.16 scored
+100, 100, 100, 65, 97.5, 100, 100, 92.5, 100, 100 after independent review.
+Seven presets met every frozen clause; the batch fails the all-100 requirement.
+The large-angle preset loses geometry/trajectory and numerical/event credit;
+two others miss median optical-flow estimates, and one of those also has a
+wrong-direction prose claim. Original grades and sources remain unchanged.
+Separate engineering handoffs retain each issue; diagnostic variants receive
+no randomized credit. See `fixtures/random30-batch002-results-2026-10-07.json`.
