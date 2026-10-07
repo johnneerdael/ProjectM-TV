@@ -88,3 +88,29 @@ def test_unwritten_entry_output_components_are_not_external_inputs():
     model.lower(warp)
     assert not model.complete
     assert 'uninitialized shader value reaches a read' in model.unknown
+
+
+def test_measured_sampler_is_forwarded_only_after_a_motion_map_is_written():
+    calls = []
+    def sampler(field, queries, **settings):
+        calls.append((field.copy(), queries.copy(), settings))
+        sampled = queries.copy()
+        sampled[:, 1] = 1 - sampled[:, 1]
+        return sampled + [.125, 0]
+    p = importlib.import_module('pipeline_fields').SourcePipeline(
+        None, None, initial_feedback=np.zeros((32, 32, 4), np.float32),
+        warp_reads_blur=False, blur_levels=0, quantize=False,
+        motion_uv_sampling_profile='measured-gles300-vertex-half-v1',
+        motion_uv_sampler=sampler)
+    first = step(p, state())
+    assert calls == []
+    assert first.history['motion_uv_sampling_profile'] == 'measured-gles300-vertex-half-v1'
+    second = step(p, state())
+    assert len(calls) == 1
+    assert second.history['motion_vector_source_frame'] == 0
+    assert np.count_nonzero(second.feedback[..., 0]) > 0
+    with pytest.raises(ValueError, match='sampler'):
+        importlib.import_module('pipeline_fields').SourcePipeline(
+            None, None, initial_feedback=np.zeros((32, 32, 4), np.float32),
+            warp_reads_blur=False, blur_levels=0,
+            motion_uv_sampling_profile='measured-gles300-vertex-half-v1')

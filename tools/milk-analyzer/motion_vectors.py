@@ -14,6 +14,15 @@ from spatial import sample2d
 PORTABLE_STORAGE='portable-half-nearest-v1'
 APPLE_RTZ_STORAGE='apple-m4pro-gles-rg16f-rtz-normal-v1'
 APPLE_FINITE_STORAGE='apple-m4pro-gles-rg16f-rtz-finite-v1'
+PORTABLE_SAMPLING='portable-half-bilinear-v1'
+MEASURED_SAMPLING='measured-gles300-vertex-half-v1'
+
+
+def validate_motion_sampler(profile, sampler):
+    if profile not in (PORTABLE_SAMPLING, MEASURED_SAMPLING):
+        raise ValueError('unknown motion UV sampling profile')
+    if (profile == MEASURED_SAMPLING and not callable(sampler)) or (profile == PORTABLE_SAMPLING and sampler is not None):
+        raise ValueError('motion UV sampler requires explicit measured profile and callback')
 
 
 def _value(state, name, *, single=False):
@@ -63,7 +72,8 @@ def motion_uv_surface(uv, *, storage_profile=PORTABLE_STORAGE):
     return stored
 
 
-def motion_geometry(state, *, previous_uv, width, height):
+def motion_geometry(state, *, previous_uv, width, height, sampling_profile=PORTABLE_SAMPLING, sampler=None):
+    validate_motion_sampler(sampling_profile, sampler)
     if any(type(n) is not int or not 0 < n < 2**31 for n in (width, height)):
         raise ValueError('positive int32 motion viewport required')
     result = dict(positions=np.empty((0, 2, 2), dtype=np.float32), counts=[0, 0],
@@ -96,7 +106,13 @@ def motion_geometry(state, *, previous_uv, width, height):
     starts = np.stack((x, y), axis=-1).reshape(-1, 2)
     lookup = starts.copy()
     lookup[:, 1] = np.float32(1) - lookup[:, 1]
-    old_uv = sample2d(previous, lookup, wrap=False, linear=True, origin='bottom')
+    if sampling_profile == MEASURED_SAMPLING:
+        old_uv = np.asarray(sampler(previous.copy(), lookup.copy(),
+            wrap=False, linear=True, origin='bottom'), dtype=np.float32)
+        if old_uv.shape != lookup.shape or not np.all(np.isfinite(old_uv)):
+            raise ValueError('measured motion UV samples must be finite and match query shape')
+    else:
+        old_uv = sample2d(previous, lookup, wrap=False, linear=True, origin='bottom')
     delta = (old_uv - starts) * _value(state, 'mv_l', single=True)
     inverse_width = np.float32(1.25) / np.float32(width)
     inverse_height = np.float32(1.25) / np.float32(height)
@@ -117,7 +133,8 @@ def motion_geometry(state, *, previous_uv, width, height):
 
 
 def draw_motion_vectors(destination, state, *, previous_uv, quantize=True,
-                        line_rendering_profile='canonical-gl-lines-v1',raster_subpixel_bits=None):
+                        line_rendering_profile='canonical-gl-lines-v1',raster_subpixel_bits=None,
+                        sampling_profile=PORTABLE_SAMPLING,sampler=None):
     if line_rendering_profile not in ('canonical-gl-lines-v1',PROFILE):
         raise ValueError('unknown motion-vector line profile')
     if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
@@ -128,7 +145,8 @@ def draw_motion_vectors(destination, state, *, previous_uv, quantize=True,
     height, width = target.shape[:2]
     if line_rendering_profile==PROFILE and (min(width,height)<=0 or width*height>1024*768):
         raise ValueError('motion quad profile requires viewport within reference area')
-    geometry = motion_geometry(state, previous_uv=previous_uv, width=width, height=height)
+    geometry = motion_geometry(state, previous_uv=previous_uv, width=width, height=height,
+                               sampling_profile=sampling_profile, sampler=sampler)
     if not len(geometry['positions']):
         return target
     colour = [_value(state, 'mv_' + channel, single=True) for channel in 'rgba']

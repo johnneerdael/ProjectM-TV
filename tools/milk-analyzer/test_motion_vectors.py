@@ -160,3 +160,40 @@ def test_motion_grid_and_viewport_guards_do_not_depend_on_visible_vectors():
     with pytest.raises(ValueError,match='reference area'):
         draw_motion_vectors(np.zeros((900,900,4)),hidden,previous_uv=None,
                             line_rendering_profile=PROFILE)
+
+
+def test_declared_measured_motion_sampler_controls_endpoints_without_mutating_inputs():
+    module = importlib.import_module('motion_vectors')
+    uv = identity()
+    original = uv.copy()
+    calls = []
+    def sampler(field, queries, **settings):
+        calls.append((field.copy(), queries.copy(), settings))
+        field[:] = 0
+        sampled = queries.copy()
+        sampled[:, 1] = 1 - sampled[:, 1]
+        return sampled + np.array([.125, .0625], np.float32)
+    measured = module.motion_geometry(state(), previous_uv=uv, width=32, height=32,
+        sampling_profile='measured-gles300-vertex-half-v1', sampler=sampler)
+    assert len(calls) == 1
+    assert calls[0][2] == {'wrap': False, 'linear': True, 'origin': 'bottom'}
+    np.testing.assert_array_equal(uv, original)
+    # Query Y is opposite the start Y, as in the existing texture convention.
+    np.testing.assert_allclose(measured['positions'][0], [[.25, .75], [.375, .6875]], atol=1e-7)
+
+
+def test_measured_motion_sampling_fails_closed_on_missing_or_invalid_backend():
+    module = importlib.import_module('motion_vectors')
+    kwargs = dict(previous_uv=identity(), width=32, height=32,
+                  sampling_profile='measured-gles300-vertex-half-v1')
+    with pytest.raises(ValueError, match='sampler'):
+        module.motion_geometry(state(), **kwargs)
+    for bad in [np.zeros((1, 3)), np.full((1, 2), np.nan)]:
+        with pytest.raises(ValueError, match='sample'):
+            module.motion_geometry(state(), sampler=lambda *args, **kw: bad, **kwargs)
+    with pytest.raises(ValueError, match='sampling profile'):
+        module.motion_geometry(state(), previous_uv=identity(), width=32, height=32,
+            sampling_profile='unknown')
+    with pytest.raises(ValueError, match='sampler'):
+        module.motion_geometry(state(), previous_uv=identity(), width=32, height=32,
+            sampler=lambda *args, **kw: np.zeros((1, 2)))

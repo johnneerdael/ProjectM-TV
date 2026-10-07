@@ -1240,7 +1240,8 @@ brightness centroid upward; those measurements are distinct.
 Cosmic's corresponding latest-AAR retest still misses p95 motion by 8.36%, so
 half-texture filtering remains open and no new randomized batch is started.
 
-Cosmic's exact-half midpoint control now isolates Y-stage accumulation: at the
+Cosmic's exact-half midpoint control now isolates dependence on Y/cross-row
+weights or accumulation: at the
 same X252/256 and identical rows, Y0 chooses the upper result, while the complete
 Y0..256 sweep chooses it only every 16 steps (17 points); the other 240 choose
 the lower result. Lowp/highp agree and changing the constant sibling channel
@@ -1248,3 +1249,24 @@ from zero to one does not affect the result. These standalone sampler controls
 load no AAR and earn no preset or randomized credit. The finding rejects an
 X-only explanation for this control, but no general filter rule is qualified;
 see `fixtures/half-filter-y-stage-attribution-2026-10-07.json`.
+
+The experimental opt-in `motion_uv_sampling_profile=measured-gles300-vertex-half-v1`
+uses a `MeasuredMotionSampler` callback for prior-UV lookups. It requires exact
+source51/GLES300, finite-half storage and a matching frozen operator identity.
+The portable default is unchanged. Missing/mismatched backend, invalid samples,
+changed evidence or nonzero core rendered frames fails explicitly. Input maps,
+queries, outputs and evidence are saved and hashed; the forecast declares
+`prediction_basis=source-with-measured-operator` and retains the operator report
+in provenance. This is measured GPU arithmetic, not independent hardware math.
+
+`MotionSamplerOperator.java` is an auxiliary GLES300 vertex/transform-feedback
+program loaded alongside the published core classes/library. It receives only
+predictor-computed half UV maps and query coordinates. It initializes no preset,
+calls no core render methods and uses rasterizer discard; no reference/display
+frames enter the forecast. It is not an exposed core numerical API. Five bounded
+controls match 1,420/1,420 components exactly, with core frame serial zero, including
+independently frozen signed/subnormal/edge-clamp texel-centre inputs. This qualifies
+the numerical operator within the recorded backend, not portable GPU behavior.
+The same-preset Cosmic forecast/comparison remains pending; its original 95 and
+latest 8.36% p95 miss are retained. See
+`fixtures/measured-motion-operator-qualification-2026-10-07.json`.

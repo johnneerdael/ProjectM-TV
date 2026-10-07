@@ -897,3 +897,30 @@ def test_forecast_forwards_declared_motion_window_policy(monkeypatch):
     assert seen==['coverage-gated-window-v2']
     assert result['descriptors']['motion_window_policy']=='coverage-gated-window-v2'
     assert result['descriptors']['motion']['window_speed_supported'] is False
+
+
+def test_measured_motion_sampling_requires_matching_source_and_explicit_backend(tmp_path):
+    import copy
+    import forecast
+    from measured_motion import MeasuredMotionSampler
+    from test_measured_motion import identity, executor
+    source=native(BASE)
+    settings=domain(motion_uv_sampling_profile='measured-gles300-vertex-half-v1',
+                    motion_uv_storage_profile='apple-m4pro-gles-rg16f-rtz-finite-v1',
+                    motion_uv_operator_identity=identity())
+    sampler=MeasuredMotionSampler(executor,identity=identity(),directory=tmp_path/'operator')
+    with pytest.raises(ValueError,match='measured motion sampling requires'):
+        forecast.forecast_source(source,audio={},binaries=BINARIES,domain=settings,
+                                 compatibility={},motion_uv_sampler=sampler)
+    pinned=copy.deepcopy(source);pinned['parser_inputs']['engine']=dict(forecast.CORE_2317_ENGINE)
+    settings['profile']='gles300'
+    with pytest.raises(ValueError,match='measured motion sampling requires'):
+        forecast.forecast_source(pinned,audio={},binaries=BINARIES,domain=settings,compatibility={})
+    settings['motion_uv_operator_identity']={}
+    with pytest.raises(ValueError,match='operator identity'):
+        forecast.forecast_source(pinned,audio={},binaries=BINARIES,domain=settings,
+                                 compatibility={},motion_uv_sampler=sampler)
+    settings.pop('motion_uv_sampling_profile')
+    with pytest.raises(ValueError,match='sampler'):
+        forecast.forecast_source(pinned,audio={},binaries=BINARIES,domain=settings,
+                                 compatibility={},motion_uv_sampler=sampler)

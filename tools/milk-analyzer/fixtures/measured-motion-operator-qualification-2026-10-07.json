@@ -1,0 +1,130 @@
+{
+  "scope": "Bounded auxiliary vertex-sampler numerical qualification; source-with-measured-operator, not independent hardwaremath",
+  "identity": {
+    "aar_sha256": "4bdd2ddd4ba249664f59a042d3b0eaf7f6bd4b643d2d126c609b2cc1d753ab9e",
+    "native_sha256": "0f6cbdc607bf03fc24466015c128f0fbfdae9f771e914f6c1b652a6d3bf691ee",
+    "classes_dex_sha256": "f956933b4d8628487f1e610b7b6f9e93f8ac6c9d61ae5e4544c37effdfce5338",
+    "operator_dex_sha256": "d69e5108454c5c62772ef166136cc9039ebbcc99988677b3b68d1e1bbad1ee41",
+    "operator_source_sha256": "4338381b670109b5da0cb450fe5e7898a3bf3cee75d95c0a63442f93472236f0",
+    "vertex_shader_sha256": "27fb3a77ae0913d674e11194de949fda7ff969820f746264b6f45b523048634b",
+    "fragment_shader_sha256": "80e5db7194ba137c090faba3ebfd7e51909097a3d6498bb647c3af8a9c623c55",
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+    "core_version": "4.1.7"
+  },
+  "controls": {
+    "case55": {
+      "matches": 514,
+      "total": 514,
+      "max_error": 0.0,
+      "metadata": {
+        "basis": "source-with-measured-operator",
+        "operator": "auxiliary-GLES300-vertex-RG16F-linear-clamp-transform-feedback-v1",
+        "core_version": "4.1.7",
+        "core_frame_serial_before": 0,
+        "core_frame_serial_after": 0,
+        "preset_draws": 0,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "vendor": "Google (Apple)",
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "vertex_shader": "#version 300 es\nprecision mediump float;layout(location=0) in vec2 q;uniform sampler2D warp_coordinates;out vec2 sampled;void main(){sampled=texture(warp_coordinates,q).xy;gl_Position=vec4(0,0,0,1);}",
+        "fragment_shader": "#version 300 es\nprecision mediump float;out vec4 color;void main(){color=vec4(0);}",
+        "width": 8,
+        "height": 8,
+        "queries": 257
+      },
+      "output_sha256": "73a32d0924f8bafc5db7967375cdd7e4b09b61b0438350545aadd6b2f1ca73fe"
+    },
+    "case14": {
+      "matches": 514,
+      "total": 514,
+      "max_error": 0.0,
+      "metadata": {
+        "basis": "source-with-measured-operator",
+        "operator": "auxiliary-GLES300-vertex-RG16F-linear-clamp-transform-feedback-v1",
+        "core_version": "4.1.7",
+        "core_frame_serial_before": 0,
+        "core_frame_serial_after": 0,
+        "preset_draws": 0,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "vendor": "Google (Apple)",
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "vertex_shader": "#version 300 es\nprecision mediump float;layout(location=0) in vec2 q;uniform sampler2D warp_coordinates;out vec2 sampled;void main(){sampled=texture(warp_coordinates,q).xy;gl_Position=vec4(0,0,0,1);}",
+        "fragment_shader": "#version 300 es\nprecision mediump float;out vec4 color;void main(){color=vec4(0);}",
+        "width": 8,
+        "height": 8,
+        "queries": 257
+      },
+      "output_sha256": "55dc493bb90a1e839f33653f09c381aaa73e2b76d72f6d34f590accc037acfa5"
+    },
+    "operational1": {
+      "matches": 128,
+      "total": 128,
+      "max_error": 0.0,
+      "metadata": {
+        "basis": "source-with-measured-operator",
+        "operator": "auxiliary-GLES300-vertex-RG16F-linear-clamp-transform-feedback-v1",
+        "core_version": "4.1.7",
+        "core_frame_serial_before": 0,
+        "core_frame_serial_after": 0,
+        "preset_draws": 0,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "vendor": "Google (Apple)",
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "vertex_shader": "#version 300 es\nprecision mediump float;layout(location=0) in vec2 q;uniform sampler2D warp_coordinates;out vec2 sampled;void main(){sampled=texture(warp_coordinates,q).xy;gl_Position=vec4(0,0,0,1);}",
+        "fragment_shader": "#version 300 es\nprecision mediump float;out vec4 color;void main(){color=vec4(0);}",
+        "width": 256,
+        "height": 144,
+        "queries": 64
+      },
+      "output_sha256": "451561100548555b8b72c5aac46b489b202143d688dd7088bc071bdca558069e"
+    },
+    "operational15": {
+      "matches": 128,
+      "total": 128,
+      "max_error": 0.0,
+      "metadata": {
+        "basis": "source-with-measured-operator",
+        "operator": "auxiliary-GLES300-vertex-RG16F-linear-clamp-transform-feedback-v1",
+        "core_version": "4.1.7",
+        "core_frame_serial_before": 0,
+        "core_frame_serial_after": 0,
+        "preset_draws": 0,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "vendor": "Google (Apple)",
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "vertex_shader": "#version 300 es\nprecision mediump float;layout(location=0) in vec2 q;uniform sampler2D warp_coordinates;out vec2 sampled;void main(){sampled=texture(warp_coordinates,q).xy;gl_Position=vec4(0,0,0,1);}",
+        "fragment_shader": "#version 300 es\nprecision mediump float;out vec4 color;void main(){color=vec4(0);}",
+        "width": 256,
+        "height": 144,
+        "queries": 64
+      },
+      "output_sha256": "fde62d0a9f0fcefa76b3ddb420d216811b5dd4d2f363c408d3087ae3ca518d88"
+    },
+    "fresh-signed-centres": {
+      "matches": 136,
+      "total": 136,
+      "max_error": 0.0,
+      "mismatches": [],
+      "metadata": {
+        "basis": "source-with-measured-operator",
+        "operator": "auxiliary-GLES300-vertex-RG16F-linear-clamp-transform-feedback-v1",
+        "core_version": "4.1.7",
+        "core_frame_serial_before": 0,
+        "core_frame_serial_after": 0,
+        "preset_draws": 0,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "vendor": "Google (Apple)",
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "vertex_shader": "#version 300 es\nprecision mediump float;layout(location=0) in vec2 q;uniform sampler2D warp_coordinates;out vec2 sampled;void main(){sampled=texture(warp_coordinates,q).xy;gl_Position=vec4(0,0,0,1);}",
+        "fragment_shader": "#version 300 es\nprecision mediump float;out vec4 color;void main(){color=vec4(0);}",
+        "width": 8,
+        "height": 8,
+        "queries": 68
+      }
+    }
+  },
+  "uses_reference_preset_frames": false,
+  "randomized_credit": 0,
+  "cosmic_full_preset_repair": "Pending"
+}

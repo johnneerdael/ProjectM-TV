@@ -135,7 +135,7 @@ def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
 
 def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
                     compatibility: dict, random_inputs=None, noise_bank=None, materials=None,
-                    retain_surfaces=True, on_frame=None) -> dict:
+                    retain_surfaces=True, on_frame=None, motion_uv_sampler=None) -> dict:
     model_hashes=model_file_hashes()
     if model_hashes!=_MODEL_IMPORT_HASHES:
         raise ValueError('forecast model files changed since import; start a fresh process')
@@ -203,6 +203,17 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if rotation_policy==CPU_ROTATION and not current_rotation:
         raise ValueError('CPU rotation engine identity mismatch')
     from motion_vectors import PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
+    from motion_vectors import PORTABLE_SAMPLING, MEASURED_SAMPLING, validate_motion_sampler
+    from measured_motion import MeasuredMotionSampler
+    motion_sampling_profile=domain.get('motion_uv_sampling_profile',PORTABLE_SAMPLING)
+    if motion_sampling_profile==MEASURED_SAMPLING:
+        if (domain['profile']!='gles300' or not matches(engine,CORE_2317_ENGINE) or
+                not isinstance(motion_uv_sampler,MeasuredMotionSampler) or
+                domain.get('motion_uv_storage_profile')!=APPLE_FINITE_STORAGE):
+            raise ValueError('measured motion sampling requires declared GLES300, pinned2.3.17, finite-half storage and explicit backend')
+        if domain.get('motion_uv_operator_identity')!=motion_uv_sampler.identity:
+            raise ValueError('measured motion operator identity must match frozen domain')
+    validate_motion_sampler(motion_sampling_profile,motion_uv_sampler)
     motion_storage_profile=domain.get('motion_uv_storage_profile',PORTABLE_STORAGE)
     if motion_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
         raise ValueError('unknown motion UV storage profile')
@@ -262,7 +273,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         texture_sampling_profile=texture_sampling_profile,line_rendering_profile=line_profile,
         motion_raster_subpixel_bits=domain.get('triangle_subpixel_bits'),
         motion_uv_storage_profile=motion_storage_profile,blur_arithmetic_profile=blur_arithmetic_profile,
-        shader_arithmetic_profile=shader_arithmetic_profile)
+        shader_arithmetic_profile=shader_arithmetic_profile,
+        motion_uv_sampling_profile=motion_sampling_profile,motion_uv_sampler=motion_uv_sampler)
     required_blur_level=native_blur_level(source,pipeline.stage_resolution)
     if shape_sampler_policy in {CORE_238_SHAPE_POLICY,CORE_2315_SHAPE} and domain['blur_levels']<required_blur_level:
         raise ValueError('declared blur levels omit native required resources')
@@ -422,5 +434,11 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         limitations=['GPU rasterization, sampling and arithmetic precision not validated',
                      'Target shader compilation/linking and fallback remain profile conditions',
                      'Initial state and RNG/resource lifecycle are declared inputs, not inferred engine startup'])
+    report['provenance']['motion_uv_sampling_profile']=motion_sampling_profile
+    report['prediction_basis']='independent-source-math'
+    if motion_uv_sampler is not None:
+        report['prediction_basis']='source-with-measured-operator'
+        report['provenance']['motion_uv_operator']=motion_uv_sampler.report()
+        report['limitations'].append('Half motion filtering uses a declared numerical GPU operator; independent hardware arithmetic is not reconstructed')
     report['source_features'] = forecast_feature_record(report)
     return report
