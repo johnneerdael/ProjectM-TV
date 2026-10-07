@@ -1,0 +1,87 @@
+{
+  "device": "Ugoos AM6, Android9, Mali-G52, ARMv7, Android user0, awake verified before each run",
+  "scope": "Headless EGL pbuffer, unchanged witness,1280x720,48x32 mesh,30 frames,frozen PCM/clock/seed. Timings cover onDrawFrame+glFinish, exclude readback, discard frames1-5. Unpaced throughput is not on-screen app FPS; uncontrolled background/thermal variation and changed output workload prevent attributing differences only to CPU trig. No settings or installed apps changed.",
+  "original_vs_wrapped_rgb_mae": 0.005887456238269806,
+  "corrected_vs_wrapped_rgb_mae": 0.0,
+  "corrected_vs_wrapped_byte_identical": true,
+  "rows": [
+    {
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_sha256": {
+        "full-core.aar": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+        "libprojectmtv.so": "effaa38debf0f3a03f723d4215f0e1f7f0eedac4617eadc9881061c3dc5598c5",
+        "native.rgb.u8": "78e86f91d8136057a6e1b4c9ef146f6e9812aabd8c9b7a2d311860dcd7ddefd5"
+      },
+      "median_frame_ms": 33.996417,
+      "p95_frame_ms": 39.8138252,
+      "synchronized_unpaced_throughput_fps": 29.738493027060308,
+      "timed_frames": 25
+    },
+    {
+      "role": "baseline",
+      "repeat": 2,
+      "artifact_sha256": {
+        "full-core.aar": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+        "libprojectmtv.so": "effaa38debf0f3a03f723d4215f0e1f7f0eedac4617eadc9881061c3dc5598c5",
+        "native.rgb.u8": "78e86f91d8136057a6e1b4c9ef146f6e9812aabd8c9b7a2d311860dcd7ddefd5"
+      },
+      "median_frame_ms": 35.06275,
+      "p95_frame_ms": 39.9609418,
+      "synchronized_unpaced_throughput_fps": 28.498607853835814,
+      "timed_frames": 25
+    },
+    {
+      "role": "baseline",
+      "repeat": 3,
+      "artifact_sha256": {
+        "full-core.aar": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+        "libprojectmtv.so": "effaa38debf0f3a03f723d4215f0e1f7f0eedac4617eadc9881061c3dc5598c5",
+        "native.rgb.u8": "78e86f91d8136057a6e1b4c9ef146f6e9812aabd8c9b7a2d311860dcd7ddefd5"
+      },
+      "median_frame_ms": 36.357708,
+      "p95_frame_ms": 41.2281504,
+      "synchronized_unpaced_throughput_fps": 27.9032921183553,
+      "timed_frames": 25
+    },
+    {
+      "role": "local",
+      "repeat": 1,
+      "artifact_sha256": {
+        "full-core.aar": "ef4b1bd44053fba85034f10d59195c04a7d36d3a8020aae8ba665eca9a03b70a",
+        "libprojectmtv.so": "d940a188577e8ce82df906624357cf5926f7a0c5e5588ed4b60252e473cbcb5e",
+        "native.rgb.u8": "98253fa08ef9df4e91b9b106ae7303f39f66036302113ee15b4cdb18a74dc74e"
+      },
+      "median_frame_ms": 35.224417,
+      "p95_frame_ms": 40.976974999999996,
+      "synchronized_unpaced_throughput_fps": 28.698594701219584,
+      "timed_frames": 25
+    },
+    {
+      "role": "local",
+      "repeat": 2,
+      "artifact_sha256": {
+        "full-core.aar": "ef4b1bd44053fba85034f10d59195c04a7d36d3a8020aae8ba665eca9a03b70a",
+        "libprojectmtv.so": "d940a188577e8ce82df906624357cf5926f7a0c5e5588ed4b60252e473cbcb5e",
+        "native.rgb.u8": "98253fa08ef9df4e91b9b106ae7303f39f66036302113ee15b4cdb18a74dc74e"
+      },
+      "median_frame_ms": 33.804917,
+      "p95_frame_ms": 42.0576418,
+      "synchronized_unpaced_throughput_fps": 29.5084061245712,
+      "timed_frames": 25
+    },
+    {
+      "role": "local",
+      "repeat": 3,
+      "artifact_sha256": {
+        "full-core.aar": "ef4b1bd44053fba85034f10d59195c04a7d36d3a8020aae8ba665eca9a03b70a",
+        "libprojectmtv.so": "d940a188577e8ce82df906624357cf5926f7a0c5e5588ed4b60252e473cbcb5e",
+        "native.rgb.u8": "98253fa08ef9df4e91b9b106ae7303f39f66036302113ee15b4cdb18a74dc74e"
+      },
+      "median_frame_ms": 34.353792,
+      "p95_frame_ms": 39.969441999999994,
+      "synchronized_unpaced_throughput_fps": 29.040593194401104,
+      "timed_frames": 25
+    }
+  ]
+}

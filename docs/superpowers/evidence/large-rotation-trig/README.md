@@ -16,7 +16,7 @@ conversion. CPU libm avoids GPU trig range reduction and an inaccurate rounded
 2pi modulus for very large angles. It changes only the internal mesh/vertex shader,
 not authored equations, assets, custom shader trig or the C/Java/JNI interface.
 The vertex gains one float (56 to60 bytes) and one attribute (six to seven).
-No performance improvement is claimed; per-pixel CPU trig needs device measurement.
+No performance improvement is claimed; physical measurements below are limited to the matched witness.
 
 ## Verified checkpoint (2026-10-07)
 
@@ -35,7 +35,7 @@ No performance improvement is claimed; per-pixel CPU trig needs device measureme
 
 Raw build/test logs are ignored under `build/large-rotation/`. No published artifact
 or original-preset appearance claim is made by these numerical controls. Linux
-Mesa, physical-TV timing/captures and published-AAR retest remain pending. Final Codex review, CI, merge,
+Mesa and published-AAR retest remain pending. Final Codex review, CI, merge,
 publication and Milkbeat update are required before completion.
 
 ## Documentation assessment
@@ -89,3 +89,30 @@ mean RGB errors range from4.49e-8 to2.72e-7; the final frames retain spatial det
 These controls exercise the shared prepared mesh in both authored feedback and
 native warp paths; downscaled readback does not certify full-resolution edge
 fidelity or physical-TV frame rates.
+
+## Physical AM6/Mali-G52
+
+The user authorized AM6 if awake. Android user0 and awake/ON state were checked
+before every run; no TV was awakened and no installed app, preference or debug
+property was changed. The matched ARMv7 control binary passes all signed/moderate/
+large/max-finite, varying per-pixel and multi-frame checks on Mali-G52. Its fixture
+uses explicit RGBA8 storage matching the RGBA seed upload/readback and checks the
+upload error immediately; the original permissive RGB allocation is corrected.
+
+The unchanged preset renders30frames at1280×720 through each full AAR using the
+same frozen clock, PCM, seed and48×32 mesh, Standard inactive. Corrected output
+matches a same-core small-angle diagnostic control **byte-for-byte**; baseline RGB
+MAE against that control is0.00588746. Three alternating baseline/corrected runs
+repeat each pixel hash. See `am6-validation.json` and raw frame-time metadata.
+
+| Synchronized unpaced throughput, three runs | Range | Median frame-time range |
+|---|---:|---:|
+| Old2.3.16 AAR |27.90–29.74 fps|34.00–36.36ms|
+| Corrected local AAR |28.70–29.51 fps|33.80–35.22ms|
+
+Each timing covers `onDrawFrame` plus `glFinish`, excludes readback and discards
+frames1–5. This is headless EGL renderer throughput, not on-screen app FPS or a
+player/audio-capture journey. Background/thermal variation and changed output
+workload prevent attributing the timing difference solely to CPU trig. No broad
+performance guarantee or improvement is claimed. The corrected full local AAR
+and all instrumented helper identities are recorded separately from production.

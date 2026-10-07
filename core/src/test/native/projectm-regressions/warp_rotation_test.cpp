@@ -38,8 +38,8 @@ struct Control
     PerFrameContext frame{state.globalMemory, &state.globalRegisters};
     PerPixelContext pixel{state.globalMemory, &state.globalRegisters};
     PerPixelMesh mesh;
-    std::shared_ptr<Texture> input = std::make_shared<Texture>("rotation-input", Width, Height, false);
-    std::shared_ptr<Texture> output = std::make_shared<Texture>("rotation-output", Width, Height, false);
+    std::shared_ptr<Texture> input = std::make_shared<Texture>("rotation-input", Width, Height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
+    std::shared_ptr<Texture> output = std::make_shared<Texture>("rotation-output", Width, Height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
     GLuint framebuffer{};
 
     Control(TextureManager& textures, bool custom, bool perPixel)
@@ -92,6 +92,7 @@ struct Control
             }
         glBindTexture(GL_TEXTURE_2D, input->TextureID());
         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, Width, Height, GL_RGBA, GL_UNSIGNED_BYTE, seed.data());
+        Check(glGetError() == GL_NO_ERROR, "rotation seed upload GL error");
     }
 
     ~Control() { glDeleteFramebuffers(1, &framebuffer); }
