@@ -1320,3 +1320,11 @@ is retained, with zero fresh randomized/batch/streak credit. This closes only th
 declared measured-operator repair window, not independent hardware-sampler math
 or the other dark/clipped/indexing cases. See
 `fixtures/cosmic-measured-operator-repair-2026-10-07.json`.
+
+The unresolved SpottedBlob2 vector-index case is narrowed under savedsource51
+audio/time: out-of-range accesses occur in frames1–3, with first indices9,1,7.
+Frames4–30 are in range, but their feedback depends on unresolved earlier output.
+Do not skip the early frames or insert black feedback to credit a complete forecast.
+Legacy compiler semantics or an explicit versioned target policy remains required.
+This source-domain calculation consumes no reference frames and earns no score.
+See `fixtures/spotted-blob2-source51-index-domain-2026-10-07.json`.

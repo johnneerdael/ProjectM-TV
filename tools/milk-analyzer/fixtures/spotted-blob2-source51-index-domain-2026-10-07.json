@@ -1,0 +1,589 @@
+{
+  "scope": "Source-input-domain recheck using savedsource51audio; not nativecompile/driver or portableUBpolicy",
+  "audio_sha256": "60095b2dac961ebabdb983a025bb80de8cc7410985e760d4420160bcdccf03c2",
+  "rows": [
+    {
+      "frame": 1,
+      "time": 0.03333333134651184,
+      "products": [
+        9.679781913757324,
+        1.521876335144043,
+        7.275979995727539
+      ],
+      "indices": [
+        9,
+        1,
+        7
+      ],
+      "out_of_range": [
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "frame": 2,
+      "time": 0.06666667014360428,
+      "products": [
+        5.277637958526611,
+        0.9024542570114136,
+        3.4541800022125244
+      ],
+      "indices": [
+        5,
+        0,
+        3
+      ],
+      "out_of_range": [
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "frame": 3,
+      "time": 0.10000000149011612,
+      "products": [
+        3.5736169815063477,
+        0.6833871603012085,
+        2.1361193656921387
+      ],
+      "indices": [
+        3,
+        0,
+        2
+      ],
+      "out_of_range": [
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 4,
+      "time": 0.13333334028720856,
+      "products": [
+        2.758265256881714,
+        0.5749971270561218,
+        1.380146861076355
+      ],
+      "indices": [
+        2,
+        0,
+        1
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 5,
+      "time": 0.1666666716337204,
+      "products": [
+        2.464813709259033,
+        0.5450327396392822,
+        0.9781000018119812
+      ],
+      "indices": [
+        2,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 6,
+      "time": 0.20000000298023224,
+      "products": [
+        2.07792329788208,
+        0.5080758333206177,
+        0.692946195602417
+      ],
+      "indices": [
+        2,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 7,
+      "time": 0.23333333432674408,
+      "products": [
+        1.821077823638916,
+        0.4798183739185333,
+        0.4555610418319702
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 8,
+      "time": 0.2666666805744171,
+      "products": [
+        1.7815474271774292,
+        0.4913656711578369,
+        0.3060831129550934
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 9,
+      "time": 0.30000001192092896,
+      "products": [
+        1.5970083475112915,
+        0.48212242126464844,
+        0.191334530711174
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 10,
+      "time": 0.3333333432674408,
+      "products": [
+        1.4633773565292358,
+        0.47150495648384094,
+        0.10032403469085693
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 11,
+      "time": 0.36666667461395264,
+      "products": [
+        1.4853771924972534,
+        0.4960147738456726,
+        0.04509865492582321
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 12,
+      "time": 0.4000000059604645,
+      "products": [
+        1.3691201210021973,
+        0.49621039628982544,
+        0.012057449668645859
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 13,
+      "time": 0.4333333373069763,
+      "products": [
+        1.282256007194519,
+        0.4920550286769867,
+        7.77657114667818e-05
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 14,
+      "time": 0.46666666865348816,
+      "products": [
+        1.326780915260315,
+        0.5234515070915222,
+        0.007643126416951418
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 15,
+      "time": 0.5,
+      "products": [
+        1.2417210340499878,
+        0.5279282927513123,
+        0.033158011734485626
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 16,
+      "time": 0.5333333611488342,
+      "products": [
+        1.1774709224700928,
+        0.5264843702316284,
+        0.07116661965847015
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 17,
+      "time": 0.5666666626930237,
+      "products": [
+        1.2321839332580566,
+        0.5626480579376221,
+        0.12636983394622803
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 18,
+      "time": 0.6000000238418579,
+      "products": [
+        1.1638418436050415,
+        0.5692203640937805,
+        0.19507688283920288
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 19,
+      "time": 0.6333333253860474,
+      "products": [
+        1.1120997667312622,
+        0.56871098279953,
+        0.2595038115978241
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 20,
+      "time": 0.6666666865348816,
+      "products": [
+        1.1720553636550903,
+        0.6085968017578125,
+        0.3461664021015167
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 21,
+      "time": 0.699999988079071,
+      "products": [
+        1.1135627031326294,
+        0.6160481572151184,
+        0.44011828303337097
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 22,
+      "time": 0.7333333492279053,
+      "products": [
+        1.0693303346633911,
+        0.615409255027771,
+        0.507541835308075
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 23,
+      "time": 0.7666666507720947,
+      "products": [
+        1.1322170495986938,
+        0.6583243608474731,
+        0.6059290766716003
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 24,
+      "time": 0.800000011920929,
+      "products": [
+        1.0798847675323486,
+        0.6658335328102112,
+        0.7040857672691345
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 25,
+      "time": 0.8333333134651184,
+      "products": [
+        1.0404024124145508,
+        0.6643203496932983,
+        0.7527016997337341
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 26,
+      "time": 0.8666666746139526,
+      "products": [
+        1.1050124168395996,
+        0.7096913456916809,
+        0.8416851758956909
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 27,
+      "time": 0.8999999761581421,
+      "products": [
+        1.0566842555999756,
+        0.7166296243667603,
+        0.9229555726051331
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 28,
+      "time": 0.9333333373069763,
+      "products": [
+        1.0203083753585815,
+        0.7136718034744263,
+        0.9361014366149902
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 29,
+      "time": 0.9666666388511658,
+      "products": [
+        1.0859520435333252,
+        0.7609614133834839,
+        0.9971430897712708
+      ],
+      "indices": [
+        1,
+        0,
+        0
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "frame": 30,
+      "time": 1.0,
+      "products": [
+        1.0402919054031372,
+        0.7668142318725586,
+        1.044640064239502
+      ],
+      "indices": [
+        1,
+        0,
+        1
+      ],
+      "out_of_range": [
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "blocked_frames": [
+    1,
+    2,
+    3
+  ],
+  "first_frame_indices": [
+    9,
+    1,
+    7
+  ],
+  "preset_unchanged": true,
+  "randomized_credit": 0,
+  "feedback_consequence": "Frame1\u20133 outputs areundefinedunderstrictlanguage; laterin-rangeaccessdoesnot recoverknownfeedbackstate. No warmframe skipping or partialprediction credited."
+}
