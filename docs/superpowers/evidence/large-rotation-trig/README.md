@@ -34,8 +34,7 @@ No performance improvement is claimed; physical measurements below are limited t
 - `./gradlew :core:assembleDebug :app:assembleDebug testDebugUnitTest`: BUILD SUCCESSFUL.
 
 Raw build/test logs are ignored under `build/large-rotation/`. No published artifact
-or original-preset appearance claim is made by these numerical controls. Linux
-Mesa and published-AAR retest remain pending. Final Codex review, CI, merge,
+or original-preset appearance claim is made by these numerical controls. Published-AAR retest remains pending. Final Codex review, CI, merge,
 publication and Milkbeat update are required before completion.
 
 ## Documentation assessment
@@ -116,3 +115,30 @@ player/audio-capture journey. Background/thermal variation and changed output
 workload prevent attributing the timing difference solely to CPU trig. No broad
 performance guarantee or improvement is claimed. The corrected full local AAR
 and all instrumented helper identities are recorded separately from production.
+
+## Linux linkage review follow-up
+
+Both Linux configurations build and pass28/28 CTests with ASan/UBSan on
+Ubuntu24.04 x86_64 Mesa25.2.8 softpipe. Normal package discovery and explicit
+`GL_LIBS=-lEGL -lGLESv2` / `GL_CFLAGS=-I/usr/include` use separate clean build
+directories. The new rotation CTest takes1.01s and0.95s respectively. No sanitizer,
+assertion or repository deadline was removed; CI's normal llvmpipe policy remains
+unchanged. Exact configure/build/test logs and image/environment identity are
+adjacent (trailing whitespace trimmed; unaltered logs retained in the external archive). Configure with `PROJECTM_SOURCE=/src/third_party/projectm`,
+`CMAKE_BUILD_TYPE=Debug`, `SANITIZERS=ON`, then build and run CTest with the
+recorded environment; `/src` is the read-only checkout and `/out` its separate
+configuration's writable build mount.
+
+The ARM64 llvmpipe configuration also builds through both linkage routes and its
+direct rotation controls exit successfully. Its full CTest runs fail16 groups
+with fixture timeouts (listed in the archived logs). Phase instrumentation shows
+~41s constructing the existing TextureManager before the rotation cases. This
+matches the [recorded baseline limitation](../float-literal-roundtrip/README.md),
+not a passing suite. The documented x86_64 softpipe route completes both entire
+suites (137.15s/135.56s). [Mesa documents backend selection](https://docs.mesa3d.org/envvars.html).
+
+A read-only observer confirms that the original preset's requested custom
+composite is active (`_qa`, `_c4` and blur uniforms), while all30 pixels remain
+byte-identical to the unobserved corrected capture. The original requests legacy
+warp (`PSVERSION_WARP=0`), so its warp is not described as a custom program.
+Generic legacy/custom warp controls are separate. See `local-active-composite.json`.

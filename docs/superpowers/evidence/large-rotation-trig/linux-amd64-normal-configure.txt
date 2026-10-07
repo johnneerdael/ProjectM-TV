@@ -1,0 +1,87 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1")
+-- Checking for module 'egl'
+--   Found egl, version 1.5
+-- Found Git: /usr/bin/git (found version "2.43.0")
+-- Building for OpenGL Embedded Profile
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so  found components: GLES3
+-- Performing Test FAST_MATH_OPTIMIZATION_SUPPORTED
+-- Performing Test FAST_MATH_OPTIMIZATION_SUPPORTED - Success
+-- Performing Test NO_MATH_LIB_REQUIRED
+-- Performing Test NO_MATH_LIB_REQUIRED - Success
+-- Performing Test CXXFLAG_-Wpedantic_SUPPORTED
+-- Performing Test CXXFLAG_-Wpedantic_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wextra_SUPPORTED
+-- Performing Test CXXFLAG_-Wextra_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wall_SUPPORTED
+-- Performing Test CXXFLAG_-Wall_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wchar-subscripts_SUPPORTED
+-- Performing Test CXXFLAG_-Wchar-subscripts_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wformat-security_SUPPORTED
+-- Performing Test CXXFLAG_-Wformat-security_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wpointer-arith_SUPPORTED
+-- Performing Test CXXFLAG_-Wpointer-arith_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wshadow_SUPPORTED
+-- Performing Test CXXFLAG_-Wshadow_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wsign-compare_SUPPORTED
+-- Performing Test CXXFLAG_-Wsign-compare_SUPPORTED - Success
+-- Performing Test CXXFLAG_-Wtype-limits_SUPPORTED
+-- Performing Test CXXFLAG_-Wtype-limits_SUPPORTED - Success
+-- Performing Test STD_FILESYSTEM_EXISTS
+-- Performing Test STD_FILESYSTEM_EXISTS - Success
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR - Success
+--
+-- libprojectM v4.1.7
+-- ==============================================
+--
+--     prefix:                      /usr/local
+--     libdir:                      lib
+--     includedir:                  include
+--     bindir:                      bin
+--
+--     compiler:                    /usr/bin/c++
+--     cflags:
+--     cxxflags:
+--     ldflags:
+--
+-- Features:
+-- ==============================================
+--
+--     Build shared libraries:      OFF
+--     Filesystem support:          C++17 STL
+--     SDL2:                        OFF
+--     OpenGL ES:                   ON
+--     Emscripten:                  OFF
+--     Use system GLM:              OFF
+--     Use system projectM-eval:    OFF
+--     Link UI with shared lib:
+--
+-- Targets and applications:
+-- ==============================================
+--
+--     libprojectM:                 (always built)
+--     Playlist library:            OFF
+--     SDL2 Test UI:                OFF
+--     Tests:                       OFF
+--     Documentation:               OFF
+--
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter
+-- Configuring done (12.0s)
+-- Generating done (0.2s)
+-- Build files have been written to: /out

@@ -1,0 +1,6 @@
+softpipe
+legacy per-frame UV controls pass
+legacy per-pixel UV controls pass
+custom per-frame UV controls pass
+custom per-pixel UV controls pass
+multi-frame feedback controls pass

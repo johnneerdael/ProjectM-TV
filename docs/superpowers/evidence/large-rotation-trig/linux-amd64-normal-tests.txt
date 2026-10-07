@@ -1,0 +1,62 @@
+Internal ctest changing into directory: /out
+Test project /out
+      Start  1: warp-rotation-regressions
+ 1/28 Test  #1: warp-rotation-regressions ..........   Passed    1.01 sec
+      Start  2: texture-routing-regressions
+ 2/28 Test  #2: texture-routing-regressions ........   Passed    2.69 sec
+      Start  3: warp-zoom-regressions
+ 3/28 Test  #3: warp-zoom-regressions ..............   Passed    0.29 sec
+      Start  4: dynamic-original-presets
+ 4/28 Test  #4: dynamic-original-presets ...........   Passed   54.36 sec
+      Start  5: dynamic-wave-controls
+ 5/28 Test  #5: dynamic-wave-controls ..............   Passed    2.66 sec
+      Start  6: dynamic-display-controls
+ 6/28 Test  #6: dynamic-display-controls ...........   Passed   41.10 sec
+      Start  7: shape-sampler-regressions
+ 7/28 Test  #7: shape-sampler-regressions ..........   Passed    2.36 sec
+      Start  8: shape-sampler-preset
+ 8/28 Test  #8: shape-sampler-preset ...............   Passed    2.01 sec
+      Start  9: blur-range-regressions
+ 9/28 Test  #9: blur-range-regressions .............   Passed    0.06 sec
+      Start 10: blur-range-render
+10/28 Test #10: blur-range-render ..................   Passed    4.45 sec
+      Start 11: float-literal-regressions
+11/28 Test #11: float-literal-regressions ..........   Passed    0.29 sec
+      Start 12: random-texture-manager
+12/28 Test #12: random-texture-manager .............   Passed    0.56 sec
+      Start 13: random-texture-stages
+13/28 Test #13: random-texture-stages ..............   Passed    0.84 sec
+      Start 14: random-texture-shorthand
+14/28 Test #14: random-texture-shorthand ...........   Passed    0.76 sec
+      Start 15: random-texture-numerical
+15/28 Test #15: random-texture-numerical ...........   Passed    0.97 sec
+      Start 16: random-texture-lifecycle
+16/28 Test #16: random-texture-lifecycle ...........   Passed    1.15 sec
+      Start 17: random-texture-blur-framebuffers
+17/28 Test #17: random-texture-blur-framebuffers ...   Passed    0.75 sec
+      Start 18: random-texture-midgit-render
+18/28 Test #18: random-texture-midgit-render .......   Passed    2.11 sec
+      Start 19: shader-parser-regressions
+19/28 Test #19: shader-parser-regressions ..........   Passed    0.10 sec
+      Start 20: hlsl-self-reference
+20/28 Test #20: hlsl-self-reference ................   Passed    0.07 sec
+      Start 21: custom-waveform-bounds
+21/28 Test #21: custom-waveform-bounds .............   Passed    0.38 sec
+      Start 22: shader-render-regressions
+22/28 Test #22: shader-render-regressions ..........   Passed    8.89 sec
+      Start 23: float-literal-render
+23/28 Test #23: float-literal-render ...............   Passed    1.00 sec
+      Start 24: parser-presets
+24/28 Test #24: parser-presets .....................   Passed    1.52 sec
+      Start 25: implicit-global-regressions
+25/28 Test #25: implicit-global-regressions ........   Passed    0.07 sec
+      Start 26: implicit-input-bindings
+26/28 Test #26: implicit-input-bindings ............   Passed    0.35 sec
+      Start 27: initialization-presets
+27/28 Test #27: initialization-presets .............   Passed    1.09 sec
+      Start 28: float-literal-presets
+28/28 Test #28: float-literal-presets ..............   Passed    5.16 sec
+
+100% tests passed, 0 tests failed out of 28
+
+Total Test time (real) = 137.15 sec

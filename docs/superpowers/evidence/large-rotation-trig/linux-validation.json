@@ -1,0 +1,37 @@
+{
+  "platform": "Ubuntu24.04 x86_64 under Docker Desktop emulation",
+  "image_sha256": "22a21c31b90a5a66ebb1aa379d85174c18b690cbc5dda66ebaa54189688fe0a9",
+  "driver": "Mesa25.2.8 softpipe",
+  "environment": {
+    "EGL_PLATFORM": "surfaceless",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "GALLIUM_DRIVER": "softpipe",
+    "ASAN_OPTIONS": "detect_leaks=0"
+  },
+  "sanitizers": "ASan+UBSan retained; repository test deadlines unchanged",
+  "configurations": {
+    "normal": {
+      "cmake_arguments": [
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DSANITIZERS=ON"
+      ],
+      "test_count": 28,
+      "passed": 28,
+      "rotation_seconds": 1.01,
+      "total_seconds": 137.15
+    },
+    "explicit": {
+      "cmake_arguments": [
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DSANITIZERS=ON",
+        "-DGL_CFLAGS=-I/usr/include",
+        "-DGL_LIBS=-lEGL -lGLESv2"
+      ],
+      "test_count": 28,
+      "passed": 28,
+      "rotation_seconds": 0.95,
+      "total_seconds": 135.56
+    }
+  },
+  "arm64_llvmpipe": "Both configurations build and direct rotation controls pass, but full CTest suites time out in16 fixture-heavy groups. Instrumentation places~41s in existing TextureManager construction, before rotation cases; matches the previously recorded baseline driver limitation. These runs do not establish a passing full suite."
+}
