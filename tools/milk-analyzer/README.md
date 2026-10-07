@@ -1038,3 +1038,14 @@ Those controls do not establish every evaluated point, raster coverage or visibl
 trajectory. Learning retests still miss median motion by 7.94% and 17.98%; their
 original grades remain unchanged and no fresh random credit is awarded. See
 `fixtures/custom-wave-fma-smoothing-2026-10-07.json`.
+
+The third frozen ten-preset/30-frame batch against published 2.3.16 scored
+100, 100, 100, 100, 100, 100, 95, 100, 100, 100 after independent review.
+Its mean is 99.5, but it fails the all-100 requirement. The cosmic-tear preset
+misses both motion estimates and retains visible fine-feedback differences;
+its other frozen clauses pass at their stated scope. A raw-feedback control
+matches frame one and diverges at frame two. Source inspection then identifies
+an unforwarded GLES quad-line policy in the motion-vector path. A disposable
+quad-path prototype improves the two errors to 2.30% and 9.60%, still a miss;
+no completed repair or fresh credit is claimed. See
+`fixtures/random30-batch003-results-2026-10-07.json`.
