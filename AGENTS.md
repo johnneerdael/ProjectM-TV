@@ -211,6 +211,9 @@ Follow the repository's configured formatting and lint rules. Review automatic f
 
 ## Building and testing
 
+The release gate runs Preset Lab and Native trails checks without the historical core-corpus suite. Standalone `tools/core-corpus` source controls read frozen commit `5681852f`; if explicitly run under GitHub Actions, their test class fetches that exact fixture only when missing, without submodule recursion. Preserve fixture hashes and assertions; do not add historical source tests or full-history fetching to the release gate.
+
+
 Choose validation that exercises the changed behavior. Compilation alone does not establish functional correctness. For UI or integration changes, exercise relevant user journeys and error paths when the environment supports them. Record baseline failures and environmental limitations honestly.
 
 For release tooling changes, the required check is:

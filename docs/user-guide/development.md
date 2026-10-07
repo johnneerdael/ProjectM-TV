@@ -195,3 +195,12 @@ Historical Android core-corpus tooling tests are outside this release gate. Run
 source-transformation controls require the frozen historical commit documented
 in `tools/core-corpus/README.md`. These historical controls do not establish the
 validity of the shipped collection scores or current-renderer appearance.
+
+## Standalone historical source controls
+
+The standalone core-corpus source controls read current source and a fixed
+historical release commit. Keep that commit available when running these tools
+locally. If explicitly invoked under GitHub Actions, the test class fetches the
+exact pinned fixture only when missing; assertions and source identity remain
+unchanged. This bootstrap is outside the Preset Lab release gate and does not
+require that gate to fetch repository history.

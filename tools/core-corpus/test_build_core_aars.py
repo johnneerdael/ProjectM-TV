@@ -1,6 +1,7 @@
 """Guard the narrow Core transformation and source provenance contracts."""
 import importlib.util
 import inspect
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -14,6 +15,17 @@ spec.loader.exec_module(builder)
 
 
 class CoreTransformationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            git = ["git", "-C", str(builder.REPO)]
+            fixture = f"{builder.BASELINE}:{builder.CPP}native-lib.cpp"
+            available = subprocess.run([*git, "cat-file", "-e", fixture],
+                                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if available.returncode:
+                subprocess.run([*git, "fetch", "--no-tags", "--depth=1",
+                                "--recurse-submodules=no", "origin", builder.BASELINE], check=True)
+
     def source(self, commit):
         return subprocess.check_output(
             ["git", "-C", str(builder.REPO), "show", f"{commit}:{builder.CPP}native-lib.cpp"], text=True)
