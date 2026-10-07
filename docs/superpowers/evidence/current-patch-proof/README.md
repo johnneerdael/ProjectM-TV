@@ -84,7 +84,7 @@ witness needs a numerical or lifecycle fixture as well as an honest image result
 |0007|319.milk; mode-switch fixture|Original ablation unchanged during this input; diagnostic mode switch changes 60 frames.|
 |0008|idiot - Forty Six and2; invert fixture|Original ablation unchanged during this input; equation-only invert changes 60 frames.|
 |0009|Unchanged suksma rand tritex preset|Removing 0009 changes 120 frames; exact-byte and alpha policy analysis remain separate.|
-|0010|Duplicate-name shape image roots; fade/reset|Removing 0010 changes 59 frames. Static shader descriptor control is unchanged and retained.|
+|0010|Custom-pack ownership enhancement; duplicate-name roots, fade/reset|Removing 0010 changes 59 frames. This demonstrates added per-preset lookup semantics. Static shader descriptor control is unchanged and retained.|
 |0011|Unchanged EoS_Phat_PeterP_Sentinel_Aware_6 witness|Stock fails shape equations first; isolated removal changes 118 frames without that confounder.|
 |0012|Unchanged sample 06; subpixel shape fixture|Original and synthetic ablations change120 frames. Synthetic no0012 loses coverage entirely.|
 |0013|Unchanged sample 06; custom-composite impulse|Both ablations change120 frames. Impulse becomes four max 64 pixels without 0013 versus one max 255 pixel with it.|
@@ -195,7 +195,10 @@ The separately requested predictor brief is `predictor-patch-0010-brief.md`.
 ## Predictor-created Aurora ownership witness
 
 The user supplied animated SOL/LUNA packs and a forecast written before the GPU
-test. The frozen witness makes patch 0010's failure visible at frame 20, before
+test. The frozen witness makes patch 0010's ownership enhancement visible at frame 20, before
 the fade: a blue LUNA emblem replaces SOL inside its still-orange portal.
 All three roles repeat exactly with zero GL errors; the patched reset/no-reset
 sequences match all 120 frames. See [frozen inputs, screenshots and audit](aurora-ownership/README.md).
+Upstream uses its documented global lookup policy; the patch adds retained
+per-preset paths for custom-pack hosts. These captures do not establish an
+upstream contract violation or a MilkDrop compatibility correction.

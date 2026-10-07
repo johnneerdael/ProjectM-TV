@@ -72,7 +72,9 @@ For patch 0010, prepare `upstream without-0010 patched`, select
 and its containing folder for `--textures`, then add `--texture-journey`. It uses
 roots `a`/`b`, switches the root at 20, starts a two-second soft cut at 21 and resets
 textures at 40. The worker retains 40/59/119 PNGs as well as 29; the generic comparison
-shows 119 after the transition completes, so inspect 40/59 for the lifetime defect.
+shows 119 after the transition completes, so inspect 40/59 for the ownership difference.
+Patch 0010 is a host-integration enhancement: it adds per-preset lookup retention
+to upstream's documented global texture-path reset behavior.
 
 New capture records identify their producer script; verification records identify
 the verifier. The capture tool removes only its own hashed remote scratch directory

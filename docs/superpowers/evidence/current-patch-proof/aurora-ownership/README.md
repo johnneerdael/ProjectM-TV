@@ -1,4 +1,4 @@
-# Aurora Ownership — predictor witness for patch 0010
+# Aurora Ownership — ownership-enhancement witness for patch 0010
 
 The user supplied two animated diagnostic packs, SOL and LUNA, from
 `/Users/jneerdael/Downloads/projectm-patch-0010-aurora-witness-2026-10-08/`.
@@ -6,12 +6,18 @@ The test froze a copy before rendering. The presets and PNG textures here are
 those exact tested bytes; later changes in Downloads do not change this result.
 These generated assets are test evidence, outside the shipping preset collection.
 
-![Frame 20: wrong blue LUNA image inside the orange SOL portal](../0010-aurora-ownership.png)
+**Classification: host-integration enhancement.** Upstream's documented global
+texture-path reset redirects later lookups to the new roots. Patch 0010 adds
+per-preset lookup ownership for hosts switching between custom packs. This
+comparison demonstrates that additional capability, not a violation of the
+existing upstream contract or a MilkDrop compatibility correction.
+
+![Frame 20: global lookup selects LUNA; per-preset lookup retains SOL](../0010-aurora-ownership.png)
 
 At frame 20, changing roots alone replaces SOL with LUNA in upstream and the
 engine with only 0010 removed. SOL's orange rings and animation remain active.
 The patched engine retains the orange SOL image. No transition has started yet.
-The bug is therefore visible without interpreting a blended transition frame.
+The ownership difference is visible without interpreting a blended transition frame.
 
 The old `ProjectM::SetTexturePaths` replaces the global texture manager, and the
 next `CustomShape::PrepareFrame` resolves its `m_image` through that new manager.
@@ -41,7 +47,7 @@ pack-b/
 Initially the host calls `SetTexturePaths({packA + "/textures"})` and loads SOL.
 At frame 20 it replaces that search root with `SetTexturePaths({packB + "/textures"})`
 while SOL is still running. LUNA is loaded at frame 21. Each preset requests the
-same filename; the bug concerns which pack's directory supplies it. The files
+same filename; the ownership policy determines which pack's directory supplies it. The files
 are never placed together in one directory. This requires host API calls; a
 `.milk` preset cannot switch those roots itself.
 
@@ -49,8 +55,13 @@ The bundled Cream of the Crop collection has a different layout: all 9,606
 presets share one flat `presets/` directory and 74 images share one flat
 `textures/` directory. A scan found no nonempty `shapecode_<n>_image` fields in
 those presets. Ordinary switching within that bundled collection does not
-change pack roots. Aurora demonstrates custom-pack texture ownership, rather
-than a failure during ordinary bundled-preset switching.
+change pack roots. Aurora demonstrates the custom-pack ownership enhancement;
+ordinary bundled-preset switching does not exercise it. Original MilkDrop 2.25's
+textured custom shapes sample the previous frame, while Aurora uses projectM's
+named-image shape capability. See [MilkDrop's shape documentation](https://www.geisswerks.com/hosted/milkdrop2/milkdrop_preset_authoring.html).
+
+The supplied forecast and capture records retain their original wording as
+historical evidence. The enhancement classification above governs this assessment.
 
 1. Load SOL using pack A's texture root.
 2. Before rendering frame 20, set the root to pack B.

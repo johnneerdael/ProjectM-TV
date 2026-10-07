@@ -316,12 +316,21 @@ the previous full-frame endpoint alone was poor visual presentation.
 
 ## 0010 — Per-preset texture search-path ownership
 
+**Classification: host-integration enhancement.** Upstream documents changing
+texture search paths as clearing/reloading its global texture cache. Redirecting
+subsequent lookups to those new paths is consistent with that existing contract.
+Patch 0010 intentionally adds a different contract: each live preset retains the
+lookup from its load, while new paths apply to subsequently loaded presets. This
+supports independent custom packs during transitions and cache resets.
+See the [upstream texture-path contract](https://github.com/projectM-visualizer/projectm/blob/6f64807467e312034883a4389e6aa80a675458bc/src/libprojectM/ProjectM.hpp#L114).
+
 Source: [0010-preset-texture-search-path-ownership.patch](../tools/projectm-patches/0010-preset-texture-search-path-ownership.patch). New roots apply to newly
 loaded presets; live incoming/outgoing presets retain their own texture manager
 through soft cuts. Reset reloads live image caches using their original paths and
 preserves feedback. Retain callbacks and strong descriptor/ShaderCache ownership.
 
-General host integration and lifetime correctness. Use two controlled packs with
+Evaluate as a per-preset ownership enhancement for hosts that switch pack roots.
+Use two controlled packs with
 the same image name and different pixels; capture fade, reset and retirement.
 No unique bundled preset can demonstrate a host changing its roots. ZIP upload,
 QR codes and category UI are app features outside this patch.
@@ -330,10 +339,16 @@ QR codes and category UI are app features outside this patch.
 directory for all 9,606 bundled presets (74 image files). Ordinary switching
 within that collection keeps the same roots. No bundled preset has a nonempty
 named-image custom-shape field. The witness below tests a host changing between
-custom packs, each with its own texture directory; it does not establish a
-failure during ordinary switching within Cream of the Crop.
+custom packs, each with its own texture directory. Ordinary switching within
+Cream of the Crop does not exercise this enhancement.
 
-![Aurora portal uses the wrong pack image before the fade starts](superpowers/evidence/current-patch-proof/0010-aurora-ownership.png)
+Original MilkDrop 2.25 custom shapes use the previous frame as their texture;
+Aurora's named-image shape is a projectM capability. MilkDrop's shared image cache
+also does not provide this per-pack ownership contract. The comparison evaluates
+the added host capability; it is not a MilkDrop rendering-compatibility repair.
+See [MilkDrop's shape documentation](https://www.geisswerks.com/hosted/milkdrop2/milkdrop_preset_authoring.html).
+
+![Aurora compares global texture lookup with retained per-preset lookup](superpowers/evidence/current-patch-proof/0010-aurora-ownership.png)
 
 **What to look for:** the orange portal belongs to SOL. At frame 20 the host has
 changed texture roots to the LUNA pack but has not loaded LUNA yet. Upstream and
@@ -342,8 +357,9 @@ LUNA emblem. The patched engine keeps SOL. The full frames and aligned 2× crops
 use the captured pixels without brightness changes.
 
 These animated SOL/LUNA presets and images were created by the user's predictor
-specifically to expose this bug. Its written forecast preceded the GPU test and
-correctly identified frame 20 as the first unambiguous failure. Both packs use
+specifically to demonstrate this ownership enhancement. Its written forecast
+preceded the GPU test and correctly identified frame 20 as the first visible
+ownership difference. Both packs use
 `shapecode_0_image=aurora_ownership_core.png`, with different image bytes. This is
 a generated diagnostic witness, separate from the unchanged artist presets used
 for other patches. All three roles repeat all 120 frames exactly with zero GL
@@ -355,16 +371,16 @@ sequence and audit](superpowers/evidence/current-patch-proof/aurora-ownership/RE
 
 The earlier bundled-image fixture remains a separate control:
 
-![Recognizable texture-pack ownership failure during a fade](superpowers/evidence/current-patch-proof/0010-recognizable-pack-switch.png)
+![Global and per-preset texture ownership during a fade](superpowers/evidence/current-patch-proof/0010-recognizable-pack-switch.png)
 
 **What to look for:** Pack A contains the bundled spotted texture `onefish.jpg`;
 Pack B contains the bundled rose photograph. Both are named `shared.jpg` in the
-test packs. Without 0010, the outgoing shape wrongly displays the rose after the
+test packs. Without 0010, the outgoing shape displays the rose after the
 host switches roots. With 0010, it retains the spotted image while the incoming
 preset uses the rose. The row at frame 40 includes the reset during the fade;
 frame 59 shows a later transition sample. No brightness gain is applied.
 
-**How the bug causes it:** the old engine gives every live preset the current
+**Why the enhancement changes the image:** upstream gives every live preset the current
 process-wide texture manager. Changing roots replaces that manager. Custom shapes
 resolve named images while preparing each frame, so the outgoing preset's next
 lookup can come from the incoming pack. Patch 0010 retains each live preset's
@@ -372,7 +388,7 @@ original manager and uses that manager for rendering and reset.
 
 This is a host-level diagnostic fixture using unchanged bundled image bytes,
 not an unchanged artist preset. The bundle has no named-image shape keys, and a
-static shader binding can retain its image and hide the lookup bug. Root switch,
+static shader binding can retain its image and show no ownership difference. Root switch,
 soft cut and reset must be driven by the host. Upstream/no 0010/current each repeat
 all 120 frames exactly with zero GL errors; only 0010 is removed in the causal pair.
 [Fixture and source image hashes](superpowers/evidence/current-patch-proof/clearer-02-05-10-figures.json).
@@ -522,6 +538,8 @@ Start with narrow evaluator, translator and renderer correctness proposals whose
 controls distinguish each change from upstream. Separate 0001's correctness from
 cache/resource optimizations and Native trails policy. Preserve upstream Mesh,
 VertexBuffer, ShaderCache and texture-descriptor ownership in proposals.
+Present 0010 separately as a host-integration enhancement with an explicit API
+contract change, rather than grouping it with renderer compatibility corrections.
 
 Images need exact input, source, binary, instrumentation and GPU identities plus
 same-role repeats. Numerical/lifecycle controls remain necessary where images

@@ -1,6 +1,16 @@
 # Generate a visual witness for ProjectM TV patch 0010
 
-Create a preset and texture-pack test that clearly exposes a texture lookup ownership bug. Explain the predicted before/after appearance before it is rendered.
+Create a preset and texture-pack test that clearly demonstrates a per-preset texture lookup ownership enhancement. Explain the predicted before/after appearance before it is rendered.
+
+## Classification
+
+Patch 0010 is a host-integration enhancement. Upstream documents changing texture
+paths as clearing/reloading its global texture cache; redirecting later lookups
+is consistent with that contract. The patch adds retained per-preset paths for
+independent custom packs. Do not describe the comparison as an upstream bug or a
+MilkDrop rendering-compatibility correction. Original MilkDrop 2.25 custom shapes
+use the previous frame as their texture; the named-image shape below is a
+projectM capability.
 
 ## Target patch
 
@@ -12,7 +22,7 @@ https://github.com/johnneerdael/ProjectM-TV/blob/feat/current-4-2-patch-proof/to
 The engine is based on unreleased projectM 4.2 master, commit:
 `6f64807467e312034883a4389e6aa80a675458bc`.
 
-## Bug: live presets use the host's newest texture lookup
+## Upstream behavior: live presets use the host's newest texture lookup
 
 Before the patch, `ProjectM` owns one global texture manager:
 
@@ -43,7 +53,7 @@ Consequently, a subsequent texture lookup by the outgoing preset can resolve aga
 
 Before the patch, `ResetTextures()` also recreates the global manager using the newest search paths.
 
-## Rendering path that exposes the bug
+## Rendering path that demonstrates the ownership difference
 
 Custom shapes support a named image through the `shapecode_<n>_image` field.
 
@@ -67,7 +77,7 @@ if (!m_imageLookedUp)
 
 This repeated named-image lookup is a useful exposure path.
 
-**Important pitfall:** a custom shader that binds its image once at initialization can retain that texture through a strong descriptor. Such a preset may show no bug during the same root-switch test. Do not assume that any named shader sampler will expose the ownership error.
+**Important pitfall:** a custom shader that binds its image once at initialization can retain that texture through a strong descriptor. Such a preset may show no ownership difference during the same root-switch test. Do not assume that any named shader sampler will demonstrate the enhancement.
 
 ## What the patch changes
 
@@ -114,10 +124,10 @@ Use a controlled sequence at 30 Hz:
 
 ## Expected distinction
 
-**Without 0010:** subsequent outgoing-shape lookups can pick up B's image, producing an obvious premature picture swap.
+**Without 0010:** subsequent outgoing-shape lookups can pick up B's image, consistent with the new global search paths.
 
 **With 0010:** the outgoing preset continues using A's image while the incoming preset uses B's image. Their appearance changes through the intended transition, rather than redirecting the outgoing lookup.
 
 Keep equations, audio, clock, seeds, dimensions and assets identical between engine roles. Predict exactly which visible object should change incorrectly, when it changes, and why.
 
-Return the proposed preset/assets, host sequence, predicted failure and expected patched appearance. Treat the prediction as a hypothesis to be checked against actual GPU emulator renders.
+Return the proposed preset/assets, host sequence, predicted ownership difference and expected patched appearance. Treat the prediction as a hypothesis to be checked against actual GPU emulator renders.
