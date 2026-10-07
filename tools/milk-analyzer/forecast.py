@@ -216,12 +216,14 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         raise ValueError('unsupported shader arithmetic profile')
     if shader_arithmetic_profile==APPLE_MIX_FMA and (domain['profile']!='gles300' or not matches(engine,CORE_2317_ENGINE)):
         raise ValueError('mix FMA requires declared GLES300 and pinned2.3.17engine')
-    from blur import SEPARATE_ARITHMETIC,ARITHMETIC_PROFILES
+    from blur import SEPARATE_ARITHMETIC,ARITHMETIC_PROFILES,APPLE_FORWARD_FMA
     blur_arithmetic_profile=domain.get('blur_arithmetic_profile',SEPARATE_ARITHMETIC)
     if blur_arithmetic_profile not in ARITHMETIC_PROFILES:
         raise ValueError('unsupported blur arithmetic profile')
-    if blur_arithmetic_profile!=SEPARATE_ARITHMETIC and (domain['profile']!='gles300' or not matches(engine,CORE_2317_ENGINE)):
-        raise ValueError('blur FMA requires declared GLES300 and pinned2.3.17engine')
+    qualified_blur=(matches(engine,CORE_2317_ENGINE) or
+                    matches(engine,CORE_2322_ENGINE) and blur_arithmetic_profile==APPLE_FORWARD_FMA)
+    if blur_arithmetic_profile!=SEPARATE_ARITHMETIC and (domain['profile']!='gles300' or not qualified_blur):
+        raise ValueError('blur FMA requires declared GLES300 and a qualified engine context')
     from spatial import LEGACY_ROTATION,CPU_ROTATION,rotation_producer
     current_rotation=matches(engine,CORE_2317_ENGINE)
     rotation_policy=domain.get('warp_rotation_policy',CPU_ROTATION if current_rotation else LEGACY_ROTATION)

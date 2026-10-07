@@ -242,3 +242,44 @@ def test_unknown_explicit_setting_policy_does_not_silently_default():
     with pytest.raises(ValueError,match='setting lookup policy'):
         forecast.source_settings({'values':{'fdecay':'.42'},'parser_inputs':{
             'engine':CORE_2322_ENGINE,'setting_lookup_policy':'unknown-v2'}})
+
+
+def test_core2322_blur_profile_is_admitted_for_qualified_context(tmp_path,qualified_core2322_adapters):
+    import forecast
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nfWaveAlpha=0\n')
+    source=forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')
+    domain=dict(width=256,height=144,mesh_x=48,mesh_y=32,profile='gles300',
+        initial_rgba=[0]*4,hue_offsets=[0]*4,equation_seed=0x4141f00d,blur_levels=0,quantize=True,
+        blur_arithmetic_profile='apple-m4pro-gles-blur-forward-fma-v1')
+    with pytest.raises(ValueError,match='source-generated nonempty audio'):
+        forecast.forecast_source(source,audio={},binaries=qualified_core2322_adapters,
+                                  domain=domain,compatibility={})
+
+
+@pytest.mark.parametrize('change',['profile','engine'])
+def test_core2322_blur_profile_rejects_unqualified_context(tmp_path,qualified_core2322_adapters,change):
+    import forecast
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nfWaveAlpha=0\n')
+    source=forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')
+    domain=dict(width=256,height=144,mesh_x=48,mesh_y=32,profile='gles300',
+        initial_rgba=[0]*4,hue_offsets=[0]*4,equation_seed=0x4141f00d,blur_levels=0,quantize=True,
+        blur_arithmetic_profile='apple-m4pro-gles-blur-forward-fma-v1')
+    if change=='profile':domain['profile']='glsl330'
+    else:
+        source['parser_inputs']['engine']['patches_sha256']='0'*64
+        source['parser_inputs'].pop('setting_lookup_policy')
+    with pytest.raises(ValueError,match='blur FMA'):
+        forecast.forecast_source(source,audio={},binaries=qualified_core2322_adapters,
+                                  domain=domain,compatibility={})
+
+
+def test_core2322_blur_rejects_unqualified_vertical_only_profile(tmp_path,qualified_core2322_adapters):
+    import forecast
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nfWaveAlpha=0\n')
+    source=forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')
+    domain=dict(width=256,height=144,mesh_x=48,mesh_y=32,profile='gles300',
+        initial_rgba=[0]*4,hue_offsets=[0]*4,equation_seed=0x4141f00d,blur_levels=0,quantize=True,
+        blur_arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+    with pytest.raises(ValueError,match='blur FMA'):
+        forecast.forecast_source(source,audio={},binaries=qualified_core2322_adapters,
+                                  domain=domain,compatibility={})

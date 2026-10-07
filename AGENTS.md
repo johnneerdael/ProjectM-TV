@@ -574,3 +574,18 @@ For new source comparisons, declare the motion-window reporting policy.
 Coverage-gated speed requires >=3 supported transitions and >=50% temporal
 coverage; retain sparse samples as diagnostics, never replace unknown speed by0.
 Use the same frozen policy on source/native arrays; preserve legacy evidence.
+
+
+Predictor maintenance (2026-10-07): the task branch qualifies unreleased4.2 source
+adapters against published core v2.3.22; v2.3.23 AAR bytes were downloaded and
+verified identical (SHA256 `c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65`).
+Restore the declared native case-insensitive setting policy with
+`scene_equations.source_settings` at public consumer boundaries after JSON reload;
+retain raw lowercase parser payloads and historical case-sensitive behavior.
+Unknown explicit policies reject. Exact CORE2322/GLES300 custom-wave smoothing and
+blur-FMA controls are numerical backend qualifications, not full visual certification.
+See `tools/milk-analyzer/fixtures/core42-setting-key-lookup-repair-2026-10-07.json`
+and `core2322-blur-arithmetic-repair-2026-10-07.json`. The randomized goal remains
+20rounds of3presets/30frames,60consecutive100scores; preserve original failed
+predictions and give retrospective repairs zero streak credit. No main merge is
+authorized yet.

@@ -1,0 +1,142 @@
+{
+  "scope": "Predictor precision gap, not a newly established coreAAR defect",
+  "preset": "Rovastar - Touchdown on Mars (Detailed Pictures Mix) (Jelly).milk",
+  "preset_sha256": "6dbb8c06952555e2b3fd46262c6d3c384023cfa7dce39cd25e2390cba13f7f34",
+  "aar_sha256": "c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65",
+  "original_failure": {
+    "predicted_p95_speed": 1.7779752969741818,
+    "native_p95_speed": 1.6833859920501708,
+    "relative_error": 0.053200573194119305,
+    "allowance": 0.05
+  },
+  "root_cause": "The new engine profile still selected separate float32 blur accumulation. AppleM4ProGLES compiles identical blur shaders using forward fused multiply-add accumulation. A sparse lowcontrast motion estimator amplifies tiny colour errors into a p95 speed miss.",
+  "diagnostic_hypotheses": {
+    "mix_only": "Did not resolve p95 miss",
+    "blur_only": "Resolved numerical gate, differing RGB samplecount34781 to262",
+    "mix_and_blur": "Similar result; mix admission not widened"
+  },
+  "source_shader_hashes": {
+    "horizontal": "10e07105c3b49f2dd9e51a78bcc69253071a41075c5b4c5b1f7f91e097e24ed9",
+    "vertical": "6ac58bbe1aea8b02550fc8947a4bc076ecca0e60b4d5cd94df07925b8212ae2c"
+  },
+  "native_shader_source_equal_to2317": true,
+  "gpu_arithmetic_controls": {
+    "scope": "GPU arithmetic diagnostic using exact official engine shader text; full authored validation remains separate",
+    "coordinate_conversion": "Native glReadPixels bottom-origin rows reversed exactly once to match frozen top-origin numerical arrays",
+    "rows": [
+      {
+        "control": "horizontal",
+        "repeat": 0,
+        "total_rgb_values": 27648,
+        "exact_values": 27648,
+        "maximum_float_error": 0.0,
+        "quantized_rgb8_mismatches": 0,
+        "native_raw_sha256": "5b445f9fd955ae25d07f5d303936894c989d2e14c799c4610bf8700668008acd"
+      },
+      {
+        "control": "horizontal",
+        "repeat": 1,
+        "total_rgb_values": 27648,
+        "exact_values": 27648,
+        "maximum_float_error": 0.0,
+        "quantized_rgb8_mismatches": 0,
+        "native_raw_sha256": "5b445f9fd955ae25d07f5d303936894c989d2e14c799c4610bf8700668008acd"
+      },
+      {
+        "control": "vertical",
+        "repeat": 0,
+        "total_rgb_values": 6912,
+        "exact_values": 6476,
+        "maximum_float_error": 1.1920928955078125e-07,
+        "quantized_rgb8_mismatches": 0,
+        "native_raw_sha256": "8f35df33bc8afeead97112f69658d3dcbe89cecae96c0cc24f2e0c5c33a2672a"
+      },
+      {
+        "control": "vertical",
+        "repeat": 1,
+        "total_rgb_values": 6912,
+        "exact_values": 6476,
+        "maximum_float_error": 1.1920928955078125e-07,
+        "quantized_rgb8_mismatches": 0,
+        "native_raw_sha256": "8f35df33bc8afeead97112f69658d3dcbe89cecae96c0cc24f2e0c5c33a2672a"
+      }
+    ],
+    "historical_discrepancy_preserved": "Initial comparison omitted the mandatory readback row reversal; raw pixels retained and unchanged"
+  },
+  "repair_numeric": {
+    "scope": "Retrospective repair against preserved original fullAAR reference;zero freshscorecredit",
+    "metrics": [
+      {
+        "feature": "motion.median_speed_viewports_per_second",
+        "predicted": 0.10571616888046265,
+        "native": 0.106150321662426,
+        "relative_error": 0.004106777483151718,
+        "passes": true
+      },
+      {
+        "feature": "motion.p95_speed_viewports_per_second",
+        "predicted": 1.6843578100204466,
+        "native": 1.6833859920501708,
+        "relative_error": 0.0005769664643072443,
+        "passes": true
+      },
+      {
+        "feature": "colour.mean_luma",
+        "predicted": 0.08880815530816714,
+        "native": 0.08880828035374483,
+        "relative_error": 1.408041606654264e-06,
+        "passes": true
+      },
+      {
+        "feature": "colour.mean_saturation",
+        "predicted": 0.6399722039699555,
+        "native": 0.6399713317553203,
+        "relative_error": 1.3628945597527198e-06,
+        "passes": true
+      },
+      {
+        "feature": "flashing.peak_mean_luma_jump",
+        "predicted": 0.006725761108100414,
+        "native": 0.00672584492713213,
+        "relative_error": 1.2462386095521973e-05,
+        "passes": true
+      }
+    ],
+    "events_match": true,
+    "source_events": {
+      "peak": [
+        1,
+        2
+      ],
+      "direction": "brightening",
+      "up": [],
+      "down": []
+    },
+    "native_events": {
+      "peak": [
+        1,
+        2
+      ],
+      "direction": "brightening",
+      "up": [],
+      "down": []
+    }
+  },
+  "limits": [
+    "ExactCORE2322source identity plus declaredGLES300 required",
+    "Backend diagnostic recompiles official shader source; it does not replace the unchanged fullAAR scoring renderer",
+    "Vertical float differences max1.192e-7 are retained; no claim of exact generalGPU arithmetic",
+    "Original failed forecast, scoring captures and hypothesis outputs preserved",
+    "Samepreset repair is retrospective,zero freshstreakcredit"
+  ],
+  "validation_status": "Resolved:1489tests+78subtests pass;strictMkDocs passes;independent scope/evidence review clear",
+  "source_guard_review": "Initialadmission accidentally included vertical-only profile. Rednegativecontrol reproduced scopeleak; fixadmitsCORE2322 forward-FMA only; historicalCORE2317 profiles preserved.",
+  "repair_assessment": {
+    "score": 100,
+    "claims_full": 20,
+    "frames_reviewed": 30,
+    "fresh_native_repeat_byte_exact": true,
+    "fresh_score_credit": 0,
+    "original_score": 97.5
+  }
+}

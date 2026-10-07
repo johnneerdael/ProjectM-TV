@@ -1434,3 +1434,14 @@ are rejected rather than silently using defaults. Published v2.3.23 was download
 and verified byte-for-byte identical to v2.3.22 (AAR SHA256
 `c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65`);
 its engine qualification therefore uses the same byte-bound policies.
+
+The first v2.3.23 round's Touchdown-on-Mars prediction missed the frozen upper-tail
+motion estimate by 5.32%. Separate float32 blur accumulation caused small pixel
+differences that affected the sparse motion correspondence. Current official blur
+shader text is byte-identical to the previously qualified text; fresh GPU numerical
+controls confirm horizontal fused accumulation exactly and vertical output within
+1.192e-7, with no RGB8 differences in those controls. The existing forward-FMA blur
+profile is now admitted for exact CORE2322 source identity and declared GLES300.
+Other shader arithmetic and motion-storage guards stay separate. The repaired
+same-preset p95 estimate differs by 0.058%; this is retrospective and grants no new
+streak credit. See `fixtures/core2322-blur-arithmetic-repair-2026-10-07.json`.
