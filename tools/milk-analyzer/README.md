@@ -173,7 +173,7 @@ capped. Do not edit a live run's scorer, descriptor, model, input or runtime fil
 A changed artifact creates a new run identity; old rows cannot be silently reused.
 
 Install the dependencies from `tools/preset-lab/requirements.lock`. An ARM64 API34
-emulator, adb, Android SDK34/build-tools34, NDK27.3.13750724 and JDK21 prepare the
+emulator, adb, Android SDK34/build-tools36.1.0, NDK27.3.13750724 and JDK21 prepare the
 runner. No user recordings or raw frames are committed.
 
 Prepare a new runtime directory (for example `build/predictive-beta/runtime`):
@@ -182,12 +182,23 @@ AAR. Compile the helper against that AAR's classes and Android34:
 
 ```sh
 javac -source 8 -target 8 -cp ANDROID_SDK/platforms/android-34/android.jar:RUNTIME/classes.jar -d RUNTIME/java tools/milk-analyzer/CoreBackendRunner.java
-ANDROID_SDK/build-tools/34.0.0/d8 --min-api 34 --lib ANDROID_SDK/platforms/android-34/android.jar --output RUNTIME RUNTIME/classes.jar RUNTIME/java/nl/neerdael/projectm/analysis/CoreBackendRunner.class
+ANDROID_SDK/build-tools/36.1.0/d8 --min-api 34 --lib ANDROID_SDK/platforms/android-34/android.jar --output RUNTIME RUNTIME/classes.jar RUNTIME/java/nl/neerdael/projectm/analysis/CoreBackendRunner.class
+python tools/milk-analyzer/java_runtime.py --aar EXACT_CORE.aar --runtime RUNTIME --dex RUNTIME/classes.dex --d8-jar ANDROID_SDK/build-tools/36.1.0/lib/d8.jar --android-jar ANDROID_SDK/platforms/android-34/android.jar --min-api 34 --helper RUNTIME/java/nl/neerdael/projectm/analysis/CoreBackendRunner.class
 ANDROID_SDK/ndk/27.3.13750724/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android34-clang++ -shared -fPIC -O2 tools/milk-analyzer/core_backend_clock.cpp -o RUNTIME/libbackendclock.so
 ```
 
 Replace `ANDROID_SDK` and `RUNTIME` with actual paths; use the NDK's `linux-x86_64`
-prebuilt directory on Linux. Different compiler output has a different recorded
+prebuilt directory on Linux; `EXACT_CORE.aar` is the supplied published AAR.
+The proof command records compiler/platform/helper hashes in `runtime-java.json`
+and independently reconstructs DEX from that AAR's `classes.jar`. It fails if the
+runtime DEX differs. Retain every helper `.class` used by D8 and pass each through
+`--helper`; do not reuse a proof from another build. D8 34.0.0 failed to process
+the 2.3.15 Java classes locally; 36.1.0 completed the verified reconstruction.
+Both numerical runner CLIs snapshot local AAR/DEX/native/clock/PCM inputs before
+verification, provenance or device access. Compiler inputs are copied before
+reconstruction too, so later edits to original paths cannot change deployed bytes.
+Historical runs without this proof retain their original evidence scope.
+Different compiler output has a different recorded
 helper hash. The Java runner calls the published JNI API, selects one preset via
 an asset-index overlay, and keeps the AAR's original preset and texture content.
 The clock helper interposes only core-origin realtime/monotonic calls, calls

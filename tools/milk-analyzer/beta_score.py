@@ -130,16 +130,27 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--aar',type=Path,required=True);p.add_argument('--runtime',type=Path,required=True)
     p.add_argument('--pcm',type=Path,required=True);p.add_argument('--owner',type=Path,required=True);p.add_argument('--device',required=True)
     p.add_argument('--remote',required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--limit',type=int)
-    p.add_argument('--retry-unscored',action='store_true');p.add_argument('--only-preset');args=p.parse_args();verify_owner(args.owner,args.device)
-    for folder in ['results','metadata','logs','overlays']:(args.output/folder).mkdir(parents=True,exist_ok=True)
+    p.add_argument('--retry-unscored',action='store_true');p.add_argument('--only-preset');args=p.parse_args()
+    from java_runtime import snapshot_runtime
+    with snapshot_runtime(args,('classes.dex','libbackendclock.so','libprojectmtv.so')) as frozen:
+        return run(frozen)
+
+
+def run(args):
     runtime={name:args.runtime/name for name in ['classes.dex','libbackendclock.so','libprojectmtv.so']}
     runtime.update({'core.aar':args.aar,'input.f32':args.pcm})
     with zipfile.ZipFile(args.aar) as z:
         native_sha=hashlib.sha256(z.read('jni/arm64-v8a/libprojectmtv.so')).hexdigest()
         if sha(runtime['libprojectmtv.so'])!=native_sha:raise ValueError('Runtime library is not the supplied AAR')
         cases=[{'preset':n.removeprefix('assets/presets/'),'sha256':hashlib.sha256(z.read(n)).hexdigest()} for n in z.namelist() if n.startswith('assets/presets/') and n.endswith('.milk')]
+    from java_runtime import verify_runtime_classes
+    java_identity=verify_runtime_classes(args.aar,args.runtime,args.runtime/'classes.dex')
+    verify_owner(args.owner,args.device)
+    for folder in ['results','metadata','logs','overlays']:(args.output/folder).mkdir(parents=True,exist_ok=True)
     cases.sort(key=lambda v:v['preset']);model_path=Path(__file__).parent/'profiles/audience-model-direct-delta-v2.json';model=json.loads(model_path.read_text())['model']
     facts={'aar_sha256':sha(args.aar),'native_arm64_sha256':native_sha,'model_sha256':sha(model_path),
+           'java_runtime_binding':java_identity,
+           'java_runtime_verifier_sha256':sha(Path(__file__).with_name('java_runtime.py')),
            'runtime_sha256':{k:sha(v) for k,v in runtime.items()},'scorer_sha256':sha(Path(__file__)),
            'descriptor_sha256':sha(Path(__file__).with_name('descriptors.py')),'profile':{'frames':FRAMES,'warmup':WARMUP,'fps':FPS,'width':128,'height':72,'motion_fps':10},
            'backend':'released-projectmtv-core-jni','input_policy':'fixed synthetic quiet/melodic/kick reference','release':'v2.3.3'}

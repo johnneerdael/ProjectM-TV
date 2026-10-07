@@ -114,9 +114,18 @@ def main():
     parser.add_argument('--runtime',type=Path,required=True)
     parser.add_argument('--pcm',type=Path,required=True)
     parser.add_argument('--limit',type=int);parser.add_argument('--retry-unscored',action='store_true')
-    args=parser.parse_args();output=args.output
+    args=parser.parse_args()
+    from java_runtime import snapshot_runtime
+    with snapshot_runtime(args,('dex/classes.dex','libbackendclock.so','jni/armeabi-v7a/libprojectmtv.so')) as frozen:
+        return run(frozen)
+
+
+def run(args):
+    output=args.output
     native_library=args.runtime/'jni/armeabi-v7a/libprojectmtv.so'
     native_sha=verify_runtime_library(args.aar,native_library)
+    from java_runtime import verify_runtime_classes
+    java_identity=verify_runtime_classes(args.aar,args.runtime,args.runtime/'dex/classes.dex')
     for folder in ('results','overlays','metadata','logs'):(output/folder).mkdir(parents=True,exist_ok=True)
     candidate=json.loads(args.model.read_text());model=candidate['model']
     runtime_files={'classes.dex':args.runtime/'dex/classes.dex',
@@ -130,9 +139,10 @@ def main():
         if actual!=expected:raise ValueError('Deployed runtime differs: '+name)
     fingerprint=subprocess.check_output(['adb','-s',args.device,'shell','getprop','ro.build.fingerprint'],text=True).strip()
     relevant=('core_corpus.py','core_backend.py','descriptors.py','intensity_calibration.py',
-              'intensity_evidence.py','audience_policy.py')
+              'intensity_evidence.py','audience_policy.py','java_runtime.py')
     code_hashes={name:digest(Path(__file__).with_name(name)) for name in relevant}
     identity_data={'aar_sha256':digest(args.aar),'native_armeabi_v7a_sha256':native_sha,
+                   'java_runtime_binding':java_identity,
                    'model_sha256':digest(args.model),'python_hashes':code_hashes,
                    'runner_java_sha256':digest(Path(__file__).with_name('CoreBackendRunner.java')),
                    'clock_source_sha256':digest(Path(__file__).with_name('core_backend_clock.cpp')),

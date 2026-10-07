@@ -10,10 +10,17 @@ import pytest
 from test_native_wave import frame
 
 
+def source49_binaries():
+    root=Path(__file__).resolve().parents[2]
+    explicit=os.environ.get('MILK_TEST_2315_BINARIES',os.environ.get('MILK_TEST_CURRENT_BINARIES'))
+    if explicit:return Path(explicit)
+    current=root/'build/milk-analyzer/native'
+    return current if (current/'milk-native-reader').is_file() else root/'build/visual-loop/source49/adapters'
+
+
 @pytest.fixture
 def binary():
-    folder = Path(os.environ.get('MILK_TEST_2315_BINARIES',
-        Path(__file__).resolve().parents[2]/'build/visual-loop/source49/adapters'))
+    folder = source49_binaries()
     executable = folder/'milk-wave-inputs'
     if not executable.is_file():
         pytest.skip('prepared published2.3.15 source waveform adapter required')

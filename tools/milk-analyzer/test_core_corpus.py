@@ -64,3 +64,22 @@ def test_missing_required_aar_abi_cannot_use_another_architecture(tmp_path):
         archive.writestr('jni/arm64-v8a/libprojectmtv.so',library.read_bytes())
     with pytest.raises(ValueError,match='no armeabi-v7a'):
         core_corpus.verify_runtime_library(aar,library)
+
+
+def test_matching_native_library_cannot_hide_unbound_runtime_dex(tmp_path,monkeypatch):
+    aar=tmp_path/'core.aar';library=b'published library'
+    with zipfile.ZipFile(aar,'w') as z:
+        z.writestr('jni/armeabi-v7a/libprojectmtv.so',library);z.writestr('classes.jar',b'published classes')
+    runtime=tmp_path/'runtime';(runtime/'jni/armeabi-v7a').mkdir(parents=True);(runtime/'dex').mkdir()
+    (runtime/'jni/armeabi-v7a/libprojectmtv.so').write_bytes(library)
+    (runtime/'dex/classes.dex').write_bytes(b'stale dex')
+    (runtime/'libbackendclock.so').write_bytes(b'clock')
+    pcm=tmp_path/'pcm';pcm.write_bytes(b'pcm');model=tmp_path/'model';model.write_text('{"model":{}}')
+    output=tmp_path/'results'
+    monkeypatch.setattr(sys,'argv',['core_corpus.py','--aar',str(aar),'--runtime',str(runtime),
+        '--pcm',str(pcm),'--model',str(model),'--output',str(output)])
+    def forbidden(*args,**kwargs):pytest.fail('Unbound DEX reached device access')
+    monkeypatch.setattr(core_corpus.subprocess,'check_output',forbidden)
+    with pytest.raises(ValueError,match='Java.*proof'):
+        core_corpus.main()
+    assert not output.exists()

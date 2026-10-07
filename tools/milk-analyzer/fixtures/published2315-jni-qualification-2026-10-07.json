@@ -24,5 +24,16 @@
   ],
   "scope": "One synthetic numeric JNI linkage/readback control; no full-preset appearance or five-policy parity certificate",
   "emulator_stopped": true,
-  "appearance_certified": false
+  "appearance_certified": false,
+  "post_capture_java_reconstruction": {
+    "policy": "published-aar-reproduced-dex-v1",
+    "dex_byte_identical": true,
+    "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+    "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+    "min_api": 21,
+    "helper_classes_sha256": {
+      "helper-classes/nl/neerdael/projectm/analysis/CoreBackendRunner.class": "df10d13672bf9e13e57cbd748131d085500bec982b5197f458f6e6816cb4db41"
+    },
+    "scope": "Post-capture byte-exact reconstruction of the same recorded DEX from published AAR classes and retained helper inputs; no new device operation or capture"
+  }
 }

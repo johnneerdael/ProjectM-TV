@@ -26,6 +26,10 @@ def batch(tmp_path,monkeypatch):
           '--owner',str(tmp_path/'owner'),'--device','emulator-test','--remote','/owned','--output',str(output)]
     monkeypatch.setattr(sys,'argv',argv)
     monkeypatch.setattr(scorer,'verify_owner',lambda *args:{})
+    # These tests exercise retry/batch state, not D8 reconstruction (covered by
+    # test_java_runtime's real compiler and the fail-before-device controls).
+    import java_runtime
+    monkeypatch.setattr(java_runtime,'verify_runtime_classes',lambda *args:{'policy':'test-only-java-boundary'})
     monkeypatch.setattr(scorer.subprocess,'run',lambda *args,**kwargs:subprocess.CompletedProcess(args,0))
     def remote_hash(command,**kwargs):
         name=Path(shlex.split(command[-1])[-1]).name

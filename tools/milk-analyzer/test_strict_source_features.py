@@ -8,6 +8,7 @@ import sys
 import pytest
 
 from test_shader_loops import lower
+from test_core2315_wave import source49_binaries
 
 
 def query(expression, inputs, **settings):
@@ -86,7 +87,7 @@ def test_uniform_input_selection_does_not_read_unused_nonfinite_q_banks():
 
 def test_strict_cli_outputs_cached_evidence_without_native_frame_arrays(tmp_path):
     # Use the same prepared source49 adapter location as the policy controls.
-    folder=Path(__file__).resolve().parents[2]/'build/visual-loop/source49/adapters'
+    folder=source49_binaries()
     if not (folder/'milk-native-reader').is_file():pytest.skip('prepared source49 adapters required')
     from test_scene_equations import frames
     preset=tmp_path/'strict.milk'
@@ -111,7 +112,7 @@ def test_strict_cli_outputs_cached_evidence_without_native_frame_arrays(tmp_path
 
 
 def test_unused_frame_wrap_does_not_block_uniform_composite_queries(tmp_path):
-    folder=Path(__file__).resolve().parents[2]/'build/visual-loop/source49/adapters'
+    folder=source49_binaries()
     if not (folder/'milk-native-reader').is_file():pytest.skip('prepared source49 adapters required')
     from forecast import read_source
     from shader_compat import check_shader

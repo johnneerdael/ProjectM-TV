@@ -10,6 +10,25 @@ import numpy as np
 import pytest
 
 import beta_score as scorer
+import zipfile
+
+
+def test_beta_java_binding_is_checked_before_owned_device_access(tmp_path,monkeypatch):
+    aar=tmp_path/'core.aar';runtime=tmp_path/'runtime';runtime.mkdir()
+    with zipfile.ZipFile(aar,'w') as z:
+        z.writestr('jni/arm64-v8a/libprojectmtv.so',b'published library');z.writestr('classes.jar',b'published classes')
+    (runtime/'libprojectmtv.so').write_bytes(b'published library')
+    (runtime/'classes.dex').write_bytes(b'stale dex')
+    (runtime/'libbackendclock.so').write_bytes(b'clock')
+    pcm=tmp_path/'pcm';pcm.write_bytes(b'pcm')
+    output=tmp_path/'scores'
+    monkeypatch.setattr(sys,'argv',['beta_score.py','--aar',str(aar),'--runtime',str(runtime),
+        '--pcm',str(pcm),'--output',str(output),'--owner','unused','--device','emulator-test','--remote','/unused'])
+    def forbidden(*args,**kwargs):pytest.fail('Unbound DEX reached owner/device access')
+    monkeypatch.setattr(scorer,'verify_owner',forbidden)
+    with pytest.raises(ValueError,match='Java.*proof'):
+        scorer.main()
+    assert not output.exists()
 
 
 @pytest.mark.parametrize('status',['scored','unscored'])

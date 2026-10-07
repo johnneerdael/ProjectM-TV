@@ -496,3 +496,12 @@ affine transport/linear decay helpers. `SOURCE_MATH.md` pins the user's beta gui
 and original `~/Scripts/milkdrop2` reference, keeping original intent, historical
 defects and TV policies distinct. Review the mathematical reference before filling
 missing data; do not use an image classifier as the strict path's fallback.
+
+Published runtime binding (2026-10-07): numerical runner CLIs require
+`runtime-java.json`, prepared with `tools/milk-analyzer/java_runtime.py` as documented
+in the analyzer README. Verification rebuilds DEX from the exact AAR classes and
+hashed D8/platform/helper inputs; native libraries are checked against their AAR
+ABI. Keep private runtime snapshots alive through provenance/deployment/execution.
+Do not replace this relationship check with independent file hashes or apply new
+binding claims retroactively to historical evidence. Local real-D8 checks passed
+with build-tools36.1.0; an absent SDK/JDK skips those compiler tests explicitly.
