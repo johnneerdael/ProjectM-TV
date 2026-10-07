@@ -158,7 +158,7 @@ public class QualityControllerTest {
         endPressureQuiet(q);
         healthySamples(q, 2);
         assertEquals(1800, applied); // recovery requested, not completed
-        memory.snapshot = new MemorySnapshot(4L << 30, 970L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 400L << 20, 128L << 20, false);
         q.setNativeTrailsLevel(2);
         q.revalidateForAllocationChange();
         assertTrue("unrendered recovery cannot credit 1800p resident textures", applied <= 900);
@@ -186,7 +186,7 @@ public class QualityControllerTest {
         q.setResolutionMode(-1, 2160);
         q.onFpsSample(30);
         q.setResolutionMode(720, 2160); // requested, not yet rendered
-        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 680L << 20, 128L << 20, false);
         q.setResolutionMode(-1, 2160);
         assertTrue("unrendered reduction supplies no resident credit", applied < 2160);
         q.onFpsSample(30);
@@ -202,7 +202,7 @@ public class QualityControllerTest {
         settle(q);
         samples(q, 3, 40); // Auto requests 1260p; GL has not acknowledged it
         assertEquals(1260, applied);
-        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 680L << 20, 128L << 20, false);
         q.setResolutionMode(-1, 1440);
         assertTrue(applied < 2160);
     }
@@ -213,7 +213,7 @@ public class QualityControllerTest {
         QualityController q = withMemory(memory, 4096);
         q.setResolutionMode(-1, 2160);
         q.onFpsSample(30); // confirmed rendered allocation
-        memory.snapshot = new MemorySnapshot(4L << 30, 950L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 390L << 20, 128L << 20, false);
         q.setResolutionMode(2160, 2160);
         assertEquals(2160, applied);
         assertTrue(!q.wasLastChangeForMemoryPressure());
@@ -227,7 +227,7 @@ public class QualityControllerTest {
         QualityController q = withMemory(memory, 4096);
         q.setResolutionMode(1440, 1440);
         q.onFpsSample(30);
-        memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 680L << 20, 128L << 20, false);
         q.setResolutionMode(-1, 1440);
         assertEquals(2160, applied);
     }
@@ -238,7 +238,7 @@ public class QualityControllerTest {
         QualityController q = withMemory(memory, 4096);
         q.setResolutionMode(-1, 2160);
         q.onFpsSample(30);
-        memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 200L << 20, 128L << 20, false);
         int reads = memory.reads;
         q.setResolutionMode(1440, 2160);
         assertEquals(1440, applied);
@@ -273,7 +273,7 @@ public class QualityControllerTest {
                 q.onFpsSample(30);
                 q.revalidateForResume(true);
             }
-            memory.snapshot = new MemorySnapshot(4L << 30, 1250L << 20, 128L << 20, false);
+            memory.snapshot = new MemorySnapshot(4L << 30, 680L << 20, 128L << 20, false);
             q.setResolutionMode(-1, 1440);
             assertTrue(applied < 2160);
             assertTrue(q.wasLastChangeForMemoryPressure());
@@ -295,7 +295,7 @@ public class QualityControllerTest {
             q.setResolutionMode(-1, 2160);
             assertEquals(2160, applied);
             assertTrue(!cleanup[0]);
-            memory.snapshot = new MemorySnapshot(4L << 30, 600L << 20, 128L << 20, false);
+            memory.snapshot = new MemorySnapshot(4L << 30, 200L << 20, 128L << 20, false);
             q.setResolutionMode(mode, 2160);
             assertTrue(applied < 2160);
             assertTrue("memory-clamped callback must flush caches and pause prewarming", cleanup[0]);
@@ -602,9 +602,23 @@ public class QualityControllerTest {
     }
 
     @Test
+    public void nominalFourGbAutoCanGrowWithModerateAvailableMemoryWithoutRoot() throws Exception {
+        FakeMemory memory = new FakeMemory();
+        memory.snapshot = new MemorySnapshot(3960360L << 10, 740L << 20, 184L << 20, false);
+        QualityController q = withMemory(memory, 3867);
+        q.setTargetFps(30);
+        q.setTransitionSeconds(7);
+        q.setMode(0, 1080);
+        assertEquals(1080, applied);
+        for (int i = 0; i < 40; i++) { settle(q); q.onFpsSample(30); }
+        assertTrue("aggregate memory permits growth beyond 1080p", applied > 1080);
+        assertTrue("candidate allocation still bounds growth", applied < 2160);
+    }
+
+    @Test
     public void lowHeadroomFourGbCannotGrowEvenAtTargetFps() throws Exception {
         FakeMemory memory = new FakeMemory();
-        memory.snapshot = new MemorySnapshot(4L << 30, 900L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 350L << 20, 128L << 20, false);
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 0);
         int start = applied;
@@ -650,13 +664,13 @@ public class QualityControllerTest {
         FakeMemory memory = new FakeMemory();
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
-        memory.snapshot = new MemorySnapshot(4L << 30, 700L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 200L << 20, 128L << 20, false);
         q.onFpsSample(60);
         int reduced = applied;
         assertTrue(reduced < 2160);
         endPressureQuiet(q);
         for (int i = 0; i < 40; i++) {
-            memory.snapshot = new MemorySnapshot(4L << 30, (i % 2 == 0 ? 870L : 850L) << 20,
+            memory.snapshot = new MemorySnapshot(4L << 30, (i % 2 == 0 ? 310L : 290L) << 20,
                     128L << 20, false);
             settle(q);
             q.onFpsSample(60);
@@ -709,7 +723,7 @@ public class QualityControllerTest {
         FakeMemory memory = new FakeMemory();
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
-        memory.snapshot = new MemorySnapshot(4L << 30, 1000L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 430L << 20, 128L << 20, false);
         q.setNativeTrailsLevel(2);
         assertTrue("detail allocation must retain protected headroom", applied < 2160);
         assertTrue(q.wasLastChangeForMemoryPressure());
@@ -720,7 +734,7 @@ public class QualityControllerTest {
         FakeMemory memory = new FakeMemory();
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
-        memory.snapshot = new MemorySnapshot(4L << 30, 1100L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 530L << 20, 128L << 20, false);
         q.setTransitionSeconds(7);
         assertTrue("a blend reserves a second complete preset", applied < 2160);
         assertTrue(q.wasLastChangeForMemoryPressure());
@@ -746,7 +760,7 @@ public class QualityControllerTest {
         settle(q);
         q.onFpsSample(40);
         assertEquals(1440, applied);
-        memory.snapshot = new MemorySnapshot(4L << 30, 700L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 200L << 20, 128L << 20, false);
         q.onFpsSample(40);
         assertTrue(applied < 1440);
         assertTrue(q.wasLastChangeForMemoryPressure());
@@ -772,7 +786,7 @@ public class QualityControllerTest {
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 1440);
         for (int i = 0; i < 40; i++) {
-            memory.snapshot = new MemorySnapshot(4L << 30, (i % 2 == 0 ? 1200L : 900L) << 20,
+            memory.snapshot = new MemorySnapshot(4L << 30, (i % 2 == 0 ? 650L : 350L) << 20,
                     128L << 20, false);
             settle(q);
             q.onFpsSample(60);
@@ -786,7 +800,7 @@ public class QualityControllerTest {
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
         q.onFpsSample(60); // The preserved context has rendered and owns its allocation.
-        memory.snapshot = new MemorySnapshot(4L << 30, 650L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 250L << 20, 128L << 20, false);
         int reads = memory.reads;
         q.revalidateForResume(false);
         assertEquals("resume must take a fresh sample", reads + 1, memory.reads);
@@ -810,7 +824,7 @@ public class QualityControllerTest {
         preserved.onFpsSample(60);
         QualityController recreated = withMemory(memory, 4096);
         recreated.setMode(0, 2160);
-        memory.snapshot = new MemorySnapshot(4L << 30, 1100L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 530L << 20, 128L << 20, false);
         preserved.revalidateForResume(false);
         assertEquals("already allocated 4K fits existing headroom", 2160, preserved.currentHeight());
         recreated.revalidateForResume(true);
@@ -859,7 +873,7 @@ public class QualityControllerTest {
         q.setNativeTrailsLevel(2);
         q.setTransitionSeconds(7);
         q.setMode(0, 2160);
-        memory.snapshot = new MemorySnapshot(4L << 30, 1100L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 530L << 20, 128L << 20, false);
         q.revalidateForResume(true);
         assertTrue("both live presets and trails must fit before allocation", applied <= 1080);
         assertTrue(q.isMemoryConstrained());
@@ -868,7 +882,7 @@ public class QualityControllerTest {
     @Test
     public void settingsBeforeFirstRenderedSampleBudgetTheFullStartupAllocation() throws Exception {
         FakeMemory memory = new FakeMemory();
-        memory.snapshot = new MemorySnapshot(4L << 30, 1300L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 730L << 20, 128L << 20, false);
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
         assertEquals("the full Standard allocation fits", 2160, applied);
@@ -880,7 +894,7 @@ public class QualityControllerTest {
     @Test
     public void aConfirmedPositiveRenderedSampleAllowsIncrementalSettingsBudget() throws Exception {
         FakeMemory memory = new FakeMemory();
-        memory.snapshot = new MemorySnapshot(4L << 30, 1300L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 730L << 20, 128L << 20, false);
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
         q.onPresetChanged(); // A confirmed draw can arrive inside the FPS settle period.
@@ -892,7 +906,7 @@ public class QualityControllerTest {
     @Test
     public void aZeroSampleCannotConfirmTheStartupAllocation() throws Exception {
         FakeMemory memory = new FakeMemory();
-        memory.snapshot = new MemorySnapshot(4L << 30, 1300L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 730L << 20, 128L << 20, false);
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
         q.onFpsSample(0);
@@ -903,7 +917,7 @@ public class QualityControllerTest {
     @Test
     public void contextRecreationRequiresFullBudgetAgainUntilAConfirmedFrame() throws Exception {
         FakeMemory memory = new FakeMemory();
-        memory.snapshot = new MemorySnapshot(4L << 30, 1300L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 730L << 20, 128L << 20, false);
         QualityController q = withMemory(memory, 4096);
         q.setMode(0, 2160);
         q.onFpsSample(60);
@@ -1066,7 +1080,7 @@ public class QualityControllerTest {
         QualityController q = withMemory(memory, 4096);
         q.setRenderAllocationSettings(2, 10);
         q.setMode(0, 2160); // No confirmed rendered sample yet.
-        memory.snapshot = new MemorySnapshot(4L << 30, 1300L << 20, 128L << 20, false);
+        memory.snapshot = new MemorySnapshot(4L << 30, 730L << 20, 128L << 20, false);
         q.setRenderAllocationSettings(2, 0);
         q.revalidateForAllocationChange();
         assertEquals("an unrendered reduction still needs the full remaining allocation", 1800, applied);
