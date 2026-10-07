@@ -128,3 +128,43 @@ def test_corrected_engine_keeps_unmodeled_high_resolution_guard(tmp_path,qualifi
         initial_rgba=[0]*4,hue_offsets=[0]*4,equation_seed=0x4141f00d,blur_levels=0,quantize=True)
     with pytest.raises(ValueError,match='2.3.22 higher-resolution'):
         forecast.forecast_source(source,audio={},binaries=BINARIES,domain=domain,compatibility={})
+
+
+@pytest.fixture
+def qualified_core2322_adapters():
+    variable=os.environ.get('MILK_TEST_2322_BINARIES')
+    if variable is None:pytest.skip('explicit prepared 2.3.22 adapters required')
+    binaries=Path(variable)
+    for name in ['milk-audio-inputs','milk-wave-inputs','milk-noise-inputs','milk-native-reader']:
+        if not (binaries/name).is_file():pytest.skip('missing 2.3.22 adapter: '+name)
+    return binaries
+
+def test_core2322_wave_admits_its_exact_identity(tmp_path,qualified_core2322_adapters):
+    from test_native_wave import frame
+    output=tmp_path/'wave.json';request=tmp_path/'request.json';request.write_text(json.dumps(dict(
+        mode=6,mode_policy='evaluated-live-v1',width=256,height=144,
+        frames=[frame(time=1,wave_mode=6)],output=str(output))))
+    process=subprocess.run([str(qualified_core2322_adapters/'milk-wave-inputs'),str(request)],capture_output=True,text=True)
+    assert process.returncode==0,process.stderr
+    assert json.loads(output.read_text())['engine_identity']['patches_sha256']=='3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381'
+
+def test_core2322_raw_noise_admits_only_its_declared_seed_model(tmp_path,qualified_core2322_adapters):
+    output=tmp_path/'noise';request=tmp_path/'request.json';request.write_text(json.dumps(dict(
+        names=['noise_lq_lite'],seed=3567620661,seed_policy='production-clock-seed-v1',output=str(output))))
+    process=subprocess.run([str(qualified_core2322_adapters/'milk-noise-inputs'),str(request)],capture_output=True,text=True)
+    assert process.returncode==0,process.stderr
+    assert json.loads(process.stdout)['seed_model']=='raw-declared-native-noise-v1'
+
+
+def test_core2322_audio_uses_its_own_cold_policy(tmp_path,qualified_core2322_adapters):
+    pcm=tmp_path/'pcm.f32';np.zeros(3*1470,dtype='<f4').tofile(pcm)
+    output=tmp_path/'audio.json';request=tmp_path/'request.json'
+    base=dict(pcm_path=str(pcm),output=str(output),fps=30,frames=3,channels=1)
+    request.write_text(json.dumps(base));subprocess.run([str(qualified_core2322_adapters/'milk-audio-inputs'),str(request)],check=True,capture_output=True)
+    if json.loads(output.read_text())['duration_distribution_model']!='libcxx-200100-fresh-normal-v1':
+        pytest.skip('qualified libcxx-200100 runtime required')
+    output.unlink();base.update(clock_policy='projectmtv-jni-rounded-nanoseconds30-v1',
+        preset_progress_policy='projectmtv-core-2.3.22-cold-jni-v1',entropy_seed=12345)
+    request.write_text(json.dumps(base));process=subprocess.run([str(qualified_core2322_adapters/'milk-audio-inputs'),str(request)],capture_output=True,text=True)
+    assert process.returncode==0,process.stderr
+    assert json.loads(output.read_text())['preset_progress_policy']=='projectmtv-core-2.3.22-cold-jni-v1'

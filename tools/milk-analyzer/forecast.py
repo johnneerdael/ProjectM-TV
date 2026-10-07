@@ -56,6 +56,7 @@ CORE_2315_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.15-cold-thread-v1'
 CORE_2316_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.16-cold-thread-v1'
 CORE_2317_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.17-cold-thread-v1'
 CORE_2321_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.21-cold-thread-v1'
+CORE_2322_EQUATION_RNG_POLICY = 'projectmtv-core-2.3.22-cold-thread-v1'
 # Patch0044 changes literal formatting; equation RNG and sampler ownership
 # retain the verified43-patch contracts. Keep44 as a distinct source identity.
 # Keep historical 2.3.4 identity. Patch 0042 adds feedback and shader random caching;
@@ -69,6 +70,7 @@ PRODUCTION_EQUATION_ENGINES = {
     CORE_2316_EQUATION_RNG_POLICY: CORE_2316_ENGINE,
     CORE_2317_EQUATION_RNG_POLICY: CORE_2317_ENGINE,
     CORE_2321_EQUATION_RNG_POLICY: CORE_2321_ENGINE,
+    CORE_2322_EQUATION_RNG_POLICY: CORE_2322_ENGINE,
 }
 
 

@@ -1398,3 +1398,14 @@ CPU corrected mesh UVs match exactly. These are qualification/learning controls,
 not random scoring credit. See
 `fixtures/core2322-centre-policy-controls-2026-10-07.json`. New release stochastic
 and waveform identity guards still need explicit admission before round one.
+
+The exact v2.3.22 identity now has its own cold JNI and equation RNG labels.
+Native evaluated wave and raw noise paths admit only the retained explicit
+source identities. A three-frame source forecast computes under the new archive
+with both corrected centre policies. The full new AAR replays the frozen startup
+controls: bands, attenuation, progress, noise and both shader random vectors are
+exact; packed clock/frame/FPS stays within the declared one-RGB8 bound. Prepared
+integration tests pass; missing adapters/platform prerequisites explicitly skip
+without granting qualification. First-round source predictions, frozen claims
+and reference scores remain pending; the random streak is zero. See
+`fixtures/core2322-input-policy-qualification-2026-10-07.json`.

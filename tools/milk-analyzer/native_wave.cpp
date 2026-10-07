@@ -35,7 +35,7 @@ int main(int argc,char** argv) {
              engine.at("patches_sha256")=="cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded" ||
              engine.at("patches_sha256")=="bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8");
         const bool core42Live = engine.at("commit")=="6f64807467e312034883a4389e6aa80a675458bc" &&
-            engine.at("patches_sha256")=="fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb";
+            (engine.at("patches_sha256")=="fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb" || engine.at("patches_sha256")=="3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381");
         if(live && !oldLive && !core42Live)
             throw std::runtime_error("live waveform engine identity mismatch");
         int mode=request.at("mode").get<int>()%16;
