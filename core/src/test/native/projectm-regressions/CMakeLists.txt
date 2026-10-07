@@ -87,7 +87,9 @@ target_include_directories(texture-routing-regressions PRIVATE
     "${PROJECTM_SOURCE}/vendor"
     "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
 target_link_libraries(texture-routing-regressions PRIVATE libprojectM::projectM)
-if(NOT APPLE)
+if(APPLE)
+    target_link_libraries(texture-routing-regressions PRIVATE "${REGRESSION_OPENGL_FRAMEWORK}")
+else()
     target_compile_definitions(texture-routing-regressions PRIVATE USE_GLES)
     target_link_libraries(texture-routing-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
