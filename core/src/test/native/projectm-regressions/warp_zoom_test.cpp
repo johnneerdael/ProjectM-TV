@@ -37,6 +37,7 @@ struct Vertex
 {
     float x, y, radius, angle, zoom, exponent, rotation, warp;
     float cx, cy, dx, dy, sx, sy;
+    float cosine{};
 };
 
 static std::array<float, 2> Reference(const Vertex& p)
@@ -118,10 +119,13 @@ int main(int argc, char** argv)
             glBindVertexArray(vao);
             glGenBuffers(1,&input);
             glBindBuffer(GL_ARRAY_BUFFER,input);
-            glBufferData(GL_ARRAY_BUFFER,vertices.size()*sizeof(Vertex),vertices.data(),GL_STATIC_DRAW);
-            const int sizes[]{2,2,4,2,2,2};
-            const size_t offsets[]{0,2,4,8,10,12};
-            for (GLuint i=0;i<6;++i)
+            // Match the internal mesh interface; retain raw angles for the independent UV reference.
+            auto uploaded = vertices;
+            for (auto& p : uploaded) { p.cosine = std::cos(p.rotation); p.rotation = std::sin(p.rotation); }
+            glBufferData(GL_ARRAY_BUFFER,uploaded.size()*sizeof(Vertex),uploaded.data(),GL_STATIC_DRAW);
+            const int sizes[]{2,2,4,2,2,2,1};
+            const size_t offsets[]{0,2,4,8,10,12,14};
+            for (GLuint i=0;i<7;++i)
             {
                 glEnableVertexAttribArray(i);
                 glVertexAttribPointer(i,sizes[i],GL_FLOAT,GL_FALSE,sizeof(Vertex),reinterpret_cast<void*>(offsets[i]*sizeof(float)));

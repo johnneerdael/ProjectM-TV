@@ -85,3 +85,8 @@ For example, `319.milk` can disable its default darken filter when its treble
 condition changes. Custom composite shaders keep their own display behaviour.
 This correction leaves the preset files unchanged; it does not certify every
 candidate preset's appearance or change the historical predictive collections.
+
+Large finite rotation values such as `rot=10000000` now use CPU-computed sine and
+cosine. This prevents feedback collapsing to one point on the observed driver,
+without editing the preset. It follows MilkDrop 2's rotation calculation; other
+shader trigonometry and nonfinite rotation remain outside this correction.
