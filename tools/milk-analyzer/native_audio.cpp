@@ -39,6 +39,10 @@ int main(int argc,char** argv) {
         int fps=request.at("fps").get<int>(),frames=request.at("frames").get<int>(),channels=request.value("channels",1);
         if((fps!=30&&fps!=60)||frames<1||frames>108000||(channels!=1&&channels!=2))
             throw std::runtime_error("invalid audio frame schedule/channels");
+        const auto clockPolicy=request.value("clock_policy",std::string("ideal-frame-fractions-v1"));
+        const bool roundedClock=clockPolicy=="projectmtv-jni-rounded-nanoseconds30-v1";
+        if((clockPolicy!="ideal-frame-fractions-v1"&&!roundedClock)||(roundedClock&&fps!=30))
+            throw std::runtime_error("unsupported audio clock policy/cadence");
         const size_t block=44100/fps;
         std::ifstream pcmFile(request.at("pcm_path").get<std::string>(),std::ios::binary);
         if(!pcmFile)throw std::runtime_error("cannot read PCM");
@@ -53,12 +57,19 @@ int main(int argc,char** argv) {
         json report={{"schema_version",1},{"basis","pinned native PCM/FFT/alignment and relative bands; no graphics context"},
             {"uses_rendered_reference",false},{"engine_archive_sha256",kEngineArchiveSha},{"engine_identity",json::parse(kEngineIdentity)},
             {"pcm_sha256",digest(bytes)},{"pcm_encoding","float32 little endian interleaved"},{"sample_rate",44100},
-            {"fps",fps},{"channels",channels},{"frames",json::array()}};
+            {"fps",fps},{"channels",channels},{"render_clock_policy",clockPolicy},{"frames",json::array()}};
         libprojectM::Audio::PCM pcm;double previous=0;
         for(int frame=0;frame<frames;++frame) {
             size_t count=std::min<size_t>(block,libprojectM::Audio::AudioBufferSamples);
             pcm.Add(samples.data()+(static_cast<size_t>(frame)*block+block-count)*channels,channels,count);
             double time=static_cast<double>(frame+1)/fps;
+            int64_t clockNanoseconds=0;
+            if(roundedClock) {
+                // Match the declared JNI helper's Java Math.round at 30 Hz.
+                // Use the same elapsed clock for both EEL inputs and loudness decay.
+                clockNanoseconds=static_cast<int64_t>(std::floor((frame+1)*1000000000.0/30.0+0.5));
+                time=static_cast<double>(clockNanoseconds)/1000000000.0;
+            }
             pcm.UpdateFrameAudioData(time-previous,frame);previous=time;
             auto values=pcm.GetFrameAudioData();
             report["frames"].push_back({{"time",time},{"frame",frame},{"fps",fps},{"progress",0},
@@ -66,6 +77,7 @@ int main(int argc,char** argv) {
                 {"mid_att",values.midAtt},{"treb_att",values.trebAtt},{"vol",values.vol},{"vol_att",values.volAtt},
                 {"waveform_left",values.waveformLeft},{"waveform_right",values.waveformRight},
                 {"spectrum_left",values.spectrumLeft},{"spectrum_right",values.spectrumRight}});
+            if(roundedClock)report["frames"].back()["clock_nanoseconds"]=clockNanoseconds;
         }
         std::filesystem::path output=request.at("output").get<std::string>();
         if(!output.parent_path().empty())std::filesystem::create_directories(output.parent_path());

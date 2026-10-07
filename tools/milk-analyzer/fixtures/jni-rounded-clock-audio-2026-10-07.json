@@ -1,0 +1,40 @@
+{
+  "issue": "Source audio/equation clock differed from declared JNI render clock",
+  "policy": "projectmtv-jni-rounded-nanoseconds30-v1",
+  "published_release": "v2.3.16",
+  "aar_sha256": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+  "native_sha256": "55fef95b3740d17543ec11e9d39dacf0526cdd929b79e4a14fb2bc2817639a73",
+  "frames": 30,
+  "bit_exact_fields": {
+    "bass": true,
+    "mid": true,
+    "treb": true,
+    "bass_att": true,
+    "mid_att": true,
+    "treb_att": true,
+    "vol": true,
+    "vol_att": true,
+    "time": true
+  },
+  "bit_exact_field_values": 270,
+  "reference_kind": "Published unchanged AAR numerical-only shader, black display, read-only uniform observation",
+  "original_grade_retained": true,
+  "randomized_credit": false,
+  "remaining": [
+    "Progress0 placeholder differs from actual sampled preset lifetime; not resolved by this clock fix",
+    "Preset05 repaired learning median-motion error7.9353% remains beyond5%; raster/feedback precision remainsunresolved"
+  ],
+  "first_frame": {
+    "ideal_seconds": 0.03333333333333333,
+    "rounded_nanoseconds": 33333333,
+    "rounded_seconds": 0.033333333,
+    "native_float32_time": 0.03333333134651184
+  },
+  "evidence_hashes": {
+    "original.milk": "d233da8613562d6dc880e5abe287fd94e28c4c7986526bfee202e827c7737b7d",
+    "freeze.json": "c6e278ddaf3f3e30f7828aa70caf3f4bea817149a2ad684b1ca998d5a9255ef7",
+    "uniforms.jsonl": "dd055f70ebf47d32d412eef3ee7fd10d959f155918a2f0a0b22eb54ee7eb8334",
+    "input-comparison.json": "059a4afa3a81fa12fa4904dc7c41b9049bbb613371470622fc2dc45c49b5ed0a",
+    "source-rounded-audio.json": "8548acdbfeb5a4f001513decf868879515b1d5355aca5059cd7b59c9a776026a"
+  }
+}

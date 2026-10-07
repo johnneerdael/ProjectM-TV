@@ -981,3 +981,22 @@ two others miss median optical-flow estimates, and one of those also has a
 wrong-direction prose claim. Original grades and sources remain unchanged.
 Separate engineering handoffs retain each issue; diagnostic variants receive
 no randomized credit. See `fixtures/random30-batch002-results-2026-10-07.json`.
+
+The CPU audio adapter accepts an opt-in request `clock_policy` of
+`projectmtv-jni-rounded-nanoseconds30-v1` for the declared 30 Hz JNI test host.
+It matches Java `Math.round((frame+1)*1e9/30)` and uses the resulting elapsed
+time for both frame timestamps and loudness-decay updates. Each frame records
+`clock_nanoseconds`; the report records `render_clock_policy`. Other cadences
+and unknown policies are rejected. The default `ideal-frame-fractions-v1`
+retains historical/general audio behavior. Rebuild into a separate adapter
+directory and set `MILK_NATIVE_CLOCK_AUDIO_BINARY` for the new clock tests;
+do not replace archived binaries or mix their audio/source archive identities.
+
+Against a separate numerical-input-only control using the unchanged full
+published 2.3.16 AAR, the corrected source producer matches all 270 float32
+time/audio-band values across 30 frames. This fixes an input mismatch, not the
+remaining visual precision gaps: a learning retest still misses median motion
+by 7.94%. Its original grade and source remain unchanged. Preset progress also
+differs from the archived zero placeholder and requires a matching sampled
+lifetime context; the clock fix does not establish progress parity. See
+`fixtures/jni-rounded-clock-audio-2026-10-07.json`.

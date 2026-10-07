@@ -107,6 +107,13 @@ prediction is produced before comparison with the unchanged published core AAR
 through JNI. The source CPU adapters and native reference have separate identities.
 Unsupported arithmetic remains unknown rather than being silently treated as calm.
 
+Matched timing matters even in short comparisons. The declared 30 Hz JNI test
+host rounds its clock to integer nanoseconds; the source audio producer has an
+explicit matching policy that applies this elapsed time to both equations and
+loudness decay. Exact time/audio-band input agreement does not certify the full
+appearance: GPU drawing precision and the sampled preset-progress context remain
+separate checks. Historical failed forecasts keep their original grades.
+
 The feature report now distinguishes geometry calculated without display fields
 from statistics of simulated display fields. Shape trajectories provide sampled
 speed, acceleration and jerk, with component/topology changes and missing support
