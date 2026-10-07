@@ -30,10 +30,13 @@ int main(int argc,char** argv) {
         if(policy!="static-v1"&&policy!="evaluated-live-v1")throw std::runtime_error("unknown waveform mode policy");
         const bool live=policy=="evaluated-live-v1";
         const auto engine=json::parse(kEngineIdentity);
-        if(live&&(engine.at("commit")!="e0b0a967f0ffd7d332106c366668ed271718472b"||
-                 (engine.at("patches_sha256")!="7ef297fcab5d42d0531ec621ac6a464a5a0e7982da02bb40996bc62a886ae527"&&
-                  engine.at("patches_sha256")!="cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded"&&
-                  engine.at("patches_sha256")!="bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8")))
+        const bool oldLive = engine.at("commit")=="e0b0a967f0ffd7d332106c366668ed271718472b" &&
+            (engine.at("patches_sha256")=="7ef297fcab5d42d0531ec621ac6a464a5a0e7982da02bb40996bc62a886ae527" ||
+             engine.at("patches_sha256")=="cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded" ||
+             engine.at("patches_sha256")=="bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8");
+        const bool core42Live = engine.at("commit")=="6f64807467e312034883a4389e6aa80a675458bc" &&
+            engine.at("patches_sha256")=="fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb";
+        if(live && !oldLive && !core42Live)
             throw std::runtime_error("live waveform engine identity mismatch");
         int mode=request.at("mode").get<int>()%16;
         std::unique_ptr<milk_wave_cpu::MilkdropPreset::Waveforms::WaveformMath> math;

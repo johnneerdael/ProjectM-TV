@@ -1,0 +1,26 @@
+{
+  "scope": "Exact4.2 cold/live/source input-policy checkpoint; no randomscorecredit",
+  "engine": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "patches_sha256": "fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb"
+  },
+  "aar_sha256": "941108bb16279cb77a3b4db430ef4befcfe9706abbc87afe87745d53e3424e3a",
+  "cpu_archive_sha256": "b73df7fc6b4a1e42c3f7f6322f78e4dc355650f22605a69e942e886f76fdc1c0",
+  "cold_progress_policy": "projectmtv-core-2.3.21-cold-jni-v1",
+  "equation_rng_policy": "projectmtv-core-2.3.21-cold-thread-v1",
+  "source_audio": "All30time/frame/FPS/progress/bandfields equal priorqualifiednumericcontext; newarchiveidentity retained",
+  "source_noise": "Rawclockseed extractreplacesexact2clockreads; all6banksbyteequal atmatchedseed; repeatedseed/changeseedcontrols pass",
+  "native_controls": {
+    "noise_frames_exact": 60,
+    "rand_frame_frames_exact": 60,
+    "rand_preset_frames_exact": 60,
+    "progress_frames_exact": 60
+  },
+  "remaining": [
+    "Fullpresetprediction/visualscores",
+    "CPU rotation and GPU numericprofile42 qualification",
+    "4.2 measuredUVoperator context ifneeded",
+    "Darkfixes identity afterpublication"
+  ],
+  "new_randomized_credit": 0
+}

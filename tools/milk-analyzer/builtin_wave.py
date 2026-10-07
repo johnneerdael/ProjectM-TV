@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from scene_equations import _scalar
 from quad_lines import PROFILE
-from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
+from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
 from native_values import live_wave_mode,native_scalar
 
 
@@ -76,7 +76,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
                  if not live or live_modes[i] is not None)
     if any_dots and line_rendering_profile==PROFILE:
         if not any(all(engine.get(key)==value for key,value in expected.items())
-                   for expected in [_CORE235_ENGINE,_CORE237_ENGINE,_CORE2310_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE]):
+                   for expected in [_CORE235_ENGINE,_CORE237_ENGINE,_CORE2310_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE]):
             raise ValueError('GLES builtin dot engine identity mismatch')
         if width<=0 or height<=0 or width*height>1024*768 or height>1330:
             raise ValueError('GLES builtin dot profile requires viewport within reference area')

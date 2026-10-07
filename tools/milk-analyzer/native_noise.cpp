@@ -1,6 +1,8 @@
 // CPU-only procedural shader inputs from the pinned projectM implementation.
 // No OpenGL context, texture upload, preset rendering or reference images.
+#ifndef MILK_RAW_NOISE_ADAPTER
 #include "Renderer/MilkdropNoise.hpp"
+#endif
 #include "vendor/json.hpp"
 #include "reader_inputs.hpp"
 #include <cstdint>
@@ -12,6 +14,12 @@
 #include <map>
 #include <sstream>
 #include <stdexcept>
+#include <random>
+#include <climits>
+#ifdef MILK_RAW_NOISE_ADAPTER
+#include "Renderer/OpenGL.h"
+#include "cpu_noise_adapter.hpp"
+#endif
 #ifdef __APPLE__
 #include <CommonCrypto/CommonDigest.h>
 #else
@@ -19,11 +27,15 @@
 #endif
 
 using json=nlohmann::json;
+#ifdef MILK_RAW_NOISE_ADAPTER
+using NoiseAccess=MilkdropNoise;
+#else
 struct NoiseAccess:libprojectM::Renderer::MilkdropNoise {
     using MilkdropNoise::generate2D;
     using MilkdropNoise::generate3D;
     using MilkdropNoise::GetPreferredInternalFormat;
 };
+#endif
 
 std::string sha256(const std::vector<unsigned char>& bytes) {
     unsigned char digest[32];
@@ -51,7 +63,15 @@ int main(int argc,char** argv) {
         const auto identity=json::parse(kEngineIdentity);
         const bool knownMix=identity.value("instrumentation_sha256",std::string{})==
             "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8";
-        if(policy=="production-clock-seed-v1" && !knownMix)
+#ifdef MILK_RAW_NOISE_ADAPTER
+        const bool rawNoise=identity.value("commit","")=="6f64807467e312034883a4389e6aa80a675458bc" &&
+            identity.value("patches_sha256","")=="fd02c15d040ca073f7c09a0b798040c2696fa6bf2252d6ddc6c7b6ff7bcd92eb";
+        if(!rawNoise || policy!="production-clock-seed-v1")
+            throw std::runtime_error("raw native noise requires exact 4.2 identity and production-clock seed policy");
+#else
+        const bool rawNoise=false;
+#endif
+        if(policy=="production-clock-seed-v1" && !knownMix && !rawNoise)
             throw std::runtime_error("production noise seed requires verified lab instrumentation");
         std::filesystem::path output=request.at("output").get<std::string>();
         std::filesystem::create_directories(output);
@@ -66,6 +86,12 @@ int main(int argc,char** argv) {
             {"engine_identity",json::parse(kEngineIdentity)},{"packed_word_encoding","uint32 little endian"},
             {"native_upload_format",NoiseAccess::GetPreferredInternalFormat()==GL_BGRA?"BGRA":"RGBA"},
             {"textures",json::object()}};
+#ifdef MILK_RAW_NOISE_ADAPTER
+        manifest["seed_model"]="raw-declared-native-noise-v1";
+        manifest["source_sha256"]=kNoiseSourceSha;
+        manifest["math_body_sha256"]=kNoiseMathSha;
+        manifest["adapted_body_sha256"]=kNoiseAdaptedSha;
+#endif
         for(const auto& value:request.at("names")) {
             auto name=value.get<std::string>();auto found=settings.find(name);
             if(found==settings.end())throw std::runtime_error("unknown builtin noise input: "+name);
@@ -73,7 +99,10 @@ int main(int argc,char** argv) {
             // The private archive XORs lab::Seed(101) with dimensions. Invert
             // only that verified test-host policy to supply production's raw seed.
             const uint32_t mix=101u*0x9e3779b9u ^ static_cast<uint32_t>(spec.size*31+spec.zoom);
-            const uint32_t configured=policy=="production-clock-seed-v1" ? seed^mix : seed;
+            const uint32_t configured=rawNoise ? seed : policy=="production-clock-seed-v1" ? seed^mix : seed;
+#ifdef MILK_RAW_NOISE_ADAPTER
+            declaredNoiseSeed=configured;
+#endif
             const auto seedText=std::to_string(configured);
             if(setenv("PRESET_LAB_SEED",seedText.c_str(),1)!=0)
                 throw std::runtime_error("cannot set procedural seed");
@@ -85,7 +114,7 @@ int main(int argc,char** argv) {
             target.close();if(!target)throw std::runtime_error("cannot write procedural input");
             manifest["textures"][name]={{"dimensions",{spec.size,spec.size,spec.dimensions==3?spec.size:1}},
                 {"zoom_factor",spec.zoom},{"file",file},{"sha256",sha256(bytes)}};
-            if(knownMix)manifest["textures"][name]["generator_seed"]=configured^mix;
+            if(knownMix||rawNoise)manifest["textures"][name]["generator_seed"]=rawNoise?configured:configured^mix;
         }
         std::ofstream saved(output/"manifest.json");saved<<manifest.dump(2)<<'\n';saved.close();
         if(!saved)throw std::runtime_error("cannot write manifest");

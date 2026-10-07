@@ -1361,3 +1361,21 @@ guards are not relabelled as 4.2 fidelity. The historical suite passes 1,459 tes
 and 78 subtests. The unpublished coordinate-fix candidate remains a different
 source/AAR identity and will be integrated after publication. Evidence is in
 `fixtures/core42-adapter-qualification-2026-10-07.json`.
+
+The explicit `projectmtv-core-2.3.21-cold-jni-v1` CPU audio policy is now guarded
+by the exact 4.2 commit/11-patch digest and rejects historical progress labels.
+Its 30 time/frame/FPS/progress/band inputs match the bounded native context.
+The new cold-thread equation RNG label keeps `0x4141f00d` separate from the
+helper's C RNG seed. Evaluated native waveform controls accept this exact new
+identity; broad hardware profiles remain separately guarded.
+
+The pristine 4.2 noise bridge no longer relies on the historical instrumented
+archive. It extracts native 2D/3D/cubic bodies, replacing exactly two clock reads
+with a declared raw seed and recording original/adapted body hashes. It rejects
+missing/lab policies and unmatched engine identities. All six banks match the
+qualified raw-seed bytes; repeated and changed seed controls pass. The full AAR
+noise probe and `rand_frame`/`rand_preset` ledger probes match exactly across two
+30-frame repeats each. These are numerical input qualifications, not preset scores.
+A simple three-frame source forecast executes with the new identity. Full suite:
+1,467 tests and 78 subtests. See
+`fixtures/core42-cold-input-policy-2026-10-07.json`.

@@ -203,7 +203,15 @@ target_include_directories(milk-wave-inputs PRIVATE "${CMAKE_CURRENT_BINARY_DIR}
 # Public/protected native CPU generators, linked to the exact existing archive.
 # OpenGL resolves the archive's unused texture-upload symbols; no GL context or
 # GL function is used by this executable's generation path.
+if(EXISTS "${ENGINE_SOURCE}/src/libprojectM/Renderer/Point.hpp")
+    execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/generate_noise_adapter.py"
+        --engine "${ENGINE_SOURCE}" --output "${CMAKE_CURRENT_BINARY_DIR}/cpu_noise_adapter.hpp"
+        COMMAND_ERROR_IS_FATAL ANY)
+endif()
 add_executable(milk-noise-inputs native_noise.cpp)
+if(EXISTS "${ENGINE_SOURCE}/src/libprojectM/Renderer/Point.hpp")
+    target_compile_definitions(milk-noise-inputs PRIVATE MILK_RAW_NOISE_ADAPTER=1)
+endif()
 target_compile_features(milk-noise-inputs PRIVATE cxx_std_17)
 target_compile_definitions(milk-noise-inputs PRIVATE PROJECTM_STATIC_DEFINE)
 target_include_directories(milk-noise-inputs PRIVATE
