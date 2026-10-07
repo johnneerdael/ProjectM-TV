@@ -26,9 +26,17 @@ class GridMathTest(unittest.TestCase):
 
     def test_scalar_loop_fallback_retains_mix_profile(self):
         from field_math import evaluate
+        from unittest.mock import patch
+        import grid_math
         _,field=test_field_math.lower('float a[2]={.125,.75};ret=lerp(a[0],a[1],bass);')
-        result=evaluate(field,inputs={'_c3':[.25,0,0,0]},
-                        arithmetic_profile='apple-m4pro-gles-mix-nested-fma-v1')
+        calls=[];actual=grid_math.evaluate_grid
+        def observe(*args,**kwargs):
+            calls.append(kwargs['arithmetic_profile'])
+            return actual(*args,**kwargs)
+        with patch.object(grid_math,'evaluate_grid',side_effect=observe):
+            result=evaluate(field,inputs={'_c3':[.25,0,0,0]},
+                            arithmetic_profile='apple-m4pro-gles-mix-nested-fma-v1')
+        self.assertEqual(calls,['apple-m4pro-gles-mix-nested-fma-v1'])
         np.testing.assert_array_equal(result,np.full(3,np.float32(.28125)))
 
     def test_logical_guards_do_not_evaluate_invalid_unselected_rhs_domains(self):
