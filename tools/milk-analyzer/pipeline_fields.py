@@ -45,7 +45,7 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1'):
         from quad_lines import PROFILE as quad_profile
         if line_rendering_profile not in ('canonical-gl-lines-v1',quad_profile):
             raise ValueError('unknown motion-vector line profile')
@@ -54,6 +54,10 @@ class SourcePipeline:
         from motion_vectors import PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
         if motion_uv_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
             raise ValueError('unknown motion UV storage profile')
+        from blur import SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA
+        if blur_arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):
+            raise ValueError('unsupported blur arithmetic profile')
+        self.blur_arithmetic_profile=blur_arithmetic_profile
         self.motion_uv_storage_profile=motion_uv_storage_profile
         self.line_rendering_profile=line_rendering_profile
         self.motion_raster_subpixel_bits=motion_raster_subpixel_bits
@@ -114,6 +118,8 @@ class SourcePipeline:
     def from_source(cls,source,*,profile,compatibility,equation_loader_policy='strict-raw-v1',**kwargs):
         from quad_lines import PROFILE as quad_profile
         from motion_vectors import PORTABLE_STORAGE
+        if kwargs.get('blur_arithmetic_profile','separate-float32-v1')!='separate-float32-v1' and profile!='gles300':
+            raise ValueError('blur arithmetic profile requires GLES300')
         if kwargs.get('motion_uv_storage_profile',PORTABLE_STORAGE)!=PORTABLE_STORAGE and profile!='gles300':
             raise ValueError('motion half storage profile requires declared GLES300 context')
         if kwargs.get('line_rendering_profile','canonical-gl-lines-v1')==quad_profile and profile!='gles300':
@@ -225,7 +231,7 @@ class SourcePipeline:
             if not self.blur_levels:return {}
             return blur_bank(previous[...,:3],levels=self.blur_levels,minimum=minimum,
                              maximum=maximum,edge_darken=edge_darken,quantize=self.quantize,policy=self.blur_range_policy,
-                             sampling_profile=self.texture_sampling_profile)
+                             sampling_profile=self.texture_sampling_profile,arithmetic_profile=self.blur_arithmetic_profile)
         old_blur=self.blur;warp_blur_frame=self.blur_source_frame
         if not self.warp_reads_blur:
             old_blur=update_blur();warp_blur_frame=self.frame-1
@@ -302,6 +308,7 @@ class SourcePipeline:
                  'warp_kind':'fixed_warp' if self.warp_tree is None else 'custom_warp',
                  'composite_kind':self.composite_kind}
         history['motion_vector_source_frame']=motion_source_frame
+        history['blur_arithmetic_profile']=self.blur_arithmetic_profile
         history['motion_uv_storage_profile']=self.motion_uv_storage_profile
         history['motion_vector_line_profile']=self.line_rendering_profile
         history['motion_vector_raster_subpixel_bits']=self.motion_raster_subpixel_bits

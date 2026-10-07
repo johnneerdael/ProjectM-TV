@@ -11,6 +11,26 @@ def trees(warp,composite):
 
 
 class PipelineFieldsTest(unittest.TestCase):
+    def test_blur_arithmetic_profile_requires_gles_and_reaches_update(self):
+        from pipeline_fields import SourcePipeline
+        with self.assertRaisesRegex(ValueError,'GLES300'):
+            SourcePipeline.from_source({},profile='glsl330',compatibility={},
+                blur_arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+        warp,comp=trees('ret=GetBlur1(uv);','ret=GetPixel(uv);')
+        pipeline=SourcePipeline(warp,comp,initial_feedback=np.zeros((32,32,4)),
+            warp_reads_blur=True,blur_levels=1,blur_arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+        from unittest.mock import patch
+        import pipeline_fields
+        actual_blur=pipeline_fields.blur_bank
+        calls=[]
+        def observe(*args,**kwargs):
+            calls.append(kwargs['arithmetic_profile'])
+            return actual_blur(*args,**kwargs)
+        with patch.object(pipeline_fields,'blur_bank',side_effect=observe):
+            result=pipeline.step(warp_uv=pipeline.original_uv,uniforms={},frame_wrap=1)
+        assert calls==['apple-m4pro-gles-vertical-blur-fma-v1']
+        assert result.history['blur_arithmetic_profile']=='apple-m4pro-gles-vertical-blur-fma-v1'
+
     def test_motion_half_storage_profile_is_recorded_and_applied(self):
         from pipeline_fields import SourcePipeline
         from motion_vectors import APPLE_RTZ_STORAGE,motion_uv_surface

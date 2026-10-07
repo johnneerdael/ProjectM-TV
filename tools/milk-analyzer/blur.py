@@ -12,6 +12,24 @@ from spatial import sample2d
 from feedback_field import unorm8
 from engine_profiles import CORE_2315_BLUR, LEGACY_BLUR
 from native_values import native_scalar
+from custom_wave import _fmaf
+
+SEPARATE_ARITHMETIC='separate-float32-v1'
+APPLE_VERTICAL_FMA='apple-m4pro-gles-vertical-blur-fma-v1'
+
+
+def vertical_weighted_sum(first,second,first_weight,second_weight,*,arithmetic_profile=SEPARATE_ARITHMETIC):
+    if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):
+        raise ValueError('unsupported blur arithmetic profile')
+    a=np.asarray(first,np.float32);b=np.asarray(second,np.float32)
+    if a.shape!=b.shape or not np.all(np.isfinite([a,b])):
+        raise ValueError('finite matching blur sample pairs required')
+    weights=np.asarray([first_weight,second_weight],np.float32)
+    if not np.all(np.isfinite(weights)):raise ValueError('finite blur weights required')
+    base=a*weights[0]
+    if arithmetic_profile==SEPARATE_ARITHMETIC:return base+b*weights[1]
+    fused=_fmaf()
+    return np.asarray([fused(weights[1],x,y) for x,y in zip(b.flat,base.flat)],np.float32).reshape(a.shape)
 
 
 def pass_dimensions(width:int,height:int)->list[tuple[int,int]]:
@@ -68,9 +86,10 @@ def native_ranges(minimum,maximum,*,policy=LEGACY_BLUR):
 
 
 def blur_bank(source,*,levels:int,minimum=(0,0,0),maximum=(1,1,1),
-              edge_darken:float=0,quantize:bool=True,policy=LEGACY_BLUR,sampling_profile='portable')->dict[int,np.ndarray]:
+              edge_darken:float=0,quantize:bool=True,policy=LEGACY_BLUR,sampling_profile='portable',arithmetic_profile=SEPARATE_ARITHMETIC)->dict[int,np.ndarray]:
     from unorm_sampler import sampler_2d
     sample=sampler_2d(sampling_profile)
+    if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):raise ValueError('unsupported blur arithmetic profile')
     if sampling_profile!='portable' and not quantize:
         raise ValueError('texture profile requires actual unorm blur storage')
     field=np.asarray(source,dtype=np.float32)
@@ -111,10 +130,12 @@ def blur_bank(source,*,levels:int,minimum=(0,0,0),maximum=(1,1,1),
             output*=np.float32(.5)/horizontal.sum()
             output=output*scales[index//2]+biases[index//2]
         else:
+            pairs=[]
             for weight,offset in zip(vertical,vertical_offset):
                 delta=np.array([0,offset/source_height],dtype=np.float32)
-                output+=(sample(field,uv+delta,wrap=False,linear=True,origin='bottom')+
-                         sample(field,uv-delta,wrap=False,linear=True,origin='bottom'))*weight
+                pairs.append(sample(field,uv+delta,wrap=False,linear=True,origin='bottom')+
+                             sample(field,uv-delta,wrap=False,linear=True,origin='bottom'))
+            output=vertical_weighted_sum(*pairs,*vertical,arithmetic_profile=arithmetic_profile)
             output*=np.float32(1)/(vertical.sum()*2)
             if index==1:
                 t=np.minimum(np.minimum(u,v),1-np.maximum(u,v))

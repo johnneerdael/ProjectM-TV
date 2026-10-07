@@ -4,6 +4,25 @@ import numpy as np
 
 
 class BlurTest(unittest.TestCase):
+    def test_declared_vertical_blur_fuses_second_pair_into_rounded_first_product(self):
+        import ctypes
+        blur=importlib.import_module('blur')
+        a=np.array([np.float32(1)/np.float32(255)],np.float32)
+        first=np.float32(14.200001);second=np.float32(4.1)
+        fma=ctypes.CDLL(None).fmaf;fma.argtypes=[ctypes.c_float]*3;fma.restype=ctypes.c_float
+        expected=np.array([fma(second,a[0],np.float32(a[0]*first))],np.float32)
+        result=blur.vertical_weighted_sum(a,a,first,second,
+            arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+        np.testing.assert_array_equal(result,expected)
+        self.assertNotEqual(result[0],np.float32(a[0]*first+a[0]*second))
+        a=np.array([.14411196],np.float32);b=np.array([.4315335],np.float32)
+        result=blur.vertical_weighted_sum(a,b,first,second,
+            arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+        self.assertEqual(result[0],np.float32(fma(second,b[0],np.float32(a[0]*first))))
+        self.assertNotEqual(result[0],np.float32(fma(first,a[0],np.float32(b[0]*second))))
+        with self.assertRaisesRegex(ValueError,'blur arithmetic profile'):
+            blur.vertical_weighted_sum(a,a,first,second,arithmetic_profile='unknown')
+
     def test_native_pass_dimensions_include_rounding_and_minimum_size(self):
         blur=importlib.import_module('blur')
         self.assertEqual(blur.pass_dimensions(512,288),[(256,144),(128,72),(64,36),(64,36),(32,20),(32,20)])

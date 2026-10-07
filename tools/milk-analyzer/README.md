@@ -1185,3 +1185,20 @@ the existing represented-value conversion matches all 60 observations. Do not
 change the generic quantizer from that near-fit. Blur arithmetic/varying
 precision remains unresolved; see
 `fixtures/glowsticks-blur-attribution2317-2026-10-07.json`.
+
+The optional `blur_arithmetic_profile` value
+`apple-m4pro-gles-vertical-blur-fma-v1` contracts the vertical weighted sum:
+round the first pair's weighted product, then fuse the second pair's product
+into it with float32 `fmaf`. Horizontal and subsequent edge/normalization math
+retain their existing paths. The historical `separate-float32-v1` default is
+unchanged. Forecasting requires GLES300 and the exact 2.3.17 source identity;
+pipeline history and forecast provenance record the selection.
+
+The observed-input vertical control matches all 6,912 float components with
+this contraction order. A separately frozen random texture matches 6,476 of
+6,912 components, with maximum float error 1.19e-7 and no quantized-byte misses.
+Those controls establish bounded evidence, not universal float identity. The
+opt-in path makes one cached ctypes `fmaf` call per output component; no speed
+improvement is claimed. The original Glowsticks learning retest passes all
+five numerical clauses; independent full-claim review remains pending and the
+original 97.5 score is preserved.

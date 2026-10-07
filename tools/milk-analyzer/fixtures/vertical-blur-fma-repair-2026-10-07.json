@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "profile": "apple-m4pro-gles-vertical-blur-fma-v1",
+  "scope": "Namedverticalweighted-sumcontraction only; nohorizontal/edgearithmeticarbitrarydrivercertificate",
+  "observed_input": [
+    {
+      "order": "separate",
+      "exact_float_matches": 6839,
+      "total": 6912,
+      "max_float_error": 1.4901161193847656e-08,
+      "quantized_mismatches": 5
+    },
+    {
+      "order": "fmaA",
+      "exact_float_matches": 6819,
+      "total": 6912,
+      "max_float_error": 1.4901161193847656e-08,
+      "quantized_mismatches": 0
+    },
+    {
+      "order": "fmaB",
+      "exact_float_matches": 6912,
+      "total": 6912,
+      "max_float_error": 0.0,
+      "quantized_mismatches": 0
+    }
+  ],
+  "fresh_control": {
+    "exact_float_matches": 6476,
+    "total": 6912,
+    "max_float_error": 1.1920928955078125e-07,
+    "quantized_mismatches": 0
+  },
+  "artifacts": {
+    "vertical-blur-float": {
+      "prediction.rgb.f32": "a108226dd55bdb5624524343a268e34fec5d52e27f832c55fb06896fb5158a11",
+      "comparison.json": "7a6f23ebc69255efa4e0b88eaeb99cb74f239c3fc56d74978798a6303822a2f8",
+      "fma-comparison.json": "9142123aef388230e91b251f0cebaf370c97e3dbff54eb6a53d81459f9f1c0c6",
+      "native.rgba.f32": "8dba019577f9e0855681384ae4111f9780c7616a84e9d0303fb3d17e8347608e",
+      "VerticalBlurFloatProbe.java": "86c2ac9d3b5512f367111ad107375103e10aeaa1d71c083e9c7aec1c4bdd32c4",
+      "input.rgba.u8": "5aa61f15b0f621d971866930efbe3cf6291e061df9db5c37a21a26c79d6518d3",
+      "freeze.json": "df0116c08dd6f5790f3db7f4c4d630faf597d02718cdbb83dea368a73428f6a9"
+    },
+    "vertical-blur-fresh-fma": {
+      "prediction.rgb.f32": "465066b1bb435d951047bd041d356a868c1e0752c381bfa2a418e0a1ff615615",
+      "comparison.json": "10f0e81f0d3415fdf232c6e5ff733229e38e276b21194bdaed974d7221ef9fba",
+      "native.rgba.f32": "8f35df33bc8afeead97112f69658d3dcbe89cecae96c0cc24f2e0c5c33a2672a",
+      "input.rgba.u8": "bd3bcb8990f9b0ad74122d13e60429d60db735c66cbd16f53922d3cc5a462fe6",
+      "freeze.json": "c2220ba00ae0597c01b9546eefaa0c3a8c11db621da33e81548f977a5d3b76da"
+    }
+  },
+  "remaining": "Freshfloatresidualmax1.19e-7; originalpresetaccuracyretestpending",
+  "randomized_credit": 0,
+  "feedback_control_retest": {
+    "scope": "Samefeedbackcontrollearningretest,no originalpresetpass/randomcredit",
+    "motion": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "source": 0.00550500163808465,
+        "native": 0.005474600940942764,
+        "relative_predicted_error_percent": 0.552237749241852
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "source": 0.3207827568054199,
+        "native": 0.3180153489112854,
+        "relative_predicted_error_percent": 0.8627046920147083
+      }
+    ],
+    "pixels": {
+      "mean_mae_rgb": 1.2826985766878352e-05,
+      "mean_rmse_rgb": 0.000208291647140868,
+      "peak_mae_rgb": 3.7410074583021924e-05,
+      "peak_rmse_rgb": 0.00038302241591736674,
+      "source_sha256": "a27e356fa9f81def0deed0fdb7bbff7769a9d7cf9cc5475ffee821ae2610f877",
+      "native_sha256": "e27692d5a8f3b979ec2f66fc460687f7bf04611ec35504bf722e8c72c5dd000b"
+    }
+  },
+  "validation": {
+    "full_suite": "1427tests+78subtests passed finalstablecode",
+    "strengthened_tests": "19+2component/pipeline and2forecastprofile/forwardingtests passed",
+    "strict_docs": "passed",
+    "independent_code_review": "No correctnessfindings; differingpair/actualforwarding gaps addressed; visualassessmentpending"
+  },
+  "original_preset_retest": {
+    "scope": "Repairedsameoriginalpresetlearning,no randomizedcredit",
+    "metrics": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "predicted": 0.054821476340293884,
+        "native": 0.0548601970076561,
+        "relative_predicted_error_percent": 0.07063047175501433,
+        "passes": true
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "predicted": 0.9474932670593252,
+        "native": 0.9479916572570792,
+        "relative_predicted_error_percent": 0.052600922358088845,
+        "passes": true
+      },
+      {
+        "feature": "mean_luma",
+        "predicted": 0.006793031571820999,
+        "native": 0.0067967451041719565,
+        "relative_predicted_error_percent": 0.05466679069124232,
+        "passes": true
+      },
+      {
+        "feature": "mean_saturation",
+        "predicted": 0.13676759774486225,
+        "native": 0.13701556563998263,
+        "relative_predicted_error_percent": 0.1813060251178517,
+        "passes": true
+      },
+      {
+        "feature": "peak_mean_luma_jump",
+        "predicted": 0.00459787342697382,
+        "native": 0.004617440048605204,
+        "relative_predicted_error_percent": 0.4255580746654448,
+        "passes": true
+      }
+    ],
+    "all_pass": true,
+    "pixels": {
+      "mean_mae_rgb": 7.106140856194543e-06,
+      "mean_rmse_rgb": 0.00020113095524720848,
+      "peak_mae_rgb": 3.489242590148933e-05,
+      "peak_rmse_rgb": 0.0005822571692988276,
+      "source_sha256": "b8f2474758c398a9be9eed35bccb88aa65b5b98f8268fee0e5987f742317d1f0",
+      "native_sha256": "836e65a05436134168811dd33982351b6c18bc5efa3306f125335db0f1210c6c"
+    }
+  },
+  "original_source_sha256": "50439de6fcd3ea3b0ec8ad9376eb1755ec842b2b60449bf42e7f403c030897f4",
+  "repair_freeze_sha256": "ab962cac8b6c67efee08936bbad4312aa3e0a1d347aba94095ef73b2a3bf135f"
+}

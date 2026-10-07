@@ -532,6 +532,36 @@ def test_cpu_rotation_policy_requires_2317_source(profile_gate):
         profile_gate(PATCHES_2317,settings)
 
 
+def test_vertical_blur_fma_requires_exact_gles_source_profile(profile_gate):
+    settings=domain(blur_arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+    with pytest.raises(ValueError,match='blur.*requires'):
+        profile_gate(PATCHES_2317,settings)
+    settings['profile']='gles300'
+    with pytest.raises(ValueError,match='blur.*requires'):
+        profile_gate(PATCHES_237,settings)
+    with pytest.raises(RuntimeError,match='profile accepted before source execution'):
+        profile_gate(PATCHES_2317,settings)
+
+
+def test_vertical_blur_profile_reaches_real_source51_pipeline(monkeypatch):
+    import forecast
+    binaries=Path(os.environ.get('MILK_TEST_2317_BINARIES',BINARIES))
+    source=native(BASE,binaries=binaries)
+    if source['parser_inputs']['engine'].get('patches_sha256')!=PATCHES_2317:
+        pytest.skip('Prepared51patchadapters required')
+    monkeypatch.setattr(test_native_audio,'BINARY',binaries/'milk-audio-inputs')
+    seen=[];original=forecast.SourcePipeline.from_source
+    def observe(*args,**kwargs):
+        seen.append(kwargs['blur_arithmetic_profile'])
+        return original(*args,**kwargs)
+    monkeypatch.setattr(forecast.SourcePipeline,'from_source',observe)
+    settings=domain(blur_arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+    settings['profile']='gles300'
+    result=forecast.forecast_source(source,audio=audio(1),binaries=binaries,domain=settings,compatibility={})
+    assert seen==['apple-m4pro-gles-vertical-blur-fma-v1']
+    assert result['provenance']['blur_arithmetic_profile']==seen[0]
+
+
 def test_2317_retains_qualified_gles_smoothing_and_storage_contracts(profile_gate):
     settings=domain(custom_wave_smoothing_profile='float32-fma-first-v1',
                     motion_uv_storage_profile='apple-m4pro-gles-rg16f-rtz-finite-v1')
