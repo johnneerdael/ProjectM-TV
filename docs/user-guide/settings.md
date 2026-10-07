@@ -59,8 +59,14 @@ The Advanced screenshot uses this change’s isolated 4K TV emulator with no aud
 
 ## Custom preset pack
 
-Open **Advanced › Custom preset pack** and enter the TV’s displayed address in a phone or computer browser on the same network. Choose a ZIP, select **Upload ZIP**, and keep the TV dialog open until import finishes. Closing the dialog or leaving ProjectM TV stops the listener and cancels an unfinished upload. The temporary address changes every time the dialog opens. Use trusted local Wi-Fi or Ethernet; HTTP uploads are not encrypted. Guest-network isolation may block access.
+Open **Advanced › Custom preset pack** and enter the TV’s displayed address in a phone or computer browser on the same network. Choose a ZIP, select **Upload ZIP**, and keep the TV dialog open until import finishes. Closing the dialog or leaving ProjectM TV stops the listener and cancels an unfinished upload. The temporary address changes every time the dialog opens. A reachable IPv4 LAN address is required; Wi-Fi/Ethernet is preferred over VPN interfaces. ZIP transfer has a one-hour total limit. Use trusted local Wi-Fi or Ethernet; HTTP uploads are not encrypted. Guest-network isolation may block access.
 
 One active pack supports up to **50,000 `.milk` files**, including nested folders and `.MILK` extensions. Other files, including textures, are ignored. Presets use bundled textures, so missing custom images can affect their appearance. ZIP limits: 2 GiB compressed, 4 GiB of extracted presets, 8 MiB per preset and 250,000 total entries. Replacement temporarily needs storage for the old pack, the incoming ZIP and the new pack. Invalid names, corruption, cancellation and insufficient storage leave the previous pack in place.
 
 A successful import replaces the previous pack and saves **Custom** as the selected mood. Custom plays only uploaded presets. **All** combines bundled and custom presets; **Chill**, **Normal** and **Intense** continue using only their scored bundled presets. Existing load-failure, blank and slow-preset skips apply to custom presets. The pack and selected mood persist across app restarts. No file picker or storage permission is needed.
+
+![Custom preset pack upload address on the isolated API36 Android TV emulator](images/setup/custom-pack-upload.png)
+
+![Browser upload page after importing a two-preset synthetic ZIP at a 390px viewport](images/setup/custom-pack-browser.png)
+
+The TV capture uses the task’s isolated API36 Android TV emulator; its address is an example and is no longer active. The browser capture uses the same upload endpoint on localhost with a synthetic ZIP. Use the current address displayed by your own TV. These captures verify the controls, not the appearance of uploaded presets.

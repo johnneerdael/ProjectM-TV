@@ -45,6 +45,7 @@
 #include <deque>
 #include <functional>
 #include <fstream>
+#include <memory>
 #include <mutex>
 #include <random>
 #include <string>
@@ -95,6 +96,17 @@ bool EndsWithMilk(const char* name) {
 // All public methods are thread-safe.
 // ------------------------------------------------------------------------------------------------
 class PresetLibrary {
+    struct PreparedPack {
+        uint64_t serial = 0;
+        uint64_t stateRevision = 0;
+        bool bundledOnly = false;
+        std::string directory;
+        std::string selected;
+        std::vector<std::string> master, custom, order;
+        std::unordered_map<std::string, std::string> files;
+        std::unordered_set<std::string> members, skipped;
+        std::unordered_map<std::string, int> strikes, counts;
+    };
 public:
     void Start(AAssetManager* assets, std::string skipFilePath, std::string textureDir) {
         bool expected = false;
@@ -109,21 +121,85 @@ public:
     bool Ready() const { return ready_.load(std::memory_order_acquire); }
 
     // The worker reads the generated index. ZIP extraction belongs to the host app.
-    void RequestCustomPack(std::string directory) {
-        std::lock_guard<std::mutex> lock(mutex_);
-        customDirectoryRequested_ = std::move(directory);
-        ++customRequestSerial_;
-        customPackPending_ = true;
-        cv_.notify_one();
+    uint64_t RequestCustomPack(std::string directory, bool apply = true) {
+        std::shared_ptr<PreparedPack> retired;
+        uint64_t serial;
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            retired = std::move(preparedPack_);
+            customDirectoryRequested_ = std::move(directory);
+            serial = ++customRequestSerial_;
+            customPackStatus_ = 0;
+            customAutoApply_ = apply;
+            customPackPending_ = true;
+            cv_.notify_one();
+        }
+        return serial;
     }
 
     bool CustomPackPending() const { return customPackPending_.load(); }
+    bool CustomRestorePending() const { return customPackPending_.load() && customAutoApply_.load(); }
+
+    int CustomPackStatus(uint64_t serial) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (serial != 0 && serial == appliedCustomSerial_) return 2;
+        return serial == customRequestSerial_ ? customPackStatus_ : -1;
+    }
+
+    bool CommitCustomPack(uint64_t serial) {
+        std::shared_ptr<PreparedPack> retired;
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            if (serial != customRequestSerial_ || !preparedPack_ ||
+                preparedPack_->stateRevision != (preparedPack_->bundledOnly ? bundledRevision_ : stateRevision_)) return false;
+            retired = std::move(preparedPack_);
+            master_.swap(retired->master);
+            categories_["custom"].swap(retired->custom);
+            customFiles_.swap(retired->files);
+            skipped_.swap(retired->skipped);
+            blankStrikes_.swap(retired->strikes);
+            categoryCounts_.swap(retired->counts);
+            order_.swap(retired->order);
+            activeMembers_.swap(retired->members);
+            category_ = retired->selected;
+            customDirectory_ = retired->directory;
+            cursor_ = 0;
+            history_.clear();
+            randomAhead_.clear();
+            prefetchedName_.clear();
+            prefetchedData_.clear();
+            skippedInOrder_ = order_.size() - static_cast<size_t>(categoryCounts_[category_]);
+            ++categoryGeneration_;
+            ++stateRevision_;
+            ++bundledRevision_;
+            customPackStatus_ = 2;
+            appliedCustomSerial_ = serial;
+            customPackPending_ = false;
+            retiredPack_ = std::move(retired);
+            RequestPrefetchLocked();
+            LOGI("Custom pack ready: %zu presets", customFiles_.size());
+        }
+        // The native worker frees retired metadata; publication only swaps prepared containers.
+        return true;
+    }
+
+    void DiscardCustomPack(uint64_t serial) {
+        std::shared_ptr<PreparedPack> retired;
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            if (serial != customRequestSerial_ || customPackStatus_ == 2) return;
+            retired = std::move(preparedPack_);
+            ++customRequestSerial_;
+            customPackStatus_ = -1;
+            customPackPending_ = false;
+        }
+    }
 
     bool SetCategory(const std::string& requested) {
         std::lock_guard<std::mutex> lock(mutex_);
         if (!ready_.load()) return false;
         std::string selected = requested;
-        if (selected != "all" && (!categories_.count(selected) || EligibleCountLocked(categories_.at(selected)) == 0))
+        if (selected != "all" && CategoryCountLocked(selected) == 0)
             selected = "all";
         if (selected != category_) RebuildCategoryLocked(selected);
         return selected == requested;
@@ -136,9 +212,7 @@ public:
 
     int CategoryCount(const std::string& name) {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (name == "all") return EligibleCountLocked(master_);
-        auto found = categories_.find(name);
-        return found == categories_.end() ? 0 : EligibleCountLocked(found->second);
+        return CategoryCountLocked(name);
     }
 
     uint64_t CategoryGeneration() {
@@ -236,6 +310,18 @@ public:
         if (name.empty()) return;
         std::lock_guard<std::mutex> lock(mutex_);
         if (!skipped_.insert(name).second) return;
+        ++stateRevision_;
+        if (bundledMembership_.count(name)) ++bundledRevision_;
+        if (customFiles_.count(name)) {
+            --categoryCounts_["all"];
+            --categoryCounts_["custom"];
+        } else {
+            auto membership = bundledMembership_.find(name);
+            if (membership != bundledMembership_.end()) {
+                const char* ids[] = {"all", "chill", "normal", "intense"};
+                for (int i = 0; i < 4; ++i) if (membership->second & (1 << i)) --categoryCounts_[ids[i]];
+            }
+        }
         if (activeMembers_.count(name)) ++skippedInOrder_;
         EnsureEligibleCategoryLocked();
         LOGW("SKIP preset='%s' reason=%s", name.c_str(), reason);
@@ -252,6 +338,8 @@ public:
         if (name.empty()) return 0;
         std::lock_guard<std::mutex> lock(mutex_);
         int strikes = ++blankStrikes_[name];
+        ++stateRevision_;
+        if (bundledMembership_.count(name)) ++bundledRevision_;
         if (FILE* f = fopen(strikeFilePath_.c_str(), "a")) {
             fprintf(f, "%s\n", name.c_str());
             fclose(f);
@@ -264,6 +352,10 @@ public:
         skipped_.clear();
         skippedInOrder_ = 0;
         blankStrikes_.clear();
+        ++stateRevision_;
+        ++bundledRevision_;
+        categoryCounts_["all"] = static_cast<int>(master_.size());
+        for (const auto& category : categories_) categoryCounts_[category.first] = static_cast<int>(category.second.size());
         if (FILE* f = fopen(strikeFilePath_.c_str(), "w")) fclose(f);
         FILE* f = fopen(skipFilePath_.c_str(), "w");
         if (f) fclose(f);
@@ -301,6 +393,15 @@ public:
     }
 
 private:
+    int CategoryCountLocked(const std::string& id) const {
+        auto count = categoryCounts_.find(id);
+        return count == categoryCounts_.end() ? 0 : count->second;
+    }
+
+    void RecountCategoriesLocked() {
+        categoryCounts_["all"] = EligibleCountLocked(master_);
+        for (const auto& category : categories_) categoryCounts_[category.first] = EligibleCountLocked(category.second);
+    }
     int EligibleCountLocked(const std::vector<std::string>& names) const {
         int count = 0;
         for (const auto& name : names) count += !skipped_.count(name);
@@ -317,13 +418,14 @@ private:
         randomAhead_.clear();
         prefetchedName_.clear();
         prefetchedData_.clear();
-        skippedInOrder_ = order_.size() - EligibleCountLocked(order_);
+        skippedInOrder_ = order_.size() - static_cast<size_t>(CategoryCountLocked(selected));
         ++categoryGeneration_;
+        ++stateRevision_;
         RequestPrefetchLocked();
     }
 
     void EnsureEligibleCategoryLocked() {
-        if (category_ != "all" && EligibleCountLocked(order_) == 0) {
+        if (category_ != "all" && CategoryCountLocked(category_) == 0) {
             LOGW("Music category %s has no eligible presets; using All", category_.c_str());
             RebuildCategoryLocked("all");
         }
@@ -480,34 +582,95 @@ private:
         BuildIndex();
         std::unique_lock<std::mutex> lock(mutex_);
         for (;;) {
-            cv_.wait(lock, [this] { return prefetchWanted_ || customPackPending_.load(); });
+            cv_.wait(lock, [this] { return prefetchWanted_ || customPackPending_.load() || retiredPack_; });
+            if (retiredPack_) {
+                auto retired = std::move(retiredPack_);
+                lock.unlock(); retired.reset(); lock.lock();
+            }
             if (customPackPending_.load()) {
                 std::string directory = customDirectoryRequested_;
                 uint64_t serial = customRequestSerial_;
+                bool apply = customAutoApply_.load();
                 lock.unlock();
-                std::vector<std::string> names;
-                std::unordered_map<std::string, std::string> files;
-                bool valid = ReadCustomIndex(directory, names, files);
-                lock.lock();
-                if (serial != customRequestSerial_) continue;
+                auto prepared = std::make_shared<PreparedPack>();
+                prepared->serial = serial;
+                prepared->directory = directory;
+                bool valid = ReadCustomIndex(directory, prepared->custom, prepared->files);
                 if (valid) {
-                    customFiles_ = std::move(files);
-                    master_ = bundled_;
-                    master_.insert(master_.end(), names.begin(), names.end());
-                    categories_["custom"] = std::move(names);
-                    // Removed generations no longer contribute skip/strike counts.
-                    for (auto it = skipped_.begin(); it != skipped_.end(); ) {
-                        if (it->compare(0, 7, "custom/") == 0 && !customFiles_.count(*it)) it = skipped_.erase(it);
+                    prepared->master = bundled_;
+                    prepared->master.insert(prepared->master.end(), prepared->custom.begin(), prepared->custom.end());
+                }
+                lock.lock();
+                if (serial != customRequestSerial_) {
+                    lock.unlock(); prepared.reset(); lock.lock();
+                    continue;
+                }
+                if (!valid) {
+                    customPackStatus_ = -1;
+                    customPackPending_ = false;
+                    LOGW("Ignored invalid custom pack index in %s", directory.c_str());
+                } else {
+                    prepared->bundledOnly = !apply && directory != customDirectory_;
+                    prepared->stateRevision = prepared->bundledOnly ? bundledRevision_ : stateRevision_;
+                    prepared->selected = apply ? category_ : "custom";
+                    if (prepared->selected == "custom" && prepared->custom.empty()) prepared->selected = "all";
+                    if (prepared->bundledOnly) {
+                        // A fresh generation cannot inherit old custom skips. Copy only the
+                        // fixed bundled inventory, keeping bad/large old packs out of the lock.
+                        for (const auto& name : bundled_) {
+                            if (skipped_.count(name)) prepared->skipped.insert(name);
+                            auto strike = blankStrikes_.find(name);
+                            if (strike != blankStrikes_.end()) prepared->strikes.emplace(*strike);
+                        }
+                    } else {
+                        prepared->skipped = skipped_;
+                        prepared->strikes = blankStrikes_;
+                    }
+                    prepared->counts = categoryCounts_;
+                    if (prepared->selected != "all" && prepared->selected != "custom")
+                        prepared->order = categories_.at(prepared->selected); // small bundled collection
+                    lock.unlock();
+                    for (auto it = prepared->skipped.begin(); it != prepared->skipped.end(); ) {
+                        if (it->compare(0, 7, "custom/") == 0 && !prepared->files.count(*it)) it = prepared->skipped.erase(it);
                         else ++it;
                     }
-                    for (auto it = blankStrikes_.begin(); it != blankStrikes_.end(); ) {
-                        if (it->first.compare(0, 7, "custom/") == 0 && !customFiles_.count(it->first)) it = blankStrikes_.erase(it);
+                    for (auto it = prepared->strikes.begin(); it != prepared->strikes.end(); ) {
+                        if (it->first.compare(0, 7, "custom/") == 0 && !prepared->files.count(it->first)) it = prepared->strikes.erase(it);
                         else ++it;
                     }
-                    RebuildCategoryLocked(category_ == "custom" && categories_["custom"].empty() ? "all" : category_);
-                    LOGI("Custom pack ready: %zu presets", customFiles_.size());
-                } else LOGW("Ignored invalid custom pack index in %s", directory.c_str());
-                customPackPending_ = false;
+                    int customCount = 0, allCount = 0;
+                    for (const auto& name : prepared->custom) customCount += !prepared->skipped.count(name);
+                    for (const auto& name : prepared->master) allCount += !prepared->skipped.count(name);
+                    prepared->counts["custom"] = customCount;
+                    prepared->counts["all"] = allCount;
+                    if (prepared->selected == "custom" && customCount == 0) prepared->selected = "all";
+                    if (prepared->selected == "all") prepared->order = prepared->master;
+                    else if (prepared->selected == "custom") prepared->order = prepared->custom;
+                    prepared->members.insert(prepared->order.begin(), prepared->order.end());
+                    std::mt19937 shuffle(std::random_device{}());
+                    std::shuffle(prepared->order.begin(), prepared->order.end(), shuffle);
+                    lock.lock();
+                    if (serial != customRequestSerial_ || prepared->stateRevision !=
+                            (prepared->bundledOnly ? bundledRevision_ : stateRevision_)) {
+                        lock.unlock(); prepared.reset(); lock.lock();
+                        continue; // retry a changed skip/category snapshot off lock
+                    }
+                    preparedPack_ = prepared;
+                    customPackStatus_ = 1;
+                    if (apply) {
+                        lock.unlock();
+                        bool committed = CommitCustomPack(serial);
+                        prepared.reset();
+                        lock.lock();
+                        if (!committed && serial == customRequestSerial_) {
+                            customPackStatus_ = 0;
+                            auto stale = std::move(preparedPack_);
+                            lock.unlock(); stale.reset(); lock.lock();
+                            continue;
+                        }
+                    } else customPackPending_ = false;
+                }
+                lock.unlock(); prepared.reset(); lock.lock();
             }
             prefetchWanted_ = false;
             std::string name = PeekNextLocked(false);
@@ -568,24 +731,22 @@ private:
         }
 
         std::unordered_set<std::string> skipped;
-        if (FILE* f = fopen(skipFilePath_.c_str(), "r")) {
-            char line[1024];
-            while (fgets(line, sizeof(line), f)) {
-                size_t len = strcspn(line, "\r\n");
-                line[len] = '\0';
-                if (len > 0) skipped.insert(line);
+        {
+            std::ifstream file(skipFilePath_);
+            std::string line;
+            while (std::getline(file, line)) {
+                if (!line.empty() && line.back() == '\r') line.pop_back();
+                if (!line.empty()) skipped.insert(line);
             }
-            fclose(f);
         }
         std::unordered_map<std::string, int> strikes;
-        if (FILE* f = fopen(strikeFilePath_.c_str(), "r")) {
-            char line[1024];
-            while (fgets(line, sizeof(line), f)) {
-                size_t len = strcspn(line, "\r\n");
-                line[len] = '\0';
-                if (len > 0) ++strikes[line];
+        {
+            std::ifstream file(strikeFilePath_);
+            std::string line;
+            while (std::getline(file, line)) {
+                if (!line.empty() && line.back() == '\r') line.pop_back();
+                if (!line.empty()) ++strikes[line];
             }
-            fclose(f);
         }
 
         std::lock_guard<std::mutex> lock(mutex_);
@@ -593,12 +754,21 @@ private:
         rng_.seed(std::random_device{}());
         bundled_ = names;
         master_ = names;
+        categories_["custom"] = {};
+        for (const auto& name : bundled_) bundledMembership_[name] = 1;
+        const char* scored[] = {"chill", "normal", "intense"};
+        for (int i = 0; i < 3; ++i) {
+            auto category = categories_.find(scored[i]);
+            if (category != categories_.end())
+                for (const auto& name : category->second) bundledMembership_[name] |= 1 << (i + 1);
+        }
         std::shuffle(names.begin(), names.end(), rng_);
         order_ = std::move(names);
         activeMembers_ = std::unordered_set<std::string>(order_.begin(), order_.end());
         weights_ = std::move(weights);
         skipped_ = std::move(skipped);
         blankStrikes_ = std::move(strikes);
+        RecountCategoriesLocked();
         skippedInOrder_ = 0;
         for (const auto& n : order_) skippedInOrder_ += skipped_.count(n);
         cursor_ = 0;
@@ -651,7 +821,17 @@ private:
     std::unordered_map<std::string, std::string> customFiles_;
     std::string customDirectoryRequested_;
     uint64_t customRequestSerial_ = 0;
+    uint64_t appliedCustomSerial_ = 0;
     std::atomic<bool> customPackPending_{false};
+    std::atomic<bool> customAutoApply_{true};
+    int customPackStatus_ = -1;
+    uint64_t stateRevision_ = 0;
+    uint64_t bundledRevision_ = 0;
+    std::string customDirectory_;
+    std::shared_ptr<PreparedPack> preparedPack_;
+    std::shared_ptr<PreparedPack> retiredPack_;
+    std::unordered_map<std::string, int> categoryCounts_;
+    std::unordered_map<std::string, unsigned char> bundledMembership_;
     std::unordered_map<std::string, std::vector<std::string>> categories_;
     std::unordered_set<std::string> activeMembers_;
     std::string category_ = "all";
@@ -1550,7 +1730,7 @@ void HandleAutoSwitch() {
 }
 
 void HandleCommands() {
-    if (g_library.CustomPackPending()) return;
+    if (g_library.CustomRestorePending()) return;
     if (g_inputs.categoryDirty.exchange(false)) {
         std::string requested;
         uint64_t serial;
@@ -1886,7 +2066,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
 
     if (g_engine.current.empty()) {
         // First frame(s): show the idle preset until the index is ready, then start immediately.
-        if (g_library.Ready() && !g_library.CustomPackPending()) {
+        if (g_library.Ready() && !g_library.CustomRestorePending()) {
             bool applyingCategory = g_inputs.categoryDirty.exchange(false);
             uint64_t categorySerial = 0;
             if (applyingCategory) {
@@ -2117,25 +2297,54 @@ JNIEXPORT jstring JNICALL JNI_FN(getMusicCategory)(JNIEnv* env, jclass) {
 }
 
 JNIEXPORT jboolean JNICALL JNI_FN(isMusicCategoryPending)(JNIEnv*, jclass) {
-    return g_library.CustomPackPending() ||
+    return g_library.CustomRestorePending() ||
            g_inputs.categoryRequestedSerial.load() != g_inputs.categoryAppliedSerial.load();
 }
 
-JNIEXPORT void JNICALL JNI_FN(setCustomPresetPack)(JNIEnv* env, jclass, jstring directory) {
-    if (!directory) return;
+JNIEXPORT jlong JNICALL JNI_FN(setCustomPresetPack)(JNIEnv* env, jclass, jstring directory) {
+    if (!directory) return 0;
     const char* path = env->GetStringUTFChars(directory, nullptr);
-    if (!path) return;
-    g_library.RequestCustomPack(path);
+    if (!path) return 0;
+    uint64_t serial = g_library.RequestCustomPack(path);
     env->ReleaseStringUTFChars(directory, path);
     {
         std::lock_guard<std::mutex> lock(g_inputs.categoryMutex);
         ++g_inputs.categoryRequestedSerial;
     }
     g_inputs.categoryDirty = true;
+    return static_cast<jlong>(serial);
 }
 
 JNIEXPORT jboolean JNICALL JNI_FN(isCustomPresetPackPending)(JNIEnv*, jclass) {
     return g_library.CustomPackPending();
+}
+
+JNIEXPORT jlong JNICALL JNI_FN(prepareCustomPresetPack)(JNIEnv* env, jclass, jstring directory) {
+    if (!directory) return 0;
+    const char* path = env->GetStringUTFChars(directory, nullptr);
+    if (!path) return 0;
+    uint64_t serial = g_library.RequestCustomPack(path, false);
+    env->ReleaseStringUTFChars(directory, path);
+    return static_cast<jlong>(serial);
+}
+
+JNIEXPORT jint JNICALL JNI_FN(getCustomPresetPackStatus)(JNIEnv*, jclass, jlong request) {
+    return g_library.CustomPackStatus(static_cast<uint64_t>(request));
+}
+
+JNIEXPORT jboolean JNICALL JNI_FN(commitCustomPresetPack)(JNIEnv*, jclass, jlong request) {
+    if (!g_library.CommitCustomPack(static_cast<uint64_t>(request))) return false;
+    {
+        std::lock_guard<std::mutex> lock(g_inputs.categoryMutex);
+        g_inputs.requestedCategory = g_library.Category();
+        ++g_inputs.categoryRequestedSerial;
+    }
+    g_inputs.categoryDirty = true;
+    return true;
+}
+
+JNIEXPORT void JNICALL JNI_FN(discardCustomPresetPack)(JNIEnv*, jclass, jlong request) {
+    g_library.DiscardCustomPack(static_cast<uint64_t>(request));
 }
 
 JNIEXPORT jint JNICALL JNI_FN(getCategoryPresetCount)(JNIEnv* env, jclass, jstring category) {
@@ -2214,8 +2423,28 @@ JNIEXPORT jstring JNICALL JNI_FN(getSystemProperty)(JNIEnv* env, jclass, jstring
 }
 
 JNIEXPORT jstring JNICALL JNI_FN(getCurrentPresetName)(JNIEnv* env, jclass) {
-    std::lock_guard<std::mutex> lock(g_published.mutex);
-    return env->NewStringUTF(g_published.currentPreset.c_str());
+    std::string name;
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        name = g_published.currentPreset;
+    }
+    // ZIP indexes are standard UTF-8, while NewStringUTF requires modified UTF-8.
+    // Use the platform decoder so supplementary characters remain valid UTF-16.
+    jclass type = env->FindClass("java/lang/String");
+    if (!type) return nullptr;
+    jmethodID constructor = env->GetMethodID(type, "<init>", "([BLjava/lang/String;)V");
+    if (!constructor) { env->DeleteLocalRef(type); return nullptr; }
+    jbyteArray bytes = env->NewByteArray(static_cast<jsize>(name.size()));
+    if (!bytes) { env->DeleteLocalRef(type); return nullptr; }
+    if (!name.empty()) env->SetByteArrayRegion(bytes, 0, static_cast<jsize>(name.size()),
+                                             reinterpret_cast<const jbyte*>(name.data()));
+    if (env->ExceptionCheck()) { env->DeleteLocalRef(bytes); env->DeleteLocalRef(type); return nullptr; }
+    jstring encoding = env->NewStringUTF("UTF-8");
+    jstring result = encoding ? static_cast<jstring>(env->NewObject(type, constructor, bytes, encoding)) : nullptr;
+    env->DeleteLocalRef(encoding);
+    env->DeleteLocalRef(bytes);
+    env->DeleteLocalRef(type);
+    return result;
 }
 
 JNIEXPORT jint JNICALL JNI_FN(getTransitionCounter)(JNIEnv*, jclass) {

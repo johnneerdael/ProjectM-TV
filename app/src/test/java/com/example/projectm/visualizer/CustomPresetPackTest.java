@@ -122,4 +122,30 @@ public class CustomPresetPackTest {
         assertFalse(old.directory.exists());
         assertTrue(next.directory.exists());
     }
+
+    @Test public void rejectedAndStalledNativePreparationLeaveTheActivePointerAlone() throws Exception {
+        File root = temp.newFolder();
+        CustomPresetPack.Pack old = CustomPresetPack.prepare(root, new ByteArrayInputStream(zip("old.milk")), () -> false, n -> {});
+        CustomPresetPack.activate(root, old);
+        for (int status : new int[]{-1, 0}) {
+            try {
+                CustomPresetPack.awaitStatus(1, 1, request -> status, () -> false, 20);
+                fail("failed/stalled indexing accepted");
+            } catch (IOException expected) {
+                assertEquals(old.directory, CustomPresetPack.current(root));
+            }
+        }
+    }
+
+    @Test public void committedCleanupFinishesIndependentlyOfTheUploadWorker() throws Exception {
+        File root = temp.newFolder();
+        CustomPresetPack.Pack old = CustomPresetPack.prepare(root, new ByteArrayInputStream(zip("old.milk")), () -> false, n -> {});
+        CustomPresetPack.activate(root, old);
+        CustomPresetPack.Pack next = CustomPresetPack.prepare(root, new ByteArrayInputStream(zip("new.milk")), () -> false, n -> {});
+        CustomPresetPack.activate(root, next);
+        java.util.concurrent.Future<?> cleanup = CustomPresetPack.scheduleCleanup(root);
+        cleanup.get(3, java.util.concurrent.TimeUnit.SECONDS);
+        assertFalse(old.directory.exists());
+        assertEquals(next.directory, CustomPresetPack.current(root));
+    }
 }

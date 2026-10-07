@@ -288,7 +288,7 @@ int main(int argc, char** argv) {
   { FILE* f = fopen((pack + "/0/0.milk").c_str(), "w"); fputs("custom first", f); fclose(f); }
   { FILE* f = fopen((pack + "/0/1.milk").c_str(), "w"); fputs("custom second", f); fclose(f); }
   { FILE* f = fopen((pack + "/presets.idx").c_str(), "w");
-    fputs("0/0.milk\tnested/good 1.milk\n0/1.milk\tother/good 1.milk\n", f); fclose(f); }
+    fprintf(f, "0/0.milk\t%s.milk\n0/1.milk\tother/good 1.milk\n", std::string(1000, 'x').c_str()); fclose(f); }
   auto installPack = [](const std::string& directory) {
     g_library.RequestCustomPack(directory);
     for (int i = 0; i < 1000 && g_library.CustomPackPending(); ++i)
@@ -307,8 +307,29 @@ int main(int argc, char** argv) {
   CHECK(first != second && g_library.Contains(second));
   g_library.RecordShown(second);
   CHECK(g_library.Previous() == first);
-  g_library.MarkSkipped(first, "custom skip identity");
+  std::string longName = "custom/pack-generation-one/" + std::string(1000, 'x') + ".milk";
+  g_library.MarkSkipped(longName, "custom skip identity");
   CHECK(g_library.CategoryCount("custom") == 1 && g_library.CategoryCount("intense") == 3);
+  // Long nested/display names must preserve their skip identity after a process restart.
+  PresetLibrary& restartedPack = *new PresetLibrary();
+  restartedPack.Start(&am, skip, "");
+  for (int i = 0; i < 1000 && !restartedPack.Ready(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
+  restartedPack.RequestCustomPack(pack);
+  for (int i = 0; i < 1000 && restartedPack.CustomPackPending(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
+  CHECK(!restartedPack.CustomPackPending() && restartedPack.CategoryCount("custom") == 1);
+  // Rejected and canceled native preparations must never replace the live catalog.
+  auto rejected = g_library.RequestCustomPack(root + "/missing-pack", false);
+  for (int i = 0; i < 1000 && g_library.CustomPackPending(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
+  CHECK(g_library.CustomPackStatus(rejected) == -1 && g_library.CategoryCount("custom") == 1);
+  auto staged = g_library.RequestCustomPack(pack, false);
+  for (int i = 0; i < 1000 && g_library.CustomPackPending(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
+  CHECK(g_library.CustomPackStatus(staged) == 1 && g_library.CategoryCount("custom") == 1);
+  g_library.DiscardCustomPack(staged);
+  CHECK(!g_library.CommitCustomPack(staged) && g_library.CategoryCount("custom") == 1);
+  staged = g_library.RequestCustomPack(pack, false);
+  for (int i = 0; i < 1000 && g_library.CustomPackPending(); ++i) std::this_thread::sleep_for(std::chrono::milliseconds(5));
+  CHECK(g_library.CommitCustomPack(staged) && g_library.CustomPackStatus(staged) == 2);
+  CHECK(g_library.Category() == "custom" && g_library.CategoryCount("all") == 14);
   installPack("");
   CHECK(g_library.Category() == "all" && g_library.CategoryCount("custom") == 0);
   CHECK(!g_library.Contains(first) && g_library.Read(first).empty());
@@ -810,4 +831,5 @@ int main(int argc, char** argv) {
   CHECK(g_loadsAfterDirectFrame == 0);  // every switch started from a stored frame
   checkManagedToLegacyRendererHandoff();
   printf("ALL TESTS PASSED\n");
+  return 0;
 }

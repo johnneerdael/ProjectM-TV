@@ -3,6 +3,7 @@ package com.example.projectm.visualizer;
 import java.io.*;
 import java.util.*;
 import java.util.zip.*;
+import java.util.concurrent.*;
 
 /** ZIP staging and an atomic active-pack pointer. Call only from a background worker. */
 final class CustomPresetPack {
@@ -12,6 +13,13 @@ final class CustomPresetPack {
     private static final long MAX_EXPANDED_BYTES = 4L * 1024 * 1024 * 1024;
     interface Cancellation { boolean canceled(); }
     interface Progress { void updated(int presets); }
+    interface IndexStatus { int status(long request); }
+    private static final Map<File, FutureTask<Void>> CLEANUPS = new HashMap<>();
+    private static final ExecutorService CLEANUP_WORKER = Executors.newSingleThreadExecutor(task -> {
+        Thread thread = new Thread(task, "CustomPresetCleanup");
+        thread.setDaemon(true);
+        return thread;
+    });
 
     static final class Pack {
         final File directory;
@@ -117,6 +125,49 @@ final class CustomPresetPack {
             out.getFD().sync();
         }
         if (!temp.renameTo(new File(root, "current"))) throw new IOException("Cannot save the active pack");
+    }
+
+    static void restore(File root, File previous) throws IOException {
+        if (previous != null) activate(root, new Pack(previous, 0));
+        else {
+            File pointer = new File(root, "current");
+            if (pointer.exists() && !pointer.delete()) throw new IOException("Cannot restore the previous pack pointer");
+        }
+    }
+
+    static void awaitStatus(long request, int expected, IndexStatus index, Cancellation cancellation, long timeoutMs) throws IOException {
+        long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(timeoutMs);
+        for (;;) {
+            checkCanceled(cancellation);
+            if (Thread.currentThread().isInterrupted()) throw new IOException("Upload canceled");
+            int status = index.status(request);
+            if (status == expected) return;
+            if (status < 0 || request == 0) throw new IOException("Cannot index the preset pack; previous pack retained");
+            if (System.nanoTime() >= deadline) throw new IOException("Preset indexing took too long; previous pack retained");
+            try { Thread.sleep(25); }
+            catch (InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
+                throw new IOException("Upload canceled", interrupted);
+            }
+        }
+    }
+
+    /** Committed storage belongs to the application process, independent of dialog/socket lifetime. */
+    static Future<?> scheduleCleanup(File root) {
+        synchronized (CLEANUPS) {
+            FutureTask<Void> existing = CLEANUPS.get(root);
+            if (existing != null) return existing;
+            FutureTask<Void> job = new FutureTask<>(() -> {
+                synchronized (STORE_LOCK) {
+                    try { cleanUnused(root, current(root)); }
+                    finally { synchronized (CLEANUPS) { CLEANUPS.remove(root); } }
+                }
+                return null;
+            });
+            CLEANUPS.put(root, job);
+            CLEANUP_WORKER.execute(job);
+            return job;
+        }
     }
 
     static File current(File root) {

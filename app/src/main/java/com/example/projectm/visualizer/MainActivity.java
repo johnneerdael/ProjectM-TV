@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
     private AlertDialog trackAccessDialog;
     private AlertDialog customPackDialog;
     private PresetPackUploadServer customPackServer;
+    private volatile boolean customPackCommitting;
     // The music player's audio session found last: tried first at the next launch.
     private static final String PREF_LAST_PLAYER_SESSION = "last_player_session";
     private static final String PREF_PRESET_DURATION = "preset_duration";
@@ -670,7 +671,7 @@ public class MainActivity extends Activity {
     }
 
     private void refreshMusicCategory() {
-        if (musicCategoryRow == null) return;
+        if (musicCategoryRow == null || customPackCommitting) return;
         String applied = MusicCategories.appliedSelection(requestedMusicCategory,
                 ProjectMJNI.getMusicCategory(), ProjectMJNI.isMusicCategoryPending());
         if (!ProjectMJNI.isMusicCategoryPending() && !applied.equals(requestedMusicCategory)) {
@@ -699,25 +700,41 @@ public class MainActivity extends Activity {
         message.setTextSize(18);
         try {
             customPackServer = new PresetPackUploadServer(root, PresetPackUploadServer.localAddress(), new PresetPackUploadServer.Commit() {
-              @Override public void imported(CustomPresetPack.Pack pack) throws IOException {
-                CustomPresetPack.activate(root, pack);
-                ProjectMJNI.setCustomPresetPack(pack.directory.getAbsolutePath());
-                prefs.edit().putString(PREF_MUSIC_CATEGORY, "custom").apply();
-                ProjectMJNI.setMusicCategory("custom");
-                handler.post(() -> {
-                    requestedMusicCategory = "custom";
-                    refreshMusicCategory();
-                    if (customPackDialog != null)
-                        message.setText("Imported " + numberFormat.format(pack.count) + " presets. Custom is now selected.\n\n"
-                                + "You can close this dialog or upload another ZIP to replace the pack.");
-                });
-              }
-              @Override public void afterResponse() {
-                  while (ProjectMJNI.isCustomPresetPackPending()) {
-                      try { Thread.sleep(50); } catch (InterruptedException interrupted) { return; }
-                  }
-                  CustomPresetPack.cleanUnused(root, CustomPresetPack.current(root));
-              }
+                private long request;
+                @Override public void prepare(CustomPresetPack.Pack pack, CustomPresetPack.Cancellation cancel) throws IOException {
+                    long restore = ((ProjectMApplication)getApplication()).customRestoreRequest();
+                    if (restore != 0) CustomPresetPack.awaitStatus(restore, 2,
+                            ProjectMJNI::getCustomPresetPackStatus, cancel, 30000);
+                    request = ProjectMJNI.prepareCustomPresetPack(pack.directory.getAbsolutePath());
+                    CustomPresetPack.awaitStatus(request, 1, ProjectMJNI::getCustomPresetPackStatus, cancel, 30000);
+                }
+                @Override public void imported(CustomPresetPack.Pack pack) throws IOException {
+                    File previous = CustomPresetPack.current(root);
+                    customPackCommitting = true;
+                    boolean committed = false;
+                    try {
+                        CustomPresetPack.activate(root, pack);
+                        if (!ProjectMJNI.commitCustomPresetPack(request)) {
+                            CustomPresetPack.restore(root, previous);
+                            throw new IOException("Preset library changed during import; previous pack retained. Try again.");
+                        }
+                        prefs.edit().putString(PREF_MUSIC_CATEGORY, "custom")
+                                .putString("custom_pack_generation", pack.directory.getName()).apply();
+                        CustomPresetPack.scheduleCleanup(root);
+                        committed = true;
+                        handler.post(() -> {
+                            requestedMusicCategory = "custom";
+                            customPackCommitting = false;
+                            refreshMusicCategory();
+                            if (customPackDialog != null)
+                                message.setText("Imported " + numberFormat.format(pack.count) + " presets. Custom is now selected.\n\n"
+                                        + "You can close this dialog or upload another ZIP to replace the pack.");
+                        });
+                    } finally {
+                        if (!committed) customPackCommitting = false;
+                    }
+                }
+                @Override public void abandoned() { ProjectMJNI.discardCustomPresetPack(request); }
             }, count -> handler.post(() -> {
                 if (customPackDialog != null) message.setText(customUploadInstructions()
                         + "\n\n" + (count < 0 ? "Upload unsuccessful. Check the message in your browser and try again."

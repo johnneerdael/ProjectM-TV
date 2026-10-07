@@ -76,9 +76,17 @@ public final class ProjectMJNI {
      * Custom presets join All only. Use setMusicCategory("custom") to select the pack; category
      * application waits for indexing. Preserve directory contents until replacement is applied.
      */
-    public static native void setCustomPresetPack(String directory);
+    public static native long setCustomPresetPack(String directory);
     /** True until the worker has processed the latest custom-pack index request. */
     public static native boolean isCustomPresetPackPending();
+    /** Stage an index without replacing the live pack. Commit only after status 1 (ready). */
+    public static native long prepareCustomPresetPack(String directory);
+    /** 0 preparing, 1 ready, 2 applied, -1 rejected or superseded; tied to the returned request ID. */
+    public static native int getCustomPresetPackStatus(long request);
+    /** Publish prepared metadata and select Custom. False leaves the live catalog unchanged. */
+    public static native boolean commitCustomPresetPack(long request);
+    /** Cancel a queued/prepared request without changing an already applied pack. */
+    public static native void discardCustomPresetPack(long request);
     public static native void setSoftCutDuration(int seconds);
     public static native void setAutoChange(boolean enabled);
     /** projectM's hard cut to the next preset on a loud beat (off: presets only change by blending). */

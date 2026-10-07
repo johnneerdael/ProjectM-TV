@@ -12,6 +12,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.net.*;
 import java.util.zip.*;
+import java.util.concurrent.atomic.AtomicReference;
 import nl.neerdael.projectm.core.ProjectMJNI;
 
 /** Full temporary-listener, ZIP-import and native selection journey on an isolated TV app. */
@@ -70,6 +71,27 @@ final class CustomPackSetupTest {
         bitmap.recycle();
     }
 
+    private static String uploadWhileRendering(Instrumentation test, URL url, File zip) throws Exception {
+        AtomicReference<String> response = new AtomicReference<>();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        Thread upload = new Thread(() -> {
+            try { response.set(upload(url, zip)); } catch (Throwable error) { failure.set(error); }
+        }, "CustomPackTestUpload");
+        upload.start();
+        int renderingIntervals = 0;
+        long previous = ProjectMJNI.getRenderedFrameSerial();
+        File incoming = new File(test.getTargetContext().getFilesDir(), "custom-presets/incoming.zip");
+        while (upload.isAlive()) {
+            SystemClock.sleep(500);
+            long current = ProjectMJNI.getRenderedFrameSerial();
+            if (incoming.exists() && current > previous) renderingIntervals++;
+            previous = current;
+        }
+        if (failure.get() != null) throw new AssertionError("upload failed", failure.get());
+        check(renderingIntervals >= 2, "rendering did not advance during active ZIP import");
+        return response.get();
+    }
+
     static void run(Instrumentation test, boolean restart) {
         Bundle result = new Bundle();
         Activity activity = null;
@@ -110,13 +132,11 @@ final class CustomPackSetupTest {
             PresetPackUploadServer server = (PresetPackUploadServer)field.get(activity);
             check(server != null, "D-pad did not open the upload listener");
             URL url = new URL(server.url());
-            long framesBefore = ProjectMJNI.getRenderedFrameSerial();
             long started = SystemClock.elapsedRealtime();
             File zip = archive(test.getTargetContext().getCacheDir(), 50000, "large");
-            check(upload(url, zip).startsWith("HTTP/1.1 200"), "large pack upload failed");
+            check(uploadWhileRendering(test, url, zip).startsWith("HTTP/1.1 200"), "large pack upload failed");
             await("custom", 50000);
             long elapsed = SystemClock.elapsedRealtime() - started;
-            check(ProjectMJNI.getRenderedFrameSerial() > framesBefore + 10, "rendering stopped during import");
             check(ProjectMJNI.getCurrentPresetName().contains("/large/"), "Custom selected a bundled preset");
             check(ProjectMJNI.getCategoryPresetCount("all") == bundled + 50000, "All does not include the entire pack");
             String[] ids = {"chill", "normal", "intense"};
@@ -127,14 +147,18 @@ final class CustomPackSetupTest {
             }
             ProjectMJNI.previousPreset(true); SystemClock.sleep(300);
             check(ProjectMJNI.getCurrentPresetName().contains("/large/"), "Previous escaped Custom");
-            check(upload(url, archive(test.getTargetContext().getCacheDir(), 2, "replacement")).startsWith("HTTP/1.1 200"), "replacement failed");
+            check(upload(url, archive(test.getTargetContext().getCacheDir(), 2, "replacement/😀")).startsWith("HTTP/1.1 200"), "replacement failed");
             await("custom", 2);
             check(ProjectMJNI.getCategoryPresetCount("all") == bundled + 2, "replacement accumulated old entries");
             check(ProjectMJNI.getCurrentPresetName().contains("/replacement/"), "old custom preset remained on screen");
+            check(ProjectMJNI.getCurrentPresetName().contains("😀"), "JNI corrupted supplementary Unicode");
+            File previousPack = CustomPresetPack.current(new File(test.getTargetContext().getFilesDir(), "custom-presets"));
             File bad = new File(test.getTargetContext().getCacheDir(), "invalid.zip");
             try (FileOutputStream out = new FileOutputStream(bad)) { out.write(new byte[]{1,2,3}); }
             check(upload(url, bad).startsWith("HTTP/1.1 400"), "invalid ZIP succeeded");
             await("custom", 2);
+            check(previousPack.equals(CustomPresetPack.current(new File(test.getTargetContext().getFilesDir(), "custom-presets"))), "invalid ZIP changed the active pointer");
+            check(ProjectMJNI.getCurrentPresetName().startsWith("custom/" + previousPack.getName() + "/"), "invalid ZIP changed the native generation");
             check("custom".equals(test.getTargetContext().getSharedPreferences("projectm_settings", 0).getString("music_category", "")), "Custom was not saved");
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
             SystemClock.sleep(200);
@@ -148,6 +172,11 @@ final class CustomPackSetupTest {
                 check(!ProjectMJNI.getCurrentPresetName().startsWith("custom/"), id + " selected a custom preset");
             }
             ProjectMJNI.setMusicCategory("custom"); await("custom", 2);
+            SystemClock.sleep(700); // allow the real settings row to reflect and save the applied selection
+            check("custom".equals(test.getTargetContext().getSharedPreferences("projectm_settings", 0)
+                    .getString("music_category", "")), "final Custom selection was not persisted");
+            test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK); // Advanced -> main settings
+            test.runOnMainSync(() -> target.findViewById(R.id.row_music_category).requestFocus());
             capture(test, "custom-pack-selected");
             result.putString("stream", "PASS: Advanced D-pad upload, 50,000 presets, rendering during import, nested .MILK, ignored files, All inclusion, scored exclusions, Random/Previous, replacement, invalid ZIP preservation, persisted Custom, closed listener. Large import including ZIP generation: " + elapsed + " ms\n");
             test.finish(Activity.RESULT_OK, result);
