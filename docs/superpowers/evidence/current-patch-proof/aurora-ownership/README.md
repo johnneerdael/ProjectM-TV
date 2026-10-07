@@ -26,6 +26,32 @@ the claimed 24% audio pulse and later visual refinements were not tested here.
 
 The frozen host sequence is:
 
+Keep the packs in separate directories. The two images have the same filename
+but different full paths:
+
+```text
+pack-a/
+  presets/Aurora Ownership - SOL.milk
+  textures/aurora_ownership_core.png       # orange SOL image
+pack-b/
+  presets/Aurora Ownership - LUNA.milk
+  textures/aurora_ownership_core.png       # blue LUNA image
+```
+
+Initially the host calls `SetTexturePaths({packA + "/textures"})` and loads SOL.
+At frame 20 it replaces that search root with `SetTexturePaths({packB + "/textures"})`
+while SOL is still running. LUNA is loaded at frame 21. Each preset requests the
+same filename; the bug concerns which pack's directory supplies it. The files
+are never placed together in one directory. This requires host API calls; a
+`.milk` preset cannot switch those roots itself.
+
+The bundled Cream of the Crop collection has a different layout: all 9,606
+presets share one flat `presets/` directory and 74 images share one flat
+`textures/` directory. A scan found no nonempty `shapecode_<n>_image` fields in
+those presets. Ordinary switching within that bundled collection does not
+change pack roots. Aurora demonstrates custom-pack texture ownership, rather
+than a failure during ordinary bundled-preset switching.
+
 1. Load SOL using pack A's texture root.
 2. Before rendering frame 20, set the root to pack B.
 3. Before frame 21, load LUNA with a two-second soft cut.

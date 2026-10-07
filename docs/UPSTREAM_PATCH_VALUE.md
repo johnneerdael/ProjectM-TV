@@ -326,6 +326,13 @@ the same image name and different pixels; capture fade, reset and retirement.
 No unique bundled preset can demonstrate a host changing its roots. ZIP upload,
 QR codes and category UI are app features outside this patch.
 
+**Bundled-collection relevance:** Cream of the Crop uses one shared texture
+directory for all 9,606 bundled presets (74 image files). Ordinary switching
+within that collection keeps the same roots. No bundled preset has a nonempty
+named-image custom-shape field. The witness below tests a host changing between
+custom packs, each with its own texture directory; it does not establish a
+failure during ordinary switching within Cream of the Crop.
+
 ![Aurora portal uses the wrong pack image before the fade starts](superpowers/evidence/current-patch-proof/0010-aurora-ownership.png)
 
 **What to look for:** the orange portal belongs to SOL. At frame 20 the host has
