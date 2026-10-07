@@ -108,8 +108,13 @@ static void Wave(ShaderCache& cache, bool topology)
     PerFrameContext frame(state.globalMemory, &state.globalRegisters); frame.RegisterBuiltinVariables();
     Waveform wave(state);
     realDraw = glad_glDrawElements; glad_glDrawElements = Observe;
+    for (bool modulate : {false, true})
+    for (float volume : {.5f, 2.f})
     for (float alpha : {.4f, .9f})
     {
+        state.modWaveAlphaByvolume = modulate;
+        state.modWaveAlphaStart = 0; state.modWaveAlphaEnd = 2;
+        state.audioData.vol = volume;
         state.waveAlpha = alpha; frame.LoadStateVariables(state);
         alphas.clear(); primitives.clear();
         output.Bind(); wave.Draw(frame); output.Pixels();
@@ -117,7 +122,7 @@ static void Wave(ShaderCache& cache, bool topology)
         for (size_t i = 0; i < alphas.size(); ++i)
         {
             if (topology) Check(primitives[i] == GL_LINE_STRIP, "mode-1 spiral added a closing segment");
-            else Check(std::abs(alphas[i] - std::min(1.f, alpha * 1.25f)) < 1e-6f,
+            else Check(std::abs(alphas[i] - std::min(1.f, alpha * 1.25f * (modulate ? volume / 2 : 1))) < 1e-6f,
                        "mode-1 waveform omitted MilkDrop alpha multiplier/clamp");
         }
     }

@@ -78,13 +78,15 @@ constant RGB 64/128/192 with disabled/fractional hue, observed mode-1 alpha .4�
 and .9→1, and actual open-strip draw topology. They do not derive the disabled-hue
 or waveform expectations from the baseline renderer.
 
-- Normal renderer suite: 37/37 controls pass.
+- Normal and ASan/UBSan renderer suites: 37/37 controls each pass.
+  The separate EGL/GLES transition overlay skips on macOS without those libraries.
 - Host engine suite: 329/329 pass.
 - Android release core, both ARM ABIs, APK and 137 JVM tests pass.
 - Six original-preset frames at 2560×1440 exercise active Standard trails with
   the reported 1280×720 authored canvas for both artifacts.
 - All 9,691 AAR asset entries are byte-identical across artifacts.
 - All 14 patches apply to a clean export of the immutable upstream pin.
+- Fresh recursive checkout debug-core build (both ABIs) and strict MkDocs pass.
 
 Candidate AAR SHA256:
 `09851b84878e357bd413bc2fe9fb4ea6ca0762a3f14c233d9334e40335b1cd59`.
@@ -92,5 +94,5 @@ This is a local research artifact, not a published release. Source references,
 per-case hashes, runtime metadata and bounded controls are in [results.json](results.json).
 Raw captures, clock helper, harness and logs are retained under the task worktree's
 `build/brainstain/`; raw audio and frame streams are not committed.
-Final sanitizer validation, fresh-checkout debug build, CI, Codex review, merge,
-publication and Milkbeat update are separate gates until their results are recorded.
+CI, Codex review, merge, publication and Milkbeat update are separate gates until
+their results are recorded.
