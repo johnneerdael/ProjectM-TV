@@ -25,7 +25,8 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         binary.write_bytes(b'observed binary')
         manifest = self.root / 'worker/source-hashes.json'
         manifest.write_text(json.dumps({'renderer.cpp': VERIFY.sha((source / 'renderer.cpp').read_bytes())}))
-        identity = {'binary': str(binary), 'binary_sha256': VERIFY.sha(binary.read_bytes()),
+        identity = {'role': 'patched', 'patch_removed': None,
+                    'binary': str(binary), 'binary_sha256': VERIFY.sha(binary.read_bytes()),
                     'source_hashes': str(manifest)}
         backend = ['vendor', 'hardware GPU', 'GLES3.0', 'GLSL3.00']
         row = {'status': 'success', 'manifest': {'status': 'success', 'gl_error_frames': 0,
@@ -77,7 +78,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def add_rejected_role(self, row, repeat_equal=False):
         self.result['roles']['upstream'] = {
-            'worker': self.result['roles']['patched']['worker'],
+            'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream'},
             'repeat_equal': repeat_equal, 'runs': [row, dict(row)]}
         self.save()
         image = Image.new('RGB', (4, 33), '#171717')
@@ -104,6 +105,18 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def test_rejects_failed_repeats_claimed_equal(self):
         self.add_rejected_role({'status': 'failed', 'exit': 2}, repeat_equal=True)
         with self.assertRaisesRegex(ValueError, 'Failed repeats cannot'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_swapped_worker_role(self):
+        self.result['roles']['patched']['worker']['role'] = 'without-0010'
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Worker role identity differs'):
+            VERIFY.verify(self.work)
+
+    def test_rejects_wrong_patch_removal_metadata(self):
+        self.result['roles']['patched']['worker']['patch_removed'] = 10
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Worker patch removal differs'):
             VERIFY.verify(self.work)
 
     def test_rejects_matching_repeats_with_missing_frames(self):
@@ -150,7 +163,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_rejects_altered_rejection_panel(self):
         self.result['roles']['upstream'] = {
-            'worker': self.result['roles']['patched']['worker'],
+            'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream'},
             'repeat_equal': False, 'runs': [{'status': 'failed', 'exit': 1}] * 2}
         self.save()
         image = Image.new('RGB', (4, 33), '#171717')

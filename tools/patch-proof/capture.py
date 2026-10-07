@@ -80,6 +80,13 @@ def main() -> None:
     for role in workers:
         if role not in supported_roles:
             raise ValueError('Unsupported worker role: ' + role)
+        identity = workers[role]
+        if identity.get('role') != role:
+            raise ValueError('Worker role identity differs: ' + role)
+        removed = int(role[8:]) if role.startswith('without-') else None
+        if ('patch_removed' not in identity or identity['patch_removed'] != removed or
+                type(identity['patch_removed']) is not type(removed)):
+            raise ValueError('Worker patch removal differs: ' + role)
     for identity in workers.values():
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary identity changed')

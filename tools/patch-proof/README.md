@@ -33,6 +33,9 @@ or unstable roles have an explicit panel rather than a fabricated render.
 `results.json` preserves load errors and available engine logs/warnings. A repeated
 load failure is still a failure. `verify.py` checks source/binary identities, repeat
 hashes, retained image payloads, counts, backend and comparison pixels.
+Capture rejects unsupported role names before creating output directories, and
+both capture and verification require each role label to match its worker identity
+and removed-patch metadata. Swapped worker records cannot silently relabel a run.
 
 Preparation requires the documented 13-patch series and pins. Supported roles are
 `upstream`, `patched`, and `without-0002` through `without-0013`. Patch0001 is

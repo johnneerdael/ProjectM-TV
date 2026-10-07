@@ -26,16 +26,22 @@ class FailedCaptureRetention(unittest.TestCase):
             textures.mkdir()
             work = root / 'capture'
             workers = root / 'workers.json'
-            for index, role in enumerate(('../escaped', str(root / 'absolute'), 'without-0001', 'unknown')):
+            cases = [(role, 'patched', None, 'Unsupported worker role') for role in
+                     ('../escaped', str(root / 'absolute'), 'without-0001', 'unknown')]
+            cases.extend([('patched', 'without-0010', 10, 'Worker role identity differs'),
+                          ('patched', 'patched', 10, 'Worker patch removal differs'),
+                          ('without-0010', 'without-0010', None, 'Worker patch removal differs')])
+            for index, (role, inner_role, removed, message) in enumerate(cases):
                 with self.subTest(role=role):
                     work = root / ('capture-' + str(index))
                     workers.write_text(json.dumps({role: {
+                        'role': inner_role, 'patch_removed': removed,
                         'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}}))
                     argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
                             '--textures', str(textures), '--device', 'emulator-5630',
                             '--user', '0', '--work', str(work)]
                     with patch.object(sys, 'argv', argv), patch.object(CAPTURE.subprocess, 'run') as run:
-                        with self.assertRaisesRegex(ValueError, 'Unsupported worker role'):
+                        with self.assertRaisesRegex(ValueError, message):
                             CAPTURE.main()
                         run.assert_not_called()
                     self.assertFalse(work.exists())
@@ -49,6 +55,7 @@ class FailedCaptureRetention(unittest.TestCase):
             binary.write_bytes(b'worker identity')
             workers = root / 'workers.json'
             workers.write_text(json.dumps({'patched': {
+                'role': 'patched', 'patch_removed': None,
                 'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}}))
             preset = root / 'preset.milk'
             preset.write_text('[preset00]\n')

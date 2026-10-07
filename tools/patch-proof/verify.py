@@ -25,6 +25,15 @@ def verify(work: Path) -> dict:
     previous = None
     for role, value in result['roles'].items():
         identity = value['worker']
+        supported_roles = {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
+        if role not in supported_roles:
+            raise ValueError('Unsupported worker role: ' + role)
+        if identity.get('role') != role:
+            raise ValueError('Worker role identity differs: ' + role)
+        removed = int(role[8:]) if role.startswith('without-') else None
+        if ('patch_removed' not in identity or identity['patch_removed'] != removed or
+                type(identity['patch_removed']) is not type(removed)):
+            raise ValueError('Worker patch removal differs: ' + role)
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary changed: ' + role)
         source_manifest = Path(identity['source_hashes'])
