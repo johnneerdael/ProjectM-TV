@@ -211,7 +211,7 @@ Follow the repository's configured formatting and lint rules. Review automatic f
 
 ## Building and testing
 
-Preset Lab CI must retain Git history for `tools/core-corpus/test_build_core_aars.py`, which reads pinned historical source `5681852f` alongside HEAD. Use `fetch-depth: 0` with `filter: blob:none` in its checkout, matching the APK history policy; shallow main checkouts without the old commit fail source-integrity checks before native rendering. Reviewed previews run trusted main workflow definitions; the source-control test class fetches the exact baseline fixture only when missing under `GITHUB_ACTIONS=true`, with submodule recursion disabled. Preserve the fixture SHA and existing assertions.
+The release gate runs Preset Lab and Native trails checks without the historical core-corpus suite. Standalone `tools/core-corpus` source controls read frozen commit `5681852f`; if explicitly run under GitHub Actions, their test class fetches that exact fixture only when missing, without submodule recursion. Preserve fixture hashes and assertions; do not add historical source tests or full-history fetching to the release gate.
 
 
 Choose validation that exercises the changed behavior. Compilation alone does not establish functional correctness. For UI or integration changes, exercise relevant user journeys and error paths when the environment supports them. Record baseline failures and environmental limitations honestly.

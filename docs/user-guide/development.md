@@ -196,14 +196,11 @@ source-transformation controls require the frozen historical commit documented
 in `tools/core-corpus/README.md`. These historical controls do not establish the
 validity of the shipped collection scores or current-renderer appearance.
 
-## History-dependent validation
+## Standalone historical source controls
 
-The standalone core-corpus source controls read both the current source and a
-fixed historical release commit. Keep Git history available when running these
-tests. The full-history checkout uses `fetch-depth: 0` and `filter: blob:none`: commit metadata
-is available, while historical file contents load on demand. A shallow checkout
-without that history can fail at `git show` before a renderer is exercised.
-Reviewed previews use the trusted workflow from main. Their source controls
-fetch the exact pinned fixture commit when it is missing in CI, so a checkout
-workflow repair can be validated before it reaches main. Existing fixtures and
-assertions stay unchanged.
+The standalone core-corpus source controls read current source and a fixed
+historical release commit. Keep that commit available when running these tools
+locally. If explicitly invoked under GitHub Actions, the test class fetches the
+exact pinned fixture only when missing; assertions and source identity remain
+unchanged. This bootstrap is outside the Preset Lab release gate and does not
+require that gate to fetch repository history.
