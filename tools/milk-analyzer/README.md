@@ -1176,3 +1176,12 @@ different RGB8 channel values across the run and exact median motion. This is
 stage-isolation evidence, not an original-preset pass; its feedback/composite
 precision miss remains open. See
 `fixtures/glowsticks-draw-isolation2317-2026-10-07.json`.
+
+A read-only latest-AAR blur observer preserves all final pixels and retains
+per-pass outputs. Feeding observed horizontal blur into source vertical math
+still differs in five one-byte values at the first level. A float32 half-up
+output-rounding near-fit is rejected by a separately frozen RGBA8 control:
+the existing represented-value conversion matches all 60 observations. Do not
+change the generic quantizer from that near-fit. Blur arithmetic/varying
+precision remains unresolved; see
+`fixtures/glowsticks-blur-attribution2317-2026-10-07.json`.
