@@ -175,3 +175,19 @@ measurements identified in `visible-original-figures.json`. The originals are
 not edited, and the figures use unbrightened full frames and aligned nearest
 crops. They replace the tiny dark witness as the primary explanation; numerical
 controls and the old records remain secondary.
+
+## Clearer02/05 originals and recognizable10 host fixture
+
+The source/history screen examined nine blur-bound originals and20 translator
+witnesses. Their exploratory outcomes remain in `blur-translator-screen-results.json`.
+Final original-preset controls are in `clearer-02-05-results.json`: madness portal
+for0002 and the Julia embossed Jelly preset for0005, with upstream/no-patch/current
+two-repeat120-frame zeroGL-error captures. `clearer-02-05-10-figures.json` identifies
+full frames, aligned raw crops, input hashes and measurements.
+
+The recognizable pack-switch fixture uses bundled onefish.jpg (a spotted texture)
+and rose.jpg under the same shared.jpg name. Its original inputs, host sequence
+and full repeated proof are retained in `recognizable-pack-fixture/` and
+`recognizable-pack-switch-results.json`. This is explicitly a host-level fixture;
+no named-image custom-shape fields were found in the bundled artist presets.
+The separately requested predictor brief is `predictor-patch-0010-brief.md`.

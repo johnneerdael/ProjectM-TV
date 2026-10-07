@@ -99,6 +99,27 @@ that upstream and the no-0002 role use a fallback composite shader; the patched
 role emits no such warning. All 120 frames match the prior image evidence.
 See the [reproduction receipt](superpowers/evidence/current-patch-proof/reproduction-validation.json).
 
+![Authored composite restored in an unchanged original](superpowers/evidence/current-patch-proof/0002-clear-original.png)
+
+**What to look for:** `Flexi - madness portal.milk` becomes a plain red disc with
+black surroundings when its authored composite cannot compile. With 0002, the
+same original preset renders its yellow/blue composite and coloured surround.
+The full frame and aligned, unbrightened close-up show the change directly.
+
+**How the bug causes it:** the preset declares a local HLSL variable named `sample`
+and uses it while computing the output colours. The translator must preserve that
+identifier during contextual-type lookahead and map it to a safe GLSL name.
+The older path fails to compile the composite and uses the generic fallback,
+so the preset's colour operations are absent. Patch 0002 retains the required
+parser/name-emission compatibility. This is restored authored shader execution,
+not an added colour filter.
+
+Removing only 0002 changes all 120 frames; both roles repeat exactly, with zero GL
+errors. The selected frame 59 is 512×288 and has RGB8 mean absolute difference 54.102.
+[Raw upstream/current-minus0002/current panel](superpowers/evidence/current-patch-proof/0002-15e7552b07.png).
+
+Earlier controls below retain other translator paths and their scope.
+
 ![Upstream versus current patched renderer: Flexi - dimension window.milk](superpowers/evidence/current-patch-proof/0002-translator.png)
 
 Frame 119, 512×288, fixed synthetic audio/clock/seed; two exact 120-frame repeats per successful role. Full-series comparison; use the adjacent ablation/activation controls for single-patch attribution.
@@ -167,6 +188,27 @@ include `Cope - The Cloud.milk`, `Mig_015.milk` and `$$$ Royal - Mashup (29).mil
 `EVET - Scanazoic --- Isosceles edit.milk` is a negative control. Record evaluated
 bounds/coefficients: a historical blur witness had unchanged pixels despite its
 reported unsafe domain. Do not promise a visible improvement for every fixture.
+
+![Blur-bound correction in the unchanged Julia-fractal preset](superpowers/evidence/current-patch-proof/0005-clear-original.png)
+
+**What to look for:** in `flexi - a julia fractal for hexcollie embossed (Jelly).milk`,
+the uncorrected frame has darker, altered embossed shading. The corrected frame
+has different bright relief and highlights across the same fractal structure.
+The close-up uses the identical source region and no brightness adjustment.
+
+**How the bug causes it:** this preset sets third-level blur bounds to 0.49 and 0.52,
+while the preceding level uses 0.78 and 0.91. The legacy clamp-then-expand logic has
+to repair the resulting narrow/inverted interval. Its typo sets both the lower
+and upper bound to `avg - 0.05`, collapsing the range. The progressive scale/bias
+calculation can then divide by zero. The preset combines `GetBlur3` with other
+blur levels to calculate normals and embossed colour, so a bad third-level blur
+changes its visible lighting. Patch 0005 expands the upper bound upward and keeps
+storage/decoding coefficients coherent; it does not change the artist's shader.
+
+All 120 frames differ when removing only 0005, and both roles repeat exactly with
+zero GL errors. Frame 59 at 512×288 has RGB8 mean absolute difference 38.541.
+[Raw upstream/current-minus0005/current panel](superpowers/evidence/current-patch-proof/0005-b9b0b89b38.png).
+The earlier zero-effect original and synthetic boundary controls remain below.
 
 ![Controlled diagnostic for patch 0005](superpowers/evidence/current-patch-proof/0005-blur-collapsed-v2.png)
 
@@ -283,6 +325,29 @@ General host integration and lifetime correctness. Use two controlled packs with
 the same image name and different pixels; capture fade, reset and retirement.
 No unique bundled preset can demonstrate a host changing its roots. ZIP upload,
 QR codes and category UI are app features outside this patch.
+
+![Recognizable texture-pack ownership failure during a fade](superpowers/evidence/current-patch-proof/0010-recognizable-pack-switch.png)
+
+**What to look for:** Pack A contains the bundled spotted texture `onefish.jpg`;
+Pack B contains the bundled rose photograph. Both are named `shared.jpg` in the
+test packs. Without 0010, the outgoing shape wrongly displays the rose after the
+host switches roots. With 0010, it retains the spotted image while the incoming
+preset uses the rose. The row at frame 40 includes the reset during the fade;
+frame 59 shows a later transition sample. No brightness gain is applied.
+
+**How the bug causes it:** the old engine gives every live preset the current
+process-wide texture manager. Changing roots replaces that manager. Custom shapes
+resolve named images while preparing each frame, so the outgoing preset's next
+lookup can come from the incoming pack. Patch 0010 retains each live preset's
+original manager and uses that manager for rendering and reset.
+
+This is a host-level diagnostic fixture using unchanged bundled image bytes,
+not an unchanged artist preset. The bundle has no named-image shape keys, and a
+static shader binding can retain its image and hide the lookup bug. Root switch,
+soft cut and reset must be driven by the host. Upstream/no 0010/current each repeat
+all 120 frames exactly with zero GL errors; only 0010 is removed in the causal pair.
+[Fixture and source image hashes](superpowers/evidence/current-patch-proof/clearer-02-05-10-figures.json).
+The original colour-square journey remains a simpler numerical control below.
 
 ![Texture-root lifetime at fade/reset timestamps](superpowers/evidence/current-patch-proof/0010-texture-roots-shapes.png)
 
