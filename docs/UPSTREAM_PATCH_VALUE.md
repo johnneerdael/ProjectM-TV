@@ -115,6 +115,16 @@ Main `dd59a791` adds historical **0050**, retained as migration **0010**. Changi
 
 This could add general texture lifetime and host integration correctness to libprojectM: hosts changing asset roots should not invalidate or redirect live presets. An upstream proposal needs explicit cache/reset and callback ownership contracts, with retained-resource retirement tests. App ZIP upload, QR codes and category UI remain ProjectM-TV product features. Fresh validation against unchanged ProjectM-TV v2.3.16 is pending; the completed v2.3.15 matrix is historical evidence.
 
+## Large-rotation synchronization from PR #51
+
+Main `16a37189478771da591d134a6bd1f8fc46eee808` publishes v2.3.17 and historical **0051**, retained as migration **0011**. It computes CPU sine/cosine after converting the final evaluated rotation to float, following MilkDrop 2. GPU sine and cosine both become zero for `rot=±10000000` on the observed Apple GLES translator, collapsing feedback to the rotation centre. Raising shader precision does not fix that driver behavior. CPU libm also covers maximum finite float angles, where a rounded `2π` remainder is insufficient. Authored equations and nonfinite handling stay unchanged.
+
+The 4.2 port uses the existing transform component for sine and adds one four-byte cosine VertexBuffer at attribute8. It resizes/uploads that buffer with the current mesh and preserves `Prepare`/`DrawAgain` reuse. The original 4.1.7 patch’s interleaved mesh layout cannot be copied into 4.2. The adapted real-GL fixture supplies 4.2 ShaderCache ownership and current Texture constructor arguments. Before the port, its large-angle UV check fails on Apple M4 Pro; afterward, direct/prepared legacy/custom per-frame/per-pixel UV and multi-frame feedback controls pass under ASan/UBSan. The direct vertex-source zoom fixture is updated for the same internal interface.
+
+Potential libprojectM value: a general MilkDrop compatibility correction that avoids driver-dependent large-angle range reduction in the built-in warp rotation. It costs a small vertex buffer/attribute and CPU trig per evaluated vertex (cached per frame without per-pixel code). The public C/Java/JNI interface does not change. Other shader trigonometry remains unchanged; no speedup or universal GPU behavior is claimed. The supplied v2.3.17 handoff verifies the unchanged original witness and both ARM artifacts; migration-specific Android witness checks remain pending at this checkpoint.
+
+The user explicitly limits this new-release migration to rotation-bug validation. Preserve the completed full matrix checkpoints and finish the already running v2.3.16 pass once; do not repeat the full preset matrix for v2.3.17.
+
 ## Contribution candidates versus product policy
 
 The strongest broadly applicable candidates are the remaining evaluator fixes 0004/0034 and HLSL compatibility/numerical fixes 0003/0030/0031/0036/0040/0044, because their isolated ports have direct controls distinguishing old, upstream and ported behavior. Upstream submission should include narrow reproductions, the relevant specification/NS-EEL rationale and attribution, with integrated rendered controls where behavior reaches GLSL. Submit evaluator changes to the evaluator project rather than treating a libprojectM gitlink update as the complete evaluator fix.

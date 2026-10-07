@@ -1,0 +1,20 @@
+{
+  "scope": "diagnostic hosts only; full core AAR bytes are unmodified. ARMv7 helper adapted for720p frame transport and synchronized unpaced timing; highres helper scales4K output for256x144 transport. Raw captures and harness sources retained externally.",
+  "sha256": {
+    "runtime/classes.dex": "f956933b4d8628487f1e610b7b6f9e93f8ac6c9d61ae5e4544c37effdfce5338",
+    "runtime/libbackendclock.so": "7624f05eb5fe95926a3980e05cc5596099908cacd2cbab150f096761a163c953",
+    "runtime/transport30.f32": "0640617ef6dcdf81f9af180ebb827c88ae8d570ec0abc96bf6f52f00bcab488c",
+    "runtime/selection.apk": "c044f31b4630978a7685e1930bbe9b86d01d0d1fa145f4a8293d1cbb9f08009c",
+    "highres/classes.dex": "dd8779aa32787646532595780d8b400a3f400d4fe3882e62f56f1add8d0692b6",
+    "highres/CoreBackendRunner.java": "ff7a7824d8376dc614b184a86f97463930c9976d3e67c1b5d1b4928243fc174b",
+    "highres/selection.apk": "704ddd26610f8fe21330bf5fed0b54c500cf115e0badd4019fe4753f956cd787",
+    "am6/classes.dex": "30e148a136a495df849d35a4d0994f0a3238dbf775428e1157d9a2aefe05cd8f",
+    "am6/CoreBackendRunner.java": "285eec0d1aa9f02028a3908d17a309174da3e22b75aba99cd7e640d4197ab46c",
+    "am6/libbackendclock.so": "e64205dba3eb7c30e0b20e1b1ac216bf23841455bd5ae1872906a8095528780a",
+    "am6/core_backend_clock.cpp": "0e652c9d2ae8d29cff6fa336b26a08da75a34e29a526f8b5aaf4020d3278226d",
+    "am6/core_random_inputs.cpp": "3bf936357b5dfcd18dc58fe93f0421c2938d8b18ee9b429fedff656c65272477",
+    "capture.py": "a2d969fc5f0e0eeb62c471f34fc2df3e2ca0b8f0ceeba2af46238c8e683b49f0",
+    "capture-highres.py": "f0cdfb3186da65c2b74f8b8ba671214080d8c81eb81b30bfc82d3c170826f4ce",
+    "capture-am6.py": "2882d7e369cf949edb029143b26a23d764665ff8ad80c7f69cb6fbc5663c515a"
+  }
+}

@@ -1,0 +1,6 @@
+llvmpipe (LLVM 20.1.2, 128 bits)
+legacy per-frame UV controls pass
+legacy per-pixel UV controls pass
+custom per-frame UV controls pass
+custom per-pixel UV controls pass
+multi-frame feedback controls pass

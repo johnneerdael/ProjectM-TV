@@ -323,6 +323,28 @@ sampler and normalization controls are separate from device appearance and
 performance evidence; they do not establish identical rendering on Windows or
 all TV GPUs.
 
+## Large warp rotation
+
+Current patch0011 (historical0051 from PR #51) computes rotation sine/cosine on the CPU after converting the final
+per-frame or per-pixel equation result to float, as MilkDrop 2 does. Large-angle
+GPU trig can return zero for both outputs on the observed GLES/Metal driver,
+collapsing feedback UVs to the rotation centre. CPU libm handles the finite float
+range, including angles for which a double remainder with a rounded `2*pi`
+constant is inaccurate. Equations and their original rotation state are unchanged.
+
+The 4.2 mesh reuses `transforms.z` for sine and adds an instance-owned four-byte
+cosine VertexBuffer at attribute8. The warp shader consumes seven attributes.
+Resize/upload cosine with the existing buffers; the 4.1.7 interleaved 56→60-byte
+layout remains historical evidence. With no per-pixel code the
+pair is cached once per frame; otherwise it uses each vertex's final evaluated
+rotation. Legacy/custom warp programs share this vertex interface, and prepared
+meshes reuse the pair for authored/native draws without reevaluating equations.
+There is no public C/Java/JNI API change. Other shader trig remains unchanged;
+nonfinite rotation is still unsupported, with no finite identity substitution.
+See [4.2 rotation synchronization](superpowers/evidence/upstream-master-4-2/rotation51-synchronization/README.md)
+and the [original repair evidence](superpowers/evidence/large-rotation-trig/README.md)
+for their separate observed scopes and remaining validation.
+
 ## Evaluated waveform and legacy display controls
 
 Engine policy `live-controls-v1` starts with patches 0048–0049. `Waveform` reads

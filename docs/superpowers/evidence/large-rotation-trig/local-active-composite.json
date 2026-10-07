@@ -1,0 +1,60 @@
+{
+  "scope": "Read-only observation of first three indexed composite draws; original requests legacy warp(PSVERSION_WARP=0) and custom composite(PSVERSION_COMP=2). Active _qa/_c4/blur uniforms distinguish authored composite from fallback. No original custom-warp assertion is made.",
+  "pixel_sha256": "127cdcd311c8daa2607b572dbe4d3a021b155756b1522af4d122614dae3f783a",
+  "observer_pixels_byte_identical": true,
+  "records": [
+    {
+      "event": 1,
+      "program": 82,
+      "active_uniform_count": 9,
+      "active_uniform_names": [
+        "sampler_main",
+        "sampler_blur3",
+        "_c4",
+        "rand_preset",
+        "_c5",
+        "_c6",
+        "sampler_blur1",
+        "_qa",
+        "sampler_blur2"
+      ],
+      "program_unchanged": true
+    },
+    {
+      "event": 2,
+      "program": 82,
+      "active_uniform_count": 9,
+      "active_uniform_names": [
+        "sampler_main",
+        "sampler_blur3",
+        "_c4",
+        "rand_preset",
+        "_c5",
+        "_c6",
+        "sampler_blur1",
+        "_qa",
+        "sampler_blur2"
+      ],
+      "program_unchanged": true
+    },
+    {
+      "event": 3,
+      "program": 82,
+      "active_uniform_count": 9,
+      "active_uniform_names": [
+        "sampler_main",
+        "sampler_blur3",
+        "_c4",
+        "rand_preset",
+        "_c5",
+        "_c6",
+        "sampler_blur1",
+        "_qa",
+        "sampler_blur2"
+      ],
+      "program_unchanged": true
+    }
+  ],
+  "observer_binary_sha256": "e5c8cc46069443aba55cce594c5becdfe805361a918c7a5549ffab54ac823148",
+  "full_uniform_capture_sha256": "06f4f25b37c608fb0ab59172724874f7b1ba92490768252e44708e8578db62f7"
+}

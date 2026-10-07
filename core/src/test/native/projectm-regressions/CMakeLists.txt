@@ -61,6 +61,24 @@ if(NOT APPLE)
     target_link_libraries(projectm-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
 enable_testing()
+add_executable(warp-rotation-regressions warp_rotation_test.cpp)
+target_compile_features(warp-rotation-regressions PRIVATE cxx_std_17)
+target_compile_definitions(warp-rotation-regressions PRIVATE GL_SILENCE_DEPRECATION)
+target_include_directories(warp-rotation-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM"
+    "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_link_libraries(warp-rotation-regressions PRIVATE libprojectM::projectM)
+if(APPLE)
+    target_link_libraries(warp-rotation-regressions PRIVATE "${REGRESSION_OPENGL_FRAMEWORK}")
+else()
+    target_compile_definitions(warp-rotation-regressions PRIVATE USE_GLES)
+    target_link_libraries(warp-rotation-regressions PRIVATE ${REGRESSION_GL_TARGET})
+endif()
+add_test(NAME warp-rotation-regressions COMMAND warp-rotation-regressions)
+set_tests_properties(warp-rotation-regressions PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
 add_executable(user-texture-premultiplication-regressions user_texture_premultiplication_test.cpp)
 target_compile_features(user-texture-premultiplication-regressions PRIVATE cxx_std_17)
 target_compile_definitions(user-texture-premultiplication-regressions PRIVATE GL_SILENCE_DEPRECATION)

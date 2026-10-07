@@ -1,0 +1,14 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/rotation51-preparation/native
+    Start 32: warp-rotation-regressions
+1/1 Test #32: warp-rotation-regressions ........***Failed    0.58 sec
+Apple M4 Pro
+rotation=10000000.000000 UV axis=0 actual=0.501961 expected=0.735156
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.58 sec
+
+The following tests FAILED:
+	 32 - warp-rotation-regressions (Failed)
+Errors while running CTest

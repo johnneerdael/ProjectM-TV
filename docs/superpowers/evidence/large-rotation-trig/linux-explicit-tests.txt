@@ -1,0 +1,181 @@
+Internal ctest changing into directory: /out
+Test project /out
+      Start  1: warp-rotation-regressions
+ 1/28 Test  #1: warp-rotation-regressions ..........***Timeout  30.04 sec
+
+      Start  2: texture-routing-regressions
+ 2/28 Test  #2: texture-routing-regressions ........***Timeout  30.03 sec
+
+      Start  3: warp-zoom-regressions
+ 3/28 Test  #3: warp-zoom-regressions ..............   Passed    0.46 sec
+      Start  4: dynamic-original-presets
+ 4/28 Test  #4: dynamic-original-presets ...........   Passed   70.37 sec
+      Start  5: dynamic-wave-controls
+ 5/28 Test  #5: dynamic-wave-controls ..............   Passed    1.21 sec
+      Start  6: dynamic-display-controls
+ 6/28 Test  #6: dynamic-display-controls ...........   Passed   57.11 sec
+      Start  7: shape-sampler-regressions
+ 7/28 Test  #7: shape-sampler-regressions ..........***Timeout  30.03 sec
+
+      Start  8: shape-sampler-preset
+ 8/28 Test  #8: shape-sampler-preset ...............***Timeout  30.04 sec
+
+      Start  9: blur-range-regressions
+ 9/28 Test  #9: blur-range-regressions .............   Passed    0.02 sec
+      Start 10: blur-range-render
+10/28 Test #10: blur-range-render ..................   Passed   90.22 sec
+      Start 11: float-literal-regressions
+11/28 Test #11: float-literal-regressions ..........   Passed    2.68 sec
+      Start 12: random-texture-manager
+12/28 Test #12: random-texture-manager .............***Timeout  30.03 sec
+
+      Start 13: random-texture-stages
+13/28 Test #13: random-texture-stages ..............***Timeout  30.03 sec
+
+      Start 14: random-texture-shorthand
+14/28 Test #14: random-texture-shorthand ...........***Timeout  30.03 sec
+
+      Start 15: random-texture-numerical
+15/28 Test #15: random-texture-numerical ...........***Timeout  30.03 sec
+
+      Start 16: random-texture-lifecycle
+16/28 Test #16: random-texture-lifecycle ...........***Timeout  30.03 sec
+
+      Start 17: random-texture-blur-framebuffers
+17/28 Test #17: random-texture-blur-framebuffers ...***Timeout  30.03 sec
+
+      Start 18: random-texture-midgit-render
+18/28 Test #18: random-texture-midgit-render .......***Timeout  30.04 sec
+
+      Start 19: shader-parser-regressions
+19/28 Test #19: shader-parser-regressions ..........   Passed    0.03 sec
+      Start 20: hlsl-self-reference
+20/28 Test #20: hlsl-self-reference ................   Passed    0.02 sec
+      Start 21: custom-waveform-bounds
+21/28 Test #21: custom-waveform-bounds .............   Passed    0.26 sec
+      Start 22: shader-render-regressions
+22/28 Test #22: shader-render-regressions ..........***Timeout  30.02 sec
+
+      Start 23: float-literal-render
+23/28 Test #23: float-literal-render ...............***Timeout  30.03 sec
+
+      Start 24: parser-presets
+24/28 Test #24: parser-presets .....................***Timeout  30.03 sec
+
+      Start 25: implicit-global-regressions
+25/28 Test #25: implicit-global-regressions ........   Passed    0.02 sec
+      Start 26: implicit-input-bindings
+26/28 Test #26: implicit-input-bindings ............   Passed    0.48 sec
+      Start 27: initialization-presets
+27/28 Test #27: initialization-presets .............***Timeout  30.03 sec
+
+      Start 28: float-literal-presets
+28/28 Test #28: float-literal-presets ..............***Timeout 120.00 sec
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:1622:33: runtime error: left shift of negative value -1
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:1625:47: runtime error: left shift of negative value -1
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:1643:27: runtime error: left shift of 248 by 24 places cannot be represented in type 'int'
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:2029:10: runtime error: left shift of negative value -606
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:2029:10: runtime error: left shift of negative value -606
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:2026:28: runtime error: left shift of negative value -6
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:2046:7: runtime error: left shift of negative value -2396
+/src/third_party/projectm/vendor/SOIL2/stb_image.h:2046:7: runtime error: left shift of negative value -2396
+Loaded texture rose
+custom shader compiled: Bdrv bdrv et  AL  rmx - dst bdrv etAL newborns of satan.milk
+custom shader compiled: EVET - Brainvex.milk
+custom shader compiled: EoS - glowsticks v2 04 music minimal - ghosts nz+23.milk
+Loaded texture ruin
+custom shader compiled: EoS - glowsticks v2 04 music minimal - ghosts nz+9.milk
+custom shader compiled: EoS - rename 2b - shf fab psychomonk mantra.milk
+custom shader compiled: Fed - blank boot 2_1 newborns of satan.milk
+custom shader compiled: Flexi - explore space not drugs - like there's a fucking difference flacc no girl, just theatre handsoap.milk
+custom shader compiled: Flexi - explore space not drugs - like there's a fucking difference flacc roam3-.milk
+custom shader compiled: Flexi - explore space not drugs - like there's a fucking difference flacc.milk
+custom shader compiled: Flexi - explore space not drugs - like there's a fucking difference nz+.milk
+custom shader compiled: Flexi - explore space not drugs - like there's a fucking difference nz+2.milk
+custom shader compiled: Flexi - explore space not drugs - like there's a fucking difference.milk
+custom shader compiled: Fumbling_Foo + En D & Martin - Mandelverse 31.milk
+custom shader compiled: Fumbling_Foo + En D & Martin - Mandelverse.milk
+custom shader compiled: Goody + martin - crystal palace - Schizotoxin - The Wild Iris Bloom - mess2 nz+ galaqt.milk
+custom shader compiled: Hexcollie - Virtual LSD (martin shader) newborns of satan.milk
+custom shader compiled: Phat_Zylot_EoS Come_fly_with_me_vidio_echo_v2 nz+ loss of movement.milk
+custom shader compiled: Redi Jedi - my pupil is big - shf fab the devil stares at you naked burning.milk
+custom shader compiled: Redi Jedi - this is my brain on milk(drop the habbit) - wisconsin cheesehead (the limit of your inquiry) nz+.milk
+custom shader compiled: Redi Jedi - this is my brain on milk(drop the habbit) - wisconsin cheesehead (the limit of your inquiry).milk
+custom shader compiled: Roosta - Diaspora - shf esr the beauty of ugliness nz.milk
+custom shader compiled: Roosta - Diaspora - shf esr the beauty of ugliness.milk
+custom shader compiled: Roosta - Diaspora - shf esr the beauty of uglinesss - bisexual mix.milk
+custom shader compiled: Tripgnosis - AetherStorm 2 nz+.milk
+custom shader compiled: Tripgnosis - AetherStorm 2.milk
+custom shader compiled: Tripgnosis - Astral Field.milk
+custom shader compiled: Tripgnosis - Astral Tumor.milk
+custom shader compiled: Tripgnosis - Big Bang nz+.milk
+custom shader compiled: Tripgnosis - Big Bang.milk
+custom shader compiled: Tripgnosis - Firesticks --- Isosceles edit05.milk
+custom shader compiled: Tripgnosis - Mirrored Mana Vortex.milk
+custom shader compiled: Tripgnosis - Negative Photon Burn.milk
+custom shader compiled: Tripgnosis - Neon Danse.milk
+custom shader compiled: Zylot - In death there is life (Carnival Of Lights).milk
+custom shader compiled: Zylot - In death there is life (Dancing Lights mix).milk
+custom shader compiled: Zylot - In death there is life (Geiss Layered Mix).milk
+custom shader compiled: Zylot - In death there is life (Portal mix).milk
+custom shader compiled: Zylot - In death there is life (Streams mix).milk
+custom shader compiled: Zylot - In death there is life (Wrong Portal mix).milk
+custom shader compiled: Zylot - In death there is life (surface reflection mix).milk
+custom shader compiled: Zylot - In death there is life.milk
+custom shader compiled: Zylot - Rays (Burst).milk
+custom shader compiled: amandio c - the climbing - shf fab slow downward headfirst crawl to psychological terminus.milk
+custom shader compiled: amandio c - typhoon season - shf fab tetragrammaton structure, prime number resonance coriolis, wolfram fractal info xfer disidentify.milk
+custom shader compiled: amandio c - typhoon season - shf fab tetragrammaton structure, prime number resonance coriolis, wolfram fractal info xfer nz.milk
+custom shader compiled: amandio c - typhoon season - shf fab tetragrammaton structure, prime number resonance coriolis, wolfram fractal info xfer.milk
+custom shader compiled: bdrv geiss zylot - oldkool2 nz+ waist ville.milk
+custom shader compiled: cope + martin - noysez award losing e8 a'shayanni deanth spleendoor.milk
+custom shader compiled: cope + martin - noysez award losing single wrap womb dynamics e8 a'sha.milk
+custom shader compiled: cope + martin - noysez award losing single wrap.milk
+custom shader compiled: craving 'spinach man' action figures suppositoric nutrition - neurotoxin ttxish liver cruncher.milk
+custom shader compiled: doqumentalryphilm.milk
+custom shader compiled: dylan - LED ravers addition (spectratex).milk
+custom shader compiled: fleekus flokus - violent and insane homicidal air molecules2 - shf fab we are the info flow, not the structure of space time.milk
+custom shader compiled: fleekus flokus - violent and insane homicidal air molecules2 - shf fab we are the info flow, not.milk
+custom shader compiled: flexi - identity-killing petting - colon gonad type29.milk
+custom shader compiled: flexi - lorenz chaser (Jelly V5-5) newborns of satan.milk
+custom shader compiled: flx kohear shf esr bum garner.milk
+custom shader compiled: i'm about to puke(remix) - sth divining via line drop - i am three sheep in nine wolves clothing (three really fucked up sheep).milk
+custom shader compiled: lemuel - the search for god is absurdit is if everyone dies alone gigo nz+.milk
+custom shader compiled: lemuel - the search for god is absurdit is if everyone dies alone gigo.milk
+custom shader compiled: lemuel - the search for god is absurdit is if everyone dies alone.milk
+custom shader compiled: martin - glass corridor nz2 incline.milk
+custom shader compiled: mess n777 - shf fab parched i k your existence out of insane boredom --- Isosceles edit.milk
+custom shader compiled: mess n777 - shf fab parched i k your existence out of insane boredom nz+ --- Isosceles edit.milk
+custom shader compiled: mess n777 - shf fab parched i k your existence out of insane boredom nz+.milk
+custom shader compiled: mess n777 - shf fab parched i k your existence out of insane boredom.milk
+custom shader compiled: milfography designator trough nz+2 newborns of satan.milk
+custom shader compiled: propre possess remandings.milk
+custom shader compiled: shf esr occult cloud execute-only omniverse.milk
+custom shader compiled: shf esr occult cloud roam3-.milk
+custom shader compiled: shf esr occult cloud.milk
+custom shader compiled: shifter - escape (sigur ros) strep test.milk
+custom shader compiled: shifter - escape (sigur ros).milk
+
+
+43% tests passed, 16 tests failed out of 28
+
+Total Test time (real) = 793.45 sec
+
+The following tests FAILED:
+	  1 - warp-rotation-regressions (Timeout)
+	  2 - texture-routing-regressions (Timeout)
+	  7 - shape-sampler-regressions (Timeout)
+	  8 - shape-sampler-preset (Timeout)
+	 12 - random-texture-manager (Timeout)
+	 13 - random-texture-stages (Timeout)
+	 14 - random-texture-shorthand (Timeout)
+	 15 - random-texture-numerical (Timeout)
+	 16 - random-texture-lifecycle (Timeout)
+	 17 - random-texture-blur-framebuffers (Timeout)
+	 18 - random-texture-midgit-render (Timeout)
+	 22 - shader-render-regressions (Timeout)
+	 23 - float-literal-render (Timeout)
+	 24 - parser-presets (Timeout)
+	 27 - initialization-presets (Timeout)
+	 28 - float-literal-presets (Timeout)
+Errors while running CTest

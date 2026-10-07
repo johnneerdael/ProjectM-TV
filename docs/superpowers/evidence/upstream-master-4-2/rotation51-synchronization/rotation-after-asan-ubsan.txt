@@ -1,0 +1,35 @@
+UpdateCTestConfiguration  from :/Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/rotation51-preparation/native/DartConfiguration.tcl
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/rotation51-preparation/native
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 32
+    Start 32: warp-rotation-regressions
+
+32: Test command: /Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/rotation51-preparation/native/warp-rotation-regressions
+32: Working Directory: /Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/rotation51-preparation/native
+32: Environment variables:
+32:  ASAN_OPTIONS=detect_leaks=0
+32:  EGL_PLATFORM=surfaceless
+32: Test timeout computed to be: 30
+32: Apple M4 Pro
+32: direct legacy per-frame UV controls pass
+32: direct legacy per-pixel UV controls pass
+32: direct custom per-frame UV controls pass
+32: direct custom per-pixel UV controls pass
+32: prepared replay legacy per-frame UV controls pass
+32: prepared replay legacy per-pixel UV controls pass
+32: prepared replay custom per-frame UV controls pass
+32: prepared replay custom per-pixel UV controls pass
+32: multi-frame feedback controls pass
+1/1 Test #32: warp-rotation-regressions ........   Passed    0.78 sec
+
+The following tests passed:
+	warp-rotation-regressions
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.78 sec
