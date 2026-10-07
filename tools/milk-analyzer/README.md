@@ -1222,3 +1222,17 @@ or GPU guarantees. The unchanged original Zylot learning retest still misses
 median motion by 19.78%, so its issue remains open. `pow` precision and feedback
 residuals require further diagnosis; implementing the mix correction alone does
 not earn an original-preset pass or randomized credit.
+
+The separate combined blur profile `apple-m4pro-gles-blur-forward-fma-v1`
+adds three forward float32 FMAs to the horizontal kernel after its rounded first
+weighted pair and retains the vertical contraction above. Existing separate and
+vertical-only profiles preserve their horizontal arithmetic. Exact source51 and
+GLES guards still apply. A freshly frozen random texture matches all 27,648
+horizontal shader float components; this is bounded backend evidence, not a
+universal hardware contract or a performance claim.
+
+With the combined profile, the unchanged Zylot learning retest meets all five
+numeric clauses: median error 0.0000614%, maximum error 0.00127%. Independent
+full-claim review is pending, and the archived original 92.5 remains unchanged.
+Cosmic's corresponding latest-AAR retest still misses p95 motion by 8.36%, so
+half-texture filtering remains open and no new randomized batch is started.

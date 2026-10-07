@@ -4,6 +4,22 @@ import numpy as np
 
 
 class BlurTest(unittest.TestCase):
+    def test_horizontal_profile_accumulates_forward_fma_without_changing_vertical_only(self):
+        import ctypes
+        from blur import horizontal_weighted_sum
+        pairs=[np.array([.12931469082832336],np.float32),np.array([.33364561200141907],np.float32),
+               np.array([.9681143760681152],np.float32),np.array([1.1444945335388184],np.float32)]
+        weights=np.array([7.8,6.4,3.1,1],np.float32)
+        fma=ctypes.CDLL(None).fmaf;fma.argtypes=[ctypes.c_float]*3;fma.restype=ctypes.c_float
+        value=np.float32(pairs[0][0]*weights[0])
+        for pair,weight in zip(pairs[1:],weights[1:]):value=np.float32(fma(weight,pair[0],value))
+        actual=horizontal_weighted_sum(pairs,weights,arithmetic_profile='apple-m4pro-gles-blur-forward-fma-v1')
+        np.testing.assert_array_equal(actual,[value])
+        legacy=horizontal_weighted_sum(pairs,weights)
+        self.assertFalse(np.array_equal(actual,legacy))
+        np.testing.assert_array_equal(legacy,horizontal_weighted_sum(pairs,weights,
+            arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1'))
+
     def test_declared_vertical_blur_fuses_second_pair_into_rounded_first_product(self):
         import ctypes
         blur=importlib.import_module('blur')

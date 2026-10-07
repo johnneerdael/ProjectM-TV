@@ -16,10 +16,28 @@ from custom_wave import _fmaf
 
 SEPARATE_ARITHMETIC='separate-float32-v1'
 APPLE_VERTICAL_FMA='apple-m4pro-gles-vertical-blur-fma-v1'
+APPLE_FORWARD_FMA='apple-m4pro-gles-blur-forward-fma-v1'
+ARITHMETIC_PROFILES=(SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA,APPLE_FORWARD_FMA)
+
+
+def horizontal_weighted_sum(pairs,weights,*,arithmetic_profile=SEPARATE_ARITHMETIC):
+    if arithmetic_profile not in ARITHMETIC_PROFILES:raise ValueError('unsupported blur arithmetic profile')
+    if len(pairs)!=4:raise ValueError('four horizontal blur sample pairs required')
+    arrays=[np.asarray(pair,np.float32) for pair in pairs];weights=np.asarray(weights,np.float32)
+    if weights.shape!=(4,) or any(a.shape!=arrays[0].shape for a in arrays) or not np.all(np.isfinite(weights)) or any(not np.all(np.isfinite(a)) for a in arrays):
+        raise ValueError('finite matching horizontal blur pairs/weights required')
+    output=np.zeros_like(arrays[0])
+    if arithmetic_profile!=APPLE_FORWARD_FMA:
+        for pair,weight in zip(arrays,weights):output+=pair*weight
+        return output
+    output=arrays[0]*weights[0];fused=_fmaf()
+    for pair,weight in zip(arrays[1:],weights[1:]):
+        output=np.asarray([fused(weight,x,y) for x,y in zip(pair.flat,output.flat)],np.float32).reshape(output.shape)
+    return output
 
 
 def vertical_weighted_sum(first,second,first_weight,second_weight,*,arithmetic_profile=SEPARATE_ARITHMETIC):
-    if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):
+    if arithmetic_profile not in ARITHMETIC_PROFILES:
         raise ValueError('unsupported blur arithmetic profile')
     a=np.asarray(first,np.float32);b=np.asarray(second,np.float32)
     if a.shape!=b.shape or not np.all(np.isfinite([a,b])):
@@ -89,7 +107,7 @@ def blur_bank(source,*,levels:int,minimum=(0,0,0),maximum=(1,1,1),
               edge_darken:float=0,quantize:bool=True,policy=LEGACY_BLUR,sampling_profile='portable',arithmetic_profile=SEPARATE_ARITHMETIC)->dict[int,np.ndarray]:
     from unorm_sampler import sampler_2d
     sample=sampler_2d(sampling_profile)
-    if arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):raise ValueError('unsupported blur arithmetic profile')
+    if arithmetic_profile not in ARITHMETIC_PROFILES:raise ValueError('unsupported blur arithmetic profile')
     if sampling_profile!='portable' and not quantize:
         raise ValueError('texture profile requires actual unorm blur storage')
     field=np.asarray(source,dtype=np.float32)
@@ -123,10 +141,12 @@ def blur_bank(source,*,levels:int,minimum=(0,0,0),maximum=(1,1,1),
         output=np.zeros((height,width,3),dtype=np.float32)
         if index%2==0:
             uv=uv+np.array([1/source_width,1/source_height],dtype=np.float32)
+            pairs=[]
             for weight,offset in zip(horizontal,horizontal_offset):
                 delta=np.array([offset/source_width,0],dtype=np.float32)
-                output+=(sample(field,uv+delta,wrap=False,linear=True,origin='bottom')+
-                         sample(field,uv-delta,wrap=False,linear=True,origin='bottom'))*weight
+                pairs.append(sample(field,uv+delta,wrap=False,linear=True,origin='bottom')+
+                             sample(field,uv-delta,wrap=False,linear=True,origin='bottom'))
+            output=horizontal_weighted_sum(pairs,horizontal,arithmetic_profile=arithmetic_profile)
             output*=np.float32(.5)/horizontal.sum()
             output=output*scales[index//2]+biases[index//2]
         else:

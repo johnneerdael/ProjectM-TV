@@ -532,8 +532,9 @@ def test_cpu_rotation_policy_requires_2317_source(profile_gate):
         profile_gate(PATCHES_2317,settings)
 
 
-def test_vertical_blur_fma_requires_exact_gles_source_profile(profile_gate):
-    settings=domain(blur_arithmetic_profile='apple-m4pro-gles-vertical-blur-fma-v1')
+@pytest.mark.parametrize('blur_profile',['apple-m4pro-gles-vertical-blur-fma-v1','apple-m4pro-gles-blur-forward-fma-v1'])
+def test_vertical_blur_fma_requires_exact_gles_source_profile(profile_gate,blur_profile):
+    settings=domain(blur_arithmetic_profile=blur_profile)
     with pytest.raises(ValueError,match='blur.*requires'):
         profile_gate(PATCHES_2317,settings)
     settings['profile']='gles300'

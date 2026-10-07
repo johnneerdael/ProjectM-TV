@@ -54,8 +54,8 @@ class SourcePipeline:
         from motion_vectors import PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE
         if motion_uv_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
             raise ValueError('unknown motion UV storage profile')
-        from blur import SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA
-        if blur_arithmetic_profile not in (SEPARATE_ARITHMETIC,APPLE_VERTICAL_FMA):
+        from blur import ARITHMETIC_PROFILES
+        if blur_arithmetic_profile not in ARITHMETIC_PROFILES:
             raise ValueError('unsupported blur arithmetic profile')
         from field_math import SEPARATE_ARITHMETIC as separate_shader,APPLE_MIX_FMA
         if shader_arithmetic_profile not in (separate_shader,APPLE_MIX_FMA):
