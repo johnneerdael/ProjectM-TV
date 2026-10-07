@@ -15,6 +15,33 @@ SPEC.loader.exec_module(CAPTURE)
 
 
 class FailedCaptureRetention(unittest.TestCase):
+    def test_rejects_roles_that_escape_the_capture_directory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            binary = root / 'worker'
+            binary.write_bytes(b'worker identity')
+            preset = root / 'preset.milk'
+            preset.write_text('[preset00]\n')
+            textures = root / 'textures'
+            textures.mkdir()
+            work = root / 'capture'
+            workers = root / 'workers.json'
+            for index, role in enumerate(('../escaped', str(root / 'absolute'), 'without-0001', 'unknown')):
+                with self.subTest(role=role):
+                    work = root / ('capture-' + str(index))
+                    workers.write_text(json.dumps({role: {
+                        'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}}))
+                    argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
+                            '--textures', str(textures), '--device', 'emulator-5630',
+                            '--user', '0', '--work', str(work)]
+                    with patch.object(sys, 'argv', argv), patch.object(CAPTURE.subprocess, 'run') as run:
+                        with self.assertRaisesRegex(ValueError, 'Unsupported worker role'):
+                            CAPTURE.main()
+                        run.assert_not_called()
+                    self.assertFalse(work.exists())
+                    self.assertFalse((root / 'escaped').exists())
+                    self.assertFalse((root / 'absolute').exists())
+
     def run_failed_worker(self, missing_manifest=False):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

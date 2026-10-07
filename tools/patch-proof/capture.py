@@ -76,6 +76,10 @@ def main() -> None:
     if args.texture_journey and (not (textures / 'a').is_dir() or not (textures / 'b').is_dir()):
         parser.error('--texture-journey requires a and b directories under --textures')
     workers = json.loads(args.workers.read_text())
+    supported_roles = {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
+    for role in workers:
+        if role not in supported_roles:
+            raise ValueError('Unsupported worker role: ' + role)
     for identity in workers.values():
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary identity changed')
