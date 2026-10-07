@@ -1,0 +1,5 @@
+s_glBindAttribLocation: bind attrib 0 name position
+s_glBindAttribLocation: bind attrib 1 name color
+s_glBindAttribLocation: bind attrib 2 name localCoord
+PASS: Advanced D-pad upload, rendered QR decoding, 50,000 presets plus uploaded PNG rendering/replacement, rendering during import, nested .MILK, ignored files, All inclusion, scored exclusions, Random/Previous, replacement, invalid ZIP preservation, persisted Custom, closed listener. Large import including ZIP generation: 12929 ms
+

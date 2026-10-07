@@ -145,8 +145,13 @@ final class CustomPackSetupTest {
             if (!qrOnly) check(bundled == 9606, "test must start with a fresh app, found " + bundled);
             int[] scored = {ProjectMJNI.getCategoryPresetCount("chill"), ProjectMJNI.getCategoryPresetCount("normal"), ProjectMJNI.getCategoryPresetCount("intense")};
             Activity target = activity;
+            // A phone-image GPU emulator can retain touch mode; establish the TV
+            // keyboard input mode before asserting the remote navigation journey.
+            test.setInTouchMode(false);
+            test.waitForIdleSync();
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
-            test.runOnMainSync(() -> target.findViewById(R.id.row_advanced).requestFocus());
+            test.runOnMainSync(() -> check(target.findViewById(R.id.row_advanced).requestFocus(),
+                    "Advanced row did not accept D-pad focus"));
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_CENTER);
             test.runOnMainSync(() -> {
                 View row = target.findViewById(R.id.row_custom_pack);
