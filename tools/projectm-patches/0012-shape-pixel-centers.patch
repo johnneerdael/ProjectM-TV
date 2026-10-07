@@ -1,0 +1,82 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Align custom shapes with MilkDrop 2's D3D9 pixel centres
+
+MilkDrop 2 DrawCustomShapes uses the unchanged x*2-1/y*-2+1 geometry
+and an orthographic projection with no position bias (milkdrop2 commit
+f05b0d811a87a17c4624170c26c93bac39b05bde, milkdropfs.cpp and support.cpp).
+D3D9 samples integer pixel centres; OpenGL/GLES samples half-integers.
+Copying just the coordinates loses subpixel shapes on integer positions.
+
+Translate fills and borders by a half destination pixel during each draw
+pass. Use each actual authored/native target's dimensions, preserve evaluated
+geometry and texture UVs, and restore the shared shader matrices afterwards.
+
+Reference: https://learn.microsoft.com/en-us/windows/win32/direct3d9/rasterization-rules
+Regression: a rad=.002 shape at (.5,.5) produces no pixels before this
+patch, instead of the single pixel selected by the D3D9 rule. Test both
+textured/untextured geometry, two viewport sizes and repeated draws.
+
+--- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+@@ -343,6 +343,17 @@
+     auto untexturedShader = m_presetState.untexturedShader.lock();
+     auto texturedShader = m_presetState.texturedShader.lock();
+     const auto& context=m_presetState.renderContext;
++    // MilkDrop 2's D3D9 viewport samples integer pixel centres. GLES/OpenGL
++    // samples half-integers; move the geometry by half a destination pixel.
++    // Y is flipped by orthogonalProjection and by the GL framebuffer convention.
++    const auto shapeProjection = context.viewportSizeX > 0 && context.viewportSizeY > 0
++        ? glm::translate(PresetState::orthogonalProjection,
++                         glm::vec3(1.0f / context.viewportSizeX, 1.0f / context.viewportSizeY, 0.0f))
++        : PresetState::orthogonalProjection;
++    untexturedShader->Bind();
++    untexturedShader->SetUniformMat4x4("vertex_transformation", shapeProjection);
++    texturedShader->Bind();
++    texturedShader->SetUniformMat4x4("vertex_transformation", shapeProjection);
+     const float scale=LineScale(context.viewportSizeX,context.viewportSizeY,
+                                 context.lineReferenceWidth,context.lineReferenceHeight);
+     const bool quadBorders=nativePass ? scale>0 && m_presetState.lineRenderer.Usable() : m_quadBorders;
+@@ -366,7 +377,7 @@
+             if (!m_texturedShaderReady)
+             {
+                 m_texturedShaderReady = true;
+-                texturedShader->SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
++                texturedShader->SetUniformMat4x4("vertex_transformation", shapeProjection);
+                 texturedShader->SetUniformInt("texture_sampler", 0);
+             }
+ 
+@@ -408,7 +419,7 @@
+             auto& lines = m_presetState.lineRenderer;
+             if (!m_linesBegun)
+             {
+-                lines.Begin(PresetState::orthogonalProjection, m_presetState.renderContext);
++                lines.Begin(shapeProjection, m_presetState.renderContext);
+                 m_linesBegun = true;
+             }
+             lines.Draw(draw.borderStrip, style);
+@@ -431,11 +442,11 @@
+                     const auto translation=glm::vec3(dx[iteration]*(1-sourceScale)/context.viewportSizeX,
+                                                      dy[iteration]*(1-sourceScale)/context.viewportSizeY,0);
+                     untexturedShader->SetUniformMat4x4("vertex_transformation",
+-                        glm::translate(PresetState::orthogonalProjection,translation));
++                        glm::translate(shapeProjection,translation));
+                 }
+                 glDrawArrays(GL_LINE_LOOP, draw.borderFirst + iteration * draw.sides, draw.sides);
+             }
+-            if (nativePass) untexturedShader->SetUniformMat4x4("vertex_transformation",PresetState::orthogonalProjection);
++            if (nativePass) untexturedShader->SetUniformMat4x4("vertex_transformation",shapeProjection);
+         }
+     }
+ 
+@@ -444,6 +455,11 @@
+         m_presetState.lineRenderer.End();
+         m_linesBegun = false;
+     }
++    // Both shaders are shared with other geometry effects.
++    untexturedShader->Bind();
++    untexturedShader->SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
++    texturedShader->Bind();
++    texturedShader->SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjection);
+ }
+ 
+ } // namespace MilkdropPreset

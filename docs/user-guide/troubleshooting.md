@@ -90,3 +90,10 @@ Large finite rotation values such as `rot=10000000` now use CPU-computed sine an
 cosine. This prevents feedback collapsing to one point on the observed driver,
 without editing the preset. It follows MilkDrop 2's rotation calculation; other
 shader trigonometry and nonfinite rotation remain outside this correction.
+
+Tiny custom shapes now use MilkDrop 2's pixel alignment. This restores samples that
+were lost when D3D9 positions fell between GLES pixel centres, without enlarging
+shapes or changing their colours. Very small shapes can still be sparse, and a
+custom composite can deliberately suppress their brightness. A short, low-resolution
+capture from a fresh start can differ substantially from playback with existing
+feedback. Include the preset name, render size and playback duration in picture reports.

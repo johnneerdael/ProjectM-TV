@@ -16,6 +16,10 @@ Main publishing runs queue instead of canceling previous builds. Obsolete PR val
 
 CI fetches full tag history and rejects conflicting tags, inconsistent retry metadata and invalid Android codes. An older retry does not replace a newer release as latest. Missing release signing fails a publishing build; PR artifacts may use a temporary debug key.
 
+Preset Lab also retains full Git history with `filter: blob:none`: its core-corpus
+transformation controls read the historical baseline source with `git show`. A
+shallow checkout fails those controls before native validation and blocks publication.
+
 ## Review gate
 
 A ready, mergeable PR targeting `main` needs approval for its **latest head commit**.

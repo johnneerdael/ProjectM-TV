@@ -1,0 +1,645 @@
+{
+  "ci_run": 37639894403,
+  "ci_sha": "8dfa0f186382e0a0e8636840a9f82d39160de2c9",
+  "baseline_aar_sha256": "941108bb16279cb77a3b4db430ef4befcfe9706abbc87afe87745d53e3424e3a",
+  "candidate_aar_sha256": "c92a2db507b998b2342203fcf77988d28f1bbea50f0a71c9fe89e7c9ef8db261",
+  "audio_sha256": "0640617ef6dcdf81f9af180ebb827c88ae8d570ec0abc96bf6f52f00bcab488c",
+  "audio_scope": "Frozen one-second transport for 30-frame checks; repeated 30 times for 900-frame controls. Raw PCM remains untracked.",
+  "sources": {
+    "milkdrop2": "f05b0d811a87a17c4624170c26c93bac39b05bde",
+    "projectm-visualizer.org": "a7036b8f90046513dd2dc0be09a99879f0556cd9"
+  },
+  "short_captures": {
+    "original-06": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+        "frames": 30,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "rgb_sha256": "47d69645c3056a71906fa1666ce4dfa1d660e31e5dfa4ddc14e9d178c879287c",
+      "max_rgb8": 42,
+      "mean_rgb8": 0.0012644073109567902
+    },
+    "raw-06": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "predictor dark06 raw feedback control.milk",
+        "frames": 30,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "rgb_sha256": "f27394844cabf1431b96d6c2d917ca9d5ebe8b25ea97f7123e09bb9b5f7d4629",
+      "max_rgb8": 52,
+      "mean_rgb8": 0.0021303530092592594
+    },
+    "candidate-06": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+        "frames": 30,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "rgb_sha256": "ca53a6d53dd495d1ff91c702cedd62479fea4d5a22737059dc5bf93657f50f16",
+      "max_rgb8": 105,
+      "mean_rgb8": 0.003301926601080247
+    },
+    "original-10": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "suksma - ed geining hateops - flx evil.milk",
+        "frames": 30,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "rgb_sha256": "96df1f89bd2a666bf1bcd29efd22dc3992473ca4823e4d06f62bdb00530208e0",
+      "max_rgb8": 8,
+      "mean_rgb8": 0.00099585262345679
+    },
+    "raw-10": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "predictor dark10 raw feedback control.milk",
+        "frames": 30,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "rgb_sha256": "5f8d789e74e231609bc3fafe262195b7fd8941b453778e934b8c669c8ecef860",
+      "max_rgb8": 254,
+      "mean_rgb8": 7.3311595775462965
+    },
+    "candidate-10": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "suksma - ed geining hateops - flx evil.milk",
+        "frames": 30,
+        "width": 256,
+        "height": 144,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "rgb_sha256": "072bd0e35f4aedf66d0ad4aa8b1f8b522f7eca2d00b0fb2aa774c595a60c5e0e",
+      "max_rgb8": 8,
+      "mean_rgb8": 0.0009895230516975308
+    }
+  },
+  "long_baseline_captures": {
+    "long-06-1080-cold": {
+      "all_frames": 900,
+      "target_named_frames": 900,
+      "max_rgb8": 253,
+      "mean_rgb8": 0.020889003200731594,
+      "max_visible_pixels_gt16": 18493,
+      "stats_sha256": "bdbf540b0de088b5f2c49b7deef548d7efe32c8dfb4d550026b06db774893634"
+    },
+    "long-06-1080-history": {
+      "all_frames": 900,
+      "target_named_frames": 839,
+      "max_rgb8": 253,
+      "mean_rgb8": 0.2618113069552966,
+      "max_visible_pixels_gt16": 1935608,
+      "stats_sha256": "7cbdefb96b6d68e0f01d50574d5243d1dc1c312c94bf03175cc8af88da34a6b3"
+    },
+    "long-06-144-cold": {
+      "all_frames": 900,
+      "target_named_frames": 900,
+      "max_rgb8": 214,
+      "mean_rgb8": 0.01839236914866255,
+      "max_visible_pixels_gt16": 429,
+      "stats_sha256": "f4e2cacff40191f09a21411770a2619295f7d4fadaa3c6d42e26669d7f67c0f4"
+    },
+    "long-06-144-history": {
+      "all_frames": 900,
+      "target_named_frames": 839,
+      "max_rgb8": 218,
+      "mean_rgb8": 0.25265900211892467,
+      "max_visible_pixels_gt16": 34596,
+      "stats_sha256": "6a45c007c6917575cbe5a0f16560e3eac11e97a6dbbf866dc57b56ce7f6a6858"
+    },
+    "long-10-1080-cold": {
+      "all_frames": 900,
+      "target_named_frames": 900,
+      "max_rgb8": 122,
+      "mean_rgb8": 1.0802044372642319,
+      "max_visible_pixels_gt16": 197013,
+      "stats_sha256": "e584390f2ac1e0f5a519cd7604587ba219499e1eb6ca4e95c591b4c7cf46de2f"
+    },
+    "long-10-1080-history": {
+      "all_frames": 900,
+      "target_named_frames": 839,
+      "max_rgb8": 153,
+      "mean_rgb8": 12.829997539876985,
+      "max_visible_pixels_gt16": 2000355,
+      "stats_sha256": "372bf476c18a5b161cbb84e60fbe7f051b483f9fc65578bab34cf136673c7f52"
+    },
+    "long-10-144-cold": {
+      "all_frames": 900,
+      "target_named_frames": 900,
+      "max_rgb8": 128,
+      "mean_rgb8": 0.6693575685603138,
+      "max_visible_pixels_gt16": 3721,
+      "stats_sha256": "8f9282192fd6294a94313dfb9433317c47335398e1fd482157f66b7dba5ce867"
+    },
+    "long-10-144-history": {
+      "all_frames": 900,
+      "target_named_frames": 839,
+      "max_rgb8": 153,
+      "mean_rgb8": 10.478884406349325,
+      "max_visible_pixels_gt16": 35683,
+      "stats_sha256": "f51cca0cecc2cbc5b4e1ab25b398c3b51db6fb05b2bf0235c2d3251575b1a744"
+    }
+  },
+  "constant_composite_controls": [
+    {
+      "case": "white-zero-q12",
+      "input_rgb": [
+        1,
+        1,
+        1
+      ],
+      "q12": 0,
+      "expected_rgb8": [
+        153.0,
+        51.0,
+        51.0
+      ],
+      "actual_unique_rgb8": [
+        [
+          153
+        ],
+        [
+          51
+        ],
+        [
+          51
+        ]
+      ],
+      "passes": true,
+      "source_comp_sha256": "2fa9112d8525e8ea66ced61ae915b1d6b08dbbf1aaba3f37f17c61f215ca4ab1"
+    },
+    {
+      "case": "quarter-red",
+      "input_rgb": [
+        0.25,
+        0.75,
+        1
+      ],
+      "q12": 0,
+      "expected_rgb8": [
+        0.607086541375489,
+        1.8023375745376964,
+        3.2125490196078426
+      ],
+      "actual_unique_rgb8": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "passes": true,
+      "source_comp_sha256": "2fa9112d8525e8ea66ced61ae915b1d6b08dbbf1aaba3f37f17c61f215ca4ab1"
+    },
+    {
+      "case": "zero-red",
+      "input_rgb": [
+        0,
+        1,
+        1
+      ],
+      "q12": 0,
+      "expected_rgb8": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "actual_unique_rgb8": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "passes": true,
+      "source_comp_sha256": "2fa9112d8525e8ea66ced61ae915b1d6b08dbbf1aaba3f37f17c61f215ca4ab1"
+    },
+    {
+      "case": "weak-red",
+      "input_rgb": [
+        0.1,
+        1,
+        1
+      ],
+      "q12": 0,
+      "expected_rgb8": [
+        0.016535757740235656,
+        0.5301960784313725,
+        0.5301960784313725
+      ],
+      "actual_unique_rgb8": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "passes": true,
+      "source_comp_sha256": "2fa9112d8525e8ea66ced61ae915b1d6b08dbbf1aaba3f37f17c61f215ca4ab1"
+    },
+    {
+      "case": "white-one-q12",
+      "input_rgb": [
+        1,
+        1,
+        1
+      ],
+      "q12": 1,
+      "expected_rgb8": [
+        255,
+        255,
+        255
+      ],
+      "actual_unique_rgb8": [
+        [
+          255
+        ],
+        [
+          255
+        ],
+        [
+          255
+        ]
+      ],
+      "passes": true,
+      "source_comp_sha256": "2fa9112d8525e8ea66ced61ae915b1d6b08dbbf1aaba3f37f17c61f215ca4ab1"
+    }
+  ],
+  "native_coverage_control": {
+    "before_patch": "256x144 textured=0 integer-centre=1 pixels=0; expected one, failed",
+    "after_patch": "Textured/untextured, integer/half-integer positions, two sizes, repeated draws and shared projection restore pass."
+  },
+  "tv_captures": {
+    "tv-baseline-06": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+        "frames": 30,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "renderer": "Mali-G52",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+        "gl_vendor": "ARM",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 188,
+      "mean_rgb8": 0.0011422593021262002,
+      "frame30_rgba_sha256": "e8a6fab4690f948eb3313f4dfd67db0f92d661b975fb16b2721a92730fa9b2ad",
+      "invocation": {
+        "command": "env CLASSPATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/classes.dex LD_PRELOAD=/data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so DARK_WIDTH=1920 DARK_HEIGHT=1080 PROJECTMTV_TEST_RANDOM_SEED=12345 PROJECTMTV_TEST_CORE_PATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline.so PROJECTMTV_TEST_RANDOM_LOG=/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-06.random.jsonl /system/bin/app_process -Djava.library.path=/data/local/tmp/projectmtv-dark-presets-20261007-0610 /system/bin nl.neerdael.projectm.analysis.CoreBackendRunner /data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline.so '/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline.aar|/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-06-selection.apk' /data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-06-work /data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-06 /data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so /data/local/tmp/projectmtv-dark-presets-20261007-0610/transport30.f32 30",
+        "wall_seconds": 7.300289869308472,
+        "aar_sha256": "941108bb16279cb77a3b4db430ef4befcfe9706abbc87afe87745d53e3424e3a",
+        "clock_sha256": "ba663b51fc5b2a4bad7a8f62b1e00b3df3d0f37adc8286b1d12c591c04491586",
+        "dex_sha256": "a0779ccfb2a8975e0c34e4b298cd1f7b5ae2d17af8aebf651523cd68f0e8daa2"
+      }
+    },
+    "tv-baseline-10": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "suksma - ed geining hateops - flx evil.milk",
+        "frames": 30,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "renderer": "Mali-G52",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+        "gl_vendor": "ARM",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 5,
+      "mean_rgb8": 0.0010757566015089162,
+      "frame30_rgba_sha256": "3fbf8cb039b1001b3a7c21050f001cb30052d288acffd8a77109fd18beb9e128",
+      "invocation": {
+        "command": "env CLASSPATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/classes.dex LD_PRELOAD=/data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so DARK_WIDTH=1920 DARK_HEIGHT=1080 PROJECTMTV_TEST_RANDOM_SEED=12345 PROJECTMTV_TEST_CORE_PATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline.so PROJECTMTV_TEST_RANDOM_LOG=/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-10.random.jsonl /system/bin/app_process -Djava.library.path=/data/local/tmp/projectmtv-dark-presets-20261007-0610 /system/bin nl.neerdael.projectm.analysis.CoreBackendRunner /data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline.so '/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline.aar|/data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-10-selection.apk' /data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-10-work /data/local/tmp/projectmtv-dark-presets-20261007-0610/baseline-10 /data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so /data/local/tmp/projectmtv-dark-presets-20261007-0610/transport30.f32 30",
+        "wall_seconds": 6.885340929031372,
+        "aar_sha256": "941108bb16279cb77a3b4db430ef4befcfe9706abbc87afe87745d53e3424e3a",
+        "clock_sha256": "ba663b51fc5b2a4bad7a8f62b1e00b3df3d0f37adc8286b1d12c591c04491586",
+        "dex_sha256": "a0779ccfb2a8975e0c34e4b298cd1f7b5ae2d17af8aebf651523cd68f0e8daa2"
+      }
+    },
+    "tv-candidate-06": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+        "frames": 30,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "renderer": "Mali-G52",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+        "gl_vendor": "ARM",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 235,
+      "mean_rgb8": 0.0012412712191358026,
+      "frame30_rgba_sha256": "f18061b1b55ea912e2211a57d55b29d2a43b0455afd201b4533d089c7312442a",
+      "invocation": {
+        "command": "env CLASSPATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/classes.dex LD_PRELOAD=/data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so DARK_WIDTH=1920 DARK_HEIGHT=1080 PROJECTMTV_TEST_RANDOM_SEED=12345 PROJECTMTV_TEST_CORE_PATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate.so PROJECTMTV_TEST_RANDOM_LOG=/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-06.random.jsonl /system/bin/app_process -Djava.library.path=/data/local/tmp/projectmtv-dark-presets-20261007-0610 /system/bin nl.neerdael.projectm.analysis.CoreBackendRunner /data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate.so '/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate.aar|/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-06-selection.apk' /data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-06-work /data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-06 /data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so /data/local/tmp/projectmtv-dark-presets-20261007-0610/transport30.f32 30",
+        "wall_seconds": 7.23673415184021,
+        "aar_sha256": "c92a2db507b998b2342203fcf77988d28f1bbea50f0a71c9fe89e7c9ef8db261",
+        "clock_sha256": "ba663b51fc5b2a4bad7a8f62b1e00b3df3d0f37adc8286b1d12c591c04491586",
+        "dex_sha256": "a0779ccfb2a8975e0c34e4b298cd1f7b5ae2d17af8aebf651523cd68f0e8daa2"
+      }
+    },
+    "tv-candidate-10": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "suksma - ed geining hateops - flx evil.milk",
+        "frames": 30,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "renderer": "Mali-G52",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+        "gl_vendor": "ARM",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 5,
+      "mean_rgb8": 0.001082497427983539,
+      "frame30_rgba_sha256": "b9a1aa0ed0fa39d442c74dfe792ec93066805a9f8b89025b4b4dfab05c55f44b",
+      "invocation": {
+        "command": "env CLASSPATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/classes.dex LD_PRELOAD=/data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so DARK_WIDTH=1920 DARK_HEIGHT=1080 PROJECTMTV_TEST_RANDOM_SEED=12345 PROJECTMTV_TEST_CORE_PATH=/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate.so PROJECTMTV_TEST_RANDOM_LOG=/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-10.random.jsonl /system/bin/app_process -Djava.library.path=/data/local/tmp/projectmtv-dark-presets-20261007-0610 /system/bin nl.neerdael.projectm.analysis.CoreBackendRunner /data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate.so '/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate.aar|/data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-10-selection.apk' /data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-10-work /data/local/tmp/projectmtv-dark-presets-20261007-0610/candidate-10 /data/local/tmp/projectmtv-dark-presets-20261007-0610/libbackendclock.so /data/local/tmp/projectmtv-dark-presets-20261007-0610/transport30.f32 30",
+        "wall_seconds": 7.280449151992798,
+        "aar_sha256": "c92a2db507b998b2342203fcf77988d28f1bbea50f0a71c9fe89e7c9ef8db261",
+        "clock_sha256": "ba663b51fc5b2a4bad7a8f62b1e00b3df3d0f37adc8286b1d12c591c04491586",
+        "dex_sha256": "a0779ccfb2a8975e0c34e4b298cd1f7b5ae2d17af8aebf651523cd68f0e8daa2"
+      }
+    }
+  },
+  "native_trails_captures": {
+    "baseline": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+        "frames": 30,
+        "width": 2560,
+        "height": 1440,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 208,
+      "mean_rgb8": 0.001307300708912037,
+      "frame30_rgba_sha256": "34e4a2e241ed98b80894bf392c95a8681878d2b6d1e051db6bffb682e07f8fe4"
+    },
+    "candidate": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+        "frames": 30,
+        "width": 2560,
+        "height": 1440,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 222,
+      "mean_rgb8": 0.001252809124228395,
+      "frame30_rgba_sha256": "b31110e28e28437b34d9736c42bcaadf25d9358fcbb6e97ddedaff07feaef5b2"
+    }
+  },
+  "ci_history_control": {
+    "baseline": "5681852f9497f320e57b8a5dd40c076d0f5a6b18",
+    "source": "core/src/main/cpp/native-lib.cpp",
+    "shallow_exit": 128,
+    "shallow_stderr": "fatal: path 'core/src/main/cpp/native-lib.cpp' does not exist in '5681852f9497f320e57b8a5dd40c076d0f5a6b18'\n",
+    "full_history_filtered_exit": 0,
+    "source_sha256": "3172d17e20019cb1b34e634f108edc3b669e5a663c18d843f32abac5f15603a6"
+  }
+}
