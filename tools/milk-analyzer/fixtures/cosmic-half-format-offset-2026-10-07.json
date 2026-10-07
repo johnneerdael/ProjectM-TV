@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "scope": "Cosmicoperationalhalf-formatdiscriminators,noAAR/randomcredit",
+  "rgba16_vs_rg16": {
+    "matches": 256,
+    "count": 256,
+    "scope": "Halfchannel-formatonly,noexactmathqualification"
+  },
+  "offset_half_map": {
+    "fixed8nearest_matches": 256,
+    "count": 256,
+    "scope": "Offsetoperationalmapmodeldiscriminator,no exactqualification"
+  },
+  "disposition": "Channelcountdoesnotexplain RG16rounding; offsetmapmatch isbounded/effectsofrenarrowingretained; no exactruleaccepted",
+  "artifacts": {
+    "cosmic-operational-rgba16": {
+      "CosmicRgbaHalfProbe.java": "5923935b21e9602eef8ec15405794669a4c7d6bda153aa94249991a3ca3d5acc",
+      "texture.rgba.f32": "36dae8f02f100922a730168141312c07eb347850af3024c179b72bb5d11314c5",
+      "comparison.json": "ef8d4426f05cb7ea028dba5bdfefeef337d7748aad0b8d6f9d68ac9ffe3ce702",
+      "stdout.json": "fb25aee823a161d704367a715ca6e4f8b7801b098bb03bbe39a52584d2a240a3",
+      "freeze.json": "3f52c88fc711eab49475247d678db36eb381b4f62972ebc9d1830df5bee1f169"
+    },
+    "cosmic-operational-offset": {
+      "comparison.json": "dfed9fae6d007a65eff735c4543b0d71ef69e97782a35c4db37ecd5b27837169",
+      "texture.rg.f32": "a5be4ebba6006faf9b05e3bb1fd1495fd4b966dce8e051c08dd8bef24ad3f919",
+      "stdout.json": "1e1155e8df50db7689d98ab228d75e7cd199c3728ab16e3af766aa3d82225120",
+      "CosmicOffsetProbe.java": "0f4f391ab424ea52d2c7beb7b1443a548a76e29c019e69177cb53249e269622b",
+      "freeze.json": "01a723c67cec2d36da8e4d41569e6a314820e62b71725aaf7f0e44a53aa45a90"
+    }
+  },
+  "randomized_credit": 0
+}
