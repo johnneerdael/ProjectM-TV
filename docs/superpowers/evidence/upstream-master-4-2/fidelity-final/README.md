@@ -2,7 +2,7 @@
 
 Validated 2026-10-07 on the task-owned API34 ARM64 Android emulator with Apple M4 Pro host GPU acceleration, GLES 3.0 / GLSL ES 3.00. The user explicitly waived physical-TV validation for this migration. This is one backend's coverage, not a universal device or performance claim.
 
-The baseline is the unchanged published **ProjectM-TV v2.3.15 AAR**, SHA256 `fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327`, verified against the release digest/checksums, source `43023889ec38cf1250f3bfcaaf079a840acbdf76`, all 49 historical patches and the complete asset catalog. It is not stock libprojectM. Candidate renderer source is `c3872be3fec33318265172b5b41972aa9571efb7`, upstream `6f64807467e312034883a4389e6aa80a675458bc`, evaluator `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a`, with nine compatibility patches. Later task commits change documentation/evidence only.
+The baseline is the unchanged published **ProjectM-TV v2.3.15 AAR**, SHA256 `fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327`, verified against the release digest/checksums, source `43023889ec38cf1250f3bfcaaf079a840acbdf76`, all 49 historical patches and the complete asset catalog. It is not stock libprojectM. Candidate renderer source is `c3872be3fec33318265172b5b41972aa9571efb7`, upstream `6f64807467e312034883a4389e6aa80a675458bc`, evaluator `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a`, with nine compatibility patches. Later task commits change documentation/evidence and historical comparison orchestration; production renderer files remain unchanged.
 
 ## Scope and results
 

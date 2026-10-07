@@ -108,6 +108,7 @@ def main():
                                       "role": role, "repeat": repeat})
                         directory = work / "jobs" / key
                         require_session(args.device, user_id, helpers)
+                        cached = (directory / "manifest.json").exists()
                         manifest = trails.render(args.device, identity,
                             trails.request(preset, width, height, 1024, 768, 0), directory, audio,
                             protocol["presets"][preset], user_id)
@@ -124,7 +125,8 @@ def main():
                         rows.append(row)
                         trails.write(work / "progress.json", {"protocol_sha256": digest(protocol), "rows": rows})
                         print(preset, label, role, repeat, "verified", flush=True)
-                        completed += 1
+                        if not cached:
+                            completed += 1
                         if args.limit and completed >= args.limit:
                             return
 
