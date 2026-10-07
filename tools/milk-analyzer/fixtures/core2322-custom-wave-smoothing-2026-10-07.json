@@ -1,0 +1,64 @@
+{
+  "scope": "Read-only published2322 pre-GPU smoothed-point output; no preset scoring",
+  "source_projection_corrected_for_actualinverse_aspect": true,
+  "results": [
+    {
+      "repeat": 0,
+      "matched_draws": 30,
+      "all_points_exact": true,
+      "buffers_sha256": "386644ed58a3184cb59802cd2a2b7c8644151f0f6d03f65d705c4091008da608"
+    },
+    {
+      "repeat": 1,
+      "matched_draws": 30,
+      "all_points_exact": true,
+      "buffers_sha256": "919c989e0ef981f5e3d49444bb0a3eaccd16294aa92af9ed7845f8f83b55cfd5"
+    }
+  ],
+  "observer_noninvasiveness": [
+    {
+      "repeat": 0,
+      "pixels_sha256": "917dd173f914f01a5b6023d13cad5fa2de148882d0febae10bb21b30dbc8220a",
+      "exact": true
+    },
+    {
+      "repeat": 1,
+      "pixels_sha256": "917dd173f914f01a5b6023d13cad5fa2de148882d0febae10bb21b30dbc8220a",
+      "exact": true
+    }
+  ],
+  "observer_sha256": "4612365945d3f3e30d0a2f5879e0f0c0dc4d225b88d58dc0846bf4bc823ba4ef",
+  "observer_source_sha256": "e4d507a2c9e42d9b81087c56f1363f0ecbd28f85cf5ccea6380c63e6902174c2",
+  "aar_sha256": "c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65",
+  "predicted_preprojection_points": [
+    [
+      0.4984227418899536,
+      1.6816262006759644
+    ],
+    [
+      0.498447060585022,
+      1.6791709661483765
+    ],
+    [
+      0.4984927177429199,
+      1.675864577293396
+    ],
+    [
+      0.49857017397880554,
+      1.6730352640151978
+    ],
+    [
+      0.49863505363464355,
+      1.6701881885528564
+    ],
+    [
+      0.4986386001110077,
+      1.6668212413787842
+    ],
+    [
+      0.498620867729187,
+      1.6643059253692627
+    ]
+  ],
+  "projection": "NativeorthogonalProjection subsequentlyinvertsY; recordedbufferXYarenotclipcoords"
+}

@@ -168,3 +168,77 @@ def test_core2322_audio_uses_its_own_cold_policy(tmp_path,qualified_core2322_ada
     request.write_text(json.dumps(base));process=subprocess.run([str(qualified_core2322_adapters/'milk-audio-inputs'),str(request)],capture_output=True,text=True)
     assert process.returncode==0,process.stderr
     assert json.loads(output.read_text())['preset_progress_policy']=='projectmtv-core-2.3.22-cold-jni-v1'
+
+
+def test_core2322_smoothing_profile_is_admitted_for_matching_context(tmp_path,qualified_core2322_adapters):
+    import forecast
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nfWaveAlpha=0\n')
+    source=forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')
+    domain=dict(width=256,height=144,mesh_x=48,mesh_y=32,profile='gles300',
+        initial_rgba=[0]*4,hue_offsets=[0]*4,equation_seed=0x4141f00d,blur_levels=0,quantize=True,
+        custom_wave_smoothing_profile='float32-fma-first-v1')
+    # A missing audio report must be the next guard, not rejection of the qualified smoothing policy.
+    with pytest.raises(ValueError,match='source-generated nonempty audio'):
+        forecast.forecast_source(source,audio={},binaries=qualified_core2322_adapters,
+                                  domain=domain,compatibility={})
+
+
+def test_core2322_lowercase_settings_keep_shader_flags_and_decay(tmp_path,qualified_core2322_adapters):
+    import forecast
+    from stage_resolution import resolve_stages
+    from scene_equations import _scalar
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=3\nPSVERSION_COMP=0\n[preset00]\nfDecay=.42\nnWaveMode=6\nwarp_1=`shader_body {ret=.5;}\n')
+    source=forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')
+    assert _scalar(source['values'],'MILKDROP_PRESET_VERSION',100,'int')==201
+    assert _scalar(source['values'],'PSVERSION_WARP',2,'int')==3
+    assert _scalar(source['values'],'fDecay',.98,'float')==pytest.approx(.42,abs=1e-7)
+    assert _scalar(source['values'],'nWaveMode',0,'int')==6
+    stages=resolve_stages(source,profile='gles300',compatibility={})
+    assert stages['warp']['shader_version']==3 and stages['warp']['kind']=='unknown'
+    assert stages['composite']['shader_version']==0
+
+
+def test_native_setting_lookup_policy_survives_json_reload(tmp_path,qualified_core2322_adapters):
+    import forecast
+    from scene_equations import CaseInsensitiveSettings,_scalar
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=3\n[preset00]\nfDecay=.42\n')
+    source=forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')
+    restored=json.loads(json.dumps(source))
+    normalized=forecast.source_settings(restored)
+    assert isinstance(normalized,CaseInsensitiveSettings)
+    assert _scalar(normalized,'fDecay',.98,'float')==pytest.approx(.42,abs=1e-7)
+    assert set(normalized)==set(restored['values'])
+
+def test_case_sensitive_historical_settings_do_not_gain_new_fallback():
+    import forecast
+    from scene_equations import _scalar
+    values=forecast.source_settings({'values':{'fdecay':'.42'},'parser_inputs':{}})
+    assert _scalar(values,'fDecay',.98,'float')==pytest.approx(.98,abs=1e-7)
+
+
+def test_reloaded_settings_reach_public_stage_resolution(tmp_path,qualified_core2322_adapters):
+    import forecast
+    from stage_resolution import resolve_stages
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=3\nPSVERSION_COMP=0\n[preset00]\nwarp_1=`shader_body {ret=.5;}\n')
+    source=json.loads(json.dumps(forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')))
+    stages=resolve_stages(source,profile='gles300',compatibility={})
+    assert stages['warp']['shader_version']==3 and stages['warp']['kind']=='unknown'
+
+def test_reloaded_settings_reach_public_scene_execution(tmp_path,qualified_core2322_adapters):
+    import forecast
+    from scene_equations import execute_scene
+    path=tmp_path/'fixture.milk';path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nfDecay=.42\nnWaveMode=6\n')
+    source=json.loads(json.dumps(forecast.read_source(path,reader=qualified_core2322_adapters/'milk-native-reader')))
+    frame=dict(time=1/30,frame=0,fps=35,progress=0,bass=1,mid=1,treb=1,bass_att=1,mid_att=1,treb_att=1)
+    scene=execute_scene(source,[frame],reader=qualified_core2322_adapters/'milk-native-reader',
+                        width=32,height=32,mesh_x=8,mesh_y=8)
+    assert scene['frames'][0]['main']['decay']==pytest.approx(.42,abs=1e-7)
+    assert scene['frames'][0]['main']['wave_mode']==6
+
+
+def test_unknown_explicit_setting_policy_does_not_silently_default():
+    import forecast
+    from engine_profiles import CORE_2322_ENGINE
+    with pytest.raises(ValueError,match='setting lookup policy'):
+        forecast.source_settings({'values':{'fdecay':'.42'},'parser_inputs':{
+            'engine':CORE_2322_ENGINE,'setting_lookup_policy':'unknown-v2'}})

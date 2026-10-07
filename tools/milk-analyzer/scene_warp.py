@@ -5,7 +5,7 @@ and triangle interpolation. Full drawing, shader uniforms and runtime precision
 remain separate requirements for a complete appearance prediction.
 """
 import numpy as np
-from scene_equations import WARP,_scalar
+from scene_equations import source_settings,WARP,_scalar
 from spatial import mesh_inputs,warp_vertex_uv,interpolate_mesh,PORTABLE_PROFILE
 
 
@@ -25,7 +25,7 @@ def warp_fields(source:dict,scene:dict,frame_index:int,*,numeric_profile=PORTABL
                             for name in WARP}
         except (TypeError,ValueError,KeyError) as error:
             raise ValueError('unresolved mesh equation value') from error
-        values=source['values']
+        values=source_settings(source)
         vertex_uv=warp_vertex_uv(mesh['position'],aspect_x=aspect_x,aspect_y=aspect_y,
                                  **parameters,time=frame['render_inputs']['time'],
                                  warp_anim_speed=_scalar(values,'fWarpAnimSpeed',1,'float'),

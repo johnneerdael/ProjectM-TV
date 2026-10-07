@@ -6,7 +6,7 @@ static draw flags. Hardware line/point coverage remains unresolved.
 import numpy as np
 import ctypes
 from functools import lru_cache
-from scene_equations import _scalar
+from scene_equations import source_settings,_scalar
 from primitives import colour_modulo
 
 DEFAULT_SMOOTHING='separate-float32-v1'
@@ -48,7 +48,7 @@ def smooth_position(points,*,profile=DEFAULT_SMOOTHING):
 def source_custom_waves(source,scene,*,smoothing_profile=DEFAULT_SMOOTHING):
     if smoothing_profile not in (DEFAULT_SMOOTHING,FMA_SMOOTHING):
         raise ValueError('unknown custom-wave smoothing profile')
-    width,height=scene['viewport'];values=source['values']
+    width,height=scene['viewport'];values=source_settings(source)
     ax=np.float32(min(1,width/height));ay=np.float32(min(1,height/width))
     inverse=np.array([np.float32(1)/ax,np.float32(1)/ay],dtype=np.float64)
     results=[]

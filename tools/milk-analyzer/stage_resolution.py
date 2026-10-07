@@ -1,7 +1,7 @@
 """Native stage selection from file settings and source-bound offline evidence."""
 import hashlib
 import re
-from scene_equations import _scalar
+from scene_equations import source_settings,_scalar
 
 
 def contains_sampler_state(value):
@@ -12,7 +12,7 @@ def contains_sampler_state(value):
 
 def resolve_stages(source:dict,*,profile:str,compatibility:dict)->dict:
     if profile not in {'glsl330','gles300'}:raise ValueError('explicit target profile required')
-    values=source['values'];version=_scalar(values,'MILKDROP_PRESET_VERSION',100,'int')
+    values=source_settings(source);version=_scalar(values,'MILKDROP_PRESET_VERSION',100,'int')
     result={'profile':profile,'native_driver_verified':False,'appearance_prediction_complete':False}
     for name,prefix in [('warp','warp_'),('composite','comp_')]:
         key='PSVERSION' if version==200 else 'PSVERSION_'+('WARP' if name=='warp' else 'COMP')

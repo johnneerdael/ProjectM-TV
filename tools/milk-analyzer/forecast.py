@@ -131,6 +131,9 @@ def model_file_hashes():
 _MODEL_IMPORT_HASHES=model_file_hashes()
 
 
+from scene_equations import source_settings
+
+
 def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
     path=Path(path);reader=Path(reader).resolve()
     raw=path.read_bytes()
@@ -146,6 +149,10 @@ def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
     if process.returncode:
         raise ValueError('source parser execution failed: '+process.stderr.strip())
     result=json.loads(process.stdout)
+    engine=result.get('parser_inputs',{}).get('engine',{})
+    if matches(engine,CORE_2321_ENGINE) or matches(engine,CORE_2322_ENGINE):
+        result['parser_inputs']['setting_lookup_policy']='native-case-insensitive-v1'
+        result['values']=source_settings(result)
     result.update(preset=path.name,preset_sha256=hashlib.sha256(raw).hexdigest(),reader_sha256=binary_sha)
     return result
 
@@ -157,6 +164,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if model_hashes!=_MODEL_IMPORT_HASHES:
         raise ValueError('forecast model files changed since import; start a fresh process')
     source=copy.deepcopy(source);audio=copy.deepcopy(audio);domain=copy.deepcopy(domain)
+    if 'values' in source:
+        source['values']=source_settings(source)
     compatibility=copy.deepcopy(compatibility)
     random_inputs=copy.deepcopy(random_inputs)
     noise_bank,materials=copy.deepcopy((noise_bank,materials))
@@ -250,8 +259,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     smoothing_profile=domain.get('custom_wave_smoothing_profile',DEFAULT_SMOOTHING)
     if smoothing_profile not in (DEFAULT_SMOOTHING,FMA_SMOOTHING):
         raise ValueError('unknown custom-wave smoothing profile')
-    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or not qualified_float_engine):
-        raise ValueError('fused custom-wave smoothing requires declared GLES core2.3.16/2.3.17 context')
+    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or not (qualified_float_engine or matches(engine,CORE_2322_ENGINE))):
+        raise ValueError('fused custom-wave smoothing requires declared GLES and a qualified engine context')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
     hue = np.asarray(domain['hue_offsets'], dtype=np.float32)
     if colour.shape!=(4,) or not np.all(np.isfinite(colour)) or np.any((colour<0)|(colour>1)):

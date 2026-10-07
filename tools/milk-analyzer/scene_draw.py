@@ -7,7 +7,7 @@ unsupported material/motion stages remain limitations, not claimed equivalence.
 import numpy as np
 from primitives import draw_shape,shape_fan,draw_triangles,draw_borders,_finite,shape_centre_shift,LEGACY_SHAPE_CENTRES
 from line_points import draw_lines,draw_points
-from scene_equations import _scalar
+from scene_equations import source_settings,_scalar
 from quad_lines import PROFILE,draw_quad_lines
 
 
@@ -37,7 +37,7 @@ def _wave(target,wave,*,builtin=False,quantize=True,line_rendering_profile='cano
 
 
 def draw_source_scene(destination,source,frame,builtin_wave,custom_waves,*,quantize=True,shape_textures=None,shape_texture_aspects=None,motion_vectors_prewarped=False,line_rendering_profile='canonical-gl-lines-v1',point_subpixel_bits=None,triangle_subpixel_bits=None,shape_centre_policy=LEGACY_SHAPE_CENTRES):
-    target=_finite(destination,'framebuffer').copy();height,width=target.shape[:2];main=frame['main'];values=source['values']
+    target=_finite(destination,'framebuffer').copy();height,width=target.shape[:2];main=frame['main'];values=source_settings(source)
     if line_rendering_profile not in {'canonical-gl-lines-v1',PROFILE}:
         raise ValueError('unknown line rendering profile')
     from motion_vectors import motion_active

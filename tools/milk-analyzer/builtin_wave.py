@@ -10,7 +10,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 import numpy as np
-from scene_equations import _scalar
+from scene_equations import source_settings,_scalar
 from quad_lines import PROFILE
 from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2322_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
 from native_values import live_wave_mode,native_scalar
@@ -32,7 +32,7 @@ _CORE2310_ENGINE = {
 
 
 def _colour(source,main,frame,mode,alpha,width,height):
-    values=source['values'];base=np.float32(alpha);result=base
+    values=source_settings(source);base=np.float32(alpha);result=base
     largest=max(width,height)
     if mode in {2,5}:
         result*=np.float32(.07 if largest<=256 else .09 if largest<=512 else .11 if largest<=1024 else .13 if largest<=2048 else .15)
@@ -57,7 +57,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     binary=Path(binary).resolve()
     binary_sha=hashlib.sha256(Path(binary).read_bytes()).hexdigest()
     if len(scene['frames'])!=len(audio['frames']):raise ValueError('wave/audio frame schedule mismatch')
-    values=source['values'];width,height=scene['viewport']
+    values=source_settings(source);width,height=scene['viewport']
     engine=source.get('parser_inputs',{}).get('engine',{})
     control_policy=select_policy(engine,control_policy,current=CORE_2315_WAVE,legacy=LEGACY_WAVE)
     live=control_policy==CORE_2315_WAVE

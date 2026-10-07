@@ -1409,3 +1409,28 @@ integration tests pass; missing adapters/platform prerequisites explicitly skip
 without granting qualification. First-round source predictions, frozen claims
 and reference scores remain pending; the random streak is zero. See
 `fixtures/core2322-input-policy-qualification-2026-10-07.json`.
+
+The v2.3.22 custom-wave smoothing profile is numerically qualified at the native
+pre-projection upload boundary: seven smoothed points match exactly in each of
+60 diagnostic draws, with duplicated line endpoints kept explicit. The observer
+intercepts only the core's EGL provider lookups, serializes its record writes and
+forwards real driver calls. Failed helper attempts are retained. Observed and
+unobserved pixel streams match byte-for-byte. These are numerical smoothing
+controls, not appearance or randomized scoring credit. See
+`fixtures/core2322-custom-wave-smoothing-2026-10-07.json`.
+
+The first source-only round exposed native4.2 setting keys lowercased by the parser.
+An exact-engine parser policy now restores case-insensitive lookup without changing
+the raw payload; JSON reloads preserve that policy, and historical dictionaries
+retain their prior behavior. This fixes shader-version flags and scalar settings
+such as decay and wave mode. The invalid legacy-circle forecasts are archived and
+ungraded. No reference frames had been captured. The same three presets recompute
+with correct stages; see
+`fixtures/core42-setting-key-lookup-repair-2026-10-07.json`.
+
+Public stage, equation, waveform, warp, drawing and shader-pipeline entry points
+restore this setting contract after JSON reload. Unknown explicit policy names
+are rejected rather than silently using defaults. Published v2.3.23 was downloaded
+and verified byte-for-byte identical to v2.3.22 (AAR SHA256
+`c8b93297aa84e6e5c1e860b7ef136fb84deb1ef946c4f66dd1863f1bd9379d65`);
+its engine qualification therefore uses the same byte-bound policies.

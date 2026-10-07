@@ -1,0 +1,51 @@
+{
+  "scope": "Predictorcase-insensitive native4.2 setting repair; no referencecapture",
+  "original_symptom": "Lowercase parser settingkeys causeduppercaseversion/config lookups todefault, disabledauthoredshaders",
+  "repair": "Exact4.2parserflag pluscase-insensitive lookup wrapper; rawpayloadkeys unchanged; JSONreloadrestored; historicallookups unchanged",
+  "old_stage_selection": {
+    "preset01": [
+      "fixed_warp",
+      "legacy_composite"
+    ],
+    "preset02": [
+      "fixed_warp",
+      "legacy_composite"
+    ],
+    "preset03": [
+      "fixed_warp",
+      "legacy_composite"
+    ]
+  },
+  "new_stage_selection": {
+    "preset01": [
+      "custom_warp",
+      "custom_composite"
+    ],
+    "preset02": [
+      "fixed_warp",
+      "legacy_composite"
+    ],
+    "preset03": [
+      "fixed_warp",
+      "custom_composite"
+    ]
+  },
+  "failed_attempts_preserved": [
+    "attempt00-unadmitted-smoothing",
+    "attempt01-wrong-case-stage-selection"
+  ],
+  "reference_frames_seen": false,
+  "source_outputs": "All3recomputed30frames",
+  "guard_regression": "Initialearlymissing-values KeyErrorfixedbykeepingexistingprofile guardordering",
+  "score_credit": 0,
+  "public_consumer_followup": {
+    "root_cause": "JSON serialization replaces the dictionary subclass with a plain dictionary. Forecast normalization alone did not cover direct public stage, scene, warp, wave, drawing and pipeline entry points.",
+    "repair": "One source_settings accessor validates the declared policy and engine at each settings boundary; absent policy retains historical case-sensitive lookup; unknown explicit policy raises.",
+    "red_controls": [
+      "Warp shader version3 incorrectly read as0 after JSON reload",
+      "Decay .42 incorrectly read as .98 after JSON reload",
+      "Unknown explicit policy silently accepted"
+    ],
+    "status": "Resolved:1485tests+78subtests pass; strictMkDocs passes; independent review has no remaining findings"
+  }
+}

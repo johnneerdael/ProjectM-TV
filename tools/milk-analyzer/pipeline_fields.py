@@ -153,6 +153,7 @@ class SourcePipeline:
                     raise UnresolvedMath('native equation compilation rejected: '+prefix)
                 if selected['compile_status'] not in {'accepted','omitted'}:
                     raise UnresolvedMath('native equation compatibility unresolved: '+prefix)
+        from scene_equations import source_settings
         from stage_resolution import resolve_stages
         plan=resolve_stages(source,profile=profile,compatibility=compatibility)
         trees={}
@@ -165,7 +166,7 @@ class SourcePipeline:
                 trees[name]=section['tree']
             else:trees[name]=None
         pipeline=cls(trees['warp'],trees['composite'],composite_kind=plan['composite']['kind'],
-                     source_values=source['values'],language_extensions={
+                     source_values=source_settings(source),language_extensions={
                          name:source.get('sections',{}).get(prefix,{}).get('language_extensions',[])
                          for name,prefix in [('warp','warp_'),('composite','comp_')]},
                      native_samplers={name:compatibility[name]['request']['samplers']

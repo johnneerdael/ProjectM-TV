@@ -62,6 +62,27 @@ _LIBC.strtol.argtypes=[ctypes.c_char_p,ctypes.POINTER(ctypes.c_void_p),ctypes.c_
 _LIBC.strtol.restype=ctypes.c_long
 
 
+class CaseInsensitiveSettings(dict):
+    """Native 4.2 already-normalized keys, retaining the original parsed payload."""
+    def get(self,key,default=None):
+        return super().get(key.lower() if isinstance(key,str) else key,default)
+
+def source_settings(source):
+    """Restore the declared native lookup contract after JSON serialization."""
+    from engine_profiles import CORE_2321_ENGINE, CORE_2322_ENGINE, matches
+    inputs=source.get('parser_inputs',{})
+    if 'setting_lookup_policy' not in inputs:
+        return source['values']
+    if inputs['setting_lookup_policy']!='native-case-insensitive-v1':
+        raise ValueError('unknown setting lookup policy')
+    engine=inputs.get('engine',{})
+    if not (matches(engine,CORE_2321_ENGINE) or matches(engine,CORE_2322_ENGINE)):
+        raise ValueError('native setting lookup policy engine identity mismatch')
+    if any(not isinstance(key,str) or key!=key.lower() for key in source['values']):
+        raise ValueError('native lowercase setting payload required')
+    return CaseInsensitiveSettings(source['values'])
+
+
 def _scalar(values,key,default,kind):
     text=ctypes.create_string_buffer(str(values.get(key,default)).encode('utf-8'))
     end=ctypes.c_void_p()
@@ -133,7 +154,7 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
         raise ValueError('source equation reader identity mismatch')
     audio_frames=frames
     frames=[_frame_input(frame) for frame in frames]
-    values=source['values']
+    values=source_settings(source)
     for index in range(4):
         if _scalar(values,f'wavecode_{index}_enabled',0,'int'):
             for frame in audio_frames:
