@@ -142,7 +142,7 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
                             'Normalized x/y use fractions of viewport width/height, not physical distance']}
 
 
-def scene_geometry_features(scene):
+def scene_geometry_features(scene, *, max_derivative_samples=1_000_000):
     """Reuse evaluated custom-shape fan geometry; no scene rasterization.
 
     Shape index and physical draw ordinal identify components. EEL can overwrite
@@ -167,7 +167,7 @@ def scene_geometry_features(scene):
                 # from statistics to avoid counting that vertex twice.
                 components[key] = shape_fan(attributes, aspect_y=min(1, height/width))['positions'][:-1]
             yield {'time': frame['render_inputs']['time'], 'components': components}
-    result = trajectory_summary(rows())
+    result = trajectory_summary(rows(), max_derivative_samples=max_derivative_samples)
     result['frames_received'] = len(scene['frames'])
     result['geometry_scope'] = 'custom shape fan vertices'
     return result

@@ -924,3 +924,16 @@ def test_measured_motion_sampling_requires_matching_source_and_explicit_backend(
     with pytest.raises(ValueError,match='sampler'):
         forecast.forecast_source(pinned,audio={},binaries=BINARIES,domain=settings,
                                  compatibility={},motion_uv_sampler=sampler)
+
+
+def test_forecast_forwards_declared_geometry_budget(monkeypatch):
+    import forecast
+    seen=[];original=forecast.scene_geometry_features
+    def observe(scene,**kwargs):
+        seen.append(kwargs.get('max_derivative_samples'))
+        return original(scene,**kwargs)
+    monkeypatch.setattr(forecast,'scene_geometry_features',observe)
+    result=predict(native(BASE),domain=domain(geometry_derivative_sample_budget=1234))
+    assert seen==[1234]
+    assert result['geometry_features']['derivative_sample_budget']==1234
+    assert result['domain']['geometry_derivative_sample_budget']==1234

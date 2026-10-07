@@ -134,8 +134,10 @@ not a new visual score or a change to the packaged mood collections.
 The feature report now distinguishes geometry calculated without display fields
 from statistics of simulated display fields. Shape trajectories provide sampled
 speed, acceleration and jerk, with component/topology changes and missing support
-recorded explicitly. These coordinates do not establish visible movement or
-smoothness between samples. Each feature carries units, evidence kind and context
+recorded explicitly. Dense scenes can declare a sufficient geometry derivative
+calculation budget; its exact value stays in the forecast context, and exceeded
+budgets still withhold partial results. These coordinates do not establish visible
+movement or smoothness between samples. Each feature carries units, evidence kind and context
 identity; discarding a simulated frame does not turn its statistics into frame-free
 analysis. The [source feature contract](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_FEATURES.md)
 records the supported scope and remaining work.

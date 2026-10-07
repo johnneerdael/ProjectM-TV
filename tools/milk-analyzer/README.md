@@ -1280,3 +1280,12 @@ actually consumed and the output it returned. The wrapper also verifies the
 bottom-origin physical-map bytes and executor-source identity. Saved evidence
 cannot change without invalidating the report. Corrected controls again match
 1,420/1,420 components; a new same-preset forecast/capture is required.
+
+Forecast domains may explicitly set `geometry_derivative_sample_budget` to a
+positive integer when a dense authored scene exceeds the historical one-million
+derivative limit. The selected budget is retained in the domain/hash and geometry
+report. Defaults stay unchanged; exceeding the chosen budget still withholds
+all partial derivative/location summaries. A sufficient budget computes the
+whole declared window without discarding vertices or changing percentiles. These
+are potential source geometry derivatives, not a substitute for unsupported
+visible motion or certification of dark/clipped output.

@@ -149,3 +149,26 @@ def test_source_bounds_track_window_extent_without_clipping_outside_geometry():
     assert bounds['window']['maximum']==pytest.approx([1.2,.6])
     assert bounds['last']['minimum']==pytest.approx([1.2,.6])
     assert bounds['frames']==2
+
+
+def test_scene_geometry_can_declare_a_sufficient_full_window_budget():
+    module=importlib.import_module('geometry_features')
+    scene={'viewport':[128,72],'frames':[
+        {'render_inputs':{'time':t},'shapes':[
+            {'index':0,'values':{'x':.1*t,'y':.5,'rad':.1,'sides':3}}]}
+        for t in [0,1,2,3]]}
+    limited=module.scene_geometry_features(scene,max_derivative_samples=1)
+    assert limited['budget_exceeded'] and limited['speed']['p95'] is None
+    complete=module.scene_geometry_features(scene,max_derivative_samples=100)
+    assert not complete['budget_exceeded']
+    assert complete['frames_sampled']==4
+    assert complete['derivative_sample_budget']==100
+    assert complete['speed']['p95']==pytest.approx(.1,abs=1e-7)
+    assert complete['visible_motion'] is None
+
+@pytest.mark.parametrize('budget',[True,0,-1,1.5])
+def test_scene_geometry_rejects_invalid_declared_budget_even_with_no_shapes(budget):
+    module=importlib.import_module('geometry_features')
+    with pytest.raises(ValueError,match='budget'):
+        module.scene_geometry_features({'viewport':[32,32],'frames':[]},
+                                       max_derivative_samples=budget)

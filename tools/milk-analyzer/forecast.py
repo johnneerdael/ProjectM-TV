@@ -314,7 +314,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
         mesh_x=domain['mesh_x'],mesh_y=domain['mesh_y'],seed=domain['equation_seed'],
         timeout_seconds=domain.get('equation_timeout_seconds',60),
         equation_loader_policy=domain.get('equation_loader_policy','strict-raw-v1'))
-    geometry_features = scene_geometry_features(scene)
+    geometry_features = scene_geometry_features(scene,
+        max_derivative_samples=domain.get('geometry_derivative_sample_budget',1_000_000))
     builtin = source_builtin_wave(source,scene,audio,binary=Path(binaries)/'milk-wave-inputs',
                                   line_rendering_profile=line_profile,control_policy=wave_control_policy)
     if builtin['engine_archive_sha256']!=archive:

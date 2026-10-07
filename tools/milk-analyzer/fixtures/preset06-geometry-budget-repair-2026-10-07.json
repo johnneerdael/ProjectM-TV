@@ -1,0 +1,39 @@
+{
+  "scope": "Saved-source geometry budget repair; not renderer/appearance/visible-motion certification",
+  "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+  "preset_sha256": "1683b34359e78a5a2ef3dc3686f384344611b52c6f947f6a9b59f2971b21a0cf",
+  "scene_sha256": "df2b0959dfd25df1383b34f08f7e0f0e610f8b3d1b7cb6a7c4996da204b88cb9",
+  "declared_budget": 4000000,
+  "before": {
+    "budget": 1000000,
+    "budget_exceeded": true,
+    "speed_p95": null
+  },
+  "after": {
+    "frames_sampled": 30,
+    "budget_exceeded": false,
+    "components_seen": 3584,
+    "total_derivative_samples": 3741696,
+    "speed": {
+      "p95": 0.5403730988175494,
+      "maximum": 0.6472219574250304,
+      "samples": 1291776,
+      "unit": "normalized viewport coordinates/s"
+    },
+    "acceleration": {
+      "p95": 17.425282546902153,
+      "maximum": 19.416657710093297,
+      "samples": 1247232,
+      "unit": "normalized viewport coordinates/s\u00b2"
+    },
+    "jerk": {
+      "p95": 982.500584659226,
+      "maximum": 1164.9993584465385,
+      "samples": 1202688,
+      "unit": "normalized viewport coordinates/s\u00b3"
+    }
+  },
+  "raw_result_sha256": "ea7afbe2288e7a7c4b4d396f893c8fc374d31e8b6952f924cac7e4b6a6f72c67",
+  "remaining": "Visible correspondence is still unsupported; dark authored/target appearance investigation remains open",
+  "fresh_randomized_credit": 0
+}
