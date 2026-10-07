@@ -45,6 +45,12 @@ at most3600). This bounds wall-clock equation execution, independently of the
 predicted timeline. The strict CLI exposes `--equation-timeout-seconds`; an expired
 deadline remains an unresolved preparation result and receives no accuracy credit.
 
+Waveform and named-image adapters record their executable digest before invoking
+the process and reject a changed digest afterward. Rebuilding those paths during
+execution cannot assign the replacement binary's identity to earlier output.
+Boundary checks do not detect every transient change-and-restore; keep adapters
+fixed during a comparison batch.
+
 The explicit `gles300-highp-infinity-v1` shader numeric policy carries justified
 infinities through supported operations and the normalized RGB sink. Set
 `shader_numeric_policy` in the forecast domain, or pass the corresponding strict

@@ -64,6 +64,22 @@ def test_native_source_decode_preserves_rows_and_soil_alpha_rounding(tmp_path):
     assert inputs.manifest['uses_rendered_reference'] is False
 
 
+def test_decoder_replacement_during_execution_cannot_receive_producer_credit(tmp_path,monkeypatch):
+    import shutil
+    import subprocess
+    from materials import MaterialBank
+    image=png(tmp_path/'colour.png',[[[255,0,0,255]]])
+    decoder=tmp_path/'decoder';shutil.copy2(BINARY,decoder)
+    original=subprocess.run
+    def replace(*args,**kwargs):
+        result=original(*args,**kwargs)
+        decoder.write_bytes(b'replacement decoder did not produce these pixels')
+        return result
+    monkeypatch.setattr(subprocess,'run',replace)
+    with pytest.raises(ValueError,match='decoder.*changed'):
+        MaterialBank([image],decoder=decoder)
+
+
 def test_case_insensitive_named_binding_and_point_sampler(tmp_path):
     path=png(tmp_path/'CoLoUr.png',[[[255,0,0,255],[0,255,0,255]]])
     inputs=bank([path])

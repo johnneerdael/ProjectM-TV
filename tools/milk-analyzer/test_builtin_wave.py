@@ -13,6 +13,38 @@ from engine_profiles import LEGACY_WAVE
 BINARY=READER.parent/'milk-wave-inputs'
 
 
+def test_wave_adapter_replacement_cannot_receive_geometry_producer_credit(tmp_path,monkeypatch):
+    import shutil
+    import subprocess
+    from builtin_wave import source_builtin_wave
+    source=native('nWaveMode=6\nfWaveAlpha=.5\n')
+    inputs=frames()[:1]
+    scene=execute_scene(source,inputs,reader=READER,width=32,height=32,mesh_x=8,mesh_y=8)
+    binary=tmp_path/'wave-adapter';shutil.copy2(BINARY,binary)
+    original=subprocess.run
+    def replace(*args,**kwargs):
+        result=original(*args,**kwargs)
+        binary.write_bytes(b'replacement adapter did not produce this geometry')
+        return result
+    monkeypatch.setattr(subprocess,'run',replace)
+    with pytest.raises(ValueError,match='wave.*changed'):
+        source_builtin_wave(source,scene,audio(inputs),binary=binary)
+
+
+def test_wave_adapter_invocation_uses_the_hashed_cwd_file_not_path(tmp_path,monkeypatch):
+    import shutil
+    import os
+    from builtin_wave import source_builtin_wave
+    source=native('nWaveMode=6\nfWaveAlpha=.5\n');inputs=frames()[:1]
+    scene=execute_scene(source,inputs,reader=READER,width=32,height=32,mesh_x=8,mesh_y=8)
+    local=tmp_path/'wave-adapter';shutil.copy2(BINARY,local)
+    other=tmp_path/'path-bin';other.mkdir();shadow=other/'wave-adapter'
+    shadow.write_text('#!/bin/sh\nexit 7\n');shadow.chmod(0o755)
+    monkeypatch.chdir(tmp_path);monkeypatch.setenv('PATH',str(other)+os.pathsep+os.environ['PATH'])
+    result=source_builtin_wave(source,scene,audio(inputs),binary=Path('wave-adapter'))
+    assert len(result['frames'])==1
+
+
 @pytest.fixture
 def core235_dot_inputs(tmp_path):
     from forecast import read_source

@@ -524,3 +524,5 @@ warp coordinates. Keep NaN/pow/FTZ/sign and sampler-domain negative controls.
 Copy compatibility evidence at forecast entry. Longer equation schedules may
 declare a finite `equation_timeout_seconds` in (0,3600], default60; preserve
 deadline failures and distinguish wall-clock cost from the predicted duration.
+Bind waveform/image-decoder outputs to a pre-execution binary digest and reject
+post-execution changes. Do not rebuild task adapters during active predictions.

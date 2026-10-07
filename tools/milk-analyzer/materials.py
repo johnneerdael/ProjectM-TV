@@ -42,6 +42,7 @@ class MaterialBank:
             if name in names or name in self.textures:raise ValueError('ambiguous source texture name: '+name)
             names.add(name);payloads.append((name,path,path.read_bytes()))
         decoder=Path(decoder).resolve()
+        decoder_sha=hashlib.sha256(decoder.read_bytes()).hexdigest()
         with tempfile.TemporaryDirectory(prefix='milk-materials-') as directory:
             root=Path(directory);files=[]
             for i,(_,path,raw) in enumerate(payloads):
@@ -49,6 +50,8 @@ class MaterialBank:
                 files.append(dict(input=str(frozen),output=str(root/(str(i)+'.rgba'))))
             request=root/'request.json';request.write_text(json.dumps(dict(files=files,maximum_texture_size=maximum_texture_size)))
             process=subprocess.run([str(decoder),str(request)],capture_output=True,text=True,timeout=60)
+            if hashlib.sha256(decoder.read_bytes()).hexdigest()!=decoder_sha:
+                raise ValueError('decoder changed during execution')
             if process.returncode:raise ValueError('source image decoding unresolved: '+process.stderr.strip())
             report=json.loads(process.stdout)
             if report.get('uses_rendered_reference') is not False or len(report['rows'])!=len(payloads):
@@ -61,7 +64,7 @@ class MaterialBank:
                 self.manifest['images'][name]=dict(path=str(path),file_sha256=hashlib.sha256(raw).hexdigest(),
                     pixels_sha256=hashlib.sha256(pixels).hexdigest(),width=width,height=height)
             self.manifest['decoder']={key:value for key,value in report.items() if key!='rows'}
-        self.manifest['decoder_binary_sha256']=hashlib.sha256(decoder.read_bytes()).hexdigest()
+        self.manifest['decoder_binary_sha256']=decoder_sha
 
     def uniforms(self):
         result={} if self.noise_bank is None else self.noise_bank.uniforms()

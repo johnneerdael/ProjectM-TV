@@ -54,6 +54,8 @@ def _colour(source,main,frame,mode,alpha,width,height):
 
 def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
                         line_rendering_profile='canonical-gl-lines-v1',control_policy=None):
+    binary=Path(binary).resolve()
+    binary_sha=hashlib.sha256(Path(binary).read_bytes()).hexdigest()
     if len(scene['frames'])!=len(audio['frames']):raise ValueError('wave/audio frame schedule mismatch')
     values=source['values'];width,height=scene['viewport']
     engine=source.get('parser_inputs',{}).get('engine',{})
@@ -95,6 +97,8 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
         root=Path(temporary);output=root/'wave.json';path=root/'request.json'
         request['output']=str(output);path.write_text(json.dumps(request))
         process=subprocess.run([str(binary),str(path)],capture_output=True,text=True,timeout=timeout_seconds)
+        if hashlib.sha256(Path(binary).read_bytes()).hexdigest()!=binary_sha:
+            raise ValueError('wave adapter changed during execution')
         if process.returncode:raise ValueError('native waveform execution unresolved: '+process.stderr)
         native=json.loads(output.read_text())
     if native.get('render_context_time_bits')!=32:
@@ -134,7 +138,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     return {'basis':native['basis'],'mode':native['mode'],'frames':result,'source_hashes':native['source_hashes'],
             'control_policy':control_policy,
             'adapter_sha256':native['adapter_sha256'],
-            'native_binary_sha256':hashlib.sha256(Path(binary).read_bytes()).hexdigest(),
+            'native_binary_sha256':binary_sha,
             'engine_archive_sha256':native['engine_archive_sha256'],'uses_rendered_reference':False,
             'render_context_source_sha256':native['render_context_source_sha256'],
             'render_context_time_bits':native['render_context_time_bits'],
