@@ -1233,6 +1233,9 @@ universal hardware contract or a performance claim.
 
 With the combined profile, the unchanged Zylot learning retest meets all five
 numeric clauses: median error 0.0000614%, maximum error 0.00127%. Independent
-full-claim review is pending, and the archived original 92.5 remains unchanged.
+full-claim review scores the repaired window 100; the archived original 92.5
+remains unchanged, with zero fresh randomized credit. Triangle-body/source
+geometry moves left/down, while changing halo intensity shifts the whole-field
+brightness centroid upward; those measurements are distinct.
 Cosmic's corresponding latest-AAR retest still misses p95 motion by 8.36%, so
 half-texture filtering remains open and no new randomized batch is started.

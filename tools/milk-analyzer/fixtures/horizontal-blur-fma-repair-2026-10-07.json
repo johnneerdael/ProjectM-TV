@@ -142,7 +142,335 @@
   "validation": {
     "full_suite": "1433tests+78subtests passed",
     "distinguishing_horizontal_test": "8blurtests passedafterstrengthening",
-    "review": "No correctnessfindings, finaltest/fullclaimreviewpending",
+    "review": "Completecode/full20claimreview learning100,no remainingfindings",
     "docs": "strictbuildpending"
+  },
+  "zylot_repair_assessment": {
+    "scope": "Retrospective learning repair of unchanged original Zylot preset. A source51 forecast with forward horizontal/vertical blur FMA and retained nested mix FMA is compared with an existing unchanged full published2.3.17 AAR capture. No fresh randomized credit.",
+    "position": 25,
+    "preset": "Zylot - new work.milk",
+    "original_score_retained": 92.5,
+    "repair_score": 100,
+    "score": 100,
+    "rows": [
+      {
+        "id": "structure1",
+        "claim": "A small pale outlined triangular object appears on black.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "A compact pale outlined triangle appears on black in the opening; source/native layouts match."
+      },
+      {
+        "id": "structure2",
+        "claim": "Three vertices are distinguishable with a lightly filled triangular interior.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Three distinct corners and a lightly filled triangular interior match throughout all30 pairs."
+      },
+      {
+        "id": "structure3",
+        "claim": "The object remains compact with most screen area black.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "The triangle remains compact while most of the viewport stays black."
+      },
+      {
+        "id": "structure4",
+        "claim": "Later frames retain the triangle with brighter glowing vertex points.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Later frames retain the recognizable triangle and brighter localized vertex glows on both sides."
+      },
+      {
+        "id": "motion1",
+        "claim": "The compact triangle shifts slightly toward the left and down over the sampled window, as supported by signed source geometry.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "The triangle itself moves left/down. Source shape0 centroid displacement is[-0.099468991,+0.107463002] in normalized top-origin coordinates; the native triangle-body component at RGB>=128 shifts(127.112,70.913)\u2192(103.663,84.670) from frames1\u219230. The changing whole-field intensity centroid moves up and is not treated as object motion."
+      },
+      {
+        "id": "motion2",
+        "claim": "The triangle changes orientation or contour slightly without becoming a large full-screen object.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Triangular orientation/contour changes remain modest and corresponding; no expansion into a full-screen object or trajectory reversal is visible."
+      },
+      {
+        "id": "motion3",
+        "claim": "Vertex glows increase while the basic three-corner structure remains recognizable.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Vertex glows brighten while the three-corner triangle remains recognizable in both sequences."
+      },
+      {
+        "id": "motion4",
+        "claim": "Median motion=0.001327536185272038, p95=0.336288833618164 viewport/s; relative5%.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Revised median/p95 estimates reproduce from source RGB. Native errors are0.00006138494% and0%; all29 transitions are supported on both sides."
+      },
+      {
+        "id": "colour1",
+        "claim": "The object is mainly pale white/grey.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "The triangle is mainly pale white/grey on both sides."
+      },
+      {
+        "id": "colour2",
+        "claim": "Some edges have small warm/cool accents but broad saturation remains low.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Small warm/cool edge accents remain localized; broad saturation stays low."
+      },
+      {
+        "id": "colour3",
+        "claim": "The black backdrop remains dominant with localized white glows.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "The black backdrop dominates around localized white glows."
+      },
+      {
+        "id": "colour4",
+        "claim": "Mean luma=0.03003488484149178; saturation=0.017983864092578492; relative5%.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Revised luma/saturation estimates reproduce from source RGB. Native errors are0.001268435% and0.000939969% of predicted."
+      },
+      {
+        "id": "feedback1",
+        "claim": "Warp applies a treble-dependent power and blends main feedback with blur2.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged warp uses a treble-dependent power and blends retained main feedback with blur2. Source code confirms the mechanism; matching fields corroborate appearance. Pow arithmetic was not changed by this repair."
+      },
+      {
+        "id": "feedback2",
+        "claim": "It decays retained feedback slightly each frame.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": true,
+        "evidence": "Unchanged warp slightly decays retained feedback each frame; source code and matching triangle/glow history corroborate the clause."
+      },
+      {
+        "id": "feedback3",
+        "claim": "Composite uses procedural 2D noise with high powers of retained colour and Q/audio weighting.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged composite procedural2D noise, high powers and Q/audio weighting are source-confirmed. Raw noise input identity is verified; native program choice is not directly exposed."
+      },
+      {
+        "id": "feedback4",
+        "claim": "A final square keeps most output dark and emphasizes the compact bright object.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Unchanged final square preserves the dark field and localized bright object; source code and observed appearance agree."
+      },
+      {
+        "id": "flashing1",
+        "claim": "Peak jump at[3, 4], brightening.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independent source/native recomputation gives exact peak3\u21924, brightening."
+      },
+      {
+        "id": "flashing2",
+        "claim": "Exact coherent brightening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independent source/native recomputation gives coherent brightening[] exactly."
+      },
+      {
+        "id": "flashing3",
+        "claim": "Exact coherent darkening transitions[].",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "Independent source/native recomputation gives coherent darkening[] exactly."
+      },
+      {
+        "id": "flashing4",
+        "claim": "Peak mean-luma jump=0.0067323981784284115; relative5%, exacteventtiming.",
+        "score": 5,
+        "disposition": "supported",
+        "critical": false,
+        "evidence": "The unchanged peak-amplitude claim0.0067323981784284115 matches native exactly, including event timing."
+      }
+    ],
+    "critical_failure": false,
+    "critical_mismatch_claims": [],
+    "critical_unknown": false,
+    "unknown_claim_ids": [],
+    "fresh_random_credit": 0,
+    "successful_batch_credit": 0,
+    "revised_claim_ids": [
+      "motion1",
+      "motion4",
+      "colour4"
+    ],
+    "flashing4_unchanged": true,
+    "original_authored_preset_byte_identical": true,
+    "original_prediction_and_grade_unchanged": true,
+    "numeric_checks": [
+      {
+        "feature": "median_speed_viewports_per_second",
+        "predicted": 0.001327536185272038,
+        "native": 0.0013275370001792908,
+        "relative_predicted_error_percent": 6.138493713612435e-05,
+        "passes": true
+      },
+      {
+        "feature": "p95_speed_viewports_per_second",
+        "predicted": 0.336288833618164,
+        "native": 0.336288833618164,
+        "relative_predicted_error_percent": 0.0,
+        "passes": true
+      },
+      {
+        "feature": "mean_luma",
+        "predicted": 0.03003488484149178,
+        "native": 0.030034503868470588,
+        "relative_predicted_error_percent": 0.0012684350987299728,
+        "passes": true
+      },
+      {
+        "feature": "mean_saturation",
+        "predicted": 0.017983864092578492,
+        "native": 0.017983695049770175,
+        "relative_predicted_error_percent": 0.0009399693383299712,
+        "passes": true
+      },
+      {
+        "feature": "peak_mean_luma_jump",
+        "predicted": 0.0067323981784284115,
+        "native": 0.0067323981784284115,
+        "relative_predicted_error_percent": 0.0,
+        "passes": true
+      }
+    ],
+    "numeric_error_rule": "abs(native-predicted)/abs(predicted), relative5%; predicted0 exact",
+    "events": {
+      "peak_luma_jump_transition": [
+        3,
+        4
+      ],
+      "peak_direction": "brightening",
+      "coherent_brightening_transitions": [],
+      "coherent_darkening_transitions": []
+    },
+    "pixel_metrics": {
+      "mean_mae_rgb": 2.51764475933669e-07,
+      "mean_rmse_rgb": 2.2422200345317833e-05,
+      "peak_mae_rgb": 3.2268405902868835e-06,
+      "peak_rmse_rgb": 0.00011733175779227167,
+      "source_sha256": "3be37f956bd7364ed34f3b8145f3ef730e74242971dfef5952ccbde1dbc4f93a",
+      "native_sha256": "95f26401a6ee7d7b9365d6d85856e498a1aa42680b653f86d005a2551866fdac"
+    },
+    "different_rgb_channels": 208,
+    "max_channel_difference_rgb8": 2,
+    "direction_evidence": {
+      "source_shape0_displacement_top_origin": [
+        -0.09946899116039276,
+        0.10746300220489502
+      ],
+      "native_triangle_body_centroid_rgb128_first_last": [
+        [
+          127.11224489795919,
+          70.91326530612245
+        ],
+        [
+          103.66258741258741,
+          84.66958041958041
+        ]
+      ],
+      "whole_field_maxrgb_weighted_centroid_first_last": [
+        [
+          127.17385415971712,
+          71.22039495630129
+        ],
+        [
+          77.47826496885084,
+          65.33613159851565
+        ]
+      ],
+      "first7_native_shape_observer_scope": "Projected native/source attributes agree within float ULPs; no frame30 mesh observer claim."
+    },
+    "validation": {
+      "repair_identity_files8_verified": true,
+      "producer_model_modules79_verified": true,
+      "source51_reader_binary_identity_verified": true,
+      "source51_exact_commit_patch_identity_verified": true,
+      "published2317_full_AAR_deployment_hashes_verified": true,
+      "original_preset_exactly_matches_AAR": true,
+      "saved_native_bytes_identical_to_zylot_original_fma2317": true,
+      "capture_indexed_count": 1,
+      "capture_skipped_count": 0,
+      "capture_frame_serial_delta": 30,
+      "active_mainPID_noise_seed3567620661_verified": true,
+      "discarded_initial_seed3567587328_separate": true,
+      "source_native_rawRGB_descriptors_recomputed": true,
+      "source_native_supported_flow_transitions": 29,
+      "all30_pairs_visually_reviewed": true,
+      "repaired_description_retrospective_chronology_explicit": true,
+      "source_profiles": {
+        "blur_arithmetic_profile": "apple-m4pro-gles-blur-forward-fma-v1",
+        "shader_arithmetic_profile": "apple-m4pro-gles-mix-nested-fma-v1",
+        "warp_rotation_policy": "projectmtv-core-2.3.17-cpu-float-trig-v1",
+        "warp_rotation_producer": {
+          "policy": "projectmtv-core-2.3.17-cpu-float-trig-v1",
+          "producer": "ctypes.CDLL(None) host sinf/cosf",
+          "platform": "macOS-15.8-arm64-arm-64bit-Mach-O",
+          "python_version": "3.14.5",
+          "android_bit_parity_verified": false
+        }
+      },
+      "no_device_or_new_capture_actions": true
+    },
+    "hashes": {
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/original.milk": "7a3041d040543ff6f330dceacd4dd177f142433cfd6726b7340bd8a55252f4a8",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/repaired-description.json": "6971404e5b3ddae62f6d7db36106b4bdfb1f6ec41de5fae483635ad34acf49c6",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/repair-identity.json": "2847420e38f74c475318bb4242aae0df79de14816a41dca314611c5b0fc6a679",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/source.json": "4158a9de1e0bee3733b93127ec7e1bef2cfc669d9edae8867c3f572a0ceb7c64",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/prediction-math.json": "ee55f36e66e45d6cb630e7c503bd72862bc00fd6691cc8e0c9900ec8bdb6f700",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/prediction.rgb.u8": "3be37f956bd7364ed34f3b8145f3ef730e74242971dfef5952ccbde1dbc4f93a",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/native.rgb.u8": "95f26401a6ee7d7b9365d6d85856e498a1aa42680b653f86d005a2551866fdac",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/domain.json": "d03a5cac96649910ce3a35501242138977e859f749d436ee2c19ecf19fcbd259",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/numeric-validation.json": "4a2f9695a5a8f665450826bdfb85bbeabac83d80a7365b82d5d80ee34a7b1264",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/all30-metrics.json": "0244fd647b62ceac708a816f251be70d0bfd525889e028dd2b22944764e9374f",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-full-blur-fma2317/all30-comparison.png": "9f6dd338a3ed61f483639d5aeeb5c8b53a32997b73e9b274573313517fe66b56",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-original-fma2317/capture.json": "0106b0086e280e4ef137ce9f124c272fb81c65eb02692aa4bd6b3199eba7850e",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-original-fma2317/native-metadata.json": "23dc602096552e6fb4b39cb9fb2f4efc782bdacfadedef35595bd5afb20bd49e",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-original-fma2317/native.random.jsonl": "78ea7f09e8f5271a46deda996b4301eb3bc44df6669125947f22b4f09afbf906",
+      "build/visual-loop/random30frames-core2316-2026-10-07/repairs/zylot-original-fma2317/native.rgb.u8": "95f26401a6ee7d7b9365d6d85856e498a1aa42680b653f86d005a2551866fdac",
+      "build/visual-loop/random30frames-core2316-2026-10-07/batch002/preset08/assessment.json": "396d4eaa6d31202cba403f468e3c09dcb9cf07da91962bc036291d4bfdcc4ca0",
+      "build/visual-loop/random30frames-core2316-2026-10-07/batch002/preset08/prediction-description.json": "343d3660a3a0a7aa502221db12fcf538ded5b51fefc0029ce81e4210f7352091"
+    },
+    "limits": [
+      "Original92.5 and its blind prediction remain unchanged; repair100 earns no random, streak or batch credit.",
+      "This is a retrospective comparison with a reused native capture; neither the revised direction nor source fields are a new blind forecast.",
+      "Object movement is distinguished from whole-field intensity movement. The latter can reverse direction as halos change; shape geometry alone does not certify arbitrary remapped shader output.",
+      "Only motion1/motion4/colour4 changed. Flashing4 retains its original text/value.",
+      "Feedback mechanisms are source-confirmed and appearance-corroborated; hidden native program selection is not directly exposed.",
+      "RGB MAE2.51764e-7 is not pixel identity;208 channel differences and maximum2 RGB8 units remain.",
+      "The single-window result does not certify all float inputs, arbitrary presets or other backends. Host/Android libm parity remains explicitly false."
+    ],
+    "created_utc": "2026-10-07T15:46:41.538909+00:00"
   }
 }
