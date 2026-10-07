@@ -14,6 +14,7 @@ import numpy as np
 
 from audience_policy import labels_for_intensity
 from core_backend import read_header, read_frames, reusable_result, write_selection_overlay, core_run_identity
+from core_backend import freeze_scorer_sources,verify_scorer_sources
 from descriptors import DescriptorStream, LUMA
 from intensity_calibration import predict_intensity
 from intensity_evidence import combine_activity, coherent_flash_proxy
@@ -40,7 +41,7 @@ def atomic_json(path, data):
     temporary.replace(path)
 
 
-def measure(case, *, device, remote, output, model, identity, timeout=180):
+def measure(case, *, device, remote, output, model, identity, timeout=180,source_hashes=None):
     key=case['sha256'];overlay=output/'overlays'/f'{key}.apk'
     write_selection_overlay(overlay,case['preset'])
     remote_overlay=f'{remote}/selection-{key}.apk'
@@ -102,6 +103,7 @@ def measure(case, *, device, remote, output, model, identity, timeout=180):
             subprocess.run(['adb','-s',device,'pull',prefix+suffix,str(output/'logs'/f'{key}{suffix}')],capture_output=True,timeout=15)
         subprocess.run(['adb','-s',device,'shell',shlex.join(['rm','-f',remote_overlay,prefix+'.json',prefix+'.log',prefix+'.java.log',prefix+'.skip'])],capture_output=True,timeout=15)
         process.stdout.close();process.stderr.close()
+    if source_hashes is not None:verify_scorer_sources(source_hashes)
     atomic_json(output/'results'/f'{key}.json',result)
     return result
 
@@ -122,12 +124,15 @@ def main():
 
 def run(args):
     output=args.output
+    source_hashes=freeze_scorer_sources()
+    model_bytes=args.model.read_bytes();model_sha=hashlib.sha256(model_bytes).hexdigest()
+    candidate=json.loads(model_bytes);model=candidate['model']
     native_library=args.runtime/'jni/armeabi-v7a/libprojectmtv.so'
     native_sha=verify_runtime_library(args.aar,native_library)
     from java_runtime import verify_runtime_classes
     java_identity=verify_runtime_classes(args.aar,args.runtime,args.runtime/'dex/classes.dex')
+    verify_scorer_sources(source_hashes)
     for folder in ('results','overlays','metadata','logs'):(output/folder).mkdir(parents=True,exist_ok=True)
-    candidate=json.loads(args.model.read_text());model=candidate['model']
     runtime_files={'classes.dex':args.runtime/'dex/classes.dex',
                    'libbackendclock.so':args.runtime/'libbackendclock.so',
                    'libprojectmtv.so':native_library,
@@ -138,12 +143,11 @@ def run(args):
         actual=subprocess.check_output(['adb','-s',args.device,'shell',command],text=True).split()[0]
         if actual!=expected:raise ValueError('Deployed runtime differs: '+name)
     fingerprint=subprocess.check_output(['adb','-s',args.device,'shell','getprop','ro.build.fingerprint'],text=True).strip()
-    relevant=('core_corpus.py','core_backend.py','descriptors.py','intensity_calibration.py',
-              'intensity_evidence.py','audience_policy.py','java_runtime.py')
-    code_hashes={name:digest(Path(__file__).with_name(name)) for name in relevant}
+    verify_scorer_sources(source_hashes)
+    code_hashes=source_hashes
     identity_data={'aar_sha256':digest(args.aar),'native_armeabi_v7a_sha256':native_sha,
                    'java_runtime_binding':java_identity,
-                   'model_sha256':digest(args.model),'python_hashes':code_hashes,
+                   'model_sha256':model_sha,'python_hashes':code_hashes,
                    'runner_java_sha256':digest(Path(__file__).with_name('CoreBackendRunner.java')),
                    'clock_source_sha256':digest(Path(__file__).with_name('core_backend_clock.cpp')),
                    'profile':{'frames':420,'warmup':60,'fps':30,'width':128,'height':72},'device':args.device,
@@ -161,9 +165,11 @@ def run(args):
             old=json.loads(existing.read_text())
             if reusable_result(old,identity):continue
             if old.get('identity')==identity and not args.retry_unscored:continue
-        result=measure(case,device=args.device,remote=args.remote,output=output,model=model,identity=identity)
+        verify_scorer_sources(source_hashes)
+        result=measure(case,device=args.device,remote=args.remote,output=output,model=model,identity=identity,source_hashes=source_hashes)
         print(json.dumps({'completed_case':index,'selected':len(cases),'preset':case['preset'],'status':result['status'],
                           'score':result['score'],'reason':result.get('reason'),'elapsed_seconds':round(result['elapsed_seconds'],2)}),flush=True)
+    verify_scorer_sources(source_hashes)
 
 
 if __name__=='__main__':main()

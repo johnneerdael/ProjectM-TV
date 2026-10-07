@@ -505,3 +505,6 @@ ABI. Keep private runtime snapshots alive through provenance/deployment/executio
 Do not replace this relationship check with independent file hashes or apply new
 binding claims retroactively to historical evidence. Local real-D8 checks passed
 with build-tools36.1.0; an absent SDK/JDK skips those compiler tests explicitly.
+Freeze scorer sources before preflight, compare with import hashes, and reject
+source changes before result persistence. Model identities hash the once-read
+model bytes. Source edits require a fresh scorer process.

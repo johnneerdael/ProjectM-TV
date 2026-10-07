@@ -8,8 +8,31 @@ import json
 import struct
 import zipfile
 from numbers import Real
+from pathlib import Path
 
 import numpy as np
+
+
+def scorer_source_hashes():
+    """Use the forecast's production-module inventory convention."""
+    return {p.name:hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(Path(__file__).parent.glob('*.py'))
+            if not p.name.startswith('test_')}
+
+
+_SCORER_IMPORT_HASHES=scorer_source_hashes()
+
+
+def freeze_scorer_sources():
+    hashes=scorer_source_hashes()
+    if hashes!=_SCORER_IMPORT_HASHES:
+        raise ValueError('Scorer source changed since import; start a fresh process')
+    return hashes
+
+
+def verify_scorer_sources(hashes):
+    if scorer_source_hashes()!=hashes:
+        raise ValueError('Scorer source changed during execution; start a fresh process')
 
 
 def core_run_identity(metadata):

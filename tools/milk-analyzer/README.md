@@ -198,6 +198,11 @@ Both numerical runner CLIs snapshot local AAR/DEX/native/clock/PCM inputs before
 verification, provenance or device access. Compiler inputs are copied before
 reconstruction too, so later edits to original paths cannot change deployed bytes.
 Historical runs without this proof retain their original evidence scope.
+Scorer source hashes are frozen against import-time hashes before preflight and
+checked again before provenance/device steps and before each result is saved.
+Changed source aborts rather than attaching new disk hashes to loaded old code;
+start a fresh process after any checkout or edit. Model JSON is read once, and its
+hash describes exactly those consumed bytes even if the original path changes.
 Different compiler output has a different recorded
 helper hash. The Java runner calls the published JNI API, selects one preset via
 an asset-index overlay, and keeps the AAR's original preset and texture content.

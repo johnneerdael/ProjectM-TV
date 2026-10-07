@@ -7,6 +7,7 @@ import argparse,hashlib,json,math,os,shlex,subprocess,time,zipfile,uuid,threadin
 from pathlib import Path
 import numpy as np
 from core_backend import read_header,read_frames,write_selection_overlay
+from core_backend import freeze_scorer_sources,verify_scorer_sources
 from descriptors import DescriptorStream,LUMA
 from scoring_context import compatible_previous
 
@@ -122,6 +123,7 @@ def measure(case,args,identity,model):
         diagnostic(['adb','-s',args.device,'shell','-T','-n',shlex.join(['rm','-f',remote_overlay,prefix+'.json',prefix+'.log',prefix+'.java.log',prefix+'.skip'])],
                    'remote cleanup')
         process.stdout.close();process.stderr.close()
+    if getattr(args,'source_hashes',None) is not None:verify_scorer_sources(args.source_hashes)
     write_json(args.output/'results'/(key+'.json'),row)
     return row
 
@@ -137,6 +139,10 @@ def main():
 
 
 def run(args):
+    source_hashes=freeze_scorer_sources();args.source_hashes=source_hashes
+    model_path=Path(__file__).parent/'profiles/audience-model-direct-delta-v2.json'
+    model_bytes=model_path.read_bytes();model=json.loads(model_bytes)['model']
+    model_sha=hashlib.sha256(model_bytes).hexdigest()
     runtime={name:args.runtime/name for name in ['classes.dex','libbackendclock.so','libprojectmtv.so']}
     runtime.update({'core.aar':args.aar,'input.f32':args.pcm})
     with zipfile.ZipFile(args.aar) as z:
@@ -145,14 +151,17 @@ def run(args):
         cases=[{'preset':n.removeprefix('assets/presets/'),'sha256':hashlib.sha256(z.read(n)).hexdigest()} for n in z.namelist() if n.startswith('assets/presets/') and n.endswith('.milk')]
     from java_runtime import verify_runtime_classes
     java_identity=verify_runtime_classes(args.aar,args.runtime,args.runtime/'classes.dex')
+    verify_scorer_sources(source_hashes)
     verify_owner(args.owner,args.device)
+    verify_scorer_sources(source_hashes)
     for folder in ['results','metadata','logs','overlays']:(args.output/folder).mkdir(parents=True,exist_ok=True)
-    cases.sort(key=lambda v:v['preset']);model_path=Path(__file__).parent/'profiles/audience-model-direct-delta-v2.json';model=json.loads(model_path.read_text())['model']
-    facts={'aar_sha256':sha(args.aar),'native_arm64_sha256':native_sha,'model_sha256':sha(model_path),
+    cases.sort(key=lambda v:v['preset'])
+    facts={'aar_sha256':sha(args.aar),'native_arm64_sha256':native_sha,'model_sha256':model_sha,
+           'python_hashes':source_hashes,
            'java_runtime_binding':java_identity,
-           'java_runtime_verifier_sha256':sha(Path(__file__).with_name('java_runtime.py')),
-           'runtime_sha256':{k:sha(v) for k,v in runtime.items()},'scorer_sha256':sha(Path(__file__)),
-           'descriptor_sha256':sha(Path(__file__).with_name('descriptors.py')),'profile':{'frames':FRAMES,'warmup':WARMUP,'fps':FPS,'width':128,'height':72,'motion_fps':10},
+           'java_runtime_verifier_sha256':source_hashes['java_runtime.py'],
+           'runtime_sha256':{k:sha(v) for k,v in runtime.items()},'scorer_sha256':source_hashes['beta_score.py'],
+           'descriptor_sha256':source_hashes['descriptors.py'],'profile':{'frames':FRAMES,'warmup':WARMUP,'fps':FPS,'width':128,'height':72,'motion_fps':10},
            'backend':'released-projectmtv-core-jni','input_policy':'fixed synthetic quiet/melodic/kick reference','release':'v2.3.3'}
     identity=hashlib.sha256(json.dumps(facts,sort_keys=True).encode()).hexdigest();facts['identity']=identity
     existing=args.output/'run-identity.json'
@@ -188,6 +197,7 @@ def run(args):
         if args.only_preset and len(unresolved)!=1 or not unresolved:
             raise ValueError('Retry must select an existing unresolved preset')
         selected=unresolved
+    verify_scorer_sources(source_hashes)
     subprocess.run(['adb','-s',args.device,'shell','-T','-n','mkdir -p '+shlex.quote(args.remote+'/work')],check=True,capture_output=True,timeout=15)
     for name,path in runtime.items():
         subprocess.run(['adb','-s',args.device,'push',str(path),args.remote+'/'+name],check=True,capture_output=True,timeout=180)
@@ -203,11 +213,14 @@ def run(args):
     for case in selected:
         old=records.get(case['sha256'])
         if old and (old['status']=='scored' or not args.retry_unscored):continue
+        verify_scorer_sources(source_hashes)
         verify_owner(args.owner,args.device);row=measure(case,args,identity,model)
+        verify_scorer_sources(source_hashes)
         records[case['sha256']]=row;progress()
         print(case['preset'],row['status'],round(row.get('raw_activity') or 0,2),round(row.get('elapsed_seconds') or 0,2),flush=True)
         if row['status']!='scored':
             raise RuntimeError('Measurement failed; diagnose the saved result before continuing: '+case['preset'])
+    verify_scorer_sources(source_hashes)
     progress()
 
 
