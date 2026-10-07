@@ -13,6 +13,23 @@ from engine_profiles import LEGACY_WAVE
 BINARY=READER.parent/'milk-wave-inputs'
 
 
+def test_source51_builtin_dots_use_verified_unchanged_draw_contract(tmp_path):
+    import os
+    from forecast import read_source
+    from builtin_wave import source_builtin_wave
+    binaries=Path(os.environ.get('MILK_TEST_2317_BINARIES',READER.parent))
+    path=tmp_path/'dots51.milk'
+    path.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nnWaveMode=6\nbWaveDots=1\nfWaveAlpha=.5\n')
+    source=read_source(path,reader=binaries/'milk-native-reader')
+    if source['parser_inputs']['engine']['patches_sha256']!='bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8':
+        pytest.skip('Prepared51patchadapters required')
+    inputs=frames()[:1]
+    scene=execute_scene(source,inputs,reader=binaries/'milk-native-reader',width=256,height=144,mesh_x=8,mesh_y=8)
+    result=source_builtin_wave(source,scene,audio(inputs),binary=binaries/'milk-wave-inputs',
+        line_rendering_profile='projectmtv-gles-quad-lines-v1')
+    assert len(result['frames'])==1
+
+
 def test_wave_adapter_replacement_cannot_receive_geometry_producer_credit(tmp_path,monkeypatch):
     import shutil
     import subprocess

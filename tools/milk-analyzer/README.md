@@ -1166,3 +1166,13 @@ source51 same-preset forecast still passes all five numerical checks, but this
 does not certify arbitrary-angle host/Android bit parity. A stable suite passes
 1,422 tests and 78 subtests. Earlier integrity failures from editing model files
 during a running suite are retained; validation must run against fixed code.
+
+The builtin-dot adapter also accepts the exact 51-patch identity, whose rotation
+patch leaves this drawing contract unchanged. A real paired reader/wave-adapter
+regression covers that path; other identities and unsupported viewport sizes
+remain guarded. A latest-AAR Glowsticks black-warp/identity-composite control
+retains the original wave equations: 19 of 30 frames match exactly, with 69
+different RGB8 channel values across the run and exact median motion. This is
+stage-isolation evidence, not an original-preset pass; its feedback/composite
+precision miss remains open. See
+`fixtures/glowsticks-draw-isolation2317-2026-10-07.json`.
