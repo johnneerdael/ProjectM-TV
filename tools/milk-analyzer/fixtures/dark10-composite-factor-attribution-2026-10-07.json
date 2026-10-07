@@ -1,0 +1,39 @@
+{
+  "scope": "Exact originalsource compositefactor attribution; no nativecomparison/visualscore",
+  "preset_sha256": "ebaea03f237328932a81461f3a42b025450abbd8fae7a8014898e1428c98167d",
+  "source_engine": {
+    "commit": "e0b0a967f0ffd7d332106c366668ed271718472b",
+    "instrumentation_sha256": "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8",
+    "patches_sha256": "bc80791e28e7559b81c33036c91b8163cfe611d9d9793e7d3e10f8cb4e5290c8"
+  },
+  "trace_sha256": "72972b9e9ff2bb1c2088fb64d5fad475ba7b62b09605ed7074790c59ea79576f",
+  "all30_frames": 30,
+  "rgb8_half_step": 0.00196078431372549,
+  "below_half_step_frames": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    13
+  ],
+  "sampled_reta_peak": 0.9960784316062927,
+  "composite_peak_before_store": 0.03071741759777069,
+  "display_peak": 0.0313725508749485,
+  "source_equation": "ret = reta.x * reta * reta.x * ret; followedbycolourlerp and \u00d72",
+  "root_attribution": "Brightotherchannels do notprevent suppression bysquaredredandmultiplicative retainedcolour; earlyvalues quantize tozero",
+  "remaining": [
+    "ActualcurrentAARsame-source numericalcomparison",
+    "LegacyD3DX/appearance context",
+    "Unsupportedvisibletrajectory/speed cannot becomezero"
+  ],
+  "score_credit": 0,
+  "instrumentation_control": {
+    "all30_display_bytes_identical": true,
+    "pixel_sha256": "a8a872e53f2c431d775134f674b92ca0f0a242e6acfd61d67f7a15146873889f",
+    "control_directory": "build/visual-loop/random30frames-core2316-2026-10-07/repairs/dark10-uninstrumented-current",
+    "diagnostic_wrapper_changes_production_code": false
+  }
+}

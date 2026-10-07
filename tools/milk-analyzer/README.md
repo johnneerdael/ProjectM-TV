@@ -1289,3 +1289,24 @@ all partial derivative/location summaries. A sufficient budget computes the
 whole declared window without discarding vertices or changing percentiles. These
 are potential source geometry derivatives, not a substitute for unsupported
 visible motion or certification of dark/clipped output.
+
+Cold audio attribution is now cross-checked against original MilkDrop2.25c:
+`mysound` starts at zero, early long-average decay is 0.9, and a first nonzero
+band above the minimum threshold therefore has relative amplitude near ten at
+30 Hz. The patched source51 Loudness recurrence retains this behavior with
+elapsed-time rate adjustment. This is structural source evidence, not FFT/float
+bit parity or a justification to normalize away large cold inputs. Hyperspace's
+sixth-power audio term and sample06's subtractive warp can amplify that initial
+state into clipping/darkness. Their visual/intention and missing-speed gates remain
+open; no repaired score is credited from matching suppression alone. See
+`fixtures/cold-audio-source-attribution-2026-10-07.json`.
+
+Sample10's unchanged composite now has a numerical factor trace: sampled `reta`
+can approach one, while `reta.x² * reta * ret`, colour blending and final gain
+reduce the whole display below half an RGB8 step in frames1–7 and13. The maximum
+pre-storage composite value across the30-frame source window is0.0307174. A
+separate uninstrumented run has identical all30 display bytes, so the diagnostic
+does not change the predicted output. This establishes source-model suppression,
+not native/legacy appearance parity or a supported visible speed. Original60 and
+unknown clauses remain. See
+`fixtures/dark10-composite-factor-attribution-2026-10-07.json`.

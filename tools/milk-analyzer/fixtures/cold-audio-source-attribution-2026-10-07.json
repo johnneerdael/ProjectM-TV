@@ -1,0 +1,49 @@
+{
+  "scope": "Source-policy attribution, not visualcertification or declaredenginebug",
+  "legacy_source_sha256": "c768b9a3a2f434a1a29155eceea32ade812c7cd65f73bf05f63823b9f7dc7d65",
+  "current_source_sha256": "ceb58332fb18a97dd9ccf1d0014d437c62ca9afca831cb9f1bb10be76f259a55",
+  "current_header_sha256": "de8e16cd6b2142898bb980284396818682a928f7e44a59a148a951b729e4c871",
+  "legacy_locations": {
+    "zero_initialization": 1062,
+    "analysis": 9510,
+    "early_long_average_rate": 9552,
+    "relative_division": 9563
+  },
+  "calculation": {
+    "initial_long_average": 0,
+    "early_rate_at30Hz": 0.9,
+    "first_long_average_for_nonzero_imm": "imm*(1-.9)",
+    "first_relative_when_threshold_not_triggered": "imm/(imm*.1)\u224810"
+  },
+  "differences": "Legacy uses GetFps-adjusted rates; current uses declaredelapsedseconds. FFTinputs/rounding and persistent/warm state needseparate matching. This identifies sharedcold recurrence, not universalbitparity.",
+  "affected": {
+    "sample06": "Initialbass/mid\u224810 subtract~.5357 perchannel fromfeedback; many subpixelshapes remain separate rasterquestion",
+    "sample08": "Authoredsixthpower combination createsq1\u2248860781 and extremezoom undercoldinputs",
+    "spotted_blob2": "Largecoldbands produceoutofrange vec3indices; legacy/current HLSLindexsemantics remainunresolved"
+  },
+  "does_not_resolve": [
+    "Visible speed in uniform/dark/clipped fields",
+    "Originalauthoredappearance underwarmmusic",
+    "Dynamicoutofbounds vector indexing",
+    "The100-score gate"
+  ],
+  "new_randomized_credit": 0,
+  "legacy_rate_adjustment": {
+    "source_sha256": "7d51af3a4d427770ba469b29702d58ea0ee0ed52bbdeb7773d7fc48755943215",
+    "line": 87,
+    "formula": "powf(powf(rate,30),1/actual_fps)",
+    "current_formula": "pow(pow(rate,30),float(secondsSinceLastFrame))",
+    "equivalence_condition": "secondsSinceLastFrame=1/actual_fps; precision/input-history remain separate"
+  },
+  "language_vs_observation": {
+    "geometry": "Shape/UVmotion can be fullycomputed evenwhen displayed output isclipped or belowthreshold",
+    "observable_speed": "Uniform/clipped fields have no unique imagecorrespondence; returningzero would invent stillness",
+    "grading_constraint": "Frozenprotocol givesmissing speed0credit; unchanged unknowns cannot reach100 without actualnew supporteddata or an explicitprotocoldecision",
+    "required_action": "Keep failures; diagnose visualintent/target behavior and source domains. Do not drop presets, relaxrules or replacevisiblespeed withhiddengeometry."
+  },
+  "current_source_paths": {
+    "legacy": "/Users/jneerdael/Scripts/milkdrop2/src/vis_milk2/plugin.cpp",
+    "rate_adjustment": "/Users/jneerdael/Scripts/milkdrop2/src/vis_milk2/utility.cpp",
+    "current": "build/visual-loop/source51/production-engine/src/libprojectM/Audio/Loudness.cpp"
+  }
+}
