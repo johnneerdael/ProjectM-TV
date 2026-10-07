@@ -1,0 +1,58 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Sample custom composite feedback at GL texel centres
+
+MilkDrop 2's D3D9 composite mesh shifts its positions by a half pixel and
+keeps UVs unchanged (plugin.cpp composite grid setup at f05b0d8). D3D9's
+integer raster sample then interpolates at the feedback texel centre.
+OpenGL/GLES already samples the unbiased mesh at half-integer positions.
+Its additional UV half-texel bias therefore spreads an impulse over four
+quarter-bright pixels instead of copying the one full-bright pixel.
+
+Remove that redundant UV bias. Preserve mesh positions, radius/angle data,
+shader code, source texture dimensions and authored/native target routing.
+The full composite impulse/pattern regression fails before and passes after.
+
+Reference: https://learn.microsoft.com/en-us/windows/win32/direct3d9/directly-mapping-texels-to-pixels
+
+--- a/src/libprojectM/MilkdropPreset/FinalComposite.cpp
++++ b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+@@ -139,9 +139,6 @@
+         return;
+     }
+
+-    float const halfTexelWidth = 0.5f / static_cast<float>(presetState.renderContext.viewportSizeX);
+-    float const halfTexelHeight = 0.5f / static_cast<float>(presetState.renderContext.viewportSizeY);
+-
+     float const dividedByX = 1.0f / static_cast<float>(compositeGridWidth - 2);
+     float const dividedByY = 1.0f / static_cast<float>(compositeGridHeight - 2);
+
+@@ -233,8 +230,10 @@
+                     ang = PI * 0.0f;
+                 }
+             }
+-            uvs[vertexIndex] = {u + halfTexelWidth,
+-                                v + halfTexelHeight};
++            // The GL grid already interpolates at half-integer pixel centres.
++            // MilkDrop's D3D9 grid biases positions by -half a pixel instead;
++            // adding another UV bias here samples between feedback texels.
++            uvs[vertexIndex] = {u, v};
+
+             m_radiusAngle[vertexIndex] = {rad, ang};
+         }
+--- a/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
++++ b/tests/libprojectM/FeedbackDiffusionRenderTest.cpp
+@@ -431,12 +431,8 @@
+         engine.SetWindowSize(width,height); engine.SetMeshSize(48,32);
+         engine.SetPresetLocked(true); engine.SetHardCutEnabled(false); engine.SetEasterEgg(0);
+         engine.SetLineReferenceSize(refWidth,refHeight); engine.SetFeedbackDetail(alpha);
+-        // Remove the composite mesh's output-sized half-texel offset to observe the feedback pixels.
+-        auto observedPreset = preset;
+-        const std::string comp = "tex2D(sampler_main, uv).rgb";
+-        observedPreset.replace(observedPreset.find(comp), comp.size(),
+-            "tex2D(sampler_main, uv-float2(" + std::to_string(0.5/width) + "," + std::to_string(0.5/height) + ")).rgb");
+-        std::istringstream data(observedPreset); engine.LoadPresetData(data,false);
++        // The production composite now samples at texel centres without a diagnostic UV bias.
++        std::istringstream data(preset); engine.LoadPresetData(data,false);
+         EXPECT_TRUE(engine.failure.empty())<<engine.failure;
+         std::vector<Image> frames;
+         for(int frame=0;frame<20;++frame) {

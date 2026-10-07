@@ -172,3 +172,18 @@ or Windows appearance certification. Source attribution: MilkDrop 2
 `milkdropfs.cpp` (`DrawCustomShapes`) and `support.cpp` (orthographic setup), plus
 [Microsoft's D3D9 rasterization specification](https://learn.microsoft.com/en-us/windows/win32/direct3d9/rasterization-rules)
 and [GLES 3.0 §3.6](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf).
+
+## Composite texel centres (0013)
+
+`0013-composite-texel-centers.patch` removes a redundant half-texel UV bias in the
+custom composite mesh. MilkDrop 2's `plugin.cpp` moves the D3D9 mesh positions by
+half a pixel while retaining its UVs. On the unbiased GLES mesh, raster samples
+already interpolate at texel centres. The additional bias diluted a single bright
+feedback pixel over four quarter-bright pixels. The direct impulse/pattern control
+fails before and passes after the correction, including viewport resize and repeats.
+
+The animated Standard/plain-canvas host comparison now removes its diagnostic
+compensation for the old bias; its numerical tolerances remain unchanged. Explicit
+warp texel offsets default to zero and remain unchanged. This corrects image
+sampling without replacing authored blur or shader brightness, and is a general
+libprojectM correctness candidate rather than a performance claim.

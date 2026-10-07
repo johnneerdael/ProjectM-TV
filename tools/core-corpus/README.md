@@ -116,3 +116,13 @@ build/preset-lab-venv/bin/python -m unittest discover -s docs/superpowers/eviden
 
 The older desktop corpus and diagnostic helpers remain supplementary research.
 Their rendered rows cannot substitute for this actual-core baseline.
+
+
+Transformation unit tests use `fixtures/baseline-native-lib.cpp.txt`, the complete
+native source from baseline `5681852f9497f320e57b8a5dd40c076d0f5a6b18` (SHA256
+`3172d17e20019cb1b34e634f108edc3b669e5a663c18d843f32abac5f15603a6`). The test checks
+that identity before using the historical source and reads the current native source
+directly. This permits shallow trusted-main PR checkouts without a mock, network
+fetch or skipped source guard. Actual historical core builds still require Git
+history and the pinned engine/evaluator objects. Update the fixture only when the
+frozen baseline is deliberately changed, with its provenance and digest.

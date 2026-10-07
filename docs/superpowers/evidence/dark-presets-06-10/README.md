@@ -30,7 +30,30 @@ of changed seed coverage, not a claim that the preset should become broadly brig
 The source still uses very small shapes, subtracts `bass/7-mid/11.2` in the warp,
 and suppresses output with noise and a subtractive slow-colour composite.
 
-## Preset 10: authored suppression validated
+## Confirmed composite sampling defect
+
+A second independent impulse control found that the pass-through composite turns
+one RGB8=255 feedback texel into four RGB8=64 pixels. MilkDrop 2 biases its D3D9
+composite vertex positions by a half pixel and keeps UVs unchanged. GLES already
+interpolates the unbiased grid at half-integer samples; the extra hardcoded UV
+half-texel bias was therefore sampling between texels.
+
+Patch 0013 removes that redundant composite UV bias. The production pass-through
+now copies the impulse at full brightness and matches an asymmetric colour pattern
+across two viewport sizes, resize reuse and repeated draws. The existing animated
+Standard/plain-canvas host test now uses the ordinary authored composite instead
+of subtracting the old bug's bias in a diagnostic shader; its tolerances are unchanged.
+Warp texel offsets are configurable and default to zero, so that path is unchanged.
+
+The final candidate (`d67dce98f209ec0e93e67c810e3e32be71994a15bff8df39533f06b5e9a7227a`)
+contains both corrections. The earlier candidate metrics above isolate patch 0012.
+With both fixes, the emulator's original 30-frame maxima are 222 for preset 06 and
+9 for preset 10 (means 0.00354185 and 0.00122161 RGB8). Direct geometry and sampling
+controls establish the corrections; these presets remain authored sparse/dark scenes.
+All bundled assets remain byte-identical. The final five constant-composite controls
+still return the same independently predicted colours.
+
+## Preset 10: authored suppression also validated
 
 The actual first-frame composite uniform `_qc` is `[0,0,0,0]`, confirming `q9=q12=0`.
 For interior UVs, `h=q9=0` makes the water mask zero and the mirror mapping the
@@ -51,14 +74,14 @@ from fresh black and after a 60-frame white seed preset. Preset 10's cold 1080p
 30-second window reaches max RGB8 122 and mean RGB8 1.0802; white-history entry
 reaches 153 and mean 12.8300. Its initial 144p one-second window reaches only 8.
 That short cold window does not establish a failed shader or permanently black
-preset. The candidate still reaches 8 in that short window, consistent with the
-authored suppression; no brightness override is included.
+preset. The shape-only candidate reaches 8 and the final candidate reaches 9 in that short
+window. Corrected sampling does not override the authored brightness suppression.
 
 ## Local validation
 
-- 33/33 normal and 33/33 ASan/UBSan native CGL controls and 329/329 host controls pass.
+- 34/34 normal and 34/34 ASan/UBSan native CGL controls and 329/329 host controls pass.
 - 134 app/core JVM tests and the debug APK plus both-ABI release core build pass.
-- 157 release-tooling tests, 76 Native trails/core-corpus tests (35 subtests) and strict MkDocs pass.
+- 157 release-tooling tests, 77 Native trails/core-corpus tests (35 subtests) and strict MkDocs pass.
 - The UGOOS AM6 (Android 9/API28, ARMv7 process, Mali-G52/GLES3.2) renders both original presets in paired 30-frame, 1920×1080 frozen-audio baseline/candidate runs without skipped presets or GL readback failures. The metadata and final-frame identities are in `results.json`. An additional paired API34 2560×1440 capture activates Standard trails (1280×720 authored canvas), exercising different authored/native draw targets. These are offscreen core captures; setup/readback time is not app FPS or a performance benchmark.
 
 ## Sources and scope
@@ -88,5 +111,5 @@ fidelity or performance gain is claimed.
 CI run 37639894403 built the 2.3.18 APK/core successfully but failed Preset Lab's
 historical source controls because checkout was shallow. Publication and the
 Milkbeat update were skipped. This PR retains full history with `filter: blob:none`
-for those controls. A fresh depth-one clone reproduces the missing-source failure; a fresh full-history `blob:none` clone retrieves the identical baseline source. The local candidate is not the unchanged CI artifact or an
+for those controls. A fresh depth-one clone reproduces the missing-source failure; a fresh full-history `blob:none` clone retrieves the identical baseline source. Reviewed PRs use trusted-main workflow definitions before merge, so the transformation tests additionally use a checked-in full baseline source fixture pinned to SHA256 `3172d17e20019cb1b34e634f108edc3b669e5a663c18d843f32abac5f15603a6`. Those tests pass in a fresh shallow checkout without changing or skipping the historical-source checks. The local candidate is not the unchanged CI artifact or an
 official 2.3.18 release; the next reviewed main merge uses normal automatic versioning.

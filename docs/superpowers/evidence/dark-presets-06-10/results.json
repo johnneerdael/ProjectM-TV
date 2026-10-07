@@ -2,7 +2,7 @@
   "ci_run": 37639894403,
   "ci_sha": "8dfa0f186382e0a0e8636840a9f82d39160de2c9",
   "baseline_aar_sha256": "941108bb16279cb77a3b4db430ef4befcfe9706abbc87afe87745d53e3424e3a",
-  "candidate_aar_sha256": "c92a2db507b998b2342203fcf77988d28f1bbea50f0a71c9fe89e7c9ef8db261",
+  "candidate_aar_sha256": "d67dce98f209ec0e93e67c810e3e32be71994a15bff8df39533f06b5e9a7227a",
   "audio_sha256": "0640617ef6dcdf81f9af180ebb827c88ae8d570ec0abc96bf6f52f00bcab488c",
   "audio_scope": "Frozen one-second transport for 30-frame checks; repeated 30 times for 900-frame controls. Raw PCM remains untracked.",
   "sources": {
@@ -641,5 +641,438 @@
     "shallow_stderr": "fatal: path 'core/src/main/cpp/native-lib.cpp' does not exist in '5681852f9497f320e57b8a5dd40c076d0f5a6b18'\n",
     "full_history_filtered_exit": 0,
     "source_sha256": "3172d17e20019cb1b34e634f108edc3b669e5a663c18d843f32abac5f15603a6"
-  }
+  },
+  "shape_only_candidate_aar_sha256": "c92a2db507b998b2342203fcf77988d28f1bbea50f0a71c9fe89e7c9ef8db261",
+  "final_candidate_qualification": {
+    "aar_sha256": "d67dce98f209ec0e93e67c810e3e32be71994a15bff8df39533f06b5e9a7227a",
+    "cases": [
+      {
+        "case": "original-06",
+        "max_rgb8": 222,
+        "mean_rgb8": 0.003541847511574074,
+        "rgb_sha256": "def028b14c58f9f987a2f814d9c11b6fce9e4338405a908f41243c60721577a0",
+        "unique_rgb8": null,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "original-10",
+        "max_rgb8": 9,
+        "mean_rgb8": 0.001221607349537037,
+        "rgb_sha256": "164636fcff40b9ddb69f258f7e2c6ae3495b147c9c69dffdc0043e66285e5d13",
+        "unique_rgb8": null,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "suksma - ed geining hateops - flx evil.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "constant-quarter-red",
+        "max_rgb8": 3,
+        "mean_rgb8": 2.0,
+        "rgb_sha256": "2eb22c54e815beb0de0894f2bab9e08c68e01c3828bc81d4b9bfd79ee8fd0f9e",
+        "unique_rgb8": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "dark10 quarter-red.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "constant-weak-red",
+        "max_rgb8": 1,
+        "mean_rgb8": 0.6666666666666666,
+        "rgb_sha256": "a9994d523379d1e9925dda465dbcb81d15e1ae15f37cbbb555c173a726267659",
+        "unique_rgb8": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "dark10 weak-red.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "constant-white-one-q12",
+        "max_rgb8": 255,
+        "mean_rgb8": 255.0,
+        "rgb_sha256": "5bb3116bfe06521e796fb9c0e3b4251434371c1e1f3d68c1f006859e41c8651c",
+        "unique_rgb8": [
+          [
+            255
+          ],
+          [
+            255
+          ],
+          [
+            255
+          ]
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "dark10 white-one-q12.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "constant-white-zero-q12",
+        "max_rgb8": 153,
+        "mean_rgb8": 85.0,
+        "rgb_sha256": "1a757fd5c6750a4b96bceb0c9316a66b4b8243010282e6250b24964ae99ce4c5",
+        "unique_rgb8": [
+          [
+            153
+          ],
+          [
+            51
+          ],
+          [
+            51
+          ]
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "dark10 white-zero-q12.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "constant-zero-red",
+        "max_rgb8": 0,
+        "mean_rgb8": 0.0,
+        "rgb_sha256": "917dd173f914f01a5b6023d13cad5fa2de148882d0febae10bb21b30dbc8220a",
+        "unique_rgb8": [
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ],
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "dark10 zero-red.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "shape-between-samples",
+        "max_rgb8": 255,
+        "mean_rgb8": 0.006917317708333333,
+        "rgb_sha256": "82cb1d0e71014080dbcecb4e00dd2d4430d522f4f652b56150536b1e51304637",
+        "unique_rgb8": null,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "dark06 between-samples.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      },
+      {
+        "case": "shape-on-sample",
+        "max_rgb8": 0,
+        "mean_rgb8": 0.0,
+        "rgb_sha256": "917dd173f914f01a5b6023d13cad5fa2de148882d0febae10bb21b30dbc8220a",
+        "unique_rgb8": null,
+        "metadata": {
+          "backend": "published-core-jni",
+          "core_version": "4.2.0",
+          "preset": "dark06 on-sample.milk",
+          "frames": 30,
+          "width": 256,
+          "height": 144,
+          "fps": 30,
+          "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+          "simulated_clock": true,
+          "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+          "gl_vendor": "Google (Apple)",
+          "egl_version_major": 1,
+          "egl_version_minor": 0,
+          "mesh_width": 48,
+          "mesh_height": 32,
+          "pcm_sample_rate": 44100,
+          "pcm_channels": 1,
+          "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+          "native_trails_status": "Standard \u00b7 inactive (render 144p)",
+          "rendered_frame_serial_initial": 0,
+          "rendered_frame_serial": 30,
+          "rendered_frame_serial_delta": 30,
+          "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+          "skipped_count": 0,
+          "indexed_count": 1
+        }
+      }
+    ]
+  },
+  "composite_impulse_control": {
+    "before": "one red source texel produced four RGB8=64 pixels",
+    "after": "one RGB8=255 pixel; full pattern/impulse tests pass across resized viewports and repeated draws"
+  },
+  "final_tv_captures": {
+    "06": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ consume, in fear, in excessiveness.milk",
+        "frames": 30,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "renderer": "Mali-G52",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+        "gl_vendor": "ARM",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 238,
+      "mean_rgb8": 0.0012184445730452674,
+      "frame30_rgba_sha256": "4708eef20897b7ed857abcd6b78feb4eefb31186b889c3ec2ff3f28e3ca14515"
+    },
+    "10": {
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "suksma - ed geining hateops - flx evil.milk",
+        "frames": 30,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "renderer": "Mali-G52",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.2 v1.r16p0-01rel0-32c0b2f.c25240d9b3b6a859d1ff286f5cd41479",
+        "gl_vendor": "ARM",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 inactive (render 1080p)",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "production default Standard; expected inactive below 1330p at 256x144",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "max_rgb8": 5,
+      "mean_rgb8": 0.0010918906464334704,
+      "frame30_rgba_sha256": "183c7a1ecc785e13231051befe7fb07c6d7f8e902a1cad5d12c7f7c01c5f5eba"
+    }
+  },
+  "final_candidate_assets_identical": true
 }

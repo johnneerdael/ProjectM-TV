@@ -325,3 +325,20 @@ else()
 endif()
 add_test(NAME shape-pixel-center-regressions COMMAND shape-pixel-center-regressions)
 set_tests_properties(shape-pixel-center-regressions PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+add_executable(composite-texel-center-regressions composite_texel_center_test.cpp)
+target_compile_features(composite-texel-center-regressions PRIVATE cxx_std_17)
+target_include_directories(composite-texel-center-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM" "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_link_libraries(composite-texel-center-regressions PRIVATE libprojectM::projectM)
+if(APPLE)
+    target_compile_definitions(composite-texel-center-regressions PRIVATE GL_SILENCE_DEPRECATION)
+    target_link_libraries(composite-texel-center-regressions PRIVATE "${REGRESSION_OPENGL_FRAMEWORK}")
+else()
+    target_compile_definitions(composite-texel-center-regressions PRIVATE USE_GLES)
+    target_link_libraries(composite-texel-center-regressions PRIVATE ${REGRESSION_GL_TARGET})
+endif()
+add_test(NAME composite-texel-center-regressions COMMAND composite-texel-center-regressions)
+set_tests_properties(composite-texel-center-regressions PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

@@ -97,3 +97,8 @@ shapes or changing their colours. Very small shapes can still be sparse, and a
 custom composite can deliberately suppress their brightness. A short, low-resolution
 capture from a fresh start can differ substantially from playback with existing
 feedback. Include the preset name, render size and playback duration in picture reports.
+
+Custom composite shaders now sample the feedback image without an extra half-texel
+shift. Thin marks keep their sampled brightness instead of being unnecessarily
+spread over neighbouring pixels. Authored blur, distortion and colour suppression
+remain in effect.
