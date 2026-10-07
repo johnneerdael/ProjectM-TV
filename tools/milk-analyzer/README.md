@@ -925,3 +925,27 @@ median motion error 2.83%, p95 error 1.03%, and exact flash-event timing matched
 Mean RGB error fell from 0.01697 to 0.00073; isolated pixel differences remain.
 The repair earns no fresh randomized-run credit. See
 `fixtures/apple-gles-sampler-learning-2026-10-07.json` for numerical evidence.
+
+
+The separate `apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1`
+texture sampling profile retains the same 2D rules and adds observed UNORM8 3D
+filtering in raw upload `[z,y,x]` order. Round coordinate fractions on all three
+axes to eight bits. Form fixed16 X/Z coefficient pairs, round each lower-Y
+coefficient upward at half-way values, and derive its upper-Y complement by
+subtraction. Sum byte values with those integer coefficients, then apply final
+fixed4 half-up rounding. Do not round intermediate XY texture planes. Unequal-volume tests matched all 32 frozen
+packed values; 48 Z-axis tie checks and four unchanged published-AAR volume-noise
+checks also matched exactly. This is an explicit Apple emulator profile; it does
+not establish float/sRGB, mipmapped or other-driver parity. The original 2D-only
+profile continues to reject volumes. See
+`fixtures/apple-gles-volume-sampler-learning-2026-10-07.json`.
+
+
+Volume coefficient qualification resolved the review finding. The former
+float32 prototype and exact full trilinear weights both missed observed boundary
+cases. The conserving lower-Y coefficient rule matches all 128 discriminating
+packed observations, including 32 fresh observations from an axis-swapped cube.
+X- and Z-oriented alternatives fail those fresh controls. No per-coordinate
+exceptions are used. These are observed-driver numerical controls, not fresh
+randomized preset scores. The volume programs' default/highp labels represent
+repeated highp-sampler3D runs, not an independent precision comparison.

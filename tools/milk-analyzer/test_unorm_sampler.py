@@ -16,6 +16,77 @@ def test_apple_profile_matches_fresh_four_corner_packed_readbacks():
         assert int(np.floor(value*16777216))==row['packed_bits']
 
 
+def test_apple_volume_matches_fresh_noncubic_packed_readbacks():
+    from unorm_sampler import sample_apple_volume_unorm8
+    proof=json.loads((Path(__file__).parent/'fixtures/apple-gles-volume-sampler-learning-2026-10-07.json').read_text())
+    width,height,depth=proof['frozen']['dimensions']
+    corners=np.asarray(proof['frozen']['corners'],np.float32)
+    z,y,x=np.indices((depth,height,width))
+    volume=corners[z%2,y%2,x%2]/255
+    for row in proof['observed']['results']:
+        uv=proof['frozen']['records'][row['case']-1]['uv']
+        value=sample_apple_volume_unorm8(volume,uv,wrap=True,linear=True)[row['axis']]
+        assert abs(int(np.floor(value*16777216))-row['packed_bits'])<=1
+
+
+def test_volume_profile_preserves_old_2d_guard_and_routes_material_volumes(tmp_path):
+    from unorm_sampler import APPLE_VOLUME_PROFILE, sample_apple_volume_unorm8
+    from noise_inputs import NoiseBank
+    from materials import MaterialBank
+    from test_materials import BINARY as decoder
+    import hashlib
+    pixels=np.array([0,8,16,24,32,40,48,56],np.uint8)
+    raw=np.stack((pixels,pixels,pixels,np.full(8,255,np.uint8)),-1).tobytes()
+    (tmp_path/'volume.bin').write_bytes(raw)
+    (tmp_path/'manifest.json').write_text(json.dumps({'schema_version':1,'uses_rendered_reference':False,
+        'packed_word_encoding':'uint32 little endian','native_upload_format':'RGBA',
+        'textures':{'noisevol_hq':{'file':'volume.bin','dimensions':[2,2,2],
+                                 'sha256':hashlib.sha256(raw).hexdigest()}}}))
+    noise=NoiseBank(tmp_path);materials=MaterialBank([],decoder=decoder,noise_bank=noise)
+    detail={'canonical_texture':'noisevol_hq','sampling_policy':{'wrap':True,'linear':True}}
+    uv=np.array([[.25,.25,.25+.5/256/2]],np.float32)
+    expected=sample_apple_volume_unorm8(noise.textures['noisevol_hq'],uv,wrap=True,linear=True)
+    for bank in [noise,materials]:
+        np.testing.assert_array_equal(bank.sample(detail,uv,sampling_profile=APPLE_VOLUME_PROFILE),expected)
+
+
+def test_apple_volume_addressing_and_storage_guards():
+    from unorm_sampler import sample_apple_volume_unorm8
+    volume=np.zeros((2,2,2,4),np.float32);volume[...,3]=1;volume[1,0,1,:3]=[1,0,1]
+    np.testing.assert_array_equal(sample_apple_volume_unorm8(volume,[1.75,-.75,1.75],
+        wrap=True,linear=False),[1,0,1,1])
+    np.testing.assert_array_equal(sample_apple_volume_unorm8(volume,[9,-9,9],
+        wrap=False,linear=False),[1,0,1,1])
+    for data,uv in [(np.full((2,2,2,4),.123),[.5,.5,.5]),
+                    (volume,[.5,.5]),(volume,[float('inf'),.5,.5])]:
+        with pytest.raises(ValueError):sample_apple_volume_unorm8(data,uv,wrap=True,linear=True)
+
+
+def test_apple_volume_z_axis_halfway_rules_match_frozen_controls():
+    from unorm_sampler import sample_apple_volume_unorm8
+    proof=json.loads((Path(__file__).parent/'fixtures/apple-gles-volume-sampler-learning-2026-10-07.json').read_text())
+    volume=np.zeros((4,4,4,4),np.float32);volume[...,3]=1;volume[1::2,...,:3]=8/255
+    for row in proof['z_ties']['observed']['results']:
+        phase=proof['z_ties']['frozen']['records'][row['case']-1]['phase_z']
+        uv=(np.array([.5,.5,.5],np.float32)+[0,0,phase])/4
+        value=sample_apple_volume_unorm8(volume,uv,wrap=True,linear=True)[row['axis']]
+        assert abs(int(np.floor(value*16777216))-row['packed_bits'])<=1
+
+
+def test_volume_coefficients_preserve_y_complements_at_discriminating_boundaries():
+    from unorm_sampler import sample_apple_volume_unorm8
+    proof=json.loads((Path(__file__).parent/'fixtures/apple-gles-volume-sampler-learning-2026-10-07.json').read_text())
+    z,y,x=np.indices((4,4,4))
+    for controls in proof['coefficient_controls']:
+        corners=np.asarray(controls['corners'],np.float32)
+        volume=corners[z%2,y%2,x%2]/255
+        for observed in controls['observations']:
+            fractions=controls['cases'][observed['case']-1]['fraction8']
+            uv=(np.float32(.5)+np.asarray(fractions,np.float32)/256)/4
+            value=sample_apple_volume_unorm8(volume,uv,wrap=True,linear=True)[observed['axis']]
+            assert int(np.floor(value*16777216))==observed['packed_bits']
+
+
 def test_apple_profile_rounds_coordinate_and_filtered_byte_ties_upward():
     from unorm_sampler import sample_apple_unorm8
     width,height=256,144;x,y=np.meshgrid(np.arange(width)%2,np.arange(height)%2)

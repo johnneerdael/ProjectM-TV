@@ -7,14 +7,60 @@ import numpy as np
 
 PROFILE='swiftshader-unorm8-fixed16-v1'
 APPLE_PROFILE='apple-m4pro-gles-unorm8-fixed8-fraction4-v1'
+APPLE_VOLUME_PROFILE='apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1'
 
 
 def sampler_2d(profile):
-    if profile==APPLE_PROFILE:return sample_apple_unorm8
+    if profile in (APPLE_PROFILE,APPLE_VOLUME_PROFILE):return sample_apple_unorm8
     if profile=='portable':
         from spatial import sample2d
         return sample2d
     raise ValueError('unsupported texture sampling profile')
+
+
+def sample_apple_volume_unorm8(volume,uvw,*,wrap:bool,linear:bool):
+    """Observed Apple UNORM8 volume filtering, in raw upload [z,y,x] order.
+
+    Apply fixed8 fractions, conserving fixed16 X/Z coefficient pairs across Y,
+    then final fixed4 raw-byte rounding. Integer accumulation avoids premature
+    float32 rounding near the final threshold.
+    """
+    field=np.asarray(volume,dtype=np.float32);coords=np.asarray(uvw,dtype=np.float32)
+    if (field.ndim!=4 or field.shape[-1] not in (3,4) or min(field.shape[:3])<1 or
+            max(field.shape[:3])>32768 or coords.shape[-1:]!=(3,) or
+            not np.all(np.isfinite(field)) or not np.all(np.isfinite(coords))):
+        raise ValueError('finite RGB/RGBA unorm volume and three-component coordinates required')
+    if type(wrap) is not bool or type(linear) is not bool:
+        raise ValueError('explicit volume wrap/filter required')
+    packed=np.rint(field*255)
+    if np.any((packed<0)|(packed>255)) or not np.allclose(field,packed/255,rtol=0,atol=1e-7):
+        raise ValueError('actual unorm8 texels required for Apple volume profile')
+    packed=packed.astype(np.int64)
+    depth,height,width=field.shape[:3];size=np.array([width,height,depth],np.float32)
+    coords=np.mod(coords,1) if wrap else np.clip(coords,0,1)
+    query=coords*size
+    def fetch(x,y,z):
+        x=np.mod(x,width) if wrap else np.clip(x,0,width-1)
+        y=np.mod(y,height) if wrap else np.clip(y,0,height-1)
+        z=np.mod(z,depth) if wrap else np.clip(z,0,depth-1)
+        return packed[z,y,x]
+    if not linear:
+        index=np.floor(query).astype(np.int64)
+        return (fetch(index[...,0],index[...,1],index[...,2])/255).astype(np.float32)
+    query-=np.float32(.5);index=np.floor(query).astype(np.int64)
+    fraction=np.floor((query-index)*256+.5).astype(np.int64)
+    x,y,z=index[...,0],index[...,1],index[...,2]
+    fx,fy,fz=fraction[...,0],fraction[...,1],fraction[...,2]
+    numerator=np.zeros(coords.shape[:-1]+(field.shape[-1],),dtype=np.int64)
+    for iz in (0,1):
+        for ix in (0,1):
+            base=(fx if ix else 256-fx)*(fz if iz else 256-fz)
+            lower=(base*(256-fy)+128)//256
+            upper=base-lower
+            numerator+=fetch(x+ix,y,z+iz)*lower[...,None]
+            numerator+=fetch(x+ix,y+1,z+iz)*upper[...,None]
+    raw16=(numerator+2048)//4096
+    return (raw16.astype(np.float32)/16/255).astype(np.float32)
 
 
 def sample_apple_unorm8(texture,uv,*,wrap:bool,linear:bool,origin:str):

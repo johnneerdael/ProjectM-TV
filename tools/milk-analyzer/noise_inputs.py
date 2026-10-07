@@ -77,6 +77,9 @@ class NoiseBank:
         if policy.get('wrap') is None or policy.get('linear') is None:raise ValueError('procedural sampler policy unresolved')
         texture=self.textures[name]
         if texture.ndim==4:
+            from unorm_sampler import APPLE_VOLUME_PROFILE,sample_apple_volume_unorm8
+            if sampling_profile==APPLE_VOLUME_PROFILE:
+                return sample_apple_volume_unorm8(texture,coordinates,wrap=policy['wrap'],linear=policy['linear'])
             if sampling_profile!='portable':raise ValueError('declared texture profile supports only2D inputs')
             return sample3d(texture,coordinates,wrap=policy['wrap'],linear=policy['linear'])
         # Raw generator row0 is normalized GL-v0; sample2d's top-origin option
