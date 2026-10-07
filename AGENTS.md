@@ -554,3 +554,8 @@ Prepare source50 adapters separately; preserve older frozen binaries and grades.
 Audience review exports require native/AAR and reproduced-DEX binding metadata;
 verification also checks actual embedded ARMv7 native/classes bytes. Independent
 runtime hashes alone cannot certify an exported review collection.
+
+Before freezing temporal colour prose, validate the claimed RGB/area predicate
+on every stated source frame and list exact phases when colour alternates.
+Preserve an incorrect frozen sentence as a prediction miss; do not reinterpret
+it after viewing the native result.

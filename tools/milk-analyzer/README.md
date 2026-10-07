@@ -861,3 +861,11 @@ with only independent runtime hashes cannot be marked verified. This validates
 recorded producer proofs and AAR membership; the review asset verifier does not
 rerun D8 without the producer’s toolchain/helper artifacts. Preserve legacy
 records and revalidate their original runtime before producing a new bound export.
+
+Temporal colour descriptions must state their exact phases.
+`prediction_windows.validate_colour_claim` checks a declared RGB/area predicate
+over every claimed source-predicted frame; it rejects a persistent-window claim
+if any intervening frame fails. `describe_colour_presence` formats only verified
+frame IDs. This numeric helper does not parse arbitrary prose, inspect native
+references, or establish structure/motion accuracy. A closely matching numerical
+forecast cannot silently repair an overbroad frozen description.
