@@ -150,3 +150,40 @@ The original three-patch consolidation contains `0001-tv-rendering-and-preset-co
 The release AAR's ARM64/ARMv7 JNI dynamic exports contain no `glad_`, `stbi_` or `prjm_eval_` symbols in the NDK llvm-nm audit. This supports shared-JNI artifact isolation, not arbitrary static libprojectM/vcpkg linking. External texture/WIP APIs and expression-monitoring UI have not been adopted.
 
 The completed AM6 pilot covers one preset at 1920×1080 with Standard inactive, eight selected captures among 480 frames, and two repeats per role on a GLES 3.2 driver. Same-role captures repeat exactly; cross-role captures do not. Its low global mean error includes larger localized differences, and no causal attribution is established. The original TV matrix is retained as historical evidence. The final API34 GPU matrix passes all declared cases under the user’s TV waiver; final CI/review/merge/publication remain separate gates. Successful compilation, host controls and Milkbeat consumer checks do not establish 9,606-preset visual equivalence, a minimum-GLES-3.0-only runtime result or a 4.2 performance gain.
+
+## Custom shape pixel centres (0012)
+
+`0012-shape-pixel-centers.patch` corrects a D3D9-to-GLES rasterization mismatch in
+custom shape fills and outlines. MilkDrop 2 copies the authored shape position into
+an orthographic projection without a position bias; D3D9 samples integer pixel
+centres. OpenGL/GLES samples half-integers. Preserving only the vertex coordinates
+can therefore lose a centred subpixel shape entirely.
+
+The patch applies a half destination pixel translation in each actual draw pass,
+including authored/native geometry replay, and restores shared shader matrices.
+It preserves equations, radii, colours, UVs and assets. The direct framebuffer
+regression fails before the patch and passes for textured/untextured shapes at
+256×144 and 512×288, including repeated draws and matrix restoration. The existing
+sampler regression retains its analytical bilinear weights with the corrected
+sample positions. See [the focused investigation](superpowers/evidence/dark-presets-06-10/README.md).
+
+This is a general MilkDrop compatibility correction, not a brightness adjustment
+or Windows appearance certification. Source attribution: MilkDrop 2
+`milkdropfs.cpp` (`DrawCustomShapes`) and `support.cpp` (orthographic setup), plus
+[Microsoft's D3D9 rasterization specification](https://learn.microsoft.com/en-us/windows/win32/direct3d9/rasterization-rules)
+and [GLES 3.0 §3.6](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf).
+
+## Composite texel centres (0013)
+
+`0013-composite-texel-centers.patch` removes a redundant half-texel UV bias in the
+custom composite mesh. MilkDrop 2's `plugin.cpp` moves the D3D9 mesh positions by
+half a pixel while retaining its UVs. On the unbiased GLES mesh, raster samples
+already interpolate at texel centres. The additional bias diluted a single bright
+feedback pixel over four quarter-bright pixels. The direct impulse/pattern control
+fails before and passes after the correction, including viewport resize and repeats.
+
+The animated Standard/plain-canvas host comparison now removes its diagnostic
+compensation for the old bias; its numerical tolerances remain unchanged. Explicit
+warp texel offsets default to zero and remain unchanged. This corrects image
+sampling without replacing authored blur or shader brightness, and is a general
+libprojectM correctness candidate rather than a performance claim.
