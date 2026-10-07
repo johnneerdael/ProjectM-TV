@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "scope": "Frozenexactgradient/signedhalfmidpoint numericalcontrols,noAAR/randomcredit",
+  "y_sweep": {
+    "scope": "ExactgradientYdependencediscriminator",
+    "channel_values": {
+      "0": [
+        0.61669921875
+      ],
+      "1": [
+        0.171630859375
+      ]
+    }
+  },
+  "signed_midpoint": {
+    "channel_values": {
+      "0": [
+        0.61669921875
+      ],
+      "1": [
+        -0.61669921875
+      ]
+    },
+    "scope": "Signedexactmidpointonly; noaccumulatorruleaccepted"
+  },
+  "disposition": "Observedtiesawayfromzero forboundedexactgradient; unresolvedpre-finalaccumulatorerrors notsolved",
+  "artifacts": {
+    "half-operational-cell-y-sweep": {
+      "HalfCellYSweepProbe.java": "5a572bc034e46394bf3bbcf161248278f2977fd1d0c2f81ae1e856663012f9f1",
+      "comparison.json": "d96f006d534e4ce5600a6382ba8b92dc1f49cddfb08fba12a0295245721e0fc3",
+      "texture.rg.f32": "9b3ebc020dc65acc459d6802ab7a0cd9f16657f31e07996a217ad4c61c439336",
+      "stdout.json": "ea5db5ea7fd9cfc463cf3d847583aaa823b26be00ba79c2207ed5fc7d9a69492",
+      "freeze.json": "a562036e424b6e3210396d7df7d0624d5e8aeefbf5caad3caf506c8ca828c038"
+    },
+    "half-signed-midpoint": {
+      "HalfSignedMidpointProbe.java": "fb2b76d92edc6f83110fb41fe5d7792359d6f1eaf37a4d1e4e9b21b761e6ebb4",
+      "comparison.json": "9f96a84d80fc1cd60321814347eb2b9081efae1d70c8f4b8e7ea1db54db99f66",
+      "texture.rg.f32": "b483867248bb3bf58aba205b0b5c42d3186ca43c9a6365b483f3c5007ccd14d2",
+      "stdout.json": "9a43d8d1d9025bb6008e79ec43d21f8609f42d9e7a0c0135ffff9fdf0c4aa8ae",
+      "freeze.json": "5a6fbeeba9dc4d9c460cab1f849f7b7190a14b3d086ce1d19663873965b8fde9"
+    }
+  },
+  "randomized_credit": 0
+}
