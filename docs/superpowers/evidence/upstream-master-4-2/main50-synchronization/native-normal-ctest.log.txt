@@ -1,0 +1,67 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/main50-native-regressions-normal
+      Start  1: user-texture-premultiplication-regressions
+ 1/31 Test  #1: user-texture-premultiplication-regressions ...   Passed    0.30 sec
+      Start  2: texture-routing-regressions
+ 2/31 Test  #2: texture-routing-regressions ..................   Passed    0.61 sec
+      Start  3: warp-zoom-regressions
+ 3/31 Test  #3: warp-zoom-regressions ........................   Passed    0.21 sec
+      Start  4: dynamic-original-presets
+ 4/31 Test  #4: dynamic-original-presets .....................   Passed    0.67 sec
+      Start  5: dynamic-wave-controls
+ 5/31 Test  #5: dynamic-wave-controls ........................   Passed    0.48 sec
+      Start  6: dynamic-display-controls
+ 6/31 Test  #6: dynamic-display-controls .....................   Passed    2.47 sec
+      Start  7: shape-sampler-regressions
+ 7/31 Test  #7: shape-sampler-regressions ....................   Passed    0.50 sec
+      Start  8: shape-sampler-preset
+ 8/31 Test  #8: shape-sampler-preset .........................   Passed    0.16 sec
+      Start  9: blur-range-regressions
+ 9/31 Test  #9: blur-range-regressions .......................   Passed    0.16 sec
+      Start 10: blur-range-render
+10/31 Test #10: blur-range-render ............................   Passed    0.44 sec
+      Start 11: float-literal-regressions
+11/31 Test #11: float-literal-regressions ....................   Passed    0.21 sec
+      Start 12: random-texture-manager
+12/31 Test #12: random-texture-manager .......................   Passed    0.27 sec
+      Start 13: random-texture-stages
+13/31 Test #13: random-texture-stages ........................   Passed    0.15 sec
+      Start 14: random-texture-shorthand
+14/31 Test #14: random-texture-shorthand .....................   Passed    0.13 sec
+      Start 15: random-texture-numerical
+15/31 Test #15: random-texture-numerical .....................   Passed    0.18 sec
+      Start 16: random-texture-lifecycle
+16/31 Test #16: random-texture-lifecycle .....................   Passed    0.21 sec
+      Start 17: random-texture-blur-framebuffers
+17/31 Test #17: random-texture-blur-framebuffers .............   Passed    0.13 sec
+      Start 18: random-texture-midgit-render
+18/31 Test #18: random-texture-midgit-render .................   Passed    0.16 sec
+      Start 19: shader-parser-regressions
+19/31 Test #19: shader-parser-regressions ....................   Passed    0.15 sec
+      Start 20: hlsl-self-reference
+20/31 Test #20: hlsl-self-reference ..........................   Passed    0.17 sec
+      Start 21: custom-waveform-bounds
+21/31 Test #21: custom-waveform-bounds .......................   Passed    0.10 sec
+      Start 22: shader-render-regressions
+22/31 Test #22: shader-render-regressions ....................   Passed    1.50 sec
+      Start 23: float-literal-render
+23/31 Test #23: float-literal-render .........................   Passed    0.13 sec
+      Start 24: parser-presets
+24/31 Test #24: parser-presets ...............................   Passed    0.25 sec
+      Start 25: implicit-global-regressions
+25/31 Test #25: implicit-global-regressions ..................   Passed    0.15 sec
+      Start 26: implicit-input-bindings
+26/31 Test #26: implicit-input-bindings ......................   Passed    0.09 sec
+      Start 27: initialization-presets
+27/31 Test #27: initialization-presets .......................   Passed    0.21 sec
+      Start 28: float-literal-presets
+28/31 Test #28: float-literal-presets ........................   Passed    0.84 sec
+      Start 29: gles-loader-gles30
+29/31 Test #29: gles-loader-gles30 ...........................   Passed    0.16 sec
+      Start 30: gles-loader-gles20
+30/31 Test #30: gles-loader-gles20 ...........................   Passed    0.01 sec
+      Start 31: gles-loader-glsl100
+31/31 Test #31: gles-loader-glsl100 ..........................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 31
+
+Total Test time (real) =  11.23 sec

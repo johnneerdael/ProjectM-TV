@@ -1,0 +1,3305 @@
+{
+  "local_project_head": "4b15c4e6df596d09874f7bf76c7e8479e63884cb",
+  "upstream_pin": "6f64807467e312034883a4389e6aa80a675458bc",
+  "local_source_state": "Applied migration threepatchseries; not main47+pending49integrated",
+  "registry_url": "https://github.com/KhronosGroup/OpenGL-Registry/blob/main/xml/gl.xml",
+  "registry_sha256": "b9ca2cfa5c676e901c20d34af3407f1687cde0f1336a5ff7a8974d04c7494ad3",
+  "calls": [
+    {
+      "call": "glActiveTexture",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 47,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp",
+          "line_in_comment_stripped_view": 244,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 243,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 254,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 99,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 115,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 166,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 189,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glAttachShader",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 194,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 195,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 66,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 67,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBindBuffer",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 28,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 39,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 50,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 306,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 322,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 79,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 89,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 131,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 164,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 191,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 197,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp",
+          "line_in_comment_stripped_view": 24,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp",
+          "line_in_comment_stripped_view": 29,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 679,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 702,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 720,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 736,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBindFramebuffer",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 343,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 344,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 357,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/ProjectM.cpp",
+          "line_in_comment_stripped_view": 215,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 47,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 59,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 71,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 78,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 119,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 122,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 128,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 131,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 210,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 219,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 220,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 245,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 286,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 311,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 336,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 420,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 428,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 429,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 153,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 171,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/UserSprites/MilkdropSprite.cpp",
+          "line_in_comment_stripped_view": 279,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 684,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 701,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1286,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1289,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1325,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1326,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1328,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 109,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 116,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 170,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 198,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBindSampler",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 244,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 25,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 30,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 181,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 188,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBindTexture",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 394,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 306,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp",
+          "line_in_comment_stripped_view": 245,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp",
+          "line_in_comment_stripped_view": 288,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 112,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 244,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 255,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 305,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 318,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 324,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 337,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 118,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 123,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 137,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1281,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1285,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 103,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 114,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 182,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 187,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBindVertexArray",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 307,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 43,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 45,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 78,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 85,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 130,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 165,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexArray.hpp",
+          "line_in_comment_stripped_view": 37,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexArray.hpp",
+          "line_in_comment_stripped_view": 45,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 183,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 186,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBlendEquation",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 176,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBlendEquationSeparate",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 191,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBlendFunc",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 359,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.cpp",
+          "line_in_comment_stripped_view": 253,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp",
+          "line_in_comment_stripped_view": 62,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp",
+          "line_in_comment_stripped_view": 66,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/BlendMode.cpp",
+          "line_in_comment_stripped_view": 26,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBlendFuncSeparate",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 177,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 192,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBlitFramebuffer",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 79,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 123,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1327,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBufferData",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 47,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 323,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 90,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 296,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp",
+          "line_in_comment_stripped_view": 105,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 681,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glBufferSubData",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 324,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 292,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp",
+          "line_in_comment_stripped_view": 101,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glCheckFramebufferStatus",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 199,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 18,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 26,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1288,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glClear",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 163,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glClearColor",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 162,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 164,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glClientWaitSync",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 713,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glColorMask",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 349,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 161,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 165,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glColorMaski",
+      "gles_core_first": "3.2",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 351,
+          "guards": [
+            "else "
+          ]
+        }
+      ]
+    },
+    {
+      "call": "glCompileShader",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 387,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 40,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glCopyTexImage2D",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 111,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glCopyTexSubImage2D",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 329,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glCreateProgram",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 155,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 65,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glCreateShader",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 383,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 38,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteBuffers",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 57,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 53,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 185,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp",
+          "line_in_comment_stripped_view": 19,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 628,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteFramebuffers",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 28,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 129,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 172,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1299,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteProgram",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 167,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 75,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 218,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteSamplers",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 61,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 20,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteShader",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 190,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 205,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 206,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 399,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 47,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 62,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 69,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 70,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteSync",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 706,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteTextures",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 88,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 235,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1300,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 205,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDeleteVertexArrays",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 31,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 57,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexArray.hpp",
+          "line_in_comment_stripped_view": 28,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 219,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDetachShader",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 203,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 204,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDisable",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 310,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.cpp",
+          "line_in_comment_stripped_view": 223,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.cpp",
+          "line_in_comment_stripped_view": 262,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 42,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 282,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 188,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 153,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp",
+          "line_in_comment_stripped_view": 80,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp",
+          "line_in_comment_stripped_view": 116,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/BlendMode.cpp",
+          "line_in_comment_stripped_view": 20,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 160,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 172,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 173,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 174,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 194,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDisableVertexAttribArray",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 228,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 216,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDrawArrays",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 392,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 406,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 439,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 44,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 184,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDrawArraysInstanced",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 158,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 248,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDrawBuffers",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 278,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 251,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 361,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/ProjectM.cpp",
+          "line_in_comment_stripped_view": 223,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 410,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glDrawElements",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Mesh.cpp",
+          "line_in_comment_stripped_view": 148,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glEnable",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 138,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 141,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 339,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.cpp",
+          "line_in_comment_stripped_view": 252,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 175,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 98,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp",
+          "line_in_comment_stripped_view": 59,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/BlendMode.cpp",
+          "line_in_comment_stripped_view": 16,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 168,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 175,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 195,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 196,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 197,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glEnableVertexAttribArray",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 30,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 31,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 32,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 41,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 42,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 82,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 226,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 212,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glFenceSync",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 695,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glFlush",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 696,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glFramebufferTexture2D",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 198,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 200,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 314,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 336,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 103,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 107,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 120,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 214,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 242,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 283,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 308,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 333,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 422,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 154,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 170,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1287,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGenBuffers",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 25,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 77,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 172,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp",
+          "line_in_comment_stripped_view": 179,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp",
+          "line_in_comment_stripped_view": 8,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp",
+          "line_in_comment_stripped_view": 14,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 678,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGenFramebuffers",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 9,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 16,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 117,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 152,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1279,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGenSamplers",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 27,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 10,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGenTextures",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 223,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 323,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 122,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1280,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 102,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGenVertexArrays",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 29,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 76,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/VertexArray.hpp",
+          "line_in_comment_stripped_view": 20,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 87,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGenerateMipmap",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 113,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetBooleanv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 158,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetError",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 110,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 112,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetFloatv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 157,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetIntegerv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 144,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 145,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 151,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 674,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 675,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 676,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 719,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 83,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 97,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 98,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 100,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 150,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 152,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 153,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 154,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 155,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 156,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 157,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 158,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 159,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 160,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 161,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 167,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 168,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetProgramBinary",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 86,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        }
+      ]
+    },
+    {
+      "call": "glGetProgramInfoLog",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 219,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 240,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetProgramiv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 54,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 79,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 209,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 217,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 235,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 236,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 72,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetShaderInfoLog",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 398,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 45,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetShaderiv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 389,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 396,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 42,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetString",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Platform/GLProbe.cpp",
+          "line_in_comment_stripped_view": 581,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 409,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glGetUniformLocation",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 274,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 79,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 80,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 81,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glInvalidateFramebuffer",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 321,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 290,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FinalComposite.cpp",
+          "line_in_comment_stripped_view": 113,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp",
+          "line_in_comment_stripped_view": 327,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/VideoEcho.cpp",
+          "line_in_comment_stripped_view": 77,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp",
+          "line_in_comment_stripped_view": 90,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glIsEnabled",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 286,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 173,
+          "guards": [
+            "ifndef USE_GLES"
+          ]
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp",
+          "line_in_comment_stripped_view": 85,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 159,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 162,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 163,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 164,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 165,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glLineWidth",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 139,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.cpp",
+          "line_in_comment_stripped_view": 266,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 96,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp",
+          "line_in_comment_stripped_view": 118,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glLinkProgram",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 200,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 68,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glMapBufferRange",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 722,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glPixelStorei",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 685,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 700,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glProgramBinary",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 52,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        }
+      ]
+    },
+    {
+      "call": "glProgramParameteri",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 198,
+          "guards": [
+            "ifdef USE_GLES"
+          ]
+        }
+      ]
+    },
+    {
+      "call": "glReadBuffer",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 121,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glReadPixels",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 688,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 691,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glSamplerParameteri",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 28,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 29,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 30,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 31,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 11,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 12,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 13,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 14,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 47,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 48,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 65,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp",
+          "line_in_comment_stripped_view": 66,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glShaderSource",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 385,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 39,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glTexImage2D",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 309,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 328,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 124,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1282,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glTexImage3D",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 312,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Texture.cpp",
+          "line_in_comment_stripped_view": 331,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glTexParameteri",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 384,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 385,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 132,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 133,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 134,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp",
+          "line_in_comment_stripped_view": 135,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1283,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1284,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 104,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 105,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 106,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 107,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform1f",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 103,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 117,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 179,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 180,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform1fv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 286,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform1i",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 297,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 298,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 85,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform1iv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 296,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform2f",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 299,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp",
+          "line_in_comment_stripped_view": 301,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 102,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 105,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 154,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform2fv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 306,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform2iv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 316,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform3fv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 326,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform3iv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 336,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform4fv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 346,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniform4iv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 356,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniformMatrix3x4fv",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 366,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUniformMatrix4fv",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 101,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 376,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUnmapBuffer",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 734,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glUseProgram",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 251,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 258,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 84,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 86,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 178,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 190,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glValidateProgram",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Shader.cpp",
+          "line_in_comment_stripped_view": 233,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glVertexAttrib4f",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Border.cpp",
+          "line_in_comment_stripped_view": 55,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Filters.cpp",
+          "line_in_comment_stripped_view": 34,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 90,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp",
+          "line_in_comment_stripped_view": 149,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/UserSprites/MilkdropSprite.cpp",
+          "line_in_comment_stripped_view": 238,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glVertexAttribDivisor",
+      "gles_core_first": "3.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 390,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 404,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 425,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 83,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp",
+          "line_in_comment_stripped_view": 227,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glVertexAttribPointer",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 34,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 35,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 36,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 44,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp",
+          "line_in_comment_stripped_view": 45,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 138,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 139,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 140,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 141,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 142,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp",
+          "line_in_comment_stripped_view": 143,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp",
+          "line_in_comment_stripped_view": 73,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp",
+          "line_in_comment_stripped_view": 88,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Color.hpp",
+          "line_in_comment_stripped_view": 171,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Point.hpp",
+          "line_in_comment_stripped_view": 69,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/TextureUV.hpp",
+          "line_in_comment_stripped_view": 69,
+          "guards": []
+        }
+      ]
+    },
+    {
+      "call": "glViewport",
+      "gles_core_first": "2.0",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 229,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp",
+          "line_in_comment_stripped_view": 345,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp",
+          "line_in_comment_stripped_view": 41,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/GeometryTargets.hpp",
+          "line_in_comment_stripped_view": 25,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/GeometryTargets.hpp",
+          "line_in_comment_stripped_view": 31,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 105,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 170,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 222,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 271,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 275,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 282,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp",
+          "line_in_comment_stripped_view": 289,
+          "guards": []
+        },
+        {
+          "file": "third_party/projectm/src/libprojectM/ProjectM.cpp",
+          "line_in_comment_stripped_view": 216,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1329,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/native-lib.cpp",
+          "line_in_comment_stripped_view": 1763,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 171,
+          "guards": []
+        },
+        {
+          "file": "core/src/main/cpp/snapshot_fade.cpp",
+          "line_in_comment_stripped_view": 199,
+          "guards": []
+        }
+      ]
+    }
+  ],
+  "non_gles30_calls": [
+    {
+      "call": "glColorMaski",
+      "gles_core_first": "3.2",
+      "occurrences": [
+        {
+          "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+          "line_in_comment_stripped_view": 351,
+          "guards": [
+            "else "
+          ]
+        }
+      ]
+    }
+  ],
+  "inspected_source_sha256": {
+    "third_party/projectm/src/libprojectM/Audio/AudioConstants.hpp": "f96354820dc4624f59867046a36b4267704cd16674b50bec612f2ae3f096b2bc",
+    "third_party/projectm/src/libprojectM/Audio/FrameAudioData.hpp": "494cc2df8702f16cb5c7d852775e77310d34dcdd7814a11d08efd3b0feac9b62",
+    "third_party/projectm/src/libprojectM/Audio/Loudness.cpp": "dff2109dbbd94e8d6480184272b6f51a95a766219550ae811f7c3fe934f9069b",
+    "third_party/projectm/src/libprojectM/Audio/Loudness.hpp": "a65ce7300c645e2e2049c2f6cb48043dcae54c7bed0f0edf658fddb565efce6e",
+    "third_party/projectm/src/libprojectM/Audio/MilkdropFFT.cpp": "598e83b309e43aea1dd6efe41b6f5e8814dc580ac86edeacbc2b56bbb86cc00c",
+    "third_party/projectm/src/libprojectM/Audio/MilkdropFFT.hpp": "4ab2a4b3b640cbeb3651d25c99f33c55347f4b1200ad59f51e7f8d35a599d253",
+    "third_party/projectm/src/libprojectM/Audio/PCM.cpp": "3221aa87d5aabc6c965bf459b2d9854f11afc8da0ef5af5af2d035105cfdec07",
+    "third_party/projectm/src/libprojectM/Audio/PCM.hpp": "e73ac5fb9ad7d4c97642a825641ba306ecf691e42aa0648bda53ae91ba2aeb57",
+    "third_party/projectm/src/libprojectM/Audio/WaveformAligner.cpp": "87facf421a367a807d6bfb7e0c005a1b7bc5f0adad317fe54db42b7e21b09e82",
+    "third_party/projectm/src/libprojectM/Audio/WaveformAligner.hpp": "bc6523cba1e651586993118091a2749b53c81df310aee01d17a0493c0569bf7a",
+    "third_party/projectm/src/libprojectM/Logging.cpp": "9bd677abda0d2d3a64559014cde4086f7124414aea1300cdd566164cb5499bbb",
+    "third_party/projectm/src/libprojectM/Logging.hpp": "72b4551fc43bbde628b96aba3cb2ade1aafb09fc54d89742a9369cf5969d4a6c",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.cpp": "cf8f84f0a5701be6eb6c700a2997deb7d4269806db4ed04d3c8fe5fc72b6df74",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/BlurTexture.hpp": "19d0fe335d89c862e9054cde5d3d48c989e5e1d4eb04a3a6f643645c6d33db6b",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Border.cpp": "ea663559fc7107a26ebf369168045d61709fe4a13aaadb235665b19e9908910d",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Border.hpp": "44bd6ca5975fb08d55e566d8ff0e0ea7eef1b80a07d382a2d5eb5a63c5c3566b",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Constants.hpp": "15b82773cdcc10902f4b78b83eb8ec5ff4402a96e1b17f27fd4354daedf1bb03",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.cpp": "b1d49463b8a4cb04361ab9afedaffd1a5cb1b6e585892b59a852a1c12530ae85",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/CustomShape.hpp": "a70ffbf45ce4ae2d35263c7596ec2acc7e9f4f2696a08e2777d5d16ddad99013",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.cpp": "6a53e9bce927f377ccce87c25d8986c8fa04a1f508b57d923177f8e15f36f3b6",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/CustomWaveform.hpp": "e3048f39fdfcf292a91540c40e3d9f23a0ae90838283c072cae45530a23edba5",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/DarkenCenter.cpp": "fe7a8b4b1fedf25b78c2a44de31a38d4d0687a09c8eb13b47a1f3feb57667d3f",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/DarkenCenter.hpp": "cfefe73dbe337b2d69d9c3f8fff1b6cfb79c5831d1e50967aac6bdd0f118c955",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/EvalLibMutex.cpp": "e785a439f0baa53d828bb59f46e9fd2f84f08bc08ed8d6ac4dae1cf6093bb414",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Factory.cpp": "a0b8ef4255a1834716dc8ef268849f6fe940dc3501cfa6e271f76e31c0d27ce7",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Factory.hpp": "f01c910fdef16f47dcca09ebd925d9387d52c31da43f21acd5737cc03b4e280d",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.cpp": "569ca79a129b78c7b0e4d012aad58441b7cb2fb6c6f5d359d00458e37c10f22f",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDetail.hpp": "daf028940043d22d07816ef6d157a5a33ac302d8ca6bc165baf9f60f8c6a641c",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.cpp": "d3f22fa53f3be1e3c0b48e340697f71b5ce03400512081e7a4cad70458a05865",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/FeedbackDiffusion.hpp": "8c6fd7f6e41132ab543bb60c3b7d58f17d737b5b6a7aa2c5710ae0bd964b95ed",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Filters.cpp": "3df4e0d1157505b921c3110a9a863d1be81bc39f3e99ce90f139b2453e2026e8",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Filters.hpp": "ab0c27579b26dd3c726eab964cd01ea06e782be8371b2b8ab972dbab368230b6",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/FinalComposite.cpp": "bf3efb187dd873315c477a281cc7f01a2c9fa3db1822185b7c72ed372727d599",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/FinalComposite.hpp": "21b28c5392a13566d63b1604852bb4d27f2d1a2586c9cda2d462c15d179cfce0",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/GeometryTargets.hpp": "0c6d7243d5b1286615b60f0aff3ad391ae10572ae00f3a5feb4f9f1942ea621b",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/IdlePreset.cpp": "520d30ee2ae4a19140b8cb86d67ea58b9c0cfdfcdd31742006176d3f94681c81",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/IdlePreset.hpp": "635c7efec068a3e9552e49d30d06581aa8a34f98c30e61c08f6bf1384e15c893",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/LegacyEquationCode.cpp": "c32e175a99b9f1ff23cd6b538511c0928a9bbb67c76798358a330987611e1341",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/LegacyEquationCode.hpp": "d320de753e96813bf453d495303a45d2b09341797893a2593c9fdda2f8d01dda",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/LineGeometry.cpp": "b9a3dc3788d4b7e227fd6078cd9195c7136790faed575e3cbe014c6cf63f192f",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/LineGeometry.hpp": "4c9dc961e25d678ce0a8ca6cd9b2f92242a555beea43b3caff93c5b3f75ef156",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.cpp": "c7020491660b21ec149f0b4dc7ad247180fd0598c489a6291ba940e6a9fb1719",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/LineRenderer.hpp": "17027b43fd2c5097ea50afee006c433d808fd9c6491ca241062888a5b832cb10",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.cpp": "6a7074f383832fad96754ef93e8a596dd0d15b8720a16be025e7febf60e74c82",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPreset.hpp": "2a516cfdeacb19a9dff7ca35bb04d185909ed2417692de4b8d713fe984d77069",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropPresetExceptions.hpp": "7b0e996d61acde329d6e75a12fd76b9b64a463b8257afc20cd88f16b81b53096",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropShader.cpp": "a24e0453a69e849360524bcde8659a732e00b9a617d5f2c1f0a3df1d9c406774",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropShader.hpp": "c777e79ffc90368418c786f04a08613410ff1803b61d18a4f7f8bbdf6dbc10de",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in": "bbf9c2cac7af598f7c9de209589530a36e59ffd90838ffdc5cfc23370c62c0c4",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.hpp.in": "cc73e1e0927a4fbbfcd8327f11f6f724adc0fdc6850f001bd657da9833a9cd28",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.cpp": "24ce6e5f331f6b3a9c0a00934540064d4573dccab4cab71f393d10a2ae6185fc",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/MotionVectors.hpp": "205ed354bcc4826c7348e26aca4fd2bb200f43909fa31483b44c46c13e39a9fb",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PerFrameContext.cpp": "1311250240e9e394b414840d19736c82a2a0fc8ee590d64414e84a0683ba9514",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PerFrameContext.hpp": "dfe921e5e3e372c2a8809e5000137de2ea05087a8ee030cc161a9249da17fcc4",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelContext.cpp": "18914393695f2c22f7df7a26516662d1aa4ef76b80de4efc538842650d1dcd3a",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelContext.hpp": "36c1c013f3a993e45d548dc1de0427e310c0238c15ec5015c103135d68d45ec3",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp": "a3f3bdd42574139dd85c5a1010f883e9fe54c3f94d5d8391673d4520d9c53673",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp": "3e638ff71a801f6825667cf04ee7052acc8e704699436d0dba0453aa52b6bf75",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PresetFileParser.cpp": "0bd179b8f58e167ea5a2340297b8ce702242a6b7983be8abd22afc26100a7757",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PresetFileParser.hpp": "94c5345d1a47b669ca521adc3fc94c93fca195773590932f79246724ce05d6d2",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PresetState.cpp": "480b8aa8bba797ee4a309db4affb53f9e43d7f65c80f8a633945cc29af131b9c",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/PresetState.hpp": "014d8776845238cbe1043581f70d2d0e51c2ad07be2e4e35e860a2a4cbe700e6",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/ShapePerFrameContext.cpp": "39bf57b5c6b67e89660ea9d3f9d7ce34998cba0de98cae07becc22c2ff52dad9",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/ShapePerFrameContext.hpp": "f6d1d2c98c3c5dc73b6bebfc2d0be0131efd15e0b0893e45d37df9aa3e88fa06",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/VideoEcho.cpp": "8d4a2c8ad4c3b8b998ce9344be5491e2da9410afda14073e0aba7a55a9425e3b",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/VideoEcho.hpp": "7d562dbdb259e4914dd1ec77356a11f445b6d9d075f47d94bce3593e4d4e66cb",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.cpp": "39d1de766260463189dd4a2b3ea1a94c42a661fda62ef2178e4917bbf94bccbc",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveform.hpp": "af4c900db7865a1df190ecf21b258c5666e875294a1031488c8d72c8d364d2f7",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/WaveformMode.hpp": "ec178ae93bc646b2f3ca159386501b5cb7705e20855f3095f6dac3539928faff",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/WaveformPerFrameContext.cpp": "323d15a18cd278b38859c8815dc80e27c44c7bdde5dfa47cd8f5cfdc09c073b4",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/WaveformPerFrameContext.hpp": "7c99270ef5ad8db5546b004a75bdf40ebe6c906ae8d922c97f4756640d5a0f59",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/WaveformPerPointContext.cpp": "c8d537acffc5db8d162ae3bb45abd3de55473ff3f9a77a51f8c78fa2d261b732",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/WaveformPerPointContext.hpp": "7f6c8a306fd29ece0c0ba06b9c893497edefa68f2153f70fa210ca253e1fde3a",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/CenteredSpiro.cpp": "3e76d5107bc272965f2eaeabdeccd0ab8c4c561895b8dbb6a3548a85012a59af",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/CenteredSpiro.hpp": "3cdcb88eb61f068557d32b960d51efb7bfdf3528ffab34b38123f036735c1bd1",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Circle.cpp": "65abde3d8814ce3f9ebf2cbce017c58e212298168c04759b78f9e2b0b08294ac",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Circle.hpp": "21313f404a14edf39c434442942f344dd79f182db585dd6be9ee7b5819719a31",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.cpp": "c991b71f4fd61330be7ec3f9df0f170e95a22b2a8513a4ee111560bd512d5be7",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.hpp": "06584d4070805c666ef8a2f7ca49dda2abfffb9c063a4c0daf324ec572524115",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.cpp": "036ce31bb3d44a0eb8462c6e55d78730e1cfff91c7daa74a58ef0542a5ea7442",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.hpp": "1948fa8ce69d1f00118cceebbbabe36d88c1baee8b4683826716cb71c429ff2b",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/ExplosiveHash.cpp": "2cf76a73679d56a17f879692d336ae28f5503f35901013ace0be47affe248963",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/ExplosiveHash.hpp": "71cf608838e23f8fed43c4405a5f185a155e74bb09a3f11d232e55534b90e6af",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Factory.cpp": "86c57acf7e0a1be4eee7472169f2bb25e670a521aa9d9c83a0ae31fafda6abaa",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Factory.hpp": "ce67084dd87a188656870bfe4a78665fb72c2a0c2d659c74836e09f177cfeac1",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Line.cpp": "8f41f0c641604f150fd174a401a21d06a52316e912fdf610c923bbd29162c508",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Line.hpp": "753087fc74f38f3cb67f526dfbefb34faec1e6e9e0a7fdb437fd7f2d51c07f4f",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/LineBase.cpp": "46735dc525a8a8e3b673e78abe7256ecec27edb691917b25568e02c5235656b7",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/LineBase.hpp": "e470f1e8c7e86abccc7910dbaa5ddbad39cc75271734903f24b49a008581d141",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077Wave11.cpp": "37bc3892696d3fbb9220beba5dc0d19317ba6c5d54b813be595135963aaadf7e",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077Wave11.hpp": "ccc41a2db4c66a64b6c2e30cd7acb7099de17f2232a35d447614801f354fdddf",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077Wave9.cpp": "3d3b57c766522be1f9533e93ed6c52b55df8c111540851afacb3e6066d286d83",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077Wave9.hpp": "9784ca052071bf3997d3fb481bcd2049f0abe1629c32f360c4b7b13f80d5c0b7",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveFlower.cpp": "4236ccdf91c971bf355f654922f4790ef7b8d619b4a097299b4b3dc9ba1aecb2",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveFlower.hpp": "5dd87234fa6cf14e8cdd63629c3c1468a2d36a0a096e0d2d2fac96e11086bd87",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveLasso.cpp": "2aae0ee8de69f9ba1483dad5056036f9231e0799e65f7017c9ffa908e5a6f64b",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveLasso.hpp": "118fe3d70d206ad5e807e4eead37f967894914b7b505c4e544e2620fd31cef37",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveSkewed.cpp": "5979d936ec8c126b9ac0a4563dfb32738acb2fc11b0290ec4982ca3936ee87c5",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveSkewed.hpp": "40aa323a3cf7ec726114590b18f6e88923ba4a1b963ff0a04091ea6f18a6c966",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveStar.cpp": "b7c50cb0d91efe06f3f7313f7de63595718ebb38a93a35f8a3bb5d83f7266c14",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveStar.hpp": "07997f9068370fbf27a1364aa1093fa5a0089b206461c1a814b99ce5602160c8",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveX.cpp": "3f08849cb0e7f389c27b711d0b4c381d303c50401e475fc507129500e1dd1509",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/Milkdrop2077WaveX.hpp": "d476bd3ac6ff7ee0f69bd8f56fc4dae35644f24ee2dba55fc84152fb892aff52",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/SpectrumLine.cpp": "fbc6d291d38e4d9e7197420eb3604809c7b236cf48565c10ed80891fa62f04b3",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/SpectrumLine.hpp": "8fa1102ef3d09ab111e562e4d16d825a2501d649ac57f4b8bfe7985b741c4dcd",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/WaveformMath.cpp": "ca7cb97af5116c19c7704cf7580d296724866f899e8041d879885ac42dcccd03",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/WaveformMath.hpp": "9403ee5a58e509fea4befd5cda89560ea70f5692c8448c0150ff7a9fce95e982",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.cpp": "68fa914ed1c69cda21fccf1cf017c33327f90581fde08b2ae57b1048b1afe111",
+    "third_party/projectm/src/libprojectM/MilkdropPreset/Waveforms/XYOscillationSpiral.hpp": "bc1cfe5dc66cdddaba3cd84c081f37f5cea0298158696720e98de168450203a8",
+    "third_party/projectm/src/libprojectM/Preset.hpp": "22a9910bab59e8d6399359f3e9cccb1d24b5c34e176152aa6ea13330da32e6c4",
+    "third_party/projectm/src/libprojectM/PresetFactory.cpp": "1bf14fd5501a85e6820252cb608121313930bdbcbe39da70de6002f0f5ee09fd",
+    "third_party/projectm/src/libprojectM/PresetFactory.hpp": "0e475d893297c6f4c597eab659ff63d134a26175f6b71e9085c3d53724a3d736",
+    "third_party/projectm/src/libprojectM/PresetFactoryManager.cpp": "3e03eae85ac71b491a0488e2c72d45fca61bb28310f069907a93b57115b741cd",
+    "third_party/projectm/src/libprojectM/PresetFactoryManager.hpp": "b9c8d092f845e02559bb220ca43f9c52e56656221091d171838f14fcda589cc1",
+    "third_party/projectm/src/libprojectM/ProjectM.cpp": "a5a3cee16096acbf5fe253d52ee41d2ef9274fca4ebf7427fa18071b5477c08a",
+    "third_party/projectm/src/libprojectM/ProjectM.hpp": "da1252e31cd14198dce1e548c18b585360dde74f6a0b23999772a4cfaa37b151",
+    "third_party/projectm/src/libprojectM/ProjectMCWrapper.cpp": "31a6b7162de6ee00e607750891f5a562425bd49e4b9748036e2f9f1b5352e637",
+    "third_party/projectm/src/libprojectM/ProjectMCWrapper.hpp": "f02a55330644f2a622777cbe5699f30073e04c91d229e5f825fde1659c8e8df9",
+    "third_party/projectm/src/libprojectM/Renderer/BlendMode.cpp": "e765a5adc87827a19220c53287a797662795bcf12ceacce1cc0e05aa9d4c8d72",
+    "third_party/projectm/src/libprojectM/Renderer/BlendMode.hpp": "bc88625aeffa3d8b7e41d86134ae6be9d83117b944511f671f13bf6bc161234c",
+    "third_party/projectm/src/libprojectM/Renderer/Color.hpp": "686f5546a8a092f98da2da3250afbe162aecea6d05dfecb2785cae0252f71f25",
+    "third_party/projectm/src/libprojectM/Renderer/CopyTexture.cpp": "c0899b631cf8a271624317a14c869aa71446bdcab6b0334fdec73b4fb852b3a3",
+    "third_party/projectm/src/libprojectM/Renderer/CopyTexture.hpp": "6e4639eecfe4f6fe31646a0a14ff6f9154d47f2a40e13f46314be0b70117483a",
+    "third_party/projectm/src/libprojectM/Renderer/FileScanner.cpp": "2345b9edbddb3818b975c57221d9c7632fe0a5be862407e7e1d366b648c19bc9",
+    "third_party/projectm/src/libprojectM/Renderer/FileScanner.hpp": "5120e44592585febde1b888a24ac2f6022d7270d0afca5f03b977beab10bf0b4",
+    "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp": "dbdb22c0d45853a2c0453fdf7371d2bf06474cb0d28a3ffae83ec050753ca40e",
+    "third_party/projectm/src/libprojectM/Renderer/Framebuffer.hpp": "1f4ea2efd59b34246a35fff67f0ecd38f38a163ef9fdaba579a805f5fd6073b6",
+    "third_party/projectm/src/libprojectM/Renderer/IdleTextures.hpp": "44b8128a7146ba2456fcc034daac7b0ebd02c855a8a543cc3136db021adbdb34",
+    "third_party/projectm/src/libprojectM/Renderer/Mesh.cpp": "23c55b86a02c6224315574a31f2360f97cd160e9fc239895845934f3fd796f36",
+    "third_party/projectm/src/libprojectM/Renderer/Mesh.hpp": "106a5c1f2ac7344b399a08933764b0329dce34acd8b0442bf3e1b8166c183bb7",
+    "third_party/projectm/src/libprojectM/Renderer/MilkdropNoise.cpp": "417f44fc823fa6e382cb5353bbf00108b4c1975b8bddd297a9ed49a5b1402eb1",
+    "third_party/projectm/src/libprojectM/Renderer/MilkdropNoise.hpp": "7c6ae6154ede19c034efe891a513ebb000c863e83a6ba5fb2d77078f8d12e6ee",
+    "third_party/projectm/src/libprojectM/Renderer/OpenGL.h": "c5eb1bb8c85f068a19d0deeb430a492c4f70141dd80eb9125dec032c755bd1d7",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/DynamicLibrary.cpp": "621791df34b3ba177b39d41ea02221b84e0c2287a47159d272d2256f50cf797a",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/DynamicLibrary.hpp": "f180757d995b2d439bf20dd4137c77790f414a2b83302e77dfe1e4f1dacbf32f",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/DynamicLibrary_emscripten.cpp": "b630789d8c32b777e9f841707aa890857e5aeb4d3ca2bc72fdba4b7e3b87b2e5",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/DynamicLibrary_posix.cpp": "5ace1391ce69c36867d112cc82f17614aeb0221d6a9b0443f6608c66658bc76d",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/DynamicLibrary_win32.cpp": "5aac3f33fb27dacbb14cf45ca757e855da3a4f968cc5c76e32c2ccb93309df0a",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/GLProbe.cpp": "eb93ab1b32481d664abbf75d7168379e793067fa9fb5c2dccc20f02271426b3e",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/GLProbe.hpp": "947991c67baf26aa38f0f0cb482ea8fc78117f57e52bb93a5da76615b55f978e",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/GLResolver.cpp": "fc0d3cc491f52d70907fc7ed0cbe8cd88c0c650085a2b138a0e37451326a699c",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/GLResolver.hpp": "4ea086df69e0ee415561a37f620c710952af1a3c7cf95ab491fcb275067c55c1",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/GladLoader.cpp": "0a3946ac4c1f109e4e7580b7248ad99b6d751f0539dbb331fa6ab322d84dc664",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/GladLoader.hpp": "cb9be2a3e41d17e1328dafea541e5f7b428157bf58ce67e246bd62d775c9021b",
+    "third_party/projectm/src/libprojectM/Renderer/Platform/PlatformLibraryNames.hpp": "de6e014d04d77521ad56357e66a2b12a612c2d90e201a0debec48c6ca28ce135",
+    "third_party/projectm/src/libprojectM/Renderer/Point.hpp": "e666f7a8ca722bbbed09463be43372fb39bd0233d11656f42505ee19fe0a4b32",
+    "third_party/projectm/src/libprojectM/Renderer/PresetTransition.cpp": "5bb7bfd093531899abd626ad7902b92d0e7aa285e0685f8d1f80acfe39c89904",
+    "third_party/projectm/src/libprojectM/Renderer/PresetTransition.hpp": "bf507ff45bc2f437b467d44479b8d789c834cc29a1650df3d8688d6725bbaf2c",
+    "third_party/projectm/src/libprojectM/Renderer/RenderContext.hpp": "2d4d9a18eea81d992d1803696fdd709ce39243d5b2605fe0e38c2c895cb6604c",
+    "third_party/projectm/src/libprojectM/Renderer/Sampler.cpp": "2f4f7a4dfb69323ce16f0432889437d9173e155a41c7261f5293dbb4259a43d9",
+    "third_party/projectm/src/libprojectM/Renderer/Sampler.hpp": "7c3a547080e5677ee1584fa04ef0b6a5709402e75fb47cd29a5f24f99af78302",
+    "third_party/projectm/src/libprojectM/Renderer/Shader.cpp": "786eb1b0526dbd32d01e3627c97288522585707297d28fad8db3b81b3ddba83e",
+    "third_party/projectm/src/libprojectM/Renderer/Shader.hpp": "05cc6fd1897a0af347d6530ab6a47fe4a5a53e8ad300fc9df7437a01b7378757",
+    "third_party/projectm/src/libprojectM/Renderer/ShaderCache.cpp": "e706cac076673c666c80b4e40635b348e6f756a6e280b3d1fbe20e7bbc493ec9",
+    "third_party/projectm/src/libprojectM/Renderer/ShaderCache.hpp": "e4458466161fa3501f67e896c1bc6915e68e1d34dbc783d77fc67648330672c0",
+    "third_party/projectm/src/libprojectM/Renderer/Texture.cpp": "53159dcbbb89d39e648960bbaac26444045e2744930dffb755b6cc3e99d6ec55",
+    "third_party/projectm/src/libprojectM/Renderer/Texture.hpp": "b8c1b2d2b188470522e39f4f0153637dc2c9460f079e12f7befed09c4e07efde",
+    "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.cpp": "7b698b6b77fb8795342a6e10f194664cfad0e942856cf45b3da2cc15a47046f2",
+    "third_party/projectm/src/libprojectM/Renderer/TextureAttachment.hpp": "6fe348d711a6ae21ac5a5fca462f1f8e8b70ec47a5dee134bc8bbec3d4a311e5",
+    "third_party/projectm/src/libprojectM/Renderer/TextureManager.cpp": "b5a097477195e791229a26a0be5b5541834af7b9435ede7ea97be0c6a6367bbb",
+    "third_party/projectm/src/libprojectM/Renderer/TextureManager.hpp": "d6822e2c3fa9e2e584108596c2ccfe04469965b905372313c9253f683bcb38b3",
+    "third_party/projectm/src/libprojectM/Renderer/TextureSamplerDescriptor.cpp": "5199b666438091daed83a1a350199794c2c31a362a5c814b1a90047d8c07ca0f",
+    "third_party/projectm/src/libprojectM/Renderer/TextureSamplerDescriptor.hpp": "adc68ba5b14f28e1d9829b719bb05fb959a41aed8105cfc615865c6baf9fc7cf",
+    "third_party/projectm/src/libprojectM/Renderer/TextureTypes.hpp": "c5aa00046133af6ebdbc14700159a5200e306246522d28cca5ad57a53c449f10",
+    "third_party/projectm/src/libprojectM/Renderer/TextureUV.hpp": "fbac0a746c3648840eee720dc697b325db1da541d4ad797f648205a3629b5bc5",
+    "third_party/projectm/src/libprojectM/Renderer/TransitionShaderManager.cpp": "8feb3ee3f8745f84082ee93177ad5313703e3cdb03de77fdbf7183c4c806b513",
+    "third_party/projectm/src/libprojectM/Renderer/TransitionShaderManager.hpp": "ff6e659827004ae822d7ab373bbb6278e2c355b24bdb7f7aab8f938d378bad59",
+    "third_party/projectm/src/libprojectM/Renderer/VertexArray.hpp": "49a1292f91c5bc34a6e0875ac8db21ea858972be828fb65d74a8e3308e082b7c",
+    "third_party/projectm/src/libprojectM/Renderer/VertexBuffer.hpp": "6d33d160b082edafa0394de4c7c8ad333baf95cda2fa7cb937535363608b4362",
+    "third_party/projectm/src/libprojectM/Renderer/VertexBufferUsage.cpp": "b8e8e2715d1a9754bc8c5005c36a333324736af2967e63a2851d59c13db4c099",
+    "third_party/projectm/src/libprojectM/Renderer/VertexBufferUsage.hpp": "728eb5c7cb63cf4749df4722b67551d2a94ba52d0acd31dac5948fd57d7e0400",
+    "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.cpp": "cafcb09c2ccfcd5dd36429696b612da58fece96213cbd99a94967f55a6f16cc7",
+    "third_party/projectm/src/libprojectM/Renderer/VertexIndexArray.hpp": "81d6b8a9461d82a777e09934dcc192b477d5178ed9b20fac3f938c54ae438fc8",
+    "third_party/projectm/src/libprojectM/StaticLibDummy.cpp": "d20f3c504dcfa444391ea3924fd8512b699e626eefe65b14b8b3391f7188b520",
+    "third_party/projectm/src/libprojectM/TimeKeeper.cpp": "99e9371ca4ef64c4143080e46050d99e8a344cb5cf9327676e272d4bf4c368a3",
+    "third_party/projectm/src/libprojectM/TimeKeeper.hpp": "05a58156b160057ebde23bf58d0a6e9d0e3def975521777cc6ff9960ad8f2693",
+    "third_party/projectm/src/libprojectM/UserSprites/Factory.cpp": "1b51d78d0a7b0521a70fa7bdaba3747ed308b549a855d3207616ba7542b0aa37",
+    "third_party/projectm/src/libprojectM/UserSprites/Factory.hpp": "c41ca7b9a36521fb0c55c90a22d2f980c29a3f5584c3d7ed95a4b1b4a7270423",
+    "third_party/projectm/src/libprojectM/UserSprites/MilkdropSprite.cpp": "249c24f0b8324586d56de35c2e03fb7e90314e8e72467c65baeebc2572a37cab",
+    "third_party/projectm/src/libprojectM/UserSprites/MilkdropSprite.hpp": "7b1d0768ca2b889eb3c5da6065979e7ceb4ba2f94b5fc3d33b01e19e0466014a",
+    "third_party/projectm/src/libprojectM/UserSprites/Sprite.hpp": "e2d46556421fef69a74f499de18fbdcb515e7b72512ec2d0111730cff7f1dc2b",
+    "third_party/projectm/src/libprojectM/UserSprites/SpriteException.hpp": "782cde945aef45b63a81f31037beafe3e760665d31ac1b5055b1e580c53931f5",
+    "third_party/projectm/src/libprojectM/UserSprites/SpriteManager.cpp": "5c6d62ad17cda632e82a1e4764b0e567656333a4c24429c4970fd79dcfbfc109",
+    "third_party/projectm/src/libprojectM/UserSprites/SpriteManager.hpp": "8831ec4a5fc9641458cb75370df54f7d0117c62ee017fca1d214c514aafa0072",
+    "third_party/projectm/src/libprojectM/Utils.cpp": "356c3053dc3fb3d2166f2ad8ced98cb46439263115c13b7fdeaa3d28ee200e8f",
+    "third_party/projectm/src/libprojectM/Utils.hpp": "9d61f0127ee19ec9aa1e4361b6699ac4dbf48cb4390b312ec15f7e48922fd98a",
+    "third_party/projectm/src/libprojectM/projectM4Config.cmake.in": "635c5a5a03832bd47b1e01fa6a7ca3c2c7e5d71bb367dbdc30288d2bf076a74b",
+    "third_party/projectm/src/api/include/projectM-4/audio.h": "3196cf7e79c2edef476222d254db70dac4d20606e12d1362930c1679a942a347",
+    "third_party/projectm/src/api/include/projectM-4/callbacks.h": "b3dbc71285133f9953a14ae52fdd1a762be177f9a4a4b066df340e6c2eb17acd",
+    "third_party/projectm/src/api/include/projectM-4/core.h": "58709477ac0309b97294232b68fc967260717f7826fd91670b72a89e5ab3e3ab",
+    "third_party/projectm/src/api/include/projectM-4/debug.h": "0012a132e228a774d027c74c35b5b1c9221b535f8155dc0dee92de13c825d481",
+    "third_party/projectm/src/api/include/projectM-4/logging.h": "dcb9ba9bf57789a9b7c6abcad58285dcbcfddc5f5f059d09065ca698ebcfef61",
+    "third_party/projectm/src/api/include/projectM-4/memory.h": "173ed0886c5a439e75c4f6d7e7c99a4380d49b69e0596cbcd2c3abab09722c59",
+    "third_party/projectm/src/api/include/projectM-4/parameters.h": "13196b6debc22b1850b47a1c737298bf14e4fb4efce5fda9b4cd15506c93578b",
+    "third_party/projectm/src/api/include/projectM-4/projectM.h": "ae1069c2478018c506a0495a305e12e3e79e5091bcc1d3a72943902fa3ea613c",
+    "third_party/projectm/src/api/include/projectM-4/render_opengl.h": "fc879402e97b8f1e592f47055a13957c0eec60c7e6895aa1d2df3b9ad5459edd",
+    "third_party/projectm/src/api/include/projectM-4/touch.h": "8f9d956ee31142b89c116dea12219812810a99a64f23e3e0e5b58e013c6234b2",
+    "third_party/projectm/src/api/include/projectM-4/types.h": "0c980a29a922ea9c75219099b19ee4e6a73c9322fc6c068af9fae862e9b205c1",
+    "third_party/projectm/src/api/include/projectM-4/user_sprites.h": "e4e0322db0c272bb817b8d25385a5767b4523bf7c112580c7cba7ef2bc88940f",
+    "third_party/projectm/src/api/version.h.in": "6b22d68e5e1c22be22027bae3252c65cf0498680bd971fd942a8773322f5195c",
+    "core/src/main/cpp/native-lib.cpp": "20e03c253592a8170deaa515d6c75393a340698ea5417a2021a20c9ba9695a09",
+    "core/src/main/cpp/preset_prewarm.cpp": "607185e6ff6d492fdf96eec07f732e2df1a434151d221c25d1fab9336645f3e3",
+    "core/src/main/cpp/preset_prewarm.h": "848939f80d7655f213bfc766b99a0272692bbe18fac5d2fcfeeb0236501cddd8",
+    "core/src/main/cpp/render_policy.h": "d3c743018bd47d19d12c6bc6a8d134846544a30a5aa290fc6611ca5e60227d75",
+    "core/src/main/cpp/snapshot_fade.cpp": "944e7a9e9d3064801366412d942811125feaaf06006b68e2745bbaf0ba8e0269",
+    "core/src/main/cpp/snapshot_fade.h": "414608fba52cc2d02af8a8e73767aa717e164cb2144120496959ee6165acdb70"
+  },
+  "overlay_patch_calls": [
+    {
+      "artifact": "build/upstream-rebase/gles3-audit/0045-main.patch",
+      "sha256": "875d5e8389a13ec14eae224c9f71d56bc6de03faeb2d62c346650443c5c2cb4f",
+      "added_gl_call_first_versions": {}
+    },
+    {
+      "artifact": "build/upstream-rebase/gles3-audit/0046-main.patch",
+      "sha256": "d5aca2d3be2e3f10e33430936ff559aa4231366b9644f120a09ec12a8ea239a2",
+      "added_gl_call_first_versions": {}
+    },
+    {
+      "artifact": "build/upstream-rebase/gles3-audit/0047-main.patch",
+      "sha256": "62b649f36c7eb7139909825f4de5a99e79cf7014eab1c50498af6934fb81b7cf",
+      "added_gl_call_first_versions": {}
+    },
+    {
+      "artifact": "build/upstream-rebase/gles3-audit/pr49.diff",
+      "sha256": "596aa8a6e02c7c01edc2197bbcc914184be7c4b87d70c4040b75619fe3879176",
+      "added_gl_call_first_versions": {
+        "glBindBuffer": "2.0",
+        "glBindFramebuffer": "2.0",
+        "glBindVertexArray": "3.0",
+        "glBlendFunc": "2.0",
+        "glCheckFramebufferStatus": "2.0",
+        "glClear": "2.0",
+        "glClearColor": "2.0",
+        "glDeleteFramebuffers": "2.0",
+        "glDisable": "2.0",
+        "glDrawArrays": "2.0",
+        "glDrawArraysInstanced": "3.0",
+        "glEnable": "2.0",
+        "glFramebufferTexture2D": "2.0",
+        "glGenFramebuffers": "2.0",
+        "glGetBufferParameteriv": "2.0",
+        "glGetError": "2.0",
+        "glGetIntegerv": "2.0",
+        "glGetString": "2.0",
+        "glGetUniformLocation": "2.0",
+        "glGetUniformfv": "2.0",
+        "glGetVertexAttribiv": "2.0",
+        "glInvalidateFramebuffer": "3.0",
+        "glIsEnabled": "2.0",
+        "glMapBufferRange": "3.0",
+        "glReadPixels": "2.0",
+        "glScissor": "2.0",
+        "glUnmapBuffer": "3.0",
+        "glVertexAttrib4f": "2.0",
+        "glVertexAttribPointer": "2.0",
+        "glViewport": "2.0"
+      }
+    }
+  ],
+  "audit_date": "2026-10-06",
+  "github_main": {
+    "sha": "347fca385b2e689bda1e758ab2f55856c3a191ef",
+    "patch_count": 47
+  },
+  "pending_pr49": {
+    "head": "25a3ff425592698b3f7835487345af2f1803cc81",
+    "url": "https://github.com/johnneerdael/ProjectM-TV/pull/49"
+  },
+  "scope": "Read-only local patched4.2 source/API/JNI plusmain0045..0047 andpendingPR49 textualchanges; finalintegrateddiff mustre-audit afterrootports/merges thosechanges.",
+  "conclusion": "Source API/GLSLfloor3.0 supported; unchanged current4.2AAR completes480frame strictGL/preset/cleanup smoke onAPI34hostGPU/GLES3.0 withfloatcolor extensions. API36hostGPU binarymetadata failure remains separatelydocumented. No genericall3.0driver orfinalpost49/fullfidelityclaim.",
+  "desktop_exception": {
+    "call": "glColorMaski",
+    "file": "third_party/projectm/src/libprojectM/Renderer/Framebuffer.cpp",
+    "line": 351,
+    "guard": "#ifdef USE_GLES calls glColorMask;#else calls glColorMaski"
+  },
+  "glsl_policy": {
+    "static": "MilkdropStaticShaders.cpp.in #version300es andVersion_300_ES",
+    "translation": "GLSLGenerator.cpp emits #version300es",
+    "other": "CopyTexture,FeedbackDiffusion,UserSprites,TransitionShaderManager andJNI snapshot_fade allselect300es underUSE_GLES",
+    "unused_desktop": "330GLSL alternative;SDLtestUI requests3.2butisnotAndroidproductionAPK"
+  },
+  "capability_gap": {
+    "format": "GL_RG16F/GL_RG/GL_FLOAT",
+    "allocation": "MilkdropPreset.cpp:477 motionVectorUVMap",
+    "attachment": "visiblemotionUV/writeMotionUV branch; no detail framebuffer path",
+    "specification": "ES3.0table3.13p131 listsRG16F texture-filterable butnotcolor-renderable;section4.4.4p212 restrictsrenderableformats",
+    "support": "EXT_color_buffer_float guaranteesRG16Frenderability onES3.0;half_float extensioncanextendformats,butconfirm FBOcompleteness ratherthanextensionstringalone",
+    "current_fallback": "No explicitUVmap floatcapabilitycheck orfallback ininspectedpath. Loadercheckdoesnotrequirefloatcolor extension. FeedbackDetail usesordinary8-bitcolor attachmentsandchecksitsFBOs."
+  },
+  "runtime_preflight": {
+    "source": "root-ownedemulator preflightlog/manifest",
+    "emulator_version": "37.1.11.0(build15917651)",
+    "device": "emulator5622 ARM64API36 AndroidTV",
+    "driver": "GLES3.0/GLSLES3.00 Google(Apple)/M4Pro/Metal4.1 translator",
+    "aar_sha256_root_reported": "c57c823d18e5e33c0fcb4c779e41eece0a3d613cf95092351a86a4332c864075",
+    "manifest": "build/upstream-rebase/emulator/preflight-oscilloscope/manifest.json",
+    "manifest_sha256": "1865b127d64e9a8b364ed719b827693b0f3ebb06428444958d5f406f59f31077",
+    "result": "failedsurfaceinitializationGL0x502;0captures beforeframe0",
+    "scoped_log": "PID3470,GL2Encoder.cpp s_glGetProgramBinary:5044 bufSize<programBinaryInfoBytes.size()",
+    "log_sha256": "5ae17eb91b5836078a0cbcc5c18999ec3e3ce31e94f13cd1b341e64d4ecc46db"
+  },
+  "binary_cache_assessment": {
+    "engine": "Shader.cpp::ProgramCache::Store queriesGL_PROGRAM_BINARY_LENGTH,allocatesexactlength,glGetProgramBinary;written<=0 returnsbutGLerror remains; noNumberOfBinaryFormatsguard. Samehistorical0002logic,notautomaticallyamigration-onlyfault.",
+    "spec": "glGetProgramBinary isGLES3.0. Too-smallbufSize orfailedlink producesINVALID_OPERATION; reportedlength+equalallocatedbuffer shouldsatisfysizeifstableconformingdriver.",
+    "aosp_current": "gfxstream mainmatchesloggedline5044;getProgramBinaryLength andGetProgramBinary independentlyretrieve+serializeGuest/HostProgramBinaryInfo. Sourcemechanismmatches butinstalledimagecommitnotestablished.",
+    "aosp_android14": "android14-releasegoldfish-opengl useshostbinarylength andrawhostbinaryforwardingwithoutprotobufwrapper. DifferencejustifiesAPI34samehostGPUprobe; notproofAPI34installedimagepasses.",
+    "recommendation": "KeepstrictGLverifier. Runminimalprogram-binarylength/retrievalroundtrip probeandactualAARonfreshAPI34hostGPU; recordformats/length/written/errors andfloatFBOcapabilities. Do notsilentlydisablecache,changeAAR/shadersorclaimruntimefloorworks."
+  },
+  "supported_emulator_config": {
+    "local_help": [
+      "auto",
+      "host",
+      "software",
+      "lavapipe",
+      "swiftshader",
+      "swangle"
+    ],
+    "hardware": "host(orauto) officialsupported;legacyangle/angle_indirectdeprecated;softwarealternativeswouldchangeGPUvalidationclaim",
+    "change_performed": false
+  },
+  "limits": [
+    "Sourcecallscan+manualguardreview,notfullpreprocessed/executableproof;API34/36sourcebranchesnotexactimagebinarycommits.",
+    "NoADB,emulatorrestart,productionedit,AARmutationorGitmutation.",
+    "Backendminimum/protocolcapabilities andfidelity/performanceareseparategates."
+  ],
+  "primary_sources": {
+    "build/upstream-rebase/gles3-audit/gl.xml": "b9ca2cfa5c676e901c20d34af3407f1687cde0f1336a5ff7a8974d04c7494ad3",
+    "build/upstream-rebase/gles3-audit/es_spec_3.0.pdf": "7e831831595d3e44c267cc0a0d754f8c244cf3c8f5056f49a674f25fb9d5adeb",
+    "build/upstream-rebase/gles3-audit/EXT_color_buffer_float.txt": "a0248913842c02babda2d79c0821accf13bc6ed6b63944630c017dec417aa075",
+    "build/upstream-rebase/gles3-audit/EXT_color_buffer_half_float.txt": "18e63c83253cc0701e32c23466cab2874aba8958c7ffd278b892da566e5aa2a9",
+    "build/upstream-rebase/gles3-audit/glGetProgramBinary.xhtml": "8805665fc8df0acedabf20a05ee16ccc481db04e8b6177d192a021738c2be907",
+    "build/upstream-rebase/gles3-audit/GL2Encoder.cpp": "a88515dcf9040f15d75f0524ec122194b648950e507eb01c60a59cad57fc0ff3",
+    "build/upstream-rebase/gles3-audit/GL2Encoder-api34.cpp": "5b93d0f142ce9ba4dfb40a7caf2938415fb60804b14e7cea92e3b1d312d3092e"
+  },
+  "runtime_api34_preflight": {
+    "manifest": "build/upstream-rebase/emulator/api34-preflight-oscilloscope/manifest.json",
+    "sha256": "6131908af1949bb5a140c9456830b22b86d8fbd9dec50a397b966d5a4e1cb200",
+    "driver": {
+      "glVendor": "Google (Apple)",
+      "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+      "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+      "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+      "programBinaryFormatCount": 0,
+      "glExtensions": "GL_EXT_debug_marker GL_EXT_robustness GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_native_sync_v3 ANDROID_EMU_native_sync_v4 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 "
+    },
+    "device": {
+      "manufacturer": "unknown",
+      "model": "Android SDK built for arm64",
+      "device": "emu64a",
+      "fingerprint": "Android/sdk_phone64_arm64/emu64a:14/UE1A.230829.036.A1/11228894:userdebug/test-keys",
+      "sdk": 34,
+      "abis": [
+        "arm64-v8a"
+      ]
+    },
+    "frames_rendered": 480,
+    "GL_checks": 480,
+    "preset_checks": 480,
+    "status": "ok",
+    "core_released": true,
+    "egl_destroyed": true,
+    "captures": [
+      {
+        "frame": 120,
+        "pngSha256": "58c23e5a8773fed4b01558f55fd5762fc880fd7d02e8e1c9a0a96dc90a131fc9",
+        "rgbSha256": "c3c648eb69da545ea39ac69ba73bbadeb877adee68d63c26ebcf6fdf20d8f70b"
+      },
+      {
+        "frame": 150,
+        "pngSha256": "813a8efa4fed8c838b314305d29ab7548e1c26243b0f4d4da354ed2589b41d5d",
+        "rgbSha256": "4c9d43489549fd09b3aa19977f406f744823652947d97f92bd44fe08e7d43944"
+      },
+      {
+        "frame": 180,
+        "pngSha256": "d1ecb2453ec35fc832c813ca044bbfaa0d29ce786e2cbe518ebe6a4d9eb784b9",
+        "rgbSha256": "45da6e6c356a485202499b23dba29fbf0f86bcbe5ab8826acd511048e76644e3"
+      },
+      {
+        "frame": 210,
+        "pngSha256": "84edaf65781a0b97a60f2444bd07f704d769df4860f4bb31263129e18e0c6f7c",
+        "rgbSha256": "6fb3de86ed8335813a1f560a6e2ad43bb0dd47f93e9f04dd2715583d0d4c4886"
+      },
+      {
+        "frame": 239,
+        "pngSha256": "429d686c2e39762655069e07eb6dfc18c3e80f37a3280132598ad0ab4ec7ac3e",
+        "rgbSha256": "8c95b2effacb0ad4a657f7f66c411b42d06553e2aa62c14021f148957c831e96"
+      },
+      {
+        "frame": 300,
+        "pngSha256": "1a8f3e3abf9da4d24570dc9aac19d3577d7b145ae1cf218c73892712a177f08e",
+        "rgbSha256": "97952781dfa9e8c5ae2ae3ea8d7528c5c168b8f8fa7be52a3a1ce39161642d45"
+      },
+      {
+        "frame": 390,
+        "pngSha256": "9519c8caf2521e78b7d40a3fadeb439119f4e13ea740e354371cb6221aec2f8a",
+        "rgbSha256": "2896b10f8857085ca4f84b84d2acf33a53c69d4d6539c56ae62967f5c9083f84"
+      },
+      {
+        "frame": 479,
+        "pngSha256": "41e2b88bf06cdf5980cb23808b094390f44fb5d11849828fd8e8b48bb2446126",
+        "rgbSha256": "c59fb6fc714ce180c8431263124d90300983286efc5ccff9505ddd76893c7abd"
+      }
+    ],
+    "scope": "Unchanged current4.2AAR c57...rootverified;API34hostGPU emulator5624;realclocknondeterministicOscilloscope1080smoke,not100presetfidelity,nobinary-exportpathbecause0formats,noisolatedUV-MRTprobe."
+  }
+}

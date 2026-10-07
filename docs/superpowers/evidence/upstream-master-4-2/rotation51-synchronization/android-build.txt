@@ -1,0 +1,9 @@
+[ 22%] Built target hlslparser
+[ 44%] Built target Renderer
+[ 87%] Built target MilkdropPreset
+[ 89%] Built target UserSprites
+[ 96%] Built target projectM_main
+[ 97%] Built target projectM
+[ 98%] Building CXX object CMakeFiles/warp-zoom-regressions.dir/warp_zoom_test.cpp.o
+[100%] Linking CXX executable warp-zoom-regressions
+[100%] Built target warp-zoom-regressions

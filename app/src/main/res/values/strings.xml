@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ProjectM TV</string>
+    <string name="engine_version_info">v%1$s · ProjectM TV Engine\nBased on unreleased projectM 4.2 master\nUpstream %2$s · 6f6480746</string>
     <string name="resolution">Resolution</string>
     <string name="resolution_auto">Auto</string>
     <string name="resolution_native">Native (%1$s)</string>

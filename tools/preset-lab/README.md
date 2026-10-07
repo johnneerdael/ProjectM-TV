@@ -24,7 +24,7 @@ Build and verify the native worker (requires CMake, a C++17 compiler, SDL2, nati
 build/preset-lab-venv/bin/preset-lab doctor --repo . --work build/preset-lab > build/preset-lab-doctor.json
 ```
 
-The worker builds a private copy of the pinned projectM engine and app patches. Its synthetic clock and fixed subsystem seeds leave the Android engine untouched. Doctor compares fresh waveform, noise and random-texture shader runs for exact repeated frames and an identical pre-intervention prefix. Framebuffer discard is a no-op on Apple OpenGL 4.1, so desktop timings do not establish TV performance.
+The worker builds a private copy of the pinned projectM engine and app patches. Its synthetic clock and fixed subsystem seeds leave the Android engine untouched. Doctor compares fresh waveform, noise and random-texture shader runs for exact repeated frames and an identical pre-intervention prefix. Framebuffer discard is a no-op on Apple OpenGL 4.1 and when the configured desktop declarations lack the optional GL4.3 hint (including the pinned GLAD3.3 Linux build). Android/GLES workers retain the real GLES3 discard API. Desktop timings do not establish TV performance.
 
 The bundled JSON parser is [nlohmann/json 3.11.3](https://github.com/nlohmann/json/tree/v3.11.3), under the included MIT license. Resolved Python dependencies are recorded in `requirements.lock`.
 

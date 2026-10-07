@@ -11,11 +11,33 @@ Published AAR SHA256:
 Release: <https://github.com/johnneerdael/ProjectM-TV/releases/tag/v2.2.1>.
 
 `build_core_aars.py` creates isolated source archives and instrumented baseline
-and candidate core AARs. The baseline contains patches 0001–0024; the candidate
-adds the exactly recovered 0025 series. Both use the same private shader RNG
-and logical frame clock. Instrumentation diffs, native compilation units,
+and candidate core AARs. The published baseline remains frozen at the source
+commit above, engine `e0b0a967`, evaluator `da885dc` and patches 0001–0024.
+Candidate pins and the consecutive patch count come from `--candidate-commit`;
+they are resolved in private checkouts rather than inferred from the live
+submodule HEADs. The current candidate uses unreleased projectM 4.2 master,
+pinned to `6f6480746`, with its retained TV patches.
+
+Both roles use the private shader RNG and logical frame clock. The private
+bridge resets the shader RNG after setting each job's seed environment, including
+engines whose constructors no longer seed libc rand. Reinitializing a job must
+restart the same stream; a native regression compiles the actual bridge/hooks
+and checks two seeds and a repeated seed. Earlier rebase workers omitted this
+reset on 4.2 and therefore used a different shader stream despite matching seed
+metadata. Preserve those artifacts and rerun comparisons under new identities.
+The private
+constructor clock starts at zero before preset initialization. Engines with
+`projectm_set_frame_time` also receive that clock before each normal or framebuffer
+render call; older engines keep the historical TimeKeeper clock hook.
+Instrumentation diffs, exact engine/evaluator pins, native compilation units,
 asset hashes and AAR/library hashes are recorded in each `source-identity.json`.
 These laboratory AARs are distinct from the unmodified published binary.
+
+The scan protocol below describes the historical 24-patch baseline versus the
+exactly recovered 25-patch candidate. Its provenance gates and archived results
+remain unchanged. A new engine or instrumentation identity requires a new run;
+use [focused Native trails validation](../native-trails/README.md) for the current
+rebase comparison rather than relabeling historical corpus captures.
 
 The worker APKs embed those AARs. Framework Instrumentation creates a GLES3
 pbuffer and calls core initialization, public settings, unsigned-byte audio,
@@ -88,7 +110,7 @@ directory. Keep old databases as evidence rather than rewriting their protocol.
 Synthetic checks:
 
 ```bash
-build/preset-lab-venv/bin/python -W error -m unittest discover -s tools/core-corpus -p 'test_*.py' -v
+build/preset-lab-venv/bin/python -m pytest tools/core-corpus tools/native-trails -q
 build/preset-lab-venv/bin/python -m unittest discover -s docs/superpowers/evidence/0025-feedback-diffusion/corpus-screen -p 'test_summarize_screen.py' -v
 ```
 

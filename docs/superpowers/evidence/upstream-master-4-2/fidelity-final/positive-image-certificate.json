@@ -1,0 +1,1306 @@
+{
+  "schema": "projectmtv-positive-image-proof-certificate-v1",
+  "verified_at_utc": "2026-10-07T02:10:08.653052+00:00",
+  "protocol_sha256": "7eaf62a6dba9804a31df9154208859845f663cb685d32728132682af8f7ddbb5",
+  "scope": "Every source replay reproduces all original 480 RGB frame hashes; PNGs at frame 120/479 decode to those hashes. Alpha excluded.",
+  "verified_replays": 48,
+  "verified_pngs": 96,
+  "records": [
+    {
+      "preset": "suksma - borat pubis jokulars.milk",
+      "preset_sha256": "e74a28440be792d6fc8ef83087b8eb5acd8b89492826bff6b4cff2759e3ff62b",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "c9d595205dfa051df7448f1af212b7c28c37f656baff6a51fd960c7f3325788e",
+      "manifest_sha256": "546f9a6295163b041b043e355bf38f7462005bb4c5485161db384443dad88933",
+      "frame_hashes_sha256": "e124e86c6f61de3ac5f9332035f3ac89991f7aa92625c9f7549257bd83c189e4",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8a58d5d96450452d42698d2b25ed65e86bebdaa394564033aac6f0a4d4d1b960",
+          "rgbSha256": "bfefa72503acb6c92cf3cbe2932c4faf459b13d90919249b3aaf4f0c5d7edb43"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgbSha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - borat pubis jokulars.milk",
+      "preset_sha256": "e74a28440be792d6fc8ef83087b8eb5acd8b89492826bff6b4cff2759e3ff62b",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "bb4abf417940d649b28c01be17f3c3accac522516ad92d895f7c9a2dba07df46",
+      "manifest_sha256": "ebb20e836d7937e819606e9f848a7a8262d26957776a0f5ecac6bdefc7f40a4c",
+      "frame_hashes_sha256": "e124e86c6f61de3ac5f9332035f3ac89991f7aa92625c9f7549257bd83c189e4",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8a58d5d96450452d42698d2b25ed65e86bebdaa394564033aac6f0a4d4d1b960",
+          "rgbSha256": "bfefa72503acb6c92cf3cbe2932c4faf459b13d90919249b3aaf4f0c5d7edb43"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgbSha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - borat pubis jokulars.milk",
+      "preset_sha256": "e74a28440be792d6fc8ef83087b8eb5acd8b89492826bff6b4cff2759e3ff62b",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "07108dbb6ddcce98332e9981d8ed0e9b335c529fc8203b35efb95c7ced73ab44",
+      "manifest_sha256": "1c7cbecb338105c8306bddebfa575a7c0cfc14d0445e9d15b2004404f2ff1b84",
+      "frame_hashes_sha256": "e124e86c6f61de3ac5f9332035f3ac89991f7aa92625c9f7549257bd83c189e4",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8a58d5d96450452d42698d2b25ed65e86bebdaa394564033aac6f0a4d4d1b960",
+          "rgbSha256": "bfefa72503acb6c92cf3cbe2932c4faf459b13d90919249b3aaf4f0c5d7edb43"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgbSha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - borat pubis jokulars.milk",
+      "preset_sha256": "e74a28440be792d6fc8ef83087b8eb5acd8b89492826bff6b4cff2759e3ff62b",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "93cf024417ac103bffff2ff3e85166926050eb5c3568229c1535de827181d64e",
+      "manifest_sha256": "67d63a0c13d25163905e549f5be2f917ae25584ac7877cd9f9c686a647fff8e1",
+      "frame_hashes_sha256": "e124e86c6f61de3ac5f9332035f3ac89991f7aa92625c9f7549257bd83c189e4",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8a58d5d96450452d42698d2b25ed65e86bebdaa394564033aac6f0a4d4d1b960",
+          "rgbSha256": "bfefa72503acb6c92cf3cbe2932c4faf459b13d90919249b3aaf4f0c5d7edb43"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "4754e8c45ebd490d8f491b345f76aaf9eb164320498acfe5491809cbb577f2b6",
+          "rgbSha256": "2cf15cb504999076fec44d9543152b3d3177305cce6274d6bb187bb01b3911a8"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - dinner - ratios that make you feel hopeless - flx spr col(1).milk",
+      "preset_sha256": "1ad74621c0601d2c3d1b49d2cf7d1e1b576c8931b06f7d237ad49e8ba4d31c99",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "c8744509fc6e92ce491a76af976722b5a189eeea5337096f5338dc2c2e0e66a7",
+      "manifest_sha256": "968b15ad65ee1c23d76f9c4367779fc9bd8c1a4f176585ed3f642bfeaf2a2d72",
+      "frame_hashes_sha256": "09d02bdf105a8188fc6550f368d2b1bdb7f77317ed714107696cd1ffefd6e926",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8d2d66eb36d7df631a9139a2289aa0d44ed2bda1a4404b8465bc21d66519b98f",
+          "rgbSha256": "37e113db9145096d8e5e5123e188f8bd3ede722cb45a9a5a0b698a107dc9c46b"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgbSha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - dinner - ratios that make you feel hopeless - flx spr col(1).milk",
+      "preset_sha256": "1ad74621c0601d2c3d1b49d2cf7d1e1b576c8931b06f7d237ad49e8ba4d31c99",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "776aca3a01762be52dbd6be1bc65d8d734cea3ad10799a9a6e6de19fad794d27",
+      "manifest_sha256": "b122516790f37f888af6a7a950560422b410cfe77d4a8ddec3e5ef2c06555ba7",
+      "frame_hashes_sha256": "09d02bdf105a8188fc6550f368d2b1bdb7f77317ed714107696cd1ffefd6e926",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8d2d66eb36d7df631a9139a2289aa0d44ed2bda1a4404b8465bc21d66519b98f",
+          "rgbSha256": "37e113db9145096d8e5e5123e188f8bd3ede722cb45a9a5a0b698a107dc9c46b"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgbSha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - dinner - ratios that make you feel hopeless - flx spr col(1).milk",
+      "preset_sha256": "1ad74621c0601d2c3d1b49d2cf7d1e1b576c8931b06f7d237ad49e8ba4d31c99",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "4deb08a7f6b101da04abcd36b7c1e11a994c2382d5e082e6da950a008981e7c3",
+      "manifest_sha256": "65ef74d159f52c65db58f1633497e9d8feb15706345b2a8398984809ef71c575",
+      "frame_hashes_sha256": "09d02bdf105a8188fc6550f368d2b1bdb7f77317ed714107696cd1ffefd6e926",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8d2d66eb36d7df631a9139a2289aa0d44ed2bda1a4404b8465bc21d66519b98f",
+          "rgbSha256": "37e113db9145096d8e5e5123e188f8bd3ede722cb45a9a5a0b698a107dc9c46b"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgbSha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        }
+      ]
+    },
+    {
+      "preset": "suksma - dinner - ratios that make you feel hopeless - flx spr col(1).milk",
+      "preset_sha256": "1ad74621c0601d2c3d1b49d2cf7d1e1b576c8931b06f7d237ad49e8ba4d31c99",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "119cb9a913ccaea8501113ae1accffbea784438b7b77f9b44c13c49e78c2725d",
+      "manifest_sha256": "b885574a8525165d73d5473f49e5950bbc1e67d7f25d0799ca5b1c20b5df3709",
+      "frame_hashes_sha256": "09d02bdf105a8188fc6550f368d2b1bdb7f77317ed714107696cd1ffefd6e926",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "8d2d66eb36d7df631a9139a2289aa0d44ed2bda1a4404b8465bc21d66519b98f",
+          "rgbSha256": "37e113db9145096d8e5e5123e188f8bd3ede722cb45a9a5a0b698a107dc9c46b"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "22f42104521b09bd90c49736ecceea14ebdbc736746169113e99cf265e66da07",
+          "rgbSha256": "e54e31d11e21fc3803ec5d33221304508826a48ed2e7dedcb4b35d4d9916e799"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - log tower 1 pig vomit 2uqle4 dorqstre l-egrunth.milk",
+      "preset_sha256": "acd42515bd929f920d9220d4cd07a0c2428d6db70f331d2130ffd9e73e875415",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "1faea8f39f8438d1cf83f04155a3d5c5b690ce0f15cf67abf5868224aa67ab5e",
+      "manifest_sha256": "c33952b7945f587cbdf1e45813b9bc3088840df727455c1f1aa38bc81eeb55ca",
+      "frame_hashes_sha256": "8dd5796fb7370ca60dd56adf4fe0da1ee53b2a47118079f3696fff4331c26eba",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "ccb8d85cd87a593f97d2371ec1349f4915141dcd454d6f5d4cd6834eeae6a2e7",
+          "rgbSha256": "354af7fb213787eef905f53a40968631b15eb8d925c34a39c2d37a71f06f5736"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgbSha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - log tower 1 pig vomit 2uqle4 dorqstre l-egrunth.milk",
+      "preset_sha256": "acd42515bd929f920d9220d4cd07a0c2428d6db70f331d2130ffd9e73e875415",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "4d60ab4c04f7e8e664af95ccff565261c71e6541064882a1f6bd540cfab6f895",
+      "manifest_sha256": "0151d5fff171874b498344ab022a4370eeaf5f679b42fc2ece940942982991e7",
+      "frame_hashes_sha256": "8dd5796fb7370ca60dd56adf4fe0da1ee53b2a47118079f3696fff4331c26eba",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "ccb8d85cd87a593f97d2371ec1349f4915141dcd454d6f5d4cd6834eeae6a2e7",
+          "rgbSha256": "354af7fb213787eef905f53a40968631b15eb8d925c34a39c2d37a71f06f5736"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgbSha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - log tower 1 pig vomit 2uqle4 dorqstre l-egrunth.milk",
+      "preset_sha256": "acd42515bd929f920d9220d4cd07a0c2428d6db70f331d2130ffd9e73e875415",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "b20963f6a60c16a5de9ed0ed0fafd5ad7d6e5288b9b1f793a5d2860ace0183b3",
+      "manifest_sha256": "79f7677de246365a0df600fc20db2265783750bf38db84558a2f99f9fbd52887",
+      "frame_hashes_sha256": "8dd5796fb7370ca60dd56adf4fe0da1ee53b2a47118079f3696fff4331c26eba",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "ccb8d85cd87a593f97d2371ec1349f4915141dcd454d6f5d4cd6834eeae6a2e7",
+          "rgbSha256": "354af7fb213787eef905f53a40968631b15eb8d925c34a39c2d37a71f06f5736"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgbSha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        }
+      ]
+    },
+    {
+      "preset": "amandio c - log tower 1 pig vomit 2uqle4 dorqstre l-egrunth.milk",
+      "preset_sha256": "acd42515bd929f920d9220d4cd07a0c2428d6db70f331d2130ffd9e73e875415",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "3e88e772b23ca038344d9054b6496f8f66364f083c61a98f50a122ff1aa3f7b2",
+      "manifest_sha256": "c2323e137c4472f5331ee850f3704a26f86d7755052f638328c1edaf787be8ef",
+      "frame_hashes_sha256": "8dd5796fb7370ca60dd56adf4fe0da1ee53b2a47118079f3696fff4331c26eba",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "ccb8d85cd87a593f97d2371ec1349f4915141dcd454d6f5d4cd6834eeae6a2e7",
+          "rgbSha256": "354af7fb213787eef905f53a40968631b15eb8d925c34a39c2d37a71f06f5736"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "2ae87e93e4233f299c910345773c381a7787e8471ae389cd781a803688be11f4",
+          "rgbSha256": "bbdbb568804f480d6aa568f9d0e1b60d14189897a472fed7ec0c75f354ad406a"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "d78d6003c66a81f00f766c3b9bcb17b8613803192f7d1b58120ae605de43efba",
+      "manifest_sha256": "6533aa440b4e99711fd4b78ecaa653c1ebbcdaa5d3a1ee2de7778f610b72d270",
+      "frame_hashes_sha256": "1f0b2264b9c3a766e18aec66d4c03f351a946f2ecc9ccdbdeb5d5410561341aa",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "7d9b7ffbdd766f598436ec49abc96d446bc643f9f4f51a0d3c71f77c1befb771",
+          "rgbSha256": "27edcb421a0b7dc8950cc949227d9adc730341dda81a4ddbf9054c9c55a288a0"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "b6b0083b5ab67a5bd47e76a707a6f96a62e1646175c7c6474f3dc0ebc8f39e9f",
+          "rgbSha256": "3aad75576e0856d514fdffd97790c1608683ddb681aa04db9513b9d3c55ed236"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "a051f33eb353e02576353931ba32314c9e5ad04386eb08351aa2de54c9e41464",
+      "manifest_sha256": "5a81bc9890e55a2846e4b710faea3b08102bfed6f7dca50b8cba1a019410bfec",
+      "frame_hashes_sha256": "1f0b2264b9c3a766e18aec66d4c03f351a946f2ecc9ccdbdeb5d5410561341aa",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "7d9b7ffbdd766f598436ec49abc96d446bc643f9f4f51a0d3c71f77c1befb771",
+          "rgbSha256": "27edcb421a0b7dc8950cc949227d9adc730341dda81a4ddbf9054c9c55a288a0"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "b6b0083b5ab67a5bd47e76a707a6f96a62e1646175c7c6474f3dc0ebc8f39e9f",
+          "rgbSha256": "3aad75576e0856d514fdffd97790c1608683ddb681aa04db9513b9d3c55ed236"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "a4fc9e6ec8abc064c8de59887fd2f06c74ea60d00507911866eaf93f49070b7b",
+      "manifest_sha256": "5db938862672e15d8b0422b29098e6588d1b9e40300f829c670ef40abbac7ec1",
+      "frame_hashes_sha256": "1f0b2264b9c3a766e18aec66d4c03f351a946f2ecc9ccdbdeb5d5410561341aa",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "7d9b7ffbdd766f598436ec49abc96d446bc643f9f4f51a0d3c71f77c1befb771",
+          "rgbSha256": "27edcb421a0b7dc8950cc949227d9adc730341dda81a4ddbf9054c9c55a288a0"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "b6b0083b5ab67a5bd47e76a707a6f96a62e1646175c7c6474f3dc0ebc8f39e9f",
+          "rgbSha256": "3aad75576e0856d514fdffd97790c1608683ddb681aa04db9513b9d3c55ed236"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "27a4b91679cce2053a6ac662ab4e4bf38e9f48a35f310dcdbaefe69c88c892cb",
+      "manifest_sha256": "205bf04ae38cfd11e51aa3d0766182874d80f112ca21b27911fb0e1371032328",
+      "frame_hashes_sha256": "1f0b2264b9c3a766e18aec66d4c03f351a946f2ecc9ccdbdeb5d5410561341aa",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "7d9b7ffbdd766f598436ec49abc96d446bc643f9f4f51a0d3c71f77c1befb771",
+          "rgbSha256": "27edcb421a0b7dc8950cc949227d9adc730341dda81a4ddbf9054c9c55a288a0"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "b6b0083b5ab67a5bd47e76a707a6f96a62e1646175c7c6474f3dc0ebc8f39e9f",
+          "rgbSha256": "3aad75576e0856d514fdffd97790c1608683ddb681aa04db9513b9d3c55ed236"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "ba6d70d544df78508b136e1d5f786201f8a45b2667bc875aae45a4dce629de9a",
+      "manifest_sha256": "fc8c1f9bc88a2eebb6a068ae7464818f41031b7fa6b53b73c35662833fe7b1aa",
+      "frame_hashes_sha256": "d55cf559ab6cae73665941a3e9fa8a0d7921a21134a81310ee54b2791a042d6c",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "e3788308b852bb49db01e8187e432feac5ed400c116d191c9b7fb85d4bdabaf5",
+          "rgbSha256": "a0256cae416a88404c92e9576bc095f1b4ecd05da54b0d28e76b74e3e17a4b38"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "d422287bc25c81f37dca194776bb3d05cfe1bbca367739bf069a3dd2c118aaa6",
+          "rgbSha256": "e2519e10c88276af653f81fd9857edbc63c4c7a58015f2933602d42a0142ad9e"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "51f8be28d876d563abcec551b2d20649092f9ed8fa1f44f3a3d8702c209a4a85",
+      "manifest_sha256": "8a26fcdd9e457dacdf17bcd2f12d0b457eabcca4703dc0130bc4e0877ee222bf",
+      "frame_hashes_sha256": "d55cf559ab6cae73665941a3e9fa8a0d7921a21134a81310ee54b2791a042d6c",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "e3788308b852bb49db01e8187e432feac5ed400c116d191c9b7fb85d4bdabaf5",
+          "rgbSha256": "a0256cae416a88404c92e9576bc095f1b4ecd05da54b0d28e76b74e3e17a4b38"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "d422287bc25c81f37dca194776bb3d05cfe1bbca367739bf069a3dd2c118aaa6",
+          "rgbSha256": "e2519e10c88276af653f81fd9857edbc63c4c7a58015f2933602d42a0142ad9e"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "08ca9a2c1e1be62d88f94b39bc99137bba29e7ace74b0769369d982de9dddf7f",
+      "manifest_sha256": "82a71b9aa76eccdb98e0945acf87a948c7df8c0026a45aa70046b98895a3e9c2",
+      "frame_hashes_sha256": "d55cf559ab6cae73665941a3e9fa8a0d7921a21134a81310ee54b2791a042d6c",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "e3788308b852bb49db01e8187e432feac5ed400c116d191c9b7fb85d4bdabaf5",
+          "rgbSha256": "a0256cae416a88404c92e9576bc095f1b4ecd05da54b0d28e76b74e3e17a4b38"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "d422287bc25c81f37dca194776bb3d05cfe1bbca367739bf069a3dd2c118aaa6",
+          "rgbSha256": "e2519e10c88276af653f81fd9857edbc63c4c7a58015f2933602d42a0142ad9e"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "7b5cb50523d56cdc1d3590c447d49ab78255c7ae66e13443494092cda3a3d858",
+      "manifest_sha256": "3aff71248737b0c4fe7f48974856573c5407a8c792284a00997b69f248511d4c",
+      "frame_hashes_sha256": "d55cf559ab6cae73665941a3e9fa8a0d7921a21134a81310ee54b2791a042d6c",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "e3788308b852bb49db01e8187e432feac5ed400c116d191c9b7fb85d4bdabaf5",
+          "rgbSha256": "a0256cae416a88404c92e9576bc095f1b4ecd05da54b0d28e76b74e3e17a4b38"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "d422287bc25c81f37dca194776bb3d05cfe1bbca367739bf069a3dd2c118aaa6",
+          "rgbSha256": "e2519e10c88276af653f81fd9857edbc63c4c7a58015f2933602d42a0142ad9e"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-medium",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "7c7148392b3e4f0eade04729318d49febbafd39f568774d0f9efac3a3cba8fa7",
+      "manifest_sha256": "69c7846b6392e824fc146c204eb5c98cfcfb11888fc22c26f5b41d964828cad4",
+      "frame_hashes_sha256": "32c86f7325ecdf2ce3214a05b7bec48507f90574d0c262a17395a433c4ad8173",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "2fc333b6c6016cc17d8e695e16926431602a55ce17e40f337c909d50e8bd39f5",
+          "rgbSha256": "25c074cdb621d82bec4af85891c9e3f0598cb5afab5a121aec20558c5b374f23"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "765b607d474db214f0bb962f8d31a9424adf82d224540d6bde46b791edc66620",
+          "rgbSha256": "ce5d74cd316ebc3895e98d67853de3d82f106d09e57ad63222dbb0ff3146d47a"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-medium",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "d2c0951e55c7e975d6d537da5868c7f8ef4a53920ea04eb5532982685c6a4c3f",
+      "manifest_sha256": "0f914b2e8b0805ce0596d653c4b11413442770b275bec5597cbb35f2f6fa782d",
+      "frame_hashes_sha256": "32c86f7325ecdf2ce3214a05b7bec48507f90574d0c262a17395a433c4ad8173",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "2fc333b6c6016cc17d8e695e16926431602a55ce17e40f337c909d50e8bd39f5",
+          "rgbSha256": "25c074cdb621d82bec4af85891c9e3f0598cb5afab5a121aec20558c5b374f23"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "765b607d474db214f0bb962f8d31a9424adf82d224540d6bde46b791edc66620",
+          "rgbSha256": "ce5d74cd316ebc3895e98d67853de3d82f106d09e57ad63222dbb0ff3146d47a"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-medium",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "b7da6603c127d192007975372bd5ce6a4dbdbb6e6fa445d129d6f1c0b8ef345c",
+      "manifest_sha256": "7f66949c5c158d9017400e354d58b24cdf13fabacadb37a38d710169c7727e48",
+      "frame_hashes_sha256": "32c86f7325ecdf2ce3214a05b7bec48507f90574d0c262a17395a433c4ad8173",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "2fc333b6c6016cc17d8e695e16926431602a55ce17e40f337c909d50e8bd39f5",
+          "rgbSha256": "25c074cdb621d82bec4af85891c9e3f0598cb5afab5a121aec20558c5b374f23"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "765b607d474db214f0bb962f8d31a9424adf82d224540d6bde46b791edc66620",
+          "rgbSha256": "ce5d74cd316ebc3895e98d67853de3d82f106d09e57ad63222dbb0ff3146d47a"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-medium",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "2642278a7d67d475a98614a90905f6a826c97f89d2ad3157f5e544982b4ddcb2",
+      "manifest_sha256": "7dccc821b40254e2eb61376ffba515851eced45edbf3e7ad7990c017fef660b3",
+      "frame_hashes_sha256": "32c86f7325ecdf2ce3214a05b7bec48507f90574d0c262a17395a433c4ad8173",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "2fc333b6c6016cc17d8e695e16926431602a55ce17e40f337c909d50e8bd39f5",
+          "rgbSha256": "25c074cdb621d82bec4af85891c9e3f0598cb5afab5a121aec20558c5b374f23"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "765b607d474db214f0bb962f8d31a9424adf82d224540d6bde46b791edc66620",
+          "rgbSha256": "ce5d74cd316ebc3895e98d67853de3d82f106d09e57ad63222dbb0ff3146d47a"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-high",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "51a35b7ddf4e41f1bdb98715e30f54a7fd1aaa0064409e81f5138b2180c32750",
+      "manifest_sha256": "b097eb6ee9db7db7e4e26ae4389643f579e3fc96a1a32382b72550af94350aef",
+      "frame_hashes_sha256": "35528d4356568d7f647346ab6a050283eacaaae3c48080326dc460e960861966",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "7cb97bc2e254d3f2c55ee5ad086125fe37109817d976381bf687998aae08e9ea",
+          "rgbSha256": "7b268cbdce29cd9dc60a8da6e43fdafb4018a0eff243ac83070ced1e361cde66"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "b25aaa81f894f8744231dcf3485389c2c4e84cac31967221736c70bc05b07639",
+          "rgbSha256": "77d8eb2744f8dc5b9936a65489fd9c2aa3fd5203336d3496588cc5c843c41250"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-high",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "7359087ea9baed17c9dfca3840e3d69a26af91b12a4e6f1f7eb50dd846a76e27",
+      "manifest_sha256": "ad9de7512a162ca17fd87b309efb55366e52c6d3dec98f19369df275ed9daff1",
+      "frame_hashes_sha256": "35528d4356568d7f647346ab6a050283eacaaae3c48080326dc460e960861966",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "7cb97bc2e254d3f2c55ee5ad086125fe37109817d976381bf687998aae08e9ea",
+          "rgbSha256": "7b268cbdce29cd9dc60a8da6e43fdafb4018a0eff243ac83070ced1e361cde66"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "b25aaa81f894f8744231dcf3485389c2c4e84cac31967221736c70bc05b07639",
+          "rgbSha256": "77d8eb2744f8dc5b9936a65489fd9c2aa3fd5203336d3496588cc5c843c41250"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-high",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "3739586b6192ca305e4436776630557bde0ea795e3c7aa9bf8420a9ecc4778b1",
+      "manifest_sha256": "8fa80904f098369eb66b35884bfc1d005a756002d1341ff5c7da31a10dc94444",
+      "frame_hashes_sha256": "35528d4356568d7f647346ab6a050283eacaaae3c48080326dc460e960861966",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "7cb97bc2e254d3f2c55ee5ad086125fe37109817d976381bf687998aae08e9ea",
+          "rgbSha256": "7b268cbdce29cd9dc60a8da6e43fdafb4018a0eff243ac83070ced1e361cde66"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "b25aaa81f894f8744231dcf3485389c2c4e84cac31967221736c70bc05b07639",
+          "rgbSha256": "77d8eb2744f8dc5b9936a65489fd9c2aa3fd5203336d3496588cc5c843c41250"
+        }
+      ]
+    },
+    {
+      "preset": "$$$ Royal - Mashup (191).milk",
+      "preset_sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe",
+      "profile": "native4k-high",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "ec7b8fdb110c59f44a49786a6a7397d9def44d288c2951bce1574747a8757eee",
+      "manifest_sha256": "8c134cb38d80719c4d68dc94c19bf6f6184ac896c53f8e530a7ace0afbc8e79d",
+      "frame_hashes_sha256": "35528d4356568d7f647346ab6a050283eacaaae3c48080326dc460e960861966",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "7cb97bc2e254d3f2c55ee5ad086125fe37109817d976381bf687998aae08e9ea",
+          "rgbSha256": "7b268cbdce29cd9dc60a8da6e43fdafb4018a0eff243ac83070ced1e361cde66"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "b25aaa81f894f8744231dcf3485389c2c4e84cac31967221736c70bc05b07639",
+          "rgbSha256": "77d8eb2744f8dc5b9936a65489fd9c2aa3fd5203336d3496588cc5c843c41250"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "14c37f033c7928080c1a3699f1d51ced4ddde7f1ad01b3a217f11c33470b0c94",
+      "manifest_sha256": "3daf04db5f55c086605792537688b8b03684a1e08ce1766933eb9b9325330fe8",
+      "frame_hashes_sha256": "b8a3d5c50f2cbd7c079e4269d41eaddc378372a05b1c739f48d0fbdcd69c78e3",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "3e27547d710ac8d9f4f35f087070010b8b83c2cd786bf86f4ab2b99fbb3137a3",
+          "rgbSha256": "1ee0d5962cc8376d7ead13889e70e703170879226358e7275027425665803a55"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "be1d7be0058165f1f322d44c245bdd1b1a38bbc630fa1a78bc1db3f0087da129",
+          "rgbSha256": "9a27a9953a23cc09297266c5a1330262418f48a992635a025b3bfc5157fe83d3"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "ebdac8d0d8aa62d1aef74daa86d093703bef052614ac5199cdede115b722b802",
+      "manifest_sha256": "7b3db4ca181bc703c60646cc939a528ff0e0d31e40d9426e56a199bc4066a44c",
+      "frame_hashes_sha256": "b8a3d5c50f2cbd7c079e4269d41eaddc378372a05b1c739f48d0fbdcd69c78e3",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "3e27547d710ac8d9f4f35f087070010b8b83c2cd786bf86f4ab2b99fbb3137a3",
+          "rgbSha256": "1ee0d5962cc8376d7ead13889e70e703170879226358e7275027425665803a55"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "be1d7be0058165f1f322d44c245bdd1b1a38bbc630fa1a78bc1db3f0087da129",
+          "rgbSha256": "9a27a9953a23cc09297266c5a1330262418f48a992635a025b3bfc5157fe83d3"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "b20ceaf44b018a0a6116242012d5b731452bd96258cec3042de104e5ca1850aa",
+      "manifest_sha256": "3e394f84654518bd9d3738f3af55171368b680f068f15c71d862d149ba9353cb",
+      "frame_hashes_sha256": "b8a3d5c50f2cbd7c079e4269d41eaddc378372a05b1c739f48d0fbdcd69c78e3",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "3e27547d710ac8d9f4f35f087070010b8b83c2cd786bf86f4ab2b99fbb3137a3",
+          "rgbSha256": "1ee0d5962cc8376d7ead13889e70e703170879226358e7275027425665803a55"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "be1d7be0058165f1f322d44c245bdd1b1a38bbc630fa1a78bc1db3f0087da129",
+          "rgbSha256": "9a27a9953a23cc09297266c5a1330262418f48a992635a025b3bfc5157fe83d3"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "a41a064fcb131d25e833e1009820229480df9a2dde3d7dd3b9bb88d0ab598387",
+      "manifest_sha256": "0f7cb4d01c447af2db3c67fa848ffda63849475cd19d45b8d491b31fc42b2707",
+      "frame_hashes_sha256": "b8a3d5c50f2cbd7c079e4269d41eaddc378372a05b1c739f48d0fbdcd69c78e3",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "3e27547d710ac8d9f4f35f087070010b8b83c2cd786bf86f4ab2b99fbb3137a3",
+          "rgbSha256": "1ee0d5962cc8376d7ead13889e70e703170879226358e7275027425665803a55"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "be1d7be0058165f1f322d44c245bdd1b1a38bbc630fa1a78bc1db3f0087da129",
+          "rgbSha256": "9a27a9953a23cc09297266c5a1330262418f48a992635a025b3bfc5157fe83d3"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "820225e56be93b37d1ef53ce865d9fdaf7cebfcb51b6ffecf90144e79b66944b",
+      "manifest_sha256": "dc2c49e2291c2776893a860ac8c0c8b36a8d4e79c1806718802e02a2378dfab0",
+      "frame_hashes_sha256": "7c0a9be23a88ad0889b148dbea713fcd2b005c53a3bc8cabaa77e57c0960c809",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "63aa30fc624bb4b9a4880f0dcaf0bb5562b2e25ea685db80a147bdfa4105e29c",
+          "rgbSha256": "9db12838798936b9669b87808dd7ef2e30e5a82809c0c3010b1af0c85e35289d"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "06352d3397878ac38a631c0af6aab989a3e5f246917821e214923505cb1ddfb5",
+          "rgbSha256": "45517af0e9833f36bf0044caa75a1d04e8548dbbb20870741d0a2bb1ec32b3e7"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "0c2e02cb44c40254fe32316c77bcf50037be24c4c9012c5489e7ea879bdbd9ed",
+      "manifest_sha256": "224e2d91836bc9f6e1da373b9849efb52e96871e2db63cd84bd2929367aec709",
+      "frame_hashes_sha256": "7c0a9be23a88ad0889b148dbea713fcd2b005c53a3bc8cabaa77e57c0960c809",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "63aa30fc624bb4b9a4880f0dcaf0bb5562b2e25ea685db80a147bdfa4105e29c",
+          "rgbSha256": "9db12838798936b9669b87808dd7ef2e30e5a82809c0c3010b1af0c85e35289d"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "06352d3397878ac38a631c0af6aab989a3e5f246917821e214923505cb1ddfb5",
+          "rgbSha256": "45517af0e9833f36bf0044caa75a1d04e8548dbbb20870741d0a2bb1ec32b3e7"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "8ca4ed81f0af111ea6abfdf34bbd5c80e606aa1f74bfff507bea75be6d533171",
+      "manifest_sha256": "931d727dfcf4e1245ae5dd142033da45a932ce4ec44f73613b681f84d1c4b2ff",
+      "frame_hashes_sha256": "7c0a9be23a88ad0889b148dbea713fcd2b005c53a3bc8cabaa77e57c0960c809",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "63aa30fc624bb4b9a4880f0dcaf0bb5562b2e25ea685db80a147bdfa4105e29c",
+          "rgbSha256": "9db12838798936b9669b87808dd7ef2e30e5a82809c0c3010b1af0c85e35289d"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "06352d3397878ac38a631c0af6aab989a3e5f246917821e214923505cb1ddfb5",
+          "rgbSha256": "45517af0e9833f36bf0044caa75a1d04e8548dbbb20870741d0a2bb1ec32b3e7"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "76f3ea7d30710454efb36c66349b9aa7e7be6b6665bddc2401788d1670966abb",
+      "manifest_sha256": "35ff9914ed0afd0bd03367a9ecd7558e028a90bc206df2c304bcfd6e9cf4a7fa",
+      "frame_hashes_sha256": "7c0a9be23a88ad0889b148dbea713fcd2b005c53a3bc8cabaa77e57c0960c809",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "63aa30fc624bb4b9a4880f0dcaf0bb5562b2e25ea685db80a147bdfa4105e29c",
+          "rgbSha256": "9db12838798936b9669b87808dd7ef2e30e5a82809c0c3010b1af0c85e35289d"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "06352d3397878ac38a631c0af6aab989a3e5f246917821e214923505cb1ddfb5",
+          "rgbSha256": "45517af0e9833f36bf0044caa75a1d04e8548dbbb20870741d0a2bb1ec32b3e7"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-medium",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "4c001327fb366428fab7972d78fb58f3165201e4934f7046545b1bb3202af13f",
+      "manifest_sha256": "0838e24dfd577ec17e00e16c7b9542cf623f92a7ee9a01606bb46ea0000aa4d3",
+      "frame_hashes_sha256": "3cf5d06f621c373c225ace7b2ad38a49726d4058b851d5b055ad7038ff17aedb",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "623f5d57834fbc76f8946d870e2384a948ba0325e929be4306406b9c67674150",
+          "rgbSha256": "0cd16970917f6e360b8ac5c1aefe697099122d5393468f3b188de8d8ef0d63f8"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "6997aedffd8a333818ecba5c917806843fc511143b1302389ad87fae9a8f70be",
+          "rgbSha256": "beaa5fddb4d2aa13519ebc1bd7cc4e7c7d175cd839c62767508c2118cb1894d9"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-medium",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "82ab68b186ff1a5fd1cf563d2a716d2719a7aa5064af59349e051b171548e725",
+      "manifest_sha256": "944b3cfffd5e7baccf60369dd17b43fa5731a325a23dcbed42d1c6861a1372d2",
+      "frame_hashes_sha256": "3cf5d06f621c373c225ace7b2ad38a49726d4058b851d5b055ad7038ff17aedb",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "623f5d57834fbc76f8946d870e2384a948ba0325e929be4306406b9c67674150",
+          "rgbSha256": "0cd16970917f6e360b8ac5c1aefe697099122d5393468f3b188de8d8ef0d63f8"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "6997aedffd8a333818ecba5c917806843fc511143b1302389ad87fae9a8f70be",
+          "rgbSha256": "beaa5fddb4d2aa13519ebc1bd7cc4e7c7d175cd839c62767508c2118cb1894d9"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-medium",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "e27a780e74f36ba81cbd5c7324a606f54494b7e324a186c896bf871fe675e989",
+      "manifest_sha256": "76eb6fc90fba4f6d4646ac53e17dba23a941a9119577a2ccfb85b5dd13807942",
+      "frame_hashes_sha256": "3cf5d06f621c373c225ace7b2ad38a49726d4058b851d5b055ad7038ff17aedb",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "623f5d57834fbc76f8946d870e2384a948ba0325e929be4306406b9c67674150",
+          "rgbSha256": "0cd16970917f6e360b8ac5c1aefe697099122d5393468f3b188de8d8ef0d63f8"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "6997aedffd8a333818ecba5c917806843fc511143b1302389ad87fae9a8f70be",
+          "rgbSha256": "beaa5fddb4d2aa13519ebc1bd7cc4e7c7d175cd839c62767508c2118cb1894d9"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-medium",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "8547b9e6027e7ccfeb5b71844b6258fb2213628a6b53e7562f8c0eecd3aae4c8",
+      "manifest_sha256": "e93318eb976caef8ddac8accb07ba72508e28cd4adb75d4b19a9168444e65de2",
+      "frame_hashes_sha256": "3cf5d06f621c373c225ace7b2ad38a49726d4058b851d5b055ad7038ff17aedb",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "623f5d57834fbc76f8946d870e2384a948ba0325e929be4306406b9c67674150",
+          "rgbSha256": "0cd16970917f6e360b8ac5c1aefe697099122d5393468f3b188de8d8ef0d63f8"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "6997aedffd8a333818ecba5c917806843fc511143b1302389ad87fae9a8f70be",
+          "rgbSha256": "beaa5fddb4d2aa13519ebc1bd7cc4e7c7d175cd839c62767508c2118cb1894d9"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-high",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "8d77ecfb25d44c6aaf182d69f2148530e6bfe8524a5979a0fa39ae4e3fd5174a",
+      "manifest_sha256": "ffd8d6f111d0755ea23c007bffacf6d5ae04b468b2c83a3274c5b6169e6ce532",
+      "frame_hashes_sha256": "aa140cb4a17d9eef86a8ebeb96c6b69de36f3e0a82fa89c652ab24ef2ea5bb26",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "13f7aa4858f28b6871252d258f64444ff2fc548c081e5a8b6a12e4176e26ddab",
+          "rgbSha256": "7e861323fdd9cbe7f0bc097e98efaa2ece19d7d3562be7a5019c7af44c1e34fa"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "beae52eb6f97ed2c48c2e6dee659a24b7a1401698e3c51fa83b4deb6632be25f",
+          "rgbSha256": "cecabe30cd94c417fa4ecf56c6be31ed5066ece52391220d8aced4dac41dc236"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-high",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "8f734271014a522dff6def66c95510cc2d98ded185e3e194aa5b161c74d4d7a5",
+      "manifest_sha256": "bbde83a26c8167976822be01937cea26042c3376c1f247b3d7023d716ebd1ec1",
+      "frame_hashes_sha256": "aa140cb4a17d9eef86a8ebeb96c6b69de36f3e0a82fa89c652ab24ef2ea5bb26",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "13f7aa4858f28b6871252d258f64444ff2fc548c081e5a8b6a12e4176e26ddab",
+          "rgbSha256": "7e861323fdd9cbe7f0bc097e98efaa2ece19d7d3562be7a5019c7af44c1e34fa"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "beae52eb6f97ed2c48c2e6dee659a24b7a1401698e3c51fa83b4deb6632be25f",
+          "rgbSha256": "cecabe30cd94c417fa4ecf56c6be31ed5066ece52391220d8aced4dac41dc236"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-high",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "bundled",
+      "key": "a42ca31cca334e24a9d72b5b51d8c7fbad8c7c562766177a35750c0d0b4d111e",
+      "manifest_sha256": "973e72b17d017e4cd110a4b937983403e3693901bf578ae4ac6d586c1ac54325",
+      "frame_hashes_sha256": "aa140cb4a17d9eef86a8ebeb96c6b69de36f3e0a82fa89c652ab24ef2ea5bb26",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "13f7aa4858f28b6871252d258f64444ff2fc548c081e5a8b6a12e4176e26ddab",
+          "rgbSha256": "7e861323fdd9cbe7f0bc097e98efaa2ece19d7d3562be7a5019c7af44c1e34fa"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "beae52eb6f97ed2c48c2e6dee659a24b7a1401698e3c51fa83b4deb6632be25f",
+          "rgbSha256": "cecabe30cd94c417fa4ecf56c6be31ed5066ece52391220d8aced4dac41dc236"
+        }
+      ]
+    },
+    {
+      "preset": "midgitstraights of majillaen - featy sweet.milk",
+      "preset_sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba",
+      "profile": "native4k-high",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "bundled",
+      "key": "263176ae939b7e066ee9e7657e85d82190fd9ba0ae32d1ea12e135300053de7e",
+      "manifest_sha256": "07466ef01f12b22d2600e4345fcb038b413e5dd10b6c558d894adf93ea52e857",
+      "frame_hashes_sha256": "aa140cb4a17d9eef86a8ebeb96c6b69de36f3e0a82fa89c652ab24ef2ea5bb26",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "13f7aa4858f28b6871252d258f64444ff2fc548c081e5a8b6a12e4176e26ddab",
+          "rgbSha256": "7e861323fdd9cbe7f0bc097e98efaa2ece19d7d3562be7a5019c7af44c1e34fa"
+        },
+        {
+          "frame": 479,
+          "width": 3840,
+          "height": 2160,
+          "pngSha256": "beae52eb6f97ed2c48c2e6dee659a24b7a1401698e3c51fa83b4deb6632be25f",
+          "rgbSha256": "cecabe30cd94c417fa4ecf56c6be31ed5066ece52391220d8aced4dac41dc236"
+        }
+      ]
+    },
+    {
+      "preset": "martin + Se7enSlasher - pixies party (random texture edit).milk",
+      "preset_sha256": "990472f4a5af7fbff629fd2340b14753a7fd1ec7ffc77203267dfdfbf4c8e37e",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 0,
+      "artifact_scope": "supplemental",
+      "key": "b598a9e099efac5bc84b4681554cdddf475012a7ab37bea7611825b9568d299f",
+      "manifest_sha256": "b0c074831d3c63439bc01fcbde5ff43ae8fe43337af4dadbe45668066c455334",
+      "frame_hashes_sha256": "7c11cb79495faa2438a767193c14c20e18869924d80ad8dbff4a71b2224e1c99",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "e9e60769b3a0c691f32e17c8fa11ecc0333d293fc5ec6d969d89e0095ba44950",
+          "rgbSha256": "08362347dd94f1291a4ba943378aa1a3d7fa8037edf7f73b1cfd15de10cdb324"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "c4198e19af114fd5e50cfd6aa48101bafa4e578b7fb8ff014094842413332059",
+          "rgbSha256": "3cfc503e3c9a0df5d1d94dfe2b76e1a65e6457c8dbbafa1a88dc7526802a7ec9"
+        }
+      ]
+    },
+    {
+      "preset": "martin + Se7enSlasher - pixies party (random texture edit).milk",
+      "preset_sha256": "990472f4a5af7fbff629fd2340b14753a7fd1ec7ffc77203267dfdfbf4c8e37e",
+      "profile": "1080p",
+      "role": "baseline",
+      "repeat": 1,
+      "artifact_scope": "supplemental",
+      "key": "dc575ff7d1068ec26b7ab33a101537340ecce0e2caa6e7343b27165f8d1f8834",
+      "manifest_sha256": "530c12221b0db16257ac7705cbd0f0e862938b5907687a5ce3be79c05d31fb67",
+      "frame_hashes_sha256": "7c11cb79495faa2438a767193c14c20e18869924d80ad8dbff4a71b2224e1c99",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "e9e60769b3a0c691f32e17c8fa11ecc0333d293fc5ec6d969d89e0095ba44950",
+          "rgbSha256": "08362347dd94f1291a4ba943378aa1a3d7fa8037edf7f73b1cfd15de10cdb324"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "c4198e19af114fd5e50cfd6aa48101bafa4e578b7fb8ff014094842413332059",
+          "rgbSha256": "3cfc503e3c9a0df5d1d94dfe2b76e1a65e6457c8dbbafa1a88dc7526802a7ec9"
+        }
+      ]
+    },
+    {
+      "preset": "martin + Se7enSlasher - pixies party (random texture edit).milk",
+      "preset_sha256": "990472f4a5af7fbff629fd2340b14753a7fd1ec7ffc77203267dfdfbf4c8e37e",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 0,
+      "artifact_scope": "supplemental",
+      "key": "a82f3bbcc1deb0b8a62260796407abd4595b66ff40f2c7b0791e45eeeca335e9",
+      "manifest_sha256": "fbb009bdc706308b03af0c9f58cdc88dcc55ae3b2143a713d2afdeea29bb1bc9",
+      "frame_hashes_sha256": "7c11cb79495faa2438a767193c14c20e18869924d80ad8dbff4a71b2224e1c99",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "e9e60769b3a0c691f32e17c8fa11ecc0333d293fc5ec6d969d89e0095ba44950",
+          "rgbSha256": "08362347dd94f1291a4ba943378aa1a3d7fa8037edf7f73b1cfd15de10cdb324"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "c4198e19af114fd5e50cfd6aa48101bafa4e578b7fb8ff014094842413332059",
+          "rgbSha256": "3cfc503e3c9a0df5d1d94dfe2b76e1a65e6457c8dbbafa1a88dc7526802a7ec9"
+        }
+      ]
+    },
+    {
+      "preset": "martin + Se7enSlasher - pixies party (random texture edit).milk",
+      "preset_sha256": "990472f4a5af7fbff629fd2340b14753a7fd1ec7ffc77203267dfdfbf4c8e37e",
+      "profile": "1080p",
+      "role": "candidate",
+      "repeat": 1,
+      "artifact_scope": "supplemental",
+      "key": "d4c31f22edd207499ccbbb889b53536aefa8801b4b758494c80ae0659e3dfe2d",
+      "manifest_sha256": "13e1774771426fe8368eaa8071259f1d5aa6843f9e94d4870d88b8c371f917ab",
+      "frame_hashes_sha256": "7c11cb79495faa2438a767193c14c20e18869924d80ad8dbff4a71b2224e1c99",
+      "captures": [
+        {
+          "frame": 120,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "e9e60769b3a0c691f32e17c8fa11ecc0333d293fc5ec6d969d89e0095ba44950",
+          "rgbSha256": "08362347dd94f1291a4ba943378aa1a3d7fa8037edf7f73b1cfd15de10cdb324"
+        },
+        {
+          "frame": 479,
+          "width": 1920,
+          "height": 1080,
+          "pngSha256": "c4198e19af114fd5e50cfd6aa48101bafa4e578b7fb8ff014094842413332059",
+          "rgbSha256": "3cfc503e3c9a0df5d1d94dfe2b76e1a65e6457c8dbbafa1a88dc7526802a7ec9"
+        }
+      ]
+    }
+  ]
+}

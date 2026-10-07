@@ -20,7 +20,7 @@ The other three presets are `Serge + martin - crystal palace tunnel003.milk`
 (`mus`), `martin - mandelbox explorer - wreck diver nz+ liquititty.milk`
 (`dist_c`) and `martin - organic light.milk` (`uv3`). The Microsoft legacy compiler
 reflects these globals as external constants with NULL defaults. Previously they
-became uninitialized ordinary GLSL globals. Patch 0040 preserves uninitialized
+became uninitialized ordinary GLSL globals. Historical patch 0040 (retained in the 4.2 series as `0002-hlsl-compatibility-and-float-roundtrip.patch`) preserves uninitialized
 scalar/vector float globals as uniform inputs and uses the existing initialized
 per-invocation copies when shaders write them. Mixed comma declarations preserve
 individual storage classes. Locals, static/const declarations, initialized globals,
@@ -71,11 +71,25 @@ cmake -S tools/milk-analyzer -B build/milk-analyzer/native \
 cmake --build build/milk-analyzer/native -j 4
 ```
 
+The shader adapter uses the engine’s `Logging.hpp` and existing `Logging` interface
+for the diagnostic macros in its copied CPU bodies. Keep those bodies unchanged
+when adapting to upstream headers so their recorded hashes remain source-bound.
+
 Match `SANITIZERS` to the linked archive. The identity JSON records pinned commit,
 patch digest and instrumentation scope. Native reader fixtures retain raw and
 assembled equation trees separately and stamp the selected loading policy. Prepared
 historical adapters cannot certify the new target policy. The broader original
 PR #25 suite remains a supplemental compatibility check; it is not imported here.
+
+Source stage selection uses the native preset parser’s lowercase key map with
+case-insensitive setting lookups. Version flags such as `PSVERSION_WARP` therefore
+select active stages; missing compatibility evidence remains unknown rather than
+being classified as disabled. Results produced with the earlier case-sensitive
+lookup can misclassify active shader stages and require a fresh analysis run.
+Record the new source revision and hashes of `source_context.py` and
+`stage_resolution.py` in that run’s identity. Keep historical exports, producer
+identities and calibrated models unchanged; parsing and stage selection remain
+source diagnostics, not fidelity certification.
 
 The native tests exercise actual parser generation, default and nonzero input values,
 copy reset across invocations, local/static/initialized controls and preset hashes
@@ -229,7 +243,7 @@ are bounded separately; runtime artifact pushes have a 180-second limit.
 
 Current source adapters stamp `float_literal_policy` as `float32-roundtrip-v1` and the production formatter’s `float_formatter_sha256`.
 The reader exports `renderer_literal` through that formatter, and lowering uses its
-reparsed value. Rebuilding against patch 0044 therefore models the new renderer
+reparsed value. Rebuilding against historical patch 0044, retained in the consolidated 4.2 HLSL patch, therefore models the current renderer
 rather than retaining the old six-digit emission. Historical adapters and archived
 measurement fixtures keep their original identities; do not relabel them.
 

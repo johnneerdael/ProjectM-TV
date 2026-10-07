@@ -1,0 +1,19 @@
+{
+  "required_bundled": 351,
+  "required_external": 1,
+  "required_ambiguous_bundled_controls": 2,
+  "optional_only": 133,
+  "historical_names_preserved": 468,
+  "evidence_reasons_checked": 4136,
+  "source_files_checked": 372,
+  "ordered_patch_hashes_checked": 49,
+  "candidate_adaptation_patch_hashes_checked": 5,
+  "external_git_blob_and_sha256_verified": true,
+  "external_primary_contents_api_identity_verified": true,
+  "relative_markdown_links_checked": 6,
+  "export_sha256": "5491b0758246c4e82f42d5090212b9de1348faee7fcda2c5bf0def3353d75343",
+  "source_inventory_sha256": "ebcca9678131d3a42294a1f7cf7024ec9a09e4940806092445804e857ea51f5b",
+  "missing_external_witnesses": 0,
+  "unresolved_historical_identity_aliases_conservatively_covered": 1,
+  "new_render_runs": 0
+}

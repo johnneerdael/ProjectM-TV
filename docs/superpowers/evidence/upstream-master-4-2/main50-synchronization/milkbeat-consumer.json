@@ -1,0 +1,50 @@
+{
+  "candidate_source": "1f0a43df",
+  "version": "4.2.0-dev-6f6480746-main50-1f0a43df",
+  "aar_sha256": "85dfb1fc6bdbd50336e0e361fdb594221efae40ca95b3d1127f392cbbd1d6008",
+  "archived_aar": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/build/projectm42-main50-core/download/v4.2.0-dev-6f6480746-main50-1f0a43df/projectM-TV-core-4.2.0-dev-6f6480746-main50-1f0a43df.aar",
+  "consumer": "59996e6a991c60b9843ce68565e7c783c0fef4c6",
+  "repo": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/build/projectm42-main50-core",
+  "worktree": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer",
+  "tests": {
+    "tests": 28,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "packaged_apks": [
+    {
+      "apk": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/app/build/outputs/apk/github/debug/app-github-arm64-v8a-debug.apk",
+      "sha256": "5202ffd1bba1ead2e72d7e1bce3143ef4fed9cfb7d8736cc79ecc4cd323e71f9",
+      "projectm_libraries": {
+        "lib/arm64-v8a/libprojectmtv.so": "f44985dee0b556f4c5943dc523f7d7a45d408331695a4653679c216efd045e24"
+      }
+    },
+    {
+      "apk": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/app/build/outputs/apk/github/debug/app-github-armeabi-v7a-debug.apk",
+      "sha256": "014b6dcfa3aba3c1c7356724787dfddcf7d54b3c2a8cee16e5c01470955d6afc",
+      "projectm_libraries": {
+        "lib/armeabi-v7a/libprojectmtv.so": "7cac8fe92d4eebe0b8f14cdee0fbf3af13cf8e954efb9e2e1f0e56c01dc3e39d"
+      }
+    },
+    {
+      "apk": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/app/build/outputs/apk/github/debug/app-github-universal-debug.apk",
+      "sha256": "20e3140c2584fde6ed142f97932f4dca3b71f1666365593a1013ad7cce461fd0",
+      "projectm_libraries": {
+        "lib/arm64-v8a/libprojectmtv.so": "f44985dee0b556f4c5943dc523f7d7a45d408331695a4653679c216efd045e24",
+        "lib/armeabi-v7a/libprojectmtv.so": "7cac8fe92d4eebe0b8f14cdee0fbf3af13cf8e954efb9e2e1f0e56c01dc3e39d"
+      }
+    },
+    {
+      "apk": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/app/build/outputs/apk/github/debug/app-github-x86-debug.apk",
+      "sha256": "adc41740aecbee5c4c6b2a3e8b364532f011a2aadaade741fd5a8f34f362c865",
+      "projectm_libraries": {}
+    },
+    {
+      "apk": "/Users/jneerdael/Scripts/milkbeat/.worktrees/milkbeat-main50-consumer/app/build/outputs/apk/github/debug/app-github-x86_64-debug.apk",
+      "sha256": "002cf5c03fc7d58a0bfc3a98a2bbc729614e6b686a4b59e6717906a9a89af892",
+      "projectm_libraries": {}
+    }
+  ],
+  "scope": "Current Milkbeat debug consumer build/API tests against exact unmodified production migration AAR; no live consumer rendering or release/R8 claim"
+}

@@ -1,6 +1,10 @@
-// Forced into the host build of projectM by tools/projectm-host-tests.sh. Apple's OpenGL 4.1 has no
-// glInvalidateFramebuffer (used by patch 0009); a no-op stands in, as in preset-lab's worker.
 #pragma once
-#ifdef __APPLE__
+#if !defined(__ANDROID__) && !defined(USE_GLES) && __has_include(<glad/gl.h>)
+#include <glad/gl.h>
+#endif
+// Apple OpenGL4.1 and desktop declarations below GL4.3 lack this optional hint.
+// Retain contents in host controls; Android/GLES keeps its real discard API.
+#if defined(__APPLE__) || (!defined(__ANDROID__) && !defined(USE_GLES) && !defined(GL_VERSION_4_3))
+#undef glInvalidateFramebuffer
 #define glInvalidateFramebuffer(target, count, attachments) ((void)0)
 #endif

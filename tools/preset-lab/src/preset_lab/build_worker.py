@@ -35,20 +35,32 @@ def _replace(root: Path, relative: str, old: str, new: str, count: int = 1) -> N
 def _instrument(root: Path) -> None:
     library = root / "src/libprojectM"
     shutil.copyfile(NATIVE / "analysis_hooks.hpp", library / "analysis_hooks.hpp")
-    paths = ["TimeKeeper.cpp", "TimeKeeper.hpp", "ProjectM.cpp", "Renderer/MilkdropNoise.cpp",
+    # Historical snapshots need clock/constructor hooks; current upstream exposes frame time.
+    native_frame_time = "SetFrameTime(" in (library / "ProjectM.hpp").read_text()
+    paths = ["TimeKeeper.cpp", "TimeKeeper.hpp", "Renderer/MilkdropNoise.cpp",
              "Renderer/TextureManager.cpp", "Renderer/TransitionShaderManager.cpp",
              "MilkdropPreset/PresetState.cpp", "MilkdropPreset/MilkdropShader.cpp"]
+    if not native_frame_time:
+        paths.append("ProjectM.cpp")
     for name in paths:
         file = library / name
         relative = os.path.relpath(library / "analysis_hooks.hpp", file.parent)
         file.write_text(f'#include "{relative}"\n' + file.read_text())
-    _replace(library, "TimeKeeper.cpp",
-             "auto currentTime = std::chrono::high_resolution_clock::now();\n\n    double currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();",
-             "double currentFrameTime = lab::clock_seconds;")
+    # The constructor updates timers before a host can call SetFrameTime. Freeze
+    # its initial clock too, while preserving the explicit public-time branch.
+    if native_frame_time:
+        _replace(library, "TimeKeeper.cpp",
+                 "auto currentTime = std::chrono::high_resolution_clock::now();\n"
+                 "        currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();",
+                 "currentFrameTime = lab::clock_seconds;")
+    else:
+        _replace(library, "TimeKeeper.cpp",
+                 "auto currentTime = std::chrono::high_resolution_clock::now();\n\n    double currentFrameTime = std::chrono::duration<double>(currentTime - m_startTime).count();",
+                 "double currentFrameTime = lab::clock_seconds;")
+        _replace(library, "ProjectM.cpp", "srand(time(nullptr));",
+                 "srand(lab::Seed(1));\n    lab::ResetShaderRandom();")
     _replace(library, "TimeKeeper.hpp", "m_randomGenerator{m_randomDevice()}",
              "m_randomGenerator{lab::Seed(11)}")
-    _replace(library, "ProjectM.cpp", "srand(time(nullptr));",
-             "srand(lab::Seed(1));\n    lab::ResetShaderRandom();")
     _replace(library, "MilkdropPreset/MilkdropShader.cpp",
              "static auto floatRand = []() { return static_cast<float>(rand() % 7381) / 7380.0f; };",
              "static auto floatRand = []() { return static_cast<float>(lab::ShaderRandom() % 7381) / 7380.0f; };")

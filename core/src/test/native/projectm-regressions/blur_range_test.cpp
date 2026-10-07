@@ -6,6 +6,7 @@
 #include <MilkdropPreset/MilkdropPreset.hpp>
 #include <MilkdropPreset/MilkdropShader.hpp>
 #include <Renderer/TextureManager.hpp>
+#include <Renderer/ShaderCache.hpp>
 #include "gl_context.hpp"
 
 #include <array>
@@ -127,8 +128,10 @@ static void RenderControls(const std::filesystem::path& assets)
     using namespace libprojectM::MilkdropPreset;
     using namespace libprojectM::Renderer;
     GLContext gl;
+    ShaderCache shaders;
     TextureManager textures({(assets / "textures").string()});
     RenderContext render;
+    render.shaderCache = &shaders;
     render.textureManager = &textures;
     render.viewportSizeX = 128;
     render.viewportSizeY = 96;

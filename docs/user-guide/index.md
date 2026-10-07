@@ -1,8 +1,8 @@
 # ProjectM TV user guide
 
-ProjectM TV visualizes music another app plays on Android TV. It uses **ProjectM TV Engine**, our extensively modified fork of projectM based on upstream version 4.1.7, with 9,606 MilkDrop presets. Start music in your player, open ProjectM TV and control it with your TV remote.
+ProjectM TV visualizes music another app plays on Android TV. It uses **ProjectM TV Engine**, our extensively modified fork of projectM based on unreleased projectM 4.2 master, pinned to commit `6f6480746`, with 9,606 MilkDrop presets. Start music in your player, open ProjectM TV and control it with your TV remote.
 
-The engine combines expanded preset compatibility with authored-scale feedback and native-resolution geometry and output, up to 4K. It is designed to preserve the authored look as resolution increases, with [known visual and device limits](troubleshooting.md#native-trails-look-soft-or-different). The settings panel shows **ProjectM TV Engine** and labels the upstream version separately as **Based on projectM 4.1.7**.
+The engine combines expanded preset compatibility with authored-scale feedback and native-resolution geometry and output, up to 4K. It is designed to preserve the authored look as resolution increases, with [known visual and device limits](troubleshooting.md#native-trails-look-soft-or-different). The settings panel shows **ProjectM TV Engine** and labels the upstream version separately as **Based on unreleased projectM 4.2 master**, with pinned commit `6f6480746`. This development snapshot is not an upstream 4.2 release.
 
 ![ProjectM TV showing a preset and the playing track](images/launch.jpg)
 

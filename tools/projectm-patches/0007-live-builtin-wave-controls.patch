@@ -1,0 +1,104 @@
+ProjectM TV: consume evaluated built-in waveform controls
+
+Read per-frame mode/dots/thickness/additive flags without overwriting defaults.
+Recreate waveform math on mode changes; reuse one evaluated geometry stream for
+authored/native targets. Preserve truncation and signed remainder over the 16
+projectM modes; unrepresentable/nonfinite modes draw nothing.
+
+Compatibility reference: MilkDrop3 code/vis_milk2/milkdropfs.cpp, evaluated
+var_pf_wave_mode (2769), additive (2717), thick/dots (3259/3275/3282).
+Independent local repair; no MilkDrop3 implementation copied.
+---
+diff --git a/src/libprojectM/MilkdropPreset/Waveform.cpp b/src/libprojectM/MilkdropPreset/Waveform.cpp
+index 6c9363dd7815191c54ccd2c48101a03d21fc424f..68b5fc27dce0b7e492de60e4ae25d60e731cc434 100644
+--- a/src/libprojectM/MilkdropPreset/Waveform.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
+@@ -13,6 +13,7 @@
+ 
+ #include <algorithm>
+ #include <cmath>
++#include <limits>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -57,7 +58,7 @@ void Waveform::DrawQuadLines(const Waves& waves, const PerFrameContext& presetPe
+     }
+ 
+     glEnable(GL_BLEND);
+-    if (m_presetState.additiveWaves)
++    if ((*presetPerFrameContext.wave_additive != 0))
+     {
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+     }
+@@ -69,7 +70,7 @@ void Waveform::DrawQuadLines(const Waves& waves, const PerFrameContext& presetPe
+     auto& lines = m_presetState.lineRenderer;
+     lines.Upload(m_lineBatch);
+     lines.Begin(PresetState::orthogonalProjectionFlipped, m_presetState.renderContext);
+-    const auto style = LineStyleFor(LineKind::MainWave, m_presetState.waveThick, lineScale,
++    const auto style = LineStyleFor(LineKind::MainWave, (*presetPerFrameContext.wave_thick != 0), lineScale,
+                                      m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
+     for (const auto& strip : strips)
+     {
+@@ -82,10 +83,19 @@ void Waveform::DrawQuadLines(const Waves& waves, const PerFrameContext& presetPe
+ 
+ void Waveform::Draw(const PerFrameContext& presetPerFrameContext, GeometryTargets* targets)
+ {
+-    m_mode = static_cast<WaveformMode>(m_presetState.waveMode % static_cast<int>(WaveformMode::Count));
+-
+-    if (!m_waveformMath)
++    // MilkDrop truncates the evaluated mode then uses signed integer remainder.
++    // Reject undefined float-to-int inputs rather than converting them or retaining
++    // the previous frame's geometry. Count includes projectM's extended modes.
++    const auto modeValue = std::trunc(*presetPerFrameContext.wave_mode);
++    if (!std::isfinite(modeValue) || modeValue < std::numeric_limits<int>::min() ||
++        modeValue > std::numeric_limits<int>::max())
++    {
++        return;
++    }
++    const auto mode = static_cast<WaveformMode>(static_cast<int>(modeValue) % static_cast<int>(WaveformMode::Count));
++    if (!m_waveformMath || mode != m_mode)
+     {
++        m_mode = mode;
+         m_waveformMath = Waveforms::Factory::Create(m_mode);
+         if (!m_waveformMath)
+         {
+@@ -106,7 +116,7 @@ void Waveform::DrawPrepared(Waves waves,const PerFrameContext& presetPerFrameCon
+ {
+     const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
+                                       m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
+-    if (lineScale > 0.0f && !m_presetState.waveDots && m_presetState.lineRenderer.Usable())
++    if (lineScale > 0.0f && !(*presetPerFrameContext.wave_usedots != 0) && m_presetState.lineRenderer.Usable())
+     {
+         DrawQuadLines(waves, presetPerFrameContext, lineScale);
+         return;
+@@ -120,13 +130,13 @@ void Waveform::DrawPrepared(Waves waves,const PerFrameContext& presetPerFrameCon
+     auto shader = m_presetState.untexturedShader.lock();
+     shader->Bind();
+     shader->SetUniformMat4x4("vertex_transformation", PresetState::orthogonalProjectionFlipped);
+-    const bool scaledDots = lineScale > 0.0f && m_presetState.waveDots;
++    const bool scaledDots = lineScale > 0.0f && (*presetPerFrameContext.wave_usedots != 0);
+     const auto dot = DotStyleFor(LineKind::MainWave, true, lineScale);
+     shader->SetUniformFloat("vertex_point_size", scaledDots ? dot.size : 1.0f);
+     const ScopedProgramPointSize programPointSize(scaledDots);
+ 
+     // Additive wave drawing (vice overwrite)
+-    if (m_presetState.additiveWaves)
++    if ((*presetPerFrameContext.wave_additive != 0))
+     {
+         Renderer::BlendMode::Set(true, Renderer::BlendMode::Function::SourceAlpha, Renderer::BlendMode::Function::One);
+     }
+@@ -149,12 +159,12 @@ void Waveform::DrawPrepared(Waves waves,const PerFrameContext& presetPerFrameCon
+         glVertexAttrib4f(1, color.r, color.g, color.b, scaledDots ? color.a * dot.alphaScale : color.a);
+ 
+         // Always draw "thick" dots.
+-        const auto iterations = scaledDots ? 1 : (m_presetState.waveThick || m_presetState.waveDots ? 4 : 1);
++        const auto iterations = scaledDots ? 1 : ((*presetPerFrameContext.wave_thick != 0) || (*presetPerFrameContext.wave_usedots != 0) ? 4 : 1);
+ 
+         const auto incrementX = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeX);
+         const auto incrementY = 2.0f / static_cast<float>(m_presetState.renderContext.viewportSizeY);
+ 
+-        m_waveMesh.SetRenderPrimitiveType(m_presetState.waveDots
++        m_waveMesh.SetRenderPrimitiveType((*presetPerFrameContext.wave_usedots != 0)
+                                               ? Renderer::Mesh::PrimitiveType::Points
+                                           : m_waveformMath->IsLoop()
+                                               ? Renderer::Mesh::PrimitiveType::LineLoop

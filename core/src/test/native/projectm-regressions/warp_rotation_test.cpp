@@ -2,10 +2,13 @@
 // Sending an unreduced large angle to GPU trig, swapping sine/cosine, or uploading
 // the per-frame angle instead of the final per-pixel angle must fail these controls.
 #include "gl_context.hpp"
+#include <MilkdropPreset/PerFrameContext.hpp>
+#include <MilkdropPreset/MilkdropShader.hpp>
 #include <MilkdropPreset/PerPixelMesh.hpp>
 #include <MilkdropPreset/PerPixelContext.hpp>
 #include <MilkdropPreset/PresetFileParser.hpp>
 #include <Renderer/TextureManager.hpp>
+#include <Renderer/ShaderCache.hpp>
 #include <array>
 #include <cmath>
 #include <iostream>
@@ -34,13 +37,15 @@ static Pixels Read()
 
 struct Control
 {
+    ShaderCache cache;
     PresetState state;
     PerFrameContext frame{state.globalMemory, &state.globalRegisters};
     PerPixelContext pixel{state.globalMemory, &state.globalRegisters};
     PerPixelMesh mesh;
-    std::shared_ptr<Texture> input = std::make_shared<Texture>("rotation-input", Width, Height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
-    std::shared_ptr<Texture> output = std::make_shared<Texture>("rotation-output", Width, Height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
+    std::shared_ptr<Texture> input = std::make_shared<Texture>("rotation-input", GL_TEXTURE_2D, Width, Height, 1, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
+    std::shared_ptr<Texture> output = std::make_shared<Texture>("rotation-output", GL_TEXTURE_2D, Width, Height, 1, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
     GLuint framebuffer{};
+    bool preparedReplay{};
 
     Control(TextureManager& textures, bool custom, bool perPixel)
     {
@@ -51,6 +56,7 @@ struct Control
         Check(parser.Read(source), "rotation fixture parse failed");
         state.Initialize(parser);
         state.renderContext.textureManager = &textures;
+        state.renderContext.shaderCache = &cache;
         state.renderContext.viewportSizeX = Width;
         state.renderContext.viewportSizeY = Height;
         state.renderContext.perPixelMeshX = 8;
@@ -103,7 +109,12 @@ struct Control
         *frame.q_vars[0] = rotation;
         pixel.LoadStateReadOnlyVariables(state, frame);
         pixel.LoadPerFrameQVariables(state, frame);
-        mesh.Draw(state, frame, pixel);
+        if (preparedReplay)
+        {
+            mesh.Prepare(state, frame, pixel);
+            mesh.DrawAgain(state, frame);
+        }
+        else mesh.Draw(state, frame, pixel);
         const double retained = perPixel ? *pixel.rot : *frame.rot;
         const double authored = rotation + (varying ? 3.0 : 0.0);
         Check(std::isnan(authored) ? std::isnan(retained) :
@@ -162,9 +173,10 @@ static void VaryingCoordinates(const Pixels& pixels, double rotation)
     }
 }
 
-static void Feedback(TextureManager& textures, bool perPixel)
+static void Feedback(TextureManager& textures, bool perPixel, bool preparedReplay)
 {
     Control large(textures, false, perPixel), reduced(textures, false, perPixel);
+    large.preparedReplay = reduced.preparedReplay = preparedReplay;
     // Frozen float32 angle reference: atan2(sin(10000000),cos(10000000)).
     constexpr double Small = 2.707543636322021484375;
     for (int frame = 0; frame < 4; ++frame)
@@ -199,10 +211,12 @@ int main()
         GLContext gl;
         TextureManager textures(std::vector<std::string>{});
         std::cout << glGetString(GL_RENDERER) << '\n';
+        for (bool preparedReplay : {false, true})
         for (bool custom : {false, true})
             for (bool perPixel : {false, true})
             {
                 Control control(textures, custom, perPixel);
+                control.preparedReplay = preparedReplay;
                 for (double rotation : {0.0, -0.0, 0.31, -0.31, 3.141592653589793, -6.283185307179586,
                                         10000000.0, -10000000.0, 10000000.6, -10000000.6,
                                         1e20, -1e20, double(std::numeric_limits<float>::max())})
@@ -221,9 +235,10 @@ int main()
                     for (double rotation : {0.31, 10000000.6, -10000000.6})
                         VaryingCoordinates(control.Draw(rotation, true, true), rotation);
                 }
-                std::cout << (custom ? "custom" : "legacy") << (perPixel ? " per-pixel" : " per-frame") << " UV controls pass\n";
+                std::cout << (preparedReplay ? "prepared replay " : "direct ") << (custom ? "custom" : "legacy") << (perPixel ? " per-pixel" : " per-frame") << " UV controls pass\n";
             }
-        for (bool perPixel : {false, true}) Feedback(textures, perPixel);
+        for (bool preparedReplay : {false, true})
+            for (bool perPixel : {false, true}) Feedback(textures, perPixel, preparedReplay);
         std::cout << "multi-frame feedback controls pass\n";
         return 0;
     }

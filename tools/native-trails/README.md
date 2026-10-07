@@ -13,11 +13,21 @@ submodules, supply `local.properties` and use the repository's JDK/SDK/NDK versi
 Run the scripts from the repository root.
 
 ```sh
-python -m unittest discover -s tools/native-trails -v
+python -m pytest tools/native-trails tools/core-corpus -q
 python tools/native-trails/build_validation.py --commit BASELINE_SHA --policy native --role baseline-native --work build/native-trails/workers
 python tools/native-trails/build_validation.py --commit CANDIDATE_SHA --policy native --role candidate-native --work build/native-trails/workers
 python tools/native-trails/run_validation.py run --device OWNED_EMULATOR --workers build/native-trails/workers --presets tools/native-trails/presets.txt --work build/native-trails/focused
 ```
+
+For an upstream rebase comparison, use `--role rebase-baseline` and
+`--role rebase-candidate` in a new work directory. Their worker packages are
+`nl.neerdael.projectmtv.corpusrebasebaseline` and
+`nl.neerdael.projectmtv.corpusrebasecandidate`; the existing corpus packages remain
+separate. The builder records the private Gradle package allowlist transformation
+and the resulting package in its identity. Historical role/package assignments
+and frozen runner protocol contracts are unchanged. A migration with a different
+patch series needs a separately recorded bounded comparison protocol; the old
+runner's prefix/+1-patch provenance gate cannot validate that migration.
 
 The builder defaults to `--abi arm64-v8a`. For a TV running 32-bit Android (check
 `adb -s DEVICE shell getprop ro.product.cpu.abilist`), build both comparison roles
@@ -25,11 +35,21 @@ with `--abi armeabi-v7a`. The selected ABI is recorded in the build identity;
 the production APK/core continue to include both supported ABIs.
 
 The builders refuse existing role directories. Each build exports a committed
-revision, composes the existing Preset Lab deterministic engine instrumentation
-with the actual core, and records transformations and compiled AAR/APK identities.
+revision and resolves that revision's engine and evaluator gitlinks into private
+checkouts, even when the live submodules are at another revision. It composes
+Preset Lab deterministic engine instrumentation with the actual core, then records
+the exact pins, ordered patch hashes, transformations and compiled AAR/APK identities.
 Private line-reference controls let authored, old Native and new Native share a
 frozen harness. Production settings go through the additive public JNI API.
 Instrumented AARs are test artifacts, not byte-identical release binaries.
+
+The current engine is based on unreleased projectM 4.2 master, pinned to
+`6f6480746`. Its private constructor clock starts at zero before preset loading;
+its public `projectm_set_frame_time` API receives the logical clock before both
+normal and framebuffer render calls. Historical 4.1.7 snapshots retain their
+private clock hook and their own source/patch identities. Clock instrumentation
+changes create a new instrumentation identity; rebuild workers into a new work
+directory rather than reusing an earlier frozen protocol.
 
 The runner freezes PCM, clock (`frame/30`), seed, source, artifact, driver and
 preset identities. It refuses changed inputs, uses an exclusive lock, restores

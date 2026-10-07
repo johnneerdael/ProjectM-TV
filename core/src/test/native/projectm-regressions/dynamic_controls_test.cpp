@@ -8,7 +8,7 @@
 #include <MilkdropPreset/Waveform.hpp>
 #include <Renderer/Texture.hpp>
 #include <Renderer/TextureManager.hpp>
-#include <dlfcn.h>
+#include <Renderer/ShaderCache.hpp>
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -43,13 +43,14 @@ struct Draw {
     std::vector<unsigned char> geometry;
     GLint program{};
 };
+static ShaderCache* shaderCache{};
+static PFNGLDRAWARRAYSPROC realDrawArrays{};
+static PFNGLDRAWELEMENTSPROC realDrawElements{};
+static PFNGLDRAWARRAYSINSTANCEDPROC realDrawArraysInstanced{};
 static bool observe = false;
 static std::vector<Draw> draws;
-extern "C" void glDrawArrays(GLenum mode, GLint first, GLsizei count)
+static void ObserveDraw(GLenum mode, GLsizei count)
 {
-    using Function = void (*)(GLenum, GLint, GLsizei);
-    static auto real = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "glDrawArrays"));
-    if (!real) std::abort();
     if (observe)
     {
         Draw draw{mode, count, 0, 0};
@@ -58,13 +59,19 @@ extern "C" void glDrawArrays(GLenum mode, GLint first, GLsizei count)
         glGetIntegerv(GL_BLEND_DST_RGB, &draw.destination);
         draws.push_back(draw);
     }
-    real(mode, first, count);
 }
-extern "C" void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instances)
+static void ObserveDrawArrays(GLenum mode, GLint first, GLsizei count)
 {
-    using Function = void (*)(GLenum, GLint, GLsizei, GLsizei);
-    static auto real = reinterpret_cast<Function>(dlsym(RTLD_NEXT, "glDrawArraysInstanced"));
-    if (!real) std::abort();
+    ObserveDraw(mode, count);
+    realDrawArrays(mode, first, count);
+}
+static void ObserveDrawElements(GLenum mode, GLsizei count, GLenum type, const void* indices)
+{
+    ObserveDraw(mode, count);
+    realDrawElements(mode, count, type, indices);
+}
+static void ObserveDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instances)
+{
     if (observe)
     {
         Draw draw{mode, count, 0, 0}; draw.instances = instances;
@@ -82,14 +89,34 @@ extern "C" void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, G
         glBindBuffer(GL_ARRAY_BUFFER, previous);
         draws.push_back(std::move(draw));
     }
-    real(mode, first, count, instances);
+    realDrawArraysInstanced(mode, first, count, instances);
 }
+// Observe both upstream Mesh indexed draws and retained TV instanced lines.
+class DrawHooks
+{
+public:
+    DrawHooks()
+    {
+        realDrawArrays = glad_glDrawArrays;
+        realDrawElements = glad_glDrawElements;
+        realDrawArraysInstanced = glad_glDrawArraysInstanced;
+        glad_glDrawArrays = ObserveDrawArrays;
+        glad_glDrawElements = ObserveDrawElements;
+        glad_glDrawArraysInstanced = ObserveDrawArraysInstanced;
+    }
+    ~DrawHooks()
+    {
+        glad_glDrawArrays = realDrawArrays;
+        glad_glDrawElements = realDrawElements;
+        glad_glDrawArraysInstanced = realDrawArraysInstanced;
+    }
+};
 struct Surface
 {
     int width, height;
     std::shared_ptr<Texture> texture;
     GLuint framebuffer{};
-    Surface(int w, int h) : width(w), height(h), texture(std::make_shared<Texture>("control", w, h, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false))
+    Surface(int w, int h) : width(w), height(h), texture(std::make_shared<Texture>("control", GL_TEXTURE_2D, w, h, 1, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false))
     {
         glGenFramebuffers(1, &framebuffer);
         Bind();
@@ -110,6 +137,8 @@ struct Surface
 static void Configure(PresetState& state, int size, bool quad)
 {
     auto& context = state.renderContext;
+    context.shaderCache = shaderCache;
+    state.LoadShaders();
     context.viewportSizeX = context.viewportSizeY = size;
     context.aspectX = context.aspectY = context.invAspectX = context.invAspectY = 1;
     context.time = .5f;
@@ -186,6 +215,7 @@ static void WaveControls()
                 draws.clear(); observe = true; staticWave.Draw(staticFrame); observe = false;
                 const auto label = "mode=" + std::to_string(mode) + " flags=" + std::to_string(flags) + " quad=" + std::to_string(quad);
                 const auto expected = surface.Pixels();
+                Check(!actualDraws.empty(), label + ": missing waveform draw observation");
                 Check(actualDraws.size() == draws.size(), label + ": wrong offset/draw count");
                 for (size_t i = 0; i < draws.size(); ++i)
                 {
@@ -377,6 +407,7 @@ static void GammaBoundsControls()
             (constant ? "gamma=1e100;echo_zoom=1e100;\n" : "gamma=bass;echo_zoom=bass;\n"));
         MilkdropPreset preset(text);
         RenderContext render;
+        render.shaderCache = shaderCache;
         render.textureManager = &manager;
         render.viewportSizeX = render.viewportSizeY = 128;
         render.aspectX = render.aspectY = render.invAspectX = render.invAspectY = 1;
@@ -392,7 +423,7 @@ static void GammaBoundsControls()
         Check(preset.SetOutputTarget(true, output.framebuffer), "gamma bounds output rejected");
         auto& state = libprojectM::FeedbackDetailTestAccess::State(preset);
         auto& frame = libprojectM::FeedbackDetailTestAccess::Frame(preset);
-        state.texturedShader.Bind();
+        state.texturedShader.lock()->Bind();
         GLint echoProgram{}; glGetIntegerv(GL_CURRENT_PROGRAM, &echoProgram);
         Shader::Unbind();
         for (const float input : {1e30f, std::numeric_limits<float>::infinity(),
@@ -463,6 +494,7 @@ static void PresetControls(const std::filesystem::path& assets, const std::files
         initial.Bind(); glClearColor(.2f, .35f, .5f, 1); glClear(GL_COLOR_BUFFER_BIT);
         MilkdropPreset preset((assets / "presets" / names[witness]).string());
         RenderContext render;
+        render.shaderCache = shaderCache;
         render.textureManager = &manager;
         render.viewportSizeX = render.viewportSizeY = 256;
         render.aspectX = render.aspectY = render.invAspectX = render.invAspectY = 1;
@@ -506,6 +538,8 @@ int main(int argc, char** argv)
     {
         Check(argc >= 2, "pass wave, display, capture or presets");
         GLContext context; Shader::InvalidateBoundProgram();
+        ShaderCache shaders; shaderCache = &shaders;
+        DrawHooks drawHooks;
         std::cout << "renderer=" << glGetString(GL_RENDERER) << " version=" << glGetString(GL_VERSION) << '\n';
         Check(glGetError() == GL_NO_ERROR, "context GL error");
         if (std::string(argv[1]) == "wave") { WaveControls(); DualWaveControls(); }

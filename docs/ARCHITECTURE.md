@@ -2,7 +2,7 @@
 
 This document retains the historical v1.8/v1.9 analysis and verification below. Section 5 includes current rendering and integration guidance; older measurements are identified as historical and do not establish the current Auto policy or device limits. Current settings and validation are documented in the [user guide](user-guide/settings.md) and [Native trails design](superpowers/specs/2026-10-05-native-trails.md).
 
-The maintained engine is named **ProjectM TV Engine**: an extensively modified projectM fork based on upstream 4.1.7, built from the pinned submodule plus `tools/projectm-patches/`. The app and Milkbeat's core AAR share this engine. The settings panel names the fork and shows the upstream base separately. Public Java/JNI names and artifact filenames are retained; `ProjectMJNI.getVersion()` still returns the upstream version. Identify a patched build by its release version, source revision and artifact checksum. [Third-party attribution](THIRD_PARTY.md) records upstream backports and local changes.
+The maintained engine is named **ProjectM TV Engine**: an extensively modified projectM fork based on unreleased projectM 4.2 master (commit `6f6480746`), built from the pinned submodule plus `tools/projectm-patches/`. The app and Milkbeat's core AAR share this engine. The settings panel names the fork and shows the upstream base separately. Public Java/JNI names and artifact filenames are retained; `ProjectMJNI.getVersion()` still returns the upstream numeric version (`4.2.0`); this development snapshot is not an upstream 4.2 release. Identify a patched build by its release version, source revision and artifact checksum. [Third-party attribution](THIRD_PARTY.md) records upstream backports and local changes.
 
 ## 1. Summary
 
@@ -114,7 +114,9 @@ projectM's soft cut renders the outgoing and incoming preset for the whole trans
 
 Remote-control switches and forced hard cuts are never faded. Beat-triggered hard cuts are off unless *Cut on loud beats* is on (since 1.9.12). If the capture or the overlay shader fails, the switch uses classic. Every load is logged (`LOAD preset=… ms=… programs_cached= programs_compiled=`), and every transition too (`TRANSITION … mode= scale= fps= blend_fps= before_fps= cpu= outgoing_rate= slow_frames=`).
 
-**Memory traffic per frame (patches 0009–0016).** On an Ugoos AM6 (Amlogic S922X, Mali-G52 MP6, Android 9) the frame rate fell with the pixel count at a GPU load of 98–99%: projectM 4.1.7 never discards a render target's old contents, so a tile-based GPU (Mali, Adreno, PowerVR) loads every target from memory before each pass, even passes that overwrite it completely, and a frame made up to four full-screen copies to y-flip images. The patches keep the output the same and remove that traffic: `glInvalidateFramebuffer` before every full overwrite (warp, composite, blur, video echo, and the flip copies while blending is off; not for warp or composite shaders that use `clip()`, whose discarded pixels keep the old contents), no first flip when the flip texture already holds the flipped previous frame, the warp and the shapes and waves on top of it in one render pass (the blur, made from the previous frame, moves before the warp; not for presets whose warp shader reads the blur textures, about a quarter, which would then see this frame's blur instead of last frame's), blur passes drawn straight into their textures instead of copied, the motion-vector u/v map written only while the preset shows motion vectors, video echo drawn upside down so the third flip goes away, and the warp mesh as one indexed draw with an orphaned buffer (no GPU stall, about 1 MB less copied per frame on the CPU). Since 0016 the active preset also draws its final image straight into the target framebuffer (the window, or the off-screen target during scaled blends) instead of into its own texture that projectM then copies: `projectm_opengl_set_direct_output`. The texture is still needed in two cases: transitions blend both presets' textures, and a new preset starts from the outgoing preset's last image (`DrawInitialImage`). So projectM stores the frame during transitions and in a frame in which it requests a switch, and the engine stores it while a remote-control command or a black-preset skip is pending: such a switch waits one frame (16–33 ms) after a direct frame. `SwitchPreset` logs a warning if a switch ever follows a direct frame; none in a test with ten instant cuts and remote presses.
+**Historical 4.1.7 memory-traffic measurements (patches 0009–0016).** The timings and upload descriptions in this paragraph/table describe the pre-rebase implementation. The 4.2 port uses upstream Mesh/VertexArray and instance ShaderCache APIs. Upstream Mesh supplies indexed warp drawing but uses glBufferSubData for unchanged buffer sizes, so the old unconditional warp-buffer orphan policy is not retained. These figures do not establish performance gains for 4.2; see [the current patch/value assessment](UPSTREAM_PATCH_VALUE.md).
+
+**Pre-rebase implementation.** On an Ugoos AM6 (Amlogic S922X, Mali-G52 MP6, Android 9) the frame rate fell with the pixel count at a GPU load of 98–99%: the pre-rebase projectM 4.1.7 base never discarded a render target's old contents, so a tile-based GPU (Mali, Adreno, PowerVR) loads every target from memory before each pass, even passes that overwrite it completely, and a frame made up to four full-screen copies to y-flip images. The patches keep the output the same and remove that traffic: `glInvalidateFramebuffer` before every full overwrite (warp, composite, blur, video echo, and the flip copies while blending is off; not for warp or composite shaders that use `clip()`, whose discarded pixels keep the old contents), no first flip when the flip texture already holds the flipped previous frame, the warp and the shapes and waves on top of it in one render pass (the blur, made from the previous frame, moves before the warp; not for presets whose warp shader reads the blur textures, about a quarter, which would then see this frame's blur instead of last frame's), blur passes drawn straight into their textures instead of copied, the motion-vector u/v map written only while the preset shows motion vectors, video echo drawn upside down so the third flip goes away, and the warp mesh as one indexed draw with an orphaned buffer (no GPU stall, about 1 MB less copied per frame on the CPU). Since 0016 the active preset also draws its final image straight into the target framebuffer (the window, or the off-screen target during scaled blends) instead of into its own texture that projectM then copies: `projectm_opengl_set_direct_output`. The texture is still needed in two cases: transitions blend both presets' textures, and a new preset starts from the outgoing preset's last image (`DrawInitialImage`). So projectM stores the frame during transitions and in a frame in which it requests a switch, and the engine stores it while a remote-control command or a black-preset skip is pending: such a switch waits one frame (16–33 ms) after a direct frame. `SwitchPreset` logs a warning if a switch ever follows a direct frame; none in a test with ten instant cuts and remote presses.
 
 **Blur framebuffer ownership (patch 0041).** `BlurTexture::Update` saves both caller framebuffer bindings before allocating its textures. Allocation calls `Framebuffer::SetSize`, which unbinds the read and draw targets. Saving them afterwards restored framebuffer zero on first use or resize. When the warp shader samples blur, the update runs after warping, so subsequent waveform and border draws lost their target. The unchanged `midgitstraights of majillaen - featy sweet.milk` reproduced error 1286 on host OpenGL; preserving the bindings removes that error. This does not establish cross-GPU appearance or a frame-rate improvement.
 
@@ -323,22 +325,25 @@ all TV GPUs.
 
 ## Large warp rotation
 
-Patch0051 computes rotation sine/cosine on the CPU after converting the final
+Current patch0011 (historical0051 from PR #51) computes rotation sine/cosine on the CPU after converting the final
 per-frame or per-pixel equation result to float, as MilkDrop 2 does. Large-angle
 GPU trig can return zero for both outputs on the observed GLES/Metal driver,
 collapsing feedback UVs to the rotation centre. CPU libm handles the finite float
 range, including angles for which a double remainder with a rounded `2*pi`
 constant is inaccurate. Equations and their original rotation state are unchanged.
 
-The internal mesh reuses `transforms.z` for sine and adds cosine at attribute6:
-60 bytes and seven attributes, versus56 bytes and six. With no per-pixel code the
+The 4.2 mesh reuses `transforms.z` for sine and adds an instance-owned four-byte
+cosine VertexBuffer at attribute8. The warp shader consumes seven attributes.
+Resize/upload cosine with the existing buffers; the 4.1.7 interleaved 56→60-byte
+layout remains historical evidence. With no per-pixel code the
 pair is cached once per frame; otherwise it uses each vertex's final evaluated
 rotation. Legacy/custom warp programs share this vertex interface, and prepared
 meshes reuse the pair for authored/native draws without reevaluating equations.
 There is no public C/Java/JNI API change. Other shader trig remains unchanged;
 nonfinite rotation is still unsupported, with no finite identity substitution.
-See [rotation regression evidence](superpowers/evidence/large-rotation-trig/README.md)
-for observed scope and remaining validation.
+See [4.2 rotation synchronization](superpowers/evidence/upstream-master-4-2/rotation51-synchronization/README.md)
+and the [original repair evidence](superpowers/evidence/large-rotation-trig/README.md)
+for their separate observed scopes and remaining validation.
 
 ## Evaluated waveform and legacy display controls
 

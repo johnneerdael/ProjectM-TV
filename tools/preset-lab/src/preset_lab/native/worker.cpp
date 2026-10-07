@@ -50,7 +50,12 @@ int main(int argc, char** argv) {
         // so the worker renders dots like the TVs.
         glEnable(GL_PROGRAM_POINT_SIZE);
         lab::clock_seconds = 0;
+        std::srand(lab::Seed(1));
+        lab::ResetShaderRandom();
         LabProjectM engine;
+#ifdef PRESET_LAB_HAS_FRAME_TIME
+        engine.SetFrameTime(0);
+#endif
         engine.SetTexturePaths({textures});
         engine.SetWindowSize(width, height);
         engine.SetMeshSize(48, 32);
@@ -79,6 +84,9 @@ int main(int argc, char** argv) {
             auto count = std::min<size_t>(pcm.size(), libprojectM::Audio::AudioBufferSamples);
             engine.PCM().Add(pcm.data() + pcm.size() - count, 1, count);
             lab::clock_seconds = static_cast<double>(frame + 1) / fps;
+#ifdef PRESET_LAB_HAS_FRAME_TIME
+            engine.SetFrameTime(lab::clock_seconds);
+#endif
             engine.RenderFrame(capture.framebuffer);
             auto pixels = capture.Read();
             if (glGetError() != GL_NO_ERROR) ++error_frames;

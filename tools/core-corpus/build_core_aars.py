@@ -11,6 +11,7 @@ import difflib
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -53,16 +54,27 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
     return text.replace(old, new)
 
 
-def transform_core_native(text: str) -> str:
+def set_native_frame_time(text: str, clock: str) -> str:
+    pattern = r"(?m)^([ \t]*)(projectm_opengl_render_frame(?:_fbo)?\(g_engine\.pm(?:,[^;\n]+)?\);)$"
+    text, count = re.subn(pattern, lambda match: match[1] +
+                         "projectm_set_frame_time(g_engine.pm, " + clock + ");\n" +
+                         match[1] + match[2], text)
+    if count == 0:
+        raise ValueError("No actual Core render call found for frame time")
+    return text
+
+
+def transform_core_native(text: str, native_frame_time: bool = False) -> str:
     text = replace_once(text, '#include "snapshot_fade.h"',
                         '#include "snapshot_fade.h"\n#include "lab_bridge.hpp"', "bridge include")
     text = replace_once(text, CLOCK_BODY,
                         "double NowSeconds() {\n    return lab::clock_seconds;\n}", "core clock")
-    return replace_once(text,
+    text = replace_once(text,
                         "projectm_opengl_set_line_reference_size(g_engine.pm, 1024, 768);",
                         "projectm_opengl_set_line_reference_size(g_engine.pm, "
                         "core_corpus::reference_width, core_corpus::reference_height);",
                         "line reference dimensions")
+    return set_native_frame_time(text, "lab::clock_seconds") if native_frame_time else text
 
 
 def relocate_shader_hook(text: str) -> str:
@@ -84,6 +96,39 @@ def export_commit(source: Path, commit: str, destination: Path) -> None:
             stream.extractall(destination, filter="data")
 
 
+def gitlink(repo: Path, revision: str, path: str) -> str:
+    row = run(["git", "-C", str(repo), "ls-tree", revision, "--", path]).split()
+    if len(row) != 4 or row[0:2] != ["160000", "commit"] or row[3] != path:
+        raise ValueError(f"missing pinned submodule {path} in {revision}")
+    return row[2]
+
+
+def checkout_pinned_engine(repo: Path, commit: str, destination: Path) -> tuple[Path, str, str]:
+    """Resolve requested gitlinks without changing either live submodule checkout."""
+    source = repo / "third_party/projectm"
+    engine_pin = gitlink(repo, commit, "third_party/projectm")
+    subprocess.run(["git", "clone", "--shared", "--no-checkout", str(source), str(destination)],
+                   check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    def checkout(cached: Path, private: Path, pin: str) -> None:
+        present = subprocess.run(["git", "-C", str(private), "cat-file", "-e", pin + "^{commit}"],
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if present.returncode:
+            url = run(["git", "-C", str(cached), "remote", "get-url", "origin"])
+            subprocess.run(["git", "-C", str(private), "fetch", url, pin], check=True)
+        subprocess.run(["git", "-C", str(private), "checkout", "--detach", pin],
+                       check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    checkout(source, destination, engine_pin)
+    evaluator_pin = gitlink(destination, engine_pin, "vendor/projectm-eval")
+    evaluator = destination / "vendor/projectm-eval"
+    subprocess.run(["git", "clone", "--shared", "--no-checkout",
+                    str(source / "vendor/projectm-eval"), str(evaluator)],
+                   check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    checkout(source / "vendor/projectm-eval", evaluator, evaluator_pin)
+    return destination, engine_pin, evaluator_pin
+
+
 def hashes(root: Path, paths: list[str]) -> dict[str, str]:
     return {name: file_digest(root / name) for name in paths}
 
@@ -94,11 +139,11 @@ def diff_text(before: str, after: str, name: str) -> str:
                                       fromfile="original/" + name, tofile="instrumented/" + name))
 
 
-def patch_manifest(root: Path, expected_count: int) -> list[dict]:
+def patch_manifest(root: Path, expected_count: int | None) -> list[dict]:
     patches = sorted((root / "tools/projectm-patches").glob("*.patch"))
-    if len(patches) != expected_count:
+    if expected_count is not None and len(patches) != expected_count:
         raise ValueError(f"expected {expected_count} patches, got {len(patches)}")
-    if [int(p.name[:4]) for p in patches] != list(range(1, expected_count + 1)):
+    if not patches or [int(p.name[:4]) for p in patches] != list(range(1, len(patches) + 1)):
         raise ValueError("patch series is not consecutive and ordered")
     return [{"name": p.name, "sha256": file_digest(p)} for p in patches]
 
@@ -110,13 +155,11 @@ def build_variant(source_repo: Path, work: Path, variant: str, commit: str,
         raise ValueError(f"scratch repository already exists: {destination}")
     export_commit(source_repo, commit, destination)
     original_inputs = hashes(destination, CORE_INPUTS)
-    patch_count = 24 if variant == "baseline" else 25
-    patches = patch_manifest(destination, patch_count)
-    source_engine = source_repo / "third_party/projectm"
-    if run(["git", "-C", str(source_engine), "rev-parse", "HEAD"]) != ENGINE:
-        raise ValueError("engine source does not match pinned commit")
-    if run(["git", "-C", str(source_engine / "vendor/projectm-eval"), "rev-parse", "HEAD"]) != EVALUATOR:
-        raise ValueError("evaluator source does not match pinned commit")
+    patches = patch_manifest(destination, 24 if variant == "baseline" else None)
+    source_engine, engine_pin, evaluator_pin = checkout_pinned_engine(
+        source_repo, commit, work / ("engine-checkout-" + variant))
+    if variant == "baseline" and (engine_pin != ENGINE or evaluator_pin != EVALUATOR):
+        raise ValueError("historical corpus baseline pins changed")
     exported_engine = destination / "third_party/projectm"
     # prepare_engine reads commit archives rather than the live patched tree.
     shutil.rmtree(exported_engine)
@@ -124,20 +167,22 @@ def build_variant(source_repo: Path, work: Path, variant: str, commit: str,
     snapshot, engine_identity = prepare_engine(destination, work / "engine-snapshots")
     exported_engine.unlink()
     shutil.copytree(snapshot, exported_engine)
-    shader = exported_engine / "src/libprojectM/MilkdropPreset/MilkdropShader.cpp"
-    shader.write_text(relocate_shader_hook(shader.read_text()))
-    # CMake's unchanged production patch detection must accept the complete series.
-    # Prevent enclosing worktree attributes/index from affecting isolated copies.
+    native_frame_time = "projectm_set_frame_time(" in (
+        exported_engine / "src/api/include/projectM-4/parameters.h").read_text()
     apply_env = dict(os.environ, GIT_CEILING_DIRECTORIES=str(destination.parent))
-    subprocess.run(["git", "apply", "--reverse", "--check",
-                    str(destination / "tools/projectm-patches" / patches[-1]["name"])],
-                   cwd=exported_engine, env=apply_env, check=True)
+    if variant == "baseline":
+        shader = exported_engine / "src/libprojectM/MilkdropPreset/MilkdropShader.cpp"
+        shader.write_text(relocate_shader_hook(shader.read_text()))
+        # Retain the frozen historical corpus source/patch acceptance control.
+        subprocess.run(["git", "apply", "--reverse", "--check",
+                        str(destination / "tools/projectm-patches" / patches[-1]["name"])],
+                       cwd=exported_engine, env=apply_env, check=True)
 
     # Independently preserve all engine clock/RNG transformation diffs and input hashes.
     engine_original = work / ("engine-original-" + variant)
-    export_commit(source_engine, ENGINE, engine_original)
+    export_commit(source_engine, engine_pin, engine_original)
     (engine_original / "vendor/projectm-eval").rmdir()
-    export_commit(source_engine / "vendor/projectm-eval", EVALUATOR,
+    export_commit(source_engine / "vendor/projectm-eval", evaluator_pin,
                   engine_original / "vendor/projectm-eval")
     for patch in patches:
         subprocess.run(["git", "apply", str(destination / "tools/projectm-patches" / patch["name"])],
@@ -161,9 +206,14 @@ def build_variant(source_repo: Path, work: Path, variant: str, commit: str,
         transformations.append(diff_text(path.read_text(), text, name))
         path.write_text(text)
     native_path = CPP + "native-lib.cpp"
-    update(native_path, transform_core_native((destination / native_path).read_text()))
+    update(native_path, transform_core_native((destination / native_path).read_text(), native_frame_time=native_frame_time))
     cmake_name = CPP + "CMakeLists.txt"
     cmake = (destination / cmake_name).read_text()
+    if variant != "baseline":
+        start = cmake.index("find_package(Git REQUIRED)")
+        end_marker = 'file(LOCK ${PROJECTM_PATCH_LOCK} RELEASE)'
+        end = cmake.index(end_marker) + len(end_marker)
+        cmake = cmake[:start] + "# Frozen engine: complete series applied by prepare_engine.\n" + cmake[end:]
     cmake = replace_once(cmake,
                          "add_library(projectmtv SHARED native-lib.cpp snapshot_fade.cpp preset_prewarm.cpp)",
                          "add_library(projectmtv SHARED native-lib.cpp snapshot_fade.cpp preset_prewarm.cpp lab_bridge.cpp)\n"
@@ -189,13 +239,15 @@ def build_variant(source_repo: Path, work: Path, variant: str, commit: str,
         "source_commit": commit, "published_baseline_source_commit": BASELINE,
         "published_baseline_aar_sha256": PUBLISHED_BASELINE_AAR_SHA256,
         "shipping_byte_identity": False, "abis": abis, "build_type": "release",
-        "engine_identity": asdict(engine_identity), "evaluator_commit": EVALUATOR,
+        "engine_identity": asdict(engine_identity), "engine_commit": engine_pin,
+        "evaluator_commit": evaluator_pin, "native_frame_time_api": native_frame_time,
         "ordered_patches": patches,
         "patch_series_sha256": digest([(p["name"], p["sha256"]) for p in patches]),
         "original_core_input_sha256": original_inputs,
         "instrumented_core_input_sha256": instrumented_inputs,
         "engine_transforms": engine_transforms,
-        "engine_hook_include_relocation": "MilkdropShader.cpp: unchanged analysis_hooks include moved before namespace to preserve patch0024 reverse-check",
+        "engine_hook_include_relocation": ("MilkdropShader.cpp: unchanged analysis_hooks include moved before namespace to preserve patch0024 reverse-check"
+                                          if variant == "baseline" else None),
         "core_transformation_sha256": file_digest(destination / "core-transformation.diff"),
         "engine_transformation_sha256": file_digest(destination / "engine-transformation.diff"),
         "builder_sha256": file_digest(Path(__file__)),

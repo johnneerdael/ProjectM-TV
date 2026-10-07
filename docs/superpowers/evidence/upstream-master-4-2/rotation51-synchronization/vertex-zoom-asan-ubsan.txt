@@ -1,0 +1,7 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/upstream-master-4-2/build/upstream-rebase/rotation51-preparation/native
+    Start 3: warp-zoom-regressions
+1/1 Test #3: warp-zoom-regressions ............   Passed    0.50 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.51 sec

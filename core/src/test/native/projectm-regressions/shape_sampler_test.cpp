@@ -5,7 +5,7 @@
 #include <MilkdropPreset/PresetState.hpp>
 #include <MilkdropPreset/MilkdropPreset.hpp>
 #include <Renderer/TextureManager.hpp>
-#include <dlfcn.h>
+#include <Renderer/ShaderCache.hpp>
 #include <array>
 #include <cmath>
 #include <cstdlib>
@@ -42,11 +42,10 @@ public:
 }
 
 // Observe the live state at the production draw, then issue that real draw once.
-extern "C" void glDrawArrays(GLenum mode, GLint first, GLsizei count)
+static PFNGLDRAWARRAYSPROC realDrawArrays{};
+
+static void ObserveDrawArrays(GLenum mode, GLint first, GLsizei count)
 {
-    using Draw = void (*)(GLenum, GLint, GLsizei);
-    static auto realDraw = reinterpret_cast<Draw>(dlsym(RTLD_NEXT, "glDrawArrays"));
-    if (!realDraw) std::abort();
     GLint program{};
     glGetIntegerv(GL_CURRENT_PROGRAM, &program);
     if (observing && mode == GL_TRIANGLE_FAN &&
@@ -66,8 +65,16 @@ extern "C" void glDrawArrays(GLenum mode, GLint first, GLsizei count)
         }
         draws.push_back(state);
     }
-    realDraw(mode, first, count);
+    realDrawArrays(mode, first, count);
 }
+
+// GLAD dispatches through pointers rather than the platform symbol table.
+class DrawHook
+{
+public:
+    DrawHook() { realDrawArrays = glad_glDrawArrays; glad_glDrawArrays = ObserveDrawArrays; }
+    ~DrawHook() { glad_glDrawArrays = realDrawArrays; }
+};
 
 static void Check(bool ok, const std::string& message)
 {
@@ -168,16 +175,20 @@ static void AssertEdgePixels()
 static void Controls(const std::filesystem::path& fixtures)
 {
     GLContext context;
+    DrawHook drawHook;
+    ShaderCache shaders;
     Shader::InvalidateBoundProgram();
     TextureManager manager({fixtures.string()});
     PresetState state;
     state.renderContext.textureManager = &manager;
+    state.renderContext.shaderCache = &shaders;
+    state.LoadShaders();
     state.renderContext.viewportSizeX = state.renderContext.viewportSizeY = 16;
     state.renderContext.aspectX = state.renderContext.aspectY = 1;
     state.renderContext.invAspectX = state.renderContext.invAspectY = 1;
     // The default Texture constructor creates unsized RGB storage, which GLES
     // rejects for this RGBA upload. Allocate matching sized fixture storage.
-    auto source = std::make_shared<Texture>("shape-source", 2, 2,
+    auto source = std::make_shared<Texture>("shape-source", GL_TEXTURE_2D, 2, 2, 1,
                                             GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false);
     source->Bind(0);
     Check(glGetError() == GL_NO_ERROR, "shape source allocation or binding failed");
@@ -246,9 +257,12 @@ static void Controls(const std::filesystem::path& fixtures)
 static void PresetControls(const std::filesystem::path& fixtures)
 {
     GLContext context;
+    DrawHook drawHook;
+    ShaderCache shaders;
     Shader::InvalidateBoundProgram();
     TextureManager manager({fixtures.string()});
     RenderContext render;
+    render.shaderCache = &shaders;
     render.textureManager = &manager;
     render.viewportSizeX = render.viewportSizeY = 128;
     render.perPixelMeshX = 8; render.perPixelMeshY = 6;
@@ -300,9 +314,12 @@ static void PresetControls(const std::filesystem::path& fixtures)
 static void ExactPresetControl(const std::filesystem::path& fixtures, const std::string& path)
 {
     GLContext context;
+    DrawHook drawHook;
+    ShaderCache shaders;
     Shader::InvalidateBoundProgram();
     TextureManager manager({fixtures.string()});
     RenderContext render;
+    render.shaderCache = &shaders;
     render.textureManager = &manager;
     render.viewportSizeX = 256; render.viewportSizeY = 144;
     render.aspectX = 1; render.aspectY = 144.f / 256.f;

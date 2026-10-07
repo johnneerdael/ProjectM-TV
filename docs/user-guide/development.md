@@ -1,8 +1,8 @@
 # Build and test
 
-ProjectM TV embeds **ProjectM TV Engine**, our extensively modified fork of projectM based on upstream version 4.1.7, with the ordered patch series in `tools/projectm-patches/`. The Android app, offline analyzer and documentation site have separate build dependencies.
+ProjectM TV embeds **ProjectM TV Engine**, our extensively modified fork of projectM based on unreleased projectM 4.2 master, pinned to commit `6f6480746`, with the ordered patch series in `tools/projectm-patches/`. The Android app, offline analyzer and documentation site have separate build dependencies.
 
-The published core AAR shares the app's release version. `ProjectMJNI.getVersion()` retains its existing meaning: the upstream projectM version, not the identity of the patched build. Record the release version, source revision and artifact checksum for reproducible engine comparisons. See the [patch inventory and upstream attribution](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/THIRD_PARTY.md).
+The published core AAR shares the app's release version. `ProjectMJNI.getVersion()` retains its existing meaning: the upstream numeric projectM version (`4.2.0`), not the identity of the patched build or proof of an upstream release. Record the release version, source revision and artifact checksum for reproducible engine comparisons. The immutable upstream pin is `6f64807467e312034883a4389e6aa80a675458bc`; this is a development snapshot, not an upstream 4.2 release. See the [patch inventory and upstream attribution](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/THIRD_PARTY.md).
 
 ## Android app
 
@@ -55,7 +55,7 @@ build/preset-lab-venv/bin/python -m pip install './tools/preset-lab[test]'
 build/preset-lab-venv/bin/preset-lab doctor --repo . --work build/preset-lab
 ```
 
-The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. That private host renderer supports historical research; the current beta collections use the **published ProjectM-TV:core AAR through JNI**. See [Predictive collections](predictive-collections.md) for scoring, export and verification commands.
+The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. The private desktop worker and host engine controls preserve attachment contents when their GL declarations lack the optional framebuffer discard hint; Android/GLES keeps the real GLES3 API. Desktop timings do not establish TV performance. That private host renderer supports historical research; the current beta collections use the **published ProjectM-TV:core AAR through JNI**. See [Predictive collections](predictive-collections.md) for scoring, export and verification commands.
 
 ## Test on a TV without replacing the release
 
@@ -70,6 +70,24 @@ adb -s DEVICE shell am instrument -r -w -e live_audio true nl.neerdael.projectmt
 ```
 
 The test checks category application, eligible counts, navigation containment, fallback and live audio delivery. Omit the live-audio argument for emulator testing without music. Results verify operation; they do not prove every selected preset's strength on every GPU.
+
+## Resolution and Native trails setup checks
+
+Build and install the separate setup app and its test APK on the selected development device:
+
+```sh
+./gradlew :app:assembleDebug :app:assembleDebugAndroidTest -PsetupScreenshotTest
+```
+
+These builds use package `nl.neerdael.projectmtv.setuptest`. Grant Record audio and stop this isolated app before instrumentation so the case starts cold:
+
+```sh
+adb -s DEVICE shell pm grant --user USER nl.neerdael.projectmtv.setuptest android.permission.RECORD_AUDIO
+adb -s DEVICE shell am force-stop --user USER nl.neerdael.projectmtv.setuptest
+adb -s DEVICE shell am instrument --user USER -r -w -e setup_case resolution nl.neerdael.projectmtv.setuptest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
+```
+
+Use `setup_case native_trails` for the Native trails case. An unanswered permission dialog can pause rendering and time out the completed-generation check; a warm activity can retain menu and focus state. These checks exercise settings, navigation and completed frames, not preset pixel fidelity or performance.
 
 ## Documentation site
 
@@ -151,7 +169,9 @@ Resolve `USER` from `adb -s SERIAL shell am get-current-user`. Use a fresh test-
 
 ## Warp rotation validation
 
-The native runner includes `warp-rotation-regressions`, which evaluates actual
+The native runner includes `warp-rotation-regressions`, ported with historical
+patch0051 as current0011. It covers direct and prepared-mesh replay through 4.2
+VertexBuffers and evaluates actual
 per-frame/per-pixel inputs, uploads the production mesh and reads real legacy and
 custom warp draws. It compares UVs for signed, moderate, large and maximum finite
 float angles, varying per-vertex equations and four feedback frames. It also
