@@ -1,0 +1,311 @@
+{
+  "scope": "Pinned source equation plus archived original full-AAR numerical clipping diagnostic; no new randomized credit or authored appearance certification",
+  "rows": [
+    {
+      "frame": 1,
+      "q1": 860780.7314648712,
+      "zoom_min": 1.01,
+      "zoom_max": 148143.19662140208,
+      "median_zoom": 80092.39098642717,
+      "motion_vector_alpha": 1.0,
+      "source_allwhite_fraction": 0.005560980902777778,
+      "native_allwhite_fraction": 0.005560980902777778
+    },
+    {
+      "frame": 2,
+      "q1": 36365.87546288778,
+      "zoom_min": 1.01,
+      "zoom_max": 6259.654173302625,
+      "median_zoom": 3384.6744805541553,
+      "motion_vector_alpha": 1.0,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 3,
+      "q1": 4902.467107395912,
+      "zoom_min": 1.01,
+      "zoom_max": 844.7349703454466,
+      "median_zoom": 457.16026744810165,
+      "motion_vector_alpha": 1.0,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 4,
+      "q1": 1293.8514705242253,
+      "zoom_min": 1.01,
+      "zoom_max": 223.68457785745937,
+      "median_zoom": 121.39646693363375,
+      "motion_vector_alpha": 1.0,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 5,
+      "q1": 679.2283074336433,
+      "zoom_min": 1.01,
+      "zoom_max": 117.90663000138879,
+      "median_zoom": 64.20882771406357,
+      "motion_vector_alpha": 1.0,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 6,
+      "q1": 309.28634854930385,
+      "zoom_min": 1.01,
+      "zoom_max": 54.23883551107097,
+      "median_zoom": 29.78756189245522,
+      "motion_vector_alpha": 0.9270060539245606,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 7,
+      "q1": 164.90843466786134,
+      "zoom_min": 1.01,
+      "zoom_max": 29.391090806290432,
+      "median_zoom": 16.353912550623853,
+      "motion_vector_alpha": 0.6610116243362427,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 8,
+      "q1": 137.17900661156088,
+      "zoom_min": 1.01,
+      "zoom_max": 24.618797519670956,
+      "median_zoom": 13.773826698546996,
+      "motion_vector_alpha": 0.6177158832550049,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 9,
+      "q1": 87.06273282877129,
+      "zoom_min": 1.01,
+      "zoom_max": 15.993680678516052,
+      "median_zoom": 9.110755802052026,
+      "motion_vector_alpha": 0.42693619728088383,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 10,
+      "q1": 58.80893488481051,
+      "zoom_min": 1.01,
+      "zoom_max": 11.131142223856838,
+      "median_zoom": 6.481879930734215,
+      "motion_vector_alpha": 0.2886100292205811,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 11,
+      "q1": 58.21864849815314,
+      "zoom_min": 1.01,
+      "zoom_max": 11.029552686758981,
+      "median_zoom": 6.42695670794736,
+      "motion_vector_alpha": 0.3088610649108887,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 12,
+      "q1": 42.66723407003711,
+      "zoom_min": 1.01,
+      "zoom_max": 8.353121332962177,
+      "median_zoom": 4.979974669071538,
+      "motion_vector_alpha": 0.18889181613922124,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 13,
+      "q1": 32.20835964687524,
+      "zoom_min": 1.01,
+      "zoom_max": 6.553126897667261,
+      "median_zoom": 4.006828238749937,
+      "motion_vector_alpha": 0.09909992218017583,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 14,
+      "q1": 34.68989283104078,
+      "zoom_min": 1.01,
+      "zoom_max": 6.980204013404088,
+      "median_zoom": 4.2377226029223705,
+      "motion_vector_alpha": 0.14256196022033696,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 15,
+      "q1": 27.430440140504523,
+      "zoom_min": 1.01,
+      "zoom_max": 5.730836833192585,
+      "median_zoom": 3.562266508312508,
+      "motion_vector_alpha": 0.05502669811248784,
+      "source_allwhite_fraction": 1.0,
+      "native_allwhite_fraction": 1.0
+    },
+    {
+      "frame": 16,
+      "q1": 22.014003866530754,
+      "zoom_min": 1.01,
+      "zoom_max": 4.798656680929616,
+      "median_zoom": 3.0582939571736336,
+      "motion_vector_alpha": -0.011226010322570756,
+      "source_allwhite_fraction": 0.9629177517361112,
+      "native_allwhite_fraction": 0.9629177517361112
+    },
+    {
+      "frame": 17,
+      "q1": 24.845743670512867,
+      "zoom_min": 1.01,
+      "zoom_max": 5.2860050975128585,
+      "median_zoom": 3.3217733116768393,
+      "motion_vector_alpha": 0.042713928222656294,
+      "source_allwhite_fraction": 0.9744194878472222,
+      "native_allwhite_fraction": 0.9744194878472222
+    },
+    {
+      "frame": 18,
+      "q1": 20.545263037753237,
+      "zoom_min": 1.01,
+      "zoom_max": 4.545883274181824,
+      "median_zoom": 2.9216349022157546,
+      "motion_vector_alpha": -0.02736599445343013,
+      "source_allwhite_fraction": 0.9970431857638888,
+      "native_allwhite_fraction": 0.9970431857638888
+    },
+    {
+      "frame": 19,
+      "q1": 17.109681272271782,
+      "zoom_min": 1.01,
+      "zoom_max": 3.9546123773659714,
+      "median_zoom": 2.6019710458688183,
+      "motion_vector_alpha": -0.08053262233734126,
+      "source_allwhite_fraction": 0.9941677517361112,
+      "native_allwhite_fraction": 0.9941677517361112
+    },
+    {
+      "frame": 20,
+      "q1": 19.86357994053671,
+      "zoom_min": 1.01,
+      "zoom_max": 4.428564169660689,
+      "median_zoom": 2.858207668478466,
+      "motion_vector_alpha": -0.02119679450988765,
+      "source_allwhite_fraction": 0.9927300347222222,
+      "native_allwhite_fraction": 0.9927300347222222
+    },
+    {
+      "frame": 21,
+      "q1": 16.894746827698818,
+      "zoom_min": 1.01,
+      "zoom_max": 3.9176217043230137,
+      "median_zoom": 2.5819724610281654,
+      "motion_vector_alpha": -0.08092398643493648,
+      "source_allwhite_fraction": 0.9556206597222222,
+      "native_allwhite_fraction": 0.9556206597222222
+    },
+    {
+      "frame": 22,
+      "q1": 14.406750295230525,
+      "zoom_min": 1.01,
+      "zoom_max": 3.4894322326568936,
+      "median_zoom": 2.350476714328868,
+      "motion_vector_alpha": -0.12617177963256831,
+      "source_allwhite_fraction": 0.9842122395833334,
+      "native_allwhite_fraction": 0.9842122395833334
+    },
+    {
+      "frame": 23,
+      "q1": 17.029585698448386,
+      "zoom_min": 1.01,
+      "zoom_max": 3.940827759505508,
+      "median_zoom": 2.5945185496825953,
+      "motion_vector_alpha": -0.06379468441009517,
+      "source_allwhite_fraction": 0.9065483940972222,
+      "native_allwhite_fraction": 0.9065483940972222
+    },
+    {
+      "frame": 24,
+      "q1": 14.75530313823298,
+      "zoom_min": 1.01,
+      "zoom_max": 3.549418915011664,
+      "median_zoom": 2.3829078289232952,
+      "motion_vector_alpha": -0.11698372364044185,
+      "source_allwhite_fraction": 0.8934733072916666,
+      "native_allwhite_fraction": 0.8934733072916666
+    },
+    {
+      "frame": 25,
+      "q1": 12.78217547368029,
+      "zoom_min": 1.01,
+      "zoom_max": 3.2098394657684457,
+      "median_zoom": 2.199318078665278,
+      "motion_vector_alpha": -0.15716512203216548,
+      "source_allwhite_fraction": 0.8518608940972222,
+      "native_allwhite_fraction": 0.8518608940972222
+    },
+    {
+      "frame": 26,
+      "q1": 15.29067132716765,
+      "zoom_min": 1.01,
+      "zoom_max": 3.6415569139900468,
+      "median_zoom": 2.432721185589644,
+      "motion_vector_alpha": -0.09295792579650874,
+      "source_allwhite_fraction": 0.8248426649305556,
+      "native_allwhite_fraction": 0.8248426649305556
+    },
+    {
+      "frame": 27,
+      "q1": 13.41612232170457,
+      "zoom_min": 1.01,
+      "zoom_max": 3.318943060720251,
+      "median_zoom": 2.25830369099869,
+      "motion_vector_alpha": -0.1418404102325439,
+      "source_allwhite_fraction": 0.7619086371527778,
+      "native_allwhite_fraction": 0.7619086371527778
+    },
+    {
+      "frame": 28,
+      "q1": 11.747835199827511,
+      "zoom_min": 1.01,
+      "zoom_max": 3.0318273143830794,
+      "median_zoom": 2.10307784243024,
+      "motion_vector_alpha": -0.17865498065948482,
+      "source_allwhite_fraction": 0.7247992621527778,
+      "native_allwhite_fraction": 0.7247992621527778
+    },
+    {
+      "frame": 29,
+      "q1": 14.167973348369513,
+      "zoom_min": 1.01,
+      "zoom_max": 3.4483382144827477,
+      "median_zoom": 2.328259702815058,
+      "motion_vector_alpha": -0.11329181194305415,
+      "source_allwhite_fraction": 0.7246907552083334,
+      "native_allwhite_fraction": 0.7246907552083334
+    },
+    {
+      "frame": 30,
+      "q1": 12.539617252854166,
+      "zoom_min": 1.01,
+      "zoom_max": 3.1680946823379097,
+      "median_zoom": 2.1767492383492146,
+      "motion_vector_alpha": -0.15925366878509517,
+      "source_allwhite_fraction": 0.6463487413194444,
+      "native_allwhite_fraction": 0.6463487413194444
+    }
+  ],
+  "preset": "Rovastar - Hyperspace (Hyper Speed Mix).milk",
+  "original_score": 85,
+  "randomized_credit": 0,
+  "source_sha256": "0689f82d2a4a728be7894ce67fd6a4299be40ca92a11ca14d435ce651bc69113",
+  "release": "v2.3.16",
+  "remaining": "Unsupported visible motion and hidden structure remain unknown; no native defect or full repair is certified"
+}
