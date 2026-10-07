@@ -107,3 +107,26 @@ def test_exceeded_derivative_budget_is_explicit_unknown_not_a_partial_score():
     assert result['speed']['p95'] is None
     assert result['budget_exceeded'] is True
     assert any('budget' in reason for reason in result['unknown_reasons'])
+
+
+def test_signed_source_translation_preserves_screen_direction():
+    result = summarize([row(0, [.6, .5]), row(1, [.4, .6])])
+    translation = result['component_translation']['shape:0:0']
+    assert translation['displacement'] == pytest.approx([-.2, .1])
+    assert translation['horizontal'] == 'left'
+    assert translation['vertical'] == 'down'
+    assert translation['matched_intervals'] == 1
+
+
+def test_signed_translation_does_not_join_missing_or_changed_vertices():
+    result = summarize([row(0, [0, 0]),
+                        {'time': 1, 'components': {}},
+                        row(2, [100, 0]),
+                        {'time': 3, 'components': {'shape:0:0': [[200, 0], [201, 0]]}}])
+    assert result['component_translation'] == {}
+
+
+def test_budget_failure_withholds_partial_signed_translation():
+    result = importlib.import_module('geometry_features').trajectory_summary(
+        [row(t, [t, 0]) for t in range(5)], max_derivative_samples=1)
+    assert result['component_translation'] == {}

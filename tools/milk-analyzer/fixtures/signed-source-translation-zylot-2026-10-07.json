@@ -1,0 +1,52 @@
+{
+  "kind": "source-only directional narrative diagnostic",
+  "preset": "Zylot - new work.milk",
+  "preset_sha256": "7a3041d040543ff6f330dceacd4dd177f142433cfd6726b7340bd8a55252f4a8",
+  "archived_claim": "The compact triangle shifts slightly toward the right over the window.",
+  "claim_is_wrong": true,
+  "source_only": true,
+  "uses_native_frames": false,
+  "randomized_credit": false,
+  "frames": 30,
+  "component_translation": {
+    "shape:0:0": {
+      "displacement": [
+        -0.09946899116039276,
+        0.10746300220489502
+      ],
+      "horizontal": "left",
+      "vertical": "down",
+      "matched_intervals": 29
+    },
+    "shape:1:0": {
+      "displacement": [
+        -0.04652720719280809,
+        0.14590585320302757
+      ],
+      "horizontal": "left",
+      "vertical": "down",
+      "matched_intervals": 29
+    },
+    "shape:2:0": {
+      "displacement": [
+        -0.14851599633693693,
+        0.15478527545928955
+      ],
+      "horizontal": "left",
+      "vertical": "down",
+      "matched_intervals": 29
+    },
+    "shape:3:0": {
+      "displacement": [
+        -0.09823694854679674,
+        0.024707793009163127
+      ],
+      "horizontal": "left",
+      "vertical": "down",
+      "matched_intervals": 29
+    }
+  },
+  "reader_sha256": "ced7163a950b5913f05375ae90f7db84749835e60ab457a4aac38d491f5fce61",
+  "geometry_report_sha256": "36fb0a48877da59e28c54cc603d0701eebc174f2b6ea0db2c838036f2b426bd0",
+  "limitation": "Centroid displacement over matched source intervals, not visible or monotonic movement; original prose score remains failed."
+}

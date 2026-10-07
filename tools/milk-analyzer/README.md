@@ -961,3 +961,14 @@ rotation; a production range-reduction fix and published-AAR retest are pending.
 Five exact-literal source candidates are recorded separately from the one
 confirmed reproduction. See
 `fixtures/native-large-angle-warp-compatibility-2026-10-07.json`.
+
+Source geometry reports also expose `component_translation`: signed centroid
+displacement summed over intervals with matching component and vertex identity.
+Positive X is right and positive Y is down in normalized top-origin screen
+coordinates. Missing components and topology changes never contribute a bridging
+displacement; budget failure withholds the partial result. This equal-vertex
+summary describes evaluated geometry, not visible movement or monotonic motion.
+Its nonzero direction has no perceptual threshold. Use it to check directional
+prose against source trajectories before freezing future descriptions; do not
+infer left/right from unsigned speed. A contradictory archived description keeps
+its failed grade even when its predicted fields agree with the renderer.

@@ -29,6 +29,7 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
     histories = {}
     seen = set()
     values = {order: [] for order in (1, 2, 3)}
+    translations = {}
     previous_time = None
     births = deaths = topology = 0
     sample_count = 0
@@ -66,6 +67,16 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
             if sample_count+required > max_derivative_samples:
                 budget_exceeded = True
                 break
+            if len(history) >= 2:
+                displacement = np.mean(history[-1][1]-history[-2][1], axis=0)
+                if not np.all(np.isfinite(displacement)):
+                    raise ValueError('geometry translation numeric domain unresolved')
+                translation = translations.setdefault(key, {'displacement': np.zeros(2),
+                                                              'matched_intervals': 0})
+                translation['displacement'] += displacement
+                if not np.all(np.isfinite(translation['displacement'])):
+                    raise ValueError('geometry translation numeric domain unresolved')
+                translation['matched_intervals'] += 1
             for order in range(1, min(3, len(history)-1)+1):
                 window = history[-order-1:]
                 times = np.array([sample[0] for sample in window])
@@ -83,15 +94,27 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
             # A prefix percentile is not a percentile of the declared window.
             # Withhold every derivative rather than silently truncating support.
             values = {order: [] for order in (1, 2, 3)}
+            translations = {}
             break
         frames_sampled += 1
         previous_time = time
+    signed_translation = {}
+    for key, translation in translations.items():
+        dx, dy = translation['displacement']
+        signed_translation[key] = {
+            'displacement': [float(dx), float(dy)],
+            'horizontal': 'right' if dx > 0 else 'left' if dx < 0 else 'unchanged',
+            'vertical': 'down' if dy > 0 else 'up' if dy < 0 else 'unchanged',
+            'matched_intervals': translation['matched_intervals'],
+        }
     return {'schema_version': 1, 'basis': 'strict-source-no-display-frames',
             'uses_display_fields': False, 'frames_sampled': frames_sampled,
             'frames_received': frames_received, 'budget_exceeded': budget_exceeded,
             'derivative_sample_budget': max_derivative_samples,
             'components_seen': len(seen), 'component_births': births,
             'component_deaths': deaths, 'topology_changes': topology,
+            'component_translation': signed_translation,
+            'translation_basis': 'Sum of equal-vertex centroid displacements over matched intervals; top-origin normalized screen coordinates',
             'speed': _summary(values[1], 'normalized viewport coordinates/s'),
             'acceleration': _summary(values[2], 'normalized viewport coordinates/s²'),
             'jerk': _summary(values[3], 'normalized viewport coordinates/s³'),
@@ -102,6 +125,7 @@ def trajectory_summary(rows, *, max_derivative_samples=1_000_000):
             'limitations': ['Equal vertex weighting, not screen-area weighting',
                             'Component identity and vertex correspondence must be supplied by the producer',
                             'Finite differences do not prove smoothness between samples or classify teleports',
+                            'Signed translation excludes identity/topology gaps; nonzero direction has no perceptual threshold and does not imply monotonic movement',
                             'Normalized x/y use fractions of viewport width/height, not physical distance']}
 
 
