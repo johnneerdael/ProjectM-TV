@@ -181,11 +181,26 @@ layout. These controls are separate from original-preset appearance, high-resolu
 trail paths and physical-TV performance; record those separately when validating
 an engine release.
 
+## Preset validation in CI
+
+The `presets / measurements` release gate verifies the shipped predictive
+collection bundle: current preset and texture hashes, retained measurement
+provenance, score calculations, collection membership and index weights. It also
+runs Preset Lab and Native trails tooling tests, source-analysis checks and
+current-engine native rendering regressions. It does not rerender or regenerate
+the full collection scores; their published core 2.3.3 provenance remains intact.
+
+Historical Android core-corpus tooling tests are outside this release gate. Run
+`python -m pytest tools/core-corpus -q` separately when changing that tooling; its
+source-transformation controls require the frozen historical commit documented
+in `tools/core-corpus/README.md`. These historical controls do not establish the
+validity of the shipped collection scores or current-renderer appearance.
+
 ## History-dependent validation
 
-The Native trails/core corpus source controls read both the current source and a
+The standalone core-corpus source controls read both the current source and a
 fixed historical release commit. Keep Git history available when running these
-tests. Preset Lab CI uses `fetch-depth: 0` and `filter: blob:none`: commit metadata
+tests. The full-history checkout uses `fetch-depth: 0` and `filter: blob:none`: commit metadata
 is available, while historical file contents load on demand. A shallow checkout
 without that history can fail at `git show` before a renderer is exercised.
 Reviewed previews use the trusted workflow from main. Their source controls
