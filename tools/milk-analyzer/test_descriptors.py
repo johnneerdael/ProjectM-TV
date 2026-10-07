@@ -116,6 +116,18 @@ def test_spatial_support_retains_empty_frames_and_uses_half_open_centre():
     assert empty[0]['supported_pixels']==0
 
 
+def test_spatial_support_keeps_field_provenance_neutral_and_exact_boundaries():
+    target=stream()
+    image=np.zeros((6,6,3),np.float32)
+    image[1,1]=1  # Pixel centre exactly .25 in both axes: included.
+    image[4,4]=1  # Pixel centre exactly .75: excluded.
+    add(target,image,0)
+    result=target.report()['structure']['spatial_support']
+    assert 'source-predicted' not in result['basis']
+    assert 'supplied' in result['basis'].lower()
+    assert result['frames'][0]['centre_support_pixels']==1
+
+
 def test_shifted_textured_field_has_visible_speed_not_coherent_flashing():
     target=stream()
     rng=np.random.default_rng(413)

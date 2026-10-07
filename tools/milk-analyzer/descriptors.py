@@ -264,7 +264,7 @@ class DescriptorStream:
                         mean_acceleration_viewports_per_second_squared=float(np.mean(acceleration)) if acceleration else None,
                         mean_warp_query_displacement=float(np.mean(displacements)) if displacements else None),
             structure={'fractal':None,'spatial_support':{
-                'basis':'Thresholded source-predicted display field, not native image inspection',
+                'basis':'Thresholded supplied display field; producer provenance belongs to the caller',
                 'value_floor':self.settings['value_floor'],'threshold_channel':'maximum encoded RGB',
                 'grid_shape':[3,3],'grid_origin':'top-left',
                 'centre_region':{'minimum':[.25,.25],'maximum':[.75,.75]},

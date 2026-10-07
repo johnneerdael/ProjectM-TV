@@ -10,7 +10,7 @@
     "scope": "Same-preset learning evidence; source prediction only; original score95 retained; no randomized credit",
     "prediction_sha256": "002589a2e4b7742668b84b6815b1c906a5f224562dc678d4520b65594f12d03f",
     "spatial_support": {
-      "basis": "Thresholded source-predicted display field, not native image inspection",
+      "basis": "Thresholded supplied display field; producer provenance belongs to the caller",
       "value_floor": 0.05,
       "threshold_channel": "maximum encoded RGB",
       "grid_shape": [
@@ -1031,7 +1031,7 @@
     "change": "Add source-predicted thresholded per-frame spatial support to prevent averaging opposed edge features into a central claim",
     "tests": {
       "red": "2 tests failed with KeyError spatial_support",
-      "focused": "29 passed",
+      "focused": "30 passed, including exact half-open region boundaries and neutral nested provenance",
       "full": "1406 passed;78subtests passed",
       "docs": "mkdocs build --strict passed",
       "diff_check": "passed"
@@ -1049,7 +1049,7 @@
     },
     "original_score": 95,
     "randomized_credit": 0,
-    "review": "pending independent code and same-preset review"
+    "review": "Provenance finding corrected; same-preset and final code review pending"
   },
   "existing_activity_score_inputs_changed": false
 }

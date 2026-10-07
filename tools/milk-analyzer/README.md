@@ -1080,7 +1080,9 @@ half-open regions; the maximum encoded RGB channel must reach the recorded
 source-model calculation includes shader remapping and feedback, unlike raw
 custom-shape bounds. Union bounds do not identify objects or establish that an
 opposed pair is central. Below-threshold output and events outside the sampled
-window remain unknown. Native inspection is not an input to this calculation.
+window remain unknown. The nested descriptor uses neutral supplied-field provenance:
+the caller identifies whether its input is a source prediction or native capture.
+Native inspection is not an input when calculating the source-predicted report.
 
 The fourth frozen batch scored 100, 100, 100, 100, 100, 60, 95, 85, 95, 60
 after independent review (mean 89.5). Unknown clauses for sparse/dark outputs
