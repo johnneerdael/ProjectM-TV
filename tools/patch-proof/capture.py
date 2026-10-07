@@ -62,6 +62,8 @@ def main() -> None:
     parser.add_argument('--textures', type=Path, required=True)
     parser.add_argument('--device', required=True)
     parser.add_argument('--user', required=True, type=int)
+    parser.add_argument('--ndk', type=Path, required=True,
+                        help='Android NDK 27.3.13750724 used to reproduce worker binaries')
     parser.add_argument('--adb', default='adb')
     parser.add_argument('--work', type=Path, required=True)
     parser.add_argument('--width', type=int, choices=(256, 512), default=512)
@@ -91,7 +93,7 @@ def main() -> None:
             raise ValueError('Worker patch removal differs: ' + role)
         if identity.get('ordered_patches') != ([] if role == 'upstream' else series['patches']):
             raise ValueError('Worker patch inventory differs: ' + role)
-        validate_prepared_source(role, identity, series)
+        validate_prepared_source(role, identity, series, args.ndk.resolve())
     for identity in workers.values():
         if sha(Path(identity['binary']).read_bytes()) != identity['binary_sha256']:
             raise ValueError('Worker binary identity changed')

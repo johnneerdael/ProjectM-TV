@@ -70,6 +70,12 @@ index 1111111..2222222 100644
         saved_snapshot = role_dir / 'snapshot' / 'engines' / SOURCE_IDENTITY.digest(asdict(parent))
         saved_snapshot.parent.mkdir(parents=True)
         shutil.copytree(fresh_snapshot, saved_snapshot)
+        harness = root / 'harness'
+        harness.mkdir()
+        (harness / 'worker.cpp').write_text('canonical harness input\n')
+        binary = role_dir / 'ndk-build' / 'patch-proof-worker'
+        binary.parent.mkdir()
+        binary.write_bytes(b'expected worker bytes')
 
         identity = {
             'role': 'patched',
@@ -81,6 +87,9 @@ index 1111111..2222222 100644
             'parent': asdict(parent),
             'source_hashes': str(source_hashes),
             'adjustments_sha256': SOURCE_IDENTITY.sha(adjustments_path),
+            'harness_sha256': SOURCE_IDENTITY.file_hashes(harness),
+            'binary': str(binary),
+            'binary_sha256': SOURCE_IDENTITY.sha(binary),
         }
 
         def rebuild(_repo, work):
@@ -91,11 +100,11 @@ index 1111111..2222222 100644
 
         return role_dir, identity, series, rebuild
 
-    def validate(self, fixture):
+    def validate(self, fixture, ndk=None):
         _role_dir, identity, series, rebuild = fixture
         with patch.object(SOURCE_IDENTITY, '_validate_git_pins'), \
                 patch.object(SOURCE_IDENTITY, 'prepare_engine', side_effect=rebuild):
-            SOURCE_IDENTITY.validate_prepared_source('patched', identity, series)
+            SOURCE_IDENTITY.validate_prepared_source('patched', identity, series, ndk)
 
     def test_accepts_source_matching_patched_role(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -116,6 +125,31 @@ index 1111111..2222222 100644
             identity['adjustments_sha256'] = SOURCE_IDENTITY.sha(adjustments)
             with self.assertRaisesRegex(ValueError, 'Capture adjustments differ'):
                 self.validate((role_dir, identity, series, rebuild))
+
+    def test_rejects_self_consistent_hash_for_wrong_worker_binary(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            role_dir, identity, series, rebuild = self.make_fixture(Path(temporary), 'patched')
+            binary = Path(identity['binary'])
+            binary.write_bytes(b'forged worker bytes')
+            identity['binary_sha256'] = SOURCE_IDENTITY.sha(binary)
+            harness_template = role_dir.parent / 'harness'
+
+            def copy_harness(destination):
+                shutil.copytree(harness_template, destination)
+                return destination
+
+            def rebuild_worker(_harness, build_dir, _source, _ndk, _role):
+                build_dir.mkdir(parents=True)
+                rebuilt = build_dir / 'patch-proof-worker'
+                rebuilt.write_bytes(b'expected worker bytes')
+                return rebuilt
+
+            with patch.object(SOURCE_IDENTITY, 'validate_ndk'), \
+                    patch.object(SOURCE_IDENTITY, 'prepare_harness', side_effect=copy_harness), \
+                    patch.object(SOURCE_IDENTITY, 'build_patch_worker', side_effect=rebuild_worker), \
+                    patch.object(SOURCE_IDENTITY, 'canonical_worker', side_effect=lambda path, _out, _ndk: path.read_bytes()):
+                with self.assertRaisesRegex(ValueError, 'differs from rebuilt source and harness'):
+                    self.validate((role_dir, identity, series, rebuild), ndk=Path('/fake/ndk'))
 
 
 if __name__ == '__main__':

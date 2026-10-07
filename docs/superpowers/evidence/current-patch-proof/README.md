@@ -148,6 +148,13 @@ and recomputes every frame hash from the complete retained RGB streams. The
 earlier journey, with zero GL errors. Raw streams remain in the ignored private
 build directory; they are required for future full-frame verification and are
 not committed as documentation assets.
+The subsequent [executable-bound replay](bound-binary-replay-results.json) also
+rebuilds each worker from the reconstructed source and checked-in harness using
+NDK27.3.13750724. Its [verification](bound-binary-replay-verification.json) requires
+matching canonical executable bytes after removing non-runtime debug/symbol
+metadata and the GNU build-id note. All720 frames match the earlier full-payload
+replay. The verifier requires an explicit NDK path for this source-to-executable
+check; source-only reconstruction does not issue a verification certificate.
 Do not run archived scripts against another device without deliberately creating
 new task-owned paths and identities. Do not overwrite existing attempt directories.
 

@@ -28,6 +28,55 @@ def file_hashes(root: Path) -> dict[str, str]:
             for path in sorted(root.rglob('*')) if path.is_file()}
 
 
+def prepare_harness(destination: Path) -> Path:
+    """Copy the only supported native proof harness inputs from the checkout."""
+    shutil.copytree(Path(__file__).parent / 'native', destination)
+    native = ROOT / 'tools/preset-lab/src/preset_lab/native'
+    shutil.copytree(native / 'vendor', destination / 'vendor')
+    shutil.copyfile(native / 'analysis_hooks.hpp', destination / 'analysis_hooks.hpp')
+    return destination
+
+
+def validate_ndk(ndk: Path) -> None:
+    properties = ndk / 'source.properties'
+    if not properties.is_file():
+        raise ValueError('Android NDK source.properties is missing')
+    revision = next((line.partition('=')[2].strip() for line in
+                     properties.read_text().splitlines()
+                     if line.partition('=')[0].strip() == 'Pkg.Revision'), None)
+    if revision != '27.3.13750724':
+        raise ValueError('Patch proof requires Android NDK 27.3.13750724')
+
+
+def build_patch_worker(harness: Path, build_dir: Path, source: Path, ndk: Path,
+                       role: str, jobs: int = 4) -> Path:
+    """Build a proof worker with the same deterministic recipe used by prepare.py."""
+    validate_ndk(ndk)
+    build_dir.parent.mkdir(parents=True, exist_ok=True)
+    with (build_dir.parent / 'build.log').open('w') as log:
+        command = ['cmake', '-S', str(harness), '-B', str(build_dir), '-G', 'Ninja',
+                   '-DCMAKE_TOOLCHAIN_FILE=' + str(ndk / 'build/cmake/android.toolchain.cmake'),
+                   '-DANDROID_ABI=arm64-v8a', '-DANDROID_PLATFORM=android-34',
+                   '-DANDROID_STL=c++_static', '-DCMAKE_BUILD_TYPE=Release',
+                   '-DPROJECTM_SOURCE=' + str(source),
+                   '-DPATCH_PROOF_TV=' + ('OFF' if role == 'upstream' else 'ON')]
+        subprocess.run(command, check=True, stdout=log, stderr=subprocess.STDOUT)
+        subprocess.run(['cmake', '--build', str(build_dir), '-j', str(jobs)],
+                       check=True, stdout=log, stderr=subprocess.STDOUT)
+    return build_dir / 'patch-proof-worker'
+
+
+def canonical_worker(binary: Path, output: Path, ndk: Path) -> bytes:
+    """Drop path-sensitive debug/build-id metadata while retaining executable ELF bytes."""
+    strip_candidates = sorted((ndk / 'toolchains/llvm/prebuilt').glob('*/bin/llvm-strip'))
+    if len(strip_candidates) != 1:
+        raise ValueError('Expected one host llvm-strip in the selected Android NDK')
+    subprocess.run([str(strip_candidates[0]), '--strip-all',
+                    '--remove-section=.note.gnu.build-id', '-o', str(output), str(binary)],
+                   check=True, capture_output=True)
+    return output.read_bytes()
+
+
 def _supported_roles() -> set[str]:
     return {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
 
@@ -118,8 +167,11 @@ def _normalise_adjustments(value: str) -> str:
     return ''.join(normalized)
 
 
-def validate_prepared_source(role: str, identity: dict, series: dict) -> None:
-    """Rebuild the prepared source recipe and reject role claims that disagree."""
+def validate_prepared_source(role: str, identity: dict, series: dict,
+                             ndk: Path | None = None) -> None:
+    """Rebuild source and worker; reject role claims or executable bytes that disagree."""
+    if ndk is not None:
+        validate_ndk(ndk)
     if role not in _supported_roles():
         raise ValueError('Unsupported worker role: ' + role)
     removed = int(role[8:]) if role.startswith('without-') else None
@@ -172,3 +224,27 @@ def validate_prepared_source(role: str, identity: dict, series: dict) -> None:
             raise ValueError('Capture adjustments differ from the prepared source role: ' + role)
         if sha(adjustments_path) != identity.get('adjustments_sha256'):
             raise ValueError('Capture adjustment identity changed: ' + role)
+
+        if ndk is None:
+            return
+        expected_harness = Path(temporary) / 'harness'
+        prepare_harness(expected_harness)
+        expected_harness_hashes = file_hashes(expected_harness)
+        if identity.get('harness_sha256') != expected_harness_hashes:
+            raise ValueError('Worker harness identity differs from checked-in inputs: ' + role)
+        retained_harness = role_dir.parent / 'harness'
+        if file_hashes(retained_harness) != expected_harness_hashes:
+            raise ValueError('Retained worker harness differs from checked-in inputs: ' + role)
+
+        binary = Path(identity['binary'])
+        if sha(binary) != identity['binary_sha256']:
+            raise ValueError('Worker binary changed: ' + role)
+        rebuilt_binary = build_patch_worker(
+            expected_harness, Path(temporary) / 'binary-build' / 'ndk-build',
+            expected_source, ndk, role)
+        expected_canonical = canonical_worker(
+            rebuilt_binary, Path(temporary) / 'rebuilt-worker.canonical', ndk)
+        actual_canonical = canonical_worker(
+            binary, Path(temporary) / 'retained-worker.canonical', ndk)
+        if actual_canonical != expected_canonical:
+            raise ValueError('Worker executable differs from rebuilt source and harness: ' + role)

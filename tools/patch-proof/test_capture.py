@@ -43,7 +43,7 @@ class FailedCaptureRetention(unittest.TestCase):
                         'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}}))
                     argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
                             '--textures', str(textures), '--device', 'emulator-5630',
-                            '--user', '0', '--work', str(work)]
+                            '--user', '0', '--ndk', str(root / 'ndk'), '--work', str(work)]
                     with patch.object(sys, 'argv', argv), patch.object(CAPTURE.subprocess, 'run') as run:
                         with self.assertRaisesRegex(ValueError, message):
                             CAPTURE.main()
@@ -97,7 +97,7 @@ class FailedCaptureRetention(unittest.TestCase):
 
             argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
                     '--textures', str(textures), '--device', 'emulator-5630',
-                    '--user', '0', '--work', str(work)]
+                    '--user', '0', '--ndk', str(root / 'ndk'), '--work', str(work)]
             with patch.object(sys, 'argv', argv), patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
                     patch.object(CAPTURE, 'validate_prepared_source'), \
                     patch.object(CAPTURE.subprocess, 'run', side_effect=fake_run):
@@ -161,7 +161,8 @@ class FailedCaptureRetention(unittest.TestCase):
 
             argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
                     '--textures', str(textures), '--device', 'emulator-5630',
-                    '--user', '0', '--width', str(width), '--work', str(work)]
+                    '--user', '0', '--width', str(width), '--ndk', str(root / 'ndk'),
+                    '--work', str(work)]
             with patch.object(sys, 'argv', argv), \
                     patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
                     patch.object(CAPTURE, 'validate_prepared_source'), \

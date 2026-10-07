@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / 'tools/preset-lab/src'))
 sys.path.insert(0, str(ROOT / 'tools/core-corpus'))
 from preset_lab.build_worker import prepare_engine
 from build_core_aars import checkout_pinned_engine
+from source_identity import build_patch_worker, prepare_harness
 
 
 def sha(path: Path) -> str:
@@ -72,11 +73,7 @@ def main() -> None:
     engine, pin, evaluator = checkout_pinned_engine(cache, source, work / 'engine-checkout')
     if (pin, evaluator) != (series['engine_commit'], series['evaluator_commit']):
         raise ValueError('Source pins differ from the documented comparison')
-    harness = work / 'harness'
-    shutil.copytree(Path(__file__).parent / 'native', harness)
-    native = ROOT / 'tools/preset-lab/src/preset_lab/native'
-    shutil.copytree(native / 'vendor', harness / 'vendor')
-    shutil.copyfile(native / 'analysis_hooks.hpp', harness / 'analysis_hooks.hpp')
+    harness = prepare_harness(work / 'harness')
     identities = {}
     for role in args.roles:
         number = int(role[8:]) if role.startswith('without-') else None
@@ -109,18 +106,8 @@ def main() -> None:
             transforms.append(change(compiled_source / 'src/libprojectM/Renderer/Shader.cpp',
                                      '        ProgramCache::Instance().Store(m_shaderProgram, cacheKey);',
                                      '        // Proof capture: API36 binary export is outside image validation.'))
-        build = dest / 'ndk-build'
-        with (dest / 'build.log').open('w') as log:
-            run(['cmake', '-S', str(harness), '-B', str(build), '-G', 'Ninja',
-                 '-DCMAKE_TOOLCHAIN_FILE=' + str(args.ndk.resolve() / 'build/cmake/android.toolchain.cmake'),
-                 '-DANDROID_ABI=arm64-v8a', '-DANDROID_PLATFORM=android-34',
-                 '-DANDROID_STL=c++_static', '-DCMAKE_BUILD_TYPE=Release',
-                 '-DPROJECTM_SOURCE=' + str(compiled_source),
-                 '-DPATCH_PROOF_TV=' + ('OFF' if role == 'upstream' else 'ON')],
-                stdout=log, stderr=subprocess.STDOUT)
-            run(['cmake', '--build', str(build), '-j', str(args.jobs)],
-                stdout=log, stderr=subprocess.STDOUT)
-        binary = build / 'patch-proof-worker'
+        binary = build_patch_worker(harness, dest / 'ndk-build', compiled_source,
+                                    args.ndk.resolve(), role, args.jobs)
         sources = {p.relative_to(compiled_source).as_posix(): sha(p)
                    for p in sorted(compiled_source.rglob('*')) if p.is_file()}
         write(dest / 'source-hashes.json', sources)

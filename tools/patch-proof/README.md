@@ -20,8 +20,8 @@ work directory for each preparation/capture; existing directories are refused.
 python3 -m venv build/patch-proof-env
 build/patch-proof-env/bin/pip install Pillow
 python3 tools/patch-proof/prepare.py --cache-repo CACHE_REPO --ndk NDK_DIRECTORY --work build/patch-proof-workers --roles upstream without-0006 patched
-build/patch-proof-env/bin/python tools/patch-proof/capture.py --workers build/patch-proof-workers/workers.json --preset 'core/src/main/assets/presets/Hexcollie - This is where we begin stripped.milk' --textures core/src/main/assets/textures --device SERIAL --user USER --work build/patch-proof-zoom
-build/patch-proof-env/bin/python tools/patch-proof/verify.py --work build/patch-proof-zoom
+build/patch-proof-env/bin/python tools/patch-proof/capture.py --workers build/patch-proof-workers/workers.json --preset 'core/src/main/assets/presets/Hexcollie - This is where we begin stripped.milk' --textures core/src/main/assets/textures --device SERIAL --user USER --ndk NDK_DIRECTORY --work build/patch-proof-zoom
+build/patch-proof-env/bin/python tools/patch-proof/verify.py --work build/patch-proof-zoom --ndk NDK_DIRECTORY
 ```
 
 Use `--adb /path/to/adb` if it is not on PATH. Capture supports 512×288 (default)
@@ -35,6 +35,10 @@ load failure is still a failure. `verify.py` checks source/binary identities, re
 hashes, retained image payloads, counts, backend and comparison pixels. Successful
 runs retain the complete `frames.rgb` stream locally; verification recomputes its
 SHA256 and all 120 frame hashes. At 512×288 this adds about 50 MB per successful run.
+Capture and verification require the same NDK directory and rebuild every worker
+from the reconstructed source and checked-in harness. They compare canonical ELF
+copies after stripping debug/symbol tables and the path-sensitive GNU build-id note;
+runtime sections, program headers and load permissions remain part of the match.
 Capture rejects unsupported role names before creating output directories, and
 both capture and verification require each role label to match its worker identity
 and removed-patch metadata. Swapped worker records cannot silently relabel a run.
@@ -63,6 +67,7 @@ and records their 128-value streams and lone-dot compilation/value. This control
 does not create a GL context. Upstream and the no 0003 role should reject the dot
 and retain shared random-stream progression; patched threads begin independent
 identical streams and dot evaluates to zero. Verify both repeats with `verify.py`.
+Pass the same `--ndk NDK_DIRECTORY` used for preparation to both capture and verify.
 
 [The frozen evidence](../../docs/superpowers/evidence/current-patch-proof/README.md)
 also includes the duplicate-name texture-root fade/reset journey and specific
