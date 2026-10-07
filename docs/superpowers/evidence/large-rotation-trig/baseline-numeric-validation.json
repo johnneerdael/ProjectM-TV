@@ -1,0 +1,69 @@
+{
+  "role": "baseline",
+  "metrics": [
+    {
+      "feature": "motion.median_speed_viewports_per_second",
+      "predicted": 0.01734024565666914,
+      "native": 0.011537263169884682,
+      "relative_error": 0.33465399520176947,
+      "passes": false
+    },
+    {
+      "feature": "motion.p95_speed_viewports_per_second",
+      "predicted": 0.9118863388895975,
+      "native": 0.477121233940124,
+      "relative_error": 0.47677554362628816,
+      "passes": false
+    },
+    {
+      "feature": "colour.mean_luma",
+      "predicted": 0.011246810015290976,
+      "native": 0.005659264496838053,
+      "relative_error": 0.4968115857613127,
+      "passes": false
+    },
+    {
+      "feature": "colour.mean_saturation",
+      "predicted": 0.05041529734929403,
+      "native": 0.011906314392884572,
+      "relative_error": 0.7638352837553719,
+      "passes": false
+    },
+    {
+      "feature": "flashing.peak_mean_luma_jump",
+      "predicted": 0.0072692688554525375,
+      "native": 0.004574677906930447,
+      "relative_error": 0.3706825269643082,
+      "passes": false
+    }
+  ],
+  "events": {
+    "source": {
+      "peak": [
+        2,
+        3
+      ],
+      "direction": "brightening",
+      "coherent_brightening_count": 0,
+      "coherent_darkening_count": 0
+    },
+    "native": {
+      "peak": [
+        1,
+        2
+      ],
+      "direction": "brightening",
+      "coherent_brightening_count": 0,
+      "coherent_darkening_count": 0
+    }
+  },
+  "events_match": false,
+  "summary": {
+    "mean_mae_rgb": 0.009713358245790005,
+    "mean_rmse_rgb": 0.03430797532200813,
+    "peak_mae_rgb": 0.011490637436509132,
+    "peak_rmse_rgb": 0.06506723910570145,
+    "source_sha256": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7",
+    "native_sha256": "b8ba88d5ffa47017f2d9b8a9ada017343d34dba056e07fc9eba8077f4803d610"
+  }
+}

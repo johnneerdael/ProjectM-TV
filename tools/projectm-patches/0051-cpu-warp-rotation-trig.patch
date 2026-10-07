@@ -16,27 +16,20 @@ Nonfinite angles remain nonfinite/unsupported; no identity substitution.
 
 --- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
 +++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
-@@ -48,14 +48,16 @@
-     glEnableVertexAttribArray(3);
-     glEnableVertexAttribArray(4);
+@@ -50,2 +50,3 @@
      glEnableVertexAttribArray(5);
 +    glEnableVertexAttribArray(6);
- 
-     // Only position & texture coordinates are per-vertex, colors are equal all over the grid (used for decay).
-     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, x)));         // Position, radius & angle
+
+@@ -54,3 +55,3 @@
      glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, radius)));    // Position, radius & angle
 -    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, zoom)));      // zoom, zoom exponent, rotation & warp
 +    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, zoom)));      // zoom, zoom exponent, rotation sine & warp
      glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, centerX)));   // Center coord
-     glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, distanceX))); // Distance
+@@ -58,2 +59,3 @@
      glVertexAttribPointer(5, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, stretchX)));  // Stretch
 +    glVertexAttribPointer(6, 1, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), reinterpret_cast<void*>(offsetof(MeshVertex, cosRot)));    // Rotation cosine
- 
-     glBindVertexArray(0);
-     glBindBuffer(GL_ARRAY_BUFFER, 0);
-@@ -239,7 +241,12 @@
-     // Cache some per-frame values as floats
-     float zoom = static_cast<float>(*perFrameContext.zoom);
+
+@@ -241,3 +243,8 @@
      float zoomExp = static_cast<float>(*perFrameContext.zoomexp);
 +    // MilkDrop 2 computes sinf/cosf after converting the evaluated angle to float.
 +    // GPU trig can collapse both outputs for large angles even at highp; CPU libm
@@ -45,75 +38,45 @@ Nonfinite angles remain nonfinite/unsupported; no identity substitution.
 +    float sinRot = std::sin(rot);
 +    float cosRot = std::cos(rot);
      float warp = static_cast<float>(*perFrameContext.warp);
-     float cx = static_cast<float>(*perFrameContext.cx);
-     float cy = static_cast<float>(*perFrameContext.cy);
-@@ -279,7 +286,9 @@
- 
-                 curVertex.zoom = static_cast<float>(*perPixelContext.zoom);
+@@ -281,3 +288,5 @@
                  curVertex.zoomExp = static_cast<float>(*perPixelContext.zoomexp);
 -                curVertex.rot = static_cast<float>(*perPixelContext.rot);
 +                float const pixelRot = static_cast<float>(*perPixelContext.rot);
 +                curVertex.sinRot = std::sin(pixelRot);
 +                curVertex.cosRot = std::cos(pixelRot);
                  curVertex.warp = static_cast<float>(*perPixelContext.warp);
-                 curVertex.centerX = static_cast<float>(*perPixelContext.cx);
-                 curVertex.centerY = static_cast<float>(*perPixelContext.cy);
-@@ -292,7 +301,8 @@
-             {
-                 curVertex.zoom = zoom;
+@@ -294,3 +303,4 @@
                  curVertex.zoomExp = zoomExp;
 -                curVertex.rot = rot;
 +                curVertex.sinRot = sinRot;
 +                curVertex.cosRot = cosRot;
                  curVertex.warp = warp;
-                 curVertex.centerX = cx;
-                 curVertex.centerY = cy;
 --- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
 +++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
-@@ -79,7 +79,7 @@
- 
-         float zoom{};
+@@ -81,3 +81,3 @@
          float zoomExp{};
 -        float rot{};
 +        float sinRot{};
          float warp{};
- 
-         float centerX{};
-@@ -90,6 +90,8 @@
- 
-         float stretchX{};
+@@ -92,2 +92,4 @@
          float stretchY{};
 +
 +        float cosRot{};
      };
- 
-     using VertexList = std::vector<MeshVertex>;
 --- a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
 +++ b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
-@@ -5,7 +5,7 @@
- #define angle rad_ang.y
- #define zoom transforms.x
+@@ -7,3 +7,3 @@
  #define zoomExp transforms.y
 -#define rot transforms.z
 +#define sinRotation transforms.z
  #define warp transforms.w
- 
- #define aspectX aspect.x
-@@ -19,6 +19,7 @@
- layout(location = 3) in vec2 warp_center;
- layout(location = 4) in vec2 warp_distance;
+@@ -21,2 +21,3 @@
  layout(location = 5) in vec2 stretch;
 +layout(location = 6) in float cosRotation;
- 
- uniform mat4 vertex_transformation;
- uniform vec4 aspect;
-@@ -67,8 +68,7 @@
-     float u2 = u - warp_center.x;
-     float v2 = v - warp_center.y;
- 
+
+@@ -69,4 +70,3 @@
+
 -    float cosRotation = cos(rot);
 -    float sinRotation = sin(rot);
 +    // CPU-computed from the emitted float angle, including large finite values.
      u = u2 * cosRotation - v2 * sinRotation + warp_center.x;
-     v = u2 * sinRotation + v2 * cosRotation + warp_center.y;
- 
