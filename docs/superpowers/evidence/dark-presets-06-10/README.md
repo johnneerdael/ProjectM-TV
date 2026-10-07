@@ -119,3 +119,13 @@ The metrics and CI-history reproduction recorded above are historical evidence,
 not dependencies of the current release gate. The local candidate is not the
 unchanged CI artifact or an official 2.3.18 release; the next reviewed main merge
 uses normal automatic versioning.
+
+## Current-main validation
+
+After incorporating main `6feb100b` and removing the superseded historical corpus
+workaround, the renderer source and both patch files are unchanged from the
+previously qualified candidate. The normal renderer suite passes 34/34; current
+Native-trails tooling passes 48 tests plus 20 subtests; the release core build/JVM
+check and strict MkDocs pass. No legacy corpus check or pinned source fixture is
+included in the PR or restored to the release gate. A fresh review and CI run are
+required for the updated head.
