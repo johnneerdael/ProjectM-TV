@@ -529,3 +529,19 @@ Resolve reader paths and reject changes during request preparation or execution;
 forecast/strict parsing and execution share identity; historical standalone
 equation diagnostics retain distinct parser/executor digests. Do not
 rebuild task adapters during active predictions.
+
+When declaring Android noise clock inputs, use the explicit libc++ microsecond
+period and active-bank generation timestamp. JNI replaces the initial bank when
+setting texture paths on the first preset draw; that bank uses the first-frame
+clock. Establish the sampled bank’s epoch before crediting paired controls.
+Forecasts reject seed/clock mismatches; preserve discarded and active banks separately.
+Never overwrite frozen source descriptors with comparison-derived labels.
+
+Source parsers and random adapters execute private snapshots of their hashed
+bytes. Corpus parsing freezes each authored source and rejects a reader digest
+that differs from the corpus identity before creating a cache row.
+
+Paired production noise must use the explicit raw-clock export policy and
+effective per-texture generator seeds. The default exporter retains Preset Lab’s
+subsystem/dimension seed mixing; it is not a production clock-seed bank. Verify
+the private instrumentation identity before reversing that mixing.

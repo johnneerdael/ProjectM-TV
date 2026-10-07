@@ -1,4 +1,6 @@
 import unittest
+import os
+import pytest
 import tempfile
 import subprocess
 import json
@@ -9,7 +11,7 @@ import importlib
 
 
 ROOT=Path(__file__).resolve().parents[2]
-BINARY=ROOT/'build/milk-analyzer/native/milk-noise-inputs'
+BINARY=Path(os.environ.get('MILK_NATIVE_NOISE_BINARY',ROOT/'build/milk-analyzer/native/milk-noise-inputs'))
 
 
 class NoiseInputsTest(unittest.TestCase):
@@ -39,11 +41,13 @@ class NoiseInputsTest(unittest.TestCase):
             row=manifest['textures']['noise_lq_lite'];(root/row['file']).write_bytes(bytes(len(payloads['noise_lq_lite'])))
             with self.assertRaisesRegex(ValueError,'hash'):module.NoiseBank(root)
 
-    def generate(self,names,seed=12345):
+    def generate(self,names,seed=12345,seed_policy=None):
         self.assertTrue(BINARY.is_file(),'native noise input exporter has not been built')
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);request=root/'request.json'
-            request.write_text(json.dumps({'names':names,'seed':seed,'output':str(root/'inputs')}))
+            settings={'names':names,'seed':seed,'output':str(root/'inputs')}
+            if seed_policy is not None:settings['seed_policy']=seed_policy
+            request.write_text(json.dumps(settings))
             process=subprocess.run([str(BINARY),str(request)],capture_output=True,text=True,timeout=30)
             self.assertEqual(process.returncode,0,process.stderr)
             manifest=json.loads(process.stdout)
@@ -80,3 +84,81 @@ class NoiseInputsTest(unittest.TestCase):
 
 
 if __name__=='__main__':unittest.main()
+
+
+
+def test_declared_android_noise_clock_rejects_first_frame_seed_for_surface_init():
+    from noise_inputs import validate_noise_clock
+    from types import SimpleNamespace
+    import pytest
+    bank=SimpleNamespace(manifest={'seed':3567620661,'seed_policy':'production-clock-seed-v1'})
+    contract={'policy':'core-thread-inputs-v1','noise_initialization_clock_ns':1000000000000000,
+              'noise_clock_period':'android-libcxx-microseconds-v1'}
+    with pytest.raises(ValueError,match='noise.*seed'):
+        validate_noise_clock(bank,contract,profile='gles300')
+
+
+def test_declared_android_noise_clock_matches_surface_init_low32_microseconds():
+    from noise_inputs import validate_noise_clock
+    from types import SimpleNamespace
+    bank=SimpleNamespace(manifest={'seed':3567587328,'seed_policy':'production-clock-seed-v1'})
+    contract={'policy':'core-thread-inputs-v1','noise_initialization_clock_ns':1000000000000000,
+              'noise_clock_period':'android-libcxx-microseconds-v1'}
+    assert validate_noise_clock(bank,contract,profile='gles300')==3567587328
+
+
+@pytest.mark.parametrize('clock',[True,-1,1.5,'1000',2**63])
+def test_declared_noise_clock_requires_explicit_supported_int64_nanoseconds(clock):
+    from noise_inputs import validate_noise_clock
+    from types import SimpleNamespace
+    import pytest
+    contract={'policy':'core-thread-inputs-v1','noise_initialization_clock_ns':clock,
+              'noise_clock_period':'android-libcxx-microseconds-v1'}
+    with pytest.raises(ValueError,match='noise.*clock'):
+        validate_noise_clock(SimpleNamespace(manifest={'seed':0}),contract,profile='gles300')
+
+
+def test_noise_clock_policy_does_not_extrapolate_other_platforms_or_missing_units():
+    from noise_inputs import validate_noise_clock
+    from types import SimpleNamespace
+    import pytest
+    base={'policy':'core-thread-inputs-v1','noise_initialization_clock_ns':0,
+          'noise_clock_period':'android-libcxx-microseconds-v1'}
+    for contract,profile in [(base,'glsl330'),({**base,'noise_clock_period':'nanoseconds'},'gles300'),
+                             ({k:v for k,v in base.items() if k!='noise_clock_period'},'gles300')]:
+        with pytest.raises(ValueError,match='noise.*clock'):
+            validate_noise_clock(SimpleNamespace(manifest={'seed':0}),contract,profile=profile)
+
+
+def test_unpaired_noise_generation_keeps_its_explicit_seed_without_android_claim():
+    from noise_inputs import validate_noise_clock
+    from types import SimpleNamespace
+    assert validate_noise_clock(SimpleNamespace(manifest={'seed':12345}),None,profile='glsl330') is None
+
+
+@pytest.mark.parametrize('contract',[{'policy':'core-thread-inputs-v1'},
+    {'policy':'core-thread-inputs-v1','noise_clock_period':'android-libcxx-microseconds-v1'}])
+def test_paired_noise_clock_cannot_omit_initialization_timestamp(contract):
+    from types import SimpleNamespace
+    from noise_inputs import validate_noise_clock
+    with pytest.raises(ValueError,match='noise.*clock'):
+        validate_noise_clock(SimpleNamespace(manifest={'seed':42}),contract,profile='gles300')
+
+
+def test_raw_production_noise_seed_is_not_mixed_by_lab_instrumentation():
+    helper=NoiseInputsTest()
+    names=['noise_lq_lite','noise_lq','noise_mq','noise_hq','noisevol_lq','noisevol_hq']
+    manifest,raw=helper.generate(names,3567620661,seed_policy='production-clock-seed-v1')
+    assert manifest['seed_policy']=='production-clock-seed-v1'
+    for name,row in manifest['textures'].items():
+        assert row['generator_seed']==3567620661
+        size=row['dimensions'][0];zoom=row['zoom_factor']
+        configured=3567620661^((101*0x9e3779b9)&0xffffffff)^(size*31+zoom)
+        _,expected=helper.generate([name],configured)
+        assert raw[name]==expected[name]
+
+
+def test_legacy_noise_policy_preserves_original_bytes_and_names_its_mixed_seeds():
+    helper=NoiseInputsTest();manifest,_=helper.generate(['noise_lq'],12345)
+    assert manifest['seed_policy']=='lab-subsystem-seed-v1'
+    assert manifest['textures']['noise_lq']['generator_seed']==12345^((101*0x9e3779b9)&0xffffffff)^(256*31+1)

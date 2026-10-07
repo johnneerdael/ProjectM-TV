@@ -807,3 +807,38 @@ during active forecasts. This guards producer attribution, not visual accuracy.
 Forecast and strict-feature callers supply their verified parser digest. Standalone
 historical equation diagnostics may intentionally use a newer evaluator; their
 reported execution digest stays separate from the archived source parser identity.
+
+
+Declared Android noise inputs now require the explicit
+`android-libcxx-microseconds-v1` clock period. For a GLES300
+`core-thread-inputs-v1` contract, the supplied noise bank seed must equal the
+low 32 bits of the **active bank’s generation** clock in microseconds.
+The JNI test runner creates an initial bank at surface creation, then replaces
+it on the first preset draw when setting texture search paths. That active bank
+uses the first-frame clock. Do not mistake the first logged bank for the bank
+actually sampled by the preset. Missing units, unsupported
+platforms, invalid timestamps and mismatched seeds reject the forecast. Unpaired
+source experiments keep their explicitly supplied noise seed without an Android
+matching-input claim. Always verify the observed initialization seed before
+crediting a paired comparison. Invalidate comparison credit only after establishing a mismatch in the active
+bank; matching descriptors alone does not validate shared inputs.
+
+Source parsing and random-ledger generation now execute private snapshots of the
+exact adapter bytes hashed at entry. Corpus parsing also snapshots each preset
+and rejects a reader that differs from the declared corpus digest before writing
+a cache row. A workspace rebuild cannot substitute different bytes under an old
+cache or producer identity; Android random execution uploads the same private
+adapter snapshot. These are attribution guards, not additional appearance evidence.
+
+
+Procedural seed export has two explicit policies. The default
+`lab-subsystem-seed-v1` preserves historical lab output. The opt-in
+`production-clock-seed-v1` supplies the raw production clock seed by reversing
+the verified private archive’s subsystem101 and size/zoom XORs separately for
+each texture. Unknown instrumentation cannot select this policy. The manifest
+records the policy and each effective `generator_seed`; paired-clock forecasts
+reject lab-policy banks. A direct unchanged2.3.15 AAR noise_lq control matched
+the repaired source samples within1RGB8 at256×144. This bounded control does not
+certify arbitrary drivers, complete presets or fresh randomized accuracy.
+Build new adapters in a separate directory; do not overwrite frozen binaries.
+`MILK_NATIVE_NOISE_BINARY` selects the prepared noise adapter for its tests.

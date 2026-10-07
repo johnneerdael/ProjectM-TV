@@ -113,12 +113,15 @@ _MODEL_IMPORT_HASHES=model_file_hashes()
 def read_source(path: Path, *, reader: Path, timeout=30) -> dict:
     path=Path(path);reader=Path(reader).resolve()
     raw=path.read_bytes()
-    binary_sha=hashlib.sha256(reader.read_bytes()).hexdigest()
+    reader_bytes=reader.read_bytes()
+    binary_sha=hashlib.sha256(reader_bytes).hexdigest()
     # Execute the exact bytes hashed here, even if the workspace file changes.
     with tempfile.TemporaryDirectory(prefix='milk-forecast-source-') as directory:
         frozen=Path(directory)/path.name
         frozen.write_bytes(raw)
-        process=subprocess.run([str(reader),str(frozen)],capture_output=True,text=True,timeout=timeout)
+        executable_dir=Path(directory)/'adapter';executable_dir.mkdir()
+        executable=executable_dir/'reader';executable.write_bytes(reader_bytes);executable.chmod(0o700)
+        process=subprocess.run([str(executable),str(frozen)],capture_output=True,text=True,timeout=timeout)
     if process.returncode:
         raise ValueError('source parser execution failed: '+process.stderr.strip())
     result=json.loads(process.stdout)
@@ -227,6 +230,8 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     material_sha=None if material_identity is None else digest(material_identity)
     procedural=noise_bank if materials is None else materials.noise_bank
     if procedural is not None:
+        from noise_inputs import validate_noise_clock
+        validate_noise_clock(procedural,domain.get('declared_random_profile'),profile=domain['profile'])
         expected_upload = 'RGBA' if domain['profile']=='gles300' else 'BGRA'
         if procedural.upload_format!=expected_upload:
             raise ValueError('procedural material upload profile mismatch')

@@ -49,12 +49,14 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
         raise ValueError('unknown random input policy')
     request = json.dumps(dict(seed=seed, events=events,rand_policy=rand_policy), allow_nan=False)
     binary = Path(binary).resolve()
-    binary_sha = hashlib.sha256(binary.read_bytes()).hexdigest()
+    binary_bytes = binary.read_bytes()
+    binary_sha = hashlib.sha256(binary_bytes).hexdigest()
     with tempfile.TemporaryDirectory(prefix='milk-random-') as directory:
         path = Path(directory) / 'request.json'
         path.write_text(request)
+        executable=Path(directory)/'adapter';executable.write_bytes(binary_bytes);executable.chmod(0o700)
         if adb is None:
-            process = subprocess.run([str(binary), str(path)], capture_output=True, text=True, timeout=timeout)
+            process = subprocess.run([str(executable), str(path)], capture_output=True, text=True, timeout=timeout)
         else:
             remote='/data/local/tmp/milk-random-'+uuid.uuid4().hex
             def command(*args):
@@ -64,7 +66,7 @@ def execute_ledger(binary: Path, *, seed: int, events: list[dict], timeout=30,
                 return result
             command('shell','-T','-n','mkdir',remote)
             try:
-                command('push',str(binary),remote+'/adapter')
+                command('push',str(executable),remote+'/adapter')
                 command('push',str(path),remote+'/request.json')
                 command('shell','-T','-n','chmod','700',remote+'/adapter')
                 process=command('shell','-T','-n',remote+'/adapter',remote+'/request.json')

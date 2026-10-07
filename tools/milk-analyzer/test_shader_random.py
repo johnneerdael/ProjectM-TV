@@ -312,3 +312,17 @@ def test_source_random_matrix_drives_the_composite_grid_with_native_uvs():
     points = np.concatenate((uv, np.zeros((8, 16, 1)), np.ones((8, 16, 1))), axis=-1)
     expected = np.clip(np.abs(points @ np.asarray(bank['rot_s1'])), 0, 1)
     np.testing.assert_allclose(result.display[...,:3], expected, atol=2e-7, rtol=0)
+
+
+def test_ledger_executes_original_reader_snapshot_after_rebuild(tmp_path,monkeypatch):
+    import shutil
+    from shader_random import execute_ledger
+    adapter=tmp_path/'random';shutil.copy2(BINARY,adapter)
+    expected=hashlib.sha256(adapter.read_bytes()).hexdigest();original=subprocess.run
+    def rebuild(args,**kwargs):
+        adapter.write_text('#!/bin/sh\nexit 7\n');adapter.chmod(0o755)
+        return original(args,**kwargs)
+    monkeypatch.setattr(subprocess,'run',rebuild)
+    result=execute_ledger(adapter,seed=12345,events=[create('warp'),load('warp')])
+    assert result['binary_sha256']==expected
+    assert result['draws_consumed']==212

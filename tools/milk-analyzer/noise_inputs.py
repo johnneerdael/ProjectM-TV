@@ -24,6 +24,33 @@ def decode_words(payload:bytes,dimensions,upload_format:str)->np.ndarray:
     return channels.reshape(shape)
 
 
+def validate_noise_clock(bank,contract:dict|None,*,profile:str)->int|None:
+    """Bind declared Android procedural inputs to their initialization clock.
+
+    Android libc++ system_clock counts microseconds, independently of the
+    declared render-frame clock. Other platform periods require separate policy.
+    """
+    if not contract:return None
+    if contract.get('policy')!='core-thread-inputs-v1' and 'noise_initialization_clock_ns' not in contract:return None
+    if 'noise_initialization_clock_ns' not in contract:
+        raise ValueError('declared Android noise initialization clock required')
+    if (contract.get('policy')!='core-thread-inputs-v1' or profile!='gles300' or
+            contract.get('noise_clock_period')!='android-libcxx-microseconds-v1'):
+        raise ValueError('explicit supported Android noise clock policy required')
+    clock=contract['noise_initialization_clock_ns']
+    if type(clock) is not int or not 0<=clock<2**63:
+        raise ValueError('noise initialization clock must be nonnegative int64 nanoseconds')
+    seed=(clock//1000)&0xffffffff
+    if bank.manifest.get('seed_policy')!='production-clock-seed-v1':
+        raise ValueError('production procedural noise seed policy required for paired clock inputs')
+    actual=bank.manifest.get('seed')
+    if type(actual) is not int or not 0<=actual<2**32 or actual!=seed:
+        raise ValueError('procedural noise seed differs from declared initialization clock')
+    if any(row.get('generator_seed')!=seed for row in bank.manifest.get('textures',{}).values()):
+        raise ValueError('procedural noise texture generator seed differs from declared clock')
+    return seed
+
+
 class NoiseBank:
     def __init__(self,directory:Path,*,upload_format:str|None=None):
         root=Path(directory).resolve();self.manifest=json.loads((root/'manifest.json').read_text())

@@ -1,0 +1,49 @@
+{
+  "root_cause": "Source-only CPU archive mixes lab base seed with subsystem101 and texture size/zoom; production uses raw system-clock seed",
+  "active_bank_clock_ns": 1000000033333333,
+  "active_clock_seed_uint32": 3567620661,
+  "discarded_surface_bank_seed": 3567587328,
+  "lab_mix": "(101 * 0x9e3779b9 mod 2^32) xor (size*31+zoom)",
+  "native_library_unchanged": true,
+  "aar_version": "2.3.15",
+  "aar_sha256": "fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327",
+  "native_sha256": "5f6aab4f774f90d4912229bb4262f79bc246e12bf4cd838cc4a7a67354e42766",
+  "direct_control_result": {
+    "max_rgb8_error": 1,
+    "mean_rgb8_error": 0.08947301793981481,
+    "exact_fraction": 0.9105269820601852,
+    "within_one_rgb8_fraction": 1.0,
+    "scope": "repair diagnostic, reference already captured; no randomized credit",
+    "root_cause": "Lab XOR seed mixing differs from production raw-clock seed"
+  },
+  "new_raw_mode_bytes_match_compensation_control": true,
+  "exporter_sha256": "fef1d7fa44af6ec29773270dfc5f6c026052b10d2c89792bbb5c31420b6218bc",
+  "generator_policy": "production-clock-seed-v1",
+  "source_epoch_firstframe_correct": true,
+  "first_surface_only_diagnosis_superseded": true,
+  "original_grade_acceptance_credit": false,
+  "original_grades_preserved": [
+    100,
+    100,
+    100,
+    97.5
+  ],
+  "same_preset_retest": {
+    "frames": 60,
+    "mean_mae_rgb": 0.0018412856152281165,
+    "numerical_relative_errors": {
+      "motion.median_speed_viewports_per_second": 0.018624069883015616,
+      "motion.p95_speed_viewports_per_second": 0.01107500091073855,
+      "colour.mean_luma": 0.0002530508769020733,
+      "colour.mean_saturation": 0.0007489274234395584,
+      "flashing.peak_mean_luma_jump": 0.00016770087299205967
+    },
+    "independent_geometry_review_pending": false,
+    "randomized_acceptance_credit": false,
+    "independently_validated_repair_rubric_score": 100,
+    "scope": "repair control; no fresh randomized acceptance credit"
+  },
+  "recorded_utc": "2026-10-07T02:58:08.081796+00:00",
+  "exporter_path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/visual-loop/source49/noise-raw-adapter/milk-noise-inputs",
+  "exporter_source_sha256": "c033b68733f6074a8c7abc44f5d5485ef17c2752f550e2ce77d4c14fa27b86ef"
+}

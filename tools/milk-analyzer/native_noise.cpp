@@ -45,8 +45,14 @@ int main(int argc,char** argv) {
         if(!request.at("seed").is_number_integer()||request.at("seed")<0||request.at("seed")>UINT32_MAX)
             throw std::runtime_error("seed must be uint32");
         auto seed=request.at("seed").get<uint32_t>();
-        auto seedText=std::to_string(seed);
-        if(setenv("PRESET_LAB_SEED",seedText.c_str(),1)!=0)throw std::runtime_error("cannot set procedural seed");
+        const auto policy=request.value("seed_policy",std::string("lab-subsystem-seed-v1"));
+        if(policy!="lab-subsystem-seed-v1" && policy!="production-clock-seed-v1")
+            throw std::runtime_error("unsupported procedural seed policy");
+        const auto identity=json::parse(kEngineIdentity);
+        const bool knownMix=identity.value("instrumentation_sha256",std::string{})==
+            "254db5d7418da6162c8db449ed400df19e9b6391ba405c0d20a0e19c3a005ef8";
+        if(policy=="production-clock-seed-v1" && !knownMix)
+            throw std::runtime_error("production noise seed requires verified lab instrumentation");
         std::filesystem::path output=request.at("output").get<std::string>();
         std::filesystem::create_directories(output);
         struct Settings {int size,zoom,dimensions;};
@@ -55,7 +61,8 @@ int main(int argc,char** argv) {
             {"noise_mq",{256,4,2}},{"noise_hq",{256,8,2}},
             {"noisevol_lq",{32,1,3}},{"noisevol_hq",{32,4,3}}};
         json manifest={{"schema_version",1},{"basis","pinned native procedural texture generation"},
-            {"uses_rendered_reference",false},{"seed",seed},{"engine_archive_sha256",kEngineArchiveSha},
+            {"uses_rendered_reference",false},{"seed",seed},{"seed_policy",policy},
+            {"engine_archive_sha256",kEngineArchiveSha},
             {"engine_identity",json::parse(kEngineIdentity)},{"packed_word_encoding","uint32 little endian"},
             {"native_upload_format",NoiseAccess::GetPreferredInternalFormat()==GL_BGRA?"BGRA":"RGBA"},
             {"textures",json::object()}};
@@ -63,6 +70,13 @@ int main(int argc,char** argv) {
             auto name=value.get<std::string>();auto found=settings.find(name);
             if(found==settings.end())throw std::runtime_error("unknown builtin noise input: "+name);
             auto spec=found->second;
+            // The private archive XORs lab::Seed(101) with dimensions. Invert
+            // only that verified test-host policy to supply production's raw seed.
+            const uint32_t mix=101u*0x9e3779b9u ^ static_cast<uint32_t>(spec.size*31+spec.zoom);
+            const uint32_t configured=policy=="production-clock-seed-v1" ? seed^mix : seed;
+            const auto seedText=std::to_string(configured);
+            if(setenv("PRESET_LAB_SEED",seedText.c_str(),1)!=0)
+                throw std::runtime_error("cannot set procedural seed");
             auto words=spec.dimensions==2?NoiseAccess::generate2D(spec.size,spec.zoom):NoiseAccess::generate3D(spec.size,spec.zoom);
             std::vector<unsigned char> bytes;bytes.reserve(words.size()*4);
             for(auto word:words)for(int shift=0;shift<32;shift+=8)bytes.push_back(static_cast<unsigned char>(word>>shift));
@@ -71,6 +85,7 @@ int main(int argc,char** argv) {
             target.close();if(!target)throw std::runtime_error("cannot write procedural input");
             manifest["textures"][name]={{"dimensions",{spec.size,spec.size,spec.dimensions==3?spec.size:1}},
                 {"zoom_factor",spec.zoom},{"file",file},{"sha256",sha256(bytes)}};
+            if(knownMix)manifest["textures"][name]["generator_seed"]=configured^mix;
         }
         std::ofstream saved(output/"manifest.json");saved<<manifest.dump(2)<<'\n';saved.close();
         if(!saved)throw std::runtime_error("cannot write manifest");

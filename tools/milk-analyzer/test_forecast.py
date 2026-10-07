@@ -653,3 +653,40 @@ def test_streamed_forecast_returns_source_colour_flash_and_motion_descriptors():
     assert descriptors['flashing']['peak_mean_luma_jump']<1e-6
     assert descriptors['motion']['median_speed_viewports_per_second'] is None
     assert descriptors['appearance_accuracy_verified'] is False
+
+
+def test_forecast_rejects_noise_seed_from_different_declared_clock_phase(tmp_path):
+    import json
+    from noise_inputs import NoiseBank
+    payload=np.array([0xff663311],dtype='<u4').tobytes()
+    (tmp_path/'noise.bin').write_bytes(payload)
+    manifest={'schema_version':1,'uses_rendered_reference':False,'seed':3567620661,'seed_policy':'production-clock-seed-v1',
+        'packed_word_encoding':'uint32 little endian','native_upload_format':'RGBA',
+        'textures':{'noise_lq':{'file':'noise.bin','dimensions':[1,1,1],'generator_seed':3567620661,
+        'sha256':hashlib.sha256(payload).hexdigest()}}}
+    (tmp_path/'manifest.json').write_text(json.dumps(manifest));bank=NoiseBank(tmp_path)
+    source=native(BASE);settings=domain();settings['profile']='gles300'
+    settings['declared_random_profile']={'policy':'core-thread-inputs-v1',
+        'noise_initialization_clock_ns':1000000000000000,
+        'noise_clock_period':'android-libcxx-microseconds-v1'}
+    with pytest.raises(ValueError,match='noise seed'):
+        predict(source,audio=audio(1),domain=settings,noise_bank=bank)
+    manifest['seed']=3567587328;manifest['textures']['noise_lq']['generator_seed']=3567587328
+    (tmp_path/'manifest.json').write_text(json.dumps(manifest));bank=NoiseBank(tmp_path)
+    assert predict(source,audio=audio(1),domain=settings,noise_bank=bank)['status']=='computed'
+
+
+def test_read_source_executes_snapshotted_reader_when_original_is_rebuilt(tmp_path,monkeypatch):
+    import shutil,subprocess
+    from forecast import read_source
+    reader=tmp_path/'reader';shutil.copy2(BINARIES/'milk-native-reader',reader)
+    expected=hashlib.sha256(reader.read_bytes()).hexdigest()
+    preset=tmp_path/'original.milk';preset.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nzoom=1.25\n')
+    original=subprocess.run
+    def rebuild(args,**kwargs):
+        reader.write_text('#!/bin/sh\nexit 7\n');reader.chmod(0o755)
+        return original(args,**kwargs)
+    monkeypatch.setattr(subprocess,'run',rebuild)
+    result=read_source(preset,reader=reader)
+    assert result['reader_sha256']==expected
+    assert float(result['values']['zoom'])==1.25

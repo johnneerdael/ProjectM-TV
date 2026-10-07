@@ -7,15 +7,24 @@ import json
 from pathlib import Path
 import subprocess
 import time
+import tempfile
 
 
 def read_preset(binary: Path, path: Path, output: Path, reader_sha: str) -> dict:
-    source_sha = hashlib.sha256(path.read_bytes()).hexdigest()
+    raw=path.read_bytes()
+    source_sha = hashlib.sha256(raw).hexdigest()
+    reader_bytes=Path(binary).resolve(strict=True).read_bytes()
+    if hashlib.sha256(reader_bytes).hexdigest()!=reader_sha:
+        raise ValueError('corpus reader identity mismatch')
     result = {"preset": path.name, "preset_sha256": source_sha, "reader_sha256": reader_sha,
               "semantics_complete": False}
     try:
-        process = subprocess.run([str(binary), str(path)], capture_output=True, text=True,
-                                 errors="replace", timeout=5)
+        with tempfile.TemporaryDirectory(prefix='milk-scan-inputs-') as directory:
+            source=Path(directory)/path.name;source.write_bytes(raw)
+            adapter_dir=Path(directory)/'adapter';adapter_dir.mkdir()
+            adapter=adapter_dir/'reader';adapter.write_bytes(reader_bytes);adapter.chmod(0o700)
+            process = subprocess.run([str(adapter), str(source)], capture_output=True, text=True,
+                                     errors="replace", timeout=5)
         result["diagnostics"] = process.stderr
         if process.returncode:
             result.update(syntax_complete=False, error=f"native reader exit {process.returncode}")
