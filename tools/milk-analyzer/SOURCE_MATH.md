@@ -58,6 +58,27 @@ The supplied local references are pinned in
 These are source references, not proof of old D3D device-register history, Windows
 compiler precision or current GPU behaviour.
 
+Justin Frankel's WDL EEL2 backends are additionally pinned at
+`d30c30b356b2b7fb1654def8dbda90066f43061a` in the same fixture. The supplied
+[x64 SSE assembly](https://github.com/justinfrankel/WDL/blob/d30c30b356b2b7fb1654def8dbda90066f43061a/WDL/eel2/asm-nseel-x64-sse.asm#L452-L460)
+implements bitwise OR with double-to-signed64 truncation (`cvttsd2si`), OR and
+conversion back to double. The corresponding
+[AArch64 inline assembly](https://github.com/justinfrankel/WDL/blob/d30c30b356b2b7fb1654def8dbda90066f43061a/WDL/eel2/asm-nseel-aarch64-gcc.c#L390-L399)
+uses `fcvtzs`, `orr` and `scvtf`. These are EEL backend operations, not shader
+intrinsics. Finite, in-range integer conversion and backend edge cases must be
+distinguished; do not infer identical overflow/NaN conversion from equivalent
+ordinary inputs.
+
+The published TV target executes its patched projectm-eval implementation,
+not these assembly files. Its `TreeFunctions.c` chooses the signed integer width
+from `PRJM_F_SIZE` (32 bits for4,64 bits otherwise); the current prepared source49
+adapter is built with8. It already executes bitwise OR through that evaluator.
+The same separation matters for `invsqrt`: these WDL backends seed the historical
+float32 bit approximation while the double projectm-eval implementation uses a
+double-width seed. Preserve the target's numerical semantics and reference the
+original backend separately. Neither instruction inspection nor CPU execution
+alone certifies published-AAR parity for exceptional inputs.
+
 ## Verified mathematical details worth retaining
 
 | Topic | Reference evidence | Predictor implication |

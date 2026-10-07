@@ -22,6 +22,16 @@
         "src/ns-eel2/nseel-eval.c": "0020e0caaa5696c00476c1337c381766575734166232ab4f45cf8d7f0bffcd14",
         "src/ns-eel2/asm-nseel-x86-msvc.c": "57484a08429ff49067e99e618d1bae7b0b84edb3f737396193044ff5420458a2"
       }
+    },
+    "wdl_eel2": {
+      "remote": "https://github.com/justinfrankel/WDL",
+      "commit": "d30c30b356b2b7fb1654def8dbda90066f43061a",
+      "files": {
+        "WDL/eel2/asm-nseel-x64-sse.asm": "1f054988955499767387e7c8e87792dea7046e43e72a53d6a3897dd7f59a9b8c",
+        "WDL/eel2/asm-nseel-aarch64-gcc.c": "7bb1aacba975a33007d2b6bf7c1bc41dc3241b5c126253126a0b7d39fc2def2b",
+        "WDL/eel2/nseel-cfunc.c": "7e2e1146c2435e28a81d2e21ee04757fc7f36ef246eaaf08db66b92e822113ef"
+      },
+      "scope": "Architecture-specific assembly/source reference; not the evaluator executed by ProjectM-TV or proof of edge-case parity"
     }
   },
   "milkdropfs_matches_user_original225c": true,
