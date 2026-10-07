@@ -1135,3 +1135,9 @@ results fails to reproduce the full map. These controls narrow the gap to the
 half-format accumulation path without qualifying an exact predictor rule or
 establishing a production engine defect. See
 `fixtures/half-filter-format-accumulation-2026-10-07.json`.
+
+Local half-texel perturbations retain additional mismatches near output
+thresholds. They identify required small pre-final deficits in two fresh cases,
+but do not establish an exact arithmetic rule. These failures are preserved in
+`fixtures/half-filter-local-thresholds-2026-10-07.json`; no predictor filtering
+change or repaired-preset credit follows from the diagnostic.
