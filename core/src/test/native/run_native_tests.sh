@@ -65,6 +65,15 @@ fi
 
 SAN="-fsanitize=address,undefined"
 [ "${NO_SANITIZERS:-0}" = "1" ] && SAN=""
+# Real JVM/CheckJNI coverage of standard UTF-8 names, including supplementary Unicode.
+JNI_TEST_EXT=so
+[ "$(uname)" = "Darwin" ] && JNI_TEST_EXT=dylib
+g++ -std=c++17 -O1 -shared -fPIC -pthread \
+    -I"$HERE/stubs" -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/$JNI_OS" \
+    -I"$ROOT/third_party/projectm/src/api/include" -I"$ROOT/core/src/main/cpp" \
+    "$HERE/unicode_name_test.cpp" -o "$WORK/unicode_name_test.$JNI_TEST_EXT"
+"$JAVA_HOME/bin/javac" -d "$WORK" "$HERE/UnicodeNameTest.java"
+"$JAVA_HOME/bin/java" -Xcheck:jni -cp "$WORK" UnicodeNameTest "$WORK/unicode_name_test.$JNI_TEST_EXT"
 g++ -std=c++17 -O1 -g $SAN -pthread \
     -I"$HERE/stubs" -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/$JNI_OS" \
     -I"$ROOT/third_party/projectm/src/api/include" -I"$ROOT/core/src/main/cpp" \

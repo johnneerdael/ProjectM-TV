@@ -18,10 +18,11 @@ The engine combines expanded preset compatibility with authored-scale feedback a
 
 | Preset mood | What it includes |
 |---|---|
-| **All — default** | The complete 9,606-preset library, in shuffled order |
+| **All — default** | The bundled 9,606-preset library plus any uploaded pack, in shuffled order |
 | **Chill** | Beta activity scores 1–30 |
 | **Normal** | Beta activity scores 25–75 |
 | **Intense** | Beta activity scores 70–100 |
+| **Custom** | Only the uploaded pack; appears and becomes selected after upload |
 
 The choice is saved. Your TV's skip list and performance checks still apply, so the eligible count can be lower than the number packaged in a collection.
 

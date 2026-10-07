@@ -78,6 +78,22 @@ add_test(NAME user-texture-premultiplication-regressions COMMAND user-texture-pr
     "${CMAKE_CURRENT_BINARY_DIR}/user-texture-premultiplication-fixtures")
 set_tests_properties(user-texture-premultiplication-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+add_executable(texture-routing-regressions texture_routing_test.cpp)
+target_compile_features(texture-routing-regressions PRIVATE cxx_std_17)
+target_compile_definitions(texture-routing-regressions PRIVATE GL_SILENCE_DEPRECATION)
+target_include_directories(texture-routing-regressions PRIVATE
+    "${PROJECTM_SOURCE}/src/libprojectM"
+    "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset"
+    "${PROJECTM_SOURCE}/vendor"
+    "${PROJECTM_SOURCE}/vendor/projectm-eval/projectm-eval/api")
+target_link_libraries(texture-routing-regressions PRIVATE libprojectM::projectM)
+if(NOT APPLE)
+    target_compile_definitions(texture-routing-regressions PRIVATE USE_GLES)
+    target_link_libraries(texture-routing-regressions PRIVATE ${REGRESSION_GL_TARGET})
+endif()
+add_test(NAME texture-routing-regressions COMMAND texture-routing-regressions "${CMAKE_CURRENT_BINARY_DIR}/routing-fixtures")
+set_tests_properties(texture-routing-regressions PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 add_executable(warp-zoom-regressions warp_zoom_test.cpp)
 target_compile_features(warp-zoom-regressions PRIVATE cxx_std_17)
 target_compile_definitions(warp-zoom-regressions PRIVATE GL_SILENCE_DEPRECATION)

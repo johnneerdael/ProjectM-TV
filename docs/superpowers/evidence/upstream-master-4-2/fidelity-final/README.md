@@ -1,5 +1,7 @@
 # Completed release-bound fidelity validation
 
+Current integration update (2026-10-07): main PR #50 merged as `dd59a791` and published **v2.3.16**. Its verified unchanged AAR SHA256 is `08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd`. Custom-pack app/JNI changes are being integrated; historical patch 0050 is ported as current 0010. The v2.3.15 matrix below remains an immutable completed checkpoint. It does not certify the new renderer or latest baseline; fresh source/runtime/image validation and final review/CI remain required.
+
 Validated 2026-10-07 on the task-owned API34 ARM64 Android emulator with Apple M4 Pro host GPU acceleration, GLES 3.0 / GLSL ES 3.00. The user explicitly waived physical-TV validation for this migration. This is one backend's coverage, not a universal device or performance claim.
 
 The baseline is the unchanged published **ProjectM-TV v2.3.15 AAR**, SHA256 `fa4bdd657a592b41eeef7d75c82982bf1fecf5404b99aba8ebba5c56f6a91327`, verified against the release digest/checksums, source `43023889ec38cf1250f3bfcaaf079a840acbdf76`, all 49 historical patches and the complete asset catalog. It is not stock libprojectM. Candidate renderer source is `c3872be3fec33318265172b5b41972aa9571efb7`, upstream `6f64807467e312034883a4389e6aa80a675458bc`, evaluator `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a`, with nine compatibility patches. Later task commits change documentation/evidence and historical comparison orchestration; production renderer files remain unchanged.

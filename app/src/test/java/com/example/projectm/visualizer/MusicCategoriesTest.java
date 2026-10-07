@@ -4,6 +4,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MusicCategoriesTest {
+    @Test public void customIsSelectableOnlyWithAnInstalledPack() {
+        assertEquals("custom", MusicCategories.normalize("custom"));
+        assertEquals("Custom", MusicCategories.label("custom"));
+        assertArrayEquals(new String[]{"all", "custom"},
+                MusicCategories.available(id -> "custom".equals(id) ? 50000 : 0));
+        assertArrayEquals(new String[]{"all"}, MusicCategories.available(id -> 0));
+    }
     @Test public void onlyAvailablePredictiveGroupsAreSelectable() {
         String[] ids = MusicCategories.available(id -> "all".equals(id) ? 14 : "intense".equals(id) ? 3 : 0);
         assertArrayEquals(new String[]{"all", "intense"}, ids);

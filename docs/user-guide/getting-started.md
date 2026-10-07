@@ -97,7 +97,7 @@ Covers have only been verified with Spotify and [Milkbeat](https://github.com/jo
 
 ## Choose a preset mood
 
-Open the panel with **Center**, **Enter** or **Menu**, move to **Preset mood**, and use **Left / Right** or **Center** to select a collection. **All** remains the default and uses the full library.
+Open the panel with **Center**, **Enter** or **Menu**, move to **Preset mood**, and use **Left / Right** or **Center** to select a collection. **All** is the initial default and uses the bundled library plus any uploaded custom pack. Uploading a pack selects **Custom**, which plays only that pack; see [Custom preset pack](settings.md#custom-preset-pack).
 
 | Collection | Beta score range | Intended starting point |
 |---|---|---|
@@ -136,6 +136,6 @@ If playback stutters, lower **Advanced › Detail** first. The [settings referen
 
 When Android asks whether ProjectM TV may install unknown apps, enable that permission for ProjectM TV, reopen it, and select **Install** again. This is separate from notification access and is only needed to install an app-downloaded update. You can also download and install the latest APK using Downloader or a computer as described above.
 
-Audio is processed in memory. The app makes no network connections while its auto-update setting is off.
+Audio is processed in memory. Network access is limited to opt-in auto-update and the temporary local HTTP listener while **Advanced › Custom preset pack** is open. Custom packs stay on the TV.
 
 Resolution defaults to Auto up to the detected panel size, using target FPS and live memory headroom. Use **Settings › Advanced › Resolution › Native (4K)** for full-panel 4K testing; supported fixed sizes are also available. Fixed/Native ignore FPS downshifts, but live memory protection can still lower the actual size shown in Diagnostics. Native trails defaults to Standard; its saved level remains available while resolution changes. The manual Memory limit remains retired.
