@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "scope": "LatestfullAARobservedblurepochdiagnosis,noindependentpredictioncredit",
+  "delayed_bank": {
+    "scope": "Observedpreviousinputblurdiagnosis,noindependentaccuracycredit",
+    "bank": [
+      {
+        "level": 1,
+        "event": 22,
+        "different_channels": 9,
+        "max_rgb8": 1
+      },
+      {
+        "level": 2,
+        "event": 24,
+        "different_channels": 3,
+        "max_rgb8": 1
+      }
+    ],
+    "source_sample": [
+      [
+        0.005637255031615496,
+        0.005637255031615496,
+        0.005637255031615496
+      ]
+    ],
+    "native_bank_source_sampler_sample": [
+      [
+        0.00637254910543561,
+        0.00637254910543561,
+        0.00637254910543561
+      ]
+    ],
+    "final_pixels_unchanged": true
+  },
+  "first_passes": {
+    "horizontal21_mismatches": 43,
+    "vertical22_observed_input_mismatches": 0,
+    "scope": "Sameobservedsourceframe5, noaccuracycredit"
+  },
+  "horizontal_fma_hypothesis": {
+    "forward_fma_mismatches": 0,
+    "max_rgb8": 0,
+    "scope": "Firsthorizontalpasspostobservationhypothesis,noqualification"
+  },
+  "cause_candidate": "FirsthorizontalweightedaccumulationseparatevscontractedFMA;43bytefailures clearunderforwardFMA, freshqualificationpending",
+  "remaining": "Implementafterfreshqualification, retestsameoriginalpreset; Cosmicfiltering stillopen",
+  "randomized_credit": 0
+}

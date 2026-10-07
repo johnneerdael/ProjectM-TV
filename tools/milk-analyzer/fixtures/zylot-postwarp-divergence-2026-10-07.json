@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "scope": "Read-onlylatestfullAARpostwarpcapture,pixelpreservationverified; noaccuracycredit",
+  "comparison": [
+    {
+      "frame": 1,
+      "different_channels": 0,
+      "max_rgb8": 0
+    },
+    {
+      "frame": 2,
+      "different_channels": 0,
+      "max_rgb8": 0
+    },
+    {
+      "frame": 3,
+      "different_channels": 0,
+      "max_rgb8": 0
+    },
+    {
+      "frame": 4,
+      "different_channels": 0,
+      "max_rgb8": 0
+    },
+    {
+      "frame": 5,
+      "different_channels": 0,
+      "max_rgb8": 0
+    },
+    {
+      "frame": 6,
+      "different_channels": 0,
+      "max_rgb8": 0
+    },
+    {
+      "frame": 7,
+      "different_channels": 189,
+      "max_rgb8": 1
+    }
+  ],
+  "shape_attribute_replay": {
+    "scope": "Observedinputreplayforcausality,noindependentforecastcredit",
+    "rows": [
+      {
+        "shape": 1,
+        "different_channels": 0,
+        "max_rgb8": 0
+      },
+      {
+        "shape": 2,
+        "different_channels": 0,
+        "max_rgb8": 0
+      },
+      {
+        "shape": 3,
+        "different_channels": 0,
+        "max_rgb8": 0
+      }
+    ]
+  },
+  "corrected_attribution": "All189frame7feedbackdifferencesalreadyexistpostwarp before shapes; earliergeometryattribution superseded",
+  "remaining": "Warp pow/main-or-blur-samplingprecision needsrootcause; originalmedianmissopen",
+  "observer_sha256": "72dcc610310c2767bb8b408ed5512ceb68a401dea214b47e6f8f70aa775d27cc",
+  "native_warp_sha256": "aea8aefa05e7cb094b2d1e5ca5ecf8feaa2c6eb473535f9ab6e7c13a21dd0b3e",
+  "randomized_credit": 0
+}
