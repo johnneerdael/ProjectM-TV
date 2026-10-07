@@ -1108,3 +1108,12 @@ Both profiles reject nonfinite input and finite values above 65,504.
 This models storage only: half-texture filtering remains an
 independent unresolved boundary, and the cosmic-tear motion miss stays open.
 See `fixtures/motion-uv-half-storage-2026-10-07.json`.
+
+Further isolated half-filter controls retain mismatches even for an affine
+texture varying along one axis. Equivalent local phases on 8×8 and 16×16 maps
+match each other, and floating-point readback reproduces the packed results;
+neither texture-size normalization nor packed output explains those misses.
+Exact fixed-fraction ties and nearby nonexact coordinates differ. No exact
+filter rule is accepted from these controls, and the original motion miss stays
+open. Sources, frozen alternatives and observed hashes are recorded in
+`fixtures/half-uv-filtering-axis-research-2026-10-07.json`.

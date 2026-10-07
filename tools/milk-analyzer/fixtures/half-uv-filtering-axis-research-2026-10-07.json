@@ -1,0 +1,855 @@
+{
+  "schema_version": 1,
+  "scope": "Isolated numerical GPU filtering research, noAARloaded, no randomized credit",
+  "findings": [
+    "Axis-only affine map retains4/32 fixed8-nearest-half misses",
+    "Exactly representable fixed fractions retain8/56 nearest-even misses; positive half ties observed upward in selected cases",
+    "Size16repeats32/32 size8samples exactly",
+    "FP32framebufferreadback repeats32/32 packed samples exactly",
+    "No accepted exact filtering rule; original preset miss remains open"
+  ],
+  "controls": [
+    {
+      "control": "half-uv-affine-axis-isolation",
+      "artifacts": {
+        "independent-weights-rejection.json": "6fb82533071f827b093e63b3d2b1b6b9d7a7e314f49de5bb3ca27d3303ab6da5",
+        "comparison.json": "e9e02112a703d96f074fc68ef725e74336eaf883deb895e5ec74eef82fa088c1",
+        "frozen-predictions.json": "066ba60709e759410a72748038945ec323b56d78088f673d9b333c3de52eb7b7",
+        "HalfUvAffineProbe.java": "3e359e638f223dc8103e94f44f5279a2e5234d034487cac74ecc9bae41f89d83",
+        "complementary-coefficient-rejection.json": "9d3471b6a00318bb999a23a57ae694ce99b74eca0a364104c317fc89f6a09708",
+        "stdout.json": "992cba06d67b038eec63f36cc3c7a713654045e7d9e1099694b5e0f65c62ce36"
+      },
+      "comparison": [
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.252685546875,
+          "exact": 0.2528076171875,
+          "nearest_half": 0.2529296875,
+          "matches": false
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 1,
+          "sample": 0.26318359375,
+          "exact": 0.2630615234375,
+          "nearest_half": 0.26318359375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 2,
+          "sample": 0.271240234375,
+          "exact": 0.2711181640625,
+          "nearest_half": 0.27099609375,
+          "matches": false
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 3,
+          "sample": 0.279541015625,
+          "exact": 0.279541015625,
+          "nearest_half": 0.279541015625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 4,
+          "sample": 0.265625,
+          "exact": 0.265625,
+          "nearest_half": 0.265625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 5,
+          "sample": 0.25,
+          "exact": 0.2501220703125,
+          "nearest_half": 0.25,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 6,
+          "sample": 0.2734375,
+          "exact": 0.2734375,
+          "nearest_half": 0.2734375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 7,
+          "sample": 0.25390625,
+          "exact": 0.25390625,
+          "nearest_half": 0.25390625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.30126953125,
+          "exact": 0.30126953125,
+          "nearest_half": 0.30126953125,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 1,
+          "sample": 0.384765625,
+          "exact": 0.384765625,
+          "nearest_half": 0.384765625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 2,
+          "sample": 0.5693359375,
+          "exact": 0.5693359375,
+          "nearest_half": 0.5693359375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 3,
+          "sample": 0.619140625,
+          "exact": 0.619140625,
+          "nearest_half": 0.619140625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 4,
+          "sample": 0.32470703125,
+          "exact": 0.32470703125,
+          "nearest_half": 0.32470703125,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 5,
+          "sample": 0.62353515625,
+          "exact": 0.62353515625,
+          "nearest_half": 0.62353515625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 6,
+          "sample": 0.34375,
+          "exact": 0.34375,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 7,
+          "sample": 0.62060546875,
+          "exact": 0.62060546875,
+          "nearest_half": 0.62060546875,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.252685546875,
+          "exact": 0.2528076171875,
+          "nearest_half": 0.2529296875,
+          "matches": false
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 1,
+          "sample": 0.26318359375,
+          "exact": 0.2630615234375,
+          "nearest_half": 0.26318359375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 2,
+          "sample": 0.271240234375,
+          "exact": 0.2711181640625,
+          "nearest_half": 0.27099609375,
+          "matches": false
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 3,
+          "sample": 0.279541015625,
+          "exact": 0.279541015625,
+          "nearest_half": 0.279541015625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 4,
+          "sample": 0.265625,
+          "exact": 0.265625,
+          "nearest_half": 0.265625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 5,
+          "sample": 0.25,
+          "exact": 0.2501220703125,
+          "nearest_half": 0.25,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 6,
+          "sample": 0.2734375,
+          "exact": 0.2734375,
+          "nearest_half": 0.2734375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 7,
+          "sample": 0.25390625,
+          "exact": 0.25390625,
+          "nearest_half": 0.25390625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.30126953125,
+          "exact": 0.30126953125,
+          "nearest_half": 0.30126953125,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 1,
+          "sample": 0.384765625,
+          "exact": 0.384765625,
+          "nearest_half": 0.384765625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 2,
+          "sample": 0.5693359375,
+          "exact": 0.5693359375,
+          "nearest_half": 0.5693359375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 3,
+          "sample": 0.619140625,
+          "exact": 0.619140625,
+          "nearest_half": 0.619140625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 4,
+          "sample": 0.32470703125,
+          "exact": 0.32470703125,
+          "nearest_half": 0.32470703125,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 5,
+          "sample": 0.62353515625,
+          "exact": 0.62353515625,
+          "nearest_half": 0.62353515625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 6,
+          "sample": 0.34375,
+          "exact": 0.34375,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 7,
+          "sample": 0.62060546875,
+          "exact": 0.62060546875,
+          "nearest_half": 0.62060546875,
+          "matches": true
+        }
+      ]
+    },
+    {
+      "control": "half-uv-fixed-fraction-ties",
+      "artifacts": {
+        "comparison.json": "98ea6bab6661f4ece70bdaf9c8e1fea5deb1c86af7427ea795c4e9758c253118",
+        "frozen-predictions.json": "a2ffcb7a257b4345524d36824a09a19260065713dd1eae06f734caec28566fad",
+        "HalfUvFixedTiesProbe.java": "4932eda11eac78f24667ae7a8cc1aa02edee360fb6158b77f9540c36dd93c370",
+        "stdout.json": "0e279fc4a8c5cbd2e688b2c3678b7c7115d29603d3ca789988aeae21774920bd"
+      },
+      "comparison": [
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.252685546875,
+          "fraction256": 21,
+          "nearest_half": 0.25244140625,
+          "matches": false
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 1,
+          "sample": 0.252685546875,
+          "fraction256": 22,
+          "nearest_half": 0.252685546875,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 2,
+          "sample": 0.2529296875,
+          "fraction256": 23,
+          "nearest_half": 0.2529296875,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 3,
+          "sample": 0.2529296875,
+          "fraction256": 24,
+          "nearest_half": 0.2529296875,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 4,
+          "sample": 0.253173828125,
+          "fraction256": 25,
+          "nearest_half": 0.2529296875,
+          "matches": false
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 5,
+          "sample": 0.27099609375,
+          "fraction256": 171,
+          "nearest_half": 0.27099609375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 6,
+          "sample": 0.27099609375,
+          "fraction256": 172,
+          "nearest_half": 0.27099609375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 7,
+          "sample": 0.271240234375,
+          "fraction256": 173,
+          "nearest_half": 0.27099609375,
+          "matches": false
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 8,
+          "sample": 0.271240234375,
+          "fraction256": 174,
+          "nearest_half": 0.271240234375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 9,
+          "sample": 0.271484375,
+          "fraction256": 175,
+          "nearest_half": 0.271484375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 10,
+          "sample": 0.279541015625,
+          "fraction256": 241,
+          "nearest_half": 0.279296875,
+          "matches": false
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 11,
+          "sample": 0.279541015625,
+          "fraction256": 242,
+          "nearest_half": 0.279541015625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 12,
+          "sample": 0.27978515625,
+          "fraction256": 243,
+          "nearest_half": 0.27978515625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 0,
+          "case": 13,
+          "sample": 0.27978515625,
+          "fraction256": 244,
+          "nearest_half": 0.27978515625,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.34375,
+          "fraction256": 21,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 1,
+          "sample": 0.34375,
+          "fraction256": 22,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 2,
+          "sample": 0.34375,
+          "fraction256": 23,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 3,
+          "sample": 0.34375,
+          "fraction256": 24,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 4,
+          "sample": 0.34375,
+          "fraction256": 25,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 5,
+          "sample": 0.34375,
+          "fraction256": 171,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 6,
+          "sample": 0.34375,
+          "fraction256": 172,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 7,
+          "sample": 0.34375,
+          "fraction256": 173,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 8,
+          "sample": 0.34375,
+          "fraction256": 174,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 9,
+          "sample": 0.34375,
+          "fraction256": 175,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 10,
+          "sample": 0.34375,
+          "fraction256": 241,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 11,
+          "sample": 0.34375,
+          "fraction256": 242,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 12,
+          "sample": 0.34375,
+          "fraction256": 243,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "lowp",
+          "channel": 1,
+          "case": 13,
+          "sample": 0.34375,
+          "fraction256": 244,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 0,
+          "sample": 0.252685546875,
+          "fraction256": 21,
+          "nearest_half": 0.25244140625,
+          "matches": false
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 1,
+          "sample": 0.252685546875,
+          "fraction256": 22,
+          "nearest_half": 0.252685546875,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 2,
+          "sample": 0.2529296875,
+          "fraction256": 23,
+          "nearest_half": 0.2529296875,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 3,
+          "sample": 0.2529296875,
+          "fraction256": 24,
+          "nearest_half": 0.2529296875,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 4,
+          "sample": 0.253173828125,
+          "fraction256": 25,
+          "nearest_half": 0.2529296875,
+          "matches": false
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 5,
+          "sample": 0.27099609375,
+          "fraction256": 171,
+          "nearest_half": 0.27099609375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 6,
+          "sample": 0.27099609375,
+          "fraction256": 172,
+          "nearest_half": 0.27099609375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 7,
+          "sample": 0.271240234375,
+          "fraction256": 173,
+          "nearest_half": 0.27099609375,
+          "matches": false
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 8,
+          "sample": 0.271240234375,
+          "fraction256": 174,
+          "nearest_half": 0.271240234375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 9,
+          "sample": 0.271484375,
+          "fraction256": 175,
+          "nearest_half": 0.271484375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 10,
+          "sample": 0.279541015625,
+          "fraction256": 241,
+          "nearest_half": 0.279296875,
+          "matches": false
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 11,
+          "sample": 0.279541015625,
+          "fraction256": 242,
+          "nearest_half": 0.279541015625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 12,
+          "sample": 0.27978515625,
+          "fraction256": 243,
+          "nearest_half": 0.27978515625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 0,
+          "case": 13,
+          "sample": 0.27978515625,
+          "fraction256": 244,
+          "nearest_half": 0.27978515625,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 0,
+          "sample": 0.34375,
+          "fraction256": 21,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 1,
+          "sample": 0.34375,
+          "fraction256": 22,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 2,
+          "sample": 0.34375,
+          "fraction256": 23,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 3,
+          "sample": 0.34375,
+          "fraction256": 24,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 4,
+          "sample": 0.34375,
+          "fraction256": 25,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 5,
+          "sample": 0.34375,
+          "fraction256": 171,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 6,
+          "sample": 0.34375,
+          "fraction256": 172,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 7,
+          "sample": 0.34375,
+          "fraction256": 173,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 8,
+          "sample": 0.34375,
+          "fraction256": 174,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 9,
+          "sample": 0.34375,
+          "fraction256": 175,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 10,
+          "sample": 0.34375,
+          "fraction256": 241,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 11,
+          "sample": 0.34375,
+          "fraction256": 242,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 12,
+          "sample": 0.34375,
+          "fraction256": 243,
+          "nearest_half": 0.34375,
+          "matches": true
+        },
+        {
+          "precision": "highp",
+          "channel": 1,
+          "case": 13,
+          "sample": 0.34375,
+          "fraction256": 244,
+          "nearest_half": 0.34375,
+          "matches": true
+        }
+      ]
+    },
+    {
+      "control": "half-uv-affine-size16",
+      "artifacts": {
+        "HalfUvAffineSizeProbe.java": "d726e32b117143e2a8776c9cd46a55b7f0c1b623de53c74d3eb01c81da58e4bf",
+        "size-comparison.json": "18a598fa1dcced85586bc7c2444f37ad89b6aa6955580e2e7463ae129fbc62cb",
+        "frozen-predictions.json": "7297f6e62eb0d142d8cb27df4946e19e39a03b773d87b30656d9c4151916de3d",
+        "stdout.json": "992cba06d67b038eec63f36cc3c7a713654045e7d9e1099694b5e0f65c62ce36"
+      },
+      "comparison": {
+        "differences": [],
+        "same": true
+      }
+    },
+    {
+      "control": "half-uv-float-readback",
+      "artifacts": {
+        "comparison.json": "18a598fa1dcced85586bc7c2444f37ad89b6aa6955580e2e7463ae129fbc62cb",
+        "HalfUvFloatProbe.java": "d028cc5a0acc2bb19c31cd187273d4c014635de128ed211f17d3e21eb5d36720",
+        "stdout.json": "992cba06d67b038eec63f36cc3c7a713654045e7d9e1099694b5e0f65c62ce36",
+        "freeze.json": "3eb7ae96373326ee4f9d1aef814c74f4e9b5fcb55428d4f54f876460032a0ce4"
+      },
+      "comparison": {
+        "differences": [],
+        "same": true
+      }
+    }
+  ]
+}
