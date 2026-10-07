@@ -14,13 +14,17 @@
 
 class PresetPrewarmer {
 public:
-    using Reader = std::function<std::string(const std::string& name)>;
+    struct Preset {
+        std::string data;
+        std::vector<std::string> texturePaths;
+    };
+    using Reader = std::function<Preset(const std::string& name)>;
 
     ~PresetPrewarmer() { Stop(); }
 
-    // textureDir must be the main instance's texture search path: sampler declarations in the
-    // generated shader code depend on the textures found, and the cache is keyed by that code.
-    void Start(const std::string& textureDir, Reader reader);
+    // The reader captures data and per-preset search paths together. Shader sampler declarations
+    // depend on the images found, so prewarming must use the render instance's exact lookup.
+    void Start(Reader reader);
     void Stop();
 
     // Compiles these presets next, in order, replacing requests that have not started yet. Presets
@@ -28,15 +32,17 @@ public:
     void Request(const std::vector<std::string>& names);
 
     bool Running() const { return thread_.joinable(); }
+    bool UsesPresetPrefix(const std::string& prefix);
 
 private:
-    void Run(std::string textureDir);
+    void Run();
 
     std::thread thread_;
     std::mutex mutex_;
     std::condition_variable cv_;
     std::deque<std::string> pending_;
     std::deque<std::string> recent_;  // compiled lately, most recent last
+    std::string active_; // Published before reading files; retained until the GL instance is gone.
     bool stop_ = false;
     Reader reader_;
 };

@@ -78,7 +78,8 @@ android {
 
 dependencies {
     implementation project(':core')
-    // No AndroidX dependencies: the app only uses framework APIs, which keeps the APK small
-    // and cold start fast on low-end TV boxes.
+    // Maintained QR encoder for the TV upload dialog; no camera/AndroidX integration.
+    implementation 'com.google.zxing:core:3.5.4'
+    // Framework UI and the standalone QR encoder; no AndroidX runtime dependencies.
     testImplementation 'junit:junit:4.13.2'
 }

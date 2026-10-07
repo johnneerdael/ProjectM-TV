@@ -161,7 +161,8 @@ final class PresetPackUploadServer implements Closeable {
                         commit.imported(pack);
                         committed = true;
                     }
-                    respond(socket, 200, "text/plain", "Imported " + pack.count + " presets. Custom is now selected on the TV.");
+                    respond(socket, 200, "text/plain", "Imported " + pack.count + " presets and " + pack.textureCount
+                            + " textures. Custom is now selected on the TV.");
                 } finally {
                     if (!committed) { commit.abandoned(); CustomPresetPack.delete(pack.directory); }
                     else commit.afterResponse();
@@ -244,12 +245,12 @@ final class PresetPackUploadServer implements Closeable {
                 + "button:disabled{opacity:.5}button:focus-visible,input:focus-visible{outline:3px solid #5ad4ff;outline-offset:4px}"
                 + "progress{width:100%;margin-top:24px}small{color:#bbb}#status{min-height:3em}</style>"
                 + "<main><small>ProjectM TV</small><h1>Upload preset pack</h1>"
-                + "<p>Choose one ZIP with up to 50,000 MilkDrop presets. Only .milk files are imported; textures and other files are ignored.</p>"
+                + "<p>Choose one ZIP with up to 50,000 MilkDrop presets and their textures. PNG, JPG, JPEG, TGA, BMP, DIB and DDS images are imported. Other files are ignored.</p>"
                 + "<p>This replaces your previous custom pack and selects <strong>Custom</strong> on the TV. A failed upload keeps your previous pack.</p>"
                 + "<form id='form'><label for='zip'>Preset ZIP</label><input id='zip' type='file' accept='.zip,application/zip' required>"
                 + "<button id='upload'>Upload ZIP</button></form><progress id='progress' hidden></progress>"
                 + "<p id='status' role='status' aria-live='polite'></p>"
-                + "<small>Keep the TV upload dialog open. Limits: 2 GiB ZIP, 4 GiB of presets, 8 MiB per preset. Use your trusted local network.</small></main>"
+                + "<small>Keep the TV upload dialog open. Limits: 2 GiB ZIP, 4 GiB combined presets/textures, 8 MiB per preset, 64 MiB per texture, 5,000 textures. Use your trusted local network.</small></main>"
                 + "<script>const form=document.getElementById('form'),file=document.getElementById('zip'),button=document.getElementById('upload'),"
                 + "status=document.getElementById('status'),progress=document.getElementById('progress');"
                 + "form.onsubmit=e=>{e.preventDefault();const zip=file.files[0];if(!zip)return;"

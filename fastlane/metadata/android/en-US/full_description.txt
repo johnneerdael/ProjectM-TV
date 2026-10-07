@@ -4,7 +4,7 @@ It visualizes the music another app plays on the TV, such as SoundCloud. It is n
 
 <b>What it does</b>
 <ul>
-<li>Import one custom ZIP pack with up to 50,000 .milk presets from a browser on the same local network. Custom becomes selected after upload; All includes the pack, while Chill, Normal and Intense keep only bundled presets. Other files, including textures, are ignored. The upload listener stops when its dialog closes or the app leaves the foreground</li>
+<li>Import one custom ZIP pack with up to 50,000 .milk presets and texture images by scanning a QR code with a phone on the same local network. Custom becomes selected after upload; All includes the pack, while Chill, Normal and Intense keep only bundled presets. PNG/JPEG/TGA/BMP/DIB/DDS textures are supported; unrelated files are ignored. The upload listener stops when its dialog closes or the app leaves the foreground</li>
 <li>Shows 9,606 presets in shuffled order, changing every 30 seconds by default or with Left/Right on the remote, with smooth blends between them</li>
 <li>Shows the cover, artist and title of the playing track in the upper left for as long as it plays; Settings › Track display shows them for 10, 20, 30 or 60 seconds per track instead, in a small lower-left pill, or not at all (needs notification access, under Apps › Special app access in the TV's settings)</li>
 <li>Automatically adjusts resolution for the target frame rate and live memory headroom, up to the panel's native 4K size; Standard trails keeps authored-scale feedback, while Medium and High add native trail detail</li>

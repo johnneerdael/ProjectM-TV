@@ -62,11 +62,11 @@ private:
 
 }  // namespace
 
-void PresetPrewarmer::Start(const std::string& textureDir, Reader reader) {
+void PresetPrewarmer::Start(Reader reader) {
     if (thread_.joinable()) return;
     stop_ = false;
     reader_ = std::move(reader);
-    thread_ = std::thread(&PresetPrewarmer::Run, this, textureDir);
+    thread_ = std::thread(&PresetPrewarmer::Run, this);
 }
 
 void PresetPrewarmer::Stop() {
@@ -76,8 +76,15 @@ void PresetPrewarmer::Stop() {
     }
     cv_.notify_all();
     if (thread_.joinable()) thread_.join();
+    std::lock_guard<std::mutex> lock(mutex_);
     pending_.clear();
     recent_.clear();
+    active_.clear();
+}
+
+bool PresetPrewarmer::UsesPresetPrefix(const std::string& prefix) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    return !active_.empty() && active_.compare(0, prefix.size(), prefix) == 0;
 }
 
 void PresetPrewarmer::Request(const std::vector<std::string>& names) {
@@ -92,7 +99,7 @@ void PresetPrewarmer::Request(const std::vector<std::string>& names) {
     if (!pending_.empty()) cv_.notify_one();
 }
 
-void PresetPrewarmer::Run(std::string textureDir) {
+void PresetPrewarmer::Run() {
     // Below the render thread: compiling must not cost it frames.
     setpriority(PRIO_PROCESS, gettid(), 10);
     PbufferContext context;
@@ -108,11 +115,16 @@ void PresetPrewarmer::Run(std::string textureDir) {
             if (stop_) break;
             name = pending_.front();
             pending_.pop_front();
+            active_ = name;
             recent_.push_back(name);
             if (recent_.size() > kRecentNames) recent_.pop_front();
         }
-        std::string data = reader_(name);
-        if (data.empty()) continue;
+        auto preset = reader_(name);
+        if (preset.data.empty()) {
+            std::lock_guard<std::mutex> lock(mutex_);
+            active_.clear();
+            continue;
+        }
         // A fresh instance per preset, destroyed right after: between switches the prewarmer holds
         // no preset, textures or frame buffers (memory is tight on TV boxes, and running short
         // makes Android take it from the music player).
@@ -120,13 +132,20 @@ void PresetPrewarmer::Run(std::string textureDir) {
         projectm_handle pm = projectm_create();
         if (!pm) {
             LOGW("PREWARM unavailable: projectm_create failed");
+            std::lock_guard<std::mutex> lock(mutex_);
+            active_.clear();
             break;
         }
-        const char* paths[] = {textureDir.c_str()};
-        if (!textureDir.empty()) projectm_set_texture_search_paths(pm, paths, 1);
+        std::vector<const char*> paths;
+        for (const auto& path : preset.texturePaths) paths.push_back(path.c_str());
+        projectm_set_texture_search_paths(pm, paths.data(), paths.size());
         projectm_set_window_size(pm, 64, 36);
-        projectm_load_preset_data(pm, data.c_str(), false);
+        projectm_load_preset_data(pm, preset.data.c_str(), false);
         projectm_destroy(pm);
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            active_.clear();
+        }
         uint32_t hits = 0, misses = 0;
         projectm_opengl_program_cache_stats(&hits, &misses);
         LOGI("PREWARM preset='%s' ms=%.0f cache_hits=%u cache_misses=%u", name.c_str(), NowMs() - start,

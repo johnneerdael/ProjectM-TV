@@ -382,14 +382,31 @@ public:
 
     // Returns the preset file contents, using the prefetched copy when available.
     std::string Load(const std::string& name) {
+        return ResolvePreset(name, true).data;
+    }
+
+    // Capture immutable file identity, cached data and its search paths under the same lock.
+    // A replacement between this snapshot and disk I/O cannot mix generations.
+    PresetPrewarmer::Preset ResolvePreset(const std::string& name, bool consumePrefetch = false) {
+        PresetPrewarmer::Preset preset;
+        std::string customPath;
         {
             std::lock_guard<std::mutex> lock(mutex_);
-            if (prefetchedName_ == name) {
+            if (name.compare(0, 7, "custom/") == 0) {
+                auto found = customFiles_.find(name);
+                if (found == customFiles_.end()) return {};
+                customPath = found->second;
+                preset.texturePaths.push_back(customDirectory_ + "/textures");
+            }
+            if (!textureDir_.empty()) preset.texturePaths.push_back(textureDir_);
+            if (consumePrefetch && prefetchedName_ == name) {
                 prefetchedName_.clear();
-                return std::move(prefetchedData_);
+                preset.data = std::move(prefetchedData_);
+                return preset;
             }
         }
-        return ReadAsset(name);
+        preset.data = customPath.empty() ? ReadBundledAsset(name) : ReadFile(customPath);
+        return preset;
     }
 
 private:
@@ -472,23 +489,20 @@ private:
     }
 
     std::string ReadAsset(const std::string& name) {
-        if (name.compare(0, 7, "custom/") == 0) {
-            std::string path;
-            {
-                std::lock_guard<std::mutex> lock(mutex_);
-                auto found = customFiles_.find(name);
-                if (found == customFiles_.end()) return {};
-                path = found->second;
-            }
-            // Immutable generations separate file identity, skips and prewarm caches on replacement.
-            std::ifstream file(path, std::ios::binary | std::ios::ate);
-            auto length = file.tellg();
-            if (!file || length <= 0 || length > 8 * 1024 * 1024) return {};
-            std::string data(static_cast<size_t>(length), '\0');
-            file.seekg(0);
-            if (!file.read(&data[0], length)) return {};
-            return data;
-        }
+        return ResolvePreset(name).data;
+    }
+
+    static std::string ReadFile(const std::string& path) {
+        std::ifstream file(path, std::ios::binary | std::ios::ate);
+        auto length = file.tellg();
+        if (!file || length <= 0 || length > 8 * 1024 * 1024) return {};
+        std::string data(static_cast<size_t>(length), '\0');
+        file.seekg(0);
+        if (!file.read(&data[0], length)) return {};
+        return data;
+    }
+
+    std::string ReadBundledAsset(const std::string& name) {
         std::string path = std::string(kPresetDir) + "/" + name;
         AAsset* asset = AAssetManager_open(assets_, path.c_str(), AASSET_MODE_BUFFER);
         if (!asset) {
@@ -1237,6 +1251,9 @@ struct Inputs {
 struct Published {
     std::mutex mutex;
     std::string currentPreset;
+    std::string outgoingPreset;
+    std::string loadingPreset;
+    bool engineAlive = false;
     int nativeTrailsLevel{-1};
     int nativeTrailsScale{-1};
     int nativeTrailsCanvasWidth{0};
@@ -1288,6 +1305,7 @@ struct Engine {
     double createdAt = 0;
     bool firstPresetLogged = false;
     bool texturesApplied = false;
+    std::vector<std::string> texturePaths;
     double lastFrameAt = 0;
     float lastFps = 0;
     double lastLoadStart = 0;
@@ -1410,6 +1428,23 @@ void Publish(const std::string& name) {
         g_published.currentPreset = name;
     }
     g_published.changeCounter.fetch_add(1);
+}
+
+// Conservative storage lease. Never acquire the GL mutex or wait for shader compilation.
+// The GL thread publishes retirement after projectM actually releases its outgoing preset.
+bool IsCustomPresetPackInUse(const std::string& directory) {
+    if (directory.empty()) return false;
+    const std::string prefix = "custom/" + directory.substr(directory.find_last_of('/') + 1) + "/";
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        if (g_published.engineAlive) {
+            if (g_library.CustomPackPending() || g_inputs.categoryDirty.load() ||
+                g_inputs.categoryRequestedSerial.load() != g_inputs.categoryAppliedSerial.load()) return true;
+            for (const auto* name : {&g_published.currentPreset, &g_published.outgoingPreset, &g_published.loadingPreset})
+                if (name->compare(0, prefix.size(), prefix) == 0) return true;
+        }
+    }
+    return g_prewarmer.UsesPresetPrefix(prefix);
 }
 
 // System-wide available memory (MemAvailable) in kB, or -1.
@@ -1601,7 +1636,18 @@ void RenderPresetFrame() {
 
 // Loads one preset; returns false if it could not be loaded (and marks it as skipped).
 bool LoadPreset(const std::string& name, bool smooth) {
-    std::string data = g_library.Load(name);
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        g_published.loadingPreset = name;
+    }
+    struct LoadingLease {
+        ~LoadingLease() {
+            std::lock_guard<std::mutex> lock(g_published.mutex);
+            g_published.loadingPreset.clear();
+        }
+    } loadingLease;
+    auto preset = g_library.ResolvePreset(name, true);
+    const std::string& data = preset.data;
     if (data.empty()) {
         g_library.MarkSkipped(name, "unreadable or empty");
         return false;
@@ -1619,6 +1665,13 @@ bool LoadPreset(const std::string& name, bool smooth) {
     UpdateTexturePool(NowSeconds());
     size_t poolBytes = projectm_opengl_texture_pool_bytes();
     double loadStart = NowSeconds();
+    if (!g_engine.texturesApplied || g_engine.texturePaths != preset.texturePaths) {
+        std::vector<const char*> paths;
+        for (const auto& path : preset.texturePaths) paths.push_back(path.c_str());
+        projectm_set_texture_search_paths(g_engine.pm, paths.data(), paths.size());
+        g_engine.texturePaths = std::move(preset.texturePaths);
+        g_engine.texturesApplied = true;
+    }
     // Parses the preset, loads its textures and compiles its shaders: the stall at a switch, unless
     // the prewarmer already compiled them (then they come from the program cache).
     projectm_load_preset_data(g_engine.pm, data.c_str(), smooth);
@@ -1643,6 +1696,10 @@ bool LoadPreset(const std::string& name, bool smooth) {
         return false;
     }
     g_engine.current = name;
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        g_published.outgoingPreset = smooth ? g_published.currentPreset : std::string();
+    }
     g_library.RecordShown(name);
     Publish(name);
     g_engine.lastLoadStart = loadStart;
@@ -1951,12 +2008,19 @@ void DestroyEngineLocked(bool contextAlive) {
         projectm_destroy(g_engine.pm);
         g_engine.pm = nullptr;
     }
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        g_published.engineAlive = false;
+        g_published.outgoingPreset.clear();
+        g_published.loadingPreset.clear();
+    }
     g_engine.width = g_engine.height = 0;
     g_engine.renderWidth = g_engine.renderHeight = 0;
     g_engine.scaledUntil = 0;
     g_engine.transitionScaled = false;
     g_engine.appliedMeshWidth = g_engine.appliedMeshHeight = 0;
     g_engine.texturesApplied = false;
+    g_engine.texturePaths.clear();
     g_engine.inTransition = false;
     g_engine.lastFrameAt = 0;
     g_engine.current.clear();  // the next instance resumes from g_published.currentPreset
@@ -2003,6 +2067,10 @@ JNIEXPORT void JNICALL JNI_FN(onSurfaceCreated)(JNIEnv*, jclass) {
     if (!g_engine.pm) {
         LOGE("projectm_create failed");
         return;
+    }
+    {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        g_published.engineAlive = true;
     }
     projectm_set_beat_sensitivity(g_engine.pm, 1.0f);
     // Lines as quads, 1 px wide up to MilkDrop's authoring resolution, 1024x768, and by the square
@@ -2075,13 +2143,7 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
                 categorySerial = g_inputs.categoryRequestedSerial.load();
             }
             g_engine.categoryGeneration = g_library.CategoryGeneration();
-            if (!g_engine.texturesApplied) {
-                // Once, before the first preset: this call rescans and reloads all textures.
-                const char* paths[] = {g_library.TextureDir().c_str()};
-                if (!g_library.TextureDir().empty()) projectm_set_texture_search_paths(g_engine.pm, paths, 1);
-                g_engine.texturesApplied = true;
-                g_prewarmer.Start(g_library.TextureDir(), [](const std::string& name) { return g_library.Read(name); });
-            }
+            g_prewarmer.Start([](const std::string& name) { return g_library.ResolvePreset(name); });
             std::string resume;  // preset shown before an EGL context loss, if any
             {
                 std::lock_guard<std::mutex> published(g_published.mutex);
@@ -2122,6 +2184,10 @@ JNIEXPORT void JNICALL JNI_FN(onDrawFrame)(JNIEnv*, jclass) {
     FeedAudio();
     ApplyRenderScale(now < g_engine.scaledUntil ? g_engine.transitionScale : 1.f);
     RenderPresetFrame();
+    if (!projectm_is_transitioning(g_engine.pm)) {
+        std::lock_guard<std::mutex> lock(g_published.mutex);
+        g_published.outgoingPreset.clear();
+    }
     g_engine.lastFrameDirect = direct && !g_engine.switchRequested;
 
     if (!g_engine.firstPresetLogged && !g_engine.current.empty()) {
@@ -2317,6 +2383,15 @@ JNIEXPORT jlong JNICALL JNI_FN(setCustomPresetPack)(JNIEnv* env, jclass, jstring
 
 JNIEXPORT jboolean JNICALL JNI_FN(isCustomPresetPackPending)(JNIEnv*, jclass) {
     return g_library.CustomPackPending();
+}
+
+JNIEXPORT jboolean JNICALL JNI_FN(isCustomPresetPackInUse)(JNIEnv* env, jclass, jstring directory) {
+    if (!directory) return false;
+    const char* path = env->GetStringUTFChars(directory, nullptr);
+    if (!path) return true; // Retain files if the query cannot be represented.
+    const bool inUse = IsCustomPresetPackInUse(path);
+    env->ReleaseStringUTFChars(directory, path);
+    return inUse;
 }
 
 JNIEXPORT jlong JNICALL JNI_FN(prepareCustomPresetPack)(JNIEnv* env, jclass, jstring directory) {

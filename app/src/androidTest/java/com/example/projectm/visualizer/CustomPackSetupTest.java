@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.View;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.RGBLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.*;
@@ -37,10 +42,18 @@ final class CustomPackSetupTest {
         try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(file))) {
             for (int i = 0; i < count; i++) {
                 out.putNextEntry(new ZipEntry(prefix + "/preset-" + i + (i % 2 == 0 ? ".milk" : ".MILK")));
-                out.write("[preset00]\nfRating=3\nfDecay=0.98\n".getBytes("UTF-8"));
+                out.write(("MILKDROP_PRESET_VERSION=201\nPSVERSION_WARP=2\nPSVERSION_COMP=2\n"
+                        + "[preset00]\nfRating=3\nfDecay=1\nfWaveAlpha=0\nfGammaAdj=1\n"
+                        + "warp_1=shader_body { ret=tex2D(sampler_uploaded_fixture,uv).rgb; }\n"
+                        + "comp_1=shader_body { ret=tex2D(sampler_uploaded_fixture,uv).rgb; }\n").getBytes("UTF-8"));
                 out.closeEntry();
             }
-            out.putNextEntry(new ZipEntry("textures/ignored.png")); out.write(new byte[]{1,2,3}); out.closeEntry();
+            out.putNextEntry(new ZipEntry("textures/uploaded_fixture.png"));
+            Bitmap texture = Bitmap.createBitmap(4, 4, Bitmap.Config.ARGB_8888);
+            texture.eraseColor(Color.rgb(0, prefix.startsWith("replacement") ? 192 : 128, 0));
+            check(texture.compress(Bitmap.CompressFormat.PNG, 100, out), "texture fixture encoding failed");
+            texture.recycle();
+            out.closeEntry();
             out.putNextEntry(new ZipEntry("README.txt")); out.write("ignored".getBytes("UTF-8")); out.closeEntry();
         }
         return file;
@@ -92,7 +105,20 @@ final class CustomPackSetupTest {
         return response.get();
     }
 
-    static void run(Instrumentation test, boolean restart) {
+    private static void checkUploadedPixels(Instrumentation test, int green) throws Exception {
+        SystemClock.sleep(1000);
+        Bitmap screen = test.getUiAutomation().takeScreenshot();
+        int pixel = screen.getPixel(screen.getWidth() / 4, screen.getHeight() / 4);
+        screen.recycle();
+        check(Color.red(pixel) < 10 && Color.blue(pixel) < 10 && Math.abs(Color.green(pixel) - green) < 15,
+                "uploaded texture did not render: " + Integer.toHexString(pixel));
+        capture(test, "custom-pack-texture");
+    }
+
+    static void run(Instrumentation test, boolean restart) { run(test, restart, false); }
+    static void runQr(Instrumentation test) { run(test, false, true); }
+
+    private static void run(Instrumentation test, boolean restart, boolean qrOnly) {
         Bundle result = new Bundle();
         Activity activity = null;
         try {
@@ -107,6 +133,7 @@ final class CustomPackSetupTest {
                         "custom pack is not stored outside Auto Backup");
                 await("custom", 2);
                 check(ProjectMJNI.getCurrentPresetName().contains("/replacement/"), "restart lost replacement pack");
+                checkUploadedPixels(test, 192);
                 result.putString("stream", "PASS: cold restart retains pack and Custom selection\n");
                 test.finish(Activity.RESULT_OK, result);
                 return;
@@ -115,7 +142,7 @@ final class CustomPackSetupTest {
             long deadline = SystemClock.elapsedRealtime() + 30000;
             while (ProjectMJNI.isMusicCategoryPending() && SystemClock.elapsedRealtime() < deadline) SystemClock.sleep(50);
             int bundled = ProjectMJNI.getCategoryPresetCount("all");
-            check(bundled == 9606, "test must start with a fresh app, found " + bundled);
+            if (!qrOnly) check(bundled == 9606, "test must start with a fresh app, found " + bundled);
             int[] scored = {ProjectMJNI.getCategoryPresetCount("chill"), ProjectMJNI.getCategoryPresetCount("normal"), ProjectMJNI.getCategoryPresetCount("intense")};
             Activity target = activity;
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
@@ -128,12 +155,44 @@ final class CustomPackSetupTest {
             SystemClock.sleep(300);
             capture(test, "custom-pack-advanced");
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_CENTER);
-            SystemClock.sleep(300);
+            SystemClock.sleep(1000);
             capture(test, "custom-pack-upload");
             Field field = MainActivity.class.getDeclaredField("customPackServer"); field.setAccessible(true);
             PresetPackUploadServer server = (PresetPackUploadServer)field.get(activity);
             check(server != null, "D-pad did not open the upload listener");
             URL url = new URL(server.url());
+            Field dialogField = MainActivity.class.getDeclaredField("customPackDialog");
+            dialogField.setAccessible(true);
+            android.app.AlertDialog dialog = (android.app.AlertDialog)dialogField.get(activity);
+            int[] qrBounds = new int[4];
+            test.runOnMainSync(() -> {
+                View qr = dialog.findViewById(R.id.custom_upload_qr);
+                check(qr != null && qr.isShown(), "upload QR code is not visible");
+                int[] location = new int[2]; qr.getLocationOnScreen(location);
+                qrBounds[0] = location[0]; qrBounds[1] = location[1];
+                qrBounds[2] = qr.getWidth(); qrBounds[3] = qr.getHeight();
+            });
+            Bitmap screen = test.getUiAutomation().takeScreenshot();
+            int[] pixels = new int[qrBounds[2] * qrBounds[3]];
+            screen.getPixels(pixels, 0, qrBounds[2], qrBounds[0], qrBounds[1], qrBounds[2], qrBounds[3]);
+            screen.recycle();
+            String scanned = new QRCodeReader().decode(new BinaryBitmap(new HybridBinarizer(
+                    new RGBLuminanceSource(qrBounds[2], qrBounds[3], pixels)))).getText();
+            check(server.url().equals(scanned), "rendered QR points to the wrong upload session");
+            if (qrOnly) {
+                test.runOnMainSync(() -> {
+                    View close = dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE);
+                    int[] location = new int[2]; close.getLocationOnScreen(location);
+                    check(close.isShown() && close.isFocusable(), "Close is not accessible");
+                    check(location[0] >= 0 && location[1] >= 0
+                            && location[0] + close.getWidth() <= target.getResources().getDisplayMetrics().widthPixels
+                            && location[1] + close.getHeight() <= target.getResources().getDisplayMetrics().heightPixels,
+                            "Close falls outside the screen");
+                });
+                result.putString("stream", "PASS: small-screen QR decoded to active endpoint; Close is visible/focusable inside display bounds\n");
+                test.finish(Activity.RESULT_OK, result);
+                return;
+            }
             long started = SystemClock.elapsedRealtime();
             File zip = archive(test.getTargetContext().getCacheDir(), 50000, "large");
             check(uploadWhileRendering(test, url, zip).startsWith("HTTP/1.1 200"), "large pack upload failed");
@@ -165,6 +224,7 @@ final class CustomPackSetupTest {
             check("custom".equals(test.getTargetContext().getSharedPreferences("projectm_settings", 0).getString("music_category", "")), "Custom was not saved");
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
             SystemClock.sleep(200);
+            checkUploadedPixels(test, 192);
             check(field.get(activity) == null, "closing the dialog left the listener attached");
             try (Socket unexpected = new Socket(url.getHost(), url.getPort())) { throw new AssertionError("closed listener accepted a connection"); }
             catch (IOException expected) { }
@@ -181,7 +241,7 @@ final class CustomPackSetupTest {
             test.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK); // Advanced -> main settings
             test.runOnMainSync(() -> target.findViewById(R.id.row_music_category).requestFocus());
             capture(test, "custom-pack-selected");
-            result.putString("stream", "PASS: Advanced D-pad upload, 50,000 presets, rendering during import, nested .MILK, ignored files, All inclusion, scored exclusions, Random/Previous, replacement, invalid ZIP preservation, persisted Custom, closed listener. Large import including ZIP generation: " + elapsed + " ms\n");
+            result.putString("stream", "PASS: Advanced D-pad upload, rendered QR decoding, 50,000 presets plus uploaded PNG rendering/replacement, rendering during import, nested .MILK, ignored files, All inclusion, scored exclusions, Random/Previous, replacement, invalid ZIP preservation, persisted Custom, closed listener. Large import including ZIP generation: " + elapsed + " ms\n");
             test.finish(Activity.RESULT_OK, result);
         } catch (Throwable failure) {
             result.putString("stream", "FAIL: " + failure + "\n");

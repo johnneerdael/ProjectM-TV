@@ -87,6 +87,8 @@ public final class ProjectMJNI {
     public static native boolean commitCustomPresetPack(long request);
     /** Cancel a queued/prepared request without changing an already applied pack. */
     public static native void discardCustomPresetPack(long request);
+    /** Live rendering/transition or prewarming can still need an immutable generation's images. */
+    public static native boolean isCustomPresetPackInUse(String directory);
     public static native void setSoftCutDuration(int seconds);
     public static native void setAutoChange(boolean enabled);
     /** projectM's hard cut to the next preset on a loud beat (off: presets only change by blending). */

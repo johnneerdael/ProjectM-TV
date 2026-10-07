@@ -94,9 +94,12 @@ void SnapshotFade::Forget() { Stop(); }
 void SnapshotFade::Release() { Stop(); }
 // ---- fake shader prewarmer (the real one needs EGL) ----
 #include "preset_prewarm.h"
-std::vector<std::string> g_prewarmRequests; std::string g_prewarmTextureDir; int g_prewarmStarts = 0, g_prewarmStops = 0;
-void PresetPrewarmer::Start(const std::string& dir, Reader) { ++g_prewarmStarts; g_prewarmTextureDir = dir; }
-void PresetPrewarmer::Stop() { ++g_prewarmStops; }
+std::vector<std::string> g_prewarmRequests; int g_prewarmStarts = 0, g_prewarmStops = 0;
+PresetPrewarmer::Reader g_prewarmReader;
+std::string g_prewarmActive;
+void PresetPrewarmer::Start(Reader reader) { ++g_prewarmStarts; g_prewarmReader = std::move(reader); }
+void PresetPrewarmer::Stop() { ++g_prewarmStops; g_prewarmActive.clear(); }
+bool PresetPrewarmer::UsesPresetPrefix(const std::string& prefix) { return g_prewarmActive.compare(0, prefix.size(), prefix) == 0; }
 std::vector<std::vector<std::string>> g_prewarmLists;
 void PresetPrewarmer::Request(const std::vector<std::string>& names) {
   g_prewarmLists.push_back(names); g_prewarmRequests.push_back(names.empty() ? "" : names.front()); }
@@ -107,7 +110,10 @@ static projectm_preset_switch_failed_event g_failCb; static projectm_preset_swit
 static projectm_preset_initialization_warning_event g_warnCb;
 std::vector<std::string> g_loaded; bool g_locked = false; size_t g_pcmFed = 0;
 bool g_lastSmooth = false; int g_meshCalls = 0;
+bool g_fakeTransitioning = false;
+bool projectm_is_transitioning(projectm_handle) { return g_fakeTransitioning; }
 std::vector<std::string> g_texturePathCalls; size_t g_loadsAtTextureCall = 0;
+std::vector<std::vector<std::string>> g_textureSearchPaths;
 // Direct output (patch 0016): like projectM, a frame that requests a switch is stored anyway. A
 // preset load right after a direct frame would start the new preset from an old image.
 bool g_directOutput = false, g_lastFrameDirect = false;
@@ -122,8 +128,8 @@ void projectm_opengl_set_line_reference_size(projectm_handle, uint32_t width, ui
   g_lineReferenceWidth = width;
   g_lineReferenceHeight = height;
 }
-projectm_handle projectm_create() { g_lastFrameDirect = false; return new projectm; }
-void projectm_destroy(projectm_handle p) { delete p; }
+projectm_handle projectm_create() { g_lastFrameDirect = false; g_fakeTransitioning = false; return new projectm; }
+void projectm_destroy(projectm_handle p) { g_fakeTransitioning = false; delete p; }
 int g_loadSleepMs = 0;
 int g_failNextLoads = 0;
 int g_warnNextLoads = 0;  // loads that leave out uncompilable code but succeed (patch 0035)
@@ -136,7 +142,7 @@ void projectm_load_preset_data(projectm_handle, const char* data, bool smooth) {
   if (g_loadSleepMs) std::this_thread::sleep_for(std::chrono::milliseconds(g_loadSleepMs));
   if (strstr(data, "BROKEN")) { g_failCb("", "compile error", nullptr); return; }
   if (g_warnNextLoads > 0) { --g_warnNextLoads; g_warnCb("", "Could not compile per-pixel code: syntax error (line 2, column 5)", nullptr); }
-  g_loaded.push_back(data); }
+  g_loaded.push_back(data); g_fakeTransitioning = smooth; }
 void projectm_set_preset_switch_requested_event_callback(projectm_handle, projectm_preset_switch_requested_event cb, void*) { g_reqCb = cb; }
 void projectm_set_preset_switch_failed_event_callback(projectm_handle, projectm_preset_switch_failed_event cb, void*) { g_failCb = cb; }
 void projectm_set_preset_initialization_warning_event_callback(projectm_handle, projectm_preset_initialization_warning_event cb, void*) { g_warnCb = cb; }
@@ -148,6 +154,7 @@ void projectm_set_soft_cut_duration(projectm_handle, double seconds) { g_applied
 void projectm_set_preset_locked(projectm_handle, bool l) { g_locked = l; }
 void projectm_set_mesh_size(projectm_handle, size_t, size_t) { ++g_meshCalls; }
 void projectm_set_texture_search_paths(projectm_handle, const char** paths, size_t count) {
+  g_textureSearchPaths.emplace_back(paths, paths + count);
   g_texturePathCalls.push_back(count ? paths[0] : "");
   g_loadsAtTextureCall = g_loaded.size(); }
 size_t g_windowW = 0, g_windowH = 0; int g_windowSizeCalls = 0;
@@ -362,6 +369,83 @@ int main(int argc, char** argv) {
   CHECK(g_texturePathCalls.size() == 1 && g_texturePathCalls[0] == texdir);
   CHECK(g_loadsAtTextureCall == 0);  // search path set before the first preset loaded
   CHECK(!g_locked);
+
+  printf("texture lookup belongs to each preset, including All and replacement generations\n");
+  auto loadTextureFixture = [](const std::string& name, bool smooth) {
+    // Like the real switch path, store a frame before loading after direct presentation.
+    projectm_opengl_set_direct_output(g_engine.pm, false);
+    projectm_opengl_render_frame(g_engine.pm);
+    g_engine.lastFrameDirect = false;
+    return LoadPreset(name, smooth);
+  };
+  installPack(pack);
+  CHECK(g_library.SetCategory("all"));
+  CHECK(loadTextureFixture(second, false));
+  CHECK(IsCustomPresetPackInUse(pack));
+  CHECK(g_textureSearchPaths.back() == std::vector<std::string>({pack + "/textures", texdir}));
+  const auto warm = g_prewarmReader(second);
+  CHECK(warm.data == "custom first" || warm.data == "custom second");
+  CHECK(warm.texturePaths == g_textureSearchPaths.back());
+  const auto samePackCalls = g_textureSearchPaths.size();
+  CHECK(loadTextureFixture(second, false));
+  CHECK(g_textureSearchPaths.size() == samePackCalls);
+  CHECK(loadTextureFixture("good 1.milk", true));
+  CHECK(IsCustomPresetPackInUse(pack)); // Outgoing preset can still lazily read its images.
+  CHECK(g_textureSearchPaths.back() == std::vector<std::string>({texdir}));
+  CHECK(g_prewarmReader("good 1.milk").texturePaths == g_textureSearchPaths.back());
+  CHECK(loadTextureFixture(second, false));
+  Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceCreated(nullptr, nullptr);
+  Java_nl_neerdael_projectm_core_ProjectMJNI_onSurfaceChanged(nullptr, nullptr, 1280, 720);
+  frame();
+  CHECK(current() == second);
+  CHECK(g_textureSearchPaths.back() == std::vector<std::string>({pack + "/textures", texdir}));
+  const std::string replacement = root + "/pack-generation-two";
+  mkdir(replacement.c_str(), 0700);
+  mkdir((replacement + "/0").c_str(), 0700);
+  { FILE* f = fopen((replacement + "/0/0.milk").c_str(), "w"); fputs("replacement data", f); fclose(f); }
+  { FILE* f = fopen((replacement + "/presets.idx").c_str(), "w"); fputs("0/0.milk\treplacement.milk\n", f); fclose(f); }
+  installPack(replacement);
+  const std::string replaced = "custom/pack-generation-two/replacement.milk";
+  CHECK(g_prewarmReader(second).data.empty());
+  CHECK(warm.texturePaths == std::vector<std::string>({pack + "/textures", texdir}));
+  static std::string loadingDirectory;
+  loadingDirectory = replacement;
+  g_loadObserver = [] { CHECK(IsCustomPresetPackInUse(loadingDirectory)); };
+  CHECK(loadTextureFixture(replaced, true));
+  g_loadObserver = nullptr;
+  CHECK(IsCustomPresetPackInUse(pack) && IsCustomPresetPackInUse(replacement));
+  g_fakeTransitioning = false;
+  frame(); // The actual engine reports the outgoing instance has been released.
+  CHECK(!IsCustomPresetPackInUse(pack) && IsCustomPresetPackInUse(replacement));
+  CHECK(g_textureSearchPaths.back() == std::vector<std::string>({replacement + "/textures", texdir}));
+  CHECK(g_prewarmReader(replaced).data == "replacement data");
+  CHECK(g_prewarmReader(replaced).texturePaths == g_textureSearchPaths.back());
+  installPack("");
+  CHECK(g_prewarmReader(second).data.empty());
+  CHECK(!loadTextureFixture(second, false));
+  CHECK(loadTextureFixture("good 1.milk", false));
+  CHECK(!IsCustomPresetPackInUse(pack) && !IsCustomPresetPackInUse(replacement));
+  g_prewarmActive = second;
+  CHECK(IsCustomPresetPackInUse(pack)); // A retired reader leases its generation before resolving.
+  g_prewarmActive.clear();
+  ++g_inputs.categoryRequestedSerial;
+  CHECK(IsCustomPresetPackInUse(pack)); // Retain until the GL category handoff is acknowledged.
+  g_inputs.categoryAppliedSerial = g_inputs.categoryRequestedSerial.load();
+  CHECK(!IsCustomPresetPackInUse(pack));
+  CHECK(g_textureSearchPaths.back() == std::vector<std::string>({texdir}));
+  g_library.ResetSkipped();
+  g_library.MarkSkipped("preskipped.milk", "fixture initial skip");
+  // Later lifecycle checks count the initial path application plus one context recreation.
+  g_texturePathCalls.assign(1, texdir);
+  if (argc == 4 && std::string(argv[3]) == "--texture-routing") {
+    installPack(replacement);
+    CHECK(loadTextureFixture(replaced, false));
+    CHECK(IsCustomPresetPackInUse(replacement));
+    Java_nl_neerdael_projectm_core_ProjectMJNI_release(nullptr, nullptr);
+    CHECK(!IsCustomPresetPackInUse(replacement)); // A saved resume name owns no files after release.
+    printf("CUSTOM PACK TEXTURE ROUTING TESTS PASSED\n");
+    return 0;
+  }
 
   printf("music category stays pending until its first preset is published\n");
   auto requestCategory = [](const std::string& category) {
@@ -756,7 +840,7 @@ int main(int argc, char** argv) {
   }
 
   printf("the next preset's shaders are compiled in the background\n");
-  CHECK(g_prewarmStarts >= 1 && !g_prewarmTextureDir.empty());
+  CHECK(g_prewarmStarts >= 1 && g_prewarmReader("good 1.milk").texturePaths == std::vector<std::string>({texdir}));
   CHECK(!g_prewarmRequests.empty() && g_prewarmRequests.back() == g_library.PeekNext());
 
   printf("random and previous presets are prepared too: Right picks the prepared random preset\n");
