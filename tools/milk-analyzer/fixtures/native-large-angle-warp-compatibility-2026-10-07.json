@@ -1,0 +1,218 @@
+{
+  "scope": "CurrentAARobserved-driver authored largeanglewarp compatibility issue,not predictor math repair",
+  "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk",
+  "preset_sha256": "591567f0029068f4f1f7ec3b50d7a8fabd8c1658ece6c981a7f60cfd6f3317ea",
+  "literal_rotation": 10000000,
+  "gpu_sine": 0,
+  "gpu_cosine": 0,
+  "precision_highp_also_fails": true,
+  "original_reference_metrics": {
+    "metrics": [
+      {
+        "feature": "motion.median_speed_viewports_per_second",
+        "predicted": 0.01734024565666914,
+        "native": 0.011537263169884682,
+        "relative_error": 0.33465399520176947,
+        "passes": false
+      },
+      {
+        "feature": "motion.p95_speed_viewports_per_second",
+        "predicted": 0.9118863388895975,
+        "native": 0.477121233940124,
+        "relative_error": 0.47677554362628816,
+        "passes": false
+      },
+      {
+        "feature": "colour.mean_luma",
+        "predicted": 0.011246810015290976,
+        "native": 0.005659264496838053,
+        "relative_error": 0.4968115857613127,
+        "passes": false
+      },
+      {
+        "feature": "colour.mean_saturation",
+        "predicted": 0.05041529734929403,
+        "native": 0.011906314392884572,
+        "relative_error": 0.7638352837553719,
+        "passes": false
+      },
+      {
+        "feature": "flashing.peak_mean_luma_jump",
+        "predicted": 0.0072692688554525375,
+        "native": 0.004574677906930447,
+        "relative_error": 0.3706825269643082,
+        "passes": false
+      }
+    ],
+    "events": {
+      "source": {
+        "peak": [
+          2,
+          3
+        ],
+        "direction": "brightening",
+        "up": [],
+        "down": []
+      },
+      "native": {
+        "peak": [
+          1,
+          2
+        ],
+        "direction": "brightening",
+        "up": [],
+        "down": []
+      }
+    },
+    "events_match": false,
+    "summary": {
+      "mean_mae_rgb": 0.009713358245790005,
+      "mean_rmse_rgb": 0.03430797532200813,
+      "peak_mae_rgb": 0.011490637436509132,
+      "peak_rmse_rgb": 0.06506723910570145,
+      "source_sha256": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7",
+      "native_sha256": "b8ba88d5ffa47017f2d9b8a9ada017343d34dba056e07fc9eba8077f4803d610"
+    }
+  },
+  "counterfactual_variant_metrics": {
+    "scope": "Diagnostic variant versus originalmath, not same-source certification or scoring credit",
+    "metrics": [
+      {
+        "metric": "motion.median_speed_viewports_per_second",
+        "source_original": 0.01734024565666914,
+        "native_reduced_variant": 0.01760387048125267,
+        "relative_error": 0.015203061698387131,
+        "passes": true
+      },
+      {
+        "metric": "motion.p95_speed_viewports_per_second",
+        "source_original": 0.9118863388895975,
+        "native_reduced_variant": 0.916057580709456,
+        "relative_error": 0.004574300153391728,
+        "passes": true
+      },
+      {
+        "metric": "colour.mean_luma",
+        "source_original": 0.011246810015290976,
+        "native_reduced_variant": 0.011248184461146593,
+        "relative_error": 0.00012220761742643546,
+        "passes": true
+      },
+      {
+        "metric": "colour.mean_saturation",
+        "source_original": 0.05041529734929403,
+        "native_reduced_variant": 0.05042782109230757,
+        "relative_error": 0.0002484115669649095,
+        "passes": true
+      },
+      {
+        "metric": "flashing.peak_mean_luma_jump",
+        "source_original": 0.0072692688554525375,
+        "native_reduced_variant": 0.007256103213876486,
+        "relative_error": 0.0018111369709728675,
+        "passes": true
+      }
+    ],
+    "pixel_metrics": {
+      "mean_mae_rgb": 1.5771331163705327e-05,
+      "mean_rmse_rgb": 0.00027828870224766433,
+      "peak_mae_rgb": 6.244468386285007e-05,
+      "peak_rmse_rgb": 0.0014231583336368203,
+      "source_sha256": "17c3a0a0862515c11da71ac15685107d1c3e1dd52fe945405cc4149d52342dd7",
+      "native_sha256": "2ca0a2be617e191e64277d6f0c98731c6471b3a6eaf0ed49cca50d9c01e9b209"
+    }
+  },
+  "milkdrop2_reference": "src/vis_milk2/milkdropfs.cpp:1905",
+  "original_grade_not_repaired": true,
+  "no_randomized_credit": true,
+  "artifact_identity": {
+    "release_commit": "dd59a791fd2af6b7ad2fffcb389e0bc178905959",
+    "aar_sha256": "08e5a1c9c3df1433407769ace6e8fc379566d50402258eef98fe948cb5f708cd",
+    "embedded_sha256": {
+      "classes.jar": "948b9a2293ad2f6d0a112f286cd93883031e3673f9def7ca0bb73337116f3428",
+      "jni/arm64-v8a/libprojectmtv.so": "55fef95b3740d17543ec11e9d39dacf0526cdd929b79e4a14fb2bc2817639a73"
+    },
+    "scope": "Standard published AAR, actual fullpresetreference"
+  },
+  "literal_candidates": [
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C correction malalol mashup.milk",
+      "sha256": "cb73ca56e5a84d16d7dbb3b03c7445ef00620ab510c705b2ef73e23136747cca",
+      "sites": [
+        {
+          "line": 643,
+          "statement": "per_pixel_3=rot=10000000;",
+          "literal": 10000000.0
+        }
+      ],
+      "status": "Literal-source candidate only; native execution not certified"
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C.milk",
+      "sha256": "3d30b54a6ac7e3e01062e4bfaab4e9e8013fdd8f376cd56dc1dfb7fb6d03d882",
+      "sites": [
+        {
+          "line": 628,
+          "statement": "per_pixel_3=rot=10000000;",
+          "literal": 10000000.0
+        }
+      ],
+      "status": "Literal-source candidate only; native execution not certified"
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C2.milk",
+      "sha256": "da88761548ef4f056fcc1d3f554a139b5eb6fee5bda50070a68e0cb50a5dde2e",
+      "sites": [
+        {
+          "line": 640,
+          "statement": "per_pixel_3=rot=10000000;",
+          "literal": 10000000.0
+        }
+      ],
+      "status": "Literal-source candidate only; native execution not certified"
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit C_b.milk",
+      "sha256": "5dc95c5a9f8e7bd0b8d015c3b6cfcea6c54926c1c574dc01f2549a3aa0aeed58",
+      "sites": [
+        {
+          "line": 628,
+          "statement": "per_pixel_3=rot=10000000;",
+          "literal": 10000000.0
+        }
+      ],
+      "status": "Literal-source candidate only; native execution not certified"
+    },
+    {
+      "preset": "EoS_Phat_PeterP_Sentinel_Aware_6 EoS edit slice into your beautiful love.milk",
+      "sha256": "591567f0029068f4f1f7ec3b50d7a8fabd8c1658ece6c981a7f60cfd6f3317ea",
+      "sites": [
+        {
+          "line": 633,
+          "statement": "per_pixel_3=rot=10000000;",
+          "literal": 10000000.0
+        }
+      ],
+      "status": "Literal-source candidate only; native execution not certified"
+    }
+  ],
+  "evidence_hashes": {
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-trig/LargeAngleVertexProbe.java": "198fabf5d337f3f88ad2ef9625bc74a6cb9c37fa3c5e4fd0ea11d46182c2cdb3",
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-trig/frozen-predictions.json": "94381e2bfe1dd6419354728d14318611b1b1933ec247a84ea5183635891ae3e9",
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-trig/stdout.json": "a4ffbd91b7d14ccb5c2077f4032fcef5f818dc818aaf8051a9c2a2b40860814e",
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-trig/comparison.json": "4f202474e8a2547d8048a7b1c0d10bbe5ca0f93d1ac45535a00dc2de71d38cc4",
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-precision/LargeAnglePrecisionProbe.java": "a6b465d860ea9d2dcbb5e671faa2c7436b7ed7af4868b3a6f311e62303e4184d",
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-precision/frozen-predictions.json": "94381e2bfe1dd6419354728d14318611b1b1933ec247a84ea5183635891ae3e9",
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-precision/stdout.json": "a4ffbd91b7d14ccb5c2077f4032fcef5f818dc818aaf8051a9c2a2b40860814e",
+    "build/visual-loop/runtime2316/controls/large-angle-vertex-precision/comparison.json": "fe80329ad4a61f3ae72ff99a970880af7cc7f1421b5c6378ca19ddef160949ff",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-active-program/observer.cpp": "f59a8bee54468c9ca01e0eae92ddb09f28060ab71d1ba0c7591f57c6da0f9e3a",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-active-program/uniforms.jsonl": "06f4f25b37c608fb0ab59172724874f7b1ba92490768252e44708e8578db62f7",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-active-program/source-uniform-comparison.json": "8f87eb81cf86f13ec7570a1788e25405637a0a91829fb56a6405153ecd9433c2",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-active-program/capture.json": "bf4e274fa7bccbc501fdbc85ea45f327cadd052f97ee0b5c2d0d8a3f5567642c",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-wrapped-rotation/original.milk": "58e99fbaf63c39bf33c73f1c7becc7973e8d9d7d665fd8d4e4b3ee63be8e58a6",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-wrapped-rotation/scope.json": "ee65635c7d87fbb8b0b0a32e4104bfd3059d5d219c14319513f75bab36cd9201",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-wrapped-rotation/freeze.json": "2bf668d281cd5b4a79b36ede8012ffaa336fd750ddd92588a76f813d786406fd",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-wrapped-rotation/capture.json": "e178030614847ff33d9378b284d6ac16db3c5c952ed72313cb0aed51d1042d19",
+    "build/visual-loop/random30frames-core2316-2026-10-07/repairs/batch002-preset04-wrapped-rotation/numeric-validation.json": "e693b21c723de2c78d25dc9c1e2518606d8f00996c99ab780cae1a142244625d"
+  }
+}

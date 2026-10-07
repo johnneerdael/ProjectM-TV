@@ -949,3 +949,15 @@ X- and Z-oriented alternatives fail those fresh controls. No per-coordinate
 exceptions are used. These are observed-driver numerical controls, not fresh
 randomized preset scores. The volume programs' default/highp labels represent
 repeated highp-sampler3D runs, not an independent precision comparison.
+
+
+Large-angle warp rotation has a separate current-AAR compatibility finding.
+On the recorded Apple emulator, vertex sin/cos both return zero at +/-10000000,
+including highp; MilkDrop 2 instead computes CPU sinf/cosf for its emitted float
+rotation. A diagnostic-only reduced-angle preset variant restores agreement with
+the original source mathematics, but does not certify the unchanged authored
+preset or repair its failed grade. The source model retains mathematical
+rotation; a production range-reduction fix and published-AAR retest are pending.
+Five exact-literal source candidates are recorded separately from the one
+confirmed reproduction. See
+`fixtures/native-large-angle-warp-compatibility-2026-10-07.json`.
