@@ -61,9 +61,14 @@ def verify(work: Path) -> dict:
                 raise ValueError('Evaluator lone-dot contract failed: ' + role)
             verified.append(role)
             continue
-        if any(r['status'] != 'success' for r in runs):
-            if any(r['status'] == 'success' for r in runs):
+        if any(r.get('status') != 'success' for r in runs):
+            if any(r.get('status') == 'success' for r in runs):
                 raise ValueError('Mixed success/failure repeats: ' + role)
+            if any(r.get('status') != 'failed' or type(r.get('exit')) is not int or r['exit'] == 0
+                   for r in runs):
+                raise ValueError('Invalid failure record: ' + role)
+            if value['repeat_equal'] is not False:
+                raise ValueError('Failed repeats cannot be claimed equal: ' + role)
             rejected.append(role)
             continue
         if not value['repeat_equal'] or runs[0]['frame_hashes'] != runs[1]['frame_hashes']:

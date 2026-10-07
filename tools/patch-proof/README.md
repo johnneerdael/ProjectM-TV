@@ -71,3 +71,14 @@ shows 119 after the transition completes, so inspect 40/59 for the lifetime defe
 New capture records identify their producer script; verification records identify
 the verifier. The capture tool removes only its own hashed remote scratch directory
 after pulling evidence, including on handled failures. Local records remain intact.
+For a nonzero worker exit, it independently attempts to retain the engine log,
+structured manifest and partial RGB stream before cleanup. It records unavailable
+pulls explicitly and keeps the run failed. Raw failed streams stay in the ignored
+local build directory. Verification accepts a rejected role only when both runs
+explicitly failed with nonzero integer exit codes and no claimed successful repeat.
+
+Run the evidence-integrity and failed-capture controls with:
+
+```sh
+build/patch-proof-env/bin/python -m unittest discover -s tools/patch-proof -p 'test_*.py' -v
+```

@@ -75,6 +75,37 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Mixed success'):
             VERIFY.verify(self.work)
 
+    def add_rejected_role(self, row, repeat_equal=False):
+        self.result['roles']['upstream'] = {
+            'worker': self.result['roles']['patched']['worker'],
+            'repeat_equal': repeat_equal, 'runs': [row, dict(row)]}
+        self.save()
+        image = Image.new('RGB', (4, 33), '#171717')
+        draw = ImageDraw.Draw(image)
+        draw.text((4, 8), 'patched', fill='white')
+        draw.text((6, 8), 'upstream', fill='white')
+        image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
+        draw.text((10, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
+        image.save(self.work / 'comparison.png')
+
+    def test_accepts_explicit_failed_repeats_as_rejected(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2})
+        self.assertEqual(VERIFY.verify(self.work)['rejected_roles'], ['upstream'])
+
+    def test_rejects_malformed_failure_records(self):
+        for row in ({'exit': 2}, {'status': 'pending', 'exit': 2},
+                    {'status': 'failed'}, {'status': 'failed', 'exit': 0},
+                    {'status': 'failed', 'exit': True}):
+            with self.subTest(row=row):
+                self.add_rejected_role(row)
+                with self.assertRaisesRegex(ValueError, 'Invalid failure record'):
+                    VERIFY.verify(self.work)
+
+    def test_rejects_failed_repeats_claimed_equal(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2}, repeat_equal=True)
+        with self.assertRaisesRegex(ValueError, 'Failed repeats cannot'):
+            VERIFY.verify(self.work)
+
     def test_rejects_matching_repeats_with_missing_frames(self):
         for row in self.result['roles']['patched']['runs']:
             row['frame_hashes'] = row['frame_hashes'][:-1]

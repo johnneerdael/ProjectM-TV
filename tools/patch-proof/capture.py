@@ -152,11 +152,32 @@ def main() -> None:
                     command += ' 2> ' + shlex.quote(remote + '/render.log')
                     adb('shell', 'rm', '-f', remote + '/manifest.json')
                     result = adb('shell', command, check=False)
-                    adb('pull', remote + '/render.log', str(directory / 'render.log'))
                     if result.returncode:
-                        runs.append({'status': 'failed', 'exit': result.returncode,
-                                     'log': (directory / 'render.log').read_text()})
+                        failed = {'status': 'failed', 'exit': result.returncode,
+                                  'pull_errors': {}, 'retained_artifacts': {}}
+                        for name in ('render.log', 'manifest.json', 'frames.rgb'):
+                            path = directory / name
+                            try:
+                                pulled = adb('pull', remote + '/' + name, str(path), check=False)
+                            except (subprocess.SubprocessError, OSError) as error:
+                                failed['pull_errors'][name] = str(error)
+                                continue
+                            if pulled.returncode:
+                                failed['pull_errors'][name] = {
+                                    'exit': pulled.returncode, 'output': pulled.stdout + pulled.stderr}
+                                continue
+                            data = path.read_bytes()
+                            failed['retained_artifacts'][name] = {'sha256': sha(data), 'bytes': len(data)}
+                            if name == 'render.log':
+                                failed['log'] = data.decode('utf-8', errors='replace')
+                            elif name == 'manifest.json':
+                                try:
+                                    failed['manifest'] = json.loads(data)
+                                except (ValueError, UnicodeError) as error:
+                                    failed['manifest_parse_error'] = str(error)
+                        runs.append(failed)
                         continue
+                    adb('pull', remote + '/render.log', str(directory / 'render.log'))
                     adb('pull', remote + '/manifest.json', str(directory / 'manifest.json'))
                     manifest = json.loads((directory / 'manifest.json').read_text())
                     renderer = manifest['gl_renderer']
