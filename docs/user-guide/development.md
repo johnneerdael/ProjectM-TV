@@ -180,3 +180,11 @@ image. The direct vertex-source zoom test uses the same updated internal attribu
 layout. These controls are separate from original-preset appearance, high-resolution
 trail paths and physical-TV performance; record those separately when validating
 an engine release.
+
+## History-dependent validation
+
+The Native trails/core corpus source controls read both the current source and a
+fixed historical release commit. Keep Git history available when running these
+tests. Preset Lab CI uses `fetch-depth: 0` and `filter: blob:none`: commit metadata
+is available, while historical file contents load on demand. A shallow checkout
+without that history can fail at `git show` before a renderer is exercised.

@@ -211,6 +211,9 @@ Follow the repository's configured formatting and lint rules. Review automatic f
 
 ## Building and testing
 
+Preset Lab CI must retain Git history for `tools/core-corpus/test_build_core_aars.py`, which reads pinned historical source `5681852f` alongside HEAD. Use `fetch-depth: 0` with `filter: blob:none` in its checkout, matching the APK history policy; shallow main checkouts without the old commit fail source-integrity checks before native rendering.
+
+
 Choose validation that exercises the changed behavior. Compilation alone does not establish functional correctness. For UI or integration changes, exercise relevant user journeys and error paths when the environment supports them. Record baseline failures and environmental limitations honestly.
 
 For release tooling changes, the required check is:

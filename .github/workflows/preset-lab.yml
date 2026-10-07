@@ -21,6 +21,8 @@ jobs:
         with:
           ref: ${{ inputs.source_ref || github.sha }}
           persist-credentials: false
+          fetch-depth: 0
+          filter: blob:none  # Historical source controls need commits; load blobs on demand.
           submodules: recursive
       - uses: actions/setup-python@v5
         with:
