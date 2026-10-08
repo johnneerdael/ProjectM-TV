@@ -1,0 +1,53 @@
+{
+  "103": {
+    "frame_checks": [
+      {
+        "frame": 0,
+        "display_exact": true,
+        "feedback_exact": true
+      },
+      {
+        "frame": 1,
+        "display_exact": true,
+        "feedback_exact": true
+      }
+    ],
+    "47_feature_objects_equal": true,
+    "original_seconds": 8.399699874978978,
+    "optimized_seconds": 3.2312321250210516
+  },
+  "113": {
+    "frame_checks": [
+      {
+        "frame": 0,
+        "display_exact": true,
+        "feedback_exact": true
+      },
+      {
+        "frame": 1,
+        "display_exact": true,
+        "feedback_exact": true
+      }
+    ],
+    "47_feature_objects_equal": true,
+    "original_seconds": 20.844899791991338,
+    "optimized_seconds": 9.471253249997972
+  },
+  "116": {
+    "frame_checks": [
+      {
+        "frame": 0,
+        "display_exact": true,
+        "feedback_exact": true
+      },
+      {
+        "frame": 1,
+        "display_exact": true,
+        "feedback_exact": true
+      }
+    ],
+    "47_feature_objects_equal": true,
+    "original_seconds": 24.56249962502625,
+    "optimized_seconds": 8.161282749992097
+  }
+}

@@ -1,0 +1,31 @@
+         1029673 function calls in 6.851 seconds
+
+   Ordered by: cumulative time
+   List reduced from 94 to 25 due to restriction <25>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.580    0.580    6.851    6.851 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/motion_vectors.py:145(draw_motion_vectors)
+     2961    0.403    0.000    6.269    0.002 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/quad_lines.py:116(draw_quad_lines)
+     2961    0.235    0.000    3.040    0.001 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/primitives.py:48(draw_triangles)
+    23692    2.883    0.000    2.883    0.000 {method 'copy' of 'numpy.ndarray' objects}
+    31991    1.962    0.000    2.159    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/primitives.py:11(_finite)
+     2961    0.131    0.000    0.230    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/quad_lines.py:43(quad_line_vertices)
+    37627    0.015    0.000    0.191    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:2586(all)
+    46510    0.031    0.000    0.187    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:86(_wrapreduction_any_all)
+    61316    0.177    0.000    0.177    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+     5632    0.026    0.000    0.118    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/primitives.py:22(blend_rgba)
+     5923    0.026    0.000    0.117    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/lib/_function_base_impl.py:5062(meshgrid)
+     5923    0.012    0.000    0.076    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/lib/_stride_tricks_impl.py:588(broadcast_arrays)
+     8633    0.043    0.000    0.052    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/lib/_stride_tricks_impl.py:447(_broadcast_to)
+    14806    0.014    0.000    0.049    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:66(_wrapreduction)
+     5632    0.018    0.000    0.041    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/feedback_field.py:91(unorm8)
+    23688    0.040    0.000    0.040    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/primitives.py:80(edge)
+    11275    0.007    0.000    0.033    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:2245(clip)
+     5922    0.004    0.000    0.032    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:3187(min)
+     2961    0.017    0.000    0.028    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/lib/_shape_base_impl.py:1157(tile)
+     5634    0.023    0.000    0.027    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/shape_base.py:378(stack)
+    11275    0.005    0.000    0.026    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:48(_wrapfunc)
+     8883    0.005    0.000    0.026    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:3049(max)
+    56012    0.022    0.000    0.022    0.000 {built-in method numpy.array}
+    11273    0.004    0.000    0.020    0.000 {method 'clip' of 'numpy.ndarray' objects}
+    11275    0.016    0.000    0.016    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-lab-venv/lib/python3.14/site-packages/numpy/_core/_methods.py:96(_clip)

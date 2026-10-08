@@ -1,0 +1,31 @@
+         3688539 function calls (3303354 primitive calls) in 14.676 seconds
+
+   Ordered by: cumulative time
+   List reduced from 678 to 25 due to restriction <25>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001   14.677   14.677 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/corpus_worker.py:83(run)
+        1    0.004    0.004   13.684   13.684 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/profile_presets.py:11(first_frame)
+        1    0.003    0.003   13.622   13.622 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/forecast.py:218(forecast_source)
+        1    0.006    0.006   12.877   12.877 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/pipeline_fields.py:213(step)
+        1    0.000    0.000   11.619   11.619 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/forecast.py:474(draw)
+        1    0.003    0.003   11.619   11.619 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/scene_draw.py:61(draw_source_scene)
+        3    0.003    0.001   11.286    3.762 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/scene_draw.py:14(_wave)
+        8    1.127    0.141   11.260    1.408 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/quad_lines.py:116(draw_quad_lines)
+     8187    0.686    0.000   10.134    0.001 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/primitives.py:48(draw_triangles)
+    53743    4.390    0.000    4.390    0.000 {method 'copy' of 'numpy.ndarray' objects}
+    55384    3.570    0.000    3.880    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/primitives.py:11(_finite)
+       12    0.001    0.000    1.194    0.100 /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py:513(run)
+       12    0.000    0.000    0.922    0.077 /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py:1177(communicate)
+       12    0.001    0.000    0.921    0.077 /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py:2093(_communicate)
+       80    0.000    0.000    0.908    0.011 /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/selectors.py:385(select)
+       80    0.907    0.011    0.907    0.011 {method 'poll' of 'select.poll' objects}
+       40    0.344    0.009    0.868    0.022 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/unorm_sampler.py:66(sample_apple_unorm8)
+        2    0.000    0.000    0.742    0.371 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/pipeline_fields.py:301(stage)
+        2    0.000    0.000    0.715    0.357 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/grid_math.py:41(evaluate_grid)
+    138/2    0.081    0.001    0.714    0.357 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/grid_math.py:181(visit)
+    57/14    0.021    0.000    0.598    0.043 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/grid_math.py:80(stored)
+        6    0.008    0.001    0.440    0.073 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/pipeline_fields.py:308(sample)
+    15381    0.084    0.000    0.345    0.000 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/primitives.py:22(blend_rgba)
+      160    0.329    0.002    0.341    0.002 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/unorm_sampler.py:86(fetch)
+        1    0.000    0.000    0.335    0.335 /Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/preset-corpus/timeout-investigation/analyzer/corpus_worker.py:22(compatibility_for)

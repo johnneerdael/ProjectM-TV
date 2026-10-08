@@ -1,0 +1,38 @@
+--- a/tools/milk-analyzer/quad_lines.py
++++ b/tools/milk-analyzer/quad_lines.py
+@@ -123,6 +123,17 @@
+-    triangles=np.array([[0,1,2],[2,1,3]],np.int64)
+-    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions,viewport_policy=viewport_policy,reference_size=reference_size):
+-        target=draw_triangles(target,segment['positions'],segment['colours'],triangles,
+-                              additive=additive,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits,
+-                              window_positions=segment.get('window_positions'))
+-    return target
++    segments=quad_line_vertices(positions,colours,width=width,height=height,closed=closed,
++        clip_positions=clip_positions,viewport_policy=viewport_policy,reference_size=reference_size)
++    return draw_quad_segments(target,segments,additive=additive,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits)
++
++
++def draw_quad_segments(destination,segments,*,additive,quantize=True,raster_subpixel_bits=None):
++    """Batch already-generated independent quads, preserving triangle/blend order."""
++    segments=list(segments)
++    if not segments:return destination
++    positions=np.concatenate([s['positions'] for s in segments])
++    colours=np.concatenate([s['colours'] for s in segments])
++    triangles=(np.arange(len(segments),dtype=np.int64)[:,None,None]*4+
++               np.array([[0,1,2],[2,1,3]],np.int64)).reshape(-1,3)
++    windows=[s.get('window_positions') for s in segments]
++    window_positions=None if windows[0] is None else np.concatenate(windows)
++    return draw_triangles(destination,positions,colours,triangles,additive=additive,
++        quantize=quantize,raster_subpixel_bits=raster_subpixel_bits,window_positions=window_positions)
+--- a/tools/milk-analyzer/motion_vectors.py
++++ b/tools/milk-analyzer/motion_vectors.py
+@@ -10 +10 @@
+-from quad_lines import PROFILE,draw_quad_lines,line_scale
++from quad_lines import PROFILE,draw_quad_lines,line_scale,quad_line_vertices,draw_quad_segments
+@@ -165,0 +166,6 @@
++    if quad:
++        segments=[]
++        for index,segment in enumerate(geometry['positions']):
++            segments.extend(quad_line_vertices(segment,colour,width=width,height=height,
++                clip_positions=geometry['clip_positions'][index],reference_size=reference_size))
++        return draw_quad_segments(target,segments,additive=False,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits)
