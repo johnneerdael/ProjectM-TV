@@ -163,6 +163,23 @@ layouts instead of guessing. `ArrayInitializerTest` and the real-GL
 `FlatLocalArrayInitializerKeepsTheAuthoredShader` controls identify this component;
 the reserved-identifier screenshot below does not independently prove array layout.
 
+![Global flat-array compatibility in an unchanged original preset](superpowers/evidence/current-patch-proof/components/arrays-quicksand/comparison.png)
+
+**What to look for:** in unchanged `ORB - Quicksand Lab.milk`, upstream and
+current-minus0002 use a brighter cyan fallback composite. Our library runs the
+authored five-tap filter and produces dimmer cyan regions with edge emphasis.
+The filter's weights sum to0.2 after its authored multiplier, so the darker
+appearance is expected; no screenshot brightness gain or correction is applied.
+
+**How the retained array work changes it:** the source initializes five `float4`
+elements from twenty scalars. GLSL needs typed vector constructors and a whole-array
+assignment. Both baseline roles report array index/constructor/type errors and
+explicit composite fallback. Current compiles the authored shader without those
+warnings. All three roles repeat all120 frames exactly with zero GL errors;
+source/binary and complete decoded-stream verification pass. This establishes
+global flat layout; local flat layout remains a separate control.
+[Original bytes, shader cause and capture receipts](superpowers/evidence/current-patch-proof/components/arrays-quicksand/README.md).
+
 Modulo type, precedence and emission compatibility is supplied by upstream
 [PR #1031](https://github.com/projectM-visualizer/projectm/pull/1031), rather than a
 separate retained modulo implementation in current 0002.
