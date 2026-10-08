@@ -1,0 +1,95 @@
+[
+  {
+    "patch": "0012",
+    "preset": "amandio c - the green machine 2 skin lard bone beacon nz+ btbam covers sepultura.milk",
+    "asset_sha256": "23aff47afac99484e61d109a3c8222cb1a55f2a61b179077fdee91d8eeda986c",
+    "frame": 59,
+    "dimensions": [
+      256,
+      144
+    ],
+    "crop": [
+      80,
+      32,
+      176,
+      112
+    ],
+    "whole_frame_nearest_scale": 2,
+    "crop_nearest_scale": 3,
+    "no_brightness_gain": true,
+    "luma_without_rgb8": 50.3221950141059,
+    "luma_with_rgb8": 71.82444254014757,
+    "mae_rgb8": 44.83743851273148,
+    "maximum_channel_delta": 227,
+    "pixels_delta_gt16": 34365,
+    "source_rgb_sha256": [
+      "8b12632b6be32b27799326f61af6ec7476ea4e47c94ba9f70561990522c1a8d5",
+      "8b92620355773e91a7833916921e4eca569e5a30e34b55af62a8ac09a1ebf315"
+    ],
+    "image": "0012-visible-original.png",
+    "image_sha256": "88352dfddfcdbae9bd0376612eb5b1500e283b1a87fc65fa9e9544430392e95a",
+    "repeat_proof": "visible-confirmed-results.json"
+  },
+  {
+    "patch": "0013",
+    "preset": "DemonLD_-_Toxic_water_diffusion threx angela vs debi brown (nice) qovboit (SNIIIWS).milk",
+    "asset_sha256": "3e2e2cd67d55560d1565aefaff878341207764dd716b9becdebd53f4f92963ea",
+    "frame": 59,
+    "dimensions": [
+      256,
+      144
+    ],
+    "crop": [
+      72,
+      40,
+      168,
+      104
+    ],
+    "whole_frame_nearest_scale": 2,
+    "crop_nearest_scale": 4,
+    "no_brightness_gain": true,
+    "luma_without_rgb8": 57.02277995334202,
+    "luma_with_rgb8": 48.392856076388895,
+    "mae_rgb8": 25.84550419560185,
+    "maximum_channel_delta": 255,
+    "pixels_delta_gt16": 19520,
+    "source_rgb_sha256": [
+      "8df23a626fa31efe5f1e4ea54c0bf87e37425ab2b22bf39a0a0e070035783098",
+      "81acba24aca839f74d1be83be68e9006e33dc0c8d7b3b30aefc4051fc6057010"
+    ],
+    "image": "0013-visible-original.png",
+    "image_sha256": "e6c2a59ea9b8263cc3de9deab78cfa06f549e9e8fdc52d59a26c2cf43da5d20e",
+    "repeat_proof": "visible-confirmed-results.json"
+  },
+  {
+    "patch": "0013",
+    "preset": "stupid mash4 my will is perfect entropy, no life.milk",
+    "asset_sha256": "b679a510e7db26a85532e351bd0d7896b3762d9ca45c0fd7826007f94d94eb25",
+    "frame": 59,
+    "dimensions": [
+      256,
+      144
+    ],
+    "crop": [
+      80,
+      32,
+      176,
+      112
+    ],
+    "whole_frame_nearest_scale": 2,
+    "crop_nearest_scale": 3,
+    "no_brightness_gain": true,
+    "luma_without_rgb8": 46.99214811197916,
+    "luma_with_rgb8": 51.36432578125,
+    "mae_rgb8": 34.349365234375,
+    "maximum_channel_delta": 255,
+    "pixels_delta_gt16": 21105,
+    "source_rgb_sha256": [
+      "975ba57d9cfa3e16c9351ec7b4a21dbbfdb2bd2b2317cc460ff575bb99c4b95a",
+      "921faf0734e9eb3dbafae5538b2efd27787d8fce24a9cbf99d6f847080d72746"
+    ],
+    "image": "0013-visible-alternate.png",
+    "image_sha256": "a1a2b4ea86f51bbb7cf704a040db9ae748bb33e53eb2148e927df54efd45b099",
+    "repeat_proof": "visible-confirmed-results.json"
+  }
+]

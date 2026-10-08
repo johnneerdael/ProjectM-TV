@@ -1,0 +1,70 @@
+{
+  "frame": 29,
+  "crop": [
+    15,
+    35,
+    215,
+    235
+  ],
+  "crop_scale": 2,
+  "crop_resampling": "nearest",
+  "brightness_gain": 1,
+  "roles": {
+    "upstream": {
+      "frame_rgb_sha256": "79bab7867f2c37c7d911a1f65053720c21632ca6183f41eb63861a87bc1fd1b1",
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        },
+        {
+          "message": "[Shader] Error compiling fragment shader: ERROR: 0:112: '[]' : array index out of range\nERROR: 0:112: 'constructor' : Array constructor argument has an incorrect type\nERROR: 0:112: '=' : array / non-array mismatch\nERROR: 0:112: 'assign' : cannot convert from 'const array[20] of 4-component vector of float' to 'highp 4-component vector of float'\n",
+          "severity": 5
+        },
+        {
+          "message": "[FinalComposite] Error compiling composite warp shader code - Using fallback shader.",
+          "severity": 4
+        }
+      ],
+      "gl_error_frames": [
+        0,
+        0
+      ]
+    },
+    "without-0002": {
+      "frame_rgb_sha256": "a66036e06f6cd2ea452dd18b8d3d970db61ad92a94c987cc947271a31b4eb3ee",
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        },
+        {
+          "message": "[Shader] Error compiling fragment shader: ERROR: 0:112: '[]' : array index out of range\nERROR: 0:112: 'constructor' : Array constructor argument has an incorrect type\nERROR: 0:112: '=' : array / non-array mismatch\nERROR: 0:112: 'assign' : cannot convert from 'const array[20] of 4-component vector of float' to 'highp 4-component vector of float'\n",
+          "severity": 5
+        },
+        {
+          "message": "[FinalComposite] Error compiling composite warp shader code - Using fallback shader.",
+          "severity": 4
+        }
+      ],
+      "gl_error_frames": [
+        0,
+        0
+      ]
+    },
+    "patched": {
+      "frame_rgb_sha256": "64b81e322a8f248ce6c8e3ed0e7091a5bab70023956a6106d2437b2ca096f13c",
+      "messages": [
+        {
+          "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+          "severity": 3
+        }
+      ],
+      "gl_error_frames": [
+        0,
+        0
+      ]
+    }
+  },
+  "figure_sha256": "3ee9d047dbba1fc6093f42fa7c348dd9e588fe5212072aa7bf8e2779a63e3957"
+}

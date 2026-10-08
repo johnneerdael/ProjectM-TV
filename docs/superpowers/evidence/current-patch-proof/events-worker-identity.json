@@ -1,0 +1,23 @@
+{
+  "base_engine_protocol": "protocol.json",
+  "source_hashes": {
+    "worker.cpp": "a9976350d502256499c797cd294233e0b26243db075bf9f0dc7d4712c247aca1",
+    "gl_capture.hpp": "f7b02bde3b4f4945427f7c0f5d2c5af19020fdad5b7189bb45cf0f888e355863",
+    "CMakeLists.txt": "5198a7bb29ab25e5c08d60aac92fe7fded601f0804e6c3efe5dd6788dc58b762",
+    "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690"
+  },
+  "roles": {
+    "upstream": {
+      "binary_sha256": "6ccf0501bcfe6519dca2b989379faaf77dc7288d84e00eb1ec90a174bd569ca0",
+      "parent_sources": "upstream-source-hashes.json"
+    },
+    "without-0010": {
+      "binary_sha256": "7c3b0affe488253872702541989ac6b73668f6dc4a73238d33a6d5cc86925a17",
+      "parent_sources": "ablation-builds.json:without-0010"
+    },
+    "patched": {
+      "binary_sha256": "9cac1fd24dfe9c66e517d99fcd02f3a202d9ece025db5e1a2af7b9c866d70acb",
+      "parent_sources": "patched-source-hashes.json"
+    }
+  }
+}

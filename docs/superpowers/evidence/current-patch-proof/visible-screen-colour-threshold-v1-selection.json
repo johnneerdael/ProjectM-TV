@@ -1,0 +1,56 @@
+[
+  {
+    "patch": "0013",
+    "asset_sha256": "7a3041d040543ff6f330dceacd4dd177f142433cfd6726b7340bd8a55252f4a8",
+    "filename": "Zylot - new work.milk",
+    "score": 1,
+    "reason": [
+      "    ret = ret+((pow(ret,6))*((((abs(q1-.5)+abs(q2-.5))*bass_att)*noiseval)));"
+    ]
+  },
+  {
+    "patch": "0013",
+    "asset_sha256": "b15eba7ba65195187f6dea3d9de514a4ee3c559e9426861d428d3e4b1c83e373",
+    "filename": "mboanaphithe.milk",
+    "score": 1,
+    "reason": [
+      "    ret = pow(ret,9)*80;"
+    ]
+  },
+  {
+    "patch": "0013",
+    "asset_sha256": "daa731b30b0efe13b0796861d4ce59e1efd62232a7bb32130d3896bebcb9d697",
+    "filename": "EVET - Brainvex.milk",
+    "score": 1,
+    "reason": [
+      "float2 fstep2 (float2 xy) {return 1.0/res*round(res*xy);}"
+    ]
+  },
+  {
+    "patch": "0013",
+    "asset_sha256": "8c56dbd8a15a5cec332e2f08e75ed8968abdc25ee0954486372f725691dc30b1",
+    "filename": "fed - slowfast 2-0 [acid tweak].milk",
+    "score": 1,
+    "reason": [
+      "ret*=4*tex2d(sampler_fw_main,floor(uv*pix)/pix);"
+    ]
+  },
+  {
+    "patch": "0013",
+    "asset_sha256": "a7f9028412153f237051483ed9cedfc5c743d9b3c5978b5f2da6a9e1d7373fee",
+    "filename": "fed - slowfast 2-0.milk",
+    "score": 1,
+    "reason": [
+      "ret*=4*tex2d(sampler_fw_main,floor(uv*pix)/pix);"
+    ]
+  },
+  {
+    "patch": "0013",
+    "asset_sha256": "f88be76c59db0c3d511f7b4449b35bcda3fb71b658fec5d5acc1fa698ea6f2b5",
+    "filename": "fed - slowfast 2-11 [Killa].milk",
+    "score": 1,
+    "reason": [
+      "ret*=4*tex2d(sampler_fw_main,floor(uv*pix)/pix);"
+    ]
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "patch": "0009",
+    "frame": 29,
+    "dimensions": [
+      512,
+      288
+    ],
+    "source_before": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/original-extra-captures/0009-original/without-0/frame-29.png",
+    "source_after": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/original-extra-captures/0009-original/patched-0/frame-29.png",
+    "source_rgb_sha256": [
+      "870730efb2d46db0049c1f93c38b3d19af45044154574288c5dcc497e8e6dd05",
+      "fa4026de42e348021b8cc11ebd44a1791c68581ae326095e928d1c67f827456b"
+    ],
+    "crop": [
+      0,
+      66,
+      96,
+      130
+    ],
+    "whole_frame_nearest_scale": 1,
+    "difference_map": "max(abs(before.RGB-after.RGB))",
+    "map_gain": 8,
+    "map_clip": 255,
+    "raw_brightness_changed": false,
+    "whole_frame_crop_outline": true,
+    "changed_pixels": 79638,
+    "total_pixels": 147456,
+    "mean_absolute_rgb8_delta": 3.6570140697337963,
+    "maximum_channel_delta": 201,
+    "image": "0009-visible.png",
+    "image_sha256": "de049e5a6e2a9f5b7e32faca82b81231f3702ce0fa8fc64637b9fc58e864f111"
+  },
+  {
+    "patch": "0012",
+    "frame": 29,
+    "dimensions": [
+      256,
+      144
+    ],
+    "source_before": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/original-extra-captures/0012-original/without-0/frame-29.png",
+    "source_after": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/original-extra-captures/0012-original/patched-0/frame-29.png",
+    "source_rgb_sha256": [
+      "7c98d2da7afa2bdee9765910c81cb588e14781b77538fb54df84f7e7039e4348",
+      "4a7d89a07291a9f18f26543ec711218b73f5f595a38f5f0246ba5e18b76fba4e"
+    ],
+    "crop": [
+      120,
+      64,
+      144,
+      80
+    ],
+    "whole_frame_nearest_scale": 2,
+    "difference_map": "max(abs(before.RGB-after.RGB))",
+    "map_gain": 4,
+    "map_clip": 255,
+    "raw_brightness_changed": false,
+    "whole_frame_crop_outline": true,
+    "changed_pixels": 3,
+    "total_pixels": 36864,
+    "mean_absolute_rgb8_delta": 0.0033365885416666665,
+    "maximum_channel_delta": 167,
+    "image": "0012-visible.png",
+    "image_sha256": "f509999210fd01e97f0619d94d298c5ed65737d88ddcefa02119290f55e01f8a"
+  },
+  {
+    "patch": "0013",
+    "frame": 29,
+    "dimensions": [
+      256,
+      144
+    ],
+    "source_before": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/original-extra-captures/0013-original/without-0/frame-29.png",
+    "source_after": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/original-extra-captures/0013-original/patched-0/frame-29.png",
+    "source_rgb_sha256": [
+      "2afd2d51aca4ed38d3478bc179b33035e3b745886336d975e47a7582af0b6952",
+      "4a7d89a07291a9f18f26543ec711218b73f5f595a38f5f0246ba5e18b76fba4e"
+    ],
+    "crop": [
+      120,
+      64,
+      144,
+      80
+    ],
+    "whole_frame_nearest_scale": 2,
+    "difference_map": "max(abs(before.RGB-after.RGB))",
+    "map_gain": 4,
+    "map_clip": 255,
+    "raw_brightness_changed": false,
+    "whole_frame_crop_outline": true,
+    "changed_pixels": 6,
+    "total_pixels": 36864,
+    "mean_absolute_rgb8_delta": 0.00244140625,
+    "maximum_channel_delta": 115,
+    "image": "0013-visible.png",
+    "image_sha256": "92be1f7a3b210e9606eb53203718c08f4f9d55bccb41651b6df22a9ff54e89cf"
+  },
+  {
+    "patch": "0007",
+    "frame": 119,
+    "dimensions": [
+      512,
+      288
+    ],
+    "source_before": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/fixture-captures/0007-wave-mode/without-0/frame-119.png",
+    "source_after": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/fixture-captures/0007-wave-mode/patched-0/frame-119.png",
+    "source_rgb_sha256": [
+      "e91feb5db4971f6b9dc8f4eaa1cf5be4f19894d0962b8e77850fc3afc12d111e",
+      "4b21eb8c4793b102f93563ffbaef1ccc0647c15173b378a35ac500f60a94b4c3"
+    ],
+    "crop": [
+      170,
+      60,
+      322,
+      212
+    ],
+    "whole_frame_nearest_scale": 1,
+    "difference_map": "max(abs(before.RGB-after.RGB))",
+    "map_gain": 1,
+    "map_clip": 255,
+    "raw_brightness_changed": false,
+    "whole_frame_crop_outline": true,
+    "changed_pixels": 1836,
+    "total_pixels": 147456,
+    "mean_absolute_rgb8_delta": 0.7041965060763888,
+    "maximum_channel_delta": 241,
+    "image": "0007-wave-mode-visible.png",
+    "image_sha256": "86449b3c62e1afa0e9f6590b8c32a9115b63c745f9eff3b4a09ba0d2c1eb9990"
+  },
+  {
+    "patch": "0007",
+    "frame": 29,
+    "dimensions": [
+      512,
+      288
+    ],
+    "source_before": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/wave-witness-captures/0007-wormhole/without-0/frame-29.png",
+    "source_after": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/wave-witness-captures/0007-wormhole/patched-0/frame-29.png",
+    "source_rgb_sha256": [
+      "acf94007242a2615b8355b341be3812cfad2dd434146dae347e0da4af37d4a36",
+      "1f0f2db750bc10c687ddfa049b50d619576e72b4dc682bd4e5fd547f886b9169"
+    ],
+    "crop": [
+      160,
+      52,
+      320,
+      212
+    ],
+    "whole_frame_nearest_scale": 1,
+    "difference_map": "max(abs(before.RGB-after.RGB))",
+    "map_gain": 2,
+    "map_clip": 255,
+    "raw_brightness_changed": false,
+    "whole_frame_crop_outline": true,
+    "changed_pixels": 135296,
+    "total_pixels": 147456,
+    "mean_absolute_rgb8_delta": 8.08204029224537,
+    "maximum_channel_delta": 255,
+    "image": "0007-wormhole-visible.png",
+    "image_sha256": "fb133516efafd5186446764b54016dd81c6a3cd05275d3f89b148444e73d640b"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "frames": 120,
+  "power_expected_pixels": {
+    "(0, 0)": [
+      0,
+      0,
+      64
+    ],
+    "(511, 0)": [
+      255,
+      0,
+      64
+    ],
+    "(0, 287)": [
+      0,
+      255,
+      64
+    ],
+    "(511, 287)": [
+      255,
+      255,
+      64
+    ],
+    "(256, 144)": [
+      127,
+      127,
+      64
+    ]
+  },
+  "blue_marker": 64,
+  "rotation_upstream_expected_constant": [
+    128,
+    128,
+    64
+  ],
+  "rotation_without0015_equals_current": true
+}

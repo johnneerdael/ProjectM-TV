@@ -1,0 +1,44 @@
+{
+  "frame": 119,
+  "preset": "Geiss - Hurricane (1-02 Version).milk",
+  "preset_sha256": "e1941fe7f4a8a2112ee9faf4660289b82748019d963864be4022f5771e9eb614",
+  "series_sha256": "6c929468f36637304eba1f819ac9d72cbd89550077232eac486d24465e30a3a7",
+  "crop": [
+    120,
+    105,
+    265,
+    210
+  ],
+  "crop_scale": 3,
+  "crop_sampling": "nearest; unchanged brightness",
+  "roles": {
+    "upstream": {
+      "frame_sha256": "a0e4fd11236dd00e924f22b9817a98c2a13299b7ae433d6f7570bf5b6539f778",
+      "mae_vs_without0014": 0.00032099971064814816,
+      "mean_rgb": [
+        31.82569037543403,
+        39.85426161024306,
+        33.12891981336806
+      ]
+    },
+    "without-0014": {
+      "frame_sha256": "054fdaeaadea20d077b31b0a62a982676b20efaff778e3a72f5439694476f419",
+      "mae_vs_without0014": 0.0,
+      "mean_rgb": [
+        31.82586669921875,
+        39.8543701171875,
+        33.12908257378472
+      ]
+    },
+    "patched": {
+      "frame_sha256": "16c8fbc66874d917abb3a6941948ed4555d241dc7053f10a6520112ac59d13f9",
+      "mae_vs_without0014": 9.386164912471065,
+      "mean_rgb": [
+        42.18103705512153,
+        44.84747314453125,
+        45.28416612413194
+      ]
+    }
+  },
+  "figure_sha256": "60f770c4a1438b8e50780653bc6953135ae6712b87a37cc858c4251fbc256a76"
+}

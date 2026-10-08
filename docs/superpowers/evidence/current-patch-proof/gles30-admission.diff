@@ -1,0 +1,7 @@
+--- a/src/libprojectM/Renderer/Platform/GladLoader.cpp
++++ b/src/libprojectM/Renderer/Platform/GladLoader.cpp
+@@ -50,2 +50,2 @@
+-        .WithMinimumVersion(3, 2)
+-        .WithMinimumShaderLanguageVersion(3, 20)
++        .WithMinimumVersion(3, 0)
++        .WithMinimumShaderLanguageVersion(3, 0)

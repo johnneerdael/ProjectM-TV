@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "successful_roles": [
+    "upstream",
+    "without-0010",
+    "patched"
+  ],
+  "rejected_roles": [],
+  "different_frames_between_adjacent_successful_roles": {
+    "upstream:without-0010": 120,
+    "without-0010:patched": 59
+  },
+  "scope": "retained full RGB streams/images/repeats/reconstructed source/binary identities; load rejection remains a rejection",
+  "verifier_sha256": "ca918b5d4ad62896feaaf17c1e6c704966ae0c2103519f8f9c0dfc052d046f84"
+}

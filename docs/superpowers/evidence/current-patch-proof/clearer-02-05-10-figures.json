@@ -1,0 +1,72 @@
+[
+  {
+    "patch": "0002",
+    "preset": "Flexi - madness portal.milk",
+    "asset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e",
+    "frame": 59,
+    "dimensions": [
+      512,
+      288
+    ],
+    "crop": [
+      208,
+      104,
+      304,
+      184
+    ],
+    "zoom": 3,
+    "full_nearest_scale": 1,
+    "raw_rgb_sha256": [
+      "6c518ced95204f8b74261e7220d65bdc9559688c8a438c9c4d00cfa2967badff",
+      "0207de1b7c7517f81261d2b33769c2f5c1ede5b2a8a6a5312223c747845f515c"
+    ],
+    "mae_rgb8": 54.1017749927662,
+    "max_delta": 255,
+    "image": "0002-clear-original.png",
+    "image_sha256": "68db463fb0d9be487e750fe8c8a45a4667e9be0c23e97b78700b4da8dd92e4e2",
+    "repeat_proof": "clearer-02-05-results.json"
+  },
+  {
+    "patch": "0005",
+    "preset": "flexi - a julia fractal for hexcollie embossed (Jelly).milk",
+    "asset_sha256": "32041049d4da1b22e8015c5c77c717220a65fbeb3a614ced302ace026a9b532b",
+    "frame": 59,
+    "dimensions": [
+      512,
+      288
+    ],
+    "crop": [
+      208,
+      104,
+      304,
+      184
+    ],
+    "zoom": 3,
+    "full_nearest_scale": 1,
+    "raw_rgb_sha256": [
+      "550a998ad6549c840a81662a1efc0883703dc7720ec35ee7372e4dbfbc7177ff",
+      "36cfb1c2727770daa537269663c63ef0af521b25d93bd5a1d3a25a051204d517"
+    ],
+    "mae_rgb8": 38.54068558304398,
+    "max_delta": 178,
+    "image": "0005-clear-original.png",
+    "image_sha256": "d86db004434d992fb9e15beca796248828aa21c520fed42cd54ba734c59fdf5f",
+    "repeat_proof": "clearer-02-05-results.json"
+  },
+  {
+    "patch": "0010",
+    "scenario": "host root-switch/soft-cut/reset; named custom-shape lookup fixture, not an unchanged artist preset",
+    "frames": [
+      40,
+      59
+    ],
+    "image": "0010-recognizable-pack-switch.png",
+    "image_sha256": "53b80c4833225b072ae1e4dfdc47507ed927fcf265efd37142c474df8d8d893c",
+    "inputs": {
+      "preset.milk": "0e19794862f9c160402b8fa3297c1449e88532e426fda83c729f206b61869098",
+      "a/shared.jpg": "3994768679343cd562e41f3a1743cdbaf892b1f93a258075b10ebdb59420aff6",
+      "b/shared.jpg": "afd039fa6b234ef622f541d8033a51dec61f47b137f93fbca08ca2aa155ed36b"
+    },
+    "repeat_proof": "recognizable-pack-switch-results.json"
+  }
+]

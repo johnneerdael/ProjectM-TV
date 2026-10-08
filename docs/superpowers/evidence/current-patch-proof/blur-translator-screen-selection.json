@@ -1,0 +1,273 @@
+[
+  {
+    "patch": "0005",
+    "filename": "Flexi - emergencey 2 --- Isosceles edit4a enhance.milk",
+    "ranges": [
+      [
+        1,
+        1.0,
+        1.0
+      ],
+      [
+        2,
+        1.0,
+        1.0
+      ],
+      [
+        3,
+        1.0,
+        1.0
+      ]
+    ],
+    "writes": [],
+    "score": 30,
+    "asset_sha256": "e5389c815f0f3b89227722f9deff98b190663ed5fb9b4aef26067a1ff3ab6734"
+  },
+  {
+    "patch": "0005",
+    "filename": "Flexi - emergencey 2 --- Isosceles edit4b enhance warp.milk",
+    "ranges": [
+      [
+        1,
+        1.0,
+        1.0
+      ],
+      [
+        2,
+        1.0,
+        1.0
+      ],
+      [
+        3,
+        1.0,
+        1.0
+      ]
+    ],
+    "writes": [],
+    "score": 30,
+    "asset_sha256": "af2294355b6d5f4ce72b8c3ea31f6e531a546547ea390dd53a5be353e542f13d"
+  },
+  {
+    "patch": "0005",
+    "filename": "Mig_015.milk",
+    "ranges": [
+      [
+        2,
+        0.0,
+        0.0
+      ],
+      [
+        3,
+        0.0,
+        0.0
+      ]
+    ],
+    "writes": [],
+    "score": 20,
+    "asset_sha256": "4b2f227da1789b1be41aea662d163032eaa9f74e3642f91d8f6b5ff1250d795f"
+  },
+  {
+    "patch": "0005",
+    "filename": "$$$ Royal - Mashup (29).milk",
+    "ranges": [
+      [
+        1,
+        1.0,
+        1.0
+      ]
+    ],
+    "writes": [],
+    "score": 10,
+    "asset_sha256": "05d916118a7f54c1b981e8111c6a3490872117761141829ec999544382791607"
+  },
+  {
+    "patch": "0005",
+    "filename": "Cope - The Cloud.milk",
+    "ranges": [
+      [
+        1,
+        1.0,
+        1.0
+      ]
+    ],
+    "writes": [],
+    "score": 10,
+    "asset_sha256": "9c93b7182617fc543a329b094067136fde5e67a6ccf78047d350dc7c7f90ad9c"
+  },
+  {
+    "patch": "0005",
+    "filename": "EVET - Scanazoic --- Isosceles edit.milk",
+    "ranges": [
+      [
+        3,
+        0.0,
+        0.0
+      ]
+    ],
+    "writes": [],
+    "score": 10,
+    "asset_sha256": "d5b351797af60543cfd3d4230c0ebb708f71c74d53f9a86cd592a79585ba0075"
+  },
+  {
+    "patch": "0005",
+    "filename": "flexi - a julia fractal for hexcollie embossed (Jelly).milk",
+    "ranges": [
+      [
+        3,
+        0.49,
+        0.52
+      ]
+    ],
+    "writes": [],
+    "score": 10,
+    "asset_sha256": "32041049d4da1b22e8015c5c77c717220a65fbeb3a614ced302ace026a9b532b"
+  },
+  {
+    "patch": "0005",
+    "filename": "goody - woven beads (ps2-0).milk",
+    "ranges": [
+      [
+        2,
+        0.0,
+        0.0
+      ]
+    ],
+    "writes": [],
+    "score": 10,
+    "asset_sha256": "01c8fa68f46ede6725058e24db509b392324195d7e66a1f48cda90e1d428dc82"
+  },
+  {
+    "patch": "0005",
+    "filename": "shadowharlequin, goody - woven beads (ps2-0) [outlined].milk",
+    "ranges": [
+      [
+        2,
+        0.0,
+        0.0
+      ]
+    ],
+    "writes": [],
+    "score": 10,
+    "asset_sha256": "61f1423c040cabdcb37c5caa9294313b5c5692bc7c0ab3c04d7d4e499677487f"
+  },
+  {
+    "patch": "0002",
+    "filename": "$$$ Royal - Mashup (324).milk",
+    "score": 100,
+    "asset_sha256": "70c428f595882862b346f55bb7b6cf342ce30e1f7e1ffe9d58299cbc80051f78"
+  },
+  {
+    "patch": "0002",
+    "filename": "EVET + Flexi - Rainbox Splash Poolz.milk",
+    "score": 100,
+    "asset_sha256": "be239e68191d98dc976e8bf3c1551162f7bf98b058f218f92e4f1800dbaaefdf"
+  },
+  {
+    "patch": "0002",
+    "filename": "EVET - Brainsplolz.milk",
+    "score": 100,
+    "asset_sha256": "ca7f632030a524c044bcf6b3387fe97a3b28f72edaa9ef93988b036ac5ff0a31"
+  },
+  {
+    "patch": "0002",
+    "filename": "EVET - Spiracology 2.milk",
+    "score": 100,
+    "asset_sha256": "2204cee597e4ebe6e9b5dae1ccdf89f2b0b49f41eeeb9a041a526c07116ffa95"
+  },
+  {
+    "patch": "0002",
+    "filename": "EoS - glowsticks v2 04 music minimal - swim  - dictatutorial.milk",
+    "score": 100,
+    "asset_sha256": "5f2e3c5732513d8f2c14a6c6dd2255fc38e1f7034a1906dc02726e47fc8585ad"
+  },
+  {
+    "patch": "0002",
+    "filename": "EoS+Phat - spectrum bubble new colors - orb sth go 4-ret brothers organs.milk",
+    "score": 100,
+    "asset_sha256": "244b7e7589bc6bf58242b85041e3cb97b800614a0d73b1dc71fa90e76d8398a3"
+  },
+  {
+    "patch": "0002",
+    "filename": "Fed + Geiss - Color Pox Remix.milk",
+    "score": 100,
+    "asset_sha256": "acae4b876741a1fa0962a8894633bca09c6e22c27b367945de3825f5dfebf2d1"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - dimension window.milk",
+    "score": 100,
+    "asset_sha256": "ca23e254c3bea2a8e59fc07fec1ddc993a9fada9469c2c0f2557610fc5b1016d"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - ianus portal.milk",
+    "score": 100,
+    "asset_sha256": "c6f7140722af728dedd6630659fd3e940634880d7c095386a28caa051d4028ef"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - madness portal.milk",
+    "score": 100,
+    "asset_sha256": "e02d91b828f75316042cade88768cdbe962e59a35ca6281eac1b50a71f8a5e4e"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - rorschach bomb.milk",
+    "score": 100,
+    "asset_sha256": "ea5c6343586c38d7b77cb1f92d69e91b3cb8fe6ec1c24f8a61fc896830e58801"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - spirally caterpillar coop mode.milk",
+    "score": 100,
+    "asset_sha256": "83a21c74a7affda7c9ed85da05fc652b988b22eb2596a394e78e5ec86f84dd22"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - spirally repetative 2.milk",
+    "score": 100,
+    "asset_sha256": "a0e1f244b13156627e3df8b50db2f47e67e7e3b4ce2571b5cb464f2a470417bd"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - truly soft piece of software - topology - cohere perfectly normal people stopped functioning.milk",
+    "score": 100,
+    "asset_sha256": "249b57cb667831ef86d09fda33c3c7c35a74d3f818cfa916bd47e8d718c75233"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - truly soft piece of software - topology - cohere.milk",
+    "score": 100,
+    "asset_sha256": "a6dd160c7fd71b64707bb25724bee5645a87bc75e3436766b665966a19034362"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - wave function collapse - major dick.milk",
+    "score": 100,
+    "asset_sha256": "0d79247a8de280e66e69c0fadac127ed5219b197803010d754e35acf4277b88a"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - wave function collapse - majorly dickless combatanth.milk",
+    "score": 100,
+    "asset_sha256": "d376201257624655b93459c8b247978d6a16c1e99a867c05b4f3e4c6145231e0"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - wave function collapse - majorly dickless nz+ puke mash.milk",
+    "score": 100,
+    "asset_sha256": "866131d9c4557ceb4f36949c29135842a8b3648305c7c25ca13d53e56da71dc1"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - wave function collapse - majorly dickless nz+.milk",
+    "score": 100,
+    "asset_sha256": "ddad1d6ab3507fbf7b1ce0b3756cd2743e3095f9bd202eac8051137b64938884"
+  },
+  {
+    "patch": "0002",
+    "filename": "Flexi - wave function collapse - majorly dickless.milk",
+    "score": 100,
+    "asset_sha256": "b17fee8006e59220ee3ace8f32cda438bb223511371d1017845d3863eb666a45"
+  }
+]

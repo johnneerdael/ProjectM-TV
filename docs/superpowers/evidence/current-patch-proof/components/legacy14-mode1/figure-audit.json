@@ -1,0 +1,26 @@
+{
+  "frame": 119,
+  "fixture": "legacy-mode1-spiral.milk",
+  "preset_sha256": "bba1568a13650e2b9218bbbbe7f33e95fd8e5f085382a5323e34921e546dcef5",
+  "series_sha256": "6c929468f36637304eba1f819ac9d72cbd89550077232eac486d24465e30a3a7",
+  "crop": [
+    189,
+    118,
+    271,
+    193
+  ],
+  "scale": 5,
+  "sampling": "nearest, unchanged brightness",
+  "roles": {
+    "upstream": {
+      "frame_sha256": "6f90b684f3144c1a9bfcfb2856aaf0a50c62ce686b6d6501f074987508d1605d"
+    },
+    "without-0014": {
+      "frame_sha256": "6f90b684f3144c1a9bfcfb2856aaf0a50c62ce686b6d6501f074987508d1605d"
+    },
+    "patched": {
+      "frame_sha256": "05990b4957008533257585cec119188bef37a7dd091d0f0a7828c1669ca32ffe"
+    }
+  },
+  "figure_sha256": "65a5f4ea64213dc6a60e6e0d97f563f2f912a030e7072c47772ed77cd5b77c1d"
+}

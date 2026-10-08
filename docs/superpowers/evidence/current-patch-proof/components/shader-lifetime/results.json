@@ -1,0 +1,1950 @@
+{
+  "capture_sha256": "993b2da137c4af99f099abd69dfeb7a327d9cd21804a6eb6be45cd53fc475a76",
+  "capture_kind": "image",
+  "device": "emulator-5630",
+  "user": 0,
+  "features": [
+    "feature:reqGlEsVersion=0x30000",
+    "feature:android.hardware.audio.output",
+    "feature:android.hardware.bluetooth",
+    "feature:android.hardware.bluetooth_le",
+    "feature:android.hardware.camera.any",
+    "feature:android.hardware.camera.capability.raw",
+    "feature:android.hardware.camera.front",
+    "feature:android.hardware.context_hub",
+    "feature:android.hardware.ethernet",
+    "feature:android.hardware.faketouch",
+    "feature:android.hardware.gamepad",
+    "feature:android.hardware.hardware_keystore=400",
+    "feature:android.hardware.keystore.app_attest_key",
+    "feature:android.hardware.location",
+    "feature:android.hardware.location.network",
+    "feature:android.hardware.ram.normal",
+    "feature:android.hardware.reboot_escrow",
+    "feature:android.hardware.screen.landscape",
+    "feature:android.hardware.security.model.compatible",
+    "feature:android.hardware.thread_network",
+    "feature:android.hardware.touchscreen",
+    "feature:android.hardware.touchscreen.multitouch",
+    "feature:android.hardware.touchscreen.multitouch.distinct",
+    "feature:android.hardware.touchscreen.multitouch.jazzhand",
+    "feature:android.hardware.type.television",
+    "feature:android.hardware.uwb",
+    "feature:android.hardware.vulkan.compute",
+    "feature:android.hardware.vulkan.level=1",
+    "feature:android.hardware.vulkan.version=4206592",
+    "feature:android.hardware.wifi",
+    "feature:android.hardware.wifi.direct",
+    "feature:android.hardware.wifi.passpoint",
+    "feature:android.software.adoptable_storage",
+    "feature:android.software.app_enumeration",
+    "feature:android.software.autofill",
+    "feature:android.software.backup",
+    "feature:android.software.cts",
+    "feature:android.software.device_lock",
+    "feature:android.software.erofs",
+    "feature:android.software.file_based_encryption",
+    "feature:android.software.incremental_delivery=2",
+    "feature:android.software.input_methods",
+    "feature:android.software.ipsec_tunnel_migration",
+    "feature:android.software.ipsec_tunnels",
+    "feature:android.software.leanback",
+    "feature:android.software.leanback_only",
+    "feature:android.software.live_tv",
+    "feature:android.software.opengles.deqp.level=132711169",
+    "feature:android.software.securely_removes_users",
+    "feature:android.software.verified_boot",
+    "feature:android.software.voice_recognizers",
+    "feature:android.software.vulkan.deqp.level=132711169",
+    "feature:android.software.webview",
+    "feature:com.google.android.apps.mediashell.cast_core",
+    "feature:com.google.android.feature.EXCHANGE_6_2",
+    "feature:com.google.android.feature.GLOBAL_ASSIST_TRIGGERING",
+    "feature:com.google.android.feature.GOOGLE_BUILD",
+    "feature:com.google.android.feature.GOOGLE_EXPERIENCE",
+    "feature:com.google.android.feature.TV_AUDIO_OUTPUT_SWITCHING",
+    "feature:com.google.android.software.cast_receiver",
+    "feature:com.google.android.tv.installed"
+  ],
+  "fingerprint": "google/sdk_google_atv64_arm64/emu64a:16/BT2A.260319.001/15058170:user/dev-keys",
+  "preset": "Geiss - 3D - Shockwaves.milk",
+  "preset_sha256": "fd442adc495d37058f7a92b3f6a58c23b212d194f93162c0e461f8c704800652",
+  "textures": {
+    "AbalonyStosich.jpg": "47ad80aaeb98ab8647271605069e205fa4df71202d5d5849e81702e0b1123b23",
+    "Image415.jpg": "4815995b55060430723358d097d3a25363a635317b44acccefe5e092f2134587",
+    "OIbeans1.jpg": "624e11b9f4a9f0b45a6ad6e255a858ef69450078bae824c97fa4a29c0014b760",
+    "OIcafewall.jpg": "fcd2a6168a41b61a9f16906478aab15f0443cb6d416d65881039427e5f4ae2cc",
+    "OIchess1.jpg": "c298fe3a52b61470e9b7eba326ec35ac40b07b9f02f38effbd413585ad573e5a",
+    "OIcurved1.jpg": "cecef2df3f52c24cd9e3306a551c8aeecdc821c700bcf021b0de8e5aea3a2dcc",
+    "OIcurved2.jpg": "2d78ef8261e182e8fdc707390724cfb5f776c63f49bdd0d9c4c8fcad9e88851f",
+    "OIcurved3.jpg": "1d73a8372d7ef6bb8faaaf7fa46144fd0ed5d0159585c7c0d5883eb2f5840364",
+    "OIcurved4.jpg": "7ff4448a9f91d1a6677dcc9bcb33e981ba99c726d823c523181694f44ce01d6f",
+    "OIkametanjo.jpg": "073cbc4cd083de7bf336d546868c6b8e45ddb4533a90a5c3c44cb47f34391cd1",
+    "OIparallel1.jpg": "d2c4478178386397092b996c1189e8ea10907aaf8612bfd093de0f2c2fc74f16",
+    "OIpoggendo.jpg": "bd3af90534d614d05919f2caf0f763b7cbaf13a935ef9c1435d7d9b273739fc9",
+    "OctagonalRoach.jpg": "1fe14532f20254911feb6a1676d960165f7aea6bb5dee8469660b4f7cc6c2d99",
+    "PEcubes1.jpg": "96292d8fad481989d1e258ad66264d1bcb622fd4b0115587d9365e25dbaf8492",
+    "PEcubesBW.jpg": "b9e60cab1afb1828655e4edc9a7df91c5b10e94bf79e8fc609b66aa0ad2de481",
+    "PElosang1.jpg": "5ace2e27d4f64e3d25795f3f2cbb637a9304500f6d4e811300470c27772b4f76",
+    "PEpyramid1.jpg": "3744275d50f244d265f61f7548a829464d267f4fecfd718536015874f3bdcd9c",
+    "PEsticks1.jpg": "eec44c21fb1f67eb77ea863079d21bc99a8026e65750f6ca9370a435bb6517bc",
+    "PEsticks2.jpg": "74f2ccd62dc3029deebe19b4d89729b495d834bf30d626b1b6f02e8acaa7fd9e",
+    "bw3.jpg": "70197f8b608b8877e3ec2fcda141f084bf3acfb5227e81065f3e77654d64f4b9",
+    "cartunemask1.jpg": "d9af2dc29c33a0c5b15ac74325fe80a463a826bcf8d5a3a5f6a10a1bddbcf4dd",
+    "cells.jpg": "73c63dafb7f61ea742ba0612cd9b070a62d66e5e4c28abfac738acfa9aaeeaf8",
+    "chloemall.png": "f07c01e6b234c9e75e51136681a79ee435eb37ac893acc793e8facfce9da5c23",
+    "chloemallCornerMask.png": "b847f831ef5107685fdfa1fffab51ec2eefbe053b5789c58a3fccab39b79d316",
+    "clouds.jpg": "f0f718609c5a911b4a394c750f6ffb8af531ef8551657ea03dc1f688127e0302",
+    "clouds2.jpg": "6348bd19522f2c6a27f76844a4588fe0327c9d9414eaeeec4162895f085d4268",
+    "colors.jpg": "db6854db3e43db35050ef7b5119477d8400afc9964a20c7c97c293f008917a1c",
+    "colors7.jpg": "ff0ef0c6dbc9d6ad099bfa7febd505a041b3210798ef243ad71e16d52c5edd00",
+    "devboxb.jpg": "b4227883ecce1f50ef7951bec4de43c2ab168e3fbc4cd19e6109adc3a0551802",
+    "eyeball.jpg": "0c0c4c78d7db809212e24f2639a906d9d05203a1ddb9e34f4f44e6be5302e269",
+    "facade01.jpg": "d2dd6468e1417df888cfa4eec2fe6f7db740649b70b8b7afc9d5e58fdd0edd68",
+    "fire_alpha.jpg": "7519c3c0baa09046baf8e0195a423ed02681b10a440a2f58073a82414e723717",
+    "fire_alpha3.jpg": "f7c0ed80250d652c7a5b339120cd3dcb26d31e52b104adba075bf1aa3ab3189a",
+    "fire_alpha4.jpg": "0ad4f2212574f43efa1a2336ff3b4bfb6153e22d8340ccafc0d16d21b909b514",
+    "fire_alpha5.jpg": "e1fe5e6540a4a1cfcf4871dd737d23d940a64e95e9d2e36a635827daaa134275",
+    "fire_alpha8.jpg": "4d5e01bddaebc0338341bb896eb4e4fecfbdf47540d55b69b189d7f0410a6bfc",
+    "fire_base.jpg": "4b98aa0d4092977b133f1e75532756975d91d345a01ed3fbd6f6433714d8cb23",
+    "fire_dis4.jpg": "717458d54a1a808761569711e6cf66c455a26341b16640063af17ac8924dd173",
+    "fire_dis5.jpg": "82fe164da4a60a7145ba75fdf7a04051636c6a0192af040c1e96323a3f83054c",
+    "grad.jpg": "a1782e77ea6ac18d08328f87cca6f3f4f894f36378458e29b5e9761abee95b2d",
+    "grad16.jpg": "0f07794ac3ae0fb8e775065e668a01d65b51ae149208d6400be47b3813c676ad",
+    "grad2.jpg": "ab6307d6bfb9b6cf5f87aa49e9eafbd3806ba4bb98985a8d798f93147e09a60d",
+    "grad3.jpg": "fc853bb74d67b9788d274266016802425a651d4ed4d67f588c3762fd748c0b95",
+    "heart.jpg": "259e5122c42220369b8ee2f3570858e08db668bda9832cd96233ed4e11ae9e25",
+    "lichen.jpg": "37efb7a166e94f4fa5328114860b05812434953df045ff9c8c91b96e63471a99",
+    "manyfish.jpg": "57e7eb55d35a96158b97cc1f025f294d07f99a3355b4c8571d95a82a47b1b0de",
+    "moss1.jpg": "8f3f10ae75acff724ac651e901dd0cb43a841573e313f9f315341bf8fe7e9ee8",
+    "noise64.png": "17173093b104e98f6b3ca7da4f3cac738d37568eac26879f0d166779098e767d",
+    "onefish.jpg": "3994768679343cd562e41f3a1743cdbaf892b1f93a258075b10ebdb59420aff6",
+    "pano_earth.jpg": "aa5f3d7c8d1b09802c244c3a7781a32ab15227d1acc3dec116beaf0d3a1aa52e",
+    "pano_earth_clouds.jpg": "5aff1ed93a9801193da7bcd964de3dd493c5615165e5cbdd3698421be0a7d877",
+    "pano_earth_night.jpg": "c9d95fc90d5d76a5eec9f47d55428869e6a367ee35a44a95e00bcbd2da2892a2",
+    "pano_earth_spec.jpg": "4915ae03dcfabeb232a13f55e687ee7af5c447766a055c578fa400f353aa29d2",
+    "pano_starsmap.jpg": "aad17668cbdbcf51110bc0dcd423ea4132544e1d7a56783d7bc97b67f9d3a63d",
+    "paper.jpg": "902feaef58b63c388fc554946ed9fb3591c9cc444be6074e28d8a22462d0e192",
+    "plane.png": "c91bd405833c12065bd98251640bafe1e18871273c69314a9a11a10cf6768c45",
+    "rose.jpg": "afd039fa6b234ef622f541d8033a51dec61f47b137f93fbca08ca2aa155ed36b",
+    "ruin.jpg": "547ddf16d2361481d4d6df178ae4dbe4f47bd0f3fb4df0511a0fc7f4667e036b",
+    "seaweed.jpg": "9d65e6534708a7c1c7b103e39ff7a5aa8e9451332a9876f60961d9b927aeb579",
+    "seaweed_ORIGINAL.jpg": "9d65e6534708a7c1c7b103e39ff7a5aa8e9451332a9876f60961d9b927aeb579",
+    "shub1.jpg": "af37a1acb297c297b5106346d5393a734572a8f866cdbe7cab091d9b14d0edbd",
+    "sin_lookup.jpg": "b5d4fad23c6a59552e396d0f51cbe36bb7d0dea923ddac2d41b7d851b2bba009",
+    "sinl.jpg": "947a54af05a1a279cfc1542b7018d73b53d2ad588547f065caebed070ae8c882",
+    "skull.jpg": "c406499742aeef8e4655e1170132d7d8b9051cbf613ee1ccb4c10e3804d47f94",
+    "sky.jpg": "49a86738cef0bd779f64b2b57390b4cce4d4c9d089942bc939f06a53ddc91944",
+    "smalltiled_colors3.jpg": "54ae6fbe0abf28649cf5fd41fac558d472e4330e11199b3fa4463200ebd72bbc",
+    "smalltiled_electric_nebula.jpg": "100784abde796d7e76bbfec8daa9c8cfca89d90b179823649c7d8a4eff2c0aab",
+    "smalltiled_ensign_meat.jpg": "ebb72e587c3c1c9be3343ef88841721bdcedb9fbfb01b61e14cbaf9bbbba46e0",
+    "smalltiled_lizard_scales.jpg": "ab00cccaf3191faf28489b46fcfb568802db3a5b8c51f7efecb3d7b5c22f191a",
+    "sunrise.jpg": "27c2f24e50bedf5a1d01e8785aa428042ac9fea9adb3ba02035dd1267a26f0e3",
+    "test.jpg": "643ac0058f750cd0ad468ac5adfc0fe3b54db3570762b894613ed8a2b3f4a311",
+    "videoalpha.jpg": "c7c8d61abec713d86c2bcdb0dc31e54abac1d96edf8b8ccd25de9f9d5fdf3461",
+    "worms.jpg": "43fc4b0c6a7254af067c26561c4fbbfcd776d513d17945a2d1439fbfe99ba4b1",
+    "wrenches.jpg": "e6355e3fc9866bae4e0321c4fca38ede37384ff1d8a6aecda6d045ca9163d82a"
+  },
+  "pcm_sha256": "d585212c3738bdfe6869427b01538b76698209d9f90c8c52b0d602989e5e0f84",
+  "clock": "frame/30.0",
+  "frames": 120,
+  "host_controls": {
+    "line_reference_height": 0,
+    "line_antialiasing": false
+  },
+  "frame_payload": "lossless-gzip",
+  "rgb_payload_sha256": "64bce135589c41468b317aa1b37f455f036c905dbb7c4182720cd9f4e0508312",
+  "dimensions": [
+    512,
+    288
+  ],
+  "alpha_excluded": true,
+  "roles": {
+    "upstream": {
+      "worker": {
+        "role": "upstream",
+        "source_commit": "654815d84d00cc14b2e81880bf4c91db467cb1d8",
+        "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
+        "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+        "parent": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e"
+        },
+        "patch_removed": null,
+        "ordered_patches": [],
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/component-workers-v3/upstream/ndk-build/patch-proof-worker",
+        "binary_sha256": "ec959696016ce1748ab1badffc6c47f34b4494df08facd3226d765dea0070cf8",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/component-workers-v3/upstream/source-hashes.json",
+        "harness_sha256": {
+          "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
+          "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+          "gl_capture.hpp": "f7b02bde3b4f4945427f7c0f5d2c5af19020fdad5b7189bb45cf0f888e355863",
+          "shader_failure_probe.hpp": "f4baadea73943c407f0cb903a48726e7180e3243a993c86f9be25eb6eb29a498",
+          "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+          "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+          "worker.cpp": "c2c1c476f92262954f9620ebead791ddd7df04cc936ec562e6128d24bd135da2"
+        },
+        "adjustments_sha256": "d37871fcdebca0be2db2f6cae5a1db1fc723aadd8e1287d7766e794f552fad46",
+        "prepare_sha256": "99b7698f64cbfbcc70375c5df38d0f93f41facbdfcd3463296a41a3b1502a28f",
+        "shipping_binary": false
+      },
+      "runs": [
+        {
+          "status": "success",
+          "manifest": {
+            "diagnostics": {
+              "attempts": 16,
+              "created_shader_objects": 34,
+              "diagnostic_cleanup_complete": true,
+              "kind": "shader-fragment-failure",
+              "live_vertex_after_each_failure": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ],
+              "live_vertex_before_cleanup": 16,
+              "observer_gl_error": 0,
+              "rejection_messages": [
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+              ],
+              "retry_linked": true
+            },
+            "fps": 30,
+            "frames": 120,
+            "gl_error_frames": 0,
+            "gl_renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+            "gl_vendor": "Google (Apple)",
+            "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+            "glsl_version": "OpenGL ES GLSL ES 3.00",
+            "height": 288,
+            "identity": {
+              "repeat": 0,
+              "role": "upstream"
+            },
+            "messages": [
+              {
+                "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+                "severity": 3
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              }
+            ],
+            "seed": 12345,
+            "status": "success",
+            "width": 512
+          },
+          "frame_hashes": [
+            "51aad8c7ae38266e7e60741aea4e63c80b8718526e340173951b63cc0d6e5b58",
+            "38e4aa864b686469ee9234a16234dfd89b914808441c91065d71dff71c95a335",
+            "3c77c6a1a1511aae4fff0097116c61b7d449e34a794e45f300b53d836ca5941c",
+            "c759ef1baa7e84d80683133d0956102ff97953d783b8267d96550c5551b00a4e",
+            "fb3ad985207a2dc89bbcee1d7fd9130961c4012931637ce64db471f0b4bd2da7",
+            "af0c32e2af70f3c384c8f0b4caf49439db9d65dfe6780b21c20128ce1fc1feb7",
+            "03cc3a4115fee7472ffcfdc8f24c851f268526ff5aaef3cdea2809f5784f4a2e",
+            "979e8ec0f396abff59b802ddec0817d9611e962a84e7af76698903bd842ccc1c",
+            "1ec64ddd41db53981e70e183c8c9025f70dec82d4683ed4248f2f893c76efb6f",
+            "2c0ff4bdd4baf92191b21f84e117132764d41331eb271b86a959f2fb1667bfad",
+            "1ad63da3c81261bf80ebc11b4e64c4c0c16a715df2690090c2d8f7a813cfcbc1",
+            "cc7ead5dde828d5d16d0e94a4766bd95852f59a49a38acd01e3ef335a79a1376",
+            "64951a91fdc2bc41f8892a5748e80c6ba9c5dc5ee3c485a1606aa61748d3dee9",
+            "cc22f1b13e28843b170b83f06e7b8cd2f3f5a8a11b431388f09f343281d43871",
+            "8a446d8bcc11fde9806b9a5c49bb7eb21d38457d747e6f12da4348164a55e533",
+            "450bcf5fe4d7bec6f7d7b89f31f3a4c54d8ef0783e1bd86c1e4b9f0aa690df0f",
+            "45f1f731ffd4c63704710ef2e297b347d10f9e6aba612f63bdf8eb5fd59f8031",
+            "f342fc0d3e6e0dae268817d9caeb9672ab618864b1e48a094e7fe7c1fb1747b2",
+            "1590b70ed1b248f97ba8645a37168cd08190aeb590e0bb320af2c5b28fab0bc2",
+            "856a66c2105ff42b262492e57a9b40d463bc208fedc43f8c246487e33ae179b5",
+            "93bd8809f61e97608a9ebe010925a8d93302000e433e73d63c46035d7a2ac0d2",
+            "42a723e13682196a6ffd95e765908d5258ddafee618f00ccc07549bcfef31667",
+            "6a2d56526d0fb8a9e5de50416e8071c31775d3999287ac34972d596bad19e4dc",
+            "7786f8dafadc6ce1c1804827dfc60ab215ba654a8fd0b5182c3f63583222f5f7",
+            "8e230ae127ac6dd6cd951940af830acdabeabba02757ca3f4ae22484e06507dc",
+            "ee8d5780e41c38463568a0ee94d00b656eb28301a46f046899b0d8c9368c1cf2",
+            "43ef8083cba23086dda9f92440f48090da9d9898cf0e3bf254e28e55849f3cab",
+            "cffd6a53a62d911bd0dc459e44646f9c94f44872d20709c159b023ba4755ed55",
+            "823f532b911f50737420cb50fda0bb32eb69edf154fc0744ab9df7de12010571",
+            "76b70dcd107a0555f129694b8ec12391f7e998e7010eaf46b92221e843024aed",
+            "4744c1895f167cfff2adad9f0e9204395cea5030522c7f7efbb8e4ec9357ec5b",
+            "05c337e9b62beea80a71a6cedeac857515f0c5d0fb2bf9c742a822d588f3d022",
+            "8f471ccee1de84ad7e9381584c2e01ee7d976301725e4b42f2db8da79ca68eec",
+            "0166e62c5f4f6ed5ae8da1dba7db78f0e1018df0d0c327010d5aa306496be14f",
+            "b46d52f428fc6ea308929682c14e00b195e135f92de0ce7a7899649585ee3897",
+            "211f168181cd9bfc0c2798d23b2d67f0b0480bbfd6cc16457618bcf61c7295e2",
+            "4c56fa656d1107756154fbdfc239978bac41ccc8a4fe87c80266a2189bfe96a2",
+            "31b46de3fc4dd3a214dfbd3cd5f8a9ca71cd1a2d4c1003384de9269ff07ff145",
+            "698cb1e21e93f5c7fe2cf34ab3c5749a3b1a3025097fd286c1ea0a2b108fd6a4",
+            "6607e4aaa9ee51576555d0570fd5d73ee11dfb61de9c1f6961df7e1d365a5d81",
+            "f0dd41839a8a699ea8a38b429bc3bd1dff8fdd56c55a87c66f4b7abca026bbbb",
+            "1c139e2d004697be916ab93f9ab394d982170c003857327bc609017cb852f367",
+            "5f7ad5198aae1509f250b4084bef65faaa47fd0eb417305c917f17f8308f6c78",
+            "7f0e00d8be7e6ab768ee2be27441d1969201e52fbec0ea4a7c132125ed6e88d6",
+            "e21b66e9d7766c087f428a727538908247cafc6d0142948305e4a99260a40217",
+            "e42a05982ac01b1dd4d36649e4091bcc5b2f0870f83bebcc74e5d3498be9f261",
+            "d4448f155117fd6c9a1bdcbadfc0a9f1bd8fe5a689b6a87d99dfeef7b226af55",
+            "6739db7db286fcf7c0a430bc584e3386c9cdb5af50ede2079cf52eb65e7723d2",
+            "438fc6a5d2642446a41562567c26f7fc66575f802b667515c0e36941bddb8cdf",
+            "c27258913f30fcbe4dbf59a75e03b3b8f9aa1baaf95558931fd6c013bcd99b29",
+            "922c5ef1abf7c2b05ff82daad70a38097538ca196f033910fef053e9f178ee48",
+            "22300c8e15725e12c62a015d2fe1a842b158853e7dbcaec6b863bac2e6740a37",
+            "320a9594da9e1720d678d24726cb94b140d030726e7c07c3711a32f8bc5b25b7",
+            "817728c2018c825015c035624d28002765a0689f8f71b8ed9adb6b3312811894",
+            "d9b18090ff1b7c2d4eefe7c26d1765eaa7193c63c599f6d7a7f496c7d6e3a02d",
+            "39733781b8f29f2c8ce8c6f5c3259bd92e4676df5b897b159c04cc7a44841ee5",
+            "5cc0fce26cdd61d9219da5548f6011c8e1641864d4c2593949abbee7da25e3f3",
+            "d183b22a279393635862b2b6a3001c1b24f8b49048a68456352b90bf24a0c060",
+            "e7bf8be7b43a540548b96f0a4c8ea8d74d1810b13da4e6a8369be5788ad0828a",
+            "b6cfbcef0b4f270931c17200da8f281e53ae1d258db8b45f8ca27f9d13d43a55",
+            "7a4cb0b9b4f3a951496767dfc40b23df764693e804f34f3335865fef4dd73688",
+            "495a789ca04d1a134f48dc37d03d641a43408d00c8694066c3d694fdb35ace25",
+            "b65861876a1b464fe309cec13e18c9cf67911844a6df39512cfeebdd0cf62d9f",
+            "7af9af75d3061e243429781c1233e41134a88d50a8e48de6b05eb0cfdc5b0f3f",
+            "68b528b2c0116d35cfad157cc747db10fb3377d373b64dd8d87a85da5d807fe6",
+            "b645037b50838831bc37e5d9ff7bcf7e2f9f0bd440ecaf3157317752e4bd7567",
+            "8f9db23b2e1803b0994019f87a07fd30aa586e3b27961c04c5534c6327adc921",
+            "c96c22d6de439d1c4f41402b56f7fb8fc2f89a1beff835923955dce1c576a563",
+            "daa5f2aa896bdab9f93e41dbf3e63a40869e21e0eedd5e1919015e47f264d79e",
+            "3bac0e1eb0fc0084fe24993dee38c4782479448e3b6e48d8c3234aab39797b3c",
+            "a0ddf83e5bae353647d73f015c4a18a53becdc6af42a542d88ac2cb8232aa152",
+            "ed3e9c09b97c36dded7cc2678be6dc5c217bbfb23abf5ac8f3eb9ffb4e5678af",
+            "40129b6817a344c7ba5913e803cc164117e7abda1fa9a7c4ac18bcf752b48aac",
+            "fb3f06699ffa6af05e9ef533d11708ba7b7cd73242f8cfe96937a6f5bd0e42ff",
+            "5a1013f4a18ed33c7fc509589d161526e050525662f737462d4980e7808d268c",
+            "e357426819cab166eea2ce031cae2188eed550a58b689214f9203d32b25cf8e9",
+            "cdaa92e55b106e2a32c9227e6ac04c5b9bd6c8add42ef8c6ababaeb1e376ddb0",
+            "4463192f396a94b2c7155dbcafd0977f03aa7a48711af3716f9fb25391697077",
+            "02e7b26ae957ec01f1fb1066a954b7449067ea301d3832332c71b681d83e354b",
+            "442d2bc2f35d1fae8efe2132554a37e240190de05ac342ce203b9636067efb54",
+            "50786595b8a3531de61e0cbbe2f6e0984ced0b2ec447b53a9a440d327b315ada",
+            "09665fb5ef4a0f2825613735888e51b4c1a6071e01bb2833eb75c190f4e1426e",
+            "23a5fad7e3dfddf0296e7a723b1148cd07d575c77010f09ddf44a60af032a523",
+            "ad94948600ead59a672602093b4c5cadb64c7d922c87d99d740a247faf03ef46",
+            "57c49a39088e6e3d098e692cd6c6aa94bb222a8e94315453b28646fd5bc6b19b",
+            "82ead9e8874d6fc7526f112b5ffd29caeb901a6ce7ecde5c362e6876ca31dddc",
+            "a5017a679e2787d89660c8a829c1d4c3c8ead3ea61ef846ba847f8274c1d702a",
+            "4af7abc7ddbf43f782ffa257db717e88a248bb3299f7fdea13cb71db3070eaa1",
+            "d00d389e0375887a32f536a43f6ed455409cd68dcdb01ae172971f90e8206e33",
+            "bbf2c1d782f3060a4a8e2c2648d6fc357facd42feb964172e83609567d9c7a39",
+            "1a94157b0cdd3133c8a726f8cb1de6ed6d5d95cd8a6e4ac561636a61826ca809",
+            "005af2d34c6a491f005a35493884b58e91dd26f05a54b5e891e00d59859a694e",
+            "b91538c0fae9e614f8aa091f048d90dbc6a98e113abfc74db44b619ab844a016",
+            "da69ffc15e74788f5c05706394ececf5169e10c46ab9b84fb8fe069fb56e1033",
+            "da942df2861268838067e14f35e30ed8d2b107cbde4c1c1054a7b93b58af5dfa",
+            "b3220f751496f975acbae62a5db3957747f64113bbed7f798415a6bf405b2cf0",
+            "7a9b0ed43f780e20a2b714cf366d7165dd6ab842265fb252443d0d7b192405bc",
+            "d25b2a47ebd5c5761bd93643642990b5d5493c6840c3fc661d4380c092cfd506",
+            "fba7b7dd92fd09381ea78eada8c5aa9bfe63f9a978c58b547051e2fa46376ccf",
+            "e13cd72f2e904bf7bad972cd6680036bef5d10fa92df45f607ffb5bec77f1f14",
+            "d53f31fc8387cac72601823943124015fbf745d94587afded44799fa3d1f7678",
+            "4e5eca09464328280c81e53b7fc8e2fcea5e010599586deaa1ab7cb543c89871",
+            "f36f6015bfc15c8f7b5a4c026bb6a65dec81aa6d6c1dd159c1243d8571aa4964",
+            "90bcc346e2cb62b11aad0d25345fcc8c831327e95afd3473f0a66da5e19d9dba",
+            "ad6acb778734099248b6a80d056333955fbe07240dd25c6d676a0e46e671fa9b",
+            "eb9371bd6d42ae1092f28113565f4b5a8ece97129de69b9e91decedd7e420fbd",
+            "4d0912390f79d74cb9d4d9b9e614a27d99dc5a7eacf1ca879ffdf3c6b42db83a",
+            "a3407ef559d0ffe6de37e3f1c5cbce81fe59f4d7f48acbfa428fb2d121dd062d",
+            "f7f60b3f78d655aa14dfcfbf5bbfbc543901fa1c6a68b041d2aea610a351d8be",
+            "6a7394fa6cd6c9036c68eea84ed7eff29f27f934382e1423d51589d298e80245",
+            "8e6c965253a3b99931312dbd84347ef6da18fd421387d077744101c440bfafd9",
+            "65b109ae86d152ccc4c0d8682ebacdc93b51297bfa8be77d8f1b39643f7db055",
+            "80d46364732e8794b529438914f2afaeb542e2a5e9bfc6c5435df49c47ac4a3b",
+            "b898c888a76809841dde8e5548a330218f88a92ee408d4c16fbb6ac0de86411b",
+            "ca06ccc6e71024e4893bbca3aef2ee131529b0ddb4c23272328fa5996101ea00",
+            "5c11bfe91146dc075b1c867c2ada2e48d92dfffd33400c6cfaf2850f50ba63ff",
+            "0f63f50e4c3e109fc9021877f200c6c993712bbd31c28b1f359ba9d332aa82a4",
+            "09e98b4247da0e282aff5c6db963a21c6a22aebeac79cfafc65adb7fc8896ae7",
+            "6f214b4e0d00963812270b6741ed6195cfa6030af00d56e631644a6af1e2df17",
+            "6f64afb0af5d6ebe02bbaebf2b6cfd68d0664d4c01deb8010aa7a5fb2b734b49"
+          ],
+          "stream_sha256": "9fe05d23cd05c6a695571a3eb41cbe7ea5428583ebf3f5266f404fb81b6b517f"
+        },
+        {
+          "status": "success",
+          "manifest": {
+            "diagnostics": {
+              "attempts": 16,
+              "created_shader_objects": 34,
+              "diagnostic_cleanup_complete": true,
+              "kind": "shader-fragment-failure",
+              "live_vertex_after_each_failure": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ],
+              "live_vertex_before_cleanup": 16,
+              "observer_gl_error": 0,
+              "rejection_messages": [
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+              ],
+              "retry_linked": true
+            },
+            "fps": 30,
+            "frames": 120,
+            "gl_error_frames": 0,
+            "gl_renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+            "gl_vendor": "Google (Apple)",
+            "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+            "glsl_version": "OpenGL ES GLSL ES 3.00",
+            "height": 288,
+            "identity": {
+              "repeat": 1,
+              "role": "upstream"
+            },
+            "messages": [
+              {
+                "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+                "severity": 3
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              }
+            ],
+            "seed": 12345,
+            "status": "success",
+            "width": 512
+          },
+          "frame_hashes": [
+            "51aad8c7ae38266e7e60741aea4e63c80b8718526e340173951b63cc0d6e5b58",
+            "38e4aa864b686469ee9234a16234dfd89b914808441c91065d71dff71c95a335",
+            "3c77c6a1a1511aae4fff0097116c61b7d449e34a794e45f300b53d836ca5941c",
+            "c759ef1baa7e84d80683133d0956102ff97953d783b8267d96550c5551b00a4e",
+            "fb3ad985207a2dc89bbcee1d7fd9130961c4012931637ce64db471f0b4bd2da7",
+            "af0c32e2af70f3c384c8f0b4caf49439db9d65dfe6780b21c20128ce1fc1feb7",
+            "03cc3a4115fee7472ffcfdc8f24c851f268526ff5aaef3cdea2809f5784f4a2e",
+            "979e8ec0f396abff59b802ddec0817d9611e962a84e7af76698903bd842ccc1c",
+            "1ec64ddd41db53981e70e183c8c9025f70dec82d4683ed4248f2f893c76efb6f",
+            "2c0ff4bdd4baf92191b21f84e117132764d41331eb271b86a959f2fb1667bfad",
+            "1ad63da3c81261bf80ebc11b4e64c4c0c16a715df2690090c2d8f7a813cfcbc1",
+            "cc7ead5dde828d5d16d0e94a4766bd95852f59a49a38acd01e3ef335a79a1376",
+            "64951a91fdc2bc41f8892a5748e80c6ba9c5dc5ee3c485a1606aa61748d3dee9",
+            "cc22f1b13e28843b170b83f06e7b8cd2f3f5a8a11b431388f09f343281d43871",
+            "8a446d8bcc11fde9806b9a5c49bb7eb21d38457d747e6f12da4348164a55e533",
+            "450bcf5fe4d7bec6f7d7b89f31f3a4c54d8ef0783e1bd86c1e4b9f0aa690df0f",
+            "45f1f731ffd4c63704710ef2e297b347d10f9e6aba612f63bdf8eb5fd59f8031",
+            "f342fc0d3e6e0dae268817d9caeb9672ab618864b1e48a094e7fe7c1fb1747b2",
+            "1590b70ed1b248f97ba8645a37168cd08190aeb590e0bb320af2c5b28fab0bc2",
+            "856a66c2105ff42b262492e57a9b40d463bc208fedc43f8c246487e33ae179b5",
+            "93bd8809f61e97608a9ebe010925a8d93302000e433e73d63c46035d7a2ac0d2",
+            "42a723e13682196a6ffd95e765908d5258ddafee618f00ccc07549bcfef31667",
+            "6a2d56526d0fb8a9e5de50416e8071c31775d3999287ac34972d596bad19e4dc",
+            "7786f8dafadc6ce1c1804827dfc60ab215ba654a8fd0b5182c3f63583222f5f7",
+            "8e230ae127ac6dd6cd951940af830acdabeabba02757ca3f4ae22484e06507dc",
+            "ee8d5780e41c38463568a0ee94d00b656eb28301a46f046899b0d8c9368c1cf2",
+            "43ef8083cba23086dda9f92440f48090da9d9898cf0e3bf254e28e55849f3cab",
+            "cffd6a53a62d911bd0dc459e44646f9c94f44872d20709c159b023ba4755ed55",
+            "823f532b911f50737420cb50fda0bb32eb69edf154fc0744ab9df7de12010571",
+            "76b70dcd107a0555f129694b8ec12391f7e998e7010eaf46b92221e843024aed",
+            "4744c1895f167cfff2adad9f0e9204395cea5030522c7f7efbb8e4ec9357ec5b",
+            "05c337e9b62beea80a71a6cedeac857515f0c5d0fb2bf9c742a822d588f3d022",
+            "8f471ccee1de84ad7e9381584c2e01ee7d976301725e4b42f2db8da79ca68eec",
+            "0166e62c5f4f6ed5ae8da1dba7db78f0e1018df0d0c327010d5aa306496be14f",
+            "b46d52f428fc6ea308929682c14e00b195e135f92de0ce7a7899649585ee3897",
+            "211f168181cd9bfc0c2798d23b2d67f0b0480bbfd6cc16457618bcf61c7295e2",
+            "4c56fa656d1107756154fbdfc239978bac41ccc8a4fe87c80266a2189bfe96a2",
+            "31b46de3fc4dd3a214dfbd3cd5f8a9ca71cd1a2d4c1003384de9269ff07ff145",
+            "698cb1e21e93f5c7fe2cf34ab3c5749a3b1a3025097fd286c1ea0a2b108fd6a4",
+            "6607e4aaa9ee51576555d0570fd5d73ee11dfb61de9c1f6961df7e1d365a5d81",
+            "f0dd41839a8a699ea8a38b429bc3bd1dff8fdd56c55a87c66f4b7abca026bbbb",
+            "1c139e2d004697be916ab93f9ab394d982170c003857327bc609017cb852f367",
+            "5f7ad5198aae1509f250b4084bef65faaa47fd0eb417305c917f17f8308f6c78",
+            "7f0e00d8be7e6ab768ee2be27441d1969201e52fbec0ea4a7c132125ed6e88d6",
+            "e21b66e9d7766c087f428a727538908247cafc6d0142948305e4a99260a40217",
+            "e42a05982ac01b1dd4d36649e4091bcc5b2f0870f83bebcc74e5d3498be9f261",
+            "d4448f155117fd6c9a1bdcbadfc0a9f1bd8fe5a689b6a87d99dfeef7b226af55",
+            "6739db7db286fcf7c0a430bc584e3386c9cdb5af50ede2079cf52eb65e7723d2",
+            "438fc6a5d2642446a41562567c26f7fc66575f802b667515c0e36941bddb8cdf",
+            "c27258913f30fcbe4dbf59a75e03b3b8f9aa1baaf95558931fd6c013bcd99b29",
+            "922c5ef1abf7c2b05ff82daad70a38097538ca196f033910fef053e9f178ee48",
+            "22300c8e15725e12c62a015d2fe1a842b158853e7dbcaec6b863bac2e6740a37",
+            "320a9594da9e1720d678d24726cb94b140d030726e7c07c3711a32f8bc5b25b7",
+            "817728c2018c825015c035624d28002765a0689f8f71b8ed9adb6b3312811894",
+            "d9b18090ff1b7c2d4eefe7c26d1765eaa7193c63c599f6d7a7f496c7d6e3a02d",
+            "39733781b8f29f2c8ce8c6f5c3259bd92e4676df5b897b159c04cc7a44841ee5",
+            "5cc0fce26cdd61d9219da5548f6011c8e1641864d4c2593949abbee7da25e3f3",
+            "d183b22a279393635862b2b6a3001c1b24f8b49048a68456352b90bf24a0c060",
+            "e7bf8be7b43a540548b96f0a4c8ea8d74d1810b13da4e6a8369be5788ad0828a",
+            "b6cfbcef0b4f270931c17200da8f281e53ae1d258db8b45f8ca27f9d13d43a55",
+            "7a4cb0b9b4f3a951496767dfc40b23df764693e804f34f3335865fef4dd73688",
+            "495a789ca04d1a134f48dc37d03d641a43408d00c8694066c3d694fdb35ace25",
+            "b65861876a1b464fe309cec13e18c9cf67911844a6df39512cfeebdd0cf62d9f",
+            "7af9af75d3061e243429781c1233e41134a88d50a8e48de6b05eb0cfdc5b0f3f",
+            "68b528b2c0116d35cfad157cc747db10fb3377d373b64dd8d87a85da5d807fe6",
+            "b645037b50838831bc37e5d9ff7bcf7e2f9f0bd440ecaf3157317752e4bd7567",
+            "8f9db23b2e1803b0994019f87a07fd30aa586e3b27961c04c5534c6327adc921",
+            "c96c22d6de439d1c4f41402b56f7fb8fc2f89a1beff835923955dce1c576a563",
+            "daa5f2aa896bdab9f93e41dbf3e63a40869e21e0eedd5e1919015e47f264d79e",
+            "3bac0e1eb0fc0084fe24993dee38c4782479448e3b6e48d8c3234aab39797b3c",
+            "a0ddf83e5bae353647d73f015c4a18a53becdc6af42a542d88ac2cb8232aa152",
+            "ed3e9c09b97c36dded7cc2678be6dc5c217bbfb23abf5ac8f3eb9ffb4e5678af",
+            "40129b6817a344c7ba5913e803cc164117e7abda1fa9a7c4ac18bcf752b48aac",
+            "fb3f06699ffa6af05e9ef533d11708ba7b7cd73242f8cfe96937a6f5bd0e42ff",
+            "5a1013f4a18ed33c7fc509589d161526e050525662f737462d4980e7808d268c",
+            "e357426819cab166eea2ce031cae2188eed550a58b689214f9203d32b25cf8e9",
+            "cdaa92e55b106e2a32c9227e6ac04c5b9bd6c8add42ef8c6ababaeb1e376ddb0",
+            "4463192f396a94b2c7155dbcafd0977f03aa7a48711af3716f9fb25391697077",
+            "02e7b26ae957ec01f1fb1066a954b7449067ea301d3832332c71b681d83e354b",
+            "442d2bc2f35d1fae8efe2132554a37e240190de05ac342ce203b9636067efb54",
+            "50786595b8a3531de61e0cbbe2f6e0984ced0b2ec447b53a9a440d327b315ada",
+            "09665fb5ef4a0f2825613735888e51b4c1a6071e01bb2833eb75c190f4e1426e",
+            "23a5fad7e3dfddf0296e7a723b1148cd07d575c77010f09ddf44a60af032a523",
+            "ad94948600ead59a672602093b4c5cadb64c7d922c87d99d740a247faf03ef46",
+            "57c49a39088e6e3d098e692cd6c6aa94bb222a8e94315453b28646fd5bc6b19b",
+            "82ead9e8874d6fc7526f112b5ffd29caeb901a6ce7ecde5c362e6876ca31dddc",
+            "a5017a679e2787d89660c8a829c1d4c3c8ead3ea61ef846ba847f8274c1d702a",
+            "4af7abc7ddbf43f782ffa257db717e88a248bb3299f7fdea13cb71db3070eaa1",
+            "d00d389e0375887a32f536a43f6ed455409cd68dcdb01ae172971f90e8206e33",
+            "bbf2c1d782f3060a4a8e2c2648d6fc357facd42feb964172e83609567d9c7a39",
+            "1a94157b0cdd3133c8a726f8cb1de6ed6d5d95cd8a6e4ac561636a61826ca809",
+            "005af2d34c6a491f005a35493884b58e91dd26f05a54b5e891e00d59859a694e",
+            "b91538c0fae9e614f8aa091f048d90dbc6a98e113abfc74db44b619ab844a016",
+            "da69ffc15e74788f5c05706394ececf5169e10c46ab9b84fb8fe069fb56e1033",
+            "da942df2861268838067e14f35e30ed8d2b107cbde4c1c1054a7b93b58af5dfa",
+            "b3220f751496f975acbae62a5db3957747f64113bbed7f798415a6bf405b2cf0",
+            "7a9b0ed43f780e20a2b714cf366d7165dd6ab842265fb252443d0d7b192405bc",
+            "d25b2a47ebd5c5761bd93643642990b5d5493c6840c3fc661d4380c092cfd506",
+            "fba7b7dd92fd09381ea78eada8c5aa9bfe63f9a978c58b547051e2fa46376ccf",
+            "e13cd72f2e904bf7bad972cd6680036bef5d10fa92df45f607ffb5bec77f1f14",
+            "d53f31fc8387cac72601823943124015fbf745d94587afded44799fa3d1f7678",
+            "4e5eca09464328280c81e53b7fc8e2fcea5e010599586deaa1ab7cb543c89871",
+            "f36f6015bfc15c8f7b5a4c026bb6a65dec81aa6d6c1dd159c1243d8571aa4964",
+            "90bcc346e2cb62b11aad0d25345fcc8c831327e95afd3473f0a66da5e19d9dba",
+            "ad6acb778734099248b6a80d056333955fbe07240dd25c6d676a0e46e671fa9b",
+            "eb9371bd6d42ae1092f28113565f4b5a8ece97129de69b9e91decedd7e420fbd",
+            "4d0912390f79d74cb9d4d9b9e614a27d99dc5a7eacf1ca879ffdf3c6b42db83a",
+            "a3407ef559d0ffe6de37e3f1c5cbce81fe59f4d7f48acbfa428fb2d121dd062d",
+            "f7f60b3f78d655aa14dfcfbf5bbfbc543901fa1c6a68b041d2aea610a351d8be",
+            "6a7394fa6cd6c9036c68eea84ed7eff29f27f934382e1423d51589d298e80245",
+            "8e6c965253a3b99931312dbd84347ef6da18fd421387d077744101c440bfafd9",
+            "65b109ae86d152ccc4c0d8682ebacdc93b51297bfa8be77d8f1b39643f7db055",
+            "80d46364732e8794b529438914f2afaeb542e2a5e9bfc6c5435df49c47ac4a3b",
+            "b898c888a76809841dde8e5548a330218f88a92ee408d4c16fbb6ac0de86411b",
+            "ca06ccc6e71024e4893bbca3aef2ee131529b0ddb4c23272328fa5996101ea00",
+            "5c11bfe91146dc075b1c867c2ada2e48d92dfffd33400c6cfaf2850f50ba63ff",
+            "0f63f50e4c3e109fc9021877f200c6c993712bbd31c28b1f359ba9d332aa82a4",
+            "09e98b4247da0e282aff5c6db963a21c6a22aebeac79cfafc65adb7fc8896ae7",
+            "6f214b4e0d00963812270b6741ed6195cfa6030af00d56e631644a6af1e2df17",
+            "6f64afb0af5d6ebe02bbaebf2b6cfd68d0664d4c01deb8010aa7a5fb2b734b49"
+          ],
+          "stream_sha256": "9fe05d23cd05c6a695571a3eb41cbe7ea5428583ebf3f5266f404fb81b6b517f"
+        }
+      ],
+      "repeat_equal": true
+    },
+    "patched": {
+      "worker": {
+        "role": "patched",
+        "source_commit": "654815d84d00cc14b2e81880bf4c91db467cb1d8",
+        "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
+        "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+        "parent": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381",
+          "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e"
+        },
+        "patch_removed": null,
+        "ordered_patches": [
+          {
+            "number": "0001",
+            "filename": "0001-tv-rendering-and-preset-compatibility.patch",
+            "sha256": "65900645b989f653d697bdce5cdc265ab9cbf5b5f0ac699d737fb09488033dd7"
+          },
+          {
+            "number": "0002",
+            "filename": "0002-hlsl-compatibility-and-float-roundtrip.patch",
+            "sha256": "eb210256beb15ba61b3989b072e0a245e02baf8b7b983550de1e6773249e6571"
+          },
+          {
+            "number": "0003",
+            "filename": "0003-evaluator-thread-local-rand-and-lone-dot.patch",
+            "sha256": "dc9ba43e32b9894e01a897f0f5727cae1cbb1b6cd9643f85b4dcd240cabc1419"
+          },
+          {
+            "number": "0004",
+            "filename": "0004-textured-shape-sampler.patch",
+            "sha256": "3601f673c62f48f44757c8956910a6930e37eb0bb5116fc6a3d90ab6964690d9"
+          },
+          {
+            "number": "0005",
+            "filename": "0005-blur-range-interval.patch",
+            "sha256": "e77e4bde96d5ef60576f618359540e24a9e1df5bb729a043ff527e70be67e31a"
+          },
+          {
+            "number": "0006",
+            "filename": "0006-fixed-warp-signed-unit-zoom.patch",
+            "sha256": "44703476e7ebdc189c053b31a23b14a4beb45e17304def8c53adf52f0b68f90d"
+          },
+          {
+            "number": "0007",
+            "filename": "0007-live-builtin-wave-controls.patch",
+            "sha256": "1c2bb9ac7328fec193c7b60a84df980afe4ac872e74dc8e8b6984ac7e83fc700"
+          },
+          {
+            "number": "0008",
+            "filename": "0008-live-legacy-display-controls.patch",
+            "sha256": "322335d4638e3513bf8a00d6bd2d9d39436647cc368cc32a79ea28cb420c93b6"
+          },
+          {
+            "number": "0009",
+            "filename": "0009-user-texture-premultiplication.patch",
+            "sha256": "2f62c09e83b45ac25a4161be1f71f941a3e9852fa5401a930e00fc19836be6d0"
+          },
+          {
+            "number": "0010",
+            "filename": "0010-preset-texture-search-path-ownership.patch",
+            "sha256": "62740719eacde9bfd12f8d3caf83413d2e3a744d0f4b713693f8eade4e049296"
+          },
+          {
+            "number": "0011",
+            "filename": "0011-cpu-warp-rotation-trig.patch",
+            "sha256": "c99a6221174a33a7d87381e055ee3187a91edea403fe0d5ea9a9efb9a502488b"
+          },
+          {
+            "number": "0012",
+            "filename": "0012-shape-pixel-centers.patch",
+            "sha256": "9e4614734be2eced389433bcdef2afd3292afaebac3330fee55222a25c9fa7be"
+          },
+          {
+            "number": "0013",
+            "filename": "0013-composite-texel-centers.patch",
+            "sha256": "85edc00b4adcc725c6b824673ec24dd756bded652511b170b62f91912e8dd2d2"
+          }
+        ],
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/component-workers-v3/patched/ndk-build/patch-proof-worker",
+        "binary_sha256": "420f0e79b6897ff107720033941f71bb0d3d087cb2eb46108b9f42bec4ce88d4",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/component-workers-v3/patched/source-hashes.json",
+        "harness_sha256": {
+          "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
+          "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+          "gl_capture.hpp": "f7b02bde3b4f4945427f7c0f5d2c5af19020fdad5b7189bb45cf0f888e355863",
+          "shader_failure_probe.hpp": "f4baadea73943c407f0cb903a48726e7180e3243a993c86f9be25eb6eb29a498",
+          "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+          "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+          "worker.cpp": "c2c1c476f92262954f9620ebead791ddd7df04cc936ec562e6128d24bd135da2"
+        },
+        "adjustments_sha256": "dddf0c95bcdf9a25c06e75eab3d2f7257e9597bb9fe15d2108c41b61e7086613",
+        "prepare_sha256": "99b7698f64cbfbcc70375c5df38d0f93f41facbdfcd3463296a41a3b1502a28f",
+        "shipping_binary": false
+      },
+      "runs": [
+        {
+          "status": "success",
+          "manifest": {
+            "diagnostics": {
+              "attempts": 16,
+              "created_shader_objects": 34,
+              "diagnostic_cleanup_complete": true,
+              "kind": "shader-fragment-failure",
+              "live_vertex_after_each_failure": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "live_vertex_before_cleanup": 0,
+              "observer_gl_error": 0,
+              "rejection_messages": [
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+              ],
+              "retry_linked": true
+            },
+            "fps": 30,
+            "frames": 120,
+            "gl_error_frames": 0,
+            "gl_renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+            "gl_vendor": "Google (Apple)",
+            "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+            "glsl_version": "OpenGL ES GLSL ES 3.00",
+            "height": 288,
+            "identity": {
+              "repeat": 0,
+              "role": "patched"
+            },
+            "messages": [
+              {
+                "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+                "severity": 3
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              }
+            ],
+            "seed": 12345,
+            "status": "success",
+            "width": 512
+          },
+          "frame_hashes": [
+            "51aad8c7ae38266e7e60741aea4e63c80b8718526e340173951b63cc0d6e5b58",
+            "522fce993c33c5e975da601c74448349c0057dcad810316ee56b4bf3463b228f",
+            "55fd1b98e241c4c433d1d2e306393575cc2c989768a3120b74e9f15cc717ede7",
+            "c71866d542a67575c3794d6d848b1d01bebb47ca4a959e634f0c0b9bdd3ecae0",
+            "e0d483220fbcedea29b9fe1638b81c5c3202066c0921af39f429a978b4c6eb3c",
+            "aa7f7aa71295faa8e02d41c9d0604af5b1e7d221391c795bf448739c40f66f63",
+            "a9512d9f12db24275a9b42357e358ef57f8f1fc2e502a88f46fecb12703d716c",
+            "ca083aac6b7910dc5cec38a9b227f884051af5f7007cd69ebd0fe0dc06fc31f5",
+            "afe81e38ed5ab9e9cd5e3bbb4c755544d444638bc6c4f789f2fbedf6aa81af98",
+            "c448821ed3986cfdaafbf019b1eba1b47529c3c787cc534b8f7dfefaa860b447",
+            "7d9322b7b779a1b91f5ba02fa987347e1ad1b6f4cb58bf7101e75703e8403585",
+            "75a4b225615b6609d392173882db806bef43215409713ab2c6314ab7099385bc",
+            "7d4f7405ad65329a2affb36bdf4dabdc5779f825d2e54dc532d5e388c3ae4668",
+            "28ec4c94ee884ae027580561ac53419753548665b038326630f4db5370d10bf8",
+            "20c047305f7405d83e1fc257ca009cf930efe662fca45737ee937f0e60680bc4",
+            "ecf17ae8ffd97922561c03ff4f5f96a0742084bdfe5453c96b344952ea885fc6",
+            "95758f5fe3d9cf3b78a69ebd682011ce378b27cd451e0416bb5b288c9b580ae5",
+            "4c3bd90aef19b105ccc7bab004db9e6dc5b7331ba9eebe59c4b72a257ca27a44",
+            "913e3d74cacc80906e78f2ed0d7fa3943143fa054b4958848c68d6343b6c5613",
+            "a88c2422567b946e8fb591688601cef27073a4480ffb8e3367a15a043c8b9577",
+            "8168ba6e16b24b7e8e46fa4123a37a22907701ee50e233a59d84bc7d6541614d",
+            "ffcd748e9976f50167134529c9510a01823ced903c3fd88c9162520061791feb",
+            "a629b1c041ba4242bd9f27c7f1dc76558de0400bcb799369b202f79a7821234e",
+            "61b3bb01d121590020c4b239c2c796bb6a68b594a905238f3a4c3a362be06d05",
+            "de23a346d4ad8057dc681367ae8dd3f821929b63ff0ae568c6ce98a49655906c",
+            "f9a74156e4bf9cc0facc7292dff27aa33100798d1d40b84682d1537390f9fb0b",
+            "07f7e21aebf547fe1db996c69b92167715ae70dfac3cc1f416cdb0c53c774837",
+            "85fa9689094fbc7eb5f7a1e50b90889a1be59a421ba91900b3b1cd44598ac02f",
+            "1c60f19df5bb0f031bbe09998331aada5388718dcc841d531ef31834baadd16a",
+            "4c5e905f44d7092783a6bdbef973dac04b46edef0520d4dbc4ea75b9e5e08cd0",
+            "1a9579fdb6089dfea2a8499a06fa3a056068cf71ed196ebedf697f8878fba36d",
+            "669098f4210525529d767dbebe236fb36607f373524d46bd7445aac395cca065",
+            "1606d2cc6b8b35c532f6216ae9a22d56d6980a83abead42b24d2a5b8e71b761e",
+            "4e7040ab317333829d44ae0d1db1206094636b5adba237a9c8601ba42b0e5a97",
+            "f58081ed8aed8418bbb2f1ed4394960a86d50e79d02d91f8f01017c6ea7d524f",
+            "79d0492b1256d235a55267752c51cfcb6ea4a6dd47c1104fdfe194b4fca43681",
+            "165579e1a285ebd926be7b27200ae313e1c41ad4e20ea3dd2bf27f3589f0ec6b",
+            "9a81500092108ea3d47864dc520fcd4f552e34b31df4c5f42795c2ae75e2a835",
+            "e8cd201b4260d45d2595d9d9f4b98c7d09ad7ca304848850031f900b5ba229de",
+            "a829fb62e3b631bbce5b7984d8d58e4dd00766f3074b9a3e80241fe8ca9d8106",
+            "822f90de793e23c2ffee24b6ca7e47098257b3dd0efb500f480d0fa73ec5b282",
+            "170f3bf6eb518ee48328f05849533522e33f0409e4c165650110365889ab32c8",
+            "24167653ac4bce0facb55ac99354fe971760564d6cc32675cd587ea13b3d65fd",
+            "2a9f0b175f8fc9822878f47ebf2da36f5476a6a5cec464483c6a975df1309a2c",
+            "2a9151a78e3de4c9cbf23a2ed761dcbda5dfb73598df7a668e19225fcb5cde18",
+            "aca67b585e70bd87db79a82de15c1d789c6a0ef69f404f65169ca53a514b702d",
+            "ecaf1edee1197a85cded8569dd488ee5d545e37a11e826572c690db8deddd92c",
+            "fa5b32f4ab332914d344fd2b334bc09c49a2e26a5e42e250df3c29406ad6e11c",
+            "4f837e3b3a9cd5a3c30173e52d2876c8ce8da3cef73efda713f0e132b9d6de5a",
+            "4cedd69d33cdba5023d4bca13eda14606223b252cbc0029cc95377c635ed0f26",
+            "4aa4d62ca8f2f3765dd320b066ffd363f1f6f8726defe701e312f5f5511f0271",
+            "ef0744bf1a9d4ec8a6e523e8db09de9c3c487ef6294b64f04cc92633a8fb17d8",
+            "f35c58496d073fca18eb1790fdce33714e3be75a171fa349bb0668fb523f9853",
+            "c40e23258d1e0ad608a6a0cf4583e44087a9f0b4520de15cb34201eeaaa67ead",
+            "426ee46381a6a0036b19ec4e42f1c49f445693743af8bb4b4e370f1ce671952c",
+            "027b6cf2d53b473057e54cf580529fc57245e0c71132bbd0fcaad7203f36192a",
+            "6c674ee93f78f825cc2107ffdbcf971c636900a29cd46f9b672fc8ee0847b843",
+            "84e305e87fec006f9828d9ac39b6b883ce63b8cf4d947fde1ecec1b1e5c7d202",
+            "18533da66d152425f788cd5b461f90e3700c1b0fde16eef8f9bbd989c977579e",
+            "da64134fa6113d457434a26ef8cafdb12982aa149d4c5b1fd7166df6836ff967",
+            "dc49b9b872aae22c9ee98268b3f9c8925f4588b4a89c2f8afa50f99c81792f10",
+            "801067e352d435e17f3877b418a0329e403e957c303ca5fc721297f4500a5057",
+            "bed708d8e49317c18da14272e27b686c2a55fb802d902155358e7e7d066228ef",
+            "caaf43db5fca6abc3511734df8218f633ee3f4225347ea9dad043f384b5b6ba2",
+            "6b408aa1d5bb74cb0dc889c0eb99861fe89049ff5ee36f34cbca890c1d9bdc3a",
+            "9e5da3e4c677e0051b7a6327384383d47c24819874d8c8d0b358b0d4c4d2f3c0",
+            "445689bf4e0e6612b7fbc351df664da6234a975d965115ce5001a86ea6fc98c4",
+            "e7e8138b2a5fc1c5285b2333cec0ace1d33004563dbec2a1190312cae592ec30",
+            "f08adce5c0b987367abefef2842790f51eac19d4e4196aea928a518007773273",
+            "cf0815b14d58175eb7f7a70d0981b60f99dc48fd306801104d9acfbb42626dab",
+            "fb32d864946cefdea52960cb5b49fda0cb4f7af69a10b84a0b8cdbdf817833a4",
+            "03e2b3d99104baa89ddbc0f79b23dbb1a94cc78f0afd1f9303d3cf419faef2ef",
+            "9eaa2da9e97eb4a8261e38682a794dfe41465d4a9fe913f7645a37b6fb47c5ee",
+            "e717d33cfddb1148a0c910b49cb33e5cee104f7a7d2045cf66cc447ee7664dfc",
+            "a39b44647f2fc62648d1ae8c414afe2c42b5c6b51d13086c9a38fe4b0d0192c4",
+            "8ce78f418ab32589984e3ec397243b77670ed2faa0c723956d0cba27bb59d5cd",
+            "84b338cc22578aeda4cf0513acff73de570ccb3bb1559466c723e3224b6aeddd",
+            "18845139cb5a24608fc3a6c29b71238737b6966b60b4b5a9b227ec4e61e8121e",
+            "a2e017c63a93ba2b1543d76d23cedfa5eeb7f46aada5dbc0fed13b0a052e47e9",
+            "69603b9d893143c5f8debe8339ffe628587c44e5331a041c0c68ddf37ede17c4",
+            "4459ed32d5d45ded84c5c3ec1b95ca178f12cd3485c7963830fcdac111260544",
+            "57fb42275514c5e8b6f8d1fdfde601924acb98b375fbac47767c146545a98e80",
+            "67530a24c64e344c38ca4a17125e3765f72c674425d3d985adb9ccf549136c64",
+            "1e568b182cd5af696435408f71bae29887ffc36521c63bc386cd3c18903d4fa0",
+            "757409c6c06db86424a93b8fb75a8a7467bed618238cc41d0851c04f772f52dc",
+            "448a8eb14408937fe4823d6d3215995ef5c25c31ccc401494258d6443f4f2a34",
+            "62cbeee340af78d688b65fe4a8a4f9b3cbe3a8683ab0904ed9b5dda6d381109c",
+            "050ad191b7b168a1d7c1d7c5bc3b6053f7c57bb4fc58e75ddd5d03ab46cb6979",
+            "d123f89b5c7d3f765ec9c70896f07ffcf6b59c1847301b61390381c1ca7a9a14",
+            "247a9e77e9b6a6f97be0937c14a41d511725bdfa7d6a79ffebf46ec700daee7a",
+            "ae224cbfaa49b7863b7b8ceb537c2e3c735c44f3c594b7766a0dcb447995396d",
+            "64a5dd69df780f81bbe03bb73a385cf27dc1957bb97fa713d5f0954979aa9766",
+            "a3605a244cebcbfb14caddf50a0b6bc8bce2f0052e8a17acf3d09cf905fc6481",
+            "0e869058907425e17b0682cf687102d2fe30c29841ba07553d922a9fca611e18",
+            "7721cceb054f6878dcc53eb6dbecc14c1adb90b9703173223e4e79d55ab59f38",
+            "d49c984a93d51d7df9bb8b3ce5cb94e123c5d13b15b6a14d1255b8106357f36a",
+            "484a2407dd68f470dd9aaf48a1e486085414f11b2dcab6ad63670512f4a4c208",
+            "f466dac91ae25f0c8995d86fc38a641a360d98967c9552be33ce4ffce7bb1e8e",
+            "61dee899af953ba1e17a469a7caa7df1a271c4eb59430b6335f2ca92675110cd",
+            "34c31e843ba03b0953b9709b8009e47965dbc0c9884370d162bec3add1cce15f",
+            "b23ac25f1935781f90174a66e7e1223a7a8eca74dcc0ffc85a5abb12ddafe430",
+            "68170a2d3903e408701d12b20aca183322e99bf59fc44c0631b3738b31009886",
+            "faf92812d777e87b584320b4e2e6dd38b56ec456bf363a3078f1744b3e3f7270",
+            "9c95c7feb5ba67ab417a2a9efab462d4f8e501dbe5c3e25e1d8388c1efc6536b",
+            "50c8f3cc3f92799b08c6c2211ccbe5b92b7e83bbc278330359b233f73fb60858",
+            "81656c5a6f8f301e182bf2e474377c2b12e102440abae74933a8f52118006421",
+            "72c22c01e942451351ef5418175c38c5de46c3d0180bbe05eb949a78a96c95c5",
+            "d987384f347d0b4244077f4e3a3b00689fc7a8d51f780e3d6f9a07c9214ef116",
+            "512ee4bbedd48f204df5c21d5c4b62ec7b766af414cdcba33985effef163f468",
+            "70b3f9b82267a7d04fd906ab1d39b8ec29883a9df16fa1f0c563cfa5a1e432d0",
+            "348598eb327dce69ee33b63f35b41cf032effc98132e636b6b9162b579f17ba2",
+            "ee10a6b245456b173a33125d127383697b65ed87bd203d7c99d31812fe75e505",
+            "99bd421bbf1516dca7814595b61e30b66bc6b1240206ddfc1935966b701ae1a2",
+            "376a14ccbf4d71ca15dde67a5b245469a0aa0533b80e104aa2d98e9199bc9eec",
+            "9232ce59c9b158f23a8f8615e0b0768a26a9ffd7ebd770408023cae653ab1cbb",
+            "9e6714a3d32127450fd7159c53c089f85bd4076dd314f681ab139ac329d3c4a8",
+            "22001cbe7dd04027aa2886f59e140d6d78e29c60227c0002d3c8faa78cc5c839",
+            "fb512f8a0c0758d123027dd2a5d60e52adf6ab15248f85acb90a65f9434e48f2",
+            "94b2d72976f93f96d6d5e8720ec43b15f1f1757caa0f04d1007e31b8cb5a6ead",
+            "3b5db71237afc318262802b7d40303edad358fab451d4437edc08a937cc44626"
+          ],
+          "stream_sha256": "35ddb658f6f6d7b1434ebeb44bf6e0cdc20d2e0651135535d0add1df5dc0d9c4"
+        },
+        {
+          "status": "success",
+          "manifest": {
+            "diagnostics": {
+              "attempts": 16,
+              "created_shader_objects": 34,
+              "diagnostic_cleanup_complete": true,
+              "kind": "shader-fragment-failure",
+              "live_vertex_after_each_failure": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "live_vertex_before_cleanup": 0,
+              "observer_gl_error": 0,
+              "rejection_messages": [
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+              ],
+              "retry_linked": true
+            },
+            "fps": 30,
+            "frames": 120,
+            "gl_error_frames": 0,
+            "gl_renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+            "gl_vendor": "Google (Apple)",
+            "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+            "glsl_version": "OpenGL ES GLSL ES 3.00",
+            "height": 288,
+            "identity": {
+              "repeat": 1,
+              "role": "patched"
+            },
+            "messages": [
+              {
+                "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+                "severity": 3
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              }
+            ],
+            "seed": 12345,
+            "status": "success",
+            "width": 512
+          },
+          "frame_hashes": [
+            "51aad8c7ae38266e7e60741aea4e63c80b8718526e340173951b63cc0d6e5b58",
+            "522fce993c33c5e975da601c74448349c0057dcad810316ee56b4bf3463b228f",
+            "55fd1b98e241c4c433d1d2e306393575cc2c989768a3120b74e9f15cc717ede7",
+            "c71866d542a67575c3794d6d848b1d01bebb47ca4a959e634f0c0b9bdd3ecae0",
+            "e0d483220fbcedea29b9fe1638b81c5c3202066c0921af39f429a978b4c6eb3c",
+            "aa7f7aa71295faa8e02d41c9d0604af5b1e7d221391c795bf448739c40f66f63",
+            "a9512d9f12db24275a9b42357e358ef57f8f1fc2e502a88f46fecb12703d716c",
+            "ca083aac6b7910dc5cec38a9b227f884051af5f7007cd69ebd0fe0dc06fc31f5",
+            "afe81e38ed5ab9e9cd5e3bbb4c755544d444638bc6c4f789f2fbedf6aa81af98",
+            "c448821ed3986cfdaafbf019b1eba1b47529c3c787cc534b8f7dfefaa860b447",
+            "7d9322b7b779a1b91f5ba02fa987347e1ad1b6f4cb58bf7101e75703e8403585",
+            "75a4b225615b6609d392173882db806bef43215409713ab2c6314ab7099385bc",
+            "7d4f7405ad65329a2affb36bdf4dabdc5779f825d2e54dc532d5e388c3ae4668",
+            "28ec4c94ee884ae027580561ac53419753548665b038326630f4db5370d10bf8",
+            "20c047305f7405d83e1fc257ca009cf930efe662fca45737ee937f0e60680bc4",
+            "ecf17ae8ffd97922561c03ff4f5f96a0742084bdfe5453c96b344952ea885fc6",
+            "95758f5fe3d9cf3b78a69ebd682011ce378b27cd451e0416bb5b288c9b580ae5",
+            "4c3bd90aef19b105ccc7bab004db9e6dc5b7331ba9eebe59c4b72a257ca27a44",
+            "913e3d74cacc80906e78f2ed0d7fa3943143fa054b4958848c68d6343b6c5613",
+            "a88c2422567b946e8fb591688601cef27073a4480ffb8e3367a15a043c8b9577",
+            "8168ba6e16b24b7e8e46fa4123a37a22907701ee50e233a59d84bc7d6541614d",
+            "ffcd748e9976f50167134529c9510a01823ced903c3fd88c9162520061791feb",
+            "a629b1c041ba4242bd9f27c7f1dc76558de0400bcb799369b202f79a7821234e",
+            "61b3bb01d121590020c4b239c2c796bb6a68b594a905238f3a4c3a362be06d05",
+            "de23a346d4ad8057dc681367ae8dd3f821929b63ff0ae568c6ce98a49655906c",
+            "f9a74156e4bf9cc0facc7292dff27aa33100798d1d40b84682d1537390f9fb0b",
+            "07f7e21aebf547fe1db996c69b92167715ae70dfac3cc1f416cdb0c53c774837",
+            "85fa9689094fbc7eb5f7a1e50b90889a1be59a421ba91900b3b1cd44598ac02f",
+            "1c60f19df5bb0f031bbe09998331aada5388718dcc841d531ef31834baadd16a",
+            "4c5e905f44d7092783a6bdbef973dac04b46edef0520d4dbc4ea75b9e5e08cd0",
+            "1a9579fdb6089dfea2a8499a06fa3a056068cf71ed196ebedf697f8878fba36d",
+            "669098f4210525529d767dbebe236fb36607f373524d46bd7445aac395cca065",
+            "1606d2cc6b8b35c532f6216ae9a22d56d6980a83abead42b24d2a5b8e71b761e",
+            "4e7040ab317333829d44ae0d1db1206094636b5adba237a9c8601ba42b0e5a97",
+            "f58081ed8aed8418bbb2f1ed4394960a86d50e79d02d91f8f01017c6ea7d524f",
+            "79d0492b1256d235a55267752c51cfcb6ea4a6dd47c1104fdfe194b4fca43681",
+            "165579e1a285ebd926be7b27200ae313e1c41ad4e20ea3dd2bf27f3589f0ec6b",
+            "9a81500092108ea3d47864dc520fcd4f552e34b31df4c5f42795c2ae75e2a835",
+            "e8cd201b4260d45d2595d9d9f4b98c7d09ad7ca304848850031f900b5ba229de",
+            "a829fb62e3b631bbce5b7984d8d58e4dd00766f3074b9a3e80241fe8ca9d8106",
+            "822f90de793e23c2ffee24b6ca7e47098257b3dd0efb500f480d0fa73ec5b282",
+            "170f3bf6eb518ee48328f05849533522e33f0409e4c165650110365889ab32c8",
+            "24167653ac4bce0facb55ac99354fe971760564d6cc32675cd587ea13b3d65fd",
+            "2a9f0b175f8fc9822878f47ebf2da36f5476a6a5cec464483c6a975df1309a2c",
+            "2a9151a78e3de4c9cbf23a2ed761dcbda5dfb73598df7a668e19225fcb5cde18",
+            "aca67b585e70bd87db79a82de15c1d789c6a0ef69f404f65169ca53a514b702d",
+            "ecaf1edee1197a85cded8569dd488ee5d545e37a11e826572c690db8deddd92c",
+            "fa5b32f4ab332914d344fd2b334bc09c49a2e26a5e42e250df3c29406ad6e11c",
+            "4f837e3b3a9cd5a3c30173e52d2876c8ce8da3cef73efda713f0e132b9d6de5a",
+            "4cedd69d33cdba5023d4bca13eda14606223b252cbc0029cc95377c635ed0f26",
+            "4aa4d62ca8f2f3765dd320b066ffd363f1f6f8726defe701e312f5f5511f0271",
+            "ef0744bf1a9d4ec8a6e523e8db09de9c3c487ef6294b64f04cc92633a8fb17d8",
+            "f35c58496d073fca18eb1790fdce33714e3be75a171fa349bb0668fb523f9853",
+            "c40e23258d1e0ad608a6a0cf4583e44087a9f0b4520de15cb34201eeaaa67ead",
+            "426ee46381a6a0036b19ec4e42f1c49f445693743af8bb4b4e370f1ce671952c",
+            "027b6cf2d53b473057e54cf580529fc57245e0c71132bbd0fcaad7203f36192a",
+            "6c674ee93f78f825cc2107ffdbcf971c636900a29cd46f9b672fc8ee0847b843",
+            "84e305e87fec006f9828d9ac39b6b883ce63b8cf4d947fde1ecec1b1e5c7d202",
+            "18533da66d152425f788cd5b461f90e3700c1b0fde16eef8f9bbd989c977579e",
+            "da64134fa6113d457434a26ef8cafdb12982aa149d4c5b1fd7166df6836ff967",
+            "dc49b9b872aae22c9ee98268b3f9c8925f4588b4a89c2f8afa50f99c81792f10",
+            "801067e352d435e17f3877b418a0329e403e957c303ca5fc721297f4500a5057",
+            "bed708d8e49317c18da14272e27b686c2a55fb802d902155358e7e7d066228ef",
+            "caaf43db5fca6abc3511734df8218f633ee3f4225347ea9dad043f384b5b6ba2",
+            "6b408aa1d5bb74cb0dc889c0eb99861fe89049ff5ee36f34cbca890c1d9bdc3a",
+            "9e5da3e4c677e0051b7a6327384383d47c24819874d8c8d0b358b0d4c4d2f3c0",
+            "445689bf4e0e6612b7fbc351df664da6234a975d965115ce5001a86ea6fc98c4",
+            "e7e8138b2a5fc1c5285b2333cec0ace1d33004563dbec2a1190312cae592ec30",
+            "f08adce5c0b987367abefef2842790f51eac19d4e4196aea928a518007773273",
+            "cf0815b14d58175eb7f7a70d0981b60f99dc48fd306801104d9acfbb42626dab",
+            "fb32d864946cefdea52960cb5b49fda0cb4f7af69a10b84a0b8cdbdf817833a4",
+            "03e2b3d99104baa89ddbc0f79b23dbb1a94cc78f0afd1f9303d3cf419faef2ef",
+            "9eaa2da9e97eb4a8261e38682a794dfe41465d4a9fe913f7645a37b6fb47c5ee",
+            "e717d33cfddb1148a0c910b49cb33e5cee104f7a7d2045cf66cc447ee7664dfc",
+            "a39b44647f2fc62648d1ae8c414afe2c42b5c6b51d13086c9a38fe4b0d0192c4",
+            "8ce78f418ab32589984e3ec397243b77670ed2faa0c723956d0cba27bb59d5cd",
+            "84b338cc22578aeda4cf0513acff73de570ccb3bb1559466c723e3224b6aeddd",
+            "18845139cb5a24608fc3a6c29b71238737b6966b60b4b5a9b227ec4e61e8121e",
+            "a2e017c63a93ba2b1543d76d23cedfa5eeb7f46aada5dbc0fed13b0a052e47e9",
+            "69603b9d893143c5f8debe8339ffe628587c44e5331a041c0c68ddf37ede17c4",
+            "4459ed32d5d45ded84c5c3ec1b95ca178f12cd3485c7963830fcdac111260544",
+            "57fb42275514c5e8b6f8d1fdfde601924acb98b375fbac47767c146545a98e80",
+            "67530a24c64e344c38ca4a17125e3765f72c674425d3d985adb9ccf549136c64",
+            "1e568b182cd5af696435408f71bae29887ffc36521c63bc386cd3c18903d4fa0",
+            "757409c6c06db86424a93b8fb75a8a7467bed618238cc41d0851c04f772f52dc",
+            "448a8eb14408937fe4823d6d3215995ef5c25c31ccc401494258d6443f4f2a34",
+            "62cbeee340af78d688b65fe4a8a4f9b3cbe3a8683ab0904ed9b5dda6d381109c",
+            "050ad191b7b168a1d7c1d7c5bc3b6053f7c57bb4fc58e75ddd5d03ab46cb6979",
+            "d123f89b5c7d3f765ec9c70896f07ffcf6b59c1847301b61390381c1ca7a9a14",
+            "247a9e77e9b6a6f97be0937c14a41d511725bdfa7d6a79ffebf46ec700daee7a",
+            "ae224cbfaa49b7863b7b8ceb537c2e3c735c44f3c594b7766a0dcb447995396d",
+            "64a5dd69df780f81bbe03bb73a385cf27dc1957bb97fa713d5f0954979aa9766",
+            "a3605a244cebcbfb14caddf50a0b6bc8bce2f0052e8a17acf3d09cf905fc6481",
+            "0e869058907425e17b0682cf687102d2fe30c29841ba07553d922a9fca611e18",
+            "7721cceb054f6878dcc53eb6dbecc14c1adb90b9703173223e4e79d55ab59f38",
+            "d49c984a93d51d7df9bb8b3ce5cb94e123c5d13b15b6a14d1255b8106357f36a",
+            "484a2407dd68f470dd9aaf48a1e486085414f11b2dcab6ad63670512f4a4c208",
+            "f466dac91ae25f0c8995d86fc38a641a360d98967c9552be33ce4ffce7bb1e8e",
+            "61dee899af953ba1e17a469a7caa7df1a271c4eb59430b6335f2ca92675110cd",
+            "34c31e843ba03b0953b9709b8009e47965dbc0c9884370d162bec3add1cce15f",
+            "b23ac25f1935781f90174a66e7e1223a7a8eca74dcc0ffc85a5abb12ddafe430",
+            "68170a2d3903e408701d12b20aca183322e99bf59fc44c0631b3738b31009886",
+            "faf92812d777e87b584320b4e2e6dd38b56ec456bf363a3078f1744b3e3f7270",
+            "9c95c7feb5ba67ab417a2a9efab462d4f8e501dbe5c3e25e1d8388c1efc6536b",
+            "50c8f3cc3f92799b08c6c2211ccbe5b92b7e83bbc278330359b233f73fb60858",
+            "81656c5a6f8f301e182bf2e474377c2b12e102440abae74933a8f52118006421",
+            "72c22c01e942451351ef5418175c38c5de46c3d0180bbe05eb949a78a96c95c5",
+            "d987384f347d0b4244077f4e3a3b00689fc7a8d51f780e3d6f9a07c9214ef116",
+            "512ee4bbedd48f204df5c21d5c4b62ec7b766af414cdcba33985effef163f468",
+            "70b3f9b82267a7d04fd906ab1d39b8ec29883a9df16fa1f0c563cfa5a1e432d0",
+            "348598eb327dce69ee33b63f35b41cf032effc98132e636b6b9162b579f17ba2",
+            "ee10a6b245456b173a33125d127383697b65ed87bd203d7c99d31812fe75e505",
+            "99bd421bbf1516dca7814595b61e30b66bc6b1240206ddfc1935966b701ae1a2",
+            "376a14ccbf4d71ca15dde67a5b245469a0aa0533b80e104aa2d98e9199bc9eec",
+            "9232ce59c9b158f23a8f8615e0b0768a26a9ffd7ebd770408023cae653ab1cbb",
+            "9e6714a3d32127450fd7159c53c089f85bd4076dd314f681ab139ac329d3c4a8",
+            "22001cbe7dd04027aa2886f59e140d6d78e29c60227c0002d3c8faa78cc5c839",
+            "fb512f8a0c0758d123027dd2a5d60e52adf6ab15248f85acb90a65f9434e48f2",
+            "94b2d72976f93f96d6d5e8720ec43b15f1f1757caa0f04d1007e31b8cb5a6ead",
+            "3b5db71237afc318262802b7d40303edad358fab451d4437edc08a937cc44626"
+          ],
+          "stream_sha256": "35ddb658f6f6d7b1434ebeb44bf6e0cdc20d2e0651135535d0add1df5dc0d9c4"
+        }
+      ],
+      "repeat_equal": true
+    },
+    "without-0002": {
+      "worker": {
+        "role": "without-0002",
+        "source_commit": "654815d84d00cc14b2e81880bf4c91db467cb1d8",
+        "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
+        "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
+        "parent": {
+          "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+          "patches_sha256": "3ade58a837591acde97d07a45f703d53047bbe0fc3993149bdfe0dd54298a381",
+          "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e"
+        },
+        "patch_removed": 2,
+        "ordered_patches": [
+          {
+            "number": "0001",
+            "filename": "0001-tv-rendering-and-preset-compatibility.patch",
+            "sha256": "65900645b989f653d697bdce5cdc265ab9cbf5b5f0ac699d737fb09488033dd7"
+          },
+          {
+            "number": "0002",
+            "filename": "0002-hlsl-compatibility-and-float-roundtrip.patch",
+            "sha256": "eb210256beb15ba61b3989b072e0a245e02baf8b7b983550de1e6773249e6571"
+          },
+          {
+            "number": "0003",
+            "filename": "0003-evaluator-thread-local-rand-and-lone-dot.patch",
+            "sha256": "dc9ba43e32b9894e01a897f0f5727cae1cbb1b6cd9643f85b4dcd240cabc1419"
+          },
+          {
+            "number": "0004",
+            "filename": "0004-textured-shape-sampler.patch",
+            "sha256": "3601f673c62f48f44757c8956910a6930e37eb0bb5116fc6a3d90ab6964690d9"
+          },
+          {
+            "number": "0005",
+            "filename": "0005-blur-range-interval.patch",
+            "sha256": "e77e4bde96d5ef60576f618359540e24a9e1df5bb729a043ff527e70be67e31a"
+          },
+          {
+            "number": "0006",
+            "filename": "0006-fixed-warp-signed-unit-zoom.patch",
+            "sha256": "44703476e7ebdc189c053b31a23b14a4beb45e17304def8c53adf52f0b68f90d"
+          },
+          {
+            "number": "0007",
+            "filename": "0007-live-builtin-wave-controls.patch",
+            "sha256": "1c2bb9ac7328fec193c7b60a84df980afe4ac872e74dc8e8b6984ac7e83fc700"
+          },
+          {
+            "number": "0008",
+            "filename": "0008-live-legacy-display-controls.patch",
+            "sha256": "322335d4638e3513bf8a00d6bd2d9d39436647cc368cc32a79ea28cb420c93b6"
+          },
+          {
+            "number": "0009",
+            "filename": "0009-user-texture-premultiplication.patch",
+            "sha256": "2f62c09e83b45ac25a4161be1f71f941a3e9852fa5401a930e00fc19836be6d0"
+          },
+          {
+            "number": "0010",
+            "filename": "0010-preset-texture-search-path-ownership.patch",
+            "sha256": "62740719eacde9bfd12f8d3caf83413d2e3a744d0f4b713693f8eade4e049296"
+          },
+          {
+            "number": "0011",
+            "filename": "0011-cpu-warp-rotation-trig.patch",
+            "sha256": "c99a6221174a33a7d87381e055ee3187a91edea403fe0d5ea9a9efb9a502488b"
+          },
+          {
+            "number": "0012",
+            "filename": "0012-shape-pixel-centers.patch",
+            "sha256": "9e4614734be2eced389433bcdef2afd3292afaebac3330fee55222a25c9fa7be"
+          },
+          {
+            "number": "0013",
+            "filename": "0013-composite-texel-centers.patch",
+            "sha256": "85edc00b4adcc725c6b824673ec24dd756bded652511b170b62f91912e8dd2d2"
+          }
+        ],
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/component-workers-v3/without-0002/ndk-build/patch-proof-worker",
+        "binary_sha256": "ea9db23c768b067b03b4686330bcb10dbd064c82ad056dd8eba70bc6636e79f6",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/component-workers-v3/without-0002/source-hashes.json",
+        "harness_sha256": {
+          "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
+          "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
+          "gl_capture.hpp": "f7b02bde3b4f4945427f7c0f5d2c5af19020fdad5b7189bb45cf0f888e355863",
+          "shader_failure_probe.hpp": "f4baadea73943c407f0cb903a48726e7180e3243a993c86f9be25eb6eb29a498",
+          "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+          "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+          "worker.cpp": "c2c1c476f92262954f9620ebead791ddd7df04cc936ec562e6128d24bd135da2"
+        },
+        "adjustments_sha256": "0e4e1e6bce1a85708b40086c5ce839034c854139a15e8527213ae6c1592cb284",
+        "prepare_sha256": "99b7698f64cbfbcc70375c5df38d0f93f41facbdfcd3463296a41a3b1502a28f",
+        "shipping_binary": false
+      },
+      "runs": [
+        {
+          "status": "success",
+          "manifest": {
+            "diagnostics": {
+              "attempts": 16,
+              "created_shader_objects": 34,
+              "diagnostic_cleanup_complete": true,
+              "kind": "shader-fragment-failure",
+              "live_vertex_after_each_failure": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "live_vertex_before_cleanup": 0,
+              "observer_gl_error": 0,
+              "rejection_messages": [
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+              ],
+              "retry_linked": true
+            },
+            "fps": 30,
+            "frames": 120,
+            "gl_error_frames": 0,
+            "gl_renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+            "gl_vendor": "Google (Apple)",
+            "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+            "glsl_version": "OpenGL ES GLSL ES 3.00",
+            "height": 288,
+            "identity": {
+              "repeat": 0,
+              "role": "without-0002"
+            },
+            "messages": [
+              {
+                "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+                "severity": 3
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              }
+            ],
+            "seed": 12345,
+            "status": "success",
+            "width": 512
+          },
+          "frame_hashes": [
+            "51aad8c7ae38266e7e60741aea4e63c80b8718526e340173951b63cc0d6e5b58",
+            "522fce993c33c5e975da601c74448349c0057dcad810316ee56b4bf3463b228f",
+            "55fd1b98e241c4c433d1d2e306393575cc2c989768a3120b74e9f15cc717ede7",
+            "c71866d542a67575c3794d6d848b1d01bebb47ca4a959e634f0c0b9bdd3ecae0",
+            "e0d483220fbcedea29b9fe1638b81c5c3202066c0921af39f429a978b4c6eb3c",
+            "aa7f7aa71295faa8e02d41c9d0604af5b1e7d221391c795bf448739c40f66f63",
+            "a9512d9f12db24275a9b42357e358ef57f8f1fc2e502a88f46fecb12703d716c",
+            "ca083aac6b7910dc5cec38a9b227f884051af5f7007cd69ebd0fe0dc06fc31f5",
+            "afe81e38ed5ab9e9cd5e3bbb4c755544d444638bc6c4f789f2fbedf6aa81af98",
+            "c448821ed3986cfdaafbf019b1eba1b47529c3c787cc534b8f7dfefaa860b447",
+            "7d9322b7b779a1b91f5ba02fa987347e1ad1b6f4cb58bf7101e75703e8403585",
+            "75a4b225615b6609d392173882db806bef43215409713ab2c6314ab7099385bc",
+            "7d4f7405ad65329a2affb36bdf4dabdc5779f825d2e54dc532d5e388c3ae4668",
+            "28ec4c94ee884ae027580561ac53419753548665b038326630f4db5370d10bf8",
+            "20c047305f7405d83e1fc257ca009cf930efe662fca45737ee937f0e60680bc4",
+            "ecf17ae8ffd97922561c03ff4f5f96a0742084bdfe5453c96b344952ea885fc6",
+            "95758f5fe3d9cf3b78a69ebd682011ce378b27cd451e0416bb5b288c9b580ae5",
+            "4c3bd90aef19b105ccc7bab004db9e6dc5b7331ba9eebe59c4b72a257ca27a44",
+            "913e3d74cacc80906e78f2ed0d7fa3943143fa054b4958848c68d6343b6c5613",
+            "a88c2422567b946e8fb591688601cef27073a4480ffb8e3367a15a043c8b9577",
+            "8168ba6e16b24b7e8e46fa4123a37a22907701ee50e233a59d84bc7d6541614d",
+            "ffcd748e9976f50167134529c9510a01823ced903c3fd88c9162520061791feb",
+            "a629b1c041ba4242bd9f27c7f1dc76558de0400bcb799369b202f79a7821234e",
+            "61b3bb01d121590020c4b239c2c796bb6a68b594a905238f3a4c3a362be06d05",
+            "de23a346d4ad8057dc681367ae8dd3f821929b63ff0ae568c6ce98a49655906c",
+            "f9a74156e4bf9cc0facc7292dff27aa33100798d1d40b84682d1537390f9fb0b",
+            "07f7e21aebf547fe1db996c69b92167715ae70dfac3cc1f416cdb0c53c774837",
+            "85fa9689094fbc7eb5f7a1e50b90889a1be59a421ba91900b3b1cd44598ac02f",
+            "1c60f19df5bb0f031bbe09998331aada5388718dcc841d531ef31834baadd16a",
+            "4c5e905f44d7092783a6bdbef973dac04b46edef0520d4dbc4ea75b9e5e08cd0",
+            "1a9579fdb6089dfea2a8499a06fa3a056068cf71ed196ebedf697f8878fba36d",
+            "669098f4210525529d767dbebe236fb36607f373524d46bd7445aac395cca065",
+            "1606d2cc6b8b35c532f6216ae9a22d56d6980a83abead42b24d2a5b8e71b761e",
+            "4e7040ab317333829d44ae0d1db1206094636b5adba237a9c8601ba42b0e5a97",
+            "f58081ed8aed8418bbb2f1ed4394960a86d50e79d02d91f8f01017c6ea7d524f",
+            "79d0492b1256d235a55267752c51cfcb6ea4a6dd47c1104fdfe194b4fca43681",
+            "165579e1a285ebd926be7b27200ae313e1c41ad4e20ea3dd2bf27f3589f0ec6b",
+            "9a81500092108ea3d47864dc520fcd4f552e34b31df4c5f42795c2ae75e2a835",
+            "e8cd201b4260d45d2595d9d9f4b98c7d09ad7ca304848850031f900b5ba229de",
+            "a829fb62e3b631bbce5b7984d8d58e4dd00766f3074b9a3e80241fe8ca9d8106",
+            "822f90de793e23c2ffee24b6ca7e47098257b3dd0efb500f480d0fa73ec5b282",
+            "170f3bf6eb518ee48328f05849533522e33f0409e4c165650110365889ab32c8",
+            "24167653ac4bce0facb55ac99354fe971760564d6cc32675cd587ea13b3d65fd",
+            "2a9f0b175f8fc9822878f47ebf2da36f5476a6a5cec464483c6a975df1309a2c",
+            "2a9151a78e3de4c9cbf23a2ed761dcbda5dfb73598df7a668e19225fcb5cde18",
+            "aca67b585e70bd87db79a82de15c1d789c6a0ef69f404f65169ca53a514b702d",
+            "ecaf1edee1197a85cded8569dd488ee5d545e37a11e826572c690db8deddd92c",
+            "fa5b32f4ab332914d344fd2b334bc09c49a2e26a5e42e250df3c29406ad6e11c",
+            "4f837e3b3a9cd5a3c30173e52d2876c8ce8da3cef73efda713f0e132b9d6de5a",
+            "4cedd69d33cdba5023d4bca13eda14606223b252cbc0029cc95377c635ed0f26",
+            "4aa4d62ca8f2f3765dd320b066ffd363f1f6f8726defe701e312f5f5511f0271",
+            "ef0744bf1a9d4ec8a6e523e8db09de9c3c487ef6294b64f04cc92633a8fb17d8",
+            "f35c58496d073fca18eb1790fdce33714e3be75a171fa349bb0668fb523f9853",
+            "c40e23258d1e0ad608a6a0cf4583e44087a9f0b4520de15cb34201eeaaa67ead",
+            "426ee46381a6a0036b19ec4e42f1c49f445693743af8bb4b4e370f1ce671952c",
+            "027b6cf2d53b473057e54cf580529fc57245e0c71132bbd0fcaad7203f36192a",
+            "6c674ee93f78f825cc2107ffdbcf971c636900a29cd46f9b672fc8ee0847b843",
+            "84e305e87fec006f9828d9ac39b6b883ce63b8cf4d947fde1ecec1b1e5c7d202",
+            "18533da66d152425f788cd5b461f90e3700c1b0fde16eef8f9bbd989c977579e",
+            "da64134fa6113d457434a26ef8cafdb12982aa149d4c5b1fd7166df6836ff967",
+            "dc49b9b872aae22c9ee98268b3f9c8925f4588b4a89c2f8afa50f99c81792f10",
+            "801067e352d435e17f3877b418a0329e403e957c303ca5fc721297f4500a5057",
+            "bed708d8e49317c18da14272e27b686c2a55fb802d902155358e7e7d066228ef",
+            "caaf43db5fca6abc3511734df8218f633ee3f4225347ea9dad043f384b5b6ba2",
+            "6b408aa1d5bb74cb0dc889c0eb99861fe89049ff5ee36f34cbca890c1d9bdc3a",
+            "9e5da3e4c677e0051b7a6327384383d47c24819874d8c8d0b358b0d4c4d2f3c0",
+            "445689bf4e0e6612b7fbc351df664da6234a975d965115ce5001a86ea6fc98c4",
+            "e7e8138b2a5fc1c5285b2333cec0ace1d33004563dbec2a1190312cae592ec30",
+            "f08adce5c0b987367abefef2842790f51eac19d4e4196aea928a518007773273",
+            "cf0815b14d58175eb7f7a70d0981b60f99dc48fd306801104d9acfbb42626dab",
+            "fb32d864946cefdea52960cb5b49fda0cb4f7af69a10b84a0b8cdbdf817833a4",
+            "03e2b3d99104baa89ddbc0f79b23dbb1a94cc78f0afd1f9303d3cf419faef2ef",
+            "9eaa2da9e97eb4a8261e38682a794dfe41465d4a9fe913f7645a37b6fb47c5ee",
+            "e717d33cfddb1148a0c910b49cb33e5cee104f7a7d2045cf66cc447ee7664dfc",
+            "a39b44647f2fc62648d1ae8c414afe2c42b5c6b51d13086c9a38fe4b0d0192c4",
+            "8ce78f418ab32589984e3ec397243b77670ed2faa0c723956d0cba27bb59d5cd",
+            "84b338cc22578aeda4cf0513acff73de570ccb3bb1559466c723e3224b6aeddd",
+            "18845139cb5a24608fc3a6c29b71238737b6966b60b4b5a9b227ec4e61e8121e",
+            "a2e017c63a93ba2b1543d76d23cedfa5eeb7f46aada5dbc0fed13b0a052e47e9",
+            "69603b9d893143c5f8debe8339ffe628587c44e5331a041c0c68ddf37ede17c4",
+            "4459ed32d5d45ded84c5c3ec1b95ca178f12cd3485c7963830fcdac111260544",
+            "57fb42275514c5e8b6f8d1fdfde601924acb98b375fbac47767c146545a98e80",
+            "67530a24c64e344c38ca4a17125e3765f72c674425d3d985adb9ccf549136c64",
+            "1e568b182cd5af696435408f71bae29887ffc36521c63bc386cd3c18903d4fa0",
+            "757409c6c06db86424a93b8fb75a8a7467bed618238cc41d0851c04f772f52dc",
+            "448a8eb14408937fe4823d6d3215995ef5c25c31ccc401494258d6443f4f2a34",
+            "62cbeee340af78d688b65fe4a8a4f9b3cbe3a8683ab0904ed9b5dda6d381109c",
+            "050ad191b7b168a1d7c1d7c5bc3b6053f7c57bb4fc58e75ddd5d03ab46cb6979",
+            "d123f89b5c7d3f765ec9c70896f07ffcf6b59c1847301b61390381c1ca7a9a14",
+            "247a9e77e9b6a6f97be0937c14a41d511725bdfa7d6a79ffebf46ec700daee7a",
+            "ae224cbfaa49b7863b7b8ceb537c2e3c735c44f3c594b7766a0dcb447995396d",
+            "64a5dd69df780f81bbe03bb73a385cf27dc1957bb97fa713d5f0954979aa9766",
+            "a3605a244cebcbfb14caddf50a0b6bc8bce2f0052e8a17acf3d09cf905fc6481",
+            "0e869058907425e17b0682cf687102d2fe30c29841ba07553d922a9fca611e18",
+            "7721cceb054f6878dcc53eb6dbecc14c1adb90b9703173223e4e79d55ab59f38",
+            "d49c984a93d51d7df9bb8b3ce5cb94e123c5d13b15b6a14d1255b8106357f36a",
+            "484a2407dd68f470dd9aaf48a1e486085414f11b2dcab6ad63670512f4a4c208",
+            "f466dac91ae25f0c8995d86fc38a641a360d98967c9552be33ce4ffce7bb1e8e",
+            "61dee899af953ba1e17a469a7caa7df1a271c4eb59430b6335f2ca92675110cd",
+            "34c31e843ba03b0953b9709b8009e47965dbc0c9884370d162bec3add1cce15f",
+            "b23ac25f1935781f90174a66e7e1223a7a8eca74dcc0ffc85a5abb12ddafe430",
+            "68170a2d3903e408701d12b20aca183322e99bf59fc44c0631b3738b31009886",
+            "faf92812d777e87b584320b4e2e6dd38b56ec456bf363a3078f1744b3e3f7270",
+            "9c95c7feb5ba67ab417a2a9efab462d4f8e501dbe5c3e25e1d8388c1efc6536b",
+            "50c8f3cc3f92799b08c6c2211ccbe5b92b7e83bbc278330359b233f73fb60858",
+            "81656c5a6f8f301e182bf2e474377c2b12e102440abae74933a8f52118006421",
+            "72c22c01e942451351ef5418175c38c5de46c3d0180bbe05eb949a78a96c95c5",
+            "d987384f347d0b4244077f4e3a3b00689fc7a8d51f780e3d6f9a07c9214ef116",
+            "512ee4bbedd48f204df5c21d5c4b62ec7b766af414cdcba33985effef163f468",
+            "70b3f9b82267a7d04fd906ab1d39b8ec29883a9df16fa1f0c563cfa5a1e432d0",
+            "348598eb327dce69ee33b63f35b41cf032effc98132e636b6b9162b579f17ba2",
+            "ee10a6b245456b173a33125d127383697b65ed87bd203d7c99d31812fe75e505",
+            "99bd421bbf1516dca7814595b61e30b66bc6b1240206ddfc1935966b701ae1a2",
+            "376a14ccbf4d71ca15dde67a5b245469a0aa0533b80e104aa2d98e9199bc9eec",
+            "9232ce59c9b158f23a8f8615e0b0768a26a9ffd7ebd770408023cae653ab1cbb",
+            "9e6714a3d32127450fd7159c53c089f85bd4076dd314f681ab139ac329d3c4a8",
+            "22001cbe7dd04027aa2886f59e140d6d78e29c60227c0002d3c8faa78cc5c839",
+            "fb512f8a0c0758d123027dd2a5d60e52adf6ab15248f85acb90a65f9434e48f2",
+            "94b2d72976f93f96d6d5e8720ec43b15f1f1757caa0f04d1007e31b8cb5a6ead",
+            "3b5db71237afc318262802b7d40303edad358fab451d4437edc08a937cc44626"
+          ],
+          "stream_sha256": "35ddb658f6f6d7b1434ebeb44bf6e0cdc20d2e0651135535d0add1df5dc0d9c4"
+        },
+        {
+          "status": "success",
+          "manifest": {
+            "diagnostics": {
+              "attempts": 16,
+              "created_shader_objects": 34,
+              "diagnostic_cleanup_complete": true,
+              "kind": "shader-fragment-failure",
+              "live_vertex_after_each_failure": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "live_vertex_before_cleanup": 0,
+              "observer_gl_error": 0,
+              "rejection_messages": [
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n"
+              ],
+              "retry_linked": true
+            },
+            "fps": 30,
+            "frames": 120,
+            "gl_error_frames": 0,
+            "gl_renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+            "gl_vendor": "Google (Apple)",
+            "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+            "glsl_version": "OpenGL ES GLSL ES 3.00",
+            "height": 288,
+            "identity": {
+              "repeat": 1,
+              "role": "without-0002"
+            },
+            "messages": [
+              {
+                "message": "[GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"",
+                "severity": 3
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              },
+              {
+                "message": "[Shader] Error compiling fragment shader: ERROR: 0:2: 'THIS_IS_NOT_VALID_GLSL' : syntax error\n",
+                "severity": 5
+              }
+            ],
+            "seed": 12345,
+            "status": "success",
+            "width": 512
+          },
+          "frame_hashes": [
+            "51aad8c7ae38266e7e60741aea4e63c80b8718526e340173951b63cc0d6e5b58",
+            "522fce993c33c5e975da601c74448349c0057dcad810316ee56b4bf3463b228f",
+            "55fd1b98e241c4c433d1d2e306393575cc2c989768a3120b74e9f15cc717ede7",
+            "c71866d542a67575c3794d6d848b1d01bebb47ca4a959e634f0c0b9bdd3ecae0",
+            "e0d483220fbcedea29b9fe1638b81c5c3202066c0921af39f429a978b4c6eb3c",
+            "aa7f7aa71295faa8e02d41c9d0604af5b1e7d221391c795bf448739c40f66f63",
+            "a9512d9f12db24275a9b42357e358ef57f8f1fc2e502a88f46fecb12703d716c",
+            "ca083aac6b7910dc5cec38a9b227f884051af5f7007cd69ebd0fe0dc06fc31f5",
+            "afe81e38ed5ab9e9cd5e3bbb4c755544d444638bc6c4f789f2fbedf6aa81af98",
+            "c448821ed3986cfdaafbf019b1eba1b47529c3c787cc534b8f7dfefaa860b447",
+            "7d9322b7b779a1b91f5ba02fa987347e1ad1b6f4cb58bf7101e75703e8403585",
+            "75a4b225615b6609d392173882db806bef43215409713ab2c6314ab7099385bc",
+            "7d4f7405ad65329a2affb36bdf4dabdc5779f825d2e54dc532d5e388c3ae4668",
+            "28ec4c94ee884ae027580561ac53419753548665b038326630f4db5370d10bf8",
+            "20c047305f7405d83e1fc257ca009cf930efe662fca45737ee937f0e60680bc4",
+            "ecf17ae8ffd97922561c03ff4f5f96a0742084bdfe5453c96b344952ea885fc6",
+            "95758f5fe3d9cf3b78a69ebd682011ce378b27cd451e0416bb5b288c9b580ae5",
+            "4c3bd90aef19b105ccc7bab004db9e6dc5b7331ba9eebe59c4b72a257ca27a44",
+            "913e3d74cacc80906e78f2ed0d7fa3943143fa054b4958848c68d6343b6c5613",
+            "a88c2422567b946e8fb591688601cef27073a4480ffb8e3367a15a043c8b9577",
+            "8168ba6e16b24b7e8e46fa4123a37a22907701ee50e233a59d84bc7d6541614d",
+            "ffcd748e9976f50167134529c9510a01823ced903c3fd88c9162520061791feb",
+            "a629b1c041ba4242bd9f27c7f1dc76558de0400bcb799369b202f79a7821234e",
+            "61b3bb01d121590020c4b239c2c796bb6a68b594a905238f3a4c3a362be06d05",
+            "de23a346d4ad8057dc681367ae8dd3f821929b63ff0ae568c6ce98a49655906c",
+            "f9a74156e4bf9cc0facc7292dff27aa33100798d1d40b84682d1537390f9fb0b",
+            "07f7e21aebf547fe1db996c69b92167715ae70dfac3cc1f416cdb0c53c774837",
+            "85fa9689094fbc7eb5f7a1e50b90889a1be59a421ba91900b3b1cd44598ac02f",
+            "1c60f19df5bb0f031bbe09998331aada5388718dcc841d531ef31834baadd16a",
+            "4c5e905f44d7092783a6bdbef973dac04b46edef0520d4dbc4ea75b9e5e08cd0",
+            "1a9579fdb6089dfea2a8499a06fa3a056068cf71ed196ebedf697f8878fba36d",
+            "669098f4210525529d767dbebe236fb36607f373524d46bd7445aac395cca065",
+            "1606d2cc6b8b35c532f6216ae9a22d56d6980a83abead42b24d2a5b8e71b761e",
+            "4e7040ab317333829d44ae0d1db1206094636b5adba237a9c8601ba42b0e5a97",
+            "f58081ed8aed8418bbb2f1ed4394960a86d50e79d02d91f8f01017c6ea7d524f",
+            "79d0492b1256d235a55267752c51cfcb6ea4a6dd47c1104fdfe194b4fca43681",
+            "165579e1a285ebd926be7b27200ae313e1c41ad4e20ea3dd2bf27f3589f0ec6b",
+            "9a81500092108ea3d47864dc520fcd4f552e34b31df4c5f42795c2ae75e2a835",
+            "e8cd201b4260d45d2595d9d9f4b98c7d09ad7ca304848850031f900b5ba229de",
+            "a829fb62e3b631bbce5b7984d8d58e4dd00766f3074b9a3e80241fe8ca9d8106",
+            "822f90de793e23c2ffee24b6ca7e47098257b3dd0efb500f480d0fa73ec5b282",
+            "170f3bf6eb518ee48328f05849533522e33f0409e4c165650110365889ab32c8",
+            "24167653ac4bce0facb55ac99354fe971760564d6cc32675cd587ea13b3d65fd",
+            "2a9f0b175f8fc9822878f47ebf2da36f5476a6a5cec464483c6a975df1309a2c",
+            "2a9151a78e3de4c9cbf23a2ed761dcbda5dfb73598df7a668e19225fcb5cde18",
+            "aca67b585e70bd87db79a82de15c1d789c6a0ef69f404f65169ca53a514b702d",
+            "ecaf1edee1197a85cded8569dd488ee5d545e37a11e826572c690db8deddd92c",
+            "fa5b32f4ab332914d344fd2b334bc09c49a2e26a5e42e250df3c29406ad6e11c",
+            "4f837e3b3a9cd5a3c30173e52d2876c8ce8da3cef73efda713f0e132b9d6de5a",
+            "4cedd69d33cdba5023d4bca13eda14606223b252cbc0029cc95377c635ed0f26",
+            "4aa4d62ca8f2f3765dd320b066ffd363f1f6f8726defe701e312f5f5511f0271",
+            "ef0744bf1a9d4ec8a6e523e8db09de9c3c487ef6294b64f04cc92633a8fb17d8",
+            "f35c58496d073fca18eb1790fdce33714e3be75a171fa349bb0668fb523f9853",
+            "c40e23258d1e0ad608a6a0cf4583e44087a9f0b4520de15cb34201eeaaa67ead",
+            "426ee46381a6a0036b19ec4e42f1c49f445693743af8bb4b4e370f1ce671952c",
+            "027b6cf2d53b473057e54cf580529fc57245e0c71132bbd0fcaad7203f36192a",
+            "6c674ee93f78f825cc2107ffdbcf971c636900a29cd46f9b672fc8ee0847b843",
+            "84e305e87fec006f9828d9ac39b6b883ce63b8cf4d947fde1ecec1b1e5c7d202",
+            "18533da66d152425f788cd5b461f90e3700c1b0fde16eef8f9bbd989c977579e",
+            "da64134fa6113d457434a26ef8cafdb12982aa149d4c5b1fd7166df6836ff967",
+            "dc49b9b872aae22c9ee98268b3f9c8925f4588b4a89c2f8afa50f99c81792f10",
+            "801067e352d435e17f3877b418a0329e403e957c303ca5fc721297f4500a5057",
+            "bed708d8e49317c18da14272e27b686c2a55fb802d902155358e7e7d066228ef",
+            "caaf43db5fca6abc3511734df8218f633ee3f4225347ea9dad043f384b5b6ba2",
+            "6b408aa1d5bb74cb0dc889c0eb99861fe89049ff5ee36f34cbca890c1d9bdc3a",
+            "9e5da3e4c677e0051b7a6327384383d47c24819874d8c8d0b358b0d4c4d2f3c0",
+            "445689bf4e0e6612b7fbc351df664da6234a975d965115ce5001a86ea6fc98c4",
+            "e7e8138b2a5fc1c5285b2333cec0ace1d33004563dbec2a1190312cae592ec30",
+            "f08adce5c0b987367abefef2842790f51eac19d4e4196aea928a518007773273",
+            "cf0815b14d58175eb7f7a70d0981b60f99dc48fd306801104d9acfbb42626dab",
+            "fb32d864946cefdea52960cb5b49fda0cb4f7af69a10b84a0b8cdbdf817833a4",
+            "03e2b3d99104baa89ddbc0f79b23dbb1a94cc78f0afd1f9303d3cf419faef2ef",
+            "9eaa2da9e97eb4a8261e38682a794dfe41465d4a9fe913f7645a37b6fb47c5ee",
+            "e717d33cfddb1148a0c910b49cb33e5cee104f7a7d2045cf66cc447ee7664dfc",
+            "a39b44647f2fc62648d1ae8c414afe2c42b5c6b51d13086c9a38fe4b0d0192c4",
+            "8ce78f418ab32589984e3ec397243b77670ed2faa0c723956d0cba27bb59d5cd",
+            "84b338cc22578aeda4cf0513acff73de570ccb3bb1559466c723e3224b6aeddd",
+            "18845139cb5a24608fc3a6c29b71238737b6966b60b4b5a9b227ec4e61e8121e",
+            "a2e017c63a93ba2b1543d76d23cedfa5eeb7f46aada5dbc0fed13b0a052e47e9",
+            "69603b9d893143c5f8debe8339ffe628587c44e5331a041c0c68ddf37ede17c4",
+            "4459ed32d5d45ded84c5c3ec1b95ca178f12cd3485c7963830fcdac111260544",
+            "57fb42275514c5e8b6f8d1fdfde601924acb98b375fbac47767c146545a98e80",
+            "67530a24c64e344c38ca4a17125e3765f72c674425d3d985adb9ccf549136c64",
+            "1e568b182cd5af696435408f71bae29887ffc36521c63bc386cd3c18903d4fa0",
+            "757409c6c06db86424a93b8fb75a8a7467bed618238cc41d0851c04f772f52dc",
+            "448a8eb14408937fe4823d6d3215995ef5c25c31ccc401494258d6443f4f2a34",
+            "62cbeee340af78d688b65fe4a8a4f9b3cbe3a8683ab0904ed9b5dda6d381109c",
+            "050ad191b7b168a1d7c1d7c5bc3b6053f7c57bb4fc58e75ddd5d03ab46cb6979",
+            "d123f89b5c7d3f765ec9c70896f07ffcf6b59c1847301b61390381c1ca7a9a14",
+            "247a9e77e9b6a6f97be0937c14a41d511725bdfa7d6a79ffebf46ec700daee7a",
+            "ae224cbfaa49b7863b7b8ceb537c2e3c735c44f3c594b7766a0dcb447995396d",
+            "64a5dd69df780f81bbe03bb73a385cf27dc1957bb97fa713d5f0954979aa9766",
+            "a3605a244cebcbfb14caddf50a0b6bc8bce2f0052e8a17acf3d09cf905fc6481",
+            "0e869058907425e17b0682cf687102d2fe30c29841ba07553d922a9fca611e18",
+            "7721cceb054f6878dcc53eb6dbecc14c1adb90b9703173223e4e79d55ab59f38",
+            "d49c984a93d51d7df9bb8b3ce5cb94e123c5d13b15b6a14d1255b8106357f36a",
+            "484a2407dd68f470dd9aaf48a1e486085414f11b2dcab6ad63670512f4a4c208",
+            "f466dac91ae25f0c8995d86fc38a641a360d98967c9552be33ce4ffce7bb1e8e",
+            "61dee899af953ba1e17a469a7caa7df1a271c4eb59430b6335f2ca92675110cd",
+            "34c31e843ba03b0953b9709b8009e47965dbc0c9884370d162bec3add1cce15f",
+            "b23ac25f1935781f90174a66e7e1223a7a8eca74dcc0ffc85a5abb12ddafe430",
+            "68170a2d3903e408701d12b20aca183322e99bf59fc44c0631b3738b31009886",
+            "faf92812d777e87b584320b4e2e6dd38b56ec456bf363a3078f1744b3e3f7270",
+            "9c95c7feb5ba67ab417a2a9efab462d4f8e501dbe5c3e25e1d8388c1efc6536b",
+            "50c8f3cc3f92799b08c6c2211ccbe5b92b7e83bbc278330359b233f73fb60858",
+            "81656c5a6f8f301e182bf2e474377c2b12e102440abae74933a8f52118006421",
+            "72c22c01e942451351ef5418175c38c5de46c3d0180bbe05eb949a78a96c95c5",
+            "d987384f347d0b4244077f4e3a3b00689fc7a8d51f780e3d6f9a07c9214ef116",
+            "512ee4bbedd48f204df5c21d5c4b62ec7b766af414cdcba33985effef163f468",
+            "70b3f9b82267a7d04fd906ab1d39b8ec29883a9df16fa1f0c563cfa5a1e432d0",
+            "348598eb327dce69ee33b63f35b41cf032effc98132e636b6b9162b579f17ba2",
+            "ee10a6b245456b173a33125d127383697b65ed87bd203d7c99d31812fe75e505",
+            "99bd421bbf1516dca7814595b61e30b66bc6b1240206ddfc1935966b701ae1a2",
+            "376a14ccbf4d71ca15dde67a5b245469a0aa0533b80e104aa2d98e9199bc9eec",
+            "9232ce59c9b158f23a8f8615e0b0768a26a9ffd7ebd770408023cae653ab1cbb",
+            "9e6714a3d32127450fd7159c53c089f85bd4076dd314f681ab139ac329d3c4a8",
+            "22001cbe7dd04027aa2886f59e140d6d78e29c60227c0002d3c8faa78cc5c839",
+            "fb512f8a0c0758d123027dd2a5d60e52adf6ab15248f85acb90a65f9434e48f2",
+            "94b2d72976f93f96d6d5e8720ec43b15f1f1757caa0f04d1007e31b8cb5a6ead",
+            "3b5db71237afc318262802b7d40303edad358fab451d4437edc08a937cc44626"
+          ],
+          "stream_sha256": "35ddb658f6f6d7b1434ebeb44bf6e0cdc20d2e0651135535d0add1df5dc0d9c4"
+        }
+      ],
+      "repeat_equal": true
+    }
+  },
+  "diagnostic_kind": "shader-fragment-failure",
+  "backend": [
+    "Google (Apple)",
+    "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+    "OpenGL ES GLSL ES 3.00"
+  ]
+}

@@ -1,0 +1,16 @@
+MILKDROP_PRESET_VERSION=201
+PSVERSION=2
+PSVERSION_WARP=2
+PSVERSION_COMP=2
+[preset00]
+fDecay=0.000000
+fGammaAdj=1.000000
+nWaveMode=0
+fWaveAlpha=0.000000
+per_frame_init_1=q18=0.2;q19=0.8;
+per_frame_1=q18=0.2;q19=0.8;
+warp_1=`shader_body { ret = tex2D(sampler_main, uv).rgb; }
+comp_1=`shader_body {
+comp_2=`q18 = 1;
+comp_3=`ret = float3(q18, q19, 0.25);
+comp_4=`}

@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "frames_checked_per_configuration": 120,
+  "roles": [
+    "upstream",
+    "without-0014",
+    "patched"
+  ],
+  "disabled_expected_rgb": [
+    64,
+    128,
+    192
+  ],
+  "disabled_all_current_frame_bytes_match": true,
+  "half_max_twice_output_minus_input_minus_full": 1,
+  "half_allowed_twice_byte_error": 2,
+  "full_current_vs_baselines_max_byte_difference": 1,
+  "upstream_and_minus0014_ignore_zero_and_half_within_byte_tolerance": 1,
+  "scope": "independent constant RGB and half-of-input-plus-full-shade oracle on all matched first-repeat pixels; source/binary/repeat verification remains separate"
+}

@@ -1,0 +1,5 @@
+{
+  "status": "passed",
+  "scope": "02/05 original exact two-repeat120-frame zeroGL-error sequences, full image/nearest crop hashes; 10 host fixture verified by portable verifier; 02 logging replay matches all prior120 hashes and records compositefallback only in upstream/no2",
+  "figure_receipt": "clearer-02-05-10-figures.json"
+}

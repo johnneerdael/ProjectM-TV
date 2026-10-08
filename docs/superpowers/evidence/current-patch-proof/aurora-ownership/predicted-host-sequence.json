@@ -1,0 +1,41 @@
+{
+  "name": "Aurora Ownership:SOL/LUNA",
+  "created_utc": "2026-10-07T22:21:08.808137+00:00",
+  "target_patch": "0010-preset-texture-search-path-ownership.patch",
+  "fps": 30,
+  "frames": 120,
+  "dimensions": [
+    512,
+    288
+  ],
+  "seed": 12345,
+  "transition_seconds": 2,
+  "events_before_render": [
+    {
+      "frame": 20,
+      "operation": "set texture roots to pack-b/textures"
+    },
+    {
+      "frame": 21,
+      "operation": "load pack-b/presets/Aurora Ownership - LUNA.milk with soft transition"
+    },
+    {
+      "frame": 40,
+      "operation": "reset textures"
+    }
+  ],
+  "inspect_frames": [
+    19,
+    20,
+    40,
+    59,
+    81,
+    119
+  ],
+  "prediction_before_gpu": true,
+  "before_patch": "Frame20 outgoing warm SOL portal remains alive but named-image lookup resolves LUNA. The blue/crystalline emblem replaces the warm solar emblem before a fade has started. During transition both live shape lookups useB; reset does notrestoreA.",
+  "with_patch": "Outgoing remains SOL fromA, incoming usesLUNA fromB. Frame40cache reset reloads each image from itsown retained root. Transition completion leaves onlyLUNA.",
+  "limits": "Blend shape depends on the chosen transition shader; exact blended RGB/visibility at40/59 is not predicted without freezing that shader. The frame20pre-transition image swap is the unambiguous screen witness.",
+  "identity_lookup": "shapecode_0_image=aurora_ownership_core.png; no custom shader sampler binds this image",
+  "validation_status": "Assets generated;source/GPU verification in progress"
+}
