@@ -1,8 +1,6 @@
 --- a/vendor/projectm-eval/projectm-eval/TreeFunctions.c
 +++ b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
-@@ -578,7 +578,10 @@
- 
-     if(fabs(*val2_ptr) < COMPARE_CLOSEFACTOR)
+@@ -580,3 +580,6 @@
      {
 -        assign_ret_val(0.0);
 +        // Recover only finite, nonzero-divisor results in the suppressed region.
@@ -10,22 +8,178 @@
 +            ? *val1_ptr / *val2_ptr : 0.0;
 +        assign_ret_val(isfinite(result) ? result : 0.0);
          return;
-     }
- 
-@@ -755,7 +758,10 @@
- 
-     if(fabs(*val2_ptr) < COMPARE_CLOSEFACTOR)
+@@ -757,2 +760,81 @@
      {
--        assign_ret_val(0.0);
 +        // Recover only finite, nonzero-divisor results in the suppressed region.
 +        PRJM_EVAL_F result = *val2_ptr != 0.0 && isfinite(**ret_val)
 +            ? **ret_val / *val2_ptr : 0.0;
 +        assign_ret_val(isfinite(result) ? result : 0.0);
-         return;
++        return;
++    }
++
++    assign_ret_val(**ret_val / *val2_ptr);
++}
++
++prjm_eval_function_decl(bitwise_or_op)
++{
++    assert_valid_ctx();
++
++    PRJM_EVAL_F val2 = .0;
++    PRJM_EVAL_F* val2_ptr = &val2;
++
++    invoke_arg(0, ret_val);
++    invoke_arg(1, &val2_ptr);
++
++    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) | (PRJM_EVAL_I)(*val2_ptr)));
++}
++
++prjm_eval_function_decl(bitwise_or)
++{
++    assert_valid_ctx();
++
++    PRJM_EVAL_F val1 = .0;
++    PRJM_EVAL_F* val1_ptr = &val1;
++    PRJM_EVAL_F val2 = .0;
++    PRJM_EVAL_F* val2_ptr = &val2;
++
++    invoke_arg(0, &val1_ptr);
++    invoke_arg(1, &val2_ptr);
++
++    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(*val1_ptr) | (PRJM_EVAL_I)(*val2_ptr)));
++}
++
++prjm_eval_function_decl(bitwise_and_op)
++{
++    assert_valid_ctx();
++
++    PRJM_EVAL_F val2 = .0;
++    PRJM_EVAL_F* val2_ptr = &val2;
++
++    invoke_arg(0, ret_val);
++    invoke_arg(1, &val2_ptr);
++
++    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) & (PRJM_EVAL_I)(*val2_ptr)));
++}
++
++prjm_eval_function_decl(bitwise_and)
++{
++    assert_valid_ctx();
++
++    PRJM_EVAL_F val1 = .0;
++    PRJM_EVAL_F* val1_ptr = &val1;
++    PRJM_EVAL_F val2 = .0;
++    PRJM_EVAL_F* val2_ptr = &val2;
++
++    invoke_arg(0, &val1_ptr);
++    invoke_arg(1, &val2_ptr);
++
++    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(*val1_ptr) & (PRJM_EVAL_I)(*val2_ptr)));
++}
++
++prjm_eval_function_decl(mod_op)
++{
++    assert_valid_ctx();
++
++    PRJM_EVAL_F val2 = .0;
++    PRJM_EVAL_F* val2_ptr = &val2;
++
++    invoke_arg(0, ret_val);
++    invoke_arg(1, &val2_ptr);
++
++    PRJM_EVAL_I divisor = (PRJM_EVAL_I) *val2_ptr;
++    if (divisor == 0)
++    {
+         assign_ret_val(0.0);
+@@ -760,7 +842,6 @@
      }
- 
-@@ -849,7 +855,10 @@
- 
+-
+-    assign_ret_val(**ret_val / *val2_ptr);
+-}
+-
+-prjm_eval_function_decl(bitwise_or_op)
++    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) % divisor));
++}
++
++prjm_eval_function_decl(pow_op)
+ {
+@@ -774,80 +855,8 @@
+-
++
+-    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) | (PRJM_EVAL_I)(*val2_ptr)));
+-}
+-
+-prjm_eval_function_decl(bitwise_or)
+-{
+-    assert_valid_ctx();
+-
+-    PRJM_EVAL_F val1 = .0;
+-    PRJM_EVAL_F* val1_ptr = &val1;
+-    PRJM_EVAL_F val2 = .0;
+-    PRJM_EVAL_F* val2_ptr = &val2;
+-
+-    invoke_arg(0, &val1_ptr);
+-    invoke_arg(1, &val2_ptr);
+-
+-    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(*val1_ptr) | (PRJM_EVAL_I)(*val2_ptr)));
+-}
+-
+-prjm_eval_function_decl(bitwise_and_op)
+-{
+-    assert_valid_ctx();
+-
+-    PRJM_EVAL_F val2 = .0;
+-    PRJM_EVAL_F* val2_ptr = &val2;
+-
+-    invoke_arg(0, ret_val);
+-    invoke_arg(1, &val2_ptr);
+-
+-    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) & (PRJM_EVAL_I)(*val2_ptr)));
+-}
+-
+-prjm_eval_function_decl(bitwise_and)
+-{
+-    assert_valid_ctx();
+-
+-    PRJM_EVAL_F val1 = .0;
+-    PRJM_EVAL_F* val1_ptr = &val1;
+-    PRJM_EVAL_F val2 = .0;
+-    PRJM_EVAL_F* val2_ptr = &val2;
+-
+-    invoke_arg(0, &val1_ptr);
+-    invoke_arg(1, &val2_ptr);
+-
+-    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(*val1_ptr) & (PRJM_EVAL_I)(*val2_ptr)));
+-}
+-
+-prjm_eval_function_decl(mod_op)
+-{
+-    assert_valid_ctx();
+-
+-    PRJM_EVAL_F val2 = .0;
+-    PRJM_EVAL_F* val2_ptr = &val2;
+-
+-    invoke_arg(0, ret_val);
+-    invoke_arg(1, &val2_ptr);
+-
+-    PRJM_EVAL_I divisor = (PRJM_EVAL_I) *val2_ptr;
+-    if (divisor == 0)
+-    {
+-        assign_ret_val(0.0);
+-        return;
+-    }
+-    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) % divisor));
+-}
+-
+-prjm_eval_function_decl(pow_op)
+-{
+-    assert_valid_ctx();
+-
+-    PRJM_EVAL_F val2 = .0;
+-    PRJM_EVAL_F* val2_ptr = &val2;
+-
+-    invoke_arg(0, ret_val);
+-    invoke_arg(1, &val2_ptr);
+-
      if(fabs(**ret_val) < COMPARE_CLOSEFACTOR && *val2_ptr < 0)
      {
 -        assign_ret_val(.0);
@@ -34,11 +188,7 @@
 +            ? pow(**ret_val, *val2_ptr) : 0.0;
 +        assign_ret_val(isfinite(result) ? result : 0.0);
          return;
-     }
- 
-@@ -985,7 +994,10 @@
- 
-     if (fabs(*math_arg1_ptr) < COMPARE_CLOSEFACTOR && *math_arg2_ptr < 0)
+@@ -987,3 +996,6 @@
      {
 -        assign_ret_val(.0);
 +        // Keep zero, invalid and overflow suppression; recover finite powers only.
@@ -46,5 +196,3 @@
 +            ? pow(*math_arg1_ptr, *math_arg2_ptr) : 0.0;
 +        assign_ret_val(isfinite(result) ? result : 0.0);
          return;
-     }
- 

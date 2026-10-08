@@ -1,9 +1,8 @@
 --- a/vendor/projectm-eval/projectm-eval/TreeFunctions.c
 +++ b/vendor/projectm-eval/projectm-eval/TreeFunctions.c
-@@ -585,6 +585,31 @@
-     assign_ret_val(*val1_ptr / *val2_ptr);
- }
- 
+@@ -587,2 +587,27 @@
+-
++
 +
 +// The original x86 fabs/fistp/div path is defined here only below 2^31.
 +// Keep defined wider signed results, and never cast invalid floats or divide MIN/-1.
@@ -30,12 +29,9 @@
 +}
 +
  prjm_eval_function_decl(mod)
- {
-     assert_valid_ctx();
-@@ -597,13 +622,7 @@
-     invoke_arg(0, &val1_ptr);
-     invoke_arg(1, &val2_ptr);
- 
+@@ -599,9 +624,3 @@
+-
++
 -    PRJM_EVAL_I divisor = (PRJM_EVAL_I) *val2_ptr;
 -    if (divisor == 0)
 -    {
@@ -45,12 +41,9 @@
 -    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I) *val1_ptr % divisor));
 +    assign_ret_val(bounded_milkdrop_remainder(*val1_ptr, *val2_ptr));
  }
- 
- prjm_eval_function_decl(boolean_and_op)
-@@ -828,13 +847,7 @@
-     invoke_arg(0, ret_val);
-     invoke_arg(1, &val2_ptr);
- 
+@@ -830,9 +849,3 @@
+-
++
 -    PRJM_EVAL_I divisor = (PRJM_EVAL_I) *val2_ptr;
 -    if (divisor == 0)
 -    {
@@ -60,5 +53,3 @@
 -    assign_ret_val((PRJM_EVAL_F) ((PRJM_EVAL_I)(**ret_val) % divisor));
 +    assign_ret_val(bounded_milkdrop_remainder(**ret_val, *val2_ptr));
  }
- 
- prjm_eval_function_decl(pow_op)
