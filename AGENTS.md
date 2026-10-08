@@ -117,7 +117,7 @@ Prefer configuration, composition, or a small wrapper to copied library source o
 | Auto-update | `HttpURLConnection` + `Updater` + custom `UpdateFileProvider` (no AndroidX `FileProvider`) | framework | off by default; separate from the temporary LAN upload listener |
 | Engine fixes | new patch in `tools/projectm-patches/` | patch series | never edit committed submodule files |
 | Preset analysis | `tools/preset-lab` (numpy, opencv-python-headless) | `tools/preset-lab/pyproject.toml`, `requirements.lock` | offline only; does not change the Android renderer |
-| Docs site | MkDocs | `docs/site-requirements.txt` (`mkdocs==1.6.1`) | |
+| Docs site | MkDocs with the Material theme (static GitHub Pages build) | `docs/site-requirements.txt` (`mkdocs==1.6.1`, `mkdocs-material==9.7.7`) | Keep MkDocs on 1.6.x: Material warns that MkDocs 2.0 removes plugins/theme overrides; dark slate palette and overrides live in `docs/user-guide/stylesheets/projectm.css` |
 | Build toolchain | AGP 8.12.0, Gradle 8.14.2, NDK 27.3.13750724, CMake 3.22.1 | `build.gradle`, `gradle/wrapper/gradle-wrapper.properties`, `app/build.gradle`, `core/build.gradle` | no version catalog |
 
 Adding AndroidX or another runtime dependency departs from the documented small-APK policy (`app/build.gradle`) and affects F-Droid reproducibility; justify it in the PR.
