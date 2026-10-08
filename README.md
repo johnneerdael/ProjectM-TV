@@ -4,7 +4,7 @@
 
 ProjectM TV is a music visualizer for Android TV. It turns the music another app plays on the TV into MilkDrop visuals, at up to 4K, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It is not a music player itself.
 
-It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualizer/projectm), the open-source reimplementation of Winamp's MilkDrop, based on unreleased projectM 4.2 master (commit `6f6480746`) plus 14 patches. The patches restore MilkDrop 2's behaviour where projectM differs, keep presets at their authored scale on 4K screens, and make preset changes smooth on TV hardware.
+It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualizer/projectm), the open-source reimplementation of Winamp's MilkDrop, based on unreleased projectM 4.2 master (commit `6f6480746`) plus 15 patches. The patches restore MilkDrop 2's behaviour where projectM differs, keep presets at their authored scale on 4K screens, and make preset changes smooth on TV hardware.
 
 > **Install on your TV with the Downloader app: code `4821216`**
 >
@@ -99,7 +99,7 @@ Opening *Advanced* also shows a **Diagnostics** card: render size, memory status
 - At least 2 GB of RAM is highly recommended.
 - A music app playing **on the same device**. Verified: Spotify, SoundCloud, SmartTube and [Milkbeat](https://github.com/johnneerdael/Milkbeat). The app has no microphone or line-in input, and audio that reaches the TV already Dolby-encoded cannot be visualized. The visualizer receives 8-bit mono audio.
 - Preset moods are a beta prediction from one short measurement per preset; they will be improved. Chill is not a guarantee of no flashing.
-- Some presets still look different from MilkDrop on Windows: random textures change per load, chaotic presets diverge, and GPU drivers differ in undefined arithmetic.
+- Some presets still look different from MilkDrop on Windows: random textures change per load, chaotic presets diverge, and GPU drivers differ in undefined arithmetic. Negative warp zoom follows MilkDrop 2’s CPU power calculation for valid integer nested exponents; fractional negative powers still have nonfinite coordinates with no portable appearance guarantee.
 - 189 of the 9,795 *Cream of the Crop* presets are not included: 116 cannot react to music, 73 use images with text, logos or people (one is in both groups), and 1 has a missing texture.
 
 ## Permissions

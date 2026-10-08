@@ -22,7 +22,7 @@ u -= dx;  v -= dy                               translate
 
 - **`warp` defaults to 1**: the animated sine warp is on unless you set `warp=0`.
 - `zoom` above 1 zooms in, so the picture flows outward. `zoomexp` makes the zoom depend on the distance from the centre.
-- **Negative zoom** reflects the picture through the centre in MilkDrop, which computes `pow` on the CPU. With `zoomexp=1` the result is simply the signed zoom; ProjectM TV reproduces that case exactly. With any other `zoomexp`, a negative zoom gives undefined results on GPUs. Avoid it.
+- **Negative zoom** uses CPU `powf` in MilkDrop. With `zoomexp=1` the result is the signed zoom; other integer nested exponents give signed odd powers or positive even powers. A negative base with a nonintegral nested exponent has an invalid real-valued power domain. In authored GLSL shader maths, `pow` is undefined for every negative base, including integer exponents; avoid relying on it.
 - **`rot`** is converted to float and passed through CPU `sinf`/`cosf` in MilkDrop, so any finite value works, even `rot=10000000`. ProjectM TV does the same. Some other GPU-based implementations collapse at huge angles.
 - **`wrap`** chooses whether coordinates outside 0–1 wrap or clamp. MilkDrop applies it only to the fixed-function warp (treating `wrap > 0.5` as on); a warp shader decides with its sampler name instead. projectM treats `> 0.0001` as on and also applies it to an unqualified `sampler_main` in warp shaders ([details](shaders.md#warp-shader-responsibilities)).
 

@@ -69,6 +69,8 @@ ProjectM TV Engine follows MilkDrop 2 closely and fixes many differences that ot
 - **GPU drivers** differ in edge cases, such as power functions of negative numbers.
 - A shader that fails to translate falls back to a simple default. Please report these.
 
+Negative motion zoom uses MilkDrop 2's CPU power calculation for valid integer nested exponents. Fractional negative powers still produce nonfinite coordinates with no portable appearance guarantee. **Great Tulip Majesty (txtr wrap)** has the same invalid power domain in the original source; its tested 30-frame emulator replay is unchanged by this correction. A source predictor can decline to forecast it even while the app renders a picture.
+
 Include the preset name, your TV and the app version when you report a difference.
 
 ## Updating fails

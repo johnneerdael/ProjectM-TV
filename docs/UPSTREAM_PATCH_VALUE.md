@@ -36,7 +36,7 @@ The original 44-patch assessment above is historical. Main `43023889ec38cf1250f3
 |---|---|---|
 | 0045 textured shape sampler | 0004 | Own a repeat/linear sampler for main-textured fills and preserve named-image qualifiers. Retain upstream VertexArray/ShaderCache ownership. This is a general sampler-state correctness candidate; it adds one instance-owned sampler. |
 | 0046 blur range interval | 0005 | Retain exact float32 normalization order, upward expansion of upper bounds and coherent defaults for unsupported ranges. Helper bodies match the final 4.1.7 fix. Useful defensive math for blur storage and decoding; no performance claim. |
-| 0047 signed unit zoom | 0006 | Preserve finite negative zoom when the exponent is exactly one, avoiding undefined GLSL power behavior. Other negative-base power domains stay unsupported. The original repair applies without changing its shader math. |
+| 0047 signed unit zoom | 0006 | Historical specialization for finite negative zoom with authored exponent exactly one. Current 0015 extends CPU compatibility to negative nested powers, preserving nonfinite fractional-domain results. |
 | 0048 live built-in wave controls | 0007 | Consume evaluated waveform mode/dots/thickness/blending and rebuild mode math when needed, while retaining Mesh rendering and evaluated geometry reuse. Useful for authored per-frame controls. Original MilkDrop2 `milkdropfs.cpp:2852` reads the evaluated mode with integer truncation and remainder; projectM retains its own 16-mode extension. |
 | 0049 live legacy display controls | 0008 | Consume evaluated gamma, echo and filter flags, including equation-only activation, through current Mesh and weak ShaderCache ownership. Preserve custom-composite policy and configuration defaults. Useful for compatibility with authored legacy effects. |
 
@@ -200,3 +200,21 @@ independent upstream proposal. The [focused evidence](superpowers/evidence/brain
 separates corrected suppression from the original preset's remaining sparse
 output and records independently failing GL controls. No universal brightness,
 Windows appearance or performance claim is made.
+
+## Negative warp power producer (0015)
+
+`0015-warp-negative-zoom-cpu-power.patch` follows MilkDrop 2.25c
+`vis_milk2/milkdropfs.cpp:1877–1938`: evaluate negative effective zoom on CPU after
+float conversion, then transport it through the shared vertex source. The old
+GLSL branch returned NaN for CPU-defined nested integer exponents 1, 2 and 3 on
+the observed backend. Instance-owned attribute9 supplies the result for legacy
+and custom warp programs; the existing positive path, raw equation values and
+evaluate-once replay are preserved. A four-byte-per-vertex buffer and CPU power
+work are added; performance is unmeasured.
+
+The exact Tulip witness's 33 fractional-domain NaNs per frame agree between CPU
+and GPU and its full 30-frame AAR replay remains byte-identical. Backend-bound
+interpolation/texture observations do not establish portable source-only pixels
+or original D3D9 appearance. See [focused source/UV/render evidence](superpowers/evidence/tulip-negative-zoom-power/README.md).
+This is a general defined-power compatibility candidate, not a preset brightness
+repair or authorization to clear predictor guards for invalid domains.

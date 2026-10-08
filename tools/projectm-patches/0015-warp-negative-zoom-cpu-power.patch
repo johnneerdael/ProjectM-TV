@@ -1,0 +1,125 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Evaluate negative warp zoom powers with MilkDrop CPU semantics
+
+Reference: MilkDrop 2.25c vis_milk2/milkdropfs.cpp:1877-1938.
+GLSL pow is undefined for every negative base; CPU powf defines integer
+nested powers. Prepare the float-converted negative result once per vertex
+and replay it through an instance-owned attribute buffer. Preserve authored
+equations, the positive shader path, and nonfinite fractional-domain results.
+No absolute-value or near-unit-exponent normalization is introduced.
+
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -28,6 +28,7 @@
+     m_distanceBuffer.Bind();
+     m_stretchBuffer.Bind();
+     m_rotationCosBuffer.Bind();
++    m_negativeZoomPowerBuffer.Bind();
+ 
+     m_radiusAngleBuffer.InitializeAttributePointer(3);
+     m_zoomRotWarpBuffer.InitializeAttributePointer(4);
+@@ -35,6 +36,7 @@
+     m_distanceBuffer.InitializeAttributePointer(6);
+     m_stretchBuffer.InitializeAttributePointer(7);
+     m_rotationCosBuffer.InitializeAttributePointer(8);
++    m_negativeZoomPowerBuffer.InitializeAttributePointer(9);
+ 
+     Renderer::VertexBuffer<Renderer::Point>::SetEnableAttributeArray(3, true);
+     Renderer::VertexBuffer<Renderer::Point>::SetEnableAttributeArray(4, true);
+@@ -42,6 +44,7 @@
+     Renderer::VertexBuffer<Renderer::Point>::SetEnableAttributeArray(6, true);
+     Renderer::VertexBuffer<Renderer::Point>::SetEnableAttributeArray(7, true);
+     Renderer::VertexBuffer<RotationCos>::SetEnableAttributeArray(8, true);
++    Renderer::VertexBuffer<NegativeZoomPower>::SetEnableAttributeArray(9, true);
+ 
+     Renderer::Mesh::Unbind();
+ }
+@@ -141,6 +144,7 @@
+         m_distanceBuffer.Resize(vertexCount);
+         m_stretchBuffer.Resize(vertexCount);
+         m_rotationCosBuffer.Resize(vertexCount);
++        m_negativeZoomPowerBuffer.Resize(vertexCount);
+ 
+         m_warpMesh.Indices().Resize(m_gridSizeX * m_gridSizeY * 6);
+     }
+@@ -295,6 +299,16 @@
+                 curStretch = {sx, sy};
+             }
+ 
++            // MilkDrop evaluates the nested power on CPU after float conversion.
++            // GLSL pow has no defined negative-base domain, even for integer powers.
++            // Keep fractional-domain NaNs/Inf; do not invent a magnitude or epsilon.
++            const float vertexZoom = curZoomRotWarp.zoom;
++            const float vertexZoomExp = curZoomRotWarp.zoomExp;
++            m_negativeZoomPowerBuffer[vertex].value = vertexZoom < 0.0f
++                ? (vertexZoomExp == 1.0f ? vertexZoom
++                    : std::pow(vertexZoom, std::pow(vertexZoomExp, curRadiusAngle.radius * 2.0f - 1.0f)))
++                : 0.0f;
++
+             vertex++;
+         }
+     }
+@@ -306,6 +320,7 @@
+     m_distanceBuffer.Update();
+     m_stretchBuffer.Update();
+     m_rotationCosBuffer.Update();
++    m_negativeZoomPowerBuffer.Update();
+ }
+ 
+ void PerPixelMesh::WarpedBlit(const PresetState& presetState,
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+@@ -98,6 +98,15 @@
+         }
+     };
+ 
++    struct NegativeZoomPower {
++        float value{};
++
++        static void InitializeAttributePointer(uint32_t attributeIndex)
++        {
++            glVertexAttribPointer(attributeIndex, 1, GL_FLOAT, GL_FALSE, sizeof(NegativeZoomPower), nullptr);
++        }
++    };
++
+     /**
+      * @brief Initializes the vertex array and fills in static data if needed.
+      *
+@@ -147,6 +156,8 @@
+ 
+     Renderer::VertexBuffer<RotationCos> m_rotationCosBuffer{Renderer::VertexBufferUsage::StreamDraw}; //!< CPU rotation cosine.
+ 
++    Renderer::VertexBuffer<NegativeZoomPower> m_negativeZoomPowerBuffer{Renderer::VertexBufferUsage::StreamDraw}; //!< MilkDrop CPU negative-base power, including nonfinite results.
++
+     std::weak_ptr<Renderer::Shader> m_perPixelMeshShader;             //!< Special shader which calculates the per-pixel UV coordinates.
+     std::unique_ptr<MilkdropShader> m_warpShader;                     //!< The warp shader. Either preset-defined or a default shader.
+     bool m_warpShaderDiscards{false};
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+--- a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
++++ b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+@@ -20,6 +20,7 @@
+ layout(location = 6) in vec2 warp_distance;
+ layout(location = 7) in vec2 stretch;
+ layout(location = 8) in float cosRotation;
++layout(location = 9) in float negativeZoomPower;
+ 
+ uniform mat4 vertex_transformation;
+ uniform vec4 aspect;
+@@ -36,11 +37,11 @@
+ void main() {
+     gl_Position = vertex_transformation * vec4(pos, 0.0, 1.0);
+ 
+-    // MilkDrop's CPU powf retains signed zoom when the nested exponent is one.
+-    // GLSL pow is undefined for any negative base, including this defined case.
++    // MilkDrop's CPU powf defines negative integer powers and preserves domain NaNs.
++    // Positive bases retain the existing shader arithmetic.
+     float zoom2;
+-    if (zoom < 0.0 && zoomExp == 1.0) {
+-        zoom2 = zoom;
++    if (zoom < 0.0) {
++        zoom2 = negativeZoomPower;
+     }
+     else {
+         zoom2 = pow(zoom, pow(zoomExp, radius * 2.0 - 1.0));

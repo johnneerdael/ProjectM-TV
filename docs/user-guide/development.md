@@ -28,7 +28,7 @@ In an existing clone, run `git submodule update --init --recursive`. Never commi
 | `python -m pytest tools/preset-lab/tests` | Preset Lab |
 | `python3 -m unittest discover -s .github/scripts/tests -v` | Release tooling |
 
-[Validation and evidence](engine/validation.md) describes what the native controls check, including the legacy compatibility controls for `fShader` shading and mode-1 waveforms ([BrainStain investigation](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/brainstain-dark-output/README.md)).
+[Validation and evidence](engine/validation.md) describes what the native controls check, including the legacy compatibility controls for `fShader` shading and mode-1 waveforms ([BrainStain investigation](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/brainstain-dark-output/README.md)). Negative-power controls also verify CPU-defined nested exponents, attribute 9 uploads, unchanged equation parameters, nonfinite preservation, resize and prepared replay ([power-domain evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/tulip-negative-zoom-power/README.md)). Invalid fractional-domain sampling remains backend-bound and does not establish portable source-only appearance.
 
 ## Test on a TV without replacing the release
 
