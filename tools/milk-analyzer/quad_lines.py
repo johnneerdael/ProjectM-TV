@@ -1,10 +1,12 @@
 """Patched GLES hard-edge quad-line vertex math in top-row screen coordinates.
 
 Port of ProjectM-TV patch 0024 LineVertexShaderGlsl330.vert and LineTieBias.
-The published JNI host sets a 1024x768 reference and leaves antialiasing disabled.
-This profile covers viewports at or below that reference area (one-pixel lines).
+An explicit reference size scales line width as native LineScale; the omitted
+reference preserves the historical one-pixel profile and1024x768 area guard.
+Authored targets with zero reference use canonical GL lines instead of quads.
 Triangle raster precision remains the declared source model, not GPU identity.
 """
+import math
 import numpy as np
 from primitives import _finite, draw_triangles
 
@@ -13,12 +15,39 @@ LEGACY_VIEWPORT='normalized-float32-v1'
 RETAINED_CLIP_VIEWPORT='retained-clip-window-v1'
 
 
-def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positions=None,viewport_policy=LEGACY_VIEWPORT):
+def line_scale(width,height,reference_size=None):
+    """Native double-area ratio, narrowed to float32 before the minimum of1."""
+    if any(type(n) is not int or not 0<n<2**31 for n in (width,height)):
+        raise ValueError('positive int32 line viewport required')
+    if reference_size is None:return np.float32(1)
+    if (not isinstance(reference_size,(tuple,list)) or len(reference_size)!=2 or
+            any(type(n) is not int or not 0<=n<2**31 for n in reference_size)):
+        raise ValueError('nonnegative int32 line reference size required')
+    rw,rh=reference_size
+    if rw==rh==0:return np.float32(0)
+    if not rw or not rh:raise ValueError('line reference must have two positive dimensions or two zeros')
+    return max(np.float32(1),np.float32(math.sqrt((float(width)*height)/(float(rw)*rh))))
+
+
+def dot_style(kind,thick,scale):
+    """Native integer dot raster size and area brightness, before GPU coverage."""
+    if kind not in {'main','custom','shape','motion'} or type(thick) is not bool:
+        raise ValueError('known dot kind and boolean thickness required')
+    scale=np.float32(scale)
+    if not np.isfinite(scale) or scale<=0:raise ValueError('finite positive dot scale required')
+    size=np.float32(2 if kind=='main' or thick else 1)*scale
+    raster=np.maximum(np.float32(1),np.ceil(size-np.float32(.0001)))
+    return {'size':float(raster),'alpha_scale':float((size*size)/(raster*raster))}
+
+
+def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positions=None,viewport_policy=LEGACY_VIEWPORT,reference_size=None):
     if viewport_policy not in (LEGACY_VIEWPORT,RETAINED_CLIP_VIEWPORT):
         raise ValueError('unknown quad-line viewport policy')
     if viewport_policy==RETAINED_CLIP_VIEWPORT and clip_positions is None:
         raise ValueError('retained viewport requires explicit clip positions')
-    if width<=0 or height<=0 or width*height>1024*768:
+    scale=line_scale(width,height,reference_size)
+    if scale==0:raise ValueError('zero line reference requires canonical GL lines')
+    if reference_size is None and width*height>1024*768:
         raise ValueError('quad-line profile requires viewport within 1024x768 reference area')
     points=_finite(positions,'line positions')
     colour=_finite(colours,'line colours')
@@ -50,7 +79,7 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positi
         # order (and thus the native triangle-strip diagonal) intact.
         normal=np.array([direction[1],-direction[0]],np.float32)
         major=np.max(np.abs(direction))
-        extent=np.float32(.5)*major
+        extent=(np.float32(.5)*scale)*major
         previous=pixels[(first-1)%len(points)] if closed or first else a
         following=pixels[(last+1)%len(points)] if closed or last<len(points)-1 else b
         corners=[];window_corners=[]
@@ -84,7 +113,7 @@ def quad_line_vertices(positions,colours,*,width,height,closed=False,clip_positi
     return result
 
 
-def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True,clip_positions=None,raster_subpixel_bits=None,viewport_policy=LEGACY_VIEWPORT):
+def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quantize=True,clip_positions=None,raster_subpixel_bits=None,viewport_policy=LEGACY_VIEWPORT,reference_size=None):
     if viewport_policy==RETAINED_CLIP_VIEWPORT and raster_subpixel_bits is None:
         raise ValueError('retained viewport requires explicit raster grid')
     if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
@@ -92,7 +121,7 @@ def draw_quad_lines(destination,positions,colours,*,additive,closed=False,quanti
     target=_finite(destination,'framebuffer').copy()
     height,width=target.shape[:2]
     triangles=np.array([[0,1,2],[2,1,3]],np.int64)
-    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions,viewport_policy=viewport_policy):
+    for segment in quad_line_vertices(positions,colours,width=width,height=height,closed=closed,clip_positions=clip_positions,viewport_policy=viewport_policy,reference_size=reference_size):
         target=draw_triangles(target,segment['positions'],segment['colours'],triangles,
                               additive=additive,quantize=quantize,raster_subpixel_bits=raster_subpixel_bits,
                               window_positions=segment.get('window_positions'))

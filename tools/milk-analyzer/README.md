@@ -89,6 +89,38 @@ MILK_TEST_2315_BINARIES=/absolute/path/to/source49/adapters \
 python -m pytest tools/milk-analyzer/test_core2315_semantics.py tools/milk-analyzer/test_core2315_wave.py -q
 ```
 
+## Six-area audit delivery checkpoint (2026-10-08)
+
+The immutable audit found 31 inherited differences, two predictor/library
+mismatches, one documentation issue and one unmodeled high-resolution path;
+no predictor bug was confirmed in that audit. The 33 library-owned entries are
+ranked in `/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/INDEX.md`.
+Candidate source counts identify triggers, not confirmed defective presets.
+Intentional repairs and Native4K fidelity require policy review before changes.
+
+The border documentation now attributes rotated fans to MilkDrop2 and distinguishes
+the library's eight-triangle mesh. Border math remains unchanged because M02 is
+assigned to the library owner.
+
+U01 is still open. `authored_canvas.py` implements integer canvas selection,
+float32 box downsampling and centered, headroom-limited block detail. `detail_pipeline.py`
+coordinates separate authored/native feedback, combines before native geometry,
+uses authored blur and UV history, and composites only the native target. Gain
+changes between positive values preserve recurrence; zero/positive changes rebuild
+from native pre-composite feedback, preserve same-size UV maps and blur.
+Scene execution can declare main-init shader dimensions separately from frame
+inputs, and the same prepared warp mesh can rasterize at independent target sizes.
+Explicit line reference dimensions scale native line/dot geometry while zero
+reference selects the authored canonical path. Numerical controls cover these
+building blocks; the high-resolution guard in `forecast_source` remains until
+complete entry-point integration and published-AAR qualification.
+
+The prepared analyzer suite passes 1,565 tests and 92 subtests; strict MkDocs passes.
+These results validate source controls, not high-resolution GPU parity or mood
+classification. The latest downloaded full core is v2.3.27 (AAR SHA-256
+`17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325`);
+its new source/runtime qualification remains separate from the frozen v2.3.25 audit.
+
 ## Cached source mood/profile mappings
 
 `source_classify.py` scores a cached source feature record without executing a
@@ -1508,3 +1540,30 @@ window arrays and an explicit grid are required, including degenerate strips.
 All six repaired30-frame controls match a fresh pair of unchanged-AAR repeats
 exactly. Original failures stay archived and repairs earn zero streak credit.
 See `fixtures/core2325-line-viewport-coordinate-repair-2026-10-08.json`.
+
+
+### Cosmic tear motion-coordinate storage repair (2026-10-08)
+
+The original round007 grades remain100/100/97.5. The motion p95 miss arose with
+nearest-half storage in the source forecast. The declared Apple GLES RG16F
+profile rounds magnitude toward zero: normal half precision has10 fraction bits,
+subnormal spacing is2^-24. Exact values remain unchanged; undersized values
+underflow toward zero. The implementation uses nearest half conversion and steps
+one half value toward zero only when that result overshoots the input magnitude.
+NaN/Inf and values outside finite half range remain unresolved.
+
+Current literal controls cover both signs, halfway cases, subnormals and
+underflow; transform-feedback readout avoids the old24bit colour-packing loss.
+The exact2.3.25 source identity can now explicitly request the retained finite
+half-storage profile under GLES. Defaults and unknown-engine guards stay intact.
+The regular forecaster repair reduces p95 relative error from6.2739% to0.3826%;
+all five declared metrics and exactflash events pass a fresh latest-AAR capture.
+This retrospective check gives zero fresh streak credit.
+
+The downloaded2.3.26 AAR is byte-identical to2.3.25, including Java/native/assets.
+Original MilkDrop2.25c computes motion endpoints from CPU float mesh values by
+bilinear interpolation; TV uses a sampled RG16F coordinate texture. This hardware
+rounding policy is therefore a TV implementation detail, not a MilkDrop language
+rule. Always trace reference operations and verify them with controlled numerical
+simulations before implementing changes; do not copy opaque routines. See
+`fixtures/core2325-cosmic-half-storage-repair-2026-10-08.json`.

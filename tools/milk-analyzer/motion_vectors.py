@@ -7,7 +7,7 @@ profile limitations; canonical unsmoothed lines are not driver-exact coverage.
 """
 import numpy as np
 from line_points import draw_lines
-from quad_lines import PROFILE,draw_quad_lines
+from quad_lines import PROFILE,draw_quad_lines,line_scale
 from scene_equations import MAIN
 from spatial import sample2d
 
@@ -72,10 +72,18 @@ def motion_uv_surface(uv, *, storage_profile=PORTABLE_STORAGE):
     return stored
 
 
-def motion_geometry(state, *, previous_uv, width, height, sampling_profile=PORTABLE_SAMPLING, sampler=None):
+def motion_geometry(state, *, previous_uv, width, height, sampling_profile=PORTABLE_SAMPLING, sampler=None,
+                    reference_size=None,diffusion_active=False):
+    """Sample the UV texture at its own extent; enforce target-sized trails.
+
+    Only explicit diffusion activation scales minimum trails by the reference
+    ratio. Authored targets pass reference_size=(0,0); defaults remain unscaled.
+    """
     validate_motion_sampler(sampling_profile, sampler)
     if any(type(n) is not int or not 0 < n < 2**31 for n in (width, height)):
         raise ValueError('positive int32 motion viewport required')
+    scale=line_scale(width,height,reference_size)
+    if type(diffusion_active) is not bool:raise ValueError('boolean diffusion activation required')
     result = dict(positions=np.empty((0, 2, 2), dtype=np.float32), counts=[0, 0],
                   minimum_length=0., active=motion_active(state))
     if not result['active']:
@@ -100,8 +108,9 @@ def motion_geometry(state, *, previous_uv, width, height, sampling_profile=PORTA
     if previous_uv is None:
         raise ValueError('previous motion UV surface is not initialized')
     previous = np.asarray(previous_uv, dtype=np.float32)
-    if previous.shape != (height, width, 2) or not np.all(np.isfinite(previous)):
-        raise ValueError('previous motion UV must match finite viewport dimensions')
+    if (previous.ndim!=3 or previous.shape[-1]!=2 or min(previous.shape[:2])<=0 or
+            not np.all(np.isfinite(previous))):
+        raise ValueError('previous motion UV requires finite nonempty two-channel texture dimensions')
     x, y = np.meshgrid(*coordinates)
     starts = np.stack((x, y), axis=-1).reshape(-1, 2)
     lookup = starts.copy()
@@ -117,6 +126,7 @@ def motion_geometry(state, *, previous_uv, width, height, sampling_profile=PORTA
     inverse_width = np.float32(1.25) / np.float32(width)
     inverse_height = np.float32(1.25) / np.float32(height)
     minimum = np.sqrt(inverse_width * inverse_width + inverse_height * inverse_height)
+    if diffusion_active:minimum*=max(np.float32(1),scale)
     length = np.sqrt(np.sum(delta * delta, axis=-1))
     short = (length <= minimum) & (length > np.float32(.00000001))
     delta[short] *= (minimum / length[short])[:, None]
@@ -134,7 +144,7 @@ def motion_geometry(state, *, previous_uv, width, height, sampling_profile=PORTA
 
 def draw_motion_vectors(destination, state, *, previous_uv, quantize=True,
                         line_rendering_profile='canonical-gl-lines-v1',raster_subpixel_bits=None,
-                        sampling_profile=PORTABLE_SAMPLING,sampler=None):
+                        sampling_profile=PORTABLE_SAMPLING,sampler=None,reference_size=None,diffusion_active=False):
     if line_rendering_profile not in ('canonical-gl-lines-v1',PROFILE):
         raise ValueError('unknown motion-vector line profile')
     if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
@@ -143,18 +153,22 @@ def draw_motion_vectors(destination, state, *, previous_uv, quantize=True,
     if target.ndim != 3 or target.shape[-1] != 4:
         raise ValueError('RGBA motion-vector framebuffer required')
     height, width = target.shape[:2]
-    if line_rendering_profile==PROFILE and (min(width,height)<=0 or width*height>1024*768):
+    scale=line_scale(width,height,reference_size)
+    quad=line_rendering_profile==PROFILE and scale>0
+    if quad and reference_size is None and width*height>1024*768:
         raise ValueError('motion quad profile requires viewport within reference area')
     geometry = motion_geometry(state, previous_uv=previous_uv, width=width, height=height,
-                               sampling_profile=sampling_profile, sampler=sampler)
+                               sampling_profile=sampling_profile, sampler=sampler,
+                               reference_size=reference_size,diffusion_active=diffusion_active)
     if not len(geometry['positions']):
         return target
     colour = [_value(state, 'mv_' + channel, single=True) for channel in 'rgba']
     for index,segment in enumerate(geometry['positions']):
         # Independent flat-ended vectors, not a connected strip across the grid.
-        if line_rendering_profile==PROFILE:
+        if quad:
             target=draw_quad_lines(target,segment,colour,additive=False,quantize=quantize,
-                clip_positions=geometry['clip_positions'][index],raster_subpixel_bits=raster_subpixel_bits)
+                clip_positions=geometry['clip_positions'][index],raster_subpixel_bits=raster_subpixel_bits,
+                reference_size=reference_size)
         else:
             target = draw_lines(target, segment, colour, additive=False, quantize=quantize)
     return target

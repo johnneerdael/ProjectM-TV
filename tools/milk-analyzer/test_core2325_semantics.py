@@ -50,6 +50,24 @@ def test_2325_retained_builtin_viewport_requires_qualified_context_and_grid():
             source_builtin_viewport_policy(engine,{**domain,'builtin_wave_viewport_policy':RETAINED_CLIP_VIEWPORT})
 
 
+@pytest.mark.parametrize('field,policy',[
+    ('blur_arithmetic_profile','apple-m4pro-gles-blur-forward-fma-v1'),
+    ('custom_wave_smoothing_profile','float32-fma-first-v1'),
+    ('motion_uv_storage_profile','apple-m4pro-gles-rg16f-rtz-finite-v1')])
+def test_2325_retained_unchanged_arithmetic_context(tmp_path,core2325_adapters,field,policy):
+    from forecast import read_source,forecast_source
+    preset=tmp_path/'inactive.milk';preset.write_text('MILKDROP_PRESET_VERSION=201\n[preset00]\nfWaveAlpha=0\n')
+    source=read_source(preset,reader=core2325_adapters/'milk-native-reader')
+    domain=dict(width=256,height=144,mesh_x=48,mesh_y=32,profile='gles300',
+        initial_rgba=[0]*4,hue_offsets=[0]*4,equation_seed=0x4141f00d,blur_levels=0,quantize=True)
+    domain[field]=policy
+    with pytest.raises(ValueError,match='source-generated nonempty audio'):
+        forecast_source(source,audio={},binaries=core2325_adapters,domain=domain,compatibility={})
+    domain['profile']='glsl330'
+    with pytest.raises(ValueError,match='FMA|smoothing|half motion storage'):
+        forecast_source(source,audio={},binaries=core2325_adapters,domain=domain,compatibility={})
+
+
 @pytest.mark.parametrize('amount', [0, .001, .25, 1, 1.5])
 def test_2325_source_tint_uses_authored_amount_without_changing_old_profiles(amount):
     from legacy_composite import source_tint_amount, legacy_display, corner_shades

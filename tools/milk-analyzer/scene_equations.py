@@ -133,8 +133,14 @@ def _frame_input(frame):
 
 
 def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,height:int=72,
-                  mesh_x:int=48,mesh_y:int=32,timeout_seconds:float=60,seed:int|None=None,
-                  equation_loader_policy='strict-raw-v1',expected_reader_sha256:str|None=None)->dict:
+                   mesh_x:int=48,mesh_y:int=32,timeout_seconds:float=60,seed:int|None=None,
+                   equation_loader_policy='strict-raw-v1',expected_reader_sha256:str|None=None,
+                   initial_shader_canvas:tuple[int,int]|list[int]|None=None)->dict:
+    """Execute one scene; only main init can report a different shader canvas.
+
+    Actual aspect and frame pixels come from width/height. Native custom contexts
+    have no pixelsx/y builtins, so the init override is never injected into them.
+    """
     if isinstance(timeout_seconds,bool) or not isinstance(timeout_seconds,(int,float)) or not np.isfinite(timeout_seconds) or not 0<timeout_seconds<=3600:
         raise ValueError('finite equation timeout in (0,3600] seconds required')
     from equation_loading import select_equation
@@ -146,6 +152,10 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
               if selected['compile_status']=='omitted']
     if not frames:raise ValueError('explicit input frames required')
     if any(type(n) is not int or n<=0 for n in [width,height]):raise ValueError('positive integer viewport required')
+    if initial_shader_canvas is not None and (
+            not isinstance(initial_shader_canvas,(tuple,list)) or len(initial_shader_canvas)!=2 or
+            any(type(n) is not int or not 0<n<2**31 for n in initial_shader_canvas)):
+        raise ValueError('initial shader canvas requires two positive int32 dimensions')
     if seed is not None and (type(seed) is not int or not 0<=seed<2**32):
         raise ValueError('equation RNG seed must be uint32')
     reader=Path(reader).resolve(strict=True)
@@ -182,7 +192,9 @@ def execute_scene(source:dict,frames:list[dict],*,reader:Path,width:int=128,heig
     custom={name for name in custom if not re.fullmatch(r'reg\d\d',name)}
     capture=list(defaults)+list(READONLY)+Q+sorted(custom)
     initial={name:0 for name in READONLY};initial['fps']=frames[0]['fps']
-    steps=[{'program':'main_init','variables':{**defaults,**initial,**{q:0 for q in Q}}},
+    initial_main=defaults if initial_shader_canvas is None else {
+        **defaults,'pixelsx':initial_shader_canvas[0],'pixelsy':initial_shader_canvas[1]}
+    steps=[{'program':'main_init','variables':{**initial_main,**initial,**{q:0 for q in Q}}},
            {'program':'main_defaults','variables':{q:{'program':'main_init','variable':q} for q in Q}}]
     layout=[]
     output_count=len(steps)

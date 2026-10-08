@@ -635,3 +635,32 @@ failures remain immutable, with zero random acceptance credit. See
 
 Final viewport-repair validation:1,510 prepared analyzer tests and78subtests pass;
 strict MkDocs passes. Repairs remain separate from randomized acceptance.
+
+Always compare predictor/renderer discrepancies with the read-only original
+MilkDrop2 source at `/Users/jneerdael/Scripts/milkdrop2`, as explicitly required
+by the user2026-10-08. Record source commit/file hashes and distinguish authored
+semantics, existing TV policies and observed GPU precision. Source inspection
+does not establish a Windows renderer appearance match.
+
+Predictor understanding requirement (user2026-10-08): derive and explain the
+behaviour of a reference operation before implementing it. Do not copy opaque
+MilkDrop/projectM routines. Use controlled simulations to isolate unknown
+operations, specify types/casts/order/state/units, and compare numerical inputs
+and outputs. Preserve unresolved domains until supported by evidence. Primary
+reference: `/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code`.
+Its `vis_milk2/milkdropfs.cpp` is byte-identical to the current read-only
+`/Users/jneerdael/Scripts/milkdrop2/src/vis_milk2/milkdropfs.cpp` (verified2026-10-08).
+The supplied `../milkdrop` alias does not currently exist.
+
+
+Six-area audit delivery checkpoint (2026-10-08): 33 I/M library handoffs are
+ranked and hash-verified in `/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/`.
+D01 corrects border attribution only; do not repair library-owned M02 math here.
+U01 authored/native operators and coordinator are experimental building blocks;
+the full forecast high-resolution guard remains until integration and latest-AAR
+qualification. Preserve separate init/frame shader canvas inputs, authored
+recurrence, native prepared-geometry replay, blur ages, shared authored UV state
+and positive-versus-zero gain-class resets. Exact prepared suite: 1,565 tests and
+92 subtests pass; strict MkDocs passes. See the analyzer README and
+`docs/superpowers/plans/2026-10-08-six-area-audit-delivery.md`. v2.3.27 is the latest
+downloaded full AAR; no runtime qualification of it is claimed at this checkpoint.

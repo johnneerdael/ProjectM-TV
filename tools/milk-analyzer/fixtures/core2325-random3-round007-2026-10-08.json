@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-08",
+  "scope": "Fresh randomized3preset30frame full-behaviour comparison; independent source predictions against full published AAR",
+  "run": "build/visual-loop/random3-core2325-2026-10-08",
+  "round": {
+    "schema_version": 1,
+    "assessor": "runtime_2321_verification",
+    "round": 7,
+    "queue_positions": [
+      19,
+      20,
+      21
+    ],
+    "release": "v2.3.25",
+    "aar_sha256": "f9c920b76a616a24b6754d350db4eac73cd425aef4106474a3dadea3df4579c3",
+    "batch_freeze_sha256": "da481b979b7513fd22bfd13983e0b2a31b6ac27c497eeb0112d09e21c7897f29",
+    "all60_claims_frozen_before_all_native_captures": true,
+    "all_frozen_input_hashes_verified": true,
+    "presets": [
+      {
+        "directory": "preset01",
+        "preset": "orb - quicksand sharp.milk",
+        "score": 100,
+        "full_claims": 20,
+        "partial_claims": 0,
+        "zero_claims": 0,
+        "assessment_sha256": "ba3ed9801d72b404aa83bd8d04421fffd44e116f74947d30149f3775257f001b"
+      },
+      {
+        "directory": "preset02",
+        "preset": "va ultramix2 - 364_1.milk",
+        "score": 100,
+        "full_claims": 20,
+        "partial_claims": 0,
+        "zero_claims": 0,
+        "assessment_sha256": "478923d835aade8824709d2e9bf8247703d36de04016aac20f65a152de4d5118"
+      },
+      {
+        "directory": "preset03",
+        "preset": "suksma - no god here, cosmic tear.milk",
+        "score": 97.5,
+        "full_claims": 19,
+        "partial_claims": 1,
+        "zero_claims": 0,
+        "assessment_sha256": "c96828e14485f745e1b0caefc63f8f850453452090230182ff823b8e0a0beec6"
+      }
+    ],
+    "scores": [
+      100,
+      100,
+      97.5
+    ],
+    "perfect_round": false,
+    "fresh_perfect_round_credit": 0,
+    "streak_credit": 0,
+    "unknown_credit": 0,
+    "failed_claims": [
+      {
+        "preset": "preset03",
+        "claim": "motion.4",
+        "grade": "partial",
+        "predicted_p95": 0.9376820683479307,
+        "native_p95": 0.9965109348297115,
+        "relative_error": 0.06273860668513093,
+        "limit": 0.05,
+        "median_passes": true
+      }
+    ],
+    "original_failure_immutable": true,
+    "prior_deferred_round": "Old round006 Tulip remains deferred and unchanged; no credit assigned here",
+    "predictor_or_library_findings": "Preset03 source/native disparity remains unresolved; no library defect established. Do not soften original metric or event expectations.",
+    "admission_review": {
+      "scope": "Only exact CORE2325 joins CORE2322 forward-blur FMA and custom-wave smoothing under GLES300",
+      "all6_retained_source_hashes_independently_verified": true,
+      "other_hardware_profiles_not_broadened": true,
+      "implementation_blockers": []
+    }
+  },
+  "retained_arithmetic_source": {
+    "release": "v2.3.25",
+    "source_files_equal_to_qualified2322": {
+      "src/libprojectM/MilkdropPreset/BlurTexture.cpp": "e3c50d8dd46f8e3217a31bf42b9ca7877315e35d318dfa07485cc12283c32103",
+      "src/libprojectM/MilkdropPreset/Shaders/Blur1FragmentShaderGlsl330.frag": "10e07105c3b49f2dd9e51a78bcc69253071a41075c5b4c5b1f7f91e097e24ed9",
+      "src/libprojectM/MilkdropPreset/Shaders/Blur2FragmentShaderGlsl330.frag": "6ac58bbe1aea8b02550fc8947a4bc076ecca0e60b4d5cd94df07925b8212ae2c",
+      "src/libprojectM/MilkdropPreset/CustomWaveform.cpp": "6a53e9bce927f377ccce87c25d8986c8fa04a1f508b57d923177f8e15f36f3b6",
+      "src/libprojectM/Audio/PCM.cpp": "3221aa87d5aabc6c965bf459b2d9854f11afc8da0ef5af5af2d035105cfdec07",
+      "src/libprojectM/TimeKeeper.cpp": "99e9371ca4ef64c4143080e46050d99e8a344cb5cf9327676e272d4bf4c368a3"
+    },
+    "limits": "Source equivalence for retained implementation; does not certify arbitrary presets or broaden other GPU profiles"
+  },
+  "asset_equivalence": {
+    "count": 9686,
+    "old_release": "v2.3.22",
+    "new_release": "v2.3.25",
+    "all_asset_bytes_equal": true
+  },
+  "tests": {
+    "passed": 1512,
+    "subtests": 78,
+    "log_sha256": "7d66f3843974f4a6f6dfa269ae8d5ed1fbfa840899e0fc0e99bc60dd206a8271"
+  },
+  "streak": {
+    "round": 7,
+    "passes": false,
+    "scores": [
+      {
+        "position": 19,
+        "directory": "preset01",
+        "preset": "orb - quicksand sharp.milk",
+        "score": 100,
+        "full_claims": 20,
+        "partial_claims": 0,
+        "zero_claims": 0,
+        "assessment_sha256": "ba3ed9801d72b404aa83bd8d04421fffd44e116f74947d30149f3775257f001b"
+      },
+      {
+        "position": 20,
+        "directory": "preset02",
+        "preset": "va ultramix2 - 364_1.milk",
+        "score": 100,
+        "full_claims": 20,
+        "partial_claims": 0,
+        "zero_claims": 0,
+        "assessment_sha256": "478923d835aade8824709d2e9bf8247703d36de04016aac20f65a152de4d5118"
+      },
+      {
+        "position": 21,
+        "directory": "preset03",
+        "preset": "suksma - no god here, cosmic tear.milk",
+        "score": 97.5,
+        "full_claims": 19,
+        "partial_claims": 1,
+        "zero_claims": 0,
+        "assessment_sha256": "c96828e14485f745e1b0caefc63f8f850453452090230182ff823b8e0a0beec6"
+      }
+    ],
+    "consecutive_perfect_rounds": 0,
+    "round_target": 20,
+    "qualifying_presets_in_complete_rounds": 0,
+    "preset_target": 60,
+    "repair_credit": 0,
+    "next_round_gate": "Blocked by source/native Cosmic tear p95 discrepancy; fix/retest before another validation batch",
+    "deferred_tulip": "Owned by separate AAR engineering worktree; no credit; original round006 retained"
+  },
+  "limits": [
+    "This failed round is not perfect acceptance",
+    "Original predictions/grades preserved",
+    "No source claim of new native library bug",
+    "Tulip AAR engineering left to separate owner"
+  ]
+}

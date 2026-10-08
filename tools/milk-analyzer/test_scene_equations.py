@@ -67,6 +67,42 @@ def test_scene_reader_rejects_stale_source_identity(tmp_path):
 
 
 class SceneEquationsTest(unittest.TestCase):
+    def test_main_init_shader_dimensions_are_separate_from_frame_dimensions(self):
+        module=importlib.import_module('scene_equations')
+        source=native('per_frame_init_1=q1=pixelsx;q2=pixelsy;\n'
+                      'per_frame_1=q3=pixelsx;q4=pixelsy;\n'
+                      'shapecode_0_enabled=1\nshape_0_init1=t1=pixelsx;t2=q1;\n'
+                      'shape_0_per_frame1=x=t1;y=t2;\n')
+        result=module.execute_scene(source,frames(),reader=test_native_reader.READER,
+                                    width=960,height=540,mesh_x=8,mesh_y=8,
+                                    initial_shader_canvas=(1280,720))
+        self.assertEqual(result['viewport'],[960,540])
+        for frame in result['frames']:
+            self.assertEqual([frame['main'][f'q{i}'] for i in range(1,5)],
+                             [1280,720,960,540])
+            # Custom contexts never receive main-only pixelsx/y builtins.
+            self.assertEqual(frame['shapes'][0]['values']['x'],0)
+            self.assertEqual(frame['shapes'][0]['values']['y'],1280)
+
+    def test_main_init_aspect_comes_from_actual_viewport_not_reported_shader_size(self):
+        module=importlib.import_module('scene_equations')
+        source=native('per_frame_init_1=q1=aspectx;q2=aspecty;\n')
+        result=module.execute_scene(source,frames()[:1],reader=test_native_reader.READER,
+                                    width=1296,height=720,mesh_x=8,mesh_y=8,
+                                    initial_shader_canvas=(1288,716))
+        main=result['frames'][0]['main']
+        self.assertEqual(main['q1'],1)
+        self.assertEqual(main['q2'],float(np.float32(1)/np.float32(720/1296)))
+
+    def test_main_init_shader_canvas_requires_positive_int32_dimensions(self):
+        module=importlib.import_module('scene_equations')
+        source=native('per_frame_1=q1=1;\n')
+        for dimensions in [[],[8],(0,8),(8,-1),(True,8),(8.,8),(2**31,8)]:
+            with self.subTest(dimensions=dimensions):
+                with self.assertRaisesRegex(ValueError,'initial shader canvas'):
+                    module.execute_scene(source,frames()[:1],reader=test_native_reader.READER,
+                                         initial_shader_canvas=dimensions)
+
     def test_legacy_motion_enable_is_the_fallback_for_missing_or_invalid_alpha(self):
         module=importlib.import_module('scene_equations')
         for text,expected in [('bMotionVectorsOn=1\n',1),

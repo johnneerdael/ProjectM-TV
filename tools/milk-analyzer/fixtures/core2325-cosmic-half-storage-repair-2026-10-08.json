@@ -1,0 +1,440 @@
+{
+  "date": "2026-10-08",
+  "scope": "Retrospective source predictor repair; original97.5 preserved,zero randomized credit",
+  "cause": "Nearest half rounding selected in source forecast instead of explicitly observed Apple RG16F towards-zero storage",
+  "understood_rule": {
+    "input": "finite float32 UV coordinates within finite half range",
+    "normal_quantum": "2^(floor(log2(abs(x)))-10)",
+    "subnormal_quantum": "2^-24",
+    "rounding": "Preserve sign and discard magnitude below representable quantum; exact representable values unchanged",
+    "implementation": "Existing half-nearest conversion followed by one nextafter toward zero only when nearest result magnitude overshoots original",
+    "unsupported": "NaN,Inf,out-of-range values remain rejected; no universal GPU rule asserted"
+  },
+  "normal_controls": {
+    "scope": "source-input-only half-storage numerical control with published AAR loaded; zero preset draws or randomized credit",
+    "core_version": "4.2.0",
+    "core_frame_serial_after": 0,
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "results": [
+      {
+        "case": 0,
+        "channel": 0,
+        "sample": 0.1729736328125
+      },
+      {
+        "case": 0,
+        "channel": 1,
+        "sample": 0.218994140625
+      },
+      {
+        "case": 1,
+        "channel": 0,
+        "sample": 0.73095703125
+      },
+      {
+        "case": 1,
+        "channel": 1,
+        "sample": 0.380859375
+      },
+      {
+        "case": 2,
+        "channel": 0,
+        "sample": 0.286865234375
+      },
+      {
+        "case": 2,
+        "channel": 1,
+        "sample": 0.6669921875
+      },
+      {
+        "case": 3,
+        "channel": 0,
+        "sample": 0.81884765625
+      },
+      {
+        "case": 3,
+        "channel": 1,
+        "sample": 0.5927734375
+      },
+      {
+        "case": 4,
+        "channel": 0,
+        "sample": 0.333251953125
+      },
+      {
+        "case": 4,
+        "channel": 1,
+        "sample": 0.69970703125
+      },
+      {
+        "case": 5,
+        "channel": 0,
+        "sample": -0.1729736328125
+      },
+      {
+        "case": 5,
+        "channel": 1,
+        "sample": -0.218994140625
+      }
+    ]
+  },
+  "boundary_controls": {
+    "rows": [
+      {
+        "case": 0,
+        "channel": 0,
+        "input": 0.500244140625,
+        "sample": 0.5,
+        "expected_rtz": 0.5,
+        "matches": true
+      },
+      {
+        "case": 0,
+        "channel": 1,
+        "input": -0.500244140625,
+        "sample": -0.5,
+        "expected_rtz": -0.5,
+        "matches": true
+      },
+      {
+        "case": 1,
+        "channel": 0,
+        "input": 0.500732421875,
+        "sample": 0.50048828125,
+        "expected_rtz": 0.50048828125,
+        "matches": true
+      },
+      {
+        "case": 1,
+        "channel": 1,
+        "input": -0.500732421875,
+        "sample": -0.50048828125,
+        "expected_rtz": -0.50048828125,
+        "matches": true
+      },
+      {
+        "case": 2,
+        "channel": 0,
+        "input": 0.12506103515625,
+        "sample": 0.125,
+        "expected_rtz": 0.125,
+        "matches": true
+      },
+      {
+        "case": 2,
+        "channel": 1,
+        "input": -0.12506103515625,
+        "sample": -0.125,
+        "expected_rtz": -0.125,
+        "matches": true
+      },
+      {
+        "case": 3,
+        "channel": 0,
+        "input": 0.12518310546875,
+        "sample": 0.1251220703125,
+        "expected_rtz": 0.1251220703125,
+        "matches": true
+      },
+      {
+        "case": 3,
+        "channel": 1,
+        "input": -0.12518310546875,
+        "sample": -0.1251220703125,
+        "expected_rtz": -0.1251220703125,
+        "matches": true
+      },
+      {
+        "case": 4,
+        "channel": 0,
+        "input": 2.9999999242136255e-05,
+        "sample": 2.9981136322021484e-05,
+        "expected_rtz": 2.9981136322021484e-05,
+        "matches": true
+      },
+      {
+        "case": 4,
+        "channel": 1,
+        "input": -2.9999999242136255e-05,
+        "sample": -2.9981136322021484e-05,
+        "expected_rtz": -2.9981136322021484e-05,
+        "matches": true
+      },
+      {
+        "case": 5,
+        "channel": 0,
+        "input": 2.995000068040099e-05,
+        "sample": 2.9921531677246094e-05,
+        "expected_rtz": 2.9921531677246094e-05,
+        "matches": true
+      },
+      {
+        "case": 5,
+        "channel": 1,
+        "input": -2.995000068040099e-05,
+        "sample": -2.9921531677246094e-05,
+        "expected_rtz": -2.9921531677246094e-05,
+        "matches": true
+      },
+      {
+        "case": 6,
+        "channel": 0,
+        "input": 5.960464477539063e-08,
+        "sample": 5.960464477539063e-08,
+        "expected_rtz": 5.960464477539063e-08,
+        "matches": true
+      },
+      {
+        "case": 6,
+        "channel": 1,
+        "input": -5.960464477539063e-08,
+        "sample": -5.960464477539063e-08,
+        "expected_rtz": -5.960464477539063e-08,
+        "matches": true
+      },
+      {
+        "case": 7,
+        "channel": 0,
+        "input": 8.940696716308594e-08,
+        "sample": 5.960464477539063e-08,
+        "expected_rtz": 5.960464477539063e-08,
+        "matches": true
+      },
+      {
+        "case": 7,
+        "channel": 1,
+        "input": -8.940696716308594e-08,
+        "sample": -5.960464477539063e-08,
+        "expected_rtz": -5.960464477539063e-08,
+        "matches": true
+      },
+      {
+        "case": 8,
+        "channel": 0,
+        "input": 1.4901161193847656e-08,
+        "sample": 0,
+        "expected_rtz": 0.0,
+        "matches": true
+      },
+      {
+        "case": 8,
+        "channel": 1,
+        "input": -1.4901161193847656e-08,
+        "sample": 0,
+        "expected_rtz": -0.0,
+        "matches": true
+      },
+      {
+        "case": 9,
+        "channel": 0,
+        "input": 0,
+        "sample": 0,
+        "expected_rtz": 0.0,
+        "matches": true
+      },
+      {
+        "case": 9,
+        "channel": 1,
+        "input": 0,
+        "sample": 0,
+        "expected_rtz": -0.0,
+        "matches": true
+      },
+      {
+        "case": 10,
+        "channel": 0,
+        "input": 0.9998999834060669,
+        "sample": 0.99951171875,
+        "expected_rtz": 0.99951171875,
+        "matches": true
+      },
+      {
+        "case": 10,
+        "channel": 1,
+        "input": -0.9998999834060669,
+        "sample": -0.99951171875,
+        "expected_rtz": -0.99951171875,
+        "matches": true
+      }
+    ],
+    "all_match": true,
+    "metadata": {
+      "scope": "source-input-only half-storage numerical control with published AAR loaded; zero preset draws or randomized credit",
+      "core_version": "4.2.0",
+      "core_frame_serial_after": 0,
+      "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)"
+    }
+  },
+  "published_aar": {
+    "release": "v2.3.26",
+    "release_commit": "ec54c802cd36a46fb1fd5ce356c1452bbdf019bb",
+    "aar_sha256": "f9c920b76a616a24b6754d350db4eac73cd425aef4106474a3dadea3df4579c3",
+    "entire_aar_byte_identical_to": "v2.3.25",
+    "scope": "IncludesJavaandallJNI/assetsbytes,notjustnativehash"
+  },
+  "original_milkdrop2": {
+    "directory": "/Users/jneerdael/Scripts/milkdrop2",
+    "commit": "f05b0d811a87a17c4624170c26c93bac39b05bde",
+    "file": "src/vis_milk2/milkdropfs.cpp",
+    "sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+    "draw_motion_vectors_lines": [
+      1239,
+      1390
+    ],
+    "reverse_propagate_lines": [
+      1514,
+      1555
+    ],
+    "findings": [
+      "Original derives motion endpoints from CPU float mesh texcoords with bilinear four-corner interpolation and Y reversal",
+      "Original applies length multiplier and minimum trail handling",
+      "TV uses a rendered RG16F coordinate texture and shader sampling; its Apple GPU storage rounding is a platform policy, not a MilkDrop2 language rule",
+      "TV minimum trail sizing differs from original and remains an explicit existing renderer policy"
+    ],
+    "validation_scope": "Original source comparison; no claim of a Windows reference render"
+  },
+  "reference_paths": [
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code",
+      "exists": true,
+      "source_file": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/milkdropfs.cpp",
+      "raw_sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+      "normalized_text_sha256": "a998f2221e25d840307fd7e3617c1bcd7b64f0196478c67e5c5250336bf056a7"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop",
+      "exists": false
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2",
+      "exists": true,
+      "source_file": "/Users/jneerdael/Scripts/milkdrop2/src/vis_milk2/milkdropfs.cpp",
+      "raw_sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+      "normalized_text_sha256": "a998f2221e25d840307fd7e3617c1bcd7b64f0196478c67e5c5250336bf056a7"
+    }
+  ],
+  "regular_forecaster_repair": {
+    "domain_sha256": "47a47cd72730f1ba23d31759d40d58198b6ec30c669c2b10c2fbf7b91dcd7e05",
+    "prediction_math_sha256": "79022d0edda78de1964c77b8d9061dad3bb476dda9d7c450e4ac51ad5e274d67",
+    "freeze_sha256": "7439f712879e0e07a79395c29b15c60b8e8f127fb71b32fb8ccbec6396be4ec3",
+    "source_rgb_sha256": "c9350229629223fc1f25b3cd825743a1a73dd071a58099400b3d5fbf8316e9dd",
+    "native_rgb_sha256": "d81993d85735cb8861c3b3bbbe8feee6304524eee441bad1e803a6dfc2ae5771",
+    "capture_sha256": "95ab93529e74847b744d491e617c3b79bc88382dff694aa7676ae65c41783c25",
+    "numeric": {
+      "metrics": [
+        {
+          "feature": "motion.median_speed_viewports_per_second",
+          "predicted": 0.08751024305820465,
+          "native": 0.09072386473417282,
+          "relative_error": 0.03672280596719097,
+          "passes": true
+        },
+        {
+          "feature": "motion.p95_speed_viewports_per_second",
+          "predicted": 0.9927129507064815,
+          "native": 0.9965109348297115,
+          "relative_error": 0.0038258633782577004,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_luma",
+          "predicted": 0.511508588209593,
+          "native": 0.5169164616265334,
+          "relative_error": 0.010572400037053684,
+          "passes": true
+        },
+        {
+          "feature": "colour.mean_saturation",
+          "predicted": 0.8504319469134013,
+          "native": 0.8477909644444783,
+          "relative_error": 0.003105460088262534,
+          "passes": true
+        },
+        {
+          "feature": "flashing.peak_mean_luma_jump",
+          "predicted": 0.5200039744377136,
+          "native": 0.5197058320045471,
+          "relative_error": 0.0005733464508398975,
+          "passes": true
+        }
+      ],
+      "events": {
+        "source": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "down": [
+            [
+              4,
+              5
+            ]
+          ]
+        },
+        "native": {
+          "peak": [
+            3,
+            4
+          ],
+          "direction": "brightening",
+          "up": [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "down": [
+            [
+              4,
+              5
+            ]
+          ]
+        }
+      },
+      "events_match": true,
+      "summary": {
+        "mean_mae_rgb": 0.01011202298104763,
+        "mean_rmse_rgb": 0.050207383930683136,
+        "peak_mae_rgb": 0.03064877912402153,
+        "peak_rmse_rgb": 0.08745024353265762,
+        "source_sha256": "c9350229629223fc1f25b3cd825743a1a73dd071a58099400b3d5fbf8316e9dd",
+        "native_sha256": "d81993d85735cb8861c3b3bbbe8feee6304524eee441bad1e803a6dfc2ae5771"
+      }
+    }
+  },
+  "tests": {
+    "prepared_passed": 1513,
+    "subtests_passed": 78,
+    "log_sha256": "09429048796b3ab868d10496059b3344ba85dd9715a85b32848724bea2de9a8e"
+  },
+  "review": "Pending independent repaired20claim assessment",
+  "limitations": [
+    "MilkDrop2 source comparison is not an original Windows rendered comparison",
+    "CPU bilinear original mesh and TV RG16F raster path remain separately modeled",
+    "No relaxation of5% rule or exactflash timing",
+    "Not a new AAR defect; no native code or authored preset modified"
+  ]
+}

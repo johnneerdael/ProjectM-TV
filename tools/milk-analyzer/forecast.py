@@ -249,7 +249,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     if blur_arithmetic_profile not in ARITHMETIC_PROFILES:
         raise ValueError('unsupported blur arithmetic profile')
     qualified_blur=(matches(engine,CORE_2317_ENGINE) or
-                    matches(engine,CORE_2322_ENGINE) and blur_arithmetic_profile==APPLE_FORWARD_FMA)
+                    (matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE)) and blur_arithmetic_profile==APPLE_FORWARD_FMA)
     if blur_arithmetic_profile!=SEPARATE_ARITHMETIC and (domain['profile']!='gles300' or not qualified_blur):
         raise ValueError('blur FMA requires declared GLES300 and a qualified engine context')
     from spatial import LEGACY_ROTATION,CPU_ROTATION,rotation_producer
@@ -273,9 +273,9 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     motion_storage_profile=domain.get('motion_uv_storage_profile',PORTABLE_STORAGE)
     if motion_storage_profile not in (PORTABLE_STORAGE,APPLE_RTZ_STORAGE,APPLE_FINITE_STORAGE):
         raise ValueError('unknown motion UV storage profile')
-    qualified_float_engine=any(matches(engine,target) for target in (CORE_2316_ENGINE,CORE_2317_ENGINE))
+    qualified_float_engine=any(matches(engine,target) for target in (CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2325_ENGINE))
     if motion_storage_profile!=PORTABLE_STORAGE and (domain['profile']!='gles300' or not qualified_float_engine):
-        raise ValueError('half motion storage requires declared GLES300 and pinned2.3.16/2.3.17engine')
+        raise ValueError('half motion storage requires declared GLES300 and a qualified engine context')
     composite_centre_policy,shape_centre_policy=source_centre_policies(engine,domain)
     line_profile=domain.get('line_rendering_profile','canonical-gl-lines-v1')
     builtin_wave_viewport_policy=source_builtin_viewport_policy(engine,domain)
@@ -290,7 +290,7 @@ def forecast_source(source: dict, *, audio: dict, binaries: Path, domain: dict,
     smoothing_profile=domain.get('custom_wave_smoothing_profile',DEFAULT_SMOOTHING)
     if smoothing_profile not in (DEFAULT_SMOOTHING,FMA_SMOOTHING):
         raise ValueError('unknown custom-wave smoothing profile')
-    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or not (qualified_float_engine or matches(engine,CORE_2322_ENGINE))):
+    if smoothing_profile==FMA_SMOOTHING and (domain['profile']!='gles300' or not (qualified_float_engine or matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE))):
         raise ValueError('fused custom-wave smoothing requires declared GLES and a qualified engine context')
     colour = np.asarray(domain['initial_rgba'], dtype=np.float32)
     hue = np.asarray(domain['hue_offsets'], dtype=np.float32)

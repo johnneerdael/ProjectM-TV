@@ -146,7 +146,12 @@ def draw_shape(destination,values:dict,*,aspect_y:float,quantize:bool=True,
 
 
 def draw_borders(destination,values:dict,*,quantize:bool=True,raster_subpixel_bits=None):
-    """Pinned Border::Draw fans, outer then inner, with ordinary alpha blending."""
+    """MilkDrop 2 rotated border fans, outer then inner, with alpha blending.
+
+    Current projectM 4.2 uses an eight-triangle mesh instead. Its coverage can
+    differ when authored border sizes invert the inner radius (audit M02);
+    this helper retains the fan model rather than claiming native parity there.
+    """
     target=_finite(destination,'framebuffer').copy()
     if raster_subpixel_bits is not None and (type(raster_subpixel_bits) is not int or not 4<=raster_subpixel_bits<=16):
         raise ValueError('raster subpixel bits must be an integer within 4..16')

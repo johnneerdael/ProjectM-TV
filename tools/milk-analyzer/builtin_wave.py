@@ -135,7 +135,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
         result.append({'positions':waves,'clip_positions':geometry['vertex_waves'],
                        'rgba':[0,0,0,0] if omitted else _colour(source,frame['main'],data,frame_mode,geometry['wave_a_after_geometry'],width,height,mode1_alpha_boost=matches(engine,CORE_2325_ENGINE)),
                        'draw_mode':'points' if dot else 'loop' if geometry['closed_loop'] else 'strip',
-                       'point_size':2 if scaled_dots else 1,
+                       'point_size':2 if scaled_dots else 1,'thick':bool(thick),
                        'additive':flag(frame['main'],'wave_additive','bAdditiveWaves'),'copy_offsets':offsets})
         if live:result[-1].update(mode=frame_mode,omitted=omitted)
     return {'basis':native['basis'],'mode':native['mode'],'frames':result,'source_hashes':native['source_hashes'],

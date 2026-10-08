@@ -197,3 +197,51 @@ def test_measured_motion_sampling_fails_closed_on_missing_or_invalid_backend():
     with pytest.raises(ValueError, match='sampler'):
         module.motion_geometry(state(), previous_uv=identity(), width=32, height=32,
             sampler=lambda *args, **kw: np.zeros((1, 2)))
+
+
+def test_motion_map_extent_is_independent_of_destination_extent():
+    from motion_vectors import motion_geometry
+    uv=np.zeros((2,4,2),np.float32)
+    uv[...,0]=[0,.25,.5,.75];uv[...,1]=.5
+    result=motion_geometry(state(),previous_uv=uv,width=32,height=32)
+    # Normalized u=.25 lies halfway between source texels0 and1, regardless
+    # of the32x32 destination. Sampled old UV is(.125,.5).
+    np.testing.assert_allclose(result['positions'][0],[[.25,.75],[.125,.5]],atol=1e-7)
+    assert result['minimum_length']==pytest.approx(.055242717266082764)
+
+
+def test_diffusion_minimum_uses_native_target_and_explicit_reference_scale():
+    from motion_vectors import motion_geometry
+    uv=np.full((4,4,2),.25,np.float32)
+    native=motion_geometry(state(),previous_uv=uv,width=64,height=64,
+        reference_size=(32,32))
+    diffused=motion_geometry(state(),previous_uv=uv,width=64,height=64,
+        reference_size=(32,32),diffusion_active=True)
+    authored=motion_geometry(state(),previous_uv=uv,width=32,height=32,
+        reference_size=(0,0),diffusion_active=True)
+    assert native['minimum_length']==pytest.approx(.027621358633041382)
+    assert diffused['minimum_length']==pytest.approx(.055242717266082764)
+    assert authored['minimum_length']==pytest.approx(.055242717266082764)
+
+
+def test_native_scaled_motion_draw_and_authored_canonical_draw_are_distinct():
+    from motion_vectors import draw_motion_vectors
+    from quad_lines import PROFILE
+    uv=np.full((4,4,2),[.5,.25],np.float32)
+    image=np.zeros((32,32,4),np.float32)
+    native=draw_motion_vectors(image,state(),previous_uv=uv,
+        line_rendering_profile=PROFILE,reference_size=(16,16),raster_subpixel_bits=8)
+    # Destination row24, tie biased toward top: a2px band covers rows23/24.
+    np.testing.assert_array_equal(np.argwhere(native[...,0]>0),
+        [[y,x] for y in (23,24) for x in range(8,16)])
+    authored=draw_motion_vectors(image,state(),previous_uv=uv,
+        line_rendering_profile=PROFILE,reference_size=(0,0))
+    canonical=draw_motion_vectors(image,state(),previous_uv=uv)
+    np.testing.assert_array_equal(authored,canonical)
+
+
+@pytest.mark.parametrize('uv',[np.empty((0,4,2)),np.zeros((2,4,3)),np.full((2,4,2),np.nan)])
+def test_independent_motion_texture_requires_finite_nonempty_two_channel_extent(uv):
+    from motion_vectors import motion_geometry
+    with pytest.raises(ValueError,match='previous motion UV'):
+        motion_geometry(state(),previous_uv=uv,width=32,height=32)

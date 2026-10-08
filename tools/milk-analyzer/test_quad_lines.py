@@ -99,3 +99,67 @@ def test_retained_viewport_requires_grid_even_when_strip_is_degenerate():
         draw_quad_lines(np.zeros((2,2,4),np.float32),[[.5,.5],[.5,.5]],
             [1,1,1,1],additive=False,clip_positions=[[0,0],[0,0]],
             viewport_policy='retained-clip-window-v1')
+
+
+def test_reference_scaled_band_keeps_gles_tie_bias_in_destination_pixels():
+    from quad_lines import quad_line_vertices,draw_quad_lines
+    vertices=quad_line_vertices([[.25,.5],[.75,.5]],[1]*4,
+        width=8,height=8,reference_size=(4,4))
+    np.testing.assert_array_equal(vertices[0]['positions']*8,
+        [[2,4.984375],[2,2.984375],[6,4.984375],[6,2.984375]])
+    result=draw_quad_lines(np.zeros((8,8,4),np.float32),[[.25,.5],[.75,.5]],
+        [1,0,0,1],additive=False,reference_size=(4,4),raster_subpixel_bits=8)
+    np.testing.assert_array_equal(np.argwhere(result[...,0]>0),
+        [[3,2],[3,3],[3,4],[3,5],[4,2],[4,3],[4,4],[4,5]])
+
+
+def test_explicit_reference_admits_native_4k_and_never_thins_small_canvas():
+    from quad_lines import quad_line_vertices
+    native=quad_line_vertices([[.25,.5],[.75,.5]],[1]*4,
+        width=3840,height=2160,reference_size=(1280,720))
+    pixels=native[0]['positions']*np.array([3840,2160],np.float32)
+    np.testing.assert_allclose(pixels[:,1],[1081.484375,1078.484375]*2,atol=1e-4)
+    default=quad_line_vertices([[.25,.5],[.75,.5]],[1]*4,width=8,height=8)
+    smaller=quad_line_vertices([[.25,.5],[.75,.5]],[1]*4,
+        width=8,height=8,reference_size=(16,16))
+    np.testing.assert_array_equal(smaller[0]['positions'],default[0]['positions'])
+
+
+@pytest.mark.parametrize('reference',[(),(0,0),(0,4),(-1,4),(True,4),(4.5,4)])
+def test_quad_reference_rejects_invalid_or_canonical_context(reference):
+    from quad_lines import quad_line_vertices
+    with pytest.raises(ValueError,match='reference'):
+        quad_line_vertices([[.5,.5],[.5,.5]],[1]*4,
+            width=8,height=8,reference_size=reference)
+
+
+def test_native_line_scale_uses_double_area_then_float32_and_zero_reference():
+    from quad_lines import line_scale
+    assert line_scale(3840,2160,(1280,720))==3
+    assert line_scale(300,200,(100,100))==np.float32(2.449489742783178)
+    assert line_scale(32,32,(64,64))==1
+    assert line_scale(32,32,(0,0))==0
+
+
+@pytest.mark.parametrize('kind,thick,scale,size,alpha',[
+    ('main',False,1.25,3,6.25/9),
+    ('custom',False,1.25,2,1.5625/4),
+    ('custom',True,1.25,3,6.25/9),
+    ('main',False,1,2,1),
+    ('custom',False,1.000030517578125,1,1.00006103515625),
+])
+def test_dot_style_scales_brightness_by_actual_integer_raster_area(kind,thick,scale,size,alpha):
+    from quad_lines import dot_style
+    style=dot_style(kind,thick,scale)
+    assert style['size']==size
+    assert style['alpha_scale']==pytest.approx(alpha,abs=1e-7)
+
+
+@pytest.mark.parametrize('kind,thick,scale',[
+    ('unknown',False,1),('custom',1,1),('custom',False,0),
+    ('custom',False,np.inf),('custom',False,np.nan),
+])
+def test_dot_style_rejects_unknown_kind_or_undefined_scale(kind,thick,scale):
+    from quad_lines import dot_style
+    with pytest.raises(ValueError,match='dot'):
+        dot_style(kind,thick,scale)

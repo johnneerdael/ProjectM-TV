@@ -1,0 +1,75 @@
+{
+  "audit_sha256": "cc129216b491b2ff4a08a58879fb91e1371ad7e12b5bb97d3e7ad08c889cfe21",
+  "handoff_manifest_sha256": "1d936a3442eafef032bcca8198a73e23345c04709831ba30327bdfd99a715ee0",
+  "ranked_index_sha256": "6fca2fb00e2811575929c864087f84d4ac80fc3b39ddd50cc816df346fadcab7",
+  "handoff_count": 33,
+  "handoff_ids": [
+    "I17",
+    "I19",
+    "I08",
+    "I22",
+    "I10",
+    "I11",
+    "I12",
+    "I14",
+    "I05",
+    "I16",
+    "I06",
+    "I24",
+    "I23",
+    "I20",
+    "I13",
+    "I18",
+    "I03",
+    "I04",
+    "M02",
+    "M01",
+    "I25",
+    "I30",
+    "I29",
+    "I15",
+    "I09",
+    "I31",
+    "I01",
+    "I02",
+    "I07",
+    "I21",
+    "I26",
+    "I27",
+    "I28"
+  ],
+  "D01": {
+    "status": "resolved-documentation-only",
+    "audited_primitives_sha256": "c0018fe09112485c064176809bb044e8b79db9098455a0294b32fc4a9faf7bb9",
+    "implementation": "tools/milk-analyzer/primitives.py draw_borders docstring",
+    "M02_math_unchanged": true
+  },
+  "U01": {
+    "status": "in-progress",
+    "entry_point_high_resolution_guard_retained": true,
+    "full_AAR_qualification_complete": false
+  },
+  "P": {
+    "confirmed_in_frozen_audit": 0
+  },
+  "validation": {
+    "analyzer_tests_passed": 1565,
+    "analyzer_subtests_passed": 92,
+    "duration_seconds": 79.72,
+    "strict_mkdocs": "passed",
+    "runtime_appearance_claim": false,
+    "independent_review": "clear after three corrected dot/UV retention cases"
+  },
+  "latest_downloaded_AAR": {
+    "release": "v2.3.27",
+    "commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+    "aar_sha256": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+    "members_sha256": {
+      "classes.jar": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+      "jni/arm64-v8a/libprojectmtv.so": "5fc881b3b74756dc9597a4ba8ce6850ed1318880eca985888a85d9495c5b1218",
+      "jni/armeabi-v7a/libprojectmtv.so": "ddbff01ad4166e7feec7f6b6e2e52f8a7e82fdc779f3f63bf0349d281f037b21"
+    },
+    "full_aar_downloaded": true,
+    "runtime_verified": false
+  }
+}
