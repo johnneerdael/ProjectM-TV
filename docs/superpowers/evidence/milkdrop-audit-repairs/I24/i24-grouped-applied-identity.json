@@ -1,0 +1,12 @@
+{
+  "patch_sha256": "fb1127fd4c39ec5ae4d474b5e009f0eeb1c9f2389459f2a45331b93b65e73230",
+  "source_hashes": {
+    "CustomShape.cpp": "909474598e442b1bc87439e02baad4e7653ab010c1a6fb717fe80c409987dc61",
+    "CustomShape.hpp": "7a201801b4f3521c7ddf30c81514b9bb08111a61c398f40a9df50b7707cae147",
+    "LineGeometry.hpp": "9b9be09c1d68445510e69423195b5bd6fbb56db6ca932b0acf8259bcc04d31f2",
+    "LineRenderer.cpp": "26e663637e2551df6ac6919d8e3ce29ffcdc4bb220d6d92242a420dc06674b65",
+    "LineRenderer.hpp": "b19b81907d73798925908d32fcd7b5f57da82f974c7fd246a3a95ad5111492dd"
+  },
+  "application": "GIT_CEILING_DIRECTORIES excludes outer repo; source markers verified",
+  "initial_baseline_red_preserved": true
+}

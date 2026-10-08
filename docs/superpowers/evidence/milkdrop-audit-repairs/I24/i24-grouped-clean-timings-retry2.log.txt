@@ -1,0 +1,23 @@
+{"issue": "I24-city-c", "cycle": 0, "step": 0, "role": "before", "mean_ms": 6.007480902777778, "p90_ms": 6.327084, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 0, "step": 1, "role": "after", "mean_ms": 5.9915112388888865, "p90_ms": 6.163083, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 0, "step": 2, "role": "after", "mean_ms": 6.043211486111111, "p90_ms": 6.448458, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 0, "step": 3, "role": "before", "mean_ms": 5.951889236111107, "p90_ms": 6.2375, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 0, "role": "before", "mean_ms": 6.002429836111109, "p90_ms": 6.358334, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 1, "role": "after", "mean_ms": 5.873374013888888, "p90_ms": 6.13675, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 2, "role": "after", "mean_ms": 5.91897728888889, "p90_ms": 6.2175, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 1, "step": 3, "role": "before", "mean_ms": 5.964797577777783, "p90_ms": 6.346209, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 2, "step": 0, "role": "before", "mean_ms": 5.9545745638888885, "p90_ms": 6.295083, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 2, "step": 1, "role": "after", "mean_ms": 6.015560636111112, "p90_ms": 6.368292, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 2, "step": 2, "role": "after", "mean_ms": 5.803561441666669, "p90_ms": 6.038667, "status": "ok"}
+{"issue": "I24-city-c", "cycle": 2, "step": 3, "role": "before", "mean_ms": 6.039832299999995, "p90_ms": 6.327291, "status": "ok"}
+Traceback (most recent call last):
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/run_i24_grouped_clean_timings_retry2.py", line 17, in <module>
+    directory=root/'captures'/('warp-clean-i24-retry2-'+issue+'-'+str(cycle)+'-'+str(step)+'-'+role);request=runner.request(name,3840,2160,1280,720,0);request['expectedPresetCount']=9609;m=runner.render(device,i,request,directory,pcm,expected,user)
+                                                                                                                                                                                             ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/tools/native-trails/run_validation.py", line 161, in render
+    tar.write_bytes(archive)
+    ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/pathlib/_abc.py", line 642, in write_bytes
+    return f.write(view)
+           ~~~~~~~^^^^^^
+OSError: [Errno 28] No space left on device

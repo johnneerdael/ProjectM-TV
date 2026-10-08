@@ -1,0 +1,10 @@
+{
+  "source_identity": "i24-grouped-applied-identity.json",
+  "command": [
+    "build/audit/shape-thick-proposal/cgl-grouped/shape-thick-grouped-controls",
+    "core/src/main/assets/presets/martin - city lights v2 c.milk"
+  ],
+  "exit_code": 0,
+  "stdout": "city original49 source trace: authored61, Native49calls/244segment instances, fills49+49\nactual per-instance thick/positions/alpha/group/replay controls passed\n",
+  "scope": "Root actual candidate CGL execution; Native images/cost remain open"
+}

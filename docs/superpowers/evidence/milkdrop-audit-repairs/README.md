@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-Native4K Android TV remains the target, preserving prior TV fixes. All33 supplied findings remain in scope:31 are classified, with13 repaired IDs in12 new patches0017–0028,10 retained policies and8 complete deferred packets. Two remain open: I04,I24. Final combined integration/review/CI gates remain open; PR61 is a draft.
+Native4K Android TV remains the target, preserving prior TV fixes. All33 supplied findings remain in scope:32 are classified, with13 repaired IDs in12 new patches0017–0028,10 retained policies and9 complete deferred packets. I04 remains open. Final combined integration/review/CI gates remain open; PR61 is a draft.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -17,7 +17,7 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | I05 | Per-pixel aspect inputs use factors instead of inverse factors | 248 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I05/README.md) |
 | I16 | Disabling motion vectors leaves a stale target UV map | 435 | [Deferred: temporal source/Native proof and isolated cost; conditional-write versus eager/lazy policy](I16/OWNER-DECISION.md) |
 | I06 | Custom-wave points inherit modified main-frame read-only inputs | 1 | [implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending](I06/README.md) |
-| I24 | Shape live thick equations do not select target outline style | 14 | [source/per-instance cost investigation recorded; two strong original candidates; execution/final screenshots and disposition pending](I24/README.md) |
+| I24 | Shape live thick equations do not select target outline style | 14 | [Deferred: two original/finite Native witnesses;24 qualified cost jobs, c+1.472%/mixed; grouping resource gates open](I24/OWNER-DECISION.md) |
 | I23 | Thick custom-wave and shape-outline offsets differ | 4951 | [retained Native thick-offset policy; complete owner packet with actual vertex/replay controls and matched Native4K style images](I15-I23/I23-OWNER-DECISION.md) |
 | I20 | Circle angular spacing and closure smoothing differ | 2736 | [deferred circle proposal; source/GL/sanitizer and two originals/all finite styles Native4K proof; isolated12-run mean+.058ms/+3.393%, mixed cycles; complete owner decision packet](I20/README.md) |
 | I13 | Left-axis equation angle seam changes sign | 204 | [implemented0026; actual CGL/normal51/sanitizer51 and original/finite/custom Native4K repeated proof; isolated12-run cost no consistent slowdown; final integration pending](I13/README.md) |

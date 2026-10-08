@@ -1,0 +1,316 @@
+From: ProjectM TV contributors
+Subject: [PROPOSAL] Retain instance thick flags and safely group disconnected Native outlines
+
+Capture evaluated int-nonzero thick once per instance. Preserve existing
+I23 widths/offsets/pass order, floating RGBA, positive-only file booleans,
+fill calls, bounded batches and prepared replay. Group only contiguous
+thick/untextured/zero-fill/finite instances with pairwise disjoint expanded
+raster bounds, same blend destination, maximum16 per group. Do not group
+overlap, opaque/textured fills, missing borders or different styles.
+
+Pack explicit four-point segment neighbours in a suffix of the existing
+line VBO, preserving disconnection and per-instance float colours. No new
+shader or GPU buffer. No-group uploads keep their original fast path.
+City-lights' four separated transparent thick outlines then use four
+Native calls total rather than16, while authored still needs16 loops.
+Packing, bounded overlap tests, extra upload calls and scratch memory are
+new work: Native/cost acceptance remains open.
+
+Original: milkdropfs.cpp:2454/2510; geometric/source policy, not D3D pixels.
+
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.cpp b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+--- a/src/libprojectM/MilkdropPreset/CustomShape.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.cpp
+@@ -152,8 +152,6 @@
+     const float lineScale = LineScale(m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY,
+                                       m_presetState.renderContext.lineReferenceWidth, m_presetState.renderContext.lineReferenceHeight);
+     m_quadBorders = lineScale > 0.0f && m_presetState.lineRenderer.Usable();
+-    m_borderStyle = LineStyleFor(LineKind::ShapeBorder, m_thickOutline, lineScale,
+-                                 m_presetState.renderContext.viewportSizeX, m_presetState.renderContext.viewportSizeY);
+     m_lineBatch.Clear();
+ 
+     // Need to use +/- 1.0 here instead of 2.0 used in Milkdrop to achieve the same rendering result.
+@@ -179,9 +177,10 @@
+         draw.additive = static_cast<int>(*m_perFrameContext.additive) != 0;
+         draw.textured = static_cast<int>(*m_perFrameContext.textured) != 0;
+         draw.sides = sides;
++        draw.thick = static_cast<int>(*m_perFrameContext.thick) != 0;
+         // GL lines: a thick outline is drawn four times with slight offsets. Quad lines: one strip per
+-        // outline; LineRenderer draws m_borderStyle's passes (four offset passes when thick).
+-        draw.borderIterations = *m_perFrameContext.border_a > 0.0001f ? (m_quadBorders ? 1 : (m_thickOutline ? 4 : 1)) : 0;
++        // outline; LineRenderer draws the captured instance style's passes (four offset passes when thick).
++        draw.borderIterations = *m_perFrameContext.border_a > 0.0001f ? (m_quadBorders ? 1 : (draw.thick ? 4 : 1)) : 0;
+ 
+         const size_t neededVertices = static_cast<size_t>(sides + 2 + (m_quadBorders ? 0 : draw.borderIterations * sides));
+         const size_t neededLinePoints = (m_quadBorders || m_geometryTargets) && draw.borderIterations > 0 ? static_cast<size_t>(sides + 3) : 0;
+@@ -251,6 +250,25 @@
+                 vertexData[i].v = 1.0f - (0.5f - 0.5f * sinf(angle) / static_cast<float>(*m_perFrameContext.tex_zoom)); // Vertical flip required!
+             }
+         }
++
++        // A conservative grouping candidate: its fill contributes no colour,
++        // and all geometry/colour inputs are finite. Retain per-instance state.
++        draw.groupable = draw.thick && !draw.textured && draw.borderIterations > 0 &&
++                         vertexData[0].a == 0.0f && vertexData[1].a == 0.0f;
++        draw.minX = draw.maxX = vertexData[0].x;
++        draw.minY = draw.maxY = vertexData[0].y;
++        for (int point = 0; point <= sides; ++point)
++        {
++            const auto& v = vertexData[point];
++            draw.groupable = draw.groupable && std::isfinite(v.x) && std::isfinite(v.y) &&
++                std::isfinite(v.r) && std::isfinite(v.g) && std::isfinite(v.b) && std::isfinite(v.a);
++            draw.minX = std::min(draw.minX, v.x); draw.maxX = std::max(draw.maxX, v.x);
++            draw.minY = std::min(draw.minY, v.y); draw.maxY = std::max(draw.maxY, v.y);
++        }
++        draw.groupable = draw.groupable && std::isfinite(static_cast<float>(*m_perFrameContext.border_r)) &&
++            std::isfinite(static_cast<float>(*m_perFrameContext.border_g)) &&
++            std::isfinite(static_cast<float>(*m_perFrameContext.border_b)) &&
++            std::isfinite(static_cast<float>(*m_perFrameContext.border_a));
+ 
+         // Duplicate last vertex.
+         vertexData[sides + 1] = vertexData[1];
+@@ -357,12 +375,58 @@
+     const float scale=LineScale(context.viewportSizeX,context.viewportSizeY,
+                                 context.lineReferenceWidth,context.lineReferenceHeight);
+     const bool quadBorders=nativePass ? scale>0 && m_presetState.lineRenderer.Usable() : m_quadBorders;
+-    const auto style=nativePass ? LineStyleFor(LineKind::ShapeBorder,m_thickOutline,scale,
+-                                              context.viewportSizeX,context.viewportSizeY) : m_borderStyle;
+-    if (quadBorders && !m_lineBatch.Points().empty()) m_presetState.lineRenderer.Upload(m_lineBatch);
++    const LineStyle styles[2] = {
++        LineStyleFor(LineKind::ShapeBorder, false, scale, context.viewportSizeX, context.viewportSizeY),
++        LineStyleFor(LineKind::ShapeBorder, true, scale, context.viewportSizeX, context.viewportSizeY)};
++    m_borderGroups.clear(); m_borderSegments.clear();
++    if (quadBorders && !m_lineBatch.Points().empty())
++    {
++        // The shader's miter length is below 1/.49; include AA, pass offsets,
++        // pixel/tie margins and test pairwise disjoint expanded source bounds.
++        const float padX = 2.0f * (3.0f * (styles[1].halfWidth + 1.0f) + 1.0f) / context.viewportSizeX + std::abs(styles[1].passOffsetX);
++        const float padY = 2.0f * (3.0f * (styles[1].halfWidth + 1.0f) + 1.0f) / context.viewportSizeY + std::abs(styles[1].passOffsetY);
++        const auto separate = [&](const InstanceDraw& a, const InstanceDraw& b) {
++            return a.maxX + padX < b.minX - padX || b.maxX + padX < a.minX - padX ||
++                   a.maxY + padY < b.minY - padY || b.maxY + padY < a.minY - padY;
++        };
++        for (size_t first = 0; first < m_draws.size();)
++        {
++            size_t last = first;
++            if (m_draws[first].groupable && std::isfinite(padX) && std::isfinite(padY))
++            {
++                while (last + 1 < m_draws.size() && last - first + 1 < 16)
++                {
++                    const auto& next = m_draws[last + 1];
++                    if (!next.groupable || next.additive != m_draws[first].additive) break;
++                    bool disjoint = true;
++                    for (size_t i = first; i <= last; ++i) disjoint = disjoint && separate(m_draws[i], next);
++                    if (!disjoint) break;
++                    ++last;
++                }
++            }
++            if (last > first)
++            {
++                BorderGroup group{first, last, static_cast<int>(m_borderSegments.size()), 0};
++                const auto& points = m_lineBatch.Points();
++                for (size_t i = first; i <= last; ++i)
++                {
++                    const auto& strip = m_draws[i].borderStrip;
++                    for (int segment = 0; segment < strip.segments; ++segment)
++                    {
++                        const size_t at = static_cast<size_t>(strip.firstPoint + segment);
++                        m_borderSegments.push_back({points[at], points[at + 1], points[at + 2], points[at + 3]});
++                        ++group.segments;
++                    }
++                }
++                m_borderGroups.push_back(group);
++            }
++            first = last + 1;
++        }
++        m_presetState.lineRenderer.Upload(m_lineBatch, m_borderSegments.empty() ? nullptr : &m_borderSegments);
++    }
+     m_linesBegun=false;
+-    for (const auto& draw : m_draws)
+-    {
++    const auto drawFill = [&](const InstanceDraw& draw) {
++
+         // Additive Drawing or Overwrite
+         GLenum blendDestination = draw.additive ? GL_ONE : GL_ONE_MINUS_SRC_ALPHA;
+         if (blendDestination != m_lastBlendDestination)
+@@ -414,6 +478,12 @@
+             glDrawArrays(GL_TRIANGLE_FAN, draw.fillFirst, draw.sides + 2);
+         }
+ 
++    };
++    size_t groupIndex = 0;
++    for (size_t drawIndex = 0; drawIndex < m_draws.size(); ++drawIndex)
++    {
++        const auto& draw = m_draws[drawIndex];
++        drawFill(draw);
+         if (draw.borderIterations > 0 && quadBorders)
+         {
+             auto& lines = m_presetState.lineRenderer;
+@@ -422,7 +492,16 @@
+                 lines.Begin(shapeProjection, m_presetState.renderContext);
+                 m_linesBegun = true;
+             }
+-            lines.Draw(draw.borderStrip, style);
++            if (groupIndex < m_borderGroups.size() && m_borderGroups[groupIndex].first == drawIndex)
++            {
++                const auto& group = m_borderGroups[groupIndex++];
++                // These transparent fills and all expanded outline supports are
++                // pairwise disjoint, so this bounded reordering cannot mix alpha.
++                for (size_t i = drawIndex + 1; i <= group.last; ++i) drawFill(m_draws[i]);
++                lines.DrawSegments(group.firstSegment, group.segments, styles[1]);
++                drawIndex = group.last;
++            }
++            else lines.Draw(draw.borderStrip, styles[draw.thick ? 1 : 0]);
+         }
+         else if (draw.borderIterations > 0)
+         {
+diff --git a/src/libprojectM/MilkdropPreset/CustomShape.hpp b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+--- a/src/libprojectM/MilkdropPreset/CustomShape.hpp
++++ b/src/libprojectM/MilkdropPreset/CustomShape.hpp
+@@ -112,10 +112,13 @@
+     struct InstanceDraw {
+         bool additive{false};
+         bool textured{false};
++        bool thick{false}; //!< Evaluated per-instance flag retained for replay.
++        bool groupable{false}; //!< Finite untextured zero-fill outline.
++        float minX{}, minY{}, maxX{}, maxY{}; //!< Conservative source bounds.
+         int sides{0};
+         GLint fillFirst{0};      //!< First fill vertex (a triangle fan of sides + 2 vertices).
+         GLint borderFirst{0};    //!< First outline vertex (borderIterations line loops of sides vertices).
+-        int borderIterations{0}; //!< 0 without outline; GL lines: 4 for a thick outline, else 1; quad lines: 1 (passes in m_borderStyle).
++        int borderIterations{0}; //!< 0 without outline; GL lines: 4 for a thick outline, else 1; quad lines: 1 (passes derived from thick).
+         LineBatch::Strip borderStrip; //!< The outline in m_lineBatch (quad lines).
+     };
+ 
+@@ -129,11 +132,13 @@
+     GeometryTargets* m_geometryTargets{nullptr};
+ 
+     std::vector<TexturedPoint> m_vertices; //!< Current batch: fills and outlines of several instances.
++    struct BorderGroup { size_t first{}, last{}; int firstSegment{}, segments{}; };
++    std::vector<BorderGroup> m_borderGroups; //!< Bounded non-overlapping contiguous runs.
++    std::vector<LineSegment> m_borderSegments; //!< Only confirmed group segments.
+     std::vector<InstanceDraw> m_draws;     //!< Draw calls of the current batch, in instance order.
+     LineBatch m_lineBatch;                                     //!< Outlines of the current batch (quad lines).
+     std::vector<ColoredPoint> m_borderPoints; //!< One outline, for the line batch.
+     bool m_quadBorders{false};                                 //!< This frame draws outlines as quads (reference size set, line program usable).
+-    LineStyle m_borderStyle;                                   //!< Outline width, passes and pass offsets this frame (quad lines).
+     bool m_linesBegun{false};                                  //!< LineRenderer::Begin() called for this batch.
+     Renderer::Sampler::Ptr m_mainTextureSampler{std::make_shared<Renderer::Sampler>(GL_REPEAT, GL_LINEAR)}; //!< The main-textured shape sampling contract.
+     Renderer::TextureSamplerDescriptor m_imageTexture; //!< The "image" texture, looked up once per frame.
+diff --git a/src/libprojectM/MilkdropPreset/LineGeometry.hpp b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
+--- a/src/libprojectM/MilkdropPreset/LineGeometry.hpp
++++ b/src/libprojectM/MilkdropPreset/LineGeometry.hpp
+@@ -10,6 +10,9 @@
+ 
+ // Interleaved attributes for the specialized batched/instanced line renderer.
+ struct ColoredPoint { float x{}, y{}, r{}, g{}, b{}, a{}; };
++
++// Explicit disconnected segment neighbours for a grouped instanced draw.
++struct LineSegment { ColoredPoint previous, a, b, next; };
+ 
+ 
+ /**
+diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.cpp b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
+--- a/src/libprojectM/MilkdropPreset/LineRenderer.cpp
++++ b/src/libprojectM/MilkdropPreset/LineRenderer.cpp
+@@ -63,7 +63,7 @@
+     return m_usable;
+ }
+ 
+-void LineRenderer::Upload(const LineBatch& batch)
++void LineRenderer::Upload(const LineBatch& batch, const std::vector<LineSegment>* segments)
+ {
+     const auto& points = batch.Points();
+     if (!m_usable || points.empty())
+@@ -85,9 +85,22 @@
+         glBindVertexArray(0);
+     }
+ 
+-    // Orphan the buffer so the GPU can keep reading the previous upload.
++    // Keep padded points as the prefix; optionally append bounded disconnected
++    // segments to the same existing VBO. No-group callers keep their old upload.
+     glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
+-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(ColoredPoint) * points.size()), points.data(), GL_STREAM_DRAW);
++    m_segmentOffsetBytes = sizeof(ColoredPoint) * points.size();
++    m_segmentCount = segments ? segments->size() : 0;
++    if (m_segmentCount == 0)
++    {
++        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(m_segmentOffsetBytes), points.data(), GL_STREAM_DRAW);
++    }
++    else
++    {
++        const size_t segmentBytes = sizeof(LineSegment) * m_segmentCount;
++        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(m_segmentOffsetBytes + segmentBytes), nullptr, GL_STREAM_DRAW);
++        glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(m_segmentOffsetBytes), points.data());
++        glBufferSubData(GL_ARRAY_BUFFER, static_cast<GLintptr>(m_segmentOffsetBytes), static_cast<GLsizeiptr>(segmentBytes), segments->data());
++    }
+ }
+ 
+ void LineRenderer::Begin(const glm::mat4& transformation, const Renderer::RenderContext& context)
+@@ -142,6 +155,31 @@
+     glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, stride, pointer(1, offsetof(ColoredPoint, r)));
+     glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, stride, pointer(2, offsetof(ColoredPoint, r)));
+ 
++    DrawPasses(strip.segments, style);
++}
++
++void LineRenderer::DrawSegments(int first, int segments, const LineStyle& style)
++{
++    if (!m_ready || first < 0 || segments <= 0 || style.passes <= 0 ||
++        static_cast<size_t>(first) + segments > m_segmentCount) return;
++    m_shader.Bind();
++    glBindVertexArray(m_vaoId);
++    glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
++    const auto stride = static_cast<GLsizei>(sizeof(LineSegment));
++    const auto pointer = [&](size_t member) {
++        return reinterpret_cast<const void*>(m_segmentOffsetBytes + static_cast<size_t>(first) * sizeof(LineSegment) + member);
++    };
++    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, stride, pointer(offsetof(LineSegment, previous) + offsetof(ColoredPoint, x)));
++    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, pointer(offsetof(LineSegment, a) + offsetof(ColoredPoint, x)));
++    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, pointer(offsetof(LineSegment, b) + offsetof(ColoredPoint, x)));
++    glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, stride, pointer(offsetof(LineSegment, next) + offsetof(ColoredPoint, x)));
++    glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, stride, pointer(offsetof(LineSegment, a) + offsetof(ColoredPoint, r)));
++    glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, stride, pointer(offsetof(LineSegment, b) + offsetof(ColoredPoint, r)));
++    DrawPasses(segments, style);
++}
++
++void LineRenderer::DrawPasses(int segments, const LineStyle& style)
++{
+     SetFloat(m_halfWidthLocation, style.halfWidth, m_lastHalfWidth, m_halfWidthSet);
+     for (int pass = 0; pass < style.passes; pass++)
+     {
+@@ -155,7 +193,7 @@
+             m_lastPassOffset = passOffset;
+             m_passOffsetSet = true;
+         }
+-        glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, strip.segments);
++        glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, segments);
+     }
+ }
+ 
+diff --git a/src/libprojectM/MilkdropPreset/LineRenderer.hpp b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
+--- a/src/libprojectM/MilkdropPreset/LineRenderer.hpp
++++ b/src/libprojectM/MilkdropPreset/LineRenderer.hpp
+@@ -51,9 +51,10 @@
+      */
+     auto Usable() const -> bool;
+ 
+-    void Upload(const LineBatch& batch);
++    void Upload(const LineBatch& batch, const std::vector<LineSegment>* segments = nullptr);
+     void Begin(const glm::mat4& transformation, const Renderer::RenderContext& context);
+     void Draw(const LineBatch::Strip& strip, const LineStyle& style);
++    void DrawSegments(int first, int segments, const LineStyle& style);
+     void End();
+ 
+ private:
+@@ -62,6 +63,10 @@
+      * @brief Sets a float uniform unless it already has this value (or the location is -1).
+      */
+     static void SetFloat(GLint location, float value, float& lastValue, bool& lastValid);
++
++    void DrawPasses(int segments, const LineStyle& style);
++    size_t m_segmentOffsetBytes{};
++    size_t m_segmentCount{};
+ 
+     Renderer::Shader m_shader;  //!< Line program, compiled with the preset (off the render thread when prewarmed).
+     bool m_usable{false};       //!< m_shader compiled and linked.

@@ -271,10 +271,14 @@
       "sha256": "6022b706bc5bdb38f2e492232727eb65974e26a28c754d21f19f016ce1d34321",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I24-shape-live-thick-equations-do-not-select-target-outline-style/HANDOFF.md",
       "numeric_witness": "Static thickOutline0, positive outline alpha, shape frame thick=1: original4passes; target1. Reverse assignment also differs.",
-      "status": "source/per-instance cost investigation recorded; two strong original candidates; execution/final screenshots and disposition pending",
-      "confirmed_affected_originals": [],
-      "evidence": "I24/README.md",
-      "source_refined_candidates": "I24/source-refined-candidates.json"
+      "status": "deferred complete owner packet; actual instance/replay GL controls,20 Native original/finite jobs and24 qualified cost jobs; city-c+1.472% mixed cycles leaves no-loss gate unproven",
+      "confirmed_affected_originals": [
+        "martin - city lights v2 c.milk",
+        "martin - city lights v2(1).milk"
+      ],
+      "evidence": "I24/OWNER-DECISION.md",
+      "source_refined_candidates": "I24/source-refined-candidates.json",
+      "policy": "keep current static style pending cost/resource-qualified per-instance outline path; experimental grouping outside shipping"
     },
     {
       "id": "I23",
