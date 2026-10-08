@@ -132,7 +132,7 @@ public final class CorpusInstrumentation extends Instrumentation {
         manifest.put("frameCountExpected", FRAMES);
         manifest.put("fps", FPS);
         manifest.put("audioBlockBytes", PCM_BLOCK);
-        manifest.put("audioDelivery", "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples");
+        manifest.put("audioDelivery", "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains the tail bounded by projectm_pcm_get_max_samples()");
         manifest.put("captureSemantics", "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash");
         manifest.put("settings", new JSONObject().put("autoChange", false).put("beatCuts", false)
                 .put("blankDetection", false).put("musicCategory", "all").put("meshWidth", 48)

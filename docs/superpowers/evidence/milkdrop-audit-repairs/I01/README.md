@@ -31,3 +31,5 @@ Both original/surrogate pairs have identical selected RGB frames at both resolut
 ## Limits and followup
 
 This retained policy adds no rendering work or engine code. No performance improvement is claimed. Original Windows/D3D playback and whole-corpus prevalence remain unmeasured. Any future strict import option needs a separate versioned API/consumer decision and its own fidelity evidence. `source-identity.json` preserves the earlier prepared snapshot with28 historical patches; `native-identity.json` is authoritative for the executed27-patch artifact.
+
+[Audio provenance correction](../AUDIO-PROVENANCE.md): frozen manifest prose says latest512, while its actual FeedAudio queries the576-sample engine limit. Images/native bytes remain unchanged; no512-tail input equivalence is claimed.

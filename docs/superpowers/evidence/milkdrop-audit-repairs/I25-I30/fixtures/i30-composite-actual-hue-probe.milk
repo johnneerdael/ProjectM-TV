@@ -1,0 +1,19 @@
+MILKDROP_PRESET_VERSION=201
+[preset00]
+fDecay=0
+fGammaAdj=1
+fVideoEchoAlpha=0
+fVideoEchoZoom=1
+nVideoEchoOrientation=0
+fShader=0
+fWaveAlpha=0
+ob_size=0
+ib_size=0
+mv_a=0
+warp=0
+zoom=1
+rot=0
+bTexWrap=0
+PSVERSION_WARP=0
+PSVERSION_COMP=2
+comp_1=`shader_body { ret = hue_shader; }

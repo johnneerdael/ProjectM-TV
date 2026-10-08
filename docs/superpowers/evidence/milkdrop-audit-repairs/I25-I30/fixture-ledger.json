@@ -1,0 +1,229 @@
+{
+  "status": "open_no_capture",
+  "bounded_geometry_formula": "int(double_channel*255*alpha_mult)&255; alpha_mult1",
+  "bounded_display_formula": "int(float(diffuse*255))&255",
+  "cases": [
+    {
+      "id": "I25",
+      "case": "shape-flat",
+      "current_rgba": [
+        0.5,
+        0.123456,
+        0.75,
+        0.123456
+      ],
+      "oracle_byte_rgba": [
+        127,
+        31,
+        191,
+        31
+      ],
+      "oracle_normalized_rgba": [
+        0.4980392156862745,
+        0.12156862745098039,
+        0.7490196078431373,
+        0.12156862745098039
+      ],
+      "current_edge": null,
+      "oracle_edge": null,
+      "current_border": null,
+      "oracle_border": null,
+      "quantization_stage": "each authored vertex before interpolation, alpha_mult=1; Native styles kept afterward",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I25",
+      "case": "shape-gradient",
+      "current_rgba": [
+        0.5,
+        0.123456,
+        0.75,
+        0.5
+      ],
+      "oracle_byte_rgba": [
+        127,
+        31,
+        191,
+        127
+      ],
+      "oracle_normalized_rgba": [
+        0.4980392156862745,
+        0.12156862745098039,
+        0.7490196078431373,
+        0.4980392156862745
+      ],
+      "current_edge": [
+        0.123456,
+        0.75,
+        0.5,
+        0.123456
+      ],
+      "oracle_edge": [
+        0.12156862745098039,
+        0.7490196078431373,
+        0.4980392156862745,
+        0.12156862745098039
+      ],
+      "current_border": null,
+      "oracle_border": null,
+      "quantization_stage": "each authored vertex before interpolation, alpha_mult=1; Native styles kept afterward",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I25",
+      "case": "shape-border",
+      "current_rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "oracle_byte_rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "oracle_normalized_rgba": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "current_edge": null,
+      "oracle_edge": null,
+      "current_border": [
+        0.5,
+        0.123456,
+        0.75,
+        0.123456
+      ],
+      "oracle_border": [
+        0.4980392156862745,
+        0.12156862745098039,
+        0.7490196078431373,
+        0.12156862745098039
+      ],
+      "quantization_stage": "each authored vertex before interpolation, alpha_mult=1; Native styles kept afterward",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I25",
+      "case": "shape-subbyte-alpha",
+      "current_rgba": [
+        1,
+        1,
+        1,
+        0.003
+      ],
+      "oracle_byte_rgba": [
+        255,
+        255,
+        255,
+        0
+      ],
+      "oracle_normalized_rgba": [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "current_edge": null,
+      "oracle_edge": null,
+      "current_border": null,
+      "oracle_border": null,
+      "quantization_stage": "each authored vertex before interpolation, alpha_mult=1; Native styles kept afterward",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I25",
+      "case": "wave-line",
+      "current_rgba": [
+        0.5,
+        0.123456,
+        0.75,
+        0.123456
+      ],
+      "oracle_byte_rgba": [
+        127,
+        31,
+        191,
+        31
+      ],
+      "oracle_normalized_rgba": [
+        0.4980392156862745,
+        0.12156862745098039,
+        0.7490196078431373,
+        0.12156862745098039
+      ],
+      "current_edge": null,
+      "oracle_edge": null,
+      "current_border": null,
+      "oracle_border": null,
+      "quantization_stage": "each authored vertex before interpolation, alpha_mult=1; Native styles kept afterward",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I25",
+      "case": "wave-dots",
+      "current_rgba": [
+        0.5,
+        0.123456,
+        0.75,
+        0.123456
+      ],
+      "oracle_byte_rgba": [
+        127,
+        31,
+        191,
+        31
+      ],
+      "oracle_normalized_rgba": [
+        0.4980392156862745,
+        0.12156862745098039,
+        0.7490196078431373,
+        0.12156862745098039
+      ],
+      "current_edge": null,
+      "oracle_edge": null,
+      "current_border": null,
+      "oracle_border": null,
+      "quantization_stage": "each authored vertex before interpolation, alpha_mult=1; Native styles kept afterward",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I30",
+      "case": "gamma-0p75",
+      "float_diffuse_gain": 0.75,
+      "original_packed_byte": 191,
+      "original_normalized_gain": 0.7490196078431373,
+      "stage": "legacy gamma-only white tint, echo0, one pass",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I30",
+      "case": "gamma-0p9",
+      "float_diffuse_gain": 0.8999999761581421,
+      "original_packed_byte": 229,
+      "original_normalized_gain": 0.8980392156862745,
+      "stage": "legacy gamma-only white tint, echo0, one pass",
+      "status": "fixture_only_not_executed_or_rendered"
+    },
+    {
+      "id": "I30",
+      "case": "echo-half",
+      "current_weights": [
+        0.5,
+        0.5
+      ],
+      "original_weights": [
+        0.4980392156862745,
+        0.4980392156862745
+      ],
+      "uniform_white_original_final_gain": 0.996078431372549,
+      "oracle_limit": "uniform white, echo zoom1/orientation0/tintwhite/gamma1 only; oracle disables echo and uses one gamma pass, not a per-pass/raster/cost oracle",
+      "status": "fixture_only_not_executed_or_rendered"
+    }
+  ],
+  "composite_vertex_oracle": "pending frozen per-vertex colour capture; fragment-flooring hue_shader is invalid"
+}
