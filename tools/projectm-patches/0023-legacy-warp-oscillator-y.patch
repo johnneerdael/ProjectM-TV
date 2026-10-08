@@ -1,0 +1,74 @@
+From: ProjectM TV maintainers
+Subject: [PATCH] Match original physical oscillator Y in legacy warp only
+
+MilkDrop2 milkdropfs.cpp:1882-1898 uses the opposite physical Y in
+the four warp oscillator arguments under the legacy projection.
+Select a compile-time legacy variant only in the actual default/fallback
+program. Custom warp retains its existing producer; the original custom
+warp VS is absent from the reference source and is not a proven oracle.
+
+Keep positions, initial/original UV, equation inputs, topology, CPU rotation
+trig, negative zoom power and prepared replay unchanged. No runtime branch,
+uniform, vertex, draw, pass or target is added; retain four oscillator calls.
+
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.hpp.in b/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.hpp.in
+--- a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.hpp.in
++++ b/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.hpp.in
+@@ -44,6 +44,9 @@
+     }
+ 
+     // Accessors for the named static GL shader resources.
++    // The fixed-function legacy projection has a distinct oscillator-Y contract.
++    std::string GetLegacyPresetWarpVertexShader();
++
+ @STATIC_SHADER_ACCESSOR_DECLARATIONS@
+ 
+ private:
+diff --git a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in b/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in
+--- a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in
++++ b/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in
+@@ -31,6 +31,11 @@
+     return m_versionHeader + "\n" + shader_text;
+ }
+ 
++std::string MilkdropStaticShaders::GetLegacyPresetWarpVertexShader()
++{
++    return AddVersionHeader("#define PROJECTM_LEGACY_WARP\n" + kPresetWarpVertexShaderGlsl330);
++}
++
+ #define DECLARE_SHADER_ACCESSOR(name)              \
+     std::string MilkdropStaticShaders::Get##name()       \
+     {                                              \
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -424,7 +424,7 @@
+     auto staticShaders = libprojectM::MilkdropPreset::MilkdropStaticShaders::Get();
+ 
+     perPixelMeshShader = std::make_shared<Renderer::Shader>();
+-    perPixelMeshShader->CompileProgram(staticShaders->GetPresetWarpVertexShader(),
++    perPixelMeshShader->CompileProgram(staticShaders->GetLegacyPresetWarpVertexShader(),
+                                        staticShaders->GetPresetWarpFragmentShader());
+ 
+     presetState.renderContext.shaderCache->Insert("milkdrop_default_warp_shader", perPixelMeshShader);
+diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+--- a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
++++ b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
+@@ -61,10 +61,17 @@
+     v = (v - warp_center.y) / stretch.y + warp_center.y;
+ 
+     // Warping
++#ifdef PROJECTM_LEGACY_WARP
++    u += warp * 0.0035 * sin(warpTime * 0.333 + warpScaleInverse * (pos.x * warpFactors.x + pos.y * warpFactors.w));
++    v += warp * 0.0035 * cos(warpTime * 0.375 - warpScaleInverse * (pos.x * warpFactors.z - pos.y * warpFactors.y));
++    u += warp * 0.0035 * cos(warpTime * 0.753 - warpScaleInverse * (pos.x * warpFactors.y + pos.y * warpFactors.z));
++    v += warp * 0.0035 * sin(warpTime * 0.825 + warpScaleInverse * (pos.x * warpFactors.x - pos.y * warpFactors.w));
++#else
+     u += warp * 0.0035 * sin(warpTime * 0.333 + warpScaleInverse * (pos.x * warpFactors.x - pos.y * warpFactors.w));
+     v += warp * 0.0035 * cos(warpTime * 0.375 - warpScaleInverse * (pos.x * warpFactors.z + pos.y * warpFactors.y));
+     u += warp * 0.0035 * cos(warpTime * 0.753 - warpScaleInverse * (pos.x * warpFactors.y - pos.y * warpFactors.z));
+     v += warp * 0.0035 * sin(warpTime * 0.825 + warpScaleInverse * (pos.x * warpFactors.x + pos.y * warpFactors.w));
++#endif
+ 
+     // Rotation
+     float u2 = u - warp_center.x;

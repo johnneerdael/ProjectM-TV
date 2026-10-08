@@ -281,12 +281,157 @@ static void Feedback(TextureManager& textures, bool perPixel, bool preparedRepla
     }
 }
 
-int main()
+// Capture the actual production warp vertex outputs, before raster interpolation.
+// This separates oscillator-Y from the independently audited mesh diagonal.
+static PFNGLLINKPROGRAMPROC deformationLink{};
+static PFNGLDRAWELEMENTSPROC deformationDraw{};
+static GLuint deformationBuffer{};
+static std::vector<float> deformationUV, deformationPositions;
+static std::vector<uint32_t> deformationIndices;
+static void LinkDeformation(GLuint program)
+{
+    GLint count{}; glGetProgramiv(program, GL_ATTACHED_SHADERS, &count);
+    std::vector<GLuint> attached(count);
+    glGetAttachedShaders(program, count, nullptr, attached.data());
+    for (auto shader : attached)
+    {
+        GLint type{}, length{};
+        glGetShaderiv(shader, GL_SHADER_TYPE, &type);
+        if (type != GL_VERTEX_SHADER) continue;
+        glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH, &length);
+        std::string source(length, '\0');
+        glGetShaderSource(shader, length, nullptr, source.data());
+        if (source.find("uniform vec4 warpFactors") != std::string::npos)
+        {
+            const char* varying = "frag_TEXCOORD0";
+            glTransformFeedbackVaryings(program, 1, &varying, GL_INTERLEAVED_ATTRIBS);
+        }
+    }
+    deformationLink(program);
+}
+static void DrawDeformation(GLenum mode, GLsizei count, GLenum type, const void* offset)
+{
+    GLint program{}; glGetIntegerv(GL_CURRENT_PROGRAM, &program);
+    if (glGetUniformLocation(program, "warpFactors") < 0)
+    {
+        deformationDraw(mode, count, type, offset); return;
+    }
+    Check(mode == GL_TRIANGLES && type == GL_UNSIGNED_INT && offset == nullptr,
+          "unexpected warp index draw contract");
+    deformationPositions = AttributeData(0);
+    deformationIndices.resize(count);
+    const auto* indices = static_cast<const uint32_t*>(glMapBufferRange(
+        GL_ELEMENT_ARRAY_BUFFER, 0, count * sizeof(uint32_t), GL_MAP_READ_BIT));
+    Check(indices, "warp index readback failed");
+    std::copy(indices, indices + count, deformationIndices.begin());
+    glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, deformationBuffer);
+    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, count * 4 * sizeof(float), nullptr, GL_STREAM_READ);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, deformationBuffer);
+    glBeginTransformFeedback(GL_TRIANGLES);
+    deformationDraw(mode, count, type, offset);
+    glEndTransformFeedback();
+    const auto* output = static_cast<const float*>(glMapBufferRange(
+        GL_TRANSFORM_FEEDBACK_BUFFER, 0, count * 4 * sizeof(float), GL_MAP_READ_BIT));
+    Check(output, "warp varying readback failed");
+    deformationUV.assign(output, output + count * 4);
+    glUnmapBuffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
+    Check(glGetError() == GL_NO_ERROR, "production warp transform-feedback GL error");
+}
+struct DeformationHook
+{
+    DeformationHook()
+    {
+        deformationLink = glad_glLinkProgram; glad_glLinkProgram = LinkDeformation;
+        deformationDraw = glad_glDrawElements; glad_glDrawElements = DrawDeformation;
+        glGenBuffers(1, &deformationBuffer);
+    }
+    ~DeformationHook()
+    {
+        glad_glLinkProgram = deformationLink; glad_glDrawElements = deformationDraw;
+        glDeleteBuffers(1, &deformationBuffer);
+    }
+};
+static void DeformationControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    for (int path : {0, 1, 2}) // Actual legacy, compiled custom, failed custom -> legacy.
+    for (bool perPixel : {false, true})
+    for (bool replay : {false, true})
+    {
+        Control control(textures, path == 1, false);
+        if (path == 2)
+        {
+            control.state.warpShaderVersion = 2;
+            control.state.warpShader = "shader_body { ret = missing_function_that_must_fail(uv); }";
+            control.mesh.LoadWarpShader(control.state);
+            control.mesh.CompileWarpShader(control.state);
+        }
+        control.state.warpAnimSpeed = control.state.warpScale = 1;
+        control.state.renderContext.texelOffsetX = control.state.renderContext.texelOffsetY = 0;
+        *control.frame.zoom = *control.frame.zoomexp = 1;
+        *control.frame.sx = *control.frame.sy = 1;
+        *control.frame.rot = 0;
+        if (perPixel) control.pixel.CompilePerPixelCode("reg00=reg00+1;warp=q1;");
+        for (float time : {0.f, 1.5f, 17.f})
+        for (float warp : {0.f, 1.f, -1.f, 50.f})
+        {
+            control.state.renderContext.time = time;
+            *control.frame.warp = warp; *control.frame.q_vars[0] = warp;
+            control.pixel.LoadStateReadOnlyVariables(control.state, control.frame);
+            control.pixel.LoadPerFrameQVariables(control.state, control.frame);
+            deformationUV.clear();
+            glBindFramebuffer(GL_FRAMEBUFFER, control.framebuffer);
+            if (replay) { control.mesh.Prepare(control.state, control.frame, control.pixel); control.mesh.DrawAgain(control.state, control.frame); }
+            else control.mesh.Draw(control.state, control.frame, control.pixel);
+            Check(!deformationUV.empty(), "production warp was not captured");
+            const auto first = deformationUV;
+            if (replay)
+            {
+                const double evaluations = control.state.globalRegisters[0];
+                control.mesh.DrawAgain(control.state, control.frame);
+                Check(control.state.globalRegisters[0] == evaluations, "warp replay reevaluated equations");
+                Check(deformationUV == first, "warp replay changed prepared outputs");
+            }
+            // MilkDrop2 milkdropfs.cpp:1882-1898, mapped to the current physical
+            // legacy projection. The absent original custom VS is not an oracle:
+            // its positive-Y contract below explicitly preserves current behavior.
+            const float f0 = 11.68f + 4 * cosf(time * 1.413f + 10);
+            const float f1 = 8.77f + 3 * cosf(time * 1.113f + 7);
+            const float f2 = 10.54f + 3 * cosf(time * 1.233f + 3);
+            const float f3 = 11.49f + 4 * cosf(time * .933f + 5);
+            for (size_t i = 0; i < deformationIndices.size(); ++i)
+            {
+                const auto vertex = deformationIndices[i];
+                const float x = deformationPositions[vertex * 2], y = deformationPositions[vertex * 2 + 1];
+                const float sourceY = path == 1 ? y : -y;
+                float u = x * .5f + .5f, v = y * .5f + .5f;
+                u += warp * .0035f * sinf(time * .333f + x*f0 - sourceY*f3);
+                v += warp * .0035f * cosf(time * .375f - (x*f2 + sourceY*f1));
+                u += warp * .0035f * cosf(time * .753f - (x*f1 - sourceY*f2));
+                v += warp * .0035f * sinf(time * .825f + x*f0 + sourceY*f3);
+                const std::string label = "path=" + std::to_string(path) + " warp=" + std::to_string(warp) + " time=" + std::to_string(time);
+                Check(std::abs(deformationUV[i*4] - u) < 2e-5f && std::abs(deformationUV[i*4+1] - v) < 2e-5f,
+                      label + " wrong physical oscillator-Y at node " + std::to_string(vertex));
+                Check(deformationUV[i*4+2] == x*.5f+.5f && deformationUV[i*4+3] == y*.5f+.5f,
+                      label + " changed original-UV varying");
+            }
+            const auto pixels = Read();
+            Check(std::abs(int(pixels[(Height/2*Width+Width/2)*4+2]) - (path == 1 ? 64 : 191)) <= 1,
+                  "requested compiled/fallback path was not drawn");
+        }
+    }
+    std::cout << "legacy/custom/fallback deformation and prepared replay controls pass\n";
+}
+
+int main(int argc, char** argv)
 {
     try
     {
         GLContext gl;
         TextureManager textures(std::vector<std::string>{});
+        if (argc > 1 && std::string(argv[1]) == "deformation") { DeformationControls(textures); return 0; }
         PowerUploadControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';
         for (bool preparedReplay : {false, true})

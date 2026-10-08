@@ -82,6 +82,8 @@ else()
     target_link_libraries(warp-rotation-regressions PRIVATE ${REGRESSION_GL_TARGET})
 endif()
 add_test(NAME warp-rotation-regressions COMMAND warp-rotation-regressions)
+add_test(NAME legacy-warp-deformation COMMAND warp-rotation-regressions deformation)
+set_tests_properties(legacy-warp-deformation PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(warp-rotation-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 

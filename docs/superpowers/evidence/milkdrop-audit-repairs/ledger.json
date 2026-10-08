@@ -123,10 +123,15 @@
       "sha256": "183f4f571da4edccc7c5b2e558ce0b2906e99a91ae20a620be030e85ff3f7e80",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I10-legacy-warp-deformation-sees-the-opposite-physical-y-argument/HANDOFF.md",
       "numeric_witness": "Matched physical normalized(.6,.7), unit aspect/zoom, time/rot0,warp1: target formula approximately(.6032275,.7047434); original legacy formula(.6032086,.6974467), before texel alignment.\n\nNARROWED: legacy/no-custom-warp path only. Original custom-warp VS is absent; mapping there is uncertain. warp0 unaffected.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "candidate0023 implemented; production vertex RED\u2192GREEN and47 normal controls pass; Native4K/cost/integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
-      "recommendation": "legacy-only physical oscillator Y correction; custom path unchanged"
+      "recommendation": "legacy-only physical oscillator Y correction; custom path unchanged",
+      "evidence": "I10/README.md",
+      "original_candidate": {
+        "name": "BrainStain-sunrays.milk",
+        "sha256": "b3ebf1ab3f1132d2215e493fe9942693b0e70361c5c269cf86cff890520e2ef5"
+      }
     },
     {
       "id": "I11",
