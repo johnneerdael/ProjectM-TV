@@ -4,6 +4,7 @@
 #include <MilkdropPreset/PerFrameContext.hpp>
 #include <MilkdropPreset/PresetState.hpp>
 #include <MilkdropPreset/Waveform.hpp>
+#include <MilkdropPreset/Waveforms/Factory.hpp>
 #include <Renderer/ShaderCache.hpp>
 #include <Renderer/Texture.hpp>
 #include <algorithm>
@@ -192,6 +193,42 @@ static void Opacity(ShaderCache& cache)
     }
     glad_glDrawElements = realDraw; glad_glDrawArraysInstanced = realInstanced;
 }
+static void Samples(ShaderCache& cache)
+{
+    struct Canvas { int width, height, referenceWidth, referenceHeight, derivative, line; };
+    const Canvas canvases[] = {
+        {1, 1, 0, 0, 2, 2},
+        {8, 8, 0, 0, 2, 2},
+        {256, 144, 0, 0, 85, 85},
+        {1024, 768, 0, 0, 341, 240},
+        {3840, 2160, 0, 0, 480, 240},
+        {3840, 2160, 1024, 768, 394, 240},
+        {3840, 2160, 1280, 720, 426, 240},
+        {1280, 720, 1280, 720, 426, 240},
+    };
+    PresetState state; Configure(state, cache);
+    PerFrameContext frame(state.globalMemory, &state.globalRegisters); frame.RegisterBuiltinVariables();
+    for (const auto& canvas : canvases)
+    {
+        auto& context = state.renderContext;
+        context.viewportSizeX = canvas.width; context.viewportSizeY = canvas.height;
+        context.lineReferenceWidth = canvas.referenceWidth; context.lineReferenceHeight = canvas.referenceHeight;
+        frame.LoadStateVariables(state);
+        for (int mode : {4, 6, 7, 8})
+        {
+            auto math = Waveforms::Factory::Create(static_cast<WaveformMode>(mode));
+            const auto vertices = math->GetVertices(state, frame);
+            // Smoothing returns 2N-1 points; it must not change the raw sample budget.
+            const auto expected = mode == 4 ? canvas.derivative : mode == 8 ? 256 : canvas.line;
+            const auto label = "mode " + std::to_string(mode) + " width " + std::to_string(canvas.width) +
+                               " reference " + std::to_string(canvas.referenceWidth);
+            Check(vertices[0].size() == size_t(2 * expected - 1),
+                  label + " expected raw samples " + std::to_string(expected) +
+                  " got " + std::to_string((vertices[0].size() + 1) / 2));
+            Check(vertices[1].size() == (mode == 7 ? vertices[0].size() : 0), label + " wrong second-wave count");
+        }
+    }
+}
 int main(int argc, char** argv)
 {
     try
@@ -202,6 +239,7 @@ int main(int argc, char** argv)
         if (control == "hue") Hue(cache);
         else if (control == "wave-alpha" || control == "wave-topology") Wave(cache, control == "wave-topology");
         else if (control == "opacity") Opacity(cache);
+        else if (control == "samples") Samples(cache);
         else throw std::runtime_error("unknown control");
         std::cout << control << " matches MilkDrop 2.25c\n";
         return 0;

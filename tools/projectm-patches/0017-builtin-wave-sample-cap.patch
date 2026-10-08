@@ -1,0 +1,91 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Cap line waveform samples by reference-equivalent width
+
+Follow MilkDrop 2.25c milkdropfs.cpp:3008-3011,3113-3121: cap the
+raw sample count at canvas width/3 rather than dividing the budget
+by three. Retain ProjectM TV SampleDecisionWidth so the decision
+uses the authored/reference-equivalent width, not physical 4K width.
+Keep a two-point safety floor below width6; that tiny-canvas boundary
+has no defined original line smoothing contract. Leave mode8 and
+other projectM extended modes unchanged. No extra PCM or equation
+evaluation is introduced, but geometry work grows for wider mode4
+canvases; Native4K acceptance and timing remain required.
+
+Original source: milkdrop2 f05b0d8, milkdropfs.cpp SHA256
+68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.cpp b/src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.cpp
+index 798305b66..f27c1e39a 100644
+--- a/src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveforms/DerivativeLine.cpp
+@@ -3,6 +3,7 @@
+ #include "PresetState.hpp"
+ 
+ #include <cassert>
++#include <algorithm>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -17,10 +18,9 @@ void DerivativeLine::GenerateVertices(const PresetState& presetState, const PerF
+ {
+     m_samples = Audio::WaveformSamples;
+ 
+-    if (m_samples > SampleDecisionWidth(presetState) / 3)
+-    {
+-        m_samples /= 3;
+-    }
++    // Cap by the TV reference-equivalent width, as MilkDrop caps by its
++    // canvas width. Keep at least two points for safe line smoothing.
++    m_samples = std::min(m_samples, std::max(2, SampleDecisionWidth(presetState) / 3));
+ 
+     m_wave1Vertices.resize(m_samples);
+ 
+diff --git a/src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.cpp b/src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.cpp
+index 8dca34820..f8374d953 100644
+--- a/src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveforms/DoubleLine.cpp
+@@ -3,6 +3,7 @@
+ #include "PresetState.hpp"
+ 
+ #include <cmath>
++#include <algorithm>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -12,10 +13,7 @@ void DoubleLine::GenerateVertices(const PresetState& presetState, const PerFrame
+ {
+     m_samples = Audio::WaveformSamples / 2;
+ 
+-    if (m_samples > SampleDecisionWidth(presetState) / 3)
+-    {
+-        m_samples /= 3;
+-    }
++    m_samples = std::min(m_samples, std::max(2, SampleDecisionWidth(presetState) / 3));
+ 
+     m_wave1Vertices.resize(m_samples);
+     m_wave2Vertices.resize(m_samples);
+diff --git a/src/libprojectM/MilkdropPreset/Waveforms/Line.cpp b/src/libprojectM/MilkdropPreset/Waveforms/Line.cpp
+index 9a842c146..e72d094ab 100644
+--- a/src/libprojectM/MilkdropPreset/Waveforms/Line.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveforms/Line.cpp
+@@ -1,6 +1,7 @@
+ #include "Waveforms/Line.hpp"
+ 
+ #include "PresetState.hpp"
++#include <algorithm>
+ 
+ namespace libprojectM {
+ namespace MilkdropPreset {
+@@ -10,10 +11,7 @@ void Line::GenerateVertices(const PresetState& presetState, const PerFrameContex
+ {
+     m_samples = Audio::WaveformSamples / 2;
+ 
+-    if (m_samples > SampleDecisionWidth(presetState) / 3)
+-    {
+-        m_samples /= 3;
+-    }
++    m_samples = std::min(m_samples, std::max(2, SampleDecisionWidth(presetState) / 3));
+ 
+     m_wave1Vertices.resize(m_samples);
+ 

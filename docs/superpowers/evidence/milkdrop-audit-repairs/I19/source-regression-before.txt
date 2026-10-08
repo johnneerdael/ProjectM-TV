@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 9: legacy-samples
+1/1 Test #9: legacy-samples ...................***Failed    0.20 sec
+mode 4 width 256 reference 0 expected raw samples 85 got 160
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.21 sec
+
+The following tests FAILED:
+	  9 - legacy-samples (Failed)
+Errors while running CTest

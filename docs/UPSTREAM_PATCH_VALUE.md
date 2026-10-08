@@ -228,6 +228,17 @@ skip final alpha below .004. Preserve patch0014’s mode-1 boost, current
 TV canvas/reference coefficients, Native dot styles and prepared replay.
 No texture, pass, sample or equation evaluation is added. The independent
 mode-2 control fails baseline (.4 versus .028) and passes with the patch;
-38 normal renderer controls pass. Native 4K captures and timings remain
-pending; no physical-TV or whole-corpus claim follows from these controls.
+38 normal renderer controls pass. Repeated Native Standard 4K captures confirm the effect on Happening.milk,
+with no observed slowdown in that witness. No physical-TV or whole-corpus claim
+follows from those emulator measurements.
 See [audit evidence](superpowers/evidence/milkdrop-audit-repairs/I17/README.md).
+
+## Line waveform sample cap (candidate0017)
+
+Restore the original raw min(sample budget, width/3) rule for modes4/6/7,
+retaining TV reference-equivalent width and a two-point safety floor below
+width6. Source-count regressions at256/1024 and3840×2160 with both reference
+policies fail baseline and pass candidate; mode8 remains unchanged. This
+increases mode4 geometry at the active1280 canvas from160 to426 points.
+Native 4K before/expected captures and measured timing remain required before
+accepting the candidate. See [I19](superpowers/evidence/milkdrop-audit-repairs/I19/README.md).
