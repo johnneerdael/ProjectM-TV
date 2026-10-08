@@ -347,11 +347,15 @@
       "sha256": "6a7d52e02ee8041644c9bc603ce4f4f6cfff6928ba8b8583a12b10136c7320b4",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I03-small-finite-divisions-and-reciprocal-powers-collapse-to-zero/HANDOFF.md",
       "numeric_witness": "1/0.000001 and pow(0.000001,-1): library/predictor0; original1000000. No zero division or negative fractional domain involved.",
-      "status": "isolated source proposal; raw Android fast-math guards unsafe; scoped finite-only override scalar ARM64 runtime passes; additional restored NaN behavior and Native4K/cost/integration pending",
+      "status": "deferred complete owner packet; combined finite recovery passes source/ARM/Native proof but runtime tiny-power cost +7.50%",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
       "recommendation": "bounded finite reciprocal repair; preserve protective domains",
-      "evidence": "I03-I04/README.md"
+      "evidence": "I03-I04/I03-OWNER-DECISION.md",
+      "native_evidence": "I03-I04/native-combined/native-results.json",
+      "performance_evidence": "I03-I04/runtime-cost-proof/verified-results.json",
+      "policy": "keep finite recovery outside shipping series pending cost/compiler-policy decision",
+      "limits": "No confirmed stock trigger or Windows/x87 parity; measured combined/compiler-scope effects explicit; I04 separate."
     },
     {
       "id": "I04",

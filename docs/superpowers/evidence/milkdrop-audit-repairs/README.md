@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20, I22 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Seven other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20, I22 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Six other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -85,3 +85,5 @@ I25/I30 retainedfloatpolicy owner decisions are qualified: realgeometry/displaya
 I26/I27 correctedinputpolicies qualified:actualcompileduniform/source/PCM/injection tests pass;34Native4K jobs repeat. MutableEELvol cannotoverwrite shaderaudio, miplive matches1280x720reference, Cope sourcecomma-scalar sibling visiblydiffers(maxMAE30.550332). EightretainedpolicyIDs,5deferredIDs,12repairedIDs and8unfinishedIDs remain.
 
 I23 retainedoffsetpolicy qualified: actualshaderpositions/pass/replay andNative live=current-offset siblings all8framesexact;originalreference offsets differ. I15 remainsseparate/open. Nine retainedpolicyIDs,5deferredIDs,12repairedIDs and7unfinishedIDs remain.
+
+I03 now has a complete deferred owner packet:198combined source/ARM controls,12Nativefinitejobs and36verifiedruntimeQcostjobs. Tiny-power+7.50%/allcyclesincrease failscostgate; compiler-scope effects explicit. I04remainsindependent/open. Twelve repairedIDs,nine retainedpolicyIDs,six deferredIDs andsix unfinishedIDs remain.
