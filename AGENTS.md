@@ -474,3 +474,12 @@ Their default preserves frozen13-patch replay. Manifest digests bind new workers
 and captures to a selected source/inventory; old unbound receipts are restricted
 to the original frozen manifest. Never relabel preserved workers as a newer
 endpoint merely because upstream pin/early patch bytes match.
+
+Original proof inputs: before remaining component captures, read
+`docs/superpowers/evidence/current-patch-proof/original-evidence-inputs/README.md`
+and its machine map. It joins original PR/commit evidence to preset types, exact
+verified assets and activation profiles. PR14 reference1024×768 must not silently
+become a16:9 reference; PR34 needs first-use/resize/distinct FBO controls, and
+PR40 needs explicit authored/native-off/Standard/Medium/High sequences. Historical
+screenshots/timings remain provenance, not current4.2 certification. Early
+optimization commits omit some benchmark names; preserve that uncertainty.

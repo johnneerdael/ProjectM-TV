@@ -124,3 +124,15 @@ is source/binary/full-stream verified and published on the main page. Generated
 hue and mode-1 controls are being verified separately; the inactive initial hue
 fixture remains excluded. Affected earlier legacy/mode-1 witnesses still need
 current-endpoint revalidation; the retained23-component matrix is not complete.
+
+## Original evidence input map (2026-10-08)
+
+Use `../evidence/current-patch-proof/original-evidence-inputs/README.md` and its
+machine map before remaining captures. The original PR bodies/comments and linked
+records already identify profiles and witnesses for Royal103/191, midgit,
+Waltra/Hexcollie, arrays, parser and initialization controls. Reuse those types and
+activation cases. Several early optimization commits have no associated PR and do
+not list exact benchmark preset names; mark that gap rather than inventing names.
+The present harness requires explicit reference width/height, Native-trails
+settings, resize/switch events and measured operation controls for those profiles.
+Do not select a generic healthy512×288 frame and call that component activation.

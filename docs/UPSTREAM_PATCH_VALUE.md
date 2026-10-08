@@ -58,6 +58,27 @@ The [component capture matrix](superpowers/plans/2026-10-08-retained-component-p
 tracks the remaining work. No whole-corpus, universal appearance or current-driver
 performance claim follows from these scoped comparisons.
 
+### Original PR inputs guide the remaining captures
+
+The [23-component input map](superpowers/evidence/current-patch-proof/original-evidence-inputs/README.md)
+now joins the original PRs/commit records to exact preset identities where
+available, preset types, activation settings and source-bound controls. These
+records guide fresh current4.2 proof; their historical screenshots and timings
+retain their original identities.
+
+| Current component | Previously tested input/profile to reuse |
+|---|---|
+| Reference lines and sample decisions | [PR14's Royal103 sampling control](https://github.com/johnneerdael/ProjectM-TV/pull/14#issuecomment-5971576653): original1024×768 reference, bass-0.30 and separate low/1080/4K modes. Royal191 covers four-pass thick waves. |
+| Blur sizing and shader canvas policy | [PR14's blur controls](https://github.com/johnneerdael/ProjectM-TV/pull/14#issuecomment-5971576796): Nuclear; virtual texsize has sawtooth grin/penattrition controls. Exact short-name variants require their linked JSON. |
+| Blur caller ownership | [PR34](https://github.com/johnneerdael/ProjectM-TV/pull/34): unchanged midgit, known TGA inputs, first allocation/unchanged size/resize and distinct read/draw targets. |
+| Evaluated geometry replay | [PR40](https://github.com/johnneerdael/ProjectM-TV/pull/40): Waltra - Heaven Liquid and Hexcollie - Julian Shader Wars4 nz+ sports fart; authored/off/Standard/Medium/High controls at3840×2160. |
+| Arrays, uniform writes and parser behavior | [PR26](https://github.com/johnneerdael/ProjectM-TV/pull/26) names Glass Ocean/Arctic Chill and Royal324; [PR29](https://github.com/johnneerdael/ProjectM-TV/pull/29) supplies16 hashed parser originals and distinct numerical controls. |
+| Pooling, batching and pass/caches | Early optimization commits supply pool-off/on, multiple instances, shape-heavy ordered draws, cold/warm shaders, vector visibility, clip/blur reads and switch-history contracts. Several exact benchmark names are absent; the map labels that gap. |
+
+The present capture harness does not yet expose every original reference/native
+profile or event sequence. Implement those explicit controls before claiming that
+a healthy preset screenshot activates a cache, replay or pass optimization.
+
 ## Reading the image evidence
 
 The requested comparison is **the pinned upstream renderer versus the current

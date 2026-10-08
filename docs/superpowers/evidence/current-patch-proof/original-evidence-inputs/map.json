@@ -1,0 +1,498 @@
+{
+  "date": "2026-10-08",
+  "scope": "Provenance/activation inputs for current components; no new GPU certification or historical performance carryover",
+  "pr_receipts": [
+    {
+      "number": 10,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/10",
+      "merge_commit": {
+        "oid": "27f0f467c700ed1bd28c82149ae673a70ca9dada"
+      },
+      "body_and_comments_sha256": "110c3e68ecd82579eb8bbec1ffc4ea0c3d9fb1e45ad5dfd237e4030fb55f2d83",
+      "comments_read": 4
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/14",
+      "merge_commit": {
+        "oid": "437045eac4190920ca184071ac845f00c76a7d18"
+      },
+      "body_and_comments_sha256": "d63fec2bb8caba85ecdbe2b4e1fb936af3116f2e8d681d8fd1afb745ed05e72c",
+      "comments_read": 13
+    },
+    {
+      "number": 15,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/15",
+      "merge_commit": {
+        "oid": "024576de0f7722c9635a30e21c673162bb197392"
+      },
+      "body_and_comments_sha256": "516512cd5f1eb7caa8927a4eade53bce4eba561b79dec9bacdee519331b56b3f",
+      "comments_read": 2
+    },
+    {
+      "number": 23,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/23",
+      "merge_commit": {
+        "oid": "0625587f12b9cd38c852e2517eb109b027fd6526"
+      },
+      "body_and_comments_sha256": "4a8a982062f15d915a4d0752c754490c7ddb5e70044af233979a41aac0449b0e",
+      "comments_read": 9
+    },
+    {
+      "number": 26,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/26",
+      "merge_commit": {
+        "oid": "ce9b80aa65860a81efa7ca90ad4763fcd96a2f58"
+      },
+      "body_and_comments_sha256": "c065ebd6074f54996aa929384d46eb3a1083118f02b99881d2e2f8af1a99da7d",
+      "comments_read": 1
+    },
+    {
+      "number": 27,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/27",
+      "merge_commit": {
+        "oid": "f435dd7c58ea1f16d9d182ecfc5632b77f5b6f98"
+      },
+      "body_and_comments_sha256": "2ddf666e679f3f23d86566d7aa3a4af08ce89d6ed7a13b86cbc4551d7b609c2d",
+      "comments_read": 3
+    },
+    {
+      "number": 28,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/28",
+      "merge_commit": {
+        "oid": "0e3f948e8cf0244b1f27c846bcb5b8b9fc3a26a0"
+      },
+      "body_and_comments_sha256": "b33c611c8a85601d858940ef49a6cfa305a81b4aea979007abce83eafac87b18",
+      "comments_read": 17
+    },
+    {
+      "number": 29,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/29",
+      "merge_commit": {
+        "oid": "f8d7dd58c7e29875465aed5ea8928d18de52701d"
+      },
+      "body_and_comments_sha256": "efadeb8d040a2b175ede0c3b174c8f192ef1882f1cd53fd1c8e80ae6bac1e683",
+      "comments_read": 4
+    },
+    {
+      "number": 30,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/30",
+      "merge_commit": {
+        "oid": "8b70620339018cfaf5ac05acdb4ea8104dc2eb59"
+      },
+      "body_and_comments_sha256": "8d0db2fce826180dd47ecb0b0b0b74cf38f58a576808267962b0d8768cbd2f62",
+      "comments_read": 8
+    },
+    {
+      "number": 33,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/33",
+      "merge_commit": {
+        "oid": "6244a3ecad952b365e177ce3ab7cfb5081c05225"
+      },
+      "body_and_comments_sha256": "34fae198ac8b7c527cecbec8006f8253fb60ea52c242cd3eb43799c4cdb97c6b",
+      "comments_read": 5
+    },
+    {
+      "number": 34,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/34",
+      "merge_commit": {
+        "oid": "6e71ac2a18a95463fbe3a21c05e6dd4027cb74a0"
+      },
+      "body_and_comments_sha256": "6c642b71e2dec7feec479e75a47c54717d7f0d1d2e604cda9bb790ffaa024578",
+      "comments_read": 3
+    },
+    {
+      "number": 35,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/35",
+      "merge_commit": {
+        "oid": "0f9c16748e508f651bbb574505f39ae45a8ab2b2"
+      },
+      "body_and_comments_sha256": "e27c6dbe5ee5ffe8ae282dab547b6e700eba9566bedf28b03ae3a4bdd81b6b97",
+      "comments_read": 2
+    },
+    {
+      "number": 37,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/37",
+      "merge_commit": {
+        "oid": "910e837b7d3eb636b3de30df402095b0a7e59a7c"
+      },
+      "body_and_comments_sha256": "a5beb00c964b7d213ea58be67055c0994ac62a7266613b3f669a0b5fcc5f9543",
+      "comments_read": 10
+    },
+    {
+      "number": 40,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/40",
+      "merge_commit": {
+        "oid": "a704a377c6c52bb31bed878e61e6e5b397701b4e"
+      },
+      "body_and_comments_sha256": "5e72a26adfa2459b1682cda2b6d5eb57bbec8710bb5fa20049ddc382931ef4e2",
+      "comments_read": 1
+    },
+    {
+      "number": 41,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/41",
+      "merge_commit": {
+        "oid": "b62511ccd96fb868024fdfb9afac677bfe557b10"
+      },
+      "body_and_comments_sha256": "3021dfcf0e0d1a81f08fe6bdd95631514a0b93e28f7389017e96f0ef9b24a31c",
+      "comments_read": 5
+    },
+    {
+      "number": 46,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/46",
+      "merge_commit": {
+        "oid": "8dfa0f186382e0a0e8636840a9f82d39160de2c9"
+      },
+      "body_and_comments_sha256": "ad068f164023d0a6873b27eb2e275b9614dd538fd458ea5db7c3d65be99deacc",
+      "comments_read": 14
+    },
+    {
+      "number": 47,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/47",
+      "merge_commit": {
+        "oid": "2c1110b5cc96253c9f51ac36cb933137a09b3c61"
+      },
+      "body_and_comments_sha256": "3aa6fe254623b2ef77c08d08928830f02a3b57a8852adbb4a012dcaa53e7fd7c",
+      "comments_read": 2
+    },
+    {
+      "number": 49,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/49",
+      "merge_commit": {
+        "oid": "43023889ec38cf1250f3bfcaaf079a840acbdf76"
+      },
+      "body_and_comments_sha256": "9057eef63b9f78ee01acb9065764e3c87c42b8d4d6514d4bc344d27f7c0959d1",
+      "comments_read": 11
+    },
+    {
+      "number": 5,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/5",
+      "merge_commit": {
+        "oid": "33a171ee4d95c5769563186da9c0be1354b5648b"
+      },
+      "body_and_comments_sha256": "8255207fbca4f33f42fb9300880007c477d0742b86b8606c146231826438c068",
+      "comments_read": 2
+    },
+    {
+      "number": 50,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/50",
+      "merge_commit": {
+        "oid": "dd59a791fd2af6b7ad2fffcb389e0bc178905959"
+      },
+      "body_and_comments_sha256": "667026c784f6a89ac726a2fdb8057398be931b8a5000338474fce9a7b61e2228",
+      "comments_read": 3
+    },
+    {
+      "number": 51,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/51",
+      "merge_commit": {
+        "oid": "16a37189478771da591d134a6bd1f8fc46eee808"
+      },
+      "body_and_comments_sha256": "f0bd5ce4ef745f4d3b8e0a2eba7a2905c7e988479d24bb69cb3923d47d0158cc",
+      "comments_read": 8
+    },
+    {
+      "number": 53,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/53",
+      "merge_commit": {
+        "oid": "654815d84d00cc14b2e81880bf4c91db467cb1d8"
+      },
+      "body_and_comments_sha256": "15fe9b3cac6bf80ffeb10e033c4d24d05b705b49a5ef5ee3dd1270646f4348b6",
+      "comments_read": 5
+    },
+    {
+      "number": 54,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/54",
+      "merge_commit": {
+        "oid": "0b6e42815a9c858b3b2306cc00c36a84390eb954"
+      },
+      "body_and_comments_sha256": "d1acb7f3b0ed8f3e7346aeef3c6318c24792ef38657efbc03e24c1a0632db3fd",
+      "comments_read": 3
+    },
+    {
+      "number": 57,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/57",
+      "merge_commit": {
+        "oid": "41ec3fc16786b325a7a8cb013a77969073aa7a5c"
+      },
+      "body_and_comments_sha256": "698ea1e77f5158e58a0316c6917f735062311d609ead3363f4aa7f3d5fd0aae8",
+      "comments_read": 5
+    },
+    {
+      "number": 6,
+      "url": "https://github.com/johnneerdael/ProjectM-TV/pull/6",
+      "merge_commit": {
+        "oid": "9ced73b39d76696eaf7f88575bb0529d84367bb8"
+      },
+      "body_and_comments_sha256": "97f393b49b0f9ddf884bd893659f3c7702c640b87f184e56f55f4a8b277a9ab1",
+      "comments_read": 2
+    }
+  ],
+  "components": [
+    {
+      "current_component": "High-resolution lines/AA",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/14",
+      "historical_inputs_or_types": "Royal Mashup103/191; Serge circles005b; synthetic thin/thick/dot controls",
+      "original_profile": "854x480/1920x1080/3840x2160; original final reference1024x768; bass-0.30; 4s warm-up +4s measure,30fps; AAoff",
+      "current_replay_requirement": "Replay original profiles; record actual reference width and height; classic/quad and low/reference/high controls; optional AA separately",
+      "verified_bundled_assets": [
+        {
+          "name": "$$$ Royal - Mashup (103).milk",
+          "sha256": "08ead3db478aa81c0e29efccc0d9c38bbe69180435123531cbafbf2beb347463"
+        },
+        {
+          "name": "$$$ Royal - Mashup (191).milk",
+          "sha256": "d1c0d1554cdda7e9e7add156ff94bc76de147fdc699afa5036e994a83f2615fe"
+        }
+      ]
+    },
+    {
+      "current_component": "Reference sample/fade/blur/canvas policy",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/14#issuecomment-5971576653",
+      "historical_inputs_or_types": "Royal103 sample count; Nuclear/fat cancer blur; Fvese-mvfun2 MaximizeColors; sawtooth grin/penattrition virtual texsize",
+      "original_profile": "1024x768 reference; authored16:9 area1182x665 versus1080/4K; separate ablations, fDecay0 canvas-hit diagnostics",
+      "current_replay_requirement": "Recover exact short-name matches from linked JSON before capture; do not combine policies into a single causal line claim",
+      "verified_bundled_assets": [
+        {
+          "name": "$$$ Royal - Mashup (103).milk",
+          "sha256": "08ead3db478aa81c0e29efccc0d9c38bbe69180435123531cbafbf2beb347463"
+        },
+        {
+          "name": "TonyMilkdrop - Nuclear [Flexi - help out + alien complex].milk",
+          "sha256": "d89c617979cee2678b6774e1558dcb73aaa574d17ced6b83e5a5c1825e272139"
+        },
+        {
+          "name": "sawtooth grin.milk",
+          "sha256": "884aef34b6edb83535dac9442dab304944dd08d4b2699c38025af375eec225d6"
+        }
+      ]
+    },
+    {
+      "current_component": "Fragment-failure shader cleanup",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/23",
+      "historical_inputs_or_types": "Intentional valid-vertex/invalid-fragment failures;16 attempts and valid retry",
+      "original_profile": "Driver shader-object lifetime queries; healthy render preservation",
+      "current_replay_requirement": "Current GPU proof already published; replay on current14 as necessary",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Fresh/reused feedback history",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/23",
+      "historical_inputs_or_types": "Valid controlled-allocation bytes; fresh clear; cached FBO-name collision after context recreation",
+      "original_profile": "Nondefault mask/scissor/clear color; caller FBO; fresh and pooled attachment reads",
+      "current_replay_requirement": "Reuse exact history/state/context test contracts; existing controlled current GPU clear proof is partial",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Qualified warp sampler reservation",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/23",
+      "historical_inputs_or_types": "Fractional/out-of-bounds samples; ADAMFX2, Matrix Moral Infinite, Mood Rings original suite",
+      "original_profile": "Point/linear and clamp/wrap aliases;33 originals at authored665/reference-scaled1330/2160",
+      "current_replay_requirement": "Use original matched sampler cases and independent alias-oracle fixture; include actual wrap mismatch",
+      "verified_bundled_assets": [
+        {
+          "name": "Milkdrop Mashup Masters ADAMFX 2 raron + flexi  +  ORB 2.milk",
+          "sha256": "a483e0507157a4c10811b41cb4d9a48bfa18f00123a0edc711f84021081877e5"
+        },
+        {
+          "name": "suksma - ed geining hateops - Matrix Moral Infinite.milk",
+          "sha256": "f3cc16483f388d1bb40e39785368b3f8610f56bcf8162a11b6daa3e5a7256e16"
+        },
+        {
+          "name": "suksma - mood rings for masochist alien deities - portentous anskeptising.milk",
+          "sha256": "f9103cf98d60d669f8216bc99771ea28a8b68e465afcc4786ca434235c8611d6"
+        }
+      ]
+    },
+    {
+      "current_component": "Ordered shape batching",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/e563f8603e2e8824c339d1296bffceeebc119c71",
+      "historical_inputs_or_types": "46 shape presets; shape-heavy instances; exact identities not listed in commit",
+      "original_profile": "184 deterministic Mesa frames; fills/outlines and blending in instance order; upload once per batch",
+      "current_replay_requirement": "Recover retained harness/list if available; otherwise label selected high-instance preset as new witness; use PR40 order/overflow controls",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Evaluate-once geometry replay",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/40",
+      "historical_inputs_or_types": "Waltra particles; Hexcollie spiral; faint recurrence and stateful equations/RNG",
+      "original_profile": "3840x2160;480frames;frame300; seed12345/frame30; authored/native-off/Standard repeats plusMedium/High; resize/re-enable",
+      "current_replay_requirement": "Enable Native trails explicitly and use authored/replay controls; count actual equation/RNG evaluation",
+      "verified_bundled_assets": [
+        {
+          "name": "Waltra - Heaven Liquid.milk",
+          "sha256": "51cde8a9f21f6a432a5c5d3f470b771d47e96db797a7776c722a735c52316d24"
+        },
+        {
+          "name": "Hexcollie - Julian Shader Wars4 nz+ sports fart.milk",
+          "sha256": "3ece7925f0e4b2fe83cccf07411d10a62d1599135ab71e5e7a6b634a369c0fad"
+        }
+      ]
+    },
+    {
+      "current_component": "Texture pooling",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/651a9fea01b03a978b395660dbb9227b563599bc",
+      "historical_inputs_or_types": "40-preset Mesa single/multi-instance with/without pool; names not listed in commit",
+      "original_profile": "Same-size retirement/reload; host pool limit; pressure release; mip-level accounting added in PR14",
+      "current_replay_requirement": "Use original pool-off/on/single/multi/pressure contracts and exact current resource diagnostics; no inherited speedup claim",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Translated GLSL cache",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/0195cb16f443b2b702fa4d1eaab8695039f192b4",
+      "historical_inputs_or_types": "Custom warp/composite shaders prepared in foreground/prewarm engine instances",
+      "original_profile": "Identical shader type/source/sampler/texsize declarations; bounded cross-instance cache",
+      "current_replay_requirement": "Reload a PR26 original such as Glass Ocean as a new identified cache witness; count translations/hits; preserve image",
+      "verified_bundled_assets": [
+        {
+          "name": "ORB - Stahl - Glass Ocean.milk",
+          "sha256": "499d464efca2e65d04c943ee4877c46d4dc533b70b2ba42fcb1c923d2cd64d9c"
+        }
+      ]
+    },
+    {
+      "current_component": "Program-binary cache",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/45dcbb9b84600af7d8483c6ac21805baa1f71399",
+      "historical_inputs_or_types": "Foreground load and shared-context prewarm linked warp/composite programs",
+      "original_profile": "Cold/warm linked programs; cache source/driver/context keys; resize/history preservation",
+      "current_replay_requirement": "Driver binary export must work before positive proof; API36 failure remains recorded",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Uniform-location/program-bind caches",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/45dcbb9b84600af7d8483c6ac21805baa1f71399",
+      "historical_inputs_or_types": "Custom shapes repeatedly binding same program per instance",
+      "original_profile": "Repeated same-frame shape uniforms/program binds; foreground/prewarm instances",
+      "current_replay_requirement": "High-instance shapes with measured queries/binds and unchanged RGB; no appearance improvement claim",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Flip reuse",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/54e9f14dc91d9a1d4b5dda30a2f079a3eb526c62",
+      "historical_inputs_or_types": "Five preset kinds; cached y-flipped previous frame",
+      "original_profile": "No-motion-vector phase versus vector drawing and resize invalidation",
+      "current_replay_requirement": "Use original motion-vector-off/on invalidation contract; PR28 Royal103 was the explicit vector case",
+      "verified_bundled_assets": [
+        {
+          "name": "$$$ Royal - Mashup (103).milk",
+          "sha256": "08ead3db478aa81c0e29efccc0d9c38bbe69180435123531cbafbf2beb347463"
+        }
+      ]
+    },
+    {
+      "current_component": "Direct blur attachment rendering",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/34",
+      "historical_inputs_or_types": "midgit warp blur; isolated known TGA; separate read/draw FBOs",
+      "original_profile": "First allocation, unchanged size, resize/scaled blur; four full-preset frames includingresize; constant-color control",
+      "current_replay_requirement": "Replay exact midgit/first-use/resize caller-ownership controls plus actual pass counts",
+      "verified_bundled_assets": [
+        {
+          "name": "midgitstraights of majillaen - featy sweet.milk",
+          "sha256": "d4cd997dedc57ab34c7247fee1ba94d4061528d12d16cde5a468145fb216ebba"
+        }
+      ],
+      "additional_sources": [
+        "https://github.com/johnneerdael/ProjectM-TV/commit/54e9f14dc91d9a1d4b5dda30a2f079a3eb526c62"
+      ]
+    },
+    {
+      "current_component": "Visibility-gated vector UV output",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/54e9f14dc91d9a1d4b5dda30a2f079a3eb526c62",
+      "historical_inputs_or_types": "Motion vectors hidden/shown; Royal103 from PR28",
+      "original_profile": "Runtime visibility phases; invalidate UV history when vector rendering changes",
+      "current_replay_requirement": "Use Royal103 and direct state fixture; count UV output/pass operations",
+      "verified_bundled_assets": [
+        {
+          "name": "$$$ Royal - Mashup (103).milk",
+          "sha256": "08ead3db478aa81c0e29efccc0d9c38bbe69180435123531cbafbf2beb347463"
+        }
+      ]
+    },
+    {
+      "current_component": "Final-orientation video echo",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/54e9f14dc91d9a1d4b5dda30a2f079a3eb526c62",
+      "historical_inputs_or_types": "Legacy video echo preset class in five-kind comparison; exact filename not listed",
+      "original_profile": "Nonzero echo alpha; all orientation values; final y-orientation without third flip",
+      "current_replay_requirement": "Choose a hash-bound legacy echo original; retain independent orientation/alpha/shade oracle",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Discard and authored blur timing",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/54e9f14dc91d9a1d4b5dda30a2f079a3eb526c62",
+      "historical_inputs_or_types": "Warp shaders reading blur; composites using clip()",
+      "original_profile": "Preserve target contents; avoid invalidation/merged pass when read/discard needs prior frame",
+      "current_replay_requirement": "Reuse source path contracts and explicit clip/blur-read controls; healthy frames plus preserved pixels",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Direct composite/switch history",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/2ac06c7253fb2956df3645779bf688c07d617419",
+      "historical_inputs_or_types": "Custom and legacy composites; classic transitions; host preset switches; clip() exclusion",
+      "original_profile": "Caller direct FBO vs stored history; store a frame before remote/blank-skip switch; transitions remainstored",
+      "current_replay_requirement": "Add exact host switch sequence and compare stored/direct pixels; count copy/draw operations",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Array initializer layout",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/26",
+      "historical_inputs_or_types": "PR26 original Glass Ocean flat arrays; current Quicksand is a later, clearer witness of the same retained initializer class; local diagnostic",
+      "original_profile": "Global flat float4[5] initialized from20scalars; local typed elements; whole-array initialization",
+      "current_replay_requirement": "Original PR26 source fixtures plus existing stronger Quicksand current proof; preserve fallback logs",
+      "verified_bundled_assets": [
+        {
+          "name": "ORB - Stahl - Glass Ocean.milk",
+          "sha256": "499d464efca2e65d04c943ee4877c46d4dc533b70b2ba42fcb1c923d2cd64d9c"
+        },
+        {
+          "name": "ORB - Quicksand Lab.milk",
+          "sha256": "80f11873f7e81063020a9d21f58e255d2efd4bcddb183d05c8b41dd16215ffeb"
+        }
+      ]
+    },
+    {
+      "current_component": "Writable uniform initialization",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/26",
+      "historical_inputs_or_types": "Royal324 black-on-Mali; q18/q19 bank; compoundtime/helper; ++/--/out/inout",
+      "original_profile": "Incoming initialized bank copy shared acrossfunctions; partial write preserves othercomponents",
+      "current_replay_requirement": "Use original q18/time and out/inout controls; existing current bank/Martin proofs cover subset",
+      "verified_bundled_assets": [
+        {
+          "name": "$$$ Royal - Mashup (324).milk",
+          "sha256": "70c428f595882862b346f55bb7b6cf342ce30e1f7e1ffe9d58299cbc80051f78"
+        }
+      ]
+    },
+    {
+      "current_component": "Contextual identifiers/macros/postfix",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/29",
+      "historical_inputs_or_types": "16 hash-pinned originals including Rainbox Splash Poolz/Hedgehog/Flexi; local sample identifier",
+      "original_profile": "Direct authored shader compilation plus12numerical rendercontrols; parser/macro/postfix distinct",
+      "current_replay_requirement": "Use existing shader-parser-16 hash manifest; add component activation rather than new corpus search",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Float emission and implicit globals",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/33",
+      "historical_inputs_or_types": "crystal palace tunnel003/wreck diver/organic light; mus/dist_c/uv3; ludicrous selector; PR41 literal fixtures",
+      "original_profile": "Explicit silence128x72/30fps/60frames; implicit-zero vs explicit-zero/nonzero controls;95literal sections/99ASTwitnesses",
+      "current_replay_requirement": "Reuse exact initialization/literal fixture manifests, not guesses about whole-preset appearance",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Evaluator lone-dot numbers",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/pull/27",
+      "historical_inputs_or_types": "PR27 code-phase/lone-dot fixtures and unchanged161/430; the current Stahlregen funky Blur original witness was added later",
+      "original_profile": "Preset/wave/shape equation phases; lone dot must compile aszero; tolerant omission distinguished",
+      "current_replay_requirement": "Use retained original witness and compile/evaluation controls",
+      "verified_bundled_assets": []
+    },
+    {
+      "current_component": "Evaluator thread-local RNG",
+      "source": "https://github.com/johnneerdael/ProjectM-TV/commit/3295518a6f8f9fd769403850d37239ccd58b6f32",
+      "historical_inputs_or_types": "Prewarm and foreground evaluator contexts/threads; no exact original named preset recovered here",
+      "original_profile": "Independent fresh-thread RNG streams; concurrent evaluation and rendered state",
+      "current_replay_requirement": "Use thread/evaluator contracts and measured streams; add controlled concurrent-render witness",
+      "verified_bundled_assets": []
+    }
+  ]
+}
