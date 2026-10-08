@@ -1,0 +1,63 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Center valid custom oscilloscope input windows
+
+Follow MilkDrop 2.25c milkdropfs.cpp:2643-2654 for finite windows:
+center each requested oscilloscope window in the 480-sample input,
+then shift left/right channels in opposite directions by sep/2.
+Apply those offsets before the existing forward/backward smoothing.
+Preserve upstream resampling for >480 samples and the current safe
+prefix fallback where the original offsets exceed input bounds.
+Leave spectrum, sample counts, smoothing, point/dot styles and Native
+prepared replay unchanged; do not restore the old out-of-bounds reads.
+
+Original source: milkdrop2 f05b0d8, milkdropfs.cpp SHA256
+68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+index 3a6691e35..3ec094fa6 100644
+--- a/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
++++ b/src/libprojectM/MilkdropPreset/CustomWaveform.cpp
+@@ -147,11 +147,29 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext, Geometry
+     const float mix1 = std::pow(m_smoothing * 0.98f, 0.5f);
+     const float mix2 = 1.0f - mix1;
+ 
++    // MilkDrop centers finite oscilloscope windows and shifts the channels
++    // in opposite directions. Retain upstream resampling/bounds safety for
++    // oversized requests and separations outside the original valid window.
++    int offsetL = 0;
++    int offsetR = 0;
++    if (!m_spectrum && sampleCount <= maxInputSampleCount)
++    {
++        const int center = (maxInputSampleCount - sampleCount) / 2;
++        const int left = center - m_sep / 2;
++        const int right = center + m_sep / 2;
++        const int maxOffset = maxInputSampleCount - sampleCount;
++        if (left >= 0 && right >= 0 && left <= maxOffset && right <= maxOffset)
++        {
++            offsetL = left;
++            offsetR = right;
++        }
++    }
++
+     std::array<float, CustomWaveformMaxSamples> sampleDataL{};
+     std::array<float, CustomWaveformMaxSamples> sampleDataR{};
+ 
+-    sampleDataL[0] = pcmL[0];
+-    sampleDataR[0] = pcmR[0];
++    sampleDataL[0] = pcmL[offsetL];
++    sampleDataR[0] = pcmR[offsetR];
+ 
+     // Smooth forward
+     for (int sample = 1; sample < sampleCount; sample++)
+@@ -159,8 +177,8 @@ void CustomWaveform::Draw(const PerFrameContext& presetPerFrameContext, Geometry
+         const int pcmSample = static_cast<int>(static_cast<float>(sample) * scaling);
+         assert(pcmSample >= 0);
+         assert(pcmSample < maxInputSampleCount);
+-        sampleDataL[sample] = pcmL[pcmSample] * mix2 + sampleDataL[sample - 1] * mix1;
+-        sampleDataR[sample] = pcmR[pcmSample] * mix2 + sampleDataR[sample - 1] * mix1;
++        sampleDataL[sample] = pcmL[pcmSample + offsetL] * mix2 + sampleDataL[sample - 1] * mix1;
++        sampleDataR[sample] = pcmR[pcmSample + offsetR] * mix2 + sampleDataR[sample - 1] * mix1;
+     }
+ 
+     // Smooth backwards (this fixes the asymmetry of the beginning & end)

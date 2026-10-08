@@ -29,7 +29,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0014](#0014-legacy-colour-shading-and-mode-1-spirals) | Authored `fShader` tint amount; mode-1 spiral opacity and open shape | `BrainStain- boiling-mix2(redi jedi full carb mix).milk` |
 | [0015](#0015-negative-warp-powers-use-milkdrop-cpu-maths) | CPU-defined negative nested powers beyond authored exponent one | synthetic nested-unit, square and cube controls |
 | [0016](#0016-built-in-wave-opacity) | Mode opacity, volume amplification and faint-wave threshold | `Happening.milk`, source controls and repeated Native 4K captures |
-| [0017](#0017-line-wave-sample-cap) | Raw mode 4/6/7 sample cap within TV reference policy | source-count controls; Native 4K acceptance pending |
+| [0017](#0017-custom-wave-input-windows) | Valid centered oscilloscope windows and channel separation | source-input controls; Native 4K acceptance pending |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -211,9 +211,11 @@ The exact **Great Tulip Majesty (txtr wrap)** witness has 33 fractional-domain N
 
 MilkDrop multiplies the mode-adjusted alpha by an unbounded volume ramp, then clamps the result. Mode 3 replaces its starting alpha with the canvas coefficient times `1.3 × treb²`; mode 1 retains its `1.25` multiplier. ProjectM TV now preserves these operations and skips built-in waves below final alpha `0.004`, including the Native quad path. Existing reference-size buckets, above-reference line/dot sizing and Native geometry replay remain in use. A matched mode-2 control changes alpha from `0.4` to `0.028`. Repeated Native Standard 4K captures confirm the effect on `Happening.milk`, with no observed slowdown in that witness. See the [audit evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I17/README.md).
 
-## 0017 — Line wave sample cap
+## 0017 — Custom wave input windows
 
-Candidate 0017 caps raw mode 4/6/7 points by one third of the reference-equivalent width, following MilkDrop’s canvas-width cap. It preserves ProjectM TV’s reference-size decision, so Native Standard at 3840×2160 uses 1280×720 canvas decisions: mode 4 has 426 raw points and modes 6/7 have 240. The old mode-4 rule divided its budget by three and emitted only 160. Tiny widths retain at least two points for safe smoothing; projectM’s extended spectrum mode remains at 256. Native 4K appearance and timing acceptance is pending; see the [I19 tradeoff investigation](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I19/README.md).
+MilkDrop centers a custom oscilloscope’s requested window and shifts its two channels in opposite directions by `sep/2`. ProjectM’s prefix sampling ignored those offsets. ProjectM TV now restores the offsets when both complete windows fit the 480-sample input. Oversized requests retain upstream resampling; invalid original offsets retain the safe prefix fallback. Spectrum sampling, point counts, smoothing and Native prepared replay remain unchanged. The finite two-point ramp control changes the first input from 0 to `239/480 × .004`, and passes with signed separation and safe-bound controls. Native 4K acceptance is pending in [I08](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I08/README.md).
+
+The separate I19 source sample-cap proposal is preserved with real 4K before/expected captures, outside the shipping patch series. Brightness relative to the previous 4K output alone does not prove fidelity loss; matched authored and resolution-band comparisons remain in progress in [I19](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I19/README.md).
 
 ## Known remaining differences from MilkDrop 2
 
@@ -228,7 +230,7 @@ Candidate 0017 caps raw mode 4/6/7 points by one third of the reference-equivale
 - Some reference-scale effects remain resolution-dependent at 4K unless Native trails or diffusion compensation is active ([details](resolution.md#what-this-does-not-fix)).
 - HLSL translator edge cases: decimal→double→float double rounding and unchecked integer narrowing. Evaluator: float-width `$pi`, `$e` and `$phi` (unused in the bundled presets).
 - Textured custom shapes always wrap; MilkDrop 2 clamps them on frames where blur levels are computed.
-- Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table.
+- Line modes 4/6/7 retain projectM’s divided-budget sample policy pending I19 qualification. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table.
 - Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.
 - `echo_orient` of −1 or −3 flips horizontally in MilkDrop 2 (`n % 2` is nonzero); projectM does not flip.
 - `decay` above 1 is clamped to 1; MilkDrop 2 wraps it to nearly black.

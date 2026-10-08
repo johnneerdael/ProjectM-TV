@@ -306,7 +306,8 @@ static void TestWaveforms()
              Case{false, 480, -1000000, 480, 1.916f},
              Case{false, 512, 0, 512, 1.916f},
              Case{false, 1000000, 0, 512, 1.916f},
-             Case{false, 2, 0, 2, 0.004f},
+             // MilkDrop's centered two-point window ends at input index240.
+             Case{false, 2, 0, 2, 0.96f},
              Case{true, 512, 0, 512, 76.65f},
              Case{true, 512, 1000000, 512, 0.0f},
              Case{true, 512, -1000000, 512, 76.65f},

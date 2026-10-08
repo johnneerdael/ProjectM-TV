@@ -233,7 +233,7 @@ with no observed slowdown in that witness. No physical-TV or whole-corpus claim
 follows from those emulator measurements.
 See [audit evidence](superpowers/evidence/milkdrop-audit-repairs/I17/README.md).
 
-## Line waveform sample cap (candidate0017)
+## Line waveform sample cap (separate I19 proposal)
 
 Restore the original raw min(sample budget, width/3) rule for modes4/6/7,
 retaining TV reference-equivalent width and a two-point safety floor below
@@ -242,3 +242,16 @@ policies fail baseline and pass candidate; mode8 remains unchanged. This
 increases mode4 geometry at the active1280 canvas from160 to426 points.
 Native 4K before/expected captures and measured timing remain required before
 accepting the candidate. See [I19](superpowers/evidence/milkdrop-audit-repairs/I19/README.md).
+
+The I19 hypothesis at `6b3162f8` is preserved outside the shipping series.
+Its large brightness change relative to previous4K output is a measured
+behavior change, not a proven loss of fidelity. Compare source-corrected
+matched authored and Native resolution bands before final disposition.
+
+## Custom-wave input windows (current0017)
+
+Restore MilkDrop2’s valid centered480-sample oscilloscope windows and signed
+channel offsets before smoothing. Preserve upstream oversized resampling,
+invalid-window prefix fallbacks, spectrum, sample counts and prepared Native
+replay. Independent real-EEL controls fail before and pass after; Native4K
+acceptance remains pending. See [I08](superpowers/evidence/milkdrop-audit-repairs/I08/README.md).

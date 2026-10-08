@@ -57,10 +57,19 @@
       "sha256": "ac2bca4c32f314d76499d7110b313e93f5acb3d1810239c26f9b6a5d296c6597",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I19-line-mode-raw-sample-counts-differ-at-matched-canvases/HANDOFF.md",
       "numeric_witness": "Width256: original mode4 raw85; target160. Original modes6/7 raw85; target80. Width1024 mode4 original341; target160.\n\nRaw vertices before smoothing, matched authored canvas; not a criticism of intentional4K policy.",
-      "status": "candidate patch0017; source counts pass; Native 4K tradeoff measurement pending",
-      "confirmed_affected_originals": [],
+      "status": "deferred for owner: source-correct cap preserves authored/Native fidelity but clean4K mean cost +0.158ms /2.56%",
+      "confirmed_affected_originals": [
+        {
+          "name": "$$$ Royal - Mashup (103).milk",
+          "sha256": "08ead3db478aa81c0e29efccc0d9c38bbe69180435123531cbafbf2beb347463"
+        }
+      ],
       "evidence": "I19/README.md",
-      "protected_prior_fix": "reference-equivalent sample decisions and documented Royal103 brightness parity"
+      "protected_prior_fix": "reference-equivalent sample decisions and documented Royal103 brightness parity",
+      "native_4k_evidence": "I19/results.json",
+      "ruling": "Brightness was compared only with the previous 4K output; do not infer fidelity loss without matched authored/resolution evidence. Preserve the proposal and gather those comparisons.",
+      "resolution_band_evidence": "I19/resolution-bands.json",
+      "decision_evidence": "I19/clean4k-timings.json"
     },
     {
       "id": "I08",
@@ -70,8 +79,9 @@
       "sha256": "991d9a29a9eae94bf006606edf204f3c77d7b5132dca9b6e2adddccbc96afe9f",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I08-custom-oscilloscope-windows-are-not-centered-or-channel-separated/HANDOFF.md",
       "numeric_witness": "480-sample ramp v[k]=k/480, samples2,sep0,smoothing0, unit scales: original first value1=(239/480)*.004=.0019916667; library/predictor0. With samples4,sep2 original starts237/239; target starts0/0.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "candidate patch0017 valid centered windows; source regression passed; Native 4K pending",
+      "confirmed_affected_originals": [],
+      "evidence": "I08/README.md"
     },
     {
       "id": "I22",

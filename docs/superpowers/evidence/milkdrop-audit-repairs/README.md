@@ -7,8 +7,8 @@ Baseline: `120547f3fafe475c86ffc3392fb94389841d08f0` (15 TV patches). Both MilkD
 | ID | Finding | Lexical candidates | Status |
 |---|---|---:|---|
 | I17 | Built-in opacity replacement and thresholds differ | 5300 | Implemented 0016; focused 4K acceptance passed; review pending |
-| I19 | Line-mode raw sample counts differ at matched canvases | 3643 | Source investigated; 4K tradeoff measurement pending |
-| I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | Pending investigation |
+| I19 | Line-mode raw sample counts differ at matched canvases | 3643 | Deferred: source fidelity validated; measured +0.16ms 4K cost |
+| I08 | Custom oscilloscope windows are not centered or channel-separated | 508 | Centered-window candidate; 4K acceptance pending |
 | I22 | Custom dot waves gain interpolated points | 1875 | Pending investigation |
 | I10 | Legacy warp deformation sees the opposite physical Y argument | 1737 | Pending investigation |
 | I11 | Legacy warp physical triangle diagonal is reversed | 878 | Pending investigation |

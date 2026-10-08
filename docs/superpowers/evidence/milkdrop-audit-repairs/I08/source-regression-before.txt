@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 5: custom-wave-input-windows
+1/1 Test #5: custom-wave-input-windows ........***Failed    0.26 sec
+samples=2 sep=0 spectrum=0 replay=0 input 0 expected 0.001992 got 0.000000
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.27 sec
+
+The following tests FAILED:
+	  5 - custom-wave-input-windows (Failed)
+Errors while running CTest
