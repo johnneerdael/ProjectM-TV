@@ -467,3 +467,10 @@ while existing image-proof workers/series.json retain the frozen13-patch source
 `654815d8`. `current-series.json` identifies the added current snapshot. Do not
 relabel old captures as 14-patch certification; matched upstream/current14 image
 proof and affected-witness revalidation remain pending.
+
+Proof snapshot selection: `tools/patch-proof/{prepare,capture,verify}.py` accept
+`--series`; pass `current-series.json` consistently for the14-patch endpoint.
+Their default preserves frozen13-patch replay. Manifest digests bind new workers
+and captures to a selected source/inventory; old unbound receipts are restricted
+to the original frozen manifest. Never relabel preserved workers as a newer
+endpoint merely because upstream pin/early patch bytes match.

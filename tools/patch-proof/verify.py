@@ -9,7 +9,7 @@ import math
 from pathlib import Path
 
 from PIL import Image, ImageDraw
-from source_identity import validate_prepared_source
+from source_identity import validate_prepared_source, DEFAULT_SERIES, digest
 from rgb_payload import inspect_rgb, payload_path
 
 
@@ -53,12 +53,15 @@ def verify_texture_history(role: str, runs: list[dict]) -> None:
         raise ValueError('Texture history diagnostic contradicts its pixel/state/allocation contract')
 
 
-def verify(work: Path, ndk: Path | None = None) -> dict:
+def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERIES) -> dict:
     if ndk is None:
         raise ValueError('NDK is required for executable-to-source verification')
     result = json.loads((work / 'results.json').read_text())
-    series = json.loads((Path(__file__).resolve().parents[2] /
-                         'docs/superpowers/evidence/current-patch-proof/series.json').read_text())
+    series = json.loads(series_path.read_text())
+    snapshot = result.get('series_sha256')
+    legacy = snapshot is None and series == json.loads(DEFAULT_SERIES.read_text())
+    if not legacy and snapshot != digest(series):
+        raise ValueError('Capture snapshot differs from the selected series')
     width, height = result['dimensions']
     kind = result.get('capture_kind')
     if kind not in ('image', 'texture-journey', 'evaluator'):
@@ -170,11 +173,13 @@ def verify(work: Path, ndk: Path | None = None) -> dict:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--series', type=Path, default=DEFAULT_SERIES,
+                        help='Same series manifest selected for preparation/capture')
     parser.add_argument('--work', type=Path, required=True)
     parser.add_argument('--ndk', type=Path, required=True,
                         help='Android NDK 27.3.13750724 for independent worker rebuilds')
     args = parser.parse_args()
-    report = verify(args.work.resolve(), args.ndk.resolve())
+    report = verify(args.work.resolve(), args.ndk.resolve(), args.series.resolve())
     report['verifier_sha256'] = sha(Path(__file__).read_bytes())
     report['source_identity_sha256'] = sha(Path(__file__).with_name('source_identity.py').read_bytes())
     report['rgb_payload_sha256'] = sha(Path(__file__).with_name('rgb_payload.py').read_bytes())

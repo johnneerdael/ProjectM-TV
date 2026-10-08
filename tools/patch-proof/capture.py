@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools/core-corpus'))
 from run_corpus import session_lock
 from PIL import Image, ImageDraw
-from source_identity import validate_prepared_source
+from source_identity import validate_prepared_source, DEFAULT_SERIES, digest, _supported_roles
 from rgb_payload import inspect_rgb, compress_rgb
 
 
@@ -58,6 +58,8 @@ def remote_workspace(adb, path):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--series', type=Path, default=DEFAULT_SERIES,
+                        help='Series manifest used to prepare these workers')
     parser.add_argument('--workers', type=Path, required=True, help='prepare.py workers.json')
     parser.add_argument('--preset', type=Path, required=True)
     parser.add_argument('--textures', type=Path, required=True)
@@ -95,12 +97,14 @@ def main() -> None:
     if args.texture_journey and (not (textures / 'a').is_dir() or not (textures / 'b').is_dir()):
         parser.error('--texture-journey requires a and b directories under --textures')
     workers = json.loads(args.workers.read_text())
-    series = json.loads((ROOT / 'docs/superpowers/evidence/current-patch-proof/series.json').read_text())
-    supported_roles = {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
+    series = json.loads(args.series.read_text())
+    supported_roles = _supported_roles(series)
     for role in workers:
         if role not in supported_roles:
             raise ValueError('Unsupported worker role: ' + role)
         identity = workers[role]
+        if 'series_sha256' in identity and identity['series_sha256'] != digest(series):
+            raise ValueError('Worker snapshot differs from the selected series: ' + role)
         if identity.get('role') != role:
             raise ValueError('Worker role identity differs: ' + role)
         removed = int(role[8:]) if role.startswith('without-') else None
@@ -141,7 +145,8 @@ def main() -> None:
             (work / 'audio.f32').write_bytes(signal)
             adb('push', str(work / 'audio.f32'), remote + '/audio.f32')
             width, height = args.width, args.width * 9 // 16
-            report = {'capture_sha256': sha(Path(__file__).read_bytes()), 'capture_kind': 'evaluator' if args.evaluator_control else
+            report = {'series_sha256': digest(series),
+                      'capture_sha256': sha(Path(__file__).read_bytes()), 'capture_kind': 'evaluator' if args.evaluator_control else
                       'texture-journey' if args.texture_journey else 'image', 'device': args.device, 'user': args.user, 'features': features,
                       'fingerprint': adb('shell', 'getprop', 'ro.build.fingerprint').stdout.strip(),
                       'preset': preset.name, 'preset_sha256': sha(preset.read_bytes()),

@@ -80,8 +80,18 @@ Both also check the prepared patch inventory against the recorded series. In the
 identity, `ordered_patches` lists the complete input series for patched/ablation
 roles; `patch_removed` names the omitted patch. Upstream has an empty inventory.
 
-Preparation requires the documented 13-patch series and pins. Supported roles are
-`upstream`, `patched`, and `without-0002` through `without-0013`. Patch0001 is
+The default series remains the immutable13-patch checkpoint so older commands
+cannot silently relabel frozen captures. For the synchronized14-patch endpoint,
+pass `--series docs/superpowers/evidence/current-patch-proof/current-series.json`
+to **prepare, capture and verify**. Prepare derives its source commit and allowed
+ablation numbers from that manifest; `without-0014` is supported only there.
+Workers and captures record a canonical manifest digest, and verification rejects
+a different selected snapshot. Unbound legacy receipts are accepted only against
+the original frozen manifest. Source reconstruction still checks every actual
+patch input, engine/evaluator pin, source tree and rebuilt executable.
+
+Preparation requires the selected documented series and pins. Supported roles are
+`upstream`, `patched`, and removals of patches0002 onward in the selected manifest. Patch0001 is
 consolidated and other patches depend on it; compare its representative witnesses
 against upstream rather than claiming a standalone removal. All compiled sources,
 patch hashes, harness/dependency hashes, capture adjustments and binaries are

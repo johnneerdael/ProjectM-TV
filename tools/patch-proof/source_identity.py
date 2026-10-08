@@ -13,6 +13,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_SERIES = ROOT / 'docs/superpowers/evidence/current-patch-proof/series.json'
 sys.path.insert(0, str(ROOT / 'tools/preset-lab/src'))
 from preset_lab.build_worker import prepare_engine
 from preset_lab.identity import digest
@@ -77,8 +78,10 @@ def canonical_worker(binary: Path, output: Path, ndk: Path) -> bytes:
     return output.read_bytes()
 
 
-def _supported_roles() -> set[str]:
-    return {'upstream', 'patched'} | {f'without-{number:04d}' for number in range(2, 14)}
+def _supported_roles(series: dict) -> set[str]:
+    return {'upstream', 'patched'} | {
+        f"without-{int(entry['number']):04d}" for entry in series['patches']
+        if int(entry['number']) > 1}
 
 
 def _validate_git_pins(inputs: Path, series: dict) -> None:
@@ -172,7 +175,7 @@ def validate_prepared_source(role: str, identity: dict, series: dict,
     """Rebuild source and worker; reject role claims or executable bytes that disagree."""
     if ndk is not None:
         validate_ndk(ndk)
-    if role not in _supported_roles():
+    if role not in _supported_roles(series):
         raise ValueError('Unsupported worker role: ' + role)
     removed = int(role[8:]) if role.startswith('without-') else None
     expected_patches = [] if role == 'upstream' else series['patches']
@@ -184,9 +187,12 @@ def validate_prepared_source(role: str, identity: dict, series: dict,
     source_commit = identity.get('source_commit')
     if (not isinstance(source_commit, str) or len(source_commit) != 40 or
             any(char not in '0123456789abcdef' for char in source_commit.lower()) or
+            source_commit != series['source_commit'] or
             identity.get('engine_commit') != series['engine_commit'] or
             identity.get('evaluator_commit') != series['evaluator_commit']):
         raise ValueError('Worker source pins differ from the documented series: ' + role)
+    if 'series_sha256' in identity and identity['series_sha256'] != digest(series):
+        raise ValueError('Worker snapshot identity differs from the selected series: ' + role)
 
     source_manifest = Path(identity['source_hashes'])
     role_dir = source_manifest.parent

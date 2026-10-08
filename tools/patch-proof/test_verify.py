@@ -74,6 +74,27 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'NDK is required'):
             VERIFY.verify(self.work)
 
+    def test_rejects_capture_bound_to_other_snapshot(self):
+        self.result['series_sha256'] = '0' * 64
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'snapshot'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_accepts_current_snapshot_and_passes_it_to_source_reconstruction(self):
+        series_path = Path(__file__).resolve().parents[2] / 'docs/superpowers/evidence/current-patch-proof/current-series.json'
+        selected = json.loads(series_path.read_text())
+        self.result['series_sha256'] = VERIFY.digest(selected)
+        self.result['roles']['patched']['worker']['ordered_patches'] = selected['patches']
+        self.save()
+        with patch.object(VERIFY, 'validate_prepared_source') as validate:
+            self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk', series_path)['successful_roles'], ['patched'])
+            self.assertEqual(validate.call_args.args[2], selected)
+
+    def test_rejects_missing_snapshot_binding_when_current_manifest_selected(self):
+        series = Path(__file__).resolve().parents[2] / 'docs/superpowers/evidence/current-patch-proof/current-series.json'
+        with self.assertRaisesRegex(ValueError, 'snapshot'):
+            VERIFY.verify(self.work, self.root / 'ndk', series)
+
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
 

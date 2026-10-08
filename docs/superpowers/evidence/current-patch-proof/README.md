@@ -11,8 +11,9 @@ Main `41ec3fc1`/PR #57 adds patch0014 after this capture checkpoint. The
 [current14-patch inventory](current-series.json) and main report now include it.
 This folder's original `series.json`, workers, frames and verification receipts
 remain tied to source `654815d8` and its 13 patches. They are preserved evidence,
-not relabeled certification of the expanded endpoint. Matched current14 TV
-captures and revalidation of affected witnesses remain pending.
+not relabeled certification of the expanded endpoint. The [Hurricane comparison](components/legacy14-hurricane/README.md) now provides
+matched current14 TV proof for0014. Revalidation of affected earlier witnesses
+remains pending.
 
 ## Comparison contract
 

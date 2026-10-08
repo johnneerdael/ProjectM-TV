@@ -6,11 +6,11 @@ That pin reports CMake version 4.2.0 and is an **unreleased development snapshot
 The evaluator pin is `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a`.
 Current series source: main `41ec3fc1` (PR #57), 2026-10-08. The
 [current manifest](superpowers/evidence/current-patch-proof/current-series.json)
-records all 14 patch hashes. Existing GPU figures were produced from ProjectM TV
+records all 14 patch hashes. Earlier GPU figures were produced from ProjectM TV
 `654815d8`, the 13-patch snapshot, with its immutable
 [capture manifest](superpowers/evidence/current-patch-proof/series.json). Their
 identities remain unchanged; they do not certify the newly added 0014 or the full
-14-patch endpoint. Fresh current-series revalidation is pending.
+14-patch endpoint. The new 0014 Hurricane comparison uses that current snapshot; revalidation of affected earlier witnesses remains pending.
 Observed upstream master is `e98fca85e57802d27a6d11499642de2a1d5e994e`. Its only
 change from the app pin is the GLES3.0 admission adjustment used in these captures;
 [byte-verified equivalence](superpowers/evidence/current-patch-proof/upstream-master-equivalence.json)
@@ -30,7 +30,7 @@ differences and code-level explanations. The linked evidence folders provide
 full-resolution frames and source/binary/payload verification; they are supporting
 records, not additional patch assessments that readers must assemble themselves.
 
-All 14 current patch sections are present; 0014's matched TV proof is pending. The retained-component expansion below
+All 14 current patch sections are present. Patch0014 now has a matched upstream/control/current TV comparison; affected earlier witnesses still need current-endpoint revalidation. The retained-component expansion below
 is still in progress; an existing patch-level image does not prove every component
 inside consolidated 0001–0003. Status is recorded here rather than presenting
 pending components as completed contributions.
@@ -51,7 +51,7 @@ pending components as completed contributions.
 | [Local flat-array layout](#local-flat-array-layout) | Published: labeled diagnostic, red fallback versus authored gradient. |
 | [Initialized writable uniform-bank copies](#initialized-writable-uniform-bank-copies) | Published: nonzero-component control, actual RGB `(255,0,64)` versus expected `(255,204,64)`. |
 | [Compound uniform writes shared with helpers](#compound-uniform-writes-shared-with-helpers) | Published: unchanged Martin original's star/ray pattern at matched source time. |
-| [Legacy tint and mode-1 waveform (0014)](#0014-legacy-tint-and-mode-1-waveform) | Added from current main: source/GL controls and AAR comparison retained; matched upstream/current14 TV proof pending. |
+| [Legacy tint and mode-1 waveform (0014)](#0014-legacy-tint-and-mode-1-waveform) | Published: unchanged Hurricane, upstream/current-minus0014/current14 TV proof and aligned crop; independent component controls in progress. |
 | Other 0002 language/numeric components and 0003 thread isolation | Existing patch-level images/numerical controls are retained; the expanded component matrix tracks remaining activation coverage. |
 
 The [component capture matrix](superpowers/plans/2026-10-08-retained-component-proof.md)
@@ -758,13 +758,26 @@ separates corrected suppression from the original preset's remaining sparse
 output and records independently failing GL controls. No universal brightness,
 Windows appearance or performance claim is made.
 
-**Evidence status:** main PR #57 adds this patch after the 13-patch GPU snapshot
-used above. Its linked investigation compares the previous ProjectM TV AAR with
-a corrected research AAR, and supplies independent source/GL controls. Those
-captures are not upstream-master-versus-current TV image proof. A matched upstream,
-current-minus0014 and current14-patch TV capture is still required for this page.
-The first-frame black output in the original BrainStain preset is expected from
-its authored echo crop; the fix does not promise to make every dark frame bright.
+![Current14-patch GPU proof: unchanged Hurricane with single-patch control](superpowers/evidence/current-patch-proof/components/legacy14-hurricane/comparison.png)
+
+**What to look for:** unchanged `Geiss - Hurricane (1-02 Version).milk` has an
+unwanted green cast in upstream and current-minus0014. With0014 its trails are
+cooler and nearly neutral, and the spiral traces change. An aligned3× close-up
+preserves the source pixels and brightness. The preset sets `fShader=0`, mode1
+and wave alpha0.3: ours now honors disabled tint, uses0.375 alpha before clamping,
+and removes the extra closing line segment. This comparison shows the combined
+patch, not independent per-pixel attribution to each subcomponent.
+
+Upstream/control RGB MAE at119 is0.000321; control/current is9.386165. Each role
+has two exact120-frame repeats, zero GL errors and no shader warnings/errors.
+[Current-source, rebuilt-binary and full-stream verification](superpowers/evidence/current-patch-proof/components/legacy14-hurricane/README.md)
+uses the synchronized14-patch source `41ec3fc1`. Earlier13-patch images retain
+their original identities; affected-witness revalidation remains pending.
+
+The linked BrainStain investigation is supporting previous-AAR/corrected-AAR and
+source/GL evidence, distinct from the new upstream/control/current TV comparison.
+Its original first-frame black output follows the authored echo crop; the fix
+does not promise to make every dark frame bright.
 
 
 ## Contribution order and acceptance boundaries

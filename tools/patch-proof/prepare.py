@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / 'tools/preset-lab/src'))
 sys.path.insert(0, str(ROOT / 'tools/core-corpus'))
 from preset_lab.build_worker import prepare_engine
 from build_core_aars import checkout_pinned_engine
-from source_identity import build_patch_worker, prepare_harness
+from source_identity import build_patch_worker, prepare_harness, DEFAULT_SERIES, digest, _supported_roles
 
 
 def sha(path: Path) -> str:
@@ -45,24 +45,28 @@ def change(path: Path, old: str, new: str) -> str:
 
 
 def main() -> None:
-    series = json.loads((EVIDENCE / 'series.json').read_text())
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--series', type=Path, default=DEFAULT_SERIES,
+                        help='Explicit series manifest; default preserves the frozen 13-patch checkpoint')
     parser.add_argument('--cache-repo', type=Path, required=True,
                         help='Checkout containing the initialized projectM/evaluator git caches')
-    parser.add_argument('--source', default=series['source_commit'])
+    parser.add_argument('--source', help='Must match the selected series source commit')
     parser.add_argument('--ndk', type=Path, required=True)
     parser.add_argument('--work', type=Path, required=True)
     parser.add_argument('--roles', nargs='+', default=['upstream', 'patched'],
                         help='upstream, patched, or without-NNNN (one current patch removed)')
     parser.add_argument('--jobs', type=int, default=4)
     args = parser.parse_args()
+    series = json.loads(args.series.read_text())
     if args.jobs < 1:
         parser.error('--jobs must be positive')
     work = args.work.resolve()
     work.mkdir(parents=True, exist_ok=False)
     cache = args.cache_repo.resolve()
-    source = subprocess.check_output(['git', '-C', str(cache), 'rev-parse', args.source],
+    source = subprocess.check_output(['git', '-C', str(cache), 'rev-parse', args.source or series['source_commit']],
                                      text=True).strip()
+    if source != series['source_commit']:
+        raise ValueError('Source commit differs from the selected snapshot')
     patches = []
     for entry in series['patches']:
         data = subprocess.check_output(['git', '-C', str(cache), 'show',
@@ -77,9 +81,8 @@ def main() -> None:
     identities = {}
     for role in args.roles:
         number = int(role[8:]) if role.startswith('without-') else None
-        if role not in ('upstream', 'patched') and not (
-                number is not None and role == f'without-{number:04d}' and 2 <= number <= 13):
-            raise ValueError('Use upstream, patched, or without-0002 through without-0013')
+        if role not in _supported_roles(series):
+            raise ValueError('Use upstream, patched, or an ablation in the selected series')
         dest = work / role
         repo = dest / 'inputs'
         (repo / 'third_party').mkdir(parents=True)
@@ -112,7 +115,8 @@ def main() -> None:
                    for p in sorted(compiled_source.rglob('*')) if p.is_file()}
         write(dest / 'source-hashes.json', sources)
         (dest / 'capture-adjustments.diff').write_text(''.join(transforms))
-        identities[role] = {'role': role, 'source_commit': source, 'engine_commit': pin,
+        identities[role] = {'role': role, 'series_sha256': digest(series),
+                            'source_commit': source, 'engine_commit': pin,
                             'evaluator_commit': evaluator, 'parent': asdict(identity),
                             'patch_removed': number, 'ordered_patches': [p[0] for p in patches]
                             if role != 'upstream' else [], 'binary': str(binary),

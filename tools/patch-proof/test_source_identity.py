@@ -111,6 +111,24 @@ index 1111111..2222222 100644
             fixture = self.make_fixture(Path(temporary), 'patched')
             self.validate(fixture)
 
+    def test_rejects_source_commit_outside_selected_snapshot(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self.make_fixture(Path(temporary), 'patched')
+            fixture[1]['source_commit'] = 'b' * 40
+            with self.assertRaisesRegex(ValueError, 'source pins'):
+                self.validate(fixture)
+
+    def test_rejects_wrong_worker_snapshot_digest(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = self.make_fixture(Path(temporary), 'patched')
+            fixture[1]['series_sha256'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'snapshot identity'):
+                self.validate(fixture)
+
+    def test_supports_selected_snapshot_ablation_numbers(self):
+        self.assertIn('without-0014', SOURCE_IDENTITY._supported_roles({'patches': [{'number': '0014'}]}))
+        self.assertNotIn('without-0014', SOURCE_IDENTITY._supported_roles({'patches': [{'number': '0013'}]}))
+
     def test_rejects_patched_claim_for_source_with_patch_removed(self):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = self.make_fixture(Path(temporary), 'without-0010')

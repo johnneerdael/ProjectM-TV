@@ -117,3 +117,10 @@ on the owned GPU TV, with unchanged original and independent activation controls
 Revalidate affected earlier legacy/mode-1 witnesses before claiming the14-patch
 endpoint. The existing BrainStain AAR/GL evidence is supporting research, not the
 requested upstream/current TV comparison. Final gates apply to the expanded scope.
+
+Current0014 progress: explicit manifest selection and source/capture snapshot binding
+are implemented. The unchanged Hurricane upstream/control/current TV comparison
+is source/binary/full-stream verified and published on the main page. Generated
+hue and mode-1 controls are being verified separately; the inactive initial hue
+fixture remains excluded. Affected earlier legacy/mode-1 witnesses still need
+current-endpoint revalidation; the retained23-component matrix is not complete.
