@@ -1,0 +1,13 @@
+{
+  "original": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+  "original_sha256": "ec4a844e75a8c8a8d4a41890495841b670960186988f29797799929a3b5d34d8",
+  "oracle_sha256": "ed26beff5389aa759b60445174404aff4049420ab5357de769d74fe4eab0a4be",
+  "changes": [
+    {
+      "line": 280,
+      "before": "warp_15=`    noise2 += noise3*vol;",
+      "after": "warp_15=`    noise2 += noise3*(treb*0.3333);"
+    }
+  ],
+  "scope": "full current-native preset surrogate restoring only original shader comma-expression volume/attenuated scalars; not Windows renderer or whole-original audio algorithm"
+}

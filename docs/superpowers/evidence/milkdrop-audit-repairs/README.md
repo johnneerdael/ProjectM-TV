@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20, I22 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Thirteen other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20, I22 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Eight other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -77,3 +77,9 @@ I01 retained casing policy is now qualified: production parser controls pass;40 
 I28 retained blur safety correction is qualified: production numeric/GL normal and sanitizer controls pass;24Native4K runs repeat exactly; equal/near/reversed ranges match explicit-expanded siblings and unsupportedfinite inputs match default siblings. Originalcollapsed storage has no defined finite image oracle. Two retained-policy IDs(I01/I28), five deferredIDs,12repairedIDs and14unfinishedIDs remain.
 
 I07 retained stereo policy is qualified: actualPCM commonmono480frames/576tails hasexactaveraged-leftcombinationinvariance; controlledstereo step/swap/right-only executesanddiffers. SixNative4Kruns/3repeatsqualifyexplicitexecutedstagecoefficientsandunchangedSjadohmono preservation. Three retained-policyIDs(I01/I07/I28), five deferredIDs,12repairedIDs and13unfinishedIDs remain.
+
+I21 retained16-modepolicy is qualified with actualGLselection/replay, matchedARM64sourceproducer576tail/.75smoothing and38Native4K runs(includingblue marker). FourretainedpolicyIDs,5deferredIDs,12repairedIDs and12unfinishedIDs remain. No newenginepatch.
+
+I25/I30 retainedfloatpolicy owner decisions are qualified: realgeometry/displayattributes/pass/replay andvalidcompleted-grid sourcebyte replay pass;48Native4Kruns repeat. Sixgeometrypairs differ;gamma pairs identical;echo uniform-white current255vslabelledfinal-gain254. Androidbyte-grid/dynamic-double followup boundaries explicit. SixretainedpolicyIDs,5deferredIDs,12repairedIDs and10unfinishedIDs remain. No newenginepatch.
+
+I26/I27 correctedinputpolicies qualified:actualcompileduniform/source/PCM/injection tests pass;34Native4K jobs repeat. MutableEELvol cannotoverwrite shaderaudio, miplive matches1280x720reference, Cope sourcecomma-scalar sibling visiblydiffers(maxMAE30.550332). EightretainedpolicyIDs,5deferredIDs,12repairedIDs and8unfinishedIDs remain.

@@ -1,5 +1,5 @@
 {
-  "status": "capture stage passed; actual colour/grid producer controls pending",
+  "status": "retained float geometry/display policy qualified; byte-exact compatibility target-specific followup documented",
   "runs": 48,
   "frames_per_run": 480,
   "selected_captures_per_run": 8,
@@ -1086,6 +1086,21 @@
           "RGB_MAE": 0.0,
           "different_channels": 0
         }
+      ]
+    },
+    {
+      "case": "echo-half",
+      "scope": "uniform-white final-gain surrogate only; different pass path, no per-pass/cost/Windows oracle",
+      "frame239_RGB_MAE": 1.0,
+      "float_current_mean_BGR": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "uniform_gain_oracle_mean_BGR": [
+        254.0,
+        254.0,
+        254.0
       ]
     }
   ]

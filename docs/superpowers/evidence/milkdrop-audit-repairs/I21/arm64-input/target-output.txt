@@ -1,0 +1,1 @@
+ARM64 source CPU producer:tail=576 spectrum=512 selected_finite=1 no_context_no_draw=true

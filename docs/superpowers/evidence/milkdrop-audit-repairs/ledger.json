@@ -398,10 +398,14 @@
       "sha256": "20eba9dde7a2eefe9a2cb89844a6e1d4b4cd77454308ca15d1e4378a9f0e6c6c",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I25-shape-custom-wave-colour-fractions-survive-original-byte-truncation/HANDOFF.md",
       "numeric_witness": "Requested channel.5: original127/255=.4980392; target.5. Requested.123456: original31/255=.1215686; targetapproximately.123456.\n\nAttribute conversion before interpolation/blending, not final framebuffer storage.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained float precision; complete owner decision with actual production controls and repeated Native4K images",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "retain float precision policy; document original byte boundary"
+      "recommendation": "retain float precision policy; document original byte boundary",
+      "evidence": "I25-I30/OWNER-DECISION.md",
+      "native_evidence": "I25-I30/native-results.json",
+      "policy": "retain geometry/display fractions; future byte-exact option requires distinct target instrumentation and performance gates",
+      "limits": "Composite byte replay is source CGL64x64; Native echo surrogate is uniform-white final-gain only. Dynamic source doubles/Android byte-grid replay are future compatibility gates, not claimed observations."
     },
     {
       "id": "I30",
@@ -411,10 +415,14 @@
       "sha256": "494c07155443e315e8d215b213b0b5bc27e311bd6e025c5d6380aaf03f1ab0a3",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I30-display-diffuse-colours-retain-floats-instead-of-original-byte-packing/HANDOFF.md",
       "numeric_witness": "Legacy white tint,fShader0,echo0,gamma.75: original uploads191/255=.749019608; target.75. Shader-composite vertex diffuse has the same original byte boundary.\n\nProducer attribute difference; final pixel difference needs controlled rendering.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained float precision; complete owner decision with actual production controls and repeated Native4K images",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "defer byte-exact diffuse policy with separate producer evidence"
+      "recommendation": "defer byte-exact diffuse policy with separate producer evidence",
+      "evidence": "I25-I30/OWNER-DECISION.md",
+      "native_evidence": "I25-I30/native-results.json",
+      "policy": "retain geometry/display fractions; future byte-exact option requires distinct target instrumentation and performance gates",
+      "limits": "Composite byte replay is source CGL64x64; Native echo surrogate is uniform-white final-gain only. Dynamic source doubles/Android byte-grid replay are future compatibility gates, not claimed observations."
     },
     {
       "id": "I29",
@@ -538,10 +546,14 @@
       "sha256": "b1b9968d7543348317341d7edd308d98df30e8858aed0e05e1b41d428bca67e7",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I21-extra-waveform-modes-change-original-modulo-aliases/HANDOFF.md",
       "numeric_witness": "Evaluated mode8: original modulo8\u2192Circle; target modulo16\u2192SpectrumLine. Mode9: original Spiral; target Wave9.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained 16-mode extension; complete owner packet with production GL, matched ARM64 input and repeated Native4K images",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "retain 16-mode extension; two visible static mode8 candidates"
+      "recommendation": "retain 16-mode extension; two visible static mode8 candidates",
+      "evidence": "I21/README.md",
+      "native_evidence": "I21/native-results.json",
+      "policy": "retain signed truncated modulo16 factory and invalid/recovery guards; no patch",
+      "limits": "Native black images alone do not prove exact program selection; separate blue marker/CGL/target-producer roles disclosed. No hidden JNI array or Windows observation."
     },
     {
       "id": "I26",
@@ -551,10 +563,14 @@
       "sha256": "e07732e75f09bc29ae76a7665a2ded73f11083696ccce3ae9ec82d22e631f92a",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I26-shader-vol-vol-att-differ-from-original-comma-expression/HANDOFF.md",
       "numeric_witness": "Bands(1,2,3): original0.3333*(bass,mid,treb)=.9998999834; target.333*(bass+mid+treb)=1.9980000257.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained upstream corrected shader input; complete owner packet with actual compile/uniform controls and repeated Native4K images",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "retain corrected all-band volume; equal bands are still affected by original typo"
+      "recommendation": "retain corrected all-band volume; equal bands are still affected by original typo",
+      "evidence": "I26-I27/OWNER-DECISION.md",
+      "native_evidence": "I26-I27/native-results.json",
+      "policy": "retain immutable all-band volume and height-derived mip/reference reporting; no patch",
+      "limits": "Source models/Cope scalar surrogate are current pipeline, not whole Windows engine; no stock mip witness or affected census."
     },
     {
       "id": "I27",
@@ -564,10 +580,14 @@
       "sha256": "b2219f9243418d08b8ccd04db108ba078843f91212dcf06e12ae3fc1ea710a78",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I27-mip-y-uses-height-rather-than-original-repeated-width/HANDOFF.md",
       "numeric_witness": "256x144: original mip tuple(8,8,8); targetapproximately(8,7.169925,7.584963).",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained upstream corrected shader input; complete owner packet with actual compile/uniform controls and repeated Native4K images",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "retain height-derived mip; no bundled source references including mip_avg"
+      "recommendation": "retain height-derived mip; no bundled source references including mip_avg",
+      "evidence": "I26-I27/OWNER-DECISION.md",
+      "native_evidence": "I26-I27/native-results.json",
+      "policy": "retain immutable all-band volume and height-derived mip/reference reporting; no patch",
+      "limits": "Source models/Cope scalar surrogate are current pipeline, not whole Windows engine; no stock mip witness or affected census."
     },
     {
       "id": "I28",

@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditshaderpolicy",
+  "pid": 7251,
+  "job": {
+    "expectedPresetCount": 9619,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/audio.u8",
+    "preset": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "63134958ff4e0b6fdbfe0ca705ea13b9af6937b409c5c67bda0d4d3b77618d92",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains the tail bounded by projectm_pcm_get_max_samples()",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "863cce684775c8790ea27095e378062b65bf278dd98b4a0625eeb9f90f4f3bad",
+      "pngBytes": 9385741,
+      "pngSha256": "680d1d8eb798181e8d8f33f04022fb82126185676712828a6b9925013a67b00b",
+      "rgbMean": [
+        76.63376965181327,
+        20.93123577353395,
+        49.25615282600309
+      ],
+      "exactBlackFraction": 0.010086684992283951
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "6383484c6cbb7b657659d51f45232c3717e5695ffa7698d5ac5533cf328e59f2",
+      "pngBytes": 9124341,
+      "pngSha256": "f5accf1f6b322b8e9bcfab9b25309de00feace8aa7febafcb090e0c6facd73cc",
+      "rgbMean": [
+        76.79429735725309,
+        21.02973259066358,
+        51.657774040316355
+      ],
+      "exactBlackFraction": 0.010135392554012346
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "e05afa7b53a09a297ac224a11dfae75cd1c065b288408301bf81f202eb130d92",
+      "pngBytes": 8885067,
+      "pngSha256": "27612aaeee352d9563ff0f119256422975fffb3f5ce2ba6744bb56811f299575",
+      "rgbMean": [
+        75.87972680362654,
+        21.453835841049383,
+        50.5256160783179
+      ],
+      "exactBlackFraction": 0.009827353395061729
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "8f7386bd5c88d70caca654b4f150f94e0d6137052b06fce52cb9bb5f46bce069",
+      "pngBytes": 10133005,
+      "pngSha256": "4222be3854577434e244af82e921f6040c4a4ea617b141be2ef738ea5c209179",
+      "rgbMean": [
+        79.59312921971451,
+        20.24136332947531,
+        51.78105408468364
+      ],
+      "exactBlackFraction": 0.009927782600308643
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "79f2111edf98e1b9e001ce3de19206415dd1372ca86f4fca2098716b21220819",
+      "pngBytes": 9281589,
+      "pngSha256": "358b3926dfd43e17cd006c1a513c290b7714fa117762374d67a4a44d0d4d6482",
+      "rgbMean": [
+        75.29058907214507,
+        20.000884211033952,
+        52.014052734375
+      ],
+      "exactBlackFraction": 0.008830897955246914
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "500c1a60d21c9b3ff007d64d93f3a64ef9c9411cd304998264edd548a5993a1c",
+      "pngBytes": 9261488,
+      "pngSha256": "a14b45874232f992b556cf281f5729d73096a0ef1ef629129214907d44e92908",
+      "rgbMean": [
+        78.96607409818672,
+        20.420525655864196,
+        52.54706766010803
+      ],
+      "exactBlackFraction": 0.00792896412037037
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "78a4d4330fdb28d59d5160f2045e81175fd7776353ac5615b8aae5ee2cb0a0c0",
+      "pngBytes": 9322067,
+      "pngSha256": "89e891d12782b7b4e03cb44978457cc363e27afdbcce21539b3fb5a901e8a3bb",
+      "rgbMean": [
+        73.53791160300926,
+        20.556485580632717,
+        52.408718653549386
+      ],
+      "exactBlackFraction": 0.007981047453703703
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditshaderpolicy\/files\/native-trails\/shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "ccd5e6448fafe379f42d68bb09214e7e001fe0db373e26a380dff53a4a0c52a8",
+      "pngBytes": 9141352,
+      "pngSha256": "1c53f0aa671d4269b4f9b5d9343f9338523b1d996e157a6a0cb77a3cd8b07dfa",
+      "rgbMean": [
+        71.98327775366512,
+        19.993971836419753,
+        53.93841760706019
+      ],
+      "exactBlackFraction": 0.008421465084876543
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 45168852,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 211,
+      "elapsedRealtimeMs": 45181521,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9619,
+  "indexSha256": "bd900837fa59cd4f05376daf913efa32c5bee35fe31b804a9fb18dd23a4054c4",
+  "presetAssetSha256": "ec4a844e75a8c8a8d4a41890495841b670960186988f29797799929a3b5d34d8",
+  "forcedPresetPrefix": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 15,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43975,
+  "framesRendered": 480,
+  "renderWallDurationMs": 24814,
+  "pssAfterFramesKB": 72536,
+  "serializedFrameMeanMs": 1.908173722222221,
+  "serializedFrameP90Ms": 2.180541,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 25141
+}

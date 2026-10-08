@@ -1,5 +1,5 @@
 {
-  "status": "capture stage passed; actual producer finiteness/compile qualification pending",
+  "status": "retained 16-mode policy qualified with actual production controls and matched ARM64 source input; no new patch",
   "runs": 36,
   "frames_per_run": 480,
   "selected_captures_per_run": 8,

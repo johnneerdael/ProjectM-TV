@@ -1,0 +1,482 @@
+{
+  "status": "retained corrected shader volume/mip policies qualified; no new patch",
+  "runs": 30,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 15,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "shaderpolicy-$$$-Royal---Mashup-(23)-current-0",
+      "preset": "$$$ Royal - Mashup (23).milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "eb7f9d9b09d64b069c5c09e39aa671ead0035af72ad6da029b18d2a6b9e16369",
+        "01e724daa027e406a481791d0f50db6651dad8661a52fba4cfd2733dc72d7111",
+        "e352895d7be60e66947b9a9ec04e0fae547ef9d894bd52022d912f372a5d08b6",
+        "96c665c48ebb0804829e6267faa765f4316badc5048d796a379a57f53ac60aa6",
+        "820f586e1da6b753d36f5da0e3fe8dabe23056c083aa50c879e13342be709e9a",
+        "8cd64f07f3fa00c5cf375c08bc557c6117a43f4bd452e3ca2dc11a2a1eaae2aa",
+        "6e8bd2ac57874b380c9ea0700369cc38efc54e2eedb2df7a0673b698d818e293",
+        "d81c857b081b91c71274ec15e6568c9ac20619ee33469c72bcb2120e357e90b0"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-$$$-Royal---Mashup-(23)-current-1",
+      "preset": "$$$ Royal - Mashup (23).milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "eb7f9d9b09d64b069c5c09e39aa671ead0035af72ad6da029b18d2a6b9e16369",
+        "01e724daa027e406a481791d0f50db6651dad8661a52fba4cfd2733dc72d7111",
+        "e352895d7be60e66947b9a9ec04e0fae547ef9d894bd52022d912f372a5d08b6",
+        "96c665c48ebb0804829e6267faa765f4316badc5048d796a379a57f53ac60aa6",
+        "820f586e1da6b753d36f5da0e3fe8dabe23056c083aa50c879e13342be709e9a",
+        "8cd64f07f3fa00c5cf375c08bc557c6117a43f4bd452e3ca2dc11a2a1eaae2aa",
+        "6e8bd2ac57874b380c9ea0700369cc38efc54e2eedb2df7a0673b698d818e293",
+        "d81c857b081b91c71274ec15e6568c9ac20619ee33469c72bcb2120e357e90b0"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-0",
+      "preset": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "863cce684775c8790ea27095e378062b65bf278dd98b4a0625eeb9f90f4f3bad",
+        "6383484c6cbb7b657659d51f45232c3717e5695ffa7698d5ac5533cf328e59f2",
+        "e05afa7b53a09a297ac224a11dfae75cd1c065b288408301bf81f202eb130d92",
+        "8f7386bd5c88d70caca654b4f150f94e0d6137052b06fce52cb9bb5f46bce069",
+        "79f2111edf98e1b9e001ce3de19206415dd1372ca86f4fca2098716b21220819",
+        "500c1a60d21c9b3ff007d64d93f3a64ef9c9411cd304998264edd548a5993a1c",
+        "78a4d4330fdb28d59d5160f2045e81175fd7776353ac5615b8aae5ee2cb0a0c0",
+        "ccd5e6448fafe379f42d68bb09214e7e001fe0db373e26a380dff53a4a0c52a8"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-Cope---The-Neverending-Explosion-of-Red-Liquid-Fire-current-1",
+      "preset": "Cope - The Neverending Explosion of Red Liquid Fire.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "863cce684775c8790ea27095e378062b65bf278dd98b4a0625eeb9f90f4f3bad",
+        "6383484c6cbb7b657659d51f45232c3717e5695ffa7698d5ac5533cf328e59f2",
+        "e05afa7b53a09a297ac224a11dfae75cd1c065b288408301bf81f202eb130d92",
+        "8f7386bd5c88d70caca654b4f150f94e0d6137052b06fce52cb9bb5f46bce069",
+        "79f2111edf98e1b9e001ce3de19206415dd1372ca86f4fca2098716b21220819",
+        "500c1a60d21c9b3ff007d64d93f3a64ef9c9411cd304998264edd548a5993a1c",
+        "78a4d4330fdb28d59d5160f2045e81175fd7776353ac5615b8aae5ee2cb0a0c0",
+        "ccd5e6448fafe379f42d68bb09214e7e001fe0db373e26a380dff53a4a0c52a8"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-comma-oracle-current-0",
+      "preset": "audit shader I26-comma-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-comma-oracle-current-1",
+      "preset": "audit shader I26-comma-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e",
+        "0c9e73fd13f2156ec836570f0286057847e234b0149fcbbf5b72d13478ea6b5e"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-current-oracle-current-0",
+      "preset": "audit shader I26-current-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-current-oracle-current-1",
+      "preset": "audit shader I26-current-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769",
+        "98b48ea9fa9b407ecb26fa57ea7264d470c1468a39e5f9d3fd348754bd70e769"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-direct-attenuated-current-0",
+      "preset": "audit shader I26-direct-attenuated.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "587c348dd314dd7659eabfc3889c83a3498343e5eb4b66f1530650b6d666ba24",
+        "da722108f67a2f521496aad49f9567b8176677e678400fed81b4c4cffd881e7d",
+        "6faff7b723b8bd3e32592ca6dce995d185e3b6eea608c7d26f96470f71039426",
+        "81d2347e28c0e068403acfa061b74a9f3e7104539ffda523f1dd3b3c9d4d1bac",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89",
+        "2e6d0c2f83123051eb4817ad6ac62748b42c2aed83362a2ecb187ccc3a3f04dd",
+        "2ed48bed88e717a2c39d21bc3719632df80dec3859ecce463f17e94d69c14d64",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-direct-attenuated-current-1",
+      "preset": "audit shader I26-direct-attenuated.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "587c348dd314dd7659eabfc3889c83a3498343e5eb4b66f1530650b6d666ba24",
+        "da722108f67a2f521496aad49f9567b8176677e678400fed81b4c4cffd881e7d",
+        "6faff7b723b8bd3e32592ca6dce995d185e3b6eea608c7d26f96470f71039426",
+        "81d2347e28c0e068403acfa061b74a9f3e7104539ffda523f1dd3b3c9d4d1bac",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89",
+        "2e6d0c2f83123051eb4817ad6ac62748b42c2aed83362a2ecb187ccc3a3f04dd",
+        "2ed48bed88e717a2c39d21bc3719632df80dec3859ecce463f17e94d69c14d64",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-direct-bands-current-0",
+      "preset": "audit shader I26-direct-bands.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "5ee7a9dda20cd201c4df3df6a8136087f71a93d3727f8c16d1ca7987d501a860",
+        "abe6bb52bd91f2427182ae351e9f811a6f9f35afaa9507f7e10799694d742052",
+        "1a475f9ac8ca69b61c581abad3fd3d6781357526789142d752eb29687ccef9fb",
+        "019af16baa88cd1c4e10ad9ab430d60c61b946b381e1bebb41caed4aab24d4a3",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89",
+        "a67df137c0473585770b758d2b8978d3ccefdb2664836dfbf32d3964d6607520",
+        "8687429ee601eec529f5e77c617641f4c22a8ed381a16df6ed215c7712d97821",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-direct-bands-current-1",
+      "preset": "audit shader I26-direct-bands.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "5ee7a9dda20cd201c4df3df6a8136087f71a93d3727f8c16d1ca7987d501a860",
+        "abe6bb52bd91f2427182ae351e9f811a6f9f35afaa9507f7e10799694d742052",
+        "1a475f9ac8ca69b61c581abad3fd3d6781357526789142d752eb29687ccef9fb",
+        "019af16baa88cd1c4e10ad9ab430d60c61b946b381e1bebb41caed4aab24d4a3",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89",
+        "a67df137c0473585770b758d2b8978d3ccefdb2664836dfbf32d3964d6607520",
+        "8687429ee601eec529f5e77c617641f4c22a8ed381a16df6ed215c7712d97821",
+        "25a43ce3b012ef49720967e6a4af7fcfa77a66f66c7a1a8def4abf4015305c89"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-live-current-0",
+      "preset": "audit shader I26-live.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "73b98f9477263ae3d60cfabd6570f5b1dac89fe1a89edaeb266d198b80b69d24",
+        "43aa8aec2bbdcb522061ec048bebe65d91df92114d05aa3763e1eb54cc152615",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "f3ec1ecc19704288fdcc75ac812c5b1c16f3b8b8e3525465451236182f84054e",
+        "69cb756a69610d4304b185c1d25acf8a38168b1b344c601708be54cb5440a571",
+        "742ec4d6bf2f1ffa297467fb35bfb8b9a3ab8dafad9c66b368d6f661b38887b0",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "b26d8287034cad256f577c8a35f836a3345b683ac7ac269b396bae69119ae1d7"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-live-current-1",
+      "preset": "audit shader I26-live.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "73b98f9477263ae3d60cfabd6570f5b1dac89fe1a89edaeb266d198b80b69d24",
+        "43aa8aec2bbdcb522061ec048bebe65d91df92114d05aa3763e1eb54cc152615",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "f3ec1ecc19704288fdcc75ac812c5b1c16f3b8b8e3525465451236182f84054e",
+        "69cb756a69610d4304b185c1d25acf8a38168b1b344c601708be54cb5440a571",
+        "742ec4d6bf2f1ffa297467fb35bfb8b9a3ab8dafad9c66b368d6f661b38887b0",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "b26d8287034cad256f577c8a35f836a3345b683ac7ac269b396bae69119ae1d7"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-mutable-eel-live-current-0",
+      "preset": "audit shader I26-mutable-eel-live.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "73b98f9477263ae3d60cfabd6570f5b1dac89fe1a89edaeb266d198b80b69d24",
+        "43aa8aec2bbdcb522061ec048bebe65d91df92114d05aa3763e1eb54cc152615",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "f3ec1ecc19704288fdcc75ac812c5b1c16f3b8b8e3525465451236182f84054e",
+        "69cb756a69610d4304b185c1d25acf8a38168b1b344c601708be54cb5440a571",
+        "742ec4d6bf2f1ffa297467fb35bfb8b9a3ab8dafad9c66b368d6f661b38887b0",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "b26d8287034cad256f577c8a35f836a3345b683ac7ac269b396bae69119ae1d7"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I26-mutable-eel-live-current-1",
+      "preset": "audit shader I26-mutable-eel-live.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "73b98f9477263ae3d60cfabd6570f5b1dac89fe1a89edaeb266d198b80b69d24",
+        "43aa8aec2bbdcb522061ec048bebe65d91df92114d05aa3763e1eb54cc152615",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "f3ec1ecc19704288fdcc75ac812c5b1c16f3b8b8e3525465451236182f84054e",
+        "69cb756a69610d4304b185c1d25acf8a38168b1b344c601708be54cb5440a571",
+        "742ec4d6bf2f1ffa297467fb35bfb8b9a3ab8dafad9c66b368d6f661b38887b0",
+        "25fe4bd076eae03939f974573743816b328ce540b64c65f258be74c696af121b",
+        "b26d8287034cad256f577c8a35f836a3345b683ac7ac269b396bae69119ae1d7"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-1280x720-current-oracle-current-0",
+      "preset": "audit shader I27-1280x720-current-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-1280x720-current-oracle-current-1",
+      "preset": "audit shader I27-1280x720-current-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-1280x720-duplicate-oracle-current-0",
+      "preset": "audit shader I27-1280x720-duplicate-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-1280x720-duplicate-oracle-current-1",
+      "preset": "audit shader I27-1280x720-duplicate-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422",
+        "9df57eabd897f170cdf0d67e656922b225b4ea7c2bfc4e830ad983190006b422"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x144-current-oracle-current-0",
+      "preset": "audit shader I27-256x144-current-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x144-current-oracle-current-1",
+      "preset": "audit shader I27-256x144-current-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e",
+        "8b4a1378995d7878624b1e64551bc24e4e8464642131cc42c423bb2b472b3c7e"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x144-duplicate-oracle-current-0",
+      "preset": "audit shader I27-256x144-duplicate-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x144-duplicate-oracle-current-1",
+      "preset": "audit shader I27-256x144-duplicate-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x256-current-oracle-current-0",
+      "preset": "audit shader I27-256x256-current-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x256-current-oracle-current-1",
+      "preset": "audit shader I27-256x256-current-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x256-duplicate-oracle-current-0",
+      "preset": "audit shader I27-256x256-duplicate-oracle.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-256x256-duplicate-oracle-current-1",
+      "preset": "audit shader I27-256x256-duplicate-oracle.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746",
+        "45f58fa35fe537398597d8a7d0974c557403818939dcc39bc2581c8899087746"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-live-current-0",
+      "preset": "audit shader I27-live.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5"
+      ]
+    },
+    {
+      "directory": "shaderpolicy-audit-shader-I27-live-current-1",
+      "preset": "audit shader I27-live.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5",
+        "b4051c19e0e22bb4cc36a38dbb009dffa7d9b1ab053d8b9b44e99ea483faf7c5"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "actual": "I26-live",
+      "oracle_or_control": "I26-mutable-eel-live",
+      "selected_RGB_equal": true
+    },
+    {
+      "actual": "I27-live",
+      "oracle_or_control": "I27-1280x720-current-oracle",
+      "selected_RGB_equal": true
+    },
+    {
+      "actual": "I26-current-oracle",
+      "original_source_explicit_oracle": "I26-comma-oracle",
+      "selected_RGB_different": true
+    },
+    {
+      "actual": "I27-1280x720-current-oracle",
+      "original_source_explicit_oracle": "I27-1280x720-duplicate-oracle",
+      "selected_RGB_different": true
+    }
+  ]
+}

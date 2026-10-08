@@ -6,3 +6,6 @@ I21/stock-salad-bar-original-alias0.milk -whitespace
 # Preserve exact raw CMake compiler output, including formatting spaces.
 I21/prepared-build-corrected.txt -whitespace
 I21/prepared-build-missing-include.txt -whitespace
+
+# Preserve all unchanged authored bytes in the single-line shader surrogate.
+I26-I27/stock-volume/cope-original-comma-volume.milk -whitespace

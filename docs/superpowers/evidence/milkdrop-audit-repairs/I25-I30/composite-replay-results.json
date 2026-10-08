@@ -1,0 +1,10 @@
+{
+  "RGB_MAE": 0.5010579427083334,
+  "different_channels": 6157,
+  "shape": [
+    64,
+    64,
+    3
+  ],
+  "scope": "actual same-CGL-grid completed-vertex byte replay; not Android Native4K grid replay"
+}

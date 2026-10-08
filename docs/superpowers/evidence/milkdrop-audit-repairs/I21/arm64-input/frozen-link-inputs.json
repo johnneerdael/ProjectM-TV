@@ -1,0 +1,62 @@
+{
+  "worker_identity": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/identity.json",
+  "aar_sha256": "f62c136ba9f3880d42cbac2c1c170b3ffcedd3246bbf0422cb3ac0faf53c9077",
+  "native_sha256": {
+    "jni/arm64-v8a/libprojectmtv.so": "af04f342bdd247c9fdaa38a28aed688577061d27276ee0c347f20f15a50eced6"
+  },
+  "engine_identity": {
+    "commit": "6f64807467e312034883a4389e6aa80a675458bc",
+    "instrumentation_sha256": "2efc3d43b8061ef60a42be22e47e1b86a781c15c1a5494a9a417b4bb43b3d57e",
+    "patches_sha256": "fec902da716d59aae317b0ae3364dccac1eb78f53b07ee508bdcc703a26a7793"
+  },
+  "ordered_patch_count": 27,
+  "frozen_engine_source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm",
+  "frozen_cxx_directory": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/core/.cxx/RelWithDebInfo/49z2z644/arm64-v8a",
+  "frozen_archives": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/core/.cxx/RelWithDebInfo/49z2z644/arm64-v8a/projectm/src/libprojectM/libprojectM-4.a",
+      "sha256": "1b51e9877fdbfbb6e2a1aaa802430c46c7d489506df8ce6fead21b70c823e483",
+      "bytes": 34738262
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/core/.cxx/RelWithDebInfo/49z2z644/arm64-v8a/projectm/vendor/projectm-eval/projectm-eval/libprojectM_eval.a",
+      "sha256": "7c88bddd7fe6a1987e7f9075ce31426e1c3453d9a4ea7f60bde01d044f8246c7",
+      "bytes": 411328
+    }
+  ],
+  "frozen_pcm_compilation": {
+    "directory": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/core/.cxx/RelWithDebInfo/49z2z644/arm64-v8a",
+    "command": "/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android21 --sysroot=/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DDATADIR_PATH=\\\"\\\" -DPROJECTM_CXX_STATIC_DEFINE -DPROJECTM_STATIC_DEFINE -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/core/.cxx/RelWithDebInfo/49z2z644/arm64-v8a/projectm/include -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm/vendor/glad/include -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm/src/libprojectM/Audio/.. -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm/src/api/include -I/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/core/.cxx/RelWithDebInfo/49z2z644/arm64-v8a/projectm/src/api/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -include config.h -ffile-prefix-map=/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source=. -ffile-prefix-map=/Users/jneerdael/Library/Android/sdk/ndk/27.3.13750724=ndk -fdebug-compilation-dir=. -Wpedantic -Wextra -Wall -Wchar-subscripts -Wformat-security -Wpointer-arith -Wshadow -Wsign-compare -Wtype-limits -std=gnu++17 -o projectm/src/libprojectM/Audio/CMakeFiles/Audio.dir/PCM.cpp.o -c /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm/src/libprojectM/Audio/PCM.cpp",
+    "file": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm/src/libprojectM/Audio/PCM.cpp"
+  },
+  "source_sha256": {
+    "Audio/PCM.cpp": "3221aa87d5aabc6c965bf459b2d9854f11afc8da0ef5af5af2d035105cfdec07",
+    "Audio/Loudness.cpp": "dff2109dbbd94e8d6480184272b6f51a95a766219550ae811f7c3fe934f9069b",
+    "Audio/MilkdropFFT.cpp": "598e83b309e43aea1dd6efe41b6f5e8814dc580ac86edeacbc2b56bbb86cc00c",
+    "Audio/WaveformAligner.cpp": "87facf421a367a807d6bfb7e0c005a1b7bc5f0adad317fe54db42b7e21b09e82",
+    "TimeKeeper.cpp": "b88b805f94553316df548b6b74613ea945e89469197eb2e12b9e5ec0f2fb92c5",
+    "TimeKeeper.hpp": "5fe53dad982907898428d1e285f0813eef576d308ca0c03c82fa16e90024e5bb",
+    "MilkdropPreset/Waveforms/Factory.cpp": "86c57acf7e0a1be4eee7472169f2bb25e670a521aa9d9c83a0ae31fafda6abaa",
+    "MilkdropPreset/Waveforms/WaveformMath.cpp": "ca7cb97af5116c19c7704cf7580d296724866f899e8041d879885ac42dcccd03"
+  },
+  "worker_clock_sources": {
+    "java": "d6698655472868efe06adbeb7dbdaed1a4aa15eb666f7de5af838bd6c3f42207",
+    "lab_bridge_sha256": {
+      "lab_bridge.cpp": "d2e5f610cc391c9207f2d2d6754e54857e684659b847ed662002933f0f0aacb1",
+      "lab_bridge.hpp": "608db6303a398058359533b7305c59b816bbfdea139e6273d31e566bb24260a2"
+    }
+  },
+  "no_execution": true,
+  "source_commit": "ac3dd034c15dced5423feed3077c15c39580823b",
+  "archive_members_observed": [
+    "MilkdropFFT.cpp.o",
+    "PCM.cpp.o",
+    "Loudness.cpp.o",
+    "WaveformAligner.cpp.o",
+    "all waveform factory/mode objects",
+    "projectM evaluator objects",
+    "gles2.c.o",
+    "egl.c.o"
+  ],
+  "single_archive_link_feasible": "llvm-ar inventory confirms evaluator/GLAD dependency objects are already merged; shipping link uses this archive plus system GLES/EGL/log/android/atomic/m libraries"
+}
