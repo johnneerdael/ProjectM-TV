@@ -101,7 +101,7 @@ Measured across 15,576 authored shaders in an earlier corpus pass, 102 shaders n
 
 ![widest swing.milk with and without 0004](../images/patches/0004-sampler.jpg)
 
-**projectM:** a custom shape with `textured=1` bound the main texture but inherited whatever sampler object was left on unit 0 (clamp, or nearest after the first instance). **MilkDrop 2** restores wrap/linear sampler state before drawing custom shapes. **ProjectM TV** gives every main-textured fill its own repeat/linear sampler, including geometry replayed for Native trails. Removing only 0004 changes 119 of 120 frames of `widest swing.milk`.
+**projectM:** a custom shape with `textured=1` bound the main texture but inherited whatever sampler object was left on unit 0 (clamp, or nearest after the first instance). **MilkDrop 2** restores wrap/linear sampler state after the warp shader (`RestoreShaderParams`), but on frames where it computes blur levels, the blur passes then set unit 0 back to clamp (`milkdropfs.cpp:1611`) and nothing resets it before `DrawCustomShapes()`. So MilkDrop's textured shapes wrap on frames without blur and clamp on frames with blur. **ProjectM TV** gives every main-textured fill its own repeat/linear sampler, including geometry replayed for Native trails. That removes projectM's unpredictable nearest/clamp mix, but for presets that use blur it wraps where MilkDrop 2 clamps. Removing only 0004 changes 119 of 120 frames of `widest swing.milk`.
 
 ## 0005 — Blur ranges that cannot collapse
 
@@ -193,6 +193,15 @@ projectM **v4.1.8** (tagged 2026-10-06) backports most of these parser and wavef
 - Blur ranges narrower than 0.1 are repaired instead of collapsing.
 - Some reference-scale effects remain resolution-dependent at 4K unless Native trails or diffusion compensation is active ([details](resolution.md#what-this-does-not-fix)).
 - Evaluator edge cases: decimal→double→float double rounding, unchecked integer narrowing, and float-width `$pi`, `$e` and `$phi`.
+- Textured custom shapes always wrap; MilkDrop 2 clamps them on frames where blur levels are computed.
+- Line waveforms: MilkDrop 2 caps the point count at a third of the canvas width; projectM divides the sample count by three. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table, and mode 3 multiplies `wave_a` where MilkDrop replaces it.
+- Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.
+- `echo_orient` of −1 or −3 flips horizontally in MilkDrop 2 (`n % 2` is nonzero); projectM does not flip.
+- The classic composite always applies the hue tint; MilkDrop 2 applies it only when `fShader` is above 0.001.
+- `decay` above 1 is clamped to 1; MilkDrop 2 wraps it to nearly black.
+- Per-pixel code visits mesh rows in the opposite vertical order, so stateful per-pixel code can differ; the animated warp sine pattern is vertically mirrored, and per-pixel `aspectx`/`aspecty` are not inverted as in MilkDrop 2.
 - No Windows reference renders exist in this project's evidence, so identical Windows appearance is never claimed.
+
+These differences were found by auditing the [source predictor](../predictor.md) against MilkDrop 2's code; they are candidates for future engine patches.
 
 The full assessment, including upstream contribution notes, is [`docs/UPSTREAM_PATCH_VALUE.md`](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/UPSTREAM_PATCH_VALUE.md).

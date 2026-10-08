@@ -28,7 +28,7 @@ u -= dx;  v -= dy                               translate
 
 ### Decay
 
-With the fixed-function warp, `decay` multiplies the warped image (default 0.98). Below about 0.9 trails vanish quickly; at 1.0 nothing fades and the picture usually saturates. With a **warp shader**, MilkDrop ignores the per-frame `decay` variable: write the fade in the shader. projectM clamps decay to at most 1.
+With the fixed-function warp, `decay` multiplies the warped image (default 0.98). Below about 0.9 trails vanish quickly; at 1.0 nothing fades and the picture usually saturates. Keep it at or below 1: MilkDrop converts it to an 8-bit colour, so values above 1 wrap around to nearly black (1.02 becomes 4/255), while projectM clamps them to 1. With a **warp shader**, MilkDrop ignores the per-frame `decay` variable: write the fade in the shader. projectM clamps decay to at most 1.
 
 ## Classic composite filters
 
@@ -54,7 +54,7 @@ MilkDrop 2 has **8 modes**: circle, X-Y spiral, spiro, spiro with alpha by volum
 !!! note "Portability"
     projectM has **16 modes**: MilkDrop's eight, then eight more of its own. It wraps modulo 16, so `wave_mode=9` is mode 1 on MilkDrop 2 and a projectM-only wave here. Stay within 0–7 for presets meant to look the same everywhere. A negative mode draws nothing in ProjectM TV. Of the bundled presets, four use mode 8 and none use higher modes.
 
-The waveform draws 480 samples. Line modes draw a third of them when the canvas is narrower than three times the sample count. With `bMaximizeWaveColor` on (default), the colour is normalized so its brightest channel is full.
+The waveform has 480 samples. MilkDrop caps the line modes at a third of the canvas width in points (`milkdropfs.cpp:3008`), and fades modes 2, 3 and 5 by a factor that depends on the canvas width; mode 3 ignores `wave_a` and uses a fixed alpha times `treb²`. With `bMaximizeWaveColor` on (default), the colour is normalized so its brightest channel is full.
 
 ## Custom waves
 
@@ -80,8 +80,8 @@ Up to four shapes, `shapecode_0` to `shapecode_3`:
 
 - `sides` (3–100) gives a regular polygon of radius `rad`, rotated by `ang`, centred on `x`, `y`.
 - The fill is a fan from the centre colour (`r g b a`) to the edge colour (`r2 g2 b2 a2`).
-- `textured=1` fills it with the **previous frame**, rotated by `tex_ang` and scaled by `tex_zoom`. The sampler wraps and filters bilinearly.
-- `border_a > 0` draws an outline; `thickOutline` draws it with four offset passes.
+- `textured=1` fills it with the **previous frame**, rotated by `tex_ang` and scaled by `tex_zoom`, with bilinear filtering. In MilkDrop 2 the edges wrap, *except* on frames where blur levels were computed: the blur passes leave the sampler on clamp (`milkdropfs.cpp:1611`) and nothing resets it before the shapes are drawn. projectM always wraps.
+- `border_a > 0` draws an outline; `thickOutline` draws it with four passes offset by one canvas pixel.
 - `additive=1` blends additively.
 - `num_inst` draws the shape that many times per frame. Per-frame code runs for each instance with `instance` = 0, 1, 2 …, and q, t and all shape variables reset per instance.
 
