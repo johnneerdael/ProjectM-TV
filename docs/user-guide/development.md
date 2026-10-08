@@ -1,271 +1,95 @@
 # Build and test
 
-ProjectM TV embeds **ProjectM TV Engine**, our extensively modified fork of projectM based on upstream version 4.1.7, with the ordered patch series in `tools/projectm-patches/`. The Android app, offline analyzer and documentation site have separate build dependencies.
+ProjectM TV is an Android app (`:app`) and an engine library (`:core`). The engine builds projectM from the pinned submodule and applies the [patch series](engine/patches.md) at configure time.
 
-The published core AAR shares the app's release version. `ProjectMJNI.getVersion()` retains its existing meaning: the upstream projectM version, not the identity of the patched build. Record the release version, source revision and artifact checksum for reproducible engine comparisons. See the [patch inventory and upstream attribution](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/THIRD_PARTY.md).
+## Build the app
 
-## Android app
-
-Clone the repository with its submodules and follow the [developer build instructions](https://github.com/johnneerdael/ProjectM-TV#for-developers).
+Requirements: JDK 21, Android SDK platform 34, NDK 27.3.13750724, CMake 3.22.1, and a `local.properties` file with `sdk.dir`.
 
 ```sh
-./gradlew assembleDebug
-./gradlew testDebugUnitTest
-core/src/test/native/run_native_tests.sh
+git clone --recursive https://github.com/johnneerdael/ProjectM-TV.git
+cd ProjectM-TV
+./gradlew assembleDebug          # debug APK
+./gradlew assembleRelease        # release APK + core AAR
+./gradlew assembleProfile        # release build that profilers can attach to
 ```
 
-The native runner also builds the patched projectM engine with ASan/UBSan and checks shader macro preprocessing, contextual identifiers such as `sample`, postfix expressions, numerical shader output and custom waveform audio bounds. It also compiles the affected shader sections of 16 unchanged bundled presets, with their file hashes checked at configure time. It also checks random-image alias identity, requested sampler modes, shared slots and numerical samples against isolated known-value textures. Blur regressions preserve separate read/draw targets on first use and resize, check constant-colour output at normal and reference-scaled sizes, and fully render the unchanged `midgitstraights of majillaen - featy sweet.milk` with isolated TGA images. It requires CMake and a JDK; the GL tests use EGL/GLES development libraries on Linux or the OpenGL framework on macOS.
+In an existing clone, run `git submodule update --init --recursive`. Never commit edits inside `third_party/projectm`: engine changes are new patch files in `tools/projectm-patches/`.
 
-Feature-branch pushes do not start CI builds. A ready PR targeting `main` starts the full build suite only after a completed Codex or human review of its latest commit, with all review threads resolved and no outstanding review requests or changes requested. Codex’s thumbs-up reaction on the PR is its approval signal. The gate uses completed review metadata to bind that reaction to the current revision, resolving shortened IDs through GitHub; a completion comment without the reaction cannot unlock builds. GitHub hides private draft reviews from automation: request a reviewer to keep the gate closed until submission. The review gate periodically rechecks thread resolution; GitHub may delay scheduled runs. Production releases are signed by CI. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md) for the release process and signing setup.
+## Run the tests
 
-The native suite also observes effective samplers at actual custom-shape draws,
-checks repeat/bilinear samples and named-image qualifiers across instances and
-context recreation, and separates blur mentions from actual allocation. Blur
-controls exercise the production bounds and progressive float32 uniform producer.
-Warp controls execute the shared production vertex source and read transformed UVs
-for signed negative unit-exponent zoom and ordinary positive transforms. Native GL regressions inherit
-the engine's GL link dependencies; Linux uses the harness-selected EGL target for
-context creation. Both ordinary system discovery and explicit EGL/GLES link-flag
-overrides are supported without depending on a child-directory imported target. Sampling fixtures allocate storage matching their upload format and check GL errors immediately; unit-slope, binary-exact coordinates keep strict pixel oracles portable across the tested drivers.
+| Command | Covers |
+|---|---|
+| `./gradlew testDebugUnitTest` | App and core JVM tests: settings, automatic quality, custom-pack import, upload server |
+| `core/src/test/native/run_native_tests.sh` | Native engine tests and patched-projectM regression controls under ASan/UBSan, with real GL (macOS OpenGL or Linux EGL/GLES) |
+| `tools/projectm-host-tests.sh` | projectM's own GoogleTest suite with the patches applied |
+| `tools/check-patch-series.sh` | The patch series applies cleanly to the pinned commit |
+| `tools/check-presets.py`, `tools/gen-preset-index.py --check` | Bundled presets react to audio, reference only bundled textures, and match the index |
+| `python -m pytest tools/preset-lab/tests` | Preset Lab |
+| `python3 -m unittest discover -s .github/scripts/tests -v` | Release tooling |
 
-## Core rendering policies
-
-The single `:core` AAR uses Native rendering. Build it with:
-
-```sh
-./gradlew :core:assembleRelease
-```
-
-The legacy `-PprojectmCoreRenderingPolicy=native` spelling remains accepted. The
-retired `capped` build is rejected. Canonical `projectM-TV-core.aar` and versioned
-core downloads now contain Native bytes; there is no separate capped publication.
-The Java/JNI API remains additive. Standard trails is the new core default above
-1330p, with `ProjectMJNI.setNativeTrails(-1/0/1/2)` for Off/Standard/Medium/High.
-The shared QualityController defaults to Auto up to the detected panel size, with
-FPS and live memory headroom as inputs. Legacy fixed-resolution/static-RAM
-settings normalize to Auto. New hosts may explicitly opt into `setResolutionMode(mode, lastAutoHeight)` using 0 for Auto, -1 for Native or a height from `resolutionModes(display)`. Fixed/Native retain memory protection and bypass FPS adaptation and slow-preset skipping; they do not guarantee a fixed actual size under memory pressure. See [Builds and Releases](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md).
-
-## Offline preset analysis
-
-[Preset Lab](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/preset-lab) is independently installable. It uses a private copy of the pinned engine and patches; its synthetic clock and seeds do not modify the Android renderer.
-
-```sh
-python3 -m venv build/preset-lab-venv
-build/preset-lab-venv/bin/python -m pip install './tools/preset-lab[test]'
-build/preset-lab-venv/bin/preset-lab doctor --repo . --work build/preset-lab
-```
-
-The package README documents native compiler, SDL2, OpenGL and audio-tool dependencies. That private host renderer supports historical research; the current beta collections use the **published ProjectM-TV:core AAR through JNI**. See [Predictive collections](predictive-collections.md) for scoring, export and verification commands.
+[Validation and evidence](engine/validation.md) describes what the native controls check, including the legacy compatibility controls for `fShader` shading and mode-1 waveforms ([BrainStain investigation](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/brainstain-dark-output/README.md)). Negative-power controls also verify CPU-defined nested exponents, attribute 9 uploads, unchanged equation parameters, nonfinite preservation, resize and prepared replay ([power-domain evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/tulip-negative-zoom-power/README.md)). Invalid fractional-domain sampling remains backend-bound and does not establish portable source-only appearance.
 
 ## Test on a TV without replacing the release
 
+A debug build cannot update a production installation (different signing key). Separate test builds install side by side:
+
+| Gradle property | Package | Use |
+|---|---|---|
+| `-PpresetLabDeviceTest` | `nl.neerdael.projectmtv.presettest` | Mood/category instrumentation and live-audio checks |
+| `-PsetupScreenshotTest` | `nl.neerdael.projectmtv.setuptest` | Setup journeys: resolution, Native trails, custom-pack upload and restart |
+
 ```sh
-./gradlew -PpresetLabDeviceTest :app:assembleDebug :app:assembleDebugAndroidTest
+./gradlew :app:assembleDebug :app:assembleDebugAndroidTest -PsetupScreenshotTest
+adb -s SERIAL shell pm grant --user USER nl.neerdael.projectmtv.setuptest android.permission.RECORD_AUDIO
+adb -s SERIAL shell am instrument --user USER -w -e setup_case resolution \
+  nl.neerdael.projectmtv.setuptest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
 ```
 
-This builds **ProjectM TV · Preset test**, package `nl.neerdael.projectmtv.presettest`. Install its app and test APKs on your development TV, grant its requested Record audio permission, then run:
+Other cases: `native_trails`, `custom_pack` followed by a cold `custom_pack_restart`, and `custom_pack_qr`. Find `USER` with `adb shell am get-current-user`. These check settings, navigation, uploads and completed frames, not preset appearance or performance.
 
-```sh
-adb -s DEVICE shell am instrument -r -w -e live_audio true nl.neerdael.projectmtv.presettest.test/com.example.projectm.visualizer.MusicCategoryInstrumentation
-```
+### Profiling and diagnostics
 
-The test checks category application, eligible counts, navigation containment, fallback and live audio delivery. Omit the live-audio argument for emulator testing without music. Results verify operation; they do not prove every selected preset's strength on every GPU.
+- Pin one preset for measurements: `adb shell setprop debug.projectmtv.preset '<filename prefix>'`, and clear it afterwards.
+- `tools/tv-diagnostics.sh <tv-ip>:5555 --no-install --duration 180` collects logs and frame statistics ([DIAGNOSTICS.md](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/DIAGNOSTICS.md)).
+- CPU profiling with the profile build and simpleperf: [PROFILING.md](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/PROFILING.md).
 
-## Documentation site
+## Use the engine in another app
 
-The site uses MkDocs and the same dark Read the Docs layout as the Milkbeat guide. Markdown in `docs/user-guide/` is the source for these pages.
+Every release publishes the engine as an Android library, `projectM-TV-core-<version>.aar`, plus a stable alias `projectM-TV-core.aar`. [Milkbeat](https://github.com/johnneerdael/Milkbeat) uses it this way and is rebuilt automatically when a new core is released.
+
+The public API lives in `nl.neerdael.projectm.core`:
+
+| Class | Role |
+|---|---|
+| `ProjectMCore.init(context)` | Call once from `Application.onCreate`: indexes presets and copies textures |
+| `VisualizerView` + `VisualizerRenderer` | The GL surface and its renderer |
+| `ProjectMJNI` | Audio input (`addWaveform`), preset navigation, settings such as transitions and `setNativeTrails` |
+| `QualityController` | Automatic resolution from frame rate and live memory headroom; `setResolutionMode` for fixed or Native sizes |
+| `DeviceProfile`, `DisplayInfo` | Device tier and physical panel detection |
+
+Engine defaults differ slightly from the app's: for example, blank-preset skipping is off in the core and switched on by the app. `ProjectMJNI.getVersion()` reports the upstream numeric projectM version (`4.2.0`), not the release version. Releasing and publishing are described in [RELEASING.md](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/RELEASING.md).
+
+## Offline preset tools
+
+- [Preset Lab](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/preset-lab): offline rendering, static audio tracing and bass-response screening with a private desktop build of the engine.
+- [milk-analyzer](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/milk-analyzer): source parsing, equation-domain proofs, shader lowering and the mood scorer.
+
+See [Test and predict presets](authoring/testing.md) for what each tool can tell you.
+
+## This documentation site
+
+The site uses MkDocs with the Material theme. Its source is `docs/user-guide/`; GitHub Pages serves the static build.
 
 ```sh
 python3 -m venv build/docs-env
 build/docs-env/bin/pip install -r docs/site-requirements.txt
-build/docs-env/bin/mkdocs serve
+build/docs-env/bin/mkdocs serve          # preview at http://127.0.0.1:8000
 build/docs-env/bin/mkdocs build --strict
 ```
 
-The read-only User guide build workflow validates the site as part of reviewed PR validation and the main pipeline. The main pipeline publishes the site after all validation builds pass. A manual **User guide** run on `main` also builds and publishes it without another APK/AAR release. Both publishing paths use the same deployment queue and skip runs whose source is older than current `main`. Every successfully tested main merge also publishes the APK and core AAR, including documentation-only merges; routine changes do not manually bump versions.
+Reviewed pull requests build the site, and every merge to `main` publishes it after the full test suite passes. Screenshots on these pages come from the released app on an Android TV emulator, playing music through Milkbeat.
 
-## Shader initialization diagnostics
+## Contributing
 
-The [source-analysis tools](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/milk-analyzer)
-check equation ranges and whether shader branches initialize their outputs. They
-include the bounded-selector fix from PR #25. These checks do not establish full
-visual accuracy.
-
-The engine preserves plain uninitialized scalar/vector shader globals as external
-inputs. Inputs with no binding start at zero; explicit bindings remain available to
-source-analysis evaluations, and writable copies begin with the chosen input on each
-invocation. This gives the affected older presets defined inputs without
-changing their source or assignment order. Local variables still require an authored
-initialization. The policy does not reproduce arbitrary old Direct3D register history.
-
-
-## Experimental source visual forecasting
-
-`tools/milk-analyzer/forecast.py` interprets preset equations, shader fields and
-feedback using explicit audio, random, texture and render inputs.
-The 4.2 migration prepares versioned CPU adapters for separate composite buffers
-and native Point waveform data. Published-AAR references stay separate from
-those adapters. Bounded constant/input controls and historical regressions are
-qualification evidence; they do not establish a new preset-prediction score.
-The current experimental target is 20 rounds of three presets, 30 frames each, with
-60 consecutive scores of 100 and predictor failures repaired before another round.
- Its numerical
-prediction is produced before comparison with the unchanged published core AAR
-through JNI. The source CPU adapters and native reference have separate identities.
-Unsupported arithmetic remains unknown rather than being silently treated as calm.
-
-An experimental opt-in numerical operator can resolve motion-map sampling under
-the declared GPU context. It receives only UV maps and query coordinates computed
-by the predictor, samples them in the vertex stage and returns coordinates through
-transform feedback. It loads the published core identity but initializes no preset
-and advances no core rendered frames. The forecast labels this path
-`source-with-measured-operator`, seals actual consumed input/output hashes and
-records the AAR, helper and GPU context. This measures hardware sampling; it does
-not claim an independent reconstruction of GPU arithmetic or change the packaged
-mood collections. Reference capture remains a separate step after the forecast
-is frozen. Missing or mismatched operator evidence stops the calculation.
-
-The v2.3.22 coordinate policy now mirrors the native custom-shape pixel-centre
-translation and removes the old composite UV half-texel bias. Policies are bound
-to the exact patched source identity, with historical behavior preserved for old
-checkpoints. An initial vertical-sign prediction error was caught by a frozen
-full-AAR impulse control and repaired before random validation. Bounded centre
-controls do not establish full-preset or high-resolution fidelity.
-
-
-Matched timing matters even in short comparisons. The declared 30 Hz JNI test
-host rounds its clock to integer nanoseconds; the source audio producer has an
-explicit matching policy that applies this elapsed time to both equations and
-loudness decay. Exact time/audio-band input agreement does not certify the full
-appearance: GPU drawing precision and the sampled preset-progress context remain
-separate checks. Historical failed forecasts keep their original grades.
-
-The bounded cold JNI progress policy now models initialization and the first
-hard preset load with declared random inputs. It matches numerical-only AAR
-controls under two seeds and rejects unqualified producer libraries. Warm loads,
-longer windows and changed configurations are outside its contract. This is input-context verification,
-not a new visual score or a change to the packaged mood collections.
-
-The feature report now distinguishes geometry calculated without display fields
-from statistics of simulated display fields. Shape trajectories provide sampled
-speed, acceleration and jerk, with component/topology changes and missing support
-recorded explicitly. Dense scenes can declare a sufficient geometry derivative
-calculation budget; its exact value stays in the forecast context, and exceeded
-budgets still withhold partial results. These coordinates do not establish visible
-movement or smoothness between samples. Each feature carries units, evidence kind and context
-identity; discarding a simulated frame does not turn its statistics into frame-free
-analysis. The [source feature contract](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_FEATURES.md)
-records the supported scope and remaining work.
-
-Palette research now reports warm/cool balance separately from hue diversity,
-excluding grey and dark output from hue-dependent calculations. Transition records
-keep brightness/colour amplitude, affected area, direction and timing together,
-including changes smaller than the coherent full-screen gate. These sampled
-changes may include moving edges; their absence does not prove a preset never
-flashes. They remain research evidence rather than new app mood scores.
-
-The offline source scoring layer can now apply explicit assumed intensity,
-smoothness, warm/cold and psychedelic mappings, then editable music/viewing
-profiles, to cached feature evidence. Unknown inputs retain their weight as score
-intervals; a short quiet sample is insufficient for the strict Chill constraints.
-These mappings are not yet calibrated or used by the app's packaged collections.
-See the [source scoring contract](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_SCORING.md)
-for supported fields and remaining extraction gaps.
-
-The primary strict extractor now reads preset source, executes equations/shape
-geometry and evaluates sparse warp and isolated shader-colour queries without
-building a display image. Missing feedback, material or spatial-coverage data remains
-unknown while its mathematics is added; no hidden image classifier fills the gaps.
-The [strict extraction reference](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/STRICT_EXTRACTION.md)
-and [source mathematics](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/SOURCE_MATH.md)
-record current coverage, the beta authoring guide and stable original MilkDrop2
-source. Restricted transport/decay helpers describe potential motion and recurrence
-assumptions, not a complete appearance or calmness guarantee.
-
-An explicit GLES300 highp math policy now distinguishes supported infinity
-intermediates from undefined powers, NaNs and unsupported precision/sampling.
-Source-mode controls can therefore follow an overflow to a finite or normalized
-colour result instead of rejecting every intermediate. The default stays strict;
-these controls add no authored-preset visual pass. Source-field observers receive
-private frame copies, and effective material arrays are frozen and identified.
-
-The October 2026 experiment passed a three-preset and then a ten-preset gate at
-95 or higher on twenty frozen behavioural claims. In the subsequent randomized
-100-preset audit,85met that threshold,12predictions remained unresolved, and three
-completed predictions failed. These are observable-claim scores, not pixel accuracy,
-whole-program guarantees or validated mood/genre assignments. The test covers only
-60frames at256×144 with one declared audio/random/GPU context; native4Kdetail and
-longer or different inputs remain unverified. See the
-[audit report](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/plans/2026-10-06-predictor-random100-audit.md)
-and [analyzer instructions](https://github.com/johnneerdael/ProjectM-TV/blob/main/tools/milk-analyzer/README.md).
-
-The packaged mood collections still use their pinned2.3.3numerical measurements,
-as described in [Predictive collections](predictive-collections.md). The experiment
-has not regenerated those indexes or changed their classifications.
-
-## Shader literal precision
-
-The native runner checks finite float32 constants by comparing their bits after
-formatting and reparsing, including negative zero, boundary values, randomized
-values and a comma-decimal locale. It also renders a one-frame warp/composite
-control and directly compiles 95 unchanged, hash-checked preset shader sections.
-The render control reads normalized framebuffers as RGBA bytes, then exports RGB
-when saving a capture. This uses the portable GLES readback format; desktop OpenGL
-can accept RGB-only reads that Linux GLES drivers reject. Validate GL readback
-changes with the Linux EGL/Mesa tests as well as macOS CGL.
-
-Source-analysis adapters rebuilt against the current engine record
-`float_literal_policy` and `float_formatter_sha256`; the reader’s `renderer_literal`
-values use the production formatter. Rebuild adapters when the engine patch series
-changes. Historical fixtures retain their historical engine identity.
-
-Nonfinite shader literals are rejected by the generator rather than emitted as
-identifiers such as `inf`. Runtime nonfinite arithmetic and driver precision remain
-separate questions. These checks do not establish every preset’s visual fidelity
-or physical-TV performance.
-
-
-The source model distinguishes the renderer's ordinary multiplication helper from
-compound assignment. The helper converts integer inputs tofloat32; compound
-integer `*=` preserves integer arithmetic. These source checks prevent a numerical
-forecast from silently rounding large integer state or masking invalid arithmetic.
-The recorded100-preset audit predates this review repair; its original grades remain
-unchanged, and fresh predictions require a new model freeze.
-
-
-Source forecasts check frame-cache-aware random inputs against the declared render
-frame and ordinary draw state. Detail passes remain unsupported. The separate
-review collection verifier also checks preset memory weights against the published
-AAR's master index, so changing a weight and its checksum cannot produce a verified
-review bundle. These checks do not regenerate the packaged mood indexes.
-
-
-Numerical corpus tools must use the native library extracted from the same supplied
-AAR. The ARMv7 runner checks that relationship before device access and records the
-native checksum; the ARM64 beta runner has its own equivalent check. Comparing an
-uploaded standalone library only with its local copy is insufficient release evidence.
-
-
-Review bundles also verify complete run provenance and each score's run identity.
-Forecasts freeze model file hashes before calculation and reject changes after
-import or during evaluation. Use a fresh process after source changes. These checks
-protect identity consistency; they are not signatures or whole-program correctness
-proofs. Historical source44 profiles retain their static waveform and legacy
-display policies. The source predictor now models the2.3.15live controls under a
-separate exact source identity, alongside its corrected shape sampling, blur
-intervals and signed unit zoom. A fresh published2.3.15JNI host passes a frozen
-one-frame constant-RGB control exactly; this checks loading/readback, not full
-authored-preset appearance or all-policy GPU parity. These changes have not regenerated
-the packaged mood indexes.
-
-## Live preset controls
-
-Native regressions include `dynamic-wave-controls`, `dynamic-display-controls`
-and `dynamic-original-presets`. They compare real draw state and pixels with
-unchanged static controls, check independent filter blend predictions, preserve
-per-frame reset defaults, exercise paired authored/native geometry targets, and
-render three unchanged SHA-256-pinned witnesses in Off/Standard/Medium/High paths.
-See the [versioned engine policy and evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/live-native-controls/README.md).
-Historical predictor/static-engine policies remain historical controls; these
-fixes do not regenerate collection scores. Host and emulator checks do not
-establish physical-TV performance.
+Changes go through a pull request to `main`. A PR runs the full build only after a completed review of its latest commit, with all review threads resolved. Every PR needs a `## Release notes` section written for people using the app (see the PR template). Each successfully tested merge publishes a new versioned APK and core library automatically.

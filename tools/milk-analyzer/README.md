@@ -1618,3 +1618,14 @@ exercises zoomed recurrence, not .97 decay (first duplicate value1 wins).
 Analytical blur/motion/gain-switch evidence is separate. Unknown resource and
 unqualified-domain guards remain; no universal appearance or random-score credit
 is claimed. See `docs/superpowers/evidence/six-area-audit-delivery/DELIVERY.md`.
+
+
+## Predictor export contract
+
+[EXPORT_CONTRACT.md](EXPORT_CONTRACT.md) documents the exact current version1
+feature envelope, 11 strict/47 simulated keys, unversioned diagnostic return,
+optional score export and downstream Rust/wgpu adaptation limits. Machine schema,
+complete catalog and real producer examples are in `export-contract/`. The user
+website includes the same reference at `docs/user-guide/predictor-export.md`.
+Semantic element/effect descriptors and generation vocabulary are documented as
+follow-up work; no renderer or new producer schema is introduced by these docs.

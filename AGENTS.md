@@ -691,3 +691,17 @@ uncertified flag; no universal GPU/preset/transition or new random-streak claim.
 See `docs/superpowers/evidence/six-area-audit-delivery/DELIVERY.md` and the pinned
 published2.3.27 profile for exact evidence/limitations. Do not merge main based
 on this audit: the user's original visual prediction acceptance remains separate.
+
+
+Export contract documentation (2026-10-08): `tools/milk-analyzer/EXPORT_CONTRACT.md`
+and the user-guide `predictor-export.md` document the current schema1 envelope,
+11 strict/47 simulated feature keys and unversioned forecast diagnostics. The
+schema/catalog/real examples in `export-contract/` describe existing producers;
+they do not introduce a semantic scene export. Guide assets mirror those files.
+Guide/config/dependency sync was taken from remote main `af164a97896646427f971ecbed8161f8d35c2fec`
+before the export page/navigation was added; no analyzer or engine merge occurred.
+Keep future semantic effect/element descriptors explicitly versioned and separate
+from statistics, preserve unknowns, and never infer a causal beat response or
+fractal/tunnel identity from field aggregates alone. Update the source reference
+and guide copy together when the actual export changes. Docs use main's pinned
+MkDocs1.6.1/Material9.7.7 requirements.

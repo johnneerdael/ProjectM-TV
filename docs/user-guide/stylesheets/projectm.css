@@ -1,131 +1,102 @@
-:root {
-  color-scheme: dark;
-  --background: #090909;
-  --surface: #171717;
-  --raised-surface: #252525;
-  --text: #f2f2f2;
-  --muted: #bcbcbc;
-  --outline: #555555;
-  --accent: #bba1ff;
+/* ProjectM TV palette on Material for MkDocs (slate scheme). */
+:root > * {
+  --md-primary-fg-color: #bba1ff;
+  --md-primary-fg-color--light: #d6c7ff;
+  --md-primary-fg-color--dark: #8a6cf0;
+  --md-primary-bg-color: #0b0b10;
+  --md-accent-fg-color: #e2d6ff;
 }
 
-body, .wy-body-for-nav, .wy-nav-content-wrap {
-  background: var(--background);
-  color: var(--text);
+[data-md-color-scheme="slate"] {
+  --md-hue: 258;
+  --md-default-bg-color: #0b0b10;
+  --md-default-bg-color--light: #12121a;
+  --md-code-bg-color: #15151f;
+  --md-typeset-a-color: #bba1ff;
 }
 
-.wy-nav-side, .wy-side-nav-search, .wy-nav-top {
-  background: var(--surface);
+/* Header and tabs: dark glass rather than a flat colour bar */
+.md-header,
+.md-tabs {
+  background: rgba(11, 11, 16, 0.86);
+  backdrop-filter: blur(12px);
+  color: #f2f2f2;
 }
 
-.wy-nav-content {
-  max-width: 1100px;
-  background: var(--background);
+.md-header { box-shadow: 0 1px 0 rgba(187, 161, 255, 0.18); }
+.md-tabs__link { opacity: 0.75; }
+.md-tabs__link--active, .md-tabs__link:hover { opacity: 1; color: #bba1ff; }
+
+/* Readable measure and generous rhythm */
+.md-typeset { font-size: 0.82rem; line-height: 1.7; }
+.md-typeset h1 { font-weight: 800; letter-spacing: -0.02em; color: var(--md-default-fg-color); }
+.md-typeset h2 { font-weight: 700; letter-spacing: -0.01em; margin-top: 2.2em; }
+
+.md-typeset img { border-radius: 10px; }
+
+/* Tables: subtle zebra rows, wrapped cells */
+.md-typeset table:not([class]) {
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0.74rem;
+}
+.md-typeset table:not([class]) th { background: #1b1b27; }
+.md-typeset table:not([class]) td { vertical-align: top; }
+
+/* Gallery tables: image cells without header noise */
+.md-typeset table:not([class]) td img { margin: 0.2rem 0; width: 100%; }
+
+/* Home page hero */
+.pm-hero {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0 0 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+.pm-hero img { display: block; width: 100%; border-radius: 0; }
+.pm-hero__text {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.2rem 2rem 1.6rem;
+  background: linear-gradient(to top, rgba(8, 8, 12, 0.92), rgba(8, 8, 12, 0));
+}
+.pm-hero__text h1 {
+  margin: 0 0 0.3rem;
+  font-size: 2.4rem;
+  color: #fff;
+}
+.pm-hero__text p { margin: 0 0 1rem; color: #e6e6ee; max-width: 46rem; }
+.pm-hero .md-button { margin: 0.2rem 0.4rem 0.2rem 0; }
+
+@media screen and (max-width: 44.9375em) {
+  .pm-hero__text { position: static; background: #12121a; padding: 1.2rem; }
+  .pm-hero__text h1 { font-size: 1.6rem; }
 }
 
-.rst-content {
-  line-height: 1.65;
+/* Cards */
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid > .card {
+  border-radius: 14px;
+  border-color: rgba(187, 161, 255, 0.18);
+  background: #12121a;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: rgba(187, 161, 255, 0.55);
+  transform: translateY(-2px);
 }
 
-.rst-content h1, .rst-content h2, .rst-content h3 {
-  font-family: inherit;
-  line-height: 1.2;
+/* Downloader call-out */
+.pm-download {
+  border: 1px solid rgba(187, 161, 255, 0.35);
+  border-radius: 14px;
+  padding: 0.9rem 1.2rem;
+  background: linear-gradient(135deg, rgba(187, 161, 255, 0.12), rgba(187, 161, 255, 0.02));
 }
+.pm-download strong code { font-size: 1.05em; }
 
-.rst-content h1 { font-size: 2.4rem; }
-.rst-content h2 { margin-top: 2.5rem; }
-.rst-content h3 { margin-top: 2rem; }
-
-a, a:visited, .wy-breadcrumbs a, .wy-side-nav-search > a {
-  color: var(--accent);
+/* Two-column card grid for four-item sections */
+.md-typeset .grid.pm-two {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
 }
-
-a:hover { color: var(--text); }
-
-a:focus-visible, button:focus-visible, input:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.wy-menu-vertical a, .wy-menu-vertical a:visited,
-.wy-menu-vertical li.current > a,
-.wy-menu-vertical li.current a {
-  color: var(--text);
-  background: var(--surface);
-}
-
-.wy-menu-vertical li.current,
-.wy-menu-vertical li.toctree-l2.current > a,
-.wy-menu-vertical a:hover,
-.wy-menu-vertical li.current a:hover {
-  background: var(--raised-surface);
-}
-
-.wy-menu-vertical li.current > a {
-  border-color: var(--outline);
-  color: var(--accent);
-}
-
-.wy-side-nav-search input[type="text"] {
-  color: var(--text);
-  background: var(--background);
-  border-color: var(--outline);
-  box-shadow: none;
-}
-
-.rst-content img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 1.5rem 0;
-}
-
-.rst-content table.docutils {
-  width: 100%;
-  border-color: var(--outline);
-}
-
-.rst-content table.docutils thead,
-.rst-content table.docutils td,
-.rst-content table.docutils th,
-.rst-content table.docutils:not(.field-list) tr:nth-child(2n+1) td,
-.rst-content table.docutils tr:nth-child(2n) td {
-  color: var(--text);
-  background: var(--surface);
-  border-color: var(--outline);
-  white-space: normal;
-}
-
-.rst-content code, .rst-content tt {
-  color: var(--text);
-  background: var(--surface);
-  border-color: var(--outline);
-}
-
-.btn, .btn:visited, .btn-neutral, .btn-neutral:visited {
-  color: var(--text) !important;
-  background: var(--surface) !important;
-  border-color: var(--outline);
-  box-shadow: none;
-}
-
-.btn:hover, .btn-neutral:hover {
-  background: var(--raised-surface) !important;
-}
-
-footer, .wy-breadcrumbs-aside { color: var(--muted); }
-hr { border-color: var(--outline); }
-
-@media (max-width: 768px) {
-  .wy-nav-content { padding: 1.5rem; }
-  .rst-content h1 { font-size: 2rem; }
-}
-
-.rst-content pre, .rst-content pre code, .rst-content .highlight {
-  color: var(--text);
-  background: var(--surface);
-  border-color: var(--outline);
-}
-
-.rst-content pre { overflow-x: auto; }
-.wy-table-responsive { overflow-x: auto; }

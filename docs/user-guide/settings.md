@@ -1,57 +1,71 @@
 # Settings reference
 
-Open the panel with Center, Enter or Menu. Use Up / Down to select a row and Left / Right to change its value.
+Open the panel with **Center**, **Enter** or **Menu**. **Up / Down** selects a row and **Left / Right** changes it. Every setting is saved on the TV.
 
-The panel identifies **ProjectM TV Engine**, the maintained projectM fork, beside the app version. **Based on projectM 4.1.7** on the next line identifies the upstream base; it does not describe an unmodified upstream engine. Some older setup screenshots below predate this naming.
+## Main panel
 
-All is the default preset mood. Your selected collection is saved. The beta predictor uses overlapping score bands: Chill 1–30, Normal 25–75 and Intense 70–100. Saved Dance selections return to All.
+![Main settings panel over a running preset: Preset, audio meter, Previous/Random/Next, Auto change, Preset mood, Preset duration, Track display, Advanced, frame rate and engine version](images/setup/main-settings.jpg)
 
-| Setting | Values | Default |
+| Setting | Values | Default | What it does |
+|---|---|---|---|
+| Auto change | Off, On | On | Change presets automatically after *Preset duration* |
+| Preset mood | All, Chill, Normal, Intense, Custom | All | Which presets play. A mood with no eligible presets on this TV is not offered. Custom appears after a [pack upload](custom-packs.md). See [Preset moods](predictive-collections.md) |
+| Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s | How long each preset plays with Auto change on |
+| Track display › | | | Opens the track panel |
+| Advanced › | | | Opens performance and quality settings |
+
+## Track display
+
+![Track display panel with Track info On, Show for Always and Pill style Off](images/setup/track-display-settings.jpg)
+
+| Setting | Values | Default | What it does |
+|---|---|---|---|
+| Track info | Off, On; *Off · Allow* without access | On | Shows cover, artist and title in the upper left. Without notification access, selecting it opens the [setup dialog](getting-started.md#track-titles-optional) |
+| Show for | 10 s, 20 s, 30 s, 60 s, Always | Always | How long after a track starts. *Always* keeps it while music plays; it hides 2 s after playback stops or pauses |
+| Pill style | Off, On | Off | Shows *Title — Artist* on one line in the small pill in the lower left instead |
+
+## Advanced
+
+| Setting | Values | Default | What it does |
+|---|---|---|---|
+| Resolution | Auto; 720p, 1080p, 1440p, 4K (up to the panel); Native (*panel*) | Auto | How large ProjectM TV renders. See [Picture quality](picture-quality.md#resolution) |
+| Frame rate | The refresh rate, ½ or ¼ of it, at least 24 fps | 30 fps at 60 Hz, 25 at 50 Hz | Target frame rate, paced to the display |
+| Detail | Minimal 24×16, Low 32×24, Medium 48×32, High 64×48, Ultra 96×72 | High on SHIELD/Tegra, Low on low-RAM devices, otherwise Medium | Warp mesh size. Per-vertex equations run on the CPU for every mesh point |
+| Native trails | Standard, Medium, High | Standard | How feedback is drawn above 1330p. See [Picture quality](picture-quality.md#native-trails) |
+| Transition | Instant, 1–10 s | 7 s (2 s on low-RAM devices) | Blend length for automatic changes. Instant cuts without blending and halves the memory reserved for two presets |
+| Transitions | Auto, Lightweight, Classic | Auto | How automatic changes blend. See [Picture quality](picture-quality.md#transitions) |
+| Cut on loud beats | Off, On | Off | Lets projectM cut to the next preset on a loud beat, as MilkDrop does |
+| Skip slow presets | Off, On | On | In Auto resolution, permanently skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help |
+| Skip blank presets | Off, On | On | Moves on from presets that stay black while music plays; skips one permanently the second time |
+| Auto-update | Off, On; *Via F-Droid* | Off | Checks GitHub for new stable releases. See [Updates](getting-started.md#updates) |
+| Custom preset pack | *Upload ZIP ›* | No pack | Upload your own presets from a phone or computer. See [Custom preset packs](custom-packs.md) |
+| Skipped presets | *None*, or *N · Reset* | | Shows how many presets this TV skips; select it to clear the list |
+
+The Advanced panel scrolls when its rows do not fit; D-pad focus brings each row into view.
+
+## Diagnostics
+
+Opening **Advanced** also shows a **Diagnostics** card beside it with live values:
+
+![Advanced settings at their defaults with the Diagnostics card on a 1080p TV](images/setup/advanced-settings.jpg)
+
+| Line | Example | Meaning |
 |---|---|---|
-| Auto change | Off, On | On |
-| Preset mood | All, Chill, Normal, Intense | All |
-| Preset duration | 10, 15, 20, 30, 45, 60, 90 s | 30 s |
+| Render | `3840x2160 (auto)` | Current render size and mode: *auto*, *native* or *fixed* |
+| RAM | `automatic headroom budget` | *resolution reduced for memory headroom* when memory protection is lowering the size |
+| Panel | `3840x2160 @ 60 Hz` | The physical display mode |
+| UI | `1920x1080` | Android's interface size, often 1080p on a 4K TV |
+| FPS | `30.0 of 30` | Measured and target frame rate |
+| Trails | `Standard · 1280×720 canvas` | Native trails level and its state: the active canvas, *inactive (render 1080p)*, *canvas fallback* or *shader/resource fallback* |
+| Blend | `blend at 75% (auto)` | The transition mode and its current blend scale |
+| Audio | `player session 1234, 0.42 (live)` | Where audio comes from: *no capture (permission?)*, *no player session found yet*, *silent / no data* or the live level |
+| Track | `corner, always` | Track display state, or *no access* with the Android path to enable it |
+| Update | `up to date, checked 14:02` | Auto-update state |
+| Device | `standard tier, 3800 MB RAM` | [Device tier](picture-quality.md#device-tiers) and RAM |
 
-The APK and the single published core use the Native renderer with **Auto resolution by default**. The controller adjusts render size in real time for the selected target frame rate and available memory, up to the detected full panel size. A 4K panel can render at 3840×2160 even when Android’s menus run at 1080p. Slow or memory-heavy workloads can render lower and are scaled to fill the screen.
+## Notices
 
-**Advanced › Resolution** switches between Auto, 720p, 1080p, 1440p and 4K (only sizes supported by the detected panel), plus Native. Native means the full physical panel: **Native (4K)** requests 3840×2160 on a 4K TV, even with a 1080p Android UI. The choice is saved. Fixed/Native modes keep the requested size regardless of FPS and disable slow-preset skipping so a demanding preset can be tested. Memory protection can still lower the actual render size temporarily and restore it after headroom recovers; check Diagnostics before claiming a 4K run. Auto retains its existing behavior and remembered starting height. There is no manual RAM-limiter control. Old saved fixed-resolution and memory-limit values no longer override the automatic controller. It reserves memory headroom before raising resolution, accounts for the extra rendering allocations of trails and transitions, and lowers resolution under memory pressure. This reduces pressure on the music player; it cannot guarantee that every Android/vendor memory policy will keep every background process alive.
+Small notices can appear in the lower-left pill:
 
-**Native trails** has three values. Standard is the default: at supported render sizes above 1330p, it keeps feedback at an authored canvas (1280×720 at 4K) and draws this frame’s waves, shapes and composite at native resolution. Medium and High add native trail detail with gain caps of 0.5 and 1; both run the same additional passes. Their difference is the amount of detail, not an intended performance saving. The gain is limited near black and white to prevent clipping from adding brightness. Higher levels use additional textures and GPU work, so automatic quality can choose a lower resolution. Waves and shapes use authored-size feedback while the same evaluated geometry is drawn sharply at native size; changing trail level does not run their equations twice.
-
-The trails preference remains available and saved while the controller changes resolution. At smaller render sizes, or when an integer canvas is incompatible, the existing diffusion path is used. Driver shader/resource failures also fall back. **Diagnostics** shows the selected level, actual active canvas or inactive/fallback reason, the current render size, and automatic memory status.
-
-The canonical `projectM-TV-core.aar` now contains this Native core; the separate capped AAR is retired. Embedding apps use the shared automatic controller. See the [development instructions](development.md#core-rendering-policies).
-
-*Track display ›* opens a panel for the playing track:
-
-| Setting | What it does | Default |
-|---|---|---|
-| Track info | Shows the cover, artist and title of the playing track in the upper left, as Milkbeat does; *Off · Allow* while notification access is missing, select it for how to allow it (see [Track titles](getting-started.md#track-titles)) | On |
-| Show for | 10, 20, 30 or 60 s from the start of each track, or *Always* while music plays (it goes when playback stops or pauses) | Always |
-| Pill style | Shows the track as one line (*Title — Artist*) in the small pill in the lower left instead | Off |
-
-*Advanced ›* opens a second panel:
-
-| Setting | What it does | Default |
-|---|---|---|
-| Resolution | Auto; supported fixed sizes (720p, 1080p, 1440p, 4K); Native follows the physical panel. Memory protection remains active | Auto |
-| Frame rate | The TV's refresh rate, half or a quarter of it, at least 24 fps (e.g. 30 or 60 fps at 60 Hz) | Half the refresh rate: 30 fps at 60 Hz, 25 at 50 Hz |
-| Detail | Mesh detail for preset motion: Minimal, Low, Medium, High, Ultra | Depends on the device |
-| Native trails | Standard, Medium, High; active at supported render sizes above 1330p. Medium and High add more trail detail with the same additional rendering work | Standard |
-| Transition | How long the blend from one preset to the next takes: Instant, 1–10 s | 7 s (2 s on low-end devices) |
-| Transitions | *Auto* blends the two running presets and keeps the frame rate up: when the GPU is the limit, both render at a lower resolution during the blend (75% to start, down to 50%, back up when there is headroom); when the CPU is the limit, the outgoing preset renders every second frame. *Classic* always blends at full resolution. *Lightweight* fades a still image of the old preset for at most 3 s. | Auto |
-| Cut on loud beats | Lets projectM cut to the next preset on a loud beat, like MilkDrop, instead of only blending | Off |
-| Skip slow presets | In Auto resolution only, skips presets that stay below half the target frame rate even at the lowest resolution, or that a lower resolution does not help (limited by the CPU); such a preset is skipped for good on this TV | On |
-| Skip blank presets | Moves on from presets that stay black while music plays; skips them for good the second time | On |
-| Auto-update | Checks GitHub for a new release at every launch and every 6 hours while open, and downloads it; an *Install* row then appears at the top of the settings panel. *Via F-Droid* when the app was installed from F-Droid | Off |
-| Skipped presets | Shows how many presets are skipped; select it to reset the list | – |
-| Diagnostics | Render size, panel, UI size, frame rate, Native trails level/canvas or fallback, blend (style and resolution), audio source and level, track display (access, corner or pill, how long), update status, device tier | – |
-
-
-![Main settings panel with Music category All, next to the track in the upper left](images/setup/main-settings.png)
-
-![Track display panel with Track info On, Show for Always and Pill style Off](images/setup/track-display-settings.png)
-
-![Advanced settings with the restored Resolution selector, Auto memory budgeting and High trails inactive at 540p](images/setup/advanced-settings.png)
-
-The Advanced screenshot uses this change’s isolated 4K TV emulator with no audio source; Auto is selected and memory budgeting reduces the render size to 540p, where High trails is inactive. The panel scrolls vertically when needed, keeping all rows reachable by D-pad. Main and Track display screenshots use an earlier isolated installation. The tables describe current behavior. See [Predictive collections](predictive-collections.md) for collection details and [Troubleshooting](troubleshooting.md) for audio and performance problems.
+- **No audio detected**: no player session was found after a start. See [Troubleshooting](troubleshooting.md#visuals-do-not-react-to-the-music).
+- **ProjectM TV *version* is ready to install: open the settings**: an auto-update has been downloaded. The **Install** row appears at the top of the main panel.
