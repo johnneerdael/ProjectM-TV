@@ -1,0 +1,55 @@
+{
+  "frame": 119,
+  "fixture": "large-rotation-uv.milk",
+  "preset_sha256": "66d6398c53544eea179250ff8fe93122f181f48bdcc9282976e0ad27f3f4207f",
+  "series_sha256": "3a93e74563c7ae7033b0478794425150d557a074dd8dc1fa0bc6bdc506c28aa2",
+  "source_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "roles": {
+    "upstream": {
+      "frame_sha256": "2e7260d553f312201d691abc3f2f6647065926c9987bf80e0c2290de58e4212e",
+      "center_rgb": [
+        128,
+        128,
+        64
+      ],
+      "channel_extrema": [
+        [
+          128,
+          128
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          64,
+          64
+        ]
+      ]
+    },
+    "patched": {
+      "frame_sha256": "33a4e1d973c20fd338e0db2b8dd22070114ab192a99280048ebd1a1448fbe06e",
+      "center_rgb": [
+        127,
+        127,
+        64
+      ],
+      "channel_extrema": [
+        [
+          0,
+          255
+        ],
+        [
+          0,
+          255
+        ],
+        [
+          64,
+          64
+        ]
+      ]
+    }
+  },
+  "transform": "raw512x288RGB unchanged; labels outside payload",
+  "figure_sha256": "5b626ba59f0b0a32cbbaee39be9d7f81d862703918b88dafbdc87bd37faac48d"
+}

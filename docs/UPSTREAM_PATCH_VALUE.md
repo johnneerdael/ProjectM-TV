@@ -12,7 +12,7 @@ A middle column, where present, removes one patch to isolate its effect. Generat
 controls are labeled; a rejected render is an error panel, not a black screenshot.
 
 Earlier images use our 13-patch snapshot `654815d8`; 0014 uses the current 14-patch
-snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Rechecking affected earlier witnesses is still in progress.
+snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Earlier captures retain their original snapshot identities;0011 and0015 now have locked15-patch comparisons.
 The upstream renderer matches master `e98fca85`; capture adjustments and source
 identities are recorded in the [evidence record](superpowers/evidence/current-patch-proof/README.md).
 
@@ -159,7 +159,7 @@ decoding consistent; the artist's shader stays unchanged.
 **Hexcollie — This is where we begin stripped** develops a different green center
 and feedback structure. It uses negative zoom with exponent one. Sending that to
 GLSL `pow` is undefined even though the intended result is simply the signed base.
-Ours uses that base directly, preserving the reflected transform.
+Ours preserves that signed base and the reflected transform. Patch0015 carries this case into its broader CPU-power path.
 [Single-patch comparison](superpowers/evidence/current-patch-proof/0006-zoom-isolated.png) ·
 [Patch source](../tools/projectm-patches/0006-fixed-warp-signed-unit-zoom.patch).
 
@@ -215,16 +215,17 @@ one shared directory and does not trigger this case. It is not a MilkDrop bug.
 
 ## 0011 — CPU warp rotation trigonometry
 
-![The original rotation witness: upstream load error and our rendered frame](superpowers/evidence/current-patch-proof/0011-rotation.png)
+![Upstream collapses the coordinate field; our library preserves rotation](superpowers/evidence/current-patch-proof/components/locked15-rotation/comparison.png)
 
-The **EoS/Phat/PeterP/Sentinel/Aware** witness uses `rot=10000000`. On the tested
-GLES driver, shader sine/cosine collapsed its feedback toward the rotation center.
-Ours computes both on the CPU after float conversion, matching MilkDrop's order.
+The **EoS/Phat/PeterP/Sentinel/Aware** witness uses `rot=10000000`. This labeled
+coordinate-color control uses the same angle: upstream collapses the field to one
+color, while ours preserves the rotation. GPU sine/cosine lost the transform on
+the tested driver; ours computes both on the CPU after float conversion.
 
-Upstream also rejects an equation in this original, so this image alone cannot
-isolate rotation. The [rotation-only comparison](superpowers/evidence/current-patch-proof/0011-rotation-isolated.png)
-and [UV controls](superpowers/evidence/large-rotation-trig/README.md) establish the
-cause; a clearer original-preset image remains needed.
+The [original preset image](superpowers/evidence/current-patch-proof/0011-rotation.png)
+is dark and upstream also rejects an equation, so it is kept as supporting evidence.
+The clear control above is generated, not the original artwork.
+[Locked-source verification](superpowers/evidence/current-patch-proof/components/locked15-rotation/README.md) ·
 [Patch source](../tools/projectm-patches/0011-cpu-warp-rotation-trig.patch).
 
 ## 0012 — Custom-shape pixel centres
@@ -272,15 +273,17 @@ isolates the waveform change from tint.
 
 ## 0015 — Negative warp powers on the CPU
 
-The previous negative-zoom fix covered `zoomExp=1`. MilkDrop also defines negative
-bases raised to integer nested powers, such as squares and cubes; GLSL `pow` does
-not. Ours evaluates the negative-base expression on the CPU after float conversion
-and reuses that value when drawing the prepared mesh. Positive zoom is unchanged.
+![Upstream collapses defined negative-power coordinates; our library preserves them](superpowers/evidence/current-patch-proof/components/locked15-power/comparison.png)
 
-The original **Great Tulip Majesty** still enters fractional negative-power
-domains and its recorded frames remain unchanged. It must not be shown as a fixed
-artist preset. The [defined-power controls](superpowers/evidence/tulip-negative-zoom-power/README.md)
-show the actual repair; a matched upstream/our-library TV comparison is pending.
+This generated control uses negative zoom with finite integer nested powers.
+Upstream collapses the coordinate field; ours preserves its gradient. GLSL `pow`
+is undefined for negative bases even when the CPU expression has a valid answer.
+The patch evaluates that expression on the CPU after float conversion and reuses
+its result when drawing the prepared mesh. Positive zoom is unchanged.
+
+The original **Great Tulip Majesty** still enters fractional negative-power domains
+and its recorded frames remain unchanged. It must not be presented as fixed.
+[Locked-source comparison and checks](superpowers/evidence/current-patch-proof/components/locked15-power/README.md) ·
 [Patch source](../tools/projectm-patches/0015-warp-negative-zoom-cpu-power.patch).
 
 ## Supporting evidence and remaining work
@@ -292,6 +295,6 @@ provides the preset names and activation profiles used to guide remaining captur
 The [detailed working assessment](superpowers/evidence/current-patch-proof/expanded-assessment.md)
 keeps the component inventory and technical notes out of this review page.
 
-Publication work covers a clearer0011 witness,0015 GPU comparison, locked15-patch endpoint checks and final PR review/CI. Deeper optimization/lifecycle checks are deferred by agreement.
+The15 patch sections now have matched comparison evidence. Deeper optimization/lifecycle checks are deferred by agreement; final review and CI remain required before publication.
 The upstream capture admits GLES 3.0; our image workers disable the emulator's broken
 program-binary export. No original Windows/MilkDrop GPU screenshot was produced.

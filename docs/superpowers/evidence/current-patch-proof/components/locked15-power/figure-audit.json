@@ -1,0 +1,55 @@
+{
+  "frame": 119,
+  "fixture": "negative-integer-zero-power.milk",
+  "preset_sha256": "38c0d1cbcd8491e2761193aab1a8a35d59fcf933e14711326979ff0273508fc9",
+  "series_sha256": "3a93e74563c7ae7033b0478794425150d557a074dd8dc1fa0bc6bdc506c28aa2",
+  "source_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "roles": {
+    "upstream": {
+      "frame_sha256": "482dc32084081e8d8d8aedd518b63d7afa5c1840ef2f8ac1cccf302ea2c21b59",
+      "center_rgb": [
+        255,
+        255,
+        64
+      ],
+      "channel_extrema": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          64,
+          64
+        ]
+      ]
+    },
+    "patched": {
+      "frame_sha256": "26b49068a14d05578a0a0075345a315333ab734baf4f13bcf604df9eb928dd9e",
+      "center_rgb": [
+        127,
+        127,
+        64
+      ],
+      "channel_extrema": [
+        [
+          0,
+          255
+        ],
+        [
+          0,
+          255
+        ],
+        [
+          64,
+          64
+        ]
+      ]
+    }
+  },
+  "transform": "raw512x288RGB unchanged; labels outside payload",
+  "figure_sha256": "1bcd86bfe44a2b425edf2bc04a4751351889ae0dbce7c98000add33d4e81e078"
+}

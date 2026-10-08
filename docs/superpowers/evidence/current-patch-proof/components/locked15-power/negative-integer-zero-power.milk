@@ -1,0 +1,21 @@
+MILKDROP_PRESET_VERSION=201
+PSVERSION_WARP=3
+PSVERSION_COMP=3
+[preset00]
+fDecay=1
+fGammaAdj=1
+fWaveAlpha=0
+fVideoEchoAlpha=0
+fShader=0
+fZoomExponent=1
+zoom=1
+rot=0
+warp=0
+cx=0.5
+cy=0.5
+sx=1
+sy=1
+bTexWrap=0
+per_pixel_1=zoom=-0.5; zoomexp=if(above(rad,0.5),0,1);
+warp_1=`shader_body { ret=float3(uv.x,uv.y,0.25); }
+comp_1=`shader_body { ret=tex2D(sampler_main,uv).rgb; }
