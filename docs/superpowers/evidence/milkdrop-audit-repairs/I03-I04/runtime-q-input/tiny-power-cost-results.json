@@ -1,0 +1,13 @@
+{
+  "means": {
+    "before": 1.4681583435185181,
+    "after": 1.5783355125
+  },
+  "delta_pct": 7.504447287166349,
+  "cycles_pct": [
+    7.119605793391415,
+    5.067062177769044,
+    10.123876741519977
+  ],
+  "scope": "runtimeQ tiny-base pow each per-pixel node; same output/drawgeometry"
+}
