@@ -1,0 +1,19 @@
+{
+  "source_root": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/retained-policy-workers/candidate-native/source/third_party/projectm",
+  "source_sha256": {
+    "PerPixelMesh.cpp": "65e37fe3316f3b186ea01e14039115f37990625a8513e1c3c0ed60bca736190b",
+    "MotionVectors.cpp": "24ce6e5f331f6b3a9c0a00934540064d4573dccab4cab71f393d10a2ae6185fc",
+    "Shaders/PresetMotionVectorsVertexShaderGlsl330.vert": "3d374d1f39a6e535d2fe42a49f4daabbde18f8fc517b5e6ad8377d2c3c5c446e",
+    "Shaders/MotionVectorLineVertexShaderGlsl330.vert": "d237428a5fbe617df7fe3c2ad16741bdaeae98227c7ebc5d380ade53960e6232"
+  },
+  "prepared_files": {
+    "motion_field_controls.cpp": "37d110339ece3025f4e0bb0b02d25f0ef6f7b297655cf7374edece06f5733b6d",
+    "CMakeLists.txt": "c7122c93d9a85201bfd4f976bbc17afe647c06fd14819096acfb94443cdcc002",
+    "diagnostic-bilerp-oracle-square8.patch": "de4b3bc05b198380c0698387e114743973259f3a3ac05e8ba1b339a3408f25bb",
+    "diagnostic-bilerp-oracle-native48x32.patch": "f128f8e1f39de30224e1152daf6d994e08dc95c4a232ddb2d69cfabb7e6f7f6a",
+    "diagnostic-motion-field-native48x32.milk": "c5c2907714c584f598b0d666603d4a315e00a7f491ab2141d55cdb9cfb5bc8a8",
+    "diagnostic-motion-field-square8.milk": "63ca9048d0dc7ddd605f280fa01430ff2f8995f4c67717aa5637e4c459805a9c"
+  },
+  "no_build_gpu_device_git": true,
+  "owner_acceptance": false
+}

@@ -1,0 +1,294 @@
+{
+  "status": "uncompiled/unrendered source models",
+  "I15": [
+    {
+      "viewport": [
+        256,
+        144
+      ],
+      "reference": [
+        0,
+        0
+      ],
+      "diffusion": false,
+      "current_threshold_model": 0.009959613580016178,
+      "current_zero_components_pixels": [
+        2.5496610764841416,
+        1.4341843555223297
+      ],
+      "original_threshold_model": 0.00390625,
+      "original_zero_components_pixels": [
+        1,
+        0.5625
+      ],
+      "current_zero_endpoint_from_center": [
+        0.5099596135800162,
+        0.5099596135800162
+      ],
+      "current_zero_normalized_segment_length": 0.014085020600854136,
+      "original_zero_endpoint_from_center": [
+        0.50390625,
+        0.50390625
+      ],
+      "original_zero_normalized_segment_length": 0.005524271728019903
+    },
+    {
+      "viewport": [
+        256,
+        256
+      ],
+      "reference": [
+        0,
+        0
+      ],
+      "diffusion": false,
+      "current_threshold_model": 0.006905339660024878,
+      "current_zero_components_pixels": [
+        1.7677669529663689,
+        1.7677669529663689
+      ],
+      "original_threshold_model": 0.00390625,
+      "original_zero_components_pixels": [
+        1,
+        1.0
+      ],
+      "current_zero_endpoint_from_center": [
+        0.5069053396600249,
+        0.5069053396600249
+      ],
+      "current_zero_normalized_segment_length": 0.009765625000000002,
+      "original_zero_endpoint_from_center": [
+        0.50390625,
+        0.50390625
+      ],
+      "original_zero_normalized_segment_length": 0.005524271728019903
+    },
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "reference": [
+        0,
+        0
+      ],
+      "diffusion": false,
+      "current_threshold_model": 0.0019919227160032356,
+      "current_zero_components_pixels": [
+        2.5496610764841416,
+        1.4341843555223297
+      ],
+      "original_threshold_model": 0.00078125,
+      "original_zero_components_pixels": [
+        1,
+        0.5625
+      ],
+      "current_zero_endpoint_from_center": [
+        0.5019919227160032,
+        0.5019919227160032
+      ],
+      "current_zero_normalized_segment_length": 0.002817004120170827,
+      "original_zero_endpoint_from_center": [
+        0.50078125,
+        0.50078125
+      ],
+      "original_zero_normalized_segment_length": 0.0011048543456039807
+    },
+    {
+      "viewport": [
+        3840,
+        2160
+      ],
+      "reference": [
+        1280,
+        720
+      ],
+      "diffusion": false,
+      "current_threshold_model": 0.0006639742386677452,
+      "current_zero_components_pixels": [
+        2.5496610764841416,
+        1.4341843555223297
+      ],
+      "original_threshold_model": 0.00026041666666666666,
+      "original_zero_components_pixels": [
+        1,
+        0.5625
+      ],
+      "current_zero_endpoint_from_center": [
+        0.5006639742386677,
+        0.5006639742386677
+      ],
+      "current_zero_normalized_segment_length": 0.0009390013733902756,
+      "original_zero_endpoint_from_center": [
+        0.5002604166666667,
+        0.5002604166666667
+      ],
+      "original_zero_normalized_segment_length": 0.0003682847818679935
+    },
+    {
+      "viewport": [
+        3840,
+        2160
+      ],
+      "reference": [
+        1280,
+        720
+      ],
+      "diffusion": true,
+      "current_threshold_model": 0.0019919227160032356,
+      "current_zero_components_pixels": [
+        7.6489832294524245,
+        4.302553066566989
+      ],
+      "original_threshold_model": 0.00026041666666666666,
+      "original_zero_components_pixels": [
+        1,
+        0.5625
+      ],
+      "current_zero_endpoint_from_center": [
+        0.5019919227160032,
+        0.5019919227160032
+      ],
+      "current_zero_normalized_segment_length": 0.002817004120170827,
+      "original_zero_endpoint_from_center": [
+        0.5002604166666667,
+        0.5002604166666667
+      ],
+      "original_zero_normalized_segment_length": 0.0003682847818679935
+    }
+  ],
+  "I15_live_motion_must_preserve_feedback_not_black_warp": true,
+  "I15_endpoint_oracles_are_custom_wave_surrogates_not_original_motion_rendering": true,
+  "I23_oracle_passes": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "I23_oracles_have_four_objects_and_extra_shape_fills_not_cost_comparable": true,
+  "Native_reference": [
+    1280,
+    720
+  ],
+  "Native_output": [
+    3840,
+    2160
+  ],
+  "full_Native_gate_open": true,
+  "I23_profiles": [
+    {
+      "name": "matched",
+      "viewport": [
+        256,
+        144
+      ],
+      "reference_scale": 1,
+      "current_custom_normalized_increments": [
+        0.00390625,
+        0.00390625
+      ],
+      "current_custom_pixel_magnitudes": [
+        0.5,
+        0.28125
+      ],
+      "current_shape_normalized_increments": [
+        0.00390625,
+        0.006944444444444444
+      ],
+      "current_shape_pixel_magnitudes": [
+        0.5,
+        0.5
+      ],
+      "original_same_target_normalized_increments": [
+        0.0078125,
+        0.013888888888888888
+      ],
+      "original_same_target_pixel_magnitudes": [
+        1,
+        1
+      ],
+      "current_native_full_band_width_pixels": 1,
+      "original_reference_pixel_scaled_to_native": null
+    },
+    {
+      "name": "authored",
+      "viewport": [
+        1280,
+        720
+      ],
+      "reference_scale": 1,
+      "current_custom_normalized_increments": [
+        0.00078125,
+        0.00078125
+      ],
+      "current_custom_pixel_magnitudes": [
+        0.5,
+        0.28125
+      ],
+      "current_shape_normalized_increments": [
+        0.00078125,
+        0.001388888888888889
+      ],
+      "current_shape_pixel_magnitudes": [
+        0.5,
+        0.5
+      ],
+      "original_same_target_normalized_increments": [
+        0.0015625,
+        0.002777777777777778
+      ],
+      "original_same_target_pixel_magnitudes": [
+        1,
+        1
+      ],
+      "current_native_full_band_width_pixels": 1,
+      "original_reference_pixel_scaled_to_native": null
+    },
+    {
+      "name": "native-reference",
+      "viewport": [
+        3840,
+        2160
+      ],
+      "reference_scale": 3,
+      "current_custom_normalized_increments": [
+        0.00078125,
+        0.00078125
+      ],
+      "current_custom_pixel_magnitudes": [
+        1.5,
+        0.84375
+      ],
+      "current_shape_normalized_increments": [
+        0.00078125,
+        0.001388888888888889
+      ],
+      "current_shape_pixel_magnitudes": [
+        1.5,
+        1.5
+      ],
+      "original_same_target_normalized_increments": [
+        0.0005208333333333333,
+        0.000925925925925926
+      ],
+      "original_same_target_pixel_magnitudes": [
+        1,
+        1
+      ],
+      "current_native_full_band_width_pixels": 3,
+      "original_reference_pixel_scaled_to_native": 3
+    }
+  ]
+}

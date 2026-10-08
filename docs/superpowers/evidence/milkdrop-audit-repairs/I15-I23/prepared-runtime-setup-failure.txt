@@ -1,0 +1,19 @@
+I15 256x144 reference=0x0 diffusion=0 kind=0 minimum=0.0099596139 original_threshold=0.00390625 endpoint=0.509959638,0.509959638 map_generation=previous-explicit
+I15 256x144 reference=0x0 diffusion=0 kind=1 minimum=0.0099596139 original_threshold=0.00390625 endpoint=0.509959638,0.5 map_generation=previous-explicit
+I15 256x144 reference=0x0 diffusion=0 kind=2 minimum=0.0099596139 original_threshold=0.00390625 endpoint=0.75,0.5 map_generation=next-explicit
+I15 256x256 reference=0x0 diffusion=0 kind=0 minimum=0.00690533966 original_threshold=0.00390625 endpoint=0.506905317,0.506905317 map_generation=previous-explicit
+I15 256x256 reference=0x0 diffusion=0 kind=1 minimum=0.00690533966 original_threshold=0.00390625 endpoint=0.506905317,0.5 map_generation=previous-explicit
+I15 256x256 reference=0x0 diffusion=0 kind=2 minimum=0.00690533966 original_threshold=0.00390625 endpoint=0.75,0.5 map_generation=next-explicit
+I15 1280x720 reference=0x0 diffusion=0 kind=0 minimum=0.00199192273 original_threshold=0.000781250012 endpoint=0.501991928,0.501991928 map_generation=previous-explicit
+I15 1280x720 reference=0x0 diffusion=0 kind=1 minimum=0.00199192273 original_threshold=0.000781250012 endpoint=0.501991928,0.5 map_generation=previous-explicit
+I15 1280x720 reference=0x0 diffusion=0 kind=2 minimum=0.00199192273 original_threshold=0.000781250012 endpoint=0.75,0.5 map_generation=next-explicit
+I15 3840x2160 reference=1280x720 diffusion=0 kind=0 minimum=0.000663974206 original_threshold=0.00026041668 endpoint=0.500663996,0.500663996 map_generation=previous-explicit
+I15 3840x2160 reference=1280x720 diffusion=0 kind=1 minimum=0.000663974206 original_threshold=0.00026041668 endpoint=0.500663996,0.5 map_generation=previous-explicit
+I15 3840x2160 reference=1280x720 diffusion=0 kind=2 minimum=0.000663974206 original_threshold=0.00026041668 endpoint=0.75,0.5 map_generation=next-explicit
+I15 3840x2160 reference=1280x720 diffusion=1 kind=0 minimum=0.0019919225 original_threshold=0.00026041668 endpoint=0.501991928,0.501991928 map_generation=previous-explicit
+I15 3840x2160 reference=1280x720 diffusion=1 kind=1 minimum=0.0019919225 original_threshold=0.00026041668 endpoint=0.501991928,0.5 map_generation=previous-explicit
+I15 3840x2160 reference=1280x720 diffusion=1 kind=2 minimum=0.0019919225 original_threshold=0.00026041668 endpoint=0.75,0.5 map_generation=next-explicit
+I15 3840x2160 reference=0x0 diffusion=0 kind=0 minimum=0.000663974206 original_threshold=0.00026041668 endpoint=0.500663996,0.500663996 map_generation=previous-explicit
+I15 3840x2160 reference=0x0 diffusion=0 kind=1 minimum=0.000663974206 original_threshold=0.00026041668 endpoint=0.500663996,0.5 map_generation=previous-explicit
+I15 3840x2160 reference=0x0 diffusion=0 kind=2 minimum=0.000663974206 original_threshold=0.00026041668 endpoint=0.75,0.5 map_generation=next-explicit
+geometry replay repeated frame equations

@@ -1,0 +1,95 @@
+{
+  "qualification": "finite injected endpoint-payload fixtures; not arbitrary original warp producer or Windows pixels",
+  "square8": {
+    "profile": {
+      "target": [
+        256,
+        256
+      ],
+      "mesh": [
+        8,
+        8
+      ],
+      "aspect": [
+        1,
+        1
+      ],
+      "texel_offsets": [
+        0,
+        0
+      ]
+    },
+    "start": [
+      0.28125,
+      0.296875
+    ],
+    "horizontal_bias": 0.125,
+    "four_node_original_endpoint": [
+      0.4296875,
+      0.2734375
+    ],
+    "AD_endpoint": [
+      0.46875,
+      0.234375
+    ],
+    "BC_endpoint": [
+      0.40625,
+      0.296875
+    ],
+    "source_to_endpoint_v_inversion": "explicit in injected payload; not assumed for real presets"
+  },
+  "native48x32": {
+    "profile": {
+      "physical": [
+        3840,
+        2160
+      ],
+      "reference": [
+        1280,
+        720
+      ],
+      "standard_detail_uv_owner": [
+        1280,
+        720
+      ],
+      "mesh": [
+        48,
+        32
+      ],
+      "aspect": [
+        1,
+        0.5625
+      ],
+      "texel_offsets": [
+        0,
+        0
+      ]
+    },
+    "D_node": [
+      18,
+      12
+    ],
+    "equation_D_y": 0.4296875,
+    "start": [
+      0.359375,
+      0.35546875
+    ],
+    "source_bilerp_endpoint": [
+      0.5078125,
+      0.33203125
+    ],
+    "AD_endpoint": [
+      0.546875,
+      0.29296875
+    ],
+    "hypothesis": "test-only oracle patch changes motion endpoint interpolation only; all feedback warp geometry remains current legacy AD"
+  },
+  "current_RG16F_bytes": {
+    "1280x720": 3686400,
+    "3840x2160_fallback": 33177600
+  },
+  "RG32F_upgrade_extra_bytes": {
+    "1280x720": 3686400,
+    "3840x2160_fallback": 33177600
+  }
+}
