@@ -1,0 +1,13 @@
+{
+  "android_jar_path": "/Users/jneerdael/Library/Android/sdk/platforms/android-34/android.jar",
+  "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+  "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+  "d8_jar_path": "/Users/jneerdael/Library/Android/sdk/build-tools/36.1.0/lib/d8.jar",
+  "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+  "dex_sha256": "6a8d414140def70e3c2069642fc8fefb97222d7085354b5142465ba8f2e5e663",
+  "helper_classes": {
+    "helper-classes/nl/neerdael/projectm/analysis/PhysicalBlitProbe.class": "528978b757b5551ad29a74785dd3d427d5db52ded7363184f95d4448dd781a4f"
+  },
+  "min_api": 21,
+  "schema_version": 1
+}

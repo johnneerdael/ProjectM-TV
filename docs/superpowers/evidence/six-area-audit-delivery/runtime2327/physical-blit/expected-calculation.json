@@ -1,0 +1,14 @@
+{
+  "profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+  "source": "authored_canvas._upsample + feedback_field.unorm8",
+  "source_files_sha256": {
+    "authored_canvas.py": "82b4bcd9ac50dc387b86f2db9f183f73b968e593249b5b1a99e2cf2fc09f59f7",
+    "unorm_sampler.py": "d2b1895ea6e5a480b7e8cdf97243d507c77a11e902cf7684c39621708e066d16",
+    "feedback_field.py": "db25176d26e619ac7d952fbdb96110bac200768bab75359509c475f63e464288",
+    "spatial.py": "18a3cc2c84e979a1871776454a7224c0e7b757a4dea556c90080de05d4a66019"
+  },
+  "independent_math": "q=(p+.5)/2-.5; i=(p-1)//2; fraction3/4 for evenp,1/4 for oddp; clampfetch; sum16 integer coefficients then roundnearestties-even",
+  "origin": "top-row-first inputs/expected; Java uploads flipped rows and flips readback once",
+  "formats": "SourceGL_RGBA8/GL_RGBA/GL_UNSIGNED_BYTE, destinationdefaultRGBA8, GL_LINEAR framebufferblit",
+  "scope": "Separate frozen operator proof; coreframesmustremain0; no actual JNI transition or preset fidelity claim"
+}

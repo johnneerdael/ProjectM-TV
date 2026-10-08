@@ -1,0 +1,49 @@
+{
+  "scope": "Frozen independent physicalGL_LINEARoperator before anynativeGLreadback; no coretransition/preset/streakproof",
+  "frozen_utc": "2026-10-08T04:37:57.971262+00:00",
+  "input_size": [
+    1920,
+    1080
+  ],
+  "output_size": [
+    3840,
+    2160
+  ],
+  "sampling_profile": "apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1",
+  "source_rgba8_framebuffer": true,
+  "destination_rgba8_default_framebuffer": true,
+  "expected_inputs_sha256": {
+    "runtime-java.json": "d1d4f63cc6d3ba32f68e923e939d4a37848620623f5f31048c604a836ea20a29",
+    "published-core.aar": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+    "stripes-expected-source.rgba.u8": "deb2a399a0b04b9645ce59a8fdae70c104242d1ae02925deb74cdd12d0e79411",
+    "stripes-expected-integer-rne.rgba.u8": "deb2a399a0b04b9645ce59a8fdae70c104242d1ae02925deb74cdd12d0e79411",
+    "stripes-input.rgba.u8": "48c0e6c545f1f6c8cc9e6bd9909b396a7b804d2c7b94346996de8dc9f2b4e898",
+    "gradient-expected-integer-rne.rgba.u8": "d98140da44deae8fc1a82dd567bca6b8662e11ac2715113b2f76c4d8538bbbb0",
+    "edges-expected-source.rgba.u8": "594aa10af9fc4b0184d635ffd37dd1ce5134c75f4a47e9f68dbcfc43415442be",
+    "classes.jar": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+    "edges-input.rgba.u8": "670d309dc8c114efaa84ae48fac17ffb85b8615d2c9a8ca282a659d9ef5e25f1",
+    "expected-calculation.json": "45e8d1d658894e9e3c9e61c1a6962b7f381f3c598aecce88d0eaefba773071d6",
+    "classes.dex": "6a8d414140def70e3c2069642fc8fefb97222d7085354b5142465ba8f2e5e663",
+    "cases.json": "8408bce976e89cb35db26d811c7b069dd807d8a418e09577cf3b62a6cdd7844d",
+    "java-reproduction-verification.json": "20710d57b349b360a1b9d4e1293014e2250b3cd973e9df16ce88f01d29c8197b",
+    "edges-expected-integer-rne.rgba.u8": "594aa10af9fc4b0184d635ffd37dd1ce5134c75f4a47e9f68dbcfc43415442be",
+    "libprojectmtv.so": "5fc881b3b74756dc9597a4ba8ce6850ed1318880eca985888a85d9495c5b1218",
+    "gradient-expected-source.rgba.u8": "b283b784b46e7ec2b4d20c5a9bf28d5ee3125c003e22ed30728ec0f979e7f283",
+    "PhysicalBlitProbe.java": "2a2eb5be52b2410bed265b81daa82789eed8b4df33d529a96db0c5b2f28bfdb1",
+    "gradient-input.rgba.u8": "71f315000b3e2795b02c2fe36a486ffb3e496f7be3dea694baee50515fd06160"
+  },
+  "java_binding": {
+    "policy": "published-aar-reproduced-dex-v1",
+    "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+    "aar_sha256": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+    "dex_sha256": "6a8d414140def70e3c2069642fc8fefb97222d7085354b5142465ba8f2e5e663",
+    "reconstructed_dex_sha256": "6a8d414140def70e3c2069642fc8fefb97222d7085354b5142465ba8f2e5e663",
+    "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+    "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+    "helper_classes_sha256": {
+      "helper-classes/nl/neerdael/projectm/analysis/PhysicalBlitProbe.class": "528978b757b5551ad29a74785dd3d427d5db52ded7363184f95d4448dd781a4f"
+    },
+    "min_api": 21,
+    "proof_sha256": "d1d4f63cc6d3ba32f68e923e939d4a37848620623f5f31048c604a836ea20a29"
+  }
+}

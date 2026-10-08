@@ -1,0 +1,177 @@
+{
+  "scope": "ActualGL_LINEARblit numerical operator with fullunchanged published27loaded; separatefromJNItransition/presetproof",
+  "metadata": {
+    "scope": "Separate physical GL_LINEAR operator; no actual JNI transition/preset draws or score credit",
+    "core_version": "4.2.0",
+    "core_frame_serial_before": 0,
+    "core_frame_serial_after": 0,
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+    "source_size": [
+      1920,
+      1080
+    ],
+    "destination_size": [
+      3840,
+      2160
+    ],
+    "destination_config_bits": {
+      "red": 8,
+      "green": 8,
+      "blue": 8,
+      "alpha": 8,
+      "samples": 0
+    }
+  },
+  "freeze_sha256": "33023d560b4793a4701093eea831987dbad2a12a3bd9de12196d316607980a3c",
+  "all_frozen_inputs_preserved": true,
+  "rows": [
+    {
+      "case": "gradient",
+      "actual_sha256": "b283b784b46e7ec2b4d20c5a9bf28d5ee3125c003e22ed30728ec0f979e7f283",
+      "source": {
+        "max_rgba8_error": 0,
+        "unequal_samples": 0,
+        "unequal_pixels": 0,
+        "channel_unequal_samples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "first_differences": []
+      },
+      "integer-rne": {
+        "max_rgba8_error": 1,
+        "unequal_samples": 2108068,
+        "unequal_pixels": 2095975,
+        "channel_unequal_samples": [
+          0,
+          0,
+          45582,
+          2062486
+        ],
+        "first_differences": [
+          {
+            "y": 1,
+            "x": 1,
+            "channel": 3,
+            "actual": 1,
+            "expected": 0
+          },
+          {
+            "y": 1,
+            "x": 5,
+            "channel": 3,
+            "actual": 3,
+            "expected": 2
+          },
+          {
+            "y": 1,
+            "x": 9,
+            "channel": 3,
+            "actual": 5,
+            "expected": 4
+          },
+          {
+            "y": 1,
+            "x": 13,
+            "channel": 3,
+            "actual": 7,
+            "expected": 6
+          },
+          {
+            "y": 1,
+            "x": 17,
+            "channel": 3,
+            "actual": 9,
+            "expected": 8
+          },
+          {
+            "y": 1,
+            "x": 21,
+            "channel": 3,
+            "actual": 11,
+            "expected": 10
+          },
+          {
+            "y": 1,
+            "x": 25,
+            "channel": 3,
+            "actual": 13,
+            "expected": 12
+          },
+          {
+            "y": 1,
+            "x": 29,
+            "channel": 3,
+            "actual": 15,
+            "expected": 14
+          }
+        ]
+      }
+    },
+    {
+      "case": "stripes",
+      "actual_sha256": "deb2a399a0b04b9645ce59a8fdae70c104242d1ae02925deb74cdd12d0e79411",
+      "source": {
+        "max_rgba8_error": 0,
+        "unequal_samples": 0,
+        "unequal_pixels": 0,
+        "channel_unequal_samples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "first_differences": []
+      },
+      "integer-rne": {
+        "max_rgba8_error": 0,
+        "unequal_samples": 0,
+        "unequal_pixels": 0,
+        "channel_unequal_samples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "first_differences": []
+      }
+    },
+    {
+      "case": "edges",
+      "actual_sha256": "594aa10af9fc4b0184d635ffd37dd1ce5134c75f4a47e9f68dbcfc43415442be",
+      "source": {
+        "max_rgba8_error": 0,
+        "unequal_samples": 0,
+        "unequal_pixels": 0,
+        "channel_unequal_samples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "first_differences": []
+      },
+      "integer-rne": {
+        "max_rgba8_error": 0,
+        "unequal_samples": 0,
+        "unequal_pixels": 0,
+        "channel_unequal_samples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "first_differences": []
+      }
+    }
+  ],
+  "limits": [
+    "No corepresetdraws/transition exercised",
+    "No rootPythonmodel changed",
+    "Only measured1920x1080to3840x2160RGBA8linearblit onrecordedbackend",
+    "No random/streakcredit"
+  ]
+}

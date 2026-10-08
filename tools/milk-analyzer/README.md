@@ -1605,3 +1605,16 @@ rounding policy is therefore a TV implementation detail, not a MilkDrop language
 rule. Always trace reference operations and verify them with controlled numerical
 simulations before implementing changes; do not copy opaque routines. See
 `fixtures/core2325-cosmic-half-storage-repair-2026-10-08.json`.
+
+
+## Completed six-area audit delivery
+
+The D/U/P implementation and I/M handoff goal is delivered. D01 is fixed, all33
+I/M handoffs are separately ranked in Downloads, and U01 is implemented and
+qualified for explicitly allocated pinned2.3.27 Apple GLES authored/native
+contexts. Four frozen full-AAR controls cover120frames with maxRGB8 errors0/1/1/1;
+six isolated physical-blit RGBA8 comparisons match exactly. The fourth control
+exercises zoomed recurrence, not .97 decay (first duplicate value1 wins).
+Analytical blur/motion/gain-switch evidence is separate. Unknown resource and
+unqualified-domain guards remain; no universal appearance or random-score credit
+is claimed. See `docs/superpowers/evidence/six-area-audit-delivery/DELIVERY.md`.

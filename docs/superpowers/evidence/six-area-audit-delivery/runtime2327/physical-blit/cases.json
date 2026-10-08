@@ -1,0 +1,29 @@
+{
+  "native_width": 1920,
+  "native_height": 1080,
+  "physical_width": 3840,
+  "physical_height": 2160,
+  "cases": [
+    {
+      "case": "gradient",
+      "input_file": "gradient-input.rgba.u8",
+      "expected_source_file": "gradient-expected-source.rgba.u8",
+      "expected_integer_rne_file": "gradient-expected-integer-rne.rgba.u8",
+      "source_integer_rne_differing_samples": 2108068
+    },
+    {
+      "case": "stripes",
+      "input_file": "stripes-input.rgba.u8",
+      "expected_source_file": "stripes-expected-source.rgba.u8",
+      "expected_integer_rne_file": "stripes-expected-integer-rne.rgba.u8",
+      "source_integer_rne_differing_samples": 0
+    },
+    {
+      "case": "edges",
+      "input_file": "edges-input.rgba.u8",
+      "expected_source_file": "edges-expected-source.rgba.u8",
+      "expected_integer_rne_file": "edges-expected-integer-rne.rgba.u8",
+      "source_integer_rne_differing_samples": 0
+    }
+  ]
+}

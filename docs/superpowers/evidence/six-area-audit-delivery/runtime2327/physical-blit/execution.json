@@ -1,0 +1,7 @@
+{
+  "scope": "Frozen operator only; no preset frames or transitions",
+  "remote": "/data/local/tmp/projectmtv-2327-physical-blit-20261008",
+  "started_utc": "2026-10-08T04:39:41.448560+00:00",
+  "command": "env CLASSPATH=/data/local/tmp/projectmtv-2327-physical-blit-20261008/classes.dex app_process -Djava.library.path=/data/local/tmp/projectmtv-2327-physical-blit-20261008 /system/bin nl.neerdael.projectm.analysis.PhysicalBlitProbe /data/local/tmp/projectmtv-2327-physical-blit-20261008/libprojectmtv.so /data/local/tmp/projectmtv-2327-physical-blit-20261008",
+  "freeze_sha256": "33023d560b4793a4701093eea831987dbad2a12a3bd9de12196d316607980a3c"
+}

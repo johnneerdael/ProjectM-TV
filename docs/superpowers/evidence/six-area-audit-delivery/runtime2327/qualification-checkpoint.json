@@ -208,11 +208,102 @@
         "native-b499b9a2723d587b4ff1a3eff2e378f5d14c7948420bd3bb0253ab4730ee1f9e.npz": "f393854904691b40ea3f22be5a55a688545a71df79b7f7b35297f499148898dd"
       },
       "recovery": null
+    },
+    {
+      "case": "feedback-shape-standard-4k",
+      "maximum_rgb8_error": 1,
+      "mean_rgb8_error": 1.3395919067215363e-08,
+      "passed": true,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "feedback-shape-standard-4k.milk",
+        "frames": 30,
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "explicit released JNI level; surface gate and integer authored canvas unchanged",
+        "requested_trails": 0,
+        "physical_surface_width": 3840,
+        "physical_surface_height": 2160,
+        "gl_viewport_after_last_draw": [
+          0,
+          0,
+          3840,
+          2160
+        ],
+        "render_extent_basis": "Classic single-preset host: expected N=P; final GL viewport observed; public JNI has no independent internal-size getter",
+        "requested_configuration": {
+          "width": 3840,
+          "height": 2160,
+          "trails": 0
+        },
+        "qualification_scope": "Private configurable public-JNI helper; no forced native/surface split or preset score credit",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "prediction_freeze_sha256": "37f8b5c1413dc540e983f06c89465c4c235e2115b9405e70a5ed9e01c5fccedb",
+      "native_frame_records_sha256": "e0d07e575cf3fe2a144b65c86486c9c9365d19a9ef878c34fd608ae6bcdff556",
+      "native_field_files": {
+        "native-42ba1fcbc55de69ef298c68d090275137bbe730ae0936e99f64679be74e8a56c.npz": "d55c40f31c8ad8c56e12663cb412bf3a51e45f347c076edd8b2ae464ef8fa309",
+        "native-44ccc7702b189a2218882b407c14bb35fa3ad65cccb485b3a63ddb742ff01c3b.npz": "0130f2a5ef3b82e1138f70590bd5f0b2137f41be6abf30e20c1d269f007671b4",
+        "native-a77861313dac13d804da3e39d81c6dc970091cbf902196c7531787d981bdbcd1.npz": "1e696e764dacb2dcc85bcf8f85fecec5cc03efc0663254624962c8b0e5d662d0",
+        "native-0dcc9f5a6293952fb80745a46755f314f609e7ca001b3654e8763258c0ed6b81.npz": "e7a857cecefff8a115ab8c3d6c0137116aff232fc945ee31c82d307e3bd62758",
+        "native-ae687d95a35d3f3badf90ff46912d905b487c9d15a20c44fa167b294f39d0052.npz": "8dabdd98bf10f26fc57b6869bd836d69a3dd9b0da8607f817dd4e85816da60e9",
+        "native-727acba94e8ab99c08f596c1f5efe3cc2607cdc41a350830030cccc8284d54b5.npz": "85738e785c063257869eae41605efd071f146655c2ae0bf5754dab6e90c81d69",
+        "native-de47f25972fd25f1ced071e0313b129facda7404c3fede058335aa6b90c7bb34.npz": "1a9f0458e80756043c10337508c8c4d934e95d6f558d7a7a61c66c20cea42f96",
+        "native-2baade4c968598bce997a8f6189b387980b8e380aa1d1bca2f09c5922725410d.npz": "dab07f1760cbd287b46db919b51924e511a893c193461bbc1400b22047fc27d8",
+        "native-615292afd551de74bfca75da1f2623454de3cb168b4ffc402850b1938d264b0d.npz": "687bd2d6aa0e2dd6316c5a708008169510a6058628e2d7940bffe29b4aff2406",
+        "native-0395fc10c78d3557082459e92db8d9907d9e757ea6b7d931ddbf9fd0c5971c74.npz": "fd9975ad3f9a05ace74af792e23fd6afbef1c6a92efdde01ba58dafa2a97c353",
+        "native-1fef13bf8668281c5ac6963ef1ea665495826e80f342b83780b697273d6d6350.npz": "64ada812ed8f470794d3bcb462362778298c754752d7439c4b80589e202a4639",
+        "native-e1eb989fbc58595a7fc8d2463db5818db9224f52eeee6494728211b02b3466fb.npz": "4435841e298bda41b502832f7c7429b9413f449191d149c97ef14d75820b466b",
+        "native-24741f33b8dd02c5b80745f662e2a8e6c303d5b1ac8b5ebe86c7c03d70e4a2d8.npz": "4fd63e072a07488b9d86b7e7ae52e1abf9c1ce5017846aedb99da6be669d526e",
+        "native-6cbe57aec92fe806633df93eda9540cd8c4202fe7bdbfe1ec2308b9158e1339d.npz": "02e68dc768fe9556e6e8a453c6ba72c115d550bbd896552f74bccc768daba391",
+        "native-2852941cd4de3b5b3aa4b10808f89eb404516e5eb7e270f8fcafcf625dffca80.npz": "40d69c91ac9cada22d96ec1789847fdc111b094400c4a826974596bad04060a9",
+        "native-62409f1172c5c0d686bdd6bb107a524f06bb75d400281be470ab4027147a92b1.npz": "ee7dde95f2d1ed2d9ab0cdca8ab7e55ec48a8dd3cddf278ad3b8b59885fe3ae1",
+        "native-950758cd9fc4487c4575c4b79d076bee09ebdc480a62ef3f078d9634e8f05a51.npz": "b3d9ad7f7fff70ded4424440459ebd09bb2dd4d3f57da6a3366348d184fe01a4",
+        "native-9dcfe3f84418e171fd8f0968cdf44179f0a9cbd8b3e75d506b6f970ce4e7b031.npz": "e4ba879c679ff19942753374d99b17c5d878b1aaee223feb390eef681edd62b1",
+        "native-4e3138782c96b1ba62c73c0b89798a3cd278cdcb1dbb7e89297250d89f640698.npz": "93ed8ae13c48ce551613caf5e5918e208d4e7a4ddfa197f316acd0700ef8dad1",
+        "native-659a99ed200d33ec877e01a65a032a6ad309c407cd25ae950a3070c3d5077095.npz": "2b16e57130be524360905ba4da062c3c1c89cd727c127cda565c47ab82e021c8",
+        "native-01e87e6a51145e0de5133a47b344419af4aaacbc230abdf04731c36750c63b73.npz": "2157f66e00f4a1dcd6ba8ca25d07ee6ea7b768fa7178b702e9c18ebc2768c663",
+        "native-34ffd8cd4f8aa6c6b1d273c7c3bee33461120db110356f97a587257ae674c15f.npz": "7a1ba245cae2a9a2aeb14bc35b72c5e330ad9eb8ade8bc5734b0c680c93f08ac",
+        "native-c44f14e7cb4a80caa13ea620d52db6ffb1b353087e7da195e5af61260ba2ac00.npz": "5f7bf8a431d7f917a7745e084f14acbf002227207e8ca8fe194fe5ea5962f107",
+        "native-e80b81499f5e0e316a7d342c5867ee42b871722b0cbef527ce05ade767e75bac.npz": "0ccfacb22714b04612615f905578ad6aee459dfbf9ba2750a91886649971584e",
+        "native-9f2d059d01f76a78c92e165c9eb683deee32815539104fadc07f2878fd834de6.npz": "1912959c0c6d00cde07dfe3be222850855c84aed35bf48f7a5919e201c3c0400",
+        "native-7f959d85687c4a4a855199e1ef9a06fb1761bcd56191689337f43cd63a9e4d9e.npz": "cf21907220f3c21496e57d417b3ee0b696ba699a1c711472e3f58f06b17c90a2",
+        "native-0da93a8204e2e8c1bec4ae09802bb37a6eb1e234b4d6c00afe2a400fb882b91c.npz": "9b5bbf6b4e55611ace4c46cae0ed2abdf7aeef6ea5d27793829f6375ac6ca5e8",
+        "native-42a997972e8d7ceb95ff87d0682dbe7b4c42f8351cdb344f282b80adfb505eb3.npz": "516f42996f5d9166cf1cb7c1e43b59864960b35e05e3412424ff90a7aafa8279",
+        "native-e2d77d1965cf424522f69fbe84b3f18c43f667ea9203e819a20f2a6fdd8b596c.npz": "df4b7eb071bbdc6d5d74e92963b1018d56c25bc6c34ad885116d4bcb2e8c90c5",
+        "native-fdbdf51c6a74be73cc08c5459fde477b195117eba27144ae00aea3b554a96db0.npz": "f839107585a51cee04ea69fb78295c540947ed309e201c985e5128595a55c7da"
+      },
+      "recovery": null,
+      "effective_source_settings": {
+        "fdecay": 1,
+        "zoom": 1.002,
+        "wave_alpha": 0,
+        "wave_mode": 4
+      },
+      "fixture_limit": "Duplicate fDecay=.97 is not selected; first value1 is retained. Control proves zoomed recurrence/moving shape/single shared-register execution, not .97 decay."
     }
   ],
-  "remaining": [
-    "physical blit numerical operator",
-    "feedback plus prepared geometry replay control"
-  ],
-  "U01_resolved": false
+  "remaining": [],
+  "U01_resolved": true,
+  "independent_recheck": "All120 source/native frame records decoded, native pixel hashes verified and maximum errors recomputed from raw compressed arrays",
+  "resolution_scope": "Explicitly allocated pinnedv2.3.27 Apple GLES authored/native contexts; no universal GPU/preset/transition/fallback certification",
+  "independent_requirement_audit": "Passed: no concrete remaining requirement within originalU01 scope; analytical blur/motion/gain-switch evidence separatefromfullAARcontrols"
 }

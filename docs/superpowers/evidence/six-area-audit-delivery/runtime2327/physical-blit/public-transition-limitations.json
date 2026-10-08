@@ -1,0 +1,17 @@
+{
+  "status": "Not executed; requires independently frozen transition predictions",
+  "public_api": [
+    "setTransitionMode(TRANSITION_AUTO,false): initial75percent",
+    "setTransitionMode(TRANSITION_AUTO,true): initial60percent",
+    "setSoftCutDuration(positive), enableautomaticsoftswitch"
+  ],
+  "exact50percent": "Only adaptivelevel3 inreleasedscale table{1,.75,.6,.5}; no publicforcedscale setter. Freeze time/performance conditions and assertobservedpercent50 beforeclaimingN1920/P3840.",
+  "scope": "Actualtransition renders two presets and changes/resizes history; separate from operator proof and single-preset forecasts",
+  "release_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "source_references": [
+    "core/src/main/cpp/native-lib.cpp:1208",
+    "core/src/main/cpp/native-lib.cpp:1764",
+    "core/src/main/cpp/native-lib.cpp:1613",
+    "core/src/main/cpp/native-lib.cpp:2472"
+  ]
+}

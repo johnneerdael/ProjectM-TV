@@ -1,0 +1,31 @@
+{
+  "all3_byte_identical": {
+    "gradient": true,
+    "stripes": true,
+    "edges": true
+  },
+  "scope": "Two numerical operator runs, zero preset frames or scoringcredit",
+  "repeat1_metadata": {
+    "scope": "Separate physical GL_LINEAR operator; no actual JNI transition/preset draws or score credit",
+    "core_version": "4.2.0",
+    "core_frame_serial_before": 0,
+    "core_frame_serial_after": 0,
+    "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+    "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+    "source_size": [
+      1920,
+      1080
+    ],
+    "destination_size": [
+      3840,
+      2160
+    ],
+    "destination_config_bits": {
+      "red": 8,
+      "green": 8,
+      "blue": 8,
+      "alpha": 8,
+      "samples": 0
+    }
+  }
+}

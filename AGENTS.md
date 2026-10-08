@@ -678,3 +678,16 @@ CPU zoom powers use a separately versioned policy with host producer attribution
 source inspection does not certify Android bit parity. Full published 2.3.27 AAR
 numerical/high-resolution qualification remains open. See the analyzer README
 and `profiles/published-core-v2.3.27.json`. Do not clear U01 from tests alone.
+
+
+Six-area audit delivery completed (2026-10-08): D01 attribution fixed;33 I/M
+handoffs ranked/hash-verified in Downloads; U01 resolved within explicitly
+allocated pinned2.3.27 Apple GLES authored/native contexts. Four full-AAR
+30framecontrols pass(maxRGB8 0/1/1/1); six isolated blitRGBA8 comparisons match
+exactly. Feedback control effectivefDecay1 (duplicate .97 notselected), zoom1.002,
+30distinct fields and single shared-register shape update. Analytical blur/motion/
+gain-switch evidence is separate. Preserve resource/domain guards and appearance
+uncertified flag; no universal GPU/preset/transition or new random-streak claim.
+See `docs/superpowers/evidence/six-area-audit-delivery/DELIVERY.md` and the pinned
+published2.3.27 profile for exact evidence/limitations. Do not merge main based
+on this audit: the user's original visual prediction acceptance remains separate.

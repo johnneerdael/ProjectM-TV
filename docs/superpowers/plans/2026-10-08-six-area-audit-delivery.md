@@ -22,18 +22,18 @@
 ## Task 3: U01 authored/native calculation
 
 - [x] Derive and test native canvas selection, positive half-away integer rounding, block downsampling, bilinear presentation and blockwise centered/headroom-limited detail gain.
-- [ ] Represent output, authored and reference sizes separately, including actual allocated canvas and fallback disposition.
-- [ ] Preserve authored feedback as its own recurrence; native geometry/detail must not feed native raster noise back into it.
-- [ ] Execute main/pixel equations with the native inputs and evaluate geometry once with authored target inputs. Replay prepared state without additional EEL or random draws.
-- [ ] Integrate both raster targets, motion UV ownership, delayed blur, native composite and all Standard/Medium/High gains from the exact release JNI contract.
-- [ ] Keep the unsupported high-resolution guard until the complete path is implemented and qualified; accepting a size alone is not a fix.
-- [ ] Run small analytical controls, unaffected low-resolution controls and identified full-AAR controls at matching source/audio/assets/clock/render settings. Include an actual 3840×2160 size/configuration witness.
-- [ ] Update the audit delivery record only when the complete U01 requirement is verified.
+- [x] Represent output, authored and reference sizes separately, including actual allocated canvas and fallback disposition.
+- [x] Preserve authored feedback as its own recurrence; native geometry/detail must not feed native raster noise back into it.
+- [x] Execute main/pixel equations with the native inputs and evaluate geometry once with authored target inputs. Replay prepared state without additional EEL or random draws.
+- [x] Integrate both raster targets, motion UV ownership, delayed blur, native composite and all Standard/Medium/High gains from the exact release JNI contract.
+- [x] Keep the unsupported high-resolution guard until the complete path is implemented and qualified; accepting a size alone is not a fix.
+- [x] Run small analytical controls, unaffected low-resolution controls and identified full-AAR controls at matching source/audio/assets/clock/render settings. Include an actual 3840×2160 size/configuration witness.
+- [x] Update the audit delivery record only when the complete U01 requirement is verified.
 
 ## Task 4: Save and review
 
-- [ ] Run the prepared analyzer suite and strict documentation build after stable implementation.
-- [ ] Obtain focused review, commit and push this predictor branch regularly. Do not merge main or change the native library/presets in this task.
+- [x] Run the prepared analyzer suite and strict documentation build after stable implementation.
+- [x] Obtain focused review, commit and push this predictor branch regularly. Do not merge main or change the native library/presets in this task.
 
 There are zero confirmed P entries in the frozen audit. New discoveries require attribution and verification rather than relabeling an inherited policy to make this plan easier.
 
@@ -64,3 +64,27 @@ Exact 2.3.27 source and adapter guards are prepared and probed; the published
 AAR is remotely staged with matching Java/Dex/native/clock/PCM hashes. Independent
 source review finds no blocking issue; full-AAR qualification and physical blit
 precision remain open. U01 is not resolved yet.
+
+
+## Final delivery
+
+The original 35-entry audit is delivered: 31 I and two M library handoffs are
+ranked and hash-verified; D01 is corrected; zero P entries were confirmed. U01
+is resolved for the explicitly allocated pinned v2.3.27 Apple GLES authored/native
+context. The default guard remains for unknown resources, noninteger canvases and
+unqualified ordinary/diffusion paths. This is a bounded extension of the predictor
+model, not universal renderer certification.
+
+Four independently frozen 30-frame full-AAR controls pass (120 frames total):
+maximum RGB8 errors 0/1/1/1. The fourth control has 30 distinct predicted fields
+and exercises zoomed feedback, moving custom shape and one shared-register update
+per frame. Its effective decay is1: the appended .97 loses to the first duplicate
+key, so no .97 decay claim is credited. Both source/native frame arrays and hashes
+were independently rechecked. Three physical GL_LINEAR fixtures match every
+RGBA8 channel exactly in two repeats; this is an isolated operator proof, not an
+actual two-preset transition. Blur/motion/gain-switch controls are analytical.
+
+The final source requirement review found no remaining blocker in this declared
+scope. Prepared suite: 1,577 tests and92subtests pass; strict MkDocs passes.
+Appearance certification and randomized acceptance scores remain unchanged.
+See `docs/superpowers/evidence/six-area-audit-delivery/DELIVERY.md`.

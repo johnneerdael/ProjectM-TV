@@ -17,8 +17,9 @@
     "published_bytes_verified": true,
     "jni_declarations_checked": true,
     "source_policy_controls_passed": true,
-    "published_runtime_numerical_controls_passed": false,
+    "published_runtime_numerical_controls_passed": true,
     "appearance_certified": false,
-    "runtime_scope": "Pending frozen authored/native canvas controls; source and runtime proofs are separate"
+    "runtime_scope": "Four frozen30frame 3840x2160 controls: canvas dimensions, Medium/High detail, and changing feedback/custom-shape replay; maximumRGB8error1; separate physical GL_LINEAR operator exact in sixRGBA8 comparisons; no authored-preset visual certification",
+    "control_evidence_sha256": "98064f70c60a8b2b991352855d3b154ccc2c90c6b9f18f8d0ac201ca56e5da81"
   }
 }

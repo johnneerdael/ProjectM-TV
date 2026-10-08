@@ -1,0 +1,40 @@
+{
+  "release": "v2.3.27",
+  "aar_sha256": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+  "native_arm64_sha256": "5fc881b3b74756dc9597a4ba8ce6850ed1318880eca985888a85d9495c5b1218",
+  "published_classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+  "operator_helper_dex_sha256": "6a8d414140def70e3c2069642fc8fefb97222d7085354b5142465ba8f2e5e663",
+  "source_extent": [
+    1920,
+    1080
+  ],
+  "physical_extent": [
+    3840,
+    2160
+  ],
+  "fixtures": [
+    "gradient",
+    "stripes",
+    "edges"
+  ],
+  "repeats": 2,
+  "max_source_rgba8_error": 0,
+  "all_samples_compared": true,
+  "preset_frames_before_after": [
+    0,
+    0
+  ],
+  "model_mutated": false,
+  "actual_core_transition_qualified": false,
+  "score_or_streak_credit": 0,
+  "raw_artifact_location": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/predictor-visual-loop/build/visual-loop/runtime2327/physical-blit-qualification",
+  "raw_sha256": {
+    "repeat0/gradient-actual.rgba.u8": "b283b784b46e7ec2b4d20c5a9bf28d5ee3125c003e22ed30728ec0f979e7f283",
+    "repeat0/stripes-actual.rgba.u8": "deb2a399a0b04b9645ce59a8fdae70c104242d1ae02925deb74cdd12d0e79411",
+    "repeat0/edges-actual.rgba.u8": "594aa10af9fc4b0184d635ffd37dd1ce5134c75f4a47e9f68dbcfc43415442be",
+    "repeat1/gradient-actual.rgba.u8": "b283b784b46e7ec2b4d20c5a9bf28d5ee3125c003e22ed30728ec0f979e7f283",
+    "repeat1/stripes-actual.rgba.u8": "deb2a399a0b04b9645ce59a8fdae70c104242d1ae02925deb74cdd12d0e79411",
+    "repeat1/edges-actual.rgba.u8": "594aa10af9fc4b0184d635ffd37dd1ce5134c75f4a47e9f68dbcfc43415442be"
+  },
+  "represented_float_evidence": "Gradient differs from exact-rational integer RNE at2108068samples,max1byte; pre-frozen source float32 sampling/storage expectations match GPU. No generic halfway rounding guarantee."
+}

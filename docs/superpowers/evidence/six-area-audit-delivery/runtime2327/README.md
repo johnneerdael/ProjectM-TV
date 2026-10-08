@@ -33,3 +33,28 @@ These controls contain no authored random references, and no random-input
 certification is claimed. U01 remains open for blit and feedback/geometry checks. The public-JNI helper supports P=N4K; forcing
 N1920/P4K is unavailable, so scaled physical-blit source tests remain separate
 from an actual core-transition witness.
+
+
+## Feedback and geometry follow-up
+
+A fourth independently frozen 30-frame 4K control exercises zoomed authored
+feedback, a moving coloured custom shape and a shared-register increment in its
+frame equation. All 30 predicted fields differ, so the comparison checks evolving
+state rather than repeating a static picture. Native geometry replay preserves
+one equation execution per frame. The maximum RGB8 difference is one level.
+All 120 source/native frame records were independently decoded and compared;
+metadata records 30 completed frames, one indexed preset, no skips and the
+1280×720 authored canvas for every control. No source/preset repair or native
+library modification was needed. U01 disposition awaits the final requirement audit.
+
+`physical-blit/` contains the separate six exact RGBA8 operator comparisons.
+These are bound to the recorded backend and do not certify an arbitrary GPU or
+an actual two-preset Auto transition. Current default and unknown resource guards
+remain; only explicit allocated authored/native contexts use the new route.
+
+
+The feedback fixture's effective decay is **1**, zoom **1.002**. Its appended
+`fDecay=.97` loses to the earlier `fDecay=1` because the parser keeps the first
+occurrence. The freeze is preserved unchanged; this control does not certify
+.97 decay. Its moving alpha-blended shape, zoomed recurrence and one register
+increment per frame remain the tested behavior. Raw parsed values are retained.

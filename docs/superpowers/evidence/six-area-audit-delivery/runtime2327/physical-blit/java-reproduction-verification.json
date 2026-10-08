@@ -1,0 +1,14 @@
+{
+  "policy": "published-aar-reproduced-dex-v1",
+  "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+  "aar_sha256": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+  "dex_sha256": "6a8d414140def70e3c2069642fc8fefb97222d7085354b5142465ba8f2e5e663",
+  "reconstructed_dex_sha256": "6a8d414140def70e3c2069642fc8fefb97222d7085354b5142465ba8f2e5e663",
+  "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+  "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+  "helper_classes_sha256": {
+    "helper-classes/nl/neerdael/projectm/analysis/PhysicalBlitProbe.class": "528978b757b5551ad29a74785dd3d427d5db52ded7363184f95d4448dd781a4f"
+  },
+  "min_api": 21,
+  "proof_sha256": "d1d4f63cc6d3ba32f68e923e939d4a37848620623f5f31048c604a836ea20a29"
+}
