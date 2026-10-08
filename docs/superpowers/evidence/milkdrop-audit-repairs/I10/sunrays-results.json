@@ -1,0 +1,93 @@
+{
+  "qualification": "Source-instrumented exact-original final-output Native4K, not Windows proof",
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "roles": {
+    "before": {
+      "preset": "BrainStain-sunrays.milk",
+      "sha256": "b3ebf1ab3f1132d2215e493fe9942693b0e70361c5c269cf86cff890520e2ef5",
+      "rgb_hashes": [
+        "4615a87995899b4277ebb40f33cf313a17150c81838e49d4791e53d5e2bdab02",
+        "d146e0825a5d20eed7aef764f6251e83ffad436c51d4d47ad70563355e7084ed",
+        "33c85ca38f1171e94da4c3e93425580d2caec637f89ad40ec75638a963fdfa42",
+        "57dbce52d8622945eccb9ffbfecd8443a9f2f3c7ecd1e81d9e8ec7625d7f9aed",
+        "d2f8657594b4fcd1d4c39c1a91f3e6c3eab7ad0d4a547859de208271bf65d8a9",
+        "328bddc616f481d5a7dca36d701ecefd42e0a17ca712940b750b6bc465f001de",
+        "9bcd75aaeadb4bd54c2374828b56c992491fd0813bef07ca03d0900620005f71",
+        "4f285c6c01627463814ec65c88256e1fec69d63a14c720bcc5f30b1e78d69daa"
+      ]
+    },
+    "after": {
+      "preset": "BrainStain-sunrays.milk",
+      "sha256": "b3ebf1ab3f1132d2215e493fe9942693b0e70361c5c269cf86cff890520e2ef5",
+      "rgb_hashes": [
+        "d26ae7537e883d2f0348c7a724a2bf6b112cfd15e7d1343d3aead72a05480584",
+        "3ad8a3f90710dd9098b375cd3da871060d095761984ca42b618d105190e85fd4",
+        "0f57438b3540e454a62b5ebdb8d10c53b518432f3704beef7a8d6158c0b3dfe0",
+        "11b2a997a5168326c9a99499bf9550182a3b54229fbb5bacf1439e80ae2851a0",
+        "f2c14e03d8f8f578e51f1c73b3e62352f1d25d4161f9aa6b23509a31b21f3f3c",
+        "841705ab8397a65fb86cb8659c8dd9b8cc6d8e7b25c285910c09105f3431a41e",
+        "72771eb930c8c276bb1c40d864f4b508ed2b05b129095391965d12e592496e17",
+        "ccb65c32c598b07f0f0a07f2b576c51ae340b80780c1ce6fff63749818e74178"
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 0.004317210005144033,
+      "before_nonblack_pixels": 96144,
+      "after_nonblack_pixels": 52193
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 0.004495201581790124,
+      "before_nonblack_pixels": 96621,
+      "after_nonblack_pixels": 45374
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 0.0022561005015432098,
+      "before_nonblack_pixels": 89899,
+      "after_nonblack_pixels": 43513
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 0.0026036040380658437,
+      "before_nonblack_pixels": 95865,
+      "after_nonblack_pixels": 41356
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 0.006447201324588477,
+      "before_nonblack_pixels": 94411,
+      "after_nonblack_pixels": 42519
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 0.004047670717592593,
+      "before_nonblack_pixels": 84746,
+      "after_nonblack_pixels": 38288
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 0.0020714779449588477,
+      "before_nonblack_pixels": 85480,
+      "after_nonblack_pixels": 36991
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 0.005414737654320987,
+      "before_nonblack_pixels": 86021,
+      "after_nonblack_pixels": 38622
+    }
+  ],
+  "illustrated_frame": 239,
+  "selected_rgb_repeats_exact": true
+}

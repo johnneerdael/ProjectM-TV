@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 5: warp-mesh-cache
+1/1 Test #5: warp-mesh-cache ..................***Failed    0.30 sec
+static mesh cache retained a stale aspect radius
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.30 sec
+
+The following tests FAILED:
+	  5 - warp-mesh-cache (Failed)
+Errors while running CTest

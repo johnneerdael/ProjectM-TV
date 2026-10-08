@@ -286,7 +286,7 @@ static void Feedback(TextureManager& textures, bool perPixel, bool preparedRepla
 static PFNGLLINKPROGRAMPROC deformationLink{};
 static PFNGLDRAWELEMENTSPROC deformationDraw{};
 static GLuint deformationBuffer{};
-static std::vector<float> deformationUV, deformationPositions;
+static std::vector<float> deformationUV, deformationPositions, deformationRadiusAngles;
 static std::vector<uint32_t> deformationIndices;
 static void LinkDeformation(GLuint program)
 {
@@ -319,6 +319,7 @@ static void DrawDeformation(GLenum mode, GLsizei count, GLenum type, const void*
     Check(mode == GL_TRIANGLES && type == GL_UNSIGNED_INT && offset == nullptr,
           "unexpected warp index draw contract");
     deformationPositions = AttributeData(0);
+    deformationRadiusAngles = AttributeData(3);
     deformationIndices.resize(count);
     const auto* indices = static_cast<const uint32_t*>(glMapBufferRange(
         GL_ELEMENT_ARRAY_BUFFER, 0, count * sizeof(uint32_t), GL_MAP_READ_BIT));
@@ -488,6 +489,36 @@ static void DiagonalControls(TextureManager& textures)
     std::cout << "legacy/custom/fallback diagonals, live path changes and affine/replay controls pass\n";
 }
 
+static void CacheControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    Control control(textures, false, false);
+    *control.frame.zoom = *control.frame.zoomexp = 1;
+    *control.frame.sx = *control.frame.sy = 1;
+    *control.frame.rot = *control.frame.warp = 0;
+    for (const auto aspect : {std::array<float,2>{1,1}, {1,1}, {.75f,1}, {1,.5f}, {1,1}})
+    {
+        control.state.renderContext.aspectX=aspect[0];control.state.renderContext.aspectY=aspect[1];
+        control.state.renderContext.invAspectX=1/aspect[0];control.state.renderContext.invAspectY=1/aspect[1];
+        control.mesh.Draw(control.state,control.frame,control.pixel);
+        Check(std::abs(deformationRadiusAngles[0]-std::hypot(aspect[0],aspect[1]))<1e-6,
+              "static mesh cache retained a stale aspect radius");
+        Check(std::abs(deformationRadiusAngles[1]-std::atan2(-aspect[1],-aspect[0]))<1e-6,
+              "static mesh cache retained a stale aspect angle");
+    }
+    for (const auto grid : {std::array<int,2>{10,8}, {8,6}})
+    {
+        control.state.renderContext.perPixelMeshX=grid[0];control.state.renderContext.perPixelMeshY=grid[1];
+        control.mesh.Draw(control.state,control.frame,control.pixel);
+        Check(deformationPositions.size()==size_t((grid[0]+1)*(grid[1]+1)*2), "cache retained stale mesh dimensions");
+        Check(deformationIndices.size()==size_t(grid[0]*grid[1]*6), "cache retained stale index count");
+    }
+    control.state.renderContext.viewportSizeX=128;control.state.renderContext.viewportSizeY=96;
+    control.mesh.Draw(control.state,control.frame,control.pixel);
+    Check(deformationPositions.front()==-1 && deformationPositions.back()==1,"resize changed normalized grid endpoints");
+    std::cout << "static mesh aspect/grid/viewport invalidation controls pass\n";
+}
+
 int main(int argc, char** argv)
 {
     try
@@ -496,6 +527,7 @@ int main(int argc, char** argv)
         TextureManager textures(std::vector<std::string>{});
         if (argc > 1 && std::string(argv[1]) == "deformation") { DeformationControls(textures); return 0; }
         if (argc > 1 && std::string(argv[1]) == "diagonal") { DiagonalControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "cache") { CacheControls(textures); return 0; }
         PowerUploadControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';
         for (bool preparedReplay : {false, true})

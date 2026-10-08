@@ -1,0 +1,93 @@
+{
+  "qualification": "Source-instrumented exact-original final-output Native4K, not Windows proof",
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "roles": {
+    "before": {
+      "preset": "BrainStain-fish on.milk",
+      "sha256": "0c69712d6f173bc6cba4a007880ab3260f3ffa2bfa7c2cfc0bfce37c57d771ce",
+      "rgb_hashes": [
+        "64c8d478b6b1cba0eaeb0bbb1e5676e36c109100ce21f18666bfe6053d0e9978",
+        "aabe3a6e6d87f4709a8960c5ddb08f480087a63bfc2a10c649fc39d00f4b26d2",
+        "dafb28dac600bf623c68c27be3566d80bc89a1d91bb4bf7f6876929fe1b60150",
+        "ef7f57c1ad3390375eba5c9d5c2a0dd3ceffe03ae797d1ac13bd8087e1afccf2",
+        "1eceb563e87b274e41c3e0d6b29a0052e073f13a982a20cc1a807e7dd0bde150",
+        "9d22e63ee0f90aa273c32fc1fcaefcc7e1ddea2f0a87edaeb07c8e60df7f745d",
+        "54fc492777fae77fc8ec1c40b01fc7fdb2dc63332425300f7c0de7d0de93ecf6",
+        "8bd1926c4aeb0c5278e21c25d51903f14a0eb6edc13fce5f84445266285e809f"
+      ]
+    },
+    "after": {
+      "preset": "BrainStain-fish on.milk",
+      "sha256": "0c69712d6f173bc6cba4a007880ab3260f3ffa2bfa7c2cfc0bfce37c57d771ce",
+      "rgb_hashes": [
+        "cdc7421f7b8760fa08664e94da3f61de6e90705e5ed4aa0d6325d89f8a98cea6",
+        "9540246989a780c62e1843988f9a146148fc062544c7a48ef519bf08813cbf95",
+        "d434488080695e7939a180dff513aed40f9368a6de4fa5f3e21fb51d84385ed9",
+        "341d572b8bf679295639c438044d08d3fb44c6fa3549e66c2e8df7e5d62c97a5",
+        "9d2c63201ecbd26c7084737ead9b9fba92dcd451a245e2bad96da5ce4da1046f",
+        "94ac3aed2289d89f91ba40c3b8710082da33a824c85347216b2e6785f4ca94e6",
+        "ee7cc3c533754e6c32791ddbcd0e8fdd0d4ed9cdd17ce778036a2e04e571c6c3",
+        "ff5c12b9c4aea0ab2674e5552623dc675778bffff473e74d4a9fac5b168f6847"
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 24.76682203253601,
+      "before_nonblack_pixels": 7755188,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 27.132979198816873,
+      "before_nonblack_pixels": 7907676,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 25.467786820023147,
+      "before_nonblack_pixels": 7908788,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 19.348728378986625,
+      "before_nonblack_pixels": 8294201,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 17.012547220614714,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 13.286373054912552,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 10.119079981674382,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 12.243249059606482,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    }
+  ],
+  "illustrated_frame": 150,
+  "selected_rgb_repeats_exact": true
+}

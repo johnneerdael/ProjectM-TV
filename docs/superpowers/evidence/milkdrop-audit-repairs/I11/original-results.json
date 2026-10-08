@@ -1,0 +1,70 @@
+{
+  "qualification": "Source-instrumented Native4K final output, exact installed APK/native AAR hashes; original or explicitly declared private fixture; not Windows proof",
+  "roles": {
+    "before": {
+      "preset": "07.milk",
+      "sha256": "ec440dc5d1409388d8b55c17e683bbe8e1cd5effac1060faefdb71e222ad7849",
+      "hashes": [
+        "4efd1bc01af3798514aab5083a11e9aef665277a649ffac34477809aa1ba87f9",
+        "07a98ac01809330850ef5eabd136a0f6e04065684ce728a01d0ef7d265810008",
+        "cb5d4b42fc29a58bf1341e04515e0822f711777454d005fb6170f9532fbe2ded",
+        "f6684b88241c9667e2cf4b8e6e723368e7a4ee152ae409bf3aed6486edd21965",
+        "e5975ca5e1a851241d3564ebb48a1cab021e4f9bb3ce312563879396302d8333",
+        "dd28c520af720e614cf33dc7bf89a34dc49cd33cf3a061601d447b7f4e11c411",
+        "26797863cfb8e09927ac1464b79b973d06fbabd27f3b9d1547b19bd0b4db9f12",
+        "0a69b3c962c5c07ab3dbfb8e6bb1c42a8dc106e5f6d118d4c50d5b71ec7f1c9a"
+      ]
+    },
+    "after": {
+      "preset": "07.milk",
+      "sha256": "ec440dc5d1409388d8b55c17e683bbe8e1cd5effac1060faefdb71e222ad7849",
+      "hashes": [
+        "1f2d0ee2f61843dd0ded323020c478679bd085c7f0ce49611efa80d5b1580fe9",
+        "5ae1e87aba64641a40e45800c91ee0289b243a5a003957503eda52c7b87515c9",
+        "9bbe59d72d27c15d79d542d4c03761b4eb4e52ace3612ade77cd743a69f262fb",
+        "89361cbae8dcf561d87cfeb2e9aac737fedc57ca4473d419d443b701f79f32e8",
+        "f55c46f1675a1d7a5e0c5a62d7aecfcb6eab20d4575d270c2a4ec8ee09c6d011",
+        "06da1e71bd5d7c6924031d974c7bd01de6da240441755002625a7c785937f59a",
+        "4b8311df09259eae8d425f206fdcdf6edfe6b2a193c58af2a2d7955605e15afd",
+        "f7ed305851cc30968d744174b705874fb4de59f906a1e37714d6e148c27d0103"
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 3.170964345421811
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 3.312257306134259
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 3.1156928369341563
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 3.2236982381687245
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 3.29922550154321
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 3.1184765223122426
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 3.222087914737654
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 3.2670248199588476
+    }
+  ],
+  "all_selected_rgb_repeats_exact": true,
+  "all_before_after_selected_rgb_identical": false,
+  "illustrated_frame": 150
+}

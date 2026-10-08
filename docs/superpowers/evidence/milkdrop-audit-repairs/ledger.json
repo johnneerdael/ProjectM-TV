@@ -123,15 +123,26 @@
       "sha256": "183f4f571da4edccc7c5b2e558ce0b2906e99a91ae20a620be030e85ff3f7e80",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I10-legacy-warp-deformation-sees-the-opposite-physical-y-argument/HANDOFF.md",
       "numeric_witness": "Matched physical normalized(.6,.7), unit aspect/zoom, time/rot0,warp1: target formula approximately(.6032275,.7047434); original legacy formula(.6032086,.6974467), before texel alignment.\n\nNARROWED: legacy/no-custom-warp path only. Original custom-warp VS is absent; mapping there is uncertain. warp0 unaffected.",
-      "status": "candidate0023 implemented; production vertex RED\u2192GREEN and47 normal controls pass; Native4K/cost/integration pending",
-      "confirmed_affected_originals": [],
+      "status": "implemented0023; focused source/original/finite/custom unchanged4K and12-run cost acceptance passed; final integration pending",
+      "confirmed_affected_originals": [
+        {
+          "name": "BrainStain-fish on.milk",
+          "sha256": "0c69712d6f173bc6cba4a007880ab3260f3ffa2bfa7c2cfc0bfce37c57d771ce"
+        },
+        {
+          "name": "Chemlock - Lily Hallucinogen (Geiss - Feedback).milk",
+          "sha256": "2688a12ed0938e3180116f998b66daad0970579d7b0e738566e8e4f75397afb1"
+        }
+      ],
       "source_report": "research/warp-motion.md",
       "recommendation": "legacy-only physical oscillator Y correction; custom path unchanged",
       "evidence": "I10/README.md",
       "original_candidate": {
         "name": "BrainStain-sunrays.milk",
         "sha256": "b3ebf1ab3f1132d2215e493fe9942693b0e70361c5c269cf86cff890520e2ef5"
-      }
+      },
+      "native_4k_evidence": "I10/chemlock-results.json",
+      "cost_evidence": "I10/initial-clean-timings.json"
     },
     {
       "id": "I11",
@@ -141,7 +152,7 @@
       "sha256": "259f01f9d09fdc0f4656c7db73b7cbbcecaff66be31f9fdb5abe0e2b76884415",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I11-legacy-warp-physical-triangle-diagonal-is-reversed/HANDOFF.md",
       "numeric_witness": "Common screen-cell corners A=B=C=0,D=1 at local(.25,.25): target interpolation0; original legacy triangle interpolation.25. Affine fields unaffected.\n\nLegacy/no-custom-warp physical mapping only; no extension to missing original custom VS.",
-      "status": "candidate0024 implemented; known production corner-field RED\u2192GREEN and48 normal controls pass; Native4K/cost/integration pending",
+      "status": "revised candidate0024 with complete static mesh cache; original candidate+4.337% cost preserved;49 source controls; revised native equivalence/cost pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
       "recommendation": "legacy-only physical diagonal correction; custom topology unchanged",
@@ -149,7 +160,9 @@
       "original_candidate": {
         "name": "07.milk",
         "sha256": "ec440dc5d1409388d8b55c17e683bbe8e1cd5effac1060faefdb71e222ad7849"
-      }
+      },
+      "native_4k_evidence": "I11/original-results.json",
+      "initial_cost_evidence": "I11/initial-clean-timings.json"
     },
     {
       "id": "I12",

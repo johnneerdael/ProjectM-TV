@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 24663,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/audio.u8",
+    "preset": "Chemlock - Lily Hallucinogen (Geiss - Feedback).milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "c4712c7678a2ceafcf87ae3ba3de26d1a1740d2b336d51900ec8b73a958ded0b",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "cb1584dc8ba6d5c57ec9e2735a775a0a8ed987219a8afdeb8736e013f34c92f4",
+      "pngBytes": 6280064,
+      "pngSha256": "4aede78b8380f4d96fb7348fdeeb77617b859aa5d42bcb2a9b4866c1d720a773",
+      "rgbMean": [
+        40.3723267505787,
+        40.87215615354938,
+        45.99838300540124
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0bfd67ff8d6cdf2525afaa317472f17a7656c27e08a86ce1452189450bc0465c",
+      "pngBytes": 8051913,
+      "pngSha256": "b57fdc5766cf7a24a4f457b99547faca793e482042e3d6afcf9a815f5fc54591",
+      "rgbMean": [
+        49.744902826003084,
+        39.22116596739969,
+        47.68581729841821
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "48af5fde2f8c4a2f43aced7e687beb0c5e39d18beecd4ea31210c287bf1cdce6",
+      "pngBytes": 8049884,
+      "pngSha256": "b8cd1a986265fcbe2c79c616bcb016eac87370839a070645e809629524f3d20c",
+      "rgbMean": [
+        52.830742549189814,
+        17.713682605131172,
+        49.4706339216821
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "3374cb015f7c6bc820f46c8bff012aad6e1954b6e64ac2ccc9f125de9848693d",
+      "pngBytes": 7591427,
+      "pngSha256": "355a636a9c74b10d438a77737a0804db5b0f1fd04f47f8d949f129bf62788b15",
+      "rgbMean": [
+        42.54743742766204,
+        13.75775547357253,
+        55.70369912229938
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "4ee1d1880a10fd0bbe3031285851199012908c8b96a576dfb349a67958042d3a",
+      "pngBytes": 6757997,
+      "pngSha256": "cae5b2e6ea7e90288eb34f4f18b18babcc51d5ae097b7aab010df7f646533cba",
+      "rgbMean": [
+        65.85696216724537,
+        18.466227936921296,
+        79.0294849537037
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "7bf850c200ddb617e81c7853a5306b74d3227669b05666b623cffff614c4f5ed",
+      "pngBytes": 6428900,
+      "pngSha256": "57ec1f52b837017fca478f11cdcfaf178265f7a3bd47c2c55dd0a7d6e1bfd42b",
+      "rgbMean": [
+        18.847114559220678,
+        14.218599295910494,
+        81.86484073591821
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "778e6984cc5c6c942506d66a8c7f2b94c8c27d16d41a19d4cc5b07ccdaee5128",
+      "pngBytes": 7177405,
+      "pngSha256": "d1b17e54452a45967a51eb65dc82043b933939b1d9c4a13d91237e8dc19f5b39",
+      "rgbMean": [
+        23.87836540316358,
+        55.479263720100306,
+        40.56297960069445
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/warp-clean-I10-1-2-after\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "01f9651655791fd5477609179aff151ac4befe6a519695cdbb0b27a573dfe88b",
+      "pngBytes": 6159628,
+      "pngSha256": "323e81702bb143b12fa0854348a18df854e08ca2a93df6ab330e557f0f083570",
+      "rgbMean": [
+        67.66119634934414,
+        38.14212155189043,
+        65.60368176118827
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 17039383,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 211,
+      "elapsedRealtimeMs": 17051780,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "2688a12ed0938e3180116f998b66daad0970579d7b0e738566e8e4f75397afb1",
+  "forcedPresetPrefix": "Chemlock - Lily Hallucinogen (Geiss - Feedback).milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 25,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43257,
+  "framesRendered": 480,
+  "renderWallDurationMs": 22691,
+  "pssAfterFramesKB": 72773,
+  "serializedFrameMeanMs": 3.7907574055555586,
+  "serializedFrameP90Ms": 4.985167,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Chemlock - Lily Hallucinogen (Geiss - Feedback).milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 23097
+}

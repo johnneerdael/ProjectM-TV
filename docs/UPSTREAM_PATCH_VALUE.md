@@ -302,3 +302,5 @@ Select a compile-time original-source Y-sign variant for the actual legacy/defau
 ## Legacy physical mesh diagonal (candidate0024)
 
 Select AD for the actual default/fallback warp path and retain custom BC. Reuse the existing index buffer and preserve vertices/counts/winding/quadrant/replay contracts. Real production corner-field and index controls fail before and48 normal controls pass after; Native4K original/finite/cost qualification remains pending. See [I11](superpowers/evidence/milkdrop-audit-repairs/I11/README.md).
+
+I11 cache revision: the original diagonal-only candidate showed+.1408ms/+4.337% in12 ABBA runs. Complete the existing static mesh cache key (viewport/aspect/mesh/compiled path) and populate viewport stamps, retaining dynamic equations/uploads.49 normal controls pass; omitting aspect produces a stale-radius failure. Revised native equivalence/performance remains pending; do not claim the initial candidate performance-safe.

@@ -84,6 +84,8 @@ endif()
 add_test(NAME warp-rotation-regressions COMMAND warp-rotation-regressions)
 add_test(NAME legacy-warp-deformation COMMAND warp-rotation-regressions deformation)
 add_test(NAME legacy-warp-diagonal COMMAND warp-rotation-regressions diagonal)
+add_test(NAME warp-mesh-cache COMMAND warp-rotation-regressions cache)
+set_tests_properties(warp-mesh-cache PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(legacy-warp-diagonal PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(legacy-warp-deformation PROPERTIES TIMEOUT 30 ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(warp-rotation-regressions PROPERTIES TIMEOUT 30

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "BrainStain-fish on.milk",
+    "warp": 10.0,
+    "alpha": 0.9,
+    "decay": 9.8,
+    "scale": 0.696,
+    "mode": "3",
+    "sha256": "0c69712d6f173bc6cba4a007880ab3260f3ffa2bfa7c2cfc0bfce37c57d771ce"
+  },
+  {
+    "name": "Chemlock - Lily Hallucinogen (Geiss - Feedback).milk",
+    "warp": 10.382783,
+    "alpha": 0.284912,
+    "decay": 1.0,
+    "scale": 0.921789,
+    "mode": "0",
+    "sha256": "2688a12ed0938e3180116f998b66daad0970579d7b0e738566e8e4f75397afb1"
+  }
+]

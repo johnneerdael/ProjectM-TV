@@ -1,0 +1,93 @@
+{
+  "qualification": "Source-instrumented exact-original final-output Native4K, not Windows proof",
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "roles": {
+    "before": {
+      "preset": "Chemlock - Lily Hallucinogen (Geiss - Feedback).milk",
+      "sha256": "2688a12ed0938e3180116f998b66daad0970579d7b0e738566e8e4f75397afb1",
+      "rgb_hashes": [
+        "1b50f00bc079f07ac76a53441f8ec99b392e7aded7e9af451ba0f1bb7b058401",
+        "61d36dab5cd9a7c632e57519f5a49ba62d81558bb4d3e076c08d2e4131342b0d",
+        "07e2c8682dd8af5e7def2363fdfba55c86f5ca4c19a1dc397b4a1f5c79b44c3f",
+        "321b08485ca4ec44d6879581348569a0cfbb41fa727d7af405cacde302c9bdaa",
+        "8cb840ddef1ff4f65bdc580d6b19cccc59361c5d9864727789e240d1c9ec2164",
+        "484265df9caf9af247d6f246f3ccd3a45f077d76dcbf345ffb19e2c3360b5a61",
+        "42e17405aa285e39a7dcaad2056548f24a0af6ef312f6f256fe0e2df0e6ac81b",
+        "61b49cd8f8471312eaa8ede34496f520c74d542ad549b1f15aad0b023f5cf6e6"
+      ]
+    },
+    "after": {
+      "preset": "Chemlock - Lily Hallucinogen (Geiss - Feedback).milk",
+      "sha256": "2688a12ed0938e3180116f998b66daad0970579d7b0e738566e8e4f75397afb1",
+      "rgb_hashes": [
+        "cb1584dc8ba6d5c57ec9e2735a775a0a8ed987219a8afdeb8736e013f34c92f4",
+        "0bfd67ff8d6cdf2525afaa317472f17a7656c27e08a86ce1452189450bc0465c",
+        "48af5fde2f8c4a2f43aced7e687beb0c5e39d18beecd4ea31210c287bf1cdce6",
+        "3374cb015f7c6bc820f46c8bff012aad6e1954b6e64ac2ccc9f125de9848693d",
+        "4ee1d1880a10fd0bbe3031285851199012908c8b96a576dfb349a67958042d3a",
+        "7bf850c200ddb617e81c7853a5306b74d3227669b05666b623cffff614c4f5ed",
+        "778e6984cc5c6c942506d66a8c7f2b94c8c27d16d41a19d4cc5b07ccdaee5128",
+        "01f9651655791fd5477609179aff151ac4befe6a519695cdbb0b27a573dfe88b"
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 13.22648923771862,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 15.33710190007716,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 15.369505087770062,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 11.970202224794239,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 13.58948716403035,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 12.869454250257201,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 12.725870225694445,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 11.990546875,
+      "before_nonblack_pixels": 8294400,
+      "after_nonblack_pixels": 8294400
+    }
+  ],
+  "illustrated_frame": 180,
+  "selected_rgb_repeats_exact": true
+}
