@@ -27,3 +27,5 @@ Exclude both ParallelogramBin2 variants from visible main-wave proof:main-frame 
 ## Required production proof
 
 Trace actual factory/mode, raw audio type/sample domain, final geometry strips/counts and per-mode alpha before drawing. Record Native primitives/styles/replay plus unchanged mode1 controls; add finite factory aliases and invalid/recovery sequence as focused regression controls if adopting a selector later. Keep extended default; any future versioned original8 selector needs an explicit API/consumer contract decision and must preserve all bounds/truncation/negative policies. Source packet alone cannot close retained-policy image qualification.
+
+Parent capture stage executed36 Native4K runs on frozenac3/27patches. All18 selected-RGB repeat groups match and288 decoded PNG hashes pass; per-frame GL/name/cleanup checks passed during capture. See native-results.json and native-identity.json. Actual producer finiteness, compiled-warp confirmation and invalid/recovery controls remain pending; I21 is OPEN. Frozen audioDelivery prose is corrected by ../AUDIO-PROVENANCE.md; actual queried tail is576.
