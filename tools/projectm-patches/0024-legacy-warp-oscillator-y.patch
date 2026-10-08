@@ -16,13 +16,15 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.hpp.in b/src/l
 +++ b/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.hpp.in
 @@ -44,6 +44,9 @@
      }
- 
+-
++
      // Accessors for the named static GL shader resources.
 +    // The fixed-function legacy projection has a distinct oscillator-Y contract.
 +    std::string GetLegacyPresetWarpVertexShader();
 +
  @STATIC_SHADER_ACCESSOR_DECLARATIONS@
- 
+-
++
  private:
 diff --git a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in b/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in
 --- a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in
@@ -30,7 +32,8 @@ diff --git a/src/libprojectM/MilkdropPreset/MilkdropStaticShaders.cpp.in b/src/l
 @@ -31,6 +31,11 @@
      return m_versionHeader + "\n" + shader_text;
  }
- 
+-
++
 +std::string MilkdropStaticShaders::GetLegacyPresetWarpVertexShader()
 +{
 +    return AddVersionHeader("#define PROJECTM_LEGACY_WARP\n" + kPresetWarpVertexShaderGlsl330);
@@ -44,19 +47,22 @@ diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/M
 +++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
 @@ -424,7 +424,7 @@
      auto staticShaders = libprojectM::MilkdropPreset::MilkdropStaticShaders::Get();
- 
+-
++
      perPixelMeshShader = std::make_shared<Renderer::Shader>();
 -    perPixelMeshShader->CompileProgram(staticShaders->GetPresetWarpVertexShader(),
 +    perPixelMeshShader->CompileProgram(staticShaders->GetLegacyPresetWarpVertexShader(),
                                         staticShaders->GetPresetWarpFragmentShader());
- 
+-
++
      presetState.renderContext.shaderCache->Insert("milkdrop_default_warp_shader", perPixelMeshShader);
 diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
 --- a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
 +++ b/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert
 @@ -61,10 +61,17 @@
      v = (v - warp_center.y) / stretch.y + warp_center.y;
- 
+-
++
      // Warping
 +#ifdef PROJECTM_LEGACY_WARP
 +    u += warp * 0.0035 * sin(warpTime * 0.333 + warpScaleInverse * (pos.x * warpFactors.x + pos.y * warpFactors.w));
@@ -69,6 +75,7 @@ diff --git a/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl33
      u += warp * 0.0035 * cos(warpTime * 0.753 - warpScaleInverse * (pos.x * warpFactors.y - pos.y * warpFactors.z));
      v += warp * 0.0035 * sin(warpTime * 0.825 + warpScaleInverse * (pos.x * warpFactors.x + pos.y * warpFactors.w));
 +#endif
- 
+-
++
      // Rotation
      float u2 = u - warp_center.x;
