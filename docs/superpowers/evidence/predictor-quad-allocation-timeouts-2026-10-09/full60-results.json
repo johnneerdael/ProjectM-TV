@@ -1,0 +1,48 @@
+{
+  "completed_cases": 3,
+  "expected_cases": 3,
+  "all_within_original_300s_limit": true,
+  "results": [
+    {
+      "preset": "$$$ Royal - Mashup (103).milk",
+      "preset_sha256": "08ead3db478aa81c0e29efccc0d9c38bbe69180435123531cbafbf2beb347463",
+      "status": "computed",
+      "elapsed_seconds": 87.78213487498579,
+      "frames": 60,
+      "fps": 15,
+      "width": 854,
+      "height": 480,
+      "feature_count": 47,
+      "known_features": 41,
+      "unknown_features": 6
+    },
+    {
+      "preset": "$$$ Royal - Mashup (113).milk",
+      "preset_sha256": "5a15da0f2d10a9f4d1221170b47238a676f216204c1933f4cd094d2e200c78e9",
+      "status": "computed",
+      "elapsed_seconds": 233.180716709001,
+      "frames": 60,
+      "fps": 15,
+      "width": 854,
+      "height": 480,
+      "feature_count": 47,
+      "known_features": 47,
+      "unknown_features": 0
+    },
+    {
+      "preset": "$$$ Royal - Mashup (116).milk",
+      "preset_sha256": "2495ebcc7939854acb7b80398a556ca1505e68dc506a63647fb4df2fad74201d",
+      "status": "computed",
+      "elapsed_seconds": 199.46031208400382,
+      "frames": 60,
+      "fps": 15,
+      "width": 854,
+      "height": 480,
+      "feature_count": 47,
+      "known_features": 47,
+      "unknown_features": 0
+    }
+  ],
+  "native_appearance_certified": false,
+  "full60_equality_to_baseline_certified": false
+}
