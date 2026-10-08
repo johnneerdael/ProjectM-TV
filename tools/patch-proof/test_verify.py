@@ -59,6 +59,8 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         self.frame_data = FRAME_DATA
         row = {'status': 'success', 'manifest': {'status': 'success', 'gl_error_frames': 0,
                'frames': 120, 'width': WIDTH, 'height': HEIGHT, 'fps': 30, 'seed': 12345,
+               'applied_controls': {'line_reference_width': 0, 'line_reference_height': 0,
+                                    'line_antialiasing': False, 'feedback_detail_alpha': -1.0},
                **dict(zip(('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version'), backend))},
                'frame_hashes': [VERIFY.sha(FRAME)] * 120,
                'stream_sha256': VERIFY.sha(self.frame_data)}
@@ -115,7 +117,11 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
                     (directory / 'manifest.json').write_text(json.dumps(manifest))
                 cfg = {'width': self.result['dimensions'][0], 'height': self.result['dimensions'][1],
                        'fps': 30, 'seed': 12345, 'warmup_seconds': 0, 'measurement_seconds': 4,
-                       'line_reference_height': 0, 'line_antialiasing': False}
+                       'line_reference_height': self.result.get('host_controls', {}).get('line_reference_height', 0),
+                       'line_antialiasing': self.result.get('host_controls', {}).get('line_antialiasing', False)}
+                for field in ('line_reference_width', 'feedback_detail'):
+                    if field in self.result.get('host_controls', {}):
+                        cfg[field] = self.result['host_controls'][field]
                 diagnostic = self.result.get('diagnostic_kind')
                 if diagnostic == 'shader-fragment-failure': cfg['shader_failure_probe'] = True
                 if diagnostic == 'texture-history': cfg['texture_history_probe'] = True
@@ -225,6 +231,89 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             with self.subTest(key=key):
                 value = json.loads(original); value['config'][key] = changed; path.write_text(json.dumps(value))
                 with self.assertRaisesRegex(ValueError, 'job protocol'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_jointly_relabelled_host_and_job_line_controls(self):
+        for controls in ({'line_reference_height': 1080}, {'line_antialiasing': True}):
+            with self.subTest(controls=controls):
+                self.result['host_controls'] = controls
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Rendered line controls differ'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_effective_line_width_different_from_explicit_job_width(self):
+        self.result['host_controls'] = {'line_reference_height': 1080, 'line_reference_width': 1280}
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['applied_controls'].update(line_reference_width=1920, line_reference_height=1080)
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Rendered line controls differ'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_missing_or_malformed_effective_line_controls(self):
+        for field, value in (('line_reference_height', None), ('line_reference_height', False),
+                             ('line_reference_width', 0.0), ('line_antialiasing', 0)):
+            with self.subTest(field=field, value=value):
+                for run in self.result['roles']['patched']['runs']:
+                    controls = run['manifest']['applied_controls']
+                    controls.update(line_reference_width=0, line_reference_height=0, line_antialiasing=False)
+                    if value is None: controls.pop(field)
+                    else: controls[field] = value
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Rendered line controls differ'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_accepts_native_line_controls_and_classic_upstream_for_same_requested_job(self):
+        self.add_successful_role()
+        self.result['host_controls'] = {'line_reference_height': 1080, 'line_antialiasing': True,
+                                       'feedback_detail': .1}
+        for run in self.result['roles']['patched']['runs']:
+            run['manifest']['applied_controls'].update(line_reference_width=1920, line_reference_height=1080,
+                line_antialiasing=True, feedback_detail_alpha=0.10000000149011612)
+        self.save()
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched', 'upstream'])
+
+    def test_accepts_rounded_or_disabled_native_reference_size(self):
+        for controls, expected in (({'line_reference_height': 2}, (4, 2)),
+                                   ({'line_reference_height': 1080, 'line_reference_width': 0}, (0, 0)),
+                                   ({'line_reference_height': 0, 'line_reference_width': 1920}, (0, 0))):
+            with self.subTest(controls=controls):
+                self.result['host_controls'] = controls
+                for run in self.result['roles']['patched']['runs']:
+                    run['manifest']['applied_controls'].update(line_reference_width=expected[0],
+                                                              line_reference_height=expected[1])
+                self.save()
+                self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_gl_failed_manifest_with_relabelled_line_controls(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2},
+                               manifest={'status': 'failed', 'gl_error_frames': 1,
+                                   'applied_controls': {'line_reference_height': 1080, 'line_reference_width': 1920,
+                                                       'line_antialiasing': False, 'feedback_detail_alpha': -1.0}})
+        with self.assertRaisesRegex(ValueError, 'Rendered line controls differ'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_jointly_relabelled_feedback_host_and_job_controls(self):
+        self.result['host_controls'] = {'feedback_detail': .5}
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Rendered line controls differ'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_accepts_effective_float32_feedback_clamps(self):
+        for requested, expected in ((-5, -1.0), (2, 1.0), (.1, 0.10000000149011612), (0, 0.0), (1e100, -1.0)):
+            with self.subTest(requested=requested):
+                self.result['host_controls'] = {'feedback_detail': requested}
+                for run in self.result['roles']['patched']['runs']:
+                    run['manifest']['applied_controls']['feedback_detail_alpha'] = expected
+                self.save()
+                self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_malformed_job_line_controls(self):
+        for controls in ({'line_reference_height': 1080.0}, {'line_reference_width': False},
+                         {'line_antialiasing': 0}, {'feedback_detail': True}, {'feedback_detail': float('nan')}):
+            with self.subTest(controls=controls):
+                self.result['host_controls'] = controls
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Retained job line controls are invalid'):
                     VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_unrecorded_host_events(self):

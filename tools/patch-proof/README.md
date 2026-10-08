@@ -97,7 +97,13 @@ external ownership and pressure-release controls remain separate work.
 Successful image verification also binds each manifest to its outer role/repeat,
 seed12345/FPS30 and retained manifest.json/job.json. It checks the fixed clock,
 frame window, dimensions, reference/diagnostic settings and exact host-event
-sequence; jobs must agree across roles/repeats apart from identity. The retained
+sequence; jobs must agree across roles/repeats apart from identity. Render
+manifests record applied_controls from the helper that invokes the line/feedback
+setters, including source-verified normalization. The verifier checks reference
+width/height, antialiasing and float32 feedback alpha against that record. Upstream
+has no TV control API and reports classic0/0, false and disabled feedback, even
+when a paired job requests reference scaling. Earlier manifests without these
+fields require fresh workers/capture for current certification. The retained
 PCM length and hash must match the trusted deterministic waveform digest, and
 dimensions must use the six capture widths with their derived 16:9 heights. Run metadata cannot silently
 certify frames produced with a different protocol.

@@ -12,7 +12,7 @@ A middle column, where present, removes one patch to isolate its effect. Generat
 controls are labeled; a rejected render is an error panel, not a black screenshot.
 
 Earlier images use our 13-patch snapshot `654815d8`; 0014 uses the current 14-patch
-snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Earlier captures retain their original snapshot identities;0003,0011 and0015 now have locked15-patch comparisons.
+snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Earlier captures retain their original snapshot identities;Reference lines and0003,0011 and0015 now have locked15-patch comparisons.
 The upstream renderer matches master `e98fca85`; capture adjustments and source
 identities are recorded in the [evidence record](superpowers/evidence/current-patch-proof/README.md).
 
@@ -23,17 +23,17 @@ line scaling, equation loading and resource handling separately.
 
 ### Lines at 4K
 
-![Upstream, our classic-line control and our reference-scaled lines](superpowers/evidence/current-patch-proof/components/lines/comparison-4k.png)
+![Upstream, our classic-line control and our reference-scaled lines](superpowers/evidence/current-patch-proof/components/locked15-lines/comparison-4k.png)
 
 In **Geiss — 3D — Shockwaves**, upstream's thin loops fade into the background at 4K.
-Our classic-line control looks almost the same. Enabling reference-scaled lines
+Our classic-line control also stays thin. Enabling reference-scaled lines
 keeps the loops broader and more visible; the close-up shows the stroke difference.
 
 Fixed one-pixel lines shrink relative to the picture as resolution increases.
 Our optional quad renderer scales their width from a chosen reference size.
 This addresses the scaling requested in [upstream #682](https://github.com/projectM-visualizer/projectm/issues/682).
 It uses miter joins and flat ends; rounded joins/caps are not implemented.
-[Line evidence](superpowers/evidence/current-patch-proof/components/lines/README.md).
+[Line evidence](superpowers/evidence/current-patch-proof/components/locked15-lines/README.md).
 
 ### Presets that fail to load
 

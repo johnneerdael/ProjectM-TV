@@ -14,7 +14,9 @@ main `120547f3` subsequently added 0015 to the locked publication inventory.
 This folder's original `series.json`, workers, frames and verification receipts
 remain tied to source `654815d8` and its 13 patches. They are preserved evidence,
 not relabeled certification of the expanded endpoint. The [Hurricane comparison](components/legacy14-hurricane/README.md) now provides
-matched current14 TV proof for0014. The [locked15 lone-dot replay](components/locked15-lone-dot/README.md) now verifies
+matched current14 TV proof for0014. The [locked15 line comparison](components/locked15-lines/README.md) binds effective
+reference/AA controls to new rendered manifests and preserves the original13-patch
+line records separately. The [locked15 lone-dot replay](components/locked15-lone-dot/README.md) now verifies
 the original preset’s upstream rejection and successful control/current frames,
 with retained execution evidence. The [complete evaluator comparison](components/locked15-evaluator/README.md)
 checks all three roles separately. Revalidation of other affected earlier

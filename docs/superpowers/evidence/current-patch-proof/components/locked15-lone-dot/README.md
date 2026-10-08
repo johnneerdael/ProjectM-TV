@@ -24,7 +24,11 @@ these identities. The [complete evaluator control](../locked15-evaluator/README.
 separately verifies thread-state and lone-dot semantics.
 
 Full streams, uploaded inputs and retained binaries remain in ignored
-build/patch-proof/locked15-lone-dot-rejection-v2. The exploratory shorter Lotus
+build/patch-proof/locked15-lone-dot-rejection-v3. The exploratory shorter Lotus
 mix capture at locked15-lone-dot-rejection-v1 loaded in all three roles and is
 not credited as a rejection witness. Earlier13-patch receipts/images remain
 preserved; they are not relabeled as current certification.
+
+The refreshed worker manifest records normalized line/feedback setter controls;
+verification binds those controls to the requested job and each compiled role.
+Earlier producer variants remain preserved in their ignored build directories.

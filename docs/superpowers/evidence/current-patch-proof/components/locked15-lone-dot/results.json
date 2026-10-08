@@ -67,7 +67,7 @@
     "feature:com.google.android.software.cast_receiver",
     "feature:com.google.android.tv.installed"
   ],
-  "remote_workspace": "/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7",
+  "remote_workspace": "/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d",
   "fingerprint": "google/sdk_google_atv64_arm64/emu64a:16/BT2A.260319.001/15058170:user/dev-keys",
   "preset": "Stahlregen - funky Blur (lotus mix) the genius in me lies right at the heart of the flacc.milk",
   "preset_sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
@@ -176,9 +176,9 @@
         },
         "patch_removed": null,
         "ordered_patches": [],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v2/inputs/workers/upstream/worker",
-        "binary_sha256": "21834c8758f74a70c673d2d33244a6d85a64a693cbb064a0a7a7526eab26c33a",
-        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/upstream/source-hashes.json",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v3/inputs/workers/upstream/worker",
+        "binary_sha256": "f70a7274af160334c125c9280e0705ffc3a3c6f39d8a98c8589f864090497e4f",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-control-bound-workers-v1/upstream/source-hashes.json",
         "harness_sha256": {
           "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
           "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
@@ -187,16 +187,16 @@
           "texture_history_probe.hpp": "277643182c9706aa1d2a3fbd07f01a7120e785e1668bcef8440efae9fd06fe91",
           "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
           "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
-          "worker.cpp": "5e2c487fffc671e5191e60b44c7e6a65cc529520df0b5867dd8c18088079e2c0"
+          "worker.cpp": "488c1617938a5ca422fe4af0385f38e05b0f00fd7e2a331bedd536e4ef597ee5"
         },
-        "adjustments_sha256": "77637d8a9bb981e9d100298ea3bdec9e7fcf8af865974cf1ef2c7bbcea5d29f1",
+        "adjustments_sha256": "621300b1c16ab4a831c3097c19782c99dbfdd01a9078a855a60ccd3a11c64ff2",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
       },
       "retained_worker": {
         "path": "inputs/workers/upstream/worker",
-        "sha256": "21834c8758f74a70c673d2d33244a6d85a64a693cbb064a0a7a7526eab26c33a",
-        "bytes": 18093280
+        "sha256": "f70a7274af160334c125c9280e0705ffc3a3c6f39d8a98c8589f864090497e4f",
+        "bytes": 18112224
       },
       "runs": [
         {
@@ -205,12 +205,12 @@
           "pull_errors": {
             "manifest.json": {
               "exit": 1,
-              "output": "adb: error: failed to stat remote object '/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/manifest.json': No such file or directory\n"
+              "output": "adb: error: failed to stat remote object '/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/manifest.json': No such file or directory\n"
             }
           },
           "retained_artifacts": {
             "render.log": {
-              "sha256": "8c53b268941976ccea5bde8e908454baa595c75a7d1070706cdac4521b0bd908",
+              "sha256": "ea2b8c962d49506356a195e73ee0ff8673c08bd5ebb0080abb4f5e1cf737b538",
               "bytes": 639
             },
             "frames.rgb": {
@@ -218,7 +218,7 @@
               "bytes": 0
             }
           },
-          "log": "projectM[3] [GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"\nGPU Google (Apple) / Android Emulator OpenGL ES Translator (Apple M4 Pro) / OpenGL ES 3.0 (4.1 Metal - 89.4)\nprojectM[5] [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\npreset-lab-worker: /data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/witness.milk: [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\n"
+          "log": "projectM[3] [GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"\nGPU Google (Apple) / Android Emulator OpenGL ES Translator (Apple M4 Pro) / OpenGL ES 3.0 (4.1 Metal - 89.4)\nprojectM[5] [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\npreset-lab-worker: /data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/witness.milk: [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\n"
         },
         {
           "status": "failed",
@@ -226,12 +226,12 @@
           "pull_errors": {
             "manifest.json": {
               "exit": 1,
-              "output": "adb: error: failed to stat remote object '/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/manifest.json': No such file or directory\n"
+              "output": "adb: error: failed to stat remote object '/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/manifest.json': No such file or directory\n"
             }
           },
           "retained_artifacts": {
             "render.log": {
-              "sha256": "8c53b268941976ccea5bde8e908454baa595c75a7d1070706cdac4521b0bd908",
+              "sha256": "ea2b8c962d49506356a195e73ee0ff8673c08bd5ebb0080abb4f5e1cf737b538",
               "bytes": 639
             },
             "frames.rgb": {
@@ -239,7 +239,7 @@
               "bytes": 0
             }
           },
-          "log": "projectM[3] [GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"\nGPU Google (Apple) / Android Emulator OpenGL ES Translator (Apple M4 Pro) / OpenGL ES 3.0 (4.1 Metal - 89.4)\nprojectM[5] [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\npreset-lab-worker: /data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/witness.milk: [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\n"
+          "log": "projectM[3] [GladLoader] GLInfo  api=\"GLES\" ver=\"3.0\" profile=\"n/a\" flags=\"fwd\" glsl=\"OpenGL ES GLSL ES 3.00\" vendor=\"Google (Apple)\" renderer=\"Android Emulator OpenGL ES Translator (Apple M4 Pro)\" backend=\"EGL\" user_resolver=\"no\"\nGPU Google (Apple) / Android Emulator OpenGL ES Translator (Apple M4 Pro) / OpenGL ES 3.0 (4.1 Metal - 89.4)\nprojectM[5] [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\npreset-lab-worker: /data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/witness.milk: [PerPixelContext] Could not compile per-pixel code: syntax error, unexpected invalid token(L9 C23)\n"
         }
       ],
       "repeat_equal": false
@@ -334,9 +334,9 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v2/inputs/workers/without-0003/worker",
-        "binary_sha256": "9c1a7c77c42e3b7a44d6eae054abe11ab8025ec73b7c584ba0a54faf895d704f",
-        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-evaluator-worker-v1/without-0003/source-hashes.json",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v3/inputs/workers/without-0003/worker",
+        "binary_sha256": "d09d3d30d77ea67066d4805dc339eda045cef44ab08bf88b94e5779a46f92dae",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-control-bound-workers-v1/without-0003/source-hashes.json",
         "harness_sha256": {
           "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
           "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
@@ -345,21 +345,27 @@
           "texture_history_probe.hpp": "277643182c9706aa1d2a3fbd07f01a7120e785e1668bcef8440efae9fd06fe91",
           "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
           "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
-          "worker.cpp": "5e2c487fffc671e5191e60b44c7e6a65cc529520df0b5867dd8c18088079e2c0"
+          "worker.cpp": "488c1617938a5ca422fe4af0385f38e05b0f00fd7e2a331bedd536e4ef597ee5"
         },
-        "adjustments_sha256": "0b3e8cb4f4c33b29b9f30a25b1d2e209f5219f32b194137eaa144d6448aefe83",
+        "adjustments_sha256": "5de4ed880c35de1c0cb6feeec24525592a54deb8703776caec79a974bcc06ce8",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
       },
       "retained_worker": {
         "path": "inputs/workers/without-0003/worker",
-        "sha256": "9c1a7c77c42e3b7a44d6eae054abe11ab8025ec73b7c584ba0a54faf895d704f",
-        "bytes": 19874904
+        "sha256": "d09d3d30d77ea67066d4805dc339eda045cef44ab08bf88b94e5779a46f92dae",
+        "bytes": 19908248
       },
       "runs": [
         {
           "status": "success",
           "manifest": {
+            "applied_controls": {
+              "feedback_detail_alpha": -1.0,
+              "line_antialiasing": false,
+              "line_reference_height": 0,
+              "line_reference_width": 0
+            },
             "fps": 30,
             "frames": 120,
             "gl_error_frames": 0,
@@ -513,6 +519,12 @@
         {
           "status": "success",
           "manifest": {
+            "applied_controls": {
+              "feedback_detail_alpha": -1.0,
+              "line_antialiasing": false,
+              "line_reference_height": 0,
+              "line_reference_width": 0
+            },
             "fps": 30,
             "frames": 120,
             "gl_error_frames": 0,
@@ -756,9 +768,9 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v2/inputs/workers/patched/worker",
-        "binary_sha256": "3a4637bee3944c2adab3be5612c369952b20f4e7b871e420bef5ed3628fcfd23",
-        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/patched/source-hashes.json",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v3/inputs/workers/patched/worker",
+        "binary_sha256": "707abcbba400a719cf8504764459a9378b5938f02d9e14cfd47a9a71d9bb5fbf",
+        "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-control-bound-workers-v1/patched/source-hashes.json",
         "harness_sha256": {
           "CMakeLists.txt": "96128e4f071a4c2f4d38a27685ea729a31751c6a1e1039db5c9526b76ae25ec2",
           "analysis_hooks.hpp": "52aa9f5b8fd3309bf31989f67f623477858aa2b4a85f158dac626289823e6690",
@@ -767,21 +779,27 @@
           "texture_history_probe.hpp": "277643182c9706aa1d2a3fbd07f01a7120e785e1668bcef8440efae9fd06fe91",
           "vendor/LICENSE.json": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
           "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
-          "worker.cpp": "5e2c487fffc671e5191e60b44c7e6a65cc529520df0b5867dd8c18088079e2c0"
+          "worker.cpp": "488c1617938a5ca422fe4af0385f38e05b0f00fd7e2a331bedd536e4ef597ee5"
         },
-        "adjustments_sha256": "d947af27e0bdad586447cbb6116ab08160e71531693911e9bc09f90c12daab4f",
+        "adjustments_sha256": "5d164fe0806f4a7f7d2e0c7790db4833d6bc93ebcafc83b38a2acc0a4625008a",
         "prepare_sha256": "9a6f0be535b29769c02a29c8bcf7110b29598f49e58e2ab2357edf4f23f72966",
         "shipping_binary": false
       },
       "retained_worker": {
         "path": "inputs/workers/patched/worker",
-        "sha256": "3a4637bee3944c2adab3be5612c369952b20f4e7b871e420bef5ed3628fcfd23",
-        "bytes": 19874432
+        "sha256": "707abcbba400a719cf8504764459a9378b5938f02d9e14cfd47a9a71d9bb5fbf",
+        "bytes": 19907480
       },
       "runs": [
         {
           "status": "success",
           "manifest": {
+            "applied_controls": {
+              "feedback_detail_alpha": -1.0,
+              "line_antialiasing": false,
+              "line_reference_height": 0,
+              "line_reference_width": 0
+            },
             "fps": 30,
             "frames": 120,
             "gl_error_frames": 0,
@@ -931,6 +949,12 @@
         {
           "status": "success",
           "manifest": {
+            "applied_controls": {
+              "feedback_detail_alpha": -1.0,
+              "line_antialiasing": false,
+              "line_reference_height": 0,
+              "line_reference_width": 0
+            },
             "fps": 30,
             "frames": 120,
             "gl_error_frames": 0,

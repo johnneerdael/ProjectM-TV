@@ -32,8 +32,8 @@ suppress API36 binary-cache export. Source reconstruction, canonical NDK rebuild
 and all720 decoded RGB frames verify: [results](results.json),
 [verification](verification.json), [figure audit](figure-audit.json).
 The [diagnostic source](negative-integer-zero-power.milk) is preserved.
-Complete streams/workers remain under ignored build/patch-proof/locked15-negative-power-v4
-and current15-job-bound-workers-v2. Raw display pixels are unchanged.
+Complete streams/workers remain under ignored build/patch-proof/locked15-negative-power-v5
+and current15-control-bound-workers-v1. Raw display pixels are unchanged.
 
 This replay uses the job-bound seed/input harness: inputs are retained, job paths
 bind to the recorded owned workspace, and the validated job seed initializes
@@ -42,3 +42,7 @@ device-side hash check; verification rebuilds that retained binary and enforces
 the trusted waveform, supported 16:9 dimensions and retained execution exits. All720 RGB frames match the preserved v1 capture; published
 images and figure hashes remain unchanged. Original v1 streams/workers remain
 available separately under their prior ignored build paths.
+
+The refreshed worker manifest records normalized line/feedback setter controls;
+verification binds those controls to the requested job and each compiled role.
+Earlier producer variants remain preserved in their ignored build directories.

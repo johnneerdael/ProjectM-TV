@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <string>
 #include <iostream>
+#include <algorithm>
+#include <cmath>
 
 using json = nlohmann::json;
 
@@ -33,8 +35,47 @@ uint32_t ConfigureSeed(uint32_t seed) {
     lab::ResetShaderRandom();
     return seed;
 }
+
+struct AppliedControls {
+    int lineReferenceWidth = 0;
+    int lineReferenceHeight = 0;
+    bool lineAntialiasing = false;
+    float feedbackDetailAlpha = -1.0f;
+
+    json ToJson() const {
+        return {{"line_reference_width", lineReferenceWidth},
+                {"line_reference_height", lineReferenceHeight},
+                {"line_antialiasing", lineAntialiasing},
+                {"feedback_detail_alpha", feedbackDetailAlpha}};
+    }
+};
+
+template <typename Engine>
+AppliedControls ApplyHostControls(Engine& engine, const json& config) {
+    AppliedControls applied;
+#ifdef PATCH_PROOF_TV
+    const int height = config.value("line_reference_height", 0);
+    const int width = config.value("line_reference_width",
+                                   static_cast<int>(std::lround(height * 16.0 / 9.0)));
+    engine.SetLineReferenceSize(width, height);
+    if (width > 0 && height > 0) {
+        applied.lineReferenceWidth = width;
+        applied.lineReferenceHeight = height;
+    }
+
+    applied.lineAntialiasing = config.value("line_antialiasing", false);
+    engine.SetLineAntialiasing(applied.lineAntialiasing);
+
+    const float requestedAlpha = config.value("feedback_detail", -1.0f);
+    engine.SetFeedbackDetail(requestedAlpha);
+    applied.feedbackDetailAlpha = std::isfinite(requestedAlpha) && requestedAlpha >= 0.0f
+        ? std::min(requestedAlpha, 1.0f) : -1.0f;
+#endif
+    return applied;
+}
 }
 
+#if defined(PATCH_PROOF_SEED_TEST) || defined(PATCH_PROOF_CONTROLS_TEST)
 #ifdef PATCH_PROOF_SEED_TEST
 int main(int argc, char** argv) {
     try {
@@ -55,6 +96,43 @@ int main(int argc, char** argv) {
         return 1;
     }
 }
+#else
+class ControlStateProbe {
+public:
+    int lineReferenceWidth = 0;
+    int lineReferenceHeight = 0;
+    bool lineAntialiasing = false;
+    float feedbackDetailAlpha = -1.0f;
+
+    void SetLineReferenceSize(int width, int height) {
+        lineReferenceWidth = width > 0 && height > 0 ? width : 0;
+        lineReferenceHeight = width > 0 && height > 0 ? height : 0;
+    }
+    void SetLineAntialiasing(bool enabled) { lineAntialiasing = enabled; }
+    void SetFeedbackDetail(float alpha) {
+        feedbackDetailAlpha = std::isfinite(alpha) && alpha >= 0.0f
+            ? std::min(alpha, 1.0f) : -1.0f;
+    }
+};
+
+int main(int argc, char** argv) {
+    try {
+        if (argc != 2) throw std::runtime_error("usage: worker-controls <config-json>");
+        ControlStateProbe engine;
+        const auto applied = ApplyHostControls(engine, json::parse(argv[1]));
+        json state = {{"line_reference_width", engine.lineReferenceWidth},
+                      {"line_reference_height", engine.lineReferenceHeight},
+                      {"line_antialiasing", engine.lineAntialiasing},
+                      {"feedback_detail_alpha", engine.feedbackDetailAlpha}};
+        std::cout << json{{"applied_controls", applied.ToJson()}, {"setter_state", state}}.dump()
+                  << std::endl;
+        return 0;
+    } catch (const std::exception& error) {
+        std::cerr << error.what() << '\n';
+        return 1;
+    }
+}
+#endif
 #else
 #include "gl_capture.hpp"
 #include "shader_failure_probe.hpp"
@@ -162,15 +240,7 @@ int main(int argc, char** argv) {
         engine.SetTexturePaths({textures});
         engine.SetWindowSize(width, height);
         engine.SetMeshSize(48, 32);
-        // Quad lines' reference size; a job with only line_reference_height means a 16:9 reference of that height.
-        int line_reference_height = cfg.value("line_reference_height", 0);
-        int line_reference_width = cfg.value("line_reference_width",
-                                             static_cast<int>(std::lround(line_reference_height * 16.0 / 9.0)));
-#ifdef PATCH_PROOF_TV
-        engine.SetLineReferenceSize(line_reference_width, line_reference_height);
-        engine.SetLineAntialiasing(cfg.value("line_antialiasing", false));
-        engine.SetFeedbackDetail(cfg.value("feedback_detail", -1.0f));
-#endif
+        const auto appliedControls = ApplyHostControls(engine, cfg);
         engine.SetSoftCutDuration(cfg.value("soft_cut_seconds",2.0));
         engine.SetTargetFramesPerSecond(fps);
         engine.SetPresetLocked(true);
@@ -219,6 +289,7 @@ int main(int argc, char** argv) {
                        {"gl_vendor", reinterpret_cast<const char*>(glGetString(GL_VENDOR))}, {"glsl_version", reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION))}, {"messages",capturedLogs}, {"gl_error_frames", error_frames}, {"gl_version", reinterpret_cast<const char*>(glGetString(GL_VERSION))},
                        {"gl_renderer", reinterpret_cast<const char*>(glGetString(GL_RENDERER))},
                        {"identity", job.at("identity")}, {"seed", seed}};
+        result["applied_controls"] = appliedControls.ToJson();
         if (!diagnostics.empty()) result["diagnostics"] = diagnostics;
         std::string target = job.at("manifest_path");
         std::ofstream manifest(target + ".tmp");

@@ -1,0 +1,67 @@
+{
+  "component": "0001 reference-sized line enhancement / upstream682",
+  "source_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "frame": 119,
+  "render_dimensions": [
+    3840,
+    2160
+  ],
+  "reference_dimensions": [
+    1920,
+    1080
+  ],
+  "crop": [
+    1460,
+    840,
+    1820,
+    1200
+  ],
+  "overview": "BOX to960x540; same operation all panels; annotated crop",
+  "zoom": "nearest2x; no gain or normalization",
+  "roles": {
+    "upstream": {
+      "capture": "locked15-lines-reference-4k-v1",
+      "role": "upstream",
+      "frame_sha256": "5ef8b745102c721107e48ea02d6acd310ee56a579390f9b322a3f3e21a0aaf66",
+      "preset_sha256": "fd442adc495d37058f7a92b3f6a58c23b212d194f93162c0e461f8c704800652",
+      "applied_controls": {
+        "feedback_detail_alpha": -1.0,
+        "line_antialiasing": false,
+        "line_reference_height": 0,
+        "line_reference_width": 0
+      },
+      "binary_sha256": "f70a7274af160334c125c9280e0705ffc3a3c6f39d8a98c8589f864090497e4f"
+    },
+    "our-classic-control": {
+      "capture": "locked15-lines-classic-4k-v1",
+      "role": "patched",
+      "frame_sha256": "8ca3bc74e535211a72b16be75a4894ed96844c23c6f90e865af943dfdf9b7410",
+      "preset_sha256": "fd442adc495d37058f7a92b3f6a58c23b212d194f93162c0e461f8c704800652",
+      "applied_controls": {
+        "feedback_detail_alpha": -1.0,
+        "line_antialiasing": false,
+        "line_reference_height": 0,
+        "line_reference_width": 0
+      },
+      "binary_sha256": "707abcbba400a719cf8504764459a9378b5938f02d9e14cfd47a9a71d9bb5fbf"
+    },
+    "our-reference-lines": {
+      "capture": "locked15-lines-reference-4k-v1",
+      "role": "patched",
+      "frame_sha256": "998ba5b0937e6b8117ab67513f88e6357df3b75cfde14dc6fcaaded64cc849e5",
+      "preset_sha256": "fd442adc495d37058f7a92b3f6a58c23b212d194f93162c0e461f8c704800652",
+      "applied_controls": {
+        "feedback_detail_alpha": -1.0,
+        "line_antialiasing": false,
+        "line_reference_height": 1080,
+        "line_reference_width": 1920
+      },
+      "binary_sha256": "707abcbba400a719cf8504764459a9378b5938f02d9e14cfd47a9a71d9bb5fbf"
+    }
+  },
+  "metrics": {
+    "upstream_vs_our_classic_rgb8_mae": 3.9921750819830244,
+    "our_classic_vs_our_reference_rgb8_mae": 22.23268687307099
+  },
+  "figure_png_sha256": "5ee0017da351c1e940ed0f7f2001fe3a3941eaf0c5f0fbf0d1948d0b1e5a6dca"
+}

@@ -10,11 +10,11 @@
     "line_reference_height": 0,
     "line_antialiasing": false
   },
-  "pcm_path": "/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/audio.f32",
-  "preset_path": "/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/witness.milk",
-  "texture_root": "/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/textures",
-  "bands_path": "/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/bands.jsonl",
-  "manifest_path": "/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7/manifest.json",
+  "pcm_path": "/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/audio.f32",
+  "preset_path": "/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/witness.milk",
+  "texture_root": "/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/textures",
+  "bands_path": "/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/bands.jsonl",
+  "manifest_path": "/data/local/tmp/projectmtv-patch-proof-459d440b2a556c8d/manifest.json",
   "identity": {
     "role": "upstream",
     "repeat": 0

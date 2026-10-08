@@ -518,3 +518,9 @@ Execution evidence maintenance (2026-10-08): new proof runs retain execution.jso
 exit receipts. Verifier checks rejected jobs and retained diagnostics, rejecting
 contradictory success artifacts. Evaluator proof requires the complete upstream,
 without-0003 and patched role set; historical subsets are not current certification.
+
+Applied-control proof maintenance (2026-10-08): rendered manifests record normalized
+line-reference dimensions, AA and feedback override from the setter helper.
+Verification binds these fields, including upstream’s ignored TV requests.
+Locked15 4K Geiss classic/reference captures replace the active line figure;
+original13-patch line images/receipts remain under components/lines.

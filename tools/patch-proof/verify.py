@@ -8,6 +8,7 @@ import json
 import math
 from pathlib import Path
 import re
+import struct
 
 from PIL import Image, ImageDraw
 from source_identity import validate_prepared_source, DEFAULT_SERIES, digest, _supported_roles
@@ -18,6 +19,31 @@ FROZEN_PCM_SHA256 = 'd585212c3738bdfe6869427b01538b76698209d9f90c8c52b0d602989e5
 
 def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def expected_applied_controls(cfg: dict, role: str) -> dict:
+    if not isinstance(cfg, dict):
+        raise ValueError('Retained job line controls are invalid')
+    height = cfg.get('line_reference_height', 0)
+    aa = cfg.get('line_antialiasing', False)
+    alpha = cfg.get('feedback_detail', -1.0)
+    if (type(height) is not int or type(aa) is not bool or
+            type(alpha) not in (int, float) or not math.isfinite(alpha)):
+        raise ValueError('Retained job line controls are invalid')
+    width = cfg.get('line_reference_width', math.floor(height * 16.0 / 9.0 + .5))
+    if type(width) is not int:
+        raise ValueError('Retained job line controls are invalid')
+    try:
+        alpha = struct.unpack('<f', struct.pack('<f', alpha))[0]
+    except OverflowError:
+        alpha = -1.0
+    alpha = min(alpha, 1.0) if math.isfinite(alpha) and alpha >= 0 else -1.0
+    if role == 'upstream':
+        width, height, aa, alpha = 0, 0, False, -1.0
+    elif width <= 0 or height <= 0:
+        width, height = 0, 0
+    return {'line_reference_width': width, 'line_reference_height': height,
+            'line_antialiasing': aa, 'feedback_detail_alpha': alpha}
 
 
 def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manifest: dict,
@@ -33,7 +59,16 @@ def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manife
     directory = work / role / str(repeat)
     if json.loads((directory / 'manifest.json').read_text()) != manifest:
         raise ValueError('Retained manifest differs from inline run record')
-    return verify_job_protocol(work, result, role, repeat, remote_workspace)
+    job = verify_job_protocol(work, result, role, repeat, remote_workspace)
+    observed = manifest.get('applied_controls')
+    if (not isinstance(observed, dict) or type(observed.get('line_reference_width')) is not int or
+            type(observed.get('line_reference_height')) is not int or
+            type(observed.get('line_antialiasing')) is not bool or
+            type(observed.get('feedback_detail_alpha')) not in (int, float) or
+            not math.isfinite(observed['feedback_detail_alpha']) or
+            observed != expected_applied_controls(job['config'], role)):
+        raise ValueError('Rendered line controls differ from the effective role/job controls')
+    return job
 
 
 def verify_job_protocol(work: Path, result: dict, role: str, repeat: int, remote_workspace: str) -> dict:
@@ -58,6 +93,8 @@ def verify_job_protocol(work: Path, result: dict, role: str, repeat: int, remote
                 'line_reference_height': controls.get('line_reference_height', 0),
                 'line_antialiasing': controls.get('line_antialiasing', False)}
     cfg = job.get('config', {})
+    expected_applied_controls(controls, role)
+    expected_applied_controls(cfg, role)
     if (job.get('schema_version') != 1 or any(cfg.get(key) != value for key, value in expected.items()) or
             type(cfg.get('seed')) is not int or type(cfg.get('fps')) is not int or
             cfg.get('feedback_detail', -1) != controls.get('feedback_detail', -1) or
@@ -65,7 +102,8 @@ def verify_job_protocol(work: Path, result: dict, role: str, repeat: int, remote
             cfg.get('shader_failure_probe', False) != (result.get('diagnostic_kind') == 'shader-fragment-failure') or
             cfg.get('texture_history_probe', False) != (result.get('diagnostic_kind') == 'texture-history')):
         raise ValueError('Retained job protocol differs from capture settings')
-    if 'line_reference_width' in cfg and cfg['line_reference_width'] != controls.get('line_reference_width', 0):
+    if (('line_reference_width' in cfg) != ('line_reference_width' in controls) or
+            'line_reference_width' in cfg and cfg['line_reference_width'] != controls['line_reference_width']):
         raise ValueError('Retained job protocol differs from reference width')
     events = []
     if journey:
