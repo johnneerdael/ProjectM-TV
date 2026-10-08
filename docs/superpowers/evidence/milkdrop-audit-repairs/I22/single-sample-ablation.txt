@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 7: custom-wave-single-dot
+1/1 Test #7: custom-wave-single-dot ...........***Failed    0.27 sec
+single-dot sample input invented a finite value
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.27 sec
+
+The following tests FAILED:
+	  7 - custom-wave-single-dot (Failed)
+Errors while running CTest

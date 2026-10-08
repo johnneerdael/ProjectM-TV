@@ -90,12 +90,13 @@ static void ObserveInstanced(GLenum primitive, GLint first, GLsizei count, GLsiz
     submissions.emplace_back(primitive, instances);
     realInstanced(primitive, first, count, instances);
 }
-static void Dots(ShaderCache& cache)
+static void Dots(ShaderCache& cache, bool singleOnly = false)
 {
     realElements = glad_glDrawElements; glad_glDrawElements = ObserveElements;
     realInstanced = glad_glDrawArraysInstanced; glad_glDrawArraysInstanced = ObserveInstanced;
     for (bool dots : {true, false}) for (bool thick : {false, true}) for (int samples : {2, 1, 0})
     {
+        if (singleOnly && samples != 1) continue;
         PresetState state; auto& context = state.renderContext;
         context.shaderCache = &cache; state.LoadShaders();
         context.viewportSizeX = context.viewportSizeY = 128;
@@ -153,8 +154,9 @@ int main(int argc, char** argv)
 {
     try {
         GLContext gl; ShaderCache cache;
-        if (argc == 2 && std::string(argv[1]) == "dots") {
-            Dots(cache); std::cout << "Custom dots retain authored points and line smoothing\n"; return 0;
+        if (argc == 2 && (std::string(argv[1]) == "dots" || std::string(argv[1]) == "single")) {
+            Dots(cache, std::string(argv[1]) == "single");
+            std::cout << "Custom dots retain authored points and line smoothing\n"; return 0;
         }
         for (bool replay : {false, true}) {
             Window(cache, 2, 0, false, 239, 239, 240, 240, replay);

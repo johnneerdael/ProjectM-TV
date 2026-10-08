@@ -97,9 +97,15 @@
       "sha256": "346dfa27d9195f08f6cc30668100f86bcb18142a1856a35471c4f17006973147",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I22-custom-dot-waves-gain-interpolated-points/HANDOFF.md",
       "numeric_witness": "Two points(.25,.5),(.75,.5): original custom dots draw2; target smooths and draws3 including(.5,.5). Target samples1 is suppressed; original permits1 if the point program overwrites finite position/colour and never consumes the nonfinite sample input.\n\nStrong witness is the finite two-point case. Single-sample boundary remains conditional; no undefined sample is credited.",
-      "status": "candidate patch0018 discrete dots and defined single-dot outputs; source controls passed; Native4K pending",
-      "confirmed_affected_originals": [],
-      "evidence": "I22/README.md"
+      "status": "candidate0018; source41 tests pass; actual4K repeats captured; performance/stronger witness pending",
+      "confirmed_affected_originals": [
+        {
+          "name": "shifter - mosaic mitosis.milk",
+          "sha256": "8a9c95567882bf3fd2644e28cb2e0067b62f52b38cb9d10cc4ada34c90710419"
+        }
+      ],
+      "evidence": "I22/README.md",
+      "native_4k_evidence": "I22/results.json"
     },
     {
       "id": "I10",

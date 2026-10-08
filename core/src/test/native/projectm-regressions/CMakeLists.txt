@@ -152,11 +152,14 @@ foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility c
 endforeach()
 add_test(NAME custom-wave-input-windows COMMAND custom-wave-inputs-regressions)
 add_test(NAME custom-wave-discrete-dots COMMAND custom-wave-inputs-regressions dots)
+add_test(NAME custom-wave-single-dot COMMAND custom-wave-inputs-regressions single)
+set_tests_properties(custom-wave-single-dot PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(custom-wave-discrete-dots PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(custom-wave-input-windows PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-foreach(control hue wave-alpha wave-topology opacity)
+foreach(control hue wave-alpha wave-topology opacity gamma)
     add_test(NAME legacy-${control} COMMAND legacy-compatibility-regressions ${control})
     set_tests_properties(legacy-${control} PROPERTIES TIMEOUT 30
         ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

@@ -1,0 +1,1707 @@
+{
+  "baseline": "8e46babdd1225b0fb35ed905c5eee77efe7418d6",
+  "candidate": "5c88ffe1baebf693c960bf7efd21ad9b5bebf166",
+  "preset": "shifter - mosaic mitosis.milk",
+  "render": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "native_trails": "Standard",
+  "selected_frame479_rgb_mae": 0.5777768132716049,
+  "repeat_scope": "all8 selected full-resolution RGB captures match within each role",
+  "initial_runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "mean_ms": 2.8198708305555544,
+      "p90_ms": 3.921708
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "mean_ms": 2.2400419972222227,
+      "p90_ms": 2.985042
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "mean_ms": 3.4303455916666667,
+      "p90_ms": 4.769667
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "mean_ms": 2.478956122222224,
+      "p90_ms": 3.590666
+    }
+  ],
+  "clean_runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "mean_ms": 2.0412866833333334,
+      "p90_ms": 2.879,
+      "pss_kb": 72910,
+      "manifest_sha256": "f6504f588a65049bdf66f4e60651f5955aa0f649e5d824a98295908979eb52a8",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0022461aa83a70b8b9dceb3fdd81ebcd1afc3c80aa845c824c775feda320a218",
+          "pngBytes": 1105984,
+          "pngSha256": "193c0365097b314779fa10ae0e245ec6c8998762a3f5900aad2437a72924bd1b",
+          "rgbMean": [
+            125.85529682677469,
+            126.64319022472993,
+            0.023488136574074073
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "c7b83c588af615ac67c16ae65040d3d77339def382796992ae61934efd293e1a",
+          "pngBytes": 1132104,
+          "pngSha256": "9783f62137341e52e9a8b3cc0564d140c5c77be1b59edc35d3fcf474c7873cdc",
+          "rgbMean": [
+            126.55866572627315,
+            126.56487967785493,
+            0.023518880208333332
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "49c1b08641a8b3a48e6ae2ff354ae34f01a7f7d18ed2e75954724c7018426570",
+          "pngBytes": 1100196,
+          "pngSha256": "ed78c681c6f68f81aca1f3ec1602b27e50e31b0af97e09633d5fd7895aba6d90",
+          "rgbMean": [
+            127.53906117380401,
+            127.2937296248071,
+            0.006640625
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "a5e64d0485b3c4be7d0b3ddea886535e848114fa7d235451266afa6a0ac544e6",
+          "pngBytes": 1033829,
+          "pngSha256": "4623d8085082ca5a4ffba65bc0193c8b51133fcc9a85caadd6f19031826db4ab",
+          "rgbMean": [
+            127.7076405767747,
+            127.72588963638117,
+            0.012174479166666667
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "6f13d24d1c81434695437dfc52ecaf94aba488ab12b9d5caed094f23f4776ca5",
+          "pngBytes": 961561,
+          "pngSha256": "4e74a4223fff36cd77e9b890c24919730491c567d5b77c6fce207804d8f5165c",
+          "rgbMean": [
+            128.7089070939429,
+            128.31420199170526,
+            0.01328125
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "9ca19103db75aac43ac020e6e9c1811a766471b6253fee76eb018cc7b951e037",
+          "pngBytes": 1406879,
+          "pngSha256": "4001a32a73370a095e783e39ef83959b157c98e4004706e999be761e70215224",
+          "rgbMean": [
+            130.48213336709105,
+            128.21765010127314,
+            0.027945963541666667
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "61ec41a6bcbbff05522558ba9441c380012c2d20b91445375bae540953419aa9",
+          "pngBytes": 1086394,
+          "pngSha256": "83f0e5e12a471a3526d6481980349a74908cd52f75fb5998994f2ebfc435e195",
+          "rgbMean": [
+            127.45419053819444,
+            128.69023726851853,
+            0.024656394675925924
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-0/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "398d5e6adfac426a57dd10894af3f8a387f3e9bb825870aef35e0a3cf7e62f94",
+          "pngBytes": 1077323,
+          "pngSha256": "4fb660bb3c1b0a10a60983eb25fcb06f7cdc31034bddfe5442809fabb6fadb9b",
+          "rgbMean": [
+            126.78399739583334,
+            127.62488823784722,
+            0.011067708333333334
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "mean_ms": 2.323867711111111,
+      "p90_ms": 2.997792,
+      "pss_kb": 72827,
+      "manifest_sha256": "467b1b9932430a07c73c7c48a577903673551f34c59044a4b20c96b706abb4c8",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0022461aa83a70b8b9dceb3fdd81ebcd1afc3c80aa845c824c775feda320a218",
+          "pngBytes": 1105984,
+          "pngSha256": "193c0365097b314779fa10ae0e245ec6c8998762a3f5900aad2437a72924bd1b",
+          "rgbMean": [
+            125.85529682677469,
+            126.64319022472993,
+            0.023488136574074073
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "c7b83c588af615ac67c16ae65040d3d77339def382796992ae61934efd293e1a",
+          "pngBytes": 1132104,
+          "pngSha256": "9783f62137341e52e9a8b3cc0564d140c5c77be1b59edc35d3fcf474c7873cdc",
+          "rgbMean": [
+            126.55866572627315,
+            126.56487967785493,
+            0.023518880208333332
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "49c1b08641a8b3a48e6ae2ff354ae34f01a7f7d18ed2e75954724c7018426570",
+          "pngBytes": 1100196,
+          "pngSha256": "ed78c681c6f68f81aca1f3ec1602b27e50e31b0af97e09633d5fd7895aba6d90",
+          "rgbMean": [
+            127.53906117380401,
+            127.2937296248071,
+            0.006640625
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "a5e64d0485b3c4be7d0b3ddea886535e848114fa7d235451266afa6a0ac544e6",
+          "pngBytes": 1033829,
+          "pngSha256": "4623d8085082ca5a4ffba65bc0193c8b51133fcc9a85caadd6f19031826db4ab",
+          "rgbMean": [
+            127.7076405767747,
+            127.72588963638117,
+            0.012174479166666667
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "6f13d24d1c81434695437dfc52ecaf94aba488ab12b9d5caed094f23f4776ca5",
+          "pngBytes": 961561,
+          "pngSha256": "4e74a4223fff36cd77e9b890c24919730491c567d5b77c6fce207804d8f5165c",
+          "rgbMean": [
+            128.7089070939429,
+            128.31420199170526,
+            0.01328125
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "9ca19103db75aac43ac020e6e9c1811a766471b6253fee76eb018cc7b951e037",
+          "pngBytes": 1406879,
+          "pngSha256": "4001a32a73370a095e783e39ef83959b157c98e4004706e999be761e70215224",
+          "rgbMean": [
+            130.48213336709105,
+            128.21765010127314,
+            0.027945963541666667
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "61ec41a6bcbbff05522558ba9441c380012c2d20b91445375bae540953419aa9",
+          "pngBytes": 1086394,
+          "pngSha256": "83f0e5e12a471a3526d6481980349a74908cd52f75fb5998994f2ebfc435e195",
+          "rgbMean": [
+            127.45419053819444,
+            128.69023726851853,
+            0.024656394675925924
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-1/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "398d5e6adfac426a57dd10894af3f8a387f3e9bb825870aef35e0a3cf7e62f94",
+          "pngBytes": 1077323,
+          "pngSha256": "4fb660bb3c1b0a10a60983eb25fcb06f7cdc31034bddfe5442809fabb6fadb9b",
+          "rgbMean": [
+            126.78399739583334,
+            127.62488823784722,
+            0.011067708333333334
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "before",
+      "repeat": 2,
+      "mean_ms": 3.7728210638888866,
+      "p90_ms": 5.11825,
+      "pss_kb": 72830,
+      "manifest_sha256": "31bf98a0a811894388dd7efb968fc2b7c5fa1430301c94b9a709e37f11834243",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0022461aa83a70b8b9dceb3fdd81ebcd1afc3c80aa845c824c775feda320a218",
+          "pngBytes": 1105984,
+          "pngSha256": "193c0365097b314779fa10ae0e245ec6c8998762a3f5900aad2437a72924bd1b",
+          "rgbMean": [
+            125.85529682677469,
+            126.64319022472993,
+            0.023488136574074073
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "c7b83c588af615ac67c16ae65040d3d77339def382796992ae61934efd293e1a",
+          "pngBytes": 1132104,
+          "pngSha256": "9783f62137341e52e9a8b3cc0564d140c5c77be1b59edc35d3fcf474c7873cdc",
+          "rgbMean": [
+            126.55866572627315,
+            126.56487967785493,
+            0.023518880208333332
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "49c1b08641a8b3a48e6ae2ff354ae34f01a7f7d18ed2e75954724c7018426570",
+          "pngBytes": 1100196,
+          "pngSha256": "ed78c681c6f68f81aca1f3ec1602b27e50e31b0af97e09633d5fd7895aba6d90",
+          "rgbMean": [
+            127.53906117380401,
+            127.2937296248071,
+            0.006640625
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "a5e64d0485b3c4be7d0b3ddea886535e848114fa7d235451266afa6a0ac544e6",
+          "pngBytes": 1033829,
+          "pngSha256": "4623d8085082ca5a4ffba65bc0193c8b51133fcc9a85caadd6f19031826db4ab",
+          "rgbMean": [
+            127.7076405767747,
+            127.72588963638117,
+            0.012174479166666667
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "6f13d24d1c81434695437dfc52ecaf94aba488ab12b9d5caed094f23f4776ca5",
+          "pngBytes": 961561,
+          "pngSha256": "4e74a4223fff36cd77e9b890c24919730491c567d5b77c6fce207804d8f5165c",
+          "rgbMean": [
+            128.7089070939429,
+            128.31420199170526,
+            0.01328125
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "9ca19103db75aac43ac020e6e9c1811a766471b6253fee76eb018cc7b951e037",
+          "pngBytes": 1406879,
+          "pngSha256": "4001a32a73370a095e783e39ef83959b157c98e4004706e999be761e70215224",
+          "rgbMean": [
+            130.48213336709105,
+            128.21765010127314,
+            0.027945963541666667
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "61ec41a6bcbbff05522558ba9441c380012c2d20b91445375bae540953419aa9",
+          "pngBytes": 1086394,
+          "pngSha256": "83f0e5e12a471a3526d6481980349a74908cd52f75fb5998994f2ebfc435e195",
+          "rgbMean": [
+            127.45419053819444,
+            128.69023726851853,
+            0.024656394675925924
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-2/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "398d5e6adfac426a57dd10894af3f8a387f3e9bb825870aef35e0a3cf7e62f94",
+          "pngBytes": 1077323,
+          "pngSha256": "4fb660bb3c1b0a10a60983eb25fcb06f7cdc31034bddfe5442809fabb6fadb9b",
+          "rgbMean": [
+            126.78399739583334,
+            127.62488823784722,
+            0.011067708333333334
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "before",
+      "repeat": 3,
+      "mean_ms": 1.983895513888889,
+      "p90_ms": 2.76625,
+      "pss_kb": 72602,
+      "manifest_sha256": "74d453db5d50d8f7416c8a4842da3e1e20c820ec6bad680427eb31f116e4f4d3",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0022461aa83a70b8b9dceb3fdd81ebcd1afc3c80aa845c824c775feda320a218",
+          "pngBytes": 1105984,
+          "pngSha256": "193c0365097b314779fa10ae0e245ec6c8998762a3f5900aad2437a72924bd1b",
+          "rgbMean": [
+            125.85529682677469,
+            126.64319022472993,
+            0.023488136574074073
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "c7b83c588af615ac67c16ae65040d3d77339def382796992ae61934efd293e1a",
+          "pngBytes": 1132104,
+          "pngSha256": "9783f62137341e52e9a8b3cc0564d140c5c77be1b59edc35d3fcf474c7873cdc",
+          "rgbMean": [
+            126.55866572627315,
+            126.56487967785493,
+            0.023518880208333332
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "49c1b08641a8b3a48e6ae2ff354ae34f01a7f7d18ed2e75954724c7018426570",
+          "pngBytes": 1100196,
+          "pngSha256": "ed78c681c6f68f81aca1f3ec1602b27e50e31b0af97e09633d5fd7895aba6d90",
+          "rgbMean": [
+            127.53906117380401,
+            127.2937296248071,
+            0.006640625
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "a5e64d0485b3c4be7d0b3ddea886535e848114fa7d235451266afa6a0ac544e6",
+          "pngBytes": 1033829,
+          "pngSha256": "4623d8085082ca5a4ffba65bc0193c8b51133fcc9a85caadd6f19031826db4ab",
+          "rgbMean": [
+            127.7076405767747,
+            127.72588963638117,
+            0.012174479166666667
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "6f13d24d1c81434695437dfc52ecaf94aba488ab12b9d5caed094f23f4776ca5",
+          "pngBytes": 961561,
+          "pngSha256": "4e74a4223fff36cd77e9b890c24919730491c567d5b77c6fce207804d8f5165c",
+          "rgbMean": [
+            128.7089070939429,
+            128.31420199170526,
+            0.01328125
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "9ca19103db75aac43ac020e6e9c1811a766471b6253fee76eb018cc7b951e037",
+          "pngBytes": 1406879,
+          "pngSha256": "4001a32a73370a095e783e39ef83959b157c98e4004706e999be761e70215224",
+          "rgbMean": [
+            130.48213336709105,
+            128.21765010127314,
+            0.027945963541666667
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "61ec41a6bcbbff05522558ba9441c380012c2d20b91445375bae540953419aa9",
+          "pngBytes": 1086394,
+          "pngSha256": "83f0e5e12a471a3526d6481980349a74908cd52f75fb5998994f2ebfc435e195",
+          "rgbMean": [
+            127.45419053819444,
+            128.69023726851853,
+            0.024656394675925924
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-3/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "398d5e6adfac426a57dd10894af3f8a387f3e9bb825870aef35e0a3cf7e62f94",
+          "pngBytes": 1077323,
+          "pngSha256": "4fb660bb3c1b0a10a60983eb25fcb06f7cdc31034bddfe5442809fabb6fadb9b",
+          "rgbMean": [
+            126.78399739583334,
+            127.62488823784722,
+            0.011067708333333334
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "before",
+      "repeat": 4,
+      "mean_ms": 2.7067694305555556,
+      "p90_ms": 3.485916,
+      "pss_kb": 73081,
+      "manifest_sha256": "215302fed8d665a6398701bd7d2ce17eb60cd43c3ae2388baac558fa32444007",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0022461aa83a70b8b9dceb3fdd81ebcd1afc3c80aa845c824c775feda320a218",
+          "pngBytes": 1105984,
+          "pngSha256": "193c0365097b314779fa10ae0e245ec6c8998762a3f5900aad2437a72924bd1b",
+          "rgbMean": [
+            125.85529682677469,
+            126.64319022472993,
+            0.023488136574074073
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "c7b83c588af615ac67c16ae65040d3d77339def382796992ae61934efd293e1a",
+          "pngBytes": 1132104,
+          "pngSha256": "9783f62137341e52e9a8b3cc0564d140c5c77be1b59edc35d3fcf474c7873cdc",
+          "rgbMean": [
+            126.55866572627315,
+            126.56487967785493,
+            0.023518880208333332
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "49c1b08641a8b3a48e6ae2ff354ae34f01a7f7d18ed2e75954724c7018426570",
+          "pngBytes": 1100196,
+          "pngSha256": "ed78c681c6f68f81aca1f3ec1602b27e50e31b0af97e09633d5fd7895aba6d90",
+          "rgbMean": [
+            127.53906117380401,
+            127.2937296248071,
+            0.006640625
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "a5e64d0485b3c4be7d0b3ddea886535e848114fa7d235451266afa6a0ac544e6",
+          "pngBytes": 1033829,
+          "pngSha256": "4623d8085082ca5a4ffba65bc0193c8b51133fcc9a85caadd6f19031826db4ab",
+          "rgbMean": [
+            127.7076405767747,
+            127.72588963638117,
+            0.012174479166666667
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "6f13d24d1c81434695437dfc52ecaf94aba488ab12b9d5caed094f23f4776ca5",
+          "pngBytes": 961561,
+          "pngSha256": "4e74a4223fff36cd77e9b890c24919730491c567d5b77c6fce207804d8f5165c",
+          "rgbMean": [
+            128.7089070939429,
+            128.31420199170526,
+            0.01328125
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "9ca19103db75aac43ac020e6e9c1811a766471b6253fee76eb018cc7b951e037",
+          "pngBytes": 1406879,
+          "pngSha256": "4001a32a73370a095e783e39ef83959b157c98e4004706e999be761e70215224",
+          "rgbMean": [
+            130.48213336709105,
+            128.21765010127314,
+            0.027945963541666667
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "61ec41a6bcbbff05522558ba9441c380012c2d20b91445375bae540953419aa9",
+          "pngBytes": 1086394,
+          "pngSha256": "83f0e5e12a471a3526d6481980349a74908cd52f75fb5998994f2ebfc435e195",
+          "rgbMean": [
+            127.45419053819444,
+            128.69023726851853,
+            0.024656394675925924
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-4/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "398d5e6adfac426a57dd10894af3f8a387f3e9bb825870aef35e0a3cf7e62f94",
+          "pngBytes": 1077323,
+          "pngSha256": "4fb660bb3c1b0a10a60983eb25fcb06f7cdc31034bddfe5442809fabb6fadb9b",
+          "rgbMean": [
+            126.78399739583334,
+            127.62488823784722,
+            0.011067708333333334
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "before",
+      "repeat": 5,
+      "mean_ms": 2.1964906055555558,
+      "p90_ms": 3.017042,
+      "pss_kb": 73110,
+      "manifest_sha256": "24a3e3d91d2783a518ee282d24e5ec0f82b3508aaafae500f0b720396ae80e00",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0022461aa83a70b8b9dceb3fdd81ebcd1afc3c80aa845c824c775feda320a218",
+          "pngBytes": 1105984,
+          "pngSha256": "193c0365097b314779fa10ae0e245ec6c8998762a3f5900aad2437a72924bd1b",
+          "rgbMean": [
+            125.85529682677469,
+            126.64319022472993,
+            0.023488136574074073
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "c7b83c588af615ac67c16ae65040d3d77339def382796992ae61934efd293e1a",
+          "pngBytes": 1132104,
+          "pngSha256": "9783f62137341e52e9a8b3cc0564d140c5c77be1b59edc35d3fcf474c7873cdc",
+          "rgbMean": [
+            126.55866572627315,
+            126.56487967785493,
+            0.023518880208333332
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "49c1b08641a8b3a48e6ae2ff354ae34f01a7f7d18ed2e75954724c7018426570",
+          "pngBytes": 1100196,
+          "pngSha256": "ed78c681c6f68f81aca1f3ec1602b27e50e31b0af97e09633d5fd7895aba6d90",
+          "rgbMean": [
+            127.53906117380401,
+            127.2937296248071,
+            0.006640625
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "a5e64d0485b3c4be7d0b3ddea886535e848114fa7d235451266afa6a0ac544e6",
+          "pngBytes": 1033829,
+          "pngSha256": "4623d8085082ca5a4ffba65bc0193c8b51133fcc9a85caadd6f19031826db4ab",
+          "rgbMean": [
+            127.7076405767747,
+            127.72588963638117,
+            0.012174479166666667
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "6f13d24d1c81434695437dfc52ecaf94aba488ab12b9d5caed094f23f4776ca5",
+          "pngBytes": 961561,
+          "pngSha256": "4e74a4223fff36cd77e9b890c24919730491c567d5b77c6fce207804d8f5165c",
+          "rgbMean": [
+            128.7089070939429,
+            128.31420199170526,
+            0.01328125
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "9ca19103db75aac43ac020e6e9c1811a766471b6253fee76eb018cc7b951e037",
+          "pngBytes": 1406879,
+          "pngSha256": "4001a32a73370a095e783e39ef83959b157c98e4004706e999be761e70215224",
+          "rgbMean": [
+            130.48213336709105,
+            128.21765010127314,
+            0.027945963541666667
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "61ec41a6bcbbff05522558ba9441c380012c2d20b91445375bae540953419aa9",
+          "pngBytes": 1086394,
+          "pngSha256": "83f0e5e12a471a3526d6481980349a74908cd52f75fb5998994f2ebfc435e195",
+          "rgbMean": [
+            127.45419053819444,
+            128.69023726851853,
+            0.024656394675925924
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpusbaseline/files/native-trails/i22-clean4k-before-5/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "398d5e6adfac426a57dd10894af3f8a387f3e9bb825870aef35e0a3cf7e62f94",
+          "pngBytes": 1077323,
+          "pngSha256": "4fb660bb3c1b0a10a60983eb25fcb06f7cdc31034bddfe5442809fabb6fadb9b",
+          "rgbMean": [
+            126.78399739583334,
+            127.62488823784722,
+            0.011067708333333334
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "mean_ms": 2.2734438611111107,
+      "p90_ms": 3.091625,
+      "pss_kb": 72663,
+      "manifest_sha256": "0c23fda74b02935410a816d8804dcb12f8b93c26d330a20cdffcef541c8ecda6",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "5541ea37c604c436e34fbe1739dbfdeccc9fa6ef927ef75a4eb70f1b27df2d4c",
+          "pngBytes": 1105731,
+          "pngSha256": "91d7a34da1c1c35bd5044e736169f35cc10aef981313901eac6f536521ca9e7b",
+          "rgbMean": [
+            125.85531057098765,
+            126.64358723958334,
+            0.01906105324074074
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "7fe8202b4deb5712a5fe85460847450622b637c362af5d91d23fa917b9a005b2",
+          "pngBytes": 1129325,
+          "pngSha256": "f95a94a8be915035de968d6d8ec68c3730d0254237334f9f0cf6a8e49a736406",
+          "rgbMean": [
+            126.56523582175926,
+            126.56899594907408,
+            0.019091796875
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "3ac272b28ac0764f9b779ba08805269a5dc089032d2b010dc41265d23fba23e5",
+          "pngBytes": 1099949,
+          "pngSha256": "3195388257b187254fcf54ef1a92a8e46b3114d8092f8bd6451f5292a7e559e8",
+          "rgbMean": [
+            127.53833429783951,
+            127.29387345679012,
+            0.0033203125
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "b57c37eb721830a5909e503d51a0da9cbc964719b4d5656e69413bb74debd19b",
+          "pngBytes": 1033319,
+          "pngSha256": "d213f7916db29c3b5a46749bcf3b7bc2849c73c26ddaf9d9b911ffff6b897875",
+          "rgbMean": [
+            127.70742850597993,
+            127.72606059510031,
+            0.006640625
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0e6c94c22d026d58742f065d112ff6ab67e45a71c73b25ce8e43ea27cc4abb9c",
+          "pngBytes": 961030,
+          "pngSha256": "df113e7ab6b95a8d4fdebc75a2d91b46fe05dc31ed6a82c40444d39bd845824c",
+          "rgbMean": [
+            128.70849368248457,
+            128.3139750916281,
+            0.006640625
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "be9ba3d1251b2e7179a1dd608f8e8596609ac943cfdb54c4d54b51835304a585",
+          "pngBytes": 1383185,
+          "pngSha256": "5567be089ba0663031fd86cb083f6e2c223578b79137e1935a4a768fc3a01437",
+          "rgbMean": [
+            130.4597860001929,
+            128.1695762201003,
+            0.021305338541666666
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "f49a3d60a21c33aca0a902b27ebd420c4d3f88204b1687a66e1572b51e839787",
+          "pngBytes": 1086097,
+          "pngSha256": "4db6c6e25978d8b07b611b19f8929e79706130d5e54195af6b6f4f2c12c9f6b1",
+          "rgbMean": [
+            127.45464192708333,
+            128.68956452546297,
+            0.020229311342592593
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-0/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "19462ed6e48e7f62abad912a940dd51a73efb7e377b27373aa792e9525e7f054",
+          "pngBytes": 1098878,
+          "pngSha256": "515d55aaa7d0f774619ff2e490f7bb3b200a4bfc17c35e80647351cd711ed704",
+          "rgbMean": [
+            126.06377399209104,
+            126.94438512731482,
+            0.005533854166666667
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "mean_ms": 2.972762980555555,
+      "p90_ms": 4.20675,
+      "pss_kb": 72821,
+      "manifest_sha256": "ea9026138b0d92344e0bc32803ea920778ecbaee0deeea1b9873f4fa18cbfa56",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "5541ea37c604c436e34fbe1739dbfdeccc9fa6ef927ef75a4eb70f1b27df2d4c",
+          "pngBytes": 1105731,
+          "pngSha256": "91d7a34da1c1c35bd5044e736169f35cc10aef981313901eac6f536521ca9e7b",
+          "rgbMean": [
+            125.85531057098765,
+            126.64358723958334,
+            0.01906105324074074
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "7fe8202b4deb5712a5fe85460847450622b637c362af5d91d23fa917b9a005b2",
+          "pngBytes": 1129325,
+          "pngSha256": "f95a94a8be915035de968d6d8ec68c3730d0254237334f9f0cf6a8e49a736406",
+          "rgbMean": [
+            126.56523582175926,
+            126.56899594907408,
+            0.019091796875
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "3ac272b28ac0764f9b779ba08805269a5dc089032d2b010dc41265d23fba23e5",
+          "pngBytes": 1099949,
+          "pngSha256": "3195388257b187254fcf54ef1a92a8e46b3114d8092f8bd6451f5292a7e559e8",
+          "rgbMean": [
+            127.53833429783951,
+            127.29387345679012,
+            0.0033203125
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "b57c37eb721830a5909e503d51a0da9cbc964719b4d5656e69413bb74debd19b",
+          "pngBytes": 1033319,
+          "pngSha256": "d213f7916db29c3b5a46749bcf3b7bc2849c73c26ddaf9d9b911ffff6b897875",
+          "rgbMean": [
+            127.70742850597993,
+            127.72606059510031,
+            0.006640625
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0e6c94c22d026d58742f065d112ff6ab67e45a71c73b25ce8e43ea27cc4abb9c",
+          "pngBytes": 961030,
+          "pngSha256": "df113e7ab6b95a8d4fdebc75a2d91b46fe05dc31ed6a82c40444d39bd845824c",
+          "rgbMean": [
+            128.70849368248457,
+            128.3139750916281,
+            0.006640625
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "be9ba3d1251b2e7179a1dd608f8e8596609ac943cfdb54c4d54b51835304a585",
+          "pngBytes": 1383185,
+          "pngSha256": "5567be089ba0663031fd86cb083f6e2c223578b79137e1935a4a768fc3a01437",
+          "rgbMean": [
+            130.4597860001929,
+            128.1695762201003,
+            0.021305338541666666
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "f49a3d60a21c33aca0a902b27ebd420c4d3f88204b1687a66e1572b51e839787",
+          "pngBytes": 1086097,
+          "pngSha256": "4db6c6e25978d8b07b611b19f8929e79706130d5e54195af6b6f4f2c12c9f6b1",
+          "rgbMean": [
+            127.45464192708333,
+            128.68956452546297,
+            0.020229311342592593
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-1/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "19462ed6e48e7f62abad912a940dd51a73efb7e377b27373aa792e9525e7f054",
+          "pngBytes": 1098878,
+          "pngSha256": "515d55aaa7d0f774619ff2e490f7bb3b200a4bfc17c35e80647351cd711ed704",
+          "rgbMean": [
+            126.06377399209104,
+            126.94438512731482,
+            0.005533854166666667
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "after",
+      "repeat": 2,
+      "mean_ms": 4.385405225000003,
+      "p90_ms": 6.402208,
+      "pss_kb": 72951,
+      "manifest_sha256": "bbbaf24b968c82bd60d5da01a20782ac048944b73248b6e6d64357004913347a",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "5541ea37c604c436e34fbe1739dbfdeccc9fa6ef927ef75a4eb70f1b27df2d4c",
+          "pngBytes": 1105731,
+          "pngSha256": "91d7a34da1c1c35bd5044e736169f35cc10aef981313901eac6f536521ca9e7b",
+          "rgbMean": [
+            125.85531057098765,
+            126.64358723958334,
+            0.01906105324074074
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "7fe8202b4deb5712a5fe85460847450622b637c362af5d91d23fa917b9a005b2",
+          "pngBytes": 1129325,
+          "pngSha256": "f95a94a8be915035de968d6d8ec68c3730d0254237334f9f0cf6a8e49a736406",
+          "rgbMean": [
+            126.56523582175926,
+            126.56899594907408,
+            0.019091796875
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "3ac272b28ac0764f9b779ba08805269a5dc089032d2b010dc41265d23fba23e5",
+          "pngBytes": 1099949,
+          "pngSha256": "3195388257b187254fcf54ef1a92a8e46b3114d8092f8bd6451f5292a7e559e8",
+          "rgbMean": [
+            127.53833429783951,
+            127.29387345679012,
+            0.0033203125
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "b57c37eb721830a5909e503d51a0da9cbc964719b4d5656e69413bb74debd19b",
+          "pngBytes": 1033319,
+          "pngSha256": "d213f7916db29c3b5a46749bcf3b7bc2849c73c26ddaf9d9b911ffff6b897875",
+          "rgbMean": [
+            127.70742850597993,
+            127.72606059510031,
+            0.006640625
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0e6c94c22d026d58742f065d112ff6ab67e45a71c73b25ce8e43ea27cc4abb9c",
+          "pngBytes": 961030,
+          "pngSha256": "df113e7ab6b95a8d4fdebc75a2d91b46fe05dc31ed6a82c40444d39bd845824c",
+          "rgbMean": [
+            128.70849368248457,
+            128.3139750916281,
+            0.006640625
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "be9ba3d1251b2e7179a1dd608f8e8596609ac943cfdb54c4d54b51835304a585",
+          "pngBytes": 1383185,
+          "pngSha256": "5567be089ba0663031fd86cb083f6e2c223578b79137e1935a4a768fc3a01437",
+          "rgbMean": [
+            130.4597860001929,
+            128.1695762201003,
+            0.021305338541666666
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "f49a3d60a21c33aca0a902b27ebd420c4d3f88204b1687a66e1572b51e839787",
+          "pngBytes": 1086097,
+          "pngSha256": "4db6c6e25978d8b07b611b19f8929e79706130d5e54195af6b6f4f2c12c9f6b1",
+          "rgbMean": [
+            127.45464192708333,
+            128.68956452546297,
+            0.020229311342592593
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-2/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "19462ed6e48e7f62abad912a940dd51a73efb7e377b27373aa792e9525e7f054",
+          "pngBytes": 1098878,
+          "pngSha256": "515d55aaa7d0f774619ff2e490f7bb3b200a4bfc17c35e80647351cd711ed704",
+          "rgbMean": [
+            126.06377399209104,
+            126.94438512731482,
+            0.005533854166666667
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "after",
+      "repeat": 3,
+      "mean_ms": 2.0572529111111115,
+      "p90_ms": 2.948958,
+      "pss_kb": 72912,
+      "manifest_sha256": "89df4becf6f73b6f0de6044f243c1221267f04baba8454be82a66eebf09a3a47",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "5541ea37c604c436e34fbe1739dbfdeccc9fa6ef927ef75a4eb70f1b27df2d4c",
+          "pngBytes": 1105731,
+          "pngSha256": "91d7a34da1c1c35bd5044e736169f35cc10aef981313901eac6f536521ca9e7b",
+          "rgbMean": [
+            125.85531057098765,
+            126.64358723958334,
+            0.01906105324074074
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "7fe8202b4deb5712a5fe85460847450622b637c362af5d91d23fa917b9a005b2",
+          "pngBytes": 1129325,
+          "pngSha256": "f95a94a8be915035de968d6d8ec68c3730d0254237334f9f0cf6a8e49a736406",
+          "rgbMean": [
+            126.56523582175926,
+            126.56899594907408,
+            0.019091796875
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "3ac272b28ac0764f9b779ba08805269a5dc089032d2b010dc41265d23fba23e5",
+          "pngBytes": 1099949,
+          "pngSha256": "3195388257b187254fcf54ef1a92a8e46b3114d8092f8bd6451f5292a7e559e8",
+          "rgbMean": [
+            127.53833429783951,
+            127.29387345679012,
+            0.0033203125
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "b57c37eb721830a5909e503d51a0da9cbc964719b4d5656e69413bb74debd19b",
+          "pngBytes": 1033319,
+          "pngSha256": "d213f7916db29c3b5a46749bcf3b7bc2849c73c26ddaf9d9b911ffff6b897875",
+          "rgbMean": [
+            127.70742850597993,
+            127.72606059510031,
+            0.006640625
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0e6c94c22d026d58742f065d112ff6ab67e45a71c73b25ce8e43ea27cc4abb9c",
+          "pngBytes": 961030,
+          "pngSha256": "df113e7ab6b95a8d4fdebc75a2d91b46fe05dc31ed6a82c40444d39bd845824c",
+          "rgbMean": [
+            128.70849368248457,
+            128.3139750916281,
+            0.006640625
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "be9ba3d1251b2e7179a1dd608f8e8596609ac943cfdb54c4d54b51835304a585",
+          "pngBytes": 1383185,
+          "pngSha256": "5567be089ba0663031fd86cb083f6e2c223578b79137e1935a4a768fc3a01437",
+          "rgbMean": [
+            130.4597860001929,
+            128.1695762201003,
+            0.021305338541666666
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "f49a3d60a21c33aca0a902b27ebd420c4d3f88204b1687a66e1572b51e839787",
+          "pngBytes": 1086097,
+          "pngSha256": "4db6c6e25978d8b07b611b19f8929e79706130d5e54195af6b6f4f2c12c9f6b1",
+          "rgbMean": [
+            127.45464192708333,
+            128.68956452546297,
+            0.020229311342592593
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-3/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "19462ed6e48e7f62abad912a940dd51a73efb7e377b27373aa792e9525e7f054",
+          "pngBytes": 1098878,
+          "pngSha256": "515d55aaa7d0f774619ff2e490f7bb3b200a4bfc17c35e80647351cd711ed704",
+          "rgbMean": [
+            126.06377399209104,
+            126.94438512731482,
+            0.005533854166666667
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "after",
+      "repeat": 4,
+      "mean_ms": 2.846878358333334,
+      "p90_ms": 3.762542,
+      "pss_kb": 72777,
+      "manifest_sha256": "3df83ef208e3fbb7da3a8267f08444fb9922af7e71a33d0a59b11a5fcc0c4b13",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "5541ea37c604c436e34fbe1739dbfdeccc9fa6ef927ef75a4eb70f1b27df2d4c",
+          "pngBytes": 1105731,
+          "pngSha256": "91d7a34da1c1c35bd5044e736169f35cc10aef981313901eac6f536521ca9e7b",
+          "rgbMean": [
+            125.85531057098765,
+            126.64358723958334,
+            0.01906105324074074
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "7fe8202b4deb5712a5fe85460847450622b637c362af5d91d23fa917b9a005b2",
+          "pngBytes": 1129325,
+          "pngSha256": "f95a94a8be915035de968d6d8ec68c3730d0254237334f9f0cf6a8e49a736406",
+          "rgbMean": [
+            126.56523582175926,
+            126.56899594907408,
+            0.019091796875
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "3ac272b28ac0764f9b779ba08805269a5dc089032d2b010dc41265d23fba23e5",
+          "pngBytes": 1099949,
+          "pngSha256": "3195388257b187254fcf54ef1a92a8e46b3114d8092f8bd6451f5292a7e559e8",
+          "rgbMean": [
+            127.53833429783951,
+            127.29387345679012,
+            0.0033203125
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "b57c37eb721830a5909e503d51a0da9cbc964719b4d5656e69413bb74debd19b",
+          "pngBytes": 1033319,
+          "pngSha256": "d213f7916db29c3b5a46749bcf3b7bc2849c73c26ddaf9d9b911ffff6b897875",
+          "rgbMean": [
+            127.70742850597993,
+            127.72606059510031,
+            0.006640625
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0e6c94c22d026d58742f065d112ff6ab67e45a71c73b25ce8e43ea27cc4abb9c",
+          "pngBytes": 961030,
+          "pngSha256": "df113e7ab6b95a8d4fdebc75a2d91b46fe05dc31ed6a82c40444d39bd845824c",
+          "rgbMean": [
+            128.70849368248457,
+            128.3139750916281,
+            0.006640625
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "be9ba3d1251b2e7179a1dd608f8e8596609ac943cfdb54c4d54b51835304a585",
+          "pngBytes": 1383185,
+          "pngSha256": "5567be089ba0663031fd86cb083f6e2c223578b79137e1935a4a768fc3a01437",
+          "rgbMean": [
+            130.4597860001929,
+            128.1695762201003,
+            0.021305338541666666
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "f49a3d60a21c33aca0a902b27ebd420c4d3f88204b1687a66e1572b51e839787",
+          "pngBytes": 1086097,
+          "pngSha256": "4db6c6e25978d8b07b611b19f8929e79706130d5e54195af6b6f4f2c12c9f6b1",
+          "rgbMean": [
+            127.45464192708333,
+            128.68956452546297,
+            0.020229311342592593
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-4/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "19462ed6e48e7f62abad912a940dd51a73efb7e377b27373aa792e9525e7f054",
+          "pngBytes": 1098878,
+          "pngSha256": "515d55aaa7d0f774619ff2e490f7bb3b200a4bfc17c35e80647351cd711ed704",
+          "rgbMean": [
+            126.06377399209104,
+            126.94438512731482,
+            0.005533854166666667
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    },
+    {
+      "role": "after",
+      "repeat": 5,
+      "mean_ms": 16.458058091666675,
+      "p90_ms": 32.669708,
+      "pss_kb": 72852,
+      "manifest_sha256": "682e8d9c3bea29bec7cc3d8d11983dc5e67ae0b5091fd550d18165260c773134",
+      "captures": [
+        {
+          "frame": 120,
+          "simulatedSeconds": 4,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-120.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "5541ea37c604c436e34fbe1739dbfdeccc9fa6ef927ef75a4eb70f1b27df2d4c",
+          "pngBytes": 1105731,
+          "pngSha256": "91d7a34da1c1c35bd5044e736169f35cc10aef981313901eac6f536521ca9e7b",
+          "rgbMean": [
+            125.85531057098765,
+            126.64358723958334,
+            0.01906105324074074
+          ],
+          "exactBlackFraction": 0
+        },
+        {
+          "frame": 150,
+          "simulatedSeconds": 5,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-150.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "7fe8202b4deb5712a5fe85460847450622b637c362af5d91d23fa917b9a005b2",
+          "pngBytes": 1129325,
+          "pngSha256": "f95a94a8be915035de968d6d8ec68c3730d0254237334f9f0cf6a8e49a736406",
+          "rgbMean": [
+            126.56523582175926,
+            126.56899594907408,
+            0.019091796875
+          ],
+          "exactBlackFraction": 0.000771484375
+        },
+        {
+          "frame": 180,
+          "simulatedSeconds": 6,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-180.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "3ac272b28ac0764f9b779ba08805269a5dc089032d2b010dc41265d23fba23e5",
+          "pngBytes": 1099949,
+          "pngSha256": "3195388257b187254fcf54ef1a92a8e46b3114d8092f8bd6451f5292a7e559e8",
+          "rgbMean": [
+            127.53833429783951,
+            127.29387345679012,
+            0.0033203125
+          ],
+          "exactBlackFraction": 5.907600308641975e-05
+        },
+        {
+          "frame": 210,
+          "simulatedSeconds": 7,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-210.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "b57c37eb721830a5909e503d51a0da9cbc964719b4d5656e69413bb74debd19b",
+          "pngBytes": 1033319,
+          "pngSha256": "d213f7916db29c3b5a46749bcf3b7bc2849c73c26ddaf9d9b911ffff6b897875",
+          "rgbMean": [
+            127.70742850597993,
+            127.72606059510031,
+            0.006640625
+          ],
+          "exactBlackFraction": 0.00012936439043209876
+        },
+        {
+          "frame": 239,
+          "simulatedSeconds": 7.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-239.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "0e6c94c22d026d58742f065d112ff6ab67e45a71c73b25ce8e43ea27cc4abb9c",
+          "pngBytes": 961030,
+          "pngSha256": "df113e7ab6b95a8d4fdebc75a2d91b46fe05dc31ed6a82c40444d39bd845824c",
+          "rgbMean": [
+            128.70849368248457,
+            128.3139750916281,
+            0.006640625
+          ],
+          "exactBlackFraction": 6.028163580246913e-07
+        },
+        {
+          "frame": 300,
+          "simulatedSeconds": 10,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-300.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "be9ba3d1251b2e7179a1dd608f8e8596609ac943cfdb54c4d54b51835304a585",
+          "pngBytes": 1383185,
+          "pngSha256": "5567be089ba0663031fd86cb083f6e2c223578b79137e1935a4a768fc3a01437",
+          "rgbMean": [
+            130.4597860001929,
+            128.1695762201003,
+            0.021305338541666666
+          ],
+          "exactBlackFraction": 0.0012534963348765432
+        },
+        {
+          "frame": 390,
+          "simulatedSeconds": 13,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-390.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "f49a3d60a21c33aca0a902b27ebd420c4d3f88204b1687a66e1572b51e839787",
+          "pngBytes": 1086097,
+          "pngSha256": "4db6c6e25978d8b07b611b19f8929e79706130d5e54195af6b6f4f2c12c9f6b1",
+          "rgbMean": [
+            127.45464192708333,
+            128.68956452546297,
+            0.020229311342592593
+          ],
+          "exactBlackFraction": 2.0495756172839506e-06
+        },
+        {
+          "frame": 479,
+          "simulatedSeconds": 15.966666666666667,
+          "path": "/data/data/nl.neerdael.projectmtv.corpuscandidate/files/native-trails/i22-clean4k-after-5/output/frame-479.png",
+          "width": 3840,
+          "height": 2160,
+          "rgbSha256": "19462ed6e48e7f62abad912a940dd51a73efb7e377b27373aa792e9525e7f054",
+          "pngBytes": 1098878,
+          "pngSha256": "515d55aaa7d0f774619ff2e490f7bb3b200a4bfc17c35e80647351cd711ed704",
+          "rgbMean": [
+            126.06377399209104,
+            126.94438512731482,
+            0.005533854166666667
+          ],
+          "exactBlackFraction": 3.713348765432099e-05
+        }
+      ]
+    }
+  ],
+  "status": "candidate not yet performance-qualified",
+  "concerns": [
+    "corrected role clean repeat5 is a16.46ms mean/32.67ms p90 outlier versus neighboring roughly2-4ms jobs; investigate, do not discard silently",
+    "initial source witness only small localized visible effect despite point-count correction",
+    "need stronger original witness and one-point diagnostic capture",
+    "42nd gamma test staged but not built/run; last observed green suite41 tests"
+  ]
+}
