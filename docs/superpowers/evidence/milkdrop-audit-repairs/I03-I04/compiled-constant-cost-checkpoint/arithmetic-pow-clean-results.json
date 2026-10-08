@@ -1,0 +1,13 @@
+{
+  "means": {
+    "before": 1.5145487287037038,
+    "after": 1.554497034722222
+  },
+  "delta_pct": 2.6376375524549633,
+  "cycles_pct": [
+    2.0696356195947674,
+    4.74198477139911,
+    1.083911852634567
+  ],
+  "scope": "literal-operand pow fixture; evaluator runtime execution source audit pending"
+}

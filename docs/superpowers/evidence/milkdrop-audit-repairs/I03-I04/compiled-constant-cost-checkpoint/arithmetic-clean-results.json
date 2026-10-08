@@ -1,0 +1,12 @@
+{
+  "before_ms": 1.4789112018518518,
+  "after_ms": 1.496395436574074,
+  "delta_ms": 0.01748423472222216,
+  "delta_pct": 1.1822369524504772,
+  "cycle_pct": [
+    0.48692931113296645,
+    2.1113580490526695,
+    0.9792228906390532
+  ],
+  "scope": "constantgeometry division/modulo witness; tiny-pow and ordinary-math cost still pending"
+}

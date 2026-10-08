@@ -62,3 +62,5 @@ Root owns scoped push/run on its task device after hashing executable/source/pat
 ## Gates before canonical adoption
 
 Require combined198-case host/ARM execution, actual per-source flags, guarded emitted IR/assembly under release options and all relevant existing native/JVM controls. Recheck bounded finite visual witnesses on final engine/AAR identity as separate source/JNI roles, preserving previous replay/resource controls. Align predictor/native versioned contracts if behavior is adopted. Root reviews restored guards and undefined-domain policy explicitly before acceptance. Existing frozen results, patch-application preparation and this source packet are not acceptance, performance or affected-preset evidence.
+
+Root executed combined198 controls on host andARM64, plus12Nativefinite runs. Initial timing fixtures use literalarguments; current compiler folds those arithmetic trees atloadtime (CompilerFunctions.c216–240). Their ABBA timings are frozen compiledconstant-workload observations and do not prove repaired runtime-callbackcost. Runtime-Q cost fixtures are required before adoption/deferral basedon actual functionwork. No canonicalpatch is accepted.
