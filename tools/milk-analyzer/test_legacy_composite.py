@@ -78,3 +78,14 @@ class LegacyCompositeTest(unittest.TestCase):
 
 
 if __name__=='__main__':unittest.main()
+
+
+def test_pr57_tint_amount_zero_fractional_and_threshold():
+    from legacy_composite import corner_shades
+    offsets=[0,11,23,37]
+    historical=corner_shades(1,offsets)
+    np.testing.assert_array_equal(corner_shades(1,offsets,shader_amount=0),np.ones((4,3),np.float32))
+    np.testing.assert_array_equal(corner_shades(1,offsets,shader_amount=.001),np.ones((4,3),np.float32))
+    expected=historical*np.float32(.25)+np.float32(.75)
+    np.testing.assert_array_equal(corner_shades(1,offsets,shader_amount=.25),expected)
+    np.testing.assert_array_equal(corner_shades(1,offsets,shader_amount=1),historical)

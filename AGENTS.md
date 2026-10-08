@@ -607,3 +607,17 @@ Published-AAR30frame creation forecasts and source-ablation120frame ownership ch
 are separate; the latter removes only0010. Both ablation roles repeat exactly and
 first differ at20. See the fixture README and verification-summary.json. No random
 streak credit is granted to authored/retrospective controls.
+
+
+Predictor PR57 migration (2026-10-08): exact14-patch core2.3.25 source adapters
+preserve historical profiles and add static fShader legacy tint, post-volume
+mode1 alpha1.25 and open spiral topology. Require matching source/archive for
+live waveform adapters. Full published AAR SHA256
+`f9c920b76a616a24b6754d350db4eac73cd425aef4106474a3dadea3df4579c3`
+is bound to reproduced Java DEX and ARM64 JNI. Five of six visible30frame controls repeat
+twice with exact RGB8 agreement; the normal spiral retains four differing pixels
+in frame24 pending quad arithmetic/raster diagnosis.1,506 tests and78subtests pass. This is bounded
+qualification with zero random acceptance credit. Do not broaden GPU arithmetic
+profiles without controls or resolve negative nonunit zoom powers by guessing.
+See `tools/milk-analyzer/fixtures/core2325-legacy-tint-mode1-controls-2026-10-08.json`.
+The current target remains20perfect3preset/30frame rounds and no main merge.

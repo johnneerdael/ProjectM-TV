@@ -1474,3 +1474,25 @@ nonzero-pixel counts. An all-zero frame must be described as uniformly black;
 nonzero samples do not establish human-visible or trackable motion. The
 randomized description freezer generates its first-frame statement from these
 facts before native capture, preventing guesses about faint traces.
+
+
+### PR57 / published core2.3.25 source migration (2026-10-08)
+
+The exact14-patch identity admits its own cold JNI audio/equation labels, native
+case-insensitive settings, and the retained pixel/texel-centre policies.
+`legacy_composite.source_tint_amount` reads static authored `fShader` only for this
+identity: disabled/threshold amounts produce white corner multipliers; enabled
+amounts blend the historical tint toward white. Historical engines retain their
+original full tint. Mode1 alpha gains1.25 after volume modulation and before
+clamping; topology comes from the new source adapter's open spiral. Live waveform
+adapters must match both source engine and archive identity.
+
+The full published AAR is `f9c920b76a616a24b6754d350db4eac73cd425aef4106474a3dadea3df4579c3`;
+its Java classes are independently reproduced into the declared DEX. Five of six visible30-frame tint/spiral controls match all RGB8 samples across two
+native repeats. The normal spiral differs at four pixels in frame24; uploaded
+source/native points and colour match exactly there, so quad expansion/raster
+arithmetic remains under investigation. Preserve the failed control.
+The prepared analyzer suite passes1,506 tests and78subtests. These are bounded
+release checks with zero random streak credit; full authored-preset appearance
+and previously qualified GPU arithmetic operators require separate evidence.
+See `fixtures/core2325-legacy-tint-mode1-controls-2026-10-08.json`.

@@ -1,13 +1,29 @@
 # Source prediction and native validation loop
 
-Current target: iterate three-preset batches until all three achieve at least
-95/100, then iterate ten-preset batches until all ten achieve at least95/100.
-After that, predict a randomized100-preset set as the final improvement audit.
-Complete each batch under one frozen model before repairing its gaps. Use60
-frames per preset and report each outcome. Generation stays outside this goal.
-Preserve prior predictions and grades; diagnostic reruns do not silently replace
-fresh acceptance evidence. The sections below retain earlier checkpoints as
-history; this staged95+ objective supersedes their acceptance thresholds.
+Current target (2026-10-08): **20 consecutive perfect randomized batches**, each
+with three presets and 30 frames: 60 consecutive scores of100. Freeze all three
+source predictions and 20 full-behaviour claims per preset before any native
+comparison in a batch. Judge structure, motion/trajectories, colour, flashing and
+feedback; numerical estimates use the user-approved5% allowance, while geometry,
+trajectories and flash timing remain strict. Predictor gaps block the next batch
+until repaired and retested. Put library investigations in separate issue folders
+under `~/Downloads`. Repairs retain their original grades and earn zero fresh
+streak credit. Do not merge the predictor branch to main yet.
+
+Use the checksum-verified full published ProjectM-TV core AAR, its reproduced
+Java runtime, original assets and JNI library as the comparison renderer. Prepare
+separate exact-source adapters for mathematical predictions. Latest migration:
+v2.3.25/PR57 adds the fShader tint amount, mode1 opacity boost and open spiral.
+Five of six frozen30-frame controls repeat twice with exact RGB8 agreement; the
+normal spiral retains four differing pixels in frame24. This is
+bounded release qualification, not randomized acceptance. See
+`tools/milk-analyzer/fixtures/core2325-legacy-tint-mode1-controls-2026-10-08.json`.
+The negative-zoom/nonunit-power Tulip case remains unresolved; do not silently
+normalize its exponent or fabricate a portable GLSL result.
+
+Historical staged target (superseded): three-preset and ten-preset batches at95,
+then a randomized100-preset audit with60frames. The sections below preserve
+historical profiles and outcomes; their thresholds are not the current goal.
 
 Historical target: ten consecutive fresh randomly selected presets, each achieving at
 least 80/100 agreement for full visible behaviour: structure, motion, colour,

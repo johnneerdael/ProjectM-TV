@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from scene_equations import source_settings,_scalar
 from quad_lines import PROFILE
-from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2322_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
+from engine_profiles import CORE_2315_ENGINE, CORE_2316_ENGINE, CORE_2317_ENGINE, CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE, CORE_2315_WAVE, LEGACY_WAVE, matches, select_policy
 from native_values import live_wave_mode,native_scalar
 
 
@@ -31,7 +31,7 @@ _CORE2310_ENGINE = {
 }
 
 
-def _colour(source,main,frame,mode,alpha,width,height):
+def _colour(source,main,frame,mode,alpha,width,height,*,mode1_alpha_boost=False):
     values=source_settings(source);base=np.float32(alpha);result=base
     largest=max(width,height)
     if mode in {2,5}:
@@ -45,6 +45,7 @@ def _colour(source,main,frame,mode,alpha,width,height):
         if volume<=start:result=np.float32(0)
         elif volume>=end:result=base
         else:result=base*((volume-np.float32(start))/(np.float32(end)-np.float32(start)))
+    if mode1_alpha_boost and mode==1:result*=np.float32(1.25)
     rgb=np.asarray([main['wave_'+channel] for channel in 'rgb'],dtype=np.float32)
     if main['wave_brighten']>0 and np.max(rgb)>.01:rgb=rgb/np.max(rgb)
     rgba=np.concatenate((rgb,[np.clip(result,0,1)])).astype(np.float32)
@@ -76,7 +77,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
                  if not live or live_modes[i] is not None)
     if any_dots and line_rendering_profile==PROFILE:
         if not any(all(engine.get(key)==value for key,value in expected.items())
-                   for expected in [_CORE235_ENGINE,_CORE237_ENGINE,_CORE2310_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE]):
+                   for expected in [_CORE235_ENGINE,_CORE237_ENGINE,_CORE2310_ENGINE,CORE_2315_ENGINE,CORE_2316_ENGINE,CORE_2317_ENGINE,CORE_2321_ENGINE,CORE_2322_ENGINE,CORE_2325_ENGINE]):
             raise ValueError('GLES builtin dot engine identity mismatch')
         if width<=0 or height<=0 or width*height>1024*768 or height>1330:
             raise ValueError('GLES builtin dot profile requires viewport within reference area')
@@ -104,7 +105,9 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
     if native.get('render_context_time_bits')!=32:
         raise ValueError('prepared native waveform adapter with float32 render context required')
     if live:
-        if native.get('mode_policy')!='evaluated-live-v1' or not matches(native.get('engine_identity',{})):
+        if (native.get('mode_policy')!='evaluated-live-v1' or
+                native.get('engine_identity')!=engine or
+                native.get('engine_archive_sha256')!=source.get('parser_inputs',{}).get('engine_archive_sha256')):
             raise ValueError('prepared live waveform adapter identity mismatch')
         if len(native['frames'])!=len(scene['frames']):raise ValueError('live waveform frame schedule differs')
     # Waveform::Draw uses one DotStyleFor(MainWave) point when quad mode is on.
@@ -130,7 +133,7 @@ def source_builtin_wave(source,scene,audio,*,binary:Path,timeout_seconds=60,
             screen=points*np.array([.5,-.5],dtype=np.float32)+np.float32(.5)
             waves.append(screen.tolist())
         result.append({'positions':waves,'clip_positions':geometry['vertex_waves'],
-                       'rgba':[0,0,0,0] if omitted else _colour(source,frame['main'],data,frame_mode,geometry['wave_a_after_geometry'],width,height),
+                       'rgba':[0,0,0,0] if omitted else _colour(source,frame['main'],data,frame_mode,geometry['wave_a_after_geometry'],width,height,mode1_alpha_boost=matches(engine,CORE_2325_ENGINE)),
                        'draw_mode':'points' if dot else 'loop' if geometry['closed_loop'] else 'strip',
                        'point_size':2 if scaled_dots else 1,
                        'additive':flag(frame['main'],'wave_additive','bAdditiveWaves'),'copy_offsets':offsets})

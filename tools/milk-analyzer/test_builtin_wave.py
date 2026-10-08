@@ -223,3 +223,15 @@ class BuiltinWaveTest(unittest.TestCase):
 
 
 if __name__=='__main__':unittest.main()
+
+
+def test_pr57_mode1_opacity_boost_after_volume_modulation():
+    from builtin_wave import _colour
+    main={'wave_r':1,'wave_g':.5,'wave_b':.25,'wave_brighten':0}
+    frame={'vol':.85,'treb':1}
+    source={'values':{'bModWaveAlphaByVolume':'1','fModWaveAlphaStart':'.75','fModWaveAlphaEnd':'.95'}}
+    old=_colour(source,main,frame,1,.8,256,144)
+    patched=_colour(source,main,frame,1,.8,256,144,mode1_alpha_boost=True)
+    assert abs(patched[3]-old[3]*1.25)<=1e-7
+    saturated=_colour({'values':{}},main,frame,1,.9,256,144,mode1_alpha_boost=True)
+    assert saturated[3]==1

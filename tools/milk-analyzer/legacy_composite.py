@@ -8,6 +8,15 @@ from engine_profiles import CORE_2315_DISPLAY,LEGACY_DISPLAY
 from native_values import native_scalar
 
 
+def source_tint_amount(source):
+    """PR57's static PresetState fShader; historical engines keep full tint."""
+    from engine_profiles import CORE_2325_ENGINE, matches
+    from scene_equations import source_settings
+    if not matches(source.get('parser_inputs',{}).get('engine',{}),CORE_2325_ENGINE):
+        return None
+    return _scalar(source_settings(source),'fShader',0,'float')
+
+
 def _live(main, name, *, finite=True):
     if main is None or name not in main:
         raise UnresolvedMath('live legacy control unresolved: '+name)
@@ -35,7 +44,7 @@ def gamma_weights(gamma,*,echo):
     return [1]*(count-1)+[float(np.float32(value-np.float32(count-1)))]
 
 
-def corner_shades(time,hue_offsets):
+def corner_shades(time,hue_offsets,*,shader_amount=None):
     if time is None or not np.isfinite(time):raise UnresolvedMath('explicit legacy render time required')
     offsets=np.asarray(hue_offsets,dtype=np.float32)
     if offsets.shape!=(4,) or not np.all(np.isfinite(offsets)):
@@ -48,7 +57,13 @@ def corner_shades(time,hue_offsets):
         angle=angle+np.float32(phase)+index*np.float32(mult)+offsets[offset]
         result.append(np.float32(.6)+np.float32(.3)*np.sin(angle))
     shade=np.stack(result,axis=-1)
-    return np.float32(.5)+np.float32(.5)*(shade/np.max(shade,axis=1,keepdims=True))
+    result=np.float32(.5)+np.float32(.5)*(shade/np.max(shade,axis=1,keepdims=True))
+    if shader_amount is not None:
+        amount=np.float32(shader_amount)
+        if not np.isfinite(amount):raise UnresolvedMath('legacy tint amount is nonfinite')
+        result=(result*amount+np.float32(1)*(np.float32(1)-amount)
+                if amount>np.float32(.001) else np.ones_like(result))
+    return result
 
 
 def apply_filters(field,values,*,quantize,main=None,control_policy=LEGACY_DISPLAY):
@@ -65,7 +80,7 @@ def apply_filters(field,values,*,quantize,main=None,control_policy=LEGACY_DISPLA
     return result
 
 
-def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,control_policy=LEGACY_DISPLAY,sampling_profile='portable'):
+def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,control_policy=LEGACY_DISPLAY,sampling_profile='portable',shader_amount=None):
     from unorm_sampler import sampler_2d
     sample=sampler_2d(sampling_profile)
     if sampling_profile!='portable' and not quantize:
@@ -76,7 +91,7 @@ def legacy_display(feedback,*,values,time,hue_offsets,quantize=True,main=None,co
     if source.ndim!=3 or source.shape[-1]!=4 or min(source.shape[:2])<=0 or not np.all(np.isfinite(source)):
         raise UnresolvedMath('finite RGBA legacy feedback required')
     height,width=source.shape[:2]
-    shade=corner_shades(time,hue_offsets)
+    shade=corner_shades(time,hue_offsets,shader_amount=shader_amount)
     gamma=np.float32(_live(main,'gamma')) if live else _scalar(values,'fGammaAdj',2,'float')
     alpha=np.float32(_live(main,'echo_alpha',finite=False)) if live else _scalar(values,'fVideoEchoAlpha',0,'float')
     echo=alpha>np.float32(.001)

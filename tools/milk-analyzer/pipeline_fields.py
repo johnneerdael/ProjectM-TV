@@ -45,7 +45,7 @@ class SourcePipeline:
         return uses_input_components(expression,'_uv',{0,1})
 
     def __init__(self,warp_tree,composite_tree,*,initial_feedback,warp_reads_blur:bool,
-                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1'):
+                 blur_levels:int,quantize:bool=True,composite_kind=None,source_values=None,coordinate_profile='strict',language_extensions=None,native_samplers=None,composite_subpixel_bits=None,main_sampling_profile='portable',main_binding_policy='legacy-sorted-v1',blur_range_policy=LEGACY_BLUR,legacy_control_policy=LEGACY_DISPLAY,shader_numeric_policy='strict',texture_sampling_profile='portable',line_rendering_profile='canonical-gl-lines-v1',motion_raster_subpixel_bits=None,motion_uv_storage_profile='portable-half-nearest-v1',blur_arithmetic_profile='separate-float32-v1',shader_arithmetic_profile='separate-float32-v1',motion_uv_sampling_profile='portable-half-bilinear-v1',motion_uv_sampler=None,composite_centre_policy='legacy-positive-half-texel-v1',legacy_tint_amount=None):
         from quad_lines import PROFILE as quad_profile
         if line_rendering_profile not in ('canonical-gl-lines-v1',quad_profile):
             raise ValueError('unknown motion-vector line profile')
@@ -109,6 +109,7 @@ class SourcePipeline:
         if blur_range_policy not in {LEGACY_BLUR,CORE_2315_BLUR}:raise ValueError('unsupported blur range policy')
         if legacy_control_policy not in {LEGACY_DISPLAY,CORE_2315_DISPLAY}:raise ValueError('unsupported legacy control policy')
         self.blur_range_policy=blur_range_policy;self.legacy_control_policy=legacy_control_policy
+        self.legacy_tint_amount=legacy_tint_amount
         self.height,self.width=field.shape[:2]
         x,y=np.meshgrid((np.arange(self.width,dtype=np.float32)+.5)/self.width,
                         (np.arange(self.height,dtype=np.float32)+.5)/self.height)
@@ -154,6 +155,8 @@ class SourcePipeline:
                 if selected['compile_status'] not in {'accepted','omitted'}:
                     raise UnresolvedMath('native equation compatibility unresolved: '+prefix)
         from scene_equations import source_settings
+        from legacy_composite import source_tint_amount
+        kwargs['legacy_tint_amount']=source_tint_amount(source)
         from stage_resolution import resolve_stages
         plan=resolve_stages(source,profile=profile,compatibility=compatibility)
         trees={}
@@ -312,7 +315,7 @@ class SourcePipeline:
             displayed=legacy_display(drawn,values=self.source_values,time=time,
                                      hue_offsets=hue_offsets,quantize=self.quantize,
                                      main=motion_state,control_policy=self.legacy_control_policy,
-                                     sampling_profile=self.texture_sampling_profile)
+                                     sampling_profile=self.texture_sampling_profile,shader_amount=self.legacy_tint_amount)
         elif self.composite_tree is None:
             displayed=self._rgba(self._sample_main(drawn,composite_uv,wrap=True,linear=True)[...,:3])
         else:displayed=self._rgba(stage(self.composite_tree,'composite',drawn,new_blur,composite_uv,composite_polar,composite.get('diffuse')))
