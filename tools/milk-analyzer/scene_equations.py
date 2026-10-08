@@ -69,14 +69,14 @@ class CaseInsensitiveSettings(dict):
 
 def source_settings(source):
     """Restore the declared native lookup contract after JSON serialization."""
-    from engine_profiles import CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE, matches
+    from engine_profiles import CORE_2321_ENGINE, CORE_2322_ENGINE,CORE_2325_ENGINE,CORE_2327_ENGINE,CORE_2329_ENGINE, matches
     inputs=source.get('parser_inputs',{})
     if 'setting_lookup_policy' not in inputs:
         return source['values']
     if inputs['setting_lookup_policy']!='native-case-insensitive-v1':
         raise ValueError('unknown setting lookup policy')
     engine=inputs.get('engine',{})
-    if not (matches(engine,CORE_2321_ENGINE) or matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE) or matches(engine,CORE_2327_ENGINE)):
+    if not (matches(engine,CORE_2321_ENGINE) or matches(engine,CORE_2322_ENGINE) or matches(engine,CORE_2325_ENGINE) or (matches(engine,CORE_2327_ENGINE) or matches(engine,CORE_2329_ENGINE))):
         raise ValueError('native setting lookup policy engine identity mismatch')
     if any(not isinstance(key,str) or key!=key.lower() for key in source['values']):
         raise ValueError('native lowercase setting payload required')

@@ -705,3 +705,15 @@ from statistics, preserve unknowns, and never infer a causal beat response or
 fractal/tunnel identity from field aggregates alone. Update the source reference
 and guide copy together when the actual export changes. Docs use main's pinned
 MkDocs1.6.1/Material9.7.7 requirements.
+
+
+Offline corpus export maintenance (2026-10-09): `tools/run-preset-corpus.command`
+executes `tools/milk-analyzer/preset_corpus.py` in the prepared Python environment.
+Defaults are60actual15Hz updates at854×480, two workers and paired ZIPs every100
+completed attempts in Downloads. Source adapters are pinned to published2.3.29's
+16-patch identity; this CPU forecast does not render the AAR or consume captured
+frames. Computed records retain47keys/null unknowns; unsupported/error/timeout
+cases retain null records. Configuration/input hashes bind resumable output;
+changed identities stop the run and require a new folder. No AI/device operation
+is required. See `tools/milk-analyzer/CORPUS_EXPORT.md` and the user-guide
+`preset-corpus-export.md`; do not infer30Hz fidelity or no-flash certification.

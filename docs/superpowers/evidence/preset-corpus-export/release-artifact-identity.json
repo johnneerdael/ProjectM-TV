@@ -1,0 +1,14 @@
+{
+  "release": "v2.3.29",
+  "commit": "af164a97896646427f971ecbed8161f8d35c2fec",
+  "aar_sha256": "60c3aeaa9375445489201cd99245b0830190c49ea20c489b319cd708cc7b6978",
+  "members_sha256": {
+    "classes.jar": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+    "jni/arm64-v8a/libprojectmtv.so": "e3186792269b5c757c61b830f84dcf51e66348bafebdbe7b6d7b019e794873f0",
+    "jni/armeabi-v7a/libprojectmtv.so": "d38b4c51779682175e41ed877b2b48f931199458eff017fce2a8449a98f71876"
+  },
+  "full_aar_downloaded": true,
+  "runtime_verified": false,
+  "zip_integrity_checked": true,
+  "bytes": 41871769
+}

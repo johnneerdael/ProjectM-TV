@@ -46,7 +46,7 @@ int main(int argc,char** argv) {
         for(const auto* name:{"fps","frames","channels"})
             if(request.contains(name)&&!request.at(name).is_number_integer())throw std::runtime_error("audio schedule/channels must be integers");
         int fps=request.at("fps").get<int>(),frames=request.at("frames").get<int>(),channels=request.value("channels",1);
-        if((fps!=30&&fps!=60)||frames<1||frames>108000||(channels!=1&&channels!=2))
+        if((fps!=15&&fps!=30&&fps!=60)||frames<1||frames>108000||(channels!=1&&channels!=2))
             throw std::runtime_error("invalid audio frame schedule/channels");
         const auto clockPolicy=request.value("clock_policy",std::string("ideal-frame-fractions-v1"));
         const bool roundedClock=clockPolicy=="projectmtv-jni-rounded-nanoseconds30-v1";
@@ -59,14 +59,17 @@ int main(int argc,char** argv) {
         const bool cold2322=progressPolicy=="projectmtv-core-2.3.22-cold-jni-v1";
         const bool cold2325=progressPolicy=="projectmtv-core-2.3.25-cold-jni-v1";
         const bool cold2327=progressPolicy=="projectmtv-core-2.3.27-cold-jni-v1";
-        const bool coldProgress=cold2316||cold2317||cold2321||cold2322||cold2325||cold2327;
+        const bool cold2329=progressPolicy=="projectmtv-core-2.3.29-cold-jni-v1";
+        const bool coldProgress=cold2316||cold2317||cold2321||cold2322||cold2325||cold2327||cold2329;
         double presetDuration=0.0;
         uint32_t entropySeed=0;
         if(coldProgress) {
             if(!kQualifiedDurationDistribution)
                 throw std::runtime_error("cold JNI progress requires qualified libcxx-200100 duration distribution");
             const auto identity=json::parse(kEngineIdentity);
-            const char* expectedPatches=cold2327
+            const char* expectedPatches=cold2329
+                ?"01d259c40d364f8d55b9ee43ab29dcf39fd85f107908969c23671b3cea064457"
+                :cold2327
                 ?"65313919430bd6d1531292b405463d8ec400a44bcfddfb1eb808fbaba16b5ad0"
                 :cold2325
                 ?"6e27be9d314e464c6ed67925c65092164e35e8a1b5273f81b1bf0b6786beefae"
@@ -79,10 +82,10 @@ int main(int argc,char** argv) {
                 :"cd01f0f3cce4f6be05d781b06192dadadbd8254a6fa1c03ea52394d3e48f9ded";
             if(!roundedClock||frames>30||channels!=1||
                identity.value("patches_sha256","")!=expectedPatches||
-               identity.value("commit","")!=((cold2321||cold2322||cold2325||cold2327)?"6f64807467e312034883a4389e6aa80a675458bc":"e0b0a967f0ffd7d332106c366668ed271718472b")||
+               identity.value("commit","")!=((cold2321||cold2322||cold2325||cold2327||cold2329)?"6f64807467e312034883a4389e6aa80a675458bc":"e0b0a967f0ffd7d332106c366668ed271718472b")||
                !request.contains("entropy_seed")||!request.at("entropy_seed").is_number_integer()||
                request.at("entropy_seed").get<double>()<0||request.at("entropy_seed").get<double>()>UINT32_MAX)
-                throw std::runtime_error(std::string("cold JNI progress requires pinned ")+(cold2327?"2.3.27":cold2325?"2.3.25":cold2322?"2.3.22":cold2321?"2.3.21":cold2317?"2.3.17":"2.3.16")+", mono rounded-clock <=30 frames and uint32 entropy seed");
+                throw std::runtime_error(std::string("cold JNI progress requires pinned ")+(cold2329?"2.3.29":cold2327?"2.3.27":cold2325?"2.3.25":cold2322?"2.3.22":cold2321?"2.3.21":cold2317?"2.3.17":"2.3.16")+", mono rounded-clock <=30 frames and uint32 entropy seed");
             entropySeed=request.at("entropy_seed").get<uint32_t>();
             std::mt19937 generator(entropySeed);
             // Initialize: idle hard load, explicit StartPreset; first JNI draw: authored hard load.
@@ -118,6 +121,8 @@ int main(int argc,char** argv) {
             {"conditional_host","cold ready single-preset JNI host; no intervening reload, failure or smoothing"}};
         libprojectM::Audio::PCM pcm;double previous=0;
         for(int frame=0;frame<frames;++frame) {
+            // Match native FrameBuffer's clipping: analyze only the last
+            // AudioBufferSamples of each complete declared PCM frame block.
             size_t count=std::min<size_t>(block,libprojectM::Audio::AudioBufferSamples);
             pcm.Add(samples.data()+(static_cast<size_t>(frame)*block+block-count)*channels,channels,count);
             double time=static_cast<double>(frame+1)/fps;

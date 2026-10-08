@@ -1,0 +1,198 @@
+"""Run the complete offline47-field corpus export; publish a ZIP every100 cases."""
+import argparse
+import fcntl
+import json
+import math
+import os
+from pathlib import Path
+import shutil
+import signal
+import subprocess
+import sys
+import tempfile
+import time
+
+from corpus_store import RunStore,atomic_json,discover,file_hash
+
+ROOT=Path(__file__).resolve().parents[2]
+ADAPTERS=('milk-native-reader','milk-shader-translate','milk-audio-inputs','milk-wave-inputs',
+          'milk-image-inputs','milk-noise-inputs','milk-composite-inputs','milk-shader-random')
+
+
+def stop_process(process):
+    # The session/process group belongs to this task even after its leader exits.
+    try:os.killpg(process.pid,signal.SIGTERM)
+    except ProcessLookupError:
+        process.wait(timeout=10);return
+    time.sleep(.5)
+    process.poll()  # Reap an exited leader before probing/killing its remaining group.
+    try:os.killpg(process.pid,signal.SIGKILL)
+    except ProcessLookupError:pass
+    process.wait(timeout=10)
+
+
+def preparation_guard(inputs,identity):
+    path=inputs/'preparation-identity.json'
+    if path.exists():
+        if json.loads(path.read_text())!=identity:
+            raise ValueError('input preparation identity changed; choose a new output directory')
+    else:
+        if (inputs/'manifest.json').exists():
+            raise ValueError('unattributed prepared inputs; choose a new output directory')
+        atomic_json(path,identity)
+
+
+def verify_frozen(configuration):
+    from forecast import model_file_hashes
+    from corpus_inputs import verify_inputs
+    if model_file_hashes()!=configuration['model_modules']:raise ValueError('model source identity changed')
+    for name,sha in configuration['binary_sha256'].items():
+        if file_hash(Path(configuration['binaries'])/name)!=sha:raise ValueError('adapter identity changed: '+name)
+    if file_hash(configuration['validator'])!=configuration['validator_sha256']:raise ValueError('validator identity changed')
+    inputs=Path(configuration['inputs']);path=inputs/'manifest.json'
+    if file_hash(path)!=configuration['prepared_inputs_sha256']:raise ValueError('input manifest identity changed')
+    verify_inputs(inputs,json.loads(path.read_text()))
+
+
+def finish_process(task,*,timed_out=False):
+    process=task['process'];process.wait(timeout=10)
+    task['stdout'].close();task['stderr'].close()
+    result_path=task['result']
+    if timed_out:
+        result={'status':'timeout','stage':'worker','feature_record':None,'error':'per-preset deadline exceeded'}
+    elif process.returncode!=0 or not result_path.exists():
+        result={'status':'error','stage':'worker','feature_record':None,
+                'error':'worker exited without a complete result','exit_code':process.returncode}
+    else:
+        try:result=json.loads(result_path.read_text())
+        except (ValueError,OSError) as error:
+            result={'status':'error','stage':'worker','feature_record':None,'error':'invalid worker result: '+str(error)}
+    if result.get('status')!='computed':
+        result['stderr_tail']=task['stderr_path'].read_text(errors='replace')[-12000:]
+        result['stdout_tail']=task['stdout_path'].read_text(errors='replace')[-2000:]
+    result['elapsed_seconds']=time.monotonic()-task['started']
+    result.setdefault('simulation',task['configuration']['simulation'])
+    result['uses_rendered_reference']=False;result['appearance_accuracy_verified']=False
+    return result
+
+
+def parse_args(argv=None):
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--presets',type=Path,default=ROOT/'core/src/main/assets/presets')
+    p.add_argument('--textures',type=Path,default=ROOT/'core/src/main/assets/textures')
+    p.add_argument('--binaries',type=Path,default=ROOT/'build/preset-corpus/source29/adapters')
+    p.add_argument('--validator',type=Path)
+    p.add_argument('--output',type=Path,default=Path.home()/'Downloads/ProjectM-TV-preset-corpus-15fps-480p')
+    p.add_argument('--frames',type=int,default=60);p.add_argument('--fps',type=int,choices=[15,30,60],default=15)
+    p.add_argument('--width',type=int,default=854);p.add_argument('--height',type=int,default=480)
+    p.add_argument('--workers',type=int,default=2);p.add_argument('--batch-size',type=int,default=100)
+    p.add_argument('--timeout',type=float,default=300);p.add_argument('--equation-timeout',type=float,default=60)
+    p.add_argument('--seed',type=int,default=12345);p.add_argument('--pcm',type=Path)
+    p.add_argument('--limit',type=int);p.add_argument('--check',action='store_true',help='prepare/verify inputs and print inventory without simulating')
+    args=p.parse_args(argv)
+    if not 1<=args.workers<=32:p.error('workers must be1..32')
+    if args.frames<1 or args.width<1 or args.height<1 or args.width*args.height>1024*768:
+        p.error('positive dimensions/frames within the currently supported reference area required')
+    if not 0<=args.seed<2**32 or args.batch_size<1 or not math.isfinite(args.timeout) or args.timeout<=0 or not math.isfinite(args.equation_timeout) or not 0<args.equation_timeout<=3600:
+        p.error('invalid seed, batch size or deadlines')
+    if args.limit is not None and args.limit<1:p.error('positive limit required')
+    return args
+
+
+def run(args):
+    # Imports happen after argument validation; the launcher selects the prepared Python environment.
+    from forecast import model_file_hashes
+    from corpus_inputs import prepare_inputs,verify_inputs
+    args.output=args.output.expanduser().resolve();args.output.mkdir(parents=True,exist_ok=True)
+    lock=(args.output/'controller.lock').open('a+')
+    try:
+        try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError as error:raise RuntimeError('corpus controller already running in this output directory') from error
+        binaries=args.binaries.resolve(strict=True)
+        missing=[n for n in ADAPTERS if not (binaries/n).is_file()]
+        if missing:raise ValueError('prepare source29 adapters first; missing: '+','.join(missing))
+        validator=args.validator or shutil.which('glslangValidator')
+        if validator is None:raise ValueError('glslangValidator required for offline shader compatibility')
+        validator=Path(validator).resolve(strict=True)
+        cases=discover(args.presets)
+        if args.limit is not None:cases=cases[:args.limit]
+        modules=model_file_hashes()
+        identity={'export_kind':'offline-source-field-corpus-v1','model_modules':modules,
+            'binary_sha256':{n:file_hash(binaries/n) for n in ADAPTERS},'validator_sha256':file_hash(validator),
+            'simulation':{'frames':args.frames,'fps':args.fps,'width':args.width,'height':args.height},
+            'seed':args.seed,'signal_policy':'fixed-kick-chord-hat-v1' if args.pcm is None else 'supplied-mono-f32',
+            'pcm_sha256':None if args.pcm is None else file_hash(args.pcm),
+            'textures':str(args.textures.resolve()),'equation_timeout':args.equation_timeout,
+            'worker_timeout':args.timeout,'sampling_profile':'apple-m4pro-gles-unorm8-fixed8-fraction4-volume-v1'}
+        # Input preparation is durable, bounded and separate from the exported result ZIPs.
+        inputs=args.output/'inputs';manifest_path=inputs/'manifest.json'
+        old_manifest=args.output/'run-manifest.json'
+        if old_manifest.exists():
+            old=json.loads(old_manifest.read_text())['configuration']
+            if any(old.get(k)!=v for k,v in identity.items()):raise ValueError('run identity changed; choose a new output directory')
+        preparation_guard(inputs,identity)
+        if manifest_path.exists():
+            manifest=json.loads(manifest_path.read_text());verify_inputs(inputs,manifest)
+            if (manifest['fps'],manifest['frames'],manifest['seed'])!=(args.fps,args.frames,args.seed):
+                raise ValueError('prepared input cadence/seed differs; choose a new output directory')
+        else:manifest=prepare_inputs(inputs,binaries=binaries,textures=args.textures,frames=args.frames,fps=args.fps,seed=args.seed,pcm=args.pcm)
+        identity['prepared_inputs_sha256']=file_hash(manifest_path)
+        configuration={**identity,'binaries':str(binaries),'inputs':str(inputs),'validator':str(validator)}
+        worker=Path(__file__).with_name('corpus_worker.py')
+        with RunStore(args.output,identity,cases,batch_size=args.batch_size) as store:
+            print(json.dumps({'event':'ready','presets':len(cases),'pending':len(store.pending()),'simulation':identity['simulation'],
+                'workers':args.workers,'output':str(args.output),'resume':True,'AI_involved':False}),flush=True)
+            if args.check:return 0
+            pending=iter(store.pending());active={};exhausted=False;interrupted=False;last_verified=0
+            with tempfile.TemporaryDirectory(prefix='preset-corpus-workers-') as scratch:
+                scratch=Path(scratch)
+                try:
+                    while active or not exhausted:
+                        if time.monotonic()-last_verified>=5:
+                            verify_frozen(configuration);last_verified=time.monotonic()
+                        while len(active)<args.workers and not exhausted:
+                            try:case=next(pending)
+                            except StopIteration:exhausted=True;break
+                            key=file_hash(Path(case['path']))[:16]+'-'+str(len(active))+'-'+str(time.time_ns())
+                            job=scratch/(key+'.job.json');result=scratch/(key+'.result.json')
+                            atomic_json(job,{'case':case,'configuration':configuration})
+                            stdout_path=scratch/(key+'.stdout');stderr_path=scratch/(key+'.stderr')
+                            stdout=stdout_path.open('wb');stderr=stderr_path.open('wb')
+                            worker_env={**os.environ,**{name:'1' for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS')}}
+                            process=subprocess.Popen([sys.executable,str(worker),'--job',str(job),'--output',str(result)],
+                                stdout=stdout,stderr=stderr,start_new_session=True,env=worker_env)
+                            active[process.pid]={'process':process,'case':case,'result':result,'stdout':stdout,'stderr':stderr,
+                                'stdout_path':stdout_path,'stderr_path':stderr_path,'started':time.monotonic(),'configuration':configuration}
+                        progressed=False
+                        for pid,task in list(active.items()):
+                            timed_out=time.monotonic()-task['started']>args.timeout
+                            if task['process'].poll() is None and not timed_out:continue
+                            stop_process(task['process'])
+                            result=finish_process(task,timed_out=timed_out)
+                            if result.get('stage')=='identity':
+                                raise ValueError('worker integrity check failed; case stays pending: '+str(result.get('error')))
+                            verify_frozen(configuration)
+                            store.complete(task['case'],result)
+                            del active[pid];progressed=True
+                            counts=store.counts();print(json.dumps({'event':'preset_completed','completed':sum(counts.values()),
+                                'total':len(cases),'preset':task['case']['relative_path'],'status':result['status'],
+                                'stage':result.get('stage'),'elapsed_seconds':round(result['elapsed_seconds'],2),'counts':counts},ensure_ascii=False),flush=True)
+                            atomic_json(args.output/'progress.json',{'completed':sum(counts.values()),'total':len(cases),'counts':counts})
+                        if not progressed:time.sleep(.2)
+                except KeyboardInterrupt:interrupted=True;print('Interrupted: finished results are preserved; active presets will resume.',flush=True)
+                finally:
+                    for task in active.values():
+                        stop_process(task['process']);task['stdout'].close();task['stderr'].close()
+                    store.flush(partial=True)
+            counts=store.counts();print(json.dumps({'event':'interrupted' if interrupted else 'complete',
+                'completed':sum(counts.values()),'total':len(cases),'counts':counts,'output':str(args.output)}),flush=True)
+            return 130 if interrupted else 0
+    finally:lock.close()
+
+
+def main():
+    try:return run(parse_args())
+    except Exception as error:
+        print('Corpus runner stopped: '+str(error),file=sys.stderr);return 1
+
+if __name__=='__main__':raise SystemExit(main())
