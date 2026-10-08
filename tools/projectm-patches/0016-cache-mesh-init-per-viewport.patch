@@ -1,0 +1,70 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Build the warp and composite meshes once per viewport size
+
+PerPixelMesh and FinalComposite compare the viewport against m_viewportWidth/Height
+to skip rebuilding their static mesh data, but nothing ever stored those values. Both
+meshes were therefore rebuilt every frame: per-vertex hypotf/atan2f, the full index
+list, and (warp mesh) the vertex positions and index buffer uploaded again.
+Record the viewport size when the data is built; the warp mesh uploads its static
+vertices and indices only after a rebuild. The values written are unchanged, so the
+rendered image is identical; only the repeated CPU work and uploads are removed.
+
+---
+diff --git a/src/libprojectM/MilkdropPreset/FinalComposite.cpp b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+index 18209831e..f07c802c4 100644
+--- a/src/libprojectM/MilkdropPreset/FinalComposite.cpp
++++ b/src/libprojectM/MilkdropPreset/FinalComposite.cpp
+@@ -139,6 +139,10 @@ void FinalComposite::InitializeMesh(const PresetState& presetState)
+         return;
+     }
+ 
++    // The grid only depends on the viewport size: build it once per size, not every frame.
++    m_viewportWidth = presetState.renderContext.viewportSizeX;
++    m_viewportHeight = presetState.renderContext.viewportSizeY;
++
+     float const dividedByX = 1.0f / static_cast<float>(compositeGridWidth - 2);
+     float const dividedByY = 1.0f / static_cast<float>(compositeGridHeight - 2);
+ 
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+index e3332dad6..c67423e87 100644
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.cpp
+@@ -158,6 +158,12 @@ void PerPixelMesh::InitializeMesh(const PresetState& presetState)
+     const float aspectX = presetState.renderContext.aspectX;
+     const float aspectY = presetState.renderContext.aspectY;
+ 
++    // Remember what the static mesh data is built for, so it is only rebuilt and uploaded again
++    // when the viewport or the grid changes, not every frame.
++    m_viewportWidth = presetState.renderContext.viewportSizeX;
++    m_viewportHeight = presetState.renderContext.viewportSizeY;
++    m_meshDirty = true;
++
+     // Either viewport size or mesh size changed, reinitialize the vertices.
+     auto& vertices = m_warpMesh.Vertices();
+     int vertexIndex{0};
+@@ -313,7 +319,12 @@ void PerPixelMesh::CalculateMesh(const PresetState& presetState, const PerFrameC
+         }
+     }
+ 
+-    m_warpMesh.Update();
++    // Vertex positions and indices only change when InitializeMesh() rebuilt them.
++    if (m_meshDirty)
++    {
++        m_warpMesh.Update();
++        m_meshDirty = false;
++    }
+     m_radiusAngleBuffer.Update();
+     m_zoomRotWarpBuffer.Update();
+     m_centerBuffer.Update();
+diff --git a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+index 0b589bc54..ef866120e 100644
+--- a/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
++++ b/src/libprojectM/MilkdropPreset/PerPixelMesh.hpp
+@@ -146,6 +146,7 @@ private:
+ 
+     int m_viewportWidth{};  //!< Last known viewport width.
+     int m_viewportHeight{}; //!< Last known viewport height.
++    bool m_meshDirty{true}; //!< Vertex positions and indices must be uploaded before the next draw.
+ 
+     Renderer::Mesh m_warpMesh;                                                                         //!< The Warp effect mesh
+     Renderer::VertexBuffer<RadiusAngle> m_radiusAngleBuffer{Renderer::VertexBufferUsage::StreamDraw};  //!< Vertex attribute buffer for radius and angle values.

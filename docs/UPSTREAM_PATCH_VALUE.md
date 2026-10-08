@@ -1,7 +1,7 @@
 # What our current projectM patches change
 
-This page compares upstream projectM 4.2 development with our library. Each section
-shows the rendered difference and explains its cause. The locked 15 current patches are
+This page shows what our library changes compared with upstream projectM 4.2
+development, using images and short explanations. The16 current patches are
 listed in build order; older patch history is kept in the evidence archive.
 
 ## Single-page comparison overview
@@ -12,7 +12,7 @@ A middle column, where present, removes one patch to isolate its effect. Generat
 controls are labeled; a rejected render is an error panel, not a black screenshot.
 
 Earlier images use our 13-patch snapshot `654815d8`; 0014 uses the current 14-patch
-snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Earlier captures retain their original snapshot identities;Reference lines and0003,0011 and0015 now have locked15-patch comparisons.
+snapshot `41ec3fc1`. The image-comparison checkpoint stays frozen at main `120547f3`, including0015; main’s later0016 is documented from its separate performance evidence. Earlier captures retain their original snapshot identities;Reference lines and0003,0011 and0015 now have locked15-patch comparisons.
 The upstream renderer matches master `e98fca85`; capture adjustments and source
 identities are recorded in the [evidence record](superpowers/evidence/current-patch-proof/README.md).
 
@@ -287,6 +287,20 @@ The original **Great Tulip Majesty** still enters fractional negative-power doma
 and its recorded frames remain unchanged. It must not be presented as fixed.
 [Locked-source comparison and checks](superpowers/evidence/current-patch-proof/components/locked15-power/README.md) ·
 [Patch source](../tools/projectm-patches/0015-warp-negative-zoom-cpu-power.patch).
+
+## 0016 — Mesh initialization caching
+
+Upstream rebuilt the warp and final-composite grids every frame because it never
+saved the viewport size used by its cache check. This patch saves the size and
+rebuilds/uploads static mesh data only when the viewport or grid changes.
+
+On the AM6, **Royal — Mashup (102)** at1080p/30fps used11.8% less process CPU in two
+40-second runs per side, with silence. GPU time and4K were not measured. Existing
+host controls check reused versus fresh mesh data; no on-device image comparison
+was run. This later main optimization is included without expanding the frozen
+15-patch capture checkpoint.
+[Performance evidence](superpowers/evidence/mesh-init-cache/README.md) ·
+[Patch source](../tools/projectm-patches/0016-cache-mesh-init-per-viewport.patch).
 
 ## Supporting evidence and remaining work
 

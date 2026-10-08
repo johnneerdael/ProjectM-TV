@@ -73,6 +73,7 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 ## Codebase navigation and knowledge tools
 
 - Negative warp powers (2026-10-08): patch0015 supplies original CPU negative effective zoom through instance-owned attribute9, after per-pixel/per-frame float conversion. Preserve raw equation values, positive GPU arithmetic, nonfinite fractional results and prepared replay; no epsilon, absolute value or NaN-to-zero policy. Exact Tulip source `c897d686…` retains 33 NaNs/frame and its 30-frame published/candidate replay is byte-identical. Defined nested exponents1/2/3 fail baseline UV controls and pass after correction. See [bounded evidence](docs/superpowers/evidence/tulip-negative-zoom-power/README.md). Current warp uses eight active attributes and four extra bytes/vertex. Normal/sanitizer renderer37/37 and JVM137 pass; 329 host controls, fresh recursive both-ABI debug core and strict MkDocs also pass. External review/CI/merge/publication gates remain separate until recorded. Do not clear the source predictor's unresolved fractional-power guard or resume its shared random run from this evidence.
+- Mesh initialization cache (2026-10-08): patch 0016 stores the viewport size in `PerPixelMesh`/`FinalComposite`, so their static mesh data (and the warp mesh's vertex/index upload) is built once per size or grid change instead of every frame. Image output is unchanged; on the AM6 (Android 9, 32-bit) the pinned `$$$ Royal - Mashup (102).milk` run at 1080p/30 fps used about 12% less process CPU (two runs per side, silence; GPU time unmeasured). Evidence: `docs/superpowers/evidence/mesh-init-cache/README.md`. Profile APKs: the installable file is `app/build/outputs/apk/profile/app-profile.apk` (`app/build/intermediates/apk/profile/` can be stale); install with `adb install -t`.
 
 - BrainStain legacy compatibility (2026-10-08): patch 0014 respects authored `fShader` in legacy echo/gamma output and restores mode-1 alpha ×1.25 before clamp and open-strip topology, following MilkDrop 2.25c. Keep custom composite hue behaviour and preset assets unchanged. See [focused evidence](docs/superpowers/evidence/brainstain-dark-output/README.md); predictor agreement alone does not establish MilkDrop correctness. Three independent controls fail before/pass after; 37 normal renderer controls, 329 host controls, both-ABI release builds and 137 JVM tests pass. First-frame black is explained by the authored echo crop despite bright raw feedback. All 37 sanitizer renderer controls also pass; macOS skips the separate EGL/GLES transition-overlay test. The fresh recursive debug-core build and strict MkDocs pass. External review, CI, merge and release gates remain open at this checkpoint.
 
@@ -529,3 +530,11 @@ Proof label portability (2026-10-08): capture/verifier use the committed bitmap
 font under tools/patch-proof/assets, without default-font/FreeType selection.
 Label-only comparison reconstruction records its font/image identity separately
 from the original producer; framebuffer payloads remain unchanged.
+
+PR55 main60 synchronization (2026-10-08): main eb1e7c16 adds0016; preserve the
+15-patch image checkpoint at120547f3 and link the separate AM6 performance
+evidence, as selected by the user. All16 patches apply in an isolated export.
+137 proof controls, native engine/JNI checks,37 ASan/UBSan regression cases on
+macOS OpenGL and strict MkDocs pass. The separate EGL transition-overlay check
+was not run on macOS. These checks do not turn the frozen images into16-patch
+GPU certification.

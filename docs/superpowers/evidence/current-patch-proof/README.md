@@ -3,7 +3,7 @@
 Original image captures and integrity audit recorded, 2026-10-07. [PR #55](https://github.com/johnneerdael/ProjectM-TV/pull/55) tracks final repository review and publication. Original capture source is `654815d8`; all 13 ordered
 patch hashes are in [series.json](series.json). The main
 [patch reference](../../../UPSTREAM_PATCH_VALUE.md) now covers the locked 15-patch
-publication inventory at `120547f3`, recorded in [current-series.json](current-series.json).
+capture inventory at `120547f3`, recorded in [current-series.json](current-series.json).
 The [archived assessment](pre-rewrite-assessment.md) preserves earlier attribution.
 
 ## Current-main synchronization
@@ -21,6 +21,11 @@ the original preset’s upstream rejection and successful control/current frames
 with retained execution evidence. The [complete evaluator comparison](components/locked15-evaluator/README.md)
 checks all three roles separately. Revalidation of other affected earlier
 witnesses remains pending.
+
+Main synchronization to `eb1e7c16` adds0016 mesh initialization caching. The
+existing15-patch workers and captures stay frozen by agreement;0016 uses its
+[separate AM6 performance evidence](../mesh-init-cache/README.md). It is not
+credited as a new GPU image comparison or silently added to current-series.json.
 
 ## Comparison contract
 
