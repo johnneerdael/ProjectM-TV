@@ -309,8 +309,11 @@
       "sha256": "c93eaabefddd9d689db167dfd5ae00f5240cd389d4c69647e0ff6f50ddfbd98d",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I13-left-axis-equation-angle-seam-changes-sign/HANDOFF.md",
       "numeric_witness": "Exact left-middle axis: original atan2(+0,negative)=+pi; target negated angle=-pi. dx=above(ang,0) gives1 vs0. Periodic sin/cos unaffected.",
-      "status": "candidate0027; actual production EEL\u2192CPU trig\u2192GPU UV legacy/custom/fallback/replay RED\u2192GREEN;51 normal and27-patch application; Native4K/cost/integration pending",
-      "confirmed_affected_originals": [],
+      "status": "implemented0027; actual CGL/normal51/sanitizer51 and original/finite/custom Native4K repeated proof; isolated12-run cost no consistent slowdown; final integration pending",
+      "confirmed_affected_originals": [
+        "Liquido.milk",
+        "Bmelgren - Liquirdo 2.milk"
+      ],
       "source_report": "research/warp-motion.md",
       "recommendation": "narrow exact-left-axis positive-pi seam",
       "evidence": "I13/README.md",
@@ -324,8 +327,10 @@
       "sha256": "3a0f71f36670068c3f8b7cae6992441184f5e99a2a0d174385d9ea6384d09d69",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I18-wave-brightening-omits-original-preliminary-clamp/HANDOFF.md",
       "numeric_witness": "Raw RGB(2,1,0),brighten1: original clamp then normalize gives(1,1,0); target normalize raw gives(1,.5,0). Negative wave_brighten/darken_center values activate original nonzero predicates but not target >0 predicates.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "candidate0028 RGB-only; actual production endpoint/raw-bit/style/geometry/alpha/replay RED\u2192GREEN;52 normal and28-patch application; Native4K/cost/integration pending",
+      "confirmed_affected_originals": [],
+      "current_patch_number": 28,
+      "evidence": "I18/README.md"
     },
     {
       "id": "I03",
@@ -597,6 +602,7 @@
     "tools/projectm-patches/0024-legacy-warp-oscillator-y.patch": "426ae38b06e5361ba509792d5c4b53a945a07728eab4e8d51b5f67ef2d2601ff",
     "tools/projectm-patches/0025-legacy-warp-physical-diagonal.patch": "4faafa2e9bc16df4ef6f3bcb5e5766da17f968b1870f6277b8397da64e849546",
     "tools/projectm-patches/0026-legacy-per-pixel-traversal.patch": "0c4188d7d6a9347bc50bc4ec4a6272b61aec3ca1a751517d631d6ce55c4744cc",
-    "tools/projectm-patches/0027-legacy-angle-seam.patch": "3eb538b623a836b51961adc246325bc1fef7a57ab730d09154bfae24eb0eb87a"
+    "tools/projectm-patches/0027-legacy-angle-seam.patch": "3eb538b623a836b51961adc246325bc1fef7a57ab730d09154bfae24eb0eb87a",
+    "tools/projectm-patches/0028-wave-rgb-clamp.patch": "2af590bc0a9e9519cc6a3fc2bc3486a9bf048537849077a6cd85b3c44e8bde55"
   }
 }

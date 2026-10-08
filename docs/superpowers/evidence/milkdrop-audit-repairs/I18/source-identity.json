@@ -1,0 +1,10 @@
+{
+  "engine_source": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9",
+  "source_sha256": {
+    "src/libprojectM/MilkdropPreset/Waveform.cpp": "f95048647640ebed4f2c3c39e46cef7914f8e67c494215cbc7ed0f74e0e8990c",
+    "src/libprojectM/MilkdropPreset/MilkdropPreset.cpp": "6a7074f383832fad96754ef93e8a596dd0d15b8720a16be025e7febf60e74c82"
+  },
+  "original_source": "/Users/jneerdael/Scripts/milkdrop2/src/vis_milk2/milkdropfs.cpp",
+  "original_sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+  "status": "proposal only; no GPU, APK, Native equivalence or performance result"
+}

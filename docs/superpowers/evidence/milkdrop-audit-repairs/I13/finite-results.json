@@ -1,0 +1,30 @@
+[
+  {
+    "kind": "legacy",
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "kind": "custom",
+    "role_rgb_repeats_exact": true,
+    "before_after_equal": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+From: ProjectM TV contributors
+Subject: [PATCH] Clamp local built-in wave RGB before nonzero brightening
+
+Follow original MilkDrop2 ordered float RGB comparisons. Modify local
+submission color only; preserve raw frame variables, alpha, geometry,
+Native styles, primitive counts, replay and every darken predicate.
+No pass, target or draw is added by this arithmetic block.
+
+--- a/src/libprojectM/MilkdropPreset/Waveform.cpp
++++ b/src/libprojectM/MilkdropPreset/Waveform.cpp
+@@ -321,3 +321,12 @@
+-
++
+-    if (*presetPerFrameContext.wave_brighten > 0)
++    // Original MilkDrop clamps float RGB before optional normalization.
++    // Comparisons preserve authored NaN instead of inventing a replacement.
++    if (waveR < 0) waveR = 0;
++    if (waveG < 0) waveG = 0;
++    if (waveB < 0) waveB = 0;
++    if (waveR > 1) waveR = 1;
++    if (waveG > 1) waveG = 1;
++    if (waveB > 1) waveB = 1;
++
++    if (*presetPerFrameContext.wave_brighten != 0)
+     {

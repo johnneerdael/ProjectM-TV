@@ -1,0 +1,15 @@
+{
+  "means_ms": {
+    "before": 3.2174719037037045,
+    "after": 3.0865155333333334
+  },
+  "delta_ms": -0.1309563703703711,
+  "delta_pct": -4.0701636032819515,
+  "cycle_delta_pct": [
+    -0.4185340023862727,
+    5.182578721644782,
+    -15.131103786219791
+  ],
+  "selected_rgb_matches_original_by_role": true,
+  "scope": "Native4K source-instrumented GPU emulator, three isolated ABBA cycles; no universal speed or physical-TV FPS claim"
+}

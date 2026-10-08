@@ -145,7 +145,7 @@ add_test(NAME warp-zoom-regressions COMMAND warp-zoom-regressions
     "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert")
 set_tests_properties(warp-zoom-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs preset-inputs)
+foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility custom-wave-inputs preset-inputs wave-colour)
     string(REPLACE "-" "_" source_name "${control}")
     add_executable(${control}-regressions ${source_name}_test.cpp)
     target_compile_features(${control}-regressions PRIVATE cxx_std_17)
@@ -379,4 +379,8 @@ set_tests_properties(composite-texel-center-regressions PROPERTIES TIMEOUT 30
 
 add_test(NAME legacy-angle-seam COMMAND warp-rotation-regressions angle-seam)
 set_tests_properties(legacy-angle-seam PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+add_test(NAME wave-colour-submission COMMAND wave-colour-regressions)
+set_tests_properties(wave-colour-submission PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

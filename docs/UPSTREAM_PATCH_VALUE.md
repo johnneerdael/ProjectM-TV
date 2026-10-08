@@ -328,3 +328,5 @@ Latest disposition: shared I02/M01 nonzero file booleans measured+.102ms/+7.503%
 Latest circle disposition: isolated Native4K mean+.058ms/+3.393% with mixed cycles leaves cost acceptance unproven; I20 proposal is deferred outside shipping patches, preserving its complete before/source-corrected evidence. Shipping series returns to0017–0026.
 
 Current0027 is the I13 exact legacy angle-seam candidate, replacing the withdrawn circle numbering. Source/CGL normal51 and27-patch application pass; Native4K and cost remain open. Frozen Boolean/Circle/I13 proposal evidence keeps its original numbering and source hashes.
+
+Candidate0028 restores built-in local RGB clamp before nonzero brightening; actual production GL52 proof preserves frame bits and submission/style contracts. Separate negative-darken activation remains outside shipping patches. Native/cost/final integration gates remain open.

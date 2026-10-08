@@ -1,0 +1,12 @@
+{"issue": "I13-angle", "cycle": 0, "step": 0, "role": "before", "mean_ms": 2.804092808333333, "p90_ms": 2.78275, "status": "ok"}
+{"issue": "I13-angle", "cycle": 0, "step": 1, "role": "after", "mean_ms": 3.3112210666666706, "p90_ms": 3.762042, "status": "ok"}
+{"issue": "I13-angle", "cycle": 0, "step": 2, "role": "after", "mean_ms": 2.825827911111112, "p90_ms": 2.893291, "status": "ok"}
+{"issue": "I13-angle", "cycle": 0, "step": 3, "role": "before", "mean_ms": 3.3587497611111106, "p90_ms": 3.748375, "status": "ok"}
+{"issue": "I13-angle", "cycle": 1, "step": 0, "role": "before", "mean_ms": 3.2331423722222246, "p90_ms": 3.58075, "status": "ok"}
+{"issue": "I13-angle", "cycle": 1, "step": 1, "role": "after", "mean_ms": 3.08143866111111, "p90_ms": 3.383542, "status": "ok"}
+{"issue": "I13-angle", "cycle": 1, "step": 2, "role": "after", "mean_ms": 3.280064925, "p90_ms": 3.667417, "status": "ok"}
+{"issue": "I13-angle", "cycle": 1, "step": 3, "role": "before", "mean_ms": 2.814915836111112, "p90_ms": 2.848, "status": "ok"}
+{"issue": "I13-angle", "cycle": 2, "step": 0, "role": "before", "mean_ms": 3.9703717527777806, "p90_ms": 4.591083, "status": "ok"}
+{"issue": "I13-angle", "cycle": 2, "step": 1, "role": "after", "mean_ms": 2.924727472222222, "p90_ms": 3.205959, "status": "ok"}
+{"issue": "I13-angle", "cycle": 2, "step": 2, "role": "after", "mean_ms": 3.0958131638888857, "p90_ms": 3.402625, "status": "ok"}
+{"issue": "I13-angle", "cycle": 2, "step": 3, "role": "before", "mean_ms": 3.123558891666667, "p90_ms": 3.442167, "status": "ok"}

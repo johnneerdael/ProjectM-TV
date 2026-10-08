@@ -66,3 +66,15 @@ Live candidate0027 now has an actual GL control, not constructor sinks: default/
 The first whole-suite attempt failed its program-activity pixel check for odd-grid9 at the central gap in the existing quadrant index builder. The test now checks a covered point; this is a harness correction, not an odd-grid mesh repair. Odd-grid inputs/indexed vertex outputs are checked; complete odd-grid raster coverage is not certified.
 
 Native4K unchanged-original/finite/custom/cost and final integration remain pending. The live candidate does not imply an affected-preset census. Frozen source proposals retain their historical identities.
+
+Current integrated sanitizer suite passes51/51: [ASan/UBSan51](production-asan51.txt). ARM64 source-instrumented worker builds atb163e1bd; Native original capture is active, not yet accepted.
+
+Two unchanged originals now pass8 final-output Native4K jobs: Liquido and Bmelgren Liquirdo2, each before/after with two repeats. Every role's eight selected RGB hashes repeat exactly. Peak selected full-frame differences are6.214605 and6.890235 RGB MAE on0–255; changes concentrate around the left-axis warp and propagate through feedback. [Liquido before](original-Liquido-before-4k.png) · [source-corrected after](original-Liquido-after-4k.png) · [Bmelgren before](original-Bmelgren---Liquirdo-2-before-4k.png) · [after](original-Bmelgren---Liquirdo-2-after-4k.png) · [metrics](i13-original-image-metrics.json). These are source-derived GLES results, not Windows recordings. Finite/custom controls and clean cost remain open.
+
+## Focused Native acceptance
+
+Sixteen Native4K runs (two unchanged originals, finite legacy and custom control) pass with every role's eight selected RGB frames repeated exactly. Custom before/after images are identical; finite legacy differs as expected. [Finite legacy before](finite-legacy-before-4k.png) · [after](finite-legacy-after-4k.png) · [results](finite-results.json).
+
+Three isolated ABBA cycles/12 Liquido runs give mean3.217472ms before versus3.086516ms after (−.130956ms/−4.070%). Cycle changes−.419%,+5.183%,−15.131% show variability; no consistent slowdown is observed and no universal speedup is claimed. All timing-run selected RGB frames match the original witness by role. [Cost results](cost-results.json) · [full log](clean-timings.txt). No additional equation, vertex, buffer, draw or target is introduced.
+
+Disposition: retain the narrow legacy seam repair after source/CGL51, sanitizer51, actual original/finite/custom Native4K and focused cost qualification. Final combined integration/CI and physical-TV performance remain separate gates.

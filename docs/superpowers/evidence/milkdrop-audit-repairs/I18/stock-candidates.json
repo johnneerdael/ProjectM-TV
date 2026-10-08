@@ -1,0 +1,152 @@
+[
+  {
+    "path": "core/src/main/assets/presets/suksma - fame is fore ache click tech - arch ass dt r3.milk",
+    "sha256": "66badf826048c016a71ca1f061832a0ca5ac97c575bf7fee5a7ce932940ce3b4",
+    "source_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=5"
+      },
+      {
+        "line": 13,
+        "text": "bAdditiveWaves=1"
+      },
+      {
+        "line": 17,
+        "text": "bMaximizeWaveColor=0"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=1.136"
+      },
+      {
+        "line": 44,
+        "text": "wave_r=0.000"
+      },
+      {
+        "line": 45,
+        "text": "wave_g=0.000"
+      },
+      {
+        "line": 46,
+        "text": "wave_b=0.000"
+      },
+      {
+        "line": 528,
+        "text": "per_frame_44=wave_r = wave_r + 9.35*sin(0.4*time) + 0.16*sin(0.5*time);"
+      },
+      {
+        "line": 529,
+        "text": "per_frame_45=wave_g = wave_g + 5.36*sin(0.7*time) + 0.15*sin(0.11*time);"
+      },
+      {
+        "line": 530,
+        "text": "per_frame_46=wave_b = wave_b + 3.37*sin(0.84*time) + 0.15*sin(0.3*time);"
+      },
+      {
+        "line": 532,
+        "text": "per_frame_48=//wave_mystery=sin(time);"
+      },
+      {
+        "line": 533,
+        "text": "per_frame_49=ob_r = wave_r;"
+      },
+      {
+        "line": 534,
+        "text": "per_frame_50=ob_g = wave_g;"
+      },
+      {
+        "line": 535,
+        "text": "per_frame_51=ob_b = wave_b;"
+      },
+      {
+        "line": 536,
+        "text": "per_frame_52=ib_r = wave_g;"
+      },
+      {
+        "line": 537,
+        "text": "per_frame_53=ib_b = wave_r;"
+      },
+      {
+        "line": 538,
+        "text": "per_frame_54=ib_g = wave_b;"
+      }
+    ],
+    "rationale": "Unbrightened large oscillating RGB; alpha positive, additive draw. At time1 raw approximately(3.718,3.469,2.554), finite source arithmetic from zero base.",
+    "qualification": "static source candidate, no parse/render, no affected census",
+    "finite_time1_source_rgb": [
+      3.7177695867625546,
+      3.4694735487196002,
+      2.553775345300997
+    ]
+  },
+  {
+    "path": "core/src/main/assets/presets/Geiss - Artifact 6d.milk",
+    "sha256": "a4a8d1b5cc46f2b60fce2493a8f44e4652b932656155bb7e75fe815c5d8e01b4",
+    "source_lines": [
+      {
+        "line": 12,
+        "text": "nWaveMode=5"
+      },
+      {
+        "line": 13,
+        "text": "bAdditiveWaves=1"
+      },
+      {
+        "line": 17,
+        "text": "bMaximizeWaveColor=1"
+      },
+      {
+        "line": 25,
+        "text": "fWaveAlpha=1.193337"
+      },
+      {
+        "line": 44,
+        "text": "wave_r=1.0"
+      },
+      {
+        "line": 45,
+        "text": "wave_g=0.8"
+      },
+      {
+        "line": 46,
+        "text": "wave_b=0.2"
+      },
+      {
+        "line": 219,
+        "text": "per_frame_1=wave_r = wave_r + 0.650*( 0.60*sin(1.437*time) + 0.40*sin(0.970*time) );"
+      },
+      {
+        "line": 220,
+        "text": "per_frame_2=wave_g = wave_g + 0.650*( 0.60*sin(1.344*time) + 0.40*sin(0.841*time) );"
+      },
+      {
+        "line": 221,
+        "text": "per_frame_3=wave_b = wave_b + 0.650*( 0.60*sin(1.251*time) + 0.40*sin(1.055*time) );"
+      },
+      {
+        "line": 229,
+        "text": "per_frame_11=//wave_x = 0.1 + rand(80)*0.01;"
+      },
+      {
+        "line": 230,
+        "text": "per_frame_12=//wave_y = 0.1 + rand(80)*0.01;"
+      },
+      {
+        "line": 232,
+        "text": "per_frame_14=wave_x = 0.5 + 0.2*( 0.60*sin(0.374*t2) + 0.40*sin(0.294*t2) );"
+      },
+      {
+        "line": 233,
+        "text": "per_frame_15=wave_y = 0.5 + 0.2*( 0.60*sin(0.393*t2) + 0.40*sin(0.223*t2) );"
+      }
+    ],
+    "rationale": "Brightened RGB bases(1,.8,.2)+.65 weighted sinusoids, no later RGB overwrite found. At time1 raw approximately(1.6,1.34,.8); preliminary clamp changes normalized palette.",
+    "qualification": "static source candidate, no parse/render, no affected census",
+    "finite_time1_source_rgb": [
+      1.6009847057443287,
+      1.3737934421166456,
+      0.796400851399452
+    ]
+  }
+]
