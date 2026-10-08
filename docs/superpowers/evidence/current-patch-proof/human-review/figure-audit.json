@@ -168,5 +168,39 @@
       }
     },
     "figure_sha256": "6890e63f88d57f100f6c0a77f5a3826de869725cbeb12f509e80d2e184f835ce"
+  },
+  {
+    "patch": "0007",
+    "frame": 29,
+    "preset": "core/src/main/assets/presets/Hexcollie - now entering the wormhole2 - mash0000 - if you like this, maybe you, like me, are insane.milk",
+    "record": "wave-witness-results.json",
+    "crop": [
+      160,
+      52,
+      320,
+      212
+    ],
+    "zoom": 2,
+    "roles": {
+      "upstream": {
+        "source_png": "build/patch-proof/wave-witness-captures/0007-wormhole/upstream-0/frame-29.png",
+        "raw_rgb_sha256": "075e5661204cf63f6519c7515913f21f13595964931361e2318f441072e79f21",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      },
+      "patched": {
+        "source_png": "build/patch-proof/wave-witness-captures/0007-wormhole/patched-0/frame-29.png",
+        "raw_rgb_sha256": "1f0f2db750bc10c687ddfa049b50d619576e72b4dc682bd4e5fd547f886b9169",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      }
+    },
+    "figure_sha256": "019dd783d715d08fb65518bc27b1c73206bfc2df84b3088f299d98f60ecbbaf9"
   }
 ]

@@ -254,7 +254,7 @@ upstream contract violation or a MilkDrop compatibility correction.
 ## Human-review presentation
 
 The main reference is the concise image-led review page. Its new
-[upstream/our-library figure audit](human-review/figure-audit.json) records five
+[upstream/our-library figure audit](human-review/figure-audit.json) records six
 actual upstream/patched pairs at the selected visible timestamps, plus exact
 matching crops. They replace ablation-only figures as the leading comparisons;
 the original ablations remain supporting cause checks. Overview pixels reconstruct

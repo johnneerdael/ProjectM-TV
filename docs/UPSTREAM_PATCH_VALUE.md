@@ -165,12 +165,12 @@ Ours uses that base directly, preserving the reflected transform.
 
 ## 0007 — Evaluated built-in waveform controls
 
-![Original Hexcollie wormhole waveform comparison](superpowers/evidence/current-patch-proof/0007-wormhole-visible.png)
+![Original Hexcollie wormhole waveform comparison](superpowers/evidence/current-patch-proof/human-review/0007.png)
 
 The **Hexcollie — now entering the wormhole2** preset sets one initial wave mode,
 then changes it through `wave_mode=q8%7`. The old renderer kept drawing the initial
 mode. Ours follows the evaluated mode, changing the wave geometry and the feedback
-it leaves behind. The rightmost panel is a labeled difference map.
+it leaves behind. The matching zoom shows the changed structure.
 [Upstream/current frames](superpowers/evidence/current-patch-proof/0007-wormhole.png) ·
 [Patch source](../tools/projectm-patches/0007-live-builtin-wave-controls.patch).
 
