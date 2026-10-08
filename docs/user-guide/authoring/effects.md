@@ -24,7 +24,7 @@ u -= dx;  v -= dy                               translate
 - `zoom` above 1 zooms in, so the picture flows outward. `zoomexp` makes the zoom depend on the distance from the centre.
 - **Negative zoom** reflects the picture through the centre in MilkDrop, which computes `pow` on the CPU. With `zoomexp=1` the result is simply the signed zoom; ProjectM TV reproduces that case exactly. With any other `zoomexp`, a negative zoom gives undefined results on GPUs. Avoid it.
 - **`rot`** is converted to float and passed through CPU `sinf`/`cosf` in MilkDrop, so any finite value works, even `rot=10000000`. ProjectM TV does the same. Some other GPU-based implementations collapse at huge angles.
-- **`wrap`** chooses whether coordinates outside 0–1 wrap or clamp. MilkDrop treats `wrap > 0.5` as on; projectM treats `> 0.0001` as on.
+- **`wrap`** chooses whether coordinates outside 0–1 wrap or clamp. MilkDrop applies it only to the fixed-function warp (treating `wrap > 0.5` as on); a warp shader decides with its sampler name instead. projectM treats `> 0.0001` as on and also applies it to an unqualified `sampler_main` in warp shaders ([details](shaders.md#warp-shader-responsibilities)).
 
 ### Decay
 

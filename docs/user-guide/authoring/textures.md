@@ -56,13 +56,11 @@ sampler sampler_rand01_smalltiled; // any image whose name starts with "smalltil
 
 `randNN` picks a random image from the texture folder. `randNN_prefix` picks one whose name starts with *prefix*. A mode prefix still applies: `sampler_pc_rand00_red` is a point-sampled, clamped image whose name starts with `red`.
 
-The rules that make random textures behave predictably:
+How the choice is made:
 
-1. A choice belongs to the **slot** (00–15) for that preset load. The warp and composite shaders see the **same** image for the same slot, and the choice survives shader reloads.
-2. A new load of the preset makes new choices. Revisiting a preset can therefore look different.
-3. Within one shader, aliases with a name filter fill their slots before unfiltered ones.
-4. Across the two shaders, the first stage to claim a slot wins, even if the second names a different prefix for it.
-5. If no image matches a prefix, nothing is bound.
+1. **MilkDrop 2** picks a file at random from its `textures` folder when it compiles each shader (`PickRandomTexture`, `plugin.cpp:2840`). The prefix match ignores case. Images in the preset's own folder are not candidates. The choice is local to each shader (`plugin.cpp:2927`), so the warp and composite shaders can receive **different** images for the same slot. Within one shader, each slot may be used only once.
+2. **ProjectM TV Engine** instead ties the choice to the slot for the whole preset load: the warp and composite shaders see the same image for the same slot, and the choice survives shader reloads. Within one shader, aliases with a name filter fill their slots first; across the two shaders, the first stage to claim a slot wins. This differs from MilkDrop 2. Don't rely on either behaviour if you need the same image in both shaders: use a fixed texture name instead.
+3. In both, a new load of the preset makes new choices, so revisiting a preset can look different, and if no image matches a prefix, nothing is bound.
 
 ProjectM TV chooses with the system's random device, so choices are not reproducible from a seed. The evaluator's `rand()` has no influence on them. Of the bundled presets, 192 contain random sampler names.
 

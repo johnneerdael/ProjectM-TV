@@ -100,7 +100,7 @@ shader_body {
 
 projectM also exposes the decay to warp shaders through the vertex colour, but do not rely on that for MilkDrop compatibility: apply the fade yourself.
 
-Sampling `sampler_main` in a warp follows the preset's `wrap` setting: wrap when `wrap` is on, clamp when off. Use `sampler_fw_main`, `sampler_fc_main`, `sampler_pw_main` or `sampler_pc_main` for an explicit mode.
+In MilkDrop 2, the preset's `wrap` setting only affects the fixed-function warp. A warp *shader*'s `sampler_main` uses its name prefix, and without one it wraps and filters bilinearly (`plugin.cpp` sampler binding, `milkdropfs.cpp:972`). projectM, including ProjectM TV Engine, instead applies the preset's `wrap` setting to the unqualified `sampler_main` in the warp pass. To get the same result everywhere, name the mode explicitly: `sampler_fw_main`, `sampler_fc_main`, `sampler_pw_main` or `sampler_pc_main`.
 
 ## Composite shader responsibilities
 

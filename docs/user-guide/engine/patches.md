@@ -51,7 +51,7 @@ Only a *parse* error in the file fails the load. Each omission is logged as `Pre
 
 - **`sampler_state` blocks** no longer break the shader. projectM stripped them only from a search copy, so `shader_body` was replaced at the wrong offset and the stage fell back to a default shader (51 bundled presets, for example `ORB - Arctic Chill`). The block fields are still ignored, as in projectM: the sampler *name* prefix chooses filtering and wrap.
 - **Warp texture unit 0** is reserved for the unqualified main sampler, so named point/clamp/wrap aliases keep their requested modes.
-- **Random textures `rand00`–`rand15`**: each slot holds one image per preset load, shared by the warp and composite shaders and kept across shader reloads. Each alias gets its own requested sampler mode, and filename-filtered aliases (`rand00_clouds`) fill slots before unfiltered ones. See [Textures](../authoring/textures.md).
+- **Random textures `rand00`–`rand15`**: each alias now gets its requested sampler mode and filename filter (`pc_rand00_red`), and the emitted short alias binds the same texture unit. ProjectM TV also keeps one image per slot for the whole preset load, shared by the warp and composite shaders and kept across shader reloads. That sharing is **not** MilkDrop 2 behaviour: MilkDrop chooses separately for each shader (`plugin.cpp:2927`). See [Textures](../authoring/textures.md#random-textures-rand00-to-rand15).
 
 ### Rendering state
 
@@ -183,7 +183,9 @@ projectM **v4.1.8** (tagged 2026-10-06) backports most of these parser and wavef
 
 ## Known remaining differences from MilkDrop 2
 
-- `sampler_state { … }` fields are ignored; the sampler name prefix selects the mode.
+- `sampler_state { … }` fields are ignored; the sampler name prefix selects the mode (as in MilkDrop).
+- In warp shaders, an unqualified `sampler_main` follows the preset's `wrap` setting; MilkDrop 2 ignores `wrap` there and uses the name prefix, which defaults to wrapping.
+- `randNN` images are shared between the warp and composite shaders for a preset load; MilkDrop 2 picks separately per shader.
 - Uninitialized shader globals read 0, not whatever a D3D9 constant register held.
 - Negative zoom with `zoomexp ≠ 1` is undefined on GPUs.
 - Nonfinite `rot` is unsupported.
