@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditfinalp16",
+  "pid": 19020,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 768,
+    "instrumented": true,
+    "nativeTrails": -1,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/audio.u8",
+    "preset": "$$$ Royal - Mashup (103).milk",
+    "referenceHeight": 0,
+    "referenceWidth": 0,
+    "seed": 12345,
+    "width": 1024
+  },
+  "requestSha256": "4406ca9f7008daebb5b4311a1c23f9b46afb34ee501f193377bfe3f265e6bf57",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-120.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "b16d7ad82b996fabd390b663f4adbb233a610f8990842d284dad3db5b57125b7",
+      "pngBytes": 1163195,
+      "pngSha256": "77de6fbea1237b6219bbbfeed7d15fcb9a534ff5e50d6bb645a219904784a6a8",
+      "rgbMean": [
+        44.64145533243815,
+        55.691630045572914,
+        57.340433756510414
+      ],
+      "exactBlackFraction": 0.1325047810872396
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-150.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "64df8aceb8582177d463cb59b839e58f1f3bbc1db21be9bd9686bf7a53db01db",
+      "pngBytes": 1242862,
+      "pngSha256": "d088e676f3f07f54d74377b0d4b6547d76d26f4e7a784e3cff0486f59f07f440",
+      "rgbMean": [
+        46.81440989176432,
+        59.41867319742838,
+        61.65806452433268
+      ],
+      "exactBlackFraction": 0.12191009521484375
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-180.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "a58656a74461c25ec0c120e3c90d7e4b9de0bcb1da2759a26de3b1b2ee176c54",
+      "pngBytes": 1231142,
+      "pngSha256": "6331323f0764dc75f97e00f1af502d44c95faa7094397d3b64bbcd80d5c39045",
+      "rgbMean": [
+        94.86097462972005,
+        70.96687698364258,
+        67.74897003173828
+      ],
+      "exactBlackFraction": 0.0027974446614583335
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-210.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "36bbfb66aee54f5cb140a7987430c6ec64cdfc7e96e847bea246ffc7307f6123",
+      "pngBytes": 1309880,
+      "pngSha256": "89f1cff73064b61429a045df5737fb4dcf0f425ce8e4e577a4f206717ad4dbc1",
+      "rgbMean": [
+        130.46525446573892,
+        91.96684392293294,
+        86.2078463236491
+      ],
+      "exactBlackFraction": 8.214314778645834E-4
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-239.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "eb242c3740c1e8db354c92a25fa129f482e57f1702df13a9f9e7f49364adf3b0",
+      "pngBytes": 1463764,
+      "pngSha256": "2cda5f676a585e6165dc8747ea7de0756fc5725758613c8910c332e3b30bfd4f",
+      "rgbMean": [
+        108.7652702331543,
+        83.78623072306316,
+        79.72998682657878
+      ],
+      "exactBlackFraction": 0.0030237833658854165
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-300.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "d49724d298a31c59d9e14848cd0af5540117beead452ce43b2f6e53557b67974",
+      "pngBytes": 1422353,
+      "pngSha256": "47a51a6265c6e84040dad86e0b15d795697a01720fcb286b2f885b335000839b",
+      "rgbMean": [
+        57.972129821777344,
+        79.02326329549153,
+        82.52080154418945
+      ],
+      "exactBlackFraction": 0.006474812825520833
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-390.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "76eb49dc0b88f147995b7806c2eff271ea650df1bcf9392fb3e6ed67eeb13610",
+      "pngBytes": 1447946,
+      "pngSha256": "37f13ac43347cae92eb55e63b42c6cf4565ce7b56c263ddfa037eebb2e04ec39",
+      "rgbMean": [
+        87.21701176961263,
+        33.32151794433594,
+        24.947589874267578
+      ],
+      "exactBlackFraction": 0.020380655924479168
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditfinalp16\/files\/native-trails\/final-i19-band-authored1024-before-1\/output\/frame-479.png",
+      "width": 1024,
+      "height": 768,
+      "rgbSha256": "e6acabad9bcb8ad77b002459340227f4a39eea992bd9ba05fded2fd5376cef98",
+      "pngBytes": 1385906,
+      "pngSha256": "9b76b348d898e8ef7a14a733e8a42057cef4f550d6b88c22be6a059111e3355e",
+      "rgbMean": [
+        82.97214126586914,
+        103.9132474263509,
+        107.15855662027995
+      ],
+      "exactBlackFraction": 0.003265380859375
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 12894679,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "08ead3db478aa81c0e29efccc0d9c38bbe69180435123531cbafbf2beb347463",
+  "forcedPresetPrefix": "$$$ Royal - Mashup (103).milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 16,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43242,
+  "framesRendered": 480,
+  "renderWallDurationMs": 4102,
+  "pssAfterFramesKB": 50985,
+  "serializedFrameMeanMs": 4.584317827777776,
+  "serializedFrameP90Ms": 5.280417,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Off",
+  "verifiedPresetName": "$$$ Royal - Mashup (103).milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 4426
+}

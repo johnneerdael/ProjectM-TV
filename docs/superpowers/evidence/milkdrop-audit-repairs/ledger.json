@@ -34,7 +34,7 @@
       "sha256": "708646e515606a96a3b45f227a75c032ba4e7dc78946a93475ca60f117513c25",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I17-built-in-opacity-replacement-and-thresholds-differ/HANDOFF.md",
       "numeric_witness": "Mode2 alpha.8, canvas256, common vol.85/bounds .75 to .95: target.4; original.028. Mode0 alpha.1/vol2.2: target.1; original.725. Mode3 alpha.5/treble1/no modulation/canvas256: target.04875; original.0975. Mode1 alpha.003 final.00375 is skipped by original threshold.004 but drawn by target.\n\nUses the same supplied modulation scalar; does not confuse shader vol, raw audio vol and mutable EEL vol.",
-      "status": "implemented patch0016; focused Native 4K acceptance passed; external integration pending",
+      "status": "implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending",
       "confirmed_affected_originals": [
         {
           "name": "Happening.milk",
@@ -47,7 +47,9 @@
         "candidate": "38/38 normal renderer tests pass",
         "limits": "Native 4K configuration attribute checks; full Native 4K output replay remains pending"
       },
-      "native_4k_evidence": "I17/results.json"
+      "native_4k_evidence": "I17/results.json",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I17/final-I17-results.json"
     },
     {
       "id": "I19",
@@ -67,9 +69,11 @@
       "evidence": "I19/README.md",
       "protected_prior_fix": "reference-equivalent sample decisions and documented Royal103 brightness parity",
       "native_4k_evidence": "I19/results.json",
-      "ruling": "Brightness was compared only with the previous 4K output; do not infer fidelity loss without matched authored/resolution evidence. Preserve the proposal and gather those comparisons.",
-      "resolution_band_evidence": "I19/resolution-bands.json",
-      "decision_evidence": "I19/clean4k-timings.json"
+      "ruling": "Final-output brightness nearly matches source-correct authored1280; low authored256 darkens. Deferred for measured +.158ms/2.56% serialized emulator cost, not alleged fidelity loss.",
+      "resolution_band_evidence": "I19/final-resolution-bands.json",
+      "decision_evidence": "I19/clean4k-timings.json",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I19/final-I19-results.json"
     },
     {
       "id": "I08",
@@ -79,7 +83,7 @@
       "sha256": "991d9a29a9eae94bf006606edf204f3c77d7b5132dca9b6e2adddccbc96afe9f",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I08-custom-oscilloscope-windows-are-not-centered-or-channel-separated/HANDOFF.md",
       "numeric_witness": "480-sample ramp v[k]=k/480, samples2,sep0,smoothing0, unit scales: original first value1=(239/480)*.004=.0019916667; library/predictor0. With samples4,sep2 original starts237/239; target starts0/0.",
-      "status": "implemented patch0017; focused Native4K acceptance passed; final integration pending",
+      "status": "implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending",
       "confirmed_affected_originals": [
         {
           "name": "Mig_304 - geiss remix 2.milk",
@@ -87,7 +91,9 @@
         }
       ],
       "evidence": "I08/README.md",
-      "native_4k_evidence": "I08/results.json"
+      "native_4k_evidence": "I08/results.json",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I08/final-I08-results.json"
     },
     {
       "id": "I22",
@@ -97,7 +103,7 @@
       "sha256": "346dfa27d9195f08f6cc30668100f86bcb18142a1856a35471c4f17006973147",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I22-custom-dot-waves-gain-interpolated-points/HANDOFF.md",
       "numeric_witness": "Two points(.25,.5),(.75,.5): original custom dots draw2; target smooths and draws3 including(.5,.5). Target samples1 is suppressed; original permits1 if the point program overwrites finite position/colour and never consumes the nonfinite sample input.\n\nStrong witness is the finite two-point case. Single-sample boundary remains conditional; no undefined sample is credited.",
-      "status": "candidate0018; source/strong original/finite diagnostic4K proof complete; mosaic timing uncertainty retained; final disposition pending",
+      "status": "candidate0018; source/final-output original and finite diagnostic proof complete; mosaic timing uncertainty retained; final disposition/integration pending",
       "confirmed_affected_originals": [
         {
           "name": "shifter - mosaic mitosis.milk",
@@ -105,7 +111,9 @@
         }
       ],
       "evidence": "I22/README.md",
-      "native_4k_evidence": "I22/results.json"
+      "native_4k_evidence": "I22/results.json",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I22/final-I22-stars-results.json"
     },
     {
       "id": "I10",
@@ -167,12 +175,15 @@
       "sha256": "2e21b780ffb8dd3e17b2c04a3d5a0780e5ab6ad95fed0b24d25a341c3509bfcb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I05-per-pixel-aspect-inputs-use-factors-instead-of-inverse-factors/HANDOFF.md",
       "numeric_witness": "16:9 aspecty: library/predictor.5625; original1.7777778. dx=aspecty/10 gives.05625 vs.17777778. Main-frame aspect inputs agree.",
-      "status": "candidate0021; source45 controls and verified4K originals/repeats pass; finite diagnostic/final acceptance pending",
+      "status": "implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
       "recommendation": "inverse per-pixel aspect assignments; square/unaffected tests",
       "evidence": "I05/README.md",
-      "native_4k_evidence": "I05/verified-results.json"
+      "native_4k_evidence": "I05/verified-results.json",
+      "diagnostic_evidence": "I05/final-diagnostic-aspect-results.json",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I05/final-I05-results.json"
     },
     {
       "id": "I16",
@@ -195,10 +206,13 @@
       "sha256": "a1d379c4c50406ae24ee004196c34e439baee60b8adf131836d465b8d84413b5",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I06-custom-wave-points-inherit-modified-main-frame-read-only-inputs/HANDOFF.md",
       "numeric_witness": "Host bass1, main bass=.25, wave point x=bass: library/predictor x=.25; original x=1 from fresh wave inputs copied before wave-frame execution.",
-      "status": "candidate0021; source45 controls and verified4K originals/repeats pass; finite diagnostic/final acceptance pending",
+      "status": "implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending",
       "confirmed_affected_originals": [],
       "evidence": "I06/README.md",
-      "native_4k_evidence": "I06/verified-results.json"
+      "native_4k_evidence": "I06/verified-results.json",
+      "diagnostic_evidence": "I06/final-diagnostic-wave-time-results.json",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I06/final-I06-results.json"
     },
     {
       "id": "I24",
@@ -208,8 +222,10 @@
       "sha256": "6022b706bc5bdb38f2e492232727eb65974e26a28c754d21f19f016ce1d34321",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I24-shape-live-thick-equations-do-not-select-target-outline-style/HANDOFF.md",
       "numeric_witness": "Static thickOutline0, positive outline alpha, shape frame thick=1: original4passes; target1. Reverse assignment also differs.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source/per-instance cost investigation recorded; two strong original candidates; execution/final screenshots and disposition pending",
+      "confirmed_affected_originals": [],
+      "evidence": "I24/README.md",
+      "source_refined_candidates": "I24/source-refined-candidates.json"
     },
     {
       "id": "I23",
@@ -341,9 +357,11 @@
       "sha256": "da8364c56c5c5b41230539808a53d6fa76e76996794c8934fbf159df63eaaa94",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I29-negative-odd-echo-orientation-omits-original-horizontal-flip/HANDOFF.md",
       "numeric_witness": "Active echo,echo_orient=-1, second-pass u=.25: original.75; target.25. Finite negative orientations are reachable and not clamped away.",
-      "status": "candidate0022; signed echo GL regression and46 controls pass;4K diagnostic pending",
+      "status": "implemented patch0022; focused source/finite final-output Native4K acceptance passed; final integration pending",
       "confirmed_affected_originals": [],
-      "evidence": "I29/README.md"
+      "evidence": "I29/README.md",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "native_4k_evidence": "I29/final-results.json"
     },
     {
       "id": "I15",
@@ -366,12 +384,14 @@
       "sha256": "9b8257b6666b330799b883c9fa056e241d47a3ea511f3ea0a5b7f1d1147945cb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I09-eel-named-constants-round-to-float-before-double-evaluation/HANDOFF.md",
       "numeric_witness": "$pi: library/predictor3.1415927410125732; original3.141592653589793; difference about8.74228e-8.",
-      "status": "implemented0020; scalar43 controls and repeated4K amplified diagnostic pass; integration pending",
+      "status": "implemented patch0020; focused source/finite final-output Native4K acceptance passed; no confirmed stock trigger; final integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
       "recommendation": "remove float suffixes from exact original decimal constants in both scanners",
       "evidence": "I09/README.md",
-      "native_4k_evidence": "I09/README.md"
+      "native_4k_evidence": "I09/README.md",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I09/final-diagnostic-pi-results.json"
     },
     {
       "id": "I31",
@@ -381,12 +401,14 @@
       "sha256": "9696fd6e7c47744a75fae2cc56ae27baa3a23b322dcac50b92f94e661a221bec",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I31-gamma-only-pass-count-epsilon-differs/HANDOFF.md",
       "numeric_witness": "Gamma1.0005: original int(gamma-.001)+1\u2192one pass; target epsilon.0001\u2192two passes weighted1 andapproximately.0005.\n\nSeparate from diffuse byte packing; no measured whole-preset impact claimed.",
-      "status": "implemented0019; source/verified installed-APK4K comparison/repeats pass; integration pending",
+      "status": "implemented source repair; focused source/final-output original Native4K acceptance passed; final integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
       "recommendation": "gamma-only epsilon repair feasible; preserve echo epsilon",
       "evidence": "I31/README.md",
-      "native_4k_evidence": "I31/verified-results.json"
+      "native_4k_evidence": "I31/verified-results.json",
+      "capture_qualification": "Historical worker bound only draw framebuffer zero; direct Native captures may read intermediate feedback rather than final composite. Preserve stage evidence; final-output replay with read framebuffer zero is required.",
+      "final_output_evidence": "I31/final-I31-results.json"
     },
     {
       "id": "I01",

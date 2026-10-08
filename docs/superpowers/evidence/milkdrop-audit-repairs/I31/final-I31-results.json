@@ -1,0 +1,96 @@
+{
+  "capture_protocol": "explicit read framebuffer zero; prior binding restored",
+  "native_aar_and_preset_bytes_unchanged": true,
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "repeat_scope": "eight selected RGB frames; not every-frame hashes",
+  "roles": {
+    "before": {
+      "preset": "suksma - type o negative - world coming down.milk",
+      "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+      "rgb_hashes": [
+        "8c8cb204012a4b0e34bb4dec2573653f77024696272cb5639a209f528e034f48",
+        "2e587b1ece2a5edd655f112daab428e8220a1fcf49ba660e28c05455c2c19cfa",
+        "f96407df95531d120022c491673b99cb8fd9b4ae05c49fd5ad5ef472d9170eb3",
+        "74ccb032b5a3e102216c02b7cc1f43a1d6a2bd25d132e4703387bb76a45ca01a",
+        "bdef0c0694b9e74557f3a261aa1b0872399976a96950084d51853c61abf0233c",
+        "0159ec472c5e7fabda7ea1155bdc2ac3c3d7d70b8e4949c8454d16fcb8dbe614",
+        "d78ce836051dcb706d47a3f8d231c99f51e66c5ba9c2abd418b1b616aa4b6418",
+        "acfb65d88ffd69171be2e98d9cc9be9ab0c97fa5e1640072aa2cf5b1146f3dd6"
+      ]
+    },
+    "after": {
+      "preset": "suksma - type o negative - world coming down.milk",
+      "preset_sha256": "1eae0591633d591883bf3dc5340bed937d4ba80ef566ffb8ce668cef3bf919ed",
+      "rgb_hashes": [
+        "3797b877e2377bad56a2538eb429e7fbded88012b6108f0d1e06e9d4d34cc92d",
+        "2e587b1ece2a5edd655f112daab428e8220a1fcf49ba660e28c05455c2c19cfa",
+        "f96407df95531d120022c491673b99cb8fd9b4ae05c49fd5ad5ef472d9170eb3",
+        "74ccb032b5a3e102216c02b7cc1f43a1d6a2bd25d132e4703387bb76a45ca01a",
+        "bdef0c0694b9e74557f3a261aa1b0872399976a96950084d51853c61abf0233c",
+        "2049378ff579ed40269475c7b1aa3bd6111a07eaf9d3fccce824dc8f1045c0c9",
+        "d78ce836051dcb706d47a3f8d231c99f51e66c5ba9c2abd418b1b616aa4b6418",
+        "acfb65d88ffd69171be2e98d9cc9be9ab0c97fa5e1640072aa2cf5b1146f3dd6"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true,
+  "frame_metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 6.831918724279835e-07,
+      "before_rgb_mean": 8.889581484696501,
+      "after_rgb_mean": 8.889582167888374
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 0.0,
+      "before_rgb_mean": 8.839700199331276,
+      "after_rgb_mean": 8.839700199331276
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 0.0,
+      "before_rgb_mean": 8.88463336709105,
+      "after_rgb_mean": 8.88463336709105
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 0.0,
+      "before_rgb_mean": 8.7382815313143,
+      "after_rgb_mean": 8.7382815313143
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 0.0,
+      "before_rgb_mean": 8.647988241062242,
+      "after_rgb_mean": 8.647988241062242
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 1.2056327160493827e-07,
+      "before_rgb_mean": 8.708227157278806,
+      "after_rgb_mean": 8.708227277842079
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 0.0,
+      "before_rgb_mean": 8.752546175733025,
+      "after_rgb_mean": 8.752546175733025
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 0.0,
+      "before_rgb_mean": 8.560303698881173,
+      "after_rgb_mean": 8.560303698881173
+    }
+  ],
+  "illustrated_frame": 120,
+  "all_selected_before_after_rgb_identical": false
+}

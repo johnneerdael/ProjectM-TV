@@ -1,0 +1,96 @@
+{
+  "capture_protocol": "explicit read framebuffer zero; prior binding restored",
+  "native_aar_and_preset_bytes_unchanged": true,
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "repeat_scope": "eight selected RGB frames; not every-frame hashes",
+  "roles": {
+    "before": {
+      "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+      "preset_sha256": "f1e64ac13a832aa173667fe1aef8d67ce2bb3b38a333cfba1c673200adb186f5",
+      "rgb_hashes": [
+        "68da05632d4a9f073577b4b192a5fe158806cc59a8518da000fb46d2e2850985",
+        "4ac4e9900fc3a18c618b77c8cc077da2092bb4af3ac6ea283cbfb4255a500660",
+        "c53a3bbbc828ae42c5cc721fab4997f0e153f4082c51e1364cd43b9d8fdc7b5a",
+        "a833c65ca08acdc9c1b99fa2c5d469c0b5b3490f4d8e7de80a82d52e9cb68c6a",
+        "7f1c62d6018ab87ecba77f88b0a6579aa8ba41c9fd8d9b55729f27fc19efc0bb",
+        "14da573cfdb65c97790b20a102f8afb408e3d7cd177404f10b62487a50aea942",
+        "bca29d8d9cda6b831e92095ef446ec95ed78b6e12499e264c9bcc3de6b3efc50",
+        "bc9a2ed2d2b33f2dab3de8c254e474453ae82f478016d9db42150b27ae5457d6"
+      ]
+    },
+    "after": {
+      "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+      "preset_sha256": "f1e64ac13a832aa173667fe1aef8d67ce2bb3b38a333cfba1c673200adb186f5",
+      "rgb_hashes": [
+        "bcda4d408da32ca31a979670d869f9e566a7cad0433087edd2c5cb73dbe9e1b4",
+        "b54d86e5aa9ceed567224cdddb0d7ea06e6fb6d69ded15a3d865f64c11fe3f75",
+        "f62f7039c323d82ab96df8509263b043d72eeaa6c6376ef5d1989f20e7787900",
+        "408088efabb282f72a6f1a7a90a48c8071ade82b5b012e5f7ee25b7975f8f3d4",
+        "159ea5010a6127e42cb78a7df25654cb71f6c65e37a17385238ec670849694f3",
+        "342a6918881bf377425bbeef43b06e11200817964e622868e9bdfffc98f80137",
+        "bdaaa3682401dd99eea404b94de29dac0a5296d10619f18f076d53d7383f10eb",
+        "38b14e0f50f875f14884db8e0f8190a154d8f708885ddfae868b87e011253d2c"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true,
+  "frame_metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 3.3770604664994854,
+      "before_rgb_mean": 74.07589044013632,
+      "after_rgb_mean": 70.69882997363683
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 4.3080801906507205,
+      "before_rgb_mean": 80.04178526073817,
+      "after_rgb_mean": 75.73370507008745
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 5.400620418595679,
+      "before_rgb_mean": 96.10090498810442,
+      "after_rgb_mean": 90.70028456950874
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 6.376016107253086,
+      "before_rgb_mean": 110.32495289994856,
+      "after_rgb_mean": 103.94893679269548
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 5.862282021604938,
+      "before_rgb_mean": 104.34165424864969,
+      "after_rgb_mean": 98.47937222704475
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 7.191794905799897,
+      "before_rgb_mean": 115.30050162358539,
+      "after_rgb_mean": 108.1087067177855
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 10.093745860661008,
+      "before_rgb_mean": 112.91460318608539,
+      "after_rgb_mean": 102.82085732542438
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 16.734592054076646,
+      "before_rgb_mean": 114.7824893904321,
+      "after_rgb_mean": 98.04789733635545
+    }
+  ],
+  "illustrated_frame": 479,
+  "all_selected_before_after_rgb_identical": false
+}

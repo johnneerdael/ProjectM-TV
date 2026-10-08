@@ -1,3 +1,5 @@
+Final-output qualification is now recorded below; historical intermediate/shared-package comparisons remain preserved with their limitations.
+
 # I22 — Discrete custom dots
 
 Candidate patch0018 passes the source-stage regressions and40 normal renderer controls. Native4K captures/timings and final integration remain pending.
@@ -49,3 +51,47 @@ All12 diagnostic runs complete480 frames and repeat selected RGB hashes. At4K, t
 ![Authored dot ring after](audit-dot-ring-after-4k.png)
 
 Appearance/count qualification is now complete for these focused contexts. Final performance disposition and final-head integration checks remain required; the earlier mosaic timing uncertainty stays visible.
+
+## Capture qualification correction (2026-10-08)
+
+The historical capture worker checked only GL_FRAMEBUFFER_BINDING (draw binding). Native direct rendering can leave an internal feedback FBO bound to GL_READ_FRAMEBUFFER, so the saved PNGs are not verified final presented output. Their intermediate geometry differences and timings remain evidence at that stage; claims of final Native4K appearance/brightness acceptance are suspended. Fresh worker APKs now explicitly select read framebuffer0 for capture and restore the prior binding; the native AAR and preset bytes are unchanged. Source/evaluator/known-FBO regression controls remain valid. Existing artifacts are retained; new final-output replays will be separately recorded.
+
+## Final-output replay — I22-mosaic
+
+Four480-frame runs now explicitly capture read framebuffer0, check the installed APK hash per run and retain exact native AAR/preset bytes. All eight selected RGB frames repeat exactly within each role. The illustrated common frame is479, selected for the largest measured difference among the eight captures. These are source-instrumented GLES final-output images; no Windows pixel-identity claim follows. [Final records](final-I22-mosaic-results.json).
+
+![Final output before](final-I22-mosaic-before-4k.png)
+
+![Source-derived expected final output](final-I22-mosaic-after-4k.png)
+
+## Final-output replay — I22-stars
+
+Four480-frame runs now explicitly capture read framebuffer0, check the installed APK hash per run and retain exact native AAR/preset bytes. All eight selected RGB frames repeat exactly within each role. The illustrated common frame is479, selected for the largest measured difference among the eight captures. These are source-instrumented GLES final-output images; no Windows pixel-identity claim follows. [Final records](final-I22-stars-results.json).
+
+![Final output before](final-I22-stars-before-4k.png)
+
+![Source-derived expected final output](final-I22-stars-after-4k.png)
+
+## Final-output finite diagnostic — single
+
+Four480-frame runs explicitly capture read framebuffer0 and verify the installed APK hash per run. All eight selected RGB repeats are exact. Native AAR and stock assets are preserved except the declared private fixture/index overlay. [Final records](final-diagnostic-single-results.json).
+
+![Final diagnostic before](final-diagnostic-single-before-4k.png)
+
+![Source-derived expected final diagnostic](final-diagnostic-single-after-4k.png)
+
+## Final-output finite diagnostic — two
+
+Four480-frame runs explicitly capture read framebuffer0 and verify the installed APK hash per run. All eight selected RGB repeats are exact. Native AAR and stock assets are preserved except the declared private fixture/index overlay. [Final records](final-diagnostic-two-results.json).
+
+![Final diagnostic before](final-diagnostic-two-before-4k.png)
+
+![Source-derived expected final diagnostic](final-diagnostic-two-after-4k.png)
+
+## Final-output finite diagnostic — ring
+
+Four480-frame runs explicitly capture read framebuffer0 and verify the installed APK hash per run. All eight selected RGB repeats are exact. Native AAR and stock assets are preserved except the declared private fixture/index overlay. [Final records](final-diagnostic-ring-results.json).
+
+![Final diagnostic before](final-diagnostic-ring-before-4k.png)
+
+![Source-derived expected final diagnostic](final-diagnostic-ring-after-4k.png)

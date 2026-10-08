@@ -25,3 +25,15 @@ These are unbrightened3840×2160 GLES captures from the same original bytes,480-
 Serialized360-frame mean/p90 pairs before are2.363/2.719 and2.490/3.423 ms; after2.253/2.527 and2.581/3.616 ms. The ranges overlap and show no consistent slowdown. Guest PSS ranges72,297–72,504 KiB before and72,375–72,523 KiB after; this is not all host GPU memory. No universal or physical-TV performance claim follows. All39 normal renderer controls pass, retaining bounds protection, line behavior and replay. Final-head sanitizer/Android/review gates remain open.
 
 Normalized blank context lines in the generated patch text preserve the applied production source bytes; all17 patches still apply cleanly. The captured candidate is the original8e46 source snapshot, independently identified in its manifest, not a relabelled newer build.
+
+## Capture qualification correction (2026-10-08)
+
+The historical capture worker checked only GL_FRAMEBUFFER_BINDING (draw binding). Native direct rendering can leave an internal feedback FBO bound to GL_READ_FRAMEBUFFER, so the saved PNGs are not verified final presented output. Their intermediate geometry differences and timings remain evidence at that stage; claims of final Native4K appearance/brightness acceptance are suspended. Fresh worker APKs now explicitly select read framebuffer0 for capture and restore the prior binding; the native AAR and preset bytes are unchanged. Source/evaluator/known-FBO regression controls remain valid. Existing artifacts are retained; new final-output replays will be separately recorded.
+
+## Final-output replay — I08
+
+Four480-frame runs now explicitly capture read framebuffer0, check the installed APK hash per run and retain exact native AAR/preset bytes. All eight selected RGB frames repeat exactly within each role. The illustrated common frame is479, selected for the largest measured difference among the eight captures. These are source-instrumented GLES final-output images; no Windows pixel-identity claim follows. [Final records](final-I08-results.json).
+
+![Final output before](final-I08-before-4k.png)
+
+![Source-derived expected final output](final-I08-after-4k.png)

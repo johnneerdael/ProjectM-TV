@@ -119,6 +119,8 @@ def verify(directory, request, expected_hash):
     if [capture["frame"] for capture in manifest["captures"]] != CAPTURES:
         raise ValueError("Incomplete temporal captures")
     for capture in manifest["captures"]:
+        if capture.get("captureReadFramebufferBinding") != 0:
+            raise ValueError("Capture did not verify final-output read framebuffer zero")
         path = directory / ("frame-%03d.png" % capture["frame"])
         if file_digest(path) != capture["pngSha256"]:
             raise ValueError("Capture PNG checksum mismatch")

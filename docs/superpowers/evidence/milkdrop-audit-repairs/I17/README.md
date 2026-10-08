@@ -47,3 +47,15 @@ These360-frame measurements exclude capture encoding and include `onDrawFrame` p
 The selected API36 emulator failed strict surface-init GL validation with0x502 before rendering; its preserved failed manifest is separate. A new task-owned API34 ARM64 emulator boots at physical3840×2160 with host GPU/HVF,8192 MiB guest RAM and Apple M4 Pro/GLES3.0. No GL check was weakened. An initial host assertion expected an outdated internal status spelling; the producer had completed successfully with the current public `Standard ·1280×720 canvas` string. The corrected controller verifies/reuses that successful row without changing or rerendering it; subsequent rows use the same frozen worker/request.
 
 Full identities, four successful manifests, capture hashes and timing limits are in the adjacent JSON records. Source baseline`120547f3` and candidate`e5dd1b09` package identical asset inventories. These are independently built source-instrumented AARs, not shipping-byte identities. All38 normal and38 sanitizer renderer controls and329 host controls pass; Android debug core/app and JVM checks pass. The macOS native runner skips its separate EGL/GLES transition-overlay test. Strict docs and final release checks remain open.
+
+## Capture qualification correction (2026-10-08)
+
+The historical capture worker checked only GL_FRAMEBUFFER_BINDING (draw binding). Native direct rendering can leave an internal feedback FBO bound to GL_READ_FRAMEBUFFER, so the saved PNGs are not verified final presented output. Their intermediate geometry differences and timings remain evidence at that stage; claims of final Native4K appearance/brightness acceptance are suspended. Fresh worker APKs now explicitly select read framebuffer0 for capture and restore the prior binding; the native AAR and preset bytes are unchanged. Source/evaluator/known-FBO regression controls remain valid. Existing artifacts are retained; new final-output replays will be separately recorded.
+
+## Final-output replay — I17
+
+Four480-frame runs now explicitly capture read framebuffer0, check the installed APK hash per run and retain exact native AAR/preset bytes. All eight selected RGB frames repeat exactly within each role. The illustrated common frame is390, selected for the largest measured difference among the eight captures. These are source-instrumented GLES final-output images; no Windows pixel-identity claim follows. [Final records](final-I17-results.json).
+
+![Final output before](final-I17-before-4k.png)
+
+![Source-derived expected final output](final-I17-after-4k.png)

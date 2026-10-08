@@ -1,0 +1,34 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ CaptureTests.test_intermediate_read_target_is_rejected_even_with_valid_pixels _
+
+self = <test_run_validation.CaptureTests testMethod=test_intermediate_read_target_is_rejected_even_with_valid_pixels>
+
+    def test_intermediate_read_target_is_rejected_even_with_valid_pixels(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,manifest = self.manifest(path)
+            manifest['captures'][0]['captureReadFramebufferBinding'] = 7
+            runner.write(path/'manifest.json',manifest)
+>           with self.assertRaisesRegex(ValueError,'final-output read framebuffer'):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: ValueError not raised
+
+tools/native-trails/test_run_validation.py:104: AssertionError
+_____ CaptureTests.test_unrecorded_read_target_cannot_certify_final_output _____
+
+self = <test_run_validation.CaptureTests testMethod=test_unrecorded_read_target_cannot_certify_final_output>
+
+    def test_unrecorded_read_target_cannot_certify_final_output(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp); request,manifest = self.manifest(path)
+            del manifest['captures'][0]['captureReadFramebufferBinding']
+            runner.write(path/'manifest.json',manifest)
+>           with self.assertRaisesRegex(ValueError,'final-output read framebuffer'):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: ValueError not raised
+
+tools/native-trails/test_run_validation.py:112: AssertionError
+=========================== short test summary info ============================
+FAILED tools/native-trails/test_run_validation.py::CaptureTests::test_intermediate_read_target_is_rejected_even_with_valid_pixels
+FAILED tools/native-trails/test_run_validation.py::CaptureTests::test_unrecorded_read_target_cannot_certify_final_output
+2 failed, 13 deselected in 0.26s

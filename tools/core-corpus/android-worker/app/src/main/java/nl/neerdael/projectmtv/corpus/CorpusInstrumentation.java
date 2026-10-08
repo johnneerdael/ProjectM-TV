@@ -133,7 +133,7 @@ public final class CorpusInstrumentation extends Instrumentation {
         manifest.put("fps", FPS);
         manifest.put("audioBlockBytes", PCM_BLOCK);
         manifest.put("audioDelivery", "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples");
-        manifest.put("captureSemantics", "eight selected frames, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash");
+        manifest.put("captureSemantics", "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash");
         manifest.put("settings", new JSONObject().put("autoChange", false).put("beatCuts", false)
                 .put("blankDetection", false).put("musicCategory", "all").put("meshWidth", 48)
                 .put("meshHeight", 32).put("presetDurationSeconds", 3600).put("softCutDurationSeconds", 0)
@@ -262,8 +262,18 @@ public final class CorpusInstrumentation extends Instrumentation {
     private static JSONObject capture(File output, int frame, int width, int height,
                                       ByteBuffer rgba) throws Exception {
         rgba.clear();
+        // The engine restores the draw target, but may leave its internal
+        // feedback framebuffer bound for reads. Capture the presented output.
+        int[] previousReadFramebuffer = new int[1];
+        GLES30.glGetIntegerv(GLES30.GL_READ_FRAMEBUFFER_BINDING, previousReadFramebuffer, 0);
+        GLES30.glBindFramebuffer(GLES30.GL_READ_FRAMEBUFFER, 0);
+        int[] captureReadFramebuffer = new int[1];
+        GLES30.glGetIntegerv(GLES30.GL_READ_FRAMEBUFFER_BINDING, captureReadFramebuffer, 0);
+        if (captureReadFramebuffer[0] != 0)
+            throw new IllegalStateException("Capture did not bind read framebuffer zero");
         GLES30.glPixelStorei(GLES30.GL_PACK_ALIGNMENT, 1);
         GLES30.glReadPixels(0, 0, width, height, GLES30.GL_RGBA, GLES30.GL_UNSIGNED_BYTE, rgba);
+        GLES30.glBindFramebuffer(GLES30.GL_READ_FRAMEBUFFER, previousReadFramebuffer[0]);
         checkGl("glReadPixels " + frame);
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         File png = new File(output, String.format(java.util.Locale.ROOT, "frame-%03d.png", frame));
@@ -298,6 +308,8 @@ public final class CorpusInstrumentation extends Instrumentation {
         } finally { bitmap.recycle(); }
         JSONObject result = new JSONObject();
         result.put("frame", frame);
+        result.put("previousReadFramebufferBinding", previousReadFramebuffer[0]);
+        result.put("captureReadFramebufferBinding", captureReadFramebuffer[0]);
         result.put("simulatedSeconds", frame / (double) FPS);
         result.put("path", png.getAbsolutePath());
         result.put("width", width); result.put("height", height);

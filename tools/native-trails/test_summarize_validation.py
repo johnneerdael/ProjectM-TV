@@ -114,6 +114,8 @@ class SummaryTests(unittest.TestCase):
                     path = directory / ("frame-%03d.png" % frame)
                     cv2.imwrite(str(path), image)
                     manifest["captures"].append({"frame": frame, "width": width, "height": height,
+                                                  "captureReadFramebufferBinding": 0,
+                                                  "previousReadFramebufferBinding": 7,
                                                   "pngSha256": summary.file_digest(path),
                                                   "rgbSha256": hashlib.sha256(image[:, :, [2, 1, 0]].tobytes()).hexdigest()})
                 summary.runner.write(directory / "request.json", request)

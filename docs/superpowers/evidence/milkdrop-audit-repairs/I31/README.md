@@ -29,3 +29,17 @@ The corrected controller installs and hashes each role immediately before render
 ![Verified gamma before](verified-before-4k-frame239.png)
 
 ![Verified gamma after](verified-after-4k-frame239.png)
+
+## Capture qualification correction (2026-10-08)
+
+The historical capture worker checked only GL_FRAMEBUFFER_BINDING (draw binding). Native direct rendering can leave an internal feedback FBO bound to GL_READ_FRAMEBUFFER, so the saved PNGs are not verified final presented output. Their intermediate geometry differences and timings remain evidence at that stage; claims of final Native4K appearance/brightness acceptance are suspended. Fresh worker APKs now explicitly select read framebuffer0 for capture and restore the prior binding; the native AAR and preset bytes are unchanged. Source/evaluator/known-FBO regression controls remain valid. Existing artifacts are retained; new final-output replays will be separately recorded.
+
+## Final-output replay — I31
+
+Four480-frame runs now explicitly capture read framebuffer0, check the installed APK hash per run and retain exact native AAR/preset bytes. All eight selected RGB frames repeat exactly within each role. The illustrated common frame is120, selected for the largest measured difference among the eight captures. These are source-instrumented GLES final-output images; no Windows pixel-identity claim follows. [Final records](final-I31-results.json).
+
+![Final output before](final-I31-before-4k.png)
+
+![Source-derived expected final output](final-I31-after-4k.png)
+
+The corrected final capture detects two changed RGB captures out of eight, with maximum full-frame MAE6.83e−7 (total absolute channel difference17 over the4K image). The earlier claim of identical final output is superseded. The effect is visually negligible for this original; the pass-count/weight regression is the stronger causal proof.

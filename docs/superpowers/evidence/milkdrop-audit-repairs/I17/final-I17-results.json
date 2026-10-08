@@ -1,0 +1,96 @@
+{
+  "capture_protocol": "explicit read framebuffer zero; prior binding restored",
+  "native_aar_and_preset_bytes_unchanged": true,
+  "display": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "repeat_scope": "eight selected RGB frames; not every-frame hashes",
+  "roles": {
+    "before": {
+      "preset": "Happening.milk",
+      "preset_sha256": "3de52c0ec9e113f409e39329836cfc5030d02cd60ca33512fd7d322866a509b5",
+      "rgb_hashes": [
+        "fe5d88c685d82addec7c338bccdddfc85e2facf65b5d8a172ec2886c4b684395",
+        "700cb6aa016ed707a68cc83def16b0e13007681fed4841e72fd2ebad9877fc8d",
+        "c0f2dfb1a1a1ffcf78a8a96cda865104a5e01019f9c1d2a7c920646fa0c26b34",
+        "96b71111244f2e8906a1e7abbc294c1ab444f2b59d239ac0e05e709815584878",
+        "473c5f9e580f7f0442d1d5ab0bbf0409490187859388d1cfea99da4b79ae9344",
+        "75dd91a58154224b50ec5fe8256c1b95424b34255b8cc75aa7078d21ac8397b4",
+        "4b34630840c94bbd388123654039e3ad78d75ec53ae9f24efb96a9a2f5f1d658",
+        "286d6a84f0668455975ec6f2363f8acefb524a681cb4db2c6a5a273180b51b04"
+      ]
+    },
+    "after": {
+      "preset": "Happening.milk",
+      "preset_sha256": "3de52c0ec9e113f409e39329836cfc5030d02cd60ca33512fd7d322866a509b5",
+      "rgb_hashes": [
+        "34b60b9ee1b6e707e68784229fd29ad212a8d4a1be73a2ef3f914a3811e62e05",
+        "491b7f0a04e1a359dd300781ac692366dc80844b2dd55ea877874a21384f7635",
+        "69d83a4a4d648baa75dc3f16f980aba4ed5d1d38c5ae2aa60e6aac525155ddc3",
+        "d9caa56dd982ea1368ed8abc4394be9408b1d8d6db8694fda49b61901b5d38b0",
+        "c82547d5109ea0cb23a0bdc29d6be792a6e51868f42d0f8794cad7dc34ec7edd",
+        "a7e11fd600c0d7f8bb77604bc4c6a41334dcb245e277aa251ed70b1b486daa7f",
+        "c7ca3156c4beb7362a2d259ecaa38a9895de54acc414c41f2119c1232b2f4518",
+        "2b856ac0f7d9f3d2a0016d196f79a626b026975c93e13fafc56d09624cf7d7d9"
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true,
+  "frame_metrics": [
+    {
+      "frame": 120,
+      "rgb_mae": 2.4242427420910495,
+      "before_rgb_mean": 177.98548177083333,
+      "after_rgb_mean": 175.56123902874228
+    },
+    {
+      "frame": 150,
+      "rgb_mae": 7.617815875771605,
+      "before_rgb_mean": 202.85083811567645,
+      "after_rgb_mean": 195.23302223990484
+    },
+    {
+      "frame": 180,
+      "rgb_mae": 11.33993782953961,
+      "before_rgb_mean": 245.27708072112912,
+      "after_rgb_mean": 233.9371428915895
+    },
+    {
+      "frame": 210,
+      "rgb_mae": 9.131968516911009,
+      "before_rgb_mean": 208.38779160236626,
+      "after_rgb_mean": 199.25582308545523
+    },
+    {
+      "frame": 239,
+      "rgb_mae": 12.19999569990998,
+      "before_rgb_mean": 229.84158866222995,
+      "after_rgb_mean": 217.64159296231995
+    },
+    {
+      "frame": 300,
+      "rgb_mae": 15.858208269032922,
+      "before_rgb_mean": 141.8159145929784,
+      "after_rgb_mean": 125.95770632394547
+    },
+    {
+      "frame": 390,
+      "rgb_mae": 18.633193721064814,
+      "before_rgb_mean": 167.52783307613169,
+      "after_rgb_mean": 148.8946393550669
+    },
+    {
+      "frame": 479,
+      "rgb_mae": 3.05698845003858,
+      "before_rgb_mean": 231.9878217029964,
+      "after_rgb_mean": 228.93083325295783
+    }
+  ],
+  "illustrated_frame": 390,
+  "all_selected_before_after_rgb_identical": false
+}

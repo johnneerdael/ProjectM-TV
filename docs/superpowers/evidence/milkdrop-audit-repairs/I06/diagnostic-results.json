@@ -1,0 +1,95 @@
+{
+  "diagnostic": "audit fresh wave time.milk",
+  "display": [
+    3840,
+    2160
+  ],
+  "reference_canvas": [
+    1280,
+    720
+  ],
+  "qualification": "Source-instrumented Native engine; private diagnostic APK; not Windows screenshot or shipping APK bytes.",
+  "roles": {
+    "before": {
+      "nonblack_pixels": 6148,
+      "red_x_mean": 829.5,
+      "red_x_min": 828,
+      "red_x_max": 831,
+      "captures": [
+        {
+          "frame": 120,
+          "rgb_sha256": "a9d5b365e45dcec63787e23ab9dcd7b8b8513f177c324d58a363f5fe73045f22"
+        },
+        {
+          "frame": 150,
+          "rgb_sha256": "a93e7941e61ac312ce20650853b70b7d253b176faed543f2f24e85d8f1152c82"
+        },
+        {
+          "frame": 180,
+          "rgb_sha256": "b871ce1455d83142c0486f9ae5e15da6d9a591b693f6cb18eff8474de5d2dd8b"
+        },
+        {
+          "frame": 210,
+          "rgb_sha256": "9eb0de2e635ffd4c981d1c2cbbe063b8d836952e73bea666fe6830229df101f4"
+        },
+        {
+          "frame": 239,
+          "rgb_sha256": "d1f79204b719466218154d2dda613da80964c04b19a29b4d7369f8a3d15776d0"
+        },
+        {
+          "frame": 300,
+          "rgb_sha256": "142408d53d0b529f834ab0721b373e0d64e404b8d129041d968843d55d63c5b5"
+        },
+        {
+          "frame": 390,
+          "rgb_sha256": "0585209ce80ff101f5685823c505db575418c6022d2e064b2f0d74d7b5e425b7"
+        },
+        {
+          "frame": 479,
+          "rgb_sha256": "c3c71236d7427df57af8593c8c40d133553f3124f05f1b56b54306e0e41b4bad"
+        }
+      ]
+    },
+    "after": {
+      "nonblack_pixels": 7685,
+      "red_x_mean": 1380.0,
+      "red_x_min": 1378,
+      "red_x_max": 1382,
+      "captures": [
+        {
+          "frame": 120,
+          "rgb_sha256": "14cb82367d8d4726655c3c286a3b2a847b9835b64aebc3f07005ffb7d27ec266"
+        },
+        {
+          "frame": 150,
+          "rgb_sha256": "bca63e8ca227e254440f9518ca124dd26279655c323a22a566cac005e73ae46d"
+        },
+        {
+          "frame": 180,
+          "rgb_sha256": "fa42450c5956f85ce20ce40ad40774a847a45aa31cd101df0e861715667ddebc"
+        },
+        {
+          "frame": 210,
+          "rgb_sha256": "ba0d1017c8c87d5aed5001c251ce9371b59402377b6bec216d4a362b47d0b51e"
+        },
+        {
+          "frame": 239,
+          "rgb_sha256": "c3561f1b95472c59523a89fbc0657f200b01e2170539c0a502f05fe78c3fc6d9"
+        },
+        {
+          "frame": 300,
+          "rgb_sha256": "0c0de3c6df140b75a68d7ffaff84a7de4fe1cc51e1fb9c757b8463cbe8519861"
+        },
+        {
+          "frame": 390,
+          "rgb_sha256": "075861ecaa88fe31fd8a94ee567ab965b87de4ec7303e395c60d9101362d2084"
+        },
+        {
+          "frame": 479,
+          "rgb_sha256": "546a5857f7028fcb45b2cfbdb751301f326ef026bddee6d830ebad5b1a4bf814"
+        }
+      ]
+    }
+  },
+  "selected_rgb_repeats_exact": true
+}

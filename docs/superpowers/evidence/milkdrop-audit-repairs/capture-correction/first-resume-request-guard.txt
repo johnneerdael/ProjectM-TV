@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/render_dot_remaining_final.py", line 33, in <module>
+    runner.verify(directory,request,preset_hash)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/tools/native-trails/run_validation.py", line 110, in verify
+    raise ValueError("Manifest is from another request")
+ValueError: Manifest is from another request
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['build/audit/venv/bin/python', 'build/audit/render_dot_remaining_final.py']' returned non-zero exit status 1.

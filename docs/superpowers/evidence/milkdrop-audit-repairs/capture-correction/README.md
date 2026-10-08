@@ -1,0 +1,13 @@
+# Final-output capture correction
+
+Native direct rendering restores GL_DRAW_FRAMEBUFFER0 but may leave an internal feedback target bound to GL_READ_FRAMEBUFFER. GL_FRAMEBUFFER_BINDING queries the draw binding. The old worker checked that value and then glReadPixels read the internal target. Historical audit screenshots therefore describe intermediate feedback/geometry and cannot certify final composite appearance. Preserve them and their original helper identities; do not relabel them.
+
+The corrected worker binds GL_READ_FRAMEBUFFER0 only for capture, records the prior and capture bindings, and restores the previous read binding. The host verifier rejects missing or nonzero capture bindings even when PNG/RGB checksums are valid. The two guard controls fail against the old verifier. Existing summary fixtures initially lacked the new field, then were updated to the same explicit final-output contract; their temporary failures are preserved separately.
+
+A causal4K test uses echo alpha1, zoom1 and signed orientation−1 with one finite orange square. The old capture path reports the same left-hand geometry before/after; the corrected path captures the candidate's expected right-hand final square. Four480-frame corrected runs repeat all eight RGB captures exactly, while recording nonzero prior read bindings and zero capture bindings. See [I29 final proof](../I29/final-results.json).
+
+Fresh worker APKs were rebuilt from each previously frozen source-bound worker, preserving native AAR and all stock asset bytes. Only the Java capture function, additive manifest fields and isolated package identity changed. Every replay installs the selected worker per row and verifies installed base.apk SHA256. Source tests and prior serialized onDrawFrame+glFinish timings remain separate evidence; fresh capture batches may overlap host analysis/build work and are not new clean performance qualification.
+
+All32 focused unchanged-original replays completed: I17, I08, I22(mosaic/starfield), I31, I05, I06 and deferred I19. All selected RGB repeats are exact; final-output images and manifests are recorded under each issue. All finite diagnostic and I19 matched-resolution replays also completed with exact selected RGB repeats. The dot pipeline stopped on host disk exhaustion, then resumed only missing work after deleting54 reproducible build-output directories and rechecking72 frozen artifact hashes. This is bug-specific validation, not a complete preset matrix or physical-TV performance claim.
+
+[Guard RED](guard-red.txt) · [Guard GREEN57 tests/20 subtests](guard-green.txt) · [Temporary summary-fixture failures](guard-before-fixture-update.txt).

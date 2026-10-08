@@ -292,5 +292,5 @@ remains pending in the per-ID audit evidence.
 
 Restore nonzero signed remainder for horizontal echo flip, preserving
 all other orientation/output policies. Independent known-edge GL control
-fails before and passes after;46 normal controls pass.4K diagnostic
+fails before and passes after;46 normal controls pass after correcting the fractional negative-orientation test input.4K diagnostic
 qualification remains pending in I29 evidence.
