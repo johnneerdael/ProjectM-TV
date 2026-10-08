@@ -20,8 +20,11 @@ for name in CASES:
  for path,digest in freeze['sha256'].items():assert sha(case/path)==digest,(name,path)
  assert freeze['context']==DEP
 for path,digest in DEP['sha256'].items():assert adb('shell','sha256sum',REMOTE+'/'+path).stdout.decode().split()[0]==digest
-rows=[]
+report_path=ROOT/'qualification-report.json'
+rows=json.loads(report_path.read_text())['rows'] if report_path.exists() else []
 for name in CASES:
+ if any(row['case']==name and row['passed'] for row in rows):
+  print(name,'already captured; preserving saved results',flush=True);continue
  case=ROOT/name;freeze=json.loads((case/'freeze.json').read_text());predictions=json.loads((case/'frames.json').read_text())
  output=case/'native';output.mkdir()
  prefix=REMOTE+'/detail-'+uuid.uuid4().hex;work=prefix+'-work'
@@ -37,6 +40,7 @@ for name in CASES:
  frames=[];unique={};maximum=0;total_error=0;total_channels=0
  try:
   header=read_header(process.stdout,expected_frames=30,width=3840,height=2160)
+  (output/'stream-header.json').write_text(json.dumps(header,indent=2)+'\n')
   for index,pixels in enumerate(read_frames(process.stdout,expected_frames=30,width=3840,height=2160,header=header)):
    expected=np.load(case/predictions[index]['file'])['pixels']
    delta=np.abs(pixels.astype(np.int16)-expected.astype(np.int16))
@@ -50,7 +54,8 @@ for name in CASES:
  finally:
   watchdog.cancel()
   if process.poll() is None:process.kill();process.wait(timeout=10)
- for suffix,file in [('.json','metadata.json'),('.random.jsonl','random.jsonl'),('.log','native.log'),('.java.log','java.log')]:
+ (output/'frames.json').write_text(json.dumps(frames,indent=2)+'\n')
+ for suffix,file in [('.json','metadata.json'),('.log','native.log'),('.java.log','java.log')]:
   adb('pull',prefix+suffix,str(output/file))
  metadata=json.loads((output/'metadata.json').read_text())
  assert metadata['frames']==metadata['rendered_frame_serial_delta']==30
@@ -59,7 +64,6 @@ for name in CASES:
  assert metadata['gl_viewport_after_last_draw']==[0,0,3840,2160]
  assert '1280×720 canvas' in metadata['native_trails_status'],metadata
  assert metadata['requested_trails']==freeze['trails']
- (output/'frames.json').write_text(json.dumps(frames,indent=2)+'\n')
  row=dict(case=name,header=header,metadata=metadata,max_rgb8_error=maximum,
   mean_rgb8_error=total_error/total_channels,passed=maximum<=freeze['tolerance']['maximum_rgb8_error'])
  rows.append(row)

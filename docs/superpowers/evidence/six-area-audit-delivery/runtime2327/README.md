@@ -22,7 +22,14 @@ A changed owner or helper/context requires a new declared deployment; never edit
 an existing freeze to fit a new context. Ordinary source tests alone do not
 certify native appearance. These controls earn zero random-preset streak credit.
 
-At this checkpoint source generation remains live and native capture has not
-started. U01 remains open. The public-JNI helper supports P=N4K; forcing
+All three source predictions were frozen before capture. The published AAR
+passes all 90 numerical frames: Standard maximum RGB8 error0; Medium/High error1.
+The Standard artifact gatherer stopped after successfully reading all frames
+because the clock-only helper produces no shader-random log. Its saved unique
+field and metadata were recovered without re-rendering; that limitation is
+recorded in `qualification-checkpoint.json`. The corrected gatherer persists
+frame/header records before pulling mandatory logs and resumes completed cases.
+These controls contain no authored random references, and no random-input
+certification is claimed. U01 remains open for blit and feedback/geometry checks. The public-JNI helper supports P=N4K; forcing
 N1920/P4K is unavailable, so scaled physical-blit source tests remain separate
 from an actual core-transition witness.

@@ -1,0 +1,218 @@
+{
+  "deployment": {
+    "remote": "/data/local/tmp/projectmtv-2327-predictor-20261008/configurable",
+    "sha256": {
+      "published-core.aar": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+      "libprojectmtv.so": "5fc881b3b74756dc9597a4ba8ce6850ed1318880eca985888a85d9495c5b1218",
+      "classes.dex": "2b944b49785333d8153dff4f4cefd5fd1e58826d32c115e96dd9101d338bc52a",
+      "libbackendclock.so": "d34bf522deb53c8fcb28f4e1a3e5b0404521c6e38f8eb283f024eff3381cf355",
+      "transport30.f32": "0640617ef6dcdf81f9af180ebb827c88ae8d570ec0abc96bf6f52f00bcab488c",
+      "config-4k-trails0.json": "a699e6d1f2fb0daec79547124b86162e7affb197db3881f688ea04c92c7bc518",
+      "config-4k-trails1.json": "007d87c9b5a53ca857a580fbb0c0efc83a96c851013afd4fb6b205fe9ceab224",
+      "config-4k-trails2.json": "ef7f3f35297cb7359eee41f639e6dca9ab2fd4c4cd595119799975119ced0df9"
+    },
+    "owner": {
+      "serial": "emulator-5596",
+      "pid": 24651,
+      "avd": "projectmtv-predictor-visual-loop-api34"
+    },
+    "java_binding": {
+      "policy": "published-aar-reproduced-dex-v1",
+      "classes_jar_sha256": "99d25e90a0f74b51a00ce32965198d92bf560e9f8f33b16813ca06489e5ac7a7",
+      "aar_sha256": "17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325",
+      "dex_sha256": "2b944b49785333d8153dff4f4cefd5fd1e58826d32c115e96dd9101d338bc52a",
+      "reconstructed_dex_sha256": "2b944b49785333d8153dff4f4cefd5fd1e58826d32c115e96dd9101d338bc52a",
+      "d8_jar_sha256": "e0c2803fbf9a1258051c3202daad46a2e00f33a0eb91258ac9fd373df0a832ce",
+      "android_jar_sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+      "helper_classes_sha256": {
+        "helper-classes/nl/neerdael/projectm/analysis/CoreBackendRunner.class": "a7a90e31531ef1d631f021f04b1036091bc39dc0a7e6487e08e11af5c9a12409"
+      },
+      "min_api": 21,
+      "proof_sha256": "c1af3deaaf9166da931eed348d469541d665bc8cb6c2f7daabfabd39fad6a35f"
+    },
+    "remote_hashes_verified": true,
+    "no_captures_run": true,
+    "helper_freeze_sha256": "6972ed3ecbf303b29b3bae7c57ca512f6a2dda311282e669cff2cce369302ede"
+  },
+  "controls": [
+    {
+      "case": "canvas-standard-4k",
+      "maximum_rgb8_error": 0,
+      "mean_rgb8_error": 0,
+      "passed": true,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "canvas-standard-4k.milk",
+        "frames": 30,
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Standard \u00b7 inactive (render 0p)",
+        "native_trails_status": "Standard \u00b7 1280\u00d7720 canvas",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "explicit released JNI level; surface gate and integer authored canvas unchanged",
+        "requested_trails": 0,
+        "physical_surface_width": 3840,
+        "physical_surface_height": 2160,
+        "gl_viewport_after_last_draw": [
+          0,
+          0,
+          3840,
+          2160
+        ],
+        "render_extent_basis": "Classic single-preset host: expected N=P; final GL viewport observed; public JNI has no independent internal-size getter",
+        "requested_configuration": {
+          "width": 3840,
+          "height": 2160,
+          "trails": 0
+        },
+        "qualification_scope": "Private configurable public-JNI helper; no forced native/surface split or preset score credit",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "prediction_freeze_sha256": "62fdbd7b835034125ecdcaa05fe936f2626fc89746da3d95a99862df6ff3ec37",
+      "native_frame_records_sha256": "f655e6798f27721c33a0b88ffd7d6e26ada0faf66ed79d0bf3e6846bbb2b74e2",
+      "native_field_files": {
+        "native-dad529b9db97b298606038443e857e29743b962f021cef18e48c1beb74690db8.npz": "85fbeae006de2bc1aac2438a81802426b60a5fa16123cd33db5e89e0fef9f844"
+      },
+      "recovery": {
+        "cause": "capture artifact gatherer assumed random log produced by a clock-only helper",
+        "native_control_rerun": false,
+        "source_or_native_library_changed": false,
+        "frame_records_recovered": 30,
+        "basis": "completed 30-packet reader before artifact pull failure, mandatory native metadata confirms 30 rendered frames, every distinct captured SHA saved immediately and exactly one saved pixel field matches every frozen predicted frame",
+        "stream_header_pid": "not retained by failed gatherer",
+        "random_trace": "not produced by this clock helper; authored control contains no rand references",
+        "remote_prefix": "/data/local/tmp/projectmtv-2327-predictor-20261008/configurable/detail-e35a8f6deee74a98935d088eaa892305"
+      }
+    },
+    {
+      "case": "grating-medium-4k",
+      "maximum_rgb8_error": 1,
+      "mean_rgb8_error": 0.05474733957047325,
+      "passed": true,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "grating-medium-4k.milk",
+        "frames": 30,
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "Medium \u00b7 inactive (render 0p)",
+        "native_trails_status": "Medium \u00b7 1280\u00d7720 canvas",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "explicit released JNI level; surface gate and integer authored canvas unchanged",
+        "requested_trails": 1,
+        "physical_surface_width": 3840,
+        "physical_surface_height": 2160,
+        "gl_viewport_after_last_draw": [
+          0,
+          0,
+          3840,
+          2160
+        ],
+        "render_extent_basis": "Classic single-preset host: expected N=P; final GL viewport observed; public JNI has no independent internal-size getter",
+        "requested_configuration": {
+          "width": 3840,
+          "height": 2160,
+          "trails": 1
+        },
+        "qualification_scope": "Private configurable public-JNI helper; no forced native/surface split or preset score credit",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "prediction_freeze_sha256": "f9dcab07c54c2d7bdabd1a592fc4dddcc4706d4893f3543b3208d4e6cbfb8424",
+      "native_frame_records_sha256": "bc1890d307f455633d14496a4bff149ae6e50ac1596cbcf57aded11af2e24feb",
+      "native_field_files": {
+        "native-9ed9bed98133c06a3795e3071b9578db4dd2241a5a30594e0f966955558eb899.npz": "ad925bc659edec6dc3a9fb6fbabab2ae4298b324aecc1fcf481fdc342dae4af2"
+      },
+      "recovery": null
+    },
+    {
+      "case": "grating-high-4k",
+      "maximum_rgb8_error": 1,
+      "mean_rgb8_error": 0.033667695473251026,
+      "passed": true,
+      "metadata": {
+        "backend": "published-core-jni",
+        "core_version": "4.2.0",
+        "preset": "grating-high-4k.milk",
+        "frames": 30,
+        "width": 3840,
+        "height": 2160,
+        "fps": 30,
+        "renderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+        "simulated_clock": true,
+        "gl_version": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+        "gl_vendor": "Google (Apple)",
+        "egl_version_major": 1,
+        "egl_version_minor": 0,
+        "mesh_width": 48,
+        "mesh_height": 32,
+        "pcm_sample_rate": 44100,
+        "pcm_channels": 1,
+        "native_trails_initial_status": "High \u00b7 inactive (render 0p)",
+        "native_trails_status": "High \u00b7 1280\u00d7720 canvas",
+        "rendered_frame_serial_initial": 0,
+        "rendered_frame_serial": 30,
+        "rendered_frame_serial_delta": 30,
+        "native_trails_policy": "explicit released JNI level; surface gate and integer authored canvas unchanged",
+        "requested_trails": 2,
+        "physical_surface_width": 3840,
+        "physical_surface_height": 2160,
+        "gl_viewport_after_last_draw": [
+          0,
+          0,
+          3840,
+          2160
+        ],
+        "render_extent_basis": "Classic single-preset host: expected N=P; final GL viewport observed; public JNI has no independent internal-size getter",
+        "requested_configuration": {
+          "width": 3840,
+          "height": 2160,
+          "trails": 2
+        },
+        "qualification_scope": "Private configurable public-JNI helper; no forced native/surface split or preset score credit",
+        "skipped_count": 0,
+        "indexed_count": 1
+      },
+      "prediction_freeze_sha256": "9a57078926881341363aeb21557523dd0199efc7add06c98412067fc02b8a1bb",
+      "native_frame_records_sha256": "691d7779dc4f9e3ff14d650d3d77931a4eec25e901a667d8ff10a9cec1f781ce",
+      "native_field_files": {
+        "native-b499b9a2723d587b4ff1a3eff2e378f5d14c7948420bd3bb0253ab4730ee1f9e.npz": "f393854904691b40ea3f22be5a55a688545a71df79b7f7b35297f499148898dd"
+      },
+      "recovery": null
+    }
+  ],
+  "remaining": [
+    "physical blit numerical operator",
+    "feedback plus prepared geometry replay control"
+  ],
+  "U01_resolved": false
+}
