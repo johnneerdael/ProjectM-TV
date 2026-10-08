@@ -425,6 +425,69 @@ static void DeformationControls(TextureManager& textures)
     std::cout << "legacy/custom/fallback deformation and prepared replay controls pass\n";
 }
 
+static void DiagonalControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    Control control(textures, false, false);
+    *control.frame.zoom = *control.frame.zoomexp = 1;
+    *control.frame.sx = *control.frame.sy = 1;
+    *control.frame.rot = *control.frame.warp = 0;
+    control.state.renderContext.texelOffsetX = control.state.renderContext.texelOffsetY = 0;
+    // At the first cell only D has displacement1; A/B/C have0. The current
+    // unflipped grid coordinates are transformed by the physical Y projection.
+    control.pixel.CompilePerPixelCode("dx=-above(x,.12499)*above(y,.16665);");
+    for (int path : {0, 1, 2, 0}) // Change compiled path without changing dimensions.
+    {
+        control.state.warpShaderVersion = path == 0 ? 0 : 2;
+        control.state.warpShader = path == 1
+            ? "shader_body { ret=float3(uv.x,uv.y,0.25); }"
+            : path == 2 ? "shader_body { ret=missing_function_that_must_fail(uv); }" : "";
+        control.mesh.LoadWarpShader(control.state);
+        control.mesh.CompileWarpShader(control.state);
+        control.pixel.LoadStateReadOnlyVariables(control.state, control.frame);
+        control.pixel.LoadPerFrameQVariables(control.state, control.frame);
+        glBindFramebuffer(GL_FRAMEBUFFER, control.framebuffer);
+        control.mesh.Prepare(control.state, control.frame, control.pixel);
+        control.mesh.DrawAgain(control.state, control.frame);
+        const bool legacy = path != 1;
+        const auto pixels = Read();
+        // Cell width/height8 pixels. At raw local(.3125,.3125), legacy AD
+        // diagonal contributes .3125; custom BC contributes0. Base u=.0390625.
+        const int expectedRed = legacy ? 90 : 10;
+        Check(std::abs(int(pixels[(45*Width+2)*4]) - expectedRed) <= 1,
+              "path="+std::to_string(path)+" wrong known corner-field interpolation");
+        Check(std::abs(int(pixels[(45*Width+2)*4+2]) - (legacy ? 191 : 64)) <= 1,
+              "diagonal test did not use requested compiled/fallback path");
+        Check(deformationIndices.size() == 8*6*6, "changed triangle/index count");
+        for (size_t i = 0; i < deformationIndices.size(); i += 6)
+        {
+            const auto a=deformationIndices[i], b=a+1, c=a+9, d=a+10;
+            const std::array<uint32_t,6> expected = legacy
+                ? std::array<uint32_t,6>{a,b,d,a,c,d}
+                : std::array<uint32_t,6>{a,b,c,b,c,d};
+            Check(std::equal(expected.begin(), expected.end(), deformationIndices.begin()+i),
+                  "wrong cell diagonal/winding/quadrant index layout");
+        }
+        const auto first = deformationIndices;
+        control.mesh.DrawAgain(control.state, control.frame);
+        Check(deformationIndices == first, "prepared replay changed topology");
+    }
+    // Affine inputs cannot expose a diagonal: sample the unchanged u/v field.
+    projectm_eval_code_destroy(control.pixel.perPixelCodeHandle);
+    control.pixel.perPixelCodeHandle = nullptr;
+    *control.frame.dx = 0;
+    for (bool custom : {false,true})
+    {
+        control.state.warpShaderVersion = custom ? 2 : 0;
+        control.state.warpShader = custom ? "shader_body { ret=float3(uv.x,uv.y,0.25); }" : "";
+        control.mesh.LoadWarpShader(control.state); control.mesh.CompileWarpShader(control.state);
+        control.mesh.Draw(control.state, control.frame, control.pixel);
+        const auto pixels=Read();
+        Check(std::abs(int(pixels[(45*Width+2)*4])-10)<=1, "diagonal changed affine UV interpolation");
+    }
+    std::cout << "legacy/custom/fallback diagonals, live path changes and affine/replay controls pass\n";
+}
+
 int main(int argc, char** argv)
 {
     try
@@ -432,6 +495,7 @@ int main(int argc, char** argv)
         GLContext gl;
         TextureManager textures(std::vector<std::string>{});
         if (argc > 1 && std::string(argv[1]) == "deformation") { DeformationControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "diagonal") { DiagonalControls(textures); return 0; }
         PowerUploadControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';
         for (bool preparedReplay : {false, true})

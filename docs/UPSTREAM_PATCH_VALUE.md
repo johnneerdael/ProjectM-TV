@@ -298,3 +298,7 @@ qualification remains pending in I29 evidence.
 ## Legacy physical oscillator Y (candidate0023)
 
 Select a compile-time original-source Y-sign variant for the actual legacy/default warp program only. Custom warp retains its existing preprocessed formula; failed compilation falls back to legacy. Same four oscillator calls and arithmetic/pass counts; preserve geometry/equation/CPU-trig/negative-power/replay policies. Production vertex capture controls reproduce baseline failure and47 normal controls pass after. Native4K original/finite/cost validation remains pending. See [I10 evidence](superpowers/evidence/milkdrop-audit-repairs/I10/README.md).
+
+## Legacy physical mesh diagonal (candidate0024)
+
+Select AD for the actual default/fallback warp path and retain custom BC. Reuse the existing index buffer and preserve vertices/counts/winding/quadrant/replay contracts. Real production corner-field and index controls fail before and48 normal controls pass after; Native4K original/finite/cost qualification remains pending. See [I11](superpowers/evidence/milkdrop-audit-repairs/I11/README.md).

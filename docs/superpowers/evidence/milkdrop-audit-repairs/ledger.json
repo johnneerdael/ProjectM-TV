@@ -141,10 +141,15 @@
       "sha256": "259f01f9d09fdc0f4656c7db73b7cbbcecaff66be31f9fdb5abe0e2b76884415",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I11-legacy-warp-physical-triangle-diagonal-is-reversed/HANDOFF.md",
       "numeric_witness": "Common screen-cell corners A=B=C=0,D=1 at local(.25,.25): target interpolation0; original legacy triangle interpolation.25. Affine fields unaffected.\n\nLegacy/no-custom-warp physical mapping only; no extension to missing original custom VS.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "candidate0024 implemented; known production corner-field RED\u2192GREEN and48 normal controls pass; Native4K/cost/integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
-      "recommendation": "legacy-only physical diagonal correction; custom topology unchanged"
+      "recommendation": "legacy-only physical diagonal correction; custom topology unchanged",
+      "evidence": "I11/README.md",
+      "original_candidate": {
+        "name": "07.milk",
+        "sha256": "ec440dc5d1409388d8b55c17e683bbe8e1cd5effac1060faefdb71e222ad7849"
+      }
     },
     {
       "id": "I12",
