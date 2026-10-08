@@ -286,7 +286,7 @@ static void Feedback(TextureManager& textures, bool perPixel, bool preparedRepla
 static PFNGLLINKPROGRAMPROC deformationLink{};
 static PFNGLDRAWELEMENTSPROC deformationDraw{};
 static GLuint deformationBuffer{};
-static std::vector<float> deformationUV, deformationPositions, deformationRadiusAngles;
+static std::vector<float> deformationUV, deformationPositions, deformationRadiusAngles, traversalDistances, traversalStretch;
 static std::vector<uint32_t> deformationIndices;
 static void LinkDeformation(GLuint program)
 {
@@ -320,6 +320,8 @@ static void DrawDeformation(GLenum mode, GLsizei count, GLenum type, const void*
           "unexpected warp index draw contract");
     deformationPositions = AttributeData(0);
     deformationRadiusAngles = AttributeData(3);
+    traversalDistances = AttributeData(6);
+    traversalStretch = AttributeData(7);
     deformationIndices.resize(count);
     const auto* indices = static_cast<const uint32_t*>(glMapBufferRange(
         GL_ELEMENT_ARRAY_BUFFER, 0, count * sizeof(uint32_t), GL_MAP_READ_BIT));
@@ -560,6 +562,63 @@ static void MeshCacheControls(TextureManager& textures)
     std::cout << "mesh cache: reused mesh matches fresh mesh across viewport and grid changes\n";
 }
 
+static void TraversalControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    for (int path : {0,1,2})
+    for (bool replay : {false,true})
+    {
+        Control c(textures,path==1,false);
+        c.state.renderContext.perPixelMeshX=c.state.renderContext.perPixelMeshY=8;
+        *c.frame.zoom=*c.frame.zoomexp=*c.frame.sx=*c.frame.sy=1;
+        *c.frame.rot=*c.frame.warp=0;
+        if (path==2)
+        {
+            c.state.warpShaderVersion=2;c.state.warpShader="shader_body { ret=missing_function_that_must_fail(uv); }";
+            c.mesh.LoadWarpShader(c.state);c.mesh.CompileWarpShader(c.state);
+        }
+        c.pixel.CompilePerPixelCode("q1=q1+1;ordinary=ordinary+1;reg00=reg00+1;gmegabuf(0)=gmegabuf(0)+1;dx=q1*.001;dy=ordinary*.001;sx=1+reg00*.001;sy=1+gmegabuf(0)*.001;");
+        Check(c.pixel.perPixelCodeHandle,"traversal equations failed to compile");
+        for (int frame=0;frame<2;++frame)
+        {
+            *c.frame.q_vars[0]=0; // One original per-frame copy, not per-node.
+            c.pixel.LoadStateReadOnlyVariables(c.state,c.frame);c.pixel.LoadPerFrameQVariables(c.state,c.frame);
+            glBindFramebuffer(GL_FRAMEBUFFER,c.framebuffer);
+            if (replay) { c.mesh.Prepare(c.state,c.frame,c.pixel);c.mesh.DrawAgain(c.state,c.frame); }
+            else c.mesh.Draw(c.state,c.frame,c.pixel);
+            Check(traversalDistances.size()==162 && traversalStretch.size()==162,"wrong traversal node count");
+            for (int y=0;y<=8;++y) for (int x=0;x<=8;++x)
+            {
+                const int vertex=y*9+x;
+                const int ordinal=(path==1?y:8-y)*9+x+1;
+                const float continuing=frame*81+ordinal;
+                const std::string label="path="+std::to_string(path)+" node="+std::to_string(vertex)+" frame="+std::to_string(frame);
+                Check(std::abs(traversalDistances[vertex*2]-ordinal*.001f)<1e-6f,label+" wrong carried Q placement");
+                Check(std::abs(traversalDistances[vertex*2+1]-continuing*.001f)<1e-6f,label+" ordinary local reset/reordered");
+                Check(std::abs(traversalStretch[vertex*2]-(1+continuing*.001f))<1e-6f,label+" register recurrence reset/reordered");
+                Check(std::abs(traversalStretch[vertex*2+1]-(1+continuing*.001f))<1e-6f,label+" global buffer recurrence reset/reordered");
+            }
+            Check(c.state.globalRegisters[0]==(frame+1)*81,"wrong evaluator call count");
+            if (replay)
+            {
+                const auto old=traversalDistances;const auto calls=c.state.globalRegisters[0];
+                c.mesh.DrawAgain(c.state,c.frame);
+                Check(traversalDistances==old && c.state.globalRegisters[0]==calls,"traversal replay reevaluated state");
+            }
+        }
+        projectm_eval_code_destroy(c.pixel.perPixelCodeHandle);c.pixel.perPixelCodeHandle=nullptr;
+        c.pixel.CompilePerPixelCode("dx=x*.001;dy=y*.001;");
+        c.mesh.Draw(c.state,c.frame,c.pixel);
+        for(int y=0;y<=8;++y) for(int x=0;x<=8;++x)
+        {
+            const int v=y*9+x;
+            Check(std::abs(traversalDistances[v*2]-x/8.f*.001f)<1e-6f &&
+                  std::abs(traversalDistances[v*2+1]-y/8.f*.001f)<1e-6f,"stateless per-node geometry changed");
+        }
+    }
+    std::cout<<"legacy/custom/fallback carried Q/local/reg/global-buffer traversal and stateless/replay controls pass\n";
+}
+
 int main(int argc, char** argv)
 {
     try
@@ -569,6 +628,7 @@ int main(int argc, char** argv)
         if (argc > 1 && std::string(argv[1]) == "deformation") { DeformationControls(textures); return 0; }
         if (argc > 1 && std::string(argv[1]) == "diagonal") { DiagonalControls(textures); return 0; }
         if (argc > 1 && std::string(argv[1]) == "cache") { CacheControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "traversal") { TraversalControls(textures); return 0; }
         PowerUploadControls(textures);
         MeshCacheControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';

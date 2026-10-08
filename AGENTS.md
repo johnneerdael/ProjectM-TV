@@ -544,3 +544,5 @@ was not run on macOS. These checks do not turn the frozen images into16-patch
 GPU certification.
 
 Latest audit integration (2026-10-08): synchronize main af164a97 including released0016-cache-mesh-init-per-viewport, retaining its static upload policy and FinalComposite cache. Audit patches renumber to0017–0025;0025 only extends static key with aspect/compiled path and selects the legacy diagonal. Frozen source/artifact/PNG evidence still uses historical numbers and is not relabeled. Source, Native and final PR gates must be checked on this integrated head.
+
+I12 candidate0026 (2026-10-08): actual legacy programs traverse physical bottom-to-top/X ascending, writing original slots; compiled custom and no-equation order unchanged. Preserve one per-frame Q copy, carried ordinary/reg/global-buffer/RNG effects, same-node inputs, CPU trig/negative power, released static uploads and replay. Production node-placement/two-frame/stateless/custom/fallback/replay RED→GREEN;50 normal controls and26-patch application pass. Native original/finite/cost and integration pending. See [I12](docs/superpowers/evidence/milkdrop-audit-repairs/I12/README.md).

@@ -183,10 +183,16 @@
       "sha256": "03ba1a7c8b0c49d248aad720fac545c3dcee41d3ebd4147f2f6c4bc92e895339",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I12-stateful-per-pixel-equations-traverse-opposite-physical-rows/HANDOFF.md",
       "numeric_witness": "8x8 mesh,q1 initially0,q1+=1;dx=q1*.001: physical top-left original legacy q1=73/dx.073; target q1=1/dx.001. Q is copied once per frame, not every vertex.\n\nLegacy physical mapping only; pure stateless equations unaffected.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "candidate0026 implemented; actual Q/local/reg/global-buffer traversal RED\u2192GREEN;50 normal controls; Native4K/cost/integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
-      "recommendation": "legacy-only evaluation row order; preserve one execution and raw state"
+      "recommendation": "legacy-only evaluation row order; preserve one execution and raw state",
+      "current_patch_number": 26,
+      "evidence": "I12/README.md",
+      "original_candidate": {
+        "name": "shifter - neon pulse.milk",
+        "sha256": "605d80e5c1480be3fd21ef57cbd2780cbff192f06be5b6a4268ddf2d80aafcf2"
+      }
     },
     {
       "id": "I14",

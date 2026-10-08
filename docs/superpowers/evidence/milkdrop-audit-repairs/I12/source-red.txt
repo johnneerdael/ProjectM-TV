@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 6: legacy-pixel-traversal
+1/1 Test #6: legacy-pixel-traversal ...........***Failed    0.36 sec
+path=0 node=0 frame=0 wrong carried Q placement
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.37 sec
+
+The following tests FAILED:
+	  6 - legacy-pixel-traversal (Failed)
+Errors while running CTest
