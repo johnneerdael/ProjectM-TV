@@ -79,9 +79,15 @@
       "sha256": "991d9a29a9eae94bf006606edf204f3c77d7b5132dca9b6e2adddccbc96afe9f",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I08-custom-oscilloscope-windows-are-not-centered-or-channel-separated/HANDOFF.md",
       "numeric_witness": "480-sample ramp v[k]=k/480, samples2,sep0,smoothing0, unit scales: original first value1=(239/480)*.004=.0019916667; library/predictor0. With samples4,sep2 original starts237/239; target starts0/0.",
-      "status": "candidate patch0017 valid centered windows; source regression passed; Native 4K pending",
-      "confirmed_affected_originals": [],
-      "evidence": "I08/README.md"
+      "status": "implemented patch0017; focused Native4K acceptance passed; final integration pending",
+      "confirmed_affected_originals": [
+        {
+          "name": "Mig_304 - geiss remix 2.milk",
+          "sha256": "7ce8638f68118846bf4a4ed71f96c24a5e030767fb3f4511885dffe45e556e96"
+        }
+      ],
+      "evidence": "I08/README.md",
+      "native_4k_evidence": "I08/results.json"
     },
     {
       "id": "I22",
@@ -91,8 +97,9 @@
       "sha256": "346dfa27d9195f08f6cc30668100f86bcb18142a1856a35471c4f17006973147",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I22-custom-dot-waves-gain-interpolated-points/HANDOFF.md",
       "numeric_witness": "Two points(.25,.5),(.75,.5): original custom dots draw2; target smooths and draws3 including(.5,.5). Target samples1 is suppressed; original permits1 if the point program overwrites finite position/colour and never consumes the nonfinite sample input.\n\nStrong witness is the finite two-point case. Single-sample boundary remains conditional; no undefined sample is credited.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "candidate patch0018 discrete dots and defined single-dot outputs; source controls passed; Native4K pending",
+      "confirmed_affected_originals": [],
+      "evidence": "I22/README.md"
     },
     {
       "id": "I10",
@@ -102,8 +109,10 @@
       "sha256": "183f4f571da4edccc7c5b2e558ce0b2906e99a91ae20a620be030e85ff3f7e80",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I10-legacy-warp-deformation-sees-the-opposite-physical-y-argument/HANDOFF.md",
       "numeric_witness": "Matched physical normalized(.6,.7), unit aspect/zoom, time/rot0,warp1: target formula approximately(.6032275,.7047434); original legacy formula(.6032086,.6974467), before texel alignment.\n\nNARROWED: legacy/no-custom-warp path only. Original custom-warp VS is absent; mapping there is uncertain. warp0 unaffected.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/warp-motion.md",
+      "recommendation": "legacy-only physical oscillator Y correction; custom path unchanged"
     },
     {
       "id": "I11",
@@ -113,8 +122,10 @@
       "sha256": "259f01f9d09fdc0f4656c7db73b7cbbcecaff66be31f9fdb5abe0e2b76884415",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I11-legacy-warp-physical-triangle-diagonal-is-reversed/HANDOFF.md",
       "numeric_witness": "Common screen-cell corners A=B=C=0,D=1 at local(.25,.25): target interpolation0; original legacy triangle interpolation.25. Affine fields unaffected.\n\nLegacy/no-custom-warp physical mapping only; no extension to missing original custom VS.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/warp-motion.md",
+      "recommendation": "legacy-only physical diagonal correction; custom topology unchanged"
     },
     {
       "id": "I12",
@@ -124,8 +135,10 @@
       "sha256": "03ba1a7c8b0c49d248aad720fac545c3dcee41d3ebd4147f2f6c4bc92e895339",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I12-stateful-per-pixel-equations-traverse-opposite-physical-rows/HANDOFF.md",
       "numeric_witness": "8x8 mesh,q1 initially0,q1+=1;dx=q1*.001: physical top-left original legacy q1=73/dx.073; target q1=1/dx.001. Q is copied once per frame, not every vertex.\n\nLegacy physical mapping only; pure stateless equations unaffected.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/warp-motion.md",
+      "recommendation": "legacy-only evaluation row order; preserve one execution and raw state"
     },
     {
       "id": "I14",
@@ -135,8 +148,10 @@
       "sha256": "409a27bbf5eb1e4c98127de59d7ac07e74793969e8e8ab413c4d2533670ce578",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I14-motion-reverse-propagation-uses-different-interpolation-and-storage/HANDOFF.md",
       "numeric_witness": "A=B=C=(0,0),D=(1,1), local(.25,.25): original CPU bilinear(.0625,.0625); target first-triangle field(0,0) away from diagonal/filter boundaries. Target RTZ half maps float32.173 to.1729736328125; original mesh has no half-storage boundary.\n\nIdealized interpolation witness; finite-resolution/filter effects remain explicit.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/warp-motion.md",
+      "recommendation": "defer/research original bilinear node/float32 motion producer and costs"
     },
     {
       "id": "I05",
@@ -146,8 +161,10 @@
       "sha256": "2e21b780ffb8dd3e17b2c04a3d5a0780e5ab6ad95fed0b24d25a341c3509bfcb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I05-per-pixel-aspect-inputs-use-factors-instead-of-inverse-factors/HANDOFF.md",
       "numeric_witness": "16:9 aspecty: library/predictor.5625; original1.7777778. dx=aspecty/10 gives.05625 vs.17777778. Main-frame aspect inputs agree.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/warp-motion.md",
+      "recommendation": "inverse per-pixel aspect assignments; square/unaffected tests"
     },
     {
       "id": "I16",
@@ -157,8 +174,10 @@
       "sha256": "83d1846370061e2c983a0a32e6e7baafb555e79aa435552010877d0bbd5750e4",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I16-disabling-motion-vectors-leaves-a-stale-target-uv-map/HANDOFF.md",
       "numeric_witness": "Valid previous map A=(.5,.5); disabled frame computes B=(.6,.5); re-enable at start(.5,.5): target reads A/minimum fallback; original reads latest B/.1 horizontal displacement.\n\nExcludes startup/uninitialized maps; requires a previously valid stored map.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/warp-motion.md",
+      "recommendation": "research cached prior-mesh UV-only re-enable replay; continuous writes cost bandwidth"
     },
     {
       "id": "I06",
@@ -212,8 +231,10 @@
       "sha256": "c93eaabefddd9d689db167dfd5ae00f5240cd389d4c69647e0ff6f50ddfbd98d",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I13-left-axis-equation-angle-seam-changes-sign/HANDOFF.md",
       "numeric_witness": "Exact left-middle axis: original atan2(+0,negative)=+pi; target negated angle=-pi. dx=above(ang,0) gives1 vs0. Periodic sin/cos unaffected.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/warp-motion.md",
+      "recommendation": "narrow exact-left-axis positive-pi seam"
     },
     {
       "id": "I18",
@@ -234,8 +255,10 @@
       "sha256": "6a7d52e02ee8041644c9bc603ce4f4f6cfff6928ba8b8583a12b10136c7320b4",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I03-small-finite-divisions-and-reciprocal-powers-collapse-to-zero/HANDOFF.md",
       "numeric_witness": "1/0.000001 and pow(0.000001,-1): library/predictor0; original1000000. No zero division or negative fractional domain involved.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/evaluator-parser.md",
+      "recommendation": "bounded finite reciprocal repair; preserve protective domains"
     },
     {
       "id": "I04",
@@ -245,8 +268,10 @@
       "sha256": "8708d10a53f0b2454132b5836b9ae4d629e7684bcf23ac5c2842cdf38d5470e8",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I04-signed-remainder-differs-from-original-absolute-value-remainder/HANDOFF.md",
       "numeric_witness": "-5%2: library/predictor-1; original+1. Exact integer operands avoid FPU rounding assumptions.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/evaluator-parser.md",
+      "recommendation": "defined-domain absolute integer remainder; width limits explicit"
     },
     {
       "id": "M02",
@@ -267,8 +292,10 @@
       "sha256": "119e5f08271fdca9f0d9ab5e59b489c95463cac52a99a6dcaf6ea24a484128c3",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/M01-negative-custom-wave-enable-executes-in-predictor-but-not-library/HANDOFF.md",
       "numeric_witness": "enabled=-1; wave per_frame reg00+=1: predictor/original increment to1; library remains0. Initializers still execute.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/evaluator-parser.md",
+      "recommendation": "coordinate negative enable repair with I02; preserve unconditional init"
     },
     {
       "id": "I25",
@@ -278,8 +305,10 @@
       "sha256": "20eba9dde7a2eefe9a2cb89844a6e1d4b4cd77454308ca15d1e4378a9f0e6c6c",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I25-shape-custom-wave-colour-fractions-survive-original-byte-truncation/HANDOFF.md",
       "numeric_witness": "Requested channel.5: original127/255=.4980392; target.5. Requested.123456: original31/255=.1215686; targetapproximately.123456.\n\nAttribute conversion before interpolation/blending, not final framebuffer storage.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "retain float precision policy; document original byte boundary"
     },
     {
       "id": "I30",
@@ -289,8 +318,10 @@
       "sha256": "494c07155443e315e8d215b213b0b5bc27e311bd6e025c5d6380aaf03f1ab0a3",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I30-display-diffuse-colours-retain-floats-instead-of-original-byte-packing/HANDOFF.md",
       "numeric_witness": "Legacy white tint,fShader0,echo0,gamma.75: original uploads191/255=.749019608; target.75. Shader-composite vertex diffuse has the same original byte boundary.\n\nProducer attribute difference; final pixel difference needs controlled rendering.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "defer byte-exact diffuse policy with separate producer evidence"
     },
     {
       "id": "I29",
@@ -311,8 +342,10 @@
       "sha256": "28d91f48493e3fc8ef55342ba09b420567506adc1720fb813298ced6bb9bd9f1",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I15-minimum-motion-trails-are-larger-and-aspect-dependent/HANDOFF.md",
       "numeric_witness": "Matched256x144, no diffusion: original minimum1/256=.00390625; target hypot(1.25/256,1.25/144)=.009959614.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "retain visibility minimum; quantify threshold versus actual segment"
     },
     {
       "id": "I09",
@@ -322,8 +355,10 @@
       "sha256": "9b8257b6666b330799b883c9fa056e241d47a3ea511f3ea0a5b7f1d1147945cb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I09-eel-named-constants-round-to-float-before-double-evaluation/HANDOFF.md",
       "numeric_witness": "$pi: library/predictor3.1415927410125732; original3.141592653589793; difference about8.74228e-8.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/evaluator-parser.md",
+      "recommendation": "remove float suffixes from exact original decimal constants in both scanners"
     },
     {
       "id": "I31",
@@ -333,8 +368,10 @@
       "sha256": "9696fd6e7c47744a75fae2cc56ae27baa3a23b322dcac50b92f94e661a221bec",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I31-gamma-only-pass-count-epsilon-differs/HANDOFF.md",
       "numeric_witness": "Gamma1.0005: original int(gamma-.001)+1\u2192one pass; target epsilon.0001\u2192two passes weighted1 andapproximately.0005.\n\nSeparate from diffuse byte packing; no measured whole-preset impact claimed.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "gamma-only epsilon repair feasible; preserve echo epsilon"
     },
     {
       "id": "I01",
@@ -344,8 +381,10 @@
       "sha256": "08cbb5be6dd7ad1d52b0ebe4546b8508c599ef65ca546bdd4c56142073df58ac",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I01-preset-keys-are-case-insensitive-in-library-predictor/HANDOFF.md",
       "numeric_witness": "ZOOM=2 without lowercase zoom: library/predictor2; original GetFast retains default1.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/evaluator-parser.md",
+      "recommendation": "retain tolerant loading; document strict-source divergence"
     },
     {
       "id": "I02",
@@ -355,8 +394,10 @@
       "sha256": "e5a3707044df079d368cdfcc4fd4f4f79fc3afc6e5c98b6a9e2dc8ba9326f544",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I02-negative-boolean-settings-use-0-rather-than-nonzero/HANDOFF.md",
       "numeric_witness": "bTexWrap=-1: library/predictor wrapping0; original wrapping1.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/evaluator-parser.md",
+      "recommendation": "coordinate nonzero boolean repair with M01"
     },
     {
       "id": "I07",
@@ -366,8 +407,10 @@
       "sha256": "a6ede7f6f841cfe5ec66cf8641443682e37143f052117f213732c418799e135a",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I07-stereo-bands-average-channels-rather-than-left-only/HANDOFF.md",
       "numeric_witness": "At the isolated band-combination stage: left1,right3, prior long average1, steady30Hz/frame>=50: original relative1; library/predictor current2 then approximately2/1.008=1.984127.\n\nDerived stage witness, not a same-PCM stereo render comparison. Current cold JNI tests are mono.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "retain stereo fix; TV mono unaffected"
     },
     {
       "id": "I21",
@@ -377,8 +420,10 @@
       "sha256": "b1b9968d7543348317341d7edd308d98df30e8858aed0e05e1b41d428bca67e7",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I21-extra-waveform-modes-change-original-modulo-aliases/HANDOFF.md",
       "numeric_witness": "Evaluated mode8: original modulo8\u2192Circle; target modulo16\u2192SpectrumLine. Mode9: original Spiral; target Wave9.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "retain 16-mode extension; two visible static mode8 candidates"
     },
     {
       "id": "I26",
@@ -388,8 +433,10 @@
       "sha256": "e07732e75f09bc29ae76a7665a2ded73f11083696ccce3ae9ec82d22e631f92a",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I26-shader-vol-vol-att-differ-from-original-comma-expression/HANDOFF.md",
       "numeric_witness": "Bands(1,2,3): original0.3333*(bass,mid,treb)=.9998999834; target.333*(bass+mid+treb)=1.9980000257.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "retain corrected all-band volume; equal bands are still affected by original typo"
     },
     {
       "id": "I27",
@@ -399,8 +446,10 @@
       "sha256": "b2219f9243418d08b8ccd04db108ba078843f91212dcf06e12ae3fc1ea710a78",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I27-mip-y-uses-height-rather-than-original-repeated-width/HANDOFF.md",
       "numeric_witness": "256x144: original mip tuple(8,8,8); targetapproximately(8,7.169925,7.584963).",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "retain height-derived mip; no bundled source references including mip_avg"
     },
     {
       "id": "I28",
@@ -410,8 +459,10 @@
       "sha256": "fccd89847cfc038a22361e1155b1a5be077c89cd17d70ae601d516b352268ba7",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I28-near-equal-blur-bounds-expand-instead-of-collapsing/HANDOFF.md",
       "numeric_witness": "min=max=.5: original both.4499999881/zero interval; target[.4499999881,.5500000119]. Target also coherently falls back to[0,1] for unsupported normalization triplets.\n\nZero interval is proven, but no Windows pixel/NaN appearance inferred.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "source investigation recorded; execution and visual qualification pending",
+      "confirmed_affected_originals": [],
+      "source_report": "research/retained-policies.md",
+      "recommendation": "retain blur domain repair; do not invent original NaN appearance"
     }
   ],
   "full_preset_inventory_bytes_verified": 9606

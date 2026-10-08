@@ -29,7 +29,8 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0014](#0014-legacy-colour-shading-and-mode-1-spirals) | Authored `fShader` tint amount; mode-1 spiral opacity and open shape | `BrainStain- boiling-mix2(redi jedi full carb mix).milk` |
 | [0015](#0015-negative-warp-powers-use-milkdrop-cpu-maths) | CPU-defined negative nested powers beyond authored exponent one | synthetic nested-unit, square and cube controls |
 | [0016](#0016-built-in-wave-opacity) | Mode opacity, volume amplification and faint-wave threshold | `Happening.milk`, source controls and repeated Native 4K captures |
-| [0017](#0017-custom-wave-input-windows) | Valid centered oscilloscope windows and channel separation | source-input controls; Native 4K acceptance pending |
+| [0017](#0017-custom-wave-input-windows) | Valid centered oscilloscope windows and channel separation | `Mig_304 - geiss remix 2.milk`, input controls and repeated Native4K captures |
+| [0018](#0018-discrete-custom-dots) | Authored custom dot counts; finite single-dot programs | source controls; Native4K acceptance pending |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -213,9 +214,13 @@ MilkDrop multiplies the mode-adjusted alpha by an unbounded volume ramp, then cl
 
 ## 0017 — Custom wave input windows
 
-MilkDrop centers a custom oscilloscope’s requested window and shifts its two channels in opposite directions by `sep/2`. ProjectM’s prefix sampling ignored those offsets. ProjectM TV now restores the offsets when both complete windows fit the 480-sample input. Oversized requests retain upstream resampling; invalid original offsets retain the safe prefix fallback. Spectrum sampling, point counts, smoothing and Native prepared replay remain unchanged. The finite two-point ramp control changes the first input from 0 to `239/480 × .004`, and passes with signed separation and safe-bound controls. Native 4K acceptance is pending in [I08](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I08/README.md).
+MilkDrop centers a custom oscilloscope’s requested window and shifts its two channels in opposite directions by `sep/2`. ProjectM’s prefix sampling ignored those offsets. ProjectM TV now restores the offsets when both complete windows fit the 480-sample input. Oversized requests retain upstream resampling; invalid original offsets retain the safe prefix fallback. Spectrum sampling, point counts, smoothing and Native prepared replay remain unchanged. The finite two-point ramp control changes the first input from 0 to `239/480 × .004`, and passes with signed separation and safe-bound controls. Repeated Native Standard4K captures confirm the separated-channel loop effect in Mig304, with no consistent slowdown in the measured witness. See [I08](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I08/README.md).
 
 The separate I19 source sample-cap proposal is preserved with real 4K before/expected captures, outside the shipping patch series. Brightness relative to the previous 4K output alone does not prove fidelity loss; matched authored and resolution-band comparisons remain in progress in [I19](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I19/README.md).
+
+## 0018 — Discrete custom dots
+
+Custom dots retain their authored point/color count, following MilkDrop’s distinction between points and smoothed lines. The old library inserted smoothing midpoints into point waves. A finite two-point control now submits two points in both authored and Native draws; ordinary lines retain their smoothing. One-dot programs may emit finite positions/colors while the undefined normalized sample input remains NaN. Invalid appearance derived from that NaN is not promised. Source controls and40 normal renderer checks pass; Native4K acceptance remains pending in [I22](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I22/README.md).
 
 ## Known remaining differences from MilkDrop 2
 

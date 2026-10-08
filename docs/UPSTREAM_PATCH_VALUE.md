@@ -255,3 +255,12 @@ channel offsets before smoothing. Preserve upstream oversized resampling,
 invalid-window prefix fallbacks, spectrum, sample counts and prepared Native
 replay. Independent real-EEL controls fail before and pass after; Native4K
 acceptance remains pending. See [I08](superpowers/evidence/milkdrop-audit-repairs/I08/README.md).
+
+## Discrete custom dots (candidate0018)
+
+Follow MilkDrop2’s skip-smoothing policy for custom point waves and support
+one finite-output point without inventing a finite sample coordinate. Keep
+maximum buffer storage, line smoothing, Native dot styles and prepared replay.
+Independent real-EEL/GL point-count/endpoint/replay controls fail before and
+pass after;40 normal renderer controls pass. Native4K acceptance remains
+pending. See [I22](superpowers/evidence/milkdrop-audit-repairs/I22/README.md).
