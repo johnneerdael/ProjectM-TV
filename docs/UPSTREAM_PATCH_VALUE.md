@@ -187,3 +187,16 @@ compensation for the old bias; its numerical tolerances remain unchanged. Explic
 warp texel offsets default to zero and remain unchanged. This corrects image
 sampling without replacing authored blur or shader brightness, and is a general
 libprojectM correctness candidate rather than a performance claim.
+
+## Legacy tint and mode-1 waveform (0014)
+
+`0014-legacy-tint-and-mode1-waveform.patch` restores MilkDrop 2.25c's `fShader`
+threshold and white/animated-shade mix in legacy video echo and gamma output.
+It also restores mode 1's 1.25 alpha multiplier and open line strip. Source
+attribution is `vis_milk2/milkdropfs.cpp`, lines 2927–2946, 3359–3365 and 4117–4144.
+Custom composite hue behaviour, authored equations, echo, gamma, darken and assets
+stay unchanged. These are general compatibility corrections suitable for an
+independent upstream proposal. The [focused evidence](superpowers/evidence/brainstain-dark-output/README.md)
+separates corrected suppression from the original preset's remaining sparse
+output and records independently failing GL controls. No universal brightness,
+Windows appearance or performance claim is made.

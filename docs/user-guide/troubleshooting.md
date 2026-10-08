@@ -102,3 +102,12 @@ Custom composite shaders now sample the feedback image without an extra half-tex
 shift. Thin marks keep their sampled brightness instead of being unnecessarily
 spread over neighbouring pixels. Authored blur, distortion and colour suppression
 remain in effect.
+
+Legacy presets now respect their authored colour-shading amount, including no
+animated tint at `fShader=0`. The built-in mode-1 spiral also uses MilkDrop 2's
+opacity boost and remains open rather than drawing an extra closing segment.
+These corrections preserve the preset files. A preset such as **BrainStain-
+boiling-mix2(redi jedi full carb mix)** can still look sparse and dark: its echo
+displays only a zoomed crop and its darken filter squares the displayed colours.
+A black first frame can occur even when the underlying waveform is bright.
+Include the audio context and time since preset loading in reports of dark output.
