@@ -5,7 +5,7 @@ A MilkDrop preset is a small text file that programs a feedback loop. Each frame
 This section documents **how a preset actually executes**, at the level of the source code that runs it. It is built on two kinds of evidence:
 
 - **MilkDrop 2's released source** (v2.25c), the reference implementation every preset was written against. Statements about MilkDrop cite the file and line, for example `milkdropfs.cpp:2852`.
-- **This project's analysis of 9,606 real presets**: parsing every file, translating every shader, running each preset under controlled audio, and comparing predictions made from source alone against rendered frames.
+- **This project's analysis of real presets**: parsing all 9,606 bundled files, translating every shader, running each preset under controlled audio, and, in a randomized audit of 100 presets, comparing predictions made from source alone against rendered frames.
 
 Most preset guides describe what each variable is *meant* to do. This one also covers what happens at the edges: equation code split across lines, a division by zero, a texture name that starts with two letters and an underscore, a shape smaller than a pixel. Those edges decide whether a preset works.
 
@@ -66,7 +66,7 @@ To see it on your TV, put it in a ZIP and upload it as a [custom preset pack](..
 
 ## A complete, modern example
 
-The *Aurora Ownership* test presets, written for this project, use every block type: per-frame bass envelopes exported through `q` variables, textured, additive and multi-instance shapes, a dotted waveform and a spectrum ring, plus warp and composite shaders. They were designed so their behaviour could be predicted from source before rendering: the core's bass-driven size was forecast with a worst error of 0.076%. The source is in the [predictor branch](https://github.com/johnneerdael/ProjectM-TV/tree/feat/predictor-visual-loop/tools/milk-analyzer/witnesses/patch-0010-aurora); [Test and predict presets](testing.md#aurora-a-preset-designed-to-be-predicted) walks through it.
+The *Aurora Ownership* test presets, written for this project, use most block types: per-frame bass envelopes exported through `q` variables, textured, additive and multi-instance shapes, a dotted waveform and a spectrum ring, plus warp and composite shaders. They were designed so their behaviour could be predicted from source before rendering: its frozen motion, colour and flash estimates matched the render with a worst relative error of 0.076%. The source is in the [predictor branch](https://github.com/johnneerdael/ProjectM-TV/tree/feat/predictor-visual-loop/tools/milk-analyzer/witnesses/patch-0010-aurora); [Test and predict presets](testing.md#aurora-a-preset-designed-to-be-predicted) walks through it.
 
 ## Other references
 

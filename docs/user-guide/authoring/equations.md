@@ -18,7 +18,7 @@ All values are 64-bit floating point. Names are case-insensitive. An unknown nam
 | `sigmoid(x,c)` | 1/(1+e^(−x·c)) |
 | `loop(n, …)`, `while(…)` | Capped at 1,048,576 iterations |
 | `exec2`, `exec3` | Evaluate in sequence, return the last |
-| `megabuf(i)`, `gmegabuf(i)` | 128 blocks × 65,536 entries; also written `x[i]`, `gmem[i]` |
+| `megabuf(i)`, `gmegabuf(i)` | 128 blocks × 65,536 entries; `buf[i]` reads `megabuf(buf+i)`, `gmem[i]` reads `gmegabuf(i)` |
 | Assignment | `= += -= *= /= %= \|= &= ^=` |
 | `int(x)` | Floor |
 

@@ -83,7 +83,7 @@ ProjectM TV listens to the music app's own audio session. It never uses the micr
 
     ---
 
-    Thirteen engine patches restore MilkDrop 2's behaviour where projectM differs: tolerant equation loading, HLSL its compiler accepted, and Direct3D pixel rules. Each comes with before/after proof.
+    Most of the thirteen engine patches restore MilkDrop 2's behaviour where projectM differs: tolerant equation loading, HLSL its compiler accepted, and Direct3D pixel rules. Each comes with before/after proof.
 
     [:octicons-arrow-right-24: Patch catalog](engine/patches.md)
 
@@ -91,7 +91,7 @@ ProjectM TV listens to the music app's own audio session. It never uses the micr
 
     ---
 
-    Lines, blur and texel steps keep their authored size, and feedback runs on an authored-scale canvas with sharp native geometry on top. This implements projectM issue #682.
+    Lines, blur and texel steps keep their authored size, and feedback runs on an authored-scale canvas with sharp native geometry on top. This addresses the resolution-scaling part of projectM issue #682.
 
     [:octicons-arrow-right-24: Rendering at 4K](engine/resolution.md)
 
@@ -107,7 +107,7 @@ ProjectM TV listens to the music app's own audio session. It never uses the micr
 
     ---
 
-    Behaviour predicted from a preset's code alone matched the rendered result almost exactly for 85 of 100 randomly chosen presets.
+    In a research audit, predictions made from preset code alone scored 95 or more out of 100, on 20 observable claims, for 85 of 100 randomly chosen presets.
 
     [:octicons-arrow-right-24: The road ahead](predictor.md)
 

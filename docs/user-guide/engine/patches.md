@@ -7,7 +7,7 @@ Most patches are about **MilkDrop 2 authenticity**. projectM is a clean-room rei
 Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-its-own-textures) adds correct behaviour for something MilkDrop never supported: presets whose textures live in different folders. [0005](#0005-blur-ranges-that-cannot-collapse) repairs a MilkDrop 2 typo instead of reproducing it.
 
 !!! info "How the images were made"
-    The comparison images come from the [current-patch proof](https://github.com/johnneerdael/ProjectM-TV/pull/55). A preset is rendered by real libprojectM on a GPU-accelerated Android TV emulator: GLES 3.0, frozen audio, seed 12345, a frame/30 clock, frames 0–119, each role captured twice with byte-identical results. *Without* means the full series minus only that patch (a single-patch ablation); *with* is the full series. Images are unbrightened. They establish cause and effect for that preset on that GPU. They are not Windows reference renders, and they do not certify every preset or every TV.
+    The comparison images come from the [current-patch proof](https://github.com/johnneerdael/ProjectM-TV/pull/55). A preset is rendered by real libprojectM on a GPU-accelerated Android TV emulator: GLES 3.0, frozen audio, seed 12345, a frame/30 clock, frames 0–119, each role captured twice with byte-identical results. *Without* means the full series minus only that patch (a single-patch ablation); *with* is the full series. Images are unbrightened and rendered at 512×288 (some at 256×144) with quad lines and Native trails off. They establish cause and effect for that preset on that GPU. They are not Windows reference renders, and they do not certify every preset or every TV.
 
 ## At a glance
 
@@ -29,7 +29,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 
 ## 0001 — TV rendering and preset compatibility
 
-The largest patch consolidates about 25 historical fixes from the projectM 4.1.7 era, ported onto 4.2 master's new Mesh and shader-cache ownership.
+The largest patch consolidates 27 historical patches from the projectM 4.1.7 era, ported onto 4.2 master's new Mesh and shader-cache ownership.
 
 ![Upstream rejects 161.milk; ProjectM TV renders it](../images/patches/0001-equations.jpg)
 
@@ -61,7 +61,7 @@ Only a *parse* error in the file fails the load. Each omission is logged as `Pre
 
 ### Resolution independence and Native trails
 
-Quad lines, reference-scaled blur and wave counts, virtual `texsize` and Native trails, the answer to projectM issue [#682](https://github.com/projectM-visualizer/projectm/issues/682). They are explained on their own page: [Rendering MilkDrop at 4K](resolution.md).
+Quad lines, reference-scaled blur and wave counts, virtual `texsize` and Native trails, which address the resolution-scaling part of projectM issue [#682](https://github.com/projectM-visualizer/projectm/issues/682) (the round joins and caps it suggests are not implemented). They are explained on their own page: [Rendering MilkDrop at 4K](resolution.md).
 
 ### TV performance work
 
@@ -87,13 +87,13 @@ MilkDrop 2 compiled preset shaders with Microsoft's HLSL compiler. projectM tran
 | Plain uninitialized globals (`float mus;`) | Undefined GLSL globals | External inputs that read 0 (the D3D9 compiler treated them as constants) |
 | Float literals such as `4194304.0` | Printed with 6 significant digits (`4.1943e+06` = 4194300) | Exact float32 round trip; nonfinite literals fail the stage instead of becoming an identifier named `inf` |
 
-Measured across 15,576 authored shaders in an earlier corpus pass, 102 shaders newly compiled and none were lost.
+In an earlier corpus pass over 15,576 authored shaders, historical patches 0030–0032 (now split between 0001 and 0002) made 102 more shaders compile and lost none.
 
 ## 0003 — Evaluator: lone dot and per-thread random
 
-![The lone-dot preset: upstream rejects it, without 0003 the block is dropped, with 0003 it runs](../images/patches/0003-lone-dot-v2.jpg)
+![Synthetic lone-dot fixture: upstream rejects it, without 0003 the block is dropped, with 0003 it runs](../images/patches/0003-lone-dot-v2.jpg)
 
-**Lone `.`** NS-EEL accepts `.` as a number (0). projectm-eval requires a digit, so `zoom=zoom+.10*sin(rad+.+15.15)` is a syntax error. Upstream rejects the Stahlregen *funky Blur* presets entirely. With 0001 alone the per-pixel block is dropped, and the outline loses its colour. With 0003 the block runs as on MilkDrop. Seven bundled presets use the construction.
+**Lone `.`** NS-EEL accepts `.` as a number (0). projectm-eval requires a digit, so `zoom=zoom+.10*sin(rad+.+15.15)` is a syntax error. Upstream rejects the Stahlregen *funky Blur* presets entirely. With 0001 alone their per-pixel block is dropped; removing only 0003 changes 120 of 120 frames of the unchanged preset. The image shows a synthetic fixture that makes the effect easy to see: the dropped block changes the wave colour. With 0003 the block runs as on MilkDrop. Seven bundled presets use the construction.
 
 **Per-thread `rand()`.** The evaluator's Mersenne Twister state was process-wide. ProjectM TV compiles upcoming presets on a background thread, so that work could advance the live preset's random stream. Each thread now has its own fixed-seed stream; the algorithm is unchanged.
 
@@ -129,13 +129,13 @@ projectM has 16 waveform modes, MilkDrop 2 has 8. The value wraps modulo 16 here
 
 ![Synthetic equation-only invert control](../images/patches/0008-display-invert.jpg)
 
-`gamma`, `echo_alpha`, `echo_zoom`, `echo_orient`, `brighten`, `darken`, `solarize` and `invert` are per-frame variables in **MilkDrop 2** (`milkdropfs.cpp` 527–540). **projectM** used only the preset file's values, and allocated the filters only when the file's default was on, so a preset could never switch one on from code. **ProjectM TV** reads them every frame, with MilkDrop's order (brighten, darken, solarize, invert), clamps (gamma 0–8, echo zoom 0.001–1000) and echo orientation modulo 4. As in MilkDrop 2, these legacy effects apply only to the built-in composite, never to a custom composite shader. No bundled preset was found whose real audio activates the difference, so the image shows a synthetic equation-only control.
+`gamma`, `echo_alpha`, `echo_zoom`, `echo_orient`, `brighten`, `darken`, `solarize` and `invert` are per-frame variables in **MilkDrop 2** (`milkdropfs.cpp` 527–540). **projectM** used only the preset file's values, and allocated the filters only when the file's default was on, so a preset could never switch one on from code. **ProjectM TV** reads them every frame, with MilkDrop's order (brighten, darken, solarize, invert), clamps (gamma 0–8, echo zoom 0.001–1000) and echo orientation modulo 4. MilkDrop 2 uses the evaluated values for presets without a composite shader (composite version 0). For shader-version presets without `comp_` code it bakes the file values into a generated shader; ProjectM TV uses the evaluated values for every built-in composite. Neither applies these effects with a custom composite shader. The tested original witness (`idiot - Forty Six and 2`) did not activate the difference under the proof audio, so the image shows a synthetic equation-only control.
 
 ## 0009 — Premultiplied user textures
 
 ![rand tritex preset with and without premultiplication](../images/patches/0009-visible.jpg)
 
-projectM 4.1 loaded images with SOIL2 and premultiplied colour by alpha. 4.2 switched to stb_image without premultiplying, so presets that sample transparent textures changed. In feedback presets, even a 1-level byte difference grows: frame 29 of the witness shows a mean 3.66 and a maximum 201 channel difference. ProjectM TV restores the released bytes, `(rgb·alpha + 128) >> 8` per channel. Whether MilkDrop 2's D3DX loader premultiplied is not verified.
+ProjectM TV's releases based on projectM 4.1.7 loaded images with SOIL2 and premultiplied colour by alpha. 4.2 switched to stb_image without premultiplying, so presets that sample transparent textures changed. In feedback presets, even a 1-level byte difference grows: frame 29 of the witness shows a mean 3.66 and a maximum 201 channel difference. ProjectM TV restores the released bytes, `(rgb·alpha + 128) >> 8` per channel. Whether MilkDrop 2's D3DX loader premultiplied is not verified.
 
 ## 0010 — Each preset keeps its own textures
 
@@ -143,7 +143,7 @@ projectM 4.1 loaded images with SOIL2 and premultiplied colour by alpha. 4.2 swi
 
 This is where ProjectM TV Engine deliberately goes beyond MilkDrop 2. MilkDrop read every texture from one folder, so the question of *which* folder a preset's images come from never arose. [Custom packs](../custom-packs.md) introduce exactly that: a pack's presets prefer the pack's own images, with the bundled textures as fallback. Upstream projectM has one global texture search path, and changing it reloads every texture. During a blend from pack A to pack B, a same-named image in the outgoing preset would therefore switch to B's file.
 
-With 0010, each preset keeps the texture paths it was loaded with until it retires: behavioural correctness for a situation MilkDrop did not support. In the test, two packs created with the predictor tools each use `emblem.png`. Upstream swaps SOL's orange emblem for LUNA's blue at frame 20; ProjectM TV keeps SOL's.
+With 0010, each preset keeps the texture paths it was loaded with until it retires: an added per-preset lookup contract for a situation MilkDrop did not support. In the test, two packs created with the predictor tools each use the same image name. Upstream swaps SOL's orange emblem for LUNA's blue at frame 20; ProjectM TV keeps SOL's.
 
 ## 0011 — Huge rotation values
 
@@ -155,7 +155,7 @@ With 0010, each preset keeps the texture paths it was loaded with until it retir
 
 ![Green machine btbam: pink/brown wedges without 0012, green/yellow structure with it](../images/patches/0012-visible-original.jpg)
 
-Direct3D 9 samples integer pixel centres; OpenGL samples half-integers. **MilkDrop 2** `DrawCustomShapes` (`milkdropfs.cpp` 2298) places shapes in D3D9 coordinates, so a shape with `rad=.002` at `x=y=.5` covers exactly one pixel on Windows and zero pixels in projectM. Feedback presets that seed their image with many tiny shapes lose them entirely. ProjectM TV shifts shape fills and outlines by half a destination pixel per render target. Equations, radii, colours and UVs are unchanged. In `amandio c - the green machine 2 skin lard bone beacon nz+ btbam covers sepultura.milk`, 34,365 of 36,864 pixels differ by more than 16 at frame 59.
+Direct3D 9 samples integer pixel centres; OpenGL samples half-integers. **MilkDrop 2** `DrawCustomShapes` (`milkdropfs.cpp` 2298) places shapes in D3D9 coordinates, so a shape with `rad=.002` at `x=y=.5` covers one pixel under the Direct3D 9 rasterization rules and zero pixels in projectM. Feedback presets that seed their image with many tiny shapes lose them entirely. ProjectM TV shifts shape fills and outlines by half a destination pixel per render target. Equations, radii, colours and UVs are unchanged. In `amandio c - the green machine 2 skin lard bone beacon nz+ btbam covers sepultura.milk`, 34,365 of 36,864 pixels differ by more than 16 at frame 59.
 
 ## 0013 — Composite reads the exact feedback texel
 
@@ -192,7 +192,7 @@ projectM **v4.1.8** (tagged 2026-10-06) backports most of these parser and wavef
 - `wave_mode` wraps at 16 projectM modes, not 8.
 - Blur ranges narrower than 0.1 are repaired instead of collapsing.
 - Some reference-scale effects remain resolution-dependent at 4K unless Native trails or diffusion compensation is active ([details](resolution.md#what-this-does-not-fix)).
-- Evaluator edge cases: decimal→double→float double rounding, unchecked integer narrowing, and float-width `$pi`, `$e` and `$phi`.
+- HLSL translator edge cases: decimal→double→float double rounding and unchecked integer narrowing. Evaluator: float-width `$pi`, `$e` and `$phi` (unused in the bundled presets).
 - Textured custom shapes always wrap; MilkDrop 2 clamps them on frames where blur levels are computed.
 - Line waveforms: MilkDrop 2 caps the point count at a third of the canvas width; projectM divides the sample count by three. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table, and mode 3 multiplies `wave_a` where MilkDrop replaces it.
 - Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.

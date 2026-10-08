@@ -10,14 +10,14 @@
 | Patches | [13, applied at build time](patches.md) from [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches) |
 | Graphics | OpenGL ES 3.0 (upstream at the pin requires 3.2) |
 | Library | Linked statically into `libprojectmtv.so`, shipped in the APK and the [core AAR](../development.md#use-the-engine-in-another-app) |
-| Version label | Settings panel: *ProjectM TV Engine · Based on unreleased projectM 4.2 master · Upstream 4.2.0 · 6f6480746* |
+| Version label | Settings panel: *v‹version› · ProjectM TV Engine / Based on unreleased projectM 4.2 master / Upstream 4.2.0 · 6f6480746* |
 
 ## Why a fork
 
 projectM targets desktop and embedded hosts and keeps a careful compatibility contract. ProjectM TV needed answers to three problems sooner than upstream could give them:
 
 1. **Presets that did not load or looked wrong.** Equation code MilkDrop accepted, HLSL that Microsoft's compiler accepted, and Direct3D 9 pixel rules that OpenGL handles differently. See the [patch catalog](patches.md).
-2. **4K TVs.** MilkDrop's pixel-sized lines, blurs and `texsize` steps make presets dark and thin at 3840×2160. See [Rendering MilkDrop at 4K](resolution.md), which implements projectM issue [#682](https://github.com/projectM-visualizer/projectm/issues/682).
+2. **4K TVs.** MilkDrop's pixel-sized lines, blurs and `texsize` steps make presets dark and thin at 3840×2160. See [Rendering MilkDrop at 4K](resolution.md), which addresses the resolution-scaling part of projectM issue [#682](https://github.com/projectM-visualizer/projectm/issues/682).
 3. **TV hardware.** Tile-based GPUs, 2 GB of RAM shared with the music app, and shader compilation that froze the picture for up to 1.9 s at every preset change. See [How a frame reaches your TV](pipeline.md).
 
 The fork tracks upstream instead of drifting from it. In October 2026 the whole series was rebased from projectM 4.1.7 onto 4.2 master:
@@ -29,9 +29,9 @@ The fork tracks upstream instead of drifting from it. In October 2026 the whole 
 ## Design rules
 
 - **The preset file is the source of truth.** No bundled preset is edited to work around an engine difference; the engine changes instead.
-- **MilkDrop 2 is the reference.** Where projectM and MilkDrop 2 disagree, the engine follows MilkDrop 2's released source, with citations in each patch. The exceptions are documented: [0010](patches.md#0010-each-preset-keeps-its-own-textures) adds behaviour MilkDrop never had (per-pack texture folders), and [0005](patches.md#0005-blur-ranges-that-cannot-collapse) repairs a MilkDrop typo.
-- **Opt-in at the API, on in the app.** New C API behaviour (quad lines, Native trails, tolerant loading warnings) defaults to upstream behaviour. The Android core switches it on. Other projectM hosts can adopt each piece independently.
-- **Evidence before claims.** Each patch has a reproducing witness preset, a regression control in the native test suite, and a statement of what its evidence does *not* establish.
+- **MilkDrop 2 is the reference.** Where projectM and MilkDrop 2 disagree, the engine aims to follow MilkDrop 2's released source, with source citations where a patch reproduces MilkDrop behaviour. The exceptions are documented: [0010](patches.md#0010-each-preset-keeps-its-own-textures) adds behaviour MilkDrop never had (per-pack texture folders), and [0005](patches.md#0005-blur-ranges-that-cannot-collapse) repairs a MilkDrop typo.
+- **Opt-in at the API, on in the app.** Resolution and performance features (quad lines, Native trails, direct output, the texture pool) default to upstream behaviour in the C API, and the Android core switches them on. Compatibility fixes, such as tolerant equation loading and the HLSL and evaluator repairs, apply to every host; only their warning callback is opt-in. Other projectM hosts can adopt each piece independently.
+- **Evidence before claims.** Each patch has a reproducing witness preset (or a synthetic fixture where no bundled preset activates the change), a regression control in the native test suite, and a statement of what its evidence does *not* establish.
 
 ## Pages in this section
 

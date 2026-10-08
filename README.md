@@ -24,7 +24,7 @@ It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualize
 **[johnneerdael.github.io/ProjectM-TV](https://johnneerdael.github.io/ProjectM-TV/)** covers:
 
 - **Using the app:** installation, remote controls, every setting, [preset moods](https://johnneerdael.github.io/ProjectM-TV/predictive-collections/), custom packs, picture quality and troubleshooting.
-- **[ProjectM TV Engine](https://johnneerdael.github.io/ProjectM-TV/engine/):** every patch with before/after proof images, how 4K rendering keeps the authored look ([projectM #682](https://github.com/projectM-visualizer/projectm/issues/682)), and how a frame reaches the TV.
+- **[ProjectM TV Engine](https://johnneerdael.github.io/ProjectM-TV/engine/):** every patch with before/after proof images, and how 4K rendering keeps the authored look (including the resolution-scaling part of [projectM #682](https://github.com/projectM-visualizer/projectm/issues/682)), and how a frame reaches the TV.
 - **[Writing presets](https://johnneerdael.github.io/ProjectM-TV/authoring/):** a source-level guide to how `.milk` presets execute, drawn from MilkDrop 2's code and the analysis of thousands of presets.
 
 ## Highlights
@@ -79,7 +79,7 @@ In the panel, Up and Down move between rows, Left and Right change a value, and 
 | Setting | What it does | Default |
 |---|---|---|
 | Resolution | Auto; fixed 720p, 1080p, 1440p, 4K up to the panel; Native. Memory protection stays active | Auto |
-| Frame rate | The refresh rate, half or a quarter of it, at least 24 fps | Half the refresh rate |
+| Frame rate | The refresh rate, half or a quarter of it, at least 24 fps | About 30 fps (30 at 60 Hz, 25 at 50 Hz) |
 | Detail | Warp mesh: Minimal, Low, Medium, High, Ultra | High on SHIELD/Tegra, Low on low-RAM devices, otherwise Medium |
 | Native trails | Standard, Medium, High; active above 1330p | Standard |
 | Transition | Instant, 1–10 s | 7 s (2 s on low-RAM devices) |

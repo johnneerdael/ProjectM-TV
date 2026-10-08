@@ -19,7 +19,7 @@ If no player is found, the app retries after the next track change (with notific
 
 Open **Track display › Track info**. If it reads *Off · Allow*, select it and choose **Configure**, then enable ProjectM TV in Android's notification access ([walkthrough](getting-started.md#track-titles-optional)). **Dismiss** only hides the automatic reminder.
 
-If the title shows but not the cover, the music app does not provide artwork. Covers are verified with Spotify and Milkbeat; SoundCloud and SmartTube provide title and artist only.
+If the title shows but not the cover, the music app may not provide artwork. Covers are verified with Spotify and Milkbeat; SoundCloud and SmartTube provide title and artist only.
 
 ## The picture stutters
 
@@ -36,7 +36,7 @@ Auto lowers resolution to hold the target frame rate and to keep memory free for
 
 ## Native trails says inactive or fallback
 
-Native trails works only above 1330p. On a 1080p TV, Diagnostics shows *inactive (render 1080p)*, which is expected. *Canvas fallback* means the render size cannot be divided into a whole-number authored canvas; *shader/resource fallback* means the GPU driver rejected the trails shaders. In both cases the standard renderer is used. Please report the Diagnostics text and your TV model.
+Native trails works only above 1330p. On a 1080p TV, Diagnostics shows *inactive (render 1080p)*, which is expected. *Canvas fallback* usually means no supported whole-number authored canvas exists at this render size; *shader/resource fallback* means the GPU driver rejected the trails shaders. In both cases the standard renderer is used. Please report the Diagnostics text and your TV model.
 
 ## A preset is black, frozen or skipped
 

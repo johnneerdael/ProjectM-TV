@@ -4,7 +4,7 @@ Shaders sample images through **samplers**. Declaring `sampler sampler_clouds;` 
 
 ## How textures are found
 
-- Every `sampler_<name>` **and every `texsize_<name>`** in the warp and composite code binds a texture, whether or not it is used. Comments are stripped first, so a commented-out declaration binds nothing.
+- In projectM, every `sampler_<name>` **and every `texsize_<name>`** in the warp and composite code binds a texture, whether or not it is used. MilkDrop binds only samplers the compiled shader actually uses, and `texsize_<name>` there only reports an already-loaded texture. Comments are stripped first, so a commented-out declaration binds nothing.
 - File extensions searched: `.jpg`, `.dds`, `.png`, `.tga`, `.bmp`, `.dib` (projectM adds `.jpeg`). Names are matched ignoring case.
 - MilkDrop searches its `textures` folder, then the preset's own folder. projectM searches its configured texture paths.
 - `texsize_<name>` gives `(width, height, 1/width, 1/height)` of that image.
@@ -66,7 +66,7 @@ ProjectM TV chooses with the system's random device, so choices are not reproduc
 
 ## Transparent images
 
-Images with an alpha channel are uploaded with their colour **premultiplied by alpha**: each channel becomes `(rgb × alpha + 128) >> 8`, and alpha keeps its value. projectM 4.1 loaded images this way through SOIL2, and ProjectM TV keeps those bytes. A fully transparent pixel therefore samples as black, whatever colour the file stored. Do not divide by alpha to recover the colour unless you handle alpha = 0.
+In ProjectM TV, every image is uploaded with its colour **premultiplied by alpha**: each channel becomes `(rgb × alpha + 128) >> 8`, and alpha keeps its value. Opaque images lose one step at the top (255 becomes 254). ProjectM TV's earlier releases, based on projectM 4.1.7, loaded images this way through SOIL2, and the current engine keeps those bytes. A fully transparent pixel therefore samples as black, whatever colour the file stored. Do not divide by alpha to recover the colour unless you handle alpha = 0.
 
 ## Named images on custom shapes
 

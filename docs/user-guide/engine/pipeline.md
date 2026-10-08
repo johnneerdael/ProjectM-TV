@@ -57,7 +57,7 @@ projectM's soft cut renders both the outgoing and the incoming preset for the wh
 
 | Mode | What happens |
 |---|---|
-| **Auto** (default) | projectM's blend, adapted to keep the frame rate. It starts at 75% of the render size (60% on low-end devices) in an off-screen framebuffer that one blit stretches to the surface. The engine measures the render thread's CPU time during the blend. When the blend is **GPU-bound** (below 80% CPU) it steps down to 60%, then 50%. When it is **CPU-bound** it steps back up, because a lower resolution only blurs, and renders the outgoing preset every second frame. Three blends with frames to spare step back up. |
+| **Auto** (default) | projectM's blend, adapted to keep the frame rate. It starts at 75% of the render size (60% on low-RAM devices or below 2.6 GB of RAM) in an off-screen framebuffer that one blit stretches to the surface. The engine measures the render thread's CPU time during the blend. When a blend falls below 85% of the previous frame rate and is **GPU-bound** (render thread below 80% CPU) it steps down to 60%, then 50%. When it is **CPU-bound** it steps back up, because a lower resolution only blurs, and renders the outgoing preset every second frame. Three blends with frames to spare step back up. |
 | **Classic** | projectM's own blend at full render size. |
 | **Lightweight** | The last frame is copied into a texture, the new preset starts as a hard cut, and the snapshot fades out over it with a slow zoom, for at most 3 s. One extra full-screen pass, and the texture exists only during the fade. |
 
@@ -93,7 +93,7 @@ Per-vertex equations run on the CPU for every mesh vertex on every frame. On low
 
 ### Frame pacing
 
-The default target is **half the refresh rate** (30 fps at 60 Hz, 25 fps at 50 Hz), paced by `Choreographer` on every second vsync. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so motion speed doesn't change with frame rate.
+The default target is **about 30 fps**: the divisor of the refresh rate closest to 30 (30 fps at 60 Hz, 25 fps at 50 Hz), paced by `Choreographer`. A steady half rate looks smoother than an uneven 40–50 fps and leaves the GPU room for heavy presets. projectM animates on wall-clock time, so motion speed doesn't change with frame rate.
 
 ## Skipping presets that cannot work here
 

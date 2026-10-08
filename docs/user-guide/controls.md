@@ -34,7 +34,7 @@ When the panel opens, focus starts on the **Random** button, or on **Install** w
 - **Previous / Random / Next** buttons. *Next* follows the shuffled order; *Random* picks any preset in the mood. All three are instant cuts.
 - **Auto change**, **Preset mood** and **Preset duration**, then **Track display ›** and **Advanced ›**.
 - A status line with the current frame rate and render size (for example *30.0 fps · 4K auto*).
-- The engine version: *ProjectM TV Engine · Based on unreleased projectM 4.2 master · Upstream 4.2.0 · 6f6480746*.
+- The engine version: *v‹version› · ProjectM TV Engine / Based on unreleased projectM 4.2 master / Upstream 4.2.0 · 6f6480746*.
 
 Changing **Preset mood** keeps the current preset if it belongs to the new mood. Otherwise it cuts to a member. Previous-preset history restarts with the new mood.
 

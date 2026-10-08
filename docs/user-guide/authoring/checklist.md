@@ -11,7 +11,7 @@ Each item below is a mistake found in real presets, with what goes wrong and how
 | Keep each name and number on one line | MilkDrop glues lines together; other engines don't | `161.milk` splits `is_beat` across two lines |
 | Write `key=value` with no space before `=` | `zoom =1` silently keeps the default | — |
 | Write booleans as `0` and `1` | `-1` is true in MilkDrop, false in projectM | — |
-| Always write `wave_r`, `wave_g`, `wave_b`, `wave_x`, `wave_y` | MilkDrop fills missing ones with the `rot` value | — |
+| Always write `wave_r`, `wave_g`, `wave_b`, `wave_x`, `wave_y` | MilkDrop fills missing ones with 0, projectM with 1/1/1/0.5/0.5 | — |
 | Set `PSVERSION_COMP=0` if you don't write a composite shader | projectM's empty-composite fallback skips gamma | — |
 | Keep files under 1 MiB | Larger files fail to load in projectM | — |
 
@@ -38,7 +38,7 @@ Each item below is a mistake found in real presets, with what goes wrong and how
 | Initialize every global you read | Uninitialized globals read 0 on GLES, anything on D3D9 | `martin - organic light.milk` (`uv3`) |
 | Write one constructor per array element | Flat initializer lists can fail translation | `ORB - Stahl - Glass Ocean` |
 | Copy an input before modifying it (`float t = time;`) | Writes to inputs need a per-invocation copy | `$$$ Royal - Mashup (324)` |
-| Guard `pow`: `pow(max(x,1e-6), y)` | Negative or zero bases are undefined in GLSL | 12 of 100 audited presets |
+| Guard `pow`: `pow(max(x,1e-6), y)` | Negative or zero bases are undefined in GLSL | 7 of the 12 unforecastable presets in the 100-preset audit |
 | Use float literals (`2.0`) in float expressions | GLSL ES rejects some int/float mixes | `EVET - Spiracology 2` |
 | Apply decay in your warp shader | MilkDrop ignores `decay` when a warp shader runs | — |
 | Implement gamma/echo yourself in a custom composite | Classic display effects don't apply to it | — |
@@ -66,7 +66,7 @@ Each item below is a mistake found in real presets, with what goes wrong and how
 
 ## Before you share
 
-1. Run `tools/check-presets.py` on your folder.
+1. Copy the presets into a checkout's `core/src/main/assets/presets` and run `tools/check-presets.py` (without `--remove`).
 2. Watch the preset cold and after a minute of music, at 720p and at 4K.
 3. Check the TV log for `Preset code left out`.
 4. If you can, compare with MilkDrop 2 on Windows.

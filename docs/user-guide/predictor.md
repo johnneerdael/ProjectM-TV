@@ -41,8 +41,9 @@ Each value says what supports it. Missing support yields *unknown*, never a gues
 Scores are computed from those features with explicit, inspectable formulas. As an illustration, the current research sketch, which is likely to change, uses:
 
 ```text
-Intensity  = 1 + 99·(0.28·speed + 0.12·acceleration + 0.08·jerk
-                    + 0.32·flashes + 0.12·brightness jumps + 0.08·bass response)
+Intensity  = max(1 + 99·(0.28·speed + 0.12·acceleration + 0.08·jerk
+                        + 0.32·flashes + 0.12·brightness jumps + 0.08·bass response),
+                 1 + 99·flashes)
 Smoothness = 100·(1 − 0.35·acceleration − 0.45·jerk − 0.20·discontinuities)
 Warm, Cold = from the palette's warm/cool balance
 Psychedelic = palette diversity, nonlinear warp, feedback complexity, symmetry, hue evolution
@@ -64,7 +65,8 @@ The predictor is tested by writing down **20 observable claims** per preset befo
 
 - **85 of 100** scored 95 or more out of 100; 71 matched all 20 claims;
 - among the 88 presets it could analyse, the mean score was **98.8**;
-- the 12 it could not analyse all depend on arithmetic that GPUs leave undefined, such as powers of negative numbers.
+- the 12 it could not complete hit numeric domains the analyser cannot yet resolve: mostly undefined powers (such as negative bases), plus division, dot-product and nonfinite-coordinate cases whose root causes are still being traced;
+- the audit's own target is 100 of 100 presets at 95 or more, so this run did not pass it (mean 86.95 when unanalysable presets count as 0). It used the published 2.3.11 engine, before the projectM 4.2 rebase.
 
 Details and limits are in [Test and predict presets](authoring/testing.md#5-predicting-a-preset-from-its-source).
 

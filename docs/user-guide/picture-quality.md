@@ -16,11 +16,11 @@ In Auto, resolution drops after about 3 seconds below 85% of the target frame ra
 
 **Memory protection applies in every mode.** Before raising resolution, the app estimates the extra texture memory, including Native trails and two presets during a blend, and keeps a reserve for the music player. Under memory pressure it lowers resolution, frees cached textures and pauses shader preloading, then recovers when headroom returns. Diagnostics shows *resolution reduced for memory headroom* while this is active. It protects the music app but cannot guarantee every vendor's memory policy.
 
-Fixed sizes and Native also turn off **Skip slow presets**, so you can study a demanding preset at full size.
+In fixed sizes and Native, **Skip slow presets** has no effect (the setting is kept for Auto), so you can study a demanding preset at full size.
 
 ## Native trails
 
-Feedback presets build each frame from the previous one. At 4K that accumulation behaves differently from the roughly 1024×768 screens the presets were written on. **Native trails**, active above 1330p, keeps the feedback at an authored-scale canvas (1280×720 at 4K) and draws each frame's new waves, shapes and final image at full native resolution.
+Feedback presets build each frame from the previous one. At 4K that accumulation behaves differently from the much smaller screens the presets were written on. **Native trails**, active above 1330p, keeps the feedback at an authored-scale canvas (1280×720 at 4K) and draws each frame's new waves, shapes and final image at full native resolution.
 
 | Level | Result |
 |---|---|
@@ -44,7 +44,7 @@ At 1330p or below, or when a driver rejects the shaders, the previous diffusion 
 
 ## Frame rate and detail
 
-- **Frame rate** defaults to half the refresh rate (30 fps on a 60 Hz TV), paced to every second vsync. Steady 30 fps looks smoother than an uneven 40–50. Motion speed is the same at any frame rate.
+- **Frame rate** defaults to about 30 fps: the refresh rate, half or a quarter of it, whichever is closest (30 on a 60 Hz TV, paced to every second vsync). Steady 30 fps looks smoother than an uneven 40–50. Motion driven by `time` keeps its speed at any frame rate, but feedback motion (zoom, rotation, decay) advances once per frame, so it runs faster at a higher frame rate.
 - **Detail** sets the warp mesh. Each mesh point runs the preset's per-vertex equations on the CPU every frame, so on a low-end box a smaller mesh helps CPU-heavy presets more than a lower resolution does.
 
 ## Device tiers

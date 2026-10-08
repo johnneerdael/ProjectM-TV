@@ -87,7 +87,7 @@ per_frame_3=q1=kick;
 
 ## Custom waves and shapes, per frame
 
-**Custom waves:** per-frame variables are loaded with q from the main per-frame result and t from init; the wave's per-frame code runs; then q and t are copied into the per-point context. Per-point code receives `sample` (0→1 along the wave), `value1`, `value2` (left/right audio or spectrum), and starts each point with `x`, `y`, `r`, `g`, `b`, `a` from the per-frame results.
+**Custom waves:** per-frame variables are loaded with q from the main per-frame result and t from init; the wave's per-frame code runs; then q and t are copied into the per-point context. Per-point code receives `sample` (0→1 along the wave), `value1`, `value2` (left/right audio or spectrum), and starts each point with `x = 0.5 + value1`, `y = 0.5 + value2`, and `r`, `g`, `b`, `a` from the per-frame results (`milkdropfs.cpp:2681`).
 
 **Custom shapes:** with `num_inst` above 1, the shape's per-frame code runs **once per instance**, with `instance` set to 0, 1, 2 …. q, t and all shape built-ins are reset for every instance; your own variables persist across instances and frames.
 
@@ -97,7 +97,7 @@ per_frame_3=q1=kick;
 |---|---|---|
 | `warp` | **1** | The animated sine warp is on unless you set `warp=0` |
 | `fDecay` / `decay` | 0.98 | Ignored by MilkDrop when a warp shader runs (see [effects](effects.md#decay)) |
-| `fGammaAdj` / `gamma` | 2.0 | Applied only by the classic composite |
+| `fGammaAdj` / `gamma` | 2.0 | Applied by the classic composite, or baked into MilkDrop's generated default composite |
 | `zoom`, `zoomexp`, `sx`, `sy` | 1 | |
 | `cx`, `cy`, `wave_x`, `wave_y` | 0.5 | |
 | `nWaveMode` | 0 | |
@@ -109,4 +109,4 @@ per_frame_3=q1=kick;
 File keys and equation names differ for some settings: `fDecay` ↔ `decay`, `nWaveMode` ↔ `wave_mode`, `fZoomExponent` ↔ `zoomexp`, `fGammaAdj` ↔ `gamma`.
 
 !!! note "Portability"
-    MilkDrop fills a missing `wave_r`, `wave_g`, `wave_b`, `wave_x` or `wave_y` with the current `rot` value, a historical quirk. projectM uses 1, 1, 1, 0.5, 0.5. Always write them.
+    MilkDrop fills a missing `wave_r`, `wave_g`, `wave_b`, `wave_x` or `wave_y` with the reset value of `rot`, which is read before the file's `rot`, so effectively 0 (`state.cpp:1369`): a black wave in the corner. projectM uses 1, 1, 1, 0.5, 0.5. Always write them.

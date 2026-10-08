@@ -62,7 +62,7 @@ Up to four waves, `wavecode_0` to `wavecode_3`:
 
 | Setting | Effect |
 |---|---|
-| `samples` | Points to draw: up to 512 (spectrum) or 480 (waveform), reduced by `sep` |
+| `samples` | Points to draw, up to 512. MilkDrop 2.25c recomputes the cap after per-frame code, so the 480 waveform limit and the `sep` reduction applied before it are discarded |
 | `bSpectrum` | 0: waveform values (−1…1, centred); 1: spectrum (0 and up) |
 | `sep` | In waveform mode, the offset between the left and right channel windows |
 | `scaling` | Multiplies the values: ×0.15 for spectrum, ×0.004 for waveform, times the preset's wave scale |

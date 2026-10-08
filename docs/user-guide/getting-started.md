@@ -3,7 +3,7 @@
 ## Requirements
 
 - Android TV or Google TV running Android 5.0 or later, with OpenGL ES 3.0.
-- At least 2 GB of RAM is highly recommended. 4K rendering benefits from 4 GB or more.
+- At least 2 GB of RAM is highly recommended; more RAM leaves more headroom for high render sizes.
 - A music app playing **on the same device**. Verified players are Spotify, SoundCloud, SmartTube and [Milkbeat](https://github.com/johnneerdael/Milkbeat); other apps have not been verified.
 
 ProjectM TV visualizes another app's music. It does not play music, and it never uses the microphone.
@@ -107,7 +107,7 @@ The defaults suit most TVs:
 | Auto change | On | Off keeps the current preset |
 | Preset duration | 30 s | Longer for slower viewing |
 | Advanced › Resolution | Auto, up to the panel's native size | Native or a fixed size to test a preset at full resolution |
-| Advanced › Frame rate | Half the refresh rate (30 fps at 60 Hz) | Higher needs more GPU and may lower Auto resolution |
+| Advanced › Frame rate | About 30 fps (30 at 60 Hz, 25 at 50 Hz) | Higher needs more GPU and may lower Auto resolution |
 | Advanced › Native trails | Standard | Medium or High for more native detail on 4K panels |
 | Advanced › Transitions | Auto | Lightweight on very slow devices |
 | Advanced › Skip slow / blank presets | On | Leave on |

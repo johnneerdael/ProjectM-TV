@@ -61,7 +61,7 @@ A leading backtick is stripped from every code line. MilkDrop's exporter adds on
 
 How the lines become one program is where the two engines differ:
 
-- **MilkDrop** joins equation lines with **no separator at all**, then removes `//` and `\\` comments to the end of each line (`CState::StripLinefeedCharsAndComments`, `state.cpp:1526`). Two lines `a=1` and `b=2` become `a=1b=2`, which still works only because statements end in `;`. A name split across two lines is glued back together.
+- **MilkDrop** joins equation lines with **no separator at all**, then removes `//` and `\\` comments to the end of each line (`CState::StripLinefeedCharsAndComments`, `state.cpp:1526`). Two lines `a=1;` and `b=2;` become `a=1;b=2;`; without the `;` they would fuse into `a=1b=2`. A name split across two lines is glued back together.
 - **projectM** joins lines with a newline, and its evaluator understands `//` and `/* */` comments.
 
 Real presets depend on MilkDrop's rule. `161.milk` splits a variable name across lines:

@@ -20,7 +20,7 @@ adb logcat -s projectM-Native
 
 | Line | Tells you |
 |---|---|
-| `LOAD preset='…' ms=… programs_compiled=… weight_mb=…` | The preset loaded, how long it took, how many shader programs were compiled, its texture memory |
+| `LOAD preset='…' ms=… … weight_mb=… … programs_compiled=…` | The preset loaded, how long it took, how many shader programs were compiled, its texture memory |
 | `Preset code left out (<preset>): <reason> (line N, column M)` | An equation block failed to compile and was dropped, as MilkDrop would. The rest still runs |
 | `Preset load failed (<preset>): <reason>` | The file could not be parsed; the preset is skipped |
 | `SKIP preset='…' reason=…` | The preset was added to this TV's skip list (unreadable, failed to load, too slow, or black twice) |
@@ -32,7 +32,7 @@ A preset that is skipped as *black* or *too slow* is recorded on the TV's skip l
 
 ## 2. Static checks
 
-`tools/check-presets.py` runs in CI on every bundled preset. You can run it on your own folder. It reports presets that:
+`tools/check-presets.py` runs in CI on the bundled presets in `core/src/main/assets/presets` (it takes no path argument; to check your own presets, copy them into that folder in a checkout, and never pass `--remove` there casually, because it deletes failing presets). It reports presets that:
 
 - **cannot react to music**: no `bass`, `mid`, `treb`, `vol` or `*_att` in any per-frame, per-pixel, wave, shape or shader code, *and* the main waveform is hidden (`fWaveAlpha` ≤ 0.01 or `wave_a = 0` in code), *and* no custom wave is enabled;
 - use an **excluded texture** (images with text, logos or people);
@@ -71,10 +71,10 @@ The most ambitious tool is the **source forecaster**, being developed on the [pr
 | Presets scoring 95 or more of 100 | **85 of 100** |
 | Of the 88 the forecaster could complete | 85 scored 95+, mean **98.8** |
 | Perfect scores (all 20 claims) | 71 |
-| Presets it could not forecast | 12, every one because of arithmetic the GPU leaves undefined |
+| Presets it could not forecast | 12: unresolved numeric domains, mostly undefined powers (6 warp power, 1 shader `pow`), plus nonfinite warp coordinates, a division and a dot product |
 | Evidence | 2,000 claims frozen before 6,000 rendered frames |
 
-In other words: when the arithmetic is defined, the forecaster describes about **nine in ten** presets almost exactly from their source code alone. These are behavioural claims, not pixel identity. The audit covers 60 frames at 256×144, with one audio stream, seed and GPU (an Apple M4 Pro emulator); longer runs, other music and 4K detail remain unverified, and the audit's own formal gate, which required more, is recorded as not passed.
+In other words: where its arithmetic is resolved, the forecaster's claims about behaviour hold for about **nine in ten** presets, from source code alone. These are behavioural claims, not pixel identity. The audit covers 60 frames at 256×144, with one audio stream, seed and GPU (an Apple M4 Pro emulator); longer runs, other music and 4K detail remain unverified, and the audit's own gate, which requires all 100 presets at 95 or more, is recorded as not passed.
 
 ### What source analysis cannot settle
 
@@ -115,7 +115,7 @@ What makes it predictable:
 - **Explicit motion.** `per_frame_5` sets every motion variable each frame, including `warp=0`, so nothing depends on defaults.
 - **A forecastable core.** Shape 0's per-frame code is `rad=.74+.12*q1`, so the core's radius ranges from 0.74 to 0.92: a 24.3% larger diameter and 54.6% larger area at full kick. On the test audio, the computed `kick` spans 0.152871 to 1.5. The render matched the forecast with a worst relative error of **0.076%**, including exact timing of flash events.
 
-The rest of the preset demonstrates every block type:
+The rest of the preset uses most block types (it has no per-pixel or wave/shape init code):
 
 - shape 0 shows a named image, a projectM extension;
 - shapes 1–2 are additive halo rings with thick outlines;

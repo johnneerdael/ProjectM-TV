@@ -39,7 +39,7 @@ Before your code, the engine prepends a header that defines the inputs. The name
 | `mip_x`, `mip_y`, `mip_avg` | Mip-level helpers | `_c12` |
 | `q1` … `q32` | The per-frame q values, after per_frame code | `_qa.x` … `_qh.w` |
 | `rand_frame`, `rand_preset` | Random `float4`: new every frame / once per preset | |
-| `rot_s1`…`rot_s4`, `rot_d1`…, `rot_f1`…, `rot_vf1`…, `rot_uf1`…, `rot_rand1`… | 4×4 rotation matrices: static, slow, fast, very fast, ultra fast, random per frame | |
+| `rot_s1`…`rot_s4`, `rot_d1`…, `rot_f1`…, `rot_vf1`…, `rot_uf1`…, `rot_rand1`… | 4×3 matrices (rotation plus translation): static, slow, fast, very fast, ultra fast, random per frame | |
 
 Helper functions:
 
@@ -53,15 +53,15 @@ Helper functions:
 
 !!! note "Portability"
     - MilkDrop's `time` *inside shaders* counts from the preset start (wrapped at 10,000 s). projectM's counts from program start. The per-frame equation variable `time` is program time in both.
-    - In MilkDrop, `rand_frame`, `rand_preset` and the `rot_*` matrices are shared by the warp and composite shaders. projectM generates them separately per shader, so the two stages see different values.
-    - MilkDrop's `vol` and `vol_att` in shaders actually hold one third of `treb`, because of a comma-operator bug in its source (`milkdropfs.cpp:3970`). projectM passes the real average volume.
+    - In MilkDrop, `rand_frame`, `rand_preset` and the `rot_s`…`rot_uf` matrices are shared by the warp and composite shaders (`rot_rand1`–`4` are drawn anew for each). projectM generates them separately per shader, so the two stages see different values.
+    - MilkDrop's `vol` and `vol_att` in shaders actually hold one third of `treb` and `treb_att`, because of a comma-operator bug in its source (`milkdropfs.cpp:3970`). projectM passes the real average volume.
     - MilkDrop writes the composite's alpha from the vertex colour; projectM writes 1.0.
 
 ## Blur levels must be decoded
 
-Each blur level stores colours **normalized to its range**: `(c − min) / (max − min)`, with each level relative to the one before. `GetBlur1(uv)` undoes this: it returns `tex2D(sampler_blur1, uv).xyz * (max1−min1) + min1`. Reading `sampler_blur1` directly returns the *encoded* value, which looks washed out or too dark whenever the range is not 0–1. Use `GetBlurN`.
+Each blur level stores colours **normalized to its range**: `(c − min) / (max − min)`, with each level's range nested inside the previous level's. `GetBlur1(uv)` undoes this: it returns `tex2D(sampler_blur1, uv).xyz * (max1−min1) + min1`. Reading `sampler_blur1` directly returns the *encoded* value, which looks washed out or too dark whenever the range is not 0–1. Use `GetBlurN`.
 
-Only the blur levels a shader needs are computed. MilkDrop and upstream projectM decide this by searching for `GetBlur1/2/3`; ProjectM TV also counts any mention of `sampler_blurN` or `blurN_min`/`max`. Blur ranges and their safe values are covered under [effects](effects.md#blur).
+Only the blur levels a shader needs are computed. MilkDrop decides from the blur samplers the compiled shader actually uses; upstream projectM searches the text for `GetBlurN` and `sampler_blurN`; ProjectM TV also counts `blurN_min`/`blurN_max`. Blur ranges and their safe values are covered under [effects](effects.md#blur).
 
 ## Writing to inputs
 
@@ -69,7 +69,7 @@ Because `q1`, `time`, `bass` and the others are macros onto uniform components, 
 
 ## What translates, and what does not
 
-Translation was run on all 15,576 authored warp and composite shaders in the bundled library. The constructs below are where real presets failed:
+An earlier pass translated all 15,576 authored warp and composite shaders in the bundled library. The constructs below are where real presets failed:
 
 | Construct | Status in ProjectM TV | Advice for portable presets |
 |---|---|---|
@@ -85,7 +85,7 @@ Translation was run on all 15,576 authored warp and composite shaders in the bun
 | `pow(x, y)` with negative `x`, or zero `x` and `y` ≤ 0 | **Undefined in GLSL**: any result, including NaN, on a given GPU | Guard: `pow(max(x, 1e-6), y)` or `pow(abs(x), y)` |
 | Large arguments to `sin`/`cos` in shader code | Precision is driver-dependent | Wrap angles with `frac` or `fmod` first |
 
-Undefined `pow` is the largest source of unpredictable output found by this project's [source predictor](testing.md#what-source-analysis-cannot-settle). Twelve of 100 randomly chosen presets could not be predicted because of undefined GPU arithmetic such as negative-base powers, nonfinite warp coordinates and divisions by zero.
+Undefined `pow` is the largest source of unpredictable output found by this project's [source predictor](testing.md#what-source-analysis-cannot-settle). Twelve of 100 randomly chosen presets could not be forecast because of unresolved numeric domains; seven of them involve powers of negative or zero bases, the rest nonfinite warp coordinates, a division and a dot product.
 
 ## Warp shader responsibilities
 

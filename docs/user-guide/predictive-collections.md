@@ -54,7 +54,7 @@ A single still cannot show motion. What separates the moods is how fast and how 
 
 ## How the scores are made
 
-The score measures **visual activity**, not musical genre or taste. Each bundled preset was run once through the published ProjectM TV core library (version 2.3.3, the same engine apps use) with controlled input:
+The score measures **visual activity**, not musical genre or taste. Each bundled preset was run once through the published ProjectM TV core library (version 2.3.3, in its capped build, which predates the current Native engine based on projectM 4.2) with controlled input:
 
 - 420 frames at 30 fps, at 128×72 pixels with a 48×32 mesh; the first 60 frames are warm-up.
 - A synthetic test signal: quiet tones for 0–5 s, a brighter melody for 5–9 s, then melody plus kick-drum pulses for 9–14 s. No real recordings are used or shipped.
@@ -66,7 +66,7 @@ Four quantities are measured from the frames:
 3. **Mean acceleration** of that motion.
 4. **Peak per-pixel change**: the 95th percentile, over frame pairs, of each pair's 95th-percentile brightness change.
 
-They are combined as `4.3673 + Σ weight × log1p(x) / scale`, with weights of about 36.97, 2.47, 50.61 and 23.40. The raw values are ranked and rescaled so that the least active preset scores 1 and the most active 100. A score therefore places a preset relative to the others; it is not a percentage. The 382 presets that showed no visible activity in the measurement score 1, stay in All, and are left out of the three moods.
+They are combined as `4.3673 + Σ weight × log1p(x) / scale`, with weights of about 36.97, 2.47, 50.61 and 23.40. A separate flash term, from paired up-and-down brightness flips, is computed too, and the larger of the two values is used. The raw values are ranked and rescaled so that the least active preset scores 1 and the most active 100. A score therefore places a preset relative to the others; it is not a percentage. The 382 presets that showed no visible activity in the measurement score 1, stay in All, and are left out of the three moods.
 
 The weights were fitted to eight human judgments of real presets. In leave-one-out checks the model placed 4 of 8 in exactly the judged band and 6 of 8 within five points. That is a small calibration set, which is why moods are still beta.
 

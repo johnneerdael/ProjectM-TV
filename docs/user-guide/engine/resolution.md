@@ -5,13 +5,13 @@ MilkDrop presets were written on Windows PCs around 2001–2013, mostly at about
 ProjectM TV Engine treats resolution as a fidelity problem. It renders at the TV's native panel size while keeping each preset's *authored scale*. This page explains each mechanism, what it measures and what it does not fix.
 
 !!! note "Upstream context"
-    This is the work described by projectM issue [#682 *Improve line rendering on higher resolutions*](https://github.com/projectM-visualizer/projectm/issues/682). ProjectM TV Engine implements it end to end: reference-scaled quad lines plus the related blur, fade, sample-count and `texsize` rules that line width alone cannot fix. The behaviour stays opt-in in the C API, so upstream-compatible callers that leave the reference size at 0 get byte-identical GL-line output.
+    This is the work described by projectM issue [#682 *Improve line rendering on higher resolutions*](https://github.com/projectM-visualizer/projectm/issues/682). ProjectM TV Engine addresses its resolution-scaling part: reference-scaled quad lines plus the related blur, fade, sample-count and `texsize` rules that line width alone cannot fix. The round joins and caps the issue suggests are not implemented. The behaviour stays opt-in in the C API, so upstream-compatible callers that leave the reference size at 0 get byte-identical GL-line output.
 
 ## The problem, measured
 
 | Quantity in MilkDrop | Why it breaks at 4K | Symptom |
 |---|---|---|
-| Waveforms, custom waves, shape outlines and motion vectors drawn as **1 px GL lines** | A 1 px line covers 1/7.5 of the share of the picture at 2160p that it covered at 768p | Line-driven feedback presets darken or go almost black |
+| Waveforms, custom waves, shape outlines and motion vectors drawn as **1 px GL lines** | At 3840×2160 a 1 px line covers less than a third of the share of the picture it covered at 1024×768 (it would need 3.25 px) | Line-driven feedback presets darken or go almost black |
 | **Blur levels** made at ¼, ⅛ and 1/16 of the canvas, blurred by a few of their own texels | The blur radius is a fixed share of the picture only at one size; at 3840×2160 blur1 was **3.75× narrower** than at 1024×768 | Glow and smear presets look sharper and darker |
 | **Line-waveform point count**: MilkDrop caps line waveforms at a third of its canvas width in points (`milkdropfs.cpp:3008`) | The cap rises with the render width, so a large render draws far more points than the author saw | `$$$ Royal - Mashup (103)` was **2.3× as bright** at 1080p (0.50 mean luma against 0.22) |
 | **`texsize`** in preset shaders (5,284 of the 9,606 bundled presets step by `texsize.zw` texels; 4,428 convert UV to pixels with `texsize.xy`) | A warp that advects by `grad*texsize.zw*6` moves the picture **3.25× slower** at 2160p | `Acid Mandala v1c` stayed small and desaturated (saturation 0.46 against 0.80) |
@@ -21,8 +21,11 @@ ProjectM TV Engine treats resolution as a fidelity problem. It renders at the TV
 
 projectM, like MilkDrop, draws lines with GL lines: 1 px wide, with thick lines drawn several times at an offset. ProjectM TV Engine adds `projectm_opengl_set_line_reference_size(W_ref, H_ref)`. With a reference size, lines are drawn as **instanced quads**, one instance per segment, with miter joins.
 
+!!! note "Which reference size the app uses"
+    The Android core uses MilkDrop's 1024×768 reference at render sizes up to 1330p. Above 1330p with Native trails on (the default), it uses 1280×720, matching the authored feedback canvas: at 3840×2160 lines are 3 px wide and `texsize` and the blur chain use 1280×720. The worked numbers on this page use the 1024×768 reference.
+
 - **Width.** 1 px at the reference size, and wider above it by the square root of the area ratio: `max(1, sqrt(W·H / (W_ref·H_ref)))`. A line covers the same share of the picture at any size and aspect ratio. With the 1024×768 reference that is 1.62 px at 1920×1080 and 3.25 px at 3840×2160.
-- **At or below the reference area nothing changes.** Lines stay MilkDrop's 1 px lines at full brightness. In testing, thinner lines faded by their width made feedback presets go dark below 1080p (`$$$ Royal - Mashup (191)` was black at 480p). This is the low-resolution regression reported in the #682 discussion, and the engine avoids it.
+- **At or below the reference area nothing changes.** Lines stay MilkDrop's 1 px lines at full brightness. In testing, thinner lines faded by their width made feedback presets go dark below 1080p (`$$$ Royal - Mashup (191)` was black at 480p). The engine avoids that low-resolution darkening.
 - **Thick lines** use MilkDrop's four-pass scheme: the thin line drawn four times, offset by (0,0), (+x,0), (+x,+y) and (0,+y), with the offsets scaled like the width. projectM uses one pixel for the main wave and half a pixel for custom waves and shape outlines; MilkDrop 2 uses one canvas pixel for all three (`milkdropfs.cpp:2455, 2738`), a remaining difference.
 - **Hard edges.** An anti-aliased edge exists (`projectm_opengl_set_line_antialiasing`) but is off. A soft edge made a feedback preset 14% darker in testing, because presets that feed their own lines back expect MilkDrop's hard pixels.
 - **Pixel ties.** At the reference size a thin quad line lights the pixels MilkDrop's 1 px line lights, apart from a few at sharp turns. On GLES the quads are moved by 1/64 px so that ties follow Mali's GL lines. This was verified on a Mali-G52; Tegra was not verified.
@@ -54,16 +57,18 @@ Eighteen line-heavy presets (feedback showcases and the largest before/after dif
 | Presets within 10% at 1080p / 2160p | **17 / 14 of 18** | 4 / 4 of 18 |
 | Brightness change between 1080p and 2160p (median) | **2.4%** | 15% |
 
-A wider sample of every 40th bundled preset (175 comparable presets, 168 drawing visible lines) gave a median brightness deviation of 0.01% from GL lines at 1080p, with no preset more than 10% different. Between 1080p and 1440p, brightness changes by a median 2.0% with quad lines against 4.3% with GL lines.
+An earlier wider sample, measured with a 1920×1080 reference, of every 40th bundled preset (175 comparable presets, 168 drawing visible lines) gave a median brightness deviation of 0.01% from GL lines at 1080p, with no preset more than 10% different. Between 1080p and 1440p, brightness changes by a median 2.0% with quad lines against 4.3% with GL lines.
 
 Aspect ratio alone changes many feedback presets considerably. Going from 1024×768 to 1182×665 with GL lines makes `Goody's Trichromatic Mind Games` 1.35× as bright and `suksma - bleuneycombinatoriccitensor` 0.11× as bright. No uniform can undo that, because the composition itself is different.
 
 ### Cost on a TV GPU
 
-On a Ugoos AM6 (Mali-G52, Android 9) the line shaders compile without errors:
+On a Ugoos AM6 (Mali-G52, Android 9) the line shaders compile without errors. Measured against GL lines with the current 1024×768 reference (music playing, alternating 60 s runs):
 
-- `Flexi - alien complex 03` (many outlined shapes) at 1080p is within measurement noise of GL lines (−0.6% and −0.85% in two runs).
-- Motion vectors at 2160p, where the quads are 2 px wide, are up to 1.85% slower.
+- `Flexi - alien complex 03` (many outlined shapes) is 2.0% slower at 1080p (44.6 against 43.7 fps, GPU-bound).
+- At 2160p, `$$$ Royal - Mashup (191)` is 0.9% slower and `$$$ Royal - Mashup (103)` 3.9% slower.
+
+An earlier run with a 1920×1080 reference, where lines stay 1 px at 1080p, measured the first preset within noise and 2 px motion vectors at 2160p up to 1.85% slower.
 
 ## Native trails: authored feedback, native geometry
 
@@ -81,7 +86,7 @@ Native trails is an Android-core default. The projectM C API leaves it off, so c
 
 - **Chaotic presets** can diverge from tiny input differences. Compare with the same audio and timing.
 - **Aspect ratio** is part of the composition. A 4:3 preset on a 16:9 TV is a different picture.
-- `suksma - penattrition` keeps MilkDrop's minimum motion-vector length in pixels. Scaling it fixed that preset but made another worse, so the value stays as MilkDrop has it, except while diffusion compensation is active.
+- `suksma - penattrition - geiss crossfire shaders` keeps MilkDrop's minimum motion-vector length in pixels. Scaling it fixed that preset but made another worse, so the value stays as MilkDrop has it, except while diffusion compensation is active.
 - `$$$ Royal - Mashup (191)` is a one-texel neighbour-difference recurrence seeded by the wave. No uniform makes it resolution-independent.
 - Host and emulator measurements do not establish performance or shader compatibility on every physical TV GPU.
 
