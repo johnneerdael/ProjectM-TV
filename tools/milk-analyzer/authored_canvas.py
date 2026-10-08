@@ -24,6 +24,39 @@ def select_canvas(width, height, reference_width, reference_height):
     return width//scale,height//scale,scale
 
 
+def detail_configuration(*,native_size,physical_size,trails_level):
+    """Released JNI selection math; allocation success is a separate input.
+
+    Physical height gates native trails. A transition-scaled render extent does
+    not change that gate. Initial uniforms use ShaderCanvasSize before integer
+    detail selection replaces its reference dimensions for frame execution.
+    """
+    for size in (native_size,physical_size):
+        if (not isinstance(size,(tuple,list)) or len(size)!=2 or
+                any(type(n) is not int or not 0<n<2**31 for n in size)):
+            raise ValueError('two positive int32 physical/native dimensions required')
+    if type(trails_level) is not int or not 0<=trails_level<=2:
+        raise ValueError('native trails level0..2 required')
+    width,height=native_size
+    active=physical_size[1]>1330
+    reference=(1280,720) if active else (1024,768)
+    alpha=trails_level*.5 if active else -1.0
+    from quad_lines import line_scale
+    scale=line_scale(width,height,reference)
+    # BlurSourceFor first divides narrowed float32 dimensions by float32 scale;
+    # then positive std::lround rounds the reported initialization canvas.
+    initial=tuple(max(1,math.floor(float(np.float32(n)/scale)+.5))
+                  for n in native_size) if scale>1 else tuple(native_size)
+    canvas=select_canvas(width,height,*reference) if active else None
+    return {'native_size':tuple(native_size),'physical_size':tuple(physical_size),
+            'reference_size':reference,'alpha':alpha,'initial_shader_canvas':initial,
+            'authored_size':None if canvas is None else canvas[:2],
+            'scale':None if canvas is None else canvas[2],
+            'selection_status':'disabled' if not active else
+                               'integer-canvas-selected' if canvas is not None else 'no-integer-canvas',
+            'resource_allocation_verified':False}
+
+
 def _rgba(values):
     field=np.asarray(values,dtype=np.float32)
     if (field.ndim!=3 or field.shape[-1]!=4 or min(field.shape[:2])<=0 or

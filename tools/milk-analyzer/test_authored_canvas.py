@@ -50,3 +50,33 @@ def test_invalid_values_and_noninteger_canvas_ratios_remain_rejected():
         combine_detail(low,None,alpha=.5,output_size=(4,4))
     with pytest.raises(ValueError,match='finite'):
         combine_detail(np.full((2,2,4),np.nan),None,alpha=0,output_size=(4,4))
+
+
+def test_native_trails_gate_uses_physical_height_and_preserves_init_canvas():
+    from authored_canvas import detail_configuration
+    value=detail_configuration(native_size=(1920,1080),physical_size=(3840,2160),trails_level=1)
+    assert value['alpha']==.5
+    assert value['authored_size']==(960,540)
+    assert value['initial_shader_canvas']==(1280,720)
+    assert value['scale']==2
+    disabled=detail_configuration(native_size=(3840,2160),physical_size=(1920,1080),trails_level=2)
+    assert disabled['alpha']==-1
+    assert disabled['authored_size'] is None
+    assert disabled['reference_size']==(1024,768)
+
+
+def test_true_4k_standard_medium_high_have_same_authored_canvas():
+    from authored_canvas import detail_configuration
+    for level,alpha in enumerate((0,.5,1)):
+        value=detail_configuration(native_size=(3840,2160),physical_size=(3840,2160),trails_level=level)
+        assert value['authored_size']==value['initial_shader_canvas']==(1280,720)
+        assert value['alpha']==alpha and value['scale']==3
+
+
+def test_detail_fallback_is_explicit_and_does_not_fabricate_an_allocated_canvas():
+    from authored_canvas import detail_configuration
+    value=detail_configuration(native_size=(3841,2160),physical_size=(3841,2160),trails_level=0)
+    assert value['authored_size'] is None
+    assert value['selection_status']=='no-integer-canvas'
+    with pytest.raises(ValueError,match='trails'):
+        detail_configuration(native_size=(3840,2160),physical_size=(3840,2160),trails_level=3)

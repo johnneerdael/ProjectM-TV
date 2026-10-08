@@ -46,3 +46,11 @@ U01 building blocks now include main-init versus frame canvas inputs, independen
 Focused controls: 115 tests and 16 subtests passed; three additional dot-area controls passed. Strict MkDocs passed. Full prepared analyzer suite: 1,565 tests and 92 subtests passed in 79.72 seconds. Independent checkpoint review is clear after three focused corrections: authored main-dot style, conditional custom-dot alpha scaling and same-size UV retention.
 
 The latest published core has changed to v2.3.27, commit `120547f3fafe475c86ffc3392fb94389841d08f0`, full AAR SHA-256 `17f17cd4914bc68d64229c3840f703c2b9c47465744f4aa92d36b52984116325`. The immutable audit remains bound to v2.3.25. The new release's exact source/adapters and full-AAR runtime are being prepared separately before numerical qualification.
+
+
+Additional U01 selector controls: 13 focused canvas/dot tests pass. The released
+JNI gate uses physical height, so a 4K surface with a 1920×1080 native target
+selects an authored 960×540 frame canvas while initialization reports 1280×720.
+Standard/Medium/High map to gains 0/0.5/1 and share the selected dimensions.
+Noninteger selection remains an explicit fallback candidate; allocation is never
+credited from dimensions alone. The entry-point guard is still retained.

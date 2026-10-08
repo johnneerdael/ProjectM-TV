@@ -111,7 +111,11 @@ from native pre-composite feedback, preserve same-size UV maps and blur.
 Scene execution can declare main-init shader dimensions separately from frame
 inputs, and the same prepared warp mesh can rasterize at independent target sizes.
 Explicit line reference dimensions scale native line/dot geometry while zero
-reference selects the authored canonical path. Numerical controls cover these
+reference selects the authored canonical path.
+`detail_configuration` distinguishes physical surface dimensions from transition-scaled
+render dimensions: physical height gates trails, while integer canvas selection
+and initial shader dimensions use the render extent. A selected integer canvas
+does not prove resource allocation; the returned qualification flag stays false. Numerical controls cover these
 building blocks; the high-resolution guard in `forecast_source` remains until
 complete entry-point integration and published-AAR qualification.
 
