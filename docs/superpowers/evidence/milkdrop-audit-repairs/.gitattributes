@@ -2,3 +2,7 @@
 I01/originals/*.milk -whitespace
 I01/stock-oracles/*.milk -whitespace
 I21/stock-salad-bar-original-alias0.milk -whitespace
+
+# Preserve exact raw CMake compiler output, including formatting spaces.
+I21/prepared-build-corrected.txt -whitespace
+I21/prepared-build-missing-include.txt -whitespace

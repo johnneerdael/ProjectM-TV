@@ -1,0 +1,106 @@
+{
+  "status": "retained stereo averaging qualified; mono TV combination difference inactive; no new patch",
+  "runs": 6,
+  "frames_per_run": 480,
+  "selected_captures_per_run": 8,
+  "exact_repeat_groups": 3,
+  "shipping_byte_identity": false,
+  "rows": [
+    {
+      "directory": "stereopolicy-Sjadoh---Fortune-Teller-current-0",
+      "preset": "Sjadoh - Fortune Teller.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "85968a3e618cc8d127518c83d3a8b9f29bcb79acc03006e01b9c7196d7249393",
+        "0fabbace5ae2f03d2747bcfa98d53bcb077843be1b4f917707550428260d58da",
+        "88cee86c9076f4fc307734d536f60b370a98bc333a25e4ceeccd7f7161f6da67",
+        "19b3d5001b0f1a7616ede6bd2bdd8db648e3a05f75b9e3f94dfb1ef8e3e802ce",
+        "e66058bf5a522b274b84fe751efa710fd7ad167b1823741eaae740886e50d6ea",
+        "92a02310ab8b80f5359f99169b6ab519694ecf2988d881c90cd14b430dc99a98",
+        "870fb39a9e778af609999fe24d8e92b596f9aee2f7938d00dd02d01a38c0afa9",
+        "893ee0c33723ebf0d7d769fb8358367c559fe952bc0cf5b257218effcbd36bdc"
+      ]
+    },
+    {
+      "directory": "stereopolicy-Sjadoh---Fortune-Teller-current-1",
+      "preset": "Sjadoh - Fortune Teller.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "85968a3e618cc8d127518c83d3a8b9f29bcb79acc03006e01b9c7196d7249393",
+        "0fabbace5ae2f03d2747bcfa98d53bcb077843be1b4f917707550428260d58da",
+        "88cee86c9076f4fc307734d536f60b370a98bc333a25e4ceeccd7f7161f6da67",
+        "19b3d5001b0f1a7616ede6bd2bdd8db648e3a05f75b9e3f94dfb1ef8e3e802ce",
+        "e66058bf5a522b274b84fe751efa710fd7ad167b1823741eaae740886e50d6ea",
+        "92a02310ab8b80f5359f99169b6ab519694ecf2988d881c90cd14b430dc99a98",
+        "870fb39a9e778af609999fe24d8e92b596f9aee2f7938d00dd02d01a38c0afa9",
+        "893ee0c33723ebf0d7d769fb8358367c559fe952bc0cf5b257218effcbd36bdc"
+      ]
+    },
+    {
+      "directory": "stereopolicy-audit-stereo-i07-averaged-stage-current-0",
+      "preset": "audit stereo i07-averaged-stage.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678"
+      ]
+    },
+    {
+      "directory": "stereopolicy-audit-stereo-i07-averaged-stage-current-1",
+      "preset": "audit stereo i07-averaged-stage.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678",
+        "3ae5e8a150e6eb91aa018476c146f158d2ef364f833df59bdeaf6cf62f6ba678"
+      ]
+    },
+    {
+      "directory": "stereopolicy-audit-stereo-i07-left-only-stage-current-0",
+      "preset": "audit stereo i07-left-only-stage.milk",
+      "repeat": 0,
+      "rgb_hashes": [
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0"
+      ]
+    },
+    {
+      "directory": "stereopolicy-audit-stereo-i07-left-only-stage-current-1",
+      "preset": "audit stereo i07-left-only-stage.milk",
+      "repeat": 1,
+      "rgb_hashes": [
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0",
+        "1120fdc67fee36d54931c14c45ee460aa38b409b636d4e9aa988a2e47b5300d0"
+      ]
+    }
+  ],
+  "finite_fixture_comparisons": [
+    {
+      "case": "executed finite stereo-analysis coefficients rendered as explicit border inputs; not stereo JNI execution",
+      "different_selected_RGB": true
+    }
+  ]
+}

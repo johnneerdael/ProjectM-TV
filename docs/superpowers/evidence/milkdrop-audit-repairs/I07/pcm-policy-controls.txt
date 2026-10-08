@@ -1,0 +1,7 @@
+common-JNI uint8 mono 480 frames, effective tail=576, averaged/left-only bands exact; maxdelta=0
+STAGE frame60 average_bass=1.993457794 left_only_bass=1.004740357 average_bass_att=1.794111967 left_only_bass_att=1.004740357
+stereo kind=0 frames=120 max relative-band difference=0.9887174368
+stereo kind=1 frames=120 max relative-band difference=0.9730741978
+stereo kind=2 frames=120 max relative-band difference=8.999998093
+stereo kind=3 frames=120 max relative-band difference=0
+production PCM averaged-policy/mono-invariance controls passed; same-FFT left-only combination oracle, not Windows PCM equivalence

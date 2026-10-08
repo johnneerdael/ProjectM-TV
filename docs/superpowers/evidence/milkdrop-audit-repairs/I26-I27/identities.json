@@ -1,0 +1,195 @@
+{
+  "source_files": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Audio/PCM.cpp",
+      "sha256": "3221aa87d5aabc6c965bf459b2d9854f11afc8da0ef5af5af2d035105cfdec07"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Audio/FrameAudioData.hpp",
+      "sha256": "494cc2df8702f16cb5c7d852775e77310d34dcdd7814a11d08efd3b0feac9b62"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/MilkdropShader.cpp",
+      "sha256": "a24e0453a69e849360524bcde8659a732e00b9a617d5f2c1f0a3df1d9c406774"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/Shaders/PresetShaderHeaderGlsl330.inc",
+      "sha256": "6717e212969ea9c5e7d38bd2133d8624cea820409016a17ae9b281467fe1832b"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/LineGeometry.cpp",
+      "sha256": "b9a3dc3788d4b7e227fd6078cd9195c7136790faed575e3cbe014c6cf63f192f"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/MilkdropPreset/PerFrameContext.cpp",
+      "sha256": "1311250240e9e394b414840d19736c82a2a0fc8ee590d64414e84a0683ba9514"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/cpp/native-lib.cpp",
+      "sha256": "5c6459969036d4ce21d1d7767cdc8b7cb9bcd3072d11934477c87d68969983fe"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/milkdropfs.cpp",
+      "sha256": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9"
+    }
+  ],
+  "I26_candidates": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/Cope - The Neverending Explosion of Red Liquid Fire.milk",
+      "sha256": "ec4a844e75a8c8a8d4a41890495841b670960186988f29797799929a3b5d34d8",
+      "executed_or_rendered": false,
+      "relevant_lines": [
+        {
+          "line": 2,
+          "text": "PSVERSION=2"
+        },
+        {
+          "line": 3,
+          "text": "PSVERSION_WARP=2"
+        },
+        {
+          "line": 4,
+          "text": "PSVERSION_COMP=2"
+        },
+        {
+          "line": 260,
+          "text": "per_frame_28=vol=(bass+mid+treb)*0.25;"
+        },
+        {
+          "line": 261,
+          "text": "per_frame_29=vol=vol*vol;"
+        },
+        {
+          "line": 262,
+          "text": "per_frame_30=q3=vol;"
+        },
+        {
+          "line": 263,
+          "text": "per_frame_31=q5=vol*0.5;"
+        },
+        {
+          "line": 264,
+          "text": "per_frame_32=mtime=mtime+vol*0.01;"
+        },
+        {
+          "line": 280,
+          "text": "warp_15=`    noise2 += noise3*vol;"
+        }
+      ]
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/$$$ Royal - Mashup (23).milk",
+      "sha256": "822dcc2c35813af84e1ba3c4af0b96c0f8ae32f2e6f971ca4b09206d98addf73",
+      "executed_or_rendered": false,
+      "relevant_lines": [
+        {
+          "line": 2,
+          "text": "PSVERSION=2"
+        },
+        {
+          "line": 3,
+          "text": "PSVERSION_WARP=2"
+        },
+        {
+          "line": 4,
+          "text": "PSVERSION_COMP=2"
+        },
+        {
+          "line": 548,
+          "text": "per_frame_6=vol=(bass_att+mid_att+treb_att)*0.25;"
+        },
+        {
+          "line": 549,
+          "text": "per_frame_7=vol=vol*vol;"
+        },
+        {
+          "line": 550,
+          "text": "per_frame_8=mtime=mtime+vol*0.1;"
+        },
+        {
+          "line": 569,
+          "text": "warp_13=`    float dec = saturate(vol/vol_att - 1.1)*0.5 + 0.004;"
+        }
+      ]
+    }
+  ],
+  "I27_candidates": [],
+  "I27_raw_token_scan": "rg mip_(x|y|avg|xy) across current bundled presets, no matches",
+  "artifacts": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I27-256x144-current-oracle.milk",
+      "sha256": "9eb12e5bb966b8ad4d6c7690aba0d492d6539b3c6d2ccbf86d3a95bd708670d1"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I27-256x144-duplicate-oracle.milk",
+      "sha256": "9cb09ff0a5082bc2afa1487542398d0b9f2329fe94f057b4ae264dddbb78070c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I26-live.milk",
+      "sha256": "b8ae8df6394d384a779017c46b308803180ba3aa56a9af552d34d059a0b87876"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/controls.json",
+      "sha256": "a65aaff0d439fb737d2038754ebb93158d56995ca714caba800cdbeb2286d4f5"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I26-comma-oracle.milk",
+      "sha256": "a7979467ad589e92477d7867af021e56c400311651644dfbc62a60200ff10a64"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I26-current-oracle.milk",
+      "sha256": "68ee577aa0dbe1978408a3cb825e0948069512111e4f04163cfa8929a6c21568"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I27-256x256-duplicate-oracle.milk",
+      "sha256": "9cb09ff0a5082bc2afa1487542398d0b9f2329fe94f057b4ae264dddbb78070c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I26-direct-bands.milk",
+      "sha256": "f1940e1dc0c07a116c260189d9e91b8ad21f237104304eda268954866ecb79f8"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I27-live.milk",
+      "sha256": "d284b530d1c9a6d9239a73222609625e927ffc17cde4932e0d9593fb8cb34540"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I27-1280x720-duplicate-oracle.milk",
+      "sha256": "3abedcb8ba4c7c76cd786bddfd413b7da2a5f12def61d46578ab96ce14ca6022"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I26-direct-attenuated.milk",
+      "sha256": "db5b21f212aedbf9f8eb07f1c0df49714cba9752afa713cd13430e7e3807bef8"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/README.md",
+      "sha256": "e52964b33b914875e06a6b8b5cfdbf646492ec58e96f0affa30b5243ed99720a"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I27-1280x720-current-oracle.milk",
+      "sha256": "f37efbb43331fac0433939441e66d27647cc2aa825a4a9d2f05b1e62d8534d8d"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I26-mutable-eel-live.milk",
+      "sha256": "47a6296bf56c8c6069a35099b5cc92f27dba55bd4dc7a0deab101243089d147a"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/I27-256x256-current-oracle.milk",
+      "sha256": "9cb09ff0a5082bc2afa1487542398d0b9f2329fe94f057b4ae264dddbb78070c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/CMakeLists.txt",
+      "sha256": "4965bfd89b5100dd6919c9445993ded6c1725a40003c12ee9c592ad243f75d67"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/EXECUTION-DESIGN.md",
+      "sha256": "9a07aa5c46dc93774ee6267be9c01bb9cc292cb720763def69ea0e1bce87ff89"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/shader-input-policy/shader_input_controls.cpp",
+      "sha256": "bf5d2ff4ef60feaf1b7a66e293bf40b239a1fdc29993f596c2f1597803620e7e"
+    }
+  ],
+  "qualified_completion": false,
+  "production_GL_controls_prepared": true,
+  "production_GL_controls_compiled_or_executed": false
+}

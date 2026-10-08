@@ -1,0 +1,18 @@
+MILKDROP_PRESET_VERSION=201
+[preset00]
+fDecay=1
+fGammaAdj=1
+fVideoEchoAlpha=0
+fWaveAlpha=0
+ob_size=0
+ib_size=0
+mv_a=0
+bDarkenCenter=0
+b2n=0
+b2x=1
+b3n=0
+b3x=1
+warp_1=`shader_body { ret=float3(.25+.5*uv.x,.25+.5*uv.y,.5); }
+b1n=.4
+b1x=.45
+comp_1=`shader_body { ret=8*(GetBlur1(uv)-.375); }

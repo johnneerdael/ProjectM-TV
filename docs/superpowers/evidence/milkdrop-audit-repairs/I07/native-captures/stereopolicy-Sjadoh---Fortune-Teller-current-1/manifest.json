@@ -1,0 +1,237 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditstereopolicy",
+  "pid": 4211,
+  "job": {
+    "expectedPresetCount": 9608,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/audio.u8",
+    "preset": "Sjadoh - Fortune Teller.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "085055658a926c729c298d669a631eebb728dccee5eeea9d6b22639e104dcf5b",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains the tail bounded by projectm_pcm_get_max_samples()",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "85968a3e618cc8d127518c83d3a8b9f29bcb79acc03006e01b9c7196d7249393",
+      "pngBytes": 9571460,
+      "pngSha256": "7c2a94a42140f0343ad1e4d7a3cb827a220165573159a0a6688bc7ce463d899a",
+      "rgbMean": [
+        62.77701328607253,
+        73.95723693094136,
+        63.23319866415895
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "0fabbace5ae2f03d2747bcfa98d53bcb077843be1b4f917707550428260d58da",
+      "pngBytes": 2410740,
+      "pngSha256": "61ac8f8fe9f002ab6b864b5f2498b443e44735eb405ab1b7b3874a78ae8691c9",
+      "rgbMean": [
+        41.89836817611883,
+        47.88685655381944,
+        42.13186631944444
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "88cee86c9076f4fc307734d536f60b370a98bc333a25e4ceeccd7f7161f6da67",
+      "pngBytes": 3578818,
+      "pngSha256": "6a5cdafae6b9738f49aa4c93159be4bfb2a552f42f47fef1639d1e6d21cec1d7",
+      "rgbMean": [
+        32.40199447820216,
+        36.43295657310957,
+        32.415470799575616
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "19b3d5001b0f1a7616ede6bd2bdd8db648e3a05f75b9e3f94dfb1ef8e3e802ce",
+      "pngBytes": 8213883,
+      "pngSha256": "619d74355f5767c9473131c0cf53c9e86042bb4022525903ed12ca003676f78d",
+      "rgbMean": [
+        145.3118907937886,
+        154.99493815104168,
+        146.345451871142
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "e66058bf5a522b274b84fe751efa710fd7ad167b1823741eaae740886e50d6ea",
+      "pngBytes": 4217350,
+      "pngSha256": "bfcdbea76219ca98b30135eba131e6d7271f67c231da2640dbfab6ef32c02032",
+      "rgbMean": [
+        43.702714361496916,
+        45.05205717110339,
+        43.85031635802469
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "92a02310ab8b80f5359f99169b6ab519694ecf2988d881c90cd14b430dc99a98",
+      "pngBytes": 2696351,
+      "pngSha256": "e4edaba5b99c3bc13e09f83ec4beb954aba7ca7d7093932c9b50351eea22252d",
+      "rgbMean": [
+        25.835553867669752,
+        23.581379846643518,
+        25.324219111689814
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "870fb39a9e778af609999fe24d8e92b596f9aee2f7938d00dd02d01a38c0afa9",
+      "pngBytes": 9767649,
+      "pngSha256": "f1010de33ffa9fc8255c723b8cde1ce181bd310d202faef99026447e1ca46986",
+      "rgbMean": [
+        95.50538917824075,
+        80.19960624035494,
+        96.52271255304784
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditstereopolicy\/files\/native-trails\/stereopolicy-Sjadoh---Fortune-Teller-current-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "893ee0c33723ebf0d7d769fb8358367c559fe952bc0cf5b257218effcbd36bdc",
+      "pngBytes": 5215385,
+      "pngSha256": "2a1aeb1a0b4591685d160735594b3d98f63694c5644025607ea5759864d3b604",
+      "rgbMean": [
+        68.91412893036265,
+        61.95516758294753,
+        69.03359061535494
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 44798711,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 391,
+      "elapsedRealtimeMs": 44810164,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9608,
+  "indexSha256": "58b0431d3a161b7265c24aa6568d789c02fbd33c5c59f2405c33e57defaa4fd1",
+  "presetAssetSha256": "60d9ae2f5adb14e3cd6beb99da7643e33ba103178aae84d152305cfc67e2b088",
+  "forcedPresetPrefix": "Sjadoh - Fortune Teller.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 17,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43262,
+  "framesRendered": 480,
+  "renderWallDurationMs": 13077,
+  "pssAfterFramesKB": 71653,
+  "serializedFrameMeanMs": 5.3618497861111125,
+  "serializedFrameP90Ms": 6.2815,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "Sjadoh - Fortune Teller.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 13414
+}

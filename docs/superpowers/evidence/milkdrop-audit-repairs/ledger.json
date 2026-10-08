@@ -521,10 +521,14 @@
       "sha256": "a6ede7f6f841cfe5ec66cf8641443682e37143f052117f213732c418799e135a",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I07-stereo-bands-average-channels-rather-than-left-only/HANDOFF.md",
       "numeric_witness": "At the isolated band-combination stage: left1,right3, prior long average1, steady30Hz/frame>=50: original relative1; library/predictor current2 then approximately2/1.008=1.984127.\n\nDerived stage witness, not a same-PCM stereo render comparison. Current cold JNI tests are mono.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained upstream stereo averaging; complete owner packet with actual PCM controls and Native4K source-stage/preservation images",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "retain stereo fix; TV mono unaffected"
+      "recommendation": "retain stereo fix; TV mono unaffected",
+      "evidence": "I07/README.md",
+      "native_evidence": "I07/native-results.json",
+      "policy": "retain both-channel analysis; mono TV duplicated-channel invariance",
+      "limits": "Stereo contrast images are explicit executed-stage coefficient surrogates, not stereo JNI or Windows appearance."
     },
     {
       "id": "I21",
@@ -573,10 +577,14 @@
       "sha256": "fccd89847cfc038a22361e1155b1a5be077c89cd17d70ae601d516b352268ba7",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I28-near-equal-blur-bounds-expand-instead-of-collapsing/HANDOFF.md",
       "numeric_witness": "min=max=.5: original both.4499999881/zero interval; target[.4499999881,.5500000119]. Target also coherently falls back to[0,1] for unsupported normalization triplets.\n\nZero interval is proven, but no Windows pixel/NaN appearance inferred.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained TV blur safety correction; complete owner packet with production numeric/storage/decode tests and repeated Native4K images",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
-      "recommendation": "retain blur domain repair; do not invent original NaN appearance"
+      "recommendation": "retain blur domain repair; do not invent original NaN appearance",
+      "evidence": "I28/README.md",
+      "native_evidence": "I28/native-results.json",
+      "policy": "retain 0005 expansion and coherent complete-triplet fallback; no new patch",
+      "limits": "Original collapsed reciprocal pipeline has no finite appearance oracle; displayed black reference is finite decoder-coefficient-only."
     }
   ],
   "full_preset_inventory_bytes_verified": 9606,

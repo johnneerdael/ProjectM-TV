@@ -1,0 +1,260 @@
+[
+  {
+    "case": "equal-half",
+    "input_min": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "input_max": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "original_float32_bounds": {
+      "min": [
+        0.44999998807907104,
+        0.42499998211860657,
+        0.41249996423721313
+      ],
+      "max": [
+        0.44999998807907104,
+        0.42499998211860657,
+        0.41249996423721313
+      ]
+    },
+    "retained_float32_bounds": {
+      "min": [
+        0.44999998807907104,
+        0.44999998807907104,
+        0.44999998807907104
+      ],
+      "max": [
+        0.550000011920929,
+        0.550000011920929,
+        0.550000011920929
+      ]
+    },
+    "original_denominator_zero": [
+      true,
+      true,
+      true
+    ],
+    "qualification": "Python float32 rounded source operations; no compiled engine/GL"
+  },
+  {
+    "case": "near-quarter",
+    "input_min": [
+      0.4,
+      0.4,
+      0.4
+    ],
+    "input_max": [
+      0.45,
+      0.45,
+      0.45
+    ],
+    "original_float32_bounds": {
+      "min": [
+        0.375,
+        0.3374999761581421,
+        0.31874996423721313
+      ],
+      "max": [
+        0.375,
+        0.3374999761581421,
+        0.31874996423721313
+      ]
+    },
+    "retained_float32_bounds": {
+      "min": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "max": [
+        0.4750000238418579,
+        0.4750000238418579,
+        0.4750000238418579
+      ]
+    },
+    "original_denominator_zero": [
+      true,
+      true,
+      true
+    ],
+    "qualification": "Python float32 rounded source operations; no compiled engine/GL"
+  },
+  {
+    "case": "reversed",
+    "input_min": [
+      0.8,
+      0.8,
+      0.8
+    ],
+    "input_max": [
+      0.2,
+      0.2,
+      0.2
+    ],
+    "original_float32_bounds": {
+      "min": [
+        0.44999998807907104,
+        0.44999998807907104,
+        0.44999998807907104
+      ],
+      "max": [
+        0.44999998807907104,
+        0.44999998807907104,
+        0.44999998807907104
+      ]
+    },
+    "retained_float32_bounds": {
+      "min": [
+        0.44999998807907104,
+        0.44999998807907104,
+        0.44999998807907104
+      ],
+      "max": [
+        0.550000011920929,
+        0.550000011920929,
+        0.550000011920929
+      ]
+    },
+    "original_denominator_zero": [
+      true,
+      true,
+      true
+    ],
+    "qualification": "Python float32 rounded source operations; no compiled engine/GL"
+  },
+  {
+    "case": "ordinary",
+    "input_min": [
+      0,
+      0,
+      0
+    ],
+    "input_max": [
+      1,
+      1,
+      1
+    ],
+    "original_float32_bounds": {
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "retained_float32_bounds": {
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "original_denominator_zero": [
+      false,
+      false,
+      false
+    ],
+    "qualification": "Python float32 rounded source operations; no compiled engine/GL"
+  },
+  {
+    "case": "nested",
+    "input_min": [
+      0,
+      0.25,
+      0.375
+    ],
+    "input_max": [
+      1,
+      0.75,
+      0.625
+    ],
+    "original_float32_bounds": {
+      "min": [
+        0.0,
+        0.25,
+        0.375
+      ],
+      "max": [
+        1.0,
+        0.75,
+        0.625
+      ]
+    },
+    "retained_float32_bounds": {
+      "min": [
+        0.0,
+        0.25,
+        0.375
+      ],
+      "max": [
+        1.0,
+        0.75,
+        0.625
+      ]
+    },
+    "original_denominator_zero": [
+      false,
+      false,
+      false
+    ],
+    "qualification": "Python float32 rounded source operations; no compiled engine/GL"
+  },
+  {
+    "case": "clamp-then-expand",
+    "input_min": [
+      0,
+      0.95,
+      0.975
+    ],
+    "input_max": [
+      1,
+      1.5,
+      1.5
+    ],
+    "original_float32_bounds": {
+      "min": [
+        0.0,
+        0.925000011920929,
+        0.9000000357627869
+      ],
+      "max": [
+        1.0,
+        0.925000011920929,
+        0.9000000357627869
+      ]
+    },
+    "retained_float32_bounds": {
+      "min": [
+        0.0,
+        0.925000011920929,
+        0.949999988079071
+      ],
+      "max": [
+        1.0,
+        1.024999976158142,
+        1.0499999523162842
+      ]
+    },
+    "original_denominator_zero": [
+      false,
+      true,
+      true
+    ],
+    "qualification": "Python float32 rounded source operations; no compiled engine/GL"
+  }
+]

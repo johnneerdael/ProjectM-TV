@@ -1,0 +1,13 @@
+MILKDROP_PRESET_VERSION=201
+PSVERSION_WARP=2
+[preset00]
+fDecay=1
+fGammaAdj=1
+fShader=0
+fVideoEchoAlpha=0
+fWaveAlpha=0
+ob_size=0
+ib_size=0
+mv_a=0
+bDarkenCenter=0
+warp_1=`shader_body { ret=float3(0,0,.25); }

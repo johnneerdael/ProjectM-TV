@@ -1,0 +1,7 @@
+{
+  "source": "executed production PCM same-FFT averaged/left-only-combination stage",
+  "frame": 60,
+  "averaged_bass": 1.993457794,
+  "left_only_bass": 1.004740357,
+  "bound": "explicit finite Native border surrogates; not stereo JNI input or original Windows audio/appearance"
+}
