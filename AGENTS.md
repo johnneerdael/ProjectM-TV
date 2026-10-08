@@ -483,3 +483,11 @@ become a16:9 reference; PR34 needs first-use/resize/distinct FBO controls, and
 PR40 needs explicit authored/native-off/Standard/Medium/High sequences. Historical
 screenshots/timings remain provenance, not current4.2 certification. Early
 optimization commits omit some benchmark names; preserve that uncertainty.
+
+Patch review-page presentation: keep `docs/UPSTREAM_PATCH_VALUE.md` as one readable
+Markdown page with upstream/our-library images, optional matching zooms and short
+natural-language explanations of the difference and cause. Move audit tables,
+hashes, repeated validation/caveats and the expanded working assessment to linked
+evidence. Preserve real upstream versus single-patch-removal labels; never relabel
+an ablation as upstream. Human-review figures must match retained raw frame hashes
+and pixel crops without brightness changes.

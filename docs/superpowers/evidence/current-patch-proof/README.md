@@ -250,3 +250,14 @@ sequences match all 120 frames. See [frozen inputs, screenshots and audit](auror
 Upstream uses its documented global lookup policy; the patch adds retained
 per-preset paths for custom-pack hosts. These captures do not establish an
 upstream contract violation or a MilkDrop compatibility correction.
+
+## Human-review presentation
+
+The main reference is the concise image-led review page. Its new
+[upstream/our-library figure audit](human-review/figure-audit.json) records five
+actual upstream/patched pairs at the selected visible timestamps, plus exact
+matching crops. They replace ablation-only figures as the leading comparisons;
+the original ablations remain supporting cause checks. Overview pixels reconstruct
+to the retained capture hashes, and zooms use nearest sampling without gain.
+The [expanded working assessment](expanded-assessment.md) preserves the inventory,
+original input map and technical discussion separately from the review page.

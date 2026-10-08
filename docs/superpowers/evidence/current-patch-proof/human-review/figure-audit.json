@@ -1,0 +1,172 @@
+[
+  {
+    "patch": "0002",
+    "frame": 59,
+    "preset": "core/src/main/assets/presets/Flexi - madness portal.milk",
+    "record": "clearer-02-05-results.json",
+    "crop": [
+      208,
+      104,
+      304,
+      184
+    ],
+    "zoom": 3,
+    "roles": {
+      "upstream": {
+        "source_png": "build/patch-proof/clearer-02-05-captures/0002-15e7552b07/upstream-0/frame-59.png",
+        "raw_rgb_sha256": "15d6f81aa2c6bcbec82387198b8c769cdc50669e2856fed2d61525627270c84a",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      },
+      "patched": {
+        "source_png": "build/patch-proof/clearer-02-05-captures/0002-15e7552b07/patched-0/frame-59.png",
+        "raw_rgb_sha256": "0207de1b7c7517f81261d2b33769c2f5c1ede5b2a8a6a5312223c747845f515c",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      }
+    },
+    "figure_sha256": "c04bd3d89f6c4b5d62b4d4289949f7f7752b13a40f3be4c496bf46a863334eb5"
+  },
+  {
+    "patch": "0005",
+    "frame": 59,
+    "preset": "core/src/main/assets/presets/flexi - a julia fractal for hexcollie embossed (Jelly).milk",
+    "record": "clearer-02-05-results.json",
+    "crop": [
+      208,
+      104,
+      304,
+      184
+    ],
+    "zoom": 3,
+    "roles": {
+      "upstream": {
+        "source_png": "build/patch-proof/clearer-02-05-captures/0005-b9b0b89b38/upstream-0/frame-59.png",
+        "raw_rgb_sha256": "d0376cc796fd29a2983a43e0dc93f0709ee7f05bfe5417f5485b8b7727f086e8",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      },
+      "patched": {
+        "source_png": "build/patch-proof/clearer-02-05-captures/0005-b9b0b89b38/patched-0/frame-59.png",
+        "raw_rgb_sha256": "36cfb1c2727770daa537269663c63ef0af521b25d93bd5a1d3a25a051204d517",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      }
+    },
+    "figure_sha256": "d2dd8d69f27b89713e22d01784db2f4b9aa1a4e6c8d279792970c1dfea6e0367"
+  },
+  {
+    "patch": "0012",
+    "frame": 59,
+    "preset": "core/src/main/assets/presets/amandio c - the green machine 2 skin lard bone beacon nz+ btbam covers sepultura.milk",
+    "record": "visible-confirmed-results.json",
+    "crop": [
+      80,
+      32,
+      176,
+      112
+    ],
+    "zoom": 3,
+    "roles": {
+      "upstream": {
+        "source_png": "build/patch-proof/visible-confirmed-captures/0012-c767a5b893/upstream-0/frame-59.png",
+        "raw_rgb_sha256": "a188ddd27bb6d4543093cc4cec86145fb53520c8524fb24fcb17b8d2c0850143",
+        "dimensions": [
+          256,
+          144
+        ],
+        "overview_nearest_scale": 2
+      },
+      "patched": {
+        "source_png": "build/patch-proof/visible-confirmed-captures/0012-c767a5b893/patched-0/frame-59.png",
+        "raw_rgb_sha256": "8b92620355773e91a7833916921e4eca569e5a30e34b55af62a8ac09a1ebf315",
+        "dimensions": [
+          256,
+          144
+        ],
+        "overview_nearest_scale": 2
+      }
+    },
+    "figure_sha256": "969e87dcb6f4bf1ee3f24cf660f3d04c5f3a51aa683ea219ccc07f13baeb429d"
+  },
+  {
+    "patch": "0013",
+    "frame": 59,
+    "preset": "core/src/main/assets/presets/DemonLD_-_Toxic_water_diffusion threx angela vs debi brown (nice) qovboit (SNIIIWS).milk",
+    "record": "visible-confirmed-results.json",
+    "crop": [
+      72,
+      40,
+      168,
+      104
+    ],
+    "zoom": 4,
+    "roles": {
+      "upstream": {
+        "source_png": "build/patch-proof/visible-confirmed-captures/0013-6d2783a426/upstream-0/frame-59.png",
+        "raw_rgb_sha256": "3a64d956bad124e53ff71aa884f7a0d6017ef7cb95eeae7e174b3d351e3fc798",
+        "dimensions": [
+          256,
+          144
+        ],
+        "overview_nearest_scale": 2
+      },
+      "patched": {
+        "source_png": "build/patch-proof/visible-confirmed-captures/0013-6d2783a426/patched-0/frame-59.png",
+        "raw_rgb_sha256": "81acba24aca839f74d1be83be68e9006e33dc0c8d7b3b30aefc4051fc6057010",
+        "dimensions": [
+          256,
+          144
+        ],
+        "overview_nearest_scale": 2
+      }
+    },
+    "figure_sha256": "b7b1ae10822e722157ff8fb24b8a09deb6a20c412d9d585bc7d5e65425f9aaa5"
+  },
+  {
+    "patch": "0009",
+    "frame": 29,
+    "preset": "core/src/main/assets/presets/suksma - chemosynthetic nosferatu - gdy patent pending free energy devices - rand tritex - inv play.milk",
+    "record": "original-extra-results.json",
+    "crop": [
+      0,
+      66,
+      96,
+      130
+    ],
+    "zoom": 5,
+    "roles": {
+      "upstream": {
+        "source_png": "build/patch-proof/original-extra-captures/0009-original/upstream-0/frame-29.png",
+        "raw_rgb_sha256": "d56bf5862717e6ac06ffc10ababb7985c66b7b30fd90d4335bb376f359e05b6b",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      },
+      "patched": {
+        "source_png": "build/patch-proof/original-extra-captures/0009-original/patched-0/frame-29.png",
+        "raw_rgb_sha256": "fa4026de42e348021b8cc11ebd44a1791c68581ae326095e928d1c67f827456b",
+        "dimensions": [
+          512,
+          288
+        ],
+        "overview_nearest_scale": 1
+      }
+    },
+    "figure_sha256": "6890e63f88d57f100f6c0a77f5a3826de869725cbeb12f509e80d2e184f835ce"
+  }
+]
