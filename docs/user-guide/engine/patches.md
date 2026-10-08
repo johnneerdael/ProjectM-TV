@@ -32,6 +32,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0017](#0017-custom-wave-input-windows) | Valid centered oscilloscope windows and channel separation | `Mig_304 - geiss remix 2.milk`, input controls and repeated Native4K captures |
 | [0018](#0018-discrete-custom-dots) | Authored custom dot counts; finite single-dot programs | source controls; Native4K acceptance pending |
 | [0019](#0019-gamma-only-pass-count) | Original gamma-only epsilon; echo unchanged | boundary controls; Native4K acceptance pending |
+| [0020](#0020-named-eel-constants) | Original double decimal precision of named constants | scalar controls; synthetic4K proof pending |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -227,6 +228,10 @@ Custom dots retain their authored point/color count, following MilkDrop’s dist
 
 MilkDrop’s gamma-only output uses a `.001` epsilon, while echo redraws use `.0001`. Candidate0019 restores that distinction and can remove one redundant fullscreen pass near integer gamma. Per-pass weight/count controls and42 normal renderer checks pass; actual Native4K output may remain visually identical. Float diffuse precision and echo/tint behavior remain unchanged. [I31 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
 
+## 0020 — Named EEL constants
+
+The original named pi/e/phi decimal expansions now enter the double evaluator without intermediate float rounding. Both lexer source and the checked-in scanner are updated; e/phi retain the original abbreviated decimals. Later geometry/shader casts, RNG and lone-dot handling remain unchanged. No stock named-constant reference was found; a synthetic4K diagnostic is pending. [I09 evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
+
 ## Known remaining differences from MilkDrop 2
 
 - `sampler_state { … }` fields are ignored; the sampler name prefix selects the mode (as in MilkDrop).
@@ -238,7 +243,7 @@ MilkDrop’s gamma-only output uses a `.001` epsilon, while echo redraws use `.0
 - `wave_mode` wraps at 16 projectM modes, not 8.
 - Blur ranges narrower than 0.1 are repaired instead of collapsing.
 - Some reference-scale effects remain resolution-dependent at 4K unless Native trails or diffusion compensation is active ([details](resolution.md#what-this-does-not-fix)).
-- HLSL translator edge cases: decimal→double→float double rounding and unchecked integer narrowing. Evaluator: float-width `$pi`, `$e` and `$phi` (unused in the bundled presets).
+- HLSL translator edge cases: decimal→double→float double rounding and unchecked integer narrowing.
 - Textured custom shapes always wrap; MilkDrop 2 clamps them on frames where blur levels are computed.
 - Line modes 4/6/7 retain projectM’s divided-budget sample policy pending I19 qualification. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table.
 - Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.

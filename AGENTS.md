@@ -72,6 +72,8 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 
 ## Codebase navigation and knowledge tools
 
+- Named EEL constants I09 candidate0020: remove float suffixes from the existing original pi/e/phi decimals in both Scanner.l and checked-in Scanner.c, preserving abbreviated e/phi, later float casts, lone-dot handling and RNG.43 normal controls pass;20 patches apply. No stock named-constant references were found; Native4K diagnostic and integration remain pending. See [I09](docs/superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
+
 - Gamma-only I31 candidate0019: use `.001f` pass epsilon only in `DrawGammaAdjustment`, retain echo redraw `.0001f`, live gamma, float diffuse and0014 tint. Boundary pass/weight controls fail before and42 normal renderer controls pass after;19 patches apply. Native4K/final checks remain pending. See [I31](docs/superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
 
 - Custom dots (I22 candidate0018): bypass line smoothing for custom dots, preserve raw point/color order and Native prepared replay, and allow one finite-output dot while retaining its NaN sample input. Keep lines with fewer than2 points and empty dots suppressed, maximum buffer capacity intact and Native point styles unchanged.40 normal renderer controls pass; Native4K acceptance and final checks remain pending. See [I22](docs/superpowers/evidence/milkdrop-audit-repairs/I22/README.md).

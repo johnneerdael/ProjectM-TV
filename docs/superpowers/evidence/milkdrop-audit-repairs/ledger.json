@@ -97,7 +97,7 @@
       "sha256": "346dfa27d9195f08f6cc30668100f86bcb18142a1856a35471c4f17006973147",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I22-custom-dot-waves-gain-interpolated-points/HANDOFF.md",
       "numeric_witness": "Two points(.25,.5),(.75,.5): original custom dots draw2; target smooths and draws3 including(.5,.5). Target samples1 is suppressed; original permits1 if the point program overwrites finite position/colour and never consumes the nonfinite sample input.\n\nStrong witness is the finite two-point case. Single-sample boundary remains conditional; no undefined sample is credited.",
-      "status": "candidate0018; source41 tests pass; actual4K repeats captured; performance/stronger witness pending",
+      "status": "candidate0018; source/strong original/finite diagnostic4K proof complete; mosaic timing uncertainty retained; final disposition pending",
       "confirmed_affected_originals": [
         {
           "name": "shifter - mosaic mitosis.milk",
@@ -361,10 +361,11 @@
       "sha256": "9b8257b6666b330799b883c9fa056e241d47a3ea511f3ea0a5b7f1d1147945cb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I09-eel-named-constants-round-to-float-before-double-evaluation/HANDOFF.md",
       "numeric_witness": "$pi: library/predictor3.1415927410125732; original3.141592653589793; difference about8.74228e-8.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "candidate0020; exact original constants and43 controls pass; Native4K synthetic diagnostic pending",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
-      "recommendation": "remove float suffixes from exact original decimal constants in both scanners"
+      "recommendation": "remove float suffixes from exact original decimal constants in both scanners",
+      "evidence": "I09/README.md"
     },
     {
       "id": "I31",
@@ -374,11 +375,12 @@
       "sha256": "9696fd6e7c47744a75fae2cc56ae27baa3a23b322dcac50b92f94e661a221bec",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I31-gamma-only-pass-count-epsilon-differs/HANDOFF.md",
       "numeric_witness": "Gamma1.0005: original int(gamma-.001)+1\u2192one pass; target epsilon.0001\u2192two passes weighted1 andapproximately.0005.\n\nSeparate from diffuse byte packing; no measured whole-preset impact claimed.",
-      "status": "candidate0019; independent gamma-only/echo controls pass; Native4K pending",
+      "status": "candidate0019; source42 controls and identical4K original/repeats pass; final disposition/integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
       "recommendation": "gamma-only epsilon repair feasible; preserve echo epsilon",
-      "evidence": "I31/README.md"
+      "evidence": "I31/README.md",
+      "native_4k_evidence": "I31/results.json"
     },
     {
       "id": "I01",

@@ -1,0 +1,39 @@
+{
+  "preset": "phat + EoS - Bass_responce_Red_Movements_Disorienting nebula3.milk",
+  "render": [
+    3840,
+    2160
+  ],
+  "canvas": [
+    1280,
+    720
+  ],
+  "frame479_mae": 8.485183738425926,
+  "repeats": "all8 selected RGB hashes identical per role",
+  "runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "mean_ms": 3.5676313583333314,
+      "p90_ms": 3.897458
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "mean_ms": 4.139877072222223,
+      "p90_ms": 4.935667
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "mean_ms": 3.407123822222224,
+      "p90_ms": 3.724958
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "mean_ms": 3.776645361111108,
+      "p90_ms": 4.787125
+    }
+  ]
+}

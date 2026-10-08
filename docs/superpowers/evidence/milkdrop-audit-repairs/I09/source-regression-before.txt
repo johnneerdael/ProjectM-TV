@@ -1,0 +1,13 @@
+Test project /Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/regressions
+    Start 1: eel-named-constants
+1/1 Test #1: eel-named-constants ..............***Failed    0.14 sec
+$pi rounded before double evaluation
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.14 sec
+
+The following tests FAILED:
+	  1 - eel-named-constants (Failed)
+Errors while running CTest

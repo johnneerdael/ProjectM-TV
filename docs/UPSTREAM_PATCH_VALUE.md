@@ -271,3 +271,11 @@ Restore the gamma-only .001f epsilon while retaining echo .0001f and float
 diffuse policy. Independent real-GL count/weight controls fail before and
 pass after;42 normal controls pass. No pass or allocation is added; Native4K
 acceptance is pending. See [I31](superpowers/evidence/milkdrop-audit-repairs/I31/README.md).
+
+## Named constant decimal precision (candidate0020)
+
+Remove intermediate float rounding from the existing original pi/e/phi
+lexer constants in both checked-in scanner and lexer source. Preserve the
+original e/phi decimals, thread-local RNG and lone-dot handling. Scalar
+regression fails before and passes after;43 normal controls pass. No
+per-frame work is added. See [I09](superpowers/evidence/milkdrop-audit-repairs/I09/README.md).
