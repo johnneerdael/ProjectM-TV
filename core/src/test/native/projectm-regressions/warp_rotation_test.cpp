@@ -288,6 +288,7 @@ static PFNGLDRAWELEMENTSPROC deformationDraw{};
 static GLuint deformationBuffer{};
 static std::vector<float> deformationUV, deformationPositions, deformationRadiusAngles, traversalDistances, traversalStretch;
 static std::vector<uint32_t> deformationIndices;
+static std::vector<float> seamTransforms, seamCosines;
 static void LinkDeformation(GLuint program)
 {
     GLint count{}; glGetProgramiv(program, GL_ATTACHED_SHADERS, &count);
@@ -322,6 +323,7 @@ static void DrawDeformation(GLenum mode, GLsizei count, GLenum type, const void*
     deformationRadiusAngles = AttributeData(3);
     traversalDistances = AttributeData(6);
     traversalStretch = AttributeData(7);
+    seamTransforms = AttributeData(4); seamCosines = AttributeData(8);
     deformationIndices.resize(count);
     const auto* indices = static_cast<const uint32_t*>(glMapBufferRange(
         GL_ELEMENT_ARRAY_BUFFER, 0, count * sizeof(uint32_t), GL_MAP_READ_BIT));
@@ -619,6 +621,74 @@ static void TraversalControls(TextureManager& textures)
     std::cout<<"legacy/custom/fallback carried Q/local/reg/global-buffer traversal and stateless/replay controls pass\n";
 }
 
+static void AngleSeamControls(TextureManager& textures)
+{
+    DeformationHook hook;
+    for (int path : {0,1,2}) for (int grid : {8,9}) for (bool replay : {false,true})
+    {
+        Control c(textures,path==1,false);
+        c.state.renderContext.perPixelMeshX=c.state.renderContext.perPixelMeshY=grid;
+        c.state.renderContext.texelOffsetX=c.state.renderContext.texelOffsetY=0;
+        *c.frame.zoom=*c.frame.zoomexp=*c.frame.sx=*c.frame.sy=1;
+        *c.frame.warp=*c.frame.dy=0; *c.frame.rot=.02;
+        if (path==2)
+        {
+            c.state.warpShaderVersion=2;
+            c.state.warpShader="shader_body { ret=missing_function_that_must_fail(uv); }";
+            c.mesh.LoadWarpShader(c.state);c.mesh.CompileWarpShader(c.state);
+        }
+        // Actual Liquido rotation predicate, plus an amplified input diagnostic.
+        c.pixel.CompilePerPixelCode("dx=ang*.01;rot=if(below(ang,-.65),if(above(ang,-2.45),rot-.1,rot+.1),rot-.1);reg00+=1;");
+        Check(c.pixel.perPixelCodeHandle,"seam EEL compilation failed");
+        for (int frame=0;frame<2;++frame)
+        {
+            c.pixel.LoadStateReadOnlyVariables(c.state,c.frame);c.pixel.LoadPerFrameQVariables(c.state,c.frame);
+            glBindFramebuffer(GL_FRAMEBUFFER,c.framebuffer);
+            if (replay) { c.mesh.Prepare(c.state,c.frame,c.pixel);c.mesh.DrawAgain(c.state,c.frame); }
+            else c.mesh.Draw(c.state,c.frame,c.pixel);
+            const size_t nodes=(grid+1)*(grid+1);
+            Check(seamTransforms.size()==nodes*4 && seamCosines.size()==nodes,
+                  "seam production attribute count changed");
+            for (int y=0;y<=grid;++y) for (int x=0;x<=grid;++x)
+            {
+                const size_t node=y*(grid+1)+x;
+                const float px=deformationPositions[node*2],py=deformationPositions[node*2+1];
+                const float raw=(x==grid/2&&y==grid/2)?0.f:atan2f(py,px);
+                Check(deformationRadiusAngles[node*2+1]==raw,"seam changed cached shader angle");
+                const double ang=path!=1&&px<0&&py==0?raw:-raw;
+                const float rotation=static_cast<float>(.02+(ang<-.65&&!(ang> -2.45)?.1:-.1));
+                Check(std::abs(traversalDistances[node*2]-static_cast<float>(ang*.01))<1e-7f,
+                      "wrong exact-axis/default/custom equation angle at node "+std::to_string(node));
+                Check(seamTransforms[node*4+2]==sinf(rotation)&&seamCosines[node]==cosf(rotation),
+                      "seam rotation did not reach preserved CPU float trig");
+            }
+            for (size_t i=0;i<deformationIndices.size();++i)
+            {
+                const auto node=deformationIndices[i];
+                const float px=deformationPositions[node*2],py=deformationPositions[node*2+1];
+                const double ang=path!=1&&px<0&&py==0?deformationRadiusAngles[node*2+1]:-deformationRadiusAngles[node*2+1];
+                const float r=static_cast<float>(.02+(ang<-.65&&!(ang> -2.45)?.1:-.1));
+                const float u=px*.5f*cosf(r)-py*.5f*sinf(r)+.5f-static_cast<float>(ang*.01);
+                const float v=px*.5f*sinf(r)+py*.5f*cosf(r)+.5f;
+                Check(std::abs(deformationUV[i*4]-u)<2e-6f&&std::abs(deformationUV[i*4+1]-v)<2e-6f,
+                      "seam equation did not reach actual warp vertex output");
+                Check(deformationUV[i*4+2]==px*.5f+.5f&&deformationUV[i*4+3]==py*.5f+.5f,
+                      "seam changed original UV varying");
+            }
+            Check(c.state.globalRegisters[0]==(frame+1)*nodes,"seam changed evaluator call count");
+            const auto uv=deformationUV;const auto calls=c.state.globalRegisters[0];
+            c.mesh.DrawAgain(c.state,c.frame);
+            Check(deformationUV==uv&&c.state.globalRegisters[0]==calls,"seam replay changed outputs/evaluation count");
+            // The existing quadrant builder leaves an odd-grid center gap;
+            // verify program activity at a covered point away from that gap.
+            const auto pixels=Read();
+            Check(std::abs(int(pixels[(8*Width+8)*4+2])-(path==1?64:191))<=1,
+                  "seam requested custom/fallback program was not active: path="+std::to_string(path)+" grid="+std::to_string(grid)+" replay="+std::to_string(replay)+" frame="+std::to_string(frame)+" blue="+std::to_string(pixels[(8*Width+8)*4+2]));
+        }
+    }
+    std::cout<<"legacy/custom/fallback exact-axis equations, CPU trig, GPU UV, odd grid and replay pass\n";
+}
+
 int main(int argc, char** argv)
 {
     try
@@ -629,6 +699,7 @@ int main(int argc, char** argv)
         if (argc > 1 && std::string(argv[1]) == "diagonal") { DiagonalControls(textures); return 0; }
         if (argc > 1 && std::string(argv[1]) == "cache") { CacheControls(textures); return 0; }
         if (argc > 1 && std::string(argv[1]) == "traversal") { TraversalControls(textures); return 0; }
+        if (argc > 1 && std::string(argv[1]) == "angle-seam") { AngleSeamControls(textures); return 0; }
         PowerUploadControls(textures);
         MeshCacheControls(textures);
         std::cout << glGetString(GL_RENDERER) << '\n';

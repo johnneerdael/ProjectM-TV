@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0026 for eleven finding IDs. I19, I20 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Eighteen other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Seventeen other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -20,7 +20,7 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | I24 | Shape live thick equations do not select target outline style | 14 | Source/cost screening; two stronger originals; execution/captures pending |
 | I23 | Thick custom-wave and shape-outline offsets differ | 4951 | Source investigation recorded; execution/captures/disposition pending |
 | I20 | Circle angular spacing and closure smoothing differ | 2736 | Deferred; source/GL/all finite styles/two original4K proof; +.058ms/+3.393% mean cost, mixed cycles |
-| I13 | Left-axis equation angle seam changes sign | 204 | Source investigation recorded; execution/captures/disposition pending |
+| I13 | Left-axis equation angle seam changes sign | 204 | Candidate0027; real EEL/trig/GPU UV/replay proof; Native4K/cost pending |
 | I18 | Wave brightening omits original preliminary clamp | 0 | Source investigation recorded; execution/captures/disposition pending |
 | I03 | Small finite divisions and reciprocal powers collapse to zero | 0 | Source investigation recorded; execution/captures/disposition pending |
 | I04 | Signed remainder differs from original absolute-value remainder | 0 | Source investigation recorded; execution/captures/disposition pending |
@@ -59,3 +59,5 @@ Current integrated shipping-series ASan/UBSan renderer controls pass51/51, match
 Latest disposition: circle I20 is withdrawn after the positive overall timing delta; its complete owner packet retains all evidence. Four IDs are now deferred (I19/I20/I02/M01). Current shipping-series50 normal/sanitizer reruns and26-patch application are pending after withdrawal.
 
 Current shipping series after both proposal withdrawals passes50/50 normal,50/50 ASan/UBSan and fresh26-patch application. [Normal](review-checkpoint/current-normal50.txt) · [Sanitizer](review-checkpoint/current-asan50.txt) · [Patch application](review-checkpoint/current-patch26.txt). I13/I14/I16 source-only proposals and precise open Native/cost limits are now durable; they do not count as completed findings.
+
+I13 candidate0027 now passes51 normal renderer controls and27-patch application with actual GL path/attribute/vertex-output proof. Native4K/cost acceptance remains open.

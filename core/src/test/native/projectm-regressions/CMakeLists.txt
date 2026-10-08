@@ -376,3 +376,7 @@ endif()
 add_test(NAME composite-texel-center-regressions COMMAND composite-texel-center-regressions)
 set_tests_properties(composite-texel-center-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
+
+add_test(NAME legacy-angle-seam COMMAND warp-rotation-regressions angle-seam)
+set_tests_properties(legacy-angle-seam PROPERTIES TIMEOUT 30
+    ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

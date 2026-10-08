@@ -326,3 +326,5 @@ Candidate0028 restores the original unblended circle angular spacing and explici
 Latest disposition: shared I02/M01 nonzero file booleans measured+.102ms/+7.503% in the negative-enabled Native4K wave control and is deferred outside shipping patches with its source/capture/cost owner packet. Analyzer remains aligned with current positive-only semantics. Circle is now live0027 (historical0028); frozen evidence numbering/source hashes are unchanged.
 
 Latest circle disposition: isolated Native4K mean+.058ms/+3.393% with mixed cycles leaves cost acceptance unproven; I20 proposal is deferred outside shipping patches, preserving its complete before/source-corrected evidence. Shipping series returns to0017–0026.
+
+Current0027 is the I13 exact legacy angle-seam candidate, replacing the withdrawn circle numbering. Source/CGL normal51 and27-patch application pass; Native4K and cost remain open. Frozen Boolean/Circle/I13 proposal evidence keeps its original numbering and source hashes.
