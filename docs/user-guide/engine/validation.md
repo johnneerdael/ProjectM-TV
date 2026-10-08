@@ -27,9 +27,9 @@ Each role is run at least twice. Its frames must repeat byte for byte before any
 | `shader-parser-regressions`, `parser-presets` | HLSL constructs plus 16 unchanged bundled presets whose shaders failed before (hash-pinned) |
 | `float-literal-regressions`, `float-literal-presets` | Bit-exact float32 round trips, locales, nonfinite rejection, 95 hash-pinned shader sections |
 | `random-texture-*` | Slot identity, sampler modes and texel values against known textures |
-| `shape-sampler-regressions`, `blur-range-regressions`, `warp-zoom-regressions` | Effective sampler state at real draws, blur normalization, vertex UV readback for signed zoom |
+| `shape-sampler-regressions`, `blur-range-regressions`, `warp-zoom-regressions` | Effective sampler state at real draws, blur normalization, vertex UV readback for signed and CPU-defined negative nested zoom powers |
 | `dynamic-wave-controls`, `dynamic-display-controls`, `dynamic-original-presets` | Per-frame waveform and display controls against static controls, in all Native trails paths |
-| `warp-rotation-regressions` | Signed, moderate, large and maximum finite rotation angles across four feedback frames |
+| `warp-rotation-regressions` | Signed, moderate, large and maximum finite rotation angles across four feedback frames; CPU negative-power uploads, raw equation values, NaNs, resize and prepared replay |
 | legacy compatibility controls | Constant-colour output with disabled and fractional `fShader`, mode-1 waveform opacity and open-strip topology against MilkDrop 2.25c expectations |
 
 `tools/projectm-host-tests.sh` runs projectM's own GoogleTest suite with the patches applied (329 tests at the 4.2 rebase).
@@ -59,6 +59,10 @@ The [patch catalog](patches.md) images come from rendering each witness three wa
 A difference between the second and third proves that patch is responsible. A full-series image alone does not: 0001 is too broad to remove in isolation, so its image shows only that the preset now loads.
 
 The capture checkpoint holds 31 images from 134 successful runs. Ten failed runs are retained alongside them, with their diagnostics, rather than discarded. Proof workers disable the shader binary cache because of an emulator driver error, so the images do not validate caching.
+
+## Negative-power source and runtime evidence
+
+The [Tulip investigation](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/tulip-negative-zoom-power/README.md) separates CPU power, production vertex UVs, interpolation, texture sampling and full-AAR output. Defined nested exponents 1/2/3 reproduce a compatibility gap and pass after patch 0015. The exact original Tulip keeps 33 fractional-domain NaNs per frame and its tested 30-frame AAR output stays byte-identical. Invalid sampling observations can differ between repeat and clamp on one backend; they do not establish portable source-only pixels or original Windows appearance. No randomized forecast credit or full-corpus claim is assigned.
 
 ## What is not claimed
 

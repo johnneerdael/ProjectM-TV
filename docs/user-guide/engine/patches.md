@@ -1,13 +1,13 @@
 # Patch catalog
 
-ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **14 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
+ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **15 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
 
 Most patches are about **MilkDrop 2 authenticity**. projectM is a clean-room reimplementation of MilkDrop on OpenGL, and over the years small differences crept in: in how equation code is accepted, how HLSL becomes GLSL, where Direct3D 9 and OpenGL put pixel centres, and which per-frame variables are actually read. Each entry below names what projectM did differently, what MilkDrop 2 does (citing its released source where we checked it), what the patch changes, and the preset that shows it.
 
 Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-its-own-textures) adds correct behaviour for something MilkDrop never supported: presets whose textures live in different folders. [0005](#0005-blur-ranges-that-cannot-collapse) repairs a MilkDrop 2 typo instead of reproducing it.
 
 !!! info "How the images were made"
-    The comparison images come from the [current-patch proof](https://github.com/johnneerdael/ProjectM-TV/pull/55). A preset is rendered by real libprojectM on a GPU-accelerated Android TV emulator: GLES 3.0, frozen audio, seed 12345, a frame/30 clock, frames 0–119, each role captured twice with byte-identical results. *Without* means the full series minus only that patch (a single-patch ablation); *with* is the full series. Images are unbrightened and rendered at 512×288 (some at 256×144) with quad lines and Native trails off. They establish cause and effect for that preset on that GPU. They are not Windows reference renders, and they do not certify every preset or every TV.
+    The images for 0001–0014 come from the [current-patch proof](https://github.com/johnneerdael/ProjectM-TV/pull/55). A preset is rendered by real libprojectM on a GPU-accelerated Android TV emulator: GLES 3.0, frozen audio, seed 12345, a frame/30 clock, frames 0–119, each role captured twice with byte-identical results. *Without* means the full series minus only that patch (a single-patch ablation); *with* is the full series at that recorded 14-patch checkpoint. Images are unbrightened and rendered at 512×288 (some at 256×144) with quad lines and Native trails off. They establish cause and effect for that preset on that GPU. They are not Windows reference renders, and they do not certify every preset or every TV.
 
 ## At a glance
 
@@ -27,6 +27,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0012](#0012-tiny-shapes-land-on-the-right-pixels) | Direct3D 9 pixel centres for custom shapes | `amandio c - the green machine 2 … btbam covers sepultura.milk` |
 | [0013](#0013-composite-reads-the-exact-feedback-texel) | Exact texel reads in custom composites | `DemonLD_-_Toxic_water_diffusion …` |
 | [0014](#0014-legacy-colour-shading-and-mode-1-spirals) | Authored `fShader` tint amount; mode-1 spiral opacity and open shape | `BrainStain- boiling-mix2(redi jedi full carb mix).milk` |
+| [0015](#0015-negative-warp-powers-use-milkdrop-cpu-maths) | CPU-defined negative nested powers beyond authored exponent one | synthetic nested-unit, square and cube controls |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -116,7 +117,7 @@ In an earlier corpus pass over 15,576 authored shaders, historical patches 0030�
 
 ![Hexcollie - This is where we begin stripped with and without 0006](../images/patches/0006-zoom.jpg)
 
-**MilkDrop 2** computes the zoom on the CPU: `powf(fZoom, powf(fZoomExp, rad*2-1))` (`milkdropfs.cpp` 1877). With `zoomexp = 1`, a negative zoom stays negative and reflects the image through the warp centre. **projectM** evaluates `pow` in GLSL, which is undefined for a negative base: 3,234 NaN UV components per frame for the witness. **ProjectM TV** uses the signed value when the exponent is exactly 1. Negative zoom with any other `zoomexp` remains undefined.
+**MilkDrop 2** computes the zoom on the CPU: `powf(fZoom, powf(fZoomExp, rad*2-1))` (`milkdropfs.cpp` 1877). With `zoomexp = 1`, a negative zoom stays negative and reflects the image through the warp centre. **projectM** evaluates `pow` in GLSL, which is undefined for a negative base: 3,234 NaN UV components per frame for the witness. **Patch0006** uses the signed value when the authored exponent is exactly 1. [0015](#0015-negative-warp-powers-use-milkdrop-cpu-maths) extends the CPU calculation to other negative nested powers; fractional-domain appearance remains unresolved.
 
 ## 0007 — Per-frame waveform controls
 
@@ -194,13 +195,23 @@ Rebasing onto 4.2 master retired nine historical patches because upstream had al
 
 projectM **v4.1.8** (tagged 2026-10-06) backports most of these parser and waveform fixes, but not the plasma transition fix. It also uses a newer evaluator commit (`e8c311e`, a float-scanner fix) that our pin does not include; its visible impact is unverified.
 
+## 0015 — Negative warp powers use MilkDrop CPU maths
+
+![Defined negative nested-unit, square and cube controls before and after](../images/patches/0015-negative-power.png)
+
+**MilkDrop 2** computes `powf(zoom, powf(zoomexp, rad*2-1))` on CPU after float conversion (`milkdropfs.cpp:1877–1938`). A nested integer exponent can have a finite signed or squared/cubed result even when authored `zoomexp` is not one. **The old GPU branch** returns NaN for these defined controls on the observed GLES backend because GLSL does not define any negative-base `pow`. **ProjectM TV** prepares the negative result on CPU and supplies it through an instance-owned float buffer at attribute 9. Positive zoom keeps its shader path; raw equation values and prepared-mesh replay are unchanged.
+
+These separate proof images use full published v2.3.25 and candidate AARs at 256×144, 48×32 mesh, 30 frozen frames and the same mono PCM/clock/seed on API 34/Apple M4 Pro/GLES3. Named diagnostic copies activate nested exponents 1/2/3 at selected vertices; constant blue 64 verifies their custom warp/composite programs. They are not the 120-frame single-patch ablations described above. Direct UV controls fail before/pass after, and real-mesh controls check values, NaNs, resize and replay. The buffer adds four bytes per vertex and nonunit negative vertices need two CPU powers; performance is unmeasured.
+
+The exact **Great Tulip Majesty (txtr wrap)** witness has 33 fractional-domain NaNs per frame in both the original CPU expression and GPU path. Its30-frame original/repeat AAR replay is byte-identical after this correction. NaN/Inf are retained, with no epsilon or absolute-value substitution. Invalid interpolation and sampling observations are backend-bound, so the source predictor's unresolved guard remains appropriate. [Source, IEEE bits and capture evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/tulip-negative-zoom-power/README.md).
+
 ## Known remaining differences from MilkDrop 2
 
 - `sampler_state { … }` fields are ignored; the sampler name prefix selects the mode (as in MilkDrop).
 - In warp shaders, an unqualified `sampler_main` follows the preset's `wrap` setting; MilkDrop 2 ignores `wrap` there and uses the name prefix, which defaults to wrapping.
 - `randNN` images are shared between the warp and composite shaders for a preset load; MilkDrop 2 picks separately per shader.
 - Uninitialized shader globals read 0, not whatever a D3D9 constant register held.
-- Negative zoom with `zoomexp ≠ 1` is undefined on GPUs.
+- Fractional negative warp powers have nonfinite coordinates and unresolved appearance. Negative-base `pow` inside authored shaders remains undefined in GLSL.
 - Nonfinite `rot` is unsupported.
 - `wave_mode` wraps at 16 projectM modes, not 8.
 - Blur ranges narrower than 0.1 are repaired instead of collapsing.

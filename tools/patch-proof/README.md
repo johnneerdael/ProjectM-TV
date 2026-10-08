@@ -81,10 +81,10 @@ identity, `ordered_patches` lists the complete input series for patched/ablation
 roles; `patch_removed` names the omitted patch. Upstream has an empty inventory.
 
 The default series remains the immutable13-patch checkpoint so older commands
-cannot silently relabel frozen captures. For the synchronized14-patch endpoint,
+cannot silently relabel frozen captures. For the locked15-patch publication endpoint,
 pass `--series docs/superpowers/evidence/current-patch-proof/current-series.json`
 to **prepare, capture and verify**. Prepare derives its source commit and allowed
-ablation numbers from that manifest; `without-0014` is supported only there.
+ablation numbers from that manifest; `without-0014` and `without-0015` are supported there. Use `current14-series.json` explicitly to replay the preserved14-patch snapshot.
 Workers and captures record a canonical manifest digest, and verification rejects
 a different selected snapshot. Unbound legacy receipts are accepted only against
 the original frozen manifest. Source reconstruction still checks every actual

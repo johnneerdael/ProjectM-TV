@@ -7,7 +7,7 @@
 | Upstream base | [projectM](https://github.com/projectM-visualizer/projectm) master at commit `6f6480746` |
 | Upstream version | Unreleased projectM 4.2 master. CMake reports `4.2.0`, but **no projectM 4.2 has been released**; this is a development snapshot |
 | Expression evaluator | projectm-eval 1.0.7 (`22fb0cfd`) |
-| Patches | [14, applied at build time](patches.md) from [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches) |
+| Patches | [15, applied at build time](patches.md) from [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches) |
 | Graphics | OpenGL ES 3.0 (upstream at the pin requires 3.2) |
 | Library | Linked statically into `libprojectmtv.so`, shipped in the APK and the [core AAR](../development.md#use-the-engine-in-another-app) |
 | Version label | Settings panel: *v‹version› · ProjectM TV Engine / Based on unreleased projectM 4.2 master / Upstream 4.2.0 · 6f6480746* |

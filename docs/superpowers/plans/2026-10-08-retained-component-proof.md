@@ -136,3 +136,16 @@ not list exact benchmark preset names; mark that gap rather than inventing names
 The present harness requires explicit reference width/height, Native-trails
 settings, resize/switch events and measured operation controls for those profiles.
 Do not select a generic healthy512×288 frame and call that component activation.
+
+## Publication scope locked by the user (2026-10-08)
+
+Engine inventory is frozen at main120547f3,15patches. The user explicitly chose:
+"Finish all15patch comparisons; defer deeper optimization/lifecycle checks."
+The23-component expansion remains follow-up work; it is not a prerequisite for
+this publication and must not keep reopening the scope. Finish readable current
+patch comparisons (including clearer0011 and new0015), then final checks/review/CI
+and publication. Preserve already gathered component evidence and original PR map.
+The Native-profile/480-frame/device-gzip extension and verified Waltra4K14-patch
+snapshot are retained under ignored build/patch-proof/deferred-native-workflow,
+current14-native-profile-workers-v2 and native14-waltra-standard-4k-v1. The
+publication harness is restored to its existing120-frame recipe.

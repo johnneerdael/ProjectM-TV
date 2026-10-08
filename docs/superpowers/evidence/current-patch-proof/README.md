@@ -8,7 +8,7 @@ The [archived assessment](pre-rewrite-assessment.md) preserves earlier attributi
 ## Current-main synchronization
 
 Main `41ec3fc1`/PR #57 adds patch0014 after this capture checkpoint. The
-[current14-patch inventory](current-series.json) and main report now include it.
+[14-patch inventory](current14-series.json) and main report now include it.
 This folder's original `series.json`, workers, frames and verification receipts
 remain tied to source `654815d8` and its 13 patches. They are preserved evidence,
 not relabeled certification of the expanded endpoint. The [Hurricane comparison](components/legacy14-hurricane/README.md) now provides
@@ -261,3 +261,12 @@ the original ablations remain supporting cause checks. Overview pixels reconstru
 to the retained capture hashes, and zooms use nearest sampling without gain.
 The [expanded working assessment](expanded-assessment.md) preserves the inventory,
 original input map and technical discussion separately from the review page.
+
+## Locked publication scope
+
+The user froze the engine inventory at main120547f3:15patches ending0015.
+`current-series.json` identifies that locked set; `current14-series.json` preserves
+the previous14-patch snapshot. Finish readable comparisons for all15patches,
+then review/CI/publication. The user explicitly deferred deeper optimization and
+lifecycle comparisons to a follow-up; they must not keep reopening this PR.
+Earlier source/capture identities remain unchanged.

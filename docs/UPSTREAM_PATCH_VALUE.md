@@ -1,7 +1,7 @@
 # What our current projectM patches change
 
 This page compares upstream projectM 4.2 development with our library. Each section
-shows the rendered difference and explains its cause. The 14 current patches are
+shows the rendered difference and explains its cause. The locked 15 current patches are
 listed in build order; older patch history is kept in the evidence archive.
 
 ## Single-page comparison overview
@@ -12,7 +12,7 @@ A middle column, where present, removes one patch to isolate its effect. Generat
 controls are labeled; a rejected render is an error panel, not a black screenshot.
 
 Earlier images use our 13-patch snapshot `654815d8`; 0014 uses the current 14-patch
-snapshot `41ec3fc1`. Rechecking affected earlier witnesses is still in progress.
+snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Rechecking affected earlier witnesses is still in progress.
 The upstream renderer matches master `e98fca85`; capture adjustments and source
 identities are recorded in the [evidence record](superpowers/evidence/current-patch-proof/README.md).
 
@@ -64,7 +64,7 @@ instead of making two. Pooling retains storage and is off by default.
 [Texture evidence](superpowers/evidence/current-patch-proof/components/texture-history/README.md).
 
 Batching, caches, pass reductions and Native-trails replay also remain in 0001.
-Their component-specific image/operation comparisons are still being completed.
+Their deeper optimization/lifecycle comparisons are deferred to a follow-up.
 [Patch source](../tools/projectm-patches/0001-tv-rendering-and-preset-compatibility.patch).
 
 ## 0002 — HLSL compatibility and finite float round trips
@@ -270,6 +270,19 @@ isolates the waveform change from tint.
 [Current-source evidence](superpowers/evidence/current-patch-proof/components/legacy14-hurricane/README.md) ·
 [Patch source](../tools/projectm-patches/0014-legacy-tint-and-mode1-waveform.patch).
 
+## 0015 — Negative warp powers on the CPU
+
+The previous negative-zoom fix covered `zoomExp=1`. MilkDrop also defines negative
+bases raised to integer nested powers, such as squares and cubes; GLSL `pow` does
+not. Ours evaluates the negative-base expression on the CPU after float conversion
+and reuses that value when drawing the prepared mesh. Positive zoom is unchanged.
+
+The original **Great Tulip Majesty** still enters fractional negative-power
+domains and its recorded frames remain unchanged. It must not be shown as a fixed
+artist preset. The [defined-power controls](superpowers/evidence/tulip-negative-zoom-power/README.md)
+show the actual repair; a matched upstream/our-library TV comparison is pending.
+[Patch source](../tools/projectm-patches/0015-warp-negative-zoom-cpu-power.patch).
+
 ## Supporting evidence and remaining work
 
 [Full-resolution images, inputs and verification](superpowers/evidence/current-patch-proof/README.md)
@@ -279,7 +292,6 @@ provides the preset names and activation profiles used to guide remaining captur
 The [detailed working assessment](superpowers/evidence/current-patch-proof/expanded-assessment.md)
 keeps the component inventory and technical notes out of this review page.
 
-Remaining work covers retained batching/cache/pass/lifecycle comparisons, a clearer
-0011 witness, affected-witness checks on the 14-patch endpoint and final PR review/CI.
+Publication work covers a clearer0011 witness,0015 GPU comparison, locked15-patch endpoint checks and final PR review/CI. Deeper optimization/lifecycle checks are deferred by agreement.
 The upstream capture admits GLES 3.0; our image workers disable the emulator's broken
 program-binary export. No original Windows/MilkDrop GPU screenshot was produced.

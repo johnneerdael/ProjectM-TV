@@ -1,8 +1,8 @@
 {
   "engine_commit": "6f64807467e312034883a4389e6aa80a675458bc",
   "evaluator_commit": "22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a",
-  "source_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
-  "scope": "Locked publication inventory by user instruction,2026-10-08; earlier captures retain their own13/14-patch snapshot identities",
+  "source_commit": "41ec3fc16786b325a7a8cb013a77969073aa7a5c",
+  "scope": "Current inventory; existing GPU captures remain bound to their original series.json snapshot",
   "patches": [
     {
       "number": "0001",
@@ -73,11 +73,6 @@
       "number": "0014",
       "filename": "0014-legacy-tint-and-mode1-waveform.patch",
       "sha256": "6f5f5d7ebebc7600f96f2fcae0a24be9d77f98a0b5402e486c207d16cbe2b689"
-    },
-    {
-      "number": "0015",
-      "filename": "0015-warp-negative-zoom-cpu-power.patch",
-      "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
     }
   ]
 }
