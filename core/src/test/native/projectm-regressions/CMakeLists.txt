@@ -131,7 +131,7 @@ add_test(NAME warp-zoom-regressions COMMAND warp-zoom-regressions
     "${PROJECTM_SOURCE}/src/libprojectM/MilkdropPreset/Shaders/PresetWarpVertexShaderGlsl330.vert")
 set_tests_properties(warp-zoom-regressions PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-foreach(control shape-sampler blur-range dynamic-controls)
+foreach(control shape-sampler blur-range dynamic-controls legacy-compatibility)
     string(REPLACE "-" "_" source_name "${control}")
     add_executable(${control}-regressions ${source_name}_test.cpp)
     target_compile_features(${control}-regressions PRIVATE cxx_std_17)
@@ -149,6 +149,11 @@ foreach(control shape-sampler blur-range dynamic-controls)
         target_compile_definitions(${control}-regressions PRIVATE USE_GLES)
         target_link_libraries(${control}-regressions PRIVATE ${REGRESSION_GL_TARGET})
     endif()
+endforeach()
+foreach(control hue wave-alpha wave-topology)
+    add_test(NAME legacy-${control} COMMAND legacy-compatibility-regressions ${control})
+    set_tests_properties(legacy-${control} PROPERTIES TIMEOUT 30
+        ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 endforeach()
 set(DYNAMIC_PRESETS
     "319.milk"

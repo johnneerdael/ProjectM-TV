@@ -5,6 +5,15 @@ patch hashes are in [series.json](series.json). The main
 [patch reference](../../../UPSTREAM_PATCH_VALUE.md) covers only that current series.
 The [archived assessment](pre-rewrite-assessment.md) preserves earlier attribution.
 
+## Current-main synchronization
+
+Main `41ec3fc1`/PR #57 adds patch0014 after this capture checkpoint. The
+[current14-patch inventory](current-series.json) and main report now include it.
+This folder's original `series.json`, workers, frames and verification receipts
+remain tied to source `654815d8` and its 13 patches. They are preserved evidence,
+not relabeled certification of the expanded endpoint. Matched current14 TV
+captures and revalidation of affected witnesses remain pending.
+
 ## Comparison contract
 
 Use a dedicated Android TV API36 AVD, `CurrentPatchProofTV36`, serial

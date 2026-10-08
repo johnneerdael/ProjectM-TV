@@ -72,6 +72,8 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 
 ## Codebase navigation and knowledge tools
 
+- BrainStain legacy compatibility (2026-10-08): patch 0014 respects authored `fShader` in legacy echo/gamma output and restores mode-1 alpha ×1.25 before clamp and open-strip topology, following MilkDrop 2.25c. Keep custom composite hue behaviour and preset assets unchanged. See [focused evidence](docs/superpowers/evidence/brainstain-dark-output/README.md); predictor agreement alone does not establish MilkDrop correctness. Three independent controls fail before/pass after; 37 normal renderer controls, 329 host controls, both-ABI release builds and 137 JVM tests pass. First-frame black is explained by the authored echo crop despite bright raw feedback. All 37 sanitizer renderer controls also pass; macOS skips the separate EGL/GLES transition-overlay test. The fresh recursive debug-core build and strict MkDocs pass. External review, CI, merge and release gates remain open at this checkpoint.
+
 - Focused dark-preset investigation: [evidence](docs/superpowers/evidence/dark-presets-06-10/README.md). Keep direct framebuffer coverage tests separate from final-composite brightness tests; one-second cold captures do not prove intended appearance. Keep the release gate’s Native-trails-only validation policy; do not reintroduce the legacy corpus or historical source dependencies.
 - No `.codegraph/` or `graphify-out/` exists at the repository root (checked 2026-10-04). Use `git grep`/`rg`; do not assume a code graph.
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) §5 (threading rules, transitions, resolution, frame pacing, threads, overlay UI, device tiers). Its title says v1.9 and §1–4 and §6–8 are historical analysis; verify against the code. Design specs, plans and evidence for engine work are in `docs/superpowers/{specs,plans,evidence}`.
@@ -288,7 +290,7 @@ A successful tested merge to `main` triggers the versioned APK/single Native cor
 | `docs/user-guide/*.md` + `mkdocs.yml` | User guide source, built by the User guide build reusable workflow and published through the shared main/manual Pages deployer to https://johnneerdael.github.io/ProjectM-TV/ (`docs/user-guide/development.md` covers build/test and the docs site) |
 | `docs/ARCHITECTURE.md` | Engine design, threading, transitions, resolution, device tiers, measurements |
 | `docs/RELEASING.md` | CI publishing, versioning, signing, downloads, Milkbeat |
-| `docs/UPSTREAM_PATCH_VALUE.md` | Current 13-patch assessment and GPU Android TV upstream/ablation image proof; linked archive preserves historical dispositions; update with pin/patch/evidence changes |
+| `docs/UPSTREAM_PATCH_VALUE.md` | Current 14-patch assessment and GPU Android TV upstream/ablation image proof; linked archive preserves historical dispositions; update with pin/patch/evidence changes |
 | `docs/THIRD_PARTY.md` | projectM pin, link to patch provenance, presets/textures sources and licences |
 | `docs/PROFILING.md`, `docs/DIAGNOSTICS.md` | Profile build + simpleperf; `tools/tv-diagnostics.sh` |
 | `docs/DANCE-COLLECTION.md` | Pointer to `docs/user-guide/dance-measurement.md` |
@@ -458,3 +460,10 @@ fixture and reads actual attachment pixels/state/storage counts. New native
 harness revisions require freshly prepared workers. Keep pooling opt-in and the
 API36 program-binary export limitation explicit. The 23-row component matrix in
 `docs/superpowers/plans/2026-10-08-retained-component-proof.md` remains incomplete.
+
+Main synchronization (2026-10-08): PR #57/main `41ec3fc1` adds current0014 legacy
+tint and mode-1 waveform compatibility. The report covers the 14-patch inventory,
+while existing image-proof workers/series.json retain the frozen13-patch source
+`654815d8`. `current-series.json` identifies the added current snapshot. Do not
+relabel old captures as 14-patch certification; matched upstream/current14 image
+proof and affected-witness revalidation remain pending.

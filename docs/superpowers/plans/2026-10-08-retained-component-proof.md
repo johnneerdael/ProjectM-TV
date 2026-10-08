@@ -106,3 +106,14 @@ Files: focused host event sequences/GL observers and `components/` receipts.
 - [ ] Confirm report navigation/local links, strict MkDocs, source/preset/version invariants and appropriate native/tool tests.
 - [ ] Sync current main, update PR release notes and obtain completed final-head Codex review with all threads resolved.
 - [ ] Pass required CI, merge through GitHub, and verify automatic publication/Milkbeat update as required by AGENTS.md.
+
+## Added current-main requirement: patch0014 (2026-10-08)
+
+Main `41ec3fc1`/PR #57 adds legacy fShader tint and mode-1 alpha/open-strip
+compatibility after this plan's original13-patch capture snapshot. Preserve that
+snapshot and its receipts. Extend source preparation/verification to explicitly
+select the current14-patch inventory; capture upstream/current-minus0014/current
+on the owned GPU TV, with unchanged original and independent activation controls.
+Revalidate affected earlier legacy/mode-1 witnesses before claiming the14-patch
+endpoint. The existing BrainStain AAR/GL evidence is supporting research, not the
+requested upstream/current TV comparison. Final gates apply to the expanded scope.

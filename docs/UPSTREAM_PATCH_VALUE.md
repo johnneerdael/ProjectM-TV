@@ -1,12 +1,16 @@
 # Current patches against upstream projectM 4.2 master
 
-This reference covers the **13 current patches**, in build order, over upstream
+This reference covers the **14 current patches**, in build order, over upstream
 [`6f64807467e312034883a4389e6aa80a675458bc`](https://github.com/projectM-visualizer/projectm/tree/6f64807467e312034883a4389e6aa80a675458bc).
 That pin reports CMake version 4.2.0 and is an **unreleased development snapshot**.
 The evaluator pin is `22fb0cfd8f2dfbcd2b68f2443e7f44e19b32c09a`.
-Assessment source: ProjectM TV `654815d8`, 2026-10-07. The
-[ordered series manifest](superpowers/evidence/current-patch-proof/series.json)
-records each patch's SHA-256. Reassess after changing a pin or patch.
+Current series source: main `41ec3fc1` (PR #57), 2026-10-08. The
+[current manifest](superpowers/evidence/current-patch-proof/current-series.json)
+records all 14 patch hashes. Existing GPU figures were produced from ProjectM TV
+`654815d8`, the 13-patch snapshot, with its immutable
+[capture manifest](superpowers/evidence/current-patch-proof/series.json). Their
+identities remain unchanged; they do not certify the newly added 0014 or the full
+14-patch endpoint. Fresh current-series revalidation is pending.
 Observed upstream master is `e98fca85e57802d27a6d11499642de2a1d5e994e`. Its only
 change from the app pin is the GLES3.0 admission adjustment used in these captures;
 [byte-verified equivalence](superpowers/evidence/current-patch-proof/upstream-master-equivalence.json)
@@ -26,7 +30,7 @@ differences and code-level explanations. The linked evidence folders provide
 full-resolution frames and source/binary/payload verification; they are supporting
 records, not additional patch assessments that readers must assemble themselves.
 
-All 13 current patch sections are present. The retained-component expansion below
+All 14 current patch sections are present; 0014's matched TV proof is pending. The retained-component expansion below
 is still in progress; an existing patch-level image does not prove every component
 inside consolidated 0001–0003. Status is recorded here rather than presenting
 pending components as completed contributions.
@@ -47,6 +51,7 @@ pending components as completed contributions.
 | [Local flat-array layout](#local-flat-array-layout) | Published: labeled diagnostic, red fallback versus authored gradient. |
 | [Initialized writable uniform-bank copies](#initialized-writable-uniform-bank-copies) | Published: nonzero-component control, actual RGB `(255,0,64)` versus expected `(255,204,64)`. |
 | [Compound uniform writes shared with helpers](#compound-uniform-writes-shared-with-helpers) | Published: unchanged Martin original's star/ray pattern at matched source time. |
+| [Legacy tint and mode-1 waveform (0014)](#0014-legacy-tint-and-mode-1-waveform) | Added from current main: source/GL controls and AAR comparison retained; matched upstream/current14 TV proof pending. |
 | Other 0002 language/numeric components and 0003 thread isolation | Existing patch-level images/numerical controls are retained; the expanded component matrix tracks remaining activation coverage. |
 
 The [component capture matrix](superpowers/plans/2026-10-08-retained-component-proof.md)
@@ -739,6 +744,28 @@ difference 115/255. Raw aligned crops are enlarged20× without brightness gain;
 the right column is a labeled ×4 absolute-difference map. This is a small sampled
 seed change, not a large whole-scene improvement.
 [Raw original three-role endpoint](superpowers/evidence/current-patch-proof/0013-original.png).
+
+## 0014 — Legacy tint and mode-1 waveform
+
+Source: [0014-legacy-tint-and-mode1-waveform.patch](../tools/projectm-patches/0014-legacy-tint-and-mode1-waveform.patch). It restores MilkDrop 2.25c's `fShader`
+threshold and white/animated-shade mix in legacy video echo and gamma output.
+It also restores mode 1's 1.25 alpha multiplier and open line strip. Source
+attribution is `vis_milk2/milkdropfs.cpp`, lines 2927–2946, 3359–3365 and 4117–4144.
+Custom composite hue behaviour, authored equations, echo, gamma, darken and assets
+stay unchanged. These are general compatibility corrections suitable for an
+independent upstream proposal. The [focused evidence](superpowers/evidence/brainstain-dark-output/README.md)
+separates corrected suppression from the original preset's remaining sparse
+output and records independently failing GL controls. No universal brightness,
+Windows appearance or performance claim is made.
+
+**Evidence status:** main PR #57 adds this patch after the 13-patch GPU snapshot
+used above. Its linked investigation compares the previous ProjectM TV AAR with
+a corrected research AAR, and supplies independent source/GL controls. Those
+captures are not upstream-master-versus-current TV image proof. A matched upstream,
+current-minus0014 and current14-patch TV capture is still required for this page.
+The first-frame black output in the original BrainStain preset is expected from
+its authored echo crop; the fix does not promise to make every dark frame bright.
+
 
 ## Contribution order and acceptance boundaries
 

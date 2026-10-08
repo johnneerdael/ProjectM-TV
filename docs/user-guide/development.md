@@ -30,6 +30,14 @@ overrides are supported without depending on a child-directory imported target. 
 
 ## Core rendering policies
 
+Legacy compatibility controls check constant-colour output with disabled and
+fractional `fShader`, mode-1 waveform opacity and open-strip topology against
+MilkDrop 2.25c source expectations. They run in the native suite above. The
+[BrainStain investigation](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/brainstain-dark-output/README.md)
+records the unchanged preset, exact-AAR reproduction, isolated diagnostic copies
+and bounded Android captures. Matching a source predictor is not independent
+proof of original MilkDrop appearance.
+
 The single `:core` AAR uses Native rendering. Build it with:
 
 ```sh
