@@ -33,6 +33,12 @@ def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manife
     directory = work / role / str(repeat)
     if json.loads((directory / 'manifest.json').read_text()) != manifest:
         raise ValueError('Retained manifest differs from inline run record')
+    return verify_job_protocol(work, result, role, repeat, remote_workspace)
+
+
+def verify_job_protocol(work: Path, result: dict, role: str, repeat: int, remote_workspace: str) -> dict:
+    identity = {'role': role, 'repeat': repeat}
+    directory = work / role / str(repeat)
     job = json.loads((directory / 'job.json').read_text())
     if (job.get('identity') != identity or
             type(job.get('identity', {}).get('repeat')) is not int):
@@ -69,6 +75,54 @@ def verify_run_protocol(work: Path, result: dict, role: str, repeat: int, manife
     if job.get('events', []) != events:
         raise ValueError('Retained host events differ from the capture sequence')
     return {key: value for key, value in job.items() if key != 'identity'}
+
+
+def verify_execution(directory: Path, expected_exit: int) -> None:
+    try:
+        receipt = json.loads((directory / 'execution.json').read_text())
+    except (OSError, ValueError) as error:
+        raise ValueError('Retained execution receipt is unavailable or invalid') from error
+    if (not isinstance(receipt, dict) or type(receipt.get('exit')) is not int or
+            type(expected_exit) is not int or receipt['exit'] != expected_exit):
+        raise ValueError('Retained execution exit differs from run status')
+
+
+def verify_failure_artifacts(directory: Path, run: dict) -> dict | None:
+    if any(directory.glob('*.png')) or (directory / 'frames.rgb.gz').exists():
+        raise ValueError('Failed run retains successful output')
+    known = {'render.log', 'manifest.json', 'frames.rgb'}
+    recorded = run.get('retained_artifacts')
+    actual = {name for name in known if (directory / name).is_file()}
+    if not isinstance(recorded, dict) or set(recorded) != actual:
+        raise ValueError('Retained failure artifact inventory differs')
+    payloads = {}
+    for name, record in recorded.items():
+        data = (directory / name).read_bytes()
+        if (not isinstance(record, dict) or type(record.get('bytes')) is not int or
+                record['bytes'] != len(data) or record.get('sha256') != sha(data)):
+            raise ValueError('Retained failure artifact differs: ' + name)
+        payloads[name] = data
+    log = payloads.get('render.log', b'')
+    if 'render.log' in payloads and run.get('log') != log.decode('utf-8', errors='replace'):
+        raise ValueError('Retained failure artifact differs: inline log')
+    failed_manifest = False
+    if 'manifest.json' in payloads:
+        try:
+            manifest = json.loads(payloads['manifest.json'])
+        except (ValueError, UnicodeError):
+            if 'manifest' in run or not isinstance(run.get('manifest_parse_error'), str):
+                raise ValueError('Retained failure manifest is invalid')
+        else:
+            if (not isinstance(manifest, dict) or manifest != run.get('manifest') or
+                    manifest.get('status') != 'failed' or
+                    type(manifest.get('gl_error_frames')) is not int or manifest['gl_error_frames'] <= 0):
+                raise ValueError('Retained failure manifest contradicts failed run')
+            failed_manifest = True
+    elif 'manifest' in run:
+        raise ValueError('Retained failure manifest is unavailable')
+    if not log.strip() and not failed_manifest:
+        raise ValueError('Failed run has no retained failure diagnostic')
+    return manifest if failed_manifest else None
 
 
 def verify_shader_lifetime(role: str, runs: list[dict]) -> None:
@@ -195,6 +249,8 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     kind = result.get('capture_kind')
     if kind not in ('image', 'texture-journey', 'evaluator'):
         raise ValueError('Missing capture kind; reproduce with the current capture tool')
+    if kind == 'evaluator' and set(result['roles']) != {'upstream', 'without-0003', 'patched'}:
+        raise ValueError('Evaluator capture requires exactly upstream, without-0003 and patched roles')
     audio = (work / 'audio.f32').read_bytes()
     if (len(audio) != 120 * 1470 * 4 or sha(audio) != FROZEN_PCM_SHA256 or
             result.get('pcm_sha256') != FROZEN_PCM_SHA256):
@@ -224,6 +280,8 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
         if len(runs) != 2:
             raise ValueError('Expected exactly two repeats')
         if kind == 'evaluator':
+            for repeat, run in enumerate(runs):
+                verify_execution(work / role / str(repeat), run['exit'])
             if any(type(r['control'].get('seed')) is not int or r['control']['seed'] != 12345 for r in runs):
                 raise ValueError('Evaluator seed differs from frozen capture seed')
             if any(r['exit'] != 0 or r['control']['compiled'] != [True, True] for r in runs):
@@ -266,6 +324,26 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
                 raise ValueError('Invalid failure record: ' + role)
             if value['repeat_equal'] is not False:
                 raise ValueError('Failed repeats cannot be claimed equal: ' + role)
+            for repeat, run in enumerate(runs):
+                directory = work / role / str(repeat)
+                verify_execution(directory, run['exit'])
+                job = verify_job_protocol(work, result, role, repeat, remote_workspace)
+                if common_job is not None and job != common_job:
+                    raise ValueError('Retained jobs differ across roles/repeats')
+                common_job = job
+                manifest = verify_failure_artifacts(directory, run)
+                if manifest is not None:
+                    verify_run_protocol(work, result, role, repeat, manifest, remote_workspace)
+                    if (type(manifest.get('frames')) is not int or manifest['frames'] != 120 or
+                            type(manifest.get('width')) is not int or type(manifest.get('height')) is not int or
+                            [manifest['width'], manifest['height']] != [width, height]):
+                        raise ValueError('Retained failure manifest dimensions/frame count differ')
+                    backend = [manifest.get(k) for k in ('gl_vendor', 'gl_renderer', 'gl_version', 'glsl_version')]
+                    if any(value in str(manifest.get('gl_renderer', '')).lower() for value in
+                           ('swiftshader', 'llvmpipe', 'softpipe', 'lavapipe', 'software rasterizer')):
+                        raise ValueError('Software renderer is outside GPU proof scope')
+                    if backend != result['backend']:
+                        raise ValueError('Backend differs in retained failure manifest')
             rejected.append(role)
             continue
         if not value['repeat_equal'] or runs[0]['frame_hashes'] != runs[1]['frame_hashes']:
@@ -276,6 +354,7 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
             verify_texture_history(role, runs)
         for repeat, run in enumerate(runs):
             manifest = run['manifest']
+            verify_execution(work / role / str(repeat), 0)
             job = verify_run_protocol(work, result, role, repeat, manifest, remote_workspace)
             if common_job is not None and job != common_job:
                 raise ValueError('Retained jobs differ across roles/repeats')
@@ -328,6 +407,7 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
              else 'retained full RGB streams/images/repeats/reconstructed source/binary identities; '
                   'load rejection remains a rejection')
     scope += '; preset and texture bytes match recorded hashes'
+    scope += '; retained execution/artifact consistency checked'
     if input_verification['source'] == 'explicit-external':
         scope += '; historical inputs supplied explicitly, original uploaded bytes were not retained'
     if kind != 'evaluator':

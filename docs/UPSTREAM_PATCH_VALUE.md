@@ -12,7 +12,7 @@ A middle column, where present, removes one patch to isolate its effect. Generat
 controls are labeled; a rejected render is an error panel, not a black screenshot.
 
 Earlier images use our 13-patch snapshot `654815d8`; 0014 uses the current 14-patch
-snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Earlier captures retain their original snapshot identities;0011 and0015 now have locked15-patch comparisons.
+snapshot `41ec3fc1`. The publication scope is locked to main `120547f3`, including0015. Earlier captures retain their original snapshot identities;0003,0011 and0015 now have locked15-patch comparisons.
 The upstream renderer matches master `e98fca85`; capture adjustments and source
 identities are recorded in the [evidence record](superpowers/evidence/current-patch-proof/README.md).
 
@@ -114,7 +114,7 @@ macro/postfix and implicit-input rules.
 
 ## 0003 — Evaluator random state and lone-dot numbers
 
-![Upstream rejection and the corrected original Stahlregen preset](superpowers/evidence/current-patch-proof/0003-original.png)
+![Upstream rejection and the corrected original Stahlregen preset](superpowers/evidence/current-patch-proof/components/locked15-lone-dot/upstream-current.png)
 
 **Stahlregen — funky Blur** uses a lone `.` in its zoom equation. Upstream rejects
 it; a tolerant loader without 0003 omits that code and produces a different pattern.
@@ -125,6 +125,8 @@ background preparation from advancing the foreground stream. That part is checke
 with thread/stream controls, rather than inferred from this picture.
 [Evidence](superpowers/evidence/current-patch-proof/reproduction-validation.json) ·
 [Patch source](../tools/projectm-patches/0003-evaluator-thread-local-rand-and-lone-dot.patch).
+[Locked15 image/failure receipts](superpowers/evidence/current-patch-proof/components/locked15-lone-dot/README.md)
+and [complete evaluator control](superpowers/evidence/current-patch-proof/components/locked15-evaluator/README.md).
 
 ## 0004 — Main-textured shape sampler ownership
 

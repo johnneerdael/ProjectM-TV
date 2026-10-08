@@ -1,6 +1,6 @@
 # Current 4.2 patch image proof
 
-Status: original image captures and integrity audit recorded, 2026-10-07. Final repository review remains open. Original capture source is `654815d8`; all 13 ordered
+Original image captures and integrity audit recorded, 2026-10-07. [PR #55](https://github.com/johnneerdael/ProjectM-TV/pull/55) tracks final repository review and publication. Original capture source is `654815d8`; all 13 ordered
 patch hashes are in [series.json](series.json). The main
 [patch reference](../../../UPSTREAM_PATCH_VALUE.md) now covers the locked 15-patch
 publication inventory at `120547f3`, recorded in [current-series.json](current-series.json).
@@ -14,8 +14,11 @@ main `120547f3` subsequently added 0015 to the locked publication inventory.
 This folder's original `series.json`, workers, frames and verification receipts
 remain tied to source `654815d8` and its 13 patches. They are preserved evidence,
 not relabeled certification of the expanded endpoint. The [Hurricane comparison](components/legacy14-hurricane/README.md) now provides
-matched current14 TV proof for0014. Revalidation of affected earlier witnesses
-remains pending.
+matched current14 TV proof for0014. The [locked15 lone-dot replay](components/locked15-lone-dot/README.md) now verifies
+the original preset’s upstream rejection and successful control/current frames,
+with retained execution evidence. The [complete evaluator comparison](components/locked15-evaluator/README.md)
+checks all three roles separately. Revalidation of other affected earlier
+witnesses remains pending.
 
 ## Comparison contract
 

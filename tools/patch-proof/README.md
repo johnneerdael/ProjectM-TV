@@ -141,7 +141,9 @@ does not validate caching, performance, production RNG parity or Windows appeara
 For the non-image evaluator contracts, prepare the `upstream`, `without-0003` and
 `patched` roles, then add `--evaluator-control` to a capture invocation in a new
 work directory. It runs fresh threads sequentially through the compiled evaluator
-and records their 128-value streams and lone-dot compilation/value. This control
+and records their 128-value streams and lone-dot compilation/value. Both capture
+and verification require exactly these three evaluator roles; subsets are not a
+complete evaluator comparison. This control
 does not create a GL context. Upstream and the no 0003 role should reject the dot
 and retain shared random-stream progression; patched threads begin independent
 identical streams and dot evaluates to zero. Verify both repeats with `verify.py`.
@@ -179,6 +181,11 @@ structured manifest and partial RGB stream before cleanup. It records unavailabl
 pulls explicitly and keeps the run failed. Raw failed streams stay in the ignored
 local build directory. Verification accepts a rejected role only when both runs
 explicitly failed with nonzero integer exit codes and no claimed successful repeat.
+Every completed command has a retained execution.json exit receipt. Rejection
+checks require matching job settings, artifact inventory/hashes and available
+diagnostics; successful manifests or derived images contradict a rejection.
+Earlier runs without these execution receipts need a fresh capture for current
+certification; their preserved receipts remain historical.
 
 Run the evidence-integrity and failed-capture controls with:
 

@@ -115,7 +115,10 @@ class FailedCaptureRetention(unittest.TestCase):
                     argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
                             '--textures', str(textures), '--device', 'emulator-5630',
                             '--user', '0', '--ndk', str(root / 'ndk'), '--work', str(work)]
-                    with patch.object(sys, 'argv', argv), patch.object(CAPTURE.subprocess, 'run') as run:
+                    with patch.object(sys, 'argv', argv), \
+                            patch.object(CAPTURE, 'validate_prepared_source'), \
+                            patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
+                            patch.object(CAPTURE.subprocess, 'run') as run:
                         with self.assertRaisesRegex(ValueError, message):
                             CAPTURE.main()
                         run.assert_not_called()
@@ -181,6 +184,7 @@ class FailedCaptureRetention(unittest.TestCase):
                 directory = work / 'patched' / str(repeat)
                 self.assertEqual(run['status'], 'failed')
                 self.assertEqual(run['exit'], 2)
+                self.assertEqual(json.loads((directory / 'execution.json').read_text()), {'exit': 2})
                 self.assertTrue((directory / 'frames.rgb').is_file(), 'Failed RGB stream was discarded')
                 self.assertEqual((directory / 'frames.rgb').read_bytes(), b'partial RGB stream')
                 if missing_manifest:
@@ -201,6 +205,96 @@ class FailedCaptureRetention(unittest.TestCase):
             self.run_failed_worker(extra_arguments=('--width', '3840', '--line-reference-height', '1080'))
         except SystemExit:
             self.fail('Capture must accept the specified 4K/reference-line controls')
+
+    def test_evaluator_control_rejects_incomplete_role_sets_before_work_or_device_access(self):
+        cases = [('patched',), ('upstream', 'patched'), ('without-0003', 'patched')]
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            binary = root / 'worker'
+            binary.write_bytes(b'worker identity')
+            preset = root / 'preset.milk'
+            preset.write_text('[preset00]\n')
+            textures = root / 'textures'
+            textures.mkdir()
+            workers = root / 'workers.json'
+            for index, roles in enumerate(cases):
+                with self.subTest(roles=roles):
+                    work = root / ('capture-' + str(index))
+                    workers.write_text(json.dumps({role: {
+                        'role': role,
+                        'patch_removed': 3 if role == 'without-0003' else None,
+                        'ordered_patches': [] if role == 'upstream' else SERIES,
+                        'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}
+                        for role in roles}))
+                    argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
+                            '--textures', str(textures), '--device', 'emulator-5630',
+                            '--user', '0', '--ndk', str(root / 'ndk'), '--work', str(work),
+                            '--evaluator-control']
+                    with patch.object(sys, 'argv', argv), \
+                            patch.object(CAPTURE, 'validate_prepared_source'), \
+                            patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
+                            patch.object(CAPTURE.subprocess, 'run') as run:
+                        with self.assertRaisesRegex(ValueError, 'requires exactly upstream'):
+                            CAPTURE.main()
+                        run.assert_not_called()
+                    self.assertFalse(work.exists())
+
+    def test_evaluator_control_retains_success_receipts_for_every_role_repeat(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            preset = root / 'preset.milk'
+            preset.write_text('[preset00]\n')
+            textures = root / 'textures'
+            textures.mkdir()
+            workers = root / 'workers.json'
+            identities = {}
+            for role in ('upstream', 'without-0003', 'patched'):
+                binary = root / (role + '-worker')
+                binary.write_bytes((role + ' bytes').encode())
+                identities[role] = {
+                    'role': role,
+                    'patch_removed': 3 if role == 'without-0003' else None,
+                    'ordered_patches': [] if role == 'upstream' else SERIES,
+                    'binary': str(binary), 'binary_sha256': CAPTURE.sha(binary.read_bytes())}
+            workers.write_text(json.dumps(identities))
+            work = root / 'capture'
+            remote_worker = b''
+
+            def fake_run(command, **kwargs):
+                nonlocal remote_worker
+                args = command[3:]
+                if args == ['shell', 'am', 'get-current-user']:
+                    return subprocess.CompletedProcess(command, 0, '0\n', '')
+                if args == ['shell', 'getprop', 'ro.kernel.qemu']:
+                    return subprocess.CompletedProcess(command, 0, '1\n', '')
+                if args == ['shell', 'pm', 'list', 'features']:
+                    return subprocess.CompletedProcess(command, 0,
+                        'feature:android.software.leanback\nfeature:android.hardware.type.television\n', '')
+                if args[0] == 'push' and args[2].endswith('/worker'):
+                    remote_worker = Path(args[1]).read_bytes()
+                if args[:2] == ['shell', 'sha256sum'] and args[2].endswith('/worker'):
+                    return subprocess.CompletedProcess(command, 0,
+                        CAPTURE.sha(remote_worker) + '  ' + args[2] + '\n', '')
+                if args[0] == 'shell' and '--evaluator-control' in args[-1]:
+                    return subprocess.CompletedProcess(command, 0, json.dumps({'control': 'ok'}) + '\n', '')
+                return subprocess.CompletedProcess(command, 0, '', '')
+
+            argv = ['capture.py', '--workers', str(workers), '--preset', str(preset),
+                    '--textures', str(textures), '--device', 'emulator-5630',
+                    '--user', '0', '--ndk', str(root / 'ndk'), '--work', str(work),
+                    '--evaluator-control']
+            with patch.object(sys, 'argv', argv), \
+                    patch.object(CAPTURE, 'session_lock', return_value=nullcontext()), \
+                    patch.object(CAPTURE, 'validate_prepared_source'), \
+                    patch.object(CAPTURE.subprocess, 'run', side_effect=fake_run):
+                CAPTURE.main()
+
+            result = json.loads((work / 'results.json').read_text())
+            self.assertEqual(set(result['roles']), set(identities))
+            for role in identities:
+                for repeat in range(2):
+                    execution = work / role / str(repeat) / 'execution.json'
+                    self.assertEqual(json.loads(execution.read_text()), {'exit': 0})
 
     def successful_capture(self, compressed=False, mutate_external_inputs=False,
                            mutate_worker_after_validation_before_upload=False):
@@ -295,6 +389,8 @@ class FailedCaptureRetention(unittest.TestCase):
             self.assertEqual(retained_worker['bytes'], len(worker_bytes))
             self.assertEqual((work / retained_worker['path']).read_bytes(), worker_bytes)
             for repeat, run in enumerate(result['roles']['patched']['runs']):
+                self.assertEqual(json.loads((work / 'patched' / str(repeat) / 'execution.json').read_text()),
+                                 {'exit': 0})
                 stream = work / 'patched' / str(repeat) / 'frames.rgb'
                 if compressed:
                     self.assertFalse(stream.exists())

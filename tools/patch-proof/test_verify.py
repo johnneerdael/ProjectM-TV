@@ -103,17 +103,16 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def save(self):
         for role, value in self.result['roles'].items():
             for repeat, run in enumerate(value['runs']):
-                if 'control' in run:
-                    directory = self.work / role / str(repeat)
-                    directory.mkdir(parents=True, exist_ok=True)
-                    (directory / 'output.txt').write_text(json.dumps(run['control']) + '\n')
-                if run.get('status') != 'success':
-                    continue
                 directory = self.work / role / str(repeat)
                 directory.mkdir(parents=True, exist_ok=True)
-                manifest = run['manifest']
-                manifest.setdefault('identity', {'role': role, 'repeat': repeat})
-                (directory / 'manifest.json').write_text(json.dumps(manifest))
+                (directory / 'execution.json').write_text(json.dumps({'exit': run.get('exit', 0)}))
+                if 'control' in run:
+                    (directory / 'output.txt').write_text(json.dumps(run['control']) + '\n')
+                    continue
+                if run.get('status') == 'success':
+                    manifest = run['manifest']
+                    manifest.setdefault('identity', {'role': role, 'repeat': repeat})
+                    (directory / 'manifest.json').write_text(json.dumps(manifest))
                 cfg = {'width': self.result['dimensions'][0], 'height': self.result['dimensions'][1],
                        'fps': 30, 'seed': 12345, 'warmup_seconds': 0, 'measurement_seconds': 4,
                        'line_reference_height': 0, 'line_antialiasing': False}
@@ -407,7 +406,8 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             with self.subTest(dimensions=dimensions):
                 self.result['dimensions'] = dimensions
                 self.save()
-                self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+                self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'],
+                                 ['patched', 'upstream', 'without-0003'])
 
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
@@ -639,13 +639,29 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Mixed success'):
             VERIFY.verify(self.work, self.root / 'ndk')
 
-    def add_rejected_role(self, row, repeat_equal=False):
+    def add_rejected_role(self, row, repeat_equal=False, log=b'Preset load failed\n', manifest=None):
         self.result['roles']['upstream'] = {
             'worker': {**self.result['roles']['patched']['worker'], 'role': 'upstream', 'ordered_patches': []},
-            'repeat_equal': repeat_equal, 'runs': [row, dict(row)]}
+            'repeat_equal': repeat_equal, 'runs': [dict(row), dict(row)]}
         self.result['roles']['upstream']['retained_worker'] = self.stage_worker(
             'upstream', self.result['roles']['upstream']['worker'])
         self.save()
+        for repeat, run in enumerate(self.result['roles']['upstream']['runs']):
+            directory = self.work / 'upstream' / str(repeat)
+            for name in ('render.log', 'manifest.json', 'frames.rgb'):
+                (directory / name).unlink(missing_ok=True)
+            artifacts = {'render.log': log, 'frames.rgb': b'partial RGB'}
+            run['log'] = log.decode('utf-8', errors='replace')
+            if manifest is not None:
+                actual_manifest = {**self.result['roles']['patched']['runs'][repeat]['manifest'],
+                                   **manifest, 'identity': {'role': 'upstream', 'repeat': repeat}}
+                artifacts['manifest.json'] = json.dumps(actual_manifest).encode()
+                run['manifest'] = actual_manifest
+            run['retained_artifacts'] = {}
+            for name, data in artifacts.items():
+                (directory / name).write_bytes(data)
+                run['retained_artifacts'][name] = {'sha256': VERIFY.sha(data), 'bytes': len(data)}
+        (self.work / 'results.json').write_text(json.dumps(self.result))
         image = Image.new('RGB', (WIDTH * 2, HEIGHT + 32), '#171717')
         draw = ImageDraw.Draw(image)
         draw.text((4, 8), 'patched', fill='white')
@@ -657,6 +673,122 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
     def test_accepts_explicit_failed_repeats_as_rejected(self):
         self.add_rejected_role({'status': 'failed', 'exit': 2})
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['rejected_roles'], ['upstream'])
+
+    def test_accepts_gl_failed_manifest_without_nonempty_log(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2}, log=b'',
+                               manifest={'status': 'failed', 'gl_error_frames': 1, 'frames': 120})
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['rejected_roles'], ['upstream'])
+
+    def test_rejects_successful_runs_relabelled_as_failed(self):
+        self.add_successful_role()
+        for repeat, run in enumerate(self.result['roles']['upstream']['runs']):
+            run['status'], run['exit'] = 'failed', 2
+            run['retained_artifacts'] = {}
+            run['log'] = 'made-up failure\n'
+            directory = self.work / 'upstream' / str(repeat)
+            (directory / 'render.log').write_text(run['log'])
+            for name in ('manifest.json', 'render.log', 'frames.rgb'):
+                data = (directory / name).read_bytes()
+                run['retained_artifacts'][name] = {'sha256': VERIFY.sha(data), 'bytes': len(data)}
+        self.result['roles']['upstream']['repeat_equal'] = False
+        self.save()
+        comparison = Image.new('RGB', (WIDTH * 2, HEIGHT + 32), '#171717')
+        draw = ImageDraw.Draw(comparison)
+        for col, role in enumerate(('patched', 'upstream')):
+            draw.text((col * WIDTH + 4, 8), role, fill='white')
+        comparison.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
+        draw.text((WIDTH + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
+        comparison.save(self.work / 'comparison.png')
+        with self.assertRaisesRegex(ValueError, 'Failed run retains successful output|failure manifest'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_failed_run_with_successful_manifest(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2},
+                               manifest={'status': 'success', 'gl_error_frames': 0, 'frames': 120})
+        with self.assertRaisesRegex(ValueError, 'failure manifest'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_self_consistent_failed_manifest_from_other_run_or_backend(self):
+        for key, value, message in (
+                ('identity', {'role': 'patched', 'repeat': 7}, 'run identity'),
+                ('seed', 999, 'run protocol'), ('fps', 60, 'run protocol'),
+                ('frames', 119, 'failure manifest dimensions/frame count'),
+                ('width', 512, 'failure manifest dimensions/frame count'),
+                ('height', 288, 'failure manifest dimensions/frame count'),
+                ('gl_renderer', 'other GPU', 'Backend'),
+                ('gl_renderer', 'SwiftShader', 'Software renderer')):
+            with self.subTest(key=key, value=value):
+                self.add_rejected_role({'status': 'failed', 'exit': 2},
+                                       manifest={'status': 'failed', 'gl_error_frames': 1})
+                for repeat, run in enumerate(self.result['roles']['upstream']['runs']):
+                    manifest = run['manifest']
+                    manifest[key] = value
+                    data = json.dumps(manifest).encode()
+                    (self.work / 'upstream' / str(repeat) / 'manifest.json').write_bytes(data)
+                    run['retained_artifacts']['manifest.json'] = {'sha256': VERIFY.sha(data), 'bytes': len(data)}
+                (self.work / 'results.json').write_text(json.dumps(self.result))
+                with self.assertRaisesRegex(ValueError, message):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_failed_run_without_failure_diagnostics(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2}, log=b'')
+        with self.assertRaisesRegex(ValueError, 'Failed run has no retained failure diagnostic'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_changed_failed_artifact_hash_or_size(self):
+        for field, value in (('sha256', '0' * 64), ('bytes', 999), ('bytes', 19.0)):
+            with self.subTest(field=field):
+                self.add_rejected_role({'status': 'failed', 'exit': 2})
+                self.result['roles']['upstream']['runs'][0]['retained_artifacts']['render.log'][field] = value
+                (self.work / 'results.json').write_text(json.dumps(self.result))
+                with self.assertRaisesRegex(ValueError, 'Retained failure artifact differs'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_missing_or_unrecorded_failed_artifacts(self):
+        for change in ('missing', 'unrecorded', 'undeclared', 'escape'):
+            with self.subTest(change=change):
+                self.add_rejected_role({'status': 'failed', 'exit': 2})
+                directory = self.work / 'upstream/0'
+                run = self.result['roles']['upstream']['runs'][0]
+                if change == 'missing': (directory / 'frames.rgb').unlink()
+                if change == 'unrecorded': (directory / 'manifest.json').write_text('{}')
+                if change == 'undeclared': run['retained_artifacts'].pop('frames.rgb')
+                if change == 'escape': run['retained_artifacts']['../outside'] = {'sha256': '0' * 64, 'bytes': 1}
+                (self.work / 'results.json').write_text(json.dumps(self.result))
+                with self.assertRaisesRegex(ValueError, 'Retained failure artifact inventory differs'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_failed_run_with_successful_derived_pixels(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2})
+        Image.frombytes('RGB', (WIDTH, HEIGHT), FRAME).save(self.work / 'upstream/0/119.png')
+        with self.assertRaisesRegex(ValueError, 'Failed run retains successful output'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_failed_job_path_substitution(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2})
+        for repeat in (0, 1):
+            path = self.work / 'upstream' / str(repeat) / 'job.json'
+            job = json.loads(path.read_text()); job['pcm_path'] = self.remote + '/other.f32'
+            path.write_text(json.dumps(job))
+        with self.assertRaisesRegex(ValueError, 'job input/output paths'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_missing_or_mismatched_execution_receipts(self):
+        for receipt in (None, 'not JSON', {'exit': 2}, {'exit': False}):
+            with self.subTest(receipt=receipt):
+                self.save()
+                path = self.work / 'patched/0/execution.json'
+                if receipt is None: path.unlink()
+                elif isinstance(receipt, str): path.write_text(receipt)
+                else: path.write_text(json.dumps(receipt))
+                with self.assertRaisesRegex(ValueError, 'Retained execution'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_failed_execution_exit_different_from_row(self):
+        self.add_rejected_role({'status': 'failed', 'exit': 2})
+        (self.work / 'upstream/0/execution.json').write_text(json.dumps({'exit': 3}))
+        with self.assertRaisesRegex(ValueError, 'Retained execution'):
+            VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_malformed_failure_records(self):
         for row in ({'exit': 2}, {'status': 'pending', 'exit': 2},
@@ -752,7 +884,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_broken_evaluator_thread_contract(self):
-        self.result['capture_kind'] = 'evaluator'
+        self.evaluator_fixture(list(range(128)))
         control = {'seed': 12345, 'compiled': [True, True], 'streams': [list(range(128)), list(range(1, 129))],
                    'fresh_thread_streams_equal': False, 'lone_dot_is_zero': True}
         self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
@@ -761,7 +893,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_broken_evaluator_lone_dot_contract(self):
-        self.result['capture_kind'] = 'evaluator'
+        self.evaluator_fixture(list(range(128)))
         control = {'seed': 12345, 'compiled': [True, True], 'streams': [list(range(128))] * 2,
                    'fresh_thread_streams_equal': True, 'lone_dot_is_zero': False}
         self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
@@ -783,11 +915,45 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         control = {'seed': 12345, 'compiled': [True, True], 'streams': [stream, stream],
                    'fresh_thread_streams_equal': True, 'lone_dot_is_zero': True}
         self.result['roles']['patched']['runs'] = [{'exit': 0, 'control': control}] * 2
+        for role in ('upstream', 'without-0003'):
+            identity = {**self.result['roles']['patched']['worker'], 'role': role,
+                        'patch_removed': 3 if role == 'without-0003' else None,
+                        'ordered_patches': SERIES if role == 'without-0003' else []}
+            other = {'seed': 12345, 'compiled': [True, True],
+                     'streams': [stream, [(v + 1000) % 1000000 for v in stream]],
+                     'fresh_thread_streams_equal': False, 'lone_dot_is_zero': False}
+            self.result['roles'][role] = {'worker': identity,
+                'retained_worker': self.stage_worker(role, identity),
+                'runs': [{'exit': 0, 'control': other}] * 2, 'repeat_equal': True}
         self.save()
 
     def test_accepts_valid_retained_evaluator_contract(self):
         self.evaluator_fixture(list(range(128)))
-        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'],
+                         ['patched', 'upstream', 'without-0003'])
+
+    def test_rejects_incomplete_or_extra_evaluator_roles_before_source_rebuild(self):
+        patched = json.loads(json.dumps(self.result['roles']['patched']))
+        for roles in (('patched',), ('upstream', 'patched'), ('without-0003', 'patched'),
+                      ('upstream', 'without-0003'),
+                      ('upstream', 'without-0003', 'patched', 'without-0010')):
+            with self.subTest(roles=roles):
+                self.result['roles'] = {'patched': json.loads(json.dumps(patched))}
+                self.evaluator_fixture(list(range(128)))
+                if 'without-0010' in roles:
+                    self.result['roles']['without-0010'] = self.result['roles']['patched']
+                self.result['roles'] = {role: self.result['roles'][role] for role in roles}
+                self.save()
+                with patch.object(VERIFY, 'validate_prepared_source') as rebuild:
+                    with self.assertRaisesRegex(ValueError, 'Evaluator capture requires exactly'):
+                        VERIFY.verify(self.work, self.root / 'ndk')
+                    rebuild.assert_not_called()
+
+    def test_rejects_evaluator_execution_with_nonzero_exit(self):
+        self.evaluator_fixture(list(range(128)))
+        (self.work / 'without-0003/1/execution.json').write_text(json.dumps({'exit': 2}))
+        with self.assertRaisesRegex(ValueError, 'Retained execution'):
+            VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_missing_or_changed_retained_evaluator_seed(self):
         for seed in (None, 0, 999, True, 12345.0):
@@ -805,7 +971,8 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         for repeat in (0, 1):
             path = self.work / 'patched' / str(repeat) / 'output.txt'
             path.write_text(path.read_text() + 'worker diagnostic on stderr\n')
-        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'],
+                         ['patched', 'upstream', 'without-0003'])
 
     def test_rejects_both_inline_evaluator_controls_tampered_together(self):
         self.evaluator_fixture(list(range(128)))

@@ -100,6 +100,8 @@ def main() -> None:
         parser.error('--texture-journey requires a and b directories under --textures')
     workers = json.loads(args.workers.read_text())
     series = json.loads(args.series.read_text())
+    if args.evaluator_control and set(workers) != {'upstream', 'without-0003', 'patched'}:
+        raise ValueError('Evaluator control requires exactly upstream, without-0003, and patched workers')
     supported_roles = _supported_roles(series)
     worker_payloads = {}
     for role in workers:
@@ -200,6 +202,7 @@ def main() -> None:
                         command = shlex.join(['env', 'PRESET_LAB_SEED=12345', remote + '/worker',
                                               '--evaluator-control'])
                         result = adb('shell', command, check=False)
+                        write(directory / 'execution.json', {'exit': result.returncode})
                         (directory / 'output.txt').write_text(result.stdout + result.stderr)
                         runs.append({'exit': result.returncode, 'control': json.loads(result.stdout)})
                         continue
@@ -229,6 +232,7 @@ def main() -> None:
                     command += ' 2> ' + shlex.quote(remote + '/render.log')
                     adb('shell', 'rm', '-f', remote + '/manifest.json')
                     result = adb('shell', command, check=False)
+                    write(directory / 'execution.json', {'exit': result.returncode})
                     if result.returncode:
                         failed = {'status': 'failed', 'exit': result.returncode,
                                   'pull_errors': {}, 'retained_artifacts': {}}

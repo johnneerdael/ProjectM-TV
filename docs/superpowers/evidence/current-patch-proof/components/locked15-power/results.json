@@ -1,6 +1,6 @@
 {
   "series_sha256": "3a93e74563c7ae7033b0478794425150d557a074dd8dc1fa0bc6bdc506c28aa2",
-  "capture_sha256": "be444b75fa06cf783ca3a4879d08564d844def3d74164116bceac0da93f7e86a",
+  "capture_sha256": "9f5fc0e40f423e349e628437cbca89f87d7d480f3a234133139fb1a72ef6a4b8",
   "capture_kind": "image",
   "device": "emulator-5630",
   "user": 0,
@@ -67,7 +67,7 @@
     "feature:com.google.android.software.cast_receiver",
     "feature:com.google.android.tv.installed"
   ],
-  "remote_workspace": "/data/local/tmp/projectmtv-patch-proof-b7b217f1df0f63f0",
+  "remote_workspace": "/data/local/tmp/projectmtv-patch-proof-2723f4de01bae7c2",
   "fingerprint": "google/sdk_google_atv64_arm64/emu64a:16/BT2A.260319.001/15058170:user/dev-keys",
   "preset": "negative-integer-zero-power.milk",
   "preset_sha256": "38c0d1cbcd8491e2761193aab1a8a35d59fcf933e14711326979ff0273508fc9",
@@ -176,7 +176,7 @@
         },
         "patch_removed": null,
         "ordered_patches": [],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v3/inputs/workers/upstream/worker",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v4/inputs/workers/upstream/worker",
         "binary_sha256": "21834c8758f74a70c673d2d33244a6d85a64a693cbb064a0a7a7526eab26c33a",
         "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/upstream/source-hashes.json",
         "harness_sha256": {
@@ -590,7 +590,7 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v3/inputs/workers/without-0015/worker",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v4/inputs/workers/without-0015/worker",
         "binary_sha256": "e4212b12da4c2d630aa130299d7462ffff1e79726fd682f462112a5c5c4c55f4",
         "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/without-0015/source-hashes.json",
         "harness_sha256": {
@@ -1004,7 +1004,7 @@
             "sha256": "0fe2495061a0cfbb9b7f1817b82292e5e42adbf52692ab1a57038664157d711d"
           }
         ],
-        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v3/inputs/workers/patched/worker",
+        "binary": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v4/inputs/workers/patched/worker",
         "binary_sha256": "3a4637bee3944c2adab3be5612c369952b20f4e7b871e420bef5ed3628fcfd23",
         "source_hashes": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/current15-job-bound-workers-v2/patched/source-hashes.json",
         "harness_sha256": {

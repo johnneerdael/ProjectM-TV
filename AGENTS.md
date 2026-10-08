@@ -513,3 +513,8 @@ Fresh locked15 power/rotation replays match all prior RGB frames and pass full
 source/binary/input/pixel verification. Historical records remain unchanged; non-staged workers require a fresh replay
 for current certification. See tools/patch-proof/README.md for input/workspace
 options and retained worker requirements.
+
+Execution evidence maintenance (2026-10-08): new proof runs retain execution.json
+exit receipts. Verifier checks rejected jobs and retained diagnostics, rejecting
+contradictory success artifacts. Evaluator proof requires the complete upstream,
+without-0003 and patched role set; historical subsets are not current certification.

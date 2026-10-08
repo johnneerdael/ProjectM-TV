@@ -1,23 +1,23 @@
 {
   "status": "verified",
   "successful_roles": [
-    "upstream",
-    "without-0015",
+    "without-0003",
     "patched"
   ],
-  "rejected_roles": [],
+  "rejected_roles": [
+    "upstream"
+  ],
   "different_frames_between_adjacent_successful_roles": {
-    "upstream:without-0015": 120,
-    "without-0015:patched": 120
+    "without-0003:patched": 120
   },
   "input_verification": {
     "source": "retained",
-    "preset": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v4/inputs/witness.milk",
-    "textures": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-negative-power-v4/inputs/textures"
+    "preset": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v2/inputs/witness.milk",
+    "textures": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/current-patch-proof/build/patch-proof/locked15-lone-dot-rejection-v2/inputs/textures"
   },
   "remote_workspace_verification": {
     "source": "recorded",
-    "path": "/data/local/tmp/projectmtv-patch-proof-2723f4de01bae7c2"
+    "path": "/data/local/tmp/projectmtv-patch-proof-1611d8ef9cf0d9e7"
   },
   "scope": "retained full RGB streams/images/repeats/reconstructed source/binary identities; load rejection remains a rejection; preset and texture bytes match recorded hashes; retained execution/artifact consistency checked; job input/output and event paths bound to the selected remote workspace",
   "verifier_sha256": "a506947860ed8f43542ee2ee2db0d00c2250816fe9fc9e4ae88d222900a66c40",

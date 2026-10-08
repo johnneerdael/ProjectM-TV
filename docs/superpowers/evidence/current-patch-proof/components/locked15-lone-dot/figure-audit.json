@@ -1,0 +1,8 @@
+{
+  "frame": 119,
+  "source_commit": "120547f3fafe475c86ffc3392fb94389841d08f0",
+  "preset_sha256": "02916538c0e5dd5bdb866f6ecf79ab510f68884218b26444459d3304dcb4657c",
+  "transform": "unchanged upstream rejection panel and patched framebuffer from verified comparison; labels outside frame",
+  "patched_frame_sha256": "5124e56a18d889d94292cd21d580e21444019bca5bc9a5bda727ac137a1c4f1c",
+  "figure_sha256": "12bd23b7ba5f5bab75db0ff25de024ec8af313cc1726601fdd66e830722fd4c1"
+}
