@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Geiss - Blur Mix 3.milk",
+    "rgb_repeats_exact": true,
+    "metrics": [
+      {
+        "frame": 120,
+        "mae": 0.2511842528292181,
+        "changed_pixels": 1814166
+      },
+      {
+        "frame": 150,
+        "mae": 0.007290179719650206,
+        "changed_pixels": 149487
+      },
+      {
+        "frame": 180,
+        "mae": 0.00028509194958847736,
+        "changed_pixels": 5413
+      },
+      {
+        "frame": 210,
+        "mae": 2.0347362477494855,
+        "changed_pixels": 2833557
+      },
+      {
+        "frame": 239,
+        "mae": 2.587901435506687,
+        "changed_pixels": 2826223
+      },
+      {
+        "frame": 300,
+        "mae": 1.6898689879115227,
+        "changed_pixels": 2897775
+      },
+      {
+        "frame": 390,
+        "mae": 1.1227496061599793,
+        "changed_pixels": 2739542
+      },
+      {
+        "frame": 479,
+        "mae": 0.6925101273148148,
+        "changed_pixels": 2388801
+      }
+    ]
+  },
+  {
+    "name": "Geiss - Skin Dots 10b.milk",
+    "rgb_repeats_exact": true,
+    "metrics": [
+      {
+        "frame": 120,
+        "mae": 0.1575219827031893,
+        "changed_pixels": 1028116
+      },
+      {
+        "frame": 150,
+        "mae": 0.0,
+        "changed_pixels": 0
+      },
+      {
+        "frame": 180,
+        "mae": 0.0,
+        "changed_pixels": 0
+      },
+      {
+        "frame": 210,
+        "mae": 0.16705359439300413,
+        "changed_pixels": 1362454
+      },
+      {
+        "frame": 239,
+        "mae": 0.14827815554269547,
+        "changed_pixels": 1174768
+      },
+      {
+        "frame": 300,
+        "mae": 0.022509122620884774,
+        "changed_pixels": 255232
+      },
+      {
+        "frame": 390,
+        "mae": 0.013042132844650205,
+        "changed_pixels": 73552
+      },
+      {
+        "frame": 479,
+        "mae": 0.0014009050282921811,
+        "changed_pixels": 22118
+      }
+    ]
+  }
+]

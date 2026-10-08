@@ -1,0 +1,4 @@
+# Preserve byte-bound archived presets, including authored trailing whitespace.
+I01/originals/*.milk -whitespace
+I01/stock-oracles/*.milk -whitespace
+I21/stock-salad-bar-original-alias0.milk -whitespace

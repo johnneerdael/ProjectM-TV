@@ -1,0 +1,124 @@
+{
+  "qualification": "Rational stage expectations only; float32 nested-rate adjustment and actual production audio must be observed",
+  "spectrum_count": 512,
+  "band_bins": {
+    "bass": 8,
+    "mid": 100,
+    "treble": 200
+  },
+  "prior_short_average": 1,
+  "prior_long_average": 1,
+  "frame": 100,
+  "seconds_since_last_frame": "1/30",
+  "cases": [
+    {
+      "name": "imbalance",
+      "left_sum": 1,
+      "right_sum": 3,
+      "averaged": {
+        "current_sum": 2.0,
+        "short_average": 1.8,
+        "long_average": 1.008,
+        "relative": 1.9841269841269842,
+        "attenuated_relative": 1.7857142857142858,
+        "relative_rational": "125/63"
+      },
+      "left_only": {
+        "current_sum": 1.0,
+        "short_average": 1.0,
+        "long_average": 1.0,
+        "relative": 1.0,
+        "attenuated_relative": 1.0,
+        "relative_rational": "1"
+      }
+    },
+    {
+      "name": "swapped",
+      "left_sum": 3,
+      "right_sum": 1,
+      "averaged": {
+        "current_sum": 2.0,
+        "short_average": 1.8,
+        "long_average": 1.008,
+        "relative": 1.9841269841269842,
+        "attenuated_relative": 1.7857142857142858,
+        "relative_rational": "125/63"
+      },
+      "left_only": {
+        "current_sum": 3.0,
+        "short_average": 2.6,
+        "long_average": 1.016,
+        "relative": 2.952755905511811,
+        "attenuated_relative": 2.559055118110236,
+        "relative_rational": "375/127"
+      }
+    },
+    {
+      "name": "equal_mono",
+      "left_sum": 1,
+      "right_sum": 1,
+      "averaged": {
+        "current_sum": 1.0,
+        "short_average": 1.0,
+        "long_average": 1.0,
+        "relative": 1.0,
+        "attenuated_relative": 1.0,
+        "relative_rational": "1"
+      },
+      "left_only": {
+        "current_sum": 1.0,
+        "short_average": 1.0,
+        "long_average": 1.0,
+        "relative": 1.0,
+        "attenuated_relative": 1.0,
+        "relative_rational": "1"
+      }
+    },
+    {
+      "name": "right_only",
+      "left_sum": 0,
+      "right_sum": 2,
+      "averaged": {
+        "current_sum": 1.0,
+        "short_average": 1.0,
+        "long_average": 1.0,
+        "relative": 1.0,
+        "attenuated_relative": 1.0,
+        "relative_rational": "1"
+      },
+      "left_only": {
+        "current_sum": 0.0,
+        "short_average": 0.5,
+        "long_average": 0.992,
+        "relative": 0.0,
+        "attenuated_relative": 0.5040322580645161,
+        "relative_rational": "0"
+      }
+    },
+    {
+      "name": "balanced_above_prior",
+      "left_sum": 2,
+      "right_sum": 2,
+      "averaged": {
+        "current_sum": 2.0,
+        "short_average": 1.8,
+        "long_average": 1.008,
+        "relative": 1.9841269841269842,
+        "attenuated_relative": 1.7857142857142858,
+        "relative_rational": "125/63"
+      },
+      "left_only": {
+        "current_sum": 2.0,
+        "short_average": 1.8,
+        "long_average": 1.008,
+        "relative": 1.9841269841269842,
+        "attenuated_relative": 1.7857142857142858,
+        "relative_rational": "125/63"
+      }
+    }
+  ],
+  "oracle_widths": {
+    "averaged": 0.07460317460317462,
+    "left_only": 0.05
+  }
+}

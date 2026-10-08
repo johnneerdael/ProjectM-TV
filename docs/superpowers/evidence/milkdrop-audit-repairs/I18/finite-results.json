@@ -1,0 +1,27 @@
+[
+  {
+    "name": "audit RGB brighten -1.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  },
+  {
+    "name": "audit RGB brighten 0.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  },
+  {
+    "name": "audit RGB brighten 1.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": false
+  },
+  {
+    "name": "audit RGB in range.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  },
+  {
+    "name": "audit RGB blue shader proof.milk",
+    "role_rgb_repeats_exact": true,
+    "before_after_identical": true
+  }
+]

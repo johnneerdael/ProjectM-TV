@@ -1,0 +1,146 @@
+[
+  {
+    "name": "suksma - fame is fore ache click tech - arch ass dt r3.milk",
+    "rgb_repeats_exact": true,
+    "before_after_equal": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "metrics": [
+      {
+        "frame": 120,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 88.0480335326646,
+        "after_mean": 88.0480335326646
+      },
+      {
+        "frame": 150,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 70.93266894933127,
+        "after_mean": 70.93266894933127
+      },
+      {
+        "frame": 180,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 57.903494405864194,
+        "after_mean": 57.903494405864194
+      },
+      {
+        "frame": 210,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 48.369094288515946,
+        "after_mean": 48.369094288515946
+      },
+      {
+        "frame": 239,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 58.47309301054527,
+        "after_mean": 58.47309301054527
+      },
+      {
+        "frame": 300,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 60.90056339216821,
+        "after_mean": 60.90056339216821
+      },
+      {
+        "frame": 390,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 36.395630947788064,
+        "after_mean": 36.395630947788064
+      },
+      {
+        "frame": 479,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 60.88024731545782,
+        "after_mean": 60.88024731545782
+      }
+    ]
+  },
+  {
+    "name": "Geiss - Artifact 6d.milk",
+    "rgb_repeats_exact": true,
+    "before_after_equal": [
+      true,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    "metrics": [
+      {
+        "frame": 120,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 10.357608828446502,
+        "after_mean": 10.357608828446502
+      },
+      {
+        "frame": 150,
+        "mae": 0.0001561696244855967,
+        "changed_pixels": 409,
+        "before_mean": 5.930238072273663,
+        "after_mean": 5.930394241898148
+      },
+      {
+        "frame": 180,
+        "mae": 8.929719650205761e-05,
+        "changed_pixels": 607,
+        "before_mean": 6.193252113876029,
+        "after_mean": 6.193341411072531
+      },
+      {
+        "frame": 210,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 20.35086110307356,
+        "after_mean": 20.35086110307356
+      },
+      {
+        "frame": 239,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 3.952598058127572,
+        "after_mean": 3.952598058127572
+      },
+      {
+        "frame": 300,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 8.3967681407536,
+        "after_mean": 8.3967681407536
+      },
+      {
+        "frame": 390,
+        "mae": 0.0,
+        "changed_pixels": 0,
+        "before_mean": 7.8171130320859055,
+        "after_mean": 7.8171130320859055
+      },
+      {
+        "frame": 479,
+        "mae": 0.021011204346707817,
+        "changed_pixels": 19113,
+        "before_mean": 6.422103829089506,
+        "after_mean": 6.443115033436214
+      }
+    ]
+  }
+]

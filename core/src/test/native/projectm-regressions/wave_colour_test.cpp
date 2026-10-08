@@ -1,19 +1,14 @@
-// Independent MilkDrop 2.25c controls: milkdropfs.cpp 2927-2946, 3359, 4117-4144.
+// Production RGB contract: original MilkDrop 2.25c milkdropfs.cpp:2822-2845.
 #include "gl_context.hpp"
 #include "wave_colour_submission.hpp"
-#include <limits>
-#include <MilkdropPreset/FinalComposite.hpp>
 #include <MilkdropPreset/GeometryTargets.hpp>
 #include <Renderer/Framebuffer.hpp>
-#include <ProjectM.hpp>
 #include <array>
 #include <MilkdropPreset/PerFrameContext.hpp>
 #include <MilkdropPreset/PresetState.hpp>
 #include <MilkdropPreset/Waveform.hpp>
 #include <Renderer/Color.hpp>
 #include <Renderer/ShaderCache.hpp>
-#include <Renderer/Texture.hpp>
-#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -26,29 +21,6 @@ static void Check(bool ok, const std::string& message)
 {
     if (!ok) throw std::runtime_error(message);
 }
-struct Surface
-{
-    std::shared_ptr<Texture> texture;
-    GLuint fbo{};
-    Surface()
-        : texture(std::make_shared<Texture>("control", GL_TEXTURE_2D, 64, 64, 1,
-                                            GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, false))
-    {
-        glGenFramebuffers(1, &fbo); Bind();
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                               texture->TextureID(), 0);
-        Check(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "incomplete FBO");
-    }
-    ~Surface() { glDeleteFramebuffers(1, &fbo); }
-    void Bind() { glBindFramebuffer(GL_FRAMEBUFFER, fbo); glViewport(0, 0, 64, 64); }
-    std::vector<unsigned char> Pixels()
-    {
-        std::vector<unsigned char> pixels(64 * 64 * 4);
-        glReadPixels(0, 0, 64, 64, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
-        Check(glGetError() == GL_NO_ERROR, "readback GL error");
-        return pixels;
-    }
-};
 static void Configure(PresetState& state, ShaderCache& cache)
 {
     state.renderContext.shaderCache = &cache;
@@ -60,7 +32,7 @@ static void Configure(PresetState& state, ShaderCache& cache)
     state.hueRandomOffsets.fill(0);
 }
 
-// PROPOSAL ONLY: link against the production engine with/without i18-wave-colour.patch.
+// Observe the production engine without replacing its color producer.
 // Keep GL context/platform flags identical to legacy-compatibility-regressions.
 static PFNGLDRAWELEMENTSPROC realElements;
 static PFNGLDRAWARRAYSINSTANCEDPROC realInstanced;

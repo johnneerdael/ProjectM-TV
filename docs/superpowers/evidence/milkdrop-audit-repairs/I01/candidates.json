@@ -1,0 +1,92 @@
+[
+  {
+    "name": "PyroCybin - Computronium [stahlregens gelatine finish].milk",
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/PyroCybin - Computronium [stahlregens gelatine finish].milk",
+    "sha256": "71450433120e7c01fc82f269226341b462ba1834d83c09c1287d7935eb1d6bf5",
+    "exact_copy": "originals/PyroCybin - Computronium [stahlregens gelatine finish].milk",
+    "mis_cased_keys": [
+      {
+        "line": 4,
+        "text": "PSVERSION_comp=3"
+      },
+      {
+        "line": 33,
+        "text": "fwarpAnimSpeed=0.500000"
+      },
+      {
+        "line": 34,
+        "text": "fwarpScale=2.331000"
+      }
+    ],
+    "duplicate_per_pixel_1": [
+      {
+        "line": 79,
+        "text": "per_pixel_1=q5=(rad+sin(time * 0.1 + rad * 5)) * rad;"
+      },
+      {
+        "line": 80,
+        "text": "per_pixel_1=zoom=zoom + q5 * q5 * q5 * q5*(bass + (mymid + mid) * 0.5 + mytreb );"
+      },
+      {
+        "line": 81,
+        "text": "per_pixel_1=zoom=zoom + sin(q5 * (100 * q5) + time) * 0.006 - q5 * 0.001;"
+      }
+    ],
+    "tolerant_loaded_values": {
+      "PSVERSION_COMP": 3,
+      "fWarpAnimSpeed": 0.5,
+      "fWarpScale": 2.331
+    },
+    "original_exact_case_source_expectation": {
+      "PSVERSION_COMP": 2,
+      "fWarpAnimSpeed": 1,
+      "fWarpScale": 1
+    },
+    "runtime_or_visual_impact": "unconfirmed"
+  },
+  {
+    "name": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+    "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+    "sha256": "7d1ba79abe1bdf49be179d481913f39865959c1f159fb4e9946e764c27ebccb3",
+    "exact_copy": "originals/PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+    "mis_cased_keys": [
+      {
+        "line": 4,
+        "text": "PSVERSION_comp=3"
+      },
+      {
+        "line": 33,
+        "text": "fwarpAnimSpeed=0.500000"
+      },
+      {
+        "line": 34,
+        "text": "fwarpScale=2.331000"
+      }
+    ],
+    "duplicate_per_pixel_1": [
+      {
+        "line": 79,
+        "text": "per_pixel_1=q5=(rad+sin(time * 0.1 + rad * 5)) * rad;"
+      },
+      {
+        "line": 80,
+        "text": "per_pixel_1=zoom=zoom + q5 * q5 * q5 * q5*(bass + (mymid + mid) * 0.5 + mytreb );"
+      },
+      {
+        "line": 81,
+        "text": "per_pixel_1=zoom=zoom + sin(q5 * (100 * q5) + time) * 0.006 - q5 * 0.001;"
+      }
+    ],
+    "tolerant_loaded_values": {
+      "PSVERSION_COMP": 3,
+      "fWarpAnimSpeed": 0.5,
+      "fWarpScale": 2.331
+    },
+    "original_exact_case_source_expectation": {
+      "PSVERSION_COMP": 2,
+      "fWarpAnimSpeed": 1,
+      "fWarpScale": 1
+    },
+    "runtime_or_visual_impact": "unconfirmed"
+  }
+]

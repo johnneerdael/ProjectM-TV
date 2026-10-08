@@ -1,0 +1,17 @@
+MILKDROP_PRESET_VERSION=100
+[preset00]
+fDecay=0
+fGammaAdj=1
+fVideoEchoAlpha=0
+fShader=0
+fWaveAlpha=0
+ib_size=0
+mv_a=0
+warp=0
+rot=0
+ob_r=1
+ob_g=0
+ob_b=0
+ob_a=1
+per_frame_1=ob_size=.05*zoom;q1=zoom;q2=ob_size;
+zoom=1

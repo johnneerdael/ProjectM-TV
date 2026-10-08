@@ -1,0 +1,13 @@
+{
+  "engine": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/main-sync-final/engines/b481ba8986fcbf64d7089f1cff0545fdd0cea971e7828527bf11902f65c856c9",
+  "sources": {
+    "Waveform.cpp": "f95048647640ebed4f2c3c39e46cef7914f8e67c494215cbc7ed0f74e0e8990c",
+    "WaveformMode.hpp": "ec178ae93bc646b2f3ca159386501b5cb7705e20855f3095f6dac3539928faff",
+    "Waveforms/Factory.cpp": "86c57acf7e0a1be4eee7472169f2bb25e670a521aa9d9c83a0ae31fafda6abaa"
+  },
+  "original_sources": {
+    "milkdropfs.cpp": "68749d31bb6b3020ca89b1e7630fd704e58a5de8dd6275c9f5ea005c6586a7d9",
+    "md_defines.h": "1bc94a3fb94e9c575551a69b6e71a504b90b3fe921c3a5d9be0dc888c3e54d25"
+  },
+  "status": "retained-policy source packet only; screenshots required"
+}

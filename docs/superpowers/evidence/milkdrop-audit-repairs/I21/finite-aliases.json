@@ -1,0 +1,427 @@
+{
+  "qualification": "finite bounded source arithmetic, no production execution",
+  "aliases": [
+    {
+      "evaluated": 0,
+      "truncated": 0,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 1,
+      "truncated": 1,
+      "current_signed_remainder16": 1,
+      "original_signed_remainder8": 1,
+      "current_factory": "XYOscillationSpiral",
+      "original_named_mode": "XYOscillationSpiral"
+    },
+    {
+      "evaluated": 2,
+      "truncated": 2,
+      "current_signed_remainder16": 2,
+      "original_signed_remainder8": 2,
+      "current_factory": "CenteredSpiro",
+      "original_named_mode": "CenteredSpiro"
+    },
+    {
+      "evaluated": 3,
+      "truncated": 3,
+      "current_signed_remainder16": 3,
+      "original_signed_remainder8": 3,
+      "current_factory": "CenteredSpiroVolume",
+      "original_named_mode": "CenteredSpiroVolume"
+    },
+    {
+      "evaluated": 4,
+      "truncated": 4,
+      "current_signed_remainder16": 4,
+      "original_signed_remainder8": 4,
+      "current_factory": "DerivativeLine",
+      "original_named_mode": "DerivativeLine"
+    },
+    {
+      "evaluated": 5,
+      "truncated": 5,
+      "current_signed_remainder16": 5,
+      "original_signed_remainder8": 5,
+      "current_factory": "ExplosiveHash",
+      "original_named_mode": "ExplosiveHash"
+    },
+    {
+      "evaluated": 6,
+      "truncated": 6,
+      "current_signed_remainder16": 6,
+      "original_signed_remainder8": 6,
+      "current_factory": "Line",
+      "original_named_mode": "Line"
+    },
+    {
+      "evaluated": 7,
+      "truncated": 7,
+      "current_signed_remainder16": 7,
+      "original_signed_remainder8": 7,
+      "current_factory": "DoubleLine",
+      "original_named_mode": "DoubleLine"
+    },
+    {
+      "evaluated": 8,
+      "truncated": 8,
+      "current_signed_remainder16": 8,
+      "original_signed_remainder8": 0,
+      "current_factory": "SpectrumLine",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 9,
+      "truncated": 9,
+      "current_signed_remainder16": 9,
+      "original_signed_remainder8": 1,
+      "current_factory": "Milkdrop2077Wave9",
+      "original_named_mode": "XYOscillationSpiral"
+    },
+    {
+      "evaluated": 10,
+      "truncated": 10,
+      "current_signed_remainder16": 10,
+      "original_signed_remainder8": 2,
+      "current_factory": "Milkdrop2077WaveX",
+      "original_named_mode": "CenteredSpiro"
+    },
+    {
+      "evaluated": 11,
+      "truncated": 11,
+      "current_signed_remainder16": 11,
+      "original_signed_remainder8": 3,
+      "current_factory": "Milkdrop2077Wave11",
+      "original_named_mode": "CenteredSpiroVolume"
+    },
+    {
+      "evaluated": 12,
+      "truncated": 12,
+      "current_signed_remainder16": 12,
+      "original_signed_remainder8": 4,
+      "current_factory": "Milkdrop2077WaveSkewed",
+      "original_named_mode": "DerivativeLine"
+    },
+    {
+      "evaluated": 13,
+      "truncated": 13,
+      "current_signed_remainder16": 13,
+      "original_signed_remainder8": 5,
+      "current_factory": "Milkdrop2077WaveStar",
+      "original_named_mode": "ExplosiveHash"
+    },
+    {
+      "evaluated": 14,
+      "truncated": 14,
+      "current_signed_remainder16": 14,
+      "original_signed_remainder8": 6,
+      "current_factory": "Milkdrop2077WaveFlower",
+      "original_named_mode": "Line"
+    },
+    {
+      "evaluated": 15,
+      "truncated": 15,
+      "current_signed_remainder16": 15,
+      "original_signed_remainder8": 7,
+      "current_factory": "Milkdrop2077WaveLasso",
+      "original_named_mode": "DoubleLine"
+    },
+    {
+      "evaluated": 16,
+      "truncated": 16,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 17,
+      "truncated": 17,
+      "current_signed_remainder16": 1,
+      "original_signed_remainder8": 1,
+      "current_factory": "XYOscillationSpiral",
+      "original_named_mode": "XYOscillationSpiral"
+    },
+    {
+      "evaluated": 18,
+      "truncated": 18,
+      "current_signed_remainder16": 2,
+      "original_signed_remainder8": 2,
+      "current_factory": "CenteredSpiro",
+      "original_named_mode": "CenteredSpiro"
+    },
+    {
+      "evaluated": 19,
+      "truncated": 19,
+      "current_signed_remainder16": 3,
+      "original_signed_remainder8": 3,
+      "current_factory": "CenteredSpiroVolume",
+      "original_named_mode": "CenteredSpiroVolume"
+    },
+    {
+      "evaluated": 20,
+      "truncated": 20,
+      "current_signed_remainder16": 4,
+      "original_signed_remainder8": 4,
+      "current_factory": "DerivativeLine",
+      "original_named_mode": "DerivativeLine"
+    },
+    {
+      "evaluated": 21,
+      "truncated": 21,
+      "current_signed_remainder16": 5,
+      "original_signed_remainder8": 5,
+      "current_factory": "ExplosiveHash",
+      "original_named_mode": "ExplosiveHash"
+    },
+    {
+      "evaluated": 22,
+      "truncated": 22,
+      "current_signed_remainder16": 6,
+      "original_signed_remainder8": 6,
+      "current_factory": "Line",
+      "original_named_mode": "Line"
+    },
+    {
+      "evaluated": 23,
+      "truncated": 23,
+      "current_signed_remainder16": 7,
+      "original_signed_remainder8": 7,
+      "current_factory": "DoubleLine",
+      "original_named_mode": "DoubleLine"
+    },
+    {
+      "evaluated": 24,
+      "truncated": 24,
+      "current_signed_remainder16": 8,
+      "original_signed_remainder8": 0,
+      "current_factory": "SpectrumLine",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 25,
+      "truncated": 25,
+      "current_signed_remainder16": 9,
+      "original_signed_remainder8": 1,
+      "current_factory": "Milkdrop2077Wave9",
+      "original_named_mode": "XYOscillationSpiral"
+    },
+    {
+      "evaluated": 26,
+      "truncated": 26,
+      "current_signed_remainder16": 10,
+      "original_signed_remainder8": 2,
+      "current_factory": "Milkdrop2077WaveX",
+      "original_named_mode": "CenteredSpiro"
+    },
+    {
+      "evaluated": 27,
+      "truncated": 27,
+      "current_signed_remainder16": 11,
+      "original_signed_remainder8": 3,
+      "current_factory": "Milkdrop2077Wave11",
+      "original_named_mode": "CenteredSpiroVolume"
+    },
+    {
+      "evaluated": 28,
+      "truncated": 28,
+      "current_signed_remainder16": 12,
+      "original_signed_remainder8": 4,
+      "current_factory": "Milkdrop2077WaveSkewed",
+      "original_named_mode": "DerivativeLine"
+    },
+    {
+      "evaluated": 29,
+      "truncated": 29,
+      "current_signed_remainder16": 13,
+      "original_signed_remainder8": 5,
+      "current_factory": "Milkdrop2077WaveStar",
+      "original_named_mode": "ExplosiveHash"
+    },
+    {
+      "evaluated": 30,
+      "truncated": 30,
+      "current_signed_remainder16": 14,
+      "original_signed_remainder8": 6,
+      "current_factory": "Milkdrop2077WaveFlower",
+      "original_named_mode": "Line"
+    },
+    {
+      "evaluated": 31,
+      "truncated": 31,
+      "current_signed_remainder16": 15,
+      "original_signed_remainder8": 7,
+      "current_factory": "Milkdrop2077WaveLasso",
+      "original_named_mode": "DoubleLine"
+    },
+    {
+      "evaluated": 32,
+      "truncated": 32,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": -0.9,
+      "truncated": 0,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": -1,
+      "truncated": -1,
+      "current_signed_remainder16": -1,
+      "original_signed_remainder8": -1,
+      "current_factory": "no matching factory/no draw",
+      "original_named_mode": "negative remainder/no named switch case"
+    },
+    {
+      "evaluated": -7,
+      "truncated": -7,
+      "current_signed_remainder16": -7,
+      "original_signed_remainder8": -7,
+      "current_factory": "no matching factory/no draw",
+      "original_named_mode": "negative remainder/no named switch case"
+    },
+    {
+      "evaluated": -8,
+      "truncated": -8,
+      "current_signed_remainder16": -8,
+      "original_signed_remainder8": 0,
+      "current_factory": "no matching factory/no draw",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": -9,
+      "truncated": -9,
+      "current_signed_remainder16": -9,
+      "original_signed_remainder8": -1,
+      "current_factory": "no matching factory/no draw",
+      "original_named_mode": "negative remainder/no named switch case"
+    },
+    {
+      "evaluated": -15,
+      "truncated": -15,
+      "current_signed_remainder16": -15,
+      "original_signed_remainder8": -7,
+      "current_factory": "no matching factory/no draw",
+      "original_named_mode": "negative remainder/no named switch case"
+    },
+    {
+      "evaluated": -16,
+      "truncated": -16,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": -17,
+      "truncated": -17,
+      "current_signed_remainder16": -1,
+      "original_signed_remainder8": -1,
+      "current_factory": "no matching factory/no draw",
+      "original_named_mode": "negative remainder/no named switch case"
+    },
+    {
+      "evaluated": -24,
+      "truncated": -24,
+      "current_signed_remainder16": -8,
+      "original_signed_remainder8": 0,
+      "current_factory": "no matching factory/no draw",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": -32,
+      "truncated": -32,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 8.9,
+      "truncated": 8,
+      "current_signed_remainder16": 8,
+      "original_signed_remainder8": 0,
+      "current_factory": "SpectrumLine",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 9.9,
+      "truncated": 9,
+      "current_signed_remainder16": 9,
+      "original_signed_remainder8": 1,
+      "current_factory": "Milkdrop2077Wave9",
+      "original_named_mode": "XYOscillationSpiral"
+    },
+    {
+      "evaluated": 16.9,
+      "truncated": 16,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 17.9,
+      "truncated": 17,
+      "current_signed_remainder16": 1,
+      "original_signed_remainder8": 1,
+      "current_factory": "XYOscillationSpiral",
+      "original_named_mode": "XYOscillationSpiral"
+    },
+    {
+      "evaluated": 2147483647,
+      "truncated": 2147483647,
+      "current_signed_remainder16": 15,
+      "original_signed_remainder8": 7,
+      "current_factory": "Milkdrop2077WaveLasso",
+      "original_named_mode": "DoubleLine"
+    },
+    {
+      "evaluated": -2147483648,
+      "truncated": -2147483648,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    },
+    {
+      "evaluated": 2147483647.9,
+      "truncated": 2147483647,
+      "current_signed_remainder16": 15,
+      "original_signed_remainder8": 7,
+      "current_factory": "Milkdrop2077WaveLasso",
+      "original_named_mode": "DoubleLine"
+    },
+    {
+      "evaluated": -2147483648.9,
+      "truncated": -2147483648,
+      "current_signed_remainder16": 0,
+      "original_signed_remainder8": 0,
+      "current_factory": "Circle",
+      "original_named_mode": "Circle"
+    }
+  ],
+  "invalid_guard_examples": [
+    {
+      "input": "NaN/\u00b1Infinity",
+      "current": "reject before conversion; no draw"
+    },
+    {
+      "input": 2147483648,
+      "current": "reject truncated value aboveINT_MAX; no draw"
+    },
+    {
+      "input": -2147483649,
+      "current": "reject truncated value belowINT_MIN; no draw"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "source_files": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Audio/PCM.cpp",
+      "sha256": "3221aa87d5aabc6c965bf459b2d9854f11afc8da0ef5af5af2d035105cfdec07"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Audio/Loudness.cpp",
+      "sha256": "dff2109dbbd94e8d6480184272b6f51a95a766219550ae811f7c3fe934f9069b"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Audio/PCM.hpp",
+      "sha256": "e73ac5fb9ad7d4c97642a825641ba306ecf691e42aa0648bda53ae91ba2aeb57"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Audio/AudioConstants.hpp",
+      "sha256": "f96354820dc4624f59867046a36b4267704cd16674b50bec612f2ae3f096b2bc"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/libprojectM/Audio/MilkdropFFT.cpp",
+      "sha256": "598e83b309e43aea1dd6efe41b6f5e8814dc580ac86edeacbc2b56bbb86cc00c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/cpp/native-lib.cpp",
+      "sha256": "5c6459969036d4ce21d1d7767cdc8b7cb9bcd3072d11934477c87d68969983fe"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/app/src/main/java/com/example/projectm/visualizer/MainActivity.java",
+      "sha256": "c5be69df7974f67e538fffdd8460f18745a78aed5e11ded914d6f677342c744c"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/third_party/projectm/src/api/include/projectM-4/audio.h",
+      "sha256": "3196cf7e79c2edef476222d254db70dac4d20606e12d1362930c1679a942a347"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/milkdrop2_v2.25c_OPEN_SOURCED_20130514_orig_code/vis_milk2/plugin.cpp",
+      "sha256": "c768b9a3a2f434a1a29155eceea32ade812c7cd65f73bf05f63823b9f7dc7d65"
+    }
+  ],
+  "candidates": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/Sjadoh - Fortune Teller.milk",
+      "sha256": "60d9ae2f5adb14e3cd6beb99da7643e33ba103178aae84d152305cfc67e2b088",
+      "executed_or_rendered": false,
+      "raw_audio_trigger_lines": [
+        {
+          "line": 42,
+          "text": "per_frame_1=zoom=zoom +0.313*( 0.60*sin(bass) + 0.40*sin(bass) );"
+        },
+        {
+          "line": 43,
+          "text": "per_frame_2=wave_r = wave_r + bass;"
+        },
+        {
+          "line": 44,
+          "text": "per_frame_3=wave_g = wave_g + trebble;"
+        },
+        {
+          "line": 45,
+          "text": "per_frame_4=wave_b = wave_b + mid;"
+        },
+        {
+          "line": 46,
+          "text": "per_pixel_1=warp=2+sin(5-bass_att*3+trebble+midd)*3;"
+        }
+      ]
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/core/src/main/assets/presets/fiShbRaiN - city slicker.milk",
+      "sha256": "382688e31a8e1ed82968f1a2be31d09ce37041d2f104b5171936e452dd7dbc05",
+      "executed_or_rendered": false,
+      "raw_audio_trigger_lines": [
+        {
+          "line": 226,
+          "text": "per_frame_1=mv_r=bass*.75;"
+        },
+        {
+          "line": 227,
+          "text": "per_frame_2=mv_g=treb*.75;"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/stereo-band-proposal/diagnostic-live-bass.milk",
+      "sha256": "a2e0db709de23fdc7c08ef4b8339931c851ea3eb34c38c07cf3247dd823bd4a0"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/stereo-band-proposal/source-oracle-left-only-diagnostic.patch",
+      "sha256": "91785b3c52964469ebd87e784e2559a4f613ec9824b1d857496985e5835f8670"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/stereo-band-proposal/README.md",
+      "sha256": "a6cb8fcfb8115407885a31f4f12468f260adfa2a47c097d938f7b41514bad3dd"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/stereo-band-proposal/stage-controls.json",
+      "sha256": "4fbe9728dbe62b548e77d82f48f84c64f0769f24225f5574d2d46306def5d5bc"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/stereo-band-proposal/oracle-averaged-stage.milk",
+      "sha256": "c91534406fbb170383db8378a88da3b076813b05b61ab68374f8f661626c1e4f"
+    },
+    {
+      "path": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/stereo-band-proposal/oracle-left-only-stage.milk",
+      "sha256": "69cd116018588b6b677fa0ffe9d506aeee5c12ad3e81572201d523d7e6fe9411"
+    }
+  ],
+  "upstream_provenance_url": "https://github.com/projectM-visualizer/projectm/commit/494269ef50479afeda1278dd0adc1002e5acfab3",
+  "candidate_inventory_is_not_affected_census": true
+}

@@ -327,8 +327,11 @@
       "sha256": "3a0f71f36670068c3f8b7cae6992441184f5e99a2a0d174385d9ea6384d09d69",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I18-wave-brightening-omits-original-preliminary-clamp/HANDOFF.md",
       "numeric_witness": "Raw RGB(2,1,0),brighten1: original clamp then normalize gives(1,1,0); target normalize raw gives(1,.5,0). Negative wave_brighten/darken_center values activate original nonzero predicates but not target >0 predicates.",
-      "status": "candidate0028 RGB-only; actual production endpoint/raw-bit/style/geometry/alpha/replay RED\u2192GREEN;52 normal and28-patch application; Native4K/cost/integration pending",
-      "confirmed_affected_originals": [],
+      "status": "implemented0028 RGB-only;52normal/52sanitizer, qualified original/finite Native4K palette/nonzero proof; isolated12-run cost no consistent slowdown; integration pending",
+      "confirmed_affected_originals": [
+        "Geiss - Blur Mix 3.milk",
+        "Geiss - Skin Dots 10b.milk"
+      ],
       "current_patch_number": 28,
       "evidence": "I18/README.md"
     },

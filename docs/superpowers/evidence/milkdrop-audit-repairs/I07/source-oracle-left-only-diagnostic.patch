@@ -1,0 +1,24 @@
+From: ProjectM TV contributors
+Subject: [DIAGNOSTIC ONLY] Isolate left-only band combination on current FFT
+
+Not a shipping repair or a proposal to undo upstream stereo improvement.
+Use only in an identified source-oracle copy. All current waveform/FFT,
+clock/alignment/temporal behavior remains; this is not original Windows
+execution. Do not use the resulting build for production or relabel it as
+unchanged AAR evidence.
+
+--- a/src/libprojectM/Audio/PCM.cpp
++++ b/src/libprojectM/Audio/PCM.cpp
+@@ -75,7 +75,7 @@
+-
++
+     // 4. Update beat detection values
+-    m_bass.Update(monoSpectrum, secondsSinceLastFrame, frame);
+-    m_middles.Update(monoSpectrum, secondsSinceLastFrame, frame);
+-    m_treble.Update(monoSpectrum, secondsSinceLastFrame, frame);
++    m_bass.Update(m_spectrumL, secondsSinceLastFrame, frame);
++    m_middles.Update(m_spectrumL, secondsSinceLastFrame, frame);
++    m_treble.Update(m_spectrumL, secondsSinceLastFrame, frame);
+-
++
+ }

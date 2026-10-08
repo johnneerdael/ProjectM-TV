@@ -1,0 +1,46 @@
+[
+  {
+    "actual": "originals/PyroCybin - Computronium [stahlregens gelatine finish].milk",
+    "actual_sha256": "71450433120e7c01fc82f269226341b462ba1834d83c09c1287d7935eb1d6bf5",
+    "strict_source_oracle": "stock-oracles/PyroCybin - Computronium [stahlregens gelatine finish] - strict-source-defaults.milk",
+    "strict_source_oracle_sha256": "23edd9a5320ffb84073dc5bd34fbeb6964dcae5d2f30f3e291ba126498b34d93",
+    "changes": [
+      {
+        "from": "PSVERSION_comp=3",
+        "to": "PSVERSION_COMP=2"
+      },
+      {
+        "from": "fwarpAnimSpeed=0.500000",
+        "to": "fWarpAnimSpeed=1.000000"
+      },
+      {
+        "from": "fwarpScale=2.331000",
+        "to": "fWarpScale=1.000000"
+      }
+    ],
+    "label": "native explicit-value surrogate for original exact-case loaded defaults; not original Windows rendering",
+    "status": "not_parsed_compiled_or_rendered"
+  },
+  {
+    "actual": "originals/PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+    "actual_sha256": "7d1ba79abe1bdf49be179d481913f39865959c1f159fb4e9946e764c27ebccb3",
+    "strict_source_oracle": "stock-oracles/PyroCybin - Toxic Lithography [stahlregens gelatine finish] - strict-source-defaults.milk",
+    "strict_source_oracle_sha256": "ee0929d194a88b312932428342c33b1b51b95b99d3c270cac9618bb47c67c910",
+    "changes": [
+      {
+        "from": "PSVERSION_comp=3",
+        "to": "PSVERSION_COMP=2"
+      },
+      {
+        "from": "fwarpAnimSpeed=0.500000",
+        "to": "fWarpAnimSpeed=1.000000"
+      },
+      {
+        "from": "fwarpScale=2.331000",
+        "to": "fWarpScale=1.000000"
+      }
+    ],
+    "label": "native explicit-value surrogate for original exact-case loaded defaults; not original Windows rendering",
+    "status": "not_parsed_compiled_or_rendered"
+  }
+]

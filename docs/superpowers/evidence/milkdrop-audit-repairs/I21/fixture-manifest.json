@@ -1,0 +1,130 @@
+[
+  {
+    "requested_extended_mode": 8,
+    "role": "retained",
+    "evaluated_fixture_mode": 8,
+    "path": "diagnostic-mode-8-retained.milk",
+    "sha256": "2d1bb117650c9496030a2c238a03b3d98417fd588feb62c19e1a6b3e1b9f08a2",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 8,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 0,
+    "path": "diagnostic-mode-8-original-alias.milk",
+    "sha256": "829fa7779a3e2ba39e0716dd2f0ca7a9926e586c01aaf819ea9dbf949de2a921",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 9,
+    "role": "retained",
+    "evaluated_fixture_mode": 9,
+    "path": "diagnostic-mode-9-retained.milk",
+    "sha256": "b2f7d3fdee0a6039c089844b24a9944e2b1b6b7fba243addff546a920f8a5570",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 9,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 1,
+    "path": "diagnostic-mode-9-original-alias.milk",
+    "sha256": "37d7258ceabcee8ee7b28c275641b7cc4d49a3f50b080dccde8ebc8a57ce100f",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 10,
+    "role": "retained",
+    "evaluated_fixture_mode": 10,
+    "path": "diagnostic-mode-10-retained.milk",
+    "sha256": "0372807f3bbad4f3c244b6d2889d0c2decd3811f14d161553bf6eceb6171ee10",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 10,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 2,
+    "path": "diagnostic-mode-10-original-alias.milk",
+    "sha256": "5e2ca837d2d643b7e3817767fd5b0ccaafca2a7a38c805be09aaa035fab55df5",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 11,
+    "role": "retained",
+    "evaluated_fixture_mode": 11,
+    "path": "diagnostic-mode-11-retained.milk",
+    "sha256": "a0a822019ff751f2e14c72d899a64bd8b00678299a16a30cc68e47e35db7f5d1",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 11,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 3,
+    "path": "diagnostic-mode-11-original-alias.milk",
+    "sha256": "deceedb589c3f11176cdbf5b4499958217ec6ed2517179a4c34548bd674ba77e",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 12,
+    "role": "retained",
+    "evaluated_fixture_mode": 12,
+    "path": "diagnostic-mode-12-retained.milk",
+    "sha256": "c9db16be595eb578240e41874b3d2122e8e3da927ff13e8d506ea3050934fc81",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 12,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 4,
+    "path": "diagnostic-mode-12-original-alias.milk",
+    "sha256": "365543ca2ba08df4efa22adfbf017791fe6233d58fe5abdfc32d4b15c6e45ea1",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 13,
+    "role": "retained",
+    "evaluated_fixture_mode": 13,
+    "path": "diagnostic-mode-13-retained.milk",
+    "sha256": "7d8c6967f827f1ef2673b3c4be41e341a243d076e7b829bba1b5909310baaff9",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 13,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 5,
+    "path": "diagnostic-mode-13-original-alias.milk",
+    "sha256": "d3a3efcffc408afefa428af011b137f9dc9e5754643588e7adb64cad8eef9cc4",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 14,
+    "role": "retained",
+    "evaluated_fixture_mode": 14,
+    "path": "diagnostic-mode-14-retained.milk",
+    "sha256": "3f614bedfd439d1cd3879d021b0b338f8df15b939251d11c8d134a9834793389",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 14,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 6,
+    "path": "diagnostic-mode-14-original-alias.milk",
+    "sha256": "49d3ac2b9681741ebb4bef3e395cd749238eba1ecab8b82502eddd5b74b198d8",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 15,
+    "role": "retained",
+    "evaluated_fixture_mode": 15,
+    "path": "diagnostic-mode-15-retained.milk",
+    "sha256": "f9d150d66a96f8e1d9b6a3e817fa30c4b86eb64a6df0dfed03b479cdb17cd182",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  },
+  {
+    "requested_extended_mode": 15,
+    "role": "original-alias",
+    "evaluated_fixture_mode": 7,
+    "path": "diagnostic-mode-15-original-alias.milk",
+    "sha256": "a4f122da72bfdf9fd9b8c98d830d71a2c62c9c582be1508bc6e3f549e231a355",
+    "qualification": "unchanged current engine renders both siblings; original-alias sibling is a source-bound selector oracle, not original Windows rendering"
+  }
+]

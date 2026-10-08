@@ -1,0 +1,15 @@
+{
+  "means_ms": {
+    "before": 2.0361406907407402,
+    "after": 1.9234873694444445
+  },
+  "delta_ms": -0.11265332129629568,
+  "delta_pct": -5.532688473276027,
+  "cycle_delta_pct": [
+    -12.30311676158803,
+    2.1741253542484573,
+    -7.603622625049367
+  ],
+  "selected_rgb_matches_original_by_role": true,
+  "scope": "Three isolated Native4K ABBA cycles; source-instrumented emulator, no universal speed or physical-TV FPS claim"
+}

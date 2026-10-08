@@ -21,7 +21,7 @@ All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical c
 | I23 | Thick custom-wave and shape-outline offsets differ | 4951 | Source investigation recorded; execution/captures/disposition pending |
 | I20 | Circle angular spacing and closure smoothing differ | 2736 | Deferred; source/GL/all finite styles/two original4K proof; +.058ms/+3.393% mean cost, mixed cycles |
 | I13 | Left-axis equation angle seam changes sign | 204 | Implemented0027; source/GL/sanitizer/original/finite/custom4K/cost proof; integration pending |
-| I18 | Wave brightening omits original preliminary clamp | 0 | Candidate0028 RGB-only; actual GL52 producer/style/raw-bit proof; Native4K/cost pending |
+| I18 | Wave brightening omits original preliminary clamp | 0 | Implemented0028 RGB-only; actual GL/sanitizer52, original/finite4K and cost proof; integration pending |
 | I03 | Small finite divisions and reciprocal powers collapse to zero | 0 | Source investigation recorded; execution/captures/disposition pending |
 | I04 | Signed remainder differs from original absolute-value remainder | 0 | Source investigation recorded; execution/captures/disposition pending |
 | M02 | Inverted-radius border topology differs from target library | 0 | Source investigation recorded; execution/captures/disposition pending |
@@ -65,3 +65,5 @@ I13 candidate0027 now passes51 normal renderer controls and27-patch application 
 I13 focused acceptance is complete:16 Native4K runs repeat exactly, custom unchanged,12 isolated cost runs show no consistent slowdown. Final integration remains open.
 
 Current52 normal renderer controls/28-patch application pass. I18 RGB-only is source-qualified; its Native/cost acceptance remains open. Negative-darken policy remains a separate unaccepted proposal.
+
+I18 RGB-only is focused-qualified; selected unbrightened captures remain identical on the tested RGBA8 backend, positive brightening/negative dim normalization provide visible proof. No corpus-wide affected count follows.

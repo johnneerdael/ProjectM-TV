@@ -1,0 +1,41 @@
+{
+  "status": "not_executed_or_rendered",
+  "fixtures": [
+    {
+      "path": "fixtures/i01-actual-tolerant.milk",
+      "loaded_zoom": 2,
+      "outer_border_size": 0.1,
+      "strict_original_source_zoom": 1
+    },
+    {
+      "path": "fixtures/i01-strict-source-oracle.milk",
+      "loaded_zoom": 1,
+      "outer_border_size": 0.05,
+      "strict_original_source_zoom": 1
+    },
+    {
+      "path": "fixtures/i01-canonical-positive.milk",
+      "loaded_zoom": 2,
+      "outer_border_size": 0.1,
+      "strict_original_source_zoom": 2
+    },
+    {
+      "path": "fixtures/i01-missing-default.milk",
+      "loaded_zoom": 1,
+      "outer_border_size": 0.05,
+      "strict_original_source_zoom": 1
+    },
+    {
+      "path": "fixtures/i01-duplicate-upper-first.milk",
+      "loaded_zoom": 2,
+      "outer_border_size": 0.1,
+      "strict_original_source_zoom": 1
+    },
+    {
+      "path": "fixtures/i01-duplicate-lower-first.milk",
+      "loaded_zoom": 1,
+      "outer_border_size": 0.05,
+      "strict_original_source_zoom": 1
+    }
+  ]
+}
