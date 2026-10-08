@@ -30,6 +30,7 @@ Each role is run at least twice. Its frames must repeat byte for byte before any
 | `shape-sampler-regressions`, `blur-range-regressions`, `warp-zoom-regressions` | Effective sampler state at real draws, blur normalization, vertex UV readback for signed zoom |
 | `dynamic-wave-controls`, `dynamic-display-controls`, `dynamic-original-presets` | Per-frame waveform and display controls against static controls, in all Native trails paths |
 | `warp-rotation-regressions` | Signed, moderate, large and maximum finite rotation angles across four feedback frames |
+| legacy compatibility controls | Constant-colour output with disabled and fractional `fShader`, mode-1 waveform opacity and open-strip topology against MilkDrop 2.25c expectations |
 
 `tools/projectm-host-tests.sh` runs projectM's own GoogleTest suite with the patches applied (329 tests at the 4.2 rebase).
 

@@ -55,6 +55,10 @@ The panel counts only presets this TV can play, so skipped presets reduce it. A 
 
 Moods are beta predictions from a short measurement and will improve. Report the preset name (shown at the top of the settings panel), the mood, the song and your TV in a [GitHub issue](https://github.com/johnneerdael/ProjectM-TV/issues).
 
+## A legacy preset looks dark or sparse
+
+Some presets are dark by design. For example, **BrainStain- boiling-mix2(redi jedi full carb mix)** shows only a zoomed crop of its image through video echo and then squares the colours with its darken filter, so it looks sparse even though its waveform is bright. The first frame of a preset can be black while its feedback builds up. When you report dark output, include the music and how long after the preset started you looked.
+
 ## A preset looks different from MilkDrop or another player
 
 ProjectM TV Engine follows MilkDrop 2 closely and fixes many differences that other projectM players still have; see the [patch catalog](engine/patches.md). Remaining reasons a preset can look different:

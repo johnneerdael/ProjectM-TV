@@ -1,6 +1,6 @@
 # Patch catalog
 
-ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **13 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
+ProjectM TV Engine is projectM at commit `6f6480746` (unreleased 4.2 master) plus **14 ordered patches** in [`tools/projectm-patches/`](https://github.com/johnneerdael/ProjectM-TV/tree/main/tools/projectm-patches). They are applied when the native library is built; the upstream source is never edited in place.
 
 Most patches are about **MilkDrop 2 authenticity**. projectM is a clean-room reimplementation of MilkDrop on OpenGL, and over the years small differences crept in: in how equation code is accepted, how HLSL becomes GLSL, where Direct3D 9 and OpenGL put pixel centres, and which per-frame variables are actually read. Each entry below names what projectM did differently, what MilkDrop 2 does (citing its released source where we checked it), what the patch changes, and the preset that shows it.
 
@@ -26,6 +26,7 @@ Two patches deliberately go beyond MilkDrop 2. [0010](#0010-each-preset-keeps-it
 | [0011](#0011-huge-rotation-values) | CPU sine/cosine for `rot` | `EoS_Phat_PeterP_Sentinel_Aware_6 …` |
 | [0012](#0012-tiny-shapes-land-on-the-right-pixels) | Direct3D 9 pixel centres for custom shapes | `amandio c - the green machine 2 … btbam covers sepultura.milk` |
 | [0013](#0013-composite-reads-the-exact-feedback-texel) | Exact texel reads in custom composites | `DemonLD_-_Toxic_water_diffusion …` |
+| [0014](#0014-legacy-colour-shading-and-mode-1-spirals) | Authored `fShader` tint amount; mode-1 spiral opacity and open shape | `BrainStain- boiling-mix2(redi jedi full carb mix).milk` |
 
 ## 0001 — TV rendering and preset compatibility
 
@@ -163,6 +164,18 @@ Direct3D 9 samples integer pixel centres; OpenGL samples half-integers. **MilkDr
 
 **MilkDrop 2** `plugin.cpp` shifts the composite grid by −½ pixel (the D3D9 convention) and keeps the UVs. **projectM**'s GL mesh is already unbiased, yet it *also* added +½ texel to the UVs, so every `tex2D(sampler_main, uv)` in a custom composite read between four texels. That is a hidden 2×2 blur: a single 255 feedback texel became four pixels of 64. ProjectM TV removes the redundant bias. In `DemonLD_-_Toxic_water_diffusion …` the bugged window was about 18% brighter at frame 59 (mean luma 57.0 against 48.4). The fix does not always darken a preset; it removes the blur.
 
+## 0014 — Legacy colour shading and mode-1 spirals
+
+Three differences in the classic (non-shader) rendering path, found while investigating why a preset looked darker than expected (`milkdropfs.cpp` 2927–2946, 3359–3365, 4117–4144):
+
+| Stage | MilkDrop 2 | projectM | ProjectM TV |
+|---|---|---|---|
+| Legacy hue shading | No tint when `fShader` ≤ 0.001; otherwise the animated corner colours are mixed with white by `fShader` | Always the full animated tint | Respects the authored amount and threshold |
+| Mode-1 waveform opacity | Alpha × 1.25, then volume modulation and clamp | Multiplier missing | Multiplier restored before the clamp |
+| Mode-1 waveform shape | Open line strip | Closed loop with an extra segment | Open, as in MilkDrop |
+
+The witness, `BrainStain- boiling-mix2(redi jedi full carb mix).milk`, can still look sparse and dark after the fix: its video echo shows only a zoomed crop of the image and its darken filter squares the colours, exactly as authored. The investigation also showed that the source predictor shared these mistaken assumptions, so agreement with the predictor is not proof of MilkDrop behaviour. [Evidence](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/brainstain-dark-output/README.md).
+
 ## Fixed upstream, dropped from the series
 
 Rebasing onto 4.2 master retired nine historical patches because upstream had already made the same fix:
@@ -197,7 +210,6 @@ projectM **v4.1.8** (tagged 2026-10-06) backports most of these parser and wavef
 - Line waveforms: MilkDrop 2 caps the point count at a third of the canvas width; projectM divides the sample count by three. Wave modes 2, 3 and 5 use projectM's size buckets instead of MilkDrop's exact-width fade table, and mode 3 multiplies `wave_a` where MilkDrop replaces it.
 - Thick custom waves and shape outlines are offset by half a pixel; MilkDrop 2 offsets them by one canvas pixel, and its custom-wave dot size also grows on canvases 1024 px and wider.
 - `echo_orient` of −1 or −3 flips horizontally in MilkDrop 2 (`n % 2` is nonzero); projectM does not flip.
-- The classic composite always applies the hue tint; MilkDrop 2 applies it only when `fShader` is above 0.001.
 - `decay` above 1 is clamped to 1; MilkDrop 2 wraps it to nearly black.
 - Per-pixel code visits mesh rows in the opposite vertical order, so stateful per-pixel code can differ; the animated warp sine pattern is vertically mirrored, and per-pixel `aspectx`/`aspecty` are not inverted as in MilkDrop 2.
 - No Windows reference renders exist in this project's evidence, so identical Windows appearance is never claimed.

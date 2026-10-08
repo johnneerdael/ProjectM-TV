@@ -4,7 +4,7 @@
 
 ProjectM TV is a music visualizer for Android TV. It turns the music another app plays on the TV into MilkDrop visuals, at up to 4K, with 9,606 presets from Jason Fletcher's *Cream of the Crop* collection. It is not a music player itself.
 
-It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualizer/projectm), the open-source reimplementation of Winamp's MilkDrop, based on unreleased projectM 4.2 master (commit `6f6480746`) plus 13 patches. The patches restore MilkDrop 2's behaviour where projectM differs, keep presets at their authored scale on 4K screens, and make preset changes smooth on TV hardware.
+It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualizer/projectm), the open-source reimplementation of Winamp's MilkDrop, based on unreleased projectM 4.2 master (commit `6f6480746`) plus 14 patches. The patches restore MilkDrop 2's behaviour where projectM differs, keep presets at their authored scale on 4K screens, and make preset changes smooth on TV hardware.
 
 > **Install on your TV with the Downloader app: code `4821216`**
 >
@@ -31,7 +31,7 @@ It runs **ProjectM TV Engine**: [projectM](https://github.com/projectM-visualize
 
 - **9,606 MilkDrop presets** with smooth blends, shuffled within the mood you choose.
 - **Preset moods (beta):** **All**, **Chill**, **Normal** and **Intense**, from a measured activity score; [predicting presets from their source](https://johnneerdael.github.io/ProjectM-TV/predictor/) is in development.
-- **Presets that work as on MilkDrop 2:** equation code MilkDrop tolerated, HLSL its compiler accepted, Direct3D pixel and texel rules, live per-frame waveform and display controls, huge rotations and negative zoom. [Patch catalog](https://johnneerdael.github.io/ProjectM-TV/engine/patches/).
+- **Presets that work as on MilkDrop 2:** equation code MilkDrop tolerated, HLSL its compiler accepted, Direct3D pixel and texel rules, live per-frame waveform and display controls, legacy colour shading and spirals, huge rotations and negative zoom. [Patch catalog](https://johnneerdael.github.io/ProjectM-TV/engine/patches/).
 - **4K without the darkness:** lines, blur and texel steps scale with resolution; Native trails keeps feedback at an authored-scale canvas with sharp native geometry on top.
 - **No freezes at preset changes:** upcoming presets are compiled in the background.
 - **Adaptive quality:** resolution follows the target frame rate and live memory headroom, up to the panel's native size.

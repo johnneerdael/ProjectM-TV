@@ -28,7 +28,7 @@ In an existing clone, run `git submodule update --init --recursive`. Never commi
 | `python -m pytest tools/preset-lab/tests` | Preset Lab |
 | `python3 -m unittest discover -s .github/scripts/tests -v` | Release tooling |
 
-[Validation and evidence](engine/validation.md) describes what the native controls check.
+[Validation and evidence](engine/validation.md) describes what the native controls check, including the legacy compatibility controls for `fShader` shading and mode-1 waveforms ([BrainStain investigation](https://github.com/johnneerdael/ProjectM-TV/blob/main/docs/superpowers/evidence/brainstain-dark-output/README.md)).
 
 ## Test on a TV without replacing the release
 

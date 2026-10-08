@@ -83,7 +83,7 @@ ProjectM TV listens to the music app's own audio session. It never uses the micr
 
     ---
 
-    Most of the thirteen engine patches restore MilkDrop 2's behaviour where projectM differs: tolerant equation loading, HLSL its compiler accepted, and Direct3D pixel rules. Each comes with before/after proof.
+    Most of the fourteen engine patches restore MilkDrop 2's behaviour where projectM differs: tolerant equation loading, HLSL its compiler accepted, and Direct3D pixel rules. Each comes with before/after proof.
 
     [:octicons-arrow-right-24: Patch catalog](engine/patches.md)
 
