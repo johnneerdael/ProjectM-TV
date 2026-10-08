@@ -20,6 +20,7 @@ from run_corpus import session_lock
 from PIL import Image, ImageDraw
 from source_identity import validate_prepared_source, DEFAULT_SERIES, digest, _supported_roles
 from rgb_payload import inspect_rgb, compress_rgb
+from proof_font import draw_text, identity as proof_font_identity
 
 
 def sha(data: bytes) -> str:
@@ -171,6 +172,7 @@ def main() -> None:
             report = {'series_sha256': digest(series),
                       'capture_sha256': sha(Path(__file__).read_bytes()), 'capture_kind': 'evaluator' if args.evaluator_control else
                       'texture-journey' if args.texture_journey else 'image', 'device': args.device, 'user': args.user, 'features': features,
+                      'label_font': proof_font_identity(),
                       'remote_workspace': remote,
                       'fingerprint': adb('shell', 'getprop', 'ro.build.fingerprint').stdout.strip(),
                       'preset': preset_name, 'preset_sha256': preset_hash,
@@ -302,11 +304,12 @@ def main() -> None:
                 image = Image.new('RGB', (width * len(workers), height + 32), '#171717')
                 draw = ImageDraw.Draw(image)
                 for col, (role, value) in enumerate(report['roles'].items()):
-                    draw.text((col * width + 4, 8), role, fill='white')
+                    draw_text(draw, (col * width + 4, 8), role, fill='white')
                     if value['repeat_equal']:
                         image.paste(Image.open(work / role / '0/119.png'), (col * width, 32))
                     else:
-                        draw.text((col * width + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
+                        draw_text(draw, (col * width + 8, 80),
+                                  'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
                 image.save(work / 'comparison.png')
             write(work / 'results.json', report)
 

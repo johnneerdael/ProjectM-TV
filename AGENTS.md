@@ -524,3 +524,8 @@ line-reference dimensions, AA and feedback override from the setter helper.
 Verification binds these fields, including upstream’s ignored TV requests.
 Locked15 4K Geiss classic/reference captures replace the active line figure;
 original13-patch line images/receipts remain under components/lines.
+
+Proof label portability (2026-10-08): capture/verifier use the committed bitmap
+font under tools/patch-proof/assets, without default-font/FreeType selection.
+Label-only comparison reconstruction records its font/image identity separately
+from the original producer; framebuffer payloads remain unchanged.

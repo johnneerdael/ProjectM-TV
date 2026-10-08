@@ -198,3 +198,11 @@ Run the evidence-integrity and failed-capture controls with:
 ```sh
 build/patch-proof-env/bin/python -m unittest discover -s tools/patch-proof -p 'test_*.py' -v
 ```
+
+Comparison labels use the committed5×7 bitmap font in assets/, loaded through
+Pillow’s legacy font API without FreeType or the installation’s default font.
+Capture records the glyph/font/atlas and renderer identities; Pillow version is
+provenance only. Verification checks those identities when recorded and compares
+the fixed-font label pixels. Label-only reconstruction of an existing comparison
+is recorded separately as comparison_relabel, with original capture_sha256 and
+all framebuffer streams left unchanged. See assets/README.md for font provenance.

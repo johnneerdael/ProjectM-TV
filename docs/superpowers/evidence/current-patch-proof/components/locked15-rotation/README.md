@@ -41,3 +41,7 @@ available separately under their prior ignored build paths.
 The refreshed worker manifest records normalized line/feedback setter controls;
 verification binds those controls to the requested job and each compiled role.
 Earlier producer variants remain preserved in their ignored build directories.
+
+Comparison labels were rebuilt with the committed bitmap font. The separate
+comparison_relabel record preserves the original capture identity and all
+framebuffer bytes; refreshed verification records the trusted glyph/renderer hashes.

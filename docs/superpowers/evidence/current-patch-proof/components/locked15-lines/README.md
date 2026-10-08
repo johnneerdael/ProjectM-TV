@@ -44,3 +44,7 @@ are not relabeled. Full streams/workers remain in ignored
 build/patch-proof/locked15-lines-reference-4k-v1, locked15-lines-classic-4k-v1 and
 current15-control-bound-workers-v1. These are direct instrumented library frames,
 not production AAR/JNI, original Windows frames or physical-TV measurements.
+
+The CLI comparison labels use the fixed bitmap font with explicit label-only
+reconstruction provenance. The full-resolution frames, overview/zoom pixels
+and captured execution identities remain unchanged.

@@ -13,6 +13,7 @@ import struct
 from PIL import Image, ImageDraw
 from source_identity import validate_prepared_source, DEFAULT_SERIES, digest, _supported_roles
 from rgb_payload import inspect_rgb, payload_path
+from proof_font import draw_text, identity as proof_font_identity
 
 FROZEN_PCM_SHA256 = 'd585212c3738bdfe6869427b01538b76698209d9f90c8c52b0d602989e5e0f84'
 
@@ -256,6 +257,23 @@ def verify_retained_worker(work: Path, role: str, value: dict) -> None:
         raise ValueError('Retained worker record differs: ' + role)
 
 
+def verify_comparison_font(result: dict, comparison: Path) -> dict:
+    expected = proof_font_identity()
+    records = [result['label_font']] if 'label_font' in result else []
+    if 'comparison_relabel' in result:
+        relabel = result['comparison_relabel']
+        if (not isinstance(relabel, dict) or
+                relabel.get('source') != 'retained captured frame PNGs; fixed-font labels only' or
+                relabel.get('comparison_sha256') != sha(comparison.read_bytes())):
+            raise ValueError('Comparison relabel record differs from retained image')
+        records.append(relabel.get('label_font'))
+    for record in records:
+        if (not isinstance(record, dict) or any(record.get(key) != value for key, value in expected.items()
+                                               if key != 'pillow_version')):
+            raise ValueError('Comparison font identity differs from trusted fixed assets')
+    return expected
+
+
 def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERIES, *,
            preset: Path | None = None, textures: Path | None = None,
            historical_remote_workspace: str | None = None) -> dict:
@@ -424,21 +442,23 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
         verified.append(role)
     if not verified:
         raise ValueError('No successful verified role')
+    comparison_label_font = None
     if kind != 'evaluator':
         if not (work / 'comparison.png').is_file():
             raise ValueError('Missing comparison image')
+        comparison_label_font = verify_comparison_font(result, work / 'comparison.png')
         image = Image.open(work / 'comparison.png').convert('RGB')
         if image.size != (width * len(result['roles']), height + 32):
             raise ValueError('Comparison dimensions differ')
         expected_image = Image.new('RGB', image.size, '#171717')
         draw = ImageDraw.Draw(expected_image)
         for col, (role, value) in enumerate(result['roles'].items()):
-            draw.text((col * width + 4, 8), role, fill='white')
+            draw_text(draw, (col * width + 4, 8), role, fill='white')
             if role in verified:
                 frame = Image.open(work / role / '0/119.png').convert('RGB')
                 expected_image.paste(frame, (col * width, 32))
             else:
-                draw.text((col * width + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
+                draw_text(draw, (col * width + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
         if image.tobytes() != expected_image.tobytes():
             raise ValueError('Comparison changed framebuffer pixels, labels or rejection panels')
     scope = ('retained evaluator output/repeats/reconstructed source/binary identities' if kind == 'evaluator'
@@ -455,7 +475,8 @@ def verify(work: Path, ndk: Path | None = None, series_path: Path = DEFAULT_SERI
     return {'status': 'verified', 'successful_roles': verified, 'rejected_roles': rejected,
             'different_frames_between_adjacent_successful_roles': comparisons,
             'input_verification': input_verification,
-            'remote_workspace_verification': remote_workspace_verification, 'scope': scope}
+            'remote_workspace_verification': remote_workspace_verification,
+            'comparison_label_font': comparison_label_font, 'scope': scope}
 
 
 if __name__ == '__main__':

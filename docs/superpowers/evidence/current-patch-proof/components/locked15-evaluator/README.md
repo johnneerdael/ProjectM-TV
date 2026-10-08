@@ -18,8 +18,8 @@ Inputs staged by the generic capture wrapper are recorded, but this control does
 not consume a preset, audio or textures and produces no framebuffer.
 
 Full workers/inputs remain in ignored build/patch-proof/locked15-evaluator-v2,
-current15-control-bound-workers-v1 and current15-control-bound-workers-v1.
+current15-control-bound-workers-v1.
 
-The refreshed worker manifest records normalized line/feedback setter controls;
-verification binds those controls to the requested job and each compiled role.
 Earlier producer variants remain preserved in their ignored build directories.
+
+This non-image control has no comparison labels; its verifier font field is null.

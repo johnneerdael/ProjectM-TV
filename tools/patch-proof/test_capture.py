@@ -377,6 +377,7 @@ class FailedCaptureRetention(unittest.TestCase):
                 CAPTURE.main()
 
             result = json.loads((work / 'results.json').read_text())
+            self.assertEqual(result['label_font'], CAPTURE.proof_font_identity())
             self.assertIn('remote_workspace', result)
             self.assertEqual(result['remote_workspace'], '/data/local/tmp/projectmtv-patch-proof-' +
                              CAPTURE.sha(str(work.resolve()).encode())[:16])
@@ -407,6 +408,10 @@ class FailedCaptureRetention(unittest.TestCase):
 
     def test_retains_successful_lossless_compressed_rgb_streams(self):
         self.successful_capture(compressed=True)
+
+    def test_comparison_labels_ignore_installed_default_font(self):
+        with patch('PIL.ImageFont.load_default', side_effect=AssertionError('default font used')):
+            self.successful_capture()
 
     def test_hashes_and_pushes_retained_inputs_despite_external_mutation(self):
         self.successful_capture(mutate_external_inputs=True)

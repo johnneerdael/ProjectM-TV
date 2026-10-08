@@ -8,8 +8,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from capture import pcm
+from proof_font import draw_text, identity as proof_font_identity
 
 SPEC = importlib.util.spec_from_file_location('patch_proof_verify', Path(__file__).with_name('verify.py'))
 VERIFY = importlib.util.module_from_spec(SPEC)
@@ -79,7 +80,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             for frame in (29, 59, 119):
                 Image.frombytes('RGB', (WIDTH, HEIGHT), FRAME).save(directory / f'{frame}.png')
         image = Image.new('RGB', (WIDTH, HEIGHT + 32), '#171717')
-        ImageDraw.Draw(image).text((4, 8), 'patched', fill='white')
+        draw_text(ImageDraw.Draw(image), (4, 8), 'patched', fill='white')
         image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
         image.save(self.work / 'comparison.png')
         self.save()
@@ -342,7 +343,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         image = Image.new('RGB', (WIDTH * 2, HEIGHT + 32), '#171717')
         draw = ImageDraw.Draw(image)
         for col, role in enumerate(('patched', 'upstream')):
-            draw.text((col * WIDTH + 4, 8), role, fill='white')
+            draw_text(draw, (col * WIDTH + 4, 8), role, fill='white')
             image.paste(Image.open(self.work / role / '0/119.png'), (col * WIDTH, 32))
         image.save(self.work / 'comparison.png')
 
@@ -472,7 +473,7 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
             for snapshot in (29, 59, 119):
                 Image.frombytes('RGB', (2, 1), frame).save(directory / f'{snapshot}.png')
         comparison = Image.new('RGB', (2, 33), '#171717')
-        ImageDraw.Draw(comparison).text((4, 8), 'patched', fill='white')
+        draw_text(ImageDraw.Draw(comparison), (4, 8), 'patched', fill='white')
         comparison.paste(Image.frombytes('RGB', (2, 1), frame), (0, 32))
         comparison.save(self.work / 'comparison.png')
         self.save()
@@ -500,6 +501,47 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
 
     def test_accepts_intact_payloads(self):
         self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_accepts_unchanged_comparison_when_pillow_default_font_is_unavailable(self):
+        with patch.object(ImageFont, 'load_default', side_effect=AssertionError('Pillow default font was used')):
+            self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_tampered_comparison_label_glyph(self):
+        image = Image.open(self.work / 'comparison.png').convert('RGB')
+        glyph = next((x, y) for y in range(32) for x in range(WIDTH) if image.getpixel((x, y)) == (255, 255, 255))
+        image.putpixel(glyph, (0, 0, 0))
+        image.save(self.work / 'comparison.png')
+        with self.assertRaisesRegex(ValueError, 'Comparison changed framebuffer pixels, labels or rejection panels'):
+            VERIFY.verify(self.work, self.root / 'ndk')
+
+    def comparison_relabel(self, font=None):
+        return {'source': 'retained captured frame PNGs; fixed-font labels only',
+                'label_font': proof_font_identity() if font is None else font,
+                'comparison_sha256': VERIFY.sha((self.work / 'comparison.png').read_bytes())}
+
+    def test_accepts_recorded_fixed_font_and_relabel_with_other_pillow_provenance(self):
+        font = {**proof_font_identity(), 'pillow_version': 'historical producer version'}
+        self.result['label_font'] = font
+        self.result['comparison_relabel'] = self.comparison_relabel(font)
+        self.save()
+        self.assertEqual(VERIFY.verify(self.work, self.root / 'ndk')['successful_roles'], ['patched'])
+
+    def test_rejects_recorded_comparison_font_identity_different_from_fixed_assets(self):
+        for location in ('label_font', 'comparison_relabel'):
+            with self.subTest(location=location):
+                self.result.pop('label_font', None)
+                self.result.pop('comparison_relabel', None)
+                font = {**proof_font_identity(), 'font_sha256': '0' * 64}
+                self.result[location] = font if location == 'label_font' else self.comparison_relabel(font)
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'Comparison font identity differs'):
+                    VERIFY.verify(self.work, self.root / 'ndk')
+
+    def test_rejects_relabel_transform_hash_different_from_comparison(self):
+        self.result['comparison_relabel'] = {**self.comparison_relabel(), 'comparison_sha256': '0' * 64}
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Comparison relabel record differs'):
+            VERIFY.verify(self.work, self.root / 'ndk')
 
     def test_rejects_changed_retained_preset(self):
         self.preset.write_bytes(b'[preset00]\nfDecay=0.1\n')
@@ -753,10 +795,10 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         (self.work / 'results.json').write_text(json.dumps(self.result))
         image = Image.new('RGB', (WIDTH * 2, HEIGHT + 32), '#171717')
         draw = ImageDraw.Draw(image)
-        draw.text((4, 8), 'patched', fill='white')
-        draw.text((WIDTH + 4, 8), 'upstream', fill='white')
+        draw_text(draw, (4, 8), 'patched', fill='white')
+        draw_text(draw, (WIDTH + 4, 8), 'upstream', fill='white')
         image.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
-        draw.text((WIDTH + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
+        draw_text(draw, (WIDTH + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
         image.save(self.work / 'comparison.png')
 
     def test_accepts_explicit_failed_repeats_as_rejected(self):
@@ -784,9 +826,9 @@ class RetainedEvidenceIntegrity(unittest.TestCase):
         comparison = Image.new('RGB', (WIDTH * 2, HEIGHT + 32), '#171717')
         draw = ImageDraw.Draw(comparison)
         for col, role in enumerate(('patched', 'upstream')):
-            draw.text((col * WIDTH + 4, 8), role, fill='white')
+            draw_text(draw, (col * WIDTH + 4, 8), role, fill='white')
         comparison.paste(Image.open(self.work / 'patched/0/119.png'), (0, 32))
-        draw.text((WIDTH + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
+        draw_text(draw, (WIDTH + 8, 80), 'Rejected or unstable\nNo verified framebuffer', fill='#ffb4ab')
         comparison.save(self.work / 'comparison.png')
         with self.assertRaisesRegex(ValueError, 'Failed run retains successful output|failure manifest'):
             VERIFY.verify(self.work, self.root / 'ndk')
