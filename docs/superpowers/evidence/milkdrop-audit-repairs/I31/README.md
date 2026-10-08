@@ -17,3 +17,15 @@ All four480-frame original-preset runs complete with Native Standard1280×720 ca
 ![Gamma-only source-corrected after, Native4K](after-4k-frame239.png)
 
 Mean/p90 timings before3.343/3.986 and3.272/4.183 ms versus after3.440/4.347 and3.332/4.148 ms are close with variable scheduling; no speedup or universal zero-cost claim is established. Production work removes a pass at the admitted boundary and adds no computation/resource. Count and image qualification pass; final timing/integration disposition remains open.
+
+## Validation correction — original comparison invalid
+
+The first I31 before/after controller installed both artifacts under the same application ID before rendering. The second installation replaced the first, so both labeled roles actually used the candidate. Its image identity and timing rows **do not prove before/after behavior** and are invalid as a comparison. Preserve those files for traceability; do not relabel them as valid baseline evidence. The source-stage pass/count/weight regression remains valid. A new controller installs each role immediately before its run, verifies the installed APK byte hash through the captured Android user, and writes new `verified-i31` directories. Final I31 appearance/timing qualification is pending the corrected run.
+
+## Verified rerun
+
+The corrected controller installs and hashes each role immediately before rendering. Four new480-frame Native Standard4K runs complete and all eight selected RGB frames are byte-identical both across roles and within repeats. This now constitutes a valid admitted image-equality result. Candidate timing means2.642/2.603 ms versus baseline around3 ms show no slowdown in this witness; no universal speedup is claimed. See verified manifests/results. Source count/weight controls, unchanged appearance and focused runtime qualification pass; final integration remains open.
+
+![Verified gamma before](verified-before-4k-frame239.png)
+
+![Verified gamma after](verified-after-4k-frame239.png)

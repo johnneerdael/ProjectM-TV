@@ -24,3 +24,17 @@ I09 implemented0020, both nested evaluator scanner files, scalar RED→GREEN and
 I22 added stronger unchanged nebula42-dot witness, all4runs exact selected repeats, source-corrected image removes41 intermediate stars and artificial glow, frame479 MAE8.49. Mean pairs after3.407/3.777 versus before3.568/4.140 show no slowdown in that witness. Mosaic16.46ms outlier remains unexplained; do not hide it. Private overlay diagnostics preserve every AAR/native/stock asset byte except explicitly appended index rows and three added test presets in APK only. Twelve runs show exact repeated single-dot0→9pixels, two dots27→18pixels, ring126→63pixels. Assets9609 total, no shipping preset changes. Builder/controller build/audit/build_diagnostics_v2.py and render_dot_diagnostics_v2.py; overlays build/audit/diagnostics-v2. Ordinary artifact check rejected overlays as expected, then explicitly scoped verifier checked native bytes, all stock assets, exact added rows/fixture hashes and no unexpected assets; GL/runtime checks unchanged.
 
 No active validation job is known outstanding except the owned emulator launcher; prior render logs have all expected rows. Last goal turn made concrete source/evidence progress. Remaining27-ish findings/qualification and final review/CI/merge remain open; inspect ledger for exact per-ID status.
+
+## Critical validation correction
+
+I31 original v1 and I05/I06 input-original v1 before/after runs are INVALID COMPARISONS: both artifacts used `candidate-native` package ID, installed before both roles, so both roles actually ran after artifact. Do not rely on claimed identical output/timing as baseline evidence. Scalar/CGL controls remain valid. New controllers render_i31_verified.py and render_input_verified.py install selected APK per row and verify installed base.apk SHA256 before rendering, preserve old invalid runs and write new verified-* dirs. I31 corrected run exec handle pending current tool output. I09 and I22 diagnostic overlays use unique before/after packages; their comparisons remain valid. I17/I08/I19/I22 original comparisons used distinct role packages and are not affected by this mistake.
+
+## Latest checkpoint update
+
+I05/I06 implemented0021,45 normal controls, primary original source fb23db46. Verified controller corrected shared-package issue and checked exact installedAPK SHA per row; new verified-input4k-* dirs have8 complete jobs/repeats, real image differences (aspect fullMAE~.22–.31; readonly~10–28). Initial input4k-* dirs invalid, never use as baseline. Finite overlays input-diagnostics built and render_input_diagnostics.py running (handle93384); packages unique, stock/native bytes preserved except declared APK index+2fixtures (9608).
+
+I31 verified new4K controller complete, valid image equality all8frames/repeats, pass-count oracle remains causal; now focused accepted. Initial invalidv1 preserved.
+
+I29 implemented0022 one predicate, real known-edge GL RED→GREEN and46 normal tests pass; native synthetic edge diagnostic pending, no stocknegative literal claim. Patch not yet in Native worker artifact until next build.
+
+Normalized0020 patch syntax: tab context expressed as byte-identical delete/add pairs, blankEOF pair plus one trailing non-tab context. All22 patches apply and git diff --check origin/main is clean. No source byte change from normalization. No other tests/GL jobs currently needed except final combined gates later. Next continue remaining IDs; do not stop at8 repairs.

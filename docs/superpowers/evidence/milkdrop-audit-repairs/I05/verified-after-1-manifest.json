@@ -1,0 +1,221 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.corpuscandidate",
+  "pid": 10697,
+  "job": {
+    "expectedPresetCount": 9606,
+    "height": 2160,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/audio.u8",
+    "preset": "163.milk",
+    "referenceHeight": 720,
+    "referenceWidth": 1280,
+    "seed": 12345,
+    "width": 3840
+  },
+  "requestSha256": "8306761d3688829ad3eda1063a09c7a0ec9ddde8205f4fde328234bb1a9e66d9",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected frames, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-120.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "7a3214c4cc853f0acb14967fa0f450cd64561f72666b2e720433a24f60e24392",
+      "pngBytes": 187551,
+      "pngSha256": "3cc96e59216a0ffa3b3bec404e3e0c6f520a9ea22e8b3aeba1ab6d40a531c02a",
+      "rgbMean": [
+        0.48482783564814813,
+        0.3267262249228395,
+        0.5337411988811729
+      ],
+      "exactBlackFraction": 0.6403448109567901
+    },
+    {
+      "frame": 150,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-150.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "dba7a6b88461aa73b1eef16222b85647176f9afa927f229f4a39302376baf4e8",
+      "pngBytes": 211450,
+      "pngSha256": "31c1b60ed8cdae4a9c5a70e0d079295ea3e32a55a5b2f7972d8ea44b535cf665",
+      "rgbMean": [
+        0.5478686824845679,
+        0.3471573591820988,
+        0.5635089940200617
+      ],
+      "exactBlackFraction": 0.6107437548225308
+    },
+    {
+      "frame": 180,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-180.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "5e949307b5fe2e9483d306fcb068b3554a108a4640bcb808d7534edf636107ff",
+      "pngBytes": 219585,
+      "pngSha256": "666aa51a0b5962e53da595e7cad560b811a01bbdfc19c11f4a0b1e0ec58609fb",
+      "rgbMean": [
+        0.5335953173225308,
+        0.369554759837963,
+        0.56767578125
+      ],
+      "exactBlackFraction": 0.5870125626929013
+    },
+    {
+      "frame": 210,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-210.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "25f69f2f38dc628e00f8d330a56ce64b13f8203d421a0cd76e1cc1c4d16ec2ff",
+      "pngBytes": 181947,
+      "pngSha256": "ced01be057c96d71b61d14bfa26685d1c9cbcc7192bac7bb1b18242b574bda7f",
+      "rgbMean": [
+        0.47421826774691356,
+        0.35629195601851854,
+        0.5120993682484568
+      ],
+      "exactBlackFraction": 0.5852713879243827
+    },
+    {
+      "frame": 239,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-239.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "63c14dd31e8aa2dd274760dc33d09eb7f929612ab6bfbeb283a994cb0f24a95a",
+      "pngBytes": 165524,
+      "pngSha256": "ad59cbb9d3fcb171a74b21bbec09c4249bd97e0226d98316cf47e16d19bc2234",
+      "rgbMean": [
+        0.487230541087963,
+        0.37074809510030865,
+        0.5378270881558642
+      ],
+      "exactBlackFraction": 0.569180290316358
+    },
+    {
+      "frame": 300,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-300.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "b45eb3865b2bdccab39d37f5412b874bac9ffc05579d1e7f5a9f784ab450caf9",
+      "pngBytes": 274572,
+      "pngSha256": "eb8ce1fe53943d0182bac83940b4e28f1757586be4faf7a5734d7d1a5e71fc03",
+      "rgbMean": [
+        0.5548756992669753,
+        0.4413207706404321,
+        0.7350191695601852
+      ],
+      "exactBlackFraction": 0.5455109471450618
+    },
+    {
+      "frame": 390,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-390.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "dc84e8a41690fb2f339d467ed79231176155d2cfc27179ac4f10a434e598b81a",
+      "pngBytes": 222254,
+      "pngSha256": "ea2f45e43759c6e9890f9fdd5e8d1daa8297f5ba7e96cba86f2604e2d4665042",
+      "rgbMean": [
+        0.5845616319444444,
+        0.4582063802083333,
+        0.6727893518518518
+      ],
+      "exactBlackFraction": 0.5057045717592593
+    },
+    {
+      "frame": 479,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.corpuscandidate\/files\/native-trails\/verified-input4k-aspect-after-1\/output\/frame-479.png",
+      "width": 3840,
+      "height": 2160,
+      "rgbSha256": "9da7fc13b5865ab703bc59877688cacffa3db25a29d584f164ff10b1c0ad0ac7",
+      "pngBytes": 281081,
+      "pngSha256": "99fa6bc1703dd0c44936da232504064be54cf0570e2e2d2c7be061a322c582ba",
+      "rgbMean": [
+        0.6690938464506173,
+        0.4827105034722222,
+        0.7406182484567901
+      ],
+      "exactBlackFraction": 0.4922781635802469
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 9721522,
+      "productionPauseSeconds": 20
+    },
+    {
+      "beforeFrame": 391,
+      "elapsedRealtimeMs": 9731840,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9606,
+  "indexSha256": "d87c63eb1a54474d3ddfecbef0e5c633c80bfd130d5ef5730bf13f66b4e0dfef",
+  "presetAssetSha256": "ee1c2c11cc38844dfa185cc64d67afd69f97c2f803262cac94c47eeb416a0b5d",
+  "forcedPresetPrefix": "163.milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 24,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 44020,
+  "framesRendered": 480,
+  "renderWallDurationMs": 12022,
+  "pssAfterFramesKB": 74084,
+  "serializedFrameMeanMs": 11.540054047222217,
+  "serializedFrameP90Ms": 16.678,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · 1280×720 canvas",
+  "verifiedPresetName": "163.milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 12720
+}

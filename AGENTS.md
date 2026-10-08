@@ -72,6 +72,8 @@ performs this setup. Its results are source diagnostics, not visual certificatio
 
 ## Codebase navigation and knowledge tools
 
+- Signed echo I29 candidate0022: horizontal U flip uses nonzero signed remainder, preserving modulo4/V/valid-input/zoom/mix/gamma/tint policies.46 normal controls and22 patch application pass; Native4K diagnostic pending. I31 and I05/I06 comparison controllers now install/hash each APK per role; preserve invalid original shared-package runs separately. See [audit ledger](docs/superpowers/evidence/milkdrop-audit-repairs/README.md).
+
 - Original input contracts I05/I06 candidate0021: per-pixel aspect uses inverse factors, preserving TV canvas/mesh inputs; wave-point host values snapshot fresh wave-frame context before its code, preserving Q/T after code and one-evaluation replay.45 normal controls pass;21 patches apply. Native4K witnesses pending. I09 amplified pi-border private diagnostic/repeats now pass. See [audit ledger](docs/superpowers/evidence/milkdrop-audit-repairs/README.md).
 
 - Named EEL constants I09 candidate0020: remove float suffixes from the existing original pi/e/phi decimals in both Scanner.l and checked-in Scanner.c, preserving abbreviated e/phi, later float casts, lone-dot handling and RNG.43 normal controls pass;20 patches apply. No stock named-constant references were found; Native4K diagnostic and integration remain pending. See [I09](docs/superpowers/evidence/milkdrop-audit-repairs/I09/README.md).

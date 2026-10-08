@@ -167,11 +167,12 @@
       "sha256": "2e21b780ffb8dd3e17b2c04a3d5a0780e5ab6ad95fed0b24d25a341c3509bfcb",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I05-per-pixel-aspect-inputs-use-factors-instead-of-inverse-factors/HANDOFF.md",
       "numeric_witness": "16:9 aspecty: library/predictor.5625; original1.7777778. dx=aspecty/10 gives.05625 vs.17777778. Main-frame aspect inputs agree.",
-      "status": "candidate0021; source45 controls pass; Native4K pending",
+      "status": "candidate0021; source45 controls and verified4K originals/repeats pass; finite diagnostic/final acceptance pending",
       "confirmed_affected_originals": [],
       "source_report": "research/warp-motion.md",
       "recommendation": "inverse per-pixel aspect assignments; square/unaffected tests",
-      "evidence": "I05/README.md"
+      "evidence": "I05/README.md",
+      "native_4k_evidence": "I05/verified-results.json"
     },
     {
       "id": "I16",
@@ -194,9 +195,10 @@
       "sha256": "a1d379c4c50406ae24ee004196c34e439baee60b8adf131836d465b8d84413b5",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I06-custom-wave-points-inherit-modified-main-frame-read-only-inputs/HANDOFF.md",
       "numeric_witness": "Host bass1, main bass=.25, wave point x=bass: library/predictor x=.25; original x=1 from fresh wave inputs copied before wave-frame execution.",
-      "status": "candidate0021; source45 controls pass; Native4K pending",
+      "status": "candidate0021; source45 controls and verified4K originals/repeats pass; finite diagnostic/final acceptance pending",
       "confirmed_affected_originals": [],
-      "evidence": "I06/README.md"
+      "evidence": "I06/README.md",
+      "native_4k_evidence": "I06/verified-results.json"
     },
     {
       "id": "I24",
@@ -339,8 +341,9 @@
       "sha256": "da8364c56c5c5b41230539808a53d6fa76e76996794c8934fbf159df63eaaa94",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I29-negative-odd-echo-orientation-omits-original-horizontal-flip/HANDOFF.md",
       "numeric_witness": "Active echo,echo_orient=-1, second-pass u=.25: original.75; target.25. Finite negative orientations are reachable and not clamped away.",
-      "status": "pending source investigation",
-      "confirmed_affected_originals": []
+      "status": "candidate0022; signed echo GL regression and46 controls pass;4K diagnostic pending",
+      "confirmed_affected_originals": [],
+      "evidence": "I29/README.md"
     },
     {
       "id": "I15",
@@ -378,12 +381,12 @@
       "sha256": "9696fd6e7c47744a75fae2cc56ae27baa3a23b322dcac50b92f94e661a221bec",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I31-gamma-only-pass-count-epsilon-differs/HANDOFF.md",
       "numeric_witness": "Gamma1.0005: original int(gamma-.001)+1\u2192one pass; target epsilon.0001\u2192two passes weighted1 andapproximately.0005.\n\nSeparate from diffuse byte packing; no measured whole-preset impact claimed.",
-      "status": "candidate0019; source42 controls and identical4K original/repeats pass; final disposition/integration pending",
+      "status": "implemented0019; source/verified installed-APK4K comparison/repeats pass; integration pending",
       "confirmed_affected_originals": [],
       "source_report": "research/retained-policies.md",
       "recommendation": "gamma-only epsilon repair feasible; preserve echo epsilon",
       "evidence": "I31/README.md",
-      "native_4k_evidence": "I31/results.json"
+      "native_4k_evidence": "I31/verified-results.json"
     },
     {
       "id": "I01",

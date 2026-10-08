@@ -17,29 +17,33 @@ index 247b3ca..c57fcd0 100644
 --- a/vendor/projectm-eval/projectm-eval/Scanner.c
 +++ b/vendor/projectm-eval/projectm-eval/Scanner.c
 @@ -1423,15 +1423,15 @@ YY_RULE_SETUP
- 	YY_BREAK
+-	YY_BREAK
++	YY_BREAK
  case 9:
  YY_RULE_SETUP
 -{ yylval->NUM = 3.141592653589793f; return NUM; }
 +{ yylval->NUM = 3.141592653589793; return NUM; }
- 	YY_BREAK
+-	YY_BREAK
++	YY_BREAK
  case 10:
  YY_RULE_SETUP
 -{ yylval->NUM = 2.71828183f; return NUM; }
 +{ yylval->NUM = 2.71828183; return NUM; }
- 	YY_BREAK
+-	YY_BREAK
++	YY_BREAK
  case 11:
  YY_RULE_SETUP
 -{ yylval->NUM = 1.61803399f; return NUM; }
 +{ yylval->NUM = 1.61803399; return NUM; }
- 	YY_BREAK
+-	YY_BREAK
++	YY_BREAK
  case 12:
  YY_RULE_SETUP
 diff --git a/vendor/projectm-eval/projectm-eval/Scanner.l b/vendor/projectm-eval/projectm-eval/Scanner.l
 index 10dcad8..209d108 100644
 --- a/vendor/projectm-eval/projectm-eval/Scanner.l
 +++ b/vendor/projectm-eval/projectm-eval/Scanner.l
-@@ -63,9 +63,9 @@ NAME            [_a-zA-Z][_a-zA-Z0-9]*
+@@ -63,10 +63,10 @@
                          return NUM;
                          }
  "$'"."'"            { yylval->NUM = *(char*)(yytext + 2); return NUM; }
@@ -51,4 +55,6 @@ index 10dcad8..209d108 100644
 +"$"(?i:phi)         { yylval->NUM = 1.61803399; return NUM; }
 
  (?i:gmem)           { return GMEM; }
-
+-
++
+ {FLOAT}             {

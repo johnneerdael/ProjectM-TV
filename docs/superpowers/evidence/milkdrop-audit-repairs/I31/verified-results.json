@@ -1,0 +1,36 @@
+{
+  "installed_apk_hash_checked_each_run": true,
+  "all8_before_after_selected_rgb_frames_identical": true,
+  "within_role_repeats_exact": true,
+  "runs": [
+    {
+      "role": "before",
+      "repeat": 0,
+      "mean_ms": 3.084350902777779,
+      "p90_ms": 3.947084,
+      "manifest_sha256": "eb169a84b6ff3eb7e38de506095fa99974cc221b14a8b6c941782edcadfd16cf"
+    },
+    {
+      "role": "before",
+      "repeat": 1,
+      "mean_ms": 3.1497292694444434,
+      "p90_ms": 3.934417,
+      "manifest_sha256": "b87d0003ef7ba27dd9f5341fd08e501f586418db3a14a17dcb44ec0ced099fdc"
+    },
+    {
+      "role": "after",
+      "repeat": 0,
+      "mean_ms": 2.6420777472222206,
+      "p90_ms": 3.401084,
+      "manifest_sha256": "26a6770d971ce9a769b578f6d6f91f27eed261905a65daa2b487ad9e5139bfb4"
+    },
+    {
+      "role": "after",
+      "repeat": 1,
+      "mean_ms": 2.6029164361111095,
+      "p90_ms": 3.260291,
+      "manifest_sha256": "d04d2f96d97685931876a33a11906378ba1f2e150c2f84cd449b96076add3a0a"
+    }
+  ],
+  "interpretation": "valid comparison supersedes invalidv1; causal source count/weights prove fix and appearance remains equal"
+}

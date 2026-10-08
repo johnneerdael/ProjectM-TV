@@ -287,3 +287,10 @@ wave-frame code, retaining TV canvas, Q/T and prepared replay. Both direct
 source regressions fail before and pass after;45 normal controls pass.
 No evaluation, vertex, pass or allocation is added. Native4K acceptance
 remains pending in the per-ID audit evidence.
+
+## Signed echo orientation (candidate0022)
+
+Restore nonzero signed remainder for horizontal echo flip, preserving
+all other orientation/output policies. Independent known-edge GL control
+fails before and passes after;46 normal controls pass.4K diagnostic
+qualification remains pending in I29 evidence.

@@ -171,7 +171,7 @@ set_tests_properties(custom-wave-discrete-dots PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
 set_tests_properties(custom-wave-input-windows PROPERTIES TIMEOUT 30
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")
-foreach(control hue wave-alpha wave-topology opacity gamma)
+foreach(control hue wave-alpha wave-topology opacity gamma echo-orientation)
     add_test(NAME legacy-${control} COMMAND legacy-compatibility-regressions ${control})
     set_tests_properties(legacy-${control} PROPERTIES TIMEOUT 30
         ENVIRONMENT "ASAN_OPTIONS=detect_leaks=0;EGL_PLATFORM=surfaceless")

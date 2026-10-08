@@ -234,6 +234,28 @@ static void Gamma(ShaderCache& cache)
     }
     glad_glDrawElements = realDraw;
 }
+static void EchoOrientation(ShaderCache& cache)
+{
+    Surface input, output;
+    input.Bind(); glEnable(GL_SCISSOR_TEST);
+    glScissor(0,0,32,64); glClearColor(64.f/255,32.f/255,16.f/255,1); glClear(GL_COLOR_BUFFER_BIT);
+    glScissor(32,0,32,64); glClearColor(192.f/255,32.f/255,16.f/255,1); glClear(GL_COLOR_BUFFER_BIT);
+    glDisable(GL_SCISSOR_TEST);
+    PresetState state; Configure(state,cache); state.mainTexture=input.texture;
+    state.shader=0;state.gammaAdj=1;state.videoEchoZoom=1;state.videoEchoAlpha=1;state.compositeShaderVersion=0;
+    PerFrameContext frame(state.globalMemory,&state.globalRegisters);frame.RegisterBuiltinVariables();
+    FinalComposite composite;composite.LoadCompositeShader(state);
+    for (int orientation : {-7,-5,-3,-1,0,1,2,3,4,5})
+    {
+        state.videoEchoOrientation=orientation;frame.LoadStateVariables(state);
+        output.Bind();composite.Draw(state,frame);const auto pixels=output.Pixels();
+        const int left=(32*64+16)*4,right=(32*64+48)*4;
+        const bool flip=(orientation%2)!=0;
+        Check(std::abs(int(pixels[left])-(flip?192:64))<=1 &&
+              std::abs(int(pixels[right])-(flip?64:192))<=1,
+              "echo orientation "+std::to_string(orientation)+" omits original horizontal flip");
+    }
+}
 int main(int argc, char** argv)
 {
     try
@@ -245,6 +267,7 @@ int main(int argc, char** argv)
         else if (control == "wave-alpha" || control == "wave-topology") Wave(cache, control == "wave-topology");
         else if (control == "opacity") Opacity(cache);
         else if (control == "gamma") Gamma(cache);
+        else if (control == "echo-orientation") EchoOrientation(cache);
         else throw std::runtime_error("unknown control");
         std::cout << control << " matches MilkDrop 2.25c\n";
         return 0;
