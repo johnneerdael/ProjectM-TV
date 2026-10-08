@@ -1,0 +1,8 @@
+{
+  "baseline": "current ac3 retained27 appliedsource; rootcheckoutenginebytesunchanged",
+  "combined_patch_sha256": "01f2207a8529c71b8fd4c65812c54f0c62d4c163bc6421ce31be21c5551f90cb",
+  "candidate_engine": "/Users/jneerdael/Scripts/Projectm-TV/.worktrees/milkdrop-audit-repairs/build/audit/arithmetic-combined-engine",
+  "TreeFunctions_sha256": "a9b454ae5dd395b3413dce65b053c0fb2d1801cf92be98c9e85b3b43c7be7b2d",
+  "evaluator_CMake_sha256": "fa5bf0e9aeacf1076854066d996332454572c89f1b8dcc19d382b5d09f9d2898",
+  "canonical_source_changed": false
+}
