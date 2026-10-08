@@ -51,7 +51,7 @@ pending components as completed contributions.
 | [Local flat-array layout](#local-flat-array-layout) | Published: labeled diagnostic, red fallback versus authored gradient. |
 | [Initialized writable uniform-bank copies](#initialized-writable-uniform-bank-copies) | Published: nonzero-component control, actual RGB `(255,0,64)` versus expected `(255,204,64)`. |
 | [Compound uniform writes shared with helpers](#compound-uniform-writes-shared-with-helpers) | Published: unchanged Martin original's star/ray pattern at matched source time. |
-| [Legacy tint and mode-1 waveform (0014)](#0014-legacy-tint-and-mode-1-waveform) | Published: unchanged Hurricane, upstream/current-minus0014/current14 TV proof and aligned crop; independent component controls in progress. |
+| [Legacy tint and mode-1 waveform (0014)](#0014-legacy-tint-and-mode-1-waveform) | Published: unchanged Hurricane plus disabled/half/full tint and isolated mode-1 controls on upstream/current-minus0014/current14 TV. |
 | Other 0002 language/numeric components and 0003 thread isolation | Existing patch-level images/numerical controls are retained; the expanded component matrix tracks remaining activation coverage. |
 
 The [component capture matrix](superpowers/plans/2026-10-08-retained-component-proof.md)
@@ -794,6 +794,27 @@ has two exact120-frame repeats, zero GL errors and no shader warnings/errors.
 [Current-source, rebuilt-binary and full-stream verification](superpowers/evidence/current-patch-proof/components/legacy14-hurricane/README.md)
 uses the synchronized14-patch source `41ec3fc1`. Earlier13-patch images retain
 their original identities; affected-witness revalidation remains pending.
+
+### Independent tint and mode-1 controls
+
+![Actual disabled/half/full tint control frames](superpowers/evidence/current-patch-proof/components/legacy14-hue/comparison.png)
+
+A labeled constant-color diagnostic separates the tint correction. Upstream and
+current-minus0014 render center RGB `(49,128,156)` at `fShader=0`,0.5 and1.
+Current preserves input `(64,128,192)` at zero, gives `(56,128,174)` at half, and
+preserves `(49,128,156)` at full. The [complete-pixel oracle and source receipts](superpowers/evidence/current-patch-proof/components/legacy14-hue/README.md)
+check all120 frames per configuration/role; two repeats and all2160 decoded
+frames verify. No screenshot brightness scaling is used.
+
+![Actual mode-1 spiral control with source-pixel close-up](superpowers/evidence/current-patch-proof/components/legacy14-mode1/comparison.png)
+
+The generated mode-1 fixture keeps full tint and excludes persistent feedback,
+so the crop isolates the waveform change. The baseline's extra connecting segment
+is removed. Alpha0.4 becomes0.5 before clamping; blend overlap and final shade
+prevent interpreting this as a uniform25% image gain. The [matched-frame/source audit](superpowers/evidence/current-patch-proof/components/legacy14-mode1/README.md)
+verifies all720 frames, two exact repeats, zero GL errors and no shader warnings.
+Both control groups use the current14-patch snapshot and remain explicitly
+separate from unchanged Hurricane and BrainStain artist presets.
 
 The linked BrainStain investigation is supporting previous-AAR/corrected-AAR and
 source/GL evidence, distinct from the new upstream/control/current TV comparison.

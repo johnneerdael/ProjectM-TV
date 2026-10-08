@@ -121,8 +121,8 @@ requested upstream/current TV comparison. Final gates apply to the expanded scop
 Current0014 progress: explicit manifest selection and source/capture snapshot binding
 are implemented. The unchanged Hurricane upstream/control/current TV comparison
 is source/binary/full-stream verified and published on the main page. Generated
-hue and mode-1 controls are being verified separately; the inactive initial hue
-fixture remains excluded. Affected earlier legacy/mode-1 witnesses still need
+hue and mode-1 controls are source/binary/full-stream verified and published
+separately; the inactive initial hue fixture remains excluded. Affected earlier legacy/mode-1 witnesses still need
 current-endpoint revalidation; the retained23-component matrix is not complete.
 
 ## Original evidence input map (2026-10-08)

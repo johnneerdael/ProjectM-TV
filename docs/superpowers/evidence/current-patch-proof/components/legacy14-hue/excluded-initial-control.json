@@ -1,0 +1,22 @@
+{
+  "status": "excluded-inert-diagnostic",
+  "reason": "Wrong shape_0_ configuration prefix left shape disabled; actual preset reader uses shapecode_0_. All roles rendered solid black; receives no hue-proof credit.",
+  "preset_sha256": "0f9b4c9a20f71badd786fa73cd46349da6da65c12663215b02fc54dace2cdf76",
+  "preset_bytes": "[preset00]\nfDecay=0\nfGammaAdj=1\nfVideoEchoAlpha=0\nfShader=0\nfWaveAlpha=0\nnWaveMode=0\nzoom=1\nrot=0\nwarp=0\nob_size=0\nib_size=0\nbDarken=0\nbBrighten=0\nbSolarize=0\nbInvert=0\nshape_0_enabled=1\nshape_0_num_inst=1\nshape_0_sides=4\nshape_0_additive=0\nshape_0_textured=0\nshape_0_x=0.5\nshape_0_y=0.5\nshape_0_rad=4\nshape_0_ang=0\nshape_0_r=0.2509803921568627\nshape_0_g=0.5019607843137255\nshape_0_b=0.7529411764705882\nshape_0_a=1\nshape_0_r2=0.2509803921568627\nshape_0_g2=0.5019607843137255\nshape_0_b2=0.7529411764705882\nshape_0_a2=1\nshape_0_border_a=0\n",
+  "source_commit": "41ec3fc16786b325a7a8cb013a77969073aa7a5c",
+  "roles": {
+    "upstream": {
+      "repeat_equal": true,
+      "frame119_sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf"
+    },
+    "without-0014": {
+      "repeat_equal": true,
+      "frame119_sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf"
+    },
+    "patched": {
+      "repeat_equal": true,
+      "frame119_sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf"
+    }
+  },
+  "retained_full_results": "build/patch-proof/legacy14-hue-zero-v1/results.json"
+}
