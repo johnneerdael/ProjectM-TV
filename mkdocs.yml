@@ -2,14 +2,37 @@ site_name: ProjectM TV
 site_description: MilkDrop visuals for Android TV, the ProjectM TV Engine, and a source-level guide to writing presets.
 site_url: https://johnneerdael.github.io/ProjectM-TV/
 repo_url: https://github.com/johnneerdael/ProjectM-TV
+repo_name: johnneerdael/ProjectM-TV
 edit_uri: blob/main/docs/user-guide/
 docs_dir: docs/user-guide
 site_dir: build/user-guide-site
 theme:
-  name: readthedocs
-  highlightjs: false
-  navigation_depth: 3
-  collapse_navigation: false
+  name: material
+  language: en
+  palette:
+    scheme: slate
+    primary: custom
+    accent: custom
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/waveform
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
 extra_css:
   - stylesheets/projectm.css
 plugins:
@@ -19,11 +42,20 @@ markdown_extensions:
   - admonition
   - attr_list
   - def_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
 nav:
   - Home: index.md
-  - Using ProjectM TV:
+  - Use it:
       - Install and get started: getting-started.md
       - Remote controls: controls.md
       - Settings reference: settings.md
@@ -31,8 +63,8 @@ nav:
       - Custom preset packs: custom-packs.md
       - Picture quality and performance: picture-quality.md
       - Troubleshooting: troubleshooting.md
-  - Writing presets:
-      - Overview: authoring/index.md
+  - Write presets:
+      - authoring/index.md
       - Anatomy of a .milk file: authoring/milk-format.md
       - The frame, step by step: authoring/execution.md
       - Equations: authoring/equations.md
@@ -41,13 +73,13 @@ nav:
       - Motion, waves, shapes and blur: authoring/effects.md
       - Test and predict presets: authoring/testing.md
       - Checklist: authoring/checklist.md
-  - ProjectM TV Engine:
-      - Overview: engine/index.md
+  - Engine:
+      - engine/index.md
       - Patch catalog: engine/patches.md
       - Rendering MilkDrop at 4K: engine/resolution.md
       - How a frame reaches your TV: engine/pipeline.md
       - Validation and evidence: engine/validation.md
-  - The road ahead: predictor.md
+  - Road ahead: predictor.md
   - Build and test: development.md
 not_in_nav: |
   /dance.md

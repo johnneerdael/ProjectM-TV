@@ -79,7 +79,7 @@ See [Test and predict presets](authoring/testing.md) for what each tool can tell
 
 ## This documentation site
 
-The site uses MkDocs with the Read the Docs theme, matching the Milkbeat guide. Its source is `docs/user-guide/`.
+The site uses MkDocs with the Material theme. Its source is `docs/user-guide/`; GitHub Pages serves the static build.
 
 ```sh
 python3 -m venv build/docs-env
