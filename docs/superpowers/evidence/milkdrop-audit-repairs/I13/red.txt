@@ -1,0 +1,137 @@
+grid=8x8 custom=0 generated raw pi=3.14159 evaluations=81
+grid=8x8 custom=0 generated raw pi=3.14159 evaluations=81
+grid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617
+grid=48x32 custom=0 generated raw pi=3.14159 evaluations=1617
+grid=8x8 custom=1 generated raw pi=3.14159 evaluations=81
+grid=8x8 custom=1 generated raw pi=3.14159 evaluations=81
+grid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617
+grid=48x32 custom=1 generated raw pi=3.14159 evaluations=1617
+failures=128
+FAIL equation ang 8x8 node=36 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 8x8 node=37 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 8x8 node=38 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 8x8 node=39 custom=0
+FAIL above(ang,0) discriminator
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
+FAIL equation ang 8x8 node=36 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 8x8 node=37 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 8x8 node=38 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 8x8 node=39 custom=0
+FAIL above(ang,0) discriminator
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
+FAIL equation ang 48x32 node=784 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=785 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=786 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=787 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=788 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=789 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=790 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=791 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=792 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=793 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=794 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=795 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=796 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=797 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=798 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=799 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=800 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=801 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=802 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=803 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=804 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=805 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=806 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=807 custom=0
+FAIL above(ang,0) discriminator
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
+FAIL equation ang 48x32 node=784 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=785 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=786 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=787 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=788 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=789 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=790 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=791 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=792 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=793 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=794 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=795 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=796 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=797 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=798 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=799 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=800 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=801 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=802 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=803 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=804 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=805 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=806 custom=0
+FAIL above(ang,0) discriminator
+FAIL equation ang 48x32 node=807 custom=0
+FAIL above(ang,0) discriminator
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
+FAIL signed-zero left-axis equation consumption
+FAIL signed-zero atan2 branch contract
