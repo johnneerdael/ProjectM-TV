@@ -1,63 +1,33 @@
-# I01 retained casing policy — owner packet
+# I01 — retain tolerant preset-key loading
 
-**Open: parser controls are prepared source only; Native screenshots are pending. This packet does not complete the policy review.** No canonical source/patch/test/helper/docs, git, build configuration/artifacts or devices were changed. No compilation, executable controls, GL/GPU or device work was performed. Files created here are owner evidence/proposal artifacts only.
+**Disposition: retain case-insensitive loading.** The production parser controls and40 repeated Native runs qualify this bounded policy decision. No engine patch is added. Native4K fidelity and the existing first-occurrence rule are preserved.
 
-## Proposed retained contract
+Original MilkDrop2 requests exact-case keys. Current projectM normalizes ASCII keys and lookup/code prefixes, accepts authored mixed-case keys, and keeps the first occurrence after normalization. Value, equation and shader text retain their casing. Switching to exact-case loading would discard values that currently load successfully; this packet documents the difference and retains the existing contract.
 
-Keep ASCII case-insensitive key storage and lookup, including GetCode prefixes. Keep the first occurrence after key normalization, in both mixed-case duplicate orders. Preserve value/code/shader text casing, existing numeric/default/prefix parsing and code-record sequencing. Do not silently switch to exact-case import or add a strict import mode without demonstrated need. No engine change is proposed.
+## Executed parser proof
 
-Production PresetFileParser.cpp:79,111,128,150 normalizes lookups;176 normalizes keys;179–183 keeps the first normalized key. Original state.cpp:143–147 uses exact strcmp, and1397 requests lowercase zoom. Thus `ZOOM=2` without lowercase zoom loads2 currently but leaves original default1. The exact-case source difference is documented; tolerant loading is deliberately retained.
+`key_policy_test.cpp` was compiled directly with the current production `PresetFileParser.cpp`, without a mock. [Results](production-parser-controls.txt) cover canonical/mixed-case keys, numeric/default/string/bool lookups, both duplicate orders, invalid first occurrence, code prefixes, and unchanged value/shader text. Both unchanged stock candidates pass their loaded-value and duplicate-code assertions.
 
-## Prepared real parser controls
+The prepared assertion initially expected the second duplicate expression. The corrected test retains the actual first `per_pixel_1` q5 assignment at line79 and excludes records80–81. Parser behavior did not change.
 
-`parser/PresetFileParser.{cpp,hpp}` are byte-identical snapshots of production sources. `key_policy_test.cpp` calls their actual APIs, with no mock or alternate parser. Controls cover canonical/mixed keys, missing defaults, integer/bool/string lookup, first mixed-case duplicate in both orders, invalid first occurrence, normalized code prefixes, unchanged shader/value casing and first duplicate custom-code record. They also check both original candidates' tolerant values and their existing duplicate per_pixel_1 precedence.
+## Native evidence
 
-Future parent-owned scalar validation (not run here):
+[Results and decoded capture hashes](native-results.json) and [artifact/source identity](native-identity.json) identify source ac3dd034 and its current27 patches, ARM64, API34, Apple M4 Pro/GLES3 backend, the instrumented AAR and private capture APK. The overlay retains native bytes and all stock assets, appends exactly eight diagnostic/oracle entries, and verifies the installed APK SHA before every row. These are source-instrumented evidence artifacts; they are not shipping APK/AAR bytes.
 
-```sh
-c++ -std=c++17 -I build/audit/key-policy-proposal/parser build/audit/key-policy-proposal/parser/PresetFileParser.cpp build/audit/key-policy-proposal/key_policy_test.cpp -o build/audit/key-policy-proposal/key-policy-controls
-```
+Twenty runs use Native3840×2160 output with Standard1280×720 reference canvas. Twenty more use matched256×144 output/reference. Each runs480 frames at30FPS, seed12345, mesh48×32 and the same mono PCM. All480 GL/preset checks pass; core/EGL cleanup succeeds. Every run verifies read framebuffer0 for all eight selected captures. All20 repeat groups match decoded RGB exactly.
 
-Run that executable with the two exact paths under `originals/` as positional arguments. A passing parser result will establish this bounded input contract; it will not establish appearance. No RED/GREEN or pass result is claimed by this source-only preparation.
+The finite version100 fixtures use decay0, no authored shader, no other geometry and an opaque red outer border with `ob_size=.05*zoom`. LoadedZOOM2 matches canonicalzoom2 and upper-first duplicates. Explicitzoom1 matches missing default and lower-first duplicates. The two groups differ at both resolutions. This is a finite visible loaded-state witness, not original Windows rasterization.
 
-## Exact stock originals and native source-oracle siblings
+| Native4K fixture | Current tolerant loading | Explicit original-source default |
+|---|---|---|
+| `ZOOM=2` | [zoom2 / border.1](captures/i01policy-audit-i01-actual-tolerant-current-0/frame-239.png) | [zoom1 / border.05](captures/i01policy-audit-i01-strict-source-oracle-current-0/frame-239.png) |
 
-`originals/` contains unchanged byte copies of:
+## Unchanged stock originals
 
-- PyroCybin - Computronium [stahlregens gelatine finish].milk — SHA25671450433120e7c01fc82f269226341b462ba1834d83c09c1287d7935eb1d6bf5
-- PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk — SHA2567d1ba79abe1bdf49be179d481913f39865959c1f159fb4e9946e764c27ebccb3
+`originals/` contains byte-identical Computronium (SHA25671450433120e7c01fc82f269226341b462ba1834d83c09c1287d7935eb1d6bf5) and Toxic Lithography (SHA2567d1ba79abe1bdf49be179d481913f39865959c1f159fb4e9946e764c27ebccb3). Their mixed keys load composite version3, warp speed.5 and scale2.331. Original exact-case requests retain defaults2/1/1. [Substitution manifest](stock-oracle-pairs.json) records the full-preset siblings changing only those three explicit values, while preserving shaders and duplicate records.
 
-`candidates.json` records their exact keys and line numbers. In each, line4 is PSVERSION_comp=3, line33 fwarpAnimSpeed=.5, and line34 fwarpScale=2.331. Current loading gives composite version3, speed.5 and scale2.331. Original exact-case source requests PSVERSION_COMP/fWarpAnimSpeed/fWarpScale, so its source expectations are2/1/1 (state.cpp:1327,654–655,1408–1409). Both composite versions are positive; strict source loading does not disable the shader.
+Both original/surrogate pairs have identical selected RGB frames at both resolutions and on both repeats. The version values are both positive, and warp0 weakens the speed/scale witness. The observed equality does not establish whole-shader finiteness, Windows/D3D equality or an affected-preset count. It does establish that these two supplied examples have no selected-frame visible difference under the frozen input.
 
-Both files declare warp0 and contain custom warp/composite code. This weakens an effect claim for the warp speed/scale values. Current FinalComposite.cpp gates authored composite loading with version>0; a version3 versus2 metadata difference alone is not evidence of a different native shader. Stock runtime/visual impact remains unconfirmed.
+## Limits and followup
 
-Both originals also contain two exact per_pixel_1 records at lines80–81. The current parser retains the first; later duplicate code must not replace it or be appended. This is separate from the casing question and stays unchanged in every surrogate.
-
-`stock-oracles/` keeps all original bytes except three explicit loaded-value substitutions: canonical PSVERSION_COMP=2, fWarpAnimSpeed=1 and fWarpScale=1. `stock-oracle-pairs.json` records each replacement and both hashes. These are new native explicit-value surrogates for the original exact-case defaults, not Windows/D3D captures. Original authored shaders remain intact; whole-shader finite output is not certified by this preparation.
-
-## Finite visible diagnostic siblings
-
-`fixtures/` contains six new version100 presets with no authored shaders or extra geometry, decay0 and an opaque red outer border. Frame code sets `ob_size=.05*zoom` and publishes zoom/size into q1/q2. This makes the loaded-state consequence visible without depending on nonuniform feedback or arbitrary original shader behavior.
-
-| Fixture | Current loaded zoom | Source border size |
-|---|---:|---:|
-| i01-actual-tolerant.milk (ZOOM=2) | 2 | .1 |
-| i01-strict-source-oracle.milk (zoom=1) | 1 | .05 |
-| i01-canonical-positive.milk (zoom=2) | 2 | .1 |
-| i01-missing-default.milk | 1 | .05 |
-| i01-duplicate-upper-first.milk (ZOOM=2, then zoom=1) | 2 | .1 |
-| i01-duplicate-lower-first.milk (zoom=1, then ZOOM=2) | 1 | .05 |
-
-`fixture-expectations.json` retains these source expectations. No fixture has been parsed, executed or rendered here. Border-size parameters are stated, not measured pixel widths. The strict oracle uses an explicit native zoom1 to represent the original source loader's result; it does not implement an original parser or certify original rasterization.
-
-## Parent screenshot acceptance
-
-Freeze parser/ordered-patch identities, fixture/original bytes, actual APK/AAR/ABI and backend, PCM transport/effective hashes, seed and context generation. Start matched256x144 authored/output, mesh48x32, Native Standard, fixed frame/time/FPS/progress, no transitions/detail/diffusion. Trace loaded zoom and q1/q2 before appearance comparison. Capture actual-tolerant versus strict-source-oracle and unchanged canonical/default/duplicate controls. Check actual-tolerant matches canonical-positive and preserves the documented first occurrence in each order.
-
-Repeat Native Standard4K separately with actual authored/reference/output dimensions recorded. Bind and verify the final-output read framebuffer for captures. Render both exact stock originals and their clearly labelled explicit-value surrogates; equality is a valid bounded result and must not become an affected-corpus claim. Include resolved shader/fallback state and avoid declaring metadata differences visually active without evidence.
-
-Screenshots and their decoded hashes/geometry checks are required before marking I01 policy review complete. Original Windows/D3D appearance and whole-corpus frequency/impact remain outside this packet.
-
-## Identities and status
-
-`source-identity.json` records parser snapshots, ordered current0001–0028 patch hashes and both byte-identical original state.cpp sources. `artifact-hashes.json` records prepared control/fixture/original/surrogate identities. Native artifact identities and captures remain parent-owned future evidence. Status stays **open / retained-policy proposal awaiting parser execution and Native images**.
+This retained policy adds no rendering work or engine code. No performance improvement is claimed. Original Windows/D3D playback and whole-corpus prevalence remain unmeasured. Any future strict import option needs a separate versioned API/consumer decision and its own fidelity evidence. `source-identity.json` preserves the earlier prepared snapshot with28 historical patches; `native-identity.json` is authoritative for the executed27-patch artifact.

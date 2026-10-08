@@ -32,6 +32,6 @@ static void Candidate(const std::string&path){PresetFileParser p;Check(p.Read(pa
  Check(std::abs(p.GetFloat("fWarpScale",1)-2.331f)<1e-6f,"candidate tolerant warp scale");
  Check(p.GetFloat("warp",1)==0,"candidate declares warp0");
  Check(!p.GetCode("warp_").empty()&&!p.GetCode("comp_").empty(),"candidate retains authored custom shaders");
- const auto pixel=p.GetCode("per_pixel_");Check(pixel.find("q5 * q5 * q5 * q5")!=std::string::npos,"exact duplicate per_pixel1 keeps first authored expression");Check(pixel.find("sin(q5 * (100 * q5)")==std::string::npos,"later duplicate per_pixel1 must not replace first");
+ const auto pixel=p.GetCode("per_pixel_");Check(pixel.find("q5=(rad+sin(time * 0.1 + rad * 5)) * rad;")!=std::string::npos,"exact duplicate per_pixel1 keeps first authored expression");Check(pixel.find("q5 * q5 * q5 * q5")==std::string::npos&&pixel.find("sin(q5 * (100 * q5)")==std::string::npos,"later duplicate per_pixel1 must not replace first");
 }
 int main(int argc,char**argv){try{Contract();for(int i=1;i<argc;++i)Candidate(argv[i]);std::cout<<"production parser casing/first-occurrence controls passed\n";}catch(const std::exception&e){std::cerr<<"FAIL "<<e.what()<<'\n';return 1;}return 0;}

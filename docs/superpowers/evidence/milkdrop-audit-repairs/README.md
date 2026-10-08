@@ -1,6 +1,6 @@
 # MilkDrop audit repairs — active ledger
 
-The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20, I22 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Sixteen other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
+The playback target is Native4K Android TV, preserving prior TV fixes. All33 supplied findings remain in scope. Historical evidence baseline120547f3 contains15 TV patches; current integration retains main af164a97 and its released0016 cache patch; the source repair series now adds0017–0027 for twelve finding IDs. I19, I20, I22 and the shared I02/M01 boolean repair are separate deferred proposals, and I22 retains a performance-disposition question. Fifteen other findings still require executable proof, screenshots and a repair or completed owner followup package. The goal is not complete.
 
 All33 handoff hashes and all9,606 bundled preset hashes were verified. Lexical candidate counts below are unconfirmed impact counts. Both MilkDrop2 renderer files are byte-identical; MilkDrop3 remains a separately identified reference.
 
@@ -71,3 +71,5 @@ I18 RGB-only is focused-qualified; selected unbrightened captures remain identic
 I22 is now a complete deferred owner packet after fresh controlled mosaic cost+.105ms/+5.038% with all cycles increasing. The dot proposal is outside shipping patches; subsequent live numbering shifts down one while historical evidence stays frozen. Five deferred IDs and16 other unfinished IDs remain; shipping normal50/sanitizer50/27-patch reruns are pending.
 
 After I22 withdrawal, current shipping source passes50 normal/50 ASan/UBSan and27-patch application. Dot-specific controls remain archived with the proposal; window/read-only/replay controls stay in the shipping suite.
+
+I01 retained casing policy is now qualified: production parser controls pass;40 Native/matched256×144 runs repeat selected RGB exactly. The finite border witness distinguishes tolerantZOOM2 from original defaultzoom1; both supplied stock pairs remain selected-RGB identical. No engine patch is added. Twelve IDs are repaired by11 new patches; five IDs have complete deferred packets; I01 has a complete retained-policy packet;15 findings remain unfinished. Current shipping50/50 normal,50/50 sanitizer and27-patch application are passed, as recorded in review-checkpoint/shipping-post-i22-*.txt.

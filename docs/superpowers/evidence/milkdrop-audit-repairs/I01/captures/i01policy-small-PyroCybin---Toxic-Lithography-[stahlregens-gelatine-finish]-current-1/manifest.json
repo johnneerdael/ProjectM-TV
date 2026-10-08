@@ -1,0 +1,232 @@
+{
+  "protocol": "projectmtv-core-corpus-v1",
+  "applicationId": "nl.neerdael.projectmtv.auditi01policy",
+  "pid": 23972,
+  "job": {
+    "expectedPresetCount": 9614,
+    "height": 144,
+    "instrumented": true,
+    "nativeTrails": 0,
+    "outputDir": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output",
+    "pcmPath": "\/data\/user\/0\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/audio.u8",
+    "preset": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+    "referenceHeight": 144,
+    "referenceWidth": 256,
+    "seed": 12345,
+    "width": 256
+  },
+  "requestSha256": "9c2d819b83f141c10b8b786ce07d5247264064a8d52b36fc15ec0a6f1219660e",
+  "determinism": "instrumented-fixed-clock-seed",
+  "frameCountExpected": 480,
+  "fps": 30,
+  "audioBlockBytes": 1470,
+  "audioDelivery": "complete unsigned 8-bit mono blocks via ProjectMJNI.addWaveform; production FeedAudio retains latest 512 samples",
+  "captureSemantics": "eight selected final-output frames from read framebuffer zero, top-down RGB8 SHA256; sampled metrics under common 16-second audio; no all-frame image hash",
+  "settings": {
+    "autoChange": false,
+    "beatCuts": false,
+    "blankDetection": false,
+    "musicCategory": "all",
+    "meshWidth": 48,
+    "meshHeight": 32,
+    "presetDurationSeconds": 3600,
+    "softCutDurationSeconds": 0,
+    "transitionMode": "CLASSIC",
+    "lowEndDevice": false
+  },
+  "captures": [
+    {
+      "frame": 120,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 4,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-120.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "2d3662a98ec06967df1ed62c0cdaa1da87af46166517cc389e5db483119bf1b7",
+      "pngBytes": 26259,
+      "pngSha256": "121d3c10e1947b04affd40531ce58feba975963733af2bfa09bd2f73836abaee",
+      "rgbMean": [
+        33.406087239583336,
+        4.922661675347222,
+        40.933865017361114
+      ],
+      "exactBlackFraction": 4.611545138888889E-4
+    },
+    {
+      "frame": 150,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 5,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-150.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "db5e754d930b1e2492941552128bd0f0c628197a9f8b9448d9725162ea29a53f",
+      "pngBytes": 32092,
+      "pngSha256": "c7c2c8f21e837e2041afcdae11369d91336b6e046eecf5324499da564127abc2",
+      "rgbMean": [
+        35.77159288194444,
+        8.265489366319445,
+        43.650119357638886
+      ],
+      "exactBlackFraction": 1.6276041666666666E-4
+    },
+    {
+      "frame": 180,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 6,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-180.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "7f820ebfd6c3d84d7377c2d01ea871549e2e5bb6823e6f9c0d7c98bca5081e33",
+      "pngBytes": 32537,
+      "pngSha256": "bc5d2c0144301de40a14fff759c4ef6b972be9e273cdba28f31ad080b892b3e9",
+      "rgbMean": [
+        30.71780056423611,
+        10.614637586805555,
+        38.874186197916664
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 210,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-210.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "cd44f816a32056afc716e3d987e67214ee16f401cb31b1348d797e2fb504fbc7",
+      "pngBytes": 41205,
+      "pngSha256": "8bbeeb59d4eb3f9398acbfa16e50f8bf4c7df16a8ed6354a41b10f8cef2da972",
+      "rgbMean": [
+        30.93511284722222,
+        18.35617404513889,
+        38.497884114583336
+      ],
+      "exactBlackFraction": 3.5264756944444444E-4
+    },
+    {
+      "frame": 239,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 7.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-239.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "59516ea2b3cfd2dfbbee49fd08955f4c77e75c2ba27d04d1f8b854f4adc810a5",
+      "pngBytes": 49257,
+      "pngSha256": "0f24038e35358eeb79d92b08c327c31dc59694e337f0dfd04cabe716847a95d8",
+      "rgbMean": [
+        36.495578342013886,
+        33.959879557291664,
+        35.93516710069444
+      ],
+      "exactBlackFraction": 5.425347222222222E-5
+    },
+    {
+      "frame": 300,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 10,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-300.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "25d18c61970c7a22dea5d853cd3c2eb2b138636f3c855a443bfa43d487c7a06f",
+      "pngBytes": 61639,
+      "pngSha256": "30d68237723f3078b4832968bbe4c986bdd17a1c733e0aa4e17cf1d66969f774",
+      "rgbMean": [
+        35.25629340277778,
+        55.47816297743056,
+        35.287570529513886
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 390,
+      "previousReadFramebufferBinding": 7,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 13,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-390.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "b8e54b3d599dacf1047d4ef7195cf7387097ab7e1d708a1518199d2e2e823e5a",
+      "pngBytes": 70235,
+      "pngSha256": "30b5b41b358223191789f2d122223a4d042716a869afa5f9f6a1e5b8f1d96ce4",
+      "rgbMean": [
+        39.08002387152778,
+        82.39089626736111,
+        40.660807291666664
+      ],
+      "exactBlackFraction": 0
+    },
+    {
+      "frame": 479,
+      "previousReadFramebufferBinding": 8,
+      "captureReadFramebufferBinding": 0,
+      "simulatedSeconds": 15.966666666666667,
+      "path": "\/data\/data\/nl.neerdael.projectmtv.auditi01policy\/files\/native-trails\/i01policy-small-PyroCybin---Toxic-Lithography-[stahlregens-gelatine-finish]-current-1\/output\/frame-479.png",
+      "width": 256,
+      "height": 144,
+      "rgbSha256": "0535b981657b30c42f8d3e12549d10a18df7d7fbcfb228c3558c84b22d70631e",
+      "pngBytes": 83870,
+      "pngSha256": "6efb6f34cfa4f910434c2a641f68686770589ada970dc676a38ef4da0adc17c4",
+      "rgbMean": [
+        28.267171223958332,
+        78.63435872395833,
+        53.76817491319444
+      ],
+      "exactBlackFraction": 0
+    }
+  ],
+  "memoryPressureCalls": [
+    {
+      "beforeFrame": -1,
+      "elapsedRealtimeMs": 43578949,
+      "productionPauseSeconds": 20
+    }
+  ],
+  "device": {
+    "manufacturer": "unknown",
+    "model": "Android SDK built for arm64",
+    "device": "emu64a",
+    "fingerprint": "Android\/sdk_phone64_arm64\/emu64a:14\/UE1A.230829.036.A1\/11228894:userdebug\/test-keys",
+    "sdk": 34,
+    "abis": [
+      "arm64-v8a"
+    ]
+  },
+  "pcmSha256": "14a59e75249dee0dd15d74487688c248c6a4a4b24a843b6d6f612ccc5c408dbc",
+  "bundledPresetCount": 9614,
+  "indexSha256": "3d0e9ccbe5f9802e9c99bbc1992e79e6bac2324c9aefa1bbe9b83e521ba16e6e",
+  "presetAssetSha256": "7d1ba79abe1bdf49be179d481913f39865959c1f159fb4e9946e764c27ebccb3",
+  "forcedPresetPrefix": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+  "eglVendor": "Android",
+  "eglVersion": "1.4 Android META-EGL",
+  "glVendor": "Google (Apple)",
+  "glRenderer": "Android Emulator OpenGL ES Translator (Apple M4 Pro)",
+  "glVersion": "OpenGL ES 3.0 (4.1 Metal - 89.4)",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.00",
+  "startupIndexWaitMs": 17,
+  "eligiblePresetCountBeforeFrame0": 1,
+  "coreVersion": "4.2.0",
+  "coreSurfaceAttempted": true,
+  "pssBeforeFramesKB": 43354,
+  "framesRendered": 480,
+  "renderWallDurationMs": 583,
+  "pssAfterFramesKB": 47985,
+  "serializedFrameMeanMs": 0.712160888888889,
+  "serializedFrameP90Ms": 0.897208,
+  "timingScope": "onDrawFrame plus glFinish; 360 frames; excludes capture\/PNG I\/O; emulator engine, not TV app fps",
+  "nativeTrailsStatus": "Standard · inactive (render 144p)",
+  "verifiedPresetName": "PyroCybin - Toxic Lithography [stahlregens gelatine finish].milk",
+  "presetNameChecks": 480,
+  "glErrorChecks": 480,
+  "presetChangeCounter": 1,
+  "eligiblePresetCountAfterFrame479": 1,
+  "coreReleased": true,
+  "eglDestroyed": true,
+  "status": "ok",
+  "wallDurationMs": 932
+}

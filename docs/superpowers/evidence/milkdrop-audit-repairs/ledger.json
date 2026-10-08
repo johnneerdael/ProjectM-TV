@@ -488,10 +488,14 @@
       "sha256": "08cbb5be6dd7ad1d52b0ebe4546b8508c599ef65ca546bdd4c56142073df58ac",
       "handoff": "/Users/jneerdael/Downloads/projectm-library-audit-handoffs-2026-10-08/I01-preset-keys-are-case-insensitive-in-library-predictor/HANDOFF.md",
       "numeric_witness": "ZOOM=2 without lowercase zoom: library/predictor2; original GetFast retains default1.",
-      "status": "source investigation recorded; execution and visual qualification pending",
+      "status": "retained tolerant loading; completed owner policy packet with production parser controls and repeated Native4K/matched-resolution images",
       "confirmed_affected_originals": [],
       "source_report": "research/evaluator-parser.md",
-      "recommendation": "retain tolerant loading; document strict-source divergence"
+      "recommendation": "retain tolerant loading; document strict-source divergence",
+      "evidence": "I01/README.md",
+      "native_evidence": "I01/native-results.json",
+      "policy": "retain ASCII case-insensitive keys and first normalized occurrence; no engine patch",
+      "limits": "Both supplied originals match explicit strict-default surrogates in selected RGB frames; no stock visible-impact or whole-corpus claim."
     },
     {
       "id": "I02",
